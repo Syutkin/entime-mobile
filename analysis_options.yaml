@@ -1,0 +1,17 @@
+include: package:pedantic/analysis_options.yaml
+
+analyzer:
+  errors:
+    omit_local_variable_types: ignore
+
+#analyzer:
+#  exclude: [build/**]
+#  strong-mode:
+#    implicit-casts: false
+#    implicit-dynamic: false
+#
+#linter:
+#  rules:
+#    - camel_case_types
+#    - prefer_void_to_null
+#    - void_checks

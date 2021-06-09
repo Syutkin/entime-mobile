@@ -1,0 +1,59 @@
+part of 'protocol_bloc.dart';
+
+abstract class ProtocolState extends Equatable {
+  @override
+  List<Object> get props => [];
+}
+
+class ProtocolSelectedState extends ProtocolState {
+  final List<StartItem> startProtocol;
+  final List<FinishItem> finishProtocol;
+  final List<StartItem> numbersOnTraceProtocol;
+  final String databasePath;
+
+  // Изменить время финиша для номера
+  final bool updateFinishNumber;
+
+  // Автоматический старт из стартового модуля
+  // Служит для проверки, установлено ли уже стартовое время или нет
+  final AutomaticStart automaticStart;
+
+  // Предыдущее стартовое время номера, которому предлагается
+  // поставить новое. Запоминаем для передачи его в UI popup.
+  // Используется два раза, и при установке автоматического стартового времени
+  // и при ручном вводе нового времени старта
+  final List<StartItem> previousStart;
+
+  // Стартовое время и номер, которые хотим установить
+  final StartTime startTime;
+
+  // Автоматически подставленный в финишное время номер
+  final int autoFinishNumber;
+
+  ProtocolSelectedState({
+    this.startProtocol,
+    this.finishProtocol,
+    this.numbersOnTraceProtocol,
+    this.databasePath,
+    this.updateFinishNumber,
+    this.automaticStart,
+    this.previousStart,
+    this.startTime,
+    this.autoFinishNumber,
+  });
+
+  @override
+  List<Object> get props => [
+        startProtocol,
+        finishProtocol,
+        numbersOnTraceProtocol,
+        databasePath,
+        updateFinishNumber,
+        automaticStart,
+        previousStart,
+        startTime,
+        autoFinishNumber,
+      ];
+}
+
+class ProtocolNotSelectedState extends ProtocolState {}

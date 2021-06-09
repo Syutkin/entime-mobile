@@ -1,0 +1,354 @@
+import 'dart:async';
+
+import 'package:meta/meta.dart';
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:share/share.dart';
+
+import 'package:entime/data_providers/data/protocol_provider.dart';
+import 'package:entime/models/models.dart';
+import 'package:entime/blocs/blocs.dart';
+import 'package:entime/utils/csv_utils.dart';
+
+part 'protocol_event.dart';
+
+part 'protocol_state.dart';
+
+class AutomaticStart {
+  String time;
+  int correction;
+  DateTime timeStamp;
+  bool updating = false;
+
+  AutomaticStart(this.time, this.correction, this.timeStamp, [this.updating]);
+}
+
+class StartTime {
+  String time;
+  int number;
+
+  StartTime(this.time, this.number);
+}
+
+class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
+  bool hideMarked = true;
+  bool hideNumbers = false;
+  bool hideManual = false;
+  String file;
+  AutomaticStart automaticStart;
+  int finishDelay;
+  bool substituteNumbers;
+  int substituteNumbersDelay;
+
+  final SettingsBloc settingsBloc;
+  StreamSubscription settingsSubscription;
+
+  List<StartItem> startProtocol;
+  List<FinishItem> finishProtocol;
+  List<StartItem> numbersOnTraceProtocol;
+
+  ProtocolBloc({
+    @required this.settingsBloc,
+  })  : assert(settingsBloc != null),
+        super(ProtocolNotSelectedState()) {
+    settingsSubscription = settingsBloc.listen((state) {
+      // условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
+      if (hideMarked != state.hideMarked ||
+          hideNumbers != state.hideNumbers ||
+          hideManual != state.hideManual) {
+        hideMarked = state.hideMarked;
+        hideNumbers = state.hideNumbers;
+        hideManual = state.hideManual;
+        file = state.recentFile;
+        add(SelectProtocol(file));
+        print(
+            'hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, ');
+      }
+      finishDelay = state.finishDelay;
+      substituteNumbers = state.substituteNumbers;
+      substituteNumbersDelay = state.substituteNumbersDelay;
+    });
+  }
+
+  @override
+  Future<void> close() {
+    ProtocolProvider.db?.close();
+    settingsSubscription.cancel();
+    return super.close();
+  }
+
+  @override
+  Stream<ProtocolState> mapEventToState(
+    ProtocolEvent event,
+  ) async* {
+    if (event is SelectProtocol) {
+      if (event.file != null && event.file.isNotEmpty) {
+        // ProtocolProvider.db.dbPath = event.file;
+        await ProtocolProvider.db.setDbPath(event.file);
+        startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
+        finishProtocol = await ProtocolProvider.db.getFinishTime(
+            hideManual: hideManual,
+            hideMarked: hideMarked,
+            hideNumbers: hideNumbers);
+        numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+        settingsBloc.add(SetStringValueEvent(recentFile: event.file));
+        yield ProtocolSelectedState(
+          startProtocol: startProtocol,
+          finishProtocol: finishProtocol,
+          numbersOnTraceProtocol: numbersOnTraceProtocol,
+          databasePath: ProtocolProvider.db.dbPath,
+        );
+        print('DatabaseConnect -> selected ' + event.file);
+      } else {
+        add(DeselectProtocol());
+        print('DatabaseConnect -> no file selected');
+      }
+    } else if (event is DeselectProtocol) {
+      // ProtocolProvider.db.dbPath = null;
+      await ProtocolProvider.db.setDbPath(null);
+      settingsBloc.add(SetStringValueEvent(recentFile: ''));
+      yield ProtocolNotSelectedState();
+    } else if (event is ProtocolAddStartNumber) {
+      // добавляет/заменяет номер и стартовое время в start
+      if (state is ProtocolSelectedState) {
+        List<StartItem> previousStart =
+            await ProtocolProvider.db.addStartNumber(
+          number: event.startTime.number,
+          time: event.startTime.time,
+          forceAdd: event.forceAdd,
+        );
+
+        if (previousStart == null) {
+          startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
+          numbersOnTraceProtocol =
+              await ProtocolProvider.db.getNumbersOnTrace();
+        }
+        yield ProtocolSelectedState(
+          startProtocol: startProtocol,
+          finishProtocol: finishProtocol,
+          numbersOnTraceProtocol: numbersOnTraceProtocol,
+          databasePath: ProtocolProvider.db.dbPath,
+          previousStart: previousStart,
+          startTime: event.startTime,
+        );
+      }
+    } else if (event is ProtocolUpdateAutomaticCorrection) {
+      // обновляет поправку
+      if (state is ProtocolSelectedState) {
+        List<StartItem> previousStart =
+            await ProtocolProvider.db.updateAutomaticCorrection(
+          time: event.automaticStart.time,
+          correction: event.automaticStart.correction,
+          timeStamp: event.automaticStart.timeStamp,
+          forceUpdate: event.forceUpdate,
+        );
+        if (previousStart == null) {
+          event.automaticStart.updating = false;
+          startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
+        } else {
+          event.automaticStart.updating = true;
+        }
+        yield ProtocolSelectedState(
+          startProtocol: startProtocol,
+          finishProtocol: finishProtocol,
+          numbersOnTraceProtocol: numbersOnTraceProtocol,
+          databasePath: ProtocolProvider.db.dbPath,
+          automaticStart: event.automaticStart,
+          previousStart: previousStart,
+        );
+      }
+    } else if (event is ProtocolUpdateManualStartTime) {
+      if (state is ProtocolSelectedState) {
+        if (await ProtocolProvider.db.updateManualStartTime(event.time) > 0) {
+          startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
+          yield ProtocolSelectedState(
+            startProtocol: startProtocol,
+            finishProtocol: finishProtocol,
+            numbersOnTraceProtocol: numbersOnTraceProtocol,
+            databasePath: ProtocolProvider.db.dbPath,
+          );
+        }
+      }
+    } else if (event is ProtocolAddFinishTime) {
+      //вставить строку с финишным временем из bluetooth
+      if (state is ProtocolSelectedState) {
+        int autoFinishNumber = await ProtocolProvider.db.addFinishTime(
+          finish: event.time,
+          timeStamp: event.timeStamp,
+          finishDelay: finishDelay,
+          substituteNumbers: substituteNumbers,
+          substituteNumbersDelay: substituteNumbersDelay,
+        );
+        finishProtocol = await ProtocolProvider.db.getFinishTime(
+            hideManual: hideManual,
+            hideMarked: hideMarked,
+            hideNumbers: hideNumbers);
+        numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+        yield ProtocolSelectedState(
+          startProtocol: startProtocol,
+          finishProtocol: finishProtocol,
+          numbersOnTraceProtocol: numbersOnTraceProtocol,
+          databasePath: ProtocolProvider.db.dbPath,
+          autoFinishNumber: autoFinishNumber,
+        );
+      }
+    } else if (event is ProtocolAddFinishTimeManual) {
+      //вставить строку с ручным финишным временем
+      if (state is ProtocolSelectedState) {
+        await ProtocolProvider.db.addFinishTimeManual(event.time);
+        finishProtocol = await ProtocolProvider.db.getFinishTime(
+            hideManual: hideManual,
+            hideMarked: hideMarked,
+            hideNumbers: hideNumbers);
+        numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+        yield ProtocolSelectedState(
+          startProtocol: startProtocol,
+          finishProtocol: finishProtocol,
+          numbersOnTraceProtocol: numbersOnTraceProtocol,
+          databasePath: ProtocolProvider.db.dbPath,
+        );
+      }
+    } else if (event is ProtocolUpdateItemInfoAtStart) {
+      if (state is ProtocolSelectedState) {
+        await ProtocolProvider.db.UpdateItemInfoAtStart(event.item);
+        startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
+        numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+        yield ProtocolSelectedState(
+          startProtocol: startProtocol,
+          finishProtocol: finishProtocol,
+          numbersOnTraceProtocol: numbersOnTraceProtocol,
+          databasePath: ProtocolProvider.db.dbPath,
+        );
+      }
+    } else if (event is ProtocolClearStartResultsDebug) {
+      //очищает результаты старта, используется только в debug
+      await ProtocolProvider.db.clearStartResultsDebug();
+      startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
+      finishProtocol = await ProtocolProvider.db.getFinishTime(
+          hideManual: hideManual,
+          hideMarked: hideMarked,
+          hideNumbers: hideNumbers);
+      numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+      yield ProtocolSelectedState(
+        startProtocol: startProtocol,
+        finishProtocol: finishProtocol,
+        numbersOnTraceProtocol: numbersOnTraceProtocol,
+        databasePath: ProtocolProvider.db.dbPath,
+      );
+    } else if (event is ProtocolClearFinishResultsDebug) {
+      //очищает результаты финиша, используется только в debug
+      await ProtocolProvider.db.clearFinishResultsDebug();
+      startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
+      finishProtocol = await ProtocolProvider.db.getFinishTime(
+          hideManual: hideManual,
+          hideMarked: hideMarked,
+          hideNumbers: hideNumbers);
+      numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+      yield ProtocolSelectedState(
+        startProtocol: startProtocol,
+        finishProtocol: finishProtocol,
+        numbersOnTraceProtocol: numbersOnTraceProtocol,
+        databasePath: ProtocolProvider.db.dbPath,
+      );
+    } else if (event is ProtocolHideAllFinishResults) {
+      //скрыть всё в финишном протоколе
+      await ProtocolProvider.db.hideAllFinish();
+      finishProtocol = await ProtocolProvider.db.getFinishTime(
+          hideManual: hideManual,
+          hideMarked: hideMarked,
+          hideNumbers: hideNumbers);
+      yield ProtocolSelectedState(
+        startProtocol: startProtocol,
+        finishProtocol: finishProtocol,
+        numbersOnTraceProtocol: numbersOnTraceProtocol,
+        databasePath: ProtocolProvider.db.dbPath,
+      );
+    } else if (event is ProtocolClearNumberAtFinish) {
+      //очистить номер в finish
+      await ProtocolProvider.db.clearNumberAtFinish(event.number);
+      finishProtocol = await ProtocolProvider.db.getFinishTime(
+          hideManual: hideManual,
+          hideMarked: hideMarked,
+          hideNumbers: hideNumbers);
+      numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+      yield ProtocolSelectedState(
+        startProtocol: startProtocol,
+        finishProtocol: finishProtocol,
+        numbersOnTraceProtocol: numbersOnTraceProtocol,
+        databasePath: ProtocolProvider.db.dbPath,
+      );
+    } else if (event is ProtocolSetDNS) {
+      await ProtocolProvider.db.setDNS(event.number);
+      startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
+      numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+      yield ProtocolSelectedState(
+        startProtocol: startProtocol,
+        finishProtocol: finishProtocol,
+        numbersOnTraceProtocol: numbersOnTraceProtocol,
+        databasePath: ProtocolProvider.db.dbPath,
+      );
+    } else if (event is ProtocolSetDNF) {
+      //ставит время финиша "DNF" для номера
+      await ProtocolProvider.db.setDNF(event.number);
+      finishProtocol = await ProtocolProvider.db.getFinishTime(
+          hideManual: hideManual,
+          hideMarked: hideMarked,
+          hideNumbers: hideNumbers);
+      numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+      yield ProtocolSelectedState(
+        startProtocol: startProtocol,
+        finishProtocol: finishProtocol,
+        numbersOnTraceProtocol: numbersOnTraceProtocol,
+        databasePath: ProtocolProvider.db.dbPath,
+      );
+    } else if (event is ProtocolHideFinishTime) {
+      await ProtocolProvider.db.hideFinish(event.id);
+      finishProtocol = await ProtocolProvider.db.getFinishTime(
+          hideManual: hideManual,
+          hideMarked: hideMarked,
+          hideNumbers: hideNumbers);
+      yield ProtocolSelectedState(
+        startProtocol: startProtocol,
+        finishProtocol: finishProtocol,
+        numbersOnTraceProtocol: numbersOnTraceProtocol,
+        databasePath: ProtocolProvider.db.dbPath,
+      );
+    } else if (event is ProtocolSetNumberToFinishTime) {
+      //добавить номер в finish и обновить финишное время в start у данного номера
+      var update = await ProtocolProvider.db
+          .addNumber(event.id, event.number, event.finishTime);
+      finishProtocol = await ProtocolProvider.db.getFinishTime(
+          hideManual: hideManual,
+          hideMarked: hideMarked,
+          hideNumbers: hideNumbers);
+      numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+      yield ProtocolSelectedState(
+        startProtocol: startProtocol,
+        finishProtocol: finishProtocol,
+        numbersOnTraceProtocol: numbersOnTraceProtocol,
+        databasePath: ProtocolProvider.db.dbPath,
+        updateFinishNumber: update,
+      );
+    } else if (event is ProtocolGetNumbersOnTrace) {
+      if (ProtocolProvider.db.dbPath != null) {
+        numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+        yield ProtocolSelectedState(
+          startProtocol: startProtocol,
+          finishProtocol: finishProtocol,
+          numbersOnTraceProtocol: numbersOnTraceProtocol,
+          databasePath: ProtocolProvider.db.dbPath,
+        );
+      }
+    } else if (event is ProtocolShareStart) {
+      var result = await ProtocolProvider.db.getStartToCsv();
+      var csv = mapListToCsv(result);
+      var path = await saveCsv(csv, 'start');
+      await Share.shareFiles([path], text: 'Стартовый протокол');
+    } else if (event is ProtocolShareFinish) {
+      var result = await ProtocolProvider.db.getFinishToCsv();
+      var csv = mapListToCsv(result);
+      var path = await saveCsv(csv, 'finish');
+      await Share.shareFiles([path], text: 'Финишный протокол');
+    }
+  }
+}
