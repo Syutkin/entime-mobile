@@ -4,16 +4,16 @@ abstract class ProtocolEvent extends Equatable {
   const ProtocolEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class SelectProtocol extends ProtocolEvent {
-  final String file;
+  final String? file;
 
   const SelectProtocol(this.file);
 
   @override
-  List<Object> get props => [file];
+  List<Object?> get props => [file];
 }
 
 class DeselectProtocol extends ProtocolEvent {}
@@ -44,7 +44,7 @@ class ProtocolUpdateAutomaticCorrection extends ProtocolEvent {
 class ProtocolUpdateManualStartTime extends ProtocolEvent {
   final DateTime time;
 
-  const ProtocolUpdateManualStartTime({@required this.time});
+  const ProtocolUpdateManualStartTime({required this.time});
 
   @override
   List<Object> get props => [time];
@@ -55,8 +55,8 @@ class ProtocolAddFinishTime extends ProtocolEvent {
   final DateTime timeStamp;
 
   const ProtocolAddFinishTime({
-    @required this.time,
-    @required this.timeStamp,
+    required this.time,
+    required this.timeStamp,
   });
 
   @override
@@ -66,7 +66,7 @@ class ProtocolAddFinishTime extends ProtocolEvent {
 class ProtocolAddFinishTimeManual extends ProtocolEvent {
   final String time;
 
-  const ProtocolAddFinishTimeManual({@required this.time});
+  const ProtocolAddFinishTimeManual({required this.time});
 
   @override
   List<Object> get props => [time];
@@ -75,7 +75,7 @@ class ProtocolAddFinishTimeManual extends ProtocolEvent {
 class ProtocolUpdateItemInfoAtStart extends ProtocolEvent {
   final StartItem item;
 
-  const ProtocolUpdateItemInfoAtStart({@required this.item});
+  const ProtocolUpdateItemInfoAtStart({required this.item});
 
   @override
   List<Object> get props => [item];
@@ -90,7 +90,7 @@ class ProtocolHideAllFinishResults extends ProtocolEvent {}
 class ProtocolClearNumberAtFinish extends ProtocolEvent {
   final int number;
 
-  const ProtocolClearNumberAtFinish({@required this.number});
+  const ProtocolClearNumberAtFinish({required this.number});
 
   @override
   List<Object> get props => [number];
@@ -99,7 +99,7 @@ class ProtocolClearNumberAtFinish extends ProtocolEvent {
 class ProtocolSetDNS extends ProtocolEvent {
   final int number;
 
-  const ProtocolSetDNS({@required this.number});
+  const ProtocolSetDNS({required this.number});
 
   @override
   List<Object> get props => [number];
@@ -108,7 +108,7 @@ class ProtocolSetDNS extends ProtocolEvent {
 class ProtocolSetDNF extends ProtocolEvent {
   final int number;
 
-  const ProtocolSetDNF({@required this.number});
+  const ProtocolSetDNF({required this.number});
 
   @override
   List<Object> get props => [number];
@@ -117,7 +117,7 @@ class ProtocolSetDNF extends ProtocolEvent {
 class ProtocolHideFinishTime extends ProtocolEvent {
   final int id;
 
-  const ProtocolHideFinishTime({@required this.id});
+  const ProtocolHideFinishTime({required this.id});
 
   @override
   List<Object> get props => [id];
@@ -129,9 +129,9 @@ class ProtocolSetNumberToFinishTime extends ProtocolEvent {
   final String finishTime;
 
   const ProtocolSetNumberToFinishTime({
-    @required this.id,
-    @required this.number,
-    @required this.finishTime,
+    required this.id,
+    required this.number,
+    required this.finishTime,
   });
 
   @override

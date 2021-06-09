@@ -1,7 +1,9 @@
 part of 'popups.dart';
 
-Future<int> brightnessPopup(
-    {String text, int initialValue, BuildContext context}) async {
+Future<int?> brightnessPopup(
+    {required String text,
+    required int initialValue,
+    required BuildContext context}) async {
   double brightness = initialValue.toDouble();
   return showDialog<int>(
     context: context,

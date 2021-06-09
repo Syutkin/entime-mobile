@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:intl/intl.dart';
 
-import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -32,13 +31,13 @@ class LogProvider {
 
   static final LogProvider db = LogProvider._();
 
-  Database _database;
+  Database? _database;
 
   Future<Database> get database async {
-    if (_database != null) return _database;
+    if (_database != null) return _database!;
     // if _database is null we instantiate it
     _database = await initDB();
-    return _database;
+    return _database!;
   }
 
   Future<Database> initDB() async {
@@ -49,7 +48,7 @@ class LogProvider {
       version: 1,
       onOpen: (db) async {
         print('SQLite version: ' +
-            (await db.rawQuery('SELECT sqlite_version()')).first.values.first);
+            (await db.rawQuery('SELECT sqlite_version()')).first.values.first.toString());
       },
       onCreate: (Database db, int version) async {
         await db.execute('''
@@ -73,9 +72,9 @@ class LogProvider {
   }
 
   Future<List<Log>> getLog({
-    List<LogLevel> level,
-    List<LogSource> source,
-    List<LogSourceDirection> direction,
+    List<LogLevel>? level,
+    List<LogSource>? source,
+    List<LogSourceDirection>? direction,
     int limit = -1,
   }) async {
     final db = await database;
@@ -125,10 +124,10 @@ class LogProvider {
   }
 
   Future<int> add({
-    @required LogLevel level,
-    @required LogSource source,
-    @required String rawData,
-    LogSourceDirection direction,
+    required LogLevel level,
+    required LogSource source,
+    required String rawData,
+    LogSourceDirection? direction,
   }) async {
     String timeStamp = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
     final db = await database;

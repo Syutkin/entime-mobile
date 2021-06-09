@@ -16,7 +16,7 @@ abstract class ModuleSettingsProvider {
   0; //7.8E3, 10.4E3, 15.6E3, 20.8E3, 31.25E3, 41.7E3, 62.5E3, 125E3, and 250E3
   int codingRateDenominator = 0; //5-8
   int preambleLength = 0; //6-65535
-  int syncWord;
+  int syncWord = 0;
   bool crc = false;
 
   // WiFi
@@ -40,7 +40,7 @@ abstract class ModuleSettingsProvider {
   //VCC
   int r1 = 0;
   int r2 = 0;
-  int vBat;
+  int vBat = 0;
 
   //LedPanel
   int brightness = 15;

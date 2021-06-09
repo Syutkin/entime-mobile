@@ -1,7 +1,7 @@
 part of 'popups.dart';
 
-Future<String> wifiSettingsPopup({String text, String labelText, BuildContext context}) async {
-  String wifi;
+Future<String?> wifiSettingsPopup({required String text, required String labelText, required BuildContext context}) async {
+  String? wifi;
   return showDialog<String>(
     context: context,
     barrierDismissible: true,

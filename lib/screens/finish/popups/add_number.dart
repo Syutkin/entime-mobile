@@ -7,10 +7,10 @@ import 'package:entime/models/models.dart';
 Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
   var _numberController = TextEditingController();
   _numberController.text = (item.number ?? '').toString();
-  int number;
+  int number = 0;
   final _protocolBloc = BlocProvider.of<ProtocolBloc>(context);
   final _formKey = GlobalKey<FormState>();
-  return showDialog<int>(
+  return showDialog<void>(
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
@@ -21,7 +21,7 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
         content: Form(
           key: _formKey,
           onChanged: () {
-            Form.of(primaryFocus.context).validate();
+            Form.of(primaryFocus!.context!)!.validate();
           },
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -32,10 +32,12 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
                 decoration: InputDecoration(labelText: 'Номер'),
                 controller: _numberController,
                 validator: (value) {
-                  number = int.tryParse(value);
-                  if (number == null || number < 1) {
+                  if (value == null) return 'Неверный номер';
+                  int? num = int.tryParse(value);
+                  if (num == null || num < 1) {
                     return 'Неверный номер';
                   }
+                  number = num;
                   return null;
                 },
               ),
@@ -51,7 +53,7 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
           ),
           TextButton(
             onPressed: () async {
-              if (_formKey.currentState.validate()) {
+              if (_formKey.currentState!.validate()) {
                 _protocolBloc.add(ProtocolSetNumberToFinishTime(
                   id: item.id,
                   number: number,
@@ -64,10 +66,12 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
           ),
           BlocListener<ProtocolBloc, ProtocolState>(
             listener: (context, state) async {
-              if (state is ProtocolSelectedState && !state.updateFinishNumber) {
+              if (state is ProtocolSelectedState &&
+                  state.updateFinishNumber != null &&
+                  !state.updateFinishNumber!) {
                 print(
                     'state.updateFinishNumber is ${state.updateFinishNumber}');
-                final bool update =
+                final bool? update =
                     await updateFinishTimePopup(context, number);
                 if (update != null && update) {
                   _protocolBloc
@@ -88,7 +92,7 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
   );
 }
 
-Future<bool> updateFinishTimePopup(BuildContext context, int number) async {
+Future<bool?> updateFinishTimePopup(BuildContext context, int number) async {
   return showDialog<bool>(
     context: context,
     barrierDismissible: true,
@@ -97,7 +101,7 @@ Future<bool> updateFinishTimePopup(BuildContext context, int number) async {
       return AlertDialog(
         title: Text('Предупреждение'),
         content: Text(
-          'Участнику с номером $number уже присвоено финишное время. Установить новое значение?'),
+            'Участнику с номером $number уже присвоено финишное время. Установить новое значение?'),
         actions: <Widget>[
           TextButton(
             onPressed: () {

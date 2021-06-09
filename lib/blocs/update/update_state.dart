@@ -4,28 +4,26 @@ abstract class UpdateState extends Equatable {
   const UpdateState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class UpdateInitial extends UpdateState {
-  final ShowChangelog showChangelog;
+  final ShowChangelog? showChangelog;
 
   UpdateInitial({this.showChangelog});
 
   @override
-  List<Object> get props => [showChangelog];
+  List<Object?> get props => [showChangelog];
 
   @override
   String toString() {
     if (showChangelog != null) {
       String result = 'UpdateInitial { '
-          'showChangelog: ${showChangelog.show}';
-      if (showChangelog.previousVersion != null) {
-        result += ', previousVersion: ${showChangelog.previousVersion}, ';
+          'showChangelog: ${showChangelog!.show}';
+      if (showChangelog!.previousVersion != null) {
+        result += ', previousVersion: ${showChangelog!.previousVersion}, ';
       }
-      if (showChangelog.previousVersion != null) {
-        result += 'currentVersion: ${showChangelog.currentVersion}';
-      }
+      result += 'currentVersion: ${showChangelog!.currentVersion}';
       result += ' }';
       return result;
     }

@@ -22,20 +22,20 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) async {
         if (state is ProtocolSelectedState) {
           // Обновление автоматического времени старта
-          if (state.automaticStart != null && state.automaticStart.updating) {
+          if (state.automaticStart != null && state.automaticStart!.updating) {
             String text = 'Участнику под номером '
-                '${state.previousStart.first.number} '
+                '${state.previousStart!.first.number} '
                 'уже установлена стартовая поправка '
-                '${state.previousStart.first.automaticcorrection}. '
-                'Обновить её на ${state.automaticStart.correction}?';
-            final bool update = await overwriteStartTime(
+                '${state.previousStart!.first.automaticcorrection}. '
+                'Обновить её на ${state.automaticStart!.correction}?';
+            final bool? update = await overwriteStartTime(
               context: context,
               text: text,
             );
             if (update != null && update) {
               BlocProvider.of<ProtocolBloc>(context)
                   .add(ProtocolUpdateAutomaticCorrection(
-                state.automaticStart,
+                state.automaticStart!,
                 forceUpdate: true,
               ));
             }
@@ -45,22 +45,22 @@ class HomeScreen extends StatelessWidget {
             // Если стартовое время уже присвоено другому номеру
             String text = '';
 
-            state.previousStart.forEach((element) {
+            state.previousStart!.forEach((element) {
               if (element.automaticstarttime == null &&
                   element.manualstarttime == null) {
-                text += 'Стартовое время ${state.startTime.time} уже '
+                text += 'Стартовое время ${state.startTime!.time} уже '
                     'присвоено номеру ${element.number}. '
                     'Вы уверены что хотите установить одинаковое стартовое время '
-                    'для номеров ${state.startTime.number} и '
+                    'для номеров ${state.startTime!.number} и '
                     '${element.number}?\n';
               } else {
                 if (element.automaticstarttime != null) {
-                  text += 'У номера ${state.startTime.number} уже проставлена '
+                  text += 'У номера ${state.startTime!.number} уже проставлена '
                       'автоматическая стартовая отсечка: '
                       '${element.automaticstarttime}. '
                       'Установить новое стартовое время и удалить предыдущее значение?\n';
                 } else if (element.manualstarttime != null) {
-                  text += 'У номера ${state.startTime.number} уже проставлена '
+                  text += 'У номера ${state.startTime!.number} уже проставлена '
                       'ручная стартовая отсечка: '
                       '${element.manualstarttime}. '
                       'Установить новое стартовое время и удалить предыдущее значение?\n';
@@ -72,14 +72,14 @@ class HomeScreen extends StatelessWidget {
               }
             });
 
-            final bool update = await overwriteStartTime(
+            final bool? update = await overwriteStartTime(
               context: context,
               text: text,
             );
 
             if (update != null && update) {
               BlocProvider.of<ProtocolBloc>(context)
-                  .add(ProtocolAddStartNumber(state.startTime, true));
+                  .add(ProtocolAddStartNumber(state.startTime!, true));
             }
           }
         }
@@ -153,10 +153,10 @@ class HomeScreen extends StatelessWidget {
                       ));
                     } else if (state is UpdateInitial &&
                         state.showChangelog != null &&
-                        state.showChangelog.show) {
+                        state.showChangelog!.show) {
                       await showChangelogAtStartup(
                         context,
-                        state.showChangelog.previousVersion,
+                        state.showChangelog!.previousVersion!,
                       );
                     }
                   },
@@ -181,8 +181,7 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<ProtocolBloc, ProtocolState>(
         builder: (context, protocolState) {
       if (protocolState is ProtocolSelectedState) {
-        return Text(
-            basenameWithoutExtension(protocolState.databasePath) ?? 'Error!');
+        return Text(basenameWithoutExtension(protocolState.databasePath));
       } else {
         return Text('Entime');
       }

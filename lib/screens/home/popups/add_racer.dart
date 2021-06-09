@@ -8,9 +8,9 @@ Future<void> addRacerPopup(BuildContext context) async {
   var time =
       Duration(hours: DateTime.now().hour, minutes: DateTime.now().minute) +
           Duration(minutes: 1);
-  int number;
+  int number = 0;
   final _formKey = GlobalKey<FormState>();
-  return showDialog<List>(
+  return showDialog<void>(
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
@@ -21,7 +21,7 @@ Future<void> addRacerPopup(BuildContext context) async {
         content: Form(
           key: _formKey,
           onChanged: () {
-            Form.of(primaryFocus.context).validate();
+            Form.of(primaryFocus!.context!)!.validate();
           },
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -31,10 +31,12 @@ Future<void> addRacerPopup(BuildContext context) async {
                 autofocus: true,
                 decoration: InputDecoration(labelText: 'Номер'),
                 validator: (value) {
-                  number = int.tryParse(value);
-                  if (number == null || number < 1) {
+                  if (value == null) return 'Неверный номер';
+                  int? num = int.tryParse(value);
+                  if (num == null || num < 1) {
                     return 'Неверный номер';
                   }
+                  number = num;
                   return null;
                 },
               ),
@@ -59,15 +61,14 @@ Future<void> addRacerPopup(BuildContext context) async {
           ),
           TextButton(
             onPressed: () async {
-              if (_formKey.currentState.validate()) {
+              if (_formKey.currentState!.validate()) {
                 // Форматирование Duration отсюда:
                 // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
                 String starttime =
                     time.toString().split('.').first.padLeft(8, '0');
                 BlocProvider.of<ProtocolBloc>(context)
 //                    .add(ProtocolAddStartNumber(number: number, time: starttime));
-                    .add(ProtocolAddStartNumber(
-                        StartTime(starttime, number)));
+                    .add(ProtocolAddStartNumber(StartTime(starttime, number)));
                 Navigator.of(context).pop();
               }
             },

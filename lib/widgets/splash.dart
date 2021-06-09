@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {
-  final String text;
+  final String? text;
 
   Splash({
     this.text,
@@ -19,7 +19,7 @@ class Splash extends StatelessWidget {
   Widget _widget() {
     if (text != null) {
       return Text(
-        text,
+        text!,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
       );
     } else {

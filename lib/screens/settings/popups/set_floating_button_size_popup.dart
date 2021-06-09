@@ -1,6 +1,6 @@
 part of 'settings_popups.dart';
 
-Future<double> setFloatingButtonSizePopup(
+Future<double?> setFloatingButtonSizePopup(
   BuildContext context,
   double value, {
   String text = '',

@@ -43,27 +43,27 @@ String startToJson(StartItem data) => json.encode(data.toMap());
 // Start time with correction
 //
 class StartItem {
-  String automaticstarttime;
-  int automaticcorrection;
-  String automaticphonetime;
-  String finishtime;
+  String? automaticstarttime;
+  int? automaticcorrection;
+  String? automaticphonetime;
+  String? finishtime;
   int id;
-  int manualcorrection;
-  String manualstarttime;
-  String name;
+  int? manualcorrection;
+  String? manualstarttime;
+  String? name;
   int number;
-  String starttime;
+  String? starttime;
 
   StartItem({
     this.automaticstarttime,
     this.automaticcorrection,
     this.automaticphonetime,
     this.finishtime,
-    this.id,
+    required this.id,
     this.manualcorrection,
     this.manualstarttime,
     this.name,
-    this.number,
+    required this.number,
     this.starttime,
   });
 
@@ -100,16 +100,16 @@ String finishToJson(FinishItem data) => json.encode(data.toMap());
 
 class FinishItem {
   int id;
-  int number;
+  int? number;
   String finishtime;
-  String phonetime;
-  int set;
-  int manual;
+  String? phonetime;
+  int? set;
+  int? manual;
 
   FinishItem({
-    this.id,
+    required this.id,
     this.number,
-    this.finishtime,
+    required this.finishtime,
     this.phonetime,
     this.set,
     this.manual,

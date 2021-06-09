@@ -22,10 +22,6 @@ Future<void> main() async {
 Future<void> runMain(SettingsProvider settings, AppInfoProvider appInfo) async {
   Bloc.observer = SimpleBlocObserver();
   final UpdateProvider updater = UpdateProvider();
-  assert(
-    settings != null,
-    appInfo != null,
-  );
   runApp(
     MultiBlocProvider(
       providers: [
@@ -60,6 +56,7 @@ Future<void> runMain(SettingsProvider settings, AppInfoProvider appInfo) async {
             settingsBloc: BlocProvider.of<SettingsBloc>(context),
           ),
         ),
+        BlocProvider<BleBloc>(create: (context) => BleBloc()),
         BlocProvider<BluetoothBloc>(
           create: (context) => BluetoothBloc(
             moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),
@@ -87,9 +84,7 @@ Future<void> runMain(SettingsProvider settings, AppInfoProvider appInfo) async {
 class EntimeApp extends StatefulWidget {
   final SettingsProvider settings;
 
-  const EntimeApp({Key key, @required this.settings})
-      : assert(settings != null),
-        super(key: key);
+  const EntimeApp({Key? key, required this.settings}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _EntimeAppState();

@@ -1,45 +1,13 @@
-import 'package:flutter/services.dart';
-
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:pedantic/pedantic.dart';
-import 'package:soundpool/soundpool.dart';
-
 import 'package:entime/data_providers/audio/audio_provider.dart';
-
-enum TtsState { playing, stopped }
+import 'package:entime/data_providers/audio/tts_provider.dart';
+import 'package:entime/data_providers/audio/beep_provider.dart';
+// import 'package:entime/data_providers/audio/audioplayers_provider.dart';
+import 'package:entime/data_providers/audio/soundpool_provider.dart';
 
 class Sound extends AudioProvider {
-  final FlutterTts flutterTts = FlutterTts();
-  TtsState ttsState = TtsState.stopped;
-
-  final Soundpool pool = Soundpool();
-  Future<int> soundId;
-
-  Sound() {
-    flutterTts.setStartHandler(() {
-      print('TTS -> Playing...');
-      ttsState = TtsState.playing;
-    });
-    flutterTts.setCompletionHandler(() {
-      print('TTS -> Complete');
-      ttsState = TtsState.stopped;
-    });
-    flutterTts.setErrorHandler((msg) {
-      print('TTS -> error: $msg');
-      ttsState = TtsState.stopped;
-    });
-    soundId = _loadSound();
-  }
-
-  Future<int> _loadSound() async {
-    var asset = await rootBundle.load('assets/beeps.mp3');
-    return await pool.load(asset);
-  }
-
-  Future<void> _playSound() async {
-    var _alarmSound = await soundId;
-    unawaited(pool.play(_alarmSound));
-  }
+  final Tts flutterTts = Tts();
+  // final BeepProvider beepProvider = AudioplayersProvider();
+  final BeepProvider beepProvider = SoundpoolProvider();
 
   @override
   Future<dynamic> setLanguage(String language) {
@@ -63,17 +31,11 @@ class Sound extends AudioProvider {
 
   @override
   void beep() {
-     _playSound();
+    beepProvider.beep();
   }
 
   @override
   void speak(String text) async {
-    if (text.isNotEmpty) {
-      print('Sound TTS -> $text');
-      var result = await flutterTts.speak(text);
-      if (result == 1) ttsState = TtsState.playing;
-    } else {
-      print('Sound TTS -> Text is empty');
-    }
+    flutterTts.speak(text);
   }
 }

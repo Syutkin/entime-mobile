@@ -12,7 +12,7 @@ import '../utils/helper.dart';
 
 class InitScreen extends StatefulWidget {
   InitScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -35,6 +35,9 @@ class _InitScreen extends State<InitScreen> {
             : Container(width: 0, height: 0),
         !kReleaseMode
             ? _debugTestButton(context)
+            : Container(width: 0, height: 0),
+        !kReleaseMode
+            ? _debugBleTestButton(context)
             : Container(width: 0, height: 0),
       ]),
     );
@@ -143,8 +146,22 @@ class _InitScreen extends State<InitScreen> {
         onPressed: () {
           // BlocProvider.of<BluetoothBloc>(context)
           //     .add(MessageReceived('B19:00:56#'));
-          showChangelogAtStartup(context, '0.3.2');
+          // showChangelogAtStartup(context, '0.3.2');
+          BlocProvider.of<AudioBloc>(context).add(Countdown());
         },
         child: Text('Voice Test'));
+  }
+
+  Widget _debugBleTestButton(BuildContext context) {
+    return TextButton(
+        onPressed: () {
+          selectBleDevice(context);
+          // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          //   return SelectBleDeviceScreen();
+          // }));
+
+          // SelectBleDeviceScreen();
+        },
+        child: Text('BLE Scanner'));
   }
 }

@@ -1,7 +1,7 @@
 part of 'popups.dart';
 
-Future<int> bluetoothNumberPopup({String text, String labelText, BuildContext context}) async {
-  int number;
+Future<int?> bluetoothNumberPopup({required String text, required String labelText, required BuildContext context}) async {
+  int? number;
   return showDialog<int>(
     context: context,
     barrierDismissible: true,

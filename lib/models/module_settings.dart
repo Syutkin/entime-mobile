@@ -11,7 +11,7 @@ class ModSettingsModelType {
   String type;
 
   ModSettingsModelType({
-    this.type,
+    required this.type,
   });
 
   factory ModSettingsModelType.fromJson(Map<String, dynamic> json) =>
@@ -33,13 +33,13 @@ String modSettingsModelLedToJson(ModSettingsModelLed data) =>
 class ModSettingsModelLed {
   bool read;
   String type;
-  Bluetooth bluetooth;
-  WiFi wiFi;
-  LedPanel ledPanel;
+  Bluetooth? bluetooth;
+  WiFi? wiFi;
+  LedPanel? ledPanel;
 
   ModSettingsModelLed({
-    this.read,
-    this.type,
+    required this.read,
+    required this.type,
     this.bluetooth,
     this.wiFi,
     this.ledPanel,
@@ -61,9 +61,9 @@ class ModSettingsModelLed {
   Map<String, dynamic> toJson() => {
         'Read': read,
         'Type': type,
-        'Bluetooth': bluetooth == null ? null : bluetooth.toJson(),
-        'WiFi': wiFi == null ? null : wiFi.toJson(),
-        'LedPanel': ledPanel == null ? null : ledPanel.toJson(),
+        'Bluetooth': bluetooth == null ? null : bluetooth?.toJson(),
+        'WiFi': wiFi == null ? null : wiFi?.toJson(),
+        'LedPanel': ledPanel == null ? null : ledPanel?.toJson(),
       };
 }
 
@@ -74,14 +74,14 @@ String modSettingsModelToJson(ModSettingsModel data) =>
     json.encode(data.toJson());
 
 class ModSettingsModel {
-  bool read;
-  String type;
-  Bluetooth bluetooth;
-  LoRa loRa;
-  WiFi wiFi;
-  Tft tft;
-  Buzzer buzzer;
-  Vcc vcc;
+  bool? read;
+  String? type;
+  Bluetooth? bluetooth;
+  LoRa? loRa;
+  WiFi? wiFi;
+  Tft? tft;
+  Buzzer? buzzer;
+  Vcc? vcc;
 
   ModSettingsModel({
     this.read,
@@ -111,12 +111,12 @@ class ModSettingsModel {
   Map<String, dynamic> toJson() => {
         'Read': read,
         'Type': type,
-        'Bluetooth': bluetooth == null ? null : bluetooth.toJson(),
-        'LoRa': loRa == null ? null : loRa.toJson(),
-        'WiFi': wiFi == null ? null : wiFi.toJson(),
-        'TFT': tft == null ? null : tft.toJson(),
-        'Buzzer': buzzer == null ? null : buzzer.toJson(),
-        'VCC': vcc == null ? null : vcc.toJson(),
+        'Bluetooth': bluetooth == null ? null : bluetooth?.toJson(),
+        'LoRa': loRa == null ? null : loRa?.toJson(),
+        'WiFi': wiFi == null ? null : wiFi?.toJson(),
+        'TFT': tft == null ? null : tft?.toJson(),
+        'Buzzer': buzzer == null ? null : buzzer?.toJson(),
+        'VCC': vcc == null ? null : vcc?.toJson(),
       };
 }
 
@@ -126,9 +126,9 @@ class Bluetooth {
   int number;
 
   Bluetooth({
-    this.active,
-    this.name,
-    this.number,
+    required this.active,
+    required this.name,
+    required this.number,
   });
 
   factory Bluetooth.fromJson(Map<String, dynamic> json) => Bluetooth(
@@ -150,9 +150,9 @@ class Buzzer {
   int longFrequency;
 
   Buzzer({
-    this.active,
-    this.shortFrequency,
-    this.longFrequency,
+    required this.active,
+    required this.shortFrequency,
+    required this.longFrequency,
   });
 
   factory Buzzer.fromJson(Map<String, dynamic> json) => Buzzer(
@@ -180,15 +180,15 @@ class LoRa {
   bool crc;
 
   LoRa({
-    this.active,
-    this.frequency,
-    this.txPower,
-    this.spreadingFactor,
-    this.signalBandwidth,
-    this.codingRateDenom,
-    this.preambleLength,
-    this.syncWord,
-    this.crc,
+    required this.active,
+    required this.frequency,
+    required this.txPower,
+    required this.spreadingFactor,
+    required this.signalBandwidth,
+    required this.codingRateDenom,
+    required this.preambleLength,
+    required this.syncWord,
+    required this.crc,
   });
 
   factory LoRa.fromJson(Map<String, dynamic> json) => LoRa(
@@ -223,10 +223,10 @@ class Tft {
   bool turnOnAtEvent;
 
   Tft({
-    this.active,
-    this.timeout,
-    this.timeoutDuration,
-    this.turnOnAtEvent,
+    required this.active,
+    required this.timeout,
+    required this.timeoutDuration,
+    required this.turnOnAtEvent,
   });
 
   factory Tft.fromJson(Map<String, dynamic> json) => Tft(
@@ -247,11 +247,11 @@ class Tft {
 class Vcc {
   int r1;
   int r2;
-  int vbat;
+  int? vbat;
 
   Vcc({
-    this.r1,
-    this.r2,
+    required this.r1,
+    required this.r2,
     this.vbat,
   });
 
@@ -274,9 +274,9 @@ class WiFi {
   String passwd;
 
   WiFi({
-    this.active,
-    this.ssid,
-    this.passwd,
+    required this.active,
+    required this.ssid,
+    required this.passwd,
   });
 
   factory WiFi.fromJson(Map<String, dynamic> json) => WiFi(
@@ -296,7 +296,7 @@ class LedPanel {
   int brightness;
 
   LedPanel({
-    this.brightness,
+    required this.brightness,
   });
 
   factory LedPanel.fromJson(Map<String, dynamic> json) => LedPanel(

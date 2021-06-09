@@ -9,7 +9,7 @@ enum BluetoothDeviceAvailability {
 class BluetoothDeviceWithAvailability extends BluetoothDevice {
   BluetoothDevice device;
   BluetoothDeviceAvailability availability;
-  int rssi;
+  int? rssi;
 
   BluetoothDeviceWithAvailability(this.device, this.availability, [this.rssi]);
 }

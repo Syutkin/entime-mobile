@@ -1,11 +1,11 @@
 class ShowChangelog {
-  String previousVersion;
-  String currentVersion;
+  String? previousVersion;
+  String? currentVersion;
   bool show;
 
   ShowChangelog([
-    this.show = false,
-    this.previousVersion,
     this.currentVersion,
+    this.previousVersion,
+    this.show = false,
   ]);
 }

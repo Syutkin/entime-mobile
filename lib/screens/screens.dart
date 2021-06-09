@@ -16,3 +16,4 @@ export 'package:entime/screens/changelog/changelog_screen.dart';
 export 'package:entime/screens/changelog/changelog_popup.dart';
 export 'package:entime/screens/log/log_screen.dart';
 export 'package:entime/screens/countdown/countdown_screen.dart';
+export 'package:entime/screens/ble/select_ble_device.dart';

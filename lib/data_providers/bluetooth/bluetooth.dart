@@ -8,7 +8,7 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 typedef ErrorHandler = void Function(String error);
 
 class BluetoothBackgroundConnection {
-  final BluetoothConnection _connection;
+  final BluetoothConnection? _connection;
 
   String _messageBuffer = '';
   String _messagePacket = '';
@@ -20,10 +20,10 @@ class BluetoothBackgroundConnection {
 
   bool isDisconnecting = false;
 
-  bool get isConnected => _connection != null && _connection.isConnected;
+  bool get isConnected => _connection != null && _connection!.isConnected;
 
-  VoidCallback _onDisconnect;
-  ErrorHandler _onSendError;
+  late VoidCallback _onDisconnect;
+  late ErrorHandler _onSendError;
 
   void onDisconnect(VoidCallback callback) {
     _onDisconnect = callback;
@@ -35,7 +35,7 @@ class BluetoothBackgroundConnection {
 
   BluetoothBackgroundConnection._fromConnection(this._connection) {
     if (_connection != null) {
-      _connection.input.listen(_onDataReceived).onDone(() {
+      _connection!.input!.listen(_onDataReceived).onDone(() {
         // Сообщаем что соединение закрыто
         // Далее на основе того, когда это произошло,
         // определяем кто закрыл соединение (в BluetoothBloc event/state)
@@ -71,7 +71,7 @@ class BluetoothBackgroundConnection {
   }
 
   Future<void> start() async {
-    await _connection.output.allSent;
+    await _connection?.output.allSent;
   }
 
   Future<void> stop() async {
@@ -89,13 +89,13 @@ class BluetoothBackgroundConnection {
     if (text.isNotEmpty) {
       try {
         print('Sending message: $text');
-        _connection.output.add(utf8.encode(text + '\r\n'));
-        await _connection.output.allSent;
+        _connection?.output.add(utf8.encode(text + '\r\n') as Uint8List);
+        await _connection?.output.allSent;
         result = true;
       } catch (e) {
         // Ignore error, but notify state
         print('Error sending message: $e');
-        _onSendError(e);
+        _onSendError('$e');
         result = false;
       }
     }

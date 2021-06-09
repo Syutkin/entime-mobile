@@ -14,8 +14,7 @@ part 'module_settings_state.dart';
 
 class ModuleSettingsBloc
     extends Bloc<ModuleSettingsEvent, ModuleSettingsState> {
-  ModuleSettingsProvider moduleSettings;
-  // final ModuleSettingsProvider moduleSettings = ModuleSettings();
+  late ModuleSettingsProvider moduleSettings;
 
   //BLoC v5
   ModuleSettingsBloc(): super(ModuleSettingsUninitialized());

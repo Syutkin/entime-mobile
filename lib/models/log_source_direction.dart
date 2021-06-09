@@ -6,6 +6,6 @@ enum LogSourceDirection {
   Undefined,
 }
 
-extension LogSourceDirectionString on LogSourceDirection {
+extension LogSourceDirectionString on LogSourceDirection? {
   String get toStr => describeEnum(this ?? LogSourceDirection.Undefined);
 }

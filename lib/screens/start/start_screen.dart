@@ -11,7 +11,7 @@ import 'package:entime/utils/helper.dart';
 
 class StartScreen extends StatefulWidget {
   StartScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -19,8 +19,8 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreen extends State<StartScreen> {
-  StreamSubscription _voiceStream;
-  StreamSubscription _countdownStream;
+  StreamSubscription? _voiceStream;
+  StreamSubscription? _countdownStream;
 
   @override
   void dispose() {

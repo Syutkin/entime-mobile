@@ -1,6 +1,6 @@
 part of 'settings_popups.dart';
 
-Future<int> setLogLimitPopup(BuildContext context, int limit) async {
+Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
   var _delayController = TextEditingController();
   _delayController.text = (limit < 0 ? '' : limit).toString();
 
@@ -17,7 +17,7 @@ Future<int> setLogLimitPopup(BuildContext context, int limit) async {
           content: Form(
             key: _formKey,
             onChanged: () {
-              Form.of(primaryFocus.context).validate();
+              Form.of(primaryFocus!.context!)!.validate();
             },
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -28,14 +28,15 @@ Future<int> setLogLimitPopup(BuildContext context, int limit) async {
                   decoration: InputDecoration(labelText: 'Количество строк'),
                   controller: _delayController,
                   validator: (value) {
-                    if (value == '' || value == '-') {
+                    if (value == null || value == '' || value == '-') {
                       limit = -1;
                       return null;
                     }
-                    limit = int.tryParse(value);
-                    if (limit == null) {
+                    final int? val = int.tryParse(value);
+                    if (val == null) {
                       return 'Введите положительное число,\r\nпустая строка или отрицательное\r\n- без ограничений';
                     }
+                    limit = val;
                     return null;
                   },
                 ),
@@ -51,7 +52,7 @@ Future<int> setLogLimitPopup(BuildContext context, int limit) async {
             ),
             TextButton(
               onPressed: () async {
-                if (_formKey.currentState.validate()) {
+                if (_formKey.currentState!.validate()) {
                   if (limit < -1) {
                     limit = -1;
                   }

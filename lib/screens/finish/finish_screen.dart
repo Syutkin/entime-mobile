@@ -26,7 +26,7 @@ class _FinishPage extends State<FinishScreen> {
     _tapPosition = details.globalPosition;
   }
 
-  Timer _timer;
+  late Timer _timer;
 
   _FinishPage() {
     _startTimer();
@@ -36,7 +36,7 @@ class _FinishPage extends State<FinishScreen> {
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _timer.cancel();
     super.dispose();
   }
 
@@ -63,7 +63,7 @@ class _FinishPage extends State<FinishScreen> {
                     onPressed: () {
                       BlocProvider.of<ProtocolBloc>(context).add(
                           ProtocolClearNumberAtFinish(
-                              number: state.autoFinishNumber));
+                              number: state.autoFinishNumber!));
                       cancel();
                     },
                     child: Text(
@@ -82,7 +82,7 @@ class _FinishPage extends State<FinishScreen> {
           // ToDo: Перематывать только при первоначальном показе всех отсечек?
           // скролл на последнюю запись если показываем скрытые отсечки
           if (!BlocProvider.of<SettingsBloc>(context).state.hideMarked) {
-            SchedulerBinding.instance.addPostFrameCallback((_) {
+            SchedulerBinding.instance!.addPostFrameCallback((_) {
               scrollToEnd(_scrollController);
             });
           }
@@ -112,7 +112,7 @@ class _FinishPage extends State<FinishScreen> {
                   child: GestureDetector(
                     onTapDown: _storePosition,
                     child: DragTarget(builder:
-                            (context, List<int> candidateData, rejectedData) {
+                            (context, List<int?> candidateData, rejectedData) {
                       return ListTile(
                         contentPadding: EdgeInsets.all(0.0),
                         onTap: () async {
@@ -120,7 +120,9 @@ class _FinishPage extends State<FinishScreen> {
 //                        _addNumber(context, item);
                         },
                         onLongPress: () async {
-                          _clearPopup(context, item.number);
+                          if (item.number != null) {
+                            _clearPopup(context, item.number!);
+                          }
                         },
                         title: Row(children: <Widget>[
                           Flexible(
@@ -162,12 +164,14 @@ class _FinishPage extends State<FinishScreen> {
                         return true;
                       }
                     }, onAccept: (data) {
-                      BlocProvider.of<ProtocolBloc>(context)
-                          .add(ProtocolSetNumberToFinishTime(
-                        id: item.id,
-                        number: data,
-                        finishTime: item.finishtime,
-                      ));
+                      if (data != null) {
+                        BlocProvider.of<ProtocolBloc>(context)
+                            .add(ProtocolSetNumberToFinishTime(
+                          id: item.id,
+                          number: data as int,
+                          finishTime: item.finishtime,
+                        ));
+                      }
                     }),
                   ),
                 );
@@ -273,8 +277,9 @@ class _FinishPage extends State<FinishScreen> {
   }
 
   void _clearPopup(context, int number) async {
-    final RenderBox overlay = Overlay.of(context).context.findRenderObject();
-    FinishPopupMenu result = await showMenu<FinishPopupMenu>(
+    final RenderBox overlay =
+        Overlay.of(context)!.context.findRenderObject() as RenderBox;
+    FinishPopupMenu? result = await showMenu<FinishPopupMenu>(
         items: _getPopupMenu(context, number),
         context: context,
         position: RelativeRect.fromRect(
@@ -297,7 +302,7 @@ class _FinishPage extends State<FinishScreen> {
   }
 
   List<PopupMenuEntry<FinishPopupMenu>> _getPopupMenu(
-      BuildContext context, int number) {
+      BuildContext context, int? number) {
     var list = <PopupMenuEntry<FinishPopupMenu>>[];
     if (number != null) {
       list.add(
@@ -322,8 +327,9 @@ class _FinishPage extends State<FinishScreen> {
   }
 
   void _numberOnTracePopup(context, int number) async {
-    final RenderBox overlay = Overlay.of(context).context.findRenderObject();
-    ParticipantStatus result = await showMenu(
+    final RenderBox overlay =
+        Overlay.of(context)!.context.findRenderObject() as RenderBox;
+    ParticipantStatus? result = await showMenu(
         items: _getNumberOnTracePopupMenu(context, number),
         context: context,
         position: RelativeRect.fromRect(
@@ -373,9 +379,10 @@ class _FinishPage extends State<FinishScreen> {
     return list;
   }
 
-  RelativeRect buttonMenuPosition(BuildContext c) {
-    final RenderBox bar = c.findRenderObject();
-    final RenderBox overlay = Overlay.of(c).context.findRenderObject();
+  RelativeRect buttonMenuPosition(BuildContext buildContext) {
+    final RenderBox bar = buildContext.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+        Overlay.of(buildContext)!.context.findRenderObject() as RenderBox;
     // ignore: omit_local_variable_types
     final RelativeRect position = RelativeRect.fromRect(
       Rect.fromPoints(
@@ -455,7 +462,7 @@ class _FinishPage extends State<FinishScreen> {
         .add(ProtocolAddFinishTimeManual(time: time));
   }
 
-  Widget _addIcon(int manual) {
+  Widget _addIcon(int? manual) {
     if (manual == 1) {
       return const Icon(MdiIcons.hand);
     } else {
@@ -468,7 +475,7 @@ class _FinishPage extends State<FinishScreen> {
   // Обновляется спустя секунду после нового открытия окна финиша,
   // т.к. создаётся новый неинициализированный таймер
   void _startTimer() {
-    int prevMinute;
+    int? prevMinute;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       var now = DateTime.now();
       if (prevMinute != now.minute && now.second > 0) {

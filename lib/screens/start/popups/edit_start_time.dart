@@ -20,8 +20,8 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
   _automaticPhoneTimeController.text = item.automaticphonetime ?? '';
   final _formKey = GlobalKey<FormState>();
 
-  String _validateCorrection(String value) {
-    if (value == '') {
+  String? _validateCorrection(String? value) {
+    if (value == '' || value == null) {
       return null;
     }
     if (int.tryParse(value) == null) {
@@ -30,8 +30,8 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
     return null;
   }
 
-  String _validateStartTime(String value) {
-    if (value == '') {
+  String? _validateStartTime(String? value) {
+    if (value == ''|| value == null) {
       return null;
     }
     if (strTimeToDateTime(value) == null) {
@@ -74,7 +74,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
         content: Form(
           key: _formKey,
           onChanged: () {
-            Form.of(primaryFocus.context).validate();
+            Form.of(primaryFocus!.context!)!.validate();
           },
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -141,7 +141,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
           ),
           TextButton(
             onPressed: () {
-              if (_formKey.currentState.validate()) {
+              if (_formKey.currentState!.validate()) {
                 if (_updateAllStart()) {
                   BlocProvider.of<ProtocolBloc>(context)
                       .add(ProtocolUpdateItemInfoAtStart(item: item));

@@ -1,6 +1,6 @@
 part of 'settings_popups.dart';
 
-Future<double> setPitchPopup(BuildContext context, settings) async {
+Future<double?> setPitchPopup(BuildContext context, settings) async {
   double _value = settings.pitch;
   return showDialog<double>(
       context: context,

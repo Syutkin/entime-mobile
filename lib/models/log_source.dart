@@ -6,6 +6,6 @@ enum LogSource {
   Unknown,
 }
 
-extension LogSourceString on LogSource {
+extension LogSourceString on LogSource? {
   String get toStr => describeEnum(this ?? LogSource.Unknown);
 }

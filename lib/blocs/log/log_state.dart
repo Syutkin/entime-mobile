@@ -4,14 +4,14 @@ abstract class LogState extends Equatable {
   const LogState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class LogInitial extends LogState {}
 
 class LogOpen extends LogState {
-  final List<Log> log;
-  final bool updateLogScreen;
+  final List<Log>? log;
+  final bool? updateLogScreen;
 
   LogOpen({
     this.log,
@@ -19,5 +19,5 @@ class LogOpen extends LogState {
   });
 
   @override
-  List<Object> get props => [log, updateLogScreen];
+  List<Object?> get props => [log, updateLogScreen];
 }

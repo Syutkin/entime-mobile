@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import 'package:entime/data_providers/update/update_provider.dart';
 import 'package:entime/models/models.dart';
@@ -15,9 +14,8 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
   final UpdateProvider updater;
 
   UpdateBloc({
-    @required this.updater,
-  })  : assert(updater != null),
-        super(UpdateInitial()) {
+    required this.updater,
+  }) : super(UpdateInitial()) {
     updater.setDownloadingHandler((current, total) {
       add(UpdateDownloading(current, total));
     });

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 //Future<bool> overwriteStartTime(
 //    BuildContext context, ProtocolSelectedState state) async {
-Future<bool> overwriteStartTime({BuildContext context, String text}) async {
+Future<bool?> overwriteStartTime({required BuildContext context, required String text}) async {
   return showDialog<bool>(
     context: context,
     barrierDismissible: true,

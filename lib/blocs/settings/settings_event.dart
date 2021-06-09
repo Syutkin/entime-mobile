@@ -4,7 +4,7 @@ abstract class SettingsEvent extends Equatable {
   const SettingsEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class LoadSettings extends SettingsEvent {}
@@ -12,20 +12,20 @@ class LoadSettings extends SettingsEvent {}
 class SetDefaultSettings extends SettingsEvent {}
 
 class SetBoolValueEvent extends SettingsEvent {
-  final bool sound;
-  final bool beep;
-  final bool voice;
-  final bool voice_name;
-  final bool wakelock;
-  final bool startFab;
-  final bool finishFab;
-  final bool countdown;
-  final bool checkUpdates;
-  final bool hideMarked;
-  final bool hideNumbers;
-  final bool hideManual;
-  final bool reconnect;
-  final bool substituteNumbers;
+  final bool? sound;
+  final bool? beep;
+  final bool? voice;
+  final bool? voice_name;
+  final bool? wakelock;
+  final bool? startFab;
+  final bool? finishFab;
+  final bool? countdown;
+  final bool? checkUpdates;
+  final bool? hideMarked;
+  final bool? hideNumbers;
+  final bool? hideManual;
+  final bool? reconnect;
+  final bool? substituteNumbers;
 
   const SetBoolValueEvent({
     this.sound,
@@ -45,7 +45,7 @@ class SetBoolValueEvent extends SettingsEvent {
   });
 
   @override
-  List<Object> get props =>
+  List<Object?> get props =>
       [
         sound,
         beep,
@@ -114,9 +114,9 @@ class SetBoolValueEvent extends SettingsEvent {
 }
 
 class SetIntValueEvent extends SettingsEvent {
-  final int finishDelay;
-  final int substituteNumbersDelay;
-  final int log_limit;
+  final int? finishDelay;
+  final int? substituteNumbersDelay;
+  final int? log_limit;
 
   const SetIntValueEvent({
     this.finishDelay,
@@ -125,7 +125,7 @@ class SetIntValueEvent extends SettingsEvent {
   });
 
   @override
-  List<Object> get props =>
+  List<Object?> get props =>
       [
         finishDelay,
         substituteNumbersDelay,
@@ -150,12 +150,12 @@ class SetIntValueEvent extends SettingsEvent {
 }
 
 class SetDoubleValueEvent extends SettingsEvent {
-  final double volume; // громкость
-  final double pitch; // тон речи
-  final double rate; // скорость речи
-  final double startFabSize;
-  final double finishFabSize;
-  final double countdownSize;
+  final double? volume; // громкость
+  final double? pitch; // тон речи
+  final double? rate; // скорость речи
+  final double? startFabSize;
+  final double? finishFabSize;
+  final double? countdownSize;
 
   const SetDoubleValueEvent({
     this.volume,
@@ -167,7 +167,7 @@ class SetDoubleValueEvent extends SettingsEvent {
   });
 
   @override
-  List<Object> get props =>
+  List<Object?> get props =>
       [
         volume,
         pitch,
@@ -204,9 +204,9 @@ class SetDoubleValueEvent extends SettingsEvent {
 }
 
 class SetStringValueEvent extends SettingsEvent {
-  final String language; // = "ru-RU"; // язык
-  final String recentFile;
-  final String previousVersion;
+  final String? language; // = "ru-RU"; // язык
+  final String? recentFile;
+  final String? previousVersion;
 
   const SetStringValueEvent({
     this.language,
@@ -215,7 +215,7 @@ class SetStringValueEvent extends SettingsEvent {
   });
 
   @override
-  List<Object> get props =>
+  List<Object?> get props =>
       [
         language,
         recentFile,
@@ -228,7 +228,7 @@ class SetStringValueEvent extends SettingsEvent {
     if (language != null) {
       result += 'language: $language';
     }
-    if (recentFile != null && recentFile.isNotEmpty) {
+    if (recentFile != null && recentFile!.isNotEmpty) {
       result += 'recentFile: $recentFile';
     }
     if (previousVersion != null) {

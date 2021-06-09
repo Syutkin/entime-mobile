@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../models/models.dart';
@@ -13,25 +12,24 @@ part 'log_event.dart';
 part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {
+  late final SettingsBloc settingsBloc;
+  late final StreamSubscription settingsSubscription;
+
+  int limit = -1;
+
+  late List<Log> log;
+
   LogBloc({
-    @required this.settingsBloc,
-  })  : assert(settingsBloc != null),
-        super(LogOpen()) {
-    settingsSubscription = settingsBloc.listen((state) {
+    required this.settingsBloc,
+  }) : super(LogOpen()) {
+    settingsSubscription = settingsBloc.stream.listen((state) {
       limit = state.log_limit;
     });
   }
 
-  final SettingsBloc settingsBloc;
-  StreamSubscription settingsSubscription;
-
-  int limit = -1;
-
-  List<Log> log;
-
   @override
   Future<void> close() {
-    LogProvider.db?.close();
+    LogProvider.db.close();
     return super.close();
   }
 

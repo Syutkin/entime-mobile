@@ -1,10 +1,10 @@
 part of 'settings_popups.dart';
 
-Future<int> setDelayPopup(
+Future<int?> setDelayPopup(
     BuildContext context, int delay, String title) async {
 
   var _delayController = TextEditingController();
-  _delayController.text = (delay ?? '').toString();
+  _delayController.text = delay.toString();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -19,7 +19,7 @@ Future<int> setDelayPopup(
           content: Form(
             key: _formKey,
             onChanged: () {
-              Form.of(primaryFocus.context).validate();
+              Form.of(primaryFocus!.context!)!.validate();
             },
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -30,10 +30,14 @@ Future<int> setDelayPopup(
                   decoration: InputDecoration(labelText: 'Задержка'),
                   controller: _delayController,
                   validator: (value) {
-                    delay = int.tryParse(value);
-                    if (delay == null || delay < 0) {
+                    if (value == null) {
                       return 'Неверная задержка';
                     }
+                    final int? integer = int.tryParse(value);
+                    if (integer == null || integer < 0) {
+                      return 'Неверная задержка';
+                    }
+                    delay = integer;
                     return null;
                   },
                 ),
@@ -49,7 +53,7 @@ Future<int> setDelayPopup(
             ),
             TextButton(
               onPressed: () async {
-                if (_formKey.currentState.validate()) {
+                if (_formKey.currentState!.validate()) {
                   Navigator.of(context).pop(delay);
                 }
               },

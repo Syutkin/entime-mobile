@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
   Header({
-    Key key,
-    this.text,
+    Key? key,
+    required this.text,
   }) : super(key: key);
 
   final String text;
@@ -12,7 +12,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     TextTheme textTheme = Theme.of(context).textTheme;
-    double height = textTheme.bodyText1.fontSize * 3;
+    double height = textTheme.bodyText1!.fontSize! * 3;
     return Container(
       height: height,
       decoration: BoxDecoration(
@@ -32,7 +32,7 @@ class Header extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: textTheme.bodyText1.apply(color: colorScheme.onPrimary),
+          style: textTheme.bodyText1!.apply(color: colorScheme.onPrimary),
         ),
       ),
     );

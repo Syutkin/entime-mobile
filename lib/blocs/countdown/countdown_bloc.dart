@@ -15,27 +15,24 @@ part 'countdown_event.dart';
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
-  final ProtocolBloc protocolBloc;
-  StreamSubscription protocolSubscription;
-  final TabBloc tabBloc;
-  StreamSubscription tabSubscription;
-  final SettingsBloc settingsBloc;
-  StreamSubscription settingsSubscription;
+  late final ProtocolBloc protocolBloc;
+  late final StreamSubscription protocolSubscription;
+  late final TabBloc tabBloc;
+  late final StreamSubscription tabSubscription;
+  late final SettingsBloc settingsBloc;
+  late final StreamSubscription settingsSubscription;
 
-  Timer _timer;
-  List<StartItem> _participant;
-  DateTime _nextStartTime;
+  Timer? _timer;
+  late List<StartItem> _participant;
+  DateTime? _nextStartTime;
   bool isFinished = false;
 
   CountdownBloc({
-    @required this.protocolBloc,
-    @required this.tabBloc,
-    @required this.settingsBloc,
-  })  : assert(protocolBloc != null),
-        assert(tabBloc != null),
-        assert(settingsBloc != null),
-        super(CountdownInitialState()) {
-    protocolSubscription = protocolBloc.listen((state) async {
+    required this.protocolBloc,
+    required this.tabBloc,
+    required this.settingsBloc,
+  }) : super(CountdownInitialState()) {
+    protocolSubscription = protocolBloc.stream.listen((state) async {
       // обновляет отсчёт при событии в дб при открытом окне старта
       if (state is ProtocolSelectedState && tabBloc.state == AppTab.start) {
         _nextStartTime = await _getNextStarttime(DateTime.now());
@@ -43,7 +40,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
         await _countdown();
       }
     });
-    tabSubscription = tabBloc.listen((state) async {
+    tabSubscription = tabBloc.stream.listen((state) async {
       // обновляет отсчёт при переключении на окно старта
       if (state == AppTab.start) {
         _nextStartTime = await _getNextStarttime(DateTime.now());
@@ -51,8 +48,8 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
         await _countdown();
       }
     });
-    settingsSubscription = settingsBloc.listen((state) {
-      if ((_timer == null || !_timer.isActive) && state.countdown) {
+    settingsSubscription = settingsBloc.stream.listen((state) {
+      if ((_timer == null || !_timer!.isActive) && state.countdown) {
         _startTimer();
       } else {
         _timer?.cancel();
@@ -65,9 +62,9 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
 
   @override
   Future<void> close() {
-    protocolSubscription?.cancel();
-    tabSubscription?.cancel();
-    settingsSubscription?.cancel();
+    protocolSubscription.cancel();
+    tabSubscription.cancel();
+    settingsSubscription.cancel();
     _timer?.cancel();
     return super.close();
   }
@@ -91,10 +88,10 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     if (protocolBloc.state is ProtocolSelectedState) {
       var now = DateTime.now();
       if (_nextStartTime != null) {
-        if (_nextStartTime.isAfter(now)) {
-          add(Tick('${_countdownDuration(_nextStartTime.difference(now))}'));
+        if (_nextStartTime!.isAfter(now)) {
+          add(Tick('${_countdownDuration(_nextStartTime!.difference(now))}'));
         } else {
-          if (_nextStartTime.isAfter(now.subtract(Duration(seconds: 10)))) {
+          if (_nextStartTime!.isAfter(now.subtract(Duration(seconds: 10)))) {
             add(Tick('GO'));
           } else {
             _nextStartTime = null;
@@ -112,11 +109,11 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     }
   }
 
-  Future<DateTime> _getNextStarttime(DateTime time) async {
+  Future<DateTime?> _getNextStarttime(DateTime time) async {
     _participant = await ProtocolProvider.db
         .getNextParticipants(DateFormat('HH:mm:ss').format(time));
-    if (_participant.isNotEmpty) {
-      return strTimeToDateTime(_participant.first.starttime);
+    if (_participant.isNotEmpty && _participant.first.starttime != null) {
+      return strTimeToDateTime(_participant.first.starttime!);
     } else {
       return null;
     }

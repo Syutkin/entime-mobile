@@ -9,10 +9,7 @@ class AppInfoProvider {
   AppInfoProvider(
     this._packageInfo,
     this._deviceInfo,
-  ) : assert(
-          _packageInfo != null,
-          _deviceInfo != null,
-        );
+  );
 
   static Future<AppInfoProvider> load() async {
     // final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();

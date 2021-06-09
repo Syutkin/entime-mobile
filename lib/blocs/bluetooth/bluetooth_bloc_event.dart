@@ -5,27 +5,27 @@ abstract class BluetoothEvent extends Equatable {
   const BluetoothEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class SelectDevice extends BluetoothEvent {
-  final BluetoothDeviceWithAvailability deviceWithAvailability;
+  final BluetoothDeviceWithAvailability? deviceWithAvailability;
 
   const SelectDevice(this.deviceWithAvailability);
 
   @override
-  List<Object> get props => [deviceWithAvailability];
+  List<Object?> get props => [deviceWithAvailability];
 }
 
 class Connected extends BluetoothEvent {}
 
 class Connect extends BluetoothEvent {
-  final BluetoothDevice selectedDevice;
+  final BluetoothDevice? selectedDevice;
 
   const Connect(this.selectedDevice);
 
   @override
-  List<Object> get props => [selectedDevice];
+  List<Object?> get props => [selectedDevice];
 }
 
 class Disconnect extends BluetoothEvent {}

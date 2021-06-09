@@ -10,7 +10,9 @@ import 'package:pub_semver/pub_semver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:install_plugin/install_plugin.dart';
+
+// import 'package:install_plugin/install_plugin.dart';
+import 'package:app_installer/app_installer.dart';
 
 import 'package:entime/models/models.dart';
 
@@ -21,14 +23,14 @@ class UpdateProvider {
   String _latestVersion = '';
   bool _canUpdate = false;
   bool _downloaded = false;
-  String _dir;
-  DownloadHandler _downloadHandler;
-  VoidCallback _onDownloadComplete;
-  ErrorHandler _onError;
+  String? _dir;
+  late DownloadHandler _downloadHandler;
+  late VoidCallback _onDownloadComplete;
+  late ErrorHandler _onError;
 
   String get latestVersion => _latestVersion;
 
-  int _updateFileSize = -1;
+  int? _updateFileSize = -1;
 
 //  int get updateFileSize => _updateFileSize;
 
@@ -40,7 +42,7 @@ class UpdateProvider {
 
   // Вынесено сюда, чтобы можно было останавливать скачивание из UI
   // с помощью stop().
-  http.Client _client;
+  http.Client? _client;
 
   void setDownloadingHandler(DownloadHandler callback) {
     _downloadHandler = callback;
@@ -59,6 +61,7 @@ class UpdateProvider {
   }
 
   Future<bool> checkUpdate() async {
+    _canUpdate = false;
     try {
       _latestVersion = await getLatestVersion();
       var latestVersion = Version.parse(_latestVersion);
@@ -68,11 +71,9 @@ class UpdateProvider {
       if (latestVersion > currentVersion) {
         print('Update_provider: Update to $latestVersion available');
         _canUpdate = true;
-        return _canUpdate;
       }
     } catch (e) {
       print(e);
-      return _canUpdate;
     }
     return _canUpdate;
   }
@@ -82,6 +83,7 @@ class UpdateProvider {
     try {
       var response = await http.get(url);
       if (response.statusCode == 200) {
+        print('Latest version: ${response.body.trim()}');
         return response.body.trim();
       }
       else {
@@ -102,7 +104,7 @@ class UpdateProvider {
           if (Platform.isAndroid) {
             _dir = '/storage/emulated/0/Download';
           } else {
-            _dir = (await getExternalStorageDirectory()).path;
+            _dir = (await getExternalStorageDirectory())!.path;
           }
           File file = File('$_dir/entime-$_latestVersion.apk');
 
@@ -111,7 +113,7 @@ class UpdateProvider {
 
           final request = http.Request('GET', Uri.parse(url));
           _client = http.Client();
-          final http.StreamedResponse response = await _client.send(request);
+          final http.StreamedResponse response = await _client!.send(request);
 
           _updateFileSize = response.contentLength;
 
@@ -124,7 +126,7 @@ class UpdateProvider {
               (List<int> newBytes) {
                 // update progress
                 bytes.addAll(newBytes);
-                _downloadHandler(bytes.length, _updateFileSize);
+                _downloadHandler(bytes.length, _updateFileSize!);
               },
               onDone: () async {
                 // save file
@@ -152,10 +154,17 @@ class UpdateProvider {
 
   void installApk() {
     if (_canUpdate && _downloaded) {
-      InstallPlugin.installApk(
-              '$_dir/entime-$_latestVersion.apk', 'site.syutkin.entime')
+      // InstallPlugin.installApk(
+      //         '$_dir/entime-$_latestVersion.apk', 'site.syutkin.entime')
+      //     .then((result) {
+      //   print('Update_provider: Open apk $result');
+      // }).catchError((error) {
+      //   print('Update_provider: Open apk error: $error');
+      //   _onError('Open apk error: $error');
+      // });
+      AppInstaller.installApk('$_dir/entime-$_latestVersion.apk')
           .then((result) {
-        print('Update_provider: Open apk $result');
+        print('Update_provider: Open apk success');
       }).catchError((error) {
         print('Update_provider: Open apk error: $error');
         _onError('Open apk error: $error');

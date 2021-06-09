@@ -13,7 +13,7 @@ import 'package:entime/blocs/blocs.dart';
 import 'package:entime/utils/helper.dart';
 
 class SelectFileScreen extends StatefulWidget {
-  SelectFileScreen({Key key}) : super(key: key);
+  SelectFileScreen({Key? key}) : super(key: key);
 
   @override
   _SelectFileScreenState createState() => _SelectFileScreenState();
@@ -29,7 +29,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
           IconButton(
             icon: const Icon(MdiIcons.filePlusOutline),
             onPressed: () async {
-              String newFile = await _createFile(context);
+              String? newFile = await _createFile(context);
               if (newFile != null) {
                 BlocProvider.of<ProtocolBloc>(context)
                     .add(SelectProtocol(newFile));
@@ -40,10 +40,10 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
           IconButton(
             icon: const Icon(MdiIcons.folderOpenOutline),
             onPressed: () async {
-              FilePickerResult result =
+              FilePickerResult? result =
                   await FilePicker.platform.pickFiles(type: FileType.any);
-              if (result != null) {
-                File file = File(result.files.single.path);
+              if (result != null && result.files.single.path != null) {
+                File? file = File(result.files.single.path!);
                 file = await _checkExists(context, file);
                 // Если null - файл уже существовал и не перезаписываем,
                 // то ничего делать не нужно
@@ -63,9 +63,9 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
           builder: (context, AsyncSnapshot<List<File>> snapshot) {
             if (snapshot.hasData) {
               return ListView.separated(
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  File item = snapshot.data[index];
+                  File item = snapshot.data![index];
                   return ListTile(
                     leading: const Icon(MdiIcons.database),
                     title: Text(basename(item.path)),
@@ -104,13 +104,15 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
   Future<List<File>> _getFiles() async {
     List<File> files = [];
 
-    Directory externalStorageDirectory = await getExternalStorageDirectory();
-    List<FileSystemEntity> allFiles = externalStorageDirectory.listSync();
-    for (var file in allFiles) {
-      if (file is File &&
-          (extension(file.path) == '.sqlite' ||
-              extension(file.path) == '.db')) {
-        files.add(file);
+    Directory? externalStorageDirectory = await getExternalStorageDirectory();
+    if (externalStorageDirectory != null) {
+      List<FileSystemEntity> allFiles = externalStorageDirectory.listSync();
+      for (var file in allFiles) {
+        if (file is File &&
+            (extension(file.path) == '.sqlite' ||
+                extension(file.path) == '.db')) {
+          files.add(file);
+        }
       }
     }
     return files;
@@ -118,19 +120,24 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
 
   // Проверка на существование файла в рабочей директории перед копированием
   // выбранного файла
-  Future<File> _checkExists(BuildContext context, File file) async {
+  Future<File?> _checkExists(BuildContext context, File file) async {
     String fileName = basename(file.path);
-    Directory externalStorageDirectory = await getExternalStorageDirectory();
-    String localFileName =
-        join(externalStorageDirectory.path, basename(fileName));
-    if (File(localFileName).existsSync()) {
-      if (await _overwriteFile(context, localFileName)) {
-        return _copyFile(file, localFileName);
+    Directory? externalStorageDirectory = await getExternalStorageDirectory();
+    if (externalStorageDirectory != null) {
+      String localFileName =
+          join(externalStorageDirectory.path, basename(fileName));
+      if (File(localFileName).existsSync()) {
+        bool? overwrite = await _overwriteFile(context, localFileName);
+        if (overwrite != null && overwrite) {
+          return _copyFile(file, localFileName);
+        } else {
+          return null;
+        }
       } else {
-        return null;
+        return _copyFile(file, localFileName);
       }
     } else {
-      return _copyFile(file, localFileName);
+      return null;
     }
   }
 
@@ -143,11 +150,11 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
     }
   }
 
-  Future<bool> _overwriteFile(
+  Future<bool?> _overwriteFile(
       BuildContext context, String localFileName) async {
     return showDialog<bool>(
       context: context,
-      barrierDismissible: true,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Предупреждение'),
@@ -220,8 +227,8 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
         );
       });
 
-  Future<String> _createFile(BuildContext context) async {
-    String result;
+  Future<String?> _createFile(BuildContext context) async {
+    String? result;
     final _formKey = GlobalKey<FormState>();
     return showDialog<String>(
       context: context,
@@ -233,7 +240,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
           content: Form(
             key: _formKey,
             onChanged: () {
-              Form.of(primaryFocus.context).validate();
+              Form.of(primaryFocus!.context!)!.validate();
             },
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -244,6 +251,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                   decoration: InputDecoration(labelText: 'Название'),
                   validator: (value) {
                     result = value;
+                    if (value == null) return null;
                     RegExp regExp = RegExp(r'^[а-яА-ЯёЁa-zA-Z0-9\-\+\.\_!]+$');
                     if (regExp.hasMatch(value)) return null;
                     return 'Недопустимый символ';
@@ -261,11 +269,14 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
             ),
             TextButton(
               onPressed: () async {
-                if (_formKey.currentState.validate()) {
-                  Directory externalStorageDirectory =
+                if (_formKey.currentState!.validate()) {
+                  Directory? externalStorageDirectory =
                       await getExternalStorageDirectory();
-                  String localFileName = join(externalStorageDirectory.path,
-                      basename('$result.sqlite'));
+                  String? localFileName;
+                  if (externalStorageDirectory != null) {
+                    localFileName = join(externalStorageDirectory.path,
+                        basename('$result.sqlite'));
+                  }
                   Navigator.of(context).pop(localFileName);
                 }
               },

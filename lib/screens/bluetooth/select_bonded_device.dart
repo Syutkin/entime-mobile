@@ -31,10 +31,10 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
       <BluetoothDeviceWithAvailability>[];
 
   // Availability
-  StreamSubscription<BluetoothDiscoveryResult> _discoveryStreamSubscription;
-  bool _isDiscovering;
+  StreamSubscription<BluetoothDiscoveryResult>? _discoveryStreamSubscription;
+  bool _isDiscovering = false;
 
-  _SelectBondedDeviceScreen();
+  // _SelectBondedDeviceScreen();
 
   @override
   void initState() {
@@ -87,7 +87,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
       });
     });
 
-    _discoveryStreamSubscription.onDone(() {
+    _discoveryStreamSubscription?.onDone(() {
       setState(() {
         _isDiscovering = false;
       });

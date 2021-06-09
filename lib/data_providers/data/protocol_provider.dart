@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -12,11 +11,11 @@ class ProtocolProvider {
 
   static final ProtocolProvider db = ProtocolProvider._();
 
-  Database _database;
+  Database? _database;
 
-  String _dbPath;
+  String? _dbPath;
 
-  String get dbPath => _dbPath;
+  String? get dbPath => _dbPath;
 
   // set dbPath(String? value) {
   //   _database?.close();
@@ -24,7 +23,7 @@ class ProtocolProvider {
   //   _database = null;
   // }
 
-  Future<void> setDbPath(String value) async {
+  Future<void> setDbPath(String? value) async {
     if (_dbPath != value) {
       await _database?.close();
       _dbPath = value;
@@ -37,14 +36,14 @@ class ProtocolProvider {
   }
 
   Future<Database> get database async {
-    if (_database != null) return _database;
+    if (_database != null) return _database!;
     _database = await _initDB();
-    return _database;
+    return _database!;
   }
 
   Future<Database> _initDB() async {
     return await openDatabase(
-      _dbPath,
+      _dbPath!,
       version: 1,
       // onOpen: (db) async {
       //   print('SQLite version: ' +
@@ -54,7 +53,7 @@ class ProtocolProvider {
         await db.execute('''
         CREATE TABLE IF NOT EXISTS 'start' (
         	'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-        	'number'	INTEGER UNIQUE,
+        	'number'	INTEGER NOT NULL UNIQUE,
         	'starttime'	TEXT,
         	'automaticstarttime'	TEXT,
         	'automaticcorrection'	INTEGER,
@@ -66,7 +65,7 @@ class ProtocolProvider {
         await db.execute('''
         CREATE TABLE IF NOT EXISTS 'finish' (
         	'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-        	'number'	INTEGER UNIQUE,
+        	'number'	INTEGER NOT NULL UNIQUE,
         	'finishtime'	TEXT,
         	'phonetime'	TEXT,
         	'set'	INTEGER,
@@ -75,7 +74,7 @@ class ProtocolProvider {
         await db.execute('''
         CREATE TABLE IF NOT EXISTS 'main' (
         	'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	        'number'	INTEGER UNIQUE,
+	        'number'	INTEGER NOT NULL UNIQUE,
 	        'name'	VARCHAR
 	        );
         ''');
@@ -129,9 +128,14 @@ class ProtocolProvider {
     return result;
   }
 
-  //ToDo: посмотреть как сделано
+  //Проверяем есть ли стартующий около времени [beepTime]
+  //Возвращает 0 если стартующего нет
   Future<int> getStart(String beepTime) async {
-    DateTime beepDateTime = strTimeToDateTime(beepTime);
+    DateTime? beepDateTime = strTimeToDateTime(beepTime);
+    if (beepDateTime == null) {
+      assert(beepDateTime != null);
+      return 0;
+    }
     DateTime timeAfter = beepDateTime.add(Duration(seconds: 10));
     String after = DateFormat('HH:mm:ss').format(timeAfter);
     final db = await database;
@@ -140,27 +144,32 @@ class ProtocolProvider {
         WHERE starttime BETWEEN '$beepTime' AND '$after'
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL);
         ''');
-    int count = Sqflite.firstIntValue(x);
+    int? count = Sqflite.firstIntValue(x);
+    if (count == null) return 0;
     return count;
   }
 
   /// Обновляет [StartItem.automaticstarttime] и [StartItem.automaticcorrection]
   /// Возвращает null при успехе, и [StartItem] при неудаче
-  Future<List<StartItem>> updateAutomaticCorrection({
-    @required String time,
-    @required int correction,
-    @required DateTime timeStamp,
+  Future<List<StartItem>?> updateAutomaticCorrection({
+    required String time,
+    required int correction,
+    required DateTime timeStamp,
     bool forceUpdate = false,
   }) async {
     final db = await database;
-    final DateTime dateGoTime = strTimeToDateTime(time);
+    final DateTime? dateGoTime = strTimeToDateTime(time);
+    if (dateGoTime == null) {
+      assert(dateGoTime != null);
+      return null;
+    }
     final DateTime timeBefore = dateGoTime.subtract(Duration(seconds: 15));
     final DateTime timeAfter = dateGoTime.add(Duration(seconds: 15));
     final String before = DateFormat('HH:mm:ss').format(timeBefore);
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
 
-    // Если не принудительно обновлять, то
+    // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
     // в этом случае устанавливаем время старта и вовращаем null.
     // В противном случае возвращаем StartItem.
@@ -193,7 +202,7 @@ class ProtocolProvider {
     return null;
   }
 
-  //ToDo: исправить выставление значения только первому совпадению
+//ToDo: исправить выставление значения только первому совпадению
   Future<int> updateManualStartTime(DateTime time) async {
     int result = 0;
     final db = await database;
@@ -210,8 +219,12 @@ class ProtocolProvider {
         ''', [before, after]);
     List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
-    if (startProtocol.isNotEmpty) {
-      DateTime startTime = strTimeToDateTime(startProtocol.first.starttime);
+    if (startProtocol.isNotEmpty && startProtocol.first.starttime != null) {
+      DateTime? startTime = strTimeToDateTime(startProtocol.first.starttime!);
+      if (startTime == null) {
+        assert(startTime != null);
+        return result;
+      }
       Duration correction = startTime.difference(time);
       result = await db.rawUpdate('''
         UPDATE start
@@ -284,9 +297,9 @@ class ProtocolProvider {
   /// Обновляет или добавляет [StartItem.number] и [StartItem.starttime]
   /// Возвращает null при успехе, и [StartItem] если такое же стартовое время
   /// уже установлено для другого участника
-  Future<List<StartItem>> addStartNumber({
-    @required int number,
-    @required String time,
+  Future<List<StartItem>?> addStartNumber({
+    required int number,
+    required String time,
     bool forceAdd = false,
   }) async {
     final db = await database;
@@ -335,7 +348,11 @@ class ProtocolProvider {
 
 //ToDo: посмотреть как сделано
   Future<List<StartItem>> getStartingParticipants(String time) async {
-    final DateTime dateTime = strTimeToDateTime(time);
+    final DateTime? dateTime = strTimeToDateTime(time);
+    if (dateTime == null) {
+      assert(dateTime != null);
+      return [];
+    }
     final DateTime timeAfter = dateTime.add(Duration(minutes: 1));
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final db = await database;
@@ -425,20 +442,24 @@ class ProtocolProvider {
   /// Если новое финишное время отличается менее чем на [finishDelay]
   /// от предыдущего нескрытого, неручного финишного времени без присвоенного номера,
   /// то записываемое время будет автоматически скрыто
-  Future<int> addFinishTime({
-    @required String finish,
-    @required DateTime timeStamp,
+  Future<int?> addFinishTime({
+    required String finish,
+    required DateTime timeStamp,
     int finishDelay = 0,
     bool substituteNumbers = false,
     int substituteNumbersDelay = 0,
   }) async {
-    int hide;
-    int number;
+    int? hide;
+    int? number;
     // узнаём предыдущее нескрытое автоматическое время
     final prevFinishTime = await _prevFinishTime();
     // проверяем разницу между предыдущей и поступившей отсечкой
     if (prevFinishTime != null) {
       final finishTime = strTimeToDateTime(finish);
+      if (finishTime == null) {
+        assert(finishTime != null);
+        return null;
+      }
       final difference = finishTime.difference(prevFinishTime);
       // скрываем отсечку, если разница меньше настройки
       if (difference.inMilliseconds < finishDelay) {
@@ -458,8 +479,11 @@ class ProtocolProvider {
         // если есть, проверяем разницу между финишами
         // если больше разницы в настройках - ставим номер
         if (lastFinishTime != null) {
-          // ToDo: время от strTimeToDateTime в общем случае может быть null, нужен обработчик
           final finishTime = strTimeToDateTime(finish);
+          if (finishTime == null) {
+            assert(finishTime != null);
+            return null;
+          }
           final difference = finishTime.difference(lastFinishTime);
           if (difference.inMilliseconds > substituteNumbersDelay) {
             number = await _getAwaitingNumber();
@@ -583,11 +607,11 @@ class ProtocolProvider {
     await _database?.close();
   }
 
-  // -------------------------
-  // вспомогательные функции
+// -------------------------
+// вспомогательные функции
 
-  Future<DateTime> _prevFinishTime() async {
-    DateTime prevFinishTime;
+  Future<DateTime?> _prevFinishTime() async {
+    DateTime? prevFinishTime;
     final db = await database;
     var res = await db.rawQuery('''
         SELECT finishtime
@@ -605,8 +629,8 @@ class ProtocolProvider {
     return prevFinishTime;
   }
 
-  Future<DateTime> _lastFinishTime() async {
-    DateTime result;
+  Future<DateTime?> _lastFinishTime() async {
+    DateTime? result;
     final db = await database;
     var res = await db.rawQuery('''
         SELECT finishtime
@@ -623,8 +647,8 @@ class ProtocolProvider {
     return result;
   }
 
-  Future<int> _getAwaitingNumber() async {
-    int number;
+  Future<int?> _getAwaitingNumber() async {
+    int? number;
     final numbersOnTraceProtocol = await getNumbersOnTrace();
     if (numbersOnTraceProtocol.isNotEmpty) {
       number = numbersOnTraceProtocol.first.number;

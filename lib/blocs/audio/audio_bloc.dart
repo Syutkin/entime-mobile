@@ -13,7 +13,7 @@ part 'audio_state.dart';
 
 class AudioBloc extends Bloc<AudioEvent, AudioState> {
   final SettingsBloc settingsBloc;
-  StreamSubscription settingsSubscription;
+  late final StreamSubscription settingsSubscription;
 
   bool sound = true;
   bool voice = true;
@@ -22,9 +22,9 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
   AudioProvider audio = Sound();
 
   AudioBloc({
-    @required this.settingsBloc,
+    required this.settingsBloc,
   }) : super(AudioInitialState()) {
-    settingsSubscription = settingsBloc.listen((state) {
+    settingsSubscription = settingsBloc.stream.listen((state) {
       sound = state.sound;
       voice = state.voice;
       beep = state.beep;

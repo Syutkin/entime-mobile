@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:share/share.dart';
@@ -18,9 +17,10 @@ class AutomaticStart {
   String time;
   int correction;
   DateTime timeStamp;
-  bool updating = false;
+  bool updating;
 
-  AutomaticStart(this.time, this.correction, this.timeStamp, [this.updating]);
+  AutomaticStart(this.time, this.correction, this.timeStamp,
+      [this.updating = false]);
 }
 
 class StartTime {
@@ -34,24 +34,23 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   bool hideMarked = true;
   bool hideNumbers = false;
   bool hideManual = false;
-  String file;
-  AutomaticStart automaticStart;
-  int finishDelay;
-  bool substituteNumbers;
-  int substituteNumbersDelay;
+  String? file;
+  AutomaticStart? automaticStart;
+  late int finishDelay;
+  late bool substituteNumbers;
+  late int substituteNumbersDelay;
 
-  final SettingsBloc settingsBloc;
-  StreamSubscription settingsSubscription;
+  late final SettingsBloc settingsBloc;
+  late final StreamSubscription settingsSubscription;
 
-  List<StartItem> startProtocol;
-  List<FinishItem> finishProtocol;
-  List<StartItem> numbersOnTraceProtocol;
+  late List<StartItem> startProtocol;
+  late List<FinishItem> finishProtocol;
+  late List<StartItem> numbersOnTraceProtocol;
 
   ProtocolBloc({
-    @required this.settingsBloc,
-  })  : assert(settingsBloc != null),
-        super(ProtocolNotSelectedState()) {
-    settingsSubscription = settingsBloc.listen((state) {
+    required this.settingsBloc,
+  }) : super(ProtocolNotSelectedState()) {
+    settingsSubscription = settingsBloc.stream.listen((state) {
       // условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
       if (hideMarked != state.hideMarked ||
           hideNumbers != state.hideNumbers ||
@@ -64,6 +63,10 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         print(
             'hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, ');
       }
+      if (file != state.recentFile) {
+        file = state.recentFile;
+        add(SelectProtocol(file!));
+      }
       finishDelay = state.finishDelay;
       substituteNumbers = state.substituteNumbers;
       substituteNumbersDelay = state.substituteNumbersDelay;
@@ -72,7 +75,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   @override
   Future<void> close() {
-    ProtocolProvider.db?.close();
+    ProtocolProvider.db.close();
     settingsSubscription.cancel();
     return super.close();
   }
@@ -82,8 +85,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolEvent event,
   ) async* {
     if (event is SelectProtocol) {
-      if (event.file != null && event.file.isNotEmpty) {
-        // ProtocolProvider.db.dbPath = event.file;
+      if (event.file != null && event.file!.isNotEmpty) {
         await ProtocolProvider.db.setDbPath(event.file);
         startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
         finishProtocol = await ProtocolProvider.db.getFinishTime(
@@ -96,22 +98,21 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: startProtocol,
           finishProtocol: finishProtocol,
           numbersOnTraceProtocol: numbersOnTraceProtocol,
-          databasePath: ProtocolProvider.db.dbPath,
+          databasePath: ProtocolProvider.db.dbPath!,
         );
-        print('DatabaseConnect -> selected ' + event.file);
+        print('DatabaseConnect -> selected ${event.file}');
       } else {
         add(DeselectProtocol());
         print('DatabaseConnect -> no file selected');
       }
     } else if (event is DeselectProtocol) {
-      // ProtocolProvider.db.dbPath = null;
       await ProtocolProvider.db.setDbPath(null);
       settingsBloc.add(SetStringValueEvent(recentFile: ''));
       yield ProtocolNotSelectedState();
     } else if (event is ProtocolAddStartNumber) {
       // добавляет/заменяет номер и стартовое время в start
       if (state is ProtocolSelectedState) {
-        List<StartItem> previousStart =
+        List<StartItem>? previousStart =
             await ProtocolProvider.db.addStartNumber(
           number: event.startTime.number,
           time: event.startTime.time,
@@ -127,7 +128,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: startProtocol,
           finishProtocol: finishProtocol,
           numbersOnTraceProtocol: numbersOnTraceProtocol,
-          databasePath: ProtocolProvider.db.dbPath,
+          databasePath: ProtocolProvider.db.dbPath!,
           previousStart: previousStart,
           startTime: event.startTime,
         );
@@ -135,7 +136,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     } else if (event is ProtocolUpdateAutomaticCorrection) {
       // обновляет поправку
       if (state is ProtocolSelectedState) {
-        List<StartItem> previousStart =
+        List<StartItem>? previousStart =
             await ProtocolProvider.db.updateAutomaticCorrection(
           time: event.automaticStart.time,
           correction: event.automaticStart.correction,
@@ -152,7 +153,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: startProtocol,
           finishProtocol: finishProtocol,
           numbersOnTraceProtocol: numbersOnTraceProtocol,
-          databasePath: ProtocolProvider.db.dbPath,
+          databasePath: ProtocolProvider.db.dbPath!,
           automaticStart: event.automaticStart,
           previousStart: previousStart,
         );
@@ -165,14 +166,14 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
             startProtocol: startProtocol,
             finishProtocol: finishProtocol,
             numbersOnTraceProtocol: numbersOnTraceProtocol,
-            databasePath: ProtocolProvider.db.dbPath,
+            databasePath: ProtocolProvider.db.dbPath!,
           );
         }
       }
     } else if (event is ProtocolAddFinishTime) {
       //вставить строку с финишным временем из bluetooth
       if (state is ProtocolSelectedState) {
-        int autoFinishNumber = await ProtocolProvider.db.addFinishTime(
+        int? autoFinishNumber = await ProtocolProvider.db.addFinishTime(
           finish: event.time,
           timeStamp: event.timeStamp,
           finishDelay: finishDelay,
@@ -188,7 +189,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: startProtocol,
           finishProtocol: finishProtocol,
           numbersOnTraceProtocol: numbersOnTraceProtocol,
-          databasePath: ProtocolProvider.db.dbPath,
+          databasePath: ProtocolProvider.db.dbPath!,
           autoFinishNumber: autoFinishNumber,
         );
       }
@@ -205,7 +206,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: startProtocol,
           finishProtocol: finishProtocol,
           numbersOnTraceProtocol: numbersOnTraceProtocol,
-          databasePath: ProtocolProvider.db.dbPath,
+          databasePath: ProtocolProvider.db.dbPath!,
         );
       }
     } else if (event is ProtocolUpdateItemInfoAtStart) {
@@ -217,7 +218,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: startProtocol,
           finishProtocol: finishProtocol,
           numbersOnTraceProtocol: numbersOnTraceProtocol,
-          databasePath: ProtocolProvider.db.dbPath,
+          databasePath: ProtocolProvider.db.dbPath!,
         );
       }
     } else if (event is ProtocolClearStartResultsDebug) {
@@ -233,7 +234,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: startProtocol,
         finishProtocol: finishProtocol,
         numbersOnTraceProtocol: numbersOnTraceProtocol,
-        databasePath: ProtocolProvider.db.dbPath,
+        databasePath: ProtocolProvider.db.dbPath!,
       );
     } else if (event is ProtocolClearFinishResultsDebug) {
       //очищает результаты финиша, используется только в debug
@@ -248,7 +249,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: startProtocol,
         finishProtocol: finishProtocol,
         numbersOnTraceProtocol: numbersOnTraceProtocol,
-        databasePath: ProtocolProvider.db.dbPath,
+        databasePath: ProtocolProvider.db.dbPath!,
       );
     } else if (event is ProtocolHideAllFinishResults) {
       //скрыть всё в финишном протоколе
@@ -261,7 +262,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: startProtocol,
         finishProtocol: finishProtocol,
         numbersOnTraceProtocol: numbersOnTraceProtocol,
-        databasePath: ProtocolProvider.db.dbPath,
+        databasePath: ProtocolProvider.db.dbPath!,
       );
     } else if (event is ProtocolClearNumberAtFinish) {
       //очистить номер в finish
@@ -275,7 +276,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: startProtocol,
         finishProtocol: finishProtocol,
         numbersOnTraceProtocol: numbersOnTraceProtocol,
-        databasePath: ProtocolProvider.db.dbPath,
+        databasePath: ProtocolProvider.db.dbPath!,
       );
     } else if (event is ProtocolSetDNS) {
       await ProtocolProvider.db.setDNS(event.number);
@@ -285,7 +286,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: startProtocol,
         finishProtocol: finishProtocol,
         numbersOnTraceProtocol: numbersOnTraceProtocol,
-        databasePath: ProtocolProvider.db.dbPath,
+        databasePath: ProtocolProvider.db.dbPath!,
       );
     } else if (event is ProtocolSetDNF) {
       //ставит время финиша "DNF" для номера
@@ -299,7 +300,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: startProtocol,
         finishProtocol: finishProtocol,
         numbersOnTraceProtocol: numbersOnTraceProtocol,
-        databasePath: ProtocolProvider.db.dbPath,
+        databasePath: ProtocolProvider.db.dbPath!,
       );
     } else if (event is ProtocolHideFinishTime) {
       await ProtocolProvider.db.hideFinish(event.id);
@@ -311,7 +312,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: startProtocol,
         finishProtocol: finishProtocol,
         numbersOnTraceProtocol: numbersOnTraceProtocol,
-        databasePath: ProtocolProvider.db.dbPath,
+        databasePath: ProtocolProvider.db.dbPath!,
       );
     } else if (event is ProtocolSetNumberToFinishTime) {
       //добавить номер в finish и обновить финишное время в start у данного номера
@@ -326,7 +327,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: startProtocol,
         finishProtocol: finishProtocol,
         numbersOnTraceProtocol: numbersOnTraceProtocol,
-        databasePath: ProtocolProvider.db.dbPath,
+        databasePath: ProtocolProvider.db.dbPath!,
         updateFinishNumber: update,
       );
     } else if (event is ProtocolGetNumbersOnTrace) {
@@ -336,19 +337,27 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: startProtocol,
           finishProtocol: finishProtocol,
           numbersOnTraceProtocol: numbersOnTraceProtocol,
-          databasePath: ProtocolProvider.db.dbPath,
+          databasePath: ProtocolProvider.db.dbPath!,
         );
       }
     } else if (event is ProtocolShareStart) {
       var result = await ProtocolProvider.db.getStartToCsv();
-      var csv = mapListToCsv(result);
-      var path = await saveCsv(csv, 'start');
-      await Share.shareFiles([path], text: 'Стартовый протокол');
+      var csv = mapListToCsv(result as List<Map<String, dynamic>>);
+      if (csv != null && ProtocolProvider.db.dbPath != null) {
+        var path = await saveCsv(csv, 'start', ProtocolProvider.db.dbPath!);
+        if (path != null) {
+          await Share.shareFiles([path], text: 'Стартовый протокол');
+        }
+      }
     } else if (event is ProtocolShareFinish) {
       var result = await ProtocolProvider.db.getFinishToCsv();
-      var csv = mapListToCsv(result);
-      var path = await saveCsv(csv, 'finish');
-      await Share.shareFiles([path], text: 'Финишный протокол');
+      var csv = mapListToCsv(result as List<Map<String, dynamic>>);
+      if (csv != null && ProtocolProvider.db.dbPath != null) {
+        var path = await saveCsv(csv, 'finish', ProtocolProvider.db.dbPath!);
+        if (path != null) {
+          await Share.shareFiles([path], text: 'Финишный протокол');
+        }
+      }
     }
   }
 }

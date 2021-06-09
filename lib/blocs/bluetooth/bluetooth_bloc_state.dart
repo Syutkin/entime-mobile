@@ -5,7 +5,7 @@ abstract class BluetoothConnectionState extends Equatable {
   const BluetoothConnectionState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class BluetoothNotInitializedState extends BluetoothConnectionState {}
@@ -17,10 +17,10 @@ class BluetoothConnectedState extends BluetoothConnectionState {}
 class BluetoothDisconnectingState extends BluetoothConnectionState {}
 
 class BluetoothDisconnectedState extends BluetoothConnectionState {
-  final BluetoothDevice bluetoothDevice;
+  final BluetoothDevice? bluetoothDevice;
 
   BluetoothDisconnectedState({this.bluetoothDevice});
 
   @override
-  List<Object> get props => [bluetoothDevice];
+  List<Object?> get props => [bluetoothDevice];
 }

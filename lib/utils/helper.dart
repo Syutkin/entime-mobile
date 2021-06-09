@@ -4,19 +4,19 @@ import 'package:intl/intl.dart';
 
 import '../screens/screens.dart';
 
-export 'package:filesize/filesize.dart';
+export 'package:filesize_ns/filesize_ns.dart';
 
-String strip(String str) {
+String strip(String? str) {
   if (str == null || str == 'null') {
     str = '';
   }
   return str;
 }
 
-DateTime strTimeToDateTime(String time) {
+DateTime? strTimeToDateTime(String time) {
   var now = DateTime.now();
   var dateFormatted = DateFormat('yyyy-MM-dd').format(now);
-  DateTime result = DateTime.tryParse(dateFormatted + ' ' + time);
+  DateTime? result = DateTime.tryParse(dateFormatted + ' ' + time);
   return result;
 }
 
@@ -94,4 +94,31 @@ void RouteToSelectFileScreen(BuildContext context) async {
   await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
     return SelectFileScreen();
   }));
+}
+
+TextStyle dBmTextStyle(int rssi) {
+/*  */ if (rssi >= -35) {
+    return TextStyle(color: Colors.greenAccent[700]);
+  } else if (rssi >= -45) {
+    return TextStyle(
+        color: Color.lerp(
+            Colors.greenAccent[700], Colors.lightGreen, -(rssi + 35) / 10));
+  } else if (rssi >= -55) {
+    return TextStyle(
+        color:
+            Color.lerp(Colors.lightGreen, Colors.lime[600], -(rssi + 45) / 10));
+  } else if (rssi >= -65) {
+    return TextStyle(
+        color: Color.lerp(Colors.lime[600], Colors.amber, -(rssi + 55) / 10));
+  } else if (rssi >= -75) {
+    return TextStyle(
+        color: Color.lerp(
+            Colors.amber, Colors.deepOrangeAccent, -(rssi + 65) / 10));
+  } else if (rssi >= -85) {
+    return TextStyle(
+        color: Color.lerp(
+            Colors.deepOrangeAccent, Colors.redAccent, -(rssi + 75) / 10));
+  } else {
+    return TextStyle(color: Colors.redAccent);
+  }
 }

@@ -26,7 +26,7 @@ class LogScreen extends StatelessWidget {
         body: BlocBuilder<LogBloc, LogState>(builder: (context, state) {
           if (state is LogOpen && state.log != null) {
             // скролл на последнюю запись
-            SchedulerBinding.instance.addPostFrameCallback((_) {
+            SchedulerBinding.instance?.addPostFrameCallback((_) {
               scrollToEnd(_scrollController);
             });
             return Scrollbar(
@@ -35,9 +35,9 @@ class LogScreen extends StatelessWidget {
               child: ListView.builder(
                 controller: _scrollController,
                 shrinkWrap: true,
-                itemCount: state.log.length,
+                itemCount: state.log!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var item = state.log[index];
+                  var item = state.log![index];
                   return ListTile(
                     contentPadding: EdgeInsets.all(0.0),
                     title: Row(children: <Widget>[
@@ -100,7 +100,7 @@ class LogScreen extends StatelessWidget {
     }
   }
 
-  Widget _logSourceIcon(String source, String direction) {
+  Widget _logSourceIcon(String source, String? direction) {
     switch (source) {
       case 'Bluetooth':
         switch (direction) {
@@ -113,7 +113,6 @@ class LogScreen extends StatelessWidget {
           default:
             return Icon(MdiIcons.bluetooth);
         }
-        break;
       case 'Other':
         return Icon(MdiIcons.cloudPrintOutline);
       case 'Unknown':

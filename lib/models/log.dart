@@ -13,19 +13,19 @@ String logToMap(Log data) => json.encode(data.toMap());
 ///
 class Log {
   Log({
-    this.id,
-    this.level,
-    this.timeStamp,
-    this.source,
+    required this.id,
+    required this.level,
+    required this.timeStamp,
+    required this.source,
     this.direction,
-    this.rawData,
+    required this.rawData,
   });
 
   int id;
   String level;
   String timeStamp;
   String source;
-  String direction;
+  String? direction;
   String rawData;
 
   factory Log.fromMap(Map<String, dynamic> json) => Log(

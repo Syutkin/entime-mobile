@@ -7,7 +7,7 @@ enum AppTheme {
   DarkRed,
 }
 
-AppTheme themeFromString(String type) {
+AppTheme themeFromString(String? type) {
   if (type == null) return AppTheme.LightBlue;
   switch (type) {
     case 'LightBlue':
@@ -35,7 +35,6 @@ extension AppThemeStr on AppTheme {
       case AppTheme.DarkRed:
         return 'DarkRed';
     }
-    return null;
   }
 
   String display(/*BuildContext context*/) {
@@ -49,7 +48,6 @@ extension AppThemeStr on AppTheme {
       case AppTheme.DarkRed:
         return 'Красная тёмная тема';
     }
-    return null;
   }
 }
 
@@ -58,7 +56,7 @@ final appThemeData = {
   AppTheme.DarkBlue: ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.blue,
-//    primaryColor: Colors.red,
+   // primaryColor: Colors.red,
 //    primaryColorBrightness: Brightness.dark,
     toggleableActiveColor: Colors.blue,
     accentColor: Colors.blue,

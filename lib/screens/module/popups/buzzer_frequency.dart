@@ -7,10 +7,10 @@ class Note {
   Note(this.name, this.frequency);
 }
 
-Future<int> buzzerFrequencyPopup(
-    {String text,
-    BuildContext context,
-    int frequency}) async {
+Future<int?> buzzerFrequencyPopup(
+    {required String text,
+    required BuildContext context,
+    required int frequency}) async {
 
   List<Note> notes = [
     Note('B0', 31),

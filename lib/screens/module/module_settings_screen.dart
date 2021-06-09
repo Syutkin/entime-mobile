@@ -9,13 +9,14 @@ import 'package:entime/widgets/splash.dart';
 
 class ModuleSettingsInitScreen extends StatelessWidget {
   ModuleSettingsInitScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   Future<bool> _onBackPressed(BuildContext context, bool updated) async {
     if (updated) {
-      return showDialog(
+      await showDialog(
           context: context,
+          barrierDismissible: true,
           builder: (context) => AlertDialog(
                 title: Text('Записать новые настройки в модуль?'),
                 actions: <Widget>[
@@ -37,6 +38,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
                   )
                 ],
               ));
+      return true;
     } else {
       return true;
     }
@@ -70,8 +72,8 @@ class ModuleSettingsScreen extends StatelessWidget {
   final VoidCallback onChanged;
 
   ModuleSettingsScreen({
-    Key key,
-    this.onChanged,
+    Key? key,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -108,7 +110,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 subtitle: '${(_bloc.moduleSettings.shortFrequency)} Гц',
                 leading: const Icon(MdiIcons.wave),
                 onPressed: (BuildContext context) async {
-                  final int hz = await buzzerFrequencyPopup(
+                  final int? hz = await buzzerFrequencyPopup(
                       frequency: _bloc.moduleSettings.shortFrequency,
                       context: context,
                       text: 'Выберите частоту короткого гудка');
@@ -124,7 +126,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 subtitle: '${(_bloc.moduleSettings.longFrequency)} Гц',
                 leading: const Icon(MdiIcons.wave),
                 onPressed: (BuildContext context) async {
-                  final int hz = await buzzerFrequencyPopup(
+                  final int? hz = await buzzerFrequencyPopup(
                       frequency: _bloc.moduleSettings.longFrequency,
                       context: context,
                       text: 'Выберите частоту длинного гудка');
@@ -297,7 +299,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 subtitle: '${(_bloc.moduleSettings.bluetoothNumber)}',
                 leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (BuildContext context) async {
-                  final int number = await bluetoothNumberPopup(
+                  final int? number = await bluetoothNumberPopup(
                       context: context,
                       labelText: 'Номер',
                       text: 'Введите номер модуля');
@@ -347,7 +349,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 subtitle: '${(_bloc.moduleSettings.r1)} Ом',
                 leading: const Icon(MdiIcons.resistor),
                 onPressed: (BuildContext context) async {
-                  final int r1 = await vccPopup(
+                  final int? r1 = await vccPopup(
                       context: context,
                       labelText: 'Ом',
                       text: 'Введите значение резистора R1');
@@ -363,7 +365,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 subtitle: '${(_bloc.moduleSettings.r2)} Ом',
                 leading: const Icon(MdiIcons.resistor),
                 onPressed: (BuildContext context) async {
-                  final int r2 = await vccPopup(
+                  final int? r2 = await vccPopup(
                       context: context,
                       labelText: 'Ом',
                       text: 'Введите значение резистора R2');
@@ -376,10 +378,10 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Ввод измерянного напряжения',
-                subtitle: '${(_bloc.moduleSettings.vBat ?? 0)} мВ',
+                subtitle: '${(_bloc.moduleSettings.vBat)} мВ',
                 leading: const Icon(MdiIcons.batteryCharging),
                 onPressed: (BuildContext context) async {
-                  final int mv = await vccPopup(
+                  final int? mv = await vccPopup(
                       context: context,
                       labelText: 'мВ',
                       text: 'Введите текущее значение напряжения на батареях');
@@ -434,7 +436,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 subtitle: '${(_bloc.moduleSettings.bluetoothNumber)}',
                 leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (BuildContext context) async {
-                  final int number = await bluetoothNumberPopup(
+                  final int? number = await bluetoothNumberPopup(
                       context: context,
                       labelText: 'Номер',
                       text: 'Введите номер модуля');
@@ -450,7 +452,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 subtitle: '${(_bloc.moduleSettings.brightness)}',
                 leading: const Icon(MdiIcons.brightness1),
                 onPressed: (BuildContext context) async {
-                  final int number = await brightnessPopup(
+                  final int? number = await brightnessPopup(
                       initialValue: _bloc.moduleSettings.brightness,
                       context: context,
                       text: 'Установите яркость панели');
@@ -479,7 +481,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               subtitle: '${(_bloc.moduleSettings.ssid)}',
               leading: const Icon(MdiIcons.wifi),
               onPressed: (BuildContext context) async {
-                final String ssid = await wifiSettingsPopup(
+                final String? ssid = await wifiSettingsPopup(
                     context: context,
                     labelText: 'WiFi',
                     text: 'Введите имя WiFi сети');
@@ -495,7 +497,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               //subtitle: '${(moduleSettings.password)}',
               leading: const Icon(MdiIcons.wifi),
               onPressed: (BuildContext context) async {
-                final String password = await wifiSettingsPopup(
+                final String? password = await wifiSettingsPopup(
                     context: context,
                     labelText: 'Пароль',
                     text:

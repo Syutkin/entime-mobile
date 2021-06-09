@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CountdownScreen extends StatelessWidget {
   CountdownScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
