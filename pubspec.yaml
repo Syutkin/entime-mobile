@@ -27,7 +27,7 @@ dependencies:
   bot_toast: ^4.0.1
   csv: ^5.0.0
   device_info: ^2.0.2
-  equatable: ^2.0.2
+  equatable: ^2.0.3
   file_picker: ^3.0.2+2
   filesize_ns: ^1.1.0
   flutter_bloc: ^7.0.1
@@ -41,7 +41,7 @@ dependencies:
   material_design_icons_flutter: ^5.0.5955-rc.1
   package_info: ^2.0.2
   path_provider: ^2.0.2
-  permission_handler: ^8.0.0+2
+  permission_handler: ^8.1.1
   pub_semver: ^2.0.0
   settings_ui: ^1.0.0
   share: ^2.0.4
@@ -50,13 +50,14 @@ dependencies:
   sqflite: ^2.0.0+3
   url_launcher: ^6.0.4
   wakelock: ^0.5.2
+  sqflite_common_ffi: ^2.0.0+1
 
 dependency_overrides:
   flutter_bluetooth_serial:
     git: https://github.com/Syutkin/flutter_bluetooth_serial.git
 
 dev_dependencies:
-  pedantic: ^1.11.0
+  pedantic: ^1.11.1
   flutter_test:
     sdk: flutter
 

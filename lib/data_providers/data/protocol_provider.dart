@@ -65,7 +65,7 @@ class ProtocolProvider {
         await db.execute('''
         CREATE TABLE IF NOT EXISTS 'finish' (
         	'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-        	'number'	INTEGER NOT NULL UNIQUE,
+        	'number'	INTEGER UNIQUE,
         	'finishtime'	TEXT,
         	'phonetime'	TEXT,
         	'set'	INTEGER,
@@ -75,7 +75,7 @@ class ProtocolProvider {
         CREATE TABLE IF NOT EXISTS 'main' (
         	'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	        'number'	INTEGER NOT NULL UNIQUE,
-	        'name'	VARCHAR
+	        'name'	TEXT
 	        );
         ''');
       },
@@ -213,7 +213,7 @@ class ProtocolProvider {
     final String manualStartTime = DateFormat('HH:mm:ss,S').format(time);
 
     var res = await db.rawQuery('''
-        SELECT number, starttime
+        SELECT id, number, starttime
         FROM start
         WHERE starttime BETWEEN ? AND ?
         ''', [before, after]);
@@ -267,7 +267,13 @@ class ProtocolProvider {
         item.number
       ],
     );
-    print('updateAllStartTime -> Start time for number ${item.number} updated');
+    if (result > 0) {
+      print(
+          'UpdateItemInfoAtStart -> Start info for number ${item.number} updated');
+    } else {
+      print(
+          'UpdateItemInfoAtStart -> Start info for number ${item.number} not updated');
+    }
     return result;
   }
 
@@ -290,7 +296,11 @@ class ProtocolProvider {
             manualstarttime = NULL, manualcorrection = NULL
         WHERE number = ?
         ''', [number]);
-    print('Database -> Set DNS to number: $number');
+    if (result > 0) {
+      print('Database -> Set DNS to number: $number');
+    } else {
+      print('Database -> Can not find number: $number, DNS not set');
+    }
     return result;
   }
 
@@ -308,7 +318,7 @@ class ProtocolProvider {
     // проверяем, что такого же времени старта не установлено другому номеру,
     // или что номеру не установлено автоматическое или ручное время старта.
     // Если истина, то добавляем номер, ставим время старта (или обновляем
-    // время старта у существующего номера) и вовращаем null.
+    // время старта у существующего номера) и возвращаем null.
     // В противном случае возвращаем StartItem.
     if (!forceAdd) {
       print('Database -> Checking start time $time and number $number...');
@@ -387,12 +397,13 @@ class ProtocolProvider {
 
 // ----------------номера на трассе----------------
 //ToDo: посмотреть как сделано
-  Future<List<StartItem>> getNumbersOnTrace() async {
+  Future<List<StartItem>> getNumbersOnTrace(
+      [String timeNow = "now', 'localtime"]) async {
     final db = await database;
     final res = await db.rawQuery('''
-        SELECT number
+        SELECT id, number
         FROM start
-        WHERE julianday(time('now', 'localtime')) > julianday(time(starttime))
+        WHERE julianday(time('$timeNow')) > julianday(time(starttime))
         AND finishtime IS NULL
         AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL)
         ORDER BY starttime ASC
@@ -547,12 +558,12 @@ class ProtocolProvider {
   Future<int> clearFinishResultsDebug() async {
     final db = await database;
     var result = await db.rawUpdate('''
-        UPDATE finish
-        SET number = NULL, "set" = NULL
-        ''');
-    result = await db.rawUpdate('''
         UPDATE start
         SET finishtime = NULL
+        ''');
+    result = await db.rawUpdate('''
+        UPDATE finish
+        SET number = NULL, "set" = NULL
         ''');
     print('Database -> Results cleared');
     return result;
@@ -614,7 +625,7 @@ class ProtocolProvider {
     DateTime? prevFinishTime;
     final db = await database;
     var res = await db.rawQuery('''
-        SELECT finishtime
+        SELECT id, finishtime
         FROM finish
         WHERE "set" ISNULL and manual ISNULL
         ORDER BY finishtime DESC LIMIT 1;
@@ -633,7 +644,7 @@ class ProtocolProvider {
     DateTime? result;
     final db = await database;
     var res = await db.rawQuery('''
-        SELECT finishtime
+        SELECT id, finishtime
         FROM finish
         WHERE number NOTNULL AND finishtime NOT like "DNF" AND finishtime NOT like "DNS"
         ORDER BY finishtime DESC LIMIT 1;
