@@ -254,7 +254,8 @@ void main() {
       result = await ProtocolProvider.db.addFinishTime(
           finish: '10:03:01,124',
           timeStamp: DateTime.now(),
-          substituteNumbers: true);
+          substituteNumbers: true,
+          debugTimeNow: '11:00:00');
       expect(result, 2);
       result = await ProtocolProvider.db.addFinishTime(
           finish: '10:03:01,125', timeStamp: DateTime.now(), finishDelay: 10);
@@ -265,19 +266,22 @@ void main() {
       result = await ProtocolProvider.db.addFinishTime(
           finish: '10:05:05,567',
           timeStamp: DateTime.now(),
-          substituteNumbers: true);
+          substituteNumbers: true,
+          debugTimeNow: '11:00:00');
       expect(result, 3);
       result = await ProtocolProvider.db.addFinishTime(
           finish: '10:05:05,678',
           timeStamp: DateTime.now(),
           substituteNumbers: true,
-          substituteNumbersDelay: 200);
+          substituteNumbersDelay: 200,
+          debugTimeNow: '11:00:00');
       expect(result, null);
       result = await ProtocolProvider.db.addFinishTime(
           finish: '10:07:05,899',
           timeStamp: DateTime.now(),
           substituteNumbers: true,
-          substituteNumbersDelay: 200);
+          substituteNumbersDelay: 200,
+          debugTimeNow: '11:00:00');
       expect(result, 4);
     });
     test('addFinishTimeManual', () async {

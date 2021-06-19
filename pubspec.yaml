@@ -50,7 +50,6 @@ dependencies:
   sqflite: ^2.0.0+3
   url_launcher: ^6.0.4
   wakelock: ^0.5.2
-  sqflite_common_ffi: ^2.0.0+1
 
 dependency_overrides:
   flutter_bluetooth_serial:
@@ -58,6 +57,7 @@ dependency_overrides:
 
 dev_dependencies:
   pedantic: ^1.11.1
+  sqflite_common_ffi: ^2.0.0+1
   flutter_test:
     sdk: flutter
 

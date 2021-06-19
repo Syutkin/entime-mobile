@@ -397,8 +397,8 @@ class ProtocolProvider {
 
 // ----------------номера на трассе----------------
 //ToDo: посмотреть как сделано
-  Future<List<StartItem>> getNumbersOnTrace(
-      [String timeNow = "now', 'localtime"]) async {
+  Future<List<StartItem>> getNumbersOnTrace([String? timeNow]) async {
+    timeNow ??= "now', 'localtime";
     final db = await database;
     final res = await db.rawQuery('''
         SELECT id, number
@@ -459,6 +459,7 @@ class ProtocolProvider {
     int finishDelay = 0,
     bool substituteNumbers = false,
     int substituteNumbersDelay = 0,
+    String? debugTimeNow,
   }) async {
     int? hide;
     int? number;
@@ -483,7 +484,7 @@ class ProtocolProvider {
     if (substituteNumbers && hide == null) {
       // если нет нескрытого предыдущего времени - ставим номер
       if (prevFinishTime == null) {
-        number = await _getAwaitingNumber();
+        number = await _getAwaitingNumber(debugTimeNow);
       } else {
         // ищем предыдущее время финиша с номером
         final lastFinishTime = await _lastFinishTime();
@@ -497,11 +498,11 @@ class ProtocolProvider {
           }
           final difference = finishTime.difference(lastFinishTime);
           if (difference.inMilliseconds > substituteNumbersDelay) {
-            number = await _getAwaitingNumber();
+            number = await _getAwaitingNumber(debugTimeNow);
           }
           // если предыдущего времени с номером нет - ставим номер
         } else {
-          number = await _getAwaitingNumber();
+          number = await _getAwaitingNumber(debugTimeNow);
         }
       }
     }
@@ -637,6 +638,7 @@ class ProtocolProvider {
         prevFinishProtocol.first.finishtime.isNotEmpty) {
       prevFinishTime = strTimeToDateTime(prevFinishProtocol.first.finishtime);
     }
+    print('prevFinishTime: $prevFinishTime');
     return prevFinishTime;
   }
 
@@ -658,9 +660,9 @@ class ProtocolProvider {
     return result;
   }
 
-  Future<int?> _getAwaitingNumber() async {
+  Future<int?> _getAwaitingNumber([String? debugTimeNow]) async {
     int? number;
-    final numbersOnTraceProtocol = await getNumbersOnTrace();
+    final numbersOnTraceProtocol = await getNumbersOnTrace(debugTimeNow);
     if (numbersOnTraceProtocol.isNotEmpty) {
       number = numbersOnTraceProtocol.first.number;
       print('Awaiting number: $number');
