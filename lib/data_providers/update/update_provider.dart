@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:entime/models/updater.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:http/http.dart' as http;
@@ -15,30 +16,45 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app_installer/app_installer.dart';
 
 import 'package:entime/models/models.dart';
+import 'package:entime/data_providers/app_info/app_info_provider.dart';
 
 typedef DownloadHandler = void Function(int current, int total);
 typedef ErrorHandler = void Function(String error);
 
 class UpdateProvider {
-  String _latestVersion = '';
+  Release? _latestRelease;
+
   bool _canUpdate = false;
   bool _downloaded = false;
   String? _dir;
+
+  File? _downloadedFile;
+
+  late AppInfoProvider _packageInfo;
   late DownloadHandler _downloadHandler;
   late VoidCallback _onDownloadComplete;
   late ErrorHandler _onError;
 
-  String get latestVersion => _latestVersion;
+  String get latestVersion {
+    if (_latestRelease != null) {
+      return _latestRelease!.tagName;
+    }
+    return '';
+  }
 
   int? _updateFileSize = -1;
 
-//  int get updateFileSize => _updateFileSize;
+  UpdateProvider._();
 
-//  StreamController _downloadBytesProgressionController =
-//      StreamController<int>.broadcast();
-//
-//  Stream<int> get downloadBytesProgression =>
-//      _downloadBytesProgressionController.stream;
+  static Future<UpdateProvider> init() async {
+    var data = UpdateProvider._();
+    await data._init();
+    return data;
+  }
+
+  Future<void> _init() async {
+    _packageInfo = await AppInfoProvider.load();
+  }
 
   // Вынесено сюда, чтобы можно было останавливать скачивание из UI
   // с помощью stop().
@@ -60,17 +76,18 @@ class UpdateProvider {
     _client?.close();
   }
 
-  Future<bool> checkUpdate() async {
+  Future<bool> isUpdateAvailable() async {
     _canUpdate = false;
     try {
-      _latestVersion = await getLatestVersion();
-      var latestVersion = Version.parse(_latestVersion);
-      var _packageInfo = await PackageInfo.fromPlatform();
-      var currentVersion =
-          Version.parse('${_packageInfo.version}+${_packageInfo.buildNumber}');
-      if (latestVersion > currentVersion) {
-        print('Update_provider: Update to $latestVersion available');
-        _canUpdate = true;
+      _latestRelease = await _getLatestRelease();
+      if (_latestRelease != null) {
+        var latestVersion = Version.parse(_latestRelease!.tagName);
+        var currentVersion = Version.parse(
+            '${_packageInfo.version}+${_packageInfo.buildNumber}');
+        if (latestVersion > currentVersion) {
+          print('Update_provider: Update to $latestVersion available');
+          _canUpdate = true;
+        }
       }
     } catch (e) {
       print(e);
@@ -78,38 +95,83 @@ class UpdateProvider {
     return _canUpdate;
   }
 
-  Future<String> getLatestVersion() async {
-    var url = Uri.parse('https://raw.githubusercontent.com/Syutkin/entime/master/latestversion');
+  Future<Release?> _getLatestRelease() async {
+    Release release;
+    var url = Uri.parse(
+        'https://api.github.com/repos/syutkin/entime-mobile/releases/latest');
     try {
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        print('Latest version: ${response.body.trim()}');
-        return response.body.trim();
-      }
-      else {
+        release = Release.fromRawJson(response.body);
+        return release;
+      } else {
         print('StatusCode: ${response.statusCode}');
-        return '';
+        return null;
       }
-      // return await http.read(
-      //     'https://raw.githubusercontent.com/Syutkin/entime/master/latestversion');
     } catch (e) {
-      return 'error: $e';
+      print('error: $e');
+      return null;
     }
   }
 
+  // Future<bool> checkUpdate() async {
+  //   await testUpdate();
+  //   _canUpdate = false;
+  //   try {
+  //     _latestVersion = await getLatestVersion();
+  //     var latestVersion = Version.parse(_latestVersion);
+  //     var _packageInfo = await PackageInfo.fromPlatform();
+  //     var currentVersion =
+  //         Version.parse('${_packageInfo.version}+${_packageInfo.buildNumber}');
+  //     if (latestVersion > currentVersion) {
+  //       print('Update_provider: Update to $latestVersion available');
+  //       _canUpdate = true;
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  //   return _canUpdate;
+  // }
+
+  // Future<String> getLatestVersion() async {
+  //   var url = Uri.parse('https://raw.githubusercontent.com/Syutkin/entime/master/latestversion');
+  //   try {
+  //     var response = await http.get(url);
+  //     if (response.statusCode == 200) {
+  //       print('Latest version: ${response.body.trim()}');
+  //       return response.body.trim();
+  //     }
+  //     else {
+  //       print('StatusCode: ${response.statusCode}');
+  //       return '';
+  //     }
+  //     // return await http.read(
+  //     //     'https://raw.githubusercontent.com/Syutkin/entime/master/latestversion');
+  //   } catch (e) {
+  //     return 'error: $e';
+  //   }
+  // }
+
   Future<void> downloadUpdate() async {
     if (await Permission.storage.request().isGranted) {
-      if (_canUpdate) {
+      if (_canUpdate && _latestRelease != null && _packageInfo.abi != null) {
         try {
           if (Platform.isAndroid) {
             _dir = '/storage/emulated/0/Download';
           } else {
-            _dir = (await getExternalStorageDirectory())!.path;
+            _dir = (await getApplicationDocumentsDirectory()).path;
           }
-          File file = File('$_dir/entime-$_latestVersion.apk');
+          _downloadedFile = File(
+              '$_dir/${_packageInfo.appName}-${_latestRelease!.tagName}-${_packageInfo.abi}.apk');
 
-          String url =
-              'https://github.com/Syutkin/entime/releases/download/$_latestVersion/entime-$_latestVersion.apk';
+          late String url;
+
+          for (var asset in _latestRelease!.assets) {
+            if (asset.name ==
+                '${_packageInfo.appName}-${_latestRelease!.tagName}-${_packageInfo.abi}.apk') {
+              url = asset.browserDownloadUrl;
+            }
+          }
 
           final request = http.Request('GET', Uri.parse(url));
           _client = http.Client();
@@ -130,7 +192,7 @@ class UpdateProvider {
               },
               onDone: () async {
                 // save file
-                await file.writeAsBytes(bytes);
+                await _downloadedFile?.writeAsBytes(bytes);
                 _downloaded = true;
                 _onDownloadComplete();
               },
@@ -153,7 +215,10 @@ class UpdateProvider {
   }
 
   void installApk() {
-    if (_canUpdate && _downloaded) {
+    if (_canUpdate &&
+        _downloaded &&
+        _latestRelease != null &&
+        _downloadedFile != null) {
       // InstallPlugin.installApk(
       //         '$_dir/entime-$_latestVersion.apk', 'site.syutkin.entime')
       //     .then((result) {
@@ -162,8 +227,8 @@ class UpdateProvider {
       //   print('Update_provider: Open apk error: $error');
       //   _onError('Open apk error: $error');
       // });
-      AppInstaller.installApk('$_dir/entime-$_latestVersion.apk')
-          .then((result) {
+      // AppInstaller.installApk('$_dir/entime-${_latestRelease!.tagName}.apk')
+      AppInstaller.installApk(_downloadedFile!.path).then((result) {
         print('Update_provider: Open apk success');
       }).catchError((error) {
         print('Update_provider: Open apk error: $error');

@@ -41,7 +41,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
     UpdateEvent event,
   ) async* {
     if (event is CheckUpdate) {
-      bool update = await updater.checkUpdate();
+      bool update = await updater.isUpdateAvailable();
       if (update) {
         yield UpdateAvailable(updater.latestVersion);
       } else {

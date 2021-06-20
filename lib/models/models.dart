@@ -12,3 +12,4 @@ export 'participant_status.dart';
 export 'filter_finish.dart';
 export 'reactive_state.dart';
 export 'ble_scanner.dart';
+export 'updater.dart';

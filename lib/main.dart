@@ -21,7 +21,7 @@ Future<void> main() async {
 
 Future<void> runMain(SettingsProvider settings, AppInfoProvider appInfo) async {
   Bloc.observer = SimpleBlocObserver();
-  final UpdateProvider updater = UpdateProvider();
+  final UpdateProvider updater = await UpdateProvider.init();
   runApp(
     MultiBlocProvider(
       providers: [

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../screens/screens.dart';
 
-export 'package:filesize_ns/filesize_ns.dart';
+export 'package:filesize/filesize.dart';
 
 String strip(String? str) {
   if (str == null || str == 'null') {

@@ -5,6 +5,7 @@ import 'package:device_info/device_info.dart';
 class AppInfoProvider {
   final PackageInfo _packageInfo;
   final AndroidDeviceInfo _deviceInfo;
+  final List<String> _supportedAbis = ['armeabi-v7a', 'arm64-v8a', 'x86_64'];
 
   AppInfoProvider(
     this._packageInfo,
@@ -65,9 +66,19 @@ class AppInfoProvider {
 
   String get version => _packageInfo.version;
 
-  List<String> get supported32BitAbis => _deviceInfo.supported32BitAbis;
+  String? get abi {
+    for (var deviceSupportedAbi in _deviceInfo.supportedAbis) {
+      for (var abi in _supportedAbis) {
+        if (deviceSupportedAbi == abi) {
+          return deviceSupportedAbi;
+        }
+      }
+    }
+  }
 
-  List<String> get supported64BitAbis => _deviceInfo.supported64BitAbis;
+  List<String> get deviceSupported32BitAbis => _deviceInfo.supported32BitAbis;
 
-  List<String> get supportedAbis => _deviceInfo.supportedAbis;
+  List<String> get deviceSupported64BitAbis => _deviceInfo.supported64BitAbis;
+
+  List<String> get deviceSupportedAbis => _deviceInfo.supportedAbis;
 }
