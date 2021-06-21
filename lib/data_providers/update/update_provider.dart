@@ -5,15 +5,13 @@ import 'package:entime/models/updater.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:open_file/open_file.dart';
 import 'package:package_info/package_info.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-// import 'package:install_plugin/install_plugin.dart';
-import 'package:app_installer/app_installer.dart';
 
 import 'package:entime/models/models.dart';
 import 'package:entime/data_providers/app_info/app_info_provider.dart';
@@ -114,44 +112,6 @@ class UpdateProvider {
     }
   }
 
-  // Future<bool> checkUpdate() async {
-  //   await testUpdate();
-  //   _canUpdate = false;
-  //   try {
-  //     _latestVersion = await getLatestVersion();
-  //     var latestVersion = Version.parse(_latestVersion);
-  //     var _packageInfo = await PackageInfo.fromPlatform();
-  //     var currentVersion =
-  //         Version.parse('${_packageInfo.version}+${_packageInfo.buildNumber}');
-  //     if (latestVersion > currentVersion) {
-  //       print('Update_provider: Update to $latestVersion available');
-  //       _canUpdate = true;
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  //   return _canUpdate;
-  // }
-
-  // Future<String> getLatestVersion() async {
-  //   var url = Uri.parse('https://raw.githubusercontent.com/Syutkin/entime/master/latestversion');
-  //   try {
-  //     var response = await http.get(url);
-  //     if (response.statusCode == 200) {
-  //       print('Latest version: ${response.body.trim()}');
-  //       return response.body.trim();
-  //     }
-  //     else {
-  //       print('StatusCode: ${response.statusCode}');
-  //       return '';
-  //     }
-  //     // return await http.read(
-  //     //     'https://raw.githubusercontent.com/Syutkin/entime/master/latestversion');
-  //   } catch (e) {
-  //     return 'error: $e';
-  //   }
-  // }
-
   Future<void> downloadUpdate() async {
     if (await Permission.storage.request().isGranted) {
       if (_canUpdate && _latestRelease != null && _packageInfo.abi != null) {
@@ -214,26 +174,13 @@ class UpdateProvider {
     }
   }
 
-  void installApk() {
+  void installApk() async {
     if (_canUpdate &&
         _downloaded &&
         _latestRelease != null &&
         _downloadedFile != null) {
-      // InstallPlugin.installApk(
-      //         '$_dir/entime-$_latestVersion.apk', 'site.syutkin.entime')
-      //     .then((result) {
-      //   print('Update_provider: Open apk $result');
-      // }).catchError((error) {
-      //   print('Update_provider: Open apk error: $error');
-      //   _onError('Open apk error: $error');
-      // });
-      // AppInstaller.installApk('$_dir/entime-${_latestRelease!.tagName}.apk')
-      AppInstaller.installApk(_downloadedFile!.path).then((result) {
-        print('Update_provider: Open apk success');
-      }).catchError((error) {
-        print('Update_provider: Open apk error: $error');
-        _onError('Open apk error: $error');
-      });
+      var result = await OpenFile.open(_downloadedFile!.path);
+      print(result.message);
     }
   }
 
