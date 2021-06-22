@@ -6,9 +6,29 @@ abstract class BleEvent {
   List<Object?> get props => [];
 }
 
-class BleScannerStartScan extends BleEvent {}
+class BleMonitorStatus extends BleEvent {
+  final BleStatus? bleStatus;
 
-class BleScannerStopScan extends BleEvent {}
+  BleMonitorStatus({
+    this.bleStatus,
+  });
+
+  @override
+  List<Object?> get props => [bleStatus];
+
+  @override
+  String toString() => 'BleMonitorStatus { $bleStatus }';
+}
+
+class BleScannerStartScan extends BleEvent {
+  @override
+  String toString() => 'BleScannerStartScan { Start }';
+}
+
+class BleScannerStopScan extends BleEvent {
+  @override
+  String toString() => 'BleScannerStopScan { Stop }';
+}
 
 class BleScannerStateUpdate extends BleEvent {
   final BleScannerStateModel? bleScannerState;
@@ -34,6 +54,10 @@ class BleConnectorSelectDevice extends BleEvent {
 
   @override
   List<Object?> get props => [device];
+
+  @override
+  String toString() =>
+      'DiscoveredDevice { Name: ${device.name}, Id: ${device.id} }';
 }
 
 class BleConnectorConnect extends BleEvent {

@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+
 // import 'package:entime/blocs/blocs.dart';
 import 'package:entime/data_providers/ble/ble_device_connector.dart';
+import 'package:entime/data_providers/ble/ble_status_monitor.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -18,6 +20,8 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   final String _uuid = '3d1182b8-ec3a-42c3-b1b4-70b28578fab3';
 
   late FlutterReactiveBle _ble;
+  late BleStatusMonitor _bleStatusMonitor;
+  BleStatus? _bleStatus;
   late BleScanner _bleScanner;
   late BleDeviceConnector _bleDeviceConnector;
 
@@ -25,14 +29,21 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   ConnectionStateUpdate? _bleConnectionState;
   DiscoveredDevice? _device;
 
-  StreamSubscription<BleScannerStateModel>? _bleScannerSubscription;
-  StreamSubscription<ConnectionStateUpdate>? _bleConnectionSubscription;
+  late StreamSubscription<BleScannerStateModel> _bleScannerSubscription;
+  late StreamSubscription<ConnectionStateUpdate> _bleConnectionSubscription;
+  late StreamSubscription<BleStatus?> _bleStatusMonitorSubscription;
 
   BleBloc() : super(BleState(
             // bleScannerState: BleScannerStateModel(
             //     discoveredDevices: [], scanIsInProgress: false),
             )) {
     _ble = FlutterReactiveBle();
+
+    _bleStatusMonitor = BleStatusMonitor(_ble);
+    _bleStatusMonitorSubscription = _bleStatusMonitor.state.listen((event) {
+      add(BleMonitorStatus(bleStatus: event));
+    });
+
     _bleScanner = BleScanner(ble: _ble);
     _bleScannerSubscription = _bleScanner.state.listen((event) {
       add(BleScannerStateUpdate(bleScannerState: event));
@@ -48,9 +59,13 @@ class BleBloc extends Bloc<BleEvent, BleState> {
   Stream<BleState> mapEventToState(
     BleEvent event,
   ) async* {
+    if (event is BleMonitorStatus) {
+      _bleStatus = event.bleStatus;
+      yield* _mapBleStateUpdateToState();
+    }
     if (event is BleScannerStartScan) {
       if (await Permission.location.request().isGranted) {
-        _bleScanner.startScan([Uuid.parse(_uuid)]);
+          _bleScanner.startScan([Uuid.parse(_uuid)]);
       }
     }
     if (event is BleScannerStopScan) {
@@ -80,6 +95,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
 
   Stream<BleState> _mapBleStateUpdateToState() async* {
     yield BleState(
+      bleStatus: _bleStatus,
       bleScannerState: _bleScannerState,
       bleConnectionState: _bleConnectionState,
       bleSelectedDevice: _device,
@@ -88,8 +104,9 @@ class BleBloc extends Bloc<BleEvent, BleState> {
 
   @override
   Future<void> close() {
-    _bleScannerSubscription?.cancel();
-    _bleConnectionSubscription?.cancel();
+    _bleScannerSubscription.cancel();
+    _bleConnectionSubscription.cancel();
+    _bleStatusMonitorSubscription.cancel();
     return super.close();
   }
 }

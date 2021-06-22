@@ -26,10 +26,11 @@ class BleScanner implements ReactiveState<BleScannerStateModel> {
   void startScan(List<Uuid> serviceIds) {
     print('Start ble discovery');
     // _logMessage('Start ble discovery');
+    var error = false;
     _devices.clear();
     _subscription?.cancel();
     _subscription =
-            _ble.scanForDevices(withServices: serviceIds).listen((device) {
+        _ble.scanForDevices(withServices: serviceIds).listen((device) {
       final knownDeviceIndex = _devices.indexWhere((d) => d.id == device.id);
       if (knownDeviceIndex >= 0) {
         _devices[knownDeviceIndex] = device;
@@ -37,16 +38,20 @@ class BleScanner implements ReactiveState<BleScannerStateModel> {
         _devices.add(device);
       }
       _pushState();
-    }, onError: (Object e) => print('Device scan fails with error: $e'))
-        /*_logMessage('Device scan fails with error: $e'))*/;
+    }, onError: (Object e) {
+      print('Device scan fails with error: $e');
+      error = true;
+      _pushState(error);
+      /*_logMessage('Device scan fails with error: $e'))*/
+    }, cancelOnError: true);
     _pushState();
   }
 
-  void _pushState() {
+  void _pushState([bool error = false]) {
     _stateStreamController.add(
       BleScannerStateModel(
         discoveredDevices: _devices,
-        scanIsInProgress: _subscription != null,
+        scanIsInProgress: error == false ? _subscription != null : false,
       ),
     );
   }
