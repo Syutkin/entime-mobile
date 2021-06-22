@@ -23,6 +23,7 @@ class BleBloc extends Bloc<BleEvent, BleState> {
 
   BleScannerStateModel? _bleScannerState;
   ConnectionStateUpdate? _bleConnectionState;
+  DiscoveredDevice? _device;
 
   StreamSubscription<BleScannerStateModel>? _bleScannerSubscription;
   StreamSubscription<ConnectionStateUpdate>? _bleConnectionSubscription;
@@ -60,7 +61,9 @@ class BleBloc extends Bloc<BleEvent, BleState> {
       yield* _mapBleStateUpdateToState();
     }
     if (event is BleConnectorConnect) {
-      await _bleDeviceConnector.connect(event.deviceId);
+      if (_device != null) {
+        await _bleDeviceConnector.connect(_device!.id);
+      }
     }
     if (event is BleConnectorDisconnect) {
       await _bleDeviceConnector.disconnect(event.deviceId);
@@ -69,12 +72,17 @@ class BleBloc extends Bloc<BleEvent, BleState> {
       _bleConnectionState = event.connectionState;
       yield* _mapBleStateUpdateToState();
     }
+    if (event is BleConnectorSelectDevice) {
+      _device = event.device;
+      yield* _mapBleStateUpdateToState();
+    }
   }
 
   Stream<BleState> _mapBleStateUpdateToState() async* {
     yield BleState(
       bleScannerState: _bleScannerState,
       bleConnectionState: _bleConnectionState,
+      bleSelectedDevice: _device,
     );
   }
 

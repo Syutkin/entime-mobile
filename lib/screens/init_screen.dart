@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart' as ble;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path/path.dart';
 
@@ -39,6 +40,7 @@ class _InitScreen extends State<InitScreen> {
         !kReleaseMode
             ? _debugBleTestButton(context)
             : Container(width: 0, height: 0),
+        !kReleaseMode ? _debugBleTest(context) : Container(width: 0, height: 0),
       ]),
     );
   }
@@ -163,5 +165,25 @@ class _InitScreen extends State<InitScreen> {
           // SelectBleDeviceScreen();
         },
         child: Text('BLE Scanner'));
+  }
+
+  Widget _debugBleTest(BuildContext context) {
+    final Widget title = Text('Ble модуль');
+    return BlocBuilder<BleBloc, BleState>(builder: (context, state) {
+      return ListTile(
+        onTap: () => selectBleDevice(context),
+        leading: BleButton(
+          context: context,
+        ),
+        title: title,
+        subtitle: Text(
+            BlocProvider.of<BleBloc>(context).state.bleSelectedDevice?.name ??
+                'Нажмите чтобы выбрать'),
+        trailing: state.bleConnectionState?.connectionState ==
+                ble.DeviceConnectionState.connected
+            ? _bluetoothButtons(context)
+            : null,
+      );
+    });
   }
 }

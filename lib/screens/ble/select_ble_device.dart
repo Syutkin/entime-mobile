@@ -24,7 +24,7 @@ Future<void> selectBleDevice(BuildContext context) async {
   BlocProvider.of<BleBloc>(context).add(BleScannerStopScan());
   if (device != null) {
     BlocProvider.of<BleBloc>(context)
-        .add(BleConnectorConnect(deviceId: device.id));
+        .add(BleConnectorSelectDevice(device: device));
   }
 }
 

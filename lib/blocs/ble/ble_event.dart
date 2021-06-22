@@ -22,18 +22,29 @@ class BleScannerStateUpdate extends BleEvent {
 
   @override
   String toString() =>
-      'BleScannerStateUpdate { Discovered devices: ${bleScannerState?.discoveredDevices}, Scan is in progress: ${bleScannerState?.scanIsInProgress} }';
+      'BleScannerState { Discovered devices: ${bleScannerState?.discoveredDevices}, Scan is in progress: ${bleScannerState?.scanIsInProgress} }';
 }
 
-class BleConnectorConnect extends BleEvent {
-  final String deviceId;
+class BleConnectorSelectDevice extends BleEvent {
+  final DiscoveredDevice device;
 
-  BleConnectorConnect({
-    required this.deviceId,
+  BleConnectorSelectDevice({
+    required this.device,
   });
 
   @override
-  List<Object?> get props => [deviceId];
+  List<Object?> get props => [device];
+}
+
+class BleConnectorConnect extends BleEvent {
+  // final DiscoveredDevice device;
+  //
+  // BleConnectorConnect({
+  //   required this.device,
+  // });
+  //
+  // @override
+  // List<Object?> get props => [device];
 }
 
 class BleConnectorDisconnect extends BleEvent {
