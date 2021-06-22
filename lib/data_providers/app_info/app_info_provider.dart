@@ -1,6 +1,6 @@
 // import 'dart:io';
-import 'package:package_info/package_info.dart';
-import 'package:device_info/device_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class AppInfoProvider {
   final PackageInfo _packageInfo;
@@ -76,9 +76,9 @@ class AppInfoProvider {
     }
   }
 
-  List<String> get deviceSupported32BitAbis => _deviceInfo.supported32BitAbis;
+  List<String?> get deviceSupported32BitAbis => _deviceInfo.supported32BitAbis;
 
-  List<String> get deviceSupported64BitAbis => _deviceInfo.supported64BitAbis;
+  List<String?> get deviceSupported64BitAbis => _deviceInfo.supported64BitAbis;
 
-  List<String> get deviceSupportedAbis => _deviceInfo.supportedAbis;
+  List<String?> get deviceSupportedAbis => _deviceInfo.supportedAbis;
 }
