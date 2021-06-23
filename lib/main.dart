@@ -12,8 +12,6 @@ import 'package:entime/data_providers/settings/shared_prefs_settings_provider.da
 import 'package:entime/data_providers/update/update_provider.dart';
 import 'package:entime/screens/screens.dart';
 
-import 'data_providers/ble/ble_device_connector.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await runMain();
@@ -25,7 +23,6 @@ Future<void> runMain() async {
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
   final AppInfoProvider appInfo = await AppInfoProvider.load();
   final ble = FlutterReactiveBle();
-  final bleDeviceConnector = BleDeviceConnector(ble: ble);
   runApp(
     MultiBlocProvider(
       providers: [
@@ -64,11 +61,12 @@ Future<void> runMain() async {
             create: (context) => BleStatusBloc(ble: ble)),
         BlocProvider<BleScannerBloc>(
             create: (context) => BleScannerBloc(ble: ble)),
-        BlocProvider<BleBloc>(
-            create: (context) => BleBloc(
-                  ble: ble,
-                  bleDeviceConnector: bleDeviceConnector,
-                )),
+        BlocProvider<BleConnectorBloc>(
+            create: (context) => BleConnectorBloc(ble: ble)),
+        // BlocProvider<BleBloc>(
+        //     create: (context) => BleBloc(
+        //           ble: ble,
+        //         )),
         BlocProvider<BluetoothBloc>(
           create: (context) => BluetoothBloc(
             moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),

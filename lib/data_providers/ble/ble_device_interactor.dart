@@ -5,18 +5,17 @@ import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 class BleDeviceInteractor {
   BleDeviceInteractor({
     required Future<List<DiscoveredService>> Function(String deviceId)
-        bleDiscoverServices,
+    bleDiscoverServices,
     required Future<List<int>> Function(QualifiedCharacteristic characteristic)
-        readCharacteristic,
+    readCharacteristic,
     required Future<void> Function(QualifiedCharacteristic characteristic,
-            {required List<int> value})
-        writeWithResponse,
+        {required List<int> value})
+    writeWithResponse,
     required Future<void> Function(QualifiedCharacteristic characteristic,
-            {required List<int> value})
-        writeWithOutResponse,
-    required void Function(String message) logMessage,
+        {required List<int> value})
+    writeWithOutResponse,
     required Stream<List<int>> Function(QualifiedCharacteristic characteristic)
-        subscribeToCharacteristic,
+    subscribeToCharacteristic,
   })  : _bleDiscoverServices = bleDiscoverServices,
         _readCharacteristic = readCharacteristic,
         _writeWithResponse = writeWithResponse,
@@ -24,10 +23,10 @@ class BleDeviceInteractor {
         _subScribeToCharacteristic = subscribeToCharacteristic;
 
   final Future<List<DiscoveredService>> Function(String deviceId)
-      _bleDiscoverServices;
+  _bleDiscoverServices;
 
   final Future<List<int>> Function(QualifiedCharacteristic characteristic)
-      _readCharacteristic;
+  _readCharacteristic;
 
   final Future<void> Function(QualifiedCharacteristic characteristic,
       {required List<int> value}) _writeWithResponse;
@@ -36,5 +35,69 @@ class BleDeviceInteractor {
       {required List<int> value}) _writeWithoutResponse;
 
   final Stream<List<int>> Function(QualifiedCharacteristic characteristic)
-      _subScribeToCharacteristic;
+  _subScribeToCharacteristic;
+
+  Future<List<DiscoveredService>> discoverServices(String deviceId) async {
+    try {
+      print('Start discovering services for: $deviceId');
+      final result = await _bleDiscoverServices(deviceId);
+      print('Discovering services finished');
+      return result;
+    } on Exception catch (e) {
+      print('Error occurred when discovering services: $e');
+      rethrow;
+    }
+  }
+
+  Future<List<int>> readCharacteristic(
+      QualifiedCharacteristic characteristic) async {
+    try {
+      final result = await _readCharacteristic(characteristic);
+
+      print('Read ${characteristic.characteristicId}: value = $result');
+      return result;
+    } on Exception catch (e, s) {
+      print(
+        'Error occurred when reading ${characteristic.characteristicId} : $e',
+      );
+      print(s);
+      rethrow;
+    }
+  }
+
+  Future<void> writeCharacteristicWithResponse(
+      QualifiedCharacteristic characteristic, List<int> value) async {
+    try {
+      print(
+          'Write with response value : $value to ${characteristic.characteristicId}');
+      await _writeWithResponse(characteristic, value: value);
+    } on Exception catch (e, s) {
+      print(
+        'Error occurred when writing ${characteristic.characteristicId} : $e',
+      );
+      print(s);
+      rethrow;
+    }
+  }
+
+  Future<void> writeCharacteristicWithoutResponse(
+      QualifiedCharacteristic characteristic, List<int> value) async {
+    try {
+      await _writeWithoutResponse(characteristic, value: value);
+      print(
+          'Write without response value: $value to ${characteristic.characteristicId}');
+    } on Exception catch (e, s) {
+      print(
+        'Error occurred when writing ${characteristic.characteristicId} : $e',
+      );
+      print(s);
+      rethrow;
+    }
+  }
+
+  Stream<List<int>> subScribeToCharacteristic(
+      QualifiedCharacteristic characteristic) {
+    print('Subscribing to: ${characteristic.characteristicId} ');
+    return _subScribeToCharacteristic(characteristic);
+  }
 }

@@ -1,9 +1,10 @@
 part of 'ble_scanner_bloc.dart';
 
 @immutable
-abstract class BleScannerEvent {
+abstract class BleScannerEvent extends Equatable {
   const BleScannerEvent();
 
+  @override
   List<Object> get props => [];
 }
 

@@ -1,9 +1,10 @@
 part of 'ble_status_bloc.dart';
 
 @immutable
-abstract class BleStatusEvent {
+abstract class BleStatusEvent extends Equatable {
   const BleStatusEvent();
 
+  @override
   List<Object> get props => [];
 }
 

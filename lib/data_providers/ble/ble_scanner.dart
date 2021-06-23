@@ -2,19 +2,14 @@ import 'dart:async';
 
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:entime/models/models.dart';
-// import 'package:meta/meta.dart';
 
 class BleScanner implements ReactiveState<BleScannerStateModel> {
   BleScanner({
     required FlutterReactiveBle ble,
-    // required Function(String message) logMessage,
   }) : _ble = ble;
-
-  /*,  _logMessage = logMessage*/
 
   final FlutterReactiveBle _ble;
 
-  // final void Function(String message) _logMessage;
   final StreamController<BleScannerStateModel> _stateStreamController =
       StreamController();
 
@@ -25,7 +20,6 @@ class BleScanner implements ReactiveState<BleScannerStateModel> {
 
   void startScan(List<Uuid> serviceIds) {
     print('Start ble discovery');
-    // _logMessage('Start ble discovery');
     var error = false;
     _devices.clear();
     _subscription?.cancel();
@@ -42,12 +36,12 @@ class BleScanner implements ReactiveState<BleScannerStateModel> {
       print('Device scan fails with error: $e');
       error = true;
       _pushState(error);
-      /*_logMessage('Device scan fails with error: $e'))*/
     }, cancelOnError: true);
     _pushState();
   }
 
   void _pushState([bool error = false]) {
+    print('_pushState();');
     _stateStreamController.add(
       BleScannerStateModel(
         discoveredDevices: _devices,
@@ -58,8 +52,6 @@ class BleScanner implements ReactiveState<BleScannerStateModel> {
 
   Future<void> stopScan() async {
     print('Stop ble discovery');
-    // _logMessage('Stop ble discovery');
-
     await _subscription?.cancel();
     _subscription = null;
     _pushState();

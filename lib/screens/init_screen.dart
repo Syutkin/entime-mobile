@@ -1,3 +1,4 @@
+import 'package:entime/blocs/ble/ble_connector/ble_connector_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -145,6 +146,7 @@ class _InitScreen extends State<InitScreen> {
 
   Widget _debugTestButton(BuildContext context) {
     return TextButton(
+        // _device = event.device;
         onPressed: () {
           // BlocProvider.of<BluetoothBloc>(context)
           //     .add(MessageReceived('B19:00:56#'));
@@ -169,7 +171,7 @@ class _InitScreen extends State<InitScreen> {
 
   Widget _debugBleTest(BuildContext context) {
     final Widget title = Text('Ble модуль');
-    return BlocBuilder<BleBloc, BleState>(builder: (context, state) {
+    return BlocBuilder<BleConnectorBloc, BleConnectorState>(builder: (context, state) {
       return ListTile(
         onTap: () => selectBleDevice(context),
         leading: BleButton(
@@ -177,7 +179,7 @@ class _InitScreen extends State<InitScreen> {
         ),
         title: title,
         subtitle: Text(
-            BlocProvider.of<BleBloc>(context).state.bleSelectedDevice?.name ??
+            BlocProvider.of<BleConnectorBloc>(context).state.bleSelectedDevice?.name ??
                 'Нажмите чтобы выбрать'),
         trailing: state.bleConnectionState?.connectionState ==
                 ble.DeviceConnectionState.connected

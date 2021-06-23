@@ -15,10 +15,9 @@ class BleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BleBloc, BleState>(builder: (context, state) {
-      if (BlocProvider.of<BleBloc>(context).state.bleConnectionState != null) {
-        var deviceId = BlocProvider.of<BleBloc>(context)
-            .state
+    return BlocBuilder<BleConnectorBloc, BleConnectorState>(builder: (context, state) {
+      if (state.bleConnectionState != null) {
+        var deviceId = state
             .bleConnectionState!
             .deviceId;
         if (state.bleConnectionState?.connectionState ==
@@ -26,7 +25,7 @@ class BleButton extends StatelessWidget {
           return IconButton(
             icon: const Icon(Icons.bluetooth_connected),
             onPressed: () async {
-              BlocProvider.of<BleBloc>(context)
+              BlocProvider.of<BleConnectorBloc>(context)
                   .add(BleConnectorDisconnect(deviceId: deviceId));
             },
           );
@@ -35,7 +34,7 @@ class BleButton extends StatelessWidget {
           return IconButton(
             icon: const Icon(Icons.bluetooth_searching),
             onPressed: () async {
-              BlocProvider.of<BleBloc>(context)
+              BlocProvider.of<BleConnectorBloc>(context)
                   .add(BleConnectorDisconnect(deviceId: deviceId));
             },
           );
@@ -51,15 +50,15 @@ class BleButton extends StatelessWidget {
           return IconButton(
               icon: const Icon(Icons.bluetooth),
               onPressed: () async {
-                BlocProvider.of<BleBloc>(context).add(BleConnectorConnect());
+                BlocProvider.of<BleConnectorBloc>(context).add(BleConnectorConnect());
               });
         }
       } else {
-        if (BlocProvider.of<BleBloc>(context).state.bleSelectedDevice != null) {
+        if (state.bleSelectedDevice != null) {
           return IconButton(
             icon: const Icon(Icons.settings_bluetooth),
             onPressed: () async =>
-                BlocProvider.of<BleBloc>(context).add(BleConnectorConnect()),
+                BlocProvider.of<BleConnectorBloc>(context).add(BleConnectorConnect()),
           );
         } else {
           return IconButton(

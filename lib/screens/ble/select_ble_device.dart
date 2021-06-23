@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:entime/blocs/ble/ble_connector/ble_connector_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
@@ -16,7 +17,7 @@ Future<void> selectBleDevice(BuildContext context) async {
   }));
   BlocProvider.of<BleScannerBloc>(context).add(BleScannerStop());
   if (device != null) {
-    BlocProvider.of<BleBloc>(context)
+    BlocProvider.of<BleConnectorBloc>(context)
         .add(BleConnectorSelectDevice(device: device));
   }
 }

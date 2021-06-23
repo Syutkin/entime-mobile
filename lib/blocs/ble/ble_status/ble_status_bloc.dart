@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:meta/meta.dart';
 
@@ -14,6 +15,7 @@ class BleStatusBloc extends Bloc<BleStatusEvent, BleStatus> {
 
   BleStatusBloc({required FlutterReactiveBle ble})
       : _bleStatusMonitor = BleStatusMonitor(ble),
+
         super(BleStatus.unknown) {
     _bleStatusMonitorSubscription = _bleStatusMonitor.state.listen((event) {
       add(BleMonitorStatusUpdate(bleStatus: event ?? BleStatus.unknown));
