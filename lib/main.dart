@@ -1,27 +1,31 @@
-import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
+import 'package:entime/blocs/blocs.dart';
+import 'package:entime/data_providers/app_info/app_info_provider.dart';
 import 'package:entime/data_providers/settings/settings_provider.dart';
 import 'package:entime/data_providers/settings/shared_prefs_settings_provider.dart';
 import 'package:entime/data_providers/update/update_provider.dart';
-import 'package:entime/data_providers/app_info/app_info_provider.dart';
-
-import 'package:entime/blocs/blocs.dart';
 import 'package:entime/screens/screens.dart';
+
+import 'data_providers/ble/ble_device_connector.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
-  final AppInfoProvider appInfo = await AppInfoProvider.load();
-  await runMain(settings, appInfo);
+  await runMain();
 }
 
-Future<void> runMain(SettingsProvider settings, AppInfoProvider appInfo) async {
+Future<void> runMain() async {
   Bloc.observer = SimpleBlocObserver();
   final UpdateProvider updater = await UpdateProvider.init();
+  final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
+  final AppInfoProvider appInfo = await AppInfoProvider.load();
+  final ble = FlutterReactiveBle();
+  final bleDeviceConnector = BleDeviceConnector(ble: ble);
   runApp(
     MultiBlocProvider(
       providers: [
@@ -56,7 +60,15 @@ Future<void> runMain(SettingsProvider settings, AppInfoProvider appInfo) async {
             settingsBloc: BlocProvider.of<SettingsBloc>(context),
           ),
         ),
-        BlocProvider<BleBloc>(create: (context) => BleBloc()),
+        BlocProvider<BleStatusBloc>(
+            create: (context) => BleStatusBloc(ble: ble)),
+        BlocProvider<BleScannerBloc>(
+            create: (context) => BleScannerBloc(ble: ble)),
+        BlocProvider<BleBloc>(
+            create: (context) => BleBloc(
+                  ble: ble,
+                  bleDeviceConnector: bleDeviceConnector,
+                )),
         BlocProvider<BluetoothBloc>(
           create: (context) => BluetoothBloc(
             moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),

@@ -6,20 +6,6 @@ abstract class BleEvent {
   List<Object?> get props => [];
 }
 
-class BleMonitorStatus extends BleEvent {
-  final BleStatus? bleStatus;
-
-  BleMonitorStatus({
-    this.bleStatus,
-  });
-
-  @override
-  List<Object?> get props => [bleStatus];
-
-  @override
-  String toString() => 'BleMonitorStatus { $bleStatus }';
-}
-
 class BleScannerStartScan extends BleEvent {
   @override
   String toString() => 'BleScannerStartScan { Start }';

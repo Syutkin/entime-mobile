@@ -19,9 +19,9 @@ class UpdateInitial extends UpdateState {
   String toString() {
     if (showChangelog != null) {
       String result = 'UpdateInitial { '
-          'showChangelog: ${showChangelog!.show}';
+          'showChangelog: ${showChangelog!.show}, ';
       if (showChangelog!.previousVersion != null) {
-        result += ', previousVersion: ${showChangelog!.previousVersion}, ';
+        result += 'previousVersion: ${showChangelog!.previousVersion}, ';
       }
       result += 'currentVersion: ${showChangelog!.currentVersion}';
       result += ' }';

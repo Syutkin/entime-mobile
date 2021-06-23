@@ -9,12 +9,12 @@ import 'package:entime/screens/ble/ble_device_list_entry.dart';
 import 'package:entime/widgets/widgets.dart';
 
 Future<void> selectBleDevice(BuildContext context) async {
-  BlocProvider.of<BleBloc>(context).add(BleScannerStartScan());
+  BlocProvider.of<BleScannerBloc>(context).add(BleScannerStart());
   DiscoveredDevice? device =
       await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
     return SelectBleDeviceScreen();
   }));
-  BlocProvider.of<BleBloc>(context).add(BleScannerStopScan());
+  BlocProvider.of<BleScannerBloc>(context).add(BleScannerStop());
   if (device != null) {
     BlocProvider.of<BleBloc>(context)
         .add(BleConnectorSelectDevice(device: device));
@@ -28,39 +28,39 @@ class SelectBleDeviceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BleBloc, BleState>(builder: (context, state) {
-      if (state.bleStatus == BleStatus.ready) {
-        bool scanIsInProgress =
-            state.bleScannerState?.scanIsInProgress ?? false;
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Выберите модуль'),
-            actions: [
-              ProgressRefreshAction(
-                isLoading: scanIsInProgress,
-                onPressed: () {
-                  if (scanIsInProgress) {
-                    BlocProvider.of<BleBloc>(context).add(BleScannerStopScan());
-                  } else {
-                    BlocProvider.of<BleBloc>(context)
-                        .add(BleScannerStartScan());
-                  }
-                },
-              ),
-            ],
-          ),
-          body: Column(
-            children: [
-              // Text('Доступные модули'),
-              Scrollbar(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount:
-                          state.bleScannerState?.discoveredDevices.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var device =
-                            state.bleScannerState?.discoveredDevices[index];
-                        if (device != null) {
+    return BlocBuilder<BleStatusBloc, BleStatus>(
+        builder: (context, bleStatusState) {
+      if (bleStatusState == BleStatus.ready) {
+        return BlocBuilder<BleScannerBloc, BleScannerState>(
+            builder: (context, bleScannerState) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Выберите модуль'),
+              actions: [
+                ProgressRefreshAction(
+                  isLoading: bleScannerState.scanIsInProgress,
+                  onPressed: () {
+                    if (bleScannerState.scanIsInProgress) {
+                      BlocProvider.of<BleScannerBloc>(context)
+                          .add(BleScannerStop());
+                    } else {
+                      BlocProvider.of<BleScannerBloc>(context)
+                          .add(BleScannerStart());
+                    }
+                  },
+                ),
+              ],
+            ),
+            body: Column(
+              children: [
+                // Text('Доступные модули'),
+                Scrollbar(
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: bleScannerState.discoveredDevices.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var device = bleScannerState.discoveredDevices[index];
+                          // if (device != null) {
                           return BleDeviceListEntry(
                             device: device,
                             onTap: () {
@@ -69,17 +69,18 @@ class SelectBleDeviceScreen extends StatelessWidget {
                             // title: Text(device.name),
                             // subtitle: Text(device.id),
                           );
-                        } else {
-                          return Container();
-                        }
-                      })),
-            ],
-          ),
-        );
+                          // } else {
+                          //   return Container();
+                          // }
+                        })),
+              ],
+            ),
+          );
+        });
       } else {
         return Scaffold(
           body: Center(
-            child: Text(_determineText(state.bleStatus ?? BleStatus.unknown)),
+            child: Text(_determineText(bleStatusState)),
           ),
         );
       }

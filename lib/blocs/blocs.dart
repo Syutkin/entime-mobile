@@ -10,5 +10,6 @@ export 'package:entime/blocs/audio/audio_bloc.dart';
 export 'package:entime/blocs/countdown/countdown_bloc.dart';
 export 'package:entime/blocs/bluetooth/bluetooth_bloc.dart';
 export 'package:entime/blocs/ble/ble_bloc.dart';
-
+export 'package:entime/blocs/ble/ble_status/ble_status_bloc.dart';
+export 'package:entime/blocs/ble/ble_scanner/ble_scanner_bloc.dart';
 export 'package:entime/blocs/simple_bloc_observer.dart';

@@ -27,7 +27,7 @@ dependencies:
   csv: ^5.0.0
   device_info_plus: ^2.0.1
   equatable: ^2.0.3
-  file_picker: ^3.0.2+2
+  file_picker: ^3.0.3
   filesize: ^2.0.1
   flutter_bloc: ^7.0.1
   flutter_reactive_ble: ^3.1.1+1
