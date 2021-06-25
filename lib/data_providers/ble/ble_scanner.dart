@@ -41,7 +41,6 @@ class BleScanner implements ReactiveState<BleScannerStateModel> {
   }
 
   void _pushState([bool error = false]) {
-    print('_pushState();');
     _stateStreamController.add(
       BleScannerStateModel(
         discoveredDevices: _devices,

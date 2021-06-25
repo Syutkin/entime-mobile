@@ -1,16 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
-
 import 'package:entime/blocs/blocs.dart';
 import 'package:entime/data_providers/app_info/app_info_provider.dart';
 import 'package:entime/data_providers/settings/settings_provider.dart';
 import 'package:entime/data_providers/settings/shared_prefs_settings_provider.dart';
 import 'package:entime/data_providers/update/update_provider.dart';
 import 'package:entime/screens/screens.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,12 +60,17 @@ Future<void> runMain() async {
             create: (context) => BleStatusBloc(ble: ble)),
         BlocProvider<BleScannerBloc>(
             create: (context) => BleScannerBloc(ble: ble)),
+        BlocProvider<BleInteractorBloc>(
+          create: (context) => BleInteractorBloc(
+            ble: ble,
+            moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),
+          ),
+        ),
         BlocProvider<BleConnectorBloc>(
-            create: (context) => BleConnectorBloc(ble: ble)),
-        // BlocProvider<BleBloc>(
-        //     create: (context) => BleBloc(
-        //           ble: ble,
-        //         )),
+          create: (context) => BleConnectorBloc(
+              ble: ble,
+              bleInteractorBloc: BlocProvider.of<BleInteractorBloc>(context)),
+        ),
         BlocProvider<BluetoothBloc>(
           create: (context) => BluetoothBloc(
             moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),

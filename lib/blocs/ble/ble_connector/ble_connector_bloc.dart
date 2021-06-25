@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:entime/blocs/ble/ble_interactor/ble_interactor_bloc.dart';
 import 'package:entime/data_providers/ble/ble_device_connector.dart';
-import 'package:entime/data_providers/ble/ble_device_interactor.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:meta/meta.dart';
 
@@ -18,29 +17,19 @@ class BleConnectorBloc extends Bloc<BleConnectorEvent, BleConnectorState> {
   final BleDeviceConnector _bleDeviceConnector;
   late StreamSubscription<ConnectionStateUpdate> _bleConnectionSubscription;
 
-  final BleDeviceInteractor _serviceDiscoverer;
+  final BleInteractorBloc _bleInteractorBloc;
 
-  BleConnectorBloc({required FlutterReactiveBle ble})
+  BleConnectorBloc(
+      {required FlutterReactiveBle ble,
+      required BleInteractorBloc bleInteractorBloc})
       : _bleDeviceConnector = BleDeviceConnector(ble: ble),
-        _serviceDiscoverer = BleDeviceInteractor(
-            bleDiscoverServices: ble.discoverServices,
-            readCharacteristic: ble.readCharacteristic,
-            writeWithResponse: ble.writeCharacteristicWithResponse,
-            writeWithOutResponse: ble.writeCharacteristicWithoutResponse,
-            subscribeToCharacteristic: ble.subscribeToCharacteristic),
+        _bleInteractorBloc = bleInteractorBloc,
         super(BleConnectorState()) {
     _bleConnectionSubscription = _bleDeviceConnector.state.listen((event) {
       add(BleConnectorStateUpdate(connectionState: event));
-      switch (event.connectionState) {
-        case DeviceConnectionState.connecting:
-          break;
-        case DeviceConnectionState.connected:
-          _subscribe(event.deviceId);
-          break;
-        case DeviceConnectionState.disconnecting:
-          break;
-        case DeviceConnectionState.disconnected:
-          break;
+      if (event.connectionState == DeviceConnectionState.connected) {
+        _bleInteractorBloc
+            .add(BleInteractorSubscribe(deviceId: event.deviceId));
       }
     });
   }
@@ -70,38 +59,6 @@ class BleConnectorBloc extends Bloc<BleConnectorEvent, BleConnectorState> {
       bleConnectionState: _bleConnectionState,
       bleSelectedDevice: _device,
     );
-  }
-
-  void _subscribe(String deviceId) async {
-    var batteryCharacteristic = QualifiedCharacteristic(
-        deviceId: deviceId,
-        serviceId: Uuid.parse('0000180f-0000-1000-8000-00805f9b34fb'),
-        characteristicId: Uuid.parse('00002a19-0000-1000-8000-00805f9b34fb'));
-
-    var result = await _serviceDiscoverer.discoverServices(deviceId);
-    var counter = 0;
-    for (var service in result) {
-      print(service);
-      if (service.serviceId == batteryCharacteristic.serviceId) {
-        var initialBattery =
-            await _serviceDiscoverer.readCharacteristic(batteryCharacteristic);
-        print('initialBattery: $initialBattery');
-        _serviceDiscoverer
-            .subScribeToCharacteristic(QualifiedCharacteristic(
-          deviceId: deviceId,
-          serviceId: service.serviceId,
-          characteristicId: Uuid.parse('00002a19-0000-1000-8000-00805f9b34fb'),
-        ))
-            .listen(
-          (data) {
-            print('[$counter] Battery event: $data');
-            counter++;
-          },
-          onDone: () => print('Subscribe to Battery service canceled'),
-          onError: (e) => print('Battery subscribe service error: $e'),
-        );
-      }
-    }
   }
 
   @override

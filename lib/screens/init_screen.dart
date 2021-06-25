@@ -9,8 +9,8 @@ import 'package:path/path.dart';
 import '../blocs/blocs.dart';
 import '../models/models.dart';
 import '../screens/screens.dart';
-import '../widgets/widgets.dart';
 import '../utils/helper.dart';
+import '../widgets/widgets.dart';
 
 class InitScreen extends StatefulWidget {
   InitScreen({
@@ -119,6 +119,45 @@ class _InitScreen extends State<InitScreen> {
     );
   }
 
+  Widget _bleButtons(BuildContext context, BleConnectorState state) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          icon: const Icon(MdiIcons.formatListBulleted),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return LogScreen(
+                  //moduleSettings: moduleSettings,
+                  );
+            }));
+          },
+        ),
+        IconButton(
+          icon: const Icon(Icons.settings),
+          onPressed: () {
+            _moduleBleSettings(context, state);
+          },
+        ),
+      ],
+    );
+  }
+
+  void _moduleBleSettings(BuildContext context, BleConnectorState state) {
+    if (state.bleConnectionState?.connectionState ==
+        ble.DeviceConnectionState.connected) {
+      BlocProvider.of<BleInteractorBloc>(context).add(
+          BleInteractorReadSettings(deviceId: state.bleSelectedDevice!.id));
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) {
+          return ModuleSettingsBleInitScreen(
+              //moduleSettings: moduleSettings,
+              );
+        }),
+      );
+    }
+  }
+
   Widget _debugLogButton(BuildContext context) {
     return TextButton(
         onPressed: () {
@@ -171,19 +210,22 @@ class _InitScreen extends State<InitScreen> {
 
   Widget _debugBleTest(BuildContext context) {
     final Widget title = Text('Ble модуль');
-    return BlocBuilder<BleConnectorBloc, BleConnectorState>(builder: (context, state) {
+    return BlocBuilder<BleConnectorBloc, BleConnectorState>(
+        builder: (context, state) {
       return ListTile(
         onTap: () => selectBleDevice(context),
         leading: BleButton(
           context: context,
         ),
         title: title,
-        subtitle: Text(
-            BlocProvider.of<BleConnectorBloc>(context).state.bleSelectedDevice?.name ??
-                'Нажмите чтобы выбрать'),
+        subtitle: Text(BlocProvider.of<BleConnectorBloc>(context)
+                .state
+                .bleSelectedDevice
+                ?.name ??
+            'Нажмите чтобы выбрать'),
         trailing: state.bleConnectionState?.connectionState ==
                 ble.DeviceConnectionState.connected
-            ? _bluetoothButtons(context)
+            ? _bleButtons(context, state)
             : null,
       );
     });
