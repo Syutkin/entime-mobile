@@ -1,8 +1,6 @@
-import 'package:entime/blocs/ble/ble_connector/ble_connector_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_reactive_ble/flutter_reactive_ble.dart' as ble;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path/path.dart';
 
@@ -38,10 +36,6 @@ class _InitScreen extends State<InitScreen> {
         !kReleaseMode
             ? _debugTestButton(context)
             : Container(width: 0, height: 0),
-        !kReleaseMode
-            ? _debugBleTestButton(context)
-            : Container(width: 0, height: 0),
-        !kReleaseMode ? _debugBleTest(context) : Container(width: 0, height: 0),
       ]),
     );
   }
@@ -119,45 +113,6 @@ class _InitScreen extends State<InitScreen> {
     );
   }
 
-  Widget _bleButtons(BuildContext context, BleConnectorState state) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          icon: const Icon(MdiIcons.formatListBulleted),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return LogScreen(
-                  //moduleSettings: moduleSettings,
-                  );
-            }));
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: () {
-            _moduleBleSettings(context, state);
-          },
-        ),
-      ],
-    );
-  }
-
-  void _moduleBleSettings(BuildContext context, BleConnectorState state) {
-    if (state.bleConnectionState?.connectionState ==
-        ble.DeviceConnectionState.connected) {
-      BlocProvider.of<BleInteractorBloc>(context).add(
-          BleInteractorReadSettings(deviceId: state.bleSelectedDevice!.id));
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) {
-          return ModuleSettingsBleInitScreen(
-              //moduleSettings: moduleSettings,
-              );
-        }),
-      );
-    }
-  }
-
   Widget _debugLogButton(BuildContext context) {
     return TextButton(
         onPressed: () {
@@ -193,41 +148,5 @@ class _InitScreen extends State<InitScreen> {
           BlocProvider.of<AudioBloc>(context).add(Countdown());
         },
         child: Text('Voice Test'));
-  }
-
-  Widget _debugBleTestButton(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          selectBleDevice(context);
-          // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          //   return SelectBleDeviceScreen();
-          // }));
-
-          // SelectBleDeviceScreen();
-        },
-        child: Text('BLE Scanner'));
-  }
-
-  Widget _debugBleTest(BuildContext context) {
-    final Widget title = Text('Ble модуль');
-    return BlocBuilder<BleConnectorBloc, BleConnectorState>(
-        builder: (context, state) {
-      return ListTile(
-        onTap: () => selectBleDevice(context),
-        leading: BleButton(
-          context: context,
-        ),
-        title: title,
-        subtitle: Text(BlocProvider.of<BleConnectorBloc>(context)
-                .state
-                .bleSelectedDevice
-                ?.name ??
-            'Нажмите чтобы выбрать'),
-        trailing: state.bleConnectionState?.connectionState ==
-                ble.DeviceConnectionState.connected
-            ? _bleButtons(context, state)
-            : null,
-      );
-    });
   }
 }

@@ -9,7 +9,6 @@ import 'package:entime/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +20,6 @@ Future<void> runMain() async {
   final UpdateProvider updater = await UpdateProvider.init();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
   final AppInfoProvider appInfo = await AppInfoProvider.load();
-  final ble = FlutterReactiveBle();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -55,21 +53,6 @@ Future<void> runMain() async {
             tabBloc: BlocProvider.of<TabBloc>(context),
             settingsBloc: BlocProvider.of<SettingsBloc>(context),
           ),
-        ),
-        BlocProvider<BleStatusBloc>(
-            create: (context) => BleStatusBloc(ble: ble)),
-        BlocProvider<BleScannerBloc>(
-            create: (context) => BleScannerBloc(ble: ble)),
-        BlocProvider<BleInteractorBloc>(
-          create: (context) => BleInteractorBloc(
-            ble: ble,
-            moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),
-          ),
-        ),
-        BlocProvider<BleConnectorBloc>(
-          create: (context) => BleConnectorBloc(
-              ble: ble,
-              bleInteractorBloc: BlocProvider.of<BleInteractorBloc>(context)),
         ),
         BlocProvider<BluetoothBloc>(
           create: (context) => BluetoothBloc(
