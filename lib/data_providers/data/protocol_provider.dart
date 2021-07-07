@@ -17,12 +17,6 @@ class ProtocolProvider {
 
   String? get dbPath => _dbPath;
 
-  // set dbPath(String? value) {
-  //   _database?.close();
-  //   _dbPath = value;
-  //   _database = null;
-  // }
-
   Future<void> setDbPath(String? value) async {
     if (_dbPath != value) {
       await _database?.close();

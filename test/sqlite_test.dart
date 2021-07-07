@@ -9,6 +9,7 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'package:entime/data_providers/data/protocol_provider.dart';
 import 'package:entime/data_providers/data/log_provider.dart';
+import 'package:entime/utils/csv_utils.dart';
 
 void main() {
   if (Platform.isWindows || Platform.isLinux) {
@@ -30,6 +31,14 @@ void main() {
       if (File(testFileName).existsSync()) {
         File(testFileName).deleteSync();
       }
+      await ProtocolProvider.db.setDbPath(testFileName);
+      expect(ProtocolProvider.db.dbPath, testFileName);
+
+      await ProtocolProvider.db.setDbPath(null);
+      expect(ProtocolProvider.db.dbPath, null);
+
+      // expect(await ProtocolProvider.db.database is Database, true);
+
       await ProtocolProvider.db.setDbPath(testFileName);
       expect(ProtocolProvider.db.dbPath, testFileName);
     });
@@ -72,8 +81,11 @@ void main() {
     });
 
     test('getStartingParticipants', () async {
-      var result =
-          await ProtocolProvider.db.getStartingParticipants('09:59:15');
+      var result = await ProtocolProvider.db
+          .getStartingParticipants('some wrong time')
+          .onError((error, stackTrace) => []);
+      expect(result, []);
+      result = await ProtocolProvider.db.getStartingParticipants('09:59:15');
       expect(result, []);
       result = await ProtocolProvider.db.getStartingParticipants('10:00:15');
       expect(result.length, 1);
@@ -81,6 +93,11 @@ void main() {
     });
 
     test('getStart', () async {
+      expect(
+          await ProtocolProvider.db
+              .getStart('some wrong time')
+              .onError((error, stackTrace) => 0),
+          0);
       expect(await ProtocolProvider.db.getStart('10:00:01'), 0);
       expect(await ProtocolProvider.db.getStart('10:00:51'), 1);
       expect(await ProtocolProvider.db.getStart('10:01:01,123'), 0);
@@ -93,6 +110,15 @@ void main() {
     });
 
     test('updateAutomaticCorrection', () async {
+      expect(
+          await ProtocolProvider.db
+              .updateAutomaticCorrection(
+                time: 'some wrong time',
+                correction: 1111,
+                timeStamp: DateTime.now(),
+              )
+              .onError((error, stackTrace) => null),
+          null);
       expect(
           await ProtocolProvider.db.updateAutomaticCorrection(
             time: '10:01:01,111',
@@ -245,6 +271,13 @@ void main() {
       var result = await ProtocolProvider.db.getStartToCsv();
       // 4 'cause number 1 is DNS and counts, but number 5 not started````````````````````````````````````````````````````````````````````````````````````````````````````
       expect(result.length, 4);
+
+      String? csv = mapListToCsv(null);
+      expect(csv, null);
+      csv = mapListToCsv(result as List<Map<String, dynamic>>);
+      String pattern =
+          'number;starttime;automaticcorrection\r\n1;10:01:00;DNS\r\n2;10:02:00;2234\r\n3;10:03:00;3333\r\n4;10:04:00;4444';
+      expect(csv, pattern);
     });
 
     test('addFinishTime', () async {
@@ -346,6 +379,11 @@ void main() {
     test('getFinishToCsv', () async {
       var result = await ProtocolProvider.db.getFinishToCsv();
       expect(result.length, 4);
+
+      String? csv = mapListToCsv(result as List<Map<String, dynamic>>);
+      String pattern =
+          'number;finishtime\r\n2;10:03:01,124\r\n3;10:05:05,567\r\n5;10:11:11,111\r\n4;DNF';
+      expect(csv, pattern);
     });
 
     test('clearFinishResultsDebug', () async {
