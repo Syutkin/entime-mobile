@@ -29,10 +29,11 @@ def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 } else {
-    keystoreProperties.setProperty('storePassword', System.getenv('KEY_STORE_PASSWORD'));
-    keystoreProperties.setProperty('keyPassword', System.getenv('KEY_PASSWORD'));
-    keystoreProperties.setProperty('keyAlias', System.getenv('ALIAS'));
-    keystoreProperties.setProperty('storeFile', System.getenv('KEY_PATH'));
+    System.out.println(System.getenv());
+    keystoreProperties.setProperty('storePassword', System.getenv('KEY_STORE_PASSWORD')?: "");
+    keystoreProperties.setProperty('keyPassword', System.getenv('KEY_PASSWORD')?: "");
+    keystoreProperties.setProperty('keyAlias', System.getenv('ALIAS')?: "");
+    keystoreProperties.setProperty('storeFile', System.getenv('KEY_PATH')?: "");
 }
 
 android {
