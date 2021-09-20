@@ -96,7 +96,7 @@ class _FinishPage extends State<FinishScreen> {
                 return Dismissible(
                   key: UniqueKey(),
                   background: Container(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       alignment: Alignment(1.0, 0.0),
                       padding: const EdgeInsets.all(5.0),
                       child: Text('Скрыть',
@@ -196,6 +196,7 @@ class _FinishPage extends State<FinishScreen> {
           );
         }
       }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(builder: (
         context,
         settingsState,
@@ -214,7 +215,6 @@ class _FinishPage extends State<FinishScreen> {
         }
         return Container(width: 0, height: 0);
       }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       persistentFooterButtons: _getFooterButtons(context),
     );
   }
@@ -224,7 +224,8 @@ class _FinishPage extends State<FinishScreen> {
       builder: (context, state) {
         if (state is ProtocolSelectedState) {
           return Container(
-            height: 50,
+            height: 50.0,
+            width: 400.0,
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
@@ -262,7 +263,7 @@ class _FinishPage extends State<FinishScreen> {
       constraints: BoxConstraints(minWidth: 50, minHeight: 50),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(12.0)),
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.secondary,
 //        color: Colors.blue,
       ),
       child: Center(

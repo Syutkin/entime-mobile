@@ -54,39 +54,30 @@ extension AppThemeStr on AppTheme {
 final appThemeData = {
   AppTheme.LightBlue: ThemeData.light(),
   AppTheme.DarkBlue: ThemeData(
-    brightness: Brightness.dark,
-    primarySwatch: Colors.blue,
-   // primaryColor: Colors.red,
-//    primaryColorBrightness: Brightness.dark,
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.blue,
+      brightness: Brightness.dark,
+      accentColor: Colors.blue,
+    ).copyWith(secondary: Colors.blue),
     toggleableActiveColor: Colors.blue,
-    accentColor: Colors.blue,
-    accentColorBrightness: Brightness.dark,
+    indicatorColor: Colors.blue,
   ),
   AppTheme.LightRed: ThemeData(
-    brightness: Brightness.light,
-    primarySwatch: Colors.red,
-//    primaryColor: Colors.red,
-//    primaryColorBrightness: Brightness.dark,
-    accentColor: Colors.red,
-    accentColorBrightness: Brightness.dark,
-//    scaffoldBackgroundColor: Colors.black,
-//    bottomSheetTheme: BottomSheetThemeData(
-//      backgroundColor: Colors.black,
-//    ),
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.red,
+      brightness: Brightness.light,
+      accentColor: Colors.red,
+    ).copyWith(secondary: Colors.red),
+    toggleableActiveColor: Colors.red,
+    indicatorColor: Colors.red,
   ),
   AppTheme.DarkRed: ThemeData(
-    brightness: Brightness.dark,
-    primarySwatch: Colors.red,
-//    primaryColor: Colors.red,
-//    primaryColorBrightness: Brightness.dark,
-    buttonColor: Colors.red,
-    accentColor: Colors.red,
-    accentColorBrightness: Brightness.dark,
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.red,
+      brightness: Brightness.dark,
+      accentColor: Colors.red,
+    ).copyWith(secondary: Colors.red),
     toggleableActiveColor: Colors.red,
-//    scaffoldBackgroundColor: Colors.black,
-//    bottomSheetTheme: BottomSheetThemeData(
-//      backgroundColor: Colors.black,
-//    ),
+    indicatorColor: Colors.red,
   ),
 };
-

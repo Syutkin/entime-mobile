@@ -47,7 +47,7 @@ class _StartScreen extends State<StartScreen> {
                     child: Dismissible(
                       key: UniqueKey(),
                       background: Container(
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).colorScheme.secondary,
                           alignment: Alignment(1.0, 0.0),
                           padding: const EdgeInsets.all(5.0),
                           child: Text('Не стартовал',
