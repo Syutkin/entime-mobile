@@ -4,10 +4,11 @@ class ProgressRefreshAction extends StatelessWidget {
   final bool isLoading;
   final Function() onPressed;
 
-  ProgressRefreshAction({
+  const ProgressRefreshAction({
     required this.isLoading,
     required this.onPressed,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class ProgressRefreshAction extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Padding(
             padding: const EdgeInsets.only(right: 12),
-            child: Container(
+            child: SizedBox(
               width: iconTheme.size ?? 24,
               height: iconTheme.size ?? 24,
               child: CircularProgressIndicator(
@@ -33,7 +34,7 @@ class ProgressRefreshAction extends StatelessWidget {
       );
     }
     return IconButton(
-      icon: Icon(
+      icon: const Icon(
         Icons.refresh,
       ),
       onPressed: onPressed,

@@ -1,59 +1,59 @@
 import 'package:flutter/material.dart';
 
 enum AppTheme {
-  LightBlue,
-  DarkBlue,
-  LightRed,
-  DarkRed,
+  lightBlue,
+  darkBlue,
+  lightRed,
+  darkRed,
 }
 
 AppTheme themeFromString(String? type) {
-  if (type == null) return AppTheme.LightBlue;
+  if (type == null) return AppTheme.lightBlue;
   switch (type) {
-    case 'LightBlue':
-      return AppTheme.LightBlue;
-    case 'DarkBlue':
-      return AppTheme.DarkBlue;
-    case 'LightRed':
-      return AppTheme.LightRed;
-    case 'DarkRed':
-      return AppTheme.DarkRed;
+    case 'lightBlue':
+      return AppTheme.lightBlue;
+    case 'darkBlue':
+      return AppTheme.darkBlue;
+    case 'lightRed':
+      return AppTheme.lightRed;
+    case 'darkRed':
+      return AppTheme.darkRed;
     default:
-      return AppTheme.LightBlue;
+      return AppTheme.lightBlue;
   }
 }
 
 extension AppThemeStr on AppTheme {
   String get stringify {
     switch (this) {
-      case AppTheme.LightBlue:
-        return 'LightBlue';
-      case AppTheme.DarkBlue:
-        return 'DarkBlue';
-      case AppTheme.LightRed:
-        return 'LightRed';
-      case AppTheme.DarkRed:
-        return 'DarkRed';
+      case AppTheme.lightBlue:
+        return 'lightBlue';
+      case AppTheme.darkBlue:
+        return 'darkBlue';
+      case AppTheme.lightRed:
+        return 'lightRed';
+      case AppTheme.darkRed:
+        return 'darkRed';
     }
   }
 
   String display(/*BuildContext context*/) {
     switch (this) {
-      case AppTheme.LightBlue:
+      case AppTheme.lightBlue:
         return 'Синяя светлая тема';
-      case AppTheme.DarkBlue:
+      case AppTheme.darkBlue:
         return 'Синяя тёмная тема';
-      case AppTheme.LightRed:
+      case AppTheme.lightRed:
         return 'Красная светлая тема';
-      case AppTheme.DarkRed:
+      case AppTheme.darkRed:
         return 'Красная тёмная тема';
     }
   }
 }
 
 final appThemeData = {
-  AppTheme.LightBlue: ThemeData.light(),
-  AppTheme.DarkBlue: ThemeData(
+  AppTheme.lightBlue: ThemeData.light(),
+  AppTheme.darkBlue: ThemeData(
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: Colors.blue,
       brightness: Brightness.dark,
@@ -62,7 +62,7 @@ final appThemeData = {
     toggleableActiveColor: Colors.blue,
     indicatorColor: Colors.blue,
   ),
-  AppTheme.LightRed: ThemeData(
+  AppTheme.lightRed: ThemeData(
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: Colors.red,
       brightness: Brightness.light,
@@ -71,7 +71,7 @@ final appThemeData = {
     toggleableActiveColor: Colors.red,
     indicatorColor: Colors.red,
   ),
-  AppTheme.DarkRed: ThemeData(
+  AppTheme.darkRed: ThemeData(
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: Colors.red,
       brightness: Brightness.dark,

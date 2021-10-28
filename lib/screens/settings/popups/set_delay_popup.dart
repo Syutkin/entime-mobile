@@ -27,7 +27,7 @@ Future<int?> setDelayPopup(
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: true,
-                  decoration: InputDecoration(labelText: 'Задержка'),
+                  decoration: const InputDecoration(labelText: 'Задержка'),
                   controller: _delayController,
                   validator: (value) {
                     if (value == null) {

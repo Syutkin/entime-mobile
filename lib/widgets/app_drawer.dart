@@ -7,6 +7,8 @@ import 'package:entime/widgets/widgets.dart';
 import 'package:entime/data_providers/app_info/app_info_provider.dart';
 
 class AppDrawer extends StatelessWidget {
+  const AppDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -22,32 +24,32 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 0.0),
-            title: Text('Настройки'),
+            title: const Text('Настройки'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => SettingsScreen()));
+                  builder: (BuildContext context) => const SettingsScreen()));
             },
           ),
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 0.0),
-            title: Text('Помощь'),
+            title: const Text('Помощь'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => HelpPage()));
+                  builder: (BuildContext context) => const HelpPage()));
             },
           ),
-          Updater(),
+          const Updater(),
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 0.0),
-            title: Text('О программе'),
+            title: const Text('О программе'),
             onTap: () {
               showDialog<void>(
                   context: context,
                   barrierDismissible: true,
                   builder: (BuildContext context) {
-                    return AboutPopup();
+                    return const AboutPopup();
                   });
             },
           ),

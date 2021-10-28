@@ -134,7 +134,7 @@ class ProtocolProvider {
       assert(beepDateTime != null);
       return 0;
     }
-    DateTime timeAfter = beepDateTime.add(Duration(seconds: 10));
+    DateTime timeAfter = beepDateTime.add(const Duration(seconds: 10));
     String after = DateFormat('HH:mm:ss').format(timeAfter);
     final db = await database;
     var x = await db.rawQuery('''
@@ -161,8 +161,8 @@ class ProtocolProvider {
       assert(dateGoTime != null);
       return null;
     }
-    final DateTime timeBefore = dateGoTime.subtract(Duration(seconds: 15));
-    final DateTime timeAfter = dateGoTime.add(Duration(seconds: 15));
+    final DateTime timeBefore = dateGoTime.subtract(const Duration(seconds: 15));
+    final DateTime timeAfter = dateGoTime.add(const Duration(seconds: 15));
     final String before = DateFormat('HH:mm:ss').format(timeBefore);
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
@@ -204,8 +204,8 @@ class ProtocolProvider {
   Future<int> updateManualStartTime(DateTime time) async {
     int result = 0;
     final db = await database;
-    final DateTime timeBefore = time.subtract(Duration(seconds: 15));
-    final DateTime timeAfter = time.add(Duration(seconds: 15));
+    final DateTime timeBefore = time.subtract(const Duration(seconds: 15));
+    final DateTime timeAfter = time.add(const Duration(seconds: 15));
     final String before = DateFormat('HH:mm:ss').format(timeBefore);
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final String manualStartTime = DateFormat('HH:mm:ss,S').format(time);
@@ -246,7 +246,7 @@ class ProtocolProvider {
     return result;
   }
 
-  Future<int> UpdateItemInfoAtStart(StartItem item) async {
+  Future<int> updateItemInfoAtStart(StartItem item) async {
     final db = await database;
     final result = await db.rawUpdate(
       '''
@@ -361,7 +361,7 @@ class ProtocolProvider {
       assert(dateTime != null);
       return [];
     }
-    final DateTime timeAfter = dateTime.add(Duration(minutes: 1));
+    final DateTime timeAfter = dateTime.add(const Duration(minutes: 1));
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final db = await database;
     final res = await db.rawQuery('''

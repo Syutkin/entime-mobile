@@ -10,7 +10,7 @@ abstract class UpdateState extends Equatable {
 class UpdateInitial extends UpdateState {
   final ShowChangelog? showChangelog;
 
-  UpdateInitial({this.showChangelog});
+  const UpdateInitial({this.showChangelog});
 
   @override
   List<Object?> get props => [showChangelog];
@@ -35,7 +35,7 @@ class UpdateInitial extends UpdateState {
 class UpdateAvailable extends UpdateState {
   final String version;
 
-  UpdateAvailable(this.version);
+  const UpdateAvailable(this.version);
 
   @override
   List<Object> get props => [version];
@@ -52,7 +52,7 @@ class UpdateDownloadInProgress extends UpdateState {
   final int bytes;
   final int total;
 
-  UpdateDownloadInProgress(
+  const UpdateDownloadInProgress(
     this.bytes,
     this.total,
   );

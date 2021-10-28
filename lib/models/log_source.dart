@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 
 enum LogSource {
-  Bluetooth,
-  Other,
-  Unknown,
+  bluetooth,
+  other,
+  unknown,
 }
 
 extension LogSourceString on LogSource? {
-  String get toStr => describeEnum(this ?? LogSource.Unknown);
+  String get toStr => describeEnum(this ?? LogSource.unknown);
 }

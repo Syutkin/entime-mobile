@@ -21,7 +21,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       var sound = settings.getBool('sound') ?? state.sound;
       var beep = settings.getBool('beep') ?? state.beep;
       var voice = settings.getBool('voice') ?? state.voice;
-      var voice_name = settings.getBool('voice_name') ?? state.voice_name;
+      var voiceName = settings.getBool('voiceName') ?? state.voiceName;
       var volume = settings.getDouble('volume') ?? state.volume;
       var pitch = settings.getDouble('pitch') ?? state.pitch;
       var rate = settings.getDouble('rate') ?? state.rate;
@@ -52,12 +52,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           settings.getBool('substituteNumbers') ?? state.substituteNumbers;
       int substituteNumbersDelay = settings.getInt('substituteNumbersDelay') ??
           state.substituteNumbersDelay;
-      int log_limit = settings.getInt('log_limit') ?? state.log_limit;
+      int logLimit = settings.getInt('log_limit') ?? state.logLimit;
       yield SettingsState(
         sound: sound,
         beep: beep,
         voice: voice,
-        voice_name: voice_name,
+        voiceName: voiceName,
         volume: volume,
         pitch: pitch,
         rate: rate,
@@ -78,7 +78,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         finishDelay: finishDelay,
         substituteNumbers: substituteNumbers,
         substituteNumbersDelay: substituteNumbersDelay,
-        log_limit: log_limit,
+        logLimit: logLimit,
       );
     } else if (event is SetBoolValueEvent) {
       if (event.sound != null) {
@@ -90,8 +90,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.voice != null) {
         settings.setBool('voice', event.voice!);
       }
-      if (event.voice_name != null) {
-        settings.setBool('voice_name', event.voice_name!);
+      if (event.voiceName != null) {
+        settings.setBool('voiceName', event.voiceName!);
       }
       if (event.wakelock != null) {
         settings.setBool('wakelock', event.wakelock!);
@@ -133,7 +133,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         sound: event.sound,
         beep: event.beep,
         voice: event.voice,
-        voice_name: event.voice_name,
+        voiceName: event.voiceName,
         wakelock: event.wakelock,
         startFab: event.startFab,
         finishFab: event.finishFab,
@@ -153,14 +153,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         settings.setInt(
             'substituteNumbersDelay', event.substituteNumbersDelay!);
       }
-      if (event.log_limit != null) {
-        settings.setInt('log_limit', event.log_limit!);
+      if (event.logLimit != null) {
+        settings.setInt('log_limit', event.logLimit!);
       }
       yield SettingsState.clone(
         state,
         finishDelay: event.finishDelay,
         substituteNumbersDelay: event.substituteNumbersDelay,
-        log_limit: event.log_limit,
+        logLimit: event.logLimit,
       );
     } else if (event is SetDoubleValueEvent) {
       if (event.volume != null) {

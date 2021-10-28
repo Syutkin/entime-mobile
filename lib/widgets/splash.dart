@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 class Splash extends StatelessWidget {
   final String? text;
 
-  Splash({
-    this.text,
-  });
+  const Splash({this.text, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +18,10 @@ class Splash extends StatelessWidget {
     if (text != null) {
       return Text(
         text!,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
       );
     } else {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     }
   }
 }

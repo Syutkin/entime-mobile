@@ -8,7 +8,7 @@ Future<double?> setPitchPopup(BuildContext context, settings) async {
       // dialog is dismissible with a tap on the barrier
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Тембр голоса'),
+          title: const Text('Тембр голоса'),
           content: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
               return Column(

@@ -11,6 +11,8 @@ import 'package:entime/screens/screens.dart';
 class AboutPopup extends StatelessWidget {
   static const double _textVerticalSeparation = 18.0;
 
+  const AboutPopup({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -89,9 +91,9 @@ class AboutPopup extends StatelessWidget {
             String changelogData = await rootBundle.loadString('CHANGELOG.md');
             await Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) =>
-                    ChangelogScreen(changelogData)));
+                    ChangelogScreen(markdownData: changelogData)));
           },
-          child: Text('Список изменений'),
+          child: const Text('Список изменений'),
         ),
         TextButton(
           onPressed: () {

@@ -5,6 +5,8 @@ import 'package:entime/blocs/blocs.dart';
 import 'package:entime/utils/helper.dart';
 
 class Updater extends StatelessWidget {
+  const Updater({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UpdateBloc, UpdateState>(builder: (context, state) {
@@ -28,7 +30,7 @@ class Updater extends StatelessWidget {
         return ListTile(
           title: Stack(
             alignment: Alignment.center,
-            children: [
+            children: const [
               LinearProgressIndicator(
                 minHeight: 24.0,
                 value: null,
@@ -51,7 +53,7 @@ class Updater extends StatelessWidget {
       } else {
         return ListTile(
           contentPadding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 0.0),
-          title: Text('Проверить обновления'),
+          title: const Text('Проверить обновления'),
           onTap: () {
             BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
           },

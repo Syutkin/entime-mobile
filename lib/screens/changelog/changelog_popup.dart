@@ -26,10 +26,10 @@ Future<void> showChangelogAtStartup(
     builder: (BuildContext context) {
       return AlertDialog(
         // scrollable: true,
-        title: Text('Что нового'),
+        title: const Text('Что нового'),
         // content: changelogMarkdown(markdownData),
         // workaround with width, see https://github.com/flutter/flutter/issues/18108
-        content: Container(
+        content: SizedBox(
           width: double.maxFinite,
           child: changelogMarkdown(markdownData),
         ),

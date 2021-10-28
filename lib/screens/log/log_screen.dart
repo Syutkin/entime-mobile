@@ -10,9 +10,11 @@ import 'package:entime/utils/helper.dart';
 class LogScreen extends StatelessWidget {
   final _scrollController = ScrollController();
 
+  LogScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<LogBloc>(context).add(ShowLog());
+    BlocProvider.of<LogBloc>(context).add(const ShowLog());
     return WillPopScope(
       onWillPop: () async {
         BlocProvider.of<LogBloc>(context).add(HideLog());
@@ -39,7 +41,7 @@ class LogScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   var item = state.log![index];
                   return ListTile(
-                    contentPadding: EdgeInsets.all(0.0),
+                    contentPadding: const EdgeInsets.all(0.0),
                     title: Row(children: <Widget>[
                       Flexible(
                         flex: 10,
@@ -74,7 +76,7 @@ class LogScreen extends StatelessWidget {
               ),
             );
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
         }),
         persistentFooterButtons:
@@ -86,17 +88,17 @@ class LogScreen extends StatelessWidget {
   Widget _levelIcon(String level) {
     switch (level) {
       case 'Error':
-        return Icon(MdiIcons.alertOctagon);
+        return const Icon(MdiIcons.alertOctagon);
       case 'Warning':
-        return Icon(Icons.warning);
+        return const Icon(Icons.warning);
       case 'Information':
-        return Icon(Icons.info_outline);
+        return const Icon(Icons.info_outline);
       case 'Debug':
-        return Icon(MdiIcons.debugStepInto);
+        return const Icon(MdiIcons.debugStepInto);
       case 'Verbose':
-        return Icon(Icons.circle_notifications);
+        return const Icon(Icons.circle_notifications);
       default:
-        return Icon(MdiIcons.closeCircleOutline);
+        return const Icon(MdiIcons.closeCircleOutline);
     }
   }
 
@@ -105,20 +107,20 @@ class LogScreen extends StatelessWidget {
       case 'Bluetooth':
         switch (direction) {
           case 'In':
-            return Icon(MdiIcons.bluetoothTransfer);
+            return const Icon(MdiIcons.bluetoothTransfer);
           case 'Out':
-            return Icon(MdiIcons.bluetoothTransfer);
+            return const Icon(MdiIcons.bluetoothTransfer);
           case 'Undefined':
-            return Icon(MdiIcons.bluetooth);
+            return const Icon(MdiIcons.bluetooth);
           default:
-            return Icon(MdiIcons.bluetooth);
+            return const Icon(MdiIcons.bluetooth);
         }
       case 'Other':
-        return Icon(MdiIcons.cloudPrintOutline);
+        return const Icon(MdiIcons.cloudPrintOutline);
       case 'Unknown':
-        return Icon(Icons.help_outline);
+        return const Icon(Icons.help_outline);
       default:
-        return Icon(Icons.help_outline);
+        return const Icon(Icons.help_outline);
     }
   }
 
@@ -128,7 +130,7 @@ class LogScreen extends StatelessWidget {
         TextButton(
           onPressed: () async {
             BlocProvider.of<BluetoothBloc>(context)
-                .add(MessageReceived('F12:12:12,121#'));
+                .add(const MessageReceived('F12:12:12,121#'));
           },
           child: const Icon(Icons.build),
         ),

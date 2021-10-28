@@ -15,6 +15,8 @@ import 'package:entime/widgets/widgets.dart';
 import '../../utils/helper.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // Следим за повторной установкой стартового времени для участника
@@ -45,7 +47,7 @@ class HomeScreen extends StatelessWidget {
             // Если стартовое время уже присвоено другому номеру
             String text = '';
 
-            state.previousStart!.forEach((element) {
+            for (var element in state.previousStart!) {
               if (element.automaticstarttime == null &&
                   element.manualstarttime == null) {
                 text += 'Стартовое время ${state.startTime!.time} уже '
@@ -70,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                       '"${MaterialLocalizations.of(context).cancelButtonLabel}"\n';
                 }
               }
-            });
+            }
 
             final bool? update = await overwriteStartTime(
               context: context,
@@ -88,7 +90,7 @@ class HomeScreen extends StatelessWidget {
         return DefaultTabController(
           length: 3,
           child: Scaffold(
-            drawer: AppDrawer(),
+            drawer: const AppDrawer(),
             appBar: AppBar(
               title: _title(context),
               actions: <Widget>[
@@ -102,19 +104,19 @@ class HomeScreen extends StatelessWidget {
                   switch (index) {
                     case 0:
                       BlocProvider.of<TabBloc>(context)
-                          .add(TabUpdated(AppTab.init));
+                          .add(const TabUpdated(AppTab.init));
                       break;
                     case 1:
                       BlocProvider.of<TabBloc>(context)
-                          .add(TabUpdated(AppTab.start));
+                          .add(const TabUpdated(AppTab.start));
                       break;
                     case 2:
                       BlocProvider.of<TabBloc>(context)
-                          .add(TabUpdated(AppTab.finish));
+                          .add(const TabUpdated(AppTab.finish));
                       break;
                   }
                 },
-                tabs: <Widget>[
+                tabs: const <Widget>[
                   Tab(icon: Text('Начало')),
                   Tab(icon: Text('Старт')),
                   Tab(icon: Text('Финиш')),
@@ -162,7 +164,7 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
               ],
-              child: TabBarView(
+              child: const TabBarView(
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
                   InitScreen(),
@@ -183,7 +185,7 @@ class HomeScreen extends StatelessWidget {
       if (protocolState is ProtocolSelectedState) {
         return Text(basenameWithoutExtension(protocolState.databasePath));
       } else {
-        return Text('Entime');
+        return const Text('Entime');
       }
     });
   }
@@ -196,74 +198,74 @@ class HomeScreen extends StatelessWidget {
         if (protocolState is ProtocolSelectedState) {
           if (activeTab == AppTab.start) {
             menuItems.add(
-              PopupMenuItem(
+              const PopupMenuItem(
                   value: MenuButton.addRacer,
                   child: ListTile(
-                    leading: const Icon(Icons.add),
+                    leading: Icon(Icons.add),
                     title: Text('Добавить'),
                   )),
             );
           }
           menuItems.add(
-            PopupMenuItem(
+            const PopupMenuItem(
                 value: MenuButton.share,
                 child: ListTile(
-                  leading: const Icon(Icons.share),
+                  leading: Icon(Icons.share),
                   title: Text('Поделиться'),
                 )),
           );
         } else {
           menuItems.add(
-            PopupMenuItem(
+            const PopupMenuItem(
                 value: MenuButton.selectStartProtocol,
                 child: ListTile(
-                  leading: const Icon(MdiIcons.database),
+                  leading: Icon(MdiIcons.database),
                   title: Text('Стартовый протокол'),
                 )),
           );
         }
         if (activeTab == AppTab.start) {
           menuItems.add(
-            PopupMenuItem(
+            const PopupMenuItem(
                 value: MenuButton.countdown,
                 child: ListTile(
-                  leading: const Icon(MdiIcons.timer),
+                  leading: Icon(MdiIcons.timer),
                   title: Text('Обратный отсчёт'),
                 )),
           );
         }
         menuItems.add(
-          PopupMenuItem(
+          const PopupMenuItem(
               value: MenuButton.fab,
               child: ListTile(
-                leading: const Icon(MdiIcons.handBackLeft),
+                leading: Icon(MdiIcons.handBackLeft),
                 title: Text('FAB'),
               )),
         );
       } else {
         menuItems.add(
-          PopupMenuItem(
+          const PopupMenuItem(
               value: MenuButton.selectStartProtocol,
               child: ListTile(
-                leading: const Icon(MdiIcons.database),
+                leading: Icon(MdiIcons.database),
                 title: Text('Стартовый протокол'),
               )),
         );
         menuItems.add(
-          PopupMenuItem(
+          const PopupMenuItem(
               value: MenuButton.bluetooth,
               child: ListTile(
-                leading: const Icon(Icons.bluetooth),
+                leading: Icon(Icons.bluetooth),
                 title: Text('Bluetooth'),
               )),
         );
       }
       if (protocolState is ProtocolSelectedState && activeTab == AppTab.start) {
         menuItems.add(
-          PopupMenuItem(
+          const PopupMenuItem(
               value: MenuButton.importCsv,
               child: ListTile(
-                leading: const Icon(MdiIcons.import),
+                leading: Icon(MdiIcons.import),
                 title: Text('Импорт стартового протокола'),
               )),
         );
@@ -299,7 +301,7 @@ class HomeScreen extends StatelessWidget {
                 await addRacerPopup(context);
                 break;
               case MenuButton.selectStartProtocol:
-                RouteToSelectFileScreen(context);
+                routeToSelectFileScreen(context);
                 break;
               case MenuButton.bluetooth:
                 await selectBluetoothDevice(context);
@@ -330,29 +332,29 @@ class HomeScreen extends StatelessWidget {
           CheckedPopupMenuItem(
             value: FilterFinish.hideMarked,
             checked: !_bloc.state.hideMarked,
-            child: Text('Скрытые'),
+            child: const Text('Скрытые'),
           ),
         );
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideNumbers,
             checked: !_bloc.state.hideNumbers,
-            child: Text('С номерами'),
+            child: const Text('С номерами'),
           ),
         );
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideManual,
             checked: !_bloc.state.hideManual,
-            child: Text('Ручная отсечка'),
+            child: const Text('Ручная отсечка'),
           ),
         );
-        menuItems.add(PopupMenuDivider());
+        menuItems.add(const PopupMenuDivider());
         menuItems.add(
-          PopupMenuItem(
+          const PopupMenuItem(
             value: FilterFinish.setDefaults,
             child: ListTile(
-              leading: Container(width: 0, height: 0),
+              leading: SizedBox(width: 0, height: 0),
               title: Text('По умолчанию'),
             ),
           ),
@@ -375,7 +377,7 @@ class HomeScreen extends StatelessWidget {
                       SetBoolValueEvent(hideManual: !_bloc.state.hideManual));
                   break;
                 case FilterFinish.setDefaults:
-                  _bloc.add(SetBoolValueEvent(
+                  _bloc.add(const SetBoolValueEvent(
                     hideMarked: true,
                     hideNumbers: false,
                     hideManual: false,
@@ -384,7 +386,7 @@ class HomeScreen extends StatelessWidget {
               }
             });
       }
-      return Container(width: 0, height: 0);
+      return const SizedBox(width: 0, height: 0);
     });
   }
 }

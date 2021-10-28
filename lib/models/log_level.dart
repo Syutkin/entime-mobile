@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 
 enum LogLevel {
-  Error,
-  Warning,
-  Information,
-  Debug,
-  Verbose,
+  error,
+  warning,
+  information,
+  debug,
+  verbose,
 }
 
 extension LogLevelString on LogLevel {

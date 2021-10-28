@@ -13,7 +13,7 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
       builder: (BuildContext context) {
         return AlertDialog(
           scrollable: true,
-          title: Text('Количество отображамых строк в журнале'),
+          title: const Text('Количество отображамых строк в журнале'),
           content: Form(
             key: _formKey,
             onChanged: () {
@@ -25,7 +25,7 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: true,
-                  decoration: InputDecoration(labelText: 'Количество строк'),
+                  decoration: const InputDecoration(labelText: 'Количество строк'),
                   controller: _delayController,
                   validator: (value) {
                     if (value == null || value == '' || value == '-') {

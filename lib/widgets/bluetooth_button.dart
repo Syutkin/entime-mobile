@@ -7,7 +7,7 @@ import 'package:entime/screens/bluetooth/select_bonded_device.dart';
 class BluetoothButton extends StatelessWidget {
   final BuildContext context;
 
-  BluetoothButton({
+  const BluetoothButton({
     Key? key,
     required this.context,
   }) : super(key: key);

@@ -19,7 +19,7 @@ class BluetoothDisconnectingState extends BluetoothConnectionState {}
 class BluetoothDisconnectedState extends BluetoothConnectionState {
   final BluetoothDevice? bluetoothDevice;
 
-  BluetoothDisconnectedState({this.bluetoothDevice});
+  const BluetoothDisconnectedState({this.bluetoothDevice});
 
   @override
   List<Object?> get props => [bluetoothDevice];

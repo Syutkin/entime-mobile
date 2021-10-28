@@ -8,9 +8,7 @@ import 'package:entime/screens/screens.dart';
 import 'package:entime/widgets/splash.dart';
 
 class ModuleSettingsInitScreen extends StatelessWidget {
-  ModuleSettingsInitScreen({
-    Key? key,
-  }) : super(key: key);
+  const ModuleSettingsInitScreen({Key? key}) : super(key: key);
 
   Future<bool> _onBackPressed(BuildContext context, bool updated) async {
     if (updated) {
@@ -18,7 +16,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
           context: context,
           barrierDismissible: true,
           builder: (context) => AlertDialog(
-                title: Text('Записать новые настройки в модуль?'),
+                title: const Text('Записать новые настройки в модуль?'),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -50,7 +48,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => _onBackPressed(context, updated),
       child: Scaffold(
-        appBar: AppBar(title: Text('Настройки модуля')),
+        appBar: AppBar(title: const Text('Настройки модуля')),
         body: BlocBuilder<ModuleSettingsBloc, ModuleSettingsState>(
             builder: (context, state) {
           if (state is ModuleSettingsUpdated) {
@@ -58,9 +56,9 @@ class ModuleSettingsInitScreen extends StatelessWidget {
               onChanged: () => updated = true,
             );
           } else if (state is ModuleSettingsLoadError) {
-            return Splash(text: 'Ошибка загрузки настроек!');
+            return const Splash(text: 'Ошибка загрузки настроек!');
           } else {
-            return Splash(text: 'Ждём настройки...');
+            return const Splash(text: 'Ждём настройки...');
           }
         }),
       ),
@@ -71,7 +69,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
 class ModuleSettingsScreen extends StatelessWidget {
   final VoidCallback onChanged;
 
-  ModuleSettingsScreen({
+  const ModuleSettingsScreen({
     Key? key,
     required this.onChanged,
   }) : super(key: key);
@@ -287,7 +285,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Имя модуля',
-                subtitle: '${(_bloc.moduleSettings.bluetoothName)}',
+                subtitle: (_bloc.moduleSettings.bluetoothName),
                 leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (BuildContext context) {
                   onChanged();
@@ -325,7 +323,7 @@ class ModuleSettingsScreen extends StatelessWidget {
             ),
             SettingsTile(
               title: 'Сеть',
-              subtitle: '${(_bloc.moduleSettings.ssid)}',
+              subtitle: (_bloc.moduleSettings.ssid),
               leading: const Icon(MdiIcons.wifi),
               onPressed: (BuildContext context) {
                 onChanged();
@@ -424,7 +422,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Имя модуля',
-                subtitle: '${(_bloc.moduleSettings.bluetoothName)}',
+                subtitle: (_bloc.moduleSettings.bluetoothName),
                 leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (BuildContext context) {
                   onChanged();
@@ -478,7 +476,7 @@ class ModuleSettingsScreen extends StatelessWidget {
             ),
             SettingsTile(
               title: 'Сеть',
-              subtitle: '${(_bloc.moduleSettings.ssid)}',
+              subtitle: (_bloc.moduleSettings.ssid),
               leading: const Icon(MdiIcons.wifi),
               onPressed: (BuildContext context) async {
                 final String? ssid = await wifiSettingsPopup(

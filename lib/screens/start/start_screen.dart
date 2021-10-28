@@ -10,7 +10,7 @@ import 'package:entime/screens/screens.dart';
 import 'package:entime/utils/helper.dart';
 
 class StartScreen extends StatefulWidget {
-  StartScreen({
+  const StartScreen({
     Key? key,
   }) : super(key: key);
 
@@ -48,7 +48,7 @@ class _StartScreen extends State<StartScreen> {
                       key: UniqueKey(),
                       background: Container(
                           color: Theme.of(context).colorScheme.secondary,
-                          alignment: Alignment(1.0, 0.0),
+                          alignment: const Alignment(1.0, 0.0),
                           padding: const EdgeInsets.all(5.0),
                           child: Text('Не стартовал',
                               style: DefaultTextStyle.of(context)
@@ -117,8 +117,8 @@ class _StartScreen extends State<StartScreen> {
         } else {
           return Center(
             child: ListTile(
-              onTap: () => RouteToSelectFileScreen(context),
-              title: Text(
+              onTap: () => routeToSelectFileScreen(context),
+              title: const Text(
                 'Выберите или создайте стартовый протокол',
                 textAlign: TextAlign.center,
               ),
@@ -132,7 +132,7 @@ class _StartScreen extends State<StartScreen> {
         settingsState,
       ) {
         if (settingsState.startFab) {
-          return Container(
+          return SizedBox(
             height: settingsState.startFabSize,
             width: settingsState.startFabSize,
             child: FittedBox(
@@ -143,7 +143,7 @@ class _StartScreen extends State<StartScreen> {
             ),
           );
         }
-        return Container(width: 0, height: 0);
+        return const SizedBox(width: 0, height: 0);
       }),
       persistentFooterButtons:
           kReleaseMode ? null : _persistentFooterButtons(context),
@@ -198,10 +198,10 @@ class _StartScreen extends State<StartScreen> {
           child: Container(
             width: settingsState.countdownSize,
             height: settingsState.countdownSize,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
             ),
-            margin: EdgeInsets.all(8.0),
+            margin: const EdgeInsets.all(8.0),
             child: Material(
               elevation: 6, //default to FloatingButtonElevation
               type: MaterialType.circle,
@@ -216,7 +216,7 @@ class _StartScreen extends State<StartScreen> {
           ),
         );
       } else {
-        return Container(width: 0, height: 0);
+        return const SizedBox(width: 0, height: 0);
       }
     });
   }
@@ -230,7 +230,7 @@ class _StartScreen extends State<StartScreen> {
                 .style
                 .apply(color: Theme.of(context).colorScheme.onSecondary));
       } else {
-        return Container(width: 0, height: 0);
+        return const SizedBox(width: 0, height: 0);
       }
     });
   }

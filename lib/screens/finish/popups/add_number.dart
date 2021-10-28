@@ -17,7 +17,7 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
     builder: (BuildContext context) {
       return AlertDialog(
         scrollable: true,
-        title: Text('Введите номер финишировавшего участника'),
+        title: const Text('Введите номер финишировавшего участника'),
         content: Form(
           key: _formKey,
           onChanged: () {
@@ -29,7 +29,7 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
               TextFormField(
                 keyboardType: TextInputType.number,
                 autofocus: true,
-                decoration: InputDecoration(labelText: 'Номер'),
+                decoration: const InputDecoration(labelText: 'Номер'),
                 controller: _numberController,
                 validator: (value) {
                   if (value == null) return 'Неверный номер';
@@ -99,7 +99,7 @@ Future<bool?> updateFinishTimePopup(BuildContext context, int number) async {
     // dialog is dismissible with a tap on the barrier
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Предупреждение'),
+        title: const Text('Предупреждение'),
         content: Text(
             'Участнику с номером $number уже присвоено финишное время. Установить новое значение?'),
         actions: <Widget>[

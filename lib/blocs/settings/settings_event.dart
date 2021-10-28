@@ -15,7 +15,7 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool? sound;
   final bool? beep;
   final bool? voice;
-  final bool? voice_name;
+  final bool? voiceName;
   final bool? wakelock;
   final bool? startFab;
   final bool? finishFab;
@@ -31,7 +31,7 @@ class SetBoolValueEvent extends SettingsEvent {
     this.sound,
     this.beep,
     this.voice,
-    this.voice_name,
+    this.voiceName,
     this.wakelock,
     this.startFab,
     this.finishFab,
@@ -50,7 +50,7 @@ class SetBoolValueEvent extends SettingsEvent {
         sound,
         beep,
         voice,
-        voice_name,
+        voiceName,
         wakelock,
         startFab,
         finishFab,
@@ -75,8 +75,8 @@ class SetBoolValueEvent extends SettingsEvent {
     if (voice != null) {
       result += 'voice: $voice';
     }
-    if (voice_name != null) {
-      result += 'voice_name: $voice_name';
+    if (voiceName != null) {
+      result += 'voiceName: $voiceName';
     }
     if (wakelock != null) {
       result += 'wakelock: $wakelock';
@@ -116,12 +116,12 @@ class SetBoolValueEvent extends SettingsEvent {
 class SetIntValueEvent extends SettingsEvent {
   final int? finishDelay;
   final int? substituteNumbersDelay;
-  final int? log_limit;
+  final int? logLimit;
 
   const SetIntValueEvent({
     this.finishDelay,
     this.substituteNumbersDelay,
-    this.log_limit,
+    this.logLimit,
   });
 
   @override
@@ -129,7 +129,7 @@ class SetIntValueEvent extends SettingsEvent {
       [
         finishDelay,
         substituteNumbersDelay,
-        log_limit,
+        logLimit,
       ];
 
   @override
@@ -141,8 +141,8 @@ class SetIntValueEvent extends SettingsEvent {
     if (substituteNumbersDelay != null) {
       result += 'substituteNumbersDelay: $substituteNumbersDelay';
     }
-    if (log_limit != null) {
-      result += 'log_limit: $log_limit';
+    if (logLimit != null) {
+      result += 'log_limit: $logLimit';
     }
     result += ' }';
     return result;

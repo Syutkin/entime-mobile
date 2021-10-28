@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:pedantic/pedantic.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -190,7 +189,7 @@ class UpdateProvider {
     var _prefs = await SharedPreferences.getInstance();
     var previousVersion =
         Version.parse(_prefs.getString('previousVersion') ?? '0.0.0');
-    var currentVersion = Version.parse('${_packageInfo.version}');
+    var currentVersion = Version.parse(_packageInfo.version);
     // Не показывать ченджлог для не релизных версий и первого запуска
     // Не изменять значение последней запущенной версии для не релизных версий
     if (!currentVersion.isPreRelease) {

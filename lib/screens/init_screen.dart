@@ -11,7 +11,7 @@ import '../utils/helper.dart';
 import '../widgets/widgets.dart';
 
 class InitScreen extends StatefulWidget {
-  InitScreen({
+  const InitScreen({
     Key? key,
   }) : super(key: key);
 
@@ -22,44 +22,42 @@ class InitScreen extends StatefulWidget {
 class _InitScreen extends State<InitScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView(children: <Widget>[
-        _selectProtocol(),
-        _selectBluetooth(),
-        !kReleaseMode ? Header(text: 'Debug') : Container(width: 0, height: 0),
-        !kReleaseMode
-            ? _debugAddLogButton(context)
-            : Container(width: 0, height: 0),
-        !kReleaseMode
-            ? _debugLogButton(context)
-            : Container(width: 0, height: 0),
-        !kReleaseMode
-            ? _debugTestButton(context)
-            : Container(width: 0, height: 0),
-      ]),
-    );
+    return ListView(children: <Widget>[
+      _selectProtocol(),
+      _selectBluetooth(),
+      !kReleaseMode ? const Header(text: 'Debug') : const SizedBox(width: 0, height: 0),
+      !kReleaseMode
+          ? _debugAddLogButton(context)
+          : const SizedBox(width: 0, height: 0),
+      !kReleaseMode
+          ? _debugLogButton(context)
+          : const SizedBox(width: 0, height: 0),
+      !kReleaseMode
+          ? _debugTestButton(context)
+          : const SizedBox(width: 0, height: 0),
+    ]);
   }
 
   Widget _selectProtocol() {
-    final Widget title = Text('Стартовый протокол');
+    const Widget title = Text('Стартовый протокол');
     return BlocBuilder<ProtocolBloc, ProtocolState>(
         builder: (context, protocolState) {
       return ListTile(
-        onTap: () => RouteToSelectFileScreen(context),
+        onTap: () => routeToSelectFileScreen(context),
         leading: IconButton(
           icon: const Icon(MdiIcons.database),
-          onPressed: () => RouteToSelectFileScreen(context),
+          onPressed: () => routeToSelectFileScreen(context),
         ),
         title: title,
         subtitle: protocolState is ProtocolSelectedState
             ? Text(basename(protocolState.databasePath))
-            : Text('Нажмите чтобы выбрать'),
+            : const Text('Нажмите чтобы выбрать'),
       );
     });
   }
 
   Widget _selectBluetooth() {
-    final Widget title = Text('Bluetooth модуль');
+    const Widget title = Text('Bluetooth модуль');
     return BlocBuilder<BluetoothBloc, BluetoothConnectionState>(
         builder: (context, state) {
       return ListTile(
@@ -103,10 +101,10 @@ class _InitScreen extends State<InitScreen> {
   }
 
   void _moduleSettings(BuildContext context) {
-    BlocProvider.of<BluetoothBloc>(context).add(SendMessage('{"Read": true}'));
+    BlocProvider.of<BluetoothBloc>(context).add(const SendMessage('{"Read": true}'));
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) {
-        return ModuleSettingsInitScreen(
+        return const ModuleSettingsInitScreen(
             //moduleSettings: moduleSettings,
             );
       }),
@@ -122,20 +120,20 @@ class _InitScreen extends State<InitScreen> {
                 );
           }));
         },
-        child: Text('Show Log'));
+        child: const Text('Show Log'));
   }
 
   Widget _debugAddLogButton(BuildContext context) {
     return TextButton(
         onPressed: () {
-          BlocProvider.of<LogBloc>(context).add(LogAdd(
-            level: LogLevel.Error,
-            source: LogSource.Bluetooth,
+          BlocProvider.of<LogBloc>(context).add(const LogAdd(
+            level: LogLevel.error,
+            source: LogSource.bluetooth,
             rawData: 'rawData',
-            direction: LogSourceDirection.In,
+            direction: LogSourceDirection.input,
           ));
         },
-        child: Text('Add Log'));
+        child: const Text('Add Log'));
   }
 
   Widget _debugTestButton(BuildContext context) {
@@ -147,6 +145,6 @@ class _InitScreen extends State<InitScreen> {
           // showChangelogAtStartup(context, '0.3.2');
           BlocProvider.of<AudioBloc>(context).add(Countdown());
         },
-        child: Text('Voice Test'));
+        child: const Text('Voice Test'));
   }
 }

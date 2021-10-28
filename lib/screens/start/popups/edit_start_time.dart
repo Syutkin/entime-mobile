@@ -81,13 +81,13 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
             children: <Widget>[
               Text(
                 item.name ?? 'Без имени',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               TextFormField(
                 controller: _automaticCorrectionController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  icon: const Icon(MdiIcons.cpu64Bit),
+                decoration: const InputDecoration(
+                  icon: Icon(MdiIcons.cpu64Bit),
                   labelText: 'Поправка',
                 ),
                 validator: (value) => _validateCorrection(value),
@@ -95,18 +95,18 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
               TextFormField(
                 controller: _automaticStartTimeController,
                 keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Время старта',
-                  icon: const Icon(MdiIcons.cpu64Bit),
+                  icon: Icon(MdiIcons.cpu64Bit),
                 ),
                 validator: (value) => _validateStartTime(value),
               ),
               TextFormField(
                 controller: _automaticPhoneTimeController,
 //                keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Время старта на смартфоне',
-                  icon: const Icon(MdiIcons.cellphone),
+                  icon: Icon(MdiIcons.cellphone),
                 ),
                 readOnly: true,
 //                validator: (value) => _validateStartTime(value),
@@ -114,8 +114,8 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
               TextFormField(
                 controller: _manualCorrectionController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  icon: const Icon(MdiIcons.handBackLeft),
+                decoration: const InputDecoration(
+                  icon: Icon(MdiIcons.handBackLeft),
                   labelText: 'Поправка',
                 ),
                 validator: (value) => _validateCorrection(value),
@@ -123,9 +123,9 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
               TextFormField(
                 controller: _manualStartTimeController,
                 keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Время старта',
-                  icon: const Icon(MdiIcons.handBackLeft),
+                  icon: Icon(MdiIcons.handBackLeft),
                 ),
                 validator: (value) => _validateStartTime(value),
               ),

@@ -61,9 +61,9 @@ class ModSettingsModelLed {
   Map<String, dynamic> toJson() => {
         'Read': read,
         'Type': type,
-        'Bluetooth': bluetooth == null ? null : bluetooth?.toJson(),
-        'WiFi': wiFi == null ? null : wiFi?.toJson(),
-        'LedPanel': ledPanel == null ? null : ledPanel?.toJson(),
+        'Bluetooth': bluetooth?.toJson(),
+        'WiFi': wiFi?.toJson(),
+        'LedPanel': ledPanel?.toJson(),
       };
 }
 
@@ -111,12 +111,12 @@ class ModSettingsModel {
   Map<String, dynamic> toJson() => {
         'Read': read,
         'Type': type,
-        'Bluetooth': bluetooth == null ? null : bluetooth?.toJson(),
-        'LoRa': loRa == null ? null : loRa?.toJson(),
-        'WiFi': wiFi == null ? null : wiFi?.toJson(),
-        'TFT': tft == null ? null : tft?.toJson(),
-        'Buzzer': buzzer == null ? null : buzzer?.toJson(),
-        'VCC': vcc == null ? null : vcc?.toJson(),
+        'Bluetooth': bluetooth?.toJson(),
+        'LoRa': loRa?.toJson(),
+        'WiFi': wiFi?.toJson(),
+        'TFT': tft?.toJson(),
+        'Buzzer': buzzer?.toJson(),
+        'VCC': vcc?.toJson(),
       };
 }
 

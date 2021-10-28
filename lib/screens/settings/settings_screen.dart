@@ -9,7 +9,7 @@ import 'package:entime/screens/screens.dart';
 import 'package:entime/models/models.dart';
 
 class SettingsScreen extends StatefulWidget {
-  SettingsScreen({
+  const SettingsScreen({
     Key? key,
   }) : super(key: key);
 
@@ -45,7 +45,7 @@ class _SettingsPageState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Настройки'),
+        title: const Text('Настройки'),
       ),
       body: settingsList(context),
     );
@@ -138,9 +138,9 @@ class _SettingsPageState extends State<SettingsScreen> {
                     title: 'Называть имена участников',
                     titleMaxLines: 2,
                     leading: const Icon(MdiIcons.textToSpeech),
-                    switchValue: settingsState.voice_name,
+                    switchValue: settingsState.voiceName,
                     onToggle: (bool value) {
-                      settingsBloc.add(SetBoolValueEvent(voice_name: value));
+                      settingsBloc.add(SetBoolValueEvent(voiceName: value));
                     },
                   ),
                   SettingsTile(
@@ -324,15 +324,15 @@ class _SettingsPageState extends State<SettingsScreen> {
                   SettingsTile(
                     title: 'Количество показываемых записей',
                     titleMaxLines: 2,
-                    subtitle: settingsState.log_limit > -1
-                        ? '${(settingsState.log_limit)}'
+                    subtitle: settingsState.logLimit > -1
+                        ? '${(settingsState.logLimit)}'
                         : 'без ограничений',
                     leading: const Icon(MdiIcons.filter),
                     onPressed: (BuildContext context) async {
                       int? value =
-                      await setLogLimitPopup(context, settingsState.log_limit);
+                      await setLogLimitPopup(context, settingsState.logLimit);
                       if (value != null) {
-                        settingsBloc.add(SetIntValueEvent(log_limit: value));
+                        settingsBloc.add(SetIntValueEvent(logLimit: value));
                       }
                     },
                   ),
@@ -361,7 +361,7 @@ class _SettingsPageState extends State<SettingsScreen> {
         .of<ThemeBloc>(context)
         .settings
         .getTheme();
-    AppTheme.values.forEach((element) {
+    for (var element in AppTheme.values) {
       result.add(SettingsTile(
         title: element.display(),
         leading: Container(
@@ -383,7 +383,7 @@ class _SettingsPageState extends State<SettingsScreen> {
           BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(element));
         },
       ));
-    });
+    }
     return result;
   }
 }

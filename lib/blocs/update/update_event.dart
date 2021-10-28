@@ -17,7 +17,7 @@ class UpdateDownloading extends UpdateEvent {
   final int bytes;
   final int total;
 
-  UpdateDownloading(
+  const UpdateDownloading(
     this.bytes,
     this.total,
   );

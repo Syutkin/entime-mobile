@@ -204,7 +204,7 @@ void main() {
         manualstarttime: '10:01:01,234',
         manualcorrection: 1234,
       );
-      expect(await ProtocolProvider.db.UpdateItemInfoAtStart(item), 1);
+      expect(await ProtocolProvider.db.updateItemInfoAtStart(item), 1);
       item = StartItem(
         id: 100,
         number: 2,
@@ -213,7 +213,7 @@ void main() {
         manualstarttime: '10:02:02,345',
         manualcorrection: 2345,
       );
-      expect(await ProtocolProvider.db.UpdateItemInfoAtStart(item), 1);
+      expect(await ProtocolProvider.db.updateItemInfoAtStart(item), 1);
       item = StartItem(
         id: 100,
         number: 6,
@@ -222,7 +222,7 @@ void main() {
         manualstarttime: '10:06:06,666',
         manualcorrection: 6666,
       );
-      expect(await ProtocolProvider.db.UpdateItemInfoAtStart(item), 0);
+      expect(await ProtocolProvider.db.updateItemInfoAtStart(item), 0);
     });
 
     test('setDNS', () async {
@@ -422,25 +422,25 @@ void main() {
 
     test('add', () async {
       var result = await LogProvider.db.add(
-          level: LogLevel.Information,
-          source: LogSource.Bluetooth,
+          level: LogLevel.information,
+          source: LogSource.bluetooth,
           rawData: 'rawData',
-          direction: LogSourceDirection.In);
+          direction: LogSourceDirection.input);
       expect(result, 1);
       result = await LogProvider.db.add(
-          level: LogLevel.Error, source: LogSource.Other, rawData: 'rawData');
+          level: LogLevel.error, source: LogSource.other, rawData: 'rawData');
       expect(result, 2);
       result = await LogProvider.db.add(
-          level: LogLevel.Debug,
-          source: LogSource.Unknown,
+          level: LogLevel.debug,
+          source: LogSource.unknown,
           rawData: 'rawData',
-          direction: LogSourceDirection.Undefined);
+          direction: LogSourceDirection.undefined);
       expect(result, 3);
       result = await LogProvider.db.add(
-          level: LogLevel.Verbose,
-          source: LogSource.Bluetooth,
+          level: LogLevel.verbose,
+          source: LogSource.bluetooth,
           rawData: 'rawData',
-          direction: LogSourceDirection.Out);
+          direction: LogSourceDirection.output);
       expect(result, 4);
     });
 
@@ -448,9 +448,9 @@ void main() {
       var result = await LogProvider.db.getLog();
       expect(result.length, 4);
       result = await LogProvider.db
-          .getLog(direction: [LogSourceDirection.In, LogSourceDirection.Out]);
+          .getLog(direction: [LogSourceDirection.input, LogSourceDirection.output]);
       expect(result.length, 2);
-      result = await LogProvider.db.getLog(source: [LogSource.Bluetooth]);
+      result = await LogProvider.db.getLog(source: [LogSource.bluetooth]);
       expect(result.length, 2);
       result = await LogProvider.db.getLog(limit: 3);
       expect(result.length, 3);

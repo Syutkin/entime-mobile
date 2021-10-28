@@ -7,7 +7,7 @@ import 'package:entime/blocs/blocs.dart';
 Future<void> addRacerPopup(BuildContext context) async {
   var time =
       Duration(hours: DateTime.now().hour, minutes: DateTime.now().minute) +
-          Duration(minutes: 1);
+          const Duration(minutes: 1);
   int number = 0;
   final _formKey = GlobalKey<FormState>();
   return showDialog<void>(
@@ -17,7 +17,7 @@ Future<void> addRacerPopup(BuildContext context) async {
     builder: (BuildContext context) {
       return AlertDialog(
         //scrollable: true,
-        title: Text('Добавить участника'),
+        title: const Text('Добавить участника'),
         content: Form(
           key: _formKey,
           onChanged: () {
@@ -29,7 +29,7 @@ Future<void> addRacerPopup(BuildContext context) async {
               TextFormField(
                 keyboardType: TextInputType.number,
                 autofocus: true,
-                decoration: InputDecoration(labelText: 'Номер'),
+                decoration: const InputDecoration(labelText: 'Номер'),
                 validator: (value) {
                   if (value == null) return 'Неверный номер';
                   int? num = int.tryParse(value);

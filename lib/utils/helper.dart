@@ -90,9 +90,9 @@ void scrollToEnd(ScrollController scrollController) {
   );
 }
 
-void RouteToSelectFileScreen(BuildContext context) async {
+void routeToSelectFileScreen(BuildContext context) async {
   await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-    return SelectFileScreen();
+    return const SelectFileScreen();
   }));
 }
 
@@ -119,6 +119,6 @@ TextStyle dBmTextStyle(int rssi) {
         color: Color.lerp(
             Colors.deepOrangeAccent, Colors.redAccent, -(rssi + 75) / 10));
   } else {
-    return TextStyle(color: Colors.redAccent);
+    return const TextStyle(color: Colors.redAccent);
   }
 }

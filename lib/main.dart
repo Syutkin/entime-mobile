@@ -114,20 +114,20 @@ class _EntimeAppState extends State<EntimeApp> with WidgetsBindingObserver {
         return MaterialApp(
           theme: stateTheme.themeData,
           title: 'Entime',
-          localizationsDelegates: [
+          localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: [
-            const Locale('ru', 'RU'), // Russian
-            const Locale('en', ''), // English, no country code
+          supportedLocales: const [
+            Locale('ru', 'RU'), // Russian
+            Locale('en', ''), // English, no country code
           ],
           //1. call BotToastInit
           builder: BotToastInit(),
           //2. registered route observer
           navigatorObservers: [BotToastNavigatorObserver()],
-          home: HomeScreen(),
+          home: const HomeScreen(),
         );
       }),
     );

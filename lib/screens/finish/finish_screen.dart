@@ -15,12 +15,14 @@ import 'package:entime/models/models.dart';
 enum FinishPopupMenu { clearNumber, hideAll }
 
 class FinishScreen extends StatefulWidget {
+  const FinishScreen({Key? key}) : super(key: key);
+
   @override
   _FinishPage createState() => _FinishPage();
 }
 
 class _FinishPage extends State<FinishScreen> {
-  var _tapPosition;
+  Offset? _tapPosition;
 
   void _storePosition(TapDownDetails details) {
     _tapPosition = details.globalPosition;
@@ -97,7 +99,7 @@ class _FinishPage extends State<FinishScreen> {
                   key: UniqueKey(),
                   background: Container(
                       color: Theme.of(context).colorScheme.secondary,
-                      alignment: Alignment(1.0, 0.0),
+                      alignment: const Alignment(1.0, 0.0),
                       padding: const EdgeInsets.all(5.0),
                       child: Text('Скрыть',
                           style: DefaultTextStyle.of(context).style.apply(
@@ -114,7 +116,7 @@ class _FinishPage extends State<FinishScreen> {
                     child: DragTarget(builder:
                             (context, List<int?> candidateData, rejectedData) {
                       return ListTile(
-                        contentPadding: EdgeInsets.all(0.0),
+                        contentPadding: const EdgeInsets.all(0.0),
                         onTap: () async {
                           await addNumberPopup(context, item);
 //                        _addNumber(context, item);
@@ -187,8 +189,8 @@ class _FinishPage extends State<FinishScreen> {
         } else {
           return Center(
             child: ListTile(
-              onTap: () => RouteToSelectFileScreen(context),
-              title: Text(
+              onTap: () => routeToSelectFileScreen(context),
+              title: const Text(
                 'Выберите или создайте стартовый протокол',
                 textAlign: TextAlign.center,
               ),
@@ -202,7 +204,7 @@ class _FinishPage extends State<FinishScreen> {
         settingsState,
       ) {
         if (settingsState.finishFab) {
-          return Container(
+          return SizedBox(
             height: settingsState.finishFabSize,
             width: settingsState.finishFabSize,
             child: FittedBox(
@@ -213,7 +215,7 @@ class _FinishPage extends State<FinishScreen> {
             ),
           );
         }
-        return Container(width: 0, height: 0);
+        return const SizedBox(width: 0, height: 0);
       }),
       persistentFooterButtons: _getFooterButtons(context),
     );
@@ -223,7 +225,7 @@ class _FinishPage extends State<FinishScreen> {
     return BlocBuilder<ProtocolBloc, ProtocolState>(
       builder: (context, state) {
         if (state is ProtocolSelectedState) {
-          return Container(
+          return SizedBox(
             height: 50.0,
             width: 400.0,
             child: ListView.builder(
@@ -236,7 +238,7 @@ class _FinishPage extends State<FinishScreen> {
                   feedback: _numberOnTrace(context, item.number),
                   childWhenDragging: Container(
                     margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    constraints: BoxConstraints(minWidth: 50, minHeight: 50),
+                    constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
                   ),
                   data: item.number,
                   child: GestureDetector(
@@ -251,7 +253,7 @@ class _FinishPage extends State<FinishScreen> {
             ),
           );
         } else {
-          return Container(width: 0.0, height: 0.0);
+          return const SizedBox(width: 0.0, height: 0.0);
         }
       },
     );
@@ -260,9 +262,9 @@ class _FinishPage extends State<FinishScreen> {
   Widget _numberOnTrace(BuildContext context, int number) {
     return Container(
       margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-      constraints: BoxConstraints(minWidth: 50, minHeight: 50),
+      constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(12.0)),
         color: Theme.of(context).colorScheme.secondary,
 //        color: Colors.blue,
       ),
@@ -284,7 +286,7 @@ class _FinishPage extends State<FinishScreen> {
         items: _getPopupMenu(context, number),
         context: context,
         position: RelativeRect.fromRect(
-            _tapPosition & Size(60, 60), // smaller rect, the touch area
+            _tapPosition! & const Size(60, 60), // smaller rect, the touch area
             Offset.zero &
                 overlay.semanticBounds.size // Bigger rect, the entire screen
             ));
@@ -307,19 +309,19 @@ class _FinishPage extends State<FinishScreen> {
     var list = <PopupMenuEntry<FinishPopupMenu>>[];
     if (number != null) {
       list.add(
-        PopupMenuItem(
+        const PopupMenuItem(
           value: FinishPopupMenu.clearNumber,
           child: Text('Убрать номер'),
         ),
       );
       list.add(
-        PopupMenuDivider(
+        const PopupMenuDivider(
           height: 5,
         ),
       );
     }
     list.add(
-      PopupMenuItem(
+      const PopupMenuItem(
         value: FinishPopupMenu.hideAll,
         child: Text('Скрыть всё'),
       ),
@@ -334,7 +336,7 @@ class _FinishPage extends State<FinishScreen> {
         items: _getNumberOnTracePopupMenu(context, number),
         context: context,
         position: RelativeRect.fromRect(
-            _tapPosition & Size(40, 40), // smaller rect, the touch area
+            _tapPosition! & const Size(40, 40), // smaller rect, the touch area
             Offset.zero &
                 overlay.semanticBounds.size // Bigger rect, the entire screen
             ));
@@ -366,7 +368,7 @@ class _FinishPage extends State<FinishScreen> {
       ),
     );
     list.add(
-      PopupMenuDivider(
+      const PopupMenuDivider(
         height: 5,
       ),
     );
@@ -425,7 +427,7 @@ class _FinishPage extends State<FinishScreen> {
                     //   level: [LogLevel.Error, LogLevel.Information, LogLevel.Debug],
                     // direction: [LogSourceDirection.In, LogSourceDirection.Out],
                     // source: [LogSource.Bluetooth]);
-                    BlocProvider.of<BluetoothBloc>(context).add(MessageReceived(
+                    BlocProvider.of<BluetoothBloc>(context).add(const MessageReceived(
                         'F12:12:12,121#\r\nF13:13:13,131#\r\nF14:14:14,141#\r\nF15:16:17,181#'));
                     //_parseBT("F19:24:05,123#");
 //            _parseBT("F19:25:57#");
@@ -477,7 +479,7 @@ class _FinishPage extends State<FinishScreen> {
   // т.к. создаётся новый неинициализированный таймер
   void _startTimer() {
     int? prevMinute;
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       var now = DateTime.now();
       if (prevMinute != now.minute && now.second > 0) {
         BlocProvider.of<ProtocolBloc>(context).add(ProtocolGetNumbersOnTrace());

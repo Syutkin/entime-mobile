@@ -15,7 +15,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
 
   UpdateBloc({
     required this.updater,
-  }) : super(UpdateInitial()) {
+  }) : super(const UpdateInitial()) {
     updater.setDownloadingHandler((current, total) {
       add(UpdateDownloading(current, total));
     });
@@ -45,7 +45,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       if (update) {
         yield UpdateAvailable(updater.latestVersion);
       } else {
-        yield UpdateInitial();
+        yield const UpdateInitial();
       }
     } else if (event is DownloadUpdate) {
       if (state is UpdateAvailable) {

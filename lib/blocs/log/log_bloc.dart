@@ -21,9 +21,9 @@ class LogBloc extends Bloc<LogEvent, LogState> {
 
   LogBloc({
     required this.settingsBloc,
-  }) : super(LogOpen()) {
+  }) : super(const LogOpen()) {
     settingsSubscription = settingsBloc.stream.listen((state) {
-      limit = state.log_limit;
+      limit = state.logLimit;
     });
   }
 
@@ -46,7 +46,7 @@ class LogBloc extends Bloc<LogEvent, LogState> {
       );
       if ((state as LogOpen).updateLogScreen != null &&
           (state as LogOpen).updateLogScreen == true) {
-        add(ShowLog());
+        add(const ShowLog());
         // log = await LogProvider.db.getLog(limit: limit);
         // yield LogOpen(
         //   log: log,

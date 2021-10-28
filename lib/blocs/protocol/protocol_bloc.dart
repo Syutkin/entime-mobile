@@ -108,7 +108,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       }
     } else if (event is DeselectProtocol) {
       await ProtocolProvider.db.setDbPath(null);
-      settingsBloc.add(SetStringValueEvent(recentFile: ''));
+      settingsBloc.add(const SetStringValueEvent(recentFile: ''));
       yield ProtocolNotSelectedState();
     } else if (event is ProtocolAddStartNumber) {
       // добавляет/заменяет номер и стартовое время в start
@@ -212,7 +212,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       }
     } else if (event is ProtocolUpdateItemInfoAtStart) {
       if (state is ProtocolSelectedState) {
-        await ProtocolProvider.db.UpdateItemInfoAtStart(event.item);
+        await ProtocolProvider.db.updateItemInfoAtStart(event.item);
         startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
         numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
         yield ProtocolSelectedState(

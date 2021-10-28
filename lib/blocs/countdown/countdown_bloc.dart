@@ -79,7 +79,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _countdown();
     });
   }
@@ -89,10 +89,10 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
       var now = DateTime.now();
       if (_nextStartTime != null) {
         if (_nextStartTime!.isAfter(now)) {
-          add(Tick('${_countdownDuration(_nextStartTime!.difference(now))}'));
+          add(Tick(_countdownDuration(_nextStartTime!.difference(now))));
         } else {
-          if (_nextStartTime!.isAfter(now.subtract(Duration(seconds: 10)))) {
-            add(Tick('GO'));
+          if (_nextStartTime!.isAfter(now.subtract(const Duration(seconds: 10)))) {
+            add(const Tick('GO'));
           } else {
             _nextStartTime = null;
           }
@@ -102,7 +102,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
           _nextStartTime = await _getNextStarttime(now);
           if (_nextStartTime == null) {
             isFinished = true;
-            add(Tick(''));
+            add(const Tick(''));
           }
         }
       }

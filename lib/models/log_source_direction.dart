@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 
 enum LogSourceDirection {
-  In,
-  Out,
-  Undefined,
+  input,
+  output,
+  undefined,
 }
 
 extension LogSourceDirectionString on LogSourceDirection? {
-  String get toStr => describeEnum(this ?? LogSourceDirection.Undefined);
+  String get toStr => describeEnum(this ?? LogSourceDirection.undefined);
 }

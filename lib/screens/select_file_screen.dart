@@ -13,7 +13,7 @@ import 'package:entime/blocs/blocs.dart';
 import 'package:entime/utils/helper.dart';
 
 class SelectFileScreen extends StatefulWidget {
-  SelectFileScreen({Key? key}) : super(key: key);
+  const SelectFileScreen({Key? key}) : super(key: key);
 
   @override
   _SelectFileScreenState createState() => _SelectFileScreenState();
@@ -24,7 +24,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Выберите файл'),
+        title: const Text('Выберите файл'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(MdiIcons.filePlusOutline),
@@ -95,7 +95,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                 ),
               );
             } else {
-              return Text('No data');
+              return const Text('No data');
             }
           }),
     );
@@ -157,7 +157,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Предупреждение'),
+          title: const Text('Предупреждение'),
           content: Text(
               'Соревнование с именем ${basename(localFileName)} уже существует и будет перезаписано'),
           actions: <Widget>[
@@ -185,17 +185,17 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
         return PopupMenuButton<int>(
           // child: PopupMenuButton<int>(
           itemBuilder: (context) => [
-            PopupMenuItem(
+            const PopupMenuItem(
               value: 2,
               child: ListTile(
-                leading: const Icon(Icons.share),
+                leading: Icon(Icons.share),
                 title: Text('Поделиться'),
               ),
             ),
-            PopupMenuItem(
+            const PopupMenuItem(
               value: 1,
               child: ListTile(
-                leading: const Icon(Icons.delete),
+                leading: Icon(Icons.delete),
                 title: Text('Удалить'),
               ),
             ),
@@ -236,7 +236,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           //scrollable: true,
-          title: Text('Создать'),
+          title: const Text('Создать'),
           content: Form(
             key: _formKey,
             onChanged: () {
@@ -248,7 +248,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                 TextFormField(
                   keyboardType: TextInputType.text,
                   autofocus: true,
-                  decoration: InputDecoration(labelText: 'Название'),
+                  decoration: const InputDecoration(labelText: 'Название'),
                   validator: (value) {
                     result = value;
                     if (value == null) return null;

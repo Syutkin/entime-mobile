@@ -72,6 +72,8 @@ class HelpPage extends StatelessWidget {
 После окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.
   ''';
 
+  const HelpPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

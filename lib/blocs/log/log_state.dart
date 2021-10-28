@@ -13,7 +13,7 @@ class LogOpen extends LogState {
   final List<Log>? log;
   final bool? updateLogScreen;
 
-  LogOpen({
+  const LogOpen({
     this.log,
     this.updateLogScreen,
   });

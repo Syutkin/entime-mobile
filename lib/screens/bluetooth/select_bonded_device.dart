@@ -11,7 +11,7 @@ import 'package:entime/screens/bluetooth/bluetooth_device_list_entry.dart';
 Future<void> selectBluetoothDevice(BuildContext context) async {
   BlocProvider.of<BluetoothBloc>(context).add(SelectDevice(
       await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-    return SelectBondedDeviceScreen();
+    return const SelectBondedDeviceScreen();
   }))));
 }
 
@@ -20,7 +20,8 @@ class SelectBondedDeviceScreen extends StatefulWidget {
   /// Then, if they are not available, they would be disabled from the selection.
   final bool checkAvailability;
 
-  const SelectBondedDeviceScreen({this.checkAvailability = true});
+  const SelectBondedDeviceScreen({this.checkAvailability = true, Key? key})
+      : super(key: key);
 
   @override
   _SelectBondedDeviceScreen createState() => _SelectBondedDeviceScreen();
@@ -115,13 +116,13 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
         .toList();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Выберите устройство'),
+        title: const Text('Выберите устройство'),
         actions: <Widget>[
           _isDiscovering
               ? FittedBox(
                   child: Container(
-                    margin: EdgeInsets.all(16.0),
-                    child: CircularProgressIndicator(
+                    margin: const EdgeInsets.all(16.0),
+                    child: const CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
                         Colors.white,
                       ),

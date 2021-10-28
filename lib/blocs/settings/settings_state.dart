@@ -9,7 +9,7 @@ class SettingsState extends Equatable {
 
   // голосовые сообщения
   final bool voice;
-  final bool voice_name;
+  final bool voiceName;
   final double volume; // громкость
   final double pitch; // тон речи
   final double rate; // скорость речи
@@ -51,13 +51,13 @@ class SettingsState extends Equatable {
   // лог
   // ограничение количества показываемых строк в окне лога
   // -1 = без ограничений
-  final int log_limit;
+  final int logLimit;
 
-  SettingsState({
+  const SettingsState({
     required this.sound,
     required this.beep,
     required this.voice,
-    required this.voice_name,
+    required this.voiceName,
     required this.volume,
     required this.pitch,
     required this.rate,
@@ -78,15 +78,15 @@ class SettingsState extends Equatable {
     required this.finishDelay,
     required this.substituteNumbers,
     required this.substituteNumbersDelay,
-    required this.log_limit,
+    required this.logLimit,
   });
 
   static SettingsState initial() {
-    return SettingsState(
+    return const SettingsState(
       sound: true,
       beep: true,
       voice: true,
-      voice_name: false,
+      voiceName: false,
       volume: 0.5,
       pitch: 1.0,
       rate: 0.8,
@@ -107,7 +107,7 @@ class SettingsState extends Equatable {
       finishDelay: 350,
       substituteNumbers: true,
       substituteNumbersDelay: 500,
-      log_limit: -1,
+      logLimit: -1,
     );
   }
 
@@ -116,7 +116,7 @@ class SettingsState extends Equatable {
     bool? sound,
     bool? beep,
     bool? voice,
-    bool? voice_name,
+    bool? voiceName,
     double? volume,
     double? pitch,
     double? rate,
@@ -137,12 +137,12 @@ class SettingsState extends Equatable {
     int? finishDelay,
     bool? substituteNumbers,
     int? substituteNumbersDelay,
-    int? log_limit,
+    int? logLimit,
   }) : this(
           sound: true,
           beep: true,
           voice: true,
-          voice_name: true,
+          voiceName: true,
           volume: 0.5,
           pitch: 1.0,
           rate: 0.8,
@@ -163,7 +163,7 @@ class SettingsState extends Equatable {
           finishDelay: 350,
           substituteNumbers: true,
           substituteNumbersDelay: 500,
-          log_limit: -1,
+          logLimit: -1,
         );
 
   SettingsState.clone(
@@ -171,7 +171,7 @@ class SettingsState extends Equatable {
     bool? sound,
     bool? beep,
     bool? voice,
-    bool? voice_name,
+    bool? voiceName,
     double? volume,
     double? pitch,
     double? rate,
@@ -192,12 +192,12 @@ class SettingsState extends Equatable {
     int? finishDelay,
     bool? substituteNumbers,
     int? substituteNumbersDelay,
-    int? log_limit,
+    int? logLimit,
   }) : this(
           sound: sound ?? state.sound,
           beep: beep ?? state.beep,
           voice: voice ?? state.voice,
-          voice_name: voice_name ?? state.voice_name,
+          voiceName: voiceName ?? state.voiceName,
           volume: volume ?? state.volume,
           pitch: pitch ?? state.pitch,
           rate: rate ?? state.rate,
@@ -219,7 +219,7 @@ class SettingsState extends Equatable {
           substituteNumbers: substituteNumbers ?? state.substituteNumbers,
           substituteNumbersDelay:
               substituteNumbersDelay ?? state.substituteNumbersDelay,
-          log_limit: log_limit ?? state.log_limit,
+          logLimit: logLimit ?? state.logLimit,
         );
 
   @override
@@ -227,7 +227,7 @@ class SettingsState extends Equatable {
         sound,
         beep,
         voice,
-        voice_name,
+        voiceName,
         volume,
         pitch,
         rate,
@@ -248,6 +248,6 @@ class SettingsState extends Equatable {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
-        log_limit,
+        logLimit,
       ];
 }

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
-  Header({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
+  const Header({required this.text, Key? key}) : super(key: key);
 
   final String text;
 
@@ -22,10 +19,10 @@ class Header extends StatelessWidget {
             color: Colors.black.withOpacity(0.25),
             blurRadius: 3.0, // has the effect of softening the shadow
             spreadRadius: 1.0, // has the effect of extending the shadow
-            offset: Offset(
-                2.0, // horizontal, move right 10
-                2.0, // vertical, move down 10
-                ),
+            offset: const Offset(
+              2.0, // horizontal, move right 10
+              2.0, // vertical, move down 10
+            ),
           )
         ],
       ),

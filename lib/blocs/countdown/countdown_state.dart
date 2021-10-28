@@ -13,7 +13,7 @@ class CountdownInitialState extends CountdownState {}
 class CountdownWorkingState extends CountdownState {
   final String text;
 
-  CountdownWorkingState(this.text);
+  const CountdownWorkingState(this.text);
 
   @override
   List<Object> get props => [text];
