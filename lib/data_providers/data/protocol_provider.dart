@@ -46,32 +46,36 @@ class ProtocolProvider {
       onCreate: (Database db, int version) async {
         await db.execute('''
         CREATE TABLE IF NOT EXISTS 'start' (
-        	'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-        	'number'	INTEGER NOT NULL UNIQUE,
-        	'starttime'	TEXT,
+        	'id'	                INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+        	'number'	            INTEGER NOT NULL UNIQUE,
+        	'starttime'	          TEXT,
         	'automaticstarttime'	TEXT,
         	'automaticcorrection'	INTEGER,
         	'automaticphonetime'	TEXT,
-        	'manualstarttime'	TEXT,
-        	'manualcorrection'	INTEGER,
-        	'finishtime'	TEXT
+        	'manualstarttime'	    TEXT,
+        	'manualcorrection'	  INTEGER,
+        	'finishtime'	        TEXT
         );''');
         await db.execute('''
         CREATE TABLE IF NOT EXISTS 'finish' (
-        	'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-        	'number'	INTEGER UNIQUE,
-        	'finishtime'	TEXT,
-        	'phonetime'	TEXT,
-        	'set'	INTEGER,
-        	'manual'	INTEGER
+        	'id'	        INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+        	'number'	    INTEGER UNIQUE,
+        	'finishtime'  TEXT,
+        	'phonetime'	  TEXT,
+        	'set'	        INTEGER,
+        	'manual'	    INTEGER
         );''');
         await db.execute('''
         CREATE TABLE IF NOT EXISTS 'main' (
-        	'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+          'id'      INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	        'category'	TEXT,
 	        'number'	INTEGER NOT NULL UNIQUE,
-	        'name'	TEXT
-	        );
-        ''');
+	        'name'	TEXT,
+	        'nickname'	TEXT,
+	        'age'	TEXT,
+	        'team'	TEXT,
+	        'city'	TEXT
+	       );''');
       },
 //      onUpgrade: (Database db, int oldVersion, int newVersion) async {
 //        print('onUpgrade');
@@ -387,6 +391,36 @@ class ProtocolProvider {
     List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
     return startProtocol;
+  }
+
+  // Загружает в протокол участников и их стартовое время (одно) из csv файла
+  Future<void> loadStartItem(List<StartItemCsv> items) async {
+    final db = await database;
+    final batch = db.batch();
+
+    for (var item in items) {
+      batch.insert(
+          'start',
+          {
+            'number': item.number,
+            'starttime': item.starttime,
+          },
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      batch.insert(
+          'main',
+          {
+            'number': item.number,
+            'category': item.category,
+            'name': item.name,
+            'nickname': item.nickname,
+            'age': item.age,
+            'team': item.team,
+            'city': item.city,
+          },
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    }
+    await batch.commit(noResult: true, continueOnError: true);
+    print('Database -> Loaded data from csv to start protocol');
   }
 
 // ----------------номера на трассе----------------

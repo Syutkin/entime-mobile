@@ -138,7 +138,7 @@ class _StartScreen extends State<StartScreen> {
             child: FittedBox(
               child: FloatingActionButton(
                 onPressed: () => _addManualStartTime(context),
-                child: const Icon(MdiIcons.hand),
+                child: const Icon(MdiIcons.handBackLeft),
               ),
             ),
           );
