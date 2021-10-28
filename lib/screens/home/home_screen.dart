@@ -236,7 +236,7 @@ class HomeScreen extends StatelessWidget {
           PopupMenuItem(
               value: MenuButton.fab,
               child: ListTile(
-                leading: const Icon(MdiIcons.hand),
+                leading: const Icon(MdiIcons.handBackLeft),
                 title: Text('FAB'),
               )),
         );
@@ -258,6 +258,17 @@ class HomeScreen extends StatelessWidget {
               )),
         );
       }
+      if (protocolState is ProtocolSelectedState && activeTab == AppTab.start) {
+        menuItems.add(
+          PopupMenuItem(
+              value: MenuButton.importCsv,
+              child: ListTile(
+                leading: const Icon(MdiIcons.import),
+                title: Text('Импорт стартового протокола'),
+              )),
+        );
+      }
+
       return PopupMenuButton<MenuButton>(
           itemBuilder: (context) => menuItems,
           onSelected: (value) async {
@@ -298,6 +309,11 @@ class HomeScreen extends StatelessWidget {
                     countdown: !BlocProvider.of<SettingsBloc>(context)
                         .state
                         .countdown));
+                break;
+              case MenuButton.importCsv:
+                // TODO: Handle this case.
+                BlocProvider.of<ProtocolBloc>(context)
+                    .add(ProtocolLoadStartFromCsv());
                 break;
             }
           });

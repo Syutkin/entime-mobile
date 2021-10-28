@@ -92,7 +92,7 @@ class LogScreen extends StatelessWidget {
       case 'Information':
         return Icon(Icons.info_outline);
       case 'Debug':
-        return Icon(MdiIcons.androidDebugBridge);
+        return Icon(MdiIcons.debugStepInto);
       case 'Verbose':
         return Icon(Icons.circle_notifications);
       default:

@@ -22,9 +22,7 @@ class ProtocolAddStartNumber extends ProtocolEvent {
   final StartTime startTime;
   final bool forceAdd;
 
-  const ProtocolAddStartNumber(
-      this.startTime,
-      [this.forceAdd = false]);
+  const ProtocolAddStartNumber(this.startTime, [this.forceAdd = false]);
 
   @override
   List<Object> get props => [startTime, forceAdd];
@@ -139,6 +137,8 @@ class ProtocolSetNumberToFinishTime extends ProtocolEvent {
 }
 
 class ProtocolGetNumbersOnTrace extends ProtocolEvent {}
+
+class ProtocolLoadStartFromCsv extends ProtocolEvent {}
 
 class ProtocolShareStart extends ProtocolEvent {}
 

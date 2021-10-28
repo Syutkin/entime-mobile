@@ -211,7 +211,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   ),
                   SettingsTile.switchTile(
                     title: 'Кнопка "отсечка"',
-                    leading: const Icon(MdiIcons.hand),
+                    leading: const Icon(MdiIcons.handBackLeft),
                     switchValue: settingsState.startFab,
                     onToggle: (bool value) {
                       settingsBloc.add(SetBoolValueEvent(startFab: value));
@@ -220,7 +220,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   SettingsTile(
                     title: 'Размер кнопки "отсечка"',
                     subtitle: '${(settingsState.startFabSize).round()}px',
-                    leading: const Icon(MdiIcons.hand),
+                    leading: const Icon(MdiIcons.handBackLeft),
                     onPressed: (BuildContext context) async {
                       var value = await setFloatingButtonSizePopup(
                           context, settingsState.startFabSize,
@@ -278,7 +278,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   ),
                   SettingsTile.switchTile(
                     title: 'Кнопка "отсечка"',
-                    leading: const Icon(MdiIcons.hand),
+                    leading: const Icon(MdiIcons.handBackLeft),
                     switchValue: settingsState.finishFab,
                     onToggle: (bool value) {
                       settingsBloc.add(SetBoolValueEvent(finishFab: value));
@@ -287,7 +287,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   SettingsTile(
                     title: 'Размер кнопки "отсечка"',
                     subtitle: '${(settingsState.finishFabSize).round()}px',
-                    leading: const Icon(MdiIcons.hand),
+                    leading: const Icon(MdiIcons.handBackLeft),
                     onPressed: (BuildContext context) async {
                       var value = await setFloatingButtonSizePopup(
                           context, settingsState.finishFabSize,

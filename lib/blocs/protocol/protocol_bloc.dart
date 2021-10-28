@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:entime/data_providers/csv/startlist_provider.dart';
 import 'package:equatable/equatable.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -332,6 +333,21 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       );
     } else if (event is ProtocolGetNumbersOnTrace) {
       if (ProtocolProvider.db.dbPath != null) {
+        numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+        yield ProtocolSelectedState(
+          startProtocol: startProtocol,
+          finishProtocol: finishProtocol,
+          numbersOnTraceProtocol: numbersOnTraceProtocol,
+          databasePath: ProtocolProvider.db.dbPath!,
+        );
+      }
+    } else if (event is ProtocolLoadStartFromCsv) {
+      if (state is ProtocolSelectedState) {
+        List<StartItemCsv> items = await getStartList();
+        // for (var item in items) {
+          await ProtocolProvider.db.loadStartItem(items);
+        // }
+        startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
         numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
         yield ProtocolSelectedState(
           startProtocol: startProtocol,

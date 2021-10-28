@@ -208,7 +208,7 @@ class _FinishPage extends State<FinishScreen> {
             child: FittedBox(
               child: FloatingActionButton(
                 onPressed: () => _addFinishTimeManual(context),
-                child: const Icon(MdiIcons.hand),
+                child: const Icon(MdiIcons.handBackLeft),
               ),
             ),
           );
@@ -465,7 +465,7 @@ class _FinishPage extends State<FinishScreen> {
 
   Widget _addIcon(int? manual) {
     if (manual == 1) {
-      return const Icon(MdiIcons.hand);
+      return const Icon(MdiIcons.handBackLeft);
     } else {
       return const Icon(MdiIcons.cpu64Bit);
     }

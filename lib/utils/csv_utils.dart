@@ -1,5 +1,7 @@
 import 'dart:io';
+
 import 'package:csv/csv.dart';
+import 'package:csv/csv_settings_autodetection.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -59,4 +61,39 @@ Future<String?> saveCsv(String csv, String suffix, String filePath) async {
   await file.writeAsString(csv);
   print('saveCsv -> Saved csv to file ${file.path}');
   return file.path;
+}
+
+//CSV to List<Map<String, String>> instead of the normal List<List<String>> scheme of the original csv package
+class CsvToMapConverter {
+  late CsvToListConverter converter;
+  CsvToMapConverter(
+      {String? fieldDelimiter = defaultFieldDelimiter,
+        String? textDelimiter = defaultTextDelimiter,
+        String? textEndDelimiter,
+        String? eol = defaultEol,
+        CsvSettingsDetector? csvSettingsDetector,
+        bool? shouldParseNumbers,
+        bool? allowInvalid}) {
+    converter = CsvToListConverter(
+        fieldDelimiter: fieldDelimiter,
+        textDelimiter: textDelimiter,
+        textEndDelimiter: textEndDelimiter,
+        eol: eol,
+        csvSettingsDetector: csvSettingsDetector,
+        shouldParseNumbers: shouldParseNumbers,
+        allowInvalid: allowInvalid);
+  }
+  List<Map<String, dynamic>> convert(String csv) {
+    List<List<dynamic>> list = converter.convert(csv);
+    List legend = list[0].map((category)=>category.toLowerCase()).toList();
+    List<Map<String, dynamic>> maps = [];
+    list.sublist(1).forEach((List l) {
+      Map<String, dynamic> map = {};
+      for (int i = 0; i < legend.length; i++) {
+        map.putIfAbsent('${legend[i]}', () => l[i]);
+      }
+      maps.add(map);
+    });
+    return maps;
+  }
 }
