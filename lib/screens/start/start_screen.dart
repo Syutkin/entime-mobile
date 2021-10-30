@@ -8,6 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:entime/blocs/blocs.dart';
 import 'package:entime/screens/screens.dart';
 import 'package:entime/utils/helper.dart';
+import 'package:entime/widgets/widgets.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({
@@ -36,80 +37,22 @@ class _StartScreen extends State<StartScreen> {
         if (state is ProtocolSelectedState) {
           return Stack(
             children: [
-              ListView.separated(
+              // ListView.separated(
+              ListView.builder(
                 itemCount: state.startProtocol.length,
                 itemBuilder: (BuildContext context, int index) {
                   var item = state.startProtocol[index];
-                  return GestureDetector(
+                  return StartItemTile(
+                    item: item,
                     onTap: () async {
                       await editStartTime(context, item);
                     },
-                    child: Dismissible(
-                      key: UniqueKey(),
-                      background: Container(
-                          color: Theme.of(context).colorScheme.secondary,
-                          alignment: const Alignment(1.0, 0.0),
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text('Не стартовал',
-                              style: DefaultTextStyle.of(context)
-                                  .style
-                                  .apply(fontSizeFactor: 2.0))),
-                      direction: DismissDirection.endToStart,
-                      onDismissed: (direction) {
-                        BlocProvider.of<ProtocolBloc>(context)
-                            .add(ProtocolSetDNS(number: item.number));
-                      },
-                      child: Row(children: <Widget>[
-                        Flexible(
-                          flex: 15,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              item.number.toString(),
-                              style: DefaultTextStyle.of(context).style.apply(
-                                  fontSizeFactor: 2.0, fontWeightDelta: 2),
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 30,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(item.starttime ?? '',
-                                style: DefaultTextStyle.of(context)
-                                    .style
-                                    .apply(fontSizeFactor: 1.5)),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 30,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child:
-                                Text(strip(item.manualcorrection.toString())),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 15,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                                strip(item.automaticcorrection.toString()),
-                                style: DefaultTextStyle.of(context)
-                                    .style
-                                    .apply(fontSizeFactor: 1.5)),
-                          ),
-                        ),
-                      ]),
-                    ),
+                    onDismissed: (direction) {
+                      BlocProvider.of<ProtocolBloc>(context)
+                          .add(ProtocolSetDNS(number: item.number));
+                    },
                   );
                 },
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(
-                  indent: 10,
-                  endIndent: 10,
-                  thickness: 2,
-                ),
               ),
               _showCountdown(),
             ],

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:entime/widgets/finish_item_tile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -89,101 +90,37 @@ class _FinishPage extends State<FinishScreen> {
             });
           }
           return Scrollbar(
-            child: ListView.separated(
+            child: ListView.builder(
               controller: _scrollController,
               shrinkWrap: true,
               itemCount: state.finishProtocol.length,
               itemBuilder: (BuildContext context, int index) {
                 var item = state.finishProtocol[index];
-                return Dismissible(
-                  key: UniqueKey(),
-                  background: Container(
-                      color: Theme.of(context).colorScheme.secondary,
-                      alignment: const Alignment(1.0, 0.0),
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text('Скрыть',
-                          style: DefaultTextStyle.of(context).style.apply(
-                              fontSizeFactor: 1.5,
-                              color:
-                                  Theme.of(context).colorScheme.onSecondary))),
-                  direction: DismissDirection.horizontal,
+                return FinishItemTile(
+                  item: item,
+                  onTap: () async {
+                    await addNumberPopup(context, item);
+                  },
+                  onLongPress: () async {
+                    _clearPopup(context, item.number);
+                  },
+                  onAccept: (data) {
+                    if (data != null) {
+                      BlocProvider.of<ProtocolBloc>(context)
+                          .add(ProtocolSetNumberToFinishTime(
+                        id: item.id,
+                        number: data as int,
+                        finishTime: item.finishtime,
+                      ));
+                    }
+                  },
+                  onTapDown: _storePosition,
                   onDismissed: (direction) {
                     BlocProvider.of<ProtocolBloc>(context)
                         .add(ProtocolHideFinishTime(id: item.id));
                   },
-                  child: GestureDetector(
-                    onTapDown: _storePosition,
-                    child: DragTarget(builder:
-                            (context, List<int?> candidateData, rejectedData) {
-                      return ListTile(
-                        contentPadding: const EdgeInsets.all(0.0),
-                        onTap: () async {
-                          await addNumberPopup(context, item);
-//                        _addNumber(context, item);
-                        },
-                        onLongPress: () async {
-                          if (item.number != null) {
-                            _clearPopup(context, item.number!);
-                          }
-                        },
-                        title: Row(children: <Widget>[
-                          Flexible(
-                            flex: 15,
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: _addIcon(
-                                  item.manual), //Icon(Icons.add_circle),
-                            ),
-                          ),
-                          Flexible(
-                            flex: 65,
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(strip(item.finishtime),
-                                  style: DefaultTextStyle.of(context)
-                                      .style
-                                      .apply(fontSizeFactor: 2.0)),
-                            ),
-                          ),
-                          Flexible(
-                            flex: 20,
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(strip(item.number.toString()),
-                                  style: DefaultTextStyle.of(context)
-                                      .style
-                                      .apply(fontSizeFactor: 2.0)),
-                            ),
-                          ),
-                        ]),
-                      );
-                    },
-                        // не даёт переписать номер через drag'n'drop
-                        onWillAccept: (data) {
-                      if (item.number != null) {
-                        return false;
-                      } else {
-                        return true;
-                      }
-                    }, onAccept: (data) {
-                      if (data != null) {
-                        BlocProvider.of<ProtocolBloc>(context)
-                            .add(ProtocolSetNumberToFinishTime(
-                          id: item.id,
-                          number: data as int,
-                          finishTime: item.finishtime,
-                        ));
-                      }
-                    }),
-                  ),
                 );
               },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(
-                indent: 10,
-                endIndent: 10,
-                thickness: 2,
-              ),
             ),
           );
         } else {
@@ -238,7 +175,8 @@ class _FinishPage extends State<FinishScreen> {
                   feedback: _numberOnTrace(context, item.number),
                   childWhenDragging: Container(
                     margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
+                    constraints:
+                        const BoxConstraints(minWidth: 50, minHeight: 50),
                   ),
                   data: item.number,
                   child: GestureDetector(
@@ -279,7 +217,7 @@ class _FinishPage extends State<FinishScreen> {
     );
   }
 
-  void _clearPopup(context, int number) async {
+  void _clearPopup(context, int? number) async {
     final RenderBox overlay =
         Overlay.of(context)!.context.findRenderObject() as RenderBox;
     FinishPopupMenu? result = await showMenu<FinishPopupMenu>(
@@ -293,8 +231,10 @@ class _FinishPage extends State<FinishScreen> {
     if (result != null) {
       switch (result) {
         case FinishPopupMenu.clearNumber:
-          BlocProvider.of<ProtocolBloc>(context)
-              .add(ProtocolClearNumberAtFinish(number: number));
+          if (number != null) {
+            BlocProvider.of<ProtocolBloc>(context)
+                .add(ProtocolClearNumberAtFinish(number: number));
+          }
           break;
         case FinishPopupMenu.hideAll:
           BlocProvider.of<ProtocolBloc>(context)
@@ -427,8 +367,9 @@ class _FinishPage extends State<FinishScreen> {
                     //   level: [LogLevel.Error, LogLevel.Information, LogLevel.Debug],
                     // direction: [LogSourceDirection.In, LogSourceDirection.Out],
                     // source: [LogSource.Bluetooth]);
-                    BlocProvider.of<BluetoothBloc>(context).add(const MessageReceived(
-                        'F12:12:12,121#\r\nF13:13:13,131#\r\nF14:14:14,141#\r\nF15:16:17,181#'));
+                    BlocProvider.of<BluetoothBloc>(context).add(
+                        const MessageReceived(
+                            'F12:12:12,121#\r\nF13:13:13,131#\r\nF14:14:14,141#\r\nF15:16:17,181#'));
                     //_parseBT("F19:24:05,123#");
 //            _parseBT("F19:25:57#");
 //            var _deltas = List<int>();
@@ -463,14 +404,6 @@ class _FinishPage extends State<FinishScreen> {
     var time = DateFormat('HH:mm:ss,S').format(now);
     BlocProvider.of<ProtocolBloc>(context)
         .add(ProtocolAddFinishTimeManual(time: time));
-  }
-
-  Widget _addIcon(int? manual) {
-    if (manual == 1) {
-      return const Icon(MdiIcons.handBackLeft);
-    } else {
-      return const Icon(MdiIcons.cpu64Bit);
-    }
   }
 
   // таймер для обновления участников на трассе
