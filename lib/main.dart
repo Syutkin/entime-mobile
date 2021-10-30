@@ -51,7 +51,7 @@ Future<void> runMain() async {
           create: (context) => CountdownBloc(
             protocolBloc: BlocProvider.of<ProtocolBloc>(context),
             tabBloc: BlocProvider.of<TabBloc>(context),
-            settingsBloc: BlocProvider.of<SettingsBloc>(context),
+            // settingsBloc: BlocProvider.of<SettingsBloc>(context),
           ),
         ),
         BlocProvider<BluetoothBloc>(

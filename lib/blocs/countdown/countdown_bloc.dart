@@ -19,8 +19,8 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   late final StreamSubscription protocolSubscription;
   late final TabBloc tabBloc;
   late final StreamSubscription tabSubscription;
-  late final SettingsBloc settingsBloc;
-  late final StreamSubscription settingsSubscription;
+  // late final SettingsBloc settingsBloc;
+  // late final StreamSubscription settingsSubscription;
 
   Timer? _timer;
   late List<StartItem> _participant;
@@ -30,8 +30,9 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   CountdownBloc({
     required this.protocolBloc,
     required this.tabBloc,
-    required this.settingsBloc,
+    // required this.settingsBloc,
   }) : super(CountdownInitialState()) {
+    _startTimer();
     protocolSubscription = protocolBloc.stream.listen((state) async {
       // обновляет отсчёт при событии в дб при открытом окне старта
       if (state is ProtocolSelectedState && tabBloc.state == AppTab.start) {
@@ -48,23 +49,23 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
         await _countdown();
       }
     });
-    settingsSubscription = settingsBloc.stream.listen((state) {
-      if ((_timer == null || !_timer!.isActive) && state.countdown) {
-        _startTimer();
-      } else {
-        _timer?.cancel();
-      }
-    });
-    if (settingsBloc.state.countdown) {
-      _startTimer();
-    }
+    // settingsSubscription = settingsBloc.stream.listen((state) {
+    // if ((_timer == null || !_timer!.isActive) && state.countdown) {
+    //   _startTimer();
+    // } else {
+    //   _timer?.cancel();
+    // }
+    // });
+    // if (settingsBloc.state.countdown) {
+    //   _startTimer();
+    // }
   }
 
   @override
   Future<void> close() {
     protocolSubscription.cancel();
     tabSubscription.cancel();
-    settingsSubscription.cancel();
+    // settingsSubscription.cancel();
     _timer?.cancel();
     return super.close();
   }
@@ -74,7 +75,12 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     CountdownEvent event,
   ) async* {
     if (event is Tick) {
-      yield CountdownWorkingState(event.text);
+      if (_nextStartTime == null) {
+        yield CountdownWorkingState(event.text, null);
+      } else {
+        yield CountdownWorkingState(
+            event.text, DateFormat('HH:mm:ss').format(_nextStartTime!));
+      }
     }
   }
 
@@ -91,7 +97,8 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
         if (_nextStartTime!.isAfter(now)) {
           add(Tick(_countdownDuration(_nextStartTime!.difference(now))));
         } else {
-          if (_nextStartTime!.isAfter(now.subtract(const Duration(seconds: 10)))) {
+          if (_nextStartTime!
+              .isAfter(now.subtract(const Duration(seconds: 10)))) {
             add(const Tick('GO'));
           } else {
             _nextStartTime = null;

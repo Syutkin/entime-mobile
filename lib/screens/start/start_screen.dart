@@ -33,23 +33,29 @@ class _StartScreen extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<ProtocolBloc, ProtocolState>(builder: (context, state) {
-        if (state is ProtocolSelectedState) {
+      body: BlocBuilder<ProtocolBloc, ProtocolState>(
+          builder: (context, protocolState) {
+        if (protocolState is ProtocolSelectedState) {
           return Stack(
             children: [
               // ListView.separated(
               ListView.builder(
-                itemCount: state.startProtocol.length,
+                itemCount: protocolState.startProtocol.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var item = state.startProtocol[index];
-                  return StartItemTile(
-                    item: item,
-                    onTap: () async {
-                      await editStartTime(context, item);
-                    },
-                    onDismissed: (direction) {
-                      BlocProvider.of<ProtocolBloc>(context)
-                          .add(ProtocolSetDNS(number: item.number));
+                  var item = protocolState.startProtocol[index];
+                  return BlocBuilder<CountdownBloc, CountdownState>(
+                    builder: (context, countdownState) {
+                      return StartItemTile(
+                        item: item,
+                        onTap: () async {
+                          await editStartTime(context, item);
+                        },
+                        onDismissed: (direction) {
+                          BlocProvider.of<ProtocolBloc>(context)
+                              .add(ProtocolSetDNS(number: item.number));
+                        },
+                        activeStartTime: _activeStartTime(countdownState),
+                      );
                     },
                   );
                 },
@@ -182,5 +188,11 @@ class _StartScreen extends State<StartScreen> {
     var time = DateTime.now();
     BlocProvider.of<ProtocolBloc>(context)
         .add(ProtocolUpdateManualStartTime(time: time));
+  }
+
+  String? _activeStartTime(CountdownState countdownState) {
+    if (countdownState is CountdownWorkingState) {
+      return countdownState.nextStartTime;
+    }
   }
 }

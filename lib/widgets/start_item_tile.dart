@@ -7,10 +7,12 @@ class StartItemTile extends StatelessWidget {
   final GestureTapCallback? onTap;
   final DismissDirectionCallback? onDismissed;
   final StartItem item;
+  final String? activeStartTime;
 
   const StartItemTile({
     Key? key,
     required this.item,
+    this.activeStartTime,
     this.onTap,
     this.onDismissed,
   }) : super(key: key);
@@ -37,7 +39,9 @@ class StartItemTile extends StatelessWidget {
         },
         child: Card(
           margin: const EdgeInsets.all(2),
-          // color: index == 0 ? Colors.amber : Colors.white,
+          color: item.starttime == activeStartTime
+              ? Theme.of(context).colorScheme.background
+              : Theme.of(context).colorScheme.surface,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Row(children: <Widget>[

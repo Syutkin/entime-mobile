@@ -1,5 +1,6 @@
 ## [0.4.1](https://github.com/Syutkin/entime-mobile/releases/tag/0.4.1)
 * Изменён вид стартового и финишного списка
+* Добавлено выделение цветом следующего стартующего
 
 ## [0.4.0](https://github.com/Syutkin/entime-mobile/releases/tag/0.4.0)
 * Улучшена внутренняя работа приложения

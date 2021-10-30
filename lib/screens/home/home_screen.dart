@@ -313,7 +313,6 @@ class HomeScreen extends StatelessWidget {
                         .countdown));
                 break;
               case MenuButton.importCsv:
-                // TODO: Handle this case.
                 BlocProvider.of<ProtocolBloc>(context)
                     .add(ProtocolLoadStartFromCsv());
                 break;

@@ -55,7 +55,9 @@ class _SettingsPageState extends State<SettingsScreen> {
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (BuildContext context, SettingsState settingsState) =>
-          SettingsList(
+          BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, ThemeState themeState) {
+          return SettingsList(
             sections: [
               SettingsSection(
                 title: 'Основные',
@@ -83,7 +85,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                   ),
                   SettingsTile.switchTile(
                     title: 'Переподключение',
-                    subtitle: 'Пытаться переподключится к модулю при обрыве связи',
+                    subtitle:
+                        'Пытаться переподключится к модулю при обрыве связи',
                     subtitleMaxLines: 3,
                     leading: const Icon(Icons.bluetooth),
                     switchValue: settingsState.reconnect,
@@ -204,8 +207,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                           context, settingsState.countdownSize,
                           text: 'Размер обратного отсчёта');
                       if (value != null) {
-                        settingsBloc.add(
-                            SetDoubleValueEvent(countdownSize: value));
+                        settingsBloc
+                            .add(SetDoubleValueEvent(countdownSize: value));
                       }
                     },
                   ),
@@ -226,8 +229,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                           context, settingsState.startFabSize,
                           text: 'Размер кнопки "отсечка" на стартовом экране');
                       if (value != null) {
-                        settingsBloc.add(
-                            SetDoubleValueEvent(startFabSize: value));
+                        settingsBloc
+                            .add(SetDoubleValueEvent(startFabSize: value));
                       }
                     },
                   ),
@@ -255,13 +258,13 @@ class _SettingsPageState extends State<SettingsScreen> {
                     leading: const Icon(MdiIcons.autoFix),
                     switchValue: settingsState.substituteNumbers,
                     onToggle: (bool value) {
-                      settingsBloc.add(
-                          SetBoolValueEvent(substituteNumbers: value));
+                      settingsBloc
+                          .add(SetBoolValueEvent(substituteNumbers: value));
                     },
                   ),
                   SettingsTile(
                     title:
-                    'Задержка перед автоматическим подставлением новых номеров',
+                        'Задержка перед автоматическим подставлением новых номеров',
                     subtitle: '${(settingsState.substituteNumbersDelay)}мс',
                     leading: const Icon(MdiIcons.clockOutline),
                     onPressed: (BuildContext context) async {
@@ -270,8 +273,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                           settingsState.substituteNumbersDelay,
                           'Задержка перед автоматическим подставлением новых номеров');
                       if (value != null) {
-                        settingsBloc
-                            .add(
+                        settingsBloc.add(
                             SetIntValueEvent(substituteNumbersDelay: value));
                       }
                     },
@@ -293,8 +295,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                           context, settingsState.finishFabSize,
                           text: 'Размер кнопки "отсечка" на финишном экране');
                       if (value != null) {
-                        settingsBloc.add(
-                            SetDoubleValueEvent(finishFabSize: value));
+                        settingsBloc
+                            .add(SetDoubleValueEvent(finishFabSize: value));
                       }
                     },
                   ),
@@ -329,8 +331,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                         : 'без ограничений',
                     leading: const Icon(MdiIcons.filter),
                     onPressed: (BuildContext context) async {
-                      int? value =
-                      await setLogLimitPopup(context, settingsState.logLimit);
+                      int? value = await setLogLimitPopup(
+                          context, settingsState.logLimit);
                       if (value != null) {
                         settingsBloc.add(SetIntValueEvent(logLimit: value));
                       }
@@ -351,16 +353,15 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ],
               ),
             ],
-          ),
+          );
+        },
+      ),
     );
   }
 
   List<SettingsTile> _themes() {
     List<SettingsTile> result = [];
-    AppTheme appTheme = BlocProvider
-        .of<ThemeBloc>(context)
-        .settings
-        .getTheme();
+    AppTheme appTheme = BlocProvider.of<ThemeBloc>(context).settings.getTheme();
     for (var element in AppTheme.values) {
       result.add(SettingsTile(
         title: element.display(),
