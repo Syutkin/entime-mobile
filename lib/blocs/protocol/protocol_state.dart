@@ -30,6 +30,9 @@ class ProtocolSelectedState extends ProtocolState {
   // Автоматически подставленный в финишное время номер
   final int? autoFinishNumber;
 
+  // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+  final int? awaitingNumber;
+
   ProtocolSelectedState({
     required this.startProtocol,
     required this.finishProtocol,
@@ -40,6 +43,7 @@ class ProtocolSelectedState extends ProtocolState {
     this.previousStart,
     this.startTime,
     this.autoFinishNumber,
+    required this.awaitingNumber,
   });
 
   @override
@@ -53,6 +57,7 @@ class ProtocolSelectedState extends ProtocolState {
         previousStart,
         startTime,
         autoFinishNumber,
+        awaitingNumber,
       ];
 }
 

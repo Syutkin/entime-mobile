@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:entime/widgets/finish_item_tile.dart';
+import 'package:entime/widgets/number_on_trace_tile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -171,21 +172,17 @@ class _FinishPage extends State<FinishScreen> {
               itemCount: state.numbersOnTraceProtocol.length,
               itemBuilder: (BuildContext context, int index) {
                 var item = state.numbersOnTraceProtocol[index];
-                return Draggable(
-                  feedback: _numberOnTrace(context, item.number),
-                  childWhenDragging: Container(
-                    margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    constraints:
-                        const BoxConstraints(minWidth: 50, minHeight: 50),
-                  ),
-                  data: item.number,
-                  child: GestureDetector(
-                    onTapDown: _storePosition,
-                    onLongPress: () async {
-                      _numberOnTracePopup(context, item.number);
-                    },
-                    child: _numberOnTrace(context, item.number),
-                  ),
+                return NumberOnTraceTile(
+                  number: item.number,
+                  onTap: () {
+                    BlocProvider.of<ProtocolBloc>(context).add(
+                        ProtocolSelectAwaitingNumber(number: item.number));
+                  },
+                  onTapDown: _storePosition,
+                  onLongPress: () async {
+                    _numberOnTracePopup(context, item.number);
+                  },
+                  isSelected: item.number == state.awaitingNumber,
                 );
               },
             ),
@@ -194,26 +191,6 @@ class _FinishPage extends State<FinishScreen> {
           return const SizedBox(width: 0.0, height: 0.0);
         }
       },
-    );
-  }
-
-  Widget _numberOnTrace(BuildContext context, int number) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-      constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-        color: Theme.of(context).colorScheme.secondary,
-//        color: Colors.blue,
-      ),
-      child: Center(
-        child: Text(
-          strip(number.toString()),
-          style: DefaultTextStyle.of(context).style.apply(
-              fontSizeFactor: 2.0,
-              color: Theme.of(context).colorScheme.onSecondary),
-        ),
-      ),
     );
   }
 

@@ -161,7 +161,8 @@ class ProtocolProvider {
       assert(dateGoTime != null);
       return null;
     }
-    final DateTime timeBefore = dateGoTime.subtract(const Duration(seconds: 15));
+    final DateTime timeBefore =
+        dateGoTime.subtract(const Duration(seconds: 15));
     final DateTime timeAfter = dateGoTime.add(const Duration(seconds: 15));
     final String before = DateFormat('HH:mm:ss').format(timeBefore);
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
@@ -488,9 +489,10 @@ class ProtocolProvider {
     bool substituteNumbers = false,
     int substituteNumbersDelay = 0,
     String? debugTimeNow,
+    int? number,
   }) async {
     int? hide;
-    int? number;
+    // int? number;
     // узнаём предыдущее нескрытое автоматическое время
     final prevFinishTime = await _prevFinishTime();
     // проверяем разницу между предыдущей и поступившей отсечкой
@@ -506,10 +508,12 @@ class ProtocolProvider {
         hide = 1;
       }
     }
-    // если автоматически ставим номера, то ставим номер только в нескрытую отсечку,
+
+    // если номер не был передан, пробуем автоматически поставить номер
+    // если автоматически ставим номер, то ставим номер только в нескрытую отсечку,
     // если разница между предыдущим временем с финишем больше настройки
     // или нет предыдущей нескрытой отсечки
-    if (substituteNumbers && hide == null) {
+    if (number == null && substituteNumbers && hide == null) {
       // если нет нескрытого предыдущего времени - ставим номер
       if (prevFinishTime == null) {
         number = await _getAwaitingNumber(debugTimeNow);

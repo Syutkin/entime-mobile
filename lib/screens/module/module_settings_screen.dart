@@ -147,7 +147,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 onToggle: (bool value) {
                   onChanged();
                   //moduleSettings.lora = value;
-                  //ToDo;
+                  //ToDo LoRa;
                 },
               ),
               SettingsTile(
@@ -156,7 +156,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.wave),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo LoRa;
                 },
               ),
               SettingsTile(
@@ -165,7 +165,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.wave),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo LoRa;
                 },
               ),
               SettingsTile(
@@ -174,7 +174,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.wave),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo LoRa;
                 },
               ),
               SettingsTile(
@@ -183,7 +183,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.wave),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo LoRa;
                 },
               ),
               SettingsTile(
@@ -192,7 +192,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.wave),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo LoRa;
                 },
               ),
               SettingsTile(
@@ -201,7 +201,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.wave),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo LoRa;
                 },
               ),
               SettingsTile(
@@ -210,7 +210,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.wave),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo LoRa;
                 },
               ),
               SettingsTile.switchTile(
@@ -220,7 +220,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 onToggle: (bool value) {
                   onChanged();
                   //moduleSettings.crc = value;
-                  //ToDo;
+                  //ToDo LoRa;
                 },
               ),
             ],
@@ -235,7 +235,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 onToggle: (bool value) {
                   onChanged();
                   //moduleSettings.tft = value;
-                  //ToDo;
+                  //ToDo TFT;
                 },
               ),
               SettingsTile.switchTile(
@@ -245,7 +245,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 onToggle: (bool value) {
                   onChanged();
                   //moduleSettings.timeout = value;
-                  //ToDo;
+                  //ToDo TFT;
                 },
               ),
               SettingsTile(
@@ -255,7 +255,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.monitor),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo TFT;
                 },
               ),
               SettingsTile.switchTile(
@@ -265,7 +265,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 onToggle: (bool value) {
                   onChanged();
                   //moduleSettings.turnOnAtEvent = value;
-                  //ToDo;
+                  //ToDo TFT;
                 },
               ),
             ],
@@ -280,7 +280,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 onToggle: (bool value) {
                   onChanged();
                   //moduleSettings.bluetooth = value;
-                  //ToDo;
+                  //ToDo bluetooth on/off;
                 },
               ),
               SettingsTile(
@@ -289,7 +289,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo bluetooth module name;
                 },
               ),
               SettingsTile(
@@ -318,7 +318,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               onToggle: (bool value) {
                 onChanged();
                 //moduleSettings.wifi = value;
-                //ToDo;
+                //ToDo WiFi;
               },
             ),
             SettingsTile(
@@ -327,7 +327,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               leading: const Icon(MdiIcons.wifi),
               onPressed: (BuildContext context) {
                 onChanged();
-                //ToDo;
+                //ToDo WiFi;
               },
             ),
             SettingsTile(
@@ -336,7 +336,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.wifi),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo WiFi;
                 }),
           ]),
           SettingsSection(
@@ -417,7 +417,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 onToggle: (bool value) {
                   onChanged();
                   //moduleSettings.bluetooth = value;
-                  //ToDo;
+                  //ToDo bluetooth on/off;
                 },
               ),
               SettingsTile(
@@ -426,7 +426,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (BuildContext context) {
                   onChanged();
-                  //ToDo;
+                  //ToDo bluetooth module name;
                 },
               ),
               SettingsTile(

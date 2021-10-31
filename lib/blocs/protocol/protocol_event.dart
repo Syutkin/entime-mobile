@@ -143,3 +143,12 @@ class ProtocolLoadStartFromCsv extends ProtocolEvent {}
 class ProtocolShareStart extends ProtocolEvent {}
 
 class ProtocolShareFinish extends ProtocolEvent {}
+
+class ProtocolSelectAwaitingNumber extends ProtocolEvent {
+  final int number;
+
+  const ProtocolSelectAwaitingNumber({required this.number});
+
+  @override
+  List<Object> get props => [number];
+}
