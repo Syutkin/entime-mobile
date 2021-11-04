@@ -6,3 +6,4 @@ export 'updater.dart';
 export 'progress_refresh_action.dart';
 export 'start_item_tile.dart';
 export 'finish_item_tile.dart';
+export 'expanded_alert_dialog.dart';

@@ -152,3 +152,5 @@ class ProtocolSelectAwaitingNumber extends ProtocolEvent {
   @override
   List<Object> get props => [number];
 }
+
+class ProtocolDeselectAwaitingNumber extends ProtocolEvent {}

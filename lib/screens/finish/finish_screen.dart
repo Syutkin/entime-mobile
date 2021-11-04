@@ -165,24 +165,28 @@ class _FinishPage extends State<FinishScreen> {
         if (state is ProtocolSelectedState) {
           return SizedBox(
             height: 50.0,
-            width: 400.0,
+            width: double.maxFinite,
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: state.numbersOnTraceProtocol.length,
               itemBuilder: (BuildContext context, int index) {
                 var item = state.numbersOnTraceProtocol[index];
+                final isSelected = item.number == state.awaitingNumber;
                 return NumberOnTraceTile(
                   number: item.number,
                   onTap: () {
-                    BlocProvider.of<ProtocolBloc>(context).add(
-                        ProtocolSelectAwaitingNumber(number: item.number));
+                    isSelected
+                        ? BlocProvider.of<ProtocolBloc>(context)
+                            .add(ProtocolDeselectAwaitingNumber())
+                        : BlocProvider.of<ProtocolBloc>(context).add(
+                            ProtocolSelectAwaitingNumber(number: item.number));
                   },
                   onTapDown: _storePosition,
                   onLongPress: () async {
                     _numberOnTracePopup(context, item.number);
                   },
-                  isSelected: item.number == state.awaitingNumber,
+                  isSelected: isSelected,
                 );
               },
             ),

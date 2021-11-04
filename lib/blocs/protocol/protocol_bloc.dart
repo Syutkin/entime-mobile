@@ -405,6 +405,17 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           awaitingNumber: awaitingNumber,
         );
       }
+    } else if (event is ProtocolDeselectAwaitingNumber) {
+      if (state is ProtocolSelectedState) {
+        awaitingNumber = null;
+        yield ProtocolSelectedState(
+          startProtocol: startProtocol,
+          finishProtocol: finishProtocol,
+          numbersOnTraceProtocol: numbersOnTraceProtocol,
+          databasePath: ProtocolProvider.db.dbPath!,
+          awaitingNumber: awaitingNumber,
+        );
+      }
     }
   }
 }

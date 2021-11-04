@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:entime/blocs/blocs.dart';
+import 'package:entime/widgets/widgets.dart';
 
 Future<void> addRacerPopup(BuildContext context) async {
-  var time =
-      Duration(hours: DateTime.now().hour, minutes: DateTime.now().minute) +
-          const Duration(minutes: 1);
+  final now = DateTime.now();
+  final duration = Duration(hours: now.hour, minutes: now.minute) +
+      const Duration(minutes: 1);
+  var time = duration < const Duration(days: 1)
+      ? duration
+      : const Duration(minutes: 0);
   int number = 0;
   final _formKey = GlobalKey<FormState>();
   return showDialog<void>(
@@ -15,7 +19,8 @@ Future<void> addRacerPopup(BuildContext context) async {
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
     builder: (BuildContext context) {
-      return AlertDialog(
+      return ExpandedAlertDialog(
+        width: MediaQuery.of(context).size.width * 0.9,
         //scrollable: true,
         title: const Text('Добавить участника'),
         content: Form(
@@ -40,7 +45,13 @@ Future<void> addRacerPopup(BuildContext context) async {
                   return null;
                 },
               ),
-              Flexible(
+              SizedBox(
+                /// The CupertinoTimerPicker has a fixed size of 320 x 216, in logical pixels, with the exception
+                /// of [CupertinoTimerPickerMode.hms], which is 330 x 216. If the parent widget
+                /// provides more space than it needs, the picker will position itself according
+                /// to its [alignment] property.
+                width: 330,
+                height: 216,
                 child: CupertinoTimerPicker(
                   mode: CupertinoTimerPickerMode.hm,
                   initialTimerDuration: time,

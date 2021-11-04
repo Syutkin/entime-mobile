@@ -5,6 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:entime/blocs/protocol/protocol_bloc.dart';
 import 'package:entime/models/models.dart';
 import 'package:entime/utils/helper.dart';
+import 'package:entime/widgets/widgets.dart';
 
 Future<void> editStartTime(BuildContext context, StartItem item) async {
   var _automaticPhoneTimeController = TextEditingController();
@@ -31,7 +32,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
   }
 
   String? _validateStartTime(String? value) {
-    if (value == ''|| value == null) {
+    if (value == '' || value == null) {
       return null;
     }
     if (strTimeToDateTime(value) == null) {
@@ -44,7 +45,8 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
     bool update = false;
     if (item.automaticcorrection !=
         int.tryParse(_automaticCorrectionController.text)) {
-      item.automaticcorrection = int.tryParse(_automaticCorrectionController.text);
+      item.automaticcorrection =
+          int.tryParse(_automaticCorrectionController.text);
       update = true;
     }
     if ((item.automaticstarttime ?? '') != _automaticStartTimeController.text) {
@@ -68,9 +70,12 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
     builder: (BuildContext context) {
-      return AlertDialog(
+      return ExpandedAlertDialog(
+        width: MediaQuery.of(context).size.width * 0.9,
         scrollable: true,
-        title: Text('Участник №${item.number}'),
+        title: Text(item.name == null
+            ? 'Участник №${item.number}'
+            : '№${item.number}, ${item.name}'),
         content: Form(
           key: _formKey,
           onChanged: () {
@@ -79,10 +84,10 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(
-                item.name ?? 'Без имени',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
+              // Text(
+              //   item.name ?? 'Без имени',
+              //   style: const TextStyle(fontWeight: FontWeight.bold),
+              // ),
               TextFormField(
                 controller: _automaticCorrectionController,
                 keyboardType: TextInputType.number,
