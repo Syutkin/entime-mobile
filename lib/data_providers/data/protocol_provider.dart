@@ -90,7 +90,9 @@ class ProtocolProvider {
   Future<List<StartItem>> getAllParticipantsAtStart() async {
     final db = await database;
     var res = await db.rawQuery('''
-        SELECT start.id as id, start.number as number,
+        SELECT
+          start.id as id,
+          start.number as number,
           start.starttime as starttime,
           start.automaticstarttime as automaticstarttime,
           start.automaticcorrection as automaticcorrection,
@@ -98,7 +100,11 @@ class ProtocolProvider {
           start.manualstarttime as manualstarttime,
           start.manualcorrection as manualcorrection,
           start.finishtime as finishtime,
-          main.name as name
+          main.name as name,
+          main.nickname as nickname,
+          main.age as age,
+          main.team as team,
+          main.city as city
         FROM start, main
         WHERE starttime NOTNULL
           AND main.number = start.number

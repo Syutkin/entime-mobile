@@ -84,10 +84,30 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              // Text(
-              //   item.name ?? 'Без имени',
-              //   style: const TextStyle(fontWeight: FontWeight.bold),
-              // ),
+              item.nickname != null && item.nickname!.isNotEmpty
+                  ? Text(
+                      'Никнейм: ${item.nickname}',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    )
+                  : const SizedBox(),
+              item.city != null && item.city!.isNotEmpty
+                  ? Text(
+                      'Город: ${item.city}',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    )
+                  : const SizedBox(),
+              item.team != null && item.team!.isNotEmpty
+                  ? Text(
+                      'Команда: ${item.team}',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    )
+                  : const SizedBox(),
+              item.age != null && item.age!.isNotEmpty
+                  ? Text(
+                      'Возраст: ${item.age}',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    )
+                  : const SizedBox(),
               TextFormField(
                 controller: _automaticCorrectionController,
                 keyboardType: TextInputType.number,

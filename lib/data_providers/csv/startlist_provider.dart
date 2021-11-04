@@ -12,6 +12,7 @@ Future<List<StartItemCsv>> getStartList() async {
   try {
     var start = CsvToMapConverter(fieldDelimiter: ';')
         .convert(utf8.decode(file.bytes!));
+    print(start);
     List<StartItemCsv> startList = start.isNotEmpty
         ? start.map((c) => StartItemCsv.fromMap(c)).toList()
         : [];
