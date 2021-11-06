@@ -53,7 +53,6 @@ Future<void> runMain() async {
           create: (context) => CountdownBloc(
             protocolBloc: BlocProvider.of<ProtocolBloc>(context),
             tabBloc: BlocProvider.of<TabBloc>(context),
-            // settingsBloc: BlocProvider.of<SettingsBloc>(context),
           ),
         ),
         BlocProvider<BluetoothBloc>(
@@ -71,9 +70,6 @@ Future<void> runMain() async {
         BlocProvider<AppInfoCubit>(
           create: (context) => AppInfoCubit(appInfo: appInfo),
         ),
-        // BlocProvider<ThemeBloc>(
-        //   create: (context) => ThemeBloc(settings),
-        // ),
       ],
       child: EntimeApp(settings: settings),
     ),
@@ -98,11 +94,6 @@ class _EntimeAppState extends State<EntimeApp> with WidgetsBindingObserver {
     if (widget.settings.getBool('checkUpdates') ?? true) {
       BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
     }
-    // BlocProvider.of<LogBloc>(context).add(LogGet());
-//    BlocProvider.of<TimersBloc>(context).add(LoadTimers());
-//    BlocProvider.of<ProjectsBloc>(context).add(LoadProjects());
-//    BlocProvider.of<ThemeBloc>(context).add(LoadThemeEvent());
-//    BlocProvider.of<LocaleBloc>(context).add(LoadLocaleEvent());
   }
 
   @override

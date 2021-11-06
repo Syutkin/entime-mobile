@@ -118,8 +118,6 @@ class SettingsState extends Equatable {
         settings.getInt('substituteNumbersDelay') ?? 500;
     int logLimit = settings.getInt('log_limit') ?? -1;
     AppTheme appTheme = settings.getTheme();
-    // ThemeData themeData =
-    //     appThemeData[settings.getTheme()] ?? appThemeData[AppTheme.lightBlue]!;
 
     return SettingsState(
       sound: sound,
