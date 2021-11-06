@@ -54,7 +54,7 @@ class SettingsState extends Equatable {
   final int logLimit;
 
   // активная тема
-  final ThemeData themeData;
+  final AppTheme appTheme;
 
   const SettingsState({
     required this.sound,
@@ -82,7 +82,7 @@ class SettingsState extends Equatable {
     required this.substituteNumbers,
     required this.substituteNumbersDelay,
     required this.logLimit,
-    required this.themeData,
+    required this.appTheme,
   });
 
   static SettingsState initialize(SettingsProvider settings) {
@@ -117,8 +117,9 @@ class SettingsState extends Equatable {
     int substituteNumbersDelay =
         settings.getInt('substituteNumbersDelay') ?? 500;
     int logLimit = settings.getInt('log_limit') ?? -1;
-    ThemeData themeData =
-        appThemeData[settings.getTheme()] ?? appThemeData[AppTheme.lightBlue]!;
+    AppTheme appTheme = settings.getTheme();
+    // ThemeData themeData =
+    //     appThemeData[settings.getTheme()] ?? appThemeData[AppTheme.lightBlue]!;
 
     return SettingsState(
       sound: sound,
@@ -146,39 +147,12 @@ class SettingsState extends Equatable {
       substituteNumbers: substituteNumbers,
       substituteNumbersDelay: substituteNumbersDelay,
       logLimit: logLimit,
-      themeData: themeData,
+      appTheme: appTheme,
     );
   }
 
-  SettingsState.reset(
-    SettingsState state, {
-    bool? sound,
-    bool? beep,
-    bool? voice,
-    bool? voiceName,
-    double? volume,
-    double? pitch,
-    double? rate,
-    String? language,
-    String? recentFile,
-    bool? wakelock,
-    bool? startFab,
-    double? startFabSize,
-    bool? finishFab,
-    double? finishFabSize,
-    bool? countdown,
-    double? countdownSize,
-    bool? checkUpdates,
-    bool? hideMarked,
-    bool? hideNumbers,
-    bool? hideManual,
-    bool? reconnect,
-    int? finishDelay,
-    bool? substituteNumbers,
-    int? substituteNumbersDelay,
-    int? logLimit,
-    ThemeData? themeData,
-  }) : this(
+  SettingsState.reset(SettingsState state)
+      : this(
           sound: true,
           beep: true,
           voice: true,
@@ -204,7 +178,7 @@ class SettingsState extends Equatable {
           substituteNumbers: true,
           substituteNumbersDelay: 500,
           logLimit: -1,
-          themeData: appThemeData[AppTheme.lightBlue]!,
+          appTheme: AppTheme.lightBlue,
         );
 
   SettingsState.clone(
@@ -234,7 +208,7 @@ class SettingsState extends Equatable {
     bool? substituteNumbers,
     int? substituteNumbersDelay,
     int? logLimit,
-    ThemeData? themeData,
+    AppTheme? appTheme,
   }) : this(
           sound: sound ?? state.sound,
           beep: beep ?? state.beep,
@@ -262,8 +236,37 @@ class SettingsState extends Equatable {
           substituteNumbersDelay:
               substituteNumbersDelay ?? state.substituteNumbersDelay,
           logLimit: logLimit ?? state.logLimit,
-          themeData: themeData ?? state.themeData,
+          appTheme: appTheme ?? state.appTheme,
         );
+
+  void save(SettingsProvider settings) {
+    settings.setBool('sound', sound);
+    settings.setBool('beep', beep);
+    settings.setBool('voice', voice);
+    settings.setBool('voiceName', voiceName);
+    settings.setDouble('volume', volume);
+    settings.setDouble('pitch', pitch);
+    settings.setDouble('rate', rate);
+    settings.setString('language', language);
+    settings.setString('recentFile', recentFile);
+    settings.setBool('wakelock', wakelock);
+    settings.setBool('start_fab', startFab);
+    settings.setDouble('start_fab_size', startFabSize);
+    settings.setBool('finish_fab', finishFab);
+    settings.setDouble('finish_fab_size', finishFabSize);
+    settings.setBool('countdown', countdown);
+    settings.setDouble('countdownSize', countdownSize);
+    settings.setBool('checkUpdates', checkUpdates);
+    settings.setBool('hideMarked', hideMarked);
+    settings.setBool('hideNumbers', hideNumbers);
+    settings.setBool('hideManual', hideManual);
+    settings.setBool('reconnect', reconnect);
+    settings.setInt('finishDelay', finishDelay);
+    settings.setBool('substituteNumbers', substituteNumbers);
+    settings.setInt('substituteNumbersDelay', substituteNumbersDelay);
+    settings.setInt('log_limit', logLimit);
+    settings.setTheme(appTheme);
+  }
 
   @override
   List<Object> get props => [
@@ -292,6 +295,6 @@ class SettingsState extends Equatable {
         substituteNumbers,
         substituteNumbersDelay,
         logLimit,
-        themeData,
+        appTheme,
       ];
 }

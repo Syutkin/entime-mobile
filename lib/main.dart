@@ -1,14 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/data_providers/app_info/app_info_provider.dart';
-import 'package:entime/data_providers/settings/settings_provider.dart';
-import 'package:entime/data_providers/settings/shared_prefs_settings_provider.dart';
-import 'package:entime/data_providers/update/update_provider.dart';
-import 'package:entime/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'blocs/blocs.dart';
+import 'data_providers/app_info/app_info_provider.dart';
+import 'data_providers/settings/settings_provider.dart';
+import 'data_providers/settings/shared_prefs_settings_provider.dart';
+import 'data_providers/update/update_provider.dart';
+import 'models/theme.dart';
+import 'screens/screens.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -109,9 +111,10 @@ class _EntimeAppState extends State<EntimeApp> with WidgetsBindingObserver {
       providers: [
         RepositoryProvider<SettingsProvider>.value(value: widget.settings),
       ],
-      child: BlocBuilder<SettingsBloc, SettingsState>(builder: (context, settingsTheme) {
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, settingsTheme) {
         return MaterialApp(
-          theme: settingsTheme.themeData,
+          theme: appThemeData[settingsTheme.appTheme],
           title: 'Entime',
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,

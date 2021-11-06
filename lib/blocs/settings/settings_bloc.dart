@@ -146,9 +146,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       settings.setTheme(event.theme);
       yield SettingsState.clone(
         state,
-        themeData: appThemeData[event.theme],
+        appTheme: event.theme,
       );
     } else if (event is SetDefaultSettings) {
+      SettingsState.reset(state).save(settings);
       yield SettingsState.reset(state);
     }
   }
