@@ -53,6 +53,9 @@ class SettingsState extends Equatable {
   // -1 = без ограничений
   final int logLimit;
 
+  // активная тема
+  final ThemeData themeData;
+
   const SettingsState({
     required this.sound,
     required this.beep,
@@ -79,35 +82,71 @@ class SettingsState extends Equatable {
     required this.substituteNumbers,
     required this.substituteNumbersDelay,
     required this.logLimit,
+    required this.themeData,
   });
 
-  static SettingsState initial() {
-    return const SettingsState(
-      sound: true,
-      beep: true,
-      voice: true,
-      voiceName: false,
-      volume: 0.5,
-      pitch: 1.0,
-      rate: 0.8,
-      language: 'ru-RU',
-      recentFile: '',
-      wakelock: true,
-      startFab: true,
-      startFabSize: 75.0,
-      finishFab: true,
-      finishFabSize: 75.0,
-      countdown: true,
-      countdownSize: 75.0,
-      checkUpdates: true,
-      hideMarked: true,
-      hideNumbers: false,
-      hideManual: false,
-      reconnect: true,
-      finishDelay: 350,
-      substituteNumbers: true,
-      substituteNumbersDelay: 500,
-      logLimit: -1,
+  static SettingsState initialize(SettingsProvider settings) {
+    var sound = settings.getBool('sound') ?? true;
+    var beep = settings.getBool('beep') ?? true;
+    var voice = settings.getBool('voice') ?? true;
+    var voiceName = settings.getBool('voiceName') ?? false;
+    var volume = settings.getDouble('volume') ?? 0.5;
+    var pitch = settings.getDouble('pitch') ?? 1.0;
+    var rate = settings.getDouble('rate') ?? 0.8;
+    var language = settings.getString('language') ?? 'ru-RU';
+    var recentFile = settings.getString('recentFile') ?? '';
+    var wakelock = settings.getBool('wakelock') ?? true;
+    if (wakelock) {
+      Wakelock.enable();
+    } else {
+      Wakelock.disable();
+    }
+    var startFab = settings.getBool('start_fab') ?? true;
+    var startFabSize = settings.getDouble('start_fab_size') ?? 75.0;
+    var finishFab = settings.getBool('finish_fab') ?? true;
+    var finishFabSize = settings.getDouble('finish_fab_size') ?? 75.0;
+    var countdown = settings.getBool('countdown') ?? true;
+    var countdownSize = settings.getDouble('countdownSize') ?? 75.0;
+    var checkUpdates = settings.getBool('checkUpdates') ?? true;
+    bool hideMarked = settings.getBool('hideMarked') ?? true;
+    bool hideNumbers = settings.getBool('hideNumbers') ?? false;
+    bool hideManual = settings.getBool('hideManual') ?? false;
+    bool reconnect = settings.getBool('reconnect') ?? true;
+    int finishDelay = settings.getInt('finishDelay') ?? 350;
+    bool substituteNumbers = settings.getBool('substituteNumbers') ?? true;
+    int substituteNumbersDelay =
+        settings.getInt('substituteNumbersDelay') ?? 500;
+    int logLimit = settings.getInt('log_limit') ?? -1;
+    ThemeData themeData =
+        appThemeData[settings.getTheme()] ?? appThemeData[AppTheme.lightBlue]!;
+
+    return SettingsState(
+      sound: sound,
+      beep: beep,
+      voice: voice,
+      voiceName: voiceName,
+      volume: volume,
+      pitch: pitch,
+      rate: rate,
+      language: language,
+      recentFile: recentFile,
+      wakelock: wakelock,
+      startFab: startFab,
+      startFabSize: startFabSize,
+      finishFab: finishFab,
+      finishFabSize: finishFabSize,
+      countdown: countdown,
+      countdownSize: countdownSize,
+      checkUpdates: checkUpdates,
+      hideMarked: hideMarked,
+      hideNumbers: hideNumbers,
+      hideManual: hideManual,
+      reconnect: reconnect,
+      finishDelay: finishDelay,
+      substituteNumbers: substituteNumbers,
+      substituteNumbersDelay: substituteNumbersDelay,
+      logLimit: logLimit,
+      themeData: themeData,
     );
   }
 
@@ -138,6 +177,7 @@ class SettingsState extends Equatable {
     bool? substituteNumbers,
     int? substituteNumbersDelay,
     int? logLimit,
+    ThemeData? themeData,
   }) : this(
           sound: true,
           beep: true,
@@ -164,6 +204,7 @@ class SettingsState extends Equatable {
           substituteNumbers: true,
           substituteNumbersDelay: 500,
           logLimit: -1,
+          themeData: appThemeData[AppTheme.lightBlue]!,
         );
 
   SettingsState.clone(
@@ -193,6 +234,7 @@ class SettingsState extends Equatable {
     bool? substituteNumbers,
     int? substituteNumbersDelay,
     int? logLimit,
+    ThemeData? themeData,
   }) : this(
           sound: sound ?? state.sound,
           beep: beep ?? state.beep,
@@ -220,6 +262,7 @@ class SettingsState extends Equatable {
           substituteNumbersDelay:
               substituteNumbersDelay ?? state.substituteNumbersDelay,
           logLimit: logLimit ?? state.logLimit,
+          themeData: themeData ?? state.themeData,
         );
 
   @override
@@ -249,5 +292,6 @@ class SettingsState extends Equatable {
         substituteNumbers,
         substituteNumbersDelay,
         logLimit,
+        themeData,
       ];
 }

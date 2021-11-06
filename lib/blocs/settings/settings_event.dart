@@ -7,8 +7,6 @@ abstract class SettingsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class LoadSettings extends SettingsEvent {}
-
 class SetDefaultSettings extends SettingsEvent {}
 
 class SetBoolValueEvent extends SettingsEvent {
@@ -237,4 +235,16 @@ class SetStringValueEvent extends SettingsEvent {
     result += ' }';
     return result;
   }
+}
+
+class ThemeChanged extends SettingsEvent {
+  final AppTheme theme;
+
+  const ThemeChanged(this.theme);
+
+  @override
+  List<Object> get props => [theme];
+
+  @override
+  String toString() => 'ThemeChanged { Theme: $theme }';
 }

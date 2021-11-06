@@ -69,9 +69,9 @@ Future<void> runMain() async {
         BlocProvider<AppInfoCubit>(
           create: (context) => AppInfoCubit(appInfo: appInfo),
         ),
-        BlocProvider<ThemeBloc>(
-          create: (context) => ThemeBloc(settings),
-        ),
+        // BlocProvider<ThemeBloc>(
+        //   create: (context) => ThemeBloc(settings),
+        // ),
       ],
       child: EntimeApp(settings: settings),
     ),
@@ -92,7 +92,6 @@ class _EntimeAppState extends State<EntimeApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     // send commands to our top-level blocs to get them to initialize
-    BlocProvider.of<SettingsBloc>(context).add(LoadSettings());
     BlocProvider.of<UpdateBloc>(context).add(PopupChangelog());
     if (widget.settings.getBool('checkUpdates') ?? true) {
       BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
@@ -110,9 +109,9 @@ class _EntimeAppState extends State<EntimeApp> with WidgetsBindingObserver {
       providers: [
         RepositoryProvider<SettingsProvider>.value(value: widget.settings),
       ],
-      child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, stateTheme) {
+      child: BlocBuilder<SettingsBloc, SettingsState>(builder: (context, settingsTheme) {
         return MaterialApp(
-          theme: stateTheme.themeData,
+          theme: settingsTheme.themeData,
           title: 'Entime',
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
