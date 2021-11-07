@@ -19,14 +19,14 @@ part 'bluetooth_bloc_state.dart';
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   BluetoothBackgroundConnection? _serialConnection;
 
-  late final ModuleSettingsBloc moduleSettingsBloc;
-  late final ProtocolBloc protocolBloc;
+  final ModuleSettingsBloc moduleSettingsBloc;
+  final ProtocolBloc protocolBloc;
   late final StreamSubscription protocolSubscription;
-  late final SettingsBloc settingsBloc;
+  final SettingsBloc settingsBloc;
   late final StreamSubscription settingsSubscription;
   bool protocolSelectedState = false;
-  late final LogBloc logBloc;
-  late final AudioBloc audioBloc;
+  final LogBloc logBloc;
+  final AudioBloc audioBloc;
 
   BluetoothDevice? _bluetoothDevice;
 

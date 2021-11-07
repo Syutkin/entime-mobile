@@ -42,12 +42,12 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   late int substituteNumbersDelay;
   int? awaitingNumber;
 
-  late final SettingsBloc settingsBloc;
+  final SettingsBloc settingsBloc;
   late final StreamSubscription settingsSubscription;
 
-  late List<StartItem> startProtocol;
-  late List<FinishItem> finishProtocol;
-  late List<StartItem> numbersOnTraceProtocol;
+  List<StartItem> startProtocol = [];
+  List<FinishItem> finishProtocol = [];
+  List<StartItem> numbersOnTraceProtocol = [];
 
   ProtocolBloc({
     required this.settingsBloc,

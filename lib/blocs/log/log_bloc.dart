@@ -12,12 +12,12 @@ part 'log_event.dart';
 part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {
-  late final SettingsBloc settingsBloc;
+  final SettingsBloc settingsBloc;
   late final StreamSubscription settingsSubscription;
 
   int limit = -1;
 
-  late List<Log> log;
+  List<Log> log = [];
 
   LogBloc({
     required this.settingsBloc,

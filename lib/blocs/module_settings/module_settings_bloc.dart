@@ -16,11 +16,7 @@ class ModuleSettingsBloc
     extends Bloc<ModuleSettingsEvent, ModuleSettingsState> {
   late ModuleSettingsProvider moduleSettings;
 
-  //BLoC v5
-  ModuleSettingsBloc(): super(ModuleSettingsUninitialized());
-
-//  @override
-//  get initialState => ModuleSettingsUninitialized();
+  ModuleSettingsBloc() : super(ModuleSettingsUninitialized());
 
   @override
   Stream<ModuleSettingsState> mapEventToState(

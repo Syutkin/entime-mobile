@@ -123,7 +123,7 @@ class UpdateProvider {
           _downloadedFile = File(
               '$_dir/${_packageInfo.appName}-${_latestRelease!.tagName}-${_packageInfo.abi}.apk');
 
-          late String url;
+          String url = '';
 
           for (var asset in _latestRelease!.assets) {
             if (asset.name ==

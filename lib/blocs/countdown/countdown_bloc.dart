@@ -15,15 +15,15 @@ part 'countdown_event.dart';
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
-  late final ProtocolBloc protocolBloc;
+  final ProtocolBloc protocolBloc;
   late final StreamSubscription protocolSubscription;
-  late final TabBloc tabBloc;
+  final TabBloc tabBloc;
   late final StreamSubscription tabSubscription;
   // late final SettingsBloc settingsBloc;
   // late final StreamSubscription settingsSubscription;
 
   Timer? _timer;
-  late List<StartItem> _participant;
+  List<StartItem> _participant = [];
   DateTime? _nextStartTime;
   bool isFinished = false;
 
