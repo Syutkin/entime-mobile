@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:entime/models/updater.dart';
 import 'package:flutter/foundation.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -12,8 +10,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:entime/models/models.dart';
 import 'package:entime/data_providers/app_info/app_info_provider.dart';
+import 'package:entime/models/models.dart';
+import 'package:entime/utils/logger.dart';
 
 typedef DownloadHandler = void Function(int current, int total);
 typedef ErrorHandler = void Function(String error);
@@ -82,12 +81,12 @@ class UpdateProvider {
         var currentVersion = Version.parse(
             '${_packageInfo.version}+${_packageInfo.buildNumber}');
         if (latestVersion > currentVersion) {
-          print('Update_provider: Update to $latestVersion available');
+          logger.i('Update_provider: Update to $latestVersion available');
           _canUpdate = true;
         }
       }
     } catch (e) {
-      print(e);
+      logger.e(e);
     }
     return _canUpdate;
   }
@@ -102,11 +101,11 @@ class UpdateProvider {
         release = Release.fromRawJson(response.body);
         return release;
       } else {
-        print('StatusCode: ${response.statusCode}');
+        logger.d('StatusCode: ${response.statusCode}');
         return null;
       }
     } catch (e) {
-      print('error: $e');
+      logger.e('error: $e');
       return null;
     }
   }
@@ -139,7 +138,7 @@ class UpdateProvider {
           _updateFileSize = response.contentLength;
 
           if (_updateFileSize != null) {
-            print('Update_provider: contentLength: $_updateFileSize');
+            logger.d('Update_provider: contentLength: $_updateFileSize');
 
             List<int> bytes = [];
 
@@ -156,7 +155,7 @@ class UpdateProvider {
                 _onDownloadComplete();
               },
               onError: (e) {
-                print('Update_provider: Error: $e');
+                logger.e('Update_provider: Error: $e');
                 _onError(e);
               },
               cancelOnError: true,
@@ -165,11 +164,11 @@ class UpdateProvider {
             _onError('response.contentLength is null');
           }
         } catch (e) {
-          print(e);
+          logger.e(e);
         }
       }
     } else {
-      print('Update_provider: Can not access file system');
+      logger.w('Update_provider: Can not access file system');
     }
   }
 
@@ -179,7 +178,7 @@ class UpdateProvider {
         _latestRelease != null &&
         _downloadedFile != null) {
       var result = await OpenFile.open(_downloadedFile!.path);
-      print(result.message);
+      logger.d(result.message);
     }
   }
 

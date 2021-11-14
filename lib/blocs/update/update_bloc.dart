@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:entime/data_providers/update/update_provider.dart';
 import 'package:entime/models/models.dart';
+import 'package:entime/utils/logger.dart';
 
 part 'update_event.dart';
 
@@ -23,7 +24,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       add(UpdateFromFile());
     });
     updater.onError((error) {
-      print('UpdateBloc: Download error: $error');
+      logger.e('UpdateBloc: Download error: $error');
       add(CancelDownload());
     });
   }

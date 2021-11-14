@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:intl/intl.dart';
-
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
+import 'package:entime/utils/logger.dart';
 import '../../models/models.dart';
 
 // ToDo:
@@ -47,7 +47,7 @@ class LogProvider {
       logPath,
       version: 1,
       onOpen: (db) async {
-        print('SQLite version: ' +
+        logger.v('SQLite version: ' +
             (await db.rawQuery('SELECT sqlite_version()')).first.values.first.toString());
       },
       onCreate: (Database db, int version) async {
@@ -63,10 +63,10 @@ class LogProvider {
         ''');
       },
 //      onUpgrade: (Database db, int oldVersion, int newVersion) async {
-//        print('onUpgrade');
+//        logger.('onUpgrade');
 //      },
 //      onDowngrade: (Database db, int oldVersion, int newVersion) async {
-//        print('onDowngrade');
+//        logger.('onDowngrade');
 //      },
     );
   }

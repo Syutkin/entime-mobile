@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:entime/data_providers/csv/startlist_provider.dart';
 import 'package:equatable/equatable.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'package:entime/data_providers/data/protocol_provider.dart';
+import 'package:entime/data_providers/csv/startlist_provider.dart';
 import 'package:entime/models/models.dart';
 import 'package:entime/blocs/blocs.dart';
 import 'package:entime/utils/csv_utils.dart';
+import 'package:entime/utils/logger.dart';
 
 part 'protocol_event.dart';
 
@@ -62,7 +63,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         hideManual = state.hideManual;
         file = state.recentFile;
         add(SelectProtocol(file));
-        print(
+        logger.v(
             'hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, ');
       }
       if (file != state.recentFile) {
@@ -103,10 +104,10 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           databasePath: ProtocolProvider.db.dbPath!,
           awaitingNumber: awaitingNumber,
         );
-        print('DatabaseConnect -> selected ${event.file}');
+        logger.i('DatabaseConnect -> selected ${event.file}');
       } else {
         add(DeselectProtocol());
-        print('DatabaseConnect -> no file selected');
+        logger.i('DatabaseConnect -> no file selected');
       }
     } else if (event is DeselectProtocol) {
       await ProtocolProvider.db.setDbPath(null);

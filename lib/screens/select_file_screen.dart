@@ -11,6 +11,7 @@ import 'package:share_plus/share_plus.dart';
 
 import 'package:entime/blocs/blocs.dart';
 import 'package:entime/utils/helper.dart';
+import 'package:entime/utils/logger.dart';
 
 class SelectFileScreen extends StatefulWidget {
   const SelectFileScreen({Key? key}) : super(key: key);
@@ -145,7 +146,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
     try {
       return sourceFile.copySync(newPath);
     } on FileSystemException catch (e) {
-      print('Error copying file: ' + e.toString());
+      logger.e('Error copying file: ' + e.toString());
       return sourceFile;
     }
   }

@@ -5,6 +5,8 @@ import 'package:csv/csv_settings_autodetection.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'logger.dart';
+
 /// Convert a map list to csv
 String? mapListToCsv(List<Map<String, dynamic>>? mapList,
     {ListToCsvConverter? converter}) {
@@ -59,7 +61,7 @@ Future<String?> saveCsv(String csv, String suffix, String filePath) async {
   final file = File(
       '${directory.path}/${basenameWithoutExtension(filePath)}-$suffix.csv');
   await file.writeAsString(csv);
-  print('saveCsv -> Saved csv to file ${file.path}');
+  logger.i('saveCsv -> Saved csv to file ${file.path}');
   return file.path;
 }
 

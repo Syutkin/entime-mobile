@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+
+import 'package:entime/utils/logger.dart';
 
 typedef ErrorHandler = void Function(String error);
 
@@ -64,8 +65,7 @@ class BluetoothBackgroundConnection {
       BluetoothDevice server) async {
     final BluetoothConnection connection =
         await BluetoothConnection.toAddress(server.address).catchError((error) {
-      print('BluetoothConnection -> Cannot connect, exception occurred');
-      print(error);
+      logger.e('BluetoothConnection -> Cannot connect, exception occurred: $error');
     });
     return BluetoothBackgroundConnection._fromConnection(connection);
   }
@@ -88,13 +88,13 @@ class BluetoothBackgroundConnection {
     //textEditingController.clear();
     if (text.isNotEmpty) {
       try {
-        print('Sending message: $text');
+        logger.i('Sending message: $text');
         _connection?.output.add(utf8.encode(text + '\r\n') as Uint8List);
         await _connection?.output.allSent;
         result = true;
       } catch (e) {
         // Ignore error, but notify state
-        print('Error sending message: $e');
+        logger.e('Error sending message: $e');
         _onSendError('$e');
         result = false;
       }

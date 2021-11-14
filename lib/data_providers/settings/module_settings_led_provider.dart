@@ -1,5 +1,6 @@
 import 'package:entime/data_providers/settings/module_settings_provider.dart';
 import 'package:entime/models/models.dart';
+import 'package:entime/utils/logger.dart';
 
 class ModuleSettingsLed extends ModuleSettingsProvider {
   late ModSettingsModelLed _modSettingsModel;
@@ -31,7 +32,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
   //Loading settings on initialization
   @override
   Future<bool> update(jsonString) async {
-    print('Updating modsettings from json');
+    logger.i('Updating modsettings from json');
 
     try {
         _modSettingsModel = modSettingsModelLedFromJson(jsonString);
@@ -54,7 +55,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
 
       return true;
     } catch (e) {
-      print('Error at parsing ModuleSettings json: $e');
+      logger.e('Error at parsing ModuleSettings json: $e');
       return false;
     }
   }

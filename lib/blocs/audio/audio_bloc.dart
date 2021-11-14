@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:entime/data_providers/audio/sound_audio_provider.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:entime/data_providers/audio/audio_provider.dart';
 import 'package:entime/blocs/blocs.dart';
+import 'package:entime/data_providers/audio/audio_provider.dart';
+import 'package:entime/data_providers/audio/sound_audio_provider.dart';
+import 'package:entime/utils/logger.dart';
 
 part 'audio_event.dart';
 
@@ -47,13 +48,13 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
       if (sound && beep) {
         audio.beep();
       } else {
-        print('Audio -> Sound is $sound, beep is $beep');
+        logger.d('Audio -> Sound is $sound, beep is $beep');
       }
     } else if (event is Speak) {
       if (sound && voice) {
         audio.speak(event.text);
       } else {
-        print('Audio -> Sound is $sound, voice is $voice');
+        logger.d('Audio -> Sound is $sound, voice is $voice');
       }
     }
   }

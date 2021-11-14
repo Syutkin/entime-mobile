@@ -69,8 +69,6 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
               if (state is ProtocolSelectedState &&
                   state.updateFinishNumber != null &&
                   !state.updateFinishNumber!) {
-                print(
-                    'state.updateFinishNumber is ${state.updateFinishNumber}');
                 final bool? update =
                     await updateFinishTimePopup(context, number);
                 if (update != null && update) {

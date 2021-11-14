@@ -355,7 +355,7 @@ class _FinishPage extends State<FinishScreen> {
 //            _parseBT("F19:25:57#");
 //            var _deltas = List<int>();
 //            _deltas.insert(0, -100);
-//            print(_deltas);
+//            logger.(_deltas);
                   },
                   child: const Icon(Icons.build),
                 ),

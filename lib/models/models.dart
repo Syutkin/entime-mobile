@@ -13,3 +13,4 @@ export 'show_changelog.dart';
 export 'theme.dart';
 export 'updater.dart';
 export 'start_protocol.dart';
+export 'bluetooth.dart';

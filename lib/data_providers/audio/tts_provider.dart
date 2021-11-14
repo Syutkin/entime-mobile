@@ -1,5 +1,7 @@
 import 'package:flutter_tts/flutter_tts.dart';
 
+import 'package:entime/utils/logger.dart';
+
 enum TtsState { playing, stopped }
 
 class Tts {
@@ -8,15 +10,15 @@ class Tts {
 
   Tts() {
     flutterTts.setStartHandler(() {
-      print('TTS -> Playing...');
+      logger.i('TTS -> Playing...');
       ttsState = TtsState.playing;
     });
     flutterTts.setCompletionHandler(() {
-      print('TTS -> Complete');
+      logger.i('TTS -> Complete');
       ttsState = TtsState.stopped;
     });
     flutterTts.setErrorHandler((msg) {
-      print('TTS -> error: $msg');
+      logger.i('TTS -> error: $msg');
       ttsState = TtsState.stopped;
     });
   }
@@ -39,11 +41,11 @@ class Tts {
 
   void speak(String text) async {
     if (text.isNotEmpty) {
-      print('Sound TTS -> $text');
+      logger.i('Sound TTS -> $text');
       var result = await flutterTts.speak(text);
       if (result == 1) ttsState = TtsState.playing;
     } else {
-      print('Sound TTS -> Text is empty');
+      logger.i('Sound TTS -> Text is empty');
     }
   }
 }

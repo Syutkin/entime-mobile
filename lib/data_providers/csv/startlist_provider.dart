@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'package:file_picker/file_picker.dart';
 
 import 'package:entime/models/start_protocol.dart';
 import 'package:entime/utils/csv_utils.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:entime/utils/logger.dart';
 
 Future<List<StartItemCsv>> getStartList() async {
   PlatformFile? file = await _pickCsv();
@@ -12,13 +13,12 @@ Future<List<StartItemCsv>> getStartList() async {
   try {
     var start = CsvToMapConverter(fieldDelimiter: ';')
         .convert(utf8.decode(file.bytes!));
-    print(start);
     List<StartItemCsv> startList = start.isNotEmpty
         ? start.map((c) => StartItemCsv.fromMap(c)).toList()
         : [];
     return startList;
   } catch (e) {
-    print('getStartList: Error: $e');
+    logger.e('getStartList: Error: $e');
     return [];
   }
 }

@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 
 import 'package:entime/models/models.dart';
 import 'package:entime/utils/helper.dart';
+import 'package:entime/utils/logger.dart';
 
 class ProtocolProvider {
   ProtocolProvider._();
@@ -39,10 +40,10 @@ class ProtocolProvider {
     return await openDatabase(
       _dbPath!,
       version: 1,
-      // onOpen: (db) async {
-      //   print('SQLite version: ' +
-      //       (await db.rawQuery('SELECT sqlite_version()')).first.values.first);
-      // },
+      onOpen: (db) async {
+        logger.v('SQLite version: ' +
+            (await db.rawQuery('SELECT sqlite_version()')).first.values.first.toString());
+      },
       onCreate: (Database db, int version) async {
         await db.execute('''
         CREATE TABLE IF NOT EXISTS 'start' (
@@ -78,10 +79,10 @@ class ProtocolProvider {
 	       );''');
       },
 //      onUpgrade: (Database db, int oldVersion, int newVersion) async {
-//        print('onUpgrade');
+//        logger.('onUpgrade');
 //      },
 //      onDowngrade: (Database db, int oldVersion, int newVersion) async {
-//        print('onDowngrade');
+//        logger.('onDowngrade');
 //      },
     );
   }
@@ -179,7 +180,7 @@ class ProtocolProvider {
     // в этом случае устанавливаем время старта и вовращаем null.
     // В противном случае возвращаем StartItem.
     if (!forceUpdate) {
-      print('Database -> Checking existing start time...');
+      logger.i('Database -> Checking existing start time...');
       final res = await db.rawQuery('''
         SELECT *
         FROM start
@@ -189,7 +190,7 @@ class ProtocolProvider {
           res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
       if (startProtocol.isNotEmpty &&
           startProtocol.first.automaticstarttime != null) {
-        print('Database -> Start time exists');
+        logger.i('Database -> Start time exists');
         return startProtocol;
       }
     }
@@ -203,7 +204,7 @@ class ProtocolProvider {
         WHERE
           starttime BETWEEN ? AND ?
         ''', [time, correction, phoneTime, before, after]);
-    print('Database -> updated: $result lines');
+    logger.i('Database -> updated: $result lines');
     return null;
   }
 
@@ -241,14 +242,14 @@ class ProtocolProvider {
         startProtocol.first.number
       ]);
       if (result > 0) {
-        print(
+        logger.i(
             'Database -> Update manual start time for number ${startProtocol.first.number}');
       } else {
-        print(
+        logger.i(
             'Database -> Error at updating manual start time for number ${startProtocol.first.number}');
       }
     } else {
-      print('Database -> Cannot find participant with start time around $time');
+      logger.i('Database -> Cannot find participant with start time around $time');
     }
     return result;
   }
@@ -273,10 +274,10 @@ class ProtocolProvider {
       ],
     );
     if (result > 0) {
-      print(
+      logger.i(
           'UpdateItemInfoAtStart -> Start info for number ${item.number} updated');
     } else {
-      print(
+      logger.i(
           'UpdateItemInfoAtStart -> Start info for number ${item.number} not updated');
     }
     return result;
@@ -289,7 +290,7 @@ class ProtocolProvider {
 //        SET starttime = ?, automaticcorrection = ?
 //        WHERE number = ?
 //        ''', [time, correction, number]);
-//    print('Database -> updated: ' + result.toString() + ' lines');
+//    logger.('Database -> updated: ' + result.toString() + ' lines');
 //    return result;
 //  }
 
@@ -302,9 +303,9 @@ class ProtocolProvider {
         WHERE number = ?
         ''', [number]);
     if (result > 0) {
-      print('Database -> Set DNS to number: $number');
+      logger.i('Database -> Set DNS to number: $number');
     } else {
-      print('Database -> Can not find number: $number, DNS not set');
+      logger.i('Database -> Can not find number: $number, DNS not set');
     }
     return result;
   }
@@ -326,7 +327,7 @@ class ProtocolProvider {
     // время старта у существующего номера) и возвращаем null.
     // В противном случае возвращаем StartItem.
     if (!forceAdd) {
-      print('Database -> Checking start time $time and number $number...');
+      logger.i('Database -> Checking start time $time and number $number...');
       final res = await db.rawQuery('''
         SELECT *
         FROM start
@@ -337,7 +338,7 @@ class ProtocolProvider {
       List<StartItem> startProtocol =
           res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
       if (startProtocol.isNotEmpty) {
-        print('Database -> Start time $time '
+        logger.i('Database -> Start time $time '
             'already set or number $number already started');
         return startProtocol;
       }
@@ -357,7 +358,7 @@ class ProtocolProvider {
         SET automaticstarttime = NULL, automaticcorrection = NULL,
             manualstarttime = NULL, manualcorrection = NULL
         ''');
-    print('Database -> Results cleared');
+    logger.i('Database -> Results cleared');
     return result;
   }
 
@@ -427,7 +428,7 @@ class ProtocolProvider {
           conflictAlgorithm: ConflictAlgorithm.replace);
     }
     await batch.commit(noResult: true, continueOnError: true);
-    print('Database -> Loaded data from csv to start protocol');
+    logger.i('Database -> Loaded data from csv to start protocol');
   }
 
 // ----------------номера на трассе----------------
@@ -553,11 +554,11 @@ class ProtocolProvider {
       '"set"': hide,
       'number': number,
     });
-    print('Database -> Automatic finish time added: $finish');
+    logger.i('Database -> Automatic finish time added: $finish');
     if (number != null) {
       await db.update('start', {'finishtime': finish},
           where: 'number = $number');
-      print(
+      logger.i(
           'Database -> Automatically add number $number to finish time: $finish');
     }
     return number;
@@ -569,7 +570,7 @@ class ProtocolProvider {
       'finishtime': time,
       'manual': 1,
     });
-    print('Database -> Manual finish time added: $time');
+    logger.i('Database -> Manual finish time added: $time');
     return result;
   }
 
@@ -580,7 +581,7 @@ class ProtocolProvider {
         SET "set" = 1
         WHERE id = $id
         ''');
-    print('Database -> Finish times hided');
+    logger.i('Database -> Finish times hided');
     return result;
   }
 
@@ -590,7 +591,7 @@ class ProtocolProvider {
         UPDATE finish
         SET "set" = 1
         ''');
-    print('Database -> All finish times hided');
+    logger.i('Database -> All finish times hided');
     return result;
   }
 
@@ -604,7 +605,7 @@ class ProtocolProvider {
         UPDATE finish
         SET number = NULL, "set" = NULL
         ''');
-    print('Database -> Results cleared');
+    logger.i('Database -> Results cleared');
     return result;
   }
 
@@ -613,13 +614,13 @@ class ProtocolProvider {
     try {
       await db.update('finish', {'number': number}, where: 'id = $id');
     } on DatabaseException {
-      print(
+      logger.i(
           'Database -> Number $number already exists and therefore has not been added');
       return false;
     }
     await db.update('start', {'finishtime': finishtime},
         where: 'number = $number');
-    print(
+    logger.i(
         'Database -> Number $number added at rowid $id with finishtime: $finishtime');
     return true;
   }
@@ -628,7 +629,7 @@ class ProtocolProvider {
     final db = await database;
     await db.update('finish', {'number': null}, where: 'number = $number');
     await db.update('start', {'finishtime': null}, where: 'number = $number');
-    print('Database -> Finishtime for number $number cleared');
+    logger.i('Database -> Finishtime for number $number cleared');
   }
 
   Future<int> setDNF(int number) async {
@@ -649,7 +650,7 @@ class ProtocolProvider {
         },
         conflictAlgorithm: ConflictAlgorithm.replace);
 
-    print('Database -> Set DNF to number: $number');
+    logger.i('Database -> Set DNF to number: $number');
     return result;
   }
 
@@ -676,7 +677,6 @@ class ProtocolProvider {
         prevFinishProtocol.first.finishtime.isNotEmpty) {
       prevFinishTime = strTimeToDateTime(prevFinishProtocol.first.finishtime);
     }
-    print('prevFinishTime: $prevFinishTime');
     return prevFinishTime;
   }
 
@@ -703,7 +703,7 @@ class ProtocolProvider {
     final numbersOnTraceProtocol = await getNumbersOnTrace(debugTimeNow);
     if (numbersOnTraceProtocol.isNotEmpty) {
       number = numbersOnTraceProtocol.first.number;
-      print('Awaiting number: $number');
+      logger.i('Awaiting number: $number');
     }
     return number;
   }
