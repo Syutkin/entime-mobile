@@ -1,4 +1,6 @@
 import 'dart:async';
+
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:entime/blocs/blocs.dart';
+import 'package:entime/models/models.dart';
 import 'package:entime/screens/screens.dart';
 import 'package:entime/utils/helper.dart';
 import 'package:entime/widgets/widgets.dart';
@@ -38,28 +41,7 @@ class _StartScreen extends State<StartScreen> {
         if (protocolState is ProtocolSelectedState) {
           return Stack(
             children: [
-              // ListView.separated(
-              ListView.builder(
-                itemCount: protocolState.startProtocol.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var item = protocolState.startProtocol[index];
-                  return BlocBuilder<CountdownBloc, CountdownState>(
-                    builder: (context, countdownState) {
-                      return StartItemTile(
-                        item: item,
-                        onTap: () async {
-                          await editStartTime(context, item);
-                        },
-                        onDismissed: (direction) {
-                          BlocProvider.of<ProtocolBloc>(context)
-                              .add(ProtocolSetDNS(number: item.number));
-                        },
-                        activeStartTime: _activeStartTime(countdownState),
-                      );
-                    },
-                  );
-                },
-              ),
+              _startList(protocolState.startProtocol),
               _showCountdown(),
             ],
           );
@@ -91,8 +73,9 @@ class _StartScreen extends State<StartScreen> {
               ),
             ),
           );
+        } else {
+          return const SizedBox(width: 0, height: 0);
         }
-        return const SizedBox(width: 0, height: 0);
       }),
       persistentFooterButtons:
           kReleaseMode ? null : _persistentFooterButtons(context),
@@ -134,6 +117,43 @@ class _StartScreen extends State<StartScreen> {
         child: const Icon(Icons.play_arrow),
       ),
     ];
+  }
+
+  Widget _startList(List<StartItem> startProtocol) {
+    return CustomScrollView(
+      slivers: [
+        SliverPersistentHeader(
+            pinned: true,
+            delegate: SliverSubHeaderDelegate(
+              minHeight: 56,
+              maxHeight: 56,
+              child: _SliverStartSubHeader(),
+            )),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              var item = startProtocol[index];
+              return BlocBuilder<CountdownBloc, CountdownState>(
+                builder: (context, countdownState) {
+                  return StartItemTile(
+                    item: item,
+                    onTap: () async {
+                      await editStartTime(context, item);
+                    },
+                    onDismissed: (direction) {
+                      BlocProvider.of<ProtocolBloc>(context)
+                          .add(ProtocolSetDNS(number: item.number));
+                    },
+                    activeStartTime: _activeStartTime(countdownState),
+                  );
+                },
+              );
+            },
+            childCount: startProtocol.length,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _showCountdown() {
@@ -194,5 +214,48 @@ class _StartScreen extends State<StartScreen> {
     if (countdownState is CountdownWorkingState) {
       return countdownState.nextStartTime;
     }
+  }
+}
+
+class _SliverStartSubHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(2),
+      color: Theme.of(context).colorScheme.background,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(children: const <Widget>[
+          Flexible(
+            flex: 20,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text('№'),
+            ),
+          ),
+          Flexible(
+            flex: 30,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Старт'),
+            ),
+          ),
+          Flexible(
+            flex: 25,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Ручная\r\nпоправка'),
+            ),
+          ),
+          Flexible(
+            flex: 25,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Авто\r\nпоправка'),
+            ),
+          ),
+        ]),
+      ),
+    );
   }
 }

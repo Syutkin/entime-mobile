@@ -1,18 +1,18 @@
 import 'dart:async';
-import 'package:entime/widgets/finish_item_tile.dart';
-import 'package:entime/widgets/number_on_trace_tile.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:bot_toast/bot_toast.dart';
 
 import 'package:entime/blocs/blocs.dart';
+import 'package:entime/models/models.dart';
 import 'package:entime/screens/screens.dart';
 import 'package:entime/utils/helper.dart';
-import 'package:entime/models/models.dart';
+import 'package:entime/widgets/widgets.dart';
 
 enum FinishPopupMenu { clearNumber, hideAll }
 
@@ -90,40 +90,7 @@ class _FinishPage extends State<FinishScreen> {
               scrollToEnd(_scrollController);
             });
           }
-          return Scrollbar(
-            child: ListView.builder(
-              controller: _scrollController,
-              shrinkWrap: true,
-              itemCount: state.finishProtocol.length,
-              itemBuilder: (BuildContext context, int index) {
-                var item = state.finishProtocol[index];
-                return FinishItemTile(
-                  item: item,
-                  onTap: () async {
-                    await addNumberPopup(context, item);
-                  },
-                  onLongPress: () async {
-                    _clearPopup(context, item.number);
-                  },
-                  onAccept: (data) {
-                    if (data != null) {
-                      BlocProvider.of<ProtocolBloc>(context)
-                          .add(ProtocolSetNumberToFinishTime(
-                        id: item.id,
-                        number: data as int,
-                        finishTime: item.finishtime,
-                      ));
-                    }
-                  },
-                  onTapDown: _storePosition,
-                  onDismissed: (direction) {
-                    BlocProvider.of<ProtocolBloc>(context)
-                        .add(ProtocolHideFinishTime(id: item.id));
-                  },
-                );
-              },
-            ),
-          );
+          return _finishList(state.finishProtocol);
         } else {
           return Center(
             child: ListTile(
@@ -157,6 +124,53 @@ class _FinishPage extends State<FinishScreen> {
       }),
       persistentFooterButtons: _getFooterButtons(context),
     );
+  }
+
+  Widget _finishList(List<FinishItem> finishProtocol) {
+    return CustomScrollView(
+        controller: _scrollController,
+        shrinkWrap: true,
+        slivers: [
+          SliverPersistentHeader(
+              pinned: true,
+              delegate: SliverSubHeaderDelegate(
+                minHeight: 40,
+                maxHeight: 40,
+                child: _SliverFinishSubHeader(),
+              )),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                var item = finishProtocol[index];
+                return FinishItemTile(
+                  item: item,
+                  onTap: () async {
+                    await addNumberPopup(context, item);
+                  },
+                  onLongPress: () async {
+                    _clearPopup(context, item.number);
+                  },
+                  onAccept: (data) {
+                    if (data != null) {
+                      BlocProvider.of<ProtocolBloc>(context)
+                          .add(ProtocolSetNumberToFinishTime(
+                        id: item.id,
+                        number: data as int,
+                        finishTime: item.finishtime,
+                      ));
+                    }
+                  },
+                  onTapDown: _storePosition,
+                  onDismissed: (direction) {
+                    BlocProvider.of<ProtocolBloc>(context)
+                        .add(ProtocolHideFinishTime(id: item.id));
+                  },
+                );
+              },
+              childCount: finishProtocol.length,
+            ),
+          ),
+        ]);
   }
 
   Widget _getNumbersOnTrace(context) {
@@ -411,4 +425,40 @@ class _FinishPage extends State<FinishScreen> {
 //   BlocProvider.of<SettingsBloc>(context)
 //       .add(SetStringValueEvent(recentFile: file));
 // }
+}
+
+class _SliverFinishSubHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(2),
+      color: Theme.of(context).colorScheme.background,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(children: const <Widget>[
+          Flexible(
+            flex: 15,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text('Тип'),
+            ),
+          ),
+          Flexible(
+            flex: 65,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Время'),
+            ),
+          ),
+          Flexible(
+            flex: 20,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Номер'),
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
 }

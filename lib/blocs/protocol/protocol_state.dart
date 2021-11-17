@@ -59,6 +59,20 @@ class ProtocolSelectedState extends ProtocolState {
         autoFinishNumber,
         awaitingNumber,
       ];
+
+  @override
+  String toString() => 'ProtocolSelectedState ('
+      'startProtocol: ${startProtocol.length} items, '
+      'finishProtocol: ${finishProtocol.length} items, '
+      'numbersOnTraceProtocol: ${numbersOnTraceProtocol.length} items, '
+      'databasePath: $databasePath, '
+      'updateFinishNumber: $updateFinishNumber, '
+      'automaticStart: $automaticStart, '
+      'previousStart: $previousStart, '
+      'startTime: $startTime, '
+      'autoFinishNumber: $autoFinishNumber, '
+      'awaitingNumber: $awaitingNumber'
+      ')';
 }
 
 class ProtocolNotSelectedState extends ProtocolState {}
