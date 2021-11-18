@@ -46,7 +46,7 @@ class StartItemTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Row(children: <Widget>[
               Flexible(
-                flex: 15,
+                flex: 20,
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
@@ -68,14 +68,14 @@ class StartItemTile extends StatelessWidget {
                 ),
               ),
               Flexible(
-                flex: 30,
+                flex: 25,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(strip(item.manualcorrection.toString())),
                 ),
               ),
               Flexible(
-                flex: 15,
+                flex: 25,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(strip(item.automaticcorrection.toString()),

@@ -19,8 +19,6 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   late final StreamSubscription protocolSubscription;
   final TabBloc tabBloc;
   late final StreamSubscription tabSubscription;
-  // late final SettingsBloc settingsBloc;
-  // late final StreamSubscription settingsSubscription;
 
   Timer? _timer;
   List<StartItem> _participant = [];
@@ -30,7 +28,6 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   CountdownBloc({
     required this.protocolBloc,
     required this.tabBloc,
-    // required this.settingsBloc,
   }) : super(CountdownInitialState()) {
     _startTimer();
     protocolSubscription = protocolBloc.stream.listen((state) async {
@@ -65,7 +62,6 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   Future<void> close() {
     protocolSubscription.cancel();
     tabSubscription.cancel();
-    // settingsSubscription.cancel();
     _timer?.cancel();
     return super.close();
   }
@@ -92,12 +88,13 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
 
   Future<void> _countdown() async {
     if (protocolBloc.state is ProtocolSelectedState) {
-      var now = DateTime.now();
-      if (_nextStartTime != null) {
-        if (_nextStartTime!.isAfter(now)) {
-          add(Tick(_countdownDuration(_nextStartTime!.difference(now))));
+      final now = DateTime.now();
+      final nextStartTime = _nextStartTime;
+      if (nextStartTime != null) {
+        if (nextStartTime.isAfter(now)) {
+          add(Tick(_countdownDuration(nextStartTime.difference(now))));
         } else {
-          if (_nextStartTime!
+          if (nextStartTime
               .isAfter(now.subtract(const Duration(seconds: 10)))) {
             add(const Tick('GO'));
           } else {
