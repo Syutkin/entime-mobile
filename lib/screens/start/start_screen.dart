@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:entime/widgets/countdown_widget.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart';
@@ -26,6 +27,9 @@ class _StartScreen extends State<StartScreen> {
   StreamSubscription? _voiceStream;
   StreamSubscription? _countdownStream;
 
+  final GlobalKey _stackKey = GlobalKey();
+  final GlobalKey _countdownKey = GlobalKey();
+
   @override
   void dispose() {
     _voiceStream?.cancel();
@@ -40,6 +44,7 @@ class _StartScreen extends State<StartScreen> {
           builder: (context, protocolState) {
         if (protocolState is ProtocolSelectedState) {
           return Stack(
+            key: _stackKey,
             children: [
               _startList(protocolState.startProtocol),
               _showCountdown(),
@@ -162,27 +167,36 @@ class _StartScreen extends State<StartScreen> {
       settingsState,
     ) {
       if (settingsState.countdown) {
-        return Align(
-          alignment: Alignment.topCenter,
-          child: Container(
-            width: settingsState.countdownSize,
-            height: settingsState.countdownSize,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            margin: const EdgeInsets.all(8.0),
-            child: Material(
-              elevation: 6, //default to FloatingButtonElevation
-              type: MaterialType.circle,
-              color: Theme.of(context).colorScheme.secondary,
-              child: FittedBox(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: _countdownBuilder(),
-                ),
-              ),
-            ),
-          ),
+        return Positioned(
+          left: settingsState.countdownLeft,
+          top: settingsState.countdownTop,
+          child: BlocBuilder<CountdownBloc, CountdownState>(
+              builder: (context, countdownState) {
+            if (countdownState is CountdownWorkingState) {
+              final countdownWidget = CountdownWidget(
+                key: _countdownKey,
+                size: settingsState.countdownSize,
+                text: countdownState.text,
+              );
+              return Draggable(
+                child: countdownWidget,
+                feedback: countdownWidget,
+                childWhenDragging: const SizedBox(width: 0, height: 0),
+                onDragEnd: (dragDetails) => _placeCountdownWidget(dragDetails),
+              );
+            } else {
+              final countdownWidget = CountdownWidget(
+                key: _countdownKey,
+                size: settingsState.countdownSize,
+              );
+              return Draggable(
+                child: countdownWidget,
+                feedback: countdownWidget,
+                childWhenDragging: const SizedBox(width: 0, height: 0),
+                onDragEnd: (dragDetails) => _placeCountdownWidget(dragDetails),
+              );
+            }
+          }),
         );
       } else {
         return const SizedBox(width: 0, height: 0);
@@ -190,18 +204,36 @@ class _StartScreen extends State<StartScreen> {
     });
   }
 
-  Widget _countdownBuilder() {
-    return BlocBuilder<CountdownBloc, CountdownState>(
-        builder: (context, countdownState) {
-      if (countdownState is CountdownWorkingState) {
-        return Text(countdownState.text,
-            style: DefaultTextStyle.of(context)
-                .style
-                .apply(color: Theme.of(context).colorScheme.onSecondary));
-      } else {
-        return const SizedBox(width: 0, height: 0);
-      }
-    });
+  void _placeCountdownWidget(DraggableDetails dragDetails) {
+    var stackRenderBox = _getRenderBox(_stackKey);
+    var stackOffset = stackRenderBox.localToGlobal(Offset.zero);
+    var stackSize = stackRenderBox.size;
+    var countdownRenderBox = _getRenderBox(_countdownKey);
+
+    var dx = dragDetails.offset.dx;
+    var dy = dragDetails.offset.dy - stackOffset.dy;
+
+    if (dx < stackOffset.dx) {
+      dx = stackOffset.dx;
+    }
+    if (dx > stackSize.width - countdownRenderBox.size.width) {
+      dx = stackSize.width - countdownRenderBox.size.width;
+    }
+    if (dy < 0) {
+      dy = 0;
+    }
+    if (dy > stackSize.height - countdownRenderBox.size.height) {
+      dy = stackSize.height - countdownRenderBox.size.height;
+    }
+
+    BlocProvider.of<SettingsBloc>(context).add(SetDoubleValueEvent(
+      countdownLeft: dx,
+      countdownTop: dy,
+    ));
+  }
+
+  RenderBox _getRenderBox(GlobalKey key) {
+    return key.currentContext!.findRenderObject() as RenderBox;
   }
 
   void _addManualStartTime(BuildContext context) async {

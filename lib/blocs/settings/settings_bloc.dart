@@ -119,6 +119,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.countdownSize != null) {
         settings.setDouble('countdownSize', event.countdownSize!);
       }
+      if (event.countdownLeft != null) {
+        settings.setDouble('countdownLeft', event.countdownLeft!);
+      }
+      if (event.countdownTop != null) {
+        settings.setDouble('countdownTop', event.countdownTop!);
+      }
       yield SettingsState.clone(
         state,
         volume: event.volume,
@@ -127,6 +133,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         startFabSize: event.startFabSize,
         finishFabSize: event.finishFabSize,
         countdownSize: event.countdownSize,
+        countdownLeft: event.countdownLeft,
+        countdownTop: event.countdownTop,
       );
     } else if (event is SetStringValueEvent) {
       if (event.language != null) {

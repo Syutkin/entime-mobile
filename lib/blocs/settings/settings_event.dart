@@ -43,8 +43,7 @@ class SetBoolValueEvent extends SettingsEvent {
   });
 
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         sound,
         beep,
         voice,
@@ -123,8 +122,7 @@ class SetIntValueEvent extends SettingsEvent {
   });
 
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         finishDelay,
         substituteNumbersDelay,
         logLimit,
@@ -154,6 +152,8 @@ class SetDoubleValueEvent extends SettingsEvent {
   final double? startFabSize;
   final double? finishFabSize;
   final double? countdownSize;
+  final double? countdownLeft;
+  final double? countdownTop;
 
   const SetDoubleValueEvent({
     this.volume,
@@ -162,17 +162,20 @@ class SetDoubleValueEvent extends SettingsEvent {
     this.startFabSize,
     this.finishFabSize,
     this.countdownSize,
+    this.countdownLeft,
+    this.countdownTop,
   });
 
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         volume,
         pitch,
         rate,
         startFabSize,
         finishFabSize,
         countdownSize,
+        countdownLeft,
+        countdownTop,
       ];
 
   @override
@@ -196,6 +199,12 @@ class SetDoubleValueEvent extends SettingsEvent {
     if (countdownSize != null) {
       result += 'countdownSize: $countdownSize';
     }
+    if (countdownLeft != null) {
+      result += 'countdownLeft: $countdownLeft';
+    }
+    if (countdownTop != null) {
+      result += 'countdownTop: $countdownTop';
+    }
     result += ' }';
     return result;
   }
@@ -213,8 +222,7 @@ class SetStringValueEvent extends SettingsEvent {
   });
 
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         language,
         recentFile,
         previousVersion,
