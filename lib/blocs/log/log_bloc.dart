@@ -15,16 +15,20 @@ class LogBloc extends Bloc<LogEvent, LogState> {
   final SettingsBloc settingsBloc;
   late final StreamSubscription settingsSubscription;
 
-  int limit = -1;
+  int _limit = -1;
 
-  List<Log> log = [];
+  List<Log> _log = [];
 
   LogBloc({
     required this.settingsBloc,
   }) : super(const LogOpen()) {
     settingsSubscription = settingsBloc.stream.listen((state) {
-      limit = state.logLimit;
+      _limit = state.logLimit;
     });
+
+    on<LogAdd>((event, emit) => _handleLogAdd(event, emit));
+    on<ShowLog>((event, emit) => _handleShowLog(event, emit));
+    on<HideLog>((event, emit) => _handleHideLog(event, emit));
   }
 
   @override
@@ -33,39 +37,31 @@ class LogBloc extends Bloc<LogEvent, LogState> {
     return super.close();
   }
 
-  @override
-  Stream<LogState> mapEventToState(
-    LogEvent event,
-  ) async* {
-    if (event is LogAdd) {
-      await LogProvider.db.add(
-        level: event.level,
-        source: event.source,
-        direction: event.direction,
-        rawData: event.rawData,
-      );
-      if ((state as LogOpen).updateLogScreen != null &&
-          (state as LogOpen).updateLogScreen == true) {
-        add(const ShowLog());
-        // log = await LogProvider.db.getLog(limit: limit);
-        // yield LogOpen(
-        //   log: log,
-        //   updateLogScreen: true,
-        // );
-      }
+  void _handleLogAdd(LogAdd event, Emitter<LogState> emit) async {
+    await LogProvider.db.add(
+      level: event.level,
+      source: event.source,
+      direction: event.direction,
+      rawData: event.rawData,
+    );
+    if ((state as LogOpen).updateLogScreen != null &&
+        (state as LogOpen).updateLogScreen == true) {
+      add(const ShowLog());
     }
-    if (event is ShowLog) {
-      log = await LogProvider.db.getLog(limit: limit);
-      yield LogOpen(
-        log: log,
-        updateLogScreen: true,
-      );
-    }
-    if (event is HideLog) {
-      yield LogOpen(
-        log: log,
-        updateLogScreen: false,
-      );
-    }
+  }
+
+  void _handleShowLog(ShowLog event, Emitter<LogState> emit) async {
+    _log = await LogProvider.db.getLog(limit: _limit);
+    emit(LogOpen(
+      log: _log,
+      updateLogScreen: true,
+    ));
+  }
+
+  void _handleHideLog(HideLog event, Emitter<LogState> emit) {
+    emit(LogOpen(
+      log: _log,
+      updateLogScreen: false,
+    ));
   }
 }

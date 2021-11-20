@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:entime/blocs/blocs.dart';
+import 'package:entime/models/models.dart';
 import 'package:entime/widgets/widgets.dart';
 
 Future<void> addRacerPopup(BuildContext context) async {

@@ -12,13 +12,8 @@ part 'settings_event.dart';
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SettingsProvider settings;
 
-  SettingsBloc(this.settings) : super(SettingsState.initialize(settings));
-
-  @override
-  Stream<SettingsState> mapEventToState(
-    SettingsEvent event,
-  ) async* {
-    if (event is SetBoolValueEvent) {
+  SettingsBloc(this.settings) : super(SettingsState.initialize(settings)) {
+    on<SetBoolValueEvent>((event, emit) async {
       if (event.sound != null) {
         settings.setBool('sound', event.sound!);
       }
@@ -66,7 +61,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.substituteNumbers != null) {
         settings.setBool('substituteNumbers', event.substituteNumbers!);
       }
-      yield SettingsState.clone(
+      emit(SettingsState.clone(
         state,
         sound: event.sound,
         beep: event.beep,
@@ -82,8 +77,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         hideManual: event.hideManual,
         reconnect: event.reconnect,
         substituteNumbers: event.substituteNumbers,
-      );
-    } else if (event is SetIntValueEvent) {
+      ));
+    });
+
+    on<SetIntValueEvent>((event, emit) {
       if (event.finishDelay != null) {
         settings.setInt('finishDelay', event.finishDelay!);
       }
@@ -94,13 +91,15 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.logLimit != null) {
         settings.setInt('log_limit', event.logLimit!);
       }
-      yield SettingsState.clone(
+      emit(SettingsState.clone(
         state,
         finishDelay: event.finishDelay,
         substituteNumbersDelay: event.substituteNumbersDelay,
         logLimit: event.logLimit,
-      );
-    } else if (event is SetDoubleValueEvent) {
+      ));
+    });
+
+    on<SetDoubleValueEvent>((event, emit) {
       if (event.volume != null) {
         settings.setDouble('volume', event.volume!);
       }
@@ -125,7 +124,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.countdownTop != null) {
         settings.setDouble('countdownTop', event.countdownTop!);
       }
-      yield SettingsState.clone(
+      emit(SettingsState.clone(
         state,
         volume: event.volume,
         pitch: event.pitch,
@@ -135,28 +134,34 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         countdownSize: event.countdownSize,
         countdownLeft: event.countdownLeft,
         countdownTop: event.countdownTop,
-      );
-    } else if (event is SetStringValueEvent) {
+      ));
+    });
+
+    on<SetStringValueEvent>((event, emit) {
       if (event.language != null) {
         settings.setString('language', event.language!);
       }
       if (event.recentFile != null) {
         settings.setString('recentFile', event.recentFile!);
       }
-      yield SettingsState.clone(
+      emit(SettingsState.clone(
         state,
         language: event.language,
         recentFile: event.recentFile,
-      );
-    } else if (event is ThemeChanged) {
+      ));
+    });
+
+    on<ThemeChanged>((event, emit) {
       settings.setTheme(event.theme);
-      yield SettingsState.clone(
+      emit(SettingsState.clone(
         state,
         appTheme: event.theme,
-      );
-    } else if (event is SetDefaultSettings) {
+      ));
+    });
+
+    on<SetDefaultSettings>((event, emit) {
       SettingsState.reset(state).save(settings);
-      yield SettingsState.reset(state);
-    }
+      emit(SettingsState.reset(state));
+    });
   }
 }

@@ -16,23 +16,39 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
   final SettingsBloc settingsBloc;
   late final StreamSubscription settingsSubscription;
 
-  bool sound = true;
-  bool voice = true;
-  bool beep = true;
+  bool _sound = true;
+  bool _voice = true;
+  bool _beep = true;
 
-  AudioProvider audio = Sound();
+  final AudioProvider _audio = Sound();
 
   AudioBloc({
     required this.settingsBloc,
-  }) : super(AudioInitialState()) {
+  }) : super(AudioState()) {
     settingsSubscription = settingsBloc.stream.listen((state) {
-      sound = state.sound;
-      voice = state.voice;
-      beep = state.beep;
-      audio.setLanguage(state.language);
-      audio.setVolume(state.volume);
-      audio.setSpeechRate(state.rate);
-      audio.setPitch(state.pitch);
+      _sound = state.sound;
+      _voice = state.voice;
+      _beep = state.beep;
+      _audio.setLanguage(state.language);
+      _audio.setVolume(state.volume);
+      _audio.setSpeechRate(state.rate);
+      _audio.setPitch(state.pitch);
+    });
+
+    on<Countdown>((event, emit) async {
+      if (_sound && _beep) {
+        _audio.beep();
+      } else {
+        logger.d('Audio -> Sound is $_sound, beep is $_beep');
+      }
+    });
+
+    on<Speak>((event, emit) async {
+      if (_sound && _voice) {
+        _audio.speak(event.text);
+      } else {
+        logger.d('Audio -> Sound is $_sound, voice is $_voice');
+      }
     });
   }
 
@@ -40,22 +56,5 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
   Future<void> close() {
     settingsSubscription.cancel();
     return super.close();
-  }
-
-  @override
-  Stream<AudioState> mapEventToState(AudioEvent event) async* {
-    if (event is Countdown) {
-      if (sound && beep) {
-        audio.beep();
-      } else {
-        logger.d('Audio -> Sound is $sound, beep is $beep');
-      }
-    } else if (event is Speak) {
-      if (sound && voice) {
-        audio.speak(event.text);
-      } else {
-        logger.d('Audio -> Sound is $sound, voice is $voice');
-      }
-    }
   }
 }

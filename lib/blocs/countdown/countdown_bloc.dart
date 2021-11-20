@@ -23,7 +23,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   Timer? _timer;
   List<StartItem> _participant = [];
   DateTime? _nextStartTime;
-  bool isFinished = false;
+  bool _isFinished = false;
 
   CountdownBloc({
     required this.protocolBloc,
@@ -34,7 +34,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
       // обновляет отсчёт при событии в дб при открытом окне старта
       if (state is ProtocolSelectedState && tabBloc.state == AppTab.start) {
         _nextStartTime = await _getNextStarttime(DateTime.now());
-        isFinished = false;
+        _isFinished = false;
         await _countdown();
       }
     });
@@ -42,20 +42,16 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
       // обновляет отсчёт при переключении на окно старта
       if (state == AppTab.start) {
         _nextStartTime = await _getNextStarttime(DateTime.now());
-        isFinished = false;
+        _isFinished = false;
         await _countdown();
       }
     });
-    // settingsSubscription = settingsBloc.stream.listen((state) {
-    // if ((_timer == null || !_timer!.isActive) && state.countdown) {
-    //   _startTimer();
-    // } else {
-    //   _timer?.cancel();
-    // }
-    // });
-    // if (settingsBloc.state.countdown) {
-    //   _startTimer();
-    // }
+    on<Tick>((event, emit) async {
+      _nextStartTime == null
+          ? emit(CountdownWorkingState(event.text, null))
+          : emit(CountdownWorkingState(
+              event.text, DateFormat('HH:mm:ss').format(_nextStartTime!)));
+    });
   }
 
   @override
@@ -64,20 +60,6 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     tabSubscription.cancel();
     _timer?.cancel();
     return super.close();
-  }
-
-  @override
-  Stream<CountdownState> mapEventToState(
-    CountdownEvent event,
-  ) async* {
-    if (event is Tick) {
-      if (_nextStartTime == null) {
-        yield CountdownWorkingState(event.text, null);
-      } else {
-        yield CountdownWorkingState(
-            event.text, DateFormat('HH:mm:ss').format(_nextStartTime!));
-      }
-    }
   }
 
   void _startTimer() {
@@ -102,10 +84,10 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
           }
         }
       } else {
-        if (!isFinished) {
+        if (!_isFinished) {
           _nextStartTime = await _getNextStarttime(now);
           if (_nextStartTime == null) {
-            isFinished = true;
+            _isFinished = true;
             add(const Tick(''));
           }
         }

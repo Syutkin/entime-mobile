@@ -18,7 +18,10 @@ Future<void> main() async {
 }
 
 Future<void> runMain() async {
-  Bloc.observer = SimpleBlocObserver();
+  BlocOverrides.runZoned(
+    () {},
+    blocObserver: SimpleBlocObserver(),
+  );
   final UpdateProvider updater = await UpdateProvider.init();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
   final AppInfoProvider appInfo = await AppInfoProvider.load();

@@ -1,8 +1,8 @@
 part of 'audio_bloc.dart';
 
 @immutable
-abstract class AudioState {}
+class AudioState {}
 
-class AudioInitialState extends AudioState {}
-
-class AudioReadyState extends AudioState {}
+// class AudioState extends AudioState {}
+//
+// class AudioReadyState extends AudioState {}

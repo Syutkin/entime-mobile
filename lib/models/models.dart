@@ -14,3 +14,5 @@ export 'theme.dart';
 export 'updater.dart';
 export 'start_protocol.dart';
 export 'bluetooth.dart';
+export 'automatic_start.dart';
+export 'start_time.dart';

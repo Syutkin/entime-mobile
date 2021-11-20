@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -27,42 +25,39 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       logger.e('UpdateBloc: Download error: $error');
       add(CancelDownload());
     });
-  }
 
-//  StreamSubscription<int> _updateProgressionSubscription;
-//
-//  @override
-//  Future<void> close() {
-//    _updateProgressionSubscription?.cancel();
-//    return super.close();
-//  }
-
-  @override
-  Stream<UpdateState> mapEventToState(
-    UpdateEvent event,
-  ) async* {
-    if (event is CheckUpdate) {
+    on<CheckUpdate>((event, emit) async {
       bool update = await updater.isUpdateAvailable();
       if (update) {
-        yield UpdateAvailable(updater.latestVersion);
+        emit(UpdateAvailable(updater.latestVersion));
       } else {
-        yield const UpdateInitial();
+        emit(const UpdateInitial());
       }
-    } else if (event is DownloadUpdate) {
+    });
+
+    on<DownloadUpdate>((event, emit) async {
       if (state is UpdateAvailable) {
-        yield UpdateConnecting();
+        emit(UpdateConnecting());
         await updater.downloadUpdate();
       }
-    } else if (event is UpdateDownloading) {
-      yield UpdateDownloadInProgress(event.bytes, event.total);
-    } else if (event is UpdateFromFile) {
+    });
+
+    on<UpdateDownloading>((event, emit) {
+      emit(UpdateDownloadInProgress(event.bytes, event.total));
+    });
+
+    on<UpdateFromFile>((event, emit) {
       updater.installApk();
-      yield UpdateAvailable(updater.latestVersion);
-    } else if (event is CancelDownload) {
+      emit(UpdateAvailable(updater.latestVersion));
+    });
+
+    on<CancelDownload>((event, emit) {
       updater.stop();
-      yield UpdateAvailable(updater.latestVersion);
-    } else if (event is PopupChangelog) {
-      yield UpdateInitial(showChangelog: await updater.showChangelog());
-    }
+      emit(UpdateAvailable(updater.latestVersion));
+    });
+
+    on<PopupChangelog>((event, emit) async {
+      emit(UpdateInitial(showChangelog: await updater.showChangelog()));
+    });
   }
 }
