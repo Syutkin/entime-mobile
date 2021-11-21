@@ -43,6 +43,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.countdown != null) {
         settings.setBool('countdown', event.countdown!);
       }
+      if (event.countdownAtStartTime != null) {
+        settings.setBool('countdownAtStartTime', event.countdownAtStartTime!);
+      }
       if (event.checkUpdates != null) {
         settings.setBool('checkUpdates', event.checkUpdates!);
       }
@@ -71,6 +74,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         startFab: event.startFab,
         finishFab: event.finishFab,
         countdown: event.countdown,
+        countdownAtStartTime: event.countdownAtStartTime,
         checkUpdates: event.checkUpdates,
         hideMarked: event.hideMarked,
         hideNumbers: event.hideNumbers,

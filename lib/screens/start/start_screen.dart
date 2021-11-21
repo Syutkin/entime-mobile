@@ -140,17 +140,28 @@ class _StartScreen extends State<StartScreen> {
               var item = startProtocol[index];
               return BlocBuilder<CountdownBloc, CountdownState>(
                 builder: (context, countdownState) {
-                  return StartItemTile(
-                    item: item,
-                    onTap: () async {
-                      await editStartTime(context, item);
-                    },
-                    onDismissed: (direction) {
-                      BlocProvider.of<ProtocolBloc>(context)
-                          .add(ProtocolSetDNS(number: item.number));
-                    },
-                    activeStartTime: _activeStartTime(countdownState),
-                  );
+                  final isHighlighted =
+                      item.starttime == _activeStartTime(countdownState);
+                  return BlocBuilder<SettingsBloc, SettingsState>(builder: (
+                    context,
+                    settingsState,
+                  ) {
+                    return StartItemTile(
+                      item: item,
+                      onTap: () async {
+                        await editStartTime(context, item);
+                      },
+                      onDismissed: (direction) {
+                        BlocProvider.of<ProtocolBloc>(context)
+                            .add(ProtocolSetDNS(number: item.number));
+                      },
+                      isHighlighted: isHighlighted,
+                      countdown:
+                          settingsState.countdownAtStartTime && isHighlighted
+                              ? _countdownFromState(countdownState)
+                              : null,
+                    );
+                  });
                 },
               );
             },
@@ -245,6 +256,12 @@ class _StartScreen extends State<StartScreen> {
   String? _activeStartTime(CountdownState countdownState) {
     if (countdownState is CountdownWorkingState) {
       return countdownState.nextStartTime;
+    }
+  }
+
+  String? _countdownFromState(CountdownState countdownState) {
+    if (countdownState is CountdownWorkingState) {
+      return countdownState.text;
     }
   }
 }

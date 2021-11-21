@@ -7,14 +7,16 @@ class StartItemTile extends StatelessWidget {
   final GestureTapCallback? onTap;
   final DismissDirectionCallback? onDismissed;
   final StartItem item;
-  final String? activeStartTime;
+  final bool isHighlighted;
+  final String? countdown;
 
   const StartItemTile({
     Key? key,
     required this.item,
-    this.activeStartTime,
+    this.isHighlighted = false,
     this.onTap,
     this.onDismissed,
+    this.countdown,
   }) : super(key: key);
 
   @override
@@ -39,7 +41,7 @@ class StartItemTile extends StatelessWidget {
         },
         child: Card(
           margin: const EdgeInsets.all(2),
-          color: item.starttime == activeStartTime
+          color: isHighlighted
               ? Theme.of(context).colorScheme.background
               : Theme.of(context).colorScheme.surface,
           child: Padding(
@@ -61,7 +63,7 @@ class StartItemTile extends StatelessWidget {
                 flex: 30,
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(item.starttime ?? '',
+                  child: Text(countdown ?? item.starttime ?? '',
                       style: DefaultTextStyle.of(context)
                           .style
                           .apply(fontSizeFactor: 1.5)),

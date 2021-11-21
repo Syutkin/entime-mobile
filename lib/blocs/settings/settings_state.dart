@@ -32,6 +32,9 @@ class SettingsState extends Equatable {
   final double countdownLeft;
   final double countdownTop;
 
+  // показывать обратный отсчёт вместо стартового времени
+  final bool countdownAtStartTime;
+
   // проверка обновлений
   final bool checkUpdates;
 
@@ -77,6 +80,7 @@ class SettingsState extends Equatable {
     required this.countdownSize,
     required this.countdownLeft,
     required this.countdownTop,
+    required this.countdownAtStartTime,
     required this.checkUpdates,
     required this.hideMarked,
     required this.hideNumbers,
@@ -109,10 +113,12 @@ class SettingsState extends Equatable {
     var startFabSize = settings.getDouble('start_fab_size') ?? 75.0;
     var finishFab = settings.getBool('finish_fab') ?? true;
     var finishFabSize = settings.getDouble('finish_fab_size') ?? 75.0;
-    var countdown = settings.getBool('countdown') ?? true;
+    var countdown = settings.getBool('countdown') ?? false;
     var countdownSize = settings.getDouble('countdownSize') ?? 75.0;
     var countdownLeft = settings.getDouble('countdownLeft') ?? 0.0;
     var countdownTop = settings.getDouble('countdownTop') ?? 0.0;
+    var countdownAtStartTime =
+        settings.getBool('countdownAtStartTime,') ?? true;
     var checkUpdates = settings.getBool('checkUpdates') ?? true;
     bool hideMarked = settings.getBool('hideMarked') ?? true;
     bool hideNumbers = settings.getBool('hideNumbers') ?? false;
@@ -144,6 +150,7 @@ class SettingsState extends Equatable {
       countdownSize: countdownSize,
       countdownLeft: countdownLeft,
       countdownTop: countdownTop,
+      countdownAtStartTime: countdownAtStartTime,
       checkUpdates: checkUpdates,
       hideMarked: hideMarked,
       hideNumbers: hideNumbers,
@@ -173,10 +180,11 @@ class SettingsState extends Equatable {
           startFabSize: 75.0,
           finishFab: true,
           finishFabSize: 75.0,
-          countdown: true,
+          countdown: false,
           countdownSize: 75.0,
           countdownLeft: 0.0,
           countdownTop: 0.0,
+          countdownAtStartTime: true,
           checkUpdates: true,
           hideMarked: true,
           hideNumbers: false,
@@ -209,6 +217,7 @@ class SettingsState extends Equatable {
     double? countdownSize,
     double? countdownLeft,
     double? countdownTop,
+    bool? countdownAtStartTime,
     bool? checkUpdates,
     bool? hideMarked,
     bool? hideNumbers,
@@ -238,6 +247,8 @@ class SettingsState extends Equatable {
           countdownSize: countdownSize ?? state.countdownSize,
           countdownLeft: countdownLeft ?? state.countdownLeft,
           countdownTop: countdownTop ?? state.countdownTop,
+          countdownAtStartTime:
+              countdownAtStartTime ?? state.countdownAtStartTime,
           checkUpdates: checkUpdates ?? state.checkUpdates,
           hideMarked: hideMarked ?? state.hideMarked,
           hideNumbers: hideNumbers ?? state.hideNumbers,
@@ -270,6 +281,7 @@ class SettingsState extends Equatable {
     settings.setDouble('countdownSize', countdownSize);
     settings.setDouble('countdownLeft', countdownLeft);
     settings.setDouble('countdownTop', countdownTop);
+    settings.setBool('countdownAtStartTime', countdownAtStartTime);
     settings.setBool('checkUpdates', checkUpdates);
     settings.setBool('hideMarked', hideMarked);
     settings.setBool('hideNumbers', hideNumbers);
@@ -302,6 +314,7 @@ class SettingsState extends Equatable {
         countdownSize,
         countdownLeft,
         countdownTop,
+        countdownAtStartTime,
         checkUpdates,
         hideMarked,
         hideNumbers,

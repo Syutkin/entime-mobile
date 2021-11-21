@@ -14,14 +14,15 @@ import 'screens/screens.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await runMain();
+  await BlocOverrides.runZoned(
+    () async {
+      await runMain();
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
 }
 
 Future<void> runMain() async {
-  BlocOverrides.runZoned(
-    () {},
-    blocObserver: SimpleBlocObserver(),
-  );
   final UpdateProvider updater = await UpdateProvider.init();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
   final AppInfoProvider appInfo = await AppInfoProvider.load();

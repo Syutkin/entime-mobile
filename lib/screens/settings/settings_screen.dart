@@ -188,6 +188,28 @@ class _SettingsPageState extends State<SettingsScreen> {
               title: 'Стартовый экран',
               tiles: [
                 SettingsTile.switchTile(
+                  title: 'Кнопка "отсечка"',
+                  leading: const Icon(MdiIcons.handBackLeft),
+                  switchValue: settingsState.startFab,
+                  onToggle: (bool value) {
+                    settingsBloc.add(SetBoolValueEvent(startFab: value));
+                  },
+                ),
+                SettingsTile(
+                  title: 'Размер кнопки "отсечка"',
+                  subtitle: '${(settingsState.startFabSize).round()}px',
+                  leading: const Icon(MdiIcons.handBackLeft),
+                  onPressed: (BuildContext context) async {
+                    var value = await setFloatingButtonSizePopup(
+                        context, settingsState.startFabSize,
+                        text: 'Размер кнопки "отсечка" на стартовом экране');
+                    if (value != null) {
+                      settingsBloc
+                          .add(SetDoubleValueEvent(startFabSize: value));
+                    }
+                  },
+                ),
+                SettingsTile.switchTile(
                   title: 'Обратный отсчёт',
                   leading: const Icon(MdiIcons.timer),
                   switchValue: settingsState.countdown,
@@ -210,25 +232,12 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: 'Кнопка "отсечка"',
-                  leading: const Icon(MdiIcons.handBackLeft),
-                  switchValue: settingsState.startFab,
+                  title: 'Заменять время старта обратным отсчётом',
+                  titleMaxLines: 2,
+                  leading: const Icon(MdiIcons.timer),
+                  switchValue: settingsState.countdownAtStartTime,
                   onToggle: (bool value) {
-                    settingsBloc.add(SetBoolValueEvent(startFab: value));
-                  },
-                ),
-                SettingsTile(
-                  title: 'Размер кнопки "отсечка"',
-                  subtitle: '${(settingsState.startFabSize).round()}px',
-                  leading: const Icon(MdiIcons.handBackLeft),
-                  onPressed: (BuildContext context) async {
-                    var value = await setFloatingButtonSizePopup(
-                        context, settingsState.startFabSize,
-                        text: 'Размер кнопки "отсечка" на стартовом экране');
-                    if (value != null) {
-                      settingsBloc
-                          .add(SetDoubleValueEvent(startFabSize: value));
-                    }
+                    settingsBloc.add(SetBoolValueEvent(countdownAtStartTime: value));
                   },
                 ),
               ],
@@ -238,6 +247,7 @@ class _SettingsPageState extends State<SettingsScreen> {
               tiles: [
                 SettingsTile(
                   title: 'Задержка перед показом новых отсечек',
+                  titleMaxLines: 2,
                   subtitle: '${(settingsState.finishDelay)}мс',
                   leading: const Icon(MdiIcons.clockOutline),
                   onPressed: (BuildContext context) async {
@@ -357,7 +367,8 @@ class _SettingsPageState extends State<SettingsScreen> {
 
   List<SettingsTile> _themes() {
     List<SettingsTile> result = [];
-    AppTheme appTheme = BlocProvider.of<SettingsBloc>(context).settings.getTheme();
+    AppTheme appTheme =
+        BlocProvider.of<SettingsBloc>(context).settings.getTheme();
     for (var element in AppTheme.values) {
       result.add(SettingsTile(
         title: element.display(),

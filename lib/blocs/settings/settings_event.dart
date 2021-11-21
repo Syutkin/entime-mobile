@@ -18,6 +18,7 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool? startFab;
   final bool? finishFab;
   final bool? countdown;
+  final bool? countdownAtStartTime;
   final bool? checkUpdates;
   final bool? hideMarked;
   final bool? hideNumbers;
@@ -34,6 +35,7 @@ class SetBoolValueEvent extends SettingsEvent {
     this.startFab,
     this.finishFab,
     this.countdown,
+    this.countdownAtStartTime,
     this.checkUpdates,
     this.hideMarked,
     this.hideNumbers,
@@ -52,6 +54,7 @@ class SetBoolValueEvent extends SettingsEvent {
         startFab,
         finishFab,
         countdown,
+        countdownAtStartTime,
         checkUpdates,
         hideMarked,
         hideNumbers,
@@ -86,6 +89,9 @@ class SetBoolValueEvent extends SettingsEvent {
     }
     if (countdown != null) {
       result += 'countdown: $countdown';
+    }
+    if (countdownAtStartTime != null) {
+      result += 'countdownAtStartTime: $countdownAtStartTime';
     }
     if (checkUpdates != null) {
       result += 'checkUpdates: $checkUpdates';
