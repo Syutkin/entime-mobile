@@ -23,10 +23,10 @@ class ProtocolProvider extends _$ProtocolProvider {
         },
         beforeOpen: (details) async {
           if (details.wasCreated) {
-            await into(statuses).insert(Statuse(id: 1, type: 'active'));
-            await into(statuses).insert(Statuse(id: 2, type: 'DNS'));
-            await into(statuses).insert(Statuse(id: 3, type: 'DNF'));
-            await into(statuses).insert(Statuse(id: 4, type: 'DSQ'));
+            await into(statuses).insert(Status(id: 1, type: 'active'));
+            await into(statuses).insert(Status(id: 2, type: 'DNS'));
+            await into(statuses).insert(Status(id: 3, type: 'DNF'));
+            await into(statuses).insert(Status(id: 4, type: 'DSQ'));
           }
         },
       );

@@ -90,6 +90,7 @@ class ProtocolProvider {
   // ----------------старт----------------
   Future<List<StartItem>> getAllParticipantsAtStart() async {
     final db = await database;
+    //new participantsAtStart
     var res = await db.rawQuery('''
         SELECT
           start.id as id,
@@ -120,6 +121,7 @@ class ProtocolProvider {
   //ToDo: посмотреть как сделано
   Future<List<Map>> getStartToCsv() async {
     final db = await database;
+    //new startResultsForExport
     var result = await db.rawQuery('''
         SELECT number, starttime,
         IFNULL (automaticcorrection, IFNULL (manualcorrection, 'DNS')) automaticcorrection
@@ -145,6 +147,8 @@ class ProtocolProvider {
     DateTime timeAfter = beepDateTime.add(const Duration(seconds: 10));
     String after = DateFormat('HH:mm:ss').format(timeAfter);
     final db = await database;
+
+    //new startsBetweenTimesForBeep
     var x = await db.rawQuery('''
         SELECT COUNT(*) FROM start
         WHERE starttime BETWEEN '$beepTime' AND '$after'
@@ -178,10 +182,11 @@ class ProtocolProvider {
 
     // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
-    // в этом случае устанавливаем время старта и вовращаем null.
+    // в этом случае устанавливаем время старта и возвращаем null.
     // В противном случае возвращаем StartItem.
     if (!forceUpdate) {
       logger.i('Database -> Checking existing start time...');
+      // new startsBetweenTimes
       final res = await db.rawQuery('''
         SELECT *
         FROM start
@@ -437,6 +442,7 @@ class ProtocolProvider {
   Future<List<StartItem>> getNumbersOnTrace([String? timeNow]) async {
     timeNow ??= "now', 'localtime";
     final db = await database;
+
     final res = await db.rawQuery('''
         SELECT id, number
         FROM start
@@ -472,8 +478,10 @@ class ProtocolProvider {
   }
 
 //ToDo: посмотреть как сделано
+
   Future<List<Map>> getFinishToCsv() async {
     final db = await database;
+    // new finishResultsForExport
     final result = await db.rawQuery('''
         SELECT number, finishtime
         FROM finish

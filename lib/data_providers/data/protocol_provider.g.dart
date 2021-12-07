@@ -8,17 +8,19 @@ part of 'protocol_provider.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class Event extends DataClass implements Insertable<Event> {
-  final int? id;
-  final String? name;
+  final int id;
+  final String name;
   final String? startDate;
   final String? finishDate;
-  Event({this.id, this.name, this.startDate, this.finishDate});
+  Event(
+      {required this.id, required this.name, this.startDate, this.finishDate});
   factory Event.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Event(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       startDate: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}start_date']),
       finishDate: const StringType()
@@ -28,12 +30,8 @@ class Event extends DataClass implements Insertable<Event> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
-    }
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String?>(name);
-    }
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
     if (!nullToAbsent || startDate != null) {
       map['start_date'] = Variable<String?>(startDate);
     }
@@ -45,8 +43,8 @@ class Event extends DataClass implements Insertable<Event> {
 
   EventsCompanion toCompanion(bool nullToAbsent) {
     return EventsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      id: Value(id),
+      name: Value(name),
       startDate: startDate == null && nullToAbsent
           ? const Value.absent()
           : Value(startDate),
@@ -60,8 +58,8 @@ class Event extends DataClass implements Insertable<Event> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Event(
-      id: serializer.fromJson<int?>(json['id']),
-      name: serializer.fromJson<String?>(json['name']),
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
       startDate: serializer.fromJson<String?>(json['start_date']),
       finishDate: serializer.fromJson<String?>(json['finish_date']),
     );
@@ -70,8 +68,8 @@ class Event extends DataClass implements Insertable<Event> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
-      'name': serializer.toJson<String?>(name),
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
       'start_date': serializer.toJson<String?>(startDate),
       'finish_date': serializer.toJson<String?>(finishDate),
     };
@@ -109,8 +107,8 @@ class Event extends DataClass implements Insertable<Event> {
 }
 
 class EventsCompanion extends UpdateCompanion<Event> {
-  final Value<int?> id;
-  final Value<String?> name;
+  final Value<int> id;
+  final Value<String> name;
   final Value<String?> startDate;
   final Value<String?> finishDate;
   const EventsCompanion({
@@ -121,13 +119,13 @@ class EventsCompanion extends UpdateCompanion<Event> {
   });
   EventsCompanion.insert({
     this.id = const Value.absent(),
-    this.name = const Value.absent(),
+    required String name,
     this.startDate = const Value.absent(),
     this.finishDate = const Value.absent(),
-  });
+  }) : name = Value(name);
   static Insertable<Event> custom({
-    Expression<int?>? id,
-    Expression<String?>? name,
+    Expression<int>? id,
+    Expression<String>? name,
     Expression<String?>? startDate,
     Expression<String?>? finishDate,
   }) {
@@ -140,8 +138,8 @@ class EventsCompanion extends UpdateCompanion<Event> {
   }
 
   EventsCompanion copyWith(
-      {Value<int?>? id,
-      Value<String?>? name,
+      {Value<int>? id,
+      Value<String>? name,
       Value<String?>? startDate,
       Value<String?>? finishDate}) {
     return EventsCompanion(
@@ -156,10 +154,10 @@ class EventsCompanion extends UpdateCompanion<Event> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (name.present) {
-      map['name'] = Variable<String?>(name.value);
+      map['name'] = Variable<String>(name.value);
     }
     if (startDate.present) {
       map['start_date'] = Variable<String?>(startDate.value);
@@ -188,14 +186,16 @@ class Events extends Table with TableInfo<Events, Event> {
   Events(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, true,
+      'id', aliasedName, false,
       typeName: 'INTEGER',
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT not null');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
-      'name', aliasedName, true,
-      typeName: 'TEXT', requiredDuringInsert: false, $customConstraints: '');
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'not null');
   final VerificationMeta _startDateMeta = const VerificationMeta('startDate');
   late final GeneratedColumn<String?> startDate = GeneratedColumn<String?>(
       'start_date', aliasedName, true,
@@ -221,6 +221,8 @@ class Events extends Table with TableInfo<Events, Event> {
     if (data.containsKey('name')) {
       context.handle(
           _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
     }
     if (data.containsKey('start_date')) {
       context.handle(_startDateMeta,
@@ -253,7 +255,7 @@ class Events extends Table with TableInfo<Events, Event> {
 }
 
 class Trail extends DataClass implements Insertable<Trail> {
-  final int? id;
+  final int id;
   final String? name;
   final int? distance;
   final int? elevation;
@@ -261,7 +263,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   final String? link;
   final String? comment;
   Trail(
-      {this.id,
+      {required this.id,
       this.name,
       this.distance,
       this.elevation,
@@ -271,7 +273,8 @@ class Trail extends DataClass implements Insertable<Trail> {
   factory Trail.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Trail(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}name']),
       distance: const IntType()
@@ -289,9 +292,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
-    }
+    map['id'] = Variable<int>(id);
     if (!nullToAbsent || name != null) {
       map['name'] = Variable<String?>(name);
     }
@@ -315,7 +316,7 @@ class Trail extends DataClass implements Insertable<Trail> {
 
   TrailsCompanion toCompanion(bool nullToAbsent) {
     return TrailsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       name: name == null && nullToAbsent ? const Value.absent() : Value(name),
       distance: distance == null && nullToAbsent
           ? const Value.absent()
@@ -337,7 +338,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Trail(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String?>(json['name']),
       distance: serializer.fromJson<int?>(json['distance']),
       elevation: serializer.fromJson<int?>(json['elevation']),
@@ -350,7 +351,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String?>(name),
       'distance': serializer.toJson<int?>(distance),
       'elevation': serializer.toJson<int?>(elevation),
@@ -408,7 +409,7 @@ class Trail extends DataClass implements Insertable<Trail> {
 }
 
 class TrailsCompanion extends UpdateCompanion<Trail> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<String?> name;
   final Value<int?> distance;
   final Value<int?> elevation;
@@ -434,7 +435,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.comment = const Value.absent(),
   });
   static Insertable<Trail> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<String?>? name,
     Expression<int?>? distance,
     Expression<int?>? elevation,
@@ -454,7 +455,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   }
 
   TrailsCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<String?>? name,
       Value<int?>? distance,
       Value<int?>? elevation,
@@ -476,7 +477,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (name.present) {
       map['name'] = Variable<String?>(name.value);
@@ -520,10 +521,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   Trails(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, true,
+      'id', aliasedName, false,
       typeName: 'INTEGER',
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT not null');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
       'name', aliasedName, true,
@@ -608,27 +609,28 @@ class Trails extends Table with TableInfo<Trails, Trail> {
 }
 
 class Stage extends DataClass implements Insertable<Stage> {
-  final int? id;
+  final int id;
   final int? trailId;
   final int eventId;
-  final String? name;
+  final String name;
   final int isActive;
   Stage(
-      {this.id,
+      {required this.id,
       this.trailId,
       required this.eventId,
-      this.name,
+      required this.name,
       required this.isActive});
   factory Stage.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Stage(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       trailId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}trail_id']),
       eventId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}event_id'])!,
       name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       isActive: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_active'])!,
     );
@@ -636,28 +638,24 @@ class Stage extends DataClass implements Insertable<Stage> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
-    }
+    map['id'] = Variable<int>(id);
     if (!nullToAbsent || trailId != null) {
       map['trail_id'] = Variable<int?>(trailId);
     }
     map['event_id'] = Variable<int>(eventId);
-    if (!nullToAbsent || name != null) {
-      map['name'] = Variable<String?>(name);
-    }
+    map['name'] = Variable<String>(name);
     map['is_active'] = Variable<int>(isActive);
     return map;
   }
 
   StagesCompanion toCompanion(bool nullToAbsent) {
     return StagesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       trailId: trailId == null && nullToAbsent
           ? const Value.absent()
           : Value(trailId),
       eventId: Value(eventId),
-      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
+      name: Value(name),
       isActive: Value(isActive),
     );
   }
@@ -666,10 +664,10 @@ class Stage extends DataClass implements Insertable<Stage> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Stage(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       trailId: serializer.fromJson<int?>(json['trail_id']),
       eventId: serializer.fromJson<int>(json['event_id']),
-      name: serializer.fromJson<String?>(json['name']),
+      name: serializer.fromJson<String>(json['name']),
       isActive: serializer.fromJson<int>(json['is_active']),
     );
   }
@@ -677,10 +675,10 @@ class Stage extends DataClass implements Insertable<Stage> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'trail_id': serializer.toJson<int?>(trailId),
       'event_id': serializer.toJson<int>(eventId),
-      'name': serializer.toJson<String?>(name),
+      'name': serializer.toJson<String>(name),
       'is_active': serializer.toJson<int>(isActive),
     };
   }
@@ -720,10 +718,10 @@ class Stage extends DataClass implements Insertable<Stage> {
 }
 
 class StagesCompanion extends UpdateCompanion<Stage> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<int?> trailId;
   final Value<int> eventId;
-  final Value<String?> name;
+  final Value<String> name;
   final Value<int> isActive;
   const StagesCompanion({
     this.id = const Value.absent(),
@@ -736,14 +734,15 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     this.id = const Value.absent(),
     this.trailId = const Value.absent(),
     required int eventId,
-    this.name = const Value.absent(),
+    required String name,
     this.isActive = const Value.absent(),
-  }) : eventId = Value(eventId);
+  })  : eventId = Value(eventId),
+        name = Value(name);
   static Insertable<Stage> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<int?>? trailId,
     Expression<int>? eventId,
-    Expression<String?>? name,
+    Expression<String>? name,
     Expression<int>? isActive,
   }) {
     return RawValuesInsertable({
@@ -756,10 +755,10 @@ class StagesCompanion extends UpdateCompanion<Stage> {
   }
 
   StagesCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<int?>? trailId,
       Value<int>? eventId,
-      Value<String?>? name,
+      Value<String>? name,
       Value<int>? isActive}) {
     return StagesCompanion(
       id: id ?? this.id,
@@ -774,7 +773,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (trailId.present) {
       map['trail_id'] = Variable<int?>(trailId.value);
@@ -783,7 +782,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
       map['event_id'] = Variable<int>(eventId.value);
     }
     if (name.present) {
-      map['name'] = Variable<String?>(name.value);
+      map['name'] = Variable<String>(name.value);
     }
     if (isActive.present) {
       map['is_active'] = Variable<int>(isActive.value);
@@ -810,10 +809,10 @@ class Stages extends Table with TableInfo<Stages, Stage> {
   Stages(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, true,
+      'id', aliasedName, false,
       typeName: 'INTEGER',
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT not null');
   final VerificationMeta _trailIdMeta = const VerificationMeta('trailId');
   late final GeneratedColumn<int?> trailId = GeneratedColumn<int?>(
       'trail_id', aliasedName, true,
@@ -826,8 +825,10 @@ class Stages extends Table with TableInfo<Stages, Stage> {
       $customConstraints: 'not null');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
-      'name', aliasedName, true,
-      typeName: 'TEXT', requiredDuringInsert: false, $customConstraints: '');
+      'name', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: true,
+      $customConstraints: 'not null');
   final VerificationMeta _isActiveMeta = const VerificationMeta('isActive');
   late final GeneratedColumn<int?> isActive = GeneratedColumn<int?>(
       'is_active', aliasedName, false,
@@ -862,6 +863,8 @@ class Stages extends Table with TableInfo<Stages, Stage> {
     if (data.containsKey('name')) {
       context.handle(
           _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
     }
     if (data.containsKey('is_active')) {
       context.handle(_isActiveMeta,
@@ -893,7 +896,7 @@ class Stages extends Table with TableInfo<Stages, Stage> {
 }
 
 class Rider extends DataClass implements Insertable<Rider> {
-  final int? id;
+  final int id;
   final String? name;
   final String? nickname;
   final int? birthday;
@@ -903,7 +906,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   final String? phone;
   final String? comment;
   Rider(
-      {this.id,
+      {required this.id,
       this.name,
       this.nickname,
       this.birthday,
@@ -915,7 +918,8 @@ class Rider extends DataClass implements Insertable<Rider> {
   factory Rider.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Rider(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}name']),
       nickname: const StringType()
@@ -937,9 +941,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
-    }
+    map['id'] = Variable<int>(id);
     if (!nullToAbsent || name != null) {
       map['name'] = Variable<String?>(name);
     }
@@ -969,7 +971,7 @@ class Rider extends DataClass implements Insertable<Rider> {
 
   RidersCompanion toCompanion(bool nullToAbsent) {
     return RidersCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       name: name == null && nullToAbsent ? const Value.absent() : Value(name),
       nickname: nickname == null && nullToAbsent
           ? const Value.absent()
@@ -993,7 +995,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Rider(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String?>(json['name']),
       nickname: serializer.fromJson<String?>(json['nickname']),
       birthday: serializer.fromJson<int?>(json['birthday']),
@@ -1008,7 +1010,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String?>(name),
       'nickname': serializer.toJson<String?>(nickname),
       'birthday': serializer.toJson<int?>(birthday),
@@ -1076,7 +1078,7 @@ class Rider extends DataClass implements Insertable<Rider> {
 }
 
 class RidersCompanion extends UpdateCompanion<Rider> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<String?> name;
   final Value<String?> nickname;
   final Value<int?> birthday;
@@ -1108,7 +1110,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     this.comment = const Value.absent(),
   });
   static Insertable<Rider> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<String?>? name,
     Expression<String?>? nickname,
     Expression<int?>? birthday,
@@ -1132,7 +1134,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
   }
 
   RidersCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<String?>? name,
       Value<String?>? nickname,
       Value<int?>? birthday,
@@ -1158,7 +1160,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (name.present) {
       map['name'] = Variable<String?>(name.value);
@@ -1210,10 +1212,10 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   Riders(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, true,
+      'id', aliasedName, false,
       typeName: 'INTEGER',
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT not null');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
       'name', aliasedName, true,
@@ -1313,14 +1315,15 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   bool get dontWriteConstraints => true;
 }
 
-class Statuse extends DataClass implements Insertable<Statuse> {
-  final int? id;
+class Status extends DataClass implements Insertable<Status> {
+  final int id;
   final String type;
-  Statuse({this.id, required this.type});
-  factory Statuse.fromData(Map<String, dynamic> data, {String? prefix}) {
+  Status({required this.id, required this.type});
+  factory Status.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return Statuse(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+    return Status(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       type: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}type'])!,
     );
@@ -1328,25 +1331,23 @@ class Statuse extends DataClass implements Insertable<Statuse> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['type'] = Variable<String>(type);
     return map;
   }
 
   StatusesCompanion toCompanion(bool nullToAbsent) {
     return StatusesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       type: Value(type),
     );
   }
 
-  factory Statuse.fromJson(Map<String, dynamic> json,
+  factory Status.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Statuse(
-      id: serializer.fromJson<int?>(json['id']),
+    return Status(
+      id: serializer.fromJson<int>(json['id']),
       type: serializer.fromJson<String>(json['type']),
     );
   }
@@ -1354,18 +1355,18 @@ class Statuse extends DataClass implements Insertable<Statuse> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'type': serializer.toJson<String>(type),
     };
   }
 
-  Statuse copyWith({int? id, String? type}) => Statuse(
+  Status copyWith({int? id, String? type}) => Status(
         id: id ?? this.id,
         type: type ?? this.type,
       );
   @override
   String toString() {
-    return (StringBuffer('Statuse(')
+    return (StringBuffer('Status(')
           ..write('id: $id, ')
           ..write('type: $type')
           ..write(')'))
@@ -1377,11 +1378,11 @@ class Statuse extends DataClass implements Insertable<Statuse> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Statuse && other.id == this.id && other.type == this.type);
+      (other is Status && other.id == this.id && other.type == this.type);
 }
 
-class StatusesCompanion extends UpdateCompanion<Statuse> {
-  final Value<int?> id;
+class StatusesCompanion extends UpdateCompanion<Status> {
+  final Value<int> id;
   final Value<String> type;
   const StatusesCompanion({
     this.id = const Value.absent(),
@@ -1391,8 +1392,8 @@ class StatusesCompanion extends UpdateCompanion<Statuse> {
     this.id = const Value.absent(),
     required String type,
   }) : type = Value(type);
-  static Insertable<Statuse> custom({
-    Expression<int?>? id,
+  static Insertable<Status> custom({
+    Expression<int>? id,
     Expression<String>? type,
   }) {
     return RawValuesInsertable({
@@ -1401,7 +1402,7 @@ class StatusesCompanion extends UpdateCompanion<Statuse> {
     });
   }
 
-  StatusesCompanion copyWith({Value<int?>? id, Value<String>? type}) {
+  StatusesCompanion copyWith({Value<int>? id, Value<String>? type}) {
     return StatusesCompanion(
       id: id ?? this.id,
       type: type ?? this.type,
@@ -1412,7 +1413,7 @@ class StatusesCompanion extends UpdateCompanion<Statuse> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (type.present) {
       map['type'] = Variable<String>(type.value);
@@ -1430,16 +1431,16 @@ class StatusesCompanion extends UpdateCompanion<Statuse> {
   }
 }
 
-class Statuses extends Table with TableInfo<Statuses, Statuse> {
+class Statuses extends Table with TableInfo<Statuses, Status> {
   final GeneratedDatabase _db;
   final String? _alias;
   Statuses(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, true,
+      'id', aliasedName, false,
       typeName: 'INTEGER',
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT not null');
   final VerificationMeta _typeMeta = const VerificationMeta('type');
   late final GeneratedColumn<String?> type = GeneratedColumn<String?>(
       'type', aliasedName, false,
@@ -1453,7 +1454,7 @@ class Statuses extends Table with TableInfo<Statuses, Statuse> {
   @override
   String get actualTableName => 'statuses';
   @override
-  VerificationContext validateIntegrity(Insertable<Statuse> instance,
+  VerificationContext validateIntegrity(Insertable<Status> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -1472,8 +1473,8 @@ class Statuses extends Table with TableInfo<Statuses, Statuse> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Statuse map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Statuse.fromData(data,
+  Status map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return Status.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
@@ -1487,7 +1488,7 @@ class Statuses extends Table with TableInfo<Statuses, Statuse> {
 }
 
 class Participant extends DataClass implements Insertable<Participant> {
-  final int? id;
+  final int id;
   final int eventId;
   final int riderId;
   final int number;
@@ -1495,7 +1496,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   final String? rfid;
   final int statusId;
   Participant(
-      {this.id,
+      {required this.id,
       required this.eventId,
       required this.riderId,
       required this.number,
@@ -1505,7 +1506,8 @@ class Participant extends DataClass implements Insertable<Participant> {
   factory Participant.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Participant(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       eventId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}event_id'])!,
       riderId: const IntType()
@@ -1523,9 +1525,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['event_id'] = Variable<int>(eventId);
     map['rider_id'] = Variable<int>(riderId);
     map['number'] = Variable<int>(number);
@@ -1539,7 +1539,7 @@ class Participant extends DataClass implements Insertable<Participant> {
 
   ParticipantsCompanion toCompanion(bool nullToAbsent) {
     return ParticipantsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       eventId: Value(eventId),
       riderId: Value(riderId),
       number: Value(number),
@@ -1553,7 +1553,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Participant(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       eventId: serializer.fromJson<int>(json['event_id']),
       riderId: serializer.fromJson<int>(json['rider_id']),
       number: serializer.fromJson<int>(json['number']),
@@ -1566,7 +1566,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'event_id': serializer.toJson<int>(eventId),
       'rider_id': serializer.toJson<int>(riderId),
       'number': serializer.toJson<int>(number),
@@ -1624,7 +1624,7 @@ class Participant extends DataClass implements Insertable<Participant> {
 }
 
 class ParticipantsCompanion extends UpdateCompanion<Participant> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<int> eventId;
   final Value<int> riderId;
   final Value<int> number;
@@ -1653,7 +1653,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
         number = Value(number),
         category = Value(category);
   static Insertable<Participant> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<int>? eventId,
     Expression<int>? riderId,
     Expression<int>? number,
@@ -1673,7 +1673,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   }
 
   ParticipantsCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<int>? eventId,
       Value<int>? riderId,
       Value<int>? number,
@@ -1695,7 +1695,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (eventId.present) {
       map['event_id'] = Variable<int>(eventId.value);
@@ -1739,10 +1739,10 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   Participants(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, true,
+      'id', aliasedName, false,
       typeName: 'INTEGER',
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT not null');
   final VerificationMeta _eventIdMeta = const VerificationMeta('eventId');
   late final GeneratedColumn<int?> eventId = GeneratedColumn<int?>(
       'event_id', aliasedName, false,
@@ -1852,7 +1852,7 @@ class Participants extends Table with TableInfo<Participants, Participant> {
 }
 
 class Start extends DataClass implements Insertable<Start> {
-  final int? id;
+  final int id;
   final int stageId;
   final int participantId;
   final String startTime;
@@ -1863,7 +1863,7 @@ class Start extends DataClass implements Insertable<Start> {
   final int? manualCorrection;
   final int statusId;
   Start(
-      {this.id,
+      {required this.id,
       required this.stageId,
       required this.participantId,
       required this.startTime,
@@ -1876,7 +1876,8 @@ class Start extends DataClass implements Insertable<Start> {
   factory Start.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Start(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       stageId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}stage_id'])!,
       participantId: const IntType()
@@ -1900,9 +1901,7 @@ class Start extends DataClass implements Insertable<Start> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['stage_id'] = Variable<int>(stageId);
     map['participant_id'] = Variable<int>(participantId);
     map['start_time'] = Variable<String>(startTime);
@@ -1927,7 +1926,7 @@ class Start extends DataClass implements Insertable<Start> {
 
   StartsCompanion toCompanion(bool nullToAbsent) {
     return StartsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       stageId: Value(stageId),
       participantId: Value(participantId),
       startTime: Value(startTime),
@@ -1954,7 +1953,7 @@ class Start extends DataClass implements Insertable<Start> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Start(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       stageId: serializer.fromJson<int>(json['stage_id']),
       participantId: serializer.fromJson<int>(json['participant_id']),
       startTime: serializer.fromJson<String>(json['start_time']),
@@ -1972,7 +1971,7 @@ class Start extends DataClass implements Insertable<Start> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'stage_id': serializer.toJson<int>(stageId),
       'participant_id': serializer.toJson<int>(participantId),
       'start_time': serializer.toJson<String>(startTime),
@@ -2054,7 +2053,7 @@ class Start extends DataClass implements Insertable<Start> {
 }
 
 class StartsCompanion extends UpdateCompanion<Start> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<int> stageId;
   final Value<int> participantId;
   final Value<String> startTime;
@@ -2091,7 +2090,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
         participantId = Value(participantId),
         startTime = Value(startTime);
   static Insertable<Start> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<int>? stageId,
     Expression<int>? participantId,
     Expression<String>? startTime,
@@ -2119,7 +2118,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
   }
 
   StartsCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<int>? stageId,
       Value<int>? participantId,
       Value<String>? startTime,
@@ -2147,7 +2146,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (stageId.present) {
       map['stage_id'] = Variable<int>(stageId.value);
@@ -2203,10 +2202,10 @@ class Starts extends Table with TableInfo<Starts, Start> {
   Starts(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, true,
+      'id', aliasedName, false,
       typeName: 'INTEGER',
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT not null');
   final VerificationMeta _stageIdMeta = const VerificationMeta('stageId');
   late final GeneratedColumn<int?> stageId = GeneratedColumn<int?>(
       'stage_id', aliasedName, false,
@@ -2364,26 +2363,27 @@ class Starts extends Table with TableInfo<Starts, Start> {
   bool get dontWriteConstraints => true;
 }
 
-class Finishe extends DataClass implements Insertable<Finishe> {
-  final int? id;
+class Finish extends DataClass implements Insertable<Finish> {
+  final int id;
   final int stageId;
   final int? number;
   final String timestamp;
   final String finishTime;
   final int isHidden;
   final int isManual;
-  Finishe(
-      {this.id,
+  Finish(
+      {required this.id,
       required this.stageId,
       this.number,
       required this.timestamp,
       required this.finishTime,
       required this.isHidden,
       required this.isManual});
-  factory Finishe.fromData(Map<String, dynamic> data, {String? prefix}) {
+  factory Finish.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return Finishe(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
+    return Finish(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       stageId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}stage_id'])!,
       number: const IntType()
@@ -2401,9 +2401,7 @@ class Finishe extends DataClass implements Insertable<Finishe> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['stage_id'] = Variable<int>(stageId);
     if (!nullToAbsent || number != null) {
       map['number'] = Variable<int?>(number);
@@ -2417,7 +2415,7 @@ class Finishe extends DataClass implements Insertable<Finishe> {
 
   FinishesCompanion toCompanion(bool nullToAbsent) {
     return FinishesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       stageId: Value(stageId),
       number:
           number == null && nullToAbsent ? const Value.absent() : Value(number),
@@ -2428,11 +2426,11 @@ class Finishe extends DataClass implements Insertable<Finishe> {
     );
   }
 
-  factory Finishe.fromJson(Map<String, dynamic> json,
+  factory Finish.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Finishe(
-      id: serializer.fromJson<int?>(json['id']),
+    return Finish(
+      id: serializer.fromJson<int>(json['id']),
       stageId: serializer.fromJson<int>(json['stage_id']),
       number: serializer.fromJson<int?>(json['number']),
       timestamp: serializer.fromJson<String>(json['timestamp']),
@@ -2445,7 +2443,7 @@ class Finishe extends DataClass implements Insertable<Finishe> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'stage_id': serializer.toJson<int>(stageId),
       'number': serializer.toJson<int?>(number),
       'timestamp': serializer.toJson<String>(timestamp),
@@ -2455,7 +2453,7 @@ class Finishe extends DataClass implements Insertable<Finishe> {
     };
   }
 
-  Finishe copyWith(
+  Finish copyWith(
           {int? id,
           int? stageId,
           int? number,
@@ -2463,7 +2461,7 @@ class Finishe extends DataClass implements Insertable<Finishe> {
           String? finishTime,
           int? isHidden,
           int? isManual}) =>
-      Finishe(
+      Finish(
         id: id ?? this.id,
         stageId: stageId ?? this.stageId,
         number: number ?? this.number,
@@ -2474,7 +2472,7 @@ class Finishe extends DataClass implements Insertable<Finishe> {
       );
   @override
   String toString() {
-    return (StringBuffer('Finishe(')
+    return (StringBuffer('Finish(')
           ..write('id: $id, ')
           ..write('stageId: $stageId, ')
           ..write('number: $number, ')
@@ -2492,7 +2490,7 @@ class Finishe extends DataClass implements Insertable<Finishe> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Finishe &&
+      (other is Finish &&
           other.id == this.id &&
           other.stageId == this.stageId &&
           other.number == this.number &&
@@ -2502,8 +2500,8 @@ class Finishe extends DataClass implements Insertable<Finishe> {
           other.isManual == this.isManual);
 }
 
-class FinishesCompanion extends UpdateCompanion<Finishe> {
-  final Value<int?> id;
+class FinishesCompanion extends UpdateCompanion<Finish> {
+  final Value<int> id;
   final Value<int> stageId;
   final Value<int?> number;
   final Value<String> timestamp;
@@ -2530,8 +2528,8 @@ class FinishesCompanion extends UpdateCompanion<Finishe> {
   })  : stageId = Value(stageId),
         timestamp = Value(timestamp),
         finishTime = Value(finishTime);
-  static Insertable<Finishe> custom({
-    Expression<int?>? id,
+  static Insertable<Finish> custom({
+    Expression<int>? id,
     Expression<int>? stageId,
     Expression<int?>? number,
     Expression<String>? timestamp,
@@ -2551,7 +2549,7 @@ class FinishesCompanion extends UpdateCompanion<Finishe> {
   }
 
   FinishesCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<int>? stageId,
       Value<int?>? number,
       Value<String>? timestamp,
@@ -2573,7 +2571,7 @@ class FinishesCompanion extends UpdateCompanion<Finishe> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (stageId.present) {
       map['stage_id'] = Variable<int>(stageId.value);
@@ -2611,16 +2609,16 @@ class FinishesCompanion extends UpdateCompanion<Finishe> {
   }
 }
 
-class Finishes extends Table with TableInfo<Finishes, Finishe> {
+class Finishes extends Table with TableInfo<Finishes, Finish> {
   final GeneratedDatabase _db;
   final String? _alias;
   Finishes(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, true,
+      'id', aliasedName, false,
       typeName: 'INTEGER',
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT not null');
   final VerificationMeta _stageIdMeta = const VerificationMeta('stageId');
   late final GeneratedColumn<int?> stageId = GeneratedColumn<int?>(
       'stage_id', aliasedName, false,
@@ -2665,7 +2663,7 @@ class Finishes extends Table with TableInfo<Finishes, Finishe> {
   @override
   String get actualTableName => 'finishes';
   @override
-  VerificationContext validateIntegrity(Insertable<Finishe> instance,
+  VerificationContext validateIntegrity(Insertable<Finish> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -2710,8 +2708,8 @@ class Finishes extends Table with TableInfo<Finishes, Finishe> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Finishe map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Finishe.fromData(data,
+  Finish map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return Finish.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
@@ -2737,11 +2735,31 @@ abstract class _$ProtocolProvider extends GeneratedDatabase {
   late final Participants participants = Participants(this);
   late final Starts starts = Starts(this);
   late final Finishes finishes = Finishes(this);
-  Selectable<ParticipantsAtStartResult> participantsAtStart(int stage_id) {
-    return customSelect(
-        'SELECT\n    participants.number as number,\n    participants.category as category,\n    starts.start_time as start_time,\n    starts.automatic_start_time as automatic_start_time,\n    starts.automatic_correction as automatic_correction,\n    starts.timestamp as timestamp,\n    starts.manual_start_time as manual_start_time,\n    starts.manual_correction as manual_correction,\n    riders.name as name,\n    riders.nickname as nickname,\n    riders.birthday as birthday,\n    riders.team as team,\n    riders.city as city,\n	statuses.type as status\nFROM starts, participants, riders, statuses\nWHERE participants.rider_id = riders.id\n    AND statuses.id = participants.status_id\n    AND status != \'DNS\'\n	AND starts.stage_id = :stage_id\nORDER BY start_time ASC',
+  Selectable<Event> event(int event_id) {
+    return customSelect('SELECT * FROM events\r\nWHERE id = :event_id',
         variables: [
-          Variable<int>(stage_id)
+          Variable<int>(event_id)
+        ],
+        readsFrom: {
+          events,
+        }).map(events.mapFromRow);
+  }
+
+  Selectable<Stage> stage(int stageId) {
+    return customSelect('SELECT * FROM stages\r\nWHERE id = :stageId',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          stages,
+        }).map(stages.mapFromRow);
+  }
+
+  Selectable<ParticipantsAtStartResult> participantsAtStart(int stageId) {
+    return customSelect(
+        'SELECT\r\n    participants.number as number,\r\n    participants.category as category,\r\n    starts.start_time as start_time,\r\n    starts.automatic_start_time as automatic_start_time,\r\n    starts.automatic_correction as automatic_correction,\r\n    starts.timestamp as timestamp,\r\n    starts.manual_start_time as manual_start_time,\r\n    starts.manual_correction as manual_correction,\r\n    riders.name as name,\r\n    riders.nickname as nickname,\r\n    riders.birthday as birthday,\r\n    riders.team as team,\r\n    riders.city as city,\r\n	statuses.type as status\r\nFROM starts, participants, riders, statuses\r\nWHERE\r\n    participants.rider_id = riders.id\r\n    AND statuses.id = participants.status_id\r\n    AND starts.participant_id = participants.id\r\n    AND status != \'DNS\'\r\n    AND starts.stage_id = :stageId\r\nORDER BY start_time ASC',
+        variables: [
+          Variable<int>(stageId)
         ],
         readsFrom: {
           participants,
@@ -2766,6 +2784,96 @@ abstract class _$ProtocolProvider extends GeneratedDatabase {
         status: row.read<String>('status'),
       );
     });
+  }
+
+  Selectable<Finish> finishStamps(int stageId, int showHidden, int showManual) {
+    return customSelect(
+        'SELECT * FROM finishes\r\nWHERE\r\n	stage_id = :stageId\r\n	--TODO: filter "with numbers only"\r\n	AND is_hidden <= :showHidden\r\n	AND is_manual <= :showManual',
+        variables: [
+          Variable<int>(stageId),
+          Variable<int>(showHidden),
+          Variable<int>(showManual)
+        ],
+        readsFrom: {
+          finishes,
+        }).map(finishes.mapFromRow);
+  }
+
+  Selectable<int?> numbersOnTrace(int stageId) {
+    return customSelect(
+        'SELECT participants.number as number\r\nFROM starts, participants\r\nWHERE\r\n	starts.stage_id = :stageId\r\n	AND starts.participant_id = participants.id\r\n	AND julianday(time(\':time\')) > julianday(time(start_time))\r\nEXCEPT\r\nSELECT number\r\nFROM finishes\r\nWHERE\r\n	finishes.stage_id = :stageId\r\n	AND number NOTNULL',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          participants,
+          starts,
+          finishes,
+        }).map((QueryRow row) => row.read<int?>('number'));
+  }
+
+  Selectable<StartResultsForExportResult> startResultsForExport(int stageId) {
+    return customSelect(
+        'SELECT\r\n    participants.number as number,\r\n    starts.start_time as start_time,\r\n    IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, \'DNS\')) as correction\r\nFROM starts, participants, stages\r\nWHERE\r\n    starts.stage_id = stages.id\r\n    AND starts.participant_id = participants.id\r\n    AND starts.stage_id = :stageId\r\nORDER BY start_time ASC',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          participants,
+          starts,
+          stages,
+        }).map((QueryRow row) {
+      return StartResultsForExportResult(
+        number: row.read<int>('number'),
+        startTime: row.read<String>('start_time'),
+        correction: row.read<String>('correction'),
+      );
+    });
+  }
+
+  Selectable<FinishResultsForExportResult> finishResultsForExport(int stageId) {
+    return customSelect(
+        'SELECT\r\n	number, finish_time\r\nFROM finishes\r\nWHERE\r\n	number NOTNULL\r\n	AND stage_id = :stageId\r\nORDER BY finish_time ASC',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          finishes,
+        }).map((QueryRow row) {
+      return FinishResultsForExportResult(
+        number: row.read<int?>('number'),
+        finishTime: row.read<String>('finish_time'),
+      );
+    });
+  }
+
+  Selectable<int> startsBetweenTimesForBeep(
+      String beepTime, String after, int stageId) {
+    return customSelect(
+        'SELECT COUNT(*)\r\nFROM starts, statuses\r\nWHERE\r\n	start_time BETWEEN :beepTime AND :after\r\n	AND starts.stage_id = :stageId\r\n	AND starts.status_id = statuses.id\r\n	AND statuses.type != \'DNS\'\r\n	AND (automatic_start_time ISNULL OR manual_start_time ISNULL)\r\nORDER BY start_time ASC',
+        variables: [
+          Variable<String>(beepTime),
+          Variable<String>(after),
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          starts,
+          statuses,
+        }).map((QueryRow row) => row.read<int>('COUNT(*)'));
+  }
+
+  Selectable<Start> startsBetweenTimes(
+      String before, String after, int stageId) {
+    return customSelect(
+        'SELECT *\r\nFROM starts\r\nWHERE\r\n	start_time BETWEEN :before AND :after\r\n	AND stage_id = :stageId',
+        variables: [
+          Variable<String>(before),
+          Variable<String>(after),
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          starts,
+        }).map(starts.mapFromRow);
   }
 
   @override
@@ -2813,5 +2921,25 @@ class ParticipantsAtStartResult {
     this.team,
     this.city,
     required this.status,
+  });
+}
+
+class StartResultsForExportResult {
+  final int number;
+  final String startTime;
+  final String correction;
+  StartResultsForExportResult({
+    required this.number,
+    required this.startTime,
+    required this.correction,
+  });
+}
+
+class FinishResultsForExportResult {
+  final int? number;
+  final String finishTime;
+  FinishResultsForExportResult({
+    this.number,
+    required this.finishTime,
   });
 }

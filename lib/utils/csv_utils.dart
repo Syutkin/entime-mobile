@@ -52,14 +52,14 @@ String? mapListToCsv(List<Map<String, dynamic>>? mapList,
 }
 
 // Save csv to file
-Future<String?> saveCsv(String csv, String suffix, String filePath) async {
+Future<String?> saveCsv(String csv, String name) async {
   final directory = await getExternalStorageDirectory();
   if (directory == null) {
     assert(directory != null);
     return null;
   }
   final file = File(
-      '${directory.path}/${basenameWithoutExtension(filePath)}-$suffix.csv');
+      '${directory.path}/$name.csv');
   await file.writeAsString(csv);
   logger.i('saveCsv -> Saved csv to file ${file.path}');
   return file.path;

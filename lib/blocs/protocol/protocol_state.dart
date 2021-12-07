@@ -5,11 +5,35 @@ abstract class ProtocolState extends Equatable {
   List<Object?> get props => [];
 }
 
+class ProtocolNotSelectedState extends ProtocolState {}
+
+class ProtocolSelectedEventState extends ProtocolState {
+  // Выбранное соревнование
+  final Event event;
+
+  ProtocolSelectedEventState({
+    required this.event,
+  });
+
+  @override
+  List<Object> get props => [event];
+
+  @override
+  String toString() => 'ProtocolSelectedEventState ('
+      'event: ${event.name}, '
+      ')';
+}
+
 class ProtocolSelectedState extends ProtocolState {
   final List<ParticipantsAtStartResult> startProtocol;
-  final List<FinishItem> finishProtocol;
-  final List<StartItem> numbersOnTraceProtocol;
-  final String databasePath;
+  final List<Finish> finishProtocol;
+  final List<int> numbersOnTraceProtocol;
+
+  // Выбранное соревнование
+  final Event event;
+
+  // Выбранный спец.участок
+  final Stage stage;
 
   // Изменить время финиша для номера
   final bool? updateFinishNumber;
@@ -37,7 +61,8 @@ class ProtocolSelectedState extends ProtocolState {
     required this.startProtocol,
     required this.finishProtocol,
     required this.numbersOnTraceProtocol,
-    required this.databasePath,
+    required this.event,
+    required this.stage,
     this.updateFinishNumber,
     this.automaticStart,
     this.previousStart,
@@ -51,7 +76,8 @@ class ProtocolSelectedState extends ProtocolState {
         startProtocol,
         finishProtocol,
         numbersOnTraceProtocol,
-        databasePath,
+        event,
+        stage,
         updateFinishNumber,
         automaticStart,
         previousStart,
@@ -65,7 +91,8 @@ class ProtocolSelectedState extends ProtocolState {
       'startProtocol: ${startProtocol.length} items, '
       'finishProtocol: ${finishProtocol.length} items, '
       'numbersOnTraceProtocol: ${numbersOnTraceProtocol.length} items, '
-      'databasePath: $databasePath, '
+      'event: ${event.name}, '
+      'stage: ${stage.name}, '
       'updateFinishNumber: $updateFinishNumber, '
       'automaticStart: $automaticStart, '
       'previousStart: $previousStart, '
@@ -74,5 +101,3 @@ class ProtocolSelectedState extends ProtocolState {
       'awaitingNumber: $awaitingNumber'
       ')';
 }
-
-class ProtocolNotSelectedState extends ProtocolState {}

@@ -16,7 +16,7 @@ class SelectProtocol extends ProtocolEvent {
   List<Object?> get props => [file];
 }
 
-class DeselectProtocol extends ProtocolEvent {}
+// class DeselectProtocol extends ProtocolEvent {}
 
 class ProtocolAddStartNumber extends ProtocolEvent {
   final StartTime startTime;
@@ -29,21 +29,21 @@ class ProtocolAddStartNumber extends ProtocolEvent {
 }
 
 class SelectEvent extends ProtocolEvent {
-  final int event;
+  final int eventId;
 
-  const SelectEvent(this.event);
+  const SelectEvent(this.eventId);
 
   @override
-  List<Object> get props => [event];
+  List<Object> get props => [eventId];
 }
 
 class SelectStage extends ProtocolEvent {
-  final int stage;
+  final int stageId;
 
-  const SelectStage(this.stage);
+  const SelectStage(this.stageId);
 
   @override
-  List<Object> get props => [stage];
+  List<Object> get props => [stageId];
 }
 
 class ProtocolUpdateAutomaticCorrection extends ProtocolEvent {

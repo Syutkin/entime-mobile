@@ -1,22 +1,22 @@
 CREATE TABLE events (
-	id integer PRIMARY KEY AUTOINCREMENT,
-	name text,
+	id integer PRIMARY KEY AUTOINCREMENT not null,
+	name text not null,
 	start_date text,
 	finish_date text
 );
 
 CREATE TABLE stages (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id integer PRIMARY KEY AUTOINCREMENT not null,
 	trail_id integer,
 	event_id integer not null,
-	name text,
+	name text not null,
 	is_active integer not null default 1,
 	FOREIGN KEY (trail_id) REFERENCES trails (id),
     FOREIGN KEY (event_id) REFERENCES events (id)
 );
 
 CREATE TABLE riders (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id integer PRIMARY KEY AUTOINCREMENT not null,
 	name text,
 	nickname text,
 	birthday integer,
@@ -28,12 +28,12 @@ CREATE TABLE riders (
 );
 
 CREATE TABLE statuses (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id integer PRIMARY KEY AUTOINCREMENT not null,
 	type text not null
-);
+) AS Status;
 
 CREATE TABLE participants (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id integer PRIMARY KEY AUTOINCREMENT not null,
 	event_id integer not null,
 	rider_id integer not null,
 	number integer not null,
@@ -46,7 +46,7 @@ CREATE TABLE participants (
 );
 
 CREATE TABLE starts (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id integer PRIMARY KEY AUTOINCREMENT not null,
 	stage_id integer not null,
 	participant_id integer not null,
 	start_time text not null,
@@ -62,7 +62,7 @@ CREATE TABLE starts (
 );
 
 CREATE TABLE finishes (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id integer PRIMARY KEY AUTOINCREMENT not null,
 	stage_id integer not null,
 	number integer,
 	timestamp text not null,
@@ -70,10 +70,10 @@ CREATE TABLE finishes (
 	is_hidden integer not null default 0,
 	is_manual integer not null default 0,
 	FOREIGN KEY (stage_id) REFERENCES stages (id)
-);
+) AS Finish;
 
 CREATE TABLE trails (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id integer PRIMARY KEY AUTOINCREMENT not null,
 	name text,
 	distance integer,
 	elevation integer,
@@ -81,6 +81,16 @@ CREATE TABLE trails (
 	link text,
 	comment text
 );
+
+--Get event info by id
+event:
+SELECT * FROM events
+WHERE id = :event_id;
+
+--Get stage info by id
+stage:
+SELECT * FROM stages
+WHERE id = :stageId;
 
 --List all participants at start, excluding participants with 'DNS'
 participantsAtStart:
@@ -100,24 +110,79 @@ SELECT
     riders.city as city,
 	statuses.type as status
 FROM starts, participants, riders, statuses
-WHERE participants.rider_id = riders.id
+WHERE
+    participants.rider_id = riders.id
     AND statuses.id = participants.status_id
+    AND starts.participant_id = participants.id
     AND status != 'DNS'
-	AND starts.stage_id = :stage_id
+    AND starts.stage_id = :stageId
 ORDER BY start_time ASC;
 
+--List all finish times, with some filters
+--1 - show hidden or show manual
+--0 - hide hidden or hide manual
+finishStamps:
+SELECT * FROM finishes
+WHERE
+	stage_id = :stageId
+	--TODO: filter "with numbers only"
+	AND is_hidden <= :showHidden
+	AND is_manual <= :showManual;
+
+--List numbers on trace
+numbersOnTrace:
+SELECT participants.number as number
+FROM starts, participants
+WHERE
+	starts.stage_id = :stageId
+	AND starts.participant_id = participants.id
+	AND julianday(time(':time')) > julianday(time(start_time))
+EXCEPT
+SELECT number
+FROM finishes
+WHERE
+	finishes.stage_id = :stageId
+	AND number NOTNULL;
+
 --List all results from start
---startResultsForExport:
---SELECT
---    participants.number as number,
---    starts.start_time as start_time,
---    IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, 'DNS')) correction
---FROM starts, participants
---WHERE automatic_correction NOT NULL
---    OR manual_correction NOT NULL
---    OR automaticstarttime IS 'DNS'
---ORDER BY starttime ASC;
+startResultsForExport:
+SELECT
+    participants.number as number,
+    starts.start_time as start_time,
+    IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, 'DNS')) as correction
+FROM starts, participants, stages
+WHERE
+    starts.stage_id = stages.id
+    AND starts.participant_id = participants.id
+    AND starts.stage_id = :stageId
+ORDER BY start_time ASC;
 
+--List all results from finish
+finishResultsForExport:
+SELECT
+	number, finish_time
+FROM finishes
+WHERE
+	number NOTNULL
+	AND stage_id = :stageId
+ORDER BY finish_time ASC;
 
+--Start between two times for countdown beep
+startsBetweenTimesForBeep:
+SELECT COUNT(*)
+FROM starts, statuses
+WHERE
+	start_time BETWEEN :beepTime AND :after
+	AND starts.stage_id = :stageId
+	AND starts.status_id = statuses.id
+	AND statuses.type != 'DNS'
+	AND (automatic_start_time ISNULL OR manual_start_time ISNULL)
+ORDER BY start_time ASC;
 
-
+--Starts between two times, used when updating correction
+startsBetweenTimes:
+SELECT *
+FROM starts
+WHERE
+	start_time BETWEEN :before AND :after
+	AND stage_id = :stageId;
