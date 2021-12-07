@@ -15,8 +15,6 @@ part 'protocol_event.dart';
 
 part 'protocol_state.dart';
 
-
-
 class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   bool _hideMarked = true;
   bool _hideNumbers = false;
@@ -30,7 +28,12 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   final SettingsBloc settingsBloc;
   late final StreamSubscription settingsSubscription;
 
-  List<StartItem> _startProtocol = [];
+  final _protocol = ProtocolProvider();
+
+  int? _activeEventId;
+  int? _activeStageId;
+
+  List<ParticipantsAtStartResult> _startProtocol = [];
   List<FinishItem> _finishProtocol = [];
   List<StartItem> _numbersOnTraceProtocol = [];
 
@@ -61,6 +64,9 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
     on<SelectProtocol>((event, emit) => _handleSelectProtocol(event, emit));
     on<DeselectProtocol>((event, emit) => _handleDeselectProtocol(event, emit));
+    on<SelectEvent>((event, emit) => _handleSelectEvent(event, emit));
+    on<SelectStage>((event, emit) => _handleSelectStage(event, emit));
+    on<SelectProtocol>((event, emit) => _handleSelectProtocol(event, emit));
     on<ProtocolAddStartNumber>(
         (event, emit) => _handleProtocolAddStartNumber(event, emit));
     on<ProtocolUpdateAutomaticCorrection>(
@@ -103,7 +109,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   @override
   Future<void> close() {
-    ProtocolProvider.db.close();
+    // ProtocolProvider.db.close();
     settingsSubscription.cancel();
     return super.close();
   }
@@ -112,7 +118,8 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       SelectProtocol event, Emitter<ProtocolState> emit) async {
     if (event.file != null && event.file!.isNotEmpty) {
       await ProtocolProvider.db.setDbPath(event.file);
-      _startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
+      // _startProtocol = await ProtocolProvider().getAllParticipantsAtStart();
+      _startProtocol = await _protocol.participantsAtStart(1).get();
       _finishProtocol = await ProtocolProvider.db.getFinishTime(
           hideManual: _hideManual,
           hideMarked: _hideMarked,
@@ -138,6 +145,31 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     await ProtocolProvider.db.setDbPath(null);
     settingsBloc.add(const SetStringValueEvent(recentFile: ''));
     emit(ProtocolNotSelectedState());
+  }
+
+  void _handleSelectEvent(
+      SelectEvent event, Emitter<ProtocolState> emit) async {
+    _activeEventId = event.event;
+  }
+
+  void _handleSelectStage(
+      SelectStage event, Emitter<ProtocolState> emit) async {
+    _activeStageId = event.stage;
+    _startProtocol = await _protocol.participantsAtStart(event.stage).get();
+    _finishProtocol = await ProtocolProvider.db.getFinishTime(
+        hideManual: _hideManual,
+        hideMarked: _hideMarked,
+        hideNumbers: _hideNumbers);
+    _numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
+    settingsBloc.add(SetStringValueEvent(recentFile: event.file));
+    emit(ProtocolSelectedState(
+      startProtocol: _startProtocol,
+      finishProtocol: _finishProtocol,
+      numbersOnTraceProtocol: _numbersOnTraceProtocol,
+      databasePath: ProtocolProvider.db.dbPath!,
+      awaitingNumber: _awaitingNumber,
+    ));
+    logger.i('DatabaseConnect -> selected ${event.file}');
   }
 
   // добавляет/заменяет номер и стартовое время в start

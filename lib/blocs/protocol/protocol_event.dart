@@ -28,6 +28,24 @@ class ProtocolAddStartNumber extends ProtocolEvent {
   List<Object> get props => [startTime, forceAdd];
 }
 
+class SelectEvent extends ProtocolEvent {
+  final int event;
+
+  const SelectEvent(this.event);
+
+  @override
+  List<Object> get props => [event];
+}
+
+class SelectStage extends ProtocolEvent {
+  final int stage;
+
+  const SelectStage(this.stage);
+
+  @override
+  List<Object> get props => [stage];
+}
+
 class ProtocolUpdateAutomaticCorrection extends ProtocolEvent {
   final AutomaticStart automaticStart;
   final bool forceUpdate;

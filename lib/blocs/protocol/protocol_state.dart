@@ -6,7 +6,7 @@ abstract class ProtocolState extends Equatable {
 }
 
 class ProtocolSelectedState extends ProtocolState {
-  final List<StartItem> startProtocol;
+  final List<ParticipantsAtStartResult> startProtocol;
   final List<FinishItem> finishProtocol;
   final List<StartItem> numbersOnTraceProtocol;
   final String databasePath;

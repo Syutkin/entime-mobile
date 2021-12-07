@@ -1,0 +1,123 @@
+CREATE TABLE events (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	name text,
+	start_date text,
+	finish_date text
+);
+
+CREATE TABLE stages (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	trail_id integer,
+	event_id integer not null,
+	name text,
+	is_active integer not null default 1,
+	FOREIGN KEY (trail_id) REFERENCES trails (id),
+    FOREIGN KEY (event_id) REFERENCES events (id)
+);
+
+CREATE TABLE riders (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	name text,
+	nickname text,
+	birthday integer,
+	team text,
+	city text,
+	email text,
+	phone text,
+	comment text
+);
+
+CREATE TABLE statuses (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	type text not null
+);
+
+CREATE TABLE participants (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	event_id integer not null,
+	rider_id integer not null,
+	number integer not null,
+	category text not null,
+	rfid text,
+	status_id integer not null default 1,
+	FOREIGN KEY (event_id) REFERENCES events (id),
+	FOREIGN KEY (rider_id) REFERENCES riders (id),
+	FOREIGN KEY (status_id) REFERENCES statuses (id)
+);
+
+CREATE TABLE starts (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	stage_id integer not null,
+	participant_id integer not null,
+	start_time text not null,
+	timestamp text,
+	automatic_start_time text,
+	automatic_correction integer,
+	manual_start_time text,
+	manual_correction integer,
+	status_id integer not null default 1,
+	FOREIGN KEY (stage_id) REFERENCES stages (id),
+    FOREIGN KEY (participant_id) REFERENCES participants (id),
+    FOREIGN KEY (status_id) REFERENCES statuses (id)
+);
+
+CREATE TABLE finishes (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	stage_id integer not null,
+	number integer,
+	timestamp text not null,
+	finish_time text not null,
+	is_hidden integer not null default 0,
+	is_manual integer not null default 0,
+	FOREIGN KEY (stage_id) REFERENCES stages (id)
+);
+
+CREATE TABLE trails (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	name text,
+	distance integer,
+	elevation integer,
+	gpx_track blob,
+	link text,
+	comment text
+);
+
+--List all participants at start, excluding participants with 'DNS'
+participantsAtStart:
+SELECT
+    participants.number as number,
+    participants.category as category,
+    starts.start_time as start_time,
+    starts.automatic_start_time as automatic_start_time,
+    starts.automatic_correction as automatic_correction,
+    starts.timestamp as timestamp,
+    starts.manual_start_time as manual_start_time,
+    starts.manual_correction as manual_correction,
+    riders.name as name,
+    riders.nickname as nickname,
+    riders.birthday as birthday,
+    riders.team as team,
+    riders.city as city,
+	statuses.type as status
+FROM starts, participants, riders, statuses
+WHERE participants.rider_id = riders.id
+    AND statuses.id = participants.status_id
+    AND status != 'DNS'
+	AND starts.stage_id = :stage_id
+ORDER BY start_time ASC;
+
+--List all results from start
+--startResultsForExport:
+--SELECT
+--    participants.number as number,
+--    starts.start_time as start_time,
+--    IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, 'DNS')) correction
+--FROM starts, participants
+--WHERE automatic_correction NOT NULL
+--    OR manual_correction NOT NULL
+--    OR automaticstarttime IS 'DNS'
+--ORDER BY starttime ASC;
+
+
+
+
