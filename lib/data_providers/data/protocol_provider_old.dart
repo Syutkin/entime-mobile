@@ -334,6 +334,7 @@ class ProtocolProvider {
     // В противном случае возвращаем StartItem.
     if (!forceAdd) {
       logger.i('Database -> Checking start time $time and number $number...');
+      // new checkStartingParticipants
       final res = await db.rawQuery('''
         SELECT *
         FROM start
@@ -443,6 +444,7 @@ class ProtocolProvider {
     timeNow ??= "now', 'localtime";
     final db = await database;
 
+    // new numbersOnTrace:
     final res = await db.rawQuery('''
         SELECT id, number
         FROM start
@@ -463,6 +465,7 @@ class ProtocolProvider {
     bool hideManual = false,
   }) async {
     final db = await database;
+    // new finishStamps:
     String sqliteQuery =
         'SELECT id, number, finishtime, "set", manual FROM finish';
     if (hideMarked || hideNumbers || hideManual) sqliteQuery += ' WHERE ';

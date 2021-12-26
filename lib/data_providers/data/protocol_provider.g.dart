@@ -1490,7 +1490,7 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
 class Participant extends DataClass implements Insertable<Participant> {
   final int id;
   final int eventId;
-  final int riderId;
+  final int? riderId;
   final int number;
   final String category;
   final String? rfid;
@@ -1498,7 +1498,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   Participant(
       {required this.id,
       required this.eventId,
-      required this.riderId,
+      this.riderId,
       required this.number,
       required this.category,
       this.rfid,
@@ -1511,7 +1511,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       eventId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}event_id'])!,
       riderId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}rider_id'])!,
+          .mapFromDatabaseResponse(data['${effectivePrefix}rider_id']),
       number: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}number'])!,
       category: const StringType()
@@ -1527,7 +1527,9 @@ class Participant extends DataClass implements Insertable<Participant> {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['event_id'] = Variable<int>(eventId);
-    map['rider_id'] = Variable<int>(riderId);
+    if (!nullToAbsent || riderId != null) {
+      map['rider_id'] = Variable<int?>(riderId);
+    }
     map['number'] = Variable<int>(number);
     map['category'] = Variable<String>(category);
     if (!nullToAbsent || rfid != null) {
@@ -1541,7 +1543,9 @@ class Participant extends DataClass implements Insertable<Participant> {
     return ParticipantsCompanion(
       id: Value(id),
       eventId: Value(eventId),
-      riderId: Value(riderId),
+      riderId: riderId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(riderId),
       number: Value(number),
       category: Value(category),
       rfid: rfid == null && nullToAbsent ? const Value.absent() : Value(rfid),
@@ -1555,7 +1559,7 @@ class Participant extends DataClass implements Insertable<Participant> {
     return Participant(
       id: serializer.fromJson<int>(json['id']),
       eventId: serializer.fromJson<int>(json['event_id']),
-      riderId: serializer.fromJson<int>(json['rider_id']),
+      riderId: serializer.fromJson<int?>(json['rider_id']),
       number: serializer.fromJson<int>(json['number']),
       category: serializer.fromJson<String>(json['category']),
       rfid: serializer.fromJson<String?>(json['rfid']),
@@ -1568,7 +1572,7 @@ class Participant extends DataClass implements Insertable<Participant> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'event_id': serializer.toJson<int>(eventId),
-      'rider_id': serializer.toJson<int>(riderId),
+      'rider_id': serializer.toJson<int?>(riderId),
       'number': serializer.toJson<int>(number),
       'category': serializer.toJson<String>(category),
       'rfid': serializer.toJson<String?>(rfid),
@@ -1626,7 +1630,7 @@ class Participant extends DataClass implements Insertable<Participant> {
 class ParticipantsCompanion extends UpdateCompanion<Participant> {
   final Value<int> id;
   final Value<int> eventId;
-  final Value<int> riderId;
+  final Value<int?> riderId;
   final Value<int> number;
   final Value<String> category;
   final Value<String?> rfid;
@@ -1643,19 +1647,17 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   ParticipantsCompanion.insert({
     this.id = const Value.absent(),
     required int eventId,
-    required int riderId,
+    this.riderId = const Value.absent(),
     required int number,
-    required String category,
+    this.category = const Value.absent(),
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
   })  : eventId = Value(eventId),
-        riderId = Value(riderId),
-        number = Value(number),
-        category = Value(category);
+        number = Value(number);
   static Insertable<Participant> custom({
     Expression<int>? id,
     Expression<int>? eventId,
-    Expression<int>? riderId,
+    Expression<int?>? riderId,
     Expression<int>? number,
     Expression<String>? category,
     Expression<String?>? rfid,
@@ -1675,7 +1677,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   ParticipantsCompanion copyWith(
       {Value<int>? id,
       Value<int>? eventId,
-      Value<int>? riderId,
+      Value<int?>? riderId,
       Value<int>? number,
       Value<String>? category,
       Value<String?>? rfid,
@@ -1701,7 +1703,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       map['event_id'] = Variable<int>(eventId.value);
     }
     if (riderId.present) {
-      map['rider_id'] = Variable<int>(riderId.value);
+      map['rider_id'] = Variable<int?>(riderId.value);
     }
     if (number.present) {
       map['number'] = Variable<int>(number.value);
@@ -1751,10 +1753,8 @@ class Participants extends Table with TableInfo<Participants, Participant> {
       $customConstraints: 'not null');
   final VerificationMeta _riderIdMeta = const VerificationMeta('riderId');
   late final GeneratedColumn<int?> riderId = GeneratedColumn<int?>(
-      'rider_id', aliasedName, false,
-      typeName: 'INTEGER',
-      requiredDuringInsert: true,
-      $customConstraints: 'not null');
+      'rider_id', aliasedName, true,
+      typeName: 'INTEGER', requiredDuringInsert: false, $customConstraints: '');
   final VerificationMeta _numberMeta = const VerificationMeta('number');
   late final GeneratedColumn<int?> number = GeneratedColumn<int?>(
       'number', aliasedName, false,
@@ -1765,8 +1765,9 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   late final GeneratedColumn<String?> category = GeneratedColumn<String?>(
       'category', aliasedName, false,
       typeName: 'TEXT',
-      requiredDuringInsert: true,
-      $customConstraints: 'not null');
+      requiredDuringInsert: false,
+      $customConstraints: 'not null default \'\'',
+      defaultValue: const CustomExpression<String>('\'\''));
   final VerificationMeta _rfidMeta = const VerificationMeta('rfid');
   late final GeneratedColumn<String?> rfid = GeneratedColumn<String?>(
       'rfid', aliasedName, true,
@@ -1802,8 +1803,6 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     if (data.containsKey('rider_id')) {
       context.handle(_riderIdMeta,
           riderId.isAcceptableOrUnknown(data['rider_id']!, _riderIdMeta));
-    } else if (isInserting) {
-      context.missing(_riderIdMeta);
     }
     if (data.containsKey('number')) {
       context.handle(_numberMeta,
@@ -1814,8 +1813,6 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     if (data.containsKey('category')) {
       context.handle(_categoryMeta,
           category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
-    } else if (isInserting) {
-      context.missing(_categoryMeta);
     }
     if (data.containsKey('rfid')) {
       context.handle(

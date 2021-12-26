@@ -163,6 +163,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   void _handleProtocolAddStartNumber(
       ProtocolAddStartNumber event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
+      var future = await _protocol.addStartTime(_event!.id, event.startTime.number);
       List<StartItem>? previousStart = await ProtocolProvider.db.addStartNumber(
         number: event.startTime.number,
         time: event.startTime.time,

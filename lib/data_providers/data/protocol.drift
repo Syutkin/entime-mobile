@@ -35,9 +35,9 @@ CREATE TABLE statuses (
 CREATE TABLE participants (
 	id integer PRIMARY KEY AUTOINCREMENT not null,
 	event_id integer not null,
-	rider_id integer not null,
+	rider_id integer, -- Можно не ссылаться на список участинка с информацией, просто номер/категория
 	number integer not null,
-	category text not null,
+	category text not null default '',
 	rfid text,
 	status_id integer not null default 1,
 	FOREIGN KEY (event_id) REFERENCES events (id),
@@ -186,3 +186,37 @@ FROM starts
 WHERE
 	start_time BETWEEN :before AND :after
 	AND stage_id = :stageId;
+
+
+---- Check if exists starting participant with :number and starting :time
+--checkStartingParticipants:
+--SELECT *
+--FROM starts, participants
+--WHERE
+--	starts.stage_id = :stageId
+--	AND starts.participant_id = participants.id
+--	AND (start_time IS ':time'
+--		OR
+--		(number IS :number AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));
+--
+---- Check if number exist at starting participants
+--checkIfNumberExists:
+--SELECT participants.id
+--FROM participants, stages, events
+--WHERE
+--	number = :number
+--	AND stages.id = :stageId
+--	AND stages.event_id = events.id = participants.event_id;
+--
+--updateStartTime:
+--UPDATE starts
+--SET start_time=':time'
+--WHERE
+--	stage_id = :stageId
+--	AND participant_id = :participantId;
+--
+--addStartTime:
+--INSERT INTO participants (event_id, number)
+--VALUES(:eventId,:number);
+--INSERT INTO starts (stage_id, participant_id, start_time)
+--VALUES(:stageId, last_insert_rowid(), ':time');
