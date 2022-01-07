@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -11,7 +10,6 @@ import 'package:share_plus/share_plus.dart';
 
 import 'package:entime/blocs/blocs.dart';
 import 'package:entime/utils/helper.dart';
-import 'package:entime/utils/logger.dart';
 
 void routeToSelectFileScreen(BuildContext context) async {
   await Navigator.of(context).push(MaterialPageRoute(builder: (context) {

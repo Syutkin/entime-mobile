@@ -7,7 +7,6 @@ import 'package:path/path.dart';
 import '../blocs/blocs.dart';
 import '../models/models.dart';
 import '../screens/screens.dart';
-import '../utils/helper.dart';
 import '../widgets/widgets.dart';
 
 class InitScreen extends StatefulWidget {

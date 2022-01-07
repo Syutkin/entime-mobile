@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path/path.dart';
 
-// import 'package:share_extend/share_extend.dart';
-
 import 'package:entime/blocs/blocs.dart';
-
 import 'package:entime/models/models.dart';
 import 'package:entime/screens/screens.dart';
 import 'package:entime/widgets/widgets.dart';
-
-import '../../utils/helper.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

@@ -413,8 +413,6 @@ class ProtocolProvider {
     final batch = db.batch();
 
     for (var item in items) {
-      print(item);
-
       batch.insert(
           'start',
           {
