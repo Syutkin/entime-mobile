@@ -5,8 +5,8 @@ import 'package:entime/models/start_protocol.dart';
 import 'package:entime/utils/csv_utils.dart';
 import 'package:entime/utils/logger.dart';
 
-Future<List<StartItemCsv>> getStartList() async {
-  PlatformFile? file = await _pickCsv();
+Future<List<StartItemCsv>> getStartList([PlatformFile? file]) async {
+  file ??= await _pickCsv();
   if (file == null || file.bytes == null) {
     return [];
   }

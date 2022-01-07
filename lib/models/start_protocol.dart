@@ -31,15 +31,15 @@ class StartItemCsv {
       };
 
   factory StartItemCsv.fromMap(Map<String, dynamic> cvs) => StartItemCsv(
-        category: cvs['category'].toString(),
-        number: cvs['number'] is int ? cvs['number'] : 0,
-        name: cvs['name'].toString(),
-        nickname: cvs['nickname'].toString(),
-        age: cvs['age'].toString(),
-        team: cvs['team'].toString(),
-        city: cvs['city'].toString(),
-        starttime: cvs['starttime'].toString(),
-      );
+    category: cvs['category']?.toString(),
+    number: cvs['number'] is int ? cvs['number'] : 0,
+    name: cvs['name']?.toString(),
+    nickname: cvs['nickname']?.toString(),
+    age: cvs['age']?.toString(),
+    team: cvs['team']?.toString(),
+    city: cvs['city']?.toString(),
+    starttime: cvs['starttime']?.toString(),
+  );
 
   @override
   String toString() =>

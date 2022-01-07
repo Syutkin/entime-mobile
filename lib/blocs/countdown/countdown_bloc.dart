@@ -40,7 +40,8 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     });
     tabSubscription = tabBloc.stream.listen((state) async {
       // обновляет отсчёт при переключении на окно старта
-      if (state == AppTab.start) {
+      if (state == AppTab.start &&
+          protocolBloc.state is ProtocolSelectedState) {
         _nextStartTime = await _getNextStarttime(DateTime.now());
         _isFinished = false;
         await _countdown();

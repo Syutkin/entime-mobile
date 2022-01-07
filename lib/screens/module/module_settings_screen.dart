@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:settings_ui/settings_ui.dart';
+import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 
 import 'package:entime/blocs/blocs.dart';
 import 'package:entime/screens/screens.dart';

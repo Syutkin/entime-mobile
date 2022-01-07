@@ -1,8 +1,14 @@
-// import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'dart:io';
 
-import '../screens/screens.dart';
+import 'package:entime/blocs/protocol/protocol_bloc.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'logger.dart';
 
 export 'package:filesize/filesize.dart';
 
@@ -90,14 +96,176 @@ void scrollToEnd(ScrollController scrollController) {
   );
 }
 
-void routeToSelectFileScreen(BuildContext context) async {
-  await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-    return const SelectFileScreen();
-  }));
+Future<String?> createNewProtocolFile(BuildContext context,
+    [PlatformFile? csv]) async {
+  String? fileName;
+  if (csv != null) {
+    fileName = basenameWithoutExtension(csv.name);
+  }
+  String? newFile = await _createFile(context, fileName);
+  if (newFile != null) {
+    BlocProvider.of<ProtocolBloc>(context).add(SelectProtocol(newFile, csv));
+  }
+  return newFile;
+}
+
+Future<String?> _createFile(BuildContext context, [String? initialName]) async {
+  String? result;
+  final _formKey = GlobalKey<FormState>();
+  return showDialog<String>(
+    context: context,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        //scrollable: true,
+        title: const Text('Создать'),
+        content: Form(
+          key: _formKey,
+          onChanged: () {
+            Form.of(primaryFocus!.context!)!.validate();
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextFormField(
+                initialValue: initialName,
+                keyboardType: TextInputType.text,
+                autofocus: true,
+                decoration: const InputDecoration(labelText: 'Название'),
+                validator: (value) {
+                  result = value;
+                  if (value == null) return null;
+                  RegExp regExp = RegExp(r'^[а-яА-ЯёЁa-zA-Z0-9\-\+\.\_! ]+$');
+                  if (regExp.hasMatch(value)) return null;
+                  return 'Недопустимый символ';
+                },
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          TextButton(
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                Directory? externalStorageDirectory =
+                    await getExternalStorageDirectory();
+                String? localFileName;
+                if (externalStorageDirectory != null) {
+                  localFileName = join(externalStorageDirectory.path,
+                      basename('$result.sqlite'));
+                }
+                Navigator.of(context).pop(localFileName);
+              }
+            },
+            child: Text(MaterialLocalizations.of(context).okButtonLabel),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> loadFile(BuildContext context) async {
+  var protocolBloc = BlocProvider.of<ProtocolBloc>(context);
+  PlatformFile? platformFile = await _pickFile();
+  if (platformFile != null && platformFile.path != null) {
+    if (platformFile.extension == 'sqlite' || platformFile.extension == 'db') {
+      File? file = File(platformFile.path!);
+      file = await _checkExists(context, file);
+      // Если null - файл уже существовал и не перезаписываем,
+      // то ничего делать не нужно
+      if (file != null) {
+        protocolBloc.add(SelectProtocol(file.path));
+        // Navigator.of(context).pop();
+      }
+    } else if (platformFile.extension == 'csv') {
+      if (protocolBloc is ProtocolSelectedState) {
+        protocolBloc.add(ProtocolLoadStartFromCsv(csv: platformFile));
+      } else if (protocolBloc is! ProtocolSelectedState) {
+        await createNewProtocolFile(context, platformFile);
+      }
+    }
+  }
+}
+
+Future<PlatformFile?> _pickFile() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.any,
+    allowMultiple: false,
+    // allowedExtensions: ['sqlite', 'db', 'csv'],
+    withData: true,
+  );
+  return result?.files.first;
+}
+
+// Проверка на существование файла в рабочей директории перед копированием
+// выбранного файла
+Future<File?> _checkExists(BuildContext context, File file) async {
+  String fileName = basename(file.path);
+  Directory? externalStorageDirectory = await getExternalStorageDirectory();
+  if (externalStorageDirectory != null) {
+    String localFileName =
+        join(externalStorageDirectory.path, basename(fileName));
+    if (File(localFileName).existsSync()) {
+      bool? overwrite = await _overwriteFile(context, localFileName);
+      if (overwrite != null && overwrite) {
+        return _copyFile(file, localFileName);
+      } else {
+        return null;
+      }
+    } else {
+      return _copyFile(file, localFileName);
+    }
+  } else {
+    return null;
+  }
+}
+
+File _copyFile(File sourceFile, String newPath) {
+  try {
+    return sourceFile.copySync(newPath);
+  } on FileSystemException catch (e) {
+    logger.e('Error copying file: ' + e.toString());
+    return sourceFile;
+  }
+}
+
+Future<bool?> _overwriteFile(BuildContext context, String localFileName) async {
+  return showDialog<bool>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Предупреждение'),
+        content: Text(
+            'Соревнование с именем ${basename(localFileName)} уже существует и будет перезаписано'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: Text(MaterialLocalizations.of(context).continueButtonLabel),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+        ],
+      );
+    },
+  );
 }
 
 TextStyle dBmTextStyle(int rssi) {
-/*  */ if (rssi >= -35) {
+  /*  */ if (rssi >= -35) {
     return TextStyle(color: Colors.greenAccent[700]);
   } else if (rssi >= -45) {
     return TextStyle(

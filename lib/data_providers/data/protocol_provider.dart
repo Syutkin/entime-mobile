@@ -42,7 +42,11 @@ class ProtocolProvider {
       version: 1,
       onOpen: (db) async {
         logger.v('SQLite version: ' +
-            (await db.rawQuery('SELECT sqlite_version()')).first.values.first.toString());
+            (await db.rawQuery('SELECT sqlite_version()'))
+                .first
+                .values
+                .first
+                .toString());
       },
       onCreate: (Database db, int version) async {
         await db.execute('''
@@ -101,6 +105,7 @@ class ProtocolProvider {
           start.manualstarttime as manualstarttime,
           start.manualcorrection as manualcorrection,
           start.finishtime as finishtime,
+          main.category as category,
           main.name as name,
           main.nickname as nickname,
           main.age as age,
@@ -249,7 +254,8 @@ class ProtocolProvider {
             'Database -> Error at updating manual start time for number ${startProtocol.first.number}');
       }
     } else {
-      logger.i('Database -> Cannot find participant with start time around $time');
+      logger.i(
+          'Database -> Cannot find participant with start time around $time');
     }
     return result;
   }
@@ -407,6 +413,8 @@ class ProtocolProvider {
     final batch = db.batch();
 
     for (var item in items) {
+      print(item);
+
       batch.insert(
           'start',
           {

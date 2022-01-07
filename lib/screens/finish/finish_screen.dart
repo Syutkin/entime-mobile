@@ -92,14 +92,8 @@ class _FinishPage extends State<FinishScreen> {
           }
           return _finishList(state.finishProtocol);
         } else {
-          return Center(
-            child: ListTile(
-              onTap: () => routeToSelectFileScreen(context),
-              title: const Text(
-                'Выберите или создайте стартовый протокол',
-                textAlign: TextAlign.center,
-              ),
-            ),
+          return CreateOrSelectProtocolWidget(
+            onTap: () => routeToSelectFileScreen(context),
           );
         }
       }),

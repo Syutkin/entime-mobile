@@ -84,6 +84,12 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              item.category != null && item.category!.isNotEmpty
+                  ? Text(
+                      'Категория: ${item.category}',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    )
+                  : const SizedBox(),
               item.nickname != null && item.nickname!.isNotEmpty
                   ? Text(
                       'Никнейм: ${item.nickname}',

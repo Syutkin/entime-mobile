@@ -11,5 +11,12 @@ class BluetoothDeviceWithAvailability extends BluetoothDevice {
   BluetoothDeviceAvailability availability;
   int? rssi;
 
-  BluetoothDeviceWithAvailability(this.device, this.availability, [this.rssi]);
+  BluetoothDeviceWithAvailability(this.device, this.availability, [this.rssi])
+      : super(
+          address: device.address,
+          name: device.name,
+          bondState: device.bondState,
+          isConnected: device.isConnected,
+          type: device.type,
+        );
 }

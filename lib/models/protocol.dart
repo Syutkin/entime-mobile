@@ -52,6 +52,7 @@ class StartItem {
   String? manualstarttime;
   String? name;
   int number;
+  String? category;
   String? nickname;
   String? age;
   String? team;
@@ -68,6 +69,7 @@ class StartItem {
     this.manualstarttime,
     this.name,
     required this.number,
+    this.category,
     this.nickname,
     this.age,
     this.team,
@@ -85,6 +87,7 @@ class StartItem {
         manualstarttime: json['manualstarttime'],
         name: json['name'],
         number: json['number'],
+        category: json['category'],
         nickname: json['nickname'],
         age: json['age'],
         team: json['team'],
@@ -102,6 +105,7 @@ class StartItem {
         'manualstarttime': manualstarttime,
         'name': name,
         'number': number,
+        'category': category,
         'nickname': nickname,
         'age': age,
         'team': team,

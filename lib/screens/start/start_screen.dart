@@ -51,14 +51,12 @@ class _StartScreen extends State<StartScreen> {
             ],
           );
         } else {
-          return Center(
-            child: ListTile(
-              onTap: () => routeToSelectFileScreen(context),
-              title: const Text(
-                'Выберите или создайте стартовый протокол',
-                textAlign: TextAlign.center,
+          return Column(
+            children: [
+              CreateOrSelectProtocolWidget(
+                onTap: () => routeToSelectFileScreen(context),
               ),
-            ),
+            ],
           );
         }
       }),

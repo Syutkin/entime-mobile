@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'package:entime/data_providers/data/protocol_provider.dart';
@@ -14,8 +15,6 @@ import 'package:entime/utils/logger.dart';
 part 'protocol_event.dart';
 
 part 'protocol_state.dart';
-
-
 
 class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   bool _hideMarked = true;
@@ -108,10 +107,13 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     return super.close();
   }
 
-  void _handleSelectProtocol(
+  Future<void> _handleSelectProtocol(
       SelectProtocol event, Emitter<ProtocolState> emit) async {
     if (event.file != null && event.file!.isNotEmpty) {
       await ProtocolProvider.db.setDbPath(event.file);
+      if (event.csv != null) {
+        await _updateFromCsv(event.csv);
+      }
       _startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
       _finishProtocol = await ProtocolProvider.db.getFinishTime(
           hideManual: _hideManual,
@@ -133,7 +135,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     }
   }
 
-  void _handleDeselectProtocol(
+  Future<void> _handleDeselectProtocol(
       DeselectProtocol event, Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.setDbPath(null);
     settingsBloc.add(const SetStringValueEvent(recentFile: ''));
@@ -141,7 +143,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   // добавляет/заменяет номер и стартовое время в start
-  void _handleProtocolAddStartNumber(
+  Future<void> _handleProtocolAddStartNumber(
       ProtocolAddStartNumber event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
       List<StartItem>? previousStart = await ProtocolProvider.db.addStartNumber(
@@ -167,7 +169,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   // обновляет поправку
-  void _handleProtocolUpdateAutomaticCorrection(
+  Future<void> _handleProtocolUpdateAutomaticCorrection(
       ProtocolUpdateAutomaticCorrection event,
       Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
@@ -196,7 +198,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     }
   }
 
-  void _handleProtocolUpdateManualStartTime(
+  Future<void> _handleProtocolUpdateManualStartTime(
       ProtocolUpdateManualStartTime event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
       if (await ProtocolProvider.db.updateManualStartTime(event.time) > 0) {
@@ -213,7 +215,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   //вставить строку с финишным временем из bluetooth
-  void _handleProtocolAddFinishTime(
+  Future<void> _handleProtocolAddFinishTime(
       ProtocolAddFinishTime event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
       int? autoFinishNumber = await ProtocolProvider.db.addFinishTime(
@@ -242,7 +244,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   //вставить строку с ручным финишным временем
-  void _handleProtocolAddFinishTimeManual(
+  Future<void> _handleProtocolAddFinishTimeManual(
       ProtocolAddFinishTimeManual event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
       await ProtocolProvider.db.addFinishTimeManual(event.time);
@@ -261,7 +263,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     }
   }
 
-  void _handleProtocolUpdateItemInfoAtStart(
+  Future<void> _handleProtocolUpdateItemInfoAtStart(
       ProtocolUpdateItemInfoAtStart event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
       await ProtocolProvider.db.updateItemInfoAtStart(event.item);
@@ -278,7 +280,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   //очищает результаты старта, используется только в debug
-  void _handleProtocolClearStartResultsDebug(
+  Future<void> _handleProtocolClearStartResultsDebug(
       ProtocolClearStartResultsDebug event, Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.clearStartResultsDebug();
     _startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
@@ -297,7 +299,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   //очищает результаты финиша, используется только в debug
-  void _handleProtocolClearFinishResultsDebug(
+  Future<void> _handleProtocolClearFinishResultsDebug(
       ProtocolClearFinishResultsDebug event,
       Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.clearFinishResultsDebug();
@@ -317,7 +319,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   //скрыть всё в финишном протоколе
-  void _handleProtocolHideAllFinishResults(
+  Future<void> _handleProtocolHideAllFinishResults(
       ProtocolHideAllFinishResults event, Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.hideAllFinish();
     _finishProtocol = await ProtocolProvider.db.getFinishTime(
@@ -334,7 +336,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   //очистить номер в finish
-  void _handleProtocolClearNumberAtFinish(
+  Future<void> _handleProtocolClearNumberAtFinish(
       ProtocolClearNumberAtFinish event, Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.clearNumberAtFinish(event.number);
     _finishProtocol = await ProtocolProvider.db.getFinishTime(
@@ -351,7 +353,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ));
   }
 
-  void _handleProtocolSetDNS(
+  Future<void> _handleProtocolSetDNS(
       ProtocolSetDNS event, Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.setDNS(event.number);
     _startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
@@ -366,7 +368,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   //ставит время финиша "DNF" для номера
-  void _handleProtocolSetDNF(
+  Future<void> _handleProtocolSetDNF(
       ProtocolSetDNF event, Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.setDNF(event.number);
     _finishProtocol = await ProtocolProvider.db.getFinishTime(
@@ -383,7 +385,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ));
   }
 
-  void _handleProtocolHideFinishTime(
+  Future<void> _handleProtocolHideFinishTime(
       ProtocolHideFinishTime event, Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.hideFinish(event.id);
     _finishProtocol = await ProtocolProvider.db.getFinishTime(
@@ -400,7 +402,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }
 
   //добавить номер в finish и обновить финишное время в start у данного номера
-  void _handleProtocolSetNumberToFinishTime(
+  Future<void> _handleProtocolSetNumberToFinishTime(
       ProtocolSetNumberToFinishTime event, Emitter<ProtocolState> emit) async {
     var update = await ProtocolProvider.db
         .addNumber(event.id, event.number, event.finishTime);
@@ -419,7 +421,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ));
   }
 
-  void _handleProtocolGetNumbersOnTrace(
+  Future<void> _handleProtocolGetNumbersOnTrace(
       ProtocolGetNumbersOnTrace event, Emitter<ProtocolState> emit) async {
     if (ProtocolProvider.db.dbPath != null) {
       _numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
@@ -433,11 +435,10 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     }
   }
 
-  void _handleProtocolLoadStartFromCsv(
+  Future<void> _handleProtocolLoadStartFromCsv(
       ProtocolLoadStartFromCsv event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
-      List<StartItemCsv> items = await getStartList();
-      await ProtocolProvider.db.loadStartItem(items);
+      await _updateFromCsv(event.csv);
       _startProtocol = await ProtocolProvider.db.getAllParticipantsAtStart();
       _numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
       emit(ProtocolSelectedState(
@@ -450,7 +451,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     }
   }
 
-  void _handleProtocolShareStart(
+  Future<void> _handleProtocolShareStart(
       ProtocolShareStart event, Emitter<ProtocolState> emit) async {
     var result = await ProtocolProvider.db.getStartToCsv();
     var csv = mapListToCsv(result as List<Map<String, dynamic>>);
@@ -462,7 +463,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     }
   }
 
-  void _handleProtocolShareFinish(
+  Future<void> _handleProtocolShareFinish(
       ProtocolShareFinish event, Emitter<ProtocolState> emit) async {
     var result = await ProtocolProvider.db.getFinishToCsv();
     var csv = mapListToCsv(result as List<Map<String, dynamic>>);
@@ -474,7 +475,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     }
   }
 
-  void _handleProtocolSelectAwaitingNumber(
+  Future<void> _handleProtocolSelectAwaitingNumber(
       ProtocolSelectAwaitingNumber event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
       _awaitingNumber = event.number;
@@ -488,7 +489,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     }
   }
 
-  void _handleProtocolDeselectAwaitingNumber(
+  Future<void> _handleProtocolDeselectAwaitingNumber(
       ProtocolDeselectAwaitingNumber event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
       _awaitingNumber = null;
@@ -501,4 +502,8 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       ));
     }
   }
+ Future<void> _updateFromCsv(PlatformFile? csv) async {
+   List<StartItemCsv> items = await getStartList(csv);
+   await ProtocolProvider.db.loadStartItem(items);
+ }
 }

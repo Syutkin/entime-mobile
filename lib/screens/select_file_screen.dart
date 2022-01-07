@@ -13,6 +13,12 @@ import 'package:entime/blocs/blocs.dart';
 import 'package:entime/utils/helper.dart';
 import 'package:entime/utils/logger.dart';
 
+void routeToSelectFileScreen(BuildContext context) async {
+  await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+    return const SelectFileScreen();
+  }));
+}
+
 class SelectFileScreen extends StatefulWidget {
   const SelectFileScreen({Key? key}) : super(key: key);
 
@@ -30,10 +36,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
           IconButton(
             icon: const Icon(MdiIcons.filePlusOutline),
             onPressed: () async {
-              String? newFile = await _createFile(context);
-              if (newFile != null) {
-                BlocProvider.of<ProtocolBloc>(context)
-                    .add(SelectProtocol(newFile));
+              if (await createNewProtocolFile(context) != null) {
                 Navigator.of(context).pop();
               }
             },
@@ -41,20 +44,24 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
           IconButton(
             icon: const Icon(MdiIcons.folderOpenOutline),
             onPressed: () async {
-              FilePickerResult? result =
-                  await FilePicker.platform.pickFiles(type: FileType.any);
-              if (result != null && result.files.single.path != null) {
-                File? file = File(result.files.single.path!);
-                file = await _checkExists(context, file);
-                // Если null - файл уже существовал и не перезаписываем,
-                // то ничего делать не нужно
-                if (file != null) {
-                  BlocProvider.of<ProtocolBloc>(context)
-                      .add(SelectProtocol(file.path));
-                  Navigator.of(context).pop();
-                }
-              }
+              await loadFile(context);
+              Navigator.of(context).pop();
             },
+            // onPressed:() async {
+            //   FilePickerResult? result =
+            //       await FilePicker.platform.pickFiles(type: FileType.any);
+            //   if (result != null && result.files.single.path != null) {
+            //     File? file = File(result.files.single.path!);
+            //     file = await _checkExists(context, file);
+            //     // Если null - файл уже существовал и не перезаписываем,
+            //     // то ничего делать не нужно
+            //     if (file != null) {
+            //       BlocProvider.of<ProtocolBloc>(context)
+            //           .add(SelectProtocol(file.path));
+            //       Navigator.of(context).pop();
+            //     }
+            //   }
+            // },
           ),
         ],
       ),
@@ -119,68 +126,6 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
     return files;
   }
 
-  // Проверка на существование файла в рабочей директории перед копированием
-  // выбранного файла
-  Future<File?> _checkExists(BuildContext context, File file) async {
-    String fileName = basename(file.path);
-    Directory? externalStorageDirectory = await getExternalStorageDirectory();
-    if (externalStorageDirectory != null) {
-      String localFileName =
-          join(externalStorageDirectory.path, basename(fileName));
-      if (File(localFileName).existsSync()) {
-        bool? overwrite = await _overwriteFile(context, localFileName);
-        if (overwrite != null && overwrite) {
-          return _copyFile(file, localFileName);
-        } else {
-          return null;
-        }
-      } else {
-        return _copyFile(file, localFileName);
-      }
-    } else {
-      return null;
-    }
-  }
-
-  File _copyFile(File sourceFile, String newPath) {
-    try {
-      return sourceFile.copySync(newPath);
-    } on FileSystemException catch (e) {
-      logger.e('Error copying file: ' + e.toString());
-      return sourceFile;
-    }
-  }
-
-  Future<bool?> _overwriteFile(
-      BuildContext context, String localFileName) async {
-    return showDialog<bool>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Предупреждение'),
-          content: Text(
-              'Соревнование с именем ${basename(localFileName)} уже существует и будет перезаписано'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              child:
-                  Text(MaterialLocalizations.of(context).continueButtonLabel),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Widget _filePopup(File item) => BlocBuilder<ProtocolBloc, ProtocolState>(
           builder: (context, protocolState) {
         return PopupMenuButton<int>(
@@ -227,65 +172,4 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
           },
         );
       });
-
-  Future<String?> _createFile(BuildContext context) async {
-    String? result;
-    final _formKey = GlobalKey<FormState>();
-    return showDialog<String>(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          //scrollable: true,
-          title: const Text('Создать'),
-          content: Form(
-            key: _formKey,
-            onChanged: () {
-              Form.of(primaryFocus!.context!)!.validate();
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                TextFormField(
-                  keyboardType: TextInputType.text,
-                  autofocus: true,
-                  decoration: const InputDecoration(labelText: 'Название'),
-                  validator: (value) {
-                    result = value;
-                    if (value == null) return null;
-                    RegExp regExp = RegExp(r'^[а-яА-ЯёЁa-zA-Z0-9\-\+\.\_!]+$');
-                    if (regExp.hasMatch(value)) return null;
-                    return 'Недопустимый символ';
-                  },
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-            ),
-            TextButton(
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  Directory? externalStorageDirectory =
-                      await getExternalStorageDirectory();
-                  String? localFileName;
-                  if (externalStorageDirectory != null) {
-                    localFileName = join(externalStorageDirectory.path,
-                        basename('$result.sqlite'));
-                  }
-                  Navigator.of(context).pop(localFileName);
-                }
-              },
-              child: Text(MaterialLocalizations.of(context).okButtonLabel),
-            ),
-          ],
-        );
-      },
-    );
-  }
 }

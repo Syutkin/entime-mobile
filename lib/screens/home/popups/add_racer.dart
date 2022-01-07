@@ -22,7 +22,7 @@ Future<void> addRacerPopup(BuildContext context) async {
     builder: (BuildContext context) {
       return ExpandedAlertDialog(
         width: MediaQuery.of(context).size.width * 0.9,
-        //scrollable: true,
+        // scrollable: true,
         title: const Text('Добавить участника'),
         content: Form(
           key: _formKey,
@@ -30,7 +30,7 @@ Future<void> addRacerPopup(BuildContext context) async {
             Form.of(primaryFocus!.context!)!.validate();
           },
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            // mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextFormField(
                 keyboardType: TextInputType.number,
@@ -46,13 +46,12 @@ Future<void> addRacerPopup(BuildContext context) async {
                   return null;
                 },
               ),
-              SizedBox(
-                /// The CupertinoTimerPicker has a fixed size of 320 x 216, in logical pixels, with the exception
-                /// of [CupertinoTimerPickerMode.hms], which is 330 x 216. If the parent widget
-                /// provides more space than it needs, the picker will position itself according
-                /// to its [alignment] property.
-                width: 330,
-                height: 216,
+
+              /// The CupertinoTimerPicker has a fixed size of 320 x 216, in logical pixels, with the exception
+              /// of [CupertinoTimerPickerMode.hms], which is 330 x 216. If the parent widget
+              /// provides more space than it needs, the picker will position itself according
+              /// to its [alignment] property.
+              Expanded(
                 child: CupertinoTimerPicker(
                   mode: CupertinoTimerPickerMode.hm,
                   initialTimerDuration: time,

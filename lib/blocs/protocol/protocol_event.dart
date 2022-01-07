@@ -9,11 +9,15 @@ abstract class ProtocolEvent extends Equatable {
 
 class SelectProtocol extends ProtocolEvent {
   final String? file;
+  final PlatformFile? csv;
 
-  const SelectProtocol(this.file);
+  const SelectProtocol(this.file, [this.csv]);
 
   @override
-  List<Object?> get props => [file];
+  List<Object?> get props => [file, csv];
+
+// @override
+// String toString() => 'ProtocolLoadStartFromCsv { PlatformFile: path: ${csv?.path}, size: ${csv?.size}b }';
 }
 
 class DeselectProtocol extends ProtocolEvent {}
@@ -138,7 +142,20 @@ class ProtocolSetNumberToFinishTime extends ProtocolEvent {
 
 class ProtocolGetNumbersOnTrace extends ProtocolEvent {}
 
-class ProtocolLoadStartFromCsv extends ProtocolEvent {}
+class ProtocolLoadStartFromCsv extends ProtocolEvent {
+  final PlatformFile? csv;
+
+  const ProtocolLoadStartFromCsv({
+    this.csv,
+  });
+
+  @override
+  List<Object?> get props => [csv];
+
+  @override
+  String toString() =>
+      'ProtocolLoadStartFromCsv { PlatformFile: path: ${csv?.path}, size: ${csv?.size} }';
+}
 
 class ProtocolShareStart extends ProtocolEvent {}
 

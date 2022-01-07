@@ -314,7 +314,7 @@ class HomeScreen extends StatelessWidget {
                 break;
               case MenuButton.importCsv:
                 BlocProvider.of<ProtocolBloc>(context)
-                    .add(ProtocolLoadStartFromCsv());
+                    .add(const ProtocolLoadStartFromCsv());
                 break;
             }
           });
