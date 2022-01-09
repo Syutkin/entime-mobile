@@ -84,7 +84,8 @@ class _InitScreen extends State<InitScreen> {
         IconButton(
           icon: const Icon(MdiIcons.formatListBulleted),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            Navigator.of(context)
+                .push(MaterialPageRoute<void>(builder: (context) {
               return LogScreen(
                   //moduleSettings: moduleSettings,
                   );
@@ -105,10 +106,8 @@ class _InitScreen extends State<InitScreen> {
     BlocProvider.of<BluetoothBloc>(context)
         .add(const SendMessage('{"Read": true}'));
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) {
-        return const ModuleSettingsInitScreen(
-            //moduleSettings: moduleSettings,
-            );
+      MaterialPageRoute<void>(builder: (context) {
+        return const ModuleSettingsInitScreen();
       }),
     );
   }
@@ -116,7 +115,8 @@ class _InitScreen extends State<InitScreen> {
   Widget _debugLogButton(BuildContext context) {
     return TextButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          Navigator.of(context)
+              .push(MaterialPageRoute<void>(builder: (context) {
             return LogScreen(
                 //moduleSettings: moduleSettings,
                 );

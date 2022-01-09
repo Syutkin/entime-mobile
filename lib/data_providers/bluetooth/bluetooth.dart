@@ -1,3 +1,5 @@
+// ignore_for_file: use_setters_to_change_properties, inference_failure_on_untyped_parameter
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';

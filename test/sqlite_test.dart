@@ -233,7 +233,7 @@ void main() {
     test('getStartingParticipants', () async {
       var result =
           await ProtocolProvider.db.getStartingParticipants('09:59:15');
-      expect(result, []);
+      expect(result, <StartItem>[]);
       result = await ProtocolProvider.db.getStartingParticipants('10:00:15');
       expect(result.length, 0);
     });

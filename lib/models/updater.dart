@@ -4,6 +4,8 @@
 //
 // https://app.quicktype.io/#l=schema
 
+// ignore_for_file: inference_failure_on_untyped_parameter
+
 import 'dart:convert';
 
 class Release {

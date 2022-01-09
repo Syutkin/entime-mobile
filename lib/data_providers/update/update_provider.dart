@@ -1,3 +1,5 @@
+// ignore_for_file: use_setters_to_change_properties, inference_failure_on_untyped_parameter
+
 import 'dart:async';
 import 'dart:io';
 
@@ -152,9 +154,9 @@ class UpdateProvider {
                 _downloaded = true;
                 _onDownloadComplete();
               },
-              onError: (e) {
-                logger.e('Update_provider: Error: $e');
-                _onError(e);
+              onError: (error) {
+                logger.e('Update_provider: Error: $error');
+                _onError(error);
               },
               cancelOnError: true,
             );

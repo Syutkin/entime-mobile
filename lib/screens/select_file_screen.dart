@@ -12,7 +12,7 @@ import '../blocs/blocs.dart';
 import '../utils/helper.dart';
 
 Future<void> routeToSelectFileScreen(BuildContext context) async {
-  await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+  await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
     return const SelectFileScreen();
   }));
 }

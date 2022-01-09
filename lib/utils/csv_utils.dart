@@ -14,7 +14,7 @@ String? mapListToCsv(List<Map<String, dynamic>>? mapList,
     return null;
   }
   converter ??= const ListToCsvConverter(fieldDelimiter: ';');
-  final data = <List>[];
+  final data = <List<dynamic>>[];
   final keys = <String>[];
   final keyIndexMap = <String, int>{};
 
@@ -31,7 +31,7 @@ String? mapListToCsv(List<Map<String, dynamic>>? mapList,
 
   for (final map in mapList) {
     // This list might grow if a new key is found
-    var dataRow = [];
+    var dataRow = <dynamic>[];
     dataRow.length = keyIndexMap.length;
     // Fix missing key
     map.forEach((key, value) {
@@ -48,7 +48,7 @@ String? mapListToCsv(List<Map<String, dynamic>>? mapList,
     });
     data.add(dataRow);
   }
-  return converter.convert(<List>[keys, ...data]);
+  return converter.convert(<List<dynamic>>[keys, ...data]);
 }
 
 // Save csv to file

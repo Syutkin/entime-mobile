@@ -27,7 +27,7 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Настройки'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.of(context).push(MaterialPageRoute(
+              Navigator.of(context).push(MaterialPageRoute<void>(
                   builder: (context) => const SettingsScreen()));
             },
           ),
@@ -36,7 +36,7 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Помощь'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.of(context).push(MaterialPageRoute(
+              Navigator.of(context).push(MaterialPageRoute<void>(
                   builder: (context) => const HelpPage()));
             },
           ),

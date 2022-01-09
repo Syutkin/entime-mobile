@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ProgressRefreshAction extends StatelessWidget {
   final bool isLoading;
-  final Function() onPressed;
+  final void Function() onPressed;
 
   const ProgressRefreshAction({
     required this.isLoading,
