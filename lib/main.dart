@@ -79,31 +79,22 @@ Future<void> runMain() async {
   );
 }
 
-class EntimeApp extends StatefulWidget {
+class EntimeApp extends StatelessWidget {
   final SettingsProvider settings;
 
   const EntimeApp({Key? key, required this.settings}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _EntimeAppState();
-}
-
-class _EntimeAppState extends State<EntimeApp> with WidgetsBindingObserver {
-  @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
     // send commands to our top-level blocs to get them to initialize
     BlocProvider.of<UpdateBloc>(context).add(PopupChangelog());
-    if (widget.settings.getBool('checkUpdates') ?? true) {
+    if (settings.getBool('checkUpdates') ?? true) {
       BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
     }
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<SettingsProvider>.value(value: widget.settings),
+        RepositoryProvider<SettingsProvider>.value(value: settings),
       ],
       child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, settingsTheme) {
