@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/screens/screens.dart';
-import 'package:entime/widgets/splash.dart';
+import '../../blocs/blocs.dart';
+import '../../widgets/splash.dart';
+import '../screens.dart';
 
 class ModuleSettingsInitScreen extends StatelessWidget {
   const ModuleSettingsInitScreen({Key? key}) : super(key: key);

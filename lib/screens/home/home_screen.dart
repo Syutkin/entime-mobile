@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path/path.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/screens/screens.dart';
-import 'package:entime/widgets/widgets.dart';
+import '../../blocs/blocs.dart';
+import '../../models/models.dart';
+import '../../widgets/widgets.dart';
+import '../screens.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

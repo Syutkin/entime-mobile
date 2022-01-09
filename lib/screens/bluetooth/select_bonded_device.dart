@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/models/bluetooth.dart';
-import 'package:entime/screens/bluetooth/bluetooth_device_list_entry.dart';
+import '../../blocs/blocs.dart';
+import '../../models/bluetooth.dart';
+import 'bluetooth_device_list_entry.dart';
 
 Future<void> selectBluetoothDevice(BuildContext context) async {
   BlocProvider.of<BluetoothBloc>(context).add(SelectDevice(

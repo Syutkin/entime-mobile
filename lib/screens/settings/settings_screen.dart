@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/screens/screens.dart';
-import 'package:entime/models/models.dart';
+import '../../blocs/blocs.dart';
+import '../../models/models.dart';
+import '../screens.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({
@@ -74,7 +74,9 @@ class _SettingsPageState extends State<SettingsScreen> {
                     }
 
                     future().then((_) {
-                      setState(() {});
+                      setState(() {
+                        //TODO: state to BLoC
+                      });
                     });
                   },
                 ),
@@ -179,7 +181,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   subtitle: settingsState.language,
                   leading: const Icon(Icons.language),
                   onPressed: (context) {
-                    //ToDo
+                    //TODO: i18n
                   },
                 ),
               ],

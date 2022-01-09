@@ -1,18 +1,18 @@
 import 'dart:async';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/screens/screens.dart';
-import 'package:entime/utils/helper.dart';
-import 'package:entime/widgets/widgets.dart';
+import '../../blocs/blocs.dart';
+import '../../models/models.dart';
+import '../../utils/helper.dart';
+import '../../widgets/widgets.dart';
+import '../screens.dart';
 
 enum FinishPopupMenu { clearNumber, hideAll }
 

@@ -1,17 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/data_providers/data/protocol_provider.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/utils/helper.dart';
+import '../../data_providers/data/protocol_provider.dart';
+import '../../models/models.dart';
+import '../../utils/helper.dart';
+import '../blocs.dart';
 
 part 'countdown_event.dart';
-
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {

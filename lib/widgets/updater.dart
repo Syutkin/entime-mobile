@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/utils/helper.dart';
+import '../blocs/blocs.dart';
+import '../utils/helper.dart';
 
 class Updater extends StatelessWidget {
   const Updater({Key? key}) : super(key: key);

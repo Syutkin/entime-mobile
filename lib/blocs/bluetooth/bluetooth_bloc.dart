@@ -1,19 +1,19 @@
 import 'dart:async';
-import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/data_providers/data/protocol_provider.dart';
-import 'package:entime/data_providers/bluetooth/bluetooth.dart';
-import 'package:entime/utils/helper.dart';
-import 'package:entime/utils/logger.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
+
+import '../../data_providers/bluetooth/bluetooth.dart';
+import '../../data_providers/data/protocol_provider.dart';
+import '../../models/models.dart';
+import '../../utils/helper.dart';
+import '../../utils/logger.dart';
+import '../blocs.dart';
 
 part 'bluetooth_bloc_event.dart';
-
 part 'bluetooth_bloc_state.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {

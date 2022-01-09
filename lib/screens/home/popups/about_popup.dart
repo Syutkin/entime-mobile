@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/screens/screens.dart';
+import '../../../blocs/blocs.dart';
+import '../../screens.dart';
 
 class AboutPopup extends StatelessWidget {
   static const double _textVerticalSeparation = 18;

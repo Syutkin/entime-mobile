@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/screens/bluetooth/select_bonded_device.dart';
+import '../blocs/blocs.dart';
+import '../screens/bluetooth/select_bonded_device.dart';
 
 class BluetoothButton extends StatelessWidget {
   final BuildContext context;

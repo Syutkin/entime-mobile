@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import 'package:soundpool/soundpool.dart';
 
-import 'package:entime/data_providers/audio/beep_provider.dart';
+import 'beep_provider.dart';
 
 class SoundpoolProvider extends BeepProvider {
   final Soundpool pool = Soundpool.fromOptions();

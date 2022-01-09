@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:entime/widgets/countdown_widget.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/screens/screens.dart';
-import 'package:entime/widgets/widgets.dart';
+import '../../blocs/blocs.dart';
+import '../../models/models.dart';
+import '../../widgets/countdown_widget.dart';
+import '../../widgets/widgets.dart';
+import '../screens.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({

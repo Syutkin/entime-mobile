@@ -16,7 +16,7 @@ class GetModuleSettings extends ModuleSettingsEvent {
   List<Object> get props => [json];
 }
 
-class ModuleSettingsLoaded extends ModuleSettingsEvent {}
+// class ModuleSettingsLoaded extends ModuleSettingsEvent {}
 
 class UpdateModuleSettings extends ModuleSettingsEvent {
   final ModuleSettingsProvider moduleSettings;

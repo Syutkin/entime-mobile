@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 class HelpPage extends StatelessWidget {
-  final String _markdownData = '''
+  String get _markdownData => '''
 # Entime mobile
 
 Перед началом работы можно изменить настройки приложения.

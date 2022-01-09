@@ -4,8 +4,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/utils/helper.dart';
+import '../../blocs/blocs.dart';
+import '../../utils/helper.dart';
 
 class LogScreen extends StatelessWidget {
   final _scrollController = ScrollController();

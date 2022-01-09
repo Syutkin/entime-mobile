@@ -1,15 +1,14 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import 'package:entime/data_providers/settings/module_settings_provider.dart';
-import 'package:entime/data_providers/settings/module_settings_entime_provider.dart';
-import 'package:entime/data_providers/settings/module_settings_led_provider.dart';
-import 'package:entime/data_providers/settings/module_settings_type_provider.dart';
-import 'package:entime/utils/logger.dart';
+import '../../data_providers/settings/module_settings_entime_provider.dart';
+import '../../data_providers/settings/module_settings_led_provider.dart';
+import '../../data_providers/settings/module_settings_provider.dart';
+import '../../data_providers/settings/module_settings_type_provider.dart';
+import '../../utils/logger.dart';
 
 part 'module_settings_event.dart';
-
 part 'module_settings_state.dart';
 
 class ModuleSettingsBloc
@@ -19,7 +18,7 @@ class ModuleSettingsBloc
   ModuleSettingsBloc() : super(ModuleSettingsUninitialized()) {
     on<GetModuleSettings>(
         (event, emit) => _handleGetModuleSettings(event, emit));
-    on<ModuleSettingsLoaded>((event, emit) {});
+    // on<ModuleSettingsLoaded>((event, emit) {});
     on<UpdateModuleSettings>((event, emit) {
       emit(ModuleSettingsLoading());
       emit(ModuleSettingsUpdated(moduleSettings));

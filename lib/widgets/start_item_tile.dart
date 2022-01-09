@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:entime/models/protocol.dart';
-import 'package:entime/utils/helper.dart';
+import '../models/protocol.dart';
+import '../utils/helper.dart';
 
 class StartItemTile extends StatelessWidget {
   final GestureTapCallback? onTap;

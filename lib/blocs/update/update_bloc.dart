@@ -1,12 +1,11 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:entime/data_providers/update/update_provider.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/utils/logger.dart';
+import '../../data_providers/update/update_provider.dart';
+import '../../models/models.dart';
+import '../../utils/logger.dart';
 
 part 'update_event.dart';
-
 part 'update_state.dart';
 
 class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {

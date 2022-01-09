@@ -1,13 +1,12 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wakelock/wakelock.dart';
 
-import 'package:entime/data_providers/settings/settings_provider.dart';
-import 'package:entime/models/models.dart';
-
-part 'settings_state.dart';
+import '../../data_providers/settings/settings_provider.dart';
+import '../../models/models.dart';
 
 part 'settings_event.dart';
+part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SettingsProvider settings;

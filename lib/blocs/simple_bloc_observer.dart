@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:entime/utils/logger.dart';
+import '../utils/logger.dart';
 
 class SimpleBlocObserver extends BlocObserver {
   @override

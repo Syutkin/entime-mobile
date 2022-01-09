@@ -1,6 +1,6 @@
 import 'package:flutter_tts/flutter_tts.dart';
 
-import 'package:entime/utils/logger.dart';
+import '../../utils/logger.dart';
 
 enum TtsState { playing, stopped }
 

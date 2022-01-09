@@ -1,10 +1,11 @@
 import 'dart:async';
-import 'dart:typed_data';
 import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-import 'package:entime/utils/logger.dart';
+import '../../utils/logger.dart';
 
 typedef ErrorHandler = void Function(String error);
 

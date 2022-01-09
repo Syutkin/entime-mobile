@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/models.dart';
-import '../../data_providers/data/log_provider.dart';
 import '../../blocs/blocs.dart';
+import '../../data_providers/data/log_provider.dart';
+import '../../models/models.dart';
 
 part 'log_event.dart';
-
 part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {

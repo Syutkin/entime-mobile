@@ -1,4 +1,4 @@
-import 'package:entime/models/theme.dart';
+import '../../models/theme.dart';
 
 abstract class SettingsProvider {
   bool? getBool(String key);

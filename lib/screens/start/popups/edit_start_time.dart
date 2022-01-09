@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:entime/blocs/protocol/protocol_bloc.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/utils/helper.dart';
-import 'package:entime/widgets/widgets.dart';
+import '../../../blocs/protocol/protocol_bloc.dart';
+import '../../../models/models.dart';
+import '../../../utils/helper.dart';
+import '../../../widgets/widgets.dart';
 
 Future<void> editStartTime(BuildContext context, StartItem item) async {
   final _automaticPhoneTimeController = TextEditingController();

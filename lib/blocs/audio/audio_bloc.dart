@@ -1,15 +1,15 @@
 import 'dart:async';
+
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:equatable/equatable.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/data_providers/audio/audio_provider.dart';
-import 'package:entime/data_providers/audio/sound_audio_provider.dart';
-import 'package:entime/utils/logger.dart';
+import '../../data_providers/audio/audio_provider.dart';
+import '../../data_providers/audio/sound_audio_provider.dart';
+import '../../utils/logger.dart';
+import '../blocs.dart';
 
 part 'audio_event.dart';
-
 part 'audio_state.dart';
 
 class AudioBloc extends Bloc<AudioEvent, AudioState> {

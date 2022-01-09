@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/screens/screens.dart';
-import 'package:entime/widgets/widgets.dart';
-import 'package:entime/data_providers/app_info/app_info_provider.dart';
+import '../blocs/blocs.dart';
+import '../data_providers/app_info/app_info_provider.dart';
+import '../screens/screens.dart';
+import 'widgets.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);

@@ -5,14 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:pub_semver/pub_semver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:entime/data_providers/app_info/app_info_provider.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/utils/logger.dart';
+import '../../models/models.dart';
+import '../../utils/logger.dart';
+import '../app_info/app_info_provider.dart';
 
 typedef DownloadHandler = void Function(int current, int total);
 typedef ErrorHandler = void Function(String error);

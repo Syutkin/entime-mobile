@@ -93,75 +93,43 @@ class SettingsState extends Equatable {
     required this.appTheme,
   });
 
-  static SettingsState initialize(SettingsProvider settings) {
-    final sound = settings.getBool('sound') ?? true;
-    final beep = settings.getBool('beep') ?? true;
-    final voice = settings.getBool('voice') ?? true;
-    final voiceName = settings.getBool('voiceName') ?? false;
-    final volume = settings.getDouble('volume') ?? 0.5;
-    final pitch = settings.getDouble('pitch') ?? 1.0;
-    final rate = settings.getDouble('rate') ?? 0.8;
-    final language = settings.getString('language') ?? 'ru-RU';
-    final recentFile = settings.getString('recentFile') ?? '';
-    final wakelock = settings.getBool('wakelock') ?? true;
+  SettingsState.initialize(SettingsProvider settings)
+      : sound = settings.getBool('sound') ?? true,
+        beep = settings.getBool('beep') ?? true,
+        voice = settings.getBool('voice') ?? true,
+        voiceName = settings.getBool('voiceName') ?? false,
+        volume = settings.getDouble('volume') ?? 0.5,
+        pitch = settings.getDouble('pitch') ?? 1.0,
+        rate = settings.getDouble('rate') ?? 0.8,
+        language = settings.getString('language') ?? 'ru-RU',
+        recentFile = settings.getString('recentFile') ?? '',
+        wakelock = settings.getBool('wakelock') ?? true,
+        startFab = settings.getBool('start_fab') ?? true,
+        startFabSize = settings.getDouble('start_fab_size') ?? 75.0,
+        finishFab = settings.getBool('finish_fab') ?? true,
+        finishFabSize = settings.getDouble('finish_fab_size') ?? 75.0,
+        countdown = settings.getBool('countdown') ?? false,
+        countdownSize = settings.getDouble('countdownSize') ?? 75.0,
+        countdownLeft = settings.getDouble('countdownLeft') ?? 0.0,
+        countdownTop = settings.getDouble('countdownTop') ?? 0.0,
+        countdownAtStartTime =
+            settings.getBool('countdownAtStartTime,') ?? true,
+        checkUpdates = settings.getBool('checkUpdates') ?? true,
+        hideMarked = settings.getBool('hideMarked') ?? true,
+        hideNumbers = settings.getBool('hideNumbers') ?? false,
+        hideManual = settings.getBool('hideManual') ?? false,
+        reconnect = settings.getBool('reconnect') ?? true,
+        finishDelay = settings.getInt('finishDelay') ?? 350,
+        substituteNumbers = settings.getBool('substituteNumbers') ?? true,
+        substituteNumbersDelay =
+            settings.getInt('substituteNumbersDelay') ?? 500,
+        logLimit = settings.getInt('log_limit') ?? -1,
+        appTheme = settings.getTheme() {
     if (wakelock) {
       Wakelock.enable();
     } else {
       Wakelock.disable();
     }
-    final startFab = settings.getBool('start_fab') ?? true;
-    final startFabSize = settings.getDouble('start_fab_size') ?? 75.0;
-    final finishFab = settings.getBool('finish_fab') ?? true;
-    final finishFabSize = settings.getDouble('finish_fab_size') ?? 75.0;
-    final countdown = settings.getBool('countdown') ?? false;
-    final countdownSize = settings.getDouble('countdownSize') ?? 75.0;
-    final countdownLeft = settings.getDouble('countdownLeft') ?? 0.0;
-    final countdownTop = settings.getDouble('countdownTop') ?? 0.0;
-    final countdownAtStartTime =
-        settings.getBool('countdownAtStartTime,') ?? true;
-    final checkUpdates = settings.getBool('checkUpdates') ?? true;
-    final bool hideMarked = settings.getBool('hideMarked') ?? true;
-    final bool hideNumbers = settings.getBool('hideNumbers') ?? false;
-    final bool hideManual = settings.getBool('hideManual') ?? false;
-    final bool reconnect = settings.getBool('reconnect') ?? true;
-    final int finishDelay = settings.getInt('finishDelay') ?? 350;
-    final bool substituteNumbers = settings.getBool('substituteNumbers') ?? true;
-    final int substituteNumbersDelay =
-        settings.getInt('substituteNumbersDelay') ?? 500;
-    final int logLimit = settings.getInt('log_limit') ?? -1;
-    final AppTheme appTheme = settings.getTheme();
-
-    return SettingsState(
-      sound: sound,
-      beep: beep,
-      voice: voice,
-      voiceName: voiceName,
-      volume: volume,
-      pitch: pitch,
-      rate: rate,
-      language: language,
-      recentFile: recentFile,
-      wakelock: wakelock,
-      startFab: startFab,
-      startFabSize: startFabSize,
-      finishFab: finishFab,
-      finishFabSize: finishFabSize,
-      countdown: countdown,
-      countdownSize: countdownSize,
-      countdownLeft: countdownLeft,
-      countdownTop: countdownTop,
-      countdownAtStartTime: countdownAtStartTime,
-      checkUpdates: checkUpdates,
-      hideMarked: hideMarked,
-      hideNumbers: hideNumbers,
-      hideManual: hideManual,
-      reconnect: reconnect,
-      finishDelay: finishDelay,
-      substituteNumbers: substituteNumbers,
-      substituteNumbersDelay: substituteNumbersDelay,
-      logLimit: logLimit,
-      appTheme: appTheme,
-    );
   }
 
   SettingsState.reset(SettingsState state)

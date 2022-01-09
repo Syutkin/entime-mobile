@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/utils/helper.dart';
+import '../blocs/blocs.dart';
+import '../utils/helper.dart';
 
 Future<void> routeToSelectFileScreen(BuildContext context) async {
   await Navigator.of(context).push(MaterialPageRoute(builder: (context) {

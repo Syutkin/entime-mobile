@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'package:entime/models/models.dart';
-import 'package:entime/utils/helper.dart';
-import 'package:entime/utils/logger.dart';
+import '../../models/models.dart';
+import '../../utils/helper.dart';
+import '../../utils/logger.dart';
 
 class ProtocolProvider {
   ProtocolProvider._();

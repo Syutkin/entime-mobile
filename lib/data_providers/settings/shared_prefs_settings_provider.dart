@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:entime/models/models.dart';
-
+import '../../models/models.dart';
 import 'settings_provider.dart';
 
 class SharedPrefsSettingsProvider extends SettingsProvider {

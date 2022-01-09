@@ -1,7 +1,7 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:entime/models/models.dart';
+import '../../models/models.dart';
 
 part 'tab_event.dart';
 

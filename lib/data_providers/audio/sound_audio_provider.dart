@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:entime/data_providers/audio/audio_provider.dart';
-import 'package:entime/data_providers/audio/tts_provider.dart';
-import 'package:entime/data_providers/audio/beep_provider.dart';
-// import 'package:entime/data_providers/audio/audioplayers_provider.dart';
-import 'package:entime/data_providers/audio/soundpool_provider.dart';
+import 'audio_provider.dart';
+import 'beep_provider.dart';
+// import 'audioplayers_provider.dart';
+import 'soundpool_provider.dart';
+import 'tts_provider.dart';
 
 class Sound extends AudioProvider {
   final Tts flutterTts = Tts();

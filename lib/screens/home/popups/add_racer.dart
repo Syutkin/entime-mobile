@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/widgets/widgets.dart';
+import '../../../blocs/blocs.dart';
+import '../../../models/models.dart';
+import '../../../widgets/widgets.dart';
 
 Future<void> addRacerPopup(BuildContext context) async {
   final now = DateTime.now();

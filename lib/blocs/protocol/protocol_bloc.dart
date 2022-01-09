@@ -1,19 +1,18 @@
 import 'dart:async';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share_plus/share_plus.dart';
 
-import 'package:entime/data_providers/data/protocol_provider.dart';
-import 'package:entime/data_providers/csv/startlist_provider.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/blocs/blocs.dart';
-import 'package:entime/utils/csv_utils.dart';
-import 'package:entime/utils/logger.dart';
+import '../../data_providers/csv/startlist_provider.dart';
+import '../../data_providers/data/protocol_provider.dart';
+import '../../models/models.dart';
+import '../../utils/csv_utils.dart';
+import '../../utils/logger.dart';
+import '../blocs.dart';
 
 part 'protocol_event.dart';
-
 part 'protocol_state.dart';
 
 class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {

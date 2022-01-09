@@ -1,6 +1,6 @@
-import 'package:entime/data_providers/settings/module_settings_provider.dart';
-import 'package:entime/models/models.dart';
-import 'package:entime/utils/logger.dart';
+import '../../models/models.dart';
+import '../../utils/logger.dart';
+import 'module_settings_provider.dart';
 
 class ModuleSettingsType extends ModuleSettingsProvider {
   late ModSettingsModelType _modSettingsModel;
