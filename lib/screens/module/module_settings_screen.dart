@@ -12,7 +12,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
 
   Future<bool> _onBackPressed(BuildContext context, bool updated) async {
     if (updated) {
-      await showDialog(
+      await showDialog<void>(
           context: context,
           barrierDismissible: true,
           builder: (context) => AlertDialog(
@@ -76,7 +76,7 @@ class ModuleSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _bloc = BlocProvider.of<ModuleSettingsBloc>(context);
+    final _bloc = BlocProvider.of<ModuleSettingsBloc>(context);
     if (_bloc.moduleSettings.type == 'entime') {
       return BlocBuilder<ModuleSettingsBloc, ModuleSettingsState>(
           builder: (context, state) {
@@ -97,7 +97,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 title: 'Buzzer',
                 leading: const Icon(MdiIcons.bell),
                 switchValue: _bloc.moduleSettings.buzzer,
-                onToggle: (bool value) {
+                onToggle: (value) {
                   onChanged();
                   _bloc.moduleSettings.buzzer = value;
                   _bloc.add(UpdateModuleSettings(_bloc.moduleSettings));
@@ -105,9 +105,9 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Частота коротких гудков',
-                subtitle: '${(_bloc.moduleSettings.shortFrequency)} Гц',
+                subtitle: '${_bloc.moduleSettings.shortFrequency} Гц',
                 leading: const Icon(MdiIcons.wave),
-                onPressed: (BuildContext context) async {
+                onPressed: (context) async {
                   final int? hz = await buzzerFrequencyPopup(
                       frequency: _bloc.moduleSettings.shortFrequency,
                       context: context,
@@ -121,9 +121,9 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Частота длинных гудков',
-                subtitle: '${(_bloc.moduleSettings.longFrequency)} Гц',
+                subtitle: '${_bloc.moduleSettings.longFrequency} Гц',
                 leading: const Icon(MdiIcons.wave),
-                onPressed: (BuildContext context) async {
+                onPressed: (context) async {
                   final int? hz = await buzzerFrequencyPopup(
                       frequency: _bloc.moduleSettings.longFrequency,
                       context: context,
@@ -144,7 +144,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 title: 'LoRa',
                 leading: const Icon(MdiIcons.radio),
                 switchValue: _bloc.moduleSettings.lora,
-                onToggle: (bool value) {
+                onToggle: (value) {
                   onChanged();
                   //moduleSettings.lora = value;
                   //ToDo LoRa;
@@ -152,63 +152,63 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Частота',
-                subtitle: '${(_bloc.moduleSettings.frequency)} МГц',
+                subtitle: '${_bloc.moduleSettings.frequency} МГц',
                 leading: const Icon(MdiIcons.wave),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
                 title: 'TX Power',
-                subtitle: '${(_bloc.moduleSettings.txPower)}',
+                subtitle: '${_bloc.moduleSettings.txPower}',
                 leading: const Icon(MdiIcons.wave),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
                 title: 'Spreading Factor',
-                subtitle: '${(_bloc.moduleSettings.spreadingFactor)}',
+                subtitle: '${_bloc.moduleSettings.spreadingFactor}',
                 leading: const Icon(MdiIcons.wave),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
                 title: 'Signal Bandwidth',
-                subtitle: '${(_bloc.moduleSettings.signalBandwidth)}',
+                subtitle: '${_bloc.moduleSettings.signalBandwidth}',
                 leading: const Icon(MdiIcons.wave),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
                 title: 'Coding Rate Denominator',
-                subtitle: '${(_bloc.moduleSettings.codingRateDenominator)}',
+                subtitle: '${_bloc.moduleSettings.codingRateDenominator}',
                 leading: const Icon(MdiIcons.wave),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
                 title: 'Preamble Length',
-                subtitle: '${(_bloc.moduleSettings.preambleLength)}',
+                subtitle: '${_bloc.moduleSettings.preambleLength}',
                 leading: const Icon(MdiIcons.wave),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
                 title: 'Sync Word',
-                subtitle: '${(_bloc.moduleSettings.syncWord)}',
+                subtitle: '${_bloc.moduleSettings.syncWord}',
                 leading: const Icon(MdiIcons.wave),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
@@ -217,7 +217,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 title: 'CRC',
                 leading: const Icon(MdiIcons.wave),
                 switchValue: _bloc.moduleSettings.crc,
-                onToggle: (bool value) {
+                onToggle: (value) {
                   onChanged();
                   //moduleSettings.crc = value;
                   //ToDo LoRa;
@@ -232,7 +232,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 title: 'TFT',
                 leading: const Icon(MdiIcons.monitor),
                 switchValue: _bloc.moduleSettings.tft,
-                onToggle: (bool value) {
+                onToggle: (value) {
                   onChanged();
                   //moduleSettings.tft = value;
                   //ToDo TFT;
@@ -242,7 +242,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 title: 'Спящий режим',
                 leading: const Icon(MdiIcons.monitor),
                 switchValue: _bloc.moduleSettings.timeout,
-                onToggle: (bool value) {
+                onToggle: (value) {
                   onChanged();
                   //moduleSettings.timeout = value;
                   //ToDo TFT;
@@ -251,9 +251,9 @@ class ModuleSettingsScreen extends StatelessWidget {
               SettingsTile(
                 title: 'Спящий режим',
                 subtitle:
-                    'Через ${(_bloc.moduleSettings.timeoutDuration)} секунд',
+                    'Через ${_bloc.moduleSettings.timeoutDuration} секунд',
                 leading: const Icon(MdiIcons.monitor),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo TFT;
                 },
@@ -262,7 +262,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 title: 'Включать после события',
                 leading: const Icon(MdiIcons.monitor),
                 switchValue: _bloc.moduleSettings.turnOnAtEvent,
-                onToggle: (bool value) {
+                onToggle: (value) {
                   onChanged();
                   //moduleSettings.turnOnAtEvent = value;
                   //ToDo TFT;
@@ -277,7 +277,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 title: 'Bluetooth',
                 leading: const Icon(Icons.bluetooth),
                 switchValue: _bloc.moduleSettings.bluetooth,
-                onToggle: (bool value) {
+                onToggle: (value) {
                   onChanged();
                   //moduleSettings.bluetooth = value;
                   //ToDo bluetooth on/off;
@@ -285,18 +285,18 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Имя модуля',
-                subtitle: (_bloc.moduleSettings.bluetoothName),
+                subtitle: _bloc.moduleSettings.bluetoothName,
                 leading: const Icon(MdiIcons.bluetooth),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo bluetooth module name;
                 },
               ),
               SettingsTile(
                 title: 'Номер модуля',
-                subtitle: '${(_bloc.moduleSettings.bluetoothNumber)}',
+                subtitle: '${_bloc.moduleSettings.bluetoothNumber}',
                 leading: const Icon(MdiIcons.bluetooth),
-                onPressed: (BuildContext context) async {
+                onPressed: (context) async {
                   final int? number = await bluetoothNumberPopup(
                       context: context,
                       labelText: 'Номер',
@@ -315,7 +315,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               title: 'WiFi',
               leading: const Icon(MdiIcons.wifi),
               switchValue: _bloc.moduleSettings.wifi,
-              onToggle: (bool value) {
+              onToggle: (value) {
                 onChanged();
                 //moduleSettings.wifi = value;
                 //ToDo WiFi;
@@ -323,9 +323,9 @@ class ModuleSettingsScreen extends StatelessWidget {
             ),
             SettingsTile(
               title: 'Сеть',
-              subtitle: (_bloc.moduleSettings.ssid),
+              subtitle: _bloc.moduleSettings.ssid,
               leading: const Icon(MdiIcons.wifi),
-              onPressed: (BuildContext context) {
+              onPressed: (context) {
                 onChanged();
                 //ToDo WiFi;
               },
@@ -334,7 +334,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 title: 'Пароль',
                 //subtitle: '${(moduleSettings.password)}',
                 leading: const Icon(MdiIcons.wifi),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo WiFi;
                 }),
@@ -344,9 +344,9 @@ class ModuleSettingsScreen extends StatelessWidget {
             tiles: [
               SettingsTile(
                 title: 'R1',
-                subtitle: '${(_bloc.moduleSettings.r1)} Ом',
+                subtitle: '${_bloc.moduleSettings.r1} Ом',
                 leading: const Icon(MdiIcons.resistor),
-                onPressed: (BuildContext context) async {
+                onPressed: (context) async {
                   final int? r1 = await vccPopup(
                       context: context,
                       labelText: 'Ом',
@@ -360,9 +360,9 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'R2',
-                subtitle: '${(_bloc.moduleSettings.r2)} Ом',
+                subtitle: '${_bloc.moduleSettings.r2} Ом',
                 leading: const Icon(MdiIcons.resistor),
-                onPressed: (BuildContext context) async {
+                onPressed: (context) async {
                   final int? r2 = await vccPopup(
                       context: context,
                       labelText: 'Ом',
@@ -376,9 +376,9 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Ввод измерянного напряжения',
-                subtitle: '${(_bloc.moduleSettings.vBat)} мВ',
+                subtitle: '${_bloc.moduleSettings.vBat} мВ',
                 leading: const Icon(MdiIcons.batteryCharging),
-                onPressed: (BuildContext context) async {
+                onPressed: (context) async {
                   final int? mv = await vccPopup(
                       context: context,
                       labelText: 'мВ',
@@ -414,7 +414,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                 title: 'Bluetooth',
                 leading: const Icon(Icons.bluetooth),
                 switchValue: _bloc.moduleSettings.bluetooth,
-                onToggle: (bool value) {
+                onToggle: (value) {
                   onChanged();
                   //moduleSettings.bluetooth = value;
                   //ToDo bluetooth on/off;
@@ -422,18 +422,18 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Имя модуля',
-                subtitle: (_bloc.moduleSettings.bluetoothName),
+                subtitle: _bloc.moduleSettings.bluetoothName,
                 leading: const Icon(MdiIcons.bluetooth),
-                onPressed: (BuildContext context) {
+                onPressed: (context) {
                   onChanged();
                   //ToDo bluetooth module name;
                 },
               ),
               SettingsTile(
                 title: 'Номер модуля',
-                subtitle: '${(_bloc.moduleSettings.bluetoothNumber)}',
+                subtitle: '${_bloc.moduleSettings.bluetoothNumber}',
                 leading: const Icon(MdiIcons.bluetooth),
-                onPressed: (BuildContext context) async {
+                onPressed: (context) async {
                   final int? number = await bluetoothNumberPopup(
                       context: context,
                       labelText: 'Номер',
@@ -447,9 +447,9 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Яркость',
-                subtitle: '${(_bloc.moduleSettings.brightness)}',
+                subtitle: '${_bloc.moduleSettings.brightness}',
                 leading: const Icon(MdiIcons.brightness1),
-                onPressed: (BuildContext context) async {
+                onPressed: (context) async {
                   final int? number = await brightnessPopup(
                       initialValue: _bloc.moduleSettings.brightness,
                       context: context,
@@ -468,7 +468,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               title: 'WiFi',
               leading: const Icon(MdiIcons.wifi),
               switchValue: _bloc.moduleSettings.wifi,
-              onToggle: (bool value) {
+              onToggle: (value) {
                 onChanged();
                 _bloc.moduleSettings.wifi = value;
                 _bloc.add(UpdateModuleSettings(_bloc.moduleSettings));
@@ -476,9 +476,9 @@ class ModuleSettingsScreen extends StatelessWidget {
             ),
             SettingsTile(
               title: 'Сеть',
-              subtitle: (_bloc.moduleSettings.ssid),
+              subtitle: _bloc.moduleSettings.ssid,
               leading: const Icon(MdiIcons.wifi),
-              onPressed: (BuildContext context) async {
+              onPressed: (context) async {
                 final String? ssid = await wifiSettingsPopup(
                     context: context,
                     labelText: 'WiFi',
@@ -494,7 +494,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               title: 'Пароль',
               //subtitle: '${(moduleSettings.password)}',
               leading: const Icon(MdiIcons.wifi),
-              onPressed: (BuildContext context) async {
+              onPressed: (context) async {
                 final String? password = await wifiSettingsPopup(
                     context: context,
                     labelText: 'Пароль',

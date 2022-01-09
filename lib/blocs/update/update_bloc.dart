@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:entime/data_providers/update/update_provider.dart';
@@ -27,7 +27,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
     });
 
     on<CheckUpdate>((event, emit) async {
-      bool update = await updater.isUpdateAvailable();
+      final bool update = await updater.isUpdateAvailable();
       if (update) {
         emit(UpdateAvailable(updater.latestVersion));
       } else {

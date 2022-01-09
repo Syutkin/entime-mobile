@@ -2,6 +2,9 @@
 //
 //     final modSettingsModel = modSettingsModelFromJson(jsonString);
 
+// ignore_for_file: implicit-casts
+// ignore_for_file: implicit-dynamic
+
 import 'dart:convert';
 
 ModSettingsModelType modSettingsModelTypeFromJson(String str) =>

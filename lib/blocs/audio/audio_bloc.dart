@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
@@ -14,7 +14,7 @@ part 'audio_state.dart';
 
 class AudioBloc extends Bloc<AudioEvent, AudioState> {
   final SettingsBloc settingsBloc;
-  late final StreamSubscription settingsSubscription;
+  late final StreamSubscription<SettingsState> settingsSubscription;
 
   bool _sound = true;
   bool _voice = true;

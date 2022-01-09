@@ -7,9 +7,9 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    TextTheme textTheme = Theme.of(context).textTheme;
-    double height = textTheme.bodyText1!.fontSize! * 3;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final double height = textTheme.bodyText1!.fontSize! * 3;
     return Container(
       height: height,
       decoration: BoxDecoration(
@@ -17,11 +17,11 @@ class Header extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.25),
-            blurRadius: 3.0, // has the effect of softening the shadow
-            spreadRadius: 1.0, // has the effect of extending the shadow
+            blurRadius: 3, // has the effect of softening the shadow
+            spreadRadius: 1, // has the effect of extending the shadow
             offset: const Offset(
-              2.0, // horizontal, move right 10
-              2.0, // vertical, move down 10
+              2, // horizontal, move right 10
+              2, // vertical, move down 10
             ),
           )
         ],

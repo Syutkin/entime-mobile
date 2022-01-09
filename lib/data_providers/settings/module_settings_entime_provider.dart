@@ -66,7 +66,7 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
 
   //Loading settings on initialization
   @override
-  Future<bool> update(jsonString) async {
+  Future<bool> update(String jsonString) async {
     logger.i('Updating modsettings from json');
 
     try {
@@ -111,7 +111,7 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
       r2 = _modSettingsModel.vcc!.r2;
 
       return true;
-    } catch (e) {
+    } on Exception catch (e) {
       logger.e('Error at parsing ModuleSettings json: $e');
       return false;
     }

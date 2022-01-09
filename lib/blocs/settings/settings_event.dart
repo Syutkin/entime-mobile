@@ -111,8 +111,7 @@ class SetBoolValueEvent extends SettingsEvent {
     if (substituteNumbers != null) {
       result += 'substituteNumbers: $substituteNumbers';
     }
-    result += ' }';
-    return result;
+    return result += ' }';
   }
 }
 
@@ -146,8 +145,7 @@ class SetIntValueEvent extends SettingsEvent {
     if (logLimit != null) {
       result += 'log_limit: $logLimit';
     }
-    result += ' }';
-    return result;
+    return result += ' }';
   }
 }
 
@@ -211,8 +209,7 @@ class SetDoubleValueEvent extends SettingsEvent {
     if (countdownTop != null) {
       result += 'countdownTop: $countdownTop';
     }
-    result += ' }';
-    return result;
+    return result += ' }';
   }
 }
 
@@ -246,8 +243,7 @@ class SetStringValueEvent extends SettingsEvent {
     if (previousVersion != null) {
       result += 'previousVersion: $previousVersion';
     }
-    result += ' }';
-    return result;
+    return result += ' }';
   }
 }
 

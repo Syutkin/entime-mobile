@@ -29,12 +29,12 @@ class StartItemTile extends StatelessWidget {
         key: UniqueKey(),
         background: Container(
             color: Theme.of(context).colorScheme.secondary,
-            alignment: const Alignment(1.0, 0.0),
-            padding: const EdgeInsets.all(5.0),
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(5),
             child: Text('Не стартовал',
                 style: DefaultTextStyle.of(context)
                     .style
-                    .apply(fontSizeFactor: 2.0))),
+                    .apply(fontSizeFactor: 2))),
         direction: DismissDirection.endToStart,
         onDismissed: (direction) {
           onDismissed?.call(direction);
@@ -55,7 +55,7 @@ class StartItemTile extends StatelessWidget {
                     item.number.toString(),
                     style: DefaultTextStyle.of(context)
                         .style
-                        .apply(fontSizeFactor: 2.0, fontWeightDelta: 2),
+                        .apply(fontSizeFactor: 2, fontWeightDelta: 2),
                   ),
                 ),
               ),

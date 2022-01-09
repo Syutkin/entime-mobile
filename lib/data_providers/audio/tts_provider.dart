@@ -39,11 +39,13 @@ class Tts {
     return flutterTts.setPitch(pitch);
   }
 
-  void speak(String text) async {
+  Future<void> speak(String text) async {
     if (text.isNotEmpty) {
       logger.i('Sound TTS -> $text');
-      var result = await flutterTts.speak(text);
-      if (result == 1) ttsState = TtsState.playing;
+      final result = await flutterTts.speak(text);
+      if (result == 1) {
+        ttsState = TtsState.playing;
+      }
     } else {
       logger.i('Sound TTS -> Text is empty');
     }

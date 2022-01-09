@@ -23,7 +23,7 @@ Future<void> showChangelogAtStartup(
   return showDialog(
     context: context,
     barrierDismissible: true,
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         // scrollable: true,
         title: const Text('Что нового'),

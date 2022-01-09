@@ -5,7 +5,7 @@ import 'package:entime/blocs/protocol/protocol_bloc.dart';
 import 'package:entime/models/models.dart';
 
 Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
-  var _numberController = TextEditingController();
+  final _numberController = TextEditingController();
   _numberController.text = (item.number ?? '').toString();
   int number = 0;
   final _protocolBloc = BlocProvider.of<ProtocolBloc>(context);
@@ -14,7 +14,7 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         scrollable: true,
         title: const Text('Введите номер финишировавшего участника'),
@@ -32,8 +32,10 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
                 decoration: const InputDecoration(labelText: 'Номер'),
                 controller: _numberController,
                 validator: (value) {
-                  if (value == null) return 'Неверный номер';
-                  int? num = int.tryParse(value);
+                  if (value == null) {
+                    return 'Неверный номер';
+                  }
+                  final int? num = int.tryParse(value);
                   if (num == null || num < 1) {
                     return 'Неверный номер';
                   }
@@ -95,7 +97,7 @@ Future<bool?> updateFinishTimePopup(BuildContext context, int number) async {
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         title: const Text('Предупреждение'),
         content: Text(

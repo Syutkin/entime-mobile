@@ -28,8 +28,8 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
       key: UniqueKey(),
       background: Container(
           color: Theme.of(context).colorScheme.secondary,
-          alignment: const Alignment(1.0, 0.0),
-          padding: const EdgeInsets.all(5.0),
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.all(5),
           child: Text('Скрыть',
               style: DefaultTextStyle.of(context).style.apply(
                   fontSizeFactor: 1.5,
@@ -58,7 +58,7 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
             return Card(
               margin: const EdgeInsets.all(2),
               child: ListTile(
-                contentPadding: const EdgeInsets.all(0.0),
+                contentPadding: EdgeInsets.zero,
                 onTap: () {
                   onTap?.call();
                 },
@@ -80,7 +80,7 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
                       child: Text(strip(item.finishtime),
                           style: DefaultTextStyle.of(context)
                               .style
-                              .apply(fontSizeFactor: 2.0)),
+                              .apply(fontSizeFactor: 2)),
                     ),
                   ),
                   Flexible(
@@ -93,7 +93,7 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
                               : candidateData.first.toString(),
                           style: DefaultTextStyle.of(context)
                               .style
-                              .apply(fontSizeFactor: 2.0)),
+                              .apply(fontSizeFactor: 2)),
                     ),
                   ),
                 ]),

@@ -26,7 +26,7 @@ class ProtocolAddStartNumber extends ProtocolEvent {
   final StartTime startTime;
   final bool forceAdd;
 
-  const ProtocolAddStartNumber(this.startTime, [this.forceAdd = false]);
+  const ProtocolAddStartNumber(this.startTime, {this.forceAdd = false});
 
   @override
   List<Object> get props => [startTime, forceAdd];

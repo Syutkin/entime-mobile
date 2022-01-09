@@ -43,7 +43,7 @@ class UpdateProvider {
   UpdateProvider._();
 
   static Future<UpdateProvider> init() async {
-    var data = UpdateProvider._();
+    final data = UpdateProvider._();
     await data._init();
     return data;
   }
@@ -77,34 +77,32 @@ class UpdateProvider {
     try {
       _latestRelease = await _getLatestRelease();
       if (_latestRelease != null) {
-        var latestVersion = Version.parse(_latestRelease!.tagName);
-        var currentVersion = Version.parse(
+        final latestVersion = Version.parse(_latestRelease!.tagName);
+        final currentVersion = Version.parse(
             '${_packageInfo.version}+${_packageInfo.buildNumber}');
         if (latestVersion > currentVersion) {
           logger.i('Update_provider: Update to $latestVersion available');
           _canUpdate = true;
         }
       }
-    } catch (e) {
+    } on Exception catch (e) {
       logger.e(e);
     }
     return _canUpdate;
   }
 
   Future<Release?> _getLatestRelease() async {
-    Release release;
-    var url = Uri.parse(
+    final url = Uri.parse(
         'https://api.github.com/repos/syutkin/entime-mobile/releases/latest');
     try {
-      var response = await http.get(url);
+      final response = await http.get(url);
       if (response.statusCode == 200) {
-        release = Release.fromRawJson(response.body);
-        return release;
+        return Release.fromRawJson(response.body);
       } else {
         logger.d('StatusCode: ${response.statusCode}');
         return null;
       }
-    } catch (e) {
+    } on Exception catch (e) {
       logger.e('error: $e');
       return null;
     }
@@ -124,7 +122,7 @@ class UpdateProvider {
 
           String url = '';
 
-          for (var asset in _latestRelease!.assets) {
+          for (final asset in _latestRelease!.assets) {
             if (asset.name ==
                 '${_packageInfo.appName}-${_latestRelease!.tagName}-${_packageInfo.abi}.apk') {
               url = asset.browserDownloadUrl;
@@ -140,10 +138,10 @@ class UpdateProvider {
           if (_updateFileSize != null) {
             logger.d('Update_provider: contentLength: $_updateFileSize');
 
-            List<int> bytes = [];
+            final List<int> bytes = [];
 
             response.stream.listen(
-              (List<int> newBytes) {
+              (newBytes) {
                 // update progress
                 bytes.addAll(newBytes);
                 _downloadHandler(bytes.length, _updateFileSize!);
@@ -163,7 +161,7 @@ class UpdateProvider {
           } else {
             _onError('response.contentLength is null');
           }
-        } catch (e) {
+        } on Exception catch (e) {
           logger.e(e);
         }
       }
@@ -172,23 +170,23 @@ class UpdateProvider {
     }
   }
 
-  void installApk() async {
+  Future<void> installApk() async {
     if (_canUpdate &&
         _downloaded &&
         _latestRelease != null &&
         _downloadedFile != null) {
-      var result = await OpenFile.open(_downloadedFile!.path);
+      final result = await OpenFile.open(_downloadedFile!.path);
       logger.d(result.message);
     }
   }
 
   Future<ShowChangelog> showChangelog() async {
-    ShowChangelog showChangelog = ShowChangelog();
-    var _packageInfo = await PackageInfo.fromPlatform();
-    var _prefs = await SharedPreferences.getInstance();
-    var previousVersion =
+    final ShowChangelog showChangelog = ShowChangelog();
+    final _packageInfo = await PackageInfo.fromPlatform();
+    final _prefs = await SharedPreferences.getInstance();
+    final previousVersion =
         Version.parse(_prefs.getString('previousVersion') ?? '0.0.0');
-    var currentVersion = Version.parse(_packageInfo.version);
+    final currentVersion = Version.parse(_packageInfo.version);
     // Не показывать ченджлог для не релизных версий и первого запуска
     // Не изменять значение последней запущенной версии для не релизных версий
     if (!currentVersion.isPreRelease) {

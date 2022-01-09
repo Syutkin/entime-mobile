@@ -61,7 +61,8 @@ class ProtocolSelectedState extends ProtocolState {
       ];
 
   @override
-  String toString() => 'ProtocolSelectedState ('
+  String toString() =>
+      'ProtocolSelectedState (' //ignore: missing_whitespace_between_adjacent_strings
       'startProtocol: ${startProtocol.length} items, '
       'finishProtocol: ${finishProtocol.length} items, '
       'numbersOnTraceProtocol: ${numbersOnTraceProtocol.length} items, '

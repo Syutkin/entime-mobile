@@ -15,9 +15,9 @@ class BluetoothBackgroundConnection {
   String _messagePacket = '';
 
   // Стрим с поступающей информацией от модуля
-  final StreamController _messageController = StreamController.broadcast();
+  final StreamController<String> _messageController = StreamController.broadcast();
 
-  Stream get message => _messageController.stream;
+  Stream<String> get message => _messageController.stream;
 
   bool isDisconnecting = false;
 
@@ -54,7 +54,7 @@ class BluetoothBackgroundConnection {
     // Create message if there is '\r\n' sequence
     _messageBuffer += String.fromCharCodes(data);
     while (_messageBuffer.contains('\r\n')) {
-      int index = _messageBuffer.indexOf('\r\n');
+      final int index = _messageBuffer.indexOf('\r\n');
       _messagePacket = _messageBuffer.substring(0, index).trim();
       _messageController.add(_messagePacket);
       _messageBuffer = _messageBuffer.substring(index + 2);
@@ -89,10 +89,10 @@ class BluetoothBackgroundConnection {
     if (text.isNotEmpty) {
       try {
         logger.i('Sending message: $text');
-        _connection?.output.add(utf8.encode(text + '\r\n') as Uint8List);
+        _connection?.output.add(utf8.encode('$text\r\n') as Uint8List);
         await _connection?.output.allSent;
         result = true;
-      } catch (e) {
+      } on Exception catch (e) {
         // Ignore error, but notify state
         logger.e('Error sending message: $e');
         _onSendError('$e');

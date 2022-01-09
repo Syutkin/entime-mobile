@@ -11,20 +11,20 @@ Future<List<StartItemCsv>> getStartList([PlatformFile? file]) async {
     return [];
   }
   try {
-    var start = CsvToMapConverter(fieldDelimiter: ';')
+    final start = CsvToMapConverter(fieldDelimiter: ';')
         .convert(utf8.decode(file.bytes!));
-    List<StartItemCsv> startList = start.isNotEmpty
+    final List<StartItemCsv> startList = start.isNotEmpty
         ? start.map((c) => StartItemCsv.fromMap(c)).toList()
         : [];
     return startList;
-  } catch (e) {
+  } on Exception catch (e) {
     logger.e('getStartList: Error: $e');
     return [];
   }
 }
 
 Future<PlatformFile?> _pickCsv() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
+  final FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
     allowMultiple: false,
     allowedExtensions: ['csv'],

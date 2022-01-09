@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -26,7 +26,7 @@ class ModuleSettingsBloc
     });
   }
 
-  void _handleGetModuleSettings(
+  Future<void> _handleGetModuleSettings(
       GetModuleSettings event, Emitter<ModuleSettingsState> emit) async {
     emit(ModuleSettingsLoading());
     moduleSettings = ModuleSettingsType();

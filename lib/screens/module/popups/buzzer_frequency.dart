@@ -12,7 +12,7 @@ Future<int?> buzzerFrequencyPopup(
     required BuildContext context,
     required int frequency}) async {
 
-  List<Note> notes = [
+  final List<Note> notes = [
     Note('B0', 31),
     Note('C1', 33),
     Note('CS1', 35),
@@ -106,13 +106,13 @@ Future<int?> buzzerFrequencyPopup(
 
   int _startNote() {
     int i = 0;
-    for (Note note in notes) {
+    for (final Note note in notes) {
       if (note.frequency == frequency) {
         return i;
       }
       i++;
     }
-    return 53; //note E5, 659Hz
+    return 53; //default, note E5, 659Hz
   }
 
   double _value = _startNote().toDouble();
@@ -121,22 +121,22 @@ Future<int?> buzzerFrequencyPopup(
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         title: Text(text),
         content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+            builder: (context, setState) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text('Нота ${notes[_value.toInt()].name}, ${notes[_value.toInt()].frequency}Гц'),
               Slider(
                 value: _value,
-                min: 0.0,
+                min: 0,
                 max: notes.length.toDouble() - 1,
                 //label: '${notes[_value.toInt()].name}',
                 divisions: notes.length,
-                onChanged: (double newValue) {
+                onChanged: (newValue) {
                   setState(() => _value = newValue);
                 },
               ),
@@ -146,8 +146,7 @@ Future<int?> buzzerFrequencyPopup(
         actions: <Widget>[
           TextButton(
             onPressed: () {
-              frequency = notes[_value.toInt()].frequency;
-              Navigator.of(context).pop(frequency);
+              Navigator.of(context).pop(notes[_value.toInt()].frequency);
             },
             child: Text(MaterialLocalizations.of(context).okButtonLabel),
           ),

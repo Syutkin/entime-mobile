@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
         if (state is ProtocolSelectedState) {
           // Обновление автоматического времени старта
           if (state.automaticStart != null && state.automaticStart!.updating) {
-            String text = 'Участнику под номером '
+            final String text = 'Участнику под номером '
                 '${state.previousStart!.first.number} '
                 'уже установлена стартовая поправка '
                 '${state.previousStart!.first.automaticcorrection}. '
@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
             // Если стартовое время уже присвоено другому номеру
             String text = '';
 
-            for (var element in state.previousStart!) {
+            for (final element in state.previousStart!) {
               if (element.automaticstarttime == null &&
                   element.manualstarttime == null) {
                 text += 'Стартовое время ${state.startTime!.time} уже '
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
 
             if (update != null && update) {
               BlocProvider.of<ProtocolBloc>(context)
-                  .add(ProtocolAddStartNumber(state.startTime!, true));
+                  .add(ProtocolAddStartNumber(state.startTime!, forceAdd: true));
             }
           }
         }
@@ -184,10 +184,10 @@ class HomeScreen extends StatelessWidget {
     });
   }
 
-  Widget _menuButton(BuildContext context, var activeTab) {
+  Widget _menuButton(BuildContext context, AppTab activeTab) {
     return BlocBuilder<ProtocolBloc, ProtocolState>(
         builder: (context, protocolState) {
-      var menuItems = <PopupMenuEntry<MenuButton>>[];
+      final menuItems = <PopupMenuEntry<MenuButton>>[];
       if (activeTab == AppTab.start || activeTab == AppTab.finish) {
         if (protocolState is ProtocolSelectedState) {
           if (activeTab == AppTab.start) {
@@ -295,7 +295,7 @@ class HomeScreen extends StatelessWidget {
                 await addRacerPopup(context);
                 break;
               case MenuButton.selectStartProtocol:
-                routeToSelectFileScreen(context);
+                await routeToSelectFileScreen(context);
                 break;
               case MenuButton.bluetooth:
                 await selectBluetoothDevice(context);
@@ -315,12 +315,12 @@ class HomeScreen extends StatelessWidget {
     });
   }
 
-  Widget _finishFilterButton(BuildContext context, var activeTab) {
-    var _bloc = BlocProvider.of<SettingsBloc>(context);
+  Widget _finishFilterButton(BuildContext context, AppTab activeTab) {
+    final _bloc = BlocProvider.of<SettingsBloc>(context);
     return BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, protocolState) {
       if (activeTab == AppTab.finish) {
-        var menuItems = <PopupMenuEntry<FilterFinish>>[];
+        final menuItems = <PopupMenuEntry<FilterFinish>>[];
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideMarked,

@@ -20,11 +20,11 @@ class FinishScreen extends StatefulWidget {
   const FinishScreen({Key? key}) : super(key: key);
 
   @override
-  _FinishPage createState() => _FinishPage();
+  State<FinishScreen> createState() => _FinishPage();
 }
 
 class _FinishPage extends State<FinishScreen> {
-  Offset? _tapPosition;
+  late Offset _tapPosition;
 
   void _storePosition(TapDownDetails details) {
     _tapPosition = details.globalPosition;
@@ -59,7 +59,7 @@ class _FinishPage extends State<FinishScreen> {
             //   duration: const Duration(seconds: 3),
             // );
             BotToast.showAttachedWidget(
-              verticalOffset: 36.0,
+              verticalOffset: 36,
               attachedBuilder: (cancel) => Card(
                 child: ListTile(
                   title: Text('Финишировал номер ${state.autoFinishNumber}'),
@@ -134,15 +134,15 @@ class _FinishPage extends State<FinishScreen> {
               )),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                var item = finishProtocol[index];
+              (context, index) {
+                final item = finishProtocol[index];
                 return FinishItemTile(
                   item: item,
                   onTap: () async {
                     await addNumberPopup(context, item);
                   },
                   onLongPress: () async {
-                    _clearPopup(context, item.number);
+                    await _clearPopup(context, item.number);
                   },
                   onAccept: (data) {
                     if (data != null) {
@@ -172,14 +172,14 @@ class _FinishPage extends State<FinishScreen> {
       builder: (context, state) {
         if (state is ProtocolSelectedState) {
           return SizedBox(
-            height: 50.0,
+            height: 50,
             width: double.maxFinite,
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: state.numbersOnTraceProtocol.length,
-              itemBuilder: (BuildContext context, int index) {
-                var item = state.numbersOnTraceProtocol[index];
+              itemBuilder: (context, index) {
+                final item = state.numbersOnTraceProtocol[index];
                 final isSelected = item.number == state.awaitingNumber;
                 return NumberOnTraceTile(
                   number: item.number,
@@ -192,7 +192,7 @@ class _FinishPage extends State<FinishScreen> {
                   },
                   onTapDown: _storePosition,
                   onLongPress: () async {
-                    _numberOnTracePopup(context, item.number);
+                    await _numberOnTracePopup(context, item.number);
                   },
                   isSelected: isSelected,
                 );
@@ -200,20 +200,20 @@ class _FinishPage extends State<FinishScreen> {
             ),
           );
         } else {
-          return const SizedBox(width: 0.0, height: 0.0);
+          return const SizedBox(width: 0, height: 0);
         }
       },
     );
   }
 
-  void _clearPopup(context, int? number) async {
+  Future<void> _clearPopup(BuildContext context, int? number) async {
     final RenderBox overlay =
         Overlay.of(context)!.context.findRenderObject() as RenderBox;
-    FinishPopupMenu? result = await showMenu<FinishPopupMenu>(
+    final FinishPopupMenu? result = await showMenu<FinishPopupMenu>(
         items: _getPopupMenu(context, number),
         context: context,
         position: RelativeRect.fromRect(
-            _tapPosition! & const Size(60, 60), // smaller rect, the touch area
+            _tapPosition & const Size(60, 60), // smaller rect, the touch area
             Offset.zero &
                 overlay.semanticBounds.size // Bigger rect, the entire screen
             ));
@@ -235,7 +235,7 @@ class _FinishPage extends State<FinishScreen> {
 
   List<PopupMenuEntry<FinishPopupMenu>> _getPopupMenu(
       BuildContext context, int? number) {
-    var list = <PopupMenuEntry<FinishPopupMenu>>[];
+    final list = <PopupMenuEntry<FinishPopupMenu>>[];
     if (number != null) {
       list.add(
         const PopupMenuItem(
@@ -258,14 +258,14 @@ class _FinishPage extends State<FinishScreen> {
     return list;
   }
 
-  void _numberOnTracePopup(context, int number) async {
+  Future<void> _numberOnTracePopup(BuildContext context, int number) async {
     final RenderBox overlay =
         Overlay.of(context)!.context.findRenderObject() as RenderBox;
-    ParticipantStatus? result = await showMenu(
+    final ParticipantStatus? result = await showMenu(
         items: _getNumberOnTracePopupMenu(context, number),
         context: context,
         position: RelativeRect.fromRect(
-            _tapPosition! & const Size(40, 40), // smaller rect, the touch area
+            _tapPosition & const Size(40, 40), // smaller rect, the touch area
             Offset.zero &
                 overlay.semanticBounds.size // Bigger rect, the entire screen
             ));
@@ -289,7 +289,7 @@ class _FinishPage extends State<FinishScreen> {
 
   List<PopupMenuEntry<ParticipantStatus>> _getNumberOnTracePopupMenu(
       BuildContext context, int number) {
-    var list = <PopupMenuEntry<ParticipantStatus>>[];
+    final list = <PopupMenuEntry<ParticipantStatus>>[];
     list.add(
       PopupMenuItem(
         value: ParticipantStatus.dns,
@@ -387,10 +387,10 @@ class _FinishPage extends State<FinishScreen> {
     }
   }
 
-  void _addFinishTimeManual(context) async {
-    var now = DateTime.now();
+  Future<void> _addFinishTimeManual(BuildContext context) async {
+    final now = DateTime.now();
 //    now = now.add(diff.duration); //добавляем поправку (см. class Difference)
-    var time = DateFormat('HH:mm:ss,S').format(now);
+    final time = DateFormat('HH:mm:ss,S').format(now);
     BlocProvider.of<ProtocolBloc>(context)
         .add(ProtocolAddFinishTimeManual(time: time));
   }
@@ -402,7 +402,7 @@ class _FinishPage extends State<FinishScreen> {
   void _startTimer() {
     int? prevMinute;
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      var now = DateTime.now();
+      final now = DateTime.now();
       if (prevMinute != now.minute && now.second > 0) {
         BlocProvider.of<ProtocolBloc>(context).add(ProtocolGetNumbersOnTrace());
         prevMinute = now.minute;

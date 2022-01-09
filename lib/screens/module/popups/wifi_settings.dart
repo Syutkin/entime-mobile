@@ -6,7 +6,7 @@ Future<String?> wifiSettingsPopup({required String text, required String labelTe
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         title: Text(text),
         content: Column(

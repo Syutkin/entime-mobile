@@ -14,22 +14,22 @@ String? mapListToCsv(List<Map<String, dynamic>>? mapList,
     return null;
   }
   converter ??= const ListToCsvConverter(fieldDelimiter: ';');
-  var data = <List>[];
-  var keys = <String>[];
-  var keyIndexMap = <String, int>{};
+  final data = <List>[];
+  final keys = <String>[];
+  final keyIndexMap = <String, int>{};
 
   // Add the key and fix previous records
   int _addKey(String key) {
-    var index = keys.length;
+    final index = keys.length;
     keyIndexMap[key] = index;
     keys.add(key);
-    for (var dataRow in data) {
+    for (final dataRow in data) {
       dataRow.add(null);
     }
     return index;
   }
 
-  for (var map in mapList) {
+  for (final map in mapList) {
     // This list might grow if a new key is found
     var dataRow = [];
     dataRow.length = keyIndexMap.length;
@@ -55,7 +55,7 @@ String? mapListToCsv(List<Map<String, dynamic>>? mapList,
 Future<String?> saveCsv(String csv, String suffix, String filePath) async {
   final directory = await getExternalStorageDirectory();
   if (directory == null) {
-    assert(directory != null);
+    assert(directory != null, 'directory must not be null');
     return null;
   }
   final file = File(
@@ -68,14 +68,15 @@ Future<String?> saveCsv(String csv, String suffix, String filePath) async {
 //CSV to List<Map<String, String>> instead of the normal List<List<String>> scheme of the original csv package
 class CsvToMapConverter {
   late CsvToListConverter converter;
+
   CsvToMapConverter(
       {String? fieldDelimiter = defaultFieldDelimiter,
-        String? textDelimiter = defaultTextDelimiter,
-        String? textEndDelimiter,
-        String? eol = defaultEol,
-        CsvSettingsDetector? csvSettingsDetector,
-        bool? shouldParseNumbers,
-        bool? allowInvalid}) {
+      String? textDelimiter = defaultTextDelimiter,
+      String? textEndDelimiter,
+      String? eol = defaultEol,
+      CsvSettingsDetector? csvSettingsDetector,
+      bool? shouldParseNumbers,
+      bool? allowInvalid}) {
     converter = CsvToListConverter(
         fieldDelimiter: fieldDelimiter,
         textDelimiter: textDelimiter,
@@ -85,12 +86,15 @@ class CsvToMapConverter {
         shouldParseNumbers: shouldParseNumbers,
         allowInvalid: allowInvalid);
   }
+
   List<Map<String, dynamic>> convert(String csv) {
-    List<List<dynamic>> list = converter.convert(csv);
-    List legend = list[0].map((category)=>category.toLowerCase()).toList();
-    List<Map<String, dynamic>> maps = [];
-    list.sublist(1).forEach((List l) {
-      Map<String, dynamic> map = {};
+    final List<List<dynamic>> list = converter.convert(csv);
+    final List<dynamic> legend = list.first
+        .map((category) => category.toString().toLowerCase())
+        .toList();
+    final List<Map<String, dynamic>> maps = [];
+    list.sublist(1).forEach((l) {
+      final Map<String, dynamic> map = {};
       for (int i = 0; i < legend.length; i++) {
         map.putIfAbsent('${legend[i]}', () => l[i]);
       }

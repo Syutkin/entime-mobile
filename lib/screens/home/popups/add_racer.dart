@@ -12,14 +12,14 @@ Future<void> addRacerPopup(BuildContext context) async {
       const Duration(minutes: 1);
   var time = duration < const Duration(days: 1)
       ? duration
-      : const Duration(minutes: 0);
+      : Duration.zero;
   int number = 0;
   final _formKey = GlobalKey<FormState>();
   return showDialog<void>(
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
-    builder: (BuildContext context) {
+    builder: (context) {
       return ExpandedAlertDialog(
         width: MediaQuery.of(context).size.width * 0.9,
         // scrollable: true,
@@ -37,8 +37,10 @@ Future<void> addRacerPopup(BuildContext context) async {
                 autofocus: true,
                 decoration: const InputDecoration(labelText: 'Номер'),
                 validator: (value) {
-                  if (value == null) return 'Неверный номер';
-                  int? num = int.tryParse(value);
+                  if (value == null) {
+                    return 'Неверный номер';
+                  }
+                  final int? num = int.tryParse(value);
                   if (num == null || num < 1) {
                     return 'Неверный номер';
                   }
@@ -75,7 +77,7 @@ Future<void> addRacerPopup(BuildContext context) async {
               if (_formKey.currentState!.validate()) {
                 // Форматирование Duration отсюда:
                 // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
-                String starttime =
+                final String starttime =
                     time.toString().split('.').first.padLeft(8, '0');
                 BlocProvider.of<ProtocolBloc>(context)
 //                    .add(ProtocolAddStartNumber(number: number, time: starttime));

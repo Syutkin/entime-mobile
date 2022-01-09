@@ -18,22 +18,22 @@ class StartScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _StartScreen createState() => _StartScreen();
+  State<StartScreen> createState() => _StartScreen();
 }
 
 class _StartScreen extends State<StartScreen> {
-  StreamSubscription? _voiceStream;
-  StreamSubscription? _countdownStream;
+  // StreamSubscription? _voiceStream;
+  // StreamSubscription? _countdownStream;
 
   final GlobalKey _stackKey = GlobalKey();
   final GlobalKey _countdownKey = GlobalKey();
 
-  @override
-  void dispose() {
-    _voiceStream?.cancel();
-    _countdownStream?.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+    // _voiceStream?.cancel();
+    // _countdownStream?.cancel();
+    // super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class _StartScreen extends State<StartScreen> {
       ),
       TextButton(
         onPressed: () {
-          AutomaticStart automaticStart = AutomaticStart(
+          final AutomaticStart automaticStart = AutomaticStart(
               DateFormat('HH:mm:ss,S').format(DateTime.now()),
               1234,
               DateTime.now());
@@ -132,8 +132,8 @@ class _StartScreen extends State<StartScreen> {
             )),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              var item = startProtocol[index];
+            (context, index) {
+              final item = startProtocol[index];
               return BlocBuilder<CountdownBloc, CountdownState>(
                 builder: (context, countdownState) {
                   final isHighlighted =
@@ -212,10 +212,10 @@ class _StartScreen extends State<StartScreen> {
   }
 
   void _placeCountdownWidget(DraggableDetails dragDetails) {
-    var stackRenderBox = _getRenderBox(_stackKey);
-    var stackOffset = stackRenderBox.localToGlobal(Offset.zero);
-    var stackSize = stackRenderBox.size;
-    var countdownRenderBox = _getRenderBox(_countdownKey);
+    final stackRenderBox = _getRenderBox(_stackKey);
+    final stackOffset = stackRenderBox.localToGlobal(Offset.zero);
+    final stackSize = stackRenderBox.size;
+    final countdownRenderBox = _getRenderBox(_countdownKey);
 
     var dx = dragDetails.offset.dx;
     var dy = dragDetails.offset.dy - stackOffset.dy;
@@ -243,8 +243,8 @@ class _StartScreen extends State<StartScreen> {
     return key.currentContext!.findRenderObject() as RenderBox;
   }
 
-  void _addManualStartTime(BuildContext context) async {
-    var time = DateTime.now();
+  Future<void> _addManualStartTime(BuildContext context) async {
+    final time = DateTime.now();
     BlocProvider.of<ProtocolBloc>(context)
         .add(ProtocolUpdateManualStartTime(time: time));
   }

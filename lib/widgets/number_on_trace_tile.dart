@@ -45,7 +45,7 @@ class NumberOnTraceTile extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
       constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         color: isSelected
             ? Theme.of(context).colorScheme.background
             : Theme.of(context).colorScheme.secondary,
@@ -54,7 +54,7 @@ class NumberOnTraceTile extends StatelessWidget {
         child: Text(
           number.toString(),
           style: DefaultTextStyle.of(context).style.apply(
-              fontSizeFactor: 2.0,
+              fontSizeFactor: 2,
               color: isSelected
                   ? Theme.of(context).colorScheme.onBackground
                   : Theme.of(context).colorScheme.onSecondary),

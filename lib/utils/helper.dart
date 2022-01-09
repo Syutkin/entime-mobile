@@ -14,15 +14,15 @@ export 'package:filesize/filesize.dart';
 
 String strip(String? str) {
   if (str == null || str == 'null') {
-    str = '';
+    return '';
   }
   return str;
 }
 
 DateTime? strTimeToDateTime(String time) {
-  var now = DateTime.now();
-  var dateFormatted = DateFormat('yyyy-MM-dd').format(now);
-  DateTime? result = DateTime.tryParse(dateFormatted + ' ' + time);
+  final now = DateTime.now();
+  final dateFormatted = DateFormat('yyyy-MM-dd').format(now);
+  final DateTime? result = DateTime.tryParse('$dateFormatted $time');
   return result;
 }
 
@@ -77,13 +77,10 @@ DateTime? strTimeToDateTime(String time) {
 //}
 
 String formatDate(DateTime dateTime) {
-  String result;
   if (dateTime.year == DateTime.now().year) {
-    result = DateFormat('MMMMd', 'ru_RU').format(dateTime);
-    return result;
+    return DateFormat('MMMMd', 'ru_RU').format(dateTime);
   } else {
-    result = DateFormat('yMMMMd', 'ru_RU').format(dateTime);
-    return result;
+    return DateFormat('yMMMMd', 'ru_RU').format(dateTime);
   }
 }
 
@@ -102,7 +99,7 @@ Future<String?> createNewProtocolFile(BuildContext context,
   if (csv != null) {
     fileName = basenameWithoutExtension(csv.name);
   }
-  String? newFile = await _createFile(context, fileName);
+  final String? newFile = await _createFile(context, fileName);
   if (newFile != null) {
     BlocProvider.of<ProtocolBloc>(context).add(SelectProtocol(newFile, csv));
   }
@@ -115,7 +112,7 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
   return showDialog<String>(
     context: context,
     barrierDismissible: true,
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         //scrollable: true,
         title: const Text('Создать'),
@@ -134,9 +131,13 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
                 decoration: const InputDecoration(labelText: 'Название'),
                 validator: (value) {
                   result = value;
-                  if (value == null) return null;
-                  RegExp regExp = RegExp(r'^[а-яА-ЯёЁa-zA-Z0-9\-\+\.\_! ]+$');
-                  if (regExp.hasMatch(value)) return null;
+                  if (value == null) {
+                    return null;
+                  }
+                  final RegExp regExp = RegExp(r'^[а-яА-ЯёЁa-zA-Z0-9\-\+\.\_! ]+$');
+                  if (regExp.hasMatch(value)) {
+                    return null;
+                  }
                   return 'Недопустимый символ';
                 },
               ),
@@ -153,7 +154,7 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
           TextButton(
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                Directory? externalStorageDirectory =
+                final Directory? externalStorageDirectory =
                     await getExternalStorageDirectory();
                 String? localFileName;
                 if (externalStorageDirectory != null) {
@@ -172,8 +173,8 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
 }
 
 Future<void> loadFile(BuildContext context) async {
-  var protocolBloc = BlocProvider.of<ProtocolBloc>(context);
-  PlatformFile? platformFile = await _pickFile();
+  final protocolBloc = BlocProvider.of<ProtocolBloc>(context);
+  final PlatformFile? platformFile = await _pickFile();
   if (platformFile != null && platformFile.path != null) {
     if (platformFile.extension == 'sqlite' || platformFile.extension == 'db') {
       File? file = File(platformFile.path!);
@@ -195,7 +196,7 @@ Future<void> loadFile(BuildContext context) async {
 }
 
 Future<PlatformFile?> _pickFile() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
+  final FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.any,
     allowMultiple: false,
     // allowedExtensions: ['sqlite', 'db', 'csv'],
@@ -207,13 +208,13 @@ Future<PlatformFile?> _pickFile() async {
 // Проверка на существование файла в рабочей директории перед копированием
 // выбранного файла
 Future<File?> _checkExists(BuildContext context, File file) async {
-  String fileName = basename(file.path);
-  Directory? externalStorageDirectory = await getExternalStorageDirectory();
+  final String fileName = basename(file.path);
+  final Directory? externalStorageDirectory = await getExternalStorageDirectory();
   if (externalStorageDirectory != null) {
-    String localFileName =
+    final String localFileName =
         join(externalStorageDirectory.path, basename(fileName));
     if (File(localFileName).existsSync()) {
-      bool? overwrite = await _overwriteFile(context, localFileName);
+      final bool? overwrite = await _overwriteFile(context, localFileName);
       if (overwrite != null && overwrite) {
         return _copyFile(file, localFileName);
       } else {
@@ -231,7 +232,7 @@ File _copyFile(File sourceFile, String newPath) {
   try {
     return sourceFile.copySync(newPath);
   } on FileSystemException catch (e) {
-    logger.e('Error copying file: ' + e.toString());
+    logger.e('Error copying file: $e');
     return sourceFile;
   }
 }
@@ -240,7 +241,7 @@ Future<bool?> _overwriteFile(BuildContext context, String localFileName) async {
   return showDialog<bool>(
     context: context,
     barrierDismissible: false,
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         title: const Text('Предупреждение'),
         content: Text(

@@ -67,8 +67,8 @@ class AppInfoProvider {
   String get version => _packageInfo.version;
 
   String? get abi {
-    for (var deviceSupportedAbi in _deviceInfo.supportedAbis) {
-      for (var abi in _supportedAbis) {
+    for (final deviceSupportedAbi in _deviceInfo.supportedAbis) {
+      for (final abi in _supportedAbis) {
         if (deviceSupportedAbi == abi) {
           return deviceSupportedAbi;
         }

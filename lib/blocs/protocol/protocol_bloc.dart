@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:share_plus/share_plus.dart';
@@ -27,7 +27,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   int? _awaitingNumber;
 
   final SettingsBloc settingsBloc;
-  late final StreamSubscription settingsSubscription;
+  late final StreamSubscription<SettingsState> settingsSubscription;
 
   List<StartItem> _startProtocol = [];
   List<FinishItem> _finishProtocol = [];
@@ -51,7 +51,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       }
       if (_file != state.recentFile) {
         _file = state.recentFile;
-        add(SelectProtocol(_file!));
+        add(SelectProtocol(_file));
       }
       _finishDelay = state.finishDelay;
       _substituteNumbers = state.substituteNumbers;
@@ -146,7 +146,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   Future<void> _handleProtocolAddStartNumber(
       ProtocolAddStartNumber event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
-      List<StartItem>? previousStart = await ProtocolProvider.db.addStartNumber(
+      final List<StartItem>? previousStart = await ProtocolProvider.db.addStartNumber(
         number: event.startTime.number,
         time: event.startTime.time,
         forceAdd: event.forceAdd,
@@ -173,7 +173,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       ProtocolUpdateAutomaticCorrection event,
       Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
-      List<StartItem>? previousStart =
+      final List<StartItem>? previousStart =
           await ProtocolProvider.db.updateAutomaticCorrection(
         time: event.automaticStart.time,
         correction: event.automaticStart.correction,
@@ -218,7 +218,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   Future<void> _handleProtocolAddFinishTime(
       ProtocolAddFinishTime event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
-      int? autoFinishNumber = await ProtocolProvider.db.addFinishTime(
+      final int? autoFinishNumber = await ProtocolProvider.db.addFinishTime(
         finish: event.time,
         timeStamp: event.timeStamp,
         finishDelay: _finishDelay,
@@ -404,7 +404,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   //добавить номер в finish и обновить финишное время в start у данного номера
   Future<void> _handleProtocolSetNumberToFinishTime(
       ProtocolSetNumberToFinishTime event, Emitter<ProtocolState> emit) async {
-    var update = await ProtocolProvider.db
+    final update = await ProtocolProvider.db
         .addNumber(event.id, event.number, event.finishTime);
     _finishProtocol = await ProtocolProvider.db.getFinishTime(
         hideManual: _hideManual,
@@ -453,10 +453,10 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   Future<void> _handleProtocolShareStart(
       ProtocolShareStart event, Emitter<ProtocolState> emit) async {
-    var result = await ProtocolProvider.db.getStartToCsv();
-    var csv = mapListToCsv(result as List<Map<String, dynamic>>);
+    final result = await ProtocolProvider.db.getStartToCsv();
+    final csv = mapListToCsv(result);
     if (csv != null && ProtocolProvider.db.dbPath != null) {
-      var path = await saveCsv(csv, 'start', ProtocolProvider.db.dbPath!);
+      final path = await saveCsv(csv, 'start', ProtocolProvider.db.dbPath!);
       if (path != null) {
         await Share.shareFiles([path], text: 'Стартовый протокол');
       }
@@ -465,10 +465,10 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   Future<void> _handleProtocolShareFinish(
       ProtocolShareFinish event, Emitter<ProtocolState> emit) async {
-    var result = await ProtocolProvider.db.getFinishToCsv();
-    var csv = mapListToCsv(result as List<Map<String, dynamic>>);
+    final result = await ProtocolProvider.db.getFinishToCsv();
+    final csv = mapListToCsv(result);
     if (csv != null && ProtocolProvider.db.dbPath != null) {
-      var path = await saveCsv(csv, 'finish', ProtocolProvider.db.dbPath!);
+      final path = await saveCsv(csv, 'finish', ProtocolProvider.db.dbPath!);
       if (path != null) {
         await Share.shareFiles([path], text: 'Финишный протокол');
       }
@@ -503,7 +503,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     }
   }
  Future<void> _updateFromCsv(PlatformFile? csv) async {
-   List<StartItemCsv> items = await getStartList(csv);
+   final List<StartItemCsv> items = await getStartList(csv);
    await ProtocolProvider.db.loadStartItem(items);
  }
 }

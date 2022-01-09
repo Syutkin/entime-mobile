@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:intl/intl.dart';
@@ -16,9 +16,9 @@ part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   final ProtocolBloc protocolBloc;
-  late final StreamSubscription protocolSubscription;
+  late final StreamSubscription<ProtocolState> protocolSubscription;
   final TabBloc tabBloc;
-  late final StreamSubscription tabSubscription;
+  late final StreamSubscription<AppTab> tabSubscription;
 
   Timer? _timer;
   List<StartItem> _participant = [];
@@ -108,8 +108,8 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
 
   String _countdownDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    final String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    final String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
     if (duration.inHours > 0) {
       return '${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds';
     } else if (duration.inMinutes > 0) {

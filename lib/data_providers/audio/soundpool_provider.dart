@@ -15,12 +15,12 @@ class SoundpoolProvider extends BeepProvider {
   }
 
   Future<int> _loadSound() async {
-    var asset = await rootBundle.load('assets/beeps.mp3');
-    return await pool.load(asset);
+    final asset = await rootBundle.load('assets/beeps.mp3');
+    return pool.load(asset);
   }
 
   Future<void> _playSound() async {
-    var _alarmSound = await soundId;
+    final _alarmSound = await soundId;
     unawaited(pool.play(_alarmSound));
   }
 

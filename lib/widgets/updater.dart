@@ -16,7 +16,7 @@ class Updater extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               LinearProgressIndicator(
-                minHeight: 24.0,
+                minHeight: 24,
                 value: state.bytes / state.total,
               ),
               Text(
@@ -32,7 +32,7 @@ class Updater extends StatelessWidget {
             alignment: Alignment.center,
             children: const [
               LinearProgressIndicator(
-                minHeight: 24.0,
+                minHeight: 24,
                 value: null,
               ),
               Text(
@@ -44,7 +44,7 @@ class Updater extends StatelessWidget {
         );
       } else if (state is UpdateAvailable) {
         return ListTile(
-          contentPadding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 0.0),
+          contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
           title: Text('Обновить до ${state.version}'),
           onTap: () {
             BlocProvider.of<UpdateBloc>(context).add(DownloadUpdate());
@@ -52,7 +52,7 @@ class Updater extends StatelessWidget {
         );
       } else {
         return ListTile(
-          contentPadding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 0.0),
+          contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
           title: const Text('Проверить обновления'),
           onTap: () {
             BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());

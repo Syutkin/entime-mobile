@@ -1,26 +1,26 @@
 part of 'settings_popups.dart';
 
-Future<double?> setVolumePopup(BuildContext context, settings) async {
+Future<double?> setVolumePopup(BuildContext context, SettingsState settings) async {
   double _value = settings.volume;
   return showDialog<double>(
       context: context,
       barrierDismissible: true,
       // dialog is dismissible with a tap on the barrier
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           title: const Text('Громкость голоса'),
           content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+            builder: (context, setState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Slider(
                     value: _value,
-                    min: 0.0,
-                    max: 1.0,
+                    min: 0,
+                    max: 1,
                     label: '${(_value * 100).round()}%',
                     divisions: 100,
-                    onChanged: (double newValue) {
+                    onChanged: (newValue) {
                       setState(() => _value = newValue);
                     },
                   ),

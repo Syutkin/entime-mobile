@@ -5,5 +5,5 @@ class AutomaticStart {
   bool updating;
 
   AutomaticStart(this.time, this.correction, this.timeStamp,
-      [this.updating = false]);
+  {this.updating = false});
 }

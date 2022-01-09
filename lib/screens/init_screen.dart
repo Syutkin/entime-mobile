@@ -15,7 +15,7 @@ class InitScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _InitScreen createState() => _InitScreen();
+  State<InitScreen> createState() => _InitScreen();
 }
 
 class _InitScreen extends State<InitScreen> {
@@ -24,7 +24,9 @@ class _InitScreen extends State<InitScreen> {
     return ListView(children: <Widget>[
       _selectProtocol(),
       _selectBluetooth(),
-      !kReleaseMode ? const Header(text: 'Debug') : const SizedBox(width: 0, height: 0),
+      !kReleaseMode
+          ? const Header(text: 'Debug')
+          : const SizedBox(width: 0, height: 0),
       !kReleaseMode
           ? _debugAddLogButton(context)
           : const SizedBox(width: 0, height: 0),
@@ -100,7 +102,8 @@ class _InitScreen extends State<InitScreen> {
   }
 
   void _moduleSettings(BuildContext context) {
-    BlocProvider.of<BluetoothBloc>(context).add(const SendMessage('{"Read": true}'));
+    BlocProvider.of<BluetoothBloc>(context)
+        .add(const SendMessage('{"Read": true}'));
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) {
         return const ModuleSettingsInitScreen(

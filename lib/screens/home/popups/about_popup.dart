@@ -9,7 +9,7 @@ import 'package:entime/blocs/blocs.dart';
 import 'package:entime/screens/screens.dart';
 
 class AboutPopup extends StatelessWidget {
-  static const double _textVerticalSeparation = 18.0;
+  static const double _textVerticalSeparation = 18;
 
   const AboutPopup({Key? key}) : super(key: key);
 
@@ -28,7 +28,7 @@ class AboutPopup extends StatelessWidget {
 //              IconTheme(data: Theme.of(context).iconTheme, child: icon),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ListBody(
                     children: <Widget>[
                       Text(BlocProvider.of<AppInfoCubit>(context).appName,
@@ -45,8 +45,8 @@ class AboutPopup extends StatelessWidget {
                           children: [
                             TextSpan(
                               style: bodyTextStyle,
-                              text:
-                                  '''Мобильное приложение к системе электронного замера времени на спортивных соревнованиях по даунхилу и эндуро
+                              text: '''
+Мобильное приложение к системе электронного замера времени на спортивных соревнованиях по даунхилу и эндуро
                                   
 Приложение делается в свободное от работы время, используйте на свой страх и риск.
                                   
@@ -70,7 +70,9 @@ class AboutPopup extends StatelessWidget {
                                       _emailLaunchUri.toString())) {
                                     await launch(_emailLaunchUri.toString());
                                   } else {
-                                    throw 'Could not launch $_emailLaunchUri';
+                                    final Error error = ArgumentError(
+                                        'Could not launch $_emailLaunchUri');
+                                    throw error;
                                   }
                                 },
                             ),
@@ -88,9 +90,10 @@ class AboutPopup extends StatelessWidget {
       actions: <Widget>[
         TextButton(
           onPressed: () async {
-            String changelogData = await rootBundle.loadString('CHANGELOG.md');
+            final String changelogData =
+                await rootBundle.loadString('CHANGELOG.md');
             await Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) =>
+                builder: (context) =>
                     ChangelogScreen(markdownData: changelogData)));
           },
           child: const Text('Список изменений'),

@@ -24,7 +24,7 @@ class SelectBondedDeviceScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  _SelectBondedDeviceScreen createState() => _SelectBondedDeviceScreen();
+  State<SelectBondedDeviceScreen> createState() => _SelectBondedDeviceScreen();
 }
 
 class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
@@ -50,7 +50,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
     // Setup a list of the bonded devices
     FlutterBluetoothSerial.instance
         .getBondedDevices()
-        .then((List<BluetoothDevice> bondedDevices) {
+        .then((bondedDevices) {
       setState(() {
         devices = bondedDevices
             .map(
@@ -77,9 +77,9 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
     _discoveryStreamSubscription =
         FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
       setState(() {
-        Iterator i = devices.iterator;
+        final Iterator<BluetoothDeviceWithAvailability> i = devices.iterator;
         while (i.moveNext()) {
-          var _device = i.current;
+          final _device = i.current;
           if (_device.device == r.device) {
             _device.availability = BluetoothDeviceAvailability.yes;
             _device.rssi = r.rssi;
@@ -104,7 +104,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<BluetoothDeviceListEntry> list = devices
+    final List<BluetoothDeviceListEntry> list = devices
         .map((_device) => BluetoothDeviceListEntry(
               device: _device.device,
               rssi: _device.rssi,
@@ -121,7 +121,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
           _isDiscovering
               ? FittedBox(
                   child: Container(
-                    margin: const EdgeInsets.all(16.0),
+                    margin: const EdgeInsets.all(16),
                     child: const CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
                         Colors.white,

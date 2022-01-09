@@ -31,7 +31,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
 
   //Loading settings on initialization
   @override
-  Future<bool> update(jsonString) async {
+  Future<bool> update(String jsonString) async {
     logger.i('Updating modsettings from json');
 
     try {
@@ -54,7 +54,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
         brightness = _modSettingsModel.ledPanel!.brightness;
 
       return true;
-    } catch (e) {
+    } on Exception catch (e) {
       logger.e('Error at parsing ModuleSettings json: $e');
       return false;
     }

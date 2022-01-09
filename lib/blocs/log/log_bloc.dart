@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../models/models.dart';
@@ -13,7 +13,7 @@ part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {
   final SettingsBloc settingsBloc;
-  late final StreamSubscription settingsSubscription;
+  late final StreamSubscription<SettingsState> settingsSubscription;
 
   int _limit = -1;
 
@@ -34,23 +34,23 @@ class LogBloc extends Bloc<LogEvent, LogState> {
   @override
   Future<void> close() {
     LogProvider.db.close();
+    settingsSubscription.cancel();
     return super.close();
   }
 
-  void _handleLogAdd(LogAdd event, Emitter<LogState> emit) async {
+  Future<void> _handleLogAdd(LogAdd event, Emitter<LogState> emit) async {
     await LogProvider.db.add(
       level: event.level,
       source: event.source,
       direction: event.direction,
       rawData: event.rawData,
     );
-    if ((state as LogOpen).updateLogScreen != null &&
-        (state as LogOpen).updateLogScreen == true) {
+    if ((state as LogOpen).updateLogScreen ?? false) {
       add(const ShowLog());
     }
   }
 
-  void _handleShowLog(ShowLog event, Emitter<LogState> emit) async {
+  Future<void> _handleShowLog(ShowLog event, Emitter<LogState> emit) async {
     _log = await LogProvider.db.getLog(limit: _limit);
     emit(LogOpen(
       log: _log,

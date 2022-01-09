@@ -1,3 +1,4 @@
+import 'package:entime/blocs/settings/settings_bloc.dart';
 import 'package:flutter/material.dart';
 
 part 'set_volume_popup.dart';

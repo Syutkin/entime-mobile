@@ -38,10 +38,10 @@ class LogScreen extends StatelessWidget {
                 controller: _scrollController,
                 shrinkWrap: true,
                 itemCount: state.log!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var item = state.log![index];
+                itemBuilder: (context, index) {
+                  final item = state.log![index];
                   return ListTile(
-                    contentPadding: const EdgeInsets.all(0.0),
+                    contentPadding: EdgeInsets.zero,
                     title: Row(children: <Widget>[
                       Flexible(
                         flex: 10,

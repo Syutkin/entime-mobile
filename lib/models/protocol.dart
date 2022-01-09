@@ -35,7 +35,8 @@ CREATE TABLE 'main' (
 
 //https://app.quicktype.io/#l=dart
 
-StartItem startFromJson(String str) => StartItem.fromMap(json.decode(str));
+StartItem startFromJson(String str) =>
+    StartItem.fromMap(json.decode(str) as Map<String, dynamic>);
 
 String startToJson(StartItem data) => json.encode(data.toMap());
 
@@ -114,7 +115,8 @@ class StartItem {
       };
 }
 
-FinishItem finishFromJson(String str) => FinishItem.fromMap(json.decode(str));
+FinishItem finishFromJson(String str) =>
+    FinishItem.fromMap(json.decode(str) as Map<String, dynamic>);
 
 String finishToJson(FinishItem data) => json.encode(data.toMap());
 

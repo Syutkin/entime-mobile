@@ -46,7 +46,7 @@ abstract class ModuleSettingsProvider {
   int brightness = 15;
 
   //Loading settings on initialization
-  Future<bool> update(jsonString);
+  Future<bool> update(String jsonString);
 
   String get write;
 }

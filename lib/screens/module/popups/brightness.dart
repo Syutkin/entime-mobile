@@ -9,22 +9,22 @@ Future<int?> brightnessPopup(
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         title: Text(text),
         content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+            builder: (context, setState) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text('Яркость ${brightness.toInt()}'),
               Slider(
                 value: brightness,
-                min: 0.0,
-                max: 15.0,
+                min: 0,
+                max: 15,
                 label: '${brightness.toInt()}',
                 divisions: 14,
-                onChanged: (double newValue) {
+                onChanged: (newValue) {
                   setState(() => brightness = newValue);
                 },
               ),

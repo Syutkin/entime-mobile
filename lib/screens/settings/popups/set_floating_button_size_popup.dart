@@ -6,26 +6,27 @@ Future<double?> setFloatingButtonSizePopup(
   String text = '',
 }) async {
   // text = 'Размер кнопки "+"';
+  double _value = value;
   return showDialog<double>(
       context: context,
       barrierDismissible: true,
       // dialog is dismissible with a tap on the barrier
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           title: Text(text),
           content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+            builder: (context, setState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Slider(
-                    value: value,
-                    min: 50.0,
-                    max: 200.0,
-                    label: '${(value).round()}px',
+                    value: _value,
+                    min: 50,
+                    max: 200,
+                    label: '${_value.round()}px',
                     divisions: 150,
-                    onChanged: (double newValue) {
-                      setState(() => value = newValue);
+                    onChanged: (newValue) {
+                      setState(() => _value = newValue);
                     },
                   ),
                 ],
@@ -35,7 +36,7 @@ Future<double?> setFloatingButtonSizePopup(
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(value);
+                Navigator.of(context).pop(_value);
               },
               child: Text(MaterialLocalizations.of(context).okButtonLabel),
             ),

@@ -11,7 +11,7 @@ class ModuleSettingsType extends ModuleSettingsProvider {
 
   //Loading settings on initialization
   @override
-  Future<bool> update(jsonString) async {
+  Future<bool> update(String jsonString) async {
     logger.i('Updating modsettings from json');
 
     try {
@@ -21,7 +21,7 @@ class ModuleSettingsType extends ModuleSettingsProvider {
       type = _modSettingsModel.type;
 
       return true;
-    } catch (e) {
+    } on Exception catch (e) {
       logger.e('Error at parsing ModuleSettings json: $e');
       return false;
     }

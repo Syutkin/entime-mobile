@@ -34,23 +34,26 @@ class LogProvider {
   Database? _database;
 
   Future<Database> get database async {
-    if (_database != null) return _database!;
+    if (_database != null) {
+      return _database!;
+    }
     // if _database is null we instantiate it
     _database = await initDB();
     return _database!;
   }
 
   Future<Database> initDB() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String logPath = join(documentsDirectory.path, 'log.sqlite');
-    return await openDatabase(
+    final Directory documentsDirectory =
+        await getApplicationDocumentsDirectory();
+    final String logPath = join(documentsDirectory.path, 'log.sqlite');
+    return openDatabase(
       logPath,
       version: 1,
       onOpen: (db) async {
-        logger.v('SQLite version: ' +
-            (await db.rawQuery('SELECT sqlite_version()')).first.values.first.toString());
+        logger.v(
+            'SQLite version: ${(await db.rawQuery('SELECT sqlite_version()')).first.values.first}');
       },
-      onCreate: (Database db, int version) async {
+      onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE "log" (
 	        "id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -79,28 +82,28 @@ class LogProvider {
   }) async {
     final db = await database;
 
-    List<String> whereArgs = [];
+    final List<String> whereArgs = [];
     String where;
 
     if (level != null && level.isNotEmpty) {
-      List<String> args = [];
-      for (var type in level) {
+      final List<String> args = [];
+      for (final type in level) {
         args.add("level LIKE '${type.toStr}'");
       }
       whereArgs.add(args.join(' OR '));
     }
 
     if (source != null && source.isNotEmpty) {
-      List<String> args = [];
-      for (var type in source) {
+      final List<String> args = [];
+      for (final type in source) {
         args.add("source LIKE '${type.toStr}'");
       }
       whereArgs.add(args.join(' OR '));
     }
 
     if (direction != null && direction.isNotEmpty) {
-      List<String> args = [];
-      for (var type in direction) {
+      final List<String> args = [];
+      for (final type in direction) {
         args.add("direction LIKE '${type.toStr}'");
       }
       whereArgs.add(args.join(' OR '));
@@ -112,13 +115,13 @@ class LogProvider {
 
     List<Map<String, dynamic>> list;
     if (whereArgs.isNotEmpty) {
-      where = '(' + whereArgs.join(') AND (') + ')';
+      where = '(${whereArgs.join(') AND (')})';
       list = await db.query('log', where: where);
     } else {
       list = await db.query('log');
     }
 
-    List<Log> log =
+    final List<Log> log =
         list.isNotEmpty ? list.map((c) => Log.fromMap(c)).toList() : [];
     return log;
   }
@@ -129,7 +132,8 @@ class LogProvider {
     required String rawData,
     LogSourceDirection? direction,
   }) async {
-    String timeStamp = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+    final String timeStamp =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
     final db = await database;
     final result = await db.insert('log', {
       'level': level.toStr,
@@ -141,7 +145,7 @@ class LogProvider {
     return result;
   }
 
-  void close() async {
+  Future<void> close() async {
     await _database?.close();
   }
 }

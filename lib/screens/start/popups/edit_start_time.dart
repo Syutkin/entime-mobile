@@ -8,11 +8,11 @@ import 'package:entime/utils/helper.dart';
 import 'package:entime/widgets/widgets.dart';
 
 Future<void> editStartTime(BuildContext context, StartItem item) async {
-  var _automaticPhoneTimeController = TextEditingController();
-  var _manualCorrectionController = TextEditingController();
-  var _manualStartTimeController = TextEditingController();
-  var _automaticStartTimeController = TextEditingController();
-  var _automaticCorrectionController = TextEditingController();
+  final _automaticPhoneTimeController = TextEditingController();
+  final _manualCorrectionController = TextEditingController();
+  final _manualStartTimeController = TextEditingController();
+  final _automaticStartTimeController = TextEditingController();
+  final _automaticCorrectionController = TextEditingController();
   _manualCorrectionController.text = (item.manualcorrection ?? '').toString();
   _manualStartTimeController.text = item.manualstarttime ?? '';
   _automaticCorrectionController.text =
@@ -69,7 +69,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
-    builder: (BuildContext context) {
+    builder: (context) {
       return ExpandedAlertDialog(
         width: MediaQuery.of(context).size.width * 0.9,
         scrollable: true,

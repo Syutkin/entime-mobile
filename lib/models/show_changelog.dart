@@ -3,9 +3,9 @@ class ShowChangelog {
   String? currentVersion;
   bool show;
 
-  ShowChangelog([
+  ShowChangelog({
     this.currentVersion,
     this.previousVersion,
     this.show = false,
-  ]);
+  });
 }

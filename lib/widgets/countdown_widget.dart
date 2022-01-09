@@ -28,14 +28,14 @@ class CountdownWidget extends StatelessWidget {
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
       ),
-      margin: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8),
       child: Material(
         elevation: elevation, //default to FloatingButtonElevation
         type: MaterialType.circle,
         color: backgroundColor,
         child: FittedBox(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Text(text,
                 style: floatingActionButtonTheme.extendedTextStyle ??
                     theme.textTheme.button!.copyWith(color: foregroundColor)),

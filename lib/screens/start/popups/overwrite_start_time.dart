@@ -7,7 +7,7 @@ Future<bool?> overwriteStartTime({required BuildContext context, required String
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         title: const Text('Предупреждение'),
         content: Text(text),

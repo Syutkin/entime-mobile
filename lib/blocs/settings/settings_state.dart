@@ -94,42 +94,42 @@ class SettingsState extends Equatable {
   });
 
   static SettingsState initialize(SettingsProvider settings) {
-    var sound = settings.getBool('sound') ?? true;
-    var beep = settings.getBool('beep') ?? true;
-    var voice = settings.getBool('voice') ?? true;
-    var voiceName = settings.getBool('voiceName') ?? false;
-    var volume = settings.getDouble('volume') ?? 0.5;
-    var pitch = settings.getDouble('pitch') ?? 1.0;
-    var rate = settings.getDouble('rate') ?? 0.8;
-    var language = settings.getString('language') ?? 'ru-RU';
-    var recentFile = settings.getString('recentFile') ?? '';
-    var wakelock = settings.getBool('wakelock') ?? true;
+    final sound = settings.getBool('sound') ?? true;
+    final beep = settings.getBool('beep') ?? true;
+    final voice = settings.getBool('voice') ?? true;
+    final voiceName = settings.getBool('voiceName') ?? false;
+    final volume = settings.getDouble('volume') ?? 0.5;
+    final pitch = settings.getDouble('pitch') ?? 1.0;
+    final rate = settings.getDouble('rate') ?? 0.8;
+    final language = settings.getString('language') ?? 'ru-RU';
+    final recentFile = settings.getString('recentFile') ?? '';
+    final wakelock = settings.getBool('wakelock') ?? true;
     if (wakelock) {
       Wakelock.enable();
     } else {
       Wakelock.disable();
     }
-    var startFab = settings.getBool('start_fab') ?? true;
-    var startFabSize = settings.getDouble('start_fab_size') ?? 75.0;
-    var finishFab = settings.getBool('finish_fab') ?? true;
-    var finishFabSize = settings.getDouble('finish_fab_size') ?? 75.0;
-    var countdown = settings.getBool('countdown') ?? false;
-    var countdownSize = settings.getDouble('countdownSize') ?? 75.0;
-    var countdownLeft = settings.getDouble('countdownLeft') ?? 0.0;
-    var countdownTop = settings.getDouble('countdownTop') ?? 0.0;
-    var countdownAtStartTime =
+    final startFab = settings.getBool('start_fab') ?? true;
+    final startFabSize = settings.getDouble('start_fab_size') ?? 75.0;
+    final finishFab = settings.getBool('finish_fab') ?? true;
+    final finishFabSize = settings.getDouble('finish_fab_size') ?? 75.0;
+    final countdown = settings.getBool('countdown') ?? false;
+    final countdownSize = settings.getDouble('countdownSize') ?? 75.0;
+    final countdownLeft = settings.getDouble('countdownLeft') ?? 0.0;
+    final countdownTop = settings.getDouble('countdownTop') ?? 0.0;
+    final countdownAtStartTime =
         settings.getBool('countdownAtStartTime,') ?? true;
-    var checkUpdates = settings.getBool('checkUpdates') ?? true;
-    bool hideMarked = settings.getBool('hideMarked') ?? true;
-    bool hideNumbers = settings.getBool('hideNumbers') ?? false;
-    bool hideManual = settings.getBool('hideManual') ?? false;
-    bool reconnect = settings.getBool('reconnect') ?? true;
-    int finishDelay = settings.getInt('finishDelay') ?? 350;
-    bool substituteNumbers = settings.getBool('substituteNumbers') ?? true;
-    int substituteNumbersDelay =
+    final checkUpdates = settings.getBool('checkUpdates') ?? true;
+    final bool hideMarked = settings.getBool('hideMarked') ?? true;
+    final bool hideNumbers = settings.getBool('hideNumbers') ?? false;
+    final bool hideManual = settings.getBool('hideManual') ?? false;
+    final bool reconnect = settings.getBool('reconnect') ?? true;
+    final int finishDelay = settings.getInt('finishDelay') ?? 350;
+    final bool substituteNumbers = settings.getBool('substituteNumbers') ?? true;
+    final int substituteNumbersDelay =
         settings.getInt('substituteNumbersDelay') ?? 500;
-    int logLimit = settings.getInt('log_limit') ?? -1;
-    AppTheme appTheme = settings.getTheme();
+    final int logLimit = settings.getInt('log_limit') ?? -1;
+    final AppTheme appTheme = settings.getTheme();
 
     return SettingsState(
       sound: sound,
@@ -171,19 +171,19 @@ class SettingsState extends Equatable {
           voice: true,
           voiceName: true,
           volume: 0.5,
-          pitch: 1.0,
+          pitch: 1,
           rate: 0.8,
           language: 'ru-RU',
           recentFile: state.recentFile,
           wakelock: true,
           startFab: true,
-          startFabSize: 75.0,
+          startFabSize: 75,
           finishFab: true,
-          finishFabSize: 75.0,
+          finishFabSize: 75,
           countdown: false,
-          countdownSize: 75.0,
-          countdownLeft: 0.0,
-          countdownTop: 0.0,
+          countdownSize: 75,
+          countdownLeft: 0,
+          countdownTop: 0,
           countdownAtStartTime: true,
           checkUpdates: true,
           hideMarked: true,

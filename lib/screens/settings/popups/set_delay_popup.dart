@@ -2,9 +2,10 @@ part of 'settings_popups.dart';
 
 Future<int?> setDelayPopup(
     BuildContext context, int delay, String title) async {
+  int _delay = delay;
 
-  var _delayController = TextEditingController();
-  _delayController.text = delay.toString();
+  final _delayController = TextEditingController();
+  _delayController.text = _delay.toString();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -12,7 +13,7 @@ Future<int?> setDelayPopup(
       context: context,
       barrierDismissible: true,
       // dialog is dismissible with a tap on the barrier
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           scrollable: true,
           title: Text(title),
@@ -37,7 +38,7 @@ Future<int?> setDelayPopup(
                     if (integer == null || integer < 0) {
                       return 'Неверная задержка';
                     }
-                    delay = integer;
+                    _delay = integer;
                     return null;
                   },
                 ),
@@ -54,7 +55,7 @@ Future<int?> setDelayPopup(
             TextButton(
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  Navigator.of(context).pop(delay);
+                  Navigator.of(context).pop(_delay);
                 }
               },
               child: Text(MaterialLocalizations.of(context).okButtonLabel),

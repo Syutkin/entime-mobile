@@ -23,32 +23,32 @@ class AppDrawer extends StatelessWidget {
             child: Image.asset('assets/fraction_logo.png'),
           ),
           ListTile(
-            contentPadding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 0.0),
+            contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             title: const Text('Настройки'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => const SettingsScreen()));
+                  builder: (context) => const SettingsScreen()));
             },
           ),
           ListTile(
-            contentPadding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 0.0),
+            contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             title: const Text('Помощь'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => const HelpPage()));
+                  builder: (context) => const HelpPage()));
             },
           ),
           const Updater(),
           ListTile(
-            contentPadding: const EdgeInsets.fromLTRB(24.0, 0.0, 8.0, 0.0),
+            contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             title: const Text('О программе'),
             onTap: () {
               showDialog<void>(
                   context: context,
                   barrierDismissible: true,
-                  builder: (BuildContext context) {
+                  builder: (context) {
                     return const AboutPopup();
                   });
             },
@@ -56,7 +56,7 @@ class AppDrawer extends StatelessWidget {
           BlocBuilder<AppInfoCubit, AppInfoProvider>(
             builder: (context, appInfo) {
               return Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 24.0, 24.0, 8.0),
+                padding: const EdgeInsets.fromLTRB(0, 24, 24, 8),
                 child: Text(
                   'v${appInfo.version}',
                   style: Theme.of(context).textTheme.bodyText1,

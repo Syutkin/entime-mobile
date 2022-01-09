@@ -31,24 +31,22 @@ class ProtocolProvider {
   }
 
   Future<Database> get database async {
-    if (_database != null) return _database!;
+    if (_database != null) {
+      return _database!;
+    }
     _database = await _initDB();
     return _database!;
   }
 
   Future<Database> _initDB() async {
-    return await openDatabase(
+    return openDatabase(
       _dbPath!,
       version: 1,
       onOpen: (db) async {
-        logger.v('SQLite version: ' +
-            (await db.rawQuery('SELECT sqlite_version()'))
-                .first
-                .values
-                .first
-                .toString());
+        logger.v(
+            'SQLite version: ${(await db.rawQuery('SELECT sqlite_version()')).first.values.first}');
       },
-      onCreate: (Database db, int version) async {
+      onCreate: (db, version) async {
         await db.execute('''
         CREATE TABLE IF NOT EXISTS 'start' (
         	'id'	                INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -94,7 +92,7 @@ class ProtocolProvider {
   // ----------------старт----------------
   Future<List<StartItem>> getAllParticipantsAtStart() async {
     final db = await database;
-    var res = await db.rawQuery('''
+    final res = await db.rawQuery('''
         SELECT
           start.id as id,
           start.number as number,
@@ -117,15 +115,15 @@ class ProtocolProvider {
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL)
         ORDER BY starttime ASC
         ''');
-    List<StartItem> protocol =
+    final List<StartItem> protocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
     return protocol;
   }
 
   //ToDo: посмотреть как сделано
-  Future<List<Map>> getStartToCsv() async {
+  Future<List<Map<String, Object?>>> getStartToCsv() async {
     final db = await database;
-    var result = await db.rawQuery('''
+    final result = await db.rawQuery('''
         SELECT number, starttime,
         IFNULL (automaticcorrection, IFNULL (manualcorrection, 'DNS')) automaticcorrection
         FROM start
@@ -141,21 +139,23 @@ class ProtocolProvider {
   //Проверяем есть ли стартующий около времени [beepTime]
   //Возвращает 0 если стартующего нет
   Future<int> getStart(String beepTime) async {
-    DateTime? beepDateTime = strTimeToDateTime(beepTime);
+    final DateTime? beepDateTime = strTimeToDateTime(beepTime);
     if (beepDateTime == null) {
-      assert(beepDateTime != null);
+      assert(beepDateTime != null, 'beepDateTime must not be null');
       return 0;
     }
-    DateTime timeAfter = beepDateTime.add(const Duration(seconds: 10));
-    String after = DateFormat('HH:mm:ss').format(timeAfter);
+    final DateTime timeAfter = beepDateTime.add(const Duration(seconds: 10));
+    final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final db = await database;
-    var x = await db.rawQuery('''
+    final x = await db.rawQuery('''
         SELECT COUNT(*) FROM start
         WHERE starttime BETWEEN '$beepTime' AND '$after'
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL);
         ''');
-    int? count = Sqflite.firstIntValue(x);
-    if (count == null) return 0;
+    final int? count = Sqflite.firstIntValue(x);
+    if (count == null) {
+      return 0;
+    }
     return count;
   }
 
@@ -170,7 +170,7 @@ class ProtocolProvider {
     final db = await database;
     final DateTime? dateGoTime = strTimeToDateTime(time);
     if (dateGoTime == null) {
-      assert(dateGoTime != null);
+      assert(dateGoTime != null, 'dateGoTime must not be null');
       return null;
     }
     final DateTime timeBefore =
@@ -191,7 +191,7 @@ class ProtocolProvider {
         FROM start
         WHERE starttime BETWEEN ? AND ?
         ''', [before, after]);
-      List<StartItem> startProtocol =
+      final List<StartItem> startProtocol =
           res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
       if (startProtocol.isNotEmpty &&
           startProtocol.first.automaticstarttime != null) {
@@ -223,20 +223,21 @@ class ProtocolProvider {
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final String manualStartTime = DateFormat('HH:mm:ss,S').format(time);
 
-    var res = await db.rawQuery('''
+    final res = await db.rawQuery('''
         SELECT id, number, starttime
         FROM start
         WHERE starttime BETWEEN ? AND ?
         ''', [before, after]);
-    List<StartItem> startProtocol =
+    final List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
     if (startProtocol.isNotEmpty && startProtocol.first.starttime != null) {
-      DateTime? startTime = strTimeToDateTime(startProtocol.first.starttime!);
+      final DateTime? startTime =
+          strTimeToDateTime(startProtocol.first.starttime!);
       if (startTime == null) {
-        assert(startTime != null);
+        assert(startTime != null, 'startTime must not be null');
         return result;
       }
-      Duration correction = startTime.difference(time);
+      final Duration correction = startTime.difference(time);
       result = await db.rawUpdate('''
         UPDATE start
         SET manualstarttime = ?, manualcorrection = ?
@@ -341,7 +342,7 @@ class ProtocolProvider {
           OR (number IS ?
           AND (automaticstarttime NOTNULL OR manualstarttime NOTNULL))
         ''', [time, number]);
-      List<StartItem> startProtocol =
+      final List<StartItem> startProtocol =
           res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
       if (startProtocol.isNotEmpty) {
         logger.i('Database -> Start time $time '
@@ -372,7 +373,7 @@ class ProtocolProvider {
   Future<List<StartItem>> getStartingParticipants(String time) async {
     final DateTime? dateTime = strTimeToDateTime(time);
     if (dateTime == null) {
-      assert(dateTime != null);
+      assert(dateTime != null, 'dateTime must not be null');
       return [];
     }
     final DateTime timeAfter = dateTime.add(const Duration(minutes: 1));
@@ -386,7 +387,7 @@ class ProtocolProvider {
         WHERE (starttime BETWEEN '$time' AND '$after') AND main.number = start.number
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL);
         ''');
-    List<StartItem> startProtocol =
+    final List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
     return startProtocol;
   }
@@ -402,7 +403,7 @@ class ProtocolProvider {
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL)
         ORDER BY starttime ASC;
         ''');
-    List<StartItem> startProtocol =
+    final List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
     return startProtocol;
   }
@@ -412,7 +413,7 @@ class ProtocolProvider {
     final db = await database;
     final batch = db.batch();
 
-    for (var item in items) {
+    for (final item in items) {
       batch.insert(
           'start',
           {
@@ -450,7 +451,7 @@ class ProtocolProvider {
         AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL)
         ORDER BY starttime ASC
         ''');
-    List<StartItem> startProtocol =
+    final List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
     return startProtocol;
   }
@@ -464,20 +465,28 @@ class ProtocolProvider {
     final db = await database;
     String sqliteQuery =
         'SELECT id, number, finishtime, "set", manual FROM finish';
-    if (hideMarked || hideNumbers || hideManual) sqliteQuery += ' WHERE ';
-    var sqliteTail = <String>[];
-    if (hideMarked) sqliteTail.add('"set" ISNULL');
-    if (hideNumbers) sqliteTail.add('number ISNULL');
-    if (hideManual) sqliteTail.add('manual ISNULL');
+    if (hideMarked || hideNumbers || hideManual) {
+      sqliteQuery += ' WHERE ';
+    }
+    final sqliteTail = <String>[];
+    if (hideMarked) {
+      sqliteTail.add('"set" ISNULL');
+    }
+    if (hideNumbers) {
+      sqliteTail.add('number ISNULL');
+    }
+    if (hideManual) {
+      sqliteTail.add('manual ISNULL');
+    }
     sqliteQuery += sqliteTail.join(' AND ');
     final res = await db.rawQuery(sqliteQuery);
-    List<FinishItem> finishProtocol =
+    final List<FinishItem> finishProtocol =
         res.isNotEmpty ? res.map((c) => FinishItem.fromMap(c)).toList() : [];
     return finishProtocol;
   }
 
 //ToDo: посмотреть как сделано
-  Future<List<Map>> getFinishToCsv() async {
+  Future<List<Map<String, Object?>>> getFinishToCsv() async {
     final db = await database;
     final result = await db.rawQuery('''
         SELECT number, finishtime
@@ -505,14 +514,14 @@ class ProtocolProvider {
     int? number,
   }) async {
     int? hide;
-    // int? number;
+    int? _number = number;
     // узнаём предыдущее нескрытое автоматическое время
     final prevFinishTime = await _prevFinishTime();
     // проверяем разницу между предыдущей и поступившей отсечкой
     if (prevFinishTime != null) {
       final finishTime = strTimeToDateTime(finish);
       if (finishTime == null) {
-        assert(finishTime != null);
+        assert(finishTime != null, 'finishTime must not be null');
         return null;
       }
       final difference = finishTime.difference(prevFinishTime);
@@ -526,10 +535,10 @@ class ProtocolProvider {
     // если автоматически ставим номер, то ставим номер только в нескрытую отсечку,
     // если разница между предыдущим временем с финишем больше настройки
     // или нет предыдущей нескрытой отсечки
-    if (number == null && substituteNumbers && hide == null) {
+    if (_number == null && substituteNumbers && hide == null) {
       // если нет нескрытого предыдущего времени - ставим номер
       if (prevFinishTime == null) {
-        number = await _getAwaitingNumber(debugTimeNow);
+        _number = await _getAwaitingNumber(debugTimeNow);
       } else {
         // ищем предыдущее время финиша с номером
         final lastFinishTime = await _lastFinishTime();
@@ -538,16 +547,16 @@ class ProtocolProvider {
         if (lastFinishTime != null) {
           final finishTime = strTimeToDateTime(finish);
           if (finishTime == null) {
-            assert(finishTime != null);
+            assert(finishTime != null, 'finishTime must not be null');
             return null;
           }
           final difference = finishTime.difference(lastFinishTime);
           if (difference.inMilliseconds > substituteNumbersDelay) {
-            number = await _getAwaitingNumber(debugTimeNow);
+            _number = await _getAwaitingNumber(debugTimeNow);
           }
           // если предыдущего времени с номером нет - ставим номер
         } else {
-          number = await _getAwaitingNumber(debugTimeNow);
+          _number = await _getAwaitingNumber(debugTimeNow);
         }
       }
     }
@@ -558,21 +567,21 @@ class ProtocolProvider {
       'finishtime': finish,
       'phonetime': phoneTime,
       '"set"': hide,
-      'number': number,
+      'number': _number,
     });
     logger.i('Database -> Automatic finish time added: $finish');
-    if (number != null) {
+    if (_number != null) {
       await db.update('start', {'finishtime': finish},
-          where: 'number = $number');
+          where: 'number = $_number');
       logger.i(
-          'Database -> Automatically add number $number to finish time: $finish');
+          'Database -> Automatically add number $_number to finish time: $finish');
     }
-    return number;
+    return _number;
   }
 
   Future<int> addFinishTimeManual(String time) async {
     final db = await database;
-    var result = await db.insert('finish', {
+    final result = await db.insert('finish', {
       'finishtime': time,
       'manual': 1,
     });
@@ -582,7 +591,7 @@ class ProtocolProvider {
 
   Future<int> hideFinish(int id) async {
     final db = await database;
-    var result = await db.rawUpdate('''
+    final result = await db.rawUpdate('''
         UPDATE finish
         SET "set" = 1
         WHERE id = $id
@@ -593,7 +602,7 @@ class ProtocolProvider {
 
   Future<int> hideAllFinish() async {
     final db = await database;
-    var result = await db.rawUpdate('''
+    final result = await db.rawUpdate('''
         UPDATE finish
         SET "set" = 1
         ''');
@@ -660,7 +669,7 @@ class ProtocolProvider {
     return result;
   }
 
-  void close() async {
+  Future<void> close() async {
     await _database?.close();
   }
 
@@ -670,14 +679,14 @@ class ProtocolProvider {
   Future<DateTime?> _prevFinishTime() async {
     DateTime? prevFinishTime;
     final db = await database;
-    var res = await db.rawQuery('''
+    final res = await db.rawQuery('''
         SELECT id, finishtime
         FROM finish
         WHERE "set" ISNULL and manual ISNULL
         ORDER BY finishtime DESC LIMIT 1;
     ''');
 
-    List<FinishItem> prevFinishProtocol =
+    final List<FinishItem> prevFinishProtocol =
         res.isNotEmpty ? res.map((c) => FinishItem.fromMap(c)).toList() : [];
     if (prevFinishProtocol.isNotEmpty &&
         prevFinishProtocol.first.finishtime.isNotEmpty) {
@@ -689,14 +698,14 @@ class ProtocolProvider {
   Future<DateTime?> _lastFinishTime() async {
     DateTime? result;
     final db = await database;
-    var res = await db.rawQuery('''
+    final res = await db.rawQuery('''
         SELECT id, finishtime
         FROM finish
         WHERE number NOTNULL AND finishtime NOT like "DNF" AND finishtime NOT like "DNS"
         ORDER BY finishtime DESC LIMIT 1;
     ''');
 
-    List<FinishItem> item =
+    final List<FinishItem> item =
         res.isNotEmpty ? res.map((c) => FinishItem.fromMap(c)).toList() : [];
     if (item.isNotEmpty && item.first.finishtime.isNotEmpty) {
       result = strTimeToDateTime(item.first.finishtime);

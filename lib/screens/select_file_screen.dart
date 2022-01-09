@@ -11,7 +11,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:entime/blocs/blocs.dart';
 import 'package:entime/utils/helper.dart';
 
-void routeToSelectFileScreen(BuildContext context) async {
+Future<void> routeToSelectFileScreen(BuildContext context) async {
   await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
     return const SelectFileScreen();
   }));
@@ -21,7 +21,7 @@ class SelectFileScreen extends StatefulWidget {
   const SelectFileScreen({Key? key}) : super(key: key);
 
   @override
-  _SelectFileScreenState createState() => _SelectFileScreenState();
+  State<SelectFileScreen> createState() => _SelectFileScreenState();
 }
 
 class _SelectFileScreenState extends State<SelectFileScreen> {
@@ -66,12 +66,12 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
       // ToDo: генерацию списка файлов в папке проги перекинуть в BLoC
       body: FutureBuilder<List<File>>(
           future: _getFiles(),
-          builder: (context, AsyncSnapshot<List<File>> snapshot) {
+          builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.separated(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  File item = snapshot.data![index];
+                  final File item = snapshot.data![index];
                   return ListTile(
                     leading: const Icon(MdiIcons.database),
                     title: Text(basename(item.path)),
@@ -93,7 +93,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                     },
                   );
                 },
-                separatorBuilder: (BuildContext context, int index) =>
+                separatorBuilder: (context, index) =>
                     const Divider(
                   indent: 70,
                   endIndent: 10,
@@ -108,12 +108,12 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
   }
 
   Future<List<File>> _getFiles() async {
-    List<File> files = [];
+    final List<File> files = [];
 
-    Directory? externalStorageDirectory = await getExternalStorageDirectory();
+    final Directory? externalStorageDirectory = await getExternalStorageDirectory();
     if (externalStorageDirectory != null) {
-      List<FileSystemEntity> allFiles = externalStorageDirectory.listSync();
-      for (var file in allFiles) {
+      final List<FileSystemEntity> allFiles = externalStorageDirectory.listSync();
+      for (final file in allFiles) {
         if (file is File &&
             (extension(file.path) == '.sqlite' ||
                 extension(file.path) == '.db')) {
@@ -154,9 +154,13 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                         .add(DeselectProtocol());
                   }
                   final File shm = File('${item.path}-shm');
-                  if (shm.existsSync()) shm.delete();
+                  if (shm.existsSync()) {
+                    shm.delete();
+                  }
                   final File wal = File('${item.path}-wal');
-                  if (wal.existsSync()) wal.delete();
+                  if (wal.existsSync()) {
+                    wal.delete();
+                  }
                   item.delete();
                 });
                 break;

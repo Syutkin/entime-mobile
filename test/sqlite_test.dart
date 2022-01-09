@@ -48,7 +48,7 @@ void main() {
           await ProtocolProvider.db.addStartNumber(number: 1, time: '10:00:00'),
           null);
 
-      List<StartItem>? secondAdd = await ProtocolProvider.db.addStartNumber(
+      final List<StartItem>? secondAdd = await ProtocolProvider.db.addStartNumber(
         number: 1,
         time: '10:00:00',
         forceAdd: false,
@@ -76,7 +76,7 @@ void main() {
     });
 
     test('getAllParticipantsAtStart', () async {
-      var result = await ProtocolProvider.db.getAllParticipantsAtStart();
+      final result = await ProtocolProvider.db.getAllParticipantsAtStart();
       expect(result.length, 5);
     });
 
@@ -84,9 +84,9 @@ void main() {
       var result = await ProtocolProvider.db
           .getStartingParticipants('some wrong time')
           .onError((error, stackTrace) => []);
-      expect(result, []);
+      expect(result, <StartItem>[]);
       result = await ProtocolProvider.db.getStartingParticipants('09:59:15');
-      expect(result, []);
+      expect(result, <StartItem>[]);
       result = await ProtocolProvider.db.getStartingParticipants('10:00:15');
       expect(result.length, 1);
       expect(result.first.number, 1);
@@ -126,7 +126,7 @@ void main() {
             timeStamp: DateTime.now(),
           ),
           null);
-      var result = await ProtocolProvider.db.updateAutomaticCorrection(
+      final result = await ProtocolProvider.db.updateAutomaticCorrection(
         time: '10:01:02,222',
         correction: 2222,
         timeStamp: DateTime.now(),
@@ -268,14 +268,14 @@ void main() {
     });
 
     test('getStartToCsv', () async {
-      var result = await ProtocolProvider.db.getStartToCsv();
+      final result = await ProtocolProvider.db.getStartToCsv();
       // 4 'cause number 1 is DNS and counts, but number 5 not started````````````````````````````````````````````````````````````````````````````````````````````````````
       expect(result.length, 4);
 
       String? csv = mapListToCsv(null);
       expect(csv, null);
-      csv = mapListToCsv(result as List<Map<String, dynamic>>);
-      String pattern =
+      csv = mapListToCsv(result);
+      const String pattern =
           'number;starttime;automaticcorrection\r\n1;10:01:00;DNS\r\n2;10:02:00;2234\r\n3;10:03:00;3333\r\n4;10:04:00;4444';
       expect(csv, pattern);
     });
@@ -328,7 +328,7 @@ void main() {
     });
 
     test('hideFinish', () async {
-      var result = await ProtocolProvider.db.hideFinish(8);
+      final result = await ProtocolProvider.db.hideFinish(8);
       expect(result, 1);
     });
 
@@ -360,39 +360,39 @@ void main() {
 
     test('clearNumberAtFinish', () async {
       await ProtocolProvider.db.clearNumberAtFinish(5);
-      var result = await ProtocolProvider.db.addNumber(9, 5, '10:11:11,111');
+      final result = await ProtocolProvider.db.addNumber(9, 5, '10:11:11,111');
       expect(result, true);
     });
 
     test('setDNF', () async {
-      var result = await ProtocolProvider.db.setDNF(4);
+      final result = await ProtocolProvider.db.setDNF(4);
       // return rowId at finish table
       expect(result, 10);
     });
 
     test('hideAllFinish', () async {
-      var result = await ProtocolProvider.db.hideAllFinish();
+      final result = await ProtocolProvider.db.hideAllFinish();
       // 9 lines changed (all finish lines)
       expect(result, 9);
     });
 
     test('getFinishToCsv', () async {
-      var result = await ProtocolProvider.db.getFinishToCsv();
+      final result = await ProtocolProvider.db.getFinishToCsv();
       expect(result.length, 4);
 
-      String? csv = mapListToCsv(result as List<Map<String, dynamic>>);
-      String pattern =
+      final String? csv = mapListToCsv(result);
+      const String pattern =
           'number;finishtime\r\n2;10:03:01,124\r\n3;10:05:05,567\r\n5;10:11:11,111\r\n4;DNF';
       expect(csv, pattern);
     });
 
     test('clearFinishResultsDebug', () async {
-      var result = await ProtocolProvider.db.clearFinishResultsDebug();
+      final result = await ProtocolProvider.db.clearFinishResultsDebug();
       expect(result, 9);
     });
 
     test('clearStartResultsDebug', () async {
-      var result = await ProtocolProvider.db.clearStartResultsDebug();
+      final result = await ProtocolProvider.db.clearStartResultsDebug();
       expect(result, 5);
     });
 

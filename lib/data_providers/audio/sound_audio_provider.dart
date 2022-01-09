@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:entime/data_providers/audio/audio_provider.dart';
 import 'package:entime/data_providers/audio/tts_provider.dart';
 import 'package:entime/data_providers/audio/beep_provider.dart';
@@ -35,7 +37,7 @@ class Sound extends AudioProvider {
   }
 
   @override
-  void speak(String text) async {
-    flutterTts.speak(text);
+  Future<void> speak(String text) async {
+    unawaited(flutterTts.speak(text));
   }
 }

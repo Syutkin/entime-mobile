@@ -8,7 +8,9 @@ enum AppTheme {
 }
 
 AppTheme themeFromString(String? type) {
-  if (type == null) return AppTheme.lightBlue;
+  if (type == null) {
+    return AppTheme.lightBlue;
+  }
   switch (type) {
     case 'lightBlue':
       return AppTheme.lightBlue;
