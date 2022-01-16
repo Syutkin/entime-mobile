@@ -27,6 +27,12 @@ Future<int?> vccPopup({required String text, required String labelText, required
         actions: <Widget>[
           TextButton(
             onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          TextButton(
+            onPressed: () {
               Navigator.of(context).pop(number);
             },
             child: Text(MaterialLocalizations.of(context).okButtonLabel),

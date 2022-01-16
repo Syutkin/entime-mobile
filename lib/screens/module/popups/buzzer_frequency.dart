@@ -146,6 +146,12 @@ Future<int?> buzzerFrequencyPopup(
         actions: <Widget>[
           TextButton(
             onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          TextButton(
+            onPressed: () {
               Navigator.of(context).pop(notes[_value.toInt()].frequency);
             },
             child: Text(MaterialLocalizations.of(context).okButtonLabel),

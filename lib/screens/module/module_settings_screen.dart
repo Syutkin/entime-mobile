@@ -95,7 +95,7 @@ class ModuleSettingsScreen extends StatelessWidget {
             tiles: [
               SettingsTile.switchTile(
                 title: 'Buzzer',
-                leading: const Icon(MdiIcons.bell),
+                //leading: const Icon(MdiIcons.bell),
                 switchValue: _bloc.moduleSettings.buzzer,
                 onToggle: (value) {
                   onChanged();
@@ -105,8 +105,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Частота коротких гудков',
-                subtitle: '${_bloc.moduleSettings.shortFrequency} Гц',
-                leading: const Icon(MdiIcons.wave),
+                trailing: Text('${_bloc.moduleSettings.shortFrequency} Гц'),
+                //leading: const Icon(MdiIcons.wave),
                 onPressed: (context) async {
                   final int? hz = await buzzerFrequencyPopup(
                       frequency: _bloc.moduleSettings.shortFrequency,
@@ -121,8 +121,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Частота длинных гудков',
-                subtitle: '${_bloc.moduleSettings.longFrequency} Гц',
-                leading: const Icon(MdiIcons.wave),
+            trailing: Text('${_bloc.moduleSettings.longFrequency} Гц'),
+                //leading: const Icon(MdiIcons.wave),
                 onPressed: (context) async {
                   final int? hz = await buzzerFrequencyPopup(
                       frequency: _bloc.moduleSettings.longFrequency,
@@ -142,7 +142,7 @@ class ModuleSettingsScreen extends StatelessWidget {
             tiles: [
               SettingsTile.switchTile(
                 title: 'LoRa',
-                leading: const Icon(MdiIcons.radio),
+                //leading: const Icon(MdiIcons.radio),
                 switchValue: _bloc.moduleSettings.lora,
                 onToggle: (value) {
                   onChanged();
@@ -152,8 +152,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Частота',
-                subtitle: '${_bloc.moduleSettings.frequency} МГц',
-                leading: const Icon(MdiIcons.wave),
+                trailing: Text('${_bloc.moduleSettings.frequency} Гц'),
+                //leading: const Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
@@ -161,8 +161,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'TX Power',
-                subtitle: '${_bloc.moduleSettings.txPower}',
-                leading: const Icon(MdiIcons.wave),
+            trailing: Text('${_bloc.moduleSettings.txPower}'),
+                //leading: const Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
@@ -170,8 +170,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Spreading Factor',
-                subtitle: '${_bloc.moduleSettings.spreadingFactor}',
-                leading: const Icon(MdiIcons.wave),
+            trailing: Text('${_bloc.moduleSettings.spreadingFactor}'),
+                //leading: const Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
@@ -179,8 +179,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Signal Bandwidth',
-                subtitle: '${_bloc.moduleSettings.signalBandwidth}',
-                leading: const Icon(MdiIcons.wave),
+            trailing: Text('${_bloc.moduleSettings.signalBandwidth}'),
+                //leading: const Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
@@ -188,8 +188,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Coding Rate Denominator',
-                subtitle: '${_bloc.moduleSettings.codingRateDenominator}',
-                leading: const Icon(MdiIcons.wave),
+            trailing: Text('${_bloc.moduleSettings.codingRateDenominator}'),
+                //leading: const Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
@@ -197,8 +197,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Preamble Length',
-                subtitle: '${_bloc.moduleSettings.preambleLength}',
-                leading: const Icon(MdiIcons.wave),
+            trailing: Text('${_bloc.moduleSettings.preambleLength}'),
+                //leading: const Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
@@ -206,8 +206,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Sync Word',
-                subtitle: '${_bloc.moduleSettings.syncWord}',
-                leading: const Icon(MdiIcons.wave),
+            trailing: Text('${_bloc.moduleSettings.syncWord}'),
+                //leading: const Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
@@ -215,7 +215,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile.switchTile(
                 title: 'CRC',
-                leading: const Icon(MdiIcons.wave),
+                //leading: const Icon(MdiIcons.wave),
                 switchValue: _bloc.moduleSettings.crc,
                 onToggle: (value) {
                   onChanged();
@@ -226,11 +226,11 @@ class ModuleSettingsScreen extends StatelessWidget {
             ],
           ),
           SettingsSection(
-            title: 'TFT',
+            title: 'Экран',
             tiles: [
               SettingsTile.switchTile(
                 title: 'TFT',
-                leading: const Icon(MdiIcons.monitor),
+                //leading: const Icon(MdiIcons.monitor),
                 switchValue: _bloc.moduleSettings.tft,
                 onToggle: (value) {
                   onChanged();
@@ -240,7 +240,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile.switchTile(
                 title: 'Спящий режим',
-                leading: const Icon(MdiIcons.monitor),
+                //leading: const Icon(MdiIcons.monitor),
                 switchValue: _bloc.moduleSettings.timeout,
                 onToggle: (value) {
                   onChanged();
@@ -250,9 +250,9 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Спящий режим',
-                subtitle:
-                    'Через ${_bloc.moduleSettings.timeoutDuration} секунд',
-                leading: const Icon(MdiIcons.monitor),
+                trailing: Text(
+                    '${_bloc.moduleSettings.timeoutDuration} секунд'),
+                //leading: const Icon(MdiIcons.monitor),
                 onPressed: (context) {
                   onChanged();
                   //ToDo TFT;
@@ -260,7 +260,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile.switchTile(
                 title: 'Включать после события',
-                leading: const Icon(MdiIcons.monitor),
+                //leading: const Icon(MdiIcons.monitor),
                 switchValue: _bloc.moduleSettings.turnOnAtEvent,
                 onToggle: (value) {
                   onChanged();
@@ -275,7 +275,7 @@ class ModuleSettingsScreen extends StatelessWidget {
             tiles: [
               SettingsTile.switchTile(
                 title: 'Bluetooth',
-                leading: const Icon(Icons.bluetooth),
+                //leading: const Icon(Icons.bluetooth),
                 switchValue: _bloc.moduleSettings.bluetooth,
                 onToggle: (value) {
                   onChanged();
@@ -285,8 +285,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Имя модуля',
-                subtitle: _bloc.moduleSettings.bluetoothName,
-                leading: const Icon(MdiIcons.bluetooth),
+            trailing: Text(_bloc.moduleSettings.bluetoothName),
+                //leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (context) {
                   onChanged();
                   //ToDo bluetooth module name;
@@ -294,8 +294,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Номер модуля',
-                subtitle: '${_bloc.moduleSettings.bluetoothNumber}',
-                leading: const Icon(MdiIcons.bluetooth),
+            trailing: Text('${_bloc.moduleSettings.bluetoothNumber}'),
+                //leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (context) async {
                   final int? number = await bluetoothNumberPopup(
                       context: context,
@@ -313,7 +313,7 @@ class ModuleSettingsScreen extends StatelessWidget {
           SettingsSection(title: 'WiFi', tiles: [
             SettingsTile.switchTile(
               title: 'WiFi',
-              leading: const Icon(MdiIcons.wifi),
+              //leading: const Icon(MdiIcons.wifi),
               switchValue: _bloc.moduleSettings.wifi,
               onToggle: (value) {
                 onChanged();
@@ -323,8 +323,8 @@ class ModuleSettingsScreen extends StatelessWidget {
             ),
             SettingsTile(
               title: 'Сеть',
-              subtitle: _bloc.moduleSettings.ssid,
-              leading: const Icon(MdiIcons.wifi),
+            trailing: Text(_bloc.moduleSettings.ssid),
+              //leading: const Icon(MdiIcons.wifi),
               onPressed: (context) {
                 onChanged();
                 //ToDo WiFi;
@@ -333,7 +333,7 @@ class ModuleSettingsScreen extends StatelessWidget {
             SettingsTile(
                 title: 'Пароль',
                 //subtitle: '${(moduleSettings.password)}',
-                leading: const Icon(MdiIcons.wifi),
+                //leading: const Icon(MdiIcons.wifi),
                 onPressed: (context) {
                   onChanged();
                   //ToDo WiFi;
@@ -344,8 +344,8 @@ class ModuleSettingsScreen extends StatelessWidget {
             tiles: [
               SettingsTile(
                 title: 'R1',
-                subtitle: '${_bloc.moduleSettings.r1} Ом',
-                leading: const Icon(MdiIcons.resistor),
+            trailing: Text('${_bloc.moduleSettings.r1} Ом'),
+                //leading: const Icon(MdiIcons.resistor),
                 onPressed: (context) async {
                   final int? r1 = await vccPopup(
                       context: context,
@@ -360,8 +360,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'R2',
-                subtitle: '${_bloc.moduleSettings.r2} Ом',
-                leading: const Icon(MdiIcons.resistor),
+            trailing: Text('${_bloc.moduleSettings.r2} Ом'),
+                //leading: const Icon(MdiIcons.resistor),
                 onPressed: (context) async {
                   final int? r2 = await vccPopup(
                       context: context,
@@ -376,8 +376,8 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
               SettingsTile(
                 title: 'Ввод измерянного напряжения',
-                subtitle: '${_bloc.moduleSettings.vBat} мВ',
-                leading: const Icon(MdiIcons.batteryCharging),
+                // subtitle: '${_bloc.moduleSettings.vBat} мВ',
+                //leading: const Icon(MdiIcons.batteryCharging),
                 onPressed: (context) async {
                   final int? mv = await vccPopup(
                       context: context,
@@ -412,7 +412,7 @@ class ModuleSettingsScreen extends StatelessWidget {
             tiles: [
               SettingsTile.switchTile(
                 title: 'Bluetooth',
-                leading: const Icon(Icons.bluetooth),
+                //leading: const Icon(Icons.bluetooth),
                 switchValue: _bloc.moduleSettings.bluetooth,
                 onToggle: (value) {
                   onChanged();
@@ -423,7 +423,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               SettingsTile(
                 title: 'Имя модуля',
                 subtitle: _bloc.moduleSettings.bluetoothName,
-                leading: const Icon(MdiIcons.bluetooth),
+                //leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (context) {
                   onChanged();
                   //ToDo bluetooth module name;
@@ -432,7 +432,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               SettingsTile(
                 title: 'Номер модуля',
                 subtitle: '${_bloc.moduleSettings.bluetoothNumber}',
-                leading: const Icon(MdiIcons.bluetooth),
+                //leading: const Icon(MdiIcons.bluetooth),
                 onPressed: (context) async {
                   final int? number = await bluetoothNumberPopup(
                       context: context,
@@ -448,7 +448,7 @@ class ModuleSettingsScreen extends StatelessWidget {
               SettingsTile(
                 title: 'Яркость',
                 subtitle: '${_bloc.moduleSettings.brightness}',
-                leading: const Icon(MdiIcons.brightness1),
+                //leading: const Icon(MdiIcons.brightness1),
                 onPressed: (context) async {
                   final int? number = await brightnessPopup(
                       initialValue: _bloc.moduleSettings.brightness,
@@ -466,7 +466,7 @@ class ModuleSettingsScreen extends StatelessWidget {
           SettingsSection(title: 'WiFi', tiles: [
             SettingsTile.switchTile(
               title: 'WiFi',
-              leading: const Icon(MdiIcons.wifi),
+              //leading: const Icon(MdiIcons.wifi),
               switchValue: _bloc.moduleSettings.wifi,
               onToggle: (value) {
                 onChanged();
@@ -477,7 +477,7 @@ class ModuleSettingsScreen extends StatelessWidget {
             SettingsTile(
               title: 'Сеть',
               subtitle: _bloc.moduleSettings.ssid,
-              leading: const Icon(MdiIcons.wifi),
+              //leading: const Icon(MdiIcons.wifi),
               onPressed: (context) async {
                 final String? ssid = await wifiSettingsPopup(
                     context: context,
@@ -493,7 +493,7 @@ class ModuleSettingsScreen extends StatelessWidget {
             SettingsTile(
               title: 'Пароль',
               //subtitle: '${(moduleSettings.password)}',
-              leading: const Icon(MdiIcons.wifi),
+              //leading: const Icon(MdiIcons.wifi),
               onPressed: (context) async {
                 final String? password = await wifiSettingsPopup(
                     context: context,

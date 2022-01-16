@@ -27,6 +27,12 @@ Future<String?> wifiSettingsPopup({required String text, required String labelTe
         actions: <Widget>[
           TextButton(
             onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          TextButton(
+            onPressed: () {
               Navigator.of(context).pop(wifi);
             },
             child: Text(MaterialLocalizations.of(context).okButtonLabel),

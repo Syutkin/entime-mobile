@@ -31,6 +31,12 @@ Future<double?> setPitchPopup(BuildContext context, SettingsState settings) asyn
           actions: <Widget>[
             TextButton(
               onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+            ),
+            TextButton(
+              onPressed: () {
                 Navigator.of(context).pop(_value);
               },
               child: Text(MaterialLocalizations.of(context).okButtonLabel),

@@ -34,6 +34,12 @@ Future<int?> brightnessPopup(
         actions: <Widget>[
           TextButton(
             onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          TextButton(
+            onPressed: () {
               Navigator.of(context).pop(brightness.toInt());
             },
             child: Text(MaterialLocalizations.of(context).okButtonLabel),

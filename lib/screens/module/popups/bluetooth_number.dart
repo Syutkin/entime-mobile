@@ -27,6 +27,12 @@ Future<int?> bluetoothNumberPopup({required String text, required String labelTe
         actions: <Widget>[
           TextButton(
             onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          TextButton(
+            onPressed: () {
               Navigator.of(context).pop(number);
             },
             child: Text(MaterialLocalizations.of(context).okButtonLabel),
