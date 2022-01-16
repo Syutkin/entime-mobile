@@ -60,7 +60,7 @@ class _SettingsPageState extends State<SettingsScreen> {
               tiles: [
                 SettingsTile.switchTile(
                   title: 'Bluetooth',
-                  leading: const Icon(Icons.bluetooth),
+                  //leading: const Icon(Icons.bluetooth),
                   switchValue: _bluetoothState.isEnabled,
                   onToggle: (value) {
                     // Do the request and update with the true value then
@@ -85,7 +85,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   subtitle:
                       'Пытаться переподключится к модулю при обрыве связи',
                   subtitleMaxLines: 3,
-                  leading: const Icon(Icons.bluetooth),
+                  //leading: const Icon(Icons.bluetooth),
                   switchValue: settingsState.reconnect,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(reconnect: value));
@@ -93,7 +93,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile.switchTile(
                   title: 'Звук',
-                  leading: const Icon(Icons.volume_up),
+                  //leading: const Icon(Icons.volume_up),
                   switchValue: settingsState.sound,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(sound: value));
@@ -102,7 +102,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                 SettingsTile.switchTile(
                   title: 'Всегда включённый экран',
                   titleMaxLines: 2,
-                  leading: const Icon(Icons.lightbulb_outline),
+                  //leading: const Icon(Icons.lightbulb_outline),
                   switchValue: settingsState.wakelock,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(wakelock: value));
@@ -115,7 +115,7 @@ class _SettingsPageState extends State<SettingsScreen> {
               tiles: [
                 SettingsTile.switchTile(
                   title: 'Обратный отсчёт',
-                  leading: const Icon(Icons.timer),
+                  //leading: const Icon(Icons.timer),
                   switchValue: settingsState.beep,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(beep: value));
@@ -128,7 +128,7 @@ class _SettingsPageState extends State<SettingsScreen> {
               tiles: [
                 SettingsTile.switchTile(
                   title: 'Голос',
-                  leading: const Icon(MdiIcons.textToSpeech),
+                  //leading: const Icon(MdiIcons.textToSpeech),
                   switchValue: settingsState.voice,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(voice: value));
@@ -137,7 +137,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                 SettingsTile.switchTile(
                   title: 'Называть имена участников',
                   titleMaxLines: 2,
-                  leading: const Icon(MdiIcons.textToSpeech),
+                  //leading: const Icon(MdiIcons.textToSpeech),
                   switchValue: settingsState.voiceName,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(voiceName: value));
@@ -145,8 +145,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile(
                   title: 'Громкость',
-                  subtitle: '${(settingsState.volume * 100).round()}%',
-                  leading: const Icon(Icons.volume_up),
+                  //leading: const Icon(Icons.volume_up),
+                  trailing: Text('${(settingsState.volume * 100).round()}%'),
                   onPressed: (context) async {
                     final value = await setVolumePopup(context, settingsState);
                     if (value != null) {
@@ -156,8 +156,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile(
                   title: 'Тембр',
-                  subtitle: settingsState.pitch.toStringAsFixed(2),
-                  leading: const Icon(Icons.record_voice_over),
+                  //leading: const Icon(Icons.record_voice_over),
+                  trailing: Text(settingsState.pitch.toStringAsFixed(2)),
                   onPressed: (context) async {
                     final value = await setPitchPopup(context, settingsState);
                     if (value != null) {
@@ -167,8 +167,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile(
                   title: 'Скорость',
-                  subtitle: settingsState.rate.toStringAsFixed(2),
-                  leading: const Icon(MdiIcons.playSpeed),
+                  //leading: const Icon(MdiIcons.playSpeed),
+                  trailing: Text(settingsState.rate.toStringAsFixed(2)),
                   onPressed: (context) async {
                     final value = await setRatePopup(context, settingsState);
                     if (value != null) {
@@ -178,8 +178,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile(
                   title: 'Язык',
-                  subtitle: settingsState.language,
-                  leading: const Icon(Icons.language),
+                  //leading: const Icon(Icons.language),
+                  trailing: Text(settingsState.language),
                   onPressed: (context) {
                     //TODO: i18n
                   },
@@ -191,7 +191,7 @@ class _SettingsPageState extends State<SettingsScreen> {
               tiles: [
                 SettingsTile.switchTile(
                   title: 'Кнопка "отсечка"',
-                  leading: const Icon(MdiIcons.handBackLeft),
+                  //leading: const Icon(MdiIcons.handBackLeft),
                   switchValue: settingsState.startFab,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(startFab: value));
@@ -199,8 +199,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile(
                   title: 'Размер кнопки "отсечка"',
-                  subtitle: '${(settingsState.startFabSize).round()}px',
-                  leading: const Icon(MdiIcons.handBackLeft),
+                  //leading: const Icon(MdiIcons.handBackLeft),
+                  trailing: Text('${(settingsState.startFabSize).round()}px'),
                   onPressed: (context) async {
                     final value = await setFloatingButtonSizePopup(
                         context, settingsState.startFabSize,
@@ -213,7 +213,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile.switchTile(
                   title: 'Обратный отсчёт',
-                  leading: const Icon(MdiIcons.timer),
+                  //leading: const Icon(MdiIcons.timer),
                   switchValue: settingsState.countdown,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(countdown: value));
@@ -221,8 +221,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile(
                   title: 'Размер обратного отсчёта',
-                  subtitle: '${(settingsState.countdownSize).round()}px',
-                  leading: const Icon(MdiIcons.timer),
+                  //leading: const Icon(MdiIcons.timer),
+                  trailing: Text('${(settingsState.countdownSize).round()}px'),
                   onPressed: (context) async {
                     final value = await setFloatingButtonSizePopup(
                         context, settingsState.countdownSize,
@@ -236,7 +236,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                 SettingsTile.switchTile(
                   title: 'Заменять время старта обратным отсчётом',
                   titleMaxLines: 2,
-                  leading: const Icon(MdiIcons.timer),
+                  //leading: const Icon(MdiIcons.timer),
                   switchValue: settingsState.countdownAtStartTime,
                   onToggle: (value) {
                     settingsBloc
@@ -251,8 +251,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                 SettingsTile(
                   title: 'Задержка перед показом новых отсечек',
                   titleMaxLines: 2,
-                  subtitle: '${settingsState.finishDelay}мс',
-                  leading: const Icon(MdiIcons.clockOutline),
+                  trailing: Text('${settingsState.finishDelay}мс'),
+                  //leading: const Icon(MdiIcons.clockOutline),
                   onPressed: (context) async {
                     final value = await setDelayPopup(
                         context,
@@ -265,7 +265,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile.switchTile(
                   title: 'Автоподстановка номеров',
-                  leading: const Icon(MdiIcons.autoFix),
+                  //leading: const Icon(MdiIcons.autoFix),
                   switchValue: settingsState.substituteNumbers,
                   onToggle: (value) {
                     settingsBloc
@@ -275,8 +275,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                 SettingsTile(
                   title:
                       'Задержка перед автоматическим подставлением новых номеров',
-                  subtitle: '${settingsState.substituteNumbersDelay}мс',
-                  leading: const Icon(MdiIcons.clockOutline),
+                  trailing: Text('${settingsState.substituteNumbersDelay}мс'),
+                  //leading: const Icon(MdiIcons.clockOutline),
                   onPressed: (context) async {
                     final value = await setDelayPopup(
                         context,
@@ -290,7 +290,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile.switchTile(
                   title: 'Кнопка "отсечка"',
-                  leading: const Icon(MdiIcons.handBackLeft),
+                  //leading: const Icon(MdiIcons.handBackLeft),
                   switchValue: settingsState.finishFab,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(finishFab: value));
@@ -298,8 +298,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                 ),
                 SettingsTile(
                   title: 'Размер кнопки "отсечка"',
-                  subtitle: '${(settingsState.finishFabSize).round()}px',
-                  leading: const Icon(MdiIcons.handBackLeft),
+                  trailing: Text('${(settingsState.finishFabSize).round()}px'),
+                  //leading: const Icon(MdiIcons.handBackLeft),
                   onPressed: (context) async {
                     final value = await setFloatingButtonSizePopup(
                         context, settingsState.finishFabSize,
@@ -318,7 +318,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                 SettingsTile.switchTile(
                   title: 'Проверка обновлений при старте',
                   titleMaxLines: 2,
-                  leading: const Icon(MdiIcons.update),
+                  //leading: const Icon(MdiIcons.update),
                   switchValue: settingsState.checkUpdates,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(checkUpdates: value));
@@ -336,10 +336,11 @@ class _SettingsPageState extends State<SettingsScreen> {
                 SettingsTile(
                   title: 'Количество показываемых записей',
                   titleMaxLines: 2,
-                  subtitle: settingsState.logLimit > -1
-                      ? '${settingsState.logLimit}'
-                      : 'без ограничений',
-                  leading: const Icon(MdiIcons.filter),
+                  trailing: settingsState.logLimit > -1
+                      ? Text('${settingsState.logLimit}')
+                      // : Text('без ограничений'),
+                      : const Icon(MdiIcons.infinity),
+                  //leading: const Icon(MdiIcons.filter),
                   onPressed: (context) async {
                     final int? value =
                         await setLogLimitPopup(context, settingsState.logLimit);
@@ -355,7 +356,7 @@ class _SettingsPageState extends State<SettingsScreen> {
               tiles: [
                 SettingsTile(
                   title: 'Настройки по умолчанию',
-                  leading: const Icon(MdiIcons.backupRestore),
+                  //leading: const Icon(MdiIcons.backupRestore),
                   onPressed: (context) {
                     settingsBloc.add(SetDefaultSettings());
                   },
