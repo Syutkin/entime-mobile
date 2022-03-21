@@ -253,12 +253,14 @@ class _StartScreen extends State<StartScreen> {
     if (countdownState is CountdownWorkingState) {
       return countdownState.nextStartTime;
     }
+    return null;
   }
 
   String? _countdownFromState(CountdownState countdownState) {
     if (countdownState is CountdownWorkingState) {
       return countdownState.text;
     }
+    return null;
   }
 }
 
