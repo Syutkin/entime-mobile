@@ -28,7 +28,7 @@ class LogScreen extends StatelessWidget {
         body: BlocBuilder<LogBloc, LogState>(builder: (context, state) {
           if (state is LogOpen && state.log != null) {
             // скролл на последнюю запись
-            SchedulerBinding.instance?.addPostFrameCallback((_) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
               scrollToEnd(_scrollController);
             });
             return Scrollbar(

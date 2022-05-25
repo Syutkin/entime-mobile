@@ -65,9 +65,8 @@ class AboutPopup extends StatelessWidget {
                                         'subject':
                                             'Entime замечания/предложения'
                                       });
-                                  if (await canLaunch(
-                                      _emailLaunchUri.toString())) {
-                                    await launch(_emailLaunchUri.toString());
+                                  if (await canLaunchUrl(_emailLaunchUri)) {
+                                    await launchUrl(_emailLaunchUri);
                                   } else {
                                     final Error error = ArgumentError(
                                         'Could not launch $_emailLaunchUri');

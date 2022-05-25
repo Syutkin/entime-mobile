@@ -86,7 +86,7 @@ class _FinishPage extends State<FinishScreen> {
           // ToDo: Перематывать только при первоначальном показе всех отсечек?
           // скролл на последнюю запись если показываем скрытые отсечки
           if (!BlocProvider.of<SettingsBloc>(context).state.hideMarked) {
-            SchedulerBinding.instance!.addPostFrameCallback((_) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
               scrollToEnd(_scrollController);
             });
           }
