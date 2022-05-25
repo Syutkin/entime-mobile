@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ToDo: use new enums from dart 2.17
 enum AppTheme {
   lightBlue,
   darkBlue,
