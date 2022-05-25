@@ -8,18 +8,18 @@ import '../../../utils/helper.dart';
 import '../../../widgets/widgets.dart';
 
 Future<void> editStartTime(BuildContext context, StartItem item) async {
-  final _automaticPhoneTimeController = TextEditingController();
-  final _manualCorrectionController = TextEditingController();
-  final _manualStartTimeController = TextEditingController();
-  final _automaticStartTimeController = TextEditingController();
-  final _automaticCorrectionController = TextEditingController();
-  _manualCorrectionController.text = (item.manualcorrection ?? '').toString();
-  _manualStartTimeController.text = item.manualstarttime ?? '';
-  _automaticCorrectionController.text =
+  final automaticPhoneTimeController = TextEditingController();
+  final manualCorrectionController = TextEditingController();
+  final manualStartTimeController = TextEditingController();
+  final automaticStartTimeController = TextEditingController();
+  final automaticCorrectionController = TextEditingController();
+  manualCorrectionController.text = (item.manualcorrection ?? '').toString();
+  manualStartTimeController.text = item.manualstarttime ?? '';
+  automaticCorrectionController.text =
       (item.automaticcorrection ?? '').toString();
-  _automaticStartTimeController.text = item.automaticstarttime ?? '';
-  _automaticPhoneTimeController.text = item.automaticphonetime ?? '';
-  final _formKey = GlobalKey<FormState>();
+  automaticStartTimeController.text = item.automaticstarttime ?? '';
+  automaticPhoneTimeController.text = item.automaticphonetime ?? '';
+  final formKey = GlobalKey<FormState>();
 
   String? _validateCorrection(String? value) {
     if (value == '' || value == null) {
@@ -44,22 +44,22 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
   bool _updateAllStart() {
     bool update = false;
     if (item.automaticcorrection !=
-        int.tryParse(_automaticCorrectionController.text)) {
+        int.tryParse(automaticCorrectionController.text)) {
       item.automaticcorrection =
-          int.tryParse(_automaticCorrectionController.text);
+          int.tryParse(automaticCorrectionController.text);
       update = true;
     }
-    if ((item.automaticstarttime ?? '') != _automaticStartTimeController.text) {
-      item.automaticstarttime = _automaticStartTimeController.text;
+    if ((item.automaticstarttime ?? '') != automaticStartTimeController.text) {
+      item.automaticstarttime = automaticStartTimeController.text;
       update = true;
     }
     if (item.manualcorrection !=
-        int.tryParse(_manualCorrectionController.text)) {
-      item.manualcorrection = int.tryParse(_manualCorrectionController.text);
+        int.tryParse(manualCorrectionController.text)) {
+      item.manualcorrection = int.tryParse(manualCorrectionController.text);
       update = true;
     }
-    if ((item.manualstarttime ?? '') != _manualStartTimeController.text) {
-      item.manualstarttime = _manualStartTimeController.text;
+    if ((item.manualstarttime ?? '') != manualStartTimeController.text) {
+      item.manualstarttime = manualStartTimeController.text;
       update = true;
     }
     return update;
@@ -77,7 +77,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
             ? 'Участник №${item.number}'
             : '№${item.number}, ${item.name}'),
         content: Form(
-          key: _formKey,
+          key: formKey,
           onChanged: () {
             Form.of(primaryFocus!.context!)!.validate();
           },
@@ -115,7 +115,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
                     )
                   : const SizedBox(),
               TextFormField(
-                controller: _automaticCorrectionController,
+                controller: automaticCorrectionController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   icon: Icon(MdiIcons.cpu64Bit),
@@ -124,7 +124,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
                 validator: (value) => _validateCorrection(value),
               ),
               TextFormField(
-                controller: _automaticStartTimeController,
+                controller: automaticStartTimeController,
                 keyboardType: TextInputType.datetime,
                 decoration: const InputDecoration(
                   labelText: 'Время старта',
@@ -133,7 +133,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
                 validator: (value) => _validateStartTime(value),
               ),
               TextFormField(
-                controller: _automaticPhoneTimeController,
+                controller: automaticPhoneTimeController,
 //                keyboardType: TextInputType.datetime,
                 decoration: const InputDecoration(
                   labelText: 'Время старта на смартфоне',
@@ -143,7 +143,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
 //                validator: (value) => _validateStartTime(value),
               ),
               TextFormField(
-                controller: _manualCorrectionController,
+                controller: manualCorrectionController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   icon: Icon(MdiIcons.handBackLeft),
@@ -152,7 +152,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
                 validator: (value) => _validateCorrection(value),
               ),
               TextFormField(
-                controller: _manualStartTimeController,
+                controller: manualStartTimeController,
                 keyboardType: TextInputType.datetime,
                 decoration: const InputDecoration(
                   labelText: 'Время старта',
@@ -172,7 +172,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
           ),
           TextButton(
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
+              if (formKey.currentState!.validate()) {
                 if (_updateAllStart()) {
                   BlocProvider.of<ProtocolBloc>(context)
                       .add(ProtocolUpdateItemInfoAtStart(item: item));

@@ -1,12 +1,12 @@
 part of 'settings_popups.dart';
 
 Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
-  int _limit = limit;
+  int newLimit = limit;
 
-  final _delayController = TextEditingController();
-  _delayController.text = (_limit < 0 ? '' : _limit).toString();
+  final delayController = TextEditingController();
+  delayController.text = (newLimit < 0 ? '' : newLimit).toString();
 
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   return showDialog<int>(
       context: context,
@@ -17,7 +17,7 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
           scrollable: true,
           title: const Text('Количество отображамых строк в журнале'),
           content: Form(
-            key: _formKey,
+            key: formKey,
             onChanged: () {
               Form.of(primaryFocus!.context!)!.validate();
             },
@@ -29,17 +29,17 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
                   autofocus: true,
                   decoration:
                       const InputDecoration(labelText: 'Количество строк'),
-                  controller: _delayController,
+                  controller: delayController,
                   validator: (value) {
                     if (value == null || value == '' || value == '-') {
-                      _limit = -1;
+                      newLimit = -1;
                       return null;
                     }
                     final int? val = int.tryParse(value);
                     if (val == null) {
                       return 'Введите положительное число,\r\nпустая строка или отрицательное\r\n- без ограничений';
                     }
-                    _limit = val;
+                    newLimit = val;
                     return null;
                   },
                 ),
@@ -55,11 +55,11 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
             ),
             TextButton(
               onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  if (_limit < -1) {
-                    _limit = -1;
+                if (formKey.currentState!.validate()) {
+                  if (newLimit < -1) {
+                    newLimit = -1;
                   }
-                  Navigator.of(context).pop(_limit);
+                  Navigator.of(context).pop(newLimit);
                 }
               },
               child: Text(MaterialLocalizations.of(context).okButtonLabel),

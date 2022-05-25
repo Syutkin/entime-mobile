@@ -79,10 +79,10 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
       setState(() {
         final Iterator<BluetoothDeviceWithAvailability> i = devices.iterator;
         while (i.moveNext()) {
-          final _device = i.current;
-          if (_device.device == r.device) {
-            _device.availability = BluetoothDeviceAvailability.yes;
-            _device.rssi = r.rssi;
+          final device = i.current;
+          if (device.device == r.device) {
+            device.availability = BluetoothDeviceAvailability.yes;
+            device.rssi = r.rssi;
           }
         }
       });
@@ -105,12 +105,12 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   @override
   Widget build(BuildContext context) {
     final List<BluetoothDeviceListEntry> list = devices
-        .map((_device) => BluetoothDeviceListEntry(
-              device: _device.device,
-              rssi: _device.rssi,
+        .map((device) => BluetoothDeviceListEntry(
+              device: device.device,
+              rssi: device.rssi,
 //      enabled: _device.availability == BluetoothDeviceAvailability.yes,
               onTap: () {
-                Navigator.of(context).pop(_device);
+                Navigator.of(context).pop(device);
               },
             ))
         .toList();

@@ -115,7 +115,7 @@ Future<int?> buzzerFrequencyPopup(
     return 53; //default, note E5, 659Hz
   }
 
-  double _value = _startNote().toDouble();
+  double value = _startNote().toDouble();
 
   return showDialog<int>(
     context: context,
@@ -129,15 +129,15 @@ Future<int?> buzzerFrequencyPopup(
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('Нота ${notes[_value.toInt()].name}, ${notes[_value.toInt()].frequency}Гц'),
+              Text('Нота ${notes[value.toInt()].name}, ${notes[value.toInt()].frequency}Гц'),
               Slider(
-                value: _value,
+                value: value,
                 min: 0,
                 max: notes.length.toDouble() - 1,
                 //label: '${notes[_value.toInt()].name}',
                 divisions: notes.length,
                 onChanged: (newValue) {
-                  setState(() => _value = newValue);
+                  setState(() => value = newValue);
                 },
               ),
             ],
@@ -152,7 +152,7 @@ Future<int?> buzzerFrequencyPopup(
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop(notes[_value.toInt()].frequency);
+              Navigator.of(context).pop(notes[value.toInt()].frequency);
             },
             child: Text(MaterialLocalizations.of(context).okButtonLabel),
           ),

@@ -6,7 +6,7 @@ Future<double?> setFloatingButtonSizePopup(
   String text = '',
 }) async {
   // text = 'Размер кнопки "+"';
-  double _value = value;
+  double newValue = value;
   return showDialog<double>(
       context: context,
       barrierDismissible: true,
@@ -20,13 +20,13 @@ Future<double?> setFloatingButtonSizePopup(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Slider(
-                    value: _value,
+                    value: newValue,
                     min: 50,
                     max: 200,
-                    label: '${_value.round()}px',
+                    label: '${newValue.round()}px',
                     divisions: 150,
-                    onChanged: (newValue) {
-                      setState(() => _value = newValue);
+                    onChanged: (value) {
+                      setState(() => newValue = value);
                     },
                   ),
                 ],
@@ -42,7 +42,7 @@ Future<double?> setFloatingButtonSizePopup(
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(_value);
+                Navigator.of(context).pop(newValue);
               },
               child: Text(MaterialLocalizations.of(context).okButtonLabel),
             ),

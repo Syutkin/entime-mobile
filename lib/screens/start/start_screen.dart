@@ -186,10 +186,10 @@ class _StartScreen extends State<StartScreen> {
                 text: countdownState.text,
               );
               return Draggable(
-                child: countdownWidget,
                 feedback: countdownWidget,
                 childWhenDragging: const SizedBox(width: 0, height: 0),
                 onDragEnd: (dragDetails) => _placeCountdownWidget(dragDetails),
+                child: countdownWidget,
               );
             } else {
               final countdownWidget = CountdownWidget(
@@ -197,10 +197,10 @@ class _StartScreen extends State<StartScreen> {
                 size: settingsState.countdownSize,
               );
               return Draggable(
-                child: countdownWidget,
                 feedback: countdownWidget,
                 childWhenDragging: const SizedBox(width: 0, height: 0),
                 onDragEnd: (dragDetails) => _placeCountdownWidget(dragDetails),
+                child: countdownWidget,
               );
             }
           }),

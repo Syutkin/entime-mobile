@@ -5,11 +5,11 @@ import '../../../blocs/protocol/protocol_bloc.dart';
 import '../../../models/models.dart';
 
 Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
-  final _numberController = TextEditingController();
-  _numberController.text = (item.number ?? '').toString();
+  final numberController = TextEditingController();
+  numberController.text = (item.number ?? '').toString();
   int number = 0;
-  final _protocolBloc = BlocProvider.of<ProtocolBloc>(context);
-  final _formKey = GlobalKey<FormState>();
+  final protocolBloc = BlocProvider.of<ProtocolBloc>(context);
+  final formKey = GlobalKey<FormState>();
   return showDialog<void>(
     context: context,
     barrierDismissible: true,
@@ -19,7 +19,7 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
         scrollable: true,
         title: const Text('Введите номер финишировавшего участника'),
         content: Form(
-          key: _formKey,
+          key: formKey,
           onChanged: () {
             Form.of(primaryFocus!.context!)!.validate();
           },
@@ -30,7 +30,7 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
                 keyboardType: TextInputType.number,
                 autofocus: true,
                 decoration: const InputDecoration(labelText: 'Номер'),
-                controller: _numberController,
+                controller: numberController,
                 validator: (value) {
                   if (value == null) {
                     return 'Неверный номер';
@@ -55,8 +55,8 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
           ),
           TextButton(
             onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                _protocolBloc.add(ProtocolSetNumberToFinishTime(
+              if (formKey.currentState!.validate()) {
+                protocolBloc.add(ProtocolSetNumberToFinishTime(
                   id: item.id,
                   number: number,
                   finishTime: item.finishtime,
@@ -74,9 +74,9 @@ Future<void> addNumberPopup(BuildContext context, FinishItem item) async {
                 final bool? update =
                     await updateFinishTimePopup(context, number);
                 if (update != null && update) {
-                  _protocolBloc
+                  protocolBloc
                       .add(ProtocolClearNumberAtFinish(number: number));
-                  _protocolBloc.add(ProtocolSetNumberToFinishTime(
+                  protocolBloc.add(ProtocolSetNumberToFinishTime(
                     id: item.id,
                     number: number,
                     finishTime: item.finishtime,

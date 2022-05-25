@@ -198,47 +198,47 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   }
 
   void _parseBT(String message, DateTime timeStamp) {
-    String _message = message;
+    String parsedMessage = message;
     logBloc.add(LogAdd(
       level: LogLevel.information,
       source: LogSource.bluetooth,
       direction: LogSourceDirection.input,
-      rawData: _message,
+      rawData: parsedMessage,
     ));
-    if (_message.startsWith(r'$') && _message.endsWith('#')) {
-      _message = _message.substring(1, _message.length - 1);
-      final List<String> _messageList = _message.split(';');
-      final int? correction = int.tryParse(_messageList[1]);
+    if (parsedMessage.startsWith(r'$') && parsedMessage.endsWith('#')) {
+      parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
+      final List<String> messageList = parsedMessage.split(';');
+      final int? correction = int.tryParse(messageList[1]);
       logger.d('Bluetooth -> correction: $correction');
-      logger.d('Bluetooth -> gotime: ${_messageList.first}');
+      logger.d('Bluetooth -> gotime: ${messageList.first}');
       if (correction != null) {
         final AutomaticStart automaticStart =
-            AutomaticStart(_messageList.first, correction, timeStamp, updating: true);
+            AutomaticStart(messageList.first, correction, timeStamp, updating: true);
         protocolBloc.add(ProtocolUpdateAutomaticCorrection(automaticStart));
       } else {
         logger.e(
-            'Bluetooth -> Something wrong with parsing Bluetooth packet $_message');
+            'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage');
       }
-    } else if (_message.startsWith('B') && _message.endsWith('#')) {
-      _message = _message.substring(1, _message.length - 1);
-      logger.v('Bluetooth -> Message parsed: beep: $_message');
-      _countdown(_message);
-    } else if (_message.startsWith('V') && _message.endsWith('#')) {
-      _message = _message.substring(1, _message.length - 1);
-      logger.v('Bluetooth -> Message parsed: speak: $_message');
-      _voice(_message);
-    } else if (_message.startsWith('F') && _message.endsWith('#')) {
-      _message = _message.substring(1, _message.length - 1);
-      logger.v('Bluetooth -> Message parsed: finish: $_message');
+    } else if (parsedMessage.startsWith('B') && parsedMessage.endsWith('#')) {
+      parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
+      logger.v('Bluetooth -> Message parsed: beep: $parsedMessage');
+      _countdown(parsedMessage);
+    } else if (parsedMessage.startsWith('V') && parsedMessage.endsWith('#')) {
+      parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
+      logger.v('Bluetooth -> Message parsed: speak: $parsedMessage');
+      _voice(parsedMessage);
+    } else if (parsedMessage.startsWith('F') && parsedMessage.endsWith('#')) {
+      parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
+      logger.v('Bluetooth -> Message parsed: finish: $parsedMessage');
       protocolBloc.add(ProtocolAddFinishTime(
-        time: _message,
+        time: parsedMessage,
         timeStamp: timeStamp,
       ));
-    } else if (_message.startsWith('{') && _message.endsWith('}')) {
+    } else if (parsedMessage.startsWith('{') && parsedMessage.endsWith('}')) {
       logger.i('Bluetooth -> Parsing JSON...');
-      moduleSettingsBloc.add(GetModuleSettings(_message));
+      moduleSettingsBloc.add(GetModuleSettings(parsedMessage));
     } else {
-      logger.e('Bluetooth -> Cannot parse data: $_message');
+      logger.e('Bluetooth -> Cannot parse data: $parsedMessage');
     }
   }
 
@@ -262,7 +262,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     if (_protocolSelectedState) {
       List<StartItem> participant;
       final List<String> start = [];
-      String _newVoiceText = '';
+      String newVoiceText = '';
 
       //высчитываем диапазоны времени участников
       DateTime? dateTime = strTimeToDateTime(time);
@@ -277,20 +277,20 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
         _isBetweenCategory = false;
         logger.d(
             'First participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory');
-        _newVoiceText = 'На старт приглашается номер ${participant.first.number}';
+        newVoiceText = 'На старт приглашается номер ${participant.first.number}';
         if (_voiceName && participant.first.name != null) {
-          _newVoiceText += ', ${participant.first.name}.';
+          newVoiceText += ', ${participant.first.name}.';
         } else {
-          _newVoiceText += '.';
+          newVoiceText += '.';
         }
         participant =
             await ProtocolProvider.db.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
-          _newVoiceText += ' Следующий номер ${participant.first.number}';
+          newVoiceText += ' Следующий номер ${participant.first.number}';
           if (_voiceName && participant.first.name != null) {
-            _newVoiceText += ', ${participant.first.name}.';
+            newVoiceText += ', ${participant.first.name}.';
           } else {
-            _newVoiceText += '.';
+            newVoiceText += '.';
           }
         }
       } else {
@@ -301,11 +301,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
           _isBetweenCategory = false;
           logger.d(
               'Second participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory');
-          _newVoiceText = 'Готовится номер ${participant.first.number}';
+          newVoiceText = 'Готовится номер ${participant.first.number}';
           if (_voiceName && participant.first.name != null) {
-            _newVoiceText += ', ${participant.first.name}.';
+            newVoiceText += ', ${participant.first.name}.';
           } else {
-            _newVoiceText += '.';
+            newVoiceText += '.';
           }
         } else {
           // если нет стартов в следующие две минуты,
@@ -324,20 +324,20 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
               }
               if (lastStart != null && nextStart != null) {
                 final Duration delay = nextStart.difference(lastStart);
-                _newVoiceText =
+                newVoiceText =
                     'Старт следующего участника номер ${participant.first.number}, ';
-                _newVoiceText += 'через ${delay.inMinutes} мин 30 с';
+                newVoiceText += 'через ${delay.inMinutes} мин 30 с';
               }
             } else {
               // если это был последний старт (следующий участник не найден),
               // сообщить об окончании стартов
               _isStarted = false;
-              _newVoiceText = 'Старты окончены, спасибо';
+              newVoiceText = 'Старты окончены, спасибо';
             }
           }
         }
       }
-      audioBloc.add(Speak(_newVoiceText));
+      audioBloc.add(Speak(newVoiceText));
     } else {
       logger.i('Bluetooth -> Protocol not selected');
     }

@@ -1,7 +1,7 @@
 part of 'settings_popups.dart';
 
 Future<double?> setRatePopup(BuildContext context, SettingsState settings) async {
-  double _value = settings.rate;
+  double value = settings.rate;
   return showDialog<double>(
       context: context,
       barrierDismissible: true,
@@ -15,13 +15,13 @@ Future<double?> setRatePopup(BuildContext context, SettingsState settings) async
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Slider(
-                    value: _value,
+                    value: value,
                     min: 0,
                     max: 1,
-                    label: _value.toStringAsFixed(2),
+                    label: value.toStringAsFixed(2),
                     divisions: 100,
                     onChanged: (newValue) {
-                      setState(() => _value = newValue);
+                      setState(() => value = newValue);
                     },
                   ),
                 ],
@@ -37,7 +37,7 @@ Future<double?> setRatePopup(BuildContext context, SettingsState settings) async
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(_value);
+                Navigator.of(context).pop(value);
               },
               child: Text(MaterialLocalizations.of(context).okButtonLabel),
             ),

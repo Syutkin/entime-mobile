@@ -2,12 +2,12 @@ part of 'settings_popups.dart';
 
 Future<int?> setDelayPopup(
     BuildContext context, int delay, String title) async {
-  int _delay = delay;
+  int newDelay = delay;
 
-  final _delayController = TextEditingController();
-  _delayController.text = _delay.toString();
+  final delayController = TextEditingController();
+  delayController.text = newDelay.toString();
 
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   return showDialog<int>(
       context: context,
@@ -18,7 +18,7 @@ Future<int?> setDelayPopup(
           scrollable: true,
           title: Text(title),
           content: Form(
-            key: _formKey,
+            key: formKey,
             onChanged: () {
               Form.of(primaryFocus!.context!)!.validate();
             },
@@ -29,7 +29,7 @@ Future<int?> setDelayPopup(
                   keyboardType: TextInputType.number,
                   autofocus: true,
                   decoration: const InputDecoration(labelText: 'Задержка'),
-                  controller: _delayController,
+                  controller: delayController,
                   validator: (value) {
                     if (value == null) {
                       return 'Неверная задержка';
@@ -38,7 +38,7 @@ Future<int?> setDelayPopup(
                     if (integer == null || integer < 0) {
                       return 'Неверная задержка';
                     }
-                    _delay = integer;
+                    newDelay = integer;
                     return null;
                   },
                 ),
@@ -54,8 +54,8 @@ Future<int?> setDelayPopup(
             ),
             TextButton(
               onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  Navigator.of(context).pop(_delay);
+                if (formKey.currentState!.validate()) {
+                  Navigator.of(context).pop(newDelay);
                 }
               },
               child: Text(MaterialLocalizations.of(context).okButtonLabel),

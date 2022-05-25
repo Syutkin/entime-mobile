@@ -316,7 +316,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _finishFilterButton(BuildContext context, AppTab activeTab) {
-    final _bloc = BlocProvider.of<SettingsBloc>(context);
+    final bloc = BlocProvider.of<SettingsBloc>(context);
     return BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, protocolState) {
       if (activeTab == AppTab.finish) {
@@ -324,21 +324,21 @@ class HomeScreen extends StatelessWidget {
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideMarked,
-            checked: !_bloc.state.hideMarked,
+            checked: !bloc.state.hideMarked,
             child: const Text('Скрытые'),
           ),
         );
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideNumbers,
-            checked: !_bloc.state.hideNumbers,
+            checked: !bloc.state.hideNumbers,
             child: const Text('С номерами'),
           ),
         );
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideManual,
-            checked: !_bloc.state.hideManual,
+            checked: !bloc.state.hideManual,
             child: const Text('Ручная отсечка'),
           ),
         );
@@ -358,19 +358,19 @@ class HomeScreen extends StatelessWidget {
             onSelected: (value) async {
               switch (value) {
                 case FilterFinish.hideMarked:
-                  _bloc.add(
-                      SetBoolValueEvent(hideMarked: !_bloc.state.hideMarked));
+                  bloc.add(
+                      SetBoolValueEvent(hideMarked: !bloc.state.hideMarked));
                   break;
                 case FilterFinish.hideNumbers:
-                  _bloc.add(
-                      SetBoolValueEvent(hideNumbers: !_bloc.state.hideNumbers));
+                  bloc.add(
+                      SetBoolValueEvent(hideNumbers: !bloc.state.hideNumbers));
                   break;
                 case FilterFinish.hideManual:
-                  _bloc.add(
-                      SetBoolValueEvent(hideManual: !_bloc.state.hideManual));
+                  bloc.add(
+                      SetBoolValueEvent(hideManual: !bloc.state.hideManual));
                   break;
                 case FilterFinish.setDefaults:
-                  _bloc.add(const SetBoolValueEvent(
+                  bloc.add(const SetBoolValueEvent(
                     hideMarked: true,
                     hideNumbers: false,
                     hideManual: false,

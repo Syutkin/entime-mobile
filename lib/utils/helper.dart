@@ -108,7 +108,7 @@ Future<String?> createNewProtocolFile(BuildContext context,
 
 Future<String?> _createFile(BuildContext context, [String? initialName]) async {
   String? result;
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   return showDialog<String>(
     context: context,
     barrierDismissible: true,
@@ -117,7 +117,7 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
         //scrollable: true,
         title: const Text('Создать'),
         content: Form(
-          key: _formKey,
+          key: formKey,
           onChanged: () {
             Form.of(primaryFocus!.context!)!.validate();
           },
@@ -153,7 +153,7 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
           ),
           TextButton(
             onPressed: () async {
-              if (_formKey.currentState!.validate()) {
+              if (formKey.currentState!.validate()) {
                 final Directory? externalStorageDirectory =
                     await getExternalStorageDirectory();
                 String? localFileName;

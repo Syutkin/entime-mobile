@@ -1,7 +1,7 @@
 part of 'settings_popups.dart';
 
 Future<double?> setVolumePopup(BuildContext context, SettingsState settings) async {
-  double _value = settings.volume;
+  double value = settings.volume;
   return showDialog<double>(
       context: context,
       barrierDismissible: true,
@@ -15,13 +15,13 @@ Future<double?> setVolumePopup(BuildContext context, SettingsState settings) asy
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Slider(
-                    value: _value,
+                    value: value,
                     min: 0,
                     max: 1,
-                    label: '${(_value * 100).round()}%',
+                    label: '${(value * 100).round()}%',
                     divisions: 100,
                     onChanged: (newValue) {
-                      setState(() => _value = newValue);
+                      setState(() => value = newValue);
                     },
                   ),
                 ],
@@ -37,7 +37,7 @@ Future<double?> setVolumePopup(BuildContext context, SettingsState settings) asy
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(_value);
+                Navigator.of(context).pop(value);
               },
               child: Text(MaterialLocalizations.of(context).okButtonLabel),
             ),

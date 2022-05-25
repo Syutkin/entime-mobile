@@ -28,7 +28,7 @@ class UpdateProvider {
 
   File? _downloadedFile;
 
-  late AppInfoProvider _packageInfo;
+  late AppInfoProvider _appInfo;
   late DownloadHandler _downloadHandler;
   late VoidCallback _onDownloadComplete;
   late ErrorHandler _onError;
@@ -51,7 +51,7 @@ class UpdateProvider {
   }
 
   Future<void> _init() async {
-    _packageInfo = await AppInfoProvider.load();
+    _appInfo = await AppInfoProvider.load();
   }
 
   // Вынесено сюда, чтобы можно было останавливать скачивание из UI
@@ -81,7 +81,7 @@ class UpdateProvider {
       if (_latestRelease != null) {
         final latestVersion = Version.parse(_latestRelease!.tagName);
         final currentVersion = Version.parse(
-            '${_packageInfo.version}+${_packageInfo.buildNumber}');
+            '${_appInfo.version}+${_appInfo.buildNumber}');
         if (latestVersion > currentVersion) {
           logger.i('Update_provider: Update to $latestVersion available');
           _canUpdate = true;
@@ -112,7 +112,7 @@ class UpdateProvider {
 
   Future<void> downloadUpdate() async {
     if (await Permission.storage.request().isGranted) {
-      if (_canUpdate && _latestRelease != null && _packageInfo.abi != null) {
+      if (_canUpdate && _latestRelease != null && _appInfo.abi != null) {
         try {
           if (Platform.isAndroid) {
             _dir = '/storage/emulated/0/Download';
@@ -120,13 +120,13 @@ class UpdateProvider {
             _dir = (await getApplicationDocumentsDirectory()).path;
           }
           _downloadedFile = File(
-              '$_dir/${_packageInfo.appName}-${_latestRelease!.tagName}-${_packageInfo.abi}.apk');
+              '$_dir/${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk');
 
           String url = '';
 
           for (final asset in _latestRelease!.assets) {
             if (asset.name ==
-                '${_packageInfo.appName}-${_latestRelease!.tagName}-${_packageInfo.abi}.apk') {
+                '${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk') {
               url = asset.browserDownloadUrl;
             }
           }
@@ -184,15 +184,15 @@ class UpdateProvider {
 
   Future<ShowChangelog> showChangelog() async {
     final ShowChangelog showChangelog = ShowChangelog();
-    final _packageInfo = await PackageInfo.fromPlatform();
-    final _prefs = await SharedPreferences.getInstance();
+    final packageInfo = await PackageInfo.fromPlatform();
+    final prefs = await SharedPreferences.getInstance();
     final previousVersion =
-        Version.parse(_prefs.getString('previousVersion') ?? '0.0.0');
-    final currentVersion = Version.parse(_packageInfo.version);
+        Version.parse(prefs.getString('previousVersion') ?? '0.0.0');
+    final currentVersion = Version.parse(packageInfo.version);
     // Не показывать ченджлог для не релизных версий и первого запуска
     // Не изменять значение последней запущенной версии для не релизных версий
     if (!currentVersion.isPreRelease) {
-      unawaited(_prefs.setString('previousVersion', _packageInfo.version));
+      unawaited(prefs.setString('previousVersion', packageInfo.version));
       if (currentVersion > previousVersion &&
           previousVersion != Version.parse('0.0.0')) {
         showChangelog.show = true;

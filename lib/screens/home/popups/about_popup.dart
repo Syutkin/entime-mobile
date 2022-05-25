@@ -58,18 +58,18 @@ class AboutPopup extends StatelessWidget {
                               text: 'syutkin@fraction.team',
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () async {
-                                  final Uri _emailLaunchUri = Uri(
+                                  final Uri emailLaunchUri = Uri(
                                       scheme: 'mailto',
                                       path: 'syutkin@fraction.team',
                                       queryParameters: {
                                         'subject':
                                             'Entime замечания/предложения'
                                       });
-                                  if (await canLaunchUrl(_emailLaunchUri)) {
-                                    await launchUrl(_emailLaunchUri);
+                                  if (await canLaunchUrl(emailLaunchUri)) {
+                                    await launchUrl(emailLaunchUri);
                                   } else {
                                     final Error error = ArgumentError(
-                                        'Could not launch $_emailLaunchUri');
+                                        'Could not launch $emailLaunchUri');
                                     throw error;
                                   }
                                 },

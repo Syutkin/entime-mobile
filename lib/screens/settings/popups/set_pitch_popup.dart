@@ -1,7 +1,7 @@
 part of 'settings_popups.dart';
 
 Future<double?> setPitchPopup(BuildContext context, SettingsState settings) async {
-  double _value = settings.pitch;
+  double value = settings.pitch;
   return showDialog<double>(
       context: context,
       barrierDismissible: true,
@@ -15,13 +15,13 @@ Future<double?> setPitchPopup(BuildContext context, SettingsState settings) asyn
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Slider(
-                    value: _value,
+                    value: value,
                     min: 0.5,
                     max: 2,
-                    label: ((_value * 100).round() / 100).toStringAsFixed(2),
+                    label: ((value * 100).round() / 100).toStringAsFixed(2),
                     divisions: 150,
                     onChanged: (newValue) {
-                      setState(() => _value = newValue);
+                      setState(() => value = newValue);
                     },
                   ),
                 ],
@@ -37,7 +37,7 @@ Future<double?> setPitchPopup(BuildContext context, SettingsState settings) asyn
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(_value);
+                Navigator.of(context).pop(value);
               },
               child: Text(MaterialLocalizations.of(context).okButtonLabel),
             ),

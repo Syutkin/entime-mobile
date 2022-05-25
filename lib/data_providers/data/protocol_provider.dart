@@ -514,7 +514,7 @@ class ProtocolProvider {
     int? number,
   }) async {
     int? hide;
-    int? _number = number;
+    int? workingNumber = number;
     // узнаём предыдущее нескрытое автоматическое время
     final prevFinishTime = await _prevFinishTime();
     // проверяем разницу между предыдущей и поступившей отсечкой
@@ -535,10 +535,10 @@ class ProtocolProvider {
     // если автоматически ставим номер, то ставим номер только в нескрытую отсечку,
     // если разница между предыдущим временем с финишем больше настройки
     // или нет предыдущей нескрытой отсечки
-    if (_number == null && substituteNumbers && hide == null) {
+    if (workingNumber == null && substituteNumbers && hide == null) {
       // если нет нескрытого предыдущего времени - ставим номер
       if (prevFinishTime == null) {
-        _number = await _getAwaitingNumber(debugTimeNow);
+        workingNumber = await _getAwaitingNumber(debugTimeNow);
       } else {
         // ищем предыдущее время финиша с номером
         final lastFinishTime = await _lastFinishTime();
@@ -552,11 +552,11 @@ class ProtocolProvider {
           }
           final difference = finishTime.difference(lastFinishTime);
           if (difference.inMilliseconds > substituteNumbersDelay) {
-            _number = await _getAwaitingNumber(debugTimeNow);
+            workingNumber = await _getAwaitingNumber(debugTimeNow);
           }
           // если предыдущего времени с номером нет - ставим номер
         } else {
-          _number = await _getAwaitingNumber(debugTimeNow);
+          workingNumber = await _getAwaitingNumber(debugTimeNow);
         }
       }
     }
@@ -567,16 +567,16 @@ class ProtocolProvider {
       'finishtime': finish,
       'phonetime': phoneTime,
       '"set"': hide,
-      'number': _number,
+      'number': workingNumber,
     });
     logger.i('Database -> Automatic finish time added: $finish');
-    if (_number != null) {
+    if (workingNumber != null) {
       await db.update('start', {'finishtime': finish},
-          where: 'number = $_number');
+          where: 'number = $workingNumber');
       logger.i(
-          'Database -> Automatically add number $_number to finish time: $finish');
+          'Database -> Automatically add number $workingNumber to finish time: $finish');
     }
-    return _number;
+    return workingNumber;
   }
 
   Future<int> addFinishTimeManual(String time) async {

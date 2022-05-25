@@ -14,7 +14,7 @@ Future<void> addRacerPopup(BuildContext context) async {
       ? duration
       : Duration.zero;
   int number = 0;
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   return showDialog<void>(
     context: context,
     barrierDismissible: true,
@@ -25,7 +25,7 @@ Future<void> addRacerPopup(BuildContext context) async {
         // scrollable: true,
         title: const Text('Добавить участника'),
         content: Form(
-          key: _formKey,
+          key: formKey,
           onChanged: () {
             Form.of(primaryFocus!.context!)!.validate();
           },
@@ -74,7 +74,7 @@ Future<void> addRacerPopup(BuildContext context) async {
           ),
           TextButton(
             onPressed: () async {
-              if (_formKey.currentState!.validate()) {
+              if (formKey.currentState!.validate()) {
                 // Форматирование Duration отсюда:
                 // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
                 final String starttime =

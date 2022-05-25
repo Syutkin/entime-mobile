@@ -20,8 +20,8 @@ class SoundpoolProvider extends BeepProvider {
   }
 
   Future<void> _playSound() async {
-    final _alarmSound = await soundId;
-    unawaited(pool.play(_alarmSound));
+    final alarmSound = await soundId;
+    unawaited(pool.play(alarmSound));
   }
 
   @override
