@@ -73,6 +73,7 @@ class AppInfoProvider {
         }
       }
     }
+    return null;
   }
 
   List<String?> get deviceSupported32BitAbis => _deviceInfo.supported32BitAbis;
