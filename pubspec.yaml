@@ -11,7 +11,7 @@ description: A mobile application for Entime project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.4.4+54
+version: 0.4.4+55
 
 environment:
   sdk: '>=2.14.0 <3.0.0'
@@ -22,11 +22,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  bloc_concurrency: ^0.2.0
   bot_toast: ^4.0.1
   csv: ^5.0.1
   device_info_plus: ^3.2.1
   equatable: ^2.0.3
-  file_picker: ^4.3.1
+  file_picker: ^4.3.3
   filesize: ^2.0.1
   flutter_bloc: ^8.0.1
   flutter_bluetooth_serial: ^0.4.0
@@ -45,22 +46,22 @@ dependencies:
   pub_semver: ^2.1.0
   flutter_settings_ui: ^2.0.1
   share_plus: ^3.0.4
-  shared_preferences: ^2.0.12
+  shared_preferences: ^2.0.13
   soundpool: ^2.2.0
   sqflite: ^2.0.2
   url_launcher: ^6.0.18
-  wakelock: ^0.6.0+1
+  wakelock: ^0.6.1+1
 
 dependency_overrides:
   flutter_bluetooth_serial:
     git: https://github.com/Syutkin/flutter_bluetooth_serial.git
 
 dev_dependencies:
-  dart_code_metrics: ^4.9.1
+  dart_code_metrics: ^4.10.1
   flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
-  sqflite_common_ffi: ^2.1.0+1
+  sqflite_common_ffi: ^2.1.0+2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

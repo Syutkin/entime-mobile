@@ -8,6 +8,7 @@ class SimpleBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
+
     if (bloc.toString() != "Instance of 'CountdownBloc'") {
       logger.d('Event: $event');
     }

@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
       await runMain();
     },
     blocObserver: SimpleBlocObserver(),
+    eventTransformer: bloc_concurrency.sequential(),
   );
 }
 
