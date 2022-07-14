@@ -221,11 +221,17 @@ class _FinishPage extends State<FinishScreen> {
       switch (result) {
         case FinishPopupMenu.clearNumber:
           if (number != null) {
+            if (!mounted) {
+              return;
+            }
             BlocProvider.of<ProtocolBloc>(context)
                 .add(ProtocolClearNumberAtFinish(number: number));
           }
           break;
         case FinishPopupMenu.hideAll:
+          if (!mounted) {
+            return;
+          }
           BlocProvider.of<ProtocolBloc>(context)
               .add(ProtocolHideAllFinishResults());
           break;
@@ -274,10 +280,16 @@ class _FinishPage extends State<FinishScreen> {
         case ParticipantStatus.active:
           break;
         case ParticipantStatus.dns:
+          if (!mounted) {
+            return;
+          }
           BlocProvider.of<ProtocolBloc>(context)
               .add(ProtocolSetDNS(number: number));
           break;
         case ParticipantStatus.dnf:
+          if (!mounted) {
+            return;
+          }
           BlocProvider.of<ProtocolBloc>(context)
               .add(ProtocolSetDNF(number: number));
           break;

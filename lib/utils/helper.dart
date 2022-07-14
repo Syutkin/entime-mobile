@@ -96,12 +96,13 @@ void scrollToEnd(ScrollController scrollController) {
 Future<String?> createNewProtocolFile(BuildContext context,
     [PlatformFile? csv]) async {
   String? fileName;
+  final bloc = BlocProvider.of<ProtocolBloc>(context);
   if (csv != null) {
     fileName = basenameWithoutExtension(csv.name);
   }
   final String? newFile = await _createFile(context, fileName);
   if (newFile != null) {
-    BlocProvider.of<ProtocolBloc>(context).add(SelectProtocol(newFile, csv));
+    bloc.add(SelectProtocol(newFile, csv));
   }
   return newFile;
 }
@@ -109,6 +110,7 @@ Future<String?> createNewProtocolFile(BuildContext context,
 Future<String?> _createFile(BuildContext context, [String? initialName]) async {
   String? result;
   final formKey = GlobalKey<FormState>();
+  final navigator = Navigator.of(context);
   return showDialog<String>(
     context: context,
     barrierDismissible: true,
@@ -134,7 +136,8 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
                   if (value == null) {
                     return null;
                   }
-                  final RegExp regExp = RegExp(r'^[а-яА-ЯёЁa-zA-Z0-9\-\+\.\_! ]+$');
+                  final RegExp regExp =
+                      RegExp(r'^[а-яА-ЯёЁa-zA-Z0-9\-\+\.\_! ]+$');
                   if (regExp.hasMatch(value)) {
                     return null;
                   }
@@ -147,7 +150,7 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
         actions: <Widget>[
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              navigator.pop();
             },
             child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
           ),
@@ -161,7 +164,7 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
                   localFileName = join(externalStorageDirectory.path,
                       basename('$result.sqlite'));
                 }
-                Navigator.of(context).pop(localFileName);
+                navigator.pop(localFileName);
               }
             },
             child: Text(MaterialLocalizations.of(context).okButtonLabel),
@@ -196,7 +199,7 @@ Future<void> loadFile(BuildContext context) async {
 }
 
 Future<PlatformFile?> _pickFile() async {
-  final FilePickerResult? result = await FilePicker.platform.pickFiles(
+  final result = await FilePicker.platform.pickFiles(
     type: FileType.any,
     allowMultiple: false,
     // allowedExtensions: ['sqlite', 'db', 'csv'],
@@ -209,7 +212,8 @@ Future<PlatformFile?> _pickFile() async {
 // выбранного файла
 Future<File?> _checkExists(BuildContext context, File file) async {
   final String fileName = basename(file.path);
-  final Directory? externalStorageDirectory = await getExternalStorageDirectory();
+  final Directory? externalStorageDirectory =
+      await getExternalStorageDirectory();
   if (externalStorageDirectory != null) {
     final String localFileName =
         join(externalStorageDirectory.path, basename(fileName));
@@ -237,7 +241,7 @@ File _copyFile(File sourceFile, String newPath) {
   }
 }
 
-Future<bool?> _overwriteFile(BuildContext context, String localFileName) async {
+Future<bool?> _overwriteFile(BuildContext context, String localFileName) {
   return showDialog<bool>(
     context: context,
     barrierDismissible: false,

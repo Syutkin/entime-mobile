@@ -88,9 +88,10 @@ class AboutPopup extends StatelessWidget {
       actions: <Widget>[
         TextButton(
           onPressed: () async {
+            final navigator = Navigator.of(context);
             final String changelogData =
                 await rootBundle.loadString('CHANGELOG.md');
-            await Navigator.of(context).push(MaterialPageRoute<void>(
+            await navigator.push(MaterialPageRoute<void>(
                 builder: (context) =>
                     ChangelogScreen(markdownData: changelogData)));
           },

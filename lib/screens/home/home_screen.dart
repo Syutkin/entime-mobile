@@ -16,6 +16,8 @@ class HomeScreen extends StatelessWidget {
     // Следим за повторной установкой стартового времени для участника
     return BlocListener<ProtocolBloc, ProtocolState>(
       listener: (context, state) async {
+        final protocolBloc = BlocProvider.of<ProtocolBloc>(context);
+        final materialLocalization = MaterialLocalizations.of(context);
         if (state is ProtocolSelectedState) {
           // Обновление автоматического времени старта
           if (state.automaticStart != null && state.automaticStart!.updating) {
@@ -29,8 +31,7 @@ class HomeScreen extends StatelessWidget {
               text: text,
             );
             if (update != null && update) {
-              BlocProvider.of<ProtocolBloc>(context)
-                  .add(ProtocolUpdateAutomaticCorrection(
+              protocolBloc.add(ProtocolUpdateAutomaticCorrection(
                 state.automaticStart!,
                 forceUpdate: true,
               ));
@@ -63,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                 } else {
                   text +=
                       'Ошибка при добавлении участника! Для продолжения нажмите '
-                      '"${MaterialLocalizations.of(context).cancelButtonLabel}"\n';
+                      '"${materialLocalization.cancelButtonLabel}"\n';
                 }
               }
             }
@@ -74,8 +75,8 @@ class HomeScreen extends StatelessWidget {
             );
 
             if (update != null && update) {
-              BlocProvider.of<ProtocolBloc>(context)
-                  .add(ProtocolAddStartNumber(state.startTime!, forceAdd: true));
+              protocolBloc.add(
+                  ProtocolAddStartNumber(state.startTime!, forceAdd: true));
             }
           }
         }
