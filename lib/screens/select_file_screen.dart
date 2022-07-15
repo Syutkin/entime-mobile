@@ -11,6 +11,9 @@ import 'package:share_plus/share_plus.dart';
 import '../blocs/blocs.dart';
 import '../utils/helper.dart';
 
+// ToDo: get rid of this ignore
+// ignore_for_file: use_build_context_synchronously
+
 Future<void> routeToSelectFileScreen(BuildContext context) async {
   await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
     return const SelectFileScreen();
@@ -93,8 +96,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                     },
                   );
                 },
-                separatorBuilder: (context, index) =>
-                    const Divider(
+                separatorBuilder: (context, index) => const Divider(
                   indent: 70,
                   endIndent: 10,
                   thickness: 1,
@@ -110,9 +112,11 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
   Future<List<File>> _getFiles() async {
     final List<File> files = [];
 
-    final Directory? externalStorageDirectory = await getExternalStorageDirectory();
+    final Directory? externalStorageDirectory =
+        await getExternalStorageDirectory();
     if (externalStorageDirectory != null) {
-      final List<FileSystemEntity> allFiles = externalStorageDirectory.listSync();
+      final List<FileSystemEntity> allFiles =
+          externalStorageDirectory.listSync();
       for (final file in allFiles) {
         if (file is File &&
             (extension(file.path) == '.sqlite' ||

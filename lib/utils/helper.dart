@@ -12,6 +12,9 @@ import 'logger.dart';
 
 export 'package:filesize/filesize.dart';
 
+// ToDo: get rid of this ignore
+// ignore_for_file: use_build_context_synchronously
+
 String strip(String? str) {
   if (str == null || str == 'null') {
     return '';
