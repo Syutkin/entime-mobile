@@ -11,7 +11,7 @@ description: A mobile application for Entime project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.4.4+65
+version: 0.4.4+66
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
@@ -25,13 +25,13 @@ dependencies:
   bloc_concurrency: ^0.2.0
   bot_toast: ^4.0.3
   csv: ^5.0.1
-  device_info_plus: ^4.0.0
+  device_info_plus: ^4.0.1
   equatable: ^2.0.3
   file_picker: ^5.0.1
   filesize: ^2.0.1
   flutter_bloc: ^8.0.1
   flutter_bluetooth_serial: ^0.4.0
-  flutter_markdown: ^0.6.10+2
+  flutter_markdown: ^0.6.10+3
   flutter_tts: ^3.5.0
   http: ^0.13.4
   intl: ^0.17.0
@@ -40,7 +40,7 @@ dependencies:
   meta: ^1.7.0
 #  open_file: ^3.2.1
   open_filex: ^3.4.0
-  package_info_plus: ^1.4.2
+  package_info_plus: ^1.4.3
   path: ^1.8.1
   path_provider: ^2.0.11
   permission_handler: ^10.0.0
@@ -60,7 +60,7 @@ dependency_overrides:
     git: https://github.com/GoldenSoju/open_file.git
 
 dev_dependencies:
-  dart_code_metrics: ^4.16.0
+  dart_code_metrics: ^4.17.0
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
