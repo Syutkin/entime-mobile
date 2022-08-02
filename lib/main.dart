@@ -4,13 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'blocs/blocs.dart';
-import 'data_providers/app_info/app_info_provider.dart';
-import 'data_providers/settings/settings_provider.dart';
-import 'data_providers/settings/shared_prefs_settings_provider.dart';
-import 'data_providers/update/update_provider.dart';
-import 'models/theme.dart';
-import 'screens/screens.dart';
+import 'common/bloc/app_bloc_observer.dart';
+import 'feature/app_info/bloc/app_info_cubit.dart';
+import 'feature/app_info/logic/app_info_provider.dart';
+import 'feature/audio/bloc/audio_bloc.dart';
+import 'feature/bluetooth/bloc/bluetooth_bloc.dart';
+import 'feature/countdown/bloc/countdown_bloc.dart';
+import 'feature/home/widget/home_screen.dart';
+import 'feature/log/bloc/log_bloc.dart';
+import 'feature/module_settings/bloc/module_settings_bloc.dart';
+import 'feature/protocol/bloc/protocol_bloc.dart';
+import 'feature/settings/bloc/settings_bloc.dart';
+import 'feature/settings/logic/settings_provider.dart';
+import 'feature/settings/logic/shared_prefs_settings_provider.dart';
+import 'feature/settings/model/theme.dart';
+import 'feature/tab/bloc/tab_bloc.dart';
+import 'feature/update/bloc/update_bloc.dart';
+import 'feature/update/logic/update_provider.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +29,7 @@ Future<void> main() async {
     () async {
       await runMain();
     },
-    blocObserver: SimpleBlocObserver(),
+    blocObserver: AppBlocObserver(),
     eventTransformer: bloc_concurrency.sequential(),
   );
 }
