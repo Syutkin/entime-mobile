@@ -5,7 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:open_file/open_file.dart';
+import 'package:open_filex/open_filex.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -178,7 +178,7 @@ class UpdateProvider {
         _downloaded &&
         _latestRelease != null &&
         _downloadedFile != null) {
-      final result = await OpenFile.open(_downloadedFile!.path);
+      final result = await OpenFilex.open(_downloadedFile!.path);
       logger.d(result.message);
     }
   }
