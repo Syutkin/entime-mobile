@@ -8,7 +8,7 @@ Future<double?> setRatePopup(BuildContext context, SettingsState settings) async
       // dialog is dismissible with a tap on the barrier
       builder: (context) {
         return AlertDialog(
-          title: const Text('Скорость произношения'),
+          title: Text(Localization.current.I18nSettings_voiceRate),
           content: StatefulBuilder(
             builder: (context, setState) {
               return Column(

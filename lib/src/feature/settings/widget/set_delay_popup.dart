@@ -28,15 +28,15 @@ Future<int?> setDelayPopup(
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: true,
-                  decoration: const InputDecoration(labelText: 'Задержка'),
+                  decoration: InputDecoration(labelText: Localization.current.I18nSettings_delay),
                   controller: delayController,
                   validator: (value) {
                     if (value == null) {
-                      return 'Неверная задержка';
+                      return Localization.current.I18nSettings_incorrectDelay;
                     }
                     final int? integer = int.tryParse(value);
                     if (integer == null || integer < 0) {
-                      return 'Неверная задержка';
+                      return Localization.current.I18nSettings_incorrectDelay;
                     }
                     newDelay = integer;
                     return null;

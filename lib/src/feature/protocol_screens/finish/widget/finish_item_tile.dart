@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../common/helper/helper.dart';
+import '../../../../common/localization/localization.dart';
 import '../../../protocol/protocol.dart';
 
 class FinishItemTile<T extends Object> extends StatelessWidget {
@@ -30,7 +31,7 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
           color: Theme.of(context).colorScheme.secondary,
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.all(5),
-          child: Text('Скрыть',
+          child: Text(Localization.current.I18nProtocol_hide,
               style: DefaultTextStyle.of(context).style.apply(
                   fontSizeFactor: 1.5,
                   color: Theme.of(context).colorScheme.onSecondary))),

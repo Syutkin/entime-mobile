@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../common/localization/localization.dart';
 import '../../../protocol/protocol.dart';
 
 Future<void> addFinishNumberPopup(BuildContext context, FinishItem item) async {
@@ -16,7 +17,7 @@ Future<void> addFinishNumberPopup(BuildContext context, FinishItem item) async {
     builder: (context) {
       return AlertDialog(
         scrollable: true,
-        title: const Text('Введите номер финишировавшего участника'),
+        title: Text(Localization.current.I18nProtocol_enterFinishNumber),
         content: Form(
           key: formKey,
           onChanged: () {
@@ -28,15 +29,15 @@ Future<void> addFinishNumberPopup(BuildContext context, FinishItem item) async {
               TextFormField(
                 keyboardType: TextInputType.number,
                 autofocus: true,
-                decoration: const InputDecoration(labelText: 'Номер'),
+                decoration: InputDecoration(labelText: Localization.current.I18nProtocol_number),
                 controller: numberController,
                 validator: (value) {
                   if (value == null) {
-                    return 'Неверный номер';
+                    return Localization.current.I18nProtocol_incorrectNumber;
                   }
                   final int? num = int.tryParse(value);
                   if (num == null || num < 1) {
-                    return 'Неверный номер';
+                    return Localization.current.I18nProtocol_incorrectNumber;
                   }
                   number = num;
                   return null;
@@ -98,9 +99,9 @@ Future<bool?> updateFinishTimePopup(BuildContext context, int number) async {
     // dialog is dismissible with a tap on the barrier
     builder: (context) {
       return AlertDialog(
-        title: const Text('Предупреждение'),
+        title: Text(Localization.current.I18nProtocol_warning),
         content: Text(
-            'Участнику с номером $number уже присвоено финишное время. Установить новое значение?'),
+            Localization.current.I18nProtocol_updateNumber(number)),
         actions: <Widget>[
           TextButton(
             onPressed: () {

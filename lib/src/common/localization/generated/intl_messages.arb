@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-08-06T21:24:40.657743",
+  "@@last_modified": "2022-08-06T23:33:27.277055",
   "I18nUpdate_whatsNew": "Что нового",
   "@I18nUpdate_whatsNew": {
     "type": "text",
@@ -271,6 +271,24 @@
     "placeholders_order": [],
     "placeholders": {}
   },
+  "I18nSettings_journalLinesNumberPopup": "Количество отображамых строк в журнале",
+  "@I18nSettings_journalLinesNumberPopup": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_numberOfLines": "Количество строк",
+  "@I18nSettings_numberOfLines": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_enterNumber": "Введите положительное число,\r\nпустая строка или отрицательное\r\n- без ограничений",
+  "@I18nSettings_enterNumber": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
   "I18nSettings_defaults": "По умолчанию",
   "@I18nSettings_defaults": {
     "type": "text",
@@ -279,6 +297,146 @@
   },
   "I18nSettings_resetToDefaults": "Настройки по умолчанию",
   "@I18nSettings_resetToDefaults": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_delay": "Задержка",
+  "@I18nSettings_delay": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_incorrectDelay": "Неверная задержка",
+  "@I18nSettings_incorrectDelay": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_voicePitch": "Тембр голоса",
+  "@I18nSettings_voicePitch": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_voiceRate": "Скорость произношения",
+  "@I18nSettings_voiceRate": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_voiceVolume": "Громкость голоса",
+  "@I18nSettings_voiceVolume": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_lightBlue": "Синяя светлая тема",
+  "@I18nSettings_lightBlue": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_darkBlue": "Синяя тёмная тема",
+  "@I18nSettings_darkBlue": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_lightRed": "Красная светлая тема",
+  "@I18nSettings_lightRed": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_darkRed": "Красная тёмная тема",
+  "@I18nSettings_darkRed": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_enterFinishNumber": "Введите номер финишировавшего участника",
+  "@I18nProtocol_enterFinishNumber": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_number": "Номер",
+  "@I18nProtocol_number": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_incorrectNumber": "Неверный номер",
+  "@I18nProtocol_incorrectNumber": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_warning": "Предупреждение",
+  "@I18nProtocol_warning": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_updateNumber": "Участнику с номером {number} уже присвоено финишное время. Установить новое значение?",
+  "@I18nProtocol_updateNumber": {
+    "type": "text",
+    "placeholders_order": [
+      "number"
+    ],
+    "placeholders": {
+      "number": {}
+    }
+  },
+  "I18nProtocol_hide": "Скрыть",
+  "@I18nProtocol_hide": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_finishNumber": "Финишировал номер {number}",
+  "@I18nProtocol_finishNumber": {
+    "type": "text",
+    "placeholders_order": [
+      "number"
+    ],
+    "placeholders": {
+      "number": {}
+    }
+  },
+  "I18nProtocol_clearNumber": "Убрать номер",
+  "@I18nProtocol_clearNumber": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_hideAll": "Скрыть всё",
+  "@I18nProtocol_hideAll": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_didNotStart": "Не стартовал",
+  "@I18nProtocol_didNotStart": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_didNotFinish": "Не финишировал",
+  "@I18nProtocol_didNotFinish": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_type": "Тип",
+  "@I18nProtocol_type": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nProtocol_time": "Время",
+  "@I18nProtocol_time": {
     "type": "text",
     "placeholders_order": [],
     "placeholders": {}

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../../../common/localization/i18n.dart';
+import '../../../common/localization/localization.dart';
 import '../bloc/settings_bloc.dart';
 import '../model/theme.dart';
 import 'settings_popups.dart';
 
 class SettingsScreen extends StatefulWidget {
-   const SettingsScreen({
+  const SettingsScreen({
     Key? key,
   }) : super(key: key);
 
@@ -44,7 +45,7 @@ class _SettingsPageState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(I18nSettings.settings),
+        title: Text(Localization.current.I18nSettings_settings),
       ),
       body: settingsList(context),
     );
@@ -57,10 +58,10 @@ class _SettingsPageState extends State<SettingsScreen> {
         return SettingsList(
           sections: [
             SettingsSection(
-              title: Text(I18nSettings.general),
+              title: Text(Localization.current.I18nSettings_general),
               tiles: [
                 SettingsTile.switchTile(
-                  title: Text(I18nSettings.bluetooth),
+                  title: Text(Localization.current.I18nSettings_bluetooth),
                   //leading:  Icon(Icons.bluetooth),
                   initialValue: _bluetoothState.isEnabled,
                   onToggle: (value) {
@@ -82,8 +83,9 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: Text(I18nSettings.reconnect),
-                  description: Text(I18nSettings.reconnectDescription),
+                  title: Text(Localization.current.I18nSettings_reconnect),
+                  description: Text(
+                      Localization.current.I18nSettings_reconnectDescription),
                   // subtitleMaxLines: 3,
                   //leading:  Icon(Icons.bluetooth),
                   initialValue: settingsState.reconnect,
@@ -92,7 +94,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.sound),
+                  title: Text(Localization.current.I18nSettings_sound),
                   //leading:  Icon(Icons.volume_up),
                   initialValue: settingsState.sound,
                   onToggle: (value) {
@@ -100,7 +102,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.wakelock),
+                  title: Text(Localization.current.I18nSettings_wakelock),
                   // titleMaxLines: 2,
                   //leading:  Icon(Icons.lightbulb_outline),
                   initialValue: settingsState.wakelock,
@@ -111,10 +113,10 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title:  Text(I18nSettings.countdown),
+              title: Text(Localization.current.I18nSettings_countdown),
               tiles: [
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.countdown),
+                  title: Text(Localization.current.I18nSettings_countdown),
                   //leading:  Icon(Icons.timer),
                   initialValue: settingsState.beep,
                   onToggle: (value) {
@@ -124,10 +126,10 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title:  Text(I18nSettings.voiceMessages),
+              title: Text(Localization.current.I18nSettings_voiceMessages),
               tiles: [
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.voice),
+                  title: Text(Localization.current.I18nSettings_voice),
                   //leading:  Icon(MdiIcons.textToSpeech),
                   initialValue: settingsState.voice,
                   onToggle: (value) {
@@ -135,7 +137,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.participantsName),
+                  title:
+                      Text(Localization.current.I18nSettings_participantsName),
                   // titleMaxLines: 2,
                   //leading:  Icon(MdiIcons.textToSpeech),
                   initialValue: settingsState.voiceName,
@@ -144,7 +147,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title:  Text(I18nSettings.volume),
+                  title: Text(Localization.current.I18nSettings_volume),
                   //leading:  Icon(Icons.volume_up),
                   trailing: Text('${(settingsState.volume * 100).round()}%'),
                   onPressed: (context) async {
@@ -155,7 +158,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title:  Text(I18nSettings.pitch),
+                  title: Text(Localization.current.I18nSettings_pitch),
                   //leading:  Icon(Icons.record_voice_over),
                   trailing: Text(settingsState.pitch.toStringAsFixed(2)),
                   onPressed: (context) async {
@@ -166,7 +169,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title:  Text(I18nSettings.rate),
+                  title: Text(Localization.current.I18nSettings_rate),
                   //leading:  Icon(MdiIcons.playSpeed),
                   trailing: Text(settingsState.rate.toStringAsFixed(2)),
                   onPressed: (context) async {
@@ -177,9 +180,10 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title:  Text(I18nSettings.language),
+                  title: Text(Localization.current.I18nSettings_language),
                   //leading:  Icon(Icons.language),
-                  trailing: Text(settingsState.language),
+                  // trailing: Text(settingsState.language),
+                  trailing: Text(Intl.getCurrentLocale()),
                   onPressed: (context) {
                     //TODO: i18n
                   },
@@ -187,10 +191,10 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title:  Text(I18nSettings.startScreen),
+              title: Text(Localization.current.I18nSettings_startScreen),
               tiles: [
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.startButton),
+                  title: Text(Localization.current.I18nSettings_startButton),
                   //leading:  Icon(MdiIcons.handBackLeft),
                   initialValue: settingsState.startFab,
                   onToggle: (value) {
@@ -198,13 +202,16 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title:  Text(I18nSettings.startButtonSize),
+                  title:
+                      Text(Localization.current.I18nSettings_startButtonSize),
                   //leading:  Icon(MdiIcons.handBackLeft),
-                  trailing: Text(I18nSettings.pixelSize((settingsState.startFabSize).round())),
+                  trailing: Text(Localization.current.I18nSettings_pixelSize(
+                      (settingsState.startFabSize).round())),
                   onPressed: (context) async {
                     final value = await setFloatingButtonSizePopup(
                         context, settingsState.startFabSize,
-                        text: I18nSettings.startButtonSizeDescription);
+                        text: Localization
+                            .current.I18nSettings_startButtonSizeDescription);
                     if (value != null) {
                       settingsBloc
                           .add(SetDoubleValueEvent(startFabSize: value));
@@ -212,7 +219,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.countdownAtStart),
+                  title:
+                      Text(Localization.current.I18nSettings_countdownAtStart),
                   //leading:  Icon(MdiIcons.timer),
                   initialValue: settingsState.countdown,
                   onToggle: (value) {
@@ -220,13 +228,16 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title:  Text(I18nSettings.countdownAtStartSize),
+                  title: Text(
+                      Localization.current.I18nSettings_countdownAtStartSize),
                   //leading:  Icon(MdiIcons.timer),
-                  trailing: Text(I18nSettings.pixelSize((settingsState.startFabSize).round())),
+                  trailing: Text(Localization.current.I18nSettings_pixelSize(
+                      (settingsState.startFabSize).round())),
                   onPressed: (context) async {
                     final value = await setFloatingButtonSizePopup(
                         context, settingsState.countdownSize,
-                        text: I18nSettings.countdownAtStartSize);
+                        text: Localization
+                            .current.I18nSettings_countdownAtStartSize);
                     if (value != null) {
                       settingsBloc
                           .add(SetDoubleValueEvent(countdownSize: value));
@@ -234,7 +245,8 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.replaceStartCountdown),
+                  title: Text(
+                      Localization.current.I18nSettings_replaceStartCountdown),
                   // titleMaxLines: 2,
                   //leading:  Icon(MdiIcons.timer),
                   initialValue: settingsState.countdownAtStartTime,
@@ -246,25 +258,28 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title:  Text(I18nSettings.finishScreen),
+              title: Text(Localization.current.I18nSettings_finishScreen),
               tiles: [
                 SettingsTile(
-                  title:  Text(I18nSettings.delayForNewEvents),
+                  title:
+                      Text(Localization.current.I18nSettings_delayForNewEvents),
                   // titleMaxLines: 2,
-                  trailing: Text(I18nSettings.milliseconds(settingsState.finishDelay)),
+                  trailing: Text(Localization.current
+                      .I18nSettings_milliseconds(settingsState.finishDelay)),
                   //leading:  Icon(MdiIcons.clockOutline),
                   onPressed: (context) async {
                     final value = await setDelayPopup(
                         context,
                         settingsState.finishDelay,
-                        I18nSettings.delayForNewEvents);
+                        Localization.current.I18nSettings_delayForNewEvents);
                     if (value != null) {
                       settingsBloc.add(SetIntValueEvent(finishDelay: value));
                     }
                   },
                 ),
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.autosubstitution),
+                  title:
+                      Text(Localization.current.I18nSettings_autosubstitution),
                   //leading:  Icon(MdiIcons.autoFix),
                   initialValue: settingsState.substituteNumbers,
                   onToggle: (value) {
@@ -273,15 +288,17 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title:  Text(
-                      I18nSettings.autosubstitutionDelay),
-                  trailing: Text(I18nSettings.milliseconds(settingsState.finishDelay)),
+                  title: Text(
+                      Localization.current.I18nSettings_autosubstitutionDelay),
+                  trailing: Text(Localization.current
+                      .I18nSettings_milliseconds(settingsState.finishDelay)),
                   //leading:  Icon(MdiIcons.clockOutline),
                   onPressed: (context) async {
                     final value = await setDelayPopup(
                         context,
                         settingsState.substituteNumbersDelay,
-                        I18nSettings.autosubstitutionDelay);
+                        Localization
+                            .current.I18nSettings_autosubstitutionDelay);
                     if (value != null) {
                       settingsBloc
                           .add(SetIntValueEvent(substituteNumbersDelay: value));
@@ -289,7 +306,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.finishButton),
+                  title: Text(Localization.current.I18nSettings_finishButton),
                   //leading:  Icon(MdiIcons.handBackLeft),
                   initialValue: settingsState.finishFab,
                   onToggle: (value) {
@@ -297,13 +314,16 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title:  Text(I18nSettings.finishButtonSize),
-                  trailing: Text(I18nSettings.pixelSize((settingsState.finishFabSize).round())),
+                  title:
+                      Text(Localization.current.I18nSettings_finishButtonSize),
+                  trailing: Text(Localization.current.I18nSettings_pixelSize(
+                      (settingsState.finishFabSize).round())),
                   //leading:  Icon(MdiIcons.handBackLeft),
                   onPressed: (context) async {
                     final value = await setFloatingButtonSizePopup(
                         context, settingsState.finishFabSize,
-                        text: I18nSettings.finishButtonSizeDescription);
+                        text: Localization
+                            .current.I18nSettings_finishButtonSizeDescription);
                     if (value != null) {
                       settingsBloc
                           .add(SetDoubleValueEvent(finishFabSize: value));
@@ -313,10 +333,11 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title:  Text(I18nSettings.update),
+              title: Text(Localization.current.I18nSettings_update),
               tiles: [
                 SettingsTile.switchTile(
-                  title:  Text(I18nSettings.checkUpdateAtStartup),
+                  title: Text(
+                      Localization.current.I18nSettings_checkUpdateAtStartup),
                   // titleMaxLines: 2,
                   //leading:  Icon(MdiIcons.update),
                   initialValue: settingsState.checkUpdates,
@@ -327,19 +348,20 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title:  Text(I18nSettings.themes),
+              title: Text(Localization.current.I18nSettings_themes),
               tiles: _themes(),
             ),
             SettingsSection(
-              title:  Text(I18nSettings.journal),
+              title: Text(Localization.current.I18nSettings_journal),
               tiles: [
                 SettingsTile(
-                  title:  Text(I18nSettings.journalLinesNumber),
+                  title: Text(
+                      Localization.current.I18nSettings_journalLinesNumber),
                   // titleMaxLines: 2,
                   trailing: settingsState.logLimit > -1
                       ? Text('${settingsState.logLimit}')
                       // : Text('без ограничений'),
-                      :  const Icon(MdiIcons.infinity),
+                      : const Icon(MdiIcons.infinity),
                   //leading:  Icon(MdiIcons.filter),
                   onPressed: (context) async {
                     final int? value =
@@ -352,10 +374,11 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title:  Text(I18nSettings.defaults),
+              title: Text(Localization.current.I18nSettings_defaults),
               tiles: [
                 SettingsTile(
-                  title:  Text(I18nSettings.resetToDefaults),
+                  title:
+                      Text(Localization.current.I18nSettings_resetToDefaults),
                   //leading:  Icon(MdiIcons.backupRestore),
                   onPressed: (context) {
                     settingsBloc.add(SetDefaultSettings());
@@ -375,7 +398,7 @@ class _SettingsPageState extends State<SettingsScreen> {
         BlocProvider.of<SettingsBloc>(context).settings.getTheme();
     for (final element in AppTheme.values) {
       result.add(SettingsTile(
-        title: Text(element.display()),
+        title: Text(element.str()),
         leading: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,

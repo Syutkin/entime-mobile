@@ -15,7 +15,8 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
       builder: (context) {
         return AlertDialog(
           scrollable: true,
-          title: const Text('Количество отображамых строк в журнале'),
+          title:
+              Text(Localization.current.I18nSettings_journalLinesNumberPopup),
           content: Form(
             key: formKey,
             onChanged: () {
@@ -27,8 +28,9 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: true,
-                  decoration:
-                      const InputDecoration(labelText: 'Количество строк'),
+                  decoration: InputDecoration(
+                      labelText:
+                          Localization.current.I18nSettings_numberOfLines),
                   controller: delayController,
                   validator: (value) {
                     if (value == null || value == '' || value == '-') {
@@ -37,7 +39,7 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
                     }
                     final int? val = int.tryParse(value);
                     if (val == null) {
-                      return 'Введите положительное число,\r\nпустая строка или отрицательное\r\n- без ограничений';
+                      return Localization.current.I18nSettings_enterNumber;
                     }
                     newLimit = val;
                     return null;

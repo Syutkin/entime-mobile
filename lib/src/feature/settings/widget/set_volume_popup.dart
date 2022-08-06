@@ -8,7 +8,7 @@ Future<double?> setVolumePopup(BuildContext context, SettingsState settings) asy
       // dialog is dismissible with a tap on the barrier
       builder: (context) {
         return AlertDialog(
-          title: const Text('Громкость голоса'),
+          title: Text(Localization.current.I18nSettings_voiceVolume),
           content: StatefulBuilder(
             builder: (context, setState) {
               return Column(

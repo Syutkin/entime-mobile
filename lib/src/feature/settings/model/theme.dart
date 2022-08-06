@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/localization.dart';
+
 // ToDo: use new enums from dart 2.17
 enum AppTheme {
   lightBlue,
@@ -40,16 +42,16 @@ extension AppThemeStr on AppTheme {
     }
   }
 
-  String display(/*BuildContext context*/) {
+  String str(/*BuildContext context*/) {
     switch (this) {
       case AppTheme.lightBlue:
-        return 'Синяя светлая тема';
+        return Localization.current.I18nSettings_lightBlue;
       case AppTheme.darkBlue:
-        return 'Синяя тёмная тема';
+        return Localization.current.I18nSettings_darkBlue;
       case AppTheme.lightRed:
-        return 'Красная светлая тема';
+        return Localization.current.I18nSettings_lightRed;
       case AppTheme.darkRed:
-        return 'Красная тёмная тема';
+        return Localization.current.I18nSettings_darkRed;
     }
   }
 }

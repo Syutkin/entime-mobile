@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/helper/helper.dart';
-import '../../../common/localization/i18n.dart';
+import '../../../common/localization/localization.dart';
 import '../bloc/update_bloc.dart';
 
 class Updater extends StatelessWidget {
@@ -21,7 +21,7 @@ class Updater extends StatelessWidget {
                 value: state.bytes / state.total,
               ),
               Text(
-                I18nUpdate.downloaded(
+                Localization.current.I18nUpdate_downloaded(
                     filesize(state.bytes), filesize(state.total)),
                 textAlign: TextAlign.center,
               ),
@@ -38,7 +38,7 @@ class Updater extends StatelessWidget {
                 value: null,
               ),
               Text(
-                I18nUpdate.connecting,
+                Localization.current.I18nUpdate_connecting,
                 textAlign: TextAlign.center,
               ),
             ],
@@ -47,7 +47,7 @@ class Updater extends StatelessWidget {
       } else if (state is UpdateAvailable) {
         return ListTile(
           contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-          title: Text(I18nUpdate.updateToVersion(state.version)),
+          title: Text(Localization.current.I18nUpdate_updateToVersion(state.version)),
           onTap: () {
             BlocProvider.of<UpdateBloc>(context).add(DownloadUpdate());
           },
@@ -55,7 +55,7 @@ class Updater extends StatelessWidget {
       } else {
         return ListTile(
           contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-          title: Text(I18nUpdate.checkForUpdates),
+          title: Text(Localization.current.I18nUpdate_checkForUpdates),
           onTap: () {
             BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
           },

@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../common/helper/helper.dart';
+import '../../../../common/localization/localization.dart';
 import '../../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../../init/widget/select_file_screen.dart';
@@ -66,7 +67,8 @@ class _FinishPage extends State<FinishScreen> {
               verticalOffset: 36,
               attachedBuilder: (cancel) => Card(
                 child: ListTile(
-                  title: Text('Финишировал номер ${state.autoFinishNumber}'),
+                  title: Text(Localization.current
+                      .I18nProtocol_finishNumber('${state.autoFinishNumber}')),
                   trailing: TextButton(
                     onPressed: () {
                       BlocProvider.of<ProtocolBloc>(context).add(
@@ -248,9 +250,9 @@ class _FinishPage extends State<FinishScreen> {
     final list = <PopupMenuEntry<FinishPopupMenu>>[];
     if (number != null) {
       list.add(
-        const PopupMenuItem(
+        PopupMenuItem(
           value: FinishPopupMenu.clearNumber,
-          child: Text('Убрать номер'),
+          child: Text(Localization.current.I18nProtocol_clearNumber),
         ),
       );
       list.add(
@@ -260,9 +262,9 @@ class _FinishPage extends State<FinishScreen> {
       );
     }
     list.add(
-      const PopupMenuItem(
+      PopupMenuItem(
         value: FinishPopupMenu.hideAll,
-        child: Text('Скрыть всё'),
+        child: Text(Localization.current.I18nProtocol_hideAll),
       ),
     );
     return list;
@@ -309,7 +311,7 @@ class _FinishPage extends State<FinishScreen> {
     list.add(
       PopupMenuItem(
         value: ParticipantStatus.dns,
-        child: Text('Не стартовал', style: Theme.of(context).textTheme.button),
+        child: Text(Localization.current.I18nProtocol_didNotStart, style: Theme.of(context).textTheme.button),
       ),
     );
     list.add(
@@ -321,7 +323,7 @@ class _FinishPage extends State<FinishScreen> {
       PopupMenuItem(
         value: ParticipantStatus.dnf,
         child:
-            Text('Не финишировал', style: Theme.of(context).textTheme.button),
+            Text(Localization.current.I18nProtocol_didNotFinish, style: Theme.of(context).textTheme.button),
       ),
     );
     return list;
@@ -445,26 +447,26 @@ class _SliverFinishSubHeader extends StatelessWidget {
       color: Theme.of(context).colorScheme.background,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(children: const <Widget>[
+        child: Row(children: <Widget>[
           Flexible(
             flex: 15,
             child: Align(
               alignment: Alignment.center,
-              child: Text('Тип'),
+              child: Text(Localization.current.I18nProtocol_type),
             ),
           ),
           Flexible(
             flex: 65,
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text('Время'),
+              child: Text(Localization.current.I18nProtocol_time),
             ),
           ),
           Flexible(
             flex: 20,
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text('Номер'),
+              child: Text(Localization.current.I18nProtocol_number),
             ),
           ),
         ]),

@@ -1,6 +1,7 @@
 part of 'settings_popups.dart';
 
-Future<double?> setPitchPopup(BuildContext context, SettingsState settings) async {
+Future<double?> setPitchPopup(
+    BuildContext context, SettingsState settings) async {
   double value = settings.pitch;
   return showDialog<double>(
       context: context,
@@ -8,7 +9,7 @@ Future<double?> setPitchPopup(BuildContext context, SettingsState settings) asyn
       // dialog is dismissible with a tap on the barrier
       builder: (context) {
         return AlertDialog(
-          title: const Text('Тембр голоса'),
+          title: Text(Localization.current.I18nSettings_voicePitch),
           content: StatefulBuilder(
             builder: (context, setState) {
               return Column(

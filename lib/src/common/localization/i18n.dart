@@ -226,6 +226,21 @@ class I18nSettings {
     name: 'I18nSettings_journalLinesNumber',
   );
 
+  static String get journalLinesNumberPopup => Intl.message(
+    'Количество отображамых строк в журнале',
+    name: 'I18nSettings_journalLinesNumberPopup',
+  );
+
+  static String get numberOfLines => Intl.message(
+    'Количество строк',
+    name: 'I18nSettings_numberOfLines',
+  );
+
+  static String get enterNumber => Intl.message(
+    'Введите положительное число,\r\nпустая строка или отрицательное\r\n- без ограничений',
+    name: 'I18nSettings_enterNumber',
+  );
+
   static String get defaults => Intl.message(
     'По умолчанию',
     name: 'I18nSettings_defaults',
@@ -235,4 +250,123 @@ class I18nSettings {
     'Настройки по умолчанию',
     name: 'I18nSettings_resetToDefaults',
   );
+
+  static String get delay => Intl.message(
+    'Задержка',
+    name: 'I18nSettings_delay',
+  );
+
+  static String get incorrectDelay => Intl.message(
+    'Неверная задержка',
+    name: 'I18nSettings_incorrectDelay',
+  );
+
+  static String get voicePitch => Intl.message(
+    'Тембр голоса',
+    name: 'I18nSettings_voicePitch',
+  );
+
+  static String get voiceRate => Intl.message(
+    'Скорость произношения',
+    name: 'I18nSettings_voiceRate',
+  );
+
+  static String get voiceVolume => Intl.message(
+    'Громкость голоса',
+    name: 'I18nSettings_voiceVolume',
+  );
+
+  static String get lightBlue => Intl.message(
+    'Синяя светлая тема',
+    name: 'I18nSettings_lightBlue',
+  );
+
+  static String get darkBlue => Intl.message(
+    'Синяя тёмная тема',
+    name: 'I18nSettings_darkBlue',
+  );
+
+  static String get lightRed => Intl.message(
+    'Красная светлая тема',
+    name: 'I18nSettings_lightRed',
+  );
+
+  static String get darkRed => Intl.message(
+    'Красная тёмная тема',
+    name: 'I18nSettings_darkRed',
+  );
+}
+
+class I18nProtocol {
+  static String get enterFinishNumber => Intl.message(
+    'Введите номер финишировавшего участника',
+    name: 'I18nProtocol_enterFinishNumber',
+  );
+
+  static String get number => Intl.message(
+    'Номер',
+    name: 'I18nProtocol_number',
+  );
+
+  static String get incorrectNumber => Intl.message(
+    'Неверный номер',
+    name: 'I18nProtocol_incorrectNumber',
+  );
+
+  static String get warning => Intl.message(
+    'Предупреждение',
+    name: 'I18nProtocol_warning',
+  );
+
+  static String updateNumber(int number) {
+    return Intl.message(
+      'Участнику с номером $number уже присвоено финишное время. Установить новое значение?',
+      name: 'I18nProtocol_updateNumber',
+      args: [number],
+    );
+  }
+
+  static String get hide => Intl.message(
+    'Скрыть',
+    name: 'I18nProtocol_hide',
+  );
+
+  static String finishNumber(String number) {
+    return Intl.message(
+      'Финишировал номер $number',
+      name: 'I18nProtocol_finishNumber',
+      args: [number],
+    );
+  }
+
+  static String get clearNumber => Intl.message(
+    'Убрать номер',
+    name: 'I18nProtocol_clearNumber',
+  );
+
+  static String get hideAll => Intl.message(
+    'Скрыть всё',
+    name: 'I18nProtocol_hideAll',
+  );
+
+  static String get didNotStart => Intl.message(
+    'Не стартовал',
+    name: 'I18nProtocol_didNotStart',
+  );
+
+  static String get didNotFinish => Intl.message(
+    'Не финишировал',
+    name: 'I18nProtocol_didNotFinish',
+  );
+
+  static String get type => Intl.message(
+    'Тип',
+    name: 'I18nProtocol_type',
+  );
+
+  static String get time => Intl.message(
+    'Время',
+    name: 'I18nProtocol_time',
+  );
+
 }

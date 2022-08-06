@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/localization.dart';
 import '../../../feature/settings/settings.dart';
 
 part 'set_delay_popup.dart';

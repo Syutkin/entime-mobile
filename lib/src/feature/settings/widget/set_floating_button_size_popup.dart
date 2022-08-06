@@ -23,7 +23,8 @@ Future<double?> setFloatingButtonSizePopup(
                     value: newValue,
                     min: 50,
                     max: 200,
-                    label: '${newValue.round()}px',
+                    label: Localization.current
+                        .I18nSettings_pixelSize(newValue.round()),
                     divisions: 150,
                     onChanged: (value) {
                       setState(() => newValue = value);
