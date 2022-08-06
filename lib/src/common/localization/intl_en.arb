@@ -1,7 +1,284 @@
 {
-    "@@last_modified": "2022-08-06T16:26:18+0000",
-    "UpdateI18n_whatsNew": "What's new",
-    "@UpdateI18n_whatsNew": {
+    "@@last_modified": "2022-08-06T18:48:00+0000",
+    "I18nUpdate_whatsNew": "What's new",
+    "@I18nUpdate_whatsNew": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nUpdate_connecting": "Connecting...",
+    "@I18nUpdate_connecting": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nUpdate_updateToVersion": "Update to {version}",
+    "@I18nUpdate_updateToVersion": {
+        "type": "text",
+        "placeholders_order": [
+            "version"
+        ],
+        "placeholders": {
+            "version": {}
+        }
+    },
+    "I18nUpdate_checkForUpdates": "Check for updates",
+    "@I18nUpdate_checkForUpdates": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nUpdate_changelog": "Changelog",
+    "@I18nUpdate_changelog": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nUpdate_downloaded": "{current} from {total}",
+    "@I18nUpdate_downloaded": {
+        "description": "Сколько скачано байт относительно общего количества",
+        "type": "text",
+        "placeholders_order": [
+            "current",
+            "total"
+        ],
+        "placeholders": {
+            "current": {},
+            "total": {}
+        }
+    },
+    "I18nSettings_settings": "Settings",
+    "@I18nSettings_settings": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_general": "General",
+    "@I18nSettings_general": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_bluetooth": "Bluetooth",
+    "@I18nSettings_bluetooth": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_reconnect": "Reconnect",
+    "@I18nSettings_reconnect": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_reconnectDescription": "Trying to reconnect when disconnected",
+    "@I18nSettings_reconnectDescription": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_sound": "Sound",
+    "@I18nSettings_sound": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_wakelock": "Wakelock",
+    "@I18nSettings_wakelock": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_countdown": "Countdown",
+    "@I18nSettings_countdown": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_voiceMessages": "Voice messages",
+    "@I18nSettings_voiceMessages": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_voice": "Voice",
+    "@I18nSettings_voice": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_participantsName": "Name the participants",
+    "@I18nSettings_participantsName": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_volume": "Volume",
+    "@I18nSettings_volume": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_pitch": "Pitch",
+    "@I18nSettings_pitch": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_rate": "Rate",
+    "@I18nSettings_rate": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_language": "Language",
+    "@I18nSettings_language": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_startScreen": "Start screen",
+    "@I18nSettings_startScreen": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_startButton": "Timestamp button",
+    "@I18nSettings_startButton": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_startButtonSize": "Timestamp button size",
+    "@I18nSettings_startButtonSize": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_pixelSize": "{size}px",
+    "@I18nSettings_pixelSize": {
+        "type": "text",
+        "placeholders_order": [
+            "size"
+        ],
+        "placeholders": {
+            "size": {}
+        }
+    },
+    "I18nSettings_startButtonSizeDescription": "Timestamp button size at start screen",
+    "@I18nSettings_startButtonSizeDescription": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_countdownAtStart": "Countdown",
+    "@I18nSettings_countdownAtStart": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_countdownAtStartSize": "Countdown size",
+    "@I18nSettings_countdownAtStartSize": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_replaceStartCountdown": "Replace start time with countdown",
+    "@I18nSettings_replaceStartCountdown": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_finishScreen": "Finish screen",
+    "@I18nSettings_finishScreen": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_delayForNewEvents": "Delay before show new timestamps",
+    "@I18nSettings_delayForNewEvents": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_milliseconds": "{milliseconds}ms",
+    "@I18nSettings_milliseconds": {
+        "type": "text",
+        "placeholders_order": [
+            "milliseconds"
+        ],
+        "placeholders": {
+            "milliseconds": {}
+        }
+    },
+    "I18nSettings_autosubstitution": "Autosubstitute numbers",
+    "@I18nSettings_autosubstitution": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_autosubstitutionDelay": "Delay before autosubstitute new numbers",
+    "@I18nSettings_autosubstitutionDelay": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_finishButton": "Timestamp button",
+    "@I18nSettings_finishButton": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_finishButtonSize": "Timestamp button size",
+    "@I18nSettings_finishButtonSize": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_finishButtonSizeDescription": "Timestamp button size at finish screen",
+    "@I18nSettings_finishButtonSizeDescription": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_update": "Update",
+    "@I18nSettings_update": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_checkUpdateAtStartup": "Check updates at startup",
+    "@I18nSettings_checkUpdateAtStartup": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_themes": "Themes",
+    "@I18nSettings_themes": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_journal": "Journal",
+    "@I18nSettings_journal": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_journalLinesNumber": "Number of records displayed",
+    "@I18nSettings_journalLinesNumber": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_defaults": "Defaults",
+    "@I18nSettings_defaults": {
+        "type": "text",
+        "placeholders_order": [],
+        "placeholders": {}
+    },
+    "I18nSettings_resetToDefaults": "Reset to defaults",
+    "@I18nSettings_resetToDefaults": {
         "type": "text",
         "placeholders_order": [],
         "placeholders": {}
