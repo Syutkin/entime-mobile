@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-08-06T20:01:15.046546",
+  "@@last_modified": "2022-08-06T21:24:40.657743",
   "I18nUpdate_whatsNew": "Что нового",
   "@I18nUpdate_whatsNew": {
     "type": "text",
@@ -46,5 +46,241 @@
       "current": {},
       "total": {}
     }
+  },
+  "I18nSettings_settings": "Настройки",
+  "@I18nSettings_settings": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_general": "Основные",
+  "@I18nSettings_general": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_bluetooth": "Bluetooth",
+  "@I18nSettings_bluetooth": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_reconnect": "Переподключение",
+  "@I18nSettings_reconnect": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_reconnectDescription": "Пытаться переподключится к модулю при обрыве связи",
+  "@I18nSettings_reconnectDescription": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_sound": "Звук",
+  "@I18nSettings_sound": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_wakelock": "Всегда включённый экран",
+  "@I18nSettings_wakelock": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_countdown": "Обратный отсчёт",
+  "@I18nSettings_countdown": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_voiceMessages": "Голосовые сообщения",
+  "@I18nSettings_voiceMessages": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_voice": "Голос",
+  "@I18nSettings_voice": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_participantsName": "Называть имена участников",
+  "@I18nSettings_participantsName": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_volume": "Громкость",
+  "@I18nSettings_volume": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_pitch": "Тембр",
+  "@I18nSettings_pitch": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_rate": "Скорость",
+  "@I18nSettings_rate": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_language": "Язык",
+  "@I18nSettings_language": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_startScreen": "Стартовый экран",
+  "@I18nSettings_startScreen": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_startButton": "Кнопка \"отсечка\"",
+  "@I18nSettings_startButton": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_startButtonSize": "Размер кнопки \"отсечка\"",
+  "@I18nSettings_startButtonSize": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_pixelSize": "{size}px",
+  "@I18nSettings_pixelSize": {
+    "type": "text",
+    "placeholders_order": [
+      "size"
+    ],
+    "placeholders": {
+      "size": {}
+    }
+  },
+  "I18nSettings_startButtonSizeDescription": "Размер кнопки \"отсечка\" на стартовом экране",
+  "@I18nSettings_startButtonSizeDescription": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_countdownAtStart": "Обратный отсчёт",
+  "@I18nSettings_countdownAtStart": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_countdownAtStartSize": "Размер обратного отсчёта",
+  "@I18nSettings_countdownAtStartSize": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_replaceStartCountdown": "Заменять время старта обратным отсчётом",
+  "@I18nSettings_replaceStartCountdown": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_finishScreen": "Финишный экран",
+  "@I18nSettings_finishScreen": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_delayForNewEvents": "Задержка перед показом новых отсечек",
+  "@I18nSettings_delayForNewEvents": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_milliseconds": "{milliseconds}мс",
+  "@I18nSettings_milliseconds": {
+    "type": "text",
+    "placeholders_order": [
+      "milliseconds"
+    ],
+    "placeholders": {
+      "milliseconds": {}
+    }
+  },
+  "I18nSettings_autosubstitution": "Автоподстановка номеров",
+  "@I18nSettings_autosubstitution": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_autosubstitutionDelay": "Задержка перед автоматическим подставлением новых номеров",
+  "@I18nSettings_autosubstitutionDelay": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_finishButton": "Кнопка \"отсечка\"",
+  "@I18nSettings_finishButton": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_finishButtonSize": "Размер кнопки \"отсечка\"",
+  "@I18nSettings_finishButtonSize": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_finishButtonSizeDescription": "Размер кнопки \"отсечка\" на финишном экране",
+  "@I18nSettings_finishButtonSizeDescription": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_update": "Обновление",
+  "@I18nSettings_update": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_checkUpdateAtStartup": "Проверка обновлений при старте",
+  "@I18nSettings_checkUpdateAtStartup": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_themes": "Темы",
+  "@I18nSettings_themes": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_journal": "Журнал",
+  "@I18nSettings_journal": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_journalLinesNumber": "Количество показываемых записей",
+  "@I18nSettings_journalLinesNumber": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_defaults": "По умолчанию",
+  "@I18nSettings_defaults": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nSettings_resetToDefaults": "Настройки по умолчанию",
+  "@I18nSettings_resetToDefaults": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
   }
 }

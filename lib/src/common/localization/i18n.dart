@@ -133,7 +133,7 @@ class I18nSettings {
   static String pixelSize(int size) {
     return Intl.message(
       '${size}px',
-      name: 'I18nUpdate_pixelSize',
+      name: 'I18nSettings_pixelSize',
       args: [size],
     );
   }
@@ -171,7 +171,7 @@ class I18nSettings {
   static String milliseconds(int milliseconds) {
     return Intl.message(
       '$millisecondsмс',
-      name: 'I18nUpdate_milliseconds',
+      name: 'I18nSettings_milliseconds',
       args: [milliseconds],
     );
   }
