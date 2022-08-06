@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../feature/protocol/bloc/protocol_bloc.dart';
+import '../../feature/protocol/protocol.dart';
 import '../logger/logger.dart';
 
 export 'package:filesize/filesize.dart';

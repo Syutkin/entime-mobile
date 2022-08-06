@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../app_info/bloc/app_info_cubit.dart';
-import '../../app_info/logic/app_info_provider.dart';
+import '../../app_info/app_info.dart';
 import '../../help/widget/help_screen.dart';
 import '../../home/widget/about_popup.dart';
 import '../../settings/widget/settings_screen.dart';

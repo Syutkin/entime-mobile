@@ -6,18 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../common/widget/sliver_sub_header_delegate.dart';
-import '../../bluetooth/bloc/bluetooth_bloc.dart';
-import '../../countdown/bloc/countdown_bloc.dart';
-import '../../countdown/widget/countdown_widget.dart';
-import '../../init/widget/select_file_screen.dart';
-import '../../protocol/bloc/protocol_bloc.dart';
-import '../../protocol/model/automatic_start.dart';
-import '../../protocol/model/protocol.dart';
-import '../../protocol/widget/create_or_select_protocol_widget.dart';
-import '../../settings/bloc/settings_bloc.dart';
-import '../../start/widget/start_item_tile.dart';
+import '../../../../common/widget/sliver_sub_header_delegate.dart';
+import '../../../bluetooth/bluetooth.dart';
+import '../../../countdown/countdown.dart';
+import '../../../init/widget/select_file_screen.dart';
+import '../../../protocol/protocol.dart';
+import '../../../settings/bloc/settings_bloc.dart';
 import 'edit_start_time_popup.dart';
+import 'start_item_tile.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({

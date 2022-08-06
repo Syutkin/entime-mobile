@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../logic/app_info_provider.dart';
+import '../app_info.dart';
 
 class AppInfoCubit extends Cubit<AppInfoProvider> {
   AppInfoCubit({required AppInfoProvider appInfo}) : super(appInfo);

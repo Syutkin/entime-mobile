@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../protocol/bloc/protocol_bloc.dart';
-import '../../protocol/model/protocol.dart';
+import '../../../protocol/protocol.dart';
 
 Future<void> addFinishNumberPopup(BuildContext context, FinishItem item) async {
   final numberController = TextEditingController();

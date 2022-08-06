@@ -6,16 +6,10 @@ import 'package:path/path.dart';
 
 import '../../../common/widget/header_widget.dart';
 import '../../audio/bloc/audio_bloc.dart';
-import '../../bluetooth/bloc/bluetooth_bloc.dart';
-import '../../bluetooth/widget/bluetooth_button.dart';
-import '../../bluetooth/widget/select_bonded_device.dart';
-import '../../log/bloc/log_bloc.dart';
-import '../../log/model/log_level.dart';
-import '../../log/model/log_source.dart';
-import '../../log/model/log_source_direction.dart';
-import '../../log/widget/log_screen.dart';
-import '../../module_settings/widget/module_settings_screen.dart';
-import '../../protocol/bloc/protocol_bloc.dart';
+import '../../bluetooth/bluetooth.dart';
+import '../../log/log.dart';
+import '../../module_settings/module_settings.dart';
+import '../../protocol/protocol.dart';
 import 'select_file_screen.dart';
 
 class InitScreen extends StatefulWidget {

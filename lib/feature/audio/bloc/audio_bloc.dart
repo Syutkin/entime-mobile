@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../common/logger/logger.dart';
-import '../../settings/bloc/settings_bloc.dart';
+import '../../settings/settings.dart';
 import '../logic/audio_provider.dart';
 import '../logic/sound_audio_provider.dart';
 

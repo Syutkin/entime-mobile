@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../feature/settings/bloc/settings_bloc.dart';
+import '../../../feature/settings/settings.dart';
 
 part 'set_delay_popup.dart';
 part 'set_floating_button_size_popup.dart';

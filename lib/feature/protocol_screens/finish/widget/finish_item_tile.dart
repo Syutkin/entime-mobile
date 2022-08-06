@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../common/helper/helper.dart';
-import '../../protocol/model/protocol.dart';
+import '../../../../common/helper/helper.dart';
+import '../../../protocol/protocol.dart';
 
 class FinishItemTile<T extends Object> extends StatelessWidget {
   final GestureTapCallback? onTap;

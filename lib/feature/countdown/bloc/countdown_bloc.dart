@@ -6,11 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import '../../../common/helper/helper.dart';
-import '../../protocol/bloc/protocol_bloc.dart';
-import '../../protocol/logic/protocol_provider.dart';
-import '../../protocol/model/protocol.dart';
-import '../../tab/bloc/tab_bloc.dart';
-import '../../tab/model/app_tab.dart';
+import '../../protocol/protocol.dart';
+import '../../tab/tab.dart';
 
 part 'countdown_event.dart';
 part 'countdown_state.dart';

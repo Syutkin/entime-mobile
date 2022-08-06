@@ -3,22 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path/path.dart';
 
-import '../../../models/menu_button.dart';
-import '../../bluetooth/widget/bluetooth_button.dart';
-import '../../bluetooth/widget/select_bonded_device.dart';
+import '../../bluetooth/bluetooth.dart';
 import '../../drawer/widget/app_drawer.dart';
-import '../../finish/widget/finish_screen.dart';
-import '../../init/widget/init_screen.dart';
-import '../../init/widget/select_file_screen.dart';
-import '../../protocol/bloc/protocol_bloc.dart';
-import '../../protocol/model/filter_finish.dart';
+import '../../init/init.dart';
+import '../../protocol/protocol.dart';
+import '../../protocol_screens/protocol_screens.dart';
 import '../../settings/bloc/settings_bloc.dart';
-import '../../start/widget/overwrite_start_time_popup.dart';
-import '../../start/widget/start_screen.dart';
-import '../../tab/bloc/tab_bloc.dart';
-import '../../tab/model/app_tab.dart';
-import '../../update/bloc/update_bloc.dart';
-import '../../update/widget/changelog_popup.dart';
+import '../../tab/tab.dart';
+import '../../update/update.dart';
 import 'add_racer_popup.dart';
 
 class HomeScreen extends StatelessWidget {

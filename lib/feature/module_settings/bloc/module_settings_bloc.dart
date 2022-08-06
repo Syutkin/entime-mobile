@@ -3,10 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../common/logger/logger.dart';
-import '../../settings/logic/module_settings_entime_provider.dart';
-import '../../settings/logic/module_settings_led_provider.dart';
-import '../../settings/logic/module_settings_provider.dart';
-import '../../settings/logic/module_settings_type_provider.dart';
+import '../../settings/settings.dart';
 
 part 'module_settings_event.dart';
 part 'module_settings_state.dart';

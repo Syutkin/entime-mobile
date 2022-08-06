@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/widget/expanded_alert_dialog.dart';
-import '../../protocol/bloc/protocol_bloc.dart';
-import '../../protocol/model/start_time.dart';
+import '../../protocol/protocol.dart';
 
 Future<void> addRacerPopup(BuildContext context) async {
   final now = DateTime.now();

@@ -8,17 +8,11 @@ import 'package:meta/meta.dart';
 
 import '../../../common/helper/helper.dart';
 import '../../../common/logger/logger.dart';
-import '../../audio/bloc/audio_bloc.dart';
-import '../../log/bloc/log_bloc.dart';
-import '../../log/model/log_level.dart';
-import '../../log/model/log_source.dart';
-import '../../log/model/log_source_direction.dart';
-import '../../module_settings/bloc/module_settings_bloc.dart';
-import '../../protocol/bloc/protocol_bloc.dart';
-import '../../protocol/logic/protocol_provider.dart';
-import '../../protocol/model/automatic_start.dart';
-import '../../protocol/model/protocol.dart';
-import '../../settings/bloc/settings_bloc.dart';
+import '../../audio/audio.dart';
+import '../../log/log.dart';
+import '../../module_settings/module_settings.dart';
+import '../../protocol/protocol.dart';
+import '../../settings/settings.dart';
 import '../logic/bluetooth.dart';
 import '../model/bluetooth.dart';
 
