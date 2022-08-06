@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:entime/common/csv/csv_utils.dart';
-import 'package:entime/feature/log/logic/log_provider.dart';
-import 'package:entime/feature/log/model/log_level.dart';
-import 'package:entime/feature/log/model/log_source.dart';
-import 'package:entime/feature/log/model/log_source_direction.dart';
-import 'package:entime/feature/protocol/logic/protocol_provider.dart';
-import 'package:entime/feature/protocol/model/protocol.dart';
+import 'package:entime/src/common/csv/csv_utils.dart';
+import 'package:entime/src/feature/log/logic/log_provider.dart';
+import 'package:entime/src/feature/log/model/log_level.dart';
+import 'package:entime/src/feature/log/model/log_source.dart';
+import 'package:entime/src/feature/log/model/log_source_direction.dart';
+import 'package:entime/src/feature/protocol/logic/protocol_provider.dart';
+import 'package:entime/src/feature/protocol/model/protocol.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';

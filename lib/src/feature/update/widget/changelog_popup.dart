@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../common/localization/i18n.dart';
 import 'changelog_markdown.dart';
 
 Future<void> showChangelogAtStartup(
@@ -26,7 +27,7 @@ Future<void> showChangelogAtStartup(
     builder: (context) {
       return AlertDialog(
         // scrollable: true,
-        title: const Text('Что нового'),
+        title: Text(I18nUpdate.whatsNew),
         // content: changelogMarkdown(markdownData),
         // workaround with width, see https://github.com/flutter/flutter/issues/18108
         content: SizedBox(

@@ -1,0 +1,50 @@
+{
+  "@@last_modified": "2022-08-06T20:01:15.046546",
+  "I18nUpdate_whatsNew": "Что нового",
+  "@I18nUpdate_whatsNew": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nUpdate_connecting": "Соединение...",
+  "@I18nUpdate_connecting": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nUpdate_updateToVersion": "Обновить до {version}",
+  "@I18nUpdate_updateToVersion": {
+    "type": "text",
+    "placeholders_order": [
+      "version"
+    ],
+    "placeholders": {
+      "version": {}
+    }
+  },
+  "I18nUpdate_checkForUpdates": "Проверить обновления",
+  "@I18nUpdate_checkForUpdates": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nUpdate_changelog": "Список изменений",
+  "@I18nUpdate_changelog": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nUpdate_downloaded": "{current} из {total}",
+  "@I18nUpdate_downloaded": {
+    "description": "Сколько скачано байт относительно общего количества",
+    "type": "text",
+    "placeholders_order": [
+      "current",
+      "total"
+    ],
+    "placeholders": {
+      "current": {},
+      "total": {}
+    }
+  }
+}

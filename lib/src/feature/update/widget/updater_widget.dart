@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/helper/helper.dart';
+import '../../../common/localization/i18n.dart';
 import '../bloc/update_bloc.dart';
 
 class Updater extends StatelessWidget {
@@ -20,7 +21,8 @@ class Updater extends StatelessWidget {
                 value: state.bytes / state.total,
               ),
               Text(
-                '${filesize(state.bytes)} из ${filesize(state.total)}',
+                I18nUpdate.downloaded(
+                    filesize(state.bytes), filesize(state.total)),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -30,13 +32,13 @@ class Updater extends StatelessWidget {
         return ListTile(
           title: Stack(
             alignment: Alignment.center,
-            children: const [
-              LinearProgressIndicator(
+            children: [
+              const LinearProgressIndicator(
                 minHeight: 24,
                 value: null,
               ),
               Text(
-                'Соединение...',
+                I18nUpdate.connecting,
                 textAlign: TextAlign.center,
               ),
             ],
@@ -45,7 +47,7 @@ class Updater extends StatelessWidget {
       } else if (state is UpdateAvailable) {
         return ListTile(
           contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-          title: Text('Обновить до ${state.version}'),
+          title: Text(I18nUpdate.updateToVersion(state.version)),
           onTap: () {
             BlocProvider.of<UpdateBloc>(context).add(DownloadUpdate());
           },
@@ -53,7 +55,7 @@ class Updater extends StatelessWidget {
       } else {
         return ListTile(
           contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-          title: const Text('Проверить обновления'),
+          title: Text(I18nUpdate.checkForUpdates),
           onTap: () {
             BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
           },

@@ -4,18 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'common/bloc/app_bloc_observer.dart';
-import 'feature/app_info/app_info.dart';
-import 'feature/audio/bloc/audio_bloc.dart';
-import 'feature/bluetooth/bloc/bluetooth_bloc.dart';
-import 'feature/countdown/bloc/countdown_bloc.dart';
-import 'feature/home/widget/home_screen.dart';
-import 'feature/log/bloc/log_bloc.dart';
-import 'feature/module_settings/bloc/module_settings_bloc.dart';
-import 'feature/protocol/bloc/protocol_bloc.dart';
-import 'feature/settings/settings.dart';
-import 'feature/tab/bloc/tab_bloc.dart';
-import 'feature/update/update.dart';
+import 'src/common/bloc/app_bloc_observer.dart';
+import 'src/common/localization/localization.dart';
+import 'src/feature/app_info/app_info.dart';
+import 'src/feature/audio/bloc/audio_bloc.dart';
+import 'src/feature/bluetooth/bloc/bluetooth_bloc.dart';
+import 'src/feature/countdown/bloc/countdown_bloc.dart';
+import 'src/feature/home/widget/home_screen.dart';
+import 'src/feature/log/bloc/log_bloc.dart';
+import 'src/feature/module_settings/bloc/module_settings_bloc.dart';
+import 'src/feature/protocol/bloc/protocol_bloc.dart';
+import 'src/feature/settings/settings.dart';
+import 'src/feature/tab/bloc/tab_bloc.dart';
+import 'src/feature/update/update.dart';
 
 
 Future<void> main() async {
@@ -116,11 +117,9 @@ class EntimeApp extends StatelessWidget {
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
+            Localization.delegate,
           ],
-          supportedLocales: const [
-            Locale('ru', 'RU'), // Russian
-            Locale('en', ''), // English, no country code
-          ],
+          supportedLocales: Localization.supportedLocales,
           //1. call BotToastInit
           builder: BotToastInit(),
           //2. registered route observer

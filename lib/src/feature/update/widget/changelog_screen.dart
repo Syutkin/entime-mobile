@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/i18n.dart';
 import 'changelog_markdown.dart';
 
 class ChangelogScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class ChangelogScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Список изменений'),
+        title: Text(I18nUpdate.changelog),
       ),
       body: SafeArea(
         child: changelogMarkdown(markdownData),

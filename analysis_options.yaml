@@ -10,10 +10,8 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  #  exclude:
-  #    - test/resources/*
-  #    - test/resources/unused_files_analyzer/**
-  #    - test/**/examples/**
+  exclude:
+    - 'lib/src/common/localization/generated/**'
   language:
     strict-inference: true
     strict-raw-types: true
