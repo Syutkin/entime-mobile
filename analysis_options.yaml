@@ -11,7 +11,7 @@ include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude:
-    - 'lib/src/common/localization/generated/**'
+    - lib/src/common/localization/generated/**
   language:
     strict-inference: true
     strict-raw-types: true
