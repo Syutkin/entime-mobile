@@ -11,7 +11,7 @@ description: A mobile application for Entime project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.4.4+70
+version: 0.4.4+71
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
@@ -22,36 +22,37 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  bloc_concurrency: ^0.2.0
-  bot_toast: ^4.0.3
-  csv: ^5.0.1
-  device_info_plus: ^4.0.1
-  equatable: ^2.0.3
-  file_picker: ^5.0.1
-  filesize: ^2.0.1
-  flutter_bloc: ^8.0.1
-  flutter_bluetooth_serial: ^0.4.0
-  flutter_markdown: ^0.6.10+3
-  flutter_tts: ^3.5.0
-  http: ^0.13.4
-  intl: ^0.17.0
-  logger: ^1.1.0
-  material_design_icons_flutter: ^5.0.6996
-  meta: ^1.7.0
+  bloc_concurrency: any
+  bot_toast: any
+  csv: any
+  device_info_plus: any
+  equatable: any
+  file_picker: any
+  filesize: any
+  flutter_bloc: any
+  flutter_bluetooth_serial: any
+  flutter_markdown: any
+  flutter_tts: any
+  http: any
+  intl: any
+  logger: any
+  material_design_icons_flutter: any
+  meta: any
 #  open_file: ^3.2.1
-  open_filex: ^3.4.0
-  package_info_plus: ^1.4.3
-  path: ^1.8.1
-  path_provider: ^2.0.11
-  permission_handler: ^10.0.0
-  pub_semver: ^2.1.1
-  flutter_settings_ui: ^2.0.1
-  share_plus: ^4.0.10
-  shared_preferences: ^2.0.15
-  soundpool: ^2.3.0
-  sqflite: ^2.0.3
-  url_launcher: ^6.1.5
-  wakelock: ^0.6.2
+  open_filex: any
+  package_info_plus: any
+  path: any
+  path_provider: any
+  permission_handler: any
+  pub_semver: any
+  settings_ui: any
+#  flutter_settings_ui: any
+  share_plus: any
+  shared_preferences: any
+  soundpool: any
+  sqflite: any
+  url_launcher: any
+  wakelock: any
 
 dependency_overrides:
   flutter_bluetooth_serial:
@@ -60,11 +61,11 @@ dependency_overrides:
     git: https://github.com/GoldenSoju/open_file.git
 
 dev_dependencies:
-  dart_code_metrics: ^4.17.0
-  flutter_lints: ^2.0.1
+  dart_code_metrics: any
+  flutter_lints: any
   flutter_test:
     sdk: flutter
-  sqflite_common_ffi: ^2.1.1+1
+  sqflite_common_ffi: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

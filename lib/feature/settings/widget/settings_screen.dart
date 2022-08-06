@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 import '../bloc/settings_bloc.dart';
 import '../model/theme.dart';
@@ -56,12 +56,12 @@ class _SettingsPageState extends State<SettingsScreen> {
         return SettingsList(
           sections: [
             SettingsSection(
-              title: 'Основные',
+              title: const Text('Основные'),
               tiles: [
                 SettingsTile.switchTile(
-                  title: 'Bluetooth',
+                  title: const Text('Bluetooth'),
                   //leading: const Icon(Icons.bluetooth),
-                  switchValue: _bluetoothState.isEnabled,
+                  initialValue: _bluetoothState.isEnabled,
                   onToggle: (value) {
                     // Do the request and update with the true value then
                     Future<void> future() async {
@@ -81,29 +81,29 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: 'Переподключение',
-                  subtitle:
-                      'Пытаться переподключится к модулю при обрыве связи',
-                  subtitleMaxLines: 3,
+                  title: const Text('Переподключение'),
+                  description: const Text(
+                      'Пытаться переподключится к модулю при обрыве связи'),
+                  // subtitleMaxLines: 3,
                   //leading: const Icon(Icons.bluetooth),
-                  switchValue: settingsState.reconnect,
+                  initialValue: settingsState.reconnect,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(reconnect: value));
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: 'Звук',
+                  title: const Text('Звук'),
                   //leading: const Icon(Icons.volume_up),
-                  switchValue: settingsState.sound,
+                  initialValue: settingsState.sound,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(sound: value));
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: 'Всегда включённый экран',
-                  titleMaxLines: 2,
+                  title: const Text('Всегда включённый экран'),
+                  // titleMaxLines: 2,
                   //leading: const Icon(Icons.lightbulb_outline),
-                  switchValue: settingsState.wakelock,
+                  initialValue: settingsState.wakelock,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(wakelock: value));
                   },
@@ -111,12 +111,12 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title: 'Обратный отсчёт',
+              title: const Text('Обратный отсчёт'),
               tiles: [
                 SettingsTile.switchTile(
-                  title: 'Обратный отсчёт',
+                  title: const Text('Обратный отсчёт'),
                   //leading: const Icon(Icons.timer),
-                  switchValue: settingsState.beep,
+                  initialValue: settingsState.beep,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(beep: value));
                   },
@@ -124,27 +124,27 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title: 'Голосовые сообщения',
+              title: const Text('Голосовые сообщения'),
               tiles: [
                 SettingsTile.switchTile(
-                  title: 'Голос',
+                  title: const Text('Голос'),
                   //leading: const Icon(MdiIcons.textToSpeech),
-                  switchValue: settingsState.voice,
+                  initialValue: settingsState.voice,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(voice: value));
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: 'Называть имена участников',
-                  titleMaxLines: 2,
+                  title: const Text('Называть имена участников'),
+                  // titleMaxLines: 2,
                   //leading: const Icon(MdiIcons.textToSpeech),
-                  switchValue: settingsState.voiceName,
+                  initialValue: settingsState.voiceName,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(voiceName: value));
                   },
                 ),
                 SettingsTile(
-                  title: 'Громкость',
+                  title: const Text('Громкость'),
                   //leading: const Icon(Icons.volume_up),
                   trailing: Text('${(settingsState.volume * 100).round()}%'),
                   onPressed: (context) async {
@@ -155,7 +155,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title: 'Тембр',
+                  title: const Text('Тембр'),
                   //leading: const Icon(Icons.record_voice_over),
                   trailing: Text(settingsState.pitch.toStringAsFixed(2)),
                   onPressed: (context) async {
@@ -166,7 +166,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title: 'Скорость',
+                  title: const Text('Скорость'),
                   //leading: const Icon(MdiIcons.playSpeed),
                   trailing: Text(settingsState.rate.toStringAsFixed(2)),
                   onPressed: (context) async {
@@ -177,7 +177,7 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile(
-                  title: 'Язык',
+                  title: const Text('Язык'),
                   //leading: const Icon(Icons.language),
                   trailing: Text(settingsState.language),
                   onPressed: (context) {
@@ -187,18 +187,18 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title: 'Стартовый экран',
+              title: const Text('Стартовый экран'),
               tiles: [
                 SettingsTile.switchTile(
-                  title: 'Кнопка "отсечка"',
+                  title: const Text('Кнопка "отсечка"'),
                   //leading: const Icon(MdiIcons.handBackLeft),
-                  switchValue: settingsState.startFab,
+                  initialValue: settingsState.startFab,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(startFab: value));
                   },
                 ),
                 SettingsTile(
-                  title: 'Размер кнопки "отсечка"',
+                  title: const Text('Размер кнопки "отсечка"'),
                   //leading: const Icon(MdiIcons.handBackLeft),
                   trailing: Text('${(settingsState.startFabSize).round()}px'),
                   onPressed: (context) async {
@@ -212,15 +212,15 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: 'Обратный отсчёт',
+                  title: const Text('Обратный отсчёт'),
                   //leading: const Icon(MdiIcons.timer),
-                  switchValue: settingsState.countdown,
+                  initialValue: settingsState.countdown,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(countdown: value));
                   },
                 ),
                 SettingsTile(
-                  title: 'Размер обратного отсчёта',
+                  title: const Text('Размер обратного отсчёта'),
                   //leading: const Icon(MdiIcons.timer),
                   trailing: Text('${(settingsState.countdownSize).round()}px'),
                   onPressed: (context) async {
@@ -234,10 +234,10 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: 'Заменять время старта обратным отсчётом',
-                  titleMaxLines: 2,
+                  title: const Text('Заменять время старта обратным отсчётом'),
+                  // titleMaxLines: 2,
                   //leading: const Icon(MdiIcons.timer),
-                  switchValue: settingsState.countdownAtStartTime,
+                  initialValue: settingsState.countdownAtStartTime,
                   onToggle: (value) {
                     settingsBloc
                         .add(SetBoolValueEvent(countdownAtStartTime: value));
@@ -246,11 +246,11 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title: 'Финишный экран',
+              title: const Text('Финишный экран'),
               tiles: [
                 SettingsTile(
-                  title: 'Задержка перед показом новых отсечек',
-                  titleMaxLines: 2,
+                  title: const Text('Задержка перед показом новых отсечек'),
+                  // titleMaxLines: 2,
                   trailing: Text('${settingsState.finishDelay}мс'),
                   //leading: const Icon(MdiIcons.clockOutline),
                   onPressed: (context) async {
@@ -264,17 +264,17 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: 'Автоподстановка номеров',
+                  title: const Text('Автоподстановка номеров'),
                   //leading: const Icon(MdiIcons.autoFix),
-                  switchValue: settingsState.substituteNumbers,
+                  initialValue: settingsState.substituteNumbers,
                   onToggle: (value) {
                     settingsBloc
                         .add(SetBoolValueEvent(substituteNumbers: value));
                   },
                 ),
                 SettingsTile(
-                  title:
-                      'Задержка перед автоматическим подставлением новых номеров',
+                  title: const Text(
+                      'Задержка перед автоматическим подставлением новых номеров'),
                   trailing: Text('${settingsState.substituteNumbersDelay}мс'),
                   //leading: const Icon(MdiIcons.clockOutline),
                   onPressed: (context) async {
@@ -289,15 +289,15 @@ class _SettingsPageState extends State<SettingsScreen> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  title: 'Кнопка "отсечка"',
+                  title: const Text('Кнопка "отсечка"'),
                   //leading: const Icon(MdiIcons.handBackLeft),
-                  switchValue: settingsState.finishFab,
+                  initialValue: settingsState.finishFab,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(finishFab: value));
                   },
                 ),
                 SettingsTile(
-                  title: 'Размер кнопки "отсечка"',
+                  title: const Text('Размер кнопки "отсечка"'),
                   trailing: Text('${(settingsState.finishFabSize).round()}px'),
                   //leading: const Icon(MdiIcons.handBackLeft),
                   onPressed: (context) async {
@@ -313,13 +313,13 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title: 'Обновление',
+              title: const Text('Обновление'),
               tiles: [
                 SettingsTile.switchTile(
-                  title: 'Проверка обновлений при старте',
-                  titleMaxLines: 2,
+                  title: const Text('Проверка обновлений при старте'),
+                  // titleMaxLines: 2,
                   //leading: const Icon(MdiIcons.update),
-                  switchValue: settingsState.checkUpdates,
+                  initialValue: settingsState.checkUpdates,
                   onToggle: (value) {
                     settingsBloc.add(SetBoolValueEvent(checkUpdates: value));
                   },
@@ -327,15 +327,15 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title: 'Темы',
+              title: const Text('Темы'),
               tiles: _themes(),
             ),
             SettingsSection(
-              title: 'Журнал',
+              title: const Text('Журнал'),
               tiles: [
                 SettingsTile(
-                  title: 'Количество показываемых записей',
-                  titleMaxLines: 2,
+                  title: const Text('Количество показываемых записей'),
+                  // titleMaxLines: 2,
                   trailing: settingsState.logLimit > -1
                       ? Text('${settingsState.logLimit}')
                       // : Text('без ограничений'),
@@ -352,10 +352,10 @@ class _SettingsPageState extends State<SettingsScreen> {
               ],
             ),
             SettingsSection(
-              title: 'По умолчанию',
+              title: const Text('По умолчанию'),
               tiles: [
                 SettingsTile(
-                  title: 'Настройки по умолчанию',
+                  title: const Text('Настройки по умолчанию'),
                   //leading: const Icon(MdiIcons.backupRestore),
                   onPressed: (context) {
                     settingsBloc.add(SetDefaultSettings());
@@ -375,7 +375,7 @@ class _SettingsPageState extends State<SettingsScreen> {
         BlocProvider.of<SettingsBloc>(context).settings.getTheme();
     for (final element in AppTheme.values) {
       result.add(SettingsTile(
-        title: element.display(),
+        title: Text(element.display()),
         leading: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
