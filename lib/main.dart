@@ -20,13 +20,16 @@ import 'feature/update/update.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await BlocOverrides.runZoned(
-    () async {
-      await runMain();
-    },
-    blocObserver: AppBlocObserver(),
-    eventTransformer: bloc_concurrency.sequential(),
-  );
+  // await BlocOverrides.runZoned(
+  //   () async {
+  //     await runMain();
+  //   },
+  //   blocObserver: AppBlocObserver(),
+  //   eventTransformer: bloc_concurrency.sequential(),
+  // );
+  Bloc.observer = AppBlocObserver();
+  Bloc.transformer = bloc_concurrency.sequential();
+  await runMain();
 }
 
 Future<void> runMain() async {
