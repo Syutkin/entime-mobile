@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../common/helper/helper.dart';
+import '../../../common/localization/localization.dart';
 import '../../protocol/bloc/protocol_bloc.dart';
 
 // ToDo: get rid of this ignore
@@ -32,7 +33,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Выберите файл'),
+        title: Text(Localization.current.I18nInit_selectFile),
         actions: <Widget>[
           IconButton(
             icon: const Icon(MdiIcons.filePlusOutline),
@@ -103,7 +104,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                 ),
               );
             } else {
-              return const Text('No data');
+              return Text(Localization.current.I18nInit_noData);
             }
           }),
     );
@@ -133,18 +134,18 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
         return PopupMenuButton<int>(
           // child: PopupMenuButton<int>(
           itemBuilder: (context) => [
-            const PopupMenuItem(
+            PopupMenuItem(
               value: 2,
               child: ListTile(
-                leading: Icon(Icons.share),
-                title: Text('Поделиться'),
+                leading: const Icon(Icons.share),
+                title: Text(Localization.current.I18nInit_share),
               ),
             ),
-            const PopupMenuItem(
+            PopupMenuItem(
               value: 1,
               child: ListTile(
-                leading: Icon(Icons.delete),
-                title: Text('Удалить'),
+                leading: const Icon(Icons.delete),
+                title: Text(Localization.current.I18nInit_delete),
               ),
             ),
           ],
@@ -170,7 +171,8 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                 break;
               case 2:
                 // ShareExtend.share(item.path, 'file');
-                Share.shareFiles([item.path], text: 'Файл базы данных');
+                Share.shareFiles([item.path],
+                    text: Localization.current.I18nInit_dbFile);
                 break;
               default:
                 break;

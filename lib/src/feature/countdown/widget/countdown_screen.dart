@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/localization.dart';
+
 class CountdownScreen extends StatelessWidget {
   const CountdownScreen({
     Key? key,
@@ -8,7 +10,7 @@ class CountdownScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Настройки модуля')),
+      appBar: AppBar(title: Text(Localization.current.I18nCountdown_countdown)),
       //ToDo: страница с обратным отсчётом и звуковым сопровождением
       // body: BlocBuilder<ManualCountdownBloc, ManualCountdownState>(
       //     builder: (context, state) {

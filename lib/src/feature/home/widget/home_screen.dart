@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path/path.dart';
 
+import '../../../common/localization/localization.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../drawer/widget/app_drawer.dart';
 import '../../init/init.dart';
@@ -26,11 +27,12 @@ class HomeScreen extends StatelessWidget {
         if (state is ProtocolSelectedState) {
           // Обновление автоматического времени старта
           if (state.automaticStart != null && state.automaticStart!.updating) {
-            final String text = 'Участнику под номером '
-                '${state.previousStart!.first.number} '
-                'уже установлена стартовая поправка '
-                '${state.previousStart!.first.automaticcorrection}. '
-                'Обновить её на ${state.automaticStart!.correction}?';
+            final String text =
+                Localization.current.I18nHome_updateAutomaticCorrection(
+              state.previousStart!.first.number,
+              state.previousStart!.first.automaticcorrection!,
+              state.automaticStart!.correction,
+            );
             final bool? update = await overwriteStartTimePopup(
               context: context,
               text: text,
@@ -46,30 +48,30 @@ class HomeScreen extends StatelessWidget {
           if (state.previousStart != null && state.startTime != null) {
             // Если стартовое время уже присвоено другому номеру
             String text = '';
-
             for (final element in state.previousStart!) {
               if (element.automaticstarttime == null &&
                   element.manualstarttime == null) {
-                text += 'Стартовое время ${state.startTime!.time} уже '
-                    'присвоено номеру ${element.number}. '
-                    'Вы уверены что хотите установить одинаковое стартовое время '
-                    'для номеров ${state.startTime!.number} и '
-                    '${element.number}?\n';
+                text += Localization.current.I18nHome_equalStartTime(
+                  state.startTime!.time,
+                  element.number,
+                  state.startTime!.number,
+                );
               } else {
                 if (element.automaticstarttime != null) {
-                  text += 'У номера ${state.startTime!.number} уже проставлена '
-                      'автоматическая стартовая отсечка: '
-                      '${element.automaticstarttime}. '
-                      'Установить новое стартовое время и удалить предыдущее значение?\n';
+                  text += Localization.current
+                      .I18nHome_updateAutomaticStartCorrection(
+                    state.startTime!.number,
+                    element.automaticstarttime!,
+                  );
                 } else if (element.manualstarttime != null) {
-                  text += 'У номера ${state.startTime!.number} уже проставлена '
-                      'ручная стартовая отсечка: '
-                      '${element.manualstarttime}. '
-                      'Установить новое стартовое время и удалить предыдущее значение?\n';
+                  text += Localization.current
+                      .I18nHome_updateAutomaticStartCorrection(
+                    state.startTime!.number,
+                    element.manualstarttime!,
+                  );
                 } else {
-                  text +=
-                      'Ошибка при добавлении участника! Для продолжения нажмите '
-                      '"${materialLocalization.cancelButtonLabel}"\n';
+                  text += Localization.current.I18nHome_errorAddParticipant(
+                      materialLocalization.cancelButtonLabel);
                 }
               }
             }
@@ -116,10 +118,10 @@ class HomeScreen extends StatelessWidget {
                       break;
                   }
                 },
-                tabs: const <Widget>[
-                  Tab(icon: Text('Начало')),
-                  Tab(icon: Text('Старт')),
-                  Tab(icon: Text('Финиш')),
+                tabs: <Widget>[
+                  Tab(icon: Text(Localization.current.I18nHome_home)),
+                  Tab(icon: Text(Localization.current.I18nHome_start)),
+                  Tab(icon: Text(Localization.current.I18nHome_finish)),
                 ],
               ),
             ),
@@ -143,14 +145,15 @@ class HomeScreen extends StatelessWidget {
                     if (state is UpdateAvailable &&
                         !Scaffold.of(context).isDrawerOpen) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Доступна новая версия ${state.version}'),
+                        content: Text(Localization.current
+                            .I18nHome_updateAvailable(state.version)),
                         action: SnackBarAction(
                           onPressed: () {
                             BlocProvider.of<UpdateBloc>(context)
                                 .add(DownloadUpdate());
                             Scaffold.of(context).openDrawer();
                           },
-                          label: 'Обновить',
+                          label: Localization.current.I18nHome_update,
                         ),
                       ));
                     } else if (state is UpdateInitial &&
@@ -198,75 +201,75 @@ class HomeScreen extends StatelessWidget {
         if (protocolState is ProtocolSelectedState) {
           if (activeTab == AppTab.start) {
             menuItems.add(
-              const PopupMenuItem(
+              PopupMenuItem(
                   value: MenuButton.addRacer,
                   child: ListTile(
-                    leading: Icon(Icons.add),
-                    title: Text('Добавить'),
+                    leading: const Icon(Icons.add),
+                    title: Text(Localization.current.I18nHome_addRacer),
                   )),
             );
           }
           menuItems.add(
-            const PopupMenuItem(
+            PopupMenuItem(
                 value: MenuButton.share,
                 child: ListTile(
-                  leading: Icon(Icons.share),
-                  title: Text('Поделиться'),
+                  leading: const Icon(Icons.share),
+                  title: Text(Localization.current.I18nHome_share),
                 )),
           );
         } else {
           menuItems.add(
-            const PopupMenuItem(
+            PopupMenuItem(
                 value: MenuButton.selectStartProtocol,
                 child: ListTile(
-                  leading: Icon(MdiIcons.database),
-                  title: Text('Стартовый протокол'),
+                  leading: const Icon(MdiIcons.database),
+                  title: Text(Localization.current.I18nHome_selectStartProtocol),
                 )),
           );
         }
         if (activeTab == AppTab.start) {
           menuItems.add(
-            const PopupMenuItem(
+            PopupMenuItem(
                 value: MenuButton.countdown,
                 child: ListTile(
-                  leading: Icon(MdiIcons.timer),
-                  title: Text('Обратный отсчёт'),
+                  leading: const Icon(MdiIcons.timer),
+                  title: Text(Localization.current.I18nHome_countdown),
                 )),
           );
         }
         menuItems.add(
-          const PopupMenuItem(
+          PopupMenuItem(
               value: MenuButton.fab,
               child: ListTile(
-                leading: Icon(MdiIcons.handBackLeft),
-                title: Text('FAB'),
+                leading: const Icon(MdiIcons.handBackLeft),
+                title: Text(Localization.current.I18nHome_fab),
               )),
         );
       } else {
         menuItems.add(
-          const PopupMenuItem(
+          PopupMenuItem(
               value: MenuButton.selectStartProtocol,
               child: ListTile(
-                leading: Icon(MdiIcons.database),
-                title: Text('Стартовый протокол'),
+                leading: const Icon(MdiIcons.database),
+                title: Text(Localization.current.I18nHome_selectStartProtocol),
               )),
         );
         menuItems.add(
-          const PopupMenuItem(
+          PopupMenuItem(
               value: MenuButton.bluetooth,
               child: ListTile(
-                leading: Icon(Icons.bluetooth),
-                title: Text('Bluetooth'),
+                leading: const Icon(Icons.bluetooth),
+                title: Text(Localization.current.I18nHome_bluetooth),
               )),
         );
       }
       if (protocolState is ProtocolSelectedState && activeTab == AppTab.start) {
         menuItems.add(
-          const PopupMenuItem(
+          PopupMenuItem(
               value: MenuButton.importCsv,
               child: ListTile(
-                leading: Icon(MdiIcons.import),
-                title: Text('Импорт стартового протокола'),
+                leading: const Icon(MdiIcons.import),
+                title: Text(Localization.current.I18nHome_importStartProtocolCsv),
               )),
         );
       }
@@ -331,30 +334,30 @@ class HomeScreen extends StatelessWidget {
           CheckedPopupMenuItem(
             value: FilterFinish.hideMarked,
             checked: !bloc.state.hideMarked,
-            child: const Text('Скрытые'),
+            child: Text(Localization.current.I18nHome_hideMarked),
           ),
         );
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideNumbers,
             checked: !bloc.state.hideNumbers,
-            child: const Text('С номерами'),
+            child: Text(Localization.current.I18nHome_hideNumbers),
           ),
         );
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideManual,
             checked: !bloc.state.hideManual,
-            child: const Text('Ручная отсечка'),
+            child: Text(Localization.current.I18nHome_hideManual),
           ),
         );
         menuItems.add(const PopupMenuDivider());
         menuItems.add(
-          const PopupMenuItem(
+          PopupMenuItem(
             value: FilterFinish.setDefaults,
             child: ListTile(
-              leading: SizedBox(width: 0, height: 0),
-              title: Text('По умолчанию'),
+              leading: const SizedBox(width: 0, height: 0),
+              title: Text(Localization.current.I18nHome_setDefaults),
             ),
           ),
         );

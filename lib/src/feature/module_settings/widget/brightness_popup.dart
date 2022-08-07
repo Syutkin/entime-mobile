@@ -17,7 +17,7 @@ Future<int?> brightnessPopup(
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('Яркость ${brightness.toInt()}'),
+              Text(Localization.current.I18nModuleSettings_brightnessInt(brightness.toInt())),
               Slider(
                 value: brightness,
                 min: 0,

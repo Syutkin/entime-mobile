@@ -11,7 +11,6 @@ Future<int?> buzzerFrequencyPopup(
     {required String text,
     required BuildContext context,
     required int frequency}) async {
-
   final List<Note> notes = [
     Note('B0', 31),
     Note('C1', 33),
@@ -124,12 +123,16 @@ Future<int?> buzzerFrequencyPopup(
     builder: (context) {
       return AlertDialog(
         title: Text(text),
-        content: StatefulBuilder(
-            builder: (context, setState) {
+        content: StatefulBuilder(builder: (context, setState) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('Нота ${notes[value.toInt()].name}, ${notes[value.toInt()].frequency}Гц'),
+              Text(
+                Localization.current.I18nModuleSettings_noteFrequency(
+                  notes[value.toInt()].name,
+                  notes[value.toInt()].frequency,
+                ),
+              ),
               Slider(
                 value: value,
                 min: 0,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/localization.dart';
+
 part 'vcc_popup.dart';
 part 'buzzer_frequency_popup.dart';
 part 'bluetooth_number_popup.dart';

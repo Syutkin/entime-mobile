@@ -740,6 +740,910 @@ class GeneratedLocalization {
       args: [],
     );
   }
+
+  /// `Неизвестное устройство`
+  String get I18nBluetooth_unknownDevice {
+    return Intl.message(
+      'Неизвестное устройство',
+      name: 'I18nBluetooth_unknownDevice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `дБм`
+  String get I18nBluetooth_dbm {
+    return Intl.message(
+      'дБм',
+      name: 'I18nBluetooth_dbm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выберите устройство`
+  String get I18nBluetooth_selectDevice {
+    return Intl.message(
+      'Выберите устройство',
+      name: 'I18nBluetooth_selectDevice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Обратный отсчёт`
+  String get I18nCountdown_countdown {
+    return Intl.message(
+      'Обратный отсчёт',
+      name: 'I18nCountdown_countdown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Настройки`
+  String get I18nDrawer_settings {
+    return Intl.message(
+      'Настройки',
+      name: 'I18nDrawer_settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Помощь`
+  String get I18nDrawer_help {
+    return Intl.message(
+      'Помощь',
+      name: 'I18nDrawer_help',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `О программе`
+  String get I18nDrawer_about {
+    return Intl.message(
+      'О программе',
+      name: 'I18nDrawer_about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `v{version}`
+  String I18nDrawer_version(Object version) {
+    return Intl.message(
+      'v$version',
+      name: 'I18nDrawer_version',
+      desc: '',
+      args: [version],
+    );
+  }
+
+  /// `Руководство`
+  String get I18nHelp_manual {
+    return Intl.message(
+      'Руководство',
+      name: 'I18nHelp_manual',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку "Start", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку "Finish", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  `
+  String get I18nHelp_manualMd {
+    return Intl.message(
+      '# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку "Start", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку "Finish", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  ',
+      name: 'I18nHelp_manualMd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Участнику под номером {number} уже установлена стартовая поправка {prevCorrection}. Обновить её на {correction}?`
+  String I18nHome_updateAutomaticCorrection(
+      Object number, Object prevCorrection, Object correction) {
+    return Intl.message(
+      'Участнику под номером $number уже установлена стартовая поправка $prevCorrection. Обновить её на $correction?',
+      name: 'I18nHome_updateAutomaticCorrection',
+      desc: '',
+      args: [number, prevCorrection, correction],
+    );
+  }
+
+  /// `Стартовое время {time} уже присвоено номеру {prevNumber}. Вы уверены что хотите установить одинаковое стартовое время для номеров {currentNumber} и {prevNumber}?\n`
+  String I18nHome_equalStartTime(
+      Object time, Object prevNumber, Object currentNumber) {
+    return Intl.message(
+      'Стартовое время $time уже присвоено номеру $prevNumber. Вы уверены что хотите установить одинаковое стартовое время для номеров $currentNumber и $prevNumber?\n',
+      name: 'I18nHome_equalStartTime',
+      desc: '',
+      args: [time, prevNumber, currentNumber],
+    );
+  }
+
+  /// `У номера {number} уже проставлена автоматическая стартовая отсечка: {automaticCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n`
+  String I18nHome_updateAutomaticStartCorrection(
+      Object number, Object automaticCorrection) {
+    return Intl.message(
+      'У номера $number уже проставлена автоматическая стартовая отсечка: $automaticCorrection. Установить новое стартовое время и удалить предыдущее значение?\n',
+      name: 'I18nHome_updateAutomaticStartCorrection',
+      desc: '',
+      args: [number, automaticCorrection],
+    );
+  }
+
+  /// `У номера {number} уже проставлена ручная стартовая отсечка: {manualCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n`
+  String I18nHome_updateManualStartCorrection(
+      Object number, Object manualCorrection) {
+    return Intl.message(
+      'У номера $number уже проставлена ручная стартовая отсечка: $manualCorrection. Установить новое стартовое время и удалить предыдущее значение?\n',
+      name: 'I18nHome_updateManualStartCorrection',
+      desc: '',
+      args: [number, manualCorrection],
+    );
+  }
+
+  /// `Ошибка при добавлении участника! Для продолжения нажмите "{cancelButtonLabel}"\n`
+  String I18nHome_errorAddParticipant(Object cancelButtonLabel) {
+    return Intl.message(
+      'Ошибка при добавлении участника! Для продолжения нажмите "$cancelButtonLabel"\n',
+      name: 'I18nHome_errorAddParticipant',
+      desc: '',
+      args: [cancelButtonLabel],
+    );
+  }
+
+  /// `Начало`
+  String get I18nHome_home {
+    return Intl.message(
+      'Начало',
+      name: 'I18nHome_home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Старт`
+  String get I18nHome_start {
+    return Intl.message(
+      'Старт',
+      name: 'I18nHome_start',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Финиш`
+  String get I18nHome_finish {
+    return Intl.message(
+      'Финиш',
+      name: 'I18nHome_finish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Доступна новая версия {version}`
+  String I18nHome_updateAvailable(Object version) {
+    return Intl.message(
+      'Доступна новая версия $version',
+      name: 'I18nHome_updateAvailable',
+      desc: '',
+      args: [version],
+    );
+  }
+
+  /// `Обновить`
+  String get I18nHome_update {
+    return Intl.message(
+      'Обновить',
+      name: 'I18nHome_update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить`
+  String get I18nHome_addRacer {
+    return Intl.message(
+      'Добавить',
+      name: 'I18nHome_addRacer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Поделиться`
+  String get I18nHome_share {
+    return Intl.message(
+      'Поделиться',
+      name: 'I18nHome_share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Стартовый протокол`
+  String get I18nHome_selectStartProtocol {
+    return Intl.message(
+      'Стартовый протокол',
+      name: 'I18nHome_selectStartProtocol',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Обратный отсчёт`
+  String get I18nHome_countdown {
+    return Intl.message(
+      'Обратный отсчёт',
+      name: 'I18nHome_countdown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FAB`
+  String get I18nHome_fab {
+    return Intl.message(
+      'FAB',
+      name: 'I18nHome_fab',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Импорт стартового протокола`
+  String get I18nHome_importStartProtocolCsv {
+    return Intl.message(
+      'Импорт стартового протокола',
+      name: 'I18nHome_importStartProtocolCsv',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bluetooth`
+  String get I18nHome_bluetooth {
+    return Intl.message(
+      'Bluetooth',
+      name: 'I18nHome_bluetooth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Скрытые`
+  String get I18nHome_hideMarked {
+    return Intl.message(
+      'Скрытые',
+      name: 'I18nHome_hideMarked',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `С номерами`
+  String get I18nHome_hideNumbers {
+    return Intl.message(
+      'С номерами',
+      name: 'I18nHome_hideNumbers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ручная отсечка`
+  String get I18nHome_hideManual {
+    return Intl.message(
+      'Ручная отсечка',
+      name: 'I18nHome_hideManual',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `По умолчанию`
+  String get I18nHome_setDefaults {
+    return Intl.message(
+      'По умолчанию',
+      name: 'I18nHome_setDefaults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Стартовый протокол`
+  String get I18nInit_startProtocol {
+    return Intl.message(
+      'Стартовый протокол',
+      name: 'I18nInit_startProtocol',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Нажмите чтобы выбрать`
+  String get I18nInit_pressToSelect {
+    return Intl.message(
+      'Нажмите чтобы выбрать',
+      name: 'I18nInit_pressToSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bluetooth модуль`
+  String get I18nInit_bluetoothModule {
+    return Intl.message(
+      'Bluetooth модуль',
+      name: 'I18nInit_bluetoothModule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выберите файл`
+  String get I18nInit_selectFile {
+    return Intl.message(
+      'Выберите файл',
+      name: 'I18nInit_selectFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Нет данных`
+  String get I18nInit_noData {
+    return Intl.message(
+      'Нет данных',
+      name: 'I18nInit_noData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Поделиться`
+  String get I18nInit_share {
+    return Intl.message(
+      'Поделиться',
+      name: 'I18nInit_share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Удалить`
+  String get I18nInit_delete {
+    return Intl.message(
+      'Удалить',
+      name: 'I18nInit_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Файл базы данных`
+  String get I18nInit_dbFile {
+    return Intl.message(
+      'Файл базы данных',
+      name: 'I18nInit_dbFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Информация Bluetooth`
+  String get I18nLog_bluetoothInformation {
+    return Intl.message(
+      'Информация Bluetooth',
+      name: 'I18nLog_bluetoothInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Записать новые настройки в модуль?`
+  String get I18nModuleSettings_saveSettingsToModule {
+    return Intl.message(
+      'Записать новые настройки в модуль?',
+      name: 'I18nModuleSettings_saveSettingsToModule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Настройки модуля`
+  String get I18nModuleSettings_moduleSettings {
+    return Intl.message(
+      'Настройки модуля',
+      name: 'I18nModuleSettings_moduleSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка загрузки настроек!`
+  String get I18nModuleSettings_errorLoadSettings {
+    return Intl.message(
+      'Ошибка загрузки настроек!',
+      name: 'I18nModuleSettings_errorLoadSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ждём настройки...`
+  String get I18nModuleSettings_awaitingSettings {
+    return Intl.message(
+      'Ждём настройки...',
+      name: 'I18nModuleSettings_awaitingSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Модуль`
+  String get I18nModuleSettings_module {
+    return Intl.message(
+      'Модуль',
+      name: 'I18nModuleSettings_module',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buzzer`
+  String get I18nModuleSettings_buzzer {
+    return Intl.message(
+      'Buzzer',
+      name: 'I18nModuleSettings_buzzer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Частота коротких гудков`
+  String get I18nModuleSettings_shortFrequency {
+    return Intl.message(
+      'Частота коротких гудков',
+      name: 'I18nModuleSettings_shortFrequency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выберите частоту короткого гудка`
+  String get I18nModuleSettings_selectShortFrequency {
+    return Intl.message(
+      'Выберите частоту короткого гудка',
+      name: 'I18nModuleSettings_selectShortFrequency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Частота длинных гудков`
+  String get I18nModuleSettings_longFrequency {
+    return Intl.message(
+      'Частота длинных гудков',
+      name: 'I18nModuleSettings_longFrequency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выберите частоту длинного гудка`
+  String get I18nModuleSettings_selectLongFrequency {
+    return Intl.message(
+      'Выберите частоту длинного гудка',
+      name: 'I18nModuleSettings_selectLongFrequency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Нота {note}, {frequency}Гц`
+  String I18nModuleSettings_noteFrequency(Object note, Object frequency) {
+    return Intl.message(
+      'Нота $note, $frequencyГц',
+      name: 'I18nModuleSettings_noteFrequency',
+      desc: '',
+      args: [note, frequency],
+    );
+  }
+
+  /// `LoRa`
+  String get I18nModuleSettings_lora {
+    return Intl.message(
+      'LoRa',
+      name: 'I18nModuleSettings_lora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Частота`
+  String get I18nModuleSettings_frequency {
+    return Intl.message(
+      'Частота',
+      name: 'I18nModuleSettings_frequency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{frequency} Гц`
+  String I18nModuleSettings_frequencyHz(Object frequency) {
+    return Intl.message(
+      '$frequency Гц',
+      name: 'I18nModuleSettings_frequencyHz',
+      desc: '',
+      args: [frequency],
+    );
+  }
+
+  /// `TX Power`
+  String get I18nModuleSettings_txPower {
+    return Intl.message(
+      'TX Power',
+      name: 'I18nModuleSettings_txPower',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Spreading Factor`
+  String get I18nModuleSettings_spreadingFactor {
+    return Intl.message(
+      'Spreading Factor',
+      name: 'I18nModuleSettings_spreadingFactor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signal Bandwidth`
+  String get I18nModuleSettings_signalBandwidth {
+    return Intl.message(
+      'Signal Bandwidth',
+      name: 'I18nModuleSettings_signalBandwidth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coding Rate Denominator`
+  String get I18nModuleSettings_codingRateDenominator {
+    return Intl.message(
+      'Coding Rate Denominator',
+      name: 'I18nModuleSettings_codingRateDenominator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preamble Length`
+  String get I18nModuleSettings_preambleLength {
+    return Intl.message(
+      'Preamble Length',
+      name: 'I18nModuleSettings_preambleLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sync Word`
+  String get I18nModuleSettings_syncWord {
+    return Intl.message(
+      'Sync Word',
+      name: 'I18nModuleSettings_syncWord',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CRC`
+  String get I18nModuleSettings_crc {
+    return Intl.message(
+      'CRC',
+      name: 'I18nModuleSettings_crc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Экран`
+  String get I18nModuleSettings_screen {
+    return Intl.message(
+      'Экран',
+      name: 'I18nModuleSettings_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TFT`
+  String get I18nModuleSettings_tft {
+    return Intl.message(
+      'TFT',
+      name: 'I18nModuleSettings_tft',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Спящий режим`
+  String get I18nModuleSettings_sleepMode {
+    return Intl.message(
+      'Спящий режим',
+      name: 'I18nModuleSettings_sleepMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{seconds} секунд`
+  String I18nModuleSettings_sleepModeSeconds(Object seconds) {
+    return Intl.message(
+      '$seconds секунд',
+      name: 'I18nModuleSettings_sleepModeSeconds',
+      desc: '',
+      args: [seconds],
+    );
+  }
+
+  /// `Включать после события`
+  String get I18nModuleSettings_turnOnAtEvent {
+    return Intl.message(
+      'Включать после события',
+      name: 'I18nModuleSettings_turnOnAtEvent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bluetooth`
+  String get I18nModuleSettings_bluetooth {
+    return Intl.message(
+      'Bluetooth',
+      name: 'I18nModuleSettings_bluetooth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя модуля`
+  String get I18nModuleSettings_bluetoothModuleName {
+    return Intl.message(
+      'Имя модуля',
+      name: 'I18nModuleSettings_bluetoothModuleName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Номер модуля`
+  String get I18nModuleSettings_bluetoothModuleNumber {
+    return Intl.message(
+      'Номер модуля',
+      name: 'I18nModuleSettings_bluetoothModuleNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Номер`
+  String get I18nModuleSettings_bluetoothNumber {
+    return Intl.message(
+      'Номер',
+      name: 'I18nModuleSettings_bluetoothNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите номер модуля`
+  String get I18nModuleSettings_enterBluetoothModuleNumber {
+    return Intl.message(
+      'Введите номер модуля',
+      name: 'I18nModuleSettings_enterBluetoothModuleNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WiFi`
+  String get I18nModuleSettings_wifi {
+    return Intl.message(
+      'WiFi',
+      name: 'I18nModuleSettings_wifi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сеть`
+  String get I18nModuleSettings_wifiNetwork {
+    return Intl.message(
+      'Сеть',
+      name: 'I18nModuleSettings_wifiNetwork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите имя WiFi сети`
+  String get I18nModuleSettings_enterWifiSsid {
+    return Intl.message(
+      'Введите имя WiFi сети',
+      name: 'I18nModuleSettings_enterWifiSsid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите пароль WiFi сети {ssid}`
+  String I18nModuleSettings_enterWifiPassword(Object ssid) {
+    return Intl.message(
+      'Введите пароль WiFi сети $ssid',
+      name: 'I18nModuleSettings_enterWifiPassword',
+      desc: '',
+      args: [ssid],
+    );
+  }
+
+  /// `Пароль`
+  String get I18nModuleSettings_password {
+    return Intl.message(
+      'Пароль',
+      name: 'I18nModuleSettings_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `VCC`
+  String get I18nModuleSettings_vcc {
+    return Intl.message(
+      'VCC',
+      name: 'I18nModuleSettings_vcc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `R1`
+  String get I18nModuleSettings_resistor1 {
+    return Intl.message(
+      'R1',
+      name: 'I18nModuleSettings_resistor1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `R2`
+  String get I18nModuleSettings_resistor2 {
+    return Intl.message(
+      'R2',
+      name: 'I18nModuleSettings_resistor2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ом`
+  String get I18nModuleSettings_ohm {
+    return Intl.message(
+      'Ом',
+      name: 'I18nModuleSettings_ohm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{ohm} Ом`
+  String I18nModuleSettings_resistorOhm(Object ohm) {
+    return Intl.message(
+      '$ohm Ом',
+      name: 'I18nModuleSettings_resistorOhm',
+      desc: '',
+      args: [ohm],
+    );
+  }
+
+  /// `Введите значение резистора R1`
+  String get I18nModuleSettings_enterResistor1 {
+    return Intl.message(
+      'Введите значение резистора R1',
+      name: 'I18nModuleSettings_enterResistor1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите значение резистора R2`
+  String get I18nModuleSettings_enterResistor2 {
+    return Intl.message(
+      'Введите значение резистора R2',
+      name: 'I18nModuleSettings_enterResistor2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ввод измеренного напряжения`
+  String get I18nModuleSettings_enterMeasuredVoltage {
+    return Intl.message(
+      'Ввод измеренного напряжения',
+      name: 'I18nModuleSettings_enterMeasuredVoltage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `мВ`
+  String get I18nModuleSettings_mv {
+    return Intl.message(
+      'мВ',
+      name: 'I18nModuleSettings_mv',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите текущее значение напряжения на батареях`
+  String get I18nModuleSettings_enterCurrentVoltage {
+    return Intl.message(
+      'Введите текущее значение напряжения на батареях',
+      name: 'I18nModuleSettings_enterCurrentVoltage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Яркость`
+  String get I18nModuleSettings_brightness {
+    return Intl.message(
+      'Яркость',
+      name: 'I18nModuleSettings_brightness',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Установите яркость панели`
+  String get I18nModuleSettings_setBrightness {
+    return Intl.message(
+      'Установите яркость панели',
+      name: 'I18nModuleSettings_setBrightness',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Яркость {brightness}`
+  String I18nModuleSettings_brightnessInt(Object brightness) {
+    return Intl.message(
+      'Яркость $brightness',
+      name: 'I18nModuleSettings_brightnessInt',
+      desc: '',
+      args: [brightness],
+    );
+  }
+
+  /// `Неизвестный тип модуля: {type}`
+  String I18nModuleSettings_unknownModuleType(Object type) {
+    return Intl.message(
+      'Неизвестный тип модуля: $type',
+      name: 'I18nModuleSettings_unknownModuleType',
+      desc: '',
+      args: [type],
+    );
+  }
 }
 
 class AppLocalizationDelegate

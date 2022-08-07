@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
+import '../../../common/localization/localization.dart';
 import '../bloc/bluetooth_bloc.dart';
 import '../model/bluetooth.dart';
 import 'bluetooth_device_list_entry.dart';
@@ -116,7 +117,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
         .toList();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Выберите устройство'),
+        title: Text(Localization.current.I18nBluetooth_selectDevice),
         actions: <Widget>[
           _isDiscovering
               ? FittedBox(

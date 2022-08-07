@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
 
+import '../../../common/localization/localization.dart';
 import '../../../common/widget/splash_widget.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../bloc/module_settings_bloc.dart';
@@ -16,7 +17,8 @@ class ModuleSettingsInitScreen extends StatelessWidget {
           context: context,
           barrierDismissible: true,
           builder: (context) => AlertDialog(
-                title: const Text('Записать новые настройки в модуль?'),
+                title: Text(Localization
+                    .current.I18nModuleSettings_saveSettingsToModule),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -48,7 +50,9 @@ class ModuleSettingsInitScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => _onBackPressed(context, updated),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Настройки модуля')),
+        appBar: AppBar(
+            title:
+                Text(Localization.current.I18nModuleSettings_moduleSettings)),
         body: BlocBuilder<ModuleSettingsBloc, ModuleSettingsState>(
             builder: (context, state) {
           if (state is ModuleSettingsUpdated) {
@@ -56,9 +60,12 @@ class ModuleSettingsInitScreen extends StatelessWidget {
               onChanged: () => updated = true,
             );
           } else if (state is ModuleSettingsLoadError) {
-            return const Splash(text: 'Ошибка загрузки настроек!');
+            return Splash(
+                text:
+                    Localization.current.I18nModuleSettings_errorLoadSettings);
           } else {
-            return const Splash(text: 'Ждём настройки...');
+            return Splash(
+                text: Localization.current.I18nModuleSettings_awaitingSettings);
           }
         }),
       ),
@@ -82,20 +89,20 @@ class ModuleSettingsScreen extends StatelessWidget {
           builder: (context, state) {
         return SettingsList(sections: [
           SettingsSection(
-            title: const Text('Модуль'),
+            title: Text(Localization.current.I18nModuleSettings_module),
             tiles: [
               SettingsTile(
-                title:
-            Text('${bloc.moduleSettings.bluetoothName}${bloc.moduleSettings.bluetoothNumber}'),
+                title: Text(
+                    '${bloc.moduleSettings.bluetoothName}${bloc.moduleSettings.bluetoothNumber}'),
               ),
             ],
           ),
           SettingsSection(
-            title: const Text('Buzzer'),
+            title: Text(Localization.current.I18nModuleSettings_buzzer),
             tiles: [
               SettingsTile.switchTile(
-                title: const Text('Buzzer'),
-                //leading: const Icon(MdiIcons.bell),
+                title: Text(Localization.current.I18nModuleSettings_buzzer),
+                //leading:  Icon(MdiIcons.bell),
                 initialValue: bloc.moduleSettings.buzzer,
                 onToggle: (value) {
                   onChanged();
@@ -104,14 +111,19 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                title: const Text('Частота коротких гудков'),
-                trailing: Text('${bloc.moduleSettings.shortFrequency} Гц'),
-                //leading: const Icon(MdiIcons.wave),
+                title: Text(
+                    Localization.current.I18nModuleSettings_shortFrequency),
+                trailing:
+                    Text(Localization.current.I18nModuleSettings_frequencyHz(
+                  bloc.moduleSettings.shortFrequency,
+                )),
+                //leading:  Icon(MdiIcons.wave),
                 onPressed: (context) async {
                   final int? hz = await buzzerFrequencyPopup(
                       frequency: bloc.moduleSettings.shortFrequency,
                       context: context,
-                      text: 'Выберите частоту короткого гудка');
+                      text: Localization
+                          .current.I18nModuleSettings_selectShortFrequency);
                   if (hz != null) {
                     onChanged();
                     bloc.moduleSettings.shortFrequency = hz;
@@ -120,14 +132,19 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                title: const Text('Частота длинных гудков'),
-            trailing: Text('${bloc.moduleSettings.longFrequency} Гц'),
-                //leading: const Icon(MdiIcons.wave),
+                title:
+                    Text(Localization.current.I18nModuleSettings_longFrequency),
+                trailing:
+                    Text(Localization.current.I18nModuleSettings_frequencyHz(
+                  bloc.moduleSettings.longFrequency,
+                )),
+                //leading:  Icon(MdiIcons.wave),
                 onPressed: (context) async {
                   final int? hz = await buzzerFrequencyPopup(
                       frequency: bloc.moduleSettings.longFrequency,
                       context: context,
-                      text: 'Выберите частоту длинного гудка');
+                      text: Localization
+                          .current.I18nModuleSettings_selectLongFrequency);
                   if (hz != null) {
                     onChanged();
                     bloc.moduleSettings.longFrequency = hz;
@@ -138,11 +155,11 @@ class ModuleSettingsScreen extends StatelessWidget {
             ],
           ),
           SettingsSection(
-            title: const Text('LoRa'),
+            title: Text(Localization.current.I18nModuleSettings_lora),
             tiles: [
               SettingsTile.switchTile(
-                title: const Text('LoRa'),
-                //leading: const Icon(MdiIcons.radio),
+                title: Text(Localization.current.I18nModuleSettings_lora),
+                //leading:  Icon(MdiIcons.radio),
                 initialValue: bloc.moduleSettings.lora,
                 onToggle: (value) {
                   onChanged();
@@ -151,71 +168,78 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                title: const Text('Частота'),
-                trailing: Text('${bloc.moduleSettings.frequency} Гц'),
-                //leading: const Icon(MdiIcons.wave),
+                title: Text(Localization.current.I18nModuleSettings_frequency),
+                trailing:
+                    Text(Localization.current.I18nModuleSettings_frequencyHz(
+                  bloc.moduleSettings.frequency,
+                )),
+                //leading:  Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
-                title: const Text('TX Power'),
-            trailing: Text('${bloc.moduleSettings.txPower}'),
-                //leading: const Icon(MdiIcons.wave),
+                title: Text(Localization.current.I18nModuleSettings_txPower),
+                trailing: Text('${bloc.moduleSettings.txPower}'),
+                //leading:  Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
-                title: const Text('Spreading Factor'),
-            trailing: Text('${bloc.moduleSettings.spreadingFactor}'),
-                //leading: const Icon(MdiIcons.wave),
+                title: Text(
+                    Localization.current.I18nModuleSettings_spreadingFactor),
+                trailing: Text('${bloc.moduleSettings.spreadingFactor}'),
+                //leading:  Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
-                title: const Text('Signal Bandwidth'),
-            trailing: Text('${bloc.moduleSettings.signalBandwidth}'),
-                //leading: const Icon(MdiIcons.wave),
+                title: Text(
+                    Localization.current.I18nModuleSettings_signalBandwidth),
+                trailing: Text('${bloc.moduleSettings.signalBandwidth}'),
+                //leading:  Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
-                title: const Text('Coding Rate Denominator'),
-            trailing: Text('${bloc.moduleSettings.codingRateDenominator}'),
-                //leading: const Icon(MdiIcons.wave),
+                title: Text(Localization
+                    .current.I18nModuleSettings_codingRateDenominator),
+                trailing: Text('${bloc.moduleSettings.codingRateDenominator}'),
+                //leading:  Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
-                title: const Text('Preamble Length'),
-            trailing: Text('${bloc.moduleSettings.preambleLength}'),
-                //leading: const Icon(MdiIcons.wave),
+                title: Text(
+                    Localization.current.I18nModuleSettings_preambleLength),
+                trailing: Text('${bloc.moduleSettings.preambleLength}'),
+                //leading:  Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile(
-                title: const Text('Sync Word'),
-            trailing: Text('${bloc.moduleSettings.syncWord}'),
-                //leading: const Icon(MdiIcons.wave),
+                title: Text(Localization.current.I18nModuleSettings_syncWord),
+                trailing: Text('${bloc.moduleSettings.syncWord}'),
+                //leading:  Icon(MdiIcons.wave),
                 onPressed: (context) {
                   onChanged();
                   //ToDo LoRa;
                 },
               ),
               SettingsTile.switchTile(
-                title: const Text('CRC'),
-                //leading: const Icon(MdiIcons.wave),
+                title: Text(Localization.current.I18nModuleSettings_crc),
+                //leading:  Icon(MdiIcons.wave),
                 initialValue: bloc.moduleSettings.crc,
                 onToggle: (value) {
                   onChanged();
@@ -226,11 +250,11 @@ class ModuleSettingsScreen extends StatelessWidget {
             ],
           ),
           SettingsSection(
-            title: const Text('Экран'),
+            title: Text(Localization.current.I18nModuleSettings_screen),
             tiles: [
               SettingsTile.switchTile(
-                title: const Text('TFT'),
-                //leading: const Icon(MdiIcons.monitor),
+                title: Text(Localization.current.I18nModuleSettings_tft),
+                //leading:  Icon(MdiIcons.monitor),
                 initialValue: bloc.moduleSettings.tft,
                 onToggle: (value) {
                   onChanged();
@@ -239,8 +263,8 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile.switchTile(
-                title: const Text('Спящий режим'),
-                //leading: const Icon(MdiIcons.monitor),
+                title: Text(Localization.current.I18nModuleSettings_sleepMode),
+                //leading:  Icon(MdiIcons.monitor),
                 initialValue: bloc.moduleSettings.timeout,
                 onToggle: (value) {
                   onChanged();
@@ -249,18 +273,20 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                title: const Text('Спящий режим'),
-                trailing: Text(
-                    '${bloc.moduleSettings.timeoutDuration} секунд'),
-                //leading: const Icon(MdiIcons.monitor),
+                title: Text(Localization.current.I18nModuleSettings_sleepMode),
+                trailing: Text(Localization.current
+                    .I18nModuleSettings_sleepModeSeconds(
+                        bloc.moduleSettings.timeoutDuration)),
+                //leading:  Icon(MdiIcons.monitor),
                 onPressed: (context) {
                   onChanged();
                   //ToDo TFT;
                 },
               ),
               SettingsTile.switchTile(
-                title: const Text('Включать после события'),
-                //leading: const Icon(MdiIcons.monitor),
+                title:
+                    Text(Localization.current.I18nModuleSettings_turnOnAtEvent),
+                //leading:  Icon(MdiIcons.monitor),
                 initialValue: bloc.moduleSettings.turnOnAtEvent,
                 onToggle: (value) {
                   onChanged();
@@ -271,11 +297,11 @@ class ModuleSettingsScreen extends StatelessWidget {
             ],
           ),
           SettingsSection(
-            title: const Text('Bluetooth'),
+            title: Text(Localization.current.I18nModuleSettings_bluetooth),
             tiles: [
               SettingsTile.switchTile(
-                title: const Text('Bluetooth'),
-                //leading: const Icon(Icons.bluetooth),
+                title: Text(Localization.current.I18nModuleSettings_bluetooth),
+                //leading:  Icon(Icons.bluetooth),
                 initialValue: bloc.moduleSettings.bluetooth,
                 onToggle: (value) {
                   onChanged();
@@ -284,23 +310,27 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                title: const Text('Имя модуля'),
-            trailing: Text(bloc.moduleSettings.bluetoothName),
-                //leading: const Icon(MdiIcons.bluetooth),
+                title: Text(Localization
+                    .current.I18nModuleSettings_bluetoothModuleName),
+                trailing: Text(bloc.moduleSettings.bluetoothName),
+                //leading:  Icon(MdiIcons.bluetooth),
                 onPressed: (context) {
                   onChanged();
                   //ToDo bluetooth module name;
                 },
               ),
               SettingsTile(
-                title: const Text('Номер модуля'),
-            trailing: Text('${bloc.moduleSettings.bluetoothNumber}'),
-                //leading: const Icon(MdiIcons.bluetooth),
+                title: Text(Localization
+                    .current.I18nModuleSettings_bluetoothModuleNumber),
+                trailing: Text('${bloc.moduleSettings.bluetoothNumber}'),
+                //leading:  Icon(MdiIcons.bluetooth),
                 onPressed: (context) async {
                   final int? number = await bluetoothNumberPopup(
                       context: context,
-                      labelText: 'Номер',
-                      text: 'Введите номер модуля');
+                      labelText: Localization
+                          .current.I18nModuleSettings_bluetoothNumber,
+                      text: Localization.current
+                          .I18nModuleSettings_enterBluetoothModuleNumber);
                   if (number != null) {
                     onChanged();
                     bloc.moduleSettings.bluetoothNumber = number;
@@ -310,47 +340,55 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
             ],
           ),
-          SettingsSection(title: const Text('WiFi'), tiles: [
-            SettingsTile.switchTile(
-              title: const Text('WiFi'),
-              //leading: const Icon(MdiIcons.wifi),
-              initialValue: bloc.moduleSettings.wifi,
-              onToggle: (value) {
-                onChanged();
-                //moduleSettings.wifi = value;
-                //ToDo WiFi;
-              },
-            ),
-            SettingsTile(
-              title: const Text('Сеть'),
-            trailing: Text(bloc.moduleSettings.ssid),
-              //leading: const Icon(MdiIcons.wifi),
-              onPressed: (context) {
-                onChanged();
-                //ToDo WiFi;
-              },
-            ),
-            SettingsTile(
-                title: const Text('Пароль'),
-                //subtitle: Text('${(moduleSettings.password)}'),
-                //leading: const Icon(MdiIcons.wifi),
-                onPressed: (context) {
-                  onChanged();
-                  //ToDo WiFi;
-                }),
-          ]),
           SettingsSection(
-            title: const Text('VCC'),
+              title: Text(Localization.current.I18nModuleSettings_wifi),
+              tiles: [
+                SettingsTile.switchTile(
+                  title: Text(Localization.current.I18nModuleSettings_wifi),
+                  //leading:  Icon(MdiIcons.wifi),
+                  initialValue: bloc.moduleSettings.wifi,
+                  onToggle: (value) {
+                    onChanged();
+                    //moduleSettings.wifi = value;
+                    //ToDo WiFi;
+                  },
+                ),
+                SettingsTile(
+                  title:
+                      Text(Localization.current.I18nModuleSettings_wifiNetwork),
+                  trailing: Text(bloc.moduleSettings.ssid),
+                  //leading:  Icon(MdiIcons.wifi),
+                  onPressed: (context) {
+                    onChanged();
+                    //ToDo WiFi;
+                  },
+                ),
+                SettingsTile(
+                    title:
+                        Text(Localization.current.I18nModuleSettings_password),
+                    //subtitle: Text('${(moduleSettings.password)}'),
+                    //leading:  Icon(MdiIcons.wifi),
+                    onPressed: (context) {
+                      onChanged();
+                      //ToDo WiFi;
+                    }),
+              ]),
+          SettingsSection(
+            title: Text(Localization.current.I18nModuleSettings_vcc),
             tiles: [
               SettingsTile(
-                title: const Text('R1'),
-            trailing: Text('${bloc.moduleSettings.r1} Ом'),
-                //leading: const Icon(MdiIcons.resistor),
+                title: Text(Localization.current.I18nModuleSettings_resistor1),
+                trailing:
+                    Text(Localization.current.I18nModuleSettings_resistorOhm(
+                  bloc.moduleSettings.r1,
+                )),
+                //leading:  Icon(MdiIcons.resistor),
                 onPressed: (context) async {
                   final int? r1 = await vccPopup(
                       context: context,
-                      labelText: 'Ом',
-                      text: 'Введите значение резистора R1');
+                      labelText: Localization.current.I18nModuleSettings_ohm,
+                      text: Localization
+                          .current.I18nModuleSettings_enterResistor1);
                   if (r1 != null) {
                     onChanged();
                     bloc.moduleSettings.r1 = r1;
@@ -359,14 +397,18 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                title: const Text('R2'),
-            trailing: Text('${bloc.moduleSettings.r2} Ом'),
-                //leading: const Icon(MdiIcons.resistor),
+                title: Text(Localization.current.I18nModuleSettings_resistor2),
+                trailing:
+                    Text(Localization.current.I18nModuleSettings_resistorOhm(
+                  bloc.moduleSettings.r2,
+                )),
+                //leading:  Icon(MdiIcons.resistor),
                 onPressed: (context) async {
                   final int? r2 = await vccPopup(
                       context: context,
-                      labelText: 'Ом',
-                      text: 'Введите значение резистора R2');
+                      labelText: Localization.current.I18nModuleSettings_ohm,
+                      text: Localization
+                          .current.I18nModuleSettings_enterResistor2);
                   if (r2 != null) {
                     onChanged();
                     bloc.moduleSettings.r2 = r2;
@@ -375,14 +417,16 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                title: const Text('Ввод измерянного напряжения'),
+                title: Text(Localization
+                    .current.I18nModuleSettings_enterMeasuredVoltage),
                 // subtitle: Text('${_bloc.moduleSettings.vBat} мВ'),
-                //leading: const Icon(MdiIcons.batteryCharging),
+                //leading:  Icon(MdiIcons.batteryCharging),
                 onPressed: (context) async {
                   final int? mv = await vccPopup(
                       context: context,
-                      labelText: 'мВ',
-                      text: 'Введите текущее значение напряжения на батареях');
+                      labelText: Localization.current.I18nModuleSettings_mv,
+                      text: Localization
+                          .current.I18nModuleSettings_enterCurrentVoltage);
                   if (mv != null) {
                     onChanged();
                     bloc.moduleSettings.vBat = mv;
@@ -399,20 +443,20 @@ class ModuleSettingsScreen extends StatelessWidget {
           builder: (context, state) {
         return SettingsList(sections: [
           SettingsSection(
-            title: const Text('Модуль'),
+            title: Text(Localization.current.I18nModuleSettings_module),
             tiles: [
               SettingsTile(
-                title:
-                    Text('${bloc.moduleSettings.bluetoothName}${bloc.moduleSettings.bluetoothNumber}'),
+                title: Text(
+                    '${bloc.moduleSettings.bluetoothName}${bloc.moduleSettings.bluetoothNumber}'),
               ),
             ],
           ),
           SettingsSection(
-            title: const Text('Bluetooth'),
+            title: Text(Localization.current.I18nModuleSettings_bluetooth),
             tiles: [
               SettingsTile.switchTile(
-                title: const Text('Bluetooth'),
-                //leading: const Icon(Icons.bluetooth),
+                title: Text(Localization.current.I18nModuleSettings_bluetooth),
+                //leading:  Icon(Icons.bluetooth),
                 initialValue: bloc.moduleSettings.bluetooth,
                 onToggle: (value) {
                   onChanged();
@@ -421,23 +465,27 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                title: const Text('Имя модуля'),
+                title: Text(Localization
+                    .current.I18nModuleSettings_bluetoothModuleName),
                 description: Text(bloc.moduleSettings.bluetoothName),
-                //leading: const Icon(MdiIcons.bluetooth),
+                //leading:  Icon(MdiIcons.bluetooth),
                 onPressed: (context) {
                   onChanged();
                   //ToDo bluetooth module name;
                 },
               ),
               SettingsTile(
-                title: const Text('Номер модуля'),
+                title: Text(Localization
+                    .current.I18nModuleSettings_bluetoothModuleNumber),
                 description: Text('${bloc.moduleSettings.bluetoothNumber}'),
-                //leading: const Icon(MdiIcons.bluetooth),
+                //leading:  Icon(MdiIcons.bluetooth),
                 onPressed: (context) async {
                   final int? number = await bluetoothNumberPopup(
                       context: context,
-                      labelText: 'Номер',
-                      text: 'Введите номер модуля');
+                      labelText: Localization
+                          .current.I18nModuleSettings_bluetoothNumber,
+                      text: Localization.current
+                          .I18nModuleSettings_enterBluetoothModuleNumber);
                   if (number != null) {
                     onChanged();
                     bloc.moduleSettings.bluetoothNumber = number;
@@ -446,14 +494,15 @@ class ModuleSettingsScreen extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                title: const Text('Яркость'),
+                title: Text(Localization.current.I18nModuleSettings_brightness),
                 description: Text('${bloc.moduleSettings.brightness}'),
-                //leading: const Icon(MdiIcons.brightness1),
+                //leading:  Icon(MdiIcons.brightness1),
                 onPressed: (context) async {
                   final int? number = await brightnessPopup(
                       initialValue: bloc.moduleSettings.brightness,
                       context: context,
-                      text: 'Установите яркость панели');
+                      text: Localization
+                          .current.I18nModuleSettings_setBrightness);
                   if (number != null) {
                     onChanged();
                     bloc.moduleSettings.brightness = number;
@@ -463,56 +512,65 @@ class ModuleSettingsScreen extends StatelessWidget {
               ),
             ],
           ),
-          SettingsSection(title: const Text('WiFi'), tiles: [
-            SettingsTile.switchTile(
-              title: const Text('WiFi'),
-              //leading: const Icon(MdiIcons.wifi),
-              initialValue: bloc.moduleSettings.wifi,
-              onToggle: (value) {
-                onChanged();
-                bloc.moduleSettings.wifi = value;
-                bloc.add(UpdateModuleSettings(bloc.moduleSettings));
-              },
-            ),
-            SettingsTile(
-              title: const Text('Сеть'),
-              description: Text(bloc.moduleSettings.ssid),
-              //leading: const Icon(MdiIcons.wifi),
-              onPressed: (context) async {
-                final String? ssid = await wifiSettingsPopup(
-                    context: context,
-                    labelText: 'WiFi',
-                    text: 'Введите имя WiFi сети');
-                if (ssid != null) {
-                  onChanged();
-                  bloc.moduleSettings.ssid = ssid;
-                  bloc.add(UpdateModuleSettings(bloc.moduleSettings));
-                }
-              },
-            ),
-            SettingsTile(
-              title: const Text('Пароль'),
-              //subtitle: Text('${(moduleSettings.password)}'),
-              //leading: const Icon(MdiIcons.wifi),
-              onPressed: (context) async {
-                final String? password = await wifiSettingsPopup(
-                    context: context,
-                    labelText: 'Пароль',
-                    text:
-                        'Введите пароль WiFi сети ${bloc.moduleSettings.ssid}');
-                if (password != null) {
-                  onChanged();
-                  bloc.moduleSettings.password = password;
-                  bloc.add(UpdateModuleSettings(bloc.moduleSettings));
-                }
-              },
-            ),
-          ]),
+          SettingsSection(
+              title: Text(Localization.current.I18nModuleSettings_wifi),
+              tiles: [
+                SettingsTile.switchTile(
+                  title: Text(Localization.current.I18nModuleSettings_wifi),
+                  //leading:  Icon(MdiIcons.wifi),
+                  initialValue: bloc.moduleSettings.wifi,
+                  onToggle: (value) {
+                    onChanged();
+                    bloc.moduleSettings.wifi = value;
+                    bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                  },
+                ),
+                SettingsTile(
+                  title:
+                      Text(Localization.current.I18nModuleSettings_wifiNetwork),
+                  description: Text(bloc.moduleSettings.ssid),
+                  //leading:  Icon(MdiIcons.wifi),
+                  onPressed: (context) async {
+                    final String? ssid = await wifiSettingsPopup(
+                        context: context,
+                        labelText: Localization.current.I18nModuleSettings_wifi,
+                        text: Localization
+                            .current.I18nModuleSettings_enterWifiSsid);
+                    if (ssid != null) {
+                      onChanged();
+                      bloc.moduleSettings.ssid = ssid;
+                      bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                    }
+                  },
+                ),
+                SettingsTile(
+                  title: Text(Localization.current.I18nModuleSettings_password),
+                  //subtitle: Text('${(moduleSettings.password)}'),
+                  //leading:  Icon(MdiIcons.wifi),
+                  onPressed: (context) async {
+                    final String? password = await wifiSettingsPopup(
+                        context: context,
+                        labelText:
+                            Localization.current.I18nModuleSettings_password,
+                        text: Localization.current
+                            .I18nModuleSettings_enterWifiPassword(
+                          bloc.moduleSettings.ssid,
+                        ));
+                    if (password != null) {
+                      onChanged();
+                      bloc.moduleSettings.password = password;
+                      bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                    }
+                  },
+                ),
+              ]),
         ]);
       });
     } else {
       return Splash(
-          text: 'Неизвестный тип модуля: ${bloc.moduleSettings.type}');
+          text: Localization.current.I18nModuleSettings_unknownModuleType(
+        bloc.moduleSettings.type,
+      ));
     }
   }
 }

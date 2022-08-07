@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path/path.dart';
 
+import '../../../common/localization/localization.dart';
 import '../../../common/widget/header_widget.dart';
 import '../../audio/bloc/audio_bloc.dart';
 import '../../bluetooth/bluetooth.dart';
@@ -43,7 +44,7 @@ class _InitScreen extends State<InitScreen> {
   }
 
   Widget _selectProtocol() {
-    const Widget title = Text('Стартовый протокол');
+    final Widget title = Text(Localization.current.I18nInit_startProtocol);
     return BlocBuilder<ProtocolBloc, ProtocolState>(
         builder: (context, protocolState) {
       return ListTile(
@@ -55,13 +56,13 @@ class _InitScreen extends State<InitScreen> {
         title: title,
         subtitle: protocolState is ProtocolSelectedState
             ? Text(basename(protocolState.databasePath))
-            : const Text('Нажмите чтобы выбрать'),
+            : Text(Localization.current.I18nInit_pressToSelect),
       );
     });
   }
 
   Widget _selectBluetooth() {
-    const Widget title = Text('Bluetooth модуль');
+    final Widget title = Text(Localization.current.I18nInit_bluetoothModule);
     return BlocBuilder<BluetoothBloc, BluetoothConnectionState>(
         builder: (context, state) {
       return ListTile(
@@ -72,7 +73,7 @@ class _InitScreen extends State<InitScreen> {
         title: title,
         subtitle: Text(
             BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
-                'Нажмите чтобы выбрать'),
+                Localization.current.I18nInit_pressToSelect),
         trailing: state is BluetoothConnectedState
             ? _bluetoothButtons(context)
             : null,

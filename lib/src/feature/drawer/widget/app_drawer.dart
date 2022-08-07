@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../common/localization/localization.dart';
 import '../../app_info/app_info.dart';
 import '../../help/widget/help_screen.dart';
 import '../../home/widget/about_popup.dart';
@@ -25,7 +26,7 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-            title: const Text('Настройки'),
+            title: Text(Localization.current.I18nDrawer_settings),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(MaterialPageRoute<void>(
@@ -34,7 +35,7 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-            title: const Text('Помощь'),
+            title: Text(Localization.current.I18nDrawer_help),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(MaterialPageRoute<void>(
@@ -44,7 +45,7 @@ class AppDrawer extends StatelessWidget {
           const Updater(),
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-            title: const Text('О программе'),
+            title: Text(Localization.current.I18nDrawer_about),
             onTap: () {
               showDialog<void>(
                   context: context,
@@ -59,7 +60,7 @@ class AppDrawer extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(0, 24, 24, 8),
                 child: Text(
-                  'v${appInfo.version}',
+                  Localization.current.I18nDrawer_version(appInfo.version),
                   style: Theme.of(context).textTheme.bodyText1,
                   textAlign: TextAlign.right,
                 ),
