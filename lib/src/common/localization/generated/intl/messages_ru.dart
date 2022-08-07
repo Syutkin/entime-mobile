@@ -43,13 +43,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m12(ssid) => "Введите пароль WiFi сети ${ssid}";
 
-  static String m13(frequency) => "${frequency} Гц";
+  static String m13(frequency) => "${frequency}Гц";
 
   static String m14(note, frequency) => "Нота ${note}, ${frequency}Гц";
 
   static String m15(ohm) => "${ohm} Ом";
 
-  static String m16(seconds) => "${seconds} секунд";
+  static String m16(seconds) =>
+      "${Intl.plural(seconds, one: '${seconds} секунда', few: '${seconds} секунды', other: 'секунд')}";
 
   static String m17(type) => "Неизвестный тип модуля: ${type}";
 

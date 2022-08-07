@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-08-07T12:12:14.952089",
+  "@@last_modified": "2022-08-07T12:32:40.220464",
   "I18nUpdate_whatsNew": "Что нового",
   "@I18nUpdate_whatsNew": {
     "type": "text",
@@ -805,7 +805,7 @@
     "placeholders_order": [],
     "placeholders": {}
   },
-  "I18nModuleSettings_frequencyHz": "{frequency} Гц",
+  "I18nModuleSettings_frequencyHz": "{frequency}Гц",
   "@I18nModuleSettings_frequencyHz": {
     "type": "text",
     "placeholders_order": [
@@ -875,7 +875,7 @@
     "placeholders_order": [],
     "placeholders": {}
   },
-  "I18nModuleSettings_sleepModeSeconds": "{seconds} секунд",
+  "I18nModuleSettings_sleepModeSeconds": "{seconds,plural, =1{{seconds} секунда}few{{seconds} секунды}other{секунд}}",
   "@I18nModuleSettings_sleepModeSeconds": {
     "type": "text",
     "placeholders_order": [

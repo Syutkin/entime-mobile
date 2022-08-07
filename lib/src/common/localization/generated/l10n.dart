@@ -1275,10 +1275,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `{frequency} Гц`
+  /// `{frequency}Гц`
   String I18nModuleSettings_frequencyHz(Object frequency) {
     return Intl.message(
-      '$frequency Гц',
+      '$frequencyГц',
       name: 'I18nModuleSettings_frequencyHz',
       desc: '',
       args: [frequency],
@@ -1385,10 +1385,13 @@ class GeneratedLocalization {
     );
   }
 
-  /// `{seconds} секунд`
-  String I18nModuleSettings_sleepModeSeconds(Object seconds) {
-    return Intl.message(
-      '$seconds секунд',
+  /// `{seconds,plural, =1{{seconds} секунда}few{{seconds} секунды}other{секунд}}`
+  String I18nModuleSettings_sleepModeSeconds(num seconds) {
+    return Intl.plural(
+      seconds,
+      one: '$seconds секунда',
+      few: '$seconds секунды',
+      other: 'секунд',
       name: 'I18nModuleSettings_sleepModeSeconds',
       desc: '',
       args: [seconds],
