@@ -1,5 +1,5 @@
 {
-    "@@last_modified": "2022-08-07T09:44:38+0000",
+    "@@last_modified": "2022-08-07T09:47:21+0000",
     "I18nUpdate_whatsNew": "What's new",
     "@I18nUpdate_whatsNew": {
         "type": "text",
@@ -379,7 +379,7 @@
         "placeholders_order": [],
         "placeholders": {}
     },
-    "I18nProtocol_updateNumber": "Finish time for participant with number {numer} already setted. Set new value?",
+    "I18nProtocol_updateNumber": "Finish time for participant with number {number} already setted. Set new value?",
     "@I18nProtocol_updateNumber": {
         "type": "text",
         "placeholders_order": [
