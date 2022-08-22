@@ -91,7 +91,7 @@ class _FinishPage extends State<FinishScreen> {
           // ToDo: настройки? более интересное поведение?
           // ToDo: Перематывать только при первоначальном показе всех отсечек?
           // скролл на последнюю запись если показываем скрытые отсечки
-          if (!BlocProvider.of<SettingsBloc>(context).state.hideMarked) {
+          if (!BlocProvider.of<SettingsBloc>(context).state.settings.hideMarked) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               scrollToEnd(_scrollController);
             });
@@ -108,10 +108,10 @@ class _FinishPage extends State<FinishScreen> {
         context,
         settingsState,
       ) {
-        if (settingsState.finishFab) {
+        if (settingsState.settings.finishFab) {
           return SizedBox(
-            height: settingsState.finishFabSize,
-            width: settingsState.finishFabSize,
+            height: settingsState.settings.finishFabSize,
+            width: settingsState.settings.finishFabSize,
             child: FittedBox(
               child: FloatingActionButton(
                 onPressed: () => _addFinishTimeManual(context),

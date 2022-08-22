@@ -62,8 +62,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
       }
     });
     settingsSubscription = settingsBloc.stream.listen((state) {
-      _voiceName = state.voiceName;
-      _reconnect = state.reconnect;
+      _voiceName = state.settings.voiceName;
+      _reconnect = state.settings.reconnect;
     });
 
     on<Connect>((event, emit) => _handleConnect(event, emit));

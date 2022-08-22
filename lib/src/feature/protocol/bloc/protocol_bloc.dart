@@ -16,6 +16,7 @@ import '../model/start_protocol.dart';
 import '../model/start_time.dart';
 
 part 'protocol_event.dart';
+
 part 'protocol_state.dart';
 
 class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
@@ -40,24 +41,24 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   }) : super(ProtocolNotSelectedState()) {
     settingsSubscription = settingsBloc.stream.listen((state) {
       // условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
-      if (_hideMarked != state.hideMarked ||
-          _hideNumbers != state.hideNumbers ||
-          _hideManual != state.hideManual) {
-        _hideMarked = state.hideMarked;
-        _hideNumbers = state.hideNumbers;
-        _hideManual = state.hideManual;
-        _file = state.recentFile;
+      if (_hideMarked != state.settings.hideMarked ||
+          _hideNumbers != state.settings.hideNumbers ||
+          _hideManual != state.settings.hideManual) {
+        _hideMarked = state.settings.hideMarked;
+        _hideNumbers = state.settings.hideNumbers;
+        _hideManual = state.settings.hideManual;
+        _file = state.settings.recentFile;
         add(SelectProtocol(_file));
         logger.v(
             'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ');
       }
-      if (_file != state.recentFile) {
-        _file = state.recentFile;
+      if (_file != state.settings.recentFile) {
+        _file = state.settings.recentFile;
         add(SelectProtocol(_file));
       }
-      _finishDelay = state.finishDelay;
-      _substituteNumbers = state.substituteNumbers;
-      _substituteNumbersDelay = state.substituteNumbersDelay;
+      _finishDelay = state.settings.finishDelay;
+      _substituteNumbers = state.settings.substituteNumbers;
+      _substituteNumbersDelay = state.settings.substituteNumbersDelay;
     });
 
     on<SelectProtocol>((event, emit) => _handleSelectProtocol(event, emit));
@@ -111,8 +112,9 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   Future<void> _handleSelectProtocol(
       SelectProtocol event, Emitter<ProtocolState> emit) async {
-    if (event.file != null && event.file!.isNotEmpty) {
-      await ProtocolProvider.db.setDbPath(event.file);
+    final file = event.file;
+    if (file != null && file.isNotEmpty) {
+      await ProtocolProvider.db.setDbPath(file);
       if (event.csv != null) {
         await _updateFromCsv(event.csv);
       }
@@ -122,7 +124,9 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           hideMarked: _hideMarked,
           hideNumbers: _hideNumbers);
       _numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
-      settingsBloc.add(SetStringValueEvent(recentFile: event.file));
+      settingsBloc.add(SettingsEventUpdate(
+          settings:
+              settingsBloc.state.settings.copyWith(recentFile: file)));
       emit(ProtocolSelectedState(
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
@@ -130,7 +134,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         databasePath: ProtocolProvider.db.dbPath!,
         awaitingNumber: _awaitingNumber,
       ));
-      logger.i('DatabaseConnect -> selected ${event.file}');
+      logger.i('DatabaseConnect -> selected $file');
     } else {
       add(DeselectProtocol());
       logger.i('DatabaseConnect -> no file selected');
@@ -140,7 +144,9 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   Future<void> _handleDeselectProtocol(
       DeselectProtocol event, Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.setDbPath(null);
-    settingsBloc.add(const SetStringValueEvent(recentFile: ''));
+    settingsBloc.add(SettingsEventUpdate(
+        settings:
+        settingsBloc.state.settings.copyWith(recentFile: '')));
     emit(ProtocolNotSelectedState());
   }
 
@@ -148,7 +154,8 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   Future<void> _handleProtocolAddStartNumber(
       ProtocolAddStartNumber event, Emitter<ProtocolState> emit) async {
     if (state is ProtocolSelectedState) {
-      final List<StartItem>? previousStart = await ProtocolProvider.db.addStartNumber(
+      final List<StartItem>? previousStart =
+          await ProtocolProvider.db.addStartNumber(
         number: event.startTime.number,
         time: event.startTime.time,
         forceAdd: event.forceAdd,
@@ -504,8 +511,9 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       ));
     }
   }
- Future<void> _updateFromCsv(PlatformFile? csv) async {
-   final List<StartItemCsv> items = await getStartList(csv);
-   await ProtocolProvider.db.loadStartItem(items);
- }
+
+  Future<void> _updateFromCsv(PlatformFile? csv) async {
+    final List<StartItemCsv> items = await getStartList(csv);
+    await ProtocolProvider.db.loadStartItem(items);
+  }
 }

@@ -1,23 +1,11 @@
-import '../model/theme.dart';
+import '../settings.dart';
 
 abstract class SettingsProvider {
-  bool? getBool(String key);
+  AppSettings get settings;
 
-  void setBool(
-      String key, bool value); //ignore: avoid_positional_boolean_parameters
-  int? getInt(String key);
+  Future<void> update(AppSettings settings);
 
-  void setInt(String key, int value);
+  Future<void> setDefaults();
 
-  double? getDouble(String key);
-
-  void setDouble(String key, double value);
-
-  String? getString(String key);
-
-  void setString(String key, String value);
-
-  AppTheme getTheme();
-
-  void setTheme(AppTheme theme);
+  Future<void> save(AppSettings settings);
 }

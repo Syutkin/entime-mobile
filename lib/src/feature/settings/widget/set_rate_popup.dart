@@ -1,7 +1,7 @@
 part of 'settings_popups.dart';
 
-Future<double?> setRatePopup(BuildContext context, SettingsState settings) async {
-  double value = settings.rate;
+Future<double?> setRatePopup(BuildContext context, SettingsState settingsState) async {
+  double value = settingsState.settings.rate;
   return showDialog<double>(
       context: context,
       barrierDismissible: true,

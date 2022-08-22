@@ -25,7 +25,7 @@ class LogBloc extends Bloc<LogEvent, LogState> {
     required this.settingsBloc,
   }) : super(const LogOpen()) {
     settingsSubscription = settingsBloc.stream.listen((state) {
-      _limit = state.logLimit;
+      _limit = state.settings.logLimit;
     });
 
     on<LogAdd>((event, emit) => _handleLogAdd(event, emit));

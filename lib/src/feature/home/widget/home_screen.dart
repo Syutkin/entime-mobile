@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
     // Следим за повторной установкой стартового времени для участника
     return BlocListener<ProtocolBloc, ProtocolState>(
       listener: (context, state) async {
-        final protocolBloc = BlocProvider.of<ProtocolBloc>(context);
+        final protocolBloc = context.read<ProtocolBloc>();
         final materialLocalization = MaterialLocalizations.of(context);
         if (state is ProtocolSelectedState) {
           // Обновление автоматического времени старта
@@ -194,6 +194,9 @@ class HomeScreen extends StatelessWidget {
   Widget _menuButton(BuildContext context, AppTab activeTab) {
     return BlocBuilder<ProtocolBloc, ProtocolState>(
         builder: (context, protocolState) {
+      final settingsBloc = context.read<SettingsBloc>();
+      final settings = settingsBloc.state.settings;
+      final protocolBloc = context.read<ProtocolBloc>();
       final menuItems = <PopupMenuEntry<MenuButton>>[];
       if (activeTab == AppTab.start || activeTab == AppTab.finish) {
         if (protocolState is ProtocolSelectedState) {
@@ -280,24 +283,20 @@ class HomeScreen extends StatelessWidget {
             switch (value) {
               case MenuButton.share:
                 if (activeTab == AppTab.start) {
-                  BlocProvider.of<ProtocolBloc>(context)
-                      .add(ProtocolShareStart());
+                  protocolBloc.add(ProtocolShareStart());
                 } else if (activeTab == AppTab.finish) {
-                  BlocProvider.of<ProtocolBloc>(context)
-                      .add(ProtocolShareFinish());
+                  protocolBloc.add(ProtocolShareFinish());
                 }
                 break;
               case MenuButton.fab:
                 if (activeTab == AppTab.start) {
-                  BlocProvider.of<SettingsBloc>(context).add(SetBoolValueEvent(
-                      startFab: !BlocProvider.of<SettingsBloc>(context)
-                          .state
-                          .startFab));
+                  settingsBloc.add(SettingsEventUpdate(
+                      settings:
+                          settings.copyWith(startFab: !settings.startFab)));
                 } else if (activeTab == AppTab.finish) {
-                  BlocProvider.of<SettingsBloc>(context).add(SetBoolValueEvent(
-                      finishFab: !BlocProvider.of<SettingsBloc>(context)
-                          .state
-                          .finishFab));
+                  settingsBloc.add(SettingsEventUpdate(
+                      settings:
+                          settings.copyWith(finishFab: !settings.finishFab)));
                 }
                 break;
               case MenuButton.addRacer:
@@ -310,14 +309,12 @@ class HomeScreen extends StatelessWidget {
                 await selectBluetoothDevice(context);
                 break;
               case MenuButton.countdown:
-                BlocProvider.of<SettingsBloc>(context).add(SetBoolValueEvent(
-                    countdown: !BlocProvider.of<SettingsBloc>(context)
-                        .state
-                        .countdown));
+                settingsBloc.add(SettingsEventUpdate(
+                    settings:
+                        settings.copyWith(countdown: !settings.countdown)));
                 break;
               case MenuButton.importCsv:
-                BlocProvider.of<ProtocolBloc>(context)
-                    .add(const ProtocolLoadStartFromCsv());
+                protocolBloc.add(const ProtocolLoadStartFromCsv());
                 break;
             }
           });
@@ -325,7 +322,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _finishFilterButton(BuildContext context, AppTab activeTab) {
-    final bloc = BlocProvider.of<SettingsBloc>(context);
+    final settingsBloc = context.read<SettingsBloc>();
+    final settings = settingsBloc.state.settings;
     return BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, protocolState) {
       if (activeTab == AppTab.finish) {
@@ -333,21 +331,21 @@ class HomeScreen extends StatelessWidget {
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideMarked,
-            checked: !bloc.state.hideMarked,
+            checked: !settings.hideMarked,
             child: Text(Localization.current.I18nHome_hideMarked),
           ),
         );
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideNumbers,
-            checked: !bloc.state.hideNumbers,
+            checked: !settings.hideNumbers,
             child: Text(Localization.current.I18nHome_hideNumbers),
           ),
         );
         menuItems.add(
           CheckedPopupMenuItem(
             value: FilterFinish.hideManual,
-            checked: !bloc.state.hideManual,
+            checked: !settings.hideManual,
             child: Text(Localization.current.I18nHome_hideManual),
           ),
         );
@@ -367,23 +365,27 @@ class HomeScreen extends StatelessWidget {
             onSelected: (value) async {
               switch (value) {
                 case FilterFinish.hideMarked:
-                  bloc.add(
-                      SetBoolValueEvent(hideMarked: !bloc.state.hideMarked));
+                  settingsBloc.add(SettingsEventUpdate(
+                      settings:
+                          settings.copyWith(hideMarked: !settings.hideMarked)));
                   break;
                 case FilterFinish.hideNumbers:
-                  bloc.add(
-                      SetBoolValueEvent(hideNumbers: !bloc.state.hideNumbers));
+                  settingsBloc.add(SettingsEventUpdate(
+                      settings: settings.copyWith(
+                          hideNumbers: !settings.hideNumbers)));
                   break;
                 case FilterFinish.hideManual:
-                  bloc.add(
-                      SetBoolValueEvent(hideManual: !bloc.state.hideManual));
+                  settingsBloc.add(SettingsEventUpdate(
+                      settings:
+                          settings.copyWith(hideManual: !settings.hideManual)));
                   break;
                 case FilterFinish.setDefaults:
-                  bloc.add(const SetBoolValueEvent(
+                  settingsBloc.add(SettingsEventUpdate(
+                      settings: settings.copyWith(
                     hideMarked: true,
                     hideNumbers: false,
                     hideManual: false,
-                  ));
+                  )));
                   break;
               }
             });

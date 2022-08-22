@@ -62,7 +62,7 @@ Future<void> runMain() async {
         BlocProvider<ProtocolBloc>(
           create: (context) => ProtocolBloc(
             settingsBloc: BlocProvider.of<SettingsBloc>(context),
-          )..add(SelectProtocol(settings.getString('recentFile'))),
+          )..add(SelectProtocol(settings.settings.recentFile)),
         ),
         BlocProvider<CountdownBloc>(
           create: (context) => CountdownBloc(
@@ -100,7 +100,7 @@ class EntimeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // send commands to our top-level blocs to get them to initialize
     BlocProvider.of<UpdateBloc>(context).add(PopupChangelog());
-    if (settings.getBool('checkUpdates') ?? true) {
+    if (settings.settings.checkUpdates) {
       BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
     }
 
@@ -111,7 +111,7 @@ class EntimeApp extends StatelessWidget {
       child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, settingsTheme) {
         return MaterialApp(
-          theme: appThemeData[settingsTheme.appTheme],
+          theme: appThemeData[settingsTheme.settings.appTheme],
           title: 'Entime',
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,

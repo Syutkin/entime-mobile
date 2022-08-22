@@ -26,13 +26,13 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     required this.settingsBloc,
   }) : super(AudioState()) {
     settingsSubscription = settingsBloc.stream.listen((state) {
-      _sound = state.sound;
-      _voice = state.voice;
-      _beep = state.beep;
-      _audio.setLanguage(state.language);
-      _audio.setVolume(state.volume);
-      _audio.setSpeechRate(state.rate);
-      _audio.setPitch(state.pitch);
+      _sound = state.settings.sound;
+      _voice = state.settings.voice;
+      _beep = state.settings.beep;
+      _audio.setLanguage(state.settings.language);
+      _audio.setVolume(state.settings.volume);
+      _audio.setSpeechRate(state.settings.rate);
+      _audio.setPitch(state.settings.pitch);
     });
 
     on<Countdown>((event, emit) async {

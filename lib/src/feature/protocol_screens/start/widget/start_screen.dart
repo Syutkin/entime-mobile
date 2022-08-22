@@ -33,9 +33,9 @@ class _StartScreen extends State<StartScreen> {
 
   // @override
   // void dispose() {
-    // _voiceStream?.cancel();
-    // _countdownStream?.cancel();
-    // super.dispose();
+  // _voiceStream?.cancel();
+  // _countdownStream?.cancel();
+  // super.dispose();
   // }
 
   @override
@@ -66,10 +66,10 @@ class _StartScreen extends State<StartScreen> {
         context,
         settingsState,
       ) {
-        if (settingsState.startFab) {
+        if (settingsState.settings.startFab) {
           return SizedBox(
-            height: settingsState.startFabSize,
-            width: settingsState.startFabSize,
+            height: settingsState.settings.startFabSize,
+            width: settingsState.settings.startFabSize,
             child: FittedBox(
               child: FloatingActionButton(
                 onPressed: () => _addManualStartTime(context),
@@ -155,10 +155,10 @@ class _StartScreen extends State<StartScreen> {
                             .add(ProtocolSetDNS(number: item.number));
                       },
                       isHighlighted: isHighlighted,
-                      countdown:
-                          settingsState.countdownAtStartTime && isHighlighted
-                              ? _countdownFromState(countdownState)
-                              : null,
+                      countdown: settingsState.settings.countdownAtStartTime &&
+                              isHighlighted
+                          ? _countdownFromState(countdownState)
+                          : null,
                     );
                   });
                 },
@@ -176,16 +176,16 @@ class _StartScreen extends State<StartScreen> {
       context,
       settingsState,
     ) {
-      if (settingsState.countdown) {
+      if (settingsState.settings.countdown) {
         return Positioned(
-          left: settingsState.countdownLeft,
-          top: settingsState.countdownTop,
+          left: settingsState.settings.countdownLeft,
+          top: settingsState.settings.countdownTop,
           child: BlocBuilder<CountdownBloc, CountdownState>(
               builder: (context, countdownState) {
             if (countdownState is CountdownWorkingState) {
               final countdownWidget = CountdownWidget(
                 key: _countdownKey,
-                size: settingsState.countdownSize,
+                size: settingsState.settings.countdownSize,
                 text: countdownState.text,
               );
               return Draggable(
@@ -197,7 +197,7 @@ class _StartScreen extends State<StartScreen> {
             } else {
               final countdownWidget = CountdownWidget(
                 key: _countdownKey,
-                size: settingsState.countdownSize,
+                size: settingsState.settings.countdownSize,
               );
               return Draggable(
                 feedback: countdownWidget,
@@ -236,10 +236,13 @@ class _StartScreen extends State<StartScreen> {
       dy = stackSize.height - countdownRenderBox.size.height;
     }
 
-    BlocProvider.of<SettingsBloc>(context).add(SetDoubleValueEvent(
+    final settingsBloc = context.read<SettingsBloc>();
+    final settings = settingsBloc.state.settings;
+    settingsBloc.add(SettingsEventUpdate(
+        settings: settings.copyWith(
       countdownLeft: dx,
       countdownTop: dy,
-    ));
+    )));
   }
 
   RenderBox _getRenderBox(GlobalKey key) {

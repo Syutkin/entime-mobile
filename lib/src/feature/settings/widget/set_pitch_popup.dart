@@ -1,8 +1,8 @@
 part of 'settings_popups.dart';
 
 Future<double?> setPitchPopup(
-    BuildContext context, SettingsState settings) async {
-  double value = settings.pitch;
+    BuildContext context, SettingsState settingsState) async {
+  double value = settingsState.settings.pitch;
   return showDialog<double>(
       context: context,
       barrierDismissible: true,
