@@ -1,47 +1,46 @@
-class StartItemCsv {
-  String? category;
-  int number;
-  String? name;
-  String? nickname;
-  String? age;
-  String? team;
-  String? city;
-  String? starttime;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  StartItemCsv({
-    this.category,
-    required this.number,
-    this.name,
-    this.nickname,
-    this.age,
-    this.team,
-    this.city,
-    this.starttime,
-  });
+part 'start_protocol.freezed.dart';
+part 'start_protocol.g.dart';
 
-  Map<String, dynamic> toMap() => {
-        'category': category,
-        'number': number,
-        'name': name,
-        'nickname': nickname,
-        'age': age,
-        'team': team,
-        'city': city,
-        'starttime': starttime,
-      };
+@freezed
+class StartItemCsv with _$StartItemCsv{
+  const factory StartItemCsv({
+    String? category,
+    required int number,
+    String? name,
+    String? nickname,
+    String? age,
+    String? team,
+    String? city,
+    String? starttime,
+  }) = _StartItemCsv;
 
-  factory StartItemCsv.fromMap(Map<String, dynamic> cvs) => StartItemCsv(
-    category: cvs['category']?.toString(),
-    number: cvs['number'] is int ? cvs['number'] : 0,
-    name: cvs['name']?.toString(),
-    nickname: cvs['nickname']?.toString(),
-    age: cvs['age']?.toString(),
-    team: cvs['team']?.toString(),
-    city: cvs['city']?.toString(),
-    starttime: cvs['starttime']?.toString(),
-  );
+  factory StartItemCsv.fromJson(Map<String, dynamic> cvs) => _$StartItemCsvFromJson(cvs);
 
-  @override
-  String toString() =>
-      'StartItemCsv { category: $category, number: $number, name: $name, nickname: $nickname, age: $age, team: $team, city: $city, starttime: $starttime, }';
+  // Map<String, dynamic> toMap() => {
+  //       'category': category,
+  //       'number': number,
+  //       'name': name,
+  //       'nickname': nickname,
+  //       'age': age,
+  //       'team': team,
+  //       'city': city,
+  //       'starttime': starttime,
+  //     };
+  //
+  // factory StartItemCsv.fromMap(Map<String, dynamic> cvs) => StartItemCsv(
+  //   category: cvs['category']?.toString(),
+  //   number: cvs['number'] is int ? cvs['number'] : 0,
+  //   name: cvs['name']?.toString(),
+  //   nickname: cvs['nickname']?.toString(),
+  //   age: cvs['age']?.toString(),
+  //   team: cvs['team']?.toString(),
+  //   city: cvs['city']?.toString(),
+  //   starttime: cvs['starttime']?.toString(),
+  // );
+  //
+  // @override
+  // String toString() =>
+  //     'StartItemCsv { category: $category, number: $number, name: $name, nickname: $nickname, age: $age, team: $team, city: $city, starttime: $starttime, }';
 }

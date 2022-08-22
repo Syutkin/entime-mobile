@@ -15,7 +15,7 @@ Future<List<StartItemCsv>> getStartList([PlatformFile? file]) async {
     final start = CsvToMapConverter(fieldDelimiter: ';')
         .convert(utf8.decode(file.bytes!));
     final List<StartItemCsv> startList = start.isNotEmpty
-        ? start.map((c) => StartItemCsv.fromMap(c)).toList()
+        ? start.map((c) => StartItemCsv.fromJson(c)).toList()
         : [];
     return startList;
   } on Exception catch (e) {
