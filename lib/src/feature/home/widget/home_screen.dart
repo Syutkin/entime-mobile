@@ -103,18 +103,16 @@ class HomeScreen extends StatelessWidget {
               bottom: TabBar(
                 isScrollable: false,
                 onTap: (index) {
+                  final bloc = context.read<TabBloc>();
                   switch (index) {
                     case 0:
-                      BlocProvider.of<TabBloc>(context)
-                          .add(const TabUpdated(AppTab.init));
+                      bloc.add(const TabEvent.updated(AppTab.init));
                       break;
                     case 1:
-                      BlocProvider.of<TabBloc>(context)
-                          .add(const TabUpdated(AppTab.start));
+                      bloc.add(const TabEvent.updated(AppTab.start));
                       break;
                     case 2:
-                      BlocProvider.of<TabBloc>(context)
-                          .add(const TabUpdated(AppTab.finish));
+                      bloc.add(const TabEvent.updated(AppTab.finish));
                       break;
                   }
                 },
@@ -223,7 +221,8 @@ class HomeScreen extends StatelessWidget {
                 value: MenuButton.selectStartProtocol,
                 child: ListTile(
                   leading: const Icon(MdiIcons.database),
-                  title: Text(Localization.current.I18nHome_selectStartProtocol),
+                  title:
+                      Text(Localization.current.I18nHome_selectStartProtocol),
                 )),
           );
         }
@@ -269,7 +268,8 @@ class HomeScreen extends StatelessWidget {
               value: MenuButton.importCsv,
               child: ListTile(
                 leading: const Icon(MdiIcons.import),
-                title: Text(Localization.current.I18nHome_importStartProtocolCsv),
+                title:
+                    Text(Localization.current.I18nHome_importStartProtocolCsv),
               )),
         );
       }

@@ -33,6 +33,7 @@ dependencies:
   flutter_bluetooth_serial: any
   flutter_markdown: any
   flutter_tts: any
+  freezed_annotation: any
   http: any
   intl: any
   logger: any
@@ -60,10 +61,12 @@ dependency_overrides:
     git: https://github.com/GoldenSoju/open_file.git
 
 dev_dependencies:
+  build_runner: any
   dart_code_metrics: any
   flutter_lints: any
   flutter_test:
     sdk: flutter
+  freezed: any
   sqflite_common_ffi: any
 
 flutter:
