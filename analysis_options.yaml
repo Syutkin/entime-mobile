@@ -12,6 +12,7 @@ include: package:flutter_lints/flutter.yaml
 analyzer:
   exclude:
     - lib/src/common/localization/generated/**
+    - '**/*.g.dart'
   language:
     strict-inference: true
     strict-raw-types: true

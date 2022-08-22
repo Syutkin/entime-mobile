@@ -6,7 +6,6 @@ import '../../../../common/helper/helper.dart';
 import '../../../../common/widget/expanded_alert_dialog.dart';
 import '../../../protocol/protocol.dart';
 
-
 Future<void> editStartTime(BuildContext context, StartItem item) async {
   final automaticPhoneTimeController = TextEditingController();
   final manualCorrectionController = TextEditingController();
@@ -41,28 +40,22 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
     return null;
   }
 
-  bool _updateAllStart() {
-    bool update = false;
-    if (item.automaticcorrection !=
-        int.tryParse(automaticCorrectionController.text)) {
-      item.automaticcorrection =
-          int.tryParse(automaticCorrectionController.text);
-      update = true;
+  StartItem? _updatedStartItem() {
+    final automaticCorrection =
+        int.tryParse(automaticCorrectionController.text);
+    final manualCorrection = int.tryParse(manualCorrectionController.text);
+    if (item.automaticcorrection != automaticCorrection ||
+        (item.automaticstarttime ?? '') != automaticStartTimeController.text ||
+        item.manualcorrection != manualCorrection ||
+        (item.manualstarttime ?? '') != manualStartTimeController.text) {
+      return item.copyWith(
+        automaticcorrection: int.tryParse(automaticCorrectionController.text),
+        automaticstarttime: automaticStartTimeController.text,
+        manualcorrection: int.tryParse(manualCorrectionController.text),
+        manualstarttime: manualStartTimeController.text,
+      );
     }
-    if ((item.automaticstarttime ?? '') != automaticStartTimeController.text) {
-      item.automaticstarttime = automaticStartTimeController.text;
-      update = true;
-    }
-    if (item.manualcorrection !=
-        int.tryParse(manualCorrectionController.text)) {
-      item.manualcorrection = int.tryParse(manualCorrectionController.text);
-      update = true;
-    }
-    if ((item.manualstarttime ?? '') != manualStartTimeController.text) {
-      item.manualstarttime = manualStartTimeController.text;
-      update = true;
-    }
-    return update;
+    return null;
   }
 
   return showDialog<void>(
@@ -173,9 +166,11 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
           TextButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                if (_updateAllStart()) {
-                  BlocProvider.of<ProtocolBloc>(context)
-                      .add(ProtocolUpdateItemInfoAtStart(item: item));
+                final newStartItem = _updatedStartItem();
+                if (newStartItem != null) {
+                  context
+                      .read<ProtocolBloc>()
+                      .add(ProtocolUpdateItemInfoAtStart(item: newStartItem));
                 }
                 Navigator.of(context).pop();
               }

@@ -198,7 +198,7 @@ void main() {
     });
 
     test('UpdateItemInfoAtStart', () async {
-      var item = StartItem(
+      var item = const StartItem(
         id: 100,
         number: 1,
         automaticstarttime: '10:01:01,123',
@@ -207,7 +207,7 @@ void main() {
         manualcorrection: 1234,
       );
       expect(await ProtocolProvider.db.updateItemInfoAtStart(item), 1);
-      item = StartItem(
+      item = const StartItem(
         id: 100,
         number: 2,
         automaticstarttime: '10:02:02,234',
@@ -216,7 +216,7 @@ void main() {
         manualcorrection: 2345,
       );
       expect(await ProtocolProvider.db.updateItemInfoAtStart(item), 1);
-      item = StartItem(
+      item = const StartItem(
         id: 100,
         number: 6,
         automaticstarttime: '10:06:00',

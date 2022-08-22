@@ -117,7 +117,7 @@ class ProtocolProvider {
         ORDER BY starttime ASC
         ''');
     final List<StartItem> protocol =
-        res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     return protocol;
   }
 
@@ -160,7 +160,7 @@ class ProtocolProvider {
     return count;
   }
 
-  /// Обновляет [StartItem.automaticstarttime] и [StartItem.automaticcorrection]
+  /// Обновляет [StartItem].automaticstarttime и [StartItem].automaticcorrection
   /// Возвращает null при успехе, и [StartItem] при неудаче
   Future<List<StartItem>?> updateAutomaticCorrection({
     required String time,
@@ -193,7 +193,7 @@ class ProtocolProvider {
         WHERE starttime BETWEEN ? AND ?
         ''', [before, after]);
       final List<StartItem> startProtocol =
-          res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
+          res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
       if (startProtocol.isNotEmpty &&
           startProtocol.first.automaticstarttime != null) {
         logger.i('Database -> Start time exists');
@@ -230,7 +230,7 @@ class ProtocolProvider {
         WHERE starttime BETWEEN ? AND ?
         ''', [before, after]);
     final List<StartItem> startProtocol =
-        res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     if (startProtocol.isNotEmpty && startProtocol.first.starttime != null) {
       final DateTime? startTime =
           strTimeToDateTime(startProtocol.first.starttime!);
@@ -318,7 +318,7 @@ class ProtocolProvider {
     return result;
   }
 
-  /// Обновляет или добавляет [StartItem.number] и [StartItem.starttime]
+  /// Обновляет или добавляет [StartItem].number и [StartItem].starttime
   /// Возвращает null при успехе, и [StartItem] если такое же стартовое время
   /// уже установлено для другого участника
   Future<List<StartItem>?> addStartNumber({
@@ -344,7 +344,7 @@ class ProtocolProvider {
           AND (automaticstarttime NOTNULL OR manualstarttime NOTNULL))
         ''', [time, number]);
       final List<StartItem> startProtocol =
-          res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
+          res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
       if (startProtocol.isNotEmpty) {
         logger.i('Database -> Start time $time '
             'already set or number $number already started');
@@ -389,7 +389,7 @@ class ProtocolProvider {
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL);
         ''');
     final List<StartItem> startProtocol =
-        res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     return startProtocol;
   }
 
@@ -405,7 +405,7 @@ class ProtocolProvider {
         ORDER BY starttime ASC;
         ''');
     final List<StartItem> startProtocol =
-        res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     return startProtocol;
   }
 
@@ -453,7 +453,7 @@ class ProtocolProvider {
         ORDER BY starttime ASC
         ''');
     final List<StartItem> startProtocol =
-        res.isNotEmpty ? res.map((c) => StartItem.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     return startProtocol;
   }
 
@@ -482,7 +482,7 @@ class ProtocolProvider {
     sqliteQuery += sqliteTail.join(' AND ');
     final res = await db.rawQuery(sqliteQuery);
     final List<FinishItem> finishProtocol =
-        res.isNotEmpty ? res.map((c) => FinishItem.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => FinishItem.fromJson(c)).toList() : [];
     return finishProtocol;
   }
 
@@ -688,7 +688,7 @@ class ProtocolProvider {
     ''');
 
     final List<FinishItem> prevFinishProtocol =
-        res.isNotEmpty ? res.map((c) => FinishItem.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => FinishItem.fromJson(c)).toList() : [];
     if (prevFinishProtocol.isNotEmpty &&
         prevFinishProtocol.first.finishtime.isNotEmpty) {
       prevFinishTime = strTimeToDateTime(prevFinishProtocol.first.finishtime);
@@ -707,7 +707,7 @@ class ProtocolProvider {
     ''');
 
     final List<FinishItem> item =
-        res.isNotEmpty ? res.map((c) => FinishItem.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => FinishItem.fromJson(c)).toList() : [];
     if (item.isNotEmpty && item.first.finishtime.isNotEmpty) {
       result = strTimeToDateTime(item.first.finishtime);
     }

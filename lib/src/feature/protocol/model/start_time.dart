@@ -1,6 +1,11 @@
-class StartTime {
-  String time;
-  int number;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  StartTime(this.time, this.number);
+part 'start_time.freezed.dart';
+
+@freezed
+class StartTime with _$StartTime {
+  const factory StartTime(
+    String time,
+    int number,
+  ) = _StartTime;
 }

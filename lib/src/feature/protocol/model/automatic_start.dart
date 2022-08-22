@@ -1,9 +1,10 @@
-class AutomaticStart {
-  String time;
-  int correction;
-  DateTime timeStamp;
-  bool updating;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  AutomaticStart(this.time, this.correction, this.timeStamp,
-  {this.updating = false});
+part 'automatic_start.freezed.dart';
+
+@unfreezed
+class AutomaticStart with _$AutomaticStart {
+  factory AutomaticStart(
+      final String time, final int correction, final DateTime timeStamp,
+      {@Default(false) bool updating}) = _AutomaticStart;
 }
