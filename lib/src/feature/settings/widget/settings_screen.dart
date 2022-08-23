@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -10,49 +9,65 @@ import '../bloc/settings_bloc.dart';
 import '../model/theme.dart';
 import 'settings_popups.dart';
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<SettingsScreen> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsScreen> {
-  BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Get current state
-    FlutterBluetoothSerial.instance.state.then((state) {
-      setState(() {
-        _bluetoothState = state;
-      });
-    });
-
-    // Listen for further state changes
-    FlutterBluetoothSerial.instance.onStateChanged().listen((state) {
-      setState(() {
-        _bluetoothState = state;
-      });
-    });
-  }
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
+    // throw UnimplementedError();
+//   }
+//
+// }
+
+// class SettingsScreen extends StatefulWidget {
+//   const SettingsScreen({
+//     Key? key,
+//   }) : super(key: key);
+//
+//   @override
+//   State<SettingsScreen> createState() => _SettingsPageState();
+// }
+
+// class _SettingsPageState extends State<SettingsScreen> {
+//   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//
+//     // Get current state
+//     FlutterBluetoothSerial.instance.state.then((state) {
+//       setState(() {
+//         _bluetoothState = state;
+//       });
+//     });
+//
+//     // Listen for further state changes
+//     FlutterBluetoothSerial.instance.onStateChanged().listen((state) {
+//       setState(() {
+//         _bluetoothState = state;
+//       });
+//     });
+//   }
+
+    // @override
+    // Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(Localization.current.I18nSettings_settings),
       ),
-      body: settingsList(context),
+      body: const _SettingsList(),
     );
   }
+}
 
-  Widget settingsList(BuildContext context) {
-    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+class _SettingsList extends StatelessWidget {
+  const _SettingsList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final settingsBloc = context.read<SettingsBloc>();
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, settingsState) {
         return SettingsList(
@@ -63,23 +78,25 @@ class _SettingsPageState extends State<SettingsScreen> {
                 SettingsTile.switchTile(
                   title: Text(Localization.current.I18nSettings_bluetooth),
                   //leading:  Icon(Icons.bluetooth),
-                  initialValue: _bluetoothState.isEnabled,
+                  // initialValue: _bluetoothState.isEnabled,
+                  initialValue: true,
+                  enabled: false,
                   onToggle: (value) {
-                    // Do the request and update with the true value then
-                    Future<void> future() async {
-                      // async lambda seems to not working
-                      if (value) {
-                        await FlutterBluetoothSerial.instance.requestEnable();
-                      } else {
-                        await FlutterBluetoothSerial.instance.requestDisable();
-                      }
-                    }
-
-                    future().then((_) {
-                      setState(() {
-                        //TODO: state to BLoC
-                      });
-                    });
+                    // // Do the request and update with the true value then
+                    // Future<void> future() async {
+                    //   // async lambda seems to not working
+                    //   if (value) {
+                    //     await FlutterBluetoothSerial.instance.requestEnable();
+                    //   } else {
+                    //     await FlutterBluetoothSerial.instance.requestDisable();
+                    //   }
+                    // }
+                    //
+                    // future().then((_) {
+                    //   setState(() {
+                    //     //TODO: state to BLoC
+                    //   });
+                    // });
                   },
                 ),
                 SettingsTile.switchTile(
@@ -386,7 +403,7 @@ class _SettingsPageState extends State<SettingsScreen> {
             ),
             SettingsSection(
               title: Text(Localization.current.I18nSettings_themes),
-              tiles: _themes(),
+              tiles: _themes(settingsBloc),
             ),
             SettingsSection(
               title: Text(Localization.current.I18nSettings_journal),
@@ -431,9 +448,8 @@ class _SettingsPageState extends State<SettingsScreen> {
     );
   }
 
-  List<SettingsTile> _themes() {
-    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
-    final settings = settingsBloc.state.settings;
+  List<SettingsTile> _themes(SettingsBloc bloc) {
+    final settings = bloc.state.settings;
     final List<SettingsTile> result = [];
     final AppTheme appTheme = settings.appTheme;
     for (final element in AppTheme.values) {
@@ -451,13 +467,15 @@ class _SettingsPageState extends State<SettingsScreen> {
           groupValue: appTheme,
           onChanged: (value) {
             // settingsBloc.add(ThemeChanged(element));
-            settingsBloc.add(SettingsEventUpdate(settings: settings.copyWith(appTheme: element)));
+            bloc.add(SettingsEventUpdate(
+                settings: settings.copyWith(appTheme: element)));
           },
           value: element,
         ),
         onPressed: (context) {
           // settingsBloc.add(ThemeChanged(element));
-          settingsBloc.add(SettingsEventUpdate(settings: settings.copyWith(appTheme: element)));
+          bloc.add(SettingsEventUpdate(
+              settings: settings.copyWith(appTheme: element)));
         },
       ));
     }
