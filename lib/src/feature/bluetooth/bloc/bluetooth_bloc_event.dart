@@ -8,6 +8,12 @@ abstract class BluetoothEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class InitializeBluetooth extends BluetoothEvent {}
+
+class EnableBluetooth extends BluetoothEvent {}
+
+class DisableBluetooth extends BluetoothEvent {}
+
 class SelectDevice extends BluetoothEvent {
   final BluetoothDeviceWithAvailability? deviceWithAvailability;
 

@@ -18,7 +18,6 @@ import 'src/feature/settings/settings.dart';
 import 'src/feature/tab/bloc/tab_bloc.dart';
 import 'src/feature/update/update.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await BlocOverrides.runZoned(
@@ -77,7 +76,7 @@ Future<void> runMain() async {
             settingsBloc: BlocProvider.of<SettingsBloc>(context),
             logBloc: BlocProvider.of<LogBloc>(context),
             audioBloc: BlocProvider.of<AudioBloc>(context),
-          ),
+          )..add(InitializeBluetooth()),
         ),
         BlocProvider<UpdateBloc>(
           create: (context) => UpdateBloc(updater: updater),

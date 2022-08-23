@@ -10,6 +10,8 @@ abstract class BluetoothConnectionState extends Equatable {
 
 class BluetoothNotInitializedState extends BluetoothConnectionState {}
 
+class BluetoothNotEnabledState extends BluetoothConnectionState {}
+
 class BluetoothConnectingState extends BluetoothConnectionState {}
 
 class BluetoothConnectedState extends BluetoothConnectionState {}

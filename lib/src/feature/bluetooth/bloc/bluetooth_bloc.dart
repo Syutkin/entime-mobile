@@ -13,13 +13,17 @@ import '../../log/log.dart';
 import '../../module_settings/module_settings.dart';
 import '../../protocol/protocol.dart';
 import '../../settings/settings.dart';
-import '../logic/bluetooth.dart';
+import '../logic/bluetooth_background_connection.dart';
 import '../model/bluetooth.dart';
 
 part 'bluetooth_bloc_event.dart';
+
 part 'bluetooth_bloc_state.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
+  final FlutterBluetoothSerial bluetoothSerial =
+      FlutterBluetoothSerial.instance;
+
   BluetoothBackgroundConnection? _serialConnection;
 
   final ModuleSettingsBloc moduleSettingsBloc;
@@ -39,6 +43,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   bool _reconnectActive = false;
   final int _reconnectDelay = 1;
 
+  bool _isEnabled = false;
+
   StreamSubscription<String>? _messageSubscription;
 
   BluetoothDevice? get bluetoothDevice => _bluetoothDevice;
@@ -53,7 +59,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     required this.settingsBloc,
     required this.logBloc,
     required this.audioBloc,
-  }) : super(const BluetoothDisconnectedState()) {
+  }) : super(BluetoothNotInitializedState()) {
     protocolSubscription = protocolBloc.stream.listen((state) {
       if (state is ProtocolSelectedState) {
         _protocolSelectedState = true;
@@ -66,6 +72,13 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
       _reconnect = state.settings.reconnect;
     });
 
+    // bluetoothSerial.onStateChanged().listen((event) {
+    //   event == BluetoothState.STATE_ON ? _isEnabled = true : _isEnabled = false;
+    //   print('_isEnabled: $_isEnabled');
+    // });
+
+    on<InitializeBluetooth>(
+        (event, emit) => _handleInitializeBluetooth(event, emit));
     on<Connect>((event, emit) => _handleConnect(event, emit));
     on<Connected>((event, emit) => _handleConnected(event, emit));
     on<Disconnect>((event, emit) => _handleDisconnect(event, emit));
@@ -73,6 +86,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     on<MessageReceived>((event, emit) => _handleMessageReceived(event, emit));
     on<SendMessage>((event, emit) => _handleSendMessage(event, emit));
     on<SelectDevice>((event, emit) => _handleSelectDevice(event, emit));
+    on<EnableBluetooth>((event, emit) => _handleEnableBluetooth(event, emit));
+    on<DisableBluetooth>((event, emit) => _handleDisableBluetooth(event, emit));
   }
 
   @override
@@ -82,6 +97,26 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     settingsSubscription.cancel();
     _serialConnection?.dispose();
     return super.close();
+  }
+
+  Future<void> _handleInitializeBluetooth(
+      InitializeBluetooth event, Emitter<BluetoothConnectionState> emit) async {
+    _isEnabled = await bluetoothSerial.isEnabled ?? false;
+    _isEnabled
+        ? emit(const BluetoothDisconnectedState())
+        : emit(BluetoothNotEnabledState());
+  }
+
+  Future<void> _handleEnableBluetooth(
+      EnableBluetooth event, Emitter<BluetoothConnectionState> emit) async {
+    await bluetoothSerial.requestEnable();
+    add(InitializeBluetooth());
+  }
+
+  Future<void> _handleDisableBluetooth(
+      DisableBluetooth event, Emitter<BluetoothConnectionState> emit) async {
+    await bluetoothSerial.requestDisable();
+    add(InitializeBluetooth());
   }
 
   Future<void> _handleConnect(
@@ -215,8 +250,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
       logger.d('Bluetooth -> correction: $correction');
       logger.d('Bluetooth -> gotime: ${messageList.first}');
       if (correction != null) {
-        final AutomaticStart automaticStart =
-            AutomaticStart(messageList.first, correction, timeStamp, updating: true);
+        final AutomaticStart automaticStart = AutomaticStart(
+            messageList.first, correction, timeStamp,
+            updating: true);
         protocolBloc.add(ProtocolUpdateAutomaticCorrection(automaticStart));
       } else {
         logger.e(
@@ -274,13 +310,15 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
         dateTime = dateTime.add(const Duration(minutes: 1));
         start.add(DateFormat('HH:mm:ss').format(dateTime));
       }
-      participant = await ProtocolProvider.db.getStartingParticipants(start.first);
+      participant =
+          await ProtocolProvider.db.getStartingParticipants(start.first);
       if (participant.isNotEmpty) {
         _isStarted = true;
         _isBetweenCategory = false;
         logger.d(
             'First participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory');
-        newVoiceText = 'На старт приглашается номер ${participant.first.number}';
+        newVoiceText =
+            'На старт приглашается номер ${participant.first.number}';
         if (_voiceName && participant.first.name != null) {
           newVoiceText += ', ${participant.first.name}.';
         } else {
