@@ -25,7 +25,7 @@ class SoundpoolProvider extends BeepProvider {
   }
 
   @override
-  void beep() {
-    _playSound();
+  Future<void> beep() async {
+    await _playSound();
   }
 }

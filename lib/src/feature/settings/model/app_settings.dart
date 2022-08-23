@@ -78,9 +78,9 @@ class AppSettings with _$AppSettings {
     // голосовые сообщения
     @Default(true) bool voice,
     @Default(true) bool voiceName,
-    @Default(0.5) double volume, // громкость
-    @Default(1) double pitch, // тон речи
-    @Default(0.8) double rate, // скорость речи
+    @Default(1.0) double volume, // громкость
+    @Default(1.0) double pitch, // тон речи
+    @Default(0.5) double rate, // скорость речи
     @Default('ru-RU') String language, // = "ru-RU", // язык
 
     @Default('') String recentFile,

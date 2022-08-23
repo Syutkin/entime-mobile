@@ -1,3 +1,3 @@
 abstract class BeepProvider {
-  void beep();
+  Future<void> beep();
 }

@@ -1,7 +1,7 @@
 abstract class AudioProvider {
-  void beep();
+  Future<void> beep();
 
-  void speak(String text);
+  Future<void> speak(String text);
 
   Future<dynamic> setLanguage(String language);
 

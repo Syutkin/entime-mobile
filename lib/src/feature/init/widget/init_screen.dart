@@ -6,7 +6,6 @@ import 'package:path/path.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/widget/header_widget.dart';
-import '../../audio/bloc/audio_bloc.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../log/log.dart';
 import '../../module_settings/module_settings.dart';
@@ -38,7 +37,10 @@ class _InitScreen extends State<InitScreen> {
           ? _debugLogButton(context)
           : const SizedBox(width: 0, height: 0),
       !kReleaseMode
-          ? _debugTestButton(context)
+          ? _debugCountdownButton(context)
+          : const SizedBox(width: 0, height: 0),
+      !kReleaseMode
+          ? _debugVoiceButton(context)
           : const SizedBox(width: 0, height: 0),
     ]);
   }
@@ -142,14 +144,23 @@ class _InitScreen extends State<InitScreen> {
         child: const Text('Add Log'));
   }
 
-  Widget _debugTestButton(BuildContext context) {
+  Widget _debugCountdownButton(BuildContext context) {
     return TextButton(
         // _device = event.device;
         onPressed: () {
           // BlocProvider.of<BluetoothBloc>(context)
           //     .add(MessageReceived('B19:00:56#'));
           // showChangelogAtStartup(context, '0.3.2');
-          BlocProvider.of<AudioBloc>(context).add(Countdown());
+
+          BlocProvider.of<BluetoothBloc>(context).audioService.countdown();
+        },
+        child: const Text('Countdown Test'));
+  }
+
+  Widget _debugVoiceButton(BuildContext context) {
+    return TextButton(
+        onPressed: () {
+          BlocProvider.of<BluetoothBloc>(context).audioService.speak('Это тестовое сообщение');
         },
         child: const Text('Voice Test'));
   }

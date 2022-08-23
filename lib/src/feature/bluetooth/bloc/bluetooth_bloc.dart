@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import '../../../common/helper/helper.dart';
 import '../../../common/logger/logger.dart';
-import '../../audio/audio.dart';
+import '../../audio/logic/audio_service.dart';
 import '../../log/log.dart';
 import '../../module_settings/module_settings.dart';
 import '../../protocol/protocol.dart';
@@ -33,7 +33,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   late final StreamSubscription<SettingsState> settingsSubscription;
   bool _protocolSelectedState = false;
   final LogBloc logBloc;
-  final AudioBloc audioBloc;
+  final AudioService audioService;
 
   BluetoothDevice? _bluetoothDevice;
 
@@ -58,7 +58,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     required this.protocolBloc,
     required this.settingsBloc,
     required this.logBloc,
-    required this.audioBloc,
+    required this.audioService,
   }) : super(BluetoothNotInitializedState()) {
     protocolSubscription = protocolBloc.stream.listen((state) {
       if (state is ProtocolSelectedState) {
@@ -284,7 +284,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   Future<void> _countdown(String time) async {
     if (_protocolSelectedState) {
       if (await ProtocolProvider.db.getStart(time) > 0) {
-        audioBloc.add(Countdown());
+        await audioService.countdown();
         logger.i('Bluetooth -> Beep start $time');
       } else {
         logger.i(
@@ -378,7 +378,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
           }
         }
       }
-      audioBloc.add(Speak(newVoiceText));
+      await audioService.speak(newVoiceText);
     } else {
       logger.i('Bluetooth -> Protocol not selected');
     }

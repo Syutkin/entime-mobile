@@ -1,4 +1,3 @@
-export 'bloc/audio_bloc.dart';
 export 'logic/audio_provider.dart';
 export 'logic/audioplayers_provider.dart';
 export 'logic/beep_provider.dart';

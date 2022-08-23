@@ -32,12 +32,12 @@ class SoundAudioProvider extends AudioProvider {
   }
 
   @override
-  void beep() {
-    beepProvider.beep();
+  Future<void> beep() async {
+    await beepProvider.beep();
   }
 
   @override
   Future<void> speak(String text) async {
-    unawaited(flutterTts.speak(text));
+    await flutterTts.speak(text);
   }
 }

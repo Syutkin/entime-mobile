@@ -7,7 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'src/common/bloc/app_bloc_observer.dart';
 import 'src/common/localization/localization.dart';
 import 'src/feature/app_info/app_info.dart';
-import 'src/feature/audio/bloc/audio_bloc.dart';
+import 'src/feature/audio/logic/audio_service.dart';
 import 'src/feature/bluetooth/bloc/bluetooth_bloc.dart';
 import 'src/feature/countdown/bloc/countdown_bloc.dart';
 import 'src/feature/home/widget/home_screen.dart';
@@ -36,6 +36,7 @@ Future<void> runMain() async {
   final UpdateProvider updater = await UpdateProvider.init();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
   final AppInfoProvider appInfo = await AppInfoProvider.load();
+  final AudioService audioService = AudioService(settings: settings);
   runApp(
     MultiBlocProvider(
       providers: [
@@ -47,11 +48,6 @@ Future<void> runMain() async {
         ),
         BlocProvider<ModuleSettingsBloc>(
           create: (context) => ModuleSettingsBloc(),
-        ),
-        BlocProvider<AudioBloc>(
-          create: (context) => AudioBloc(
-            settingsBloc: BlocProvider.of<SettingsBloc>(context),
-          ),
         ),
         BlocProvider<LogBloc>(
           create: (context) => LogBloc(
@@ -75,7 +71,7 @@ Future<void> runMain() async {
             protocolBloc: BlocProvider.of<ProtocolBloc>(context),
             settingsBloc: BlocProvider.of<SettingsBloc>(context),
             logBloc: BlocProvider.of<LogBloc>(context),
-            audioBloc: BlocProvider.of<AudioBloc>(context),
+            audioService: audioService,
           )..add(InitializeBluetooth()),
         ),
         BlocProvider<UpdateBloc>(
