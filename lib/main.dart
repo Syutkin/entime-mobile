@@ -99,29 +99,24 @@ class EntimeApp extends StatelessWidget {
       BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
     }
 
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<SettingsProvider>.value(value: settings),
-      ],
-      child: BlocBuilder<SettingsBloc, SettingsState>(
-          builder: (context, settingsTheme) {
-        return MaterialApp(
-          theme: appThemeData[settingsTheme.settings.appTheme],
-          title: 'Entime',
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            Localization.delegate,
-          ],
-          supportedLocales: Localization.supportedLocales,
-          //1. call BotToastInit
-          builder: BotToastInit(),
-          //2. registered route observer
-          navigatorObservers: [BotToastNavigatorObserver()],
-          home: const HomeScreen(),
-        );
-      }),
-    );
+    return BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, settingsTheme) {
+      return MaterialApp(
+        theme: appThemeData[settingsTheme.settings.appTheme],
+        title: 'Entime',
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          Localization.delegate,
+        ],
+        supportedLocales: Localization.supportedLocales,
+        //1. call BotToastInit
+        builder: BotToastInit(),
+        //2. registered route observer
+        navigatorObservers: [BotToastNavigatorObserver()],
+        home: const HomeScreen(),
+      );
+    });
   }
 }
