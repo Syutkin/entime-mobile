@@ -21,7 +21,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       emit(_SettingsState(settings: settingsProvider.settings));
     });
     on<SettingsEventUpdate>((event, emit) {
-      settingsProvider.save(event.settings);
+      settingsProvider.update(event.settings);
       emit(_SettingsState(settings: settingsProvider.settings));
     });
   }

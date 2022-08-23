@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wakelock/wakelock.dart';
 
 import '../settings.dart';
 
@@ -69,6 +70,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       appTheme: themeFromString(prefs.getString('theme')),
     );
 
+    await Wakelock.toggle(enable: settings.wakelock);
+
     return SharedPrefsSettingsProvider._(
       prefs,
       settings,
@@ -77,19 +80,18 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   @override
   Future<void> update(AppSettings settings) async {
-    _settings = settings;
-    await save(_settings);
+    await _save(settings);
   }
 
   @override
   Future<void> setDefaults() async {
-    _settings = const AppSettings.defaults();
-    await save(_settings);
+    await _save(const AppSettings.defaults());
   }
 
-  @override
-  Future<void> save(AppSettings settings) async {
-    _settings = settings;
+  Future<void> _save(AppSettings settings) async {
+    if (settings.wakelock != _settings.wakelock) {
+      await Wakelock.toggle(enable: settings.wakelock);
+    }
     await _prefs.setBool('sound', settings.sound);
     await _prefs.setBool('beep', settings.beep);
     await _prefs.setBool('voice', settings.voice);
@@ -122,5 +124,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     );
     await _prefs.setInt('log_limit', settings.logLimit);
     await _prefs.setString('theme', settings.appTheme.stringify);
+
+    _settings = settings;
   }
 }

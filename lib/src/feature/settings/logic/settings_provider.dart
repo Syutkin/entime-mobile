@@ -7,5 +7,5 @@ abstract class SettingsProvider {
 
   Future<void> setDefaults();
 
-  Future<void> save(AppSettings settings);
+  // Future<void> save(AppSettings settings);
 }
