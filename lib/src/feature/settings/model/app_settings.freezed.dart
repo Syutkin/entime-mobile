@@ -59,6 +59,224 @@ mixin _$AppSettings {
 // -1 = без ограничений
   int get logLimit => throw _privateConstructorUsedError; // активная тема
   AppTheme get appTheme => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)
+        $default, {
+    required TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)
+        defaults,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        $default, {
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        defaults,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        $default, {
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        defaults,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AppSettings value) $default, {
+    required TResult Function(_AppSettingsDefaults value) defaults,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(_AppSettings value)? $default, {
+    TResult Function(_AppSettingsDefaults value)? defaults,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AppSettings value)? $default, {
+    TResult Function(_AppSettingsDefaults value)? defaults,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppSettingsCopyWith<AppSettings> get copyWith =>
@@ -469,6 +687,846 @@ class __$$_AppSettingsCopyWithImpl<$Res> extends _$AppSettingsCopyWithImpl<$Res>
 
 class _$_AppSettings implements _AppSettings {
   const _$_AppSettings(
+      {required this.sound,
+      required this.beep,
+      required this.voice,
+      required this.voiceName,
+      required this.volume,
+      required this.pitch,
+      required this.rate,
+      required this.language,
+      required this.recentFile,
+      required this.wakelock,
+      required this.startFab,
+      required this.startFabSize,
+      required this.finishFab,
+      required this.finishFabSize,
+      required this.countdown,
+      required this.countdownSize,
+      required this.countdownLeft,
+      required this.countdownTop,
+      required this.countdownAtStartTime,
+      required this.checkUpdates,
+      required this.hideMarked,
+      required this.hideNumbers,
+      required this.hideManual,
+      required this.reconnect,
+      required this.finishDelay,
+      required this.substituteNumbers,
+      required this.substituteNumbersDelay,
+      required this.logLimit,
+      required this.appTheme});
+
+// звук
+  @override
+  final bool sound;
+// вкл/выкл
+// звук обратного отсчёта
+  @override
+  final bool beep;
+// голосовые сообщения
+  @override
+  final bool voice;
+  @override
+  final bool voiceName;
+  @override
+  final double volume;
+// громкость
+  @override
+  final double pitch;
+// тон речи
+  @override
+  final double rate;
+// скорость речи
+  @override
+  final String language;
+// = "ru-RU", // язык
+  @override
+  final String recentFile;
+// всегда включённый экран
+  @override
+  final bool wakelock;
+// кнопки "добавить вручную" на экранах старта и финиша
+  @override
+  final bool startFab;
+  @override
+  final double startFabSize;
+  @override
+  final bool finishFab;
+  @override
+  final double finishFabSize;
+// обратный отсчёт на экране старта
+  @override
+  final bool countdown;
+  @override
+  final double countdownSize;
+  @override
+  final double countdownLeft;
+  @override
+  final double countdownTop;
+// показывать обратный отсчёт вместо стартового времени
+  @override
+  final bool countdownAtStartTime;
+// проверка обновлений
+  @override
+  final bool checkUpdates;
+// выборка значений в финише
+  @override
+  final bool hideMarked;
+  @override
+  final bool hideNumbers;
+  @override
+  final bool hideManual;
+// восстанавливать Bluetooth подключение при обрыве
+  @override
+  final bool reconnect;
+// задержка в миллисекундах перед показыванием нового финишного времени
+  @override
+  final int finishDelay;
+// автоподстановка номеров в финишном протоколе
+  @override
+  final bool substituteNumbers;
+  @override
+  final int substituteNumbersDelay;
+// лог
+// ограничение количества показываемых строк в окне лога
+// -1 = без ограничений
+  @override
+  final int logLimit;
+// активная тема
+  @override
+  final AppTheme appTheme;
+
+  @override
+  String toString() {
+    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AppSettings &&
+            const DeepCollectionEquality().equals(other.sound, sound) &&
+            const DeepCollectionEquality().equals(other.beep, beep) &&
+            const DeepCollectionEquality().equals(other.voice, voice) &&
+            const DeepCollectionEquality().equals(other.voiceName, voiceName) &&
+            const DeepCollectionEquality().equals(other.volume, volume) &&
+            const DeepCollectionEquality().equals(other.pitch, pitch) &&
+            const DeepCollectionEquality().equals(other.rate, rate) &&
+            const DeepCollectionEquality().equals(other.language, language) &&
+            const DeepCollectionEquality()
+                .equals(other.recentFile, recentFile) &&
+            const DeepCollectionEquality().equals(other.wakelock, wakelock) &&
+            const DeepCollectionEquality().equals(other.startFab, startFab) &&
+            const DeepCollectionEquality()
+                .equals(other.startFabSize, startFabSize) &&
+            const DeepCollectionEquality().equals(other.finishFab, finishFab) &&
+            const DeepCollectionEquality()
+                .equals(other.finishFabSize, finishFabSize) &&
+            const DeepCollectionEquality().equals(other.countdown, countdown) &&
+            const DeepCollectionEquality()
+                .equals(other.countdownSize, countdownSize) &&
+            const DeepCollectionEquality()
+                .equals(other.countdownLeft, countdownLeft) &&
+            const DeepCollectionEquality()
+                .equals(other.countdownTop, countdownTop) &&
+            const DeepCollectionEquality()
+                .equals(other.countdownAtStartTime, countdownAtStartTime) &&
+            const DeepCollectionEquality()
+                .equals(other.checkUpdates, checkUpdates) &&
+            const DeepCollectionEquality()
+                .equals(other.hideMarked, hideMarked) &&
+            const DeepCollectionEquality()
+                .equals(other.hideNumbers, hideNumbers) &&
+            const DeepCollectionEquality()
+                .equals(other.hideManual, hideManual) &&
+            const DeepCollectionEquality().equals(other.reconnect, reconnect) &&
+            const DeepCollectionEquality()
+                .equals(other.finishDelay, finishDelay) &&
+            const DeepCollectionEquality()
+                .equals(other.substituteNumbers, substituteNumbers) &&
+            const DeepCollectionEquality()
+                .equals(other.substituteNumbersDelay, substituteNumbersDelay) &&
+            const DeepCollectionEquality().equals(other.logLimit, logLimit) &&
+            const DeepCollectionEquality().equals(other.appTheme, appTheme));
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(sound),
+        const DeepCollectionEquality().hash(beep),
+        const DeepCollectionEquality().hash(voice),
+        const DeepCollectionEquality().hash(voiceName),
+        const DeepCollectionEquality().hash(volume),
+        const DeepCollectionEquality().hash(pitch),
+        const DeepCollectionEquality().hash(rate),
+        const DeepCollectionEquality().hash(language),
+        const DeepCollectionEquality().hash(recentFile),
+        const DeepCollectionEquality().hash(wakelock),
+        const DeepCollectionEquality().hash(startFab),
+        const DeepCollectionEquality().hash(startFabSize),
+        const DeepCollectionEquality().hash(finishFab),
+        const DeepCollectionEquality().hash(finishFabSize),
+        const DeepCollectionEquality().hash(countdown),
+        const DeepCollectionEquality().hash(countdownSize),
+        const DeepCollectionEquality().hash(countdownLeft),
+        const DeepCollectionEquality().hash(countdownTop),
+        const DeepCollectionEquality().hash(countdownAtStartTime),
+        const DeepCollectionEquality().hash(checkUpdates),
+        const DeepCollectionEquality().hash(hideMarked),
+        const DeepCollectionEquality().hash(hideNumbers),
+        const DeepCollectionEquality().hash(hideManual),
+        const DeepCollectionEquality().hash(reconnect),
+        const DeepCollectionEquality().hash(finishDelay),
+        const DeepCollectionEquality().hash(substituteNumbers),
+        const DeepCollectionEquality().hash(substituteNumbersDelay),
+        const DeepCollectionEquality().hash(logLimit),
+        const DeepCollectionEquality().hash(appTheme)
+      ]);
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_AppSettingsCopyWith<_$_AppSettings> get copyWith =>
+      __$$_AppSettingsCopyWithImpl<_$_AppSettings>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)
+        $default, {
+    required TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)
+        defaults,
+  }) {
+    return $default(
+        sound,
+        beep,
+        voice,
+        voiceName,
+        volume,
+        pitch,
+        rate,
+        language,
+        recentFile,
+        wakelock,
+        startFab,
+        startFabSize,
+        finishFab,
+        finishFabSize,
+        countdown,
+        countdownSize,
+        countdownLeft,
+        countdownTop,
+        countdownAtStartTime,
+        checkUpdates,
+        hideMarked,
+        hideNumbers,
+        hideManual,
+        reconnect,
+        finishDelay,
+        substituteNumbers,
+        substituteNumbersDelay,
+        logLimit,
+        appTheme);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        $default, {
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        defaults,
+  }) {
+    return $default?.call(
+        sound,
+        beep,
+        voice,
+        voiceName,
+        volume,
+        pitch,
+        rate,
+        language,
+        recentFile,
+        wakelock,
+        startFab,
+        startFabSize,
+        finishFab,
+        finishFabSize,
+        countdown,
+        countdownSize,
+        countdownLeft,
+        countdownTop,
+        countdownAtStartTime,
+        checkUpdates,
+        hideMarked,
+        hideNumbers,
+        hideManual,
+        reconnect,
+        finishDelay,
+        substituteNumbers,
+        substituteNumbersDelay,
+        logLimit,
+        appTheme);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        $default, {
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        defaults,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(
+          sound,
+          beep,
+          voice,
+          voiceName,
+          volume,
+          pitch,
+          rate,
+          language,
+          recentFile,
+          wakelock,
+          startFab,
+          startFabSize,
+          finishFab,
+          finishFabSize,
+          countdown,
+          countdownSize,
+          countdownLeft,
+          countdownTop,
+          countdownAtStartTime,
+          checkUpdates,
+          hideMarked,
+          hideNumbers,
+          hideManual,
+          reconnect,
+          finishDelay,
+          substituteNumbers,
+          substituteNumbersDelay,
+          logLimit,
+          appTheme);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AppSettings value) $default, {
+    required TResult Function(_AppSettingsDefaults value) defaults,
+  }) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(_AppSettings value)? $default, {
+    TResult Function(_AppSettingsDefaults value)? defaults,
+  }) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AppSettings value)? $default, {
+    TResult Function(_AppSettingsDefaults value)? defaults,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AppSettings implements AppSettings {
+  const factory _AppSettings(
+      {required final bool sound,
+      required final bool beep,
+      required final bool voice,
+      required final bool voiceName,
+      required final double volume,
+      required final double pitch,
+      required final double rate,
+      required final String language,
+      required final String recentFile,
+      required final bool wakelock,
+      required final bool startFab,
+      required final double startFabSize,
+      required final bool finishFab,
+      required final double finishFabSize,
+      required final bool countdown,
+      required final double countdownSize,
+      required final double countdownLeft,
+      required final double countdownTop,
+      required final bool countdownAtStartTime,
+      required final bool checkUpdates,
+      required final bool hideMarked,
+      required final bool hideNumbers,
+      required final bool hideManual,
+      required final bool reconnect,
+      required final int finishDelay,
+      required final bool substituteNumbers,
+      required final int substituteNumbersDelay,
+      required final int logLimit,
+      required final AppTheme appTheme}) = _$_AppSettings;
+
+  @override // звук
+  bool get sound;
+  @override // вкл/выкл
+// звук обратного отсчёта
+  bool get beep;
+  @override // голосовые сообщения
+  bool get voice;
+  @override
+  bool get voiceName;
+  @override
+  double get volume;
+  @override // громкость
+  double get pitch;
+  @override // тон речи
+  double get rate;
+  @override // скорость речи
+  String get language;
+  @override // = "ru-RU", // язык
+  String get recentFile;
+  @override // всегда включённый экран
+  bool get wakelock;
+  @override // кнопки "добавить вручную" на экранах старта и финиша
+  bool get startFab;
+  @override
+  double get startFabSize;
+  @override
+  bool get finishFab;
+  @override
+  double get finishFabSize;
+  @override // обратный отсчёт на экране старта
+  bool get countdown;
+  @override
+  double get countdownSize;
+  @override
+  double get countdownLeft;
+  @override
+  double get countdownTop;
+  @override // показывать обратный отсчёт вместо стартового времени
+  bool get countdownAtStartTime;
+  @override // проверка обновлений
+  bool get checkUpdates;
+  @override // выборка значений в финише
+  bool get hideMarked;
+  @override
+  bool get hideNumbers;
+  @override
+  bool get hideManual;
+  @override // восстанавливать Bluetooth подключение при обрыве
+  bool get reconnect;
+  @override // задержка в миллисекундах перед показыванием нового финишного времени
+  int get finishDelay;
+  @override // автоподстановка номеров в финишном протоколе
+  bool get substituteNumbers;
+  @override
+  int get substituteNumbersDelay;
+  @override // лог
+// ограничение количества показываемых строк в окне лога
+// -1 = без ограничений
+  int get logLimit;
+  @override // активная тема
+  AppTheme get appTheme;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AppSettingsCopyWith<_$_AppSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AppSettingsDefaultsCopyWith<$Res>
+    implements $AppSettingsCopyWith<$Res> {
+  factory _$$_AppSettingsDefaultsCopyWith(_$_AppSettingsDefaults value,
+          $Res Function(_$_AppSettingsDefaults) then) =
+      __$$_AppSettingsDefaultsCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {bool sound,
+      bool beep,
+      bool voice,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String language,
+      String recentFile,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool hideMarked,
+      bool hideNumbers,
+      bool hideManual,
+      bool reconnect,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      int logLimit,
+      AppTheme appTheme});
+}
+
+/// @nodoc
+class __$$_AppSettingsDefaultsCopyWithImpl<$Res>
+    extends _$AppSettingsCopyWithImpl<$Res>
+    implements _$$_AppSettingsDefaultsCopyWith<$Res> {
+  __$$_AppSettingsDefaultsCopyWithImpl(_$_AppSettingsDefaults _value,
+      $Res Function(_$_AppSettingsDefaults) _then)
+      : super(_value, (v) => _then(v as _$_AppSettingsDefaults));
+
+  @override
+  _$_AppSettingsDefaults get _value => super._value as _$_AppSettingsDefaults;
+
+  @override
+  $Res call({
+    Object? sound = freezed,
+    Object? beep = freezed,
+    Object? voice = freezed,
+    Object? voiceName = freezed,
+    Object? volume = freezed,
+    Object? pitch = freezed,
+    Object? rate = freezed,
+    Object? language = freezed,
+    Object? recentFile = freezed,
+    Object? wakelock = freezed,
+    Object? startFab = freezed,
+    Object? startFabSize = freezed,
+    Object? finishFab = freezed,
+    Object? finishFabSize = freezed,
+    Object? countdown = freezed,
+    Object? countdownSize = freezed,
+    Object? countdownLeft = freezed,
+    Object? countdownTop = freezed,
+    Object? countdownAtStartTime = freezed,
+    Object? checkUpdates = freezed,
+    Object? hideMarked = freezed,
+    Object? hideNumbers = freezed,
+    Object? hideManual = freezed,
+    Object? reconnect = freezed,
+    Object? finishDelay = freezed,
+    Object? substituteNumbers = freezed,
+    Object? substituteNumbersDelay = freezed,
+    Object? logLimit = freezed,
+    Object? appTheme = freezed,
+  }) {
+    return _then(_$_AppSettingsDefaults(
+      sound: sound == freezed
+          ? _value.sound
+          : sound // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beep: beep == freezed
+          ? _value.beep
+          : beep // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voice: voice == freezed
+          ? _value.voice
+          : voice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voiceName: voiceName == freezed
+          ? _value.voiceName
+          : voiceName // ignore: cast_nullable_to_non_nullable
+              as bool,
+      volume: volume == freezed
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      pitch: pitch == freezed
+          ? _value.pitch
+          : pitch // ignore: cast_nullable_to_non_nullable
+              as double,
+      rate: rate == freezed
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as double,
+      language: language == freezed
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      recentFile: recentFile == freezed
+          ? _value.recentFile
+          : recentFile // ignore: cast_nullable_to_non_nullable
+              as String,
+      wakelock: wakelock == freezed
+          ? _value.wakelock
+          : wakelock // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startFab: startFab == freezed
+          ? _value.startFab
+          : startFab // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startFabSize: startFabSize == freezed
+          ? _value.startFabSize
+          : startFabSize // ignore: cast_nullable_to_non_nullable
+              as double,
+      finishFab: finishFab == freezed
+          ? _value.finishFab
+          : finishFab // ignore: cast_nullable_to_non_nullable
+              as bool,
+      finishFabSize: finishFabSize == freezed
+          ? _value.finishFabSize
+          : finishFabSize // ignore: cast_nullable_to_non_nullable
+              as double,
+      countdown: countdown == freezed
+          ? _value.countdown
+          : countdown // ignore: cast_nullable_to_non_nullable
+              as bool,
+      countdownSize: countdownSize == freezed
+          ? _value.countdownSize
+          : countdownSize // ignore: cast_nullable_to_non_nullable
+              as double,
+      countdownLeft: countdownLeft == freezed
+          ? _value.countdownLeft
+          : countdownLeft // ignore: cast_nullable_to_non_nullable
+              as double,
+      countdownTop: countdownTop == freezed
+          ? _value.countdownTop
+          : countdownTop // ignore: cast_nullable_to_non_nullable
+              as double,
+      countdownAtStartTime: countdownAtStartTime == freezed
+          ? _value.countdownAtStartTime
+          : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
+              as bool,
+      checkUpdates: checkUpdates == freezed
+          ? _value.checkUpdates
+          : checkUpdates // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hideMarked: hideMarked == freezed
+          ? _value.hideMarked
+          : hideMarked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hideNumbers: hideNumbers == freezed
+          ? _value.hideNumbers
+          : hideNumbers // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hideManual: hideManual == freezed
+          ? _value.hideManual
+          : hideManual // ignore: cast_nullable_to_non_nullable
+              as bool,
+      reconnect: reconnect == freezed
+          ? _value.reconnect
+          : reconnect // ignore: cast_nullable_to_non_nullable
+              as bool,
+      finishDelay: finishDelay == freezed
+          ? _value.finishDelay
+          : finishDelay // ignore: cast_nullable_to_non_nullable
+              as int,
+      substituteNumbers: substituteNumbers == freezed
+          ? _value.substituteNumbers
+          : substituteNumbers // ignore: cast_nullable_to_non_nullable
+              as bool,
+      substituteNumbersDelay: substituteNumbersDelay == freezed
+          ? _value.substituteNumbersDelay
+          : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
+              as int,
+      logLimit: logLimit == freezed
+          ? _value.logLimit
+          : logLimit // ignore: cast_nullable_to_non_nullable
+              as int,
+      appTheme: appTheme == freezed
+          ? _value.appTheme
+          : appTheme // ignore: cast_nullable_to_non_nullable
+              as AppTheme,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AppSettingsDefaults implements _AppSettingsDefaults {
+  const _$_AppSettingsDefaults(
       {this.sound = true,
       this.beep = true,
       this.voice = true,
@@ -610,14 +1668,14 @@ class _$_AppSettings implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme)';
+    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppSettings &&
+            other is _$_AppSettingsDefaults &&
             const DeepCollectionEquality().equals(other.sound, sound) &&
             const DeepCollectionEquality().equals(other.beep, beep) &&
             const DeepCollectionEquality().equals(other.voice, voice) &&
@@ -699,12 +1757,342 @@ class _$_AppSettings implements _AppSettings {
 
   @JsonKey(ignore: true)
   @override
-  _$$_AppSettingsCopyWith<_$_AppSettings> get copyWith =>
-      __$$_AppSettingsCopyWithImpl<_$_AppSettings>(this, _$identity);
+  _$$_AppSettingsDefaultsCopyWith<_$_AppSettingsDefaults> get copyWith =>
+      __$$_AppSettingsDefaultsCopyWithImpl<_$_AppSettingsDefaults>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)
+        $default, {
+    required TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)
+        defaults,
+  }) {
+    return defaults(
+        sound,
+        beep,
+        voice,
+        voiceName,
+        volume,
+        pitch,
+        rate,
+        language,
+        recentFile,
+        wakelock,
+        startFab,
+        startFabSize,
+        finishFab,
+        finishFabSize,
+        countdown,
+        countdownSize,
+        countdownLeft,
+        countdownTop,
+        countdownAtStartTime,
+        checkUpdates,
+        hideMarked,
+        hideNumbers,
+        hideManual,
+        reconnect,
+        finishDelay,
+        substituteNumbers,
+        substituteNumbersDelay,
+        logLimit,
+        appTheme);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        $default, {
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        defaults,
+  }) {
+    return defaults?.call(
+        sound,
+        beep,
+        voice,
+        voiceName,
+        volume,
+        pitch,
+        rate,
+        language,
+        recentFile,
+        wakelock,
+        startFab,
+        startFabSize,
+        finishFab,
+        finishFabSize,
+        countdown,
+        countdownSize,
+        countdownLeft,
+        countdownTop,
+        countdownAtStartTime,
+        checkUpdates,
+        hideMarked,
+        hideNumbers,
+        hideManual,
+        reconnect,
+        finishDelay,
+        substituteNumbers,
+        substituteNumbersDelay,
+        logLimit,
+        appTheme);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        $default, {
+    TResult Function(
+            bool sound,
+            bool beep,
+            bool voice,
+            bool voiceName,
+            double volume,
+            double pitch,
+            double rate,
+            String language,
+            String recentFile,
+            bool wakelock,
+            bool startFab,
+            double startFabSize,
+            bool finishFab,
+            double finishFabSize,
+            bool countdown,
+            double countdownSize,
+            double countdownLeft,
+            double countdownTop,
+            bool countdownAtStartTime,
+            bool checkUpdates,
+            bool hideMarked,
+            bool hideNumbers,
+            bool hideManual,
+            bool reconnect,
+            int finishDelay,
+            bool substituteNumbers,
+            int substituteNumbersDelay,
+            int logLimit,
+            AppTheme appTheme)?
+        defaults,
+    required TResult orElse(),
+  }) {
+    if (defaults != null) {
+      return defaults(
+          sound,
+          beep,
+          voice,
+          voiceName,
+          volume,
+          pitch,
+          rate,
+          language,
+          recentFile,
+          wakelock,
+          startFab,
+          startFabSize,
+          finishFab,
+          finishFabSize,
+          countdown,
+          countdownSize,
+          countdownLeft,
+          countdownTop,
+          countdownAtStartTime,
+          checkUpdates,
+          hideMarked,
+          hideNumbers,
+          hideManual,
+          reconnect,
+          finishDelay,
+          substituteNumbers,
+          substituteNumbersDelay,
+          logLimit,
+          appTheme);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AppSettings value) $default, {
+    required TResult Function(_AppSettingsDefaults value) defaults,
+  }) {
+    return defaults(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(_AppSettings value)? $default, {
+    TResult Function(_AppSettingsDefaults value)? defaults,
+  }) {
+    return defaults?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AppSettings value)? $default, {
+    TResult Function(_AppSettingsDefaults value)? defaults,
+    required TResult orElse(),
+  }) {
+    if (defaults != null) {
+      return defaults(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _AppSettings implements AppSettings {
-  const factory _AppSettings(
+abstract class _AppSettingsDefaults implements AppSettings {
+  const factory _AppSettingsDefaults(
       {final bool sound,
       final bool beep,
       final bool voice,
@@ -733,7 +2121,7 @@ abstract class _AppSettings implements AppSettings {
       final bool substituteNumbers,
       final int substituteNumbersDelay,
       final int logLimit,
-      final AppTheme appTheme}) = _$_AppSettings;
+      final AppTheme appTheme}) = _$_AppSettingsDefaults;
 
   @override // звук
   bool get sound;
@@ -798,6 +2186,6 @@ abstract class _AppSettings implements AppSettings {
   AppTheme get appTheme;
   @override
   @JsonKey(ignore: true)
-  _$$_AppSettingsCopyWith<_$_AppSettings> get copyWith =>
+  _$$_AppSettingsDefaultsCopyWith<_$_AppSettingsDefaults> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../settings.dart';
 
-class SharedPrefsSettingsProvider extends SettingsProvider{
+class SharedPrefsSettingsProvider extends SettingsProvider {
   final SharedPreferences _prefs;
   AppSettings _settings;
 
@@ -16,46 +16,56 @@ class SharedPrefsSettingsProvider extends SettingsProvider{
   static Future<SharedPrefsSettingsProvider> load() async {
     final prefs = await SharedPreferences.getInstance();
     final settings = AppSettings(
-      sound: prefs.getBool('sound') ?? const AppSettings().sound,
-      beep: prefs.getBool('beep') ?? const AppSettings().beep,
-      voice: prefs.getBool('voice') ?? const AppSettings().voice,
-      voiceName: prefs.getBool('voiceName') ?? const AppSettings().voiceName,
-      volume: prefs.getDouble('volume') ?? const AppSettings().volume,
-      pitch: prefs.getDouble('pitch') ?? const AppSettings().pitch,
-      rate: prefs.getDouble('rate') ?? const AppSettings().rate,
-      language: prefs.getString('language') ?? const AppSettings().language,
-      recentFile:
-      prefs.getString('recentFile') ?? const AppSettings().recentFile,
-      wakelock: prefs.getBool('wakelock') ?? const AppSettings().wakelock,
-      startFab: prefs.getBool('startFab') ?? const AppSettings().startFab,
-      startFabSize:
-      prefs.getDouble('startFabSize') ?? const AppSettings().startFabSize,
-      finishFab: prefs.getBool('finishFab') ?? const AppSettings().finishFab,
-      finishFabSize:
-      prefs.getDouble('finishFabSize') ?? const AppSettings().finishFabSize,
-      countdown: prefs.getBool('countdown') ?? const AppSettings().countdown,
-      countdownSize:
-      prefs.getDouble('countdownSize') ?? const AppSettings().countdownSize,
-      countdownLeft:
-      prefs.getDouble('countdownLeft') ?? const AppSettings().countdownLeft,
-      countdownTop:
-      prefs.getDouble('countdownTop') ?? const AppSettings().countdownTop,
+      sound: prefs.getBool('sound') ?? const AppSettings.defaults().sound,
+      beep: prefs.getBool('beep') ?? const AppSettings.defaults().beep,
+      voice: prefs.getBool('voice') ?? const AppSettings.defaults().voice,
+      voiceName:
+          prefs.getBool('voiceName') ?? const AppSettings.defaults().voiceName,
+      volume: prefs.getDouble('volume') ?? const AppSettings.defaults().volume,
+      pitch: prefs.getDouble('pitch') ?? const AppSettings.defaults().pitch,
+      rate: prefs.getDouble('rate') ?? const AppSettings.defaults().rate,
+      language:
+          prefs.getString('language') ?? const AppSettings.defaults().language,
+      recentFile: prefs.getString('recentFile') ??
+          const AppSettings.defaults().recentFile,
+      wakelock:
+          prefs.getBool('wakelock') ?? const AppSettings.defaults().wakelock,
+      startFab:
+          prefs.getBool('startFab') ?? const AppSettings.defaults().startFab,
+      startFabSize: prefs.getDouble('startFabSize') ??
+          const AppSettings.defaults().startFabSize,
+      finishFab:
+          prefs.getBool('finishFab') ?? const AppSettings.defaults().finishFab,
+      finishFabSize: prefs.getDouble('finishFabSize') ??
+          const AppSettings.defaults().finishFabSize,
+      countdown:
+          prefs.getBool('countdown') ?? const AppSettings.defaults().countdown,
+      countdownSize: prefs.getDouble('countdownSize') ??
+          const AppSettings.defaults().countdownSize,
+      countdownLeft: prefs.getDouble('countdownLeft') ??
+          const AppSettings.defaults().countdownLeft,
+      countdownTop: prefs.getDouble('countdownTop') ??
+          const AppSettings.defaults().countdownTop,
       countdownAtStartTime: prefs.getBool('countdownAtStartTime') ??
-          const AppSettings().countdownAtStartTime,
-      checkUpdates:
-      prefs.getBool('checkUpdates') ?? const AppSettings().checkUpdates,
-      hideMarked: prefs.getBool('hideMarked') ?? const AppSettings().hideMarked,
-      hideNumbers:
-      prefs.getBool('hideNumbers') ?? const AppSettings().hideNumbers,
-      hideManual: prefs.getBool('hideManual') ?? const AppSettings().hideManual,
-      reconnect: prefs.getBool('reconnect') ?? const AppSettings().reconnect,
-      finishDelay:
-      prefs.getInt('finishDelay') ?? const AppSettings().finishDelay,
+          const AppSettings.defaults().countdownAtStartTime,
+      checkUpdates: prefs.getBool('checkUpdates') ??
+          const AppSettings.defaults().checkUpdates,
+      hideMarked: prefs.getBool('hideMarked') ??
+          const AppSettings.defaults().hideMarked,
+      hideNumbers: prefs.getBool('hideNumbers') ??
+          const AppSettings.defaults().hideNumbers,
+      hideManual: prefs.getBool('hideManual') ??
+          const AppSettings.defaults().hideManual,
+      reconnect:
+          prefs.getBool('reconnect') ?? const AppSettings.defaults().reconnect,
+      finishDelay: prefs.getInt('finishDelay') ??
+          const AppSettings.defaults().finishDelay,
       substituteNumbers: prefs.getBool('substituteNumbers') ??
-          const AppSettings().substituteNumbers,
+          const AppSettings.defaults().substituteNumbers,
       substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
-          const AppSettings().substituteNumbersDelay,
-      logLimit: prefs.getInt('logLimit') ?? const AppSettings().logLimit,
+          const AppSettings.defaults().substituteNumbersDelay,
+      logLimit:
+          prefs.getInt('logLimit') ?? const AppSettings.defaults().logLimit,
       appTheme: themeFromString(prefs.getString('theme')),
     );
 
@@ -73,7 +83,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider{
 
   @override
   Future<void> setDefaults() async {
-    _settings = const AppSettings();
+    _settings = const AppSettings.defaults();
     await save(_settings);
   }
 
@@ -107,7 +117,9 @@ class SharedPrefsSettingsProvider extends SettingsProvider{
     await _prefs.setInt('finishDelay', settings.finishDelay);
     await _prefs.setBool('substituteNumbers', settings.substituteNumbers);
     await _prefs.setInt(
-        'substituteNumbersDelay', settings.substituteNumbersDelay);
+      'substituteNumbersDelay',
+      settings.substituteNumbersDelay,
+    );
     await _prefs.setInt('log_limit', settings.logLimit);
     await _prefs.setString('theme', settings.appTheme.stringify);
   }

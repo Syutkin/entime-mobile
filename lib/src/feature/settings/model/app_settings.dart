@@ -8,6 +8,68 @@ part 'app_settings.freezed.dart';
 class AppSettings with _$AppSettings {
   const factory AppSettings({
     // звук
+    required bool sound, // вкл/выкл
+
+    // звук обратного отсчёта
+    required bool beep,
+
+    // голосовые сообщения
+    required bool voice,
+    required bool voiceName,
+    required double volume, // громкость
+    required double pitch, // тон речи
+    required double rate, // скорость речи
+    required String language, // = "ru-RU", // язык
+
+    required String recentFile,
+
+    // всегда включённый экран
+    required bool wakelock,
+
+    // кнопки "добавить вручную" на экранах старта и финиша
+    required bool startFab,
+    required double startFabSize,
+    required bool finishFab,
+    required double finishFabSize,
+
+    // обратный отсчёт на экране старта
+    required bool countdown,
+    required double countdownSize,
+    required double countdownLeft,
+    required double countdownTop,
+
+    // показывать обратный отсчёт вместо стартового времени
+    required bool countdownAtStartTime,
+
+    // проверка обновлений
+    required bool checkUpdates,
+
+    // выборка значений в финише
+    required bool hideMarked,
+    required bool hideNumbers,
+    required bool hideManual,
+
+    // восстанавливать Bluetooth подключение при обрыве
+    required bool reconnect,
+
+    // задержка в миллисекундах перед показыванием нового финишного времени
+    required int finishDelay,
+
+    // автоподстановка номеров в финишном протоколе
+    required bool substituteNumbers,
+    required int substituteNumbersDelay,
+
+    // лог
+    // ограничение количества показываемых строк в окне лога
+    // -1 = без ограничений
+    required int logLimit,
+
+    // активная тема
+    required AppTheme appTheme,
+  }) = _AppSettings;
+
+  const factory AppSettings.defaults({
+    // звук
     @Default(true) bool sound, // вкл/выкл
 
     // звук обратного отсчёта
@@ -66,5 +128,5 @@ class AppSettings with _$AppSettings {
 
     // активная тема
     @Default(AppTheme.lightBlue) AppTheme appTheme,
-  }) = _AppSettings;
+  }) = _AppSettingsDefaults;
 }
