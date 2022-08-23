@@ -105,7 +105,7 @@ class _StartScreen extends State<StartScreen> {
       TextButton(
         onPressed: () async {
           BlocProvider.of<ProtocolBloc>(context)
-              .add(ProtocolClearStartResultsDebug());
+              .add(const ProtocolClearStartResultsDebug());
         },
         child: const Icon(Icons.clear_all),
       ),

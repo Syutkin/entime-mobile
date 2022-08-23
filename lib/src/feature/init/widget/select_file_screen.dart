@@ -156,7 +156,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                   if (protocolState is ProtocolSelectedState &&
                       protocolState.databasePath == item.path) {
                     BlocProvider.of<ProtocolBloc>(context)
-                        .add(DeselectProtocol());
+                        .add(const DeselectProtocol());
                   }
                   final File shm = File('${item.path}-shm');
                   if (shm.existsSync()) {

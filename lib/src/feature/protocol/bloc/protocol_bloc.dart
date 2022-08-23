@@ -40,7 +40,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   ProtocolBloc({
     required this.settingsBloc,
-  }) : super(ProtocolNotSelectedState()) {
+  }) : super(const ProtocolNotSelectedState()) {
     settingsSubscription = settingsBloc.stream.listen((state) {
       // условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
       if (_hideMarked != state.settings.hideMarked ||
@@ -137,7 +137,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       ));
       logger.i('DatabaseConnect -> selected $file');
     } else {
-      add(DeselectProtocol());
+      add(const DeselectProtocol());
       logger.i('DatabaseConnect -> no file selected');
     }
   }
@@ -147,7 +147,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     await ProtocolProvider.db.setDbPath(null);
     settingsBloc.add(SettingsEventUpdate(
         settings: settingsBloc.state.settings.copyWith(recentFile: '')));
-    emit(ProtocolNotSelectedState());
+    emit(const ProtocolNotSelectedState());
   }
 
   // добавляет/заменяет номер и стартовое время в start

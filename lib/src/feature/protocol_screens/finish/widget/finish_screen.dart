@@ -192,7 +192,7 @@ class _FinishPage extends State<FinishScreen> {
                   onTap: () {
                     isSelected
                         ? BlocProvider.of<ProtocolBloc>(context)
-                            .add(ProtocolDeselectAwaitingNumber())
+                            .add(const ProtocolDeselectAwaitingNumber())
                         : BlocProvider.of<ProtocolBloc>(context).add(
                             ProtocolSelectAwaitingNumber(number: item.number));
                   },
@@ -239,7 +239,7 @@ class _FinishPage extends State<FinishScreen> {
             return;
           }
           BlocProvider.of<ProtocolBloc>(context)
-              .add(ProtocolHideAllFinishResults());
+              .add(const ProtocolHideAllFinishResults());
           break;
       }
     }
@@ -389,7 +389,7 @@ class _FinishPage extends State<FinishScreen> {
                 TextButton(
                   onPressed: () async {
                     BlocProvider.of<ProtocolBloc>(context)
-                        .add(ProtocolClearFinishResultsDebug());
+                        .add(const ProtocolClearFinishResultsDebug());
                   },
                   child: const Icon(Icons.clear_all),
                 ),
@@ -422,7 +422,7 @@ class _FinishPage extends State<FinishScreen> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final now = DateTime.now();
       if (prevMinute != now.minute && now.second > 0) {
-        BlocProvider.of<ProtocolBloc>(context).add(ProtocolGetNumbersOnTrace());
+        BlocProvider.of<ProtocolBloc>(context).add(const ProtocolGetNumbersOnTrace());
         prevMinute = now.minute;
       }
     });

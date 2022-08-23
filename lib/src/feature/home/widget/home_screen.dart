@@ -283,9 +283,9 @@ class HomeScreen extends StatelessWidget {
             switch (value) {
               case MenuButton.share:
                 if (activeTab == AppTab.start) {
-                  protocolBloc.add(ProtocolShareStart());
+                  protocolBloc.add(const ProtocolShareStart());
                 } else if (activeTab == AppTab.finish) {
-                  protocolBloc.add(ProtocolShareFinish());
+                  protocolBloc.add(const ProtocolShareFinish());
                 }
                 break;
               case MenuButton.fab:
