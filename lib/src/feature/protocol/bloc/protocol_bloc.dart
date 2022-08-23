@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../common/csv/csv_utils.dart';
@@ -14,6 +14,8 @@ import '../model/automatic_start.dart';
 import '../model/protocol.dart';
 import '../model/start_protocol.dart';
 import '../model/start_time.dart';
+
+part 'protocol_bloc.freezed.dart';
 
 part 'protocol_event.dart';
 
@@ -48,13 +50,13 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         _hideNumbers = state.settings.hideNumbers;
         _hideManual = state.settings.hideManual;
         _file = state.settings.recentFile;
-        add(SelectProtocol(_file));
+        add(SelectProtocol(file: _file));
         logger.v(
             'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ');
       }
       if (_file != state.settings.recentFile) {
         _file = state.settings.recentFile;
-        add(SelectProtocol(_file));
+        add(SelectProtocol(file: _file));
       }
       _finishDelay = state.settings.finishDelay;
       _substituteNumbers = state.settings.substituteNumbers;
@@ -125,8 +127,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           hideNumbers: _hideNumbers);
       _numbersOnTraceProtocol = await ProtocolProvider.db.getNumbersOnTrace();
       settingsBloc.add(SettingsEventUpdate(
-          settings:
-              settingsBloc.state.settings.copyWith(recentFile: file)));
+          settings: settingsBloc.state.settings.copyWith(recentFile: file)));
       emit(ProtocolSelectedState(
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
@@ -145,8 +146,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       DeselectProtocol event, Emitter<ProtocolState> emit) async {
     await ProtocolProvider.db.setDbPath(null);
     settingsBloc.add(SettingsEventUpdate(
-        settings:
-        settingsBloc.state.settings.copyWith(recentFile: '')));
+        settings: settingsBloc.state.settings.copyWith(recentFile: '')));
     emit(ProtocolNotSelectedState());
   }
 

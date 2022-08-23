@@ -57,7 +57,7 @@ Future<void> runMain() async {
         BlocProvider<ProtocolBloc>(
           create: (context) => ProtocolBloc(
             settingsBloc: BlocProvider.of<SettingsBloc>(context),
-          )..add(SelectProtocol(settings.settings.recentFile)),
+          )..add(SelectProtocol(file:settings.settings.recentFile)),
         ),
         BlocProvider<CountdownBloc>(
           create: (context) => CountdownBloc(

@@ -253,7 +253,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
         final AutomaticStart automaticStart = AutomaticStart(
             messageList.first, correction, timeStamp,
             updating: true);
-        protocolBloc.add(ProtocolUpdateAutomaticCorrection(automaticStart));
+        protocolBloc.add(ProtocolUpdateAutomaticCorrection(automaticStart: automaticStart));
       } else {
         logger.e(
             'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage');

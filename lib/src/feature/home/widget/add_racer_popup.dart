@@ -80,7 +80,7 @@ Future<void> addRacerPopup(BuildContext context) async {
                     time.toString().split('.').first.padLeft(8, '0');
                 BlocProvider.of<ProtocolBloc>(context)
 //                    .add(ProtocolAddStartNumber(number: number, time: starttime));
-                    .add(ProtocolAddStartNumber(StartTime(starttime, number)));
+                    .add(ProtocolAddStartNumber(startTime: StartTime(starttime, number)));
                 Navigator.of(context).pop();
               }
             },

@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
             );
             if (update != null && update) {
               protocolBloc.add(ProtocolUpdateAutomaticCorrection(
-                state.automaticStart!,
+                automaticStart: state.automaticStart!,
                 forceUpdate: true,
               ));
             }
@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
 
             if (update != null && update) {
               protocolBloc.add(
-                  ProtocolAddStartNumber(state.startTime!, forceAdd: true));
+                  ProtocolAddStartNumber(startTime: state.startTime!, forceAdd: true));
             }
           }
         }

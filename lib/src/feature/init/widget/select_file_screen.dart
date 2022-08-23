@@ -92,7 +92,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                     trailing: _filePopup(item),
                     onTap: () {
                       BlocProvider.of<ProtocolBloc>(context)
-                          .add(SelectProtocol(item.path));
+                          .add(SelectProtocol(file: item.path));
                       Navigator.of(context).pop();
                     },
                   );

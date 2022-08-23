@@ -116,7 +116,7 @@ class _StartScreen extends State<StartScreen> {
               1234,
               DateTime.now());
           BlocProvider.of<ProtocolBloc>(context)
-              .add(ProtocolUpdateAutomaticCorrection(automaticStart));
+              .add(ProtocolUpdateAutomaticCorrection(automaticStart: automaticStart));
         },
         child: const Icon(Icons.play_arrow),
       ),

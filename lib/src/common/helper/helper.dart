@@ -105,7 +105,7 @@ Future<String?> createNewProtocolFile(BuildContext context,
   }
   final String? newFile = await _createFile(context, fileName);
   if (newFile != null) {
-    bloc.add(SelectProtocol(newFile, csv));
+    bloc.add(SelectProtocol(file:newFile, csv: csv));
   }
   return newFile;
 }
@@ -188,7 +188,7 @@ Future<void> loadFile(BuildContext context) async {
       // Если null - файл уже существовал и не перезаписываем,
       // то ничего делать не нужно
       if (file != null) {
-        protocolBloc.add(SelectProtocol(file.path));
+        protocolBloc.add(SelectProtocol(file:file.path));
         // Navigator.of(context).pop();
       }
     } else if (platformFile.extension == 'csv') {
