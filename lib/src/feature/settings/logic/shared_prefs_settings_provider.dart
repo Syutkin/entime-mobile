@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -9,6 +11,11 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   @override
   AppSettings get settings => _settings;
+
+  @override
+  Stream<AppSettings> get state =>
+      _appSettingsController.stream.asBroadcastStream();
+  final _appSettingsController = StreamController<AppSettings>();
 
   SharedPrefsSettingsProvider._(SharedPreferences prefs, AppSettings settings)
       : _prefs = prefs,
@@ -75,7 +82,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     return SharedPrefsSettingsProvider._(
       prefs,
       settings,
-    );
+    ).._appSettingsController.add(settings); //add initial value to stream
   }
 
   @override
@@ -126,5 +133,10 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setString('theme', settings.appTheme.stringify);
 
     _settings = settings;
+    _appSettingsController.add(_settings);
+  }
+
+  Future<void> dispose() async {
+    await _appSettingsController.close();
   }
 }

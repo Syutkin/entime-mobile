@@ -6,7 +6,7 @@ import 'beep_provider.dart';
 import 'soundpool_provider.dart';
 import 'tts_provider.dart';
 
-class Sound extends AudioProvider {
+class SoundAudioProvider extends AudioProvider {
   final Tts flutterTts = Tts();
   // final BeepProvider beepProvider = AudioplayersProvider();
   final BeepProvider beepProvider = SoundpoolProvider();

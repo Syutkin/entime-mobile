@@ -20,7 +20,7 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
   bool _voice = true;
   bool _beep = true;
 
-  final AudioProvider _audio = Sound();
+  final AudioProvider _audio = SoundAudioProvider();
 
   AudioBloc({
     required this.settingsBloc,

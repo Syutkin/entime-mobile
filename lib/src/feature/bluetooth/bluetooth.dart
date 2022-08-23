@@ -1,5 +1,4 @@
 export 'bloc/bluetooth_bloc.dart';
-export 'logic/bluetooth.dart';
 export 'logic/bluetooth_background_connection.dart';
 export 'model/bluetooth.dart';
 export 'widget/bluetooth_button.dart';
