@@ -16,12 +16,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<SettingsEventInitialize>((event, emit) {
       emit(_SettingsState(settings: settingsProvider.settings));
     });
-    on<SettingsEventSetDefault>((event, emit) {
-      settingsProvider.setDefaults();
+    on<SettingsEventSetDefault>((event, emit) async {
+      await settingsProvider.setDefaults();
       emit(_SettingsState(settings: settingsProvider.settings));
     });
-    on<SettingsEventUpdate>((event, emit) {
-      settingsProvider.update(event.settings);
+    on<SettingsEventUpdate>((event, emit) async {
+      await settingsProvider.update(event.settings);
       emit(_SettingsState(settings: settingsProvider.settings));
     });
   }
