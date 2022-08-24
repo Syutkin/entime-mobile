@@ -570,9 +570,9 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     final result = await ProtocolProvider.db.getStartToCsv();
     final csv = mapListToCsv(result);
     if (csv != null && ProtocolProvider.db.dbPath != null) {
-      final path = await saveCsv(csv, 'start', ProtocolProvider.db.dbPath!);
-      if (path != null) {
-        await Share.shareFiles([path], text: 'Стартовый протокол');
+      final file = await saveCsv(csv, 'start', ProtocolProvider.db.dbPath!);
+      if (file != null) {
+        await Share.shareFiles([file.path], text: 'Стартовый протокол');
       }
     }
   }
@@ -584,9 +584,9 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     final result = await ProtocolProvider.db.getFinishToCsv();
     final csv = mapListToCsv(result);
     if (csv != null && ProtocolProvider.db.dbPath != null) {
-      final path = await saveCsv(csv, 'finish', ProtocolProvider.db.dbPath!);
-      if (path != null) {
-        await Share.shareFiles([path], text: 'Финишный протокол');
+      final file = await saveCsv(csv, 'finish', ProtocolProvider.db.dbPath!);
+      if (file != null) {
+        await Share.shareFiles([file.path], text: 'Финишный протокол');
       }
     }
   }

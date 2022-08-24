@@ -53,8 +53,10 @@ String? mapListToCsv(
 }
 
 // Save csv to file
-Future<String?> saveCsv(String csv, String suffix, String filePath) async {
-  final directory = await getExternalStorageDirectory();
+Future<File?> saveCsv(String csv, String suffix, String filePath) async {
+  final directory = Platform.isAndroid
+      ? await getExternalStorageDirectory()
+      : await getApplicationDocumentsDirectory();
   if (directory == null) {
     return null;
   }
@@ -63,7 +65,7 @@ Future<String?> saveCsv(String csv, String suffix, String filePath) async {
   );
   await file.writeAsString(csv);
   logger.i('saveCsv -> Saved csv to file ${file.path}');
-  return file.path;
+  return file;
 }
 
 //CSV to List<Map<String, String>> instead of the normal List<List<String>> scheme of the original csv package
