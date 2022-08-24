@@ -10,8 +10,7 @@ void main() async {
   final Directory directory = await getApplicationDocumentsDirectory();
   final File testFile = File(join(directory.path, 'test_csv.csv'));
   final referenceFile = File('test/startlist.csv');
-  logger..d(referenceFile.path)
-  ..d(referenceFile.readAsStringSync());
+  logger.d(testFile.path);
   if (testFile.existsSync()) {
     testFile.deleteSync();
   }
@@ -25,6 +24,7 @@ void main() async {
 
       final csvMap = CsvToMapConverter(fieldDelimiter: ';').convert(csv);
       final csvMapCsv = mapListToCsv(csvMap);
+      logger.d(csvMapCsv);
       testFile.writeAsStringSync(csvMapCsv ?? '');
 
       final referenceLines = referenceFile.readAsLinesSync()..removeAt(0);
