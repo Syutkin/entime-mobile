@@ -1,48 +1,22 @@
-// To parse this JSON data, do
-//
-//     final log = logFromJson(jsonString);
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'dart:convert';
+part 'log.freezed.dart';
 
-Log logFromMap(String str) => Log.fromMap(json.decode(str));
-
-String logToMap(Log data) => json.encode(data.toMap());
+part 'log.g.dart';
 
 ///
 /// Logging format
 ///
-class Log {
-  Log({
-    required this.id,
-    required this.level,
-    required this.timeStamp,
-    required this.source,
-    this.direction,
-    required this.rawData,
-  });
+@freezed
+class Log with _$Log {
+  const factory Log({
+    required int id,
+    required String level,
+    required String timeStamp,
+    required String source,
+    String? direction,
+    required String rawData,
+  }) = _Log;
 
-  int id;
-  String level;
-  String timeStamp;
-  String source;
-  String? direction;
-  String rawData;
-
-  factory Log.fromMap(Map<String, dynamic> json) => Log(
-        id: json['id'],
-        level: json['level'],
-        timeStamp: json['timeStamp'],
-        source: json['source'],
-        direction: json['direction'],
-        rawData: json['rawData'],
-      );
-
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'level': level,
-        'timeStamp': timeStamp,
-        'source': source,
-        'direction': direction,
-        'rawData': rawData,
-      };
+  factory Log.fromJson(Map<String, dynamic> json) => _$LogFromJson(json);
 }

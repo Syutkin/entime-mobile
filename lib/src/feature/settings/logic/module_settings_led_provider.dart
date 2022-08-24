@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../../../common/logger/logger.dart';
 import '../../module_settings/model/module_settings.dart';
 import 'module_settings_provider.dart';
@@ -5,53 +7,31 @@ import 'module_settings_provider.dart';
 class ModuleSettingsLed extends ModuleSettingsProvider {
   late ModSettingsModelLed _modSettingsModel;
 
-  // // Module type
-  // @override
-  // String type = 'ledpanel';
-  //
-  // // bluetooth
-  // @override
-  // bool bluetooth = true; // вкл/выкл
-  // @override
-  // String bluetoothName = 'BT';
-  // @override
-  // int bluetoothNumber = 100;
-  //
-  // // WiFi
-  // @override
-  // bool wifi = false;
-  // @override
-  // String ssid = 'none';
-  // @override
-  // String password = '';
-  //
-  // //LedPanel
-  // @override
-  // int brightness = 15;
-
   //Loading settings on initialization
   @override
   Future<bool> update(String jsonString) async {
     logger.i('Updating modsettings from json');
 
     try {
-      _modSettingsModel = modSettingsModelLedFromJson(jsonString);
+      _modSettingsModel = ModSettingsModelLed.fromJson(
+        jsonDecode(jsonString) as Map<String, dynamic>,
+      );
 
       // Module type
       type = _modSettingsModel.type;
 
       // Bluetooth
-      bluetooth = _modSettingsModel.bluetooth!.active;
-      bluetoothName = _modSettingsModel.bluetooth!.name;
-      bluetoothNumber = _modSettingsModel.bluetooth!.number;
+      bluetooth = _modSettingsModel.bluetooth.active;
+      bluetoothName = _modSettingsModel.bluetooth.name;
+      bluetoothNumber = _modSettingsModel.bluetooth.number;
 
       // WiFi
-      wifi = _modSettingsModel.wiFi!.active;
-      ssid = _modSettingsModel.wiFi!.ssid;
-      password = _modSettingsModel.wiFi!.passwd;
+      wifi = _modSettingsModel.wiFi.active;
+      ssid = _modSettingsModel.wiFi.ssid;
+      password = _modSettingsModel.wiFi.passwd;
 
       //LedPanel
-      brightness = _modSettingsModel.ledPanel!.brightness;
+      brightness = _modSettingsModel.ledPanel.brightness;
 
       return true;
     } on Exception catch (e) {
@@ -61,23 +41,15 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
   }
 
   @override
-  String get write {
-    // запись данных
-    _modSettingsModel.read = false;
-
-    // Bluetooth
-    _modSettingsModel.bluetooth!.active = bluetooth;
-    _modSettingsModel.bluetooth!.name = bluetoothName;
-    _modSettingsModel.bluetooth!.number = bluetoothNumber;
-
-    // WiFi
-    _modSettingsModel.wiFi!.active = wifi;
-    _modSettingsModel.wiFi!.ssid = ssid;
-    _modSettingsModel.wiFi!.passwd = password;
-
-    //LedPanel
-    _modSettingsModel.ledPanel!.brightness = brightness;
-
-    return modSettingsModelLedToJson(_modSettingsModel);
-  }
+  String get write => ModSettingsModelLed(
+        read: false,
+        type: type,
+        // Bluetooth
+        bluetooth: Bluetooth(
+            active: bluetooth, name: bluetoothName, number: bluetoothNumber),
+        // WiFi
+        wiFi: WiFi(active: wifi, ssid: ssid, passwd: password),
+        //LedPanel
+        ledPanel: LedPanel(brightness: brightness),
+      ).toString();
 }

@@ -18,7 +18,7 @@ class Tts {
         logger.i('TTS -> Complete');
         ttsState = TtsState.stopped;
       })
-      ..setErrorHandler((msg) {
+      ..setErrorHandler((dynamic msg) {
         logger.i('TTS -> error: $msg');
         ttsState = TtsState.stopped;
       });
@@ -36,7 +36,7 @@ class Tts {
   Future<void> speak(String text) async {
     if (text.isNotEmpty) {
       logger.i('Sound TTS -> $text');
-      final result = await flutterTts.speak(text);
+      final dynamic result = await flutterTts.speak(text);
       if (result == 1) {
         ttsState = TtsState.playing;
       }

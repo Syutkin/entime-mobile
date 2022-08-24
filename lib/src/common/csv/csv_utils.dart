@@ -35,14 +35,14 @@ String? mapListToCsv(
     // This list might grow if a new key is found
     var dataRow = <dynamic>[]..length = keyIndexMap.length;
     // Fix missing key
-    map.forEach((key, value) {
+    map.forEach((key, dynamic value) {
       var keyIndex = keyIndexMap[key];
       if (keyIndex == null) {
         // New key is found
         // Add it and fix previous data
         keyIndex = _addKey(key);
         // grow our list
-        dataRow = List.from(dataRow)..add(value);
+        dataRow = List<dynamic>.from(dataRow)..add(value);
       } else {
         dataRow[keyIndex] = value;
       }
@@ -92,13 +92,13 @@ class CsvToMapConverter {
   }
 
   List<Map<String, dynamic>> convert(String csv) {
-    final List<List<dynamic>> list = converter.convert(csv);
+    final list = converter.convert<dynamic>(csv);
     final List<dynamic> legend = list.first
-        .map((category) => category.toString().toLowerCase())
+        .map((dynamic category) => category.toString().toLowerCase())
         .toList();
     final List<Map<String, dynamic>> maps = [];
     list.sublist(1).forEach((l) {
-      final Map<String, dynamic> map = {};
+      final map = <String, dynamic>{};
       for (int i = 0; i < legend.length; i++) {
         map.putIfAbsent('${legend[i]}', () => l[i]);
       }

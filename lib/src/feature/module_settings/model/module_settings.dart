@@ -1,312 +1,130 @@
-// To parse this JSON data, do
-//
-//     final modSettingsModel = modSettingsModelFromJson(jsonString);
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-// ignore_for_file: implicit-casts
-// ignore_for_file: implicit-dynamic
+part 'module_settings.freezed.dart';
 
-import 'dart:convert';
+part 'module_settings.g.dart';
 
-ModSettingsModelType modSettingsModelTypeFromJson(String str) =>
-    ModSettingsModelType.fromJson(json.decode(str));
-
-class ModSettingsModelType {
-  String type;
-
-  ModSettingsModelType({
-    required this.type,
-  });
+@freezed
+class ModSettingsModelType with _$ModSettingsModelType {
+  const factory ModSettingsModelType({
+    required String type,
+  }) = _ModSettingsModelType;
 
   factory ModSettingsModelType.fromJson(Map<String, dynamic> json) =>
-      ModSettingsModelType(
-        type: json['Type'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'Type': type,
-      };
+      _$ModSettingsModelTypeFromJson(json);
 }
 
-ModSettingsModelLed modSettingsModelLedFromJson(String str) =>
-    ModSettingsModelLed.fromJson(json.decode(str));
-
-String modSettingsModelLedToJson(ModSettingsModelLed data) =>
-    json.encode(data.toJson());
-
-class ModSettingsModelLed {
-  bool read;
-  String type;
-  Bluetooth? bluetooth;
-  WiFi? wiFi;
-  LedPanel? ledPanel;
-
-  ModSettingsModelLed({
-    required this.read,
-    required this.type,
-    this.bluetooth,
-    this.wiFi,
-    this.ledPanel,
-  });
+@freezed
+class ModSettingsModelLed with _$ModSettingsModelLed {
+  const factory ModSettingsModelLed({
+    required bool read,
+    required String type,
+    required Bluetooth bluetooth,
+    required WiFi wiFi,
+    required LedPanel ledPanel,
+  }) = _ModSettingsModelLed;
 
   factory ModSettingsModelLed.fromJson(Map<String, dynamic> json) =>
-      ModSettingsModelLed(
-        read: json['Read'],
-        type: json['Type'],
-        bluetooth: json['Bluetooth'] == null
-            ? null
-            : Bluetooth.fromJson(json['Bluetooth']),
-        wiFi: json['WiFi'] == null ? null : WiFi.fromJson(json['WiFi']),
-        ledPanel: json['LedPanel'] == null
-            ? null
-            : LedPanel.fromJson(json['LedPanel']),
-      );
-
-  Map<String, dynamic> toJson() => {
-        'Read': read,
-        'Type': type,
-        'Bluetooth': bluetooth?.toJson(),
-        'WiFi': wiFi?.toJson(),
-        'LedPanel': ledPanel?.toJson(),
-      };
+      _$ModSettingsModelLedFromJson(json);
 }
 
-ModSettingsModel modSettingsModelFromJson(String str) =>
-    ModSettingsModel.fromJson(json.decode(str));
-
-String modSettingsModelToJson(ModSettingsModel data) =>
-    json.encode(data.toJson());
-
-class ModSettingsModel {
-  bool? read;
-  String? type;
-  Bluetooth? bluetooth;
-  LoRa? loRa;
-  WiFi? wiFi;
-  Tft? tft;
-  Buzzer? buzzer;
-  Vcc? vcc;
-
-  ModSettingsModel({
-    this.read,
-    this.type,
-    this.bluetooth,
-    this.loRa,
-    this.wiFi,
-    this.tft,
-    this.buzzer,
-    this.vcc,
-  });
+@freezed
+class ModSettingsModel with _$ModSettingsModel {
+  const factory ModSettingsModel({
+    required bool read,
+    required String type,
+    required Bluetooth bluetooth,
+    required LoRa loRa,
+    required WiFi wiFi,
+    required Tft tft,
+    required Buzzer buzzer,
+    required Vcc vcc,
+  }) = _ModSettingsModel;
 
   factory ModSettingsModel.fromJson(Map<String, dynamic> json) =>
-      ModSettingsModel(
-        read: json['Read'],
-        type: json['Type'],
-        bluetooth: json['Bluetooth'] == null
-            ? null
-            : Bluetooth.fromJson(json['Bluetooth']),
-        loRa: json['LoRa'] == null ? null : LoRa.fromJson(json['LoRa']),
-        wiFi: json['WiFi'] == null ? null : WiFi.fromJson(json['WiFi']),
-        tft: json['TFT'] == null ? null : Tft.fromJson(json['TFT']),
-        buzzer: json['Buzzer'] == null ? null : Buzzer.fromJson(json['Buzzer']),
-        vcc: json['VCC'] == null ? null : Vcc.fromJson(json['VCC']),
-      );
-
-  Map<String, dynamic> toJson() => {
-        'Read': read,
-        'Type': type,
-        'Bluetooth': bluetooth?.toJson(),
-        'LoRa': loRa?.toJson(),
-        'WiFi': wiFi?.toJson(),
-        'TFT': tft?.toJson(),
-        'Buzzer': buzzer?.toJson(),
-        'VCC': vcc?.toJson(),
-      };
+      _$ModSettingsModelFromJson(json);
 }
 
-class Bluetooth {
-  bool active;
-  String name;
-  int number;
+@freezed
+class Bluetooth with _$Bluetooth {
+  const factory Bluetooth({
+    required bool active,
+    required String name,
+    required int number,
+  }) = _Bluetooth;
 
-  Bluetooth({
-    required this.active,
-    required this.name,
-    required this.number,
-  });
-
-  factory Bluetooth.fromJson(Map<String, dynamic> json) => Bluetooth(
-        active: json['active'],
-        name: json['name'],
-        number: json['number'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'active': active,
-        'name': name,
-        'number': number,
-      };
+  factory Bluetooth.fromJson(Map<String, dynamic> json) =>
+      _$BluetoothFromJson(json);
 }
 
-class Buzzer {
-  bool active;
-  int shortFrequency;
-  int longFrequency;
+@freezed
+class Buzzer with _$Buzzer {
+  const factory Buzzer({
+    required bool active,
+    required int shortFrequency,
+    required int longFrequency,
+  }) = _Buzzer;
 
-  Buzzer({
-    required this.active,
-    required this.shortFrequency,
-    required this.longFrequency,
-  });
-
-  factory Buzzer.fromJson(Map<String, dynamic> json) => Buzzer(
-        active: json['active'],
-        shortFrequency: json['shortFrequency'],
-        longFrequency: json['longFrequency'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'active': active,
-        'shortFrequency': shortFrequency,
-        'longFrequency': longFrequency,
-      };
+  factory Buzzer.fromJson(Map<String, dynamic> json) => _$BuzzerFromJson(json);
 }
 
-class LoRa {
-  bool active;
-  int frequency;
-  int txPower;
-  int spreadingFactor;
-  int signalBandwidth;
-  int codingRateDenom;
-  int preambleLength;
-  int syncWord;
-  bool crc;
+@freezed
+class LoRa with _$LoRa {
+  const factory LoRa({
+    required bool active,
+    required int frequency,
+    required int txPower,
+    required int spreadingFactor,
+    required int signalBandwidth,
+    required int codingRateDenom,
+    required int preambleLength,
+    required int syncWord,
+    required bool crc,
+  }) = _LoRa;
 
-  LoRa({
-    required this.active,
-    required this.frequency,
-    required this.txPower,
-    required this.spreadingFactor,
-    required this.signalBandwidth,
-    required this.codingRateDenom,
-    required this.preambleLength,
-    required this.syncWord,
-    required this.crc,
-  });
-
-  factory LoRa.fromJson(Map<String, dynamic> json) => LoRa(
-        active: json['active'],
-        frequency: json['frequency'],
-        txPower: json['txPower'],
-        spreadingFactor: json['spreadingFactor'],
-        signalBandwidth: json['signalBandwidth'],
-        codingRateDenom: json['codingRateDenom'],
-        preambleLength: json['preambleLength'],
-        syncWord: json['syncWord'],
-        crc: json['crc'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'active': active,
-        'frequency': frequency,
-        'txPower': txPower,
-        'spreadingFactor': spreadingFactor,
-        'signalBandwidth': signalBandwidth,
-        'codingRateDenom': codingRateDenom,
-        'preambleLength': preambleLength,
-        'syncWord': syncWord,
-        'crc': crc,
-      };
+  factory LoRa.fromJson(Map<String, dynamic> json) => _$LoRaFromJson(json);
 }
 
-class Tft {
-  bool active;
-  bool timeout;
-  int timeoutDuration;
-  bool turnOnAtEvent;
+@freezed
+class Tft with _$Tft {
+  const factory Tft({
+    required bool active,
+    required bool timeout,
+    required int timeoutDuration,
+    required bool turnOnAtEvent,
+  }) = _Tft;
 
-  Tft({
-    required this.active,
-    required this.timeout,
-    required this.timeoutDuration,
-    required this.turnOnAtEvent,
-  });
-
-  factory Tft.fromJson(Map<String, dynamic> json) => Tft(
-        active: json['active'],
-        timeout: json['timeout'],
-        timeoutDuration: json['timeoutDuration'],
-        turnOnAtEvent: json['turnOnAtEvent'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'active': active,
-        'timeout': timeout,
-        'timeoutDuration': timeoutDuration,
-        'turnOnAtEvent': turnOnAtEvent,
-      };
+  factory Tft.fromJson(Map<String, dynamic> json) => _$TftFromJson(json);
 }
 
-class Vcc {
-  int r1;
-  int r2;
-  int? vbat;
+@freezed
+class Vcc with _$Vcc {
+  const factory Vcc({
+    required int r1,
+    required int r2,
+    int? vbat,
+  }) = _Vcc;
 
-  Vcc({
-    required this.r1,
-    required this.r2,
-    this.vbat,
-  });
-
-  factory Vcc.fromJson(Map<String, dynamic> json) => Vcc(
-        r1: json['r1'],
-        r2: json['r2'],
-        vbat: json['vbat'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'r1': r1,
-        'r2': r2,
-        'vbat': vbat,
-      };
+  factory Vcc.fromJson(Map<String, dynamic> json) => _$VccFromJson(json);
 }
 
-class WiFi {
-  bool active;
-  String ssid;
-  String passwd;
+@freezed
+class WiFi with _$WiFi {
+  const factory WiFi({
+    required bool active,
+    required String ssid,
+    required String passwd,
+  }) = _WiFi;
 
-  WiFi({
-    required this.active,
-    required this.ssid,
-    required this.passwd,
-  });
-
-  factory WiFi.fromJson(Map<String, dynamic> json) => WiFi(
-        active: json['active'],
-        ssid: json['ssid'],
-        passwd: json['passwd'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'active': active,
-        'ssid': ssid,
-        'passwd': passwd,
-      };
+  factory WiFi.fromJson(Map<String, dynamic> json) => _$WiFiFromJson(json);
 }
 
-class LedPanel {
-  int brightness;
+@freezed
+class LedPanel with _$LedPanel {
+  const factory LedPanel({
+    required int brightness,
+  }) = _LedPanel;
 
-  LedPanel({
-    required this.brightness,
-  });
-
-  factory LedPanel.fromJson(Map<String, dynamic> json) => LedPanel(
-        brightness: json['brightness'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'brightness': brightness,
-      };
+  factory LedPanel.fromJson(Map<String, dynamic> json) =>
+      _$LedPanelFromJson(json);
 }

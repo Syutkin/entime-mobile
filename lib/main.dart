@@ -19,8 +19,7 @@ import 'src/feature/tab/bloc/tab_bloc.dart';
 import 'src/feature/update/update.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.
-  ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   // await BlocOverrides.runZoned(
   //   () async {
   //     await runMain();
@@ -29,7 +28,7 @@ Future<void> main() async {
   //   eventTransformer: bloc_concurrency.sequential(),
   // );
   Bloc.observer = AppBlocObserver();
-  Bloc.transformer = bloc_concurrency.sequential();
+  Bloc.transformer = bloc_concurrency.sequential<dynamic>();
   await runMain();
 }
 

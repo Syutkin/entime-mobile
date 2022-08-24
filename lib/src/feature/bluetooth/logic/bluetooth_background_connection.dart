@@ -69,7 +69,8 @@ class BluetoothBackgroundConnection {
     BluetoothDevice server,
   ) async {
     final BluetoothConnection connection =
-        await BluetoothConnection.toAddress(server.address).catchError((error) {
+        await BluetoothConnection.toAddress(server.address)
+            .catchError((dynamic error) {
       logger.e(
         'BluetoothConnection -> Cannot connect, exception occurred: $error',
       );

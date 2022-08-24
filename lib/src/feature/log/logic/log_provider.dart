@@ -129,7 +129,7 @@ class LogProvider {
     }
 
     final List<Log> log =
-        list.isNotEmpty ? list.map((c) => Log.fromMap(c)).toList() : [];
+        list.isNotEmpty ? list.map((c) => Log.fromJson(c)).toList() : [];
     return log;
   }
 

@@ -185,7 +185,7 @@ class _FinishPage extends State<FinishScreen> {
         ],
       );
 
-  Widget _getNumbersOnTrace(context) =>
+  Widget _getNumbersOnTrace(BuildContext context) =>
       BlocBuilder<ProtocolBloc, ProtocolState>(
         builder: (context, state) {
           if (state is ProtocolSelectedState) {

@@ -66,7 +66,7 @@ class AboutPopup extends StatelessWidget {
                                   final Uri emailLaunchUri = Uri(
                                     scheme: 'mailto',
                                     path: 'syutkin@fraction.team',
-                                    queryParameters: {
+                                    queryParameters: <String, String>{
                                       'subject': 'Entime замечания/предложения'
                                     },
                                   );

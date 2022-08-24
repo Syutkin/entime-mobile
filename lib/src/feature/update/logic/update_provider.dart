@@ -1,6 +1,7 @@
 // ignore_for_file: use_setters_to_change_properties, inference_failure_on_untyped_parameter
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -101,7 +102,8 @@ class UpdateProvider {
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        return Release.fromRawJson(response.body);
+        return Release.fromJson(
+            jsonDecode(response.body) as Map<String, dynamic>);
       } else {
         logger.d('StatusCode: ${response.statusCode}');
         return null;
@@ -157,9 +159,9 @@ class UpdateProvider {
                 _downloaded = true;
                 _onDownloadComplete();
               },
-              onError: (error) {
+              onError: (dynamic error) {
                 logger.e('Update_provider: Error: $error');
-                _onError(error);
+                _onError(error as String);
               },
               cancelOnError: true,
             );
