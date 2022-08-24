@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:entime/src/common/csv/csv_utils.dart';
+// import 'package:entime/src/common/csv/csv_utils.dart';
 import 'package:entime/src/common/logger/logger.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart';
@@ -17,23 +17,24 @@ void main() async {
 
   group('csv_utils:', () {
     final csv = referenceFile.readAsStringSync();
-    test('CsvToMapConverter and mapListToCsv', () {
-      // Считываем тестовый файл, конвертим из csv и обратно,
-      // вырезаем первую строку с заголовками,
-      // сравниваем получившиеся списки
-
-      final csvMap = CsvToMapConverter(fieldDelimiter: ';').convert(csv);
-      final csvMapCsv = mapListToCsv(csvMap);
-      logger.d(csvMapCsv);
-      testFile.writeAsStringSync(csvMapCsv ?? '');
-
-      logger..d('testFile: ${testFile.readAsLinesSync()}')
-      ..d('referenceFile: ${testFile.readAsLinesSync()}');
-
-      final referenceLines = referenceFile.readAsLinesSync()..removeAt(0);
-      final testLines = testFile.readAsLinesSync()..removeAt(0);
-      expect(testLines, referenceLines);
-    });
+    logger.d(csv);
+    // test('CsvToMapConverter and mapListToCsv', () {
+    //   // Считываем тестовый файл, конвертим из csv и обратно,
+    //   // вырезаем первую строку с заголовками,
+    //   // сравниваем получившиеся списки
+    //
+    //   final csvMap = CsvToMapConverter(fieldDelimiter: ';').convert(csv);
+    //   final csvMapCsv = mapListToCsv(csvMap);
+    //   logger.d(csvMapCsv);
+    //   testFile.writeAsStringSync(csvMapCsv ?? '');
+    //
+    //   logger..d('testFile: ${testFile.readAsLinesSync()}')
+    //   ..d('referenceFile: ${testFile.readAsLinesSync()}');
+    //
+    //   final referenceLines = referenceFile.readAsLinesSync()..removeAt(0);
+    //   final testLines = testFile.readAsLinesSync()..removeAt(0);
+    //   expect(testLines, referenceLines);
+    // });
 
     // test('saveCsv', ()  {
     //   saveCsv(csv, 'suffix', 'filePath');
