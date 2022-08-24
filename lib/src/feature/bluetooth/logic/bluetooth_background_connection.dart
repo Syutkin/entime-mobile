@@ -12,14 +12,15 @@ import '../../../common/logger/logger.dart';
 typedef ErrorHandler = void Function(String error);
 
 class BluetoothBackgroundConnection {
-
   final BluetoothConnection? _connection;
 
   String _messageBuffer = '';
   String _messagePacket = '';
 
   // Стрим с поступающей информацией от модуля
-  final StreamController<String> _messageController = StreamController.broadcast();
+  final StreamController<String> _messageController =
+      StreamController.broadcast();
+
   Stream<String> get message => _messageController.stream;
 
   bool isDisconnecting = false;
@@ -65,10 +66,13 @@ class BluetoothBackgroundConnection {
   }
 
   static Future<BluetoothBackgroundConnection> connect(
-      BluetoothDevice server) async {
+    BluetoothDevice server,
+  ) async {
     final BluetoothConnection connection =
         await BluetoothConnection.toAddress(server.address).catchError((error) {
-      logger.e('BluetoothConnection -> Cannot connect, exception occurred: $error');
+      logger.e(
+        'BluetoothConnection -> Cannot connect, exception occurred: $error',
+      );
     });
     return BluetoothBackgroundConnection._fromConnection(connection);
   }

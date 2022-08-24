@@ -55,10 +55,12 @@ class LogProvider {
       version: 1,
       onOpen: (db) async {
         logger.v(
-            'SQLite version: ${(await db.rawQuery('SELECT sqlite_version()')).first.values.first}');
+          'SQLite version: ${(await db.rawQuery('SELECT sqlite_version()')).first.values.first}',
+        );
       },
       onCreate: (db, version) async {
-        await db.execute('''
+        await db.execute(
+          '''
           CREATE TABLE "log" (
 	        "id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	        "level"	TEXT NOT NULL,
@@ -67,7 +69,8 @@ class LogProvider {
 	        "direction"	TEXT NOT NULL,
 	        "rawData"	TEXT
 	        );
-        ''');
+        ''',
+        );
       },
 //      onUpgrade: (Database db, int oldVersion, int newVersion) async {
 //        logger.('onUpgrade');

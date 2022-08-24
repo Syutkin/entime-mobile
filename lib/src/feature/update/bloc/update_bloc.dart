@@ -6,6 +6,7 @@ import '../logic/update_provider.dart';
 import '../model/show_changelog.dart';
 
 part 'update_event.dart';
+
 part 'update_state.dart';
 
 class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
@@ -14,16 +15,17 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
   UpdateBloc({
     required this.updater,
   }) : super(const UpdateInitial()) {
-    updater.setDownloadingHandler((current, total) {
-      add(UpdateDownloading(current, total));
-    });
-    updater.onDownloadComplete(() {
-      add(UpdateFromFile());
-    });
-    updater.onError((error) {
-      logger.e('UpdateBloc: Download error: $error');
-      add(CancelDownload());
-    });
+    updater
+      ..setDownloadingHandler((current, total) {
+        add(UpdateDownloading(current, total));
+      })
+      ..onDownloadComplete(() {
+        add(UpdateFromFile());
+      })
+      ..onError((error) {
+        logger.e('UpdateBloc: Download error: $error');
+        add(CancelDownload());
+      });
 
     on<CheckUpdate>((event, emit) async {
       final bool update = await updater.isUpdateAvailable();

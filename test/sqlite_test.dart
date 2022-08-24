@@ -47,34 +47,40 @@ void main() {
 
     test('addStartNumber', () async {
       expect(
-          await ProtocolProvider.db.addStartNumber(number: 1, time: '10:00:00'),
-          null);
+        await ProtocolProvider.db.addStartNumber(number: 1, time: '10:00:00'),
+        null,
+      );
 
-      final List<StartItem>? secondAdd = await ProtocolProvider.db.addStartNumber(
+      final List<StartItem>? secondAdd =
+          await ProtocolProvider.db.addStartNumber(
         number: 1,
         time: '10:00:00',
-        forceAdd: false,
       );
       expect(secondAdd?.first.number == 1, true);
       expect(secondAdd?.first.starttime == '10:00:00', true);
 
       expect(
-          await ProtocolProvider.db
-              .addStartNumber(number: 1, time: '10:01:00', forceAdd: true),
-          null);
+        await ProtocolProvider.db
+            .addStartNumber(number: 1, time: '10:01:00', forceAdd: true),
+        null,
+      );
 
       expect(
-          await ProtocolProvider.db.addStartNumber(number: 2, time: '10:02:00'),
-          null);
+        await ProtocolProvider.db.addStartNumber(number: 2, time: '10:02:00'),
+        null,
+      );
       expect(
-          await ProtocolProvider.db.addStartNumber(number: 3, time: '10:03:00'),
-          null);
+        await ProtocolProvider.db.addStartNumber(number: 3, time: '10:03:00'),
+        null,
+      );
       expect(
-          await ProtocolProvider.db.addStartNumber(number: 4, time: '10:04:00'),
-          null);
+        await ProtocolProvider.db.addStartNumber(number: 4, time: '10:04:00'),
+        null,
+      );
       expect(
-          await ProtocolProvider.db.addStartNumber(number: 5, time: '10:05:00'),
-          null);
+        await ProtocolProvider.db.addStartNumber(number: 5, time: '10:05:00'),
+        null,
+      );
     });
 
     test('getAllParticipantsAtStart', () async {
@@ -96,10 +102,11 @@ void main() {
 
     test('getStart', () async {
       expect(
-          await ProtocolProvider.db
-              .getStart('some wrong time')
-              .onError((error, stackTrace) => 0),
-          0);
+        await ProtocolProvider.db
+            .getStart('some wrong time')
+            .onError((error, stackTrace) => 0),
+        0,
+      );
       expect(await ProtocolProvider.db.getStart('10:00:01'), 0);
       expect(await ProtocolProvider.db.getStart('10:00:51'), 1);
       expect(await ProtocolProvider.db.getStart('10:01:01,123'), 0);
@@ -113,21 +120,23 @@ void main() {
 
     test('updateAutomaticCorrection', () async {
       expect(
-          await ProtocolProvider.db
-              .updateAutomaticCorrection(
-                time: 'some wrong time',
-                correction: 1111,
-                timeStamp: DateTime.now(),
-              )
-              .onError((error, stackTrace) => null),
-          null);
+        await ProtocolProvider.db
+            .updateAutomaticCorrection(
+              time: 'some wrong time',
+              correction: 1111,
+              timeStamp: DateTime.now(),
+            )
+            .onError((error, stackTrace) => null),
+        null,
+      );
       expect(
-          await ProtocolProvider.db.updateAutomaticCorrection(
-            time: '10:01:01,111',
-            correction: 1111,
-            timeStamp: DateTime.now(),
-          ),
-          null);
+        await ProtocolProvider.db.updateAutomaticCorrection(
+          time: '10:01:01,111',
+          correction: 1111,
+          timeStamp: DateTime.now(),
+        ),
+        null,
+      );
       final result = await ProtocolProvider.db.updateAutomaticCorrection(
         time: '10:01:02,222',
         correction: 2222,
@@ -137,64 +146,74 @@ void main() {
       expect(result?.first.automaticstarttime, '10:01:01,111');
       expect(result?.first.automaticcorrection, 1111);
       expect(
-          await ProtocolProvider.db.updateAutomaticCorrection(
-            time: '10:01:02,222',
-            correction: 2222,
-            timeStamp: DateTime.now(),
-            forceUpdate: true,
-          ),
-          null);
+        await ProtocolProvider.db.updateAutomaticCorrection(
+          time: '10:01:02,222',
+          correction: 2222,
+          timeStamp: DateTime.now(),
+          forceUpdate: true,
+        ),
+        null,
+      );
       expect(
-          await ProtocolProvider.db.updateAutomaticCorrection(
-            time: '10:02:02,222',
-            correction: 2222,
-            timeStamp: DateTime.now(),
-            forceUpdate: true,
-          ),
-          null);
+        await ProtocolProvider.db.updateAutomaticCorrection(
+          time: '10:02:02,222',
+          correction: 2222,
+          timeStamp: DateTime.now(),
+          forceUpdate: true,
+        ),
+        null,
+      );
       expect(
-          await ProtocolProvider.db.updateAutomaticCorrection(
-            time: '10:03:03,3',
-            correction: 3333,
-            timeStamp: DateTime.now(),
-            forceUpdate: true,
-          ),
-          null);
+        await ProtocolProvider.db.updateAutomaticCorrection(
+          time: '10:03:03,3',
+          correction: 3333,
+          timeStamp: DateTime.now(),
+          forceUpdate: true,
+        ),
+        null,
+      );
       expect(
-          await ProtocolProvider.db.updateAutomaticCorrection(
-            time: '10:04:04,4444',
-            correction: 4444,
-            timeStamp: DateTime.now(),
-            forceUpdate: true,
-          ),
-          null);
+        await ProtocolProvider.db.updateAutomaticCorrection(
+          time: '10:04:04,4444',
+          correction: 4444,
+          timeStamp: DateTime.now(),
+          forceUpdate: true,
+        ),
+        null,
+      );
     });
 
     test('updateManualStartTime', () async {
       expect(
-          await ProtocolProvider.db
-              .updateManualStartTime(DateTime(2020, 1, 1, 10, 0, 0, 000)),
-          0);
+        await ProtocolProvider.db
+            .updateManualStartTime(DateTime(2020, 1, 1, 10)),
+        0,
+      );
       expect(
-          await ProtocolProvider.db
-              .updateManualStartTime(DateTime(2020, 1, 1, 10, 1, 1, 111)),
-          1);
+        await ProtocolProvider.db
+            .updateManualStartTime(DateTime(2020, 1, 1, 10, 1, 1, 111)),
+        1,
+      );
       expect(
-          await ProtocolProvider.db
-              .updateManualStartTime(DateTime(2020, 1, 1, 10, 1, 59, 222)),
-          1);
+        await ProtocolProvider.db
+            .updateManualStartTime(DateTime(2020, 1, 1, 10, 1, 59, 222)),
+        1,
+      );
       expect(
-          await ProtocolProvider.db
-              .updateManualStartTime(DateTime(2020, 1, 1, 10, 3, 1, 555)),
-          1);
+        await ProtocolProvider.db
+            .updateManualStartTime(DateTime(2020, 1, 1, 10, 3, 1, 555)),
+        1,
+      );
       expect(
-          await ProtocolProvider.db
-              .updateManualStartTime(DateTime(2020, 1, 1, 10, 3, 30, 222)),
-          0);
+        await ProtocolProvider.db
+            .updateManualStartTime(DateTime(2020, 1, 1, 10, 3, 30, 222)),
+        0,
+      );
       expect(
-          await ProtocolProvider.db
-              .updateManualStartTime(DateTime(2020, 1, 1, 10, 3, 50, 777)),
-          1);
+        await ProtocolProvider.db
+            .updateManualStartTime(DateTime(2020, 1, 1, 10, 3, 50, 777)),
+        1,
+      );
     });
 
     test('UpdateItemInfoAtStart', () async {
@@ -287,36 +306,43 @@ void main() {
           .addFinishTime(finish: '10:03:01,123', timeStamp: DateTime.now());
       expect(result, null);
       result = await ProtocolProvider.db.addFinishTime(
-          finish: '10:03:01,124',
-          timeStamp: DateTime.now(),
-          substituteNumbers: true,
-          debugTimeNow: '11:00:00');
+        finish: '10:03:01,124',
+        timeStamp: DateTime.now(),
+        substituteNumbers: true,
+        debugTimeNow: '11:00:00',
+      );
       expect(result, 2);
       result = await ProtocolProvider.db.addFinishTime(
-          finish: '10:03:01,125', timeStamp: DateTime.now(), finishDelay: 10);
+        finish: '10:03:01,125',
+        timeStamp: DateTime.now(),
+        finishDelay: 10,
+      );
       expect(result, null);
       result = await ProtocolProvider.db
           .addFinishTime(finish: '10:04:04,456', timeStamp: DateTime.now());
       expect(result, null);
       result = await ProtocolProvider.db.addFinishTime(
-          finish: '10:05:05,567',
-          timeStamp: DateTime.now(),
-          substituteNumbers: true,
-          debugTimeNow: '11:00:00');
+        finish: '10:05:05,567',
+        timeStamp: DateTime.now(),
+        substituteNumbers: true,
+        debugTimeNow: '11:00:00',
+      );
       expect(result, 3);
       result = await ProtocolProvider.db.addFinishTime(
-          finish: '10:05:05,678',
-          timeStamp: DateTime.now(),
-          substituteNumbers: true,
-          substituteNumbersDelay: 200,
-          debugTimeNow: '11:00:00');
+        finish: '10:05:05,678',
+        timeStamp: DateTime.now(),
+        substituteNumbers: true,
+        substituteNumbersDelay: 200,
+        debugTimeNow: '11:00:00',
+      );
       expect(result, null);
       result = await ProtocolProvider.db.addFinishTime(
-          finish: '10:07:05,899',
-          timeStamp: DateTime.now(),
-          substituteNumbers: true,
-          substituteNumbersDelay: 200,
-          debugTimeNow: '11:00:00');
+        finish: '10:07:05,899',
+        timeStamp: DateTime.now(),
+        substituteNumbers: true,
+        substituteNumbersDelay: 200,
+        debugTimeNow: '11:00:00',
+      );
       expect(result, 4);
     });
     test('addFinishTimeManual', () async {
@@ -340,15 +366,20 @@ void main() {
       expect(result.length, 7);
       // Show all
       result = await ProtocolProvider.db.getFinishTime(
-          hideManual: false, hideMarked: false, hideNumbers: false);
+        hideMarked: false,
+      );
       expect(result.length, 9);
       // Show only automatic
       result = await ProtocolProvider.db.getFinishTime(
-          hideManual: true, hideMarked: false, hideNumbers: false);
+        hideManual: true,
+        hideMarked: false,
+      );
       expect(result.length, 7);
       // Show only times without numbers
       result = await ProtocolProvider.db.getFinishTime(
-          hideManual: false, hideMarked: false, hideNumbers: true);
+        hideMarked: false,
+        hideNumbers: true,
+      );
       expect(result.length, 6);
     });
 
@@ -398,9 +429,7 @@ void main() {
       expect(result, 5);
     });
 
-    test('close', () {
-      ProtocolProvider.db.close();
-    });
+    test('close', ProtocolProvider.db.close);
 
     test('Remove DB', () {
       expect(File(testFileName).existsSync(), true);
@@ -424,33 +453,40 @@ void main() {
 
     test('add', () async {
       var result = await LogProvider.db.add(
-          level: LogLevel.information,
-          source: LogSource.bluetooth,
-          rawData: 'rawData',
-          direction: LogSourceDirection.input);
+        level: LogLevel.information,
+        source: LogSource.bluetooth,
+        rawData: 'rawData',
+        direction: LogSourceDirection.input,
+      );
       expect(result, 1);
       result = await LogProvider.db.add(
-          level: LogLevel.error, source: LogSource.other, rawData: 'rawData');
+        level: LogLevel.error,
+        source: LogSource.other,
+        rawData: 'rawData',
+      );
       expect(result, 2);
       result = await LogProvider.db.add(
-          level: LogLevel.debug,
-          source: LogSource.unknown,
-          rawData: 'rawData',
-          direction: LogSourceDirection.undefined);
+        level: LogLevel.debug,
+        source: LogSource.unknown,
+        rawData: 'rawData',
+        direction: LogSourceDirection.undefined,
+      );
       expect(result, 3);
       result = await LogProvider.db.add(
-          level: LogLevel.verbose,
-          source: LogSource.bluetooth,
-          rawData: 'rawData',
-          direction: LogSourceDirection.output);
+        level: LogLevel.verbose,
+        source: LogSource.bluetooth,
+        rawData: 'rawData',
+        direction: LogSourceDirection.output,
+      );
       expect(result, 4);
     });
 
     test('getLog', () async {
       var result = await LogProvider.db.getLog();
       expect(result.length, 4);
-      result = await LogProvider.db
-          .getLog(direction: [LogSourceDirection.input, LogSourceDirection.output]);
+      result = await LogProvider.db.getLog(
+        direction: [LogSourceDirection.input, LogSourceDirection.output],
+      );
       expect(result.length, 2);
       result = await LogProvider.db.getLog(source: [LogSource.bluetooth]);
       expect(result.length, 2);
@@ -458,9 +494,7 @@ void main() {
       expect(result.length, 3);
     });
 
-    test('close', () {
-      LogProvider.db.close();
-    });
+    test('close', LogProvider.db.close);
 
     test('Remove DB', () {
       expect(File(testLogName).existsSync(), true);

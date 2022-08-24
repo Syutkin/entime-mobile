@@ -16,9 +16,9 @@ import '../../protocol/bloc/protocol_bloc.dart';
 // ignore_for_file: use_build_context_synchronously
 
 Future<void> routeToSelectFileScreen(BuildContext context) async {
-  await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
-    return const SelectFileScreen();
-  }));
+  await Navigator.of(context).push(
+    MaterialPageRoute<void>(builder: (context) => const SelectFileScreen()),
+  );
 }
 
 class SelectFileScreen extends StatefulWidget {
@@ -30,45 +30,44 @@ class SelectFileScreen extends StatefulWidget {
 
 class _SelectFileScreenState extends State<SelectFileScreen> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(Localization.current.I18nInit_selectFile),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(MdiIcons.filePlusOutline),
-            onPressed: () async {
-              if (await createNewProtocolFile(context) != null) {
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(Localization.current.I18nInit_selectFile),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(MdiIcons.filePlusOutline),
+              onPressed: () async {
+                if (await createNewProtocolFile(context) != null) {
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            IconButton(
+              icon: const Icon(MdiIcons.folderOpenOutline),
+              onPressed: () async {
+                await loadFile(context);
                 Navigator.of(context).pop();
-              }
-            },
-          ),
-          IconButton(
-            icon: const Icon(MdiIcons.folderOpenOutline),
-            onPressed: () async {
-              await loadFile(context);
-              Navigator.of(context).pop();
-            },
-            // onPressed:() async {
-            //   FilePickerResult? result =
-            //       await FilePicker.platform.pickFiles(type: FileType.any);
-            //   if (result != null && result.files.single.path != null) {
-            //     File? file = File(result.files.single.path!);
-            //     file = await _checkExists(context, file);
-            //     // Если null - файл уже существовал и не перезаписываем,
-            //     // то ничего делать не нужно
-            //     if (file != null) {
-            //       BlocProvider.of<ProtocolBloc>(context)
-            //           .add(SelectProtocol(file.path));
-            //       Navigator.of(context).pop();
-            //     }
-            //   }
-            // },
-          ),
-        ],
-      ),
-      // ToDo: генерацию списка файлов в папке проги перекинуть в BLoC
-      body: FutureBuilder<List<File>>(
+              },
+              // onPressed:() async {
+              //   FilePickerResult? result =
+              //       await FilePicker.platform.pickFiles(type: FileType.any);
+              //   if (result != null && result.files.single.path != null) {
+              //     File? file = File(result.files.single.path!);
+              //     file = await _checkExists(context, file);
+              //     // Если null - файл уже существовал и не перезаписываем,
+              //     // то ничего делать не нужно
+              //     if (file != null) {
+              //       BlocProvider.of<ProtocolBloc>(context)
+              //           .add(SelectProtocol(file.path));
+              //       Navigator.of(context).pop();
+              //     }
+              //   }
+              // },
+            ),
+          ],
+        ),
+        // ToDo: генерацию списка файлов в папке проги перекинуть в BLoC
+        body: FutureBuilder<List<File>>(
           future: _getFiles(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -82,11 +81,13 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                     subtitle: Row(
                       children: <Widget>[
                         Expanded(
-                            flex: 5,
-                            child: Text(formatDate(item.statSync().accessed))),
+                          flex: 5,
+                          child: Text(formatDate(item.statSync().accessed)),
+                        ),
                         Expanded(
-                            flex: 5,
-                            child: Text(filesize(item.statSync().size))),
+                          flex: 5,
+                          child: Text(filesize(item.statSync().size)),
+                        ),
                       ],
                     ),
                     trailing: _filePopup(item),
@@ -106,9 +107,9 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
             } else {
               return Text(Localization.current.I18nInit_noData);
             }
-          }),
-    );
-  }
+          },
+        ),
+      );
 
   Future<List<File>> _getFiles() async {
     final List<File> files = [];
@@ -130,8 +131,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
   }
 
   Widget _filePopup(File item) => BlocBuilder<ProtocolBloc, ProtocolState>(
-          builder: (context, protocolState) {
-        return PopupMenuButton<int>(
+        builder: (context, protocolState) => PopupMenuButton<int>(
           // child: PopupMenuButton<int>(
           itemBuilder: (context) => [
             PopupMenuItem(
@@ -171,13 +171,15 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                 break;
               case 2:
                 // ShareExtend.share(item.path, 'file');
-                Share.shareFiles([item.path],
-                    text: Localization.current.I18nInit_dbFile);
+                Share.shareFiles(
+                  [item.path],
+                  text: Localization.current.I18nInit_dbFile,
+                );
                 break;
               default:
                 break;
             }
           },
-        );
-      });
+        ),
+      );
 }

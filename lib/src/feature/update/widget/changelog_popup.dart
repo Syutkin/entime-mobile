@@ -5,7 +5,9 @@ import '../../../common/localization/i18n.dart';
 import 'changelog_markdown.dart';
 
 Future<void> showChangelogAtStartup(
-    BuildContext context, String fromVersion) async {
+  BuildContext context,
+  String fromVersion,
+) async {
   String markdownData = await rootBundle.loadString('CHANGELOG.md');
   // Обрезает ченджлог ниже ранее запущенной версии
   // В противном случае показывает весь
@@ -24,25 +26,23 @@ Future<void> showChangelogAtStartup(
   return showDialog(
     context: context,
     barrierDismissible: true,
-    builder: (context) {
-      return AlertDialog(
-        // scrollable: true,
-        title: Text(I18nUpdate.whatsNew),
-        // content: changelogMarkdown(markdownData),
-        // workaround with width, see https://github.com/flutter/flutter/issues/18108
-        content: SizedBox(
-          width: double.maxFinite,
-          child: changelogMarkdown(markdownData),
+    builder: (context) => AlertDialog(
+      // scrollable: true,
+      title: Text(I18nUpdate.whatsNew),
+      // content: changelogMarkdown(markdownData),
+      // workaround with width, see https://github.com/flutter/flutter/issues/18108
+      content: SizedBox(
+        width: double.maxFinite,
+        child: changelogMarkdown(markdownData),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(MaterialLocalizations.of(context).okButtonLabel),
         ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(MaterialLocalizations.of(context).okButtonLabel),
-          ),
-        ],
-      );
-    },
+      ],
+    ),
   );
 }

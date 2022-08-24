@@ -39,180 +39,193 @@ class _StartScreen extends State<StartScreen> {
   // }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<ProtocolBloc, ProtocolState>(
+  Widget build(BuildContext context) => Scaffold(
+        body: BlocBuilder<ProtocolBloc, ProtocolState>(
           builder: (context, protocolState) {
-        if (protocolState is ProtocolSelectedState) {
-          return Stack(
-            key: _stackKey,
-            children: [
-              _startList(protocolState.startProtocol),
-              _showCountdown(),
-            ],
-          );
-        } else {
-          return Column(
-            children: [
-              CreateOrSelectProtocolWidget(
-                onTap: () => routeToSelectFileScreen(context),
-              ),
-            ],
-          );
-        }
-      }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(builder: (
-        context,
-        settingsState,
-      ) {
-        if (settingsState.settings.startFab) {
-          return SizedBox(
-            height: settingsState.settings.startFabSize,
-            width: settingsState.settings.startFabSize,
-            child: FittedBox(
-              child: FloatingActionButton(
-                onPressed: () => _addManualStartTime(context),
-                child: const Icon(MdiIcons.handBackLeft),
-              ),
-            ),
-          );
-        } else {
-          return const SizedBox(width: 0, height: 0);
-        }
-      }),
-      persistentFooterButtons:
-          kReleaseMode ? null : _persistentFooterButtons(context),
-    );
-  }
+            if (protocolState is ProtocolSelectedState) {
+              return Stack(
+                key: _stackKey,
+                children: [
+                  _startList(protocolState.startProtocol),
+                  _showCountdown(),
+                ],
+              );
+            } else {
+              return Column(
+                children: [
+                  CreateOrSelectProtocolWidget(
+                    onTap: () => routeToSelectFileScreen(context),
+                  ),
+                ],
+              );
+            }
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (
+            context,
+            settingsState,
+          ) {
+            if (settingsState.settings.startFab) {
+              return SizedBox(
+                height: settingsState.settings.startFabSize,
+                width: settingsState.settings.startFabSize,
+                child: FittedBox(
+                  child: FloatingActionButton(
+                    onPressed: () => _addManualStartTime(context),
+                    child: const Icon(MdiIcons.handBackLeft),
+                  ),
+                ),
+              );
+            } else {
+              return const SizedBox(width: 0, height: 0);
+            }
+          },
+        ),
+        persistentFooterButtons:
+            kReleaseMode ? null : _persistentFooterButtons(context),
+      );
 
-  List<Widget> _persistentFooterButtons(BuildContext context) {
-    return <Widget>[
-      TextButton(
-        onPressed: () {
-          BlocProvider.of<BluetoothBloc>(context).add(MessageReceived(
-              'V${DateFormat('HH:mm:ss').format(DateTime.now())}#'));
-        },
-        child: const Icon(Icons.record_voice_over_rounded),
-      ),
-      TextButton(
-        onPressed: () {
-          BlocProvider.of<BluetoothBloc>(context).add(MessageReceived(
-              'B${DateFormat('HH:mm:ss').format(DateTime.now())}#'));
-        },
-        child: const Icon(Icons.volume_up),
-      ),
-      TextButton(
-        onPressed: () async {
-          BlocProvider.of<ProtocolBloc>(context)
-              .add(const ProtocolClearStartResultsDebug());
-        },
-        child: const Icon(Icons.clear_all),
-      ),
-      TextButton(
-        onPressed: () {
-          final AutomaticStart automaticStart = AutomaticStart(
+  List<Widget> _persistentFooterButtons(BuildContext context) => <Widget>[
+        TextButton(
+          onPressed: () {
+            BlocProvider.of<BluetoothBloc>(context).add(
+              MessageReceived(
+                'V${DateFormat('HH:mm:ss').format(DateTime.now())}#',
+              ),
+            );
+          },
+          child: const Icon(Icons.record_voice_over_rounded),
+        ),
+        TextButton(
+          onPressed: () {
+            BlocProvider.of<BluetoothBloc>(context).add(
+              MessageReceived(
+                'B${DateFormat('HH:mm:ss').format(DateTime.now())}#',
+              ),
+            );
+          },
+          child: const Icon(Icons.volume_up),
+        ),
+        TextButton(
+          onPressed: () async {
+            BlocProvider.of<ProtocolBloc>(context)
+                .add(const ProtocolClearStartResultsDebug());
+          },
+          child: const Icon(Icons.clear_all),
+        ),
+        TextButton(
+          onPressed: () {
+            final AutomaticStart automaticStart = AutomaticStart(
               DateFormat('HH:mm:ss,S').format(DateTime.now()),
               1234,
-              DateTime.now());
-          BlocProvider.of<ProtocolBloc>(context)
-              .add(ProtocolUpdateAutomaticCorrection(automaticStart: automaticStart));
-        },
-        child: const Icon(Icons.play_arrow),
-      ),
-    ];
-  }
+              DateTime.now(),
+            );
+            BlocProvider.of<ProtocolBloc>(context).add(
+              ProtocolUpdateAutomaticCorrection(
+                automaticStart: automaticStart,
+              ),
+            );
+          },
+          child: const Icon(Icons.play_arrow),
+        ),
+      ];
 
-  Widget _startList(List<StartItem> startProtocol) {
-    return CustomScrollView(
-      slivers: [
-        SliverPersistentHeader(
+  Widget _startList(List<StartItem> startProtocol) => CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(
             pinned: true,
             delegate: SliverSubHeaderDelegate(
               minHeight: 56,
               maxHeight: 56,
               child: _SliverStartSubHeader(),
-            )),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final item = startProtocol[index];
-              return BlocBuilder<CountdownBloc, CountdownState>(
-                builder: (context, countdownState) {
-                  final isHighlighted =
-                      item.starttime == _activeStartTime(countdownState);
-                  return BlocBuilder<SettingsBloc, SettingsState>(builder: (
-                    context,
-                    settingsState,
-                  ) {
-                    return StartItemTile(
-                      item: item,
-                      onTap: () async {
-                        await editStartTime(context, item);
-                      },
-                      onDismissed: (direction) {
-                        BlocProvider.of<ProtocolBloc>(context)
-                            .add(ProtocolSetDNS(number: item.number));
-                      },
-                      isHighlighted: isHighlighted,
-                      countdown: settingsState.settings.countdownAtStartTime &&
-                              isHighlighted
-                          ? _countdownFromState(countdownState)
-                          : null,
-                    );
-                  });
-                },
-              );
-            },
-            childCount: startProtocol.length,
+            ),
           ),
-        ),
-      ],
-    );
-  }
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final item = startProtocol[index];
+                return BlocBuilder<CountdownBloc, CountdownState>(
+                  builder: (context, countdownState) {
+                    final isHighlighted =
+                        item.starttime == _activeStartTime(countdownState);
+                    return BlocBuilder<SettingsBloc, SettingsState>(
+                      builder: (
+                        context,
+                        settingsState,
+                      ) =>
+                          StartItemTile(
+                        item: item,
+                        onTap: () async {
+                          await editStartTime(context, item);
+                        },
+                        onDismissed: (direction) {
+                          BlocProvider.of<ProtocolBloc>(context)
+                              .add(ProtocolSetDNS(number: item.number));
+                        },
+                        isHighlighted: isHighlighted,
+                        countdown:
+                            settingsState.settings.countdownAtStartTime &&
+                                    isHighlighted
+                                ? _countdownFromState(countdownState)
+                                : null,
+                      ),
+                    );
+                  },
+                );
+              },
+              childCount: startProtocol.length,
+            ),
+          ),
+        ],
+      );
 
-  Widget _showCountdown() {
-    return BlocBuilder<SettingsBloc, SettingsState>(builder: (
-      context,
-      settingsState,
-    ) {
-      if (settingsState.settings.countdown) {
-        return Positioned(
-          left: settingsState.settings.countdownLeft,
-          top: settingsState.settings.countdownTop,
-          child: BlocBuilder<CountdownBloc, CountdownState>(
-              builder: (context, countdownState) {
-            if (countdownState is CountdownWorkingState) {
-              final countdownWidget = CountdownWidget(
-                key: _countdownKey,
-                size: settingsState.settings.countdownSize,
-                text: countdownState.text,
-              );
-              return Draggable(
-                feedback: countdownWidget,
-                childWhenDragging: const SizedBox(width: 0, height: 0),
-                onDragEnd: (dragDetails) => _placeCountdownWidget(dragDetails),
-                child: countdownWidget,
-              );
-            } else {
-              final countdownWidget = CountdownWidget(
-                key: _countdownKey,
-                size: settingsState.settings.countdownSize,
-              );
-              return Draggable(
-                feedback: countdownWidget,
-                childWhenDragging: const SizedBox(width: 0, height: 0),
-                onDragEnd: (dragDetails) => _placeCountdownWidget(dragDetails),
-                child: countdownWidget,
-              );
-            }
-          }),
-        );
-      } else {
-        return const SizedBox(width: 0, height: 0);
-      }
-    });
-  }
+  Widget _showCountdown() => BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (
+          context,
+          settingsState,
+        ) {
+          if (settingsState.settings.countdown) {
+            return Positioned(
+              left: settingsState.settings.countdownLeft,
+              top: settingsState.settings.countdownTop,
+              child: BlocBuilder<CountdownBloc, CountdownState>(
+                builder: (context, countdownState) {
+                  if (countdownState is CountdownWorkingState) {
+                    final countdownWidget = CountdownWidget(
+                      key: _countdownKey,
+                      size: settingsState.settings.countdownSize,
+                      text: countdownState.text,
+                    );
+                    return Draggable(
+                      feedback: countdownWidget,
+                      childWhenDragging: const SizedBox(width: 0, height: 0),
+                      onDragEnd: (dragDetails) =>
+                          _placeCountdownWidget(dragDetails),
+                      child: countdownWidget,
+                    );
+                  } else {
+                    final countdownWidget = CountdownWidget(
+                      key: _countdownKey,
+                      size: settingsState.settings.countdownSize,
+                    );
+                    return Draggable(
+                      feedback: countdownWidget,
+                      childWhenDragging: const SizedBox(width: 0, height: 0),
+                      onDragEnd: (dragDetails) =>
+                          _placeCountdownWidget(dragDetails),
+                      child: countdownWidget,
+                    );
+                  }
+                },
+              ),
+            );
+          } else {
+            return const SizedBox(width: 0, height: 0);
+          }
+        },
+      );
 
   void _placeCountdownWidget(DraggableDetails dragDetails) {
     final stackRenderBox = _getRenderBox(_stackKey);
@@ -238,16 +251,18 @@ class _StartScreen extends State<StartScreen> {
 
     final settingsBloc = context.read<SettingsBloc>();
     final settings = settingsBloc.state.settings;
-    settingsBloc.add(SettingsEventUpdate(
+    settingsBloc.add(
+      SettingsEventUpdate(
         settings: settings.copyWith(
-      countdownLeft: dx,
-      countdownTop: dy,
-    )));
+          countdownLeft: dx,
+          countdownTop: dy,
+        ),
+      ),
+    );
   }
 
-  RenderBox _getRenderBox(GlobalKey key) {
-    return key.currentContext!.findRenderObject() as RenderBox;
-  }
+  RenderBox _getRenderBox(GlobalKey key) =>
+      key.currentContext!.findRenderObject() as RenderBox;
 
   Future<void> _addManualStartTime(BuildContext context) async {
     final time = DateTime.now();
@@ -272,43 +287,42 @@ class _StartScreen extends State<StartScreen> {
 
 class _SliverStartSubHeader extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(2),
-      color: Theme.of(context).colorScheme.background,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(children: const <Widget>[
-          Flexible(
-            flex: 20,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text('№'),
-            ),
+  Widget build(BuildContext context) => Card(
+        margin: const EdgeInsets.all(2),
+        color: Theme.of(context).colorScheme.background,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            children: const <Widget>[
+              Flexible(
+                flex: 20,
+                child: Align(
+                  child: Text('№'),
+                ),
+              ),
+              Flexible(
+                flex: 30,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Старт'),
+                ),
+              ),
+              Flexible(
+                flex: 25,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Ручная\r\nпоправка'),
+                ),
+              ),
+              Flexible(
+                flex: 25,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Авто\r\nпоправка'),
+                ),
+              ),
+            ],
           ),
-          Flexible(
-            flex: 30,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text('Старт'),
-            ),
-          ),
-          Flexible(
-            flex: 25,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text('Ручная\r\nпоправка'),
-            ),
-          ),
-          Flexible(
-            flex: 25,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text('Авто\r\nпоправка'),
-            ),
-          ),
-        ]),
-      ),
-    );
-  }
+        ),
+      );
 }

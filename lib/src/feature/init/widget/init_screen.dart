@@ -23,33 +23,32 @@ class InitScreen extends StatefulWidget {
 
 class _InitScreen extends State<InitScreen> {
   @override
-  Widget build(BuildContext context) {
-    return ListView(children: <Widget>[
-      _selectProtocol(),
-      _selectBluetooth(),
-      !kReleaseMode
-          ? const Header(text: 'Debug')
-          : const SizedBox(width: 0, height: 0),
-      !kReleaseMode
-          ? _debugAddLogButton(context)
-          : const SizedBox(width: 0, height: 0),
-      !kReleaseMode
-          ? _debugLogButton(context)
-          : const SizedBox(width: 0, height: 0),
-      !kReleaseMode
-          ? _debugCountdownButton(context)
-          : const SizedBox(width: 0, height: 0),
-      !kReleaseMode
-          ? _debugVoiceButton(context)
-          : const SizedBox(width: 0, height: 0),
-    ]);
-  }
+  Widget build(BuildContext context) => ListView(
+        children: <Widget>[
+          _selectProtocol(),
+          _selectBluetooth(),
+          !kReleaseMode
+              ? const Header(text: 'Debug')
+              : const SizedBox(width: 0, height: 0),
+          !kReleaseMode
+              ? _debugAddLogButton(context)
+              : const SizedBox(width: 0, height: 0),
+          !kReleaseMode
+              ? _debugLogButton(context)
+              : const SizedBox(width: 0, height: 0),
+          !kReleaseMode
+              ? _debugCountdownButton(context)
+              : const SizedBox(width: 0, height: 0),
+          !kReleaseMode
+              ? _debugVoiceButton(context)
+              : const SizedBox(width: 0, height: 0),
+        ],
+      );
 
   Widget _selectProtocol() {
     final Widget title = Text(Localization.current.I18nInit_startProtocol);
     return BlocBuilder<ProtocolBloc, ProtocolState>(
-        builder: (context, protocolState) {
-      return ListTile(
+      builder: (context, protocolState) => ListTile(
         onTap: () => routeToSelectFileScreen(context),
         leading: IconButton(
           icon: const Icon(MdiIcons.database),
@@ -59,93 +58,92 @@ class _InitScreen extends State<InitScreen> {
         subtitle: protocolState is ProtocolSelectedState
             ? Text(basename(protocolState.databasePath))
             : Text(Localization.current.I18nInit_pressToSelect),
-      );
-    });
+      ),
+    );
   }
 
   Widget _selectBluetooth() {
     final Widget title = Text(Localization.current.I18nInit_bluetoothModule);
     return BlocBuilder<BluetoothBloc, BluetoothConnectionState>(
-        builder: (context, state) {
-      return ListTile(
+      builder: (context, state) => ListTile(
         onTap: () => selectBluetoothDevice(context),
         leading: BluetoothButton(
           context: context,
         ),
         title: title,
         subtitle: Text(
-            BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
-                Localization.current.I18nInit_pressToSelect),
+          BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
+              Localization.current.I18nInit_pressToSelect,
+        ),
         trailing: state is BluetoothConnectedState
             ? _bluetoothButtons(context)
             : null,
-      );
-    });
-  }
-
-  Widget _bluetoothButtons(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          icon: const Icon(MdiIcons.formatListBulleted),
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute<void>(builder: (context) {
-              return LogScreen(
-                  //moduleSettings: moduleSettings,
-                  );
-            }));
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: () {
-            _moduleSettings(context);
-          },
-        ),
-      ],
+      ),
     );
   }
+
+  Widget _bluetoothButtons(BuildContext context) => Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: const Icon(MdiIcons.formatListBulleted),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (context) => LogScreen(
+                      //moduleSettings: moduleSettings,
+                      ),
+                ),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              _moduleSettings(context);
+            },
+          ),
+        ],
+      );
 
   void _moduleSettings(BuildContext context) {
     BlocProvider.of<BluetoothBloc>(context)
         .add(const SendMessage('{"Read": true}'));
     Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (context) {
-        return const ModuleSettingsInitScreen();
-      }),
+      MaterialPageRoute<void>(
+        builder: (context) => const ModuleSettingsInitScreen(),
+      ),
     );
   }
 
-  Widget _debugLogButton(BuildContext context) {
-    return TextButton(
+  Widget _debugLogButton(BuildContext context) => TextButton(
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute<void>(builder: (context) {
-            return LogScreen(
-                //moduleSettings: moduleSettings,
-                );
-          }));
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (context) => LogScreen(
+                  //moduleSettings: moduleSettings,
+                  ),
+            ),
+          );
         },
-        child: const Text('Show Log'));
-  }
+        child: const Text('Show Log'),
+      );
 
-  Widget _debugAddLogButton(BuildContext context) {
-    return TextButton(
+  Widget _debugAddLogButton(BuildContext context) => TextButton(
         onPressed: () {
-          BlocProvider.of<LogBloc>(context).add(const LogAdd(
-            level: LogLevel.error,
-            source: LogSource.bluetooth,
-            rawData: 'rawData',
-            direction: LogSourceDirection.input,
-          ));
+          BlocProvider.of<LogBloc>(context).add(
+            const LogAdd(
+              level: LogLevel.error,
+              source: LogSource.bluetooth,
+              rawData: 'rawData',
+              direction: LogSourceDirection.input,
+            ),
+          );
         },
-        child: const Text('Add Log'));
-  }
+        child: const Text('Add Log'),
+      );
 
-  Widget _debugCountdownButton(BuildContext context) {
-    return TextButton(
+  Widget _debugCountdownButton(BuildContext context) => TextButton(
         // _device = event.device;
         onPressed: () {
           // BlocProvider.of<BluetoothBloc>(context)
@@ -154,14 +152,15 @@ class _InitScreen extends State<InitScreen> {
 
           BlocProvider.of<BluetoothBloc>(context).audioService.countdown();
         },
-        child: const Text('Countdown Test'));
-  }
+        child: const Text('Countdown Test'),
+      );
 
-  Widget _debugVoiceButton(BuildContext context) {
-    return TextButton(
+  Widget _debugVoiceButton(BuildContext context) => TextButton(
         onPressed: () {
-          BlocProvider.of<BluetoothBloc>(context).audioService.speak('Это тестовое сообщение');
+          BlocProvider.of<BluetoothBloc>(context)
+              .audioService
+              .speak('Это тестовое сообщение');
         },
-        child: const Text('Voice Test'));
-  }
+        child: const Text('Voice Test'),
+      );
 }

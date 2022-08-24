@@ -39,16 +39,17 @@ class ProtocolProvider {
     return _database!;
   }
 
-  Future<Database> _initDB() async {
-    return openDatabase(
-      _dbPath!,
-      version: 1,
-      onOpen: (db) async {
-        logger.v(
-            'SQLite version: ${(await db.rawQuery('SELECT sqlite_version()')).first.values.first}');
-      },
-      onCreate: (db, version) async {
-        await db.execute('''
+  Future<Database> _initDB() async => openDatabase(
+        _dbPath!,
+        version: 1,
+        onOpen: (db) async {
+          logger.v(
+            'SQLite version: ${(await db.rawQuery('SELECT sqlite_version()')).first.values.first}',
+          );
+        },
+        onCreate: (db, version) async {
+          await db.execute(
+            '''
         CREATE TABLE IF NOT EXISTS 'start' (
         	'id'	                INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
         	'number'	            INTEGER NOT NULL UNIQUE,
@@ -59,8 +60,10 @@ class ProtocolProvider {
         	'manualstarttime'	    TEXT,
         	'manualcorrection'	  INTEGER,
         	'finishtime'	        TEXT
-        );''');
-        await db.execute('''
+        );''',
+          );
+          await db.execute(
+            '''
         CREATE TABLE IF NOT EXISTS 'finish' (
         	'id'	        INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
         	'number'	    INTEGER UNIQUE,
@@ -68,8 +71,10 @@ class ProtocolProvider {
         	'phonetime'	  TEXT,
         	'set'	        INTEGER,
         	'manual'	    INTEGER
-        );''');
-        await db.execute('''
+        );''',
+          );
+          await db.execute(
+            '''
         CREATE TABLE IF NOT EXISTS 'main' (
           'id'      INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	        'category'	TEXT,
@@ -79,21 +84,22 @@ class ProtocolProvider {
 	        'age'	TEXT,
 	        'team'	TEXT,
 	        'city'	TEXT
-	       );''');
-      },
+	       );''',
+          );
+        },
 //      onUpgrade: (Database db, int oldVersion, int newVersion) async {
 //        logger.('onUpgrade');
 //      },
 //      onDowngrade: (Database db, int oldVersion, int newVersion) async {
 //        logger.('onDowngrade');
 //      },
-    );
-  }
+      );
 
   // ----------------старт----------------
   Future<List<StartItem>> getAllParticipantsAtStart() async {
     final db = await database;
-    final res = await db.rawQuery('''
+    final res = await db.rawQuery(
+      '''
         SELECT
           start.id as id,
           start.number as number,
@@ -115,7 +121,8 @@ class ProtocolProvider {
           AND main.number = start.number
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL)
         ORDER BY starttime ASC
-        ''');
+        ''',
+    );
     final List<StartItem> protocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     return protocol;
@@ -124,7 +131,8 @@ class ProtocolProvider {
   //ToDo: посмотреть как сделано
   Future<List<Map<String, Object?>>> getStartToCsv() async {
     final db = await database;
-    final result = await db.rawQuery('''
+    final result = await db.rawQuery(
+      '''
         SELECT number, starttime,
         IFNULL (automaticcorrection, IFNULL (manualcorrection, 'DNS')) automaticcorrection
         FROM start
@@ -133,7 +141,8 @@ class ProtocolProvider {
              OR manualcorrection NOT NULL
              OR automaticstarttime IS 'DNS')
         ORDER BY starttime ASC
-        ''');
+        ''',
+    );
     return result;
   }
 
@@ -148,11 +157,13 @@ class ProtocolProvider {
     final DateTime timeAfter = beepDateTime.add(const Duration(seconds: 10));
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final db = await database;
-    final x = await db.rawQuery('''
+    final x = await db.rawQuery(
+      '''
         SELECT COUNT(*) FROM start
         WHERE starttime BETWEEN '$beepTime' AND '$after'
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL);
-        ''');
+        ''',
+    );
     final int? count = Sqflite.firstIntValue(x);
     if (count == null) {
       return 0;
@@ -187,11 +198,14 @@ class ProtocolProvider {
     // В противном случае возвращаем StartItem.
     if (!forceUpdate) {
       logger.i('Database -> Checking existing start time...');
-      final res = await db.rawQuery('''
+      final res = await db.rawQuery(
+        '''
         SELECT *
         FROM start
         WHERE starttime BETWEEN ? AND ?
-        ''', [before, after]);
+        ''',
+        [before, after],
+      );
       final List<StartItem> startProtocol =
           res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
       if (startProtocol.isNotEmpty &&
@@ -201,7 +215,8 @@ class ProtocolProvider {
       }
     }
 
-    final int result = await db.rawUpdate('''
+    final int result = await db.rawUpdate(
+      '''
         UPDATE start
         SET
           automaticstarttime = ?,
@@ -209,7 +224,9 @@ class ProtocolProvider {
           automaticphonetime = ?
         WHERE
           starttime BETWEEN ? AND ?
-        ''', [time, correction, phoneTime, before, after]);
+        ''',
+      [time, correction, phoneTime, before, after],
+    );
     logger.i('Database -> updated: $result lines');
     return null;
   }
@@ -224,11 +241,14 @@ class ProtocolProvider {
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final String manualStartTime = DateFormat('HH:mm:ss,S').format(time);
 
-    final res = await db.rawQuery('''
+    final res = await db.rawQuery(
+      '''
         SELECT id, number, starttime
         FROM start
         WHERE starttime BETWEEN ? AND ?
-        ''', [before, after]);
+        ''',
+      [before, after],
+    );
     final List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     if (startProtocol.isNotEmpty && startProtocol.first.starttime != null) {
@@ -250,14 +270,17 @@ class ProtocolProvider {
       ]);
       if (result > 0) {
         logger.i(
-            'Database -> Update manual start time for number ${startProtocol.first.number}');
+          'Database -> Update manual start time for number ${startProtocol.first.number}',
+        );
       } else {
         logger.i(
-            'Database -> Error at updating manual start time for number ${startProtocol.first.number}');
+          'Database -> Error at updating manual start time for number ${startProtocol.first.number}',
+        );
       }
     } else {
       logger.i(
-          'Database -> Cannot find participant with start time around $time');
+        'Database -> Cannot find participant with start time around $time',
+      );
     }
     return result;
   }
@@ -283,10 +306,12 @@ class ProtocolProvider {
     );
     if (result > 0) {
       logger.i(
-          'UpdateItemInfoAtStart -> Start info for number ${item.number} updated');
+        'UpdateItemInfoAtStart -> Start info for number ${item.number} updated',
+      );
     } else {
       logger.i(
-          'UpdateItemInfoAtStart -> Start info for number ${item.number} not updated');
+        'UpdateItemInfoAtStart -> Start info for number ${item.number} not updated',
+      );
     }
     return result;
   }
@@ -304,12 +329,15 @@ class ProtocolProvider {
 
   Future<int> setDNS(int number) async {
     final db = await database;
-    final result = await db.rawUpdate('''
+    final result = await db.rawUpdate(
+      '''
         UPDATE start
         SET automaticstarttime = 'DNS', automaticcorrection = NULL,
             manualstarttime = NULL, manualcorrection = NULL
         WHERE number = ?
-        ''', [number]);
+        ''',
+      [number],
+    );
     if (result > 0) {
       logger.i('Database -> Set DNS to number: $number');
     } else {
@@ -336,36 +364,49 @@ class ProtocolProvider {
     // В противном случае возвращаем StartItem.
     if (!forceAdd) {
       logger.i('Database -> Checking start time $time and number $number...');
-      final res = await db.rawQuery('''
+      final res = await db.rawQuery(
+        '''
         SELECT *
         FROM start
         WHERE starttime IS ?
           OR (number IS ?
           AND (automaticstarttime NOTNULL OR manualstarttime NOTNULL))
-        ''', [time, number]);
+        ''',
+        [time, number],
+      );
       final List<StartItem> startProtocol =
           res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
       if (startProtocol.isNotEmpty) {
-        logger.i('Database -> Start time $time '
-            'already set or number $number already started');
+        logger.i(
+          'Database -> Start time $time '
+          'already set or number $number already started',
+        );
         return startProtocol;
       }
     }
 
-    await db.insert('start', {'number': number, 'starttime': time},
-        conflictAlgorithm: ConflictAlgorithm.replace);
-    await db.insert('main', {'number': number},
-        conflictAlgorithm: ConflictAlgorithm.ignore);
+    await db.insert(
+      'start',
+      {'number': number, 'starttime': time},
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    await db.insert(
+      'main',
+      {'number': number},
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
     return null;
   }
 
   Future<int> clearStartResultsDebug() async {
     final db = await database;
-    final result = await db.rawUpdate('''
+    final result = await db.rawUpdate(
+      '''
         UPDATE start
         SET automaticstarttime = NULL, automaticcorrection = NULL,
             manualstarttime = NULL, manualcorrection = NULL
-        ''');
+        ''',
+    );
     logger.i('Database -> Results cleared');
     return result;
   }
@@ -380,14 +421,16 @@ class ProtocolProvider {
     final DateTime timeAfter = dateTime.add(const Duration(minutes: 1));
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final db = await database;
-    final res = await db.rawQuery('''
+    final res = await db.rawQuery(
+      '''
         SELECT start.id as id, start.number as number,
           start.starttime as starttime, start.automaticstarttime as automaticstarttime,
           start.automaticcorrection as automaticcorrection, main.name as name
         FROM start, main
         WHERE (starttime BETWEEN '$time' AND '$after') AND main.number = start.number
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL);
-        ''');
+        ''',
+    );
     final List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     return startProtocol;
@@ -395,7 +438,8 @@ class ProtocolProvider {
 
   Future<List<StartItem>> getNextParticipants(String time) async {
     final db = await database;
-    final res = await db.rawQuery('''
+    final res = await db.rawQuery(
+      '''
         SELECT start.id as id, start.number as number,
           start.starttime as starttime, start.automaticstarttime as automaticstarttime,
           start.automaticcorrection as automaticcorrection, main.name as name
@@ -403,7 +447,8 @@ class ProtocolProvider {
         WHERE starttime > '$time' AND main.number = start.number
           AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL)
         ORDER BY starttime ASC;
-        ''');
+        ''',
+    );
     final List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     return startProtocol;
@@ -415,14 +460,16 @@ class ProtocolProvider {
     final batch = db.batch();
 
     for (final item in items) {
-      batch.insert(
+      batch
+        ..insert(
           'start',
           {
             'number': item.number,
             'starttime': item.starttime,
           },
-          conflictAlgorithm: ConflictAlgorithm.replace);
-      batch.insert(
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        )
+        ..insert(
           'main',
           {
             'number': item.number,
@@ -433,7 +480,8 @@ class ProtocolProvider {
             'team': item.team,
             'city': item.city,
           },
-          conflictAlgorithm: ConflictAlgorithm.replace);
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
     }
     await batch.commit(noResult: true, continueOnError: true);
     logger.i('Database -> Loaded data from csv to start protocol');
@@ -444,14 +492,16 @@ class ProtocolProvider {
   Future<List<StartItem>> getNumbersOnTrace([String? timeNow]) async {
     timeNow ??= "now', 'localtime";
     final db = await database;
-    final res = await db.rawQuery('''
+    final res = await db.rawQuery(
+      '''
         SELECT id, number
         FROM start
         WHERE julianday(time('$timeNow')) > julianday(time(starttime))
         AND finishtime IS NULL
         AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL)
         ORDER BY starttime ASC
-        ''');
+        ''',
+    );
     final List<StartItem> startProtocol =
         res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
     return startProtocol;
@@ -489,12 +539,14 @@ class ProtocolProvider {
 //ToDo: посмотреть как сделано
   Future<List<Map<String, Object?>>> getFinishToCsv() async {
     final db = await database;
-    final result = await db.rawQuery('''
+    final result = await db.rawQuery(
+      '''
         SELECT number, finishtime
         FROM finish
         WHERE number NOTNULL
         ORDER BY finishtime ASC
-        ''');
+        ''',
+    );
     return result;
   }
 
@@ -572,10 +624,14 @@ class ProtocolProvider {
     });
     logger.i('Database -> Automatic finish time added: $finish');
     if (workingNumber != null) {
-      await db.update('start', {'finishtime': finish},
-          where: 'number = $workingNumber');
+      await db.update(
+        'start',
+        {'finishtime': finish},
+        where: 'number = $workingNumber',
+      );
       logger.i(
-          'Database -> Automatically add number $workingNumber to finish time: $finish');
+        'Database -> Automatically add number $workingNumber to finish time: $finish',
+      );
     }
     return workingNumber;
   }
@@ -592,35 +648,43 @@ class ProtocolProvider {
 
   Future<int> hideFinish(int id) async {
     final db = await database;
-    final result = await db.rawUpdate('''
+    final result = await db.rawUpdate(
+      '''
         UPDATE finish
         SET "set" = 1
         WHERE id = $id
-        ''');
+        ''',
+    );
     logger.i('Database -> Finish times hided');
     return result;
   }
 
   Future<int> hideAllFinish() async {
     final db = await database;
-    final result = await db.rawUpdate('''
+    final result = await db.rawUpdate(
+      '''
         UPDATE finish
         SET "set" = 1
-        ''');
+        ''',
+    );
     logger.i('Database -> All finish times hided');
     return result;
   }
 
   Future<int> clearFinishResultsDebug() async {
     final db = await database;
-    var result = await db.rawUpdate('''
+    var result = await db.rawUpdate(
+      '''
         UPDATE start
         SET finishtime = NULL
-        ''');
-    result = await db.rawUpdate('''
+        ''',
+    );
+    result = await db.rawUpdate(
+      '''
         UPDATE finish
         SET number = NULL, "set" = NULL
-        ''');
+        ''',
+    );
     logger.i('Database -> Results cleared');
     return result;
   }
@@ -631,13 +695,18 @@ class ProtocolProvider {
       await db.update('finish', {'number': number}, where: 'id = $id');
     } on DatabaseException {
       logger.i(
-          'Database -> Number $number already exists and therefore has not been added');
+        'Database -> Number $number already exists and therefore has not been added',
+      );
       return false;
     }
-    await db.update('start', {'finishtime': finishtime},
-        where: 'number = $number');
+    await db.update(
+      'start',
+      {'finishtime': finishtime},
+      where: 'number = $number',
+    );
     logger.i(
-        'Database -> Number $number added at rowid $id with finishtime: $finishtime');
+      'Database -> Number $number added at rowid $id with finishtime: $finishtime',
+    );
     return true;
   }
 
@@ -650,21 +719,25 @@ class ProtocolProvider {
 
   Future<int> setDNF(int number) async {
     final db = await database;
-    var result = await db.rawUpdate('''
+    var result = await db.rawUpdate(
+      '''
         UPDATE start
         SET finishtime = 'DNF'
         WHERE number = ?
-        ''', [number]);
+        ''',
+      [number],
+    );
 
     result = await db.insert(
-        'finish',
-        {
-          'finishtime': 'DNF',
-          'number': number,
-          'set': 1,
-          'manual': 1,
-        },
-        conflictAlgorithm: ConflictAlgorithm.replace);
+      'finish',
+      {
+        'finishtime': 'DNF',
+        'number': number,
+        'set': 1,
+        'manual': 1,
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
 
     logger.i('Database -> Set DNF to number: $number');
     return result;
@@ -680,12 +753,14 @@ class ProtocolProvider {
   Future<DateTime?> _prevFinishTime() async {
     DateTime? prevFinishTime;
     final db = await database;
-    final res = await db.rawQuery('''
+    final res = await db.rawQuery(
+      '''
         SELECT id, finishtime
         FROM finish
         WHERE "set" ISNULL and manual ISNULL
         ORDER BY finishtime DESC LIMIT 1;
-    ''');
+    ''',
+    );
 
     final List<FinishItem> prevFinishProtocol =
         res.isNotEmpty ? res.map((c) => FinishItem.fromJson(c)).toList() : [];
@@ -699,12 +774,14 @@ class ProtocolProvider {
   Future<DateTime?> _lastFinishTime() async {
     DateTime? result;
     final db = await database;
-    final res = await db.rawQuery('''
+    final res = await db.rawQuery(
+      '''
         SELECT id, finishtime
         FROM finish
         WHERE number NOTNULL AND finishtime NOT like "DNF" AND finishtime NOT like "DNS"
         ORDER BY finishtime DESC LIMIT 1;
-    ''');
+    ''',
+    );
 
     final List<FinishItem> item =
         res.isNotEmpty ? res.map((c) => FinishItem.fromJson(c)).toList() : [];

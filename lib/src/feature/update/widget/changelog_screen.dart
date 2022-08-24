@@ -10,14 +10,12 @@ class ChangelogScreen extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(Localization.current.I18nUpdate_changelog),
-      ),
-      body: SafeArea(
-        child: changelogMarkdown(markdownData),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(Localization.current.I18nUpdate_changelog),
+        ),
+        body: SafeArea(
+          child: changelogMarkdown(markdownData),
+        ),
+      );
 }

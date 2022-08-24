@@ -7,11 +7,9 @@ abstract class ModuleSettingsState extends Equatable {
   List<Object> get props => [];
 }
 
-class ModuleSettingsUninitialized extends ModuleSettingsState {
-}
+class ModuleSettingsUninitialized extends ModuleSettingsState {}
 
-class ModuleSettingsLoading extends ModuleSettingsState {
-}
+class ModuleSettingsLoading extends ModuleSettingsState {}
 
 //class ModuleSettingsUpdated extends ModuleSettingsState {
 //}
@@ -25,8 +23,7 @@ class ModuleSettingsUpdated extends ModuleSettingsState {
   List<Object> get props => [moduleSettings];
 }
 
-class ModuleSettingsLoadError extends ModuleSettingsState {
-}
+class ModuleSettingsLoadError extends ModuleSettingsState {}
 
 // Reason:
 //if the authentication state was uninitialized, the user might be seeing a splash screen.

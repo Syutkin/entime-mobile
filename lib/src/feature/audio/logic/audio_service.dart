@@ -15,10 +15,11 @@ class AudioService {
       _sound = settings.sound;
       _voice = settings.voice;
       _beep = settings.beep;
-      _audio.setLanguage(settings.language);
-      _audio.setVolume(settings.volume);
-      _audio.setSpeechRate(settings.rate);
-      _audio.setPitch(settings.pitch);
+      _audio
+        ..setLanguage(settings.language)
+        ..setVolume(settings.volume)
+        ..setSpeechRate(settings.rate)
+        ..setPitch(settings.pitch);
     });
   }
 

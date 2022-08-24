@@ -19,7 +19,8 @@ import 'src/feature/tab/bloc/tab_bloc.dart';
 import 'src/feature/update/update.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.
+  ensureInitialized();
   // await BlocOverrides.runZoned(
   //   () async {
   //     await runMain();
@@ -57,7 +58,7 @@ Future<void> runMain() async {
         BlocProvider<ProtocolBloc>(
           create: (context) => ProtocolBloc(
             settingsBloc: BlocProvider.of<SettingsBloc>(context),
-          )..add(SelectProtocol(file:settings.settings.recentFile)),
+          )..add(SelectProtocol(file: settings.settings.recentFile)),
         ),
         BlocProvider<CountdownBloc>(
           create: (context) => CountdownBloc(
@@ -100,8 +101,7 @@ class EntimeApp extends StatelessWidget {
     }
 
     return BlocBuilder<SettingsBloc, SettingsState>(
-        builder: (context, settingsTheme) {
-      return MaterialApp(
+      builder: (context, settingsTheme) => MaterialApp(
         theme: appThemeData[settingsTheme.settings.appTheme],
         title: 'Entime',
         localizationsDelegates: const [
@@ -116,7 +116,7 @@ class EntimeApp extends StatelessWidget {
         //2. registered route observer
         navigatorObservers: [BotToastNavigatorObserver()],
         home: const HomeScreen(),
-      );
-    });
+      ),
+    );
   }
 }

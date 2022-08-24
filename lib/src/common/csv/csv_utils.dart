@@ -8,8 +8,10 @@ import 'package:path_provider/path_provider.dart';
 import '../logger/logger.dart';
 
 /// Convert a map list to csv
-String? mapListToCsv(List<Map<String, dynamic>>? mapList,
-    {ListToCsvConverter? converter}) {
+String? mapListToCsv(
+  List<Map<String, dynamic>>? mapList, {
+  ListToCsvConverter? converter,
+}) {
   if (mapList == null) {
     return null;
   }
@@ -31,8 +33,7 @@ String? mapListToCsv(List<Map<String, dynamic>>? mapList,
 
   for (final map in mapList) {
     // This list might grow if a new key is found
-    var dataRow = <dynamic>[];
-    dataRow.length = keyIndexMap.length;
+    var dataRow = <dynamic>[]..length = keyIndexMap.length;
     // Fix missing key
     map.forEach((key, value) {
       var keyIndex = keyIndexMap[key];
@@ -41,7 +42,7 @@ String? mapListToCsv(List<Map<String, dynamic>>? mapList,
         // Add it and fix previous data
         keyIndex = _addKey(key);
         // grow our list
-        dataRow = List.from(dataRow, growable: true)..add(value);
+        dataRow = List.from(dataRow)..add(value);
       } else {
         dataRow[keyIndex] = value;
       }
@@ -59,7 +60,8 @@ Future<String?> saveCsv(String csv, String suffix, String filePath) async {
     return null;
   }
   final file = File(
-      '${directory.path}/${basenameWithoutExtension(filePath)}-$suffix.csv');
+    '${directory.path}/${basenameWithoutExtension(filePath)}-$suffix.csv',
+  );
   await file.writeAsString(csv);
   logger.i('saveCsv -> Saved csv to file ${file.path}');
   return file.path;
@@ -69,22 +71,24 @@ Future<String?> saveCsv(String csv, String suffix, String filePath) async {
 class CsvToMapConverter {
   late CsvToListConverter converter;
 
-  CsvToMapConverter(
-      {String? fieldDelimiter = defaultFieldDelimiter,
-      String? textDelimiter = defaultTextDelimiter,
-      String? textEndDelimiter,
-      String? eol = defaultEol,
-      CsvSettingsDetector? csvSettingsDetector,
-      bool? shouldParseNumbers,
-      bool? allowInvalid}) {
+  CsvToMapConverter({
+    String? fieldDelimiter = defaultFieldDelimiter,
+    String? textDelimiter = defaultTextDelimiter,
+    String? textEndDelimiter,
+    String? eol = defaultEol,
+    CsvSettingsDetector? csvSettingsDetector,
+    bool? shouldParseNumbers,
+    bool? allowInvalid,
+  }) {
     converter = CsvToListConverter(
-        fieldDelimiter: fieldDelimiter,
-        textDelimiter: textDelimiter,
-        textEndDelimiter: textEndDelimiter,
-        eol: eol,
-        csvSettingsDetector: csvSettingsDetector,
-        shouldParseNumbers: shouldParseNumbers,
-        allowInvalid: allowInvalid);
+      fieldDelimiter: fieldDelimiter,
+      textDelimiter: textDelimiter,
+      textEndDelimiter: textEndDelimiter,
+      eol: eol,
+      csvSettingsDetector: csvSettingsDetector,
+      shouldParseNumbers: shouldParseNumbers,
+      allowInvalid: allowInvalid,
+    );
   }
 
   List<Map<String, dynamic>> convert(String csv) {

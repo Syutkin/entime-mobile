@@ -7,10 +7,11 @@ class Note {
   Note(this.name, this.frequency);
 }
 
-Future<int?> buzzerFrequencyPopup(
-    {required String text,
-    required BuildContext context,
-    required int frequency}) async {
+Future<int?> buzzerFrequencyPopup({
+  required String text,
+  required BuildContext context,
+  required int frequency,
+}) async {
   final List<Note> notes = [
     Note('B0', 31),
     Note('C1', 33),
@@ -120,47 +121,44 @@ Future<int?> buzzerFrequencyPopup(
     context: context,
     barrierDismissible: true,
     // dialog is dismissible with a tap on the barrier
-    builder: (context) {
-      return AlertDialog(
-        title: Text(text),
-        content: StatefulBuilder(builder: (context, setState) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                Localization.current.I18nModuleSettings_noteFrequency(
-                  notes[value.toInt()].name,
-                  notes[value.toInt()].frequency,
-                ),
+    builder: (context) => AlertDialog(
+      title: Text(text),
+      content: StatefulBuilder(
+        builder: (context, setState) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              Localization.current.I18nModuleSettings_noteFrequency(
+                notes[value.toInt()].name,
+                notes[value.toInt()].frequency,
               ),
-              Slider(
-                value: value,
-                min: 0,
-                max: notes.length.toDouble() - 1,
-                //label: '${notes[_value.toInt()].name}',
-                divisions: notes.length,
-                onChanged: (newValue) {
-                  setState(() => value = newValue);
-                },
-              ),
-            ],
-          );
-        }),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(notes[value.toInt()].frequency);
-            },
-            child: Text(MaterialLocalizations.of(context).okButtonLabel),
-          ),
-        ],
-      );
-    },
+            ),
+            Slider(
+              value: value,
+              max: notes.length.toDouble() - 1,
+              //label: '${notes[_value.toInt()].name}',
+              divisions: notes.length,
+              onChanged: (newValue) {
+                setState(() => value = newValue);
+              },
+            ),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(notes[value.toInt()].frequency);
+          },
+          child: Text(MaterialLocalizations.of(context).okButtonLabel),
+        ),
+      ],
+    ),
   );
 }

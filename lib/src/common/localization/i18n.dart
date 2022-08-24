@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_classes_with_only_static_members
+
 import 'package:intl/intl.dart';
 
 class I18nUpdate {
@@ -11,13 +13,11 @@ class I18nUpdate {
         name: 'I18nUpdate_connecting',
       );
 
-  static String updateToVersion(String version) {
-    return Intl.message(
-      'Обновить до $version',
-      name: 'I18nUpdate_updateToVersion',
-      args: [version],
-    );
-  }
+  static String updateToVersion(String version) => Intl.message(
+        'Обновить до $version',
+        name: 'I18nUpdate_updateToVersion',
+        args: [version],
+      );
 
   static String get checkForUpdates => Intl.message(
         'Проверить обновления',
@@ -29,14 +29,12 @@ class I18nUpdate {
         name: 'I18nUpdate_changelog',
       );
 
-  static String downloaded(String current, String total) {
-    return Intl.message(
-      '$current из $total',
-      name: 'I18nUpdate_downloaded',
-      args: [current, total],
-      desc: 'Сколько скачано байт относительно общего количества',
-    );
-  }
+  static String downloaded(String current, String total) => Intl.message(
+        '$current из $total',
+        name: 'I18nUpdate_downloaded',
+        args: [current, total],
+        desc: 'Сколько скачано байт относительно общего количества',
+      );
 }
 
 class I18nSettings {
@@ -130,13 +128,11 @@ class I18nSettings {
         name: 'I18nSettings_startButtonSize',
       );
 
-  static String pixelSize(int size) {
-    return Intl.message(
-      '${size}px',
-      name: 'I18nSettings_pixelSize',
-      args: [size],
-    );
-  }
+  static String pixelSize(int size) => Intl.message(
+        '${size}px',
+        name: 'I18nSettings_pixelSize',
+        args: [size],
+      );
 
   static String get startButtonSizeDescription => Intl.message(
         'Размер кнопки "отсечка" на стартовом экране',
@@ -168,13 +164,11 @@ class I18nSettings {
         name: 'I18nSettings_delayForNewEvents',
       );
 
-  static String milliseconds(int milliseconds) {
-    return Intl.message(
-      '$millisecondsмс',
-      name: 'I18nSettings_milliseconds',
-      args: [milliseconds],
-    );
-  }
+  static String milliseconds(int milliseconds) => Intl.message(
+        '$millisecondsмс',
+        name: 'I18nSettings_milliseconds',
+        args: [milliseconds],
+      );
 
   static String get autosubstitution => Intl.message(
         'Автоподстановка номеров',
@@ -318,26 +312,22 @@ class I18nProtocol {
         name: 'I18nProtocol_warning',
       );
 
-  static String updateNumber(int number) {
-    return Intl.message(
-      'Участнику с номером $number уже присвоено финишное время. Установить новое значение?',
-      name: 'I18nProtocol_updateNumber',
-      args: [number],
-    );
-  }
+  static String updateNumber(int number) => Intl.message(
+        'Участнику с номером $number уже присвоено финишное время. Установить новое значение?',
+        name: 'I18nProtocol_updateNumber',
+        args: [number],
+      );
 
   static String get hide => Intl.message(
         'Скрыть',
         name: 'I18nProtocol_hide',
       );
 
-  static String finishNumber(String number) {
-    return Intl.message(
-      'Финишировал номер $number',
-      name: 'I18nProtocol_finishNumber',
-      args: [number],
-    );
-  }
+  static String finishNumber(String number) => Intl.message(
+        'Финишировал номер $number',
+        name: 'I18nProtocol_finishNumber',
+        args: [number],
+      );
 
   static String get clearNumber => Intl.message(
         'Убрать номер',
@@ -410,13 +400,11 @@ class I18nDrawer {
         name: 'I18nDrawer_about',
       );
 
-  static String version(String version) {
-    return Intl.message(
-      'v$version',
-      name: 'I18nDrawer_version',
-      args: [version],
-    );
-  }
+  static String version(String version) => Intl.message(
+        'v$version',
+        name: 'I18nDrawer_version',
+        args: [version],
+      );
 }
 
 class I18nHelp {
@@ -502,53 +490,58 @@ class I18nHelp {
 
 class I18nHome {
   static String updateAutomaticCorrection(
-      int number, int prevCorrection, int correction) {
-    return Intl.message(
-      'Участнику под номером $number '
-      'уже установлена стартовая поправка $prevCorrection. '
-      'Обновить её на $correction?',
-      name: 'I18nHome_updateAutomaticCorrection',
-      args: [number, prevCorrection, correction],
-    );
-  }
+    int number,
+    int prevCorrection,
+    int correction,
+  ) =>
+      Intl.message(
+        'Участнику под номером $number '
+        'уже установлена стартовая поправка $prevCorrection. '
+        'Обновить её на $correction?',
+        name: 'I18nHome_updateAutomaticCorrection',
+        args: [number, prevCorrection, correction],
+      );
 
-  static String equalStartTime(String time, int prevNumber, int currentNumber) {
-    return Intl.message(
-      'Стартовое время $time уже присвоено номеру $prevNumber. '
-      'Вы уверены что хотите установить одинаковое стартовое время '
-      'для номеров $currentNumber и $prevNumber?\n',
-      name: 'I18nHome_equalStartTime',
-      args: [time, prevNumber, currentNumber],
-    );
-  }
+  static String equalStartTime(
+    String time,
+    int prevNumber,
+    int currentNumber,
+  ) =>
+      Intl.message(
+        'Стартовое время $time уже присвоено номеру $prevNumber. '
+        'Вы уверены что хотите установить одинаковое стартовое время '
+        'для номеров $currentNumber и $prevNumber?\n',
+        name: 'I18nHome_equalStartTime',
+        args: [time, prevNumber, currentNumber],
+      );
 
   static String updateAutomaticStartCorrection(
-      int number, String automaticCorrection) {
-    return Intl.message(
-      'У номера $number уже проставлена автоматическая стартовая отсечка: $automaticCorrection. '
-      'Установить новое стартовое время и удалить предыдущее значение?\n',
-      name: 'I18nHome_updateAutomaticStartCorrection',
-      args: [number, automaticCorrection],
-    );
-  }
+    int number,
+    String automaticCorrection,
+  ) =>
+      Intl.message(
+        'У номера $number уже проставлена автоматическая стартовая отсечка: $automaticCorrection. '
+        'Установить новое стартовое время и удалить предыдущее значение?\n',
+        name: 'I18nHome_updateAutomaticStartCorrection',
+        args: [number, automaticCorrection],
+      );
 
   static String updateManualStartCorrection(
-      int number, String manualCorrection) {
-    return Intl.message(
-      'У номера $number уже проставлена ручная стартовая отсечка: $manualCorrection. '
-      'Установить новое стартовое время и удалить предыдущее значение?\n',
-      name: 'I18nHome_updateManualStartCorrection',
-      args: [number, manualCorrection],
-    );
-  }
+    int number,
+    String manualCorrection,
+  ) =>
+      Intl.message(
+        'У номера $number уже проставлена ручная стартовая отсечка: $manualCorrection. '
+        'Установить новое стартовое время и удалить предыдущее значение?\n',
+        name: 'I18nHome_updateManualStartCorrection',
+        args: [number, manualCorrection],
+      );
 
-  static String errorAddParticipant(String cancelButtonLabel) {
-    return Intl.message(
-      'Ошибка при добавлении участника! Для продолжения нажмите "$cancelButtonLabel"\n',
-      name: 'I18nHome_errorAddParticipant',
-      args: [cancelButtonLabel],
-    );
-  }
+  static String errorAddParticipant(String cancelButtonLabel) => Intl.message(
+        'Ошибка при добавлении участника! Для продолжения нажмите "$cancelButtonLabel"\n',
+        name: 'I18nHome_errorAddParticipant',
+        args: [cancelButtonLabel],
+      );
 
   static String get home => Intl.message(
         'Начало',
@@ -565,13 +558,11 @@ class I18nHome {
         name: 'I18nHome_finish',
       );
 
-  static String updateAvailable(String version) {
-    return Intl.message(
-      'Доступна новая версия $version',
-      name: 'I18nHome_updateAvailable',
-      args: [version],
-    );
-  }
+  static String updateAvailable(String version) => Intl.message(
+        'Доступна новая версия $version',
+        name: 'I18nHome_updateAvailable',
+        args: [version],
+      );
 
   static String get update => Intl.message(
         'Обновить',
@@ -734,13 +725,11 @@ class I18nModuleSettings {
         name: 'I18nModuleSettings_selectLongFrequency',
       );
 
-  static String noteFrequency(String note, int frequency) {
-    return Intl.message(
-      'Нота $note, $frequencyГц',
-      name: 'I18nModuleSettings_noteFrequency',
-      args: [note, frequency],
-    );
-  }
+  static String noteFrequency(String note, int frequency) => Intl.message(
+        'Нота $note, $frequencyГц',
+        name: 'I18nModuleSettings_noteFrequency',
+        args: [note, frequency],
+      );
 
   static String get lora => Intl.message(
         'LoRa',
@@ -752,13 +741,11 @@ class I18nModuleSettings {
         name: 'I18nModuleSettings_frequency',
       );
 
-  static String frequencyHz(int frequency) {
-    return Intl.message(
-      '$frequencyГц',
-      name: 'I18nModuleSettings_frequencyHz',
-      args: [frequency],
-    );
-  }
+  static String frequencyHz(int frequency) => Intl.message(
+        '$frequencyГц',
+        name: 'I18nModuleSettings_frequencyHz',
+        args: [frequency],
+      );
 
   static String get txPower => Intl.message(
         'TX Power',
@@ -810,15 +797,14 @@ class I18nModuleSettings {
         name: 'I18nModuleSettings_sleepMode',
       );
 
-  static String sleepModeSeconds(int seconds) {
-    return Intl.plural(seconds,
-      one: '$seconds секунда',
-      few: '$seconds секунды',
-      other: 'секунд',
-      name: 'I18nModuleSettings_sleepModeSeconds',
-      args: [seconds],
-    );
-  }
+  static String sleepModeSeconds(int seconds) => Intl.plural(
+        seconds,
+        one: '$seconds секунда',
+        few: '$seconds секунды',
+        other: 'секунд',
+        name: 'I18nModuleSettings_sleepModeSeconds',
+        args: [seconds],
+      );
 
   static String get turnOnAtEvent => Intl.message(
         'Включать после события',
@@ -865,13 +851,11 @@ class I18nModuleSettings {
         name: 'I18nModuleSettings_enterWifiSsid',
       );
 
-  static String enterWifiPassword(String ssid) {
-    return Intl.message(
-      'Введите пароль WiFi сети $ssid',
-      name: 'I18nModuleSettings_enterWifiPassword',
-      args: [ssid],
-    );
-  }
+  static String enterWifiPassword(String ssid) => Intl.message(
+        'Введите пароль WiFi сети $ssid',
+        name: 'I18nModuleSettings_enterWifiPassword',
+        args: [ssid],
+      );
 
   static String get password => Intl.message(
         'Пароль',
@@ -898,13 +882,11 @@ class I18nModuleSettings {
         name: 'I18nModuleSettings_ohm',
       );
 
-  static String resistorOhm(int ohm) {
-    return Intl.message(
-      '$ohm Ом',
-      name: 'I18nModuleSettings_resistorOhm',
-      args: [ohm],
-    );
-  }
+  static String resistorOhm(int ohm) => Intl.message(
+        '$ohm Ом',
+        name: 'I18nModuleSettings_resistorOhm',
+        args: [ohm],
+      );
 
   static String get enterResistor1 => Intl.message(
         'Введите значение резистора R1',
@@ -941,19 +923,15 @@ class I18nModuleSettings {
         name: 'I18nModuleSettings_setBrightness',
       );
 
-  static String brightnessInt(int brightness) {
-    return Intl.message(
-      'Яркость $brightness',
-      name: 'I18nModuleSettings_brightnessInt',
-      args: [brightness],
-    );
-  }
+  static String brightnessInt(int brightness) => Intl.message(
+        'Яркость $brightness',
+        name: 'I18nModuleSettings_brightnessInt',
+        args: [brightness],
+      );
 
-  static String unknownModuleType(String type) {
-    return Intl.message(
-      'Неизвестный тип модуля: $type',
-      name: 'I18nModuleSettings_unknownModuleType',
-      args: [type],
-    );
-  }
+  static String unknownModuleType(String type) => Intl.message(
+        'Неизвестный тип модуля: $type',
+        name: 'I18nModuleSettings_unknownModuleType',
+        args: [type],
+      );
 }

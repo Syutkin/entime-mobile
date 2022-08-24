@@ -1,1 +1,9 @@
-enum MenuButton { share, fab, addRacer, selectStartProtocol, bluetooth, countdown, importCsv }
+enum MenuButton {
+  share,
+  fab,
+  addRacer,
+  selectStartProtocol,
+  bluetooth,
+  countdown,
+  importCsv
+}

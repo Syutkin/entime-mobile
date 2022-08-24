@@ -81,8 +81,8 @@ class UpdateProvider {
       _latestRelease = await _getLatestRelease();
       if (_latestRelease != null) {
         final latestVersion = Version.parse(_latestRelease!.tagName);
-        final currentVersion = Version.parse(
-            '${_appInfo.version}+${_appInfo.buildNumber}');
+        final currentVersion =
+            Version.parse('${_appInfo.version}+${_appInfo.buildNumber}');
         if (latestVersion > currentVersion) {
           logger.i('Update_provider: Update to $latestVersion available');
           _canUpdate = true;
@@ -96,7 +96,8 @@ class UpdateProvider {
 
   Future<Release?> _getLatestRelease() async {
     final url = Uri.parse(
-        'https://api.github.com/repos/syutkin/entime-mobile/releases/latest');
+      'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
+    );
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -121,7 +122,8 @@ class UpdateProvider {
             _dir = (await getApplicationDocumentsDirectory()).path;
           }
           _downloadedFile = File(
-              '$_dir/${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk');
+            '$_dir/${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk',
+          );
 
           String url = '';
 
@@ -196,9 +198,10 @@ class UpdateProvider {
       unawaited(prefs.setString('previousVersion', packageInfo.version));
       if (currentVersion > previousVersion &&
           previousVersion != Version.parse('0.0.0')) {
-        showChangelog.show = true;
-        showChangelog.previousVersion = previousVersion.toString();
-        showChangelog.currentVersion = currentVersion.toString();
+        showChangelog
+          ..show = true
+          ..previousVersion = previousVersion.toString()
+          ..currentVersion = currentVersion.toString();
         return showChangelog;
       }
     }

@@ -9,16 +9,14 @@ class HelpPage extends StatelessWidget {
   const HelpPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(Localization.current.I18nHelp_manual),
-      ),
-      body: SafeArea(
-        child: Markdown(
-          data: _markdownData,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(Localization.current.I18nHelp_manual),
         ),
-      ),
-    );
-  }
+        body: SafeArea(
+          child: Markdown(
+            data: _markdownData,
+          ),
+        ),
+      );
 }

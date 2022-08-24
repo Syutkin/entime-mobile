@@ -20,16 +20,14 @@ class ExpandedAlertDialog extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      scrollable: scrollable,
-      title: title,
-      content: SizedBox(
-        width: width,
-        height: height,
-        child: content,
-      ),
-      actions: actions,
-    );
-  }
+  Widget build(BuildContext context) => AlertDialog(
+        scrollable: scrollable,
+        title: title,
+        content: SizedBox(
+          width: width,
+          height: height,
+          child: content,
+        ),
+        actions: actions,
+      );
 }

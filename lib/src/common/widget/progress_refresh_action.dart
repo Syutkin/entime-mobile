@@ -18,19 +18,23 @@ class ProgressRefreshAction extends StatelessWidget {
           theme.appBarTheme.actionsIconTheme ?? theme.primaryIconTheme;
       return GestureDetector(
         onTap: onPressed,
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: SizedBox(
-              width: iconTheme.size ?? 24,
-              height: iconTheme.size ?? 24,
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    iconTheme.color ?? Colors.white),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: SizedBox(
+                width: iconTheme.size ?? 24,
+                height: iconTheme.size ?? 24,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    iconTheme.color ?? Colors.white,
+                  ),
+                ),
               ),
             ),
-          ),
-        ]),
+          ],
+        ),
       );
     }
     return IconButton(

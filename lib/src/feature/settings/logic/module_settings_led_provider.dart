@@ -35,23 +35,23 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
     logger.i('Updating modsettings from json');
 
     try {
-        _modSettingsModel = modSettingsModelLedFromJson(jsonString);
+      _modSettingsModel = modSettingsModelLedFromJson(jsonString);
 
-        // Module type
-        type = _modSettingsModel.type;
+      // Module type
+      type = _modSettingsModel.type;
 
-        // Bluetooth
-        bluetooth = _modSettingsModel.bluetooth!.active;
-        bluetoothName = _modSettingsModel.bluetooth!.name;
-        bluetoothNumber = _modSettingsModel.bluetooth!.number;
+      // Bluetooth
+      bluetooth = _modSettingsModel.bluetooth!.active;
+      bluetoothName = _modSettingsModel.bluetooth!.name;
+      bluetoothNumber = _modSettingsModel.bluetooth!.number;
 
-        // WiFi
-        wifi = _modSettingsModel.wiFi!.active;
-        ssid = _modSettingsModel.wiFi!.ssid;
-        password = _modSettingsModel.wiFi!.passwd;
+      // WiFi
+      wifi = _modSettingsModel.wiFi!.active;
+      ssid = _modSettingsModel.wiFi!.ssid;
+      password = _modSettingsModel.wiFi!.passwd;
 
-        //LedPanel
-        brightness = _modSettingsModel.ledPanel!.brightness;
+      //LedPanel
+      brightness = _modSettingsModel.ledPanel!.brightness;
 
       return true;
     } on Exception catch (e) {

@@ -54,16 +54,20 @@ class LogBloc extends Bloc<LogEvent, LogState> {
 
   Future<void> _handleShowLog(ShowLog event, Emitter<LogState> emit) async {
     _log = await LogProvider.db.getLog(limit: _limit);
-    emit(LogOpen(
-      log: _log,
-      updateLogScreen: true,
-    ));
+    emit(
+      LogOpen(
+        log: _log,
+        updateLogScreen: true,
+      ),
+    );
   }
 
   void _handleHideLog(HideLog event, Emitter<LogState> emit) {
-    emit(LogOpen(
-      log: _log,
-      updateLogScreen: false,
-    ));
+    emit(
+      LogOpen(
+        log: _log,
+        updateLogScreen: false,
+      ),
+    );
   }
 }

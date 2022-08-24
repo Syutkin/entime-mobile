@@ -10,7 +10,7 @@ class ProtocolState with _$ProtocolState {
     required String databasePath,
 
     // Изменить время финиша для номера
-     bool? updateFinishNumber,
+    bool? updateFinishNumber,
 
     // Автоматический старт из стартового модуля
     // Служит для проверки, установлено ли уже стартовое время или нет
@@ -20,13 +20,13 @@ class ProtocolState with _$ProtocolState {
     // поставить новое. Запоминаем для передачи его в UI popup.
     // Используется два раза, и при установке автоматического стартового времени
     // и при ручном вводе нового времени старта
-     List<StartItem>? previousStart,
+    List<StartItem>? previousStart,
 
     // Стартовое время и номер, которые хотим установить
-     StartTime? startTime,
+    StartTime? startTime,
 
     // Автоматически подставленный в финишное время номер
-     int? autoFinishNumber,
+    int? autoFinishNumber,
 
     // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
     required int? awaitingNumber,

@@ -28,7 +28,5 @@ class ModuleSettingsType extends ModuleSettingsProvider {
   }
 
   @override
-  String get write {
-    return '';
-  }
+  String get write => '';
 }

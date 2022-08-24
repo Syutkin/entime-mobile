@@ -9,35 +9,29 @@ class Tts {
   TtsState ttsState = TtsState.stopped;
 
   Tts() {
-    flutterTts.setStartHandler(() {
-      logger.i('TTS -> Playing...');
-      ttsState = TtsState.playing;
-    });
-    flutterTts.setCompletionHandler(() {
-      logger.i('TTS -> Complete');
-      ttsState = TtsState.stopped;
-    });
-    flutterTts.setErrorHandler((msg) {
-      logger.i('TTS -> error: $msg');
-      ttsState = TtsState.stopped;
-    });
+    flutterTts
+      ..setStartHandler(() {
+        logger.i('TTS -> Playing...');
+        ttsState = TtsState.playing;
+      })
+      ..setCompletionHandler(() {
+        logger.i('TTS -> Complete');
+        ttsState = TtsState.stopped;
+      })
+      ..setErrorHandler((msg) {
+        logger.i('TTS -> error: $msg');
+        ttsState = TtsState.stopped;
+      });
   }
 
-  Future<dynamic> setLanguage(String language) {
-    return flutterTts.setLanguage(language);
-  }
+  Future<dynamic> setLanguage(String language) =>
+      flutterTts.setLanguage(language);
 
-  Future<dynamic> setVolume(double volume) {
-    return flutterTts.setVolume(volume);
-  }
+  Future<dynamic> setVolume(double volume) => flutterTts.setVolume(volume);
 
-  Future<dynamic> setSpeechRate(double rate) {
-    return flutterTts.setSpeechRate(rate);
-  }
+  Future<dynamic> setSpeechRate(double rate) => flutterTts.setSpeechRate(rate);
 
-  Future<dynamic> setPitch(double pitch) {
-    return flutterTts.setPitch(pitch);
-  }
+  Future<dynamic> setPitch(double pitch) => flutterTts.setPitch(pitch);
 
   Future<void> speak(String text) async {
     if (text.isNotEmpty) {

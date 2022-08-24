@@ -13,7 +13,7 @@ abstract class ModuleSettingsProvider {
   int txPower = 0; //0-20
   int spreadingFactor = 0; //6-12
   int signalBandwidth =
-  0; //7.8E3, 10.4E3, 15.6E3, 20.8E3, 31.25E3, 41.7E3, 62.5E3, 125E3, and 250E3
+      0; //7.8E3, 10.4E3, 15.6E3, 20.8E3, 31.25E3, 41.7E3, 62.5E3, 125E3, and 250E3
   int codingRateDenominator = 0; //5-8
   int preambleLength = 0; //6-65535
   int syncWord = 0;

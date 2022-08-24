@@ -24,39 +24,40 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Dismissible(
-      key: UniqueKey(),
-      background: Container(
+  Widget build(BuildContext context) => Dismissible(
+        key: UniqueKey(),
+        background: Container(
           color: Theme.of(context).colorScheme.secondary,
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.all(5),
-          child: Text(Localization.current.I18nProtocol_hide,
-              style: DefaultTextStyle.of(context).style.apply(
+          child: Text(
+            Localization.current.I18nProtocol_hide,
+            style: DefaultTextStyle.of(context).style.apply(
                   fontSizeFactor: 1.5,
-                  color: Theme.of(context).colorScheme.onSecondary))),
-      direction: DismissDirection.horizontal,
-      onDismissed: (direction) {
-        onDismissed?.call(direction);
-      },
-      child: GestureDetector(
-        onTapDown: (details) {
-          onTapDown?.call(details);
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+          ),
+        ),
+        onDismissed: (direction) {
+          onDismissed?.call(direction);
         },
-        child: DragTarget(
-          // не даёт переписать номер через drag'n'drop
-          onWillAccept: (data) {
-            if (item.number != null) {
-              return false;
-            } else {
-              return true;
-            }
+        child: GestureDetector(
+          onTapDown: (details) {
+            onTapDown?.call(details);
           },
-          onAccept: (data) {
-            onAccept?.call(data! as T);
-          },
-          builder: (context, candidateData, rejectedData) {
-            return Card(
+          child: DragTarget(
+            // не даёт переписать номер через drag'n'drop
+            onWillAccept: (data) {
+              if (item.number != null) {
+                return false;
+              } else {
+                return true;
+              }
+            },
+            onAccept: (data) {
+              onAccept?.call(data! as T);
+            },
+            builder: (context, candidateData, rejectedData) => Card(
               margin: const EdgeInsets.all(2),
               child: ListTile(
                 contentPadding: EdgeInsets.zero,
@@ -66,45 +67,46 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
                 onLongPress: () {
                   onLongPress?.call();
                 },
-                title: Row(children: <Widget>[
-                  Flexible(
-                    flex: 15,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: _addIcon(item.manual), //Icon(Icons.add_circle),
+                title: Row(
+                  children: <Widget>[
+                    Flexible(
+                      flex: 15,
+                      child: Align(
+                        child: _addIcon(item.manual), //Icon(Icons.add_circle),
+                      ),
                     ),
-                  ),
-                  Flexible(
-                    flex: 65,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(strip(item.finishtime),
+                    Flexible(
+                      flex: 65,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          strip(item.finishtime),
                           style: DefaultTextStyle.of(context)
                               .style
-                              .apply(fontSizeFactor: 2)),
+                              .apply(fontSizeFactor: 2),
+                        ),
+                      ),
                     ),
-                  ),
-                  Flexible(
-                    flex: 20,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
+                    Flexible(
+                      flex: 20,
+                      child: Align(
+                        child: Text(
                           candidateData.isEmpty
                               ? strip(item.number.toString())
                               : candidateData.first.toString(),
                           style: DefaultTextStyle.of(context)
                               .style
-                              .apply(fontSizeFactor: 2)),
+                              .apply(fontSizeFactor: 2),
+                        ),
+                      ),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
-            );
-          },
+            ),
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   Widget _addIcon(int? manual) {
     if (manual == 1) {

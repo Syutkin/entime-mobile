@@ -96,8 +96,10 @@ void scrollToEnd(ScrollController scrollController) {
   );
 }
 
-Future<String?> createNewProtocolFile(BuildContext context,
-    [PlatformFile? csv]) async {
+Future<String?> createNewProtocolFile(
+  BuildContext context, [
+  PlatformFile? csv,
+]) async {
   String? fileName;
   final bloc = BlocProvider.of<ProtocolBloc>(context);
   if (csv != null) {
@@ -105,7 +107,7 @@ Future<String?> createNewProtocolFile(BuildContext context,
   }
   final String? newFile = await _createFile(context, fileName);
   if (newFile != null) {
-    bloc.add(SelectProtocol(file:newFile, csv: csv));
+    bloc.add(SelectProtocol(file: newFile, csv: csv));
   }
   return newFile;
 }
@@ -117,64 +119,62 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
   return showDialog<String>(
     context: context,
     barrierDismissible: true,
-    builder: (context) {
-      return AlertDialog(
-        //scrollable: true,
-        title: const Text('Создать'),
-        content: Form(
-          key: formKey,
-          onChanged: () {
-            Form.of(primaryFocus!.context!)!.validate();
-          },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              TextFormField(
-                initialValue: initialName,
-                keyboardType: TextInputType.text,
-                autofocus: true,
-                decoration: const InputDecoration(labelText: 'Название'),
-                validator: (value) {
-                  result = value;
-                  if (value == null) {
-                    return null;
-                  }
-                  final RegExp regExp =
-                      RegExp(r'^[а-яА-ЯёЁa-zA-Z0-9\-\+\.\_! ]+$');
-                  if (regExp.hasMatch(value)) {
-                    return null;
-                  }
-                  return 'Недопустимый символ';
-                },
-              ),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              navigator.pop();
-            },
-            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-          ),
-          TextButton(
-            onPressed: () async {
-              if (formKey.currentState!.validate()) {
-                final Directory? externalStorageDirectory =
-                    await getExternalStorageDirectory();
-                String? localFileName;
-                if (externalStorageDirectory != null) {
-                  localFileName = join(externalStorageDirectory.path,
-                      basename('$result.sqlite'));
+    builder: (context) => AlertDialog(
+      //scrollable: true,
+      title: const Text('Создать'),
+      content: Form(
+        key: formKey,
+        onChanged: () {
+          Form.of(primaryFocus!.context!)!.validate();
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            TextFormField(
+              initialValue: initialName,
+              keyboardType: TextInputType.text,
+              autofocus: true,
+              decoration: const InputDecoration(labelText: 'Название'),
+              validator: (value) {
+                result = value;
+                if (value == null) {
+                  return null;
                 }
-                navigator.pop(localFileName);
+                final RegExp regExp =
+                    RegExp(r'^[а-яА-ЯёЁa-zA-Z0-9\-\+\.\_! ]+$');
+                if (regExp.hasMatch(value)) {
+                  return null;
+                }
+                return 'Недопустимый символ';
+              },
+            ),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: navigator.pop,
+          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+        ),
+        TextButton(
+          onPressed: () async {
+            if (formKey.currentState!.validate()) {
+              final Directory? externalStorageDirectory =
+                  await getExternalStorageDirectory();
+              String? localFileName;
+              if (externalStorageDirectory != null) {
+                localFileName = join(
+                  externalStorageDirectory.path,
+                  basename('$result.sqlite'),
+                );
               }
-            },
-            child: Text(MaterialLocalizations.of(context).okButtonLabel),
-          ),
-        ],
-      );
-    },
+              navigator.pop(localFileName);
+            }
+          },
+          child: Text(MaterialLocalizations.of(context).okButtonLabel),
+        ),
+      ],
+    ),
   );
 }
 
@@ -188,7 +188,7 @@ Future<void> loadFile(BuildContext context) async {
       // Если null - файл уже существовал и не перезаписываем,
       // то ничего делать не нужно
       if (file != null) {
-        protocolBloc.add(SelectProtocol(file:file.path));
+        protocolBloc.add(SelectProtocol(file: file.path));
         // Navigator.of(context).pop();
       }
     } else if (platformFile.extension == 'csv') {
@@ -203,9 +203,6 @@ Future<void> loadFile(BuildContext context) async {
 
 Future<PlatformFile?> _pickFile() async {
   final result = await FilePicker.platform.pickFiles(
-    type: FileType.any,
-    allowMultiple: false,
-    // allowedExtensions: ['sqlite', 'db', 'csv'],
     withData: true,
   );
   return result?.files.first;
@@ -244,15 +241,15 @@ File _copyFile(File sourceFile, String newPath) {
   }
 }
 
-Future<bool?> _overwriteFile(BuildContext context, String localFileName) {
-  return showDialog<bool>(
-    context: context,
-    barrierDismissible: false,
-    builder: (context) {
-      return AlertDialog(
+Future<bool?> _overwriteFile(BuildContext context, String localFileName) =>
+    showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
         title: const Text('Предупреждение'),
         content: Text(
-            'Соревнование с именем ${basename(localFileName)} уже существует и будет перезаписано'),
+          'Соревнование с именем ${basename(localFileName)} уже существует и будет перезаписано',
+        ),
         actions: <Widget>[
           TextButton(
             onPressed: () {
@@ -267,33 +264,44 @@ Future<bool?> _overwriteFile(BuildContext context, String localFileName) {
             child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
           ),
         ],
-      );
-    },
-  );
-}
+      ),
+    );
 
 TextStyle dBmTextStyle(int rssi) {
   /*  */ if (rssi >= -35) {
     return TextStyle(color: Colors.greenAccent[700]);
   } else if (rssi >= -45) {
     return TextStyle(
-        color: Color.lerp(
-            Colors.greenAccent[700], Colors.lightGreen, -(rssi + 35) / 10));
+      color: Color.lerp(
+        Colors.greenAccent[700],
+        Colors.lightGreen,
+        -(rssi + 35) / 10,
+      ),
+    );
   } else if (rssi >= -55) {
     return TextStyle(
-        color:
-            Color.lerp(Colors.lightGreen, Colors.lime[600], -(rssi + 45) / 10));
+      color: Color.lerp(Colors.lightGreen, Colors.lime[600], -(rssi + 45) / 10),
+    );
   } else if (rssi >= -65) {
     return TextStyle(
-        color: Color.lerp(Colors.lime[600], Colors.amber, -(rssi + 55) / 10));
+      color: Color.lerp(Colors.lime[600], Colors.amber, -(rssi + 55) / 10),
+    );
   } else if (rssi >= -75) {
     return TextStyle(
-        color: Color.lerp(
-            Colors.amber, Colors.deepOrangeAccent, -(rssi + 65) / 10));
+      color: Color.lerp(
+        Colors.amber,
+        Colors.deepOrangeAccent,
+        -(rssi + 65) / 10,
+      ),
+    );
   } else if (rssi >= -85) {
     return TextStyle(
-        color: Color.lerp(
-            Colors.deepOrangeAccent, Colors.redAccent, -(rssi + 75) / 10));
+      color: Color.lerp(
+        Colors.deepOrangeAccent,
+        Colors.redAccent,
+        -(rssi + 75) / 10,
+      ),
+    );
   } else {
     return const TextStyle(color: Colors.redAccent);
   }

@@ -48,8 +48,12 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     on<Tick>((event, emit) async {
       _nextStartTime == null
           ? emit(CountdownWorkingState(event.text, null))
-          : emit(CountdownWorkingState(
-              event.text, DateFormat('HH:mm:ss').format(_nextStartTime!)));
+          : emit(
+              CountdownWorkingState(
+                event.text,
+                DateFormat('HH:mm:ss').format(_nextStartTime!),
+              ),
+            );
     });
   }
 

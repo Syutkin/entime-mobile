@@ -78,7 +78,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     // });
 
     on<InitializeBluetooth>(
-        (event, emit) => _handleInitializeBluetooth(event, emit));
+      (event, emit) => _handleInitializeBluetooth(event, emit),
+    );
     on<Connect>((event, emit) => _handleConnect(event, emit));
     on<Connected>((event, emit) => _handleConnected(event, emit));
     on<Disconnect>((event, emit) => _handleDisconnect(event, emit));
@@ -100,7 +101,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   }
 
   Future<void> _handleInitializeBluetooth(
-      InitializeBluetooth event, Emitter<BluetoothConnectionState> emit) async {
+    InitializeBluetooth event,
+    Emitter<BluetoothConnectionState> emit,
+  ) async {
     _isEnabled = await bluetoothSerial.isEnabled ?? false;
     _isEnabled
         ? emit(const BluetoothDisconnectedState())
@@ -108,19 +111,25 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   }
 
   Future<void> _handleEnableBluetooth(
-      EnableBluetooth event, Emitter<BluetoothConnectionState> emit) async {
+    EnableBluetooth event,
+    Emitter<BluetoothConnectionState> emit,
+  ) async {
     await bluetoothSerial.requestEnable();
     add(InitializeBluetooth());
   }
 
   Future<void> _handleDisableBluetooth(
-      DisableBluetooth event, Emitter<BluetoothConnectionState> emit) async {
+    DisableBluetooth event,
+    Emitter<BluetoothConnectionState> emit,
+  ) async {
     await bluetoothSerial.requestDisable();
     add(InitializeBluetooth());
   }
 
   Future<void> _handleConnect(
-      Connect event, Emitter<BluetoothConnectionState> emit) async {
+    Connect event,
+    Emitter<BluetoothConnectionState> emit,
+  ) async {
     // Состояние соединения
     emit(BluetoothConnectingState());
     // Соединяемся
@@ -142,14 +151,18 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
       logger.i("Bluetooth -> Can't connect");
       emit(const BluetoothDisconnectedState());
       if (_reconnectActive) {
-        Timer(Duration(seconds: _reconnectDelay),
-            () => add(Connect(_bluetoothDevice)));
+        Timer(
+          Duration(seconds: _reconnectDelay),
+          () => add(Connect(_bluetoothDevice)),
+        );
       }
     }
   }
 
   void _handleConnected(
-      Connected event, Emitter<BluetoothConnectionState> emit) {
+    Connected event,
+    Emitter<BluetoothConnectionState> emit,
+  ) {
     //Успешное соединение
     emit(BluetoothConnectedState());
     logger.i('Bluetooth -> Connected');
@@ -157,7 +170,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   }
 
   void _handleDisconnect(
-      Disconnect event, Emitter<BluetoothConnectionState> emit) {
+    Disconnect event,
+    Emitter<BluetoothConnectionState> emit,
+  ) {
     _reconnectActive = false;
     logger.i('Bluetooth -> Disconnecting...');
     if (state is BluetoothConnectedState) {
@@ -167,7 +182,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   }
 
   Future<void> _handleDisconnected(
-      Disconnected event, Emitter<BluetoothConnectionState> emit) async {
+    Disconnected event,
+    Emitter<BluetoothConnectionState> emit,
+  ) async {
     // Если перед разъединением было состояние DisconnectingState,
     // то соединение было закрыто локально.
     // Если же состояние было другим, то соединение было закрыто удалённо.
@@ -186,7 +203,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   }
 
   void _handleMessageReceived(
-      MessageReceived event, Emitter<BluetoothConnectionState> emit) {
+    MessageReceived event,
+    Emitter<BluetoothConnectionState> emit,
+  ) {
     //Пришло соообщение из Bluetooth serial
     final DateTime timeStamp = DateTime.now();
     logger
@@ -195,20 +214,26 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   }
 
   Future<void> _handleSendMessage(
-      SendMessage event, Emitter<BluetoothConnectionState> emit) async {
+    SendMessage event,
+    Emitter<BluetoothConnectionState> emit,
+  ) async {
     //Отправлено соообщение в Bluetooth serial
     logger.i('Bluetooth -> Sent message: ${event.message}');
     await _serialConnection?.sendMessage(event.message);
-    logBloc.add(LogAdd(
-      level: LogLevel.information,
-      source: LogSource.bluetooth,
-      direction: LogSourceDirection.output,
-      rawData: event.message,
-    ));
+    logBloc.add(
+      LogAdd(
+        level: LogLevel.information,
+        source: LogSource.bluetooth,
+        direction: LogSourceDirection.output,
+        rawData: event.message,
+      ),
+    );
   }
 
   Future<void> _handleSelectDevice(
-      SelectDevice event, Emitter<BluetoothConnectionState> emit) async {
+    SelectDevice event,
+    Emitter<BluetoothConnectionState> emit,
+  ) async {
     // Если выбран новый блютусдевайс
     _reconnectActive = false;
     if (event.deviceWithAvailability != null) {
@@ -237,26 +262,35 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
 
   void _parseBT(String message, DateTime timeStamp) {
     String parsedMessage = message;
-    logBloc.add(LogAdd(
-      level: LogLevel.information,
-      source: LogSource.bluetooth,
-      direction: LogSourceDirection.input,
-      rawData: parsedMessage,
-    ));
+    logBloc.add(
+      LogAdd(
+        level: LogLevel.information,
+        source: LogSource.bluetooth,
+        direction: LogSourceDirection.input,
+        rawData: parsedMessage,
+      ),
+    );
     if (parsedMessage.startsWith(r'$') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
       final List<String> messageList = parsedMessage.split(';');
       final int? correction = int.tryParse(messageList[1]);
-      logger.d('Bluetooth -> correction: $correction');
-      logger.d('Bluetooth -> gotime: ${messageList.first}');
+      logger
+        ..d('Bluetooth -> correction: $correction')
+        ..d('Bluetooth -> gotime: ${messageList.first}');
       if (correction != null) {
         final AutomaticStart automaticStart = AutomaticStart(
-            messageList.first, correction, timeStamp,
-            updating: true);
-        protocolBloc.add(ProtocolUpdateAutomaticCorrection(automaticStart: automaticStart));
+          messageList.first,
+          correction,
+          timeStamp,
+          updating: true,
+        );
+        protocolBloc.add(
+          ProtocolUpdateAutomaticCorrection(automaticStart: automaticStart),
+        );
       } else {
         logger.e(
-            'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage');
+          'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage',
+        );
       }
     } else if (parsedMessage.startsWith('B') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
@@ -269,10 +303,12 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     } else if (parsedMessage.startsWith('F') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
       logger.v('Bluetooth -> Message parsed: finish: $parsedMessage');
-      protocolBloc.add(ProtocolAddFinishTime(
-        time: parsedMessage,
-        timeStamp: timeStamp,
-      ));
+      protocolBloc.add(
+        ProtocolAddFinishTime(
+          time: parsedMessage,
+          timeStamp: timeStamp,
+        ),
+      );
     } else if (parsedMessage.startsWith('{') && parsedMessage.endsWith('}')) {
       logger.i('Bluetooth -> Parsing JSON...');
       moduleSettingsBloc.add(GetModuleSettings(parsedMessage));
@@ -288,7 +324,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
         logger.i('Bluetooth -> Beep start $time');
       } else {
         logger.i(
-            'Bluetooth -> Cannot find participant with start time around $time');
+          'Bluetooth -> Cannot find participant with start time around $time',
+        );
       }
     } else {
       logger.i('Bluetooth -> Protocol not selected');
@@ -316,7 +353,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
         _isStarted = true;
         _isBetweenCategory = false;
         logger.d(
-            'First participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory');
+          'First participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
+        );
         newVoiceText =
             'На старт приглашается номер ${participant.first.number}';
         if (_voiceName && participant.first.name != null) {
@@ -341,7 +379,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
           _isStarted = true;
           _isBetweenCategory = false;
           logger.d(
-              'Second participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory');
+            'Second participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
+          );
           newVoiceText = 'Готовится номер ${participant.first.number}';
           if (_voiceName && participant.first.name != null) {
             newVoiceText += ', ${participant.first.name}.';
@@ -353,7 +392,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
           // сообщить сколько времени до старта след участника
           if (_isStarted && !_isBetweenCategory) {
             logger.d(
-                'Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory');
+              'Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
+            );
             participant =
                 await ProtocolProvider.db.getNextParticipants(start.first);
             if (participant.isNotEmpty) {

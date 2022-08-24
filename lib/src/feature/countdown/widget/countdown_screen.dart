@@ -8,14 +8,13 @@ class CountdownScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(Localization.current.I18nCountdown_countdown)),
-      //ToDo: страница с обратным отсчётом и звуковым сопровождением
-      // body: BlocBuilder<ManualCountdownBloc, ManualCountdownState>(
-      //     builder: (context, state) {
-      //
-      //     }),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+        appBar:
+            AppBar(title: Text(Localization.current.I18nCountdown_countdown)),
+        //ToDo: страница с обратным отсчётом и звуковым сопровождением
+        // body: BlocBuilder<ManualCountdownBloc, ManualCountdownState>(
+        //     builder: (context, state) {
+        //
+        //     }),
+      );
 }

@@ -10,10 +10,15 @@ import '../model/bluetooth.dart';
 import 'bluetooth_device_list_entry.dart';
 
 Future<void> selectBluetoothDevice(BuildContext context) async {
-  BlocProvider.of<BluetoothBloc>(context).add(SelectDevice(
-      await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-    return const SelectBondedDeviceScreen();
-  }))));
+  BlocProvider.of<BluetoothBloc>(context).add(
+    SelectDevice(
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const SelectBondedDeviceScreen(),
+        ),
+      ),
+    ),
+  );
 }
 
 class SelectBondedDeviceScreen extends StatefulWidget {
@@ -49,9 +54,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
     }
 
     // Setup a list of the bonded devices
-    FlutterBluetoothSerial.instance
-        .getBondedDevices()
-        .then((bondedDevices) {
+    FlutterBluetoothSerial.instance.getBondedDevices().then((bondedDevices) {
       setState(() {
         devices = bondedDevices
             .map(
@@ -82,8 +85,9 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
         while (i.moveNext()) {
           final device = i.current;
           if (device.device == r.device) {
-            device.availability = BluetoothDeviceAvailability.yes;
-            device.rssi = r.rssi;
+            device
+              ..availability = BluetoothDeviceAvailability.yes
+              ..rssi = r.rssi;
           }
         }
       });
@@ -106,14 +110,16 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   @override
   Widget build(BuildContext context) {
     final List<BluetoothDeviceListEntry> list = devices
-        .map((device) => BluetoothDeviceListEntry(
-              device: device.device,
-              rssi: device.rssi,
+        .map(
+          (device) => BluetoothDeviceListEntry(
+            device: device.device,
+            rssi: device.rssi,
 //      enabled: _device.availability == BluetoothDeviceAvailability.yes,
-              onTap: () {
-                Navigator.of(context).pop(device);
-              },
-            ))
+            onTap: () {
+              Navigator.of(context).pop(device);
+            },
+          ),
+        )
         .toList();
     return Scaffold(
       appBar: AppBar(

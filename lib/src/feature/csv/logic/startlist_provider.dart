@@ -27,7 +27,6 @@ Future<List<StartItemCsv>> getStartList([PlatformFile? file]) async {
 Future<PlatformFile?> _pickCsv() async {
   final FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
-    allowMultiple: false,
     allowedExtensions: ['csv'],
     withData: true,
   );

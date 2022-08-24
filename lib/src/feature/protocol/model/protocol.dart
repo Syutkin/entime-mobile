@@ -5,7 +5,7 @@ part 'protocol.g.dart';
 
 /// Start time with correction
 @freezed
-class StartItem with _$StartItem{
+class StartItem with _$StartItem {
   const factory StartItem({
     String? automaticstarttime,
     int? automaticcorrection,
@@ -24,11 +24,12 @@ class StartItem with _$StartItem{
     String? starttime,
   }) = _StartItem;
 
-  factory StartItem.fromJson(Map<String, Object?> json) => _$StartItemFromJson(json);
+  factory StartItem.fromJson(Map<String, Object?> json) =>
+      _$StartItemFromJson(json);
 }
 
 @freezed
-class FinishItem with _$FinishItem{
+class FinishItem with _$FinishItem {
   const factory FinishItem({
     required int id,
     int? number,
@@ -36,7 +37,8 @@ class FinishItem with _$FinishItem{
     String? phonetime,
     int? set,
     int? manual,
-  })= _FinishItem;
+  }) = _FinishItem;
 
-  factory FinishItem.fromJson(Map<String, Object?> json) => _$FinishItemFromJson(json);
+  factory FinishItem.fromJson(Map<String, Object?> json) =>
+      _$FinishItemFromJson(json);
 }

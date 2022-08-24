@@ -27,60 +27,63 @@ class LogScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(Localization.current.I18nLog_bluetoothInformation),
         ),
-        body: BlocBuilder<LogBloc, LogState>(builder: (context, state) {
-          if (state is LogOpen && state.log != null) {
-            // скролл на последнюю запись
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              scrollToEnd(_scrollController);
-            });
-            return Scrollbar(
-              // ToDo: при нажатии показывать всю инфу в попапе
-              // child: ListView.separated(
-              child: ListView.builder(
-                controller: _scrollController,
-                shrinkWrap: true,
-                itemCount: state.log!.length,
-                itemBuilder: (context, index) {
-                  final item = state.log![index];
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Row(children: <Widget>[
-                      Flexible(
-                        flex: 10,
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: _levelIcon(item.level),
-                        ),
+        body: BlocBuilder<LogBloc, LogState>(
+          builder: (context, state) {
+            if (state is LogOpen && state.log != null) {
+              // скролл на последнюю запись
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                scrollToEnd(_scrollController);
+              });
+              return Scrollbar(
+                // ToDo: при нажатии показывать всю инфу в попапе
+                // child: ListView.separated(
+                child: ListView.builder(
+                  controller: _scrollController,
+                  shrinkWrap: true,
+                  itemCount: state.log!.length,
+                  itemBuilder: (context, index) {
+                    final item = state.log![index];
+                    return ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Row(
+                        children: <Widget>[
+                          Flexible(
+                            flex: 10,
+                            child: Align(
+                              child: _levelIcon(item.level),
+                            ),
+                          ),
+                          Flexible(
+                            flex: 10,
+                            child: Align(
+                              child:
+                                  _logSourceIcon(item.source, item.direction),
+                            ),
+                          ),
+                          Flexible(
+                            flex: 80,
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(item.rawData),
+                            ),
+                          ),
+                        ],
                       ),
-                      Flexible(
-                        flex: 10,
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: _logSourceIcon(item.source, item.direction),
-                        ),
-                      ),
-                      Flexible(
-                        flex: 80,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(item.rawData),
-                        ),
-                      ),
-                    ]),
-                  );
-                },
-                // separatorBuilder: (BuildContext context, int index) =>
-                //     const Divider(
-                //   indent: 10,
-                //   endIndent: 10,
-                //   thickness: 2,
-                // ),
-              ),
-            );
-          } else {
-            return const CircularProgressIndicator();
-          }
-        }),
+                    );
+                  },
+                  // separatorBuilder: (BuildContext context, int index) =>
+                  //     const Divider(
+                  //   indent: 10,
+                  //   endIndent: 10,
+                  //   thickness: 2,
+                  // ),
+                ),
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
+        ),
         persistentFooterButtons:
             !kReleaseMode ? _getDebugButtons(context) : null,
       ),
@@ -126,17 +129,17 @@ class LogScreen extends StatelessWidget {
     }
   }
 
-  List<Widget> _getDebugButtons(BuildContext context) {
-    return <Widget>[
-      Row(children: <Widget>[
-        TextButton(
-          onPressed: () async {
-            BlocProvider.of<BluetoothBloc>(context)
-                .add(const MessageReceived('F12:12:12,121#'));
-          },
-          child: const Icon(Icons.build),
+  List<Widget> _getDebugButtons(BuildContext context) => <Widget>[
+        Row(
+          children: <Widget>[
+            TextButton(
+              onPressed: () async {
+                BlocProvider.of<BluetoothBloc>(context)
+                    .add(const MessageReceived('F12:12:12,121#'));
+              },
+              child: const Icon(Icons.build),
+            ),
+          ],
         ),
-      ]),
-    ];
-  }
+      ];
 }

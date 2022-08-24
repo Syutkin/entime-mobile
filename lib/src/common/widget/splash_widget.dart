@@ -6,13 +6,11 @@ class Splash extends StatelessWidget {
   const Splash({this.text, Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widget(),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
+          child: _widget(),
+        ),
+      );
 
   Widget _widget() {
     if (text != null) {

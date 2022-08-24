@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 //Future<bool> overwriteStartTime(
 //    BuildContext context, ProtocolSelectedState state) async {
-Future<bool?> overwriteStartTimePopup({required BuildContext context, required String text}) async {
-  return showDialog<bool>(
-    context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
-    builder: (context) {
-      return AlertDialog(
+Future<bool?> overwriteStartTimePopup({
+  required BuildContext context,
+  required String text,
+}) async =>
+    showDialog<bool>(
+      context: context,
+      barrierDismissible: true,
+      // dialog is dismissible with a tap on the barrier
+      builder: (context) => AlertDialog(
         title: const Text('Предупреждение'),
         content: Text(text),
 //        content: Text('Участнику под номером '
@@ -30,7 +32,5 @@ Future<bool?> overwriteStartTimePopup({required BuildContext context, required S
             child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
           ),
         ],
-      );
-    },
-  );
-}
+      ),
+    );

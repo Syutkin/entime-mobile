@@ -14,7 +14,8 @@ class ModuleSettingsBloc
 
   ModuleSettingsBloc() : super(ModuleSettingsUninitialized()) {
     on<GetModuleSettings>(
-        (event, emit) => _handleGetModuleSettings(event, emit));
+      (event, emit) => _handleGetModuleSettings(event, emit),
+    );
     // on<ModuleSettingsLoaded>((event, emit) {});
     on<UpdateModuleSettings>((event, emit) {
       emit(ModuleSettingsLoading());
@@ -23,7 +24,9 @@ class ModuleSettingsBloc
   }
 
   Future<void> _handleGetModuleSettings(
-      GetModuleSettings event, Emitter<ModuleSettingsState> emit) async {
+    GetModuleSettings event,
+    Emitter<ModuleSettingsState> emit,
+  ) async {
     emit(ModuleSettingsLoading());
     moduleSettings = ModuleSettingsType();
     bool isLoaded = await moduleSettings.update(event.json);

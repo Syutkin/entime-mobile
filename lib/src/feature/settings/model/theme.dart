@@ -59,38 +59,40 @@ extension AppThemeStr on AppTheme {
 final appThemeData = {
   AppTheme.lightBlue: ThemeData(
     colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: Colors.blue,
-      brightness: Brightness.light,
       accentColor: Colors.blue,
     ).copyWith(secondary: Colors.blue),
     toggleableActiveColor: Colors.blue,
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.blue))),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.blue),
+      ),
+    ),
     indicatorColor: Colors.blue,
   ),
   AppTheme.darkBlue: ThemeData(
     colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: Colors.blue,
       brightness: Brightness.dark,
       accentColor: Colors.blue,
     ).copyWith(secondary: Colors.blue),
     toggleableActiveColor: Colors.blue,
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.blue))),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.blue),
+      ),
+    ),
     indicatorColor: Colors.blue,
   ),
   AppTheme.lightRed: ThemeData(
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: Colors.red,
-      brightness: Brightness.light,
       accentColor: Colors.red,
     ).copyWith(secondary: Colors.red),
     toggleableActiveColor: Colors.red,
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.red))),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.red),
+      ),
+    ),
     indicatorColor: Colors.red,
   ),
   AppTheme.darkRed: ThemeData(
@@ -101,8 +103,10 @@ final appThemeData = {
     ).copyWith(secondary: Colors.red),
     toggleableActiveColor: Colors.red,
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.red))),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.red),
+      ),
+    ),
     indicatorColor: Colors.red,
   ),
 };

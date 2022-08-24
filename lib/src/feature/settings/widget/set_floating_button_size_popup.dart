@@ -8,46 +8,43 @@ Future<double?> setFloatingButtonSizePopup(
   // text = 'Размер кнопки "+"';
   double newValue = value;
   return showDialog<double>(
-      context: context,
-      barrierDismissible: true,
-      // dialog is dismissible with a tap on the barrier
-      builder: (context) {
-        return AlertDialog(
-          title: Text(text),
-          content: StatefulBuilder(
-            builder: (context, setState) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Slider(
-                    value: newValue,
-                    min: 50,
-                    max: 200,
-                    label: Localization.current
-                        .I18nSettings_pixelSize(newValue.round()),
-                    divisions: 150,
-                    onChanged: (value) {
-                      setState(() => newValue = value);
-                    },
-                  ),
-                ],
-              );
-            },
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
+    context: context,
+    barrierDismissible: true,
+    // dialog is dismissible with a tap on the barrier
+    builder: (context) => AlertDialog(
+      title: Text(text),
+      content: StatefulBuilder(
+        builder: (context, setState) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Slider(
+              value: newValue,
+              min: 50,
+              max: 200,
+              label:
+                  Localization.current.I18nSettings_pixelSize(newValue.round()),
+              divisions: 150,
+              onChanged: (value) {
+                setState(() => newValue = value);
               },
-              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(newValue);
-              },
-              child: Text(MaterialLocalizations.of(context).okButtonLabel),
             ),
           ],
-        );
-      });
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(newValue);
+          },
+          child: Text(MaterialLocalizations.of(context).okButtonLabel),
+        ),
+      ],
+    ),
+  );
 }

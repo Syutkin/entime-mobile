@@ -30,14 +30,19 @@ class AboutPopup extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ListBody(
                     children: <Widget>[
-                      Text(BlocProvider.of<AppInfoCubit>(context).appName,
-                          style: Theme.of(context).textTheme.headline5),
                       Text(
-                          'Версия: ${BlocProvider.of<AppInfoCubit>(context).version}',
-                          style: Theme.of(context).textTheme.bodyText2),
+                        BlocProvider.of<AppInfoCubit>(context).appName,
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                      Text(
+                        'Версия: ${BlocProvider.of<AppInfoCubit>(context).version}',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
                       const SizedBox(height: _textVerticalSeparation),
-                      Text('© 2021 Andrey Syutkin',
-                          style: Theme.of(context).textTheme.caption),
+                      Text(
+                        '© 2021 Andrey Syutkin',
+                        style: Theme.of(context).textTheme.caption,
+                      ),
                       const SizedBox(height: _textVerticalSeparation),
                       RichText(
                         text: TextSpan(
@@ -59,17 +64,18 @@ class AboutPopup extends StatelessWidget {
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () async {
                                   final Uri emailLaunchUri = Uri(
-                                      scheme: 'mailto',
-                                      path: 'syutkin@fraction.team',
-                                      queryParameters: {
-                                        'subject':
-                                            'Entime замечания/предложения'
-                                      });
+                                    scheme: 'mailto',
+                                    path: 'syutkin@fraction.team',
+                                    queryParameters: {
+                                      'subject': 'Entime замечания/предложения'
+                                    },
+                                  );
                                   if (await canLaunchUrl(emailLaunchUri)) {
                                     await launchUrl(emailLaunchUri);
                                   } else {
                                     final Error error = ArgumentError(
-                                        'Could not launch $emailLaunchUri');
+                                      'Could not launch $emailLaunchUri',
+                                    );
                                     throw error;
                                   }
                                 },
@@ -91,9 +97,12 @@ class AboutPopup extends StatelessWidget {
             final navigator = Navigator.of(context);
             final String changelogData =
                 await rootBundle.loadString('CHANGELOG.md');
-            await navigator.push(MaterialPageRoute<void>(
+            await navigator.push(
+              MaterialPageRoute<void>(
                 builder: (context) =>
-                    ChangelogScreen(markdownData: changelogData)));
+                    ChangelogScreen(markdownData: changelogData),
+              ),
+            );
           },
           child: const Text('Список изменений'),
         ),

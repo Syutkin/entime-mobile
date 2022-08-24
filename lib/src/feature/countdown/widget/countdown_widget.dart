@@ -36,9 +36,11 @@ class CountdownWidget extends StatelessWidget {
         child: FittedBox(
           child: Padding(
             padding: const EdgeInsets.all(8),
-            child: Text(text,
-                style: floatingActionButtonTheme.extendedTextStyle ??
-                    theme.textTheme.button!.copyWith(color: foregroundColor)),
+            child: Text(
+              text,
+              style: floatingActionButtonTheme.extendedTextStyle ??
+                  theme.textTheme.button!.copyWith(color: foregroundColor),
+            ),
           ),
         ),
       ),
