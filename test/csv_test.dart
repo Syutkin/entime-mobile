@@ -17,7 +17,7 @@ void main() async {
 
   group('csv_utils:', () {
     final csv = referenceFile.readAsStringSync();
-    test('CsvToMapConverter and mapListToCsv', () async {
+    test('CsvToMapConverter and mapListToCsv', () {
       // Считываем тестовый файл, конвертим из csv и обратно,
       // вырезаем первую строку с заголовками,
       // сравниваем получившиеся списки
