@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:entime/src/common/csv/csv_utils.dart';
+import 'package:entime/src/common/logger/logger.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,6 +10,8 @@ void main() async {
   final Directory directory = await getApplicationDocumentsDirectory();
   final File testFile = File(join(directory.path, 'test_csv.csv'));
   final referenceFile = File('test/startlist.csv');
+  logger..d(referenceFile.path)
+  ..d(referenceFile.readAsStringSync());
   if (testFile.existsSync()) {
     testFile.deleteSync();
   }
