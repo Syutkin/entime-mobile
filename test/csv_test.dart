@@ -27,6 +27,9 @@ void main() async {
       logger.d(csvMapCsv);
       testFile.writeAsStringSync(csvMapCsv ?? '');
 
+      logger..d('testFile: ${testFile.readAsLinesSync()}')
+      ..d('referenceFile: ${testFile.readAsLinesSync()}');
+
       final referenceLines = referenceFile.readAsLinesSync()..removeAt(0);
       final testLines = testFile.readAsLinesSync()..removeAt(0);
       expect(testLines, referenceLines);
