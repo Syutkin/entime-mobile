@@ -322,7 +322,8 @@ class __$$_ReleaseCopyWithImpl<$Res> extends _$ReleaseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class _$_Release implements _Release {
   const _$_Release(
       {required this.url,
@@ -768,7 +769,8 @@ class __$$_AssetCopyWithImpl<$Res> extends _$AssetCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class _$_Asset implements _Asset {
   const _$_Asset(
       {required this.url,
@@ -1219,7 +1221,8 @@ class __$$_AuthorCopyWithImpl<$Res> extends _$AuthorCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class _$_Author implements _Author {
   const _$_Author(
       {required this.login,

@@ -103,7 +103,7 @@ class UpdateProvider {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         return Release.fromJson(
-            jsonDecode(response.body) as Map<String, dynamic>);
+            jsonDecode(response.body) as Map<String, dynamic>,);
       } else {
         logger.d('StatusCode: ${response.statusCode}');
         return null;

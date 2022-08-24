@@ -46,7 +46,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
         type: type,
         // Bluetooth
         bluetooth: Bluetooth(
-            active: bluetooth, name: bluetoothName, number: bluetoothNumber),
+            active: bluetooth, name: bluetoothName, number: bluetoothNumber,),
         // WiFi
         wiFi: WiFi(active: wifi, ssid: ssid, passwd: password),
         //LedPanel

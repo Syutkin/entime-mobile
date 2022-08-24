@@ -56,7 +56,6 @@ String? mapListToCsv(
 Future<String?> saveCsv(String csv, String suffix, String filePath) async {
   final directory = await getExternalStorageDirectory();
   if (directory == null) {
-    assert(directory != null, 'directory must not be null');
     return null;
   }
   final file = File(
