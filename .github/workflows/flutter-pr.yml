@@ -36,8 +36,9 @@ jobs:
         run: flutter test --coverage test/
 
       - name: Clean coverage
-        run: sudo apt-get -y install lcov
-        run: lcov -r coverage/lcov.info -o coverage/lcov.info "lib/**.freezed.dart" "lib/**.g.dart" "lib/src/common/localization/generated/**.dart"
+        run: | 
+          sudo apt-get -y install lcov
+          lcov -r coverage/lcov.info -o coverage/lcov.info "lib/**.freezed.dart" "lib/**.g.dart" "lib/src/common/localization/generated/**.dart"
         
       - name: Upload to Codecov
         uses: codecov/codecov-action@v3.1.0
