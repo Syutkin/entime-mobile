@@ -36,12 +36,7 @@ class UpdateProvider {
   late VoidCallback _onDownloadComplete;
   late ErrorHandler _onError;
 
-  String get latestVersion {
-    if (_latestRelease != null) {
-      return _latestRelease!.tagName;
-    }
-    return '';
-  }
+  String get latestVersion => _latestRelease?.tagName ?? '';
 
   int? _updateFileSize = -1;
 

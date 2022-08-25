@@ -202,6 +202,56 @@ void main() async {
     // });
   });
 
+  group('UpdateProvider.latestVersion', () {
+    test('latestVersion exists', () async {
+      when(
+        client.get(
+          Uri.parse(
+            'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
+          ),
+        ),
+      ).thenAnswer(
+        (_) async => http.Response(
+          _githubResponse,
+          200,
+        ),
+      );
+
+      final updater = await UpdateProvider.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      await updater.isUpdateAvailable();
+
+      expect(updater.latestVersion, '0.4.4');
+    });
+
+    test('latestVersion did not exists', () async {
+      when(
+        client.get(
+          Uri.parse(
+            'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
+          ),
+        ),
+      ).thenAnswer(
+        (_) async => http.Response(
+          _githubResponse,
+          404,
+        ),
+      );
+
+      final updater = await UpdateProvider.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      expect(updater.latestVersion, '');
+    });
+  });
+
   group('UpdateProvider.showChangelog', () {
     test('First start', () async {
       final updater = await UpdateProvider.init(
@@ -296,28 +346,6 @@ void main() async {
     });
   });
 }
-
-// Future<ShowChangelog> showChangelog() async {
-//   final settings = _settingsProvider.settings;
-//   final previousVersion = Version.parse(settings.previousVersion);
-//   final currentVersion = Version.parse(_appInfo.version);
-//   // Не показывать ченджлог для не релизных версий и первого запуска
-//   // Не изменять значение последней запущенной версии для не релизных версий
-//   if (!currentVersion.isPreRelease) {
-//     await _settingsProvider
-//         .update(settings.copyWith(previousVersion: _appInfo.version));
-//     if (currentVersion > previousVersion &&
-//         previousVersion !=
-//             Version.parse(_settingsProvider.getDefaults().previousVersion)) {
-//       return ShowChangelog(
-//         show: true,
-//         previousVersion: previousVersion.toString(),
-//         currentVersion: currentVersion.toString(),
-//       );
-//     }
-//   }
-//   return const ShowChangelog();
-// }
 
 String _githubResponse = '''
 {
