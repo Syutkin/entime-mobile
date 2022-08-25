@@ -38,13 +38,15 @@ Future<void> main() async {
 Future<void> runMain() async {
   final packageInfo = await PackageInfo.fromPlatform();
   final androidInfo = await DeviceInfoPlugin().androidInfo;
-  final AppInfoProvider appInfo = await AppInfoProvider.load(
+  final settings = await SharedPrefsSettingsProvider.load();
+  final appInfo = await AppInfoProvider.load(
     deviceInfo: androidInfo,
     packageInfo: packageInfo,
   );
   final UpdateProvider updater = await UpdateProvider.init(
     client: http.Client(),
     appInfoProvider: appInfo,
+    settingsProvider: settings,
   );
   final FlutterBluetoothSerial flutterBluetoothSerial =
       FlutterBluetoothSerial.instance;
@@ -54,7 +56,7 @@ Future<void> runMain() async {
     flutterBluetoothSerial: flutterBluetoothSerial,
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
-  final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
+
   final AudioService audioService = AudioService(settings: settings);
   runApp(
     MultiBlocProvider(

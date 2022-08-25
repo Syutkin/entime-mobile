@@ -66,6 +66,9 @@ class AppSettings with _$AppSettings {
 
     // активная тема
     required AppTheme appTheme,
+
+    // версия при предыдущем запуске
+    required String previousVersion,
   }) = _AppSettings;
 
   const factory AppSettings.defaults({
@@ -128,5 +131,8 @@ class AppSettings with _$AppSettings {
 
     // активная тема
     @Default(AppTheme.lightBlue) AppTheme appTheme,
+
+    // версия при предыдущем запуске
+    @Default('0.0.0') String previousVersion,
   }) = _AppSettingsDefaults;
 }

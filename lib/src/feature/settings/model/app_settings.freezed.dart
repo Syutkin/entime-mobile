@@ -58,7 +58,9 @@ mixin _$AppSettings {
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   int get logLimit => throw _privateConstructorUsedError; // активная тема
-  AppTheme get appTheme => throw _privateConstructorUsedError;
+  AppTheme get appTheme =>
+      throw _privateConstructorUsedError; // версия при предыдущем запуске
+  String get previousVersion => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
@@ -90,7 +92,8 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)
+            AppTheme appTheme,
+            String previousVersion)
         $default, {
     required TResult Function(
             bool sound,
@@ -121,7 +124,8 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)
+            AppTheme appTheme,
+            String previousVersion)
         defaults,
   }) =>
       throw _privateConstructorUsedError;
@@ -156,7 +160,8 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         $default, {
     TResult Function(
             bool sound,
@@ -187,7 +192,8 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         defaults,
   }) =>
       throw _privateConstructorUsedError;
@@ -222,7 +228,8 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         $default, {
     TResult Function(
             bool sound,
@@ -253,7 +260,8 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         defaults,
     required TResult orElse(),
   }) =>
@@ -317,7 +325,8 @@ abstract class $AppSettingsCopyWith<$Res> {
       bool substituteNumbers,
       int substituteNumbersDelay,
       int logLimit,
-      AppTheme appTheme});
+      AppTheme appTheme,
+      String previousVersion});
 }
 
 /// @nodoc
@@ -359,6 +368,7 @@ class _$AppSettingsCopyWithImpl<$Res> implements $AppSettingsCopyWith<$Res> {
     Object? substituteNumbersDelay = freezed,
     Object? logLimit = freezed,
     Object? appTheme = freezed,
+    Object? previousVersion = freezed,
   }) {
     return _then(_value.copyWith(
       sound: sound == freezed
@@ -477,6 +487,10 @@ class _$AppSettingsCopyWithImpl<$Res> implements $AppSettingsCopyWith<$Res> {
           ? _value.appTheme
           : appTheme // ignore: cast_nullable_to_non_nullable
               as AppTheme,
+      previousVersion: previousVersion == freezed
+          ? _value.previousVersion
+          : previousVersion // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -517,7 +531,8 @@ abstract class _$$_AppSettingsCopyWith<$Res>
       bool substituteNumbers,
       int substituteNumbersDelay,
       int logLimit,
-      AppTheme appTheme});
+      AppTheme appTheme,
+      String previousVersion});
 }
 
 /// @nodoc
@@ -561,6 +576,7 @@ class __$$_AppSettingsCopyWithImpl<$Res> extends _$AppSettingsCopyWithImpl<$Res>
     Object? substituteNumbersDelay = freezed,
     Object? logLimit = freezed,
     Object? appTheme = freezed,
+    Object? previousVersion = freezed,
   }) {
     return _then(_$_AppSettings(
       sound: sound == freezed
@@ -679,6 +695,10 @@ class __$$_AppSettingsCopyWithImpl<$Res> extends _$AppSettingsCopyWithImpl<$Res>
           ? _value.appTheme
           : appTheme // ignore: cast_nullable_to_non_nullable
               as AppTheme,
+      previousVersion: previousVersion == freezed
+          ? _value.previousVersion
+          : previousVersion // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -715,7 +735,8 @@ class _$_AppSettings implements _AppSettings {
       required this.substituteNumbers,
       required this.substituteNumbersDelay,
       required this.logLimit,
-      required this.appTheme});
+      required this.appTheme,
+      required this.previousVersion});
 
 // звук
   @override
@@ -796,10 +817,13 @@ class _$_AppSettings implements _AppSettings {
 // активная тема
   @override
   final AppTheme appTheme;
+// версия при предыдущем запуске
+  @override
+  final String previousVersion;
 
   @override
   String toString() {
-    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme)';
+    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
   }
 
   @override
@@ -849,7 +873,9 @@ class _$_AppSettings implements _AppSettings {
             const DeepCollectionEquality()
                 .equals(other.substituteNumbersDelay, substituteNumbersDelay) &&
             const DeepCollectionEquality().equals(other.logLimit, logLimit) &&
-            const DeepCollectionEquality().equals(other.appTheme, appTheme));
+            const DeepCollectionEquality().equals(other.appTheme, appTheme) &&
+            const DeepCollectionEquality()
+                .equals(other.previousVersion, previousVersion));
   }
 
   @override
@@ -883,7 +909,8 @@ class _$_AppSettings implements _AppSettings {
         const DeepCollectionEquality().hash(substituteNumbers),
         const DeepCollectionEquality().hash(substituteNumbersDelay),
         const DeepCollectionEquality().hash(logLimit),
-        const DeepCollectionEquality().hash(appTheme)
+        const DeepCollectionEquality().hash(appTheme),
+        const DeepCollectionEquality().hash(previousVersion)
       ]);
 
   @JsonKey(ignore: true)
@@ -923,7 +950,8 @@ class _$_AppSettings implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)
+            AppTheme appTheme,
+            String previousVersion)
         $default, {
     required TResult Function(
             bool sound,
@@ -954,7 +982,8 @@ class _$_AppSettings implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)
+            AppTheme appTheme,
+            String previousVersion)
         defaults,
   }) {
     return $default(
@@ -986,7 +1015,8 @@ class _$_AppSettings implements _AppSettings {
         substituteNumbers,
         substituteNumbersDelay,
         logLimit,
-        appTheme);
+        appTheme,
+        previousVersion);
   }
 
   @override
@@ -1021,7 +1051,8 @@ class _$_AppSettings implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         $default, {
     TResult Function(
             bool sound,
@@ -1052,7 +1083,8 @@ class _$_AppSettings implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         defaults,
   }) {
     return $default?.call(
@@ -1084,7 +1116,8 @@ class _$_AppSettings implements _AppSettings {
         substituteNumbers,
         substituteNumbersDelay,
         logLimit,
-        appTheme);
+        appTheme,
+        previousVersion);
   }
 
   @override
@@ -1119,7 +1152,8 @@ class _$_AppSettings implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         $default, {
     TResult Function(
             bool sound,
@@ -1150,7 +1184,8 @@ class _$_AppSettings implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         defaults,
     required TResult orElse(),
   }) {
@@ -1184,7 +1219,8 @@ class _$_AppSettings implements _AppSettings {
           substituteNumbers,
           substituteNumbersDelay,
           logLimit,
-          appTheme);
+          appTheme,
+          previousVersion);
     }
     return orElse();
   }
@@ -1251,7 +1287,8 @@ abstract class _AppSettings implements AppSettings {
       required final bool substituteNumbers,
       required final int substituteNumbersDelay,
       required final int logLimit,
-      required final AppTheme appTheme}) = _$_AppSettings;
+      required final AppTheme appTheme,
+      required final String previousVersion}) = _$_AppSettings;
 
   @override // звук
   bool get sound;
@@ -1314,6 +1351,8 @@ abstract class _AppSettings implements AppSettings {
   int get logLimit;
   @override // активная тема
   AppTheme get appTheme;
+  @override // версия при предыдущем запуске
+  String get previousVersion;
   @override
   @JsonKey(ignore: true)
   _$$_AppSettingsCopyWith<_$_AppSettings> get copyWith =>
@@ -1356,7 +1395,8 @@ abstract class _$$_AppSettingsDefaultsCopyWith<$Res>
       bool substituteNumbers,
       int substituteNumbersDelay,
       int logLimit,
-      AppTheme appTheme});
+      AppTheme appTheme,
+      String previousVersion});
 }
 
 /// @nodoc
@@ -1401,6 +1441,7 @@ class __$$_AppSettingsDefaultsCopyWithImpl<$Res>
     Object? substituteNumbersDelay = freezed,
     Object? logLimit = freezed,
     Object? appTheme = freezed,
+    Object? previousVersion = freezed,
   }) {
     return _then(_$_AppSettingsDefaults(
       sound: sound == freezed
@@ -1519,6 +1560,10 @@ class __$$_AppSettingsDefaultsCopyWithImpl<$Res>
           ? _value.appTheme
           : appTheme // ignore: cast_nullable_to_non_nullable
               as AppTheme,
+      previousVersion: previousVersion == freezed
+          ? _value.previousVersion
+          : previousVersion // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -1555,7 +1600,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
       this.substituteNumbers = false,
       this.substituteNumbersDelay = 500,
       this.logLimit = -1,
-      this.appTheme = AppTheme.lightBlue});
+      this.appTheme = AppTheme.lightBlue,
+      this.previousVersion = '0.0.0'});
 
 // звук
   @override
@@ -1665,10 +1711,14 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final AppTheme appTheme;
+// версия при предыдущем запуске
+  @override
+  @JsonKey()
+  final String previousVersion;
 
   @override
   String toString() {
-    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme)';
+    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
   }
 
   @override
@@ -1718,7 +1768,9 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             const DeepCollectionEquality()
                 .equals(other.substituteNumbersDelay, substituteNumbersDelay) &&
             const DeepCollectionEquality().equals(other.logLimit, logLimit) &&
-            const DeepCollectionEquality().equals(other.appTheme, appTheme));
+            const DeepCollectionEquality().equals(other.appTheme, appTheme) &&
+            const DeepCollectionEquality()
+                .equals(other.previousVersion, previousVersion));
   }
 
   @override
@@ -1752,7 +1804,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
         const DeepCollectionEquality().hash(substituteNumbers),
         const DeepCollectionEquality().hash(substituteNumbersDelay),
         const DeepCollectionEquality().hash(logLimit),
-        const DeepCollectionEquality().hash(appTheme)
+        const DeepCollectionEquality().hash(appTheme),
+        const DeepCollectionEquality().hash(previousVersion)
       ]);
 
   @JsonKey(ignore: true)
@@ -1793,7 +1846,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)
+            AppTheme appTheme,
+            String previousVersion)
         $default, {
     required TResult Function(
             bool sound,
@@ -1824,7 +1878,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)
+            AppTheme appTheme,
+            String previousVersion)
         defaults,
   }) {
     return defaults(
@@ -1856,7 +1911,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
         substituteNumbers,
         substituteNumbersDelay,
         logLimit,
-        appTheme);
+        appTheme,
+        previousVersion);
   }
 
   @override
@@ -1891,7 +1947,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         $default, {
     TResult Function(
             bool sound,
@@ -1922,7 +1979,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         defaults,
   }) {
     return defaults?.call(
@@ -1954,7 +2012,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
         substituteNumbers,
         substituteNumbersDelay,
         logLimit,
-        appTheme);
+        appTheme,
+        previousVersion);
   }
 
   @override
@@ -1989,7 +2048,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         $default, {
     TResult Function(
             bool sound,
@@ -2020,7 +2080,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int logLimit,
-            AppTheme appTheme)?
+            AppTheme appTheme,
+            String previousVersion)?
         defaults,
     required TResult orElse(),
   }) {
@@ -2054,7 +2115,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
           substituteNumbers,
           substituteNumbersDelay,
           logLimit,
-          appTheme);
+          appTheme,
+          previousVersion);
     }
     return orElse();
   }
@@ -2121,7 +2183,8 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final bool substituteNumbers,
       final int substituteNumbersDelay,
       final int logLimit,
-      final AppTheme appTheme}) = _$_AppSettingsDefaults;
+      final AppTheme appTheme,
+      final String previousVersion}) = _$_AppSettingsDefaults;
 
   @override // звук
   bool get sound;
@@ -2184,6 +2247,8 @@ abstract class _AppSettingsDefaults implements AppSettings {
   int get logLimit;
   @override // активная тема
   AppTheme get appTheme;
+  @override // версия при предыдущем запуске
+  String get previousVersion;
   @override
   @JsonKey(ignore: true)
   _$$_AppSettingsDefaultsCopyWith<_$_AppSettingsDefaults> get copyWith =>

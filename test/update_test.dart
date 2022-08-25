@@ -1,4 +1,5 @@
 import 'package:entime/src/feature/app_info/app_info.dart';
+import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/update/update.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,24 +12,26 @@ import 'update_test.mocks.dart';
 // Generate a MockClient using the Mockito package.
 // Create new instances of this class in each test.
 @GenerateMocks([http.Client, AppInfoProvider])
-void main() {
-  group('UpdateProvider:', () {
-    test('Initialize', () async {
-      final client = MockClient();
-      final appInfoProvider = MockAppInfoProvider();
+void main() async {
+  final client = MockClient();
+  final appInfoProvider = MockAppInfoProvider();
+  final settings = await SharedPrefsSettingsProvider.load();
 
+  group('UpdateProvider.init', () {
+    test('Initialize', () async {
       expect(
         await UpdateProvider.init(
           client: client,
           appInfoProvider: appInfoProvider,
+          settingsProvider: settings,
         ),
         isA<UpdateProvider>(),
       );
     });
-    test('Update available', () async {
-      final client = MockClient();
-      final appInfoProvider = MockAppInfoProvider();
+  });
 
+  group('UpdateProvider.isUpdateAvailable', () {
+    test('Update available', () async {
       when(
         appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'Entime');
@@ -57,15 +60,13 @@ void main() {
       final updater = await UpdateProvider.init(
         client: client,
         appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
       );
 
       expect(await updater.isUpdateAvailable(), true);
     });
 
     test('Update unavailable, you get a latest version', () async {
-      final client = MockClient();
-      final appInfoProvider = MockAppInfoProvider();
-
       when(
         appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'Entime');
@@ -94,15 +95,13 @@ void main() {
       final updater = await UpdateProvider.init(
         client: client,
         appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
       );
 
       expect(await updater.isUpdateAvailable(), false);
     });
 
     test('Incorrect response from github api', () async {
-      final client = MockClient();
-      final appInfoProvider = MockAppInfoProvider();
-
       when(
         appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'Entime');
@@ -130,9 +129,6 @@ void main() {
     });
 
     test('404 not found', () async {
-      final client = MockClient();
-      final appInfoProvider = MockAppInfoProvider();
-
       when(
         appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'Entime');
@@ -161,6 +157,7 @@ void main() {
       final updater = await UpdateProvider.init(
         client: client,
         appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
       );
 
       expect(await updater.isUpdateAvailable(), false);
@@ -204,7 +201,123 @@ void main() {
     //   expect(await updater.isUpdateAvailable(), false);
     // });
   });
+
+  group('UpdateProvider.showChangelog', () {
+    test('First start', () async {
+      final updater = await UpdateProvider.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      await settings.setDefaults();
+
+      when(
+        appInfoProvider.version,
+      ).thenAnswer(
+        (realInvocation) => '1.0.1',
+      );
+
+      expect(
+        await updater.showChangelog(),
+        const ShowChangelog(),
+      );
+      // Текущая версия должна быть сохранена в настройках
+      expect(
+        settings.settings.previousVersion,
+        '1.0.1',
+      );
+    });
+
+    test('Second start', () async {
+      final updater = await UpdateProvider.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      when(
+        appInfoProvider.version,
+      ).thenAnswer(
+        (realInvocation) => '1.0.1',
+      );
+
+      expect(
+        await updater.showChangelog(),
+        const ShowChangelog(),
+      );
+    });
+
+    test('Program updated', () async {
+      final updater = await UpdateProvider.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      when(
+        appInfoProvider.version,
+      ).thenAnswer(
+        (realInvocation) => '2.0.1',
+      );
+
+      expect(
+        await updater.showChangelog(),
+        const ShowChangelog(
+          show: true,
+          currentVersion: '2.0.1',
+          previousVersion: '1.0.1',
+        ),
+      );
+    });
+
+    test('Updated to dev version', () async {
+      final updater = await UpdateProvider.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      when(
+        appInfoProvider.version,
+      ).thenAnswer(
+        (realInvocation) => '3.0.5-dev',
+      );
+
+      // на dev версиях не покаываем ченджлог и не сохраняем версию в настройки
+      expect(
+        await updater.showChangelog(),
+        const ShowChangelog(),
+      );
+      expect(
+        settings.settings.previousVersion,
+        '2.0.1',
+      );
+    });
+  });
 }
+
+// Future<ShowChangelog> showChangelog() async {
+//   final settings = _settingsProvider.settings;
+//   final previousVersion = Version.parse(settings.previousVersion);
+//   final currentVersion = Version.parse(_appInfo.version);
+//   // Не показывать ченджлог для не релизных версий и первого запуска
+//   // Не изменять значение последней запущенной версии для не релизных версий
+//   if (!currentVersion.isPreRelease) {
+//     await _settingsProvider
+//         .update(settings.copyWith(previousVersion: _appInfo.version));
+//     if (currentVersion > previousVersion &&
+//         previousVersion !=
+//             Version.parse(_settingsProvider.getDefaults().previousVersion)) {
+//       return ShowChangelog(
+//         show: true,
+//         previousVersion: previousVersion.toString(),
+//         currentVersion: currentVersion.toString(),
+//       );
+//     }
+//   }
+//   return const ShowChangelog();
+// }
 
 String _githubResponse = '''
 {

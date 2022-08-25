@@ -75,6 +75,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       logLimit:
           prefs.getInt('logLimit') ?? const AppSettings.defaults().logLimit,
       appTheme: themeFromString(prefs.getString('theme')),
+      previousVersion: prefs.getString('previousVersion') ??
+          const AppSettings.defaults().previousVersion,
     );
 
     await Wakelock.toggle(enable: settings.wakelock);
@@ -89,6 +91,9 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   Future<void> update(AppSettings settings) async {
     await _save(settings);
   }
+
+  @override
+  AppSettings getDefaults() => const AppSettings.defaults();
 
   @override
   Future<void> setDefaults() async {
@@ -131,6 +136,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     );
     await _prefs.setInt('log_limit', settings.logLimit);
     await _prefs.setString('theme', settings.appTheme.stringify);
+    await _prefs.setString('previousVersion', settings.previousVersion);
 
     _settings = settings;
     _appSettingsController.add(_settings);

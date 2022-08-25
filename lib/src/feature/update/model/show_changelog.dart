@@ -1,11 +1,12 @@
-class ShowChangelog {
-  String? previousVersion;
-  String? currentVersion;
-  bool show;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  ShowChangelog({
-    this.currentVersion,
-    this.previousVersion,
-    this.show = false,
-  });
+part 'show_changelog.freezed.dart';
+
+@freezed
+class ShowChangelog with _$ShowChangelog {
+  const factory ShowChangelog({
+    String? previousVersion,
+    String? currentVersion,
+    @Default(false) bool show,
+  }) = _ShowChangelog;
 }

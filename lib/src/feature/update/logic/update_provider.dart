@@ -1,4 +1,4 @@
-// ignore_for_file: use_setters_to_change_properties, inference_failure_on_untyped_parameter, require_trailing_commas
+// ignore_for_file: use_setters_to_change_properties
 
 import 'dart:async';
 import 'dart:convert';
@@ -7,14 +7,13 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_filex/open_filex.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pub_semver/pub_semver.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../app_info/logic/app_info_provider.dart';
+import '../../settings/settings.dart';
 import '../model/show_changelog.dart';
 import '../model/updater.dart';
 
@@ -32,6 +31,7 @@ class UpdateProvider {
   File? _downloadedFile;
 
   final AppInfoProvider _appInfo;
+  final SettingsProvider _settingsProvider;
   late DownloadHandler _downloadHandler;
   late VoidCallback _onDownloadComplete;
   late ErrorHandler _onError;
@@ -48,14 +48,17 @@ class UpdateProvider {
   UpdateProvider._(
     http.Client client,
     AppInfoProvider appInfo,
+    SettingsProvider settingsProvider,
   )   : _client = client,
-        _appInfo = appInfo;
+        _appInfo = appInfo,
+        _settingsProvider = settingsProvider;
 
   static Future<UpdateProvider> init({
     required http.Client client,
     required AppInfoProvider appInfoProvider,
+    required SettingsProvider settingsProvider,
   }) async =>
-      UpdateProvider._(client, appInfoProvider);
+      UpdateProvider._(client, appInfoProvider, settingsProvider);
 
   void setDownloadingHandler(DownloadHandler callback) {
     _downloadHandler = callback;
@@ -186,25 +189,26 @@ class UpdateProvider {
   }
 
   Future<ShowChangelog> showChangelog() async {
-    final ShowChangelog showChangelog = ShowChangelog();
-    final packageInfo = await PackageInfo.fromPlatform();
-    final prefs = await SharedPreferences.getInstance();
+    // final settings = _settingsProvider.settings;
     final previousVersion =
-        Version.parse(prefs.getString('previousVersion') ?? '0.0.0');
-    final currentVersion = Version.parse(packageInfo.version);
+        Version.parse(_settingsProvider.settings.previousVersion);
+    final currentVersion = Version.parse(_appInfo.version);
     // Не показывать ченджлог для не релизных версий и первого запуска
     // Не изменять значение последней запущенной версии для не релизных версий
     if (!currentVersion.isPreRelease) {
-      unawaited(prefs.setString('previousVersion', packageInfo.version));
+      await _settingsProvider.update(
+        _settingsProvider.settings.copyWith(previousVersion: _appInfo.version),
+      );
       if (currentVersion > previousVersion &&
-          previousVersion != Version.parse('0.0.0')) {
-        showChangelog
-          ..show = true
-          ..previousVersion = previousVersion.toString()
-          ..currentVersion = currentVersion.toString();
-        return showChangelog;
+          previousVersion !=
+              Version.parse(_settingsProvider.getDefaults().previousVersion)) {
+        return ShowChangelog(
+          show: true,
+          previousVersion: previousVersion.toString(),
+          currentVersion: currentVersion.toString(),
+        );
       }
     }
-    return showChangelog;
+    return const ShowChangelog();
   }
 }

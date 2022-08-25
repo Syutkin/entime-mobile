@@ -6,5 +6,7 @@ abstract class SettingsProvider with ReactiveState<AppSettings> {
 
   Future<void> update(AppSettings settings);
 
+  AppSettings getDefaults();
+
   Future<void> setDefaults();
 }
