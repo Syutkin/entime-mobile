@@ -1,8 +1,11 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:http/http.dart' as http;
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'src/common/bloc/app_bloc_observer.dart';
 import 'src/common/localization/localization.dart';
@@ -33,9 +36,17 @@ Future<void> main() async {
 }
 
 Future<void> runMain() async {
-  final UpdateProvider updater = await UpdateProvider.init();
+  final packageInfo = await PackageInfo.fromPlatform();
+  final androidInfo = await DeviceInfoPlugin().androidInfo;
+  final AppInfoProvider appInfo = await AppInfoProvider.load(
+    deviceInfo: androidInfo,
+    packageInfo: packageInfo,
+  );
+  final UpdateProvider updater = await UpdateProvider.init(
+    client: http.Client(),
+    appInfoProvider: appInfo,
+  );
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
-  final AppInfoProvider appInfo = await AppInfoProvider.load();
   final AudioService audioService = AudioService(settings: settings);
   runApp(
     MultiBlocProvider(

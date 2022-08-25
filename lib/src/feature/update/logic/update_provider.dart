@@ -1,4 +1,4 @@
-// ignore_for_file: use_setters_to_change_properties, inference_failure_on_untyped_parameter
+// ignore_for_file: use_setters_to_change_properties, inference_failure_on_untyped_parameter, require_trailing_commas
 
 import 'dart:async';
 import 'dart:convert';
@@ -22,6 +22,7 @@ typedef DownloadHandler = void Function(int current, int total);
 typedef ErrorHandler = void Function(String error);
 
 class UpdateProvider {
+  final http.Client _client;
   Release? _latestRelease;
 
   bool _canUpdate = false;
@@ -30,7 +31,7 @@ class UpdateProvider {
 
   File? _downloadedFile;
 
-  late AppInfoProvider _appInfo;
+  final AppInfoProvider _appInfo;
   late DownloadHandler _downloadHandler;
   late VoidCallback _onDownloadComplete;
   late ErrorHandler _onError;
@@ -44,21 +45,17 @@ class UpdateProvider {
 
   int? _updateFileSize = -1;
 
-  UpdateProvider._();
+  UpdateProvider._(
+    http.Client client,
+    AppInfoProvider appInfo,
+  )   : _client = client,
+        _appInfo = appInfo;
 
-  static Future<UpdateProvider> init() async {
-    final data = UpdateProvider._();
-    await data._init();
-    return data;
-  }
-
-  Future<void> _init() async {
-    _appInfo = await AppInfoProvider.load();
-  }
-
-  // Вынесено сюда, чтобы можно было останавливать скачивание из UI
-  // с помощью stop().
-  http.Client? _client;
+  static Future<UpdateProvider> init({
+    required http.Client client,
+    required AppInfoProvider appInfoProvider,
+  }) async =>
+      UpdateProvider._(client, appInfoProvider);
 
   void setDownloadingHandler(DownloadHandler callback) {
     _downloadHandler = callback;
@@ -73,7 +70,7 @@ class UpdateProvider {
   }
 
   void stop() {
-    _client?.close();
+    _client.close();
   }
 
   Future<bool> isUpdateAvailable() async {
@@ -90,7 +87,7 @@ class UpdateProvider {
         }
       }
     } on Exception catch (e) {
-      logger.e(e);
+      logger.e('Some error: $e');
     }
     return _canUpdate;
   }
@@ -100,11 +97,11 @@ class UpdateProvider {
       'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
     );
     try {
-      final response = await http.get(url);
+      final response = await _client.get(url);
       if (response.statusCode == 200) {
-        return Release.fromJson(
-          jsonDecode(response.body) as Map<String, dynamic>,
-        );
+        final release =
+            Release.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+        return release;
       } else {
         logger.d('StatusCode: ${response.statusCode}');
         return null;
@@ -138,8 +135,8 @@ class UpdateProvider {
           }
 
           final request = http.Request('GET', Uri.parse(url));
-          _client = http.Client();
-          final http.StreamedResponse response = await _client!.send(request);
+          // _client = http.Client();
+          final http.StreamedResponse response = await _client.send(request);
 
           _updateFileSize = response.contentLength;
 
