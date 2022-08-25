@@ -5,14 +5,36 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import '../../../common/logger/logger.dart';
+import '../bluetooth.dart';
 
 typedef ErrorHandler = void Function(String error);
 
-class BluetoothBackgroundConnection {
-  final BluetoothConnection? _connection;
+abstract class IBluetoothBackgroundConnection {
+  Future<void> connect(
+    BluetoothDevice bluetoothDevice,
+  );
+  Stream<String> get message;
+  bool get isConnected;
+
+  Future<void> start();
+  Future<void> stop();
+
+  /// Отсылает [text] в Bluetooth Serial
+  ///
+  /// Обрезает [text] с помощью trim() и добавляет в конец \r\n.
+  /// Вызывает [onSendError] при ошибке
+  Future<bool> sendMessage(String text);
+
+  Future<void> dispose();
+
+  void onDisconnect(VoidCallback callback);
+  void onSendError(ErrorHandler error);
+}
+
+class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
+  BluetoothConnection? _connection;
 
   String _messageBuffer = '';
   String _messagePacket = '';
@@ -21,75 +43,78 @@ class BluetoothBackgroundConnection {
   final StreamController<String> _messageController =
       StreamController.broadcast();
 
+  @override
   Stream<String> get message => _messageController.stream;
 
-  bool isDisconnecting = false;
+  // bool isDisconnecting = false;
 
+  @override
   bool get isConnected => _connection != null && _connection!.isConnected;
 
   late VoidCallback _onDisconnect;
   late ErrorHandler _onSendError;
 
+  @override
   void onDisconnect(VoidCallback callback) {
     _onDisconnect = callback;
   }
 
+  @override
   void onSendError(ErrorHandler error) {
     _onSendError = error;
   }
 
-  BluetoothBackgroundConnection._fromConnection(this._connection) {
-    if (_connection != null) {
-      _connection!.input!.listen(_onDataReceived).onDone(() {
-        // Сообщаем что соединение закрыто
-        // Далее на основе того, когда это произошло,
-        // определяем кто закрыл соединение (в BluetoothBloc event/state)
-        _onDisconnect();
-      });
-    }
-  }
+  // void _fromConnection(BluetoothConnection? connection) {
+  //   if (_connection != null) {
+  //     _connection!.input!.listen(_onDataReceived).onDone(() {
+  //       // Сообщаем что соединение закрыто
+  //       // Далее на основе того, когда это произошло,
+  //       // определяем кто закрыл соединение (в BluetoothBloc event/state)
+  //       _onDisconnect();
+  //     });
+  //   }
+  // }
 
-  void dispose() {
-    _messageController.close();
-    _connection?.finish();
-  }
-
-  void _onDataReceived(Uint8List data) {
-    // Create message if there is '\r\n' sequence
-    _messageBuffer += String.fromCharCodes(data);
-    while (_messageBuffer.contains('\r\n')) {
-      final int index = _messageBuffer.indexOf('\r\n');
-      _messagePacket = _messageBuffer.substring(0, index).trim();
-      _messageController.add(_messagePacket);
-      _messageBuffer = _messageBuffer.substring(index + 2);
-    }
-  }
-
-  static Future<BluetoothBackgroundConnection> connect(
-    BluetoothDevice server,
+  @override
+  Future<void> connect(
+    BluetoothDevice bluetoothDevice,
   ) async {
-    final BluetoothConnection connection =
-        await BluetoothConnection.toAddress(server.address)
-            .catchError((dynamic error) {
+    _connection = await BluetoothConnection.toAddress(bluetoothDevice.address)
+        .catchError((dynamic error) {
       logger.e(
         'BluetoothConnection -> Cannot connect, exception occurred: $error',
       );
     });
-    return BluetoothBackgroundConnection._fromConnection(connection);
+
+    // if (_connection != null) {
+    _connection?.input?.listen(_onDataReceived).onDone(() {
+      // Сообщаем что соединение закрыто
+      // Далее на основе того, когда это произошло,
+      // определяем кто закрыл соединение (в BluetoothBloc event/state)
+      _onDisconnect();
+    });
+    // }
+
+    // BluetoothBackgroundConnection._fromConnection(connection);
   }
 
+  @override
   Future<void> start() async {
     await _connection?.output.allSent;
   }
 
+  @override
   Future<void> stop() async {
     await _connection?.finish();
   }
 
-  /// Отсылает [text] в Bluetooth Serial
-  ///
-  /// Обрезает [text] с помощью trim() и добавляет в конец \r\n.
-  /// Вызывает [onSendError] при ошибке
+  @override
+  Future<void> dispose() async {
+    await _messageController.close();
+    await _connection?.finish();
+  }
+
+  @override
   Future<bool> sendMessage(String text) async {
     bool result = false;
     text.trim();
@@ -108,5 +133,16 @@ class BluetoothBackgroundConnection {
       }
     }
     return result;
+  }
+
+  void _onDataReceived(Uint8List data) {
+    // Create message if there is '\r\n' sequence
+    _messageBuffer += String.fromCharCodes(data);
+    while (_messageBuffer.contains('\r\n')) {
+      final int index = _messageBuffer.indexOf('\r\n');
+      _messagePacket = _messageBuffer.substring(0, index).trim();
+      _messageController.add(_messagePacket);
+      _messageBuffer = _messageBuffer.substring(index + 2);
+    }
   }
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
@@ -13,18 +12,15 @@ import '../../log/log.dart';
 import '../../module_settings/module_settings.dart';
 import '../../protocol/protocol.dart';
 import '../../settings/settings.dart';
-import '../logic/bluetooth_background_connection.dart';
-import '../model/bluetooth.dart';
+import '../bluetooth.dart';
 
 part 'bluetooth_bloc_event.dart';
 
 part 'bluetooth_bloc_state.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
-  final FlutterBluetoothSerial bluetoothSerial =
-      FlutterBluetoothSerial.instance;
+  final IBluetoothProvider bluetoothProvider;
 
-  BluetoothBackgroundConnection? _serialConnection;
 
   final ModuleSettingsBloc moduleSettingsBloc;
   final ProtocolBloc protocolBloc;
@@ -59,6 +55,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     required this.settingsBloc,
     required this.logBloc,
     required this.audioService,
+    required this.bluetoothProvider,
   }) : super(BluetoothNotInitializedState()) {
     protocolSubscription = protocolBloc.stream.listen((state) {
       if (state is ProtocolSelectedState) {
@@ -71,11 +68,6 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
       _voiceName = state.settings.voiceName;
       _reconnect = state.settings.reconnect;
     });
-
-    // bluetoothSerial.onStateChanged().listen((event) {
-    //   event == BluetoothState.STATE_ON ? _isEnabled = true : _isEnabled = false;
-    //   print('_isEnabled: $_isEnabled');
-    // });
 
     on<InitializeBluetooth>(
       (event, emit) => _handleInitializeBluetooth(event, emit),
@@ -96,7 +88,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     _messageSubscription?.cancel();
     protocolSubscription.cancel();
     settingsSubscription.cancel();
-    _serialConnection?.dispose();
+    bluetoothProvider.dispose();
     return super.close();
   }
 
@@ -104,7 +96,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     InitializeBluetooth event,
     Emitter<BluetoothConnectionState> emit,
   ) async {
-    _isEnabled = await bluetoothSerial.isEnabled ?? false;
+    _isEnabled =
+        await bluetoothProvider.flutterBluetoothSerial.isEnabled ?? false;
     _isEnabled
         ? emit(const BluetoothDisconnectedState())
         : emit(BluetoothNotEnabledState());
@@ -114,7 +107,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     EnableBluetooth event,
     Emitter<BluetoothConnectionState> emit,
   ) async {
-    await bluetoothSerial.requestEnable();
+    await bluetoothProvider.flutterBluetoothSerial.requestEnable();
     add(InitializeBluetooth());
   }
 
@@ -122,7 +115,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     DisableBluetooth event,
     Emitter<BluetoothConnectionState> emit,
   ) async {
-    await bluetoothSerial.requestDisable();
+    await bluetoothProvider.flutterBluetoothSerial.requestDisable();
     add(InitializeBluetooth());
   }
 
@@ -133,18 +126,19 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     // Состояние соединения
     emit(BluetoothConnectingState());
     // Соединяемся
-    _serialConnection =
-        await BluetoothBackgroundConnection.connect(event.selectedDevice!);
-    if (_serialConnection!.isConnected) {
+    await bluetoothProvider.bluetoothBackgroundConnection
+        .connect(event.selectedDevice!);
+    if (bluetoothProvider.bluetoothBackgroundConnection.isConnected) {
       // Запускаем событие 'соединён'
       add(Connected());
       logger.i('Bluetooth -> Connecting...');
       // Если соединение успешно, запускаем сборщик поступающих сообщений
-      await _serialConnection!.start();
+      await bluetoothProvider.bluetoothBackgroundConnection.start();
       // и подписываемся на его события (поступающие сообщения)
-      _messageSubscription = _serialConnection!.message
+      _messageSubscription = bluetoothProvider
+          .bluetoothBackgroundConnection.message
           .listen((message) => add(MessageReceived(message)));
-      _serialConnection!.onDisconnect(() {
+      bluetoothProvider.bluetoothBackgroundConnection.onDisconnect(() {
         add(Disconnected());
       });
     } else {
@@ -199,7 +193,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
     }
     emit(const BluetoothDisconnectedState());
     await _messageSubscription?.cancel();
-    await _serialConnection?.stop();
+    await bluetoothProvider.bluetoothBackgroundConnection.stop();
   }
 
   void _handleMessageReceived(
@@ -219,7 +213,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   ) async {
     //Отправлено соообщение в Bluetooth serial
     logger.i('Bluetooth -> Sent message: ${event.message}');
-    await _serialConnection?.sendMessage(event.message);
+    await bluetoothProvider.bluetoothBackgroundConnection
+        .sendMessage(event.message);
     logBloc.add(
       LogAdd(
         level: LogLevel.information,
@@ -240,7 +235,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
       if (event.deviceWithAvailability!.device != _bluetoothDevice) {
         // Отменяем подписки и останавливаем соединение (если было)
         await _messageSubscription?.cancel();
-        await _serialConnection?.stop();
+        await bluetoothProvider.bluetoothBackgroundConnection.stop();
         // Если девайс выбран - обновляем
         _bluetoothDevice = event.deviceWithAvailability!.device;
         emit(BluetoothDisconnectedState(bluetoothDevice: _bluetoothDevice));

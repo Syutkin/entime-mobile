@@ -12,6 +12,7 @@ import 'src/common/localization/localization.dart';
 import 'src/feature/app_info/app_info.dart';
 import 'src/feature/audio/logic/audio_service.dart';
 import 'src/feature/bluetooth/bloc/bluetooth_bloc.dart';
+import 'src/feature/bluetooth/bluetooth.dart';
 import 'src/feature/countdown/bloc/countdown_bloc.dart';
 import 'src/feature/home/widget/home_screen.dart';
 import 'src/feature/log/bloc/log_bloc.dart';
@@ -46,6 +47,13 @@ Future<void> runMain() async {
     client: http.Client(),
     appInfoProvider: appInfo,
   );
+  final FlutterBluetoothSerial flutterBluetoothSerial =
+      FlutterBluetoothSerial.instance;
+  final IBluetoothBackgroundConnection bluetoothBackgroundConnection =
+      BluetoothBackgroundConnection();
+  final IBluetoothProvider bluetoothProvider = BluetoothProvider(
+      flutterBluetoothSerial: flutterBluetoothSerial,
+      bluetoothBackgroundConnection: bluetoothBackgroundConnection);
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
   final AudioService audioService = AudioService(settings: settings);
   runApp(
@@ -78,11 +86,12 @@ Future<void> runMain() async {
         ),
         BlocProvider<BluetoothBloc>(
           create: (context) => BluetoothBloc(
+            audioService: audioService,
+            bluetoothProvider: bluetoothProvider,
             moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),
             protocolBloc: BlocProvider.of<ProtocolBloc>(context),
             settingsBloc: BlocProvider.of<SettingsBloc>(context),
             logBloc: BlocProvider.of<LogBloc>(context),
-            audioService: audioService,
           )..add(InitializeBluetooth()),
         ),
         BlocProvider<UpdateBloc>(
