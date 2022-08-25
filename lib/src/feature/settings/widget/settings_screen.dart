@@ -59,7 +59,7 @@ class _SettingsList extends StatelessWidget {
                     //
                     // future().then((_) {
                     //   setState(() {
-                    //     //TODO: state to BLoC
+                    //     // TODO: state to BLoC
                     //   });
                     // });
                   },

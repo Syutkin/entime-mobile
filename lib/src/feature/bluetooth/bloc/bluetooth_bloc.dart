@@ -21,7 +21,6 @@ part 'bluetooth_bloc_state.dart';
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothConnectionState> {
   final IBluetoothProvider bluetoothProvider;
 
-
   final ModuleSettingsBloc moduleSettingsBloc;
   final ProtocolBloc protocolBloc;
   late final StreamSubscription<ProtocolState> protocolSubscription;

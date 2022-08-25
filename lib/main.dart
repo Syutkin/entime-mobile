@@ -11,7 +11,6 @@ import 'src/common/bloc/app_bloc_observer.dart';
 import 'src/common/localization/localization.dart';
 import 'src/feature/app_info/app_info.dart';
 import 'src/feature/audio/logic/audio_service.dart';
-import 'src/feature/bluetooth/bloc/bluetooth_bloc.dart';
 import 'src/feature/bluetooth/bluetooth.dart';
 import 'src/feature/countdown/bloc/countdown_bloc.dart';
 import 'src/feature/home/widget/home_screen.dart';
@@ -52,8 +51,9 @@ Future<void> runMain() async {
   final IBluetoothBackgroundConnection bluetoothBackgroundConnection =
       BluetoothBackgroundConnection();
   final IBluetoothProvider bluetoothProvider = BluetoothProvider(
-      flutterBluetoothSerial: flutterBluetoothSerial,
-      bluetoothBackgroundConnection: bluetoothBackgroundConnection);
+    flutterBluetoothSerial: flutterBluetoothSerial,
+    bluetoothBackgroundConnection: bluetoothBackgroundConnection,
+  );
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
   final AudioService audioService = AudioService(settings: settings);
   runApp(
