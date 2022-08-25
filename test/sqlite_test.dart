@@ -492,6 +492,20 @@ void main() {
       expect(result.length, 2);
       result = await LogProvider.db.getLog(limit: 3);
       expect(result.length, 3);
+      result = await LogProvider.db.getLog(
+        level: [
+          LogLevel.error,
+          LogLevel.warning,
+        ],
+      );
+      expect(result.length, 1);
+      result = await LogProvider.db.getLog(
+        level: [
+          LogLevel.information,
+          LogLevel.verbose,
+        ],
+      );
+      expect(result.length, 2);
     });
 
     test('close', LogProvider.db.close);
