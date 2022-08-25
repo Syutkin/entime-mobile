@@ -5,16 +5,10 @@ on:
     branches: [ master ]
     paths:
       - "**.dart"
-    paths-ignore:
-      - "android/**"
-      - "ios/**"
   pull_request:
     branches: [ master ]
     paths:
       - "**.dart"
-    paths-ignore:
-      - "android/**"
-      - "ios/**"
 
 jobs:
   build:
