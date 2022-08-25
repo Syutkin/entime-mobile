@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock/wakelock.dart';
@@ -79,7 +80,10 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           const AppSettings.defaults().previousVersion,
     );
 
-    await Wakelock.toggle(enable: settings.wakelock);
+    // Для похождения тестов, пока Wakelock не поддерживает Linux,
+    if (!Platform.isLinux) {
+      await Wakelock.toggle(enable: settings.wakelock);
+    }
 
     return SharedPrefsSettingsProvider._(
       prefs,
@@ -102,7 +106,10 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   Future<void> _save(AppSettings settings) async {
     if (settings.wakelock != _settings.wakelock) {
-      await Wakelock.toggle(enable: settings.wakelock);
+      // Для похождения тестов, пока Wakelock не поддерживает Linux,
+      if (!Platform.isLinux) {
+        await Wakelock.toggle(enable: settings.wakelock);
+      }
     }
     await _prefs.setBool('sound', settings.sound);
     await _prefs.setBool('beep', settings.beep);
