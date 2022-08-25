@@ -127,36 +127,36 @@ void main() {
           200,
         ),
       );
+    });
 
-      test('404 not found', () async {
-        final client = MockClient();
-        final appInfoProvider = MockAppInfoProvider();
+    test('404 not found', () async {
+      final client = MockClient();
+      final appInfoProvider = MockAppInfoProvider();
 
-        when(
-          appInfoProvider.appName,
-        ).thenAnswer((realInvocation) => 'Entime');
-        when(
-          appInfoProvider.version,
-        ).thenAnswer((realInvocation) => '1.0.1');
-        when(
-          appInfoProvider.buildNumber,
-        ).thenAnswer((realInvocation) => '1');
-        when(
-          appInfoProvider.abi,
-        ).thenAnswer((realInvocation) => 'arm64-v8a');
-        when(
-          client.get(
-            Uri.parse(
-              'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
-            ),
+      when(
+        appInfoProvider.appName,
+      ).thenAnswer((realInvocation) => 'Entime');
+      when(
+        appInfoProvider.version,
+      ).thenAnswer((realInvocation) => '1.0.1');
+      when(
+        appInfoProvider.buildNumber,
+      ).thenAnswer((realInvocation) => '1');
+      when(
+        appInfoProvider.abi,
+      ).thenAnswer((realInvocation) => 'arm64-v8a');
+      when(
+        client.get(
+          Uri.parse(
+            'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
-        ).thenAnswer(
-          (_) async => http.Response(
-            '',
-            404,
-          ),
-        );
-      });
+        ),
+      ).thenAnswer(
+        (_) async => http.Response(
+          '',
+          404,
+        ),
+      );
 
       final updater = await UpdateProvider.init(
         client: client,
