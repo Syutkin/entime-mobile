@@ -196,9 +196,8 @@ class _SettingsList extends StatelessWidget {
                   //leading:  Icon(Icons.language),
                   // trailing: Text(settingsState.settings.language),
                   trailing: Text(Intl.getCurrentLocale()),
-                  onPressed: (context) {
-                    //TODO: i18n
-                  },
+                  //ToDo: change locale
+                  // onPressed: (context) {},
                 ),
               ],
             ),
