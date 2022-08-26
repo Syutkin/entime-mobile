@@ -5,11 +5,8 @@ import '../bloc/bluetooth_bloc.dart';
 import 'select_bonded_device.dart';
 
 class BluetoothButton extends StatelessWidget {
-  final BuildContext context;
-
   const BluetoothButton({
     Key? key,
-    required this.context,
   }) : super(key: key);
 
   @override

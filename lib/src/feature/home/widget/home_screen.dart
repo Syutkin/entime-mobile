@@ -102,11 +102,11 @@ class HomeScreen extends StatelessWidget {
             child: Scaffold(
               drawer: const AppDrawer(),
               appBar: AppBar(
-                title: _title(context),
+                title: const _TextTitle(),
                 actions: <Widget>[
-                  _finishFilterButton(context, activeTab),
-                  BluetoothButton(context: context),
-                  _menuButton(context, activeTab),
+                  _FinishFilterButton(activeTab: activeTab),
+                  const BluetoothButton(),
+                  _MenuButton(activeTab: activeTab),
                 ],
                 bottom: TabBar(
                   onTap: (index) {
@@ -189,8 +189,15 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       );
+}
 
-  Widget _title(BuildContext context) =>
+class _TextTitle extends StatelessWidget {
+  const _TextTitle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) =>
       BlocBuilder<ProtocolBloc, ProtocolState>(
         builder: (context, protocolState) {
           if (protocolState is ProtocolSelectedState) {
@@ -200,8 +207,105 @@ class HomeScreen extends StatelessWidget {
           }
         },
       );
+}
 
-  Widget _menuButton(BuildContext context, AppTab activeTab) =>
+class _FinishFilterButton extends StatelessWidget {
+  const _FinishFilterButton({
+    Key? key,
+    required this.activeTab,
+  }) : super(key: key);
+
+  final AppTab activeTab;
+
+  @override
+  Widget build(BuildContext context) {
+    final settingsBloc = context.read<SettingsBloc>();
+    final settings = settingsBloc.state.settings;
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      builder: (context, protocolState) {
+        if (activeTab == AppTab.finish) {
+          final menuItems = <PopupMenuEntry<FilterFinish>>[
+            CheckedPopupMenuItem(
+              value: FilterFinish.hideMarked,
+              checked: !settings.hideMarked,
+              child: Text(Localization.current.I18nHome_hideMarked),
+            ),
+            CheckedPopupMenuItem(
+              value: FilterFinish.hideNumbers,
+              checked: !settings.hideNumbers,
+              child: Text(Localization.current.I18nHome_hideNumbers),
+            ),
+            CheckedPopupMenuItem(
+              value: FilterFinish.hideManual,
+              checked: !settings.hideManual,
+              child: Text(Localization.current.I18nHome_hideManual),
+            ),
+            const PopupMenuDivider(),
+            PopupMenuItem(
+              value: FilterFinish.setDefaults,
+              child: ListTile(
+                leading: const SizedBox(width: 0, height: 0),
+                title: Text(Localization.current.I18nHome_setDefaults),
+              ),
+            )
+          ];
+          return PopupMenuButton<FilterFinish>(
+            icon: const Icon(Icons.filter_list),
+            itemBuilder: (context) => menuItems,
+            onSelected: (value) async {
+              switch (value) {
+                case FilterFinish.hideMarked:
+                  settingsBloc.add(
+                    SettingsEventUpdate(
+                      settings:
+                          settings.copyWith(hideMarked: !settings.hideMarked),
+                    ),
+                  );
+                  break;
+                case FilterFinish.hideNumbers:
+                  settingsBloc.add(
+                    SettingsEventUpdate(
+                      settings: settings.copyWith(
+                        hideNumbers: !settings.hideNumbers,
+                      ),
+                    ),
+                  );
+                  break;
+                case FilterFinish.hideManual:
+                  settingsBloc.add(
+                    SettingsEventUpdate(
+                      settings:
+                          settings.copyWith(hideManual: !settings.hideManual),
+                    ),
+                  );
+                  break;
+                case FilterFinish.setDefaults:
+                  settingsBloc.add(
+                    SettingsEventUpdate(
+                      settings: settings.copyWith(
+                        hideMarked: true,
+                        hideNumbers: false,
+                        hideManual: false,
+                      ),
+                    ),
+                  );
+                  break;
+              }
+            },
+          );
+        }
+        return const SizedBox(width: 0, height: 0);
+      },
+    );
+  }
+}
+
+class _MenuButton extends StatelessWidget {
+  final AppTab activeTab;
+
+  const _MenuButton({Key? key, required this.activeTab}) : super(key: key);
+  @override
+  Widget build(BuildContext context) =>
       BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, state) => BlocBuilder<ProtocolBloc, ProtocolState>(
           builder: (context, protocolState) {
@@ -357,85 +461,4 @@ class HomeScreen extends StatelessWidget {
           },
         ),
       );
-
-  Widget _finishFilterButton(BuildContext context, AppTab activeTab) {
-    final settingsBloc = context.read<SettingsBloc>();
-    final settings = settingsBloc.state.settings;
-    return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, protocolState) {
-        if (activeTab == AppTab.finish) {
-          final menuItems = <PopupMenuEntry<FilterFinish>>[
-            CheckedPopupMenuItem(
-              value: FilterFinish.hideMarked,
-              checked: !settings.hideMarked,
-              child: Text(Localization.current.I18nHome_hideMarked),
-            ),
-            CheckedPopupMenuItem(
-              value: FilterFinish.hideNumbers,
-              checked: !settings.hideNumbers,
-              child: Text(Localization.current.I18nHome_hideNumbers),
-            ),
-            CheckedPopupMenuItem(
-              value: FilterFinish.hideManual,
-              checked: !settings.hideManual,
-              child: Text(Localization.current.I18nHome_hideManual),
-            ),
-            const PopupMenuDivider(),
-            PopupMenuItem(
-              value: FilterFinish.setDefaults,
-              child: ListTile(
-                leading: const SizedBox(width: 0, height: 0),
-                title: Text(Localization.current.I18nHome_setDefaults),
-              ),
-            )
-          ];
-          return PopupMenuButton<FilterFinish>(
-            icon: const Icon(Icons.filter_list),
-            itemBuilder: (context) => menuItems,
-            onSelected: (value) async {
-              switch (value) {
-                case FilterFinish.hideMarked:
-                  settingsBloc.add(
-                    SettingsEventUpdate(
-                      settings:
-                          settings.copyWith(hideMarked: !settings.hideMarked),
-                    ),
-                  );
-                  break;
-                case FilterFinish.hideNumbers:
-                  settingsBloc.add(
-                    SettingsEventUpdate(
-                      settings: settings.copyWith(
-                        hideNumbers: !settings.hideNumbers,
-                      ),
-                    ),
-                  );
-                  break;
-                case FilterFinish.hideManual:
-                  settingsBloc.add(
-                    SettingsEventUpdate(
-                      settings:
-                          settings.copyWith(hideManual: !settings.hideManual),
-                    ),
-                  );
-                  break;
-                case FilterFinish.setDefaults:
-                  settingsBloc.add(
-                    SettingsEventUpdate(
-                      settings: settings.copyWith(
-                        hideMarked: true,
-                        hideNumbers: false,
-                        hideManual: false,
-                      ),
-                    ),
-                  );
-                  break;
-              }
-            },
-          );
-        }
-        return const SizedBox(width: 0, height: 0);
-      },
-    );
-  }
 }

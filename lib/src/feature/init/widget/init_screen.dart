@@ -62,25 +62,21 @@ class _InitScreen extends State<InitScreen> {
     );
   }
 
-  Widget _selectBluetooth() {
-    final Widget title = Text(Localization.current.I18nInit_bluetoothModule);
-    return BlocBuilder<BluetoothBloc, BluetoothConnectionState>(
-      builder: (context, state) => ListTile(
-        onTap: () => selectBluetoothDevice(context),
-        leading: BluetoothButton(
-          context: context,
+  Widget _selectBluetooth() =>
+      BlocBuilder<BluetoothBloc, BluetoothConnectionState>(
+        builder: (context, state) => ListTile(
+          onTap: () => selectBluetoothDevice(context),
+          leading: const BluetoothButton(),
+          title: Text(Localization.current.I18nInit_bluetoothModule),
+          subtitle: Text(
+            BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
+                Localization.current.I18nInit_pressToSelect,
+          ),
+          trailing: state is BluetoothConnectedState
+              ? _bluetoothButtons(context)
+              : null,
         ),
-        title: title,
-        subtitle: Text(
-          BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
-              Localization.current.I18nInit_pressToSelect,
-        ),
-        trailing: state is BluetoothConnectedState
-            ? _bluetoothButtons(context)
-            : null,
-      ),
-    );
-  }
+      );
 
   Widget _bluetoothButtons(BuildContext context) => Row(
         mainAxisSize: MainAxisSize.min,
