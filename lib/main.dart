@@ -153,31 +153,10 @@ class EntimeAppView extends StatelessWidget {
           ],
           supportedLocales: Localization.supportedLocales,
           //1. call BotToastInit
-          // builder: BotToastInit(),
+          builder: BotToastInit(),
           //2. registered route observer
-          // navigatorObservers: [BotToastNavigatorObserver()],
+          navigatorObservers: [BotToastNavigatorObserver()],
           home: const HomeScreen(),
         ),
       );
-}
-
-class MyEntimeAppView extends StatelessWidget {
-  const MyEntimeAppView({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<SettingsBloc, SettingsState>(
-        builder: (context, state) => const MaterialApp(
-          home: MyWidget(),
-        ),
-      );
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => const Text('data');
 }
