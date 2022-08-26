@@ -1,68 +1,21 @@
 part of 'update_bloc.dart';
 
-abstract class UpdateState extends Equatable {
-  const UpdateState();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class UpdateInitial extends UpdateState {
-  final ShowChangelog? showChangelog;
-
-  const UpdateInitial({this.showChangelog});
-
-  @override
-  List<Object?> get props => [showChangelog];
-
-  @override
-  String toString() {
-    if (showChangelog != null) {
-      String result = 'UpdateInitial { '
-          'showChangelog: ${showChangelog!.show}, ';
-      if (showChangelog!.previousVersion != null) {
-        result += 'previousVersion: ${showChangelog!.previousVersion}, ';
-      }
-      result += 'currentVersion: ${showChangelog!.currentVersion}';
-      result += ' }';
-      return result;
-    }
-    return 'UpdateInitial';
-  }
-}
-
-// Есть обновление, вызываем попап с вопросом обновлять или нет
-class UpdateAvailable extends UpdateState {
-  final String version;
-
-  const UpdateAvailable(this.version);
-
-  @override
-  List<Object> get props => [version];
-
-  @override
-  String toString() => 'UpdateAvailable { version: $version}';
-}
-
+@freezed
+class UpdateState with _$UpdateState {
+  const factory UpdateState.initial({ShowChangelog? showChangelog}) =
+      UpdateInitial;
+  // Есть обновление, вызываем попап с вопросом обновлять или нет
+  const factory UpdateState.updateAvailable({required String version}) =
+      UpdateAvailable;
 // Соединение с сервером для скачивания файла
-class UpdateConnecting extends UpdateState {}
+  const factory UpdateState.connecting() = UpdateConnecting;
 
 // Скачивание обновления, прогрессбар
-class UpdateDownloadInProgress extends UpdateState {
-  final int bytes;
-  final int total;
+  const factory UpdateState.downloadInProgress({
+    required int bytes,
+    required int total,
+  }) = UpdateDownloadInProgress;
 
-  const UpdateDownloadInProgress(
-    this.bytes,
-    this.total,
-  );
-
-  @override
-  List<Object> get props => [
-        bytes,
-        total,
-      ];
+  // При удачном обновлении (возможно не нужен, т.к. просто вернуть Initial)
+  // const factory UpdateState.complete() = UpdateState;
 }
-
-// При удачном обновлении (возможно не нужен, т.к. просто вернуть Initial)
-class UpdateComplete extends UpdateState {}

@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../common/logger/logger.dart';
 import '../logic/update_provider.dart';
@@ -9,6 +9,8 @@ part 'update_event.dart';
 
 part 'update_state.dart';
 
+part 'update_bloc.freezed.dart';
+
 class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
   final UpdateProvider updateProvider;
 
@@ -17,20 +19,20 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
   }) : super(const UpdateInitial()) {
     updateProvider
       ..setDownloadingHandler((current, total) {
-        add(UpdateDownloading(current, total));
+        add(UpdateDownloading(bytes: current, total: total));
       })
       ..onDownloadComplete(() {
-        add(UpdateFromFile());
+        add(const UpdateFromFile());
       })
       ..onError((error) {
         logger.e('UpdateBloc: Download error: $error');
-        add(CancelDownload());
+        add(const CancelDownload());
       });
 
     on<CheckUpdate>((event, emit) async {
       final bool update = await updateProvider.isUpdateAvailable();
       if (update) {
-        emit(UpdateAvailable(updateProvider.latestVersion));
+        emit(UpdateAvailable(version: updateProvider.latestVersion));
       } else {
         emit(const UpdateInitial());
       }
@@ -38,23 +40,23 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
 
     on<DownloadUpdate>((event, emit) async {
       if (state is UpdateAvailable) {
-        emit(UpdateConnecting());
+        emit(const UpdateConnecting());
         await updateProvider.downloadUpdate();
       }
     });
 
     on<UpdateDownloading>((event, emit) {
-      emit(UpdateDownloadInProgress(event.bytes, event.total));
+      emit(UpdateDownloadInProgress(bytes: event.bytes, total: event.total));
     });
 
     on<UpdateFromFile>((event, emit) {
       updateProvider.installApk();
-      emit(UpdateAvailable(updateProvider.latestVersion));
+      emit(UpdateAvailable(version: updateProvider.latestVersion));
     });
 
     on<CancelDownload>((event, emit) {
       updateProvider.stop();
-      emit(UpdateAvailable(updateProvider.latestVersion));
+      emit(UpdateAvailable(version: updateProvider.latestVersion));
     });
 
     on<PopupChangelog>((event, emit) async {
