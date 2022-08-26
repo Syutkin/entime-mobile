@@ -91,7 +91,7 @@ class _StartScreen extends State<StartScreen> {
         TextButton(
           onPressed: () {
             BlocProvider.of<BluetoothBloc>(context).add(
-              MessageReceived(
+              MessageReceived(message: 
                 'V${DateFormat('HH:mm:ss').format(DateTime.now())}#',
               ),
             );
@@ -101,7 +101,7 @@ class _StartScreen extends State<StartScreen> {
         TextButton(
           onPressed: () {
             BlocProvider.of<BluetoothBloc>(context).add(
-              MessageReceived(
+              MessageReceived(message: 
                 'B${DateFormat('HH:mm:ss').format(DateTime.now())}#',
               ),
             );

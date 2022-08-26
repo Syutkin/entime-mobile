@@ -11,21 +11,23 @@ class BluetoothButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<BluetoothBloc, BluetoothConnectionState>(
+      BlocBuilder<BluetoothBloc, BluetoothBlocState>(
         builder: (context, state) {
           if (BlocProvider.of<BluetoothBloc>(context).bluetoothDevice != null) {
             if (state is BluetoothConnectedState) {
               return IconButton(
                 icon: const Icon(Icons.bluetooth_connected),
                 onPressed: () async {
-                  BlocProvider.of<BluetoothBloc>(context).add(Disconnect());
+                  BlocProvider.of<BluetoothBloc>(context)
+                      .add(const Disconnect());
                 },
               );
             } else if (state is BluetoothConnectingState) {
               return IconButton(
                 icon: const Icon(Icons.bluetooth_searching),
                 onPressed: () async {
-                  BlocProvider.of<BluetoothBloc>(context).add(Disconnect());
+                  BlocProvider.of<BluetoothBloc>(context)
+                      .add(const Disconnect());
                 },
               );
             } else {
@@ -34,7 +36,8 @@ class BluetoothButton extends StatelessWidget {
                 onPressed: () async {
                   BlocProvider.of<BluetoothBloc>(context).add(
                     Connect(
-                      BlocProvider.of<BluetoothBloc>(context).bluetoothDevice,
+                      selectedDevice: BlocProvider.of<BluetoothBloc>(context)
+                          .bluetoothDevice,
                     ),
                   );
                 },

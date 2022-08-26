@@ -158,7 +158,7 @@ class HomeScreen extends StatelessWidget {
                             action: SnackBarAction(
                               onPressed: () {
                                 BlocProvider.of<UpdateBloc>(context)
-                                    .add(DownloadUpdate());
+                                    .add(const DownloadUpdate());
                                 Scaffold.of(context).openDrawer();
                               },
                               label: Localization.current.I18nHome_update,

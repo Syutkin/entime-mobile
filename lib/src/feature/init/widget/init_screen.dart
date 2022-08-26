@@ -45,8 +45,7 @@ class _InitScreen extends State<InitScreen> {
         ],
       );
 
-  Widget _selectBluetooth() =>
-      BlocBuilder<BluetoothBloc, BluetoothConnectionState>(
+  Widget _selectBluetooth() => BlocBuilder<BluetoothBloc, BluetoothBlocState>(
         builder: (context, state) => ListTile(
           onTap: () => selectBluetoothDevice(context),
           leading: const BluetoothButton(),
@@ -87,7 +86,7 @@ class _InitScreen extends State<InitScreen> {
 
   void _moduleSettings(BuildContext context) {
     BlocProvider.of<BluetoothBloc>(context)
-        .add(const SendMessage('{"Read": true}'));
+        .add(const SendMessage(message: '{"Read": true}'));
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (context) => const ModuleSettingsInitScreen(),

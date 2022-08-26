@@ -1,26 +1,41 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
+import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:entime/src/feature/audio/logic/audio_service.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
+import 'package:entime/src/feature/home/home.dart';
+import 'package:entime/src/feature/protocol/protocol.dart';
 import 'package:entime/src/feature/settings/settings.dart';
+import 'package:entime/src/feature/tab/tab.dart';
 import 'package:entime/src/feature/update/update.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
+import 'package:mocktail/mocktail.dart';
 
-import 'app_test.mocks.dart';
+class MockAppInfoProvider extends Mock implements AppInfoProvider {}
 
-@GenerateMocks(
-  [
-    AppInfoProvider,
-    UpdateProvider,
-    IBluetoothProvider,
-    AudioService,
-    SharedPrefsSettingsProvider
-  ],
-)
+class MockUpdateProvider extends Mock implements UpdateProvider {}
+
+class MockBluetoothProvider extends Mock implements BluetoothProvider {}
+
+class MockAudioService extends Mock implements AudioService {}
+
+class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
+    implements SettingsBloc {}
+
+class MockProtocolBloc extends MockBloc<ProtocolEvent, ProtocolState>
+    implements ProtocolBloc {}
+
+class MockTabBloc extends MockBloc<TabEvent, AppTab> implements TabBloc {}
+
+class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState>
+    implements UpdateBloc {}
+
+class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState>
+    implements BluetoothBloc {}
+
 void main() async {
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
@@ -28,7 +43,7 @@ void main() async {
   final settings = await SharedPrefsSettingsProvider.load();
   final appInfo = MockAppInfoProvider();
   final UpdateProvider updateProvider = MockUpdateProvider();
-  final IBluetoothProvider bluetoothProvider = MockIBluetoothProvider();
+  final IBluetoothProvider bluetoothProvider = MockBluetoothProvider();
 
   final AudioService audioService = MockAudioService();
 
@@ -44,6 +59,47 @@ void main() async {
         ),
       ); // Create main app
       expect(find.byType(EntimeAppView), findsOneWidget);
+    });
+  });
+
+  group('EntimeAppView', () {
+    late SettingsBloc settingsBloc;
+    late ProtocolBloc protocolBloc;
+    late TabBloc tabBloc;
+    late UpdateBloc updateBloc;
+    late BluetoothBloc bluetoothBloc;
+
+    setUp(() {
+      settingsBloc = MockSettingsBloc();
+      protocolBloc = MockProtocolBloc();
+      tabBloc = MockTabBloc();
+      updateBloc = MockUpdateBloc();
+      bluetoothBloc = MockBluetoothBloc();
+    });
+
+    testWidgets('renders WeatherPage', (tester) async {
+      when(() => settingsBloc.state)
+          .thenReturn(SettingsState(settings: settings.settings));
+      when(() => protocolBloc.state)
+          .thenReturn(const ProtocolState.notSelected());
+      when(() => tabBloc.state).thenReturn(AppTab.init);
+      when(() => updateBloc.state).thenReturn(const UpdateState.initial());
+      when(() => bluetoothBloc.state)
+          .thenReturn(const BluetoothBlocState.notInitialized());
+      await tester.pumpWidget(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => settingsBloc),
+            BlocProvider(create: (_) => protocolBloc),
+            BlocProvider(create: (_) => tabBloc),
+            BlocProvider(create: (_) => updateBloc),
+            BlocProvider(create: (_) => bluetoothBloc),
+          ],
+          child: const EntimeAppView(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(HomeScreen), findsOneWidget);
     });
   });
 }

@@ -119,12 +119,12 @@ class EntimeApp extends StatelessWidget {
               protocolBloc: BlocProvider.of<ProtocolBloc>(context),
               settingsBloc: BlocProvider.of<SettingsBloc>(context),
               logBloc: BlocProvider.of<LogBloc>(context),
-            )..add(InitializeBluetooth()),
+            )..add(const InitializeBluetooth()),
           ),
           BlocProvider<UpdateBloc>(
             create: (context) => UpdateBloc(updateProvider: updateProvider)
-              ..add(PopupChangelog())
-              ..add(CheckUpdate()),
+              ..add(const PopupChangelog())
+              ..add(const CheckUpdate()),
           ),
           BlocProvider<AppInfoCubit>(
             create: (context) => AppInfoCubit(appInfo: appInfo),
@@ -142,8 +142,8 @@ class EntimeAppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<SettingsBloc, SettingsState>(
-        builder: (context, settingsTheme) => MaterialApp(
-          theme: appThemeData[settingsTheme.settings.appTheme],
+        builder: (context, state) => MaterialApp(
+          theme: appThemeData[state.settings.appTheme],
           title: 'Entime',
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
@@ -153,10 +153,31 @@ class EntimeAppView extends StatelessWidget {
           ],
           supportedLocales: Localization.supportedLocales,
           //1. call BotToastInit
-          builder: BotToastInit(),
+          // builder: BotToastInit(),
           //2. registered route observer
-          navigatorObservers: [BotToastNavigatorObserver()],
+          // navigatorObservers: [BotToastNavigatorObserver()],
           home: const HomeScreen(),
         ),
       );
+}
+
+class MyEntimeAppView extends StatelessWidget {
+  const MyEntimeAppView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) =>
+      BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) => const MaterialApp(
+          home: MyWidget(),
+        ),
+      );
+}
+
+class MyWidget extends StatelessWidget {
+  const MyWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => const Text('data');
 }

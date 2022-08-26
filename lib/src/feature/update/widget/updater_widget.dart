@@ -52,7 +52,7 @@ class Updater extends StatelessWidget {
                 Localization.current.I18nUpdate_updateToVersion(state.version),
               ),
               onTap: () {
-                BlocProvider.of<UpdateBloc>(context).add(DownloadUpdate());
+                BlocProvider.of<UpdateBloc>(context).add(const DownloadUpdate());
               },
             );
           } else {
@@ -60,7 +60,7 @@ class Updater extends StatelessWidget {
               contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
               title: Text(Localization.current.I18nUpdate_checkForUpdates),
               onTap: () {
-                BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
+                BlocProvider.of<UpdateBloc>(context).add(const CheckUpdate());
               },
             );
           }

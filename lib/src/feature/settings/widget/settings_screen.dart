@@ -30,7 +30,7 @@ class _SettingsList extends StatelessWidget {
     final settingsBloc = context.read<SettingsBloc>();
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, settingsState) =>
-          BlocBuilder<BluetoothBloc, BluetoothConnectionState>(
+          BlocBuilder<BluetoothBloc, BluetoothBlocState>(
         builder: (context, bluetoothState) => SettingsList(
           sections: [
             SettingsSection(
@@ -41,8 +41,12 @@ class _SettingsList extends StatelessWidget {
                   initialValue: bluetoothState is! BluetoothNotEnabledState,
                   onToggle: (value) {
                     value
-                        ? context.read<BluetoothBloc>().add(EnableBluetooth())
-                        : context.read<BluetoothBloc>().add(DisableBluetooth());
+                        ? context
+                            .read<BluetoothBloc>()
+                            .add(const EnableBluetooth())
+                        : context
+                            .read<BluetoothBloc>()
+                            .add(const DisableBluetooth());
                   },
                 ),
                 SettingsTile.switchTile(
