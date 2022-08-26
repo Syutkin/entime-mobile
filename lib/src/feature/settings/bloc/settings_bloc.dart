@@ -23,7 +23,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     });
     on<SettingsEventUpdate>((event, emit) async {
       await settingsProvider.update(event.settings);
-      emit(_SettingsState(settings: settingsProvider.settings));
+      emit(_SettingsState(settings: event.settings));
     });
   }
 }

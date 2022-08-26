@@ -202,155 +202,160 @@ class HomeScreen extends StatelessWidget {
       );
 
   Widget _menuButton(BuildContext context, AppTab activeTab) =>
-      BlocBuilder<ProtocolBloc, ProtocolState>(
-        builder: (context, protocolState) {
-          final settingsBloc = context.read<SettingsBloc>();
-          final settings = settingsBloc.state.settings;
-          final protocolBloc = context.read<ProtocolBloc>();
-          final menuItems = <PopupMenuEntry<MenuButton>>[];
-          if (activeTab == AppTab.start || activeTab == AppTab.finish) {
-            if (protocolState is ProtocolSelectedState) {
+      BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) => BlocBuilder<ProtocolBloc, ProtocolState>(
+          builder: (context, protocolState) {
+            final settingsBloc = context.read<SettingsBloc>();
+            final settings = settingsBloc.state.settings;
+            final protocolBloc = context.read<ProtocolBloc>();
+            final menuItems = <PopupMenuEntry<MenuButton>>[];
+            if (activeTab == AppTab.start || activeTab == AppTab.finish) {
+              if (protocolState is ProtocolSelectedState) {
+                if (activeTab == AppTab.start) {
+                  menuItems.add(
+                    PopupMenuItem(
+                      value: MenuButton.addRacer,
+                      child: ListTile(
+                        leading: const Icon(Icons.add),
+                        title: Text(Localization.current.I18nHome_addRacer),
+                      ),
+                    ),
+                  );
+                }
+                menuItems.add(
+                  PopupMenuItem(
+                    value: MenuButton.share,
+                    child: ListTile(
+                      leading: const Icon(Icons.share),
+                      title: Text(Localization.current.I18nHome_share),
+                    ),
+                  ),
+                );
+              } else {
+                menuItems.add(
+                  PopupMenuItem(
+                    value: MenuButton.selectStartProtocol,
+                    child: ListTile(
+                      leading: const Icon(MdiIcons.database),
+                      title: Text(
+                        Localization.current.I18nHome_selectStartProtocol,
+                      ),
+                    ),
+                  ),
+                );
+              }
               if (activeTab == AppTab.start) {
                 menuItems.add(
                   PopupMenuItem(
-                    value: MenuButton.addRacer,
+                    value: MenuButton.countdown,
                     child: ListTile(
-                      leading: const Icon(Icons.add),
-                      title: Text(Localization.current.I18nHome_addRacer),
+                      leading: const Icon(MdiIcons.timer),
+                      title: Text(Localization.current.I18nHome_countdown),
                     ),
                   ),
                 );
               }
               menuItems.add(
                 PopupMenuItem(
-                  value: MenuButton.share,
+                  value: MenuButton.fab,
                   child: ListTile(
-                    leading: const Icon(Icons.share),
-                    title: Text(Localization.current.I18nHome_share),
+                    leading: const Icon(MdiIcons.handBackLeft),
+                    title: Text(Localization.current.I18nHome_fab),
                   ),
                 ),
               );
             } else {
-              menuItems.add(
-                PopupMenuItem(
-                  value: MenuButton.selectStartProtocol,
-                  child: ListTile(
-                    leading: const Icon(MdiIcons.database),
-                    title:
-                        Text(Localization.current.I18nHome_selectStartProtocol),
-                  ),
-                ),
-              );
-            }
-            if (activeTab == AppTab.start) {
-              menuItems.add(
-                PopupMenuItem(
-                  value: MenuButton.countdown,
-                  child: ListTile(
-                    leading: const Icon(MdiIcons.timer),
-                    title: Text(Localization.current.I18nHome_countdown),
-                  ),
-                ),
-              );
-            }
-            menuItems.add(
-              PopupMenuItem(
-                value: MenuButton.fab,
-                child: ListTile(
-                  leading: const Icon(MdiIcons.handBackLeft),
-                  title: Text(Localization.current.I18nHome_fab),
-                ),
-              ),
-            );
-          } else {
-            menuItems
-              ..add(
-                PopupMenuItem(
-                  value: MenuButton.selectStartProtocol,
-                  child: ListTile(
-                    leading: const Icon(MdiIcons.database),
-                    title:
-                        Text(Localization.current.I18nHome_selectStartProtocol),
-                  ),
-                ),
-              )
-              ..add(
-                PopupMenuItem(
-                  value: MenuButton.bluetooth,
-                  child: ListTile(
-                    leading: const Icon(Icons.bluetooth),
-                    title: Text(Localization.current.I18nHome_bluetooth),
-                  ),
-                ),
-              );
-          }
-          if (protocolState is ProtocolSelectedState &&
-              activeTab == AppTab.start) {
-            menuItems.add(
-              PopupMenuItem(
-                value: MenuButton.importCsv,
-                child: ListTile(
-                  leading: const Icon(MdiIcons.import),
-                  title: Text(
-                    Localization.current.I18nHome_importStartProtocolCsv,
-                  ),
-                ),
-              ),
-            );
-          }
-
-          return PopupMenuButton<MenuButton>(
-            itemBuilder: (context) => menuItems,
-            onSelected: (value) async {
-              switch (value) {
-                case MenuButton.share:
-                  if (activeTab == AppTab.start) {
-                    protocolBloc.add(const ProtocolShareStart());
-                  } else if (activeTab == AppTab.finish) {
-                    protocolBloc.add(const ProtocolShareFinish());
-                  }
-                  break;
-                case MenuButton.fab:
-                  if (activeTab == AppTab.start) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings:
-                            settings.copyWith(startFab: !settings.startFab),
+              menuItems
+                ..add(
+                  PopupMenuItem(
+                    value: MenuButton.selectStartProtocol,
+                    child: ListTile(
+                      leading: const Icon(MdiIcons.database),
+                      title: Text(
+                        Localization.current.I18nHome_selectStartProtocol,
                       ),
-                    );
-                  } else if (activeTab == AppTab.finish) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings:
-                            settings.copyWith(finishFab: !settings.finishFab),
-                      ),
-                    );
-                  }
-                  break;
-                case MenuButton.addRacer:
-                  await addRacerPopup(context);
-                  break;
-                case MenuButton.selectStartProtocol:
-                  await routeToSelectFileScreen(context);
-                  break;
-                case MenuButton.bluetooth:
-                  await selectBluetoothDevice(context);
-                  break;
-                case MenuButton.countdown:
-                  settingsBloc.add(
-                    SettingsEventUpdate(
-                      settings:
-                          settings.copyWith(countdown: !settings.countdown),
                     ),
-                  );
-                  break;
-                case MenuButton.importCsv:
-                  protocolBloc.add(const ProtocolLoadStartFromCsv());
-                  break;
-              }
-            },
-          );
-        },
+                  ),
+                )
+                ..add(
+                  PopupMenuItem(
+                    value: MenuButton.bluetooth,
+                    child: ListTile(
+                      leading: const Icon(Icons.bluetooth),
+                      title: Text(Localization.current.I18nHome_bluetooth),
+                    ),
+                  ),
+                );
+            }
+            if (protocolState is ProtocolSelectedState &&
+                activeTab == AppTab.start) {
+              menuItems.add(
+                PopupMenuItem(
+                  value: MenuButton.importCsv,
+                  child: ListTile(
+                    leading: const Icon(MdiIcons.import),
+                    title: Text(
+                      Localization.current.I18nHome_importStartProtocolCsv,
+                    ),
+                  ),
+                ),
+              );
+            }
+
+            return PopupMenuButton<MenuButton>(
+              itemBuilder: (context) => menuItems,
+              onSelected: (value) async {
+                switch (value) {
+                  case MenuButton.share:
+                    if (activeTab == AppTab.start) {
+                      protocolBloc.add(const ProtocolShareStart());
+                    } else if (activeTab == AppTab.finish) {
+                      protocolBloc.add(const ProtocolShareFinish());
+                    }
+                    break;
+                  case MenuButton.fab:
+                    if (activeTab == AppTab.start) {
+                      settingsBloc.add(
+                        SettingsEventUpdate(
+                          settings:
+                              settings.copyWith(startFab: !settings.startFab),
+                        ),
+                      );
+                    } else if (activeTab == AppTab.finish) {
+                      settingsBloc.add(
+                        SettingsEventUpdate(
+                          settings: settings.copyWith(
+                            finishFab: !settings.finishFab,
+                          ),
+                        ),
+                      );
+                    }
+                    break;
+                  case MenuButton.addRacer:
+                    await addRacerPopup(context);
+                    break;
+                  case MenuButton.selectStartProtocol:
+                    await routeToSelectFileScreen(context);
+                    break;
+                  case MenuButton.bluetooth:
+                    await selectBluetoothDevice(context);
+                    break;
+                  case MenuButton.countdown:
+                    settingsBloc.add(
+                      SettingsEventUpdate(
+                        settings:
+                            settings.copyWith(countdown: !settings.countdown),
+                      ),
+                    );
+                    break;
+                  case MenuButton.importCsv:
+                    protocolBloc.add(const ProtocolLoadStartFromCsv());
+                    break;
+                }
+              },
+            );
+          },
+        ),
       );
 
   Widget _finishFilterButton(BuildContext context, AppTab activeTab) {
