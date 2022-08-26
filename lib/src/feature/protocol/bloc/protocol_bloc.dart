@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../common/csv/csv_utils.dart';
 import '../../../common/logger/logger.dart';
+import '../../../common/utils/csv_utils.dart';
 import '../../csv/logic/startlist_provider.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../logic/protocol_provider.dart';
@@ -16,9 +16,7 @@ import '../model/start_protocol.dart';
 import '../model/start_time.dart';
 
 part 'protocol_bloc.freezed.dart';
-
 part 'protocol_event.dart';
-
 part 'protocol_state.dart';
 
 class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {

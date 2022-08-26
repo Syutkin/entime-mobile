@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../../common/helper/helper.dart';
 import '../../../../common/localization/localization.dart';
+import '../../../../common/utils/helper.dart';
 import '../../../protocol/protocol.dart';
 
 class FinishItemTile<T extends Object> extends StatelessWidget {

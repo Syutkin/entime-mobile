@@ -8,8 +8,9 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../common/helper/helper.dart';
 import '../../../common/localization/localization.dart';
+import '../../../common/utils/file_utils.dart';
+import '../../../common/utils/helper.dart';
 import '../../protocol/bloc/protocol_bloc.dart';
 
 // ToDo: get rid of this ignore

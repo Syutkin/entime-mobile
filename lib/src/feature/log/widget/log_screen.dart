@@ -4,8 +4,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../common/helper/helper.dart';
 import '../../../common/localization/localization.dart';
+import '../../../common/utils/helper.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../bloc/log_bloc.dart';
 

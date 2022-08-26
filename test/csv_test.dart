@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:entime/src/common/csv/csv_utils.dart';
+import 'package:entime/src/common/utils/csv_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';

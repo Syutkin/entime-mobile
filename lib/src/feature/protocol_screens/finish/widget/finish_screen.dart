@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../../common/helper/helper.dart';
 import '../../../../common/localization/localization.dart';
+import '../../../../common/utils/helper.dart';
 import '../../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../../init/widget/select_file_screen.dart';

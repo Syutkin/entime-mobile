@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:entime/src/common/csv/csv_utils.dart';
+import 'package:entime/src/common/utils/csv_utils.dart';
 import 'package:entime/src/feature/log/logic/log_provider.dart';
 import 'package:entime/src/feature/log/model/log_level.dart';
 import 'package:entime/src/feature/log/model/log_source.dart';

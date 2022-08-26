@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../../common/helper/helper.dart';
 import '../../../common/logger/logger.dart';
+import '../../../common/utils/helper.dart';
 import '../model/protocol.dart';
 import '../model/start_protocol.dart';
 

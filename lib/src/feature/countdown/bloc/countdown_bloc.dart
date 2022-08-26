@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
-import '../../../common/helper/helper.dart';
+import '../../../common/utils/helper.dart';
 import '../../protocol/protocol.dart';
 import '../../tab/tab.dart';
 

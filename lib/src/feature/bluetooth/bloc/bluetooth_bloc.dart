@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
-import '../../../common/helper/helper.dart';
 import '../../../common/logger/logger.dart';
+import '../../../common/utils/helper.dart';
 import '../../audio/logic/audio_service.dart';
 import '../../log/log.dart';
 import '../../module_settings/module_settings.dart';
