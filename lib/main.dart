@@ -32,10 +32,7 @@ Future<void> main() async {
   // );
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
-  await runMain();
-}
 
-Future<void> runMain() async {
   final packageInfo = await PackageInfo.fromPlatform();
   final androidInfo = await DeviceInfoPlugin().androidInfo;
   final settings = await SharedPrefsSettingsProvider.load();
@@ -43,7 +40,7 @@ Future<void> runMain() async {
     deviceInfo: androidInfo,
     packageInfo: packageInfo,
   );
-  final UpdateProvider updater = await UpdateProvider.init(
+  final UpdateProvider updateProvider = await UpdateProvider.init(
     client: http.Client(),
     appInfoProvider: appInfo,
     settingsProvider: settings,
@@ -58,86 +55,98 @@ Future<void> runMain() async {
   );
 
   final AudioService audioService = AudioService(settings: settings);
+
   runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider<TabBloc>(
-          create: (context) => TabBloc(),
-        ),
-        BlocProvider<SettingsBloc>(
-          create: (context) => SettingsBloc(settings),
-        ),
-        BlocProvider<ModuleSettingsBloc>(
-          create: (context) => ModuleSettingsBloc(),
-        ),
-        BlocProvider<LogBloc>(
-          create: (context) => LogBloc(
-            settingsBloc: BlocProvider.of<SettingsBloc>(context),
-          ),
-        ),
-        BlocProvider<ProtocolBloc>(
-          create: (context) => ProtocolBloc(
-            settingsBloc: BlocProvider.of<SettingsBloc>(context),
-          )..add(SelectProtocol(file: settings.settings.recentFile)),
-        ),
-        BlocProvider<CountdownBloc>(
-          create: (context) => CountdownBloc(
-            protocolBloc: BlocProvider.of<ProtocolBloc>(context),
-            tabBloc: BlocProvider.of<TabBloc>(context),
-          ),
-        ),
-        BlocProvider<BluetoothBloc>(
-          create: (context) => BluetoothBloc(
-            audioService: audioService,
-            bluetoothProvider: bluetoothProvider,
-            moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),
-            protocolBloc: BlocProvider.of<ProtocolBloc>(context),
-            settingsBloc: BlocProvider.of<SettingsBloc>(context),
-            logBloc: BlocProvider.of<LogBloc>(context),
-          )..add(InitializeBluetooth()),
-        ),
-        BlocProvider<UpdateBloc>(
-          create: (context) => UpdateBloc(updater: updater),
-        ),
-        BlocProvider<AppInfoCubit>(
-          create: (context) => AppInfoCubit(appInfo: appInfo),
-        ),
-      ],
-      child: EntimeApp(settings: settings),
+    EntimeApp(
+      settings: settings,
+      updateProvider: updateProvider,
+      bluetoothProvider: bluetoothProvider,
+      audioService: audioService,
+      appInfo: appInfo,
     ),
   );
 }
 
 class EntimeApp extends StatelessWidget {
   final SettingsProvider settings;
+  final AppInfoProvider appInfo;
+  final UpdateProvider updateProvider;
+  final IBluetoothProvider bluetoothProvider;
+  final AudioService audioService;
 
-  const EntimeApp({Key? key, required this.settings}) : super(key: key);
+  const EntimeApp({
+    Key? key,
+    required this.settings,
+    required this.updateProvider,
+    required this.bluetoothProvider,
+    required this.audioService,
+    required this.appInfo,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    // send commands to our top-level blocs to get them to initialize
-    BlocProvider.of<UpdateBloc>(context).add(PopupChangelog());
-    if (settings.settings.checkUpdates) {
-      BlocProvider.of<UpdateBloc>(context).add(CheckUpdate());
-    }
-
-    return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, settingsTheme) => MaterialApp(
-        theme: appThemeData[settingsTheme.settings.appTheme],
-        title: 'Entime',
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          Localization.delegate,
+  Widget build(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider<TabBloc>(
+            create: (context) => TabBloc(),
+          ),
+          BlocProvider<SettingsBloc>(
+            create: (context) => SettingsBloc(settings),
+          ),
+          BlocProvider<ModuleSettingsBloc>(
+            create: (context) => ModuleSettingsBloc(),
+          ),
+          BlocProvider<LogBloc>(
+            create: (context) => LogBloc(
+              settingsBloc: BlocProvider.of<SettingsBloc>(context),
+            ),
+          ),
+          BlocProvider<ProtocolBloc>(
+            create: (context) => ProtocolBloc(
+              settingsBloc: BlocProvider.of<SettingsBloc>(context),
+            )..add(SelectProtocol(file: settings.settings.recentFile)),
+          ),
+          BlocProvider<CountdownBloc>(
+            create: (context) => CountdownBloc(
+              protocolBloc: BlocProvider.of<ProtocolBloc>(context),
+              tabBloc: BlocProvider.of<TabBloc>(context),
+            ),
+          ),
+          BlocProvider<BluetoothBloc>(
+            create: (context) => BluetoothBloc(
+              audioService: audioService,
+              bluetoothProvider: bluetoothProvider,
+              moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),
+              protocolBloc: BlocProvider.of<ProtocolBloc>(context),
+              settingsBloc: BlocProvider.of<SettingsBloc>(context),
+              logBloc: BlocProvider.of<LogBloc>(context),
+            )..add(InitializeBluetooth()),
+          ),
+          BlocProvider<UpdateBloc>(
+            create: (context) => UpdateBloc(updateProvider: updateProvider)
+              ..add(PopupChangelog())
+              ..add(CheckUpdate()),
+          ),
+          BlocProvider<AppInfoCubit>(
+            create: (context) => AppInfoCubit(appInfo: appInfo),
+          ),
         ],
-        supportedLocales: Localization.supportedLocales,
-        //1. call BotToastInit
-        builder: BotToastInit(),
-        //2. registered route observer
-        navigatorObservers: [BotToastNavigatorObserver()],
-        home: const HomeScreen(),
-      ),
-    );
-  }
+        child: BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, settingsTheme) => MaterialApp(
+            theme: appThemeData[settingsTheme.settings.appTheme],
+            title: 'Entime',
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              Localization.delegate,
+            ],
+            supportedLocales: Localization.supportedLocales,
+            //1. call BotToastInit
+            builder: BotToastInit(),
+            //2. registered route observer
+            navigatorObservers: [BotToastNavigatorObserver()],
+            home: const HomeScreen(),
+          ),
+        ),
+      );
 }

@@ -10,12 +10,12 @@ part 'update_event.dart';
 part 'update_state.dart';
 
 class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
-  final UpdateProvider updater;
+  final UpdateProvider updateProvider;
 
   UpdateBloc({
-    required this.updater,
+    required this.updateProvider,
   }) : super(const UpdateInitial()) {
-    updater
+    updateProvider
       ..setDownloadingHandler((current, total) {
         add(UpdateDownloading(current, total));
       })
@@ -28,9 +28,9 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       });
 
     on<CheckUpdate>((event, emit) async {
-      final bool update = await updater.isUpdateAvailable();
+      final bool update = await updateProvider.isUpdateAvailable();
       if (update) {
-        emit(UpdateAvailable(updater.latestVersion));
+        emit(UpdateAvailable(updateProvider.latestVersion));
       } else {
         emit(const UpdateInitial());
       }
@@ -39,7 +39,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
     on<DownloadUpdate>((event, emit) async {
       if (state is UpdateAvailable) {
         emit(UpdateConnecting());
-        await updater.downloadUpdate();
+        await updateProvider.downloadUpdate();
       }
     });
 
@@ -48,17 +48,17 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
     });
 
     on<UpdateFromFile>((event, emit) {
-      updater.installApk();
-      emit(UpdateAvailable(updater.latestVersion));
+      updateProvider.installApk();
+      emit(UpdateAvailable(updateProvider.latestVersion));
     });
 
     on<CancelDownload>((event, emit) {
-      updater.stop();
-      emit(UpdateAvailable(updater.latestVersion));
+      updateProvider.stop();
+      emit(UpdateAvailable(updateProvider.latestVersion));
     });
 
     on<PopupChangelog>((event, emit) async {
-      emit(UpdateInitial(showChangelog: await updater.showChangelog()));
+      emit(UpdateInitial(showChangelog: await updateProvider.showChangelog()));
     });
   }
 }

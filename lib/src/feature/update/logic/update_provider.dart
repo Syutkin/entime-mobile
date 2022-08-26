@@ -91,23 +91,27 @@ class UpdateProvider {
   }
 
   Future<Release?> _getLatestRelease() async {
-    final url = Uri.parse(
-      'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
-    );
-    try {
-      final response = await _client.get(url);
-      if (response.statusCode == 200) {
-        final release =
-            Release.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        return release;
-      } else {
-        logger.d('StatusCode: ${response.statusCode}');
+    if (_settingsProvider.settings.checkUpdates) {
+      final url = Uri.parse(
+        'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
+      );
+      try {
+        final response = await _client.get(url);
+        if (response.statusCode == 200) {
+          final release = Release.fromJson(
+            jsonDecode(response.body) as Map<String, dynamic>,
+          );
+          return release;
+        } else {
+          logger.d('StatusCode: ${response.statusCode}');
+          return null;
+        }
+      } on Exception catch (e) {
+        logger.e('error: $e');
         return null;
       }
-    } on Exception catch (e) {
-      logger.e('error: $e');
-      return null;
     }
+    return null;
   }
 
   Future<void> downloadUpdate() async {

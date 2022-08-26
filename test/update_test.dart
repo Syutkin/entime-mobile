@@ -16,6 +16,7 @@ void main() async {
   final client = MockClient();
   final appInfoProvider = MockAppInfoProvider();
   final settings = await SharedPrefsSettingsProvider.load();
+  await settings.setDefaults();
 
   group('UpdateProvider.init', () {
     test('Initialize', () async {
@@ -64,6 +65,45 @@ void main() async {
       );
 
       expect(await updater.isUpdateAvailable(), true);
+    });
+
+    test('Update available but check disabled at settings', () async {
+      when(
+        appInfoProvider.appName,
+      ).thenAnswer((realInvocation) => 'Entime');
+      when(
+        appInfoProvider.version,
+      ).thenAnswer((realInvocation) => '0.0.1');
+      when(
+        appInfoProvider.buildNumber,
+      ).thenAnswer((realInvocation) => '1');
+      when(
+        appInfoProvider.abi,
+      ).thenAnswer((realInvocation) => 'arm64-v8a');
+      when(
+        client.get(
+          Uri.parse(
+            'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
+          ),
+        ),
+      ).thenAnswer(
+        (_) async => http.Response(
+          _githubResponse,
+          200,
+        ),
+      );
+
+      await settings.update(settings.settings.copyWith(checkUpdates: false));
+
+      final updater = await UpdateProvider.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      expect(await updater.isUpdateAvailable(), false);
+
+      await settings.update(settings.settings.copyWith(checkUpdates: true));
     });
 
     test('Update unavailable, you get a latest version', () async {
