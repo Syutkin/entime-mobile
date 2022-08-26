@@ -38,30 +38,11 @@ class _SettingsList extends StatelessWidget {
               tiles: [
                 SettingsTile.switchTile(
                   title: Text(Localization.current.I18nSettings_bluetooth),
-                  //leading:  Icon(Icons.bluetooth),
-                  // initialValue: _bluetoothState.isEnabled,
                   initialValue: bluetoothState is! BluetoothNotEnabledState,
-                  // enabled: false,
                   onToggle: (value) {
                     value
                         ? context.read<BluetoothBloc>().add(EnableBluetooth())
                         : context.read<BluetoothBloc>().add(DisableBluetooth());
-// value ?  ?
-                    // // Do the request and update with the true value then
-                    // Future<void> future() async {
-                    //   // async lambda seems to not working
-                    //   if (value) {
-                    //     await FlutterBluetoothSerial.instance.requestEnable();
-                    //   } else {
-                    //     await FlutterBluetoothSerial.instance.requestDisable();
-                    //   }
-                    // }
-                    //
-                    // future().then((_) {
-                    //   setState(() {
-                    //     // TODO: state to BLoC
-                    //   });
-                    // });
                   },
                 ),
                 SettingsTile.switchTile(
@@ -69,7 +50,6 @@ class _SettingsList extends StatelessWidget {
                   description: Text(
                     Localization.current.I18nSettings_reconnectDescription,
                   ),
-                  // subtitleMaxLines: 3,
                   //leading:  Icon(Icons.bluetooth),
                   initialValue: settingsState.settings.reconnect,
                   onToggle: (value) {

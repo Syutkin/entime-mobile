@@ -25,42 +25,25 @@ class _InitScreen extends State<InitScreen> {
   @override
   Widget build(BuildContext context) => ListView(
         children: <Widget>[
-          _selectProtocol(),
+          const _SelectProtocolWidget(),
           _selectBluetooth(),
           !kReleaseMode
               ? const Header(text: 'Debug')
               : const SizedBox(width: 0, height: 0),
           !kReleaseMode
-              ? _debugAddLogButton(context)
+              ? _DebugAddLogButton(context: context)
               : const SizedBox(width: 0, height: 0),
           !kReleaseMode
-              ? _debugLogButton(context)
+              ? _DebugLogButton(context: context)
               : const SizedBox(width: 0, height: 0),
           !kReleaseMode
-              ? _debugCountdownButton(context)
+              ? _DebugCountdownButton(context: context)
               : const SizedBox(width: 0, height: 0),
           !kReleaseMode
-              ? _debugVoiceButton(context)
+              ? const _DebugVoiceButton()
               : const SizedBox(width: 0, height: 0),
         ],
       );
-
-  Widget _selectProtocol() {
-    final Widget title = Text(Localization.current.I18nInit_startProtocol);
-    return BlocBuilder<ProtocolBloc, ProtocolState>(
-      builder: (context, protocolState) => ListTile(
-        onTap: () => routeToSelectFileScreen(context),
-        leading: IconButton(
-          icon: const Icon(MdiIcons.database),
-          onPressed: () => routeToSelectFileScreen(context),
-        ),
-        title: title,
-        subtitle: protocolState is ProtocolSelectedState
-            ? Text(basename(protocolState.databasePath))
-            : Text(Localization.current.I18nInit_pressToSelect),
-      ),
-    );
-  }
 
   Widget _selectBluetooth() =>
       BlocBuilder<BluetoothBloc, BluetoothConnectionState>(
@@ -111,8 +94,18 @@ class _InitScreen extends State<InitScreen> {
       ),
     );
   }
+}
 
-  Widget _debugLogButton(BuildContext context) => TextButton(
+class _DebugLogButton extends StatelessWidget {
+  const _DebugLogButton({
+    Key? key,
+    required this.context,
+  }) : super(key: key);
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) => TextButton(
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute<void>(
@@ -124,8 +117,18 @@ class _InitScreen extends State<InitScreen> {
         },
         child: const Text('Show Log'),
       );
+}
 
-  Widget _debugAddLogButton(BuildContext context) => TextButton(
+class _DebugAddLogButton extends StatelessWidget {
+  const _DebugAddLogButton({
+    Key? key,
+    required this.context,
+  }) : super(key: key);
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) => TextButton(
         onPressed: () {
           BlocProvider.of<LogBloc>(context).add(
             const LogAdd(
@@ -138,8 +141,18 @@ class _InitScreen extends State<InitScreen> {
         },
         child: const Text('Add Log'),
       );
+}
 
-  Widget _debugCountdownButton(BuildContext context) => TextButton(
+class _DebugCountdownButton extends StatelessWidget {
+  const _DebugCountdownButton({
+    Key? key,
+    required this.context,
+  }) : super(key: key);
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) => TextButton(
         // _device = event.device;
         onPressed: () {
           // BlocProvider.of<BluetoothBloc>(context)
@@ -150,13 +163,42 @@ class _InitScreen extends State<InitScreen> {
         },
         child: const Text('Countdown Test'),
       );
+}
 
-  Widget _debugVoiceButton(BuildContext context) => TextButton(
+class _DebugVoiceButton extends StatelessWidget {
+  const _DebugVoiceButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => TextButton(
         onPressed: () {
           BlocProvider.of<BluetoothBloc>(context)
               .audioService
               .speak('Это тестовое сообщение');
         },
         child: const Text('Voice Test'),
+      );
+}
+
+class _SelectProtocolWidget extends StatelessWidget {
+  const _SelectProtocolWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) =>
+      BlocBuilder<ProtocolBloc, ProtocolState>(
+        builder: (context, protocolState) => ListTile(
+          onTap: () => routeToSelectFileScreen(context),
+          leading: IconButton(
+            icon: const Icon(MdiIcons.database),
+            onPressed: () => routeToSelectFileScreen(context),
+          ),
+          title: Text(Localization.current.I18nInit_startProtocol),
+          subtitle: protocolState is ProtocolSelectedState
+              ? Text(basename(protocolState.databasePath))
+              : Text(Localization.current.I18nInit_pressToSelect),
+        ),
       );
 }

@@ -50,14 +50,16 @@ class LogScreen extends StatelessWidget {
                           Flexible(
                             flex: 10,
                             child: Align(
-                              child: _levelIcon(item.level),
+                              child: _LogLevelIcon(level: item.level),
                             ),
                           ),
                           Flexible(
                             flex: 10,
                             child: Align(
-                              child:
-                                  _logSourceIcon(item.source, item.direction),
+                              child: _LogSourceIcon(
+                                source: item.source,
+                                direction: item.direction,
+                              ),
                             ),
                           ),
                           Flexible(
@@ -90,24 +92,33 @@ class LogScreen extends StatelessWidget {
     );
   }
 
-  Widget _levelIcon(String level) {
-    switch (level) {
-      case 'Error':
-        return const Icon(MdiIcons.alertOctagon);
-      case 'Warning':
-        return const Icon(Icons.warning);
-      case 'Information':
-        return const Icon(Icons.info_outline);
-      case 'Debug':
-        return const Icon(MdiIcons.debugStepInto);
-      case 'Verbose':
-        return const Icon(Icons.circle_notifications);
-      default:
-        return const Icon(MdiIcons.closeCircleOutline);
-    }
-  }
+  List<Widget> _getDebugButtons(BuildContext context) => <Widget>[
+        Row(
+          children: <Widget>[
+            TextButton(
+              onPressed: () async {
+                BlocProvider.of<BluetoothBloc>(context)
+                    .add(const MessageReceived('F12:12:12,121#'));
+              },
+              child: const Icon(Icons.build),
+            ),
+          ],
+        ),
+      ];
+}
 
-  Widget _logSourceIcon(String source, String? direction) {
+class _LogSourceIcon extends StatelessWidget {
+  const _LogSourceIcon({
+    Key? key,
+    required this.source,
+    required this.direction,
+  }) : super(key: key);
+
+  final String source;
+  final String? direction;
+
+  @override
+  Widget build(BuildContext context) {
     switch (source) {
       case 'Bluetooth':
         switch (direction) {
@@ -128,18 +139,31 @@ class LogScreen extends StatelessWidget {
         return const Icon(Icons.help_outline);
     }
   }
+}
 
-  List<Widget> _getDebugButtons(BuildContext context) => <Widget>[
-        Row(
-          children: <Widget>[
-            TextButton(
-              onPressed: () async {
-                BlocProvider.of<BluetoothBloc>(context)
-                    .add(const MessageReceived('F12:12:12,121#'));
-              },
-              child: const Icon(Icons.build),
-            ),
-          ],
-        ),
-      ];
+class _LogLevelIcon extends StatelessWidget {
+  const _LogLevelIcon({
+    Key? key,
+    required this.level,
+  }) : super(key: key);
+
+  final String level;
+
+  @override
+  Widget build(BuildContext context) {
+    switch (level) {
+      case 'Error':
+        return const Icon(MdiIcons.alertOctagon);
+      case 'Warning':
+        return const Icon(Icons.warning);
+      case 'Information':
+        return const Icon(Icons.info_outline);
+      case 'Debug':
+        return const Icon(MdiIcons.debugStepInto);
+      case 'Verbose':
+        return const Icon(Icons.circle_notifications);
+      default:
+        return const Icon(MdiIcons.closeCircleOutline);
+    }
+  }
 }
