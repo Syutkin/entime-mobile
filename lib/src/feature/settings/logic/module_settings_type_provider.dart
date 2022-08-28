@@ -7,10 +7,6 @@ import 'module_settings_provider.dart';
 class ModuleSettingsType extends ModuleSettingsProvider {
   late ModSettingsModelType _modSettingsModel;
 
-  // // Module type
-  // @override
-  // String type = '';
-
   //Loading settings on initialization
   @override
   Future<bool> update(String jsonString) async {

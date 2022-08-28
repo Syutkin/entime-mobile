@@ -23,61 +23,62 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
         _settings = settings;
 
   static Future<SharedPrefsSettingsProvider> load() async {
+    const defaults = AppSettings.defaults();
     final prefs = await SharedPreferences.getInstance();
     final settings = AppSettings(
-      sound: prefs.getBool('sound') ?? const AppSettings.defaults().sound,
-      beep: prefs.getBool('beep') ?? const AppSettings.defaults().beep,
-      voice: prefs.getBool('voice') ?? const AppSettings.defaults().voice,
+      sound: prefs.getBool('sound') ?? defaults.sound,
+      beep: prefs.getBool('beep') ?? defaults.beep,
+      voice: prefs.getBool('voice') ?? defaults.voice,
       voiceName:
-          prefs.getBool('voiceName') ?? const AppSettings.defaults().voiceName,
-      volume: prefs.getDouble('volume') ?? const AppSettings.defaults().volume,
-      pitch: prefs.getDouble('pitch') ?? const AppSettings.defaults().pitch,
-      rate: prefs.getDouble('rate') ?? const AppSettings.defaults().rate,
+          prefs.getBool('voiceName') ?? defaults.voiceName,
+      volume: prefs.getDouble('volume') ?? defaults.volume,
+      pitch: prefs.getDouble('pitch') ?? defaults.pitch,
+      rate: prefs.getDouble('rate') ?? defaults.rate,
       language:
-          prefs.getString('language') ?? const AppSettings.defaults().language,
+          prefs.getString('language') ?? defaults.language,
       recentFile: prefs.getString('recentFile') ??
-          const AppSettings.defaults().recentFile,
+          defaults.recentFile,
       wakelock:
-          prefs.getBool('wakelock') ?? const AppSettings.defaults().wakelock,
+          prefs.getBool('wakelock') ?? defaults.wakelock,
       startFab:
-          prefs.getBool('startFab') ?? const AppSettings.defaults().startFab,
+          prefs.getBool('startFab') ?? defaults.startFab,
       startFabSize: prefs.getDouble('startFabSize') ??
-          const AppSettings.defaults().startFabSize,
+          defaults.startFabSize,
       finishFab:
-          prefs.getBool('finishFab') ?? const AppSettings.defaults().finishFab,
+          prefs.getBool('finishFab') ?? defaults.finishFab,
       finishFabSize: prefs.getDouble('finishFabSize') ??
-          const AppSettings.defaults().finishFabSize,
+          defaults.finishFabSize,
       countdown:
-          prefs.getBool('countdown') ?? const AppSettings.defaults().countdown,
+          prefs.getBool('countdown') ?? defaults.countdown,
       countdownSize: prefs.getDouble('countdownSize') ??
-          const AppSettings.defaults().countdownSize,
+          defaults.countdownSize,
       countdownLeft: prefs.getDouble('countdownLeft') ??
-          const AppSettings.defaults().countdownLeft,
+          defaults.countdownLeft,
       countdownTop: prefs.getDouble('countdownTop') ??
-          const AppSettings.defaults().countdownTop,
+          defaults.countdownTop,
       countdownAtStartTime: prefs.getBool('countdownAtStartTime') ??
-          const AppSettings.defaults().countdownAtStartTime,
+          defaults.countdownAtStartTime,
       checkUpdates: prefs.getBool('checkUpdates') ??
-          const AppSettings.defaults().checkUpdates,
+          defaults.checkUpdates,
       hideMarked: prefs.getBool('hideMarked') ??
-          const AppSettings.defaults().hideMarked,
+          defaults.hideMarked,
       hideNumbers: prefs.getBool('hideNumbers') ??
-          const AppSettings.defaults().hideNumbers,
+          defaults.hideNumbers,
       hideManual: prefs.getBool('hideManual') ??
-          const AppSettings.defaults().hideManual,
+          defaults.hideManual,
       reconnect:
-          prefs.getBool('reconnect') ?? const AppSettings.defaults().reconnect,
+          prefs.getBool('reconnect') ?? defaults.reconnect,
       finishDelay: prefs.getInt('finishDelay') ??
-          const AppSettings.defaults().finishDelay,
+          defaults.finishDelay,
       substituteNumbers: prefs.getBool('substituteNumbers') ??
-          const AppSettings.defaults().substituteNumbers,
+          defaults.substituteNumbers,
       substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
-          const AppSettings.defaults().substituteNumbersDelay,
+          defaults.substituteNumbersDelay,
       logLimit:
-          prefs.getInt('logLimit') ?? const AppSettings.defaults().logLimit,
+          prefs.getInt('logLimit') ?? defaults.logLimit,
       appTheme: themeFromString(prefs.getString('theme')),
       previousVersion: prefs.getString('previousVersion') ??
-          const AppSettings.defaults().previousVersion,
+          defaults.previousVersion,
     );
 
     // Для похождения тестов, пока Wakelock не поддерживает Linux,

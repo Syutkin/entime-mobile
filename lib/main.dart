@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/common/bloc/app_bloc_observer.dart';
 import 'src/common/localization/localization.dart';
@@ -23,6 +24,7 @@ import 'src/feature/update/update.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   // await BlocOverrides.runZoned(
   //   () async {
   //     await runMain();
@@ -56,13 +58,19 @@ Future<void> main() async {
 
   final AudioService audioService = AudioService(settings: settings);
 
-  runApp(
-    EntimeApp(
-      settings: settings,
-      updateProvider: updateProvider,
-      bluetoothProvider: bluetoothProvider,
-      audioService: audioService,
-      appInfo: appInfo,
+  await SentryFlutter.init(
+    (options) async {
+      
+      options.dsn = 'https://example@sentry.io/add-your-dsn-here';
+    },
+    appRunner: () => runApp(
+      EntimeApp(
+        settings: settings,
+        updateProvider: updateProvider,
+        bluetoothProvider: bluetoothProvider,
+        audioService: audioService,
+        appInfo: appInfo,
+      ),
     ),
   );
 }

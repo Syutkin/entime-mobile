@@ -11,7 +11,7 @@ description: A mobile application for Entime project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.4.4+109
+version: 0.4.4+110
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
@@ -47,6 +47,7 @@ dependencies:
   path_provider: any
   permission_handler: any
   pub_semver: any
+  sentry_flutter: any
   settings_ui: any
   share_plus: any
   shared_preferences: any
