@@ -21,6 +21,7 @@ part 'bluetooth_bloc.freezed.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   final IBluetoothProvider bluetoothProvider;
+  final IProtocolProvider protocolProvider;
 
   final ModuleSettingsBloc moduleSettingsBloc;
   final ProtocolBloc protocolBloc;
@@ -56,6 +57,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     required this.logBloc,
     required this.audioService,
     required this.bluetoothProvider,
+    required this.protocolProvider,
   }) : super(const BluetoothNotInitializedState()) {
     protocolSubscription = protocolBloc.stream.listen((state) {
       if (state is ProtocolSelectedState) {
@@ -314,7 +316,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   Future<void> _countdown(String time) async {
     if (_protocolSelectedState) {
-      if (await ProtocolProvider.db.getStart(time) > 0) {
+      if (await protocolProvider.getStart(time) > 0) {
         await audioService.countdown();
         logger.i('Bluetooth -> Beep start $time');
       } else {
@@ -343,7 +345,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         start.add(DateFormat('HH:mm:ss').format(dateTime));
       }
       participant =
-          await ProtocolProvider.db.getStartingParticipants(start.first);
+          await protocolProvider.getStartingParticipants(start.first);
       if (participant.isNotEmpty) {
         _isStarted = true;
         _isBetweenCategory = false;
@@ -358,7 +360,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           newVoiceText += '.';
         }
         participant =
-            await ProtocolProvider.db.getStartingParticipants(start[1]);
+            await protocolProvider.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
           newVoiceText += ' Следующий номер ${participant.first.number}';
           if (_voiceName && participant.first.name != null) {
@@ -369,7 +371,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         }
       } else {
         participant =
-            await ProtocolProvider.db.getStartingParticipants(start[1]);
+            await protocolProvider.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
           _isStarted = true;
           _isBetweenCategory = false;
@@ -390,7 +392,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               'Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
             );
             participant =
-                await ProtocolProvider.db.getNextParticipants(start.first);
+                await protocolProvider.getNextParticipants(start.first);
             if (participant.isNotEmpty) {
               _isBetweenCategory = true;
               final DateTime? lastStart = strTimeToDateTime(start.first);

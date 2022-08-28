@@ -14,6 +14,7 @@ part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   final ProtocolBloc protocolBloc;
+  final IProtocolProvider protocolProvider;
   late final StreamSubscription<ProtocolState> protocolSubscription;
   final TabBloc tabBloc;
   late final StreamSubscription<AppTab> tabSubscription;
@@ -26,6 +27,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   CountdownBloc({
     required this.protocolBloc,
     required this.tabBloc,
+    required this.protocolProvider,
   }) : super(CountdownInitialState()) {
     _startTimer();
     protocolSubscription = protocolBloc.stream.listen((state) async {
@@ -99,7 +101,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   }
 
   Future<DateTime?> _getNextStarttime(DateTime time) async {
-    _participant = await ProtocolProvider.db
+    _participant = await protocolProvider
         .getNextParticipants(DateFormat('HH:mm:ss').format(time));
     if (_participant.isNotEmpty && _participant.first.starttime != null) {
       return strTimeToDateTime(_participant.first.starttime!);

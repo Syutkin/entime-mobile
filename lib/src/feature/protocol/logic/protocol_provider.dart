@@ -4,43 +4,169 @@ import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../common/logger/logger.dart';
+import '../../../common/model/reactive_state.dart';
 import '../../../common/utils/helper.dart';
+import '../model/db_state.dart';
 import '../model/protocol.dart';
 import '../model/start_protocol.dart';
 
-class ProtocolProvider {
-  ProtocolProvider._();
+abstract class IProtocolProvider with ReactiveState<DBState> {
+  String? get dbPath;
+  // Future<void> setDbPath(String? value);
+  // Future<Database> get database;
+  // Future<Database> get db;
+  Future<void> openDb(String path);
 
-  static final ProtocolProvider db = ProtocolProvider._();
+  /// Close database
+  Future<void> closeDb();
 
+  // ----------------старт----------------
+  Future<List<StartItem>> getAllParticipantsAtStart();
+
+  Future<List<Map<String, Object?>>> getStartToCsv();
+
+  /// Проверяем есть ли стартующий около времени [beepTime]
+  /// Возвращает 0 если стартующего нет
+  Future<int> getStart(String beepTime);
+
+  /// Обновляет [StartItem].automaticstarttime и [StartItem].automaticcorrection
+  /// Возвращает null при успехе, и [StartItem] при неудаче
+  Future<List<StartItem>?> updateAutomaticCorrection({
+    required String time,
+    required int correction,
+    required DateTime timeStamp,
+    bool forceUpdate = false,
+  });
+
+  Future<int> updateManualStartTime(DateTime time);
+
+  Future<int> updateItemInfoAtStart(StartItem item);
+
+  Future<int> setDNS(int number);
+
+  /// Обновляет или добавляет [StartItem].number и [StartItem].starttime
+  /// Возвращает null при успехе, и [StartItem] если такое же стартовое время
+  /// уже установлено для другого участника
+  Future<List<StartItem>?> addStartNumber({
+    required int number,
+    required String time,
+    bool forceAdd = false,
+  });
+
+  Future<int> clearStartResultsDebug();
+
+  Future<List<StartItem>> getStartingParticipants(String time);
+
+  Future<List<StartItem>> getNextParticipants(String time);
+
+  // Загружает в протокол участников и их стартовое время (одно) из csv файла
+  Future<void> loadStartItem(List<StartItemCsv> items);
+
+  // ----------------номера на трассе----------------
+  Future<List<StartItem>> getNumbersOnTrace([String? timeNow]);
+
+// ----------------финиш----------------
+  Future<List<FinishItem>> getFinishTime({
+    bool hideMarked = true,
+    bool hideNumbers = false,
+    bool hideManual = false,
+  });
+
+  Future<List<Map<String, Object?>>> getFinishToCsv();
+
+  /// Записывает финишное время
+  ///
+  /// Возвращает автоматически присвоенный номер или null
+  ///
+  /// Если новое финишное время отличается менее чем на [finishDelay]
+  /// от предыдущего нескрытого, неручного финишного времени без присвоенного номера,
+  /// то записываемое время будет автоматически скрыто
+  Future<int?> addFinishTime({
+    required String finish,
+    required DateTime timeStamp,
+    int finishDelay = 0,
+    bool substituteNumbers = false,
+    int substituteNumbersDelay = 0,
+    String? debugTimeNow,
+    int? number,
+  });
+
+  Future<int> addFinishTimeManual(String time);
+
+  Future<int> hideFinish(int id);
+
+  Future<int> hideAllFinish();
+
+  Future<int> clearFinishResultsDebug();
+
+  Future<bool> addNumber(int id, int number, String finishtime);
+
+  Future<void> clearNumberAtFinish(int number);
+
+  Future<int> setDNF(int number);
+
+  Future<void> dispose();
+}
+
+class ProtocolProvider implements IProtocolProvider {
   Database? _database;
 
   String? _dbPath;
 
+  @override
   String? get dbPath => _dbPath;
 
-  Future<void> setDbPath(String? value) async {
-    if (_dbPath != value) {
+  // @override
+  // Future<void> setDbPath(String? value) async {
+  //   if (_dbPath != value) {
+  //     await _database?.close();
+  //     if (value != null) {
+  //       _database = await _initDB(value);
+  //     } else {
+  //       _database = null;
+  //     }
+  //     _dbPath = value;
+  //   }
+  // }
+
+  @override
+  Future<void> openDb(String path) async {
+    if (_dbPath != path) {
       await _database?.close();
-      _dbPath = value;
-      if (_dbPath != null) {
-        _database = await _initDB();
-      } else {
-        _database = null;
-      }
+      _dbPath = path;
+      _database = await _initDB(path);
+      _dbStateController.add(DBState.selected);
     }
   }
 
-  Future<Database> get database async {
+  @override
+  Future<void> closeDb() async {
+    _dbPath = null;
+    _dbStateController.add(DBState.notSelected);
+    await _database?.close();
+  }
+
+  final _dbStateController = StreamController<DBState>()
+    ..add(DBState.notSelected);
+
+  @override
+  Stream<DBState> get state => _dbStateController.stream.asBroadcastStream();
+
+  // @override
+  Future<Database> get _db async {
     if (_database != null) {
       return _database!;
     }
-    _database = await _initDB();
+    //ToDo: potential errors lives here
+    _database = await _initDB(_dbPath!);
     return _database!;
   }
 
-  Future<Database> _initDB() async => openDatabase(
-        _dbPath!,
+  // @override
+  // Future<Database> get _database async => db;
+
+  Future<Database> _initDB(String path) async => openDatabase(
+        path,
         version: 1,
         onOpen: (db) async {
           logger.v(
@@ -96,8 +222,9 @@ class ProtocolProvider {
       );
 
   // ----------------старт----------------
+  @override
   Future<List<StartItem>> getAllParticipantsAtStart() async {
-    final db = await database;
+    final db = await _db;
     final res = await db.rawQuery(
       '''
         SELECT
@@ -129,8 +256,9 @@ class ProtocolProvider {
   }
 
   //ToDo: посмотреть как сделано
+  @override
   Future<List<Map<String, Object?>>> getStartToCsv() async {
-    final db = await database;
+    final db = await _db;
     final result = await db.rawQuery(
       '''
         SELECT number, starttime,
@@ -148,6 +276,7 @@ class ProtocolProvider {
 
   //Проверяем есть ли стартующий около времени [beepTime]
   //Возвращает 0 если стартующего нет
+  @override
   Future<int> getStart(String beepTime) async {
     final DateTime? beepDateTime = strTimeToDateTime(beepTime);
     if (beepDateTime == null) {
@@ -156,7 +285,7 @@ class ProtocolProvider {
     }
     final DateTime timeAfter = beepDateTime.add(const Duration(seconds: 10));
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
-    final db = await database;
+    final db = await _db;
     final x = await db.rawQuery(
       '''
         SELECT COUNT(*) FROM start
@@ -173,13 +302,14 @@ class ProtocolProvider {
 
   /// Обновляет [StartItem].automaticstarttime и [StartItem].automaticcorrection
   /// Возвращает null при успехе, и [StartItem] при неудаче
+  @override
   Future<List<StartItem>?> updateAutomaticCorrection({
     required String time,
     required int correction,
     required DateTime timeStamp,
     bool forceUpdate = false,
   }) async {
-    final db = await database;
+    final db = await _db;
     final DateTime? dateGoTime = strTimeToDateTime(time);
     if (dateGoTime == null) {
       assert(dateGoTime != null, 'dateGoTime must not be null');
@@ -232,9 +362,10 @@ class ProtocolProvider {
   }
 
 //ToDo: исправить выставление значения только первому совпадению
+  @override
   Future<int> updateManualStartTime(DateTime time) async {
     int result = 0;
-    final db = await database;
+    final db = await _db;
     final DateTime timeBefore = time.subtract(const Duration(seconds: 15));
     final DateTime timeAfter = time.add(const Duration(seconds: 15));
     final String before = DateFormat('HH:mm:ss').format(timeBefore);
@@ -285,8 +416,9 @@ class ProtocolProvider {
     return result;
   }
 
+  @override
   Future<int> updateItemInfoAtStart(StartItem item) async {
-    final db = await database;
+    final db = await _db;
     final result = await db.rawUpdate(
       '''
         UPDATE start
@@ -317,7 +449,7 @@ class ProtocolProvider {
   }
 
 //  setStart(int number, String time, int correction) async {
-//    final db = await database;
+//    final db = await _db;
 //    var result = await db.rawUpdate('''
 //        UPDATE start
 //        SET starttime = ?, automaticcorrection = ?
@@ -327,8 +459,9 @@ class ProtocolProvider {
 //    return result;
 //  }
 
+  @override
   Future<int> setDNS(int number) async {
-    final db = await database;
+    final db = await _db;
     final result = await db.rawUpdate(
       '''
         UPDATE start
@@ -349,12 +482,13 @@ class ProtocolProvider {
   /// Обновляет или добавляет [StartItem].number и [StartItem].starttime
   /// Возвращает null при успехе, и [StartItem] если такое же стартовое время
   /// уже установлено для другого участника
+  @override
   Future<List<StartItem>?> addStartNumber({
     required int number,
     required String time,
     bool forceAdd = false,
   }) async {
-    final db = await database;
+    final db = await _db;
 
     // Если не принудительно добавлять/обновлять, то
     // проверяем, что такого же времени старта не установлено другому номеру,
@@ -398,8 +532,9 @@ class ProtocolProvider {
     return null;
   }
 
+  @override
   Future<int> clearStartResultsDebug() async {
-    final db = await database;
+    final db = await _db;
     final result = await db.rawUpdate(
       '''
         UPDATE start
@@ -412,6 +547,7 @@ class ProtocolProvider {
   }
 
 //ToDo: посмотреть как сделано
+  @override
   Future<List<StartItem>> getStartingParticipants(String time) async {
     final DateTime? dateTime = strTimeToDateTime(time);
     if (dateTime == null) {
@@ -420,7 +556,7 @@ class ProtocolProvider {
     }
     final DateTime timeAfter = dateTime.add(const Duration(minutes: 1));
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
-    final db = await database;
+    final db = await _db;
     final res = await db.rawQuery(
       '''
         SELECT start.id as id, start.number as number,
@@ -436,8 +572,9 @@ class ProtocolProvider {
     return startProtocol;
   }
 
+  @override
   Future<List<StartItem>> getNextParticipants(String time) async {
-    final db = await database;
+    final db = await _db;
     final res = await db.rawQuery(
       '''
         SELECT start.id as id, start.number as number,
@@ -454,9 +591,10 @@ class ProtocolProvider {
     return startProtocol;
   }
 
-  // Загружает в протокол участников и их стартовое время (одно) из csv файла
+  /// Загружает в протокол участников и их стартовое время (одно) из csv файла
+  @override
   Future<void> loadStartItem(List<StartItemCsv> items) async {
-    final db = await database;
+    final db = await _db;
     final batch = db.batch();
 
     for (final item in items) {
@@ -489,9 +627,10 @@ class ProtocolProvider {
 
 // ----------------номера на трассе----------------
 //ToDo: посмотреть как сделано
+  @override
   Future<List<StartItem>> getNumbersOnTrace([String? timeNow]) async {
     timeNow ??= "now', 'localtime";
-    final db = await database;
+    final db = await _db;
     final res = await db.rawQuery(
       '''
         SELECT id, number
@@ -508,12 +647,13 @@ class ProtocolProvider {
   }
 
 // ----------------финиш----------------
+  @override
   Future<List<FinishItem>> getFinishTime({
     bool hideMarked = true,
     bool hideNumbers = false,
     bool hideManual = false,
   }) async {
-    final db = await database;
+    final db = await _db;
     String sqliteQuery =
         'SELECT id, number, finishtime, "set", manual FROM finish';
     if (hideMarked || hideNumbers || hideManual) {
@@ -537,8 +677,9 @@ class ProtocolProvider {
   }
 
 //ToDo: посмотреть как сделано
+  @override
   Future<List<Map<String, Object?>>> getFinishToCsv() async {
-    final db = await database;
+    final db = await _db;
     final result = await db.rawQuery(
       '''
         SELECT number, finishtime
@@ -557,6 +698,7 @@ class ProtocolProvider {
   /// Если новое финишное время отличается менее чем на [finishDelay]
   /// от предыдущего нескрытого, неручного финишного времени без присвоенного номера,
   /// то записываемое время будет автоматически скрыто
+  @override
   Future<int?> addFinishTime({
     required String finish,
     required DateTime timeStamp,
@@ -615,7 +757,7 @@ class ProtocolProvider {
     }
 
     final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
-    final db = await database;
+    final db = await _db;
     await db.insert('finish', {
       'finishtime': finish,
       'phonetime': phoneTime,
@@ -636,8 +778,9 @@ class ProtocolProvider {
     return workingNumber;
   }
 
+  @override
   Future<int> addFinishTimeManual(String time) async {
-    final db = await database;
+    final db = await _db;
     final result = await db.insert('finish', {
       'finishtime': time,
       'manual': 1,
@@ -646,8 +789,9 @@ class ProtocolProvider {
     return result;
   }
 
+  @override
   Future<int> hideFinish(int id) async {
-    final db = await database;
+    final db = await _db;
     final result = await db.rawUpdate(
       '''
         UPDATE finish
@@ -659,8 +803,9 @@ class ProtocolProvider {
     return result;
   }
 
+  @override
   Future<int> hideAllFinish() async {
-    final db = await database;
+    final db = await _db;
     final result = await db.rawUpdate(
       '''
         UPDATE finish
@@ -671,8 +816,9 @@ class ProtocolProvider {
     return result;
   }
 
+  @override
   Future<int> clearFinishResultsDebug() async {
-    final db = await database;
+    final db = await _db;
     var result = await db.rawUpdate(
       '''
         UPDATE start
@@ -689,8 +835,9 @@ class ProtocolProvider {
     return result;
   }
 
+  @override
   Future<bool> addNumber(int id, int number, String finishtime) async {
-    final db = await database;
+    final db = await _db;
     try {
       await db.update('finish', {'number': number}, where: 'id = $id');
     } on DatabaseException {
@@ -710,15 +857,17 @@ class ProtocolProvider {
     return true;
   }
 
+  @override
   Future<void> clearNumberAtFinish(int number) async {
-    final db = await database;
+    final db = await _db;
     await db.update('finish', {'number': null}, where: 'number = $number');
     await db.update('start', {'finishtime': null}, where: 'number = $number');
     logger.i('Database -> Finishtime for number $number cleared');
   }
 
+  @override
   Future<int> setDNF(int number) async {
-    final db = await database;
+    final db = await _db;
     var result = await db.rawUpdate(
       '''
         UPDATE start
@@ -743,8 +892,10 @@ class ProtocolProvider {
     return result;
   }
 
-  Future<void> close() async {
+  @override
+  Future<void> dispose() async {
     await _database?.close();
+    await _dbStateController.close();
   }
 
 // -------------------------
@@ -752,7 +903,7 @@ class ProtocolProvider {
 
   Future<DateTime?> _prevFinishTime() async {
     DateTime? prevFinishTime;
-    final db = await database;
+    final db = await _db;
     final res = await db.rawQuery(
       '''
         SELECT id, finishtime
@@ -773,7 +924,7 @@ class ProtocolProvider {
 
   Future<DateTime?> _lastFinishTime() async {
     DateTime? result;
-    final db = await database;
+    final db = await _db;
     final res = await db.rawQuery(
       '''
         SELECT id, finishtime

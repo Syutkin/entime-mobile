@@ -5,6 +5,7 @@ import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:entime/src/feature/audio/logic/audio_service.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
+import 'package:entime/src/feature/protocol/protocol.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/update/update.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ void main() async {
 
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
+
+  final protocolProvider = ProtocolProvider();
 
   final packageInfo = await PackageInfo.fromPlatform();
   final androidInfo = await DeviceInfoPlugin().androidInfo;
@@ -52,6 +55,7 @@ void main() async {
         bluetoothProvider: bluetoothProvider,
         audioService: audioService,
         appInfo: appInfo,
+        protocolProvider: protocolProvider,
       ),
     ); // Create main app
     await tester.pumpAndSettle(); // Finish animations and scheduled microtasks

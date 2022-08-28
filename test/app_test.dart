@@ -18,7 +18,9 @@ class MockAppInfoProvider extends Mock implements AppInfoProvider {}
 
 class MockUpdateProvider extends Mock implements UpdateProvider {}
 
-class MockBluetoothProvider extends Mock implements BluetoothProvider {}
+class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
+
+class MockProtocolProvider extends Mock implements IProtocolProvider {}
 
 class MockAudioService extends Mock implements AudioService {}
 
@@ -44,6 +46,7 @@ void main() async {
   final appInfo = MockAppInfoProvider();
   final UpdateProvider updateProvider = MockUpdateProvider();
   final IBluetoothProvider bluetoothProvider = MockBluetoothProvider();
+  final IProtocolProvider protocolProvider = MockProtocolProvider();
 
   final AudioService audioService = MockAudioService();
 
@@ -56,6 +59,7 @@ void main() async {
           bluetoothProvider: bluetoothProvider,
           audioService: audioService,
           appInfo: appInfo,
+          protocolProvider: protocolProvider,
         ),
       ); // Create main app
       expect(find.byType(EntimeAppView), findsOneWidget);
