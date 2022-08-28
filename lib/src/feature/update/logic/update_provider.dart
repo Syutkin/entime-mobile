@@ -1,4 +1,4 @@
-// ignore_for_file: use_setters_to_change_properties
+// ignore_for_file: use_setters_to_change_properties, avoid_catching_errors
 
 import 'dart:async';
 import 'dart:convert';
@@ -107,7 +107,11 @@ class UpdateProvider {
           return null;
         }
       } on Exception catch (e) {
-        logger.e('error: $e');
+        logger.e('Exception: $e');
+        return null;
+        // Может возникнуть при получении ошибочного json от github
+      } on Error catch (e) {
+        logger.e('Error: $e');
         return null;
       }
     }

@@ -203,43 +203,43 @@ void main() async {
       expect(await updater.isUpdateAvailable(), false);
     });
 
-    // ToDo: handle this event
-    // test('Incorrect json from github api', () async {
-    //   final client = MockClient();
-    //   final appInfoProvider = MockAppInfoProvider();
+    test('Incorrect json from github api', () async {
+      final client = MockClient();
+      final appInfoProvider = MockAppInfoProvider();
 
-    //   when(
-    //     appInfoProvider.appName,
-    //   ).thenAnswer((realInvocation) => 'Entime');
-    //   when(
-    //     appInfoProvider.version,
-    //   ).thenAnswer((realInvocation) => '1.0.1');
-    //   when(
-    //     appInfoProvider.buildNumber,
-    //   ).thenAnswer((realInvocation) => '1');
-    //   when(
-    //     appInfoProvider.abi,
-    //   ).thenAnswer((realInvocation) => 'arm64-v8a');
-    //   when(
-    //     client.get(
-    //       Uri.parse(
-    //         'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
-    //       ),
-    //     ),
-    //   ).thenAnswer(
-    //     (_) async => http.Response(
-    //       '{ "url": "https://api.github.com/repos/Syutkin/entime-mobile/releases/56643443" }',
-    //       200,
-    //     ),
-    //   );
+      when(
+        appInfoProvider.appName,
+      ).thenAnswer((realInvocation) => 'Entime');
+      when(
+        appInfoProvider.version,
+      ).thenAnswer((realInvocation) => '1.0.1');
+      when(
+        appInfoProvider.buildNumber,
+      ).thenAnswer((realInvocation) => '1');
+      when(
+        appInfoProvider.abi,
+      ).thenAnswer((realInvocation) => 'arm64-v8a');
+      when(
+        client.get(
+          Uri.parse(
+            'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
+          ),
+        ),
+      ).thenAnswer(
+        (_) async => http.Response(
+          '{ "url": "https://api.github.com/repos/Syutkin/entime-mobile/releases/56643443" }',
+          200,
+        ),
+      );
 
-    //   final updater = await UpdateProvider.init(
-    //     client: client,
-    //     appInfoProvider: appInfoProvider,
-    //   );
+      final updater = await UpdateProvider.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
 
-    //   expect(await updater.isUpdateAvailable(), false);
-    // });
+      expect(await updater.isUpdateAvailable(), false);
+    });
   });
 
   group('UpdateProvider.latestVersion', () {
