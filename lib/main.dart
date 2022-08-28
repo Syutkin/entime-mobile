@@ -60,8 +60,7 @@ Future<void> main() async {
 
   await SentryFlutter.init(
     (options) async {
-      
-      options.dsn = 'https://example@sentry.io/add-your-dsn-here';
+      options.tracesSampleRate = 1.0;
     },
     appRunner: () => runApp(
       EntimeApp(

@@ -397,8 +397,9 @@ class _FinishPage extends State<FinishScreen> {
                     // direction: [LogSourceDirection.In, LogSourceDirection.Out],
                     // source: [LogSource.Bluetooth]);
                     BlocProvider.of<BluetoothBloc>(context).add(
-                      const MessageReceived(message: 
-                        'F12:12:12,121#\r\nF13:13:13,131#\r\nF14:14:14,141#\r\nF15:16:17,181#',
+                      const MessageReceived(
+                        message:
+                            'F12:12:12,121#\r\nF13:13:13,131#\r\nF14:14:14,141#\r\nF15:16:17,181#',
                       ),
                     );
                     //_parseBT("F19:24:05,123#");
