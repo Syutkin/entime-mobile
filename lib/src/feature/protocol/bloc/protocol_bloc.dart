@@ -10,10 +10,7 @@ import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
 import '../../csv/logic/startlist_provider.dart';
 import '../../settings/bloc/settings_bloc.dart';
-import '../model/automatic_start.dart';
-import '../model/protocol.dart';
-import '../model/start_protocol.dart';
-import '../model/start_time.dart';
+import '../protocol.dart';
 
 part 'protocol_bloc.freezed.dart';
 part 'protocol_event.dart';
