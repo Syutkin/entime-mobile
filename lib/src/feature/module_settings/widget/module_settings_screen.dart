@@ -24,8 +24,8 @@ class ModuleSettingsInitScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 BlocProvider.of<BluetoothBloc>(context).add(
-                  SendMessage(message: 
-                    BlocProvider.of<ModuleSettingsBloc>(context)
+                  SendMessage(
+                    message: BlocProvider.of<ModuleSettingsBloc>(context)
                         .moduleSettings
                         .write,
                   ),

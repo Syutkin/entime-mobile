@@ -1,1 +1,1 @@
-enum DBState {selected, notSelected}
+enum DBState { selected, notSelected }

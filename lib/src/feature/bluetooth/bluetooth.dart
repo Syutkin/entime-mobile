@@ -1,5 +1,3 @@
-
-
 export 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 export 'bloc/bluetooth_bloc.dart';

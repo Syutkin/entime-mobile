@@ -52,7 +52,8 @@ class Updater extends StatelessWidget {
                 Localization.current.I18nUpdate_updateToVersion(state.version),
               ),
               onTap: () {
-                BlocProvider.of<UpdateBloc>(context).add(const DownloadUpdate());
+                BlocProvider.of<UpdateBloc>(context)
+                    .add(const DownloadUpdate());
               },
             );
           } else {

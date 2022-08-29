@@ -344,8 +344,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         dateTime = dateTime.add(const Duration(minutes: 1));
         start.add(DateFormat('HH:mm:ss').format(dateTime));
       }
-      participant =
-          await protocolProvider.getStartingParticipants(start.first);
+      participant = await protocolProvider.getStartingParticipants(start.first);
       if (participant.isNotEmpty) {
         _isStarted = true;
         _isBetweenCategory = false;
@@ -359,8 +358,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         } else {
           newVoiceText += '.';
         }
-        participant =
-            await protocolProvider.getStartingParticipants(start[1]);
+        participant = await protocolProvider.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
           newVoiceText += ' Следующий номер ${participant.first.number}';
           if (_voiceName && participant.first.name != null) {
@@ -370,8 +368,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           }
         }
       } else {
-        participant =
-            await protocolProvider.getStartingParticipants(start[1]);
+        participant = await protocolProvider.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
           _isStarted = true;
           _isBetweenCategory = false;

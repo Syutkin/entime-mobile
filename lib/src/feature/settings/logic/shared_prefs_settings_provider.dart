@@ -29,56 +29,37 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       sound: prefs.getBool('sound') ?? defaults.sound,
       beep: prefs.getBool('beep') ?? defaults.beep,
       voice: prefs.getBool('voice') ?? defaults.voice,
-      voiceName:
-          prefs.getBool('voiceName') ?? defaults.voiceName,
+      voiceName: prefs.getBool('voiceName') ?? defaults.voiceName,
       volume: prefs.getDouble('volume') ?? defaults.volume,
       pitch: prefs.getDouble('pitch') ?? defaults.pitch,
       rate: prefs.getDouble('rate') ?? defaults.rate,
-      language:
-          prefs.getString('language') ?? defaults.language,
-      recentFile: prefs.getString('recentFile') ??
-          defaults.recentFile,
-      wakelock:
-          prefs.getBool('wakelock') ?? defaults.wakelock,
-      startFab:
-          prefs.getBool('startFab') ?? defaults.startFab,
-      startFabSize: prefs.getDouble('startFabSize') ??
-          defaults.startFabSize,
-      finishFab:
-          prefs.getBool('finishFab') ?? defaults.finishFab,
-      finishFabSize: prefs.getDouble('finishFabSize') ??
-          defaults.finishFabSize,
-      countdown:
-          prefs.getBool('countdown') ?? defaults.countdown,
-      countdownSize: prefs.getDouble('countdownSize') ??
-          defaults.countdownSize,
-      countdownLeft: prefs.getDouble('countdownLeft') ??
-          defaults.countdownLeft,
-      countdownTop: prefs.getDouble('countdownTop') ??
-          defaults.countdownTop,
+      language: prefs.getString('language') ?? defaults.language,
+      recentFile: prefs.getString('recentFile') ?? defaults.recentFile,
+      wakelock: prefs.getBool('wakelock') ?? defaults.wakelock,
+      startFab: prefs.getBool('startFab') ?? defaults.startFab,
+      startFabSize: prefs.getDouble('startFabSize') ?? defaults.startFabSize,
+      finishFab: prefs.getBool('finishFab') ?? defaults.finishFab,
+      finishFabSize: prefs.getDouble('finishFabSize') ?? defaults.finishFabSize,
+      countdown: prefs.getBool('countdown') ?? defaults.countdown,
+      countdownSize: prefs.getDouble('countdownSize') ?? defaults.countdownSize,
+      countdownLeft: prefs.getDouble('countdownLeft') ?? defaults.countdownLeft,
+      countdownTop: prefs.getDouble('countdownTop') ?? defaults.countdownTop,
       countdownAtStartTime: prefs.getBool('countdownAtStartTime') ??
           defaults.countdownAtStartTime,
-      checkUpdates: prefs.getBool('checkUpdates') ??
-          defaults.checkUpdates,
-      hideMarked: prefs.getBool('hideMarked') ??
-          defaults.hideMarked,
-      hideNumbers: prefs.getBool('hideNumbers') ??
-          defaults.hideNumbers,
-      hideManual: prefs.getBool('hideManual') ??
-          defaults.hideManual,
-      reconnect:
-          prefs.getBool('reconnect') ?? defaults.reconnect,
-      finishDelay: prefs.getInt('finishDelay') ??
-          defaults.finishDelay,
-      substituteNumbers: prefs.getBool('substituteNumbers') ??
-          defaults.substituteNumbers,
+      checkUpdates: prefs.getBool('checkUpdates') ?? defaults.checkUpdates,
+      hideMarked: prefs.getBool('hideMarked') ?? defaults.hideMarked,
+      hideNumbers: prefs.getBool('hideNumbers') ?? defaults.hideNumbers,
+      hideManual: prefs.getBool('hideManual') ?? defaults.hideManual,
+      reconnect: prefs.getBool('reconnect') ?? defaults.reconnect,
+      finishDelay: prefs.getInt('finishDelay') ?? defaults.finishDelay,
+      substituteNumbers:
+          prefs.getBool('substituteNumbers') ?? defaults.substituteNumbers,
       substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
           defaults.substituteNumbersDelay,
-      logLimit:
-          prefs.getInt('logLimit') ?? defaults.logLimit,
+      logLimit: prefs.getInt('logLimit') ?? defaults.logLimit,
       appTheme: themeFromString(prefs.getString('theme')),
-      previousVersion: prefs.getString('previousVersion') ??
-          defaults.previousVersion,
+      previousVersion:
+          prefs.getString('previousVersion') ?? defaults.previousVersion,
     );
 
     // Для похождения тестов, пока Wakelock не поддерживает Linux,

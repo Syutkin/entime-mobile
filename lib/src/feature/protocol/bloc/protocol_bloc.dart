@@ -506,8 +506,11 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolSetNumberToFinishTime event,
     Emitter<ProtocolState> emit,
   ) async {
-    final update = await protocolProvider
-        .addNumber(event.id, event.number, event.finishTime);
+    final update = await protocolProvider.addNumber(
+      event.id,
+      event.number,
+      event.finishTime,
+    );
     _finishProtocol = await protocolProvider.getFinishTime(
       hideManual: _hideManual,
       hideMarked: _hideMarked,
