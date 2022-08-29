@@ -25,17 +25,19 @@ void main() {
     });
   }
 
-  final IProtocolProvider protocolProvider = ProtocolProvider();
+  late IProtocolProvider protocolProvider;
 
   group('ProtocolProvider:', () {
     late Directory directory;
     late String testFileName;
 
     test('Correct initial state', () async {
+      protocolProvider = ProtocolProvider();
       expect(protocolProvider.state, emits(DBState.notSelected));
     });
 
     test('openDb', () async {
+      protocolProvider = ProtocolProvider();
       directory = await getApplicationDocumentsDirectory();
       testFileName = path.join(directory.path, 'test_db.sqlite');
       if (File(testFileName).existsSync()) {
@@ -44,13 +46,35 @@ void main() {
       await protocolProvider.openDb(testFileName);
 
       expect(protocolProvider.dbPath, testFileName);
-      // expect(protocolProvider.state, emits(DBState.selected));
+      expect(
+        protocolProvider.state,
+        emitsInOrder(<DBState>[DBState.notSelected, DBState.selected]),
+      );
+      await protocolProvider.dispose();
     });
 
     test('closeDb', () async {
+      protocolProvider = ProtocolProvider();
+      directory = await getApplicationDocumentsDirectory();
+      testFileName = path.join(directory.path, 'test_db.sqlite');
+      if (File(testFileName).existsSync()) {
+        File(testFileName).deleteSync();
+      }
+
+      await protocolProvider.openDb(testFileName);
       await protocolProvider.closeDb();
+
       expect(protocolProvider.dbPath, null);
-      // expect(protocolProvider.state, emits(DBState.notSelected));
+      expect(
+        protocolProvider.state,
+        emitsInOrder(<DBState>[
+          DBState.notSelected,
+          DBState.selected,
+          DBState.notSelected,
+        ]),
+      );
+
+      //
     });
 
     test('openDb for later use', () async {
