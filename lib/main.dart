@@ -9,6 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/common/bloc/app_bloc_observer.dart';
+import 'src/common/database/logic/database_provider.dart';
 import 'src/common/localization/localization.dart';
 import 'src/feature/app_info/app_info.dart';
 import 'src/feature/audio/logic/audio_service.dart';
@@ -18,7 +19,6 @@ import 'src/feature/home/widget/home_screen.dart';
 import 'src/feature/log/bloc/log_bloc.dart';
 import 'src/feature/module_settings/bloc/module_settings_bloc.dart';
 import 'src/feature/protocol/bloc/protocol_bloc.dart';
-import 'src/feature/protocol/logic/protocol_provider.dart';
 import 'src/feature/settings/settings.dart';
 import 'src/feature/tab/bloc/tab_bloc.dart';
 import 'src/feature/update/update.dart';
@@ -36,7 +36,7 @@ Future<void> main() async {
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
 
-  final protocolProvider = ProtocolProvider();
+  final databaseProvider = DatabaseProvider();
 
   final packageInfo = await PackageInfo.fromPlatform();
   final androidInfo = await DeviceInfoPlugin().androidInfo;
@@ -70,7 +70,7 @@ Future<void> main() async {
         settings: settings,
         updateProvider: updateProvider,
         bluetoothProvider: bluetoothProvider,
-        protocolProvider: protocolProvider,
+        databaseProvider: databaseProvider,
         audioService: audioService,
         appInfo: appInfo,
       ),
@@ -84,7 +84,7 @@ class EntimeApp extends StatelessWidget {
   final UpdateProvider updateProvider;
   final IBluetoothProvider bluetoothProvider;
   final AudioService audioService;
-  final IProtocolProvider protocolProvider;
+  final IDatabaseProvider databaseProvider;
 
   const EntimeApp({
     Key? key,
@@ -93,7 +93,7 @@ class EntimeApp extends StatelessWidget {
     required this.bluetoothProvider,
     required this.audioService,
     required this.appInfo,
-    required this.protocolProvider,
+    required this.databaseProvider,
   }) : super(key: key);
 
   @override
@@ -110,19 +110,19 @@ class EntimeApp extends StatelessWidget {
           ),
           BlocProvider<LogBloc>(
             create: (context) => LogBloc(
-              settingsBloc: BlocProvider.of<SettingsBloc>(context),
+              settingsBloc: BlocProvider.of<SettingsBloc>(context), databaseProvider: databaseProvider,
             ),
           ),
           BlocProvider<ProtocolBloc>(
             create: (context) => ProtocolBloc(
               settingsBloc: BlocProvider.of<SettingsBloc>(context),
-              protocolProvider: protocolProvider,
+              databaseProvider: databaseProvider,
             )..add(SelectProtocol(file: settings.settings.recentFile)),
           ),
           BlocProvider<CountdownBloc>(
             create: (context) => CountdownBloc(
               protocolBloc: BlocProvider.of<ProtocolBloc>(context),
-              protocolProvider: protocolProvider,
+              databaseProvider: databaseProvider,
               tabBloc: BlocProvider.of<TabBloc>(context),
             ),
           ),
@@ -130,7 +130,7 @@ class EntimeApp extends StatelessWidget {
             create: (context) => BluetoothBloc(
               audioService: audioService,
               bluetoothProvider: bluetoothProvider,
-              protocolProvider: protocolProvider,
+              databaseProvider: databaseProvider,
               moduleSettingsBloc: BlocProvider.of<ModuleSettingsBloc>(context),
               protocolBloc: BlocProvider.of<ProtocolBloc>(context),
               settingsBloc: BlocProvider.of<SettingsBloc>(context),

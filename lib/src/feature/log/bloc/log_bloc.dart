@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../common/database/logic/database_provider.dart';
 import '../../settings/bloc/settings_bloc.dart';
-import '../logic/log_provider.dart';
 import '../model/log.dart';
 import '../model/log_level.dart';
 import '../model/log_source.dart';
@@ -14,6 +14,7 @@ part 'log_event.dart';
 part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {
+  final IDatabaseProvider databaseProvider;
   final SettingsBloc settingsBloc;
   late final StreamSubscription<SettingsState> settingsSubscription;
 
@@ -23,6 +24,7 @@ class LogBloc extends Bloc<LogEvent, LogState> {
 
   LogBloc({
     required this.settingsBloc,
+    required this.databaseProvider,
   }) : super(const LogOpen()) {
     settingsSubscription = settingsBloc.stream.listen((state) {
       _limit = state.settings.logLimit;
@@ -35,13 +37,13 @@ class LogBloc extends Bloc<LogEvent, LogState> {
 
   @override
   Future<void> close() {
-    LogProvider.db.close();
+    databaseProvider.dispose();
     settingsSubscription.cancel();
     return super.close();
   }
 
   Future<void> _handleLogAdd(LogAdd event, Emitter<LogState> emit) async {
-    await LogProvider.db.add(
+    await databaseProvider.addLog(
       level: event.level,
       source: event.source,
       direction: event.direction,
@@ -53,7 +55,7 @@ class LogBloc extends Bloc<LogEvent, LogState> {
   }
 
   Future<void> _handleShowLog(ShowLog event, Emitter<LogState> emit) async {
-    _log = await LogProvider.db.getLog(limit: _limit);
+    _log = await databaseProvider.getLog(limit: _limit);
     emit(
       LogOpen(
         log: _log,

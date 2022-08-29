@@ -1,5 +1,4 @@
 export 'bloc/protocol_bloc.dart';
-export 'logic/protocol_provider.dart';
 export 'model/automatic_start.dart';
 export 'model/filter_finish.dart';
 export 'model/participant_status.dart';

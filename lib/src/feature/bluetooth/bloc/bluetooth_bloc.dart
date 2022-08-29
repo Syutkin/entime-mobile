@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
+import '../../../common/database/logic/database_provider.dart';
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/helper.dart';
 import '../../audio/logic/audio_service.dart';
@@ -21,7 +22,7 @@ part 'bluetooth_bloc.freezed.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   final IBluetoothProvider bluetoothProvider;
-  final IProtocolProvider protocolProvider;
+  final IDatabaseProvider databaseProvider;
 
   final ModuleSettingsBloc moduleSettingsBloc;
   final ProtocolBloc protocolBloc;
@@ -57,7 +58,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     required this.logBloc,
     required this.audioService,
     required this.bluetoothProvider,
-    required this.protocolProvider,
+    required this.databaseProvider,
   }) : super(const BluetoothNotInitializedState()) {
     protocolSubscription = protocolBloc.stream.listen((state) {
       if (state is ProtocolSelectedState) {
@@ -316,7 +317,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   Future<void> _countdown(String time) async {
     if (_protocolSelectedState) {
-      if (await protocolProvider.getStart(time) > 0) {
+      if (await databaseProvider.getStart(time) > 0) {
         await audioService.countdown();
         logger.i('Bluetooth -> Beep start $time');
       } else {
@@ -344,7 +345,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         dateTime = dateTime.add(const Duration(minutes: 1));
         start.add(DateFormat('HH:mm:ss').format(dateTime));
       }
-      participant = await protocolProvider.getStartingParticipants(start.first);
+      participant = await databaseProvider.getStartingParticipants(start.first);
       if (participant.isNotEmpty) {
         _isStarted = true;
         _isBetweenCategory = false;
@@ -358,7 +359,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         } else {
           newVoiceText += '.';
         }
-        participant = await protocolProvider.getStartingParticipants(start[1]);
+        participant = await databaseProvider.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
           newVoiceText += ' Следующий номер ${participant.first.number}';
           if (_voiceName && participant.first.name != null) {
@@ -368,7 +369,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           }
         }
       } else {
-        participant = await protocolProvider.getStartingParticipants(start[1]);
+        participant = await databaseProvider.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
           _isStarted = true;
           _isBetweenCategory = false;
@@ -389,7 +390,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               'Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
             );
             participant =
-                await protocolProvider.getNextParticipants(start.first);
+                await databaseProvider.getNextParticipants(start.first);
             if (participant.isNotEmpty) {
               _isBetweenCategory = true;
               final DateTime? lastStart = strTimeToDateTime(start.first);

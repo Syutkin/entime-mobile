@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
+import '../../../common/database/logic/database_provider.dart';
 import '../../../common/utils/helper.dart';
 import '../../protocol/protocol.dart';
 import '../../tab/tab.dart';
@@ -14,7 +15,7 @@ part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   final ProtocolBloc protocolBloc;
-  final IProtocolProvider protocolProvider;
+  final IDatabaseProvider databaseProvider;
   late final StreamSubscription<ProtocolState> protocolSubscription;
   final TabBloc tabBloc;
   late final StreamSubscription<AppTab> tabSubscription;
@@ -27,7 +28,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   CountdownBloc({
     required this.protocolBloc,
     required this.tabBloc,
-    required this.protocolProvider,
+    required this.databaseProvider,
   }) : super(CountdownInitialState()) {
     _startTimer();
     protocolSubscription = protocolBloc.stream.listen((state) async {
@@ -101,7 +102,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   }
 
   Future<DateTime?> _getNextStarttime(DateTime time) async {
-    _participant = await protocolProvider
+    _participant = await databaseProvider
         .getNextParticipants(DateFormat('HH:mm:ss').format(time));
     if (_participant.isNotEmpty && _participant.first.starttime != null) {
       return strTimeToDateTime(_participant.first.starttime!);
