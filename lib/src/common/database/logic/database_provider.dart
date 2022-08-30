@@ -158,11 +158,11 @@ class DatabaseProvider implements IDatabaseProvider {
     await _database?.close();
   }
 
-  final _dbStateController = StreamController<DBState>()
+  final _dbStateController = StreamController<DBState>.broadcast()
     ..add(DBState.notSelected);
 
   @override
-  Stream<DBState> get state => _dbStateController.stream.asBroadcastStream();
+  Stream<DBState> get state => _dbStateController.stream;
 
   // @override
   Future<Database> get _db async {

@@ -10,6 +10,7 @@ import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
 import '../../csv/logic/startlist_provider.dart';
 import '../../settings/bloc/settings_bloc.dart';
+import '../../settings/settings.dart';
 import '../protocol.dart';
 
 part 'protocol_bloc.freezed.dart';
@@ -28,38 +29,39 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   final IDatabaseProvider databaseProvider;
 
-  final SettingsBloc settingsBloc;
-  late final StreamSubscription<SettingsState> settingsSubscription;
+  // final SettingsBloc settingsBloc;
+  final SettingsProvider settingsProvider;
+  late final StreamSubscription<AppSettings> settingsSubscription;
 
   List<StartItem> _startProtocol = [];
   List<FinishItem> _finishProtocol = [];
   List<StartItem> _numbersOnTraceProtocol = [];
 
   ProtocolBloc({
-    required this.settingsBloc,
+    required this.settingsProvider,
     required this.databaseProvider,
   }) : super(const ProtocolNotSelectedState()) {
-    settingsSubscription = settingsBloc.stream.listen((state) {
+    settingsSubscription = settingsProvider.state.listen((state) {
       // условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
-      if (_hideMarked != state.settings.hideMarked ||
-          _hideNumbers != state.settings.hideNumbers ||
-          _hideManual != state.settings.hideManual) {
-        _hideMarked = state.settings.hideMarked;
-        _hideNumbers = state.settings.hideNumbers;
-        _hideManual = state.settings.hideManual;
-        _file = state.settings.recentFile;
+      if (_hideMarked != state.hideMarked ||
+          _hideNumbers != state.hideNumbers ||
+          _hideManual != state.hideManual) {
+        _hideMarked = state.hideMarked;
+        _hideNumbers = state.hideNumbers;
+        _hideManual = state.hideManual;
+        _file = state.recentFile;
         add(SelectProtocol(file: _file));
         logger.v(
           'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
         );
       }
-      if (_file != state.settings.recentFile) {
-        _file = state.settings.recentFile;
+      if (_file != state.recentFile) {
+        _file = state.recentFile;
         add(SelectProtocol(file: _file));
       }
-      _finishDelay = state.settings.finishDelay;
-      _substituteNumbers = state.settings.substituteNumbers;
-      _substituteNumbersDelay = state.settings.substituteNumbersDelay;
+      _finishDelay = state.finishDelay;
+      _substituteNumbers = state.substituteNumbers;
+      _substituteNumbersDelay = state.substituteNumbersDelay;
     });
 
     on<SelectProtocol>((event, emit) => _handleSelectProtocol(event, emit));
@@ -146,11 +148,8 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         hideNumbers: _hideNumbers,
       );
       _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
-      settingsBloc.add(
-        SettingsEventUpdate(
-          settings: settingsBloc.state.settings.copyWith(recentFile: file),
-        ),
-      );
+      await settingsProvider
+          .update(settingsProvider.settings.copyWith(recentFile: file));
       emit(
         ProtocolSelectedState(
           startProtocol: _startProtocol,
@@ -172,11 +171,8 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     Emitter<ProtocolState> emit,
   ) async {
     await databaseProvider.closeDb();
-    settingsBloc.add(
-      SettingsEventUpdate(
-        settings: settingsBloc.state.settings.copyWith(recentFile: ''),
-      ),
-    );
+    await settingsProvider
+        .update(settingsProvider.settings.copyWith(recentFile: ''));
     emit(const ProtocolNotSelectedState());
   }
 

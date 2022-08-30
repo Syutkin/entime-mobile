@@ -15,8 +15,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   @override
   Stream<AppSettings> get state =>
-      _appSettingsController.stream.asBroadcastStream();
-  final _appSettingsController = StreamController<AppSettings>();
+      _appSettingsController.stream;
+  final _appSettingsController = StreamController<AppSettings>.broadcast();
 
   SharedPrefsSettingsProvider._(SharedPreferences prefs, AppSettings settings)
       : _prefs = prefs,

@@ -16,7 +16,6 @@ part 'log_state.dart';
 class LogBloc extends Bloc<LogEvent, LogState> {
   final IDatabaseProvider databaseProvider;
   final SettingsProvider settingsProvider;
-  // final SettingsBloc settingsBloc;
   late final StreamSubscription<AppSettings> settingsSubscription;
 
   int _limit = -1;

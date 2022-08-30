@@ -116,7 +116,7 @@ class EntimeApp extends StatelessWidget {
           ),
           BlocProvider<ProtocolBloc>(
             create: (context) => ProtocolBloc(
-              settingsBloc: BlocProvider.of<SettingsBloc>(context),
+              settingsProvider: settings,
               databaseProvider: databaseProvider,
             )..add(SelectProtocol(file: settings.settings.recentFile)),
           ),
