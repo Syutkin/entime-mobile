@@ -110,7 +110,8 @@ class EntimeApp extends StatelessWidget {
           ),
           BlocProvider<LogBloc>(
             create: (context) => LogBloc(
-              settingsBloc: BlocProvider.of<SettingsBloc>(context), databaseProvider: databaseProvider,
+              settingsProvider: settings,
+              databaseProvider: databaseProvider,
             ),
           ),
           BlocProvider<ProtocolBloc>(

@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/database/logic/database_provider.dart';
-import '../../settings/bloc/settings_bloc.dart';
+import '../../settings/settings.dart';
 import '../model/log.dart';
 import '../model/log_level.dart';
 import '../model/log_source.dart';
@@ -15,19 +15,20 @@ part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {
   final IDatabaseProvider databaseProvider;
-  final SettingsBloc settingsBloc;
-  late final StreamSubscription<SettingsState> settingsSubscription;
+  final SettingsProvider settingsProvider;
+  // final SettingsBloc settingsBloc;
+  late final StreamSubscription<AppSettings> settingsSubscription;
 
   int _limit = -1;
 
   List<Log> _log = [];
 
   LogBloc({
-    required this.settingsBloc,
+    required this.settingsProvider,
     required this.databaseProvider,
   }) : super(const LogOpen()) {
-    settingsSubscription = settingsBloc.stream.listen((state) {
-      _limit = state.settings.logLimit;
+    settingsSubscription = settingsProvider.state.listen((state) {
+      _limit = state.logLimit;
     });
 
     on<LogAdd>((event, emit) => _handleLogAdd(event, emit));
