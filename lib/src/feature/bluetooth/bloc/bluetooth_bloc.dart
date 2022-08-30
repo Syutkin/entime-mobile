@@ -27,8 +27,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   final ModuleSettingsBloc moduleSettingsBloc;
   final ProtocolBloc protocolBloc;
   late final StreamSubscription<ProtocolState> protocolSubscription;
-  final SettingsBloc settingsBloc;
-  late final StreamSubscription<SettingsState> settingsSubscription;
+  final SettingsProvider settingsProvider;
+  late final StreamSubscription<AppSettings> settingsSubscription;
   bool _protocolSelectedState = false;
   final LogBloc logBloc;
   final AudioService audioService;
@@ -54,7 +54,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   BluetoothBloc({
     required this.moduleSettingsBloc,
     required this.protocolBloc,
-    required this.settingsBloc,
+    required this.settingsProvider,
     required this.logBloc,
     required this.audioService,
     required this.bluetoothProvider,
@@ -67,9 +67,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         _protocolSelectedState = false;
       }
     });
-    settingsSubscription = settingsBloc.stream.listen((state) {
-      _voiceName = state.settings.voiceName;
-      _reconnect = state.settings.reconnect;
+    settingsSubscription = settingsProvider.state.listen((state) {
+      _voiceName = state.voiceName;
+      _reconnect = state.reconnect;
     });
 
     on<InitializeBluetooth>(
