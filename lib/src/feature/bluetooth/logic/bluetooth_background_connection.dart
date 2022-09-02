@@ -5,9 +5,10 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:rxdart/subjects.dart';
 
 import '../../../common/logger/logger.dart';
-import '../bluetooth.dart';
 
 typedef ErrorHandler = void Function(String error);
 
@@ -40,8 +41,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   String _messagePacket = '';
 
   // Стрим с поступающей информацией от модуля
-  final StreamController<String> _messageController =
-      StreamController.broadcast();
+  final StreamController<String> _messageController = BehaviorSubject();
 
   @override
   Stream<String> get message => _messageController.stream;

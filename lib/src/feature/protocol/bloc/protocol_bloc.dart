@@ -5,12 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../common/database/logic/database_provider.dart';
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
 import '../../csv/logic/startlist_provider.dart';
-import '../../settings/bloc/settings_bloc.dart';
 import '../../settings/settings.dart';
+import '../logic/protocol_provider.dart';
 import '../protocol.dart';
 
 part 'protocol_bloc.freezed.dart';
@@ -27,11 +26,9 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   late int _substituteNumbersDelay;
   int? _awaitingNumber;
 
-  final IDatabaseProvider databaseProvider;
+  final IProtocolProvider protocolProvider;
 
-  // final SettingsBloc settingsBloc;
   final SettingsProvider settingsProvider;
-  late final StreamSubscription<AppSettings> settingsSubscription;
 
   List<StartItem> _startProtocol = [];
   List<FinishItem> _finishProtocol = [];
@@ -39,9 +36,9 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   ProtocolBloc({
     required this.settingsProvider,
-    required this.databaseProvider,
+    required this.protocolProvider,
   }) : super(const ProtocolNotSelectedState()) {
-    settingsSubscription = settingsProvider.state.listen((state) {
+    settingsProvider.state.listen((state) {
       // условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
       if (_hideMarked != state.hideMarked ||
           _hideNumbers != state.hideNumbers ||
@@ -126,8 +123,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   @override
   Future<void> close() {
-    databaseProvider.dispose();
-    settingsSubscription.cancel();
+    protocolProvider.dispose();
     return super.close();
   }
 
@@ -137,17 +133,17 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   ) async {
     final file = event.file;
     if (file != null && file.isNotEmpty) {
-      await databaseProvider.openDb(file);
+      await protocolProvider.openDb(file);
       if (event.csv != null) {
         await _updateFromCsv(event.csv);
       }
-      _startProtocol = await databaseProvider.getAllParticipantsAtStart();
-      _finishProtocol = await databaseProvider.getFinishTime(
+      _startProtocol = await protocolProvider.getAllParticipantsAtStart();
+      _finishProtocol = await protocolProvider.getFinishTime(
         hideManual: _hideManual,
         hideMarked: _hideMarked,
         hideNumbers: _hideNumbers,
       );
-      _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+      _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
       await settingsProvider
           .update(settingsProvider.settings.copyWith(recentFile: file));
       emit(
@@ -155,7 +151,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           awaitingNumber: _awaitingNumber,
         ),
       );
@@ -170,7 +166,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     DeselectProtocol event,
     Emitter<ProtocolState> emit,
   ) async {
-    await databaseProvider.closeDb();
+    await protocolProvider.closeDb();
     await settingsProvider
         .update(settingsProvider.settings.copyWith(recentFile: ''));
     emit(const ProtocolNotSelectedState());
@@ -183,22 +179,22 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   ) async {
     if (state is ProtocolSelectedState) {
       final List<StartItem>? previousStart =
-          await databaseProvider.addStartNumber(
+          await protocolProvider.addStartNumber(
         number: event.startTime.number,
         time: event.startTime.time,
         forceAdd: event.forceAdd,
       );
 
       if (previousStart == null) {
-        _startProtocol = await databaseProvider.getAllParticipantsAtStart();
-        _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+        _startProtocol = await protocolProvider.getAllParticipantsAtStart();
+        _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
       }
       emit(
         ProtocolSelectedState(
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           previousStart: previousStart,
           startTime: event.startTime,
           awaitingNumber: _awaitingNumber,
@@ -214,7 +210,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   ) async {
     if (state is ProtocolSelectedState) {
       final List<StartItem>? previousStart =
-          await databaseProvider.updateAutomaticCorrection(
+          await protocolProvider.updateAutomaticCorrection(
         time: event.automaticStart.time,
         correction: event.automaticStart.correction,
         timeStamp: event.automaticStart.timeStamp,
@@ -222,7 +218,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
       );
       if (previousStart == null) {
         event.automaticStart.updating = false;
-        _startProtocol = await databaseProvider.getAllParticipantsAtStart();
+        _startProtocol = await protocolProvider.getAllParticipantsAtStart();
       } else {
         event.automaticStart.updating = true;
       }
@@ -231,7 +227,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           automaticStart: event.automaticStart,
           previousStart: previousStart,
           awaitingNumber: _awaitingNumber,
@@ -245,14 +241,14 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     Emitter<ProtocolState> emit,
   ) async {
     if (state is ProtocolSelectedState) {
-      if (await databaseProvider.updateManualStartTime(event.time) > 0) {
-        _startProtocol = await databaseProvider.getAllParticipantsAtStart();
+      if (await protocolProvider.updateManualStartTime(event.time) > 0) {
+        _startProtocol = await protocolProvider.getAllParticipantsAtStart();
         emit(
           ProtocolSelectedState(
             startProtocol: _startProtocol,
             finishProtocol: _finishProtocol,
             numbersOnTraceProtocol: _numbersOnTraceProtocol,
-            databasePath: databaseProvider.dbPath!,
+            databasePath: protocolProvider.dbPath!,
             awaitingNumber: _awaitingNumber,
           ),
         );
@@ -266,7 +262,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     Emitter<ProtocolState> emit,
   ) async {
     if (state is ProtocolSelectedState) {
-      final int? autoFinishNumber = await databaseProvider.addFinishTime(
+      final int? autoFinishNumber = await protocolProvider.addFinishTime(
         finish: event.time,
         timeStamp: event.timeStamp,
         finishDelay: _finishDelay,
@@ -275,18 +271,18 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         number: _awaitingNumber,
       );
       _awaitingNumber = null;
-      _finishProtocol = await databaseProvider.getFinishTime(
+      _finishProtocol = await protocolProvider.getFinishTime(
         hideManual: _hideManual,
         hideMarked: _hideMarked,
         hideNumbers: _hideNumbers,
       );
-      _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+      _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
       emit(
         ProtocolSelectedState(
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           autoFinishNumber: autoFinishNumber,
           awaitingNumber: _awaitingNumber,
         ),
@@ -300,19 +296,19 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     Emitter<ProtocolState> emit,
   ) async {
     if (state is ProtocolSelectedState) {
-      await databaseProvider.addFinishTimeManual(event.time);
-      _finishProtocol = await databaseProvider.getFinishTime(
+      await protocolProvider.addFinishTimeManual(event.time);
+      _finishProtocol = await protocolProvider.getFinishTime(
         hideManual: _hideManual,
         hideMarked: _hideMarked,
         hideNumbers: _hideNumbers,
       );
-      _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+      _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
       emit(
         ProtocolSelectedState(
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           awaitingNumber: _awaitingNumber,
         ),
       );
@@ -324,15 +320,15 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     Emitter<ProtocolState> emit,
   ) async {
     if (state is ProtocolSelectedState) {
-      await databaseProvider.updateItemInfoAtStart(event.item);
-      _startProtocol = await databaseProvider.getAllParticipantsAtStart();
-      _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+      await protocolProvider.updateItemInfoAtStart(event.item);
+      _startProtocol = await protocolProvider.getAllParticipantsAtStart();
+      _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
       emit(
         ProtocolSelectedState(
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           awaitingNumber: _awaitingNumber,
         ),
       );
@@ -344,20 +340,20 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolClearStartResultsDebug event,
     Emitter<ProtocolState> emit,
   ) async {
-    await databaseProvider.clearStartResultsDebug();
-    _startProtocol = await databaseProvider.getAllParticipantsAtStart();
-    _finishProtocol = await databaseProvider.getFinishTime(
+    await protocolProvider.clearStartResultsDebug();
+    _startProtocol = await protocolProvider.getAllParticipantsAtStart();
+    _finishProtocol = await protocolProvider.getFinishTime(
       hideManual: _hideManual,
       hideMarked: _hideMarked,
       hideNumbers: _hideNumbers,
     );
-    _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+    _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
     emit(
       ProtocolSelectedState(
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
         numbersOnTraceProtocol: _numbersOnTraceProtocol,
-        databasePath: databaseProvider.dbPath!,
+        databasePath: protocolProvider.dbPath!,
         awaitingNumber: _awaitingNumber,
       ),
     );
@@ -368,20 +364,20 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolClearFinishResultsDebug event,
     Emitter<ProtocolState> emit,
   ) async {
-    await databaseProvider.clearFinishResultsDebug();
-    _startProtocol = await databaseProvider.getAllParticipantsAtStart();
-    _finishProtocol = await databaseProvider.getFinishTime(
+    await protocolProvider.clearFinishResultsDebug();
+    _startProtocol = await protocolProvider.getAllParticipantsAtStart();
+    _finishProtocol = await protocolProvider.getFinishTime(
       hideManual: _hideManual,
       hideMarked: _hideMarked,
       hideNumbers: _hideNumbers,
     );
-    _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+    _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
     emit(
       ProtocolSelectedState(
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
         numbersOnTraceProtocol: _numbersOnTraceProtocol,
-        databasePath: databaseProvider.dbPath!,
+        databasePath: protocolProvider.dbPath!,
         awaitingNumber: _awaitingNumber,
       ),
     );
@@ -392,8 +388,8 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolHideAllFinishResults event,
     Emitter<ProtocolState> emit,
   ) async {
-    await databaseProvider.hideAllFinish();
-    _finishProtocol = await databaseProvider.getFinishTime(
+    await protocolProvider.hideAllFinish();
+    _finishProtocol = await protocolProvider.getFinishTime(
       hideManual: _hideManual,
       hideMarked: _hideMarked,
       hideNumbers: _hideNumbers,
@@ -403,7 +399,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
         numbersOnTraceProtocol: _numbersOnTraceProtocol,
-        databasePath: databaseProvider.dbPath!,
+        databasePath: protocolProvider.dbPath!,
         awaitingNumber: _awaitingNumber,
       ),
     );
@@ -414,19 +410,19 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolClearNumberAtFinish event,
     Emitter<ProtocolState> emit,
   ) async {
-    await databaseProvider.clearNumberAtFinish(event.number);
-    _finishProtocol = await databaseProvider.getFinishTime(
+    await protocolProvider.clearNumberAtFinish(event.number);
+    _finishProtocol = await protocolProvider.getFinishTime(
       hideManual: _hideManual,
       hideMarked: _hideMarked,
       hideNumbers: _hideNumbers,
     );
-    _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+    _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
     emit(
       ProtocolSelectedState(
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
         numbersOnTraceProtocol: _numbersOnTraceProtocol,
-        databasePath: databaseProvider.dbPath!,
+        databasePath: protocolProvider.dbPath!,
         awaitingNumber: _awaitingNumber,
       ),
     );
@@ -436,15 +432,15 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolSetDNS event,
     Emitter<ProtocolState> emit,
   ) async {
-    await databaseProvider.setDNS(event.number);
-    _startProtocol = await databaseProvider.getAllParticipantsAtStart();
-    _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+    await protocolProvider.setDNS(event.number);
+    _startProtocol = await protocolProvider.getAllParticipantsAtStart();
+    _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
     emit(
       ProtocolSelectedState(
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
         numbersOnTraceProtocol: _numbersOnTraceProtocol,
-        databasePath: databaseProvider.dbPath!,
+        databasePath: protocolProvider.dbPath!,
         awaitingNumber: _awaitingNumber,
       ),
     );
@@ -455,19 +451,19 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolSetDNF event,
     Emitter<ProtocolState> emit,
   ) async {
-    await databaseProvider.setDNF(event.number);
-    _finishProtocol = await databaseProvider.getFinishTime(
+    await protocolProvider.setDNF(event.number);
+    _finishProtocol = await protocolProvider.getFinishTime(
       hideManual: _hideManual,
       hideMarked: _hideMarked,
       hideNumbers: _hideNumbers,
     );
-    _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+    _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
     emit(
       ProtocolSelectedState(
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
         numbersOnTraceProtocol: _numbersOnTraceProtocol,
-        databasePath: databaseProvider.dbPath!,
+        databasePath: protocolProvider.dbPath!,
         awaitingNumber: _awaitingNumber,
       ),
     );
@@ -477,8 +473,8 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolHideFinishTime event,
     Emitter<ProtocolState> emit,
   ) async {
-    await databaseProvider.hideFinish(event.id);
-    _finishProtocol = await databaseProvider.getFinishTime(
+    await protocolProvider.hideFinish(event.id);
+    _finishProtocol = await protocolProvider.getFinishTime(
       hideManual: _hideManual,
       hideMarked: _hideMarked,
       hideNumbers: _hideNumbers,
@@ -488,7 +484,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
         numbersOnTraceProtocol: _numbersOnTraceProtocol,
-        databasePath: databaseProvider.dbPath!,
+        databasePath: protocolProvider.dbPath!,
         awaitingNumber: _awaitingNumber,
       ),
     );
@@ -499,23 +495,23 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolSetNumberToFinishTime event,
     Emitter<ProtocolState> emit,
   ) async {
-    final update = await databaseProvider.addNumber(
+    final update = await protocolProvider.addNumber(
       event.id,
       event.number,
       event.finishTime,
     );
-    _finishProtocol = await databaseProvider.getFinishTime(
+    _finishProtocol = await protocolProvider.getFinishTime(
       hideManual: _hideManual,
       hideMarked: _hideMarked,
       hideNumbers: _hideNumbers,
     );
-    _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+    _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
     emit(
       ProtocolSelectedState(
         startProtocol: _startProtocol,
         finishProtocol: _finishProtocol,
         numbersOnTraceProtocol: _numbersOnTraceProtocol,
-        databasePath: databaseProvider.dbPath!,
+        databasePath: protocolProvider.dbPath!,
         updateFinishNumber: update,
         awaitingNumber: _awaitingNumber,
       ),
@@ -526,14 +522,14 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolGetNumbersOnTrace event,
     Emitter<ProtocolState> emit,
   ) async {
-    if (databaseProvider.dbPath != null) {
-      _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+    if (protocolProvider.dbPath != null) {
+      _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
       emit(
         ProtocolSelectedState(
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           awaitingNumber: _awaitingNumber,
         ),
       );
@@ -546,14 +542,14 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
   ) async {
     if (state is ProtocolSelectedState) {
       await _updateFromCsv(event.csv);
-      _startProtocol = await databaseProvider.getAllParticipantsAtStart();
-      _numbersOnTraceProtocol = await databaseProvider.getNumbersOnTrace();
+      _startProtocol = await protocolProvider.getAllParticipantsAtStart();
+      _numbersOnTraceProtocol = await protocolProvider.getNumbersOnTrace();
       emit(
         ProtocolSelectedState(
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           awaitingNumber: _awaitingNumber,
         ),
       );
@@ -564,10 +560,10 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolShareStart event,
     Emitter<ProtocolState> emit,
   ) async {
-    final result = await databaseProvider.getStartToCsv();
+    final result = await protocolProvider.getStartToCsv();
     final csv = mapListToCsv(result);
-    if (csv != null && databaseProvider.dbPath != null) {
-      final file = await saveCsv(csv, 'start', databaseProvider.dbPath!);
+    if (csv != null && protocolProvider.dbPath != null) {
+      final file = await saveCsv(csv, 'start', protocolProvider.dbPath!);
       if (file != null) {
         await Share.shareFiles([file.path], text: 'Стартовый протокол');
       }
@@ -578,10 +574,10 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     ProtocolShareFinish event,
     Emitter<ProtocolState> emit,
   ) async {
-    final result = await databaseProvider.getFinishToCsv();
+    final result = await protocolProvider.getFinishToCsv();
     final csv = mapListToCsv(result);
-    if (csv != null && databaseProvider.dbPath != null) {
-      final file = await saveCsv(csv, 'finish', databaseProvider.dbPath!);
+    if (csv != null && protocolProvider.dbPath != null) {
+      final file = await saveCsv(csv, 'finish', protocolProvider.dbPath!);
       if (file != null) {
         await Share.shareFiles([file.path], text: 'Финишный протокол');
       }
@@ -599,7 +595,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           awaitingNumber: _awaitingNumber,
         ),
       );
@@ -617,7 +613,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
           startProtocol: _startProtocol,
           finishProtocol: _finishProtocol,
           numbersOnTraceProtocol: _numbersOnTraceProtocol,
-          databasePath: databaseProvider.dbPath!,
+          databasePath: protocolProvider.dbPath!,
           awaitingNumber: _awaitingNumber,
         ),
       );
@@ -626,6 +622,6 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
 
   Future<void> _updateFromCsv(PlatformFile? csv) async {
     final List<StartItemCsv> items = await getStartList(csv);
-    await databaseProvider.loadStartItem(items);
+    await protocolProvider.loadStartItem(items);
   }
 }

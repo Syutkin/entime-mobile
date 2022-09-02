@@ -1,3 +1,5 @@
+import 'package:rxdart/subjects.dart';
+
 mixin ReactiveState<T> {
-  Stream<T> get state;
+  BehaviorSubject<T> get state;
 }

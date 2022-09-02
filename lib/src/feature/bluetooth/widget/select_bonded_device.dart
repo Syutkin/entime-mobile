@@ -6,7 +6,7 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import '../../../common/localization/localization.dart';
 import '../bloc/bluetooth_bloc.dart';
-import '../model/bluetooth.dart';
+import '../model/bluetooth_device_with_availability.dart';
 import 'bluetooth_device_list_entry.dart';
 
 Future<void> selectBluetoothDevice(BuildContext context) async {

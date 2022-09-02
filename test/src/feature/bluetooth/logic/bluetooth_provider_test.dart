@@ -1,9 +1,10 @@
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:mockito/annotations.dart';
 
-import 'bluetooth_test.mocks.dart';
+import 'bluetooth_provider_test.mocks.dart';
 
 @GenerateMocks([FlutterBluetoothSerial])
 void main() {

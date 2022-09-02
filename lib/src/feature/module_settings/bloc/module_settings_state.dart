@@ -1,29 +1,18 @@
 part of 'module_settings_bloc.dart';
 
-@immutable
-abstract class ModuleSettingsState extends Equatable {
-  const ModuleSettingsState();
-  @override
-  List<Object> get props => [];
+@freezed
+class ModuleSettingsState with _$ModuleSettingsState {
+  const factory ModuleSettingsState.uninitialized() =
+      ModuleSettingsUninitialized;
+  const factory ModuleSettingsState.loading(
+      ) = ModuleSettingsLoading;
+
+  const factory ModuleSettingsState.loaded(ModuleSettingsProvider moduleSettings) = ModuleSettingsLoaded;
+  const factory ModuleSettingsState.error() = ModuleSettingsError;
+
+  // factory ModuleSettingsState.fromJson(Map<String, dynamic> json) =>
+  //     _$ModuleSettingsStateFromJson(json);
 }
-
-class ModuleSettingsUninitialized extends ModuleSettingsState {}
-
-class ModuleSettingsLoading extends ModuleSettingsState {}
-
-//class ModuleSettingsUpdated extends ModuleSettingsState {
-//}
-
-class ModuleSettingsUpdated extends ModuleSettingsState {
-  final ModuleSettingsProvider moduleSettings;
-
-  const ModuleSettingsUpdated(this.moduleSettings);
-
-  @override
-  List<Object> get props => [moduleSettings];
-}
-
-class ModuleSettingsLoadError extends ModuleSettingsState {}
 
 // Reason:
 //if the authentication state was uninitialized, the user might be seeing a splash screen.

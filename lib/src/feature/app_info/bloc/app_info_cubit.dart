@@ -7,7 +7,7 @@ class AppInfoCubit extends Cubit<AppInfoProvider> {
 
   String get appName => state.appName;
 
-  String get packageName => state.packageName;
+  // String get packageName => state.packageName;
 
   String get buildNumber => state.buildNumber;
 

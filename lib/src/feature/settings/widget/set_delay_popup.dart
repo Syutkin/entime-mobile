@@ -13,8 +13,6 @@ Future<int?> setDelayPopup(
 
   return showDialog<int>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       scrollable: true,
       title: Text(title),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -40,26 +41,39 @@ class _StartScreen extends State<StartScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: BlocBuilder<ProtocolBloc, ProtocolState>(
-          builder: (context, protocolState) {
-            if (protocolState is ProtocolSelectedState) {
-              return Stack(
-                key: _stackKey,
-                children: [
-                  _startList(protocolState.startProtocol),
-                  _showCountdown(),
-                ],
-              );
-            } else {
-              return Column(
-                children: [
-                  CreateOrSelectProtocolWidget(
-                    onTap: () => routeToSelectFileScreen(context),
-                  ),
-                ],
-              );
-            }
+        body: BlocListener<ProtocolBloc, ProtocolState>(
+          listener: (context, state) {
+            state.map(
+              selected: (state) {
+                context
+                    .read<CountdownBloc>()
+                    .add(const CountdownEvent.reload());
+              },
+              // ignore: no-empty-block
+              notSelected: (state) {},
+            );
           },
+          child: BlocBuilder<ProtocolBloc, ProtocolState>(
+            builder: (context, protocolState) {
+              if (protocolState is ProtocolSelectedState) {
+                return Stack(
+                  key: _stackKey,
+                  children: [
+                    _startList(protocolState.startProtocol),
+                    _showCountdown(),
+                  ],
+                );
+              } else {
+                return Column(
+                  children: [
+                    CreateOrSelectProtocolWidget(
+                      onTap: () => routeToSelectFileScreen(context),
+                    ),
+                  ],
+                );
+              }
+            },
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
@@ -108,13 +122,13 @@ class _StartScreen extends State<StartScreen> {
           },
           child: const Icon(Icons.volume_up),
         ),
-        TextButton(
-          onPressed: () async {
-            BlocProvider.of<ProtocolBloc>(context)
-                .add(const ProtocolClearStartResultsDebug());
-          },
-          child: const Icon(Icons.clear_all),
-        ),
+        // TextButton(
+        //   onPressed: () async {
+        //     BlocProvider.of<ProtocolBloc>(context)
+        //         .add(const ProtocolClearStartResultsDebug());
+        //   },
+        //   child: const Icon(Icons.clear_all),
+        // ),
         TextButton(
           onPressed: () {
             final AutomaticStart automaticStart = AutomaticStart(
@@ -129,6 +143,38 @@ class _StartScreen extends State<StartScreen> {
             );
           },
           child: const Icon(Icons.play_arrow),
+        ),
+        TextButton(
+          onPressed: () {
+            BlocProvider.of<ProtocolBloc>(context).add(
+              const ProtocolEvent.addStartNumber(
+                startTime: StartTime('15:31:00', 111),
+                forceAdd: true,
+              ),
+            );
+            // final AutomaticStart automaticStart = AutomaticStart(
+            //   DateFormat('HH:mm:ss,S').format(DateTime.now()),
+            //   1234,
+            //   DateTime.now(),
+            // );
+            // BlocProvider.of<ProtocolBloc>(context).add(
+            //   ProtocolEvent.updateAutomaticCorrection(
+            //     forceUpdate: true,
+            //     automaticStart: AutomaticStart(
+            //       '15:31:00',
+            //       Random().nextInt(9999) - 5000,
+            //       DateTime.now(),
+            //     ),
+            //   ),
+            // );
+            final int cor = Random().nextInt(9999) - 5000;
+            BlocProvider.of<BluetoothBloc>(context).add(
+              BluetoothEvent.messageReceived(
+                message: r'$' '15:31:01,121;$cor#',
+              ),
+            );
+          },
+          child: const Icon(Icons.bluetooth),
         ),
       ];
 

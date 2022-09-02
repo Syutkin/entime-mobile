@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 void main() async {
   final Directory directory = await getApplicationDocumentsDirectory();
   final File testFile = File(join(directory.path, 'test_csv.csv'));
-  final referenceFile = File('test/common/utils/startlist.csv');
+  final referenceFile = File('test/src/common/utils/startlist.csv');
   if (testFile.existsSync()) {
     testFile.deleteSync();
   }

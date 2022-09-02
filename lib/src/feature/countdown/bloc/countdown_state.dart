@@ -1,24 +1,10 @@
 part of 'countdown_bloc.dart';
 
-@immutable
-abstract class CountdownState extends Equatable {
-  const CountdownState();
+@freezed
+class CountdownState with _$CountdownState {
+  const factory CountdownState.initial() = CountdownInitialState;
 
-  @override
-  List<Object?> get props => [];
-}
+  const factory CountdownState.working(
+      {required String text, String? nextStartTime,}) = CountdownWorkingState;
 
-class CountdownInitialState extends CountdownState {}
-
-class CountdownWorkingState extends CountdownState {
-  final String text;
-  final String? nextStartTime;
-
-  const CountdownWorkingState(
-    this.text,
-    this.nextStartTime,
-  );
-
-  @override
-  List<Object?> get props => [text, nextStartTime];
 }

@@ -14,8 +14,6 @@ Future<void> addRacerPopup(BuildContext context) async {
   final formKey = GlobalKey<FormState>();
   return showDialog<void>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => ExpandedAlertDialog(
       width: MediaQuery.of(context).size.width * 0.9,
       // scrollable: true,

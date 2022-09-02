@@ -36,7 +36,6 @@ Future<String?> _createFile(BuildContext context, [String? initialName]) async {
   final navigator = Navigator.of(context);
   return showDialog<String>(
     context: context,
-    barrierDismissible: true,
     builder: (context) => AlertDialog(
       //scrollable: true,
       title: const Text('Создать'),

@@ -77,8 +77,7 @@ class UpdateProvider {
       _latestRelease = await _getLatestRelease();
       if (_latestRelease != null) {
         final latestVersion = Version.parse(_latestRelease!.tagName);
-        final currentVersion =
-            Version.parse('${_appInfo.version}+${_appInfo.buildNumber}');
+        final currentVersion = Version.parse(_appInfo.version);
         if (latestVersion > currentVersion) {
           logger.i('Update_provider: Update to $latestVersion available');
           _canUpdate = true;

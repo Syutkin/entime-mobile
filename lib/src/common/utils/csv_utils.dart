@@ -21,7 +21,7 @@ String? mapListToCsv(
   final keyIndexMap = <String, int>{};
 
   // Add the key and fix previous records
-  int _addKey(String key) {
+  int addKey(String key) {
     final index = keys.length;
     keyIndexMap[key] = index;
     keys.add(key);
@@ -40,7 +40,7 @@ String? mapListToCsv(
       if (keyIndex == null) {
         // New key is found
         // Add it and fix previous data
-        keyIndex = _addKey(key);
+        keyIndex = addKey(key);
         // grow our list
         dataRow = List<dynamic>.from(dataRow)..add(value);
       } else {

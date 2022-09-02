@@ -8,8 +8,6 @@ Future<int?> brightnessPopup({
   double brightness = initialValue.toDouble();
   return showDialog<int>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       title: Text(text),
       content: StatefulBuilder(

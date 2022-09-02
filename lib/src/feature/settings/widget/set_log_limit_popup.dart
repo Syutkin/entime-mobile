@@ -10,8 +10,6 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
 
   return showDialog<int>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       scrollable: true,
       title: Text(Localization.current.I18nSettings_journalLinesNumberPopup),

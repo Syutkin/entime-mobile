@@ -8,8 +8,6 @@ Future<String?> wifiSettingsPopup({
   String? wifi;
   return showDialog<String>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       title: Text(text),
       content: Column(

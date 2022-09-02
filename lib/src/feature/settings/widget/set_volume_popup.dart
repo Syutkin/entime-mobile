@@ -7,8 +7,6 @@ Future<double?> setVolumePopup(
   double value = settingsState.settings.volume;
   return showDialog<double>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       title: Text(Localization.current.I18nSettings_voiceVolume),
       content: StatefulBuilder(

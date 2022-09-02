@@ -1,23 +1,8 @@
 part of 'log_bloc.dart';
 
-abstract class LogState extends Equatable {
-  const LogState();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class LogInitial extends LogState {}
-
-class LogOpen extends LogState {
-  final List<Log>? log;
-  final bool? updateLogScreen;
-
-  const LogOpen({
-    this.log,
-    this.updateLogScreen,
-  });
-
-  @override
-  List<Object?> get props => [log, updateLogScreen];
+@freezed
+class LogState with _$LogState {
+  const factory LogState.initial() = LogInitial;
+  const factory LogState.open({List<Log>? log, bool? updateLogScreen}) =
+      LogOpen;
 }

@@ -1,36 +1,34 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
-import '../../../common/database/logic/database_provider.dart';
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/helper.dart';
 import '../../audio/logic/audio_service.dart';
 import '../../log/log.dart';
-import '../../module_settings/module_settings.dart';
+import '../../log/logic/log_provider.dart';
+import '../../protocol/logic/protocol_provider.dart';
 import '../../protocol/protocol.dart';
 import '../../settings/settings.dart';
 import '../bluetooth.dart';
 
-part 'bluetooth_bloc_event.dart';
-
-part 'bluetooth_bloc_state.dart';
-
 part 'bluetooth_bloc.freezed.dart';
+part 'bluetooth_bloc_event.dart';
+part 'bluetooth_bloc_state.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   final IBluetoothProvider bluetoothProvider;
-  final IDatabaseProvider databaseProvider;
+  final IProtocolProvider protocolProvider;
+  final ILogProvider logProvider;
 
-  final ModuleSettingsBloc moduleSettingsBloc;
-  final ProtocolBloc protocolBloc;
+  // final ModuleSettingsBloc moduleSettingsBloc;
   late final StreamSubscription<ProtocolState> protocolSubscription;
   final SettingsProvider settingsProvider;
   late final StreamSubscription<AppSettings> settingsSubscription;
   bool _protocolSelectedState = false;
-  final LogBloc logBloc;
   final AudioService audioService;
 
   BluetoothDevice? _bluetoothDevice;
@@ -52,20 +50,23 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   bool _isBetweenCategory = false;
 
   BluetoothBloc({
-    required this.moduleSettingsBloc,
-    required this.protocolBloc,
+    // required this.moduleSettingsBloc,
+    // required this.protocolBloc,
     required this.settingsProvider,
-    required this.logBloc,
+    required this.logProvider,
     required this.audioService,
     required this.bluetoothProvider,
-    required this.databaseProvider,
+    required this.protocolProvider,
   }) : super(const BluetoothNotInitializedState()) {
-    protocolSubscription = protocolBloc.stream.listen((state) {
-      if (state is ProtocolSelectedState) {
-        _protocolSelectedState = true;
-      } else {
-        _protocolSelectedState = false;
-      }
+    protocolProvider.state.listen((value) {
+      value.when(
+        notSelected: () {
+          _protocolSelectedState = false;
+        },
+        selected: (updated) {
+          _protocolSelectedState = true;
+        },
+      );
     });
     settingsSubscription = settingsProvider.state.listen((state) {
       _voiceName = state.voiceName;
@@ -207,7 +208,26 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     final DateTime timeStamp = DateTime.now();
     logger
         .i('Bluetooth -> Received message: ${event.message}, time: $timeStamp');
-    _parseBT(event.message, timeStamp);
+    final BluetoothMessage message = _parseBT(event.message, timeStamp);
+    message.when(
+      automaticStart: (automaticStart) {
+        emit(BluetoothBlocState.connected(message: message));
+      },
+      finish: (time, timeStamp) {
+        emit(BluetoothBlocState.connected(message: message));
+      },
+      countdown: (countdown) async {
+        await _countdown(countdown);
+      },
+      voice: (time) async {
+        await _voice(time);
+      },
+      moduleSettings: (moduleSettings) {
+        emit(BluetoothBlocState.connected(message: message));
+      },
+      // ignore: no-empty-block
+      empty: () {},
+    );
   }
 
   Future<void> _handleSendMessage(
@@ -218,13 +238,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     logger.i('Bluetooth -> Sent message: ${event.message}');
     await bluetoothProvider.bluetoothBackgroundConnection
         .sendMessage(event.message);
-    logBloc.add(
-      LogAdd(
-        level: LogLevel.information,
-        source: LogSource.bluetooth,
-        direction: LogSourceDirection.output,
-        rawData: event.message,
-      ),
+    await logProvider.addLog(
+      level: LogLevel.information,
+      source: LogSource.bluetooth,
+      direction: LogSourceDirection.output,
+      rawData: event.message,
     );
   }
 
@@ -258,15 +276,13 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     }
   }
 
-  void _parseBT(String message, DateTime timeStamp) {
+  BluetoothMessage _parseBT(String message, DateTime timeStamp) {
     String parsedMessage = message;
-    logBloc.add(
-      LogAdd(
-        level: LogLevel.information,
-        source: LogSource.bluetooth,
-        direction: LogSourceDirection.input,
-        rawData: parsedMessage,
-      ),
+    logProvider.addLog(
+      level: LogLevel.information,
+      source: LogSource.bluetooth,
+      direction: LogSourceDirection.output,
+      rawData: parsedMessage,
     );
     if (parsedMessage.startsWith(r'$') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
@@ -282,42 +298,37 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           timeStamp,
           updating: true,
         );
-        protocolBloc.add(
-          ProtocolUpdateAutomaticCorrection(automaticStart: automaticStart),
-        );
+        return BluetoothMessage.automaticStart(automaticStart: automaticStart);
       } else {
         logger.e(
           'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage',
         );
+        return const BluetoothMessage.empty();
       }
     } else if (parsedMessage.startsWith('B') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
       logger.v('Bluetooth -> Message parsed: beep: $parsedMessage');
-      _countdown(parsedMessage);
+      return BluetoothMessage.countdown(time: parsedMessage);
     } else if (parsedMessage.startsWith('V') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
       logger.v('Bluetooth -> Message parsed: speak: $parsedMessage');
-      _voice(parsedMessage);
+      return BluetoothMessage.voice(time: parsedMessage);
     } else if (parsedMessage.startsWith('F') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
       logger.v('Bluetooth -> Message parsed: finish: $parsedMessage');
-      protocolBloc.add(
-        ProtocolAddFinishTime(
-          time: parsedMessage,
-          timeStamp: timeStamp,
-        ),
-      );
+      return BluetoothMessage.finish(time: parsedMessage, timeStamp: timeStamp);
     } else if (parsedMessage.startsWith('{') && parsedMessage.endsWith('}')) {
       logger.i('Bluetooth -> Parsing JSON...');
-      moduleSettingsBloc.add(GetModuleSettings(parsedMessage));
+      return BluetoothMessage.moduleSettings(json: parsedMessage);
     } else {
       logger.e('Bluetooth -> Cannot parse data: $parsedMessage');
+      return const BluetoothMessage.empty();
     }
   }
 
   Future<void> _countdown(String time) async {
     if (_protocolSelectedState) {
-      if (await databaseProvider.getStart(time) > 0) {
+      if (await protocolProvider.getStart(time) > 0) {
         await audioService.countdown();
         logger.i('Bluetooth -> Beep start $time');
       } else {
@@ -345,7 +356,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         dateTime = dateTime.add(const Duration(minutes: 1));
         start.add(DateFormat('HH:mm:ss').format(dateTime));
       }
-      participant = await databaseProvider.getStartingParticipants(start.first);
+      participant = await protocolProvider.getStartingParticipants(start.first);
       if (participant.isNotEmpty) {
         _isStarted = true;
         _isBetweenCategory = false;
@@ -359,7 +370,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         } else {
           newVoiceText += '.';
         }
-        participant = await databaseProvider.getStartingParticipants(start[1]);
+        participant = await protocolProvider.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
           newVoiceText += ' Следующий номер ${participant.first.number}';
           if (_voiceName && participant.first.name != null) {
@@ -369,7 +380,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           }
         }
       } else {
-        participant = await databaseProvider.getStartingParticipants(start[1]);
+        participant = await protocolProvider.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
           _isStarted = true;
           _isBetweenCategory = false;
@@ -390,7 +401,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               'Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
             );
             participant =
-                await databaseProvider.getNextParticipants(start.first);
+                await protocolProvider.getNextParticipants(start.first);
             if (participant.isNotEmpty) {
               _isBetweenCategory = true;
               final DateTime? lastStart = strTimeToDateTime(start.first);

@@ -12,8 +12,6 @@ Future<void> addFinishNumberPopup(BuildContext context, FinishItem item) async {
   final formKey = GlobalKey<FormState>();
   return showDialog<void>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       scrollable: true,
       title: Text(Localization.current.I18nProtocol_enterFinishNumber),
@@ -98,8 +96,6 @@ Future<void> addFinishNumberPopup(BuildContext context, FinishItem item) async {
 Future<bool?> updateFinishTimePopup(BuildContext context, int number) async =>
     showDialog<bool>(
       context: context,
-      barrierDismissible: true,
-      // dialog is dismissible with a tap on the barrier
       builder: (context) => AlertDialog(
         title: Text(Localization.current.I18nProtocol_warning),
         content: Text(Localization.current.I18nProtocol_updateNumber(number)),

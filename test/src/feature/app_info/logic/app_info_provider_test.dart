@@ -1,114 +1,72 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:entime/src/constants/pubspec.yaml.g.dart' as pubspec;
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
-import 'appinfo_test.mocks.dart';
+import 'app_info_provider_test.mocks.dart';
 
 // Generate a MockClient using the Mockito package.
 // Create new instances of this class in each test.
-@GenerateMocks([PackageInfo, AndroidDeviceInfo])
+@GenerateMocks([AndroidDeviceInfo])
 void main() {
   group('AppInfoProvider:', () {
     test('Initialize', () async {
-      final packageInfo = MockPackageInfo();
       final deviceInfo = MockAndroidDeviceInfo();
 
       expect(
         await AppInfoProvider.load(
           deviceInfo: deviceInfo,
-          packageInfo: packageInfo,
         ),
         isA<AppInfoProvider>(),
       );
     });
 
     test('Get appName', () async {
-      final packageInfo = MockPackageInfo();
       final deviceInfo = MockAndroidDeviceInfo();
 
       final appInfoProvider = await AppInfoProvider.load(
         deviceInfo: deviceInfo,
-        packageInfo: packageInfo,
       );
-
-      when(
-        packageInfo.appName,
-      ).thenAnswer((realInvocation) => 'Entime');
 
       expect(
         appInfoProvider.appName,
-        'Entime',
+        pubspec.name,
       );
     });
 
     test('Get buildNumber', () async {
-      final packageInfo = MockPackageInfo();
       final deviceInfo = MockAndroidDeviceInfo();
 
       final appInfoProvider = await AppInfoProvider.load(
         deviceInfo: deviceInfo,
-        packageInfo: packageInfo,
       );
-
-      when(
-        packageInfo.buildNumber,
-      ).thenAnswer((realInvocation) => '1');
 
       expect(
         appInfoProvider.buildNumber,
-        '1',
-      );
-    });
-
-    test('Get packageName', () async {
-      final packageInfo = MockPackageInfo();
-      final deviceInfo = MockAndroidDeviceInfo();
-
-      final appInfoProvider = await AppInfoProvider.load(
-        deviceInfo: deviceInfo,
-        packageInfo: packageInfo,
-      );
-
-      when(
-        packageInfo.packageName,
-      ).thenAnswer((realInvocation) => 'site.syutkin.entime');
-
-      expect(
-        appInfoProvider.packageName,
-        'site.syutkin.entime',
+        pubspec.build.toString(),
       );
     });
 
     test('Get version', () async {
-      final packageInfo = MockPackageInfo();
       final deviceInfo = MockAndroidDeviceInfo();
 
       final appInfoProvider = await AppInfoProvider.load(
         deviceInfo: deviceInfo,
-        packageInfo: packageInfo,
       );
-
-      when(
-        packageInfo.version,
-      ).thenAnswer((realInvocation) => '1.0.0');
 
       expect(
         appInfoProvider.version,
-        '1.0.0',
+        pubspec.version,
       );
     });
 
     test('Get supported abi', () async {
-      final packageInfo = MockPackageInfo();
       final deviceInfo = MockAndroidDeviceInfo();
 
       final appInfoProvider = await AppInfoProvider.load(
         deviceInfo: deviceInfo,
-        packageInfo: packageInfo,
       );
 
       when(
@@ -140,12 +98,10 @@ void main() {
     });
 
     test('Get deviceSupported32BitAbis', () async {
-      final packageInfo = MockPackageInfo();
       final deviceInfo = MockAndroidDeviceInfo();
 
       final appInfoProvider = await AppInfoProvider.load(
         deviceInfo: deviceInfo,
-        packageInfo: packageInfo,
       );
 
       when(
@@ -159,12 +115,10 @@ void main() {
     });
 
     test('Get deviceSupported64BitAbis', () async {
-      final packageInfo = MockPackageInfo();
       final deviceInfo = MockAndroidDeviceInfo();
 
       final appInfoProvider = await AppInfoProvider.load(
         deviceInfo: deviceInfo,
-        packageInfo: packageInfo,
       );
 
       when(
@@ -178,12 +132,10 @@ void main() {
     });
 
     test('Get deviceSupportedAbis', () async {
-      final packageInfo = MockPackageInfo();
       final deviceInfo = MockAndroidDeviceInfo();
 
       final appInfoProvider = await AppInfoProvider.load(
         deviceInfo: deviceInfo,
-        packageInfo: packageInfo,
       );
 
       when(
@@ -195,11 +147,5 @@ void main() {
         ['armeabi-v7a', 'arm64-v8a', 'x86_64'],
       );
     });
-
-    // List<String?> get deviceSupported32BitAbis => _deviceInfo.supported32BitAbis;
-
-    // List<String?> get deviceSupported64BitAbis => _deviceInfo.supported64BitAbis;
-
-    // List<String?> get deviceSupportedAbis => _deviceInfo.supportedAbis;
   });
 }

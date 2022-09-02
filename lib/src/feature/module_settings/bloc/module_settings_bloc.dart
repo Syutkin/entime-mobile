@@ -1,10 +1,10 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../settings/settings.dart';
 
+part 'module_settings_bloc.freezed.dart';
 part 'module_settings_event.dart';
 part 'module_settings_state.dart';
 
@@ -12,14 +12,14 @@ class ModuleSettingsBloc
     extends Bloc<ModuleSettingsEvent, ModuleSettingsState> {
   late ModuleSettingsProvider moduleSettings;
 
-  ModuleSettingsBloc() : super(ModuleSettingsUninitialized()) {
+  ModuleSettingsBloc() : super(const ModuleSettingsUninitialized()) {
     on<GetModuleSettings>(
       (event, emit) => _handleGetModuleSettings(event, emit),
     );
     // on<ModuleSettingsLoaded>((event, emit) {});
     on<UpdateModuleSettings>((event, emit) {
-      emit(ModuleSettingsLoading());
-      emit(ModuleSettingsUpdated(moduleSettings));
+      emit(const ModuleSettingsLoading());
+      emit(ModuleSettingsLoaded(moduleSettings));
     });
   }
 
@@ -27,7 +27,7 @@ class ModuleSettingsBloc
     GetModuleSettings event,
     Emitter<ModuleSettingsState> emit,
   ) async {
-    emit(ModuleSettingsLoading());
+    emit(const ModuleSettingsLoading());
     moduleSettings = ModuleSettingsType();
     bool isLoaded = await moduleSettings.update(event.json);
 
@@ -40,12 +40,12 @@ class ModuleSettingsBloc
         isLoaded = await moduleSettings.update(event.json);
       } else {
         logger.e('Ошибка! Неизвестный тип модуля: ${moduleSettings.type}');
-        emit(ModuleSettingsLoadError());
+        emit(const ModuleSettingsError());
       }
-      emit(ModuleSettingsUpdated(moduleSettings));
+      emit(ModuleSettingsLoaded(moduleSettings));
     } else {
       logger.e('Ошибка! Настройки не загружены');
-      emit(ModuleSettingsLoadError());
+      emit(const ModuleSettingsError());
     }
   }
 }

@@ -20,7 +20,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
   automaticPhoneTimeController.text = item.automaticphonetime ?? '';
   final formKey = GlobalKey<FormState>();
 
-  String? _validateCorrection(String? value) {
+  String? validateCorrection(String? value) {
     if (value == '' || value == null) {
       return null;
     }
@@ -30,7 +30,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
     return null;
   }
 
-  String? _validateStartTime(String? value) {
+  String? validateStartTime(String? value) {
     if (value == '' || value == null) {
       return null;
     }
@@ -40,7 +40,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
     return null;
   }
 
-  StartItem? _updatedStartItem() {
+  StartItem? updatedStartItem() {
     final automaticCorrection =
         int.tryParse(automaticCorrectionController.text);
     final manualCorrection = int.tryParse(manualCorrectionController.text);
@@ -60,8 +60,6 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
 
   return showDialog<void>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => ExpandedAlertDialog(
       width: MediaQuery.of(context).size.width * 0.9,
       scrollable: true,
@@ -115,7 +113,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
                 icon: Icon(MdiIcons.cpu64Bit),
                 labelText: 'Поправка',
               ),
-              validator: (value) => _validateCorrection(value),
+              validator: (value) => validateCorrection(value),
             ),
             TextFormField(
               controller: automaticStartTimeController,
@@ -124,7 +122,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
                 labelText: 'Время старта',
                 icon: Icon(MdiIcons.cpu64Bit),
               ),
-              validator: (value) => _validateStartTime(value),
+              validator: (value) => validateStartTime(value),
             ),
             TextFormField(
               controller: automaticPhoneTimeController,
@@ -143,7 +141,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
                 icon: Icon(MdiIcons.handBackLeft),
                 labelText: 'Поправка',
               ),
-              validator: (value) => _validateCorrection(value),
+              validator: (value) => validateCorrection(value),
             ),
             TextFormField(
               controller: manualStartTimeController,
@@ -152,7 +150,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
                 labelText: 'Время старта',
                 icon: Icon(MdiIcons.handBackLeft),
               ),
-              validator: (value) => _validateStartTime(value),
+              validator: (value) => validateStartTime(value),
             ),
           ],
         ),
@@ -167,7 +165,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
         TextButton(
           onPressed: () {
             if (formKey.currentState!.validate()) {
-              final newStartItem = _updatedStartItem();
+              final newStartItem = updatedStartItem();
               if (newStartItem != null) {
                 context
                     .read<ProtocolBloc>()

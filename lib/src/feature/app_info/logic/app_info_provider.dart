@@ -1,22 +1,19 @@
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+
+import '../../../constants/pubspec.yaml.g.dart' as pubspec;
 
 class AppInfoProvider {
-  final PackageInfo _packageInfo;
   final AndroidDeviceInfo _deviceInfo;
   final List<String> _supportedAbis = ['armeabi-v7a', 'arm64-v8a', 'x86_64'];
 
   AppInfoProvider._(
-    PackageInfo packageInfo,
     AndroidDeviceInfo deviceInfo,
-  )   : _packageInfo = packageInfo,
-        _deviceInfo = deviceInfo;
+  ) : _deviceInfo = deviceInfo;
 
   static Future<AppInfoProvider> load({
-    required PackageInfo packageInfo,
     required AndroidDeviceInfo deviceInfo,
   }) async =>
-      AppInfoProvider._(packageInfo, deviceInfo);
+      AppInfoProvider._(deviceInfo);
 
   // => AppInfoProvider(
   // final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
@@ -62,13 +59,11 @@ class AppInfoProvider {
   //   await DeviceInfoPlugin().androidInfo,
   // );
 
-  String get appName => _packageInfo.appName;
+  String get appName => pubspec.name;
 
-  String get buildNumber => _packageInfo.buildNumber;
+  String get buildNumber => pubspec.build.toString();
 
-  String get packageName => _packageInfo.packageName;
-
-  String get version => _packageInfo.version;
+  String get version => pubspec.version;
 
   String? get abi {
     for (final deviceSupportedAbi in _deviceInfo.supportedAbis) {

@@ -9,8 +9,6 @@ Future<double?> setFloatingButtonSizePopup(
   double newValue = value;
   return showDialog<double>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       title: Text(text),
       content: StatefulBuilder(

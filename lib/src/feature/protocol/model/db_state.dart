@@ -1,1 +1,0 @@
-enum DBState { selected, notSelected }

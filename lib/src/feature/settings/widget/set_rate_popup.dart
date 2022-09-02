@@ -7,8 +7,6 @@ Future<double?> setRatePopup(
   double value = settingsState.settings.rate;
   return showDialog<double>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       title: Text(Localization.current.I18nSettings_voiceRate),
       content: StatefulBuilder(

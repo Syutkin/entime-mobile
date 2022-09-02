@@ -7,8 +7,6 @@ Future<double?> setPitchPopup(
   double value = settingsState.settings.pitch;
   return showDialog<double>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       title: Text(Localization.current.I18nSettings_voicePitch),
       content: StatefulBuilder(

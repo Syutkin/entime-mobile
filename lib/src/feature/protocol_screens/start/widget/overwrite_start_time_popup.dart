@@ -8,8 +8,6 @@ Future<bool?> overwriteStartTimePopup({
 }) async =>
     showDialog<bool>(
       context: context,
-      barrierDismissible: true,
-      // dialog is dismissible with a tap on the barrier
       builder: (context) => AlertDialog(
         title: const Text('Предупреждение'),
         content: Text(text),

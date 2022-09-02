@@ -1,22 +1,23 @@
 import 'dart:async';
 
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../common/database/logic/database_provider.dart';
+import '../../../common/database/model/dbstate.dart';
 import '../../settings/settings.dart';
+import '../logic/log_provider.dart';
 import '../model/log.dart';
 import '../model/log_level.dart';
 import '../model/log_source.dart';
 import '../model/log_source_direction.dart';
 
+part 'log_bloc.freezed.dart';
 part 'log_event.dart';
 part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {
-  final IDatabaseProvider databaseProvider;
+  final ILogProvider logProvider;
   final SettingsProvider settingsProvider;
-  late final StreamSubscription<AppSettings> settingsSubscription;
 
   int _limit = -1;
 
@@ -24,10 +25,16 @@ class LogBloc extends Bloc<LogEvent, LogState> {
 
   LogBloc({
     required this.settingsProvider,
-    required this.databaseProvider,
+    required this.logProvider,
   }) : super(const LogOpen()) {
-    settingsSubscription = settingsProvider.state.listen((state) {
+    settingsProvider.state.listen((state) {
       _limit = state.logLimit;
+    });
+
+    logProvider.state.listen((state) {
+      if (state == const DBState.selected(updated: true)) {
+        add(const ShowLog());
+      }
     });
 
     on<LogAdd>((event, emit) => _handleLogAdd(event, emit));
@@ -37,13 +44,12 @@ class LogBloc extends Bloc<LogEvent, LogState> {
 
   @override
   Future<void> close() {
-    databaseProvider.dispose();
-    settingsSubscription.cancel();
+    logProvider.dispose();
     return super.close();
   }
 
   Future<void> _handleLogAdd(LogAdd event, Emitter<LogState> emit) async {
-    await databaseProvider.addLog(
+    await logProvider.addLog(
       level: event.level,
       source: event.source,
       direction: event.direction,
@@ -55,7 +61,7 @@ class LogBloc extends Bloc<LogEvent, LogState> {
   }
 
   Future<void> _handleShowLog(ShowLog event, Emitter<LogState> emit) async {
-    _log = await databaseProvider.getLog(limit: _limit);
+    _log = await logProvider.getLog(limit: _limit);
     emit(
       LogOpen(
         log: _log,

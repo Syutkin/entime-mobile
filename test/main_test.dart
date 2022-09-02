@@ -2,11 +2,12 @@ import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
-import 'package:entime/src/common/database/logic/database_provider.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:entime/src/feature/audio/logic/audio_service.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/home/home.dart';
+import 'package:entime/src/feature/log/logic/log_provider.dart';
+import 'package:entime/src/feature/protocol/logic/protocol_provider.dart';
 import 'package:entime/src/feature/protocol/protocol.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/tab/tab.dart';
@@ -21,7 +22,9 @@ class MockUpdateProvider extends Mock implements UpdateProvider {}
 
 class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
-class MockDatabaseProvider extends Mock implements IDatabaseProvider {}
+class MockProtocolProvider extends Mock implements IProtocolProvider {}
+
+class MockLogProvider extends Mock implements LogProvider {}
 
 class MockAudioService extends Mock implements AudioService {}
 
@@ -47,7 +50,8 @@ void main() async {
   final appInfo = MockAppInfoProvider();
   final UpdateProvider updateProvider = MockUpdateProvider();
   final IBluetoothProvider bluetoothProvider = MockBluetoothProvider();
-  final IDatabaseProvider databaseProvider = MockDatabaseProvider();
+  final IProtocolProvider protocolProvider = MockProtocolProvider();
+  final ILogProvider logProvider = MockLogProvider();
 
   final AudioService audioService = MockAudioService();
 
@@ -60,7 +64,8 @@ void main() async {
           bluetoothProvider: bluetoothProvider,
           audioService: audioService,
           appInfo: appInfo,
-          databaseProvider: databaseProvider,
+          protocolProvider: protocolProvider,
+          logProvider: logProvider,
         ),
       ); // Create main app
       expect(find.byType(EntimeAppView), findsOneWidget);

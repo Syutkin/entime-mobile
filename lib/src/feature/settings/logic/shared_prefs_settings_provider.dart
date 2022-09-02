@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -14,9 +15,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   AppSettings get settings => _settings;
 
   @override
-  Stream<AppSettings> get state =>
-      _appSettingsController.stream;
-  final _appSettingsController = StreamController<AppSettings>.broadcast();
+  BehaviorSubject<AppSettings> get state => _appSettingsController;
+  final _appSettingsController = BehaviorSubject<AppSettings>();
 
   SharedPrefsSettingsProvider._(SharedPreferences prefs, AppSettings settings)
       : _prefs = prefs,

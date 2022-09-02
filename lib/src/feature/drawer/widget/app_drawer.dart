@@ -54,7 +54,6 @@ class AppDrawer extends StatelessWidget {
               onTap: () {
                 showDialog<void>(
                   context: context,
-                  barrierDismissible: true,
                   builder: (context) => const AboutPopup(),
                 );
               },

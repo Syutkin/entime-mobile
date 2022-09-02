@@ -7,6 +7,7 @@ import '../../../common/localization/localization.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../drawer/widget/app_drawer.dart';
 import '../../init/init.dart';
+import '../../module_settings/module_settings.dart';
 import '../../protocol/protocol.dart';
 import '../../protocol_screens/protocol_screens.dart';
 import '../../settings/bloc/settings_bloc.dart';
@@ -19,170 +20,205 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      // Следим за повторной установкой стартового времени для участника
-      BlocListener<ProtocolBloc, ProtocolState>(
-        listener: (context, state) async {
-          final protocolBloc = context.read<ProtocolBloc>();
-          final materialLocalization = MaterialLocalizations.of(context);
-          if (state is ProtocolSelectedState) {
-            // Обновление автоматического времени старта
-            if (state.automaticStart != null &&
-                state.automaticStart!.updating) {
-              final String text =
-                  Localization.current.I18nHome_updateAutomaticCorrection(
-                state.previousStart!.first.number,
-                state.previousStart!.first.automaticcorrection!,
-                state.automaticStart!.correction,
+      // Следим за поступающей информацией от Bluetooth
+      BlocListener<BluetoothBloc, BluetoothBlocState>(
+        listener: (context, state) {
+          state.maybeWhen(
+            connected: (message) {
+              message?.maybeWhen(
+                automaticStart: (automaticStart) {
+                  context.read<ProtocolBloc>().add(
+                        ProtocolEvent.updateAutomaticCorrection(
+                          automaticStart: automaticStart,
+                        ),
+                      );
+                },
+                finish: (time, timeStamp) {
+                  context.read<ProtocolBloc>().add(
+                        ProtocolEvent.addFinishTime(
+                          time: time,
+                          timeStamp: timeStamp,
+                        ),
+                      );
+                },
+                moduleSettings: (moduleSettings) {
+                  context
+                      .read<ModuleSettingsBloc>()
+                      .add(ModuleSettingsEvent.get(moduleSettings));
+                },
+                // ignore: no-empty-block
+                orElse: () {},
               );
-              final bool? update = await overwriteStartTimePopup(
-                context: context,
-                text: text,
-              );
-              if (update != null && update) {
-                protocolBloc.add(
-                  ProtocolUpdateAutomaticCorrection(
-                    automaticStart: state.automaticStart!,
-                    forceUpdate: true,
-                  ),
+            },
+            // ignore: no-empty-block
+            orElse: () {},
+          );
+        },
+        // Следим за повторной установкой стартового времени для участника
+        child: BlocListener<ProtocolBloc, ProtocolState>(
+          listener: (context, state) async {
+            final protocolBloc = context.read<ProtocolBloc>();
+            final materialLocalization = MaterialLocalizations.of(context);
+            if (state is ProtocolSelectedState) {
+              // Обновление автоматического времени старта
+              if (state.automaticStart != null &&
+                  state.automaticStart!.updating) {
+                final String text =
+                    Localization.current.I18nHome_updateAutomaticCorrection(
+                  state.previousStart!.first.number,
+                  state.previousStart!.first.automaticcorrection!,
+                  state.automaticStart!.correction,
                 );
-              }
-            }
-            // Добавление нового стартового времени
-            if (state.previousStart != null && state.startTime != null) {
-              // Если стартовое время уже присвоено другому номеру
-              String text = '';
-              for (final element in state.previousStart!) {
-                if (element.automaticstarttime == null &&
-                    element.manualstarttime == null) {
-                  text += Localization.current.I18nHome_equalStartTime(
-                    state.startTime!.time,
-                    element.number,
-                    state.startTime!.number,
+                final bool? update = await overwriteStartTimePopup(
+                  context: context,
+                  text: text,
+                );
+                if (update != null && update) {
+                  protocolBloc.add(
+                    ProtocolUpdateAutomaticCorrection(
+                      automaticStart: state.automaticStart!,
+                      forceUpdate: true,
+                    ),
                   );
-                } else {
-                  if (element.automaticstarttime != null) {
-                    text += Localization.current
-                        .I18nHome_updateAutomaticStartCorrection(
-                      state.startTime!.number,
-                      element.automaticstarttime!,
-                    );
-                  } else if (element.manualstarttime != null) {
-                    text += Localization.current
-                        .I18nHome_updateAutomaticStartCorrection(
-                      state.startTime!.number,
-                      element.manualstarttime!,
-                    );
-                  } else {
-                    text += Localization.current.I18nHome_errorAddParticipant(
-                      materialLocalization.cancelButtonLabel,
-                    );
-                  }
                 }
               }
+              // Добавление нового стартового времени
+              if (state.previousStart != null && state.startTime != null) {
+                // Если стартовое время уже присвоено другому номеру
+                String text = '';
+                for (final element in state.previousStart!) {
+                  if (element.automaticstarttime == null &&
+                      element.manualstarttime == null) {
+                    text += Localization.current.I18nHome_equalStartTime(
+                      state.startTime!.time,
+                      element.number,
+                      state.startTime!.number,
+                    );
+                  } else {
+                    if (element.automaticstarttime != null) {
+                      text += Localization.current
+                          .I18nHome_updateAutomaticStartCorrection(
+                        state.startTime!.number,
+                        element.automaticstarttime!,
+                      );
+                    } else if (element.manualstarttime != null) {
+                      text += Localization.current
+                          .I18nHome_updateAutomaticStartCorrection(
+                        state.startTime!.number,
+                        element.manualstarttime!,
+                      );
+                    } else {
+                      text += Localization.current.I18nHome_errorAddParticipant(
+                        materialLocalization.cancelButtonLabel,
+                      );
+                    }
+                  }
+                }
 
-              final bool? update = await overwriteStartTimePopup(
-                context: context,
-                text: text,
-              );
-
-              if (update != null && update) {
-                protocolBloc.add(
-                  ProtocolAddStartNumber(
-                    startTime: state.startTime!,
-                    forceAdd: true,
-                  ),
+                final bool? update = await overwriteStartTimePopup(
+                  context: context,
+                  text: text,
                 );
+
+                if (update != null && update) {
+                  protocolBloc.add(
+                    ProtocolAddStartNumber(
+                      startTime: state.startTime!,
+                      forceAdd: true,
+                    ),
+                  );
+                }
               }
             }
-          }
-        },
-        child: BlocBuilder<TabBloc, AppTab>(
-          builder: (context, activeTab) => DefaultTabController(
-            length: 3,
-            child: Scaffold(
-              drawer: const AppDrawer(),
-              appBar: AppBar(
-                title: const _TextTitle(),
-                actions: <Widget>[
-                  _FinishFilterButton(activeTab: activeTab),
-                  const BluetoothButton(),
-                  _MenuButton(activeTab: activeTab),
-                ],
-                bottom: TabBar(
-                  onTap: (index) {
-                    final bloc = context.read<TabBloc>();
-                    switch (index) {
-                      case 0:
-                        bloc.add(const TabEvent.updated(AppTab.init));
-                        break;
-                      case 1:
-                        bloc.add(const TabEvent.updated(AppTab.start));
-                        break;
-                      case 2:
-                        bloc.add(const TabEvent.updated(AppTab.finish));
-                        break;
-                    }
-                  },
-                  tabs: <Widget>[
-                    Tab(icon: Text(Localization.current.I18nHome_home)),
-                    Tab(icon: Text(Localization.current.I18nHome_start)),
-                    Tab(icon: Text(Localization.current.I18nHome_finish)),
+          },
+          child: BlocBuilder<TabBloc, AppTab>(
+            builder: (context, activeTab) => DefaultTabController(
+              length: 3,
+              child: Scaffold(
+                drawer: const AppDrawer(),
+                appBar: AppBar(
+                  title: const _TextTitle(),
+                  actions: <Widget>[
+                    _FinishFilterButton(activeTab: activeTab),
+                    const BluetoothButton(),
+                    _MenuButton(activeTab: activeTab),
                   ],
-                ),
-              ),
-              body: MultiBlocListener(
-                listeners: [
-                  BlocListener<UpdateBloc, UpdateState>(
-                    listenWhen: (previousState, state) {
-                      // ловим показ наличия обновления
-                      if (previousState is UpdateInitial &&
-                          state is UpdateAvailable) {
-                        return true;
-                        // ловим показ ченджлога
-                      } else if (previousState is UpdateInitial &&
-                          state is UpdateInitial) {
-                        return true;
-                      } else {
-                        return false;
+                  bottom: TabBar(
+                    onTap: (index) {
+                      final bloc = context.read<TabBloc>();
+                      switch (index) {
+                        case 0:
+                          bloc.add(const TabEvent.updated(AppTab.init));
+                          break;
+                        case 1:
+                          bloc.add(const TabEvent.updated(AppTab.start));
+                          break;
+                        case 2:
+                          bloc.add(const TabEvent.updated(AppTab.finish));
+                          break;
                       }
                     },
-                    listener: (context, state) async {
-                      if (state is UpdateAvailable &&
-                          !Scaffold.of(context).isDrawerOpen) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              Localization.current
-                                  .I18nHome_updateAvailable(state.version),
-                            ),
-                            action: SnackBarAction(
-                              onPressed: () {
-                                BlocProvider.of<UpdateBloc>(context)
-                                    .add(const DownloadUpdate());
-                                Scaffold.of(context).openDrawer();
-                              },
-                              label: Localization.current.I18nHome_update,
-                            ),
-                          ),
-                        );
-                      } else if (state is UpdateInitial &&
-                          state.showChangelog != null &&
-                          state.showChangelog!.show) {
-                        await showChangelogAtStartup(
-                          context,
-                          state.showChangelog!.previousVersion!,
-                        );
-                      }
-                    },
+                    tabs: <Widget>[
+                      Tab(icon: Text(Localization.current.I18nHome_home)),
+                      Tab(icon: Text(Localization.current.I18nHome_start)),
+                      Tab(icon: Text(Localization.current.I18nHome_finish)),
+                    ],
                   ),
-                ],
-                child: const TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: <Widget>[
-                    InitScreen(),
-                    StartScreen(),
-                    FinishScreen(),
+                ),
+                body: MultiBlocListener(
+                  listeners: [
+                    BlocListener<UpdateBloc, UpdateState>(
+                      listenWhen: (previousState, state) {
+                        // ловим показ наличия обновления
+                        if (previousState is UpdateInitial &&
+                            state is UpdateAvailable) {
+                          return true;
+                          // ловим показ ченджлога
+                        } else if (previousState is UpdateInitial &&
+                            state is UpdateInitial) {
+                          return true;
+                        } else {
+                          return false;
+                        }
+                      },
+                      listener: (context, state) async {
+                        if (state is UpdateAvailable &&
+                            !Scaffold.of(context).isDrawerOpen) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                Localization.current
+                                    .I18nHome_updateAvailable(state.version),
+                              ),
+                              action: SnackBarAction(
+                                onPressed: () {
+                                  BlocProvider.of<UpdateBloc>(context)
+                                      .add(const DownloadUpdate());
+                                  Scaffold.of(context).openDrawer();
+                                },
+                                label: Localization.current.I18nHome_update,
+                              ),
+                            ),
+                          );
+                        } else if (state is UpdateInitial &&
+                            state.showChangelog != null &&
+                            state.showChangelog!.show) {
+                          await showChangelogAtStartup(
+                            context,
+                            state.showChangelog!.previousVersion!,
+                          );
+                        }
+                      },
+                    ),
                   ],
+                  child: const TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: <Widget>[
+                      InitScreen(),
+                      StartScreen(),
+                      FinishScreen(),
+                    ],
+                  ),
                 ),
               ),
             ),

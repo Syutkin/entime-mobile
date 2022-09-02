@@ -1819,7 +1819,7 @@ mixin _$BluetoothBlocState {
     required TResult Function() notInitialized,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
-    required TResult Function() connected,
+    required TResult Function(BluetoothMessage? message) connected,
     required TResult Function() disconnecting,
     required TResult Function(BluetoothDevice? bluetoothDevice) disconnected,
   }) =>
@@ -1829,7 +1829,7 @@ mixin _$BluetoothBlocState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
   }) =>
@@ -1839,7 +1839,7 @@ mixin _$BluetoothBlocState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
     required TResult orElse(),
@@ -1944,7 +1944,7 @@ class _$BluetoothNotInitializedState implements BluetoothNotInitializedState {
     required TResult Function() notInitialized,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
-    required TResult Function() connected,
+    required TResult Function(BluetoothMessage? message) connected,
     required TResult Function() disconnecting,
     required TResult Function(BluetoothDevice? bluetoothDevice) disconnected,
   }) {
@@ -1957,7 +1957,7 @@ class _$BluetoothNotInitializedState implements BluetoothNotInitializedState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
   }) {
@@ -1970,7 +1970,7 @@ class _$BluetoothNotInitializedState implements BluetoothNotInitializedState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
     required TResult orElse(),
@@ -2076,7 +2076,7 @@ class _$BluetoothNotEnabledState implements BluetoothNotEnabledState {
     required TResult Function() notInitialized,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
-    required TResult Function() connected,
+    required TResult Function(BluetoothMessage? message) connected,
     required TResult Function() disconnecting,
     required TResult Function(BluetoothDevice? bluetoothDevice) disconnected,
   }) {
@@ -2089,7 +2089,7 @@ class _$BluetoothNotEnabledState implements BluetoothNotEnabledState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
   }) {
@@ -2102,7 +2102,7 @@ class _$BluetoothNotEnabledState implements BluetoothNotEnabledState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
     required TResult orElse(),
@@ -2208,7 +2208,7 @@ class _$BluetoothConnectingState implements BluetoothConnectingState {
     required TResult Function() notInitialized,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
-    required TResult Function() connected,
+    required TResult Function(BluetoothMessage? message) connected,
     required TResult Function() disconnecting,
     required TResult Function(BluetoothDevice? bluetoothDevice) disconnected,
   }) {
@@ -2221,7 +2221,7 @@ class _$BluetoothConnectingState implements BluetoothConnectingState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
   }) {
@@ -2234,7 +2234,7 @@ class _$BluetoothConnectingState implements BluetoothConnectingState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
     required TResult orElse(),
@@ -2299,6 +2299,9 @@ abstract class _$$BluetoothConnectedStateCopyWith<$Res> {
   factory _$$BluetoothConnectedStateCopyWith(_$BluetoothConnectedState value,
           $Res Function(_$BluetoothConnectedState) then) =
       __$$BluetoothConnectedStateCopyWithImpl<$Res>;
+  $Res call({BluetoothMessage? message});
+
+  $BluetoothMessageCopyWith<$Res>? get message;
 }
 
 /// @nodoc
@@ -2312,27 +2315,61 @@ class __$$BluetoothConnectedStateCopyWithImpl<$Res>
   @override
   _$BluetoothConnectedState get _value =>
       super._value as _$BluetoothConnectedState;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$BluetoothConnectedState(
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as BluetoothMessage?,
+    ));
+  }
+
+  @override
+  $BluetoothMessageCopyWith<$Res>? get message {
+    if (_value.message == null) {
+      return null;
+    }
+
+    return $BluetoothMessageCopyWith<$Res>(_value.message!, (value) {
+      return _then(_value.copyWith(message: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$BluetoothConnectedState implements BluetoothConnectedState {
-  const _$BluetoothConnectedState();
+  const _$BluetoothConnectedState({this.message});
+
+  @override
+  final BluetoothMessage? message;
 
   @override
   String toString() {
-    return 'BluetoothBlocState.connected()';
+    return 'BluetoothBlocState.connected(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothConnectedState);
+            other is _$BluetoothConnectedState &&
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$BluetoothConnectedStateCopyWith<_$BluetoothConnectedState> get copyWith =>
+      __$$BluetoothConnectedStateCopyWithImpl<_$BluetoothConnectedState>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2340,11 +2377,11 @@ class _$BluetoothConnectedState implements BluetoothConnectedState {
     required TResult Function() notInitialized,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
-    required TResult Function() connected,
+    required TResult Function(BluetoothMessage? message) connected,
     required TResult Function() disconnecting,
     required TResult Function(BluetoothDevice? bluetoothDevice) disconnected,
   }) {
-    return connected();
+    return connected(message);
   }
 
   @override
@@ -2353,11 +2390,11 @@ class _$BluetoothConnectedState implements BluetoothConnectedState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
   }) {
-    return connected?.call();
+    return connected?.call(message);
   }
 
   @override
@@ -2366,13 +2403,13 @@ class _$BluetoothConnectedState implements BluetoothConnectedState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
     required TResult orElse(),
   }) {
     if (connected != null) {
-      return connected();
+      return connected(message);
     }
     return orElse();
   }
@@ -2423,7 +2460,13 @@ class _$BluetoothConnectedState implements BluetoothConnectedState {
 }
 
 abstract class BluetoothConnectedState implements BluetoothBlocState {
-  const factory BluetoothConnectedState() = _$BluetoothConnectedState;
+  const factory BluetoothConnectedState({final BluetoothMessage? message}) =
+      _$BluetoothConnectedState;
+
+  BluetoothMessage? get message;
+  @JsonKey(ignore: true)
+  _$$BluetoothConnectedStateCopyWith<_$BluetoothConnectedState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2474,7 +2517,7 @@ class _$BluetoothDisconnectingState implements BluetoothDisconnectingState {
     required TResult Function() notInitialized,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
-    required TResult Function() connected,
+    required TResult Function(BluetoothMessage? message) connected,
     required TResult Function() disconnecting,
     required TResult Function(BluetoothDevice? bluetoothDevice) disconnected,
   }) {
@@ -2487,7 +2530,7 @@ class _$BluetoothDisconnectingState implements BluetoothDisconnectingState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
   }) {
@@ -2500,7 +2543,7 @@ class _$BluetoothDisconnectingState implements BluetoothDisconnectingState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
     required TResult orElse(),
@@ -2633,7 +2676,7 @@ class _$BluetoothDisconnectedState implements BluetoothDisconnectedState {
     required TResult Function() notInitialized,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
-    required TResult Function() connected,
+    required TResult Function(BluetoothMessage? message) connected,
     required TResult Function() disconnecting,
     required TResult Function(BluetoothDevice? bluetoothDevice) disconnected,
   }) {
@@ -2646,7 +2689,7 @@ class _$BluetoothDisconnectedState implements BluetoothDisconnectedState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
   }) {
@@ -2659,7 +2702,7 @@ class _$BluetoothDisconnectedState implements BluetoothDisconnectedState {
     TResult Function()? notInitialized,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
-    TResult Function()? connected,
+    TResult Function(BluetoothMessage? message)? connected,
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
     required TResult orElse(),

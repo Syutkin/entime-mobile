@@ -104,7 +104,7 @@ Future<int?> buzzerFrequencyPopup({
     Note('DS8', 4978),
   ];
 
-  int _startNote() {
+  int startNote() {
     int i = 0;
     for (final Note note in notes) {
       if (note.frequency == frequency) {
@@ -115,12 +115,10 @@ Future<int?> buzzerFrequencyPopup({
     return 53; //default, note E5, 659Hz
   }
 
-  double value = _startNote().toDouble();
+  double value = startNote().toDouble();
 
   return showDialog<int>(
     context: context,
-    barrierDismissible: true,
-    // dialog is dismissible with a tap on the barrier
     builder: (context) => AlertDialog(
       title: Text(text),
       content: StatefulBuilder(

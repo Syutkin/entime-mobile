@@ -15,7 +15,6 @@ class ModuleSettingsInitScreen extends StatelessWidget {
     if (updated) {
       await showDialog<void>(
         context: context,
-        barrierDismissible: true,
         builder: (context) => AlertDialog(
           title: Text(
             Localization.current.I18nModuleSettings_saveSettingsToModule,
@@ -60,11 +59,11 @@ class ModuleSettingsInitScreen extends StatelessWidget {
         ),
         body: BlocBuilder<ModuleSettingsBloc, ModuleSettingsState>(
           builder: (context, state) {
-            if (state is ModuleSettingsUpdated) {
+            if (state is ModuleSettingsLoaded) {
               return ModuleSettingsScreen(
                 onChanged: () => updated = true,
               );
-            } else if (state is ModuleSettingsLoadError) {
+            } else if (state is ModuleSettingsError) {
               return Splash(
                 text: Localization.current.I18nModuleSettings_errorLoadSettings,
               );

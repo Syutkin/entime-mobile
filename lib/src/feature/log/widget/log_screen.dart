@@ -19,7 +19,7 @@ class LogScreen extends StatelessWidget {
     BlocProvider.of<LogBloc>(context).add(const ShowLog());
     return WillPopScope(
       onWillPop: () async {
-        BlocProvider.of<LogBloc>(context).add(HideLog());
+        BlocProvider.of<LogBloc>(context).add(const HideLog());
         return true;
       },
       child: Scaffold(
