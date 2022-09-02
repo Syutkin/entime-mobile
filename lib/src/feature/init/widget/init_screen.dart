@@ -86,7 +86,7 @@ class _InitScreen extends State<InitScreen> {
 
   void _moduleSettings(BuildContext context) {
     BlocProvider.of<BluetoothBloc>(context)
-        .add(const SendMessage(message: '{"Read": true}'));
+        .add(const BluetoothEvent.sendMessage(message: '{"Read": true}'));
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (context) => const ModuleSettingsInitScreen(),

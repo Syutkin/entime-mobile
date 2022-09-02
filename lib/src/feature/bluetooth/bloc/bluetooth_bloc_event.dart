@@ -2,19 +2,19 @@ part of 'bluetooth_bloc.dart';
 
 @freezed
 class BluetoothEvent with _$BluetoothEvent {
-  const factory BluetoothEvent.initialize() = InitializeBluetooth;
-  const factory BluetoothEvent.enable() = EnableBluetooth;
-  const factory BluetoothEvent.disable() = DisableBluetooth;
+  const factory BluetoothEvent.initialize() = _InitializeBluetooth;
+  const factory BluetoothEvent.enable() = _EnableBluetooth;
+  const factory BluetoothEvent.disable() = _DisableBluetooth;
   const factory BluetoothEvent.selectDevice({
     BluetoothDeviceWithAvailability? deviceWithAvailability,
-  }) = SelectDevice;
-  const factory BluetoothEvent.connected() = Connected;
+  }) = _SelectDevice;
+  const factory BluetoothEvent.connected() = _Connected;
   const factory BluetoothEvent.connect({BluetoothDevice? selectedDevice}) =
-      Connect;
-  const factory BluetoothEvent.disconnect() = Disconnect;
-  const factory BluetoothEvent.disconnected() = Disconnected;
+      _Connect;
+  const factory BluetoothEvent.disconnect() = _Disconnect;
+  const factory BluetoothEvent.disconnected() = _Disconnected;
   const factory BluetoothEvent.messageReceived({required String message}) =
-      MessageReceived;
+      _MessageReceived;
   const factory BluetoothEvent.sendMessage({required String message}) =
-      SendMessage;
+      _SendMessage;
 }

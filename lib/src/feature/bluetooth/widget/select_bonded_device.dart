@@ -11,7 +11,7 @@ import 'bluetooth_device_list_entry.dart';
 
 Future<void> selectBluetoothDevice(BuildContext context) async {
   BlocProvider.of<BluetoothBloc>(context).add(
-    SelectDevice(
+    BluetoothEvent.selectDevice(
       deviceWithAvailability: await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const SelectBondedDeviceScreen(),

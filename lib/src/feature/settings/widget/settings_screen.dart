@@ -43,10 +43,10 @@ class _SettingsList extends StatelessWidget {
                     value
                         ? context
                             .read<BluetoothBloc>()
-                            .add(const EnableBluetooth())
+                            .add(const BluetoothEvent.enable())
                         : context
                             .read<BluetoothBloc>()
-                            .add(const DisableBluetooth());
+                            .add(const BluetoothEvent.disable());
                   },
                 ),
                 SettingsTile.switchTile(

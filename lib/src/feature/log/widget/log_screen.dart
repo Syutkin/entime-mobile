@@ -97,8 +97,11 @@ class LogScreen extends StatelessWidget {
           children: <Widget>[
             TextButton(
               onPressed: () async {
-                BlocProvider.of<BluetoothBloc>(context)
-                    .add(const MessageReceived(message: 'F12:12:12,121#'));
+                BlocProvider.of<BluetoothBloc>(context).add(
+                  const BluetoothEvent.messageReceived(
+                    message: 'F12:12:12,121#',
+                  ),
+                );
               },
               child: const Icon(Icons.build),
             ),
