@@ -117,7 +117,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               // Если девайс равен предыдущему:
               // Если девайс отключён и доступен - соединяемся
             } else {
-              state.maybeMap(
+              state.mapOrNull(
                 disconnected: (state) {
                   if (event.deviceWithAvailability!.availability ==
                       BluetoothDeviceAvailability.yes) {
@@ -128,7 +128,6 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
                     );
                   }
                 },
-                orElse: () => null,
               );
             }
           }
@@ -177,12 +176,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           _reconnectActive = false;
           logger.i('Bluetooth -> Disconnecting...');
 
-          state.maybeWhen(
+          state.whenOrNull(
             connected: (_) {
               emit(const BluetoothBlocState.disconnecting());
               add(const BluetoothEvent.disconnected());
             },
-            orElse: () => null,
           );
         },
         disconnected: (event) async {
@@ -190,7 +188,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           // то соединение было закрыто локально.
           // Если же состояние было другим, то соединение было закрыто удалённо.
 
-          state.maybeMap(
+          state.mapOrNull(
             disconnecting: (_) {
               logger.i('Bluetooth -> Disconnected locally');
             },
@@ -201,7 +199,6 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
                 add(BluetoothEvent.connect(selectedDevice: _bluetoothDevice));
               }
             },
-            orElse: () => null,
           );
 
           // if (state is BluetoothDisconnectingState) {
@@ -240,8 +237,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             moduleSettings: (moduleSettings) {
               emit(BluetoothBlocState.connected(message: message));
             },
-            // ignore: no-empty-block
-            empty: () {},
+            empty: () => null,
           );
         },
         sendMessage: (event) async {
@@ -358,11 +354,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         );
         newVoiceText =
             'На старт приглашается номер ${participant.first.number}';
-        if (_voiceName && participant.first.name != null) {
-          newVoiceText += ', ${participant.first.name}.';
-        } else {
-          newVoiceText += '.';
-        }
+        _voiceName && participant.first.name != null ? newVoiceText += ', ${participant.first.name}.' : newVoiceText += '.';
         participant = await protocolProvider.getStartingParticipants(start[1]);
         if (participant.isNotEmpty) {
           newVoiceText += ' Следующий номер ${participant.first.number}';

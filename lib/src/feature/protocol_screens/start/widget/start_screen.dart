@@ -39,18 +39,17 @@ class _StartScreen extends State<StartScreen> {
   // super.dispose();
   // }
 
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: BlocListener<ProtocolBloc, ProtocolState>(
           listener: (context, state) {
-            state.map(
+            state.mapOrNull(
               selected: (state) {
                 context
                     .read<CountdownBloc>()
                     .add(const CountdownEvent.reload());
               },
-              // ignore: no-empty-block
-              notSelected: (state) {},
             );
           },
           child: BlocBuilder<ProtocolBloc, ProtocolState>(

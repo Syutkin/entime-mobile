@@ -23,9 +23,9 @@ class HomeScreen extends StatelessWidget {
       // Следим за поступающей информацией от Bluetooth
       BlocListener<BluetoothBloc, BluetoothBlocState>(
         listener: (context, state) {
-          state.maybeWhen(
+          state.whenOrNull(
             connected: (message) {
-              message?.maybeWhen(
+              message?.whenOrNull(
                 automaticStart: (automaticStart) {
                   context.read<ProtocolBloc>().add(
                         ProtocolEvent.updateAutomaticCorrection(
@@ -46,12 +46,8 @@ class HomeScreen extends StatelessWidget {
                       .read<ModuleSettingsBloc>()
                       .add(ModuleSettingsEvent.get(moduleSettings));
                 },
-                // ignore: no-empty-block
-                orElse: () {},
               );
             },
-            // ignore: no-empty-block
-            orElse: () {},
           );
         },
         // Следим за повторной установкой стартового времени для участника
@@ -235,13 +231,10 @@ class _TextTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<ProtocolBloc, ProtocolState>(
-        builder: (context, protocolState) {
-          if (protocolState is ProtocolSelectedState) {
-            return Text(basenameWithoutExtension(protocolState.databasePath));
-          } else {
-            return const Text('Entime');
-          }
-        },
+        builder: (context, protocolState) =>
+            protocolState is ProtocolSelectedState
+                ? Text(basenameWithoutExtension(protocolState.databasePath))
+                : const Text('Entime'),
       );
 }
 

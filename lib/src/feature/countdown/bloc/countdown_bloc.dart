@@ -94,19 +94,16 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
           }
         }
       },
-      // ignore: no-empty-block
-      notSelected: () {},
+      notSelected: () => null,
     );
   }
 
   Future<DateTime?> _getNextStarttime(DateTime time) async {
     _participant = await protocolProvider
         .getNextParticipants(DateFormat('HH:mm:ss').format(time));
-    if (_participant.isNotEmpty && _participant.first.starttime != null) {
-      return strTimeToDateTime(_participant.first.starttime!);
-    } else {
-      return null;
-    }
+    return _participant.isNotEmpty && _participant.first.starttime != null
+        ? strTimeToDateTime(_participant.first.starttime!)
+        : null;
   }
 
   String _formatDuration(Duration duration) {
