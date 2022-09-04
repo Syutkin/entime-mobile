@@ -15,7 +15,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'src/common/bloc/app_bloc_observer.dart';
 import 'src/common/localization/localization.dart';
 import 'src/feature/app_info/app_info.dart';
-import 'src/feature/audio/logic/audio_service.dart';
+import 'src/feature/audio/audio.dart';
 import 'src/feature/bluetooth/bluetooth.dart';
 import 'src/feature/countdown/bloc/countdown_bloc.dart';
 import 'src/feature/home/widget/home_screen.dart';
@@ -68,7 +68,12 @@ Future<void> main() async {
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 
-  final AudioService audioService = AudioService(settings: settings);
+  final IAudioService audioService = AudioService(settings: settings);
+  final IAudioController audioController = AudioController(
+    audioService: audioService,
+    protocolProvider: protocolProvider,
+    settingsProvider: settings,
+  );
 
   await SentryFlutter.init(
     (options) async {
@@ -81,7 +86,7 @@ Future<void> main() async {
         bluetoothProvider: bluetoothProvider,
         protocolProvider: protocolProvider,
         logProvider: logProvider,
-        audioService: audioService,
+        audioController: audioController,
         appInfo: appInfo,
       ),
     ),
@@ -93,7 +98,7 @@ class EntimeApp extends StatelessWidget {
   final AppInfoProvider appInfo;
   final UpdateProvider updateProvider;
   final IBluetoothProvider bluetoothProvider;
-  final AudioService audioService;
+  final IAudioController audioController;
   final IProtocolProvider protocolProvider;
   final ILogProvider logProvider;
 
@@ -102,7 +107,7 @@ class EntimeApp extends StatelessWidget {
     required this.settings,
     required this.updateProvider,
     required this.bluetoothProvider,
-    required this.audioService,
+    required this.audioController,
     required this.appInfo,
     required this.protocolProvider,
     required this.logProvider,
@@ -141,7 +146,7 @@ class EntimeApp extends StatelessWidget {
           ),
           BlocProvider<BluetoothBloc>(
             create: (context) => BluetoothBloc(
-              audioService: audioService,
+              audioController: audioController,
               bluetoothProvider: bluetoothProvider,
               protocolProvider: protocolProvider,
               logProvider: logProvider,

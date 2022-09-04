@@ -9,7 +9,6 @@ import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
 import '../../csv/logic/startlist_provider.dart';
 import '../../settings/settings.dart';
-import '../logic/protocol_provider.dart';
 import '../protocol.dart';
 
 part 'protocol_bloc.freezed.dart';

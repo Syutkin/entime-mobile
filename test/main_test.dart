@@ -3,11 +3,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
-import 'package:entime/src/feature/audio/logic/audio_service.dart';
+import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/home/home.dart';
 import 'package:entime/src/feature/log/logic/log_provider.dart';
-import 'package:entime/src/feature/protocol/logic/protocol_provider.dart';
 import 'package:entime/src/feature/protocol/protocol.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/tab/tab.dart';
@@ -28,6 +27,8 @@ class MockLogProvider extends Mock implements LogProvider {}
 
 class MockAudioService extends Mock implements AudioService {}
 
+class MockIAudioController extends Mock implements IAudioController {}
+
 class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
     implements SettingsBloc {}
 
@@ -42,6 +43,7 @@ class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState>
 class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState>
     implements BluetoothBloc {}
 
+
 void main() async {
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
@@ -53,7 +55,9 @@ void main() async {
   final IProtocolProvider protocolProvider = MockProtocolProvider();
   final ILogProvider logProvider = MockLogProvider();
 
-  final AudioService audioService = MockAudioService();
+  // final AudioService audioService = MockAudioService();
+final IAudioController audioController = MockIAudioController();
+  
 
   group('EntimeApp', () {
     testWidgets('renders EntimeAppView', (tester) async {
@@ -62,7 +66,7 @@ void main() async {
           settings: settings,
           updateProvider: updateProvider,
           bluetoothProvider: bluetoothProvider,
-          audioService: audioService,
+          audioController: audioController,
           appInfo: appInfo,
           protocolProvider: protocolProvider,
           logProvider: logProvider,

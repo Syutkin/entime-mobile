@@ -2,7 +2,7 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/database/model/dbstate.dart';
-import 'package:entime/src/feature/audio/logic/audio_service.dart';
+import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/log/logic/log_provider.dart';
 import 'package:entime/src/feature/protocol/logic/protocol_provider.dart';
@@ -20,6 +20,8 @@ class MockLogProvider extends Mock implements LogProvider {}
 
 class MockAudioService extends Mock implements AudioService {}
 
+class MockAudioController extends Mock implements AudioController {}
+
 class MockSettingsProvider extends Mock implements SettingsProvider {}
 
 class MockBluetoothDevice extends Mock implements BluetoothDevice {}
@@ -32,7 +34,8 @@ void main() {
     late MockBluetoothProvider bluetoothProvider;
     // late MockBluetoothDevice bluetoothDevice;
     late MockLogProvider logProvider;
-    late MockAudioService audioService;
+    // late MockAudioService audioService;
+    late MockAudioController audioController;
     late MockProtocolProvider protocolProvider;
     late MockSettingsProvider settingsProvider;
     late MockFlutterBluetoothSerial flutterBluetoothSerial;
@@ -42,8 +45,9 @@ void main() {
       bluetoothProvider = MockBluetoothProvider();
       protocolProvider = MockProtocolProvider();
       logProvider = MockLogProvider();
-      audioService = MockAudioService();
+      // audioService = MockAudioService();
       flutterBluetoothSerial = MockFlutterBluetoothSerial();
+      audioController = MockAudioController();
     });
 
     test('Initial state is correct', () {
@@ -61,7 +65,7 @@ void main() {
           .thenAnswer((invocation) => Future.value());
 
       final bluetoothBloc = BluetoothBloc(
-        audioService: audioService,
+        audioController: audioController,
         bluetoothProvider: bluetoothProvider,
         protocolProvider: protocolProvider,
         logProvider: logProvider,
@@ -101,7 +105,7 @@ void main() {
           );
         },
         build: () => BluetoothBloc(
-          audioService: audioService,
+          audioController: audioController,
           bluetoothProvider: bluetoothProvider,
           protocolProvider: protocolProvider,
           logProvider: logProvider,
@@ -121,7 +125,7 @@ void main() {
           );
         },
         build: () => BluetoothBloc(
-          audioService: audioService,
+          audioController: audioController,
           bluetoothProvider: bluetoothProvider,
           protocolProvider: protocolProvider,
           logProvider: logProvider,
@@ -141,7 +145,7 @@ void main() {
           );
         },
         build: () => BluetoothBloc(
-          audioService: audioService,
+          audioController: audioController,
           bluetoothProvider: bluetoothProvider,
           protocolProvider: protocolProvider,
           logProvider: logProvider,
@@ -189,7 +193,7 @@ void main() {
           );
         },
         build: () => BluetoothBloc(
-          audioService: audioService,
+          audioController: audioController,
           bluetoothProvider: bluetoothProvider,
           protocolProvider: protocolProvider,
           logProvider: logProvider,
@@ -235,7 +239,7 @@ void main() {
           );
         },
         build: () => BluetoothBloc(
-          audioService: audioService,
+          audioController: audioController,
           bluetoothProvider: bluetoothProvider,
           protocolProvider: protocolProvider,
           logProvider: logProvider,

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:entime/src/common/database/model/dbstate.dart';
 import 'package:entime/src/common/utils/csv_utils.dart';
 import 'package:entime/src/feature/protocol/logic/protocol_provider.dart';
-import 'package:entime/src/feature/protocol/model/protocol.dart';
+import 'package:entime/src/feature/protocol/model/protocol_items.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';

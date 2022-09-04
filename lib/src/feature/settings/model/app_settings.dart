@@ -79,8 +79,8 @@ class AppSettings with _$AppSettings {
     @Default(true) bool beep,
 
     // голосовые сообщения
-    @Default(true) bool voice,
-    @Default(true) bool voiceName,
+    @Default(true) bool voice, // использовать голосовые сообщения
+    @Default(true) bool voiceName, // называть имена участников
     @Default(1.0) double volume, // громкость
     @Default(1.0) double pitch, // тон речи
     @Default(0.5) double rate, // скорость речи

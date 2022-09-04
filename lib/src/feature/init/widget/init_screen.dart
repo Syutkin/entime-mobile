@@ -153,12 +153,13 @@ class _DebugCountdownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextButton(
         // _device = event.device;
+        // ignore: no-empty-block
         onPressed: () {
           // BlocProvider.of<BluetoothBloc>(context)
           //     .add(MessageReceived('B19:00:56#'));
           // showChangelogAtStartup(context, '0.3.2');
 
-          BlocProvider.of<BluetoothBloc>(context).audioService.countdown();
+          // BlocProvider.of<BluetoothBloc>(context).audioService.countdown();
         },
         child: const Text('Countdown Test'),
       );
@@ -171,10 +172,11 @@ class _DebugVoiceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
+        // ignore: no-empty-block
         onPressed: () {
-          BlocProvider.of<BluetoothBloc>(context)
-              .audioService
-              .speak('Это тестовое сообщение');
+          // BlocProvider.of<BluetoothBloc>(context)
+          //     .audioService
+          //     .speak('Это тестовое сообщение');
         },
         child: const Text('Voice Test'),
       );

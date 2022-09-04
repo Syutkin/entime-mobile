@@ -3,14 +3,11 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 import '../../../common/logger/logger.dart';
-import '../../../common/utils/helper.dart';
-import '../../audio/logic/audio_service.dart';
+import '../../audio/audio.dart';
 import '../../log/log.dart';
 import '../../log/logic/log_provider.dart';
-import '../../protocol/logic/protocol_provider.dart';
 import '../../protocol/protocol.dart';
 import '../../settings/settings.dart';
 import '../bluetooth.dart';
@@ -23,17 +20,10 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   final IBluetoothProvider bluetoothProvider;
   final IProtocolProvider protocolProvider;
   final ILogProvider logProvider;
-
-  // final ModuleSettingsBloc moduleSettingsBloc;
-  // late final StreamSubscription<ProtocolState> protocolSubscription;
+  final IAudioController audioController;
   final SettingsProvider settingsProvider;
-  // late final StreamSubscription<AppSettings> settingsSubscription;
-  bool _protocolSelectedState = false;
-  final AudioService audioService;
 
   BluetoothDevice? _bluetoothDevice;
-
-  bool _voiceName = false;
 
   bool _reconnect = true;
   bool _reconnectActive = false;
@@ -45,30 +35,16 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   BluetoothDevice? get bluetoothDevice => _bluetoothDevice;
 
-  // для голоса
-  bool _isStarted = false;
-  bool _isBetweenCategory = false;
-
   BluetoothBloc({
     required this.settingsProvider,
     required this.logProvider,
-    required this.audioService,
+    required this.audioController,
     required this.bluetoothProvider,
     required this.protocolProvider,
   }) : super(const BluetoothBlocState.notInitialized()) {
-    protocolProvider.state.listen((value) {
-      value.when(
-        notSelected: () {
-          _protocolSelectedState = false;
-        },
-        selected: (updated) {
-          _protocolSelectedState = true;
-        },
-      );
-    });
     settingsProvider.state.listen((state) {
-      _voiceName = state.voiceName;
       _reconnect = state.reconnect;
+      settingsProvider.settings.reconnect;
     });
 
     on<BluetoothEvent>((event, emit) {
@@ -229,10 +205,10 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               emit(BluetoothBlocState.connected(message: message));
             },
             countdown: (countdown) async {
-              await _countdown(countdown);
+              await audioController.playCountdown(countdown);
             },
             voice: (time) async {
-              await _voice(time);
+              await audioController.callParticipant(time);
             },
             moduleSettings: (moduleSettings) {
               emit(BluetoothBlocState.connected(message: message));
@@ -312,106 +288,6 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     } else {
       logger.e('Bluetooth -> Cannot parse data: $parsedMessage');
       return const BluetoothMessage.empty();
-    }
-  }
-
-  Future<void> _countdown(String time) async {
-    if (_protocolSelectedState) {
-      if (await protocolProvider.getStart(time) > 0) {
-        await audioService.countdown();
-        logger.i('Bluetooth -> Beep start $time');
-      } else {
-        logger.i(
-          'Bluetooth -> Cannot find participant with start time around $time',
-        );
-      }
-    } else {
-      logger.i('Bluetooth -> Protocol not selected');
-    }
-  }
-
-  Future<void> _voice(String time) async {
-    logger.i('StartPage -> Voice time: $time');
-    // if (sound && voice) {
-    if (_protocolSelectedState) {
-      List<StartItem> participant;
-      final List<String> start = [];
-      String newVoiceText = '';
-
-      //высчитываем диапазоны времени участников
-      DateTime? dateTime = strTimeToDateTime(time);
-      if (dateTime != null) {
-        start.add(DateFormat('HH:mm:ss').format(dateTime));
-        dateTime = dateTime.add(const Duration(minutes: 1));
-        start.add(DateFormat('HH:mm:ss').format(dateTime));
-      }
-      participant = await protocolProvider.getStartingParticipants(start.first);
-      if (participant.isNotEmpty) {
-        _isStarted = true;
-        _isBetweenCategory = false;
-        logger.d(
-          'First participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
-        );
-        newVoiceText =
-            'На старт приглашается номер ${participant.first.number}';
-        _voiceName && participant.first.name != null ? newVoiceText += ', ${participant.first.name}.' : newVoiceText += '.';
-        participant = await protocolProvider.getStartingParticipants(start[1]);
-        if (participant.isNotEmpty) {
-          newVoiceText += ' Следующий номер ${participant.first.number}';
-          if (_voiceName && participant.first.name != null) {
-            newVoiceText += ', ${participant.first.name}.';
-          } else {
-            newVoiceText += '.';
-          }
-        }
-      } else {
-        participant = await protocolProvider.getStartingParticipants(start[1]);
-        if (participant.isNotEmpty) {
-          _isStarted = true;
-          _isBetweenCategory = false;
-          logger.d(
-            'Second participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
-          );
-          newVoiceText = 'Готовится номер ${participant.first.number}';
-          if (_voiceName && participant.first.name != null) {
-            newVoiceText += ', ${participant.first.name}.';
-          } else {
-            newVoiceText += '.';
-          }
-        } else {
-          // если нет стартов в следующие две минуты,
-          // сообщить сколько времени до старта след участника
-          if (_isStarted && !_isBetweenCategory) {
-            logger.d(
-              'Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
-            );
-            participant =
-                await protocolProvider.getNextParticipants(start.first);
-            if (participant.isNotEmpty) {
-              _isBetweenCategory = true;
-              final DateTime? lastStart = strTimeToDateTime(start.first);
-              DateTime? nextStart;
-              if (participant.first.starttime != null) {
-                nextStart = strTimeToDateTime(participant.first.starttime!);
-              }
-              if (lastStart != null && nextStart != null) {
-                final Duration delay = nextStart.difference(lastStart);
-                newVoiceText =
-                    'Старт следующего участника номер ${participant.first.number}, ';
-                newVoiceText += 'через ${delay.inMinutes} мин 30 с';
-              }
-            } else {
-              // если это был последний старт (следующий участник не найден),
-              // сообщить об окончании стартов
-              _isStarted = false;
-              newVoiceText = 'Старты окончены, спасибо';
-            }
-          }
-        }
-      }
-      await audioService.speak(newVoiceText);
-    } else {
-      logger.i('Bluetooth -> Protocol not selected');
     }
   }
 }

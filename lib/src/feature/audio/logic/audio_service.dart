@@ -2,8 +2,13 @@ import '../../../common/logger/logger.dart';
 import '../../settings/settings.dart';
 import '../audio.dart';
 
-class AudioService {
-  final AudioProvider _audio = SoundAudioProvider();
+abstract class IAudioService {
+  Future<void> countdown();
+  Future<void> speak(String text);
+}
+
+class AudioService implements IAudioService {
+  final IAudioProvider _audio = AudioProvider();
   final SettingsProvider _settings;
 
   bool _sound = true;
@@ -23,6 +28,7 @@ class AudioService {
     });
   }
 
+  @override
   Future<void> countdown() async {
     if (_sound && _beep) {
       await _audio.beep();
@@ -31,6 +37,7 @@ class AudioService {
     }
   }
 
+  @override
   Future<void> speak(String text) async {
     if (_sound && _voice) {
       await _audio.speak(text);

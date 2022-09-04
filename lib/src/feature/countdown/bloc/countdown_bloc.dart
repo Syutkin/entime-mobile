@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/utils/helper.dart';
-import '../../protocol/logic/protocol_provider.dart';
 import '../../protocol/protocol.dart';
 import '../../tab/tab.dart';
 

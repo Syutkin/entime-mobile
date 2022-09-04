@@ -3,6 +3,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
+import 'package:entime/src/feature/audio/logic/audio_controller.dart';
 import 'package:entime/src/feature/audio/logic/audio_service.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/log/logic/log_provider.dart';
@@ -45,7 +46,12 @@ void main() async {
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 
-  final AudioService audioService = AudioService(settings: settings);
+  final IAudioService audioService = AudioService(settings: settings);
+  final IAudioController audioController = AudioController(
+    audioService: audioService,
+    protocolProvider: protocolProvider,
+    settingsProvider: settings,
+  );
 
   testWidgets('Smoke test', (tester) async {
     await tester.pumpWidget(
@@ -53,7 +59,7 @@ void main() async {
         settings: settings,
         updateProvider: updateProvider,
         bluetoothProvider: bluetoothProvider,
-        audioService: audioService,
+        audioController: audioController,
         appInfo: appInfo,
         protocolProvider: protocolProvider,
         logProvider: logProvider,

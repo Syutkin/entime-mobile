@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'protocol.freezed.dart';
-part 'protocol.g.dart';
+part 'protocol_items.freezed.dart';
+part 'protocol_items.g.dart';
 
 /// Start time with correction
 @freezed
