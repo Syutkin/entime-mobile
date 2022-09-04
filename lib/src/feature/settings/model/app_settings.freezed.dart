@@ -1616,9 +1616,11 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final bool voice;
+// использовать голосовые сообщения
   @override
   @JsonKey()
   final bool voiceName;
+// называть имена участников
   @override
   @JsonKey()
   final double volume;
@@ -2193,9 +2195,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
   bool get beep;
   @override // голосовые сообщения
   bool get voice;
-  @override
+  @override // использовать голосовые сообщения
   bool get voiceName;
-  @override
+  @override // называть имена участников
   double get volume;
   @override // громкость
   double get pitch;

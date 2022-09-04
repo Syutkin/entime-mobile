@@ -8,17 +8,17 @@ part 'bluetooth_message.freezed.dart';
 class BluetoothMessage with _$BluetoothMessage {
   const factory BluetoothMessage.automaticStart({
     required AutomaticStart automaticStart,
-  }) = _BluetoothMessageAutomaticStart;
+  }) = BluetoothMessageAutomaticStart;
   const factory BluetoothMessage.finish({
     required String time,
     required DateTime timeStamp,
-  }) = _BluetoothMessageFinish;
+  }) = BluetoothMessageFinish;
   const factory BluetoothMessage.countdown({required String time}) =
-      _BluetoothMessageCountdown;
+      BluetoothMessageCountdown;
   const factory BluetoothMessage.voice({required String time}) =
-      _BluetoothMessageVoice;
+      BluetoothMessageVoice;
   const factory BluetoothMessage.moduleSettings({required String json}) =
-      _BluetoothMessageModuleSettings;
+      BluetoothMessageModuleSettings;
 
-  const factory BluetoothMessage.empty() = _BluetoothMessageEmpty;
+  const factory BluetoothMessage.empty() = BluetoothMessageEmpty;
 }

@@ -15,7 +15,7 @@ class BluetoothButton extends StatelessWidget {
         builder: (context, state) {
           if (BlocProvider.of<BluetoothBloc>(context).bluetoothDevice != null) {
             return state.maybeWhen(
-              connected: (_) => IconButton(
+              connected: (device) => IconButton(
                 icon: const Icon(Icons.bluetooth_connected),
                 onPressed: () async {
                   BlocProvider.of<BluetoothBloc>(context)

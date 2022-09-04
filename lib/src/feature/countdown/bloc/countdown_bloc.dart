@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
@@ -27,7 +28,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   }) : super(const CountdownInitialState()) {
     _startTimer();
 
-    on<CountdownEvent>((event, emit) async {
+    on<CountdownEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         reload: (event) async {
           _nextStartTime = await _getNextStarttime(DateTime.now());
