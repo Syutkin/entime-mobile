@@ -76,6 +76,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Неизвестное устройство"),
         "I18nCountdown_countdown":
             MessageLookupByLibrary.simpleMessage("Обратный отсчёт"),
+        "I18nDatabase_addRace":
+            MessageLookupByLibrary.simpleMessage("Создать соревнование"),
+        "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
+            "Введите название соревнования"),
+        "I18nDatabase_raceDates":
+            MessageLookupByLibrary.simpleMessage("Даты проведения"),
+        "I18nDatabase_raceName":
+            MessageLookupByLibrary.simpleMessage("Название соревнования"),
+        "I18nDatabase_races":
+            MessageLookupByLibrary.simpleMessage("Соревнования"),
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
         "I18nDrawer_settings":
@@ -335,6 +345,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Громкость"),
         "I18nSettings_wakelock":
             MessageLookupByLibrary.simpleMessage("Всегда включённый экран"),
+        "I18nStart_addParticipant":
+            MessageLookupByLibrary.simpleMessage("Добавить участника"),
+        "I18nStart_didNotStart":
+            MessageLookupByLibrary.simpleMessage("Не стартовал"),
         "I18nUpdate_changelog":
             MessageLookupByLibrary.simpleMessage("Список изменений"),
         "I18nUpdate_checkForUpdates":

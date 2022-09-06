@@ -667,6 +667,20 @@ class I18nInit {
       );
 }
 
+class I18nStart {
+  static String get didNotStart => Intl.message(
+        'Не стартовал',
+        name: 'I18nStart_didNotStart',
+      );
+
+  static String get addParticipant => Intl.message(
+        'Добавить участника',
+        name: 'I18nStart_addParticipant',
+      );
+}
+
+class I18nFinish {}
+
 class I18nLog {
   static String get bluetoothInformation => Intl.message(
         'Информация Bluetooth',
@@ -933,5 +947,32 @@ class I18nModuleSettings {
         'Неизвестный тип модуля: $type',
         name: 'I18nModuleSettings_unknownModuleType',
         args: [type],
+      );
+}
+
+class I18nDatabase {
+  static String get races => Intl.message(
+        'Соревнования',
+        name: 'I18nDatabase_races',
+      );
+
+  static String get addRace => Intl.message(
+        'Создать соревнование',
+        name: 'I18nDatabase_addRace',
+      );
+
+  static String get raceName => Intl.message(
+        'Название соревнования',
+        name: 'I18nDatabase_raceName',
+      );
+
+  static String get enterRaceName => Intl.message(
+        'Введите название соревнования',
+        name: 'I18nDatabase_enterRaceName',
+      );
+
+  static String get raceDates => Intl.message(
+        'Даты проведения',
+        name: 'I18nDatabase_raceDates',
       );
 }

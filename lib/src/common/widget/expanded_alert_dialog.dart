@@ -24,7 +24,7 @@ class ExpandedAlertDialog extends StatelessWidget {
         scrollable: scrollable,
         title: title,
         content: SizedBox(
-          width: width,
+          width: width ?? MediaQuery.of(context).size.width * 0.9,
           height: height,
           child: content,
         ),

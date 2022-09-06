@@ -1135,6 +1135,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Не стартовал`
+  String get I18nStart_didNotStart {
+    return Intl.message(
+      'Не стартовал',
+      name: 'I18nStart_didNotStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить участника`
+  String get I18nStart_addParticipant {
+    return Intl.message(
+      'Добавить участника',
+      name: 'I18nStart_addParticipant',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Информация Bluetooth`
   String get I18nLog_bluetoothInformation {
     return Intl.message(
@@ -1645,6 +1665,56 @@ class GeneratedLocalization {
       name: 'I18nModuleSettings_unknownModuleType',
       desc: '',
       args: [type],
+    );
+  }
+
+  /// `Соревнования`
+  String get I18nDatabase_races {
+    return Intl.message(
+      'Соревнования',
+      name: 'I18nDatabase_races',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Создать соревнование`
+  String get I18nDatabase_addRace {
+    return Intl.message(
+      'Создать соревнование',
+      name: 'I18nDatabase_addRace',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Название соревнования`
+  String get I18nDatabase_raceName {
+    return Intl.message(
+      'Название соревнования',
+      name: 'I18nDatabase_raceName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите название соревнования`
+  String get I18nDatabase_enterRaceName {
+    return Intl.message(
+      'Введите название соревнования',
+      name: 'I18nDatabase_enterRaceName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Даты проведения`
+  String get I18nDatabase_raceDates {
+    return Intl.message(
+      'Даты проведения',
+      name: 'I18nDatabase_raceDates',
+      desc: '',
+      args: [],
     );
   }
 }

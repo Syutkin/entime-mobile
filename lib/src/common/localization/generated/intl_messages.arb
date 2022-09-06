@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-08-07T12:32:40.220464",
+  "@@last_modified": "2022-09-07T00:25:33.974375",
   "I18nUpdate_whatsNew": "Что нового",
   "@I18nUpdate_whatsNew": {
     "type": "text",
@@ -715,6 +715,18 @@
     "placeholders_order": [],
     "placeholders": {}
   },
+  "I18nStart_didNotStart": "Не стартовал",
+  "@I18nStart_didNotStart": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nStart_addParticipant": "Добавить участника",
+  "@I18nStart_addParticipant": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
   "I18nLog_bluetoothInformation": "Информация Bluetooth",
   "@I18nLog_bluetoothInformation": {
     "type": "text",
@@ -1050,5 +1062,35 @@
     "placeholders": {
       "type": {}
     }
+  },
+  "I18nDatabase_races": "Соревнования",
+  "@I18nDatabase_races": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nDatabase_addRace": "Создать соревнование",
+  "@I18nDatabase_addRace": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nDatabase_raceName": "Название соревнования",
+  "@I18nDatabase_raceName": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nDatabase_enterRaceName": "Введите название соревнования",
+  "@I18nDatabase_enterRaceName": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nDatabase_raceDates": "Даты проведения",
+  "@I18nDatabase_raceDates": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
   }
 }

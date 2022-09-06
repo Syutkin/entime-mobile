@@ -40,25 +40,25 @@
 // ignore_for_file: prefer_single_quotes
 
 /// Current app version
-const String version = r'0.4.4+126';
+const String version = r'0.5.0-dev+127';
 
 /// The major version number: "1" in "1.2.3".
 const int major = 0;
 
 /// The minor version number: "2" in "1.2.3".
-const int minor = 4;
+const int minor = 5;
 
 /// The patch version number: "3" in "1.2.3".
-const int patch = 4;
+const int patch = 0;
 
 /// The pre-release identifier: "foo" in "1.2.3-foo".
-const List<String> pre = <String>[];
+const List<String> pre = <String>[r'dev'];
 
 /// The build identifier: "foo" in "1.2.3+foo".
-const List<String> build = <String>[r'126'];
+const List<String> build = <String>[r'127'];
 
 /// Build date in Unix Time (in seconds)
-const int timestamp = 1662455688;
+const int timestamp = 1662485629;
 
 /// Name [name]
 const String name = r'entime';
@@ -155,9 +155,6 @@ const Map<String, Object> devDependencies = <String, Object>{
 const Map<String, Object> dependencyOverrides = <String, Object>{
   'flutter_bluetooth_serial': <String, Object>{
     'git': r'https://github.com/Syutkin/flutter_bluetooth_serial.git',
-  },
-  'open_filex': <String, Object>{
-    'git': r'https://github.com/GoldenSoju/open_file.git',
   },
 };
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/localization/localization.dart';
 import '../../../../common/utils/helper.dart';
 import '../../../protocol/protocol.dart';
 
@@ -31,7 +32,7 @@ class StartItemTile extends StatelessWidget {
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.all(5),
             child: Text(
-              'Не стартовал',
+              Localization.current.I18nStart_didNotStart,
               style:
                   DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2),
             ),

@@ -1,49 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
+import '../../../common/localization/localization.dart';
+import '../../../common/widget/expanded_alert_dialog.dart';
 import '../bloc/database_bloc.dart';
 import '../drift/app_database.dart';
 import 'stages_list_page.dart';
+
+part 'popup/add_race_popup.dart';
 
 class RacesListPage extends StatelessWidget {
   const RacesListPage({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context
-                .read<DatabaseBloc>()
-                .add(DatabaseEvent.addRace(Race(name: 'name')));
+  Widget build(BuildContext context) {
+    final DateFormat formatter =
+        DateFormat.yMd(Localizations.localeOf(context).languageCode);
+    return Scaffold(
+      appBar: AppBar(title: Text(Localization.current.I18nDatabase_races)),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          addRacePopup(context);
+        },
+      ),
+      body: BlocBuilder<DatabaseBloc, DatabaseState>(
+        builder: (context, state) => state.map(
+          initial: (state) => const CircularProgressIndicator(),
+          initialized: (state) {
+            final count = state.races.length;
+            return ListView.builder(
+              itemCount: count,
+              itemBuilder: (context, index) {
+                final race = state.races[index];
+                return ListTile(
+                  title: Text(race.name),
+                  subtitle: (race.startDate != null && race.finishDate != null)
+                      ? Text(
+                          '${formatter.format(DateTime.parse(race.startDate!))} - ${formatter.format(DateTime.parse(race.finishDate!))}',
+                        )
+                      : const SizedBox.shrink(),
+                  onTap: () {
+                    context
+                        .read<DatabaseBloc>()
+                        .add(DatabaseEvent.selectStages(race.id!));
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (context) => StagesListPage(raceId: race.id!),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
           },
         ),
-        body: BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, state) => state.map(
-            initial: (state) => const CircularProgressIndicator(),
-            initialized: (state) {
-              final count = state.races.length;
-              return ListView.builder(
-                itemCount: count,
-                itemBuilder: (context, index) {
-                  final race = state.races[index];
-                  return ListTile(
-                    title: Text(race.name),
-                    onTap: () {
-                      context
-                          .read<DatabaseBloc>()
-                          .add(DatabaseEvent.selectStages(race.id!));
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (context) =>
-                              StagesListPage(raceId: race.id!),
-                        ),
-                      );
-                    },
-                  );
-                },
-              );
-            },
-          ),
-        ),
-      );
+      ),
+    );
+  }
 }

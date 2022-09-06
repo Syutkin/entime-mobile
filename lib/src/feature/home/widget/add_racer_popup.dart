@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../common/localization/localization.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../../protocol/protocol.dart';
 
@@ -17,11 +18,14 @@ Future<void> addRacerPopup(BuildContext context) async {
     builder: (context) => ExpandedAlertDialog(
       width: MediaQuery.of(context).size.width * 0.9,
       // scrollable: true,
-      title: const Text('Добавить участника'),
+      title: Text(Localization.current.I18nStart_addParticipant),
       content: Form(
         key: formKey,
         onChanged: () {
-          Form.of(primaryFocus!.context!)!.validate();
+          final formState = primaryFocus?.context;
+          if (formState != null) {
+            Form.of(formState)?.validate();
+          }
         },
         child: Column(
           // mainAxisSize: MainAxisSize.min,
@@ -29,14 +33,16 @@ Future<void> addRacerPopup(BuildContext context) async {
             TextFormField(
               keyboardType: TextInputType.number,
               autofocus: true,
-              decoration: const InputDecoration(labelText: 'Номер'),
+              decoration: InputDecoration(
+                labelText: Localization.current.I18nProtocol_number,
+              ),
               validator: (value) {
                 if (value == null) {
-                  return 'Неверный номер';
+                  return Localization.current.I18nProtocol_incorrectNumber;
                 }
                 final int? num = int.tryParse(value);
                 if (num == null || num < 1) {
-                  return 'Неверный номер';
+                  return Localization.current.I18nProtocol_incorrectNumber;
                 }
                 number = num;
                 return null;
@@ -73,9 +79,7 @@ Future<void> addRacerPopup(BuildContext context) async {
               // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
               final String starttime =
                   time.toString().split('.').first.padLeft(8, '0');
-              BlocProvider.of<ProtocolBloc>(context)
-//                    .add(ProtocolAddStartNumber(number: number, time: starttime));
-                  .add(
+              BlocProvider.of<ProtocolBloc>(context).add(
                 ProtocolAddStartNumber(
                   startTime: StartTime(starttime, number),
                 ),
