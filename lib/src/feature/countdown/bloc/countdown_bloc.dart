@@ -36,13 +36,13 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
           await _countdown();
         },
         tick: (event) {
-          _nextStartTime == null
+          final nextStartTime = _nextStartTime;
+          nextStartTime == null
               ? emit(CountdownWorkingState(text: event.text))
               : emit(
                   CountdownWorkingState(
                     text: event.text,
-                    nextStartTime:
-                        DateFormat('HH:mm:ss').format(_nextStartTime!),
+                    nextStartTime: DateFormat('HH:mm:ss').format(nextStartTime),
                   ),
                 );
         },
@@ -65,7 +65,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   }
 
   Future<void> _countdown() async {
-    await protocolProvider.state.value.when(
+    await protocolProvider.state.value.whenOrNull(
       selected: (updated) async {
         final now = DateTime.now();
         final nextStartTime = _nextStartTime;
@@ -94,7 +94,6 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
           }
         }
       },
-      notSelected: () => null,
     );
   }
 
