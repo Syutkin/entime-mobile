@@ -20,6 +20,7 @@ analyzer:
     strict-raw-types: true
   plugins:
     - dart_code_metrics
+    - drift
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false

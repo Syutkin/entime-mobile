@@ -1,0 +1,85 @@
+CREATE TABLE races (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	name text NOT NULL,
+	start_date text,
+	finish_date text
+) AS Race;
+
+CREATE TABLE stages (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	trail_id integer,
+	race_id integer NOT NULL,
+	name text NOT NULL,
+	is_active BOOLEAN NOT NULL DEFAULT true,
+    FOREIGN KEY (trail_id) REFERENCES trails(id),
+    FOREIGN KEY (race_id) REFERENCES races(id)
+);
+
+CREATE TABLE riders (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	name text NOT NULL,
+	nickname text,
+	birthday integer,
+	team text,
+	city text,
+	email text,
+	phone text,
+	comment text
+);
+
+CREATE TABLE statuses (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	type text NOT NULL
+) AS Status;
+
+CREATE TABLE participants (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	race_id integer NOT NULL,
+	rider_id integer,
+	number integer NOT NULL UNIQUE,
+	category text NOT NULL,
+	rfid text,
+	status_id integer NOT NULL DEFAULT 0,
+    FOREIGN KEY (rider_id) REFERENCES riders(id),
+    FOREIGN KEY (race_id) REFERENCES races(id)
+);
+
+CREATE TABLE starts (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	stage_id integer NOT NULL,
+	participant_id integer NOT NULL,
+	start_time text NOT NULL,
+	timestamp text,
+	automatic_start_time text,
+	automatic_correction integer,
+	manual_start_time text,
+	manual_correction integer,
+	status_id integer NOT NULL DEFAULT 0,
+    FOREIGN KEY (stage_id) REFERENCES stages(id),
+    FOREIGN KEY (participant_id) REFERENCES participants(id)
+);
+
+CREATE TABLE finishes (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	stage_id integer NOT NULL,
+	number integer,
+	timestamp text,
+	finish_time text,
+	is_hidden BOOLEAN NOT NULL DEFAULT false,
+	is_manual BOOLEAN NOT NULL DEFAULT false,
+    FOREIGN KEY (stage_id) REFERENCES stages(id)
+) AS Finish;
+
+CREATE TABLE trails (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	name text NOT NULL,
+	distance integer,
+	elevation integer,
+	gpx_track blob,
+	link text,
+	comment text
+);
+
+addRace: INSERT INTO races (name, start_date, finish_date) VALUES (:name, :start_date, :finish_date);
+addStage: INSERT INTO stages (trail_id, race_id, name, is_active) VALUES (:trail_id, :race_id, :name, :is_active);
+selectStages: SELECT * FROM stages WHERE race_id = :race_id;

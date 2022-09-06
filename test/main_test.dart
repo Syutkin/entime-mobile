@@ -5,6 +5,7 @@ import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
+import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/home/home.dart';
 import 'package:entime/src/feature/log/logic/log_provider.dart';
 import 'package:entime/src/feature/protocol/protocol.dart';
@@ -43,6 +44,7 @@ class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState>
 class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState>
     implements BluetoothBloc {}
 
+class MockAppDatabase extends Mock implements AppDatabase {}
 
 void main() async {
   Bloc.observer = AppBlocObserver();
@@ -56,8 +58,9 @@ void main() async {
   final ILogProvider logProvider = MockLogProvider();
 
   // final AudioService audioService = MockAudioService();
-final IAudioController audioController = MockIAudioController();
-  
+  final IAudioController audioController = MockIAudioController();
+
+  final AppDatabase database = MockAppDatabase();
 
   group('EntimeApp', () {
     testWidgets('renders EntimeAppView', (tester) async {
@@ -70,6 +73,7 @@ final IAudioController audioController = MockIAudioController();
           appInfo: appInfo,
           protocolProvider: protocolProvider,
           logProvider: logProvider,
+          database: database,
         ),
       ); // Create main app
       expect(find.byType(EntimeAppView), findsOneWidget);

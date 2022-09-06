@@ -18,6 +18,8 @@ import 'src/feature/app_info/app_info.dart';
 import 'src/feature/audio/audio.dart';
 import 'src/feature/bluetooth/bluetooth.dart';
 import 'src/feature/countdown/bloc/countdown_bloc.dart';
+import 'src/feature/database/bloc/database_bloc.dart';
+import 'src/feature/database/drift/app_database.dart';
 import 'src/feature/home/widget/home_screen.dart';
 import 'src/feature/log/bloc/log_bloc.dart';
 import 'src/feature/log/logic/log_provider.dart';
@@ -75,6 +77,8 @@ Future<void> main() async {
     settingsProvider: settings,
   );
 
+  final AppDatabase database = AppDatabase();
+
   await SentryFlutter.init(
     (options) async {
       options.tracesSampleRate = 1.0;
@@ -88,6 +92,7 @@ Future<void> main() async {
         logProvider: logProvider,
         audioController: audioController,
         appInfo: appInfo,
+        database: database,
       ),
     ),
   );
@@ -101,6 +106,7 @@ class EntimeApp extends StatelessWidget {
   final IAudioController audioController;
   final IProtocolProvider protocolProvider;
   final ILogProvider logProvider;
+  final AppDatabase database;
 
   const EntimeApp({
     Key? key,
@@ -111,6 +117,7 @@ class EntimeApp extends StatelessWidget {
     required this.appInfo,
     required this.protocolProvider,
     required this.logProvider,
+    required this.database,
   }) : super(key: key);
 
   @override
@@ -136,6 +143,10 @@ class EntimeApp extends StatelessWidget {
               settingsProvider: settings,
               protocolProvider: protocolProvider,
             )..add(SelectProtocol(file: settings.settings.recentFile)),
+          ),
+          BlocProvider<DatabaseBloc>(
+            create: (context) => DatabaseBloc(database: database)
+              ..add(const DatabaseEvent.initialize()),
           ),
           BlocProvider<CountdownBloc>(
             create: (context) => CountdownBloc(

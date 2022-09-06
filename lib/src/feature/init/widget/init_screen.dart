@@ -7,6 +7,7 @@ import 'package:path/path.dart';
 import '../../../common/localization/localization.dart';
 import '../../../common/widget/header_widget.dart';
 import '../../bluetooth/bluetooth.dart';
+import '../../database/widget/races_list_page.dart';
 import '../../log/log.dart';
 import '../../module_settings/module_settings.dart';
 import '../../protocol/protocol.dart';
@@ -41,6 +42,9 @@ class _InitScreen extends State<InitScreen> {
               : const SizedBox(width: 0, height: 0),
           !kReleaseMode
               ? const _DebugVoiceButton()
+              : const SizedBox(width: 0, height: 0),
+          !kReleaseMode
+              ? const _DebugNewDatabase()
               : const SizedBox(width: 0, height: 0),
         ],
       );
@@ -179,6 +183,24 @@ class _DebugVoiceButton extends StatelessWidget {
           //     .speak('Это тестовое сообщение');
         },
         child: const Text('Voice Test'),
+      );
+}
+
+class _DebugNewDatabase extends StatelessWidget {
+  const _DebugNewDatabase({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => TextButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (context) => const RacesListPage(),
+            ),
+          );
+        },
+        child: const Text('New database'),
       );
 }
 

@@ -40,7 +40,7 @@
 // ignore_for_file: prefer_single_quotes
 
 /// Current app version
-const String version = r'0.4.4+123';
+const String version = r'0.4.4+126';
 
 /// The major version number: "1" in "1.2.3".
 const int major = 0;
@@ -55,10 +55,10 @@ const int patch = 4;
 const List<String> pre = <String>[];
 
 /// The build identifier: "foo" in "1.2.3+foo".
-const List<String> build = <String>[r'123'];
+const List<String> build = <String>[r'126'];
 
 /// Build date in Unix Time (in seconds)
-const int timestamp = 1662296233;
+const int timestamp = 1662455688;
 
 /// Name [name]
 const String name = r'entime';
@@ -98,6 +98,7 @@ const Map<String, Object> dependencies = <String, Object>{
   'bot_toast': r'any',
   'csv': r'any',
   'device_info_plus': r'any',
+  'drift': r'any',
   'equatable': r'any',
   'file_picker': r'any',
   'filesize': r'any',
@@ -124,6 +125,7 @@ const Map<String, Object> dependencies = <String, Object>{
   'shared_preferences': r'any',
   'soundpool': r'any',
   'sqflite': r'any',
+  'sqlite3_flutter_libs': r'any',
   'url_launcher': r'any',
   'wakelock': r'any',
 };
@@ -133,6 +135,7 @@ const Map<String, Object> devDependencies = <String, Object>{
   'bloc_test': r'^9.1.0',
   'build_runner': r'any',
   'dart_code_metrics': r'any',
+  'drift_dev': r'any',
   'flutter_lints': r'any',
   'flutter_test': <String, Object>{
     'sdk': r'flutter',
