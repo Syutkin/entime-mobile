@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,84 +31,153 @@ class _StartListPage extends State<StartListPage> {
   final GlobalKey _countdownKey = GlobalKey();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(widget.stage.name),
-          actions: [
-            PopupMenuButton<int>(
-              icon: const Icon(Icons.more_vert),
-              itemBuilder: (context) => <PopupMenuEntry<int>>[
-                PopupMenuItem<int>(
-                  value: 1,
-                  child: ListTile(
-                    leading: const Icon(Icons.add),
-                    title: Text(Localization.current.I18nHome_addRacer),
+  Widget build(BuildContext context) =>
+      BlocListener<DatabaseBloc, DatabaseState>(
+        listener: (context, state) {
+          state.mapOrNull(
+            initialized: (state) {
+              // Добавление нового стартового времени
+              // Если стартовое время уже присвоено другому номеру
+              final newStartingParticipant = state.newStartingParticipant;
+              if (newStartingParticipant != null) {
+                //ToDo
+                print('BlocListener: '
+                    'start_time: ${newStartingParticipant.first.startTime}, '
+                    'number: ${newStartingParticipant.first.number}');
+
+                // if (state.previousStart != null && state.startTime != null) {
+
+                // String text = '';
+                // for (final element in state.newStartingParticipant) {
+                //   if (element.automaticStartTime == null &&
+                //       element.manualStartTime == null) {
+                //     text += Localization.current.I18nHome_equalStartTime(
+                //       state.startTime!.time,
+                //       element.number,
+                //       state.startTime!.number,
+                //     );
+                //   } else {
+                //     if (element.automaticStartTime != null) {
+                //       text += Localization.current
+                //           .I18nHome_updateAutomaticStartCorrection(
+                //         state.startTime!.number,
+                //         element.automaticStartTime!,
+                //       );
+                //     } else if (element.manualStartTime != null) {
+                //       text += Localization.current
+                //           .I18nHome_updateAutomaticStartCorrection(
+                //         state.startTime!.number,
+                //         element.manualStartTime!,
+                //       );
+                //     } else {
+                //       text += Localization.current.I18nHome_errorAddParticipant(
+                //         MaterialLocalizations.of(context).cancelButtonLabel,
+                //       );
+                //     }
+                //   }
+                // }
+
+                // final bool? update = await overwriteStartTimePopup(
+                //   context: context,
+                //   text: text,
+                // );
+
+                // if (update != null && update) {
+                //   protocolBloc.add(
+                //     ProtocolAddStartNumber(
+                //       startTime: state.startTime!,
+                //       forceAdd: true,
+                //     ),
+                //   );
+                // }
+                // }
+              }
+            },
+          );
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(widget.stage.name),
+            actions: [
+              PopupMenuButton<int>(
+                icon: const Icon(Icons.more_vert),
+                itemBuilder: (context) => <PopupMenuEntry<int>>[
+                  PopupMenuItem<int>(
+                    value: 1,
+                    child: ListTile(
+                      leading: const Icon(Icons.add),
+                      title: Text(Localization.current.I18nHome_addRacer),
+                    ),
                   ),
-                ),
-              ],
-              onSelected: (value) async {
-                switch (value) {
-                  case 1:
-                    await addRacerPopup(context: context, stage: widget.stage);
-                    break;
-                }
-              },
-            ),
-          ],
-        ),
-        // body: BlocListener<ProtocolBloc, ProtocolState>(
-        //   listener: (context, state) {
-        //     state.mapOrNull(
-        //       selected: (state) {
-        //         context
-        //             .read<CountdownBloc>()
-        //             .add(const CountdownEvent.reload());
-        //       },
-        //     );
-        //   },
-        body: BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, state) => state.map(
-            initial: (state) => const SizedBox.shrink(),
-            //   return Column(
-            //     children: [
-            //       CreateOrSelectProtocolWidget(
-            //         onTap: () => routeToSelectFileScreen(context),
-            //       ),
-            //     ],
-            //   );
-            initialized: (state) => Stack(
-              key: _stackKey,
-              children: [
-                _startList(state.participants),
-                _showCountdown(),
-              ],
+                ],
+                onSelected: (value) async {
+                  switch (value) {
+                    case 1:
+                      await addRacerPopup(
+                        context: context,
+                        stage: widget.stage,
+                      );
+                      break;
+                  }
+                },
+              ),
+            ],
+          ),
+          // body: BlocListener<ProtocolBloc, ProtocolState>(
+          //   listener: (context, state) {
+          //     state.mapOrNull(
+          //       selected: (state) {
+          //         context
+          //             .read<CountdownBloc>()
+          //             .add(const CountdownEvent.reload());
+          //       },
+          //     );
+          //   },
+          body: BlocBuilder<DatabaseBloc, DatabaseState>(
+            builder: (context, state) => state.map(
+              initial: (state) => const SizedBox.shrink(),
+              //   return Column(
+              //     children: [
+              //       CreateOrSelectProtocolWidget(
+              //         onTap: () => routeToSelectFileScreen(context),
+              //       ),
+              //     ],
+              //   );
+              initialized: (state) => Stack(
+                key: _stackKey,
+                children: [
+                  _startList(state.participants),
+                  _showCountdown(),
+                ],
+              ),
             ),
           ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
-          builder: (
-            context,
-            settingsState,
-          ) {
-            if (settingsState.settings.startFab) {
-              return SizedBox(
-                height: settingsState.settings.startFabSize,
-                width: settingsState.settings.startFabSize,
-                child: FittedBox(
-                  child: FloatingActionButton(
-                    onPressed: () => _addManualStartTime(context),
-                    child: const Icon(MdiIcons.handBackLeft),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (
+              context,
+              settingsState,
+            ) {
+              if (settingsState.settings.startFab) {
+                return SizedBox(
+                  height: settingsState.settings.startFabSize,
+                  width: settingsState.settings.startFabSize,
+                  child: FittedBox(
+                    child: FloatingActionButton(
+                      onPressed: () => _addManualStartTime(context),
+                      child: const Icon(MdiIcons.handBackLeft),
+                    ),
                   ),
-                ),
-              );
-            } else {
-              return const SizedBox(width: 0, height: 0);
-            }
-          },
+                );
+              } else {
+                return const SizedBox(width: 0, height: 0);
+              }
+            },
+          ),
+          // persistentFooterButtons:
+          //     kReleaseMode ? null : _persistentFooterButtons(context),
         ),
-        // persistentFooterButtons:
-        //     kReleaseMode ? null : _persistentFooterButtons(context),
       );
 
   // List<Widget> _persistentFooterButtons(BuildContext context) => <Widget>[

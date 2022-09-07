@@ -3,7 +3,17 @@ part of 'database_bloc.dart';
 @freezed
 class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.initialize() = _Initialize;
-  const factory DatabaseEvent.emitState() = _EmitState;
+  const factory DatabaseEvent.emitState({
+    List<Race>? races,
+    List<Stage>? stages,
+    List<Rider>? riders,
+    List<Status>? statuses,
+    List<GetParticipantsAtStartResult>? participants,
+    List<Start>? starts,
+    List<Finish>? finishes,
+    List<Trail>? trails,
+    List<CheckNewStartingParticipantResult>? newStartingParticipant,
+  }) = _EmitState;
   const factory DatabaseEvent.addRace(Race race) = _AddRace;
   const factory DatabaseEvent.deleteRace(int id) = _DeleteRace;
   const factory DatabaseEvent.addStage(Stage stage) = _AddStage;

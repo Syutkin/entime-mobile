@@ -19,7 +19,17 @@ mixin _$DatabaseEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -34,7 +44,17 @@ mixin _$DatabaseEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -48,7 +68,17 @@ mixin _$DatabaseEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -162,7 +192,17 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -180,7 +220,17 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -197,7 +247,17 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -277,6 +337,16 @@ abstract class _$$_EmitStateCopyWith<$Res> {
   factory _$$_EmitStateCopyWith(
           _$_EmitState value, $Res Function(_$_EmitState) then) =
       __$$_EmitStateCopyWithImpl<$Res>;
+  $Res call(
+      {List<Race>? races,
+      List<Stage>? stages,
+      List<Rider>? riders,
+      List<Status>? statuses,
+      List<GetParticipantsAtStartResult>? participants,
+      List<Start>? starts,
+      List<Finish>? finishes,
+      List<Trail>? trails,
+      List<CheckNewStartingParticipantResult>? newStartingParticipant});
 }
 
 /// @nodoc
@@ -288,32 +358,220 @@ class __$$_EmitStateCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
 
   @override
   _$_EmitState get _value => super._value as _$_EmitState;
+
+  @override
+  $Res call({
+    Object? races = freezed,
+    Object? stages = freezed,
+    Object? riders = freezed,
+    Object? statuses = freezed,
+    Object? participants = freezed,
+    Object? starts = freezed,
+    Object? finishes = freezed,
+    Object? trails = freezed,
+    Object? newStartingParticipant = freezed,
+  }) {
+    return _then(_$_EmitState(
+      races: races == freezed
+          ? _value._races
+          : races // ignore: cast_nullable_to_non_nullable
+              as List<Race>?,
+      stages: stages == freezed
+          ? _value._stages
+          : stages // ignore: cast_nullable_to_non_nullable
+              as List<Stage>?,
+      riders: riders == freezed
+          ? _value._riders
+          : riders // ignore: cast_nullable_to_non_nullable
+              as List<Rider>?,
+      statuses: statuses == freezed
+          ? _value._statuses
+          : statuses // ignore: cast_nullable_to_non_nullable
+              as List<Status>?,
+      participants: participants == freezed
+          ? _value._participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<GetParticipantsAtStartResult>?,
+      starts: starts == freezed
+          ? _value._starts
+          : starts // ignore: cast_nullable_to_non_nullable
+              as List<Start>?,
+      finishes: finishes == freezed
+          ? _value._finishes
+          : finishes // ignore: cast_nullable_to_non_nullable
+              as List<Finish>?,
+      trails: trails == freezed
+          ? _value._trails
+          : trails // ignore: cast_nullable_to_non_nullable
+              as List<Trail>?,
+      newStartingParticipant: newStartingParticipant == freezed
+          ? _value._newStartingParticipant
+          : newStartingParticipant // ignore: cast_nullable_to_non_nullable
+              as List<CheckNewStartingParticipantResult>?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_EmitState implements _EmitState {
-  const _$_EmitState();
+  const _$_EmitState(
+      {final List<Race>? races,
+      final List<Stage>? stages,
+      final List<Rider>? riders,
+      final List<Status>? statuses,
+      final List<GetParticipantsAtStartResult>? participants,
+      final List<Start>? starts,
+      final List<Finish>? finishes,
+      final List<Trail>? trails,
+      final List<CheckNewStartingParticipantResult>? newStartingParticipant})
+      : _races = races,
+        _stages = stages,
+        _riders = riders,
+        _statuses = statuses,
+        _participants = participants,
+        _starts = starts,
+        _finishes = finishes,
+        _trails = trails,
+        _newStartingParticipant = newStartingParticipant;
+
+  final List<Race>? _races;
+  @override
+  List<Race>? get races {
+    final value = _races;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Stage>? _stages;
+  @override
+  List<Stage>? get stages {
+    final value = _stages;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Rider>? _riders;
+  @override
+  List<Rider>? get riders {
+    final value = _riders;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Status>? _statuses;
+  @override
+  List<Status>? get statuses {
+    final value = _statuses;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<GetParticipantsAtStartResult>? _participants;
+  @override
+  List<GetParticipantsAtStartResult>? get participants {
+    final value = _participants;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Start>? _starts;
+  @override
+  List<Start>? get starts {
+    final value = _starts;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Finish>? _finishes;
+  @override
+  List<Finish>? get finishes {
+    final value = _finishes;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Trail>? _trails;
+  @override
+  List<Trail>? get trails {
+    final value = _trails;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<CheckNewStartingParticipantResult>? _newStartingParticipant;
+  @override
+  List<CheckNewStartingParticipantResult>? get newStartingParticipant {
+    final value = _newStartingParticipant;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'DatabaseEvent.emitState()';
+    return 'DatabaseEvent.emitState(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, newStartingParticipant: $newStartingParticipant)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_EmitState);
+        (other.runtimeType == runtimeType &&
+            other is _$_EmitState &&
+            const DeepCollectionEquality().equals(other._races, _races) &&
+            const DeepCollectionEquality().equals(other._stages, _stages) &&
+            const DeepCollectionEquality().equals(other._riders, _riders) &&
+            const DeepCollectionEquality().equals(other._statuses, _statuses) &&
+            const DeepCollectionEquality()
+                .equals(other._participants, _participants) &&
+            const DeepCollectionEquality().equals(other._starts, _starts) &&
+            const DeepCollectionEquality().equals(other._finishes, _finishes) &&
+            const DeepCollectionEquality().equals(other._trails, _trails) &&
+            const DeepCollectionEquality().equals(
+                other._newStartingParticipant, _newStartingParticipant));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_races),
+      const DeepCollectionEquality().hash(_stages),
+      const DeepCollectionEquality().hash(_riders),
+      const DeepCollectionEquality().hash(_statuses),
+      const DeepCollectionEquality().hash(_participants),
+      const DeepCollectionEquality().hash(_starts),
+      const DeepCollectionEquality().hash(_finishes),
+      const DeepCollectionEquality().hash(_trails),
+      const DeepCollectionEquality().hash(_newStartingParticipant));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_EmitStateCopyWith<_$_EmitState> get copyWith =>
+      __$$_EmitStateCopyWithImpl<_$_EmitState>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -324,14 +582,25 @@ class _$_EmitState implements _EmitState {
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
   }) {
-    return emitState();
+    return emitState(races, stages, riders, statuses, participants, starts,
+        finishes, trails, newStartingParticipant);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -341,14 +610,25 @@ class _$_EmitState implements _EmitState {
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
   }) {
-    return emitState?.call();
+    return emitState?.call(races, stages, riders, statuses, participants,
+        starts, finishes, trails, newStartingParticipant);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -360,7 +640,8 @@ class _$_EmitState implements _EmitState {
     required TResult orElse(),
   }) {
     if (emitState != null) {
-      return emitState();
+      return emitState(races, stages, riders, statuses, participants, starts,
+          finishes, trails, newStartingParticipant);
     }
     return orElse();
   }
@@ -420,7 +701,30 @@ class _$_EmitState implements _EmitState {
 }
 
 abstract class _EmitState implements DatabaseEvent {
-  const factory _EmitState() = _$_EmitState;
+  const factory _EmitState(
+      {final List<Race>? races,
+      final List<Stage>? stages,
+      final List<Rider>? riders,
+      final List<Status>? statuses,
+      final List<GetParticipantsAtStartResult>? participants,
+      final List<Start>? starts,
+      final List<Finish>? finishes,
+      final List<Trail>? trails,
+      final List<CheckNewStartingParticipantResult>?
+          newStartingParticipant}) = _$_EmitState;
+
+  List<Race>? get races;
+  List<Stage>? get stages;
+  List<Rider>? get riders;
+  List<Status>? get statuses;
+  List<GetParticipantsAtStartResult>? get participants;
+  List<Start>? get starts;
+  List<Finish>? get finishes;
+  List<Trail>? get trails;
+  List<CheckNewStartingParticipantResult>? get newStartingParticipant;
+  @JsonKey(ignore: true)
+  _$$_EmitStateCopyWith<_$_EmitState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -487,7 +791,17 @@ class _$_AddRace implements _AddRace {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -505,7 +819,17 @@ class _$_AddRace implements _AddRace {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -522,7 +846,17 @@ class _$_AddRace implements _AddRace {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -668,7 +1002,17 @@ class _$_DeleteRace implements _DeleteRace {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -686,7 +1030,17 @@ class _$_DeleteRace implements _DeleteRace {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -703,7 +1057,17 @@ class _$_DeleteRace implements _DeleteRace {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -848,7 +1212,17 @@ class _$_AddStage implements _AddStage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -866,7 +1240,17 @@ class _$_AddStage implements _AddStage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -883,7 +1267,17 @@ class _$_AddStage implements _AddStage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -1029,7 +1423,17 @@ class _$_SelectStages implements _SelectStages {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -1047,7 +1451,17 @@ class _$_SelectStages implements _SelectStages {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -1064,7 +1478,17 @@ class _$_SelectStages implements _SelectStages {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -1210,7 +1634,17 @@ class _$_DeleteStage implements _DeleteStage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -1228,7 +1662,17 @@ class _$_DeleteStage implements _DeleteStage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -1245,7 +1689,17 @@ class _$_DeleteStage implements _DeleteStage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -1393,7 +1847,17 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -1411,7 +1875,17 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -1428,7 +1902,17 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -1608,7 +2092,17 @@ class _$_AddStartNumber implements _AddStartNumber {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() emitState,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+        emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
@@ -1626,7 +2120,17 @@ class _$_AddStartNumber implements _AddStartNumber {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -1643,7 +2147,17 @@ class _$_AddStartNumber implements _AddStartNumber {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? emitState,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+        emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
@@ -1743,7 +2257,8 @@ mixin _$DatabaseState {
             List<GetParticipantsAtStartResult> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails)
+            List<Trail> trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
         initialized,
   }) =>
       throw _privateConstructorUsedError;
@@ -1758,7 +2273,8 @@ mixin _$DatabaseState {
             List<GetParticipantsAtStartResult> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails)?
+            List<Trail> trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
         initialized,
   }) =>
       throw _privateConstructorUsedError;
@@ -1773,7 +2289,8 @@ mixin _$DatabaseState {
             List<GetParticipantsAtStartResult> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails)?
+            List<Trail> trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
         initialized,
     required TResult orElse(),
   }) =>
@@ -1864,7 +2381,8 @@ class _$_Initial implements _Initial {
             List<GetParticipantsAtStartResult> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails)
+            List<Trail> trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
         initialized,
   }) {
     return initial();
@@ -1882,7 +2400,8 @@ class _$_Initial implements _Initial {
             List<GetParticipantsAtStartResult> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails)?
+            List<Trail> trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
         initialized,
   }) {
     return initial?.call();
@@ -1900,7 +2419,8 @@ class _$_Initial implements _Initial {
             List<GetParticipantsAtStartResult> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails)?
+            List<Trail> trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
         initialized,
     required TResult orElse(),
   }) {
@@ -1959,7 +2479,8 @@ abstract class _$$_InitializedCopyWith<$Res> {
       List<GetParticipantsAtStartResult> participants,
       List<Start> starts,
       List<Finish> finishes,
-      List<Trail> trails});
+      List<Trail> trails,
+      List<CheckNewStartingParticipantResult>? newStartingParticipant});
 }
 
 /// @nodoc
@@ -1983,6 +2504,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? starts = freezed,
     Object? finishes = freezed,
     Object? trails = freezed,
+    Object? newStartingParticipant = freezed,
   }) {
     return _then(_$_Initialized(
       races: races == freezed
@@ -2017,6 +2539,10 @@ class __$$_InitializedCopyWithImpl<$Res>
           ? _value._trails
           : trails // ignore: cast_nullable_to_non_nullable
               as List<Trail>,
+      newStartingParticipant: newStartingParticipant == freezed
+          ? _value._newStartingParticipant
+          : newStartingParticipant // ignore: cast_nullable_to_non_nullable
+              as List<CheckNewStartingParticipantResult>?,
     ));
   }
 }
@@ -2032,7 +2558,8 @@ class _$_Initialized implements _Initialized {
       required final List<GetParticipantsAtStartResult> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
-      required final List<Trail> trails})
+      required final List<Trail> trails,
+      final List<CheckNewStartingParticipantResult>? newStartingParticipant})
       : _races = races,
         _stages = stages,
         _riders = riders,
@@ -2040,7 +2567,8 @@ class _$_Initialized implements _Initialized {
         _participants = participants,
         _starts = starts,
         _finishes = finishes,
-        _trails = trails;
+        _trails = trails,
+        _newStartingParticipant = newStartingParticipant;
 
   final List<Race> _races;
   @override
@@ -2098,9 +2626,18 @@ class _$_Initialized implements _Initialized {
     return EqualUnmodifiableListView(_trails);
   }
 
+  final List<CheckNewStartingParticipantResult>? _newStartingParticipant;
+  @override
+  List<CheckNewStartingParticipantResult>? get newStartingParticipant {
+    final value = _newStartingParticipant;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'DatabaseState.initialized(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails)';
+    return 'DatabaseState.initialized(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, newStartingParticipant: $newStartingParticipant)';
   }
 
   @override
@@ -2116,7 +2653,9 @@ class _$_Initialized implements _Initialized {
                 .equals(other._participants, _participants) &&
             const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
-            const DeepCollectionEquality().equals(other._trails, _trails));
+            const DeepCollectionEquality().equals(other._trails, _trails) &&
+            const DeepCollectionEquality().equals(
+                other._newStartingParticipant, _newStartingParticipant));
   }
 
   @override
@@ -2129,7 +2668,8 @@ class _$_Initialized implements _Initialized {
       const DeepCollectionEquality().hash(_participants),
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
-      const DeepCollectionEquality().hash(_trails));
+      const DeepCollectionEquality().hash(_trails),
+      const DeepCollectionEquality().hash(_newStartingParticipant));
 
   @JsonKey(ignore: true)
   @override
@@ -2148,11 +2688,12 @@ class _$_Initialized implements _Initialized {
             List<GetParticipantsAtStartResult> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails)
+            List<Trail> trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)
         initialized,
   }) {
     return initialized(races, stages, riders, statuses, participants, starts,
-        finishes, trails);
+        finishes, trails, newStartingParticipant);
   }
 
   @override
@@ -2167,11 +2708,12 @@ class _$_Initialized implements _Initialized {
             List<GetParticipantsAtStartResult> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails)?
+            List<Trail> trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
         initialized,
   }) {
     return initialized?.call(races, stages, riders, statuses, participants,
-        starts, finishes, trails);
+        starts, finishes, trails, newStartingParticipant);
   }
 
   @override
@@ -2186,13 +2728,14 @@ class _$_Initialized implements _Initialized {
             List<GetParticipantsAtStartResult> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails)?
+            List<Trail> trails,
+            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
         initialized,
     required TResult orElse(),
   }) {
     if (initialized != null) {
       return initialized(races, stages, riders, statuses, participants, starts,
-          finishes, trails);
+          finishes, trails, newStartingParticipant);
     }
     return orElse();
   }
@@ -2238,7 +2781,9 @@ abstract class _Initialized implements DatabaseState {
       required final List<GetParticipantsAtStartResult> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
-      required final List<Trail> trails}) = _$_Initialized;
+      required final List<Trail> trails,
+      final List<CheckNewStartingParticipantResult>?
+          newStartingParticipant}) = _$_Initialized;
 
   List<Race> get races;
   List<Stage> get stages;
@@ -2248,6 +2793,7 @@ abstract class _Initialized implements DatabaseState {
   List<Start> get starts;
   List<Finish> get finishes;
   List<Trail> get trails;
+  List<CheckNewStartingParticipantResult>? get newStartingParticipant;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;

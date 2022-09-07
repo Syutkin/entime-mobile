@@ -12,5 +12,6 @@ class DatabaseState with _$DatabaseState {
     required List<Start> starts,
     required List<Finish> finishes,
     required List<Trail> trails,
+    List<CheckNewStartingParticipantResult>? newStartingParticipant,
   }) = _Initialized;
 }

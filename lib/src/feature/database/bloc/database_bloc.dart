@@ -21,6 +21,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   List<Start> _starts = [];
   List<Finish> _finishes = [];
   List<Trail> _trails = [];
+  List<CheckNewStartingParticipantResult> _newStartingParticipant = [];
 
   int _raceId = 0;
   int _stageId = 0;
@@ -76,8 +77,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     // });
 
     on<DatabaseEvent>(transformer: sequential(), (event, emit) async {
-      await event.when(
-        initialize: () async {
+      await event.map(
+        initialize: (event) async {
           _races = await _db.select(_db.races).get();
           // _stages = await _db.select(_db.stages).get();
           // _riders = await _db.select(_db.riders).get();
@@ -96,68 +97,70 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               starts: _starts,
               finishes: _finishes,
               trails: _trails,
+              newStartingParticipant: _newStartingParticipant,
             ),
           );
         },
-        emitState: () {
+        emitState: (event) {
           emit(
             DatabaseState.initialized(
-              races: _races,
-              stages: _stages,
-              riders: _riders,
-              statuses: _statuses,
-              participants: _participants,
-              starts: _starts,
-              finishes: _finishes,
-              trails: _trails,
+              races: event.races ?? _races,
+              stages: event.stages ?? _stages,
+              riders: event.riders ?? _riders,
+              statuses: event.statuses ?? _statuses,
+              participants: event.participants ?? _participants,
+              starts: event.starts ?? _starts,
+              finishes: event.finishes ?? _finishes,
+              trails: event.trails ?? _trails,
+              newStartingParticipant: event.newStartingParticipant,
             ),
           );
+          _newStartingParticipant = [];
         },
-        addRace: (race) async {
+        addRace: (event) async {
           await _db.addRace(
-            name: race.name,
-            startDate: race.startDate,
-            finishDate: race.finishDate,
+            name: event.race.name,
+            startDate: event.race.startDate,
+            finishDate: event.race.finishDate,
           );
         },
-        selectStages: (raceId) async {
-          _raceId = raceId;
+        selectStages: (event) async {
+          _raceId = event.raceId;
           _stages = await _db.selectStages(raceId: _raceId).get();
           // _stages = await (_db.select(_db.stages)
           //       ..where((stage) => stage.raceId.equals(_raceId)))
           //     .get();
           add(const DatabaseEvent.emitState());
         },
-        addStage: (stage) async {
+        addStage: (event) async {
           await _db.addStage(
-            raceId: stage.raceId,
-            name: stage.name,
+            raceId: event.stage.raceId,
+            name: event.stage.name,
           );
         },
-        deleteRace: (id) async {
-          await _db.deleteRace(id: id);
+        deleteRace: (event) async {
+          await _db.deleteRace(id: event.id);
         },
-        deleteStage: (id) async {
-          await _db.deleteStage(id: id);
+        deleteStage: (event) async {
+          await _db.deleteStage(id: event.id);
         },
-        getParticipantsAtStart: (stageId) async {
-          _stageId = stageId;
+        getParticipantsAtStart: (event) async {
+          _stageId = event.stageId;
           _participants =
-              await _db.getParticipantsAtStart(stageId: stageId).get();
+              await _db.getParticipantsAtStart(stageId: event.stageId).get();
           add(const DatabaseEvent.emitState());
         },
-        addStartNumber: (stage, number, startTime, forceAdd) async {
+        addStartNumber: (event) async {
           final result = await _db.addStartNumber(
-            stage: stage,
-            number: number,
-            startTime: startTime,
-            forceAdd: forceAdd,
+            stage: event.stage,
+            number: event.number,
+            startTime: event.startTime,
+            forceAdd: event.forceAdd,
           );
+          //ToDo: popup с вопросом обновлять или нет стартовое время или номер
           if (result != null) {
-            
-            //ToDo: popup с вопросом обновлять или нет стартовое время или номер
+            add(DatabaseEvent.emitState(newStartingParticipant: result));
           }
-          
         },
       );
     });
