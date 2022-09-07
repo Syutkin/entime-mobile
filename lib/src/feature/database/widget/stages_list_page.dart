@@ -5,6 +5,7 @@ import '../../../common/localization/localization.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../bloc/database_bloc.dart';
 import '../drift/app_database.dart';
+import 'start_list_page.dart';
 
 part 'popup/add_stage_popup.dart';
 
@@ -34,8 +35,16 @@ class StagesListPage extends StatelessWidget {
                   final stage = state.stages[index];
                   return ListTile(
                     title: Text(stage.name),
-                    //ToDo: Stage page
-                    // onTap: () {},
+                    onTap: () {
+                      context
+                          .read<DatabaseBloc>()
+                          .add(DatabaseEvent.getParticipantsAtStart(stage.id!));
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (context) => StartListPage(stage: stage),
+                        ),
+                      );
+                    },
                     trailing: PopupMenuButton<void>(
                       icon: const Icon(Icons.more_vert),
                       itemBuilder: (context) => <PopupMenuEntry<void>>[

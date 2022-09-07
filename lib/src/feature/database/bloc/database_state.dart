@@ -8,7 +8,7 @@ class DatabaseState with _$DatabaseState {
     required List<Stage> stages,
     required List<Rider> riders,
     required List<Status> statuses,
-    required List<Participant> participants,
+    required List<GetParticipantsAtStartResult> participants,
     required List<Start> starts,
     required List<Finish> finishes,
     required List<Trail> trails,

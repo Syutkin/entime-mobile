@@ -205,6 +205,7 @@ class ProtocolProvider implements IProtocolProvider {
       );
 
   // ----------------старт----------------
+  //!transfered
   @override
   Future<List<StartItem>> getAllParticipantsAtStart() async {
     final db = await _db;
@@ -238,7 +239,6 @@ class ProtocolProvider implements IProtocolProvider {
     return protocol;
   }
 
-  //ToDo: посмотреть как сделано
   @override
   Future<List<Map<String, Object?>>> getStartToCsv() async {
     final db = await _db;
@@ -529,7 +529,6 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
-//ToDo: посмотреть как сделано
   @override
   Future<List<StartItem>> getStartingParticipants(String time) async {
     final DateTime? dateTime = strTimeToDateTime(time);
@@ -609,7 +608,6 @@ class ProtocolProvider implements IProtocolProvider {
   }
 
 // ----------------номера на трассе----------------
-//ToDo: посмотреть как сделано
   @override
   Future<List<StartItem>> getNumbersOnTrace([String? timeNow]) async {
     timeNow ??= "now', 'localtime";
@@ -659,7 +657,6 @@ class ProtocolProvider implements IProtocolProvider {
     return finishProtocol;
   }
 
-//ToDo: посмотреть как сделано
   @override
   Future<List<Map<String, Object?>>> getFinishToCsv() async {
     final db = await _db;

@@ -9,4 +9,12 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.addStage(Stage stage) = _AddStage;
   const factory DatabaseEvent.selectStages(int raceId) = _SelectStages;
   const factory DatabaseEvent.deleteStage(int id) = _DeleteStage;
+  const factory DatabaseEvent.getParticipantsAtStart(int stageId) =
+      _GetParticipantsAtStart;
+  const factory DatabaseEvent.addStartNumber({
+    required Stage stage,
+    required int number,
+    required String startTime,
+    @Default(false) bool forceAdd,
+  }) = _AddStartNumber;
 }

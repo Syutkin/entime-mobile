@@ -17,13 +17,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   List<Stage> _stages = [];
   List<Rider> _riders = [];
   List<Status> _statuses = [];
-  List<Participant> _participants = [];
+  List<GetParticipantsAtStartResult> _participants = [];
   List<Start> _starts = [];
   List<Finish> _finishes = [];
   List<Trail> _trails = [];
 
   int _raceId = 0;
-  int _stagesId = 0;
+  int _stageId = 0;
 
   DatabaseBloc({required AppDatabase database})
       : _db = database,
@@ -34,7 +34,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     });
 
     _db.selectStages(raceId: _raceId).watch().listen((event) async {
-      //! watch here generates empty event list
+      //! watch generates empty list at event
       _stages = await _db.selectStages(raceId: _raceId).get();
       add(const DatabaseEvent.emitState());
     });
@@ -49,15 +49,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     //   add(const DatabaseEvent.onChanged());
     // });
 
-    (_db.select(_db.participants)
-          ..where((participant) => participant.raceId.equals(_raceId)))
-        .watch()
-        .listen((event) async {
-      _participants = event;
+    _db.getParticipantsAtStart(stageId: _stageId).watch().listen((event) async {
+      //! watch generates empty list at event
+      _participants = await _db.getParticipantsAtStart(stageId: _stageId).get();
       add(const DatabaseEvent.emitState());
     });
 
-    (_db.select(_db.starts)..where((start) => start.stageId.equals(_stagesId)))
+    (_db.select(_db.starts)..where((start) => start.stageId.equals(_stageId)))
         .watch()
         .listen((event) async {
       _starts = event;
@@ -65,7 +63,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     });
 
     (_db.select(_db.finishes)
-          ..where((finish) => finish.stageId.equals(_stagesId)))
+          ..where((finish) => finish.stageId.equals(_stageId)))
         .watch()
         .listen((event) async {
       _finishes = event;
@@ -141,6 +139,21 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         },
         deleteStage: (id) async {
           await _db.deleteStage(id: id);
+        },
+        getParticipantsAtStart: (stageId) async {
+          _stageId = stageId;
+          _participants =
+              await _db.getParticipantsAtStart(stageId: stageId).get();
+          add(const DatabaseEvent.emitState());
+        },
+        addStartNumber: (stage, number, startTime, forceAdd) async {
+          final result = await _db.addStartNumber(
+            stage: stage,
+            number: number,
+            startTime: startTime,
+            forceAdd: forceAdd,
+          );
+          //ToDo: popup с вопросом обновлять или нет стартовое время или номер
         },
       );
     });

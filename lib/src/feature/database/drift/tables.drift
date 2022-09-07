@@ -38,11 +38,11 @@ CREATE TABLE statuses (
 CREATE TABLE participants (
 	id integer PRIMARY KEY AUTOINCREMENT,
 	race_id integer NOT NULL,
-	rider_id integer,
-	number integer NOT NULL UNIQUE,
-	category text NOT NULL,
+	rider_id integer NOT NULL,
+	number integer NOT NULL,
+	category text,
 	rfid text,
-	status_id integer NOT NULL DEFAULT 0,
+	status_id integer NOT NULL DEFAULT 1,
     FOREIGN KEY (rider_id) REFERENCES riders(id),
     FOREIGN KEY (race_id) REFERENCES races(id)
 );
@@ -57,7 +57,7 @@ CREATE TABLE starts (
 	automatic_correction integer,
 	manual_start_time text,
 	manual_correction integer,
-	status_id integer NOT NULL DEFAULT 0,
+	status_id integer NOT NULL DEFAULT 1,
     FOREIGN KEY (stage_id) REFERENCES stages(id),
     FOREIGN KEY (participant_id) REFERENCES participants(id)
 );
@@ -91,3 +91,24 @@ addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_
 deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
 
 
+
+-- Old protocol
+getParticipantsAtStart:
+SELECT *
+FROM participants, riders, starts
+WHERE participants.rider_id = riders.id
+  AND starts.participant_id = participants.id
+  AND stage_id = :stage_id
+  AND starts.status_id = 1
+  AND participants.status_id = 1
+ORDER BY start_time ASC;
+
+
+checkNewStartingParticipant:
+SELECT *
+FROM starts, participants
+WHERE starts.participant_id = participants.id
+  AND stage_id = :stage_id
+  AND (start_time IS :start_time
+  OR (number IS :number
+  AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));

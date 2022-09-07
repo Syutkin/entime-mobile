@@ -12,12 +12,14 @@ class Race extends DataClass implements Insertable<Race> {
   final String name;
   final String? startDate;
   final String? finishDate;
+  final String? location;
   final bool isDeleted;
   Race(
       {this.id,
       required this.name,
       this.startDate,
       this.finishDate,
+      this.location,
       required this.isDeleted});
   factory Race.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -29,6 +31,8 @@ class Race extends DataClass implements Insertable<Race> {
           .mapFromDatabaseResponse(data['${effectivePrefix}start_date']),
       finishDate: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}finish_date']),
+      location: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}location']),
       isDeleted: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_deleted'])!,
     );
@@ -46,6 +50,9 @@ class Race extends DataClass implements Insertable<Race> {
     if (!nullToAbsent || finishDate != null) {
       map['finish_date'] = Variable<String?>(finishDate);
     }
+    if (!nullToAbsent || location != null) {
+      map['location'] = Variable<String?>(location);
+    }
     map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
   }
@@ -60,6 +67,9 @@ class Race extends DataClass implements Insertable<Race> {
       finishDate: finishDate == null && nullToAbsent
           ? const Value.absent()
           : Value(finishDate),
+      location: location == null && nullToAbsent
+          ? const Value.absent()
+          : Value(location),
       isDeleted: Value(isDeleted),
     );
   }
@@ -72,6 +82,7 @@ class Race extends DataClass implements Insertable<Race> {
       name: serializer.fromJson<String>(json['name']),
       startDate: serializer.fromJson<String?>(json['start_date']),
       finishDate: serializer.fromJson<String?>(json['finish_date']),
+      location: serializer.fromJson<String?>(json['location']),
       isDeleted: serializer.fromJson<bool>(json['is_deleted']),
     );
   }
@@ -83,6 +94,7 @@ class Race extends DataClass implements Insertable<Race> {
       'name': serializer.toJson<String>(name),
       'start_date': serializer.toJson<String?>(startDate),
       'finish_date': serializer.toJson<String?>(finishDate),
+      'location': serializer.toJson<String?>(location),
       'is_deleted': serializer.toJson<bool>(isDeleted),
     };
   }
@@ -92,12 +104,14 @@ class Race extends DataClass implements Insertable<Race> {
           String? name,
           String? startDate,
           String? finishDate,
+          String? location,
           bool? isDeleted}) =>
       Race(
         id: id ?? this.id,
         name: name ?? this.name,
         startDate: startDate ?? this.startDate,
         finishDate: finishDate ?? this.finishDate,
+        location: location ?? this.location,
         isDeleted: isDeleted ?? this.isDeleted,
       );
   @override
@@ -107,13 +121,15 @@ class Race extends DataClass implements Insertable<Race> {
           ..write('name: $name, ')
           ..write('startDate: $startDate, ')
           ..write('finishDate: $finishDate, ')
+          ..write('location: $location, ')
           ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, name, startDate, finishDate, isDeleted);
+  int get hashCode =>
+      Object.hash(id, name, startDate, finishDate, location, isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -122,6 +138,7 @@ class Race extends DataClass implements Insertable<Race> {
           other.name == this.name &&
           other.startDate == this.startDate &&
           other.finishDate == this.finishDate &&
+          other.location == this.location &&
           other.isDeleted == this.isDeleted);
 }
 
@@ -130,12 +147,14 @@ class RacesCompanion extends UpdateCompanion<Race> {
   final Value<String> name;
   final Value<String?> startDate;
   final Value<String?> finishDate;
+  final Value<String?> location;
   final Value<bool> isDeleted;
   const RacesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.startDate = const Value.absent(),
     this.finishDate = const Value.absent(),
+    this.location = const Value.absent(),
     this.isDeleted = const Value.absent(),
   });
   RacesCompanion.insert({
@@ -143,6 +162,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
     required String name,
     this.startDate = const Value.absent(),
     this.finishDate = const Value.absent(),
+    this.location = const Value.absent(),
     this.isDeleted = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Race> custom({
@@ -150,6 +170,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
     Expression<String>? name,
     Expression<String?>? startDate,
     Expression<String?>? finishDate,
+    Expression<String?>? location,
     Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
@@ -157,6 +178,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
       if (name != null) 'name': name,
       if (startDate != null) 'start_date': startDate,
       if (finishDate != null) 'finish_date': finishDate,
+      if (location != null) 'location': location,
       if (isDeleted != null) 'is_deleted': isDeleted,
     });
   }
@@ -166,12 +188,14 @@ class RacesCompanion extends UpdateCompanion<Race> {
       Value<String>? name,
       Value<String?>? startDate,
       Value<String?>? finishDate,
+      Value<String?>? location,
       Value<bool>? isDeleted}) {
     return RacesCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       startDate: startDate ?? this.startDate,
       finishDate: finishDate ?? this.finishDate,
+      location: location ?? this.location,
       isDeleted: isDeleted ?? this.isDeleted,
     );
   }
@@ -191,6 +215,9 @@ class RacesCompanion extends UpdateCompanion<Race> {
     if (finishDate.present) {
       map['finish_date'] = Variable<String?>(finishDate.value);
     }
+    if (location.present) {
+      map['location'] = Variable<String?>(location.value);
+    }
     if (isDeleted.present) {
       map['is_deleted'] = Variable<bool>(isDeleted.value);
     }
@@ -204,6 +231,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
           ..write('name: $name, ')
           ..write('startDate: $startDate, ')
           ..write('finishDate: $finishDate, ')
+          ..write('location: $location, ')
           ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
@@ -239,6 +267,12 @@ class Races extends Table with TableInfo<Races, Race> {
       type: const StringType(),
       requiredDuringInsert: false,
       $customConstraints: '');
+  final VerificationMeta _locationMeta = const VerificationMeta('location');
+  late final GeneratedColumn<String?> location = GeneratedColumn<String?>(
+      'location', aliasedName, true,
+      type: const StringType(),
+      requiredDuringInsert: false,
+      $customConstraints: '');
   final VerificationMeta _isDeletedMeta = const VerificationMeta('isDeleted');
   late final GeneratedColumn<bool?> isDeleted = GeneratedColumn<bool?>(
       'is_deleted', aliasedName, false,
@@ -248,7 +282,7 @@ class Races extends Table with TableInfo<Races, Race> {
       defaultValue: const CustomExpression<bool>('false'));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, startDate, finishDate, isDeleted];
+      [id, name, startDate, finishDate, location, isDeleted];
   @override
   String get aliasedName => _alias ?? 'races';
   @override
@@ -276,6 +310,10 @@ class Races extends Table with TableInfo<Races, Race> {
           _finishDateMeta,
           finishDate.isAcceptableOrUnknown(
               data['finish_date']!, _finishDateMeta));
+    }
+    if (data.containsKey('location')) {
+      context.handle(_locationMeta,
+          location.isAcceptableOrUnknown(data['location']!, _locationMeta));
     }
     if (data.containsKey('is_deleted')) {
       context.handle(_isDeletedMeta,
@@ -1615,17 +1653,17 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
 class Participant extends DataClass implements Insertable<Participant> {
   final int? id;
   final int raceId;
-  final int? riderId;
+  final int riderId;
   final int number;
-  final String category;
+  final String? category;
   final String? rfid;
   final int statusId;
   Participant(
       {this.id,
       required this.raceId,
-      this.riderId,
+      required this.riderId,
       required this.number,
-      required this.category,
+      this.category,
       this.rfid,
       required this.statusId});
   factory Participant.fromData(Map<String, dynamic> data, {String? prefix}) {
@@ -1635,11 +1673,11 @@ class Participant extends DataClass implements Insertable<Participant> {
       raceId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}race_id'])!,
       riderId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}rider_id']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}rider_id'])!,
       number: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}number'])!,
       category: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}category'])!,
+          .mapFromDatabaseResponse(data['${effectivePrefix}category']),
       rfid: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}rfid']),
       statusId: const IntType()
@@ -1653,11 +1691,11 @@ class Participant extends DataClass implements Insertable<Participant> {
       map['id'] = Variable<int?>(id);
     }
     map['race_id'] = Variable<int>(raceId);
-    if (!nullToAbsent || riderId != null) {
-      map['rider_id'] = Variable<int?>(riderId);
-    }
+    map['rider_id'] = Variable<int>(riderId);
     map['number'] = Variable<int>(number);
-    map['category'] = Variable<String>(category);
+    if (!nullToAbsent || category != null) {
+      map['category'] = Variable<String?>(category);
+    }
     if (!nullToAbsent || rfid != null) {
       map['rfid'] = Variable<String?>(rfid);
     }
@@ -1669,11 +1707,11 @@ class Participant extends DataClass implements Insertable<Participant> {
     return ParticipantsCompanion(
       id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       raceId: Value(raceId),
-      riderId: riderId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(riderId),
+      riderId: Value(riderId),
       number: Value(number),
-      category: Value(category),
+      category: category == null && nullToAbsent
+          ? const Value.absent()
+          : Value(category),
       rfid: rfid == null && nullToAbsent ? const Value.absent() : Value(rfid),
       statusId: Value(statusId),
     );
@@ -1685,9 +1723,9 @@ class Participant extends DataClass implements Insertable<Participant> {
     return Participant(
       id: serializer.fromJson<int?>(json['id']),
       raceId: serializer.fromJson<int>(json['race_id']),
-      riderId: serializer.fromJson<int?>(json['rider_id']),
+      riderId: serializer.fromJson<int>(json['rider_id']),
       number: serializer.fromJson<int>(json['number']),
-      category: serializer.fromJson<String>(json['category']),
+      category: serializer.fromJson<String?>(json['category']),
       rfid: serializer.fromJson<String?>(json['rfid']),
       statusId: serializer.fromJson<int>(json['status_id']),
     );
@@ -1698,9 +1736,9 @@ class Participant extends DataClass implements Insertable<Participant> {
     return <String, dynamic>{
       'id': serializer.toJson<int?>(id),
       'race_id': serializer.toJson<int>(raceId),
-      'rider_id': serializer.toJson<int?>(riderId),
+      'rider_id': serializer.toJson<int>(riderId),
       'number': serializer.toJson<int>(number),
-      'category': serializer.toJson<String>(category),
+      'category': serializer.toJson<String?>(category),
       'rfid': serializer.toJson<String?>(rfid),
       'status_id': serializer.toJson<int>(statusId),
     };
@@ -1756,9 +1794,9 @@ class Participant extends DataClass implements Insertable<Participant> {
 class ParticipantsCompanion extends UpdateCompanion<Participant> {
   final Value<int?> id;
   final Value<int> raceId;
-  final Value<int?> riderId;
+  final Value<int> riderId;
   final Value<int> number;
-  final Value<String> category;
+  final Value<String?> category;
   final Value<String?> rfid;
   final Value<int> statusId;
   const ParticipantsCompanion({
@@ -1773,20 +1811,20 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   ParticipantsCompanion.insert({
     this.id = const Value.absent(),
     required int raceId,
-    this.riderId = const Value.absent(),
+    required int riderId,
     required int number,
-    required String category,
+    this.category = const Value.absent(),
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
   })  : raceId = Value(raceId),
-        number = Value(number),
-        category = Value(category);
+        riderId = Value(riderId),
+        number = Value(number);
   static Insertable<Participant> custom({
     Expression<int?>? id,
     Expression<int>? raceId,
-    Expression<int?>? riderId,
+    Expression<int>? riderId,
     Expression<int>? number,
-    Expression<String>? category,
+    Expression<String?>? category,
     Expression<String?>? rfid,
     Expression<int>? statusId,
   }) {
@@ -1804,9 +1842,9 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   ParticipantsCompanion copyWith(
       {Value<int?>? id,
       Value<int>? raceId,
-      Value<int?>? riderId,
+      Value<int>? riderId,
       Value<int>? number,
-      Value<String>? category,
+      Value<String?>? category,
       Value<String?>? rfid,
       Value<int>? statusId}) {
     return ParticipantsCompanion(
@@ -1830,13 +1868,13 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       map['race_id'] = Variable<int>(raceId.value);
     }
     if (riderId.present) {
-      map['rider_id'] = Variable<int?>(riderId.value);
+      map['rider_id'] = Variable<int>(riderId.value);
     }
     if (number.present) {
       map['number'] = Variable<int>(number.value);
     }
     if (category.present) {
-      map['category'] = Variable<String>(category.value);
+      map['category'] = Variable<String?>(category.value);
     }
     if (rfid.present) {
       map['rfid'] = Variable<String?>(rfid.value);
@@ -1881,22 +1919,22 @@ class Participants extends Table with TableInfo<Participants, Participant> {
       $customConstraints: 'NOT NULL');
   final VerificationMeta _riderIdMeta = const VerificationMeta('riderId');
   late final GeneratedColumn<int?> riderId = GeneratedColumn<int?>(
-      'rider_id', aliasedName, true,
+      'rider_id', aliasedName, false,
       type: const IntType(),
-      requiredDuringInsert: false,
-      $customConstraints: '');
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
   final VerificationMeta _numberMeta = const VerificationMeta('number');
   late final GeneratedColumn<int?> number = GeneratedColumn<int?>(
       'number', aliasedName, false,
       type: const IntType(),
       requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL UNIQUE');
+      $customConstraints: 'NOT NULL');
   final VerificationMeta _categoryMeta = const VerificationMeta('category');
   late final GeneratedColumn<String?> category = GeneratedColumn<String?>(
-      'category', aliasedName, false,
+      'category', aliasedName, true,
       type: const StringType(),
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
+      requiredDuringInsert: false,
+      $customConstraints: '');
   final VerificationMeta _rfidMeta = const VerificationMeta('rfid');
   late final GeneratedColumn<String?> rfid = GeneratedColumn<String?>(
       'rfid', aliasedName, true,
@@ -1908,8 +1946,8 @@ class Participants extends Table with TableInfo<Participants, Participant> {
       'status_id', aliasedName, false,
       type: const IntType(),
       requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT 0',
-      defaultValue: const CustomExpression<int>('0'));
+      $customConstraints: 'NOT NULL DEFAULT 1',
+      defaultValue: const CustomExpression<int>('1'));
   @override
   List<GeneratedColumn> get $columns =>
       [id, raceId, riderId, number, category, rfid, statusId];
@@ -1934,6 +1972,8 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     if (data.containsKey('rider_id')) {
       context.handle(_riderIdMeta,
           riderId.isAcceptableOrUnknown(data['rider_id']!, _riderIdMeta));
+    } else if (isInserting) {
+      context.missing(_riderIdMeta);
     }
     if (data.containsKey('number')) {
       context.handle(_numberMeta,
@@ -1944,8 +1984,6 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     if (data.containsKey('category')) {
       context.handle(_categoryMeta,
           category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
-    } else if (isInserting) {
-      context.missing(_categoryMeta);
     }
     if (data.containsKey('rfid')) {
       context.handle(
@@ -2395,8 +2433,8 @@ class Starts extends Table with TableInfo<Starts, Start> {
       'status_id', aliasedName, false,
       type: const IntType(),
       requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT 0',
-      defaultValue: const CustomExpression<int>('0'));
+      $customConstraints: 'NOT NULL DEFAULT 1',
+      defaultValue: const CustomExpression<int>('1'));
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -2940,9 +2978,183 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Selectable<GetParticipantsAtStartResult> getParticipantsAtStart(
+      {required int stageId}) {
+    return customSelect(
+        'SELECT *\r\nFROM participants, riders, starts\r\nWHERE participants.rider_id = riders.id\r\n  AND starts.participant_id = participants.id\r\n  AND stage_id = :stage_id\r\n  AND starts.status_id = 1\r\n  AND participants.status_id = 1\r\nORDER BY start_time ASC',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          participants,
+          riders,
+          starts,
+        }).map((QueryRow row) {
+      return GetParticipantsAtStartResult(
+        id: row.read<int?>('id'),
+        raceId: row.read<int>('race_id'),
+        riderId: row.read<int>('rider_id'),
+        number: row.read<int>('number'),
+        category: row.read<String?>('category'),
+        rfid: row.read<String?>('rfid'),
+        statusId: row.read<int>('status_id'),
+        id1: row.read<int?>('id'),
+        name: row.read<String>('name'),
+        nickname: row.read<String?>('nickname'),
+        birthday: row.read<int?>('birthday'),
+        team: row.read<String?>('team'),
+        city: row.read<String?>('city'),
+        email: row.read<String?>('email'),
+        phone: row.read<String?>('phone'),
+        comment: row.read<String?>('comment'),
+        id2: row.read<int?>('id'),
+        stageId: row.read<int>('stage_id'),
+        participantId: row.read<int>('participant_id'),
+        startTime: row.read<String>('start_time'),
+        timestamp: row.read<String?>('timestamp'),
+        automaticStartTime: row.read<String?>('automatic_start_time'),
+        automaticCorrection: row.read<int?>('automatic_correction'),
+        manualStartTime: row.read<String?>('manual_start_time'),
+        manualCorrection: row.read<int?>('manual_correction'),
+        statusId1: row.read<int>('status_id'),
+      );
+    });
+  }
+
+  Selectable<CheckNewStartingParticipantResult> checkNewStartingParticipant(
+      {required int stageId, required String startTime, required int number}) {
+    return customSelect(
+        'SELECT *\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n  AND stage_id = :stage_id\r\n  AND (start_time IS :start_time\r\n  OR (number IS :number\r\n  AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
+        variables: [
+          Variable<int>(stageId),
+          Variable<String>(startTime),
+          Variable<int>(number)
+        ],
+        readsFrom: {
+          starts,
+          participants,
+        }).map((QueryRow row) {
+      return CheckNewStartingParticipantResult(
+        id: row.read<int?>('id'),
+        stageId: row.read<int>('stage_id'),
+        participantId: row.read<int>('participant_id'),
+        startTime: row.read<String>('start_time'),
+        timestamp: row.read<String?>('timestamp'),
+        automaticStartTime: row.read<String?>('automatic_start_time'),
+        automaticCorrection: row.read<int?>('automatic_correction'),
+        manualStartTime: row.read<String?>('manual_start_time'),
+        manualCorrection: row.read<int?>('manual_correction'),
+        statusId: row.read<int>('status_id'),
+        id1: row.read<int?>('id'),
+        raceId: row.read<int>('race_id'),
+        riderId: row.read<int>('rider_id'),
+        number: row.read<int>('number'),
+        category: row.read<String?>('category'),
+        rfid: row.read<String?>('rfid'),
+        statusId1: row.read<int>('status_id'),
+      );
+    });
+  }
+
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
       [races, trails, stages, riders, statuses, participants, starts, finishes];
+}
+
+class GetParticipantsAtStartResult {
+  final int? id;
+  final int raceId;
+  final int riderId;
+  final int number;
+  final String? category;
+  final String? rfid;
+  final int statusId;
+  final int? id1;
+  final String name;
+  final String? nickname;
+  final int? birthday;
+  final String? team;
+  final String? city;
+  final String? email;
+  final String? phone;
+  final String? comment;
+  final int? id2;
+  final int stageId;
+  final int participantId;
+  final String startTime;
+  final String? timestamp;
+  final String? automaticStartTime;
+  final int? automaticCorrection;
+  final String? manualStartTime;
+  final int? manualCorrection;
+  final int statusId1;
+  GetParticipantsAtStartResult({
+    this.id,
+    required this.raceId,
+    required this.riderId,
+    required this.number,
+    this.category,
+    this.rfid,
+    required this.statusId,
+    this.id1,
+    required this.name,
+    this.nickname,
+    this.birthday,
+    this.team,
+    this.city,
+    this.email,
+    this.phone,
+    this.comment,
+    this.id2,
+    required this.stageId,
+    required this.participantId,
+    required this.startTime,
+    this.timestamp,
+    this.automaticStartTime,
+    this.automaticCorrection,
+    this.manualStartTime,
+    this.manualCorrection,
+    required this.statusId1,
+  });
+}
+
+class CheckNewStartingParticipantResult {
+  final int? id;
+  final int stageId;
+  final int participantId;
+  final String startTime;
+  final String? timestamp;
+  final String? automaticStartTime;
+  final int? automaticCorrection;
+  final String? manualStartTime;
+  final int? manualCorrection;
+  final int statusId;
+  final int? id1;
+  final int raceId;
+  final int riderId;
+  final int number;
+  final String? category;
+  final String? rfid;
+  final int statusId1;
+  CheckNewStartingParticipantResult({
+    this.id,
+    required this.stageId,
+    required this.participantId,
+    required this.startTime,
+    this.timestamp,
+    this.automaticStartTime,
+    this.automaticCorrection,
+    this.manualStartTime,
+    this.manualCorrection,
+    required this.statusId,
+    this.id1,
+    required this.raceId,
+    required this.riderId,
+    required this.number,
+    this.category,
+    this.rfid,
+    required this.statusId1,
+  });
 }
