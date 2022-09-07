@@ -74,18 +74,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Выберите устройство"),
         "I18nBluetooth_unknownDevice":
             MessageLookupByLibrary.simpleMessage("Неизвестное устройство"),
+        "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "I18nCountdown_countdown":
             MessageLookupByLibrary.simpleMessage("Обратный отсчёт"),
         "I18nDatabase_addRace":
             MessageLookupByLibrary.simpleMessage("Создать соревнование"),
+        "I18nDatabase_addStage":
+            MessageLookupByLibrary.simpleMessage("Создать спецучасток"),
         "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
             "Введите название соревнования"),
+        "I18nDatabase_enterStageName": MessageLookupByLibrary.simpleMessage(
+            "Введите название спецучастка"),
         "I18nDatabase_raceDates":
             MessageLookupByLibrary.simpleMessage("Даты проведения"),
         "I18nDatabase_raceName":
             MessageLookupByLibrary.simpleMessage("Название соревнования"),
         "I18nDatabase_races":
             MessageLookupByLibrary.simpleMessage("Соревнования"),
+        "I18nDatabase_stageName":
+            MessageLookupByLibrary.simpleMessage("Название спецучастка"),
+        "I18nDatabase_trail": MessageLookupByLibrary.simpleMessage("Трейл"),
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
         "I18nDrawer_settings":

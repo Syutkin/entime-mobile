@@ -19,56 +19,68 @@ mixin _$DatabaseEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() onChanged,
+    required TResult Function() emitState,
     required TResult Function(Race race) addRace,
-    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_OnChanged value) onChanged,
+    required TResult Function(_EmitState value) emitState,
     required TResult Function(_AddRace value) addRace,
-    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -133,10 +145,12 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() onChanged,
+    required TResult Function() emitState,
     required TResult Function(Race race) addRace,
-    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
   }) {
     return initialize();
   }
@@ -145,10 +159,12 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
   }) {
     return initialize?.call();
   }
@@ -157,10 +173,12 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -173,10 +191,12 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_OnChanged value) onChanged,
+    required TResult Function(_EmitState value) emitState,
     required TResult Function(_AddRace value) addRace,
-    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
   }) {
     return initialize(this);
   }
@@ -185,10 +205,12 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
   }) {
     return initialize?.call(this);
   }
@@ -197,10 +219,12 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -215,37 +239,37 @@ abstract class _Initialize implements DatabaseEvent {
 }
 
 /// @nodoc
-abstract class _$$_OnChangedCopyWith<$Res> {
-  factory _$$_OnChangedCopyWith(
-          _$_OnChanged value, $Res Function(_$_OnChanged) then) =
-      __$$_OnChangedCopyWithImpl<$Res>;
+abstract class _$$_EmitStateCopyWith<$Res> {
+  factory _$$_EmitStateCopyWith(
+          _$_EmitState value, $Res Function(_$_EmitState) then) =
+      __$$_EmitStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_OnChangedCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_OnChangedCopyWith<$Res> {
-  __$$_OnChangedCopyWithImpl(
-      _$_OnChanged _value, $Res Function(_$_OnChanged) _then)
-      : super(_value, (v) => _then(v as _$_OnChanged));
+class __$$_EmitStateCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
+    implements _$$_EmitStateCopyWith<$Res> {
+  __$$_EmitStateCopyWithImpl(
+      _$_EmitState _value, $Res Function(_$_EmitState) _then)
+      : super(_value, (v) => _then(v as _$_EmitState));
 
   @override
-  _$_OnChanged get _value => super._value as _$_OnChanged;
+  _$_EmitState get _value => super._value as _$_EmitState;
 }
 
 /// @nodoc
 
-class _$_OnChanged implements _OnChanged {
-  const _$_OnChanged();
+class _$_EmitState implements _EmitState {
+  const _$_EmitState();
 
   @override
   String toString() {
-    return 'DatabaseEvent.onChanged()';
+    return 'DatabaseEvent.emitState()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_OnChanged);
+        (other.runtimeType == runtimeType && other is _$_EmitState);
   }
 
   @override
@@ -255,38 +279,44 @@ class _$_OnChanged implements _OnChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() onChanged,
+    required TResult Function() emitState,
     required TResult Function(Race race) addRace,
-    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
   }) {
-    return onChanged();
+    return emitState();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
   }) {
-    return onChanged?.call();
+    return emitState?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
     required TResult orElse(),
   }) {
-    if (onChanged != null) {
-      return onChanged();
+    if (emitState != null) {
+      return emitState();
     }
     return orElse();
   }
@@ -295,45 +325,51 @@ class _$_OnChanged implements _OnChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_OnChanged value) onChanged,
+    required TResult Function(_EmitState value) emitState,
     required TResult Function(_AddRace value) addRace,
-    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
   }) {
-    return onChanged(this);
+    return emitState(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
   }) {
-    return onChanged?.call(this);
+    return emitState?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
     required TResult orElse(),
   }) {
-    if (onChanged != null) {
-      return onChanged(this);
+    if (emitState != null) {
+      return emitState(this);
     }
     return orElse();
   }
 }
 
-abstract class _OnChanged implements DatabaseEvent {
-  const factory _OnChanged() = _$_OnChanged;
+abstract class _EmitState implements DatabaseEvent {
+  const factory _EmitState() = _$_EmitState;
 }
 
 /// @nodoc
@@ -400,10 +436,12 @@ class _$_AddRace implements _AddRace {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() onChanged,
+    required TResult Function() emitState,
     required TResult Function(Race race) addRace,
-    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
   }) {
     return addRace(race);
   }
@@ -412,10 +450,12 @@ class _$_AddRace implements _AddRace {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
   }) {
     return addRace?.call(race);
   }
@@ -424,10 +464,12 @@ class _$_AddRace implements _AddRace {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -440,10 +482,12 @@ class _$_AddRace implements _AddRace {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_OnChanged value) onChanged,
+    required TResult Function(_EmitState value) emitState,
     required TResult Function(_AddRace value) addRace,
-    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
   }) {
     return addRace(this);
   }
@@ -452,10 +496,12 @@ class _$_AddRace implements _AddRace {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
   }) {
     return addRace?.call(this);
   }
@@ -464,10 +510,12 @@ class _$_AddRace implements _AddRace {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -483,6 +531,333 @@ abstract class _AddRace implements DatabaseEvent {
   Race get race;
   @JsonKey(ignore: true)
   _$$_AddRaceCopyWith<_$_AddRace> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteRaceCopyWith<$Res> {
+  factory _$$_DeleteRaceCopyWith(
+          _$_DeleteRace value, $Res Function(_$_DeleteRace) then) =
+      __$$_DeleteRaceCopyWithImpl<$Res>;
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$_DeleteRaceCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res>
+    implements _$$_DeleteRaceCopyWith<$Res> {
+  __$$_DeleteRaceCopyWithImpl(
+      _$_DeleteRace _value, $Res Function(_$_DeleteRace) _then)
+      : super(_value, (v) => _then(v as _$_DeleteRace));
+
+  @override
+  _$_DeleteRace get _value => super._value as _$_DeleteRace;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_$_DeleteRace(
+      id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteRace implements _DeleteRace {
+  const _$_DeleteRace(this.id);
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.deleteRace(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteRace &&
+            const DeepCollectionEquality().equals(other.id, id));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_DeleteRaceCopyWith<_$_DeleteRace> get copyWith =>
+      __$$_DeleteRaceCopyWithImpl<_$_DeleteRace>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function() emitState,
+    required TResult Function(Race race) addRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
+  }) {
+    return deleteRace(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function()? emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
+  }) {
+    return deleteRace?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function()? emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
+    required TResult orElse(),
+  }) {
+    if (deleteRace != null) {
+      return deleteRace(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
+  }) {
+    return deleteRace(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
+  }) {
+    return deleteRace?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
+    required TResult orElse(),
+  }) {
+    if (deleteRace != null) {
+      return deleteRace(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteRace implements DatabaseEvent {
+  const factory _DeleteRace(final int id) = _$_DeleteRace;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$_DeleteRaceCopyWith<_$_DeleteRace> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AddStageCopyWith<$Res> {
+  factory _$$_AddStageCopyWith(
+          _$_AddStage value, $Res Function(_$_AddStage) then) =
+      __$$_AddStageCopyWithImpl<$Res>;
+  $Res call({Stage stage});
+}
+
+/// @nodoc
+class __$$_AddStageCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
+    implements _$$_AddStageCopyWith<$Res> {
+  __$$_AddStageCopyWithImpl(
+      _$_AddStage _value, $Res Function(_$_AddStage) _then)
+      : super(_value, (v) => _then(v as _$_AddStage));
+
+  @override
+  _$_AddStage get _value => super._value as _$_AddStage;
+
+  @override
+  $Res call({
+    Object? stage = freezed,
+  }) {
+    return _then(_$_AddStage(
+      stage == freezed
+          ? _value.stage
+          : stage // ignore: cast_nullable_to_non_nullable
+              as Stage,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AddStage implements _AddStage {
+  const _$_AddStage(this.stage);
+
+  @override
+  final Stage stage;
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.addStage(stage: $stage)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AddStage &&
+            const DeepCollectionEquality().equals(other.stage, stage));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(stage));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_AddStageCopyWith<_$_AddStage> get copyWith =>
+      __$$_AddStageCopyWithImpl<_$_AddStage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function() emitState,
+    required TResult Function(Race race) addRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
+  }) {
+    return addStage(stage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function()? emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
+  }) {
+    return addStage?.call(stage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function()? emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
+    required TResult orElse(),
+  }) {
+    if (addStage != null) {
+      return addStage(stage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
+  }) {
+    return addStage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
+  }) {
+    return addStage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
+    required TResult orElse(),
+  }) {
+    if (addStage != null) {
+      return addStage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddStage implements DatabaseEvent {
+  const factory _AddStage(final Stage stage) = _$_AddStage;
+
+  Stage get stage;
+  @JsonKey(ignore: true)
+  _$$_AddStageCopyWith<_$_AddStage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -552,10 +927,12 @@ class _$_SelectStages implements _SelectStages {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() onChanged,
+    required TResult Function() emitState,
     required TResult Function(Race race) addRace,
-    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
   }) {
     return selectStages(raceId);
   }
@@ -564,10 +941,12 @@ class _$_SelectStages implements _SelectStages {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
   }) {
     return selectStages?.call(raceId);
   }
@@ -576,10 +955,12 @@ class _$_SelectStages implements _SelectStages {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
     required TResult orElse(),
   }) {
     if (selectStages != null) {
@@ -592,10 +973,12 @@ class _$_SelectStages implements _SelectStages {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_OnChanged value) onChanged,
+    required TResult Function(_EmitState value) emitState,
     required TResult Function(_AddRace value) addRace,
-    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
   }) {
     return selectStages(this);
   }
@@ -604,10 +987,12 @@ class _$_SelectStages implements _SelectStages {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
   }) {
     return selectStages?.call(this);
   }
@@ -616,10 +1001,12 @@ class _$_SelectStages implements _SelectStages {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
     required TResult orElse(),
   }) {
     if (selectStages != null) {
@@ -639,102 +1026,109 @@ abstract class _SelectStages implements DatabaseEvent {
 }
 
 /// @nodoc
-abstract class _$$_AddStageCopyWith<$Res> {
-  factory _$$_AddStageCopyWith(
-          _$_AddStage value, $Res Function(_$_AddStage) then) =
-      __$$_AddStageCopyWithImpl<$Res>;
-  $Res call({Stage stage});
+abstract class _$$_DeleteStageCopyWith<$Res> {
+  factory _$$_DeleteStageCopyWith(
+          _$_DeleteStage value, $Res Function(_$_DeleteStage) then) =
+      __$$_DeleteStageCopyWithImpl<$Res>;
+  $Res call({int id});
 }
 
 /// @nodoc
-class __$$_AddStageCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_AddStageCopyWith<$Res> {
-  __$$_AddStageCopyWithImpl(
-      _$_AddStage _value, $Res Function(_$_AddStage) _then)
-      : super(_value, (v) => _then(v as _$_AddStage));
+class __$$_DeleteStageCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res>
+    implements _$$_DeleteStageCopyWith<$Res> {
+  __$$_DeleteStageCopyWithImpl(
+      _$_DeleteStage _value, $Res Function(_$_DeleteStage) _then)
+      : super(_value, (v) => _then(v as _$_DeleteStage));
 
   @override
-  _$_AddStage get _value => super._value as _$_AddStage;
+  _$_DeleteStage get _value => super._value as _$_DeleteStage;
 
   @override
   $Res call({
-    Object? stage = freezed,
+    Object? id = freezed,
   }) {
-    return _then(_$_AddStage(
-      stage == freezed
-          ? _value.stage
-          : stage // ignore: cast_nullable_to_non_nullable
-              as Stage,
+    return _then(_$_DeleteStage(
+      id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AddStage implements _AddStage {
-  const _$_AddStage(this.stage);
+class _$_DeleteStage implements _DeleteStage {
+  const _$_DeleteStage(this.id);
 
   @override
-  final Stage stage;
+  final int id;
 
   @override
   String toString() {
-    return 'DatabaseEvent.addStage(stage: $stage)';
+    return 'DatabaseEvent.deleteStage(id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddStage &&
-            const DeepCollectionEquality().equals(other.stage, stage));
+            other is _$_DeleteStage &&
+            const DeepCollectionEquality().equals(other.id, id));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(stage));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
 
   @JsonKey(ignore: true)
   @override
-  _$$_AddStageCopyWith<_$_AddStage> get copyWith =>
-      __$$_AddStageCopyWithImpl<_$_AddStage>(this, _$identity);
+  _$$_DeleteStageCopyWith<_$_DeleteStage> get copyWith =>
+      __$$_DeleteStageCopyWithImpl<_$_DeleteStage>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() onChanged,
+    required TResult Function() emitState,
     required TResult Function(Race race) addRace,
-    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteRace,
     required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
   }) {
-    return addStage(stage);
+    return deleteStage(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
   }) {
-    return addStage?.call(stage);
+    return deleteStage?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? onChanged,
+    TResult Function()? emitState,
     TResult Function(Race race)? addRace,
-    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteRace,
     TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
     required TResult orElse(),
   }) {
-    if (addStage != null) {
-      return addStage(stage);
+    if (deleteStage != null) {
+      return deleteStage(id);
     }
     return orElse();
   }
@@ -743,49 +1137,55 @@ class _$_AddStage implements _AddStage {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_OnChanged value) onChanged,
+    required TResult Function(_EmitState value) emitState,
     required TResult Function(_AddRace value) addRace,
-    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
   }) {
-    return addStage(this);
+    return deleteStage(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
   }) {
-    return addStage?.call(this);
+    return deleteStage?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_OnChanged value)? onChanged,
+    TResult Function(_EmitState value)? emitState,
     TResult Function(_AddRace value)? addRace,
-    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
     required TResult orElse(),
   }) {
-    if (addStage != null) {
-      return addStage(this);
+    if (deleteStage != null) {
+      return deleteStage(this);
     }
     return orElse();
   }
 }
 
-abstract class _AddStage implements DatabaseEvent {
-  const factory _AddStage(final Stage stage) = _$_AddStage;
+abstract class _DeleteStage implements DatabaseEvent {
+  const factory _DeleteStage(final int id) = _$_DeleteStage;
 
-  Stage get stage;
+  int get id;
   @JsonKey(ignore: true)
-  _$$_AddStageCopyWith<_$_AddStage> get copyWith =>
+  _$$_DeleteStageCopyWith<_$_DeleteStage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

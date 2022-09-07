@@ -12,7 +12,13 @@ class Race extends DataClass implements Insertable<Race> {
   final String name;
   final String? startDate;
   final String? finishDate;
-  Race({this.id, required this.name, this.startDate, this.finishDate});
+  final bool isDeleted;
+  Race(
+      {this.id,
+      required this.name,
+      this.startDate,
+      this.finishDate,
+      required this.isDeleted});
   factory Race.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Race(
@@ -23,6 +29,8 @@ class Race extends DataClass implements Insertable<Race> {
           .mapFromDatabaseResponse(data['${effectivePrefix}start_date']),
       finishDate: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}finish_date']),
+      isDeleted: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_deleted'])!,
     );
   }
   @override
@@ -38,6 +46,7 @@ class Race extends DataClass implements Insertable<Race> {
     if (!nullToAbsent || finishDate != null) {
       map['finish_date'] = Variable<String?>(finishDate);
     }
+    map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
   }
 
@@ -51,6 +60,7 @@ class Race extends DataClass implements Insertable<Race> {
       finishDate: finishDate == null && nullToAbsent
           ? const Value.absent()
           : Value(finishDate),
+      isDeleted: Value(isDeleted),
     );
   }
 
@@ -62,6 +72,7 @@ class Race extends DataClass implements Insertable<Race> {
       name: serializer.fromJson<String>(json['name']),
       startDate: serializer.fromJson<String?>(json['start_date']),
       finishDate: serializer.fromJson<String?>(json['finish_date']),
+      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
     );
   }
   @override
@@ -72,16 +83,22 @@ class Race extends DataClass implements Insertable<Race> {
       'name': serializer.toJson<String>(name),
       'start_date': serializer.toJson<String?>(startDate),
       'finish_date': serializer.toJson<String?>(finishDate),
+      'is_deleted': serializer.toJson<bool>(isDeleted),
     };
   }
 
   Race copyWith(
-          {int? id, String? name, String? startDate, String? finishDate}) =>
+          {int? id,
+          String? name,
+          String? startDate,
+          String? finishDate,
+          bool? isDeleted}) =>
       Race(
         id: id ?? this.id,
         name: name ?? this.name,
         startDate: startDate ?? this.startDate,
         finishDate: finishDate ?? this.finishDate,
+        isDeleted: isDeleted ?? this.isDeleted,
       );
   @override
   String toString() {
@@ -89,13 +106,14 @@ class Race extends DataClass implements Insertable<Race> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('startDate: $startDate, ')
-          ..write('finishDate: $finishDate')
+          ..write('finishDate: $finishDate, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, name, startDate, finishDate);
+  int get hashCode => Object.hash(id, name, startDate, finishDate, isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -103,7 +121,8 @@ class Race extends DataClass implements Insertable<Race> {
           other.id == this.id &&
           other.name == this.name &&
           other.startDate == this.startDate &&
-          other.finishDate == this.finishDate);
+          other.finishDate == this.finishDate &&
+          other.isDeleted == this.isDeleted);
 }
 
 class RacesCompanion extends UpdateCompanion<Race> {
@@ -111,29 +130,34 @@ class RacesCompanion extends UpdateCompanion<Race> {
   final Value<String> name;
   final Value<String?> startDate;
   final Value<String?> finishDate;
+  final Value<bool> isDeleted;
   const RacesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.startDate = const Value.absent(),
     this.finishDate = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   });
   RacesCompanion.insert({
     this.id = const Value.absent(),
     required String name,
     this.startDate = const Value.absent(),
     this.finishDate = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Race> custom({
     Expression<int?>? id,
     Expression<String>? name,
     Expression<String?>? startDate,
     Expression<String?>? finishDate,
+    Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (startDate != null) 'start_date': startDate,
       if (finishDate != null) 'finish_date': finishDate,
+      if (isDeleted != null) 'is_deleted': isDeleted,
     });
   }
 
@@ -141,12 +165,14 @@ class RacesCompanion extends UpdateCompanion<Race> {
       {Value<int?>? id,
       Value<String>? name,
       Value<String?>? startDate,
-      Value<String?>? finishDate}) {
+      Value<String?>? finishDate,
+      Value<bool>? isDeleted}) {
     return RacesCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       startDate: startDate ?? this.startDate,
       finishDate: finishDate ?? this.finishDate,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 
@@ -165,6 +191,9 @@ class RacesCompanion extends UpdateCompanion<Race> {
     if (finishDate.present) {
       map['finish_date'] = Variable<String?>(finishDate.value);
     }
+    if (isDeleted.present) {
+      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    }
     return map;
   }
 
@@ -174,7 +203,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('startDate: $startDate, ')
-          ..write('finishDate: $finishDate')
+          ..write('finishDate: $finishDate, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
@@ -209,8 +239,16 @@ class Races extends Table with TableInfo<Races, Race> {
       type: const StringType(),
       requiredDuringInsert: false,
       $customConstraints: '');
+  final VerificationMeta _isDeletedMeta = const VerificationMeta('isDeleted');
+  late final GeneratedColumn<bool?> isDeleted = GeneratedColumn<bool?>(
+      'is_deleted', aliasedName, false,
+      type: const BoolType(),
+      requiredDuringInsert: false,
+      $customConstraints: 'NOT NULL DEFAULT false',
+      defaultValue: const CustomExpression<bool>('false'));
   @override
-  List<GeneratedColumn> get $columns => [id, name, startDate, finishDate];
+  List<GeneratedColumn> get $columns =>
+      [id, name, startDate, finishDate, isDeleted];
   @override
   String get aliasedName => _alias ?? 'races';
   @override
@@ -238,6 +276,10 @@ class Races extends Table with TableInfo<Races, Race> {
           _finishDateMeta,
           finishDate.isAcceptableOrUnknown(
               data['finish_date']!, _finishDateMeta));
+    }
+    if (data.containsKey('is_deleted')) {
+      context.handle(_isDeletedMeta,
+          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
     }
     return context;
   }
@@ -633,12 +675,14 @@ class Stage extends DataClass implements Insertable<Stage> {
   final int raceId;
   final String name;
   final bool isActive;
+  final bool isDeleted;
   Stage(
       {this.id,
       this.trailId,
       required this.raceId,
       required this.name,
-      required this.isActive});
+      required this.isActive,
+      required this.isDeleted});
   factory Stage.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return Stage(
@@ -651,6 +695,8 @@ class Stage extends DataClass implements Insertable<Stage> {
           .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       isActive: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_active'])!,
+      isDeleted: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_deleted'])!,
     );
   }
   @override
@@ -665,6 +711,7 @@ class Stage extends DataClass implements Insertable<Stage> {
     map['race_id'] = Variable<int>(raceId);
     map['name'] = Variable<String>(name);
     map['is_active'] = Variable<bool>(isActive);
+    map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
   }
 
@@ -677,6 +724,7 @@ class Stage extends DataClass implements Insertable<Stage> {
       raceId: Value(raceId),
       name: Value(name),
       isActive: Value(isActive),
+      isDeleted: Value(isDeleted),
     );
   }
 
@@ -689,6 +737,7 @@ class Stage extends DataClass implements Insertable<Stage> {
       raceId: serializer.fromJson<int>(json['race_id']),
       name: serializer.fromJson<String>(json['name']),
       isActive: serializer.fromJson<bool>(json['is_active']),
+      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
     );
   }
   @override
@@ -700,17 +749,24 @@ class Stage extends DataClass implements Insertable<Stage> {
       'race_id': serializer.toJson<int>(raceId),
       'name': serializer.toJson<String>(name),
       'is_active': serializer.toJson<bool>(isActive),
+      'is_deleted': serializer.toJson<bool>(isDeleted),
     };
   }
 
   Stage copyWith(
-          {int? id, int? trailId, int? raceId, String? name, bool? isActive}) =>
+          {int? id,
+          int? trailId,
+          int? raceId,
+          String? name,
+          bool? isActive,
+          bool? isDeleted}) =>
       Stage(
         id: id ?? this.id,
         trailId: trailId ?? this.trailId,
         raceId: raceId ?? this.raceId,
         name: name ?? this.name,
         isActive: isActive ?? this.isActive,
+        isDeleted: isDeleted ?? this.isDeleted,
       );
   @override
   String toString() {
@@ -719,13 +775,15 @@ class Stage extends DataClass implements Insertable<Stage> {
           ..write('trailId: $trailId, ')
           ..write('raceId: $raceId, ')
           ..write('name: $name, ')
-          ..write('isActive: $isActive')
+          ..write('isActive: $isActive, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, trailId, raceId, name, isActive);
+  int get hashCode =>
+      Object.hash(id, trailId, raceId, name, isActive, isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -734,7 +792,8 @@ class Stage extends DataClass implements Insertable<Stage> {
           other.trailId == this.trailId &&
           other.raceId == this.raceId &&
           other.name == this.name &&
-          other.isActive == this.isActive);
+          other.isActive == this.isActive &&
+          other.isDeleted == this.isDeleted);
 }
 
 class StagesCompanion extends UpdateCompanion<Stage> {
@@ -743,12 +802,14 @@ class StagesCompanion extends UpdateCompanion<Stage> {
   final Value<int> raceId;
   final Value<String> name;
   final Value<bool> isActive;
+  final Value<bool> isDeleted;
   const StagesCompanion({
     this.id = const Value.absent(),
     this.trailId = const Value.absent(),
     this.raceId = const Value.absent(),
     this.name = const Value.absent(),
     this.isActive = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   });
   StagesCompanion.insert({
     this.id = const Value.absent(),
@@ -756,6 +817,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     required int raceId,
     required String name,
     this.isActive = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   })  : raceId = Value(raceId),
         name = Value(name);
   static Insertable<Stage> custom({
@@ -764,6 +826,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     Expression<int>? raceId,
     Expression<String>? name,
     Expression<bool>? isActive,
+    Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -771,6 +834,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
       if (raceId != null) 'race_id': raceId,
       if (name != null) 'name': name,
       if (isActive != null) 'is_active': isActive,
+      if (isDeleted != null) 'is_deleted': isDeleted,
     });
   }
 
@@ -779,13 +843,15 @@ class StagesCompanion extends UpdateCompanion<Stage> {
       Value<int?>? trailId,
       Value<int>? raceId,
       Value<String>? name,
-      Value<bool>? isActive}) {
+      Value<bool>? isActive,
+      Value<bool>? isDeleted}) {
     return StagesCompanion(
       id: id ?? this.id,
       trailId: trailId ?? this.trailId,
       raceId: raceId ?? this.raceId,
       name: name ?? this.name,
       isActive: isActive ?? this.isActive,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 
@@ -807,6 +873,9 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     if (isActive.present) {
       map['is_active'] = Variable<bool>(isActive.value);
     }
+    if (isDeleted.present) {
+      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    }
     return map;
   }
 
@@ -817,7 +886,8 @@ class StagesCompanion extends UpdateCompanion<Stage> {
           ..write('trailId: $trailId, ')
           ..write('raceId: $raceId, ')
           ..write('name: $name, ')
-          ..write('isActive: $isActive')
+          ..write('isActive: $isActive, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
@@ -859,8 +929,16 @@ class Stages extends Table with TableInfo<Stages, Stage> {
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT true',
       defaultValue: const CustomExpression<bool>('true'));
+  final VerificationMeta _isDeletedMeta = const VerificationMeta('isDeleted');
+  late final GeneratedColumn<bool?> isDeleted = GeneratedColumn<bool?>(
+      'is_deleted', aliasedName, false,
+      type: const BoolType(),
+      requiredDuringInsert: false,
+      $customConstraints: 'NOT NULL DEFAULT false',
+      defaultValue: const CustomExpression<bool>('false'));
   @override
-  List<GeneratedColumn> get $columns => [id, trailId, raceId, name, isActive];
+  List<GeneratedColumn> get $columns =>
+      [id, trailId, raceId, name, isActive, isDeleted];
   @override
   String get aliasedName => _alias ?? 'stages';
   @override
@@ -892,6 +970,10 @@ class Stages extends Table with TableInfo<Stages, Stage> {
     if (data.containsKey('is_active')) {
       context.handle(_isActiveMeta,
           isActive.isAcceptableOrUnknown(data['is_active']!, _isActiveMeta));
+    }
+    if (data.containsKey('is_deleted')) {
+      context.handle(_isDeletedMeta,
+          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
     }
     return context;
   }
@@ -2795,6 +2877,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Participants participants = Participants(this);
   late final Starts starts = Starts(this);
   late final Finishes finishes = Finishes(this);
+  Selectable<Race> selectRaces() {
+    return customSelect('SELECT * FROM races WHERE is_deleted = false',
+        variables: [],
+        readsFrom: {
+          races,
+        }).map(races.mapFromRow);
+  }
+
   Future<int> addRace(
       {required String name, String? startDate, String? finishDate}) {
     return customInsert(
@@ -2808,31 +2898,46 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Future<int> addStage(
-      {int? trailId,
-      required int raceId,
-      required String name,
-      required bool isActive}) {
-    return customInsert(
-      'INSERT INTO stages (trail_id, race_id, name, is_active) VALUES (:trail_id, :race_id, :name, :is_active)',
-      variables: [
-        Variable<int?>(trailId),
-        Variable<int>(raceId),
-        Variable<String>(name),
-        Variable<bool>(isActive)
-      ],
-      updates: {stages},
+  Future<int> deleteRace({int? id}) {
+    return customUpdate(
+      'UPDATE races SET is_deleted = true WHERE id = :id',
+      variables: [Variable<int?>(id)],
+      updates: {races},
+      updateKind: UpdateKind.update,
     );
   }
 
   Selectable<Stage> selectStages({required int raceId}) {
-    return customSelect('SELECT * FROM stages WHERE race_id = :race_id',
+    return customSelect(
+        'SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false',
         variables: [
           Variable<int>(raceId)
         ],
         readsFrom: {
           stages,
         }).map(stages.mapFromRow);
+  }
+
+  Future<int> addStage(
+      {int? trailId, required int raceId, required String name}) {
+    return customInsert(
+      'INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name)',
+      variables: [
+        Variable<int?>(trailId),
+        Variable<int>(raceId),
+        Variable<String>(name)
+      ],
+      updates: {stages},
+    );
+  }
+
+  Future<int> deleteStage({int? id}) {
+    return customUpdate(
+      'UPDATE stages SET is_deleted = true WHERE id = :id',
+      variables: [Variable<int?>(id)],
+      updates: {stages},
+      updateKind: UpdateKind.update,
+    );
   }
 
   @override

@@ -2,7 +2,9 @@ CREATE TABLE races (
 	id integer PRIMARY KEY AUTOINCREMENT,
 	name text NOT NULL,
 	start_date text,
-	finish_date text
+	finish_date text,
+	location text,
+	is_deleted BOOLEAN NOT NULL DEFAULT false
 ) AS Race;
 
 CREATE TABLE stages (
@@ -11,6 +13,7 @@ CREATE TABLE stages (
 	race_id integer NOT NULL,
 	name text NOT NULL,
 	is_active BOOLEAN NOT NULL DEFAULT true,
+	is_deleted BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (trail_id) REFERENCES trails(id),
     FOREIGN KEY (race_id) REFERENCES races(id)
 );
@@ -80,6 +83,11 @@ CREATE TABLE trails (
 	comment text
 );
 
+selectRaces: SELECT * FROM races WHERE is_deleted = false;
 addRace: INSERT INTO races (name, start_date, finish_date) VALUES (:name, :start_date, :finish_date);
-addStage: INSERT INTO stages (trail_id, race_id, name, is_active) VALUES (:trail_id, :race_id, :name, :is_active);
-selectStages: SELECT * FROM stages WHERE race_id = :race_id;
+deleteRace: UPDATE races SET is_deleted = true WHERE id = :id;
+selectStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false;
+addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
+deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
+
+

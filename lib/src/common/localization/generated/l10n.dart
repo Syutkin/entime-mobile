@@ -51,6 +51,16 @@ class GeneratedLocalization {
         context, GeneratedLocalization);
   }
 
+  /// `Удалить`
+  String get I18nCore_delete {
+    return Intl.message(
+      'Удалить',
+      name: 'I18nCore_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Что нового`
   String get I18nUpdate_whatsNew {
     return Intl.message(
@@ -1713,6 +1723,46 @@ class GeneratedLocalization {
     return Intl.message(
       'Даты проведения',
       name: 'I18nDatabase_raceDates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Создать спецучасток`
+  String get I18nDatabase_addStage {
+    return Intl.message(
+      'Создать спецучасток',
+      name: 'I18nDatabase_addStage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Название спецучастка`
+  String get I18nDatabase_stageName {
+    return Intl.message(
+      'Название спецучастка',
+      name: 'I18nDatabase_stageName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите название спецучастка`
+  String get I18nDatabase_enterStageName {
+    return Intl.message(
+      'Введите название спецучастка',
+      name: 'I18nDatabase_enterStageName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Трейл`
+  String get I18nDatabase_trail {
+    return Intl.message(
+      'Трейл',
+      name: 'I18nDatabase_trail',
       desc: '',
       args: [],
     );

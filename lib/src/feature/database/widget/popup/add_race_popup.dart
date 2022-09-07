@@ -1,11 +1,6 @@
 part of '../races_list_page.dart';
 
 Future<void> addRacePopup(BuildContext context) async {
-  // final now = DateTime.now();
-  // final duration = Duration(hours: now.hour, minutes: now.minute) +
-  //     const Duration(minutes: 1);
-  // var time = duration < const Duration(days: 1) ? duration : Duration.zero;
-  // int number = 0;
   String raceName = '';
   final dateController = TextEditingController();
   DateTime? startDate;
@@ -15,8 +10,6 @@ Future<void> addRacePopup(BuildContext context) async {
   return showDialog<void>(
     context: context,
     builder: (context) => ExpandedAlertDialog(
-      // width: MediaQuery.of(context).size.width * 0.9,
-      // scrollable: true,
       title: Text(Localization.current.I18nDatabase_addRace),
       content: Form(
         key: formKey,
@@ -27,10 +20,9 @@ Future<void> addRacePopup(BuildContext context) async {
           }
         },
         child: Column(
-          // mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             TextFormField(
-              // keyboardType: TextInputType.number,
               autofocus: true,
               decoration: InputDecoration(
                 labelText: Localization.current.I18nDatabase_raceName,
@@ -48,6 +40,7 @@ Future<void> addRacePopup(BuildContext context) async {
                 labelText: Localization.current.I18nDatabase_raceDates,
               ),
               controller: dateController,
+              keyboardType: TextInputType.none,
               onTap: () async {
                 final range = await showDateRangePicker(
                   context: context,
@@ -83,6 +76,7 @@ Future<void> addRacePopup(BuildContext context) async {
                         name: raceName,
                         startDate: startDate?.toIso8601String(),
                         finishDate: finishDate?.toIso8601String(),
+                        isDeleted: false,
                       ),
                     ),
                   );

@@ -28,14 +28,15 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   DatabaseBloc({required AppDatabase database})
       : _db = database,
         super(const _Initial()) {
-    _db.select(_db.races).watch().listen((event) async {
+    _db.selectRaces().watch().listen((event) async {
       _races = event;
-      add(const DatabaseEvent.onChanged());
+      add(const DatabaseEvent.emitState());
     });
 
-    _db.select(_db.stages).watch().listen((event) async {
+    _db.selectStages(raceId: _raceId).watch().listen((event) async {
+      //! watch here generates empty event list
       _stages = await _db.selectStages(raceId: _raceId).get();
-      add(const DatabaseEvent.onChanged());
+      add(const DatabaseEvent.emitState());
     });
 
     // _db.select(_db.riders).watch().listen((event) async {
@@ -53,14 +54,14 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         .watch()
         .listen((event) async {
       _participants = event;
-      add(const DatabaseEvent.onChanged());
+      add(const DatabaseEvent.emitState());
     });
 
     (_db.select(_db.starts)..where((start) => start.stageId.equals(_stagesId)))
         .watch()
         .listen((event) async {
       _starts = event;
-      add(const DatabaseEvent.onChanged());
+      add(const DatabaseEvent.emitState());
     });
 
     (_db.select(_db.finishes)
@@ -68,7 +69,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         .watch()
         .listen((event) async {
       _finishes = event;
-      add(const DatabaseEvent.onChanged());
+      add(const DatabaseEvent.emitState());
     });
 
     // _db.select(_db.trails).watch().listen((event) async {
@@ -100,7 +101,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             ),
           );
         },
-        onChanged: () {
+        emitState: () {
           emit(
             DatabaseState.initialized(
               races: _races,
@@ -123,17 +124,23 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         },
         selectStages: (raceId) async {
           _raceId = raceId;
-          _stages = await (_db.select(_db.stages)
-                ..where((stage) => stage.raceId.equals(_raceId)))
-              .get();
-          add(const DatabaseEvent.onChanged());
+          _stages = await _db.selectStages(raceId: _raceId).get();
+          // _stages = await (_db.select(_db.stages)
+          //       ..where((stage) => stage.raceId.equals(_raceId)))
+          //     .get();
+          add(const DatabaseEvent.emitState());
         },
         addStage: (stage) async {
           await _db.addStage(
             raceId: stage.raceId,
             name: stage.name,
-            isActive: stage.isActive,
           );
+        },
+        deleteRace: (id) async {
+          await _db.deleteRace(id: id);
+        },
+        deleteStage: (id) async {
+          await _db.deleteStage(id: id);
         },
       );
     });

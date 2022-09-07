@@ -47,10 +47,24 @@ class RacesListPage extends StatelessWidget {
                         .add(DatabaseEvent.selectStages(race.id!));
                     Navigator.of(context).push(
                       MaterialPageRoute<void>(
-                        builder: (context) => StagesListPage(raceId: race.id!),
+                        builder: (context) => StagesListPage(race: race),
                       ),
                     );
                   },
+                  trailing: PopupMenuButton<void>(
+                    icon: const Icon(Icons.more_vert),
+                    itemBuilder: (context) => <PopupMenuEntry<void>>[
+                      PopupMenuItem<void>(
+                        onTap: () => context
+                            .read<DatabaseBloc>()
+                            .add(DatabaseEvent.deleteRace(race.id!)),
+                        child: ListTile(
+                          leading: const Icon(Icons.delete),
+                          title: Text(Localization.current.I18nCore_delete),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
             );

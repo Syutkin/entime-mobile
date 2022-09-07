@@ -2,6 +2,13 @@
 
 import 'package:intl/intl.dart';
 
+class I18nCore {
+  static String get delete => Intl.message(
+        'Удалить',
+        name: 'I18nCore_delete',
+      );
+}
+
 class I18nUpdate {
   static String get whatsNew => Intl.message(
         'Что нового',
@@ -974,5 +981,25 @@ class I18nDatabase {
   static String get raceDates => Intl.message(
         'Даты проведения',
         name: 'I18nDatabase_raceDates',
+      );
+
+  static String get addStage => Intl.message(
+        'Создать спецучасток',
+        name: 'I18nDatabase_addStage',
+      );
+
+  static String get stageName => Intl.message(
+        'Название спецучастка',
+        name: 'I18nDatabase_stageName',
+      );
+
+  static String get enterStageName => Intl.message(
+        'Введите название спецучастка',
+        name: 'I18nDatabase_enterStageName',
+      );
+
+  static String get trail => Intl.message(
+        'Трейл',
+        name: 'I18nDatabase_trail',
       );
 }
