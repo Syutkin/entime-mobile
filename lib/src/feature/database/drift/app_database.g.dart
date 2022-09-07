@@ -3024,7 +3024,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<CheckNewStartingParticipantResult> checkNewStartingParticipant(
       {required int stageId, required String startTime, required int number}) {
     return customSelect(
-        'SELECT *\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n  AND stage_id = :stage_id\r\n  AND (start_time IS :start_time\r\n  OR (number IS :number\r\n  AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
+        'SELECT *\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n  AND stage_id = :stage_id\r\n  AND (start_time IS :start_time\r\n    OR (number IS :number\r\n      AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
         variables: [
           Variable<int>(stageId),
           Variable<String>(startTime),

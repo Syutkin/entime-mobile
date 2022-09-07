@@ -16,15 +16,6 @@ import 'start_item_tile.dart';
 
 part 'popup/add_racer_popup.dart';
 
-// import '../../../../common/widget/sliver_sub_header_delegate.dart';
-// import '../../../bluetooth/bluetooth.dart';
-// import '../../../countdown/countdown.dart';
-// import '../../../init/widget/select_file_screen.dart';
-// import '../../../protocol/protocol.dart';
-// import '../../../settings/bloc/settings_bloc.dart';
-// import 'edit_start_time_popup.dart';
-// import 'start_item_tile.dart';
-
 class StartListPage extends StatefulWidget {
   final Stage stage;
 
@@ -38,18 +29,8 @@ class StartListPage extends StatefulWidget {
 }
 
 class _StartListPage extends State<StartListPage> {
-  // StreamSubscription? _voiceStream;
-  // StreamSubscription? _countdownStream;
-
   final GlobalKey _stackKey = GlobalKey();
   final GlobalKey _countdownKey = GlobalKey();
-
-  // @override
-  // void dispose() {
-  // _voiceStream?.cancel();
-  // _countdownStream?.cancel();
-  // super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -90,6 +71,13 @@ class _StartListPage extends State<StartListPage> {
         body: BlocBuilder<DatabaseBloc, DatabaseState>(
           builder: (context, state) => state.map(
             initial: (state) => const SizedBox.shrink(),
+            //   return Column(
+            //     children: [
+            //       CreateOrSelectProtocolWidget(
+            //         onTap: () => routeToSelectFileScreen(context),
+            //       ),
+            //     ],
+            //   );
             initialized: (state) => Stack(
               key: _stackKey,
               children: [
@@ -98,27 +86,7 @@ class _StartListPage extends State<StartListPage> {
               ],
             ),
           ),
-
-          // if (protocolState is ProtocolSelectedState) {
-
-          //   return Stack(
-          //     key: _stackKey,
-          //     children: [
-          //       _startList(protocolState.startProtocol),
-          //       _showCountdown(),
-          //     ],
-          //   );
-          // } else {
-          //   return Column(
-          //     children: [
-          //       CreateOrSelectProtocolWidget(
-          //         onTap: () => routeToSelectFileScreen(context),
-          //       ),
-          //     ],
-          //   );
-          // }
         ),
-        // ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (
@@ -387,32 +355,36 @@ class _SliverStartSubHeader extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(
-            children: const <Widget>[
+            children: <Widget>[
               Flexible(
                 flex: 20,
                 child: Align(
-                  child: Text('№'),
+                  child: Text(Localization.current.I18nStart_sliverNumber),
                 ),
               ),
               Flexible(
                 flex: 30,
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('Старт'),
+                  child: Text(Localization.current.I18nStart_sliverStart),
                 ),
               ),
               Flexible(
                 flex: 25,
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('Ручная\r\nпоправка'),
+                  child: Text(
+                    Localization.current.I18nStart_sliverManualCorrection,
+                  ),
                 ),
               ),
               Flexible(
                 flex: 25,
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('Авто\r\nпоправка'),
+                  child: Text(
+                    Localization.current.I18nStart_sliverAutomaticCorrection,
+                  ),
                 ),
               ),
             ],

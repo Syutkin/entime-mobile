@@ -684,6 +684,23 @@ class I18nStart {
         'Добавить участника',
         name: 'I18nStart_addParticipant',
       );
+
+  static String get sliverNumber => Intl.message(
+        '№',
+        name: 'I18nStart_sliverNumber',
+      );
+  static String get sliverStart => Intl.message(
+        'Старт',
+        name: 'I18nStart_sliverStart',
+      );
+  static String get sliverManualCorrection => Intl.message(
+        'Ручная\r\nпоправка',
+        name: 'I18nStart_sliverManualCorrection',
+      );
+  static String get sliverAutomaticCorrection => Intl.message(
+        'Авто\r\nпоправка',
+        name: 'I18nStart_sliverAutomaticCorrection',
+      );
 }
 
 class I18nFinish {}

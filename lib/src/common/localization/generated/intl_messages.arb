@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-09-07T12:34:57.418576",
+  "@@last_modified": "2022-09-07T22:06:17.685070",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -729,6 +729,30 @@
   },
   "I18nStart_addParticipant": "Добавить участника",
   "@I18nStart_addParticipant": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nStart_sliverNumber": "№",
+  "@I18nStart_sliverNumber": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nStart_sliverStart": "Старт",
+  "@I18nStart_sliverStart": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nStart_sliverManualCorrection": "Ручная\r\nпоправка",
+  "@I18nStart_sliverManualCorrection": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nStart_sliverAutomaticCorrection": "Авто\r\nпоправка",
+  "@I18nStart_sliverAutomaticCorrection": {
     "type": "text",
     "placeholders_order": [],
     "placeholders": {}

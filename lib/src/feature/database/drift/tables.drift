@@ -110,5 +110,5 @@ FROM starts, participants
 WHERE starts.participant_id = participants.id
   AND stage_id = :stage_id
   AND (start_time IS :start_time
-  OR (number IS :number
-  AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));
+    OR (number IS :number
+      AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));

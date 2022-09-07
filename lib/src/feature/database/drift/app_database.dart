@@ -18,7 +18,6 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
-//ToDo: одинаковые времена не ставит, а время номера обновляет без вопросов
   Future<List<CheckNewStartingParticipantResult>?> addStartNumber({
     required Stage stage,
     required int number,
@@ -91,17 +90,6 @@ class AppDatabase extends _$AppDatabase {
       );
     }
 
-// lastInsertId();
-    // await db.insert(
-    //   'start',
-    //   {'number': number, 'starttime': time},
-    //   conflictAlgorithm: ConflictAlgorithm.replace,
-    // );
-    // await db.insert(
-    //   'main',
-    //   {'number': number},
-    //   conflictAlgorithm: ConflictAlgorithm.ignore,
-    // );
     return null;
   }
 }

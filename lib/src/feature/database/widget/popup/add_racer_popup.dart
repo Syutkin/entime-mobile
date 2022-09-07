@@ -1,7 +1,9 @@
 part of '../start_list_page.dart';
 
-Future<void> addRacerPopup(
-    {required BuildContext context, required Stage stage,}) async {
+Future<void> addRacerPopup({
+  required BuildContext context,
+  required Stage stage,
+}) async {
   final now = DateTime.now();
   final duration = Duration(hours: now.hour, minutes: now.minute) +
       const Duration(minutes: 1);
@@ -74,13 +76,13 @@ Future<void> addRacerPopup(
               // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
               final String startTime =
                   time.toString().split('.').first.padLeft(8, '0');
-              context.read<DatabaseBloc>().add(DatabaseEvent.addStartNumber(
-                  stage: stage, number: number, startTime: startTime,),);
-              // BlocProvider.of<ProtocolBloc>(context).add(
-              //   ProtocolAddStartNumber(
-              //     startTime: StartTime(starttime, number),
-              //   ),
-              // );
+              context.read<DatabaseBloc>().add(
+                    DatabaseEvent.addStartNumber(
+                      stage: stage,
+                      number: number,
+                      startTime: startTime,
+                    ),
+                  );
               Navigator.of(context).pop();
             }
           },

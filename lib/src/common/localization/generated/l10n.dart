@@ -1165,6 +1165,46 @@ class GeneratedLocalization {
     );
   }
 
+  /// `№`
+  String get I18nStart_sliverNumber {
+    return Intl.message(
+      '№',
+      name: 'I18nStart_sliverNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Старт`
+  String get I18nStart_sliverStart {
+    return Intl.message(
+      'Старт',
+      name: 'I18nStart_sliverStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ручная\r\nпоправка`
+  String get I18nStart_sliverManualCorrection {
+    return Intl.message(
+      'Ручная\r\nпоправка',
+      name: 'I18nStart_sliverManualCorrection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Авто\r\nпоправка`
+  String get I18nStart_sliverAutomaticCorrection {
+    return Intl.message(
+      'Авто\r\nпоправка',
+      name: 'I18nStart_sliverAutomaticCorrection',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Информация Bluetooth`
   String get I18nLog_bluetoothInformation {
     return Intl.message(

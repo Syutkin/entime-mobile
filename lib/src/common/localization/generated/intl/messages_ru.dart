@@ -357,6 +357,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Добавить участника"),
         "I18nStart_didNotStart":
             MessageLookupByLibrary.simpleMessage("Не стартовал"),
+        "I18nStart_sliverAutomaticCorrection":
+            MessageLookupByLibrary.simpleMessage("Авто\r\nпоправка"),
+        "I18nStart_sliverManualCorrection":
+            MessageLookupByLibrary.simpleMessage("Ручная\r\nпоправка"),
+        "I18nStart_sliverNumber": MessageLookupByLibrary.simpleMessage("№"),
+        "I18nStart_sliverStart": MessageLookupByLibrary.simpleMessage("Старт"),
         "I18nUpdate_changelog":
             MessageLookupByLibrary.simpleMessage("Список изменений"),
         "I18nUpdate_checkForUpdates":

@@ -153,7 +153,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             startTime: startTime,
             forceAdd: forceAdd,
           );
-          //ToDo: popup с вопросом обновлять или нет стартовое время или номер
+          if (result != null) {
+            
+            //ToDo: popup с вопросом обновлять или нет стартовое время или номер
+          }
+          
         },
       );
     });
