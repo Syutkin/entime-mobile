@@ -48,6 +48,7 @@ mixin _$DatabaseEvent {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +82,7 @@ mixin _$DatabaseEvent {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,6 +116,7 @@ mixin _$DatabaseEvent {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -130,6 +133,8 @@ mixin _$DatabaseEvent {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -144,6 +149,7 @@ mixin _$DatabaseEvent {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -158,6 +164,7 @@ mixin _$DatabaseEvent {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -251,6 +258,7 @@ class _$_Initialize implements _Initialize {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return initialize();
   }
@@ -287,6 +295,7 @@ class _$_Initialize implements _Initialize {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return initialize?.call();
   }
@@ -323,6 +332,7 @@ class _$_Initialize implements _Initialize {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -345,6 +355,8 @@ class _$_Initialize implements _Initialize {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return initialize(this);
   }
@@ -362,6 +374,7 @@ class _$_Initialize implements _Initialize {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return initialize?.call(this);
   }
@@ -379,6 +392,7 @@ class _$_Initialize implements _Initialize {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -656,6 +670,7 @@ class _$_EmitState implements _EmitState {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return emitState(races, stages, riders, statuses, participants, starts,
         finishes, trails, notification);
@@ -693,6 +708,7 @@ class _$_EmitState implements _EmitState {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return emitState?.call(races, stages, riders, statuses, participants,
         starts, finishes, trails, notification);
@@ -730,6 +746,7 @@ class _$_EmitState implements _EmitState {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (emitState != null) {
@@ -753,6 +770,8 @@ class _$_EmitState implements _EmitState {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return emitState(this);
   }
@@ -770,6 +789,7 @@ class _$_EmitState implements _EmitState {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return emitState?.call(this);
   }
@@ -787,6 +807,7 @@ class _$_EmitState implements _EmitState {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (emitState != null) {
@@ -915,6 +936,7 @@ class _$_AddRace implements _AddRace {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return addRace(race);
   }
@@ -951,6 +973,7 @@ class _$_AddRace implements _AddRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return addRace?.call(race);
   }
@@ -987,6 +1010,7 @@ class _$_AddRace implements _AddRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -1009,6 +1033,8 @@ class _$_AddRace implements _AddRace {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return addRace(this);
   }
@@ -1026,6 +1052,7 @@ class _$_AddRace implements _AddRace {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return addRace?.call(this);
   }
@@ -1043,6 +1070,7 @@ class _$_AddRace implements _AddRace {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -1156,6 +1184,7 @@ class _$_DeleteRace implements _DeleteRace {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return deleteRace(id);
   }
@@ -1192,6 +1221,7 @@ class _$_DeleteRace implements _DeleteRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return deleteRace?.call(id);
   }
@@ -1228,6 +1258,7 @@ class _$_DeleteRace implements _DeleteRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (deleteRace != null) {
@@ -1250,6 +1281,8 @@ class _$_DeleteRace implements _DeleteRace {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return deleteRace(this);
   }
@@ -1267,6 +1300,7 @@ class _$_DeleteRace implements _DeleteRace {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return deleteRace?.call(this);
   }
@@ -1284,6 +1318,7 @@ class _$_DeleteRace implements _DeleteRace {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (deleteRace != null) {
@@ -1396,6 +1431,7 @@ class _$_AddStage implements _AddStage {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return addStage(stage);
   }
@@ -1432,6 +1468,7 @@ class _$_AddStage implements _AddStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return addStage?.call(stage);
   }
@@ -1468,6 +1505,7 @@ class _$_AddStage implements _AddStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (addStage != null) {
@@ -1490,6 +1528,8 @@ class _$_AddStage implements _AddStage {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return addStage(this);
   }
@@ -1507,6 +1547,7 @@ class _$_AddStage implements _AddStage {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return addStage?.call(this);
   }
@@ -1524,6 +1565,7 @@ class _$_AddStage implements _AddStage {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (addStage != null) {
@@ -1637,6 +1679,7 @@ class _$_SelectStages implements _SelectStages {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return selectStages(raceId);
   }
@@ -1673,6 +1716,7 @@ class _$_SelectStages implements _SelectStages {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return selectStages?.call(raceId);
   }
@@ -1709,6 +1753,7 @@ class _$_SelectStages implements _SelectStages {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (selectStages != null) {
@@ -1731,6 +1776,8 @@ class _$_SelectStages implements _SelectStages {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return selectStages(this);
   }
@@ -1748,6 +1795,7 @@ class _$_SelectStages implements _SelectStages {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return selectStages?.call(this);
   }
@@ -1765,6 +1813,7 @@ class _$_SelectStages implements _SelectStages {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (selectStages != null) {
@@ -1878,6 +1927,7 @@ class _$_DeleteStage implements _DeleteStage {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return deleteStage(id);
   }
@@ -1914,6 +1964,7 @@ class _$_DeleteStage implements _DeleteStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return deleteStage?.call(id);
   }
@@ -1950,6 +2001,7 @@ class _$_DeleteStage implements _DeleteStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (deleteStage != null) {
@@ -1972,6 +2024,8 @@ class _$_DeleteStage implements _DeleteStage {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return deleteStage(this);
   }
@@ -1989,6 +2043,7 @@ class _$_DeleteStage implements _DeleteStage {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return deleteStage?.call(this);
   }
@@ -2006,6 +2061,7 @@ class _$_DeleteStage implements _DeleteStage {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (deleteStage != null) {
@@ -2121,6 +2177,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return getParticipantsAtStart(stageId);
   }
@@ -2157,6 +2214,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return getParticipantsAtStart?.call(stageId);
   }
@@ -2193,6 +2251,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (getParticipantsAtStart != null) {
@@ -2215,6 +2274,8 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return getParticipantsAtStart(this);
   }
@@ -2232,6 +2293,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return getParticipantsAtStart?.call(this);
   }
@@ -2249,6 +2311,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (getParticipantsAtStart != null) {
@@ -2396,6 +2459,7 @@ class _$_AddStartNumber implements _AddStartNumber {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return addStartNumber(stage, number, startTime, forceAdd);
   }
@@ -2432,6 +2496,7 @@ class _$_AddStartNumber implements _AddStartNumber {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return addStartNumber?.call(stage, number, startTime, forceAdd);
   }
@@ -2468,6 +2533,7 @@ class _$_AddStartNumber implements _AddStartNumber {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (addStartNumber != null) {
@@ -2490,6 +2556,8 @@ class _$_AddStartNumber implements _AddStartNumber {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return addStartNumber(this);
   }
@@ -2507,6 +2575,7 @@ class _$_AddStartNumber implements _AddStartNumber {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return addStartNumber?.call(this);
   }
@@ -2524,6 +2593,7 @@ class _$_AddStartNumber implements _AddStartNumber {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (addStartNumber != null) {
@@ -2719,6 +2789,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
             int stageId,
             int participantId)
         updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
   }) {
     return updateStartingInfo(
         startTime,
@@ -2762,6 +2833,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
   }) {
     return updateStartingInfo?.call(
         startTime,
@@ -2805,6 +2877,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
             int stageId,
             int participantId)?
         updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (updateStartingInfo != null) {
@@ -2834,6 +2907,8 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
   }) {
     return updateStartingInfo(this);
   }
@@ -2851,6 +2926,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
   }) {
     return updateStartingInfo?.call(this);
   }
@@ -2868,6 +2944,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     required TResult orElse(),
   }) {
     if (updateStartingInfo != null) {
@@ -2896,6 +2973,269 @@ abstract class _UpdateStartingInfo implements DatabaseEvent {
   int get participantId;
   @JsonKey(ignore: true)
   _$$_UpdateStartingInfoCopyWith<_$_UpdateStartingInfo> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateManualStartTimeCopyWith<$Res> {
+  factory _$$_UpdateManualStartTimeCopyWith(_$_UpdateManualStartTime value,
+          $Res Function(_$_UpdateManualStartTime) then) =
+      __$$_UpdateManualStartTimeCopyWithImpl<$Res>;
+  $Res call({int stageId, DateTime time});
+}
+
+/// @nodoc
+class __$$_UpdateManualStartTimeCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res>
+    implements _$$_UpdateManualStartTimeCopyWith<$Res> {
+  __$$_UpdateManualStartTimeCopyWithImpl(_$_UpdateManualStartTime _value,
+      $Res Function(_$_UpdateManualStartTime) _then)
+      : super(_value, (v) => _then(v as _$_UpdateManualStartTime));
+
+  @override
+  _$_UpdateManualStartTime get _value =>
+      super._value as _$_UpdateManualStartTime;
+
+  @override
+  $Res call({
+    Object? stageId = freezed,
+    Object? time = freezed,
+  }) {
+    return _then(_$_UpdateManualStartTime(
+      stageId: stageId == freezed
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
+      time: time == freezed
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateManualStartTime implements _UpdateManualStartTime {
+  const _$_UpdateManualStartTime({required this.stageId, required this.time});
+
+  @override
+  final int stageId;
+  @override
+  final DateTime time;
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.updateManualStartTime(stageId: $stageId, time: $time)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateManualStartTime &&
+            const DeepCollectionEquality().equals(other.stageId, stageId) &&
+            const DeepCollectionEquality().equals(other.time, time));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(stageId),
+      const DeepCollectionEquality().hash(time));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_UpdateManualStartTimeCopyWith<_$_UpdateManualStartTime> get copyWith =>
+      __$$_UpdateManualStartTimeCopyWithImpl<_$_UpdateManualStartTime>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            Notification? notification)
+        emitState,
+    required TResult Function(Race race) addRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
+    required TResult Function(int stageId) getParticipantsAtStart,
+    required TResult Function(
+            Stage stage, int number, String startTime, bool forceAdd)
+        addStartNumber,
+    required TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)
+        updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
+  }) {
+    return updateManualStartTime(stageId, time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            Notification? notification)?
+        emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
+  }) {
+    return updateManualStartTime?.call(stageId, time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            Notification? notification)?
+        emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    required TResult orElse(),
+  }) {
+    if (updateManualStartTime != null) {
+      return updateManualStartTime(stageId, time);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
+    required TResult Function(_GetParticipantsAtStart value)
+        getParticipantsAtStart,
+    required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
+  }) {
+    return updateManualStartTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+  }) {
+    return updateManualStartTime?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    required TResult orElse(),
+  }) {
+    if (updateManualStartTime != null) {
+      return updateManualStartTime(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateManualStartTime implements DatabaseEvent {
+  const factory _UpdateManualStartTime(
+      {required final int stageId,
+      required final DateTime time}) = _$_UpdateManualStartTime;
+
+  int get stageId;
+  DateTime get time;
+  @JsonKey(ignore: true)
+  _$$_UpdateManualStartTimeCopyWith<_$_UpdateManualStartTime> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

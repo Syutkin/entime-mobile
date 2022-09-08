@@ -3021,8 +3021,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     });
   }
 
-  Selectable<ExistedStartingParticipantsResult> existedStartingParticipants(
-      {required int stageId, required String startTime, required int number}) {
+  Selectable<GetExistedStartingParticipantsResult>
+      getExistedStartingParticipants(
+          {required int stageId,
+          required String startTime,
+          required int number}) {
     return customSelect(
         'SELECT *\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n	AND stage_id = :stage_id\r\n	AND (start_time IS :start_time\r\n    	OR (number IS :number\r\n      	AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
         variables: [
@@ -3034,7 +3037,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           participants,
         }).map((QueryRow row) {
-      return ExistedStartingParticipantsResult(
+      return GetExistedStartingParticipantsResult(
         id: row.read<int?>('id'),
         stageId: row.read<int>('stage_id'),
         participantId: row.read<int>('participant_id'),
@@ -3056,7 +3059,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     });
   }
 
-  Future<int> updateStartingInfo(
+  Future<int> setStartingInfo(
       {required String startTime,
       String? automaticStartTime,
       int? automaticCorrection,
@@ -3074,6 +3077,38 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         Variable<int?>(manualCorrection),
         Variable<int>(stageId),
         Variable<int>(participantId)
+      ],
+      updates: {starts},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Selectable<Start> getParticipantAroundTime(
+      {required int stageId, required String before, required String after}) {
+    return customSelect(
+        'SELECT *\r\nFROM starts\r\nWHERE stage_id = :stage_id\r\n	AND start_time BETWEEN :before AND :after',
+        variables: [
+          Variable<int>(stageId),
+          Variable<String>(before),
+          Variable<String>(after)
+        ],
+        readsFrom: {
+          starts,
+        }).map(starts.mapFromRow);
+  }
+
+  Future<int> setManualStartTime(
+      {String? manualStartTime,
+      int? manualCorrection,
+      required int participantId,
+      required int stageId}) {
+    return customUpdate(
+      'UPDATE starts\r\nSET manual_start_time = :manual_start_time, manual_correction = :manual_correction\r\nWHERE participant_id = :participant_id\r\n	AND stage_id = :stage_id',
+      variables: [
+        Variable<String?>(manualStartTime),
+        Variable<int?>(manualCorrection),
+        Variable<int>(participantId),
+        Variable<int>(stageId)
       ],
       updates: {starts},
       updateKind: UpdateKind.update,
@@ -3144,7 +3179,7 @@ class GetParticipantsAtStartResult {
   });
 }
 
-class ExistedStartingParticipantsResult {
+class GetExistedStartingParticipantsResult {
   final int? id;
   final int stageId;
   final int participantId;
@@ -3162,7 +3197,7 @@ class ExistedStartingParticipantsResult {
   final String? category;
   final String? rfid;
   final int statusId1;
-  ExistedStartingParticipantsResult({
+  GetExistedStartingParticipantsResult({
     this.id,
     required this.stageId,
     required this.participantId,

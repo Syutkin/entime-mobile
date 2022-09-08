@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
 import '../../../common/logger/logger.dart';
+import '../../../common/utils/helper.dart';
 
 part 'app_database.g.dart';
 
@@ -21,7 +23,7 @@ class AppDatabase extends _$AppDatabase {
   /// Обновляет или добавляет участника с заданным номером и стартовым временем
   /// Возвращает null при успехе, и список участников если такое же стартовое время
   /// уже установлено для других участников
-  Future<List<ExistedStartingParticipantsResult>?> addStartNumber({
+  Future<List<GetExistedStartingParticipantsResult>?> addStartNumber({
     required Stage stage,
     required int number,
     required String startTime,
@@ -37,7 +39,7 @@ class AppDatabase extends _$AppDatabase {
       logger.i(
         'Database -> Checking start time $startTime and number $number...',
       );
-      final res = await existedStartingParticipants(
+      final res = await getExistedStartingParticipants(
         stageId: stage.id!,
         startTime: startTime,
         number: number,
@@ -100,6 +102,59 @@ class AppDatabase extends _$AppDatabase {
     }
 
     return null;
+  }
+
+//ToDo: исправить выставление значения только первому совпадению
+///Устанавливает ручное стартовое время для участника
+///
+///Ищет участника с временем рядом с текущим (плюс-минус 15 секунд)
+///и устанавливает ему текущее время старта в ручную отсечку
+///
+///Возращает 0 если участник не найден и rowid участника в случае успеха
+///(возврат rowid не тестировался ни в каком виде)
+  Future<int> updateManualStartTime(int stageId, DateTime time) async {
+    int result = 0;
+    final DateTime timeBefore = time.subtract(const Duration(seconds: 15));
+    final DateTime timeAfter = time.add(const Duration(seconds: 15));
+    final String before = DateFormat('HH:mm:ss').format(timeBefore);
+    final String after = DateFormat('HH:mm:ss').format(timeAfter);
+    final String manualStartTime = DateFormat('HH:mm:ss,S').format(time);
+
+    final participantsAroundTime = await getParticipantAroundTime(
+      stageId: stageId,
+      before: before,
+      after: after,
+    ).get();
+
+    if (participantsAroundTime.isNotEmpty) {
+      final DateTime? startTime =
+          strTimeToDateTime(participantsAroundTime.first.startTime);
+      if (startTime == null) {
+        assert(startTime != null, 'startTime must not be null');
+        return result;
+      }
+      final Duration correction = startTime.difference(time);
+      result = await setManualStartTime(
+        participantId: participantsAroundTime.first.participantId,
+        stageId: stageId,
+        manualCorrection: correction.inMilliseconds,
+        manualStartTime: manualStartTime,
+      );
+      if (result > 0) {
+        logger.i(
+          'Database -> Update manual start time for participant with id ${participantsAroundTime.first.participantId}',
+        );
+      } else {
+        logger.i(
+          'Database -> Error at updating manual start time for participant with id ${participantsAroundTime.first.participantId}',
+        );
+      }
+    } else {
+      logger.i(
+        'Database -> Cannot find participant with start time around $time',
+      );
+    }
+    return result;
   }
 }
 

@@ -16,14 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Notification {
-  List<ExistedStartingParticipantsResult> get existedStartingParticipants =>
+  List<GetExistedStartingParticipantsResult> get existedStartingParticipants =>
       throw _privateConstructorUsedError;
   int get number => throw _privateConstructorUsedError;
   String get startTime => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            List<ExistedStartingParticipantsResult> existedStartingParticipants,
+            List<GetExistedStartingParticipantsResult>
+                existedStartingParticipants,
             int number,
             String startTime)
         updateNumber,
@@ -32,7 +33,8 @@ mixin _$Notification {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(
-            List<ExistedStartingParticipantsResult> existedStartingParticipants,
+            List<GetExistedStartingParticipantsResult>
+                existedStartingParticipants,
             int number,
             String startTime)?
         updateNumber,
@@ -41,7 +43,8 @@ mixin _$Notification {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            List<ExistedStartingParticipantsResult> existedStartingParticipants,
+            List<GetExistedStartingParticipantsResult>
+                existedStartingParticipants,
             int number,
             String startTime)?
         updateNumber,
@@ -76,7 +79,7 @@ abstract class $NotificationCopyWith<$Res> {
           Notification value, $Res Function(Notification) then) =
       _$NotificationCopyWithImpl<$Res>;
   $Res call(
-      {List<ExistedStartingParticipantsResult> existedStartingParticipants,
+      {List<GetExistedStartingParticipantsResult> existedStartingParticipants,
       int number,
       String startTime});
 }
@@ -99,7 +102,7 @@ class _$NotificationCopyWithImpl<$Res> implements $NotificationCopyWith<$Res> {
       existedStartingParticipants: existedStartingParticipants == freezed
           ? _value.existedStartingParticipants
           : existedStartingParticipants // ignore: cast_nullable_to_non_nullable
-              as List<ExistedStartingParticipantsResult>,
+              as List<GetExistedStartingParticipantsResult>,
       number: number == freezed
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -120,7 +123,7 @@ abstract class _$$_UpdateNumberCopyWith<$Res>
       __$$_UpdateNumberCopyWithImpl<$Res>;
   @override
   $Res call(
-      {List<ExistedStartingParticipantsResult> existedStartingParticipants,
+      {List<GetExistedStartingParticipantsResult> existedStartingParticipants,
       int number,
       String startTime});
 }
@@ -146,7 +149,7 @@ class __$$_UpdateNumberCopyWithImpl<$Res>
       existedStartingParticipants: existedStartingParticipants == freezed
           ? _value._existedStartingParticipants
           : existedStartingParticipants // ignore: cast_nullable_to_non_nullable
-              as List<ExistedStartingParticipantsResult>,
+              as List<GetExistedStartingParticipantsResult>,
       number: number == freezed
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -163,15 +166,15 @@ class __$$_UpdateNumberCopyWithImpl<$Res>
 
 class _$_UpdateNumber implements _UpdateNumber {
   const _$_UpdateNumber(
-      {required final List<ExistedStartingParticipantsResult>
+      {required final List<GetExistedStartingParticipantsResult>
           existedStartingParticipants,
       required this.number,
       required this.startTime})
       : _existedStartingParticipants = existedStartingParticipants;
 
-  final List<ExistedStartingParticipantsResult> _existedStartingParticipants;
+  final List<GetExistedStartingParticipantsResult> _existedStartingParticipants;
   @override
-  List<ExistedStartingParticipantsResult> get existedStartingParticipants {
+  List<GetExistedStartingParticipantsResult> get existedStartingParticipants {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_existedStartingParticipants);
   }
@@ -214,7 +217,8 @@ class _$_UpdateNumber implements _UpdateNumber {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            List<ExistedStartingParticipantsResult> existedStartingParticipants,
+            List<GetExistedStartingParticipantsResult>
+                existedStartingParticipants,
             int number,
             String startTime)
         updateNumber,
@@ -226,7 +230,8 @@ class _$_UpdateNumber implements _UpdateNumber {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(
-            List<ExistedStartingParticipantsResult> existedStartingParticipants,
+            List<GetExistedStartingParticipantsResult>
+                existedStartingParticipants,
             int number,
             String startTime)?
         updateNumber,
@@ -238,7 +243,8 @@ class _$_UpdateNumber implements _UpdateNumber {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            List<ExistedStartingParticipantsResult> existedStartingParticipants,
+            List<GetExistedStartingParticipantsResult>
+                existedStartingParticipants,
             int number,
             String startTime)?
         updateNumber,
@@ -281,13 +287,13 @@ class _$_UpdateNumber implements _UpdateNumber {
 
 abstract class _UpdateNumber implements Notification {
   const factory _UpdateNumber(
-      {required final List<ExistedStartingParticipantsResult>
+      {required final List<GetExistedStartingParticipantsResult>
           existedStartingParticipants,
       required final int number,
       required final String startTime}) = _$_UpdateNumber;
 
   @override
-  List<ExistedStartingParticipantsResult> get existedStartingParticipants;
+  List<GetExistedStartingParticipantsResult> get existedStartingParticipants;
   @override
   int get number;
   @override

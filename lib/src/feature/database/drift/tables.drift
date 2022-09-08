@@ -103,7 +103,7 @@ WHERE participants.rider_id = riders.id
 	AND participants.status_id = 1
 ORDER BY start_time ASC;
 
-existedStartingParticipants:
+getExistedStartingParticipants:
 SELECT *
 FROM starts, participants
 WHERE starts.participant_id = participants.id
@@ -112,7 +112,7 @@ WHERE starts.participant_id = participants.id
     	OR (number IS :number
       	AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));
 
-updateStartingInfo:
+setStartingInfo:
 UPDATE starts
 SET start_time = :start_time,
 	automatic_start_time = :automatic_start_time,
@@ -121,3 +121,15 @@ SET start_time = :start_time,
     manual_correction = :manual_correction
 WHERE stage_id = :stage_id
 	AND participant_id = :participant_id;
+
+getParticipantAroundTime:
+SELECT *
+FROM starts
+WHERE stage_id = :stage_id
+	AND start_time BETWEEN :before AND :after;
+
+setManualStartTime:
+UPDATE starts
+SET manual_start_time = :manual_start_time, manual_correction = :manual_correction
+WHERE participant_id = :participant_id
+	AND stage_id = :stage_id;

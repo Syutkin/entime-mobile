@@ -171,7 +171,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           }
         },
         updateStartingInfo: (event) async {
-          await _db.updateStartingInfo(
+          await _db.setStartingInfo(
             startTime: event.startTime,
             automaticStartTime: event.automaticStartTime,
             automaticCorrection: event.automaticCorrection,
@@ -180,6 +180,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             stageId: event.stageId,
             participantId: event.participantId,
           );
+        },
+        updateManualStartTime: (event) async {
+          await _db.updateManualStartTime(event.stageId, event.time);
         },
       );
     });

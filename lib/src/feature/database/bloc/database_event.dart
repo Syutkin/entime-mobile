@@ -38,4 +38,9 @@ class DatabaseEvent with _$DatabaseEvent {
     required int stageId,
     required int participantId,
   }) = _UpdateStartingInfo;
+
+  const factory DatabaseEvent.updateManualStartTime({
+    required int stageId,
+    required DateTime time,
+  }) = _UpdateManualStartTime;
 }

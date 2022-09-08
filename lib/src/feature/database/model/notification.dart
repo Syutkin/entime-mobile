@@ -7,7 +7,7 @@ part 'notification.freezed.dart';
 @freezed
 class Notification with _$Notification {
   const factory Notification.updateNumber({
-    required List<ExistedStartingParticipantsResult>
+    required List<GetExistedStartingParticipantsResult>
         existedStartingParticipants,
     required int number,
     required String startTime,

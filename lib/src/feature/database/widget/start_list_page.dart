@@ -392,11 +392,13 @@ class _StartListPage extends State<StartListPage> {
       key.currentContext!.findRenderObject() as RenderBox;
 
   Future<void> _addManualStartTime(BuildContext context) async {
-    //ToDo
-    DateTime.now();
-    // final time = DateTime.now();
-    // BlocProvider.of<ProtocolBloc>(context)
-    //     .add(ProtocolUpdateManualStartTime(time: time));
+    final time = DateTime.now();
+    context.read<DatabaseBloc>().add(
+          DatabaseEvent.updateManualStartTime(
+            stageId: widget.stage.id!,
+            time: time,
+          ),
+        );
   }
 
   String? _activeStartTime(CountdownState countdownState) {
