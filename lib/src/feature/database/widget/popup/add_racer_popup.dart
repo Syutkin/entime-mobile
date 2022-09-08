@@ -14,7 +14,6 @@ Future<void> addRacerPopup({
     context: context,
     builder: (context) => ExpandedAlertDialog(
       width: MediaQuery.of(context).size.width * 0.9,
-      // scrollable: true,
       title: Text(Localization.current.I18nStart_addParticipant),
       content: Form(
         key: formKey,
@@ -25,7 +24,6 @@ Future<void> addRacerPopup({
           }
         },
         child: Column(
-          // mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             TextFormField(
               keyboardType: TextInputType.number,

@@ -18,7 +18,7 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
-  Future<List<CheckNewStartingParticipantResult>?> addStartNumber({
+  Future<List<ExistedStartingParticipantsResult>?> addStartNumber({
     required Stage stage,
     required int number,
     required String startTime,
@@ -28,7 +28,7 @@ class AppDatabase extends _$AppDatabase {
       logger.i(
         'Database -> Checking start time $startTime and number $number...',
       );
-      final res = await checkNewStartingParticipant(
+      final res = await existedStartingParticipants(
         stageId: stage.id!,
         startTime: startTime,
         number: number,

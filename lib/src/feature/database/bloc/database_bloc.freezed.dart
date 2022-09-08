@@ -28,7 +28,7 @@ mixin _$DatabaseEvent {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -53,7 +53,7 @@ mixin _$DatabaseEvent {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -77,7 +77,7 @@ mixin _$DatabaseEvent {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -201,7 +201,7 @@ class _$_Initialize implements _Initialize {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -229,7 +229,7 @@ class _$_Initialize implements _Initialize {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -256,7 +256,7 @@ class _$_Initialize implements _Initialize {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -346,7 +346,9 @@ abstract class _$$_EmitStateCopyWith<$Res> {
       List<Start>? starts,
       List<Finish>? finishes,
       List<Trail>? trails,
-      List<CheckNewStartingParticipantResult>? newStartingParticipant});
+      Notification? notification});
+
+  $NotificationCopyWith<$Res>? get notification;
 }
 
 /// @nodoc
@@ -369,7 +371,7 @@ class __$$_EmitStateCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
     Object? starts = freezed,
     Object? finishes = freezed,
     Object? trails = freezed,
-    Object? newStartingParticipant = freezed,
+    Object? notification = freezed,
   }) {
     return _then(_$_EmitState(
       races: races == freezed
@@ -404,11 +406,22 @@ class __$$_EmitStateCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
           ? _value._trails
           : trails // ignore: cast_nullable_to_non_nullable
               as List<Trail>?,
-      newStartingParticipant: newStartingParticipant == freezed
-          ? _value._newStartingParticipant
-          : newStartingParticipant // ignore: cast_nullable_to_non_nullable
-              as List<CheckNewStartingParticipantResult>?,
+      notification: notification == freezed
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as Notification?,
     ));
+  }
+
+  @override
+  $NotificationCopyWith<$Res>? get notification {
+    if (_value.notification == null) {
+      return null;
+    }
+
+    return $NotificationCopyWith<$Res>(_value.notification!, (value) {
+      return _then(_value.copyWith(notification: value));
+    });
   }
 }
 
@@ -424,7 +437,7 @@ class _$_EmitState implements _EmitState {
       final List<Start>? starts,
       final List<Finish>? finishes,
       final List<Trail>? trails,
-      final List<CheckNewStartingParticipantResult>? newStartingParticipant})
+      this.notification})
       : _races = races,
         _stages = stages,
         _riders = riders,
@@ -432,8 +445,7 @@ class _$_EmitState implements _EmitState {
         _participants = participants,
         _starts = starts,
         _finishes = finishes,
-        _trails = trails,
-        _newStartingParticipant = newStartingParticipant;
+        _trails = trails;
 
   final List<Race>? _races;
   @override
@@ -507,18 +519,12 @@ class _$_EmitState implements _EmitState {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<CheckNewStartingParticipantResult>? _newStartingParticipant;
   @override
-  List<CheckNewStartingParticipantResult>? get newStartingParticipant {
-    final value = _newStartingParticipant;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final Notification? notification;
 
   @override
   String toString() {
-    return 'DatabaseEvent.emitState(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, newStartingParticipant: $newStartingParticipant)';
+    return 'DatabaseEvent.emitState(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, notification: $notification)';
   }
 
   @override
@@ -535,8 +541,8 @@ class _$_EmitState implements _EmitState {
             const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
             const DeepCollectionEquality().equals(other._trails, _trails) &&
-            const DeepCollectionEquality().equals(
-                other._newStartingParticipant, _newStartingParticipant));
+            const DeepCollectionEquality()
+                .equals(other.notification, notification));
   }
 
   @override
@@ -550,7 +556,7 @@ class _$_EmitState implements _EmitState {
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_trails),
-      const DeepCollectionEquality().hash(_newStartingParticipant));
+      const DeepCollectionEquality().hash(notification));
 
   @JsonKey(ignore: true)
   @override
@@ -570,7 +576,7 @@ class _$_EmitState implements _EmitState {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -583,7 +589,7 @@ class _$_EmitState implements _EmitState {
         addStartNumber,
   }) {
     return emitState(races, stages, riders, statuses, participants, starts,
-        finishes, trails, newStartingParticipant);
+        finishes, trails, notification);
   }
 
   @override
@@ -599,7 +605,7 @@ class _$_EmitState implements _EmitState {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -611,7 +617,7 @@ class _$_EmitState implements _EmitState {
         addStartNumber,
   }) {
     return emitState?.call(races, stages, riders, statuses, participants,
-        starts, finishes, trails, newStartingParticipant);
+        starts, finishes, trails, notification);
   }
 
   @override
@@ -627,7 +633,7 @@ class _$_EmitState implements _EmitState {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -641,7 +647,7 @@ class _$_EmitState implements _EmitState {
   }) {
     if (emitState != null) {
       return emitState(races, stages, riders, statuses, participants, starts,
-          finishes, trails, newStartingParticipant);
+          finishes, trails, notification);
     }
     return orElse();
   }
@@ -710,8 +716,7 @@ abstract class _EmitState implements DatabaseEvent {
       final List<Start>? starts,
       final List<Finish>? finishes,
       final List<Trail>? trails,
-      final List<CheckNewStartingParticipantResult>?
-          newStartingParticipant}) = _$_EmitState;
+      final Notification? notification}) = _$_EmitState;
 
   List<Race>? get races;
   List<Stage>? get stages;
@@ -721,7 +726,7 @@ abstract class _EmitState implements DatabaseEvent {
   List<Start>? get starts;
   List<Finish>? get finishes;
   List<Trail>? get trails;
-  List<CheckNewStartingParticipantResult>? get newStartingParticipant;
+  Notification? get notification;
   @JsonKey(ignore: true)
   _$$_EmitStateCopyWith<_$_EmitState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -800,7 +805,7 @@ class _$_AddRace implements _AddRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -828,7 +833,7 @@ class _$_AddRace implements _AddRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -855,7 +860,7 @@ class _$_AddRace implements _AddRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1011,7 +1016,7 @@ class _$_DeleteRace implements _DeleteRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -1039,7 +1044,7 @@ class _$_DeleteRace implements _DeleteRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1066,7 +1071,7 @@ class _$_DeleteRace implements _DeleteRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1221,7 +1226,7 @@ class _$_AddStage implements _AddStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -1249,7 +1254,7 @@ class _$_AddStage implements _AddStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1276,7 +1281,7 @@ class _$_AddStage implements _AddStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1432,7 +1437,7 @@ class _$_SelectStages implements _SelectStages {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -1460,7 +1465,7 @@ class _$_SelectStages implements _SelectStages {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1487,7 +1492,7 @@ class _$_SelectStages implements _SelectStages {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1643,7 +1648,7 @@ class _$_DeleteStage implements _DeleteStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -1671,7 +1676,7 @@ class _$_DeleteStage implements _DeleteStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1698,7 +1703,7 @@ class _$_DeleteStage implements _DeleteStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1856,7 +1861,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -1884,7 +1889,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1911,7 +1916,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -2101,7 +2106,7 @@ class _$_AddStartNumber implements _AddStartNumber {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -2129,7 +2134,7 @@ class _$_AddStartNumber implements _AddStartNumber {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -2156,7 +2161,7 @@ class _$_AddStartNumber implements _AddStartNumber {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -2258,7 +2263,7 @@ mixin _$DatabaseState {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         initialized,
   }) =>
       throw _privateConstructorUsedError;
@@ -2274,7 +2279,7 @@ mixin _$DatabaseState {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         initialized,
   }) =>
       throw _privateConstructorUsedError;
@@ -2290,7 +2295,7 @@ mixin _$DatabaseState {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         initialized,
     required TResult orElse(),
   }) =>
@@ -2382,7 +2387,7 @@ class _$_Initial implements _Initial {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         initialized,
   }) {
     return initial();
@@ -2401,7 +2406,7 @@ class _$_Initial implements _Initial {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         initialized,
   }) {
     return initial?.call();
@@ -2420,7 +2425,7 @@ class _$_Initial implements _Initial {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         initialized,
     required TResult orElse(),
   }) {
@@ -2480,7 +2485,9 @@ abstract class _$$_InitializedCopyWith<$Res> {
       List<Start> starts,
       List<Finish> finishes,
       List<Trail> trails,
-      List<CheckNewStartingParticipantResult>? newStartingParticipant});
+      Notification? notification});
+
+  $NotificationCopyWith<$Res>? get notification;
 }
 
 /// @nodoc
@@ -2504,7 +2511,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? starts = freezed,
     Object? finishes = freezed,
     Object? trails = freezed,
-    Object? newStartingParticipant = freezed,
+    Object? notification = freezed,
   }) {
     return _then(_$_Initialized(
       races: races == freezed
@@ -2539,11 +2546,22 @@ class __$$_InitializedCopyWithImpl<$Res>
           ? _value._trails
           : trails // ignore: cast_nullable_to_non_nullable
               as List<Trail>,
-      newStartingParticipant: newStartingParticipant == freezed
-          ? _value._newStartingParticipant
-          : newStartingParticipant // ignore: cast_nullable_to_non_nullable
-              as List<CheckNewStartingParticipantResult>?,
+      notification: notification == freezed
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as Notification?,
     ));
+  }
+
+  @override
+  $NotificationCopyWith<$Res>? get notification {
+    if (_value.notification == null) {
+      return null;
+    }
+
+    return $NotificationCopyWith<$Res>(_value.notification!, (value) {
+      return _then(_value.copyWith(notification: value));
+    });
   }
 }
 
@@ -2559,7 +2577,7 @@ class _$_Initialized implements _Initialized {
       required final List<Start> starts,
       required final List<Finish> finishes,
       required final List<Trail> trails,
-      final List<CheckNewStartingParticipantResult>? newStartingParticipant})
+      this.notification})
       : _races = races,
         _stages = stages,
         _riders = riders,
@@ -2567,8 +2585,7 @@ class _$_Initialized implements _Initialized {
         _participants = participants,
         _starts = starts,
         _finishes = finishes,
-        _trails = trails,
-        _newStartingParticipant = newStartingParticipant;
+        _trails = trails;
 
   final List<Race> _races;
   @override
@@ -2626,18 +2643,12 @@ class _$_Initialized implements _Initialized {
     return EqualUnmodifiableListView(_trails);
   }
 
-  final List<CheckNewStartingParticipantResult>? _newStartingParticipant;
   @override
-  List<CheckNewStartingParticipantResult>? get newStartingParticipant {
-    final value = _newStartingParticipant;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final Notification? notification;
 
   @override
   String toString() {
-    return 'DatabaseState.initialized(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, newStartingParticipant: $newStartingParticipant)';
+    return 'DatabaseState.initialized(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, notification: $notification)';
   }
 
   @override
@@ -2654,8 +2665,8 @@ class _$_Initialized implements _Initialized {
             const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
             const DeepCollectionEquality().equals(other._trails, _trails) &&
-            const DeepCollectionEquality().equals(
-                other._newStartingParticipant, _newStartingParticipant));
+            const DeepCollectionEquality()
+                .equals(other.notification, notification));
   }
 
   @override
@@ -2669,7 +2680,7 @@ class _$_Initialized implements _Initialized {
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_trails),
-      const DeepCollectionEquality().hash(_newStartingParticipant));
+      const DeepCollectionEquality().hash(notification));
 
   @JsonKey(ignore: true)
   @override
@@ -2689,11 +2700,11 @@ class _$_Initialized implements _Initialized {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)
+            Notification? notification)
         initialized,
   }) {
     return initialized(races, stages, riders, statuses, participants, starts,
-        finishes, trails, newStartingParticipant);
+        finishes, trails, notification);
   }
 
   @override
@@ -2709,11 +2720,11 @@ class _$_Initialized implements _Initialized {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         initialized,
   }) {
     return initialized?.call(races, stages, riders, statuses, participants,
-        starts, finishes, trails, newStartingParticipant);
+        starts, finishes, trails, notification);
   }
 
   @override
@@ -2729,13 +2740,13 @@ class _$_Initialized implements _Initialized {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
-            List<CheckNewStartingParticipantResult>? newStartingParticipant)?
+            Notification? notification)?
         initialized,
     required TResult orElse(),
   }) {
     if (initialized != null) {
       return initialized(races, stages, riders, statuses, participants, starts,
-          finishes, trails, newStartingParticipant);
+          finishes, trails, notification);
     }
     return orElse();
   }
@@ -2782,8 +2793,7 @@ abstract class _Initialized implements DatabaseState {
       required final List<Start> starts,
       required final List<Finish> finishes,
       required final List<Trail> trails,
-      final List<CheckNewStartingParticipantResult>?
-          newStartingParticipant}) = _$_Initialized;
+      final Notification? notification}) = _$_Initialized;
 
   List<Race> get races;
   List<Stage> get stages;
@@ -2793,7 +2803,7 @@ abstract class _Initialized implements DatabaseState {
   List<Start> get starts;
   List<Finish> get finishes;
   List<Trail> get trails;
-  List<CheckNewStartingParticipantResult>? get newStartingParticipant;
+  Notification? get notification;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;

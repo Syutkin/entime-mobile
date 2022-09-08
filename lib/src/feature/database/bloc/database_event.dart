@@ -12,7 +12,7 @@ class DatabaseEvent with _$DatabaseEvent {
     List<Start>? starts,
     List<Finish>? finishes,
     List<Trail>? trails,
-    List<CheckNewStartingParticipantResult>? newStartingParticipant,
+    Notification? notification,
   }) = _EmitState;
   const factory DatabaseEvent.addRace(Race race) = _AddRace;
   const factory DatabaseEvent.deleteRace(int id) = _DeleteRace;

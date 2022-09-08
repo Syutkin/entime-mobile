@@ -103,8 +103,7 @@ WHERE participants.rider_id = riders.id
   AND participants.status_id = 1
 ORDER BY start_time ASC;
 
-
-checkNewStartingParticipant:
+existedStartingParticipants:
 SELECT *
 FROM starts, participants
 WHERE starts.participant_id = participants.id

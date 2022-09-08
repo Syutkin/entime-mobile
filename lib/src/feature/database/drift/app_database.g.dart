@@ -3021,7 +3021,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     });
   }
 
-  Selectable<CheckNewStartingParticipantResult> checkNewStartingParticipant(
+  Selectable<ExistedStartingParticipantsResult> existedStartingParticipants(
       {required int stageId, required String startTime, required int number}) {
     return customSelect(
         'SELECT *\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n  AND stage_id = :stage_id\r\n  AND (start_time IS :start_time\r\n    OR (number IS :number\r\n      AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
@@ -3034,7 +3034,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           participants,
         }).map((QueryRow row) {
-      return CheckNewStartingParticipantResult(
+      return ExistedStartingParticipantsResult(
         id: row.read<int?>('id'),
         stageId: row.read<int>('stage_id'),
         participantId: row.read<int>('participant_id'),
@@ -3120,7 +3120,7 @@ class GetParticipantsAtStartResult {
   });
 }
 
-class CheckNewStartingParticipantResult {
+class ExistedStartingParticipantsResult {
   final int? id;
   final int stageId;
   final int participantId;
@@ -3138,7 +3138,7 @@ class CheckNewStartingParticipantResult {
   final String? category;
   final String? rfid;
   final int statusId1;
-  CheckNewStartingParticipantResult({
+  ExistedStartingParticipantsResult({
     this.id,
     required this.stageId,
     required this.participantId,

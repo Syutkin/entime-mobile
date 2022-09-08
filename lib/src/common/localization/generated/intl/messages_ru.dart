@@ -75,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nBluetooth_unknownDevice":
             MessageLookupByLibrary.simpleMessage("Неизвестное устройство"),
         "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "I18nCore_warning":
+            MessageLookupByLibrary.simpleMessage("Предупреждение"),
         "I18nCountdown_countdown":
             MessageLookupByLibrary.simpleMessage("Обратный отсчёт"),
         "I18nDatabase_addRace":

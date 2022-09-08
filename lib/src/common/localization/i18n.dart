@@ -7,6 +7,11 @@ class I18nCore {
         'Удалить',
         name: 'I18nCore_delete',
       );
+
+  static String get warning => Intl.message(
+        'Предупреждение',
+        name: 'I18nCore_warning',
+      );
 }
 
 class I18nUpdate {

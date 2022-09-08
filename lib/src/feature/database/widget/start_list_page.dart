@@ -13,6 +13,7 @@ import '../drift/app_database.dart';
 import 'start_item_tile.dart';
 
 part 'popup/add_racer_popup.dart';
+part 'popup/overwrite_start_time_popup.dart';
 
 class StartListPage extends StatefulWidget {
   final Stage stage;
@@ -36,62 +37,57 @@ class _StartListPage extends State<StartListPage> {
         listener: (context, state) {
           state.mapOrNull(
             initialized: (state) {
-              // Добавление нового стартового времени
-              // Если стартовое время уже присвоено другому номеру
-              final newStartingParticipant = state.newStartingParticipant;
-              if (newStartingParticipant != null) {
-                //ToDo
-                print('BlocListener: '
-                    'start_time: ${newStartingParticipant.first.startTime}, '
-                    'number: ${newStartingParticipant.first.number}');
+              final databaseBloc = context.read<DatabaseBloc>();
+              state.notification?.mapOrNull(
+                updateNumber: (value) async {
+                  //ToDo
+                  String text = '';
+                  for (final element in value.existedStartingParticipants) {
+                    if (element.automaticStartTime == null &&
+                        element.manualStartTime == null) {
+                      text += Localization.current.I18nHome_equalStartTime(
+                        value.startTime,
+                        element.number,
+                        value.number,
+                      );
+                    } else {
+                      if (element.automaticStartTime != null) {
+                        text += Localization.current
+                            .I18nHome_updateAutomaticStartCorrection(
+                          value.number,
+                          element.automaticStartTime!,
+                        );
+                      } else if (element.manualStartTime != null) {
+                        text += Localization.current
+                            .I18nHome_updateAutomaticStartCorrection(
+                          value.number,
+                          element.manualStartTime!,
+                        );
+                      } else {
+                        text +=
+                            Localization.current.I18nHome_errorAddParticipant(
+                          MaterialLocalizations.of(context).cancelButtonLabel,
+                        );
+                      }
+                    }
+                  }
+                  final update = await overwriteStartTimePopup(
+                    context: context,
+                    text: text,
+                  );
 
-                // if (state.previousStart != null && state.startTime != null) {
-
-                // String text = '';
-                // for (final element in state.newStartingParticipant) {
-                //   if (element.automaticStartTime == null &&
-                //       element.manualStartTime == null) {
-                //     text += Localization.current.I18nHome_equalStartTime(
-                //       state.startTime!.time,
-                //       element.number,
-                //       state.startTime!.number,
-                //     );
-                //   } else {
-                //     if (element.automaticStartTime != null) {
-                //       text += Localization.current
-                //           .I18nHome_updateAutomaticStartCorrection(
-                //         state.startTime!.number,
-                //         element.automaticStartTime!,
-                //       );
-                //     } else if (element.manualStartTime != null) {
-                //       text += Localization.current
-                //           .I18nHome_updateAutomaticStartCorrection(
-                //         state.startTime!.number,
-                //         element.manualStartTime!,
-                //       );
-                //     } else {
-                //       text += Localization.current.I18nHome_errorAddParticipant(
-                //         MaterialLocalizations.of(context).cancelButtonLabel,
-                //       );
-                //     }
-                //   }
-                // }
-
-                // final bool? update = await overwriteStartTimePopup(
-                //   context: context,
-                //   text: text,
-                // );
-
-                // if (update != null && update) {
-                //   protocolBloc.add(
-                //     ProtocolAddStartNumber(
-                //       startTime: state.startTime!,
-                //       forceAdd: true,
-                //     ),
-                //   );
-                // }
-                // }
-              }
+                  if (update ?? false) {
+                    databaseBloc.add(
+                      DatabaseEvent.addStartNumber(
+                        stage: widget.stage,
+                        number: value.number,
+                        startTime: value.startTime,
+                        forceAdd: true,
+                      ),
+                    );
+                  }
+                },
+              );
             },
           );
         },

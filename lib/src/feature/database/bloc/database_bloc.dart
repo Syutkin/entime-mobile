@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../drift/app_database.dart';
+import '../model/notification.dart';
 
 part 'database_bloc.freezed.dart';
 part 'database_event.dart';
@@ -21,7 +22,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   List<Start> _starts = [];
   List<Finish> _finishes = [];
   List<Trail> _trails = [];
-  List<CheckNewStartingParticipantResult> _newStartingParticipant = [];
+  // List<ExistedStartingParticipantsResult> _newStartingParticipant = [];
 
   int _raceId = 0;
   int _stageId = 0;
@@ -97,7 +98,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               starts: _starts,
               finishes: _finishes,
               trails: _trails,
-              newStartingParticipant: _newStartingParticipant,
             ),
           );
         },
@@ -112,10 +112,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               starts: event.starts ?? _starts,
               finishes: event.finishes ?? _finishes,
               trails: event.trails ?? _trails,
-              newStartingParticipant: event.newStartingParticipant,
+              notification: event.notification,
             ),
           );
-          _newStartingParticipant = [];
+          // _newStartingParticipant = [];
         },
         addRace: (event) async {
           await _db.addRace(
@@ -159,7 +159,15 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           );
           //ToDo: popup с вопросом обновлять или нет стартовое время или номер
           if (result != null) {
-            add(DatabaseEvent.emitState(newStartingParticipant: result));
+            add(
+              DatabaseEvent.emitState(
+                notification: Notification.updateNumber(
+                  existedStartingParticipants: result,
+                  number: event.number,
+                  startTime: event.startTime,
+                ),
+              ),
+            );
           }
         },
       );

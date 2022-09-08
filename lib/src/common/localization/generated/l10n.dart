@@ -61,6 +61,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Предупреждение`
+  String get I18nCore_warning {
+    return Intl.message(
+      'Предупреждение',
+      name: 'I18nCore_warning',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Что нового`
   String get I18nUpdate_whatsNew {
     return Intl.message(

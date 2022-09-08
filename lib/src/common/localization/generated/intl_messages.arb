@@ -1,7 +1,13 @@
 {
-  "@@last_modified": "2022-09-07T22:06:17.685070",
+  "@@last_modified": "2022-09-08T13:01:45.779027",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nCore_warning": "Предупреждение",
+  "@I18nCore_warning": {
     "type": "text",
     "placeholders_order": [],
     "placeholders": {}
