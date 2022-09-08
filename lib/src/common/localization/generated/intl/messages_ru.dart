@@ -63,6 +63,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m17(size) => "${size}px";
 
+  static String m20(category) => "Категория: ${category}";
+
+  static String m21(city) => "Категория: ${city}";
+
+  static String m22(nickname) => "Никнейм: ${nickname}";
+
+  static String m23(number) => "Участник №${number}";
+
+  static String m24(number, name) => "№${number}, ${name}";
+
+  static String m25(team) => "Категория: ${team}";
+
+  static String m26(year) => "Категория: ${year}";
+
   static String m18(current, total) => "${current} из ${total}";
 
   static String m19(version) => "Обновить до ${version}";
@@ -74,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Выберите устройство"),
         "I18nBluetooth_unknownDevice":
             MessageLookupByLibrary.simpleMessage("Неизвестное устройство"),
+        "I18nCore_correction": MessageLookupByLibrary.simpleMessage("Поправка"),
         "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "I18nCore_warning":
             MessageLookupByLibrary.simpleMessage("Предупреждение"),
@@ -359,12 +374,27 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Добавить участника"),
         "I18nStart_didNotStart":
             MessageLookupByLibrary.simpleMessage("Не стартовал"),
+        "I18nStart_incorrectCorrection":
+            MessageLookupByLibrary.simpleMessage("Неверное значение поправки"),
+        "I18nStart_incorrectTime":
+            MessageLookupByLibrary.simpleMessage("Неверное значение времени"),
+        "I18nStart_participantCategory": m20,
+        "I18nStart_participantCity": m21,
+        "I18nStart_participantNickname": m22,
+        "I18nStart_participantNumber": m23,
+        "I18nStart_participantNumberWithName": m24,
+        "I18nStart_participantTeam": m25,
+        "I18nStart_participantYear": m26,
         "I18nStart_sliverAutomaticCorrection":
             MessageLookupByLibrary.simpleMessage("Авто\r\nпоправка"),
         "I18nStart_sliverManualCorrection":
             MessageLookupByLibrary.simpleMessage("Ручная\r\nпоправка"),
         "I18nStart_sliverNumber": MessageLookupByLibrary.simpleMessage("№"),
         "I18nStart_sliverStart": MessageLookupByLibrary.simpleMessage("Старт"),
+        "I18nStart_startTime":
+            MessageLookupByLibrary.simpleMessage("Время старта"),
+        "I18nStart_startTimeAtSmartphone":
+            MessageLookupByLibrary.simpleMessage("Время старта на смартфоне"),
         "I18nUpdate_changelog":
             MessageLookupByLibrary.simpleMessage("Список изменений"),
         "I18nUpdate_checkForUpdates":

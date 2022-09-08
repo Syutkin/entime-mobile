@@ -13,7 +13,7 @@ import '../../../countdown/countdown.dart';
 import '../../../init/widget/select_file_screen.dart';
 import '../../../protocol/protocol.dart';
 import '../../../settings/bloc/settings_bloc.dart';
-import 'edit_start_time_popup.dart';
+// import 'edit_start_time_popup.dart';
 import 'start_item_tile.dart';
 
 class StartScreen extends StatefulWidget {
@@ -200,9 +200,9 @@ class _StartScreen extends State<StartScreen> {
                       ) =>
                           StartItemTile(
                         item: item,
-                        onTap: () async {
-                          await editStartTime(context, item);
-                        },
+                        // onTap: () async {
+                        //   await editStartTime(context, item);
+                        // },
                         onDismissed: (direction) {
                           BlocProvider.of<ProtocolBloc>(context)
                               .add(ProtocolSetDNS(number: item.number));

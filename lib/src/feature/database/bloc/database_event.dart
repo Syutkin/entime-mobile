@@ -21,10 +21,21 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.deleteStage(int id) = _DeleteStage;
   const factory DatabaseEvent.getParticipantsAtStart(int stageId) =
       _GetParticipantsAtStart;
+
   const factory DatabaseEvent.addStartNumber({
     required Stage stage,
     required int number,
     required String startTime,
     @Default(false) bool forceAdd,
   }) = _AddStartNumber;
+
+  const factory DatabaseEvent.updateStartingInfo({
+    required String startTime,
+    String? automaticStartTime,
+    int? automaticCorrection,
+    String? manualStartTime,
+    int? manualCorrection,
+    required int stageId,
+    required int participantId,
+  }) = _UpdateStartingInfo;
 }

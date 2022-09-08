@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../common/utils/helper.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../countdown/countdown.dart';
@@ -13,6 +14,7 @@ import '../drift/app_database.dart';
 import 'start_item_tile.dart';
 
 part 'popup/add_racer_popup.dart';
+part 'popup/edit_start_time_popup.dart';
 part 'popup/overwrite_start_time_popup.dart';
 
 class StartListPage extends StatefulWidget {
@@ -38,29 +40,31 @@ class _StartListPage extends State<StartListPage> {
           state.mapOrNull(
             initialized: (state) {
               final databaseBloc = context.read<DatabaseBloc>();
+              // Добавление нового стартового времени
+              // Если стартовое время уже присвоено другому номеру
               state.notification?.mapOrNull(
-                updateNumber: (value) async {
-                  //ToDo
+                updateNumber: (notification) async {
                   String text = '';
-                  for (final element in value.existedStartingParticipants) {
+                  for (final element
+                      in notification.existedStartingParticipants) {
                     if (element.automaticStartTime == null &&
                         element.manualStartTime == null) {
                       text += Localization.current.I18nHome_equalStartTime(
-                        value.startTime,
+                        notification.startTime,
                         element.number,
-                        value.number,
+                        notification.number,
                       );
                     } else {
                       if (element.automaticStartTime != null) {
                         text += Localization.current
                             .I18nHome_updateAutomaticStartCorrection(
-                          value.number,
+                          notification.number,
                           element.automaticStartTime!,
                         );
                       } else if (element.manualStartTime != null) {
                         text += Localization.current
                             .I18nHome_updateAutomaticStartCorrection(
-                          value.number,
+                          notification.number,
                           element.manualStartTime!,
                         );
                       } else {
@@ -80,8 +84,8 @@ class _StartListPage extends State<StartListPage> {
                     databaseBloc.add(
                       DatabaseEvent.addStartNumber(
                         stage: widget.stage,
-                        number: value.number,
-                        startTime: value.startTime,
+                        number: notification.number,
+                        startTime: notification.startTime,
                         forceAdd: true,
                       ),
                     );
@@ -279,9 +283,9 @@ class _StartListPage extends State<StartListPage> {
                           StartItemTile(
                         item: item,
                         //ToDo:
-                        // onTap: () async {
-                        //   await editStartTime(context, item);
-                        // },
+                        onTap: () async {
+                          await editStartTime(context, item);
+                        },
                         //ToDo:
                         // onDismissed: (direction) {
                         //   BlocProvider.of<ProtocolBloc>(context)

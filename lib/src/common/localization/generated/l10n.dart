@@ -71,6 +71,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Поправка`
+  String get I18nCore_correction {
+    return Intl.message(
+      'Поправка',
+      name: 'I18nCore_correction',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Что нового`
   String get I18nUpdate_whatsNew {
     return Intl.message(
@@ -1210,6 +1220,116 @@ class GeneratedLocalization {
     return Intl.message(
       'Авто\r\nпоправка',
       name: 'I18nStart_sliverAutomaticCorrection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверное значение поправки`
+  String get I18nStart_incorrectCorrection {
+    return Intl.message(
+      'Неверное значение поправки',
+      name: 'I18nStart_incorrectCorrection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверное значение времени`
+  String get I18nStart_incorrectTime {
+    return Intl.message(
+      'Неверное значение времени',
+      name: 'I18nStart_incorrectTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Участник №{number}`
+  String I18nStart_participantNumber(Object number) {
+    return Intl.message(
+      'Участник №$number',
+      name: 'I18nStart_participantNumber',
+      desc: '',
+      args: [number],
+    );
+  }
+
+  /// `№{number}, {name}`
+  String I18nStart_participantNumberWithName(Object number, Object name) {
+    return Intl.message(
+      '№$number, $name',
+      name: 'I18nStart_participantNumberWithName',
+      desc: '',
+      args: [number, name],
+    );
+  }
+
+  /// `Категория: {category}`
+  String I18nStart_participantCategory(Object category) {
+    return Intl.message(
+      'Категория: $category',
+      name: 'I18nStart_participantCategory',
+      desc: '',
+      args: [category],
+    );
+  }
+
+  /// `Никнейм: {nickname}`
+  String I18nStart_participantNickname(Object nickname) {
+    return Intl.message(
+      'Никнейм: $nickname',
+      name: 'I18nStart_participantNickname',
+      desc: '',
+      args: [nickname],
+    );
+  }
+
+  /// `Категория: {city}`
+  String I18nStart_participantCity(Object city) {
+    return Intl.message(
+      'Категория: $city',
+      name: 'I18nStart_participantCity',
+      desc: '',
+      args: [city],
+    );
+  }
+
+  /// `Категория: {team}`
+  String I18nStart_participantTeam(Object team) {
+    return Intl.message(
+      'Категория: $team',
+      name: 'I18nStart_participantTeam',
+      desc: '',
+      args: [team],
+    );
+  }
+
+  /// `Категория: {year}`
+  String I18nStart_participantYear(Object year) {
+    return Intl.message(
+      'Категория: $year',
+      name: 'I18nStart_participantYear',
+      desc: '',
+      args: [year],
+    );
+  }
+
+  /// `Время старта`
+  String get I18nStart_startTime {
+    return Intl.message(
+      'Время старта',
+      name: 'I18nStart_startTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Время старта на смартфоне`
+  String get I18nStart_startTimeAtSmartphone {
+    return Intl.message(
+      'Время старта на смартфоне',
+      name: 'I18nStart_startTimeAtSmartphone',
       desc: '',
       args: [],
     );

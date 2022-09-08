@@ -1,23 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+part of '../start_list_page.dart';
 
-import '../../../../common/utils/helper.dart';
-import '../../../../common/widget/expanded_alert_dialog.dart';
-import '../../../protocol/protocol.dart';
-
-Future<void> editStartTime(BuildContext context, StartItem item) async {
+Future<void> editStartTime(
+  BuildContext context,
+  GetParticipantsAtStartResult item,
+) async {
+  final automaticStartTimeController = TextEditingController();
   final automaticPhoneTimeController = TextEditingController();
   final manualCorrectionController = TextEditingController();
   final manualStartTimeController = TextEditingController();
-  final automaticStartTimeController = TextEditingController();
+  final startTimeController = TextEditingController();
   final automaticCorrectionController = TextEditingController();
-  manualCorrectionController.text = (item.manualcorrection ?? '').toString();
-  manualStartTimeController.text = item.manualstarttime ?? '';
+  startTimeController.text = item.startTime;
+  manualCorrectionController.text = (item.manualCorrection ?? '').toString();
+  manualStartTimeController.text = item.manualStartTime ?? '';
   automaticCorrectionController.text =
-      (item.automaticcorrection ?? '').toString();
-  automaticStartTimeController.text = item.automaticstarttime ?? '';
-  automaticPhoneTimeController.text = item.automaticphonetime ?? '';
+      (item.automaticCorrection ?? '').toString();
+  automaticStartTimeController.text = item.automaticStartTime ?? '';
+  automaticPhoneTimeController.text = item.timestamp ?? '';
   final formKey = GlobalKey<FormState>();
 
   String? validateCorrection(String? value) {
@@ -25,7 +24,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
       return null;
     }
     if (int.tryParse(value) == null) {
-      return 'Неверное значение поправки';
+      return Localization.current.I18nStart_incorrectCorrection;
     }
     return null;
   }
@@ -35,25 +34,7 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
       return null;
     }
     if (strTimeToDateTime(value) == null) {
-      return 'Неверное значение времени';
-    }
-    return null;
-  }
-
-  StartItem? updatedStartItem() {
-    final automaticCorrection =
-        int.tryParse(automaticCorrectionController.text);
-    final manualCorrection = int.tryParse(manualCorrectionController.text);
-    if (item.automaticcorrection != automaticCorrection ||
-        (item.automaticstarttime ?? '') != automaticStartTimeController.text ||
-        item.manualcorrection != manualCorrection ||
-        (item.manualstarttime ?? '') != manualStartTimeController.text) {
-      return item.copyWith(
-        automaticcorrection: int.tryParse(automaticCorrectionController.text),
-        automaticstarttime: automaticStartTimeController.text,
-        manualcorrection: int.tryParse(manualCorrectionController.text),
-        manualstarttime: manualStartTimeController.text,
-      );
+      return Localization.current.I18nStart_incorrectTime;
     }
     return null;
   }
@@ -64,9 +45,10 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
       width: MediaQuery.of(context).size.width * 0.9,
       scrollable: true,
       title: Text(
-        item.name == null
-            ? 'Участник №${item.number}'
-            : '№${item.number}, ${item.name}',
+        item.name.isEmpty
+            ? Localization.current.I18nStart_participantNumber(item.number)
+            : Localization.current
+                .I18nStart_participantNumberWithName(item.number, item.name),
       ),
       content: Form(
         key: formKey,
@@ -78,77 +60,89 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
           children: <Widget>[
             item.category != null && item.category!.isNotEmpty
                 ? Text(
-                    'Категория: ${item.category}',
+                    Localization.current
+                        .I18nStart_participantCategory(item.category!),
                     style: Theme.of(context).textTheme.subtitle1,
                   )
                 : const SizedBox(),
             item.nickname != null && item.nickname!.isNotEmpty
                 ? Text(
-                    'Никнейм: ${item.nickname}',
+                    Localization.current
+                        .I18nStart_participantNickname(item.nickname!),
                     style: Theme.of(context).textTheme.subtitle1,
                   )
                 : const SizedBox(),
             item.city != null && item.city!.isNotEmpty
                 ? Text(
-                    'Город: ${item.city}',
+                    Localization.current.I18nStart_participantCity(item.city!),
                     style: Theme.of(context).textTheme.subtitle1,
                   )
                 : const SizedBox(),
             item.team != null && item.team!.isNotEmpty
                 ? Text(
-                    'Команда: ${item.team}',
+                    Localization.current.I18nStart_participantTeam(item.team!),
                     style: Theme.of(context).textTheme.subtitle1,
                   )
                 : const SizedBox(),
-            item.age != null && item.age!.isNotEmpty
+            item.birthday != null && item.birthday!.isNotEmpty
                 ? Text(
-                    'Возраст: ${item.age}',
+                    Localization.current
+                        .I18nStart_participantYear(item.birthday!),
                     style: Theme.of(context).textTheme.subtitle1,
                   )
                 : const SizedBox(),
             TextFormField(
+              controller: startTimeController,
+              keyboardType: TextInputType.datetime,
+              decoration: InputDecoration(
+                labelText: Localization.current.I18nStart_startTime,
+                icon: const Icon(MdiIcons.clock),
+              ),
+              validator: (value) => validateStartTime(value),
+            ),
+            TextFormField(
               controller: automaticCorrectionController,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                icon: Icon(MdiIcons.cpu64Bit),
-                labelText: 'Поправка',
+              decoration: InputDecoration(
+                icon: const Icon(MdiIcons.cpu64Bit),
+                labelText: Localization.current.I18nCore_correction,
               ),
               validator: (value) => validateCorrection(value),
             ),
             TextFormField(
               controller: automaticStartTimeController,
               keyboardType: TextInputType.datetime,
-              decoration: const InputDecoration(
-                labelText: 'Время старта',
-                icon: Icon(MdiIcons.cpu64Bit),
+              decoration: InputDecoration(
+                labelText: Localization.current.I18nStart_startTime,
+                icon: const Icon(MdiIcons.cpu64Bit),
               ),
               validator: (value) => validateStartTime(value),
             ),
             TextFormField(
               controller: automaticPhoneTimeController,
-//                keyboardType: TextInputType.datetime,
-              decoration: const InputDecoration(
-                labelText: 'Время старта на смартфоне',
-                icon: Icon(MdiIcons.cellphone),
+              // keyboardType: TextInputType.datetime,
+              decoration: InputDecoration(
+                labelText: Localization.current.I18nStart_startTimeAtSmartphone,
+                icon: const Icon(MdiIcons.cellphone),
               ),
               readOnly: true,
-//                validator: (value) => _validateStartTime(value),
+              // validator: (value) => validateStartTime(value),
             ),
             TextFormField(
               controller: manualCorrectionController,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                icon: Icon(MdiIcons.handBackLeft),
-                labelText: 'Поправка',
+              decoration: InputDecoration(
+                icon: const Icon(MdiIcons.handBackLeft),
+                labelText: Localization.current.I18nCore_correction,
               ),
               validator: (value) => validateCorrection(value),
             ),
             TextFormField(
               controller: manualStartTimeController,
               keyboardType: TextInputType.datetime,
-              decoration: const InputDecoration(
-                labelText: 'Время старта',
-                icon: Icon(MdiIcons.handBackLeft),
+              decoration: InputDecoration(
+                labelText: Localization.current.I18nStart_startTime,
+                icon: const Icon(MdiIcons.handBackLeft),
               ),
               validator: (value) => validateStartTime(value),
             ),
@@ -165,12 +159,21 @@ Future<void> editStartTime(BuildContext context, StartItem item) async {
         TextButton(
           onPressed: () {
             if (formKey.currentState!.validate()) {
-              final newStartItem = updatedStartItem();
-              if (newStartItem != null) {
-                context
-                    .read<ProtocolBloc>()
-                    .add(ProtocolUpdateItemInfoAtStart(item: newStartItem));
-              }
+              final automaticCorrection =
+                  int.tryParse(automaticCorrectionController.text);
+              final manualCorrection =
+                  int.tryParse(manualCorrectionController.text);
+              context.read<DatabaseBloc>().add(
+                    DatabaseEvent.updateStartingInfo(
+                      startTime: startTimeController.text,
+                      automaticStartTime: automaticStartTimeController.text,
+                      automaticCorrection: automaticCorrection,
+                      manualStartTime: manualStartTimeController.text,
+                      manualCorrection: manualCorrection,
+                      stageId: item.stageId,
+                      participantId: item.participantId,
+                    ),
+                  );
               Navigator.of(context).pop();
             }
           },

@@ -18,12 +18,21 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
+  /// Обновляет или добавляет участника с заданным номером и стартовым временем
+  /// Возвращает null при успехе, и список участников если такое же стартовое время
+  /// уже установлено для других участников
   Future<List<ExistedStartingParticipantsResult>?> addStartNumber({
     required Stage stage,
     required int number,
     required String startTime,
     bool forceAdd = false,
   }) async {
+    // Если не принудительно добавлять/обновлять, то
+    // проверяем, что такого же времени старта не установлено другому номеру,
+    // или что номеру не установлено автоматическое или ручное время старта.
+    // Если истина, то добавляем номер, ставим время старта (или обновляем
+    // время старта у существующего номера) и возвращаем null.
+    // В противном случае возвращаем список конфликтующих участников.
     if (!forceAdd) {
       logger.i(
         'Database -> Checking start time $startTime and number $number...',

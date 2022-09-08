@@ -170,6 +170,17 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             );
           }
         },
+        updateStartingInfo: (event) async {
+          await _db.updateStartingInfo(
+            startTime: event.startTime,
+            automaticStartTime: event.automaticStartTime,
+            automaticCorrection: event.automaticCorrection,
+            manualStartTime: event.manualStartTime,
+            manualCorrection: event.manualCorrection,
+            stageId: event.stageId,
+            participantId: event.participantId,
+          );
+        },
       );
     });
   }

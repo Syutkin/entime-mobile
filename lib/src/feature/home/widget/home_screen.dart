@@ -13,7 +13,7 @@ import '../../protocol_screens/protocol_screens.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../../tab/tab.dart';
 import '../../update/update.dart';
-import 'add_racer_popup.dart';
+// import 'add_racer_popup.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
         child: BlocListener<ProtocolBloc, ProtocolState>(
           listener: (context, state) async {
             final protocolBloc = context.read<ProtocolBloc>();
-            final materialLocalization = MaterialLocalizations.of(context);
+            // final materialLocalization = MaterialLocalizations.of(context);
             if (state is ProtocolSelectedState) {
               // Обновление автоматического времени старта
               if (state.automaticStart != null &&
@@ -79,52 +79,52 @@ class HomeScreen extends StatelessWidget {
                 }
               }
               // Добавление нового стартового времени
-              if (state.previousStart != null && state.startTime != null) {
-                // Если стартовое время уже присвоено другому номеру
-                String text = '';
-                for (final element in state.previousStart!) {
-                  if (element.automaticstarttime == null &&
-                      element.manualstarttime == null) {
-                    text += Localization.current.I18nHome_equalStartTime(
-                      state.startTime!.time,
-                      element.number,
-                      state.startTime!.number,
-                    );
-                  } else {
-                    if (element.automaticstarttime != null) {
-                      text += Localization.current
-                          .I18nHome_updateAutomaticStartCorrection(
-                        state.startTime!.number,
-                        element.automaticstarttime!,
-                      );
-                    } else if (element.manualstarttime != null) {
-                      text += Localization.current
-                          .I18nHome_updateAutomaticStartCorrection(
-                        state.startTime!.number,
-                        element.manualstarttime!,
-                      );
-                    } else {
-                      text += Localization.current.I18nHome_errorAddParticipant(
-                        materialLocalization.cancelButtonLabel,
-                      );
-                    }
-                  }
-                }
+              // if (state.previousStart != null && state.startTime != null) {
+              //   // Если стартовое время уже присвоено другому номеру
+              //   String text = '';
+              //   for (final element in state.previousStart!) {
+              //     if (element.automaticstarttime == null &&
+              //         element.manualstarttime == null) {
+              //       text += Localization.current.I18nHome_equalStartTime(
+              //         state.startTime!.time,
+              //         element.number,
+              //         state.startTime!.number,
+              //       );
+              //     } else {
+              //       if (element.automaticstarttime != null) {
+              //         text += Localization.current
+              //             .I18nHome_updateAutomaticStartCorrection(
+              //           state.startTime!.number,
+              //           element.automaticstarttime!,
+              //         );
+              //       } else if (element.manualstarttime != null) {
+              //         text += Localization.current
+              //             .I18nHome_updateAutomaticStartCorrection(
+              //           state.startTime!.number,
+              //           element.manualstarttime!,
+              //         );
+              //       } else {
+              //         text += Localization.current.I18nHome_errorAddParticipant(
+              //           materialLocalization.cancelButtonLabel,
+              //         );
+              //       }
+              //     }
+              //   }
 
-                final bool? update = await overwriteStartTimePopup(
-                  context: context,
-                  text: text,
-                );
+              //   final bool? update = await overwriteStartTimePopup(
+              //     context: context,
+              //     text: text,
+              //   );
 
-                if (update != null && update) {
-                  protocolBloc.add(
-                    ProtocolAddStartNumber(
-                      startTime: state.startTime!,
-                      forceAdd: true,
-                    ),
-                  );
-                }
-              }
+              //   if (update != null && update) {
+              //     protocolBloc.add(
+              //       ProtocolAddStartNumber(
+              //         startTime: state.startTime!,
+              //         forceAdd: true,
+              //       ),
+              //     );
+              //   }
+              // }
             }
           },
           child: BlocBuilder<TabBloc, AppTab>(
@@ -465,7 +465,7 @@ class _MenuButton extends StatelessWidget {
                     }
                     break;
                   case MenuButton.addRacer:
-                    await addRacerPopup(context);
+                    // await addRacerPopup(context);
                     break;
                   case MenuButton.selectStartProtocol:
                     await routeToSelectFileScreen(context);

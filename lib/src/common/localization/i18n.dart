@@ -12,6 +12,11 @@ class I18nCore {
         'Предупреждение',
         name: 'I18nCore_warning',
       );
+
+  static String get correction => Intl.message(
+        'Поправка',
+        name: 'I18nCore_correction',
+      );
 }
 
 class I18nUpdate {
@@ -705,6 +710,66 @@ class I18nStart {
   static String get sliverAutomaticCorrection => Intl.message(
         'Авто\r\nпоправка',
         name: 'I18nStart_sliverAutomaticCorrection',
+      );
+
+// edit_start_time_popup
+  static String get incorrectCorrection => Intl.message(
+        'Неверное значение поправки',
+        name: 'I18nStart_incorrectCorrection',
+      );
+
+  static String get incorrectTime => Intl.message(
+        'Неверное значение времени',
+        name: 'I18nStart_incorrectTime',
+      );
+
+  static String participantNumber(int number) => Intl.message(
+        'Участник №$number',
+        name: 'I18nStart_participantNumber',
+        args: [number],
+      );
+
+  static String participantNumberWithName(int number, String name) =>
+      Intl.message(
+        '№$number, $name',
+        name: 'I18nStart_participantNumberWithName',
+        args: [number, name],
+      );
+
+  static String participantCategory(String category) => Intl.message(
+        'Категория: $category',
+        name: 'I18nStart_participantCategory',
+        args: [category],
+      );
+  static String participantNickname(String nickname) => Intl.message(
+        'Никнейм: $nickname',
+        name: 'I18nStart_participantNickname',
+        args: [nickname],
+      );
+  static String participantCity(String city) => Intl.message(
+        'Категория: $city',
+        name: 'I18nStart_participantCity',
+        args: [city],
+      );
+  static String participantTeam(String team) => Intl.message(
+        'Категория: $team',
+        name: 'I18nStart_participantTeam',
+        args: [team],
+      );
+  static String participantYear(int year) => Intl.message(
+        'Категория: $year',
+        name: 'I18nStart_participantYear',
+        args: [year],
+      );
+
+  static String get startTime => Intl.message(
+        'Время старта',
+        name: 'I18nStart_startTime',
+      );
+
+  static String get startTimeAtSmartphone => Intl.message(
+        'Время старта на смартфоне',
+        name: 'I18nStart_startTimeAtSmartphone',
       );
 }
 

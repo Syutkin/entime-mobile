@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-09-08T13:01:45.779027",
+  "@@last_modified": "2022-09-08T13:36:04.394943",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -8,6 +8,12 @@
   },
   "I18nCore_warning": "Предупреждение",
   "@I18nCore_warning": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nCore_correction": "Поправка",
+  "@I18nCore_correction": {
     "type": "text",
     "placeholders_order": [],
     "placeholders": {}
@@ -759,6 +765,102 @@
   },
   "I18nStart_sliverAutomaticCorrection": "Авто\r\nпоправка",
   "@I18nStart_sliverAutomaticCorrection": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nStart_incorrectCorrection": "Неверное значение поправки",
+  "@I18nStart_incorrectCorrection": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nStart_incorrectTime": "Неверное значение времени",
+  "@I18nStart_incorrectTime": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nStart_participantNumber": "Участник №{number}",
+  "@I18nStart_participantNumber": {
+    "type": "text",
+    "placeholders_order": [
+      "number"
+    ],
+    "placeholders": {
+      "number": {}
+    }
+  },
+  "I18nStart_participantNumberWithName": "№{number}, {name}",
+  "@I18nStart_participantNumberWithName": {
+    "type": "text",
+    "placeholders_order": [
+      "number",
+      "name"
+    ],
+    "placeholders": {
+      "number": {},
+      "name": {}
+    }
+  },
+  "I18nStart_participantCategory": "Категория: {category}",
+  "@I18nStart_participantCategory": {
+    "type": "text",
+    "placeholders_order": [
+      "category"
+    ],
+    "placeholders": {
+      "category": {}
+    }
+  },
+  "I18nStart_participantNickname": "Никнейм: {nickname}",
+  "@I18nStart_participantNickname": {
+    "type": "text",
+    "placeholders_order": [
+      "nickname"
+    ],
+    "placeholders": {
+      "nickname": {}
+    }
+  },
+  "I18nStart_participantCity": "Категория: {city}",
+  "@I18nStart_participantCity": {
+    "type": "text",
+    "placeholders_order": [
+      "city"
+    ],
+    "placeholders": {
+      "city": {}
+    }
+  },
+  "I18nStart_participantTeam": "Категория: {team}",
+  "@I18nStart_participantTeam": {
+    "type": "text",
+    "placeholders_order": [
+      "team"
+    ],
+    "placeholders": {
+      "team": {}
+    }
+  },
+  "I18nStart_participantYear": "Категория: {year}",
+  "@I18nStart_participantYear": {
+    "type": "text",
+    "placeholders_order": [
+      "year"
+    ],
+    "placeholders": {
+      "year": {}
+    }
+  },
+  "I18nStart_startTime": "Время старта",
+  "@I18nStart_startTime": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "I18nStart_startTimeAtSmartphone": "Время старта на смартфоне",
+  "@I18nStart_startTimeAtSmartphone": {
     "type": "text",
     "placeholders_order": [],
     "placeholders": {}

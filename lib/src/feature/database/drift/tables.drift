@@ -22,7 +22,7 @@ CREATE TABLE riders (
 	id integer PRIMARY KEY AUTOINCREMENT,
 	name text NOT NULL,
 	nickname text,
-	birthday integer,
+	birthday text,
 	team text,
 	city text,
 	email text,
@@ -97,17 +97,27 @@ getParticipantsAtStart:
 SELECT *
 FROM participants, riders, starts
 WHERE participants.rider_id = riders.id
-  AND starts.participant_id = participants.id
-  AND stage_id = :stage_id
-  AND starts.status_id = 1
-  AND participants.status_id = 1
+    AND starts.participant_id = participants.id
+	AND stage_id = :stage_id
+	AND starts.status_id = 1
+	AND participants.status_id = 1
 ORDER BY start_time ASC;
 
 existedStartingParticipants:
 SELECT *
 FROM starts, participants
 WHERE starts.participant_id = participants.id
-  AND stage_id = :stage_id
-  AND (start_time IS :start_time
-    OR (number IS :number
-      AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));
+	AND stage_id = :stage_id
+	AND (start_time IS :start_time
+    	OR (number IS :number
+      	AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));
+
+updateStartingInfo:
+UPDATE starts
+SET start_time = :start_time,
+	automatic_start_time = :automatic_start_time,
+    automatic_correction = :automatic_correction,
+    manual_start_time = :manual_start_time,
+    manual_correction = :manual_correction
+WHERE stage_id = :stage_id
+	AND participant_id = :participant_id;

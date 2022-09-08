@@ -1042,7 +1042,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   final int? id;
   final String name;
   final String? nickname;
-  final int? birthday;
+  final String? birthday;
   final String? team;
   final String? city;
   final String? email;
@@ -1066,7 +1066,7 @@ class Rider extends DataClass implements Insertable<Rider> {
           .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       nickname: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}nickname']),
-      birthday: const IntType()
+      birthday: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}birthday']),
       team: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}team']),
@@ -1091,7 +1091,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       map['nickname'] = Variable<String?>(nickname);
     }
     if (!nullToAbsent || birthday != null) {
-      map['birthday'] = Variable<int?>(birthday);
+      map['birthday'] = Variable<String?>(birthday);
     }
     if (!nullToAbsent || team != null) {
       map['team'] = Variable<String?>(team);
@@ -1140,7 +1140,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       id: serializer.fromJson<int?>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       nickname: serializer.fromJson<String?>(json['nickname']),
-      birthday: serializer.fromJson<int?>(json['birthday']),
+      birthday: serializer.fromJson<String?>(json['birthday']),
       team: serializer.fromJson<String?>(json['team']),
       city: serializer.fromJson<String?>(json['city']),
       email: serializer.fromJson<String?>(json['email']),
@@ -1155,7 +1155,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       'id': serializer.toJson<int?>(id),
       'name': serializer.toJson<String>(name),
       'nickname': serializer.toJson<String?>(nickname),
-      'birthday': serializer.toJson<int?>(birthday),
+      'birthday': serializer.toJson<String?>(birthday),
       'team': serializer.toJson<String?>(team),
       'city': serializer.toJson<String?>(city),
       'email': serializer.toJson<String?>(email),
@@ -1168,7 +1168,7 @@ class Rider extends DataClass implements Insertable<Rider> {
           {int? id,
           String? name,
           String? nickname,
-          int? birthday,
+          String? birthday,
           String? team,
           String? city,
           String? email,
@@ -1223,7 +1223,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
   final Value<int?> id;
   final Value<String> name;
   final Value<String?> nickname;
-  final Value<int?> birthday;
+  final Value<String?> birthday;
   final Value<String?> team;
   final Value<String?> city;
   final Value<String?> email;
@@ -1255,7 +1255,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     Expression<int?>? id,
     Expression<String>? name,
     Expression<String?>? nickname,
-    Expression<int?>? birthday,
+    Expression<String?>? birthday,
     Expression<String?>? team,
     Expression<String?>? city,
     Expression<String?>? email,
@@ -1279,7 +1279,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
       {Value<int?>? id,
       Value<String>? name,
       Value<String?>? nickname,
-      Value<int?>? birthday,
+      Value<String?>? birthday,
       Value<String?>? team,
       Value<String?>? city,
       Value<String?>? email,
@@ -1311,7 +1311,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
       map['nickname'] = Variable<String?>(nickname.value);
     }
     if (birthday.present) {
-      map['birthday'] = Variable<int?>(birthday.value);
+      map['birthday'] = Variable<String?>(birthday.value);
     }
     if (team.present) {
       map['team'] = Variable<String?>(team.value);
@@ -1372,9 +1372,9 @@ class Riders extends Table with TableInfo<Riders, Rider> {
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _birthdayMeta = const VerificationMeta('birthday');
-  late final GeneratedColumn<int?> birthday = GeneratedColumn<int?>(
+  late final GeneratedColumn<String?> birthday = GeneratedColumn<String?>(
       'birthday', aliasedName, true,
-      type: const IntType(),
+      type: const StringType(),
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _teamMeta = const VerificationMeta('team');
@@ -2981,7 +2981,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<GetParticipantsAtStartResult> getParticipantsAtStart(
       {required int stageId}) {
     return customSelect(
-        'SELECT *\r\nFROM participants, riders, starts\r\nWHERE participants.rider_id = riders.id\r\n  AND starts.participant_id = participants.id\r\n  AND stage_id = :stage_id\r\n  AND starts.status_id = 1\r\n  AND participants.status_id = 1\r\nORDER BY start_time ASC',
+        'SELECT *\r\nFROM participants, riders, starts\r\nWHERE participants.rider_id = riders.id\r\n    AND starts.participant_id = participants.id\r\n	AND stage_id = :stage_id\r\n	AND starts.status_id = 1\r\n	AND participants.status_id = 1\r\nORDER BY start_time ASC',
         variables: [
           Variable<int>(stageId)
         ],
@@ -3001,7 +3001,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         id1: row.read<int?>('id'),
         name: row.read<String>('name'),
         nickname: row.read<String?>('nickname'),
-        birthday: row.read<int?>('birthday'),
+        birthday: row.read<String?>('birthday'),
         team: row.read<String?>('team'),
         city: row.read<String?>('city'),
         email: row.read<String?>('email'),
@@ -3024,7 +3024,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<ExistedStartingParticipantsResult> existedStartingParticipants(
       {required int stageId, required String startTime, required int number}) {
     return customSelect(
-        'SELECT *\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n  AND stage_id = :stage_id\r\n  AND (start_time IS :start_time\r\n    OR (number IS :number\r\n      AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
+        'SELECT *\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n	AND stage_id = :stage_id\r\n	AND (start_time IS :start_time\r\n    	OR (number IS :number\r\n      	AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
         variables: [
           Variable<int>(stageId),
           Variable<String>(startTime),
@@ -3056,6 +3056,30 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     });
   }
 
+  Future<int> updateStartingInfo(
+      {required String startTime,
+      String? automaticStartTime,
+      int? automaticCorrection,
+      String? manualStartTime,
+      int? manualCorrection,
+      required int stageId,
+      required int participantId}) {
+    return customUpdate(
+      'UPDATE starts\r\nSET start_time = :start_time,\r\n	automatic_start_time = :automatic_start_time,\r\n    automatic_correction = :automatic_correction,\r\n    manual_start_time = :manual_start_time,\r\n    manual_correction = :manual_correction\r\nWHERE stage_id = :stage_id\r\n	AND participant_id = :participant_id',
+      variables: [
+        Variable<String>(startTime),
+        Variable<String?>(automaticStartTime),
+        Variable<int?>(automaticCorrection),
+        Variable<String?>(manualStartTime),
+        Variable<int?>(manualCorrection),
+        Variable<int>(stageId),
+        Variable<int>(participantId)
+      ],
+      updates: {starts},
+      updateKind: UpdateKind.update,
+    );
+  }
+
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
@@ -3074,7 +3098,7 @@ class GetParticipantsAtStartResult {
   final int? id1;
   final String name;
   final String? nickname;
-  final int? birthday;
+  final String? birthday;
   final String? team;
   final String? city;
   final String? email;
