@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
+import '../../countdown/countdown.dart';
 import '../bloc/database_bloc.dart';
 import '../drift/app_database.dart';
 import 'start_list_page.dart';
@@ -39,6 +40,9 @@ class StagesListPage extends StatelessWidget {
                       context
                           .read<DatabaseBloc>()
                           .add(DatabaseEvent.getParticipantsAtStart(stage.id!));
+                      context
+                          .read<CountdownBloc>()
+                          .add(CountdownEvent.start(stageId: stage.id!));
                       Navigator.of(context).push(
                         MaterialPageRoute<void>(
                           builder: (context) => StartListPage(stage: stage),

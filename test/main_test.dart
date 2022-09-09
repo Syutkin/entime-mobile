@@ -5,6 +5,7 @@ import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
+import 'package:entime/src/feature/countdown/logic/countdown.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/home/home.dart';
 import 'package:entime/src/feature/log/logic/log_provider.dart';
@@ -62,6 +63,8 @@ void main() async {
 
   final AppDatabase database = MockAppDatabase();
 
+  final CountdownAtStart countdown = CountdownAtStart(database: database);
+
   group('EntimeApp', () {
     testWidgets('renders EntimeAppView', (tester) async {
       await tester.pumpWidget(
@@ -74,6 +77,7 @@ void main() async {
           protocolProvider: protocolProvider,
           logProvider: logProvider,
           database: database,
+          countdown: countdown,
         ),
       ); // Create main app
       expect(find.byType(EntimeAppView), findsOneWidget);

@@ -39,9 +39,14 @@ class _StartListPage extends State<StartListPage> {
         listener: (context, state) {
           state.mapOrNull(
             initialized: (state) {
-              final databaseBloc = context.read<DatabaseBloc>();
+              // обновлять обратный отсчёт при любом изменении состояния DatabaseBloc
+              // context
+              //     .read<CountdownBloc>()
+              //     .add(CountdownEvent.start(stageId: widget.stage.raceId));
+
               // Добавление нового стартового времени
               // Если стартовое время уже присвоено другому номеру
+              final databaseBloc = context.read<DatabaseBloc>();
               state.notification?.mapOrNull(
                 updateNumber: (notification) async {
                   String text = '';
@@ -123,16 +128,6 @@ class _StartListPage extends State<StartListPage> {
               ),
             ],
           ),
-          // body: BlocListener<ProtocolBloc, ProtocolState>(
-          //   listener: (context, state) {
-          //     state.mapOrNull(
-          //       selected: (state) {
-          //         context
-          //             .read<CountdownBloc>()
-          //             .add(const CountdownEvent.reload());
-          //       },
-          //     );
-          //   },
           body: BlocBuilder<DatabaseBloc, DatabaseState>(
             builder: (context, state) => state.map(
               initial: (state) => const SizedBox.shrink(),
@@ -273,8 +268,10 @@ class _StartListPage extends State<StartListPage> {
                 final item = startList[index];
                 return BlocBuilder<CountdownBloc, CountdownState>(
                   builder: (context, countdownState) {
+            
                     final isHighlighted =
                         item.startTime == _activeStartTime(countdownState);
+                    // print('item.startTime: ${item.startTime}, _activeStartTime(countdownState): ${_activeStartTime(countdownState)}');
                     return BlocBuilder<SettingsBloc, SettingsState>(
                       builder: (
                         context,
@@ -282,7 +279,6 @@ class _StartListPage extends State<StartListPage> {
                       ) =>
                           StartItemTile(
                         item: item,
-                        //ToDo:
                         onTap: () async {
                           await editStartTime(context, item);
                         },
@@ -318,12 +314,12 @@ class _StartListPage extends State<StartListPage> {
               left: settingsState.settings.countdownLeft,
               top: settingsState.settings.countdownTop,
               child: BlocBuilder<CountdownBloc, CountdownState>(
-                builder: (context, countdownState) {
-                  if (countdownState is CountdownWorkingState) {
+                builder: (context, state) => state.maybeMap(
+                  working: (state) {
                     final countdownWidget = CountdownWidget(
                       key: _countdownKey,
                       size: settingsState.settings.countdownSize,
-                      text: countdownState.text,
+                      text: state.text,
                     );
                     return Draggable(
                       feedback: countdownWidget,
@@ -332,7 +328,8 @@ class _StartListPage extends State<StartListPage> {
                           _placeCountdownWidget(dragDetails),
                       child: countdownWidget,
                     );
-                  } else {
+                  },
+                  orElse: () {
                     final countdownWidget = CountdownWidget(
                       key: _countdownKey,
                       size: settingsState.settings.countdownSize,
@@ -344,8 +341,8 @@ class _StartListPage extends State<StartListPage> {
                           _placeCountdownWidget(dragDetails),
                       child: countdownWidget,
                     );
-                  }
-                },
+                  },
+                ),
               ),
             );
           } else {
@@ -402,16 +399,16 @@ class _StartListPage extends State<StartListPage> {
   }
 
   String? _activeStartTime(CountdownState countdownState) {
-    if (countdownState is CountdownWorkingState) {
-      return countdownState.nextStartTime;
-    }
+    countdownState.mapOrNull(
+      working: (state) => state.nextStartTime,
+    );
     return null;
   }
 
   String? _countdownFromState(CountdownState countdownState) {
-    if (countdownState is CountdownWorkingState) {
-      return countdownState.text;
-    }
+    countdownState.mapOrNull(
+      working: (state) => state.text,
+    );
     return null;
   }
 }

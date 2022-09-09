@@ -3115,6 +3115,27 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Selectable<GetNextStartingParticipantsResult> getNextStartingParticipants(
+      {required int stageId, required String time}) {
+    return customSelect(
+        'SELECT \r\n	participants.number as number,\r\n  	starts.start_time as start_time,\r\n	starts.automatic_start_time as automatic_start_time,\r\n	starts.automatic_correction as automatic_correction\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n	AND starts.stage_id = :stage_id\r\n	AND start_time > :time\r\n	AND automatic_start_time ISNULL\r\n	AND participants.status_id = 1\r\n	AND starts.status_id = 1\r\nORDER BY start_time ASC',
+        variables: [
+          Variable<int>(stageId),
+          Variable<String>(time)
+        ],
+        readsFrom: {
+          participants,
+          starts,
+        }).map((QueryRow row) {
+      return GetNextStartingParticipantsResult(
+        number: row.read<int>('number'),
+        startTime: row.read<String>('start_time'),
+        automaticStartTime: row.read<String?>('automatic_start_time'),
+        automaticCorrection: row.read<int?>('automatic_correction'),
+      );
+    });
+  }
+
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
@@ -3215,5 +3236,18 @@ class GetExistedStartingParticipantsResult {
     this.category,
     this.rfid,
     required this.statusId1,
+  });
+}
+
+class GetNextStartingParticipantsResult {
+  final int number;
+  final String startTime;
+  final String? automaticStartTime;
+  final int? automaticCorrection;
+  GetNextStartingParticipantsResult({
+    required this.number,
+    required this.startTime,
+    this.automaticStartTime,
+    this.automaticCorrection,
   });
 }

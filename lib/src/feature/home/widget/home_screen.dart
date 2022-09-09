@@ -5,15 +5,17 @@ import 'package:path/path.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../bluetooth/bluetooth.dart';
+import '../../database/drift/app_database.dart';
+import '../../database/widget/start_list_page.dart';
 import '../../drawer/widget/app_drawer.dart';
 import '../../init/init.dart';
 import '../../module_settings/module_settings.dart';
 import '../../protocol/protocol.dart';
-import '../../protocol_screens/protocol_screens.dart';
+import '../../protocol_screens/finish/widget/finish_screen.dart';
+import '../../protocol_screens/model/menu_button.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../../tab/tab.dart';
 import '../../update/update.dart';
-// import 'add_racer_popup.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -78,53 +80,6 @@ class HomeScreen extends StatelessWidget {
                   );
                 }
               }
-              // Добавление нового стартового времени
-              // if (state.previousStart != null && state.startTime != null) {
-              //   // Если стартовое время уже присвоено другому номеру
-              //   String text = '';
-              //   for (final element in state.previousStart!) {
-              //     if (element.automaticstarttime == null &&
-              //         element.manualstarttime == null) {
-              //       text += Localization.current.I18nHome_equalStartTime(
-              //         state.startTime!.time,
-              //         element.number,
-              //         state.startTime!.number,
-              //       );
-              //     } else {
-              //       if (element.automaticstarttime != null) {
-              //         text += Localization.current
-              //             .I18nHome_updateAutomaticStartCorrection(
-              //           state.startTime!.number,
-              //           element.automaticstarttime!,
-              //         );
-              //       } else if (element.manualstarttime != null) {
-              //         text += Localization.current
-              //             .I18nHome_updateAutomaticStartCorrection(
-              //           state.startTime!.number,
-              //           element.manualstarttime!,
-              //         );
-              //       } else {
-              //         text += Localization.current.I18nHome_errorAddParticipant(
-              //           materialLocalization.cancelButtonLabel,
-              //         );
-              //       }
-              //     }
-              //   }
-
-              //   final bool? update = await overwriteStartTimePopup(
-              //     context: context,
-              //     text: text,
-              //   );
-
-              //   if (update != null && update) {
-              //     protocolBloc.add(
-              //       ProtocolAddStartNumber(
-              //         startTime: state.startTime!,
-              //         forceAdd: true,
-              //       ),
-              //     );
-              //   }
-              // }
             }
           },
           child: BlocBuilder<TabBloc, AppTab>(
@@ -207,12 +162,20 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                   ],
-                  child: const TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
+                  child: TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      InitScreen(),
-                      StartScreen(),
-                      FinishScreen(),
+                      const InitScreen(),
+                      //ToDo: rework Start page
+                      StartListPage(
+                        stage: Stage(
+                          raceId: 1,
+                          name: 'name',
+                          isActive: true,
+                          isDeleted: false,
+                        ),
+                      ),
+                      const FinishScreen(),
                     ],
                   ),
                 ),

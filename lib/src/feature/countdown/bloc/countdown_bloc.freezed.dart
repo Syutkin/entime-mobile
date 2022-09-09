@@ -18,39 +18,39 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CountdownEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String text) tick,
-    required TResult Function() reload,
+    required TResult Function(String text, DateTime? nextStartTime) tick,
+    required TResult Function(int stageId) start,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String text)? tick,
-    TResult Function()? reload,
+    TResult Function(String text, DateTime? nextStartTime)? tick,
+    TResult Function(int stageId)? start,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String text)? tick,
-    TResult Function()? reload,
+    TResult Function(String text, DateTime? nextStartTime)? tick,
+    TResult Function(int stageId)? start,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TickEvent value) tick,
-    required TResult Function(TickInit value) reload,
+    required TResult Function(_TickEvent value) tick,
+    required TResult Function(_TickInit value) start,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TickEvent value)? tick,
-    TResult Function(TickInit value)? reload,
+    TResult Function(_TickEvent value)? tick,
+    TResult Function(_TickInit value)? start,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TickEvent value)? tick,
-    TResult Function(TickInit value)? reload,
+    TResult Function(_TickEvent value)? tick,
+    TResult Function(_TickInit value)? start,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -74,93 +74,105 @@ class _$CountdownEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$TickEventCopyWith<$Res> {
-  factory _$$TickEventCopyWith(
-          _$TickEvent value, $Res Function(_$TickEvent) then) =
-      __$$TickEventCopyWithImpl<$Res>;
-  $Res call({String text});
+abstract class _$$_TickEventCopyWith<$Res> {
+  factory _$$_TickEventCopyWith(
+          _$_TickEvent value, $Res Function(_$_TickEvent) then) =
+      __$$_TickEventCopyWithImpl<$Res>;
+  $Res call({String text, DateTime? nextStartTime});
 }
 
 /// @nodoc
-class __$$TickEventCopyWithImpl<$Res> extends _$CountdownEventCopyWithImpl<$Res>
-    implements _$$TickEventCopyWith<$Res> {
-  __$$TickEventCopyWithImpl(
-      _$TickEvent _value, $Res Function(_$TickEvent) _then)
-      : super(_value, (v) => _then(v as _$TickEvent));
+class __$$_TickEventCopyWithImpl<$Res>
+    extends _$CountdownEventCopyWithImpl<$Res>
+    implements _$$_TickEventCopyWith<$Res> {
+  __$$_TickEventCopyWithImpl(
+      _$_TickEvent _value, $Res Function(_$_TickEvent) _then)
+      : super(_value, (v) => _then(v as _$_TickEvent));
 
   @override
-  _$TickEvent get _value => super._value as _$TickEvent;
+  _$_TickEvent get _value => super._value as _$_TickEvent;
 
   @override
   $Res call({
     Object? text = freezed,
+    Object? nextStartTime = freezed,
   }) {
-    return _then(_$TickEvent(
+    return _then(_$_TickEvent(
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      nextStartTime: nextStartTime == freezed
+          ? _value.nextStartTime
+          : nextStartTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$TickEvent implements TickEvent {
-  const _$TickEvent({required this.text});
+class _$_TickEvent implements _TickEvent {
+  const _$_TickEvent({required this.text, this.nextStartTime});
 
   @override
   final String text;
+  @override
+  final DateTime? nextStartTime;
 
   @override
   String toString() {
-    return 'CountdownEvent.tick(text: $text)';
+    return 'CountdownEvent.tick(text: $text, nextStartTime: $nextStartTime)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TickEvent &&
-            const DeepCollectionEquality().equals(other.text, text));
+            other is _$_TickEvent &&
+            const DeepCollectionEquality().equals(other.text, text) &&
+            const DeepCollectionEquality()
+                .equals(other.nextStartTime, nextStartTime));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(text));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(text),
+      const DeepCollectionEquality().hash(nextStartTime));
 
   @JsonKey(ignore: true)
   @override
-  _$$TickEventCopyWith<_$TickEvent> get copyWith =>
-      __$$TickEventCopyWithImpl<_$TickEvent>(this, _$identity);
+  _$$_TickEventCopyWith<_$_TickEvent> get copyWith =>
+      __$$_TickEventCopyWithImpl<_$_TickEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String text) tick,
-    required TResult Function() reload,
+    required TResult Function(String text, DateTime? nextStartTime) tick,
+    required TResult Function(int stageId) start,
   }) {
-    return tick(text);
+    return tick(text, nextStartTime);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String text)? tick,
-    TResult Function()? reload,
+    TResult Function(String text, DateTime? nextStartTime)? tick,
+    TResult Function(int stageId)? start,
   }) {
-    return tick?.call(text);
+    return tick?.call(text, nextStartTime);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String text)? tick,
-    TResult Function()? reload,
+    TResult Function(String text, DateTime? nextStartTime)? tick,
+    TResult Function(int stageId)? start,
     required TResult orElse(),
   }) {
     if (tick != null) {
-      return tick(text);
+      return tick(text, nextStartTime);
     }
     return orElse();
   }
@@ -168,8 +180,8 @@ class _$TickEvent implements TickEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TickEvent value) tick,
-    required TResult Function(TickInit value) reload,
+    required TResult Function(_TickEvent value) tick,
+    required TResult Function(_TickInit value) start,
   }) {
     return tick(this);
   }
@@ -177,8 +189,8 @@ class _$TickEvent implements TickEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TickEvent value)? tick,
-    TResult Function(TickInit value)? reload,
+    TResult Function(_TickEvent value)? tick,
+    TResult Function(_TickInit value)? start,
   }) {
     return tick?.call(this);
   }
@@ -186,8 +198,8 @@ class _$TickEvent implements TickEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TickEvent value)? tick,
-    TResult Function(TickInit value)? reload,
+    TResult Function(_TickEvent value)? tick,
+    TResult Function(_TickInit value)? start,
     required TResult orElse(),
   }) {
     if (tick != null) {
@@ -197,78 +209,106 @@ class _$TickEvent implements TickEvent {
   }
 }
 
-abstract class TickEvent implements CountdownEvent {
-  const factory TickEvent({required final String text}) = _$TickEvent;
+abstract class _TickEvent implements CountdownEvent {
+  const factory _TickEvent(
+      {required final String text,
+      final DateTime? nextStartTime}) = _$_TickEvent;
 
   String get text;
+  DateTime? get nextStartTime;
   @JsonKey(ignore: true)
-  _$$TickEventCopyWith<_$TickEvent> get copyWith =>
+  _$$_TickEventCopyWith<_$_TickEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TickInitCopyWith<$Res> {
-  factory _$$TickInitCopyWith(
-          _$TickInit value, $Res Function(_$TickInit) then) =
-      __$$TickInitCopyWithImpl<$Res>;
+abstract class _$$_TickInitCopyWith<$Res> {
+  factory _$$_TickInitCopyWith(
+          _$_TickInit value, $Res Function(_$_TickInit) then) =
+      __$$_TickInitCopyWithImpl<$Res>;
+  $Res call({int stageId});
 }
 
 /// @nodoc
-class __$$TickInitCopyWithImpl<$Res> extends _$CountdownEventCopyWithImpl<$Res>
-    implements _$$TickInitCopyWith<$Res> {
-  __$$TickInitCopyWithImpl(_$TickInit _value, $Res Function(_$TickInit) _then)
-      : super(_value, (v) => _then(v as _$TickInit));
+class __$$_TickInitCopyWithImpl<$Res> extends _$CountdownEventCopyWithImpl<$Res>
+    implements _$$_TickInitCopyWith<$Res> {
+  __$$_TickInitCopyWithImpl(
+      _$_TickInit _value, $Res Function(_$_TickInit) _then)
+      : super(_value, (v) => _then(v as _$_TickInit));
 
   @override
-  _$TickInit get _value => super._value as _$TickInit;
+  _$_TickInit get _value => super._value as _$_TickInit;
+
+  @override
+  $Res call({
+    Object? stageId = freezed,
+  }) {
+    return _then(_$_TickInit(
+      stageId: stageId == freezed
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$TickInit implements TickInit {
-  const _$TickInit();
+class _$_TickInit implements _TickInit {
+  const _$_TickInit({required this.stageId});
+
+  @override
+  final int stageId;
 
   @override
   String toString() {
-    return 'CountdownEvent.reload()';
+    return 'CountdownEvent.start(stageId: $stageId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TickInit);
+        (other.runtimeType == runtimeType &&
+            other is _$_TickInit &&
+            const DeepCollectionEquality().equals(other.stageId, stageId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(stageId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_TickInitCopyWith<_$_TickInit> get copyWith =>
+      __$$_TickInitCopyWithImpl<_$_TickInit>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String text) tick,
-    required TResult Function() reload,
+    required TResult Function(String text, DateTime? nextStartTime) tick,
+    required TResult Function(int stageId) start,
   }) {
-    return reload();
+    return start(stageId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String text)? tick,
-    TResult Function()? reload,
+    TResult Function(String text, DateTime? nextStartTime)? tick,
+    TResult Function(int stageId)? start,
   }) {
-    return reload?.call();
+    return start?.call(stageId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String text)? tick,
-    TResult Function()? reload,
+    TResult Function(String text, DateTime? nextStartTime)? tick,
+    TResult Function(int stageId)? start,
     required TResult orElse(),
   }) {
-    if (reload != null) {
-      return reload();
+    if (start != null) {
+      return start(stageId);
     }
     return orElse();
   }
@@ -276,37 +316,42 @@ class _$TickInit implements TickInit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TickEvent value) tick,
-    required TResult Function(TickInit value) reload,
+    required TResult Function(_TickEvent value) tick,
+    required TResult Function(_TickInit value) start,
   }) {
-    return reload(this);
+    return start(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TickEvent value)? tick,
-    TResult Function(TickInit value)? reload,
+    TResult Function(_TickEvent value)? tick,
+    TResult Function(_TickInit value)? start,
   }) {
-    return reload?.call(this);
+    return start?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TickEvent value)? tick,
-    TResult Function(TickInit value)? reload,
+    TResult Function(_TickEvent value)? tick,
+    TResult Function(_TickInit value)? start,
     required TResult orElse(),
   }) {
-    if (reload != null) {
-      return reload(this);
+    if (start != null) {
+      return start(this);
     }
     return orElse();
   }
 }
 
-abstract class TickInit implements CountdownEvent {
-  const factory TickInit() = _$TickInit;
+abstract class _TickInit implements CountdownEvent {
+  const factory _TickInit({required final int stageId}) = _$_TickInit;
+
+  int get stageId;
+  @JsonKey(ignore: true)
+  _$$_TickInitCopyWith<_$_TickInit> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -332,20 +377,20 @@ mixin _$CountdownState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CountdownInitialState value) initial,
-    required TResult Function(CountdownWorkingState value) working,
+    required TResult Function(_CountdownInitialState value) initial,
+    required TResult Function(_CountdownWorkingState value) working,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CountdownInitialState value)? initial,
-    TResult Function(CountdownWorkingState value)? working,
+    TResult Function(_CountdownInitialState value)? initial,
+    TResult Function(_CountdownWorkingState value)? working,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CountdownInitialState value)? initial,
-    TResult Function(CountdownWorkingState value)? working,
+    TResult Function(_CountdownInitialState value)? initial,
+    TResult Function(_CountdownWorkingState value)? working,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -369,28 +414,29 @@ class _$CountdownStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$CountdownInitialStateCopyWith<$Res> {
-  factory _$$CountdownInitialStateCopyWith(_$CountdownInitialState value,
-          $Res Function(_$CountdownInitialState) then) =
-      __$$CountdownInitialStateCopyWithImpl<$Res>;
+abstract class _$$_CountdownInitialStateCopyWith<$Res> {
+  factory _$$_CountdownInitialStateCopyWith(_$_CountdownInitialState value,
+          $Res Function(_$_CountdownInitialState) then) =
+      __$$_CountdownInitialStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CountdownInitialStateCopyWithImpl<$Res>
+class __$$_CountdownInitialStateCopyWithImpl<$Res>
     extends _$CountdownStateCopyWithImpl<$Res>
-    implements _$$CountdownInitialStateCopyWith<$Res> {
-  __$$CountdownInitialStateCopyWithImpl(_$CountdownInitialState _value,
-      $Res Function(_$CountdownInitialState) _then)
-      : super(_value, (v) => _then(v as _$CountdownInitialState));
+    implements _$$_CountdownInitialStateCopyWith<$Res> {
+  __$$_CountdownInitialStateCopyWithImpl(_$_CountdownInitialState _value,
+      $Res Function(_$_CountdownInitialState) _then)
+      : super(_value, (v) => _then(v as _$_CountdownInitialState));
 
   @override
-  _$CountdownInitialState get _value => super._value as _$CountdownInitialState;
+  _$_CountdownInitialState get _value =>
+      super._value as _$_CountdownInitialState;
 }
 
 /// @nodoc
 
-class _$CountdownInitialState implements CountdownInitialState {
-  const _$CountdownInitialState();
+class _$_CountdownInitialState implements _CountdownInitialState {
+  const _$_CountdownInitialState();
 
   @override
   String toString() {
@@ -400,7 +446,7 @@ class _$CountdownInitialState implements CountdownInitialState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CountdownInitialState);
+        (other.runtimeType == runtimeType && other is _$_CountdownInitialState);
   }
 
   @override
@@ -440,8 +486,8 @@ class _$CountdownInitialState implements CountdownInitialState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CountdownInitialState value) initial,
-    required TResult Function(CountdownWorkingState value) working,
+    required TResult Function(_CountdownInitialState value) initial,
+    required TResult Function(_CountdownWorkingState value) working,
   }) {
     return initial(this);
   }
@@ -449,8 +495,8 @@ class _$CountdownInitialState implements CountdownInitialState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CountdownInitialState value)? initial,
-    TResult Function(CountdownWorkingState value)? working,
+    TResult Function(_CountdownInitialState value)? initial,
+    TResult Function(_CountdownWorkingState value)? working,
   }) {
     return initial?.call(this);
   }
@@ -458,8 +504,8 @@ class _$CountdownInitialState implements CountdownInitialState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CountdownInitialState value)? initial,
-    TResult Function(CountdownWorkingState value)? working,
+    TResult Function(_CountdownInitialState value)? initial,
+    TResult Function(_CountdownWorkingState value)? working,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -469,35 +515,36 @@ class _$CountdownInitialState implements CountdownInitialState {
   }
 }
 
-abstract class CountdownInitialState implements CountdownState {
-  const factory CountdownInitialState() = _$CountdownInitialState;
+abstract class _CountdownInitialState implements CountdownState {
+  const factory _CountdownInitialState() = _$_CountdownInitialState;
 }
 
 /// @nodoc
-abstract class _$$CountdownWorkingStateCopyWith<$Res> {
-  factory _$$CountdownWorkingStateCopyWith(_$CountdownWorkingState value,
-          $Res Function(_$CountdownWorkingState) then) =
-      __$$CountdownWorkingStateCopyWithImpl<$Res>;
+abstract class _$$_CountdownWorkingStateCopyWith<$Res> {
+  factory _$$_CountdownWorkingStateCopyWith(_$_CountdownWorkingState value,
+          $Res Function(_$_CountdownWorkingState) then) =
+      __$$_CountdownWorkingStateCopyWithImpl<$Res>;
   $Res call({String text, String? nextStartTime});
 }
 
 /// @nodoc
-class __$$CountdownWorkingStateCopyWithImpl<$Res>
+class __$$_CountdownWorkingStateCopyWithImpl<$Res>
     extends _$CountdownStateCopyWithImpl<$Res>
-    implements _$$CountdownWorkingStateCopyWith<$Res> {
-  __$$CountdownWorkingStateCopyWithImpl(_$CountdownWorkingState _value,
-      $Res Function(_$CountdownWorkingState) _then)
-      : super(_value, (v) => _then(v as _$CountdownWorkingState));
+    implements _$$_CountdownWorkingStateCopyWith<$Res> {
+  __$$_CountdownWorkingStateCopyWithImpl(_$_CountdownWorkingState _value,
+      $Res Function(_$_CountdownWorkingState) _then)
+      : super(_value, (v) => _then(v as _$_CountdownWorkingState));
 
   @override
-  _$CountdownWorkingState get _value => super._value as _$CountdownWorkingState;
+  _$_CountdownWorkingState get _value =>
+      super._value as _$_CountdownWorkingState;
 
   @override
   $Res call({
     Object? text = freezed,
     Object? nextStartTime = freezed,
   }) {
-    return _then(_$CountdownWorkingState(
+    return _then(_$_CountdownWorkingState(
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -512,8 +559,8 @@ class __$$CountdownWorkingStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CountdownWorkingState implements CountdownWorkingState {
-  const _$CountdownWorkingState({required this.text, this.nextStartTime});
+class _$_CountdownWorkingState implements _CountdownWorkingState {
+  const _$_CountdownWorkingState({required this.text, this.nextStartTime});
 
   @override
   final String text;
@@ -529,7 +576,7 @@ class _$CountdownWorkingState implements CountdownWorkingState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CountdownWorkingState &&
+            other is _$_CountdownWorkingState &&
             const DeepCollectionEquality().equals(other.text, text) &&
             const DeepCollectionEquality()
                 .equals(other.nextStartTime, nextStartTime));
@@ -543,8 +590,8 @@ class _$CountdownWorkingState implements CountdownWorkingState {
 
   @JsonKey(ignore: true)
   @override
-  _$$CountdownWorkingStateCopyWith<_$CountdownWorkingState> get copyWith =>
-      __$$CountdownWorkingStateCopyWithImpl<_$CountdownWorkingState>(
+  _$$_CountdownWorkingStateCopyWith<_$_CountdownWorkingState> get copyWith =>
+      __$$_CountdownWorkingStateCopyWithImpl<_$_CountdownWorkingState>(
           this, _$identity);
 
   @override
@@ -581,8 +628,8 @@ class _$CountdownWorkingState implements CountdownWorkingState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CountdownInitialState value) initial,
-    required TResult Function(CountdownWorkingState value) working,
+    required TResult Function(_CountdownInitialState value) initial,
+    required TResult Function(_CountdownWorkingState value) working,
   }) {
     return working(this);
   }
@@ -590,8 +637,8 @@ class _$CountdownWorkingState implements CountdownWorkingState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CountdownInitialState value)? initial,
-    TResult Function(CountdownWorkingState value)? working,
+    TResult Function(_CountdownInitialState value)? initial,
+    TResult Function(_CountdownWorkingState value)? working,
   }) {
     return working?.call(this);
   }
@@ -599,8 +646,8 @@ class _$CountdownWorkingState implements CountdownWorkingState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CountdownInitialState value)? initial,
-    TResult Function(CountdownWorkingState value)? working,
+    TResult Function(_CountdownInitialState value)? initial,
+    TResult Function(_CountdownWorkingState value)? working,
     required TResult orElse(),
   }) {
     if (working != null) {
@@ -610,14 +657,14 @@ class _$CountdownWorkingState implements CountdownWorkingState {
   }
 }
 
-abstract class CountdownWorkingState implements CountdownState {
-  const factory CountdownWorkingState(
+abstract class _CountdownWorkingState implements CountdownState {
+  const factory _CountdownWorkingState(
       {required final String text,
-      final String? nextStartTime}) = _$CountdownWorkingState;
+      final String? nextStartTime}) = _$_CountdownWorkingState;
 
   String get text;
   String? get nextStartTime;
   @JsonKey(ignore: true)
-  _$$CountdownWorkingStateCopyWith<_$CountdownWorkingState> get copyWith =>
+  _$$_CountdownWorkingStateCopyWith<_$_CountdownWorkingState> get copyWith =>
       throw _privateConstructorUsedError;
 }
