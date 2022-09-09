@@ -4,9 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../settings.dart';
 
 part 'settings_bloc.freezed.dart';
-
 part 'settings_event.dart';
-
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
@@ -14,16 +12,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   SettingsBloc(this.settingsProvider)
       : super(_SettingsState(settings: settingsProvider.settings)) {
-    on<SettingsEventInitialize>((event, emit) async {
+    on<SettingsEventInitialize>((event, emit) {
       emit(_SettingsState(settings: settingsProvider.settings));
     });
-    on<SettingsEventSetDefault>((event, emit) async {
-      await settingsProvider.setDefaults();
+    on<SettingsEventSetDefault>((event, emit) {
       emit(_SettingsState(settings: settingsProvider.settings));
+      settingsProvider.setDefaults();
     });
-    on<SettingsEventUpdate>((event, emit) async {
-      await settingsProvider.update(event.settings);
+    on<SettingsEventUpdate>((event, emit) {
       emit(_SettingsState(settings: event.settings));
+      settingsProvider.update(event.settings);
     });
   }
 }

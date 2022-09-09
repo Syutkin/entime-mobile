@@ -306,8 +306,12 @@ class _StartListPage extends State<StartListPage> {
       );
 
   Widget _showCountdown() => BlocBuilder<SettingsBloc, SettingsState>(
+        //ребилдим, только если изменяются настройки, касаемые обратного отсчёта в круге
         buildWhen: (previous, current) =>
-            previous.settings.countdown != current.settings.countdown,
+            previous.settings.countdown != current.settings.countdown ||
+            previous.settings.countdownTop != current.settings.countdownTop ||
+            previous.settings.countdownLeft != current.settings.countdownLeft ||
+            previous.settings.countdownSize != current.settings.countdownSize,
         builder: (
           context,
           settingsState,
