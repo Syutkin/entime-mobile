@@ -192,6 +192,8 @@ class EntimeAppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<SettingsBloc, SettingsState>(
+        buildWhen: (previousState, state) =>
+            previousState.settings.appTheme != state.settings.appTheme,
         builder: (context, state) => MaterialApp(
           theme: appThemeData[state.settings.appTheme],
           title: 'Entime',

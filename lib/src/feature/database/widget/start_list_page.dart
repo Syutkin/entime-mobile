@@ -150,6 +150,8 @@ class _StartListPage extends State<StartListPage> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
+            buildWhen: (previous, current) =>
+                previous.settings.startFab != current.settings.startFab,
             builder: (
               context,
               settingsState,
@@ -268,7 +270,6 @@ class _StartListPage extends State<StartListPage> {
                 final item = startList[index];
                 return BlocBuilder<CountdownBloc, CountdownState>(
                   builder: (context, countdownState) {
-            
                     final isHighlighted =
                         item.startTime == _activeStartTime(countdownState);
                     // print('item.startTime: ${item.startTime}, _activeStartTime(countdownState): ${_activeStartTime(countdownState)}');
@@ -305,6 +306,8 @@ class _StartListPage extends State<StartListPage> {
       );
 
   Widget _showCountdown() => BlocBuilder<SettingsBloc, SettingsState>(
+        buildWhen: (previous, current) =>
+            previous.settings.countdown != current.settings.countdown,
         builder: (
           context,
           settingsState,
