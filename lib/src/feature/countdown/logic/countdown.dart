@@ -23,6 +23,12 @@ class CountdownAtStart {
   CountdownAtStart({required AppDatabase database}) : _db = database;
 
   Future<void> start(int stageId) async {
+    //subscribe to changes at starts table
+    _db.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
+    _nextStartTime =
+        await _getNextStarttime(time: DateTime.now(), stageId: stageId);
+    });
+
     _timer?.cancel();
     _nextStartTime =
         await _getNextStarttime(time: DateTime.now(), stageId: stageId);

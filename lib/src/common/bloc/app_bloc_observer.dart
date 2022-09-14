@@ -9,9 +9,9 @@ class AppBlocObserver extends BlocObserver {
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
 
-    // if (bloc.toString() != "Instance of 'CountdownBloc'") {
+    if (bloc.toString() != "Instance of 'CountdownBloc'") {
       logger.d('Event: $event');
-    // }
+    }
   }
 
   @override
@@ -23,8 +23,8 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    // if (bloc.toString() != "Instance of 'CountdownBloc'") {
+    if (bloc.toString() != "Instance of 'CountdownBloc'") {
       logger.d('Transition: $transition');
-    // }
+    }
   }
 }

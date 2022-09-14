@@ -139,12 +139,14 @@ SELECT
 	participants.number as number,
   	starts.start_time as start_time,
 	starts.automatic_start_time as automatic_start_time,
-	starts.automatic_correction as automatic_correction
+	starts.automatic_correction as automatic_correction,
+	starts.manual_start_time as manual_start_time
 FROM starts, participants
 WHERE starts.participant_id = participants.id
 	AND starts.stage_id = :stage_id
 	AND start_time > :time
 	AND automatic_start_time ISNULL
+	AND manual_start_time ISNULL
 	AND participants.status_id = 1
 	AND starts.status_id = 1
 ORDER BY start_time ASC;

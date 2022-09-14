@@ -272,8 +272,10 @@ class _StartListPage extends State<StartListPage> {
                   builder: (context, countdownState) {
                     final isHighlighted =
                         item.startTime == _activeStartTime(countdownState);
-                    // print('item.startTime: ${item.startTime}, _activeStartTime(countdownState): ${_activeStartTime(countdownState)}');
                     return BlocBuilder<SettingsBloc, SettingsState>(
+                      buildWhen: (previous, current) =>
+                          previous.settings.countdownAtStartTime !=
+                          current.settings.countdownAtStartTime,
                       builder: (
                         context,
                         settingsState,

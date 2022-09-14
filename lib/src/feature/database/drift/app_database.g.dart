@@ -3103,7 +3103,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<GetNextStartingParticipantsResult> getNextStartingParticipants(
       {required int stageId, required String time}) {
     return customSelect(
-        'SELECT participants.number AS number, starts.start_time AS start_time, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND start_time > ?2 AND automatic_start_time ISNULL AND participants.status_id = 1 AND starts.status_id = 1 ORDER BY start_time ASC',
+        'SELECT participants.number AS number, starts.start_time AS start_time, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND start_time > ?2 AND automatic_start_time ISNULL AND manual_start_time ISNULL AND participants.status_id = 1 AND starts.status_id = 1 ORDER BY start_time ASC',
         variables: [
           Variable<int>(stageId),
           Variable<String>(time)
@@ -3117,6 +3117,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         startTime: row.read<String>('start_time'),
         automaticStartTime: row.readNullable<String>('automatic_start_time'),
         automaticCorrection: row.readNullable<int>('automatic_correction'),
+        manualStartTime: row.readNullable<String>('manual_start_time'),
       );
     });
   }
@@ -3230,10 +3231,12 @@ class GetNextStartingParticipantsResult {
   final String startTime;
   final String? automaticStartTime;
   final int? automaticCorrection;
+  final String? manualStartTime;
   GetNextStartingParticipantsResult({
     required this.number,
     required this.startTime,
     this.automaticStartTime,
     this.automaticCorrection,
+    this.manualStartTime,
   });
 }
