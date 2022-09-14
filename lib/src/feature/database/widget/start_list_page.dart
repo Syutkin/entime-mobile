@@ -39,11 +39,6 @@ class _StartListPage extends State<StartListPage> {
         listener: (context, state) {
           state.mapOrNull(
             initialized: (state) {
-              // обновлять обратный отсчёт при любом изменении состояния DatabaseBloc
-              // context
-              //     .read<CountdownBloc>()
-              //     .add(CountdownEvent.start(stageId: widget.stage.raceId));
-
               // Добавление нового стартового времени
               // Если стартовое время уже присвоено другому номеру
               final databaseBloc = context.read<DatabaseBloc>();
@@ -268,37 +263,50 @@ class _StartListPage extends State<StartListPage> {
               childCount: startList.length,
               (context, index) {
                 final item = startList[index];
+                bool isHighlighted = false;
                 return BlocBuilder<CountdownBloc, CountdownState>(
-                  builder: (context, countdownState) {
-                    final isHighlighted =
-                        item.startTime == _activeStartTime(countdownState);
-                    return BlocBuilder<SettingsBloc, SettingsState>(
-                      buildWhen: (previous, current) =>
-                          previous.settings.countdownAtStartTime !=
-                          current.settings.countdownAtStartTime,
-                      builder: (
-                        context,
-                        settingsState,
-                      ) =>
-                          StartItemTile(
-                        item: item,
-                        onTap: () async {
-                          await editStartTime(context, item);
-                        },
-                        //ToDo:
-                        // onDismissed: (direction) {
-                        //   BlocProvider.of<ProtocolBloc>(context)
-                        //       .add(ProtocolSetDNS(number: item.number));
-                        // },
-                        isHighlighted: isHighlighted,
-                        countdown:
-                            settingsState.settings.countdownAtStartTime &&
-                                    isHighlighted
-                                ? _countdownFromState(countdownState)
-                                : null,
-                      ),
-                    );
+                  buildWhen: (previous, current) {
+                    final previousIsHighlighted =
+                        item.startTime == _activeStartTime(previous);
+                    isHighlighted = item.startTime == _activeStartTime(current);
+                    // Обновлять при сдвигании следующего старта (убирать подсветку)
+                    if (previousIsHighlighted && !isHighlighted) {
+                      return true;
+                    } else {
+                      // Обновлять только там, где есть обратный отсчёт
+                      return isHighlighted &&
+                          (previous.mapOrNull(working: (state) => state.text) !=
+                              current.mapOrNull(
+                                working: (state) => state.text,
+                              ));
+                    }
                   },
+                  builder: (context, countdownState) =>
+                      BlocBuilder<SettingsBloc, SettingsState>(
+                    buildWhen: (previous, current) =>
+                        previous.settings.countdownAtStartTime !=
+                        current.settings.countdownAtStartTime,
+                    builder: (
+                      context,
+                      settingsState,
+                    ) =>
+                        StartItemTile(
+                      item: item,
+                      onTap: () async {
+                        await editStartTime(context, item);
+                      },
+                      //ToDo:
+                      // onDismissed: (direction) {
+                      //   BlocProvider.of<ProtocolBloc>(context)
+                      //       .add(ProtocolSetDNS(number: item.number));
+                      // },
+                      isHighlighted: isHighlighted,
+                      countdown: settingsState.settings.countdownAtStartTime &&
+                              isHighlighted
+                          ? _countdownFromState(countdownState)
+                          : null,
+                    ),
+                  ),
                 );
               },
               // childCount: startList.length,

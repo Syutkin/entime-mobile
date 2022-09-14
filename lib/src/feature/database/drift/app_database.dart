@@ -53,7 +53,7 @@ class AppDatabase extends _$AppDatabase {
       }
     }
 
-    final numberExists = await (select(participants)
+    final participantAtRace = await (select(participants)
           ..where(
             (participant) =>
                 participant.number.equals(number) &
@@ -61,11 +61,16 @@ class AppDatabase extends _$AppDatabase {
           ))
         .get();
 
-    if (numberExists.isEmpty) {
-      //Номера не было в списке, создаём запись в riders, participants и в starts
+    if (participantAtRace.isEmpty) {
+      //Участника с заданным номером не было в соревновании, создаём запись в riders, participants и в starts
+      final raceName = await (select(races)
+            ..where(
+              (name) => races.id.equals(stage.raceId),
+            ))
+          .get();
       final int ridersId = await into(riders).insert(
         RidersCompanion(
-          name: Value('Номер $number, на СУ ${stage.name}'),
+          name: Value('$number, $raceName'),
         ),
       );
       final int participantsId = await into(participants).insert(
@@ -83,35 +88,54 @@ class AppDatabase extends _$AppDatabase {
         ),
       );
     } else {
-      //Номер уже был в списке, обновляем(обнуляем) его стартовые значения
-      await (update(starts)
+      //Номер уже участвует в соревновании, ищем его на старте
+      final start = await (select(starts)
             ..where(
-              (start) => start.participantId.equals(numberExists.first.id!),
+              (start) =>
+                  start.stageId.equals(stage.id!) &
+                  start.participantId.equals(participantAtRace.first.id!),
             ))
-          .write(
-        StartsCompanion(
-          automaticCorrection: const Value(null),
-          automaticStartTime: const Value(null),
-          manualCorrection: const Value(null),
-          manualStartTime: const Value(null),
-          startTime: Value(startTime),
-          timestamp: const Value(null),
-          statusId: const Value(1),
-        ),
-      );
+          .get();
+      // Если номера не было в стартовом протоколе на СУ, добавляем
+      if (start.isEmpty) {
+        await into(starts).insert(
+          StartsCompanion(
+            startTime: Value(startTime),
+            participantId: Value(participantAtRace.first.id!),
+            stageId: Value(stage.id!),
+          ),
+        );
+      } else {
+        //Номер уже был в стартовом протоколе, обновляем
+        await (update(starts)
+              ..where(
+                (start) =>
+                    start.participantId.equals(participantAtRace.first.id!),
+              ))
+            .write(
+          StartsCompanion(
+            automaticCorrection: const Value(null),
+            automaticStartTime: const Value(null),
+            manualCorrection: const Value(null),
+            manualStartTime: const Value(null),
+            startTime: Value(startTime),
+            timestamp: const Value(null),
+            statusId: const Value(1),
+          ),
+        );
+      }
     }
-
     return null;
   }
 
 //ToDo: исправить выставление значения только первому совпадению
-///Устанавливает ручное стартовое время для участника
-///
-///Ищет участника с временем рядом с текущим (плюс-минус 15 секунд)
-///и устанавливает ему текущее время старта в ручную отсечку
-///
-///Возращает 0 если участник не найден и rowid участника в случае успеха
-///(возврат rowid не тестировался ни в каком виде)
+  ///Устанавливает ручное стартовое время для участника
+  ///
+  ///Ищет участника с временем рядом с текущим (плюс-минус 15 секунд)
+  ///и устанавливает ему текущее время старта в ручную отсечку
+  ///
+  ///Возращает 0 если участник не найден и rowid участника в случае успеха
+  ///(возврат rowid не тестировался ни в каком виде)
   Future<int> updateManualStartTime(int stageId, DateTime time) async {
     int result = 0;
     final DateTime timeBefore = time.subtract(const Duration(seconds: 15));
