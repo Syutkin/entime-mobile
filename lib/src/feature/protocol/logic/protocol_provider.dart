@@ -257,6 +257,7 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
+  //!transfered
   //Проверяем есть ли стартующий около времени [beepTime]
   //Возвращает 0 если стартующего нет
   @override
@@ -283,6 +284,7 @@ class ProtocolProvider implements IProtocolProvider {
     return count;
   }
 
+  //!transfered
   /// Обновляет [StartItem].automaticstarttime и [StartItem].automaticcorrection
   /// Возвращает null при успехе, и [StartItem] при неудаче
   @override
@@ -344,7 +346,8 @@ class ProtocolProvider implements IProtocolProvider {
     return null;
   }
 
-//ToDo: исправить выставление значения только первому совпадению
+  //!transfered
+  //ToDo: исправить выставление значения только первому совпадению
   @override
   Future<int> updateManualStartTime(DateTime time) async {
     int result = 0;
@@ -399,7 +402,7 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
-//!transfered
+  //!transfered
   @override
   Future<int> updateItemInfoAtStart(StartItem item) async {
     final db = await _db;
@@ -443,6 +446,7 @@ class ProtocolProvider implements IProtocolProvider {
 //    return result;
 //  }
 
+  //!transfered
   @override
   Future<int> setDNS(int number) async {
     final db = await _db;
@@ -463,6 +467,7 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
+  //!transfered
   /// Обновляет или добавляет [StartItem].number и [StartItem].starttime
   /// Возвращает null при успехе, и [StartItem] если такое же стартовое время
   /// уже установлено для другого участника
@@ -530,6 +535,8 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
+  //!transfered
+  //Используется для голосового сообщения
   @override
   Future<List<StartItem>> getStartingParticipants(String time) async {
     final DateTime? dateTime = strTimeToDateTime(time);

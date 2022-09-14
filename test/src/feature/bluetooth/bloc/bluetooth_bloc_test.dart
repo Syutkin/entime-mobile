@@ -109,12 +109,12 @@ void main() {
         (_) => Stream.fromIterable([]),
       );
       when(
-        () => audioController.playCountdown(any()),
+        () => audioController.playCountdown(time: any(), stageId: any()),
       ).thenAnswer(
         (_) => Future.value(),
       );
       when(
-        () => audioController.callParticipant(any()),
+        () => audioController.callParticipant(time: any(), stageId: any()),
       ).thenAnswer(
         (_) => Future.value(),
       );

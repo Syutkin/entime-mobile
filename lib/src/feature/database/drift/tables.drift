@@ -94,9 +94,34 @@ deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
 
 -- Old protocol
 getParticipantsAtStart:
-SELECT *
+SELECT
+	participants.rider_id as rider_id,
+	participants.race_id as race_id,
+	participants.number as number,
+	participants.category as category,
+	participants.rfid as rfid,
+	participants.status_id as participant_status_id,
+	riders.name as name,
+	riders.nickname as nickname,
+	riders.birthday as birthday,
+	riders.team as team,
+	riders.city as city,
+	riders.email as email,
+	riders.phone as phone,
+	riders.comment as comment,
+	starts.id as start_id,
+	starts.stage_id as stage_id,
+	starts.participant_id as participant_id,
+	starts.start_time as start_time,
+	starts.timestamp as timestamp,
+	starts.automatic_start_time as automatic_start_time,
+	starts.automatic_correction as automatic_correction,
+	starts.manual_start_time as manual_start_time,
+	starts.manual_correction as manual_correction,
+	starts.status_id as status_id
 FROM participants, riders, starts
-WHERE participants.rider_id = riders.id
+WHERE 
+	participants.rider_id = riders.id
     AND starts.participant_id = participants.id
 	AND stage_id = :stage_id
 	AND starts.status_id = 1
@@ -106,7 +131,8 @@ ORDER BY start_time ASC;
 getExistedStartingParticipants:
 SELECT *
 FROM starts, participants
-WHERE starts.participant_id = participants.id
+WHERE 
+	starts.participant_id = participants.id
 	AND stage_id = :stage_id
 	AND (start_time IS :start_time
     	OR (number IS :number
@@ -119,19 +145,24 @@ SET start_time = :start_time,
     automatic_correction = :automatic_correction,
     manual_start_time = :manual_start_time,
     manual_correction = :manual_correction
-WHERE stage_id = :stage_id
+WHERE
+	stage_id = :stage_id
 	AND participant_id = :participant_id;
 
 getParticipantAroundTime:
 SELECT *
 FROM starts
-WHERE stage_id = :stage_id
+WHERE
+	stage_id = :stage_id
 	AND start_time BETWEEN :before AND :after;
 
 setManualStartTime:
 UPDATE starts
-SET manual_start_time = :manual_start_time, manual_correction = :manual_correction
-WHERE participant_id = :participant_id
+SET
+	manual_start_time = :manual_start_time,
+	manual_correction = :manual_correction
+WHERE
+	participant_id = :participant_id
 	AND stage_id = :stage_id;
 
 getNextStartingParticipants:
@@ -141,7 +172,8 @@ SELECT
 	starts.automatic_start_time as automatic_start_time,
 	starts.automatic_correction as automatic_correction,
 	starts.manual_start_time as manual_start_time
-FROM starts, participants
+FROM
+	starts, participants
 WHERE starts.participant_id = participants.id
 	AND starts.stage_id = :stage_id
 	AND start_time > :time
@@ -150,3 +182,44 @@ WHERE starts.participant_id = participants.id
 	AND participants.status_id = 1
 	AND starts.status_id = 1
 ORDER BY start_time ASC;
+
+getForBeep:
+SELECT COUNT(*) FROM starts
+WHERE
+	starts.stage_id = :stage_id
+	AND start_time BETWEEN :beepTime AND :afterTime
+  	AND automatic_start_time ISNULL
+	AND status_id = 1;
+
+getStartingParticipantAndFollowing:
+SELECT
+	participants.number as number,
+	starts.start_time as start_time,
+	starts.automatic_start_time as automatic_start_time,
+	starts.automatic_correction as automatic_correction,
+	riders.name as name
+FROM
+	starts, participants, riders
+WHERE
+	starts.participant_id = participants.id
+	AND participants.rider_id = riders.id
+	AND starts.stage_id = :stage_id
+	AND (start_time BETWEEN :time AND :after)
+	AND automatic_start_time ISNULL
+	AND starts.status_id = 1;
+
+/*
+getStartForCsv:
+SELECT participants.number as number,
+	starts.start_time,
+	IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, 'DNS')) starts.automatic_correction as automatic_correction
+FROM starts, participants
+WHERE
+	starts.participant_id = participants.id
+	AND starts.stage_id = :stage_id
+	AND start_time NOTNULL
+	AND	(automatic_correction NOT NULL
+    	OR manual_correction NOT NULL
+       	OR automatic_start_time IS 'DNS')
+ORDER BY starttime ASC;
+*/

@@ -32,6 +32,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   bool _isEnabled = false;
 
+  // ToDo: change stageId to actual value for voice control
+  int stageId = -1;
+
   StreamSubscription<String>? _messageSubscription;
 
   BluetoothDevice? get bluetoothDevice => _bluetoothDevice;
@@ -223,10 +226,16 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               emit(BluetoothBlocState.connected(message: message));
             },
             countdown: (countdown) async {
-              await audioController.playCountdown(countdown);
+              await audioController.playCountdown(
+                time: countdown,
+                stageId: stageId,
+              );
             },
             voice: (time) async {
-              await audioController.callParticipant(time);
+              await audioController.callParticipant(
+                time: time,
+                stageId: stageId,
+              );
             },
             moduleSettings: (moduleSettings) {
               emit(BluetoothBlocState.connected(message: message));

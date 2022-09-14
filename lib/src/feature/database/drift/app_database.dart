@@ -20,7 +20,7 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
-  /// Обновляет или добавляет участника с заданным номером и стартовым временем
+  /// Обновляет или добавляет участника с заданным [number] и [startTime]
   /// Возвращает null при успехе, и список участников если такое же стартовое время
   /// уже установлено для других участников
   Future<List<GetExistedStartingParticipantsResult>?> addStartNumber({
@@ -128,6 +128,79 @@ class AppDatabase extends _$AppDatabase {
     return null;
   }
 
+  /// Обновляет automaticStartTime и automaticCorrection
+  /// для участника, стартовое время которого лежит в пределах
+  /// плюс/минус [deltaInSeconds] от заданного [time].
+  ///
+  /// Возвращает null при успехе, и список [Start] при неудаче
+  Future<List<Start>?> updateAutomaticCorrection({
+    required int stageId,
+    required String time,
+    required int correction,
+    required DateTime timeStamp,
+    bool forceUpdate = false,
+    int deltaInSeconds = 15,
+  }) async {
+    final DateTime? dateGoTime = strTimeToDateTime(time);
+    if (dateGoTime == null) {
+      assert(dateGoTime != null, 'dateGoTime must not be null');
+      return null;
+    }
+    final String before = DateFormat('HH:mm:ss')
+        .format(dateGoTime.subtract(Duration(seconds: deltaInSeconds)));
+    final String after = DateFormat('HH:mm:ss')
+        .format(dateGoTime.add(Duration(seconds: deltaInSeconds)));
+    final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
+
+    // Если не обновлять принудительно, то
+    // проверяем что автоматическое время старта не установлено,
+    // в этом случае устанавливаем время старта и вовращаем null.
+    // В противном случае возвращаем StartItem.
+    if (!forceUpdate) {
+      logger.i('Database -> Checking existing start time...');
+
+      // final res = await (select(starts)
+      //       ..where(
+      //         (start) =>
+      //             start.stageId.equals(stageId) &
+      //             start.startTime.isBetweenValues(before, after),
+      //       ))
+      //     .get();
+
+      final participantsAroundTime = await getParticipantAroundTime(
+        stageId: stageId,
+        before: before,
+        after: after,
+      ).get();
+
+      if (participantsAroundTime.isNotEmpty &&
+          participantsAroundTime.first.automaticStartTime != null) {
+        logger.i('Database -> Start time exists');
+
+        return participantsAroundTime;
+      }
+    }
+
+    final result = await (update(starts)
+          ..where(
+            (start) =>
+                start.stageId.equals(stageId) &
+                start.startTime.isBetweenValues(before, after),
+          ))
+        .write(
+      StartsCompanion(
+        automaticCorrection: Value(correction),
+        automaticStartTime: Value(time),
+        startTime: Value(phoneTime),
+        timestamp: const Value(null),
+        statusId: const Value(1),
+      ),
+    );
+    logger.i('Database -> updated: $result lines');
+
+    return null;
+  }
+
 //ToDo: исправить выставление значения только первому совпадению
   ///Устанавливает ручное стартовое время для участника
   ///
@@ -177,6 +250,89 @@ class AppDatabase extends _$AppDatabase {
       logger.i(
         'Database -> Cannot find participant with start time around $time',
       );
+    }
+    return result;
+  }
+
+  ///Проверяем есть ли стартующий около времени [time]
+  ///
+  ///[deltaInSeconds] в каком секундном диапазоне от [time] искать участников
+  ///
+  ///Возвращает количество стартущих и 0 если последние не найдены
+  Future<int> checkParticipantAroundStartTime({
+    required String time,
+    required int stageId,
+    int deltaInSeconds = 10,
+  }) async {
+    final DateTime? beepDateTime = strTimeToDateTime(time);
+    if (beepDateTime == null) {
+      assert(beepDateTime != null, 'beepDateTime must not be null');
+      return 0;
+    }
+    final DateTime timeAfter =
+        beepDateTime.add(Duration(seconds: deltaInSeconds));
+    final String after = DateFormat('HH:mm:ss').format(timeAfter);
+    final x =
+        await getForBeep(stageId: stageId, beepTime: time, afterTime: after)
+            .get();
+
+    return x.length;
+  }
+
+  //Используется для голосового сообщения
+  Future<List<GetStartingParticipantAndFollowingResult>>
+      getStartingParticipants({
+    required String time,
+    required int stageId,
+  }) async {
+    final DateTime? dateTime = strTimeToDateTime(time);
+    if (dateTime == null) {
+      assert(dateTime != null, 'dateTime must not be null');
+      return <GetStartingParticipantAndFollowingResult>[];
+    }
+    final String after =
+        DateFormat('HH:mm:ss').format(dateTime.add(const Duration(minutes: 1)));
+    // final db = await _db;
+    return getStartingParticipantAndFollowing(
+      time: time,
+      after: after,
+      stageId: stageId,
+    ).get();
+    // final res = await db.rawQuery(
+    //   '''
+    //     SELECT start.id as id, start.number as number,
+    //       start.starttime as starttime, start.automaticstarttime as automaticstarttime,
+    //       start.automaticcorrection as automaticcorrection, main.name as name
+    //     FROM start, main
+    //     WHERE (starttime BETWEEN '$time' AND '$after') AND main.number = start.number
+    //       AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL);
+    //     ''',
+    // );
+    // final List<StartItem> startProtocol =
+    //     res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
+    // return startProtocol;
+  }
+
+  Future<int> setDNSatStart(int startId) async {
+    final result = await (update(starts)
+          ..where(
+            (start) => start.id.equals(startId),
+          ))
+        .write(
+      const StartsCompanion(
+        automaticCorrection: Value(null),
+        automaticStartTime: Value(null),
+        manualStartTime: Value(null),
+        manualCorrection: Value(null),
+        timestamp: Value(null),
+        statusId: Value(2),
+      ),
+    );
+
+    if (result > 0) {
+      logger.i('Database -> Set DNS to startId: $startId');
+    } else {
+      logger.i('Database -> Can not find startId: $startId, DNS not set');
     }
     return result;
   }

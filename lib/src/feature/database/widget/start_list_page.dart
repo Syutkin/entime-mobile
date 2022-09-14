@@ -296,10 +296,13 @@ class _StartListPage extends State<StartListPage> {
                         await editStartTime(context, item);
                       },
                       //ToDo:
-                      // onDismissed: (direction) {
-                      //   BlocProvider.of<ProtocolBloc>(context)
-                      //       .add(ProtocolSetDNS(number: item.number));
-                      // },
+                      onDismissed: (direction) {
+                        BlocProvider.of<DatabaseBloc>(context).add(
+                          DatabaseEvent.setDNSatStart(
+                            startId: item.startId!,
+                          ),
+                        );
+                      },
                       isHighlighted: isHighlighted,
                       countdown: settingsState.settings.countdownAtStartTime &&
                               isHighlighted

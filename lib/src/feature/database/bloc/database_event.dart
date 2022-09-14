@@ -43,4 +43,8 @@ class DatabaseEvent with _$DatabaseEvent {
     required int stageId,
     required DateTime time,
   }) = _UpdateManualStartTime;
+
+    const factory DatabaseEvent.setDNSatStart({
+    required int startId,
+  }) = _setDNS;
 }

@@ -2966,7 +2966,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<GetParticipantsAtStartResult> getParticipantsAtStart(
       {required int stageId}) {
     return customSelect(
-        'SELECT * FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 AND starts.status_id = 1 AND participants.status_id = 1 ORDER BY start_time ASC',
+        'SELECT participants.rider_id AS rider_id, participants.race_id AS race_id, participants.number AS number, participants.category AS category, participants.rfid AS rfid, participants.status_id AS participant_status_id, riders.name AS name, riders.nickname AS nickname, riders.birthday AS birthday, riders.team AS team, riders.city AS city, riders.email AS email, riders.phone AS phone, riders.comment AS comment, starts.id AS start_id, starts.stage_id AS stage_id, starts.participant_id AS participant_id, starts.start_time AS start_time, starts.timestamp AS timestamp, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time, starts.manual_correction AS manual_correction, starts.status_id AS status_id FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 AND starts.status_id = 1 AND participants.status_id = 1 ORDER BY start_time ASC',
         variables: [
           Variable<int>(stageId)
         ],
@@ -2976,14 +2976,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
         }).map((QueryRow row) {
       return GetParticipantsAtStartResult(
-        id: row.readNullable<int>('id'),
-        raceId: row.read<int>('race_id'),
         riderId: row.read<int>('rider_id'),
+        raceId: row.read<int>('race_id'),
         number: row.read<int>('number'),
         category: row.readNullable<String>('category'),
         rfid: row.readNullable<String>('rfid'),
-        statusId: row.read<int>('status_id'),
-        id1: row.readNullable<int>('id'),
+        participantStatusId: row.read<int>('participant_status_id'),
         name: row.read<String>('name'),
         nickname: row.readNullable<String>('nickname'),
         birthday: row.readNullable<String>('birthday'),
@@ -2992,7 +2990,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         email: row.readNullable<String>('email'),
         phone: row.readNullable<String>('phone'),
         comment: row.readNullable<String>('comment'),
-        id2: row.readNullable<int>('id'),
+        startId: row.readNullable<int>('start_id'),
         stageId: row.read<int>('stage_id'),
         participantId: row.read<int>('participant_id'),
         startTime: row.read<String>('start_time'),
@@ -3001,7 +2999,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         automaticCorrection: row.readNullable<int>('automatic_correction'),
         manualStartTime: row.readNullable<String>('manual_start_time'),
         manualCorrection: row.readNullable<int>('manual_correction'),
-        statusId1: row.read<int>('status_id'),
+        statusId: row.read<int>('status_id'),
       );
     });
   }
@@ -3122,6 +3120,47 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     });
   }
 
+  Selectable<int> getForBeep(
+      {required int stageId,
+      required String beepTime,
+      required String afterTime}) {
+    return customSelect(
+        'SELECT COUNT(*) AS _c0 FROM starts WHERE starts.stage_id = ?1 AND start_time BETWEEN ?2 AND ?3 AND automatic_start_time ISNULL AND status_id = 1',
+        variables: [
+          Variable<int>(stageId),
+          Variable<String>(beepTime),
+          Variable<String>(afterTime)
+        ],
+        readsFrom: {
+          starts,
+        }).map((QueryRow row) => row.read<int>('_c0'));
+  }
+
+  Selectable<GetStartingParticipantAndFollowingResult>
+      getStartingParticipantAndFollowing(
+          {required int stageId, required String time, required String after}) {
+    return customSelect(
+        'SELECT participants.number AS number, starts.start_time AS start_time, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, riders.name AS name FROM starts,participants,riders WHERE starts.participant_id = participants.id AND participants.rider_id = riders.id AND starts.stage_id = ?1 AND(start_time BETWEEN ?2 AND ?3)AND automatic_start_time ISNULL AND starts.status_id = 1',
+        variables: [
+          Variable<int>(stageId),
+          Variable<String>(time),
+          Variable<String>(after)
+        ],
+        readsFrom: {
+          participants,
+          starts,
+          riders,
+        }).map((QueryRow row) {
+      return GetStartingParticipantAndFollowingResult(
+        number: row.read<int>('number'),
+        startTime: row.read<String>('start_time'),
+        automaticStartTime: row.readNullable<String>('automatic_start_time'),
+        automaticCorrection: row.readNullable<int>('automatic_correction'),
+        name: row.read<String>('name'),
+      );
+    });
+  }
+
   @override
   Iterable<TableInfo<Table, dynamic>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3131,14 +3170,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 }
 
 class GetParticipantsAtStartResult {
-  final int? id;
-  final int raceId;
   final int riderId;
+  final int raceId;
   final int number;
   final String? category;
   final String? rfid;
-  final int statusId;
-  final int? id1;
+  final int participantStatusId;
   final String name;
   final String? nickname;
   final String? birthday;
@@ -3147,7 +3184,7 @@ class GetParticipantsAtStartResult {
   final String? email;
   final String? phone;
   final String? comment;
-  final int? id2;
+  final int? startId;
   final int stageId;
   final int participantId;
   final String startTime;
@@ -3156,16 +3193,14 @@ class GetParticipantsAtStartResult {
   final int? automaticCorrection;
   final String? manualStartTime;
   final int? manualCorrection;
-  final int statusId1;
+  final int statusId;
   GetParticipantsAtStartResult({
-    this.id,
-    required this.raceId,
     required this.riderId,
+    required this.raceId,
     required this.number,
     this.category,
     this.rfid,
-    required this.statusId,
-    this.id1,
+    required this.participantStatusId,
     required this.name,
     this.nickname,
     this.birthday,
@@ -3174,7 +3209,7 @@ class GetParticipantsAtStartResult {
     this.email,
     this.phone,
     this.comment,
-    this.id2,
+    this.startId,
     required this.stageId,
     required this.participantId,
     required this.startTime,
@@ -3183,7 +3218,7 @@ class GetParticipantsAtStartResult {
     this.automaticCorrection,
     this.manualStartTime,
     this.manualCorrection,
-    required this.statusId1,
+    required this.statusId,
   });
 }
 
@@ -3238,5 +3273,20 @@ class GetNextStartingParticipantsResult {
     this.automaticStartTime,
     this.automaticCorrection,
     this.manualStartTime,
+  });
+}
+
+class GetStartingParticipantAndFollowingResult {
+  final int number;
+  final String startTime;
+  final String? automaticStartTime;
+  final int? automaticCorrection;
+  final String name;
+  GetStartingParticipantAndFollowingResult({
+    required this.number,
+    required this.startTime,
+    this.automaticStartTime,
+    this.automaticCorrection,
+    required this.name,
   });
 }

@@ -49,6 +49,7 @@ mixin _$DatabaseEvent {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,6 +84,7 @@ mixin _$DatabaseEvent {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -117,6 +119,7 @@ mixin _$DatabaseEvent {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -135,6 +138,7 @@ mixin _$DatabaseEvent {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -150,6 +154,7 @@ mixin _$DatabaseEvent {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -165,6 +170,7 @@ mixin _$DatabaseEvent {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -259,6 +265,7 @@ class _$_Initialize implements _Initialize {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return initialize();
   }
@@ -296,6 +303,7 @@ class _$_Initialize implements _Initialize {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return initialize?.call();
   }
@@ -333,6 +341,7 @@ class _$_Initialize implements _Initialize {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -357,6 +366,7 @@ class _$_Initialize implements _Initialize {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return initialize(this);
   }
@@ -375,6 +385,7 @@ class _$_Initialize implements _Initialize {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return initialize?.call(this);
   }
@@ -393,6 +404,7 @@ class _$_Initialize implements _Initialize {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -671,6 +683,7 @@ class _$_EmitState implements _EmitState {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return emitState(races, stages, riders, statuses, participants, starts,
         finishes, trails, notification);
@@ -709,6 +722,7 @@ class _$_EmitState implements _EmitState {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return emitState?.call(races, stages, riders, statuses, participants,
         starts, finishes, trails, notification);
@@ -747,6 +761,7 @@ class _$_EmitState implements _EmitState {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (emitState != null) {
@@ -772,6 +787,7 @@ class _$_EmitState implements _EmitState {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return emitState(this);
   }
@@ -790,6 +806,7 @@ class _$_EmitState implements _EmitState {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return emitState?.call(this);
   }
@@ -808,6 +825,7 @@ class _$_EmitState implements _EmitState {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (emitState != null) {
@@ -937,6 +955,7 @@ class _$_AddRace implements _AddRace {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return addRace(race);
   }
@@ -974,6 +993,7 @@ class _$_AddRace implements _AddRace {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return addRace?.call(race);
   }
@@ -1011,6 +1031,7 @@ class _$_AddRace implements _AddRace {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -1035,6 +1056,7 @@ class _$_AddRace implements _AddRace {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return addRace(this);
   }
@@ -1053,6 +1075,7 @@ class _$_AddRace implements _AddRace {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return addRace?.call(this);
   }
@@ -1071,6 +1094,7 @@ class _$_AddRace implements _AddRace {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -1185,6 +1209,7 @@ class _$_DeleteRace implements _DeleteRace {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return deleteRace(id);
   }
@@ -1222,6 +1247,7 @@ class _$_DeleteRace implements _DeleteRace {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return deleteRace?.call(id);
   }
@@ -1259,6 +1285,7 @@ class _$_DeleteRace implements _DeleteRace {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (deleteRace != null) {
@@ -1283,6 +1310,7 @@ class _$_DeleteRace implements _DeleteRace {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return deleteRace(this);
   }
@@ -1301,6 +1329,7 @@ class _$_DeleteRace implements _DeleteRace {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return deleteRace?.call(this);
   }
@@ -1319,6 +1348,7 @@ class _$_DeleteRace implements _DeleteRace {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (deleteRace != null) {
@@ -1432,6 +1462,7 @@ class _$_AddStage implements _AddStage {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return addStage(stage);
   }
@@ -1469,6 +1500,7 @@ class _$_AddStage implements _AddStage {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return addStage?.call(stage);
   }
@@ -1506,6 +1538,7 @@ class _$_AddStage implements _AddStage {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (addStage != null) {
@@ -1530,6 +1563,7 @@ class _$_AddStage implements _AddStage {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return addStage(this);
   }
@@ -1548,6 +1582,7 @@ class _$_AddStage implements _AddStage {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return addStage?.call(this);
   }
@@ -1566,6 +1601,7 @@ class _$_AddStage implements _AddStage {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (addStage != null) {
@@ -1680,6 +1716,7 @@ class _$_SelectStages implements _SelectStages {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return selectStages(raceId);
   }
@@ -1717,6 +1754,7 @@ class _$_SelectStages implements _SelectStages {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return selectStages?.call(raceId);
   }
@@ -1754,6 +1792,7 @@ class _$_SelectStages implements _SelectStages {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (selectStages != null) {
@@ -1778,6 +1817,7 @@ class _$_SelectStages implements _SelectStages {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return selectStages(this);
   }
@@ -1796,6 +1836,7 @@ class _$_SelectStages implements _SelectStages {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return selectStages?.call(this);
   }
@@ -1814,6 +1855,7 @@ class _$_SelectStages implements _SelectStages {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (selectStages != null) {
@@ -1928,6 +1970,7 @@ class _$_DeleteStage implements _DeleteStage {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return deleteStage(id);
   }
@@ -1965,6 +2008,7 @@ class _$_DeleteStage implements _DeleteStage {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return deleteStage?.call(id);
   }
@@ -2002,6 +2046,7 @@ class _$_DeleteStage implements _DeleteStage {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (deleteStage != null) {
@@ -2026,6 +2071,7 @@ class _$_DeleteStage implements _DeleteStage {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return deleteStage(this);
   }
@@ -2044,6 +2090,7 @@ class _$_DeleteStage implements _DeleteStage {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return deleteStage?.call(this);
   }
@@ -2062,6 +2109,7 @@ class _$_DeleteStage implements _DeleteStage {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (deleteStage != null) {
@@ -2178,6 +2226,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return getParticipantsAtStart(stageId);
   }
@@ -2215,6 +2264,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return getParticipantsAtStart?.call(stageId);
   }
@@ -2252,6 +2302,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (getParticipantsAtStart != null) {
@@ -2276,6 +2327,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return getParticipantsAtStart(this);
   }
@@ -2294,6 +2346,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return getParticipantsAtStart?.call(this);
   }
@@ -2312,6 +2365,7 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (getParticipantsAtStart != null) {
@@ -2460,6 +2514,7 @@ class _$_AddStartNumber implements _AddStartNumber {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return addStartNumber(stage, number, startTime, forceAdd);
   }
@@ -2497,6 +2552,7 @@ class _$_AddStartNumber implements _AddStartNumber {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return addStartNumber?.call(stage, number, startTime, forceAdd);
   }
@@ -2534,6 +2590,7 @@ class _$_AddStartNumber implements _AddStartNumber {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (addStartNumber != null) {
@@ -2558,6 +2615,7 @@ class _$_AddStartNumber implements _AddStartNumber {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return addStartNumber(this);
   }
@@ -2576,6 +2634,7 @@ class _$_AddStartNumber implements _AddStartNumber {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return addStartNumber?.call(this);
   }
@@ -2594,6 +2653,7 @@ class _$_AddStartNumber implements _AddStartNumber {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (addStartNumber != null) {
@@ -2790,6 +2850,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return updateStartingInfo(
         startTime,
@@ -2834,6 +2895,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return updateStartingInfo?.call(
         startTime,
@@ -2878,6 +2940,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (updateStartingInfo != null) {
@@ -2909,6 +2972,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return updateStartingInfo(this);
   }
@@ -2927,6 +2991,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return updateStartingInfo?.call(this);
   }
@@ -2945,6 +3010,7 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (updateStartingInfo != null) {
@@ -3084,6 +3150,7 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
             int participantId)
         updateStartingInfo,
     required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
   }) {
     return updateManualStartTime(stageId, time);
   }
@@ -3121,6 +3188,7 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
   }) {
     return updateManualStartTime?.call(stageId, time);
   }
@@ -3158,6 +3226,7 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
             int participantId)?
         updateStartingInfo,
     TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (updateManualStartTime != null) {
@@ -3182,6 +3251,7 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
   }) {
     return updateManualStartTime(this);
   }
@@ -3200,6 +3270,7 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
   }) {
     return updateManualStartTime?.call(this);
   }
@@ -3218,6 +3289,7 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
     TResult Function(_AddStartNumber value)? addStartNumber,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
     required TResult orElse(),
   }) {
     if (updateManualStartTime != null) {
@@ -3236,6 +3308,257 @@ abstract class _UpdateManualStartTime implements DatabaseEvent {
   DateTime get time;
   @JsonKey(ignore: true)
   _$$_UpdateManualStartTimeCopyWith<_$_UpdateManualStartTime> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_setDNSCopyWith<$Res> {
+  factory _$$_setDNSCopyWith(_$_setDNS value, $Res Function(_$_setDNS) then) =
+      __$$_setDNSCopyWithImpl<$Res>;
+  $Res call({int startId});
+}
+
+/// @nodoc
+class __$$_setDNSCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
+    implements _$$_setDNSCopyWith<$Res> {
+  __$$_setDNSCopyWithImpl(_$_setDNS _value, $Res Function(_$_setDNS) _then)
+      : super(_value, (v) => _then(v as _$_setDNS));
+
+  @override
+  _$_setDNS get _value => super._value as _$_setDNS;
+
+  @override
+  $Res call({
+    Object? startId = freezed,
+  }) {
+    return _then(_$_setDNS(
+      startId: startId == freezed
+          ? _value.startId
+          : startId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_setDNS implements _setDNS {
+  const _$_setDNS({required this.startId});
+
+  @override
+  final int startId;
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.setDNSatStart(startId: $startId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_setDNS &&
+            const DeepCollectionEquality().equals(other.startId, startId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(startId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_setDNSCopyWith<_$_setDNS> get copyWith =>
+      __$$_setDNSCopyWithImpl<_$_setDNS>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            Notification? notification)
+        emitState,
+    required TResult Function(Race race) addRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function(Stage stage) addStage,
+    required TResult Function(int raceId) selectStages,
+    required TResult Function(int id) deleteStage,
+    required TResult Function(int stageId) getParticipantsAtStart,
+    required TResult Function(
+            Stage stage, int number, String startTime, bool forceAdd)
+        addStartNumber,
+    required TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)
+        updateStartingInfo,
+    required TResult Function(int stageId, DateTime time) updateManualStartTime,
+    required TResult Function(int startId) setDNSatStart,
+  }) {
+    return setDNSatStart(startId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            Notification? notification)?
+        emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
+  }) {
+    return setDNSatStart?.call(startId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            List<Race>? races,
+            List<Stage>? stages,
+            List<Rider>? riders,
+            List<Status>? statuses,
+            List<GetParticipantsAtStartResult>? participants,
+            List<Start>? starts,
+            List<Finish>? finishes,
+            List<Trail>? trails,
+            Notification? notification)?
+        emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int raceId)? selectStages,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult Function(int startId)? setDNSatStart,
+    required TResult orElse(),
+  }) {
+    if (setDNSatStart != null) {
+      return setDNSatStart(startId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_SelectStages value) selectStages,
+    required TResult Function(_DeleteStage value) deleteStage,
+    required TResult Function(_GetParticipantsAtStart value)
+        getParticipantsAtStart,
+    required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
+    required TResult Function(_setDNS value) setDNSatStart,
+  }) {
+    return setDNSatStart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
+  }) {
+    return setDNSatStart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_SelectStages value)? selectStages,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_setDNS value)? setDNSatStart,
+    required TResult orElse(),
+  }) {
+    if (setDNSatStart != null) {
+      return setDNSatStart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _setDNS implements DatabaseEvent {
+  const factory _setDNS({required final int startId}) = _$_setDNS;
+
+  int get startId;
+  @JsonKey(ignore: true)
+  _$$_setDNSCopyWith<_$_setDNS> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

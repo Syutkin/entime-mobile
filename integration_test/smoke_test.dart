@@ -26,6 +26,8 @@ void main() async {
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
 
+  final AppDatabase database = AppDatabase();
+
   final protocolProvider = ProtocolProvider();
   final logProvider = LogProvider();
 
@@ -51,11 +53,12 @@ void main() async {
   final IAudioService audioService = AudioService(settings: settings);
   final IAudioController audioController = AudioController(
     audioService: audioService,
-    protocolProvider: protocolProvider,
+    // protocolProvider: protocolProvider,
+    database: database,
     settingsProvider: settings,
   );
 
-  final AppDatabase database = AppDatabase();
+  
 
   final CountdownAtStart countdown = CountdownAtStart(database: database);
 

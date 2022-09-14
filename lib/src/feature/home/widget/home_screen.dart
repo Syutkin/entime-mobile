@@ -162,10 +162,10 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                   ],
-                  child: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),
+                  child: const TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      const InitScreen(),
+                      InitScreen(),
                       //ToDo: rework Start page
                       StartListPage(
                         stage: Stage(
@@ -175,7 +175,7 @@ class HomeScreen extends StatelessWidget {
                           isDeleted: false,
                         ),
                       ),
-                      const FinishScreen(),
+                      FinishScreen(),
                     ],
                   ),
                 ),

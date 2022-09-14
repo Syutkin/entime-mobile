@@ -48,6 +48,7 @@ Future<void> main() async {
   final String logPath = join(documentsDirectory.path, 'log.sqlite');
 
   final protocolProvider = ProtocolProvider();
+  final AppDatabase database = AppDatabase();
 
   final logProvider = LogProvider();
   await logProvider.openDb(logPath);
@@ -74,11 +75,10 @@ Future<void> main() async {
   final IAudioService audioService = AudioService(settings: settings);
   final IAudioController audioController = AudioController(
     audioService: audioService,
-    protocolProvider: protocolProvider,
+    database: database,
+    // protocolProvider: protocolProvider,
     settingsProvider: settings,
   );
-
-  final AppDatabase database = AppDatabase();
 
   final CountdownAtStart countdown = CountdownAtStart(database: database);
 
