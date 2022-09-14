@@ -21,7 +21,7 @@ class StartItemTile extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
+  Widget build(BuildContext context) => InkWell(
         onTap: () {
           onTap?.call();
         },

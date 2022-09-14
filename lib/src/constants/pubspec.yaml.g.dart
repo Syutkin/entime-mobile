@@ -40,7 +40,7 @@
 // ignore_for_file: prefer_single_quotes
 
 /// Current app version
-const String version = r'0.5.0-dev+136';
+const String version = r'0.5.0-dev+140';
 
 /// The major version number: "1" in "1.2.3".
 const int major = 0;
@@ -55,10 +55,10 @@ const int patch = 0;
 const List<String> pre = <String>[r'dev'];
 
 /// The build identifier: "foo" in "1.2.3+foo".
-const List<String> build = <String>[r'136'];
+const List<String> build = <String>[r'140'];
 
 /// Build date in Unix Time (in seconds)
-const int timestamp = 1662713506;
+const int timestamp = 1663143484;
 
 /// Name [name]
 const String name = r'entime';
@@ -94,61 +94,61 @@ const Map<String, Object> dependencies = <String, Object>{
   'flutter_localizations': <String, Object>{
     'sdk': r'flutter',
   },
-  'bloc_concurrency': r'any',
-  'bot_toast': r'any',
-  'csv': r'any',
-  'device_info_plus': r'any',
-  'drift': r'any',
-  'equatable': r'any',
-  'file_picker': r'any',
-  'filesize': r'any',
-  'flutter_bloc': r'any',
-  'flutter_bluetooth_serial': r'any',
-  'flutter_markdown': r'any',
-  'flutter_tts': r'any',
-  'freezed_annotation': r'any',
+  'bloc_concurrency': r'^0.2.0',
+  'bot_toast': r'^4.0.3',
+  'csv': r'^5.0.1',
+  'device_info_plus': r'^4.1.2',
+  'drift': r'^2.1.0',
+  'equatable': r'^2.0.5',
+  'file_picker': r'^5.0.1',
+  'filesize': r'^2.0.1',
+  'flutter_bloc': r'^8.1.1',
+  'flutter_bluetooth_serial': r'^0.4.0',
+  'flutter_markdown': r'^0.6.10+5',
+  'flutter_tts': r'^3.5.3',
+  'freezed_annotation': r'^2.1.0',
   'json_annotation': r'^4.6.0',
-  'http': r'any',
-  'intl': r'any',
-  'logger': r'any',
-  'material_design_icons_flutter': r'any',
-  'meta': r'any',
-  'open_filex': r'any',
-  'path': r'any',
-  'path_provider': r'any',
-  'permission_handler': r'any',
-  'pub_semver': r'any',
-  'rxdart': r'any',
-  'sentry_flutter': r'any',
-  'settings_ui': r'any',
-  'share_plus': r'any',
-  'shared_preferences': r'any',
-  'soundpool': r'any',
-  'sqflite': r'any',
-  'sqlite3_flutter_libs': r'any',
-  'url_launcher': r'any',
-  'wakelock': r'any',
+  'http': r'^0.13.5',
+  'intl': r'^0.17.0',
+  'logger': r'^1.1.0',
+  'material_design_icons_flutter': r'^5.0.6996',
+  'meta': r'^1.8.0',
+  'open_filex': r'^4.1.1',
+  'path': r'^1.8.2',
+  'path_provider': r'^2.0.11',
+  'permission_handler': r'^10.0.0',
+  'pub_semver': r'^2.1.1',
+  'rxdart': r'^0.27.5',
+  'sentry_flutter': r'^6.9.1',
+  'settings_ui': r'^2.0.2',
+  'share_plus': r'^4.1.0',
+  'shared_preferences': r'^2.0.15',
+  'soundpool': r'^2.3.0',
+  'sqflite': r'^2.0.3+1',
+  'sqlite3_flutter_libs': r'^0.5.9',
+  'url_launcher': r'^6.1.5',
+  'wakelock': r'^0.6.2',
 };
 
 /// Developer dependencies
 const Map<String, Object> devDependencies = <String, Object>{
   'bloc_test': r'^9.1.0',
-  'build_runner': r'any',
-  'dart_code_metrics': r'any',
-  'drift_dev': r'any',
-  'flutter_lints': r'any',
+  'build_runner': r'^2.2.0',
+  'dart_code_metrics': r'^4.17.1',
+  'drift_dev': r'^2.1.0',
+  'flutter_lints': r'^2.0.1',
   'flutter_test': <String, Object>{
     'sdk': r'flutter',
   },
-  'freezed': r'any',
+  'freezed': r'^2.1.0+1',
   'json_serializable': r'^6.3.1',
   'integration_test': <String, Object>{
     'sdk': r'flutter',
   },
-  'mockito': r'any',
-  'mocktail': r'any',
-  'pubspec_generator': r'any',
-  'sqflite_common_ffi': r'any',
+  'mockito': r'^5.3.0',
+  'mocktail': r'^0.3.0',
+  'pubspec_generator': r'^3.0.1',
+  'sqflite_common_ffi': r'^2.1.1+1',
 };
 
 /// Dependency overrides

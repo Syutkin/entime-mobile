@@ -3,7 +3,7 @@
 part of 'app_database.dart';
 
 // **************************************************************************
-// MoorGenerator
+// DriftDatabaseGenerator
 // **************************************************************************
 
 // ignore_for_file: type=lint
@@ -14,44 +14,28 @@ class Race extends DataClass implements Insertable<Race> {
   final String? finishDate;
   final String? location;
   final bool isDeleted;
-  Race(
+  const Race(
       {this.id,
       required this.name,
       this.startDate,
       this.finishDate,
       this.location,
       required this.isDeleted});
-  factory Race.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return Race(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      startDate: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}start_date']),
-      finishDate: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}finish_date']),
-      location: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}location']),
-      isDeleted: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_deleted'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
+      map['id'] = Variable<int>(id);
     }
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || startDate != null) {
-      map['start_date'] = Variable<String?>(startDate);
+      map['start_date'] = Variable<String>(startDate);
     }
     if (!nullToAbsent || finishDate != null) {
-      map['finish_date'] = Variable<String?>(finishDate);
+      map['finish_date'] = Variable<String>(finishDate);
     }
     if (!nullToAbsent || location != null) {
-      map['location'] = Variable<String?>(location);
+      map['location'] = Variable<String>(location);
     }
     map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
@@ -100,18 +84,18 @@ class Race extends DataClass implements Insertable<Race> {
   }
 
   Race copyWith(
-          {int? id,
+          {Value<int?> id = const Value.absent(),
           String? name,
-          String? startDate,
-          String? finishDate,
-          String? location,
+          Value<String?> startDate = const Value.absent(),
+          Value<String?> finishDate = const Value.absent(),
+          Value<String?> location = const Value.absent(),
           bool? isDeleted}) =>
       Race(
-        id: id ?? this.id,
+        id: id.present ? id.value : this.id,
         name: name ?? this.name,
-        startDate: startDate ?? this.startDate,
-        finishDate: finishDate ?? this.finishDate,
-        location: location ?? this.location,
+        startDate: startDate.present ? startDate.value : this.startDate,
+        finishDate: finishDate.present ? finishDate.value : this.finishDate,
+        location: location.present ? location.value : this.location,
         isDeleted: isDeleted ?? this.isDeleted,
       );
   @override
@@ -166,11 +150,11 @@ class RacesCompanion extends UpdateCompanion<Race> {
     this.isDeleted = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Race> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<String>? name,
-    Expression<String?>? startDate,
-    Expression<String?>? finishDate,
-    Expression<String?>? location,
+    Expression<String>? startDate,
+    Expression<String>? finishDate,
+    Expression<String>? location,
     Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
@@ -204,19 +188,19 @@ class RacesCompanion extends UpdateCompanion<Race> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
     }
     if (startDate.present) {
-      map['start_date'] = Variable<String?>(startDate.value);
+      map['start_date'] = Variable<String>(startDate.value);
     }
     if (finishDate.present) {
-      map['finish_date'] = Variable<String?>(finishDate.value);
+      map['finish_date'] = Variable<String>(finishDate.value);
     }
     if (location.present) {
-      map['location'] = Variable<String?>(location.value);
+      map['location'] = Variable<String>(location.value);
     }
     if (isDeleted.present) {
       map['is_deleted'] = Variable<bool>(isDeleted.value);
@@ -244,39 +228,39 @@ class Races extends Table with TableInfo<Races, Race> {
   final String? _alias;
   Races(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _startDateMeta = const VerificationMeta('startDate');
-  late final GeneratedColumn<String?> startDate = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> startDate = GeneratedColumn<String>(
       'start_date', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _finishDateMeta = const VerificationMeta('finishDate');
-  late final GeneratedColumn<String?> finishDate = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> finishDate = GeneratedColumn<String>(
       'finish_date', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _locationMeta = const VerificationMeta('location');
-  late final GeneratedColumn<String?> location = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> location = GeneratedColumn<String>(
       'location', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _isDeletedMeta = const VerificationMeta('isDeleted');
-  late final GeneratedColumn<bool?> isDeleted = GeneratedColumn<bool?>(
+  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
       'is_deleted', aliasedName, false,
-      type: const BoolType(),
+      type: DriftSqlType.bool,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT false',
       defaultValue: const CustomExpression<bool>('false'));
@@ -326,8 +310,21 @@ class Races extends Table with TableInfo<Races, Race> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Race map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Race.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Race(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      name: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      startDate: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}start_date']),
+      finishDate: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}finish_date']),
+      location: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}location']),
+      isDeleted: attachedDatabase.options.types
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
+    );
   }
 
   @override
@@ -347,7 +344,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   final Uint8List? gpxTrack;
   final String? link;
   final String? comment;
-  Trail(
+  const Trail(
       {this.id,
       required this.name,
       this.distance,
@@ -355,45 +352,27 @@ class Trail extends DataClass implements Insertable<Trail> {
       this.gpxTrack,
       this.link,
       this.comment});
-  factory Trail.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return Trail(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      distance: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}distance']),
-      elevation: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}elevation']),
-      gpxTrack: const BlobType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}gpx_track']),
-      link: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}link']),
-      comment: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}comment']),
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
+      map['id'] = Variable<int>(id);
     }
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || distance != null) {
-      map['distance'] = Variable<int?>(distance);
+      map['distance'] = Variable<int>(distance);
     }
     if (!nullToAbsent || elevation != null) {
-      map['elevation'] = Variable<int?>(elevation);
+      map['elevation'] = Variable<int>(elevation);
     }
     if (!nullToAbsent || gpxTrack != null) {
-      map['gpx_track'] = Variable<Uint8List?>(gpxTrack);
+      map['gpx_track'] = Variable<Uint8List>(gpxTrack);
     }
     if (!nullToAbsent || link != null) {
-      map['link'] = Variable<String?>(link);
+      map['link'] = Variable<String>(link);
     }
     if (!nullToAbsent || comment != null) {
-      map['comment'] = Variable<String?>(comment);
+      map['comment'] = Variable<String>(comment);
     }
     return map;
   }
@@ -446,21 +425,21 @@ class Trail extends DataClass implements Insertable<Trail> {
   }
 
   Trail copyWith(
-          {int? id,
+          {Value<int?> id = const Value.absent(),
           String? name,
-          int? distance,
-          int? elevation,
-          Uint8List? gpxTrack,
-          String? link,
-          String? comment}) =>
+          Value<int?> distance = const Value.absent(),
+          Value<int?> elevation = const Value.absent(),
+          Value<Uint8List?> gpxTrack = const Value.absent(),
+          Value<String?> link = const Value.absent(),
+          Value<String?> comment = const Value.absent()}) =>
       Trail(
-        id: id ?? this.id,
+        id: id.present ? id.value : this.id,
         name: name ?? this.name,
-        distance: distance ?? this.distance,
-        elevation: elevation ?? this.elevation,
-        gpxTrack: gpxTrack ?? this.gpxTrack,
-        link: link ?? this.link,
-        comment: comment ?? this.comment,
+        distance: distance.present ? distance.value : this.distance,
+        elevation: elevation.present ? elevation.value : this.elevation,
+        gpxTrack: gpxTrack.present ? gpxTrack.value : this.gpxTrack,
+        link: link.present ? link.value : this.link,
+        comment: comment.present ? comment.value : this.comment,
       );
   @override
   String toString() {
@@ -519,13 +498,13 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.comment = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Trail> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<String>? name,
-    Expression<int?>? distance,
-    Expression<int?>? elevation,
-    Expression<Uint8List?>? gpxTrack,
-    Expression<String?>? link,
-    Expression<String?>? comment,
+    Expression<int>? distance,
+    Expression<int>? elevation,
+    Expression<Uint8List>? gpxTrack,
+    Expression<String>? link,
+    Expression<String>? comment,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -561,25 +540,25 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
     }
     if (distance.present) {
-      map['distance'] = Variable<int?>(distance.value);
+      map['distance'] = Variable<int>(distance.value);
     }
     if (elevation.present) {
-      map['elevation'] = Variable<int?>(elevation.value);
+      map['elevation'] = Variable<int>(elevation.value);
     }
     if (gpxTrack.present) {
-      map['gpx_track'] = Variable<Uint8List?>(gpxTrack.value);
+      map['gpx_track'] = Variable<Uint8List>(gpxTrack.value);
     }
     if (link.present) {
-      map['link'] = Variable<String?>(link.value);
+      map['link'] = Variable<String>(link.value);
     }
     if (comment.present) {
-      map['comment'] = Variable<String?>(comment.value);
+      map['comment'] = Variable<String>(comment.value);
     }
     return map;
   }
@@ -605,45 +584,45 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   final String? _alias;
   Trails(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _distanceMeta = const VerificationMeta('distance');
-  late final GeneratedColumn<int?> distance = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> distance = GeneratedColumn<int>(
       'distance', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _elevationMeta = const VerificationMeta('elevation');
-  late final GeneratedColumn<int?> elevation = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> elevation = GeneratedColumn<int>(
       'elevation', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _gpxTrackMeta = const VerificationMeta('gpxTrack');
-  late final GeneratedColumn<Uint8List?> gpxTrack = GeneratedColumn<Uint8List?>(
+  late final GeneratedColumn<Uint8List> gpxTrack = GeneratedColumn<Uint8List>(
       'gpx_track', aliasedName, true,
-      type: const BlobType(),
+      type: DriftSqlType.blob,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _linkMeta = const VerificationMeta('link');
-  late final GeneratedColumn<String?> link = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> link = GeneratedColumn<String>(
       'link', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _commentMeta = const VerificationMeta('comment');
-  late final GeneratedColumn<String?> comment = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> comment = GeneratedColumn<String>(
       'comment', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   @override
@@ -694,8 +673,23 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Trail map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Trail.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Trail(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      name: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      distance: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}distance']),
+      elevation: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}elevation']),
+      gpxTrack: attachedDatabase.options.types
+          .read(DriftSqlType.blob, data['${effectivePrefix}gpx_track']),
+      link: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}link']),
+      comment: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}comment']),
+    );
   }
 
   @override
@@ -714,37 +708,21 @@ class Stage extends DataClass implements Insertable<Stage> {
   final String name;
   final bool isActive;
   final bool isDeleted;
-  Stage(
+  const Stage(
       {this.id,
       this.trailId,
       required this.raceId,
       required this.name,
       required this.isActive,
       required this.isDeleted});
-  factory Stage.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return Stage(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      trailId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}trail_id']),
-      raceId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}race_id'])!,
-      name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      isActive: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_active'])!,
-      isDeleted: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_deleted'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
+      map['id'] = Variable<int>(id);
     }
     if (!nullToAbsent || trailId != null) {
-      map['trail_id'] = Variable<int?>(trailId);
+      map['trail_id'] = Variable<int>(trailId);
     }
     map['race_id'] = Variable<int>(raceId);
     map['name'] = Variable<String>(name);
@@ -792,15 +770,15 @@ class Stage extends DataClass implements Insertable<Stage> {
   }
 
   Stage copyWith(
-          {int? id,
-          int? trailId,
+          {Value<int?> id = const Value.absent(),
+          Value<int?> trailId = const Value.absent(),
           int? raceId,
           String? name,
           bool? isActive,
           bool? isDeleted}) =>
       Stage(
-        id: id ?? this.id,
-        trailId: trailId ?? this.trailId,
+        id: id.present ? id.value : this.id,
+        trailId: trailId.present ? trailId.value : this.trailId,
         raceId: raceId ?? this.raceId,
         name: name ?? this.name,
         isActive: isActive ?? this.isActive,
@@ -859,8 +837,8 @@ class StagesCompanion extends UpdateCompanion<Stage> {
   })  : raceId = Value(raceId),
         name = Value(name);
   static Insertable<Stage> custom({
-    Expression<int?>? id,
-    Expression<int?>? trailId,
+    Expression<int>? id,
+    Expression<int>? trailId,
     Expression<int>? raceId,
     Expression<String>? name,
     Expression<bool>? isActive,
@@ -897,10 +875,10 @@ class StagesCompanion extends UpdateCompanion<Stage> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (trailId.present) {
-      map['trail_id'] = Variable<int?>(trailId.value);
+      map['trail_id'] = Variable<int>(trailId.value);
     }
     if (raceId.present) {
       map['race_id'] = Variable<int>(raceId.value);
@@ -937,40 +915,40 @@ class Stages extends Table with TableInfo<Stages, Stage> {
   final String? _alias;
   Stages(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _trailIdMeta = const VerificationMeta('trailId');
-  late final GeneratedColumn<int?> trailId = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> trailId = GeneratedColumn<int>(
       'trail_id', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
-  late final GeneratedColumn<int?> raceId = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
       'race_id', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _isActiveMeta = const VerificationMeta('isActive');
-  late final GeneratedColumn<bool?> isActive = GeneratedColumn<bool?>(
+  late final GeneratedColumn<bool> isActive = GeneratedColumn<bool>(
       'is_active', aliasedName, false,
-      type: const BoolType(),
+      type: DriftSqlType.bool,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT true',
       defaultValue: const CustomExpression<bool>('true'));
   final VerificationMeta _isDeletedMeta = const VerificationMeta('isDeleted');
-  late final GeneratedColumn<bool?> isDeleted = GeneratedColumn<bool?>(
+  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
       'is_deleted', aliasedName, false,
-      type: const BoolType(),
+      type: DriftSqlType.bool,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT false',
       defaultValue: const CustomExpression<bool>('false'));
@@ -1020,8 +998,21 @@ class Stages extends Table with TableInfo<Stages, Stage> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Stage map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Stage.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Stage(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      trailId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}trail_id']),
+      raceId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}race_id'])!,
+      name: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      isActive: attachedDatabase.options.types
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_active'])!,
+      isDeleted: attachedDatabase.options.types
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
+    );
   }
 
   @override
@@ -1048,7 +1039,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   final String? email;
   final String? phone;
   final String? comment;
-  Rider(
+  const Rider(
       {this.id,
       required this.name,
       this.nickname,
@@ -1058,55 +1049,33 @@ class Rider extends DataClass implements Insertable<Rider> {
       this.email,
       this.phone,
       this.comment});
-  factory Rider.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return Rider(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      nickname: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}nickname']),
-      birthday: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}birthday']),
-      team: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}team']),
-      city: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}city']),
-      email: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}email']),
-      phone: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}phone']),
-      comment: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}comment']),
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
+      map['id'] = Variable<int>(id);
     }
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || nickname != null) {
-      map['nickname'] = Variable<String?>(nickname);
+      map['nickname'] = Variable<String>(nickname);
     }
     if (!nullToAbsent || birthday != null) {
-      map['birthday'] = Variable<String?>(birthday);
+      map['birthday'] = Variable<String>(birthday);
     }
     if (!nullToAbsent || team != null) {
-      map['team'] = Variable<String?>(team);
+      map['team'] = Variable<String>(team);
     }
     if (!nullToAbsent || city != null) {
-      map['city'] = Variable<String?>(city);
+      map['city'] = Variable<String>(city);
     }
     if (!nullToAbsent || email != null) {
-      map['email'] = Variable<String?>(email);
+      map['email'] = Variable<String>(email);
     }
     if (!nullToAbsent || phone != null) {
-      map['phone'] = Variable<String?>(phone);
+      map['phone'] = Variable<String>(phone);
     }
     if (!nullToAbsent || comment != null) {
-      map['comment'] = Variable<String?>(comment);
+      map['comment'] = Variable<String>(comment);
     }
     return map;
   }
@@ -1165,25 +1134,25 @@ class Rider extends DataClass implements Insertable<Rider> {
   }
 
   Rider copyWith(
-          {int? id,
+          {Value<int?> id = const Value.absent(),
           String? name,
-          String? nickname,
-          String? birthday,
-          String? team,
-          String? city,
-          String? email,
-          String? phone,
-          String? comment}) =>
+          Value<String?> nickname = const Value.absent(),
+          Value<String?> birthday = const Value.absent(),
+          Value<String?> team = const Value.absent(),
+          Value<String?> city = const Value.absent(),
+          Value<String?> email = const Value.absent(),
+          Value<String?> phone = const Value.absent(),
+          Value<String?> comment = const Value.absent()}) =>
       Rider(
-        id: id ?? this.id,
+        id: id.present ? id.value : this.id,
         name: name ?? this.name,
-        nickname: nickname ?? this.nickname,
-        birthday: birthday ?? this.birthday,
-        team: team ?? this.team,
-        city: city ?? this.city,
-        email: email ?? this.email,
-        phone: phone ?? this.phone,
-        comment: comment ?? this.comment,
+        nickname: nickname.present ? nickname.value : this.nickname,
+        birthday: birthday.present ? birthday.value : this.birthday,
+        team: team.present ? team.value : this.team,
+        city: city.present ? city.value : this.city,
+        email: email.present ? email.value : this.email,
+        phone: phone.present ? phone.value : this.phone,
+        comment: comment.present ? comment.value : this.comment,
       );
   @override
   String toString() {
@@ -1252,15 +1221,15 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     this.comment = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Rider> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<String>? name,
-    Expression<String?>? nickname,
-    Expression<String?>? birthday,
-    Expression<String?>? team,
-    Expression<String?>? city,
-    Expression<String?>? email,
-    Expression<String?>? phone,
-    Expression<String?>? comment,
+    Expression<String>? nickname,
+    Expression<String>? birthday,
+    Expression<String>? team,
+    Expression<String>? city,
+    Expression<String>? email,
+    Expression<String>? phone,
+    Expression<String>? comment,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1302,31 +1271,31 @@ class RidersCompanion extends UpdateCompanion<Rider> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
     }
     if (nickname.present) {
-      map['nickname'] = Variable<String?>(nickname.value);
+      map['nickname'] = Variable<String>(nickname.value);
     }
     if (birthday.present) {
-      map['birthday'] = Variable<String?>(birthday.value);
+      map['birthday'] = Variable<String>(birthday.value);
     }
     if (team.present) {
-      map['team'] = Variable<String?>(team.value);
+      map['team'] = Variable<String>(team.value);
     }
     if (city.present) {
-      map['city'] = Variable<String?>(city.value);
+      map['city'] = Variable<String>(city.value);
     }
     if (email.present) {
-      map['email'] = Variable<String?>(email.value);
+      map['email'] = Variable<String>(email.value);
     }
     if (phone.present) {
-      map['phone'] = Variable<String?>(phone.value);
+      map['phone'] = Variable<String>(phone.value);
     }
     if (comment.present) {
-      map['comment'] = Variable<String?>(comment.value);
+      map['comment'] = Variable<String>(comment.value);
     }
     return map;
   }
@@ -1354,57 +1323,57 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   final String? _alias;
   Riders(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _nameMeta = const VerificationMeta('name');
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _nicknameMeta = const VerificationMeta('nickname');
-  late final GeneratedColumn<String?> nickname = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> nickname = GeneratedColumn<String>(
       'nickname', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _birthdayMeta = const VerificationMeta('birthday');
-  late final GeneratedColumn<String?> birthday = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> birthday = GeneratedColumn<String>(
       'birthday', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _teamMeta = const VerificationMeta('team');
-  late final GeneratedColumn<String?> team = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> team = GeneratedColumn<String>(
       'team', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _cityMeta = const VerificationMeta('city');
-  late final GeneratedColumn<String?> city = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> city = GeneratedColumn<String>(
       'city', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _emailMeta = const VerificationMeta('email');
-  late final GeneratedColumn<String?> email = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> email = GeneratedColumn<String>(
       'email', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _phoneMeta = const VerificationMeta('phone');
-  late final GeneratedColumn<String?> phone = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> phone = GeneratedColumn<String>(
       'phone', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _commentMeta = const VerificationMeta('comment');
-  late final GeneratedColumn<String?> comment = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> comment = GeneratedColumn<String>(
       'comment', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   @override
@@ -1463,8 +1432,27 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Rider map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Rider.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Rider(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      name: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      nickname: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}nickname']),
+      birthday: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}birthday']),
+      team: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}team']),
+      city: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}city']),
+      email: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}email']),
+      phone: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}phone']),
+      comment: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}comment']),
+    );
   }
 
   @override
@@ -1479,20 +1467,12 @@ class Riders extends Table with TableInfo<Riders, Rider> {
 class Status extends DataClass implements Insertable<Status> {
   final int? id;
   final String type;
-  Status({this.id, required this.type});
-  factory Status.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return Status(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      type: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}type'])!,
-    );
-  }
+  const Status({this.id, required this.type});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
+      map['id'] = Variable<int>(id);
     }
     map['type'] = Variable<String>(type);
     return map;
@@ -1522,8 +1502,9 @@ class Status extends DataClass implements Insertable<Status> {
     };
   }
 
-  Status copyWith({int? id, String? type}) => Status(
-        id: id ?? this.id,
+  Status copyWith({Value<int?> id = const Value.absent(), String? type}) =>
+      Status(
+        id: id.present ? id.value : this.id,
         type: type ?? this.type,
       );
   @override
@@ -1555,7 +1536,7 @@ class StatusesCompanion extends UpdateCompanion<Status> {
     required String type,
   }) : type = Value(type);
   static Insertable<Status> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<String>? type,
   }) {
     return RawValuesInsertable({
@@ -1575,7 +1556,7 @@ class StatusesCompanion extends UpdateCompanion<Status> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (type.present) {
       map['type'] = Variable<String>(type.value);
@@ -1599,15 +1580,15 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
   final String? _alias;
   Statuses(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _typeMeta = const VerificationMeta('type');
-  late final GeneratedColumn<String?> type = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> type = GeneratedColumn<String>(
       'type', aliasedName, false,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   @override
@@ -1637,8 +1618,13 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Status map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Status.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Status(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      type: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
+    );
   }
 
   @override
@@ -1658,7 +1644,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   final String? category;
   final String? rfid;
   final int statusId;
-  Participant(
+  const Participant(
       {this.id,
       required this.raceId,
       required this.riderId,
@@ -1666,38 +1652,20 @@ class Participant extends DataClass implements Insertable<Participant> {
       this.category,
       this.rfid,
       required this.statusId});
-  factory Participant.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return Participant(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      raceId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}race_id'])!,
-      riderId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}rider_id'])!,
-      number: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}number'])!,
-      category: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}category']),
-      rfid: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}rfid']),
-      statusId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}status_id'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
+      map['id'] = Variable<int>(id);
     }
     map['race_id'] = Variable<int>(raceId);
     map['rider_id'] = Variable<int>(riderId);
     map['number'] = Variable<int>(number);
     if (!nullToAbsent || category != null) {
-      map['category'] = Variable<String?>(category);
+      map['category'] = Variable<String>(category);
     }
     if (!nullToAbsent || rfid != null) {
-      map['rfid'] = Variable<String?>(rfid);
+      map['rfid'] = Variable<String>(rfid);
     }
     map['status_id'] = Variable<int>(statusId);
     return map;
@@ -1745,20 +1713,20 @@ class Participant extends DataClass implements Insertable<Participant> {
   }
 
   Participant copyWith(
-          {int? id,
+          {Value<int?> id = const Value.absent(),
           int? raceId,
           int? riderId,
           int? number,
-          String? category,
-          String? rfid,
+          Value<String?> category = const Value.absent(),
+          Value<String?> rfid = const Value.absent(),
           int? statusId}) =>
       Participant(
-        id: id ?? this.id,
+        id: id.present ? id.value : this.id,
         raceId: raceId ?? this.raceId,
         riderId: riderId ?? this.riderId,
         number: number ?? this.number,
-        category: category ?? this.category,
-        rfid: rfid ?? this.rfid,
+        category: category.present ? category.value : this.category,
+        rfid: rfid.present ? rfid.value : this.rfid,
         statusId: statusId ?? this.statusId,
       );
   @override
@@ -1820,12 +1788,12 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
         riderId = Value(riderId),
         number = Value(number);
   static Insertable<Participant> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<int>? raceId,
     Expression<int>? riderId,
     Expression<int>? number,
-    Expression<String?>? category,
-    Expression<String?>? rfid,
+    Expression<String>? category,
+    Expression<String>? rfid,
     Expression<int>? statusId,
   }) {
     return RawValuesInsertable({
@@ -1862,7 +1830,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (raceId.present) {
       map['race_id'] = Variable<int>(raceId.value);
@@ -1874,10 +1842,10 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       map['number'] = Variable<int>(number.value);
     }
     if (category.present) {
-      map['category'] = Variable<String?>(category.value);
+      map['category'] = Variable<String>(category.value);
     }
     if (rfid.present) {
-      map['rfid'] = Variable<String?>(rfid.value);
+      map['rfid'] = Variable<String>(rfid.value);
     }
     if (statusId.present) {
       map['status_id'] = Variable<int>(statusId.value);
@@ -1906,45 +1874,45 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   final String? _alias;
   Participants(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
-  late final GeneratedColumn<int?> raceId = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
       'race_id', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _riderIdMeta = const VerificationMeta('riderId');
-  late final GeneratedColumn<int?> riderId = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> riderId = GeneratedColumn<int>(
       'rider_id', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _numberMeta = const VerificationMeta('number');
-  late final GeneratedColumn<int?> number = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> number = GeneratedColumn<int>(
       'number', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _categoryMeta = const VerificationMeta('category');
-  late final GeneratedColumn<String?> category = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> category = GeneratedColumn<String>(
       'category', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _rfidMeta = const VerificationMeta('rfid');
-  late final GeneratedColumn<String?> rfid = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> rfid = GeneratedColumn<String>(
       'rfid', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _statusIdMeta = const VerificationMeta('statusId');
-  late final GeneratedColumn<int?> statusId = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
       'status_id', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT 1',
       defaultValue: const CustomExpression<int>('1'));
@@ -2000,8 +1968,23 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Participant map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Participant.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Participant(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      raceId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}race_id'])!,
+      riderId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}rider_id'])!,
+      number: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}number'])!,
+      category: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}category']),
+      rfid: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}rfid']),
+      statusId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}status_id'])!,
+    );
   }
 
   @override
@@ -2029,7 +2012,7 @@ class Start extends DataClass implements Insertable<Start> {
   final String? manualStartTime;
   final int? manualCorrection;
   final int statusId;
-  Start(
+  const Start(
       {this.id,
       required this.stageId,
       required this.participantId,
@@ -2040,53 +2023,29 @@ class Start extends DataClass implements Insertable<Start> {
       this.manualStartTime,
       this.manualCorrection,
       required this.statusId});
-  factory Start.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return Start(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      stageId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}stage_id'])!,
-      participantId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}participant_id'])!,
-      startTime: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}start_time'])!,
-      timestamp: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}timestamp']),
-      automaticStartTime: const StringType().mapFromDatabaseResponse(
-          data['${effectivePrefix}automatic_start_time']),
-      automaticCorrection: const IntType().mapFromDatabaseResponse(
-          data['${effectivePrefix}automatic_correction']),
-      manualStartTime: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}manual_start_time']),
-      manualCorrection: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}manual_correction']),
-      statusId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}status_id'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
+      map['id'] = Variable<int>(id);
     }
     map['stage_id'] = Variable<int>(stageId);
     map['participant_id'] = Variable<int>(participantId);
     map['start_time'] = Variable<String>(startTime);
     if (!nullToAbsent || timestamp != null) {
-      map['timestamp'] = Variable<String?>(timestamp);
+      map['timestamp'] = Variable<String>(timestamp);
     }
     if (!nullToAbsent || automaticStartTime != null) {
-      map['automatic_start_time'] = Variable<String?>(automaticStartTime);
+      map['automatic_start_time'] = Variable<String>(automaticStartTime);
     }
     if (!nullToAbsent || automaticCorrection != null) {
-      map['automatic_correction'] = Variable<int?>(automaticCorrection);
+      map['automatic_correction'] = Variable<int>(automaticCorrection);
     }
     if (!nullToAbsent || manualStartTime != null) {
-      map['manual_start_time'] = Variable<String?>(manualStartTime);
+      map['manual_start_time'] = Variable<String>(manualStartTime);
     }
     if (!nullToAbsent || manualCorrection != null) {
-      map['manual_correction'] = Variable<int?>(manualCorrection);
+      map['manual_correction'] = Variable<int>(manualCorrection);
     }
     map['status_id'] = Variable<int>(statusId);
     return map;
@@ -2153,26 +2112,34 @@ class Start extends DataClass implements Insertable<Start> {
   }
 
   Start copyWith(
-          {int? id,
+          {Value<int?> id = const Value.absent(),
           int? stageId,
           int? participantId,
           String? startTime,
-          String? timestamp,
-          String? automaticStartTime,
-          int? automaticCorrection,
-          String? manualStartTime,
-          int? manualCorrection,
+          Value<String?> timestamp = const Value.absent(),
+          Value<String?> automaticStartTime = const Value.absent(),
+          Value<int?> automaticCorrection = const Value.absent(),
+          Value<String?> manualStartTime = const Value.absent(),
+          Value<int?> manualCorrection = const Value.absent(),
           int? statusId}) =>
       Start(
-        id: id ?? this.id,
+        id: id.present ? id.value : this.id,
         stageId: stageId ?? this.stageId,
         participantId: participantId ?? this.participantId,
         startTime: startTime ?? this.startTime,
-        timestamp: timestamp ?? this.timestamp,
-        automaticStartTime: automaticStartTime ?? this.automaticStartTime,
-        automaticCorrection: automaticCorrection ?? this.automaticCorrection,
-        manualStartTime: manualStartTime ?? this.manualStartTime,
-        manualCorrection: manualCorrection ?? this.manualCorrection,
+        timestamp: timestamp.present ? timestamp.value : this.timestamp,
+        automaticStartTime: automaticStartTime.present
+            ? automaticStartTime.value
+            : this.automaticStartTime,
+        automaticCorrection: automaticCorrection.present
+            ? automaticCorrection.value
+            : this.automaticCorrection,
+        manualStartTime: manualStartTime.present
+            ? manualStartTime.value
+            : this.manualStartTime,
+        manualCorrection: manualCorrection.present
+            ? manualCorrection.value
+            : this.manualCorrection,
         statusId: statusId ?? this.statusId,
       );
   @override
@@ -2258,15 +2225,15 @@ class StartsCompanion extends UpdateCompanion<Start> {
         participantId = Value(participantId),
         startTime = Value(startTime);
   static Insertable<Start> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<int>? stageId,
     Expression<int>? participantId,
     Expression<String>? startTime,
-    Expression<String?>? timestamp,
-    Expression<String?>? automaticStartTime,
-    Expression<int?>? automaticCorrection,
-    Expression<String?>? manualStartTime,
-    Expression<int?>? manualCorrection,
+    Expression<String>? timestamp,
+    Expression<String>? automaticStartTime,
+    Expression<int>? automaticCorrection,
+    Expression<String>? manualStartTime,
+    Expression<int>? manualCorrection,
     Expression<int>? statusId,
   }) {
     return RawValuesInsertable({
@@ -2314,7 +2281,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (stageId.present) {
       map['stage_id'] = Variable<int>(stageId.value);
@@ -2326,19 +2293,19 @@ class StartsCompanion extends UpdateCompanion<Start> {
       map['start_time'] = Variable<String>(startTime.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String?>(timestamp.value);
+      map['timestamp'] = Variable<String>(timestamp.value);
     }
     if (automaticStartTime.present) {
-      map['automatic_start_time'] = Variable<String?>(automaticStartTime.value);
+      map['automatic_start_time'] = Variable<String>(automaticStartTime.value);
     }
     if (automaticCorrection.present) {
-      map['automatic_correction'] = Variable<int?>(automaticCorrection.value);
+      map['automatic_correction'] = Variable<int>(automaticCorrection.value);
     }
     if (manualStartTime.present) {
-      map['manual_start_time'] = Variable<String?>(manualStartTime.value);
+      map['manual_start_time'] = Variable<String>(manualStartTime.value);
     }
     if (manualCorrection.present) {
-      map['manual_correction'] = Variable<int?>(manualCorrection.value);
+      map['manual_correction'] = Variable<int>(manualCorrection.value);
     }
     if (statusId.present) {
       map['status_id'] = Variable<int>(statusId.value);
@@ -2370,68 +2337,68 @@ class Starts extends Table with TableInfo<Starts, Start> {
   final String? _alias;
   Starts(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _stageIdMeta = const VerificationMeta('stageId');
-  late final GeneratedColumn<int?> stageId = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
       'stage_id', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _participantIdMeta =
       const VerificationMeta('participantId');
-  late final GeneratedColumn<int?> participantId = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> participantId = GeneratedColumn<int>(
       'participant_id', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _startTimeMeta = const VerificationMeta('startTime');
-  late final GeneratedColumn<String?> startTime = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> startTime = GeneratedColumn<String>(
       'start_time', aliasedName, false,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _timestampMeta = const VerificationMeta('timestamp');
-  late final GeneratedColumn<String?> timestamp = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
       'timestamp', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _automaticStartTimeMeta =
       const VerificationMeta('automaticStartTime');
-  late final GeneratedColumn<String?> automaticStartTime =
-      GeneratedColumn<String?>('automatic_start_time', aliasedName, true,
-          type: const StringType(),
+  late final GeneratedColumn<String> automaticStartTime =
+      GeneratedColumn<String>('automatic_start_time', aliasedName, true,
+          type: DriftSqlType.string,
           requiredDuringInsert: false,
           $customConstraints: '');
   final VerificationMeta _automaticCorrectionMeta =
       const VerificationMeta('automaticCorrection');
-  late final GeneratedColumn<int?> automaticCorrection = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> automaticCorrection = GeneratedColumn<int>(
       'automatic_correction', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _manualStartTimeMeta =
       const VerificationMeta('manualStartTime');
-  late final GeneratedColumn<String?> manualStartTime =
-      GeneratedColumn<String?>('manual_start_time', aliasedName, true,
-          type: const StringType(),
-          requiredDuringInsert: false,
-          $customConstraints: '');
+  late final GeneratedColumn<String> manualStartTime = GeneratedColumn<String>(
+      'manual_start_time', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
   final VerificationMeta _manualCorrectionMeta =
       const VerificationMeta('manualCorrection');
-  late final GeneratedColumn<int?> manualCorrection = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> manualCorrection = GeneratedColumn<int>(
       'manual_correction', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _statusIdMeta = const VerificationMeta('statusId');
-  late final GeneratedColumn<int?> statusId = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
       'status_id', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT 1',
       defaultValue: const CustomExpression<int>('1'));
@@ -2519,8 +2486,29 @@ class Starts extends Table with TableInfo<Starts, Start> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Start map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Start.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Start(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      stageId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}stage_id'])!,
+      participantId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}participant_id'])!,
+      startTime: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}start_time'])!,
+      timestamp: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
+      automaticStartTime: attachedDatabase.options.types.read(
+          DriftSqlType.string, data['${effectivePrefix}automatic_start_time']),
+      automaticCorrection: attachedDatabase.options.types.read(
+          DriftSqlType.int, data['${effectivePrefix}automatic_correction']),
+      manualStartTime: attachedDatabase.options.types.read(
+          DriftSqlType.string, data['${effectivePrefix}manual_start_time']),
+      manualCorrection: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}manual_correction']),
+      statusId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}status_id'])!,
+    );
   }
 
   @override
@@ -2545,7 +2533,7 @@ class Finish extends DataClass implements Insertable<Finish> {
   final String? finishTime;
   final bool isHidden;
   final bool isManual;
-  Finish(
+  const Finish(
       {this.id,
       required this.stageId,
       this.number,
@@ -2553,39 +2541,21 @@ class Finish extends DataClass implements Insertable<Finish> {
       this.finishTime,
       required this.isHidden,
       required this.isManual});
-  factory Finish.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return Finish(
-      id: const IntType().mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      stageId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}stage_id'])!,
-      number: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}number']),
-      timestamp: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}timestamp']),
-      finishTime: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}finish_time']),
-      isHidden: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_hidden'])!,
-      isManual: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_manual'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int?>(id);
+      map['id'] = Variable<int>(id);
     }
     map['stage_id'] = Variable<int>(stageId);
     if (!nullToAbsent || number != null) {
-      map['number'] = Variable<int?>(number);
+      map['number'] = Variable<int>(number);
     }
     if (!nullToAbsent || timestamp != null) {
-      map['timestamp'] = Variable<String?>(timestamp);
+      map['timestamp'] = Variable<String>(timestamp);
     }
     if (!nullToAbsent || finishTime != null) {
-      map['finish_time'] = Variable<String?>(finishTime);
+      map['finish_time'] = Variable<String>(finishTime);
     }
     map['is_hidden'] = Variable<bool>(isHidden);
     map['is_manual'] = Variable<bool>(isManual);
@@ -2637,19 +2607,19 @@ class Finish extends DataClass implements Insertable<Finish> {
   }
 
   Finish copyWith(
-          {int? id,
+          {Value<int?> id = const Value.absent(),
           int? stageId,
-          int? number,
-          String? timestamp,
-          String? finishTime,
+          Value<int?> number = const Value.absent(),
+          Value<String?> timestamp = const Value.absent(),
+          Value<String?> finishTime = const Value.absent(),
           bool? isHidden,
           bool? isManual}) =>
       Finish(
-        id: id ?? this.id,
+        id: id.present ? id.value : this.id,
         stageId: stageId ?? this.stageId,
-        number: number ?? this.number,
-        timestamp: timestamp ?? this.timestamp,
-        finishTime: finishTime ?? this.finishTime,
+        number: number.present ? number.value : this.number,
+        timestamp: timestamp.present ? timestamp.value : this.timestamp,
+        finishTime: finishTime.present ? finishTime.value : this.finishTime,
         isHidden: isHidden ?? this.isHidden,
         isManual: isManual ?? this.isManual,
       );
@@ -2710,11 +2680,11 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
     this.isManual = const Value.absent(),
   }) : stageId = Value(stageId);
   static Insertable<Finish> custom({
-    Expression<int?>? id,
+    Expression<int>? id,
     Expression<int>? stageId,
-    Expression<int?>? number,
-    Expression<String?>? timestamp,
-    Expression<String?>? finishTime,
+    Expression<int>? number,
+    Expression<String>? timestamp,
+    Expression<String>? finishTime,
     Expression<bool>? isHidden,
     Expression<bool>? isManual,
   }) {
@@ -2752,19 +2722,19 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int?>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (stageId.present) {
       map['stage_id'] = Variable<int>(stageId.value);
     }
     if (number.present) {
-      map['number'] = Variable<int?>(number.value);
+      map['number'] = Variable<int>(number.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String?>(timestamp.value);
+      map['timestamp'] = Variable<String>(timestamp.value);
     }
     if (finishTime.present) {
-      map['finish_time'] = Variable<String?>(finishTime.value);
+      map['finish_time'] = Variable<String>(finishTime.value);
     }
     if (isHidden.present) {
       map['is_hidden'] = Variable<bool>(isHidden.value);
@@ -2796,46 +2766,46 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
   final String? _alias;
   Finishes(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
   final VerificationMeta _stageIdMeta = const VerificationMeta('stageId');
-  late final GeneratedColumn<int?> stageId = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
       'stage_id', aliasedName, false,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   final VerificationMeta _numberMeta = const VerificationMeta('number');
-  late final GeneratedColumn<int?> number = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> number = GeneratedColumn<int>(
       'number', aliasedName, true,
-      type: const IntType(),
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _timestampMeta = const VerificationMeta('timestamp');
-  late final GeneratedColumn<String?> timestamp = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
       'timestamp', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _finishTimeMeta = const VerificationMeta('finishTime');
-  late final GeneratedColumn<String?> finishTime = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> finishTime = GeneratedColumn<String>(
       'finish_time', aliasedName, true,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   final VerificationMeta _isHiddenMeta = const VerificationMeta('isHidden');
-  late final GeneratedColumn<bool?> isHidden = GeneratedColumn<bool?>(
+  late final GeneratedColumn<bool> isHidden = GeneratedColumn<bool>(
       'is_hidden', aliasedName, false,
-      type: const BoolType(),
+      type: DriftSqlType.bool,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT false',
       defaultValue: const CustomExpression<bool>('false'));
   final VerificationMeta _isManualMeta = const VerificationMeta('isManual');
-  late final GeneratedColumn<bool?> isManual = GeneratedColumn<bool?>(
+  late final GeneratedColumn<bool> isManual = GeneratedColumn<bool>(
       'is_manual', aliasedName, false,
-      type: const BoolType(),
+      type: DriftSqlType.bool,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT false',
       defaultValue: const CustomExpression<bool>('false'));
@@ -2889,8 +2859,23 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Finish map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return Finish.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Finish(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      stageId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}stage_id'])!,
+      number: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}number']),
+      timestamp: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
+      finishTime: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}finish_time']),
+      isHidden: attachedDatabase.options.types
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_hidden'])!,
+      isManual: attachedDatabase.options.types
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_manual'])!,
+    );
   }
 
   @override
@@ -2906,7 +2891,7 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
 }
 
 abstract class _$AppDatabase extends GeneratedDatabase {
-  _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+  _$AppDatabase(QueryExecutor e) : super(e);
   late final Races races = Races(this);
   late final Trails trails = Trails(this);
   late final Stages stages = Stages(this);
@@ -2916,21 +2901,21 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Starts starts = Starts(this);
   late final Finishes finishes = Finishes(this);
   Selectable<Race> selectRaces() {
-    return customSelect('SELECT * FROM races WHERE is_deleted = false',
+    return customSelect('SELECT * FROM races WHERE is_deleted = FALSE',
         variables: [],
         readsFrom: {
           races,
-        }).map(races.mapFromRow);
+        }).asyncMap(races.mapFromRow);
   }
 
   Future<int> addRace(
       {required String name, String? startDate, String? finishDate}) {
     return customInsert(
-      'INSERT INTO races (name, start_date, finish_date) VALUES (:name, :start_date, :finish_date)',
+      'INSERT INTO races (name, start_date, finish_date) VALUES (?1, ?2, ?3)',
       variables: [
         Variable<String>(name),
-        Variable<String?>(startDate),
-        Variable<String?>(finishDate)
+        Variable<String>(startDate),
+        Variable<String>(finishDate)
       ],
       updates: {races},
     );
@@ -2938,8 +2923,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Future<int> deleteRace({int? id}) {
     return customUpdate(
-      'UPDATE races SET is_deleted = true WHERE id = :id',
-      variables: [Variable<int?>(id)],
+      'UPDATE races SET is_deleted = TRUE WHERE id = ?1',
+      variables: [Variable<int>(id)],
       updates: {races},
       updateKind: UpdateKind.update,
     );
@@ -2947,21 +2932,21 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Selectable<Stage> selectStages({required int raceId}) {
     return customSelect(
-        'SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false',
+        'SELECT * FROM stages WHERE race_id = ?1 AND is_deleted = FALSE',
         variables: [
           Variable<int>(raceId)
         ],
         readsFrom: {
           stages,
-        }).map(stages.mapFromRow);
+        }).asyncMap(stages.mapFromRow);
   }
 
   Future<int> addStage(
       {int? trailId, required int raceId, required String name}) {
     return customInsert(
-      'INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name)',
+      'INSERT INTO stages (trail_id, race_id, name) VALUES (?1, ?2, ?3)',
       variables: [
-        Variable<int?>(trailId),
+        Variable<int>(trailId),
         Variable<int>(raceId),
         Variable<String>(name)
       ],
@@ -2971,8 +2956,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Future<int> deleteStage({int? id}) {
     return customUpdate(
-      'UPDATE stages SET is_deleted = true WHERE id = :id',
-      variables: [Variable<int?>(id)],
+      'UPDATE stages SET is_deleted = TRUE WHERE id = ?1',
+      variables: [Variable<int>(id)],
       updates: {stages},
       updateKind: UpdateKind.update,
     );
@@ -2981,7 +2966,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<GetParticipantsAtStartResult> getParticipantsAtStart(
       {required int stageId}) {
     return customSelect(
-        'SELECT *\r\nFROM participants, riders, starts\r\nWHERE participants.rider_id = riders.id\r\n    AND starts.participant_id = participants.id\r\n	AND stage_id = :stage_id\r\n	AND starts.status_id = 1\r\n	AND participants.status_id = 1\r\nORDER BY start_time ASC',
+        'SELECT * FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 AND starts.status_id = 1 AND participants.status_id = 1 ORDER BY start_time ASC',
         variables: [
           Variable<int>(stageId)
         ],
@@ -2991,31 +2976,31 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
         }).map((QueryRow row) {
       return GetParticipantsAtStartResult(
-        id: row.read<int?>('id'),
+        id: row.readNullable<int>('id'),
         raceId: row.read<int>('race_id'),
         riderId: row.read<int>('rider_id'),
         number: row.read<int>('number'),
-        category: row.read<String?>('category'),
-        rfid: row.read<String?>('rfid'),
+        category: row.readNullable<String>('category'),
+        rfid: row.readNullable<String>('rfid'),
         statusId: row.read<int>('status_id'),
-        id1: row.read<int?>('id'),
+        id1: row.readNullable<int>('id'),
         name: row.read<String>('name'),
-        nickname: row.read<String?>('nickname'),
-        birthday: row.read<String?>('birthday'),
-        team: row.read<String?>('team'),
-        city: row.read<String?>('city'),
-        email: row.read<String?>('email'),
-        phone: row.read<String?>('phone'),
-        comment: row.read<String?>('comment'),
-        id2: row.read<int?>('id'),
+        nickname: row.readNullable<String>('nickname'),
+        birthday: row.readNullable<String>('birthday'),
+        team: row.readNullable<String>('team'),
+        city: row.readNullable<String>('city'),
+        email: row.readNullable<String>('email'),
+        phone: row.readNullable<String>('phone'),
+        comment: row.readNullable<String>('comment'),
+        id2: row.readNullable<int>('id'),
         stageId: row.read<int>('stage_id'),
         participantId: row.read<int>('participant_id'),
         startTime: row.read<String>('start_time'),
-        timestamp: row.read<String?>('timestamp'),
-        automaticStartTime: row.read<String?>('automatic_start_time'),
-        automaticCorrection: row.read<int?>('automatic_correction'),
-        manualStartTime: row.read<String?>('manual_start_time'),
-        manualCorrection: row.read<int?>('manual_correction'),
+        timestamp: row.readNullable<String>('timestamp'),
+        automaticStartTime: row.readNullable<String>('automatic_start_time'),
+        automaticCorrection: row.readNullable<int>('automatic_correction'),
+        manualStartTime: row.readNullable<String>('manual_start_time'),
+        manualCorrection: row.readNullable<int>('manual_correction'),
         statusId1: row.read<int>('status_id'),
       );
     });
@@ -3027,7 +3012,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           required String startTime,
           required int number}) {
     return customSelect(
-        'SELECT *\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n	AND stage_id = :stage_id\r\n	AND (start_time IS :start_time\r\n    	OR (number IS :number\r\n      	AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
+        'SELECT * FROM starts,participants WHERE starts.participant_id = participants.id AND stage_id = ?1 AND(start_time IS ?2 OR(number IS ?3 AND(automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
         variables: [
           Variable<int>(stageId),
           Variable<String>(startTime),
@@ -3038,22 +3023,22 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           participants,
         }).map((QueryRow row) {
       return GetExistedStartingParticipantsResult(
-        id: row.read<int?>('id'),
+        id: row.readNullable<int>('id'),
         stageId: row.read<int>('stage_id'),
         participantId: row.read<int>('participant_id'),
         startTime: row.read<String>('start_time'),
-        timestamp: row.read<String?>('timestamp'),
-        automaticStartTime: row.read<String?>('automatic_start_time'),
-        automaticCorrection: row.read<int?>('automatic_correction'),
-        manualStartTime: row.read<String?>('manual_start_time'),
-        manualCorrection: row.read<int?>('manual_correction'),
+        timestamp: row.readNullable<String>('timestamp'),
+        automaticStartTime: row.readNullable<String>('automatic_start_time'),
+        automaticCorrection: row.readNullable<int>('automatic_correction'),
+        manualStartTime: row.readNullable<String>('manual_start_time'),
+        manualCorrection: row.readNullable<int>('manual_correction'),
         statusId: row.read<int>('status_id'),
-        id1: row.read<int?>('id'),
+        id1: row.readNullable<int>('id'),
         raceId: row.read<int>('race_id'),
         riderId: row.read<int>('rider_id'),
         number: row.read<int>('number'),
-        category: row.read<String?>('category'),
-        rfid: row.read<String?>('rfid'),
+        category: row.readNullable<String>('category'),
+        rfid: row.readNullable<String>('rfid'),
         statusId1: row.read<int>('status_id'),
       );
     });
@@ -3068,13 +3053,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       required int stageId,
       required int participantId}) {
     return customUpdate(
-      'UPDATE starts\r\nSET start_time = :start_time,\r\n	automatic_start_time = :automatic_start_time,\r\n    automatic_correction = :automatic_correction,\r\n    manual_start_time = :manual_start_time,\r\n    manual_correction = :manual_correction\r\nWHERE stage_id = :stage_id\r\n	AND participant_id = :participant_id',
+      'UPDATE starts SET start_time = ?1, automatic_start_time = ?2, automatic_correction = ?3, manual_start_time = ?4, manual_correction = ?5 WHERE stage_id = ?6 AND participant_id = ?7',
       variables: [
         Variable<String>(startTime),
-        Variable<String?>(automaticStartTime),
-        Variable<int?>(automaticCorrection),
-        Variable<String?>(manualStartTime),
-        Variable<int?>(manualCorrection),
+        Variable<String>(automaticStartTime),
+        Variable<int>(automaticCorrection),
+        Variable<String>(manualStartTime),
+        Variable<int>(manualCorrection),
         Variable<int>(stageId),
         Variable<int>(participantId)
       ],
@@ -3086,7 +3071,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<Start> getParticipantAroundTime(
       {required int stageId, required String before, required String after}) {
     return customSelect(
-        'SELECT *\r\nFROM starts\r\nWHERE stage_id = :stage_id\r\n	AND start_time BETWEEN :before AND :after',
+        'SELECT * FROM starts WHERE stage_id = ?1 AND start_time BETWEEN ?2 AND ?3',
         variables: [
           Variable<int>(stageId),
           Variable<String>(before),
@@ -3094,7 +3079,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ],
         readsFrom: {
           starts,
-        }).map(starts.mapFromRow);
+        }).asyncMap(starts.mapFromRow);
   }
 
   Future<int> setManualStartTime(
@@ -3103,10 +3088,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       required int participantId,
       required int stageId}) {
     return customUpdate(
-      'UPDATE starts\r\nSET manual_start_time = :manual_start_time, manual_correction = :manual_correction\r\nWHERE participant_id = :participant_id\r\n	AND stage_id = :stage_id',
+      'UPDATE starts SET manual_start_time = ?1, manual_correction = ?2 WHERE participant_id = ?3 AND stage_id = ?4',
       variables: [
-        Variable<String?>(manualStartTime),
-        Variable<int?>(manualCorrection),
+        Variable<String>(manualStartTime),
+        Variable<int>(manualCorrection),
         Variable<int>(participantId),
         Variable<int>(stageId)
       ],
@@ -3118,7 +3103,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<GetNextStartingParticipantsResult> getNextStartingParticipants(
       {required int stageId, required String time}) {
     return customSelect(
-        'SELECT \r\n	participants.number as number,\r\n  	starts.start_time as start_time,\r\n	starts.automatic_start_time as automatic_start_time,\r\n	starts.automatic_correction as automatic_correction\r\nFROM starts, participants\r\nWHERE starts.participant_id = participants.id\r\n	AND starts.stage_id = :stage_id\r\n	AND start_time > :time\r\n	AND automatic_start_time ISNULL\r\n	AND participants.status_id = 1\r\n	AND starts.status_id = 1\r\nORDER BY start_time ASC',
+        'SELECT participants.number AS number, starts.start_time AS start_time, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND start_time > ?2 AND automatic_start_time ISNULL AND participants.status_id = 1 AND starts.status_id = 1 ORDER BY start_time ASC',
         variables: [
           Variable<int>(stageId),
           Variable<String>(time)
@@ -3130,14 +3115,15 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       return GetNextStartingParticipantsResult(
         number: row.read<int>('number'),
         startTime: row.read<String>('start_time'),
-        automaticStartTime: row.read<String?>('automatic_start_time'),
-        automaticCorrection: row.read<int?>('automatic_correction'),
+        automaticStartTime: row.readNullable<String>('automatic_start_time'),
+        automaticCorrection: row.readNullable<int>('automatic_correction'),
       );
     });
   }
 
   @override
-  Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
+  Iterable<TableInfo<Table, dynamic>> get allTables =>
+      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
       [races, trails, stages, riders, statuses, participants, starts, finishes];

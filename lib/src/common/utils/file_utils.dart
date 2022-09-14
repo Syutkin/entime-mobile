@@ -111,8 +111,8 @@ Future<void> loadFile(BuildContext context) async {
     } else if (platformFile.extension == 'csv') {
       if (protocolBloc is ProtocolSelectedState) {
         protocolBloc.add(ProtocolLoadStartFromCsv(csv: platformFile));
-      } else if (protocolBloc is! ProtocolSelectedState) {
-        await createNewProtocolFile(context, platformFile);
+      // } else if (protocolBloc is! ProtocolSelectedState) {
+        // await createNewProtocolFile(context, platformFile);
       }
     }
   }

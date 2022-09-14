@@ -41,7 +41,7 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
         onDismissed: (direction) {
           onDismissed?.call(direction);
         },
-        child: GestureDetector(
+        child: InkWell(
           onTapDown: (details) {
             onTapDown?.call(details);
           },

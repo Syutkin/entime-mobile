@@ -86,7 +86,7 @@ class AppDatabase extends _$AppDatabase {
       //Номер уже был в списке, обновляем(обнуляем) его стартовые значения
       await (update(starts)
             ..where(
-              (start) => start.participantId.equals(numberExists.first.id),
+              (start) => start.participantId.equals(numberExists.first.id!),
             ))
           .write(
         StartsCompanion(

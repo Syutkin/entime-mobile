@@ -24,7 +24,7 @@ class NumberOnTraceTile extends StatelessWidget {
           constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
         ),
         data: number,
-        child: GestureDetector(
+        child: InkWell(
           onTap: () {
             onTap?.call();
           },
