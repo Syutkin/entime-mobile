@@ -25,8 +25,9 @@ class CountdownAtStart {
   Future<void> start(int stageId) async {
     //subscribe to changes at starts table
     _db.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
-    _nextStartTime =
-        await _getNextStarttime(time: DateTime.now(), stageId: stageId);
+      _isFinished = false;
+      _nextStartTime =
+          await _getNextStarttime(time: DateTime.now(), stageId: stageId);
     });
 
     _timer?.cancel();
@@ -75,7 +76,7 @@ class CountdownAtStart {
         _nextStartTime = await _getNextStarttime(time: now, stageId: stageId);
         if (_nextStartTime == null) {
           _isFinished = true;
-          value.add(const Tick(text: ''));
+          value.add(const Tick(text: 'Fin'));
         }
       }
     }
