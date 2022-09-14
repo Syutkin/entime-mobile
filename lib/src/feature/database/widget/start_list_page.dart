@@ -405,19 +405,15 @@ class _StartListPage extends State<StartListPage> {
         );
   }
 
-  String? _activeStartTime(CountdownState countdownState) {
-    countdownState.mapOrNull(
-      working: (state) => state.nextStartTime,
-    );
-    return null;
-  }
+  String? _activeStartTime(CountdownState countdownState) =>
+      countdownState.whenOrNull(
+        working: (text, nextStartTime) => nextStartTime ?? '',
+      );
 
-  String? _countdownFromState(CountdownState countdownState) {
-    countdownState.mapOrNull(
-      working: (state) => state.text,
-    );
-    return null;
-  }
+  String? _countdownFromState(CountdownState countdownState) =>
+      countdownState.mapOrNull(
+        working: (state) => state.text,
+      );
 }
 
 class _SliverStartSubHeader extends StatelessWidget {
