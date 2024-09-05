@@ -63,7 +63,8 @@ class AppInfoProvider {
 
   String get buildNumber => Pubspec.version.build[0];
 
-  String get version => '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}';
+  String get version =>
+      '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}';
 
   String? get abi {
     for (final deviceSupportedAbi in _deviceInfo.supportedAbis) {

@@ -44,7 +44,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required DateTime time,
   }) = _UpdateManualStartTime;
 
-    const factory DatabaseEvent.setDNSatStart({
+  const factory DatabaseEvent.setDNSatStart({
     required int startId,
   }) = _setDNS;
 }

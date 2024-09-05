@@ -44,7 +44,7 @@ class StartItemTile extends StatelessWidget {
           child: Card(
             margin: const EdgeInsets.all(2),
             color: isHighlighted
-            //TODO: test colors
+                //TODO: test colors
                 ? Theme.of(context).colorScheme.background
                 : Theme.of(context).colorScheme.surface,
             child: Padding(

@@ -23,8 +23,8 @@ class Header extends StatelessWidget {
               2, // horizontal, move right 10
               2, // vertical, move down 10
             ),
-          )
-        ,],
+          ),
+        ],
       ),
       child: Center(
         child: Text(

@@ -383,8 +383,8 @@ class ProtocolProvider implements IProtocolProvider {
         ''', [
         manualStartTime,
         correction.inMilliseconds,
-        startProtocol.first.number
-      ,]);
+        startProtocol.first.number,
+      ]);
       if (result > 0) {
         logger.i(
           'Database -> Update manual start time for number ${startProtocol.first.number}',

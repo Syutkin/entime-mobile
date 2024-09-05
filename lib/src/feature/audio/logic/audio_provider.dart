@@ -20,10 +20,7 @@ abstract class IAudioProvider {
   Future<dynamic> setPitch(double pitch);
 }
 
-
 class AudioProvider implements IAudioProvider {
-
-
   final Tts flutterTts = Tts();
 
   // final BeepProvider beepProvider = AudioplayersProvider();

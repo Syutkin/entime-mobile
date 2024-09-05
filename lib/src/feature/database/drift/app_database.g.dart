@@ -8,42 +8,39 @@ class Races extends Table with TableInfo<Races, Race> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Races(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  static const VerificationMeta _nameMeta = VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _startDateMeta =
-      const VerificationMeta('startDate');
+  static const VerificationMeta _startDateMeta = VerificationMeta('startDate');
   late final GeneratedColumn<String> startDate = GeneratedColumn<String>(
       'start_date', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _finishDateMeta =
-      const VerificationMeta('finishDate');
+      VerificationMeta('finishDate');
   late final GeneratedColumn<String> finishDate = GeneratedColumn<String>(
       'finish_date', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _locationMeta =
-      const VerificationMeta('location');
+  static const VerificationMeta _locationMeta = VerificationMeta('location');
   late final GeneratedColumn<String> location = GeneratedColumn<String>(
       'location', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _isDeletedMeta =
-      const VerificationMeta('isDeleted');
+  static const VerificationMeta _isDeletedMeta = VerificationMeta('isDeleted');
   late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
       'is_deleted', aliasedName, false,
       type: DriftSqlType.bool,
@@ -355,48 +352,44 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Trails(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  static const VerificationMeta _nameMeta = VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _distanceMeta =
-      const VerificationMeta('distance');
+  static const VerificationMeta _distanceMeta = VerificationMeta('distance');
   late final GeneratedColumn<int> distance = GeneratedColumn<int>(
       'distance', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _elevationMeta =
-      const VerificationMeta('elevation');
+  static const VerificationMeta _elevationMeta = VerificationMeta('elevation');
   late final GeneratedColumn<int> elevation = GeneratedColumn<int>(
       'elevation', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _gpxTrackMeta =
-      const VerificationMeta('gpxTrack');
+  static const VerificationMeta _gpxTrackMeta = VerificationMeta('gpxTrack');
   late final GeneratedColumn<Uint8List> gpxTrack = GeneratedColumn<Uint8List>(
       'gpx_track', aliasedName, true,
       type: DriftSqlType.blob,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _linkMeta = const VerificationMeta('link');
+  static const VerificationMeta _linkMeta = VerificationMeta('link');
   late final GeneratedColumn<String> link = GeneratedColumn<String>(
       'link', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _commentMeta =
-      const VerificationMeta('comment');
+  static const VerificationMeta _commentMeta = VerificationMeta('comment');
   late final GeneratedColumn<String> comment = GeneratedColumn<String>(
       'comment', aliasedName, true,
       type: DriftSqlType.string,
@@ -738,42 +731,39 @@ class Stages extends Table with TableInfo<Stages, Stage> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Stages(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _trailIdMeta =
-      const VerificationMeta('trailId');
+  static const VerificationMeta _trailIdMeta = VerificationMeta('trailId');
   late final GeneratedColumn<int> trailId = GeneratedColumn<int>(
       'trail_id', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
+  static const VerificationMeta _raceIdMeta = VerificationMeta('raceId');
   late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
       'race_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  static const VerificationMeta _nameMeta = VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _isActiveMeta =
-      const VerificationMeta('isActive');
+  static const VerificationMeta _isActiveMeta = VerificationMeta('isActive');
   late final GeneratedColumn<bool> isActive = GeneratedColumn<bool>(
       'is_active', aliasedName, false,
       type: DriftSqlType.bool,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT TRUE',
       defaultValue: const CustomExpression('TRUE'));
-  static const VerificationMeta _isDeletedMeta =
-      const VerificationMeta('isDeleted');
+  static const VerificationMeta _isDeletedMeta = VerificationMeta('isDeleted');
   late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
       'is_deleted', aliasedName, false,
       type: DriftSqlType.bool,
@@ -1082,59 +1072,56 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Riders(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  static const VerificationMeta _nameMeta = VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _nicknameMeta =
-      const VerificationMeta('nickname');
+  static const VerificationMeta _nicknameMeta = VerificationMeta('nickname');
   late final GeneratedColumn<String> nickname = GeneratedColumn<String>(
       'nickname', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _birthdayMeta =
-      const VerificationMeta('birthday');
+  static const VerificationMeta _birthdayMeta = VerificationMeta('birthday');
   late final GeneratedColumn<String> birthday = GeneratedColumn<String>(
       'birthday', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _teamMeta = const VerificationMeta('team');
+  static const VerificationMeta _teamMeta = VerificationMeta('team');
   late final GeneratedColumn<String> team = GeneratedColumn<String>(
       'team', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _cityMeta = const VerificationMeta('city');
+  static const VerificationMeta _cityMeta = VerificationMeta('city');
   late final GeneratedColumn<String> city = GeneratedColumn<String>(
       'city', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _emailMeta = const VerificationMeta('email');
+  static const VerificationMeta _emailMeta = VerificationMeta('email');
   late final GeneratedColumn<String> email = GeneratedColumn<String>(
       'email', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _phoneMeta = const VerificationMeta('phone');
+  static const VerificationMeta _phoneMeta = VerificationMeta('phone');
   late final GeneratedColumn<String> phone = GeneratedColumn<String>(
       'phone', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _commentMeta =
-      const VerificationMeta('comment');
+  static const VerificationMeta _commentMeta = VerificationMeta('comment');
   late final GeneratedColumn<String> comment = GeneratedColumn<String>(
       'comment', aliasedName, true,
       type: DriftSqlType.string,
@@ -1536,14 +1523,14 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Statuses(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  static const VerificationMeta _typeMeta = VerificationMeta('type');
   late final GeneratedColumn<String> type = GeneratedColumn<String>(
       'type', aliasedName, false,
       type: DriftSqlType.string,
@@ -1717,47 +1704,44 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Participants(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
+  static const VerificationMeta _raceIdMeta = VerificationMeta('raceId');
   late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
       'race_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _riderIdMeta =
-      const VerificationMeta('riderId');
+  static const VerificationMeta _riderIdMeta = VerificationMeta('riderId');
   late final GeneratedColumn<int> riderId = GeneratedColumn<int>(
       'rider_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _numberMeta = const VerificationMeta('number');
+  static const VerificationMeta _numberMeta = VerificationMeta('number');
   late final GeneratedColumn<int> number = GeneratedColumn<int>(
       'number', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _categoryMeta =
-      const VerificationMeta('category');
+  static const VerificationMeta _categoryMeta = VerificationMeta('category');
   late final GeneratedColumn<String> category = GeneratedColumn<String>(
       'category', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _rfidMeta = const VerificationMeta('rfid');
+  static const VerificationMeta _rfidMeta = VerificationMeta('rfid');
   late final GeneratedColumn<String> rfid = GeneratedColumn<String>(
       'rfid', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _statusIdMeta =
-      const VerificationMeta('statusId');
+  static const VerificationMeta _statusIdMeta = VerificationMeta('statusId');
   late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
       'status_id', aliasedName, false,
       type: DriftSqlType.int,
@@ -2099,71 +2083,67 @@ class Starts extends Table with TableInfo<Starts, Start> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Starts(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _stageIdMeta =
-      const VerificationMeta('stageId');
+  static const VerificationMeta _stageIdMeta = VerificationMeta('stageId');
   late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
       'stage_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _participantIdMeta =
-      const VerificationMeta('participantId');
+      VerificationMeta('participantId');
   late final GeneratedColumn<int> participantId = GeneratedColumn<int>(
       'participant_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _startTimeMeta =
-      const VerificationMeta('startTime');
+  static const VerificationMeta _startTimeMeta = VerificationMeta('startTime');
   late final GeneratedColumn<String> startTime = GeneratedColumn<String>(
       'start_time', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _timestampMeta =
-      const VerificationMeta('timestamp');
+  static const VerificationMeta _timestampMeta = VerificationMeta('timestamp');
   late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
       'timestamp', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _automaticStartTimeMeta =
-      const VerificationMeta('automaticStartTime');
+      VerificationMeta('automaticStartTime');
   late final GeneratedColumn<String> automaticStartTime =
       GeneratedColumn<String>('automatic_start_time', aliasedName, true,
           type: DriftSqlType.string,
           requiredDuringInsert: false,
           $customConstraints: '');
   static const VerificationMeta _automaticCorrectionMeta =
-      const VerificationMeta('automaticCorrection');
+      VerificationMeta('automaticCorrection');
   late final GeneratedColumn<int> automaticCorrection = GeneratedColumn<int>(
       'automatic_correction', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _manualStartTimeMeta =
-      const VerificationMeta('manualStartTime');
+      VerificationMeta('manualStartTime');
   late final GeneratedColumn<String> manualStartTime = GeneratedColumn<String>(
       'manual_start_time', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _manualCorrectionMeta =
-      const VerificationMeta('manualCorrection');
+      VerificationMeta('manualCorrection');
   late final GeneratedColumn<int> manualCorrection = GeneratedColumn<int>(
       'manual_correction', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _statusIdMeta =
-      const VerificationMeta('statusId');
+  static const VerificationMeta _statusIdMeta = VerificationMeta('statusId');
   late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
       'status_id', aliasedName, false,
       type: DriftSqlType.int,
@@ -2654,50 +2634,46 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Finishes(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _stageIdMeta =
-      const VerificationMeta('stageId');
+  static const VerificationMeta _stageIdMeta = VerificationMeta('stageId');
   late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
       'stage_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _numberMeta = const VerificationMeta('number');
+  static const VerificationMeta _numberMeta = VerificationMeta('number');
   late final GeneratedColumn<int> number = GeneratedColumn<int>(
       'number', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _timestampMeta =
-      const VerificationMeta('timestamp');
+  static const VerificationMeta _timestampMeta = VerificationMeta('timestamp');
   late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
       'timestamp', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _finishTimeMeta =
-      const VerificationMeta('finishTime');
+      VerificationMeta('finishTime');
   late final GeneratedColumn<String> finishTime = GeneratedColumn<String>(
       'finish_time', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _isHiddenMeta =
-      const VerificationMeta('isHidden');
+  static const VerificationMeta _isHiddenMeta = VerificationMeta('isHidden');
   late final GeneratedColumn<bool> isHidden = GeneratedColumn<bool>(
       'is_hidden', aliasedName, false,
       type: DriftSqlType.bool,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT FALSE',
       defaultValue: const CustomExpression('FALSE'));
-  static const VerificationMeta _isManualMeta =
-      const VerificationMeta('isManual');
+  static const VerificationMeta _isManualMeta = VerificationMeta('isManual');
   late final GeneratedColumn<bool> isManual = GeneratedColumn<bool>(
       'is_manual', aliasedName, false,
       type: DriftSqlType.bool,

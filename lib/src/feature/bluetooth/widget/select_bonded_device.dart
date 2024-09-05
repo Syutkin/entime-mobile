@@ -138,8 +138,8 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
               : IconButton(
                   icon: const Icon(Icons.replay),
                   onPressed: _restartDiscovery,
-                )
-        ,],
+                ),
+        ],
       ),
       body: ListView(children: list),
     );
