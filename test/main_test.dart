@@ -48,6 +48,7 @@ class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState>
 class MockAppDatabase extends Mock implements AppDatabase {}
 
 void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
 
