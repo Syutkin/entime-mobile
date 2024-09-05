@@ -332,7 +332,7 @@ class _MenuButton extends StatelessWidget {
                   PopupMenuItem(
                     value: MenuButton.selectStartProtocol,
                     child: ListTile(
-                      leading: const Icon(MdiIcons.database),
+                      leading: Icon(MdiIcons.database),
                       title: Text(
                         Localization.current.I18nHome_selectStartProtocol,
                       ),
@@ -345,7 +345,7 @@ class _MenuButton extends StatelessWidget {
                   PopupMenuItem(
                     value: MenuButton.countdown,
                     child: ListTile(
-                      leading: const Icon(MdiIcons.timer),
+                      leading: Icon(MdiIcons.timer),
                       title: Text(Localization.current.I18nHome_countdown),
                     ),
                   ),
@@ -355,7 +355,7 @@ class _MenuButton extends StatelessWidget {
                 PopupMenuItem(
                   value: MenuButton.fab,
                   child: ListTile(
-                    leading: const Icon(MdiIcons.handBackLeft),
+                    leading: Icon(MdiIcons.handBackLeft),
                     title: Text(Localization.current.I18nHome_fab),
                   ),
                 ),
@@ -366,7 +366,7 @@ class _MenuButton extends StatelessWidget {
                   PopupMenuItem(
                     value: MenuButton.selectStartProtocol,
                     child: ListTile(
-                      leading: const Icon(MdiIcons.database),
+                      leading: Icon(MdiIcons.database),
                       title: Text(
                         Localization.current.I18nHome_selectStartProtocol,
                       ),
@@ -389,7 +389,7 @@ class _MenuButton extends StatelessWidget {
                 PopupMenuItem(
                   value: MenuButton.importCsv,
                   child: ListTile(
-                    leading: const Icon(MdiIcons.import),
+                    leading: Icon(MdiIcons.import),
                     title: Text(
                       Localization.current.I18nHome_importStartProtocolCsv,
                     ),

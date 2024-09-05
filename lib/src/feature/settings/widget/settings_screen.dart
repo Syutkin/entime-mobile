@@ -448,7 +448,7 @@ class _SettingsList extends StatelessWidget {
                   trailing: settingsState.settings.logLimit > -1
                       ? Text('${settingsState.settings.logLimit}')
                       // : Text('без ограничений'),
-                      : const Icon(MdiIcons.infinity),
+                      : Icon(MdiIcons.infinity),
                   //leading:  Icon(MdiIcons.filter),
                   onPressed: (context) async {
                     final int? value = await setLogLimitPopup(

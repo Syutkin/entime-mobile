@@ -61,7 +61,8 @@ final appThemeData = {
     colorScheme: ColorScheme.fromSwatch(
       accentColor: Colors.blue,
     ).copyWith(secondary: Colors.blue),
-    toggleableActiveColor: Colors.blue,
+    //TODO: migrate toggleableActiveColor
+    // toggleableActiveColor: Colors.blue,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Colors.blue),
@@ -74,7 +75,8 @@ final appThemeData = {
       brightness: Brightness.dark,
       accentColor: Colors.blue,
     ).copyWith(secondary: Colors.blue),
-    toggleableActiveColor: Colors.blue,
+    //TODO: migrate toggleableActiveColor
+    // toggleableActiveColor: Colors.blue,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Colors.blue),
@@ -87,7 +89,8 @@ final appThemeData = {
       primarySwatch: Colors.red,
       accentColor: Colors.red,
     ).copyWith(secondary: Colors.red),
-    toggleableActiveColor: Colors.red,
+    //TODO: migrate toggleableActiveColor
+    // toggleableActiveColor: Colors.red,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Colors.red),
@@ -101,7 +104,8 @@ final appThemeData = {
       brightness: Brightness.dark,
       accentColor: Colors.red,
     ).copyWith(secondary: Colors.red),
-    toggleableActiveColor: Colors.red,
+    //TODO: migrate toggleableActiveColor
+    // toggleableActiveColor: Colors.red,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Colors.red),

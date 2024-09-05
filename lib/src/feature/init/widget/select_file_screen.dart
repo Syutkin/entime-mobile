@@ -36,7 +36,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
           title: Text(Localization.current.I18nInit_selectFile),
           actions: <Widget>[
             IconButton(
-              icon: const Icon(MdiIcons.filePlusOutline),
+              icon: Icon(MdiIcons.filePlusOutline),
               onPressed: () async {
                 if (await createNewProtocolFile(context) != null) {
                   Navigator.of(context).pop();
@@ -44,7 +44,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
               },
             ),
             IconButton(
-              icon: const Icon(MdiIcons.folderOpenOutline),
+              icon: Icon(MdiIcons.folderOpenOutline),
               onPressed: () async {
                 await loadFile(context);
                 Navigator.of(context).pop();
@@ -77,7 +77,7 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                 itemBuilder: (context, index) {
                   final File item = snapshot.data![index];
                   return ListTile(
-                    leading: const Icon(MdiIcons.database),
+                    leading: Icon(MdiIcons.database),
                     title: Text(basename(item.path)),
                     subtitle: Row(
                       children: <Widget>[
@@ -172,8 +172,8 @@ class _SelectFileScreenState extends State<SelectFileScreen> {
                 break;
               case 2:
                 // ShareExtend.share(item.path, 'file');
-                Share.shareFiles(
-                  [item.path],
+                Share.shareXFiles(
+                  [XFile(item.path)],
                   text: Localization.current.I18nInit_dbFile,
                 );
                 break;

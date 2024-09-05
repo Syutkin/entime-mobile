@@ -158,7 +158,7 @@ class _StartListPage extends State<StartListPage> {
                   child: FittedBox(
                     child: FloatingActionButton(
                       onPressed: () => _addManualStartTime(context),
-                      child: const Icon(MdiIcons.handBackLeft),
+                      child: Icon(MdiIcons.handBackLeft),
                     ),
                   ),
                 );

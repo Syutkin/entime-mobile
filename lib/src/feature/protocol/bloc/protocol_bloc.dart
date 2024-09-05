@@ -564,7 +564,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     if (csv != null && protocolProvider.dbPath != null) {
       final file = await saveCsv(csv, 'start', protocolProvider.dbPath!);
       if (file != null) {
-        await Share.shareFiles([file.path], text: 'Стартовый протокол');
+        await Share.shareXFiles([XFile(file.path)], text: 'Стартовый протокол');
       }
     }
   }
@@ -578,7 +578,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
     if (csv != null && protocolProvider.dbPath != null) {
       final file = await saveCsv(csv, 'finish', protocolProvider.dbPath!);
       if (file != null) {
-        await Share.shareFiles([file.path], text: 'Финишный протокол');
+        await Share.shareXFiles([XFile(file.path)], text: 'Финишный протокол');
       }
     }
   }

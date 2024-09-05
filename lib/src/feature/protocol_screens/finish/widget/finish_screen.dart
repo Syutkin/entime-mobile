@@ -126,7 +126,7 @@ class _FinishPage extends State<FinishScreen> {
                 child: FittedBox(
                   child: FloatingActionButton(
                     onPressed: () => _addFinishTimeManual(context),
-                    child: const Icon(MdiIcons.handBackLeft),
+                    child: Icon(MdiIcons.handBackLeft),
                   ),
                 ),
               );
@@ -333,7 +333,7 @@ class _FinishPage extends State<FinishScreen> {
         value: ParticipantStatus.dns,
         child: Text(
           Localization.current.I18nProtocol_didNotStart,
-          style: Theme.of(context).textTheme.button,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
       ),
       const PopupMenuDivider(
@@ -343,7 +343,7 @@ class _FinishPage extends State<FinishScreen> {
         value: ParticipantStatus.dnf,
         child: Text(
           Localization.current.I18nProtocol_didNotFinish,
-          style: Theme.of(context).textTheme.button,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
       )
     ];

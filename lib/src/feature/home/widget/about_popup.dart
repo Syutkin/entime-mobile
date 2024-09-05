@@ -17,7 +17,7 @@ class AboutPopup extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final bodyTextStyle =
-        textTheme.bodyText1!.apply(color: colorScheme.onSurface);
+        textTheme.bodyLarge!.apply(color: colorScheme.onSurface);
     return AlertDialog(
       content: ListBody(
         children: <Widget>[
@@ -32,16 +32,16 @@ class AboutPopup extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         BlocProvider.of<AppInfoCubit>(context).appName,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Text(
                         'Версия: ${BlocProvider.of<AppInfoCubit>(context).version}',
-                        style: Theme.of(context).textTheme.bodyText2,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: _textVerticalSeparation),
                       Text(
                         '© 2021 Andrey Syutkin',
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(height: _textVerticalSeparation),
                       RichText(

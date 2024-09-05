@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../settings.dart';
 
@@ -64,7 +64,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
     // Для похождения тестов, пока Wakelock не поддерживает Linux,
     if (!Platform.isLinux) {
-      await Wakelock.toggle(enable: settings.wakelock);
+      await WakelockPlus.toggle(enable: settings.wakelock);
     }
 
     return SharedPrefsSettingsProvider._(
@@ -90,7 +90,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     if (settings.wakelock != _settings.wakelock) {
       // Для похождения тестов, пока Wakelock не поддерживает Linux,
       if (!Platform.isLinux) {
-        await Wakelock.toggle(enable: settings.wakelock);
+        await WakelockPlus.toggle(enable: settings.wakelock);
       }
     }
     await _prefs.setBool('sound', settings.sound);

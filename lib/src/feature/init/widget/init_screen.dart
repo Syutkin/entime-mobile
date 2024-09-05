@@ -68,7 +68,7 @@ class _InitScreen extends State<InitScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: const Icon(MdiIcons.formatListBulleted),
+            icon: Icon(MdiIcons.formatListBulleted),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute<void>(
@@ -215,7 +215,7 @@ class _SelectProtocolWidget extends StatelessWidget {
         builder: (context, protocolState) => ListTile(
           onTap: () => routeToSelectFileScreen(context),
           leading: IconButton(
-            icon: const Icon(MdiIcons.database),
+            icon: Icon(MdiIcons.database),
             onPressed: () => routeToSelectFileScreen(context),
           ),
           title: Text(Localization.current.I18nInit_startProtocol),

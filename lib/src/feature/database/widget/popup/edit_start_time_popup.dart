@@ -62,33 +62,33 @@ Future<void> editStartTime(
                 ? Text(
                     Localization.current
                         .I18nStart_participantCategory(item.category!),
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.titleMedium,
                   )
                 : const SizedBox(),
             item.nickname != null && item.nickname!.isNotEmpty
                 ? Text(
                     Localization.current
                         .I18nStart_participantNickname(item.nickname!),
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.titleMedium,
                   )
                 : const SizedBox(),
             item.city != null && item.city!.isNotEmpty
                 ? Text(
                     Localization.current.I18nStart_participantCity(item.city!),
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.titleMedium,
                   )
                 : const SizedBox(),
             item.team != null && item.team!.isNotEmpty
                 ? Text(
                     Localization.current.I18nStart_participantTeam(item.team!),
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.titleMedium,
                   )
                 : const SizedBox(),
             item.birthday != null && item.birthday!.isNotEmpty
                 ? Text(
                     Localization.current
                         .I18nStart_participantYear(item.birthday!),
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.titleMedium,
                   )
                 : const SizedBox(),
             TextFormField(
@@ -96,7 +96,7 @@ Future<void> editStartTime(
               keyboardType: TextInputType.datetime,
               decoration: InputDecoration(
                 labelText: Localization.current.I18nStart_startTime,
-                icon: const Icon(MdiIcons.clock),
+                icon: Icon(MdiIcons.clock),
               ),
               validator: (value) => validateStartTime(value),
             ),
@@ -104,7 +104,7 @@ Future<void> editStartTime(
               controller: automaticCorrectionController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                icon: const Icon(MdiIcons.cpu64Bit),
+                icon: Icon(MdiIcons.cpu64Bit),
                 labelText: Localization.current.I18nCore_correction,
               ),
               validator: (value) => validateCorrection(value),
@@ -114,7 +114,7 @@ Future<void> editStartTime(
               keyboardType: TextInputType.datetime,
               decoration: InputDecoration(
                 labelText: Localization.current.I18nStart_startTime,
-                icon: const Icon(MdiIcons.cpu64Bit),
+                icon: Icon(MdiIcons.cpu64Bit),
               ),
               validator: (value) => validateStartTime(value),
             ),
@@ -123,7 +123,7 @@ Future<void> editStartTime(
               // keyboardType: TextInputType.datetime,
               decoration: InputDecoration(
                 labelText: Localization.current.I18nStart_startTimeAtSmartphone,
-                icon: const Icon(MdiIcons.cellphone),
+                icon: Icon(MdiIcons.cellphone),
               ),
               readOnly: true,
               // validator: (value) => validateStartTime(value),
@@ -132,7 +132,7 @@ Future<void> editStartTime(
               controller: manualCorrectionController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                icon: const Icon(MdiIcons.handBackLeft),
+                icon: Icon(MdiIcons.handBackLeft),
                 labelText: Localization.current.I18nCore_correction,
               ),
               validator: (value) => validateCorrection(value),
@@ -142,7 +142,7 @@ Future<void> editStartTime(
               keyboardType: TextInputType.datetime,
               decoration: InputDecoration(
                 labelText: Localization.current.I18nStart_startTime,
-                icon: const Icon(MdiIcons.handBackLeft),
+                icon: Icon(MdiIcons.handBackLeft),
               ),
               validator: (value) => validateStartTime(value),
             ),

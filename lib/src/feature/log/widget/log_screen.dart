@@ -126,16 +126,16 @@ class _LogSourceIcon extends StatelessWidget {
       case 'Bluetooth':
         switch (direction) {
           case 'In':
-            return const Icon(MdiIcons.bluetoothTransfer);
+            return Icon(MdiIcons.bluetoothTransfer);
           case 'Out':
-            return const Icon(MdiIcons.bluetoothTransfer);
+            return Icon(MdiIcons.bluetoothTransfer);
           case 'Undefined':
-            return const Icon(MdiIcons.bluetooth);
+            return Icon(MdiIcons.bluetooth);
           default:
-            return const Icon(MdiIcons.bluetooth);
+            return Icon(MdiIcons.bluetooth);
         }
       case 'Other':
-        return const Icon(MdiIcons.cloudPrintOutline);
+        return Icon(MdiIcons.cloudPrintOutline);
       case 'Unknown':
         return const Icon(Icons.help_outline);
       default:
@@ -156,17 +156,17 @@ class _LogLevelIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (level) {
       case 'Error':
-        return const Icon(MdiIcons.alertOctagon);
+        return Icon(MdiIcons.alertOctagon);
       case 'Warning':
         return const Icon(Icons.warning);
       case 'Information':
         return const Icon(Icons.info_outline);
       case 'Debug':
-        return const Icon(MdiIcons.debugStepInto);
+        return Icon(MdiIcons.debugStepInto);
       case 'Verbose':
         return const Icon(Icons.circle_notifications);
       default:
-        return const Icon(MdiIcons.closeCircleOutline);
+        return Icon(MdiIcons.closeCircleOutline);
     }
   }
 }

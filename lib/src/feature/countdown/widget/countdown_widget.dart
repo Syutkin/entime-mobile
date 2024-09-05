@@ -39,7 +39,7 @@ class CountdownWidget extends StatelessWidget {
             child: Text(
               text,
               style: floatingActionButtonTheme.extendedTextStyle ??
-                  theme.textTheme.button!.copyWith(color: foregroundColor),
+                  theme.textTheme.labelLarge!.copyWith(color: foregroundColor),
             ),
           ),
         ),

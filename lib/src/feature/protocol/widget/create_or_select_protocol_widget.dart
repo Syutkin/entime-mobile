@@ -18,17 +18,17 @@ class CreateOrSelectProtocolWidget extends StatelessWidget {
           ListTile(
             onTap: () => routeToSelectFileScreen(context),
             title: const Text('Выбрать протокол'),
-            leading: const Icon(MdiIcons.database),
+            leading: Icon(MdiIcons.database),
           ),
           ListTile(
             onTap: () => createNewProtocolFile(context),
             title: const Text('Создать новый пустой протокол'),
-            leading: const Icon(MdiIcons.filePlusOutline),
+            leading: Icon(MdiIcons.filePlusOutline),
           ),
           ListTile(
             onTap: () => loadFile(context),
             title: const Text('Импортировать протокол или список участников'),
-            leading: const Icon(MdiIcons.fileImportOutline),
+            leading: Icon(MdiIcons.fileImportOutline),
           ),
         ],
       );

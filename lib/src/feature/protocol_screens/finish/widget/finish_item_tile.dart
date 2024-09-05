@@ -110,9 +110,9 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
 
   Widget _addIcon(int? manual) {
     if (manual == 1) {
-      return const Icon(MdiIcons.handBackLeft);
+      return Icon(MdiIcons.handBackLeft);
     } else {
-      return const Icon(MdiIcons.cpu64Bit);
+      return Icon(MdiIcons.cpu64Bit);
     }
   }
 }

@@ -63,7 +63,7 @@ class AppDrawer extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 24, 24, 8),
                 child: Text(
                   Localization.current.I18nDrawer_version(appInfo.version),
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.right,
                 ),
               ),
