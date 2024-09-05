@@ -6,17 +6,13 @@ import '../../../common/utils/helper.dart';
 
 class BluetoothDeviceListEntry extends ListTile {
   BluetoothDeviceListEntry({
-    Key? key,
+    super.key,
     required BluetoothDevice device,
     int? rssi,
-    GestureTapCallback? onTap,
-    GestureLongPressCallback? onLongPress,
-    bool enabled = true,
+    super.onTap,
+    super.onLongPress,
+    super.enabled,
   }) : super(
-          key: key,
-          onTap: onTap,
-          onLongPress: onLongPress,
-          enabled: enabled,
           leading: const Icon(Icons.devices),
           // @TODO . !BluetoothClass! class aware icon
           title: Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
-  const Header({required this.text, Key? key}) : super(key: key);
+  const Header({required this.text, super.key});
 
   final String text;
 
@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
               2, // vertical, move down 10
             ),
           )
-        ],
+        ,],
       ),
       child: Center(
         child: Text(

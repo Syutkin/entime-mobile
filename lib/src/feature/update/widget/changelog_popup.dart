@@ -25,7 +25,6 @@ Future<void> showChangelogAtStartup(
   }
   return showDialog(
     context: context,
-    barrierDismissible: true,
     builder: (context) => AlertDialog(
       // scrollable: true,
       title: Text(I18nUpdate.whatsNew),

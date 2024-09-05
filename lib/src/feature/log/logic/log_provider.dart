@@ -118,7 +118,7 @@ class LogProvider implements ILogProvider {
     if (level != null && level.isNotEmpty) {
       final List<String> args = [];
       for (final type in level) {
-        args.add("level LIKE '${type.toStr}'");
+        args.add("level LIKE '${type.name}'");
       }
       whereArgs.add(args.join(' OR '));
     }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'notification.dart';
 
@@ -12,7 +12,7 @@ part of 'notification.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Notification {
@@ -32,7 +32,7 @@ mixin _$Notification {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             List<GetExistedStartingParticipantsResult>
                 existedStartingParticipants,
             int number,
@@ -58,7 +58,7 @@ mixin _$Notification {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_UpdateNumber value)? updateNumber,
+    TResult? Function(_UpdateNumber value)? updateNumber,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,7 +68,9 @@ mixin _$Notification {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NotificationCopyWith<Notification> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -77,7 +79,8 @@ mixin _$Notification {
 abstract class $NotificationCopyWith<$Res> {
   factory $NotificationCopyWith(
           Notification value, $Res Function(Notification) then) =
-      _$NotificationCopyWithImpl<$Res>;
+      _$NotificationCopyWithImpl<$Res, Notification>;
+  @useResult
   $Res call(
       {List<GetExistedStartingParticipantsResult> existedStartingParticipants,
       int number,
@@ -85,43 +88,49 @@ abstract class $NotificationCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$NotificationCopyWithImpl<$Res> implements $NotificationCopyWith<$Res> {
+class _$NotificationCopyWithImpl<$Res, $Val extends Notification>
+    implements $NotificationCopyWith<$Res> {
   _$NotificationCopyWithImpl(this._value, this._then);
 
-  final Notification _value;
   // ignore: unused_field
-  final $Res Function(Notification) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? existedStartingParticipants = freezed,
-    Object? number = freezed,
-    Object? startTime = freezed,
+    Object? existedStartingParticipants = null,
+    Object? number = null,
+    Object? startTime = null,
   }) {
     return _then(_value.copyWith(
-      existedStartingParticipants: existedStartingParticipants == freezed
+      existedStartingParticipants: null == existedStartingParticipants
           ? _value.existedStartingParticipants
           : existedStartingParticipants // ignore: cast_nullable_to_non_nullable
               as List<GetExistedStartingParticipantsResult>,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      startTime: startTime == freezed
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_UpdateNumberCopyWith<$Res>
+abstract class _$$UpdateNumberImplCopyWith<$Res>
     implements $NotificationCopyWith<$Res> {
-  factory _$$_UpdateNumberCopyWith(
-          _$_UpdateNumber value, $Res Function(_$_UpdateNumber) then) =
-      __$$_UpdateNumberCopyWithImpl<$Res>;
+  factory _$$UpdateNumberImplCopyWith(
+          _$UpdateNumberImpl value, $Res Function(_$UpdateNumberImpl) then) =
+      __$$UpdateNumberImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<GetExistedStartingParticipantsResult> existedStartingParticipants,
       int number,
@@ -129,32 +138,32 @@ abstract class _$$_UpdateNumberCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UpdateNumberCopyWithImpl<$Res>
-    extends _$NotificationCopyWithImpl<$Res>
-    implements _$$_UpdateNumberCopyWith<$Res> {
-  __$$_UpdateNumberCopyWithImpl(
-      _$_UpdateNumber _value, $Res Function(_$_UpdateNumber) _then)
-      : super(_value, (v) => _then(v as _$_UpdateNumber));
+class __$$UpdateNumberImplCopyWithImpl<$Res>
+    extends _$NotificationCopyWithImpl<$Res, _$UpdateNumberImpl>
+    implements _$$UpdateNumberImplCopyWith<$Res> {
+  __$$UpdateNumberImplCopyWithImpl(
+      _$UpdateNumberImpl _value, $Res Function(_$UpdateNumberImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_UpdateNumber get _value => super._value as _$_UpdateNumber;
-
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? existedStartingParticipants = freezed,
-    Object? number = freezed,
-    Object? startTime = freezed,
+    Object? existedStartingParticipants = null,
+    Object? number = null,
+    Object? startTime = null,
   }) {
-    return _then(_$_UpdateNumber(
-      existedStartingParticipants: existedStartingParticipants == freezed
+    return _then(_$UpdateNumberImpl(
+      existedStartingParticipants: null == existedStartingParticipants
           ? _value._existedStartingParticipants
           : existedStartingParticipants // ignore: cast_nullable_to_non_nullable
               as List<GetExistedStartingParticipantsResult>,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      startTime: startTime == freezed
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as String,
@@ -164,8 +173,8 @@ class __$$_UpdateNumberCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateNumber implements _UpdateNumber {
-  const _$_UpdateNumber(
+class _$UpdateNumberImpl implements _UpdateNumber {
+  const _$UpdateNumberImpl(
       {required final List<GetExistedStartingParticipantsResult>
           existedStartingParticipants,
       required this.number,
@@ -175,6 +184,8 @@ class _$_UpdateNumber implements _UpdateNumber {
   final List<GetExistedStartingParticipantsResult> _existedStartingParticipants;
   @override
   List<GetExistedStartingParticipantsResult> get existedStartingParticipants {
+    if (_existedStartingParticipants is EqualUnmodifiableListView)
+      return _existedStartingParticipants;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_existedStartingParticipants);
   }
@@ -190,28 +201,32 @@ class _$_UpdateNumber implements _UpdateNumber {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateNumber &&
+            other is _$UpdateNumberImpl &&
             const DeepCollectionEquality().equals(
                 other._existedStartingParticipants,
                 _existedStartingParticipants) &&
-            const DeepCollectionEquality().equals(other.number, number) &&
-            const DeepCollectionEquality().equals(other.startTime, startTime));
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_existedStartingParticipants),
-      const DeepCollectionEquality().hash(number),
-      const DeepCollectionEquality().hash(startTime));
+      number,
+      startTime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_UpdateNumberCopyWith<_$_UpdateNumber> get copyWith =>
-      __$$_UpdateNumberCopyWithImpl<_$_UpdateNumber>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$UpdateNumberImplCopyWith<_$UpdateNumberImpl> get copyWith =>
+      __$$UpdateNumberImplCopyWithImpl<_$UpdateNumberImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -229,7 +244,7 @@ class _$_UpdateNumber implements _UpdateNumber {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             List<GetExistedStartingParticipantsResult>
                 existedStartingParticipants,
             int number,
@@ -267,7 +282,7 @@ class _$_UpdateNumber implements _UpdateNumber {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_UpdateNumber value)? updateNumber,
+    TResult? Function(_UpdateNumber value)? updateNumber,
   }) {
     return updateNumber?.call(this);
   }
@@ -290,7 +305,7 @@ abstract class _UpdateNumber implements Notification {
       {required final List<GetExistedStartingParticipantsResult>
           existedStartingParticipants,
       required final int number,
-      required final String startTime}) = _$_UpdateNumber;
+      required final String startTime}) = _$UpdateNumberImpl;
 
   @override
   List<GetExistedStartingParticipantsResult> get existedStartingParticipants;
@@ -298,8 +313,11 @@ abstract class _UpdateNumber implements Notification {
   int get number;
   @override
   String get startTime;
+
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_UpdateNumberCopyWith<_$_UpdateNumber> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateNumberImplCopyWith<_$UpdateNumberImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

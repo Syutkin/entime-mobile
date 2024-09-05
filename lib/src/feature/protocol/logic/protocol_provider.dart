@@ -140,7 +140,7 @@ class ProtocolProvider implements IProtocolProvider {
         path,
         version: 1,
         onOpen: (db) async {
-          logger.v(
+          logger.t(
             'SQLite version: ${(await db.rawQuery('SELECT sqlite_version()')).first.values.first}',
           );
         },
@@ -384,7 +384,7 @@ class ProtocolProvider implements IProtocolProvider {
         manualStartTime,
         correction.inMilliseconds,
         startProtocol.first.number
-      ]);
+      ,]);
       if (result > 0) {
         logger.i(
           'Database -> Update manual start time for number ${startProtocol.first.number}',
@@ -420,7 +420,7 @@ class ProtocolProvider implements IProtocolProvider {
         item.automaticcorrection,
         item.manualstarttime,
         item.manualcorrection,
-        item.number
+        item.number,
       ],
     );
     if (result > 0) {

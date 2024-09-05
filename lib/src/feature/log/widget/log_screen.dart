@@ -12,7 +12,7 @@ import '../bloc/log_bloc.dart';
 class LogScreen extends StatelessWidget {
   final _scrollController = ScrollController();
 
-  LogScreen({Key? key}) : super(key: key);
+  LogScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -112,10 +112,9 @@ class LogScreen extends StatelessWidget {
 
 class _LogSourceIcon extends StatelessWidget {
   const _LogSourceIcon({
-    Key? key,
     required this.source,
     required this.direction,
-  }) : super(key: key);
+  });
 
   final String source;
   final String? direction;
@@ -146,9 +145,8 @@ class _LogSourceIcon extends StatelessWidget {
 
 class _LogLevelIcon extends StatelessWidget {
   const _LogLevelIcon({
-    Key? key,
     required this.level,
-  }) : super(key: key);
+  });
 
   final String level;
 

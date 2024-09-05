@@ -16,7 +16,7 @@ Future<void> addRacePopup(BuildContext context) async {
         onChanged: () {
           final formState = primaryFocus?.context;
           if (formState != null) {
-            Form.of(formState)?.validate();
+            Form.of(formState).validate();
           }
         },
         child: Column(

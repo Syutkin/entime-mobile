@@ -18,7 +18,7 @@ import '../../tab/tab.dart';
 import '../../update/update.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) =>
@@ -187,9 +187,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _TextTitle extends StatelessWidget {
-  const _TextTitle({
-    Key? key,
-  }) : super(key: key);
+  const _TextTitle();
 
   @override
   Widget build(BuildContext context) =>
@@ -203,9 +201,8 @@ class _TextTitle extends StatelessWidget {
 
 class _FinishFilterButton extends StatelessWidget {
   const _FinishFilterButton({
-    Key? key,
     required this.activeTab,
-  }) : super(key: key);
+  });
 
   final AppTab activeTab;
 
@@ -239,7 +236,7 @@ class _FinishFilterButton extends StatelessWidget {
                 leading: const SizedBox(width: 0, height: 0),
                 title: Text(Localization.current.I18nHome_setDefaults),
               ),
-            )
+            ),
           ];
           return PopupMenuButton<FilterFinish>(
             icon: const Icon(Icons.filter_list),
@@ -295,7 +292,7 @@ class _FinishFilterButton extends StatelessWidget {
 class _MenuButton extends StatelessWidget {
   final AppTab activeTab;
 
-  const _MenuButton({Key? key, required this.activeTab}) : super(key: key);
+  const _MenuButton({required this.activeTab});
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<SettingsBloc, SettingsState>(

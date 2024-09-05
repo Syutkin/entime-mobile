@@ -4,8 +4,8 @@ import '../../../common/localization/localization.dart';
 
 class CountdownScreen extends StatelessWidget {
   const CountdownScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) => Scaffold(

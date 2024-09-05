@@ -23,7 +23,7 @@ Future<void> routeToSelectFileScreen(BuildContext context) async {
 }
 
 class SelectFileScreen extends StatefulWidget {
-  const SelectFileScreen({Key? key}) : super(key: key);
+  const SelectFileScreen({super.key});
 
   @override
   State<SelectFileScreen> createState() => _SelectFileScreenState();

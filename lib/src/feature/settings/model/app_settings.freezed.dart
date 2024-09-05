@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'app_settings.dart';
 
@@ -12,7 +12,7 @@ part of 'app_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AppSettings {
@@ -131,7 +131,7 @@ mixin _$AppSettings {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
+    TResult? Function(
             bool sound,
             bool beep,
             bool voice,
@@ -163,7 +163,7 @@ mixin _$AppSettings {
             AppTheme appTheme,
             String previousVersion)?
         $default, {
-    TResult Function(
+    TResult? Function(
             bool sound,
             bool beep,
             bool voice,
@@ -274,8 +274,8 @@ mixin _$AppSettings {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_AppSettings value)? $default, {
-    TResult Function(_AppSettingsDefaults value)? defaults,
+    TResult? Function(_AppSettings value)? $default, {
+    TResult? Function(_AppSettingsDefaults value)? defaults,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -286,7 +286,9 @@ mixin _$AppSettings {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppSettingsCopyWith<AppSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -295,7 +297,8 @@ mixin _$AppSettings {
 abstract class $AppSettingsCopyWith<$Res> {
   factory $AppSettingsCopyWith(
           AppSettings value, $Res Function(AppSettings) then) =
-      _$AppSettingsCopyWithImpl<$Res>;
+      _$AppSettingsCopyWithImpl<$Res, AppSettings>;
+  @useResult
   $Res call(
       {bool sound,
       bool beep,
@@ -330,178 +333,184 @@ abstract class $AppSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AppSettingsCopyWithImpl<$Res> implements $AppSettingsCopyWith<$Res> {
+class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
+    implements $AppSettingsCopyWith<$Res> {
   _$AppSettingsCopyWithImpl(this._value, this._then);
 
-  final AppSettings _value;
   // ignore: unused_field
-  final $Res Function(AppSettings) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sound = freezed,
-    Object? beep = freezed,
-    Object? voice = freezed,
-    Object? voiceName = freezed,
-    Object? volume = freezed,
-    Object? pitch = freezed,
-    Object? rate = freezed,
-    Object? language = freezed,
-    Object? recentFile = freezed,
-    Object? wakelock = freezed,
-    Object? startFab = freezed,
-    Object? startFabSize = freezed,
-    Object? finishFab = freezed,
-    Object? finishFabSize = freezed,
-    Object? countdown = freezed,
-    Object? countdownSize = freezed,
-    Object? countdownLeft = freezed,
-    Object? countdownTop = freezed,
-    Object? countdownAtStartTime = freezed,
-    Object? checkUpdates = freezed,
-    Object? hideMarked = freezed,
-    Object? hideNumbers = freezed,
-    Object? hideManual = freezed,
-    Object? reconnect = freezed,
-    Object? finishDelay = freezed,
-    Object? substituteNumbers = freezed,
-    Object? substituteNumbersDelay = freezed,
-    Object? logLimit = freezed,
-    Object? appTheme = freezed,
-    Object? previousVersion = freezed,
+    Object? sound = null,
+    Object? beep = null,
+    Object? voice = null,
+    Object? voiceName = null,
+    Object? volume = null,
+    Object? pitch = null,
+    Object? rate = null,
+    Object? language = null,
+    Object? recentFile = null,
+    Object? wakelock = null,
+    Object? startFab = null,
+    Object? startFabSize = null,
+    Object? finishFab = null,
+    Object? finishFabSize = null,
+    Object? countdown = null,
+    Object? countdownSize = null,
+    Object? countdownLeft = null,
+    Object? countdownTop = null,
+    Object? countdownAtStartTime = null,
+    Object? checkUpdates = null,
+    Object? hideMarked = null,
+    Object? hideNumbers = null,
+    Object? hideManual = null,
+    Object? reconnect = null,
+    Object? finishDelay = null,
+    Object? substituteNumbers = null,
+    Object? substituteNumbersDelay = null,
+    Object? logLimit = null,
+    Object? appTheme = null,
+    Object? previousVersion = null,
   }) {
     return _then(_value.copyWith(
-      sound: sound == freezed
+      sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
               as bool,
-      beep: beep == freezed
+      beep: null == beep
           ? _value.beep
           : beep // ignore: cast_nullable_to_non_nullable
               as bool,
-      voice: voice == freezed
+      voice: null == voice
           ? _value.voice
           : voice // ignore: cast_nullable_to_non_nullable
               as bool,
-      voiceName: voiceName == freezed
+      voiceName: null == voiceName
           ? _value.voiceName
           : voiceName // ignore: cast_nullable_to_non_nullable
               as bool,
-      volume: volume == freezed
+      volume: null == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
               as double,
-      pitch: pitch == freezed
+      pitch: null == pitch
           ? _value.pitch
           : pitch // ignore: cast_nullable_to_non_nullable
               as double,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-      language: language == freezed
+      language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      recentFile: recentFile == freezed
+      recentFile: null == recentFile
           ? _value.recentFile
           : recentFile // ignore: cast_nullable_to_non_nullable
               as String,
-      wakelock: wakelock == freezed
+      wakelock: null == wakelock
           ? _value.wakelock
           : wakelock // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFab: startFab == freezed
+      startFab: null == startFab
           ? _value.startFab
           : startFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFabSize: startFabSize == freezed
+      startFabSize: null == startFabSize
           ? _value.startFabSize
           : startFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      finishFab: finishFab == freezed
+      finishFab: null == finishFab
           ? _value.finishFab
           : finishFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishFabSize: finishFabSize == freezed
+      finishFabSize: null == finishFabSize
           ? _value.finishFabSize
           : finishFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdown: countdown == freezed
+      countdown: null == countdown
           ? _value.countdown
           : countdown // ignore: cast_nullable_to_non_nullable
               as bool,
-      countdownSize: countdownSize == freezed
+      countdownSize: null == countdownSize
           ? _value.countdownSize
           : countdownSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownLeft: countdownLeft == freezed
+      countdownLeft: null == countdownLeft
           ? _value.countdownLeft
           : countdownLeft // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownTop: countdownTop == freezed
+      countdownTop: null == countdownTop
           ? _value.countdownTop
           : countdownTop // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownAtStartTime: countdownAtStartTime == freezed
+      countdownAtStartTime: null == countdownAtStartTime
           ? _value.countdownAtStartTime
           : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      checkUpdates: checkUpdates == freezed
+      checkUpdates: null == checkUpdates
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: hideMarked == freezed
+      hideMarked: null == hideMarked
           ? _value.hideMarked
           : hideMarked // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: hideNumbers == freezed
+      hideNumbers: null == hideNumbers
           ? _value.hideNumbers
           : hideNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: hideManual == freezed
+      hideManual: null == hideManual
           ? _value.hideManual
           : hideManual // ignore: cast_nullable_to_non_nullable
               as bool,
-      reconnect: reconnect == freezed
+      reconnect: null == reconnect
           ? _value.reconnect
           : reconnect // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishDelay: finishDelay == freezed
+      finishDelay: null == finishDelay
           ? _value.finishDelay
           : finishDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      substituteNumbers: substituteNumbers == freezed
+      substituteNumbers: null == substituteNumbers
           ? _value.substituteNumbers
           : substituteNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      substituteNumbersDelay: substituteNumbersDelay == freezed
+      substituteNumbersDelay: null == substituteNumbersDelay
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      logLimit: logLimit == freezed
+      logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
               as int,
-      appTheme: appTheme == freezed
+      appTheme: null == appTheme
           ? _value.appTheme
           : appTheme // ignore: cast_nullable_to_non_nullable
               as AppTheme,
-      previousVersion: previousVersion == freezed
+      previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_AppSettingsCopyWith<$Res>
+abstract class _$$AppSettingsImplCopyWith<$Res>
     implements $AppSettingsCopyWith<$Res> {
-  factory _$$_AppSettingsCopyWith(
-          _$_AppSettings value, $Res Function(_$_AppSettings) then) =
-      __$$_AppSettingsCopyWithImpl<$Res>;
+  factory _$$AppSettingsImplCopyWith(
+          _$AppSettingsImpl value, $Res Function(_$AppSettingsImpl) then) =
+      __$$AppSettingsImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool sound,
       bool beep,
@@ -536,166 +545,167 @@ abstract class _$$_AppSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AppSettingsCopyWithImpl<$Res> extends _$AppSettingsCopyWithImpl<$Res>
-    implements _$$_AppSettingsCopyWith<$Res> {
-  __$$_AppSettingsCopyWithImpl(
-      _$_AppSettings _value, $Res Function(_$_AppSettings) _then)
-      : super(_value, (v) => _then(v as _$_AppSettings));
+class __$$AppSettingsImplCopyWithImpl<$Res>
+    extends _$AppSettingsCopyWithImpl<$Res, _$AppSettingsImpl>
+    implements _$$AppSettingsImplCopyWith<$Res> {
+  __$$AppSettingsImplCopyWithImpl(
+      _$AppSettingsImpl _value, $Res Function(_$AppSettingsImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_AppSettings get _value => super._value as _$_AppSettings;
-
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sound = freezed,
-    Object? beep = freezed,
-    Object? voice = freezed,
-    Object? voiceName = freezed,
-    Object? volume = freezed,
-    Object? pitch = freezed,
-    Object? rate = freezed,
-    Object? language = freezed,
-    Object? recentFile = freezed,
-    Object? wakelock = freezed,
-    Object? startFab = freezed,
-    Object? startFabSize = freezed,
-    Object? finishFab = freezed,
-    Object? finishFabSize = freezed,
-    Object? countdown = freezed,
-    Object? countdownSize = freezed,
-    Object? countdownLeft = freezed,
-    Object? countdownTop = freezed,
-    Object? countdownAtStartTime = freezed,
-    Object? checkUpdates = freezed,
-    Object? hideMarked = freezed,
-    Object? hideNumbers = freezed,
-    Object? hideManual = freezed,
-    Object? reconnect = freezed,
-    Object? finishDelay = freezed,
-    Object? substituteNumbers = freezed,
-    Object? substituteNumbersDelay = freezed,
-    Object? logLimit = freezed,
-    Object? appTheme = freezed,
-    Object? previousVersion = freezed,
+    Object? sound = null,
+    Object? beep = null,
+    Object? voice = null,
+    Object? voiceName = null,
+    Object? volume = null,
+    Object? pitch = null,
+    Object? rate = null,
+    Object? language = null,
+    Object? recentFile = null,
+    Object? wakelock = null,
+    Object? startFab = null,
+    Object? startFabSize = null,
+    Object? finishFab = null,
+    Object? finishFabSize = null,
+    Object? countdown = null,
+    Object? countdownSize = null,
+    Object? countdownLeft = null,
+    Object? countdownTop = null,
+    Object? countdownAtStartTime = null,
+    Object? checkUpdates = null,
+    Object? hideMarked = null,
+    Object? hideNumbers = null,
+    Object? hideManual = null,
+    Object? reconnect = null,
+    Object? finishDelay = null,
+    Object? substituteNumbers = null,
+    Object? substituteNumbersDelay = null,
+    Object? logLimit = null,
+    Object? appTheme = null,
+    Object? previousVersion = null,
   }) {
-    return _then(_$_AppSettings(
-      sound: sound == freezed
+    return _then(_$AppSettingsImpl(
+      sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
               as bool,
-      beep: beep == freezed
+      beep: null == beep
           ? _value.beep
           : beep // ignore: cast_nullable_to_non_nullable
               as bool,
-      voice: voice == freezed
+      voice: null == voice
           ? _value.voice
           : voice // ignore: cast_nullable_to_non_nullable
               as bool,
-      voiceName: voiceName == freezed
+      voiceName: null == voiceName
           ? _value.voiceName
           : voiceName // ignore: cast_nullable_to_non_nullable
               as bool,
-      volume: volume == freezed
+      volume: null == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
               as double,
-      pitch: pitch == freezed
+      pitch: null == pitch
           ? _value.pitch
           : pitch // ignore: cast_nullable_to_non_nullable
               as double,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-      language: language == freezed
+      language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      recentFile: recentFile == freezed
+      recentFile: null == recentFile
           ? _value.recentFile
           : recentFile // ignore: cast_nullable_to_non_nullable
               as String,
-      wakelock: wakelock == freezed
+      wakelock: null == wakelock
           ? _value.wakelock
           : wakelock // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFab: startFab == freezed
+      startFab: null == startFab
           ? _value.startFab
           : startFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFabSize: startFabSize == freezed
+      startFabSize: null == startFabSize
           ? _value.startFabSize
           : startFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      finishFab: finishFab == freezed
+      finishFab: null == finishFab
           ? _value.finishFab
           : finishFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishFabSize: finishFabSize == freezed
+      finishFabSize: null == finishFabSize
           ? _value.finishFabSize
           : finishFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdown: countdown == freezed
+      countdown: null == countdown
           ? _value.countdown
           : countdown // ignore: cast_nullable_to_non_nullable
               as bool,
-      countdownSize: countdownSize == freezed
+      countdownSize: null == countdownSize
           ? _value.countdownSize
           : countdownSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownLeft: countdownLeft == freezed
+      countdownLeft: null == countdownLeft
           ? _value.countdownLeft
           : countdownLeft // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownTop: countdownTop == freezed
+      countdownTop: null == countdownTop
           ? _value.countdownTop
           : countdownTop // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownAtStartTime: countdownAtStartTime == freezed
+      countdownAtStartTime: null == countdownAtStartTime
           ? _value.countdownAtStartTime
           : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      checkUpdates: checkUpdates == freezed
+      checkUpdates: null == checkUpdates
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: hideMarked == freezed
+      hideMarked: null == hideMarked
           ? _value.hideMarked
           : hideMarked // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: hideNumbers == freezed
+      hideNumbers: null == hideNumbers
           ? _value.hideNumbers
           : hideNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: hideManual == freezed
+      hideManual: null == hideManual
           ? _value.hideManual
           : hideManual // ignore: cast_nullable_to_non_nullable
               as bool,
-      reconnect: reconnect == freezed
+      reconnect: null == reconnect
           ? _value.reconnect
           : reconnect // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishDelay: finishDelay == freezed
+      finishDelay: null == finishDelay
           ? _value.finishDelay
           : finishDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      substituteNumbers: substituteNumbers == freezed
+      substituteNumbers: null == substituteNumbers
           ? _value.substituteNumbers
           : substituteNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      substituteNumbersDelay: substituteNumbersDelay == freezed
+      substituteNumbersDelay: null == substituteNumbersDelay
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      logLimit: logLimit == freezed
+      logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
               as int,
-      appTheme: appTheme == freezed
+      appTheme: null == appTheme
           ? _value.appTheme
           : appTheme // ignore: cast_nullable_to_non_nullable
               as AppTheme,
-      previousVersion: previousVersion == freezed
+      previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
               as String,
@@ -705,8 +715,8 @@ class __$$_AppSettingsCopyWithImpl<$Res> extends _$AppSettingsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AppSettings implements _AppSettings {
-  const _$_AppSettings(
+class _$AppSettingsImpl implements _AppSettings {
+  const _$AppSettingsImpl(
       {required this.sound,
       required this.beep,
       required this.voice,
@@ -827,96 +837,108 @@ class _$_AppSettings implements _AppSettings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppSettings &&
-            const DeepCollectionEquality().equals(other.sound, sound) &&
-            const DeepCollectionEquality().equals(other.beep, beep) &&
-            const DeepCollectionEquality().equals(other.voice, voice) &&
-            const DeepCollectionEquality().equals(other.voiceName, voiceName) &&
-            const DeepCollectionEquality().equals(other.volume, volume) &&
-            const DeepCollectionEquality().equals(other.pitch, pitch) &&
-            const DeepCollectionEquality().equals(other.rate, rate) &&
-            const DeepCollectionEquality().equals(other.language, language) &&
-            const DeepCollectionEquality()
-                .equals(other.recentFile, recentFile) &&
-            const DeepCollectionEquality().equals(other.wakelock, wakelock) &&
-            const DeepCollectionEquality().equals(other.startFab, startFab) &&
-            const DeepCollectionEquality()
-                .equals(other.startFabSize, startFabSize) &&
-            const DeepCollectionEquality().equals(other.finishFab, finishFab) &&
-            const DeepCollectionEquality()
-                .equals(other.finishFabSize, finishFabSize) &&
-            const DeepCollectionEquality().equals(other.countdown, countdown) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownSize, countdownSize) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownLeft, countdownLeft) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownTop, countdownTop) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownAtStartTime, countdownAtStartTime) &&
-            const DeepCollectionEquality()
-                .equals(other.checkUpdates, checkUpdates) &&
-            const DeepCollectionEquality()
-                .equals(other.hideMarked, hideMarked) &&
-            const DeepCollectionEquality()
-                .equals(other.hideNumbers, hideNumbers) &&
-            const DeepCollectionEquality()
-                .equals(other.hideManual, hideManual) &&
-            const DeepCollectionEquality().equals(other.reconnect, reconnect) &&
-            const DeepCollectionEquality()
-                .equals(other.finishDelay, finishDelay) &&
-            const DeepCollectionEquality()
-                .equals(other.substituteNumbers, substituteNumbers) &&
-            const DeepCollectionEquality()
-                .equals(other.substituteNumbersDelay, substituteNumbersDelay) &&
-            const DeepCollectionEquality().equals(other.logLimit, logLimit) &&
-            const DeepCollectionEquality().equals(other.appTheme, appTheme) &&
-            const DeepCollectionEquality()
-                .equals(other.previousVersion, previousVersion));
+            other is _$AppSettingsImpl &&
+            (identical(other.sound, sound) || other.sound == sound) &&
+            (identical(other.beep, beep) || other.beep == beep) &&
+            (identical(other.voice, voice) || other.voice == voice) &&
+            (identical(other.voiceName, voiceName) ||
+                other.voiceName == voiceName) &&
+            (identical(other.volume, volume) || other.volume == volume) &&
+            (identical(other.pitch, pitch) || other.pitch == pitch) &&
+            (identical(other.rate, rate) || other.rate == rate) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.recentFile, recentFile) ||
+                other.recentFile == recentFile) &&
+            (identical(other.wakelock, wakelock) ||
+                other.wakelock == wakelock) &&
+            (identical(other.startFab, startFab) ||
+                other.startFab == startFab) &&
+            (identical(other.startFabSize, startFabSize) ||
+                other.startFabSize == startFabSize) &&
+            (identical(other.finishFab, finishFab) ||
+                other.finishFab == finishFab) &&
+            (identical(other.finishFabSize, finishFabSize) ||
+                other.finishFabSize == finishFabSize) &&
+            (identical(other.countdown, countdown) ||
+                other.countdown == countdown) &&
+            (identical(other.countdownSize, countdownSize) ||
+                other.countdownSize == countdownSize) &&
+            (identical(other.countdownLeft, countdownLeft) ||
+                other.countdownLeft == countdownLeft) &&
+            (identical(other.countdownTop, countdownTop) ||
+                other.countdownTop == countdownTop) &&
+            (identical(other.countdownAtStartTime, countdownAtStartTime) ||
+                other.countdownAtStartTime == countdownAtStartTime) &&
+            (identical(other.checkUpdates, checkUpdates) ||
+                other.checkUpdates == checkUpdates) &&
+            (identical(other.hideMarked, hideMarked) ||
+                other.hideMarked == hideMarked) &&
+            (identical(other.hideNumbers, hideNumbers) ||
+                other.hideNumbers == hideNumbers) &&
+            (identical(other.hideManual, hideManual) ||
+                other.hideManual == hideManual) &&
+            (identical(other.reconnect, reconnect) ||
+                other.reconnect == reconnect) &&
+            (identical(other.finishDelay, finishDelay) ||
+                other.finishDelay == finishDelay) &&
+            (identical(other.substituteNumbers, substituteNumbers) ||
+                other.substituteNumbers == substituteNumbers) &&
+            (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
+                other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.logLimit, logLimit) ||
+                other.logLimit == logLimit) &&
+            (identical(other.appTheme, appTheme) ||
+                other.appTheme == appTheme) &&
+            (identical(other.previousVersion, previousVersion) ||
+                other.previousVersion == previousVersion));
   }
 
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(sound),
-        const DeepCollectionEquality().hash(beep),
-        const DeepCollectionEquality().hash(voice),
-        const DeepCollectionEquality().hash(voiceName),
-        const DeepCollectionEquality().hash(volume),
-        const DeepCollectionEquality().hash(pitch),
-        const DeepCollectionEquality().hash(rate),
-        const DeepCollectionEquality().hash(language),
-        const DeepCollectionEquality().hash(recentFile),
-        const DeepCollectionEquality().hash(wakelock),
-        const DeepCollectionEquality().hash(startFab),
-        const DeepCollectionEquality().hash(startFabSize),
-        const DeepCollectionEquality().hash(finishFab),
-        const DeepCollectionEquality().hash(finishFabSize),
-        const DeepCollectionEquality().hash(countdown),
-        const DeepCollectionEquality().hash(countdownSize),
-        const DeepCollectionEquality().hash(countdownLeft),
-        const DeepCollectionEquality().hash(countdownTop),
-        const DeepCollectionEquality().hash(countdownAtStartTime),
-        const DeepCollectionEquality().hash(checkUpdates),
-        const DeepCollectionEquality().hash(hideMarked),
-        const DeepCollectionEquality().hash(hideNumbers),
-        const DeepCollectionEquality().hash(hideManual),
-        const DeepCollectionEquality().hash(reconnect),
-        const DeepCollectionEquality().hash(finishDelay),
-        const DeepCollectionEquality().hash(substituteNumbers),
-        const DeepCollectionEquality().hash(substituteNumbersDelay),
-        const DeepCollectionEquality().hash(logLimit),
-        const DeepCollectionEquality().hash(appTheme),
-        const DeepCollectionEquality().hash(previousVersion)
+        sound,
+        beep,
+        voice,
+        voiceName,
+        volume,
+        pitch,
+        rate,
+        language,
+        recentFile,
+        wakelock,
+        startFab,
+        startFabSize,
+        finishFab,
+        finishFabSize,
+        countdown,
+        countdownSize,
+        countdownLeft,
+        countdownTop,
+        countdownAtStartTime,
+        checkUpdates,
+        hideMarked,
+        hideNumbers,
+        hideManual,
+        reconnect,
+        finishDelay,
+        substituteNumbers,
+        substituteNumbersDelay,
+        logLimit,
+        appTheme,
+        previousVersion
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_AppSettingsCopyWith<_$_AppSettings> get copyWith =>
-      __$$_AppSettingsCopyWithImpl<_$_AppSettings>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$AppSettingsImplCopyWith<_$AppSettingsImpl> get copyWith =>
+      __$$AppSettingsImplCopyWithImpl<_$AppSettingsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1022,7 +1044,7 @@ class _$_AppSettings implements _AppSettings {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
+    TResult? Function(
             bool sound,
             bool beep,
             bool voice,
@@ -1054,7 +1076,7 @@ class _$_AppSettings implements _AppSettings {
             AppTheme appTheme,
             String previousVersion)?
         $default, {
-    TResult Function(
+    TResult? Function(
             bool sound,
             bool beep,
             bool voice,
@@ -1237,8 +1259,8 @@ class _$_AppSettings implements _AppSettings {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_AppSettings value)? $default, {
-    TResult Function(_AppSettingsDefaults value)? defaults,
+    TResult? Function(_AppSettings value)? $default, {
+    TResult? Function(_AppSettingsDefaults value)? defaults,
   }) {
     return $default?.call(this);
   }
@@ -1288,84 +1310,91 @@ abstract class _AppSettings implements AppSettings {
       required final int substituteNumbersDelay,
       required final int logLimit,
       required final AppTheme appTheme,
-      required final String previousVersion}) = _$_AppSettings;
+      required final String previousVersion}) = _$AppSettingsImpl;
 
-  @override // звук
-  bool get sound;
-  @override // вкл/выкл
+// звук
+  @override
+  bool get sound; // вкл/выкл
 // звук обратного отсчёта
-  bool get beep;
-  @override // голосовые сообщения
+  @override
+  bool get beep; // голосовые сообщения
+  @override
   bool get voice;
   @override
   bool get voiceName;
   @override
-  double get volume;
-  @override // громкость
-  double get pitch;
-  @override // тон речи
-  double get rate;
-  @override // скорость речи
-  String get language;
-  @override // = "ru-RU", // язык
-  String get recentFile;
-  @override // всегда включённый экран
-  bool get wakelock;
-  @override // кнопки "добавить вручную" на экранах старта и финиша
+  double get volume; // громкость
+  @override
+  double get pitch; // тон речи
+  @override
+  double get rate; // скорость речи
+  @override
+  String get language; // = "ru-RU", // язык
+  @override
+  String get recentFile; // всегда включённый экран
+  @override
+  bool get wakelock; // кнопки "добавить вручную" на экранах старта и финиша
+  @override
   bool get startFab;
   @override
   double get startFabSize;
   @override
   bool get finishFab;
   @override
-  double get finishFabSize;
-  @override // обратный отсчёт на экране старта
+  double get finishFabSize; // обратный отсчёт на экране старта
+  @override
   bool get countdown;
   @override
   double get countdownSize;
   @override
   double get countdownLeft;
   @override
-  double get countdownTop;
-  @override // показывать обратный отсчёт вместо стартового времени
-  bool get countdownAtStartTime;
-  @override // проверка обновлений
-  bool get checkUpdates;
-  @override // выборка значений в финише
+  double
+      get countdownTop; // показывать обратный отсчёт вместо стартового времени
+  @override
+  bool get countdownAtStartTime; // проверка обновлений
+  @override
+  bool get checkUpdates; // выборка значений в финише
+  @override
   bool get hideMarked;
   @override
   bool get hideNumbers;
   @override
-  bool get hideManual;
-  @override // восстанавливать Bluetooth подключение при обрыве
-  bool get reconnect;
-  @override // задержка в миллисекундах перед показыванием нового финишного времени
-  int get finishDelay;
-  @override // автоподстановка номеров в финишном протоколе
+  bool get hideManual; // восстанавливать Bluetooth подключение при обрыве
+  @override
+  bool
+      get reconnect; // задержка в миллисекундах перед показыванием нового финишного времени
+  @override
+  int get finishDelay; // автоподстановка номеров в финишном протоколе
+  @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay;
-  @override // лог
+  int get substituteNumbersDelay; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
-  int get logLimit;
-  @override // активная тема
-  AppTheme get appTheme;
-  @override // версия при предыдущем запуске
-  String get previousVersion;
   @override
-  @JsonKey(ignore: true)
-  _$$_AppSettingsCopyWith<_$_AppSettings> get copyWith =>
+  int get logLimit; // активная тема
+  @override
+  AppTheme get appTheme; // версия при предыдущем запуске
+  @override
+  String get previousVersion;
+
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AppSettingsImplCopyWith<_$AppSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AppSettingsDefaultsCopyWith<$Res>
+abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
     implements $AppSettingsCopyWith<$Res> {
-  factory _$$_AppSettingsDefaultsCopyWith(_$_AppSettingsDefaults value,
-          $Res Function(_$_AppSettingsDefaults) then) =
-      __$$_AppSettingsDefaultsCopyWithImpl<$Res>;
+  factory _$$AppSettingsDefaultsImplCopyWith(_$AppSettingsDefaultsImpl value,
+          $Res Function(_$AppSettingsDefaultsImpl) then) =
+      __$$AppSettingsDefaultsImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool sound,
       bool beep,
@@ -1400,167 +1429,167 @@ abstract class _$$_AppSettingsDefaultsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AppSettingsDefaultsCopyWithImpl<$Res>
-    extends _$AppSettingsCopyWithImpl<$Res>
-    implements _$$_AppSettingsDefaultsCopyWith<$Res> {
-  __$$_AppSettingsDefaultsCopyWithImpl(_$_AppSettingsDefaults _value,
-      $Res Function(_$_AppSettingsDefaults) _then)
-      : super(_value, (v) => _then(v as _$_AppSettingsDefaults));
+class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
+    extends _$AppSettingsCopyWithImpl<$Res, _$AppSettingsDefaultsImpl>
+    implements _$$AppSettingsDefaultsImplCopyWith<$Res> {
+  __$$AppSettingsDefaultsImplCopyWithImpl(_$AppSettingsDefaultsImpl _value,
+      $Res Function(_$AppSettingsDefaultsImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_AppSettingsDefaults get _value => super._value as _$_AppSettingsDefaults;
-
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sound = freezed,
-    Object? beep = freezed,
-    Object? voice = freezed,
-    Object? voiceName = freezed,
-    Object? volume = freezed,
-    Object? pitch = freezed,
-    Object? rate = freezed,
-    Object? language = freezed,
-    Object? recentFile = freezed,
-    Object? wakelock = freezed,
-    Object? startFab = freezed,
-    Object? startFabSize = freezed,
-    Object? finishFab = freezed,
-    Object? finishFabSize = freezed,
-    Object? countdown = freezed,
-    Object? countdownSize = freezed,
-    Object? countdownLeft = freezed,
-    Object? countdownTop = freezed,
-    Object? countdownAtStartTime = freezed,
-    Object? checkUpdates = freezed,
-    Object? hideMarked = freezed,
-    Object? hideNumbers = freezed,
-    Object? hideManual = freezed,
-    Object? reconnect = freezed,
-    Object? finishDelay = freezed,
-    Object? substituteNumbers = freezed,
-    Object? substituteNumbersDelay = freezed,
-    Object? logLimit = freezed,
-    Object? appTheme = freezed,
-    Object? previousVersion = freezed,
+    Object? sound = null,
+    Object? beep = null,
+    Object? voice = null,
+    Object? voiceName = null,
+    Object? volume = null,
+    Object? pitch = null,
+    Object? rate = null,
+    Object? language = null,
+    Object? recentFile = null,
+    Object? wakelock = null,
+    Object? startFab = null,
+    Object? startFabSize = null,
+    Object? finishFab = null,
+    Object? finishFabSize = null,
+    Object? countdown = null,
+    Object? countdownSize = null,
+    Object? countdownLeft = null,
+    Object? countdownTop = null,
+    Object? countdownAtStartTime = null,
+    Object? checkUpdates = null,
+    Object? hideMarked = null,
+    Object? hideNumbers = null,
+    Object? hideManual = null,
+    Object? reconnect = null,
+    Object? finishDelay = null,
+    Object? substituteNumbers = null,
+    Object? substituteNumbersDelay = null,
+    Object? logLimit = null,
+    Object? appTheme = null,
+    Object? previousVersion = null,
   }) {
-    return _then(_$_AppSettingsDefaults(
-      sound: sound == freezed
+    return _then(_$AppSettingsDefaultsImpl(
+      sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
               as bool,
-      beep: beep == freezed
+      beep: null == beep
           ? _value.beep
           : beep // ignore: cast_nullable_to_non_nullable
               as bool,
-      voice: voice == freezed
+      voice: null == voice
           ? _value.voice
           : voice // ignore: cast_nullable_to_non_nullable
               as bool,
-      voiceName: voiceName == freezed
+      voiceName: null == voiceName
           ? _value.voiceName
           : voiceName // ignore: cast_nullable_to_non_nullable
               as bool,
-      volume: volume == freezed
+      volume: null == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
               as double,
-      pitch: pitch == freezed
+      pitch: null == pitch
           ? _value.pitch
           : pitch // ignore: cast_nullable_to_non_nullable
               as double,
-      rate: rate == freezed
+      rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-      language: language == freezed
+      language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      recentFile: recentFile == freezed
+      recentFile: null == recentFile
           ? _value.recentFile
           : recentFile // ignore: cast_nullable_to_non_nullable
               as String,
-      wakelock: wakelock == freezed
+      wakelock: null == wakelock
           ? _value.wakelock
           : wakelock // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFab: startFab == freezed
+      startFab: null == startFab
           ? _value.startFab
           : startFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFabSize: startFabSize == freezed
+      startFabSize: null == startFabSize
           ? _value.startFabSize
           : startFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      finishFab: finishFab == freezed
+      finishFab: null == finishFab
           ? _value.finishFab
           : finishFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishFabSize: finishFabSize == freezed
+      finishFabSize: null == finishFabSize
           ? _value.finishFabSize
           : finishFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdown: countdown == freezed
+      countdown: null == countdown
           ? _value.countdown
           : countdown // ignore: cast_nullable_to_non_nullable
               as bool,
-      countdownSize: countdownSize == freezed
+      countdownSize: null == countdownSize
           ? _value.countdownSize
           : countdownSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownLeft: countdownLeft == freezed
+      countdownLeft: null == countdownLeft
           ? _value.countdownLeft
           : countdownLeft // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownTop: countdownTop == freezed
+      countdownTop: null == countdownTop
           ? _value.countdownTop
           : countdownTop // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownAtStartTime: countdownAtStartTime == freezed
+      countdownAtStartTime: null == countdownAtStartTime
           ? _value.countdownAtStartTime
           : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      checkUpdates: checkUpdates == freezed
+      checkUpdates: null == checkUpdates
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: hideMarked == freezed
+      hideMarked: null == hideMarked
           ? _value.hideMarked
           : hideMarked // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: hideNumbers == freezed
+      hideNumbers: null == hideNumbers
           ? _value.hideNumbers
           : hideNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: hideManual == freezed
+      hideManual: null == hideManual
           ? _value.hideManual
           : hideManual // ignore: cast_nullable_to_non_nullable
               as bool,
-      reconnect: reconnect == freezed
+      reconnect: null == reconnect
           ? _value.reconnect
           : reconnect // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishDelay: finishDelay == freezed
+      finishDelay: null == finishDelay
           ? _value.finishDelay
           : finishDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      substituteNumbers: substituteNumbers == freezed
+      substituteNumbers: null == substituteNumbers
           ? _value.substituteNumbers
           : substituteNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      substituteNumbersDelay: substituteNumbersDelay == freezed
+      substituteNumbersDelay: null == substituteNumbersDelay
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      logLimit: logLimit == freezed
+      logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
               as int,
-      appTheme: appTheme == freezed
+      appTheme: null == appTheme
           ? _value.appTheme
           : appTheme // ignore: cast_nullable_to_non_nullable
               as AppTheme,
-      previousVersion: previousVersion == freezed
+      previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1570,8 +1599,8 @@ class __$$_AppSettingsDefaultsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AppSettingsDefaults implements _AppSettingsDefaults {
-  const _$_AppSettingsDefaults(
+class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
+  const _$AppSettingsDefaultsImpl(
       {this.sound = true,
       this.beep = true,
       this.voice = true,
@@ -1724,96 +1753,108 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppSettingsDefaults &&
-            const DeepCollectionEquality().equals(other.sound, sound) &&
-            const DeepCollectionEquality().equals(other.beep, beep) &&
-            const DeepCollectionEquality().equals(other.voice, voice) &&
-            const DeepCollectionEquality().equals(other.voiceName, voiceName) &&
-            const DeepCollectionEquality().equals(other.volume, volume) &&
-            const DeepCollectionEquality().equals(other.pitch, pitch) &&
-            const DeepCollectionEquality().equals(other.rate, rate) &&
-            const DeepCollectionEquality().equals(other.language, language) &&
-            const DeepCollectionEquality()
-                .equals(other.recentFile, recentFile) &&
-            const DeepCollectionEquality().equals(other.wakelock, wakelock) &&
-            const DeepCollectionEquality().equals(other.startFab, startFab) &&
-            const DeepCollectionEquality()
-                .equals(other.startFabSize, startFabSize) &&
-            const DeepCollectionEquality().equals(other.finishFab, finishFab) &&
-            const DeepCollectionEquality()
-                .equals(other.finishFabSize, finishFabSize) &&
-            const DeepCollectionEquality().equals(other.countdown, countdown) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownSize, countdownSize) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownLeft, countdownLeft) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownTop, countdownTop) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownAtStartTime, countdownAtStartTime) &&
-            const DeepCollectionEquality()
-                .equals(other.checkUpdates, checkUpdates) &&
-            const DeepCollectionEquality()
-                .equals(other.hideMarked, hideMarked) &&
-            const DeepCollectionEquality()
-                .equals(other.hideNumbers, hideNumbers) &&
-            const DeepCollectionEquality()
-                .equals(other.hideManual, hideManual) &&
-            const DeepCollectionEquality().equals(other.reconnect, reconnect) &&
-            const DeepCollectionEquality()
-                .equals(other.finishDelay, finishDelay) &&
-            const DeepCollectionEquality()
-                .equals(other.substituteNumbers, substituteNumbers) &&
-            const DeepCollectionEquality()
-                .equals(other.substituteNumbersDelay, substituteNumbersDelay) &&
-            const DeepCollectionEquality().equals(other.logLimit, logLimit) &&
-            const DeepCollectionEquality().equals(other.appTheme, appTheme) &&
-            const DeepCollectionEquality()
-                .equals(other.previousVersion, previousVersion));
+            other is _$AppSettingsDefaultsImpl &&
+            (identical(other.sound, sound) || other.sound == sound) &&
+            (identical(other.beep, beep) || other.beep == beep) &&
+            (identical(other.voice, voice) || other.voice == voice) &&
+            (identical(other.voiceName, voiceName) ||
+                other.voiceName == voiceName) &&
+            (identical(other.volume, volume) || other.volume == volume) &&
+            (identical(other.pitch, pitch) || other.pitch == pitch) &&
+            (identical(other.rate, rate) || other.rate == rate) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.recentFile, recentFile) ||
+                other.recentFile == recentFile) &&
+            (identical(other.wakelock, wakelock) ||
+                other.wakelock == wakelock) &&
+            (identical(other.startFab, startFab) ||
+                other.startFab == startFab) &&
+            (identical(other.startFabSize, startFabSize) ||
+                other.startFabSize == startFabSize) &&
+            (identical(other.finishFab, finishFab) ||
+                other.finishFab == finishFab) &&
+            (identical(other.finishFabSize, finishFabSize) ||
+                other.finishFabSize == finishFabSize) &&
+            (identical(other.countdown, countdown) ||
+                other.countdown == countdown) &&
+            (identical(other.countdownSize, countdownSize) ||
+                other.countdownSize == countdownSize) &&
+            (identical(other.countdownLeft, countdownLeft) ||
+                other.countdownLeft == countdownLeft) &&
+            (identical(other.countdownTop, countdownTop) ||
+                other.countdownTop == countdownTop) &&
+            (identical(other.countdownAtStartTime, countdownAtStartTime) ||
+                other.countdownAtStartTime == countdownAtStartTime) &&
+            (identical(other.checkUpdates, checkUpdates) ||
+                other.checkUpdates == checkUpdates) &&
+            (identical(other.hideMarked, hideMarked) ||
+                other.hideMarked == hideMarked) &&
+            (identical(other.hideNumbers, hideNumbers) ||
+                other.hideNumbers == hideNumbers) &&
+            (identical(other.hideManual, hideManual) ||
+                other.hideManual == hideManual) &&
+            (identical(other.reconnect, reconnect) ||
+                other.reconnect == reconnect) &&
+            (identical(other.finishDelay, finishDelay) ||
+                other.finishDelay == finishDelay) &&
+            (identical(other.substituteNumbers, substituteNumbers) ||
+                other.substituteNumbers == substituteNumbers) &&
+            (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
+                other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.logLimit, logLimit) ||
+                other.logLimit == logLimit) &&
+            (identical(other.appTheme, appTheme) ||
+                other.appTheme == appTheme) &&
+            (identical(other.previousVersion, previousVersion) ||
+                other.previousVersion == previousVersion));
   }
 
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(sound),
-        const DeepCollectionEquality().hash(beep),
-        const DeepCollectionEquality().hash(voice),
-        const DeepCollectionEquality().hash(voiceName),
-        const DeepCollectionEquality().hash(volume),
-        const DeepCollectionEquality().hash(pitch),
-        const DeepCollectionEquality().hash(rate),
-        const DeepCollectionEquality().hash(language),
-        const DeepCollectionEquality().hash(recentFile),
-        const DeepCollectionEquality().hash(wakelock),
-        const DeepCollectionEquality().hash(startFab),
-        const DeepCollectionEquality().hash(startFabSize),
-        const DeepCollectionEquality().hash(finishFab),
-        const DeepCollectionEquality().hash(finishFabSize),
-        const DeepCollectionEquality().hash(countdown),
-        const DeepCollectionEquality().hash(countdownSize),
-        const DeepCollectionEquality().hash(countdownLeft),
-        const DeepCollectionEquality().hash(countdownTop),
-        const DeepCollectionEquality().hash(countdownAtStartTime),
-        const DeepCollectionEquality().hash(checkUpdates),
-        const DeepCollectionEquality().hash(hideMarked),
-        const DeepCollectionEquality().hash(hideNumbers),
-        const DeepCollectionEquality().hash(hideManual),
-        const DeepCollectionEquality().hash(reconnect),
-        const DeepCollectionEquality().hash(finishDelay),
-        const DeepCollectionEquality().hash(substituteNumbers),
-        const DeepCollectionEquality().hash(substituteNumbersDelay),
-        const DeepCollectionEquality().hash(logLimit),
-        const DeepCollectionEquality().hash(appTheme),
-        const DeepCollectionEquality().hash(previousVersion)
+        sound,
+        beep,
+        voice,
+        voiceName,
+        volume,
+        pitch,
+        rate,
+        language,
+        recentFile,
+        wakelock,
+        startFab,
+        startFabSize,
+        finishFab,
+        finishFabSize,
+        countdown,
+        countdownSize,
+        countdownLeft,
+        countdownTop,
+        countdownAtStartTime,
+        checkUpdates,
+        hideMarked,
+        hideNumbers,
+        hideManual,
+        reconnect,
+        finishDelay,
+        substituteNumbers,
+        substituteNumbersDelay,
+        logLimit,
+        appTheme,
+        previousVersion
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_AppSettingsDefaultsCopyWith<_$_AppSettingsDefaults> get copyWith =>
-      __$$_AppSettingsDefaultsCopyWithImpl<_$_AppSettingsDefaults>(
+  @pragma('vm:prefer-inline')
+  _$$AppSettingsDefaultsImplCopyWith<_$AppSettingsDefaultsImpl> get copyWith =>
+      __$$AppSettingsDefaultsImplCopyWithImpl<_$AppSettingsDefaultsImpl>(
           this, _$identity);
 
   @override
@@ -1920,7 +1961,7 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
+    TResult? Function(
             bool sound,
             bool beep,
             bool voice,
@@ -1952,7 +1993,7 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             AppTheme appTheme,
             String previousVersion)?
         $default, {
-    TResult Function(
+    TResult? Function(
             bool sound,
             bool beep,
             bool voice,
@@ -2135,8 +2176,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_AppSettings value)? $default, {
-    TResult Function(_AppSettingsDefaults value)? defaults,
+    TResult? Function(_AppSettings value)? $default, {
+    TResult? Function(_AppSettingsDefaults value)? defaults,
   }) {
     return defaults?.call(this);
   }
@@ -2186,73 +2227,79 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final int substituteNumbersDelay,
       final int logLimit,
       final AppTheme appTheme,
-      final String previousVersion}) = _$_AppSettingsDefaults;
+      final String previousVersion}) = _$AppSettingsDefaultsImpl;
 
-  @override // звук
-  bool get sound;
-  @override // вкл/выкл
+// звук
+  @override
+  bool get sound; // вкл/выкл
 // звук обратного отсчёта
-  bool get beep;
-  @override // голосовые сообщения
-  bool get voice;
-  @override // использовать голосовые сообщения
-  bool get voiceName;
-  @override // называть имена участников
-  double get volume;
-  @override // громкость
-  double get pitch;
-  @override // тон речи
-  double get rate;
-  @override // скорость речи
-  String get language;
-  @override // = "ru-RU", // язык
-  String get recentFile;
-  @override // всегда включённый экран
-  bool get wakelock;
-  @override // кнопки "добавить вручную" на экранах старта и финиша
+  @override
+  bool get beep; // голосовые сообщения
+  @override
+  bool get voice; // использовать голосовые сообщения
+  @override
+  bool get voiceName; // называть имена участников
+  @override
+  double get volume; // громкость
+  @override
+  double get pitch; // тон речи
+  @override
+  double get rate; // скорость речи
+  @override
+  String get language; // = "ru-RU", // язык
+  @override
+  String get recentFile; // всегда включённый экран
+  @override
+  bool get wakelock; // кнопки "добавить вручную" на экранах старта и финиша
+  @override
   bool get startFab;
   @override
   double get startFabSize;
   @override
   bool get finishFab;
   @override
-  double get finishFabSize;
-  @override // обратный отсчёт на экране старта
+  double get finishFabSize; // обратный отсчёт на экране старта
+  @override
   bool get countdown;
   @override
   double get countdownSize;
   @override
   double get countdownLeft;
   @override
-  double get countdownTop;
-  @override // показывать обратный отсчёт вместо стартового времени
-  bool get countdownAtStartTime;
-  @override // проверка обновлений
-  bool get checkUpdates;
-  @override // выборка значений в финише
+  double
+      get countdownTop; // показывать обратный отсчёт вместо стартового времени
+  @override
+  bool get countdownAtStartTime; // проверка обновлений
+  @override
+  bool get checkUpdates; // выборка значений в финише
+  @override
   bool get hideMarked;
   @override
   bool get hideNumbers;
   @override
-  bool get hideManual;
-  @override // восстанавливать Bluetooth подключение при обрыве
-  bool get reconnect;
-  @override // задержка в миллисекундах перед показыванием нового финишного времени
-  int get finishDelay;
-  @override // автоподстановка номеров в финишном протоколе
+  bool get hideManual; // восстанавливать Bluetooth подключение при обрыве
+  @override
+  bool
+      get reconnect; // задержка в миллисекундах перед показыванием нового финишного времени
+  @override
+  int get finishDelay; // автоподстановка номеров в финишном протоколе
+  @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay;
-  @override // лог
+  int get substituteNumbersDelay; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
-  int get logLimit;
-  @override // активная тема
-  AppTheme get appTheme;
-  @override // версия при предыдущем запуске
-  String get previousVersion;
   @override
-  @JsonKey(ignore: true)
-  _$$_AppSettingsDefaultsCopyWith<_$_AppSettingsDefaults> get copyWith =>
+  int get logLimit; // активная тема
+  @override
+  AppTheme get appTheme; // версия при предыдущем запуске
+  @override
+  String get previousVersion;
+
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AppSettingsDefaultsImplCopyWith<_$AppSettingsDefaultsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'protocol_bloc.dart';
 
@@ -12,7 +12,7 @@ part of 'protocol_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProtocolEvent {
@@ -47,30 +47,30 @@ mixin _$ProtocolEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -142,34 +142,34 @@ mixin _$ProtocolEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) =>
       throw _privateConstructorUsedError;
@@ -213,49 +213,54 @@ mixin _$ProtocolEvent {
 abstract class $ProtocolEventCopyWith<$Res> {
   factory $ProtocolEventCopyWith(
           ProtocolEvent value, $Res Function(ProtocolEvent) then) =
-      _$ProtocolEventCopyWithImpl<$Res>;
+      _$ProtocolEventCopyWithImpl<$Res, ProtocolEvent>;
 }
 
 /// @nodoc
-class _$ProtocolEventCopyWithImpl<$Res>
+class _$ProtocolEventCopyWithImpl<$Res, $Val extends ProtocolEvent>
     implements $ProtocolEventCopyWith<$Res> {
   _$ProtocolEventCopyWithImpl(this._value, this._then);
 
-  final ProtocolEvent _value;
   // ignore: unused_field
-  final $Res Function(ProtocolEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$SelectProtocolCopyWith<$Res> {
-  factory _$$SelectProtocolCopyWith(
-          _$SelectProtocol value, $Res Function(_$SelectProtocol) then) =
-      __$$SelectProtocolCopyWithImpl<$Res>;
+abstract class _$$SelectProtocolImplCopyWith<$Res> {
+  factory _$$SelectProtocolImplCopyWith(_$SelectProtocolImpl value,
+          $Res Function(_$SelectProtocolImpl) then) =
+      __$$SelectProtocolImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({String? file, PlatformFile? csv});
 }
 
 /// @nodoc
-class __$$SelectProtocolCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$SelectProtocolCopyWith<$Res> {
-  __$$SelectProtocolCopyWithImpl(
-      _$SelectProtocol _value, $Res Function(_$SelectProtocol) _then)
-      : super(_value, (v) => _then(v as _$SelectProtocol));
+class __$$SelectProtocolImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$SelectProtocolImpl>
+    implements _$$SelectProtocolImplCopyWith<$Res> {
+  __$$SelectProtocolImplCopyWithImpl(
+      _$SelectProtocolImpl _value, $Res Function(_$SelectProtocolImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$SelectProtocol get _value => super._value as _$SelectProtocol;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? file = freezed,
     Object? csv = freezed,
   }) {
-    return _then(_$SelectProtocol(
-      file: file == freezed
+    return _then(_$SelectProtocolImpl(
+      file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as String?,
-      csv: csv == freezed
+      csv: freezed == csv
           ? _value.csv
           : csv // ignore: cast_nullable_to_non_nullable
               as PlatformFile?,
@@ -265,8 +270,8 @@ class __$$SelectProtocolCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SelectProtocol implements SelectProtocol {
-  const _$SelectProtocol({this.file, this.csv});
+class _$SelectProtocolImpl implements SelectProtocol {
+  const _$SelectProtocolImpl({this.file, this.csv});
 
   @override
   final String? file;
@@ -279,24 +284,25 @@ class _$SelectProtocol implements SelectProtocol {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectProtocol &&
-            const DeepCollectionEquality().equals(other.file, file) &&
-            const DeepCollectionEquality().equals(other.csv, csv));
+            other is _$SelectProtocolImpl &&
+            (identical(other.file, file) || other.file == file) &&
+            (identical(other.csv, csv) || other.csv == csv));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(file),
-      const DeepCollectionEquality().hash(csv));
+  int get hashCode => Object.hash(runtimeType, file, csv);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$SelectProtocolCopyWith<_$SelectProtocol> get copyWith =>
-      __$$SelectProtocolCopyWithImpl<_$SelectProtocol>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$SelectProtocolImplCopyWith<_$SelectProtocolImpl> get copyWith =>
+      __$$SelectProtocolImplCopyWithImpl<_$SelectProtocolImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -333,30 +339,30 @@ class _$SelectProtocol implements SelectProtocol {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return select?.call(file, csv);
   }
@@ -440,34 +446,34 @@ class _$SelectProtocol implements SelectProtocol {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return select?.call(this);
@@ -516,38 +522,41 @@ class _$SelectProtocol implements SelectProtocol {
 
 abstract class SelectProtocol implements ProtocolEvent {
   const factory SelectProtocol({final String? file, final PlatformFile? csv}) =
-      _$SelectProtocol;
+      _$SelectProtocolImpl;
 
   String? get file;
   PlatformFile? get csv;
-  @JsonKey(ignore: true)
-  _$$SelectProtocolCopyWith<_$SelectProtocol> get copyWith =>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SelectProtocolImplCopyWith<_$SelectProtocolImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DeselectProtocolCopyWith<$Res> {
-  factory _$$DeselectProtocolCopyWith(
-          _$DeselectProtocol value, $Res Function(_$DeselectProtocol) then) =
-      __$$DeselectProtocolCopyWithImpl<$Res>;
+abstract class _$$DeselectProtocolImplCopyWith<$Res> {
+  factory _$$DeselectProtocolImplCopyWith(_$DeselectProtocolImpl value,
+          $Res Function(_$DeselectProtocolImpl) then) =
+      __$$DeselectProtocolImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DeselectProtocolCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$DeselectProtocolCopyWith<$Res> {
-  __$$DeselectProtocolCopyWithImpl(
-      _$DeselectProtocol _value, $Res Function(_$DeselectProtocol) _then)
-      : super(_value, (v) => _then(v as _$DeselectProtocol));
+class __$$DeselectProtocolImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$DeselectProtocolImpl>
+    implements _$$DeselectProtocolImplCopyWith<$Res> {
+  __$$DeselectProtocolImplCopyWithImpl(_$DeselectProtocolImpl _value,
+      $Res Function(_$DeselectProtocolImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$DeselectProtocol get _value => super._value as _$DeselectProtocol;
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$DeselectProtocol implements DeselectProtocol {
-  const _$DeselectProtocol();
+class _$DeselectProtocolImpl implements DeselectProtocol {
+  const _$DeselectProtocolImpl();
 
   @override
   String toString() {
@@ -555,9 +564,9 @@ class _$DeselectProtocol implements DeselectProtocol {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DeselectProtocol);
+        (other.runtimeType == runtimeType && other is _$DeselectProtocolImpl);
   }
 
   @override
@@ -598,30 +607,30 @@ class _$DeselectProtocol implements DeselectProtocol {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return deselect?.call();
   }
@@ -705,34 +714,34 @@ class _$DeselectProtocol implements DeselectProtocol {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return deselect?.call(this);
@@ -780,49 +789,54 @@ class _$DeselectProtocol implements DeselectProtocol {
 }
 
 abstract class DeselectProtocol implements ProtocolEvent {
-  const factory DeselectProtocol() = _$DeselectProtocol;
+  const factory DeselectProtocol() = _$DeselectProtocolImpl;
 }
 
 /// @nodoc
-abstract class _$$ProtocolAddStartNumberCopyWith<$Res> {
-  factory _$$ProtocolAddStartNumberCopyWith(_$ProtocolAddStartNumber value,
-          $Res Function(_$ProtocolAddStartNumber) then) =
-      __$$ProtocolAddStartNumberCopyWithImpl<$Res>;
+abstract class _$$ProtocolAddStartNumberImplCopyWith<$Res> {
+  factory _$$ProtocolAddStartNumberImplCopyWith(
+          _$ProtocolAddStartNumberImpl value,
+          $Res Function(_$ProtocolAddStartNumberImpl) then) =
+      __$$ProtocolAddStartNumberImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({StartTime startTime, bool forceAdd});
 
   $StartTimeCopyWith<$Res> get startTime;
 }
 
 /// @nodoc
-class __$$ProtocolAddStartNumberCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolAddStartNumberCopyWith<$Res> {
-  __$$ProtocolAddStartNumberCopyWithImpl(_$ProtocolAddStartNumber _value,
-      $Res Function(_$ProtocolAddStartNumber) _then)
-      : super(_value, (v) => _then(v as _$ProtocolAddStartNumber));
+class __$$ProtocolAddStartNumberImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolAddStartNumberImpl>
+    implements _$$ProtocolAddStartNumberImplCopyWith<$Res> {
+  __$$ProtocolAddStartNumberImplCopyWithImpl(
+      _$ProtocolAddStartNumberImpl _value,
+      $Res Function(_$ProtocolAddStartNumberImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolAddStartNumber get _value =>
-      super._value as _$ProtocolAddStartNumber;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startTime = freezed,
-    Object? forceAdd = freezed,
+    Object? startTime = null,
+    Object? forceAdd = null,
   }) {
-    return _then(_$ProtocolAddStartNumber(
-      startTime: startTime == freezed
+    return _then(_$ProtocolAddStartNumberImpl(
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as StartTime,
-      forceAdd: forceAdd == freezed
+      forceAdd: null == forceAdd
           ? _value.forceAdd
           : forceAdd // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
 
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $StartTimeCopyWith<$Res> get startTime {
     return $StartTimeCopyWith<$Res>(_value.startTime, (value) {
       return _then(_value.copyWith(startTime: value));
@@ -832,8 +846,8 @@ class __$$ProtocolAddStartNumberCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolAddStartNumber implements ProtocolAddStartNumber {
-  const _$ProtocolAddStartNumber(
+class _$ProtocolAddStartNumberImpl implements ProtocolAddStartNumber {
+  const _$ProtocolAddStartNumberImpl(
       {required this.startTime, this.forceAdd = false});
 
   @override
@@ -848,25 +862,27 @@ class _$ProtocolAddStartNumber implements ProtocolAddStartNumber {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolAddStartNumber &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.forceAdd, forceAdd));
+            other is _$ProtocolAddStartNumberImpl &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.forceAdd, forceAdd) ||
+                other.forceAdd == forceAdd));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(forceAdd));
+  int get hashCode => Object.hash(runtimeType, startTime, forceAdd);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolAddStartNumberCopyWith<_$ProtocolAddStartNumber> get copyWith =>
-      __$$ProtocolAddStartNumberCopyWithImpl<_$ProtocolAddStartNumber>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolAddStartNumberImplCopyWith<_$ProtocolAddStartNumberImpl>
+      get copyWith => __$$ProtocolAddStartNumberImplCopyWithImpl<
+          _$ProtocolAddStartNumberImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -903,30 +919,30 @@ class _$ProtocolAddStartNumber implements ProtocolAddStartNumber {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return addStartNumber?.call(startTime, forceAdd);
   }
@@ -1010,34 +1026,34 @@ class _$ProtocolAddStartNumber implements ProtocolAddStartNumber {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return addStartNumber?.call(this);
@@ -1087,57 +1103,64 @@ class _$ProtocolAddStartNumber implements ProtocolAddStartNumber {
 abstract class ProtocolAddStartNumber implements ProtocolEvent {
   const factory ProtocolAddStartNumber(
       {required final StartTime startTime,
-      final bool forceAdd}) = _$ProtocolAddStartNumber;
+      final bool forceAdd}) = _$ProtocolAddStartNumberImpl;
 
   StartTime get startTime;
   bool get forceAdd;
-  @JsonKey(ignore: true)
-  _$$ProtocolAddStartNumberCopyWith<_$ProtocolAddStartNumber> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolAddStartNumberImplCopyWith<_$ProtocolAddStartNumberImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolUpdateAutomaticCorrectionCopyWith<$Res> {
-  factory _$$ProtocolUpdateAutomaticCorrectionCopyWith(
-          _$ProtocolUpdateAutomaticCorrection value,
-          $Res Function(_$ProtocolUpdateAutomaticCorrection) then) =
-      __$$ProtocolUpdateAutomaticCorrectionCopyWithImpl<$Res>;
+abstract class _$$ProtocolUpdateAutomaticCorrectionImplCopyWith<$Res> {
+  factory _$$ProtocolUpdateAutomaticCorrectionImplCopyWith(
+          _$ProtocolUpdateAutomaticCorrectionImpl value,
+          $Res Function(_$ProtocolUpdateAutomaticCorrectionImpl) then) =
+      __$$ProtocolUpdateAutomaticCorrectionImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({AutomaticStart automaticStart, bool forceUpdate});
 
   $AutomaticStartCopyWith<$Res> get automaticStart;
 }
 
 /// @nodoc
-class __$$ProtocolUpdateAutomaticCorrectionCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolUpdateAutomaticCorrectionCopyWith<$Res> {
-  __$$ProtocolUpdateAutomaticCorrectionCopyWithImpl(
-      _$ProtocolUpdateAutomaticCorrection _value,
-      $Res Function(_$ProtocolUpdateAutomaticCorrection) _then)
-      : super(_value, (v) => _then(v as _$ProtocolUpdateAutomaticCorrection));
+class __$$ProtocolUpdateAutomaticCorrectionImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res,
+        _$ProtocolUpdateAutomaticCorrectionImpl>
+    implements _$$ProtocolUpdateAutomaticCorrectionImplCopyWith<$Res> {
+  __$$ProtocolUpdateAutomaticCorrectionImplCopyWithImpl(
+      _$ProtocolUpdateAutomaticCorrectionImpl _value,
+      $Res Function(_$ProtocolUpdateAutomaticCorrectionImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolUpdateAutomaticCorrection get _value =>
-      super._value as _$ProtocolUpdateAutomaticCorrection;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? automaticStart = freezed,
-    Object? forceUpdate = freezed,
+    Object? automaticStart = null,
+    Object? forceUpdate = null,
   }) {
-    return _then(_$ProtocolUpdateAutomaticCorrection(
-      automaticStart: automaticStart == freezed
+    return _then(_$ProtocolUpdateAutomaticCorrectionImpl(
+      automaticStart: null == automaticStart
           ? _value.automaticStart
           : automaticStart // ignore: cast_nullable_to_non_nullable
               as AutomaticStart,
-      forceUpdate: forceUpdate == freezed
+      forceUpdate: null == forceUpdate
           ? _value.forceUpdate
           : forceUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
 
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $AutomaticStartCopyWith<$Res> get automaticStart {
     return $AutomaticStartCopyWith<$Res>(_value.automaticStart, (value) {
       return _then(_value.copyWith(automaticStart: value));
@@ -1147,9 +1170,9 @@ class __$$ProtocolUpdateAutomaticCorrectionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolUpdateAutomaticCorrection
+class _$ProtocolUpdateAutomaticCorrectionImpl
     implements ProtocolUpdateAutomaticCorrection {
-  const _$ProtocolUpdateAutomaticCorrection(
+  const _$ProtocolUpdateAutomaticCorrectionImpl(
       {required this.automaticStart, this.forceUpdate = false});
 
   @override
@@ -1164,28 +1187,28 @@ class _$ProtocolUpdateAutomaticCorrection
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolUpdateAutomaticCorrection &&
-            const DeepCollectionEquality()
-                .equals(other.automaticStart, automaticStart) &&
-            const DeepCollectionEquality()
-                .equals(other.forceUpdate, forceUpdate));
+            other is _$ProtocolUpdateAutomaticCorrectionImpl &&
+            (identical(other.automaticStart, automaticStart) ||
+                other.automaticStart == automaticStart) &&
+            (identical(other.forceUpdate, forceUpdate) ||
+                other.forceUpdate == forceUpdate));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(automaticStart),
-      const DeepCollectionEquality().hash(forceUpdate));
+  int get hashCode => Object.hash(runtimeType, automaticStart, forceUpdate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolUpdateAutomaticCorrectionCopyWith<
-          _$ProtocolUpdateAutomaticCorrection>
-      get copyWith => __$$ProtocolUpdateAutomaticCorrectionCopyWithImpl<
-          _$ProtocolUpdateAutomaticCorrection>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolUpdateAutomaticCorrectionImplCopyWith<
+          _$ProtocolUpdateAutomaticCorrectionImpl>
+      get copyWith => __$$ProtocolUpdateAutomaticCorrectionImplCopyWithImpl<
+          _$ProtocolUpdateAutomaticCorrectionImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1222,30 +1245,30 @@ class _$ProtocolUpdateAutomaticCorrection
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return updateAutomaticCorrection?.call(automaticStart, forceUpdate);
   }
@@ -1329,34 +1352,34 @@ class _$ProtocolUpdateAutomaticCorrection
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return updateAutomaticCorrection?.call(this);
@@ -1406,44 +1429,48 @@ class _$ProtocolUpdateAutomaticCorrection
 abstract class ProtocolUpdateAutomaticCorrection implements ProtocolEvent {
   const factory ProtocolUpdateAutomaticCorrection(
       {required final AutomaticStart automaticStart,
-      final bool forceUpdate}) = _$ProtocolUpdateAutomaticCorrection;
+      final bool forceUpdate}) = _$ProtocolUpdateAutomaticCorrectionImpl;
 
   AutomaticStart get automaticStart;
   bool get forceUpdate;
-  @JsonKey(ignore: true)
-  _$$ProtocolUpdateAutomaticCorrectionCopyWith<
-          _$ProtocolUpdateAutomaticCorrection>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolUpdateAutomaticCorrectionImplCopyWith<
+          _$ProtocolUpdateAutomaticCorrectionImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolUpdateManualStartTimeCopyWith<$Res> {
-  factory _$$ProtocolUpdateManualStartTimeCopyWith(
-          _$ProtocolUpdateManualStartTime value,
-          $Res Function(_$ProtocolUpdateManualStartTime) then) =
-      __$$ProtocolUpdateManualStartTimeCopyWithImpl<$Res>;
+abstract class _$$ProtocolUpdateManualStartTimeImplCopyWith<$Res> {
+  factory _$$ProtocolUpdateManualStartTimeImplCopyWith(
+          _$ProtocolUpdateManualStartTimeImpl value,
+          $Res Function(_$ProtocolUpdateManualStartTimeImpl) then) =
+      __$$ProtocolUpdateManualStartTimeImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({DateTime time});
 }
 
 /// @nodoc
-class __$$ProtocolUpdateManualStartTimeCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolUpdateManualStartTimeCopyWith<$Res> {
-  __$$ProtocolUpdateManualStartTimeCopyWithImpl(
-      _$ProtocolUpdateManualStartTime _value,
-      $Res Function(_$ProtocolUpdateManualStartTime) _then)
-      : super(_value, (v) => _then(v as _$ProtocolUpdateManualStartTime));
+class __$$ProtocolUpdateManualStartTimeImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res,
+        _$ProtocolUpdateManualStartTimeImpl>
+    implements _$$ProtocolUpdateManualStartTimeImplCopyWith<$Res> {
+  __$$ProtocolUpdateManualStartTimeImplCopyWithImpl(
+      _$ProtocolUpdateManualStartTimeImpl _value,
+      $Res Function(_$ProtocolUpdateManualStartTimeImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolUpdateManualStartTime get _value =>
-      super._value as _$ProtocolUpdateManualStartTime;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
+    Object? time = null,
   }) {
-    return _then(_$ProtocolUpdateManualStartTime(
-      time: time == freezed
+    return _then(_$ProtocolUpdateManualStartTimeImpl(
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -1453,8 +1480,9 @@ class __$$ProtocolUpdateManualStartTimeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolUpdateManualStartTime implements ProtocolUpdateManualStartTime {
-  const _$ProtocolUpdateManualStartTime({required this.time});
+class _$ProtocolUpdateManualStartTimeImpl
+    implements ProtocolUpdateManualStartTime {
+  const _$ProtocolUpdateManualStartTimeImpl({required this.time});
 
   @override
   final DateTime time;
@@ -1465,22 +1493,25 @@ class _$ProtocolUpdateManualStartTime implements ProtocolUpdateManualStartTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolUpdateManualStartTime &&
-            const DeepCollectionEquality().equals(other.time, time));
+            other is _$ProtocolUpdateManualStartTimeImpl &&
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(time));
+  int get hashCode => Object.hash(runtimeType, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolUpdateManualStartTimeCopyWith<_$ProtocolUpdateManualStartTime>
-      get copyWith => __$$ProtocolUpdateManualStartTimeCopyWithImpl<
-          _$ProtocolUpdateManualStartTime>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolUpdateManualStartTimeImplCopyWith<
+          _$ProtocolUpdateManualStartTimeImpl>
+      get copyWith => __$$ProtocolUpdateManualStartTimeImplCopyWithImpl<
+          _$ProtocolUpdateManualStartTimeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1517,30 +1548,30 @@ class _$ProtocolUpdateManualStartTime implements ProtocolUpdateManualStartTime {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return updateManualStartTime?.call(time);
   }
@@ -1624,34 +1655,34 @@ class _$ProtocolUpdateManualStartTime implements ProtocolUpdateManualStartTime {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return updateManualStartTime?.call(this);
@@ -1700,44 +1731,50 @@ class _$ProtocolUpdateManualStartTime implements ProtocolUpdateManualStartTime {
 
 abstract class ProtocolUpdateManualStartTime implements ProtocolEvent {
   const factory ProtocolUpdateManualStartTime({required final DateTime time}) =
-      _$ProtocolUpdateManualStartTime;
+      _$ProtocolUpdateManualStartTimeImpl;
 
   DateTime get time;
-  @JsonKey(ignore: true)
-  _$$ProtocolUpdateManualStartTimeCopyWith<_$ProtocolUpdateManualStartTime>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolUpdateManualStartTimeImplCopyWith<
+          _$ProtocolUpdateManualStartTimeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolAddFinishTimeCopyWith<$Res> {
-  factory _$$ProtocolAddFinishTimeCopyWith(_$ProtocolAddFinishTime value,
-          $Res Function(_$ProtocolAddFinishTime) then) =
-      __$$ProtocolAddFinishTimeCopyWithImpl<$Res>;
+abstract class _$$ProtocolAddFinishTimeImplCopyWith<$Res> {
+  factory _$$ProtocolAddFinishTimeImplCopyWith(
+          _$ProtocolAddFinishTimeImpl value,
+          $Res Function(_$ProtocolAddFinishTimeImpl) then) =
+      __$$ProtocolAddFinishTimeImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({String time, DateTime timeStamp});
 }
 
 /// @nodoc
-class __$$ProtocolAddFinishTimeCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolAddFinishTimeCopyWith<$Res> {
-  __$$ProtocolAddFinishTimeCopyWithImpl(_$ProtocolAddFinishTime _value,
-      $Res Function(_$ProtocolAddFinishTime) _then)
-      : super(_value, (v) => _then(v as _$ProtocolAddFinishTime));
+class __$$ProtocolAddFinishTimeImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolAddFinishTimeImpl>
+    implements _$$ProtocolAddFinishTimeImplCopyWith<$Res> {
+  __$$ProtocolAddFinishTimeImplCopyWithImpl(_$ProtocolAddFinishTimeImpl _value,
+      $Res Function(_$ProtocolAddFinishTimeImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolAddFinishTime get _value => super._value as _$ProtocolAddFinishTime;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
-    Object? timeStamp = freezed,
+    Object? time = null,
+    Object? timeStamp = null,
   }) {
-    return _then(_$ProtocolAddFinishTime(
-      time: time == freezed
+    return _then(_$ProtocolAddFinishTimeImpl(
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
-      timeStamp: timeStamp == freezed
+      timeStamp: null == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -1747,8 +1784,9 @@ class __$$ProtocolAddFinishTimeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolAddFinishTime implements ProtocolAddFinishTime {
-  const _$ProtocolAddFinishTime({required this.time, required this.timeStamp});
+class _$ProtocolAddFinishTimeImpl implements ProtocolAddFinishTime {
+  const _$ProtocolAddFinishTimeImpl(
+      {required this.time, required this.timeStamp});
 
   @override
   final String time;
@@ -1761,25 +1799,26 @@ class _$ProtocolAddFinishTime implements ProtocolAddFinishTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolAddFinishTime &&
-            const DeepCollectionEquality().equals(other.time, time) &&
-            const DeepCollectionEquality().equals(other.timeStamp, timeStamp));
+            other is _$ProtocolAddFinishTimeImpl &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.timeStamp, timeStamp) ||
+                other.timeStamp == timeStamp));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(timeStamp));
+  int get hashCode => Object.hash(runtimeType, time, timeStamp);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolAddFinishTimeCopyWith<_$ProtocolAddFinishTime> get copyWith =>
-      __$$ProtocolAddFinishTimeCopyWithImpl<_$ProtocolAddFinishTime>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolAddFinishTimeImplCopyWith<_$ProtocolAddFinishTimeImpl>
+      get copyWith => __$$ProtocolAddFinishTimeImplCopyWithImpl<
+          _$ProtocolAddFinishTimeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1816,30 +1855,30 @@ class _$ProtocolAddFinishTime implements ProtocolAddFinishTime {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return addFinishTime?.call(time, timeStamp);
   }
@@ -1923,34 +1962,34 @@ class _$ProtocolAddFinishTime implements ProtocolAddFinishTime {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return addFinishTime?.call(this);
@@ -2000,43 +2039,46 @@ class _$ProtocolAddFinishTime implements ProtocolAddFinishTime {
 abstract class ProtocolAddFinishTime implements ProtocolEvent {
   const factory ProtocolAddFinishTime(
       {required final String time,
-      required final DateTime timeStamp}) = _$ProtocolAddFinishTime;
+      required final DateTime timeStamp}) = _$ProtocolAddFinishTimeImpl;
 
   String get time;
   DateTime get timeStamp;
-  @JsonKey(ignore: true)
-  _$$ProtocolAddFinishTimeCopyWith<_$ProtocolAddFinishTime> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolAddFinishTimeImplCopyWith<_$ProtocolAddFinishTimeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolAddFinishTimeManualCopyWith<$Res> {
-  factory _$$ProtocolAddFinishTimeManualCopyWith(
-          _$ProtocolAddFinishTimeManual value,
-          $Res Function(_$ProtocolAddFinishTimeManual) then) =
-      __$$ProtocolAddFinishTimeManualCopyWithImpl<$Res>;
+abstract class _$$ProtocolAddFinishTimeManualImplCopyWith<$Res> {
+  factory _$$ProtocolAddFinishTimeManualImplCopyWith(
+          _$ProtocolAddFinishTimeManualImpl value,
+          $Res Function(_$ProtocolAddFinishTimeManualImpl) then) =
+      __$$ProtocolAddFinishTimeManualImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({String time});
 }
 
 /// @nodoc
-class __$$ProtocolAddFinishTimeManualCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolAddFinishTimeManualCopyWith<$Res> {
-  __$$ProtocolAddFinishTimeManualCopyWithImpl(
-      _$ProtocolAddFinishTimeManual _value,
-      $Res Function(_$ProtocolAddFinishTimeManual) _then)
-      : super(_value, (v) => _then(v as _$ProtocolAddFinishTimeManual));
+class __$$ProtocolAddFinishTimeManualImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolAddFinishTimeManualImpl>
+    implements _$$ProtocolAddFinishTimeManualImplCopyWith<$Res> {
+  __$$ProtocolAddFinishTimeManualImplCopyWithImpl(
+      _$ProtocolAddFinishTimeManualImpl _value,
+      $Res Function(_$ProtocolAddFinishTimeManualImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolAddFinishTimeManual get _value =>
-      super._value as _$ProtocolAddFinishTimeManual;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
+    Object? time = null,
   }) {
-    return _then(_$ProtocolAddFinishTimeManual(
-      time: time == freezed
+    return _then(_$ProtocolAddFinishTimeManualImpl(
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
@@ -2046,8 +2088,8 @@ class __$$ProtocolAddFinishTimeManualCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolAddFinishTimeManual implements ProtocolAddFinishTimeManual {
-  const _$ProtocolAddFinishTimeManual({required this.time});
+class _$ProtocolAddFinishTimeManualImpl implements ProtocolAddFinishTimeManual {
+  const _$ProtocolAddFinishTimeManualImpl({required this.time});
 
   @override
   final String time;
@@ -2058,22 +2100,24 @@ class _$ProtocolAddFinishTimeManual implements ProtocolAddFinishTimeManual {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolAddFinishTimeManual &&
-            const DeepCollectionEquality().equals(other.time, time));
+            other is _$ProtocolAddFinishTimeManualImpl &&
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(time));
+  int get hashCode => Object.hash(runtimeType, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolAddFinishTimeManualCopyWith<_$ProtocolAddFinishTimeManual>
-      get copyWith => __$$ProtocolAddFinishTimeManualCopyWithImpl<
-          _$ProtocolAddFinishTimeManual>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolAddFinishTimeManualImplCopyWith<_$ProtocolAddFinishTimeManualImpl>
+      get copyWith => __$$ProtocolAddFinishTimeManualImplCopyWithImpl<
+          _$ProtocolAddFinishTimeManualImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2110,30 +2154,30 @@ class _$ProtocolAddFinishTimeManual implements ProtocolAddFinishTimeManual {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return addFinishTimeManual?.call(time);
   }
@@ -2217,34 +2261,34 @@ class _$ProtocolAddFinishTimeManual implements ProtocolAddFinishTimeManual {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return addFinishTimeManual?.call(this);
@@ -2293,51 +2337,58 @@ class _$ProtocolAddFinishTimeManual implements ProtocolAddFinishTimeManual {
 
 abstract class ProtocolAddFinishTimeManual implements ProtocolEvent {
   const factory ProtocolAddFinishTimeManual({required final String time}) =
-      _$ProtocolAddFinishTimeManual;
+      _$ProtocolAddFinishTimeManualImpl;
 
   String get time;
-  @JsonKey(ignore: true)
-  _$$ProtocolAddFinishTimeManualCopyWith<_$ProtocolAddFinishTimeManual>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolAddFinishTimeManualImplCopyWith<_$ProtocolAddFinishTimeManualImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolUpdateItemInfoAtStartCopyWith<$Res> {
-  factory _$$ProtocolUpdateItemInfoAtStartCopyWith(
-          _$ProtocolUpdateItemInfoAtStart value,
-          $Res Function(_$ProtocolUpdateItemInfoAtStart) then) =
-      __$$ProtocolUpdateItemInfoAtStartCopyWithImpl<$Res>;
+abstract class _$$ProtocolUpdateItemInfoAtStartImplCopyWith<$Res> {
+  factory _$$ProtocolUpdateItemInfoAtStartImplCopyWith(
+          _$ProtocolUpdateItemInfoAtStartImpl value,
+          $Res Function(_$ProtocolUpdateItemInfoAtStartImpl) then) =
+      __$$ProtocolUpdateItemInfoAtStartImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({StartItem item});
 
   $StartItemCopyWith<$Res> get item;
 }
 
 /// @nodoc
-class __$$ProtocolUpdateItemInfoAtStartCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolUpdateItemInfoAtStartCopyWith<$Res> {
-  __$$ProtocolUpdateItemInfoAtStartCopyWithImpl(
-      _$ProtocolUpdateItemInfoAtStart _value,
-      $Res Function(_$ProtocolUpdateItemInfoAtStart) _then)
-      : super(_value, (v) => _then(v as _$ProtocolUpdateItemInfoAtStart));
+class __$$ProtocolUpdateItemInfoAtStartImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res,
+        _$ProtocolUpdateItemInfoAtStartImpl>
+    implements _$$ProtocolUpdateItemInfoAtStartImplCopyWith<$Res> {
+  __$$ProtocolUpdateItemInfoAtStartImplCopyWithImpl(
+      _$ProtocolUpdateItemInfoAtStartImpl _value,
+      $Res Function(_$ProtocolUpdateItemInfoAtStartImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolUpdateItemInfoAtStart get _value =>
-      super._value as _$ProtocolUpdateItemInfoAtStart;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? item = freezed,
+    Object? item = null,
   }) {
-    return _then(_$ProtocolUpdateItemInfoAtStart(
-      item: item == freezed
+    return _then(_$ProtocolUpdateItemInfoAtStartImpl(
+      item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as StartItem,
     ));
   }
 
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $StartItemCopyWith<$Res> get item {
     return $StartItemCopyWith<$Res>(_value.item, (value) {
       return _then(_value.copyWith(item: value));
@@ -2347,8 +2398,9 @@ class __$$ProtocolUpdateItemInfoAtStartCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolUpdateItemInfoAtStart implements ProtocolUpdateItemInfoAtStart {
-  const _$ProtocolUpdateItemInfoAtStart({required this.item});
+class _$ProtocolUpdateItemInfoAtStartImpl
+    implements ProtocolUpdateItemInfoAtStart {
+  const _$ProtocolUpdateItemInfoAtStartImpl({required this.item});
 
   @override
   final StartItem item;
@@ -2359,22 +2411,25 @@ class _$ProtocolUpdateItemInfoAtStart implements ProtocolUpdateItemInfoAtStart {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolUpdateItemInfoAtStart &&
-            const DeepCollectionEquality().equals(other.item, item));
+            other is _$ProtocolUpdateItemInfoAtStartImpl &&
+            (identical(other.item, item) || other.item == item));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(item));
+  int get hashCode => Object.hash(runtimeType, item);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolUpdateItemInfoAtStartCopyWith<_$ProtocolUpdateItemInfoAtStart>
-      get copyWith => __$$ProtocolUpdateItemInfoAtStartCopyWithImpl<
-          _$ProtocolUpdateItemInfoAtStart>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolUpdateItemInfoAtStartImplCopyWith<
+          _$ProtocolUpdateItemInfoAtStartImpl>
+      get copyWith => __$$ProtocolUpdateItemInfoAtStartImplCopyWithImpl<
+          _$ProtocolUpdateItemInfoAtStartImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2411,30 +2466,30 @@ class _$ProtocolUpdateItemInfoAtStart implements ProtocolUpdateItemInfoAtStart {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return updateItemInfoAtStart?.call(item);
   }
@@ -2518,34 +2573,34 @@ class _$ProtocolUpdateItemInfoAtStart implements ProtocolUpdateItemInfoAtStart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return updateItemInfoAtStart?.call(this);
@@ -2594,41 +2649,45 @@ class _$ProtocolUpdateItemInfoAtStart implements ProtocolUpdateItemInfoAtStart {
 
 abstract class ProtocolUpdateItemInfoAtStart implements ProtocolEvent {
   const factory ProtocolUpdateItemInfoAtStart({required final StartItem item}) =
-      _$ProtocolUpdateItemInfoAtStart;
+      _$ProtocolUpdateItemInfoAtStartImpl;
 
   StartItem get item;
-  @JsonKey(ignore: true)
-  _$$ProtocolUpdateItemInfoAtStartCopyWith<_$ProtocolUpdateItemInfoAtStart>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolUpdateItemInfoAtStartImplCopyWith<
+          _$ProtocolUpdateItemInfoAtStartImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolClearStartResultsDebugCopyWith<$Res> {
-  factory _$$ProtocolClearStartResultsDebugCopyWith(
-          _$ProtocolClearStartResultsDebug value,
-          $Res Function(_$ProtocolClearStartResultsDebug) then) =
-      __$$ProtocolClearStartResultsDebugCopyWithImpl<$Res>;
+abstract class _$$ProtocolClearStartResultsDebugImplCopyWith<$Res> {
+  factory _$$ProtocolClearStartResultsDebugImplCopyWith(
+          _$ProtocolClearStartResultsDebugImpl value,
+          $Res Function(_$ProtocolClearStartResultsDebugImpl) then) =
+      __$$ProtocolClearStartResultsDebugImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProtocolClearStartResultsDebugCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolClearStartResultsDebugCopyWith<$Res> {
-  __$$ProtocolClearStartResultsDebugCopyWithImpl(
-      _$ProtocolClearStartResultsDebug _value,
-      $Res Function(_$ProtocolClearStartResultsDebug) _then)
-      : super(_value, (v) => _then(v as _$ProtocolClearStartResultsDebug));
+class __$$ProtocolClearStartResultsDebugImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res,
+        _$ProtocolClearStartResultsDebugImpl>
+    implements _$$ProtocolClearStartResultsDebugImplCopyWith<$Res> {
+  __$$ProtocolClearStartResultsDebugImplCopyWithImpl(
+      _$ProtocolClearStartResultsDebugImpl _value,
+      $Res Function(_$ProtocolClearStartResultsDebugImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolClearStartResultsDebug get _value =>
-      super._value as _$ProtocolClearStartResultsDebug;
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ProtocolClearStartResultsDebug
+class _$ProtocolClearStartResultsDebugImpl
     implements ProtocolClearStartResultsDebug {
-  const _$ProtocolClearStartResultsDebug();
+  const _$ProtocolClearStartResultsDebugImpl();
 
   @override
   String toString() {
@@ -2636,10 +2695,10 @@ class _$ProtocolClearStartResultsDebug
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolClearStartResultsDebug);
+            other is _$ProtocolClearStartResultsDebugImpl);
   }
 
   @override
@@ -2680,30 +2739,30 @@ class _$ProtocolClearStartResultsDebug
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return clearStartResultsDebug?.call();
   }
@@ -2787,34 +2846,34 @@ class _$ProtocolClearStartResultsDebug
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return clearStartResultsDebug?.call(this);
@@ -2863,36 +2922,36 @@ class _$ProtocolClearStartResultsDebug
 
 abstract class ProtocolClearStartResultsDebug implements ProtocolEvent {
   const factory ProtocolClearStartResultsDebug() =
-      _$ProtocolClearStartResultsDebug;
+      _$ProtocolClearStartResultsDebugImpl;
 }
 
 /// @nodoc
-abstract class _$$ProtocolClearFinishResultsDebugCopyWith<$Res> {
-  factory _$$ProtocolClearFinishResultsDebugCopyWith(
-          _$ProtocolClearFinishResultsDebug value,
-          $Res Function(_$ProtocolClearFinishResultsDebug) then) =
-      __$$ProtocolClearFinishResultsDebugCopyWithImpl<$Res>;
+abstract class _$$ProtocolClearFinishResultsDebugImplCopyWith<$Res> {
+  factory _$$ProtocolClearFinishResultsDebugImplCopyWith(
+          _$ProtocolClearFinishResultsDebugImpl value,
+          $Res Function(_$ProtocolClearFinishResultsDebugImpl) then) =
+      __$$ProtocolClearFinishResultsDebugImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProtocolClearFinishResultsDebugCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolClearFinishResultsDebugCopyWith<$Res> {
-  __$$ProtocolClearFinishResultsDebugCopyWithImpl(
-      _$ProtocolClearFinishResultsDebug _value,
-      $Res Function(_$ProtocolClearFinishResultsDebug) _then)
-      : super(_value, (v) => _then(v as _$ProtocolClearFinishResultsDebug));
+class __$$ProtocolClearFinishResultsDebugImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res,
+        _$ProtocolClearFinishResultsDebugImpl>
+    implements _$$ProtocolClearFinishResultsDebugImplCopyWith<$Res> {
+  __$$ProtocolClearFinishResultsDebugImplCopyWithImpl(
+      _$ProtocolClearFinishResultsDebugImpl _value,
+      $Res Function(_$ProtocolClearFinishResultsDebugImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolClearFinishResultsDebug get _value =>
-      super._value as _$ProtocolClearFinishResultsDebug;
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ProtocolClearFinishResultsDebug
+class _$ProtocolClearFinishResultsDebugImpl
     implements ProtocolClearFinishResultsDebug {
-  const _$ProtocolClearFinishResultsDebug();
+  const _$ProtocolClearFinishResultsDebugImpl();
 
   @override
   String toString() {
@@ -2900,10 +2959,10 @@ class _$ProtocolClearFinishResultsDebug
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolClearFinishResultsDebug);
+            other is _$ProtocolClearFinishResultsDebugImpl);
   }
 
   @override
@@ -2944,30 +3003,30 @@ class _$ProtocolClearFinishResultsDebug
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return clearFinishResultsDebug?.call();
   }
@@ -3051,34 +3110,34 @@ class _$ProtocolClearFinishResultsDebug
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return clearFinishResultsDebug?.call(this);
@@ -3127,35 +3186,36 @@ class _$ProtocolClearFinishResultsDebug
 
 abstract class ProtocolClearFinishResultsDebug implements ProtocolEvent {
   const factory ProtocolClearFinishResultsDebug() =
-      _$ProtocolClearFinishResultsDebug;
+      _$ProtocolClearFinishResultsDebugImpl;
 }
 
 /// @nodoc
-abstract class _$$ProtocolHideAllFinishResultsCopyWith<$Res> {
-  factory _$$ProtocolHideAllFinishResultsCopyWith(
-          _$ProtocolHideAllFinishResults value,
-          $Res Function(_$ProtocolHideAllFinishResults) then) =
-      __$$ProtocolHideAllFinishResultsCopyWithImpl<$Res>;
+abstract class _$$ProtocolHideAllFinishResultsImplCopyWith<$Res> {
+  factory _$$ProtocolHideAllFinishResultsImplCopyWith(
+          _$ProtocolHideAllFinishResultsImpl value,
+          $Res Function(_$ProtocolHideAllFinishResultsImpl) then) =
+      __$$ProtocolHideAllFinishResultsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProtocolHideAllFinishResultsCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolHideAllFinishResultsCopyWith<$Res> {
-  __$$ProtocolHideAllFinishResultsCopyWithImpl(
-      _$ProtocolHideAllFinishResults _value,
-      $Res Function(_$ProtocolHideAllFinishResults) _then)
-      : super(_value, (v) => _then(v as _$ProtocolHideAllFinishResults));
+class __$$ProtocolHideAllFinishResultsImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res,
+        _$ProtocolHideAllFinishResultsImpl>
+    implements _$$ProtocolHideAllFinishResultsImplCopyWith<$Res> {
+  __$$ProtocolHideAllFinishResultsImplCopyWithImpl(
+      _$ProtocolHideAllFinishResultsImpl _value,
+      $Res Function(_$ProtocolHideAllFinishResultsImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolHideAllFinishResults get _value =>
-      super._value as _$ProtocolHideAllFinishResults;
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ProtocolHideAllFinishResults implements ProtocolHideAllFinishResults {
-  const _$ProtocolHideAllFinishResults();
+class _$ProtocolHideAllFinishResultsImpl
+    implements ProtocolHideAllFinishResults {
+  const _$ProtocolHideAllFinishResultsImpl();
 
   @override
   String toString() {
@@ -3163,10 +3223,10 @@ class _$ProtocolHideAllFinishResults implements ProtocolHideAllFinishResults {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolHideAllFinishResults);
+            other is _$ProtocolHideAllFinishResultsImpl);
   }
 
   @override
@@ -3207,30 +3267,30 @@ class _$ProtocolHideAllFinishResults implements ProtocolHideAllFinishResults {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return hideAllFinishResults?.call();
   }
@@ -3314,34 +3374,34 @@ class _$ProtocolHideAllFinishResults implements ProtocolHideAllFinishResults {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return hideAllFinishResults?.call(this);
@@ -3389,37 +3449,38 @@ class _$ProtocolHideAllFinishResults implements ProtocolHideAllFinishResults {
 }
 
 abstract class ProtocolHideAllFinishResults implements ProtocolEvent {
-  const factory ProtocolHideAllFinishResults() = _$ProtocolHideAllFinishResults;
+  const factory ProtocolHideAllFinishResults() =
+      _$ProtocolHideAllFinishResultsImpl;
 }
 
 /// @nodoc
-abstract class _$$ProtocolClearNumberAtFinishCopyWith<$Res> {
-  factory _$$ProtocolClearNumberAtFinishCopyWith(
-          _$ProtocolClearNumberAtFinish value,
-          $Res Function(_$ProtocolClearNumberAtFinish) then) =
-      __$$ProtocolClearNumberAtFinishCopyWithImpl<$Res>;
+abstract class _$$ProtocolClearNumberAtFinishImplCopyWith<$Res> {
+  factory _$$ProtocolClearNumberAtFinishImplCopyWith(
+          _$ProtocolClearNumberAtFinishImpl value,
+          $Res Function(_$ProtocolClearNumberAtFinishImpl) then) =
+      __$$ProtocolClearNumberAtFinishImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int number});
 }
 
 /// @nodoc
-class __$$ProtocolClearNumberAtFinishCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolClearNumberAtFinishCopyWith<$Res> {
-  __$$ProtocolClearNumberAtFinishCopyWithImpl(
-      _$ProtocolClearNumberAtFinish _value,
-      $Res Function(_$ProtocolClearNumberAtFinish) _then)
-      : super(_value, (v) => _then(v as _$ProtocolClearNumberAtFinish));
+class __$$ProtocolClearNumberAtFinishImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolClearNumberAtFinishImpl>
+    implements _$$ProtocolClearNumberAtFinishImplCopyWith<$Res> {
+  __$$ProtocolClearNumberAtFinishImplCopyWithImpl(
+      _$ProtocolClearNumberAtFinishImpl _value,
+      $Res Function(_$ProtocolClearNumberAtFinishImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolClearNumberAtFinish get _value =>
-      super._value as _$ProtocolClearNumberAtFinish;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = freezed,
+    Object? number = null,
   }) {
-    return _then(_$ProtocolClearNumberAtFinish(
-      number: number == freezed
+    return _then(_$ProtocolClearNumberAtFinishImpl(
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
@@ -3429,8 +3490,8 @@ class __$$ProtocolClearNumberAtFinishCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolClearNumberAtFinish implements ProtocolClearNumberAtFinish {
-  const _$ProtocolClearNumberAtFinish({required this.number});
+class _$ProtocolClearNumberAtFinishImpl implements ProtocolClearNumberAtFinish {
+  const _$ProtocolClearNumberAtFinishImpl({required this.number});
 
   @override
   final int number;
@@ -3441,22 +3502,24 @@ class _$ProtocolClearNumberAtFinish implements ProtocolClearNumberAtFinish {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolClearNumberAtFinish &&
-            const DeepCollectionEquality().equals(other.number, number));
+            other is _$ProtocolClearNumberAtFinishImpl &&
+            (identical(other.number, number) || other.number == number));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(number));
+  int get hashCode => Object.hash(runtimeType, number);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolClearNumberAtFinishCopyWith<_$ProtocolClearNumberAtFinish>
-      get copyWith => __$$ProtocolClearNumberAtFinishCopyWithImpl<
-          _$ProtocolClearNumberAtFinish>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolClearNumberAtFinishImplCopyWith<_$ProtocolClearNumberAtFinishImpl>
+      get copyWith => __$$ProtocolClearNumberAtFinishImplCopyWithImpl<
+          _$ProtocolClearNumberAtFinishImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3493,30 +3556,30 @@ class _$ProtocolClearNumberAtFinish implements ProtocolClearNumberAtFinish {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return clearNumberAtFinish?.call(number);
   }
@@ -3600,34 +3663,34 @@ class _$ProtocolClearNumberAtFinish implements ProtocolClearNumberAtFinish {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return clearNumberAtFinish?.call(this);
@@ -3676,39 +3739,43 @@ class _$ProtocolClearNumberAtFinish implements ProtocolClearNumberAtFinish {
 
 abstract class ProtocolClearNumberAtFinish implements ProtocolEvent {
   const factory ProtocolClearNumberAtFinish({required final int number}) =
-      _$ProtocolClearNumberAtFinish;
+      _$ProtocolClearNumberAtFinishImpl;
 
   int get number;
-  @JsonKey(ignore: true)
-  _$$ProtocolClearNumberAtFinishCopyWith<_$ProtocolClearNumberAtFinish>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolClearNumberAtFinishImplCopyWith<_$ProtocolClearNumberAtFinishImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolSetDNSCopyWith<$Res> {
-  factory _$$ProtocolSetDNSCopyWith(
-          _$ProtocolSetDNS value, $Res Function(_$ProtocolSetDNS) then) =
-      __$$ProtocolSetDNSCopyWithImpl<$Res>;
+abstract class _$$ProtocolSetDNSImplCopyWith<$Res> {
+  factory _$$ProtocolSetDNSImplCopyWith(_$ProtocolSetDNSImpl value,
+          $Res Function(_$ProtocolSetDNSImpl) then) =
+      __$$ProtocolSetDNSImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int number});
 }
 
 /// @nodoc
-class __$$ProtocolSetDNSCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolSetDNSCopyWith<$Res> {
-  __$$ProtocolSetDNSCopyWithImpl(
-      _$ProtocolSetDNS _value, $Res Function(_$ProtocolSetDNS) _then)
-      : super(_value, (v) => _then(v as _$ProtocolSetDNS));
+class __$$ProtocolSetDNSImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolSetDNSImpl>
+    implements _$$ProtocolSetDNSImplCopyWith<$Res> {
+  __$$ProtocolSetDNSImplCopyWithImpl(
+      _$ProtocolSetDNSImpl _value, $Res Function(_$ProtocolSetDNSImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolSetDNS get _value => super._value as _$ProtocolSetDNS;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = freezed,
+    Object? number = null,
   }) {
-    return _then(_$ProtocolSetDNS(
-      number: number == freezed
+    return _then(_$ProtocolSetDNSImpl(
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
@@ -3718,8 +3785,8 @@ class __$$ProtocolSetDNSCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolSetDNS implements ProtocolSetDNS {
-  const _$ProtocolSetDNS({required this.number});
+class _$ProtocolSetDNSImpl implements ProtocolSetDNS {
+  const _$ProtocolSetDNSImpl({required this.number});
 
   @override
   final int number;
@@ -3730,21 +3797,24 @@ class _$ProtocolSetDNS implements ProtocolSetDNS {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolSetDNS &&
-            const DeepCollectionEquality().equals(other.number, number));
+            other is _$ProtocolSetDNSImpl &&
+            (identical(other.number, number) || other.number == number));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(number));
+  int get hashCode => Object.hash(runtimeType, number);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolSetDNSCopyWith<_$ProtocolSetDNS> get copyWith =>
-      __$$ProtocolSetDNSCopyWithImpl<_$ProtocolSetDNS>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolSetDNSImplCopyWith<_$ProtocolSetDNSImpl> get copyWith =>
+      __$$ProtocolSetDNSImplCopyWithImpl<_$ProtocolSetDNSImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3781,30 +3851,30 @@ class _$ProtocolSetDNS implements ProtocolSetDNS {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return setDNS?.call(number);
   }
@@ -3888,34 +3958,34 @@ class _$ProtocolSetDNS implements ProtocolSetDNS {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return setDNS?.call(this);
@@ -3963,39 +4033,44 @@ class _$ProtocolSetDNS implements ProtocolSetDNS {
 }
 
 abstract class ProtocolSetDNS implements ProtocolEvent {
-  const factory ProtocolSetDNS({required final int number}) = _$ProtocolSetDNS;
+  const factory ProtocolSetDNS({required final int number}) =
+      _$ProtocolSetDNSImpl;
 
   int get number;
-  @JsonKey(ignore: true)
-  _$$ProtocolSetDNSCopyWith<_$ProtocolSetDNS> get copyWith =>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolSetDNSImplCopyWith<_$ProtocolSetDNSImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolSetDNFCopyWith<$Res> {
-  factory _$$ProtocolSetDNFCopyWith(
-          _$ProtocolSetDNF value, $Res Function(_$ProtocolSetDNF) then) =
-      __$$ProtocolSetDNFCopyWithImpl<$Res>;
+abstract class _$$ProtocolSetDNFImplCopyWith<$Res> {
+  factory _$$ProtocolSetDNFImplCopyWith(_$ProtocolSetDNFImpl value,
+          $Res Function(_$ProtocolSetDNFImpl) then) =
+      __$$ProtocolSetDNFImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int number});
 }
 
 /// @nodoc
-class __$$ProtocolSetDNFCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolSetDNFCopyWith<$Res> {
-  __$$ProtocolSetDNFCopyWithImpl(
-      _$ProtocolSetDNF _value, $Res Function(_$ProtocolSetDNF) _then)
-      : super(_value, (v) => _then(v as _$ProtocolSetDNF));
+class __$$ProtocolSetDNFImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolSetDNFImpl>
+    implements _$$ProtocolSetDNFImplCopyWith<$Res> {
+  __$$ProtocolSetDNFImplCopyWithImpl(
+      _$ProtocolSetDNFImpl _value, $Res Function(_$ProtocolSetDNFImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolSetDNF get _value => super._value as _$ProtocolSetDNF;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = freezed,
+    Object? number = null,
   }) {
-    return _then(_$ProtocolSetDNF(
-      number: number == freezed
+    return _then(_$ProtocolSetDNFImpl(
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
@@ -4005,8 +4080,8 @@ class __$$ProtocolSetDNFCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolSetDNF implements ProtocolSetDNF {
-  const _$ProtocolSetDNF({required this.number});
+class _$ProtocolSetDNFImpl implements ProtocolSetDNF {
+  const _$ProtocolSetDNFImpl({required this.number});
 
   @override
   final int number;
@@ -4017,21 +4092,24 @@ class _$ProtocolSetDNF implements ProtocolSetDNF {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolSetDNF &&
-            const DeepCollectionEquality().equals(other.number, number));
+            other is _$ProtocolSetDNFImpl &&
+            (identical(other.number, number) || other.number == number));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(number));
+  int get hashCode => Object.hash(runtimeType, number);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolSetDNFCopyWith<_$ProtocolSetDNF> get copyWith =>
-      __$$ProtocolSetDNFCopyWithImpl<_$ProtocolSetDNF>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolSetDNFImplCopyWith<_$ProtocolSetDNFImpl> get copyWith =>
+      __$$ProtocolSetDNFImplCopyWithImpl<_$ProtocolSetDNFImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4068,30 +4146,30 @@ class _$ProtocolSetDNF implements ProtocolSetDNF {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return setDNF?.call(number);
   }
@@ -4175,34 +4253,34 @@ class _$ProtocolSetDNF implements ProtocolSetDNF {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return setDNF?.call(this);
@@ -4250,40 +4328,46 @@ class _$ProtocolSetDNF implements ProtocolSetDNF {
 }
 
 abstract class ProtocolSetDNF implements ProtocolEvent {
-  const factory ProtocolSetDNF({required final int number}) = _$ProtocolSetDNF;
+  const factory ProtocolSetDNF({required final int number}) =
+      _$ProtocolSetDNFImpl;
 
   int get number;
-  @JsonKey(ignore: true)
-  _$$ProtocolSetDNFCopyWith<_$ProtocolSetDNF> get copyWith =>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolSetDNFImplCopyWith<_$ProtocolSetDNFImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolHideFinishTimeCopyWith<$Res> {
-  factory _$$ProtocolHideFinishTimeCopyWith(_$ProtocolHideFinishTime value,
-          $Res Function(_$ProtocolHideFinishTime) then) =
-      __$$ProtocolHideFinishTimeCopyWithImpl<$Res>;
+abstract class _$$ProtocolHideFinishTimeImplCopyWith<$Res> {
+  factory _$$ProtocolHideFinishTimeImplCopyWith(
+          _$ProtocolHideFinishTimeImpl value,
+          $Res Function(_$ProtocolHideFinishTimeImpl) then) =
+      __$$ProtocolHideFinishTimeImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int id});
 }
 
 /// @nodoc
-class __$$ProtocolHideFinishTimeCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolHideFinishTimeCopyWith<$Res> {
-  __$$ProtocolHideFinishTimeCopyWithImpl(_$ProtocolHideFinishTime _value,
-      $Res Function(_$ProtocolHideFinishTime) _then)
-      : super(_value, (v) => _then(v as _$ProtocolHideFinishTime));
+class __$$ProtocolHideFinishTimeImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolHideFinishTimeImpl>
+    implements _$$ProtocolHideFinishTimeImplCopyWith<$Res> {
+  __$$ProtocolHideFinishTimeImplCopyWithImpl(
+      _$ProtocolHideFinishTimeImpl _value,
+      $Res Function(_$ProtocolHideFinishTimeImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolHideFinishTime get _value =>
-      super._value as _$ProtocolHideFinishTime;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
   }) {
-    return _then(_$ProtocolHideFinishTime(
-      id: id == freezed
+    return _then(_$ProtocolHideFinishTimeImpl(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
@@ -4293,8 +4377,8 @@ class __$$ProtocolHideFinishTimeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolHideFinishTime implements ProtocolHideFinishTime {
-  const _$ProtocolHideFinishTime({required this.id});
+class _$ProtocolHideFinishTimeImpl implements ProtocolHideFinishTime {
+  const _$ProtocolHideFinishTimeImpl({required this.id});
 
   @override
   final int id;
@@ -4305,22 +4389,24 @@ class _$ProtocolHideFinishTime implements ProtocolHideFinishTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolHideFinishTime &&
-            const DeepCollectionEquality().equals(other.id, id));
+            other is _$ProtocolHideFinishTimeImpl &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolHideFinishTimeCopyWith<_$ProtocolHideFinishTime> get copyWith =>
-      __$$ProtocolHideFinishTimeCopyWithImpl<_$ProtocolHideFinishTime>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolHideFinishTimeImplCopyWith<_$ProtocolHideFinishTimeImpl>
+      get copyWith => __$$ProtocolHideFinishTimeImplCopyWithImpl<
+          _$ProtocolHideFinishTimeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4357,30 +4443,30 @@ class _$ProtocolHideFinishTime implements ProtocolHideFinishTime {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return hideFinishTime?.call(id);
   }
@@ -4464,34 +4550,34 @@ class _$ProtocolHideFinishTime implements ProtocolHideFinishTime {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return hideFinishTime?.call(this);
@@ -4540,52 +4626,56 @@ class _$ProtocolHideFinishTime implements ProtocolHideFinishTime {
 
 abstract class ProtocolHideFinishTime implements ProtocolEvent {
   const factory ProtocolHideFinishTime({required final int id}) =
-      _$ProtocolHideFinishTime;
+      _$ProtocolHideFinishTimeImpl;
 
   int get id;
-  @JsonKey(ignore: true)
-  _$$ProtocolHideFinishTimeCopyWith<_$ProtocolHideFinishTime> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolHideFinishTimeImplCopyWith<_$ProtocolHideFinishTimeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolSetNumberToFinishTimeCopyWith<$Res> {
-  factory _$$ProtocolSetNumberToFinishTimeCopyWith(
-          _$ProtocolSetNumberToFinishTime value,
-          $Res Function(_$ProtocolSetNumberToFinishTime) then) =
-      __$$ProtocolSetNumberToFinishTimeCopyWithImpl<$Res>;
+abstract class _$$ProtocolSetNumberToFinishTimeImplCopyWith<$Res> {
+  factory _$$ProtocolSetNumberToFinishTimeImplCopyWith(
+          _$ProtocolSetNumberToFinishTimeImpl value,
+          $Res Function(_$ProtocolSetNumberToFinishTimeImpl) then) =
+      __$$ProtocolSetNumberToFinishTimeImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int id, int number, String finishTime});
 }
 
 /// @nodoc
-class __$$ProtocolSetNumberToFinishTimeCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolSetNumberToFinishTimeCopyWith<$Res> {
-  __$$ProtocolSetNumberToFinishTimeCopyWithImpl(
-      _$ProtocolSetNumberToFinishTime _value,
-      $Res Function(_$ProtocolSetNumberToFinishTime) _then)
-      : super(_value, (v) => _then(v as _$ProtocolSetNumberToFinishTime));
+class __$$ProtocolSetNumberToFinishTimeImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res,
+        _$ProtocolSetNumberToFinishTimeImpl>
+    implements _$$ProtocolSetNumberToFinishTimeImplCopyWith<$Res> {
+  __$$ProtocolSetNumberToFinishTimeImplCopyWithImpl(
+      _$ProtocolSetNumberToFinishTimeImpl _value,
+      $Res Function(_$ProtocolSetNumberToFinishTimeImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolSetNumberToFinishTime get _value =>
-      super._value as _$ProtocolSetNumberToFinishTime;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? number = freezed,
-    Object? finishTime = freezed,
+    Object? id = null,
+    Object? number = null,
+    Object? finishTime = null,
   }) {
-    return _then(_$ProtocolSetNumberToFinishTime(
-      id: id == freezed
+    return _then(_$ProtocolSetNumberToFinishTimeImpl(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      finishTime: finishTime == freezed
+      finishTime: null == finishTime
           ? _value.finishTime
           : finishTime // ignore: cast_nullable_to_non_nullable
               as String,
@@ -4595,8 +4685,9 @@ class __$$ProtocolSetNumberToFinishTimeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolSetNumberToFinishTime implements ProtocolSetNumberToFinishTime {
-  const _$ProtocolSetNumberToFinishTime(
+class _$ProtocolSetNumberToFinishTimeImpl
+    implements ProtocolSetNumberToFinishTime {
+  const _$ProtocolSetNumberToFinishTimeImpl(
       {required this.id, required this.number, required this.finishTime});
 
   @override
@@ -4612,28 +4703,28 @@ class _$ProtocolSetNumberToFinishTime implements ProtocolSetNumberToFinishTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolSetNumberToFinishTime &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.number, number) &&
-            const DeepCollectionEquality()
-                .equals(other.finishTime, finishTime));
+            other is _$ProtocolSetNumberToFinishTimeImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.finishTime, finishTime) ||
+                other.finishTime == finishTime));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(number),
-      const DeepCollectionEquality().hash(finishTime));
+  int get hashCode => Object.hash(runtimeType, id, number, finishTime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolSetNumberToFinishTimeCopyWith<_$ProtocolSetNumberToFinishTime>
-      get copyWith => __$$ProtocolSetNumberToFinishTimeCopyWithImpl<
-          _$ProtocolSetNumberToFinishTime>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolSetNumberToFinishTimeImplCopyWith<
+          _$ProtocolSetNumberToFinishTimeImpl>
+      get copyWith => __$$ProtocolSetNumberToFinishTimeImplCopyWithImpl<
+          _$ProtocolSetNumberToFinishTimeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4670,30 +4761,30 @@ class _$ProtocolSetNumberToFinishTime implements ProtocolSetNumberToFinishTime {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return setNumberToFinishTime?.call(id, number, finishTime);
   }
@@ -4777,34 +4868,34 @@ class _$ProtocolSetNumberToFinishTime implements ProtocolSetNumberToFinishTime {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return setNumberToFinishTime?.call(this);
@@ -4855,41 +4946,45 @@ abstract class ProtocolSetNumberToFinishTime implements ProtocolEvent {
   const factory ProtocolSetNumberToFinishTime(
       {required final int id,
       required final int number,
-      required final String finishTime}) = _$ProtocolSetNumberToFinishTime;
+      required final String finishTime}) = _$ProtocolSetNumberToFinishTimeImpl;
 
   int get id;
   int get number;
   String get finishTime;
-  @JsonKey(ignore: true)
-  _$$ProtocolSetNumberToFinishTimeCopyWith<_$ProtocolSetNumberToFinishTime>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolSetNumberToFinishTimeImplCopyWith<
+          _$ProtocolSetNumberToFinishTimeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolGetNumbersOnTraceCopyWith<$Res> {
-  factory _$$ProtocolGetNumbersOnTraceCopyWith(
-          _$ProtocolGetNumbersOnTrace value,
-          $Res Function(_$ProtocolGetNumbersOnTrace) then) =
-      __$$ProtocolGetNumbersOnTraceCopyWithImpl<$Res>;
+abstract class _$$ProtocolGetNumbersOnTraceImplCopyWith<$Res> {
+  factory _$$ProtocolGetNumbersOnTraceImplCopyWith(
+          _$ProtocolGetNumbersOnTraceImpl value,
+          $Res Function(_$ProtocolGetNumbersOnTraceImpl) then) =
+      __$$ProtocolGetNumbersOnTraceImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProtocolGetNumbersOnTraceCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolGetNumbersOnTraceCopyWith<$Res> {
-  __$$ProtocolGetNumbersOnTraceCopyWithImpl(_$ProtocolGetNumbersOnTrace _value,
-      $Res Function(_$ProtocolGetNumbersOnTrace) _then)
-      : super(_value, (v) => _then(v as _$ProtocolGetNumbersOnTrace));
+class __$$ProtocolGetNumbersOnTraceImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolGetNumbersOnTraceImpl>
+    implements _$$ProtocolGetNumbersOnTraceImplCopyWith<$Res> {
+  __$$ProtocolGetNumbersOnTraceImplCopyWithImpl(
+      _$ProtocolGetNumbersOnTraceImpl _value,
+      $Res Function(_$ProtocolGetNumbersOnTraceImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolGetNumbersOnTrace get _value =>
-      super._value as _$ProtocolGetNumbersOnTrace;
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ProtocolGetNumbersOnTrace implements ProtocolGetNumbersOnTrace {
-  const _$ProtocolGetNumbersOnTrace();
+class _$ProtocolGetNumbersOnTraceImpl implements ProtocolGetNumbersOnTrace {
+  const _$ProtocolGetNumbersOnTraceImpl();
 
   @override
   String toString() {
@@ -4897,10 +4992,10 @@ class _$ProtocolGetNumbersOnTrace implements ProtocolGetNumbersOnTrace {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolGetNumbersOnTrace);
+            other is _$ProtocolGetNumbersOnTraceImpl);
   }
 
   @override
@@ -4941,30 +5036,30 @@ class _$ProtocolGetNumbersOnTrace implements ProtocolGetNumbersOnTrace {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return getNumbersOnTrace?.call();
   }
@@ -5048,34 +5143,34 @@ class _$ProtocolGetNumbersOnTrace implements ProtocolGetNumbersOnTrace {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return getNumbersOnTrace?.call(this);
@@ -5123,35 +5218,37 @@ class _$ProtocolGetNumbersOnTrace implements ProtocolGetNumbersOnTrace {
 }
 
 abstract class ProtocolGetNumbersOnTrace implements ProtocolEvent {
-  const factory ProtocolGetNumbersOnTrace() = _$ProtocolGetNumbersOnTrace;
+  const factory ProtocolGetNumbersOnTrace() = _$ProtocolGetNumbersOnTraceImpl;
 }
 
 /// @nodoc
-abstract class _$$ProtocolLoadStartFromCsvCopyWith<$Res> {
-  factory _$$ProtocolLoadStartFromCsvCopyWith(_$ProtocolLoadStartFromCsv value,
-          $Res Function(_$ProtocolLoadStartFromCsv) then) =
-      __$$ProtocolLoadStartFromCsvCopyWithImpl<$Res>;
+abstract class _$$ProtocolLoadStartFromCsvImplCopyWith<$Res> {
+  factory _$$ProtocolLoadStartFromCsvImplCopyWith(
+          _$ProtocolLoadStartFromCsvImpl value,
+          $Res Function(_$ProtocolLoadStartFromCsvImpl) then) =
+      __$$ProtocolLoadStartFromCsvImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({PlatformFile? csv});
 }
 
 /// @nodoc
-class __$$ProtocolLoadStartFromCsvCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolLoadStartFromCsvCopyWith<$Res> {
-  __$$ProtocolLoadStartFromCsvCopyWithImpl(_$ProtocolLoadStartFromCsv _value,
-      $Res Function(_$ProtocolLoadStartFromCsv) _then)
-      : super(_value, (v) => _then(v as _$ProtocolLoadStartFromCsv));
+class __$$ProtocolLoadStartFromCsvImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolLoadStartFromCsvImpl>
+    implements _$$ProtocolLoadStartFromCsvImplCopyWith<$Res> {
+  __$$ProtocolLoadStartFromCsvImplCopyWithImpl(
+      _$ProtocolLoadStartFromCsvImpl _value,
+      $Res Function(_$ProtocolLoadStartFromCsvImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolLoadStartFromCsv get _value =>
-      super._value as _$ProtocolLoadStartFromCsv;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? csv = freezed,
   }) {
-    return _then(_$ProtocolLoadStartFromCsv(
-      csv: csv == freezed
+    return _then(_$ProtocolLoadStartFromCsvImpl(
+      csv: freezed == csv
           ? _value.csv
           : csv // ignore: cast_nullable_to_non_nullable
               as PlatformFile?,
@@ -5161,8 +5258,8 @@ class __$$ProtocolLoadStartFromCsvCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolLoadStartFromCsv implements ProtocolLoadStartFromCsv {
-  const _$ProtocolLoadStartFromCsv({this.csv});
+class _$ProtocolLoadStartFromCsvImpl implements ProtocolLoadStartFromCsv {
+  const _$ProtocolLoadStartFromCsvImpl({this.csv});
 
   @override
   final PlatformFile? csv;
@@ -5173,23 +5270,24 @@ class _$ProtocolLoadStartFromCsv implements ProtocolLoadStartFromCsv {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolLoadStartFromCsv &&
-            const DeepCollectionEquality().equals(other.csv, csv));
+            other is _$ProtocolLoadStartFromCsvImpl &&
+            (identical(other.csv, csv) || other.csv == csv));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(csv));
+  int get hashCode => Object.hash(runtimeType, csv);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolLoadStartFromCsvCopyWith<_$ProtocolLoadStartFromCsv>
-      get copyWith =>
-          __$$ProtocolLoadStartFromCsvCopyWithImpl<_$ProtocolLoadStartFromCsv>(
-              this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolLoadStartFromCsvImplCopyWith<_$ProtocolLoadStartFromCsvImpl>
+      get copyWith => __$$ProtocolLoadStartFromCsvImplCopyWithImpl<
+          _$ProtocolLoadStartFromCsvImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -5226,30 +5324,30 @@ class _$ProtocolLoadStartFromCsv implements ProtocolLoadStartFromCsv {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return loadStartFromCsv?.call(csv);
   }
@@ -5333,34 +5431,34 @@ class _$ProtocolLoadStartFromCsv implements ProtocolLoadStartFromCsv {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return loadStartFromCsv?.call(this);
@@ -5409,37 +5507,40 @@ class _$ProtocolLoadStartFromCsv implements ProtocolLoadStartFromCsv {
 
 abstract class ProtocolLoadStartFromCsv implements ProtocolEvent {
   const factory ProtocolLoadStartFromCsv({final PlatformFile? csv}) =
-      _$ProtocolLoadStartFromCsv;
+      _$ProtocolLoadStartFromCsvImpl;
 
   PlatformFile? get csv;
-  @JsonKey(ignore: true)
-  _$$ProtocolLoadStartFromCsvCopyWith<_$ProtocolLoadStartFromCsv>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolLoadStartFromCsvImplCopyWith<_$ProtocolLoadStartFromCsvImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolShareStartCopyWith<$Res> {
-  factory _$$ProtocolShareStartCopyWith(_$ProtocolShareStart value,
-          $Res Function(_$ProtocolShareStart) then) =
-      __$$ProtocolShareStartCopyWithImpl<$Res>;
+abstract class _$$ProtocolShareStartImplCopyWith<$Res> {
+  factory _$$ProtocolShareStartImplCopyWith(_$ProtocolShareStartImpl value,
+          $Res Function(_$ProtocolShareStartImpl) then) =
+      __$$ProtocolShareStartImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProtocolShareStartCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolShareStartCopyWith<$Res> {
-  __$$ProtocolShareStartCopyWithImpl(
-      _$ProtocolShareStart _value, $Res Function(_$ProtocolShareStart) _then)
-      : super(_value, (v) => _then(v as _$ProtocolShareStart));
+class __$$ProtocolShareStartImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolShareStartImpl>
+    implements _$$ProtocolShareStartImplCopyWith<$Res> {
+  __$$ProtocolShareStartImplCopyWithImpl(_$ProtocolShareStartImpl _value,
+      $Res Function(_$ProtocolShareStartImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolShareStart get _value => super._value as _$ProtocolShareStart;
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ProtocolShareStart implements ProtocolShareStart {
-  const _$ProtocolShareStart();
+class _$ProtocolShareStartImpl implements ProtocolShareStart {
+  const _$ProtocolShareStartImpl();
 
   @override
   String toString() {
@@ -5447,9 +5548,9 @@ class _$ProtocolShareStart implements ProtocolShareStart {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ProtocolShareStart);
+        (other.runtimeType == runtimeType && other is _$ProtocolShareStartImpl);
   }
 
   @override
@@ -5490,30 +5591,30 @@ class _$ProtocolShareStart implements ProtocolShareStart {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return shareStart?.call();
   }
@@ -5597,34 +5698,34 @@ class _$ProtocolShareStart implements ProtocolShareStart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return shareStart?.call(this);
@@ -5672,32 +5773,32 @@ class _$ProtocolShareStart implements ProtocolShareStart {
 }
 
 abstract class ProtocolShareStart implements ProtocolEvent {
-  const factory ProtocolShareStart() = _$ProtocolShareStart;
+  const factory ProtocolShareStart() = _$ProtocolShareStartImpl;
 }
 
 /// @nodoc
-abstract class _$$ProtocolShareFinishCopyWith<$Res> {
-  factory _$$ProtocolShareFinishCopyWith(_$ProtocolShareFinish value,
-          $Res Function(_$ProtocolShareFinish) then) =
-      __$$ProtocolShareFinishCopyWithImpl<$Res>;
+abstract class _$$ProtocolShareFinishImplCopyWith<$Res> {
+  factory _$$ProtocolShareFinishImplCopyWith(_$ProtocolShareFinishImpl value,
+          $Res Function(_$ProtocolShareFinishImpl) then) =
+      __$$ProtocolShareFinishImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProtocolShareFinishCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolShareFinishCopyWith<$Res> {
-  __$$ProtocolShareFinishCopyWithImpl(
-      _$ProtocolShareFinish _value, $Res Function(_$ProtocolShareFinish) _then)
-      : super(_value, (v) => _then(v as _$ProtocolShareFinish));
+class __$$ProtocolShareFinishImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res, _$ProtocolShareFinishImpl>
+    implements _$$ProtocolShareFinishImplCopyWith<$Res> {
+  __$$ProtocolShareFinishImplCopyWithImpl(_$ProtocolShareFinishImpl _value,
+      $Res Function(_$ProtocolShareFinishImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolShareFinish get _value => super._value as _$ProtocolShareFinish;
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ProtocolShareFinish implements ProtocolShareFinish {
-  const _$ProtocolShareFinish();
+class _$ProtocolShareFinishImpl implements ProtocolShareFinish {
+  const _$ProtocolShareFinishImpl();
 
   @override
   String toString() {
@@ -5705,9 +5806,10 @@ class _$ProtocolShareFinish implements ProtocolShareFinish {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ProtocolShareFinish);
+        (other.runtimeType == runtimeType &&
+            other is _$ProtocolShareFinishImpl);
   }
 
   @override
@@ -5748,30 +5850,30 @@ class _$ProtocolShareFinish implements ProtocolShareFinish {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return shareFinish?.call();
   }
@@ -5855,34 +5957,34 @@ class _$ProtocolShareFinish implements ProtocolShareFinish {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return shareFinish?.call(this);
@@ -5930,37 +6032,38 @@ class _$ProtocolShareFinish implements ProtocolShareFinish {
 }
 
 abstract class ProtocolShareFinish implements ProtocolEvent {
-  const factory ProtocolShareFinish() = _$ProtocolShareFinish;
+  const factory ProtocolShareFinish() = _$ProtocolShareFinishImpl;
 }
 
 /// @nodoc
-abstract class _$$ProtocolSelectAwaitingNumberCopyWith<$Res> {
-  factory _$$ProtocolSelectAwaitingNumberCopyWith(
-          _$ProtocolSelectAwaitingNumber value,
-          $Res Function(_$ProtocolSelectAwaitingNumber) then) =
-      __$$ProtocolSelectAwaitingNumberCopyWithImpl<$Res>;
+abstract class _$$ProtocolSelectAwaitingNumberImplCopyWith<$Res> {
+  factory _$$ProtocolSelectAwaitingNumberImplCopyWith(
+          _$ProtocolSelectAwaitingNumberImpl value,
+          $Res Function(_$ProtocolSelectAwaitingNumberImpl) then) =
+      __$$ProtocolSelectAwaitingNumberImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int number});
 }
 
 /// @nodoc
-class __$$ProtocolSelectAwaitingNumberCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolSelectAwaitingNumberCopyWith<$Res> {
-  __$$ProtocolSelectAwaitingNumberCopyWithImpl(
-      _$ProtocolSelectAwaitingNumber _value,
-      $Res Function(_$ProtocolSelectAwaitingNumber) _then)
-      : super(_value, (v) => _then(v as _$ProtocolSelectAwaitingNumber));
+class __$$ProtocolSelectAwaitingNumberImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res,
+        _$ProtocolSelectAwaitingNumberImpl>
+    implements _$$ProtocolSelectAwaitingNumberImplCopyWith<$Res> {
+  __$$ProtocolSelectAwaitingNumberImplCopyWithImpl(
+      _$ProtocolSelectAwaitingNumberImpl _value,
+      $Res Function(_$ProtocolSelectAwaitingNumberImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolSelectAwaitingNumber get _value =>
-      super._value as _$ProtocolSelectAwaitingNumber;
-
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = freezed,
+    Object? number = null,
   }) {
-    return _then(_$ProtocolSelectAwaitingNumber(
-      number: number == freezed
+    return _then(_$ProtocolSelectAwaitingNumberImpl(
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
@@ -5970,8 +6073,9 @@ class __$$ProtocolSelectAwaitingNumberCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolSelectAwaitingNumber implements ProtocolSelectAwaitingNumber {
-  const _$ProtocolSelectAwaitingNumber({required this.number});
+class _$ProtocolSelectAwaitingNumberImpl
+    implements ProtocolSelectAwaitingNumber {
+  const _$ProtocolSelectAwaitingNumberImpl({required this.number});
 
   @override
   final int number;
@@ -5982,22 +6086,25 @@ class _$ProtocolSelectAwaitingNumber implements ProtocolSelectAwaitingNumber {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolSelectAwaitingNumber &&
-            const DeepCollectionEquality().equals(other.number, number));
+            other is _$ProtocolSelectAwaitingNumberImpl &&
+            (identical(other.number, number) || other.number == number));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(number));
+  int get hashCode => Object.hash(runtimeType, number);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolSelectAwaitingNumberCopyWith<_$ProtocolSelectAwaitingNumber>
-      get copyWith => __$$ProtocolSelectAwaitingNumberCopyWithImpl<
-          _$ProtocolSelectAwaitingNumber>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolSelectAwaitingNumberImplCopyWith<
+          _$ProtocolSelectAwaitingNumberImpl>
+      get copyWith => __$$ProtocolSelectAwaitingNumberImplCopyWithImpl<
+          _$ProtocolSelectAwaitingNumberImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -6034,30 +6141,30 @@ class _$ProtocolSelectAwaitingNumber implements ProtocolSelectAwaitingNumber {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return selectAwaitingNumber?.call(number);
   }
@@ -6141,34 +6248,34 @@ class _$ProtocolSelectAwaitingNumber implements ProtocolSelectAwaitingNumber {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return selectAwaitingNumber?.call(this);
@@ -6217,41 +6324,45 @@ class _$ProtocolSelectAwaitingNumber implements ProtocolSelectAwaitingNumber {
 
 abstract class ProtocolSelectAwaitingNumber implements ProtocolEvent {
   const factory ProtocolSelectAwaitingNumber({required final int number}) =
-      _$ProtocolSelectAwaitingNumber;
+      _$ProtocolSelectAwaitingNumberImpl;
 
   int get number;
-  @JsonKey(ignore: true)
-  _$$ProtocolSelectAwaitingNumberCopyWith<_$ProtocolSelectAwaitingNumber>
+
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolSelectAwaitingNumberImplCopyWith<
+          _$ProtocolSelectAwaitingNumberImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProtocolDeselectAwaitingNumberCopyWith<$Res> {
-  factory _$$ProtocolDeselectAwaitingNumberCopyWith(
-          _$ProtocolDeselectAwaitingNumber value,
-          $Res Function(_$ProtocolDeselectAwaitingNumber) then) =
-      __$$ProtocolDeselectAwaitingNumberCopyWithImpl<$Res>;
+abstract class _$$ProtocolDeselectAwaitingNumberImplCopyWith<$Res> {
+  factory _$$ProtocolDeselectAwaitingNumberImplCopyWith(
+          _$ProtocolDeselectAwaitingNumberImpl value,
+          $Res Function(_$ProtocolDeselectAwaitingNumberImpl) then) =
+      __$$ProtocolDeselectAwaitingNumberImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProtocolDeselectAwaitingNumberCopyWithImpl<$Res>
-    extends _$ProtocolEventCopyWithImpl<$Res>
-    implements _$$ProtocolDeselectAwaitingNumberCopyWith<$Res> {
-  __$$ProtocolDeselectAwaitingNumberCopyWithImpl(
-      _$ProtocolDeselectAwaitingNumber _value,
-      $Res Function(_$ProtocolDeselectAwaitingNumber) _then)
-      : super(_value, (v) => _then(v as _$ProtocolDeselectAwaitingNumber));
+class __$$ProtocolDeselectAwaitingNumberImplCopyWithImpl<$Res>
+    extends _$ProtocolEventCopyWithImpl<$Res,
+        _$ProtocolDeselectAwaitingNumberImpl>
+    implements _$$ProtocolDeselectAwaitingNumberImplCopyWith<$Res> {
+  __$$ProtocolDeselectAwaitingNumberImplCopyWithImpl(
+      _$ProtocolDeselectAwaitingNumberImpl _value,
+      $Res Function(_$ProtocolDeselectAwaitingNumberImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolDeselectAwaitingNumber get _value =>
-      super._value as _$ProtocolDeselectAwaitingNumber;
+  /// Create a copy of ProtocolEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ProtocolDeselectAwaitingNumber
+class _$ProtocolDeselectAwaitingNumberImpl
     implements ProtocolDeselectAwaitingNumber {
-  const _$ProtocolDeselectAwaitingNumber();
+  const _$ProtocolDeselectAwaitingNumberImpl();
 
   @override
   String toString() {
@@ -6259,10 +6370,10 @@ class _$ProtocolDeselectAwaitingNumber
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolDeselectAwaitingNumber);
+            other is _$ProtocolDeselectAwaitingNumberImpl);
   }
 
   @override
@@ -6303,30 +6414,30 @@ class _$ProtocolDeselectAwaitingNumber
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? file, PlatformFile? csv)? select,
-    TResult Function()? deselect,
-    TResult Function(StartTime startTime, bool forceAdd)? addStartNumber,
-    TResult Function(AutomaticStart automaticStart, bool forceUpdate)?
+    TResult? Function(String? file, PlatformFile? csv)? select,
+    TResult? Function()? deselect,
+    TResult? Function(StartTime startTime, bool forceAdd)? addStartNumber,
+    TResult? Function(AutomaticStart automaticStart, bool forceUpdate)?
         updateAutomaticCorrection,
-    TResult Function(DateTime time)? updateManualStartTime,
-    TResult Function(String time, DateTime timeStamp)? addFinishTime,
-    TResult Function(String time)? addFinishTimeManual,
-    TResult Function(StartItem item)? updateItemInfoAtStart,
-    TResult Function()? clearStartResultsDebug,
-    TResult Function()? clearFinishResultsDebug,
-    TResult Function()? hideAllFinishResults,
-    TResult Function(int number)? clearNumberAtFinish,
-    TResult Function(int number)? setDNS,
-    TResult Function(int number)? setDNF,
-    TResult Function(int id)? hideFinishTime,
-    TResult Function(int id, int number, String finishTime)?
+    TResult? Function(DateTime time)? updateManualStartTime,
+    TResult? Function(String time, DateTime timeStamp)? addFinishTime,
+    TResult? Function(String time)? addFinishTimeManual,
+    TResult? Function(StartItem item)? updateItemInfoAtStart,
+    TResult? Function()? clearStartResultsDebug,
+    TResult? Function()? clearFinishResultsDebug,
+    TResult? Function()? hideAllFinishResults,
+    TResult? Function(int number)? clearNumberAtFinish,
+    TResult? Function(int number)? setDNS,
+    TResult? Function(int number)? setDNF,
+    TResult? Function(int id)? hideFinishTime,
+    TResult? Function(int id, int number, String finishTime)?
         setNumberToFinishTime,
-    TResult Function()? getNumbersOnTrace,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
+    TResult? Function()? getNumbersOnTrace,
+    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
   }) {
     return deselectAwaitingNumber?.call();
   }
@@ -6410,34 +6521,34 @@ class _$ProtocolDeselectAwaitingNumber
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SelectProtocol value)? select,
-    TResult Function(DeselectProtocol value)? deselect,
-    TResult Function(ProtocolAddStartNumber value)? addStartNumber,
-    TResult Function(ProtocolUpdateAutomaticCorrection value)?
+    TResult? Function(SelectProtocol value)? select,
+    TResult? Function(DeselectProtocol value)? deselect,
+    TResult? Function(ProtocolAddStartNumber value)? addStartNumber,
+    TResult? Function(ProtocolUpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
-    TResult Function(ProtocolUpdateManualStartTime value)?
+    TResult? Function(ProtocolUpdateManualStartTime value)?
         updateManualStartTime,
-    TResult Function(ProtocolAddFinishTime value)? addFinishTime,
-    TResult Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(ProtocolUpdateItemInfoAtStart value)?
+    TResult? Function(ProtocolAddFinishTime value)? addFinishTime,
+    TResult? Function(ProtocolAddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(ProtocolUpdateItemInfoAtStart value)?
         updateItemInfoAtStart,
-    TResult Function(ProtocolClearStartResultsDebug value)?
+    TResult? Function(ProtocolClearStartResultsDebug value)?
         clearStartResultsDebug,
-    TResult Function(ProtocolClearFinishResultsDebug value)?
+    TResult? Function(ProtocolClearFinishResultsDebug value)?
         clearFinishResultsDebug,
-    TResult Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
-    TResult Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(ProtocolSetDNS value)? setDNS,
-    TResult Function(ProtocolSetDNF value)? setDNF,
-    TResult Function(ProtocolHideFinishTime value)? hideFinishTime,
-    TResult Function(ProtocolSetNumberToFinishTime value)?
+    TResult? Function(ProtocolHideAllFinishResults value)? hideAllFinishResults,
+    TResult? Function(ProtocolClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(ProtocolSetDNS value)? setDNS,
+    TResult? Function(ProtocolSetDNF value)? setDNF,
+    TResult? Function(ProtocolHideFinishTime value)? hideFinishTime,
+    TResult? Function(ProtocolSetNumberToFinishTime value)?
         setNumberToFinishTime,
-    TResult Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
-    TResult Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(ProtocolShareStart value)? shareStart,
-    TResult Function(ProtocolShareFinish value)? shareFinish,
-    TResult Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(ProtocolDeselectAwaitingNumber value)?
+    TResult? Function(ProtocolGetNumbersOnTrace value)? getNumbersOnTrace,
+    TResult? Function(ProtocolLoadStartFromCsv value)? loadStartFromCsv,
+    TResult? Function(ProtocolShareStart value)? shareStart,
+    TResult? Function(ProtocolShareFinish value)? shareFinish,
+    TResult? Function(ProtocolSelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(ProtocolDeselectAwaitingNumber value)?
         deselectAwaitingNumber,
   }) {
     return deselectAwaitingNumber?.call(this);
@@ -6486,7 +6597,7 @@ class _$ProtocolDeselectAwaitingNumber
 
 abstract class ProtocolDeselectAwaitingNumber implements ProtocolEvent {
   const factory ProtocolDeselectAwaitingNumber() =
-      _$ProtocolDeselectAwaitingNumber;
+      _$ProtocolDeselectAwaitingNumberImpl;
 }
 
 /// @nodoc
@@ -6510,8 +6621,8 @@ mixin _$ProtocolState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? notSelected,
-    TResult Function(
+    TResult? Function()? notSelected,
+    TResult? Function(
             List<StartItem> startProtocol,
             List<FinishItem> finishProtocol,
             List<StartItem> numbersOnTraceProtocol,
@@ -6551,8 +6662,8 @@ mixin _$ProtocolState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProtocolNotSelectedState value)? notSelected,
-    TResult Function(ProtocolSelectedState value)? selected,
+    TResult? Function(ProtocolNotSelectedState value)? notSelected,
+    TResult? Function(ProtocolSelectedState value)? selected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -6568,43 +6679,48 @@ mixin _$ProtocolState {
 abstract class $ProtocolStateCopyWith<$Res> {
   factory $ProtocolStateCopyWith(
           ProtocolState value, $Res Function(ProtocolState) then) =
-      _$ProtocolStateCopyWithImpl<$Res>;
+      _$ProtocolStateCopyWithImpl<$Res, ProtocolState>;
 }
 
 /// @nodoc
-class _$ProtocolStateCopyWithImpl<$Res>
+class _$ProtocolStateCopyWithImpl<$Res, $Val extends ProtocolState>
     implements $ProtocolStateCopyWith<$Res> {
   _$ProtocolStateCopyWithImpl(this._value, this._then);
 
-  final ProtocolState _value;
   // ignore: unused_field
-  final $Res Function(ProtocolState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ProtocolState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$ProtocolNotSelectedStateCopyWith<$Res> {
-  factory _$$ProtocolNotSelectedStateCopyWith(_$ProtocolNotSelectedState value,
-          $Res Function(_$ProtocolNotSelectedState) then) =
-      __$$ProtocolNotSelectedStateCopyWithImpl<$Res>;
+abstract class _$$ProtocolNotSelectedStateImplCopyWith<$Res> {
+  factory _$$ProtocolNotSelectedStateImplCopyWith(
+          _$ProtocolNotSelectedStateImpl value,
+          $Res Function(_$ProtocolNotSelectedStateImpl) then) =
+      __$$ProtocolNotSelectedStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProtocolNotSelectedStateCopyWithImpl<$Res>
-    extends _$ProtocolStateCopyWithImpl<$Res>
-    implements _$$ProtocolNotSelectedStateCopyWith<$Res> {
-  __$$ProtocolNotSelectedStateCopyWithImpl(_$ProtocolNotSelectedState _value,
-      $Res Function(_$ProtocolNotSelectedState) _then)
-      : super(_value, (v) => _then(v as _$ProtocolNotSelectedState));
+class __$$ProtocolNotSelectedStateImplCopyWithImpl<$Res>
+    extends _$ProtocolStateCopyWithImpl<$Res, _$ProtocolNotSelectedStateImpl>
+    implements _$$ProtocolNotSelectedStateImplCopyWith<$Res> {
+  __$$ProtocolNotSelectedStateImplCopyWithImpl(
+      _$ProtocolNotSelectedStateImpl _value,
+      $Res Function(_$ProtocolNotSelectedStateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolNotSelectedState get _value =>
-      super._value as _$ProtocolNotSelectedState;
+  /// Create a copy of ProtocolState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ProtocolNotSelectedState implements ProtocolNotSelectedState {
-  const _$ProtocolNotSelectedState();
+class _$ProtocolNotSelectedStateImpl implements ProtocolNotSelectedState {
+  const _$ProtocolNotSelectedStateImpl();
 
   @override
   String toString() {
@@ -6612,10 +6728,10 @@ class _$ProtocolNotSelectedState implements ProtocolNotSelectedState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolNotSelectedState);
+            other is _$ProtocolNotSelectedStateImpl);
   }
 
   @override
@@ -6644,8 +6760,8 @@ class _$ProtocolNotSelectedState implements ProtocolNotSelectedState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? notSelected,
-    TResult Function(
+    TResult? Function()? notSelected,
+    TResult? Function(
             List<StartItem> startProtocol,
             List<FinishItem> finishProtocol,
             List<StartItem> numbersOnTraceProtocol,
@@ -6697,8 +6813,8 @@ class _$ProtocolNotSelectedState implements ProtocolNotSelectedState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProtocolNotSelectedState value)? notSelected,
-    TResult Function(ProtocolSelectedState value)? selected,
+    TResult? Function(ProtocolNotSelectedState value)? notSelected,
+    TResult? Function(ProtocolSelectedState value)? selected,
   }) {
     return notSelected?.call(this);
   }
@@ -6718,14 +6834,16 @@ class _$ProtocolNotSelectedState implements ProtocolNotSelectedState {
 }
 
 abstract class ProtocolNotSelectedState implements ProtocolState {
-  const factory ProtocolNotSelectedState() = _$ProtocolNotSelectedState;
+  const factory ProtocolNotSelectedState() = _$ProtocolNotSelectedStateImpl;
 }
 
 /// @nodoc
-abstract class _$$ProtocolSelectedStateCopyWith<$Res> {
-  factory _$$ProtocolSelectedStateCopyWith(_$ProtocolSelectedState value,
-          $Res Function(_$ProtocolSelectedState) then) =
-      __$$ProtocolSelectedStateCopyWithImpl<$Res>;
+abstract class _$$ProtocolSelectedStateImplCopyWith<$Res> {
+  factory _$$ProtocolSelectedStateImplCopyWith(
+          _$ProtocolSelectedStateImpl value,
+          $Res Function(_$ProtocolSelectedStateImpl) then) =
+      __$$ProtocolSelectedStateImplCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {List<StartItem> startProtocol,
       List<FinishItem> finishProtocol,
@@ -6743,22 +6861,22 @@ abstract class _$$ProtocolSelectedStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ProtocolSelectedStateCopyWithImpl<$Res>
-    extends _$ProtocolStateCopyWithImpl<$Res>
-    implements _$$ProtocolSelectedStateCopyWith<$Res> {
-  __$$ProtocolSelectedStateCopyWithImpl(_$ProtocolSelectedState _value,
-      $Res Function(_$ProtocolSelectedState) _then)
-      : super(_value, (v) => _then(v as _$ProtocolSelectedState));
+class __$$ProtocolSelectedStateImplCopyWithImpl<$Res>
+    extends _$ProtocolStateCopyWithImpl<$Res, _$ProtocolSelectedStateImpl>
+    implements _$$ProtocolSelectedStateImplCopyWith<$Res> {
+  __$$ProtocolSelectedStateImplCopyWithImpl(_$ProtocolSelectedStateImpl _value,
+      $Res Function(_$ProtocolSelectedStateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ProtocolSelectedState get _value => super._value as _$ProtocolSelectedState;
-
+  /// Create a copy of ProtocolState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startProtocol = freezed,
-    Object? finishProtocol = freezed,
-    Object? numbersOnTraceProtocol = freezed,
-    Object? databasePath = freezed,
+    Object? startProtocol = null,
+    Object? finishProtocol = null,
+    Object? numbersOnTraceProtocol = null,
+    Object? databasePath = null,
     Object? updateFinishNumber = freezed,
     Object? automaticStart = freezed,
     Object? previousStart = freezed,
@@ -6766,51 +6884,54 @@ class __$$ProtocolSelectedStateCopyWithImpl<$Res>
     Object? autoFinishNumber = freezed,
     Object? awaitingNumber = freezed,
   }) {
-    return _then(_$ProtocolSelectedState(
-      startProtocol: startProtocol == freezed
+    return _then(_$ProtocolSelectedStateImpl(
+      startProtocol: null == startProtocol
           ? _value._startProtocol
           : startProtocol // ignore: cast_nullable_to_non_nullable
               as List<StartItem>,
-      finishProtocol: finishProtocol == freezed
+      finishProtocol: null == finishProtocol
           ? _value._finishProtocol
           : finishProtocol // ignore: cast_nullable_to_non_nullable
               as List<FinishItem>,
-      numbersOnTraceProtocol: numbersOnTraceProtocol == freezed
+      numbersOnTraceProtocol: null == numbersOnTraceProtocol
           ? _value._numbersOnTraceProtocol
           : numbersOnTraceProtocol // ignore: cast_nullable_to_non_nullable
               as List<StartItem>,
-      databasePath: databasePath == freezed
+      databasePath: null == databasePath
           ? _value.databasePath
           : databasePath // ignore: cast_nullable_to_non_nullable
               as String,
-      updateFinishNumber: updateFinishNumber == freezed
+      updateFinishNumber: freezed == updateFinishNumber
           ? _value.updateFinishNumber
           : updateFinishNumber // ignore: cast_nullable_to_non_nullable
               as bool?,
-      automaticStart: automaticStart == freezed
+      automaticStart: freezed == automaticStart
           ? _value.automaticStart
           : automaticStart // ignore: cast_nullable_to_non_nullable
               as AutomaticStart?,
-      previousStart: previousStart == freezed
+      previousStart: freezed == previousStart
           ? _value._previousStart
           : previousStart // ignore: cast_nullable_to_non_nullable
               as List<StartItem>?,
-      startTime: startTime == freezed
+      startTime: freezed == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as StartTime?,
-      autoFinishNumber: autoFinishNumber == freezed
+      autoFinishNumber: freezed == autoFinishNumber
           ? _value.autoFinishNumber
           : autoFinishNumber // ignore: cast_nullable_to_non_nullable
               as int?,
-      awaitingNumber: awaitingNumber == freezed
+      awaitingNumber: freezed == awaitingNumber
           ? _value.awaitingNumber
           : awaitingNumber // ignore: cast_nullable_to_non_nullable
               as int?,
     ));
   }
 
+  /// Create a copy of ProtocolState
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $AutomaticStartCopyWith<$Res>? get automaticStart {
     if (_value.automaticStart == null) {
       return null;
@@ -6821,7 +6942,10 @@ class __$$ProtocolSelectedStateCopyWithImpl<$Res>
     });
   }
 
+  /// Create a copy of ProtocolState
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $StartTimeCopyWith<$Res>? get startTime {
     if (_value.startTime == null) {
       return null;
@@ -6835,8 +6959,8 @@ class __$$ProtocolSelectedStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProtocolSelectedState implements ProtocolSelectedState {
-  const _$ProtocolSelectedState(
+class _$ProtocolSelectedStateImpl implements ProtocolSelectedState {
+  const _$ProtocolSelectedStateImpl(
       {required final List<StartItem> startProtocol,
       required final List<FinishItem> finishProtocol,
       required final List<StartItem> numbersOnTraceProtocol,
@@ -6855,6 +6979,7 @@ class _$ProtocolSelectedState implements ProtocolSelectedState {
   final List<StartItem> _startProtocol;
   @override
   List<StartItem> get startProtocol {
+    if (_startProtocol is EqualUnmodifiableListView) return _startProtocol;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_startProtocol);
   }
@@ -6862,6 +6987,7 @@ class _$ProtocolSelectedState implements ProtocolSelectedState {
   final List<FinishItem> _finishProtocol;
   @override
   List<FinishItem> get finishProtocol {
+    if (_finishProtocol is EqualUnmodifiableListView) return _finishProtocol;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_finishProtocol);
   }
@@ -6869,6 +6995,8 @@ class _$ProtocolSelectedState implements ProtocolSelectedState {
   final List<StartItem> _numbersOnTraceProtocol;
   @override
   List<StartItem> get numbersOnTraceProtocol {
+    if (_numbersOnTraceProtocol is EqualUnmodifiableListView)
+      return _numbersOnTraceProtocol;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_numbersOnTraceProtocol);
   }
@@ -6895,6 +7023,7 @@ class _$ProtocolSelectedState implements ProtocolSelectedState {
   List<StartItem>? get previousStart {
     final value = _previousStart;
     if (value == null) return null;
+    if (_previousStart is EqualUnmodifiableListView) return _previousStart;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -6915,29 +7044,30 @@ class _$ProtocolSelectedState implements ProtocolSelectedState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProtocolSelectedState &&
+            other is _$ProtocolSelectedStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._startProtocol, _startProtocol) &&
             const DeepCollectionEquality()
                 .equals(other._finishProtocol, _finishProtocol) &&
             const DeepCollectionEquality().equals(
                 other._numbersOnTraceProtocol, _numbersOnTraceProtocol) &&
-            const DeepCollectionEquality()
-                .equals(other.databasePath, databasePath) &&
-            const DeepCollectionEquality()
-                .equals(other.updateFinishNumber, updateFinishNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.automaticStart, automaticStart) &&
+            (identical(other.databasePath, databasePath) ||
+                other.databasePath == databasePath) &&
+            (identical(other.updateFinishNumber, updateFinishNumber) ||
+                other.updateFinishNumber == updateFinishNumber) &&
+            (identical(other.automaticStart, automaticStart) ||
+                other.automaticStart == automaticStart) &&
             const DeepCollectionEquality()
                 .equals(other._previousStart, _previousStart) &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality()
-                .equals(other.autoFinishNumber, autoFinishNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.awaitingNumber, awaitingNumber));
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.autoFinishNumber, autoFinishNumber) ||
+                other.autoFinishNumber == autoFinishNumber) &&
+            (identical(other.awaitingNumber, awaitingNumber) ||
+                other.awaitingNumber == awaitingNumber));
   }
 
   @override
@@ -6946,19 +7076,22 @@ class _$ProtocolSelectedState implements ProtocolSelectedState {
       const DeepCollectionEquality().hash(_startProtocol),
       const DeepCollectionEquality().hash(_finishProtocol),
       const DeepCollectionEquality().hash(_numbersOnTraceProtocol),
-      const DeepCollectionEquality().hash(databasePath),
-      const DeepCollectionEquality().hash(updateFinishNumber),
-      const DeepCollectionEquality().hash(automaticStart),
+      databasePath,
+      updateFinishNumber,
+      automaticStart,
       const DeepCollectionEquality().hash(_previousStart),
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(autoFinishNumber),
-      const DeepCollectionEquality().hash(awaitingNumber));
+      startTime,
+      autoFinishNumber,
+      awaitingNumber);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProtocolState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ProtocolSelectedStateCopyWith<_$ProtocolSelectedState> get copyWith =>
-      __$$ProtocolSelectedStateCopyWithImpl<_$ProtocolSelectedState>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ProtocolSelectedStateImplCopyWith<_$ProtocolSelectedStateImpl>
+      get copyWith => __$$ProtocolSelectedStateImplCopyWithImpl<
+          _$ProtocolSelectedStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -6993,8 +7126,8 @@ class _$ProtocolSelectedState implements ProtocolSelectedState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? notSelected,
-    TResult Function(
+    TResult? Function()? notSelected,
+    TResult? Function(
             List<StartItem> startProtocol,
             List<FinishItem> finishProtocol,
             List<StartItem> numbersOnTraceProtocol,
@@ -7066,8 +7199,8 @@ class _$ProtocolSelectedState implements ProtocolSelectedState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProtocolNotSelectedState value)? notSelected,
-    TResult Function(ProtocolSelectedState value)? selected,
+    TResult? Function(ProtocolNotSelectedState value)? notSelected,
+    TResult? Function(ProtocolSelectedState value)? selected,
   }) {
     return selected?.call(this);
   }
@@ -7097,7 +7230,7 @@ abstract class ProtocolSelectedState implements ProtocolState {
       final List<StartItem>? previousStart,
       final StartTime? startTime,
       final int? autoFinishNumber,
-      required final int? awaitingNumber}) = _$ProtocolSelectedState;
+      required final int? awaitingNumber}) = _$ProtocolSelectedStateImpl;
 
   List<StartItem> get startProtocol;
   List<FinishItem> get finishProtocol;
@@ -7117,7 +7250,10 @@ abstract class ProtocolSelectedState implements ProtocolState {
   int?
       get autoFinishNumber; // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
   int? get awaitingNumber;
-  @JsonKey(ignore: true)
-  _$$ProtocolSelectedStateCopyWith<_$ProtocolSelectedState> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of ProtocolState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProtocolSelectedStateImplCopyWith<_$ProtocolSelectedStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -65,7 +65,7 @@ final appThemeData = {
     // toggleableActiveColor: Colors.blue,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.blue),
+        backgroundColor: WidgetStateProperty.all(Colors.blue),
       ),
     ),
     indicatorColor: Colors.blue,
@@ -79,7 +79,7 @@ final appThemeData = {
     // toggleableActiveColor: Colors.blue,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.blue),
+        backgroundColor: WidgetStateProperty.all(Colors.blue),
       ),
     ),
     indicatorColor: Colors.blue,
@@ -93,7 +93,7 @@ final appThemeData = {
     // toggleableActiveColor: Colors.red,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.red),
+        backgroundColor: WidgetStateProperty.all(Colors.red),
       ),
     ),
     indicatorColor: Colors.red,
@@ -108,7 +108,7 @@ final appThemeData = {
     // toggleableActiveColor: Colors.red,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.red),
+        backgroundColor: WidgetStateProperty.all(Colors.red),
       ),
     ),
     indicatorColor: Colors.red,

@@ -6,25 +6,27 @@ part of 'dbstate.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DBStateNotSelected _$$_DBStateNotSelectedFromJson(
+_$DBStateNotSelectedImpl _$$DBStateNotSelectedImplFromJson(
         Map<String, dynamic> json) =>
-    _$_DBStateNotSelected(
+    _$DBStateNotSelectedImpl(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$_DBStateNotSelectedToJson(
-        _$_DBStateNotSelected instance) =>
+Map<String, dynamic> _$$DBStateNotSelectedImplToJson(
+        _$DBStateNotSelectedImpl instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
-_$_DBStateSelected _$$_DBStateSelectedFromJson(Map<String, dynamic> json) =>
-    _$_DBStateSelected(
+_$DBStateSelectedImpl _$$DBStateSelectedImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DBStateSelectedImpl(
       updated: json['updated'] as bool? ?? false,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$_DBStateSelectedToJson(_$_DBStateSelected instance) =>
+Map<String, dynamic> _$$DBStateSelectedImplToJson(
+        _$DBStateSelectedImpl instance) =>
     <String, dynamic>{
       'updated': instance.updated,
       'runtimeType': instance.$type,

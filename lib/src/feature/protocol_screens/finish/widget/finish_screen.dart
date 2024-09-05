@@ -22,7 +22,7 @@ import 'number_on_trace_tile.dart';
 enum FinishPopupMenu { clearNumber, hideAll }
 
 class FinishScreen extends StatefulWidget {
-  const FinishScreen({Key? key}) : super(key: key);
+  const FinishScreen({super.key});
 
   @override
   State<FinishScreen> createState() => _FinishPage();
@@ -228,7 +228,7 @@ class _FinishPage extends State<FinishScreen> {
 
   Future<void> _clearPopup(BuildContext context, int? number) async {
     final RenderBox overlay =
-        Overlay.of(context)!.context.findRenderObject() as RenderBox;
+        Overlay.of(context).context.findRenderObject() as RenderBox;
     final FinishPopupMenu? result = await showMenu<FinishPopupMenu>(
       items: _getPopupMenu(context, number),
       context: context,
@@ -290,7 +290,7 @@ class _FinishPage extends State<FinishScreen> {
 
   Future<void> _numberOnTracePopup(BuildContext context, int number) async {
     final RenderBox overlay =
-        Overlay.of(context)!.context.findRenderObject() as RenderBox;
+        Overlay.of(context).context.findRenderObject() as RenderBox;
     final ParticipantStatus? result = await showMenu(
       items: _getNumberOnTracePopupMenu(context, number),
       context: context,
@@ -345,7 +345,7 @@ class _FinishPage extends State<FinishScreen> {
           Localization.current.I18nProtocol_didNotFinish,
           style: Theme.of(context).textTheme.labelLarge,
         ),
-      )
+      ),
     ];
     return list;
   }
@@ -353,7 +353,7 @@ class _FinishPage extends State<FinishScreen> {
   RelativeRect buttonMenuPosition(BuildContext buildContext) {
     final RenderBox bar = buildContext.findRenderObject() as RenderBox;
     final RenderBox overlay =
-        Overlay.of(buildContext)!.context.findRenderObject() as RenderBox;
+        Overlay.of(buildContext).context.findRenderObject() as RenderBox;
     // ignore: omit_local_variable_types
     final RelativeRect position = RelativeRect.fromRect(
       Rect.fromPoints(
@@ -469,7 +469,7 @@ class _SliverFinishSubHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
         margin: const EdgeInsets.all(2),
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(

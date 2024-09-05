@@ -1,5 +1,5 @@
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:entime/src/constants/pubspec.yaml.g.dart' as pubspec;
+import 'package:entime/src/constants/pubspec.yaml.g.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -32,7 +32,7 @@ void main() {
 
       expect(
         appInfoProvider.appName,
-        pubspec.name,
+        Pubspec.name,
       );
     });
 
@@ -45,7 +45,7 @@ void main() {
 
       expect(
         appInfoProvider.buildNumber,
-        pubspec.build.toString(),
+        Pubspec.version.build[0],
       );
     });
 
@@ -58,7 +58,7 @@ void main() {
 
       expect(
         appInfoProvider.version,
-        pubspec.version,
+        '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}',
       );
     });
 

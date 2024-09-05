@@ -70,7 +70,7 @@ void main() async {
     test('Update available but check disabled at settings', () async {
       when(
         appInfoProvider.appName,
-      ).thenAnswer((realInvocation) => 'Entime');
+      ).thenAnswer((realInvocation) => 'entime');
       when(
         appInfoProvider.version,
       ).thenAnswer((realInvocation) => '0.0.1');

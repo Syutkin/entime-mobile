@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 
-import '../../../constants/pubspec.yaml.g.dart' as pubspec;
+import '../../../constants/pubspec.yaml.g.dart';
 
 class AppInfoProvider {
   final AndroidDeviceInfo _deviceInfo;
@@ -59,11 +59,11 @@ class AppInfoProvider {
   //   await DeviceInfoPlugin().androidInfo,
   // );
 
-  String get appName => pubspec.name;
+  String get appName => Pubspec.name;
 
-  String get buildNumber => pubspec.build.toString();
+  String get buildNumber => Pubspec.version.build[0];
 
-  String get version => pubspec.version;
+  String get version => '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}';
 
   String? get abi {
     for (final deviceSupportedAbi in _deviceInfo.supportedAbis) {

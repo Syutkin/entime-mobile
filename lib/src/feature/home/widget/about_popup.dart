@@ -10,7 +10,7 @@ import '../../update/widget/changelog_screen.dart';
 class AboutPopup extends StatelessWidget {
   static const double _textVerticalSeparation = 18;
 
-  const AboutPopup({Key? key}) : super(key: key);
+  const AboutPopup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class AboutPopup extends StatelessWidget {
                                     scheme: 'mailto',
                                     path: 'syutkin@fraction.team',
                                     queryParameters: <String, String>{
-                                      'subject': 'Entime замечания/предложения'
+                                      'subject': 'Entime замечания/предложения',
                                     },
                                   );
                                   if (await canLaunchUrl(emailLaunchUri)) {

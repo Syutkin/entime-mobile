@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'settings_bloc.dart';
 
@@ -12,7 +12,7 @@ part of 'settings_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SettingsEvent {
@@ -25,9 +25,9 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function()? setDefault,
-    TResult Function(AppSettings settings)? update,
+    TResult? Function()? initialize,
+    TResult? Function()? setDefault,
+    TResult? Function(AppSettings settings)? update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,9 +47,9 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SettingsEventInitialize value)? initialize,
-    TResult Function(SettingsEventSetDefault value)? setDefault,
-    TResult Function(SettingsEventUpdate value)? update,
+    TResult? Function(SettingsEventInitialize value)? initialize,
+    TResult? Function(SettingsEventSetDefault value)? setDefault,
+    TResult? Function(SettingsEventUpdate value)? update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,43 +66,48 @@ mixin _$SettingsEvent {
 abstract class $SettingsEventCopyWith<$Res> {
   factory $SettingsEventCopyWith(
           SettingsEvent value, $Res Function(SettingsEvent) then) =
-      _$SettingsEventCopyWithImpl<$Res>;
+      _$SettingsEventCopyWithImpl<$Res, SettingsEvent>;
 }
 
 /// @nodoc
-class _$SettingsEventCopyWithImpl<$Res>
+class _$SettingsEventCopyWithImpl<$Res, $Val extends SettingsEvent>
     implements $SettingsEventCopyWith<$Res> {
   _$SettingsEventCopyWithImpl(this._value, this._then);
 
-  final SettingsEvent _value;
   // ignore: unused_field
-  final $Res Function(SettingsEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$SettingsEventInitializeCopyWith<$Res> {
-  factory _$$SettingsEventInitializeCopyWith(_$SettingsEventInitialize value,
-          $Res Function(_$SettingsEventInitialize) then) =
-      __$$SettingsEventInitializeCopyWithImpl<$Res>;
+abstract class _$$SettingsEventInitializeImplCopyWith<$Res> {
+  factory _$$SettingsEventInitializeImplCopyWith(
+          _$SettingsEventInitializeImpl value,
+          $Res Function(_$SettingsEventInitializeImpl) then) =
+      __$$SettingsEventInitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SettingsEventInitializeCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res>
-    implements _$$SettingsEventInitializeCopyWith<$Res> {
-  __$$SettingsEventInitializeCopyWithImpl(_$SettingsEventInitialize _value,
-      $Res Function(_$SettingsEventInitialize) _then)
-      : super(_value, (v) => _then(v as _$SettingsEventInitialize));
+class __$$SettingsEventInitializeImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$SettingsEventInitializeImpl>
+    implements _$$SettingsEventInitializeImplCopyWith<$Res> {
+  __$$SettingsEventInitializeImplCopyWithImpl(
+      _$SettingsEventInitializeImpl _value,
+      $Res Function(_$SettingsEventInitializeImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$SettingsEventInitialize get _value =>
-      super._value as _$SettingsEventInitialize;
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$SettingsEventInitialize implements SettingsEventInitialize {
-  const _$SettingsEventInitialize();
+class _$SettingsEventInitializeImpl implements SettingsEventInitialize {
+  const _$SettingsEventInitializeImpl();
 
   @override
   String toString() {
@@ -110,10 +115,10 @@ class _$SettingsEventInitialize implements SettingsEventInitialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SettingsEventInitialize);
+            other is _$SettingsEventInitializeImpl);
   }
 
   @override
@@ -132,9 +137,9 @@ class _$SettingsEventInitialize implements SettingsEventInitialize {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function()? setDefault,
-    TResult Function(AppSettings settings)? update,
+    TResult? Function()? initialize,
+    TResult? Function()? setDefault,
+    TResult? Function(AppSettings settings)? update,
   }) {
     return initialize?.call();
   }
@@ -166,9 +171,9 @@ class _$SettingsEventInitialize implements SettingsEventInitialize {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SettingsEventInitialize value)? initialize,
-    TResult Function(SettingsEventSetDefault value)? setDefault,
-    TResult Function(SettingsEventUpdate value)? update,
+    TResult? Function(SettingsEventInitialize value)? initialize,
+    TResult? Function(SettingsEventSetDefault value)? setDefault,
+    TResult? Function(SettingsEventUpdate value)? update,
   }) {
     return initialize?.call(this);
   }
@@ -189,33 +194,34 @@ class _$SettingsEventInitialize implements SettingsEventInitialize {
 }
 
 abstract class SettingsEventInitialize implements SettingsEvent {
-  const factory SettingsEventInitialize() = _$SettingsEventInitialize;
+  const factory SettingsEventInitialize() = _$SettingsEventInitializeImpl;
 }
 
 /// @nodoc
-abstract class _$$SettingsEventSetDefaultCopyWith<$Res> {
-  factory _$$SettingsEventSetDefaultCopyWith(_$SettingsEventSetDefault value,
-          $Res Function(_$SettingsEventSetDefault) then) =
-      __$$SettingsEventSetDefaultCopyWithImpl<$Res>;
+abstract class _$$SettingsEventSetDefaultImplCopyWith<$Res> {
+  factory _$$SettingsEventSetDefaultImplCopyWith(
+          _$SettingsEventSetDefaultImpl value,
+          $Res Function(_$SettingsEventSetDefaultImpl) then) =
+      __$$SettingsEventSetDefaultImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SettingsEventSetDefaultCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res>
-    implements _$$SettingsEventSetDefaultCopyWith<$Res> {
-  __$$SettingsEventSetDefaultCopyWithImpl(_$SettingsEventSetDefault _value,
-      $Res Function(_$SettingsEventSetDefault) _then)
-      : super(_value, (v) => _then(v as _$SettingsEventSetDefault));
+class __$$SettingsEventSetDefaultImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$SettingsEventSetDefaultImpl>
+    implements _$$SettingsEventSetDefaultImplCopyWith<$Res> {
+  __$$SettingsEventSetDefaultImplCopyWithImpl(
+      _$SettingsEventSetDefaultImpl _value,
+      $Res Function(_$SettingsEventSetDefaultImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$SettingsEventSetDefault get _value =>
-      super._value as _$SettingsEventSetDefault;
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$SettingsEventSetDefault implements SettingsEventSetDefault {
-  const _$SettingsEventSetDefault();
+class _$SettingsEventSetDefaultImpl implements SettingsEventSetDefault {
+  const _$SettingsEventSetDefaultImpl();
 
   @override
   String toString() {
@@ -223,10 +229,10 @@ class _$SettingsEventSetDefault implements SettingsEventSetDefault {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SettingsEventSetDefault);
+            other is _$SettingsEventSetDefaultImpl);
   }
 
   @override
@@ -245,9 +251,9 @@ class _$SettingsEventSetDefault implements SettingsEventSetDefault {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function()? setDefault,
-    TResult Function(AppSettings settings)? update,
+    TResult? Function()? initialize,
+    TResult? Function()? setDefault,
+    TResult? Function(AppSettings settings)? update,
   }) {
     return setDefault?.call();
   }
@@ -279,9 +285,9 @@ class _$SettingsEventSetDefault implements SettingsEventSetDefault {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SettingsEventInitialize value)? initialize,
-    TResult Function(SettingsEventSetDefault value)? setDefault,
-    TResult Function(SettingsEventUpdate value)? update,
+    TResult? Function(SettingsEventInitialize value)? initialize,
+    TResult? Function(SettingsEventSetDefault value)? setDefault,
+    TResult? Function(SettingsEventUpdate value)? update,
   }) {
     return setDefault?.call(this);
   }
@@ -302,43 +308,47 @@ class _$SettingsEventSetDefault implements SettingsEventSetDefault {
 }
 
 abstract class SettingsEventSetDefault implements SettingsEvent {
-  const factory SettingsEventSetDefault() = _$SettingsEventSetDefault;
+  const factory SettingsEventSetDefault() = _$SettingsEventSetDefaultImpl;
 }
 
 /// @nodoc
-abstract class _$$SettingsEventUpdateCopyWith<$Res> {
-  factory _$$SettingsEventUpdateCopyWith(_$SettingsEventUpdate value,
-          $Res Function(_$SettingsEventUpdate) then) =
-      __$$SettingsEventUpdateCopyWithImpl<$Res>;
+abstract class _$$SettingsEventUpdateImplCopyWith<$Res> {
+  factory _$$SettingsEventUpdateImplCopyWith(_$SettingsEventUpdateImpl value,
+          $Res Function(_$SettingsEventUpdateImpl) then) =
+      __$$SettingsEventUpdateImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({AppSettings settings});
 
   $AppSettingsCopyWith<$Res> get settings;
 }
 
 /// @nodoc
-class __$$SettingsEventUpdateCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res>
-    implements _$$SettingsEventUpdateCopyWith<$Res> {
-  __$$SettingsEventUpdateCopyWithImpl(
-      _$SettingsEventUpdate _value, $Res Function(_$SettingsEventUpdate) _then)
-      : super(_value, (v) => _then(v as _$SettingsEventUpdate));
+class __$$SettingsEventUpdateImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$SettingsEventUpdateImpl>
+    implements _$$SettingsEventUpdateImplCopyWith<$Res> {
+  __$$SettingsEventUpdateImplCopyWithImpl(_$SettingsEventUpdateImpl _value,
+      $Res Function(_$SettingsEventUpdateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$SettingsEventUpdate get _value => super._value as _$SettingsEventUpdate;
-
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? settings = freezed,
+    Object? settings = null,
   }) {
-    return _then(_$SettingsEventUpdate(
-      settings: settings == freezed
+    return _then(_$SettingsEventUpdateImpl(
+      settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as AppSettings,
     ));
   }
 
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $AppSettingsCopyWith<$Res> get settings {
     return $AppSettingsCopyWith<$Res>(_value.settings, (value) {
       return _then(_value.copyWith(settings: value));
@@ -348,8 +358,8 @@ class __$$SettingsEventUpdateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SettingsEventUpdate implements SettingsEventUpdate {
-  const _$SettingsEventUpdate({required this.settings});
+class _$SettingsEventUpdateImpl implements SettingsEventUpdate {
+  const _$SettingsEventUpdateImpl({required this.settings});
 
   @override
   final AppSettings settings;
@@ -360,21 +370,24 @@ class _$SettingsEventUpdate implements SettingsEventUpdate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SettingsEventUpdate &&
-            const DeepCollectionEquality().equals(other.settings, settings));
+            other is _$SettingsEventUpdateImpl &&
+            (identical(other.settings, settings) ||
+                other.settings == settings));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(settings));
+  int get hashCode => Object.hash(runtimeType, settings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$SettingsEventUpdateCopyWith<_$SettingsEventUpdate> get copyWith =>
-      __$$SettingsEventUpdateCopyWithImpl<_$SettingsEventUpdate>(
+  @pragma('vm:prefer-inline')
+  _$$SettingsEventUpdateImplCopyWith<_$SettingsEventUpdateImpl> get copyWith =>
+      __$$SettingsEventUpdateImplCopyWithImpl<_$SettingsEventUpdateImpl>(
           this, _$identity);
 
   @override
@@ -390,9 +403,9 @@ class _$SettingsEventUpdate implements SettingsEventUpdate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function()? setDefault,
-    TResult Function(AppSettings settings)? update,
+    TResult? Function()? initialize,
+    TResult? Function()? setDefault,
+    TResult? Function(AppSettings settings)? update,
   }) {
     return update?.call(settings);
   }
@@ -424,9 +437,9 @@ class _$SettingsEventUpdate implements SettingsEventUpdate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SettingsEventInitialize value)? initialize,
-    TResult Function(SettingsEventSetDefault value)? setDefault,
-    TResult Function(SettingsEventUpdate value)? update,
+    TResult? Function(SettingsEventInitialize value)? initialize,
+    TResult? Function(SettingsEventSetDefault value)? setDefault,
+    TResult? Function(SettingsEventUpdate value)? update,
   }) {
     return update?.call(this);
   }
@@ -448,11 +461,14 @@ class _$SettingsEventUpdate implements SettingsEventUpdate {
 
 abstract class SettingsEventUpdate implements SettingsEvent {
   const factory SettingsEventUpdate({required final AppSettings settings}) =
-      _$SettingsEventUpdate;
+      _$SettingsEventUpdateImpl;
 
   AppSettings get settings;
-  @JsonKey(ignore: true)
-  _$$SettingsEventUpdateCopyWith<_$SettingsEventUpdate> get copyWith =>
+
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SettingsEventUpdateImplCopyWith<_$SettingsEventUpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -460,7 +476,9 @@ abstract class SettingsEventUpdate implements SettingsEvent {
 mixin _$SettingsState {
   AppSettings get settings => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SettingsStateCopyWith<SettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -469,48 +487,57 @@ mixin _$SettingsState {
 abstract class $SettingsStateCopyWith<$Res> {
   factory $SettingsStateCopyWith(
           SettingsState value, $Res Function(SettingsState) then) =
-      _$SettingsStateCopyWithImpl<$Res>;
+      _$SettingsStateCopyWithImpl<$Res, SettingsState>;
+  @useResult
   $Res call({AppSettings settings});
 
   $AppSettingsCopyWith<$Res> get settings;
 }
 
 /// @nodoc
-class _$SettingsStateCopyWithImpl<$Res>
+class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     implements $SettingsStateCopyWith<$Res> {
   _$SettingsStateCopyWithImpl(this._value, this._then);
 
-  final SettingsState _value;
   // ignore: unused_field
-  final $Res Function(SettingsState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? settings = freezed,
+    Object? settings = null,
   }) {
     return _then(_value.copyWith(
-      settings: settings == freezed
+      settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as AppSettings,
-    ));
+    ) as $Val);
   }
 
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $AppSettingsCopyWith<$Res> get settings {
     return $AppSettingsCopyWith<$Res>(_value.settings, (value) {
-      return _then(_value.copyWith(settings: value));
+      return _then(_value.copyWith(settings: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_SettingsStateCopyWith<$Res>
+abstract class _$$SettingsStateImplCopyWith<$Res>
     implements $SettingsStateCopyWith<$Res> {
-  factory _$$_SettingsStateCopyWith(
-          _$_SettingsState value, $Res Function(_$_SettingsState) then) =
-      __$$_SettingsStateCopyWithImpl<$Res>;
+  factory _$$SettingsStateImplCopyWith(
+          _$SettingsStateImpl value, $Res Function(_$SettingsStateImpl) then) =
+      __$$SettingsStateImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({AppSettings settings});
 
   @override
@@ -518,22 +545,22 @@ abstract class _$$_SettingsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SettingsStateCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res>
-    implements _$$_SettingsStateCopyWith<$Res> {
-  __$$_SettingsStateCopyWithImpl(
-      _$_SettingsState _value, $Res Function(_$_SettingsState) _then)
-      : super(_value, (v) => _then(v as _$_SettingsState));
+class __$$SettingsStateImplCopyWithImpl<$Res>
+    extends _$SettingsStateCopyWithImpl<$Res, _$SettingsStateImpl>
+    implements _$$SettingsStateImplCopyWith<$Res> {
+  __$$SettingsStateImplCopyWithImpl(
+      _$SettingsStateImpl _value, $Res Function(_$SettingsStateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_SettingsState get _value => super._value as _$_SettingsState;
-
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? settings = freezed,
+    Object? settings = null,
   }) {
-    return _then(_$_SettingsState(
-      settings: settings == freezed
+    return _then(_$SettingsStateImpl(
+      settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as AppSettings,
@@ -543,8 +570,8 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SettingsState implements _SettingsState {
-  const _$_SettingsState({required this.settings});
+class _$SettingsStateImpl implements _SettingsState {
+  const _$SettingsStateImpl({required this.settings});
 
   @override
   final AppSettings settings;
@@ -555,31 +582,37 @@ class _$_SettingsState implements _SettingsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SettingsState &&
-            const DeepCollectionEquality().equals(other.settings, settings));
+            other is _$SettingsStateImpl &&
+            (identical(other.settings, settings) ||
+                other.settings == settings));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(settings));
+  int get hashCode => Object.hash(runtimeType, settings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>
-      __$$_SettingsStateCopyWithImpl<_$_SettingsState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
+      __$$SettingsStateImplCopyWithImpl<_$SettingsStateImpl>(this, _$identity);
 }
 
 abstract class _SettingsState implements SettingsState {
   const factory _SettingsState({required final AppSettings settings}) =
-      _$_SettingsState;
+      _$SettingsStateImpl;
 
   @override
   AppSettings get settings;
+
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'bluetooth_message.dart';
 
@@ -12,7 +12,7 @@ part of 'bluetooth_message.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BluetoothMessage {
@@ -28,12 +28,12 @@ mixin _$BluetoothMessage {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
-    TResult Function(String time)? countdown,
-    TResult Function(String time)? voice,
-    TResult Function(String json)? moduleSettings,
-    TResult Function()? empty,
+    TResult? Function(AutomaticStart automaticStart)? automaticStart,
+    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time)? countdown,
+    TResult? Function(String time)? voice,
+    TResult? Function(String json)? moduleSettings,
+    TResult? Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,12 +61,12 @@ mixin _$BluetoothMessage {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BluetoothMessageAutomaticStart value)? automaticStart,
-    TResult Function(BluetoothMessageFinish value)? finish,
-    TResult Function(BluetoothMessageCountdown value)? countdown,
-    TResult Function(BluetoothMessageVoice value)? voice,
-    TResult Function(BluetoothMessageModuleSettings value)? moduleSettings,
-    TResult Function(BluetoothMessageEmpty value)? empty,
+    TResult? Function(BluetoothMessageAutomaticStart value)? automaticStart,
+    TResult? Function(BluetoothMessageFinish value)? finish,
+    TResult? Function(BluetoothMessageCountdown value)? countdown,
+    TResult? Function(BluetoothMessageVoice value)? voice,
+    TResult? Function(BluetoothMessageModuleSettings value)? moduleSettings,
+    TResult? Function(BluetoothMessageEmpty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -86,56 +86,64 @@ mixin _$BluetoothMessage {
 abstract class $BluetoothMessageCopyWith<$Res> {
   factory $BluetoothMessageCopyWith(
           BluetoothMessage value, $Res Function(BluetoothMessage) then) =
-      _$BluetoothMessageCopyWithImpl<$Res>;
+      _$BluetoothMessageCopyWithImpl<$Res, BluetoothMessage>;
 }
 
 /// @nodoc
-class _$BluetoothMessageCopyWithImpl<$Res>
+class _$BluetoothMessageCopyWithImpl<$Res, $Val extends BluetoothMessage>
     implements $BluetoothMessageCopyWith<$Res> {
   _$BluetoothMessageCopyWithImpl(this._value, this._then);
 
-  final BluetoothMessage _value;
   // ignore: unused_field
-  final $Res Function(BluetoothMessage) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$BluetoothMessageAutomaticStartCopyWith<$Res> {
-  factory _$$BluetoothMessageAutomaticStartCopyWith(
-          _$BluetoothMessageAutomaticStart value,
-          $Res Function(_$BluetoothMessageAutomaticStart) then) =
-      __$$BluetoothMessageAutomaticStartCopyWithImpl<$Res>;
+abstract class _$$BluetoothMessageAutomaticStartImplCopyWith<$Res> {
+  factory _$$BluetoothMessageAutomaticStartImplCopyWith(
+          _$BluetoothMessageAutomaticStartImpl value,
+          $Res Function(_$BluetoothMessageAutomaticStartImpl) then) =
+      __$$BluetoothMessageAutomaticStartImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({AutomaticStart automaticStart});
 
   $AutomaticStartCopyWith<$Res> get automaticStart;
 }
 
 /// @nodoc
-class __$$BluetoothMessageAutomaticStartCopyWithImpl<$Res>
-    extends _$BluetoothMessageCopyWithImpl<$Res>
-    implements _$$BluetoothMessageAutomaticStartCopyWith<$Res> {
-  __$$BluetoothMessageAutomaticStartCopyWithImpl(
-      _$BluetoothMessageAutomaticStart _value,
-      $Res Function(_$BluetoothMessageAutomaticStart) _then)
-      : super(_value, (v) => _then(v as _$BluetoothMessageAutomaticStart));
+class __$$BluetoothMessageAutomaticStartImplCopyWithImpl<$Res>
+    extends _$BluetoothMessageCopyWithImpl<$Res,
+        _$BluetoothMessageAutomaticStartImpl>
+    implements _$$BluetoothMessageAutomaticStartImplCopyWith<$Res> {
+  __$$BluetoothMessageAutomaticStartImplCopyWithImpl(
+      _$BluetoothMessageAutomaticStartImpl _value,
+      $Res Function(_$BluetoothMessageAutomaticStartImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$BluetoothMessageAutomaticStart get _value =>
-      super._value as _$BluetoothMessageAutomaticStart;
-
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? automaticStart = freezed,
+    Object? automaticStart = null,
   }) {
-    return _then(_$BluetoothMessageAutomaticStart(
-      automaticStart: automaticStart == freezed
+    return _then(_$BluetoothMessageAutomaticStartImpl(
+      automaticStart: null == automaticStart
           ? _value.automaticStart
           : automaticStart // ignore: cast_nullable_to_non_nullable
               as AutomaticStart,
     ));
   }
 
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $AutomaticStartCopyWith<$Res> get automaticStart {
     return $AutomaticStartCopyWith<$Res>(_value.automaticStart, (value) {
       return _then(_value.copyWith(automaticStart: value));
@@ -145,9 +153,9 @@ class __$$BluetoothMessageAutomaticStartCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothMessageAutomaticStart
+class _$BluetoothMessageAutomaticStartImpl
     implements BluetoothMessageAutomaticStart {
-  const _$BluetoothMessageAutomaticStart({required this.automaticStart});
+  const _$BluetoothMessageAutomaticStartImpl({required this.automaticStart});
 
   @override
   final AutomaticStart automaticStart;
@@ -158,23 +166,26 @@ class _$BluetoothMessageAutomaticStart
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothMessageAutomaticStart &&
-            const DeepCollectionEquality()
-                .equals(other.automaticStart, automaticStart));
+            other is _$BluetoothMessageAutomaticStartImpl &&
+            (identical(other.automaticStart, automaticStart) ||
+                other.automaticStart == automaticStart));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(automaticStart));
+  int get hashCode => Object.hash(runtimeType, automaticStart);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$BluetoothMessageAutomaticStartCopyWith<_$BluetoothMessageAutomaticStart>
-      get copyWith => __$$BluetoothMessageAutomaticStartCopyWithImpl<
-          _$BluetoothMessageAutomaticStart>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$BluetoothMessageAutomaticStartImplCopyWith<
+          _$BluetoothMessageAutomaticStartImpl>
+      get copyWith => __$$BluetoothMessageAutomaticStartImplCopyWithImpl<
+          _$BluetoothMessageAutomaticStartImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -192,12 +203,12 @@ class _$BluetoothMessageAutomaticStart
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
-    TResult Function(String time)? countdown,
-    TResult Function(String time)? voice,
-    TResult Function(String json)? moduleSettings,
-    TResult Function()? empty,
+    TResult? Function(AutomaticStart automaticStart)? automaticStart,
+    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time)? countdown,
+    TResult? Function(String time)? voice,
+    TResult? Function(String json)? moduleSettings,
+    TResult? Function()? empty,
   }) {
     return automaticStart?.call(this.automaticStart);
   }
@@ -237,12 +248,12 @@ class _$BluetoothMessageAutomaticStart
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BluetoothMessageAutomaticStart value)? automaticStart,
-    TResult Function(BluetoothMessageFinish value)? finish,
-    TResult Function(BluetoothMessageCountdown value)? countdown,
-    TResult Function(BluetoothMessageVoice value)? voice,
-    TResult Function(BluetoothMessageModuleSettings value)? moduleSettings,
-    TResult Function(BluetoothMessageEmpty value)? empty,
+    TResult? Function(BluetoothMessageAutomaticStart value)? automaticStart,
+    TResult? Function(BluetoothMessageFinish value)? finish,
+    TResult? Function(BluetoothMessageCountdown value)? countdown,
+    TResult? Function(BluetoothMessageVoice value)? voice,
+    TResult? Function(BluetoothMessageModuleSettings value)? moduleSettings,
+    TResult? Function(BluetoothMessageEmpty value)? empty,
   }) {
     return automaticStart?.call(this);
   }
@@ -268,45 +279,51 @@ class _$BluetoothMessageAutomaticStart
 abstract class BluetoothMessageAutomaticStart implements BluetoothMessage {
   const factory BluetoothMessageAutomaticStart(
           {required final AutomaticStart automaticStart}) =
-      _$BluetoothMessageAutomaticStart;
+      _$BluetoothMessageAutomaticStartImpl;
 
   AutomaticStart get automaticStart;
-  @JsonKey(ignore: true)
-  _$$BluetoothMessageAutomaticStartCopyWith<_$BluetoothMessageAutomaticStart>
+
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BluetoothMessageAutomaticStartImplCopyWith<
+          _$BluetoothMessageAutomaticStartImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$BluetoothMessageFinishCopyWith<$Res> {
-  factory _$$BluetoothMessageFinishCopyWith(_$BluetoothMessageFinish value,
-          $Res Function(_$BluetoothMessageFinish) then) =
-      __$$BluetoothMessageFinishCopyWithImpl<$Res>;
+abstract class _$$BluetoothMessageFinishImplCopyWith<$Res> {
+  factory _$$BluetoothMessageFinishImplCopyWith(
+          _$BluetoothMessageFinishImpl value,
+          $Res Function(_$BluetoothMessageFinishImpl) then) =
+      __$$BluetoothMessageFinishImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({String time, DateTime timeStamp});
 }
 
 /// @nodoc
-class __$$BluetoothMessageFinishCopyWithImpl<$Res>
-    extends _$BluetoothMessageCopyWithImpl<$Res>
-    implements _$$BluetoothMessageFinishCopyWith<$Res> {
-  __$$BluetoothMessageFinishCopyWithImpl(_$BluetoothMessageFinish _value,
-      $Res Function(_$BluetoothMessageFinish) _then)
-      : super(_value, (v) => _then(v as _$BluetoothMessageFinish));
+class __$$BluetoothMessageFinishImplCopyWithImpl<$Res>
+    extends _$BluetoothMessageCopyWithImpl<$Res, _$BluetoothMessageFinishImpl>
+    implements _$$BluetoothMessageFinishImplCopyWith<$Res> {
+  __$$BluetoothMessageFinishImplCopyWithImpl(
+      _$BluetoothMessageFinishImpl _value,
+      $Res Function(_$BluetoothMessageFinishImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$BluetoothMessageFinish get _value =>
-      super._value as _$BluetoothMessageFinish;
-
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
-    Object? timeStamp = freezed,
+    Object? time = null,
+    Object? timeStamp = null,
   }) {
-    return _then(_$BluetoothMessageFinish(
-      time: time == freezed
+    return _then(_$BluetoothMessageFinishImpl(
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
-      timeStamp: timeStamp == freezed
+      timeStamp: null == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -316,8 +333,9 @@ class __$$BluetoothMessageFinishCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothMessageFinish implements BluetoothMessageFinish {
-  const _$BluetoothMessageFinish({required this.time, required this.timeStamp});
+class _$BluetoothMessageFinishImpl implements BluetoothMessageFinish {
+  const _$BluetoothMessageFinishImpl(
+      {required this.time, required this.timeStamp});
 
   @override
   final String time;
@@ -330,25 +348,26 @@ class _$BluetoothMessageFinish implements BluetoothMessageFinish {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothMessageFinish &&
-            const DeepCollectionEquality().equals(other.time, time) &&
-            const DeepCollectionEquality().equals(other.timeStamp, timeStamp));
+            other is _$BluetoothMessageFinishImpl &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.timeStamp, timeStamp) ||
+                other.timeStamp == timeStamp));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(timeStamp));
+  int get hashCode => Object.hash(runtimeType, time, timeStamp);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$BluetoothMessageFinishCopyWith<_$BluetoothMessageFinish> get copyWith =>
-      __$$BluetoothMessageFinishCopyWithImpl<_$BluetoothMessageFinish>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$BluetoothMessageFinishImplCopyWith<_$BluetoothMessageFinishImpl>
+      get copyWith => __$$BluetoothMessageFinishImplCopyWithImpl<
+          _$BluetoothMessageFinishImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -366,12 +385,12 @@ class _$BluetoothMessageFinish implements BluetoothMessageFinish {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
-    TResult Function(String time)? countdown,
-    TResult Function(String time)? voice,
-    TResult Function(String json)? moduleSettings,
-    TResult Function()? empty,
+    TResult? Function(AutomaticStart automaticStart)? automaticStart,
+    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time)? countdown,
+    TResult? Function(String time)? voice,
+    TResult? Function(String json)? moduleSettings,
+    TResult? Function()? empty,
   }) {
     return finish?.call(time, timeStamp);
   }
@@ -411,12 +430,12 @@ class _$BluetoothMessageFinish implements BluetoothMessageFinish {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BluetoothMessageAutomaticStart value)? automaticStart,
-    TResult Function(BluetoothMessageFinish value)? finish,
-    TResult Function(BluetoothMessageCountdown value)? countdown,
-    TResult Function(BluetoothMessageVoice value)? voice,
-    TResult Function(BluetoothMessageModuleSettings value)? moduleSettings,
-    TResult Function(BluetoothMessageEmpty value)? empty,
+    TResult? Function(BluetoothMessageAutomaticStart value)? automaticStart,
+    TResult? Function(BluetoothMessageFinish value)? finish,
+    TResult? Function(BluetoothMessageCountdown value)? countdown,
+    TResult? Function(BluetoothMessageVoice value)? voice,
+    TResult? Function(BluetoothMessageModuleSettings value)? moduleSettings,
+    TResult? Function(BluetoothMessageEmpty value)? empty,
   }) {
     return finish?.call(this);
   }
@@ -442,42 +461,47 @@ class _$BluetoothMessageFinish implements BluetoothMessageFinish {
 abstract class BluetoothMessageFinish implements BluetoothMessage {
   const factory BluetoothMessageFinish(
       {required final String time,
-      required final DateTime timeStamp}) = _$BluetoothMessageFinish;
+      required final DateTime timeStamp}) = _$BluetoothMessageFinishImpl;
 
   String get time;
   DateTime get timeStamp;
-  @JsonKey(ignore: true)
-  _$$BluetoothMessageFinishCopyWith<_$BluetoothMessageFinish> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BluetoothMessageFinishImplCopyWith<_$BluetoothMessageFinishImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$BluetoothMessageCountdownCopyWith<$Res> {
-  factory _$$BluetoothMessageCountdownCopyWith(
-          _$BluetoothMessageCountdown value,
-          $Res Function(_$BluetoothMessageCountdown) then) =
-      __$$BluetoothMessageCountdownCopyWithImpl<$Res>;
+abstract class _$$BluetoothMessageCountdownImplCopyWith<$Res> {
+  factory _$$BluetoothMessageCountdownImplCopyWith(
+          _$BluetoothMessageCountdownImpl value,
+          $Res Function(_$BluetoothMessageCountdownImpl) then) =
+      __$$BluetoothMessageCountdownImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({String time});
 }
 
 /// @nodoc
-class __$$BluetoothMessageCountdownCopyWithImpl<$Res>
-    extends _$BluetoothMessageCopyWithImpl<$Res>
-    implements _$$BluetoothMessageCountdownCopyWith<$Res> {
-  __$$BluetoothMessageCountdownCopyWithImpl(_$BluetoothMessageCountdown _value,
-      $Res Function(_$BluetoothMessageCountdown) _then)
-      : super(_value, (v) => _then(v as _$BluetoothMessageCountdown));
+class __$$BluetoothMessageCountdownImplCopyWithImpl<$Res>
+    extends _$BluetoothMessageCopyWithImpl<$Res,
+        _$BluetoothMessageCountdownImpl>
+    implements _$$BluetoothMessageCountdownImplCopyWith<$Res> {
+  __$$BluetoothMessageCountdownImplCopyWithImpl(
+      _$BluetoothMessageCountdownImpl _value,
+      $Res Function(_$BluetoothMessageCountdownImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$BluetoothMessageCountdown get _value =>
-      super._value as _$BluetoothMessageCountdown;
-
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
+    Object? time = null,
   }) {
-    return _then(_$BluetoothMessageCountdown(
-      time: time == freezed
+    return _then(_$BluetoothMessageCountdownImpl(
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
@@ -487,8 +511,8 @@ class __$$BluetoothMessageCountdownCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothMessageCountdown implements BluetoothMessageCountdown {
-  const _$BluetoothMessageCountdown({required this.time});
+class _$BluetoothMessageCountdownImpl implements BluetoothMessageCountdown {
+  const _$BluetoothMessageCountdownImpl({required this.time});
 
   @override
   final String time;
@@ -499,22 +523,24 @@ class _$BluetoothMessageCountdown implements BluetoothMessageCountdown {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothMessageCountdown &&
-            const DeepCollectionEquality().equals(other.time, time));
+            other is _$BluetoothMessageCountdownImpl &&
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(time));
+  int get hashCode => Object.hash(runtimeType, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$BluetoothMessageCountdownCopyWith<_$BluetoothMessageCountdown>
-      get copyWith => __$$BluetoothMessageCountdownCopyWithImpl<
-          _$BluetoothMessageCountdown>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$BluetoothMessageCountdownImplCopyWith<_$BluetoothMessageCountdownImpl>
+      get copyWith => __$$BluetoothMessageCountdownImplCopyWithImpl<
+          _$BluetoothMessageCountdownImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -532,12 +558,12 @@ class _$BluetoothMessageCountdown implements BluetoothMessageCountdown {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
-    TResult Function(String time)? countdown,
-    TResult Function(String time)? voice,
-    TResult Function(String json)? moduleSettings,
-    TResult Function()? empty,
+    TResult? Function(AutomaticStart automaticStart)? automaticStart,
+    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time)? countdown,
+    TResult? Function(String time)? voice,
+    TResult? Function(String json)? moduleSettings,
+    TResult? Function()? empty,
   }) {
     return countdown?.call(time);
   }
@@ -577,12 +603,12 @@ class _$BluetoothMessageCountdown implements BluetoothMessageCountdown {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BluetoothMessageAutomaticStart value)? automaticStart,
-    TResult Function(BluetoothMessageFinish value)? finish,
-    TResult Function(BluetoothMessageCountdown value)? countdown,
-    TResult Function(BluetoothMessageVoice value)? voice,
-    TResult Function(BluetoothMessageModuleSettings value)? moduleSettings,
-    TResult Function(BluetoothMessageEmpty value)? empty,
+    TResult? Function(BluetoothMessageAutomaticStart value)? automaticStart,
+    TResult? Function(BluetoothMessageFinish value)? finish,
+    TResult? Function(BluetoothMessageCountdown value)? countdown,
+    TResult? Function(BluetoothMessageVoice value)? voice,
+    TResult? Function(BluetoothMessageModuleSettings value)? moduleSettings,
+    TResult? Function(BluetoothMessageEmpty value)? empty,
   }) {
     return countdown?.call(this);
   }
@@ -607,39 +633,44 @@ class _$BluetoothMessageCountdown implements BluetoothMessageCountdown {
 
 abstract class BluetoothMessageCountdown implements BluetoothMessage {
   const factory BluetoothMessageCountdown({required final String time}) =
-      _$BluetoothMessageCountdown;
+      _$BluetoothMessageCountdownImpl;
 
   String get time;
-  @JsonKey(ignore: true)
-  _$$BluetoothMessageCountdownCopyWith<_$BluetoothMessageCountdown>
+
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BluetoothMessageCountdownImplCopyWith<_$BluetoothMessageCountdownImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$BluetoothMessageVoiceCopyWith<$Res> {
-  factory _$$BluetoothMessageVoiceCopyWith(_$BluetoothMessageVoice value,
-          $Res Function(_$BluetoothMessageVoice) then) =
-      __$$BluetoothMessageVoiceCopyWithImpl<$Res>;
+abstract class _$$BluetoothMessageVoiceImplCopyWith<$Res> {
+  factory _$$BluetoothMessageVoiceImplCopyWith(
+          _$BluetoothMessageVoiceImpl value,
+          $Res Function(_$BluetoothMessageVoiceImpl) then) =
+      __$$BluetoothMessageVoiceImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({String time});
 }
 
 /// @nodoc
-class __$$BluetoothMessageVoiceCopyWithImpl<$Res>
-    extends _$BluetoothMessageCopyWithImpl<$Res>
-    implements _$$BluetoothMessageVoiceCopyWith<$Res> {
-  __$$BluetoothMessageVoiceCopyWithImpl(_$BluetoothMessageVoice _value,
-      $Res Function(_$BluetoothMessageVoice) _then)
-      : super(_value, (v) => _then(v as _$BluetoothMessageVoice));
+class __$$BluetoothMessageVoiceImplCopyWithImpl<$Res>
+    extends _$BluetoothMessageCopyWithImpl<$Res, _$BluetoothMessageVoiceImpl>
+    implements _$$BluetoothMessageVoiceImplCopyWith<$Res> {
+  __$$BluetoothMessageVoiceImplCopyWithImpl(_$BluetoothMessageVoiceImpl _value,
+      $Res Function(_$BluetoothMessageVoiceImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$BluetoothMessageVoice get _value => super._value as _$BluetoothMessageVoice;
-
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
+    Object? time = null,
   }) {
-    return _then(_$BluetoothMessageVoice(
-      time: time == freezed
+    return _then(_$BluetoothMessageVoiceImpl(
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
@@ -649,8 +680,8 @@ class __$$BluetoothMessageVoiceCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothMessageVoice implements BluetoothMessageVoice {
-  const _$BluetoothMessageVoice({required this.time});
+class _$BluetoothMessageVoiceImpl implements BluetoothMessageVoice {
+  const _$BluetoothMessageVoiceImpl({required this.time});
 
   @override
   final String time;
@@ -661,22 +692,24 @@ class _$BluetoothMessageVoice implements BluetoothMessageVoice {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothMessageVoice &&
-            const DeepCollectionEquality().equals(other.time, time));
+            other is _$BluetoothMessageVoiceImpl &&
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(time));
+  int get hashCode => Object.hash(runtimeType, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$BluetoothMessageVoiceCopyWith<_$BluetoothMessageVoice> get copyWith =>
-      __$$BluetoothMessageVoiceCopyWithImpl<_$BluetoothMessageVoice>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$BluetoothMessageVoiceImplCopyWith<_$BluetoothMessageVoiceImpl>
+      get copyWith => __$$BluetoothMessageVoiceImplCopyWithImpl<
+          _$BluetoothMessageVoiceImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -694,12 +727,12 @@ class _$BluetoothMessageVoice implements BluetoothMessageVoice {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
-    TResult Function(String time)? countdown,
-    TResult Function(String time)? voice,
-    TResult Function(String json)? moduleSettings,
-    TResult Function()? empty,
+    TResult? Function(AutomaticStart automaticStart)? automaticStart,
+    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time)? countdown,
+    TResult? Function(String time)? voice,
+    TResult? Function(String json)? moduleSettings,
+    TResult? Function()? empty,
   }) {
     return voice?.call(time);
   }
@@ -739,12 +772,12 @@ class _$BluetoothMessageVoice implements BluetoothMessageVoice {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BluetoothMessageAutomaticStart value)? automaticStart,
-    TResult Function(BluetoothMessageFinish value)? finish,
-    TResult Function(BluetoothMessageCountdown value)? countdown,
-    TResult Function(BluetoothMessageVoice value)? voice,
-    TResult Function(BluetoothMessageModuleSettings value)? moduleSettings,
-    TResult Function(BluetoothMessageEmpty value)? empty,
+    TResult? Function(BluetoothMessageAutomaticStart value)? automaticStart,
+    TResult? Function(BluetoothMessageFinish value)? finish,
+    TResult? Function(BluetoothMessageCountdown value)? countdown,
+    TResult? Function(BluetoothMessageVoice value)? voice,
+    TResult? Function(BluetoothMessageModuleSettings value)? moduleSettings,
+    TResult? Function(BluetoothMessageEmpty value)? empty,
   }) {
     return voice?.call(this);
   }
@@ -769,42 +802,46 @@ class _$BluetoothMessageVoice implements BluetoothMessageVoice {
 
 abstract class BluetoothMessageVoice implements BluetoothMessage {
   const factory BluetoothMessageVoice({required final String time}) =
-      _$BluetoothMessageVoice;
+      _$BluetoothMessageVoiceImpl;
 
   String get time;
-  @JsonKey(ignore: true)
-  _$$BluetoothMessageVoiceCopyWith<_$BluetoothMessageVoice> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BluetoothMessageVoiceImplCopyWith<_$BluetoothMessageVoiceImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$BluetoothMessageModuleSettingsCopyWith<$Res> {
-  factory _$$BluetoothMessageModuleSettingsCopyWith(
-          _$BluetoothMessageModuleSettings value,
-          $Res Function(_$BluetoothMessageModuleSettings) then) =
-      __$$BluetoothMessageModuleSettingsCopyWithImpl<$Res>;
+abstract class _$$BluetoothMessageModuleSettingsImplCopyWith<$Res> {
+  factory _$$BluetoothMessageModuleSettingsImplCopyWith(
+          _$BluetoothMessageModuleSettingsImpl value,
+          $Res Function(_$BluetoothMessageModuleSettingsImpl) then) =
+      __$$BluetoothMessageModuleSettingsImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({String json});
 }
 
 /// @nodoc
-class __$$BluetoothMessageModuleSettingsCopyWithImpl<$Res>
-    extends _$BluetoothMessageCopyWithImpl<$Res>
-    implements _$$BluetoothMessageModuleSettingsCopyWith<$Res> {
-  __$$BluetoothMessageModuleSettingsCopyWithImpl(
-      _$BluetoothMessageModuleSettings _value,
-      $Res Function(_$BluetoothMessageModuleSettings) _then)
-      : super(_value, (v) => _then(v as _$BluetoothMessageModuleSettings));
+class __$$BluetoothMessageModuleSettingsImplCopyWithImpl<$Res>
+    extends _$BluetoothMessageCopyWithImpl<$Res,
+        _$BluetoothMessageModuleSettingsImpl>
+    implements _$$BluetoothMessageModuleSettingsImplCopyWith<$Res> {
+  __$$BluetoothMessageModuleSettingsImplCopyWithImpl(
+      _$BluetoothMessageModuleSettingsImpl _value,
+      $Res Function(_$BluetoothMessageModuleSettingsImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$BluetoothMessageModuleSettings get _value =>
-      super._value as _$BluetoothMessageModuleSettings;
-
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? json = freezed,
+    Object? json = null,
   }) {
-    return _then(_$BluetoothMessageModuleSettings(
-      json: json == freezed
+    return _then(_$BluetoothMessageModuleSettingsImpl(
+      json: null == json
           ? _value.json
           : json // ignore: cast_nullable_to_non_nullable
               as String,
@@ -814,9 +851,9 @@ class __$$BluetoothMessageModuleSettingsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothMessageModuleSettings
+class _$BluetoothMessageModuleSettingsImpl
     implements BluetoothMessageModuleSettings {
-  const _$BluetoothMessageModuleSettings({required this.json});
+  const _$BluetoothMessageModuleSettingsImpl({required this.json});
 
   @override
   final String json;
@@ -827,22 +864,25 @@ class _$BluetoothMessageModuleSettings
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothMessageModuleSettings &&
-            const DeepCollectionEquality().equals(other.json, json));
+            other is _$BluetoothMessageModuleSettingsImpl &&
+            (identical(other.json, json) || other.json == json));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(json));
+  int get hashCode => Object.hash(runtimeType, json);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$BluetoothMessageModuleSettingsCopyWith<_$BluetoothMessageModuleSettings>
-      get copyWith => __$$BluetoothMessageModuleSettingsCopyWithImpl<
-          _$BluetoothMessageModuleSettings>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$BluetoothMessageModuleSettingsImplCopyWith<
+          _$BluetoothMessageModuleSettingsImpl>
+      get copyWith => __$$BluetoothMessageModuleSettingsImplCopyWithImpl<
+          _$BluetoothMessageModuleSettingsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -860,12 +900,12 @@ class _$BluetoothMessageModuleSettings
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
-    TResult Function(String time)? countdown,
-    TResult Function(String time)? voice,
-    TResult Function(String json)? moduleSettings,
-    TResult Function()? empty,
+    TResult? Function(AutomaticStart automaticStart)? automaticStart,
+    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time)? countdown,
+    TResult? Function(String time)? voice,
+    TResult? Function(String json)? moduleSettings,
+    TResult? Function()? empty,
   }) {
     return moduleSettings?.call(json);
   }
@@ -905,12 +945,12 @@ class _$BluetoothMessageModuleSettings
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BluetoothMessageAutomaticStart value)? automaticStart,
-    TResult Function(BluetoothMessageFinish value)? finish,
-    TResult Function(BluetoothMessageCountdown value)? countdown,
-    TResult Function(BluetoothMessageVoice value)? voice,
-    TResult Function(BluetoothMessageModuleSettings value)? moduleSettings,
-    TResult Function(BluetoothMessageEmpty value)? empty,
+    TResult? Function(BluetoothMessageAutomaticStart value)? automaticStart,
+    TResult? Function(BluetoothMessageFinish value)? finish,
+    TResult? Function(BluetoothMessageCountdown value)? countdown,
+    TResult? Function(BluetoothMessageVoice value)? voice,
+    TResult? Function(BluetoothMessageModuleSettings value)? moduleSettings,
+    TResult? Function(BluetoothMessageEmpty value)? empty,
   }) {
     return moduleSettings?.call(this);
   }
@@ -935,37 +975,42 @@ class _$BluetoothMessageModuleSettings
 
 abstract class BluetoothMessageModuleSettings implements BluetoothMessage {
   const factory BluetoothMessageModuleSettings({required final String json}) =
-      _$BluetoothMessageModuleSettings;
+      _$BluetoothMessageModuleSettingsImpl;
 
   String get json;
-  @JsonKey(ignore: true)
-  _$$BluetoothMessageModuleSettingsCopyWith<_$BluetoothMessageModuleSettings>
+
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BluetoothMessageModuleSettingsImplCopyWith<
+          _$BluetoothMessageModuleSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$BluetoothMessageEmptyCopyWith<$Res> {
-  factory _$$BluetoothMessageEmptyCopyWith(_$BluetoothMessageEmpty value,
-          $Res Function(_$BluetoothMessageEmpty) then) =
-      __$$BluetoothMessageEmptyCopyWithImpl<$Res>;
+abstract class _$$BluetoothMessageEmptyImplCopyWith<$Res> {
+  factory _$$BluetoothMessageEmptyImplCopyWith(
+          _$BluetoothMessageEmptyImpl value,
+          $Res Function(_$BluetoothMessageEmptyImpl) then) =
+      __$$BluetoothMessageEmptyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$BluetoothMessageEmptyCopyWithImpl<$Res>
-    extends _$BluetoothMessageCopyWithImpl<$Res>
-    implements _$$BluetoothMessageEmptyCopyWith<$Res> {
-  __$$BluetoothMessageEmptyCopyWithImpl(_$BluetoothMessageEmpty _value,
-      $Res Function(_$BluetoothMessageEmpty) _then)
-      : super(_value, (v) => _then(v as _$BluetoothMessageEmpty));
+class __$$BluetoothMessageEmptyImplCopyWithImpl<$Res>
+    extends _$BluetoothMessageCopyWithImpl<$Res, _$BluetoothMessageEmptyImpl>
+    implements _$$BluetoothMessageEmptyImplCopyWith<$Res> {
+  __$$BluetoothMessageEmptyImplCopyWithImpl(_$BluetoothMessageEmptyImpl _value,
+      $Res Function(_$BluetoothMessageEmptyImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$BluetoothMessageEmpty get _value => super._value as _$BluetoothMessageEmpty;
+  /// Create a copy of BluetoothMessage
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$BluetoothMessageEmpty implements BluetoothMessageEmpty {
-  const _$BluetoothMessageEmpty();
+class _$BluetoothMessageEmptyImpl implements BluetoothMessageEmpty {
+  const _$BluetoothMessageEmptyImpl();
 
   @override
   String toString() {
@@ -973,9 +1018,10 @@ class _$BluetoothMessageEmpty implements BluetoothMessageEmpty {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BluetoothMessageEmpty);
+        (other.runtimeType == runtimeType &&
+            other is _$BluetoothMessageEmptyImpl);
   }
 
   @override
@@ -997,12 +1043,12 @@ class _$BluetoothMessageEmpty implements BluetoothMessageEmpty {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
-    TResult Function(String time)? countdown,
-    TResult Function(String time)? voice,
-    TResult Function(String json)? moduleSettings,
-    TResult Function()? empty,
+    TResult? Function(AutomaticStart automaticStart)? automaticStart,
+    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time)? countdown,
+    TResult? Function(String time)? voice,
+    TResult? Function(String json)? moduleSettings,
+    TResult? Function()? empty,
   }) {
     return empty?.call();
   }
@@ -1042,12 +1088,12 @@ class _$BluetoothMessageEmpty implements BluetoothMessageEmpty {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BluetoothMessageAutomaticStart value)? automaticStart,
-    TResult Function(BluetoothMessageFinish value)? finish,
-    TResult Function(BluetoothMessageCountdown value)? countdown,
-    TResult Function(BluetoothMessageVoice value)? voice,
-    TResult Function(BluetoothMessageModuleSettings value)? moduleSettings,
-    TResult Function(BluetoothMessageEmpty value)? empty,
+    TResult? Function(BluetoothMessageAutomaticStart value)? automaticStart,
+    TResult? Function(BluetoothMessageFinish value)? finish,
+    TResult? Function(BluetoothMessageCountdown value)? countdown,
+    TResult? Function(BluetoothMessageVoice value)? voice,
+    TResult? Function(BluetoothMessageModuleSettings value)? moduleSettings,
+    TResult? Function(BluetoothMessageEmpty value)? empty,
   }) {
     return empty?.call(this);
   }
@@ -1071,5 +1117,5 @@ class _$BluetoothMessageEmpty implements BluetoothMessageEmpty {
 }
 
 abstract class BluetoothMessageEmpty implements BluetoothMessage {
-  const factory BluetoothMessageEmpty() = _$BluetoothMessageEmpty;
+  const factory BluetoothMessageEmpty() = _$BluetoothMessageEmptyImpl;
 }

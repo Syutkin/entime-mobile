@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'automatic_start.dart';
 
@@ -12,7 +12,7 @@ part of 'automatic_start.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AutomaticStart {
@@ -22,7 +22,9 @@ mixin _$AutomaticStart {
   bool get updating => throw _privateConstructorUsedError;
   set updating(bool value) => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AutomaticStart
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AutomaticStartCopyWith<AutomaticStart> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -31,89 +33,95 @@ mixin _$AutomaticStart {
 abstract class $AutomaticStartCopyWith<$Res> {
   factory $AutomaticStartCopyWith(
           AutomaticStart value, $Res Function(AutomaticStart) then) =
-      _$AutomaticStartCopyWithImpl<$Res>;
+      _$AutomaticStartCopyWithImpl<$Res, AutomaticStart>;
+  @useResult
   $Res call({String time, int correction, DateTime timeStamp, bool updating});
 }
 
 /// @nodoc
-class _$AutomaticStartCopyWithImpl<$Res>
+class _$AutomaticStartCopyWithImpl<$Res, $Val extends AutomaticStart>
     implements $AutomaticStartCopyWith<$Res> {
   _$AutomaticStartCopyWithImpl(this._value, this._then);
 
-  final AutomaticStart _value;
   // ignore: unused_field
-  final $Res Function(AutomaticStart) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of AutomaticStart
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
-    Object? correction = freezed,
-    Object? timeStamp = freezed,
-    Object? updating = freezed,
+    Object? time = null,
+    Object? correction = null,
+    Object? timeStamp = null,
+    Object? updating = null,
   }) {
     return _then(_value.copyWith(
-      time: time == freezed
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
-      correction: correction == freezed
+      correction: null == correction
           ? _value.correction
           : correction // ignore: cast_nullable_to_non_nullable
               as int,
-      timeStamp: timeStamp == freezed
+      timeStamp: null == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updating: updating == freezed
+      updating: null == updating
           ? _value.updating
           : updating // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_AutomaticStartCopyWith<$Res>
+abstract class _$$AutomaticStartImplCopyWith<$Res>
     implements $AutomaticStartCopyWith<$Res> {
-  factory _$$_AutomaticStartCopyWith(
-          _$_AutomaticStart value, $Res Function(_$_AutomaticStart) then) =
-      __$$_AutomaticStartCopyWithImpl<$Res>;
+  factory _$$AutomaticStartImplCopyWith(_$AutomaticStartImpl value,
+          $Res Function(_$AutomaticStartImpl) then) =
+      __$$AutomaticStartImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String time, int correction, DateTime timeStamp, bool updating});
 }
 
 /// @nodoc
-class __$$_AutomaticStartCopyWithImpl<$Res>
-    extends _$AutomaticStartCopyWithImpl<$Res>
-    implements _$$_AutomaticStartCopyWith<$Res> {
-  __$$_AutomaticStartCopyWithImpl(
-      _$_AutomaticStart _value, $Res Function(_$_AutomaticStart) _then)
-      : super(_value, (v) => _then(v as _$_AutomaticStart));
+class __$$AutomaticStartImplCopyWithImpl<$Res>
+    extends _$AutomaticStartCopyWithImpl<$Res, _$AutomaticStartImpl>
+    implements _$$AutomaticStartImplCopyWith<$Res> {
+  __$$AutomaticStartImplCopyWithImpl(
+      _$AutomaticStartImpl _value, $Res Function(_$AutomaticStartImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_AutomaticStart get _value => super._value as _$_AutomaticStart;
-
+  /// Create a copy of AutomaticStart
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
-    Object? correction = freezed,
-    Object? timeStamp = freezed,
-    Object? updating = freezed,
+    Object? time = null,
+    Object? correction = null,
+    Object? timeStamp = null,
+    Object? updating = null,
   }) {
-    return _then(_$_AutomaticStart(
-      time == freezed
+    return _then(_$AutomaticStartImpl(
+      null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
-      correction == freezed
+      null == correction
           ? _value.correction
           : correction // ignore: cast_nullable_to_non_nullable
               as int,
-      timeStamp == freezed
+      null == timeStamp
           ? _value.timeStamp
           : timeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updating: updating == freezed
+      updating: null == updating
           ? _value.updating
           : updating // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -123,8 +131,8 @@ class __$$_AutomaticStartCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AutomaticStart implements _AutomaticStart {
-  _$_AutomaticStart(this.time, this.correction, this.timeStamp,
+class _$AutomaticStartImpl implements _AutomaticStart {
+  _$AutomaticStartImpl(this.time, this.correction, this.timeStamp,
       {this.updating = false});
 
   @override
@@ -142,16 +150,20 @@ class _$_AutomaticStart implements _AutomaticStart {
     return 'AutomaticStart(time: $time, correction: $correction, timeStamp: $timeStamp, updating: $updating)';
   }
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AutomaticStart
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_AutomaticStartCopyWith<_$_AutomaticStart> get copyWith =>
-      __$$_AutomaticStartCopyWithImpl<_$_AutomaticStart>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$AutomaticStartImplCopyWith<_$AutomaticStartImpl> get copyWith =>
+      __$$AutomaticStartImplCopyWithImpl<_$AutomaticStartImpl>(
+          this, _$identity);
 }
 
 abstract class _AutomaticStart implements AutomaticStart {
   factory _AutomaticStart(
       final String time, final int correction, final DateTime timeStamp,
-      {bool updating}) = _$_AutomaticStart;
+      {bool updating}) = _$AutomaticStartImpl;
 
   @override
   String get time;
@@ -162,8 +174,11 @@ abstract class _AutomaticStart implements AutomaticStart {
   @override
   bool get updating;
   set updating(bool value);
+
+  /// Create a copy of AutomaticStart
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_AutomaticStartCopyWith<_$_AutomaticStart> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AutomaticStartImplCopyWith<_$AutomaticStartImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

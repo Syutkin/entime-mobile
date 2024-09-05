@@ -305,15 +305,15 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
       }
     } else if (parsedMessage.startsWith('B') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
-      logger.v('Bluetooth -> Message parsed: beep: $parsedMessage');
+      logger.t('Bluetooth -> Message parsed: beep: $parsedMessage');
       return BluetoothMessage.countdown(time: parsedMessage);
     } else if (parsedMessage.startsWith('V') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
-      logger.v('Bluetooth -> Message parsed: speak: $parsedMessage');
+      logger.t('Bluetooth -> Message parsed: speak: $parsedMessage');
       return BluetoothMessage.voice(time: parsedMessage);
     } else if (parsedMessage.startsWith('F') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
-      logger.v('Bluetooth -> Message parsed: finish: $parsedMessage');
+      logger.t('Bluetooth -> Message parsed: finish: $parsedMessage');
       return BluetoothMessage.finish(time: parsedMessage, timeStamp: timeStamp);
     } else if (parsedMessage.startsWith('{') && parsedMessage.endsWith('}')) {
       logger.i('Bluetooth -> Parsing JSON...');

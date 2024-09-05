@@ -114,7 +114,7 @@ class EntimeApp extends StatelessWidget {
   final CountdownAtStart countdown;
 
   const EntimeApp({
-    Key? key,
+    super.key,
     required this.settings,
     required this.updateProvider,
     required this.bluetoothProvider,
@@ -124,7 +124,7 @@ class EntimeApp extends StatelessWidget {
     required this.logProvider,
     required this.database,
     required this.countdown,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
@@ -186,8 +186,8 @@ class EntimeApp extends StatelessWidget {
 
 class EntimeAppView extends StatelessWidget {
   const EntimeAppView({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) =>

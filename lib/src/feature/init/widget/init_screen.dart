@@ -15,8 +15,8 @@ import 'select_file_screen.dart';
 
 class InitScreen extends StatefulWidget {
   const InitScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<InitScreen> createState() => _InitScreen();
@@ -101,9 +101,8 @@ class _InitScreen extends State<InitScreen> {
 
 class _DebugLogButton extends StatelessWidget {
   const _DebugLogButton({
-    Key? key,
     required this.context,
-  }) : super(key: key);
+  });
 
   final BuildContext context;
 
@@ -124,9 +123,8 @@ class _DebugLogButton extends StatelessWidget {
 
 class _DebugAddLogButton extends StatelessWidget {
   const _DebugAddLogButton({
-    Key? key,
     required this.context,
-  }) : super(key: key);
+  });
 
   final BuildContext context;
 
@@ -148,9 +146,8 @@ class _DebugAddLogButton extends StatelessWidget {
 
 class _DebugCountdownButton extends StatelessWidget {
   const _DebugCountdownButton({
-    Key? key,
     required this.context,
-  }) : super(key: key);
+  });
 
   final BuildContext context;
 
@@ -170,9 +167,7 @@ class _DebugCountdownButton extends StatelessWidget {
 }
 
 class _DebugVoiceButton extends StatelessWidget {
-  const _DebugVoiceButton({
-    Key? key,
-  }) : super(key: key);
+  const _DebugVoiceButton();
 
   @override
   Widget build(BuildContext context) => TextButton(
@@ -187,9 +182,7 @@ class _DebugVoiceButton extends StatelessWidget {
 }
 
 class _DebugNewDatabase extends StatelessWidget {
-  const _DebugNewDatabase({
-    Key? key,
-  }) : super(key: key);
+  const _DebugNewDatabase();
 
   @override
   Widget build(BuildContext context) => TextButton(
@@ -205,9 +198,7 @@ class _DebugNewDatabase extends StatelessWidget {
 }
 
 class _SelectProtocolWidget extends StatelessWidget {
-  const _SelectProtocolWidget({
-    Key? key,
-  }) : super(key: key);
+  const _SelectProtocolWidget();
 
   @override
   Widget build(BuildContext context) =>

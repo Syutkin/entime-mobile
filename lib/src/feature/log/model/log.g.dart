@@ -6,8 +6,8 @@ part of 'log.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Log _$$_LogFromJson(Map<String, dynamic> json) => _$_Log(
-      id: json['id'] as int,
+_$LogImpl _$$LogImplFromJson(Map<String, dynamic> json) => _$LogImpl(
+      id: (json['id'] as num).toInt(),
       level: json['level'] as String,
       timeStamp: json['timeStamp'] as String,
       source: json['source'] as String,
@@ -15,7 +15,7 @@ _$_Log _$$_LogFromJson(Map<String, dynamic> json) => _$_Log(
       rawData: json['rawData'] as String,
     );
 
-Map<String, dynamic> _$$_LogToJson(_$_Log instance) => <String, dynamic>{
+Map<String, dynamic> _$$LogImplToJson(_$LogImpl instance) => <String, dynamic>{
       'id': instance.id,
       'level': instance.level,
       'timeStamp': instance.timeStamp,

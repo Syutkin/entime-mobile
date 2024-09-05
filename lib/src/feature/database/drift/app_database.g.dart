@@ -2,11 +2,127 @@
 
 part of 'app_database.dart';
 
-// **************************************************************************
-// DriftDatabaseGenerator
-// **************************************************************************
-
 // ignore_for_file: type=lint
+class Races extends Table with TableInfo<Races, Race> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  Races(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, true,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _startDateMeta =
+      const VerificationMeta('startDate');
+  late final GeneratedColumn<String> startDate = GeneratedColumn<String>(
+      'start_date', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _finishDateMeta =
+      const VerificationMeta('finishDate');
+  late final GeneratedColumn<String> finishDate = GeneratedColumn<String>(
+      'finish_date', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _locationMeta =
+      const VerificationMeta('location');
+  late final GeneratedColumn<String> location = GeneratedColumn<String>(
+      'location', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _isDeletedMeta =
+      const VerificationMeta('isDeleted');
+  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
+      'is_deleted', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      $customConstraints: 'NOT NULL DEFAULT FALSE',
+      defaultValue: const CustomExpression('FALSE'));
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, name, startDate, finishDate, location, isDeleted];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'races';
+  @override
+  VerificationContext validateIntegrity(Insertable<Race> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('start_date')) {
+      context.handle(_startDateMeta,
+          startDate.isAcceptableOrUnknown(data['start_date']!, _startDateMeta));
+    }
+    if (data.containsKey('finish_date')) {
+      context.handle(
+          _finishDateMeta,
+          finishDate.isAcceptableOrUnknown(
+              data['finish_date']!, _finishDateMeta));
+    }
+    if (data.containsKey('location')) {
+      context.handle(_locationMeta,
+          location.isAcceptableOrUnknown(data['location']!, _locationMeta));
+    }
+    if (data.containsKey('is_deleted')) {
+      context.handle(_isDeletedMeta,
+          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Race map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Race(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      startDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}start_date']),
+      finishDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}finish_date']),
+      location: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}location']),
+      isDeleted: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
+    );
+  }
+
+  @override
+  Races createAlias(String alias) {
+    return Races(attachedDatabase, alias);
+  }
+
+  @override
+  bool get dontWriteConstraints => true;
+}
+
 class Race extends DataClass implements Insertable<Race> {
   final int? id;
   final String name;
@@ -98,6 +214,18 @@ class Race extends DataClass implements Insertable<Race> {
         location: location.present ? location.value : this.location,
         isDeleted: isDeleted ?? this.isDeleted,
       );
+  Race copyWithCompanion(RacesCompanion data) {
+    return Race(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      startDate: data.startDate.present ? data.startDate.value : this.startDate,
+      finishDate:
+          data.finishDate.present ? data.finishDate.value : this.finishDate,
+      location: data.location.present ? data.location.value : this.location,
+      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('Race(')
@@ -222,57 +350,68 @@ class RacesCompanion extends UpdateCompanion<Race> {
   }
 }
 
-class Races extends Table with TableInfo<Races, Race> {
+class Trails extends Table with TableInfo<Trails, Trail> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  Races(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  Trails(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
+      hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  final VerificationMeta _startDateMeta = const VerificationMeta('startDate');
-  late final GeneratedColumn<String> startDate = GeneratedColumn<String>(
-      'start_date', aliasedName, true,
+  static const VerificationMeta _distanceMeta =
+      const VerificationMeta('distance');
+  late final GeneratedColumn<int> distance = GeneratedColumn<int>(
+      'distance', aliasedName, true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _elevationMeta =
+      const VerificationMeta('elevation');
+  late final GeneratedColumn<int> elevation = GeneratedColumn<int>(
+      'elevation', aliasedName, true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _gpxTrackMeta =
+      const VerificationMeta('gpxTrack');
+  late final GeneratedColumn<Uint8List> gpxTrack = GeneratedColumn<Uint8List>(
+      'gpx_track', aliasedName, true,
+      type: DriftSqlType.blob,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _linkMeta = const VerificationMeta('link');
+  late final GeneratedColumn<String> link = GeneratedColumn<String>(
+      'link', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  final VerificationMeta _finishDateMeta = const VerificationMeta('finishDate');
-  late final GeneratedColumn<String> finishDate = GeneratedColumn<String>(
-      'finish_date', aliasedName, true,
+  static const VerificationMeta _commentMeta =
+      const VerificationMeta('comment');
+  late final GeneratedColumn<String> comment = GeneratedColumn<String>(
+      'comment', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  final VerificationMeta _locationMeta = const VerificationMeta('location');
-  late final GeneratedColumn<String> location = GeneratedColumn<String>(
-      'location', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _isDeletedMeta = const VerificationMeta('isDeleted');
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-      'is_deleted', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT false',
-      defaultValue: const CustomExpression<bool>('false'));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, startDate, finishDate, location, isDeleted];
+      [id, name, distance, elevation, gpxTrack, link, comment];
   @override
-  String get aliasedName => _alias ?? 'races';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'races';
+  String get actualTableName => $name;
+  static const String $name = 'trails';
   @override
-  VerificationContext validateIntegrity(Insertable<Race> instance,
+  VerificationContext validateIntegrity(Insertable<Trail> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -285,23 +424,25 @@ class Races extends Table with TableInfo<Races, Race> {
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('start_date')) {
-      context.handle(_startDateMeta,
-          startDate.isAcceptableOrUnknown(data['start_date']!, _startDateMeta));
+    if (data.containsKey('distance')) {
+      context.handle(_distanceMeta,
+          distance.isAcceptableOrUnknown(data['distance']!, _distanceMeta));
     }
-    if (data.containsKey('finish_date')) {
+    if (data.containsKey('elevation')) {
+      context.handle(_elevationMeta,
+          elevation.isAcceptableOrUnknown(data['elevation']!, _elevationMeta));
+    }
+    if (data.containsKey('gpx_track')) {
+      context.handle(_gpxTrackMeta,
+          gpxTrack.isAcceptableOrUnknown(data['gpx_track']!, _gpxTrackMeta));
+    }
+    if (data.containsKey('link')) {
       context.handle(
-          _finishDateMeta,
-          finishDate.isAcceptableOrUnknown(
-              data['finish_date']!, _finishDateMeta));
+          _linkMeta, link.isAcceptableOrUnknown(data['link']!, _linkMeta));
     }
-    if (data.containsKey('location')) {
-      context.handle(_locationMeta,
-          location.isAcceptableOrUnknown(data['location']!, _locationMeta));
-    }
-    if (data.containsKey('is_deleted')) {
-      context.handle(_isDeletedMeta,
-          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
+    if (data.containsKey('comment')) {
+      context.handle(_commentMeta,
+          comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
     }
     return context;
   }
@@ -309,27 +450,29 @@ class Races extends Table with TableInfo<Races, Race> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Race map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Trail map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Race(
-      id: attachedDatabase.options.types
+    return Trail(
+      id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id']),
-      name: attachedDatabase.options.types
+      name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      startDate: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}start_date']),
-      finishDate: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}finish_date']),
-      location: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}location']),
-      isDeleted: attachedDatabase.options.types
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
+      distance: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}distance']),
+      elevation: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}elevation']),
+      gpxTrack: attachedDatabase.typeMapping
+          .read(DriftSqlType.blob, data['${effectivePrefix}gpx_track']),
+      link: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}link']),
+      comment: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}comment']),
     );
   }
 
   @override
-  Races createAlias(String alias) {
-    return Races(attachedDatabase, alias);
+  Trails createAlias(String alias) {
+    return Trails(attachedDatabase, alias);
   }
 
   @override
@@ -441,6 +584,18 @@ class Trail extends DataClass implements Insertable<Trail> {
         link: link.present ? link.value : this.link,
         comment: comment.present ? comment.value : this.comment,
       );
+  Trail copyWithCompanion(TrailsCompanion data) {
+    return Trail(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      distance: data.distance.present ? data.distance.value : this.distance,
+      elevation: data.elevation.present ? data.elevation.value : this.elevation,
+      gpxTrack: data.gpxTrack.present ? data.gpxTrack.value : this.gpxTrack,
+      link: data.link.present ? data.link.value : this.link,
+      comment: data.comment.present ? data.comment.value : this.comment,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('Trail(')
@@ -456,8 +611,8 @@ class Trail extends DataClass implements Insertable<Trail> {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, name, distance, elevation, gpxTrack, link, comment);
+  int get hashCode => Object.hash(id, name, distance, elevation,
+      $driftBlobEquality.hash(gpxTrack), link, comment);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -466,7 +621,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           other.name == this.name &&
           other.distance == this.distance &&
           other.elevation == this.elevation &&
-          other.gpxTrack == this.gpxTrack &&
+          $driftBlobEquality.equals(other.gpxTrack, this.gpxTrack) &&
           other.link == this.link &&
           other.comment == this.comment);
 }
@@ -578,67 +733,78 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   }
 }
 
-class Trails extends Table with TableInfo<Trails, Trail> {
+class Stages extends Table with TableInfo<Stages, Stage> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  Trails(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  Stages(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
+      hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  static const VerificationMeta _trailIdMeta =
+      const VerificationMeta('trailId');
+  late final GeneratedColumn<int> trailId = GeneratedColumn<int>(
+      'trail_id', aliasedName, true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
+  late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
+      'race_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  final VerificationMeta _distanceMeta = const VerificationMeta('distance');
-  late final GeneratedColumn<int> distance = GeneratedColumn<int>(
-      'distance', aliasedName, true,
-      type: DriftSqlType.int,
+  static const VerificationMeta _isActiveMeta =
+      const VerificationMeta('isActive');
+  late final GeneratedColumn<bool> isActive = GeneratedColumn<bool>(
+      'is_active', aliasedName, false,
+      type: DriftSqlType.bool,
       requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _elevationMeta = const VerificationMeta('elevation');
-  late final GeneratedColumn<int> elevation = GeneratedColumn<int>(
-      'elevation', aliasedName, true,
-      type: DriftSqlType.int,
+      $customConstraints: 'NOT NULL DEFAULT TRUE',
+      defaultValue: const CustomExpression('TRUE'));
+  static const VerificationMeta _isDeletedMeta =
+      const VerificationMeta('isDeleted');
+  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
+      'is_deleted', aliasedName, false,
+      type: DriftSqlType.bool,
       requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _gpxTrackMeta = const VerificationMeta('gpxTrack');
-  late final GeneratedColumn<Uint8List> gpxTrack = GeneratedColumn<Uint8List>(
-      'gpx_track', aliasedName, true,
-      type: DriftSqlType.blob,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _linkMeta = const VerificationMeta('link');
-  late final GeneratedColumn<String> link = GeneratedColumn<String>(
-      'link', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _commentMeta = const VerificationMeta('comment');
-  late final GeneratedColumn<String> comment = GeneratedColumn<String>(
-      'comment', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
+      $customConstraints: 'NOT NULL DEFAULT FALSE',
+      defaultValue: const CustomExpression('FALSE'));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, distance, elevation, gpxTrack, link, comment];
+      [id, trailId, raceId, name, isActive, isDeleted];
   @override
-  String get aliasedName => _alias ?? 'trails';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'trails';
+  String get actualTableName => $name;
+  static const String $name = 'stages';
   @override
-  VerificationContext validateIntegrity(Insertable<Trail> instance,
+  VerificationContext validateIntegrity(Insertable<Stage> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('trail_id')) {
+      context.handle(_trailIdMeta,
+          trailId.isAcceptableOrUnknown(data['trail_id']!, _trailIdMeta));
+    }
+    if (data.containsKey('race_id')) {
+      context.handle(_raceIdMeta,
+          raceId.isAcceptableOrUnknown(data['race_id']!, _raceIdMeta));
+    } else if (isInserting) {
+      context.missing(_raceIdMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -646,25 +812,13 @@ class Trails extends Table with TableInfo<Trails, Trail> {
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('distance')) {
-      context.handle(_distanceMeta,
-          distance.isAcceptableOrUnknown(data['distance']!, _distanceMeta));
+    if (data.containsKey('is_active')) {
+      context.handle(_isActiveMeta,
+          isActive.isAcceptableOrUnknown(data['is_active']!, _isActiveMeta));
     }
-    if (data.containsKey('elevation')) {
-      context.handle(_elevationMeta,
-          elevation.isAcceptableOrUnknown(data['elevation']!, _elevationMeta));
-    }
-    if (data.containsKey('gpx_track')) {
-      context.handle(_gpxTrackMeta,
-          gpxTrack.isAcceptableOrUnknown(data['gpx_track']!, _gpxTrackMeta));
-    }
-    if (data.containsKey('link')) {
-      context.handle(
-          _linkMeta, link.isAcceptableOrUnknown(data['link']!, _linkMeta));
-    }
-    if (data.containsKey('comment')) {
-      context.handle(_commentMeta,
-          comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
+    if (data.containsKey('is_deleted')) {
+      context.handle(_isDeletedMeta,
+          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
     }
     return context;
   }
@@ -672,31 +826,34 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Trail map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Stage map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Trail(
-      id: attachedDatabase.options.types
+    return Stage(
+      id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id']),
-      name: attachedDatabase.options.types
+      trailId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}trail_id']),
+      raceId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}race_id'])!,
+      name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      distance: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}distance']),
-      elevation: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}elevation']),
-      gpxTrack: attachedDatabase.options.types
-          .read(DriftSqlType.blob, data['${effectivePrefix}gpx_track']),
-      link: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}link']),
-      comment: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}comment']),
+      isActive: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_active'])!,
+      isDeleted: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
     );
   }
 
   @override
-  Trails createAlias(String alias) {
-    return Trails(attachedDatabase, alias);
+  Stages createAlias(String alias) {
+    return Stages(attachedDatabase, alias);
   }
 
+  @override
+  List<String> get customConstraints => const [
+        'FOREIGN KEY(trail_id)REFERENCES trails(id)',
+        'FOREIGN KEY(race_id)REFERENCES races(id)'
+      ];
   @override
   bool get dontWriteConstraints => true;
 }
@@ -784,6 +941,17 @@ class Stage extends DataClass implements Insertable<Stage> {
         isActive: isActive ?? this.isActive,
         isDeleted: isDeleted ?? this.isDeleted,
       );
+  Stage copyWithCompanion(StagesCompanion data) {
+    return Stage(
+      id: data.id.present ? data.id.value : this.id,
+      trailId: data.trailId.present ? data.trailId.value : this.trailId,
+      raceId: data.raceId.present ? data.raceId.value : this.raceId,
+      name: data.name.present ? data.name.value : this.name,
+      isActive: data.isActive.present ? data.isActive.value : this.isActive,
+      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('Stage(')
@@ -909,73 +1077,84 @@ class StagesCompanion extends UpdateCompanion<Stage> {
   }
 }
 
-class Stages extends Table with TableInfo<Stages, Stage> {
+class Riders extends Table with TableInfo<Riders, Rider> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  Stages(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  Riders(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
+      hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _trailIdMeta = const VerificationMeta('trailId');
-  late final GeneratedColumn<int> trailId = GeneratedColumn<int>(
-      'trail_id', aliasedName, true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
-  late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
-      'race_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
-  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  final VerificationMeta _isActiveMeta = const VerificationMeta('isActive');
-  late final GeneratedColumn<bool> isActive = GeneratedColumn<bool>(
-      'is_active', aliasedName, false,
-      type: DriftSqlType.bool,
+  static const VerificationMeta _nicknameMeta =
+      const VerificationMeta('nickname');
+  late final GeneratedColumn<String> nickname = GeneratedColumn<String>(
+      'nickname', aliasedName, true,
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT true',
-      defaultValue: const CustomExpression<bool>('true'));
-  final VerificationMeta _isDeletedMeta = const VerificationMeta('isDeleted');
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-      'is_deleted', aliasedName, false,
-      type: DriftSqlType.bool,
+      $customConstraints: '');
+  static const VerificationMeta _birthdayMeta =
+      const VerificationMeta('birthday');
+  late final GeneratedColumn<String> birthday = GeneratedColumn<String>(
+      'birthday', aliasedName, true,
+      type: DriftSqlType.string,
       requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT false',
-      defaultValue: const CustomExpression<bool>('false'));
+      $customConstraints: '');
+  static const VerificationMeta _teamMeta = const VerificationMeta('team');
+  late final GeneratedColumn<String> team = GeneratedColumn<String>(
+      'team', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _cityMeta = const VerificationMeta('city');
+  late final GeneratedColumn<String> city = GeneratedColumn<String>(
+      'city', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _emailMeta = const VerificationMeta('email');
+  late final GeneratedColumn<String> email = GeneratedColumn<String>(
+      'email', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _phoneMeta = const VerificationMeta('phone');
+  late final GeneratedColumn<String> phone = GeneratedColumn<String>(
+      'phone', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _commentMeta =
+      const VerificationMeta('comment');
+  late final GeneratedColumn<String> comment = GeneratedColumn<String>(
+      'comment', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
   @override
   List<GeneratedColumn> get $columns =>
-      [id, trailId, raceId, name, isActive, isDeleted];
+      [id, name, nickname, birthday, team, city, email, phone, comment];
   @override
-  String get aliasedName => _alias ?? 'stages';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'stages';
+  String get actualTableName => $name;
+  static const String $name = 'riders';
   @override
-  VerificationContext validateIntegrity(Insertable<Stage> instance,
+  VerificationContext validateIntegrity(Insertable<Rider> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('trail_id')) {
-      context.handle(_trailIdMeta,
-          trailId.isAcceptableOrUnknown(data['trail_id']!, _trailIdMeta));
-    }
-    if (data.containsKey('race_id')) {
-      context.handle(_raceIdMeta,
-          raceId.isAcceptableOrUnknown(data['race_id']!, _raceIdMeta));
-    } else if (isInserting) {
-      context.missing(_raceIdMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -983,13 +1162,33 @@ class Stages extends Table with TableInfo<Stages, Stage> {
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('is_active')) {
-      context.handle(_isActiveMeta,
-          isActive.isAcceptableOrUnknown(data['is_active']!, _isActiveMeta));
+    if (data.containsKey('nickname')) {
+      context.handle(_nicknameMeta,
+          nickname.isAcceptableOrUnknown(data['nickname']!, _nicknameMeta));
     }
-    if (data.containsKey('is_deleted')) {
-      context.handle(_isDeletedMeta,
-          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
+    if (data.containsKey('birthday')) {
+      context.handle(_birthdayMeta,
+          birthday.isAcceptableOrUnknown(data['birthday']!, _birthdayMeta));
+    }
+    if (data.containsKey('team')) {
+      context.handle(
+          _teamMeta, team.isAcceptableOrUnknown(data['team']!, _teamMeta));
+    }
+    if (data.containsKey('city')) {
+      context.handle(
+          _cityMeta, city.isAcceptableOrUnknown(data['city']!, _cityMeta));
+    }
+    if (data.containsKey('email')) {
+      context.handle(
+          _emailMeta, email.isAcceptableOrUnknown(data['email']!, _emailMeta));
+    }
+    if (data.containsKey('phone')) {
+      context.handle(
+          _phoneMeta, phone.isAcceptableOrUnknown(data['phone']!, _phoneMeta));
+    }
+    if (data.containsKey('comment')) {
+      context.handle(_commentMeta,
+          comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
     }
     return context;
   }
@@ -997,34 +1196,35 @@ class Stages extends Table with TableInfo<Stages, Stage> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Stage map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Rider map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Stage(
-      id: attachedDatabase.options.types
+    return Rider(
+      id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id']),
-      trailId: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}trail_id']),
-      raceId: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}race_id'])!,
-      name: attachedDatabase.options.types
+      name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      isActive: attachedDatabase.options.types
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_active'])!,
-      isDeleted: attachedDatabase.options.types
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
+      nickname: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}nickname']),
+      birthday: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}birthday']),
+      team: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}team']),
+      city: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}city']),
+      email: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}email']),
+      phone: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}phone']),
+      comment: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}comment']),
     );
   }
 
   @override
-  Stages createAlias(String alias) {
-    return Stages(attachedDatabase, alias);
+  Riders createAlias(String alias) {
+    return Riders(attachedDatabase, alias);
   }
 
-  @override
-  List<String> get customConstraints => const [
-        'FOREIGN KEY (trail_id) REFERENCES trails(id)',
-        'FOREIGN KEY (race_id) REFERENCES races(id)'
-      ];
   @override
   bool get dontWriteConstraints => true;
 }
@@ -1154,6 +1354,20 @@ class Rider extends DataClass implements Insertable<Rider> {
         phone: phone.present ? phone.value : this.phone,
         comment: comment.present ? comment.value : this.comment,
       );
+  Rider copyWithCompanion(RidersCompanion data) {
+    return Rider(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      nickname: data.nickname.present ? data.nickname.value : this.nickname,
+      birthday: data.birthday.present ? data.birthday.value : this.birthday,
+      team: data.team.present ? data.team.value : this.team,
+      city: data.city.present ? data.city.value : this.city,
+      email: data.email.present ? data.email.value : this.email,
+      phone: data.phone.present ? data.phone.value : this.phone,
+      comment: data.comment.present ? data.comment.value : this.comment,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('Rider(')
@@ -1317,113 +1531,44 @@ class RidersCompanion extends UpdateCompanion<Rider> {
   }
 }
 
-class Riders extends Table with TableInfo<Riders, Rider> {
+class Statuses extends Table with TableInfo<Statuses, Status> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  Riders(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  Statuses(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
+      hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _nameMeta = const VerificationMeta('name');
-  late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  late final GeneratedColumn<String> type = GeneratedColumn<String>(
+      'type', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  final VerificationMeta _nicknameMeta = const VerificationMeta('nickname');
-  late final GeneratedColumn<String> nickname = GeneratedColumn<String>(
-      'nickname', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _birthdayMeta = const VerificationMeta('birthday');
-  late final GeneratedColumn<String> birthday = GeneratedColumn<String>(
-      'birthday', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _teamMeta = const VerificationMeta('team');
-  late final GeneratedColumn<String> team = GeneratedColumn<String>(
-      'team', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _cityMeta = const VerificationMeta('city');
-  late final GeneratedColumn<String> city = GeneratedColumn<String>(
-      'city', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _emailMeta = const VerificationMeta('email');
-  late final GeneratedColumn<String> email = GeneratedColumn<String>(
-      'email', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _phoneMeta = const VerificationMeta('phone');
-  late final GeneratedColumn<String> phone = GeneratedColumn<String>(
-      'phone', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _commentMeta = const VerificationMeta('comment');
-  late final GeneratedColumn<String> comment = GeneratedColumn<String>(
-      'comment', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, name, nickname, birthday, team, city, email, phone, comment];
+  List<GeneratedColumn> get $columns => [id, type];
   @override
-  String get aliasedName => _alias ?? 'riders';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'riders';
+  String get actualTableName => $name;
+  static const String $name = 'statuses';
   @override
-  VerificationContext validateIntegrity(Insertable<Rider> instance,
+  VerificationContext validateIntegrity(Insertable<Status> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('name')) {
+    if (data.containsKey('type')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
     } else if (isInserting) {
-      context.missing(_nameMeta);
-    }
-    if (data.containsKey('nickname')) {
-      context.handle(_nicknameMeta,
-          nickname.isAcceptableOrUnknown(data['nickname']!, _nicknameMeta));
-    }
-    if (data.containsKey('birthday')) {
-      context.handle(_birthdayMeta,
-          birthday.isAcceptableOrUnknown(data['birthday']!, _birthdayMeta));
-    }
-    if (data.containsKey('team')) {
-      context.handle(
-          _teamMeta, team.isAcceptableOrUnknown(data['team']!, _teamMeta));
-    }
-    if (data.containsKey('city')) {
-      context.handle(
-          _cityMeta, city.isAcceptableOrUnknown(data['city']!, _cityMeta));
-    }
-    if (data.containsKey('email')) {
-      context.handle(
-          _emailMeta, email.isAcceptableOrUnknown(data['email']!, _emailMeta));
-    }
-    if (data.containsKey('phone')) {
-      context.handle(
-          _phoneMeta, phone.isAcceptableOrUnknown(data['phone']!, _phoneMeta));
-    }
-    if (data.containsKey('comment')) {
-      context.handle(_commentMeta,
-          comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
+      context.missing(_typeMeta);
     }
     return context;
   }
@@ -1431,33 +1576,19 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Rider map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Status map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Rider(
-      id: attachedDatabase.options.types
+    return Status(
+      id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id']),
-      name: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      nickname: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}nickname']),
-      birthday: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}birthday']),
-      team: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}team']),
-      city: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}city']),
-      email: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}email']),
-      phone: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}phone']),
-      comment: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}comment']),
+      type: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
     );
   }
 
   @override
-  Riders createAlias(String alias) {
-    return Riders(attachedDatabase, alias);
+  Statuses createAlias(String alias) {
+    return Statuses(attachedDatabase, alias);
   }
 
   @override
@@ -1507,6 +1638,13 @@ class Status extends DataClass implements Insertable<Status> {
         id: id.present ? id.value : this.id,
         type: type ?? this.type,
       );
+  Status copyWithCompanion(StatusesCompanion data) {
+    return Status(
+      id: data.id.present ? data.id.value : this.id,
+      type: data.type.present ? data.type.value : this.type,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('Status(')
@@ -1574,42 +1712,103 @@ class StatusesCompanion extends UpdateCompanion<Status> {
   }
 }
 
-class Statuses extends Table with TableInfo<Statuses, Status> {
+class Participants extends Table with TableInfo<Participants, Participant> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  Statuses(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  Participants(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
+      hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _typeMeta = const VerificationMeta('type');
-  late final GeneratedColumn<String> type = GeneratedColumn<String>(
-      'type', aliasedName, false,
-      type: DriftSqlType.string,
+  static const VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
+  late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
+      'race_id', aliasedName, false,
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
+  static const VerificationMeta _riderIdMeta =
+      const VerificationMeta('riderId');
+  late final GeneratedColumn<int> riderId = GeneratedColumn<int>(
+      'rider_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _numberMeta = const VerificationMeta('number');
+  late final GeneratedColumn<int> number = GeneratedColumn<int>(
+      'number', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _categoryMeta =
+      const VerificationMeta('category');
+  late final GeneratedColumn<String> category = GeneratedColumn<String>(
+      'category', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _rfidMeta = const VerificationMeta('rfid');
+  late final GeneratedColumn<String> rfid = GeneratedColumn<String>(
+      'rfid', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _statusIdMeta =
+      const VerificationMeta('statusId');
+  late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
+      'status_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: 'NOT NULL DEFAULT 1',
+      defaultValue: const CustomExpression('1'));
   @override
-  List<GeneratedColumn> get $columns => [id, type];
+  List<GeneratedColumn> get $columns =>
+      [id, raceId, riderId, number, category, rfid, statusId];
   @override
-  String get aliasedName => _alias ?? 'statuses';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'statuses';
+  String get actualTableName => $name;
+  static const String $name = 'participants';
   @override
-  VerificationContext validateIntegrity(Insertable<Status> instance,
+  VerificationContext validateIntegrity(Insertable<Participant> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('type')) {
-      context.handle(
-          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
+    if (data.containsKey('race_id')) {
+      context.handle(_raceIdMeta,
+          raceId.isAcceptableOrUnknown(data['race_id']!, _raceIdMeta));
     } else if (isInserting) {
-      context.missing(_typeMeta);
+      context.missing(_raceIdMeta);
+    }
+    if (data.containsKey('rider_id')) {
+      context.handle(_riderIdMeta,
+          riderId.isAcceptableOrUnknown(data['rider_id']!, _riderIdMeta));
+    } else if (isInserting) {
+      context.missing(_riderIdMeta);
+    }
+    if (data.containsKey('number')) {
+      context.handle(_numberMeta,
+          number.isAcceptableOrUnknown(data['number']!, _numberMeta));
+    } else if (isInserting) {
+      context.missing(_numberMeta);
+    }
+    if (data.containsKey('category')) {
+      context.handle(_categoryMeta,
+          category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
+    }
+    if (data.containsKey('rfid')) {
+      context.handle(
+          _rfidMeta, rfid.isAcceptableOrUnknown(data['rfid']!, _rfidMeta));
+    }
+    if (data.containsKey('status_id')) {
+      context.handle(_statusIdMeta,
+          statusId.isAcceptableOrUnknown(data['status_id']!, _statusIdMeta));
     }
     return context;
   }
@@ -1617,21 +1816,36 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Status map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Participant map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Status(
-      id: attachedDatabase.options.types
+    return Participant(
+      id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id']),
-      type: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
+      raceId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}race_id'])!,
+      riderId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}rider_id'])!,
+      number: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}number'])!,
+      category: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}category']),
+      rfid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}rfid']),
+      statusId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}status_id'])!,
     );
   }
 
   @override
-  Statuses createAlias(String alias) {
-    return Statuses(attachedDatabase, alias);
+  Participants createAlias(String alias) {
+    return Participants(attachedDatabase, alias);
   }
 
+  @override
+  List<String> get customConstraints => const [
+        'FOREIGN KEY(rider_id)REFERENCES riders(id)',
+        'FOREIGN KEY(race_id)REFERENCES races(id)'
+      ];
   @override
   bool get dontWriteConstraints => true;
 }
@@ -1729,6 +1943,18 @@ class Participant extends DataClass implements Insertable<Participant> {
         rfid: rfid.present ? rfid.value : this.rfid,
         statusId: statusId ?? this.statusId,
       );
+  Participant copyWithCompanion(ParticipantsCompanion data) {
+    return Participant(
+      id: data.id.present ? data.id.value : this.id,
+      raceId: data.raceId.present ? data.raceId.value : this.raceId,
+      riderId: data.riderId.present ? data.riderId.value : this.riderId,
+      number: data.number.present ? data.number.value : this.number,
+      category: data.category.present ? data.category.value : this.category,
+      rfid: data.rfid.present ? data.rfid.value : this.rfid,
+      statusId: data.statusId.present ? data.statusId.value : this.statusId,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('Participant(')
@@ -1868,94 +2094,155 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   }
 }
 
-class Participants extends Table with TableInfo<Participants, Participant> {
+class Starts extends Table with TableInfo<Starts, Start> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  Participants(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  Starts(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
+      hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
-  late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
-      'race_id', aliasedName, false,
+  static const VerificationMeta _stageIdMeta =
+      const VerificationMeta('stageId');
+  late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
+      'stage_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  final VerificationMeta _riderIdMeta = const VerificationMeta('riderId');
-  late final GeneratedColumn<int> riderId = GeneratedColumn<int>(
-      'rider_id', aliasedName, false,
+  static const VerificationMeta _participantIdMeta =
+      const VerificationMeta('participantId');
+  late final GeneratedColumn<int> participantId = GeneratedColumn<int>(
+      'participant_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  final VerificationMeta _numberMeta = const VerificationMeta('number');
-  late final GeneratedColumn<int> number = GeneratedColumn<int>(
-      'number', aliasedName, false,
-      type: DriftSqlType.int,
+  static const VerificationMeta _startTimeMeta =
+      const VerificationMeta('startTime');
+  late final GeneratedColumn<String> startTime = GeneratedColumn<String>(
+      'start_time', aliasedName, false,
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  final VerificationMeta _categoryMeta = const VerificationMeta('category');
-  late final GeneratedColumn<String> category = GeneratedColumn<String>(
-      'category', aliasedName, true,
+  static const VerificationMeta _timestampMeta =
+      const VerificationMeta('timestamp');
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+      'timestamp', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  final VerificationMeta _rfidMeta = const VerificationMeta('rfid');
-  late final GeneratedColumn<String> rfid = GeneratedColumn<String>(
-      'rfid', aliasedName, true,
+  static const VerificationMeta _automaticStartTimeMeta =
+      const VerificationMeta('automaticStartTime');
+  late final GeneratedColumn<String> automaticStartTime =
+      GeneratedColumn<String>('automatic_start_time', aliasedName, true,
+          type: DriftSqlType.string,
+          requiredDuringInsert: false,
+          $customConstraints: '');
+  static const VerificationMeta _automaticCorrectionMeta =
+      const VerificationMeta('automaticCorrection');
+  late final GeneratedColumn<int> automaticCorrection = GeneratedColumn<int>(
+      'automatic_correction', aliasedName, true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _manualStartTimeMeta =
+      const VerificationMeta('manualStartTime');
+  late final GeneratedColumn<String> manualStartTime = GeneratedColumn<String>(
+      'manual_start_time', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  final VerificationMeta _statusIdMeta = const VerificationMeta('statusId');
+  static const VerificationMeta _manualCorrectionMeta =
+      const VerificationMeta('manualCorrection');
+  late final GeneratedColumn<int> manualCorrection = GeneratedColumn<int>(
+      'manual_correction', aliasedName, true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _statusIdMeta =
+      const VerificationMeta('statusId');
   late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
       'status_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT 1',
-      defaultValue: const CustomExpression<int>('1'));
+      defaultValue: const CustomExpression('1'));
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, raceId, riderId, number, category, rfid, statusId];
+  List<GeneratedColumn> get $columns => [
+        id,
+        stageId,
+        participantId,
+        startTime,
+        timestamp,
+        automaticStartTime,
+        automaticCorrection,
+        manualStartTime,
+        manualCorrection,
+        statusId
+      ];
   @override
-  String get aliasedName => _alias ?? 'participants';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'participants';
+  String get actualTableName => $name;
+  static const String $name = 'starts';
   @override
-  VerificationContext validateIntegrity(Insertable<Participant> instance,
+  VerificationContext validateIntegrity(Insertable<Start> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('race_id')) {
-      context.handle(_raceIdMeta,
-          raceId.isAcceptableOrUnknown(data['race_id']!, _raceIdMeta));
+    if (data.containsKey('stage_id')) {
+      context.handle(_stageIdMeta,
+          stageId.isAcceptableOrUnknown(data['stage_id']!, _stageIdMeta));
     } else if (isInserting) {
-      context.missing(_raceIdMeta);
+      context.missing(_stageIdMeta);
     }
-    if (data.containsKey('rider_id')) {
-      context.handle(_riderIdMeta,
-          riderId.isAcceptableOrUnknown(data['rider_id']!, _riderIdMeta));
-    } else if (isInserting) {
-      context.missing(_riderIdMeta);
-    }
-    if (data.containsKey('number')) {
-      context.handle(_numberMeta,
-          number.isAcceptableOrUnknown(data['number']!, _numberMeta));
-    } else if (isInserting) {
-      context.missing(_numberMeta);
-    }
-    if (data.containsKey('category')) {
-      context.handle(_categoryMeta,
-          category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
-    }
-    if (data.containsKey('rfid')) {
+    if (data.containsKey('participant_id')) {
       context.handle(
-          _rfidMeta, rfid.isAcceptableOrUnknown(data['rfid']!, _rfidMeta));
+          _participantIdMeta,
+          participantId.isAcceptableOrUnknown(
+              data['participant_id']!, _participantIdMeta));
+    } else if (isInserting) {
+      context.missing(_participantIdMeta);
+    }
+    if (data.containsKey('start_time')) {
+      context.handle(_startTimeMeta,
+          startTime.isAcceptableOrUnknown(data['start_time']!, _startTimeMeta));
+    } else if (isInserting) {
+      context.missing(_startTimeMeta);
+    }
+    if (data.containsKey('timestamp')) {
+      context.handle(_timestampMeta,
+          timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
+    }
+    if (data.containsKey('automatic_start_time')) {
+      context.handle(
+          _automaticStartTimeMeta,
+          automaticStartTime.isAcceptableOrUnknown(
+              data['automatic_start_time']!, _automaticStartTimeMeta));
+    }
+    if (data.containsKey('automatic_correction')) {
+      context.handle(
+          _automaticCorrectionMeta,
+          automaticCorrection.isAcceptableOrUnknown(
+              data['automatic_correction']!, _automaticCorrectionMeta));
+    }
+    if (data.containsKey('manual_start_time')) {
+      context.handle(
+          _manualStartTimeMeta,
+          manualStartTime.isAcceptableOrUnknown(
+              data['manual_start_time']!, _manualStartTimeMeta));
+    }
+    if (data.containsKey('manual_correction')) {
+      context.handle(
+          _manualCorrectionMeta,
+          manualCorrection.isAcceptableOrUnknown(
+              data['manual_correction']!, _manualCorrectionMeta));
     }
     if (data.containsKey('status_id')) {
       context.handle(_statusIdMeta,
@@ -1967,35 +2254,41 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Participant map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Start map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Participant(
-      id: attachedDatabase.options.types
+    return Start(
+      id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id']),
-      raceId: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}race_id'])!,
-      riderId: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}rider_id'])!,
-      number: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}number'])!,
-      category: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}category']),
-      rfid: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}rfid']),
-      statusId: attachedDatabase.options.types
+      stageId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}stage_id'])!,
+      participantId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}participant_id'])!,
+      startTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}start_time'])!,
+      timestamp: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
+      automaticStartTime: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}automatic_start_time']),
+      automaticCorrection: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}automatic_correction']),
+      manualStartTime: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}manual_start_time']),
+      manualCorrection: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}manual_correction']),
+      statusId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}status_id'])!,
     );
   }
 
   @override
-  Participants createAlias(String alias) {
-    return Participants(attachedDatabase, alias);
+  Starts createAlias(String alias) {
+    return Starts(attachedDatabase, alias);
   }
 
   @override
   List<String> get customConstraints => const [
-        'FOREIGN KEY (rider_id) REFERENCES riders(id)',
-        'FOREIGN KEY (race_id) REFERENCES races(id)'
+        'FOREIGN KEY(stage_id)REFERENCES stages(id)',
+        'FOREIGN KEY(participant_id)REFERENCES participants(id)'
       ];
   @override
   bool get dontWriteConstraints => true;
@@ -2142,6 +2435,31 @@ class Start extends DataClass implements Insertable<Start> {
             : this.manualCorrection,
         statusId: statusId ?? this.statusId,
       );
+  Start copyWithCompanion(StartsCompanion data) {
+    return Start(
+      id: data.id.present ? data.id.value : this.id,
+      stageId: data.stageId.present ? data.stageId.value : this.stageId,
+      participantId: data.participantId.present
+          ? data.participantId.value
+          : this.participantId,
+      startTime: data.startTime.present ? data.startTime.value : this.startTime,
+      timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+      automaticStartTime: data.automaticStartTime.present
+          ? data.automaticStartTime.value
+          : this.automaticStartTime,
+      automaticCorrection: data.automaticCorrection.present
+          ? data.automaticCorrection.value
+          : this.automaticCorrection,
+      manualStartTime: data.manualStartTime.present
+          ? data.manualStartTime.value
+          : this.manualStartTime,
+      manualCorrection: data.manualCorrection.present
+          ? data.manualCorrection.value
+          : this.manualCorrection,
+      statusId: data.statusId.present ? data.statusId.value : this.statusId,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('Start(')
@@ -2331,96 +2649,71 @@ class StartsCompanion extends UpdateCompanion<Start> {
   }
 }
 
-class Starts extends Table with TableInfo<Starts, Start> {
+class Finishes extends Table with TableInfo<Finishes, Finish> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  Starts(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  Finishes(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
+      hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _stageIdMeta = const VerificationMeta('stageId');
+  static const VerificationMeta _stageIdMeta =
+      const VerificationMeta('stageId');
   late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
       'stage_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  final VerificationMeta _participantIdMeta =
-      const VerificationMeta('participantId');
-  late final GeneratedColumn<int> participantId = GeneratedColumn<int>(
-      'participant_id', aliasedName, false,
+  static const VerificationMeta _numberMeta = const VerificationMeta('number');
+  late final GeneratedColumn<int> number = GeneratedColumn<int>(
+      'number', aliasedName, true,
       type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
-  final VerificationMeta _startTimeMeta = const VerificationMeta('startTime');
-  late final GeneratedColumn<String> startTime = GeneratedColumn<String>(
-      'start_time', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
-  final VerificationMeta _timestampMeta = const VerificationMeta('timestamp');
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _timestampMeta =
+      const VerificationMeta('timestamp');
   late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
       'timestamp', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  final VerificationMeta _automaticStartTimeMeta =
-      const VerificationMeta('automaticStartTime');
-  late final GeneratedColumn<String> automaticStartTime =
-      GeneratedColumn<String>('automatic_start_time', aliasedName, true,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          $customConstraints: '');
-  final VerificationMeta _automaticCorrectionMeta =
-      const VerificationMeta('automaticCorrection');
-  late final GeneratedColumn<int> automaticCorrection = GeneratedColumn<int>(
-      'automatic_correction', aliasedName, true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _manualStartTimeMeta =
-      const VerificationMeta('manualStartTime');
-  late final GeneratedColumn<String> manualStartTime = GeneratedColumn<String>(
-      'manual_start_time', aliasedName, true,
+  static const VerificationMeta _finishTimeMeta =
+      const VerificationMeta('finishTime');
+  late final GeneratedColumn<String> finishTime = GeneratedColumn<String>(
+      'finish_time', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  final VerificationMeta _manualCorrectionMeta =
-      const VerificationMeta('manualCorrection');
-  late final GeneratedColumn<int> manualCorrection = GeneratedColumn<int>(
-      'manual_correction', aliasedName, true,
-      type: DriftSqlType.int,
+  static const VerificationMeta _isHiddenMeta =
+      const VerificationMeta('isHidden');
+  late final GeneratedColumn<bool> isHidden = GeneratedColumn<bool>(
+      'is_hidden', aliasedName, false,
+      type: DriftSqlType.bool,
       requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _statusIdMeta = const VerificationMeta('statusId');
-  late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
-      'status_id', aliasedName, false,
-      type: DriftSqlType.int,
+      $customConstraints: 'NOT NULL DEFAULT FALSE',
+      defaultValue: const CustomExpression('FALSE'));
+  static const VerificationMeta _isManualMeta =
+      const VerificationMeta('isManual');
+  late final GeneratedColumn<bool> isManual = GeneratedColumn<bool>(
+      'is_manual', aliasedName, false,
+      type: DriftSqlType.bool,
       requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT 1',
-      defaultValue: const CustomExpression<int>('1'));
+      $customConstraints: 'NOT NULL DEFAULT FALSE',
+      defaultValue: const CustomExpression('FALSE'));
   @override
-  List<GeneratedColumn> get $columns => [
-        id,
-        stageId,
-        participantId,
-        startTime,
-        timestamp,
-        automaticStartTime,
-        automaticCorrection,
-        manualStartTime,
-        manualCorrection,
-        statusId
-      ];
+  List<GeneratedColumn> get $columns =>
+      [id, stageId, number, timestamp, finishTime, isHidden, isManual];
   @override
-  String get aliasedName => _alias ?? 'starts';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'starts';
+  String get actualTableName => $name;
+  static const String $name = 'finishes';
   @override
-  VerificationContext validateIntegrity(Insertable<Start> instance,
+  VerificationContext validateIntegrity(Insertable<Finish> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -2433,51 +2726,27 @@ class Starts extends Table with TableInfo<Starts, Start> {
     } else if (isInserting) {
       context.missing(_stageIdMeta);
     }
-    if (data.containsKey('participant_id')) {
-      context.handle(
-          _participantIdMeta,
-          participantId.isAcceptableOrUnknown(
-              data['participant_id']!, _participantIdMeta));
-    } else if (isInserting) {
-      context.missing(_participantIdMeta);
-    }
-    if (data.containsKey('start_time')) {
-      context.handle(_startTimeMeta,
-          startTime.isAcceptableOrUnknown(data['start_time']!, _startTimeMeta));
-    } else if (isInserting) {
-      context.missing(_startTimeMeta);
+    if (data.containsKey('number')) {
+      context.handle(_numberMeta,
+          number.isAcceptableOrUnknown(data['number']!, _numberMeta));
     }
     if (data.containsKey('timestamp')) {
       context.handle(_timestampMeta,
           timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
     }
-    if (data.containsKey('automatic_start_time')) {
+    if (data.containsKey('finish_time')) {
       context.handle(
-          _automaticStartTimeMeta,
-          automaticStartTime.isAcceptableOrUnknown(
-              data['automatic_start_time']!, _automaticStartTimeMeta));
+          _finishTimeMeta,
+          finishTime.isAcceptableOrUnknown(
+              data['finish_time']!, _finishTimeMeta));
     }
-    if (data.containsKey('automatic_correction')) {
-      context.handle(
-          _automaticCorrectionMeta,
-          automaticCorrection.isAcceptableOrUnknown(
-              data['automatic_correction']!, _automaticCorrectionMeta));
+    if (data.containsKey('is_hidden')) {
+      context.handle(_isHiddenMeta,
+          isHidden.isAcceptableOrUnknown(data['is_hidden']!, _isHiddenMeta));
     }
-    if (data.containsKey('manual_start_time')) {
-      context.handle(
-          _manualStartTimeMeta,
-          manualStartTime.isAcceptableOrUnknown(
-              data['manual_start_time']!, _manualStartTimeMeta));
-    }
-    if (data.containsKey('manual_correction')) {
-      context.handle(
-          _manualCorrectionMeta,
-          manualCorrection.isAcceptableOrUnknown(
-              data['manual_correction']!, _manualCorrectionMeta));
-    }
-    if (data.containsKey('status_id')) {
-      context.handle(_statusIdMeta,
-          statusId.isAcceptableOrUnknown(data['status_id']!, _statusIdMeta));
+    if (data.containsKey('is_manual')) {
+      context.handle(_isManualMeta,
+          isManual.isAcceptableOrUnknown(data['is_manual']!, _isManualMeta));
     }
     return context;
   }
@@ -2485,42 +2754,34 @@ class Starts extends Table with TableInfo<Starts, Start> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Start map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Finish map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Start(
-      id: attachedDatabase.options.types
+    return Finish(
+      id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id']),
-      stageId: attachedDatabase.options.types
+      stageId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}stage_id'])!,
-      participantId: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}participant_id'])!,
-      startTime: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}start_time'])!,
-      timestamp: attachedDatabase.options.types
+      number: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}number']),
+      timestamp: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
-      automaticStartTime: attachedDatabase.options.types.read(
-          DriftSqlType.string, data['${effectivePrefix}automatic_start_time']),
-      automaticCorrection: attachedDatabase.options.types.read(
-          DriftSqlType.int, data['${effectivePrefix}automatic_correction']),
-      manualStartTime: attachedDatabase.options.types.read(
-          DriftSqlType.string, data['${effectivePrefix}manual_start_time']),
-      manualCorrection: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}manual_correction']),
-      statusId: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}status_id'])!,
+      finishTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}finish_time']),
+      isHidden: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_hidden'])!,
+      isManual: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_manual'])!,
     );
   }
 
   @override
-  Starts createAlias(String alias) {
-    return Starts(attachedDatabase, alias);
+  Finishes createAlias(String alias) {
+    return Finishes(attachedDatabase, alias);
   }
 
   @override
-  List<String> get customConstraints => const [
-        'FOREIGN KEY (stage_id) REFERENCES stages(id)',
-        'FOREIGN KEY (participant_id) REFERENCES participants(id)'
-      ];
+  List<String> get customConstraints =>
+      const ['FOREIGN KEY(stage_id)REFERENCES stages(id)'];
   @override
   bool get dontWriteConstraints => true;
 }
@@ -2623,6 +2884,19 @@ class Finish extends DataClass implements Insertable<Finish> {
         isHidden: isHidden ?? this.isHidden,
         isManual: isManual ?? this.isManual,
       );
+  Finish copyWithCompanion(FinishesCompanion data) {
+    return Finish(
+      id: data.id.present ? data.id.value : this.id,
+      stageId: data.stageId.present ? data.stageId.value : this.stageId,
+      number: data.number.present ? data.number.value : this.number,
+      timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+      finishTime:
+          data.finishTime.present ? data.finishTime.value : this.finishTime,
+      isHidden: data.isHidden.present ? data.isHidden.value : this.isHidden,
+      isManual: data.isManual.present ? data.isManual.value : this.isManual,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('Finish(')
@@ -2760,138 +3034,9 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
   }
 }
 
-class Finishes extends Table with TableInfo<Finishes, Finish> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  Finishes(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _stageIdMeta = const VerificationMeta('stageId');
-  late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
-      'stage_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
-  final VerificationMeta _numberMeta = const VerificationMeta('number');
-  late final GeneratedColumn<int> number = GeneratedColumn<int>(
-      'number', aliasedName, true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _timestampMeta = const VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
-      'timestamp', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _finishTimeMeta = const VerificationMeta('finishTime');
-  late final GeneratedColumn<String> finishTime = GeneratedColumn<String>(
-      'finish_time', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  final VerificationMeta _isHiddenMeta = const VerificationMeta('isHidden');
-  late final GeneratedColumn<bool> isHidden = GeneratedColumn<bool>(
-      'is_hidden', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT false',
-      defaultValue: const CustomExpression<bool>('false'));
-  final VerificationMeta _isManualMeta = const VerificationMeta('isManual');
-  late final GeneratedColumn<bool> isManual = GeneratedColumn<bool>(
-      'is_manual', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT false',
-      defaultValue: const CustomExpression<bool>('false'));
-  @override
-  List<GeneratedColumn> get $columns =>
-      [id, stageId, number, timestamp, finishTime, isHidden, isManual];
-  @override
-  String get aliasedName => _alias ?? 'finishes';
-  @override
-  String get actualTableName => 'finishes';
-  @override
-  VerificationContext validateIntegrity(Insertable<Finish> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('stage_id')) {
-      context.handle(_stageIdMeta,
-          stageId.isAcceptableOrUnknown(data['stage_id']!, _stageIdMeta));
-    } else if (isInserting) {
-      context.missing(_stageIdMeta);
-    }
-    if (data.containsKey('number')) {
-      context.handle(_numberMeta,
-          number.isAcceptableOrUnknown(data['number']!, _numberMeta));
-    }
-    if (data.containsKey('timestamp')) {
-      context.handle(_timestampMeta,
-          timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
-    }
-    if (data.containsKey('finish_time')) {
-      context.handle(
-          _finishTimeMeta,
-          finishTime.isAcceptableOrUnknown(
-              data['finish_time']!, _finishTimeMeta));
-    }
-    if (data.containsKey('is_hidden')) {
-      context.handle(_isHiddenMeta,
-          isHidden.isAcceptableOrUnknown(data['is_hidden']!, _isHiddenMeta));
-    }
-    if (data.containsKey('is_manual')) {
-      context.handle(_isManualMeta,
-          isManual.isAcceptableOrUnknown(data['is_manual']!, _isManualMeta));
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  Finish map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Finish(
-      id: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
-      stageId: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}stage_id'])!,
-      number: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}number']),
-      timestamp: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
-      finishTime: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}finish_time']),
-      isHidden: attachedDatabase.options.types
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_hidden'])!,
-      isManual: attachedDatabase.options.types
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_manual'])!,
-    );
-  }
-
-  @override
-  Finishes createAlias(String alias) {
-    return Finishes(attachedDatabase, alias);
-  }
-
-  @override
-  List<String> get customConstraints =>
-      const ['FOREIGN KEY (stage_id) REFERENCES stages(id)'];
-  @override
-  bool get dontWriteConstraints => true;
-}
-
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
+  $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final Races races = Races(this);
   late final Trails trails = Trails(this);
   late final Stages stages = Stages(this);
@@ -2974,34 +3119,32 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           participants,
           riders,
           starts,
-        }).map((QueryRow row) {
-      return GetParticipantsAtStartResult(
-        riderId: row.read<int>('rider_id'),
-        raceId: row.read<int>('race_id'),
-        number: row.read<int>('number'),
-        category: row.readNullable<String>('category'),
-        rfid: row.readNullable<String>('rfid'),
-        participantStatusId: row.read<int>('participant_status_id'),
-        name: row.read<String>('name'),
-        nickname: row.readNullable<String>('nickname'),
-        birthday: row.readNullable<String>('birthday'),
-        team: row.readNullable<String>('team'),
-        city: row.readNullable<String>('city'),
-        email: row.readNullable<String>('email'),
-        phone: row.readNullable<String>('phone'),
-        comment: row.readNullable<String>('comment'),
-        startId: row.readNullable<int>('start_id'),
-        stageId: row.read<int>('stage_id'),
-        participantId: row.read<int>('participant_id'),
-        startTime: row.read<String>('start_time'),
-        timestamp: row.readNullable<String>('timestamp'),
-        automaticStartTime: row.readNullable<String>('automatic_start_time'),
-        automaticCorrection: row.readNullable<int>('automatic_correction'),
-        manualStartTime: row.readNullable<String>('manual_start_time'),
-        manualCorrection: row.readNullable<int>('manual_correction'),
-        statusId: row.read<int>('status_id'),
-      );
-    });
+        }).map((QueryRow row) => GetParticipantsAtStartResult(
+          riderId: row.read<int>('rider_id'),
+          raceId: row.read<int>('race_id'),
+          number: row.read<int>('number'),
+          category: row.readNullable<String>('category'),
+          rfid: row.readNullable<String>('rfid'),
+          participantStatusId: row.read<int>('participant_status_id'),
+          name: row.read<String>('name'),
+          nickname: row.readNullable<String>('nickname'),
+          birthday: row.readNullable<String>('birthday'),
+          team: row.readNullable<String>('team'),
+          city: row.readNullable<String>('city'),
+          email: row.readNullable<String>('email'),
+          phone: row.readNullable<String>('phone'),
+          comment: row.readNullable<String>('comment'),
+          startId: row.readNullable<int>('start_id'),
+          stageId: row.read<int>('stage_id'),
+          participantId: row.read<int>('participant_id'),
+          startTime: row.read<String>('start_time'),
+          timestamp: row.readNullable<String>('timestamp'),
+          automaticStartTime: row.readNullable<String>('automatic_start_time'),
+          automaticCorrection: row.readNullable<int>('automatic_correction'),
+          manualStartTime: row.readNullable<String>('manual_start_time'),
+          manualCorrection: row.readNullable<int>('manual_correction'),
+          statusId: row.read<int>('status_id'),
+        ));
   }
 
   Selectable<GetExistedStartingParticipantsResult>
@@ -3019,27 +3162,25 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         readsFrom: {
           starts,
           participants,
-        }).map((QueryRow row) {
-      return GetExistedStartingParticipantsResult(
-        id: row.readNullable<int>('id'),
-        stageId: row.read<int>('stage_id'),
-        participantId: row.read<int>('participant_id'),
-        startTime: row.read<String>('start_time'),
-        timestamp: row.readNullable<String>('timestamp'),
-        automaticStartTime: row.readNullable<String>('automatic_start_time'),
-        automaticCorrection: row.readNullable<int>('automatic_correction'),
-        manualStartTime: row.readNullable<String>('manual_start_time'),
-        manualCorrection: row.readNullable<int>('manual_correction'),
-        statusId: row.read<int>('status_id'),
-        id1: row.readNullable<int>('id'),
-        raceId: row.read<int>('race_id'),
-        riderId: row.read<int>('rider_id'),
-        number: row.read<int>('number'),
-        category: row.readNullable<String>('category'),
-        rfid: row.readNullable<String>('rfid'),
-        statusId1: row.read<int>('status_id'),
-      );
-    });
+        }).map((QueryRow row) => GetExistedStartingParticipantsResult(
+          id: row.readNullable<int>('id'),
+          stageId: row.read<int>('stage_id'),
+          participantId: row.read<int>('participant_id'),
+          startTime: row.read<String>('start_time'),
+          timestamp: row.readNullable<String>('timestamp'),
+          automaticStartTime: row.readNullable<String>('automatic_start_time'),
+          automaticCorrection: row.readNullable<int>('automatic_correction'),
+          manualStartTime: row.readNullable<String>('manual_start_time'),
+          manualCorrection: row.readNullable<int>('manual_correction'),
+          statusId: row.read<int>('status_id'),
+          id1: row.readNullable<int>('id'),
+          raceId: row.read<int>('race_id'),
+          riderId: row.read<int>('rider_id'),
+          number: row.read<int>('number'),
+          category: row.readNullable<String>('category'),
+          rfid: row.readNullable<String>('rfid'),
+          statusId1: row.read<int>('status_id'),
+        ));
   }
 
   Future<int> setStartingInfo(
@@ -3109,15 +3250,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         readsFrom: {
           participants,
           starts,
-        }).map((QueryRow row) {
-      return GetNextStartingParticipantsResult(
-        number: row.read<int>('number'),
-        startTime: row.read<String>('start_time'),
-        automaticStartTime: row.readNullable<String>('automatic_start_time'),
-        automaticCorrection: row.readNullable<int>('automatic_correction'),
-        manualStartTime: row.readNullable<String>('manual_start_time'),
-      );
-    });
+        }).map((QueryRow row) => GetNextStartingParticipantsResult(
+          number: row.read<int>('number'),
+          startTime: row.read<String>('start_time'),
+          automaticStartTime: row.readNullable<String>('automatic_start_time'),
+          automaticCorrection: row.readNullable<int>('automatic_correction'),
+          manualStartTime: row.readNullable<String>('manual_start_time'),
+        ));
   }
 
   Selectable<int> getForBeep(
@@ -3150,23 +3289,1340 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           participants,
           starts,
           riders,
-        }).map((QueryRow row) {
-      return GetStartingParticipantAndFollowingResult(
-        number: row.read<int>('number'),
-        startTime: row.read<String>('start_time'),
-        automaticStartTime: row.readNullable<String>('automatic_start_time'),
-        automaticCorrection: row.readNullable<int>('automatic_correction'),
-        name: row.read<String>('name'),
-      );
-    });
+        }).map((QueryRow row) => GetStartingParticipantAndFollowingResult(
+          number: row.read<int>('number'),
+          startTime: row.read<String>('start_time'),
+          automaticStartTime: row.readNullable<String>('automatic_start_time'),
+          automaticCorrection: row.readNullable<int>('automatic_correction'),
+          name: row.read<String>('name'),
+        ));
   }
 
   @override
-  Iterable<TableInfo<Table, dynamic>> get allTables =>
+  Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
       [races, trails, stages, riders, statuses, participants, starts, finishes];
+}
+
+typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
+  Value<int?> id,
+  required String name,
+  Value<String?> startDate,
+  Value<String?> finishDate,
+  Value<String?> location,
+  Value<bool> isDeleted,
+});
+typedef $RacesUpdateCompanionBuilder = RacesCompanion Function({
+  Value<int?> id,
+  Value<String> name,
+  Value<String?> startDate,
+  Value<String?> finishDate,
+  Value<String?> location,
+  Value<bool> isDeleted,
+});
+
+class $RacesFilterComposer extends FilterComposer<_$AppDatabase, Races> {
+  $RacesFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get startDate => $state.composableBuilder(
+      column: $state.table.startDate,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get finishDate => $state.composableBuilder(
+      column: $state.table.finishDate,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get location => $state.composableBuilder(
+      column: $state.table.location,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isDeleted => $state.composableBuilder(
+      column: $state.table.isDeleted,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $RacesOrderingComposer extends OrderingComposer<_$AppDatabase, Races> {
+  $RacesOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get startDate => $state.composableBuilder(
+      column: $state.table.startDate,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get finishDate => $state.composableBuilder(
+      column: $state.table.finishDate,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get location => $state.composableBuilder(
+      column: $state.table.location,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isDeleted => $state.composableBuilder(
+      column: $state.table.isDeleted,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $RacesTableManager extends RootTableManager<
+    _$AppDatabase,
+    Races,
+    Race,
+    $RacesFilterComposer,
+    $RacesOrderingComposer,
+    $RacesCreateCompanionBuilder,
+    $RacesUpdateCompanionBuilder,
+    (Race, BaseReferences<_$AppDatabase, Races, Race>),
+    Race,
+    PrefetchHooks Function()> {
+  $RacesTableManager(_$AppDatabase db, Races table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $RacesFilterComposer(ComposerState(db, table)),
+          orderingComposer: $RacesOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String?> startDate = const Value.absent(),
+            Value<String?> finishDate = const Value.absent(),
+            Value<String?> location = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
+          }) =>
+              RacesCompanion(
+            id: id,
+            name: name,
+            startDate: startDate,
+            finishDate: finishDate,
+            location: location,
+            isDeleted: isDeleted,
+          ),
+          createCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            required String name,
+            Value<String?> startDate = const Value.absent(),
+            Value<String?> finishDate = const Value.absent(),
+            Value<String?> location = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
+          }) =>
+              RacesCompanion.insert(
+            id: id,
+            name: name,
+            startDate: startDate,
+            finishDate: finishDate,
+            location: location,
+            isDeleted: isDeleted,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $RacesProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Races,
+    Race,
+    $RacesFilterComposer,
+    $RacesOrderingComposer,
+    $RacesCreateCompanionBuilder,
+    $RacesUpdateCompanionBuilder,
+    (Race, BaseReferences<_$AppDatabase, Races, Race>),
+    Race,
+    PrefetchHooks Function()>;
+typedef $TrailsCreateCompanionBuilder = TrailsCompanion Function({
+  Value<int?> id,
+  required String name,
+  Value<int?> distance,
+  Value<int?> elevation,
+  Value<Uint8List?> gpxTrack,
+  Value<String?> link,
+  Value<String?> comment,
+});
+typedef $TrailsUpdateCompanionBuilder = TrailsCompanion Function({
+  Value<int?> id,
+  Value<String> name,
+  Value<int?> distance,
+  Value<int?> elevation,
+  Value<Uint8List?> gpxTrack,
+  Value<String?> link,
+  Value<String?> comment,
+});
+
+class $TrailsFilterComposer extends FilterComposer<_$AppDatabase, Trails> {
+  $TrailsFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get distance => $state.composableBuilder(
+      column: $state.table.distance,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get elevation => $state.composableBuilder(
+      column: $state.table.elevation,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<Uint8List> get gpxTrack => $state.composableBuilder(
+      column: $state.table.gpxTrack,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get link => $state.composableBuilder(
+      column: $state.table.link,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get comment => $state.composableBuilder(
+      column: $state.table.comment,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $TrailsOrderingComposer extends OrderingComposer<_$AppDatabase, Trails> {
+  $TrailsOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get distance => $state.composableBuilder(
+      column: $state.table.distance,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get elevation => $state.composableBuilder(
+      column: $state.table.elevation,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<Uint8List> get gpxTrack => $state.composableBuilder(
+      column: $state.table.gpxTrack,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get link => $state.composableBuilder(
+      column: $state.table.link,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get comment => $state.composableBuilder(
+      column: $state.table.comment,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $TrailsTableManager extends RootTableManager<
+    _$AppDatabase,
+    Trails,
+    Trail,
+    $TrailsFilterComposer,
+    $TrailsOrderingComposer,
+    $TrailsCreateCompanionBuilder,
+    $TrailsUpdateCompanionBuilder,
+    (Trail, BaseReferences<_$AppDatabase, Trails, Trail>),
+    Trail,
+    PrefetchHooks Function()> {
+  $TrailsTableManager(_$AppDatabase db, Trails table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $TrailsFilterComposer(ComposerState(db, table)),
+          orderingComposer: $TrailsOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<int?> distance = const Value.absent(),
+            Value<int?> elevation = const Value.absent(),
+            Value<Uint8List?> gpxTrack = const Value.absent(),
+            Value<String?> link = const Value.absent(),
+            Value<String?> comment = const Value.absent(),
+          }) =>
+              TrailsCompanion(
+            id: id,
+            name: name,
+            distance: distance,
+            elevation: elevation,
+            gpxTrack: gpxTrack,
+            link: link,
+            comment: comment,
+          ),
+          createCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            required String name,
+            Value<int?> distance = const Value.absent(),
+            Value<int?> elevation = const Value.absent(),
+            Value<Uint8List?> gpxTrack = const Value.absent(),
+            Value<String?> link = const Value.absent(),
+            Value<String?> comment = const Value.absent(),
+          }) =>
+              TrailsCompanion.insert(
+            id: id,
+            name: name,
+            distance: distance,
+            elevation: elevation,
+            gpxTrack: gpxTrack,
+            link: link,
+            comment: comment,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $TrailsProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Trails,
+    Trail,
+    $TrailsFilterComposer,
+    $TrailsOrderingComposer,
+    $TrailsCreateCompanionBuilder,
+    $TrailsUpdateCompanionBuilder,
+    (Trail, BaseReferences<_$AppDatabase, Trails, Trail>),
+    Trail,
+    PrefetchHooks Function()>;
+typedef $StagesCreateCompanionBuilder = StagesCompanion Function({
+  Value<int?> id,
+  Value<int?> trailId,
+  required int raceId,
+  required String name,
+  Value<bool> isActive,
+  Value<bool> isDeleted,
+});
+typedef $StagesUpdateCompanionBuilder = StagesCompanion Function({
+  Value<int?> id,
+  Value<int?> trailId,
+  Value<int> raceId,
+  Value<String> name,
+  Value<bool> isActive,
+  Value<bool> isDeleted,
+});
+
+class $StagesFilterComposer extends FilterComposer<_$AppDatabase, Stages> {
+  $StagesFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get trailId => $state.composableBuilder(
+      column: $state.table.trailId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get raceId => $state.composableBuilder(
+      column: $state.table.raceId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isActive => $state.composableBuilder(
+      column: $state.table.isActive,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isDeleted => $state.composableBuilder(
+      column: $state.table.isDeleted,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $StagesOrderingComposer extends OrderingComposer<_$AppDatabase, Stages> {
+  $StagesOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get trailId => $state.composableBuilder(
+      column: $state.table.trailId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get raceId => $state.composableBuilder(
+      column: $state.table.raceId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isActive => $state.composableBuilder(
+      column: $state.table.isActive,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isDeleted => $state.composableBuilder(
+      column: $state.table.isDeleted,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $StagesTableManager extends RootTableManager<
+    _$AppDatabase,
+    Stages,
+    Stage,
+    $StagesFilterComposer,
+    $StagesOrderingComposer,
+    $StagesCreateCompanionBuilder,
+    $StagesUpdateCompanionBuilder,
+    (Stage, BaseReferences<_$AppDatabase, Stages, Stage>),
+    Stage,
+    PrefetchHooks Function()> {
+  $StagesTableManager(_$AppDatabase db, Stages table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $StagesFilterComposer(ComposerState(db, table)),
+          orderingComposer: $StagesOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<int?> trailId = const Value.absent(),
+            Value<int> raceId = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<bool> isActive = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
+          }) =>
+              StagesCompanion(
+            id: id,
+            trailId: trailId,
+            raceId: raceId,
+            name: name,
+            isActive: isActive,
+            isDeleted: isDeleted,
+          ),
+          createCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<int?> trailId = const Value.absent(),
+            required int raceId,
+            required String name,
+            Value<bool> isActive = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
+          }) =>
+              StagesCompanion.insert(
+            id: id,
+            trailId: trailId,
+            raceId: raceId,
+            name: name,
+            isActive: isActive,
+            isDeleted: isDeleted,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $StagesProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Stages,
+    Stage,
+    $StagesFilterComposer,
+    $StagesOrderingComposer,
+    $StagesCreateCompanionBuilder,
+    $StagesUpdateCompanionBuilder,
+    (Stage, BaseReferences<_$AppDatabase, Stages, Stage>),
+    Stage,
+    PrefetchHooks Function()>;
+typedef $RidersCreateCompanionBuilder = RidersCompanion Function({
+  Value<int?> id,
+  required String name,
+  Value<String?> nickname,
+  Value<String?> birthday,
+  Value<String?> team,
+  Value<String?> city,
+  Value<String?> email,
+  Value<String?> phone,
+  Value<String?> comment,
+});
+typedef $RidersUpdateCompanionBuilder = RidersCompanion Function({
+  Value<int?> id,
+  Value<String> name,
+  Value<String?> nickname,
+  Value<String?> birthday,
+  Value<String?> team,
+  Value<String?> city,
+  Value<String?> email,
+  Value<String?> phone,
+  Value<String?> comment,
+});
+
+class $RidersFilterComposer extends FilterComposer<_$AppDatabase, Riders> {
+  $RidersFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get nickname => $state.composableBuilder(
+      column: $state.table.nickname,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get birthday => $state.composableBuilder(
+      column: $state.table.birthday,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get team => $state.composableBuilder(
+      column: $state.table.team,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get city => $state.composableBuilder(
+      column: $state.table.city,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get email => $state.composableBuilder(
+      column: $state.table.email,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get phone => $state.composableBuilder(
+      column: $state.table.phone,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get comment => $state.composableBuilder(
+      column: $state.table.comment,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $RidersOrderingComposer extends OrderingComposer<_$AppDatabase, Riders> {
+  $RidersOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get nickname => $state.composableBuilder(
+      column: $state.table.nickname,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get birthday => $state.composableBuilder(
+      column: $state.table.birthday,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get team => $state.composableBuilder(
+      column: $state.table.team,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get city => $state.composableBuilder(
+      column: $state.table.city,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get email => $state.composableBuilder(
+      column: $state.table.email,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get phone => $state.composableBuilder(
+      column: $state.table.phone,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get comment => $state.composableBuilder(
+      column: $state.table.comment,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $RidersTableManager extends RootTableManager<
+    _$AppDatabase,
+    Riders,
+    Rider,
+    $RidersFilterComposer,
+    $RidersOrderingComposer,
+    $RidersCreateCompanionBuilder,
+    $RidersUpdateCompanionBuilder,
+    (Rider, BaseReferences<_$AppDatabase, Riders, Rider>),
+    Rider,
+    PrefetchHooks Function()> {
+  $RidersTableManager(_$AppDatabase db, Riders table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $RidersFilterComposer(ComposerState(db, table)),
+          orderingComposer: $RidersOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String?> nickname = const Value.absent(),
+            Value<String?> birthday = const Value.absent(),
+            Value<String?> team = const Value.absent(),
+            Value<String?> city = const Value.absent(),
+            Value<String?> email = const Value.absent(),
+            Value<String?> phone = const Value.absent(),
+            Value<String?> comment = const Value.absent(),
+          }) =>
+              RidersCompanion(
+            id: id,
+            name: name,
+            nickname: nickname,
+            birthday: birthday,
+            team: team,
+            city: city,
+            email: email,
+            phone: phone,
+            comment: comment,
+          ),
+          createCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            required String name,
+            Value<String?> nickname = const Value.absent(),
+            Value<String?> birthday = const Value.absent(),
+            Value<String?> team = const Value.absent(),
+            Value<String?> city = const Value.absent(),
+            Value<String?> email = const Value.absent(),
+            Value<String?> phone = const Value.absent(),
+            Value<String?> comment = const Value.absent(),
+          }) =>
+              RidersCompanion.insert(
+            id: id,
+            name: name,
+            nickname: nickname,
+            birthday: birthday,
+            team: team,
+            city: city,
+            email: email,
+            phone: phone,
+            comment: comment,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $RidersProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Riders,
+    Rider,
+    $RidersFilterComposer,
+    $RidersOrderingComposer,
+    $RidersCreateCompanionBuilder,
+    $RidersUpdateCompanionBuilder,
+    (Rider, BaseReferences<_$AppDatabase, Riders, Rider>),
+    Rider,
+    PrefetchHooks Function()>;
+typedef $StatusesCreateCompanionBuilder = StatusesCompanion Function({
+  Value<int?> id,
+  required String type,
+});
+typedef $StatusesUpdateCompanionBuilder = StatusesCompanion Function({
+  Value<int?> id,
+  Value<String> type,
+});
+
+class $StatusesFilterComposer extends FilterComposer<_$AppDatabase, Statuses> {
+  $StatusesFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get type => $state.composableBuilder(
+      column: $state.table.type,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $StatusesOrderingComposer
+    extends OrderingComposer<_$AppDatabase, Statuses> {
+  $StatusesOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get type => $state.composableBuilder(
+      column: $state.table.type,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $StatusesTableManager extends RootTableManager<
+    _$AppDatabase,
+    Statuses,
+    Status,
+    $StatusesFilterComposer,
+    $StatusesOrderingComposer,
+    $StatusesCreateCompanionBuilder,
+    $StatusesUpdateCompanionBuilder,
+    (Status, BaseReferences<_$AppDatabase, Statuses, Status>),
+    Status,
+    PrefetchHooks Function()> {
+  $StatusesTableManager(_$AppDatabase db, Statuses table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $StatusesFilterComposer(ComposerState(db, table)),
+          orderingComposer: $StatusesOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<String> type = const Value.absent(),
+          }) =>
+              StatusesCompanion(
+            id: id,
+            type: type,
+          ),
+          createCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            required String type,
+          }) =>
+              StatusesCompanion.insert(
+            id: id,
+            type: type,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $StatusesProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Statuses,
+    Status,
+    $StatusesFilterComposer,
+    $StatusesOrderingComposer,
+    $StatusesCreateCompanionBuilder,
+    $StatusesUpdateCompanionBuilder,
+    (Status, BaseReferences<_$AppDatabase, Statuses, Status>),
+    Status,
+    PrefetchHooks Function()>;
+typedef $ParticipantsCreateCompanionBuilder = ParticipantsCompanion Function({
+  Value<int?> id,
+  required int raceId,
+  required int riderId,
+  required int number,
+  Value<String?> category,
+  Value<String?> rfid,
+  Value<int> statusId,
+});
+typedef $ParticipantsUpdateCompanionBuilder = ParticipantsCompanion Function({
+  Value<int?> id,
+  Value<int> raceId,
+  Value<int> riderId,
+  Value<int> number,
+  Value<String?> category,
+  Value<String?> rfid,
+  Value<int> statusId,
+});
+
+class $ParticipantsFilterComposer
+    extends FilterComposer<_$AppDatabase, Participants> {
+  $ParticipantsFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get raceId => $state.composableBuilder(
+      column: $state.table.raceId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get riderId => $state.composableBuilder(
+      column: $state.table.riderId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get number => $state.composableBuilder(
+      column: $state.table.number,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get category => $state.composableBuilder(
+      column: $state.table.category,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get rfid => $state.composableBuilder(
+      column: $state.table.rfid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get statusId => $state.composableBuilder(
+      column: $state.table.statusId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $ParticipantsOrderingComposer
+    extends OrderingComposer<_$AppDatabase, Participants> {
+  $ParticipantsOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get raceId => $state.composableBuilder(
+      column: $state.table.raceId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get riderId => $state.composableBuilder(
+      column: $state.table.riderId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get number => $state.composableBuilder(
+      column: $state.table.number,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get category => $state.composableBuilder(
+      column: $state.table.category,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get rfid => $state.composableBuilder(
+      column: $state.table.rfid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get statusId => $state.composableBuilder(
+      column: $state.table.statusId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $ParticipantsTableManager extends RootTableManager<
+    _$AppDatabase,
+    Participants,
+    Participant,
+    $ParticipantsFilterComposer,
+    $ParticipantsOrderingComposer,
+    $ParticipantsCreateCompanionBuilder,
+    $ParticipantsUpdateCompanionBuilder,
+    (Participant, BaseReferences<_$AppDatabase, Participants, Participant>),
+    Participant,
+    PrefetchHooks Function()> {
+  $ParticipantsTableManager(_$AppDatabase db, Participants table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $ParticipantsFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $ParticipantsOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<int> raceId = const Value.absent(),
+            Value<int> riderId = const Value.absent(),
+            Value<int> number = const Value.absent(),
+            Value<String?> category = const Value.absent(),
+            Value<String?> rfid = const Value.absent(),
+            Value<int> statusId = const Value.absent(),
+          }) =>
+              ParticipantsCompanion(
+            id: id,
+            raceId: raceId,
+            riderId: riderId,
+            number: number,
+            category: category,
+            rfid: rfid,
+            statusId: statusId,
+          ),
+          createCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            required int raceId,
+            required int riderId,
+            required int number,
+            Value<String?> category = const Value.absent(),
+            Value<String?> rfid = const Value.absent(),
+            Value<int> statusId = const Value.absent(),
+          }) =>
+              ParticipantsCompanion.insert(
+            id: id,
+            raceId: raceId,
+            riderId: riderId,
+            number: number,
+            category: category,
+            rfid: rfid,
+            statusId: statusId,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $ParticipantsProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Participants,
+    Participant,
+    $ParticipantsFilterComposer,
+    $ParticipantsOrderingComposer,
+    $ParticipantsCreateCompanionBuilder,
+    $ParticipantsUpdateCompanionBuilder,
+    (Participant, BaseReferences<_$AppDatabase, Participants, Participant>),
+    Participant,
+    PrefetchHooks Function()>;
+typedef $StartsCreateCompanionBuilder = StartsCompanion Function({
+  Value<int?> id,
+  required int stageId,
+  required int participantId,
+  required String startTime,
+  Value<String?> timestamp,
+  Value<String?> automaticStartTime,
+  Value<int?> automaticCorrection,
+  Value<String?> manualStartTime,
+  Value<int?> manualCorrection,
+  Value<int> statusId,
+});
+typedef $StartsUpdateCompanionBuilder = StartsCompanion Function({
+  Value<int?> id,
+  Value<int> stageId,
+  Value<int> participantId,
+  Value<String> startTime,
+  Value<String?> timestamp,
+  Value<String?> automaticStartTime,
+  Value<int?> automaticCorrection,
+  Value<String?> manualStartTime,
+  Value<int?> manualCorrection,
+  Value<int> statusId,
+});
+
+class $StartsFilterComposer extends FilterComposer<_$AppDatabase, Starts> {
+  $StartsFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get stageId => $state.composableBuilder(
+      column: $state.table.stageId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get participantId => $state.composableBuilder(
+      column: $state.table.participantId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get startTime => $state.composableBuilder(
+      column: $state.table.startTime,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get timestamp => $state.composableBuilder(
+      column: $state.table.timestamp,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get automaticStartTime => $state.composableBuilder(
+      column: $state.table.automaticStartTime,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get automaticCorrection => $state.composableBuilder(
+      column: $state.table.automaticCorrection,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get manualStartTime => $state.composableBuilder(
+      column: $state.table.manualStartTime,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get manualCorrection => $state.composableBuilder(
+      column: $state.table.manualCorrection,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get statusId => $state.composableBuilder(
+      column: $state.table.statusId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $StartsOrderingComposer extends OrderingComposer<_$AppDatabase, Starts> {
+  $StartsOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get stageId => $state.composableBuilder(
+      column: $state.table.stageId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get participantId => $state.composableBuilder(
+      column: $state.table.participantId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get startTime => $state.composableBuilder(
+      column: $state.table.startTime,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get timestamp => $state.composableBuilder(
+      column: $state.table.timestamp,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get automaticStartTime => $state.composableBuilder(
+      column: $state.table.automaticStartTime,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get automaticCorrection => $state.composableBuilder(
+      column: $state.table.automaticCorrection,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get manualStartTime => $state.composableBuilder(
+      column: $state.table.manualStartTime,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get manualCorrection => $state.composableBuilder(
+      column: $state.table.manualCorrection,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get statusId => $state.composableBuilder(
+      column: $state.table.statusId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $StartsTableManager extends RootTableManager<
+    _$AppDatabase,
+    Starts,
+    Start,
+    $StartsFilterComposer,
+    $StartsOrderingComposer,
+    $StartsCreateCompanionBuilder,
+    $StartsUpdateCompanionBuilder,
+    (Start, BaseReferences<_$AppDatabase, Starts, Start>),
+    Start,
+    PrefetchHooks Function()> {
+  $StartsTableManager(_$AppDatabase db, Starts table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $StartsFilterComposer(ComposerState(db, table)),
+          orderingComposer: $StartsOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<int> stageId = const Value.absent(),
+            Value<int> participantId = const Value.absent(),
+            Value<String> startTime = const Value.absent(),
+            Value<String?> timestamp = const Value.absent(),
+            Value<String?> automaticStartTime = const Value.absent(),
+            Value<int?> automaticCorrection = const Value.absent(),
+            Value<String?> manualStartTime = const Value.absent(),
+            Value<int?> manualCorrection = const Value.absent(),
+            Value<int> statusId = const Value.absent(),
+          }) =>
+              StartsCompanion(
+            id: id,
+            stageId: stageId,
+            participantId: participantId,
+            startTime: startTime,
+            timestamp: timestamp,
+            automaticStartTime: automaticStartTime,
+            automaticCorrection: automaticCorrection,
+            manualStartTime: manualStartTime,
+            manualCorrection: manualCorrection,
+            statusId: statusId,
+          ),
+          createCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            required int stageId,
+            required int participantId,
+            required String startTime,
+            Value<String?> timestamp = const Value.absent(),
+            Value<String?> automaticStartTime = const Value.absent(),
+            Value<int?> automaticCorrection = const Value.absent(),
+            Value<String?> manualStartTime = const Value.absent(),
+            Value<int?> manualCorrection = const Value.absent(),
+            Value<int> statusId = const Value.absent(),
+          }) =>
+              StartsCompanion.insert(
+            id: id,
+            stageId: stageId,
+            participantId: participantId,
+            startTime: startTime,
+            timestamp: timestamp,
+            automaticStartTime: automaticStartTime,
+            automaticCorrection: automaticCorrection,
+            manualStartTime: manualStartTime,
+            manualCorrection: manualCorrection,
+            statusId: statusId,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $StartsProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Starts,
+    Start,
+    $StartsFilterComposer,
+    $StartsOrderingComposer,
+    $StartsCreateCompanionBuilder,
+    $StartsUpdateCompanionBuilder,
+    (Start, BaseReferences<_$AppDatabase, Starts, Start>),
+    Start,
+    PrefetchHooks Function()>;
+typedef $FinishesCreateCompanionBuilder = FinishesCompanion Function({
+  Value<int?> id,
+  required int stageId,
+  Value<int?> number,
+  Value<String?> timestamp,
+  Value<String?> finishTime,
+  Value<bool> isHidden,
+  Value<bool> isManual,
+});
+typedef $FinishesUpdateCompanionBuilder = FinishesCompanion Function({
+  Value<int?> id,
+  Value<int> stageId,
+  Value<int?> number,
+  Value<String?> timestamp,
+  Value<String?> finishTime,
+  Value<bool> isHidden,
+  Value<bool> isManual,
+});
+
+class $FinishesFilterComposer extends FilterComposer<_$AppDatabase, Finishes> {
+  $FinishesFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get stageId => $state.composableBuilder(
+      column: $state.table.stageId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get number => $state.composableBuilder(
+      column: $state.table.number,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get timestamp => $state.composableBuilder(
+      column: $state.table.timestamp,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get finishTime => $state.composableBuilder(
+      column: $state.table.finishTime,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isHidden => $state.composableBuilder(
+      column: $state.table.isHidden,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isManual => $state.composableBuilder(
+      column: $state.table.isManual,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $FinishesOrderingComposer
+    extends OrderingComposer<_$AppDatabase, Finishes> {
+  $FinishesOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get stageId => $state.composableBuilder(
+      column: $state.table.stageId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get number => $state.composableBuilder(
+      column: $state.table.number,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get timestamp => $state.composableBuilder(
+      column: $state.table.timestamp,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get finishTime => $state.composableBuilder(
+      column: $state.table.finishTime,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isHidden => $state.composableBuilder(
+      column: $state.table.isHidden,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isManual => $state.composableBuilder(
+      column: $state.table.isManual,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $FinishesTableManager extends RootTableManager<
+    _$AppDatabase,
+    Finishes,
+    Finish,
+    $FinishesFilterComposer,
+    $FinishesOrderingComposer,
+    $FinishesCreateCompanionBuilder,
+    $FinishesUpdateCompanionBuilder,
+    (Finish, BaseReferences<_$AppDatabase, Finishes, Finish>),
+    Finish,
+    PrefetchHooks Function()> {
+  $FinishesTableManager(_$AppDatabase db, Finishes table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $FinishesFilterComposer(ComposerState(db, table)),
+          orderingComposer: $FinishesOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<int> stageId = const Value.absent(),
+            Value<int?> number = const Value.absent(),
+            Value<String?> timestamp = const Value.absent(),
+            Value<String?> finishTime = const Value.absent(),
+            Value<bool> isHidden = const Value.absent(),
+            Value<bool> isManual = const Value.absent(),
+          }) =>
+              FinishesCompanion(
+            id: id,
+            stageId: stageId,
+            number: number,
+            timestamp: timestamp,
+            finishTime: finishTime,
+            isHidden: isHidden,
+            isManual: isManual,
+          ),
+          createCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            required int stageId,
+            Value<int?> number = const Value.absent(),
+            Value<String?> timestamp = const Value.absent(),
+            Value<String?> finishTime = const Value.absent(),
+            Value<bool> isHidden = const Value.absent(),
+            Value<bool> isManual = const Value.absent(),
+          }) =>
+              FinishesCompanion.insert(
+            id: id,
+            stageId: stageId,
+            number: number,
+            timestamp: timestamp,
+            finishTime: finishTime,
+            isHidden: isHidden,
+            isManual: isManual,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $FinishesProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Finishes,
+    Finish,
+    $FinishesFilterComposer,
+    $FinishesOrderingComposer,
+    $FinishesCreateCompanionBuilder,
+    $FinishesUpdateCompanionBuilder,
+    (Finish, BaseReferences<_$AppDatabase, Finishes, Finish>),
+    Finish,
+    PrefetchHooks Function()>;
+
+class $AppDatabaseManager {
+  final _$AppDatabase _db;
+  $AppDatabaseManager(this._db);
+  $RacesTableManager get races => $RacesTableManager(_db, _db.races);
+  $TrailsTableManager get trails => $TrailsTableManager(_db, _db.trails);
+  $StagesTableManager get stages => $StagesTableManager(_db, _db.stages);
+  $RidersTableManager get riders => $RidersTableManager(_db, _db.riders);
+  $StatusesTableManager get statuses =>
+      $StatusesTableManager(_db, _db.statuses);
+  $ParticipantsTableManager get participants =>
+      $ParticipantsTableManager(_db, _db.participants);
+  $StartsTableManager get starts => $StartsTableManager(_db, _db.starts);
+  $FinishesTableManager get finishes =>
+      $FinishesTableManager(_db, _db.finishes);
 }
 
 class GetParticipantsAtStartResult {

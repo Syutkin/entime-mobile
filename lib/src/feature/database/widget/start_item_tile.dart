@@ -12,13 +12,13 @@ class StartItemTile extends StatelessWidget {
   final String? countdown;
 
   const StartItemTile({
-    Key? key,
+    super.key,
     required this.item,
     this.isHighlighted = false,
     this.onTap,
     this.onDismissed,
     this.countdown,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => InkWell(
@@ -44,6 +44,7 @@ class StartItemTile extends StatelessWidget {
           child: Card(
             margin: const EdgeInsets.all(2),
             color: isHighlighted
+            //TODO: test colors
                 ? Theme.of(context).colorScheme.background
                 : Theme.of(context).colorScheme.surface,
             child: Padding(

@@ -8,13 +8,13 @@ class NumberOnTraceTile extends StatelessWidget {
   final GestureLongPressCallback? onLongPress;
 
   const NumberOnTraceTile({
-    Key? key,
+    super.key,
     required this.number,
     this.onTap,
     this.onTapDown,
     this.onLongPress,
     this.isSelected = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => Draggable(
@@ -44,7 +44,7 @@ class NumberOnTraceTile extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           color: isSelected
-              ? Theme.of(context).colorScheme.background
+              ? Theme.of(context).colorScheme.surface
               : Theme.of(context).colorScheme.secondary,
         ),
         child: Center(
@@ -53,7 +53,7 @@ class NumberOnTraceTile extends StatelessWidget {
             style: DefaultTextStyle.of(context).style.apply(
                   fontSizeFactor: 2,
                   color: isSelected
-                      ? Theme.of(context).colorScheme.onBackground
+                      ? Theme.of(context).colorScheme.onSurface
                       : Theme.of(context).colorScheme.onSecondary,
                 ),
           ),

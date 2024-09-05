@@ -14,14 +14,14 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
   final FinishItem item;
 
   const FinishItemTile({
-    Key? key,
+    super.key,
     required this.item,
     this.onTap,
     this.onTapDown,
     this.onLongPress,
     this.onDismissed,
     this.onAccept,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => Dismissible(

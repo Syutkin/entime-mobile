@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'tab_bloc.dart';
 
@@ -12,7 +12,7 @@ part of 'tab_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TabEvent {
@@ -24,7 +24,7 @@ mixin _$TabEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AppTab tab)? updated,
+    TResult? Function(AppTab tab)? updated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$TabEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TabEventUpdated value)? updated,
+    TResult? Function(TabEventUpdated value)? updated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,7 +50,9 @@ mixin _$TabEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TabEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TabEventCopyWith<TabEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,57 +60,65 @@ mixin _$TabEvent {
 /// @nodoc
 abstract class $TabEventCopyWith<$Res> {
   factory $TabEventCopyWith(TabEvent value, $Res Function(TabEvent) then) =
-      _$TabEventCopyWithImpl<$Res>;
+      _$TabEventCopyWithImpl<$Res, TabEvent>;
+  @useResult
   $Res call({AppTab tab});
 }
 
 /// @nodoc
-class _$TabEventCopyWithImpl<$Res> implements $TabEventCopyWith<$Res> {
+class _$TabEventCopyWithImpl<$Res, $Val extends TabEvent>
+    implements $TabEventCopyWith<$Res> {
   _$TabEventCopyWithImpl(this._value, this._then);
 
-  final TabEvent _value;
   // ignore: unused_field
-  final $Res Function(TabEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of TabEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tab = freezed,
+    Object? tab = null,
   }) {
     return _then(_value.copyWith(
-      tab: tab == freezed
+      tab: null == tab
           ? _value.tab
           : tab // ignore: cast_nullable_to_non_nullable
               as AppTab,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$TabEventUpdatedCopyWith<$Res>
+abstract class _$$TabEventUpdatedImplCopyWith<$Res>
     implements $TabEventCopyWith<$Res> {
-  factory _$$TabEventUpdatedCopyWith(
-          _$TabEventUpdated value, $Res Function(_$TabEventUpdated) then) =
-      __$$TabEventUpdatedCopyWithImpl<$Res>;
+  factory _$$TabEventUpdatedImplCopyWith(_$TabEventUpdatedImpl value,
+          $Res Function(_$TabEventUpdatedImpl) then) =
+      __$$TabEventUpdatedImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({AppTab tab});
 }
 
 /// @nodoc
-class __$$TabEventUpdatedCopyWithImpl<$Res> extends _$TabEventCopyWithImpl<$Res>
-    implements _$$TabEventUpdatedCopyWith<$Res> {
-  __$$TabEventUpdatedCopyWithImpl(
-      _$TabEventUpdated _value, $Res Function(_$TabEventUpdated) _then)
-      : super(_value, (v) => _then(v as _$TabEventUpdated));
+class __$$TabEventUpdatedImplCopyWithImpl<$Res>
+    extends _$TabEventCopyWithImpl<$Res, _$TabEventUpdatedImpl>
+    implements _$$TabEventUpdatedImplCopyWith<$Res> {
+  __$$TabEventUpdatedImplCopyWithImpl(
+      _$TabEventUpdatedImpl _value, $Res Function(_$TabEventUpdatedImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$TabEventUpdated get _value => super._value as _$TabEventUpdated;
-
+  /// Create a copy of TabEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tab = freezed,
+    Object? tab = null,
   }) {
-    return _then(_$TabEventUpdated(
-      tab == freezed
+    return _then(_$TabEventUpdatedImpl(
+      null == tab
           ? _value.tab
           : tab // ignore: cast_nullable_to_non_nullable
               as AppTab,
@@ -118,8 +128,8 @@ class __$$TabEventUpdatedCopyWithImpl<$Res> extends _$TabEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TabEventUpdated implements TabEventUpdated {
-  const _$TabEventUpdated(this.tab);
+class _$TabEventUpdatedImpl implements TabEventUpdated {
+  const _$TabEventUpdatedImpl(this.tab);
 
   @override
   final AppTab tab;
@@ -130,21 +140,24 @@ class _$TabEventUpdated implements TabEventUpdated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TabEventUpdated &&
-            const DeepCollectionEquality().equals(other.tab, tab));
+            other is _$TabEventUpdatedImpl &&
+            (identical(other.tab, tab) || other.tab == tab));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(tab));
+  int get hashCode => Object.hash(runtimeType, tab);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TabEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$TabEventUpdatedCopyWith<_$TabEventUpdated> get copyWith =>
-      __$$TabEventUpdatedCopyWithImpl<_$TabEventUpdated>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$TabEventUpdatedImplCopyWith<_$TabEventUpdatedImpl> get copyWith =>
+      __$$TabEventUpdatedImplCopyWithImpl<_$TabEventUpdatedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -157,7 +170,7 @@ class _$TabEventUpdated implements TabEventUpdated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AppTab tab)? updated,
+    TResult? Function(AppTab tab)? updated,
   }) {
     return updated?.call(tab);
   }
@@ -185,7 +198,7 @@ class _$TabEventUpdated implements TabEventUpdated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TabEventUpdated value)? updated,
+    TResult? Function(TabEventUpdated value)? updated,
   }) {
     return updated?.call(this);
   }
@@ -204,12 +217,15 @@ class _$TabEventUpdated implements TabEventUpdated {
 }
 
 abstract class TabEventUpdated implements TabEvent {
-  const factory TabEventUpdated(final AppTab tab) = _$TabEventUpdated;
+  const factory TabEventUpdated(final AppTab tab) = _$TabEventUpdatedImpl;
 
   @override
   AppTab get tab;
+
+  /// Create a copy of TabEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$TabEventUpdatedCopyWith<_$TabEventUpdated> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TabEventUpdatedImplCopyWith<_$TabEventUpdatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

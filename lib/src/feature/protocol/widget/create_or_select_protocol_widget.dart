@@ -7,8 +7,7 @@ import '../../init/widget/select_file_screen.dart';
 class CreateOrSelectProtocolWidget extends StatelessWidget {
   final void Function() onTap;
 
-  const CreateOrSelectProtocolWidget({Key? key, required this.onTap})
-      : super(key: key);
+  const CreateOrSelectProtocolWidget({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) => ListView(

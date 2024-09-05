@@ -11,7 +11,7 @@ import '../model/theme.dart';
 import 'settings_popups.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -23,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
 }
 
 class _SettingsList extends StatelessWidget {
-  const _SettingsList({Key? key}) : super(key: key);
+  const _SettingsList();
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +223,7 @@ class _SettingsList extends StatelessWidget {
                   //leading:  Icon(MdiIcons.handBackLeft),
                   trailing: Text(
                     Localization.current.I18nSettings_pixelSize(
-                      (settingsState.settings.startFabSize).round(),
+                      settingsState.settings.startFabSize.round(),
                     ),
                   ),
                   onPressed: (context) async {
@@ -264,7 +264,7 @@ class _SettingsList extends StatelessWidget {
                   //leading:  Icon(MdiIcons.timer),
                   trailing: Text(
                     Localization.current.I18nSettings_pixelSize(
-                      (settingsState.settings.startFabSize).round(),
+                      settingsState.settings.startFabSize.round(),
                     ),
                   ),
                   onPressed: (context) async {
@@ -389,7 +389,7 @@ class _SettingsList extends StatelessWidget {
                       Text(Localization.current.I18nSettings_finishButtonSize),
                   trailing: Text(
                     Localization.current.I18nSettings_pixelSize(
-                      (settingsState.settings.finishFabSize).round(),
+                      settingsState.settings.finishFabSize.round(),
                     ),
                   ),
                   //leading:  Icon(MdiIcons.handBackLeft),
@@ -497,7 +497,7 @@ class _SettingsList extends StatelessWidget {
           leading: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: appThemeData[element]!.colorScheme.background,
+              color: appThemeData[element]!.colorScheme.surface,
             ),
             child: Icon(
               MdiIcons.palette,

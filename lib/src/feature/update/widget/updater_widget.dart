@@ -6,7 +6,7 @@ import '../../../common/utils/file_utils.dart';
 import '../bloc/update_bloc.dart';
 
 class Updater extends StatelessWidget {
-  const Updater({Key? key}) : super(key: key);
+  const Updater({super.key});
 
   @override
   Widget build(BuildContext context) => BlocBuilder<UpdateBloc, UpdateState>(

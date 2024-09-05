@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'dbstate.dart';
 
@@ -12,7 +12,7 @@ part of 'dbstate.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DBState _$DBStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
@@ -37,8 +37,8 @@ mixin _$DBState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? notSelected,
-    TResult Function(bool updated)? selected,
+    TResult? Function()? notSelected,
+    TResult? Function(bool updated)? selected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,8 +56,8 @@ mixin _$DBState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_DBStateNotSelected value)? notSelected,
-    TResult Function(_DBStateSelected value)? selected,
+    TResult? Function(_DBStateNotSelected value)? notSelected,
+    TResult? Function(_DBStateSelected value)? selected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,51 +67,58 @@ mixin _$DBState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this DBState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DBStateCopyWith<$Res> {
   factory $DBStateCopyWith(DBState value, $Res Function(DBState) then) =
-      _$DBStateCopyWithImpl<$Res>;
+      _$DBStateCopyWithImpl<$Res, DBState>;
 }
 
 /// @nodoc
-class _$DBStateCopyWithImpl<$Res> implements $DBStateCopyWith<$Res> {
+class _$DBStateCopyWithImpl<$Res, $Val extends DBState>
+    implements $DBStateCopyWith<$Res> {
   _$DBStateCopyWithImpl(this._value, this._then);
 
-  final DBState _value;
   // ignore: unused_field
-  final $Res Function(DBState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of DBState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$_DBStateNotSelectedCopyWith<$Res> {
-  factory _$$_DBStateNotSelectedCopyWith(_$_DBStateNotSelected value,
-          $Res Function(_$_DBStateNotSelected) then) =
-      __$$_DBStateNotSelectedCopyWithImpl<$Res>;
+abstract class _$$DBStateNotSelectedImplCopyWith<$Res> {
+  factory _$$DBStateNotSelectedImplCopyWith(_$DBStateNotSelectedImpl value,
+          $Res Function(_$DBStateNotSelectedImpl) then) =
+      __$$DBStateNotSelectedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DBStateNotSelectedCopyWithImpl<$Res>
-    extends _$DBStateCopyWithImpl<$Res>
-    implements _$$_DBStateNotSelectedCopyWith<$Res> {
-  __$$_DBStateNotSelectedCopyWithImpl(
-      _$_DBStateNotSelected _value, $Res Function(_$_DBStateNotSelected) _then)
-      : super(_value, (v) => _then(v as _$_DBStateNotSelected));
+class __$$DBStateNotSelectedImplCopyWithImpl<$Res>
+    extends _$DBStateCopyWithImpl<$Res, _$DBStateNotSelectedImpl>
+    implements _$$DBStateNotSelectedImplCopyWith<$Res> {
+  __$$DBStateNotSelectedImplCopyWithImpl(_$DBStateNotSelectedImpl _value,
+      $Res Function(_$DBStateNotSelectedImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_DBStateNotSelected get _value => super._value as _$_DBStateNotSelected;
+  /// Create a copy of DBState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_DBStateNotSelected implements _DBStateNotSelected {
-  const _$_DBStateNotSelected({final String? $type})
+class _$DBStateNotSelectedImpl implements _DBStateNotSelected {
+  const _$DBStateNotSelectedImpl({final String? $type})
       : $type = $type ?? 'notSelected';
 
-  factory _$_DBStateNotSelected.fromJson(Map<String, dynamic> json) =>
-      _$$_DBStateNotSelectedFromJson(json);
+  factory _$DBStateNotSelectedImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DBStateNotSelectedImplFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -122,12 +129,12 @@ class _$_DBStateNotSelected implements _DBStateNotSelected {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_DBStateNotSelected);
+        (other.runtimeType == runtimeType && other is _$DBStateNotSelectedImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -143,8 +150,8 @@ class _$_DBStateNotSelected implements _DBStateNotSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? notSelected,
-    TResult Function(bool updated)? selected,
+    TResult? Function()? notSelected,
+    TResult? Function(bool updated)? selected,
   }) {
     return notSelected?.call();
   }
@@ -174,8 +181,8 @@ class _$_DBStateNotSelected implements _DBStateNotSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_DBStateNotSelected value)? notSelected,
-    TResult Function(_DBStateSelected value)? selected,
+    TResult? Function(_DBStateNotSelected value)? notSelected,
+    TResult? Function(_DBStateSelected value)? selected,
   }) {
     return notSelected?.call(this);
   }
@@ -195,43 +202,45 @@ class _$_DBStateNotSelected implements _DBStateNotSelected {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DBStateNotSelectedToJson(
+    return _$$DBStateNotSelectedImplToJson(
       this,
     );
   }
 }
 
 abstract class _DBStateNotSelected implements DBState {
-  const factory _DBStateNotSelected() = _$_DBStateNotSelected;
+  const factory _DBStateNotSelected() = _$DBStateNotSelectedImpl;
 
   factory _DBStateNotSelected.fromJson(Map<String, dynamic> json) =
-      _$_DBStateNotSelected.fromJson;
+      _$DBStateNotSelectedImpl.fromJson;
 }
 
 /// @nodoc
-abstract class _$$_DBStateSelectedCopyWith<$Res> {
-  factory _$$_DBStateSelectedCopyWith(
-          _$_DBStateSelected value, $Res Function(_$_DBStateSelected) then) =
-      __$$_DBStateSelectedCopyWithImpl<$Res>;
+abstract class _$$DBStateSelectedImplCopyWith<$Res> {
+  factory _$$DBStateSelectedImplCopyWith(_$DBStateSelectedImpl value,
+          $Res Function(_$DBStateSelectedImpl) then) =
+      __$$DBStateSelectedImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({bool updated});
 }
 
 /// @nodoc
-class __$$_DBStateSelectedCopyWithImpl<$Res> extends _$DBStateCopyWithImpl<$Res>
-    implements _$$_DBStateSelectedCopyWith<$Res> {
-  __$$_DBStateSelectedCopyWithImpl(
-      _$_DBStateSelected _value, $Res Function(_$_DBStateSelected) _then)
-      : super(_value, (v) => _then(v as _$_DBStateSelected));
+class __$$DBStateSelectedImplCopyWithImpl<$Res>
+    extends _$DBStateCopyWithImpl<$Res, _$DBStateSelectedImpl>
+    implements _$$DBStateSelectedImplCopyWith<$Res> {
+  __$$DBStateSelectedImplCopyWithImpl(
+      _$DBStateSelectedImpl _value, $Res Function(_$DBStateSelectedImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_DBStateSelected get _value => super._value as _$_DBStateSelected;
-
+  /// Create a copy of DBState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? updated = freezed,
+    Object? updated = null,
   }) {
-    return _then(_$_DBStateSelected(
-      updated: updated == freezed
+    return _then(_$DBStateSelectedImpl(
+      updated: null == updated
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -241,12 +250,12 @@ class __$$_DBStateSelectedCopyWithImpl<$Res> extends _$DBStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DBStateSelected implements _DBStateSelected {
-  const _$_DBStateSelected({this.updated = false, final String? $type})
+class _$DBStateSelectedImpl implements _DBStateSelected {
+  const _$DBStateSelectedImpl({this.updated = false, final String? $type})
       : $type = $type ?? 'selected';
 
-  factory _$_DBStateSelected.fromJson(Map<String, dynamic> json) =>
-      _$$_DBStateSelectedFromJson(json);
+  factory _$DBStateSelectedImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DBStateSelectedImplFromJson(json);
 
   @override
   @JsonKey()
@@ -261,22 +270,25 @@ class _$_DBStateSelected implements _DBStateSelected {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DBStateSelected &&
-            const DeepCollectionEquality().equals(other.updated, updated));
+            other is _$DBStateSelectedImpl &&
+            (identical(other.updated, updated) || other.updated == updated));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(updated));
+  int get hashCode => Object.hash(runtimeType, updated);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DBState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_DBStateSelectedCopyWith<_$_DBStateSelected> get copyWith =>
-      __$$_DBStateSelectedCopyWithImpl<_$_DBStateSelected>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$DBStateSelectedImplCopyWith<_$DBStateSelectedImpl> get copyWith =>
+      __$$DBStateSelectedImplCopyWithImpl<_$DBStateSelectedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -290,8 +302,8 @@ class _$_DBStateSelected implements _DBStateSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? notSelected,
-    TResult Function(bool updated)? selected,
+    TResult? Function()? notSelected,
+    TResult? Function(bool updated)? selected,
   }) {
     return selected?.call(updated);
   }
@@ -321,8 +333,8 @@ class _$_DBStateSelected implements _DBStateSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_DBStateNotSelected value)? notSelected,
-    TResult Function(_DBStateSelected value)? selected,
+    TResult? Function(_DBStateNotSelected value)? notSelected,
+    TResult? Function(_DBStateSelected value)? selected,
   }) {
     return selected?.call(this);
   }
@@ -342,20 +354,23 @@ class _$_DBStateSelected implements _DBStateSelected {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DBStateSelectedToJson(
+    return _$$DBStateSelectedImplToJson(
       this,
     );
   }
 }
 
 abstract class _DBStateSelected implements DBState {
-  const factory _DBStateSelected({final bool updated}) = _$_DBStateSelected;
+  const factory _DBStateSelected({final bool updated}) = _$DBStateSelectedImpl;
 
   factory _DBStateSelected.fromJson(Map<String, dynamic> json) =
-      _$_DBStateSelected.fromJson;
+      _$DBStateSelectedImpl.fromJson;
 
   bool get updated;
-  @JsonKey(ignore: true)
-  _$$_DBStateSelectedCopyWith<_$_DBStateSelected> get copyWith =>
+
+  /// Create a copy of DBState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DBStateSelectedImplCopyWith<_$DBStateSelectedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

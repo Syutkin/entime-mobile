@@ -47,7 +47,7 @@ class ProtocolBloc extends Bloc<ProtocolEvent, ProtocolState> {
         _hideManual = state.hideManual;
         _file = state.recentFile;
         add(SelectProtocol(file: _file));
-        logger.v(
+        logger.t(
           'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
         );
       }

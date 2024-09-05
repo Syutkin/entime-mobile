@@ -16,7 +16,7 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
       content: Form(
         key: formKey,
         onChanged: () {
-          Form.of(primaryFocus!.context!)!.validate();
+          Form.of(primaryFocus!.context!).validate();
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,

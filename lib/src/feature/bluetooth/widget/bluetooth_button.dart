@@ -6,8 +6,8 @@ import 'select_bonded_device.dart';
 
 class BluetoothButton extends StatelessWidget {
   const BluetoothButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) =>

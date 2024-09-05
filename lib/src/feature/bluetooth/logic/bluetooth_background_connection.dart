@@ -122,7 +122,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
     if (text.isNotEmpty) {
       try {
         logger.i('Sending message: $text');
-        _connection?.output.add(utf8.encode('$text\r\n') as Uint8List);
+        _connection?.output.add(utf8.encode('$text\r\n'));
         await _connection?.output.allSent;
         result = true;
       } on Exception catch (e) {

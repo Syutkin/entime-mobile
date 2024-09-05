@@ -434,7 +434,7 @@ void main() {
         ),
         expect: () => [
           const BluetoothBlocState.connecting(),
-          const BluetoothBlocState.connected()
+          const BluetoothBlocState.connected(),
         ],
       );
 
@@ -485,7 +485,7 @@ void main() {
               'finish',
               '10:10:10,123',
             ),
-          )
+          ),
         ],
       );
     });
@@ -557,7 +557,7 @@ void main() {
         act: (bloc) => bloc.add(const BluetoothEvent.disconnect()),
         expect: () => [
           const BluetoothBlocState.disconnecting(),
-          const BluetoothBlocState.disconnected()
+          const BluetoothBlocState.disconnected(),
         ],
       );
     });
@@ -706,7 +706,7 @@ void main() {
                     true,
                   ),
             ),
-          )
+          ),
         ],
       );
 
@@ -770,7 +770,7 @@ void main() {
               'finish',
               '10:00:01,123',
             ),
-          )
+          ),
         ],
       );
 
@@ -861,7 +861,7 @@ void main() {
               'json',
               '{ settings: { key, value } }',
             ),
-          )
+          ),
         ],
       );
 

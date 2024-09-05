@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'database_bloc.dart';
 
@@ -12,7 +12,7 @@ part of 'database_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DatabaseEvent {
@@ -54,8 +54,8 @@ mixin _$DatabaseEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -66,15 +66,15 @@ mixin _$DatabaseEvent {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -83,8 +83,8 @@ mixin _$DatabaseEvent {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -143,18 +143,18 @@ mixin _$DatabaseEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -180,42 +180,46 @@ mixin _$DatabaseEvent {
 abstract class $DatabaseEventCopyWith<$Res> {
   factory $DatabaseEventCopyWith(
           DatabaseEvent value, $Res Function(DatabaseEvent) then) =
-      _$DatabaseEventCopyWithImpl<$Res>;
+      _$DatabaseEventCopyWithImpl<$Res, DatabaseEvent>;
 }
 
 /// @nodoc
-class _$DatabaseEventCopyWithImpl<$Res>
+class _$DatabaseEventCopyWithImpl<$Res, $Val extends DatabaseEvent>
     implements $DatabaseEventCopyWith<$Res> {
   _$DatabaseEventCopyWithImpl(this._value, this._then);
 
-  final DatabaseEvent _value;
   // ignore: unused_field
-  final $Res Function(DatabaseEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
-      : super(_value, (v) => _then(v as _$_Initialize));
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_Initialize get _value => super._value as _$_Initialize;
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize();
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl();
 
   @override
   String toString() {
@@ -223,9 +227,9 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialize);
+        (other.runtimeType == runtimeType && other is _$InitializeImpl);
   }
 
   @override
@@ -273,8 +277,8 @@ class _$_Initialize implements _Initialize {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -285,15 +289,15 @@ class _$_Initialize implements _Initialize {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -302,8 +306,8 @@ class _$_Initialize implements _Initialize {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return initialize?.call();
   }
@@ -374,18 +378,18 @@ class _$_Initialize implements _Initialize {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return initialize?.call(this);
   }
@@ -415,14 +419,15 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements DatabaseEvent {
-  const factory _Initialize() = _$_Initialize;
+  const factory _Initialize() = _$InitializeImpl;
 }
 
 /// @nodoc
-abstract class _$$_EmitStateCopyWith<$Res> {
-  factory _$$_EmitStateCopyWith(
-          _$_EmitState value, $Res Function(_$_EmitState) then) =
-      __$$_EmitStateCopyWithImpl<$Res>;
+abstract class _$$EmitStateImplCopyWith<$Res> {
+  factory _$$EmitStateImplCopyWith(
+          _$EmitStateImpl value, $Res Function(_$EmitStateImpl) then) =
+      __$$EmitStateImplCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {List<Race>? races,
       List<Stage>? stages,
@@ -438,15 +443,16 @@ abstract class _$$_EmitStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_EmitStateCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_EmitStateCopyWith<$Res> {
-  __$$_EmitStateCopyWithImpl(
-      _$_EmitState _value, $Res Function(_$_EmitState) _then)
-      : super(_value, (v) => _then(v as _$_EmitState));
+class __$$EmitStateImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$EmitStateImpl>
+    implements _$$EmitStateImplCopyWith<$Res> {
+  __$$EmitStateImplCopyWithImpl(
+      _$EmitStateImpl _value, $Res Function(_$EmitStateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_EmitState get _value => super._value as _$_EmitState;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? races = freezed,
@@ -459,47 +465,50 @@ class __$$_EmitStateCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
     Object? trails = freezed,
     Object? notification = freezed,
   }) {
-    return _then(_$_EmitState(
-      races: races == freezed
+    return _then(_$EmitStateImpl(
+      races: freezed == races
           ? _value._races
           : races // ignore: cast_nullable_to_non_nullable
               as List<Race>?,
-      stages: stages == freezed
+      stages: freezed == stages
           ? _value._stages
           : stages // ignore: cast_nullable_to_non_nullable
               as List<Stage>?,
-      riders: riders == freezed
+      riders: freezed == riders
           ? _value._riders
           : riders // ignore: cast_nullable_to_non_nullable
               as List<Rider>?,
-      statuses: statuses == freezed
+      statuses: freezed == statuses
           ? _value._statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<Status>?,
-      participants: participants == freezed
+      participants: freezed == participants
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
               as List<GetParticipantsAtStartResult>?,
-      starts: starts == freezed
+      starts: freezed == starts
           ? _value._starts
           : starts // ignore: cast_nullable_to_non_nullable
               as List<Start>?,
-      finishes: finishes == freezed
+      finishes: freezed == finishes
           ? _value._finishes
           : finishes // ignore: cast_nullable_to_non_nullable
               as List<Finish>?,
-      trails: trails == freezed
+      trails: freezed == trails
           ? _value._trails
           : trails // ignore: cast_nullable_to_non_nullable
               as List<Trail>?,
-      notification: notification == freezed
+      notification: freezed == notification
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as Notification?,
     ));
   }
 
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $NotificationCopyWith<$Res>? get notification {
     if (_value.notification == null) {
       return null;
@@ -513,8 +522,8 @@ class __$$_EmitStateCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EmitState implements _EmitState {
-  const _$_EmitState(
+class _$EmitStateImpl implements _EmitState {
+  const _$EmitStateImpl(
       {final List<Race>? races,
       final List<Stage>? stages,
       final List<Rider>? riders,
@@ -538,6 +547,7 @@ class _$_EmitState implements _EmitState {
   List<Race>? get races {
     final value = _races;
     if (value == null) return null;
+    if (_races is EqualUnmodifiableListView) return _races;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -547,6 +557,7 @@ class _$_EmitState implements _EmitState {
   List<Stage>? get stages {
     final value = _stages;
     if (value == null) return null;
+    if (_stages is EqualUnmodifiableListView) return _stages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -556,6 +567,7 @@ class _$_EmitState implements _EmitState {
   List<Rider>? get riders {
     final value = _riders;
     if (value == null) return null;
+    if (_riders is EqualUnmodifiableListView) return _riders;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -565,6 +577,7 @@ class _$_EmitState implements _EmitState {
   List<Status>? get statuses {
     final value = _statuses;
     if (value == null) return null;
+    if (_statuses is EqualUnmodifiableListView) return _statuses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -574,6 +587,7 @@ class _$_EmitState implements _EmitState {
   List<GetParticipantsAtStartResult>? get participants {
     final value = _participants;
     if (value == null) return null;
+    if (_participants is EqualUnmodifiableListView) return _participants;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -583,6 +597,7 @@ class _$_EmitState implements _EmitState {
   List<Start>? get starts {
     final value = _starts;
     if (value == null) return null;
+    if (_starts is EqualUnmodifiableListView) return _starts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -592,6 +607,7 @@ class _$_EmitState implements _EmitState {
   List<Finish>? get finishes {
     final value = _finishes;
     if (value == null) return null;
+    if (_finishes is EqualUnmodifiableListView) return _finishes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -601,6 +617,7 @@ class _$_EmitState implements _EmitState {
   List<Trail>? get trails {
     final value = _trails;
     if (value == null) return null;
+    if (_trails is EqualUnmodifiableListView) return _trails;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -614,10 +631,10 @@ class _$_EmitState implements _EmitState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EmitState &&
+            other is _$EmitStateImpl &&
             const DeepCollectionEquality().equals(other._races, _races) &&
             const DeepCollectionEquality().equals(other._stages, _stages) &&
             const DeepCollectionEquality().equals(other._riders, _riders) &&
@@ -627,8 +644,8 @@ class _$_EmitState implements _EmitState {
             const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
             const DeepCollectionEquality().equals(other._trails, _trails) &&
-            const DeepCollectionEquality()
-                .equals(other.notification, notification));
+            (identical(other.notification, notification) ||
+                other.notification == notification));
   }
 
   @override
@@ -642,12 +659,15 @@ class _$_EmitState implements _EmitState {
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_trails),
-      const DeepCollectionEquality().hash(notification));
+      notification);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_EmitStateCopyWith<_$_EmitState> get copyWith =>
-      __$$_EmitStateCopyWithImpl<_$_EmitState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$EmitStateImplCopyWith<_$EmitStateImpl> get copyWith =>
+      __$$EmitStateImplCopyWithImpl<_$EmitStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -692,8 +712,8 @@ class _$_EmitState implements _EmitState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -704,15 +724,15 @@ class _$_EmitState implements _EmitState {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -721,8 +741,8 @@ class _$_EmitState implements _EmitState {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return emitState?.call(races, stages, riders, statuses, participants,
         starts, finishes, trails, notification);
@@ -795,18 +815,18 @@ class _$_EmitState implements _EmitState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return emitState?.call(this);
   }
@@ -845,7 +865,7 @@ abstract class _EmitState implements DatabaseEvent {
       final List<Start>? starts,
       final List<Finish>? finishes,
       final List<Trail>? trails,
-      final Notification? notification}) = _$_EmitState;
+      final Notification? notification}) = _$EmitStateImpl;
 
   List<Race>? get races;
   List<Stage>? get stages;
@@ -856,34 +876,40 @@ abstract class _EmitState implements DatabaseEvent {
   List<Finish>? get finishes;
   List<Trail>? get trails;
   Notification? get notification;
-  @JsonKey(ignore: true)
-  _$$_EmitStateCopyWith<_$_EmitState> get copyWith =>
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$EmitStateImplCopyWith<_$EmitStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AddRaceCopyWith<$Res> {
-  factory _$$_AddRaceCopyWith(
-          _$_AddRace value, $Res Function(_$_AddRace) then) =
-      __$$_AddRaceCopyWithImpl<$Res>;
+abstract class _$$AddRaceImplCopyWith<$Res> {
+  factory _$$AddRaceImplCopyWith(
+          _$AddRaceImpl value, $Res Function(_$AddRaceImpl) then) =
+      __$$AddRaceImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({Race race});
 }
 
 /// @nodoc
-class __$$_AddRaceCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_AddRaceCopyWith<$Res> {
-  __$$_AddRaceCopyWithImpl(_$_AddRace _value, $Res Function(_$_AddRace) _then)
-      : super(_value, (v) => _then(v as _$_AddRace));
+class __$$AddRaceImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$AddRaceImpl>
+    implements _$$AddRaceImplCopyWith<$Res> {
+  __$$AddRaceImplCopyWithImpl(
+      _$AddRaceImpl _value, $Res Function(_$AddRaceImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_AddRace get _value => super._value as _$_AddRace;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? race = freezed,
   }) {
-    return _then(_$_AddRace(
-      race == freezed
+    return _then(_$AddRaceImpl(
+      freezed == race
           ? _value.race
           : race // ignore: cast_nullable_to_non_nullable
               as Race,
@@ -893,8 +919,8 @@ class __$$_AddRaceCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddRace implements _AddRace {
-  const _$_AddRace(this.race);
+class _$AddRaceImpl implements _AddRace {
+  const _$AddRaceImpl(this.race);
 
   @override
   final Race race;
@@ -905,10 +931,10 @@ class _$_AddRace implements _AddRace {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddRace &&
+            other is _$AddRaceImpl &&
             const DeepCollectionEquality().equals(other.race, race));
   }
 
@@ -916,10 +942,13 @@ class _$_AddRace implements _AddRace {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(race));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_AddRaceCopyWith<_$_AddRace> get copyWith =>
-      __$$_AddRaceCopyWithImpl<_$_AddRace>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$AddRaceImplCopyWith<_$AddRaceImpl> get copyWith =>
+      __$$AddRaceImplCopyWithImpl<_$AddRaceImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -963,8 +992,8 @@ class _$_AddRace implements _AddRace {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -975,15 +1004,15 @@ class _$_AddRace implements _AddRace {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -992,8 +1021,8 @@ class _$_AddRace implements _AddRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return addRace?.call(race);
   }
@@ -1064,18 +1093,18 @@ class _$_AddRace implements _AddRace {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return addRace?.call(this);
   }
@@ -1105,39 +1134,43 @@ class _$_AddRace implements _AddRace {
 }
 
 abstract class _AddRace implements DatabaseEvent {
-  const factory _AddRace(final Race race) = _$_AddRace;
+  const factory _AddRace(final Race race) = _$AddRaceImpl;
 
   Race get race;
-  @JsonKey(ignore: true)
-  _$$_AddRaceCopyWith<_$_AddRace> get copyWith =>
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddRaceImplCopyWith<_$AddRaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteRaceCopyWith<$Res> {
-  factory _$$_DeleteRaceCopyWith(
-          _$_DeleteRace value, $Res Function(_$_DeleteRace) then) =
-      __$$_DeleteRaceCopyWithImpl<$Res>;
+abstract class _$$DeleteRaceImplCopyWith<$Res> {
+  factory _$$DeleteRaceImplCopyWith(
+          _$DeleteRaceImpl value, $Res Function(_$DeleteRaceImpl) then) =
+      __$$DeleteRaceImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int id});
 }
 
 /// @nodoc
-class __$$_DeleteRaceCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_DeleteRaceCopyWith<$Res> {
-  __$$_DeleteRaceCopyWithImpl(
-      _$_DeleteRace _value, $Res Function(_$_DeleteRace) _then)
-      : super(_value, (v) => _then(v as _$_DeleteRace));
+class __$$DeleteRaceImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$DeleteRaceImpl>
+    implements _$$DeleteRaceImplCopyWith<$Res> {
+  __$$DeleteRaceImplCopyWithImpl(
+      _$DeleteRaceImpl _value, $Res Function(_$DeleteRaceImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_DeleteRace get _value => super._value as _$_DeleteRace;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
   }) {
-    return _then(_$_DeleteRace(
-      id == freezed
+    return _then(_$DeleteRaceImpl(
+      null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
@@ -1147,8 +1180,8 @@ class __$$_DeleteRaceCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeleteRace implements _DeleteRace {
-  const _$_DeleteRace(this.id);
+class _$DeleteRaceImpl implements _DeleteRace {
+  const _$DeleteRaceImpl(this.id);
 
   @override
   final int id;
@@ -1159,21 +1192,23 @@ class _$_DeleteRace implements _DeleteRace {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteRace &&
-            const DeepCollectionEquality().equals(other.id, id));
+            other is _$DeleteRaceImpl &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_DeleteRaceCopyWith<_$_DeleteRace> get copyWith =>
-      __$$_DeleteRaceCopyWithImpl<_$_DeleteRace>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$DeleteRaceImplCopyWith<_$DeleteRaceImpl> get copyWith =>
+      __$$DeleteRaceImplCopyWithImpl<_$DeleteRaceImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1217,8 +1252,8 @@ class _$_DeleteRace implements _DeleteRace {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -1229,15 +1264,15 @@ class _$_DeleteRace implements _DeleteRace {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -1246,8 +1281,8 @@ class _$_DeleteRace implements _DeleteRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return deleteRace?.call(id);
   }
@@ -1318,18 +1353,18 @@ class _$_DeleteRace implements _DeleteRace {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return deleteRace?.call(this);
   }
@@ -1359,38 +1394,43 @@ class _$_DeleteRace implements _DeleteRace {
 }
 
 abstract class _DeleteRace implements DatabaseEvent {
-  const factory _DeleteRace(final int id) = _$_DeleteRace;
+  const factory _DeleteRace(final int id) = _$DeleteRaceImpl;
 
   int get id;
-  @JsonKey(ignore: true)
-  _$$_DeleteRaceCopyWith<_$_DeleteRace> get copyWith =>
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteRaceImplCopyWith<_$DeleteRaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AddStageCopyWith<$Res> {
-  factory _$$_AddStageCopyWith(
-          _$_AddStage value, $Res Function(_$_AddStage) then) =
-      __$$_AddStageCopyWithImpl<$Res>;
+abstract class _$$AddStageImplCopyWith<$Res> {
+  factory _$$AddStageImplCopyWith(
+          _$AddStageImpl value, $Res Function(_$AddStageImpl) then) =
+      __$$AddStageImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({Stage stage});
 }
 
 /// @nodoc
-class __$$_AddStageCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_AddStageCopyWith<$Res> {
-  __$$_AddStageCopyWithImpl(
-      _$_AddStage _value, $Res Function(_$_AddStage) _then)
-      : super(_value, (v) => _then(v as _$_AddStage));
+class __$$AddStageImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$AddStageImpl>
+    implements _$$AddStageImplCopyWith<$Res> {
+  __$$AddStageImplCopyWithImpl(
+      _$AddStageImpl _value, $Res Function(_$AddStageImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_AddStage get _value => super._value as _$_AddStage;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? stage = freezed,
   }) {
-    return _then(_$_AddStage(
-      stage == freezed
+    return _then(_$AddStageImpl(
+      freezed == stage
           ? _value.stage
           : stage // ignore: cast_nullable_to_non_nullable
               as Stage,
@@ -1400,8 +1440,8 @@ class __$$_AddStageCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddStage implements _AddStage {
-  const _$_AddStage(this.stage);
+class _$AddStageImpl implements _AddStage {
+  const _$AddStageImpl(this.stage);
 
   @override
   final Stage stage;
@@ -1412,10 +1452,10 @@ class _$_AddStage implements _AddStage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddStage &&
+            other is _$AddStageImpl &&
             const DeepCollectionEquality().equals(other.stage, stage));
   }
 
@@ -1423,10 +1463,13 @@ class _$_AddStage implements _AddStage {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(stage));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_AddStageCopyWith<_$_AddStage> get copyWith =>
-      __$$_AddStageCopyWithImpl<_$_AddStage>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$AddStageImplCopyWith<_$AddStageImpl> get copyWith =>
+      __$$AddStageImplCopyWithImpl<_$AddStageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1470,8 +1513,8 @@ class _$_AddStage implements _AddStage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -1482,15 +1525,15 @@ class _$_AddStage implements _AddStage {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -1499,8 +1542,8 @@ class _$_AddStage implements _AddStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return addStage?.call(stage);
   }
@@ -1571,18 +1614,18 @@ class _$_AddStage implements _AddStage {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return addStage?.call(this);
   }
@@ -1612,39 +1655,43 @@ class _$_AddStage implements _AddStage {
 }
 
 abstract class _AddStage implements DatabaseEvent {
-  const factory _AddStage(final Stage stage) = _$_AddStage;
+  const factory _AddStage(final Stage stage) = _$AddStageImpl;
 
   Stage get stage;
-  @JsonKey(ignore: true)
-  _$$_AddStageCopyWith<_$_AddStage> get copyWith =>
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddStageImplCopyWith<_$AddStageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SelectStagesCopyWith<$Res> {
-  factory _$$_SelectStagesCopyWith(
-          _$_SelectStages value, $Res Function(_$_SelectStages) then) =
-      __$$_SelectStagesCopyWithImpl<$Res>;
+abstract class _$$SelectStagesImplCopyWith<$Res> {
+  factory _$$SelectStagesImplCopyWith(
+          _$SelectStagesImpl value, $Res Function(_$SelectStagesImpl) then) =
+      __$$SelectStagesImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int raceId});
 }
 
 /// @nodoc
-class __$$_SelectStagesCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_SelectStagesCopyWith<$Res> {
-  __$$_SelectStagesCopyWithImpl(
-      _$_SelectStages _value, $Res Function(_$_SelectStages) _then)
-      : super(_value, (v) => _then(v as _$_SelectStages));
+class __$$SelectStagesImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$SelectStagesImpl>
+    implements _$$SelectStagesImplCopyWith<$Res> {
+  __$$SelectStagesImplCopyWithImpl(
+      _$SelectStagesImpl _value, $Res Function(_$SelectStagesImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_SelectStages get _value => super._value as _$_SelectStages;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? raceId = freezed,
+    Object? raceId = null,
   }) {
-    return _then(_$_SelectStages(
-      raceId == freezed
+    return _then(_$SelectStagesImpl(
+      null == raceId
           ? _value.raceId
           : raceId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -1654,8 +1701,8 @@ class __$$_SelectStagesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SelectStages implements _SelectStages {
-  const _$_SelectStages(this.raceId);
+class _$SelectStagesImpl implements _SelectStages {
+  const _$SelectStagesImpl(this.raceId);
 
   @override
   final int raceId;
@@ -1666,21 +1713,23 @@ class _$_SelectStages implements _SelectStages {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SelectStages &&
-            const DeepCollectionEquality().equals(other.raceId, raceId));
+            other is _$SelectStagesImpl &&
+            (identical(other.raceId, raceId) || other.raceId == raceId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(raceId));
+  int get hashCode => Object.hash(runtimeType, raceId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_SelectStagesCopyWith<_$_SelectStages> get copyWith =>
-      __$$_SelectStagesCopyWithImpl<_$_SelectStages>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$SelectStagesImplCopyWith<_$SelectStagesImpl> get copyWith =>
+      __$$SelectStagesImplCopyWithImpl<_$SelectStagesImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1724,8 +1773,8 @@ class _$_SelectStages implements _SelectStages {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -1736,15 +1785,15 @@ class _$_SelectStages implements _SelectStages {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -1753,8 +1802,8 @@ class _$_SelectStages implements _SelectStages {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return selectStages?.call(raceId);
   }
@@ -1825,18 +1874,18 @@ class _$_SelectStages implements _SelectStages {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return selectStages?.call(this);
   }
@@ -1866,39 +1915,43 @@ class _$_SelectStages implements _SelectStages {
 }
 
 abstract class _SelectStages implements DatabaseEvent {
-  const factory _SelectStages(final int raceId) = _$_SelectStages;
+  const factory _SelectStages(final int raceId) = _$SelectStagesImpl;
 
   int get raceId;
-  @JsonKey(ignore: true)
-  _$$_SelectStagesCopyWith<_$_SelectStages> get copyWith =>
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SelectStagesImplCopyWith<_$SelectStagesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteStageCopyWith<$Res> {
-  factory _$$_DeleteStageCopyWith(
-          _$_DeleteStage value, $Res Function(_$_DeleteStage) then) =
-      __$$_DeleteStageCopyWithImpl<$Res>;
+abstract class _$$DeleteStageImplCopyWith<$Res> {
+  factory _$$DeleteStageImplCopyWith(
+          _$DeleteStageImpl value, $Res Function(_$DeleteStageImpl) then) =
+      __$$DeleteStageImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int id});
 }
 
 /// @nodoc
-class __$$_DeleteStageCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_DeleteStageCopyWith<$Res> {
-  __$$_DeleteStageCopyWithImpl(
-      _$_DeleteStage _value, $Res Function(_$_DeleteStage) _then)
-      : super(_value, (v) => _then(v as _$_DeleteStage));
+class __$$DeleteStageImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$DeleteStageImpl>
+    implements _$$DeleteStageImplCopyWith<$Res> {
+  __$$DeleteStageImplCopyWithImpl(
+      _$DeleteStageImpl _value, $Res Function(_$DeleteStageImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_DeleteStage get _value => super._value as _$_DeleteStage;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
   }) {
-    return _then(_$_DeleteStage(
-      id == freezed
+    return _then(_$DeleteStageImpl(
+      null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
@@ -1908,8 +1961,8 @@ class __$$_DeleteStageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeleteStage implements _DeleteStage {
-  const _$_DeleteStage(this.id);
+class _$DeleteStageImpl implements _DeleteStage {
+  const _$DeleteStageImpl(this.id);
 
   @override
   final int id;
@@ -1920,21 +1973,23 @@ class _$_DeleteStage implements _DeleteStage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteStage &&
-            const DeepCollectionEquality().equals(other.id, id));
+            other is _$DeleteStageImpl &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_DeleteStageCopyWith<_$_DeleteStage> get copyWith =>
-      __$$_DeleteStageCopyWithImpl<_$_DeleteStage>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$DeleteStageImplCopyWith<_$DeleteStageImpl> get copyWith =>
+      __$$DeleteStageImplCopyWithImpl<_$DeleteStageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1978,8 +2033,8 @@ class _$_DeleteStage implements _DeleteStage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -1990,15 +2045,15 @@ class _$_DeleteStage implements _DeleteStage {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -2007,8 +2062,8 @@ class _$_DeleteStage implements _DeleteStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return deleteStage?.call(id);
   }
@@ -2079,18 +2134,18 @@ class _$_DeleteStage implements _DeleteStage {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return deleteStage?.call(this);
   }
@@ -2120,40 +2175,45 @@ class _$_DeleteStage implements _DeleteStage {
 }
 
 abstract class _DeleteStage implements DatabaseEvent {
-  const factory _DeleteStage(final int id) = _$_DeleteStage;
+  const factory _DeleteStage(final int id) = _$DeleteStageImpl;
 
   int get id;
-  @JsonKey(ignore: true)
-  _$$_DeleteStageCopyWith<_$_DeleteStage> get copyWith =>
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteStageImplCopyWith<_$DeleteStageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetParticipantsAtStartCopyWith<$Res> {
-  factory _$$_GetParticipantsAtStartCopyWith(_$_GetParticipantsAtStart value,
-          $Res Function(_$_GetParticipantsAtStart) then) =
-      __$$_GetParticipantsAtStartCopyWithImpl<$Res>;
+abstract class _$$GetParticipantsAtStartImplCopyWith<$Res> {
+  factory _$$GetParticipantsAtStartImplCopyWith(
+          _$GetParticipantsAtStartImpl value,
+          $Res Function(_$GetParticipantsAtStartImpl) then) =
+      __$$GetParticipantsAtStartImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int stageId});
 }
 
 /// @nodoc
-class __$$_GetParticipantsAtStartCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_GetParticipantsAtStartCopyWith<$Res> {
-  __$$_GetParticipantsAtStartCopyWithImpl(_$_GetParticipantsAtStart _value,
-      $Res Function(_$_GetParticipantsAtStart) _then)
-      : super(_value, (v) => _then(v as _$_GetParticipantsAtStart));
+class __$$GetParticipantsAtStartImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$GetParticipantsAtStartImpl>
+    implements _$$GetParticipantsAtStartImplCopyWith<$Res> {
+  __$$GetParticipantsAtStartImplCopyWithImpl(
+      _$GetParticipantsAtStartImpl _value,
+      $Res Function(_$GetParticipantsAtStartImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_GetParticipantsAtStart get _value =>
-      super._value as _$_GetParticipantsAtStart;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? stageId = freezed,
+    Object? stageId = null,
   }) {
-    return _then(_$_GetParticipantsAtStart(
-      stageId == freezed
+    return _then(_$GetParticipantsAtStartImpl(
+      null == stageId
           ? _value.stageId
           : stageId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -2163,8 +2223,8 @@ class __$$_GetParticipantsAtStartCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
-  const _$_GetParticipantsAtStart(this.stageId);
+class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
+  const _$GetParticipantsAtStartImpl(this.stageId);
 
   @override
   final int stageId;
@@ -2175,22 +2235,24 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetParticipantsAtStart &&
-            const DeepCollectionEquality().equals(other.stageId, stageId));
+            other is _$GetParticipantsAtStartImpl &&
+            (identical(other.stageId, stageId) || other.stageId == stageId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(stageId));
+  int get hashCode => Object.hash(runtimeType, stageId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_GetParticipantsAtStartCopyWith<_$_GetParticipantsAtStart> get copyWith =>
-      __$$_GetParticipantsAtStartCopyWithImpl<_$_GetParticipantsAtStart>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$GetParticipantsAtStartImplCopyWith<_$GetParticipantsAtStartImpl>
+      get copyWith => __$$GetParticipantsAtStartImplCopyWithImpl<
+          _$GetParticipantsAtStartImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2234,8 +2296,8 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -2246,15 +2308,15 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -2263,8 +2325,8 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return getParticipantsAtStart?.call(stageId);
   }
@@ -2335,18 +2397,18 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return getParticipantsAtStart?.call(this);
   }
@@ -2377,54 +2439,58 @@ class _$_GetParticipantsAtStart implements _GetParticipantsAtStart {
 
 abstract class _GetParticipantsAtStart implements DatabaseEvent {
   const factory _GetParticipantsAtStart(final int stageId) =
-      _$_GetParticipantsAtStart;
+      _$GetParticipantsAtStartImpl;
 
   int get stageId;
-  @JsonKey(ignore: true)
-  _$$_GetParticipantsAtStartCopyWith<_$_GetParticipantsAtStart> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetParticipantsAtStartImplCopyWith<_$GetParticipantsAtStartImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AddStartNumberCopyWith<$Res> {
-  factory _$$_AddStartNumberCopyWith(
-          _$_AddStartNumber value, $Res Function(_$_AddStartNumber) then) =
-      __$$_AddStartNumberCopyWithImpl<$Res>;
+abstract class _$$AddStartNumberImplCopyWith<$Res> {
+  factory _$$AddStartNumberImplCopyWith(_$AddStartNumberImpl value,
+          $Res Function(_$AddStartNumberImpl) then) =
+      __$$AddStartNumberImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({Stage stage, int number, String startTime, bool forceAdd});
 }
 
 /// @nodoc
-class __$$_AddStartNumberCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_AddStartNumberCopyWith<$Res> {
-  __$$_AddStartNumberCopyWithImpl(
-      _$_AddStartNumber _value, $Res Function(_$_AddStartNumber) _then)
-      : super(_value, (v) => _then(v as _$_AddStartNumber));
+class __$$AddStartNumberImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$AddStartNumberImpl>
+    implements _$$AddStartNumberImplCopyWith<$Res> {
+  __$$AddStartNumberImplCopyWithImpl(
+      _$AddStartNumberImpl _value, $Res Function(_$AddStartNumberImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_AddStartNumber get _value => super._value as _$_AddStartNumber;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? stage = freezed,
-    Object? number = freezed,
-    Object? startTime = freezed,
-    Object? forceAdd = freezed,
+    Object? number = null,
+    Object? startTime = null,
+    Object? forceAdd = null,
   }) {
-    return _then(_$_AddStartNumber(
-      stage: stage == freezed
+    return _then(_$AddStartNumberImpl(
+      stage: freezed == stage
           ? _value.stage
           : stage // ignore: cast_nullable_to_non_nullable
               as Stage,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      startTime: startTime == freezed
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as String,
-      forceAdd: forceAdd == freezed
+      forceAdd: null == forceAdd
           ? _value.forceAdd
           : forceAdd // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -2434,8 +2500,8 @@ class __$$_AddStartNumberCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddStartNumber implements _AddStartNumber {
-  const _$_AddStartNumber(
+class _$AddStartNumberImpl implements _AddStartNumber {
+  const _$AddStartNumberImpl(
       {required this.stage,
       required this.number,
       required this.startTime,
@@ -2457,28 +2523,30 @@ class _$_AddStartNumber implements _AddStartNumber {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddStartNumber &&
+            other is _$AddStartNumberImpl &&
             const DeepCollectionEquality().equals(other.stage, stage) &&
-            const DeepCollectionEquality().equals(other.number, number) &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.forceAdd, forceAdd));
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.forceAdd, forceAdd) ||
+                other.forceAdd == forceAdd));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(stage),
-      const DeepCollectionEquality().hash(number),
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(forceAdd));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(stage), number, startTime, forceAdd);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_AddStartNumberCopyWith<_$_AddStartNumber> get copyWith =>
-      __$$_AddStartNumberCopyWithImpl<_$_AddStartNumber>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$AddStartNumberImplCopyWith<_$AddStartNumberImpl> get copyWith =>
+      __$$AddStartNumberImplCopyWithImpl<_$AddStartNumberImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2522,8 +2590,8 @@ class _$_AddStartNumber implements _AddStartNumber {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -2534,15 +2602,15 @@ class _$_AddStartNumber implements _AddStartNumber {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -2551,8 +2619,8 @@ class _$_AddStartNumber implements _AddStartNumber {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return addStartNumber?.call(stage, number, startTime, forceAdd);
   }
@@ -2623,18 +2691,18 @@ class _$_AddStartNumber implements _AddStartNumber {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return addStartNumber?.call(this);
   }
@@ -2668,22 +2736,26 @@ abstract class _AddStartNumber implements DatabaseEvent {
       {required final Stage stage,
       required final int number,
       required final String startTime,
-      final bool forceAdd}) = _$_AddStartNumber;
+      final bool forceAdd}) = _$AddStartNumberImpl;
 
   Stage get stage;
   int get number;
   String get startTime;
   bool get forceAdd;
-  @JsonKey(ignore: true)
-  _$$_AddStartNumberCopyWith<_$_AddStartNumber> get copyWith =>
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddStartNumberImplCopyWith<_$AddStartNumberImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateStartingInfoCopyWith<$Res> {
-  factory _$$_UpdateStartingInfoCopyWith(_$_UpdateStartingInfo value,
-          $Res Function(_$_UpdateStartingInfo) then) =
-      __$$_UpdateStartingInfoCopyWithImpl<$Res>;
+abstract class _$$UpdateStartingInfoImplCopyWith<$Res> {
+  factory _$$UpdateStartingInfoImplCopyWith(_$UpdateStartingInfoImpl value,
+          $Res Function(_$UpdateStartingInfoImpl) then) =
+      __$$UpdateStartingInfoImplCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {String startTime,
       String? automaticStartTime,
@@ -2695,52 +2767,52 @@ abstract class _$$_UpdateStartingInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateStartingInfoCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_UpdateStartingInfoCopyWith<$Res> {
-  __$$_UpdateStartingInfoCopyWithImpl(
-      _$_UpdateStartingInfo _value, $Res Function(_$_UpdateStartingInfo) _then)
-      : super(_value, (v) => _then(v as _$_UpdateStartingInfo));
+class __$$UpdateStartingInfoImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$UpdateStartingInfoImpl>
+    implements _$$UpdateStartingInfoImplCopyWith<$Res> {
+  __$$UpdateStartingInfoImplCopyWithImpl(_$UpdateStartingInfoImpl _value,
+      $Res Function(_$UpdateStartingInfoImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_UpdateStartingInfo get _value => super._value as _$_UpdateStartingInfo;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startTime = freezed,
+    Object? startTime = null,
     Object? automaticStartTime = freezed,
     Object? automaticCorrection = freezed,
     Object? manualStartTime = freezed,
     Object? manualCorrection = freezed,
-    Object? stageId = freezed,
-    Object? participantId = freezed,
+    Object? stageId = null,
+    Object? participantId = null,
   }) {
-    return _then(_$_UpdateStartingInfo(
-      startTime: startTime == freezed
+    return _then(_$UpdateStartingInfoImpl(
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as String,
-      automaticStartTime: automaticStartTime == freezed
+      automaticStartTime: freezed == automaticStartTime
           ? _value.automaticStartTime
           : automaticStartTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      automaticCorrection: automaticCorrection == freezed
+      automaticCorrection: freezed == automaticCorrection
           ? _value.automaticCorrection
           : automaticCorrection // ignore: cast_nullable_to_non_nullable
               as int?,
-      manualStartTime: manualStartTime == freezed
+      manualStartTime: freezed == manualStartTime
           ? _value.manualStartTime
           : manualStartTime // ignore: cast_nullable_to_non_nullable
               as String?,
-      manualCorrection: manualCorrection == freezed
+      manualCorrection: freezed == manualCorrection
           ? _value.manualCorrection
           : manualCorrection // ignore: cast_nullable_to_non_nullable
               as int?,
-      stageId: stageId == freezed
+      stageId: null == stageId
           ? _value.stageId
           : stageId // ignore: cast_nullable_to_non_nullable
               as int,
-      participantId: participantId == freezed
+      participantId: null == participantId
           ? _value.participantId
           : participantId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -2750,8 +2822,8 @@ class __$$_UpdateStartingInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateStartingInfo implements _UpdateStartingInfo {
-  const _$_UpdateStartingInfo(
+class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
+  const _$UpdateStartingInfoImpl(
       {required this.startTime,
       this.automaticStartTime,
       this.automaticCorrection,
@@ -2781,39 +2853,43 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateStartingInfo &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality()
-                .equals(other.automaticStartTime, automaticStartTime) &&
-            const DeepCollectionEquality()
-                .equals(other.automaticCorrection, automaticCorrection) &&
-            const DeepCollectionEquality()
-                .equals(other.manualStartTime, manualStartTime) &&
-            const DeepCollectionEquality()
-                .equals(other.manualCorrection, manualCorrection) &&
-            const DeepCollectionEquality().equals(other.stageId, stageId) &&
-            const DeepCollectionEquality()
-                .equals(other.participantId, participantId));
+            other is _$UpdateStartingInfoImpl &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.automaticStartTime, automaticStartTime) ||
+                other.automaticStartTime == automaticStartTime) &&
+            (identical(other.automaticCorrection, automaticCorrection) ||
+                other.automaticCorrection == automaticCorrection) &&
+            (identical(other.manualStartTime, manualStartTime) ||
+                other.manualStartTime == manualStartTime) &&
+            (identical(other.manualCorrection, manualCorrection) ||
+                other.manualCorrection == manualCorrection) &&
+            (identical(other.stageId, stageId) || other.stageId == stageId) &&
+            (identical(other.participantId, participantId) ||
+                other.participantId == participantId));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(automaticStartTime),
-      const DeepCollectionEquality().hash(automaticCorrection),
-      const DeepCollectionEquality().hash(manualStartTime),
-      const DeepCollectionEquality().hash(manualCorrection),
-      const DeepCollectionEquality().hash(stageId),
-      const DeepCollectionEquality().hash(participantId));
+      startTime,
+      automaticStartTime,
+      automaticCorrection,
+      manualStartTime,
+      manualCorrection,
+      stageId,
+      participantId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_UpdateStartingInfoCopyWith<_$_UpdateStartingInfo> get copyWith =>
-      __$$_UpdateStartingInfoCopyWithImpl<_$_UpdateStartingInfo>(
+  @pragma('vm:prefer-inline')
+  _$$UpdateStartingInfoImplCopyWith<_$UpdateStartingInfoImpl> get copyWith =>
+      __$$UpdateStartingInfoImplCopyWithImpl<_$UpdateStartingInfoImpl>(
           this, _$identity);
 
   @override
@@ -2865,8 +2941,8 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -2877,15 +2953,15 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -2894,8 +2970,8 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return updateStartingInfo?.call(
         startTime,
@@ -2980,18 +3056,18 @@ class _$_UpdateStartingInfo implements _UpdateStartingInfo {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return updateStartingInfo?.call(this);
   }
@@ -3028,7 +3104,7 @@ abstract class _UpdateStartingInfo implements DatabaseEvent {
       final String? manualStartTime,
       final int? manualCorrection,
       required final int stageId,
-      required final int participantId}) = _$_UpdateStartingInfo;
+      required final int participantId}) = _$UpdateStartingInfoImpl;
 
   String get startTime;
   String? get automaticStartTime;
@@ -3037,42 +3113,46 @@ abstract class _UpdateStartingInfo implements DatabaseEvent {
   int? get manualCorrection;
   int get stageId;
   int get participantId;
-  @JsonKey(ignore: true)
-  _$$_UpdateStartingInfoCopyWith<_$_UpdateStartingInfo> get copyWith =>
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateStartingInfoImplCopyWith<_$UpdateStartingInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateManualStartTimeCopyWith<$Res> {
-  factory _$$_UpdateManualStartTimeCopyWith(_$_UpdateManualStartTime value,
-          $Res Function(_$_UpdateManualStartTime) then) =
-      __$$_UpdateManualStartTimeCopyWithImpl<$Res>;
+abstract class _$$UpdateManualStartTimeImplCopyWith<$Res> {
+  factory _$$UpdateManualStartTimeImplCopyWith(
+          _$UpdateManualStartTimeImpl value,
+          $Res Function(_$UpdateManualStartTimeImpl) then) =
+      __$$UpdateManualStartTimeImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int stageId, DateTime time});
 }
 
 /// @nodoc
-class __$$_UpdateManualStartTimeCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_UpdateManualStartTimeCopyWith<$Res> {
-  __$$_UpdateManualStartTimeCopyWithImpl(_$_UpdateManualStartTime _value,
-      $Res Function(_$_UpdateManualStartTime) _then)
-      : super(_value, (v) => _then(v as _$_UpdateManualStartTime));
+class __$$UpdateManualStartTimeImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$UpdateManualStartTimeImpl>
+    implements _$$UpdateManualStartTimeImplCopyWith<$Res> {
+  __$$UpdateManualStartTimeImplCopyWithImpl(_$UpdateManualStartTimeImpl _value,
+      $Res Function(_$UpdateManualStartTimeImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_UpdateManualStartTime get _value =>
-      super._value as _$_UpdateManualStartTime;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? stageId = freezed,
-    Object? time = freezed,
+    Object? stageId = null,
+    Object? time = null,
   }) {
-    return _then(_$_UpdateManualStartTime(
-      stageId: stageId == freezed
+    return _then(_$UpdateManualStartTimeImpl(
+      stageId: null == stageId
           ? _value.stageId
           : stageId // ignore: cast_nullable_to_non_nullable
               as int,
-      time: time == freezed
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -3082,8 +3162,9 @@ class __$$_UpdateManualStartTimeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateManualStartTime implements _UpdateManualStartTime {
-  const _$_UpdateManualStartTime({required this.stageId, required this.time});
+class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
+  const _$UpdateManualStartTimeImpl(
+      {required this.stageId, required this.time});
 
   @override
   final int stageId;
@@ -3096,25 +3177,25 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateManualStartTime &&
-            const DeepCollectionEquality().equals(other.stageId, stageId) &&
-            const DeepCollectionEquality().equals(other.time, time));
+            other is _$UpdateManualStartTimeImpl &&
+            (identical(other.stageId, stageId) || other.stageId == stageId) &&
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(stageId),
-      const DeepCollectionEquality().hash(time));
+  int get hashCode => Object.hash(runtimeType, stageId, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_UpdateManualStartTimeCopyWith<_$_UpdateManualStartTime> get copyWith =>
-      __$$_UpdateManualStartTimeCopyWithImpl<_$_UpdateManualStartTime>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$UpdateManualStartTimeImplCopyWith<_$UpdateManualStartTimeImpl>
+      get copyWith => __$$UpdateManualStartTimeImplCopyWithImpl<
+          _$UpdateManualStartTimeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3158,8 +3239,8 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -3170,15 +3251,15 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -3187,8 +3268,8 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return updateManualStartTime?.call(stageId, time);
   }
@@ -3259,18 +3340,18 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return updateManualStartTime?.call(this);
   }
@@ -3302,37 +3383,44 @@ class _$_UpdateManualStartTime implements _UpdateManualStartTime {
 abstract class _UpdateManualStartTime implements DatabaseEvent {
   const factory _UpdateManualStartTime(
       {required final int stageId,
-      required final DateTime time}) = _$_UpdateManualStartTime;
+      required final DateTime time}) = _$UpdateManualStartTimeImpl;
 
   int get stageId;
   DateTime get time;
-  @JsonKey(ignore: true)
-  _$$_UpdateManualStartTimeCopyWith<_$_UpdateManualStartTime> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateManualStartTimeImplCopyWith<_$UpdateManualStartTimeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_setDNSCopyWith<$Res> {
-  factory _$$_setDNSCopyWith(_$_setDNS value, $Res Function(_$_setDNS) then) =
-      __$$_setDNSCopyWithImpl<$Res>;
+abstract class _$$setDNSImplCopyWith<$Res> {
+  factory _$$setDNSImplCopyWith(
+          _$setDNSImpl value, $Res Function(_$setDNSImpl) then) =
+      __$$setDNSImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({int startId});
 }
 
 /// @nodoc
-class __$$_setDNSCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
-    implements _$$_setDNSCopyWith<$Res> {
-  __$$_setDNSCopyWithImpl(_$_setDNS _value, $Res Function(_$_setDNS) _then)
-      : super(_value, (v) => _then(v as _$_setDNS));
+class __$$setDNSImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$setDNSImpl>
+    implements _$$setDNSImplCopyWith<$Res> {
+  __$$setDNSImplCopyWithImpl(
+      _$setDNSImpl _value, $Res Function(_$setDNSImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_setDNS get _value => super._value as _$_setDNS;
-
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startId = freezed,
+    Object? startId = null,
   }) {
-    return _then(_$_setDNS(
-      startId: startId == freezed
+    return _then(_$setDNSImpl(
+      startId: null == startId
           ? _value.startId
           : startId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -3342,8 +3430,8 @@ class __$$_setDNSCopyWithImpl<$Res> extends _$DatabaseEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_setDNS implements _setDNS {
-  const _$_setDNS({required this.startId});
+class _$setDNSImpl implements _setDNS {
+  const _$setDNSImpl({required this.startId});
 
   @override
   final int startId;
@@ -3354,21 +3442,23 @@ class _$_setDNS implements _setDNS {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_setDNS &&
-            const DeepCollectionEquality().equals(other.startId, startId));
+            other is _$setDNSImpl &&
+            (identical(other.startId, startId) || other.startId == startId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(startId));
+  int get hashCode => Object.hash(runtimeType, startId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_setDNSCopyWith<_$_setDNS> get copyWith =>
-      __$$_setDNSCopyWithImpl<_$_setDNS>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$setDNSImplCopyWith<_$setDNSImpl> get copyWith =>
+      __$$setDNSImplCopyWithImpl<_$setDNSImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3412,8 +3502,8 @@ class _$_setDNS implements _setDNS {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
+    TResult? Function()? initialize,
+    TResult? Function(
             List<Race>? races,
             List<Stage>? stages,
             List<Rider>? riders,
@@ -3424,15 +3514,15 @@ class _$_setDNS implements _setDNS {
             List<Trail>? trails,
             Notification? notification)?
         emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int raceId)? selectStages,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int raceId)? selectStages,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
-    TResult Function(
+    TResult? Function(
             String startTime,
             String? automaticStartTime,
             int? automaticCorrection,
@@ -3441,8 +3531,8 @@ class _$_setDNS implements _setDNS {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, DateTime time)? updateManualStartTime,
-    TResult Function(int startId)? setDNSatStart,
+    TResult? Function(int stageId, DateTime time)? updateManualStartTime,
+    TResult? Function(int startId)? setDNSatStart,
   }) {
     return setDNSatStart?.call(startId);
   }
@@ -3513,18 +3603,18 @@ class _$_setDNS implements _setDNS {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_SelectStages value)? selectStages,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_setDNS value)? setDNSatStart,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_SelectStages value)? selectStages,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_setDNS value)? setDNSatStart,
   }) {
     return setDNSatStart?.call(this);
   }
@@ -3554,11 +3644,14 @@ class _$_setDNS implements _setDNS {
 }
 
 abstract class _setDNS implements DatabaseEvent {
-  const factory _setDNS({required final int startId}) = _$_setDNS;
+  const factory _setDNS({required final int startId}) = _$setDNSImpl;
 
   int get startId;
-  @JsonKey(ignore: true)
-  _$$_setDNSCopyWith<_$_setDNS> get copyWith =>
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$setDNSImplCopyWith<_$setDNSImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3582,8 +3675,8 @@ mixin _$DatabaseState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
+    TResult? Function()? initial,
+    TResult? Function(
             List<Race> races,
             List<Stage> stages,
             List<Rider> riders,
@@ -3621,8 +3714,8 @@ mixin _$DatabaseState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Initialized value)? initialized,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -3638,40 +3731,46 @@ mixin _$DatabaseState {
 abstract class $DatabaseStateCopyWith<$Res> {
   factory $DatabaseStateCopyWith(
           DatabaseState value, $Res Function(DatabaseState) then) =
-      _$DatabaseStateCopyWithImpl<$Res>;
+      _$DatabaseStateCopyWithImpl<$Res, DatabaseState>;
 }
 
 /// @nodoc
-class _$DatabaseStateCopyWithImpl<$Res>
+class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
     implements $DatabaseStateCopyWith<$Res> {
   _$DatabaseStateCopyWithImpl(this._value, this._then);
 
-  final DatabaseState _value;
   // ignore: unused_field
-  final $Res Function(DatabaseState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of DatabaseState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res> extends _$DatabaseStateCopyWithImpl<$Res>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
-      : super(_value, (v) => _then(v as _$_Initial));
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$DatabaseStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_Initial get _value => super._value as _$_Initial;
+  /// Create a copy of DatabaseState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -3679,9 +3778,9 @@ class _$_Initial implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -3709,8 +3808,8 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
+    TResult? Function()? initial,
+    TResult? Function(
             List<Race> races,
             List<Stage> stages,
             List<Rider> riders,
@@ -3760,8 +3859,8 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Initialized value)? initialized,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
   }) {
     return initial?.call(this);
   }
@@ -3781,14 +3880,15 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements DatabaseState {
-  const factory _Initial() = _$_Initial;
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {List<Race> races,
       List<Stage> stages,
@@ -3804,69 +3904,72 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$DatabaseStateCopyWithImpl<$Res>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, (v) => _then(v as _$_Initialized));
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$DatabaseStateCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_Initialized get _value => super._value as _$_Initialized;
-
+  /// Create a copy of DatabaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? races = freezed,
-    Object? stages = freezed,
-    Object? riders = freezed,
-    Object? statuses = freezed,
-    Object? participants = freezed,
-    Object? starts = freezed,
-    Object? finishes = freezed,
-    Object? trails = freezed,
+    Object? races = null,
+    Object? stages = null,
+    Object? riders = null,
+    Object? statuses = null,
+    Object? participants = null,
+    Object? starts = null,
+    Object? finishes = null,
+    Object? trails = null,
     Object? notification = freezed,
   }) {
-    return _then(_$_Initialized(
-      races: races == freezed
+    return _then(_$InitializedImpl(
+      races: null == races
           ? _value._races
           : races // ignore: cast_nullable_to_non_nullable
               as List<Race>,
-      stages: stages == freezed
+      stages: null == stages
           ? _value._stages
           : stages // ignore: cast_nullable_to_non_nullable
               as List<Stage>,
-      riders: riders == freezed
+      riders: null == riders
           ? _value._riders
           : riders // ignore: cast_nullable_to_non_nullable
               as List<Rider>,
-      statuses: statuses == freezed
+      statuses: null == statuses
           ? _value._statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<Status>,
-      participants: participants == freezed
+      participants: null == participants
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
               as List<GetParticipantsAtStartResult>,
-      starts: starts == freezed
+      starts: null == starts
           ? _value._starts
           : starts // ignore: cast_nullable_to_non_nullable
               as List<Start>,
-      finishes: finishes == freezed
+      finishes: null == finishes
           ? _value._finishes
           : finishes // ignore: cast_nullable_to_non_nullable
               as List<Finish>,
-      trails: trails == freezed
+      trails: null == trails
           ? _value._trails
           : trails // ignore: cast_nullable_to_non_nullable
               as List<Trail>,
-      notification: notification == freezed
+      notification: freezed == notification
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as Notification?,
     ));
   }
 
+  /// Create a copy of DatabaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $NotificationCopyWith<$Res>? get notification {
     if (_value.notification == null) {
       return null;
@@ -3880,8 +3983,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required final List<Race> races,
       required final List<Stage> stages,
       required final List<Rider> riders,
@@ -3903,6 +4006,7 @@ class _$_Initialized implements _Initialized {
   final List<Race> _races;
   @override
   List<Race> get races {
+    if (_races is EqualUnmodifiableListView) return _races;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_races);
   }
@@ -3910,6 +4014,7 @@ class _$_Initialized implements _Initialized {
   final List<Stage> _stages;
   @override
   List<Stage> get stages {
+    if (_stages is EqualUnmodifiableListView) return _stages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_stages);
   }
@@ -3917,6 +4022,7 @@ class _$_Initialized implements _Initialized {
   final List<Rider> _riders;
   @override
   List<Rider> get riders {
+    if (_riders is EqualUnmodifiableListView) return _riders;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_riders);
   }
@@ -3924,6 +4030,7 @@ class _$_Initialized implements _Initialized {
   final List<Status> _statuses;
   @override
   List<Status> get statuses {
+    if (_statuses is EqualUnmodifiableListView) return _statuses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_statuses);
   }
@@ -3931,6 +4038,7 @@ class _$_Initialized implements _Initialized {
   final List<GetParticipantsAtStartResult> _participants;
   @override
   List<GetParticipantsAtStartResult> get participants {
+    if (_participants is EqualUnmodifiableListView) return _participants;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_participants);
   }
@@ -3938,6 +4046,7 @@ class _$_Initialized implements _Initialized {
   final List<Start> _starts;
   @override
   List<Start> get starts {
+    if (_starts is EqualUnmodifiableListView) return _starts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_starts);
   }
@@ -3945,6 +4054,7 @@ class _$_Initialized implements _Initialized {
   final List<Finish> _finishes;
   @override
   List<Finish> get finishes {
+    if (_finishes is EqualUnmodifiableListView) return _finishes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_finishes);
   }
@@ -3952,6 +4062,7 @@ class _$_Initialized implements _Initialized {
   final List<Trail> _trails;
   @override
   List<Trail> get trails {
+    if (_trails is EqualUnmodifiableListView) return _trails;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_trails);
   }
@@ -3965,10 +4076,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             const DeepCollectionEquality().equals(other._races, _races) &&
             const DeepCollectionEquality().equals(other._stages, _stages) &&
             const DeepCollectionEquality().equals(other._riders, _riders) &&
@@ -3978,8 +4089,8 @@ class _$_Initialized implements _Initialized {
             const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
             const DeepCollectionEquality().equals(other._trails, _trails) &&
-            const DeepCollectionEquality()
-                .equals(other.notification, notification));
+            (identical(other.notification, notification) ||
+                other.notification == notification));
   }
 
   @override
@@ -3993,12 +4104,15 @@ class _$_Initialized implements _Initialized {
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_trails),
-      const DeepCollectionEquality().hash(notification));
+      notification);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatabaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4023,8 +4137,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
+    TResult? Function()? initial,
+    TResult? Function(
             List<Race> races,
             List<Stage> stages,
             List<Rider> riders,
@@ -4076,8 +4190,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Initialized value)? initialized,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
   }) {
     return initialized?.call(this);
   }
@@ -4106,7 +4220,7 @@ abstract class _Initialized implements DatabaseState {
       required final List<Start> starts,
       required final List<Finish> finishes,
       required final List<Trail> trails,
-      final Notification? notification}) = _$_Initialized;
+      final Notification? notification}) = _$InitializedImpl;
 
   List<Race> get races;
   List<Stage> get stages;
@@ -4117,7 +4231,10 @@ abstract class _Initialized implements DatabaseState {
   List<Finish> get finishes;
   List<Trail> get trails;
   Notification? get notification;
-  @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+
+  /// Create a copy of DatabaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -10,14 +10,14 @@ class ExpandedAlertDialog extends StatelessWidget {
   final List<Widget>? actions;
 
   const ExpandedAlertDialog({
-    Key? key,
+    super.key,
     this.height,
     this.width,
     this.scrollable = false,
     this.title,
     this.content,
     this.actions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => AlertDialog(

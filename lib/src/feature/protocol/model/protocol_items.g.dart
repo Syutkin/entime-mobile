@@ -6,16 +6,17 @@ part of 'protocol_items.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_StartItem _$$_StartItemFromJson(Map<String, dynamic> json) => _$_StartItem(
+_$StartItemImpl _$$StartItemImplFromJson(Map<String, dynamic> json) =>
+    _$StartItemImpl(
       automaticstarttime: json['automaticstarttime'] as String?,
-      automaticcorrection: json['automaticcorrection'] as int?,
+      automaticcorrection: (json['automaticcorrection'] as num?)?.toInt(),
       automaticphonetime: json['automaticphonetime'] as String?,
       finishtime: json['finishtime'] as String?,
-      id: json['id'] as int,
-      manualcorrection: json['manualcorrection'] as int?,
+      id: (json['id'] as num).toInt(),
+      manualcorrection: (json['manualcorrection'] as num?)?.toInt(),
       manualstarttime: json['manualstarttime'] as String?,
       name: json['name'] as String?,
-      number: json['number'] as int,
+      number: (json['number'] as num).toInt(),
       category: json['category'] as String?,
       nickname: json['nickname'] as String?,
       age: json['age'] as String?,
@@ -24,7 +25,7 @@ _$_StartItem _$$_StartItemFromJson(Map<String, dynamic> json) => _$_StartItem(
       starttime: json['starttime'] as String?,
     );
 
-Map<String, dynamic> _$$_StartItemToJson(_$_StartItem instance) =>
+Map<String, dynamic> _$$StartItemImplToJson(_$StartItemImpl instance) =>
     <String, dynamic>{
       'automaticstarttime': instance.automaticstarttime,
       'automaticcorrection': instance.automaticcorrection,
@@ -43,17 +44,17 @@ Map<String, dynamic> _$$_StartItemToJson(_$_StartItem instance) =>
       'starttime': instance.starttime,
     };
 
-_$_FinishItem _$$_FinishItemFromJson(Map<String, dynamic> json) =>
-    _$_FinishItem(
-      id: json['id'] as int,
-      number: json['number'] as int?,
+_$FinishItemImpl _$$FinishItemImplFromJson(Map<String, dynamic> json) =>
+    _$FinishItemImpl(
+      id: (json['id'] as num).toInt(),
+      number: (json['number'] as num?)?.toInt(),
       finishtime: json['finishtime'] as String,
       phonetime: json['phonetime'] as String?,
-      set: json['set'] as int?,
-      manual: json['manual'] as int?,
+      set: (json['set'] as num?)?.toInt(),
+      manual: (json['manual'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$_FinishItemToJson(_$_FinishItem instance) =>
+Map<String, dynamic> _$$FinishItemImplToJson(_$FinishItemImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'number': instance.number,

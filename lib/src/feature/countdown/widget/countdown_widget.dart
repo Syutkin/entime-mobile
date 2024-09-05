@@ -6,11 +6,11 @@ class CountdownWidget extends StatelessWidget {
   final double elevation;
 
   const CountdownWidget({
-    Key? key,
+    super.key,
     this.size = 75,
     this.text = '',
     this.elevation = 6,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

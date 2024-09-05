@@ -13,7 +13,7 @@ Future<void> addStagePopup(BuildContext context, {required int raceId}) async {
         onChanged: () {
           final formState = primaryFocus?.context;
           if (formState != null) {
-            Form.of(formState)?.validate();
+            Form.of(formState).validate();
           }
         },
         child: Column(

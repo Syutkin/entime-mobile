@@ -19,7 +19,7 @@ Future<int?> setDelayPopup(
       content: Form(
         key: formKey,
         onChanged: () {
-          Form.of(primaryFocus!.context!)!.validate();
+          Form.of(primaryFocus!.context!).validate();
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,

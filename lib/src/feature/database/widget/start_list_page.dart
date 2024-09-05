@@ -22,8 +22,8 @@ class StartListPage extends StatefulWidget {
 
   const StartListPage({
     required this.stage,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<StartListPage> createState() => _StartListPage();
@@ -433,7 +433,7 @@ class _SliverStartSubHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
         margin: const EdgeInsets.all(2),
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'start_time.dart';
 
@@ -12,14 +12,16 @@ part of 'start_time.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$StartTime {
   String get time => throw _privateConstructorUsedError;
   int get number => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StartTime
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StartTimeCopyWith<StartTime> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -27,66 +29,75 @@ mixin _$StartTime {
 /// @nodoc
 abstract class $StartTimeCopyWith<$Res> {
   factory $StartTimeCopyWith(StartTime value, $Res Function(StartTime) then) =
-      _$StartTimeCopyWithImpl<$Res>;
+      _$StartTimeCopyWithImpl<$Res, StartTime>;
+  @useResult
   $Res call({String time, int number});
 }
 
 /// @nodoc
-class _$StartTimeCopyWithImpl<$Res> implements $StartTimeCopyWith<$Res> {
+class _$StartTimeCopyWithImpl<$Res, $Val extends StartTime>
+    implements $StartTimeCopyWith<$Res> {
   _$StartTimeCopyWithImpl(this._value, this._then);
 
-  final StartTime _value;
   // ignore: unused_field
-  final $Res Function(StartTime) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of StartTime
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
-    Object? number = freezed,
+    Object? time = null,
+    Object? number = null,
   }) {
     return _then(_value.copyWith(
-      time: time == freezed
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_StartTimeCopyWith<$Res> implements $StartTimeCopyWith<$Res> {
-  factory _$$_StartTimeCopyWith(
-          _$_StartTime value, $Res Function(_$_StartTime) then) =
-      __$$_StartTimeCopyWithImpl<$Res>;
+abstract class _$$StartTimeImplCopyWith<$Res>
+    implements $StartTimeCopyWith<$Res> {
+  factory _$$StartTimeImplCopyWith(
+          _$StartTimeImpl value, $Res Function(_$StartTimeImpl) then) =
+      __$$StartTimeImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String time, int number});
 }
 
 /// @nodoc
-class __$$_StartTimeCopyWithImpl<$Res> extends _$StartTimeCopyWithImpl<$Res>
-    implements _$$_StartTimeCopyWith<$Res> {
-  __$$_StartTimeCopyWithImpl(
-      _$_StartTime _value, $Res Function(_$_StartTime) _then)
-      : super(_value, (v) => _then(v as _$_StartTime));
+class __$$StartTimeImplCopyWithImpl<$Res>
+    extends _$StartTimeCopyWithImpl<$Res, _$StartTimeImpl>
+    implements _$$StartTimeImplCopyWith<$Res> {
+  __$$StartTimeImplCopyWithImpl(
+      _$StartTimeImpl _value, $Res Function(_$StartTimeImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_StartTime get _value => super._value as _$_StartTime;
-
+  /// Create a copy of StartTime
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = freezed,
-    Object? number = freezed,
+    Object? time = null,
+    Object? number = null,
   }) {
-    return _then(_$_StartTime(
-      time == freezed
+    return _then(_$StartTimeImpl(
+      null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
-      number == freezed
+      null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
@@ -96,8 +107,8 @@ class __$$_StartTimeCopyWithImpl<$Res> extends _$StartTimeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_StartTime implements _StartTime {
-  const _$_StartTime(this.time, this.number);
+class _$StartTimeImpl implements _StartTime {
+  const _$StartTimeImpl(this.time, this.number);
 
   @override
   final String time;
@@ -110,35 +121,39 @@ class _$_StartTime implements _StartTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StartTime &&
-            const DeepCollectionEquality().equals(other.time, time) &&
-            const DeepCollectionEquality().equals(other.number, number));
+            other is _$StartTimeImpl &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.number, number) || other.number == number));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(number));
+  int get hashCode => Object.hash(runtimeType, time, number);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StartTime
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_StartTimeCopyWith<_$_StartTime> get copyWith =>
-      __$$_StartTimeCopyWithImpl<_$_StartTime>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$StartTimeImplCopyWith<_$StartTimeImpl> get copyWith =>
+      __$$StartTimeImplCopyWithImpl<_$StartTimeImpl>(this, _$identity);
 }
 
 abstract class _StartTime implements StartTime {
-  const factory _StartTime(final String time, final int number) = _$_StartTime;
+  const factory _StartTime(final String time, final int number) =
+      _$StartTimeImpl;
 
   @override
   String get time;
   @override
   int get number;
+
+  /// Create a copy of StartTime
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_StartTimeCopyWith<_$_StartTime> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$StartTimeImplCopyWith<_$StartTimeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

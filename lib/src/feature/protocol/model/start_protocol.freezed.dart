@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'start_protocol.dart';
 
@@ -12,7 +12,7 @@ part of 'start_protocol.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 StartItemCsv _$StartItemCsvFromJson(Map<String, dynamic> json) {
   return _StartItemCsv.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$StartItemCsv {
   String? get city => throw _privateConstructorUsedError;
   String? get starttime => throw _privateConstructorUsedError;
 
+  /// Serializes this StartItemCsv to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StartItemCsv
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StartItemCsvCopyWith<StartItemCsv> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -39,7 +43,8 @@ mixin _$StartItemCsv {
 abstract class $StartItemCsvCopyWith<$Res> {
   factory $StartItemCsvCopyWith(
           StartItemCsv value, $Res Function(StartItemCsv) then) =
-      _$StartItemCsvCopyWithImpl<$Res>;
+      _$StartItemCsvCopyWithImpl<$Res, StartItemCsv>;
+  @useResult
   $Res call(
       {String? category,
       int number,
@@ -52,17 +57,22 @@ abstract class $StartItemCsvCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StartItemCsvCopyWithImpl<$Res> implements $StartItemCsvCopyWith<$Res> {
+class _$StartItemCsvCopyWithImpl<$Res, $Val extends StartItemCsv>
+    implements $StartItemCsvCopyWith<$Res> {
   _$StartItemCsvCopyWithImpl(this._value, this._then);
 
-  final StartItemCsv _value;
   // ignore: unused_field
-  final $Res Function(StartItemCsv) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of StartItemCsv
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? category = freezed,
-    Object? number = freezed,
+    Object? number = null,
     Object? name = freezed,
     Object? nickname = freezed,
     Object? age = freezed,
@@ -71,49 +81,50 @@ class _$StartItemCsvCopyWithImpl<$Res> implements $StartItemCsvCopyWith<$Res> {
     Object? starttime = freezed,
   }) {
     return _then(_value.copyWith(
-      category: category == freezed
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String?,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      nickname: nickname == freezed
+      nickname: freezed == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String?,
-      age: age == freezed
+      age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as String?,
-      team: team == freezed
+      team: freezed == team
           ? _value.team
           : team // ignore: cast_nullable_to_non_nullable
               as String?,
-      city: city == freezed
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      starttime: starttime == freezed
+      starttime: freezed == starttime
           ? _value.starttime
           : starttime // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_StartItemCsvCopyWith<$Res>
+abstract class _$$StartItemCsvImplCopyWith<$Res>
     implements $StartItemCsvCopyWith<$Res> {
-  factory _$$_StartItemCsvCopyWith(
-          _$_StartItemCsv value, $Res Function(_$_StartItemCsv) then) =
-      __$$_StartItemCsvCopyWithImpl<$Res>;
+  factory _$$StartItemCsvImplCopyWith(
+          _$StartItemCsvImpl value, $Res Function(_$StartItemCsvImpl) then) =
+      __$$StartItemCsvImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? category,
       int number,
@@ -126,20 +137,20 @@ abstract class _$$_StartItemCsvCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_StartItemCsvCopyWithImpl<$Res>
-    extends _$StartItemCsvCopyWithImpl<$Res>
-    implements _$$_StartItemCsvCopyWith<$Res> {
-  __$$_StartItemCsvCopyWithImpl(
-      _$_StartItemCsv _value, $Res Function(_$_StartItemCsv) _then)
-      : super(_value, (v) => _then(v as _$_StartItemCsv));
+class __$$StartItemCsvImplCopyWithImpl<$Res>
+    extends _$StartItemCsvCopyWithImpl<$Res, _$StartItemCsvImpl>
+    implements _$$StartItemCsvImplCopyWith<$Res> {
+  __$$StartItemCsvImplCopyWithImpl(
+      _$StartItemCsvImpl _value, $Res Function(_$StartItemCsvImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_StartItemCsv get _value => super._value as _$_StartItemCsv;
-
+  /// Create a copy of StartItemCsv
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? category = freezed,
-    Object? number = freezed,
+    Object? number = null,
     Object? name = freezed,
     Object? nickname = freezed,
     Object? age = freezed,
@@ -147,36 +158,36 @@ class __$$_StartItemCsvCopyWithImpl<$Res>
     Object? city = freezed,
     Object? starttime = freezed,
   }) {
-    return _then(_$_StartItemCsv(
-      category: category == freezed
+    return _then(_$StartItemCsvImpl(
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String?,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      nickname: nickname == freezed
+      nickname: freezed == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String?,
-      age: age == freezed
+      age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as String?,
-      team: team == freezed
+      team: freezed == team
           ? _value.team
           : team // ignore: cast_nullable_to_non_nullable
               as String?,
-      city: city == freezed
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      starttime: starttime == freezed
+      starttime: freezed == starttime
           ? _value.starttime
           : starttime // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -186,8 +197,8 @@ class __$$_StartItemCsvCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StartItemCsv implements _StartItemCsv {
-  const _$_StartItemCsv(
+class _$StartItemCsvImpl implements _StartItemCsv {
+  const _$StartItemCsvImpl(
       {this.category,
       required this.number,
       this.name,
@@ -197,8 +208,8 @@ class _$_StartItemCsv implements _StartItemCsv {
       this.city,
       this.starttime});
 
-  factory _$_StartItemCsv.fromJson(Map<String, dynamic> json) =>
-      _$$_StartItemCsvFromJson(json);
+  factory _$StartItemCsvImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StartItemCsvImplFromJson(json);
 
   @override
   final String? category;
@@ -223,41 +234,39 @@ class _$_StartItemCsv implements _StartItemCsv {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StartItemCsv &&
-            const DeepCollectionEquality().equals(other.category, category) &&
-            const DeepCollectionEquality().equals(other.number, number) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.nickname, nickname) &&
-            const DeepCollectionEquality().equals(other.age, age) &&
-            const DeepCollectionEquality().equals(other.team, team) &&
-            const DeepCollectionEquality().equals(other.city, city) &&
-            const DeepCollectionEquality().equals(other.starttime, starttime));
+            other is _$StartItemCsvImpl &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.age, age) || other.age == age) &&
+            (identical(other.team, team) || other.team == team) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.starttime, starttime) ||
+                other.starttime == starttime));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(category),
-      const DeepCollectionEquality().hash(number),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(nickname),
-      const DeepCollectionEquality().hash(age),
-      const DeepCollectionEquality().hash(team),
-      const DeepCollectionEquality().hash(city),
-      const DeepCollectionEquality().hash(starttime));
+  int get hashCode => Object.hash(runtimeType, category, number, name, nickname,
+      age, team, city, starttime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StartItemCsv
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_StartItemCsvCopyWith<_$_StartItemCsv> get copyWith =>
-      __$$_StartItemCsvCopyWithImpl<_$_StartItemCsv>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$StartItemCsvImplCopyWith<_$StartItemCsvImpl> get copyWith =>
+      __$$StartItemCsvImplCopyWithImpl<_$StartItemCsvImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StartItemCsvToJson(
+    return _$$StartItemCsvImplToJson(
       this,
     );
   }
@@ -272,10 +281,10 @@ abstract class _StartItemCsv implements StartItemCsv {
       final String? age,
       final String? team,
       final String? city,
-      final String? starttime}) = _$_StartItemCsv;
+      final String? starttime}) = _$StartItemCsvImpl;
 
   factory _StartItemCsv.fromJson(Map<String, dynamic> json) =
-      _$_StartItemCsv.fromJson;
+      _$StartItemCsvImpl.fromJson;
 
   @override
   String? get category;
@@ -293,8 +302,11 @@ abstract class _StartItemCsv implements StartItemCsv {
   String? get city;
   @override
   String? get starttime;
+
+  /// Create a copy of StartItemCsv
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_StartItemCsvCopyWith<_$_StartItemCsv> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$StartItemCsvImplCopyWith<_$StartItemCsvImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

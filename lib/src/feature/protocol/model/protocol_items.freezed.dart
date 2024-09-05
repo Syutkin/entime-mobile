@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'protocol_items.dart';
 
@@ -12,7 +12,7 @@ part of 'protocol_items.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 StartItem _$StartItemFromJson(Map<String, dynamic> json) {
   return _StartItem.fromJson(json);
@@ -36,8 +36,12 @@ mixin _$StartItem {
   String? get city => throw _privateConstructorUsedError;
   String? get starttime => throw _privateConstructorUsedError;
 
+  /// Serializes this StartItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StartItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StartItemCopyWith<StartItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,7 +49,8 @@ mixin _$StartItem {
 /// @nodoc
 abstract class $StartItemCopyWith<$Res> {
   factory $StartItemCopyWith(StartItem value, $Res Function(StartItem) then) =
-      _$StartItemCopyWithImpl<$Res>;
+      _$StartItemCopyWithImpl<$Res, StartItem>;
+  @useResult
   $Res call(
       {String? automaticstarttime,
       int? automaticcorrection,
@@ -65,24 +70,29 @@ abstract class $StartItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StartItemCopyWithImpl<$Res> implements $StartItemCopyWith<$Res> {
+class _$StartItemCopyWithImpl<$Res, $Val extends StartItem>
+    implements $StartItemCopyWith<$Res> {
   _$StartItemCopyWithImpl(this._value, this._then);
 
-  final StartItem _value;
   // ignore: unused_field
-  final $Res Function(StartItem) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of StartItem
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? automaticstarttime = freezed,
     Object? automaticcorrection = freezed,
     Object? automaticphonetime = freezed,
     Object? finishtime = freezed,
-    Object? id = freezed,
+    Object? id = null,
     Object? manualcorrection = freezed,
     Object? manualstarttime = freezed,
     Object? name = freezed,
-    Object? number = freezed,
+    Object? number = null,
     Object? category = freezed,
     Object? nickname = freezed,
     Object? age = freezed,
@@ -91,76 +101,78 @@ class _$StartItemCopyWithImpl<$Res> implements $StartItemCopyWith<$Res> {
     Object? starttime = freezed,
   }) {
     return _then(_value.copyWith(
-      automaticstarttime: automaticstarttime == freezed
+      automaticstarttime: freezed == automaticstarttime
           ? _value.automaticstarttime
           : automaticstarttime // ignore: cast_nullable_to_non_nullable
               as String?,
-      automaticcorrection: automaticcorrection == freezed
+      automaticcorrection: freezed == automaticcorrection
           ? _value.automaticcorrection
           : automaticcorrection // ignore: cast_nullable_to_non_nullable
               as int?,
-      automaticphonetime: automaticphonetime == freezed
+      automaticphonetime: freezed == automaticphonetime
           ? _value.automaticphonetime
           : automaticphonetime // ignore: cast_nullable_to_non_nullable
               as String?,
-      finishtime: finishtime == freezed
+      finishtime: freezed == finishtime
           ? _value.finishtime
           : finishtime // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      manualcorrection: manualcorrection == freezed
+      manualcorrection: freezed == manualcorrection
           ? _value.manualcorrection
           : manualcorrection // ignore: cast_nullable_to_non_nullable
               as int?,
-      manualstarttime: manualstarttime == freezed
+      manualstarttime: freezed == manualstarttime
           ? _value.manualstarttime
           : manualstarttime // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      category: category == freezed
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String?,
-      nickname: nickname == freezed
+      nickname: freezed == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String?,
-      age: age == freezed
+      age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as String?,
-      team: team == freezed
+      team: freezed == team
           ? _value.team
           : team // ignore: cast_nullable_to_non_nullable
               as String?,
-      city: city == freezed
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      starttime: starttime == freezed
+      starttime: freezed == starttime
           ? _value.starttime
           : starttime // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_StartItemCopyWith<$Res> implements $StartItemCopyWith<$Res> {
-  factory _$$_StartItemCopyWith(
-          _$_StartItem value, $Res Function(_$_StartItem) then) =
-      __$$_StartItemCopyWithImpl<$Res>;
+abstract class _$$StartItemImplCopyWith<$Res>
+    implements $StartItemCopyWith<$Res> {
+  factory _$$StartItemImplCopyWith(
+          _$StartItemImpl value, $Res Function(_$StartItemImpl) then) =
+      __$$StartItemImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? automaticstarttime,
       int? automaticcorrection,
@@ -180,26 +192,27 @@ abstract class _$$_StartItemCopyWith<$Res> implements $StartItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_StartItemCopyWithImpl<$Res> extends _$StartItemCopyWithImpl<$Res>
-    implements _$$_StartItemCopyWith<$Res> {
-  __$$_StartItemCopyWithImpl(
-      _$_StartItem _value, $Res Function(_$_StartItem) _then)
-      : super(_value, (v) => _then(v as _$_StartItem));
+class __$$StartItemImplCopyWithImpl<$Res>
+    extends _$StartItemCopyWithImpl<$Res, _$StartItemImpl>
+    implements _$$StartItemImplCopyWith<$Res> {
+  __$$StartItemImplCopyWithImpl(
+      _$StartItemImpl _value, $Res Function(_$StartItemImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_StartItem get _value => super._value as _$_StartItem;
-
+  /// Create a copy of StartItem
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? automaticstarttime = freezed,
     Object? automaticcorrection = freezed,
     Object? automaticphonetime = freezed,
     Object? finishtime = freezed,
-    Object? id = freezed,
+    Object? id = null,
     Object? manualcorrection = freezed,
     Object? manualstarttime = freezed,
     Object? name = freezed,
-    Object? number = freezed,
+    Object? number = null,
     Object? category = freezed,
     Object? nickname = freezed,
     Object? age = freezed,
@@ -207,64 +220,64 @@ class __$$_StartItemCopyWithImpl<$Res> extends _$StartItemCopyWithImpl<$Res>
     Object? city = freezed,
     Object? starttime = freezed,
   }) {
-    return _then(_$_StartItem(
-      automaticstarttime: automaticstarttime == freezed
+    return _then(_$StartItemImpl(
+      automaticstarttime: freezed == automaticstarttime
           ? _value.automaticstarttime
           : automaticstarttime // ignore: cast_nullable_to_non_nullable
               as String?,
-      automaticcorrection: automaticcorrection == freezed
+      automaticcorrection: freezed == automaticcorrection
           ? _value.automaticcorrection
           : automaticcorrection // ignore: cast_nullable_to_non_nullable
               as int?,
-      automaticphonetime: automaticphonetime == freezed
+      automaticphonetime: freezed == automaticphonetime
           ? _value.automaticphonetime
           : automaticphonetime // ignore: cast_nullable_to_non_nullable
               as String?,
-      finishtime: finishtime == freezed
+      finishtime: freezed == finishtime
           ? _value.finishtime
           : finishtime // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      manualcorrection: manualcorrection == freezed
+      manualcorrection: freezed == manualcorrection
           ? _value.manualcorrection
           : manualcorrection // ignore: cast_nullable_to_non_nullable
               as int?,
-      manualstarttime: manualstarttime == freezed
+      manualstarttime: freezed == manualstarttime
           ? _value.manualstarttime
           : manualstarttime // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      number: number == freezed
+      number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      category: category == freezed
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String?,
-      nickname: nickname == freezed
+      nickname: freezed == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String?,
-      age: age == freezed
+      age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as String?,
-      team: team == freezed
+      team: freezed == team
           ? _value.team
           : team // ignore: cast_nullable_to_non_nullable
               as String?,
-      city: city == freezed
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      starttime: starttime == freezed
+      starttime: freezed == starttime
           ? _value.starttime
           : starttime // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -274,8 +287,8 @@ class __$$_StartItemCopyWithImpl<$Res> extends _$StartItemCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StartItem implements _StartItem {
-  const _$_StartItem(
+class _$StartItemImpl implements _StartItem {
+  const _$StartItemImpl(
       {this.automaticstarttime,
       this.automaticcorrection,
       this.automaticphonetime,
@@ -292,8 +305,8 @@ class _$_StartItem implements _StartItem {
       this.city,
       this.starttime});
 
-  factory _$_StartItem.fromJson(Map<String, dynamic> json) =>
-      _$$_StartItemFromJson(json);
+  factory _$StartItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StartItemImplFromJson(json);
 
   @override
   final String? automaticstarttime;
@@ -332,61 +345,67 @@ class _$_StartItem implements _StartItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StartItem &&
-            const DeepCollectionEquality()
-                .equals(other.automaticstarttime, automaticstarttime) &&
-            const DeepCollectionEquality()
-                .equals(other.automaticcorrection, automaticcorrection) &&
-            const DeepCollectionEquality()
-                .equals(other.automaticphonetime, automaticphonetime) &&
-            const DeepCollectionEquality()
-                .equals(other.finishtime, finishtime) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.manualcorrection, manualcorrection) &&
-            const DeepCollectionEquality()
-                .equals(other.manualstarttime, manualstarttime) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.number, number) &&
-            const DeepCollectionEquality().equals(other.category, category) &&
-            const DeepCollectionEquality().equals(other.nickname, nickname) &&
-            const DeepCollectionEquality().equals(other.age, age) &&
-            const DeepCollectionEquality().equals(other.team, team) &&
-            const DeepCollectionEquality().equals(other.city, city) &&
-            const DeepCollectionEquality().equals(other.starttime, starttime));
+            other is _$StartItemImpl &&
+            (identical(other.automaticstarttime, automaticstarttime) ||
+                other.automaticstarttime == automaticstarttime) &&
+            (identical(other.automaticcorrection, automaticcorrection) ||
+                other.automaticcorrection == automaticcorrection) &&
+            (identical(other.automaticphonetime, automaticphonetime) ||
+                other.automaticphonetime == automaticphonetime) &&
+            (identical(other.finishtime, finishtime) ||
+                other.finishtime == finishtime) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.manualcorrection, manualcorrection) ||
+                other.manualcorrection == manualcorrection) &&
+            (identical(other.manualstarttime, manualstarttime) ||
+                other.manualstarttime == manualstarttime) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.age, age) || other.age == age) &&
+            (identical(other.team, team) || other.team == team) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.starttime, starttime) ||
+                other.starttime == starttime));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(automaticstarttime),
-      const DeepCollectionEquality().hash(automaticcorrection),
-      const DeepCollectionEquality().hash(automaticphonetime),
-      const DeepCollectionEquality().hash(finishtime),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(manualcorrection),
-      const DeepCollectionEquality().hash(manualstarttime),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(number),
-      const DeepCollectionEquality().hash(category),
-      const DeepCollectionEquality().hash(nickname),
-      const DeepCollectionEquality().hash(age),
-      const DeepCollectionEquality().hash(team),
-      const DeepCollectionEquality().hash(city),
-      const DeepCollectionEquality().hash(starttime));
+      automaticstarttime,
+      automaticcorrection,
+      automaticphonetime,
+      finishtime,
+      id,
+      manualcorrection,
+      manualstarttime,
+      name,
+      number,
+      category,
+      nickname,
+      age,
+      team,
+      city,
+      starttime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StartItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_StartItemCopyWith<_$_StartItem> get copyWith =>
-      __$$_StartItemCopyWithImpl<_$_StartItem>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$StartItemImplCopyWith<_$StartItemImpl> get copyWith =>
+      __$$StartItemImplCopyWithImpl<_$StartItemImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StartItemToJson(
+    return _$$StartItemImplToJson(
       this,
     );
   }
@@ -408,10 +427,10 @@ abstract class _StartItem implements StartItem {
       final String? age,
       final String? team,
       final String? city,
-      final String? starttime}) = _$_StartItem;
+      final String? starttime}) = _$StartItemImpl;
 
   factory _StartItem.fromJson(Map<String, dynamic> json) =
-      _$_StartItem.fromJson;
+      _$StartItemImpl.fromJson;
 
   @override
   String? get automaticstarttime;
@@ -443,9 +462,12 @@ abstract class _StartItem implements StartItem {
   String? get city;
   @override
   String? get starttime;
+
+  /// Create a copy of StartItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_StartItemCopyWith<_$_StartItem> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$StartItemImplCopyWith<_$StartItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -462,8 +484,12 @@ mixin _$FinishItem {
   int? get set => throw _privateConstructorUsedError;
   int? get manual => throw _privateConstructorUsedError;
 
+  /// Serializes this FinishItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FinishItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FinishItemCopyWith<FinishItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -472,7 +498,8 @@ mixin _$FinishItem {
 abstract class $FinishItemCopyWith<$Res> {
   factory $FinishItemCopyWith(
           FinishItem value, $Res Function(FinishItem) then) =
-      _$FinishItemCopyWithImpl<$Res>;
+      _$FinishItemCopyWithImpl<$Res, FinishItem>;
+  @useResult
   $Res call(
       {int id,
       int? number,
@@ -483,58 +510,64 @@ abstract class $FinishItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FinishItemCopyWithImpl<$Res> implements $FinishItemCopyWith<$Res> {
+class _$FinishItemCopyWithImpl<$Res, $Val extends FinishItem>
+    implements $FinishItemCopyWith<$Res> {
   _$FinishItemCopyWithImpl(this._value, this._then);
 
-  final FinishItem _value;
   // ignore: unused_field
-  final $Res Function(FinishItem) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of FinishItem
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? number = freezed,
-    Object? finishtime = freezed,
+    Object? finishtime = null,
     Object? phonetime = freezed,
     Object? set = freezed,
     Object? manual = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      number: number == freezed
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int?,
-      finishtime: finishtime == freezed
+      finishtime: null == finishtime
           ? _value.finishtime
           : finishtime // ignore: cast_nullable_to_non_nullable
               as String,
-      phonetime: phonetime == freezed
+      phonetime: freezed == phonetime
           ? _value.phonetime
           : phonetime // ignore: cast_nullable_to_non_nullable
               as String?,
-      set: set == freezed
+      set: freezed == set
           ? _value.set
           : set // ignore: cast_nullable_to_non_nullable
               as int?,
-      manual: manual == freezed
+      manual: freezed == manual
           ? _value.manual
           : manual // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_FinishItemCopyWith<$Res>
+abstract class _$$FinishItemImplCopyWith<$Res>
     implements $FinishItemCopyWith<$Res> {
-  factory _$$_FinishItemCopyWith(
-          _$_FinishItem value, $Res Function(_$_FinishItem) then) =
-      __$$_FinishItemCopyWithImpl<$Res>;
+  factory _$$FinishItemImplCopyWith(
+          _$FinishItemImpl value, $Res Function(_$FinishItemImpl) then) =
+      __$$FinishItemImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       int? number,
@@ -545,46 +578,47 @@ abstract class _$$_FinishItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FinishItemCopyWithImpl<$Res> extends _$FinishItemCopyWithImpl<$Res>
-    implements _$$_FinishItemCopyWith<$Res> {
-  __$$_FinishItemCopyWithImpl(
-      _$_FinishItem _value, $Res Function(_$_FinishItem) _then)
-      : super(_value, (v) => _then(v as _$_FinishItem));
+class __$$FinishItemImplCopyWithImpl<$Res>
+    extends _$FinishItemCopyWithImpl<$Res, _$FinishItemImpl>
+    implements _$$FinishItemImplCopyWith<$Res> {
+  __$$FinishItemImplCopyWithImpl(
+      _$FinishItemImpl _value, $Res Function(_$FinishItemImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_FinishItem get _value => super._value as _$_FinishItem;
-
+  /// Create a copy of FinishItem
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? number = freezed,
-    Object? finishtime = freezed,
+    Object? finishtime = null,
     Object? phonetime = freezed,
     Object? set = freezed,
     Object? manual = freezed,
   }) {
-    return _then(_$_FinishItem(
-      id: id == freezed
+    return _then(_$FinishItemImpl(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      number: number == freezed
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int?,
-      finishtime: finishtime == freezed
+      finishtime: null == finishtime
           ? _value.finishtime
           : finishtime // ignore: cast_nullable_to_non_nullable
               as String,
-      phonetime: phonetime == freezed
+      phonetime: freezed == phonetime
           ? _value.phonetime
           : phonetime // ignore: cast_nullable_to_non_nullable
               as String?,
-      set: set == freezed
+      set: freezed == set
           ? _value.set
           : set // ignore: cast_nullable_to_non_nullable
               as int?,
-      manual: manual == freezed
+      manual: freezed == manual
           ? _value.manual
           : manual // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -594,8 +628,8 @@ class __$$_FinishItemCopyWithImpl<$Res> extends _$FinishItemCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FinishItem implements _FinishItem {
-  const _$_FinishItem(
+class _$FinishItemImpl implements _FinishItem {
+  const _$FinishItemImpl(
       {required this.id,
       this.number,
       required this.finishtime,
@@ -603,8 +637,8 @@ class _$_FinishItem implements _FinishItem {
       this.set,
       this.manual});
 
-  factory _$_FinishItem.fromJson(Map<String, dynamic> json) =>
-      _$$_FinishItemFromJson(json);
+  factory _$FinishItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FinishItemImplFromJson(json);
 
   @override
   final int id;
@@ -625,38 +659,36 @@ class _$_FinishItem implements _FinishItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FinishItem &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.number, number) &&
-            const DeepCollectionEquality()
-                .equals(other.finishtime, finishtime) &&
-            const DeepCollectionEquality().equals(other.phonetime, phonetime) &&
-            const DeepCollectionEquality().equals(other.set, set) &&
-            const DeepCollectionEquality().equals(other.manual, manual));
+            other is _$FinishItemImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.finishtime, finishtime) ||
+                other.finishtime == finishtime) &&
+            (identical(other.phonetime, phonetime) ||
+                other.phonetime == phonetime) &&
+            (identical(other.set, set) || other.set == set) &&
+            (identical(other.manual, manual) || other.manual == manual));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(number),
-      const DeepCollectionEquality().hash(finishtime),
-      const DeepCollectionEquality().hash(phonetime),
-      const DeepCollectionEquality().hash(set),
-      const DeepCollectionEquality().hash(manual));
+  int get hashCode =>
+      Object.hash(runtimeType, id, number, finishtime, phonetime, set, manual);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FinishItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_FinishItemCopyWith<_$_FinishItem> get copyWith =>
-      __$$_FinishItemCopyWithImpl<_$_FinishItem>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$FinishItemImplCopyWith<_$FinishItemImpl> get copyWith =>
+      __$$FinishItemImplCopyWithImpl<_$FinishItemImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FinishItemToJson(
+    return _$$FinishItemImplToJson(
       this,
     );
   }
@@ -669,10 +701,10 @@ abstract class _FinishItem implements FinishItem {
       required final String finishtime,
       final String? phonetime,
       final int? set,
-      final int? manual}) = _$_FinishItem;
+      final int? manual}) = _$FinishItemImpl;
 
   factory _FinishItem.fromJson(Map<String, dynamic> json) =
-      _$_FinishItem.fromJson;
+      _$FinishItemImpl.fromJson;
 
   @override
   int get id;
@@ -686,8 +718,11 @@ abstract class _FinishItem implements FinishItem {
   int? get set;
   @override
   int? get manual;
+
+  /// Create a copy of FinishItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_FinishItemCopyWith<_$_FinishItem> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FinishItemImplCopyWith<_$FinishItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

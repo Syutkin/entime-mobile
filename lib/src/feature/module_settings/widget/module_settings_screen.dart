@@ -9,7 +9,7 @@ import '../bloc/module_settings_bloc.dart';
 import 'popups.dart';
 
 class ModuleSettingsInitScreen extends StatelessWidget {
-  const ModuleSettingsInitScreen({Key? key}) : super(key: key);
+  const ModuleSettingsInitScreen({super.key});
 
   Future<bool> _onBackPressed(BuildContext context, bool updated) async {
     if (updated) {
@@ -36,7 +36,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
               child: Text(
                 MaterialLocalizations.of(context).cancelButtonLabel,
               ),
-            )
+            ),
           ],
         ),
       );
@@ -81,9 +81,9 @@ class ModuleSettingsScreen extends StatelessWidget {
   final VoidCallback onChanged;
 
   const ModuleSettingsScreen({
-    Key? key,
+    super.key,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
