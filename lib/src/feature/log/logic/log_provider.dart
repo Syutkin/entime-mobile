@@ -126,7 +126,7 @@ class LogProvider implements ILogProvider {
     if (source != null && source.isNotEmpty) {
       final List<String> args = [];
       for (final type in source) {
-        args.add("source LIKE '${type.toStr}'");
+        args.add("source LIKE '${type.name}'");
       }
       whereArgs.add(args.join(' OR '));
     }
@@ -134,7 +134,7 @@ class LogProvider implements ILogProvider {
     if (direction != null && direction.isNotEmpty) {
       final List<String> args = [];
       for (final type in direction) {
-        args.add("direction LIKE '${type.toStr}'");
+        args.add("direction LIKE '${type.name}'");
       }
       whereArgs.add(args.join(' OR '));
     }
@@ -167,10 +167,10 @@ class LogProvider implements ILogProvider {
         DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
     final db = await _db;
     final result = await db.insert('log', {
-      'level': level.toStr,
+      'level': level.name,
       'timeStamp': timeStamp,
-      'source': source.toStr,
-      'direction': direction.toStr,
+      'source': source.name,
+      'direction': direction?.name ?? LogSourceDirection.undefined,
       'rawData': rawData,
     });
     _dbStateController.add(const DBState.selected(updated: true));
