@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -14,6 +15,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/common/bloc/app_bloc_observer.dart';
 import 'src/common/localization/localization.dart';
+import 'src/common/logger/logger.dart';
 import 'src/feature/app_info/app_info.dart';
 import 'src/feature/audio/audio.dart';
 import 'src/feature/bluetooth/bluetooth.dart';
@@ -82,24 +84,34 @@ Future<void> main() async {
 
   final CountdownAtStart countdown = CountdownAtStart(database: database);
 
-  await SentryFlutter.init(
-    (options) async {
-      options.tracesSampleRate = 1.0;
-    },
-    appRunner: () => runApp(
-      EntimeApp(
-        settings: settings,
-        updateProvider: updateProvider,
-        bluetoothProvider: bluetoothProvider,
-        protocolProvider: protocolProvider,
-        logProvider: logProvider,
-        audioController: audioController,
-        appInfo: appInfo,
-        database: database,
-        countdown: countdown,
-      ),
-    ),
+  final app = EntimeApp(
+    settings: settings,
+    updateProvider: updateProvider,
+    bluetoothProvider: bluetoothProvider,
+    protocolProvider: protocolProvider,
+    logProvider: logProvider,
+    audioController: audioController,
+    appInfo: appInfo,
+    database: database,
+    countdown: countdown,
   );
+
+  if (kReleaseMode) {
+    try {
+      await SentryFlutter.init(
+        (options) async {
+          options.tracesSampleRate = 1.0;
+        },
+        appRunner: () => runApp(app),
+      );
+      // ignore: avoid_catches_without_on_clauses
+    } catch (e) {
+      logger.e('SentryFlutter error: $e');
+      runApp(app);
+    }
+  } else {
+    runApp(app);
+  }
 }
 
 class EntimeApp extends StatelessWidget {
