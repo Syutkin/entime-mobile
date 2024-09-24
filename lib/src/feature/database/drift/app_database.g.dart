@@ -8,39 +8,42 @@ class Races extends Table with TableInfo<Races, Race> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Races(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _nameMeta = VerificationMeta('name');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _startDateMeta = VerificationMeta('startDate');
+  static const VerificationMeta _startDateMeta =
+      const VerificationMeta('startDate');
   late final GeneratedColumn<String> startDate = GeneratedColumn<String>(
       'start_date', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _finishDateMeta =
-      VerificationMeta('finishDate');
+      const VerificationMeta('finishDate');
   late final GeneratedColumn<String> finishDate = GeneratedColumn<String>(
       'finish_date', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _locationMeta = VerificationMeta('location');
+  static const VerificationMeta _locationMeta =
+      const VerificationMeta('location');
   late final GeneratedColumn<String> location = GeneratedColumn<String>(
       'location', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _isDeletedMeta = VerificationMeta('isDeleted');
+  static const VerificationMeta _isDeletedMeta =
+      const VerificationMeta('isDeleted');
   late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
       'is_deleted', aliasedName, false,
       type: DriftSqlType.bool,
@@ -352,44 +355,48 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Trails(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _nameMeta = VerificationMeta('name');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _distanceMeta = VerificationMeta('distance');
+  static const VerificationMeta _distanceMeta =
+      const VerificationMeta('distance');
   late final GeneratedColumn<int> distance = GeneratedColumn<int>(
       'distance', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _elevationMeta = VerificationMeta('elevation');
+  static const VerificationMeta _elevationMeta =
+      const VerificationMeta('elevation');
   late final GeneratedColumn<int> elevation = GeneratedColumn<int>(
       'elevation', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _gpxTrackMeta = VerificationMeta('gpxTrack');
+  static const VerificationMeta _gpxTrackMeta =
+      const VerificationMeta('gpxTrack');
   late final GeneratedColumn<Uint8List> gpxTrack = GeneratedColumn<Uint8List>(
       'gpx_track', aliasedName, true,
       type: DriftSqlType.blob,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _linkMeta = VerificationMeta('link');
+  static const VerificationMeta _linkMeta = const VerificationMeta('link');
   late final GeneratedColumn<String> link = GeneratedColumn<String>(
       'link', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _commentMeta = VerificationMeta('comment');
+  static const VerificationMeta _commentMeta =
+      const VerificationMeta('comment');
   late final GeneratedColumn<String> comment = GeneratedColumn<String>(
       'comment', aliasedName, true,
       type: DriftSqlType.string,
@@ -731,39 +738,42 @@ class Stages extends Table with TableInfo<Stages, Stage> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Stages(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _trailIdMeta = VerificationMeta('trailId');
+  static const VerificationMeta _trailIdMeta =
+      const VerificationMeta('trailId');
   late final GeneratedColumn<int> trailId = GeneratedColumn<int>(
       'trail_id', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _raceIdMeta = VerificationMeta('raceId');
+  static const VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
   late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
       'race_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _nameMeta = VerificationMeta('name');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _isActiveMeta = VerificationMeta('isActive');
+  static const VerificationMeta _isActiveMeta =
+      const VerificationMeta('isActive');
   late final GeneratedColumn<bool> isActive = GeneratedColumn<bool>(
       'is_active', aliasedName, false,
       type: DriftSqlType.bool,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT TRUE',
       defaultValue: const CustomExpression('TRUE'));
-  static const VerificationMeta _isDeletedMeta = VerificationMeta('isDeleted');
+  static const VerificationMeta _isDeletedMeta =
+      const VerificationMeta('isDeleted');
   late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
       'is_deleted', aliasedName, false,
       type: DriftSqlType.bool,
@@ -1072,56 +1082,59 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Riders(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _nameMeta = VerificationMeta('name');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _nicknameMeta = VerificationMeta('nickname');
+  static const VerificationMeta _nicknameMeta =
+      const VerificationMeta('nickname');
   late final GeneratedColumn<String> nickname = GeneratedColumn<String>(
       'nickname', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _birthdayMeta = VerificationMeta('birthday');
+  static const VerificationMeta _birthdayMeta =
+      const VerificationMeta('birthday');
   late final GeneratedColumn<String> birthday = GeneratedColumn<String>(
       'birthday', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _teamMeta = VerificationMeta('team');
+  static const VerificationMeta _teamMeta = const VerificationMeta('team');
   late final GeneratedColumn<String> team = GeneratedColumn<String>(
       'team', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _cityMeta = VerificationMeta('city');
+  static const VerificationMeta _cityMeta = const VerificationMeta('city');
   late final GeneratedColumn<String> city = GeneratedColumn<String>(
       'city', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _emailMeta = VerificationMeta('email');
+  static const VerificationMeta _emailMeta = const VerificationMeta('email');
   late final GeneratedColumn<String> email = GeneratedColumn<String>(
       'email', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _phoneMeta = VerificationMeta('phone');
+  static const VerificationMeta _phoneMeta = const VerificationMeta('phone');
   late final GeneratedColumn<String> phone = GeneratedColumn<String>(
       'phone', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _commentMeta = VerificationMeta('comment');
+  static const VerificationMeta _commentMeta =
+      const VerificationMeta('comment');
   late final GeneratedColumn<String> comment = GeneratedColumn<String>(
       'comment', aliasedName, true,
       type: DriftSqlType.string,
@@ -1523,14 +1536,14 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Statuses(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _typeMeta = VerificationMeta('type');
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
   late final GeneratedColumn<String> type = GeneratedColumn<String>(
       'type', aliasedName, false,
       type: DriftSqlType.string,
@@ -1704,44 +1717,47 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Participants(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _raceIdMeta = VerificationMeta('raceId');
+  static const VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
   late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
       'race_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _riderIdMeta = VerificationMeta('riderId');
+  static const VerificationMeta _riderIdMeta =
+      const VerificationMeta('riderId');
   late final GeneratedColumn<int> riderId = GeneratedColumn<int>(
       'rider_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _numberMeta = VerificationMeta('number');
+  static const VerificationMeta _numberMeta = const VerificationMeta('number');
   late final GeneratedColumn<int> number = GeneratedColumn<int>(
       'number', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _categoryMeta = VerificationMeta('category');
+  static const VerificationMeta _categoryMeta =
+      const VerificationMeta('category');
   late final GeneratedColumn<String> category = GeneratedColumn<String>(
-      'category', aliasedName, true,
+      'category', aliasedName, false,
       type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  static const VerificationMeta _rfidMeta = VerificationMeta('rfid');
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _rfidMeta = const VerificationMeta('rfid');
   late final GeneratedColumn<String> rfid = GeneratedColumn<String>(
       'rfid', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _statusIdMeta = VerificationMeta('statusId');
+  static const VerificationMeta _statusIdMeta =
+      const VerificationMeta('statusId');
   late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
       'status_id', aliasedName, false,
       type: DriftSqlType.int,
@@ -1785,6 +1801,8 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     if (data.containsKey('category')) {
       context.handle(_categoryMeta,
           category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
+    } else if (isInserting) {
+      context.missing(_categoryMeta);
     }
     if (data.containsKey('rfid')) {
       context.handle(
@@ -1812,7 +1830,7 @@ class Participants extends Table with TableInfo<Participants, Participant> {
       number: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}number'])!,
       category: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}category']),
+          .read(DriftSqlType.string, data['${effectivePrefix}category'])!,
       rfid: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}rfid']),
       statusId: attachedDatabase.typeMapping
@@ -1839,7 +1857,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   final int raceId;
   final int riderId;
   final int number;
-  final String? category;
+  final String category;
   final String? rfid;
   final int statusId;
   const Participant(
@@ -1847,7 +1865,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       required this.raceId,
       required this.riderId,
       required this.number,
-      this.category,
+      required this.category,
       this.rfid,
       required this.statusId});
   @override
@@ -1859,9 +1877,7 @@ class Participant extends DataClass implements Insertable<Participant> {
     map['race_id'] = Variable<int>(raceId);
     map['rider_id'] = Variable<int>(riderId);
     map['number'] = Variable<int>(number);
-    if (!nullToAbsent || category != null) {
-      map['category'] = Variable<String>(category);
-    }
+    map['category'] = Variable<String>(category);
     if (!nullToAbsent || rfid != null) {
       map['rfid'] = Variable<String>(rfid);
     }
@@ -1875,9 +1891,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       raceId: Value(raceId),
       riderId: Value(riderId),
       number: Value(number),
-      category: category == null && nullToAbsent
-          ? const Value.absent()
-          : Value(category),
+      category: Value(category),
       rfid: rfid == null && nullToAbsent ? const Value.absent() : Value(rfid),
       statusId: Value(statusId),
     );
@@ -1891,7 +1905,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       raceId: serializer.fromJson<int>(json['race_id']),
       riderId: serializer.fromJson<int>(json['rider_id']),
       number: serializer.fromJson<int>(json['number']),
-      category: serializer.fromJson<String?>(json['category']),
+      category: serializer.fromJson<String>(json['category']),
       rfid: serializer.fromJson<String?>(json['rfid']),
       statusId: serializer.fromJson<int>(json['status_id']),
     );
@@ -1904,7 +1918,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       'race_id': serializer.toJson<int>(raceId),
       'rider_id': serializer.toJson<int>(riderId),
       'number': serializer.toJson<int>(number),
-      'category': serializer.toJson<String?>(category),
+      'category': serializer.toJson<String>(category),
       'rfid': serializer.toJson<String?>(rfid),
       'status_id': serializer.toJson<int>(statusId),
     };
@@ -1915,7 +1929,7 @@ class Participant extends DataClass implements Insertable<Participant> {
           int? raceId,
           int? riderId,
           int? number,
-          Value<String?> category = const Value.absent(),
+          String? category,
           Value<String?> rfid = const Value.absent(),
           int? statusId}) =>
       Participant(
@@ -1923,7 +1937,7 @@ class Participant extends DataClass implements Insertable<Participant> {
         raceId: raceId ?? this.raceId,
         riderId: riderId ?? this.riderId,
         number: number ?? this.number,
-        category: category.present ? category.value : this.category,
+        category: category ?? this.category,
         rfid: rfid.present ? rfid.value : this.rfid,
         statusId: statusId ?? this.statusId,
       );
@@ -1974,7 +1988,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   final Value<int> raceId;
   final Value<int> riderId;
   final Value<int> number;
-  final Value<String?> category;
+  final Value<String> category;
   final Value<String?> rfid;
   final Value<int> statusId;
   const ParticipantsCompanion({
@@ -1991,12 +2005,13 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     required int raceId,
     required int riderId,
     required int number,
-    this.category = const Value.absent(),
+    required String category,
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
   })  : raceId = Value(raceId),
         riderId = Value(riderId),
-        number = Value(number);
+        number = Value(number),
+        category = Value(category);
   static Insertable<Participant> custom({
     Expression<int>? id,
     Expression<int>? raceId,
@@ -2022,7 +2037,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       Value<int>? raceId,
       Value<int>? riderId,
       Value<int>? number,
-      Value<String?>? category,
+      Value<String>? category,
       Value<String?>? rfid,
       Value<int>? statusId}) {
     return ParticipantsCompanion(
@@ -2078,602 +2093,55 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   }
 }
 
-class Starts extends Table with TableInfo<Starts, Start> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  Starts(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _stageIdMeta = VerificationMeta('stageId');
-  late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
-      'stage_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
-  static const VerificationMeta _participantIdMeta =
-      VerificationMeta('participantId');
-  late final GeneratedColumn<int> participantId = GeneratedColumn<int>(
-      'participant_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
-  static const VerificationMeta _startTimeMeta = VerificationMeta('startTime');
-  late final GeneratedColumn<String> startTime = GeneratedColumn<String>(
-      'start_time', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
-  static const VerificationMeta _timestampMeta = VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
-      'timestamp', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  static const VerificationMeta _automaticStartTimeMeta =
-      VerificationMeta('automaticStartTime');
-  late final GeneratedColumn<String> automaticStartTime =
-      GeneratedColumn<String>('automatic_start_time', aliasedName, true,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          $customConstraints: '');
-  static const VerificationMeta _automaticCorrectionMeta =
-      VerificationMeta('automaticCorrection');
-  late final GeneratedColumn<int> automaticCorrection = GeneratedColumn<int>(
-      'automatic_correction', aliasedName, true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  static const VerificationMeta _manualStartTimeMeta =
-      VerificationMeta('manualStartTime');
-  late final GeneratedColumn<String> manualStartTime = GeneratedColumn<String>(
-      'manual_start_time', aliasedName, true,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  static const VerificationMeta _manualCorrectionMeta =
-      VerificationMeta('manualCorrection');
-  late final GeneratedColumn<int> manualCorrection = GeneratedColumn<int>(
-      'manual_correction', aliasedName, true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  static const VerificationMeta _statusIdMeta = VerificationMeta('statusId');
-  late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
-      'status_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT 1',
-      defaultValue: const CustomExpression('1'));
-  @override
-  List<GeneratedColumn> get $columns => [
-        id,
-        stageId,
-        participantId,
-        startTime,
-        timestamp,
-        automaticStartTime,
-        automaticCorrection,
-        manualStartTime,
-        manualCorrection,
-        statusId
-      ];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'starts';
-  @override
-  VerificationContext validateIntegrity(Insertable<Start> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('stage_id')) {
-      context.handle(_stageIdMeta,
-          stageId.isAcceptableOrUnknown(data['stage_id']!, _stageIdMeta));
-    } else if (isInserting) {
-      context.missing(_stageIdMeta);
-    }
-    if (data.containsKey('participant_id')) {
-      context.handle(
-          _participantIdMeta,
-          participantId.isAcceptableOrUnknown(
-              data['participant_id']!, _participantIdMeta));
-    } else if (isInserting) {
-      context.missing(_participantIdMeta);
-    }
-    if (data.containsKey('start_time')) {
-      context.handle(_startTimeMeta,
-          startTime.isAcceptableOrUnknown(data['start_time']!, _startTimeMeta));
-    } else if (isInserting) {
-      context.missing(_startTimeMeta);
-    }
-    if (data.containsKey('timestamp')) {
-      context.handle(_timestampMeta,
-          timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
-    }
-    if (data.containsKey('automatic_start_time')) {
-      context.handle(
-          _automaticStartTimeMeta,
-          automaticStartTime.isAcceptableOrUnknown(
-              data['automatic_start_time']!, _automaticStartTimeMeta));
-    }
-    if (data.containsKey('automatic_correction')) {
-      context.handle(
-          _automaticCorrectionMeta,
-          automaticCorrection.isAcceptableOrUnknown(
-              data['automatic_correction']!, _automaticCorrectionMeta));
-    }
-    if (data.containsKey('manual_start_time')) {
-      context.handle(
-          _manualStartTimeMeta,
-          manualStartTime.isAcceptableOrUnknown(
-              data['manual_start_time']!, _manualStartTimeMeta));
-    }
-    if (data.containsKey('manual_correction')) {
-      context.handle(
-          _manualCorrectionMeta,
-          manualCorrection.isAcceptableOrUnknown(
-              data['manual_correction']!, _manualCorrectionMeta));
-    }
-    if (data.containsKey('status_id')) {
-      context.handle(_statusIdMeta,
-          statusId.isAcceptableOrUnknown(data['status_id']!, _statusIdMeta));
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  Start map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Start(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
-      stageId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}stage_id'])!,
-      participantId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}participant_id'])!,
-      startTime: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}start_time'])!,
-      timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
-      automaticStartTime: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}automatic_start_time']),
-      automaticCorrection: attachedDatabase.typeMapping.read(
-          DriftSqlType.int, data['${effectivePrefix}automatic_correction']),
-      manualStartTime: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}manual_start_time']),
-      manualCorrection: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}manual_correction']),
-      statusId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}status_id'])!,
-    );
-  }
-
-  @override
-  Starts createAlias(String alias) {
-    return Starts(attachedDatabase, alias);
-  }
-
-  @override
-  List<String> get customConstraints => const [
-        'FOREIGN KEY(stage_id)REFERENCES stages(id)',
-        'FOREIGN KEY(participant_id)REFERENCES participants(id)'
-      ];
-  @override
-  bool get dontWriteConstraints => true;
-}
-
-class Start extends DataClass implements Insertable<Start> {
-  final int? id;
-  final int stageId;
-  final int participantId;
-  final String startTime;
-  final String? timestamp;
-  final String? automaticStartTime;
-  final int? automaticCorrection;
-  final String? manualStartTime;
-  final int? manualCorrection;
-  final int statusId;
-  const Start(
-      {this.id,
-      required this.stageId,
-      required this.participantId,
-      required this.startTime,
-      this.timestamp,
-      this.automaticStartTime,
-      this.automaticCorrection,
-      this.manualStartTime,
-      this.manualCorrection,
-      required this.statusId});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
-    map['stage_id'] = Variable<int>(stageId);
-    map['participant_id'] = Variable<int>(participantId);
-    map['start_time'] = Variable<String>(startTime);
-    if (!nullToAbsent || timestamp != null) {
-      map['timestamp'] = Variable<String>(timestamp);
-    }
-    if (!nullToAbsent || automaticStartTime != null) {
-      map['automatic_start_time'] = Variable<String>(automaticStartTime);
-    }
-    if (!nullToAbsent || automaticCorrection != null) {
-      map['automatic_correction'] = Variable<int>(automaticCorrection);
-    }
-    if (!nullToAbsent || manualStartTime != null) {
-      map['manual_start_time'] = Variable<String>(manualStartTime);
-    }
-    if (!nullToAbsent || manualCorrection != null) {
-      map['manual_correction'] = Variable<int>(manualCorrection);
-    }
-    map['status_id'] = Variable<int>(statusId);
-    return map;
-  }
-
-  StartsCompanion toCompanion(bool nullToAbsent) {
-    return StartsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      stageId: Value(stageId),
-      participantId: Value(participantId),
-      startTime: Value(startTime),
-      timestamp: timestamp == null && nullToAbsent
-          ? const Value.absent()
-          : Value(timestamp),
-      automaticStartTime: automaticStartTime == null && nullToAbsent
-          ? const Value.absent()
-          : Value(automaticStartTime),
-      automaticCorrection: automaticCorrection == null && nullToAbsent
-          ? const Value.absent()
-          : Value(automaticCorrection),
-      manualStartTime: manualStartTime == null && nullToAbsent
-          ? const Value.absent()
-          : Value(manualStartTime),
-      manualCorrection: manualCorrection == null && nullToAbsent
-          ? const Value.absent()
-          : Value(manualCorrection),
-      statusId: Value(statusId),
-    );
-  }
-
-  factory Start.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Start(
-      id: serializer.fromJson<int?>(json['id']),
-      stageId: serializer.fromJson<int>(json['stage_id']),
-      participantId: serializer.fromJson<int>(json['participant_id']),
-      startTime: serializer.fromJson<String>(json['start_time']),
-      timestamp: serializer.fromJson<String?>(json['timestamp']),
-      automaticStartTime:
-          serializer.fromJson<String?>(json['automatic_start_time']),
-      automaticCorrection:
-          serializer.fromJson<int?>(json['automatic_correction']),
-      manualStartTime: serializer.fromJson<String?>(json['manual_start_time']),
-      manualCorrection: serializer.fromJson<int?>(json['manual_correction']),
-      statusId: serializer.fromJson<int>(json['status_id']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
-      'stage_id': serializer.toJson<int>(stageId),
-      'participant_id': serializer.toJson<int>(participantId),
-      'start_time': serializer.toJson<String>(startTime),
-      'timestamp': serializer.toJson<String?>(timestamp),
-      'automatic_start_time': serializer.toJson<String?>(automaticStartTime),
-      'automatic_correction': serializer.toJson<int?>(automaticCorrection),
-      'manual_start_time': serializer.toJson<String?>(manualStartTime),
-      'manual_correction': serializer.toJson<int?>(manualCorrection),
-      'status_id': serializer.toJson<int>(statusId),
-    };
-  }
-
-  Start copyWith(
-          {Value<int?> id = const Value.absent(),
-          int? stageId,
-          int? participantId,
-          String? startTime,
-          Value<String?> timestamp = const Value.absent(),
-          Value<String?> automaticStartTime = const Value.absent(),
-          Value<int?> automaticCorrection = const Value.absent(),
-          Value<String?> manualStartTime = const Value.absent(),
-          Value<int?> manualCorrection = const Value.absent(),
-          int? statusId}) =>
-      Start(
-        id: id.present ? id.value : this.id,
-        stageId: stageId ?? this.stageId,
-        participantId: participantId ?? this.participantId,
-        startTime: startTime ?? this.startTime,
-        timestamp: timestamp.present ? timestamp.value : this.timestamp,
-        automaticStartTime: automaticStartTime.present
-            ? automaticStartTime.value
-            : this.automaticStartTime,
-        automaticCorrection: automaticCorrection.present
-            ? automaticCorrection.value
-            : this.automaticCorrection,
-        manualStartTime: manualStartTime.present
-            ? manualStartTime.value
-            : this.manualStartTime,
-        manualCorrection: manualCorrection.present
-            ? manualCorrection.value
-            : this.manualCorrection,
-        statusId: statusId ?? this.statusId,
-      );
-  Start copyWithCompanion(StartsCompanion data) {
-    return Start(
-      id: data.id.present ? data.id.value : this.id,
-      stageId: data.stageId.present ? data.stageId.value : this.stageId,
-      participantId: data.participantId.present
-          ? data.participantId.value
-          : this.participantId,
-      startTime: data.startTime.present ? data.startTime.value : this.startTime,
-      timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
-      automaticStartTime: data.automaticStartTime.present
-          ? data.automaticStartTime.value
-          : this.automaticStartTime,
-      automaticCorrection: data.automaticCorrection.present
-          ? data.automaticCorrection.value
-          : this.automaticCorrection,
-      manualStartTime: data.manualStartTime.present
-          ? data.manualStartTime.value
-          : this.manualStartTime,
-      manualCorrection: data.manualCorrection.present
-          ? data.manualCorrection.value
-          : this.manualCorrection,
-      statusId: data.statusId.present ? data.statusId.value : this.statusId,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('Start(')
-          ..write('id: $id, ')
-          ..write('stageId: $stageId, ')
-          ..write('participantId: $participantId, ')
-          ..write('startTime: $startTime, ')
-          ..write('timestamp: $timestamp, ')
-          ..write('automaticStartTime: $automaticStartTime, ')
-          ..write('automaticCorrection: $automaticCorrection, ')
-          ..write('manualStartTime: $manualStartTime, ')
-          ..write('manualCorrection: $manualCorrection, ')
-          ..write('statusId: $statusId')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      id,
-      stageId,
-      participantId,
-      startTime,
-      timestamp,
-      automaticStartTime,
-      automaticCorrection,
-      manualStartTime,
-      manualCorrection,
-      statusId);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is Start &&
-          other.id == this.id &&
-          other.stageId == this.stageId &&
-          other.participantId == this.participantId &&
-          other.startTime == this.startTime &&
-          other.timestamp == this.timestamp &&
-          other.automaticStartTime == this.automaticStartTime &&
-          other.automaticCorrection == this.automaticCorrection &&
-          other.manualStartTime == this.manualStartTime &&
-          other.manualCorrection == this.manualCorrection &&
-          other.statusId == this.statusId);
-}
-
-class StartsCompanion extends UpdateCompanion<Start> {
-  final Value<int?> id;
-  final Value<int> stageId;
-  final Value<int> participantId;
-  final Value<String> startTime;
-  final Value<String?> timestamp;
-  final Value<String?> automaticStartTime;
-  final Value<int?> automaticCorrection;
-  final Value<String?> manualStartTime;
-  final Value<int?> manualCorrection;
-  final Value<int> statusId;
-  const StartsCompanion({
-    this.id = const Value.absent(),
-    this.stageId = const Value.absent(),
-    this.participantId = const Value.absent(),
-    this.startTime = const Value.absent(),
-    this.timestamp = const Value.absent(),
-    this.automaticStartTime = const Value.absent(),
-    this.automaticCorrection = const Value.absent(),
-    this.manualStartTime = const Value.absent(),
-    this.manualCorrection = const Value.absent(),
-    this.statusId = const Value.absent(),
-  });
-  StartsCompanion.insert({
-    this.id = const Value.absent(),
-    required int stageId,
-    required int participantId,
-    required String startTime,
-    this.timestamp = const Value.absent(),
-    this.automaticStartTime = const Value.absent(),
-    this.automaticCorrection = const Value.absent(),
-    this.manualStartTime = const Value.absent(),
-    this.manualCorrection = const Value.absent(),
-    this.statusId = const Value.absent(),
-  })  : stageId = Value(stageId),
-        participantId = Value(participantId),
-        startTime = Value(startTime);
-  static Insertable<Start> custom({
-    Expression<int>? id,
-    Expression<int>? stageId,
-    Expression<int>? participantId,
-    Expression<String>? startTime,
-    Expression<String>? timestamp,
-    Expression<String>? automaticStartTime,
-    Expression<int>? automaticCorrection,
-    Expression<String>? manualStartTime,
-    Expression<int>? manualCorrection,
-    Expression<int>? statusId,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (stageId != null) 'stage_id': stageId,
-      if (participantId != null) 'participant_id': participantId,
-      if (startTime != null) 'start_time': startTime,
-      if (timestamp != null) 'timestamp': timestamp,
-      if (automaticStartTime != null)
-        'automatic_start_time': automaticStartTime,
-      if (automaticCorrection != null)
-        'automatic_correction': automaticCorrection,
-      if (manualStartTime != null) 'manual_start_time': manualStartTime,
-      if (manualCorrection != null) 'manual_correction': manualCorrection,
-      if (statusId != null) 'status_id': statusId,
-    });
-  }
-
-  StartsCompanion copyWith(
-      {Value<int?>? id,
-      Value<int>? stageId,
-      Value<int>? participantId,
-      Value<String>? startTime,
-      Value<String?>? timestamp,
-      Value<String?>? automaticStartTime,
-      Value<int?>? automaticCorrection,
-      Value<String?>? manualStartTime,
-      Value<int?>? manualCorrection,
-      Value<int>? statusId}) {
-    return StartsCompanion(
-      id: id ?? this.id,
-      stageId: stageId ?? this.stageId,
-      participantId: participantId ?? this.participantId,
-      startTime: startTime ?? this.startTime,
-      timestamp: timestamp ?? this.timestamp,
-      automaticStartTime: automaticStartTime ?? this.automaticStartTime,
-      automaticCorrection: automaticCorrection ?? this.automaticCorrection,
-      manualStartTime: manualStartTime ?? this.manualStartTime,
-      manualCorrection: manualCorrection ?? this.manualCorrection,
-      statusId: statusId ?? this.statusId,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (stageId.present) {
-      map['stage_id'] = Variable<int>(stageId.value);
-    }
-    if (participantId.present) {
-      map['participant_id'] = Variable<int>(participantId.value);
-    }
-    if (startTime.present) {
-      map['start_time'] = Variable<String>(startTime.value);
-    }
-    if (timestamp.present) {
-      map['timestamp'] = Variable<String>(timestamp.value);
-    }
-    if (automaticStartTime.present) {
-      map['automatic_start_time'] = Variable<String>(automaticStartTime.value);
-    }
-    if (automaticCorrection.present) {
-      map['automatic_correction'] = Variable<int>(automaticCorrection.value);
-    }
-    if (manualStartTime.present) {
-      map['manual_start_time'] = Variable<String>(manualStartTime.value);
-    }
-    if (manualCorrection.present) {
-      map['manual_correction'] = Variable<int>(manualCorrection.value);
-    }
-    if (statusId.present) {
-      map['status_id'] = Variable<int>(statusId.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('StartsCompanion(')
-          ..write('id: $id, ')
-          ..write('stageId: $stageId, ')
-          ..write('participantId: $participantId, ')
-          ..write('startTime: $startTime, ')
-          ..write('timestamp: $timestamp, ')
-          ..write('automaticStartTime: $automaticStartTime, ')
-          ..write('automaticCorrection: $automaticCorrection, ')
-          ..write('manualStartTime: $manualStartTime, ')
-          ..write('manualCorrection: $manualCorrection, ')
-          ..write('statusId: $statusId')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class Finishes extends Table with TableInfo<Finishes, Finish> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   Finishes(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, true,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  static const VerificationMeta _stageIdMeta = VerificationMeta('stageId');
+  static const VerificationMeta _stageIdMeta =
+      const VerificationMeta('stageId');
   late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
       'stage_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _numberMeta = VerificationMeta('number');
+  static const VerificationMeta _numberMeta = const VerificationMeta('number');
   late final GeneratedColumn<int> number = GeneratedColumn<int>(
       'number', aliasedName, true,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _timestampMeta = VerificationMeta('timestamp');
+  static const VerificationMeta _timestampMeta =
+      const VerificationMeta('timestamp');
   late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
       'timestamp', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _finishTimeMeta =
-      VerificationMeta('finishTime');
+      const VerificationMeta('finishTime');
   late final GeneratedColumn<String> finishTime = GeneratedColumn<String>(
       'finish_time', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _isHiddenMeta = VerificationMeta('isHidden');
+  static const VerificationMeta _isHiddenMeta =
+      const VerificationMeta('isHidden');
   late final GeneratedColumn<bool> isHidden = GeneratedColumn<bool>(
       'is_hidden', aliasedName, false,
       type: DriftSqlType.bool,
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT FALSE',
       defaultValue: const CustomExpression('FALSE'));
-  static const VerificationMeta _isManualMeta = VerificationMeta('isManual');
+  static const VerificationMeta _isManualMeta =
+      const VerificationMeta('isManual');
   late final GeneratedColumn<bool> isManual = GeneratedColumn<bool>(
       'is_manual', aliasedName, false,
       type: DriftSqlType.bool,
@@ -3010,6 +2478,603 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
   }
 }
 
+class Starts extends Table with TableInfo<Starts, Start> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  Starts(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, true,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  static const VerificationMeta _stageIdMeta =
+      const VerificationMeta('stageId');
+  late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
+      'stage_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _participantIdMeta =
+      const VerificationMeta('participantId');
+  late final GeneratedColumn<int> participantId = GeneratedColumn<int>(
+      'participant_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _startTimeMeta =
+      const VerificationMeta('startTime');
+  late final GeneratedColumn<String> startTime = GeneratedColumn<String>(
+      'start_time', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _timestampMeta =
+      const VerificationMeta('timestamp');
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+      'timestamp', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _automaticStartTimeMeta =
+      const VerificationMeta('automaticStartTime');
+  late final GeneratedColumn<String> automaticStartTime =
+      GeneratedColumn<String>('automatic_start_time', aliasedName, true,
+          type: DriftSqlType.string,
+          requiredDuringInsert: false,
+          $customConstraints: '');
+  static const VerificationMeta _automaticCorrectionMeta =
+      const VerificationMeta('automaticCorrection');
+  late final GeneratedColumn<int> automaticCorrection = GeneratedColumn<int>(
+      'automatic_correction', aliasedName, true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _manualStartTimeMeta =
+      const VerificationMeta('manualStartTime');
+  late final GeneratedColumn<String> manualStartTime = GeneratedColumn<String>(
+      'manual_start_time', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _manualCorrectionMeta =
+      const VerificationMeta('manualCorrection');
+  late final GeneratedColumn<int> manualCorrection = GeneratedColumn<int>(
+      'manual_correction', aliasedName, true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _statusIdMeta =
+      const VerificationMeta('statusId');
+  late final GeneratedColumn<int> statusId = GeneratedColumn<int>(
+      'status_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: 'NOT NULL DEFAULT 1',
+      defaultValue: const CustomExpression('1'));
+  static const VerificationMeta _finishIdMeta =
+      const VerificationMeta('finishId');
+  late final GeneratedColumn<int> finishId = GeneratedColumn<int>(
+      'finish_id', aliasedName, true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        stageId,
+        participantId,
+        startTime,
+        timestamp,
+        automaticStartTime,
+        automaticCorrection,
+        manualStartTime,
+        manualCorrection,
+        statusId,
+        finishId
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'starts';
+  @override
+  VerificationContext validateIntegrity(Insertable<Start> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('stage_id')) {
+      context.handle(_stageIdMeta,
+          stageId.isAcceptableOrUnknown(data['stage_id']!, _stageIdMeta));
+    } else if (isInserting) {
+      context.missing(_stageIdMeta);
+    }
+    if (data.containsKey('participant_id')) {
+      context.handle(
+          _participantIdMeta,
+          participantId.isAcceptableOrUnknown(
+              data['participant_id']!, _participantIdMeta));
+    } else if (isInserting) {
+      context.missing(_participantIdMeta);
+    }
+    if (data.containsKey('start_time')) {
+      context.handle(_startTimeMeta,
+          startTime.isAcceptableOrUnknown(data['start_time']!, _startTimeMeta));
+    } else if (isInserting) {
+      context.missing(_startTimeMeta);
+    }
+    if (data.containsKey('timestamp')) {
+      context.handle(_timestampMeta,
+          timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
+    }
+    if (data.containsKey('automatic_start_time')) {
+      context.handle(
+          _automaticStartTimeMeta,
+          automaticStartTime.isAcceptableOrUnknown(
+              data['automatic_start_time']!, _automaticStartTimeMeta));
+    }
+    if (data.containsKey('automatic_correction')) {
+      context.handle(
+          _automaticCorrectionMeta,
+          automaticCorrection.isAcceptableOrUnknown(
+              data['automatic_correction']!, _automaticCorrectionMeta));
+    }
+    if (data.containsKey('manual_start_time')) {
+      context.handle(
+          _manualStartTimeMeta,
+          manualStartTime.isAcceptableOrUnknown(
+              data['manual_start_time']!, _manualStartTimeMeta));
+    }
+    if (data.containsKey('manual_correction')) {
+      context.handle(
+          _manualCorrectionMeta,
+          manualCorrection.isAcceptableOrUnknown(
+              data['manual_correction']!, _manualCorrectionMeta));
+    }
+    if (data.containsKey('status_id')) {
+      context.handle(_statusIdMeta,
+          statusId.isAcceptableOrUnknown(data['status_id']!, _statusIdMeta));
+    }
+    if (data.containsKey('finish_id')) {
+      context.handle(_finishIdMeta,
+          finishId.isAcceptableOrUnknown(data['finish_id']!, _finishIdMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Start map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Start(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+      stageId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}stage_id'])!,
+      participantId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}participant_id'])!,
+      startTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}start_time'])!,
+      timestamp: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
+      automaticStartTime: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}automatic_start_time']),
+      automaticCorrection: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}automatic_correction']),
+      manualStartTime: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}manual_start_time']),
+      manualCorrection: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}manual_correction']),
+      statusId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}status_id'])!,
+      finishId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}finish_id']),
+    );
+  }
+
+  @override
+  Starts createAlias(String alias) {
+    return Starts(attachedDatabase, alias);
+  }
+
+  @override
+  List<String> get customConstraints => const [
+        'FOREIGN KEY(stage_id)REFERENCES stages(id)',
+        'FOREIGN KEY(participant_id)REFERENCES participants(id)',
+        'FOREIGN KEY(finish_id)REFERENCES finishes(id)'
+      ];
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class Start extends DataClass implements Insertable<Start> {
+  final int? id;
+  final int stageId;
+  final int participantId;
+  final String startTime;
+  final String? timestamp;
+  final String? automaticStartTime;
+  final int? automaticCorrection;
+  final String? manualStartTime;
+  final int? manualCorrection;
+  final int statusId;
+  final int? finishId;
+  const Start(
+      {this.id,
+      required this.stageId,
+      required this.participantId,
+      required this.startTime,
+      this.timestamp,
+      this.automaticStartTime,
+      this.automaticCorrection,
+      this.manualStartTime,
+      this.manualCorrection,
+      required this.statusId,
+      this.finishId});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    map['stage_id'] = Variable<int>(stageId);
+    map['participant_id'] = Variable<int>(participantId);
+    map['start_time'] = Variable<String>(startTime);
+    if (!nullToAbsent || timestamp != null) {
+      map['timestamp'] = Variable<String>(timestamp);
+    }
+    if (!nullToAbsent || automaticStartTime != null) {
+      map['automatic_start_time'] = Variable<String>(automaticStartTime);
+    }
+    if (!nullToAbsent || automaticCorrection != null) {
+      map['automatic_correction'] = Variable<int>(automaticCorrection);
+    }
+    if (!nullToAbsent || manualStartTime != null) {
+      map['manual_start_time'] = Variable<String>(manualStartTime);
+    }
+    if (!nullToAbsent || manualCorrection != null) {
+      map['manual_correction'] = Variable<int>(manualCorrection);
+    }
+    map['status_id'] = Variable<int>(statusId);
+    if (!nullToAbsent || finishId != null) {
+      map['finish_id'] = Variable<int>(finishId);
+    }
+    return map;
+  }
+
+  StartsCompanion toCompanion(bool nullToAbsent) {
+    return StartsCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      stageId: Value(stageId),
+      participantId: Value(participantId),
+      startTime: Value(startTime),
+      timestamp: timestamp == null && nullToAbsent
+          ? const Value.absent()
+          : Value(timestamp),
+      automaticStartTime: automaticStartTime == null && nullToAbsent
+          ? const Value.absent()
+          : Value(automaticStartTime),
+      automaticCorrection: automaticCorrection == null && nullToAbsent
+          ? const Value.absent()
+          : Value(automaticCorrection),
+      manualStartTime: manualStartTime == null && nullToAbsent
+          ? const Value.absent()
+          : Value(manualStartTime),
+      manualCorrection: manualCorrection == null && nullToAbsent
+          ? const Value.absent()
+          : Value(manualCorrection),
+      statusId: Value(statusId),
+      finishId: finishId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(finishId),
+    );
+  }
+
+  factory Start.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return Start(
+      id: serializer.fromJson<int?>(json['id']),
+      stageId: serializer.fromJson<int>(json['stage_id']),
+      participantId: serializer.fromJson<int>(json['participant_id']),
+      startTime: serializer.fromJson<String>(json['start_time']),
+      timestamp: serializer.fromJson<String?>(json['timestamp']),
+      automaticStartTime:
+          serializer.fromJson<String?>(json['automatic_start_time']),
+      automaticCorrection:
+          serializer.fromJson<int?>(json['automatic_correction']),
+      manualStartTime: serializer.fromJson<String?>(json['manual_start_time']),
+      manualCorrection: serializer.fromJson<int?>(json['manual_correction']),
+      statusId: serializer.fromJson<int>(json['status_id']),
+      finishId: serializer.fromJson<int?>(json['finish_id']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int?>(id),
+      'stage_id': serializer.toJson<int>(stageId),
+      'participant_id': serializer.toJson<int>(participantId),
+      'start_time': serializer.toJson<String>(startTime),
+      'timestamp': serializer.toJson<String?>(timestamp),
+      'automatic_start_time': serializer.toJson<String?>(automaticStartTime),
+      'automatic_correction': serializer.toJson<int?>(automaticCorrection),
+      'manual_start_time': serializer.toJson<String?>(manualStartTime),
+      'manual_correction': serializer.toJson<int?>(manualCorrection),
+      'status_id': serializer.toJson<int>(statusId),
+      'finish_id': serializer.toJson<int?>(finishId),
+    };
+  }
+
+  Start copyWith(
+          {Value<int?> id = const Value.absent(),
+          int? stageId,
+          int? participantId,
+          String? startTime,
+          Value<String?> timestamp = const Value.absent(),
+          Value<String?> automaticStartTime = const Value.absent(),
+          Value<int?> automaticCorrection = const Value.absent(),
+          Value<String?> manualStartTime = const Value.absent(),
+          Value<int?> manualCorrection = const Value.absent(),
+          int? statusId,
+          Value<int?> finishId = const Value.absent()}) =>
+      Start(
+        id: id.present ? id.value : this.id,
+        stageId: stageId ?? this.stageId,
+        participantId: participantId ?? this.participantId,
+        startTime: startTime ?? this.startTime,
+        timestamp: timestamp.present ? timestamp.value : this.timestamp,
+        automaticStartTime: automaticStartTime.present
+            ? automaticStartTime.value
+            : this.automaticStartTime,
+        automaticCorrection: automaticCorrection.present
+            ? automaticCorrection.value
+            : this.automaticCorrection,
+        manualStartTime: manualStartTime.present
+            ? manualStartTime.value
+            : this.manualStartTime,
+        manualCorrection: manualCorrection.present
+            ? manualCorrection.value
+            : this.manualCorrection,
+        statusId: statusId ?? this.statusId,
+        finishId: finishId.present ? finishId.value : this.finishId,
+      );
+  Start copyWithCompanion(StartsCompanion data) {
+    return Start(
+      id: data.id.present ? data.id.value : this.id,
+      stageId: data.stageId.present ? data.stageId.value : this.stageId,
+      participantId: data.participantId.present
+          ? data.participantId.value
+          : this.participantId,
+      startTime: data.startTime.present ? data.startTime.value : this.startTime,
+      timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+      automaticStartTime: data.automaticStartTime.present
+          ? data.automaticStartTime.value
+          : this.automaticStartTime,
+      automaticCorrection: data.automaticCorrection.present
+          ? data.automaticCorrection.value
+          : this.automaticCorrection,
+      manualStartTime: data.manualStartTime.present
+          ? data.manualStartTime.value
+          : this.manualStartTime,
+      manualCorrection: data.manualCorrection.present
+          ? data.manualCorrection.value
+          : this.manualCorrection,
+      statusId: data.statusId.present ? data.statusId.value : this.statusId,
+      finishId: data.finishId.present ? data.finishId.value : this.finishId,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('Start(')
+          ..write('id: $id, ')
+          ..write('stageId: $stageId, ')
+          ..write('participantId: $participantId, ')
+          ..write('startTime: $startTime, ')
+          ..write('timestamp: $timestamp, ')
+          ..write('automaticStartTime: $automaticStartTime, ')
+          ..write('automaticCorrection: $automaticCorrection, ')
+          ..write('manualStartTime: $manualStartTime, ')
+          ..write('manualCorrection: $manualCorrection, ')
+          ..write('statusId: $statusId, ')
+          ..write('finishId: $finishId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id,
+      stageId,
+      participantId,
+      startTime,
+      timestamp,
+      automaticStartTime,
+      automaticCorrection,
+      manualStartTime,
+      manualCorrection,
+      statusId,
+      finishId);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Start &&
+          other.id == this.id &&
+          other.stageId == this.stageId &&
+          other.participantId == this.participantId &&
+          other.startTime == this.startTime &&
+          other.timestamp == this.timestamp &&
+          other.automaticStartTime == this.automaticStartTime &&
+          other.automaticCorrection == this.automaticCorrection &&
+          other.manualStartTime == this.manualStartTime &&
+          other.manualCorrection == this.manualCorrection &&
+          other.statusId == this.statusId &&
+          other.finishId == this.finishId);
+}
+
+class StartsCompanion extends UpdateCompanion<Start> {
+  final Value<int?> id;
+  final Value<int> stageId;
+  final Value<int> participantId;
+  final Value<String> startTime;
+  final Value<String?> timestamp;
+  final Value<String?> automaticStartTime;
+  final Value<int?> automaticCorrection;
+  final Value<String?> manualStartTime;
+  final Value<int?> manualCorrection;
+  final Value<int> statusId;
+  final Value<int?> finishId;
+  const StartsCompanion({
+    this.id = const Value.absent(),
+    this.stageId = const Value.absent(),
+    this.participantId = const Value.absent(),
+    this.startTime = const Value.absent(),
+    this.timestamp = const Value.absent(),
+    this.automaticStartTime = const Value.absent(),
+    this.automaticCorrection = const Value.absent(),
+    this.manualStartTime = const Value.absent(),
+    this.manualCorrection = const Value.absent(),
+    this.statusId = const Value.absent(),
+    this.finishId = const Value.absent(),
+  });
+  StartsCompanion.insert({
+    this.id = const Value.absent(),
+    required int stageId,
+    required int participantId,
+    required String startTime,
+    this.timestamp = const Value.absent(),
+    this.automaticStartTime = const Value.absent(),
+    this.automaticCorrection = const Value.absent(),
+    this.manualStartTime = const Value.absent(),
+    this.manualCorrection = const Value.absent(),
+    this.statusId = const Value.absent(),
+    this.finishId = const Value.absent(),
+  })  : stageId = Value(stageId),
+        participantId = Value(participantId),
+        startTime = Value(startTime);
+  static Insertable<Start> custom({
+    Expression<int>? id,
+    Expression<int>? stageId,
+    Expression<int>? participantId,
+    Expression<String>? startTime,
+    Expression<String>? timestamp,
+    Expression<String>? automaticStartTime,
+    Expression<int>? automaticCorrection,
+    Expression<String>? manualStartTime,
+    Expression<int>? manualCorrection,
+    Expression<int>? statusId,
+    Expression<int>? finishId,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (stageId != null) 'stage_id': stageId,
+      if (participantId != null) 'participant_id': participantId,
+      if (startTime != null) 'start_time': startTime,
+      if (timestamp != null) 'timestamp': timestamp,
+      if (automaticStartTime != null)
+        'automatic_start_time': automaticStartTime,
+      if (automaticCorrection != null)
+        'automatic_correction': automaticCorrection,
+      if (manualStartTime != null) 'manual_start_time': manualStartTime,
+      if (manualCorrection != null) 'manual_correction': manualCorrection,
+      if (statusId != null) 'status_id': statusId,
+      if (finishId != null) 'finish_id': finishId,
+    });
+  }
+
+  StartsCompanion copyWith(
+      {Value<int?>? id,
+      Value<int>? stageId,
+      Value<int>? participantId,
+      Value<String>? startTime,
+      Value<String?>? timestamp,
+      Value<String?>? automaticStartTime,
+      Value<int?>? automaticCorrection,
+      Value<String?>? manualStartTime,
+      Value<int?>? manualCorrection,
+      Value<int>? statusId,
+      Value<int?>? finishId}) {
+    return StartsCompanion(
+      id: id ?? this.id,
+      stageId: stageId ?? this.stageId,
+      participantId: participantId ?? this.participantId,
+      startTime: startTime ?? this.startTime,
+      timestamp: timestamp ?? this.timestamp,
+      automaticStartTime: automaticStartTime ?? this.automaticStartTime,
+      automaticCorrection: automaticCorrection ?? this.automaticCorrection,
+      manualStartTime: manualStartTime ?? this.manualStartTime,
+      manualCorrection: manualCorrection ?? this.manualCorrection,
+      statusId: statusId ?? this.statusId,
+      finishId: finishId ?? this.finishId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (stageId.present) {
+      map['stage_id'] = Variable<int>(stageId.value);
+    }
+    if (participantId.present) {
+      map['participant_id'] = Variable<int>(participantId.value);
+    }
+    if (startTime.present) {
+      map['start_time'] = Variable<String>(startTime.value);
+    }
+    if (timestamp.present) {
+      map['timestamp'] = Variable<String>(timestamp.value);
+    }
+    if (automaticStartTime.present) {
+      map['automatic_start_time'] = Variable<String>(automaticStartTime.value);
+    }
+    if (automaticCorrection.present) {
+      map['automatic_correction'] = Variable<int>(automaticCorrection.value);
+    }
+    if (manualStartTime.present) {
+      map['manual_start_time'] = Variable<String>(manualStartTime.value);
+    }
+    if (manualCorrection.present) {
+      map['manual_correction'] = Variable<int>(manualCorrection.value);
+    }
+    if (statusId.present) {
+      map['status_id'] = Variable<int>(statusId.value);
+    }
+    if (finishId.present) {
+      map['finish_id'] = Variable<int>(finishId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('StartsCompanion(')
+          ..write('id: $id, ')
+          ..write('stageId: $stageId, ')
+          ..write('participantId: $participantId, ')
+          ..write('startTime: $startTime, ')
+          ..write('timestamp: $timestamp, ')
+          ..write('automaticStartTime: $automaticStartTime, ')
+          ..write('automaticCorrection: $automaticCorrection, ')
+          ..write('manualStartTime: $manualStartTime, ')
+          ..write('manualCorrection: $manualCorrection, ')
+          ..write('statusId: $statusId, ')
+          ..write('finishId: $finishId')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3019,8 +3084,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Riders riders = Riders(this);
   late final Statuses statuses = Statuses(this);
   late final Participants participants = Participants(this);
-  late final Starts starts = Starts(this);
   late final Finishes finishes = Finishes(this);
+  late final Starts starts = Starts(this);
   Selectable<Race> selectRaces() {
     return customSelect('SELECT * FROM races WHERE is_deleted = FALSE',
         variables: [],
@@ -3099,7 +3164,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           riderId: row.read<int>('rider_id'),
           raceId: row.read<int>('race_id'),
           number: row.read<int>('number'),
-          category: row.readNullable<String>('category'),
+          category: row.read<String>('category'),
           rfid: row.readNullable<String>('rfid'),
           participantStatusId: row.read<int>('participant_status_id'),
           name: row.read<String>('name'),
@@ -3149,11 +3214,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           manualStartTime: row.readNullable<String>('manual_start_time'),
           manualCorrection: row.readNullable<int>('manual_correction'),
           statusId: row.read<int>('status_id'),
+          finishId: row.readNullable<int>('finish_id'),
           id1: row.readNullable<int>('id'),
           raceId: row.read<int>('race_id'),
           riderId: row.read<int>('rider_id'),
           number: row.read<int>('number'),
-          category: row.readNullable<String>('category'),
+          category: row.read<String>('category'),
           rfid: row.readNullable<String>('rfid'),
           statusId1: row.read<int>('status_id'),
         ));
@@ -3274,12 +3340,45 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
+  Selectable<GetNumbersOnTraceResult> getNumbersOnTrace(
+      {required int stageId, required String timeNow}) {
+    return customSelect(
+        'SELECT * FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND(starts.automatic_start_time NOT LIKE \'DNS\' OR starts.automatic_start_time ISNULL)ORDER BY starts.start_time ASC',
+        variables: [
+          Variable<int>(stageId),
+          Variable<String>(timeNow)
+        ],
+        readsFrom: {
+          starts,
+          participants,
+        }).map((QueryRow row) => GetNumbersOnTraceResult(
+          id: row.readNullable<int>('id'),
+          stageId: row.read<int>('stage_id'),
+          participantId: row.read<int>('participant_id'),
+          startTime: row.read<String>('start_time'),
+          timestamp: row.readNullable<String>('timestamp'),
+          automaticStartTime: row.readNullable<String>('automatic_start_time'),
+          automaticCorrection: row.readNullable<int>('automatic_correction'),
+          manualStartTime: row.readNullable<String>('manual_start_time'),
+          manualCorrection: row.readNullable<int>('manual_correction'),
+          statusId: row.read<int>('status_id'),
+          finishId: row.readNullable<int>('finish_id'),
+          id1: row.readNullable<int>('id'),
+          raceId: row.read<int>('race_id'),
+          riderId: row.read<int>('rider_id'),
+          number: row.read<int>('number'),
+          category: row.read<String>('category'),
+          rfid: row.readNullable<String>('rfid'),
+          statusId1: row.read<int>('status_id'),
+        ));
+  }
+
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [races, trails, stages, riders, statuses, participants, starts, finishes];
+      [races, trails, stages, riders, statuses, participants, finishes, starts];
 }
 
 typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
@@ -4038,7 +4137,7 @@ typedef $ParticipantsCreateCompanionBuilder = ParticipantsCompanion Function({
   required int raceId,
   required int riderId,
   required int number,
-  Value<String?> category,
+  required String category,
   Value<String?> rfid,
   Value<int> statusId,
 });
@@ -4047,7 +4146,7 @@ typedef $ParticipantsUpdateCompanionBuilder = ParticipantsCompanion Function({
   Value<int> raceId,
   Value<int> riderId,
   Value<int> number,
-  Value<String?> category,
+  Value<String> category,
   Value<String?> rfid,
   Value<int> statusId,
 });
@@ -4154,7 +4253,7 @@ class $ParticipantsTableManager extends RootTableManager<
             Value<int> raceId = const Value.absent(),
             Value<int> riderId = const Value.absent(),
             Value<int> number = const Value.absent(),
-            Value<String?> category = const Value.absent(),
+            Value<String> category = const Value.absent(),
             Value<String?> rfid = const Value.absent(),
             Value<int> statusId = const Value.absent(),
           }) =>
@@ -4172,7 +4271,7 @@ class $ParticipantsTableManager extends RootTableManager<
             required int raceId,
             required int riderId,
             required int number,
-            Value<String?> category = const Value.absent(),
+            required String category,
             Value<String?> rfid = const Value.absent(),
             Value<int> statusId = const Value.absent(),
           }) =>
@@ -4202,220 +4301,6 @@ typedef $ParticipantsProcessedTableManager = ProcessedTableManager<
     $ParticipantsUpdateCompanionBuilder,
     (Participant, BaseReferences<_$AppDatabase, Participants, Participant>),
     Participant,
-    PrefetchHooks Function()>;
-typedef $StartsCreateCompanionBuilder = StartsCompanion Function({
-  Value<int?> id,
-  required int stageId,
-  required int participantId,
-  required String startTime,
-  Value<String?> timestamp,
-  Value<String?> automaticStartTime,
-  Value<int?> automaticCorrection,
-  Value<String?> manualStartTime,
-  Value<int?> manualCorrection,
-  Value<int> statusId,
-});
-typedef $StartsUpdateCompanionBuilder = StartsCompanion Function({
-  Value<int?> id,
-  Value<int> stageId,
-  Value<int> participantId,
-  Value<String> startTime,
-  Value<String?> timestamp,
-  Value<String?> automaticStartTime,
-  Value<int?> automaticCorrection,
-  Value<String?> manualStartTime,
-  Value<int?> manualCorrection,
-  Value<int> statusId,
-});
-
-class $StartsFilterComposer extends FilterComposer<_$AppDatabase, Starts> {
-  $StartsFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get stageId => $state.composableBuilder(
-      column: $state.table.stageId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get participantId => $state.composableBuilder(
-      column: $state.table.participantId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get startTime => $state.composableBuilder(
-      column: $state.table.startTime,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get timestamp => $state.composableBuilder(
-      column: $state.table.timestamp,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get automaticStartTime => $state.composableBuilder(
-      column: $state.table.automaticStartTime,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get automaticCorrection => $state.composableBuilder(
-      column: $state.table.automaticCorrection,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get manualStartTime => $state.composableBuilder(
-      column: $state.table.manualStartTime,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get manualCorrection => $state.composableBuilder(
-      column: $state.table.manualCorrection,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get statusId => $state.composableBuilder(
-      column: $state.table.statusId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $StartsOrderingComposer extends OrderingComposer<_$AppDatabase, Starts> {
-  $StartsOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get stageId => $state.composableBuilder(
-      column: $state.table.stageId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get participantId => $state.composableBuilder(
-      column: $state.table.participantId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get startTime => $state.composableBuilder(
-      column: $state.table.startTime,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get timestamp => $state.composableBuilder(
-      column: $state.table.timestamp,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get automaticStartTime => $state.composableBuilder(
-      column: $state.table.automaticStartTime,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get automaticCorrection => $state.composableBuilder(
-      column: $state.table.automaticCorrection,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get manualStartTime => $state.composableBuilder(
-      column: $state.table.manualStartTime,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get manualCorrection => $state.composableBuilder(
-      column: $state.table.manualCorrection,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get statusId => $state.composableBuilder(
-      column: $state.table.statusId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
-class $StartsTableManager extends RootTableManager<
-    _$AppDatabase,
-    Starts,
-    Start,
-    $StartsFilterComposer,
-    $StartsOrderingComposer,
-    $StartsCreateCompanionBuilder,
-    $StartsUpdateCompanionBuilder,
-    (Start, BaseReferences<_$AppDatabase, Starts, Start>),
-    Start,
-    PrefetchHooks Function()> {
-  $StartsTableManager(_$AppDatabase db, Starts table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: $StartsFilterComposer(ComposerState(db, table)),
-          orderingComposer: $StartsOrderingComposer(ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
-            Value<int> stageId = const Value.absent(),
-            Value<int> participantId = const Value.absent(),
-            Value<String> startTime = const Value.absent(),
-            Value<String?> timestamp = const Value.absent(),
-            Value<String?> automaticStartTime = const Value.absent(),
-            Value<int?> automaticCorrection = const Value.absent(),
-            Value<String?> manualStartTime = const Value.absent(),
-            Value<int?> manualCorrection = const Value.absent(),
-            Value<int> statusId = const Value.absent(),
-          }) =>
-              StartsCompanion(
-            id: id,
-            stageId: stageId,
-            participantId: participantId,
-            startTime: startTime,
-            timestamp: timestamp,
-            automaticStartTime: automaticStartTime,
-            automaticCorrection: automaticCorrection,
-            manualStartTime: manualStartTime,
-            manualCorrection: manualCorrection,
-            statusId: statusId,
-          ),
-          createCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
-            required int stageId,
-            required int participantId,
-            required String startTime,
-            Value<String?> timestamp = const Value.absent(),
-            Value<String?> automaticStartTime = const Value.absent(),
-            Value<int?> automaticCorrection = const Value.absent(),
-            Value<String?> manualStartTime = const Value.absent(),
-            Value<int?> manualCorrection = const Value.absent(),
-            Value<int> statusId = const Value.absent(),
-          }) =>
-              StartsCompanion.insert(
-            id: id,
-            stageId: stageId,
-            participantId: participantId,
-            startTime: startTime,
-            timestamp: timestamp,
-            automaticStartTime: automaticStartTime,
-            automaticCorrection: automaticCorrection,
-            manualStartTime: manualStartTime,
-            manualCorrection: manualCorrection,
-            statusId: statusId,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: null,
-        ));
-}
-
-typedef $StartsProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    Starts,
-    Start,
-    $StartsFilterComposer,
-    $StartsOrderingComposer,
-    $StartsCreateCompanionBuilder,
-    $StartsUpdateCompanionBuilder,
-    (Start, BaseReferences<_$AppDatabase, Starts, Start>),
-    Start,
     PrefetchHooks Function()>;
 typedef $FinishesCreateCompanionBuilder = FinishesCompanion Function({
   Value<int?> id,
@@ -4584,6 +4469,236 @@ typedef $FinishesProcessedTableManager = ProcessedTableManager<
     (Finish, BaseReferences<_$AppDatabase, Finishes, Finish>),
     Finish,
     PrefetchHooks Function()>;
+typedef $StartsCreateCompanionBuilder = StartsCompanion Function({
+  Value<int?> id,
+  required int stageId,
+  required int participantId,
+  required String startTime,
+  Value<String?> timestamp,
+  Value<String?> automaticStartTime,
+  Value<int?> automaticCorrection,
+  Value<String?> manualStartTime,
+  Value<int?> manualCorrection,
+  Value<int> statusId,
+  Value<int?> finishId,
+});
+typedef $StartsUpdateCompanionBuilder = StartsCompanion Function({
+  Value<int?> id,
+  Value<int> stageId,
+  Value<int> participantId,
+  Value<String> startTime,
+  Value<String?> timestamp,
+  Value<String?> automaticStartTime,
+  Value<int?> automaticCorrection,
+  Value<String?> manualStartTime,
+  Value<int?> manualCorrection,
+  Value<int> statusId,
+  Value<int?> finishId,
+});
+
+class $StartsFilterComposer extends FilterComposer<_$AppDatabase, Starts> {
+  $StartsFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get stageId => $state.composableBuilder(
+      column: $state.table.stageId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get participantId => $state.composableBuilder(
+      column: $state.table.participantId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get startTime => $state.composableBuilder(
+      column: $state.table.startTime,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get timestamp => $state.composableBuilder(
+      column: $state.table.timestamp,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get automaticStartTime => $state.composableBuilder(
+      column: $state.table.automaticStartTime,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get automaticCorrection => $state.composableBuilder(
+      column: $state.table.automaticCorrection,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get manualStartTime => $state.composableBuilder(
+      column: $state.table.manualStartTime,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get manualCorrection => $state.composableBuilder(
+      column: $state.table.manualCorrection,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get statusId => $state.composableBuilder(
+      column: $state.table.statusId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get finishId => $state.composableBuilder(
+      column: $state.table.finishId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $StartsOrderingComposer extends OrderingComposer<_$AppDatabase, Starts> {
+  $StartsOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get stageId => $state.composableBuilder(
+      column: $state.table.stageId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get participantId => $state.composableBuilder(
+      column: $state.table.participantId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get startTime => $state.composableBuilder(
+      column: $state.table.startTime,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get timestamp => $state.composableBuilder(
+      column: $state.table.timestamp,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get automaticStartTime => $state.composableBuilder(
+      column: $state.table.automaticStartTime,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get automaticCorrection => $state.composableBuilder(
+      column: $state.table.automaticCorrection,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get manualStartTime => $state.composableBuilder(
+      column: $state.table.manualStartTime,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get manualCorrection => $state.composableBuilder(
+      column: $state.table.manualCorrection,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get statusId => $state.composableBuilder(
+      column: $state.table.statusId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get finishId => $state.composableBuilder(
+      column: $state.table.finishId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $StartsTableManager extends RootTableManager<
+    _$AppDatabase,
+    Starts,
+    Start,
+    $StartsFilterComposer,
+    $StartsOrderingComposer,
+    $StartsCreateCompanionBuilder,
+    $StartsUpdateCompanionBuilder,
+    (Start, BaseReferences<_$AppDatabase, Starts, Start>),
+    Start,
+    PrefetchHooks Function()> {
+  $StartsTableManager(_$AppDatabase db, Starts table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $StartsFilterComposer(ComposerState(db, table)),
+          orderingComposer: $StartsOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            Value<int> stageId = const Value.absent(),
+            Value<int> participantId = const Value.absent(),
+            Value<String> startTime = const Value.absent(),
+            Value<String?> timestamp = const Value.absent(),
+            Value<String?> automaticStartTime = const Value.absent(),
+            Value<int?> automaticCorrection = const Value.absent(),
+            Value<String?> manualStartTime = const Value.absent(),
+            Value<int?> manualCorrection = const Value.absent(),
+            Value<int> statusId = const Value.absent(),
+            Value<int?> finishId = const Value.absent(),
+          }) =>
+              StartsCompanion(
+            id: id,
+            stageId: stageId,
+            participantId: participantId,
+            startTime: startTime,
+            timestamp: timestamp,
+            automaticStartTime: automaticStartTime,
+            automaticCorrection: automaticCorrection,
+            manualStartTime: manualStartTime,
+            manualCorrection: manualCorrection,
+            statusId: statusId,
+            finishId: finishId,
+          ),
+          createCompanionCallback: ({
+            Value<int?> id = const Value.absent(),
+            required int stageId,
+            required int participantId,
+            required String startTime,
+            Value<String?> timestamp = const Value.absent(),
+            Value<String?> automaticStartTime = const Value.absent(),
+            Value<int?> automaticCorrection = const Value.absent(),
+            Value<String?> manualStartTime = const Value.absent(),
+            Value<int?> manualCorrection = const Value.absent(),
+            Value<int> statusId = const Value.absent(),
+            Value<int?> finishId = const Value.absent(),
+          }) =>
+              StartsCompanion.insert(
+            id: id,
+            stageId: stageId,
+            participantId: participantId,
+            startTime: startTime,
+            timestamp: timestamp,
+            automaticStartTime: automaticStartTime,
+            automaticCorrection: automaticCorrection,
+            manualStartTime: manualStartTime,
+            manualCorrection: manualCorrection,
+            statusId: statusId,
+            finishId: finishId,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $StartsProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Starts,
+    Start,
+    $StartsFilterComposer,
+    $StartsOrderingComposer,
+    $StartsCreateCompanionBuilder,
+    $StartsUpdateCompanionBuilder,
+    (Start, BaseReferences<_$AppDatabase, Starts, Start>),
+    Start,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4596,16 +4711,16 @@ class $AppDatabaseManager {
       $StatusesTableManager(_db, _db.statuses);
   $ParticipantsTableManager get participants =>
       $ParticipantsTableManager(_db, _db.participants);
-  $StartsTableManager get starts => $StartsTableManager(_db, _db.starts);
   $FinishesTableManager get finishes =>
       $FinishesTableManager(_db, _db.finishes);
+  $StartsTableManager get starts => $StartsTableManager(_db, _db.starts);
 }
 
 class GetParticipantsAtStartResult {
   final int riderId;
   final int raceId;
   final int number;
-  final String? category;
+  final String category;
   final String? rfid;
   final int participantStatusId;
   final String name;
@@ -4630,7 +4745,7 @@ class GetParticipantsAtStartResult {
     required this.riderId,
     required this.raceId,
     required this.number,
-    this.category,
+    required this.category,
     this.rfid,
     required this.participantStatusId,
     required this.name,
@@ -4665,11 +4780,12 @@ class GetExistedStartingParticipantsResult {
   final String? manualStartTime;
   final int? manualCorrection;
   final int statusId;
+  final int? finishId;
   final int? id1;
   final int raceId;
   final int riderId;
   final int number;
-  final String? category;
+  final String category;
   final String? rfid;
   final int statusId1;
   GetExistedStartingParticipantsResult({
@@ -4683,11 +4799,12 @@ class GetExistedStartingParticipantsResult {
     this.manualStartTime,
     this.manualCorrection,
     required this.statusId,
+    this.finishId,
     this.id1,
     required this.raceId,
     required this.riderId,
     required this.number,
-    this.category,
+    required this.category,
     this.rfid,
     required this.statusId1,
   });
@@ -4720,5 +4837,46 @@ class GetStartingParticipantAndFollowingResult {
     this.automaticStartTime,
     this.automaticCorrection,
     required this.name,
+  });
+}
+
+class GetNumbersOnTraceResult {
+  final int? id;
+  final int stageId;
+  final int participantId;
+  final String startTime;
+  final String? timestamp;
+  final String? automaticStartTime;
+  final int? automaticCorrection;
+  final String? manualStartTime;
+  final int? manualCorrection;
+  final int statusId;
+  final int? finishId;
+  final int? id1;
+  final int raceId;
+  final int riderId;
+  final int number;
+  final String category;
+  final String? rfid;
+  final int statusId1;
+  GetNumbersOnTraceResult({
+    this.id,
+    required this.stageId,
+    required this.participantId,
+    required this.startTime,
+    this.timestamp,
+    this.automaticStartTime,
+    this.automaticCorrection,
+    this.manualStartTime,
+    this.manualCorrection,
+    required this.statusId,
+    this.finishId,
+    this.id1,
+    required this.raceId,
+    required this.riderId,
+    required this.number,
+    required this.category,
+    this.rfid,
+    required this.statusId1,
   });
 }

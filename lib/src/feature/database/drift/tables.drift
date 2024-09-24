@@ -40,7 +40,7 @@ CREATE TABLE participants (
 	race_id integer NOT NULL,
 	rider_id integer NOT NULL,
 	number integer NOT NULL,
-	category text,
+	category text NOT NULL,
 	rfid text,
 	status_id integer NOT NULL DEFAULT 1,
     FOREIGN KEY (rider_id) REFERENCES riders(id),
@@ -58,8 +58,10 @@ CREATE TABLE starts (
 	manual_start_time text,
 	manual_correction integer,
 	status_id integer NOT NULL DEFAULT 1,
+	finish_id integer,
     FOREIGN KEY (stage_id) REFERENCES stages(id),
-    FOREIGN KEY (participant_id) REFERENCES participants(id)
+    FOREIGN KEY (participant_id) REFERENCES participants(id),
+	FOREIGN KEY (finish_id) REFERENCES finishes(id)
 );
 
 CREATE TABLE finishes (
@@ -207,6 +209,17 @@ WHERE
 	AND (start_time BETWEEN :time AND :after)
 	AND automatic_start_time ISNULL
 	AND starts.status_id = 1;
+
+getNumbersOnTrace:
+SELECT *
+FROM starts, participants
+WHERE
+    starts.participant_id = participants.id
+    AND starts.stage_id = :stage_id
+    AND julianday(time(:time_now)) > julianday(time(starts.start_time))
+    AND starts.finish_id ISNULL
+    AND (starts.automatic_start_time NOT LIKE 'DNS' OR starts.automatic_start_time ISNULL)
+ORDER BY starts.start_time ASC;
 
 /*
 getStartForCsv:
