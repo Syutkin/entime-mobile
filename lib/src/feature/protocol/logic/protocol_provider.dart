@@ -562,7 +562,7 @@ class ProtocolProvider implements IProtocolProvider {
     return startProtocol;
   }
 
-//!transfered
+  //!transfered
   @override
   Future<List<StartItem>> getNextParticipants(String time) async {
     final db = await _db;
@@ -616,7 +616,8 @@ class ProtocolProvider implements IProtocolProvider {
     logger.i('Database -> Loaded data from csv to start protocol');
   }
 
-// ----------------номера на трассе----------------
+  //!transfered
+  // ----------------номера на трассе----------------
   @override
   Future<List<StartItem>> getNumbersOnTrace([String? timeNow]) async {
     timeNow ??= "now', 'localtime";
@@ -636,7 +637,8 @@ class ProtocolProvider implements IProtocolProvider {
     return startProtocol;
   }
 
-// ----------------финиш----------------
+  //!transfered (watch() at database_bloc)
+  // ----------------финиш----------------
   @override
   Future<List<FinishItem>> getFinishTime({
     bool hideMarked = true,
@@ -680,6 +682,7 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
+  //!transfered
   /// Записывает финишное время
   ///
   /// Возвращает автоматически присвоенный номер или null

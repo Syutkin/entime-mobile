@@ -210,7 +210,7 @@ WHERE
 	AND automatic_start_time ISNULL
 	AND starts.status_id = 1;
 
-getNumbersOnTrace:
+getNumbersOnTraceNow:
 SELECT *
 FROM starts, participants
 WHERE
@@ -218,8 +218,41 @@ WHERE
     AND starts.stage_id = :stage_id
     AND julianday(time(:time_now)) > julianday(time(starts.start_time))
     AND starts.finish_id ISNULL
-    AND (starts.automatic_start_time NOT LIKE 'DNS' OR starts.automatic_start_time ISNULL)
+    AND (starts.automatic_start_time NOT LIKE 'DNS'
+        OR starts.automatic_start_time ISNULL)
 ORDER BY starts.start_time ASC;
+
+getLastFinishTime:
+SELECT finish_time
+FROM finishes
+WHERE
+    stage_id = :stage_id
+    AND is_hidden = false
+    AND is_manual = false
+ORDER BY finish_time DESC LIMIT 1;
+
+getLastFinishTimeWithNumber:
+SELECT finish_time
+FROM finishes
+WHERE
+    stage_id = :stage_id
+    AND number NOTNULL
+    AND finish_time NOT like 'DNS'
+    AND finish_time NOT like 'DNF'
+ORDER BY finish_time DESC LIMIT 1;
+
+addFinishTimeStamp:
+INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_hidden)
+VALUES (:stage_id, :finish_time, :timestamp, :number, :is_hidden);
+
+setFinishInfoToStart:
+UPDATE starts
+SET finish_id = :finish_id
+FROM (SELECT id, number FROM participants WHERE race_id = :race_id ) as p
+WHERE
+    starts.participant_id = p.id
+    AND stage_id = :stage_id
+    AND p.number = :number;
 
 /*
 getStartForCsv:

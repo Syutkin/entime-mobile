@@ -58,10 +58,10 @@ Future<void> editStartTime(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            item.category != null && item.category!.isNotEmpty
+            item.category.isNotEmpty
                 ? Text(
                     Localization.current
-                        .I18nStart_participantCategory(item.category!),
+                        .I18nStart_participantCategory(item.category),
                     style: Theme.of(context).textTheme.titleMedium,
                   )
                 : const SizedBox(),

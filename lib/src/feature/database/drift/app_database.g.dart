@@ -3340,7 +3340,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
-  Selectable<GetNumbersOnTraceResult> getNumbersOnTrace(
+  Selectable<GetNumbersOnTraceNowResult> getNumbersOnTraceNow(
       {required int stageId, required String timeNow}) {
     return customSelect(
         'SELECT * FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND(starts.automatic_start_time NOT LIKE \'DNS\' OR starts.automatic_start_time ISNULL)ORDER BY starts.start_time ASC',
@@ -3351,7 +3351,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         readsFrom: {
           starts,
           participants,
-        }).map((QueryRow row) => GetNumbersOnTraceResult(
+        }).map((QueryRow row) => GetNumbersOnTraceNowResult(
           id: row.readNullable<int>('id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
@@ -3371,6 +3371,65 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           rfid: row.readNullable<String>('rfid'),
           statusId1: row.read<int>('status_id'),
         ));
+  }
+
+  Selectable<String?> getLastFinishTime({required int stageId}) {
+    return customSelect(
+        'SELECT finish_time FROM finishes WHERE stage_id = ?1 AND is_hidden = FALSE AND is_manual = FALSE ORDER BY finish_time DESC LIMIT 1',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          finishes,
+        }).map((QueryRow row) => row.readNullable<String>('finish_time'));
+  }
+
+  Selectable<String?> getLastFinishTimeWithNumber({required int stageId}) {
+    return customSelect(
+        'SELECT finish_time FROM finishes WHERE stage_id = ?1 AND number NOTNULL AND finish_time NOT LIKE \'DNS\' AND finish_time NOT LIKE \'DNF\' ORDER BY finish_time DESC LIMIT 1',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          finishes,
+        }).map((QueryRow row) => row.readNullable<String>('finish_time'));
+  }
+
+  Future<int> addFinishTimeStamp(
+      {required int stageId,
+      String? finishTime,
+      String? timestamp,
+      int? number,
+      required bool isHidden}) {
+    return customInsert(
+      'INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_hidden) VALUES (?1, ?2, ?3, ?4, ?5)',
+      variables: [
+        Variable<int>(stageId),
+        Variable<String>(finishTime),
+        Variable<String>(timestamp),
+        Variable<int>(number),
+        Variable<bool>(isHidden)
+      ],
+      updates: {finishes},
+    );
+  }
+
+  Future<int> setFinishInfoToStart(
+      {int? finishId,
+      required int raceId,
+      required int stageId,
+      required int number}) {
+    return customUpdate(
+      'UPDATE starts SET finish_id = ?1 FROM (SELECT id, number FROM participants WHERE race_id = ?2) AS p WHERE starts.participant_id = p.id AND stage_id = ?3 AND p.number = ?4',
+      variables: [
+        Variable<int>(finishId),
+        Variable<int>(raceId),
+        Variable<int>(stageId),
+        Variable<int>(number)
+      ],
+      updates: {starts},
+      updateKind: UpdateKind.update,
+    );
   }
 
   @override
@@ -4840,7 +4899,7 @@ class GetStartingParticipantAndFollowingResult {
   });
 }
 
-class GetNumbersOnTraceResult {
+class GetNumbersOnTraceNowResult {
   final int? id;
   final int stageId;
   final int participantId;
@@ -4859,7 +4918,7 @@ class GetNumbersOnTraceResult {
   final String category;
   final String? rfid;
   final int statusId1;
-  GetNumbersOnTraceResult({
+  GetNumbersOnTraceNowResult({
     this.id,
     required this.stageId,
     required this.participantId,

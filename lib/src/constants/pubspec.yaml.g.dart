@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-dev+146',
+    representation: r'0.5.0-dev+149',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-dev+146',
+    canonical: r'0.5.0-dev+149',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,7 +118,7 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'146'],
+    build: <String>[r'149'],
   );
 
   /// Build date and time (UTC)
@@ -126,11 +126,11 @@ sealed class Pubspec {
     2024,
     9,
     24,
-    11,
-    7,
-    1,
-    399,
-    439,
+    18,
+    48,
+    53,
+    787,
+    877,
   );
 
   /// Name
@@ -416,7 +416,7 @@ sealed class Pubspec {
     'bot_toast': r'^4.1.3',
     'csv': r'^6.0.0',
     'device_info_plus': r'^10.1.2',
-    'drift': r'^2.20.0',
+    'drift': r'^2.20.2',
     'equatable': r'^2.0.5',
     'file_picker': r'^8.1.2',
     'filesize': r'^2.0.1',
@@ -437,7 +437,7 @@ sealed class Pubspec {
     'permission_handler': r'^11.3.1',
     'pub_semver': r'^2.1.4',
     'rxdart': r'^0.28.0',
-    'sentry_flutter': r'^8.8.0',
+    'sentry_flutter': r'^8.9.0',
     'settings_ui': r'^2.0.2',
     'share_plus': r'^10.0.2',
     'shared_preferences': r'^2.3.2',
@@ -452,7 +452,7 @@ sealed class Pubspec {
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^9.1.7',
     'build_runner': r'^2.4.12',
-    'drift_dev': r'^2.20.1',
+    'drift_dev': r'^2.20.3',
     'flutter_lints': r'^4.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',

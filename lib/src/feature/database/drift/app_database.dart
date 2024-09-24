@@ -336,6 +336,135 @@ class AppDatabase extends _$AppDatabase {
     }
     return result;
   }
+
+  /// Записывает финишное время
+  ///
+  /// Возвращает автоматически присвоенный номер или null
+  ///
+  /// Если новое финишное время отличается менее чем на [finishDelay]
+  /// от предыдущего нескрытого, неручного финишного времени без присвоенного номера,
+  /// то записываемое время будет автоматически скрыто
+  Future<int?> addFinishTime({
+    required int raceId,
+    required int stageId,
+    required String finish,
+    required DateTime timeStamp,
+    int finishDelay = 0,
+    bool substituteNumbers = false,
+    int substituteNumbersDelay = 0,
+    String? debugTimeNow,
+    int? number,
+  }) async {
+    bool isHidden = false;
+    int? workingNumber = number;
+    // узнаём предыдущее нескрытое автоматическое время
+    final prevFinishTime =
+        await getLastFinishTime(stageId: stageId).getSingleOrNull();
+    // проверяем разницу между предыдущей и поступившей отсечкой
+    if (prevFinishTime != null) {
+      final prevFinishDateTime = strTimeToDateTime(prevFinishTime);
+      if (prevFinishDateTime != null) {
+        final finishTime = strTimeToDateTime(finish);
+        if (finishTime == null) {
+          assert(finishTime != null, 'finishTime must not be null');
+          return null;
+        }
+        final difference = finishTime.difference(prevFinishDateTime);
+        // скрываем отсечку, если разница меньше настройки
+        if (difference.inMilliseconds < finishDelay) {
+          isHidden = true;
+        }
+      }
+    }
+
+    // если номер не был передан, пробуем автоматически поставить номер
+    // если автоматически ставим номер, то ставим номер только в нескрытую отсечку,
+    // если разница между предыдущим временем с финишем больше настройки
+    // или нет предыдущей нескрытой отсечки
+    if (substituteNumbers && workingNumber == null && isHidden == false) {
+      // если нет нескрытого предыдущего времени - ставим номер
+      if (prevFinishTime == null) {
+        workingNumber = await _getAwaitingNumber(
+          stageId: stageId,
+          debugTimeNow: debugTimeNow,
+        );
+      } else {
+        // ищем предыдущее время финиша с номером
+        final lastFinishTime = await _lastFinishTime(stageId: stageId);
+        // если есть, проверяем разницу между финишами
+        // если больше разницы в настройках - ставим номер
+        if (lastFinishTime != null) {
+          final finishTime = strTimeToDateTime(finish);
+          if (finishTime == null) {
+            assert(finishTime != null, 'finishTime must not be null');
+            return null;
+          }
+          final difference = finishTime.difference(lastFinishTime);
+          if (difference.inMilliseconds > substituteNumbersDelay) {
+            workingNumber = await _getAwaitingNumber(
+              stageId: stageId,
+              debugTimeNow: debugTimeNow,
+            );
+          }
+          // если предыдущего времени с номером нет - ставим номер
+        } else {
+          workingNumber = await _getAwaitingNumber(
+            stageId: stageId,
+            debugTimeNow: debugTimeNow,
+          );
+        }
+      }
+    }
+
+    final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
+    final finishId = await addFinishTimeStamp(
+      stageId: stageId,
+      finishTime: finish,
+      timestamp: phoneTime,
+      number: workingNumber,
+      isHidden: isHidden,
+    );
+    logger.i('Database -> Automatic finish time added: $finish');
+    if (workingNumber != null) {
+      await setFinishInfoToStart(
+        raceId: raceId,
+        stageId: stageId,
+        number: workingNumber,
+        finishId: finishId,
+      );
+      logger.i(
+        'Database -> Automatically add number $workingNumber to finish time: $finish',
+      );
+    }
+    return workingNumber;
+  }
+
+  Future<int?> _getAwaitingNumber({
+    required int stageId,
+    String? debugTimeNow,
+  }) async {
+    int? number;
+    debugTimeNow ??= "'now', 'localtime'";
+    final numbersOnTraceProtocol =
+        await getNumbersOnTraceNow(stageId: stageId, timeNow: debugTimeNow)
+            .get();
+    if (numbersOnTraceProtocol.isNotEmpty) {
+      number = numbersOnTraceProtocol.first.number;
+      logger.i('Awaiting number: $number');
+    }
+    return number;
+  }
+
+  Future<DateTime?> _lastFinishTime({required int stageId}) async {
+    DateTime? result;
+    final res =
+        await getLastFinishTimeWithNumber(stageId: stageId).getSingleOrNull();
+
+    if (res != null) {
+      result = strTimeToDateTime(res);
+    }
+    return result;
+  }
 }
 
 LazyDatabase _openConnection() => LazyDatabase(() async {

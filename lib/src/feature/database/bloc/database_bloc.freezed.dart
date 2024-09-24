@@ -28,6 +28,7 @@ mixin _$DatabaseEvent {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -64,6 +65,7 @@ mixin _$DatabaseEvent {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -99,6 +101,7 @@ mixin _$DatabaseEvent {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -248,6 +251,7 @@ class _$InitializeImpl implements _Initialize {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -287,6 +291,7 @@ class _$InitializeImpl implements _Initialize {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -325,6 +330,7 @@ class _$InitializeImpl implements _Initialize {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -437,6 +443,7 @@ abstract class _$$EmitStateImplCopyWith<$Res> {
       List<Start>? starts,
       List<Finish>? finishes,
       List<Trail>? trails,
+      List<GetNumbersOnTraceNowResult>? numbersOnTrace,
       Notification? notification});
 
   $NotificationCopyWith<$Res>? get notification;
@@ -463,6 +470,7 @@ class __$$EmitStateImplCopyWithImpl<$Res>
     Object? starts = freezed,
     Object? finishes = freezed,
     Object? trails = freezed,
+    Object? numbersOnTrace = freezed,
     Object? notification = freezed,
   }) {
     return _then(_$EmitStateImpl(
@@ -498,6 +506,10 @@ class __$$EmitStateImplCopyWithImpl<$Res>
           ? _value._trails
           : trails // ignore: cast_nullable_to_non_nullable
               as List<Trail>?,
+      numbersOnTrace: freezed == numbersOnTrace
+          ? _value._numbersOnTrace
+          : numbersOnTrace // ignore: cast_nullable_to_non_nullable
+              as List<GetNumbersOnTraceNowResult>?,
       notification: freezed == notification
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
@@ -532,6 +544,7 @@ class _$EmitStateImpl implements _EmitState {
       final List<Start>? starts,
       final List<Finish>? finishes,
       final List<Trail>? trails,
+      final List<GetNumbersOnTraceNowResult>? numbersOnTrace,
       this.notification})
       : _races = races,
         _stages = stages,
@@ -540,7 +553,8 @@ class _$EmitStateImpl implements _EmitState {
         _participants = participants,
         _starts = starts,
         _finishes = finishes,
-        _trails = trails;
+        _trails = trails,
+        _numbersOnTrace = numbersOnTrace;
 
   final List<Race>? _races;
   @override
@@ -622,12 +636,22 @@ class _$EmitStateImpl implements _EmitState {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<GetNumbersOnTraceNowResult>? _numbersOnTrace;
+  @override
+  List<GetNumbersOnTraceNowResult>? get numbersOnTrace {
+    final value = _numbersOnTrace;
+    if (value == null) return null;
+    if (_numbersOnTrace is EqualUnmodifiableListView) return _numbersOnTrace;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final Notification? notification;
 
   @override
   String toString() {
-    return 'DatabaseEvent.emitState(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, notification: $notification)';
+    return 'DatabaseEvent.emitState(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification)';
   }
 
   @override
@@ -644,6 +668,8 @@ class _$EmitStateImpl implements _EmitState {
             const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
             const DeepCollectionEquality().equals(other._trails, _trails) &&
+            const DeepCollectionEquality()
+                .equals(other._numbersOnTrace, _numbersOnTrace) &&
             (identical(other.notification, notification) ||
                 other.notification == notification));
   }
@@ -659,6 +685,7 @@ class _$EmitStateImpl implements _EmitState {
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_trails),
+      const DeepCollectionEquality().hash(_numbersOnTrace),
       notification);
 
   /// Create a copy of DatabaseEvent
@@ -682,6 +709,7 @@ class _$EmitStateImpl implements _EmitState {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -706,7 +734,7 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(int startId) setDNSatStart,
   }) {
     return emitState(races, stages, riders, statuses, participants, starts,
-        finishes, trails, notification);
+        finishes, trails, numbersOnTrace, notification);
   }
 
   @override
@@ -722,6 +750,7 @@ class _$EmitStateImpl implements _EmitState {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -745,7 +774,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(int startId)? setDNSatStart,
   }) {
     return emitState?.call(races, stages, riders, statuses, participants,
-        starts, finishes, trails, notification);
+        starts, finishes, trails, numbersOnTrace, notification);
   }
 
   @override
@@ -761,6 +790,7 @@ class _$EmitStateImpl implements _EmitState {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -786,7 +816,7 @@ class _$EmitStateImpl implements _EmitState {
   }) {
     if (emitState != null) {
       return emitState(races, stages, riders, statuses, participants, starts,
-          finishes, trails, notification);
+          finishes, trails, numbersOnTrace, notification);
     }
     return orElse();
   }
@@ -865,6 +895,7 @@ abstract class _EmitState implements DatabaseEvent {
       final List<Start>? starts,
       final List<Finish>? finishes,
       final List<Trail>? trails,
+      final List<GetNumbersOnTraceNowResult>? numbersOnTrace,
       final Notification? notification}) = _$EmitStateImpl;
 
   List<Race>? get races;
@@ -875,6 +906,7 @@ abstract class _EmitState implements DatabaseEvent {
   List<Start>? get starts;
   List<Finish>? get finishes;
   List<Trail>? get trails;
+  List<GetNumbersOnTraceNowResult>? get numbersOnTrace;
   Notification? get notification;
 
   /// Create a copy of DatabaseEvent
@@ -963,6 +995,7 @@ class _$AddRaceImpl implements _AddRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -1002,6 +1035,7 @@ class _$AddRaceImpl implements _AddRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -1040,6 +1074,7 @@ class _$AddRaceImpl implements _AddRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -1223,6 +1258,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -1262,6 +1298,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -1300,6 +1337,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -1484,6 +1522,7 @@ class _$AddStageImpl implements _AddStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -1523,6 +1562,7 @@ class _$AddStageImpl implements _AddStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -1561,6 +1601,7 @@ class _$AddStageImpl implements _AddStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -1744,6 +1785,7 @@ class _$SelectStagesImpl implements _SelectStages {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -1783,6 +1825,7 @@ class _$SelectStagesImpl implements _SelectStages {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -1821,6 +1864,7 @@ class _$SelectStagesImpl implements _SelectStages {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -2004,6 +2048,7 @@ class _$DeleteStageImpl implements _DeleteStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -2043,6 +2088,7 @@ class _$DeleteStageImpl implements _DeleteStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -2081,6 +2127,7 @@ class _$DeleteStageImpl implements _DeleteStage {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -2267,6 +2314,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -2306,6 +2354,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -2344,6 +2393,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -2561,6 +2611,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -2600,6 +2651,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -2638,6 +2690,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -2905,6 +2958,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -2951,6 +3005,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -2996,6 +3051,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -3210,6 +3266,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -3249,6 +3306,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -3287,6 +3345,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -3473,6 +3532,7 @@ class _$setDNSImpl implements _setDNS {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)
         emitState,
     required TResult Function(Race race) addRace,
@@ -3512,6 +3572,7 @@ class _$setDNSImpl implements _setDNS {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult? Function(Race race)? addRace,
@@ -3550,6 +3611,7 @@ class _$setDNSImpl implements _setDNS {
             List<Start>? starts,
             List<Finish>? finishes,
             List<Trail>? trails,
+            List<GetNumbersOnTraceNowResult>? numbersOnTrace,
             Notification? notification)?
         emitState,
     TResult Function(Race race)? addRace,
@@ -3669,6 +3731,7 @@ mixin _$DatabaseState {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
+            List<GetNumbersOnTraceNowResult> numbersOnTrace,
             Notification? notification)
         initialized,
   }) =>
@@ -3685,6 +3748,7 @@ mixin _$DatabaseState {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
+            List<GetNumbersOnTraceNowResult> numbersOnTrace,
             Notification? notification)?
         initialized,
   }) =>
@@ -3701,6 +3765,7 @@ mixin _$DatabaseState {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
+            List<GetNumbersOnTraceNowResult> numbersOnTrace,
             Notification? notification)?
         initialized,
     required TResult orElse(),
@@ -3799,6 +3864,7 @@ class _$InitialImpl implements _Initial {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
+            List<GetNumbersOnTraceNowResult> numbersOnTrace,
             Notification? notification)
         initialized,
   }) {
@@ -3818,6 +3884,7 @@ class _$InitialImpl implements _Initial {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
+            List<GetNumbersOnTraceNowResult> numbersOnTrace,
             Notification? notification)?
         initialized,
   }) {
@@ -3837,6 +3904,7 @@ class _$InitialImpl implements _Initial {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
+            List<GetNumbersOnTraceNowResult> numbersOnTrace,
             Notification? notification)?
         initialized,
     required TResult orElse(),
@@ -3898,6 +3966,7 @@ abstract class _$$InitializedImplCopyWith<$Res> {
       List<Start> starts,
       List<Finish> finishes,
       List<Trail> trails,
+      List<GetNumbersOnTraceNowResult> numbersOnTrace,
       Notification? notification});
 
   $NotificationCopyWith<$Res>? get notification;
@@ -3924,6 +3993,7 @@ class __$$InitializedImplCopyWithImpl<$Res>
     Object? starts = null,
     Object? finishes = null,
     Object? trails = null,
+    Object? numbersOnTrace = null,
     Object? notification = freezed,
   }) {
     return _then(_$InitializedImpl(
@@ -3959,6 +4029,10 @@ class __$$InitializedImplCopyWithImpl<$Res>
           ? _value._trails
           : trails // ignore: cast_nullable_to_non_nullable
               as List<Trail>,
+      numbersOnTrace: null == numbersOnTrace
+          ? _value._numbersOnTrace
+          : numbersOnTrace // ignore: cast_nullable_to_non_nullable
+              as List<GetNumbersOnTraceNowResult>,
       notification: freezed == notification
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
@@ -3993,6 +4067,7 @@ class _$InitializedImpl implements _Initialized {
       required final List<Start> starts,
       required final List<Finish> finishes,
       required final List<Trail> trails,
+      required final List<GetNumbersOnTraceNowResult> numbersOnTrace,
       this.notification})
       : _races = races,
         _stages = stages,
@@ -4001,7 +4076,8 @@ class _$InitializedImpl implements _Initialized {
         _participants = participants,
         _starts = starts,
         _finishes = finishes,
-        _trails = trails;
+        _trails = trails,
+        _numbersOnTrace = numbersOnTrace;
 
   final List<Race> _races;
   @override
@@ -4067,12 +4143,20 @@ class _$InitializedImpl implements _Initialized {
     return EqualUnmodifiableListView(_trails);
   }
 
+  final List<GetNumbersOnTraceNowResult> _numbersOnTrace;
+  @override
+  List<GetNumbersOnTraceNowResult> get numbersOnTrace {
+    if (_numbersOnTrace is EqualUnmodifiableListView) return _numbersOnTrace;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_numbersOnTrace);
+  }
+
   @override
   final Notification? notification;
 
   @override
   String toString() {
-    return 'DatabaseState.initialized(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, notification: $notification)';
+    return 'DatabaseState.initialized(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification)';
   }
 
   @override
@@ -4089,6 +4173,8 @@ class _$InitializedImpl implements _Initialized {
             const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
             const DeepCollectionEquality().equals(other._trails, _trails) &&
+            const DeepCollectionEquality()
+                .equals(other._numbersOnTrace, _numbersOnTrace) &&
             (identical(other.notification, notification) ||
                 other.notification == notification));
   }
@@ -4104,6 +4190,7 @@ class _$InitializedImpl implements _Initialized {
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_trails),
+      const DeepCollectionEquality().hash(_numbersOnTrace),
       notification);
 
   /// Create a copy of DatabaseState
@@ -4127,11 +4214,12 @@ class _$InitializedImpl implements _Initialized {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
+            List<GetNumbersOnTraceNowResult> numbersOnTrace,
             Notification? notification)
         initialized,
   }) {
     return initialized(races, stages, riders, statuses, participants, starts,
-        finishes, trails, notification);
+        finishes, trails, numbersOnTrace, notification);
   }
 
   @override
@@ -4147,11 +4235,12 @@ class _$InitializedImpl implements _Initialized {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
+            List<GetNumbersOnTraceNowResult> numbersOnTrace,
             Notification? notification)?
         initialized,
   }) {
     return initialized?.call(races, stages, riders, statuses, participants,
-        starts, finishes, trails, notification);
+        starts, finishes, trails, numbersOnTrace, notification);
   }
 
   @override
@@ -4167,13 +4256,14 @@ class _$InitializedImpl implements _Initialized {
             List<Start> starts,
             List<Finish> finishes,
             List<Trail> trails,
+            List<GetNumbersOnTraceNowResult> numbersOnTrace,
             Notification? notification)?
         initialized,
     required TResult orElse(),
   }) {
     if (initialized != null) {
       return initialized(races, stages, riders, statuses, participants, starts,
-          finishes, trails, notification);
+          finishes, trails, numbersOnTrace, notification);
     }
     return orElse();
   }
@@ -4220,6 +4310,7 @@ abstract class _Initialized implements DatabaseState {
       required final List<Start> starts,
       required final List<Finish> finishes,
       required final List<Trail> trails,
+      required final List<GetNumbersOnTraceNowResult> numbersOnTrace,
       final Notification? notification}) = _$InitializedImpl;
 
   List<Race> get races;
@@ -4230,6 +4321,7 @@ abstract class _Initialized implements DatabaseState {
   List<Start> get starts;
   List<Finish> get finishes;
   List<Trail> get trails;
+  List<GetNumbersOnTraceNowResult> get numbersOnTrace;
   Notification? get notification;
 
   /// Create a copy of DatabaseState

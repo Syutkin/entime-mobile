@@ -8,7 +8,9 @@ import '../drift/app_database.dart';
 import '../model/notification.dart';
 
 part 'database_bloc.freezed.dart';
+
 part 'database_event.dart';
+
 part 'database_state.dart';
 
 class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
@@ -22,6 +24,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   List<Start> _starts = [];
   List<Finish> _finishes = [];
   List<Trail> _trails = [];
+  List<GetNumbersOnTraceNowResult> _numbersOnTrace = [];
+
   // List<ExistedStartingParticipantsResult> _newStartingParticipant = [];
 
   int _raceId = 0;
@@ -77,6 +81,14 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     //   add(const DatabaseEvent.onChanged());
     // });
 
+    _db
+        .getNumbersOnTraceNow(stageId: _stageId, timeNow: "'now', 'localtime'")
+        .watch()
+        .listen((event) async {
+      _numbersOnTrace = event;
+      add(const DatabaseEvent.emitState());
+    });
+
     on<DatabaseEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         initialize: (event) async {
@@ -98,6 +110,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               starts: _starts,
               finishes: _finishes,
               trails: _trails,
+              numbersOnTrace: _numbersOnTrace,
             ),
           );
         },
@@ -112,6 +125,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               starts: event.starts ?? _starts,
               finishes: event.finishes ?? _finishes,
               trails: event.trails ?? _trails,
+              numbersOnTrace: event.numbersOnTrace ?? _numbersOnTrace,
               notification: event.notification,
             ),
           );
@@ -187,6 +201,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         setDNSatStart: (event) {
           _db.setDNSatStart(event.startId);
         },
+        // getNumbersOnTrace: (event) async {
+        //   await _db.getNumbersOnTrace(stageId: _stageId);
+        // },
       );
     });
   }
