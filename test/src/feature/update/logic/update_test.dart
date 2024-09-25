@@ -13,6 +13,7 @@ import 'update_test.mocks.dart';
 // Create new instances of this class in each test.
 @GenerateMocks([http.Client, AppInfoProvider])
 void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
   final client = MockClient();
   final appInfoProvider = MockAppInfoProvider();
   final settings = await SharedPrefsSettingsProvider.load();

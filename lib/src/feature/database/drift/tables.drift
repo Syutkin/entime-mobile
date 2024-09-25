@@ -40,7 +40,7 @@ CREATE TABLE participants (
 	race_id integer NOT NULL,
 	rider_id integer NOT NULL,
 	number integer NOT NULL,
-	category text NOT NULL,
+	category text, /* может быть NULL для быстрого добавления номера на старте */
 	rfid text,
 	status_id integer NOT NULL DEFAULT 1,
     FOREIGN KEY (rider_id) REFERENCES riders(id),
@@ -85,7 +85,7 @@ CREATE TABLE trails (
 	comment text
 );
 
-selectRaces: SELECT * FROM races WHERE is_deleted = false;
+getRaces: SELECT * FROM races WHERE is_deleted = false;
 
 addRace:
 INSERT INTO races (name, start_date, finish_date, location)
@@ -93,9 +93,18 @@ VALUES (:name, :start_date, :finish_date, :location);
 
 deleteRace: UPDATE races SET is_deleted = true WHERE id = :id;
 
-selectStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false;
+getStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false;
 addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
 deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
+
+getNumberAtStarts:
+SELECT *
+FROM starts, participants
+WHERE
+    participants.id = starts.participant_id
+    AND starts.stage_id = :stage_id
+    AND participants.number = :number;
+
 
 
 
@@ -281,10 +290,12 @@ UPDATE finishes
 SET number = :number
 WHERE id = :id;
 
+/*
 _clearNumberAtFinish:
 UPDATE finishes
 SET number = :number
 WHERE id = :id;
+*/
 
 _setStatusForNumberAtStage:
 UPDATE starts

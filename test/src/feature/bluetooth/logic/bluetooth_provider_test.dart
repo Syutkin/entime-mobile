@@ -8,6 +8,7 @@ import 'bluetooth_provider_test.mocks.dart';
 
 @GenerateMocks([FlutterBluetoothSerial])
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   group('IBluetoothProvider:', () {
     test('Initialize', () async {
       final FlutterBluetoothSerial flutterBluetoothSerial =

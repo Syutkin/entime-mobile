@@ -58,7 +58,7 @@ void main() async {
     settingsProvider: settings,
   );
 
-  
+
 
   final CountdownAtStart countdown = CountdownAtStart(database: database);
 

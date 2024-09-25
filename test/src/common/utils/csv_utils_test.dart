@@ -6,6 +6,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
   final Directory directory = await getApplicationDocumentsDirectory();
   final File testFile = File(join(directory.path, 'test_csv.csv'));
   final referenceFile = File('test/src/common/utils/startlist.csv');

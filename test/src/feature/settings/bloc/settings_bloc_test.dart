@@ -23,6 +23,7 @@ class MockSettingsProvider extends Mock implements SettingsProvider {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   group('SettingsBloc', () {
     final defaultSettingsProvider =
         MockSettingsProvider(const AppSettings.defaults());

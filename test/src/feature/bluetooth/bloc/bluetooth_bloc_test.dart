@@ -31,6 +31,7 @@ class MockFlutterBluetoothSerial extends Mock
     implements FlutterBluetoothSerial {}
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   group('BluetoothBloc:', () {
     late MockBluetoothProvider bluetoothProvider;
     late BluetoothDeviceWithAvailability deviceWithAvailability;

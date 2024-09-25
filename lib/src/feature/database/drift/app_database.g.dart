@@ -1746,10 +1746,10 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   static const VerificationMeta _categoryMeta =
       const VerificationMeta('category');
   late final GeneratedColumn<String> category = GeneratedColumn<String>(
-      'category', aliasedName, false,
+      'category', aliasedName, true,
       type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
+      requiredDuringInsert: false,
+      $customConstraints: '');
   static const VerificationMeta _rfidMeta = const VerificationMeta('rfid');
   late final GeneratedColumn<String> rfid = GeneratedColumn<String>(
       'rfid', aliasedName, true,
@@ -1801,8 +1801,6 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     if (data.containsKey('category')) {
       context.handle(_categoryMeta,
           category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
-    } else if (isInserting) {
-      context.missing(_categoryMeta);
     }
     if (data.containsKey('rfid')) {
       context.handle(
@@ -1830,7 +1828,7 @@ class Participants extends Table with TableInfo<Participants, Participant> {
       number: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}number'])!,
       category: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}category'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}category']),
       rfid: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}rfid']),
       statusId: attachedDatabase.typeMapping
@@ -1857,7 +1855,9 @@ class Participant extends DataClass implements Insertable<Participant> {
   final int raceId;
   final int riderId;
   final int number;
-  final String category;
+  final String? category;
+
+  /// может быть NULL для быстрого добавления номера на старте
   final String? rfid;
   final int statusId;
   const Participant(
@@ -1865,7 +1865,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       required this.raceId,
       required this.riderId,
       required this.number,
-      required this.category,
+      this.category,
       this.rfid,
       required this.statusId});
   @override
@@ -1877,7 +1877,9 @@ class Participant extends DataClass implements Insertable<Participant> {
     map['race_id'] = Variable<int>(raceId);
     map['rider_id'] = Variable<int>(riderId);
     map['number'] = Variable<int>(number);
-    map['category'] = Variable<String>(category);
+    if (!nullToAbsent || category != null) {
+      map['category'] = Variable<String>(category);
+    }
     if (!nullToAbsent || rfid != null) {
       map['rfid'] = Variable<String>(rfid);
     }
@@ -1891,7 +1893,9 @@ class Participant extends DataClass implements Insertable<Participant> {
       raceId: Value(raceId),
       riderId: Value(riderId),
       number: Value(number),
-      category: Value(category),
+      category: category == null && nullToAbsent
+          ? const Value.absent()
+          : Value(category),
       rfid: rfid == null && nullToAbsent ? const Value.absent() : Value(rfid),
       statusId: Value(statusId),
     );
@@ -1905,7 +1909,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       raceId: serializer.fromJson<int>(json['race_id']),
       riderId: serializer.fromJson<int>(json['rider_id']),
       number: serializer.fromJson<int>(json['number']),
-      category: serializer.fromJson<String>(json['category']),
+      category: serializer.fromJson<String?>(json['category']),
       rfid: serializer.fromJson<String?>(json['rfid']),
       statusId: serializer.fromJson<int>(json['status_id']),
     );
@@ -1918,7 +1922,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       'race_id': serializer.toJson<int>(raceId),
       'rider_id': serializer.toJson<int>(riderId),
       'number': serializer.toJson<int>(number),
-      'category': serializer.toJson<String>(category),
+      'category': serializer.toJson<String?>(category),
       'rfid': serializer.toJson<String?>(rfid),
       'status_id': serializer.toJson<int>(statusId),
     };
@@ -1929,7 +1933,7 @@ class Participant extends DataClass implements Insertable<Participant> {
           int? raceId,
           int? riderId,
           int? number,
-          String? category,
+          Value<String?> category = const Value.absent(),
           Value<String?> rfid = const Value.absent(),
           int? statusId}) =>
       Participant(
@@ -1937,7 +1941,7 @@ class Participant extends DataClass implements Insertable<Participant> {
         raceId: raceId ?? this.raceId,
         riderId: riderId ?? this.riderId,
         number: number ?? this.number,
-        category: category ?? this.category,
+        category: category.present ? category.value : this.category,
         rfid: rfid.present ? rfid.value : this.rfid,
         statusId: statusId ?? this.statusId,
       );
@@ -1988,7 +1992,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   final Value<int> raceId;
   final Value<int> riderId;
   final Value<int> number;
-  final Value<String> category;
+  final Value<String?> category;
   final Value<String?> rfid;
   final Value<int> statusId;
   const ParticipantsCompanion({
@@ -2005,13 +2009,12 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     required int raceId,
     required int riderId,
     required int number,
-    required String category,
+    this.category = const Value.absent(),
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
   })  : raceId = Value(raceId),
         riderId = Value(riderId),
-        number = Value(number),
-        category = Value(category);
+        number = Value(number);
   static Insertable<Participant> custom({
     Expression<int>? id,
     Expression<int>? raceId,
@@ -2037,7 +2040,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       Value<int>? raceId,
       Value<int>? riderId,
       Value<int>? number,
-      Value<String>? category,
+      Value<String?>? category,
       Value<String?>? rfid,
       Value<int>? statusId}) {
     return ParticipantsCompanion(
@@ -3086,7 +3089,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Participants participants = Participants(this);
   late final Finishes finishes = Finishes(this);
   late final Starts starts = Starts(this);
-  Selectable<Race> selectRaces() {
+  Selectable<Race> getRaces() {
     return customSelect('SELECT * FROM races WHERE is_deleted = FALSE',
         variables: [],
         readsFrom: {
@@ -3120,7 +3123,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Selectable<Stage> selectStages({required int raceId}) {
+  Selectable<Stage> getStages({required int raceId}) {
     return customSelect(
         'SELECT * FROM stages WHERE race_id = ?1 AND is_deleted = FALSE',
         variables: [
@@ -3153,6 +3156,39 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Selectable<GetNumberAtStartsResult> getNumberAtStarts(
+      {required int stageId, required int number}) {
+    return customSelect(
+        'SELECT * FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
+        variables: [
+          Variable<int>(stageId),
+          Variable<int>(number)
+        ],
+        readsFrom: {
+          starts,
+          participants,
+        }).map((QueryRow row) => GetNumberAtStartsResult(
+          id: row.readNullable<int>('id'),
+          stageId: row.read<int>('stage_id'),
+          participantId: row.read<int>('participant_id'),
+          startTime: row.read<String>('start_time'),
+          timestamp: row.readNullable<String>('timestamp'),
+          automaticStartTime: row.readNullable<String>('automatic_start_time'),
+          automaticCorrection: row.readNullable<int>('automatic_correction'),
+          manualStartTime: row.readNullable<String>('manual_start_time'),
+          manualCorrection: row.readNullable<int>('manual_correction'),
+          statusId: row.read<int>('status_id'),
+          finishId: row.readNullable<int>('finish_id'),
+          id1: row.readNullable<int>('id'),
+          raceId: row.read<int>('race_id'),
+          riderId: row.read<int>('rider_id'),
+          number: row.read<int>('number'),
+          category: row.readNullable<String>('category'),
+          rfid: row.readNullable<String>('rfid'),
+          statusId1: row.read<int>('status_id'),
+        ));
+  }
+
   Selectable<GetParticipantsAtStartResult> getParticipantsAtStart(
       {required int stageId}) {
     return customSelect(
@@ -3168,7 +3204,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           riderId: row.read<int>('rider_id'),
           raceId: row.read<int>('race_id'),
           number: row.read<int>('number'),
-          category: row.read<String>('category'),
+          category: row.readNullable<String>('category'),
           rfid: row.readNullable<String>('rfid'),
           participantStatusId: row.read<int>('participant_status_id'),
           name: row.read<String>('name'),
@@ -3223,7 +3259,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           raceId: row.read<int>('race_id'),
           riderId: row.read<int>('rider_id'),
           number: row.read<int>('number'),
-          category: row.read<String>('category'),
+          category: row.readNullable<String>('category'),
           rfid: row.readNullable<String>('rfid'),
           statusId1: row.read<int>('status_id'),
         ));
@@ -3371,7 +3407,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           raceId: row.read<int>('race_id'),
           riderId: row.read<int>('rider_id'),
           number: row.read<int>('number'),
-          category: row.read<String>('category'),
+          category: row.readNullable<String>('category'),
           rfid: row.readNullable<String>('rfid'),
           statusId1: row.read<int>('status_id'),
         ));
@@ -3480,15 +3516,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   }
 
   Future<int> _setNumberToFinish({int? number, int? id}) {
-    return customUpdate(
-      'UPDATE finishes SET number = ?1 WHERE id = ?2',
-      variables: [Variable<int>(number), Variable<int>(id)],
-      updates: {finishes},
-      updateKind: UpdateKind.update,
-    );
-  }
-
-  Future<int> _clearNumberAtFinish({int? number, int? id}) {
     return customUpdate(
       'UPDATE finishes SET number = ?1 WHERE id = ?2',
       variables: [Variable<int>(number), Variable<int>(id)],
@@ -4279,7 +4306,7 @@ typedef $ParticipantsCreateCompanionBuilder = ParticipantsCompanion Function({
   required int raceId,
   required int riderId,
   required int number,
-  required String category,
+  Value<String?> category,
   Value<String?> rfid,
   Value<int> statusId,
 });
@@ -4288,7 +4315,7 @@ typedef $ParticipantsUpdateCompanionBuilder = ParticipantsCompanion Function({
   Value<int> raceId,
   Value<int> riderId,
   Value<int> number,
-  Value<String> category,
+  Value<String?> category,
   Value<String?> rfid,
   Value<int> statusId,
 });
@@ -4395,7 +4422,7 @@ class $ParticipantsTableManager extends RootTableManager<
             Value<int> raceId = const Value.absent(),
             Value<int> riderId = const Value.absent(),
             Value<int> number = const Value.absent(),
-            Value<String> category = const Value.absent(),
+            Value<String?> category = const Value.absent(),
             Value<String?> rfid = const Value.absent(),
             Value<int> statusId = const Value.absent(),
           }) =>
@@ -4413,7 +4440,7 @@ class $ParticipantsTableManager extends RootTableManager<
             required int raceId,
             required int riderId,
             required int number,
-            required String category,
+            Value<String?> category = const Value.absent(),
             Value<String?> rfid = const Value.absent(),
             Value<int> statusId = const Value.absent(),
           }) =>
@@ -4858,11 +4885,52 @@ class $AppDatabaseManager {
   $StartsTableManager get starts => $StartsTableManager(_db, _db.starts);
 }
 
+class GetNumberAtStartsResult {
+  final int? id;
+  final int stageId;
+  final int participantId;
+  final String startTime;
+  final String? timestamp;
+  final String? automaticStartTime;
+  final int? automaticCorrection;
+  final String? manualStartTime;
+  final int? manualCorrection;
+  final int statusId;
+  final int? finishId;
+  final int? id1;
+  final int raceId;
+  final int riderId;
+  final int number;
+  final String? category;
+  final String? rfid;
+  final int statusId1;
+  GetNumberAtStartsResult({
+    this.id,
+    required this.stageId,
+    required this.participantId,
+    required this.startTime,
+    this.timestamp,
+    this.automaticStartTime,
+    this.automaticCorrection,
+    this.manualStartTime,
+    this.manualCorrection,
+    required this.statusId,
+    this.finishId,
+    this.id1,
+    required this.raceId,
+    required this.riderId,
+    required this.number,
+    this.category,
+    this.rfid,
+    required this.statusId1,
+  });
+}
+
 class GetParticipantsAtStartResult {
   final int riderId;
   final int raceId;
   final int number;
-  final String category;
+  final String? category;
   final String? rfid;
   final int participantStatusId;
   final String name;
@@ -4887,7 +4955,7 @@ class GetParticipantsAtStartResult {
     required this.riderId,
     required this.raceId,
     required this.number,
-    required this.category,
+    this.category,
     this.rfid,
     required this.participantStatusId,
     required this.name,
@@ -4927,7 +4995,7 @@ class GetExistedStartingParticipantsResult {
   final int raceId;
   final int riderId;
   final int number;
-  final String category;
+  final String? category;
   final String? rfid;
   final int statusId1;
   GetExistedStartingParticipantsResult({
@@ -4946,7 +5014,7 @@ class GetExistedStartingParticipantsResult {
     required this.raceId,
     required this.riderId,
     required this.number,
-    required this.category,
+    this.category,
     this.rfid,
     required this.statusId1,
   });
@@ -4998,7 +5066,7 @@ class GetNumbersOnTraceNowResult {
   final int raceId;
   final int riderId;
   final int number;
-  final String category;
+  final String? category;
   final String? rfid;
   final int statusId1;
   GetNumbersOnTraceNowResult({
@@ -5017,7 +5085,7 @@ class GetNumbersOnTraceNowResult {
     required this.raceId,
     required this.riderId,
     required this.number,
-    required this.category,
+    this.category,
     this.rfid,
     required this.statusId1,
   });

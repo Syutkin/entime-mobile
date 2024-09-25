@@ -52,9 +52,16 @@ class AppDatabase extends _$AppDatabase {
           'already set or number $number already started',
         );
         return res;
+      } else {
+        logger.i(
+          'Database -> Start time $startTime and number $number not found',
+        );
       }
     }
 
+    logger.i(
+      'Database -> Checking number $number at participants...',
+    );
     final participantAtRace = await (select(participants)
           ..where(
             (participant) =>
@@ -65,6 +72,9 @@ class AppDatabase extends _$AppDatabase {
 
     if (participantAtRace.isEmpty) {
       //Участника с заданным номером не было в соревновании, создаём запись в riders, participants и в starts
+      logger.i(
+        'Database -> Creating new participant with number $number and start time $startTime...',
+      );
       final raceName = await (select(races)
             ..where(
               (name) => races.id.equals(stage.raceId),
@@ -90,6 +100,9 @@ class AppDatabase extends _$AppDatabase {
         ),
       );
     } else {
+      logger.i(
+        'Database -> Number $number already in participants list. Checking at starts...',
+      );
       //Номер уже участвует в соревновании, ищем его на старте
       final start = await (select(starts)
             ..where(
@@ -100,6 +113,9 @@ class AppDatabase extends _$AppDatabase {
           .get();
       // Если номера не было в стартовом протоколе на СУ, добавляем
       if (start.isEmpty) {
+        logger.i(
+          'Database -> Adding number $number to starts...',
+        );
         await into(starts).insert(
           StartsCompanion(
             startTime: Value(startTime),
@@ -109,6 +125,9 @@ class AppDatabase extends _$AppDatabase {
         );
       } else {
         //Номер уже был в стартовом протоколе, обновляем
+        logger.i(
+          'Database -> Number $number already in starts list. Update start time to $startTime...',
+        );
         await (update(starts)
               ..where(
                 (start) =>
@@ -347,8 +366,7 @@ class AppDatabase extends _$AppDatabase {
   /// от предыдущего нескрытого, неручного финишного времени без присвоенного номера,
   /// то записываемое время будет автоматически скрыто
   Future<int?> addFinishTime({
-    required int raceId,
-    required int stageId,
+    required Stage stage,
     required String finish,
     required DateTime timeStamp,
     int finishDelay = 0,
@@ -361,7 +379,7 @@ class AppDatabase extends _$AppDatabase {
     int? workingNumber = number;
     // узнаём предыдущее нескрытое автоматическое время
     final prevFinishTime =
-        await getLastFinishTime(stageId: stageId).getSingleOrNull();
+        await getLastFinishTime(stageId: stage.id!).getSingleOrNull();
     // проверяем разницу между предыдущей и поступившей отсечкой
     if (prevFinishTime != null) {
       final prevFinishDateTime = strTimeToDateTime(prevFinishTime);
@@ -387,12 +405,12 @@ class AppDatabase extends _$AppDatabase {
       // если нет нескрытого предыдущего времени - ставим номер
       if (prevFinishTime == null) {
         workingNumber = await _getAwaitingNumber(
-          stageId: stageId,
+          stageId: stage.id!,
           debugTimeNow: debugTimeNow,
         );
       } else {
         // ищем предыдущее время финиша с номером
-        final lastFinishTime = await _lastFinishTime(stageId: stageId);
+        final lastFinishTime = await _lastFinishTime(stageId: stage.id!);
         // если есть, проверяем разницу между финишами
         // если больше разницы в настройках - ставим номер
         if (lastFinishTime != null) {
@@ -404,14 +422,14 @@ class AppDatabase extends _$AppDatabase {
           final difference = finishTime.difference(lastFinishTime);
           if (difference.inMilliseconds > substituteNumbersDelay) {
             workingNumber = await _getAwaitingNumber(
-              stageId: stageId,
+              stageId: stage.id!,
               debugTimeNow: debugTimeNow,
             );
           }
           // если предыдущего времени с номером нет - ставим номер
         } else {
           workingNumber = await _getAwaitingNumber(
-            stageId: stageId,
+            stageId: stage.id!,
             debugTimeNow: debugTimeNow,
           );
         }
@@ -420,7 +438,7 @@ class AppDatabase extends _$AppDatabase {
 
     final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
     final finishId = await _addFinishTime(
-      stageId: stageId,
+      stageId: stage.id!,
       finishTime: finish,
       timestamp: phoneTime,
       number: workingNumber,
@@ -429,8 +447,8 @@ class AppDatabase extends _$AppDatabase {
     logger.i('Database -> Automatic finish time added: $finish');
     if (workingNumber != null) {
       await _setFinishInfoToStart(
-        raceId: raceId,
-        stageId: stageId,
+        raceId: stage.raceId,
+        stageId: stage.id!,
         number: workingNumber,
         finishId: finishId,
       );
@@ -487,14 +505,13 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<bool> addNumber(
-    int raceId,
-    int stageId,
+    Stage stage,
     int finishId,
     int number,
     String finishTime,
   ) async {
     final existingNumber = await _getNumberAtFinishes(
-      stageId: stageId,
+      stageId: stage.id!,
       number: number,
     ).getSingleOrNull();
     if (existingNumber == null) {
@@ -505,8 +522,8 @@ class AppDatabase extends _$AppDatabase {
     } else {
       await _setNumberToFinish(id: finishId, number: number);
       await _setFinishInfoToStart(
-        raceId: raceId,
-        stageId: stageId,
+        raceId: stage.raceId,
+        stageId: stage.id!,
         number: number,
         finishId: finishId,
       );
@@ -518,8 +535,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<void> clearNumberAtFinish(
-    int raceId,
-    int stageId,
+    Stage stage,
     int number,
   ) async {
     await customUpdate(
@@ -528,28 +544,27 @@ class AppDatabase extends _$AppDatabase {
       'WHERE number = ? AND stage_id = ?',
       variables: [
         Variable.withInt(number),
-        Variable.withInt(stageId),
+        Variable.withInt(stage.id!),
       ],
       updates: {finishes},
       updateKind: UpdateKind.update,
     );
     await _setFinishInfoToStart(
-      raceId: raceId,
-      stageId: stageId,
+      raceId: stage.raceId,
+      stageId: stage.id!,
       number: number,
     );
     logger.i('Database -> Finish info for number $number removed');
   }
 
   Future<int> _setStatus({
-    required int raceId,
-    required int stageId,
+    required Stage stage,
     required int number,
     required int statusId,
   }) async {
     final result = await _setStatusForNumberAtStage(
-      raceId: raceId,
-      stageId: stageId,
+      raceId: stage.raceId,
+      stageId: stage.id!,
       number: number,
       statusId: statusId,
     );
@@ -557,32 +572,28 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> setDNSForStage({
-    required int raceId,
-    required int stageId,
+    required Stage stage,
     required int number,
   }) async {
     final result = await _setStatus(
-      raceId: raceId,
-      stageId: stageId,
+      stage: stage,
       number: number,
       statusId: 2,
     );
-    logger.i('Database -> Set DNS to number: $number at stageId: $stageId');
+    logger.i('Database -> Set DNS to number: $number at stageId: ${stage.id}');
     return result;
   }
 
   Future<int> setDNFForStage({
-    required int raceId,
-    required int stageId,
+    required Stage stage,
     required int number,
   }) async {
     final result = await _setStatus(
-      raceId: raceId,
-      stageId: stageId,
+      stage: stage,
       number: number,
       statusId: 3,
     );
-    logger.i('Database -> Set DNF to number: $number at stageId: $stageId');
+    logger.i('Database -> Set DNF to number: $number at stageId: ${stage.id}');
     return result;
   }
 

@@ -1,9 +1,9 @@
 part of '../start_list_page.dart';
 
 Future<void> editStartTime(
-  BuildContext context,
-  GetParticipantsAtStartResult item,
-) async {
+    BuildContext context,
+    GetParticipantsAtStartResult item,
+    ) async {
   final automaticStartTimeController = TextEditingController();
   final automaticPhoneTimeController = TextEditingController();
   final manualCorrectionController = TextEditingController();
@@ -48,7 +48,7 @@ Future<void> editStartTime(
         item.name.isEmpty
             ? Localization.current.I18nStart_participantNumber(item.number)
             : Localization.current
-                .I18nStart_participantNumberWithName(item.number, item.name),
+            .I18nStart_participantNumberWithName(item.number, item.name),
       ),
       content: Form(
         key: formKey,
@@ -58,38 +58,38 @@ Future<void> editStartTime(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            item.category.isNotEmpty
+            item.category != null && item.category!.isNotEmpty
                 ? Text(
-                    Localization.current
-                        .I18nStart_participantCategory(item.category),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
+              Localization.current
+                  .I18nStart_participantCategory(item.category!),
+              style: Theme.of(context).textTheme.titleMedium,
+            )
                 : const SizedBox(),
             item.nickname != null && item.nickname!.isNotEmpty
                 ? Text(
-                    Localization.current
-                        .I18nStart_participantNickname(item.nickname!),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
+              Localization.current
+                  .I18nStart_participantNickname(item.nickname!),
+              style: Theme.of(context).textTheme.titleMedium,
+            )
                 : const SizedBox(),
             item.city != null && item.city!.isNotEmpty
                 ? Text(
-                    Localization.current.I18nStart_participantCity(item.city!),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
+              Localization.current.I18nStart_participantCity(item.city!),
+              style: Theme.of(context).textTheme.titleMedium,
+            )
                 : const SizedBox(),
             item.team != null && item.team!.isNotEmpty
                 ? Text(
-                    Localization.current.I18nStart_participantTeam(item.team!),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
+              Localization.current.I18nStart_participantTeam(item.team!),
+              style: Theme.of(context).textTheme.titleMedium,
+            )
                 : const SizedBox(),
             item.birthday != null && item.birthday!.isNotEmpty
                 ? Text(
-                    Localization.current
-                        .I18nStart_participantYear(item.birthday!),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
+              Localization.current
+                  .I18nStart_participantYear(item.birthday!),
+              style: Theme.of(context).textTheme.titleMedium,
+            )
                 : const SizedBox(),
             TextFormField(
               controller: startTimeController,
@@ -160,20 +160,20 @@ Future<void> editStartTime(
           onPressed: () {
             if (formKey.currentState!.validate()) {
               final automaticCorrection =
-                  int.tryParse(automaticCorrectionController.text);
+              int.tryParse(automaticCorrectionController.text);
               final manualCorrection =
-                  int.tryParse(manualCorrectionController.text);
+              int.tryParse(manualCorrectionController.text);
               context.read<DatabaseBloc>().add(
-                    DatabaseEvent.updateStartingInfo(
-                      startTime: startTimeController.text,
-                      automaticStartTime: automaticStartTimeController.text,
-                      automaticCorrection: automaticCorrection,
-                      manualStartTime: manualStartTimeController.text,
-                      manualCorrection: manualCorrection,
-                      stageId: item.stageId,
-                      participantId: item.participantId,
-                    ),
-                  );
+                DatabaseEvent.updateStartingInfo(
+                  startTime: startTimeController.text,
+                  automaticStartTime: automaticStartTimeController.text,
+                  automaticCorrection: automaticCorrection,
+                  manualStartTime: manualStartTimeController.text,
+                  manualCorrection: manualCorrection,
+                  stageId: item.stageId,
+                  participantId: item.participantId,
+                ),
+              );
               Navigator.of(context).pop();
             }
           },

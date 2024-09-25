@@ -34,14 +34,14 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   DatabaseBloc({required AppDatabase database})
       : _db = database,
         super(const _Initial()) {
-    _db.selectRaces().watch().listen((event) async {
+    _db.getRaces().watch().listen((event) async {
       _races = event;
       add(const DatabaseEvent.emitState());
     });
 
-    _db.selectStages(raceId: _raceId).watch().listen((event) async {
+    _db.getStages(raceId: _raceId).watch().listen((event) async {
       //! watch generates empty list at event
-      _stages = await _db.selectStages(raceId: _raceId).get();
+      _stages = await _db.getStages(raceId: _raceId).get();
       add(const DatabaseEvent.emitState());
     });
 
@@ -140,7 +140,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         },
         selectStages: (event) async {
           _raceId = event.raceId;
-          _stages = await _db.selectStages(raceId: _raceId).get();
+          _stages = await _db.getStages(raceId: _raceId).get();
           // _stages = await (_db.select(_db.stages)
           //       ..where((stage) => stage.raceId.equals(_raceId)))
           //     .get();

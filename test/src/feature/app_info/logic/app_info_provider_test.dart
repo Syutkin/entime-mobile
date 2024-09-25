@@ -11,6 +11,7 @@ import 'app_info_provider_test.mocks.dart';
 // Create new instances of this class in each test.
 @GenerateMocks([AndroidDeviceInfo])
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   group('AppInfoProvider:', () {
     test('Initialize', () async {
       final deviceInfo = MockAndroidDeviceInfo();
