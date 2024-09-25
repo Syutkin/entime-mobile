@@ -86,8 +86,13 @@ CREATE TABLE trails (
 );
 
 selectRaces: SELECT * FROM races WHERE is_deleted = false;
-addRace: INSERT INTO races (name, start_date, finish_date) VALUES (:name, :start_date, :finish_date);
+
+addRace:
+INSERT INTO races (name, start_date, finish_date, location)
+VALUES (:name, :start_date, :finish_date, :location);
+
 deleteRace: UPDATE races SET is_deleted = true WHERE id = :id;
+
 selectStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false;
 addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
 deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
@@ -241,13 +246,49 @@ WHERE
     AND finish_time NOT like 'DNF'
 ORDER BY finish_time DESC LIMIT 1;
 
-addFinishTimeStamp:
+_addFinishTime:
 INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_hidden)
 VALUES (:stage_id, :finish_time, :timestamp, :number, :is_hidden);
 
-setFinishInfoToStart:
+_setFinishInfoToStart:
 UPDATE starts
 SET finish_id = :finish_id
+FROM (SELECT id, number FROM participants WHERE race_id = :race_id ) as p
+WHERE
+    starts.participant_id = p.id
+    AND stage_id = :stage_id
+    AND p.number = :number;
+
+_addFinishTimeManual:
+INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_manual)
+VALUES (:stage_id, :finish_time, :finish_time, :number, true);
+
+_hideFinish:
+UPDATE finishes SET is_hidden = true WHERE id = :id;
+
+_hideAllFinishes:
+UPDATE finishes SET is_hidden = true;
+
+_getNumberAtFinishes:
+SELECT *
+FROM finishes
+WHERE
+    stage_id = :stage_id
+    AND number = :number;
+
+_setNumberToFinish:
+UPDATE finishes
+SET number = :number
+WHERE id = :id;
+
+_clearNumberAtFinish:
+UPDATE finishes
+SET number = :number
+WHERE id = :id;
+
+_setStatusForNumberAtStage:
+UPDATE starts
+SET status_id = :status_id
 FROM (SELECT id, number FROM participants WHERE race_id = :race_id ) as p
 WHERE
     starts.participant_id = p.id

@@ -239,6 +239,7 @@ class ProtocolProvider implements IProtocolProvider {
     return protocol;
   }
 
+  //ToDo: refactor to drift
   @override
   Future<List<Map<String, Object?>>> getStartToCsv() async {
     final db = await _db;
@@ -521,6 +522,7 @@ class ProtocolProvider implements IProtocolProvider {
     return null;
   }
 
+  //ToDo: refactor to drift
   @override
   Future<int> clearStartResultsDebug() async {
     final db = await _db;
@@ -582,6 +584,7 @@ class ProtocolProvider implements IProtocolProvider {
     return startProtocol;
   }
 
+  //ToDo: refactor to drift
   /// Загружает в протокол участников и их стартовое время (одно) из csv файла
   @override
   Future<void> loadStartItem(List<StartItemCsv> items) async {
@@ -668,6 +671,7 @@ class ProtocolProvider implements IProtocolProvider {
     return finishProtocol;
   }
 
+  //ToDo: refactor to drift
   @override
   Future<List<Map<String, Object?>>> getFinishToCsv() async {
     final db = await _db;
@@ -770,6 +774,7 @@ class ProtocolProvider implements IProtocolProvider {
     return workingNumber;
   }
 
+  //!transfered
   @override
   Future<int> addFinishTimeManual(String time) async {
     final db = await _db;
@@ -781,6 +786,7 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
+  //!transfered
   @override
   Future<int> hideFinish(int id) async {
     final db = await _db;
@@ -795,6 +801,7 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
+  //!transfered
   @override
   Future<int> hideAllFinish() async {
     final db = await _db;
@@ -808,6 +815,7 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
+  //!transfered
   @override
   Future<int> clearFinishResultsDebug() async {
     final db = await _db;
@@ -827,6 +835,7 @@ class ProtocolProvider implements IProtocolProvider {
     return result;
   }
 
+  //!transfered
   @override
   Future<bool> addNumber(int id, int number, String finishtime) async {
     final db = await _db;
@@ -849,6 +858,7 @@ class ProtocolProvider implements IProtocolProvider {
     return true;
   }
 
+  //!transfered
   @override
   Future<void> clearNumberAtFinish(int number) async {
     final db = await _db;
@@ -857,6 +867,7 @@ class ProtocolProvider implements IProtocolProvider {
     logger.i('Database -> Finishtime for number $number cleared');
   }
 
+  //!transfered
   @override
   Future<int> setDNF(int number) async {
     final db = await _db;

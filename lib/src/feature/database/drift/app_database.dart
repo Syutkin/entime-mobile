@@ -17,6 +17,8 @@ part 'app_database.g.dart';
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
+  AppDatabase.forTesting(DatabaseConnection super.connection);
+
   @override
   int get schemaVersion => 1;
 
@@ -201,7 +203,7 @@ class AppDatabase extends _$AppDatabase {
     return null;
   }
 
-//ToDo: исправить выставление значения только первому совпадению
+  //ToDo: исправить выставление значения только первому совпадению
   ///Устанавливает ручное стартовое время для участника
   ///
   ///Ищет участника с временем рядом с текущим (плюс-минус 15 секунд)
@@ -417,7 +419,7 @@ class AppDatabase extends _$AppDatabase {
     }
 
     final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
-    final finishId = await addFinishTimeStamp(
+    final finishId = await _addFinishTime(
       stageId: stageId,
       finishTime: finish,
       timestamp: phoneTime,
@@ -426,7 +428,7 @@ class AppDatabase extends _$AppDatabase {
     );
     logger.i('Database -> Automatic finish time added: $finish');
     if (workingNumber != null) {
-      await setFinishInfoToStart(
+      await _setFinishInfoToStart(
         raceId: raceId,
         stageId: stageId,
         number: workingNumber,
@@ -438,6 +440,154 @@ class AppDatabase extends _$AppDatabase {
     }
     return workingNumber;
   }
+
+  Future<int> addFinishTimeManual({
+    required int stageId,
+    required String finishTime,
+    int? number,
+  }) async {
+    final result = await _addFinishTimeManual(
+      stageId: stageId,
+      finishTime: finishTime,
+      number: number,
+    );
+    logger.i('Database -> Manual finish time added: $finishTime');
+    return result;
+  }
+
+  Future<int> hideFinish(int id) async {
+    final result = await _hideFinish(id: id);
+    logger.i('Database -> Finish times hided for id: $id');
+    return result;
+  }
+
+  Future<int> hideAllFinish() async {
+    final result = await _hideAllFinishes();
+    logger.i('Database -> All finish times hided');
+    return result;
+  }
+
+  Future<int> clearFinishResultsDebug(int stageId) async {
+    int result = await customUpdate(
+      'UPDATE starts SET finish_id = NULL WHERE stage_id = ?',
+      variables: [Variable.withInt(stageId)],
+      updates: {starts},
+      updateKind: UpdateKind.update,
+    );
+    result = await customUpdate(
+      'UPDATE finishes '
+      'SET number = NULL, is_hidden = false, '
+      'WHERE stage_id = ?',
+      variables: [Variable.withInt(stageId)],
+      updates: {finishes},
+      updateKind: UpdateKind.update,
+    );
+    logger.i('Database -> Results cleared');
+    return result;
+  }
+
+  Future<bool> addNumber(
+    int raceId,
+    int stageId,
+    int finishId,
+    int number,
+    String finishTime,
+  ) async {
+    final existingNumber = await _getNumberAtFinishes(
+      stageId: stageId,
+      number: number,
+    ).getSingleOrNull();
+    if (existingNumber == null) {
+      logger.i(
+        'Database -> Number $number already exists and therefore has not been added',
+      );
+      return false;
+    } else {
+      await _setNumberToFinish(id: finishId, number: number);
+      await _setFinishInfoToStart(
+        raceId: raceId,
+        stageId: stageId,
+        number: number,
+        finishId: finishId,
+      );
+      logger.i(
+        'Database -> Number $number added at rowid $finishId with finishtime: $finishTime',
+      );
+      return true;
+    }
+  }
+
+  Future<void> clearNumberAtFinish(
+    int raceId,
+    int stageId,
+    int number,
+  ) async {
+    await customUpdate(
+      'UPDATE finishes '
+      'SET number = NULL, '
+      'WHERE number = ? AND stage_id = ?',
+      variables: [
+        Variable.withInt(number),
+        Variable.withInt(stageId),
+      ],
+      updates: {finishes},
+      updateKind: UpdateKind.update,
+    );
+    await _setFinishInfoToStart(
+      raceId: raceId,
+      stageId: stageId,
+      number: number,
+    );
+    logger.i('Database -> Finish info for number $number removed');
+  }
+
+  Future<int> _setStatus({
+    required int raceId,
+    required int stageId,
+    required int number,
+    required int statusId,
+  }) async {
+    final result = await _setStatusForNumberAtStage(
+      raceId: raceId,
+      stageId: stageId,
+      number: number,
+      statusId: statusId,
+    );
+    return result;
+  }
+
+  Future<int> setDNSForStage({
+    required int raceId,
+    required int stageId,
+    required int number,
+  }) async {
+    final result = await _setStatus(
+      raceId: raceId,
+      stageId: stageId,
+      number: number,
+      statusId: 2,
+    );
+    logger.i('Database -> Set DNS to number: $number at stageId: $stageId');
+    return result;
+  }
+
+  Future<int> setDNFForStage({
+    required int raceId,
+    required int stageId,
+    required int number,
+  }) async {
+    final result = await _setStatus(
+      raceId: raceId,
+      stageId: stageId,
+      number: number,
+      statusId: 3,
+    );
+    logger.i('Database -> Set DNF to number: $number at stageId: $stageId');
+    return result;
+  }
+
+  // -------------------------
+  // вспомогательные функции
 
   Future<int?> _getAwaitingNumber({
     required int stageId,

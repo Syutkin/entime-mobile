@@ -3095,13 +3095,17 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   }
 
   Future<int> addRace(
-      {required String name, String? startDate, String? finishDate}) {
+      {required String name,
+      String? startDate,
+      String? finishDate,
+      String? location}) {
     return customInsert(
-      'INSERT INTO races (name, start_date, finish_date) VALUES (?1, ?2, ?3)',
+      'INSERT INTO races (name, start_date, finish_date, location) VALUES (?1, ?2, ?3, ?4)',
       variables: [
         Variable<String>(name),
         Variable<String>(startDate),
-        Variable<String>(finishDate)
+        Variable<String>(finishDate),
+        Variable<String>(location)
       ],
       updates: {races},
     );
@@ -3395,7 +3399,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).map((QueryRow row) => row.readNullable<String>('finish_time'));
   }
 
-  Future<int> addFinishTimeStamp(
+  Future<int> _addFinishTime(
       {required int stageId,
       String? finishTime,
       String? timestamp,
@@ -3414,7 +3418,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Future<int> setFinishInfoToStart(
+  Future<int> _setFinishInfoToStart(
       {int? finishId,
       required int raceId,
       required int stageId,
@@ -3423,6 +3427,85 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       'UPDATE starts SET finish_id = ?1 FROM (SELECT id, number FROM participants WHERE race_id = ?2) AS p WHERE starts.participant_id = p.id AND stage_id = ?3 AND p.number = ?4',
       variables: [
         Variable<int>(finishId),
+        Variable<int>(raceId),
+        Variable<int>(stageId),
+        Variable<int>(number)
+      ],
+      updates: {starts},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> _addFinishTimeManual(
+      {required int stageId, String? finishTime, int? number}) {
+    return customInsert(
+      'INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_manual) VALUES (?1, ?2, ?2, ?3, TRUE)',
+      variables: [
+        Variable<int>(stageId),
+        Variable<String>(finishTime),
+        Variable<int>(number)
+      ],
+      updates: {finishes},
+    );
+  }
+
+  Future<int> _hideFinish({int? id}) {
+    return customUpdate(
+      'UPDATE finishes SET is_hidden = TRUE WHERE id = ?1',
+      variables: [Variable<int>(id)],
+      updates: {finishes},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> _hideAllFinishes() {
+    return customUpdate(
+      'UPDATE finishes SET is_hidden = TRUE',
+      variables: [],
+      updates: {finishes},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Selectable<Finish> _getNumberAtFinishes({required int stageId, int? number}) {
+    return customSelect(
+        'SELECT * FROM finishes WHERE stage_id = ?1 AND number = ?2',
+        variables: [
+          Variable<int>(stageId),
+          Variable<int>(number)
+        ],
+        readsFrom: {
+          finishes,
+        }).asyncMap(finishes.mapFromRow);
+  }
+
+  Future<int> _setNumberToFinish({int? number, int? id}) {
+    return customUpdate(
+      'UPDATE finishes SET number = ?1 WHERE id = ?2',
+      variables: [Variable<int>(number), Variable<int>(id)],
+      updates: {finishes},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> _clearNumberAtFinish({int? number, int? id}) {
+    return customUpdate(
+      'UPDATE finishes SET number = ?1 WHERE id = ?2',
+      variables: [Variable<int>(number), Variable<int>(id)],
+      updates: {finishes},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> _setStatusForNumberAtStage(
+      {required int statusId,
+      required int raceId,
+      required int stageId,
+      required int number}) {
+    return customUpdate(
+      'UPDATE starts SET status_id = ?1 FROM (SELECT id, number FROM participants WHERE race_id = ?2) AS p WHERE starts.participant_id = p.id AND stage_id = ?3 AND p.number = ?4',
+      variables: [
+        Variable<int>(statusId),
         Variable<int>(raceId),
         Variable<int>(stageId),
         Variable<int>(number)
