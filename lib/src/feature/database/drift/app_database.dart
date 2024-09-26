@@ -150,7 +150,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Обновляет automaticStartTime и automaticCorrection
-  /// для участника, стартовое время которого лежит в пределах
+  /// для !первого участника, стартовое время которого лежит в пределах
   /// плюс/минус [deltaInSeconds] от заданного [time].
   ///
   /// Возвращает null при успехе, и список [Start] при неудаче
@@ -164,8 +164,9 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     final DateTime? dateGoTime = strTimeToDateTime(time);
     if (dateGoTime == null) {
-      assert(dateGoTime != null, 'dateGoTime must not be null');
-      return null;
+      throw FormatException('Invalid time format: $time');
+      // assert(dateGoTime != null, 'dateGoTime must not be null');
+      //   return null;
     }
     final String before = DateFormat('HH:mm:ss')
         .format(dateGoTime.subtract(Duration(seconds: deltaInSeconds)));
@@ -177,63 +178,62 @@ class AppDatabase extends _$AppDatabase {
     // проверяем что автоматическое время старта не установлено,
     // в этом случае устанавливаем время старта и вовращаем null.
     // В противном случае возвращаем StartItem.
-    if (!forceUpdate) {
-      logger.i('Database -> Checking existing start time...');
+    logger.i('Database -> Checking existing start time around $time...');
+    final participantsAroundTime = await getParticipantAroundTime(
+      stageId: stageId,
+      before: before,
+      after: after,
+    ).get();
 
-      // final res = await (select(starts)
-      //       ..where(
-      //         (start) =>
-      //             start.stageId.equals(stageId) &
-      //             start.startTime.isBetweenValues(before, after),
-      //       ))
-      //     .get();
-
-      final participantsAroundTime = await getParticipantAroundTime(
-        stageId: stageId,
-        before: before,
-        after: after,
-      ).get();
-
-      if (participantsAroundTime.isNotEmpty &&
+    if (participantsAroundTime.isNotEmpty) {
+      logger.i('Database -> Found participant with starting time '
+          '${participantsAroundTime.first.startTime}...');
+      if (!forceUpdate &&
           participantsAroundTime.first.automaticStartTime != null) {
-        logger.i('Database -> Start time exists');
-
+        logger.i('Database -> Start time already exists');
         return participantsAroundTime;
       }
+
+      final result = await (update(starts)
+            ..where(
+              (start) =>
+                  start.stageId.equals(stageId) &
+                  start.startTime.isBetweenValues(before, after),
+            ))
+          .write(
+        StartsCompanion(
+          automaticCorrection: Value(correction),
+          automaticStartTime: Value(time),
+          // startTime: Value(phoneTime),
+          timestamp: Value(phoneTime),
+          // statusId: const Value(1),
+        ),
+      );
+      logger.i('Database -> updated: $result lines');
+    } else {
+      logger.i(
+          'Database -> Can not find participant with start time around $time '
+          'with $deltaInSeconds seconds delta');
     }
-
-    final result = await (update(starts)
-          ..where(
-            (start) =>
-                start.stageId.equals(stageId) &
-                start.startTime.isBetweenValues(before, after),
-          ))
-        .write(
-      StartsCompanion(
-        automaticCorrection: Value(correction),
-        automaticStartTime: Value(time),
-        startTime: Value(phoneTime),
-        timestamp: const Value(null),
-        statusId: const Value(1),
-      ),
-    );
-    logger.i('Database -> updated: $result lines');
-
     return null;
   }
 
   //ToDo: исправить выставление значения только первому совпадению
   ///Устанавливает ручное стартовое время для участника
   ///
-  ///Ищет участника с временем рядом с текущим (плюс-минус 15 секунд)
+  ///Ищет участника с временем рядом с текущим (плюс-минус [deltaInSeconds] секунд)
   ///и устанавливает ему текущее время старта в ручную отсечку
   ///
-  ///Возращает 0 если участник не найден и rowid участника в случае успеха
-  ///(возврат rowid не тестировался ни в каком виде)
-  Future<int> updateManualStartTime(int stageId, DateTime time) async {
+  ///Возращает 0 если участник не найден и количество обновлённых участников в случае успеха
+  Future<int> updateManualStartTime({
+    required int stageId,
+    required DateTime time,
+    int deltaInSeconds = 15,
+  }) async {
     int result = 0;
-    final DateTime timeBefore = time.subtract(const Duration(seconds: 15));
-    final DateTime timeAfter = time.add(const Duration(seconds: 15));
+    final DateTime timeBefore =
+        time.subtract(Duration(seconds: deltaInSeconds));
+    final DateTime timeAfter = time.add(Duration(seconds: deltaInSeconds));
     final String before = DateFormat('HH:mm:ss').format(timeBefore);
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final String manualStartTime = DateFormat('HH:mm:ss,S').format(time);
@@ -260,17 +260,19 @@ class AppDatabase extends _$AppDatabase {
       );
       if (result > 0) {
         logger.i(
-          'Database -> Update manual start time for participant with id ${participantsAroundTime.first.participantId}',
+          'Database -> Update manual start time for participant with id '
+          '${participantsAroundTime.first.participantId}',
         );
       } else {
         logger.i(
-          'Database -> Error at updating manual start time for participant with id ${participantsAroundTime.first.participantId}',
+          'Database -> Error at updating manual start time for participant with id '
+          '${participantsAroundTime.first.participantId}',
         );
       }
     } else {
       logger.i(
-        'Database -> Cannot find participant with start time around $time',
-      );
+          'Database -> Can not find participant with start time around $manualStartTime '
+          'with $deltaInSeconds seconds delta');
     }
     return result;
   }
@@ -300,7 +302,7 @@ class AppDatabase extends _$AppDatabase {
     return x.length;
   }
 
-  //Используется для голосового сообщения
+//Используется для голосового сообщения
   Future<List<GetStartingParticipantAndFollowingResult>>
       getStartingParticipants({
     required String time,
@@ -597,8 +599,8 @@ class AppDatabase extends _$AppDatabase {
     return result;
   }
 
-  // -------------------------
-  // вспомогательные функции
+// -------------------------
+// вспомогательные функции
 
   Future<int?> _getAwaitingNumber({
     required int stageId,

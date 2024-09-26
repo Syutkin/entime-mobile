@@ -196,7 +196,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           );
         },
         updateManualStartTime: (event) async {
-          await _db.updateManualStartTime(event.stageId, event.time);
+          await _db.updateManualStartTime(
+              stageId: event.stageId, time: event.time);
         },
         setDNSatStart: (event) {
           _db.setDNSatStart(event.startId);
