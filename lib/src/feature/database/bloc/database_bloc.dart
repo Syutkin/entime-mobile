@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -200,7 +201,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               stageId: event.stageId, time: event.time);
         },
         setDNSatStart: (event) {
-          _db.setDNSatStart(event.startId);
+          _db.setStatusForStartId(
+              id: event.startId, status: ParticipantStatus.dns);
         },
         // getNumbersOnTrace: (event) async {
         //   await _db.getNumbersOnTrace(stageId: _stageId);

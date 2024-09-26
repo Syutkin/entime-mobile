@@ -1844,7 +1844,8 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   @override
   List<String> get customConstraints => const [
         'FOREIGN KEY(rider_id)REFERENCES riders(id)',
-        'FOREIGN KEY(race_id)REFERENCES races(id)'
+        'FOREIGN KEY(race_id)REFERENCES races(id)',
+        'FOREIGN KEY(status_id)REFERENCES statuses(id)'
       ];
   @override
   bool get dontWriteConstraints => true;
@@ -2690,7 +2691,8 @@ class Starts extends Table with TableInfo<Starts, Start> {
   List<String> get customConstraints => const [
         'FOREIGN KEY(stage_id)REFERENCES stages(id)',
         'FOREIGN KEY(participant_id)REFERENCES participants(id)',
-        'FOREIGN KEY(finish_id)REFERENCES finishes(id)'
+        'FOREIGN KEY(finish_id)REFERENCES finishes(id)',
+        'FOREIGN KEY(status_id)REFERENCES statuses(id)'
       ];
   @override
   bool get dontWriteConstraints => true;
@@ -3159,7 +3161,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<GetNumberAtStartsResult> getNumberAtStarts(
       {required int stageId, required int number}) {
     return customSelect(
-        'SELECT * FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
         variables: [
           Variable<int>(stageId),
           Variable<int>(number)
@@ -3168,7 +3170,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           participants,
         }).map((QueryRow row) => GetNumberAtStartsResult(
-          id: row.readNullable<int>('id'),
+          startId: row.readNullable<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
@@ -3177,15 +3179,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
           manualCorrection: row.readNullable<int>('manual_correction'),
-          statusId: row.read<int>('status_id'),
+          startStatus: row.read<int>('start_status'),
           finishId: row.readNullable<int>('finish_id'),
-          id1: row.readNullable<int>('id'),
           raceId: row.read<int>('race_id'),
           riderId: row.read<int>('rider_id'),
           number: row.read<int>('number'),
           category: row.readNullable<String>('category'),
           rfid: row.readNullable<String>('rfid'),
-          statusId1: row.read<int>('status_id'),
+          participantStatus: row.read<int>('participant_status'),
         ));
   }
 
@@ -3234,7 +3235,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           required String startTime,
           required int number}) {
     return customSelect(
-        'SELECT * FROM starts,participants WHERE starts.participant_id = participants.id AND stage_id = ?1 AND(start_time IS ?2 OR(number IS ?3 AND(automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND stage_id = ?1 AND(start_time IS ?2 OR(number IS ?3 AND(automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
         variables: [
           Variable<int>(stageId),
           Variable<String>(startTime),
@@ -3244,7 +3245,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           participants,
         }).map((QueryRow row) => GetExistedStartingParticipantsResult(
-          id: row.readNullable<int>('id'),
+          startId: row.readNullable<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
@@ -3253,15 +3254,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
           manualCorrection: row.readNullable<int>('manual_correction'),
-          statusId: row.read<int>('status_id'),
+          startStatus: row.read<int>('start_status'),
           finishId: row.readNullable<int>('finish_id'),
-          id1: row.readNullable<int>('id'),
           raceId: row.read<int>('race_id'),
           riderId: row.read<int>('rider_id'),
           number: row.read<int>('number'),
           category: row.readNullable<String>('category'),
           rfid: row.readNullable<String>('rfid'),
-          statusId1: row.read<int>('status_id'),
+          participantStatus: row.read<int>('participant_status'),
         ));
   }
 
@@ -3357,8 +3357,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).map((QueryRow row) => row.read<int>('_c0'));
   }
 
-  Selectable<GetStartingParticipantAndFollowingResult>
-      getStartingParticipantAndFollowing(
+  Selectable<GetStartingParticipantBetweenTimesResult>
+      getStartingParticipantBetweenTimes(
           {required int stageId, required String time, required String after}) {
     return customSelect(
         'SELECT participants.number AS number, starts.start_time AS start_time, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, riders.name AS name FROM starts,participants,riders WHERE starts.participant_id = participants.id AND participants.rider_id = riders.id AND starts.stage_id = ?1 AND(start_time BETWEEN ?2 AND ?3)AND automatic_start_time ISNULL AND starts.status_id = 1',
@@ -3371,7 +3371,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           participants,
           starts,
           riders,
-        }).map((QueryRow row) => GetStartingParticipantAndFollowingResult(
+        }).map((QueryRow row) => GetStartingParticipantBetweenTimesResult(
           number: row.read<int>('number'),
           startTime: row.read<String>('start_time'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
@@ -3380,10 +3380,19 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
+  Future<int> _setDNSForStartId({required int statusId, int? id}) {
+    return customUpdate(
+      'UPDATE starts SET status_id = ?1, automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL WHERE id = ?2',
+      variables: [Variable<int>(statusId), Variable<int>(id)],
+      updates: {starts},
+      updateKind: UpdateKind.update,
+    );
+  }
+
   Selectable<GetNumbersOnTraceNowResult> getNumbersOnTraceNow(
       {required int stageId, required String timeNow}) {
     return customSelect(
-        'SELECT * FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND(starts.automatic_start_time NOT LIKE \'DNS\' OR starts.automatic_start_time ISNULL)ORDER BY starts.start_time ASC',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND(starts.automatic_start_time NOT LIKE \'DNS\' OR starts.automatic_start_time ISNULL)ORDER BY starts.start_time ASC',
         variables: [
           Variable<int>(stageId),
           Variable<String>(timeNow)
@@ -3392,7 +3401,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           participants,
         }).map((QueryRow row) => GetNumbersOnTraceNowResult(
-          id: row.readNullable<int>('id'),
+          startId: row.readNullable<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
@@ -3401,15 +3410,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
           manualCorrection: row.readNullable<int>('manual_correction'),
-          statusId: row.read<int>('status_id'),
+          startStatus: row.read<int>('start_status'),
           finishId: row.readNullable<int>('finish_id'),
-          id1: row.readNullable<int>('id'),
           raceId: row.read<int>('race_id'),
           riderId: row.read<int>('rider_id'),
           number: row.read<int>('number'),
           category: row.readNullable<String>('category'),
           rfid: row.readNullable<String>('rfid'),
-          statusId1: row.read<int>('status_id'),
+          participantStatus: row.read<int>('participant_status'),
         ));
   }
 
@@ -4886,7 +4894,7 @@ class $AppDatabaseManager {
 }
 
 class GetNumberAtStartsResult {
-  final int? id;
+  final int? startId;
   final int stageId;
   final int participantId;
   final String startTime;
@@ -4895,17 +4903,16 @@ class GetNumberAtStartsResult {
   final int? automaticCorrection;
   final String? manualStartTime;
   final int? manualCorrection;
-  final int statusId;
+  final int startStatus;
   final int? finishId;
-  final int? id1;
   final int raceId;
   final int riderId;
   final int number;
   final String? category;
   final String? rfid;
-  final int statusId1;
+  final int participantStatus;
   GetNumberAtStartsResult({
-    this.id,
+    this.startId,
     required this.stageId,
     required this.participantId,
     required this.startTime,
@@ -4914,15 +4921,14 @@ class GetNumberAtStartsResult {
     this.automaticCorrection,
     this.manualStartTime,
     this.manualCorrection,
-    required this.statusId,
+    required this.startStatus,
     this.finishId,
-    this.id1,
     required this.raceId,
     required this.riderId,
     required this.number,
     this.category,
     this.rfid,
-    required this.statusId1,
+    required this.participantStatus,
   });
 }
 
@@ -4980,7 +4986,7 @@ class GetParticipantsAtStartResult {
 }
 
 class GetExistedStartingParticipantsResult {
-  final int? id;
+  final int? startId;
   final int stageId;
   final int participantId;
   final String startTime;
@@ -4989,17 +4995,16 @@ class GetExistedStartingParticipantsResult {
   final int? automaticCorrection;
   final String? manualStartTime;
   final int? manualCorrection;
-  final int statusId;
+  final int startStatus;
   final int? finishId;
-  final int? id1;
   final int raceId;
   final int riderId;
   final int number;
   final String? category;
   final String? rfid;
-  final int statusId1;
+  final int participantStatus;
   GetExistedStartingParticipantsResult({
-    this.id,
+    this.startId,
     required this.stageId,
     required this.participantId,
     required this.startTime,
@@ -5008,15 +5013,14 @@ class GetExistedStartingParticipantsResult {
     this.automaticCorrection,
     this.manualStartTime,
     this.manualCorrection,
-    required this.statusId,
+    required this.startStatus,
     this.finishId,
-    this.id1,
     required this.raceId,
     required this.riderId,
     required this.number,
     this.category,
     this.rfid,
-    required this.statusId1,
+    required this.participantStatus,
   });
 }
 
@@ -5035,13 +5039,13 @@ class GetNextStartingParticipantsResult {
   });
 }
 
-class GetStartingParticipantAndFollowingResult {
+class GetStartingParticipantBetweenTimesResult {
   final int number;
   final String startTime;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String name;
-  GetStartingParticipantAndFollowingResult({
+  GetStartingParticipantBetweenTimesResult({
     required this.number,
     required this.startTime,
     this.automaticStartTime,
@@ -5051,7 +5055,7 @@ class GetStartingParticipantAndFollowingResult {
 }
 
 class GetNumbersOnTraceNowResult {
-  final int? id;
+  final int? startId;
   final int stageId;
   final int participantId;
   final String startTime;
@@ -5060,17 +5064,16 @@ class GetNumbersOnTraceNowResult {
   final int? automaticCorrection;
   final String? manualStartTime;
   final int? manualCorrection;
-  final int statusId;
+  final int startStatus;
   final int? finishId;
-  final int? id1;
   final int raceId;
   final int riderId;
   final int number;
   final String? category;
   final String? rfid;
-  final int statusId1;
+  final int participantStatus;
   GetNumbersOnTraceNowResult({
-    this.id,
+    this.startId,
     required this.stageId,
     required this.participantId,
     required this.startTime,
@@ -5079,14 +5082,13 @@ class GetNumbersOnTraceNowResult {
     this.automaticCorrection,
     this.manualStartTime,
     this.manualCorrection,
-    required this.statusId,
+    required this.startStatus,
     this.finishId,
-    this.id1,
     required this.raceId,
     required this.riderId,
     required this.number,
     this.category,
     this.rfid,
-    required this.statusId1,
+    required this.participantStatus,
   });
 }

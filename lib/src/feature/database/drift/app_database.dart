@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
@@ -289,7 +290,7 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     final DateTime? beepDateTime = strTimeToDateTime(time);
     if (beepDateTime == null) {
-      assert(beepDateTime != null, 'beepDateTime must not be null');
+      logger.e('Wrong time format: $time, can not convert to DateTime');
       return 0;
     }
     final DateTime timeAfter =
@@ -298,64 +299,40 @@ class AppDatabase extends _$AppDatabase {
     final x =
         await getForBeep(stageId: stageId, beepTime: time, afterTime: after)
             .get();
-
-    return x.length;
+    return x.first;
   }
 
 //Используется для голосового сообщения
-  Future<List<GetStartingParticipantAndFollowingResult>>
+  Future<List<GetStartingParticipantBetweenTimesResult>>
       getStartingParticipants({
     required String time,
     required int stageId,
   }) async {
     final DateTime? dateTime = strTimeToDateTime(time);
     if (dateTime == null) {
-      assert(dateTime != null, 'dateTime must not be null');
-      return <GetStartingParticipantAndFollowingResult>[];
+      logger.e('Wrong time format: $time, can not convert to DateTime');
+      return <GetStartingParticipantBetweenTimesResult>[];
     }
     final String after =
         DateFormat('HH:mm:ss').format(dateTime.add(const Duration(minutes: 1)));
-    // final db = await _db;
-    return getStartingParticipantAndFollowing(
+    return getStartingParticipantBetweenTimes(
       time: time,
       after: after,
       stageId: stageId,
     ).get();
-    // final res = await db.rawQuery(
-    //   '''
-    //     SELECT start.id as id, start.number as number,
-    //       start.starttime as starttime, start.automaticstarttime as automaticstarttime,
-    //       start.automaticcorrection as automaticcorrection, main.name as name
-    //     FROM start, main
-    //     WHERE (starttime BETWEEN '$time' AND '$after') AND main.number = start.number
-    //       AND (automaticstarttime NOT LIKE 'DNS' OR automaticstarttime ISNULL);
-    //     ''',
-    // );
-    // final List<StartItem> startProtocol =
-    //     res.isNotEmpty ? res.map((c) => StartItem.fromJson(c)).toList() : [];
-    // return startProtocol;
   }
 
-  Future<int> setDNSatStart(int startId) async {
-    final result = await (update(starts)
-          ..where(
-            (start) => start.id.equals(startId),
-          ))
-        .write(
-      const StartsCompanion(
-        automaticCorrection: Value(null),
-        automaticStartTime: Value(null),
-        manualStartTime: Value(null),
-        manualCorrection: Value(null),
-        timestamp: Value(null),
-        statusId: Value(2),
-      ),
-    );
+  Future<int> setStatusForStartId({
+    required int id,
+    required ParticipantStatus status,
+  }) async {
+    var status = ParticipantStatus.dns;
+    final result = await _setDNSForStartId(id: id, statusId: status.index);
 
     if (result > 0) {
-      logger.i('Database -> Set DNS to startId: $startId');
+      logger.i('Database -> Set ${status.name.toUpperCase()} to startId: $id');
     } else {
-      logger.i('Database -> Can not find startId: $startId, DNS not set');
+      logger.i('Database -> Can not find startId: $id, ${status.name.toUpperCase()} not set');
     }
     return result;
   }

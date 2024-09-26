@@ -2,7 +2,7 @@ export 'bloc/protocol_bloc.dart';
 export 'logic/protocol_provider.dart';
 export 'model/automatic_start.dart';
 export 'model/filter_finish.dart';
-export 'model/participant_status.dart';
+export '../database/model/participant_status.dart';
 export 'model/protocol_items.dart';
 export 'model/start_protocol.dart';
 export 'model/start_time.dart';

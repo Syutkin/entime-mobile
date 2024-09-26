@@ -1,5 +1,7 @@
 /// Список возможных статусов участника
 ///
+/// [unknown] не используется
+///
 /// [active] нет особых статусов, статус по умолчанию
 ///
 /// [dns] не стартовал
@@ -7,4 +9,10 @@
 /// [dnf] не финишировал
 ///
 /// [dsq] дисквалифицирован
-enum ParticipantStatus { active, dns, dnf, dsq }
+enum ParticipantStatus {
+  unknown,
+  active,
+  dns,
+  dnf,
+  dsq,
+}

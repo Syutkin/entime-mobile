@@ -320,6 +320,8 @@ class _FinishPage extends State<FinishScreen> {
           break;
         case ParticipantStatus.dsq:
           break;
+        case ParticipantStatus.unknown:
+          break;
       }
     }
   }

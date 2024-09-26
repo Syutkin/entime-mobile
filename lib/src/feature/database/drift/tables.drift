@@ -44,7 +44,8 @@ CREATE TABLE participants (
 	rfid text,
 	status_id integer NOT NULL DEFAULT 1,
     FOREIGN KEY (rider_id) REFERENCES riders(id),
-    FOREIGN KEY (race_id) REFERENCES races(id)
+    FOREIGN KEY (race_id) REFERENCES races(id),
+    FOREIGN KEY (status_id) REFERENCES statuses(id)
 );
 
 CREATE TABLE starts (
@@ -61,7 +62,8 @@ CREATE TABLE starts (
 	finish_id integer,
     FOREIGN KEY (stage_id) REFERENCES stages(id),
     FOREIGN KEY (participant_id) REFERENCES participants(id),
-	FOREIGN KEY (finish_id) REFERENCES finishes(id)
+	FOREIGN KEY (finish_id) REFERENCES finishes(id),
+	FOREIGN KEY (status_id) REFERENCES statuses(id)
 );
 
 CREATE TABLE finishes (
@@ -98,7 +100,24 @@ addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_
 deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
 
 getNumberAtStarts:
-SELECT *
+SELECT
+	starts.id as start_id,
+	stage_id,
+	participant_id,
+	start_time,
+	timestamp,
+	automatic_start_time,
+	automatic_correction,
+	manual_start_time,
+	manual_correction,
+	starts.status_id as start_status,
+	finish_id ,
+    race_id,
+    rider_id,
+    number,
+    category,
+    rfid,
+    participants.status_id as participant_status
 FROM starts, participants
 WHERE
     participants.id = starts.participant_id
@@ -143,7 +162,24 @@ WHERE
 ORDER BY start_time ASC;
 
 getExistedStartingParticipants:
-SELECT *
+SELECT
+	starts.id as start_id,
+	stage_id,
+	participant_id,
+	start_time,
+	timestamp,
+	automatic_start_time,
+	automatic_correction,
+	manual_start_time,
+	manual_correction,
+	starts.status_id as start_status,
+	finish_id ,
+    race_id,
+    rider_id,
+    number,
+    category,
+    rfid,
+    participants.status_id as participant_status
 FROM starts, participants
 WHERE 
 	starts.participant_id = participants.id
@@ -205,7 +241,7 @@ WHERE
   	AND automatic_start_time ISNULL
 	AND status_id = 1;
 
-getStartingParticipantAndFollowing:
+getStartingParticipantBetweenTimes:
 SELECT
 	participants.number as number,
 	starts.start_time as start_time,
@@ -222,8 +258,37 @@ WHERE
 	AND automatic_start_time ISNULL
 	AND starts.status_id = 1;
 
+_setDNSForStartId:
+UPDATE starts
+SET
+    status_id = :status_id,
+	automatic_correction = NULL,
+	automatic_start_time = NULL,
+	manual_correction = NULL,
+	manual_start_time = NULL,
+	timestamp = NULL
+WHERE
+	id = :id;
+
 getNumbersOnTraceNow:
-SELECT *
+SELECT
+	starts.id as start_id,
+	stage_id,
+	participant_id,
+	start_time,
+	timestamp,
+	automatic_start_time,
+	automatic_correction,
+	manual_start_time,
+	manual_correction,
+	starts.status_id as start_status,
+	finish_id ,
+    race_id,
+    rider_id,
+    number,
+    category,
+    rfid,
+    participants.status_id as participant_status
 FROM starts, participants
 WHERE
     starts.participant_id = participants.id

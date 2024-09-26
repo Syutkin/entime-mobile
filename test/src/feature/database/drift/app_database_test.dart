@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:entime/src/common/utils/helper.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
+import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'raw_queries.dart';
@@ -25,7 +26,7 @@ void main() {
   group('AppDatabase:', () {
     test('Check initial state', () async {
       final racesList = await db.getRaces().get();
-      expect(racesList.length, 1);
+      expect(racesList.length, 2);
 
       final stagesList = await db.getStages(raceId: 1).get();
       expect(stagesList.length, 4);
@@ -51,11 +52,11 @@ void main() {
       );
 
       List<Race> racesList = await db.getRaces().get();
-      expect(racesList.length, 2);
-      expect(racesList[1].name, raceName);
-      expect(racesList[1].startDate, startDate);
-      expect(racesList[1].finishDate, finishDate);
-      expect(racesList[1].location, location);
+      expect(racesList.length, 3);
+      expect(racesList[2].name, raceName);
+      expect(racesList[2].startDate, startDate);
+      expect(racesList[2].finishDate, finishDate);
+      expect(racesList[2].location, location);
 
       await db.addRace(
         name: raceName2,
@@ -63,19 +64,19 @@ void main() {
 
       racesList = await db.getRaces().get();
 
-      expect(racesList.length, 3);
-      expect(racesList[2].name, raceName2);
-      expect(racesList[2].startDate, null);
-      expect(racesList[2].finishDate, null);
-      expect(racesList[2].location, null);
+      expect(racesList.length, 4);
+      expect(racesList[3].name, raceName2);
+      expect(racesList[3].startDate, null);
+      expect(racesList[3].finishDate, null);
+      expect(racesList[3].location, null);
 
       await db.addRace(
         name: raceName3,
       );
 
       racesList = await db.getRaces().get();
-      expect(racesList.length, 4);
-      expect(racesList[3].name, raceName3);
+      expect(racesList.length, 5);
+      expect(racesList[4].name, raceName3);
     });
 
     test('Delete race', () async {
@@ -91,7 +92,9 @@ void main() {
         location: location,
       );
 
-      final result = await db.deleteRace(id: 1);
+      var result = await db.deleteRace(id: 1);
+      expect(result, 1);
+      result = await db.deleteRace(id: 2);
       expect(result, 1);
 
       final racesList = await db.getRaces().get();
@@ -283,9 +286,11 @@ void main() {
         );
         expect(result, null);
 
-        final start = await (db.select(db.starts)
-              ..where((start) => start.startTime.equals(startTime)))
-            .get();
+        final start = await startsByStartTime(
+          db: db,
+          startTime: startTime,
+          stageId: stage.id!,
+        );
 
         expect(start.length, 1);
         expect(start.first.automaticStartTime, automaticStartTime);
@@ -321,9 +326,11 @@ void main() {
         );
         expect(result?.length, 1);
 
-        final start = await (db.select(db.starts)
-              ..where((start) => start.startTime.equals(startTime)))
-            .get();
+        final start = await startsByStartTime(
+          db: db,
+          startTime: startTime,
+          stageId: stage.id!,
+        );
 
         expect(start.length, 1);
         expect(start.first.automaticStartTime, automaticStartTime);
@@ -360,9 +367,11 @@ void main() {
         );
         expect(result?.length, null);
 
-        final start = await (db.select(db.starts)
-              ..where((start) => start.startTime.equals(startTime)))
-            .get();
+        final start = await startsByStartTime(
+          db: db,
+          startTime: startTime,
+          stageId: stage.id!,
+        );
 
         expect(start.length, 1);
         expect(start.first.automaticStartTime, automaticStartTimeNew);
@@ -405,9 +414,11 @@ void main() {
         );
         expect(result, null);
 
-        final start = await (db.select(db.starts)
-              ..where((start) => start.startTime.equals(startTime)))
-            .get();
+        final start = await startsByStartTime(
+          db: db,
+          startTime: startTime,
+          stageId: stage.id!,
+        );
 
         expect(start.length, 1);
         expect(start.first.automaticStartTime, null);
@@ -431,13 +442,14 @@ void main() {
         );
         expect(result, 1);
 
-        final start = await (db.select(db.starts)
-              ..where((start) => start.startTime.equals(startTime)))
-            .get();
+        final start = await startsByStartTime(
+          db: db,
+          startTime: startTime,
+          stageId: stage.id!,
+        );
 
         expect(start.length, 1);
         expect(start.first.automaticStartTime, null);
-        expect(start.first.automaticCorrection, null);
         expect(start.first.automaticCorrection, null);
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
@@ -457,7 +469,7 @@ void main() {
         expect(result, 0);
       });
 
-      test('Check delta t manual', () async {
+      test('Check delta at manual', () async {
         var stage = (await db.getStages(raceId: 1).get()).first;
         var startTime = '10:15:00';
         var timeStamp = '10:15:03,001';
@@ -471,13 +483,14 @@ void main() {
         );
         expect(result, 0);
 
-        var start = await (db.select(db.starts)
-          ..where((start) => start.startTime.equals(startTime)))
-            .get();
+        var start = await startsByStartTime(
+          db: db,
+          startTime: startTime,
+          stageId: stage.id!,
+        );
 
         expect(start.length, 1);
         expect(start.first.automaticStartTime, null);
-        expect(start.first.automaticCorrection, null);
         expect(start.first.automaticCorrection, null);
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
@@ -485,28 +498,171 @@ void main() {
         expect(start.first.manualStartTime, null);
         expect(start.first.manualCorrection, null);
 
-         result = await db.updateManualStartTime(
+        result = await db.updateManualStartTime(
           stageId: stage.id!,
           time: strTimeToDateTime(timeStamp)!,
         );
         expect(result, 1);
 
-         start = await (db.select(db.starts)
-          ..where((start) => start.startTime.equals(startTime)))
-            .get();
+        start = await startsByStartTime(
+          db: db,
+          startTime: startTime,
+          stageId: stage.id!,
+        );
 
         expect(start.length, 1);
         expect(start.first.automaticStartTime, null);
         expect(start.first.automaticCorrection, null);
-        expect(start.first.automaticCorrection, null);
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, null);
-        expect(start.first.manualStartTime,timeStamp );
+        expect(start.first.manualStartTime, timeStamp);
         expect(start.first.manualCorrection, correction);
+      });
+    });
 
+    group('Test checkParticipantAroundStartTime', () {
+      test('Check existing participant around time', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var time = '10:14:53,001';
+
+        var result = await db.checkParticipantAroundStartTime(
+          time: time,
+          stageId: stage.id!,
+        );
+        expect(result, 1);
       });
 
+      test('Check not existing participant around time', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var time = '19:15:03,001';
+
+        var result = await db.checkParticipantAroundStartTime(
+          time: time,
+          stageId: stage.id!,
+        );
+        expect(result, 0);
+      });
+
+      test('Submit wrong time', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var time = '19-15-03,001';
+
+        var result = await db.checkParticipantAroundStartTime(
+          time: time,
+          stageId: stage.id!,
+        );
+        expect(result, 0);
+      });
+    });
+
+    group('Test getStartingParticipants', () {
+      test('Starting participant exists after time', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var time = '10:14:53,001';
+
+        var result = await db.getStartingParticipants(
+          time: time,
+          stageId: stage.id!,
+        );
+        expect(result.length, 1);
+      });
+
+      test('Starting participant not exists after time', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var time = '14:14:53,001';
+
+        var result = await db.getStartingParticipants(
+          time: time,
+          stageId: stage.id!,
+        );
+        expect(result.length, 0);
+      });
+    });
+
+    group('Test setStatusForStartId', () {
+      test('Set DNS and start with id exists, DNS set successfully', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var number = 1;
+        var participants = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+        expect(participants.length, 1);
+
+        var startId = participants.first.startId!;
+        var startTime = participants.first.startTime;
+        var automaticStartTime = startTime.replaceAll(':00', ':01,123');
+        var manualStartTime = startTime.replaceAll(':00', ':01,523');
+        var timeStamp = startTime.replaceAll(':00', ':01,001');
+        var automaticCorrection = -1523;
+
+        var correctionResult = await db.updateAutomaticCorrection(
+          stageId: stage.id!,
+          time: automaticStartTime,
+          correction: automaticCorrection,
+          timeStamp: strTimeToDateTime(timeStamp)!,
+        );
+        expect(correctionResult, null);
+
+        var manualResult = await db.updateManualStartTime(
+          stageId: stage.id!,
+          time: strTimeToDateTime(manualStartTime)!,
+        );
+        expect(manualResult, 1);
+
+        var start = await startsByStartTime(
+          db: db,
+          startTime: startTime,
+          stageId: stage.id!,
+        );
+
+        expect(start.length, 1);
+        expect(start.first.automaticStartTime, automaticStartTime);
+        expect(start.first.automaticCorrection, automaticCorrection);
+        expect(start.first.startTime, startTime);
+        expect(start.first.statusId, 1);
+        expect(start.first.timestamp, timeStamp);
+        expect(start.first.manualStartTime, manualStartTime);
+        expect(start.first.manualCorrection, automaticCorrection);
+
+        participants = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+
+        var result = await db.setStatusForStartId(
+            id: startId, status: ParticipantStatus.dns);
+        expect(result, 1);
+
+        participants = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+
+        expect(participants.length, 1);
+        expect(participants.first.startStatus, ParticipantStatus.dns.index);
+        expect(participants.first.automaticStartTime, null);
+        expect(participants.first.automaticCorrection, null);
+        expect(participants.first.startTime, startTime);
+        expect(participants.first.timestamp, null);
+        expect(participants.first.manualStartTime, null);
+        expect(participants.first.manualCorrection, null);
+      });
+
+      test('Set DNS but start with id does not exists', () async {
+        var result =
+            await db.setStatusForStartId(id: 0, status: ParticipantStatus.dns);
+        expect(result, 0);
+      });
     });
   });
+}
+
+Future<List<Start>> startsByStartTime({
+  required AppDatabase db,
+  required String startTime,
+  required int stageId,
+}) {
+  return (db.select(db.starts)
+        ..where((start) =>
+            start.startTime.equals(startTime) & start.stageId.equals(stageId)))
+      .get();
 }
