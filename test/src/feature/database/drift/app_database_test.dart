@@ -128,34 +128,149 @@ void main() {
       expect(stagesList.length, 4);
       expect(stagesList[3].name, stageName);
     });
+    group('Test addStartNumber', () {
+      test('Add unique start number', () async {
+        var stages = await db.getStages(raceId: 1).get();
+        var stage = stages.first;
+        var startTime = '01:00:00';
+        var number = 100;
 
-    test('Add unique start number', () async {
-      var stages = await db.getStages(raceId: 1).get();
-      var stage = stages.first;
-      var startTime = '01:00:00';
-      var number = 100;
+        var result = await db.addStartNumber(
+          number: number,
+          stage: stage,
+          startTime: startTime,
+        );
+        expect(result, null);
 
-      var result = await db.addStartNumber(
-        number: number,
-        stage: stage,
-        startTime: startTime,
-      );
-      expect(result, null);
+        final participantsList =
+            await db.getParticipantsAtStart(stageId: stage.id!).get();
+        expect(participantsList.length, 80);
 
-      final participantsList =
-          await db.getParticipantsAtStart(stageId: stage.id!).get();
-      expect(participantsList.length, 80);
+        var participants = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+        expect(participants.length, 1);
+        expect(participants.first.number, number);
+        expect(participants.first.startTime, startTime);
+        expect(participants.first.timestamp, null);
+        expect(participants.first.automaticCorrection, null);
+        expect(participants.first.automaticStartTime, null);
+        expect(participants.first.manualCorrection, null);
+        expect(participants.first.manualStartTime, null);
+      });
 
-      var participants =
-          await db.getNumberAtStarts(stageId: stage.id!, number: number).get();
-      expect(participants.length, 1);
-      expect(participants.first.number, number);
-      expect(participants.first.startTime, startTime);
-      expect(participants.first.timestamp, null);
-      expect(participants.first.automaticCorrection, null);
-      expect(participants.first.automaticStartTime, null);
-      expect(participants.first.manualCorrection, null);
-      expect(participants.first.manualStartTime, null);
+      test('Add existed start number', () async {
+        var stages = await db.getStages(raceId: 1).get();
+        var stage = stages.first;
+        var startTime = '01:00:00';
+        var number = 1;
+
+        var result = await db.addStartNumber(
+          number: number,
+          stage: stage,
+          startTime: startTime,
+        );
+        expect(result, null);
+
+        final participantsList =
+            await db.getParticipantsAtStart(stageId: stage.id!).get();
+        expect(participantsList.length, 79);
+
+        var participants = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+        expect(participants.length, 1);
+        expect(participants.first.number, number);
+        expect(participants.first.startTime, startTime);
+        expect(participants.first.timestamp, null);
+        expect(participants.first.automaticCorrection, null);
+        expect(participants.first.automaticStartTime, null);
+        expect(participants.first.manualCorrection, null);
+        expect(participants.first.manualStartTime, null);
+      });
+
+      test('Add new start number with existed time', () async {
+        var stages = await db.getStages(raceId: 1).get();
+        var stage = stages.first;
+        var startTime = '10:00:00';
+        var number = 100;
+
+        var result = await db.addStartNumber(
+          number: number,
+          stage: stage,
+          startTime: startTime,
+        );
+
+        expect(result?.length, 1);
+        var participant = result?.first;
+
+        // Стартовое время '10:00:00' у номера 2 из тестовых данных
+        expect(participant?.number, 2);
+        expect(participant?.startTime, startTime);
+
+        final participantsList =
+            await db.getParticipantsAtStart(stageId: stage.id!).get();
+        expect(participantsList.length, 79);
+
+        // номер не добавлен
+        var participants = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+        expect(participants.length, 0);
+      });
+
+      test(
+          'Add new start number. Number exist at participants list, '
+          'but not exists at starts', () async {
+        var stages = await db.getStages(raceId: 1).get();
+        var stage = stages.first;
+        var startTime = '01:00:00';
+        var number = 1;
+
+        // get participant with number
+        var startInfo = (await db
+                .getNumberAtStarts(
+                  stageId: stage.id!,
+                  number: number,
+                )
+                .get())
+            .first;
+
+        // delete participant with number at start
+        await (db.delete(db.starts)
+              ..where((start) =>
+                  start.participantId.isValue(startInfo.participantId)))
+            .go();
+
+        var participantsList =
+            await db.getParticipantsAtStart(stageId: stage.id!).get();
+        expect(participantsList.length, 78);
+
+        var result = await db.addStartNumber(
+          number: number,
+          stage: stage,
+          startTime: startTime,
+        );
+        expect(result, null);
+
+        participantsList =
+            await db.getParticipantsAtStart(stageId: stage.id!).get();
+        expect(participantsList.length, 79);
+
+        // get participant with number
+        var startInfoNew = (await db
+                .getNumberAtStarts(
+                  stageId: stage.id!,
+                  number: number,
+                )
+                .get())
+            .first;
+
+        expect(startInfoNew.number, startInfo.number);
+        expect(startInfoNew.startTime, startTime);
+        expect(startInfoNew.category, startInfo.category);
+      });
     });
+    group('Test updateAutomaticCorrection', () {});
   });
 }

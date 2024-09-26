@@ -106,8 +106,6 @@ WHERE
     AND participants.number = :number;
 
 
-
-
 -- Old protocol
 getParticipantsAtStart:
 SELECT
@@ -321,3 +319,6 @@ WHERE
        	OR automatic_start_time IS 'DNS')
 ORDER BY starttime ASC;
 */
+
+
+/* --- for testing --- */
