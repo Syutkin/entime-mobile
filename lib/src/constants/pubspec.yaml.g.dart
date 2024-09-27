@@ -125,12 +125,12 @@ sealed class Pubspec {
   static final DateTime timestamp = DateTime.utc(
     2024,
     9,
-    24,
-    18,
+    27,
+    9,
     48,
-    53,
-    787,
-    877,
+    50,
+    184,
+    55,
   );
 
   /// Name
@@ -422,7 +422,7 @@ sealed class Pubspec {
     'filesize': r'^2.0.1',
     'flutter_bloc': r'^8.1.6',
     'flutter_bluetooth_serial': r'^0.4.0',
-    'flutter_markdown': r'^0.7.3+1',
+    'flutter_markdown': r'^0.7.3+2',
     'flutter_tts': r'^4.0.2',
     'freezed_annotation': r'^2.4.4',
     'json_annotation': r'^4.9.0',
@@ -453,7 +453,7 @@ sealed class Pubspec {
     'bloc_test': r'^9.1.7',
     'build_runner': r'^2.4.12',
     'drift_dev': r'^2.20.3',
-    'flutter_lints': r'^4.0.0',
+    'flutter_lints': r'^5.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
     },

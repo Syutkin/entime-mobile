@@ -69,13 +69,19 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       add(const DatabaseEvent.emitState());
     });
 
-    (_db.select(_db.finishes)
-          ..where((finish) => finish.stageId.equals(_stageId)))
-        .watch()
-        .listen((event) async {
-      _finishes = event;
+    _db.getFinishesFromStage(stageId: _stageId).watch().listen((event) async {
+      //! watch generates empty list at event
+      _finishes = await _db.getFinishesFromStage(stageId: _stageId).get();
       add(const DatabaseEvent.emitState());
     });
+
+    // (_db.select(_db.finishes)
+    //       ..where((finish) => finish.stageId.equals(_stageId)))
+    //     .watch()
+    //     .listen((event) async {
+    //   _finishes = event;
+    //   add(const DatabaseEvent.emitState());
+    // });
 
     // _db.select(_db.trails).watch().listen((event) async {
     //   _trails = event;

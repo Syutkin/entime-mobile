@@ -110,14 +110,14 @@ SELECT
 	automatic_correction,
 	manual_start_time,
 	manual_correction,
-	starts.status_id as start_status,
-	finish_id ,
+	starts.status_id as start_status_id,
+	finish_id,
     race_id,
     rider_id,
     number,
     category,
     rfid,
-    participants.status_id as participant_status
+    participants.status_id as participant_status_id
 FROM starts, participants
 WHERE
     participants.id = starts.participant_id
@@ -295,9 +295,15 @@ WHERE
     AND starts.stage_id = :stage_id
     AND julianday(time(:time_now)) > julianday(time(starts.start_time))
     AND starts.finish_id ISNULL
-    AND (starts.automatic_start_time NOT LIKE 'DNS'
-        OR starts.automatic_start_time ISNULL)
+    AND starts.status_id = 1
+    AND starts.automatic_start_time ISNULL
 ORDER BY starts.start_time ASC;
+
+
+/* --- Finish --- */
+
+getFinishesFromStage:
+SELECT * FROM finishes WHERE stage_id = :stage_id;
 
 getLastFinishTime:
 SELECT finish_time

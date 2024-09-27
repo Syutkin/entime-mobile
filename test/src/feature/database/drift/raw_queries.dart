@@ -3,11 +3,6 @@ class PopDB {
 
   PopDB() {
     queries
-      ..add('''INSERT INTO statuses (id, type) VALUES
-(1, 'active'),
-(2, 'DNS'),
-(3, 'DNF'),
-(4, 'DSQ');''')
       ..add('''INSERT INTO races (id, name) VALUES
 (1, 'гонка1'),
 (2, 'гонка2');''')

@@ -3161,7 +3161,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<GetNumberAtStartsResult> getNumberAtStarts(
       {required int stageId, required int number}) {
     return customSelect(
-        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status_id, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status_id FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
         variables: [
           Variable<int>(stageId),
           Variable<int>(number)
@@ -3179,14 +3179,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
           manualCorrection: row.readNullable<int>('manual_correction'),
-          startStatus: row.read<int>('start_status'),
+          startStatusId: row.read<int>('start_status_id'),
           finishId: row.readNullable<int>('finish_id'),
           raceId: row.read<int>('race_id'),
           riderId: row.read<int>('rider_id'),
           number: row.read<int>('number'),
           category: row.readNullable<String>('category'),
           rfid: row.readNullable<String>('rfid'),
-          participantStatus: row.read<int>('participant_status'),
+          participantStatusId: row.read<int>('participant_status_id'),
         ));
   }
 
@@ -3392,7 +3392,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<GetNumbersOnTraceNowResult> getNumbersOnTraceNow(
       {required int stageId, required String timeNow}) {
     return customSelect(
-        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND(starts.automatic_start_time NOT LIKE \'DNS\' OR starts.automatic_start_time ISNULL)ORDER BY starts.start_time ASC',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND starts.status_id = 1 AND starts.automatic_start_time ISNULL ORDER BY starts.start_time ASC',
         variables: [
           Variable<int>(stageId),
           Variable<String>(timeNow)
@@ -3419,6 +3419,16 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           rfid: row.readNullable<String>('rfid'),
           participantStatus: row.read<int>('participant_status'),
         ));
+  }
+
+  Selectable<Finish> getFinishesFromStage({required int stageId}) {
+    return customSelect('SELECT * FROM finishes WHERE stage_id = ?1',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          finishes,
+        }).asyncMap(finishes.mapFromRow);
   }
 
   Selectable<String?> getLastFinishTime({required int stageId}) {
@@ -4903,14 +4913,14 @@ class GetNumberAtStartsResult {
   final int? automaticCorrection;
   final String? manualStartTime;
   final int? manualCorrection;
-  final int startStatus;
+  final int startStatusId;
   final int? finishId;
   final int raceId;
   final int riderId;
   final int number;
   final String? category;
   final String? rfid;
-  final int participantStatus;
+  final int participantStatusId;
   GetNumberAtStartsResult({
     this.startId,
     required this.stageId,
@@ -4921,14 +4931,14 @@ class GetNumberAtStartsResult {
     this.automaticCorrection,
     this.manualStartTime,
     this.manualCorrection,
-    required this.startStatus,
+    required this.startStatusId,
     this.finishId,
     required this.raceId,
     required this.riderId,
     required this.number,
     this.category,
     this.rfid,
-    required this.participantStatus,
+    required this.participantStatusId,
   });
 }
 

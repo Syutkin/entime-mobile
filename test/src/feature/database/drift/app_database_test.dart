@@ -638,7 +638,7 @@ void main() {
             .get();
 
         expect(participants.length, 1);
-        expect(participants.first.startStatus, ParticipantStatus.dns.index);
+        expect(participants.first.startStatusId, ParticipantStatus.dns.index);
         expect(participants.first.automaticStartTime, null);
         expect(participants.first.automaticCorrection, null);
         expect(participants.first.startTime, startTime);
@@ -651,6 +651,331 @@ void main() {
         var result =
             await db.setStatusForStartId(id: 0, status: ParticipantStatus.dns);
         expect(result, 0);
+      });
+    });
+
+    group('Test addNumberToFinish', () {
+      test('Correct adding number', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finishTime = '10:05:23,123';
+        var timeStamp = '10:05:23,456';
+        var number = 2;
+
+        var startInfo = (await db
+                .getNumberAtStarts(stageId: stage.id!, number: number)
+                .get())
+            .first;
+        expect(startInfo.finishId, null);
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finishTime,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.length, 1);
+        var finishId = finishes.first.id!;
+
+        var result =
+            await db.addNumberToFinish(stage, finishId, number, finishTime);
+        expect(result, true);
+
+        finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.first.number, number);
+
+        startInfo = (await db
+                .getNumberAtStarts(stageId: stage.id!, number: number)
+                .get())
+            .first;
+        expect(startInfo.finishId, 1);
+      });
+
+      test('Number already exists at finishes', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finishTime = '10:05:23,123';
+        var timeStamp = '10:05:23,456';
+        var number = 2;
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finishTime,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finishTime,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.length, 2);
+        var finishId1 = finishes.first.id!;
+        var finishId2 = finishes.last.id!;
+
+        var result1 =
+            await db.addNumberToFinish(stage, finishId1, number, finishTime);
+        expect(result1, true);
+
+        var result2 =
+            await db.addNumberToFinish(stage, finishId2, number, finishTime);
+        expect(result2, false);
+      });
+    });
+
+    group('Test getNumbersOnTraceNow', () {
+      test('No numbers on trace', () async {
+        var stageId = (await db.getStages(raceId: 1).get()).first.id!;
+        var timeNow = '09:00:00.111';
+        var result = await db
+            .getNumbersOnTraceNow(
+              stageId: stageId,
+              timeNow: timeNow,
+            )
+            .get();
+
+        expect(result.length, 0);
+      });
+      test('One number on trace', () async {
+        var stageId = (await db.getStages(raceId: 1).get()).first.id!;
+        var timeNow = '10:00:01.111';
+        var result = await db
+            .getNumbersOnTraceNow(
+              stageId: stageId,
+              timeNow: timeNow,
+            )
+            .get();
+
+        expect(result.length, 1);
+        expect(result.first.number, 2);
+      });
+      test('All numbers on trace', () async {
+        var stageId = (await db.getStages(raceId: 1).get()).first.id!;
+        var timeNow = '23:00:01.111';
+        var result = await db
+            .getNumbersOnTraceNow(
+              stageId: stageId,
+              timeNow: timeNow,
+            )
+            .get();
+
+        expect(result.length, 79);
+        expect(result.first.number, 2);
+        expect(result.last.number, 73);
+      });
+      test('One number finished, two on trace', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var timeNow = '10:02:01.111';
+        var finishTime = '10:01:23,123';
+        var timeStamp = '10:01:23,456';
+        var number = 2;
+        var number2 = 7;
+
+        var result = await db
+            .getNumbersOnTraceNow(
+              stageId: stage.id!,
+              timeNow: timeNow,
+            )
+            .get();
+
+        expect(result.length, 3);
+        expect(result.first.number, 2);
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finishTime,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.length, 1);
+        var finishId = finishes.first.id!;
+
+        await db.addNumberToFinish(stage, finishId, number, finishTime);
+
+        result = await db
+            .getNumbersOnTraceNow(
+              stageId: stage.id!,
+              timeNow: timeNow,
+            )
+            .get();
+        expect(result.length, 2);
+        expect(result.first.number, number2);
+      });
+      test('One number dns, two on trace', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var timeNow = '10:02:01.111';
+        var number = 2;
+        var number2 = 7;
+
+        var result = await db
+            .getNumbersOnTraceNow(
+              stageId: stage.id!,
+              timeNow: timeNow,
+            )
+            .get();
+
+        expect(result.length, 3);
+        expect(result.first.number, 2);
+
+        var participants = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+        expect(participants.length, 1);
+        var startId = participants.first.startId!;
+
+        var resultStatus = await db.setStatusForStartId(
+            id: startId, status: ParticipantStatus.dns);
+        expect(resultStatus, 1);
+
+        result = await db
+            .getNumbersOnTraceNow(
+              stageId: stage.id!,
+              timeNow: timeNow,
+            )
+            .get();
+
+        expect(result.length, 2);
+        expect(result.first.number, number2);
+      });
+    });
+
+    group('Test hideFinish', () {
+      test('Finish hided successfully', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finish = '10:05:23,123';
+        var timeStamp = '10:05:23,456';
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finish,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finish,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        var result = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(result[0].isHidden, false);
+        expect(result[1].isHidden, false);
+
+        var count = await db.hideFinish(result[0].id!);
+        expect(count, 1);
+
+        result = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(result[0].isHidden, true);
+        expect(result[1].isHidden, false);
+
+        count = await db.hideFinish(result[1].id!);
+        result = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(result[0].isHidden, true);
+        expect(result[1].isHidden, true);
+      });
+    });
+
+    group('Test hideAllFinish', () {
+      test('Finishes hided successfully', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finish = '10:05:23,123';
+        var timeStamp = '10:05:23,456';
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finish,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        var result = await db.hideAllFinish();
+        expect(result, 1);
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finish,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        result = await db.hideAllFinish();
+        expect(result, 2);
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finish,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        result = await db.hideAllFinish();
+        expect(result, 3);
+
+        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.length, 3);
+        expect(finishes[0].isHidden, true);
+        expect(finishes[1].isHidden, true);
+        expect(finishes[2].isHidden, true);
+      });
+    });
+
+    group('Test addFinishTime', () {
+      test('New automatic finish time', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finish = '10:05:23,123';
+        var timeStamp = '10:05:23,456';
+
+        var result = await db.addFinishTime(
+            stage: stage,
+            finish: finish,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        expect(result, null);
+
+        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.length, 1);
+        expect(finishes.first.stageId, stage.id);
+        expect(finishes.first.number, null);
+        expect(finishes.first.finishTime, finish);
+        expect(finishes.first.timestamp, timeStamp);
+        expect(finishes.first.isHidden, false);
+        expect(finishes.first.isManual, false);
+      });
+
+      test('Second automatic finish time', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finish1 = '10:05:23,123';
+        var finish2 = '10:05:23,129';
+        var timeStamp1 = '10:05:23,456';
+        var timeStamp2 = '10:05:23,459';
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finish1,
+            timeStamp: strTimeToDateTime(timeStamp1)!);
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finish2,
+            timeStamp: strTimeToDateTime(timeStamp2)!);
+
+        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.length, 2);
+        expect(finishes[1].stageId, stage.id);
+        expect(finishes[1].number, null);
+        expect(finishes[1].finishTime, finish2);
+        expect(finishes[1].timestamp, timeStamp2);
+        expect(finishes[1].isHidden, false);
+        expect(finishes[1].isManual, false);
+      });
+
+      test('Second automatic finish time', () async {
+        //ToDo
+        // var stage = (await db.getStages(raceId: 1).get()).first;
+        // var finish1 = '10:05:23,123';
+        // var finish2 = '10:05:23,129';
+        // var timeStamp1 = '10:05:23,456';
+        // var timeStamp2 = '10:05:23,459';
+        //
+        // await db.addFinishTime(
+        //     stage: stage,
+        //     finish: finish1,
+        //     timeStamp: strTimeToDateTime(timeStamp1)!);
+        //
+        // await db.addFinishTime(
+        //     stage: stage,
+        //     finish: finish2,
+        //     timeStamp: strTimeToDateTime(timeStamp2)!);
       });
     });
   });

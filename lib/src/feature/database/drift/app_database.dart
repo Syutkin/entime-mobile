@@ -6,6 +6,8 @@ import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:sqlite3/sqlite3.dart';
+import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/helper.dart';
@@ -19,6 +21,22 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   AppDatabase.forTesting(DatabaseConnection super.connection);
+
+  @override
+  MigrationStrategy get migration {
+    return MigrationStrategy(
+      onCreate: (m) async {
+        // Create all tables
+        await m.createAll();
+        // Populate DB with statuses
+        await customInsert('''INSERT INTO statuses (id, type) VALUES
+          (1, '${ParticipantStatus.active.name}'),
+        (2, '${ParticipantStatus.dns.name}'),
+        (3, '${ParticipantStatus.dnf.name}'),
+        (4, '${ParticipantStatus.dsq.name}');''');
+      },
+    );
+  }
 
   @override
   int get schemaVersion => 1;
@@ -332,10 +350,13 @@ class AppDatabase extends _$AppDatabase {
     if (result > 0) {
       logger.i('Database -> Set ${status.name.toUpperCase()} to startId: $id');
     } else {
-      logger.i('Database -> Can not find startId: $id, ${status.name.toUpperCase()} not set');
+      logger.i(
+          'Database -> Can not find startId: $id, ${status.name.toUpperCase()} not set');
     }
     return result;
   }
+
+  // ----------------финиш----------------
 
   /// Записывает финишное время
   ///
@@ -351,7 +372,8 @@ class AppDatabase extends _$AppDatabase {
     int finishDelay = 0,
     bool substituteNumbers = false,
     int substituteNumbersDelay = 0,
-    String? debugTimeNow,
+    /// Произвольное текущее время
+    String? customTimeNow,
     int? number,
   }) async {
     bool isHidden = false;
@@ -365,7 +387,7 @@ class AppDatabase extends _$AppDatabase {
       if (prevFinishDateTime != null) {
         final finishTime = strTimeToDateTime(finish);
         if (finishTime == null) {
-          assert(finishTime != null, 'finishTime must not be null');
+          logger.e('Wrong time format: $finish, can not convert to DateTime');
           return null;
         }
         final difference = finishTime.difference(prevFinishDateTime);
@@ -385,7 +407,7 @@ class AppDatabase extends _$AppDatabase {
       if (prevFinishTime == null) {
         workingNumber = await _getAwaitingNumber(
           stageId: stage.id!,
-          debugTimeNow: debugTimeNow,
+          customTimeNow: customTimeNow,
         );
       } else {
         // ищем предыдущее время финиша с номером
@@ -402,14 +424,14 @@ class AppDatabase extends _$AppDatabase {
           if (difference.inMilliseconds > substituteNumbersDelay) {
             workingNumber = await _getAwaitingNumber(
               stageId: stage.id!,
-              debugTimeNow: debugTimeNow,
+              customTimeNow: customTimeNow,
             );
           }
           // если предыдущего времени с номером нет - ставим номер
         } else {
           workingNumber = await _getAwaitingNumber(
             stageId: stage.id!,
-            debugTimeNow: debugTimeNow,
+            customTimeNow: customTimeNow,
           );
         }
       }
@@ -483,7 +505,7 @@ class AppDatabase extends _$AppDatabase {
     return result;
   }
 
-  Future<bool> addNumber(
+  Future<bool> addNumberToFinish(
     Stage stage,
     int finishId,
     int number,
@@ -492,8 +514,8 @@ class AppDatabase extends _$AppDatabase {
     final existingNumber = await _getNumberAtFinishes(
       stageId: stage.id!,
       number: number,
-    ).getSingleOrNull();
-    if (existingNumber == null) {
+    ).get();
+    if (existingNumber.isNotEmpty) {
       logger.i(
         'Database -> Number $number already exists and therefore has not been added',
       );
@@ -557,7 +579,7 @@ class AppDatabase extends _$AppDatabase {
     final result = await _setStatus(
       stage: stage,
       number: number,
-      statusId: 2,
+      statusId: ParticipantStatus.dns.index,
     );
     logger.i('Database -> Set DNS to number: $number at stageId: ${stage.id}');
     return result;
@@ -570,7 +592,7 @@ class AppDatabase extends _$AppDatabase {
     final result = await _setStatus(
       stage: stage,
       number: number,
-      statusId: 3,
+      statusId: ParticipantStatus.dnf.index,
     );
     logger.i('Database -> Set DNF to number: $number at stageId: ${stage.id}');
     return result;
@@ -581,12 +603,12 @@ class AppDatabase extends _$AppDatabase {
 
   Future<int?> _getAwaitingNumber({
     required int stageId,
-    String? debugTimeNow,
+    String? customTimeNow,
   }) async {
     int? number;
-    debugTimeNow ??= "'now', 'localtime'";
+    customTimeNow ??= "'now', 'localtime'";
     final numbersOnTraceProtocol =
-        await getNumbersOnTraceNow(stageId: stageId, timeNow: debugTimeNow)
+        await getNumbersOnTraceNow(stageId: stageId, timeNow: customTimeNow)
             .get();
     if (numbersOnTraceProtocol.isNotEmpty) {
       number = numbersOnTraceProtocol.first.number;
@@ -607,8 +629,35 @@ class AppDatabase extends _$AppDatabase {
   }
 }
 
-LazyDatabase _openConnection() => LazyDatabase(() async {
-      final dbFolder = await getApplicationDocumentsDirectory();
-      final file = File(path.join(dbFolder.path, 'database.sqlite'));
-      return NativeDatabase(file);
-    });
+// LazyDatabase _openConnection() => LazyDatabase(() async {
+//       final dbFolder = await getApplicationDocumentsDirectory();
+//       final file = File(path.join(dbFolder.path, 'database.sqlite'));
+//       return NativeDatabase(file);
+//     });
+
+LazyDatabase _openConnection() {
+  // the LazyDatabase util lets us find the right location for the file async.
+  return LazyDatabase(() async {
+    // put the database file, called db.sqlite here, into the documents folder
+    // for your app.
+    final dbFolder = await getApplicationDocumentsDirectory();
+
+    /// You can replace [database.sqlite] with anything you want
+    /// Ex: cat.sqlite, darthVader.sqlite, todoDB.sqlite
+    final file = File(path.join(dbFolder.path, 'database.sqlite'));
+
+    // Also work around limitations on old Android versions
+    if (Platform.isAndroid) {
+      await applyWorkaroundToOpenSqlite3OnOldAndroidVersions();
+    }
+
+    // Make sqlite3 pick a more suitable location for temporary files - the
+    // one from the system may be inaccessible due to sandboxing.
+    final cacheBase = (await getTemporaryDirectory()).path;
+    // We can't access /tmp on Android, which sqlite3 would try by default.
+    // Explicitly tell it about the correct temporary directory.
+    sqlite3.tempDirectory = cacheBase;
+
+    return NativeDatabase.createInBackground(file);
+  });
+}
