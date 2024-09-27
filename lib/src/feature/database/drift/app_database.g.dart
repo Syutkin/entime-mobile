@@ -3091,7 +3091,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Participants participants = Participants(this);
   late final Finishes finishes = Finishes(this);
   late final Starts starts = Starts(this);
-  Selectable<Race> getRaces() {
+  Selectable<Race> _getRaces() {
     return customSelect('SELECT * FROM races WHERE is_deleted = FALSE',
         variables: [],
         readsFrom: {
@@ -3099,7 +3099,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).asyncMap(races.mapFromRow);
   }
 
-  Future<int> addRace(
+  Future<int> _addRace(
       {required String name,
       String? startDate,
       String? finishDate,
@@ -3116,7 +3116,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Future<int> deleteRace({int? id}) {
+  Future<int> _deleteRace({int? id}) {
     return customUpdate(
       'UPDATE races SET is_deleted = TRUE WHERE id = ?1',
       variables: [Variable<int>(id)],
@@ -3125,7 +3125,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Selectable<Stage> getStages({required int raceId}) {
+
+
+  Selectable<Stage> _getStages({required int raceId}) {
     return customSelect(
         'SELECT * FROM stages WHERE race_id = ?1 AND is_deleted = FALSE',
         variables: [
@@ -3136,7 +3138,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).asyncMap(stages.mapFromRow);
   }
 
-  Future<int> addStage(
+  Future<int> _addStage(
       {int? trailId, required int raceId, required String name}) {
     return customInsert(
       'INSERT INTO stages (trail_id, race_id, name) VALUES (?1, ?2, ?3)',
@@ -3149,7 +3151,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Future<int> deleteStage({int? id}) {
+  Future<int> _deleteStage({int? id}) {
     return customUpdate(
       'UPDATE stages SET is_deleted = TRUE WHERE id = ?1',
       variables: [Variable<int>(id)],
@@ -3158,7 +3160,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Selectable<GetNumberAtStartsResult> getNumberAtStarts(
+  Selectable<GetNumberAtStartsResult> _getNumberAtStarts(
       {required int stageId, required int number}) {
     return customSelect(
         'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status_id, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status_id FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
@@ -3190,7 +3192,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
-  Selectable<GetParticipantsAtStartResult> getParticipantsAtStart(
+  Selectable<GetParticipantsAtStartResult> _getParticipantsAtStart(
       {required int stageId}) {
     return customSelect(
         'SELECT participants.rider_id AS rider_id, participants.race_id AS race_id, participants.number AS number, participants.category AS category, participants.rfid AS rfid, participants.status_id AS participant_status_id, riders.name AS name, riders.nickname AS nickname, riders.birthday AS birthday, riders.team AS team, riders.city AS city, riders.email AS email, riders.phone AS phone, riders.comment AS comment, starts.id AS start_id, starts.stage_id AS stage_id, starts.participant_id AS participant_id, starts.start_time AS start_time, starts.timestamp AS timestamp, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time, starts.manual_correction AS manual_correction, starts.status_id AS status_id FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 AND starts.status_id = 1 AND participants.status_id = 1 ORDER BY start_time ASC',
@@ -3230,7 +3232,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   }
 
   Selectable<GetExistedStartingParticipantsResult>
-      getExistedStartingParticipants(
+      _getExistedStartingParticipants(
           {required int stageId,
           required String startTime,
           required int number}) {
@@ -3265,7 +3267,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
-  Future<int> setStartingInfo(
+  Future<int> _setStartingInfo(
       {required String startTime,
       String? automaticStartTime,
       int? automaticCorrection,
@@ -3289,7 +3291,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Selectable<Start> getParticipantAroundTime(
+  Selectable<Start> _getParticipantAroundTime(
       {required int stageId, required String before, required String after}) {
     return customSelect(
         'SELECT * FROM starts WHERE stage_id = ?1 AND start_time BETWEEN ?2 AND ?3',
@@ -3303,7 +3305,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).asyncMap(starts.mapFromRow);
   }
 
-  Future<int> setManualStartTime(
+  Future<int> _setManualStartTime(
       {String? manualStartTime,
       int? manualCorrection,
       required int participantId,
@@ -3321,7 +3323,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Selectable<GetNextStartingParticipantsResult> getNextStartingParticipants(
+  Selectable<GetNextStartingParticipantsResult> _getNextStartingParticipants(
       {required int stageId, required String time}) {
     return customSelect(
         'SELECT participants.number AS number, starts.start_time AS start_time, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND start_time > ?2 AND automatic_start_time ISNULL AND manual_start_time ISNULL AND participants.status_id = 1 AND starts.status_id = 1 ORDER BY start_time ASC',
@@ -3341,7 +3343,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
-  Selectable<int> getForBeep(
+  Selectable<int> _getForBeep(
       {required int stageId,
       required String beepTime,
       required String afterTime}) {
@@ -3358,7 +3360,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   }
 
   Selectable<GetStartingParticipantBetweenTimesResult>
-      getStartingParticipantBetweenTimes(
+      _getStartingParticipantBetweenTimes(
           {required int stageId, required String time, required String after}) {
     return customSelect(
         'SELECT participants.number AS number, starts.start_time AS start_time, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, riders.name AS name FROM starts,participants,riders WHERE starts.participant_id = participants.id AND participants.rider_id = riders.id AND starts.stage_id = ?1 AND(start_time BETWEEN ?2 AND ?3)AND automatic_start_time ISNULL AND starts.status_id = 1',
@@ -3421,7 +3423,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
-  Selectable<Finish> getFinishesFromStage({required int stageId}) {
+  Selectable<Finish> _getFinishesFromStage({required int stageId}) {
     return customSelect('SELECT * FROM finishes WHERE stage_id = ?1',
         variables: [
           Variable<int>(stageId)
@@ -3431,7 +3433,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).asyncMap(finishes.mapFromRow);
   }
 
-  Selectable<String?> getLastFinishTime({required int stageId}) {
+  Selectable<String?> _getLastFinishTime({required int stageId}) {
     return customSelect(
         'SELECT finish_time FROM finishes WHERE stage_id = ?1 AND is_hidden = FALSE AND is_manual = FALSE ORDER BY finish_time DESC LIMIT 1',
         variables: [
@@ -3442,7 +3444,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).map((QueryRow row) => row.readNullable<String>('finish_time'));
   }
 
-  Selectable<String?> getLastFinishTimeWithNumber({required int stageId}) {
+  Selectable<String?> _getLastFinishTimeWithNumber({required int stageId}) {
     return customSelect(
         'SELECT finish_time FROM finishes WHERE stage_id = ?1 AND number NOTNULL AND finish_time NOT LIKE \'DNS\' AND finish_time NOT LIKE \'DNF\' ORDER BY finish_time DESC LIMIT 1',
         variables: [

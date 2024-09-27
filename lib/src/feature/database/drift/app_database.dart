@@ -42,6 +42,50 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
+  /// Весь список гонок, кроме "удалённых" (is_deleted = true)
+  Selectable<Race> getRaces() {
+    return _getRaces();
+  }
+
+  /// Добавляет новую гонку
+  Future<int> addRace(
+      {required String name,
+      String? startDate,
+      String? finishDate,
+      String? location}) {
+    return _addRace(
+        name: name,
+        startDate: startDate,
+        finishDate: finishDate,
+        location: location);
+  }
+
+  /// Удаляет гонку с [id]
+  Future<int> deleteRace({required int id}) {
+    return _deleteRace(id: id);
+  }
+
+  /// Весь список спецучастков, кроме "удалённых" (is_deleted = true)
+  Selectable<Stage> getStages({required int raceId}) {
+    return _getStages(raceId: raceId);
+  }
+
+  /// Добавляет спецучасток
+  Future<int> addStage(
+      {int? trailId, required int raceId, required String name}) {
+    return _addStage(raceId: raceId, name: name, trailId: trailId);
+  }
+
+  /// Удаляет спецучасток с [id]
+  Future<int> deleteStage({required int id}) {
+    return _deleteStage(id: id);
+  }
+
+  Selectable<GetParticipantsAtStartResult> getParticipantsAtStart(
+      {required int stageId}) {
+    return _getParticipantsAtStart(stageId: stageId);
+  }
+
   /// Обновляет или добавляет участника с заданным [number] и [startTime]
   /// Возвращает null при успехе, и список участников если такое же стартовое время
   /// уже установлено для других участников
@@ -61,7 +105,7 @@ class AppDatabase extends _$AppDatabase {
       logger.i(
         'Database -> Checking start time $startTime and number $number...',
       );
-      final res = await getExistedStartingParticipants(
+      final res = await _getExistedStartingParticipants(
         stageId: stage.id!,
         startTime: startTime,
         number: number,
@@ -169,6 +213,25 @@ class AppDatabase extends _$AppDatabase {
     return null;
   }
 
+  Future<int> setStartingInfo(
+      {required String startTime,
+      String? automaticStartTime,
+      int? automaticCorrection,
+      String? manualStartTime,
+      int? manualCorrection,
+      required int stageId,
+      required int participantId}) {
+    return _setStartingInfo(
+      startTime: startTime,
+      stageId: stageId,
+      participantId: participantId,
+      automaticCorrection: automaticCorrection,
+      automaticStartTime: automaticStartTime,
+      manualCorrection: manualCorrection,
+      manualStartTime: manualStartTime,
+    );
+  }
+
   /// Обновляет automaticStartTime и automaticCorrection
   /// для !первого участника, стартовое время которого лежит в пределах
   /// плюс/минус [deltaInSeconds] от заданного [time].
@@ -199,7 +262,7 @@ class AppDatabase extends _$AppDatabase {
     // в этом случае устанавливаем время старта и вовращаем null.
     // В противном случае возвращаем StartItem.
     logger.i('Database -> Checking existing start time around $time...');
-    final participantsAroundTime = await getParticipantAroundTime(
+    final participantsAroundTime = await _getParticipantAroundTime(
       stageId: stageId,
       before: before,
       after: after,
@@ -258,7 +321,7 @@ class AppDatabase extends _$AppDatabase {
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final String manualStartTime = DateFormat('HH:mm:ss,S').format(time);
 
-    final participantsAroundTime = await getParticipantAroundTime(
+    final participantsAroundTime = await _getParticipantAroundTime(
       stageId: stageId,
       before: before,
       after: after,
@@ -272,7 +335,7 @@ class AppDatabase extends _$AppDatabase {
         return result;
       }
       final Duration correction = startTime.difference(time);
-      result = await setManualStartTime(
+      result = await _setManualStartTime(
         participantId: participantsAroundTime.first.participantId,
         stageId: stageId,
         manualCorrection: correction.inMilliseconds,
@@ -316,7 +379,7 @@ class AppDatabase extends _$AppDatabase {
         beepDateTime.add(Duration(seconds: deltaInSeconds));
     final String after = DateFormat('HH:mm:ss').format(timeAfter);
     final x =
-        await getForBeep(stageId: stageId, beepTime: time, afterTime: after)
+        await _getForBeep(stageId: stageId, beepTime: time, afterTime: after)
             .get();
     return x.first;
   }
@@ -334,11 +397,16 @@ class AppDatabase extends _$AppDatabase {
     }
     final String after =
         DateFormat('HH:mm:ss').format(dateTime.add(const Duration(minutes: 1)));
-    return getStartingParticipantBetweenTimes(
+    return _getStartingParticipantBetweenTimes(
       time: time,
       after: after,
       stageId: stageId,
     ).get();
+  }
+
+  Selectable<GetNextStartingParticipantsResult> getNextStartingParticipants(
+      {required int stageId, required String time}) {
+    return _getNextStartingParticipants(stageId: stageId, time: time);
   }
 
   Future<int> setStatusForStartId({
@@ -366,6 +434,10 @@ class AppDatabase extends _$AppDatabase {
   }
 
   // ----------------финиш----------------
+
+  Selectable<Finish> getFinishesFromStage({required int stageId}) {
+    return _getFinishesFromStage(stageId: stageId);
+  }
 
   /// Записывает финишное время
   ///
@@ -395,7 +467,7 @@ class AppDatabase extends _$AppDatabase {
     int? workingNumber = number;
     // узнаём предыдущее нескрытое автоматическое время
     final prevFinishTime =
-        await getLastFinishTime(stageId: stage.id!).getSingleOrNull();
+        await _getLastFinishTime(stageId: stage.id!).getSingleOrNull();
     // проверяем разницу между предыдущей и поступившей отсечкой
     if (prevFinishTime != null) {
       final prevFinishDateTime = strTimeToDateTime(prevFinishTime);
@@ -613,7 +685,8 @@ class AppDatabase extends _$AppDatabase {
     dateTimeNow ??= DateTime.now();
     int? number;
     final numbersOnTraceNow =
-        await getNumbersOnTraceNow(stageId: stageId, dateTimeNow: dateTimeNow).get();
+        await getNumbersOnTraceNow(stageId: stageId, dateTimeNow: dateTimeNow)
+            .get();
     if (numbersOnTraceNow.isNotEmpty) {
       number = numbersOnTraceNow.first.number;
       logger.i('Awaiting number: $number');
@@ -624,12 +697,19 @@ class AppDatabase extends _$AppDatabase {
   Future<DateTime?> _lastFinishTime({required int stageId}) async {
     DateTime? result;
     final res =
-        await getLastFinishTimeWithNumber(stageId: stageId).getSingleOrNull();
+        await _getLastFinishTimeWithNumber(stageId: stageId).getSingleOrNull();
 
     if (res != null) {
       result = strTimeToDateTime(res);
     }
     return result;
+  }
+
+// -------------------------
+// для тестирования
+  Selectable<GetNumberAtStartsResult> getNumberAtStarts(
+      {required int stageId, required int number}) {
+    return _getNumberAtStarts(stageId: stageId, number: number);
   }
 }
 

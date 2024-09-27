@@ -87,19 +87,19 @@ CREATE TABLE trails (
 	comment text
 );
 
-getRaces: SELECT * FROM races WHERE is_deleted = false;
+_getRaces: SELECT * FROM races WHERE is_deleted = false;
 
-addRace:
+_addRace:
 INSERT INTO races (name, start_date, finish_date, location)
 VALUES (:name, :start_date, :finish_date, :location);
 
-deleteRace: UPDATE races SET is_deleted = true WHERE id = :id;
+_deleteRace: UPDATE races SET is_deleted = true WHERE id = :id;
 
-getStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false;
-addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
-deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
+_getStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false;
+_addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
+_deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
 
-getNumberAtStarts:
+_getNumberAtStarts:
 SELECT
 	starts.id as start_id,
 	stage_id,
@@ -126,7 +126,7 @@ WHERE
 
 
 -- Old protocol
-getParticipantsAtStart:
+_getParticipantsAtStart:
 SELECT
 	participants.rider_id as rider_id,
 	participants.race_id as race_id,
@@ -161,7 +161,7 @@ WHERE
 	AND participants.status_id = 1
 ORDER BY start_time ASC;
 
-getExistedStartingParticipants:
+_getExistedStartingParticipants:
 SELECT
 	starts.id as start_id,
 	stage_id,
@@ -188,7 +188,7 @@ WHERE
     	OR (number IS :number
       	AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));
 
-setStartingInfo:
+_setStartingInfo:
 UPDATE starts
 SET start_time = :start_time,
 	automatic_start_time = :automatic_start_time,
@@ -199,14 +199,14 @@ WHERE
 	stage_id = :stage_id
 	AND participant_id = :participant_id;
 
-getParticipantAroundTime:
+_getParticipantAroundTime:
 SELECT *
 FROM starts
 WHERE
 	stage_id = :stage_id
 	AND start_time BETWEEN :before AND :after;
 
-setManualStartTime:
+_setManualStartTime:
 UPDATE starts
 SET
 	manual_start_time = :manual_start_time,
@@ -215,7 +215,7 @@ WHERE
 	participant_id = :participant_id
 	AND stage_id = :stage_id;
 
-getNextStartingParticipants:
+_getNextStartingParticipants:
 SELECT 
 	participants.number as number,
   	starts.start_time as start_time,
@@ -233,7 +233,7 @@ WHERE starts.participant_id = participants.id
 	AND starts.status_id = 1
 ORDER BY start_time ASC;
 
-getForBeep:
+_getForBeep:
 SELECT COUNT(*) FROM starts
 WHERE
 	starts.stage_id = :stage_id
@@ -241,7 +241,7 @@ WHERE
   	AND automatic_start_time ISNULL
 	AND status_id = 1;
 
-getStartingParticipantBetweenTimes:
+_getStartingParticipantBetweenTimes:
 SELECT
 	participants.number as number,
 	starts.start_time as start_time,
@@ -302,10 +302,10 @@ ORDER BY starts.start_time ASC;
 
 /* --- Finish --- */
 
-getFinishesFromStage:
+_getFinishesFromStage:
 SELECT * FROM finishes WHERE stage_id = :stage_id;
 
-getLastFinishTime:
+_getLastFinishTime:
 SELECT finish_time
 FROM finishes
 WHERE
@@ -314,7 +314,7 @@ WHERE
     AND is_manual = false
 ORDER BY finish_time DESC LIMIT 1;
 
-getLastFinishTimeWithNumber:
+_getLastFinishTimeWithNumber:
 SELECT finish_time
 FROM finishes
 WHERE
