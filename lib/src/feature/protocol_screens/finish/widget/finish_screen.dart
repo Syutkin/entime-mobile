@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../common/localization/localization.dart';
+import '../../../../common/utils/consts.dart';
 import '../../../../common/utils/helper.dart';
 import '../../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../../bluetooth/bloc/bluetooth_bloc.dart';
@@ -380,7 +381,7 @@ class _FinishPage extends State<FinishScreen> {
                   onPressed: () async {
                     BlocProvider.of<ProtocolBloc>(context).add(
                       ProtocolAddFinishTime(
-                        time: DateFormat('longTimeFormat').format(DateTime.now()),
+                        time: DateFormat(longTimeFormat).format(DateTime.now()),
                         timeStamp: DateTime.now(),
                       ),
                     );
@@ -435,7 +436,7 @@ class _FinishPage extends State<FinishScreen> {
   Future<void> _addFinishTimeManual(BuildContext context) async {
     final now = DateTime.now();
 //    now = now.add(diff.duration); //добавляем поправку (см. class Difference)
-    final time = DateFormat('longTimeFormat').format(now);
+    final time = DateFormat(longTimeFormat).format(now);
     BlocProvider.of<ProtocolBloc>(context)
         .add(ProtocolAddFinishTimeManual(time: time));
   }

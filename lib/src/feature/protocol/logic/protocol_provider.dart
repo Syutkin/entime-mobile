@@ -307,7 +307,7 @@ class ProtocolProvider implements IProtocolProvider {
     final DateTime timeAfter = dateGoTime.add(const Duration(seconds: 15));
     final String before = DateFormat(shortTimeFormat).format(timeBefore);
     final String after = DateFormat(shortTimeFormat).format(timeAfter);
-    final String phoneTime = DateFormat('longTimeFormat').format(timeStamp);
+    final String phoneTime = DateFormat(longTimeFormat).format(timeStamp);
 
     // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
@@ -358,7 +358,7 @@ class ProtocolProvider implements IProtocolProvider {
     final DateTime timeAfter = time.add(const Duration(seconds: 15));
     final String before = DateFormat(shortTimeFormat).format(timeBefore);
     final String after = DateFormat(shortTimeFormat).format(timeAfter);
-    final String manualStartTime = DateFormat('longTimeFormat').format(time);
+    final String manualStartTime = DateFormat(longTimeFormat).format(time);
 
     final res = await db.rawQuery(
       '''
@@ -753,7 +753,7 @@ class ProtocolProvider implements IProtocolProvider {
       }
     }
 
-    final String phoneTime = DateFormat('longTimeFormat').format(timeStamp);
+    final String phoneTime = DateFormat(longTimeFormat).format(timeStamp);
     final db = await _db;
     await db.insert('finish', {
       'finishtime': finish,

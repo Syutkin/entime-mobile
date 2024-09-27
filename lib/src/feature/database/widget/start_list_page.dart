@@ -201,7 +201,7 @@ class _StartListPage extends State<StartListPage> {
   //       TextButton(
   //         onPressed: () {
   //           final AutomaticStart automaticStart = AutomaticStart(
-  //             DateFormat('longTimeFormat').format(DateTime.now()),
+  //             DateFormat(longTimeFormat).format(DateTime.now()),
   //             1234,
   //             DateTime.now(),
   //           );
@@ -222,7 +222,7 @@ class _StartListPage extends State<StartListPage> {
   //             ),
   //           );
   //           // final AutomaticStart automaticStart = AutomaticStart(
-  //           //   DateFormat('longTimeFormat').format(DateTime.now()),
+  //           //   DateFormat(longTimeFormat).format(DateTime.now()),
   //           //   1234,
   //           //   DateTime.now(),
   //           // );

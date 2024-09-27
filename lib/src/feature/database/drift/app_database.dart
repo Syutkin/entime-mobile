@@ -261,7 +261,7 @@ class AppDatabase extends _$AppDatabase {
         .format(dateGoTime.subtract(Duration(seconds: deltaInSeconds)));
     final String after = DateFormat(shortTimeFormat)
         .format(dateGoTime.add(Duration(seconds: deltaInSeconds)));
-    final String phoneTime = DateFormat('longTimeFormat').format(timeStamp);
+    final String phoneTime = DateFormat(longTimeFormat).format(timeStamp);
 
     // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
@@ -325,7 +325,7 @@ class AppDatabase extends _$AppDatabase {
     final DateTime timeAfter = time.add(Duration(seconds: deltaInSeconds));
     final String before = DateFormat(shortTimeFormat).format(timeBefore);
     final String after = DateFormat(shortTimeFormat).format(timeAfter);
-    final String manualStartTime = DateFormat('longTimeFormat').format(time);
+    final String manualStartTime = DateFormat(longTimeFormat).format(time);
 
     final participantsAroundTime = await _getParticipantAroundTime(
       stageId: stageId,
@@ -337,7 +337,7 @@ class AppDatabase extends _$AppDatabase {
       final DateTime? startTime =
           strTimeToDateTime(participantsAroundTime.first.startTime);
       if (startTime == null) {
-        assert(startTime != null, 'startTime must not be null');
+        logger.e('Wrong time format: $startTime, can not convert to DateTime');
         return result;
       }
       final Duration correction = startTime.difference(time);
@@ -401,8 +401,8 @@ class AppDatabase extends _$AppDatabase {
       logger.e('Wrong time format: $time, can not convert to DateTime');
       return <GetStartingParticipantBetweenTimesResult>[];
     }
-    final String after =
-        DateFormat(shortTimeFormat).format(dateTime.add(const Duration(minutes: 1)));
+    final String after = DateFormat(shortTimeFormat)
+        .format(dateTime.add(const Duration(minutes: 1)));
     return _getStartingParticipantBetweenTimes(
       time: time,
       after: after,
@@ -520,7 +520,7 @@ class AppDatabase extends _$AppDatabase {
       }
     }
 
-    final String phoneTime = DateFormat('longTimeFormat').format(timeStamp);
+    final String phoneTime = DateFormat(longTimeFormat).format(timeStamp);
     final finishId = await _addFinishTime(
       stageId: stage.id!,
       finishTime: finish,
@@ -695,7 +695,7 @@ class AppDatabase extends _$AppDatabase {
             .get();
     if (numbersOnTraceNow.isNotEmpty) {
       number = numbersOnTraceNow.first.number;
-      logger.i('Awaiting number: $number');
+      logger.i('Database -> Awaiting number: $number');
     }
     return number;
   }
