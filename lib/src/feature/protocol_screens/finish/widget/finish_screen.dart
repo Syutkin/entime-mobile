@@ -380,7 +380,7 @@ class _FinishPage extends State<FinishScreen> {
                   onPressed: () async {
                     BlocProvider.of<ProtocolBloc>(context).add(
                       ProtocolAddFinishTime(
-                        time: DateFormat('HH:mm:ss,S').format(DateTime.now()),
+                        time: DateFormat('longTimeFormat').format(DateTime.now()),
                         timeStamp: DateTime.now(),
                       ),
                     );
@@ -435,7 +435,7 @@ class _FinishPage extends State<FinishScreen> {
   Future<void> _addFinishTimeManual(BuildContext context) async {
     final now = DateTime.now();
 //    now = now.add(diff.duration); //добавляем поправку (см. class Difference)
-    final time = DateFormat('HH:mm:ss,S').format(now);
+    final time = DateFormat('longTimeFormat').format(now);
     BlocProvider.of<ProtocolBloc>(context)
         .add(ProtocolAddFinishTimeManual(time: time));
   }

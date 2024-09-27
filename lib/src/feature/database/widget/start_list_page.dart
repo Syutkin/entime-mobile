@@ -176,7 +176,7 @@ class _StartListPage extends State<StartListPage> {
   //       TextButton(
   //         onPressed: () {
   //           BlocProvider.of<BluetoothBloc>(context).add(
-  //             BluetoothEvent.messageReceived(message:  'V${DateFormat('HH:mm:ss').format(DateTime.now())}#',
+  //             BluetoothEvent.messageReceived(message:  'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
   //             ),
   //           );
   //         },
@@ -185,7 +185,7 @@ class _StartListPage extends State<StartListPage> {
   //       TextButton(
   //         onPressed: () {
   //           BlocProvider.of<BluetoothBloc>(context).add(
-  //             BluetoothEvent.messageReceived(message:  'B${DateFormat('HH:mm:ss').format(DateTime.now())}#',
+  //             BluetoothEvent.messageReceived(message:  'B${DateFormat(shortTimeFormat).format(DateTime.now())}#',
   //             ),
   //           );
   //         },
@@ -201,7 +201,7 @@ class _StartListPage extends State<StartListPage> {
   //       TextButton(
   //         onPressed: () {
   //           final AutomaticStart automaticStart = AutomaticStart(
-  //             DateFormat('HH:mm:ss,S').format(DateTime.now()),
+  //             DateFormat('longTimeFormat').format(DateTime.now()),
   //             1234,
   //             DateTime.now(),
   //           );
@@ -222,7 +222,7 @@ class _StartListPage extends State<StartListPage> {
   //             ),
   //           );
   //           // final AutomaticStart automaticStart = AutomaticStart(
-  //           //   DateFormat('HH:mm:ss,S').format(DateTime.now()),
+  //           //   DateFormat('longTimeFormat').format(DateTime.now()),
   //           //   1234,
   //           //   DateTime.now(),
   //           // );

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../common/utils/consts.dart';
 import '../../../common/utils/helper.dart';
 import '../../database/drift/app_database.dart';
 import '../model/tick.dart';
@@ -89,7 +90,7 @@ class CountdownAtStart {
     final res = await _db
         .getNextStartingParticipants(
           stageId: stageId,
-          time: DateFormat('HH:mm:ss').format(time),
+          time: DateFormat(shortTimeFormat).format(time),
         )
         .get();
 

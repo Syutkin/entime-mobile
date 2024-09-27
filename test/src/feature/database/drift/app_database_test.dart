@@ -132,6 +132,92 @@ void main() {
       expect(stagesList.length, 4);
       expect(stagesList[3].name, stageName);
     });
+
+    group('Test setStartingInfo', () {
+      test('All field filled for starting info', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var startTime = '11:11:11';
+        var manualStartTime = '11:11:11';
+        var automaticStartTime = '11:11:11';
+        var manualCorrection = 1234;
+        var automaticCorrection = -4331;
+        var number = 2;
+        var participant = (await db
+                .getNumberAtStarts(stageId: stage.id!, number: number)
+                .get())
+            .first;
+        var participantId = participant.participantId;
+
+        var rowsUpdated = await db.setStartingInfo(
+          startTime: startTime,
+          stageId: stage.id!,
+          participantId: participantId,
+          manualStartTime: manualStartTime,
+          manualCorrection: manualCorrection,
+          automaticStartTime: automaticStartTime,
+          automaticCorrection: automaticCorrection,
+        );
+        expect(rowsUpdated, 1);
+
+        participant = (await db
+                .getNumberAtStarts(stageId: stage.id!, number: number)
+                .get())
+            .first;
+        expect(participant.number, number);
+        expect(participant.participantId, participantId);
+        expect(participant.startTime, startTime);
+        expect(participant.manualStartTime, manualStartTime);
+        expect(participant.manualCorrection, manualCorrection);
+        expect(participant.automaticStartTime, automaticStartTime);
+        expect(participant.automaticCorrection, automaticCorrection);
+      });
+
+      test('Only required fields for starting info', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var startTime = '11:11:11';
+        var manualStartTime = '11:11:11';
+        var automaticStartTime = '11:11:11';
+        var manualCorrection = 1234;
+        var automaticCorrection = -4331;
+        var number = 2;
+        var participant = (await db
+                .getNumberAtStarts(stageId: stage.id!, number: number)
+                .get())
+            .first;
+        var participantId = participant.participantId;
+
+        var rowsUpdated = await db.setStartingInfo(
+          startTime: startTime,
+          stageId: stage.id!,
+          participantId: participantId,
+          manualStartTime: manualStartTime,
+          manualCorrection: manualCorrection,
+          automaticStartTime: automaticStartTime,
+          automaticCorrection: automaticCorrection,
+        );
+        expect(rowsUpdated, 1);
+
+        rowsUpdated = await db.setStartingInfo(
+          startTime: startTime,
+          stageId: stage.id!,
+          participantId: participantId,
+        );
+        expect(rowsUpdated, 1);
+
+        participant = (await db
+                .getNumberAtStarts(stageId: stage.id!, number: number)
+                .get())
+            .first;
+        expect(participant.number, number);
+        expect(participant.participantId, participantId);
+        expect(participant.startTime, startTime);
+        expect(participant.manualStartTime, null);
+        expect(participant.manualCorrection, null);
+        expect(participant.automaticStartTime, null);
+        expect(participant.automaticCorrection, null);
+      });
+    });
+
     group('Test addStartNumber', () {
       test('Add unique start number', () async {
         var stage = (await db.getStages(raceId: 1).get()).first;
@@ -989,9 +1075,6 @@ void main() {
         expect(finishes[1].timestamp, timeStamp2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
-
-
-
       });
     });
   });

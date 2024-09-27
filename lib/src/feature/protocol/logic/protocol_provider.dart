@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import '../../../common/database/logic/database_provider.dart';
 import '../../../common/database/model/dbstate.dart';
 import '../../../common/logger/logger.dart';
+import '../../../common/utils/consts.dart';
 import '../../../common/utils/helper.dart';
 import '../protocol.dart';
 
@@ -269,7 +270,7 @@ class ProtocolProvider implements IProtocolProvider {
       return 0;
     }
     final DateTime timeAfter = beepDateTime.add(const Duration(seconds: 10));
-    final String after = DateFormat('HH:mm:ss').format(timeAfter);
+    final String after = DateFormat(shortTimeFormat).format(timeAfter);
     final db = await _db;
     final x = await db.rawQuery(
       '''
@@ -304,9 +305,9 @@ class ProtocolProvider implements IProtocolProvider {
     final DateTime timeBefore =
         dateGoTime.subtract(const Duration(seconds: 15));
     final DateTime timeAfter = dateGoTime.add(const Duration(seconds: 15));
-    final String before = DateFormat('HH:mm:ss').format(timeBefore);
-    final String after = DateFormat('HH:mm:ss').format(timeAfter);
-    final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
+    final String before = DateFormat(shortTimeFormat).format(timeBefore);
+    final String after = DateFormat(shortTimeFormat).format(timeAfter);
+    final String phoneTime = DateFormat('longTimeFormat').format(timeStamp);
 
     // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
@@ -355,9 +356,9 @@ class ProtocolProvider implements IProtocolProvider {
     final db = await _db;
     final DateTime timeBefore = time.subtract(const Duration(seconds: 15));
     final DateTime timeAfter = time.add(const Duration(seconds: 15));
-    final String before = DateFormat('HH:mm:ss').format(timeBefore);
-    final String after = DateFormat('HH:mm:ss').format(timeAfter);
-    final String manualStartTime = DateFormat('HH:mm:ss,S').format(time);
+    final String before = DateFormat(shortTimeFormat).format(timeBefore);
+    final String after = DateFormat(shortTimeFormat).format(timeAfter);
+    final String manualStartTime = DateFormat('longTimeFormat').format(time);
 
     final res = await db.rawQuery(
       '''
@@ -547,7 +548,7 @@ class ProtocolProvider implements IProtocolProvider {
       return [];
     }
     final DateTime timeAfter = dateTime.add(const Duration(minutes: 1));
-    final String after = DateFormat('HH:mm:ss').format(timeAfter);
+    final String after = DateFormat(shortTimeFormat).format(timeAfter);
     final db = await _db;
     final res = await db.rawQuery(
       '''
@@ -752,7 +753,7 @@ class ProtocolProvider implements IProtocolProvider {
       }
     }
 
-    final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
+    final String phoneTime = DateFormat('longTimeFormat').format(timeStamp);
     final db = await _db;
     await db.insert('finish', {
       'finishtime': finish,

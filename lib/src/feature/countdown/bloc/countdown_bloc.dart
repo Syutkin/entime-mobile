@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
+import '../../../common/utils/consts.dart';
 import '../logic/countdown.dart';
 
 part 'countdown_bloc.freezed.dart';
@@ -41,7 +42,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
             emit(
               CountdownState.working(
                 text: event.text,
-                nextStartTime: DateFormat('HH:mm:ss').format(nextStartTime),
+                nextStartTime: DateFormat(shortTimeFormat).format(nextStartTime),
               ),
             );
           }

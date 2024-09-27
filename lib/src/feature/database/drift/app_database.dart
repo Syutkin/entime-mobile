@@ -81,6 +81,11 @@ class AppDatabase extends _$AppDatabase {
     return _deleteStage(id: id);
   }
 
+  /// Список участников на старте
+  ///
+  /// Список содержит только участников со статусом [ParticipantStatus.active]
+  /// Статус учитывается и для старта на спецучастке,
+  /// и непосредственно для участника
   Selectable<GetParticipantsAtStartResult> getParticipantsAtStart(
       {required int stageId}) {
     return _getParticipantsAtStart(stageId: stageId);
@@ -213,6 +218,7 @@ class AppDatabase extends _$AppDatabase {
     return null;
   }
 
+  /// Устанавливает информацию об участнике на старте
   Future<int> setStartingInfo(
       {required String startTime,
       String? automaticStartTime,
@@ -251,11 +257,11 @@ class AppDatabase extends _$AppDatabase {
       // assert(dateGoTime != null, 'dateGoTime must not be null');
       //   return null;
     }
-    final String before = DateFormat('HH:mm:ss')
+    final String before = DateFormat(shortTimeFormat)
         .format(dateGoTime.subtract(Duration(seconds: deltaInSeconds)));
-    final String after = DateFormat('HH:mm:ss')
+    final String after = DateFormat(shortTimeFormat)
         .format(dateGoTime.add(Duration(seconds: deltaInSeconds)));
-    final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
+    final String phoneTime = DateFormat('longTimeFormat').format(timeStamp);
 
     // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
@@ -317,9 +323,9 @@ class AppDatabase extends _$AppDatabase {
     final DateTime timeBefore =
         time.subtract(Duration(seconds: deltaInSeconds));
     final DateTime timeAfter = time.add(Duration(seconds: deltaInSeconds));
-    final String before = DateFormat('HH:mm:ss').format(timeBefore);
-    final String after = DateFormat('HH:mm:ss').format(timeAfter);
-    final String manualStartTime = DateFormat('HH:mm:ss,S').format(time);
+    final String before = DateFormat(shortTimeFormat).format(timeBefore);
+    final String after = DateFormat(shortTimeFormat).format(timeAfter);
+    final String manualStartTime = DateFormat('longTimeFormat').format(time);
 
     final participantsAroundTime = await _getParticipantAroundTime(
       stageId: stageId,
@@ -377,7 +383,7 @@ class AppDatabase extends _$AppDatabase {
     }
     final DateTime timeAfter =
         beepDateTime.add(Duration(seconds: deltaInSeconds));
-    final String after = DateFormat('HH:mm:ss').format(timeAfter);
+    final String after = DateFormat(shortTimeFormat).format(timeAfter);
     final x =
         await _getForBeep(stageId: stageId, beepTime: time, afterTime: after)
             .get();
@@ -396,7 +402,7 @@ class AppDatabase extends _$AppDatabase {
       return <GetStartingParticipantBetweenTimesResult>[];
     }
     final String after =
-        DateFormat('HH:mm:ss').format(dateTime.add(const Duration(minutes: 1)));
+        DateFormat(shortTimeFormat).format(dateTime.add(const Duration(minutes: 1)));
     return _getStartingParticipantBetweenTimes(
       time: time,
       after: after,
@@ -514,7 +520,7 @@ class AppDatabase extends _$AppDatabase {
       }
     }
 
-    final String phoneTime = DateFormat('HH:mm:ss,S').format(timeStamp);
+    final String phoneTime = DateFormat('longTimeFormat').format(timeStamp);
     final finishId = await _addFinishTime(
       stageId: stage.id!,
       finishTime: finish,
@@ -707,6 +713,7 @@ class AppDatabase extends _$AppDatabase {
 
 // -------------------------
 // для тестирования
+
   Selectable<GetNumberAtStartsResult> getNumberAtStarts(
       {required int stageId, required int number}) {
     return _getNumberAtStarts(stageId: stageId, number: number);

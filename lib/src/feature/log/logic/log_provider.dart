@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../common/database/logic/database_provider.dart';
 import '../../../common/database/model/dbstate.dart';
+import '../../../common/utils/consts.dart';
 import '../log.dart';
 
 abstract class ILogProvider extends IDatabaseProvider {
@@ -164,7 +165,7 @@ class LogProvider implements ILogProvider {
     LogSourceDirection? direction,
   }) async {
     final String timeStamp =
-        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+        DateFormat(longDateFormat).format(DateTime.now());
     final db = await _db;
     final result = await db.insert('log', {
       'level': level.name,

@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 import '../../../common/logger/logger.dart';
+import '../../../common/utils/consts.dart';
 import '../../../common/utils/helper.dart';
 import '../../database/drift/app_database.dart';
 import '../../settings/settings.dart';
@@ -72,9 +73,9 @@ class AudioController implements IAudioController {
     //высчитываем диапазоны времени участников
     DateTime? dateTime = strTimeToDateTime(time);
     if (dateTime != null) {
-      start.add(DateFormat('HH:mm:ss').format(dateTime));
+      start.add(DateFormat(shortTimeFormat).format(dateTime));
       dateTime = dateTime.add(const Duration(minutes: 1));
-      start.add(DateFormat('HH:mm:ss').format(dateTime));
+      start.add(DateFormat(shortTimeFormat).format(dateTime));
     }
     var participant =
         await _db.getStartingParticipants(time: time, stageId: stageId);
