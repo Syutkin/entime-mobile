@@ -3389,7 +3389,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Selectable<GetNumbersOnTraceNowResult> getNumbersOnTraceNow(
+  Selectable<GetNumbersOnTraceNowResult> _getNumbersOnTraceNow(
       {required int stageId, required String timeNow}) {
     return customSelect(
         'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND starts.status_id = 1 AND starts.automatic_start_time ISNULL ORDER BY starts.start_time ASC',

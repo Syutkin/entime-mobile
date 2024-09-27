@@ -270,7 +270,7 @@ SET
 WHERE
 	id = :id;
 
-getNumbersOnTraceNow:
+_getNumbersOnTraceNow:
 SELECT
 	starts.id as start_id,
 	stage_id,

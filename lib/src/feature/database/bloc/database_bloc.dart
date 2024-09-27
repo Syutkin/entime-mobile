@@ -89,7 +89,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     // });
 
     _db
-        .getNumbersOnTraceNow(stageId: _stageId, timeNow: "'now', 'localtime'")
+        .getNumbersOnTraceNow(stageId: _stageId, dateTimeNow: DateTime.now())
         .watch()
         .listen((event) async {
       _numbersOnTrace = event;

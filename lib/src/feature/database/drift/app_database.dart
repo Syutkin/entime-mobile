@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:entime/src/common/utils/consts.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
@@ -356,6 +357,14 @@ class AppDatabase extends _$AppDatabase {
     return result;
   }
 
+  Selectable<GetNumbersOnTraceNowResult> getNumbersOnTraceNow({
+    required int stageId,
+    required DateTime dateTimeNow,
+  }) {
+    var timeNow = DateFormat(sqlTimeFormat).format(dateTimeNow);
+    return _getNumbersOnTraceNow(stageId: stageId, timeNow: timeNow);
+  }
+
   // ----------------финиш----------------
 
   /// Записывает финишное время
@@ -372,10 +381,16 @@ class AppDatabase extends _$AppDatabase {
     int finishDelay = 0,
     bool substituteNumbers = false,
     int substituteNumbersDelay = 0,
+
     /// Произвольное текущее время
-    String? customTimeNow,
+    DateTime? dateTimeNow,
     int? number,
   }) async {
+    final finishTime = strTimeToDateTime(finish);
+    if (finishTime == null) {
+      logger.e('Wrong time format: $finishTime, can not convert to DateTime');
+      return null;
+    }
     bool isHidden = false;
     int? workingNumber = number;
     // узнаём предыдущее нескрытое автоматическое время
@@ -385,11 +400,6 @@ class AppDatabase extends _$AppDatabase {
     if (prevFinishTime != null) {
       final prevFinishDateTime = strTimeToDateTime(prevFinishTime);
       if (prevFinishDateTime != null) {
-        final finishTime = strTimeToDateTime(finish);
-        if (finishTime == null) {
-          logger.e('Wrong time format: $finish, can not convert to DateTime');
-          return null;
-        }
         final difference = finishTime.difference(prevFinishDateTime);
         // скрываем отсечку, если разница меньше настройки
         if (difference.inMilliseconds < finishDelay) {
@@ -407,7 +417,7 @@ class AppDatabase extends _$AppDatabase {
       if (prevFinishTime == null) {
         workingNumber = await _getAwaitingNumber(
           stageId: stage.id!,
-          customTimeNow: customTimeNow,
+          dateTimeNow: dateTimeNow,
         );
       } else {
         // ищем предыдущее время финиша с номером
@@ -415,23 +425,18 @@ class AppDatabase extends _$AppDatabase {
         // если есть, проверяем разницу между финишами
         // если больше разницы в настройках - ставим номер
         if (lastFinishTime != null) {
-          final finishTime = strTimeToDateTime(finish);
-          if (finishTime == null) {
-            assert(finishTime != null, 'finishTime must not be null');
-            return null;
-          }
           final difference = finishTime.difference(lastFinishTime);
           if (difference.inMilliseconds > substituteNumbersDelay) {
             workingNumber = await _getAwaitingNumber(
               stageId: stage.id!,
-              customTimeNow: customTimeNow,
+              dateTimeNow: dateTimeNow,
             );
           }
           // если предыдущего времени с номером нет - ставим номер
         } else {
           workingNumber = await _getAwaitingNumber(
             stageId: stage.id!,
-            customTimeNow: customTimeNow,
+            dateTimeNow: dateTimeNow,
           );
         }
       }
@@ -603,15 +608,14 @@ class AppDatabase extends _$AppDatabase {
 
   Future<int?> _getAwaitingNumber({
     required int stageId,
-    String? customTimeNow,
+    DateTime? dateTimeNow,
   }) async {
+    dateTimeNow ??= DateTime.now();
     int? number;
-    customTimeNow ??= "'now', 'localtime'";
-    final numbersOnTraceProtocol =
-        await getNumbersOnTraceNow(stageId: stageId, timeNow: customTimeNow)
-            .get();
-    if (numbersOnTraceProtocol.isNotEmpty) {
-      number = numbersOnTraceProtocol.first.number;
+    final numbersOnTraceNow =
+        await getNumbersOnTraceNow(stageId: stageId, dateTimeNow: dateTimeNow).get();
+    if (numbersOnTraceNow.isNotEmpty) {
+      number = numbersOnTraceNow.first.number;
       logger.i('Awaiting number: $number');
     }
     return number;
