@@ -1125,7 +1125,7 @@ void main() {
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
         );
-        expect(addNumber2, null);
+        expect(addNumber2, number1);
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
         expect(finishes.length, 2);

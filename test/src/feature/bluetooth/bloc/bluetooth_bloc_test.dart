@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_implementing_value_types
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/database/model/dbstate.dart';
 import 'package:entime/src/feature/audio/audio.dart';
@@ -13,6 +11,8 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class MockBluetoothProvider extends Mock implements BluetoothProvider {}
 
@@ -30,29 +30,81 @@ class MockBluetoothBackgroundConnection extends Mock
 class MockFlutterBluetoothSerial extends Mock
     implements FlutterBluetoothSerial {}
 
+class MockSettingsProvider extends Mock implements SettingsProvider {}
+
+class MockWakelockPlus extends Mock implements WakelockPlus {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  group('BluetoothBloc:', () {
-    late MockBluetoothProvider bluetoothProvider;
-    late BluetoothDeviceWithAvailability deviceWithAvailability;
-    late BluetoothDeviceWithAvailability deviceWithoutAvailability;
-    late MockLogProvider logProvider;
-    late MockAudioController audioController;
-    late MockProtocolProvider protocolProvider;
-    late SettingsProvider settingsProvider;
-    late MockFlutterBluetoothSerial flutterBluetoothSerial;
-    late MockBluetoothBackgroundConnection bluetoothBackgroundConnection;
 
+  late MockBluetoothProvider bluetoothProvider;
+  late BluetoothDeviceWithAvailability deviceWithAvailability;
+  late BluetoothDeviceWithAvailability deviceWithoutAvailability;
+  late MockLogProvider logProvider;
+  late MockAudioController audioController;
+  late MockProtocolProvider protocolProvider;
+  late SharedPrefsSettingsProvider settingsProvider;
+  late AppSettings settings;
+  late MockFlutterBluetoothSerial flutterBluetoothSerial;
+  late MockBluetoothBackgroundConnection bluetoothBackgroundConnection;
+
+  setUpAll(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMessageHandler(
+            'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
+            (obj) async => obj);
+  });
+
+  group('BluetoothBloc:', () {
     setUp(() async {
+      SharedPreferences.setMockInitialValues(
+        <String, Object>{
+          'sound': true,
+          'beep': true,
+          'voice': true,
+          'voiceName': true,
+          'volume': 1.0,
+          'pitch': 1.0,
+          'rate': 0.5,
+          'language': 'ru-RU',
+          'recentFile': '',
+          'wakelock': true,
+          'startFab': true,
+          'startFabSize': 75.0,
+          'finishFab': true,
+          'finishFabSize': 75.0,
+          'countdown': false,
+          'countdownSize': 75.0,
+          'countdownLeft': 0.0,
+          'countdownTop': 0.0,
+          'countdownAtStartTime': true,
+          'checkUpdates': true,
+          'hideMarked': true,
+          'hideNumbers': false,
+          'hideManual': false,
+          'reconnect': true,
+          'finishDelay': 350,
+          'substituteNumbers': false,
+          'substituteNumbersDelay': 500,
+          'logLimit': -1,
+          // appTheme: themeFromString(prefs.getString('theme')),
+          'previousVersion': '0.0.0',
+        },
+      );
       settingsProvider = await SharedPrefsSettingsProvider.load();
       bluetoothProvider = MockBluetoothProvider();
       flutterBluetoothSerial = MockFlutterBluetoothSerial();
       bluetoothBackgroundConnection = MockBluetoothBackgroundConnection();
       protocolProvider = MockProtocolProvider();
       logProvider = MockLogProvider();
-
       audioController = MockAudioController();
+      settings = AppSettings.defaults();
 
+      when(
+        () => bluetoothProvider.flutterBluetoothSerial,
+      ).thenReturn(
+        flutterBluetoothSerial,
+      );
       when(
         () => bluetoothProvider.flutterBluetoothSerial,
       ).thenReturn(
@@ -110,12 +162,14 @@ void main() {
         (_) => Stream.fromIterable([]),
       );
       when(
-        () => audioController.playCountdown(time: any(), stageId: any()),
+        () => audioController.playCountdown(
+            time: any(named: 'time'), stageId: any(named: 'stageId')),
       ).thenAnswer(
         (_) => Future.value(),
       );
       when(
-        () => audioController.callParticipant(time: any(), stageId: any()),
+        () => audioController.callParticipant(
+            time: any(named: 'time'), stageId: any(named: 'stageId')),
       ).thenAnswer(
         (_) => Future.value(),
       );
@@ -638,8 +692,10 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) async {
-          settingsProvider.state
-              .add(const AppSettings.defaults().copyWith(reconnect: false));
+          settings = settings.copyWith(reconnect: false);
+          await settingsProvider.update(settings);
+          expect(settingsProvider.settings.reconnect, false);
+
           bloc.add(
             BluetoothEvent.connect(selectedDevice: deviceWithAvailability),
           );
