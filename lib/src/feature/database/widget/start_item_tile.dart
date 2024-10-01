@@ -7,7 +7,7 @@ import '../drift/app_database.dart';
 class StartItemTile extends StatelessWidget {
   final GestureTapCallback? onTap;
   final DismissDirectionCallback? onDismissed;
-  final GetParticipantsAtStartResult item;
+  final ParticipantAtStart item;
   final bool isHighlighted;
   final String? countdown;
 

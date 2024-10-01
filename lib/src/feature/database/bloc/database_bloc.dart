@@ -21,11 +21,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   List<Stage> _stages = [];
   List<Rider> _riders = [];
   List<Status> _statuses = [];
-  List<GetParticipantsAtStartResult> _participants = [];
+  List<ParticipantAtStart> _participants = [];
   List<Start> _starts = [];
   List<Finish> _finishes = [];
   List<Trail> _trails = [];
-  List<GetNumbersOnTraceNowResult> _numbersOnTrace = [];
+  List<StartingParticipant> _numbersOnTrace = [];
 
   // List<ExistedStartingParticipantsResult> _newStartingParticipant = [];
 

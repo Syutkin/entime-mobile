@@ -2,7 +2,7 @@ part of '../start_list_page.dart';
 
 Future<void> editStartTime(
     BuildContext context,
-    GetParticipantsAtStartResult item,
+    ParticipantAtStart item,
     ) async {
   final automaticStartTimeController = TextEditingController();
   final automaticPhoneTimeController = TextEditingController();

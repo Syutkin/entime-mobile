@@ -36,6 +36,10 @@ class AppDatabase extends _$AppDatabase {
         (3, '${ParticipantStatus.dnf.name}'),
         (4, '${ParticipantStatus.dsq.name}');''');
       },
+      beforeOpen: (details) async {
+        // Enable foreign_keys
+        await customStatement('PRAGMA foreign_keys = ON');
+      },
     );
   }
 
@@ -86,7 +90,7 @@ class AppDatabase extends _$AppDatabase {
   /// Список содержит только участников со статусом [ParticipantStatus.active]
   /// Статус учитывается и для старта на спецучастке,
   /// и непосредственно для участника
-  Selectable<GetParticipantsAtStartResult> getParticipantsAtStart(
+  Selectable<ParticipantAtStart> getParticipantsAtStart(
       {required int stageId}) {
     return _getParticipantsAtStart(stageId: stageId);
   }
@@ -94,7 +98,7 @@ class AppDatabase extends _$AppDatabase {
   /// Обновляет или добавляет участника с заданным [number] и [startTime]
   /// Возвращает null при успехе, и список участников если такое же стартовое время
   /// уже установлено для других участников
-  Future<List<GetExistedStartingParticipantsResult>?> addStartNumber({
+  Future<List<StartingParticipant>?> addStartNumber({
     required Stage stage,
     required int number,
     required String startTime,
@@ -384,10 +388,12 @@ class AppDatabase extends _$AppDatabase {
     final DateTime timeAfter =
         beepDateTime.add(Duration(seconds: deltaInSeconds));
     final String after = DateFormat(shortTimeFormat).format(timeAfter);
-    final x =
-        await _getForBeep(stageId: stageId, beepTime: time, afterTime: after)
-            .get();
-    return x.first;
+    final startingCount = await _getForBeep(
+      stageId: stageId,
+      beepTime: time,
+      afterTime: after,
+    ).get();
+    return startingCount.first;
   }
 
 //Используется для голосового сообщения
@@ -410,7 +416,7 @@ class AppDatabase extends _$AppDatabase {
     ).get();
   }
 
-  Selectable<GetNextStartingParticipantsResult> getNextStartingParticipants(
+  Selectable<NextStartingParticipant> getNextStartingParticipants(
       {required int stageId, required String time}) {
     return _getNextStartingParticipants(stageId: stageId, time: time);
   }
@@ -431,7 +437,7 @@ class AppDatabase extends _$AppDatabase {
     return result;
   }
 
-  Selectable<GetNumbersOnTraceNowResult> getNumbersOnTraceNow({
+  Selectable<StartingParticipant> getNumbersOnTraceNow({
     required int stageId,
     required DateTime dateTimeNow,
   }) {
@@ -548,13 +554,13 @@ class AppDatabase extends _$AppDatabase {
     required String finishTime,
     int? number,
   }) async {
-    final result = await _addFinishTimeManual(
+    final finishId = await _addFinishTimeManual(
       stageId: stageId,
       finishTime: finishTime,
       number: number,
     );
     logger.i('Database -> Manual finish time added: $finishTime');
-    return result;
+    return finishId;
   }
 
   Future<int> hideFinish(int id) async {
@@ -641,26 +647,13 @@ class AppDatabase extends _$AppDatabase {
     logger.i('Database -> Finish info for number $number removed');
   }
 
-  Future<int> _setStatus({
-    required Stage stage,
-    required int number,
-    required int statusId,
-  }) async {
-    final result = await _setStatusForNumberAtStage(
-      raceId: stage.raceId,
-      stageId: stage.id!,
-      number: number,
-      statusId: statusId,
-    );
-    return result;
-  }
-
   Future<int> setDNSForStage({
     required Stage stage,
     required int number,
   }) async {
-    final result = await _setStatus(
-      stage: stage,
+    final result = await _setStatusForNumberAtStage(
+      raceId: stage.raceId,
+      stageId: stage.id!,
       number: number,
       statusId: ParticipantStatus.dns.index,
     );
@@ -672,8 +665,9 @@ class AppDatabase extends _$AppDatabase {
     required Stage stage,
     required int number,
   }) async {
-    final result = await _setStatus(
-      stage: stage,
+    final result = await _setStatusForNumberAtStage(
+      raceId: stage.raceId,
+      stageId: stage.id!,
       number: number,
       statusId: ParticipantStatus.dnf.index,
     );
@@ -714,7 +708,7 @@ class AppDatabase extends _$AppDatabase {
 // -------------------------
 // для тестирования
 
-  Selectable<GetNumberAtStartsResult> getNumberAtStarts(
+  Selectable<NumberAtStart> getNumberAtStarts(
       {required int stageId, required int number}) {
     return _getNumberAtStarts(stageId: stageId, number: number);
   }

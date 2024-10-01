@@ -8,11 +8,11 @@ class DatabaseState with _$DatabaseState {
     required List<Stage> stages,
     required List<Rider> riders,
     required List<Status> statuses,
-    required List<GetParticipantsAtStartResult> participants,
+    required List<ParticipantAtStart> participants,
     required List<Start> starts,
     required List<Finish> finishes,
     required List<Trail> trails,
-    required List<GetNumbersOnTraceNowResult> numbersOnTrace,
+    required List<StartingParticipant> numbersOnTrace,
     Notification? notification,
   }) = _Initialized;
 }

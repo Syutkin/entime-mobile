@@ -99,7 +99,7 @@ _getStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false
 _addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
 _deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
 
-_getNumberAtStarts:
+_getNumberAtStarts AS NumberAtStart:
 SELECT
 	starts.id as start_id,
 	stage_id,
@@ -126,7 +126,7 @@ WHERE
 
 
 -- Old protocol
-_getParticipantsAtStart:
+_getParticipantsAtStart AS ParticipantAtStart:
 SELECT
 	participants.rider_id as rider_id,
 	participants.race_id as race_id,
@@ -161,7 +161,7 @@ WHERE
 	AND participants.status_id = 1
 ORDER BY start_time ASC;
 
-_getExistedStartingParticipants:
+_getExistedStartingParticipants AS StartingParticipant:
 SELECT
 	starts.id as start_id,
 	stage_id,
@@ -173,7 +173,7 @@ SELECT
 	manual_start_time,
 	manual_correction,
 	starts.status_id as start_status,
-	finish_id ,
+	finish_id,
     race_id,
     rider_id,
     number,
@@ -215,7 +215,7 @@ WHERE
 	participant_id = :participant_id
 	AND stage_id = :stage_id;
 
-_getNextStartingParticipants:
+_getNextStartingParticipants AS NextStartingParticipant:
 SELECT 
 	participants.number as number,
   	starts.start_time as start_time,
@@ -270,7 +270,7 @@ SET
 WHERE
 	id = :id;
 
-_getNumbersOnTraceNow:
+_getNumbersOnTraceNow AS StartingParticipant:
 SELECT
 	starts.id as start_id,
 	stage_id,
@@ -282,7 +282,7 @@ SELECT
 	manual_start_time,
 	manual_correction,
 	starts.status_id as start_status,
-	finish_id ,
+	finish_id,
     race_id,
     rider_id,
     number,

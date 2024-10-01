@@ -1081,13 +1081,14 @@ void main() {
         var dateTimeNow = strTimeToDateTime('10:05:28,111');
         var number = 2;
 
-        await db.addFinishTime(
+        var addNumber = await db.addFinishTime(
           stage: stage,
           finish: finish1,
           timeStamp: strTimeToDateTime(timeStamp1)!,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
         );
+        expect(addNumber, number);
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
         expect(finishes.length, 1);
@@ -1108,20 +1109,22 @@ void main() {
         var dateTimeNow = strTimeToDateTime('10:05:28,111');
         var number1 = 2;
 
-        await db.addFinishTime(
+        var addNumber1 = await db.addFinishTime(
           stage: stage,
           finish: finish1,
           timeStamp: strTimeToDateTime(timeStamp1)!,
           dateTimeNow: dateTimeNow,
         );
+        expect(addNumber1, null);
 
-        await db.addFinishTime(
+        var addNumber2 = await db.addFinishTime(
           stage: stage,
           finish: finish2,
           timeStamp: strTimeToDateTime(timeStamp2)!,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
         );
+        expect(addNumber2, null);
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
         expect(finishes.length, 2);
@@ -1149,21 +1152,23 @@ void main() {
         var number1 = 2;
         var number2 = 7;
 
-        await db.addFinishTime(
+        var addNumber1 = await db.addFinishTime(
           stage: stage,
           finish: finish1,
           timeStamp: strTimeToDateTime(timeStamp1)!,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
         );
+        expect(addNumber1, number1);
 
-        await db.addFinishTime(
+        var addNumber2 = await db.addFinishTime(
           stage: stage,
           finish: finish2,
           timeStamp: strTimeToDateTime(timeStamp2)!,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
         );
+        expect(addNumber2, number2);
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
         expect(finishes.length, 2);
@@ -1198,7 +1203,7 @@ void main() {
         var number1 = 2;
         var number2 = 7;
 
-        await db.addFinishTime(
+        var addNumber1 = await db.addFinishTime(
           stage: stage,
           finish: finish1,
           timeStamp: strTimeToDateTime(timeStamp1)!,
@@ -1206,8 +1211,9 @@ void main() {
           dateTimeNow: dateTimeNow,
           substituteNumbersDelay: substituteNumbersDelay,
         );
+        expect(addNumber1, number1);
 
-        await db.addFinishTime(
+        var addNumber2 = await db.addFinishTime(
           stage: stage,
           finish: finish2,
           timeStamp: strTimeToDateTime(timeStamp2)!,
@@ -1215,8 +1221,9 @@ void main() {
           dateTimeNow: dateTimeNow,
           substituteNumbersDelay: substituteNumbersDelay,
         );
+        expect(addNumber2, null);
 
-        await db.addFinishTime(
+        var addNumber3 = await db.addFinishTime(
           stage: stage,
           finish: finish3,
           timeStamp: strTimeToDateTime(timeStamp3)!,
@@ -1224,6 +1231,7 @@ void main() {
           dateTimeNow: dateTimeNow,
           substituteNumbersDelay: substituteNumbersDelay,
         );
+        expect(addNumber3, number2);
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
         expect(finishes.length, 3);
@@ -1262,7 +1270,7 @@ void main() {
         var number1 = 2;
         var number2 = 7;
 
-        await db.addFinishTime(
+        var addNumber1 = await db.addFinishTime(
           stage: stage,
           finish: finish1,
           timeStamp: strTimeToDateTime(timeStamp1)!,
@@ -1270,8 +1278,9 @@ void main() {
           dateTimeNow: dateTimeNow,
           finishDelay: finishDelay,
         );
+        expect(addNumber1, number1);
 
-        await db.addFinishTime(
+        var addNumber2 = await db.addFinishTime(
           stage: stage,
           finish: finish2,
           timeStamp: strTimeToDateTime(timeStamp2)!,
@@ -1279,8 +1288,9 @@ void main() {
           dateTimeNow: dateTimeNow,
           finishDelay: finishDelay,
         );
+        expect(addNumber2, null);
 
-        await db.addFinishTime(
+        var addNumber3 = await db.addFinishTime(
           stage: stage,
           finish: finish3,
           timeStamp: strTimeToDateTime(timeStamp3)!,
@@ -1288,6 +1298,7 @@ void main() {
           dateTimeNow: dateTimeNow,
           finishDelay: finishDelay,
         );
+        expect(addNumber3, number2);
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
         expect(finishes.length, 3);
@@ -1309,6 +1320,32 @@ void main() {
         expect(finishes[2].timestamp, timeStamp3);
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
+      });
+    });
+
+    group('Test addFinishTimeManual', () {
+      test('New manual finish time', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finishTime = '10:05:23,123';
+
+        var addFinish = await db.addFinishTimeManual(
+          stageId: stage.id!,
+          finishTime: finishTime,
+        );
+        expect(addFinish, 1);
+
+        addFinish = await db.addFinishTimeManual(
+          stageId: stage.id!,
+          finishTime: finishTime,
+        );
+        expect(addFinish, 2);
+
+        addFinish = await db.addFinishTimeManual(
+          stageId: stage.id!,
+          finishTime: finishTime,
+        );
+        expect(addFinish, 3);
+
       });
     });
   });

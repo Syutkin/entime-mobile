@@ -9,11 +9,11 @@ class DatabaseEvent with _$DatabaseEvent {
     List<Stage>? stages,
     List<Rider>? riders,
     List<Status>? statuses,
-    List<GetParticipantsAtStartResult>? participants,
+    List<ParticipantAtStart>? participants,
     List<Start>? starts,
     List<Finish>? finishes,
     List<Trail>? trails,
-    List<GetNumbersOnTraceNowResult>? numbersOnTrace,
+    List<StartingParticipant>? numbersOnTrace,
     Notification? notification,
   }) = _EmitState;
 

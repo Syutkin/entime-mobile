@@ -247,7 +247,7 @@ class _StartListPage extends State<StartListPage> {
   //       ),
   //     ];
 
-  Widget _startList(List<GetParticipantsAtStartResult> startList) =>
+  Widget _startList(List<ParticipantAtStart> startList) =>
       CustomScrollView(
         slivers: [
           SliverPersistentHeader(
