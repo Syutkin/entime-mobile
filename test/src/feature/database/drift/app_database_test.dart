@@ -14,6 +14,7 @@ void main() {
   setUp(() {
     db = AppDatabase.forTesting(DatabaseConnection(NativeDatabase.memory()));
 
+    // populate DB
     for (var query in PopDB().queries) {
       db.customInsert(query);
     }
@@ -1535,6 +1536,48 @@ void main() {
 
         expect(start.length, 1);
         expect(start.first.finishId, null);
+      });
+    });
+
+    group('Test setStatusesForStage', () {
+      test('Set DNS for stage', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var number = 14;
+
+        var start = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+        expect(start.length, 1);
+        expect(start.first.startStatusId, 1);
+
+        var rowCount = await db.setDNSForStage(stage: stage, number: number);
+        expect(rowCount, 1);
+
+        start = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+        expect(start.length, 1);
+        expect(start.first.startStatusId, 2);
+      });
+
+      test('Set DNF for stage', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var number = 14;
+
+        var start = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+        expect(start.length, 1);
+        expect(start.first.startStatusId, 1);
+
+        var rowCount = await db.setDNFForStage(stage: stage, number: number);
+        expect(rowCount, 1);
+
+        start = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+        expect(start.length, 1);
+        expect(start.first.startStatusId, 3);
       });
     });
   });

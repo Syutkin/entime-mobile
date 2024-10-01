@@ -652,28 +652,28 @@ class AppDatabase extends _$AppDatabase {
     required Stage stage,
     required int number,
   }) async {
-    final result = await _setStatusForNumberAtStage(
+    final rowCount = await _setStatusForNumberAtStage(
       raceId: stage.raceId,
       stageId: stage.id!,
       number: number,
       statusId: ParticipantStatus.dns.index,
     );
     logger.i('Database -> Set DNS to number: $number at stageId: ${stage.id}');
-    return result;
+    return rowCount;
   }
 
   Future<int> setDNFForStage({
     required Stage stage,
     required int number,
   }) async {
-    final result = await _setStatusForNumberAtStage(
+    final rowCount = await _setStatusForNumberAtStage(
       raceId: stage.raceId,
       stageId: stage.id!,
       number: number,
       statusId: ParticipantStatus.dnf.index,
     );
     logger.i('Database -> Set DNF to number: $number at stageId: ${stage.id}');
-    return result;
+    return rowCount;
   }
 
 // -------------------------
