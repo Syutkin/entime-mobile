@@ -1321,6 +1321,22 @@ void main() {
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
       });
+
+      test('Add incorrect finish time', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finish = '10:05-23,123';
+        var timeStamp = '10:05:23,456';
+        var finishDelay = 1000;
+
+        var addNumber = await db.addFinishTime(
+          stage: stage,
+          finish: finish,
+          timeStamp: strTimeToDateTime(timeStamp)!,
+          substituteNumbers: true,
+          finishDelay: finishDelay,
+        );
+        expect(addNumber, null);
+      });
     });
 
     group('Test addFinishTimeManual', () {
@@ -1345,7 +1361,180 @@ void main() {
           finishTime: finishTime,
         );
         expect(addFinish, 3);
+      });
+    });
 
+    group('Test clearFinishResultsDebug', () {
+      test('Clear all finish info', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finish1 = '10:05:23,123';
+        var finish2 = '10:05:23,129';
+        var finish3 = '10:05:25,129';
+        var timeStamp1 = '10:05:23,456';
+        var timeStamp2 = '10:05:24,459';
+        var timeStamp3 = '10:05:25,459';
+        var dateTimeNow = strTimeToDateTime('10:05:28,111');
+        var number1 = 2;
+        var number2 = 7;
+        var number3 = 14;
+
+        var addNumber1 = await db.addFinishTime(
+          stage: stage,
+          finish: finish1,
+          timeStamp: strTimeToDateTime(timeStamp1)!,
+          dateTimeNow: dateTimeNow,
+          number: number1,
+        );
+        expect(addNumber1, number1);
+
+        var addNumber2 = await db.addFinishTime(
+          stage: stage,
+          finish: finish2,
+          timeStamp: strTimeToDateTime(timeStamp2)!,
+          dateTimeNow: dateTimeNow,
+          number: number2,
+        );
+        expect(addNumber2, number2);
+
+        var addNumber3 = await db.addFinishTime(
+          stage: stage,
+          finish: finish3,
+          timeStamp: strTimeToDateTime(timeStamp3)!,
+          dateTimeNow: dateTimeNow,
+          number: number3,
+        );
+        expect(addNumber3, number3);
+
+        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.length, 3);
+        expect(finishes[0].stageId, stage.id);
+        expect(finishes[0].number, number1);
+        expect(finishes[0].finishTime, finish1);
+        expect(finishes[0].timestamp, timeStamp1);
+        expect(finishes[0].isHidden, false);
+        expect(finishes[0].isManual, false);
+        expect(finishes[1].stageId, stage.id);
+        expect(finishes[1].number, number2);
+        expect(finishes[1].finishTime, finish2);
+        expect(finishes[1].timestamp, timeStamp2);
+        expect(finishes[1].isHidden, false);
+        expect(finishes[1].isManual, false);
+        expect(finishes[2].stageId, stage.id);
+        expect(finishes[2].number, number3);
+        expect(finishes[2].finishTime, finish3);
+        expect(finishes[2].timestamp, timeStamp3);
+        expect(finishes[2].isHidden, false);
+        expect(finishes[2].isManual, false);
+
+        var start1 = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number1)
+            .get();
+        var start2 = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number2)
+            .get();
+        var start3 = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number3)
+            .get();
+
+        expect(start1.length, 1);
+        expect(start1.first.finishId, 1);
+        expect(start2.length, 1);
+        expect(start2.first.finishId, 2);
+        expect(start3.length, 1);
+        expect(start3.first.finishId, 3);
+
+        await db.clearFinishResultsDebug(stage.id!);
+        finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+
+        expect(finishes.length, 3);
+        expect(finishes[0].stageId, stage.id);
+        expect(finishes[0].number, null);
+        expect(finishes[0].finishTime, finish1);
+        expect(finishes[0].timestamp, timeStamp1);
+        expect(finishes[0].isHidden, false);
+        expect(finishes[0].isManual, false);
+        expect(finishes[1].stageId, stage.id);
+        expect(finishes[1].number, null);
+        expect(finishes[1].finishTime, finish2);
+        expect(finishes[1].timestamp, timeStamp2);
+        expect(finishes[1].isHidden, false);
+        expect(finishes[1].isManual, false);
+        expect(finishes[2].stageId, stage.id);
+        expect(finishes[2].number, null);
+        expect(finishes[2].finishTime, finish3);
+        expect(finishes[2].timestamp, timeStamp3);
+        expect(finishes[2].isHidden, false);
+        expect(finishes[2].isManual, false);
+
+        start1 = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number1)
+            .get();
+        start2 = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number2)
+            .get();
+        start3 = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number3)
+            .get();
+
+        expect(start1.length, 1);
+        expect(start1.first.finishId, null);
+        expect(start2.length, 1);
+        expect(start2.first.finishId, null);
+        expect(start3.length, 1);
+        expect(start3.first.finishId, null);
+      });
+    });
+
+    group('Test clearNumberAtFinish', () {
+      test('Clear number at finish', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finish = '10:05:23,123';
+        var timeStamp = '10:05:23,456';
+        var dateTimeNow = strTimeToDateTime('10:05:28,111');
+        var number = 2;
+
+        var addNumber = await db.addFinishTime(
+          stage: stage,
+          finish: finish,
+          timeStamp: strTimeToDateTime(timeStamp)!,
+          dateTimeNow: dateTimeNow,
+          number: number,
+        );
+        expect(addNumber, number);
+
+        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.length, 1);
+        expect(finishes[0].stageId, stage.id);
+        expect(finishes[0].number, number);
+        expect(finishes[0].finishTime, finish);
+        expect(finishes[0].timestamp, timeStamp);
+        expect(finishes[0].isHidden, false);
+        expect(finishes[0].isManual, false);
+
+        var start = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+
+        expect(start.length, 1);
+        expect(start.first.finishId, 1);
+
+        await db.clearNumberAtFinish(stage: stage, number: number);
+        finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+
+        expect(finishes.length, 1);
+        expect(finishes[0].stageId, stage.id);
+        expect(finishes[0].number, null);
+        expect(finishes[0].finishTime, finish);
+        expect(finishes[0].timestamp, timeStamp);
+        expect(finishes[0].isHidden, false);
+        expect(finishes[0].isManual, false);
+
+        start = await db
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
+
+        expect(start.length, 1);
+        expect(start.first.finishId, null);
       });
     });
   });

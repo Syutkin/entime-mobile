@@ -575,23 +575,24 @@ class AppDatabase extends _$AppDatabase {
     return result;
   }
 
-  Future<int> clearFinishResultsDebug(int stageId) async {
+  Future<void> clearFinishResultsDebug(int stageId) async {
     int result = await customUpdate(
       'UPDATE starts SET finish_id = NULL WHERE stage_id = ?',
       variables: [Variable.withInt(stageId)],
       updates: {starts},
       updateKind: UpdateKind.update,
     );
+    logger.d('Database -> Finish info for $result starting participants cleared');
     result = await customUpdate(
       'UPDATE finishes '
-      'SET number = NULL, is_hidden = false, '
+      'SET number = NULL, is_hidden = false '
       'WHERE stage_id = ?',
       variables: [Variable.withInt(stageId)],
       updates: {finishes},
       updateKind: UpdateKind.update,
     );
+    logger.d('Database -> $result finish results cleared');
     logger.i('Database -> Results cleared');
-    return result;
   }
 
   Future<bool> addNumberToFinish(
@@ -624,13 +625,13 @@ class AppDatabase extends _$AppDatabase {
     }
   }
 
-  Future<void> clearNumberAtFinish(
-    Stage stage,
-    int number,
+  Future<void> clearNumberAtFinish({
+    required Stage stage,
+    required int number,}
   ) async {
     await customUpdate(
       'UPDATE finishes '
-      'SET number = NULL, '
+      'SET number = NULL '
       'WHERE number = ? AND stage_id = ?',
       variables: [
         Variable.withInt(number),
