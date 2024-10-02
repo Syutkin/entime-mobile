@@ -4,20 +4,76 @@ import 'package:entime/src/feature/update/update.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'update_test.mocks.dart';
+// import 'package:mockito/annotations.dart';
+// import 'package:mockito/mockito.dart';
+//
+// import 'update_test.mocks.dart';
 
 // Generate a MockClient using the Mockito package.
 // Create new instances of this class in each test.
-@GenerateMocks([http.Client, AppInfoProvider])
+// @GenerateMocks([http.Client, AppInfoProvider])
+
+class MockClient extends Mock implements http.Client {}
+
+class MockAppInfoProvider extends Mock implements AppInfoProvider {}
+
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final client = MockClient();
-  final appInfoProvider = MockAppInfoProvider();
-  final settings = await SharedPrefsSettingsProvider.load();
-  await settings.setDefaults();
+
+  late MockClient client;
+  late MockAppInfoProvider appInfoProvider;
+  late SharedPrefsSettingsProvider settings;
+  // await settings.setDefaults();
+
+  setUpAll(() async {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMessageHandler(
+            'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
+            (obj) async => obj);
+
+    SharedPreferences.setMockInitialValues(
+      <String, Object>{
+        'sound': true,
+        'beep': true,
+        'voice': true,
+        'voiceName': true,
+        'volume': 1.0,
+        'pitch': 1.0,
+        'rate': 0.5,
+        'language': 'ru-RU',
+        'recentFile': '',
+        'wakelock': true,
+        'startFab': true,
+        'startFabSize': 75.0,
+        'finishFab': true,
+        'finishFabSize': 75.0,
+        'countdown': false,
+        'countdownSize': 75.0,
+        'countdownLeft': 0.0,
+        'countdownTop': 0.0,
+        'countdownAtStartTime': true,
+        'checkUpdates': true,
+        'hideMarked': true,
+        'hideNumbers': false,
+        'hideManual': false,
+        'reconnect': true,
+        'finishDelay': 350,
+        'substituteNumbers': false,
+        'substituteNumbersDelay': 500,
+        'logLimit': -1,
+        // appTheme: themeFromString(prefs.getString('theme')),
+        'previousVersion': '0.0.0',
+      },
+    );
+
+    client = MockClient();
+    appInfoProvider = MockAppInfoProvider();
+    settings = await SharedPrefsSettingsProvider.load();
+    await settings.setDefaults();
+  });
 
   group('UpdateProvider.init', () {
     test('Initialize', () async {
@@ -34,20 +90,12 @@ void main() async {
 
   group('UpdateProvider.isUpdateAvailable', () {
     test('Update available', () async {
+      when(() => appInfoProvider.appName).thenReturn('Entime');
+      when(() => appInfoProvider.version).thenReturn('0.0.1');
+      when(() => appInfoProvider.buildNumber).thenReturn('1');
+      when(() => appInfoProvider.abi).thenReturn('arm64-v8a');
       when(
-        appInfoProvider.appName,
-      ).thenAnswer((realInvocation) => 'Entime');
-      when(
-        appInfoProvider.version,
-      ).thenAnswer((realInvocation) => '0.0.1');
-      when(
-        appInfoProvider.buildNumber,
-      ).thenAnswer((realInvocation) => '1');
-      when(
-        appInfoProvider.abi,
-      ).thenAnswer((realInvocation) => 'arm64-v8a');
-      when(
-        client.get(
+        () => client.get(
           Uri.parse(
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
@@ -70,19 +118,19 @@ void main() async {
 
     test('Update available but check disabled at settings', () async {
       when(
-        appInfoProvider.appName,
+        () => appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'entime');
       when(
-        appInfoProvider.version,
+        () => appInfoProvider.version,
       ).thenAnswer((realInvocation) => '0.0.1');
       when(
-        appInfoProvider.buildNumber,
+        () => appInfoProvider.buildNumber,
       ).thenAnswer((realInvocation) => '1');
       when(
-        appInfoProvider.abi,
+        () => appInfoProvider.abi,
       ).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
-        client.get(
+        () => client.get(
           Uri.parse(
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
@@ -109,19 +157,19 @@ void main() async {
 
     test('Update unavailable, you get a latest version', () async {
       when(
-        appInfoProvider.appName,
+        () => appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'Entime');
       when(
-        appInfoProvider.version,
+        () => appInfoProvider.version,
       ).thenAnswer((realInvocation) => '1.0.1');
       when(
-        appInfoProvider.buildNumber,
+        () => appInfoProvider.buildNumber,
       ).thenAnswer((realInvocation) => '1');
       when(
-        appInfoProvider.abi,
+        () => appInfoProvider.abi,
       ).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
-        client.get(
+        () => client.get(
           Uri.parse(
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
@@ -144,19 +192,19 @@ void main() async {
 
     test('Incorrect response from github api', () async {
       when(
-        appInfoProvider.appName,
+        () => appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'Entime');
       when(
-        appInfoProvider.version,
+        () => appInfoProvider.version,
       ).thenAnswer((realInvocation) => '1.0.1');
       when(
-        appInfoProvider.buildNumber,
+        () => appInfoProvider.buildNumber,
       ).thenAnswer((realInvocation) => '1');
       when(
-        appInfoProvider.abi,
+        () => appInfoProvider.abi,
       ).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
-        client.get(
+        () => client.get(
           Uri.parse(
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
@@ -171,19 +219,19 @@ void main() async {
 
     test('404 not found', () async {
       when(
-        appInfoProvider.appName,
+        () => appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'Entime');
       when(
-        appInfoProvider.version,
+        () => appInfoProvider.version,
       ).thenAnswer((realInvocation) => '1.0.1');
       when(
-        appInfoProvider.buildNumber,
+        () => appInfoProvider.buildNumber,
       ).thenAnswer((realInvocation) => '1');
       when(
-        appInfoProvider.abi,
+        () => appInfoProvider.abi,
       ).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
-        client.get(
+        () => client.get(
           Uri.parse(
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
@@ -209,19 +257,19 @@ void main() async {
       final appInfoProvider = MockAppInfoProvider();
 
       when(
-        appInfoProvider.appName,
+        () => appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'Entime');
       when(
-        appInfoProvider.version,
+        () => appInfoProvider.version,
       ).thenAnswer((realInvocation) => '1.0.1');
       when(
-        appInfoProvider.buildNumber,
+        () => appInfoProvider.buildNumber,
       ).thenAnswer((realInvocation) => '1');
       when(
-        appInfoProvider.abi,
+        () => appInfoProvider.abi,
       ).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
-        client.get(
+        () => client.get(
           Uri.parse(
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
@@ -246,7 +294,7 @@ void main() async {
   group('UpdateProvider.latestVersion', () {
     test('latestVersion exists', () async {
       when(
-        client.get(
+        () => client.get(
           Uri.parse(
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
@@ -271,7 +319,7 @@ void main() async {
 
     test('latestVersion did not exists', () async {
       when(
-        client.get(
+        () => client.get(
           Uri.parse(
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
@@ -304,7 +352,7 @@ void main() async {
       await settings.setDefaults();
 
       when(
-        appInfoProvider.version,
+        () => appInfoProvider.version,
       ).thenAnswer(
         (realInvocation) => '1.0.1',
       );
@@ -328,7 +376,7 @@ void main() async {
       );
 
       when(
-        appInfoProvider.version,
+        () => appInfoProvider.version,
       ).thenAnswer(
         (realInvocation) => '1.0.1',
       );
@@ -347,7 +395,7 @@ void main() async {
       );
 
       when(
-        appInfoProvider.version,
+        () => appInfoProvider.version,
       ).thenAnswer(
         (realInvocation) => '2.0.1',
       );
@@ -370,7 +418,7 @@ void main() async {
       );
 
       when(
-        appInfoProvider.version,
+        () => appInfoProvider.version,
       ).thenAnswer(
         (realInvocation) => '3.0.5-dev',
       );
