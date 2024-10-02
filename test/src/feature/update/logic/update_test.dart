@@ -7,14 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// import 'package:mockito/annotations.dart';
-// import 'package:mockito/mockito.dart';
-//
-// import 'update_test.mocks.dart';
-
-// Generate a MockClient using the Mockito package.
-// Create new instances of this class in each test.
-// @GenerateMocks([http.Client, AppInfoProvider])
+import '../../../../helpers/shared_prefs_defaults.dart';
 
 class MockClient extends Mock implements http.Client {}
 
@@ -26,7 +19,6 @@ void main() async {
   late MockClient client;
   late MockAppInfoProvider appInfoProvider;
   late SharedPrefsSettingsProvider settings;
-  // await settings.setDefaults();
 
   setUpAll(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -34,40 +26,7 @@ void main() async {
             'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
             (obj) async => obj);
 
-    SharedPreferences.setMockInitialValues(
-      <String, Object>{
-        'sound': true,
-        'beep': true,
-        'voice': true,
-        'voiceName': true,
-        'volume': 1.0,
-        'pitch': 1.0,
-        'rate': 0.5,
-        'language': 'ru-RU',
-        'recentFile': '',
-        'wakelock': true,
-        'startFab': true,
-        'startFabSize': 75.0,
-        'finishFab': true,
-        'finishFabSize': 75.0,
-        'countdown': false,
-        'countdownSize': 75.0,
-        'countdownLeft': 0.0,
-        'countdownTop': 0.0,
-        'countdownAtStartTime': true,
-        'checkUpdates': true,
-        'hideMarked': true,
-        'hideNumbers': false,
-        'hideManual': false,
-        'reconnect': true,
-        'finishDelay': 350,
-        'substituteNumbers': false,
-        'substituteNumbersDelay': 500,
-        'logLimit': -1,
-        // appTheme: themeFromString(prefs.getString('theme')),
-        'previousVersion': '0.0.0',
-      },
-    );
+    SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
 
     client = MockClient();
     appInfoProvider = MockAppInfoProvider();

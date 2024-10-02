@@ -14,6 +14,8 @@ import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
+import '../../../../helpers/shared_prefs_defaults.dart';
+
 class MockBluetoothProvider extends Mock implements BluetoothProvider {}
 
 class MockProtocolProvider extends Mock implements ProtocolProvider {}
@@ -57,40 +59,7 @@ void main() {
 
   group('BluetoothBloc:', () {
     setUp(() async {
-      SharedPreferences.setMockInitialValues(
-        <String, Object>{
-          'sound': true,
-          'beep': true,
-          'voice': true,
-          'voiceName': true,
-          'volume': 1.0,
-          'pitch': 1.0,
-          'rate': 0.5,
-          'language': 'ru-RU',
-          'recentFile': '',
-          'wakelock': true,
-          'startFab': true,
-          'startFabSize': 75.0,
-          'finishFab': true,
-          'finishFabSize': 75.0,
-          'countdown': false,
-          'countdownSize': 75.0,
-          'countdownLeft': 0.0,
-          'countdownTop': 0.0,
-          'countdownAtStartTime': true,
-          'checkUpdates': true,
-          'hideMarked': true,
-          'hideNumbers': false,
-          'hideManual': false,
-          'reconnect': true,
-          'finishDelay': 350,
-          'substituteNumbers': false,
-          'substituteNumbersDelay': 500,
-          'logLimit': -1,
-          // appTheme: themeFromString(prefs.getString('theme')),
-          'previousVersion': '0.0.0',
-        },
-      );
+      SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
       settingsProvider = await SharedPrefsSettingsProvider.load();
       bluetoothProvider = MockBluetoothProvider();
       flutterBluetoothSerial = MockFlutterBluetoothSerial();
