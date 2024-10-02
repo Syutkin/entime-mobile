@@ -1,3 +1,4 @@
+import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -295,11 +296,12 @@ class _StartListPage extends State<StartListPage> {
                       onTap: () async {
                         await editStartTime(context, item);
                       },
-                      //ToDo:
+                      /// Set DNS on dismissed
                       onDismissed: (direction) {
                         BlocProvider.of<DatabaseBloc>(context).add(
-                          DatabaseEvent.setDNSatStart(
+                          DatabaseEvent.setStatusForStartId(
                             startId: item.startId!,
+                            status: ParticipantStatus.dns
                           ),
                         );
                       },

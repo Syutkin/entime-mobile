@@ -2,6 +2,7 @@
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -62,7 +63,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       add(const DatabaseEvent.emitState());
     });
 
-    (_db.select(_db.starts)..where((start) => start.stageId.equals(_stageId)))
+    (_db.select(_db.starts)
+      ..where((start) => start.stageId.equals(_stageId)))
         .watch()
         .listen((event) async {
       _starts = event;
@@ -168,22 +170,22 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         getParticipantsAtStart: (event) async {
           _stageId = event.stageId;
           _participants =
-              await _db.getParticipantsAtStart(stageId: event.stageId).get();
+          await _db.getParticipantsAtStart(stageId: event.stageId).get();
           add(const DatabaseEvent.emitState());
         },
         addStartNumber: (event) async {
-          final result = await _db.addStartNumber(
+          final startingParticipants = await _db.addStartNumber(
             stage: event.stage,
             number: event.number,
             startTime: event.startTime,
             forceAdd: event.forceAdd,
           );
           //ToDo: popup с вопросом обновлять или нет стартовое время или номер
-          if (result != null) {
+          if (startingParticipants != null) {
             add(
               DatabaseEvent.emitState(
                 notification: Notification.updateNumber(
-                  existedStartingParticipants: result,
+                  existedStartingParticipants: startingParticipants,
                   number: event.number,
                   startTime: event.startTime,
                 ),
@@ -206,13 +208,78 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _db.updateManualStartTime(
               stageId: event.stageId, time: event.time);
         },
-        setDNSatStart: (event) {
-          _db.setStatusForStartId(
-              id: event.startId, status: ParticipantStatus.dns);
+        setStatusForStartId: (event) async {
+          await _db.setStatusForStartId(
+              startId: event.startId, status: ParticipantStatus.dns);
         },
-        // getNumbersOnTrace: (event) async {
-        //   await _db.getNumbersOnTrace(stageId: _stageId);
-        // },
+        updateAutomaticCorrection: (event) async {
+          await _db.updateAutomaticCorrection(stageId: event.stageId,
+              time: event.time,
+              correction: event.correction,
+              timeStamp: event.timeStamp);
+        },
+        addFinishTime: (event) async {
+          await _db.addFinishTime(stage: event.stage,
+              finish: event.finish,
+              timeStamp: event.timeStamp);
+        },
+        addFinishTimeManual: (event) async {
+          await _db.addFinishTimeManual(
+              stageId: event.stageId, finishTime: event.finishTime);
+        },
+        //ToDo:
+        clearStartResultsDebug: (event) {
+          throw('Not implemented');
+        },
+        clearFinishResultsDebug: (event) async {
+          await _db.clearFinishResultsDebug(event.stageId);
+        },
+        hideFinish: (event) async {
+          await _db.hideFinish(event.id);
+        },
+        hideAllFinises: (event) async {
+          await _db.hideAllFinishes(event.stageId);
+        },
+        clearNumberAtFinish: (event) async {
+          await _db.clearNumberAtFinish(
+              stage: event.stage, number: event.number);
+        },
+        setDNSForStage: (event) async {
+          await _db.setDNSForStage(stage: event.stage, number: event.number);
+        },
+        setDNFForStage: (event) async {
+          await _db.setDNFForStage(stage: event.stage, number: event.number);
+        },
+        addNumberToFinish: (event) async {
+          await _db.addNumberToFinish(stage: event.stage,
+              finishId: event.finishId,
+              number: event.number,
+              finishTime: event.finishTime);
+        },
+        getNumbersOnTraceNow: (event) async {
+          await _db.getNumbersOnTraceNow(
+              stageId: event.stageId, dateTimeNow: event.dateTimeNow);
+        },
+        //ToDo:
+        loadStartFromCsv: (event) {
+          throw('Not implemented');
+        },
+        //ToDo:
+        shareStart: (event) {
+          throw('Not implemented');
+        },
+        //ToDo:
+        shareFinish: (event) {
+          throw('Not implemented');
+        },
+        //ToDo:
+        selectAwaitingNumber: (event) {
+          throw('Not implemented');
+        },
+        //ToDo:
+        deselectAwaitingNumber: (event) {
+          throw('Not implemented');
+        },
       );
     });
   }

@@ -422,17 +422,18 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> setStatusForStartId({
-    required int id,
+    required int startId,
     required ParticipantStatus status,
   }) async {
     var status = ParticipantStatus.dns;
-    final result = await _setDNSForStartId(id: id, statusId: status.index);
+    final result = await _setDNSForStartId(id: startId, statusId: status.index);
 
     if (result > 0) {
-      logger.i('Database -> Set ${status.name.toUpperCase()} to startId: $id');
+      logger.i(
+          'Database -> Set ${status.name.toUpperCase()} to startId: $startId');
     } else {
       logger.i(
-          'Database -> Can not find startId: $id, ${status.name.toUpperCase()} not set');
+          'Database -> Can not find startId: $startId, ${status.name.toUpperCase()} not set');
     }
     return result;
   }
@@ -564,26 +565,27 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> hideFinish(int id) async {
-    final result = await _hideFinish(id: id);
+    final rowCount = await _hideFinish(id: id);
     logger.i('Database -> Finish times hided for id: $id');
-    return result;
+    return rowCount;
   }
 
-  Future<int> hideAllFinish() async {
-    final result = await _hideAllFinishes();
+  Future<int> hideAllFinishes(int stageId) async {
+    final rowCount = await _hideAllFinishes(stageId: stageId);
     logger.i('Database -> All finish times hided');
-    return result;
+    return rowCount;
   }
 
   Future<void> clearFinishResultsDebug(int stageId) async {
-    int result = await customUpdate(
+    int rowCount = await customUpdate(
       'UPDATE starts SET finish_id = NULL WHERE stage_id = ?',
       variables: [Variable.withInt(stageId)],
       updates: {starts},
       updateKind: UpdateKind.update,
     );
-    logger.d('Database -> Finish info for $result starting participants cleared');
-    result = await customUpdate(
+    logger.d(
+        'Database -> Finish info for $rowCount starting participants cleared');
+    rowCount = await customUpdate(
       'UPDATE finishes '
       'SET number = NULL, is_hidden = false '
       'WHERE stage_id = ?',
@@ -591,16 +593,16 @@ class AppDatabase extends _$AppDatabase {
       updates: {finishes},
       updateKind: UpdateKind.update,
     );
-    logger.d('Database -> $result finish results cleared');
+    logger.d('Database -> $rowCount finish results cleared');
     logger.i('Database -> Results cleared');
   }
 
-  Future<bool> addNumberToFinish(
-    Stage stage,
-    int finishId,
-    int number,
-    String finishTime,
-  ) async {
+  Future<bool> addNumberToFinish({
+    required Stage stage,
+    required int finishId,
+    required int number,
+    required String finishTime,
+  }) async {
     final existingNumber = await _getNumberAtFinishes(
       stageId: stage.id!,
       number: number,
@@ -627,8 +629,8 @@ class AppDatabase extends _$AppDatabase {
 
   Future<void> clearNumberAtFinish({
     required Stage stage,
-    required int number,}
-  ) async {
+    required int number,
+  }) async {
     await customUpdate(
       'UPDATE finishes '
       'SET number = NULL '

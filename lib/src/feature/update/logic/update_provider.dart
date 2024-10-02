@@ -1,5 +1,3 @@
-// ignore_for_file: use_setters_to_change_properties, avoid_catching_errors
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -79,12 +77,12 @@ class UpdateProvider {
         final latestVersion = Version.parse(_latestRelease!.tagName);
         final currentVersion = Version.parse(_appInfo.version);
         if (latestVersion > currentVersion) {
-          logger.i('Update_provider: Update to $latestVersion available');
+          logger.i('Update_provider -> Update to $latestVersion available');
           _canUpdate = true;
         }
       }
     } on Exception catch (e) {
-      logger.e('Some error: $e');
+      logger.e('Update_provider -> Some error: $e');
     }
     return _canUpdate;
   }
@@ -102,15 +100,15 @@ class UpdateProvider {
           );
           return release;
         } else {
-          logger.d('StatusCode: ${response.statusCode}');
+          logger.d('Update_provider -> StatusCode: ${response.statusCode}');
           return null;
         }
       } on Exception catch (e) {
-        logger.e('Exception: $e');
+        logger.e('Update_provider -> Exception: $e');
         return null;
-        // Может возникнуть при получении ошибочного json от github
+        // Может возникнуть при получении некорректного json от github
       } on Error catch (e) {
-        logger.e('Error: $e');
+        logger.e('Update_provider -> Error: $e');
         return null;
       }
     }
@@ -146,7 +144,7 @@ class UpdateProvider {
           _updateFileSize = response.contentLength;
 
           if (_updateFileSize != null) {
-            logger.d('Update_provider: contentLength: $_updateFileSize');
+            logger.d('Update_provider -> contentLength: $_updateFileSize');
 
             final List<int> bytes = [];
 
@@ -163,20 +161,20 @@ class UpdateProvider {
                 _onDownloadComplete();
               },
               onError: (dynamic error) {
-                logger.e('Update_provider: Error: $error');
+                logger.e('Update_provider -> Error: $error');
                 _onError(error as String);
               },
               cancelOnError: true,
             );
           } else {
-            _onError('response.contentLength is null');
+            _onError('Update_provider -> response.contentLength is null');
           }
         } on Exception catch (e) {
           logger.e(e);
         }
       }
     } else {
-      logger.w('Update_provider: Can not access file system');
+      logger.w('Update_provider -> Can not access file system');
     }
   }
 

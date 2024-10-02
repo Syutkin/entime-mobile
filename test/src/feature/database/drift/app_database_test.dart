@@ -746,7 +746,7 @@ void main() {
             .get();
 
         var result = await db.setStatusForStartId(
-            id: startId, status: ParticipantStatus.dns);
+            startId: startId, status: ParticipantStatus.dns);
         expect(result, 1);
 
         participants = await db
@@ -765,7 +765,7 @@ void main() {
 
       test('Set DNS but start with id does not exists', () async {
         var result =
-            await db.setStatusForStartId(id: 0, status: ParticipantStatus.dns);
+            await db.setStatusForStartId(startId: 0, status: ParticipantStatus.dns);
         expect(result, 0);
       });
     });
@@ -792,8 +792,12 @@ void main() {
         expect(finishes.length, 1);
         var finishId = finishes.first.id!;
 
-        var result =
-            await db.addNumberToFinish(stage, finishId, number, finishTime);
+        var result = await db.addNumberToFinish(
+          stage: stage,
+          finishId: finishId,
+          number: number,
+          finishTime: finishTime,
+        );
         expect(result, true);
 
         finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
@@ -827,12 +831,20 @@ void main() {
         var finishId1 = finishes.first.id!;
         var finishId2 = finishes.last.id!;
 
-        var result1 =
-            await db.addNumberToFinish(stage, finishId1, number, finishTime);
+        var result1 = await db.addNumberToFinish(
+          stage: stage,
+          finishId: finishId1,
+          number: number,
+          finishTime: finishTime,
+        );
         expect(result1, true);
 
-        var result2 =
-            await db.addNumberToFinish(stage, finishId2, number, finishTime);
+        var result2 = await db.addNumberToFinish(
+          stage: stage,
+          finishId: finishId2,
+          number: number,
+          finishTime: finishTime,
+        );
         expect(result2, false);
       });
     });
@@ -904,7 +916,12 @@ void main() {
         expect(finishes.length, 1);
         var finishId = finishes.first.id!;
 
-        await db.addNumberToFinish(stage, finishId, number, finishTime);
+        await db.addNumberToFinish(
+          stage: stage,
+          finishId: finishId,
+          number: number,
+          finishTime: finishTime,
+        );
 
         result = await db
             .getNumbersOnTraceNow(
@@ -938,7 +955,7 @@ void main() {
         var startId = participants.first.startId!;
 
         var resultStatus = await db.setStatusForStartId(
-            id: startId, status: ParticipantStatus.dns);
+            startId: startId, status: ParticipantStatus.dns);
         expect(resultStatus, 1);
 
         result = await db
@@ -998,7 +1015,7 @@ void main() {
             finish: finish,
             timeStamp: strTimeToDateTime(timeStamp)!);
 
-        var result = await db.hideAllFinish();
+        var result = await db.hideAllFinishes(stage.id!);
         expect(result, 1);
 
         await db.addFinishTime(
@@ -1006,7 +1023,7 @@ void main() {
             finish: finish,
             timeStamp: strTimeToDateTime(timeStamp)!);
 
-        result = await db.hideAllFinish();
+        result = await db.hideAllFinishes(stage.id!);
         expect(result, 2);
 
         await db.addFinishTime(
@@ -1014,7 +1031,7 @@ void main() {
             finish: finish,
             timeStamp: strTimeToDateTime(timeStamp)!);
 
-        result = await db.hideAllFinish();
+        result = await db.hideAllFinishes(stage.id!);
         expect(result, 3);
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();

@@ -345,7 +345,7 @@ _hideFinish:
 UPDATE finishes SET is_hidden = true WHERE id = :id;
 
 _hideAllFinishes:
-UPDATE finishes SET is_hidden = true;
+UPDATE finishes SET is_hidden = true WHERE stage_id = :stage_id;
 
 _getNumberAtFinishes:
 SELECT *

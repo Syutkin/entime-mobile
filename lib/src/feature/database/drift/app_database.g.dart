@@ -3509,10 +3509,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Future<int> _hideAllFinishes() {
+  Future<int> _hideAllFinishes({required int stageId}) {
     return customUpdate(
-      'UPDATE finishes SET is_hidden = TRUE',
-      variables: [],
+      'UPDATE finishes SET is_hidden = TRUE WHERE stage_id = ?1',
+      variables: [Variable<int>(stageId)],
       updates: {finishes},
       updateKind: UpdateKind.update,
     );
