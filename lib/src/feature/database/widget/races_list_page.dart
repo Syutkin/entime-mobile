@@ -6,7 +6,6 @@ import '../../../common/localization/localization.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../bloc/database_bloc.dart';
 import '../drift/app_database.dart';
-import 'stages_list_page.dart';
 
 part 'popup/add_race_popup.dart';
 
@@ -44,12 +43,7 @@ class RacesListPage extends StatelessWidget {
                   onTap: () {
                     context
                         .read<DatabaseBloc>()
-                        .add(DatabaseEvent.selectStages(race.id!));
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (context) => StagesListPage(race: race),
-                      ),
-                    );
+                        .add(DatabaseEvent.selectRace(race));
                   },
                   trailing: PopupMenuButton<void>(
                     icon: const Icon(Icons.more_vert),

@@ -4,6 +4,8 @@ part of 'database_bloc.dart';
 class DatabaseState with _$DatabaseState {
   const factory DatabaseState.initial() = _Initial;
   const factory DatabaseState.initialized({
+    Race? race,
+    Stage? stage,
     required List<Race> races,
     required List<Stage> stages,
     required List<Rider> riders,

@@ -1,3 +1,4 @@
+import 'package:entime/src/common/logger/logger.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,7 @@ part 'popup/edit_start_time_popup.dart';
 part 'popup/overwrite_start_time_popup.dart';
 
 class StartListPage extends StatefulWidget {
-  final Stage stage;
-
   const StartListPage({
-    required this.stage,
     super.key,
   });
 
@@ -34,222 +32,7 @@ class _StartListPage extends State<StartListPage> {
   final GlobalKey _stackKey = GlobalKey();
   final GlobalKey _countdownKey = GlobalKey();
 
-  @override
-  Widget build(BuildContext context) =>
-      BlocListener<DatabaseBloc, DatabaseState>(
-        listener: (context, state) {
-          state.mapOrNull(
-            initialized: (state) {
-              // Добавление нового стартового времени
-              // Если стартовое время уже присвоено другому номеру
-              final databaseBloc = context.read<DatabaseBloc>();
-              state.notification?.mapOrNull(
-                updateNumber: (notification) async {
-                  String text = '';
-                  for (final element
-                      in notification.existedStartingParticipants) {
-                    if (element.automaticStartTime == null &&
-                        element.manualStartTime == null) {
-                      text += Localization.current.I18nHome_equalStartTime(
-                        notification.startTime,
-                        element.number,
-                        notification.number,
-                      );
-                    } else {
-                      if (element.automaticStartTime != null) {
-                        text += Localization.current
-                            .I18nHome_updateAutomaticStartCorrection(
-                          notification.number,
-                          element.automaticStartTime!,
-                        );
-                      } else if (element.manualStartTime != null) {
-                        text += Localization.current
-                            .I18nHome_updateAutomaticStartCorrection(
-                          notification.number,
-                          element.manualStartTime!,
-                        );
-                      } else {
-                        text +=
-                            Localization.current.I18nHome_errorAddParticipant(
-                          MaterialLocalizations.of(context).cancelButtonLabel,
-                        );
-                      }
-                    }
-                  }
-                  final update = await overwriteStartTimePopup(
-                    context: context,
-                    text: text,
-                  );
-
-                  if (update ?? false) {
-                    databaseBloc.add(
-                      DatabaseEvent.addStartNumber(
-                        stage: widget.stage,
-                        number: notification.number,
-                        startTime: notification.startTime,
-                        forceAdd: true,
-                      ),
-                    );
-                  }
-                },
-              );
-            },
-          );
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(widget.stage.name),
-            actions: [
-              PopupMenuButton<int>(
-                icon: const Icon(Icons.more_vert),
-                itemBuilder: (context) => <PopupMenuEntry<int>>[
-                  PopupMenuItem<int>(
-                    value: 1,
-                    child: ListTile(
-                      leading: const Icon(Icons.add),
-                      title: Text(Localization.current.I18nHome_addRacer),
-                    ),
-                  ),
-                ],
-                onSelected: (value) async {
-                  switch (value) {
-                    case 1:
-                      await addRacerPopup(
-                        context: context,
-                        stage: widget.stage,
-                      );
-                      break;
-                  }
-                },
-              ),
-            ],
-          ),
-          body: BlocBuilder<DatabaseBloc, DatabaseState>(
-            builder: (context, state) => state.map(
-              initial: (state) => const SizedBox.shrink(),
-              //   return Column(
-              //     children: [
-              //       CreateOrSelectProtocolWidget(
-              //         onTap: () => routeToSelectFileScreen(context),
-              //       ),
-              //     ],
-              //   );
-              initialized: (state) => Stack(
-                key: _stackKey,
-                children: [
-                  _startList(state.participants),
-                  _showCountdown(),
-                ],
-              ),
-            ),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
-            buildWhen: (previous, current) =>
-                previous.settings.startFab != current.settings.startFab,
-            builder: (
-              context,
-              settingsState,
-            ) {
-              if (settingsState.settings.startFab) {
-                return SizedBox(
-                  height: settingsState.settings.startFabSize,
-                  width: settingsState.settings.startFabSize,
-                  child: FittedBox(
-                    child: FloatingActionButton(
-                      onPressed: () => _addManualStartTime(context),
-                      child: Icon(MdiIcons.handBackLeft),
-                    ),
-                  ),
-                );
-              } else {
-                return const SizedBox(width: 0, height: 0);
-              }
-            },
-          ),
-          // persistentFooterButtons:
-          //     kReleaseMode ? null : _persistentFooterButtons(context),
-        ),
-      );
-
-  // List<Widget> _persistentFooterButtons(BuildContext context) => <Widget>[
-  //       TextButton(
-  //         onPressed: () {
-  //           BlocProvider.of<BluetoothBloc>(context).add(
-  //             BluetoothEvent.messageReceived(message:  'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
-  //             ),
-  //           );
-  //         },
-  //         child: const Icon(Icons.record_voice_over_rounded),
-  //       ),
-  //       TextButton(
-  //         onPressed: () {
-  //           BlocProvider.of<BluetoothBloc>(context).add(
-  //             BluetoothEvent.messageReceived(message:  'B${DateFormat(shortTimeFormat).format(DateTime.now())}#',
-  //             ),
-  //           );
-  //         },
-  //         child: const Icon(Icons.volume_up),
-  //       ),
-  //       // TextButton(
-  //       //   onPressed: () async {
-  //       //     BlocProvider.of<ProtocolBloc>(context)
-  //       //         .add(const ProtocolClearStartResultsDebug());
-  //       //   },
-  //       //   child: const Icon(Icons.clear_all),
-  //       // ),
-  //       TextButton(
-  //         onPressed: () {
-  //           final AutomaticStart automaticStart = AutomaticStart(
-  //             DateFormat(longTimeFormat).format(DateTime.now()),
-  //             1234,
-  //             DateTime.now(),
-  //           );
-  //           BlocProvider.of<ProtocolBloc>(context).add(
-  //             ProtocolUpdateAutomaticCorrection(
-  //               automaticStart: automaticStart,
-  //             ),
-  //           );
-  //         },
-  //         child: const Icon(Icons.play_arrow),
-  //       ),
-  //       TextButton(
-  //         onPressed: () {
-  //           BlocProvider.of<ProtocolBloc>(context).add(
-  //             const ProtocolEvent.addStartNumber(
-  //               startTime: StartTime('15:31:00', 111),
-  //               forceAdd: true,
-  //             ),
-  //           );
-  //           // final AutomaticStart automaticStart = AutomaticStart(
-  //           //   DateFormat(longTimeFormat).format(DateTime.now()),
-  //           //   1234,
-  //           //   DateTime.now(),
-  //           // );
-  //           // BlocProvider.of<ProtocolBloc>(context).add(
-  //           //   ProtocolEvent.updateAutomaticCorrection(
-  //           //     forceUpdate: true,
-  //           //     automaticStart: AutomaticStart(
-  //           //       '15:31:00',
-  //           //       Random().nextInt(9999) - 5000,
-  //           //       DateTime.now(),
-  //           //     ),
-  //           //   ),
-  //           // );
-  //           final int cor = Random().nextInt(9999) - 5000;
-  //           BlocProvider.of<BluetoothBloc>(context).add(
-  //             BluetoothEvent.messageReceived(
-  //               message: r'$' '15:31:01,121;$cor#',
-  //             ),
-  //           );
-  //         },
-  //         child: const Icon(Icons.bluetooth),
-  //       ),
-  //     ];
-
-  Widget _startList(List<ParticipantAtStart> startList) =>
-      CustomScrollView(
+  Widget _startList(List<ParticipantAtStart> startList) => CustomScrollView(
         slivers: [
           SliverPersistentHeader(
             pinned: true,
@@ -296,13 +79,13 @@ class _StartListPage extends State<StartListPage> {
                       onTap: () async {
                         await editStartTime(context, item);
                       },
+
                       /// Set DNS on dismissed
                       onDismissed: (direction) {
                         BlocProvider.of<DatabaseBloc>(context).add(
                           DatabaseEvent.setStatusForStartId(
-                            startId: item.startId!,
-                            status: ParticipantStatus.dns
-                          ),
+                              startId: item.startId!,
+                              status: ParticipantStatus.dns),
                         );
                       },
                       isHighlighted: isHighlighted,
@@ -410,14 +193,17 @@ class _StartListPage extends State<StartListPage> {
   RenderBox _getRenderBox(GlobalKey key) =>
       key.currentContext!.findRenderObject() as RenderBox;
 
-  Future<void> _addManualStartTime(BuildContext context) async {
+  Future<void> _addManualStartTime(DatabaseBloc bloc) async {
     final time = DateTime.now();
-    context.read<DatabaseBloc>().add(
-          DatabaseEvent.updateManualStartTime(
-            stageId: widget.stage.id!,
-            time: time,
-          ),
-        );
+    var stageId = bloc.stageId;
+    if (stageId != null) {
+      bloc.add(
+        DatabaseEvent.updateManualStartTime(
+          stageId: stageId,
+          time: time,
+        ),
+      );
+    }
   }
 
   String? _activeStartTime(CountdownState countdownState) =>
@@ -429,6 +215,223 @@ class _StartListPage extends State<StartListPage> {
       countdownState.mapOrNull(
         working: (state) => state.text,
       );
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<DatabaseBloc, DatabaseState>(
+      listener: (context, state) {
+        var databaseBloc = context.read<DatabaseBloc>();
+        state.mapOrNull(
+          initialized: (state) {
+            // Добавление нового стартового времени
+            // Если стартовое время уже присвоено другому номеру
+            state.notification?.mapOrNull(
+              updateNumber: (notification) async {
+                String text = '';
+                for (final element
+                    in notification.existedStartingParticipants) {
+                  if (element.automaticStartTime == null &&
+                      element.manualStartTime == null) {
+                    text += Localization.current.I18nHome_equalStartTime(
+                      notification.startTime,
+                      element.number,
+                      notification.number,
+                    );
+                  } else {
+                    if (element.automaticStartTime != null) {
+                      text += Localization.current
+                          .I18nHome_updateAutomaticStartCorrection(
+                        notification.number,
+                        element.automaticStartTime!,
+                      );
+                    } else if (element.manualStartTime != null) {
+                      text += Localization.current
+                          .I18nHome_updateAutomaticStartCorrection(
+                        notification.number,
+                        element.manualStartTime!,
+                      );
+                    } else {
+                      text += Localization.current.I18nHome_errorAddParticipant(
+                        MaterialLocalizations.of(context).cancelButtonLabel,
+                      );
+                    }
+                  }
+                }
+                final update = await overwriteStartTimePopup(
+                  context: context,
+                  text: text,
+                );
+
+                if (update ?? false) {
+                  var stage = state.stage;
+                  if (stage != null) {
+                    databaseBloc.add(
+                      DatabaseEvent.addStartNumber(
+                        stage: stage,
+                        // stage: widget.stage,
+                        number: notification.number,
+                        startTime: notification.startTime,
+                        forceAdd: true,
+                      ),
+                    );
+                  }
+                }
+              },
+            );
+          },
+        );
+      },
+      child: BlocBuilder<DatabaseBloc, DatabaseState>(
+        builder: (context, state) => state.map(
+            initial: (state) => const SizedBox.shrink(),
+            initialized: (state) {
+              var databaseBloc = context.read<DatabaseBloc>();
+              var stage = state.stage;
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text(stage?.name ?? 'n/a'),
+                  actions: [
+                    PopupMenuButton<int>(
+                      icon: const Icon(Icons.more_vert),
+                      itemBuilder: (context) => <PopupMenuEntry<int>>[
+                        PopupMenuItem<int>(
+                          value: 1,
+                          child: ListTile(
+                            leading: const Icon(Icons.add),
+                            title: Text(Localization.current.I18nHome_addRacer),
+                          ),
+                        ),
+                      ],
+                      onSelected: (value) async {
+                        switch (value) {
+                          case 1:
+                            logger.d('stage $stage');
+                            if (stage != null) {
+                              await addRacerPopup(
+                                context: context,
+                                stage: stage,
+                              );
+                            }
+                            break;
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                body: Stack(
+                  key: _stackKey,
+                  children: [
+                    _startList(state.participants),
+                    _showCountdown(),
+                  ],
+                ),
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerFloat,
+                floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
+                  buildWhen: (previous, current) =>
+                      previous.settings.startFab != current.settings.startFab,
+                  builder: (
+                    context,
+                    settingsState,
+                  ) {
+                    if (settingsState.settings.startFab) {
+                      return SizedBox(
+                        height: settingsState.settings.startFabSize,
+                        width: settingsState.settings.startFabSize,
+                        child: FittedBox(
+                          child: FloatingActionButton(
+                            onPressed: () => _addManualStartTime(databaseBloc),
+                            child: Icon(MdiIcons.handBackLeft),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return const SizedBox(width: 0, height: 0);
+                    }
+                  },
+                ),
+                // persistentFooterButtons:
+                //     kReleaseMode ? null : _persistentFooterButtons(context),
+              );
+            }),
+      ),
+    );
+
+    // List<Widget> _persistentFooterButtons(BuildContext context) => <Widget>[
+    //       TextButton(
+    //         onPressed: () {
+    //           BlocProvider.of<BluetoothBloc>(context).add(
+    //             BluetoothEvent.messageReceived(message:  'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+    //             ),
+    //           );
+    //         },
+    //         child: const Icon(Icons.record_voice_over_rounded),
+    //       ),
+    //       TextButton(
+    //         onPressed: () {
+    //           BlocProvider.of<BluetoothBloc>(context).add(
+    //             BluetoothEvent.messageReceived(message:  'B${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+    //             ),
+    //           );
+    //         },
+    //         child: const Icon(Icons.volume_up),
+    //       ),
+    //       // TextButton(
+    //       //   onPressed: () async {
+    //       //     BlocProvider.of<ProtocolBloc>(context)
+    //       //         .add(const ProtocolClearStartResultsDebug());
+    //       //   },
+    //       //   child: const Icon(Icons.clear_all),
+    //       // ),
+    //       TextButton(
+    //         onPressed: () {
+    //           final AutomaticStart automaticStart = AutomaticStart(
+    //             DateFormat(longTimeFormat).format(DateTime.now()),
+    //             1234,
+    //             DateTime.now(),
+    //           );
+    //           BlocProvider.of<ProtocolBloc>(context).add(
+    //             ProtocolUpdateAutomaticCorrection(
+    //               automaticStart: automaticStart,
+    //             ),
+    //           );
+    //         },
+    //         child: const Icon(Icons.play_arrow),
+    //       ),
+    //       TextButton(
+    //         onPressed: () {
+    //           BlocProvider.of<ProtocolBloc>(context).add(
+    //             const ProtocolEvent.addStartNumber(
+    //               startTime: StartTime('15:31:00', 111),
+    //               forceAdd: true,
+    //             ),
+    //           );
+    //           // final AutomaticStart automaticStart = AutomaticStart(
+    //           //   DateFormat(longTimeFormat).format(DateTime.now()),
+    //           //   1234,
+    //           //   DateTime.now(),
+    //           // );
+    //           // BlocProvider.of<ProtocolBloc>(context).add(
+    //           //   ProtocolEvent.updateAutomaticCorrection(
+    //           //     forceUpdate: true,
+    //           //     automaticStart: AutomaticStart(
+    //           //       '15:31:00',
+    //           //       Random().nextInt(9999) - 5000,
+    //           //       DateTime.now(),
+    //           //     ),
+    //           //   ),
+    //           // );
+    //           final int cor = Random().nextInt(9999) - 5000;
+    //           BlocProvider.of<BluetoothBloc>(context).add(
+    //             BluetoothEvent.messageReceived(
+    //               message: r'$' '15:31:01,121;$cor#',
+    //             ),
+    //           );
+    //         },
+    //         child: const Icon(Icons.bluetooth),
+    //       ),
+    //     ];
+  }
 }
 
 class _SliverStartSubHeader extends StatelessWidget {

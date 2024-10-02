@@ -37,17 +37,20 @@ class StagesListPage extends StatelessWidget {
                   return ListTile(
                     title: Text(stage.name),
                     onTap: () {
+                      // context
+                      //     .read<DatabaseBloc>()
+                      //     .add(DatabaseEvent.getParticipantsAtStart(stage.id!));
                       context
                           .read<DatabaseBloc>()
-                          .add(DatabaseEvent.getParticipantsAtStart(stage.id!));
+                          .add(DatabaseEvent.selectStage(stage));
                       context
                           .read<CountdownBloc>()
                           .add(CountdownEvent.start(stageId: stage.id!));
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (context) => StartListPage(stage: stage),
-                        ),
-                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute<void>(
+                      //     builder: (context) => StartListPage(),
+                      //   ),
+                      // );
                     },
                     trailing: PopupMenuButton<void>(
                       icon: const Icon(Icons.more_vert),

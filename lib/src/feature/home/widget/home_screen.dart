@@ -5,7 +5,6 @@ import 'package:path/path.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../bluetooth/bluetooth.dart';
-import '../../database/drift/app_database.dart';
 import '../../database/widget/start_list_page.dart';
 import '../../drawer/widget/app_drawer.dart';
 import '../../init/init.dart';
@@ -15,6 +14,7 @@ import '../../protocol_screens/finish/widget/finish_screen.dart';
 import '../../protocol_screens/model/menu_button.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../../tab/tab.dart';
+import '../../tab/widget/start_page.dart';
 import '../../update/update.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -167,14 +167,15 @@ class HomeScreen extends StatelessWidget {
                     children: <Widget>[
                       InitScreen(),
                       //ToDo: rework Start page
-                      StartListPage(
-                        stage: Stage(
-                          raceId: 1,
-                          name: 'name',
-                          isActive: true,
-                          isDeleted: false,
-                        ),
-                      ),
+                      StartPage(),
+                      // StartListPage(
+                      //   stage: Stage(
+                      //     raceId: 1,
+                      //     name: 'name',
+                      //     isActive: true,
+                      //     isDeleted: false,
+                      //   ),
+                      // ),
                       FinishScreen(),
                     ],
                   ),

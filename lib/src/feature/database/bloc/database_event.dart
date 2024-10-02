@@ -5,27 +5,35 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.initialize() = _Initialize;
 
   const factory DatabaseEvent.emitState({
-    List<Race>? races,
-    List<Stage>? stages,
-    List<Rider>? riders,
-    List<Status>? statuses,
-    List<ParticipantAtStart>? participants,
-    List<Start>? starts,
-    List<Finish>? finishes,
-    List<Trail>? trails,
-    List<StartingParticipant>? numbersOnTrace,
-    Notification? notification,
+    required Race? race,
+    required Stage? stage,
+    required List<Race> races,
+    required List<Stage> stages,
+    required List<Rider> riders,
+    required List<Status> statuses,
+    required List<ParticipantAtStart> participants,
+    required List<Start> starts,
+    required List<Finish> finishes,
+    required List<Trail> trails,
+    required List<StartingParticipant> numbersOnTrace,
+    required Notification? notification,
   }) = _EmitState;
 
   const factory DatabaseEvent.addRace(Race race) = _AddRace;
 
   const factory DatabaseEvent.deleteRace(int id) = _DeleteRace;
 
+  const factory DatabaseEvent.getRaces() = _GetRaces;
+
+  const factory DatabaseEvent.selectRace(Race race) = _SelectRace;
+
   const factory DatabaseEvent.addStage(Stage stage) = _AddStage;
 
-  const factory DatabaseEvent.selectStages(int raceId) = _SelectStages;
-
   const factory DatabaseEvent.deleteStage(int id) = _DeleteStage;
+
+  const factory DatabaseEvent.getStages(int raceId) = _GetStages;
+
+  const factory DatabaseEvent.selectStage(Stage stage) = _SelectStage;
 
   const factory DatabaseEvent.getParticipantsAtStart(int stageId) =
       _GetParticipantsAtStart;
@@ -35,7 +43,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required int number,
     required String startTime,
     @Default(false) bool forceAdd,
-  }) = _addStartNumber;
+  }) = _AddStartNumber;
 
   const factory DatabaseEvent.updateStartingInfo({
     required String startTime,
@@ -45,7 +53,7 @@ class DatabaseEvent with _$DatabaseEvent {
     int? manualCorrection,
     required int stageId,
     required int participantId,
-  }) = _updateStartingInfo;
+  }) = _UpdateStartingInfo;
 
   const factory DatabaseEvent.updateAutomaticCorrection({
     required int stageId,
@@ -54,7 +62,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required DateTime timeStamp,
     @Default(false) bool forceUpdate,
     @Default(15) int deltaInSeconds,
-  }) = _updateAutomaticCorrection;
+  }) = _UpdateAutomaticCorrection;
 
   const factory DatabaseEvent.updateManualStartTime({
     required int stageId,
@@ -65,7 +73,7 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.setStatusForStartId({
     required int startId,
     required ParticipantStatus status,
-  }) = _setStatusForStartId;
+  }) = _SetStatusForStartId;
 
   const factory DatabaseEvent.addFinishTime({
     required Stage stage,
@@ -76,75 +84,75 @@ class DatabaseEvent with _$DatabaseEvent {
     @Default(0) int substituteNumbersDelay,
     DateTime? dateTimeNow,
     int? number,
-  }) = _addFinishTime;
+  }) = _AddFinishTime;
 
   const factory DatabaseEvent.addFinishTimeManual({
     required int stageId,
     required String finishTime,
     int? number,
-  }) = _addFinishTimeManual;
+  }) = _AddFinishTimeManual;
 
   //ToDO
   const factory DatabaseEvent.clearStartResultsDebug(
     int stageId,
-  ) = _clearStartResultsDebug;
+  ) = _ClearStartResultsDebug;
 
   const factory DatabaseEvent.clearFinishResultsDebug(
     int stageId,
-  ) = _clearFinishResultsDebug;
+  ) = _ClearFinishResultsDebug;
 
   const factory DatabaseEvent.hideAllFinises(
     int stageId,
-  ) = _hideAllFinises;
+  ) = _HideAllFinises;
 
   const factory DatabaseEvent.clearNumberAtFinish({
     required Stage stage,
     required int number,
-  }) = _clearNumberAtFinish;
+  }) = _ClearNumberAtFinish;
 
   const factory DatabaseEvent.setDNSForStage({
     required Stage stage,
     required int number,
-  }) = _setDNSForStage;
+  }) = _SetDNSForStage;
 
   const factory DatabaseEvent.setDNFForStage({
     required Stage stage,
     required int number,
-  }) = _setDNFForStage;
+  }) = _SetDNFForStage;
 
   const factory DatabaseEvent.hideFinish({
     required int id,
-  }) = _hideFinish;
+  }) = _HideFinish;
 
   const factory DatabaseEvent.addNumberToFinish({
     required Stage stage,
     required int finishId,
     required int number,
     required String finishTime,
-  }) = _addNumberToFinish;
+  }) = _AddNumberToFinish;
 
   const factory DatabaseEvent.getNumbersOnTraceNow({
     required int stageId,
     required DateTime dateTimeNow,
-  }) = _getNumbersOnTraceNow;
+  }) = _GetNumbersOnTraceNow;
 
   //ToDO:
   const factory DatabaseEvent.loadStartFromCsv({
     PlatformFile? csv,
-  }) = _loadStartFromCsv;
+  }) = _LoadStartFromCsv;
 
   //ToDO:
-  const factory DatabaseEvent.shareStart() = _shareStart;
+  const factory DatabaseEvent.shareStart() = _SshareStart;
 
   //ToDO:
-  const factory DatabaseEvent.shareFinish() = _shareFinish;
+  const factory DatabaseEvent.shareFinish() = _ShareFinish;
 
   //ToDO:
   const factory DatabaseEvent.selectAwaitingNumber({
     required int number,
-  }) = _selectAwaitingNumber;
+  }) = _SelectAwaitingNumber;
 
   //ToDO:
   const factory DatabaseEvent.deselectAwaitingNumber() =
-      _deselectAwaitingNumber;
+      _DeselectAwaitingNumber;
 }
