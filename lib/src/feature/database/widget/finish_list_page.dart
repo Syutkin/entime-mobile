@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:entime/src/feature/database/widget/popup/add_finish_number_popup.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -8,28 +9,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../../common/localization/localization.dart';
-import '../../../../common/utils/consts.dart';
-import '../../../../common/utils/helper.dart';
-import '../../../../common/widget/sliver_sub_header_delegate.dart';
-import '../../../bluetooth/bloc/bluetooth_bloc.dart';
-import '../../../init/widget/select_file_screen.dart';
-import '../../../protocol/protocol.dart';
-import '../../../settings/bloc/settings_bloc.dart';
-import 'add_finish_number_popup.dart';
+import '../../../common/localization/localization.dart';
+import '../../../common/utils/consts.dart';
+import '../../../common/utils/helper.dart';
+import '../../../common/widget/sliver_sub_header_delegate.dart';
+import '../../bluetooth/bloc/bluetooth_bloc.dart';
+import '../../settings/bloc/settings_bloc.dart';
+import '../bloc/database_bloc.dart';
+import '../drift/app_database.dart';
+import '../model/participant_status.dart';
 import 'finish_item_tile.dart';
 import 'number_on_trace_tile.dart';
 
 enum FinishPopupMenu { clearNumber, hideAll }
 
-class FinishScreen extends StatefulWidget {
-  const FinishScreen({super.key});
+class FinishListPage extends StatefulWidget {
+  const FinishListPage({super.key});
 
   @override
-  State<FinishScreen> createState() => _FinishPage();
+  State<FinishListPage> createState() => _FinishPage();
 }
 
-class _FinishPage extends State<FinishScreen> {
+class _FinishPage extends State<FinishListPage> {
   late Offset _tapPosition;
 
   void _storePosition(TapDownDetails details) {
@@ -52,67 +53,69 @@ class _FinishPage extends State<FinishScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: BlocBuilder<ProtocolBloc, ProtocolState>(
-          builder: (context, state) {
-            if (state is ProtocolSelectedState) {
-              // toast с автоматичски проставленным номером
-              if (state.autoFinishNumber != null) {
-                // BotToast.showSimpleNotification(
-                //   title: 'Финишировал номер ${state.autoFinishNumber}',
-                //   onTap: () => BlocProvider.of<ProtocolBloc>(context).add(
-                //       ProtocolClearNumberAtFinish(number: state.autoFinishNumber)),
-                //   hideCloseButton: true,
-                //   duration: const Duration(seconds: 3),
-                // );
-                BotToast.showAttachedWidget(
-                  verticalOffset: 36,
-                  attachedBuilder: (cancel) => Card(
-                    child: ListTile(
-                      title: Text(
-                        Localization.current.I18nProtocol_finishNumber(
-                          '${state.autoFinishNumber}',
+        body: BlocBuilder<DatabaseBloc, DatabaseState>(
+          builder: (context, state) => state.map(
+              initial: (state) => const SizedBox.shrink(),
+              initialized: (state) {
+                final databaseBloc = context.read<DatabaseBloc>();
+                // toast с автоматичски проставленным номером
+                final autoFinishNumber = state.autoFinishNumber;
+                if (autoFinishNumber != null) {
+                  // BotToast.showSimpleNotification(
+                  //   title: 'Финишировал номер ${state.autoFinishNumber}',
+                  //   onTap: () => BlocProvider.of<ProtocolBloc>(context).add(
+                  //       ProtocolClearNumberAtFinish(number: state.autoFinishNumber)),
+                  //   hideCloseButton: true,
+                  //   duration: const Duration(seconds: 3),
+                  // );
+                  BotToast.showAttachedWidget(
+                    verticalOffset: 36,
+                    attachedBuilder: (cancel) => Card(
+                      child: ListTile(
+                        title: Text(
+                          Localization.current.I18nProtocol_finishNumber(
+                            '${state.autoFinishNumber}',
+                          ),
                         ),
-                      ),
-                      trailing: TextButton(
-                        onPressed: () {
-                          BlocProvider.of<ProtocolBloc>(context).add(
-                            ProtocolClearNumberAtFinish(
-                              number: state.autoFinishNumber!,
-                            ),
-                          );
-                          cancel();
-                        },
-                        child: Text(
-                          MaterialLocalizations.of(context).cancelButtonLabel,
+                        trailing: TextButton(
+                          onPressed: () {
+                            final stage = state.stage;
+                            if (stage != null) {
+                              databaseBloc.add(
+                                DatabaseEvent.clearNumberAtFinish(
+                                  stage: stage,
+                                  number: autoFinishNumber,
+                                ),
+                              );
+                            }
+                            cancel();
+                          },
+                          child: Text(
+                            MaterialLocalizations.of(context).cancelButtonLabel,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  // enableSafeArea: false,
-                  animationDuration: const Duration(milliseconds: 300),
-                  duration: const Duration(seconds: 3),
-                  targetContext: context,
-                );
-              }
+                    // enableSafeArea: false,
+                    animationDuration: const Duration(milliseconds: 300),
+                    duration: const Duration(seconds: 3),
+                    targetContext: context,
+                  );
+                }
 
-              // ToDo: настройки? более интересное поведение?
-              // ToDo: Перематывать только при первоначальном показе всех отсечек?
-              // скролл на последнюю запись если показываем скрытые отсечки
-              if (!BlocProvider.of<SettingsBloc>(context)
-                  .state
-                  .settings
-                  .hideMarked) {
-                SchedulerBinding.instance.addPostFrameCallback((_) {
-                  scrollToEnd(_scrollController);
-                });
-              }
-              return _finishList(state.finishProtocol);
-            } else {
-              return CreateOrSelectProtocolWidget(
-                onTap: () => routeToSelectFileScreen(context),
-              );
-            }
-          },
+                // ToDo: настройки? более интересное поведение?
+                // ToDo: Перематывать только при первоначальном показе всех отсечек?
+                // скролл на последнюю запись если показываем скрытые отсечки
+                if (!BlocProvider.of<SettingsBloc>(context)
+                    .state
+                    .settings
+                    .hideMarked) {
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
+                    scrollToEnd(_scrollController);
+                  });
+                }
+                return _finishList(state.finishes);
+              }),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
@@ -126,7 +129,7 @@ class _FinishPage extends State<FinishScreen> {
                 width: settingsState.settings.finishFabSize,
                 child: FittedBox(
                   child: FloatingActionButton(
-                    onPressed: () => _addFinishTimeManual(context),
+                    onPressed: () => _addFinishTimeManual(),
                     child: Icon(MdiIcons.handBackLeft),
                   ),
                 ),
@@ -138,7 +141,7 @@ class _FinishPage extends State<FinishScreen> {
         persistentFooterButtons: _getFooterButtons(context),
       );
 
-  Widget _finishList(List<FinishItem> finishProtocol) => CustomScrollView(
+  Widget _finishList(List<Finish> finishProtocol) => CustomScrollView(
         controller: _scrollController,
         shrinkWrap: true,
         slivers: [
@@ -160,23 +163,37 @@ class _FinishPage extends State<FinishScreen> {
                     await addFinishNumberPopup(context, item);
                   },
                   onLongPress: () async {
-                    await _clearPopup(context, item.number);
+                    await _clearPopup(item.number);
                   },
                   onAccept: (data) {
                     if (data != null) {
-                      BlocProvider.of<ProtocolBloc>(context).add(
-                        ProtocolSetNumberToFinishTime(
-                          id: item.id,
-                          number: data as int,
-                          finishTime: item.finishtime,
-                        ),
-                      );
+                      final databaseBloc = context.read<DatabaseBloc>();
+                      final stage = databaseBloc.stage;
+                      final finishId = item.id;
+                      final number = item.number;
+                      final finishTime = item.finishTime;
+                      if (stage != null &&
+                          finishId != null &&
+                          number != null &&
+                          finishTime != null) {
+                        databaseBloc.add(
+                          DatabaseEvent.addNumberToFinish(
+                            stage: stage,
+                            finishId: finishId,
+                            number: number,
+                            finishTime: finishTime,
+                          ),
+                        );
+                      }
                     }
                   },
                   onTapDown: _storePosition,
                   onDismissed: (direction) {
-                    BlocProvider.of<ProtocolBloc>(context)
-                        .add(ProtocolHideFinishTime(id: item.id));
+                    final databaseBloc = context.read<DatabaseBloc>();
+                    final id = item.id;
+                    if (id != null) {
+                      databaseBloc.add(DatabaseEvent.hideFinish(id: id));
+                    }
                   },
                 );
               },
@@ -187,47 +204,48 @@ class _FinishPage extends State<FinishScreen> {
       );
 
   Widget _getNumbersOnTrace(BuildContext context) =>
-      BlocBuilder<ProtocolBloc, ProtocolState>(
-        builder: (context, state) {
-          if (state is ProtocolSelectedState) {
-            return SizedBox(
-              height: 50,
-              width: double.maxFinite,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: state.numbersOnTraceProtocol.length,
-                itemBuilder: (context, index) {
-                  final item = state.numbersOnTraceProtocol[index];
-                  final isSelected = item.number == state.awaitingNumber;
-                  return NumberOnTraceTile(
-                    number: item.number,
-                    onTap: () {
-                      isSelected
-                          ? BlocProvider.of<ProtocolBloc>(context)
-                              .add(const ProtocolDeselectAwaitingNumber())
-                          : BlocProvider.of<ProtocolBloc>(context).add(
-                              ProtocolSelectAwaitingNumber(
-                                number: item.number,
-                              ),
-                            );
-                    },
-                    onTapDown: _storePosition,
-                    onLongPress: () async {
-                      await _numberOnTracePopup(context, item.number);
-                    },
-                    isSelected: isSelected,
+      BlocBuilder<DatabaseBloc, DatabaseState>(
+          builder: (context, state) => state.map(
+                initial: (state) => const SizedBox.shrink(),
+                initialized: (state) {
+                  return SizedBox(
+                    height: 50,
+                    width: double.maxFinite,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.numbersOnTrace.length,
+                      itemBuilder: (context, index) {
+                        final item = state.numbersOnTrace[index];
+                        final isSelected = item.number == state.awaitingNumber;
+                        return NumberOnTraceTile(
+                          number: item.number,
+                          onTap: () {
+                            final databaseBloc = context.read<DatabaseBloc>();
+                            isSelected
+                                ? databaseBloc
+                                    .add(DatabaseEvent.deselectAwaitingNumber())
+                                : databaseBloc.add(
+                                    DatabaseEvent.selectAwaitingNumber(
+                                      number: item.number,
+                                    ),
+                                  );
+                          },
+                          onTapDown: _storePosition,
+                          onLongPress: () async {
+                            await _numberOnTracePopup(item.number);
+                          },
+                          isSelected: isSelected,
+                        );
+                      },
+                    ),
                   );
                 },
-              ),
-            );
-          } else {
-            return const SizedBox(width: 0, height: 0);
-          }
-        },
-      );
+              ));
 
-  Future<void> _clearPopup(BuildContext context, int? number) async {
+  Future<void> _clearPopup(int? number) async {
+    final databaseBloc = context.read<DatabaseBloc>();
+    final stage = databaseBloc.stage;
     final RenderBox overlay =
         Overlay.of(context).context.findRenderObject() as RenderBox;
     final FinishPopupMenu? result = await showMenu<FinishPopupMenu>(
@@ -239,23 +257,22 @@ class _FinishPage extends State<FinishScreen> {
             overlay.semanticBounds.size, // Bigger rect, the entire screen
       ),
     );
-    if (result != null) {
+    if (result != null && stage != null) {
       switch (result) {
         case FinishPopupMenu.clearNumber:
           if (number != null) {
             if (!mounted) {
               return;
             }
-            BlocProvider.of<ProtocolBloc>(context)
-                .add(ProtocolClearNumberAtFinish(number: number));
+            databaseBloc.add(DatabaseEvent.clearNumberAtFinish(
+                stage: stage, number: number));
           }
           break;
         case FinishPopupMenu.hideAll:
           if (!mounted) {
             return;
           }
-          BlocProvider.of<ProtocolBloc>(context)
-              .add(const ProtocolHideAllFinishResults());
+          databaseBloc.add(DatabaseEvent.hideAllFinises(stage.id!));
           break;
       }
     }
@@ -289,7 +306,9 @@ class _FinishPage extends State<FinishScreen> {
     return list;
   }
 
-  Future<void> _numberOnTracePopup(BuildContext context, int number) async {
+  Future<void> _numberOnTracePopup(int number) async {
+    final databaseBloc = context.read<DatabaseBloc>();
+    final stage = databaseBloc.stage;
     final RenderBox overlay =
         Overlay.of(context).context.findRenderObject() as RenderBox;
     final ParticipantStatus? result = await showMenu(
@@ -301,7 +320,7 @@ class _FinishPage extends State<FinishScreen> {
             overlay.semanticBounds.size, // Bigger rect, the entire screen
       ),
     );
-    if (result != null) {
+    if (result != null && stage != null) {
       switch (result) {
         case ParticipantStatus.active:
           break;
@@ -309,15 +328,15 @@ class _FinishPage extends State<FinishScreen> {
           if (!mounted) {
             return;
           }
-          BlocProvider.of<ProtocolBloc>(context)
-              .add(ProtocolSetDNS(number: number));
+          databaseBloc
+              .add(DatabaseEvent.setDNSForStage(stage: stage, number: number));
           break;
         case ParticipantStatus.dnf:
           if (!mounted) {
             return;
           }
-          BlocProvider.of<ProtocolBloc>(context)
-              .add(ProtocolSetDNF(number: number));
+          databaseBloc
+              .add(DatabaseEvent.setDNFForStage(stage: stage, number: number));
           break;
         case ParticipantStatus.dsq:
           break;
@@ -369,6 +388,7 @@ class _FinishPage extends State<FinishScreen> {
   }
 
   List<Widget> _getFooterButtons(BuildContext context) {
+    final databaseBloc = context.read<DatabaseBloc>();
     if (!kReleaseMode) {
       return <Widget>[
         Column(
@@ -379,10 +399,12 @@ class _FinishPage extends State<FinishScreen> {
               children: <Widget>[
                 TextButton(
                   onPressed: () async {
-                    BlocProvider.of<ProtocolBloc>(context).add(
-                      ProtocolAddFinishTime(
-                        time: DateFormat(longTimeFormat).format(DateTime.now()),
+                    databaseBloc.add(
+                      DatabaseEvent.addFinishTime(
+                        finish:
+                            DateFormat(longTimeFormat).format(DateTime.now()),
                         timeStamp: DateTime.now(),
+                        stage: databaseBloc.stage!,
                       ),
                     );
                   },
@@ -416,8 +438,11 @@ class _FinishPage extends State<FinishScreen> {
                 //TextButton(child: const Icon(Icons.add), onPressed: () => _addFinishTime(context)),
                 TextButton(
                   onPressed: () async {
-                    BlocProvider.of<ProtocolBloc>(context)
-                        .add(const ProtocolClearFinishResultsDebug());
+                    final stageId = databaseBloc.stageId;
+                    if (stageId != null) {
+                      databaseBloc
+                          .add(DatabaseEvent.clearFinishResultsDebug(stageId));
+                    }
                   },
                   child: const Icon(Icons.clear_all),
                 ),
@@ -433,25 +458,31 @@ class _FinishPage extends State<FinishScreen> {
     }
   }
 
-  Future<void> _addFinishTimeManual(BuildContext context) async {
+  Future<void> _addFinishTimeManual() async {
     final now = DateTime.now();
 //    now = now.add(diff.duration); //добавляем поправку (см. class Difference)
-    final time = DateFormat(longTimeFormat).format(now);
-    BlocProvider.of<ProtocolBloc>(context)
-        .add(ProtocolAddFinishTimeManual(time: time));
+    final finishTime = DateFormat(longTimeFormat).format(now);
+    final databaseBloc = context.read<DatabaseBloc>();
+    final stageId = databaseBloc.stageId;
+    if (stageId != null) {
+      databaseBloc.add(DatabaseEvent.addFinishTimeManual(
+          stageId: stageId, finishTime: finishTime));
+    }
   }
 
-  // таймер для обновления участников на трассе
-  // Работает только на экране финиша
-  // Обновляется спустя секунду после нового открытия окна финиша,
-  // т.к. создаётся новый неинициализированный таймер
+// таймер для обновления участников на трассе
+// Работает только на экране финиша
+// Обновляется спустя секунду после нового открытия окна финиша,
+// т.к. создаётся новый неинициализированный таймер
   void _startTimer() {
     int? prevMinute;
+    final databaseBloc = context.read<DatabaseBloc>();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final now = DateTime.now();
-      if (prevMinute != now.minute && now.second > 0) {
-        BlocProvider.of<ProtocolBloc>(context)
-            .add(const ProtocolGetNumbersOnTrace());
+      final stageId = databaseBloc.stageId;
+      if (prevMinute != now.minute && now.second > 0 && stageId != null) {
+        databaseBloc.add(DatabaseEvent.getNumbersOnTraceNow(
+            stageId: stageId, dateTimeNow: now));
         prevMinute = now.minute;
       }
     });

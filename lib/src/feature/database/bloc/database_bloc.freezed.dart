@@ -31,7 +31,10 @@ mixin _$DatabaseEvent {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -107,7 +110,10 @@ mixin _$DatabaseEvent {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -180,7 +186,10 @@ mixin _$DatabaseEvent {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -433,7 +442,10 @@ class _$InitializeImpl implements _Initialize {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -512,7 +524,10 @@ class _$InitializeImpl implements _Initialize {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -588,7 +603,10 @@ class _$InitializeImpl implements _Initialize {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -804,7 +822,10 @@ abstract class _$$EmitStateImplCopyWith<$Res> {
       List<Finish> finishes,
       List<Trail> trails,
       List<StartingParticipant> numbersOnTrace,
-      Notification? notification});
+      Notification? notification,
+      int? autoFinishNumber,
+      int? awaitingNumber,
+      bool? updateFinishNumber});
 
   $NotificationCopyWith<$Res>? get notification;
 }
@@ -834,6 +855,9 @@ class __$$EmitStateImplCopyWithImpl<$Res>
     Object? trails = null,
     Object? numbersOnTrace = null,
     Object? notification = freezed,
+    Object? autoFinishNumber = freezed,
+    Object? awaitingNumber = freezed,
+    Object? updateFinishNumber = freezed,
   }) {
     return _then(_$EmitStateImpl(
       race: freezed == race
@@ -884,6 +908,18 @@ class __$$EmitStateImplCopyWithImpl<$Res>
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as Notification?,
+      autoFinishNumber: freezed == autoFinishNumber
+          ? _value.autoFinishNumber
+          : autoFinishNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      awaitingNumber: freezed == awaitingNumber
+          ? _value.awaitingNumber
+          : awaitingNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      updateFinishNumber: freezed == updateFinishNumber
+          ? _value.updateFinishNumber
+          : updateFinishNumber // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -917,7 +953,10 @@ class _$EmitStateImpl implements _EmitState {
       required final List<Finish> finishes,
       required final List<Trail> trails,
       required final List<StartingParticipant> numbersOnTrace,
-      required this.notification})
+      required this.notification,
+      required this.autoFinishNumber,
+      required this.awaitingNumber,
+      required this.updateFinishNumber})
       : _races = races,
         _stages = stages,
         _riders = riders,
@@ -1006,10 +1045,16 @@ class _$EmitStateImpl implements _EmitState {
 
   @override
   final Notification? notification;
+  @override
+  final int? autoFinishNumber;
+  @override
+  final int? awaitingNumber;
+  @override
+  final bool? updateFinishNumber;
 
   @override
   String toString() {
-    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification)';
+    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
   }
 
   @override
@@ -1031,7 +1076,13 @@ class _$EmitStateImpl implements _EmitState {
             const DeepCollectionEquality()
                 .equals(other._numbersOnTrace, _numbersOnTrace) &&
             (identical(other.notification, notification) ||
-                other.notification == notification));
+                other.notification == notification) &&
+            (identical(other.autoFinishNumber, autoFinishNumber) ||
+                other.autoFinishNumber == autoFinishNumber) &&
+            (identical(other.awaitingNumber, awaitingNumber) ||
+                other.awaitingNumber == awaitingNumber) &&
+            (identical(other.updateFinishNumber, updateFinishNumber) ||
+                other.updateFinishNumber == updateFinishNumber));
   }
 
   @override
@@ -1048,7 +1099,10 @@ class _$EmitStateImpl implements _EmitState {
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_trails),
       const DeepCollectionEquality().hash(_numbersOnTrace),
-      notification);
+      notification,
+      autoFinishNumber,
+      awaitingNumber,
+      updateFinishNumber);
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1074,7 +1128,10 @@ class _$EmitStateImpl implements _EmitState {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -1134,8 +1191,22 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
   }) {
-    return emitState(race, stage, races, stages, riders, statuses, participants,
-        starts, finishes, trails, numbersOnTrace, notification);
+    return emitState(
+        race,
+        stage,
+        races,
+        stages,
+        riders,
+        statuses,
+        participants,
+        starts,
+        finishes,
+        trails,
+        numbersOnTrace,
+        notification,
+        autoFinishNumber,
+        awaitingNumber,
+        updateFinishNumber);
   }
 
   @override
@@ -1154,7 +1225,10 @@ class _$EmitStateImpl implements _EmitState {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -1211,8 +1285,22 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
   }) {
-    return emitState?.call(race, stage, races, stages, riders, statuses,
-        participants, starts, finishes, trails, numbersOnTrace, notification);
+    return emitState?.call(
+        race,
+        stage,
+        races,
+        stages,
+        riders,
+        statuses,
+        participants,
+        starts,
+        finishes,
+        trails,
+        numbersOnTrace,
+        notification,
+        autoFinishNumber,
+        awaitingNumber,
+        updateFinishNumber);
   }
 
   @override
@@ -1231,7 +1319,10 @@ class _$EmitStateImpl implements _EmitState {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1290,8 +1381,22 @@ class _$EmitStateImpl implements _EmitState {
     required TResult orElse(),
   }) {
     if (emitState != null) {
-      return emitState(race, stage, races, stages, riders, statuses,
-          participants, starts, finishes, trails, numbersOnTrace, notification);
+      return emitState(
+          race,
+          stage,
+          races,
+          stages,
+          riders,
+          statuses,
+          participants,
+          starts,
+          finishes,
+          trails,
+          numbersOnTrace,
+          notification,
+          autoFinishNumber,
+          awaitingNumber,
+          updateFinishNumber);
     }
     return orElse();
   }
@@ -1439,7 +1544,10 @@ abstract class _EmitState implements DatabaseEvent {
       required final List<Finish> finishes,
       required final List<Trail> trails,
       required final List<StartingParticipant> numbersOnTrace,
-      required final Notification? notification}) = _$EmitStateImpl;
+      required final Notification? notification,
+      required final int? autoFinishNumber,
+      required final int? awaitingNumber,
+      required final bool? updateFinishNumber}) = _$EmitStateImpl;
 
   Race? get race;
   Stage? get stage;
@@ -1453,6 +1561,9 @@ abstract class _EmitState implements DatabaseEvent {
   List<Trail> get trails;
   List<StartingParticipant> get numbersOnTrace;
   Notification? get notification;
+  int? get autoFinishNumber;
+  int? get awaitingNumber;
+  bool? get updateFinishNumber;
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1543,7 +1654,10 @@ class _$AddRaceImpl implements _AddRace {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -1622,7 +1736,10 @@ class _$AddRaceImpl implements _AddRace {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -1698,7 +1815,10 @@ class _$AddRaceImpl implements _AddRace {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -1985,7 +2105,10 @@ class _$DeleteRaceImpl implements _DeleteRace {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -2064,7 +2187,10 @@ class _$DeleteRaceImpl implements _DeleteRace {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -2140,7 +2266,10 @@ class _$DeleteRaceImpl implements _DeleteRace {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -2400,7 +2529,10 @@ class _$GetRacesImpl implements _GetRaces {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -2479,7 +2611,10 @@ class _$GetRacesImpl implements _GetRaces {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -2555,7 +2690,10 @@ class _$GetRacesImpl implements _GetRaces {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -2835,7 +2973,10 @@ class _$SelectRaceImpl implements _SelectRace {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -2914,7 +3055,10 @@ class _$SelectRaceImpl implements _SelectRace {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -2990,7 +3134,10 @@ class _$SelectRaceImpl implements _SelectRace {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -3278,7 +3425,10 @@ class _$AddStageImpl implements _AddStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -3357,7 +3507,10 @@ class _$AddStageImpl implements _AddStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -3433,7 +3586,10 @@ class _$AddStageImpl implements _AddStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -3720,7 +3876,10 @@ class _$DeleteStageImpl implements _DeleteStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -3799,7 +3958,10 @@ class _$DeleteStageImpl implements _DeleteStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -3875,7 +4037,10 @@ class _$DeleteStageImpl implements _DeleteStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -4162,7 +4327,10 @@ class _$GetStagesImpl implements _GetStages {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -4241,7 +4409,10 @@ class _$GetStagesImpl implements _GetStages {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -4317,7 +4488,10 @@ class _$GetStagesImpl implements _GetStages {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -4605,7 +4779,10 @@ class _$SelectStageImpl implements _SelectStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -4684,7 +4861,10 @@ class _$SelectStageImpl implements _SelectStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -4760,7 +4940,10 @@ class _$SelectStageImpl implements _SelectStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -5050,7 +5233,10 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -5129,7 +5315,10 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -5205,7 +5394,10 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -5526,7 +5718,10 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -5605,7 +5800,10 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -5681,7 +5879,10 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -6052,7 +6253,10 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -6138,7 +6342,10 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -6221,7 +6428,10 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -6590,7 +6800,10 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -6670,7 +6883,10 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -6747,7 +6963,10 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -7067,7 +7286,10 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -7146,7 +7368,10 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -7222,7 +7447,10 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -7524,7 +7752,10 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -7603,7 +7834,10 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -7679,7 +7913,10 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -8058,7 +8295,10 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -8138,7 +8378,10 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -8215,7 +8458,10 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -8537,7 +8783,10 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -8616,7 +8865,10 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -8692,7 +8944,10 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -8987,7 +9242,10 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -9066,7 +9324,10 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -9142,7 +9403,10 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -9433,7 +9697,10 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -9512,7 +9779,10 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -9588,7 +9858,10 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -9877,7 +10150,10 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -9956,7 +10232,10 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -10032,7 +10311,10 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -10329,7 +10611,10 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -10408,7 +10693,10 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -10484,7 +10772,10 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -10784,7 +11075,10 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -10863,7 +11157,10 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -10939,7 +11236,10 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -11239,7 +11539,10 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -11318,7 +11621,10 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -11394,7 +11700,10 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -11684,7 +11993,10 @@ class _$HideFinishImpl implements _HideFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -11763,7 +12075,10 @@ class _$HideFinishImpl implements _HideFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -11839,7 +12154,10 @@ class _$HideFinishImpl implements _HideFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -12158,7 +12476,10 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -12237,7 +12558,10 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -12313,7 +12637,10 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -12619,7 +12946,10 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -12698,7 +13028,10 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -12774,7 +13107,10 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -13065,7 +13401,10 @@ class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -13144,7 +13483,10 @@ class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -13220,7 +13562,10 @@ class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -13481,7 +13826,10 @@ class _$SshareStartImpl implements _SshareStart {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -13560,7 +13908,10 @@ class _$SshareStartImpl implements _SshareStart {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -13636,7 +13987,10 @@ class _$SshareStartImpl implements _SshareStart {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -13888,7 +14242,10 @@ class _$ShareFinishImpl implements _ShareFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -13967,7 +14324,10 @@ class _$ShareFinishImpl implements _ShareFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -14043,7 +14403,10 @@ class _$ShareFinishImpl implements _ShareFinish {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -14324,7 +14687,10 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -14403,7 +14769,10 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -14479,7 +14848,10 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -14743,7 +15115,10 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
         emitState,
     required TResult Function(Race race) addRace,
     required TResult Function(int id) deleteRace,
@@ -14822,7 +15197,10 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult? Function(Race race)? addRace,
     TResult? Function(int id)? deleteRace,
@@ -14898,7 +15276,10 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
         emitState,
     TResult Function(Race race)? addRace,
     TResult Function(int id)? deleteRace,
@@ -15113,7 +15494,10 @@ mixin _$DatabaseState {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            bool? updateFinishNumber,
+            int? autoFinishNumber,
+            int? awaitingNumber)
         initialized,
   }) =>
       throw _privateConstructorUsedError;
@@ -15132,7 +15516,10 @@ mixin _$DatabaseState {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            bool? updateFinishNumber,
+            int? autoFinishNumber,
+            int? awaitingNumber)?
         initialized,
   }) =>
       throw _privateConstructorUsedError;
@@ -15151,7 +15538,10 @@ mixin _$DatabaseState {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            bool? updateFinishNumber,
+            int? autoFinishNumber,
+            int? awaitingNumber)?
         initialized,
     required TResult orElse(),
   }) =>
@@ -15252,7 +15642,10 @@ class _$InitialImpl implements _Initial {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            bool? updateFinishNumber,
+            int? autoFinishNumber,
+            int? awaitingNumber)
         initialized,
   }) {
     return initial();
@@ -15274,7 +15667,10 @@ class _$InitialImpl implements _Initial {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            bool? updateFinishNumber,
+            int? autoFinishNumber,
+            int? awaitingNumber)?
         initialized,
   }) {
     return initial?.call();
@@ -15296,7 +15692,10 @@ class _$InitialImpl implements _Initial {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            bool? updateFinishNumber,
+            int? autoFinishNumber,
+            int? awaitingNumber)?
         initialized,
     required TResult orElse(),
   }) {
@@ -15360,7 +15759,10 @@ abstract class _$$InitializedImplCopyWith<$Res> {
       List<Finish> finishes,
       List<Trail> trails,
       List<StartingParticipant> numbersOnTrace,
-      Notification? notification});
+      Notification? notification,
+      bool? updateFinishNumber,
+      int? autoFinishNumber,
+      int? awaitingNumber});
 
   $NotificationCopyWith<$Res>? get notification;
 }
@@ -15390,6 +15792,9 @@ class __$$InitializedImplCopyWithImpl<$Res>
     Object? trails = null,
     Object? numbersOnTrace = null,
     Object? notification = freezed,
+    Object? updateFinishNumber = freezed,
+    Object? autoFinishNumber = freezed,
+    Object? awaitingNumber = freezed,
   }) {
     return _then(_$InitializedImpl(
       race: freezed == race
@@ -15440,6 +15845,18 @@ class __$$InitializedImplCopyWithImpl<$Res>
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as Notification?,
+      updateFinishNumber: freezed == updateFinishNumber
+          ? _value.updateFinishNumber
+          : updateFinishNumber // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      autoFinishNumber: freezed == autoFinishNumber
+          ? _value.autoFinishNumber
+          : autoFinishNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      awaitingNumber: freezed == awaitingNumber
+          ? _value.awaitingNumber
+          : awaitingNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 
@@ -15473,7 +15890,10 @@ class _$InitializedImpl implements _Initialized {
       required final List<Finish> finishes,
       required final List<Trail> trails,
       required final List<StartingParticipant> numbersOnTrace,
-      this.notification})
+      this.notification,
+      this.updateFinishNumber,
+      this.autoFinishNumber,
+      this.awaitingNumber})
       : _races = races,
         _stages = stages,
         _riders = riders,
@@ -15562,10 +15982,19 @@ class _$InitializedImpl implements _Initialized {
 
   @override
   final Notification? notification;
+// Изменить время финиша для номера
+  @override
+  final bool? updateFinishNumber;
+// Автоматически подставленный в финишное время номер
+  @override
+  final int? autoFinishNumber;
+// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+  @override
+  final int? awaitingNumber;
 
   @override
   String toString() {
-    return 'DatabaseState.initialized(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification)';
+    return 'DatabaseState.initialized(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification, updateFinishNumber: $updateFinishNumber, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
   }
 
   @override
@@ -15587,7 +16016,13 @@ class _$InitializedImpl implements _Initialized {
             const DeepCollectionEquality()
                 .equals(other._numbersOnTrace, _numbersOnTrace) &&
             (identical(other.notification, notification) ||
-                other.notification == notification));
+                other.notification == notification) &&
+            (identical(other.updateFinishNumber, updateFinishNumber) ||
+                other.updateFinishNumber == updateFinishNumber) &&
+            (identical(other.autoFinishNumber, autoFinishNumber) ||
+                other.autoFinishNumber == autoFinishNumber) &&
+            (identical(other.awaitingNumber, awaitingNumber) ||
+                other.awaitingNumber == awaitingNumber));
   }
 
   @override
@@ -15604,7 +16039,10 @@ class _$InitializedImpl implements _Initialized {
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_trails),
       const DeepCollectionEquality().hash(_numbersOnTrace),
-      notification);
+      notification,
+      updateFinishNumber,
+      autoFinishNumber,
+      awaitingNumber);
 
   /// Create a copy of DatabaseState
   /// with the given fields replaced by the non-null parameter values.
@@ -15630,11 +16068,28 @@ class _$InitializedImpl implements _Initialized {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)
+            Notification? notification,
+            bool? updateFinishNumber,
+            int? autoFinishNumber,
+            int? awaitingNumber)
         initialized,
   }) {
-    return initialized(race, stage, races, stages, riders, statuses,
-        participants, starts, finishes, trails, numbersOnTrace, notification);
+    return initialized(
+        race,
+        stage,
+        races,
+        stages,
+        riders,
+        statuses,
+        participants,
+        starts,
+        finishes,
+        trails,
+        numbersOnTrace,
+        notification,
+        updateFinishNumber,
+        autoFinishNumber,
+        awaitingNumber);
   }
 
   @override
@@ -15653,11 +16108,28 @@ class _$InitializedImpl implements _Initialized {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            bool? updateFinishNumber,
+            int? autoFinishNumber,
+            int? awaitingNumber)?
         initialized,
   }) {
-    return initialized?.call(race, stage, races, stages, riders, statuses,
-        participants, starts, finishes, trails, numbersOnTrace, notification);
+    return initialized?.call(
+        race,
+        stage,
+        races,
+        stages,
+        riders,
+        statuses,
+        participants,
+        starts,
+        finishes,
+        trails,
+        numbersOnTrace,
+        notification,
+        updateFinishNumber,
+        autoFinishNumber,
+        awaitingNumber);
   }
 
   @override
@@ -15676,13 +16148,30 @@ class _$InitializedImpl implements _Initialized {
             List<Finish> finishes,
             List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
-            Notification? notification)?
+            Notification? notification,
+            bool? updateFinishNumber,
+            int? autoFinishNumber,
+            int? awaitingNumber)?
         initialized,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(race, stage, races, stages, riders, statuses,
-          participants, starts, finishes, trails, numbersOnTrace, notification);
+      return initialized(
+          race,
+          stage,
+          races,
+          stages,
+          riders,
+          statuses,
+          participants,
+          starts,
+          finishes,
+          trails,
+          numbersOnTrace,
+          notification,
+          updateFinishNumber,
+          autoFinishNumber,
+          awaitingNumber);
     }
     return orElse();
   }
@@ -15732,7 +16221,10 @@ abstract class _Initialized implements DatabaseState {
       required final List<Finish> finishes,
       required final List<Trail> trails,
       required final List<StartingParticipant> numbersOnTrace,
-      final Notification? notification}) = _$InitializedImpl;
+      final Notification? notification,
+      final bool? updateFinishNumber,
+      final int? autoFinishNumber,
+      final int? awaitingNumber}) = _$InitializedImpl;
 
   Race? get race;
   Stage? get stage;
@@ -15745,7 +16237,12 @@ abstract class _Initialized implements DatabaseState {
   List<Finish> get finishes;
   List<Trail> get trails;
   List<StartingParticipant> get numbersOnTrace;
-  Notification? get notification;
+  Notification? get notification; // Изменить время финиша для номера
+  bool?
+      get updateFinishNumber; // Автоматически подставленный в финишное время номер
+  int?
+      get autoFinishNumber; // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+  int? get awaitingNumber;
 
   /// Create a copy of DatabaseState
   /// with the given fields replaced by the non-null parameter values.

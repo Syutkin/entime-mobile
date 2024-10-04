@@ -3,6 +3,7 @@ part of 'database_bloc.dart';
 @freezed
 class DatabaseState with _$DatabaseState {
   const factory DatabaseState.initial() = _Initial;
+
   const factory DatabaseState.initialized({
     Race? race,
     Stage? stage,
@@ -16,5 +17,14 @@ class DatabaseState with _$DatabaseState {
     required List<Trail> trails,
     required List<StartingParticipant> numbersOnTrace,
     Notification? notification,
+
+    // Изменить время финиша для номера
+    bool? updateFinishNumber,
+
+    // Автоматически подставленный в финишное время номер
+    int? autoFinishNumber,
+
+    // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+    int? awaitingNumber,
   }) = _Initialized;
 }

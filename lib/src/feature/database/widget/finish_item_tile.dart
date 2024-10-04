@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../../common/localization/localization.dart';
-import '../../../../common/utils/helper.dart';
-import '../../../protocol/protocol.dart';
+import '../../../common/localization/localization.dart';
+import '../../../common/utils/helper.dart';
+import '../drift/app_database.dart';
 
 class FinishItemTile<T extends Object> extends StatelessWidget {
   final GestureTapCallback? onTap;
@@ -11,7 +11,7 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
   final GestureLongPressCallback? onLongPress;
   final DismissDirectionCallback? onDismissed;
   final DragTargetAccept<T>? onAccept;
-  final FinishItem item;
+  final Finish item;
 
   const FinishItemTile({
     super.key,
@@ -47,15 +47,15 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
           },
           child: DragTarget(
             // не даёт переписать номер через drag'n'drop
-            onWillAccept: (data) {
+            onWillAcceptWithDetails: (data) {
               if (item.number != null) {
                 return false;
               } else {
                 return true;
               }
             },
-            onAccept: (data) {
-              onAccept?.call(data! as T);
+            onAcceptWithDetails: (data) {
+              onAccept?.call(data as T);
             },
             builder: (context, candidateData, rejectedData) => Card(
               margin: const EdgeInsets.all(2),
@@ -72,7 +72,8 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
                     Flexible(
                       flex: 15,
                       child: Align(
-                        child: _addIcon(item.manual), //Icon(Icons.add_circle),
+                        child:
+                            _addIcon(item.isManual), //Icon(Icons.add_circle),
                       ),
                     ),
                     Flexible(
@@ -80,7 +81,7 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          strip(item.finishtime),
+                          strip(item.finishTime),
                           style: DefaultTextStyle.of(context)
                               .style
                               .apply(fontSizeFactor: 2),
@@ -108,8 +109,8 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
         ),
       );
 
-  Widget _addIcon(int? manual) {
-    if (manual == 1) {
+  Widget _addIcon(bool manual) {
+    if (manual) {
       return Icon(MdiIcons.handBackLeft);
     } else {
       return Icon(MdiIcons.cpu64Bit);

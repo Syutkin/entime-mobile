@@ -26,10 +26,14 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   List<Finish> _finishes = [];
   List<Trail> _trails = [];
   List<StartingParticipant> _numbersOnTrace = [];
-  Notification? _notification;
+
+  // Notification? _notification;
 
   Race? _race;
   Stage? _stage;
+  int? _awaitingNumber;
+
+  // int? _autoFinishNumber;
 
   Race? get race => _race;
 
@@ -39,7 +43,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   int? get stageId => _stage?.id;
 
-  void _emitState() {
+  void _emitState({
+    Notification? notification,
+    int? autoFinishNumber,
+    bool? updateFinishNumber,
+  }) {
     add(DatabaseEvent.emitState(
       race: race,
       stage: stage,
@@ -52,7 +60,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       finishes: _finishes,
       trails: _trails,
       numbersOnTrace: _numbersOnTrace,
-      notification: _notification,
+      notification: notification,
+      autoFinishNumber: autoFinishNumber,
+      awaitingNumber: _awaitingNumber,
+      updateFinishNumber: updateFinishNumber,
     ));
   }
 
@@ -173,6 +184,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               trails: event.trails,
               numbersOnTrace: event.numbersOnTrace,
               notification: event.notification,
+              autoFinishNumber: event.autoFinishNumber,
+              awaitingNumber: _awaitingNumber,
             ),
           );
         },
@@ -181,6 +194,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             name: event.race.name,
             startDate: event.race.startDate,
             finishDate: event.race.finishDate,
+            location: event.race.location,
           );
         },
         deleteRace: (event) async {
@@ -200,6 +214,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _db.addStage(
             raceId: event.stage.raceId,
             name: event.stage.name,
+            trailId: event.stage.trailId,
           );
         },
         deleteStage: (event) async {
@@ -239,13 +254,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             //     ),
             //   ),
             // );
-            _notification = Notification.updateNumber(
+            final notification = Notification.updateNumber(
               existedStartingParticipants: startingParticipants,
               number: event.number,
               startTime: event.startTime,
             );
-            _emitState();
-            _notification = null;
+            _emitState(notification: notification);
+            // _notification = null;
           }
         },
         updateStartingInfo: (event) async {
@@ -261,28 +276,50 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         },
         updateManualStartTime: (event) async {
           await _db.updateManualStartTime(
-              stageId: event.stageId, time: event.time);
+            stageId: event.stageId,
+            time: event.time,
+            deltaInSeconds: event.deltaInSeconds,
+          );
         },
         setStatusForStartId: (event) async {
           await _db.setStatusForStartId(
-              startId: event.startId, status: ParticipantStatus.dns);
+            startId: event.startId,
+            status: ParticipantStatus.dns,
+          );
         },
         updateAutomaticCorrection: (event) async {
           await _db.updateAutomaticCorrection(
-              stageId: event.stageId,
-              time: event.time,
-              correction: event.correction,
-              timeStamp: event.timeStamp);
+            stageId: event.stageId,
+            time: event.time,
+            correction: event.correction,
+            timeStamp: event.timeStamp,
+            deltaInSeconds: event.deltaInSeconds,
+            forceUpdate: event.forceUpdate,
+          );
         },
+        // ToDo: проверить тост с автоматически добавленным номером
         addFinishTime: (event) async {
-          await _db.addFinishTime(
-              stage: event.stage,
-              finish: event.finish,
-              timeStamp: event.timeStamp);
+          final autoFinishNumber = await _db.addFinishTime(
+            stage: event.stage,
+            finish: event.finish,
+            timeStamp: event.timeStamp,
+            finishDelay: event.finishDelay,
+            substituteNumbers: event.substituteNumbers,
+            substituteNumbersDelay: event.finishDelay,
+            dateTimeNow: event.dateTimeNow,
+            number: event.number,
+          );
+          if (autoFinishNumber != null) {
+            _emitState(autoFinishNumber: autoFinishNumber);
+          }
+          // _autoFinishNumber = null;
         },
         addFinishTimeManual: (event) async {
           await _db.addFinishTimeManual(
-              stageId: event.stageId, finishTime: event.finishTime);
+            stageId: event.stageId,
+            finishTime: event.finishTime,
+            number: event.number,
+          );
         },
         //ToDo:
         clearStartResultsDebug: (event) {
@@ -308,16 +345,20 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _db.setDNFForStage(stage: event.stage, number: event.number);
         },
         addNumberToFinish: (event) async {
-          await _db.addNumberToFinish(
-              stage: event.stage,
-              finishId: event.finishId,
-              number: event.number,
-              finishTime: event.finishTime);
+          final update = await _db.addNumberToFinish(
+            stage: event.stage,
+            finishId: event.finishId,
+            number: event.number,
+            finishTime: event.finishTime,
+          );
+          _emitState();
         },
         getNumbersOnTraceNow: (event) async {
           _numbersOnTrace = await _db
               .getNumbersOnTraceNow(
-                  stageId: event.stageId, dateTimeNow: event.dateTimeNow)
+                stageId: event.stageId,
+                dateTimeNow: event.dateTimeNow,
+              )
               .get();
           _emitState();
         },
@@ -333,13 +374,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         shareFinish: (event) {
           throw ('Not implemented');
         },
-        //ToDo:
         selectAwaitingNumber: (event) {
-          throw ('Not implemented');
+          _awaitingNumber = event.number;
         },
-        //ToDo:
         deselectAwaitingNumber: (event) {
-          throw ('Not implemented');
+          _awaitingNumber = null;
         },
       );
     });

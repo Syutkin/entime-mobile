@@ -285,8 +285,8 @@ class _StartListPage extends State<StartListPage> {
         builder: (context, state) => state.map(
             initial: (state) => const SizedBox.shrink(),
             initialized: (state) {
-              var databaseBloc = context.read<DatabaseBloc>();
-              var stage = state.stage;
+              final databaseBloc = context.read<DatabaseBloc>();
+              final stage = state.stage;
               return Scaffold(
                 appBar: AppBar(
                   title: Text(stage?.name ?? 'n/a'),

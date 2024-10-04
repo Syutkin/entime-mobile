@@ -17,6 +17,9 @@ class DatabaseEvent with _$DatabaseEvent {
     required List<Trail> trails,
     required List<StartingParticipant> numbersOnTrace,
     required Notification? notification,
+    required int? autoFinishNumber,
+    required int? awaitingNumber,
+    required bool? updateFinishNumber,
   }) = _EmitState;
 
   const factory DatabaseEvent.addRace(Race race) = _AddRace;

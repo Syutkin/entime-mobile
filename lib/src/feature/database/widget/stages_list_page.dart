@@ -6,7 +6,6 @@ import '../../../common/widget/expanded_alert_dialog.dart';
 import '../../countdown/countdown.dart';
 import '../bloc/database_bloc.dart';
 import '../drift/app_database.dart';
-import 'start_list_page.dart';
 
 part 'popup/add_stage_popup.dart';
 

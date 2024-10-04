@@ -10,10 +10,10 @@ import '../../drawer/widget/app_drawer.dart';
 import '../../init/init.dart';
 import '../../module_settings/module_settings.dart';
 import '../../protocol/protocol.dart';
-import '../../protocol_screens/finish/widget/finish_screen.dart';
 import '../../protocol_screens/model/menu_button.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../../tab/tab.dart';
+import '../../tab/widget/finish_page.dart';
 import '../../tab/widget/start_page.dart';
 import '../../update/update.dart';
 
@@ -176,7 +176,7 @@ class HomeScreen extends StatelessWidget {
                       //     isDeleted: false,
                       //   ),
                       // ),
-                      FinishScreen(),
+                      FinishPage(),
                     ],
                   ),
                 ),
@@ -294,6 +294,7 @@ class _MenuButton extends StatelessWidget {
   final AppTab activeTab;
 
   const _MenuButton({required this.activeTab});
+
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<SettingsBloc, SettingsState>(
