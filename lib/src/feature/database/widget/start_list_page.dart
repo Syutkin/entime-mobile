@@ -20,9 +20,7 @@ part 'popup/edit_start_time_popup.dart';
 part 'popup/overwrite_start_time_popup.dart';
 
 class StartListPage extends StatefulWidget {
-  const StartListPage({
-    super.key,
-  });
+  const StartListPage({super.key});
 
   @override
   State<StartListPage> createState() => _StartListPage();

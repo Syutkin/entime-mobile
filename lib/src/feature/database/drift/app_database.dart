@@ -613,16 +613,31 @@ class AppDatabase extends _$AppDatabase {
       );
       return false;
     } else {
-      await _setNumberToFinish(id: finishId, number: number);
-      await _setFinishInfoToStart(
+      var rowCount = await _setNumberToFinish(id: finishId, number: number);
+      if (rowCount > 0) {
+        logger.i(
+          'Database -> Number $number added at rowid $finishId with finishtime: $finishTime',
+        );
+      } else {
+        logger.w(
+          'Database -> Number $number NOT added at rowid $finishId with finishtime: $finishTime',
+        );
+      }
+      rowCount = await _setFinishInfoToStart(
         raceId: stage.raceId,
         stageId: stage.id!,
         number: number,
         finishId: finishId,
       );
-      logger.i(
-        'Database -> Number $number added at rowid $finishId with finishtime: $finishTime',
-      );
+      if (rowCount > 0) {
+        logger.i(
+          'Database -> Added finish id $finishId for number $number',
+        );
+      } else {
+        logger.i(
+          'Database -> Number $number not found at start list and therefor finish rowid $finishId not added',
+        );
+      }
       return true;
     }
   }

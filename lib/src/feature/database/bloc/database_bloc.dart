@@ -11,7 +11,9 @@ import '../drift/app_database.dart';
 import '../model/notification.dart';
 
 part 'database_bloc.freezed.dart';
+
 part 'database_event.dart';
+
 part 'database_state.dart';
 
 class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
@@ -224,11 +226,20 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           _stages = await _db.getStages(raceId: event.raceId).get();
           _emitState();
         },
-        selectStage: (event) {
+        selectStage: (event) async {
           _stage = event.stage;
           var stageId = event.stage.id;
+
+          /// Fill state with data
           if (stageId != null) {
-            add(DatabaseEvent.getParticipantsAtStart(stageId));
+            _participants =
+                await _db.getParticipantsAtStart(stageId: stageId).get();
+            _numbersOnTrace = await _db
+                .getNumbersOnTraceNow(
+                    stageId: stageId, dateTimeNow: DateTime.now())
+                .get();
+            _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
+            _emitState();
           }
         },
         getParticipantsAtStart: (event) async {
@@ -297,6 +308,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             forceUpdate: event.forceUpdate,
           );
         },
+        getFinishesFromStage: (event) {},
         // ToDo: проверить тост с автоматически добавленным номером
         addFinishTime: (event) async {
           final autoFinishNumber = await _db.addFinishTime(
@@ -356,9 +368,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         getNumbersOnTraceNow: (event) async {
           _numbersOnTrace = await _db
               .getNumbersOnTraceNow(
-                stageId: event.stageId,
-                dateTimeNow: event.dateTimeNow,
-              )
+                  stageId: event.stageId, dateTimeNow: event.dateTimeNow)
               .get();
           _emitState();
         },

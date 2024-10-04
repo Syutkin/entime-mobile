@@ -764,8 +764,8 @@ void main() {
       });
 
       test('Set DNS but start with id does not exists', () async {
-        var result =
-            await db.setStatusForStartId(startId: 0, status: ParticipantStatus.dns);
+        var result = await db.setStatusForStartId(
+            startId: 0, status: ParticipantStatus.dns);
         expect(result, 0);
       });
     });
@@ -846,6 +846,44 @@ void main() {
           finishTime: finishTime,
         );
         expect(result2, false);
+      });
+
+      test('Add not existing number to finish', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finishTime = '10:05:23,123';
+        var timeStamp = '10:05:23,456';
+        var number = 999;
+
+        var startInfo = await db
+                .getNumberAtStarts(stageId: stage.id!, number: number)
+                .get();
+        expect(startInfo.isEmpty, true);
+
+        await db.addFinishTime(
+            stage: stage,
+            finish: finishTime,
+            timeStamp: strTimeToDateTime(timeStamp)!);
+
+        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.length, 1);
+        var finishId = finishes.first.id!;
+
+        var result = await db.addNumberToFinish(
+          stage: stage,
+          finishId: finishId,
+          number: number,
+          finishTime: finishTime,
+        );
+        expect(result, true);
+
+        finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        expect(finishes.first.number, number);
+
+        // startInfo = (await db
+        //         .getNumberAtStarts(stageId: stage.id!, number: number)
+        //         .get())
+        //     .first;
+        // expect(startInfo.finishId, 1);
       });
     });
 

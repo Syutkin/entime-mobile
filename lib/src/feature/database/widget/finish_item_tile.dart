@@ -5,12 +5,12 @@ import '../../../common/localization/localization.dart';
 import '../../../common/utils/helper.dart';
 import '../drift/app_database.dart';
 
-class FinishItemTile<T extends Object> extends StatelessWidget {
+class FinishItemTile extends StatelessWidget {
   final GestureTapCallback? onTap;
   final GestureTapDownCallback? onTapDown;
   final GestureLongPressCallback? onLongPress;
   final DismissDirectionCallback? onDismissed;
-  final DragTargetAccept<T>? onAccept;
+  final DragTargetAcceptWithDetails<int>? onAccept;
   final Finish item;
 
   const FinishItemTile({
@@ -45,17 +45,17 @@ class FinishItemTile<T extends Object> extends StatelessWidget {
           onTapDown: (details) {
             onTapDown?.call(details);
           },
-          child: DragTarget(
+          child: DragTarget<int>(
             // не даёт переписать номер через drag'n'drop
-            onWillAcceptWithDetails: (data) {
+            onWillAcceptWithDetails: (details) {
               if (item.number != null) {
                 return false;
               } else {
                 return true;
               }
             },
-            onAcceptWithDetails: (data) {
-              onAccept?.call(data as T);
+            onAcceptWithDetails: (details) {
+              onAccept?.call(details);
             },
             builder: (context, candidateData, rejectedData) => Card(
               margin: const EdgeInsets.all(2),

@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../common/logger/logger.dart';
 import '../../../common/utils/consts.dart';
 import '../../../common/utils/helper.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
@@ -27,10 +28,10 @@ class FinishListPage extends StatefulWidget {
   const FinishListPage({super.key});
 
   @override
-  State<FinishListPage> createState() => _FinishPage();
+  State<FinishListPage> createState() => _FinishListPage();
 }
 
-class _FinishPage extends State<FinishListPage> {
+class _FinishListPage extends State<FinishListPage> {
   late Offset _tapPosition;
 
   void _storePosition(TapDownDetails details) {
@@ -39,11 +40,17 @@ class _FinishPage extends State<FinishListPage> {
 
   late Timer _timer;
 
-  _FinishPage() {
-    _startTimer();
-  }
+  // _FinishListPage() {
+  //   _startTimer(widget.stageId);
+  // }
 
   final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
 
   @override
   void dispose() {
@@ -61,13 +68,6 @@ class _FinishPage extends State<FinishListPage> {
                 // toast с автоматичски проставленным номером
                 final autoFinishNumber = state.autoFinishNumber;
                 if (autoFinishNumber != null) {
-                  // BotToast.showSimpleNotification(
-                  //   title: 'Финишировал номер ${state.autoFinishNumber}',
-                  //   onTap: () => BlocProvider.of<ProtocolBloc>(context).add(
-                  //       ProtocolClearNumberAtFinish(number: state.autoFinishNumber)),
-                  //   hideCloseButton: true,
-                  //   duration: const Duration(seconds: 3),
-                  // );
                   BotToast.showAttachedWidget(
                     verticalOffset: 36,
                     attachedBuilder: (cancel) => Card(
@@ -114,6 +114,7 @@ class _FinishPage extends State<FinishListPage> {
                     scrollToEnd(_scrollController);
                   });
                 }
+                // return const SizedBox.shrink();
                 return _finishList(state.finishes);
               }),
         ),
@@ -165,16 +166,18 @@ class _FinishPage extends State<FinishListPage> {
                   onLongPress: () async {
                     await _clearPopup(item.number);
                   },
-                  onAccept: (data) {
-                    if (data != null) {
+                  onAccept: (details) {
+                    if (details != null) {
                       final databaseBloc = context.read<DatabaseBloc>();
                       final stage = databaseBloc.stage;
                       final finishId = item.id;
-                      final number = item.number;
+                      final number = details.data;
                       final finishTime = item.finishTime;
+                      logger.d(
+                          'stage: $stage, finishId: $finishId, number: $number, finishTime: $finishTime, details: $details, ');
                       if (stage != null &&
                           finishId != null &&
-                          number != null &&
+                          // number != null &&
                           finishTime != null) {
                         databaseBloc.add(
                           DatabaseEvent.addNumberToFinish(
