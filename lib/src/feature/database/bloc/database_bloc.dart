@@ -43,8 +43,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   late int _substituteNumbersDelay;
   int? _awaitingNumber;
 
-  // int? _autoFinishNumber;
-
   final SettingsProvider _settingsProvider;
 
   void _emitState({
@@ -52,9 +50,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     int? autoFinishNumber,
     bool? updateFinishNumber,
   }) {
-    logger.d('race: ${_race?.id}, stage: ${_stage?.id}, '
-        'autoFinishNumber: $autoFinishNumber, '
-        'updateFinishNumber: $updateFinishNumber');
     add(DatabaseEvent.emitState(
       race: _race,
       stage: _stage,
@@ -111,14 +106,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       _emitState();
     });
 
-    // (_db.select(_db.starts)
-    //       ..where((start) => start.stageId.equals(stageId ?? 0)))
-    //     .watch()
-    //     .listen((event) async {
-    //   _starts = event;
-    //   add( DatabaseEvent.emitState());
-    // });
-
     //ToDo: сделать фильтры
     _db.select(_db.finishes).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
@@ -127,14 +114,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           .d('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
       _emitState();
     });
-
-    // (_db.select(_db.finishes)
-    //       ..where((finish) => finish.stageId.equals(_stageId)))
-    //     .watch()
-    //     .listen((event) async {
-    //   _finishes = event;
-    //   add( DatabaseEvent.emitState());
-    // });
 
     // _db.select(_db.trails).watch().listen((event) async {
     //   _trails = event;
@@ -153,7 +132,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           .d('DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()');
       _emitState();
 
-      settingsProvider.state.listen((state) {
+      _settingsProvider.state.listen((state) {
         // условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
         if (_hideMarked != state.hideMarked ||
             _hideNumbers != state.hideNumbers ||
@@ -337,7 +316,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           );
         },
         getFinishesFromStage: (event) {},
-        // ToDo: проверить тост с автоматически добавленным номером
         addFinishTime: (event) async {
           final autoFinishNumber = await _db.addFinishTime(
             stage: event.stage,
@@ -345,7 +323,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             timeStamp: event.timeStamp,
             finishDelay: event.finishDelay ?? _finishDelay,
             substituteNumbers: event.substituteNumbers ?? _substituteNumbers,
-            substituteNumbersDelay: event.finishDelay ?? _substituteNumbersDelay,
+            substituteNumbersDelay:
+                event.finishDelay ?? _substituteNumbersDelay,
             dateTimeNow: event.dateTimeNow,
             number: _awaitingNumber,
           );
@@ -387,7 +366,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _db.setDNFForStage(stage: event.stage, number: event.number);
         },
         addNumberToFinish: (event) async {
-          final update = await _db.addNumberToFinish(
+          // final update = await _db.addNumberToFinish(
+          await _db.addNumberToFinish(
             stage: event.stage,
             finishId: event.finishId,
             number: event.number,

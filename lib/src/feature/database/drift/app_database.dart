@@ -635,7 +635,7 @@ class AppDatabase extends _$AppDatabase {
         );
       } else {
         logger.i(
-          'Database -> Number $number not found at start list and therefor finish rowid $finishId not added',
+          'Database -> Number $number not found at start list and therefore finish rowid $finishId not added',
         );
       }
       return true;
