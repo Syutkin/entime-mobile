@@ -324,9 +324,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             substituteNumbers: event.substituteNumbers,
             substituteNumbersDelay: event.finishDelay,
             dateTimeNow: event.dateTimeNow,
-            number: event.number,
+            number: _awaitingNumber,
           );
           if (autoFinishNumber != null) {
+            // снять выделение с автоматически подставленного номера
+            _awaitingNumber = null;
             _emitState(autoFinishNumber: autoFinishNumber);
           }
           // _autoFinishNumber = null;
@@ -391,9 +393,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         },
         selectAwaitingNumber: (event) {
           _awaitingNumber = event.number;
+          _emitState();
         },
         deselectAwaitingNumber: (event) {
           _awaitingNumber = null;
+          _emitState();
         },
       );
     });
