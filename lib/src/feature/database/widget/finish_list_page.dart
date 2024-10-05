@@ -59,88 +59,95 @@ class _FinishListPage extends State<FinishListPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, state) => state.map(
-              initial: (state) => const SizedBox.shrink(),
-              initialized: (state) {
-                final databaseBloc = context.read<DatabaseBloc>();
-                // toast с автоматически проставленным номером
-                final autoFinishNumber = state.autoFinishNumber;
-                if (autoFinishNumber != null) {
-                  logger.d('autoFinishNumber: $autoFinishNumber');
-                  BotToast.showAttachedWidget(
-                    verticalOffset: 36.0,
-                    attachedBuilder: (cancel) => Card(
-                      child: ListTile(
-                        title: Text(
-                          Localization.current.I18nProtocol_finishNumber(
-                            '${state.autoFinishNumber}',
-                          ),
-                        ),
-                        trailing: TextButton(
-                          onPressed: () {
-                            final stage = state.stage;
-                            if (stage != null) {
-                              databaseBloc.add(
-                                DatabaseEvent.clearNumberAtFinish(
-                                  stage: stage,
-                                  number: autoFinishNumber,
-                                ),
-                              );
-                            }
-                            cancel();
-                          },
-                          child: Text(
-                            MaterialLocalizations.of(context).cancelButtonLabel,
-                          ),
-                        ),
+  Widget build(BuildContext context) =>
+      BlocListener<DatabaseBloc, DatabaseState>(
+        listener: (context, state) {
+          state.mapOrNull(initialized: (state) {
+            final databaseBloc = context.read<DatabaseBloc>();
+            // toast с автоматически проставленным номером
+            final autoFinishNumber = state.autoFinishNumber;
+            logger.d('autoFinishNumber: $autoFinishNumber');
+            if (autoFinishNumber != null) {
+              BotToast.showAttachedWidget(
+                verticalOffset: 36.0,
+                attachedBuilder: (cancel) => Card(
+                  child: ListTile(
+                    title: Text(
+                      Localization.current.I18nProtocol_finishNumber(
+                        '$autoFinishNumber',
                       ),
                     ),
-                    // enableSafeArea: false,
-                    animationDuration: const Duration(milliseconds: 300),
-                    duration: const Duration(seconds: 3),
-                    targetContext: context,
-                  );
-                }
-
-                // ToDo: настройки? более интересное поведение?
-                // ToDo: Перематывать только при первоначальном показе всех отсечек?
-                // скролл на последнюю запись если показываем скрытые отсечки
-                if (!BlocProvider.of<SettingsBloc>(context)
-                    .state
-                    .settings
-                    .hideMarked) {
-                  SchedulerBinding.instance.addPostFrameCallback((_) {
-                    scrollToEnd(_scrollController);
-                  });
-                }
-                // return const SizedBox.shrink();
-                return _finishList(state.finishes);
-              }),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
-          builder: (
-            context,
-            settingsState,
-          ) {
-            if (settingsState.settings.finishFab) {
-              return SizedBox(
-                height: settingsState.settings.finishFabSize,
-                width: settingsState.settings.finishFabSize,
-                child: FittedBox(
-                  child: FloatingActionButton(
-                    onPressed: () => _addFinishTimeManual(),
-                    child: Icon(MdiIcons.handBackLeft),
+                    trailing: TextButton(
+                      onPressed: () {
+                        final stage = state.stage;
+                        if (stage != null) {
+                          databaseBloc.add(
+                            DatabaseEvent.clearNumberAtFinish(
+                              stage: stage,
+                              number: autoFinishNumber,
+                            ),
+                          );
+                        }
+                        cancel();
+                      },
+                      child: Text(
+                        MaterialLocalizations.of(context).cancelButtonLabel,
+                      ),
+                    ),
                   ),
                 ),
+                // enableSafeArea: false,
+                animationDuration: const Duration(milliseconds: 300),
+                duration: const Duration(seconds: 3),
+                targetContext: context,
               );
             }
-            return const SizedBox(width: 0, height: 0);
-          },
+          });
+        },
+        child: Scaffold(
+          body: BlocBuilder<DatabaseBloc, DatabaseState>(
+            builder: (context, state) => state.map(
+                initial: (state) => const SizedBox.shrink(),
+                initialized: (state) {
+                  // ToDo: настройки? более интересное поведение?
+                  // ToDo: Перематывать только при первоначальном показе всех отсечек?
+                  // скролл на последнюю запись если показываем скрытые отсечки
+                  if (!BlocProvider.of<SettingsBloc>(context)
+                      .state
+                      .settings
+                      .hideMarked) {
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
+                      scrollToEnd(_scrollController);
+                    });
+                  }
+                  // return const SizedBox.shrink();
+                  return _finishList(state.finishes);
+                }),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (
+              context,
+              settingsState,
+            ) {
+              if (settingsState.settings.finishFab) {
+                return SizedBox(
+                  height: settingsState.settings.finishFabSize,
+                  width: settingsState.settings.finishFabSize,
+                  child: FittedBox(
+                    child: FloatingActionButton(
+                      onPressed: () => _addFinishTimeManual(),
+                      child: Icon(MdiIcons.handBackLeft),
+                    ),
+                  ),
+                );
+              }
+              return const SizedBox(width: 0, height: 0);
+            },
+          ),
+          persistentFooterButtons: _getFooterButtons(context),
         ),
-        persistentFooterButtons: _getFooterButtons(context),
       );
 
   Widget _finishList(List<Finish> finishProtocol) => CustomScrollView(

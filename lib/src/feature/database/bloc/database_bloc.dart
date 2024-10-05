@@ -43,17 +43,17 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   late int _substituteNumbersDelay;
   int? _awaitingNumber;
 
-  int? _autoFinishNumber;
+  // int? _autoFinishNumber;
 
   final SettingsProvider _settingsProvider;
 
   void _emitState({
     Notification? notification,
-    // int? autoFinishNumber,
+    int? autoFinishNumber,
     bool? updateFinishNumber,
   }) {
     logger.d('race: ${_race?.id}, stage: ${_stage?.id}, '
-        // 'autoFinishNumber: $autoFinishNumber, '
+        'autoFinishNumber: $autoFinishNumber, '
         'updateFinishNumber: $updateFinishNumber');
     add(DatabaseEvent.emitState(
       race: _race,
@@ -68,7 +68,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       trails: _trails,
       numbersOnTrace: _numbersOnTrace,
       notification: notification,
-      autoFinishNumber: _autoFinishNumber,
+      autoFinishNumber: autoFinishNumber,
       awaitingNumber: _awaitingNumber,
       updateFinishNumber: updateFinishNumber,
     ));
@@ -339,7 +339,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         getFinishesFromStage: (event) {},
         // ToDo: проверить тост с автоматически добавленным номером
         addFinishTime: (event) async {
-          _autoFinishNumber = await _db.addFinishTime(
+          final autoFinishNumber = await _db.addFinishTime(
             stage: event.stage,
             finish: event.finish,
             timeStamp: event.timeStamp,
@@ -349,10 +349,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             dateTimeNow: event.dateTimeNow,
             number: _awaitingNumber,
           );
-          if (_autoFinishNumber != null) {
+          if (autoFinishNumber != null) {
             // снять выделение с автоматически подставленного номера
             _awaitingNumber = null;
-            _emitState();
+            _emitState(autoFinishNumber: autoFinishNumber);
           }
         },
         addFinishTimeManual: (event) async {
@@ -376,7 +376,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _db.hideAllFinishes(event.stageId);
         },
         clearNumberAtFinish: (event) async {
-          _autoFinishNumber = null;
+          // _autoFinishNumber = null;
           await _db.clearNumberAtFinish(
               stage: event.stage, number: event.number);
         },
