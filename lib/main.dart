@@ -163,8 +163,10 @@ class EntimeApp extends StatelessWidget {
             )..add(SelectProtocol(file: settings.settings.recentFile)),
           ),
           BlocProvider<DatabaseBloc>(
-            create: (context) => DatabaseBloc(database: database)
-              ..add(const DatabaseEvent.initialize()),
+            create: (context) => DatabaseBloc(
+              database: database,
+              settingsProvider: settings,
+            )..add(const DatabaseEvent.initialize()),
           ),
           BlocProvider<CountdownBloc>(
             create: (context) => CountdownBloc(

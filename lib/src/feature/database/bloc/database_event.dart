@@ -87,9 +87,9 @@ class DatabaseEvent with _$DatabaseEvent {
     required Stage stage,
     required String finish,
     required DateTime timeStamp,
-    @Default(0) int finishDelay,
-    @Default(false) bool substituteNumbers,
-    @Default(0) int substituteNumbersDelay,
+    int? finishDelay,
+    bool? substituteNumbers,
+    int? substituteNumbersDelay,
     DateTime? dateTimeNow,
     int? number,
   }) = _AddFinishTime;
@@ -155,12 +155,10 @@ class DatabaseEvent with _$DatabaseEvent {
   //ToDO:
   const factory DatabaseEvent.shareFinish() = _ShareFinish;
 
-  //ToDO:
   const factory DatabaseEvent.selectAwaitingNumber({
     required int number,
   }) = _SelectAwaitingNumber;
 
-  //ToDO:
   const factory DatabaseEvent.deselectAwaitingNumber() =
       _DeselectAwaitingNumber;
 }

@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../settings/logic/settings_provider.dart';
 import '../drift/app_database.dart';
 import '../model/notification.dart';
 
@@ -33,23 +34,27 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   Race? _race;
   Stage? _stage;
+
+  bool _hideMarked = true;
+  bool _hideNumbers = false;
+  bool _hideManual = false;
+  late int _finishDelay;
+  late bool _substituteNumbers;
+  late int _substituteNumbersDelay;
   int? _awaitingNumber;
 
-  // int? _autoFinishNumber;
+  int? _autoFinishNumber;
 
-  // Race? get race => _race;
-  //
-  // Stage? get stage => _stage;
-  //
-  // int? get raceId => _race?.id;
-  //
-  // int? get stageId => _stage?.id;
+  final SettingsProvider _settingsProvider;
 
   void _emitState({
     Notification? notification,
-    int? autoFinishNumber,
+    // int? autoFinishNumber,
     bool? updateFinishNumber,
   }) {
+    logger.d('race: ${_race?.id}, stage: ${_stage?.id}, '
+        // 'autoFinishNumber: $autoFinishNumber, '
+        'updateFinishNumber: $updateFinishNumber');
     add(DatabaseEvent.emitState(
       race: _race,
       stage: _stage,
@@ -63,14 +68,17 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       trails: _trails,
       numbersOnTrace: _numbersOnTrace,
       notification: notification,
-      autoFinishNumber: autoFinishNumber,
+      autoFinishNumber: _autoFinishNumber,
       awaitingNumber: _awaitingNumber,
       updateFinishNumber: updateFinishNumber,
     ));
   }
 
-  DatabaseBloc({required AppDatabase database})
+  DatabaseBloc(
+      {required AppDatabase database,
+      required SettingsProvider settingsProvider})
       : _db = database,
+        _settingsProvider = settingsProvider,
         super(DatabaseState.initial()) {
     _db.getRaces().watch().listen((event) async {
       _races = event;
@@ -97,8 +105,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
     _db.select(_db.starts).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
-      _participants =
-          await _db.getParticipantsAtStart(stageId: stageId).get();
+      _participants = await _db.getParticipantsAtStart(stageId: stageId).get();
       logger.d(
           'DatabaseBloc -> getParticipantsAtStart(stageId: $stageId).watch()');
       _emitState();
@@ -112,9 +119,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     //   add( DatabaseEvent.emitState());
     // });
 
+    //ToDo: сделать фильтры
     _db.select(_db.finishes).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
-
       _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
       logger
           .d('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
@@ -140,12 +147,28 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         .listen((event) async {
       final stageId = _stage?.id ?? 0;
       _numbersOnTrace = await _db
-          .getNumbersOnTraceNow(
-              stageId: stageId, dateTimeNow: DateTime.now())
+          .getNumbersOnTraceNow(stageId: stageId, dateTimeNow: DateTime.now())
           .get();
       logger
           .d('DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()');
       _emitState();
+
+      settingsProvider.state.listen((state) {
+        // условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
+        if (_hideMarked != state.hideMarked ||
+            _hideNumbers != state.hideNumbers ||
+            _hideManual != state.hideManual) {
+          _hideMarked = state.hideMarked;
+          _hideNumbers = state.hideNumbers;
+          _hideManual = state.hideManual;
+          logger.d(
+            'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
+          );
+        }
+        _finishDelay = state.finishDelay;
+        _substituteNumbers = state.substituteNumbers;
+        _substituteNumbersDelay = state.substituteNumbersDelay;
+      });
     });
 
     on<DatabaseEvent>(transformer: sequential(), (event, emit) async {
@@ -316,22 +339,21 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         getFinishesFromStage: (event) {},
         // ToDo: проверить тост с автоматически добавленным номером
         addFinishTime: (event) async {
-          final autoFinishNumber = await _db.addFinishTime(
+          _autoFinishNumber = await _db.addFinishTime(
             stage: event.stage,
             finish: event.finish,
             timeStamp: event.timeStamp,
-            finishDelay: event.finishDelay,
-            substituteNumbers: event.substituteNumbers,
-            substituteNumbersDelay: event.finishDelay,
+            finishDelay: event.finishDelay ?? _finishDelay,
+            substituteNumbers: event.substituteNumbers ?? _substituteNumbers,
+            substituteNumbersDelay: event.finishDelay ?? _substituteNumbersDelay,
             dateTimeNow: event.dateTimeNow,
             number: _awaitingNumber,
           );
-          if (autoFinishNumber != null) {
+          if (_autoFinishNumber != null) {
             // снять выделение с автоматически подставленного номера
             _awaitingNumber = null;
-            _emitState(autoFinishNumber: autoFinishNumber);
+            _emitState();
           }
-          // _autoFinishNumber = null;
         },
         addFinishTimeManual: (event) async {
           await _db.addFinishTimeManual(
@@ -354,6 +376,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _db.hideAllFinishes(event.stageId);
         },
         clearNumberAtFinish: (event) async {
+          _autoFinishNumber = null;
           await _db.clearNumberAtFinish(
               stage: event.stage, number: event.number);
         },

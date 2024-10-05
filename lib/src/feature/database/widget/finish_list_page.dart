@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:entime/src/common/logger/logger.dart';
 import 'package:entime/src/feature/database/widget/popup/add_finish_number_popup.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -64,11 +65,12 @@ class _FinishListPage extends State<FinishListPage> {
               initial: (state) => const SizedBox.shrink(),
               initialized: (state) {
                 final databaseBloc = context.read<DatabaseBloc>();
-                // toast с автоматичски проставленным номером
+                // toast с автоматически проставленным номером
                 final autoFinishNumber = state.autoFinishNumber;
                 if (autoFinishNumber != null) {
+                  logger.d('autoFinishNumber: $autoFinishNumber');
                   BotToast.showAttachedWidget(
-                    verticalOffset: 36,
+                    verticalOffset: 36.0,
                     attachedBuilder: (cancel) => Card(
                       child: ListTile(
                         title: Text(
