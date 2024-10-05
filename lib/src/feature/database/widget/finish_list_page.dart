@@ -10,7 +10,6 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../common/logger/logger.dart';
 import '../../../common/utils/consts.dart';
 import '../../../common/utils/helper.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
@@ -167,27 +166,27 @@ class _FinishListPage extends State<FinishListPage> {
                     await _clearPopup(item.number);
                   },
                   onAccept: (details) {
-                    if (details != null) {
-                      final databaseBloc = context.read<DatabaseBloc>();
-                      final stage = databaseBloc.stage;
-                      final finishId = item.id;
-                      final number = details.data;
-                      final finishTime = item.finishTime;
-                      logger.d(
-                          'stage: $stage, finishId: $finishId, number: $number, finishTime: $finishTime, details: $details, ');
-                      if (stage != null &&
-                          finishId != null &&
-                          // number != null &&
-                          finishTime != null) {
-                        databaseBloc.add(
-                          DatabaseEvent.addNumberToFinish(
-                            stage: stage,
-                            finishId: finishId,
-                            number: number,
-                            finishTime: finishTime,
-                          ),
-                        );
-                      }
+                    final databaseBloc = context.read<DatabaseBloc>();
+                    Stage? stage;
+                    databaseBloc.state.map(
+                        initial: (_) {},
+                        initialized: (state) {
+                          stage = state.stage;
+                        });
+                    final finishId = item.id;
+                    final number = details.data;
+                    final finishTime = item.finishTime;
+                    if (stage != null &&
+                        finishId != null &&
+                        finishTime != null) {
+                      databaseBloc.add(
+                        DatabaseEvent.addNumberToFinish(
+                          stage: stage!,
+                          finishId: finishId,
+                          number: number,
+                          finishTime: finishTime,
+                        ),
+                      );
                     }
                   },
                   onTapDown: _storePosition,
@@ -248,7 +247,12 @@ class _FinishListPage extends State<FinishListPage> {
 
   Future<void> _clearPopup(int? number) async {
     final databaseBloc = context.read<DatabaseBloc>();
-    final stage = databaseBloc.stage;
+    Stage? stage;
+    databaseBloc.state.map(
+        initial: (_) {},
+        initialized: (state) {
+          stage = state.stage;
+        });
     final RenderBox overlay =
         Overlay.of(context).context.findRenderObject() as RenderBox;
     final FinishPopupMenu? result = await showMenu<FinishPopupMenu>(
@@ -264,18 +268,21 @@ class _FinishListPage extends State<FinishListPage> {
       switch (result) {
         case FinishPopupMenu.clearNumber:
           if (number != null) {
-            if (!mounted) {
-              return;
-            }
+            // if (!mounted) {
+            //   return;
+            // }
             databaseBloc.add(DatabaseEvent.clearNumberAtFinish(
-                stage: stage, number: number));
+                stage: stage!, number: number));
           }
           break;
         case FinishPopupMenu.hideAll:
-          if (!mounted) {
-            return;
+          // if (!mounted) {
+          //   return;
+          // }
+          final stageId = stage?.id;
+          if (stageId != null) {
+            databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
           }
-          databaseBloc.add(DatabaseEvent.hideAllFinises(stage.id!));
           break;
       }
     }
@@ -311,7 +318,12 @@ class _FinishListPage extends State<FinishListPage> {
 
   Future<void> _numberOnTracePopup(int number) async {
     final databaseBloc = context.read<DatabaseBloc>();
-    final stage = databaseBloc.stage;
+    Stage? stage;
+    databaseBloc.state.map(
+        initial: (_) {},
+        initialized: (state) {
+          stage = state.stage;
+        });
     final RenderBox overlay =
         Overlay.of(context).context.findRenderObject() as RenderBox;
     final ParticipantStatus? result = await showMenu(
@@ -332,14 +344,14 @@ class _FinishListPage extends State<FinishListPage> {
             return;
           }
           databaseBloc
-              .add(DatabaseEvent.setDNSForStage(stage: stage, number: number));
+              .add(DatabaseEvent.setDNSForStage(stage: stage!, number: number));
           break;
         case ParticipantStatus.dnf:
           if (!mounted) {
             return;
           }
           databaseBloc
-              .add(DatabaseEvent.setDNFForStage(stage: stage, number: number));
+              .add(DatabaseEvent.setDNFForStage(stage: stage!, number: number));
           break;
         case ParticipantStatus.dsq:
           break;
@@ -392,6 +404,12 @@ class _FinishListPage extends State<FinishListPage> {
 
   List<Widget> _getFooterButtons(BuildContext context) {
     final databaseBloc = context.read<DatabaseBloc>();
+    Stage? stage;
+    databaseBloc.state.map(
+        initial: (_) {},
+        initialized: (state) {
+          stage = state.stage;
+        });
     if (!kReleaseMode) {
       return <Widget>[
         Column(
@@ -407,7 +425,7 @@ class _FinishListPage extends State<FinishListPage> {
                         finish:
                             DateFormat(longTimeFormat).format(DateTime.now()),
                         timeStamp: DateTime.now(),
-                        stage: databaseBloc.stage!,
+                        stage: stage!,
                       ),
                     );
                   },
@@ -441,7 +459,7 @@ class _FinishListPage extends State<FinishListPage> {
                 //TextButton(child: const Icon(Icons.add), onPressed: () => _addFinishTime(context)),
                 TextButton(
                   onPressed: () async {
-                    final stageId = databaseBloc.stageId;
+                    final stageId = stage?.id;
                     if (stageId != null) {
                       databaseBloc
                           .add(DatabaseEvent.clearFinishResultsDebug(stageId));
@@ -466,10 +484,15 @@ class _FinishListPage extends State<FinishListPage> {
 //    now = now.add(diff.duration); //добавляем поправку (см. class Difference)
     final finishTime = DateFormat(longTimeFormat).format(now);
     final databaseBloc = context.read<DatabaseBloc>();
-    final stageId = databaseBloc.stageId;
+    int? stageId;
+    databaseBloc.state.map(
+        initial: (_) {},
+        initialized: (state) {
+          stageId = state.stage?.id;
+        });
     if (stageId != null) {
       databaseBloc.add(DatabaseEvent.addFinishTimeManual(
-          stageId: stageId, finishTime: finishTime));
+          stageId: stageId!, finishTime: finishTime));
     }
   }
 
@@ -482,10 +505,15 @@ class _FinishListPage extends State<FinishListPage> {
     final databaseBloc = context.read<DatabaseBloc>();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final now = DateTime.now();
-      final stageId = databaseBloc.stageId;
+      int? stageId;
+      databaseBloc.state.map(
+          initial: (_) {},
+          initialized: (state) {
+            stageId = state.stage?.id;
+          });
       if (prevMinute != now.minute && now.second > 0 && stageId != null) {
         databaseBloc.add(DatabaseEvent.getNumbersOnTraceNow(
-            stageId: stageId, dateTimeNow: now));
+            stageId: stageId!, dateTimeNow: now));
         prevMinute = now.minute;
       }
     });

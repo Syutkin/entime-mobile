@@ -37,13 +37,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   // int? _autoFinishNumber;
 
-  Race? get race => _race;
-
-  Stage? get stage => _stage;
-
-  int? get raceId => _race?.id;
-
-  int? get stageId => _stage?.id;
+  // Race? get race => _race;
+  //
+  // Stage? get stage => _stage;
+  //
+  // int? get raceId => _race?.id;
+  //
+  // int? get stageId => _stage?.id;
 
   void _emitState({
     Notification? notification,
@@ -51,8 +51,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     bool? updateFinishNumber,
   }) {
     add(DatabaseEvent.emitState(
-      race: race,
-      stage: stage,
+      race: _race,
+      stage: _stage,
       races: _races,
       stages: _stages,
       riders: _riders,
@@ -79,7 +79,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     });
 
     _db.select(_db.stages).watch().listen((event) async {
-      _stages = await _db.getStages(raceId: raceId ?? 0).get();
+      final raceId = _race?.id ?? 0;
+      _stages = await _db.getStages(raceId: raceId).get();
       logger.d('DatabaseBloc -> getStages(raceId: $raceId).watch()');
       _emitState();
     });
@@ -95,8 +96,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     // });
 
     _db.select(_db.starts).watch().listen((event) async {
+      final stageId = _stage?.id ?? 0;
       _participants =
-          await _db.getParticipantsAtStart(stageId: stageId ?? 0).get();
+          await _db.getParticipantsAtStart(stageId: stageId).get();
       logger.d(
           'DatabaseBloc -> getParticipantsAtStart(stageId: $stageId).watch()');
       _emitState();
@@ -111,7 +113,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     // });
 
     _db.select(_db.finishes).watch().listen((event) async {
-      _finishes = await _db.getFinishesFromStage(stageId: stageId ?? 0).get();
+      final stageId = _stage?.id ?? 0;
+
+      _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
       logger
           .d('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
       _emitState();
@@ -134,9 +138,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         .getNumbersOnTraceNow(stageId: 0, dateTimeNow: DateTime.now())
         .watch()
         .listen((event) async {
+      final stageId = _stage?.id ?? 0;
       _numbersOnTrace = await _db
           .getNumbersOnTraceNow(
-              stageId: stageId ?? 0, dateTimeNow: DateTime.now())
+              stageId: stageId, dateTimeNow: DateTime.now())
           .get();
       logger
           .d('DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()');

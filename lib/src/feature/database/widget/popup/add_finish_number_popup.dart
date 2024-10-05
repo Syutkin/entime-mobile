@@ -12,7 +12,12 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
   final databaseBloc = context.read<DatabaseBloc>();
   final finishId = item.id;
   final finishTime = item.finishTime;
-  final stage = databaseBloc.stage;
+  Stage? stage;
+  databaseBloc.state.map(
+      initial: (_) {},
+      initialized: (state) {
+        stage = state.stage;
+      });
 
   final formKey = GlobalKey<FormState>();
   if (finishId != null && finishTime != null && stage != null) {
@@ -66,7 +71,7 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
                     finishId: finishId,
                     number: number,
                     finishTime: finishTime,
-                    stage: stage,
+                    stage: stage!,
                   ),
                 );
                 Navigator.of(context).pop();
@@ -86,7 +91,7 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
                       if (update != null && update) {
                         databaseBloc
                           ..add(DatabaseEvent.clearNumberAtFinish(
-                            stage: stage,
+                            stage: stage!,
                             number: number,
                           ))
                           ..add(
@@ -94,7 +99,7 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
                               finishId: finishId,
                               number: number,
                               finishTime: finishTime,
-                              stage: stage,
+                              stage: stage!,
                             ),
                           );
                       }

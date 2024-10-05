@@ -193,11 +193,17 @@ class _StartListPage extends State<StartListPage> {
 
   Future<void> _addManualStartTime(DatabaseBloc bloc) async {
     final time = DateTime.now();
-    var stageId = bloc.stageId;
+    int? stageId;
+    bloc.state.maybeMap(
+        initialized: (state) {
+          stageId = state.stage?.id;
+        },
+        orElse: () {});
+
     if (stageId != null) {
       bloc.add(
         DatabaseEvent.updateManualStartTime(
-          stageId: stageId,
+          stageId: stageId!,
           time: time,
         ),
       );
