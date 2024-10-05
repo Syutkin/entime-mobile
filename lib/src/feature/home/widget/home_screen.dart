@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:path/path.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../constants/pubspec.yaml.g.dart';
 import '../../bluetooth/bluetooth.dart';
+import '../../database/bloc/database_bloc.dart';
 import '../../database/widget/start_list_page.dart';
 import '../../drawer/widget/app_drawer.dart';
 import '../../init/init.dart';
@@ -29,19 +30,34 @@ class HomeScreen extends StatelessWidget {
             connected: (message) {
               message?.whenOrNull(
                 automaticStart: (automaticStart) {
-                  context.read<ProtocolBloc>().add(
-                        ProtocolEvent.updateAutomaticCorrection(
-                          automaticStart: automaticStart,
-                        ),
-                      );
+                  var databaseBloc = context.read<DatabaseBloc>();
+                  var stageId = databaseBloc.state
+                      .mapOrNull(initialized: (state) => state.stage?.id);
+                  if (stageId != null) {
+                    databaseBloc.add(
+                      DatabaseEvent.updateAutomaticCorrection(
+                        stageId: stageId,
+                        time: automaticStart.time,
+                        correction: automaticStart.correction,
+                        timeStamp: automaticStart.timeStamp,
+                        forceUpdate: automaticStart.updating,
+                      ),
+                    );
+                  }
                 },
                 finish: (time, timeStamp) {
-                  context.read<ProtocolBloc>().add(
-                        ProtocolEvent.addFinishTime(
-                          time: time,
-                          timeStamp: timeStamp,
-                        ),
-                      );
+                  var databaseBloc = context.read<DatabaseBloc>();
+                  var stage = databaseBloc.state
+                      .mapOrNull(initialized: (state) => state.stage);
+                  if (stage != null) {
+                    databaseBloc.add(
+                      DatabaseEvent.addFinishTime(
+                        timeStamp: timeStamp,
+                        stage: stage,
+                        finishTime: '',
+                      ),
+                    );
+                  }
                 },
                 moduleSettings: (moduleSettings) {
                   context
@@ -168,14 +184,6 @@ class HomeScreen extends StatelessWidget {
                       InitScreen(),
                       //ToDo: rework Start page
                       StartPage(),
-                      // StartListPage(
-                      //   stage: Stage(
-                      //     raceId: 1,
-                      //     name: 'name',
-                      //     isActive: true,
-                      //     isDeleted: false,
-                      //   ),
-                      // ),
                       FinishPage(),
                     ],
                   ),
@@ -192,12 +200,25 @@ class _TextTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<ProtocolBloc, ProtocolState>(
-        builder: (context, protocolState) =>
-            protocolState is ProtocolSelectedState
-                ? Text(basenameWithoutExtension(protocolState.databasePath))
-                : const Text('Entime'),
-      );
+      BlocBuilder<DatabaseBloc, DatabaseState>(
+          builder: (context, state) => state.map(initial: (_) {
+                return const Text(Pubspec.name);
+              }, initialized: (state) {
+                final stage = state.stage;
+                if (stage != null) {
+                  return Text(stage.name);
+                } else {
+                  final race = state.race;
+                  if (race != null) {
+                    return Text(race.name);
+                  } else {
+                    return Text(Pubspec.name);
+                  }
+                }
+              })
+          // protocolState is ProtocolSelectedState
+          //     ? Text(basenameWithoutExtension(protocolState.databasePath))
+          );
 }
 
 class _FinishFilterButton extends StatelessWidget {

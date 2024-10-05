@@ -125,12 +125,12 @@ sealed class Pubspec {
   static final DateTime timestamp = DateTime.utc(
     2024,
     10,
-    4,
-    21,
-    32,
-    48,
-    252,
-    879,
+    5,
+    15,
+    13,
+    23,
+    211,
+    398,
   );
 
   /// Name
@@ -416,7 +416,7 @@ sealed class Pubspec {
     'bot_toast': r'^4.1.3',
     'csv': r'^6.0.0',
     'device_info_plus': r'^10.1.2',
-    'drift': r'^2.20.2',
+    'drift': r'^2.20.3',
     'equatable': r'^2.0.5',
     'file_picker': r'^8.1.2',
     'filesize': r'^2.0.1',
@@ -442,7 +442,7 @@ sealed class Pubspec {
     'share_plus': r'^10.0.2',
     'shared_preferences': r'^2.3.2',
     'soundpool': r'^2.4.1',
-    'sqflite': r'^2.3.3+1',
+    'sqflite': r'^2.3.3+2',
     'sqlite3_flutter_libs': r'^0.5.24',
     'url_launcher': r'^6.3.0',
     'wakelock_plus': r'^1.2.8',
@@ -451,7 +451,7 @@ sealed class Pubspec {
   /// Developer dependencies
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^9.1.7',
-    'build_runner': r'^2.4.12',
+    'build_runner': r'^2.4.13',
     'drift_dev': r'^2.20.3',
     'flutter_lints': r'^5.0.0',
     'flutter_test': <String, Object>{
@@ -465,7 +465,7 @@ sealed class Pubspec {
     'mockito': r'^5.4.4',
     'mocktail': r'^1.0.4',
     'pubspec_generator': r'^4.0.0',
-    'sqflite_common_ffi': r'^2.3.3',
+    'sqflite_common_ffi': r'^2.3.3+1',
   };
 
   /// Dependency overrides

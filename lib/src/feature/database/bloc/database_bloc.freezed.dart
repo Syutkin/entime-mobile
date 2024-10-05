@@ -67,7 +67,7 @@ mixin _$DatabaseEvent {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -146,7 +146,7 @@ mixin _$DatabaseEvent {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -223,7 +223,7 @@ mixin _$DatabaseEvent {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -484,7 +484,7 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -566,7 +566,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -646,7 +646,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -1176,7 +1176,7 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -1273,7 +1273,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -1368,7 +1368,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -1708,7 +1708,7 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -1790,7 +1790,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -1870,7 +1870,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -2165,7 +2165,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -2247,7 +2247,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -2327,7 +2327,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -2595,7 +2595,7 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -2677,7 +2677,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -2757,7 +2757,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -3045,7 +3045,7 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -3127,7 +3127,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -3207,7 +3207,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -3503,7 +3503,7 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -3585,7 +3585,7 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -3665,7 +3665,7 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -3960,7 +3960,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -4042,7 +4042,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -4122,7 +4122,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -4417,7 +4417,7 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -4499,7 +4499,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -4579,7 +4579,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -4875,7 +4875,7 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -4957,7 +4957,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -5037,7 +5037,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -5335,7 +5335,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -5417,7 +5417,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -5497,7 +5497,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -5826,7 +5826,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -5908,7 +5908,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -5988,7 +5988,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -6367,7 +6367,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -6456,7 +6456,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -6543,7 +6543,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -6920,7 +6920,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -7003,7 +7003,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -7084,7 +7084,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -7412,7 +7412,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -7494,7 +7494,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -7574,7 +7574,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -7884,7 +7884,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -7966,7 +7966,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -8046,7 +8046,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -8346,7 +8346,7 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -8428,7 +8428,7 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -8508,7 +8508,7 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -8695,7 +8695,7 @@ abstract class _$$AddFinishTimeImplCopyWith<$Res> {
   @useResult
   $Res call(
       {Stage stage,
-      String finish,
+      String finishTime,
       DateTime timeStamp,
       int? finishDelay,
       bool? substituteNumbers,
@@ -8718,7 +8718,7 @@ class __$$AddFinishTimeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stage = freezed,
-    Object? finish = null,
+    Object? finishTime = null,
     Object? timeStamp = null,
     Object? finishDelay = freezed,
     Object? substituteNumbers = freezed,
@@ -8731,9 +8731,9 @@ class __$$AddFinishTimeImplCopyWithImpl<$Res>
           ? _value.stage
           : stage // ignore: cast_nullable_to_non_nullable
               as Stage,
-      finish: null == finish
-          ? _value.finish
-          : finish // ignore: cast_nullable_to_non_nullable
+      finishTime: null == finishTime
+          ? _value.finishTime
+          : finishTime // ignore: cast_nullable_to_non_nullable
               as String,
       timeStamp: null == timeStamp
           ? _value.timeStamp
@@ -8768,7 +8768,7 @@ class __$$AddFinishTimeImplCopyWithImpl<$Res>
 class _$AddFinishTimeImpl implements _AddFinishTime {
   const _$AddFinishTimeImpl(
       {required this.stage,
-      required this.finish,
+      required this.finishTime,
       required this.timeStamp,
       this.finishDelay,
       this.substituteNumbers,
@@ -8779,7 +8779,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
   @override
   final Stage stage;
   @override
-  final String finish;
+  final String finishTime;
   @override
   final DateTime timeStamp;
   @override
@@ -8795,7 +8795,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
 
   @override
   String toString() {
-    return 'DatabaseEvent.addFinishTime(stage: $stage, finish: $finish, timeStamp: $timeStamp, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, dateTimeNow: $dateTimeNow, number: $number)';
+    return 'DatabaseEvent.addFinishTime(stage: $stage, finishTime: $finishTime, timeStamp: $timeStamp, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, dateTimeNow: $dateTimeNow, number: $number)';
   }
 
   @override
@@ -8804,7 +8804,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
         (other.runtimeType == runtimeType &&
             other is _$AddFinishTimeImpl &&
             const DeepCollectionEquality().equals(other.stage, stage) &&
-            (identical(other.finish, finish) || other.finish == finish) &&
+            (identical(other.finishTime, finishTime) ||
+                other.finishTime == finishTime) &&
             (identical(other.timeStamp, timeStamp) ||
                 other.timeStamp == timeStamp) &&
             (identical(other.finishDelay, finishDelay) ||
@@ -8822,7 +8823,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(stage),
-      finish,
+      finishTime,
       timeStamp,
       finishDelay,
       substituteNumbers,
@@ -8890,7 +8891,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -8918,7 +8919,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
   }) {
-    return addFinishTime(stage, finish, timeStamp, finishDelay,
+    return addFinishTime(stage, finishTime, timeStamp, finishDelay,
         substituteNumbers, substituteNumbersDelay, dateTimeNow, number);
   }
 
@@ -8973,7 +8974,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -8999,7 +9000,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
   }) {
-    return addFinishTime?.call(stage, finish, timeStamp, finishDelay,
+    return addFinishTime?.call(stage, finishTime, timeStamp, finishDelay,
         substituteNumbers, substituteNumbersDelay, dateTimeNow, number);
   }
 
@@ -9054,7 +9055,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -9082,7 +9083,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult orElse(),
   }) {
     if (addFinishTime != null) {
-      return addFinishTime(stage, finish, timeStamp, finishDelay,
+      return addFinishTime(stage, finishTime, timeStamp, finishDelay,
           substituteNumbers, substituteNumbersDelay, dateTimeNow, number);
     }
     return orElse();
@@ -9224,7 +9225,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
 abstract class _AddFinishTime implements DatabaseEvent {
   const factory _AddFinishTime(
       {required final Stage stage,
-      required final String finish,
+      required final String finishTime,
       required final DateTime timeStamp,
       final int? finishDelay,
       final bool? substituteNumbers,
@@ -9233,7 +9234,7 @@ abstract class _AddFinishTime implements DatabaseEvent {
       final int? number}) = _$AddFinishTimeImpl;
 
   Stage get stage;
-  String get finish;
+  String get finishTime;
   DateTime get timeStamp;
   int? get finishDelay;
   bool? get substituteNumbers;
@@ -9384,7 +9385,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -9466,7 +9467,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -9546,7 +9547,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -9849,7 +9850,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -9931,7 +9932,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -10011,7 +10012,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -10310,7 +10311,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -10392,7 +10393,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -10472,7 +10473,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -10769,7 +10770,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -10851,7 +10852,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -10931,7 +10932,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -11236,7 +11237,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -11318,7 +11319,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -11398,7 +11399,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -11706,7 +11707,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -11788,7 +11789,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -11868,7 +11869,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -12176,7 +12177,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -12258,7 +12259,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -12338,7 +12339,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -12636,7 +12637,7 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -12718,7 +12719,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -12798,7 +12799,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -13125,7 +13126,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -13207,7 +13208,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -13287,7 +13288,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -13601,7 +13602,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -13683,7 +13684,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -13763,7 +13764,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -14062,7 +14063,7 @@ class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -14144,7 +14145,7 @@ class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -14224,7 +14225,7 @@ class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -14493,7 +14494,7 @@ class _$SshareStartImpl implements _SshareStart {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -14575,7 +14576,7 @@ class _$SshareStartImpl implements _SshareStart {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -14655,7 +14656,7 @@ class _$SshareStartImpl implements _SshareStart {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -14915,7 +14916,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -14997,7 +14998,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -15077,7 +15078,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -15366,7 +15367,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -15448,7 +15449,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -15528,7 +15529,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -15800,7 +15801,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -15882,7 +15883,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,
@@ -15962,7 +15963,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
-            String finish,
+            String finishTime,
             DateTime timeStamp,
             int? finishDelay,
             bool? substituteNumbers,

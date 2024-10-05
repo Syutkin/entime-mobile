@@ -85,7 +85,7 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.addFinishTime({
     required Stage stage,
-    required String finish,
+    required String finishTime,
     required DateTime timeStamp,
     int? finishDelay,
     bool? substituteNumbers,

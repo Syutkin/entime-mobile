@@ -63,11 +63,11 @@ class _FinishListPage extends State<FinishListPage> {
       BlocListener<DatabaseBloc, DatabaseState>(
         listener: (context, state) {
           state.mapOrNull(initialized: (state) {
-            final databaseBloc = context.read<DatabaseBloc>();
             // toast с автоматически проставленным номером
             final autoFinishNumber = state.autoFinishNumber;
             logger.d('autoFinishNumber: $autoFinishNumber');
             if (autoFinishNumber != null) {
+              final databaseBloc = context.read<DatabaseBloc>();
               BotToast.showAttachedWidget(
                 verticalOffset: 36.0,
                 attachedBuilder: (cancel) => Card(
@@ -431,7 +431,7 @@ class _FinishListPage extends State<FinishListPage> {
                   onPressed: () async {
                     databaseBloc.add(
                       DatabaseEvent.addFinishTime(
-                        finish:
+                        finishTime:
                             DateFormat(longTimeFormat).format(DateTime.now()),
                         timeStamp: DateTime.now(),
                         stage: stage!,

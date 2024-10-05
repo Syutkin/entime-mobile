@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:entime/src/constants/pubspec.yaml.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -210,7 +211,7 @@ class EntimeAppView extends StatelessWidget {
             previousState.settings.appTheme != state.settings.appTheme,
         builder: (context, state) => MaterialApp(
           theme: appThemeData[state.settings.appTheme],
-          title: 'Entime',
+          title: Pubspec.name,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

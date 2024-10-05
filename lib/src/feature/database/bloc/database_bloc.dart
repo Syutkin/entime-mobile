@@ -319,7 +319,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         addFinishTime: (event) async {
           final autoFinishNumber = await _db.addFinishTime(
             stage: event.stage,
-            finish: event.finish,
+            finish: event.finishTime,
             timeStamp: event.timeStamp,
             finishDelay: event.finishDelay ?? _finishDelay,
             substituteNumbers: event.substituteNumbers ?? _substituteNumbers,
