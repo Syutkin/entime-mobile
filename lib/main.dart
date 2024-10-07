@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -10,8 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/common/bloc/app_bloc_observer.dart';
@@ -26,7 +22,6 @@ import 'src/feature/database/bloc/database_bloc.dart';
 import 'src/feature/database/drift/app_database.dart';
 import 'src/feature/home/widget/home_screen.dart';
 import 'src/feature/log/bloc/log_bloc.dart';
-import 'src/feature/log/logic/log_provider.dart';
 import 'src/feature/module_settings/bloc/module_settings_bloc.dart';
 import 'src/feature/protocol/bloc/protocol_bloc.dart';
 import 'src/feature/protocol/logic/protocol_provider.dart';
@@ -47,14 +42,14 @@ Future<void> main() async {
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
 
-  final Directory documentsDirectory = await getApplicationDocumentsDirectory();
-  final String logPath = join(documentsDirectory.path, 'log.sqlite');
+  // final Directory documentsDirectory = await getApplicationDocumentsDirectory();
+  // final String logPath = join(documentsDirectory.path, 'log.sqlite');
 
   final protocolProvider = ProtocolProvider();
   final AppDatabase database = AppDatabase();
 
-  final logProvider = LogProvider();
-  await logProvider.openDb(logPath);
+  // final logProvider = LogProvider();
+  // await logProvider.openDb(logPath);
 
   final androidInfo = await DeviceInfoPlugin().androidInfo;
   final settings = await SharedPrefsSettingsProvider.load();
@@ -90,7 +85,7 @@ Future<void> main() async {
     updateProvider: updateProvider,
     bluetoothProvider: bluetoothProvider,
     protocolProvider: protocolProvider,
-    logProvider: logProvider,
+    // logProvider: logProvider,
     audioController: audioController,
     appInfo: appInfo,
     database: database,
@@ -122,7 +117,8 @@ class EntimeApp extends StatelessWidget {
   final IBluetoothProvider bluetoothProvider;
   final IAudioController audioController;
   final IProtocolProvider protocolProvider;
-  final ILogProvider logProvider;
+
+  // final ILogProvider logProvider;
   final AppDatabase database;
   final CountdownAtStart countdown;
 
@@ -134,7 +130,7 @@ class EntimeApp extends StatelessWidget {
     required this.audioController,
     required this.appInfo,
     required this.protocolProvider,
-    required this.logProvider,
+    // required this.logProvider,
     required this.database,
     required this.countdown,
   });
@@ -154,7 +150,7 @@ class EntimeApp extends StatelessWidget {
           BlocProvider<LogBloc>(
             create: (context) => LogBloc(
               settingsProvider: settings,
-              logProvider: logProvider,
+              database: database,
             ),
           ),
           BlocProvider<ProtocolBloc>(
@@ -181,9 +177,10 @@ class EntimeApp extends StatelessWidget {
             create: (context) => BluetoothBloc(
               audioController: audioController,
               bluetoothProvider: bluetoothProvider,
-              protocolProvider: protocolProvider,
-              logProvider: logProvider,
+              // protocolProvider: protocolProvider,
+              // logProvider: logProvider,
               settingsProvider: settings,
+              database: database,
             )..add(const BluetoothEvent.initialize()),
           ),
           BlocProvider<UpdateBloc>(

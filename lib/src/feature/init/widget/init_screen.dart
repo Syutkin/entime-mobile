@@ -132,7 +132,7 @@ class _DebugAddLogButton extends StatelessWidget {
   Widget build(BuildContext context) => TextButton(
         onPressed: () {
           BlocProvider.of<LogBloc>(context).add(
-            const LogAdd(
+            const LogEvent.add(
               level: LogLevel.error,
               source: LogSource.bluetooth,
               rawData: 'rawData',

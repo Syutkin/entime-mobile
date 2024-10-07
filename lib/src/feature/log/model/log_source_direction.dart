@@ -1,5 +1,5 @@
 enum LogSourceDirection {
+  undefined,
   input,
   output,
-  undefined,
 }

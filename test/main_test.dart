@@ -8,7 +8,6 @@ import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/countdown/logic/countdown.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/home/home.dart';
-import 'package:entime/src/feature/log/logic/log_provider.dart';
 import 'package:entime/src/feature/protocol/protocol.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/tab/tab.dart';
@@ -28,7 +27,7 @@ class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
 class MockProtocolProvider extends Mock implements IProtocolProvider {}
 
-class MockLogProvider extends Mock implements LogProvider {}
+// class MockLogProvider extends Mock implements LogProvider {}
 
 class MockAudioService extends Mock implements AudioService {}
 
@@ -60,7 +59,7 @@ void main() {
   late UpdateProvider updateProvider;
   late IBluetoothProvider bluetoothProvider;
   late IProtocolProvider protocolProvider;
-  late ILogProvider logProvider;
+  // late ILogProvider logProvider;
   // final AudioService audioService = MockAudioService();
   late IAudioController audioController;
   late AppDatabase database;
@@ -81,7 +80,7 @@ void main() {
     updateProvider = MockUpdateProvider();
     bluetoothProvider = MockBluetoothProvider();
     protocolProvider = MockProtocolProvider();
-    logProvider = MockLogProvider();
+    // logProvider = MockLogProvider();
     // final AudioService audioService = MockAudioService();
     audioController = MockIAudioController();
     database = MockAppDatabase();
@@ -98,7 +97,7 @@ void main() {
           audioController: audioController,
           appInfo: appInfo,
           protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          // logProvider: logProvider,
           database: database,
           countdown: countdown,
         ),

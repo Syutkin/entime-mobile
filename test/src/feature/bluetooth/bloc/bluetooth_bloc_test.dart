@@ -2,8 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/database/model/dbstate.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
+import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/log/log.dart';
-import 'package:entime/src/feature/log/logic/log_provider.dart';
 import 'package:entime/src/feature/protocol/logic/protocol_provider.dart';
 import 'package:entime/src/feature/protocol/model/automatic_start.dart';
 import 'package:entime/src/feature/settings/settings.dart';
@@ -20,7 +20,7 @@ class MockBluetoothProvider extends Mock implements BluetoothProvider {}
 
 class MockProtocolProvider extends Mock implements ProtocolProvider {}
 
-class MockLogProvider extends Mock implements LogProvider {}
+class MockAppDatabase extends Mock implements AppDatabase {}
 
 class MockAudioService extends Mock implements AudioService {}
 
@@ -42,7 +42,7 @@ void main() {
   late MockBluetoothProvider bluetoothProvider;
   late BluetoothDeviceWithAvailability deviceWithAvailability;
   late BluetoothDeviceWithAvailability deviceWithoutAvailability;
-  late MockLogProvider logProvider;
+  late MockAppDatabase database;
   late MockAudioController audioController;
   late MockProtocolProvider protocolProvider;
   late SharedPrefsSettingsProvider settingsProvider;
@@ -65,7 +65,7 @@ void main() {
       flutterBluetoothSerial = MockFlutterBluetoothSerial();
       bluetoothBackgroundConnection = MockBluetoothBackgroundConnection();
       protocolProvider = MockProtocolProvider();
-      logProvider = MockLogProvider();
+      database = MockAppDatabase();
       audioController = MockAudioController();
       settings = AppSettings.defaults();
 
@@ -148,9 +148,8 @@ void main() {
       final bluetoothBloc = BluetoothBloc(
         audioController: audioController,
         bluetoothProvider: bluetoothProvider,
-        protocolProvider: protocolProvider,
-        logProvider: logProvider,
         settingsProvider: settingsProvider,
+        database: database,
       );
       expect(bluetoothBloc.state, const BluetoothBlocState.notInitialized());
     });
@@ -168,9 +167,8 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
           settingsProvider: settingsProvider,
+          database: database,
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.initialize()),
         expect: () => [const BluetoothBlocState.notEnabled()],
@@ -188,9 +186,8 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
           settingsProvider: settingsProvider,
+          database: database,
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.initialize()),
         expect: () => [const BluetoothBlocState.disconnected()],
@@ -208,9 +205,8 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
           settingsProvider: settingsProvider,
+          database: database,
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.initialize()),
         expect: () => [const BluetoothBlocState.notEnabled()],
@@ -235,9 +231,8 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
           settingsProvider: settingsProvider,
+          database: database,
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.enable()),
         expect: () => [const BluetoothBlocState.disconnected()],
@@ -261,9 +256,8 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
           settingsProvider: settingsProvider,
+          database: database,
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.disable()),
         expect: () => [const BluetoothBlocState.notEnabled()],
@@ -276,9 +270,8 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
           settingsProvider: settingsProvider,
+          database: database,
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.selectDevice()),
         expect: () => <BluetoothBlocState>[],
@@ -296,9 +289,8 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
           settingsProvider: settingsProvider,
+          database: database,
         ),
         act: (bloc) => bloc.add(
           BluetoothEvent.selectDevice(
@@ -325,9 +317,8 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
           settingsProvider: settingsProvider,
+          database: database,
         ),
         act: (bloc) => bloc.add(
           BluetoothEvent.selectDevice(
@@ -361,9 +352,8 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
           settingsProvider: settingsProvider,
+          database: database,
         ),
         act: (bloc) => bloc.add(
           BluetoothEvent.selectDevice(
@@ -395,8 +385,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) {
@@ -447,8 +436,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(
@@ -477,7 +465,7 @@ void main() {
           );
 
           when(
-            () => logProvider.addLog(
+            () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -490,8 +478,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(
@@ -520,8 +507,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.connected()),
@@ -534,8 +520,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         seed: () => const BluetoothBlocState.connecting(),
@@ -547,8 +532,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         seed: () => const BluetoothBlocState.disconnecting(),
@@ -560,8 +544,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         seed: () => const BluetoothBlocState.disconnected(),
@@ -573,8 +556,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         seed: () => const BluetoothBlocState.connected(),
@@ -600,8 +582,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.disconnected()),
@@ -613,8 +594,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         seed: () => const BluetoothBlocState.disconnecting(),
@@ -627,8 +607,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) async {
@@ -656,8 +635,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) async {
@@ -689,7 +667,7 @@ void main() {
         setUp: () {
           message = r'$10:00:01,123;1234#';
           when(
-            () => logProvider.addLog(
+            () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -702,8 +680,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
@@ -741,7 +718,7 @@ void main() {
         setUp: () {
           message = r'$10:00:01,123.1234#';
           when(
-            () => logProvider.addLog(
+            () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -754,8 +731,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
@@ -768,7 +744,7 @@ void main() {
         setUp: () {
           message = 'F10:00:01,123#';
           when(
-            () => logProvider.addLog(
+            () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -781,8 +757,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
@@ -805,7 +780,7 @@ void main() {
         setUp: () {
           message = 'B10:00:01,123#';
           when(
-            () => logProvider.addLog(
+            () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -818,8 +793,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
@@ -832,7 +806,7 @@ void main() {
         setUp: () {
           message = 'V10:00:01,123#';
           when(
-            () => logProvider.addLog(
+            () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -845,8 +819,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
@@ -859,7 +832,7 @@ void main() {
         setUp: () {
           message = '{ settings: { key, value } }';
           when(
-            () => logProvider.addLog(
+            () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -872,8 +845,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
@@ -896,7 +868,7 @@ void main() {
         setUp: () {
           message = '10:00:01,123.1234';
           when(
-            () => logProvider.addLog(
+            () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -909,8 +881,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
@@ -929,7 +900,7 @@ void main() {
             (_) => Future.value(true),
           );
           when(
-            () => logProvider.addLog(
+            () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -942,8 +913,7 @@ void main() {
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
-          protocolProvider: protocolProvider,
-          logProvider: logProvider,
+          database: database,
           settingsProvider: settingsProvider,
         ),
         seed: () => const BluetoothBlocState.connected(),

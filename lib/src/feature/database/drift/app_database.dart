@@ -12,6 +12,7 @@ import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/helper.dart';
+import '../../log/log.dart';
 
 part 'app_database.g.dart';
 
@@ -298,6 +299,7 @@ class AppDatabase extends _$AppDatabase {
           automaticCorrection: Value(correction),
           automaticStartTime: Value(time),
           // startTime: Value(phoneTime),
+          // ToDO: use drift DATETIME format
           timestamp: Value(phoneTime),
           // statusId: const Value(1),
         ),
@@ -462,6 +464,7 @@ class AppDatabase extends _$AppDatabase {
   Future<int?> addFinishTime({
     required Stage stage,
     required String finish,
+    // ToDO: use drift DATETIME format
     required DateTime timeStamp,
     int finishDelay = 0,
     bool substituteNumbers = false,
@@ -531,6 +534,7 @@ class AppDatabase extends _$AppDatabase {
     final finishId = await _addFinishTime(
       stageId: stage.id!,
       finishTime: finish,
+      // ToDO: use drift DATETIME format
       timestamp: phoneTime,
       number: workingNumber,
       isHidden: isHidden,
@@ -691,6 +695,78 @@ class AppDatabase extends _$AppDatabase {
     );
     logger.i('Database -> Set DNF to number: $number at stageId: ${stage.id}');
     return rowCount;
+  }
+
+// -------------------------
+// логгер
+
+  Future<List<Log>> getLog({
+    List<LogLevel>? level,
+    List<LogSource>? source,
+    List<LogSourceDirection>? direction,
+    int limit = -1,
+  }) async {
+    final selectLog = 'SELECT * FROM logs';
+    final List<String> whereArgs = [];
+    String where;
+
+    if (level != null && level.isNotEmpty) {
+      final List<String> args = [];
+      for (final type in level) {
+        args.add("level LIKE '${type.name}'");
+      }
+      whereArgs.add(args.join(' OR '));
+    }
+
+    if (source != null && source.isNotEmpty) {
+      final List<String> args = [];
+      for (final type in source) {
+        args.add("source LIKE '${type.name}'");
+      }
+      whereArgs.add(args.join(' OR '));
+    }
+
+    if (direction != null && direction.isNotEmpty) {
+      final List<String> args = [];
+      for (final type in direction) {
+        args.add("direction LIKE '${type.name}'");
+      }
+      whereArgs.add(args.join(' OR '));
+    }
+
+    if (limit >= 0) {
+      whereArgs.add('ROWID > (SELECT MAX(ROWID) FROM log) - $limit');
+    }
+
+    final List<Log> log;
+    if (whereArgs.isNotEmpty) {
+      where = '(${whereArgs.join(') AND (')})';
+      log = (await customSelect('$selectLog $where;', readsFrom: {logs}).get())
+          .cast<Log>();
+    } else {
+      log = select(logs) as List<Log>;
+    }
+    return log;
+  }
+
+  Future<int> addLog({
+    required LogLevel level,
+    required LogSource source,
+    required String rawData,
+    LogSourceDirection? direction,
+  }) async {
+    final String timeStamp = DateFormat(longDateFormat).format(DateTime.now());
+    final int logId = await into(logs).insert(
+      LogsCompanion(
+        level: Value(level),
+        // ToDO: use drift DATETIME format
+        timestamp: Value(timeStamp),
+        source: Value(source),
+        direction: Value(direction ?? LogSourceDirection.undefined),
+        rawData: Value(rawData),
+      ),
+    );
+    return logId;
   }
 
 // -------------------------

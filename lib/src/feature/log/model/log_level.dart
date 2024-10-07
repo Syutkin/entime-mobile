@@ -1,7 +1,7 @@
 enum LogLevel {
-  error,
-  warning,
-  information,
-  debug,
   verbose,
+  debug,
+  information,
+  warning,
+  error,
 }

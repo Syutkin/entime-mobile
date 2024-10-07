@@ -3080,6 +3080,354 @@ class StartsCompanion extends UpdateCompanion<Start> {
   }
 }
 
+class Logs extends Table with TableInfo<Logs, Log> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  Logs(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: 'PRIMARY KEY UNIQUE');
+  static const VerificationMeta _levelMeta = const VerificationMeta('level');
+  late final GeneratedColumnWithTypeConverter<LogLevel, String> level =
+      GeneratedColumn<String>('level', aliasedName, false,
+              type: DriftSqlType.string,
+              requiredDuringInsert: true,
+              $customConstraints: 'NOT NULL')
+          .withConverter<LogLevel>(Logs.$converterlevel);
+  static const VerificationMeta _timestampMeta =
+      const VerificationMeta('timestamp');
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+      'timestamp', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
+  late final GeneratedColumnWithTypeConverter<LogSource, String> source =
+      GeneratedColumn<String>('source', aliasedName, false,
+              type: DriftSqlType.string,
+              requiredDuringInsert: true,
+              $customConstraints: 'NOT NULL')
+          .withConverter<LogSource>(Logs.$convertersource);
+  static const VerificationMeta _directionMeta =
+      const VerificationMeta('direction');
+  late final GeneratedColumnWithTypeConverter<LogSourceDirection, String>
+      direction = GeneratedColumn<String>('direction', aliasedName, false,
+              type: DriftSqlType.string,
+              requiredDuringInsert: true,
+              $customConstraints: 'NOT NULL')
+          .withConverter<LogSourceDirection>(Logs.$converterdirection);
+  static const VerificationMeta _rawDataMeta =
+      const VerificationMeta('rawData');
+  late final GeneratedColumn<String> rawData = GeneratedColumn<String>(
+      'raw_data', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, level, timestamp, source, direction, rawData];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'logs';
+  @override
+  VerificationContext validateIntegrity(Insertable<Log> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    context.handle(_levelMeta, const VerificationResult.success());
+    if (data.containsKey('timestamp')) {
+      context.handle(_timestampMeta,
+          timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
+    } else if (isInserting) {
+      context.missing(_timestampMeta);
+    }
+    context.handle(_sourceMeta, const VerificationResult.success());
+    context.handle(_directionMeta, const VerificationResult.success());
+    if (data.containsKey('raw_data')) {
+      context.handle(_rawDataMeta,
+          rawData.isAcceptableOrUnknown(data['raw_data']!, _rawDataMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Log map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Log(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      level: Logs.$converterlevel.fromSql(attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}level'])!),
+      timestamp: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}timestamp'])!,
+      source: Logs.$convertersource.fromSql(attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}source'])!),
+      direction: Logs.$converterdirection.fromSql(attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}direction'])!),
+      rawData: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}raw_data']),
+    );
+  }
+
+  @override
+  Logs createAlias(String alias) {
+    return Logs(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<LogLevel, String, String> $converterlevel =
+      const EnumNameConverter<LogLevel>(LogLevel.values);
+  static JsonTypeConverter2<LogSource, String, String> $convertersource =
+      const EnumNameConverter<LogSource>(LogSource.values);
+  static JsonTypeConverter2<LogSourceDirection, String, String>
+      $converterdirection =
+      const EnumNameConverter<LogSourceDirection>(LogSourceDirection.values);
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class Log extends DataClass implements Insertable<Log> {
+  final int id;
+  final LogLevel level;
+  final String timestamp;
+  final LogSource source;
+  final LogSourceDirection direction;
+  final String? rawData;
+  const Log(
+      {required this.id,
+      required this.level,
+      required this.timestamp,
+      required this.source,
+      required this.direction,
+      this.rawData});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    {
+      map['level'] = Variable<String>(Logs.$converterlevel.toSql(level));
+    }
+    map['timestamp'] = Variable<String>(timestamp);
+    {
+      map['source'] = Variable<String>(Logs.$convertersource.toSql(source));
+    }
+    {
+      map['direction'] =
+          Variable<String>(Logs.$converterdirection.toSql(direction));
+    }
+    if (!nullToAbsent || rawData != null) {
+      map['raw_data'] = Variable<String>(rawData);
+    }
+    return map;
+  }
+
+  LogsCompanion toCompanion(bool nullToAbsent) {
+    return LogsCompanion(
+      id: Value(id),
+      level: Value(level),
+      timestamp: Value(timestamp),
+      source: Value(source),
+      direction: Value(direction),
+      rawData: rawData == null && nullToAbsent
+          ? const Value.absent()
+          : Value(rawData),
+    );
+  }
+
+  factory Log.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return Log(
+      id: serializer.fromJson<int>(json['id']),
+      level: Logs.$converterlevel
+          .fromJson(serializer.fromJson<String>(json['level'])),
+      timestamp: serializer.fromJson<String>(json['timestamp']),
+      source: Logs.$convertersource
+          .fromJson(serializer.fromJson<String>(json['source'])),
+      direction: Logs.$converterdirection
+          .fromJson(serializer.fromJson<String>(json['direction'])),
+      rawData: serializer.fromJson<String?>(json['raw_data']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'level': serializer.toJson<String>(Logs.$converterlevel.toJson(level)),
+      'timestamp': serializer.toJson<String>(timestamp),
+      'source': serializer.toJson<String>(Logs.$convertersource.toJson(source)),
+      'direction':
+          serializer.toJson<String>(Logs.$converterdirection.toJson(direction)),
+      'raw_data': serializer.toJson<String?>(rawData),
+    };
+  }
+
+  Log copyWith(
+          {int? id,
+          LogLevel? level,
+          String? timestamp,
+          LogSource? source,
+          LogSourceDirection? direction,
+          Value<String?> rawData = const Value.absent()}) =>
+      Log(
+        id: id ?? this.id,
+        level: level ?? this.level,
+        timestamp: timestamp ?? this.timestamp,
+        source: source ?? this.source,
+        direction: direction ?? this.direction,
+        rawData: rawData.present ? rawData.value : this.rawData,
+      );
+  Log copyWithCompanion(LogsCompanion data) {
+    return Log(
+      id: data.id.present ? data.id.value : this.id,
+      level: data.level.present ? data.level.value : this.level,
+      timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+      source: data.source.present ? data.source.value : this.source,
+      direction: data.direction.present ? data.direction.value : this.direction,
+      rawData: data.rawData.present ? data.rawData.value : this.rawData,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('Log(')
+          ..write('id: $id, ')
+          ..write('level: $level, ')
+          ..write('timestamp: $timestamp, ')
+          ..write('source: $source, ')
+          ..write('direction: $direction, ')
+          ..write('rawData: $rawData')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, level, timestamp, source, direction, rawData);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Log &&
+          other.id == this.id &&
+          other.level == this.level &&
+          other.timestamp == this.timestamp &&
+          other.source == this.source &&
+          other.direction == this.direction &&
+          other.rawData == this.rawData);
+}
+
+class LogsCompanion extends UpdateCompanion<Log> {
+  final Value<int> id;
+  final Value<LogLevel> level;
+  final Value<String> timestamp;
+  final Value<LogSource> source;
+  final Value<LogSourceDirection> direction;
+  final Value<String?> rawData;
+  const LogsCompanion({
+    this.id = const Value.absent(),
+    this.level = const Value.absent(),
+    this.timestamp = const Value.absent(),
+    this.source = const Value.absent(),
+    this.direction = const Value.absent(),
+    this.rawData = const Value.absent(),
+  });
+  LogsCompanion.insert({
+    this.id = const Value.absent(),
+    required LogLevel level,
+    required String timestamp,
+    required LogSource source,
+    required LogSourceDirection direction,
+    this.rawData = const Value.absent(),
+  })  : level = Value(level),
+        timestamp = Value(timestamp),
+        source = Value(source),
+        direction = Value(direction);
+  static Insertable<Log> custom({
+    Expression<int>? id,
+    Expression<String>? level,
+    Expression<String>? timestamp,
+    Expression<String>? source,
+    Expression<String>? direction,
+    Expression<String>? rawData,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (level != null) 'level': level,
+      if (timestamp != null) 'timestamp': timestamp,
+      if (source != null) 'source': source,
+      if (direction != null) 'direction': direction,
+      if (rawData != null) 'raw_data': rawData,
+    });
+  }
+
+  LogsCompanion copyWith(
+      {Value<int>? id,
+      Value<LogLevel>? level,
+      Value<String>? timestamp,
+      Value<LogSource>? source,
+      Value<LogSourceDirection>? direction,
+      Value<String?>? rawData}) {
+    return LogsCompanion(
+      id: id ?? this.id,
+      level: level ?? this.level,
+      timestamp: timestamp ?? this.timestamp,
+      source: source ?? this.source,
+      direction: direction ?? this.direction,
+      rawData: rawData ?? this.rawData,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (level.present) {
+      map['level'] = Variable<String>(Logs.$converterlevel.toSql(level.value));
+    }
+    if (timestamp.present) {
+      map['timestamp'] = Variable<String>(timestamp.value);
+    }
+    if (source.present) {
+      map['source'] =
+          Variable<String>(Logs.$convertersource.toSql(source.value));
+    }
+    if (direction.present) {
+      map['direction'] =
+          Variable<String>(Logs.$converterdirection.toSql(direction.value));
+    }
+    if (rawData.present) {
+      map['raw_data'] = Variable<String>(rawData.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LogsCompanion(')
+          ..write('id: $id, ')
+          ..write('level: $level, ')
+          ..write('timestamp: $timestamp, ')
+          ..write('source: $source, ')
+          ..write('direction: $direction, ')
+          ..write('rawData: $rawData')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3091,6 +3439,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Participants participants = Participants(this);
   late final Finishes finishes = Finishes(this);
   late final Starts starts = Starts(this);
+  late final Logs logs = Logs(this);
   Selectable<Race> _getRaces() {
     return customSelect('SELECT * FROM races WHERE is_deleted = FALSE',
         variables: [],
@@ -3561,8 +3910,17 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [races, trails, stages, riders, statuses, participants, finishes, starts];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        races,
+        trails,
+        stages,
+        riders,
+        statuses,
+        participants,
+        finishes,
+        starts,
+        logs
+      ];
 }
 
 typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
@@ -4883,6 +5241,162 @@ typedef $StartsProcessedTableManager = ProcessedTableManager<
     (Start, BaseReferences<_$AppDatabase, Starts, Start>),
     Start,
     PrefetchHooks Function()>;
+typedef $LogsCreateCompanionBuilder = LogsCompanion Function({
+  Value<int> id,
+  required LogLevel level,
+  required String timestamp,
+  required LogSource source,
+  required LogSourceDirection direction,
+  Value<String?> rawData,
+});
+typedef $LogsUpdateCompanionBuilder = LogsCompanion Function({
+  Value<int> id,
+  Value<LogLevel> level,
+  Value<String> timestamp,
+  Value<LogSource> source,
+  Value<LogSourceDirection> direction,
+  Value<String?> rawData,
+});
+
+class $LogsFilterComposer extends FilterComposer<_$AppDatabase, Logs> {
+  $LogsFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnWithTypeConverterFilters<LogLevel, LogLevel, String> get level =>
+      $state.composableBuilder(
+          column: $state.table.level,
+          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
+              column,
+              joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get timestamp => $state.composableBuilder(
+      column: $state.table.timestamp,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnWithTypeConverterFilters<LogSource, LogSource, String> get source =>
+      $state.composableBuilder(
+          column: $state.table.source,
+          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
+              column,
+              joinBuilders: joinBuilders));
+
+  ColumnWithTypeConverterFilters<LogSourceDirection, LogSourceDirection, String>
+      get direction => $state.composableBuilder(
+          column: $state.table.direction,
+          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
+              column,
+              joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get rawData => $state.composableBuilder(
+      column: $state.table.rawData,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $LogsOrderingComposer extends OrderingComposer<_$AppDatabase, Logs> {
+  $LogsOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get level => $state.composableBuilder(
+      column: $state.table.level,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get timestamp => $state.composableBuilder(
+      column: $state.table.timestamp,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get source => $state.composableBuilder(
+      column: $state.table.source,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get direction => $state.composableBuilder(
+      column: $state.table.direction,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get rawData => $state.composableBuilder(
+      column: $state.table.rawData,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class $LogsTableManager extends RootTableManager<
+    _$AppDatabase,
+    Logs,
+    Log,
+    $LogsFilterComposer,
+    $LogsOrderingComposer,
+    $LogsCreateCompanionBuilder,
+    $LogsUpdateCompanionBuilder,
+    (Log, BaseReferences<_$AppDatabase, Logs, Log>),
+    Log,
+    PrefetchHooks Function()> {
+  $LogsTableManager(_$AppDatabase db, Logs table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $LogsFilterComposer(ComposerState(db, table)),
+          orderingComposer: $LogsOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<LogLevel> level = const Value.absent(),
+            Value<String> timestamp = const Value.absent(),
+            Value<LogSource> source = const Value.absent(),
+            Value<LogSourceDirection> direction = const Value.absent(),
+            Value<String?> rawData = const Value.absent(),
+          }) =>
+              LogsCompanion(
+            id: id,
+            level: level,
+            timestamp: timestamp,
+            source: source,
+            direction: direction,
+            rawData: rawData,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required LogLevel level,
+            required String timestamp,
+            required LogSource source,
+            required LogSourceDirection direction,
+            Value<String?> rawData = const Value.absent(),
+          }) =>
+              LogsCompanion.insert(
+            id: id,
+            level: level,
+            timestamp: timestamp,
+            source: source,
+            direction: direction,
+            rawData: rawData,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $LogsProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    Logs,
+    Log,
+    $LogsFilterComposer,
+    $LogsOrderingComposer,
+    $LogsCreateCompanionBuilder,
+    $LogsUpdateCompanionBuilder,
+    (Log, BaseReferences<_$AppDatabase, Logs, Log>),
+    Log,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4898,6 +5412,7 @@ class $AppDatabaseManager {
   $FinishesTableManager get finishes =>
       $FinishesTableManager(_db, _db.finishes);
   $StartsTableManager get starts => $StartsTableManager(_db, _db.starts);
+  $LogsTableManager get logs => $LogsTableManager(_db, _db.logs);
 }
 
 class NumberAtStart {

@@ -1,5 +1,5 @@
 enum LogSource {
+  unknown,
   bluetooth,
   other,
-  unknown,
 }

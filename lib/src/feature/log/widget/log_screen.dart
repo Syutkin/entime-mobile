@@ -7,7 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../common/localization/localization.dart';
 import '../../../common/utils/helper.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
-import '../bloc/log_bloc.dart';
+import '../log.dart';
 
 class LogScreen extends StatelessWidget {
   final _scrollController = ScrollController();
@@ -16,10 +16,10 @@ class LogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<LogBloc>(context).add(const ShowLog());
+    BlocProvider.of<LogBloc>(context).add(const LogEvent.show());
     return WillPopScope(
       onWillPop: () async {
-        BlocProvider.of<LogBloc>(context).add(const HideLog());
+        BlocProvider.of<LogBloc>(context).add(const LogEvent.hide());
         return true;
       },
       child: Scaffold(
@@ -29,61 +29,65 @@ class LogScreen extends StatelessWidget {
         ),
         body: BlocBuilder<LogBloc, LogState>(
           builder: (context, state) {
-            if (state is LogOpen && state.log != null) {
-              // скролл на последнюю запись
-              SchedulerBinding.instance.addPostFrameCallback((_) {
-                scrollToEnd(_scrollController);
-              });
-              return Scrollbar(
-                // ToDo: при нажатии показывать всю инфу в попапе
-                // child: ListView.separated(
-                child: ListView.builder(
-                  controller: _scrollController,
-                  shrinkWrap: true,
-                  itemCount: state.log!.length,
-                  itemBuilder: (context, index) {
-                    final item = state.log![index];
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Row(
-                        children: <Widget>[
-                          Flexible(
-                            flex: 10,
-                            child: Align(
-                              child: _LogLevelIcon(level: item.level),
-                            ),
-                          ),
-                          Flexible(
-                            flex: 10,
-                            child: Align(
-                              child: _LogSourceIcon(
-                                source: item.source,
-                                direction: item.direction,
+            return state.map(initial: (_) {
+              return const CircularProgressIndicator();
+            }, initialized: (state) {
+              if (state.log != null) {
+                // скролл на последнюю запись
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  scrollToEnd(_scrollController);
+                });
+                return Scrollbar(
+                  // ToDo: при нажатии показывать всю инфу в попапе
+                  // child: ListView.separated(
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    shrinkWrap: true,
+                    itemCount: state.log!.length,
+                    itemBuilder: (context, index) {
+                      final item = state.log![index];
+                      return ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: <Widget>[
+                            Flexible(
+                              flex: 10,
+                              child: Align(
+                                child: _LogLevelIcon(level: item.level),
                               ),
                             ),
-                          ),
-                          Flexible(
-                            flex: 80,
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(item.rawData),
+                            Flexible(
+                              flex: 10,
+                              child: Align(
+                                child: _LogSourceIcon(
+                                  source: item.source.name,
+                                  direction: item.direction.name,
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  // separatorBuilder: (BuildContext context, int index) =>
-                  //     const Divider(
-                  //   indent: 10,
-                  //   endIndent: 10,
-                  //   thickness: 2,
-                  // ),
-                ),
-              );
-            } else {
-              return const CircularProgressIndicator();
-            }
+                            Flexible(
+                              flex: 80,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(item.rawData ?? ''),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    // separatorBuilder: (BuildContext context, int index) =>
+                    //     const Divider(
+                    //   indent: 10,
+                    //   endIndent: 10,
+                    //   thickness: 2,
+                    // ),
+                  ),
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            });
           },
         ),
         persistentFooterButtons:
@@ -148,20 +152,20 @@ class _LogLevelIcon extends StatelessWidget {
     required this.level,
   });
 
-  final String level;
+  final LogLevel level;
 
   @override
   Widget build(BuildContext context) {
     switch (level) {
-      case 'Error':
+      case LogLevel.error:
         return Icon(MdiIcons.alertOctagon);
-      case 'Warning':
+      case LogLevel.warning:
         return const Icon(Icons.warning);
-      case 'Information':
+      case LogLevel.information:
         return const Icon(Icons.info_outline);
-      case 'Debug':
+      case LogLevel.debug:
         return Icon(MdiIcons.debugStepInto);
-      case 'Verbose':
+      case LogLevel.verbose:
         return const Icon(Icons.circle_notifications);
       default:
         return Icon(MdiIcons.closeCircleOutline);

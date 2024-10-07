@@ -8,7 +8,6 @@ import 'package:entime/src/feature/audio/logic/audio_service.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/countdown/logic/countdown.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
-import 'package:entime/src/feature/log/logic/log_provider.dart';
 import 'package:entime/src/feature/protocol/logic/protocol_provider.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/update/update.dart';
@@ -29,7 +28,7 @@ void main() async {
   final AppDatabase database = AppDatabase();
 
   final protocolProvider = ProtocolProvider();
-  final logProvider = LogProvider();
+  // final logProvider = LogProvider();
 
   final androidInfo = await DeviceInfoPlugin().androidInfo;
   final settings = await SharedPrefsSettingsProvider.load();
@@ -71,7 +70,7 @@ void main() async {
         audioController: audioController,
         appInfo: appInfo,
         protocolProvider: protocolProvider,
-        logProvider: logProvider,
+        // logProvider: logProvider,
         database: database,
         countdown: countdown,
       ),

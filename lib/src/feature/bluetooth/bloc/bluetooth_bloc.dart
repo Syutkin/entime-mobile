@@ -7,8 +7,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../audio/audio.dart';
+import '../../database/drift/app_database.dart';
 import '../../log/log.dart';
-import '../../log/logic/log_provider.dart';
 import '../../protocol/protocol.dart';
 import '../../settings/settings.dart';
 import '../bluetooth.dart';
@@ -19,8 +19,10 @@ part 'bluetooth_bloc_state.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   final IBluetoothProvider bluetoothProvider;
-  final IProtocolProvider protocolProvider;
-  final ILogProvider logProvider;
+
+  // final IProtocolProvider protocolProvider;
+  // final ILogProvider logProvider;
+  final AppDatabase database;
   final IAudioController audioController;
   final SettingsProvider settingsProvider;
 
@@ -41,10 +43,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   BluetoothBloc({
     required this.settingsProvider,
-    required this.logProvider,
+    // required this.logProvider,
     required this.audioController,
     required this.bluetoothProvider,
-    required this.protocolProvider,
+    // required this.protocolProvider,
+    required this.database,
   }) : super(const BluetoothBlocState.notInitialized()) {
     settingsProvider.state.listen((state) {
       _reconnect = state.reconnect;
@@ -250,7 +253,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               .bluetoothBackgroundConnection
               .sendMessage(event.message);
           if (isMessageSended) {
-            await logProvider.addLog(
+            await database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -273,7 +276,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   BluetoothMessage _parseBT(String message, DateTime timeStamp) {
     String parsedMessage = message;
-    logProvider.addLog(
+    database.addLog(
       level: LogLevel.information,
       source: LogSource.bluetooth,
       direction: LogSourceDirection.output,

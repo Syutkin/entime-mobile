@@ -1,3 +1,7 @@
+import '../model/log_level.dart';
+import '../model/log_source.dart';
+import '../model/log_source_direction.dart';
+
 CREATE TABLE races (
 	id integer PRIMARY KEY AUTOINCREMENT,
 	name text NOT NULL,
@@ -85,6 +89,27 @@ CREATE TABLE trails (
 	gpx_track blob,
 	link text,
 	comment text
+);
+
+-- ToDo:
+-- надо прикинуть как именно вести лог и что туда писать
+-- сделать фильтры аналогичные финишу
+-- новый файл каждые сутки
+-- удалять старые файлы (глубина удаления настраиваемая)
+
+-- logdb:
+-- 1. timeStamp - time
+-- 2. от кого получена/кому отправлена инфа - source
+-- 3. Направление отправлено/получено - direction
+-- 4. сырая информация - rawData
+
+CREATE TABLE logs (
+    id INTEGER PRIMARY KEY UNIQUE,
+    level ENUMNAME(LogLevel) NOT NULL,
+    timestamp TEXT NOT NULL,
+    source ENUMNAME(LogSource) NOT NULL,
+    direction ENUMNAME(LogSourceDirection) NOT NULL,
+    raw_data TEXT
 );
 
 _getRaces: SELECT * FROM races WHERE is_deleted = false;
