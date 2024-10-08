@@ -248,13 +248,13 @@ class AppDatabase extends _$AppDatabase {
   /// плюс/минус [deltaInSeconds] от заданного [time].
   ///
   /// Возвращает null при успехе, и список [Start] при неудаче
-  Future<List<Start>?> updateAutomaticCorrection({
+  Future<List<StartingParticipant>?> updateAutomaticCorrection({
     required int stageId,
     required String time,
     required int correction,
     required DateTime timeStamp,
     bool forceUpdate = false,
-    int deltaInSeconds = 15,
+    required int deltaInSeconds,
   }) async {
     final DateTime? dateGoTime = strTimeToDateTime(time);
     if (dateGoTime == null) {

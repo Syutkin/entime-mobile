@@ -21,19 +21,18 @@ analyzer:
   plugins:
     - drift
 
-#linter:
-#  # The lint rules applied to this project can be customized in the
-#  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-#  # included above or to enable additional rules. A list of all available lints
-#  # and their documentation is published at
-#  # https://dart-lang.github.io/linter/lints/index.html.
-#  #
-#  # Instead of disabling a lint rule for the entire project in the
-#  # section below, it can also be suppressed for a single line of code
-#  # or a specific dart file by using the `// ignore: name_of_lint` and
-#  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-#  # producing the lint.
-#  rules:
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at https://dart.dev/tools/linter-rules.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
+  rules:
 #    - always_declare_return_types
 #    - always_put_control_body_on_new_line
 #    #    - always_put_required_named_parameters_first

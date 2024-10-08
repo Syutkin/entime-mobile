@@ -1,16 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:entime/src/common/database/model/dbstate.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
+import 'package:entime/src/feature/database/model/automatic_start.dart';
 import 'package:entime/src/feature/log/log.dart';
-import 'package:entime/src/feature/protocol/logic/protocol_provider.dart';
-import 'package:entime/src/feature/protocol/model/automatic_start.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
@@ -18,7 +15,6 @@ import '../../../../helpers/shared_prefs_defaults.dart';
 
 class MockBluetoothProvider extends Mock implements BluetoothProvider {}
 
-class MockProtocolProvider extends Mock implements ProtocolProvider {}
 
 class MockAppDatabase extends Mock implements AppDatabase {}
 
@@ -44,7 +40,6 @@ void main() {
   late BluetoothDeviceWithAvailability deviceWithoutAvailability;
   late MockAppDatabase database;
   late MockAudioController audioController;
-  late MockProtocolProvider protocolProvider;
   late SharedPrefsSettingsProvider settingsProvider;
   late AppSettings settings;
   late MockFlutterBluetoothSerial flutterBluetoothSerial;
@@ -64,7 +59,6 @@ void main() {
       bluetoothProvider = MockBluetoothProvider();
       flutterBluetoothSerial = MockFlutterBluetoothSerial();
       bluetoothBackgroundConnection = MockBluetoothBackgroundConnection();
-      protocolProvider = MockProtocolProvider();
       database = MockAppDatabase();
       audioController = MockAudioController();
       settings = AppSettings.defaults();
@@ -94,11 +88,11 @@ void main() {
       ).thenAnswer(
         (_) => Future.value(),
       );
-      when(
-        () => protocolProvider.state,
-      ).thenAnswer(
-        (_) => BehaviorSubject<DBState>(),
-      );
+      // when(
+      //   () => protocolProvider.state,
+      // ).thenAnswer(
+      //   (_) => BehaviorSubject<DBState>(),
+      // );
       when(() => bluetoothProvider.dispose())
           .thenAnswer((invocation) => Future.value());
       deviceWithAvailability = BluetoothDeviceWithAvailability(

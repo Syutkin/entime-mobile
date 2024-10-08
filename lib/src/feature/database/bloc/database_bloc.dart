@@ -262,7 +262,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             forceAdd: event.forceAdd,
           );
           //ToDo: popup с вопросом обновлять или нет стартовое время или номер
-          if (startingParticipants != null) {
+          if (startingParticipants != null && !event.forceAdd) {
             // add(
             //   DatabaseEvent.emitState(
             //     notification: Notification.updateNumber(
@@ -306,14 +306,25 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           );
         },
         updateAutomaticCorrection: (event) async {
-          await _db.updateAutomaticCorrection(
+          var previousStarts = await _db.updateAutomaticCorrection(
             stageId: event.stageId,
-            time: event.time,
+            time: event.startTime,
             correction: event.correction,
             timeStamp: event.timeStamp,
-            deltaInSeconds: event.deltaInSeconds,
+            deltaInSeconds: event.deltaInSeconds ??
+                settingsProvider.settings.deltaInSeconds,
             forceUpdate: event.forceUpdate,
           );
+          if (previousStarts != null && !event.forceUpdate) {
+            _emitState(
+                notification: Notification.updateAutomaticCorrection(
+              previousStarts: previousStarts,
+              number: previousStarts.first.number,
+              startTime: event.startTime,
+              timeStamp: event.timeStamp,
+              correction: event.correction,
+            ));
+          }
         },
         getFinishesFromStage: (event) {},
         addFinishTime: (event) async {

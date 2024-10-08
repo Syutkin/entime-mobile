@@ -10,6 +10,7 @@ import 'raw_queries.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late AppDatabase db;
+  int deltaInSeconds = 15;
 
   setUp(() {
     db = AppDatabase.forTesting(DatabaseConnection(NativeDatabase.memory()));
@@ -370,6 +371,7 @@ void main() {
           time: automaticStartTime,
           correction: correction,
           timeStamp: strTimeToDateTime(timeStamp)!,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result, null);
 
@@ -402,6 +404,7 @@ void main() {
           time: automaticStartTime,
           correction: correction,
           timeStamp: strTimeToDateTime(timeStamp)!,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result, null);
 
@@ -410,6 +413,7 @@ void main() {
           time: automaticStartTimeNew,
           correction: correctionNew,
           timeStamp: strTimeToDateTime(timeStampNew)!,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result?.length, 1);
 
@@ -442,6 +446,7 @@ void main() {
           time: automaticStartTime,
           correction: correction,
           timeStamp: strTimeToDateTime(timeStamp)!,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result, null);
 
@@ -451,6 +456,7 @@ void main() {
           correction: correctionNew,
           timeStamp: strTimeToDateTime(timeStampNew)!,
           forceUpdate: true,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result?.length, null);
 
@@ -480,6 +486,7 @@ void main() {
                   time: automaticStartTime,
                   correction: correction,
                   timeStamp: strTimeToDateTime(timeStamp)!,
+                  deltaInSeconds: deltaInSeconds,
                 ),
             throwsA(isA<FormatException>()));
       });
@@ -717,6 +724,7 @@ void main() {
           time: automaticStartTime,
           correction: automaticCorrection,
           timeStamp: strTimeToDateTime(timeStamp)!,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(correctionResult, null);
 
@@ -855,8 +863,8 @@ void main() {
         var number = 999;
 
         var startInfo = await db
-                .getNumberAtStarts(stageId: stage.id!, number: number)
-                .get();
+            .getNumberAtStarts(stageId: stage.id!, number: number)
+            .get();
         expect(startInfo.isEmpty, true);
 
         await db.addFinishTime(

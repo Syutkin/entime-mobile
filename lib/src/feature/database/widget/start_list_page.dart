@@ -1,4 +1,3 @@
-import 'package:entime/src/common/logger/logger.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -309,7 +308,6 @@ class _StartListPage extends State<StartListPage> {
                       onSelected: (value) async {
                         switch (value) {
                           case 1:
-                            logger.d('stage $stage');
                             if (stage != null) {
                               await addRacerPopup(
                                 context: context,

@@ -16,8 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Notification {
-  List<StartingParticipant> get existedStartingParticipants =>
-      throw _privateConstructorUsedError;
   int get number => throw _privateConstructorUsedError;
   String get startTime => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -27,6 +25,9 @@ mixin _$Notification {
             int number,
             String startTime)
         updateNumber,
+    required TResult Function(List<StartingParticipant> previousStarts,
+            int number, String startTime, DateTime timeStamp, int correction)
+        updateAutomaticCorrection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,9 @@ mixin _$Notification {
     TResult? Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
         updateNumber,
+    TResult? Function(List<StartingParticipant> previousStarts, int number,
+            String startTime, DateTime timeStamp, int correction)?
+        updateAutomaticCorrection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,22 +45,31 @@ mixin _$Notification {
     TResult Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
         updateNumber,
+    TResult Function(List<StartingParticipant> previousStarts, int number,
+            String startTime, DateTime timeStamp, int correction)?
+        updateAutomaticCorrection,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_UpdateNumber value) updateNumber,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_UpdateNumber value)? updateNumber,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_UpdateNumber value)? updateNumber,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -74,10 +87,7 @@ abstract class $NotificationCopyWith<$Res> {
           Notification value, $Res Function(Notification) then) =
       _$NotificationCopyWithImpl<$Res, Notification>;
   @useResult
-  $Res call(
-      {List<StartingParticipant> existedStartingParticipants,
-      int number,
-      String startTime});
+  $Res call({int number, String startTime});
 }
 
 /// @nodoc
@@ -95,15 +105,10 @@ class _$NotificationCopyWithImpl<$Res, $Val extends Notification>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? existedStartingParticipants = null,
     Object? number = null,
     Object? startTime = null,
   }) {
     return _then(_value.copyWith(
-      existedStartingParticipants: null == existedStartingParticipants
-          ? _value.existedStartingParticipants
-          : existedStartingParticipants // ignore: cast_nullable_to_non_nullable
-              as List<StartingParticipant>,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -228,6 +233,9 @@ class _$UpdateNumberImpl implements _UpdateNumber {
             int number,
             String startTime)
         updateNumber,
+    required TResult Function(List<StartingParticipant> previousStarts,
+            int number, String startTime, DateTime timeStamp, int correction)
+        updateAutomaticCorrection,
   }) {
     return updateNumber(existedStartingParticipants, number, startTime);
   }
@@ -238,6 +246,9 @@ class _$UpdateNumberImpl implements _UpdateNumber {
     TResult? Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
         updateNumber,
+    TResult? Function(List<StartingParticipant> previousStarts, int number,
+            String startTime, DateTime timeStamp, int correction)?
+        updateAutomaticCorrection,
   }) {
     return updateNumber?.call(existedStartingParticipants, number, startTime);
   }
@@ -248,6 +259,9 @@ class _$UpdateNumberImpl implements _UpdateNumber {
     TResult Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
         updateNumber,
+    TResult Function(List<StartingParticipant> previousStarts, int number,
+            String startTime, DateTime timeStamp, int correction)?
+        updateAutomaticCorrection,
     required TResult orElse(),
   }) {
     if (updateNumber != null) {
@@ -260,6 +274,8 @@ class _$UpdateNumberImpl implements _UpdateNumber {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_UpdateNumber value) updateNumber,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
   }) {
     return updateNumber(this);
   }
@@ -268,6 +284,8 @@ class _$UpdateNumberImpl implements _UpdateNumber {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_UpdateNumber value)? updateNumber,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
   }) {
     return updateNumber?.call(this);
   }
@@ -276,6 +294,8 @@ class _$UpdateNumberImpl implements _UpdateNumber {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_UpdateNumber value)? updateNumber,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
     required TResult orElse(),
   }) {
     if (updateNumber != null) {
@@ -291,7 +311,6 @@ abstract class _UpdateNumber implements Notification {
       required final int number,
       required final String startTime}) = _$UpdateNumberImpl;
 
-  @override
   List<StartingParticipant> get existedStartingParticipants;
   @override
   int get number;
@@ -304,4 +323,240 @@ abstract class _UpdateNumber implements Notification {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateNumberImplCopyWith<_$UpdateNumberImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateAutomaticCorrectionImplCopyWith<$Res>
+    implements $NotificationCopyWith<$Res> {
+  factory _$$UpdateAutomaticCorrectionImplCopyWith(
+          _$UpdateAutomaticCorrectionImpl value,
+          $Res Function(_$UpdateAutomaticCorrectionImpl) then) =
+      __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<StartingParticipant> previousStarts,
+      int number,
+      String startTime,
+      DateTime timeStamp,
+      int correction});
+}
+
+/// @nodoc
+class __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>
+    extends _$NotificationCopyWithImpl<$Res, _$UpdateAutomaticCorrectionImpl>
+    implements _$$UpdateAutomaticCorrectionImplCopyWith<$Res> {
+  __$$UpdateAutomaticCorrectionImplCopyWithImpl(
+      _$UpdateAutomaticCorrectionImpl _value,
+      $Res Function(_$UpdateAutomaticCorrectionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? previousStarts = null,
+    Object? number = null,
+    Object? startTime = null,
+    Object? timeStamp = null,
+    Object? correction = null,
+  }) {
+    return _then(_$UpdateAutomaticCorrectionImpl(
+      previousStarts: null == previousStarts
+          ? _value._previousStarts
+          : previousStarts // ignore: cast_nullable_to_non_nullable
+              as List<StartingParticipant>,
+      number: null == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      timeStamp: null == timeStamp
+          ? _value.timeStamp
+          : timeStamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      correction: null == correction
+          ? _value.correction
+          : correction // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
+  const _$UpdateAutomaticCorrectionImpl(
+      {required final List<StartingParticipant> previousStarts,
+      required this.number,
+      required this.startTime,
+      required this.timeStamp,
+      required this.correction})
+      : _previousStarts = previousStarts;
+
+  final List<StartingParticipant> _previousStarts;
+  @override
+  List<StartingParticipant> get previousStarts {
+    if (_previousStarts is EqualUnmodifiableListView) return _previousStarts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_previousStarts);
+  }
+
+  @override
+  final int number;
+  @override
+  final String startTime;
+  @override
+  final DateTime timeStamp;
+  @override
+  final int correction;
+
+  @override
+  String toString() {
+    return 'Notification.updateAutomaticCorrection(previousStarts: $previousStarts, number: $number, startTime: $startTime, timeStamp: $timeStamp, correction: $correction)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateAutomaticCorrectionImpl &&
+            const DeepCollectionEquality()
+                .equals(other._previousStarts, _previousStarts) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.timeStamp, timeStamp) ||
+                other.timeStamp == timeStamp) &&
+            (identical(other.correction, correction) ||
+                other.correction == correction));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_previousStarts),
+      number,
+      startTime,
+      timeStamp,
+      correction);
+
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateAutomaticCorrectionImplCopyWith<_$UpdateAutomaticCorrectionImpl>
+      get copyWith => __$$UpdateAutomaticCorrectionImplCopyWithImpl<
+          _$UpdateAutomaticCorrectionImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            List<StartingParticipant> existedStartingParticipants,
+            int number,
+            String startTime)
+        updateNumber,
+    required TResult Function(List<StartingParticipant> previousStarts,
+            int number, String startTime, DateTime timeStamp, int correction)
+        updateAutomaticCorrection,
+  }) {
+    return updateAutomaticCorrection(
+        previousStarts, number, startTime, timeStamp, correction);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<StartingParticipant> existedStartingParticipants,
+            int number, String startTime)?
+        updateNumber,
+    TResult? Function(List<StartingParticipant> previousStarts, int number,
+            String startTime, DateTime timeStamp, int correction)?
+        updateAutomaticCorrection,
+  }) {
+    return updateAutomaticCorrection?.call(
+        previousStarts, number, startTime, timeStamp, correction);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<StartingParticipant> existedStartingParticipants,
+            int number, String startTime)?
+        updateNumber,
+    TResult Function(List<StartingParticipant> previousStarts, int number,
+            String startTime, DateTime timeStamp, int correction)?
+        updateAutomaticCorrection,
+    required TResult orElse(),
+  }) {
+    if (updateAutomaticCorrection != null) {
+      return updateAutomaticCorrection(
+          previousStarts, number, startTime, timeStamp, correction);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UpdateNumber value) updateNumber,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
+  }) {
+    return updateAutomaticCorrection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UpdateNumber value)? updateNumber,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+  }) {
+    return updateAutomaticCorrection?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UpdateNumber value)? updateNumber,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    required TResult orElse(),
+  }) {
+    if (updateAutomaticCorrection != null) {
+      return updateAutomaticCorrection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateAutomaticCorrection implements Notification {
+  const factory _UpdateAutomaticCorrection(
+      {required final List<StartingParticipant> previousStarts,
+      required final int number,
+      required final String startTime,
+      required final DateTime timeStamp,
+      required final int correction}) = _$UpdateAutomaticCorrectionImpl;
+
+  List<StartingParticipant> get previousStarts;
+  @override
+  int get number;
+  @override
+  String get startTime;
+  DateTime get timeStamp;
+  int get correction;
+
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateAutomaticCorrectionImplCopyWith<_$UpdateAutomaticCorrectionImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

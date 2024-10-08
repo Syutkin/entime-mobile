@@ -57,8 +57,8 @@ mixin _$DatabaseEvent {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -136,8 +136,8 @@ mixin _$DatabaseEvent {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -213,8 +213,8 @@ mixin _$DatabaseEvent {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -474,8 +474,8 @@ class _$InitializeImpl implements _Initialize {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -556,8 +556,8 @@ class _$InitializeImpl implements _Initialize {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -636,8 +636,8 @@ class _$InitializeImpl implements _Initialize {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -1166,8 +1166,8 @@ class _$EmitStateImpl implements _EmitState {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -1263,8 +1263,8 @@ class _$EmitStateImpl implements _EmitState {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -1358,8 +1358,8 @@ class _$EmitStateImpl implements _EmitState {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -1698,8 +1698,8 @@ class _$AddRaceImpl implements _AddRace {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -1780,8 +1780,8 @@ class _$AddRaceImpl implements _AddRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -1860,8 +1860,8 @@ class _$AddRaceImpl implements _AddRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -2155,8 +2155,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -2237,8 +2237,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -2317,8 +2317,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -2585,8 +2585,8 @@ class _$GetRacesImpl implements _GetRaces {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -2667,8 +2667,8 @@ class _$GetRacesImpl implements _GetRaces {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -2747,8 +2747,8 @@ class _$GetRacesImpl implements _GetRaces {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -3035,8 +3035,8 @@ class _$SelectRaceImpl implements _SelectRace {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -3117,8 +3117,8 @@ class _$SelectRaceImpl implements _SelectRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -3197,8 +3197,8 @@ class _$SelectRaceImpl implements _SelectRace {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -3493,8 +3493,8 @@ class _$AddStageImpl implements _AddStage {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -3575,8 +3575,8 @@ class _$AddStageImpl implements _AddStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -3655,8 +3655,8 @@ class _$AddStageImpl implements _AddStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -3950,8 +3950,8 @@ class _$DeleteStageImpl implements _DeleteStage {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -4032,8 +4032,8 @@ class _$DeleteStageImpl implements _DeleteStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -4112,8 +4112,8 @@ class _$DeleteStageImpl implements _DeleteStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -4407,8 +4407,8 @@ class _$GetStagesImpl implements _GetStages {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -4489,8 +4489,8 @@ class _$GetStagesImpl implements _GetStages {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -4569,8 +4569,8 @@ class _$GetStagesImpl implements _GetStages {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -4865,8 +4865,8 @@ class _$SelectStageImpl implements _SelectStage {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -4947,8 +4947,8 @@ class _$SelectStageImpl implements _SelectStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -5027,8 +5027,8 @@ class _$SelectStageImpl implements _SelectStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -5325,8 +5325,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -5407,8 +5407,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -5487,8 +5487,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -5816,8 +5816,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -5898,8 +5898,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -5978,8 +5978,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -6357,8 +6357,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -6446,8 +6446,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -6533,8 +6533,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -6750,11 +6750,11 @@ abstract class _$$UpdateAutomaticCorrectionImplCopyWith<$Res> {
   @useResult
   $Res call(
       {int stageId,
-      String time,
+      String startTime,
       int correction,
       DateTime timeStamp,
       bool forceUpdate,
-      int deltaInSeconds});
+      int? deltaInSeconds});
 }
 
 /// @nodoc
@@ -6772,20 +6772,20 @@ class __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stageId = null,
-    Object? time = null,
+    Object? startTime = null,
     Object? correction = null,
     Object? timeStamp = null,
     Object? forceUpdate = null,
-    Object? deltaInSeconds = null,
+    Object? deltaInSeconds = freezed,
   }) {
     return _then(_$UpdateAutomaticCorrectionImpl(
       stageId: null == stageId
           ? _value.stageId
           : stageId // ignore: cast_nullable_to_non_nullable
               as int,
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
               as String,
       correction: null == correction
           ? _value.correction
@@ -6799,10 +6799,10 @@ class __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>
           ? _value.forceUpdate
           : forceUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
-      deltaInSeconds: null == deltaInSeconds
+      deltaInSeconds: freezed == deltaInSeconds
           ? _value.deltaInSeconds
           : deltaInSeconds // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -6812,16 +6812,17 @@ class __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>
 class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   const _$UpdateAutomaticCorrectionImpl(
       {required this.stageId,
-      required this.time,
+      required this.startTime,
       required this.correction,
       required this.timeStamp,
       this.forceUpdate = false,
-      this.deltaInSeconds = 15});
+      this.deltaInSeconds});
 
   @override
   final int stageId;
+// required AutomaticStart automaticStart,
   @override
-  final String time;
+  final String startTime;
   @override
   final int correction;
   @override
@@ -6830,12 +6831,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   @JsonKey()
   final bool forceUpdate;
   @override
-  @JsonKey()
-  final int deltaInSeconds;
+  final int? deltaInSeconds;
 
   @override
   String toString() {
-    return 'DatabaseEvent.updateAutomaticCorrection(stageId: $stageId, time: $time, correction: $correction, timeStamp: $timeStamp, forceUpdate: $forceUpdate, deltaInSeconds: $deltaInSeconds)';
+    return 'DatabaseEvent.updateAutomaticCorrection(stageId: $stageId, startTime: $startTime, correction: $correction, timeStamp: $timeStamp, forceUpdate: $forceUpdate, deltaInSeconds: $deltaInSeconds)';
   }
 
   @override
@@ -6844,7 +6844,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
         (other.runtimeType == runtimeType &&
             other is _$UpdateAutomaticCorrectionImpl &&
             (identical(other.stageId, stageId) || other.stageId == stageId) &&
-            (identical(other.time, time) || other.time == time) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
             (identical(other.correction, correction) ||
                 other.correction == correction) &&
             (identical(other.timeStamp, timeStamp) ||
@@ -6856,7 +6857,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, stageId, time, correction,
+  int get hashCode => Object.hash(runtimeType, stageId, startTime, correction,
       timeStamp, forceUpdate, deltaInSeconds);
 
   /// Create a copy of DatabaseEvent
@@ -6910,8 +6911,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -6949,7 +6950,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function() deselectAwaitingNumber,
   }) {
     return updateAutomaticCorrection(
-        stageId, time, correction, timeStamp, forceUpdate, deltaInSeconds);
+        stageId, startTime, correction, timeStamp, forceUpdate, deltaInSeconds);
   }
 
   @override
@@ -6993,8 +6994,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -7030,7 +7031,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function()? deselectAwaitingNumber,
   }) {
     return updateAutomaticCorrection?.call(
-        stageId, time, correction, timeStamp, forceUpdate, deltaInSeconds);
+        stageId, startTime, correction, timeStamp, forceUpdate, deltaInSeconds);
   }
 
   @override
@@ -7074,8 +7075,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -7112,8 +7113,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult orElse(),
   }) {
     if (updateAutomaticCorrection != null) {
-      return updateAutomaticCorrection(
-          stageId, time, correction, timeStamp, forceUpdate, deltaInSeconds);
+      return updateAutomaticCorrection(stageId, startTime, correction,
+          timeStamp, forceUpdate, deltaInSeconds);
     }
     return orElse();
   }
@@ -7254,18 +7255,18 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
 abstract class _UpdateAutomaticCorrection implements DatabaseEvent {
   const factory _UpdateAutomaticCorrection(
       {required final int stageId,
-      required final String time,
+      required final String startTime,
       required final int correction,
       required final DateTime timeStamp,
       final bool forceUpdate,
-      final int deltaInSeconds}) = _$UpdateAutomaticCorrectionImpl;
+      final int? deltaInSeconds}) = _$UpdateAutomaticCorrectionImpl;
 
-  int get stageId;
-  String get time;
+  int get stageId; // required AutomaticStart automaticStart,
+  String get startTime;
   int get correction;
   DateTime get timeStamp;
   bool get forceUpdate;
-  int get deltaInSeconds;
+  int? get deltaInSeconds;
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -7402,8 +7403,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -7484,8 +7485,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -7564,8 +7565,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -7874,8 +7875,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -7956,8 +7957,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -8036,8 +8037,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -8336,8 +8337,8 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -8418,8 +8419,8 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -8498,8 +8499,8 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -8881,8 +8882,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -8964,8 +8965,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -9045,8 +9046,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -9375,8 +9376,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -9457,8 +9458,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -9537,8 +9538,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -9840,8 +9841,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -9922,8 +9923,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -10002,8 +10003,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -10301,8 +10302,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -10383,8 +10384,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -10463,8 +10464,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -10760,8 +10761,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -10842,8 +10843,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -10922,8 +10923,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -11227,8 +11228,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -11309,8 +11310,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -11389,8 +11390,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -11697,8 +11698,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -11779,8 +11780,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -11859,8 +11860,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -12167,8 +12168,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -12249,8 +12250,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -12329,8 +12330,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -12627,8 +12628,8 @@ class _$HideFinishImpl implements _HideFinish {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -12709,8 +12710,8 @@ class _$HideFinishImpl implements _HideFinish {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -12789,8 +12790,8 @@ class _$HideFinishImpl implements _HideFinish {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -13116,8 +13117,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -13198,8 +13199,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -13278,8 +13279,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -13592,8 +13593,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -13674,8 +13675,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -13754,8 +13755,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -14053,8 +14054,8 @@ class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -14135,8 +14136,8 @@ class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -14215,8 +14216,8 @@ class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -14484,8 +14485,8 @@ class _$SshareStartImpl implements _SshareStart {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -14566,8 +14567,8 @@ class _$SshareStartImpl implements _SshareStart {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -14646,8 +14647,8 @@ class _$SshareStartImpl implements _SshareStart {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -14906,8 +14907,8 @@ class _$ShareFinishImpl implements _ShareFinish {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -14988,8 +14989,8 @@ class _$ShareFinishImpl implements _ShareFinish {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -15068,8 +15069,8 @@ class _$ShareFinishImpl implements _ShareFinish {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -15357,8 +15358,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -15439,8 +15440,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -15519,8 +15520,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -15791,8 +15792,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             int stageId,
             int participantId)
         updateStartingInfo,
-    required TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
         updateAutomaticCorrection,
     required TResult Function(int stageId, DateTime time, int deltaInSeconds)
         updateManualStartTime,
@@ -15873,8 +15874,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult? Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -15953,8 +15954,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             int stageId,
             int participantId)?
         updateStartingInfo,
-    TResult Function(int stageId, String time, int correction,
-            DateTime timeStamp, bool forceUpdate, int deltaInSeconds)?
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
         updateAutomaticCorrection,
     TResult Function(int stageId, DateTime time, int deltaInSeconds)?
         updateManualStartTime,
@@ -16638,6 +16639,16 @@ class _$InitializedImpl implements _Initialized {
 
   @override
   final Notification? notification;
+// Стартовое время и номер, которые хотим установить
+// StartTime? startTime,
+// Автоматический старт из стартового модуля
+// Служит для проверки, установлено ли уже стартовое время или нет
+// AutomaticStart? automaticStart,
+// Предыдущее стартовое время номера, которому предлагается
+// поставить новое. Запоминаем для передачи его в UI popup.
+// Используется два раза, и при установке автоматического стартового времени
+// и при ручном вводе нового времени старта
+// List<StartingParticipant>? previousStart,
 // Изменить время финиша для номера
   @override
   final bool? updateFinishNumber;
@@ -16893,7 +16904,18 @@ abstract class _Initialized implements DatabaseState {
   List<Finish> get finishes;
   List<Trail> get trails;
   List<StartingParticipant> get numbersOnTrace;
-  Notification? get notification; // Изменить время финиша для номера
+  Notification?
+      get notification; // Стартовое время и номер, которые хотим установить
+// StartTime? startTime,
+// Автоматический старт из стартового модуля
+// Служит для проверки, установлено ли уже стартовое время или нет
+// AutomaticStart? automaticStart,
+// Предыдущее стартовое время номера, которому предлагается
+// поставить новое. Запоминаем для передачи его в UI popup.
+// Используется два раза, и при установке автоматического стартового времени
+// и при ручном вводе нового времени старта
+// List<StartingParticipant>? previousStart,
+// Изменить время финиша для номера
   bool?
       get updateFinishNumber; // Автоматически подставленный в финишное время номер
   int?

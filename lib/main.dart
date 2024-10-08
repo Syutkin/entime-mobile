@@ -23,8 +23,6 @@ import 'src/feature/database/drift/app_database.dart';
 import 'src/feature/home/widget/home_screen.dart';
 import 'src/feature/log/bloc/log_bloc.dart';
 import 'src/feature/module_settings/bloc/module_settings_bloc.dart';
-import 'src/feature/protocol/bloc/protocol_bloc.dart';
-import 'src/feature/protocol/logic/protocol_provider.dart';
 import 'src/feature/settings/settings.dart';
 import 'src/feature/tab/bloc/tab_bloc.dart';
 import 'src/feature/update/update.dart';
@@ -42,14 +40,7 @@ Future<void> main() async {
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
 
-  // final Directory documentsDirectory = await getApplicationDocumentsDirectory();
-  // final String logPath = join(documentsDirectory.path, 'log.sqlite');
-
-  final protocolProvider = ProtocolProvider();
   final AppDatabase database = AppDatabase();
-
-  // final logProvider = LogProvider();
-  // await logProvider.openDb(logPath);
 
   final androidInfo = await DeviceInfoPlugin().androidInfo;
   final settings = await SharedPrefsSettingsProvider.load();
@@ -84,8 +75,6 @@ Future<void> main() async {
     settings: settings,
     updateProvider: updateProvider,
     bluetoothProvider: bluetoothProvider,
-    protocolProvider: protocolProvider,
-    // logProvider: logProvider,
     audioController: audioController,
     appInfo: appInfo,
     database: database,
@@ -116,7 +105,6 @@ class EntimeApp extends StatelessWidget {
   final UpdateProvider updateProvider;
   final IBluetoothProvider bluetoothProvider;
   final IAudioController audioController;
-  final IProtocolProvider protocolProvider;
 
   // final ILogProvider logProvider;
   final AppDatabase database;
@@ -129,8 +117,6 @@ class EntimeApp extends StatelessWidget {
     required this.bluetoothProvider,
     required this.audioController,
     required this.appInfo,
-    required this.protocolProvider,
-    // required this.logProvider,
     required this.database,
     required this.countdown,
   });
@@ -152,12 +138,6 @@ class EntimeApp extends StatelessWidget {
               settingsProvider: settings,
               database: database,
             ),
-          ),
-          BlocProvider<ProtocolBloc>(
-            create: (context) => ProtocolBloc(
-              settingsProvider: settings,
-              protocolProvider: protocolProvider,
-            )..add(SelectProtocol(file: settings.settings.recentFile)),
           ),
           BlocProvider<DatabaseBloc>(
             create: (context) => DatabaseBloc(

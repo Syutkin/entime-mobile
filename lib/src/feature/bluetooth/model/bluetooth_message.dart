@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../protocol/protocol.dart';
+import '../../database/model/automatic_start.dart';
+
 
 part 'bluetooth_message.freezed.dart';
 

@@ -8,7 +8,6 @@ import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/countdown/logic/countdown.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/home/home.dart';
-import 'package:entime/src/feature/protocol/protocol.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/tab/tab.dart';
 import 'package:entime/src/feature/update/update.dart';
@@ -25,19 +24,12 @@ class MockUpdateProvider extends Mock implements UpdateProvider {}
 
 class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
-class MockProtocolProvider extends Mock implements IProtocolProvider {}
-
-// class MockLogProvider extends Mock implements LogProvider {}
-
 class MockAudioService extends Mock implements AudioService {}
 
 class MockIAudioController extends Mock implements IAudioController {}
 
 class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
     implements SettingsBloc {}
-
-class MockProtocolBloc extends MockBloc<ProtocolEvent, ProtocolState>
-    implements ProtocolBloc {}
 
 class MockTabBloc extends MockBloc<TabEvent, AppTab> implements TabBloc {}
 
@@ -58,9 +50,6 @@ void main() {
   late MockAppInfoProvider appInfo;
   late UpdateProvider updateProvider;
   late IBluetoothProvider bluetoothProvider;
-  late IProtocolProvider protocolProvider;
-  // late ILogProvider logProvider;
-  // final AudioService audioService = MockAudioService();
   late IAudioController audioController;
   late AppDatabase database;
   late CountdownAtStart countdown;
@@ -79,9 +68,6 @@ void main() {
     appInfo = MockAppInfoProvider();
     updateProvider = MockUpdateProvider();
     bluetoothProvider = MockBluetoothProvider();
-    protocolProvider = MockProtocolProvider();
-    // logProvider = MockLogProvider();
-    // final AudioService audioService = MockAudioService();
     audioController = MockIAudioController();
     database = MockAppDatabase();
     countdown = CountdownAtStart(database: database);
@@ -96,8 +82,6 @@ void main() {
           bluetoothProvider: bluetoothProvider,
           audioController: audioController,
           appInfo: appInfo,
-          protocolProvider: protocolProvider,
-          // logProvider: logProvider,
           database: database,
           countdown: countdown,
         ),
@@ -108,14 +92,12 @@ void main() {
 
   group('EntimeAppView', () {
     late SettingsBloc settingsBloc;
-    late ProtocolBloc protocolBloc;
     late TabBloc tabBloc;
     late UpdateBloc updateBloc;
     late BluetoothBloc bluetoothBloc;
 
     setUp(() {
       settingsBloc = MockSettingsBloc();
-      protocolBloc = MockProtocolBloc();
       tabBloc = MockTabBloc();
       updateBloc = MockUpdateBloc();
       bluetoothBloc = MockBluetoothBloc();
@@ -124,8 +106,6 @@ void main() {
     testWidgets('Renders Home page', (tester) async {
       when(() => settingsBloc.state)
           .thenReturn(SettingsState(settings: settingsProvider.settings));
-      when(() => protocolBloc.state)
-          .thenReturn(const ProtocolState.notSelected());
       when(() => tabBloc.state).thenReturn(AppTab.init);
       when(() => updateBloc.state).thenReturn(const UpdateState.initial());
       when(() => bluetoothBloc.state)
@@ -134,7 +114,6 @@ void main() {
         MultiBlocProvider(
           providers: [
             BlocProvider(create: (_) => settingsBloc),
-            BlocProvider(create: (_) => protocolBloc),
             BlocProvider(create: (_) => tabBloc),
             BlocProvider(create: (_) => updateBloc),
             BlocProvider(create: (_) => bluetoothBloc),

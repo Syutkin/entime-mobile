@@ -1,6 +1,6 @@
-import '../model/log_level.dart';
-import '../model/log_source.dart';
-import '../model/log_source_direction.dart';
+import '../../log/model/log_level.dart';
+import '../../log/model/log_source.dart';
+import '../../log/model/log_source_direction.dart';
 
 CREATE TABLE races (
 	id integer PRIMARY KEY AUTOINCREMENT,
@@ -91,17 +91,7 @@ CREATE TABLE trails (
 	comment text
 );
 
--- ToDo:
--- надо прикинуть как именно вести лог и что туда писать
--- сделать фильтры аналогичные финишу
--- новый файл каждые сутки
--- удалять старые файлы (глубина удаления настраиваемая)
 
--- logdb:
--- 1. timeStamp - time
--- 2. от кого получена/кому отправлена инфа - source
--- 3. Направление отправлено/получено - direction
--- 4. сырая информация - rawData
 
 CREATE TABLE logs (
     id INTEGER PRIMARY KEY UNIQUE,
@@ -224,11 +214,29 @@ WHERE
 	stage_id = :stage_id
 	AND participant_id = :participant_id;
 
-_getParticipantAroundTime:
-SELECT *
-FROM starts
+_getParticipantAroundTime AS StartingParticipant:
+SELECT
+	starts.id as start_id,
+	stage_id,
+	participant_id,
+	start_time,
+	timestamp,
+	automatic_start_time,
+	automatic_correction,
+	manual_start_time,
+	manual_correction,
+	starts.status_id as start_status,
+	finish_id,
+    race_id,
+    rider_id,
+    number,
+    category,
+    rfid,
+    participants.status_id as participant_status
+FROM starts, participants
 WHERE
 	stage_id = :stage_id
+	AND participants.id = starts.participant_id
 	AND start_time BETWEEN :before AND :after;
 
 _setManualStartTime:

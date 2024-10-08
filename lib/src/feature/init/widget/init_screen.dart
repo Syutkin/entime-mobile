@@ -2,16 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:path/path.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/widget/header_widget.dart';
 import '../../bluetooth/bluetooth.dart';
+import '../../database/bloc/database_bloc.dart';
 import '../../database/widget/races_list_page.dart';
 import '../../log/log.dart';
 import '../../module_settings/module_settings.dart';
-import '../../protocol/protocol.dart';
-import 'select_file_screen.dart';
 
 class InitScreen extends StatefulWidget {
   const InitScreen({
@@ -26,7 +24,7 @@ class _InitScreen extends State<InitScreen> {
   @override
   Widget build(BuildContext context) => ListView(
         children: <Widget>[
-          const _SelectProtocolWidget(),
+          const _SelectRaceWidget(),
           _selectBluetooth(),
           !kReleaseMode
               ? const Header(text: 'Debug')
@@ -197,22 +195,39 @@ class _DebugNewDatabase extends StatelessWidget {
       );
 }
 
-class _SelectProtocolWidget extends StatelessWidget {
-  const _SelectProtocolWidget();
+class _SelectRaceWidget extends StatelessWidget {
+  const _SelectRaceWidget();
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<ProtocolBloc, ProtocolState>(
-        builder: (context, protocolState) => ListTile(
-          onTap: () => routeToSelectFileScreen(context),
-          leading: IconButton(
-            icon: Icon(MdiIcons.database),
-            onPressed: () => routeToSelectFileScreen(context),
-          ),
-          title: Text(Localization.current.I18nInit_startProtocol),
-          subtitle: protocolState is ProtocolSelectedState
-              ? Text(basename(protocolState.databasePath))
-              : Text(Localization.current.I18nInit_pressToSelect),
-        ),
+      BlocBuilder<DatabaseBloc, DatabaseState>(
+        builder: (context, databaseState) => ListTile(
+            //ToDo: select race
+            // onTap: () => routeToSelectFileScreen(context),
+            leading: IconButton(
+              icon: Icon(MdiIcons.database),
+              //ToDo: select race
+              onPressed: () {},
+              // onPressed: () => routeToSelectFileScreen(context),
+            ),
+            title: Text(Localization.current.I18nInit_startProtocol),
+            subtitle: databaseState.map(
+              initial: (_) {
+                return Text(Localization.current.I18nInit_pressToSelect);
+              },
+              initialized: (state) {
+                var race = state.race;
+                var stage = state.stage;
+                if (race == null) {
+                  return Text(Localization.current.I18nInit_pressToSelect);
+                } else {
+                  if (stage == null) {
+                    return Text(race.name);
+                  } else {
+                    return Text(stage.name);
+                  }
+                }
+              },
+            )),
       );
 }

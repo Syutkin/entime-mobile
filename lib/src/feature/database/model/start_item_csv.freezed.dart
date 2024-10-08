@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'start_protocol.dart';
+part of 'start_item_csv.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -27,7 +27,7 @@ mixin _$StartItemCsv {
   String? get age => throw _privateConstructorUsedError;
   String? get team => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
-  String? get starttime => throw _privateConstructorUsedError;
+  String? get startTime => throw _privateConstructorUsedError;
 
   /// Serializes this StartItemCsv to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ abstract class $StartItemCsvCopyWith<$Res> {
       String? age,
       String? team,
       String? city,
-      String? starttime});
+      String? startTime});
 }
 
 /// @nodoc
@@ -78,7 +78,7 @@ class _$StartItemCsvCopyWithImpl<$Res, $Val extends StartItemCsv>
     Object? age = freezed,
     Object? team = freezed,
     Object? city = freezed,
-    Object? starttime = freezed,
+    Object? startTime = freezed,
   }) {
     return _then(_value.copyWith(
       category: freezed == category
@@ -109,9 +109,9 @@ class _$StartItemCsvCopyWithImpl<$Res, $Val extends StartItemCsv>
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      starttime: freezed == starttime
-          ? _value.starttime
-          : starttime // ignore: cast_nullable_to_non_nullable
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -133,7 +133,7 @@ abstract class _$$StartItemCsvImplCopyWith<$Res>
       String? age,
       String? team,
       String? city,
-      String? starttime});
+      String? startTime});
 }
 
 /// @nodoc
@@ -156,7 +156,7 @@ class __$$StartItemCsvImplCopyWithImpl<$Res>
     Object? age = freezed,
     Object? team = freezed,
     Object? city = freezed,
-    Object? starttime = freezed,
+    Object? startTime = freezed,
   }) {
     return _then(_$StartItemCsvImpl(
       category: freezed == category
@@ -187,9 +187,9 @@ class __$$StartItemCsvImplCopyWithImpl<$Res>
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      starttime: freezed == starttime
-          ? _value.starttime
-          : starttime // ignore: cast_nullable_to_non_nullable
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -206,7 +206,7 @@ class _$StartItemCsvImpl implements _StartItemCsv {
       this.age,
       this.team,
       this.city,
-      this.starttime});
+      this.startTime});
 
   factory _$StartItemCsvImpl.fromJson(Map<String, dynamic> json) =>
       _$$StartItemCsvImplFromJson(json);
@@ -226,11 +226,11 @@ class _$StartItemCsvImpl implements _StartItemCsv {
   @override
   final String? city;
   @override
-  final String? starttime;
+  final String? startTime;
 
   @override
   String toString() {
-    return 'StartItemCsv(category: $category, number: $number, name: $name, nickname: $nickname, age: $age, team: $team, city: $city, starttime: $starttime)';
+    return 'StartItemCsv(category: $category, number: $number, name: $name, nickname: $nickname, age: $age, team: $team, city: $city, startTime: $startTime)';
   }
 
   @override
@@ -247,14 +247,14 @@ class _$StartItemCsvImpl implements _StartItemCsv {
             (identical(other.age, age) || other.age == age) &&
             (identical(other.team, team) || other.team == team) &&
             (identical(other.city, city) || other.city == city) &&
-            (identical(other.starttime, starttime) ||
-                other.starttime == starttime));
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, category, number, name, nickname,
-      age, team, city, starttime);
+      age, team, city, startTime);
 
   /// Create a copy of StartItemCsv
   /// with the given fields replaced by the non-null parameter values.
@@ -281,7 +281,7 @@ abstract class _StartItemCsv implements StartItemCsv {
       final String? age,
       final String? team,
       final String? city,
-      final String? starttime}) = _$StartItemCsvImpl;
+      final String? startTime}) = _$StartItemCsvImpl;
 
   factory _StartItemCsv.fromJson(Map<String, dynamic> json) =
       _$StartItemCsvImpl.fromJson;
@@ -301,7 +301,7 @@ abstract class _StartItemCsv implements StartItemCsv {
   @override
   String? get city;
   @override
-  String? get starttime;
+  String? get startTime;
 
   /// Create a copy of StartItemCsv
   /// with the given fields replaced by the non-null parameter values.

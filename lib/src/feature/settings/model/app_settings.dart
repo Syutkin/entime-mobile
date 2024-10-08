@@ -59,6 +59,9 @@ class AppSettings with _$AppSettings {
     required bool substituteNumbers,
     required int substituteNumbersDelay,
 
+    // дельта в секундах для автоматического подставления стартового времени
+    required int deltaInSeconds,
+
     // лог
     // ограничение количества показываемых строк в окне лога
     // -1 = без ограничений
@@ -123,6 +126,9 @@ class AppSettings with _$AppSettings {
     // автоподстановка номеров в финишном протоколе
     @Default(false) bool substituteNumbers,
     @Default(500) int substituteNumbersDelay,
+
+    // дельта в секундах для автоматического подставления стартового времени
+    @Default(15) int deltaInSeconds,
 
     // лог
     // ограничение количества показываемых строк в окне лога

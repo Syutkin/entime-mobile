@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'start_protocol.freezed.dart';
-part 'start_protocol.g.dart';
+part 'start_item_csv.freezed.dart';
+part 'start_item_csv.g.dart';
 
 @freezed
 class StartItemCsv with _$StartItemCsv {
@@ -13,7 +13,7 @@ class StartItemCsv with _$StartItemCsv {
     String? age,
     String? team,
     String? city,
-    String? starttime,
+    String? startTime,
   }) = _StartItemCsv;
 
   factory StartItemCsv.fromJson(Map<String, dynamic> cvs) =>

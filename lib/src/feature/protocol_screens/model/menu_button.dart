@@ -2,7 +2,8 @@ enum MenuButton {
   share,
   fab,
   addRacer,
-  selectStartProtocol,
+  // selectStartProtocol,
+  selectRace,
   bluetooth,
   countdown,
   importCsv

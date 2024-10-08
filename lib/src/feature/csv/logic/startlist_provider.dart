@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
-import '../../protocol/model/start_protocol.dart';
+import '../../database/model/start_item_csv.dart';
 
 Future<List<StartItemCsv>> getStartList([PlatformFile? file]) async {
   file ??= await _pickCsv();

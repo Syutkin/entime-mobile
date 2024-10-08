@@ -60,11 +60,12 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.updateAutomaticCorrection({
     required int stageId,
-    required String time,
+    // required AutomaticStart automaticStart,
+    required String startTime,
     required int correction,
     required DateTime timeStamp,
     @Default(false) bool forceUpdate,
-    @Default(15) int deltaInSeconds,
+    int? deltaInSeconds,
   }) = _UpdateAutomaticCorrection;
 
   const factory DatabaseEvent.updateManualStartTime({

@@ -56,6 +56,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           prefs.getBool('substituteNumbers') ?? defaults.substituteNumbers,
       substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
           defaults.substituteNumbersDelay,
+      deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
       logLimit: prefs.getInt('logLimit') ?? defaults.logLimit,
       appTheme: themeFromString(prefs.getString('theme')),
       previousVersion:
@@ -123,6 +124,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       'substituteNumbersDelay',
       settings.substituteNumbersDelay,
     );
+    await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
     await _prefs.setInt('log_limit', settings.logLimit);
     await _prefs.setString('theme', settings.appTheme.stringify);
     await _prefs.setString('previousVersion', settings.previousVersion);

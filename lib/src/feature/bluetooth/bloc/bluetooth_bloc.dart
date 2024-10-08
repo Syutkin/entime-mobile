@@ -8,8 +8,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../common/logger/logger.dart';
 import '../../audio/audio.dart';
 import '../../database/drift/app_database.dart';
+import '../../database/model/automatic_start.dart';
 import '../../log/log.dart';
-import '../../protocol/protocol.dart';
 import '../../settings/settings.dart';
 import '../bluetooth.dart';
 
@@ -299,7 +299,6 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         return BluetoothMessage.automaticStart(
           automaticStart: automaticStart,
         );
-        // ignore: avoid_catching_errors
       } on Error catch (e) {
         logger.e(
           'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage: $e',

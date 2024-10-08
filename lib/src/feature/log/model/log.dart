@@ -4,9 +4,9 @@
 //
 // part 'log.g.dart';
 
-///
-/// Logging format
-///
+// ///
+// /// Logging format
+// ///
 // @freezed
 // class Log with _$Log {
 //   const factory Log({

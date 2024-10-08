@@ -3635,10 +3635,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Selectable<Start> _getParticipantAroundTime(
+  Selectable<StartingParticipant> _getParticipantAroundTime(
       {required int stageId, required String before, required String after}) {
     return customSelect(
-        'SELECT * FROM starts WHERE stage_id = ?1 AND start_time BETWEEN ?2 AND ?3',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE stage_id = ?1 AND participants.id = starts.participant_id AND start_time BETWEEN ?2 AND ?3',
         variables: [
           Variable<int>(stageId),
           Variable<String>(before),
@@ -3646,7 +3646,26 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ],
         readsFrom: {
           starts,
-        }).asyncMap(starts.mapFromRow);
+          participants,
+        }).map((QueryRow row) => StartingParticipant(
+          startId: row.readNullable<int>('start_id'),
+          stageId: row.read<int>('stage_id'),
+          participantId: row.read<int>('participant_id'),
+          startTime: row.read<String>('start_time'),
+          timestamp: row.readNullable<String>('timestamp'),
+          automaticStartTime: row.readNullable<String>('automatic_start_time'),
+          automaticCorrection: row.readNullable<int>('automatic_correction'),
+          manualStartTime: row.readNullable<String>('manual_start_time'),
+          manualCorrection: row.readNullable<int>('manual_correction'),
+          startStatus: row.read<int>('start_status'),
+          finishId: row.readNullable<int>('finish_id'),
+          raceId: row.read<int>('race_id'),
+          riderId: row.read<int>('rider_id'),
+          number: row.read<int>('number'),
+          category: row.readNullable<String>('category'),
+          rfid: row.readNullable<String>('rfid'),
+          participantStatus: row.read<int>('participant_status'),
+        ));
   }
 
   Future<int> _setManualStartTime(

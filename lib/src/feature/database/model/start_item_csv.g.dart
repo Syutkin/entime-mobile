@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'start_protocol.dart';
+part of 'start_item_csv.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -15,7 +15,7 @@ _$StartItemCsvImpl _$$StartItemCsvImplFromJson(Map<String, dynamic> json) =>
       age: json['age'] as String?,
       team: json['team'] as String?,
       city: json['city'] as String?,
-      starttime: json['starttime'] as String?,
+      startTime: json['startTime'] as String?,
     );
 
 Map<String, dynamic> _$$StartItemCsvImplToJson(_$StartItemCsvImpl instance) =>
@@ -27,5 +27,5 @@ Map<String, dynamic> _$$StartItemCsvImplToJson(_$StartItemCsvImpl instance) =>
       'age': instance.age,
       'team': instance.team,
       'city': instance.city,
-      'starttime': instance.starttime,
+      'startTime': instance.startTime,
     };

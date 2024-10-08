@@ -54,7 +54,9 @@ mixin _$AppSettings {
   int get finishDelay =>
       throw _privateConstructorUsedError; // автоподстановка номеров в финишном протоколе
   bool get substituteNumbers => throw _privateConstructorUsedError;
-  int get substituteNumbersDelay => throw _privateConstructorUsedError; // лог
+  int get substituteNumbersDelay =>
+      throw _privateConstructorUsedError; // дельта в секундах для автоматического подставления стартового времени
+  int get deltaInSeconds => throw _privateConstructorUsedError; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   int get logLimit => throw _privateConstructorUsedError; // активная тема
@@ -91,6 +93,7 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)
@@ -123,6 +126,7 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)
@@ -159,6 +163,7 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -191,6 +196,7 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -227,6 +233,7 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -259,6 +266,7 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -327,6 +335,7 @@ abstract class $AppSettingsCopyWith<$Res> {
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      int deltaInSeconds,
       int logLimit,
       AppTheme appTheme,
       String previousVersion});
@@ -374,6 +383,7 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
+    Object? deltaInSeconds = null,
     Object? logLimit = null,
     Object? appTheme = null,
     Object? previousVersion = null,
@@ -487,6 +497,10 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
+      deltaInSeconds: null == deltaInSeconds
+          ? _value.deltaInSeconds
+          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+              as int,
       logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
@@ -539,6 +553,7 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      int deltaInSeconds,
       int logLimit,
       AppTheme appTheme,
       String previousVersion});
@@ -584,6 +599,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
+    Object? deltaInSeconds = null,
     Object? logLimit = null,
     Object? appTheme = null,
     Object? previousVersion = null,
@@ -697,6 +713,10 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
+      deltaInSeconds: null == deltaInSeconds
+          ? _value.deltaInSeconds
+          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+              as int,
       logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
@@ -744,6 +764,7 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.finishDelay,
       required this.substituteNumbers,
       required this.substituteNumbersDelay,
+      required this.deltaInSeconds,
       required this.logLimit,
       required this.appTheme,
       required this.previousVersion});
@@ -819,6 +840,9 @@ class _$AppSettingsImpl implements _AppSettings {
   final bool substituteNumbers;
   @override
   final int substituteNumbersDelay;
+// дельта в секундах для автоматического подставления стартового времени
+  @override
+  final int deltaInSeconds;
 // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
@@ -833,7 +857,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
+    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
   }
 
   @override
@@ -889,6 +913,8 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.substituteNumbers == substituteNumbers) &&
             (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.deltaInSeconds, deltaInSeconds) ||
+                other.deltaInSeconds == deltaInSeconds) &&
             (identical(other.logLimit, logLimit) ||
                 other.logLimit == logLimit) &&
             (identical(other.appTheme, appTheme) ||
@@ -927,6 +953,7 @@ class _$AppSettingsImpl implements _AppSettings {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
         logLimit,
         appTheme,
         previousVersion
@@ -971,6 +998,7 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)
@@ -1003,6 +1031,7 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)
@@ -1036,6 +1065,7 @@ class _$AppSettingsImpl implements _AppSettings {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
         logLimit,
         appTheme,
         previousVersion);
@@ -1072,6 +1102,7 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -1104,6 +1135,7 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -1137,6 +1169,7 @@ class _$AppSettingsImpl implements _AppSettings {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
         logLimit,
         appTheme,
         previousVersion);
@@ -1173,6 +1206,7 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -1205,6 +1239,7 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -1240,6 +1275,7 @@ class _$AppSettingsImpl implements _AppSettings {
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
+          deltaInSeconds,
           logLimit,
           appTheme,
           previousVersion);
@@ -1308,6 +1344,7 @@ abstract class _AppSettings implements AppSettings {
       required final int finishDelay,
       required final bool substituteNumbers,
       required final int substituteNumbersDelay,
+      required final int deltaInSeconds,
       required final int logLimit,
       required final AppTheme appTheme,
       required final String previousVersion}) = _$AppSettingsImpl;
@@ -1369,7 +1406,9 @@ abstract class _AppSettings implements AppSettings {
   @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay; // лог
+  int get substituteNumbersDelay; // дельта в секундах для автоматического подставления стартового времени
+  @override
+  int get deltaInSeconds; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   @override
@@ -1423,6 +1462,7 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      int deltaInSeconds,
       int logLimit,
       AppTheme appTheme,
       String previousVersion});
@@ -1468,6 +1508,7 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
+    Object? deltaInSeconds = null,
     Object? logLimit = null,
     Object? appTheme = null,
     Object? previousVersion = null,
@@ -1581,6 +1622,10 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
+      deltaInSeconds: null == deltaInSeconds
+          ? _value.deltaInSeconds
+          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+              as int,
       logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
@@ -1628,6 +1673,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.finishDelay = 350,
       this.substituteNumbers = false,
       this.substituteNumbersDelay = 500,
+      this.deltaInSeconds = 15,
       this.logLimit = -1,
       this.appTheme = AppTheme.lightBlue,
       this.previousVersion = '0.0.0'});
@@ -1732,6 +1778,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final int substituteNumbersDelay;
+// дельта в секундах для автоматического подставления стартового времени
+  @override
+  @JsonKey()
+  final int deltaInSeconds;
 // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
@@ -1749,7 +1799,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
+    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
   }
 
   @override
@@ -1805,6 +1855,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.substituteNumbers == substituteNumbers) &&
             (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.deltaInSeconds, deltaInSeconds) ||
+                other.deltaInSeconds == deltaInSeconds) &&
             (identical(other.logLimit, logLimit) ||
                 other.logLimit == logLimit) &&
             (identical(other.appTheme, appTheme) ||
@@ -1843,6 +1895,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
         logLimit,
         appTheme,
         previousVersion
@@ -1888,6 +1941,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)
@@ -1920,6 +1974,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)
@@ -1953,6 +2008,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
         logLimit,
         appTheme,
         previousVersion);
@@ -1989,6 +2045,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -2021,6 +2078,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -2054,6 +2112,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
         logLimit,
         appTheme,
         previousVersion);
@@ -2090,6 +2149,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -2122,6 +2182,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
             int logLimit,
             AppTheme appTheme,
             String previousVersion)?
@@ -2157,6 +2218,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
+          deltaInSeconds,
           logLimit,
           appTheme,
           previousVersion);
@@ -2225,6 +2287,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final int finishDelay,
       final bool substituteNumbers,
       final int substituteNumbersDelay,
+      final int deltaInSeconds,
       final int logLimit,
       final AppTheme appTheme,
       final String previousVersion}) = _$AppSettingsDefaultsImpl;
@@ -2286,7 +2349,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay; // лог
+  int get substituteNumbersDelay; // дельта в секундах для автоматического подставления стартового времени
+  @override
+  int get deltaInSeconds; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   @override
