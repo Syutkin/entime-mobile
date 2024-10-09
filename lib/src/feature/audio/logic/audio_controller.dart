@@ -71,7 +71,7 @@ class AudioController implements IAudioController {
     String newVoiceText = '';
 
     //высчитываем диапазоны времени участников
-    DateTime? dateTime = strTimeToDateTime(time);
+    DateTime? dateTime = time.toDateTime();
     if (dateTime != null) {
       start.add(DateFormat(shortTimeFormat).format(dateTime));
       dateTime = dateTime.add(const Duration(minutes: 1));
@@ -129,10 +129,10 @@ class AudioController implements IAudioController {
               .get();
           if (participants.isNotEmpty) {
             _isBetweenCategory = true;
-            final DateTime? lastStart = strTimeToDateTime(start.first);
+            final DateTime? lastStart = start.first.toDateTime();
             DateTime? nextStart;
             // if (participants.first.startTime != null) {
-            nextStart = strTimeToDateTime(participants.first.startTime);
+            nextStart = participants.first.startTime.toDateTime();
             // }
             if (lastStart != null && nextStart != null) {
               final Duration delay = nextStart.difference(lastStart);

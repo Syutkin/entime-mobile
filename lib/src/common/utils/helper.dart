@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-String strip(String? str) {
-  if (str == null || str == 'null') {
-    return '';
+import 'consts.dart';
+
+extension Strip on String? {
+  String strip() {
+    if (this == null || this == 'null') {
+      return '';
+    } else {
+      return this!.trim();
+    }
   }
-  return str;
 }
 
-DateTime? strTimeToDateTime(String time) {
-  final now = DateTime.now();
-  final dateFormatted = DateFormat('yyyy-MM-dd').format(now);
-  final DateTime? result = DateTime.tryParse('$dateFormatted $time');
-  return result;
+extension StrTimeToDateTime on String {
+  DateTime? toDateTime() {
+    final now = DateTime.now();
+    final dateFormatted = DateFormat(shortDateFormat).format(now);
+    return DateTime.tryParse('$dateFormatted $this');
+  }
 }
 
-String formatDate(DateTime dateTime) {
+String formatDate(DateTime dateTime, String? locale) {
   if (dateTime.year == DateTime.now().year) {
-    return DateFormat('MMMMd', 'ru_RU').format(dateTime);
+    return DateFormat('MMMMd', locale ?? 'ru_RU').format(dateTime);
   } else {
-    return DateFormat('yMMMMd', 'ru_RU').format(dateTime);
+    return DateFormat('yMMMMd', locale ?? 'ru_RU').format(dateTime);
   }
 }
 

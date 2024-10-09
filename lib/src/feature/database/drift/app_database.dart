@@ -256,7 +256,7 @@ class AppDatabase extends _$AppDatabase {
     bool forceUpdate = false,
     required int deltaInSeconds,
   }) async {
-    final DateTime? dateGoTime = strTimeToDateTime(time);
+    final DateTime? dateGoTime = time.toDateTime();
     if (dateGoTime == null) {
       throw FormatException('Invalid time format: $time');
       // assert(dateGoTime != null, 'dateGoTime must not be null');
@@ -341,7 +341,7 @@ class AppDatabase extends _$AppDatabase {
 
     if (participantsAroundTime.isNotEmpty) {
       final DateTime? startTime =
-          strTimeToDateTime(participantsAroundTime.first.startTime);
+          participantsAroundTime.first.startTime.toDateTime();
       if (startTime == null) {
         logger.e('Wrong time format: $startTime, can not convert to DateTime');
         return result;
@@ -382,7 +382,7 @@ class AppDatabase extends _$AppDatabase {
     required int stageId,
     int deltaInSeconds = 10,
   }) async {
-    final DateTime? beepDateTime = strTimeToDateTime(time);
+    final DateTime? beepDateTime = time.toDateTime();
     if (beepDateTime == null) {
       logger.e('Wrong time format: $time, can not convert to DateTime');
       return 0;
@@ -404,7 +404,7 @@ class AppDatabase extends _$AppDatabase {
     required String time,
     required int stageId,
   }) async {
-    final DateTime? dateTime = strTimeToDateTime(time);
+    final DateTime? dateTime = time.toDateTime();
     if (dateTime == null) {
       logger.e('Wrong time format: $time, can not convert to DateTime');
       return <GetStartingParticipantBetweenTimesResult>[];
@@ -474,7 +474,7 @@ class AppDatabase extends _$AppDatabase {
     DateTime? dateTimeNow,
     int? number,
   }) async {
-    final finishTime = strTimeToDateTime(finish);
+    final finishTime = finish.toDateTime();
     if (finishTime == null) {
       logger.e('Wrong time format: $finishTime, can not convert to DateTime');
       return null;
@@ -486,7 +486,7 @@ class AppDatabase extends _$AppDatabase {
         await _getLastFinishTime(stageId: stage.id!).getSingleOrNull();
     // проверяем разницу между предыдущей и поступившей отсечкой
     if (prevFinishTime != null) {
-      final prevFinishDateTime = strTimeToDateTime(prevFinishTime);
+      final prevFinishDateTime = prevFinishTime.toDateTime();
       if (prevFinishDateTime != null) {
         final difference = finishTime.difference(prevFinishDateTime);
         // скрываем отсечку, если разница меньше настройки
@@ -794,7 +794,7 @@ class AppDatabase extends _$AppDatabase {
         await _getLastFinishTimeWithNumber(stageId: stageId).getSingleOrNull();
 
     if (res != null) {
-      result = strTimeToDateTime(res);
+      result = res.toDateTime();
     }
     return result;
   }

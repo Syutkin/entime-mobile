@@ -94,7 +94,7 @@ class CountdownAtStart {
         )
         .get();
 
-    return res.isNotEmpty ? strTimeToDateTime(res.first.startTime) : null;
+    return res.isNotEmpty ? res.first.startTime.toDateTime() : null;
   }
 
   String _formatDuration(Duration duration) {

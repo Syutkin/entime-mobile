@@ -81,7 +81,7 @@ class FinishItemTile extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          strip(item.finishTime),
+                          item.finishTime.strip(),
                           style: DefaultTextStyle.of(context)
                               .style
                               .apply(fontSizeFactor: 2),
@@ -93,7 +93,7 @@ class FinishItemTile extends StatelessWidget {
                       child: Align(
                         child: Text(
                           candidateData.isEmpty
-                              ? strip(item.number.toString())
+                              ? item.number.toString().strip()
                               : candidateData.first.toString(),
                           style: DefaultTextStyle.of(context)
                               .style

@@ -78,7 +78,7 @@ class StartItemTile extends StatelessWidget {
                     flex: 25,
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(strip(item.manualCorrection.toString())),
+                      child: Text(item.manualCorrection.toString().strip()),
                     ),
                   ),
                   Flexible(
@@ -86,7 +86,7 @@ class StartItemTile extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        strip(item.automaticCorrection.toString()),
+                        item.automaticCorrection.toString().strip(),
                         style: DefaultTextStyle.of(context)
                             .style
                             .apply(fontSizeFactor: 1.5),

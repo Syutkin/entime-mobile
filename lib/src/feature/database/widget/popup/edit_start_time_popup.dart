@@ -33,7 +33,7 @@ Future<void> editStartTime(
     if (value == '' || value == null) {
       return null;
     }
-    if (strTimeToDateTime(value) == null) {
+    if (value.toDateTime() == null) {
       return Localization.current.I18nStart_incorrectTime;
     }
     return null;
