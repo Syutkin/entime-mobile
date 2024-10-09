@@ -700,7 +700,7 @@ void main() {
                   .having(
                     (automaticStart) => automaticStart.updating,
                     'updating',
-                    true,
+                    false,
                   ),
             ),
           ),

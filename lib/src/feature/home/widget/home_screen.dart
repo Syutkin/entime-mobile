@@ -219,7 +219,6 @@ class HomeScreen extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     children: <Widget>[
                       InitPage(),
-                      //ToDo: rework Start page
                       StartPage(),
                       FinishPage(),
                     ],
