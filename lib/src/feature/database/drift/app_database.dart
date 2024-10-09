@@ -744,7 +744,7 @@ class AppDatabase extends _$AppDatabase {
       log = (await customSelect('$selectLog $where;', readsFrom: {logs}).get())
           .cast<Log>();
     } else {
-      log = select(logs) as List<Log>;
+      log = await select(logs).get();
     }
     return log;
   }

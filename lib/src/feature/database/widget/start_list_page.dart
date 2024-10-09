@@ -1,13 +1,19 @@
+import 'dart:math';
+
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../common/utils/consts.dart';
 import '../../../common/utils/helper.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
+import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../countdown/countdown.dart';
 import '../../settings/settings.dart';
 import '../bloc/database_bloc.dart';
@@ -15,7 +21,9 @@ import '../drift/app_database.dart';
 import 'start_item_tile.dart';
 
 part 'popup/add_racer_popup.dart';
+
 part 'popup/edit_start_time_popup.dart';
+
 part 'popup/overwrite_start_time_popup.dart';
 
 class StartListPage extends StatefulWidget {
@@ -352,87 +360,100 @@ class _StartListPage extends State<StartListPage> {
                     }
                   },
                 ),
-                // persistentFooterButtons:
-                //     kReleaseMode ? null : _persistentFooterButtons(context),
+                persistentFooterButtons:
+                    kReleaseMode ? null : _persistentFooterButtons(context),
               );
             }),
       ),
     );
+  }
 
-    // List<Widget> _persistentFooterButtons(BuildContext context) => <Widget>[
-    //       TextButton(
-    //         onPressed: () {
-    //           BlocProvider.of<BluetoothBloc>(context).add(
-    //             BluetoothEvent.messageReceived(message:  'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
-    //             ),
-    //           );
-    //         },
-    //         child: const Icon(Icons.record_voice_over_rounded),
-    //       ),
-    //       TextButton(
-    //         onPressed: () {
-    //           BlocProvider.of<BluetoothBloc>(context).add(
-    //             BluetoothEvent.messageReceived(message:  'B${DateFormat(shortTimeFormat).format(DateTime.now())}#',
-    //             ),
-    //           );
-    //         },
-    //         child: const Icon(Icons.volume_up),
-    //       ),
-    //       // TextButton(
-    //       //   onPressed: () async {
-    //       //     BlocProvider.of<ProtocolBloc>(context)
-    //       //         .add(const ProtocolClearStartResultsDebug());
-    //       //   },
-    //       //   child: const Icon(Icons.clear_all),
-    //       // ),
-    //       TextButton(
-    //         onPressed: () {
-    //           final AutomaticStart automaticStart = AutomaticStart(
-    //             DateFormat(longTimeFormat).format(DateTime.now()),
-    //             1234,
-    //             DateTime.now(),
-    //           );
-    //           BlocProvider.of<ProtocolBloc>(context).add(
-    //             ProtocolUpdateAutomaticCorrection(
-    //               automaticStart: automaticStart,
-    //             ),
-    //           );
-    //         },
-    //         child: const Icon(Icons.play_arrow),
-    //       ),
-    //       TextButton(
-    //         onPressed: () {
-    //           BlocProvider.of<ProtocolBloc>(context).add(
-    //             const ProtocolEvent.addStartNumber(
-    //               startTime: StartTime('15:31:00', 111),
-    //               forceAdd: true,
-    //             ),
-    //           );
-    //           // final AutomaticStart automaticStart = AutomaticStart(
-    //           //   DateFormat(longTimeFormat).format(DateTime.now()),
-    //           //   1234,
-    //           //   DateTime.now(),
-    //           // );
-    //           // BlocProvider.of<ProtocolBloc>(context).add(
-    //           //   ProtocolEvent.updateAutomaticCorrection(
-    //           //     forceUpdate: true,
-    //           //     automaticStart: AutomaticStart(
-    //           //       '15:31:00',
-    //           //       Random().nextInt(9999) - 5000,
-    //           //       DateTime.now(),
-    //           //     ),
-    //           //   ),
-    //           // );
-    //           final int cor = Random().nextInt(9999) - 5000;
-    //           BlocProvider.of<BluetoothBloc>(context).add(
-    //             BluetoothEvent.messageReceived(
-    //               message: r'$' '15:31:01,121;$cor#',
-    //             ),
-    //           );
-    //         },
-    //         child: const Icon(Icons.bluetooth),
-    //       ),
-    //     ];
+  List<Widget> _persistentFooterButtons(BuildContext context) {
+    final databaseBloc = context.read<DatabaseBloc>();
+    final stage = databaseBloc.state.mapOrNull(initialized: (state) {
+      return state.stage;
+    });
+    final stageId = stage!.id!;
+    return <Widget>[
+      TextButton(
+        onPressed: () {
+          BlocProvider.of<BluetoothBloc>(context).add(
+            BluetoothEvent.messageReceived(
+              message:
+                  'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+            ),
+          );
+        },
+        child: const Icon(Icons.record_voice_over_rounded),
+      ),
+      TextButton(
+        onPressed: () {
+          BlocProvider.of<BluetoothBloc>(context).add(
+            BluetoothEvent.messageReceived(
+              message:
+                  'B${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+            ),
+          );
+        },
+        child: const Icon(Icons.volume_up),
+      ),
+      // TextButton(
+      //   onPressed: () async {
+      //     BlocProvider.of<ProtocolBloc>(context)
+      //         .add(const ProtocolClearStartResultsDebug());
+      //   },
+      //   child: const Icon(Icons.clear_all),
+      // ),
+      TextButton(
+        onPressed: () {
+          databaseBloc.add(
+            DatabaseEvent.updateAutomaticCorrection(
+              stageId: stageId,
+              correction: 1234,
+              timeStamp: DateTime.now(),
+              startTime: DateFormat(longTimeFormat).format(DateTime.now()),
+              // deltaInSeconds: ,
+              // forceUpdate: ,
+            ),
+          );
+        },
+        child: const Icon(Icons.play_arrow),
+      ),
+      TextButton(
+        onPressed: () {
+          databaseBloc.add(
+            DatabaseEvent.addStartNumber(
+              stage: stage,
+              number: 111,
+              startTime: '15:31:00',
+              forceAdd: true,
+            ),
+          );
+          // final AutomaticStart automaticStart = AutomaticStart(
+          //   DateFormat(longTimeFormat).format(DateTime.now()),
+          //   1234,
+          //   DateTime.now(),
+          // );
+          // BlocProvider.of<ProtocolBloc>(context).add(
+          //   ProtocolEvent.updateAutomaticCorrection(
+          //     forceUpdate: true,
+          //     automaticStart: AutomaticStart(
+          //       '15:31:00',
+          //       Random().nextInt(9999) - 5000,
+          //       DateTime.now(),
+          //     ),
+          //   ),
+          // );
+          final int cor = Random().nextInt(9999) - 5000;
+          BlocProvider.of<BluetoothBloc>(context).add(
+            BluetoothEvent.messageReceived(
+              message: r'$' '15:31:01,121;$cor#',
+            ),
+          );
+        },
+        child: const Icon(Icons.bluetooth),
+      ),
+    ];
   }
 }
 
