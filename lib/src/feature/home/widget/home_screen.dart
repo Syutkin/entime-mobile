@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../common/logger/logger.dart';
 import '../../../constants/pubspec.yaml.g.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../database/bloc/database_bloc.dart';
@@ -74,40 +73,42 @@ class HomeScreen extends StatelessWidget {
         child: BlocListener<DatabaseBloc, DatabaseState>(
           listener: (context, state) async {
             final databaseBloc = context.read<DatabaseBloc>();
-            // final materialLocalization = MaterialLocalizations.of(context);
             databaseBloc.state.mapOrNull(initialized: (state) async {
               // Обновление автоматического времени старта
               final notification = state.notification;
               if (notification != null) {
-                notification.map(
-                  //ToDo: update info for number
-                    updateNumber: (data) {
-                      logger.d('Notification.updateNumber in action');
-                    },
-                    updateAutomaticCorrection: (data) async {
-                      logger.d('Notification.updateAutomaticCorrection in action');
-                      final String text = Localization.current
-                          .I18nHome_updateAutomaticCorrection(
-                        data.number,
-                        data.previousStarts.first.automaticCorrection!,
-                        data.correction,
+                notification.mapOrNull(updateAutomaticCorrection: (data) async {
+                  final prevCorrection =
+                      data.previousStarts.first.automaticCorrection;
+                  // Если новая поправка для номера отличается от предыдущей
+                  // более чем на две секунды, то уточняем, точно ли обновлять?
+                  // Если разница менее двух секунд, то молча игнорируем отсечку
+                  // ToDo: засунуть 2000 в настройки
+                  if (prevCorrection != null &&
+                      data.correction - prevCorrection > 2000) {
+                    final String text =
+                        Localization.current.I18nHome_updateAutomaticCorrection(
+                      data.number,
+                      data.previousStarts.first.automaticCorrection!,
+                      data.correction,
+                    );
+                    final bool? update = await overwriteStartTimePopup(
+                      context: context,
+                      text: text,
+                    );
+                    if (update ?? false) {
+                      databaseBloc.add(
+                        DatabaseEvent.updateAutomaticCorrection(
+                          stageId: data.previousStarts.first.stageId,
+                          startTime: data.startTime,
+                          timeStamp: data.timeStamp,
+                          correction: data.correction,
+                          forceUpdate: true,
+                        ),
                       );
-                      final bool? update = await overwriteStartTimePopup(
-                        context: context,
-                        text: text,
-                      );
-                      if (update != null && update) {
-                        databaseBloc.add(
-                          DatabaseEvent.updateAutomaticCorrection(
-                            stageId: data.previousStarts.first.stageId,
-                            startTime: data.startTime,
-                            timeStamp: data.timeStamp,
-                            correction: data.correction,
-                            forceUpdate: true,
-                          ),
-                        );
-                      }
-                    });
+                    }
+                  }
+                });
               }
               // if (state.automaticStart != null &&
               //     state.automaticStart!.updating) {

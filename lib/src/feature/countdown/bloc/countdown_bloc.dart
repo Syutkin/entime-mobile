@@ -7,16 +7,25 @@ import '../../../common/utils/consts.dart';
 import '../logic/countdown.dart';
 
 part 'countdown_bloc.freezed.dart';
+
 part 'countdown_event.dart';
+
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   final CountdownAtStart _countdown;
+  final int _stageId;
 
   CountdownBloc({
     required CountdownAtStart countdown,
-  })  : _countdown = countdown,
+    required int stageId,
+  })
+      : _countdown = countdown,
+        _stageId = stageId,
         super(const CountdownState.initial()) {
+    if (stageId > 0) {
+      _countdown.start(_stageId);
+    }
     _countdown.value.listen((value) {
       add(
         CountdownEvent.tick(
@@ -42,7 +51,8 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
             emit(
               CountdownState.working(
                 text: event.text,
-                nextStartTime: DateFormat(shortTimeFormat).format(nextStartTime),
+                nextStartTime:
+                DateFormat(shortTimeFormat).format(nextStartTime),
               ),
             );
           }

@@ -243,7 +243,7 @@ class _SelectRaceWidget extends StatelessWidget {
 }
 
 class _SelectRaceRouterWidget extends StatelessWidget {
-  const _SelectRaceRouterWidget({super.key});
+  const _SelectRaceRouterWidget();
 
   @override
   Widget build(BuildContext context) {

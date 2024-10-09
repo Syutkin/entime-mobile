@@ -60,7 +60,7 @@ void main() async {
   testWidgets('Smoke test', (tester) async {
     await tester.pumpWidget(
       EntimeApp(
-        settings: settings,
+        settingsProvider: settings,
         updateProvider: updateProvider,
         bluetoothProvider: bluetoothProvider,
         audioController: audioController,

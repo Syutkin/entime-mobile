@@ -77,7 +77,7 @@ void main() {
     testWidgets('renders EntimeAppView', (tester) async {
       await tester.pumpWidget(
         EntimeApp(
-          settings: settingsProvider,
+          settingsProvider: settingsProvider,
           updateProvider: updateProvider,
           bluetoothProvider: bluetoothProvider,
           audioController: audioController,

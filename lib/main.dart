@@ -72,7 +72,7 @@ Future<void> main() async {
   final CountdownAtStart countdown = CountdownAtStart(database: database);
 
   final app = EntimeApp(
-    settings: settings,
+    settingsProvider: settings,
     updateProvider: updateProvider,
     bluetoothProvider: bluetoothProvider,
     audioController: audioController,
@@ -100,7 +100,7 @@ Future<void> main() async {
 }
 
 class EntimeApp extends StatelessWidget {
-  final SettingsProvider settings;
+  final SettingsProvider settingsProvider;
   final AppInfoProvider appInfo;
   final UpdateProvider updateProvider;
   final IBluetoothProvider bluetoothProvider;
@@ -112,7 +112,7 @@ class EntimeApp extends StatelessWidget {
 
   const EntimeApp({
     super.key,
-    required this.settings,
+    required this.settingsProvider,
     required this.updateProvider,
     required this.bluetoothProvider,
     required this.audioController,
@@ -128,29 +128,27 @@ class EntimeApp extends StatelessWidget {
             create: (context) => TabBloc(),
           ),
           BlocProvider<SettingsBloc>(
-            create: (context) => SettingsBloc(settings),
+            create: (context) => SettingsBloc(settingsProvider),
           ),
           BlocProvider<ModuleSettingsBloc>(
             create: (context) => ModuleSettingsBloc(),
           ),
           BlocProvider<LogBloc>(
             create: (context) => LogBloc(
-              settingsProvider: settings,
+              settingsProvider: settingsProvider,
               database: database,
             ),
           ),
           BlocProvider<DatabaseBloc>(
             create: (context) => DatabaseBloc(
               database: database,
-              settingsProvider: settings,
+              settingsProvider: settingsProvider,
             )..add(const DatabaseEvent.initialize()),
           ),
           BlocProvider<CountdownBloc>(
             create: (context) => CountdownBloc(
-              // protocolBloc: BlocProvider.of<ProtocolBloc>(context),
-              // database: database,
-              // tabBloc: BlocProvider.of<TabBloc>(context),
               countdown: countdown,
+              stageId: settingsProvider.settings.stageId,
             ),
           ),
           BlocProvider<BluetoothBloc>(
@@ -159,7 +157,7 @@ class EntimeApp extends StatelessWidget {
               bluetoothProvider: bluetoothProvider,
               // protocolProvider: protocolProvider,
               // logProvider: logProvider,
-              settingsProvider: settings,
+              settingsProvider: settingsProvider,
               database: database,
             )..add(const BluetoothEvent.initialize()),
           ),

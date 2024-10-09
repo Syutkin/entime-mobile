@@ -294,7 +294,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           messageList.first,
           correction,
           timeStamp,
-          updating: true,
+          // ToDo: проверить задержку на блоке перед отправкой нового стартового времени
+          updating: false,
         );
         return BluetoothMessage.automaticStart(
           automaticStart: automaticStart,

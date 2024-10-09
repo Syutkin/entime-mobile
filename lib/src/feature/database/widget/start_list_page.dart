@@ -297,7 +297,7 @@ class _StartListPage extends State<StartListPage> {
             initial: (state) => const SizedBox.shrink(),
             initialized: (state) {
               final databaseBloc = context.read<DatabaseBloc>();
-              final stage = state.stage;
+              // final stage = state.stage;
               return Scaffold(
                 // appBar: AppBar(
                 //   title: Text(stage?.name ?? 'n/a'),
@@ -448,6 +448,12 @@ class _StartListPage extends State<StartListPage> {
           BlocProvider.of<BluetoothBloc>(context).add(
             BluetoothEvent.messageReceived(
               message: r'$' '15:31:01,121;$cor#',
+            ),
+          );
+          final int cor2 = Random().nextInt(9999) - 5000;
+          BlocProvider.of<BluetoothBloc>(context).add(
+            BluetoothEvent.messageReceived(
+              message: r'$' '15:31:01,121;$cor2#',
             ),
           );
         },
