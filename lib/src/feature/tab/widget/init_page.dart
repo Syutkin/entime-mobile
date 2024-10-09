@@ -8,19 +8,20 @@ import '../../../common/widget/header_widget.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../database/bloc/database_bloc.dart';
 import '../../database/widget/races_list_page.dart';
+import '../../database/widget/stages_list_page.dart';
 import '../../log/log.dart';
 import '../../module_settings/module_settings.dart';
 
-class InitScreen extends StatefulWidget {
-  const InitScreen({
+class InitPage extends StatefulWidget {
+  const InitPage({
     super.key,
   });
 
   @override
-  State<InitScreen> createState() => _InitScreen();
+  State<InitPage> createState() => _InitPage();
 }
 
-class _InitScreen extends State<InitScreen> {
+class _InitPage extends State<InitPage> {
   @override
   Widget build(BuildContext context) => ListView(
         children: <Widget>[
@@ -201,33 +202,79 @@ class _SelectRaceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<DatabaseBloc, DatabaseState>(
-        builder: (context, databaseState) => ListTile(
-            //ToDo: select race
-            // onTap: () => routeToSelectFileScreen(context),
+          builder: (context, databaseState) {
+        return databaseState.map(initial: (initial) {
+          return ListTile(
             leading: IconButton(
-              icon: Icon(MdiIcons.database),
-              //ToDo: select race
+              icon: Icon(MdiIcons.flagCheckered),
               onPressed: () {},
-              // onPressed: () => routeToSelectFileScreen(context),
             ),
-            title: Text(Localization.current.I18nInit_startProtocol),
-            subtitle: databaseState.map(
-              initial: (_) {
-                return Text(Localization.current.I18nInit_pressToSelect);
+            title: Text(Localization.current.I18nInit_selectRace),
+            subtitle: Text(Localization.current.I18nInit_selectStage),
+          );
+        }, initialized: (initialized) {
+          void routeToSelectRace() {
+            if (initialized.race != null && initialized.stage != null) {
+              context.read<DatabaseBloc>().add(DatabaseEvent.deselectRace());
+            }
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                  builder: (context) => const _SelectRaceRouterWidget()),
+            );
+          }
+
+          return ListTile(
+            onTap: () => routeToSelectRace(),
+            leading: IconButton(
+              icon: Icon(MdiIcons.flagCheckered),
+              onPressed: () {
+                routeToSelectRace();
               },
+            ),
+            title: initialized.race == null
+                ? Text(Localization.current.I18nInit_selectRace)
+                : Text(initialized.race!.name),
+            subtitle: initialized.stage == null
+                ? Text(Localization.current.I18nInit_selectStage)
+                : Text(initialized.stage!.name),
+          );
+        });
+      });
+}
+
+class _SelectRaceRouterWidget extends StatelessWidget {
+  const _SelectRaceRouterWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocBuilder<DatabaseBloc, DatabaseState>(
+          builder: (context, state) => state.map(
+              initial: (state) => const CircularProgressIndicator(),
               initialized: (state) {
                 var race = state.race;
                 var stage = state.stage;
                 if (race == null) {
-                  return Text(Localization.current.I18nInit_pressToSelect);
+                  return RacesListPage();
                 } else {
                   if (stage == null) {
-                    return Text(race.name);
+                    return StagesListPage(
+                      race: race,
+                    );
                   } else {
-                    return Text(stage.name);
+                    _onWidgetDidBuild(() {
+                      Navigator.pop(context);
+                    });
                   }
                 }
-              },
-            )),
-      );
+                return const SizedBox();
+              })),
+    );
+  }
+
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      callback();
+    });
+  }
 }

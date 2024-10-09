@@ -27,7 +27,9 @@ mixin _$AppSettings {
   double get rate => throw _privateConstructorUsedError; // скорость речи
   String get language =>
       throw _privateConstructorUsedError; // = "ru-RU", // язык
-  String get recentFile =>
+// id выбранного соревнования и участка
+  int get raceId => throw _privateConstructorUsedError;
+  int get stageId =>
       throw _privateConstructorUsedError; // всегда включённый экран
   bool get wakelock =>
       throw _privateConstructorUsedError; // кнопки "добавить вручную" на экранах старта и финиша
@@ -74,7 +76,8 @@ mixin _$AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -107,7 +110,8 @@ mixin _$AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -144,7 +148,8 @@ mixin _$AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -177,7 +182,8 @@ mixin _$AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -214,7 +220,8 @@ mixin _$AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -247,7 +254,8 @@ mixin _$AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -316,7 +324,8 @@ abstract class $AppSettingsCopyWith<$Res> {
       double pitch,
       double rate,
       String language,
-      String recentFile,
+      int raceId,
+      int stageId,
       bool wakelock,
       bool startFab,
       double startFabSize,
@@ -364,7 +373,8 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? pitch = null,
     Object? rate = null,
     Object? language = null,
-    Object? recentFile = null,
+    Object? raceId = null,
+    Object? stageId = null,
     Object? wakelock = null,
     Object? startFab = null,
     Object? startFabSize = null,
@@ -421,10 +431,14 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      recentFile: null == recentFile
-          ? _value.recentFile
-          : recentFile // ignore: cast_nullable_to_non_nullable
-              as String,
+      raceId: null == raceId
+          ? _value.raceId
+          : raceId // ignore: cast_nullable_to_non_nullable
+              as int,
+      stageId: null == stageId
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
       wakelock: null == wakelock
           ? _value.wakelock
           : wakelock // ignore: cast_nullable_to_non_nullable
@@ -534,7 +548,8 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       double pitch,
       double rate,
       String language,
-      String recentFile,
+      int raceId,
+      int stageId,
       bool wakelock,
       bool startFab,
       double startFabSize,
@@ -580,7 +595,8 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? pitch = null,
     Object? rate = null,
     Object? language = null,
-    Object? recentFile = null,
+    Object? raceId = null,
+    Object? stageId = null,
     Object? wakelock = null,
     Object? startFab = null,
     Object? startFabSize = null,
@@ -637,10 +653,14 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      recentFile: null == recentFile
-          ? _value.recentFile
-          : recentFile // ignore: cast_nullable_to_non_nullable
-              as String,
+      raceId: null == raceId
+          ? _value.raceId
+          : raceId // ignore: cast_nullable_to_non_nullable
+              as int,
+      stageId: null == stageId
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
       wakelock: null == wakelock
           ? _value.wakelock
           : wakelock // ignore: cast_nullable_to_non_nullable
@@ -745,7 +765,8 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.pitch,
       required this.rate,
       required this.language,
-      required this.recentFile,
+      required this.raceId,
+      required this.stageId,
       required this.wakelock,
       required this.startFab,
       required this.startFabSize,
@@ -793,8 +814,11 @@ class _$AppSettingsImpl implements _AppSettings {
   @override
   final String language;
 // = "ru-RU", // язык
+// id выбранного соревнования и участка
   @override
-  final String recentFile;
+  final int raceId;
+  @override
+  final int stageId;
 // всегда включённый экран
   @override
   final bool wakelock;
@@ -857,7 +881,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
+    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
   }
 
   @override
@@ -875,8 +899,8 @@ class _$AppSettingsImpl implements _AppSettings {
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.language, language) ||
                 other.language == language) &&
-            (identical(other.recentFile, recentFile) ||
-                other.recentFile == recentFile) &&
+            (identical(other.raceId, raceId) || other.raceId == raceId) &&
+            (identical(other.stageId, stageId) || other.stageId == stageId) &&
             (identical(other.wakelock, wakelock) ||
                 other.wakelock == wakelock) &&
             (identical(other.startFab, startFab) ||
@@ -934,7 +958,8 @@ class _$AppSettingsImpl implements _AppSettings {
         pitch,
         rate,
         language,
-        recentFile,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -979,7 +1004,8 @@ class _$AppSettingsImpl implements _AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1012,7 +1038,8 @@ class _$AppSettingsImpl implements _AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1046,7 +1073,8 @@ class _$AppSettingsImpl implements _AppSettings {
         pitch,
         rate,
         language,
-        recentFile,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -1083,7 +1111,8 @@ class _$AppSettingsImpl implements _AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1116,7 +1145,8 @@ class _$AppSettingsImpl implements _AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1150,7 +1180,8 @@ class _$AppSettingsImpl implements _AppSettings {
         pitch,
         rate,
         language,
-        recentFile,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -1187,7 +1218,8 @@ class _$AppSettingsImpl implements _AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1220,7 +1252,8 @@ class _$AppSettingsImpl implements _AppSettings {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1256,7 +1289,8 @@ class _$AppSettingsImpl implements _AppSettings {
           pitch,
           rate,
           language,
-          recentFile,
+          raceId,
+          stageId,
           wakelock,
           startFab,
           startFabSize,
@@ -1325,7 +1359,8 @@ abstract class _AppSettings implements AppSettings {
       required final double pitch,
       required final double rate,
       required final String language,
-      required final String recentFile,
+      required final int raceId,
+      required final int stageId,
       required final bool wakelock,
       required final bool startFab,
       required final double startFabSize,
@@ -1367,8 +1402,11 @@ abstract class _AppSettings implements AppSettings {
   double get rate; // скорость речи
   @override
   String get language; // = "ru-RU", // язык
+// id выбранного соревнования и участка
   @override
-  String get recentFile; // всегда включённый экран
+  int get raceId;
+  @override
+  int get stageId; // всегда включённый экран
   @override
   bool get wakelock; // кнопки "добавить вручную" на экранах старта и финиша
   @override
@@ -1443,7 +1481,8 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       double pitch,
       double rate,
       String language,
-      String recentFile,
+      int raceId,
+      int stageId,
       bool wakelock,
       bool startFab,
       double startFabSize,
@@ -1489,7 +1528,8 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? pitch = null,
     Object? rate = null,
     Object? language = null,
-    Object? recentFile = null,
+    Object? raceId = null,
+    Object? stageId = null,
     Object? wakelock = null,
     Object? startFab = null,
     Object? startFabSize = null,
@@ -1546,10 +1586,14 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      recentFile: null == recentFile
-          ? _value.recentFile
-          : recentFile // ignore: cast_nullable_to_non_nullable
-              as String,
+      raceId: null == raceId
+          ? _value.raceId
+          : raceId // ignore: cast_nullable_to_non_nullable
+              as int,
+      stageId: null == stageId
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
       wakelock: null == wakelock
           ? _value.wakelock
           : wakelock // ignore: cast_nullable_to_non_nullable
@@ -1654,7 +1698,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.pitch = 1.0,
       this.rate = 0.5,
       this.language = 'ru-RU',
-      this.recentFile = '',
+      this.raceId = -1,
+      this.stageId = -1,
       this.wakelock = true,
       this.startFab = true,
       this.startFabSize = 75,
@@ -1712,9 +1757,14 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @JsonKey()
   final String language;
 // = "ru-RU", // язык
+// ToDo: не изменять эти настройки при установке значений по умолчанию
+// id выбранного соревнования и участка
   @override
   @JsonKey()
-  final String recentFile;
+  final int raceId;
+  @override
+  @JsonKey()
+  final int stageId;
 // всегда включённый экран
   @override
   @JsonKey()
@@ -1799,7 +1849,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
+    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
   }
 
   @override
@@ -1817,8 +1867,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.language, language) ||
                 other.language == language) &&
-            (identical(other.recentFile, recentFile) ||
-                other.recentFile == recentFile) &&
+            (identical(other.raceId, raceId) || other.raceId == raceId) &&
+            (identical(other.stageId, stageId) || other.stageId == stageId) &&
             (identical(other.wakelock, wakelock) ||
                 other.wakelock == wakelock) &&
             (identical(other.startFab, startFab) ||
@@ -1876,7 +1926,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         pitch,
         rate,
         language,
-        recentFile,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -1922,7 +1973,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1955,7 +2007,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1989,7 +2042,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         pitch,
         rate,
         language,
-        recentFile,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -2026,7 +2080,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -2059,7 +2114,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -2093,7 +2149,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         pitch,
         rate,
         language,
-        recentFile,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -2130,7 +2187,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -2163,7 +2221,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double pitch,
             double rate,
             String language,
-            String recentFile,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -2199,7 +2258,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           pitch,
           rate,
           language,
-          recentFile,
+          raceId,
+          stageId,
           wakelock,
           startFab,
           startFabSize,
@@ -2268,7 +2328,8 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final double pitch,
       final double rate,
       final String language,
-      final String recentFile,
+      final int raceId,
+      final int stageId,
       final bool wakelock,
       final bool startFab,
       final double startFabSize,
@@ -2310,8 +2371,12 @@ abstract class _AppSettingsDefaults implements AppSettings {
   double get rate; // скорость речи
   @override
   String get language; // = "ru-RU", // язык
+// ToDo: не изменять эти настройки при установке значений по умолчанию
+// id выбранного соревнования и участка
   @override
-  String get recentFile; // всегда включённый экран
+  int get raceId;
+  @override
+  int get stageId; // всегда включённый экран
   @override
   bool get wakelock; // кнопки "добавить вручную" на экранах старта и финиша
   @override

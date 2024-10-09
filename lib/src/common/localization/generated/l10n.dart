@@ -1085,11 +1085,21 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Стартовый протокол`
-  String get I18nInit_startProtocol {
+  /// `Выберите соревнование`
+  String get I18nInit_selectRace {
     return Intl.message(
-      'Стартовый протокол',
-      name: 'I18nInit_startProtocol',
+      'Выберите соревнование',
+      name: 'I18nInit_selectRace',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выберите спецучасток`
+  String get I18nInit_selectStage {
+    return Intl.message(
+      'Выберите спецучасток',
+      name: 'I18nInit_selectStage',
       desc: '',
       args: [],
     );

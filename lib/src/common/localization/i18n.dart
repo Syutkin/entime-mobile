@@ -643,10 +643,20 @@ class I18nHome {
 }
 
 class I18nInit {
-  static String get startProtocol => Intl.message(
-        'Стартовый протокол',
-        name: 'I18nInit_startProtocol',
-      );
+  // static String get startProtocol => Intl.message(
+  //       'Стартовый протокол',
+  //       name: 'I18nInit_startProtocol',
+  //     );
+
+  static String get selectRace => Intl.message(
+    'Выберите соревнование',
+    name: 'I18nInit_selectRace',
+  );
+
+  static String get selectStage => Intl.message(
+    'Выберите спецучасток',
+    name: 'I18nInit_selectStage',
+  );
 
   static String get pressToSelect => Intl.message(
         'Нажмите чтобы выбрать',

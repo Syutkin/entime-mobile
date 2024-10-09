@@ -12,9 +12,7 @@ import '../drift/app_database.dart';
 import '../model/notification.dart';
 
 part 'database_bloc.freezed.dart';
-
 part 'database_event.dart';
-
 part 'database_state.dart';
 
 class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
@@ -153,7 +151,27 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     on<DatabaseEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         initialize: (event) async {
-          add(DatabaseEvent.getRaces());
+          final raceId = _settingsProvider.settings.raceId;
+          if (raceId > 0) {
+            _races = await _db.getRaces().get();
+            for (var race in _races) {
+              if (race.id == raceId) {
+                _race = race;
+                _stages = await _db.getStages(raceId: raceId).get();
+              }
+            }
+          }
+
+          final stageId = _settingsProvider.settings.stageId;
+          if (stageId > 0) {
+            for (var stage in _stages) {
+              if (stage.id == stageId) {
+                // _stage = stage;
+                add(DatabaseEvent.selectStage(stage));
+              }
+            }
+          }
+
           // _races = await _db.select(_db.races).get();
           // _stages = await _db.select(_db.stages).get();
           // _riders = await _db.select(_db.riders).get();
@@ -216,8 +234,15 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           _race = event.race;
           var raceId = event.race.id;
           if (raceId != null) {
+            var settings = _settingsProvider.settings.copyWith(raceId: raceId);
+            _settingsProvider.update(settings);
             add(DatabaseEvent.getStages(raceId));
           }
+        },
+        deselectRace: (event) {
+          _race = null;
+          _stage = null;
+          _emitState();
         },
         addStage: (event) async {
           await _db.addStage(
@@ -239,6 +264,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
           /// Fill state with data
           if (stageId != null) {
+            var settings =
+                _settingsProvider.settings.copyWith(stageId: stageId);
+            _settingsProvider.update(settings);
             _participants =
                 await _db.getParticipantsAtStart(stageId: stageId).get();
             _numbersOnTrace = await _db

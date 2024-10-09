@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +33,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       pitch: prefs.getDouble('pitch') ?? defaults.pitch,
       rate: prefs.getDouble('rate') ?? defaults.rate,
       language: prefs.getString('language') ?? defaults.language,
-      recentFile: prefs.getString('recentFile') ?? defaults.recentFile,
+      raceId: prefs.getInt('raceId') ?? -1,
+      stageId: prefs.getInt('stageId') ?? -1,
       wakelock: prefs.getBool('wakelock') ?? defaults.wakelock,
       startFab: prefs.getBool('startFab') ?? defaults.startFab,
       startFabSize: prefs.getDouble('startFabSize') ?? defaults.startFabSize,
@@ -63,10 +63,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           prefs.getString('previousVersion') ?? defaults.previousVersion,
     );
 
-    // Для похождения тестов, пока Wakelock не поддерживает Linux,
-    if (!Platform.isLinux) {
-      await WakelockPlus.toggle(enable: settings.wakelock);
-    }
+    await WakelockPlus.toggle(enable: settings.wakelock);
 
     return SharedPrefsSettingsProvider._(
       prefs,
@@ -89,10 +86,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   Future<void> _save(AppSettings settings) async {
     if (settings.wakelock != _settings.wakelock) {
-      // Для похождения тестов, пока Wakelock не поддерживает Linux,
-      if (!Platform.isLinux) {
-        await WakelockPlus.toggle(enable: settings.wakelock);
-      }
+      await WakelockPlus.toggle(enable: settings.wakelock);
     }
     await _prefs.setBool('sound', settings.sound);
     await _prefs.setBool('beep', settings.beep);
@@ -102,7 +96,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setDouble('pitch', settings.pitch);
     await _prefs.setDouble('rate', settings.rate);
     await _prefs.setString('language', settings.language);
-    await _prefs.setString('recentFile', settings.recentFile);
+    await _prefs.setInt('raceId', settings.raceId);
+    await _prefs.setInt('stageId', settings.stageId);
     await _prefs.setBool('wakelock', settings.wakelock);
     await _prefs.setBool('start_fab', settings.startFab);
     await _prefs.setDouble('start_fab_size', settings.startFabSize);

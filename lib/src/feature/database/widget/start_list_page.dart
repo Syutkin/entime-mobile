@@ -291,35 +291,35 @@ class _StartListPage extends State<StartListPage> {
               final databaseBloc = context.read<DatabaseBloc>();
               final stage = state.stage;
               return Scaffold(
-                appBar: AppBar(
-                  title: Text(stage?.name ?? 'n/a'),
-                  actions: [
-                    PopupMenuButton<int>(
-                      icon: const Icon(Icons.more_vert),
-                      itemBuilder: (context) => <PopupMenuEntry<int>>[
-                        PopupMenuItem<int>(
-                          value: 1,
-                          child: ListTile(
-                            leading: const Icon(Icons.add),
-                            title: Text(Localization.current.I18nHome_addRacer),
-                          ),
-                        ),
-                      ],
-                      onSelected: (value) async {
-                        switch (value) {
-                          case 1:
-                            if (stage != null) {
-                              await addRacerPopup(
-                                context: context,
-                                stage: stage,
-                              );
-                            }
-                            break;
-                        }
-                      },
-                    ),
-                  ],
-                ),
+                // appBar: AppBar(
+                //   title: Text(stage?.name ?? 'n/a'),
+                //   actions: [
+                //     PopupMenuButton<int>(
+                //       icon: const Icon(Icons.more_vert),
+                //       itemBuilder: (context) => <PopupMenuEntry<int>>[
+                //         PopupMenuItem<int>(
+                //           value: 1,
+                //           child: ListTile(
+                //             leading: const Icon(Icons.add),
+                //             title: Text(Localization.current.I18nHome_addRacer),
+                //           ),
+                //         ),
+                //       ],
+                //       onSelected: (value) async {
+                //         switch (value) {
+                //           case 1:
+                //             if (stage != null) {
+                //               await addRacerPopup(
+                //                 context: context,
+                //                 stage: stage,
+                //               );
+                //             }
+                //             break;
+                //         }
+                //       },
+                //     ),
+                //   ],
+                // ),
                 body: Stack(
                   key: _stackKey,
                   children: [

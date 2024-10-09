@@ -30,6 +30,8 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.selectRace(Race race) = _SelectRace;
 
+  const factory DatabaseEvent.deselectRace() = _DeselectRace;
+
   const factory DatabaseEvent.addStage(Stage stage) = _AddStage;
 
   const factory DatabaseEvent.deleteStage(int id) = _DeleteStage;

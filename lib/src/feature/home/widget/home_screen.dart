@@ -11,12 +11,12 @@ import '../../database/model/filter_finish.dart';
 import '../../database/widget/races_list_page.dart';
 import '../../database/widget/start_list_page.dart';
 import '../../drawer/widget/app_drawer.dart';
-import '../../init/init.dart';
 import '../../module_settings/module_settings.dart';
 import '../../protocol_screens/model/menu_button.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../../tab/tab.dart';
 import '../../tab/widget/finish_page.dart';
+import '../../tab/widget/init_page.dart';
 import '../../tab/widget/start_page.dart';
 import '../../update/update.dart';
 
@@ -217,7 +217,7 @@ class HomeScreen extends StatelessWidget {
                   child: const TabBarView(
                     physics: NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      InitScreen(),
+                      InitPage(),
                       //ToDo: rework Start page
                       StartPage(),
                       FinishPage(),

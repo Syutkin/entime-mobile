@@ -13,10 +13,9 @@
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-final messages = MessageLookup();
+final messages = new MessageLookup();
 
-typedef MessageIfAbsent = String Function(
-    String messageStr, List<dynamic> args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
@@ -157,9 +156,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Нажмите чтобы выбрать"),
         "I18nInit_selectFile":
             MessageLookupByLibrary.simpleMessage("Выберите файл"),
+        "I18nInit_selectRace":
+            MessageLookupByLibrary.simpleMessage("Выберите соревнование"),
+        "I18nInit_selectStage":
+            MessageLookupByLibrary.simpleMessage("Выберите спецучасток"),
         "I18nInit_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
-        "I18nInit_startProtocol":
-            MessageLookupByLibrary.simpleMessage("Стартовый протокол"),
         "I18nLog_bluetoothInformation":
             MessageLookupByLibrary.simpleMessage("Информация Bluetooth"),
         "I18nModuleSettings_awaitingSettings":

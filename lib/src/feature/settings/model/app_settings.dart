@@ -21,7 +21,9 @@ class AppSettings with _$AppSettings {
     required double rate, // скорость речи
     required String language, // = "ru-RU", // язык
 
-    required String recentFile,
+    // id выбранного соревнования и участка
+    required int raceId,
+    required int stageId,
 
     // всегда включённый экран
     required bool wakelock,
@@ -89,7 +91,10 @@ class AppSettings with _$AppSettings {
     @Default(0.5) double rate, // скорость речи
     @Default('ru-RU') String language, // = "ru-RU", // язык
 
-    @Default('') String recentFile,
+    // ToDo: не изменять эти настройки при установке значений по умолчанию
+    // id выбранного соревнования и участка
+    @Default(-1) int raceId,
+    @Default(-1) int stageId,
 
     // всегда включённый экран
     @Default(true) bool wakelock,
