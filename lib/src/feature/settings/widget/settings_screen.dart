@@ -58,7 +58,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.reconnect,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings:
                             settingsState.settings.copyWith(reconnect: value),
                       ),
@@ -71,7 +71,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.sound,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings: settingsState.settings.copyWith(sound: value),
                       ),
                     );
@@ -84,7 +84,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.wakelock,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings:
                             settingsState.settings.copyWith(wakelock: value),
                       ),
@@ -102,7 +102,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.beep,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings: settingsState.settings.copyWith(beep: value),
                       ),
                     );
@@ -119,7 +119,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.voice,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings: settingsState.settings.copyWith(voice: value),
                       ),
                     );
@@ -133,7 +133,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.voiceName,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings:
                             settingsState.settings.copyWith(voiceName: value),
                       ),
@@ -149,7 +149,7 @@ class _SettingsList extends StatelessWidget {
                     final value = await setVolumePopup(context, settingsState);
                     if (value != null) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings:
                               settingsState.settings.copyWith(volume: value),
                         ),
@@ -166,7 +166,7 @@ class _SettingsList extends StatelessWidget {
                     final value = await setPitchPopup(context, settingsState);
                     if (value != null) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings:
                               settingsState.settings.copyWith(pitch: value),
                         ),
@@ -183,7 +183,7 @@ class _SettingsList extends StatelessWidget {
                     final value = await setRatePopup(context, settingsState);
                     if (value != null) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings:
                               settingsState.settings.copyWith(rate: value),
                         ),
@@ -210,7 +210,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.startFab,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings:
                             settingsState.settings.copyWith(startFab: value),
                       ),
@@ -235,7 +235,7 @@ class _SettingsList extends StatelessWidget {
                     );
                     if (value != null) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings: settingsState.settings
                               .copyWith(startFabSize: value),
                         ),
@@ -250,7 +250,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.countdown,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings:
                             settingsState.settings.copyWith(countdown: value),
                       ),
@@ -276,7 +276,7 @@ class _SettingsList extends StatelessWidget {
                     );
                     if (value != null) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings: settingsState.settings
                               .copyWith(countdownSize: value),
                         ),
@@ -293,7 +293,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.countdownAtStartTime,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings: settingsState.settings
                             .copyWith(countdownAtStartTime: value),
                       ),
@@ -323,7 +323,7 @@ class _SettingsList extends StatelessWidget {
                     );
                     if (value != null) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings: settingsState.settings
                               .copyWith(finishDelay: value),
                         ),
@@ -338,7 +338,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.substituteNumbers,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings: settingsState.settings
                             .copyWith(substituteNumbers: value),
                       ),
@@ -363,7 +363,7 @@ class _SettingsList extends StatelessWidget {
                     );
                     if (value != null) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings: settingsState.settings
                               .copyWith(substituteNumbersDelay: value),
                         ),
@@ -377,7 +377,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.finishFab,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings:
                             settingsState.settings.copyWith(finishFab: value),
                       ),
@@ -402,7 +402,7 @@ class _SettingsList extends StatelessWidget {
                     );
                     if (value != null) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings: settingsState.settings
                               .copyWith(finishFabSize: value),
                         ),
@@ -424,7 +424,7 @@ class _SettingsList extends StatelessWidget {
                   initialValue: settingsState.settings.checkUpdates,
                   onToggle: (value) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings: settingsState.settings
                             .copyWith(checkUpdates: value),
                       ),
@@ -457,7 +457,7 @@ class _SettingsList extends StatelessWidget {
                     );
                     if (value != null) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings:
                               settingsState.settings.copyWith(logLimit: value),
                         ),
@@ -475,7 +475,7 @@ class _SettingsList extends StatelessWidget {
                       Text(Localization.current.I18nSettings_resetToDefaults),
                   //leading:  Icon(MdiIcons.backupRestore),
                   onPressed: (context) {
-                    settingsBloc.add(const SettingsEventSetDefault());
+                    settingsBloc.add(const SettingsEvent.setDefault());
                   },
                 ),
               ],
@@ -489,38 +489,60 @@ class _SettingsList extends StatelessWidget {
   List<SettingsTile> _themes(SettingsBloc bloc) {
     final settings = bloc.state.settings;
     final List<SettingsTile> result = [];
-    final AppTheme appTheme = settings.appTheme;
-    for (final element in AppTheme.values) {
+    final seedColor = settings.seedColor;
+    result.add(
+      SettingsTile.switchTile(
+        title: Text(
+          Localization.current.I18nSettings_brightness,
+        ),
+        // titleMaxLines: 2,
+        //leading:  Icon(MdiIcons.timer),
+        initialValue: settings.brightness == Brightness.light ? true : false,
+        onToggle: (value) {
+          bloc.add(
+            SettingsEvent.update(
+              settings: settings.copyWith(
+                  brightness: value ? Brightness.light : Brightness.dark),
+            ),
+          );
+        },
+      ),
+    );
+    for (final colorSeed in ColorSeed.values) {
       result.add(
         SettingsTile(
-          title: Text(element.str()),
+          title: Text(colorSeed.name),
           leading: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: appThemeData[element]!.colorScheme.surface,
+              color: appThemeData(
+                seedColor: colorSeed,
+                brightness: settings.brightness,
+              ).colorScheme.surface,
             ),
             child: Icon(
               MdiIcons.palette,
-              color: appThemeData[element]!.colorScheme.primary,
+              color: appThemeData(
+                seedColor: colorSeed,
+                brightness: settings.brightness,
+              ).colorScheme.primary,
             ),
           ),
           trailing: Radio(
-            groupValue: appTheme,
+            groupValue: seedColor,
             onChanged: (value) {
-              // settingsBloc.add(ThemeChanged(element));
               bloc.add(
-                SettingsEventUpdate(
-                  settings: settings.copyWith(appTheme: element),
+                SettingsEvent.update(
+                  settings: settings.copyWith(seedColor: colorSeed),
                 ),
               );
             },
-            value: element,
+            value: colorSeed,
           ),
           onPressed: (context) {
-            // settingsBloc.add(ThemeChanged(element));
             bloc.add(
-              SettingsEventUpdate(
-                settings: settings.copyWith(appTheme: element),
+              SettingsEvent.update(
+                settings: settings.copyWith(seedColor: colorSeed),
               ),
             );
           },

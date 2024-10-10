@@ -125,12 +125,12 @@ sealed class Pubspec {
   static final DateTime timestamp = DateTime.utc(
     2024,
     10,
-    9,
-    1,
-    59,
-    35,
-    943,
-    796,
+    10,
+    3,
+    20,
+    39,
+    941,
+    575,
   );
 
   /// Name
@@ -466,6 +466,7 @@ sealed class Pubspec {
     'mocktail': r'^1.0.4',
     'pubspec_generator': r'^4.0.0',
     'sqflite_common_ffi': r'^2.3.3+1',
+    'test': r'^1.25.7',
   };
 
   /// Dependency overrides

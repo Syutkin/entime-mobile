@@ -186,7 +186,7 @@ class _StartListPage extends State<StartListPage> {
     final settingsBloc = context.read<SettingsBloc>();
     final settings = settingsBloc.state.settings;
     settingsBloc.add(
-      SettingsEventUpdate(
+      SettingsEvent.update(
         settings: settings.copyWith(
           countdownLeft: dx,
           countdownTop: dy,

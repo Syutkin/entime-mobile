@@ -481,6 +481,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Светлая тема`
+  String get I18nSettings_brightness {
+    return Intl.message(
+      'Светлая тема',
+      name: 'I18nSettings_brightness',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Журнал`
   String get I18nSettings_journal {
     return Intl.message(

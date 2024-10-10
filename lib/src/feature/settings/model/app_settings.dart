@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../settings.dart';
@@ -70,7 +73,11 @@ class AppSettings with _$AppSettings {
     required int logLimit,
 
     // активная тема
-    required AppTheme appTheme,
+    // required AppTheme appTheme,
+    required ColorSeed seedColor,
+    required Brightness brightness,
+    required double contrastLevel,
+    required DynamicSchemeVariant dynamicSchemeVariant,
 
     // версия при предыдущем запуске
     required String previousVersion,
@@ -141,7 +148,11 @@ class AppSettings with _$AppSettings {
     @Default(-1) int logLimit,
 
     // активная тема
-    @Default(AppTheme.lightBlue) AppTheme appTheme,
+    // @Default(AppTheme.lightBlue) AppTheme appTheme,
+    @Default(ColorSeed.blue) ColorSeed seedColor,
+    @Default(Brightness.light)  Brightness brightness,
+    @Default(-1.0) double contrastLevel,
+    @Default(DynamicSchemeVariant.vibrant) DynamicSchemeVariant dynamicSchemeVariant,
 
     // версия при предыдущем запуске
     @Default('0.0.0') String previousVersion,

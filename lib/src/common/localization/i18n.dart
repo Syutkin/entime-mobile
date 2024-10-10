@@ -227,6 +227,11 @@ class I18nSettings {
         name: 'I18nSettings_themes',
       );
 
+  static String get brightness => Intl.message(
+    'Светлая тема',
+    name: 'I18nSettings_brightness',
+  );
+
   static String get journal => Intl.message(
         'Журнал',
         name: 'I18nSettings_journal',

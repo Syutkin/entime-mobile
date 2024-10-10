@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -58,7 +59,14 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           defaults.substituteNumbersDelay,
       deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
       logLimit: prefs.getInt('logLimit') ?? defaults.logLimit,
-      appTheme: themeFromString(prefs.getString('theme')),
+      seedColor: ColorSeed.values
+          .byName(prefs.getString('seedColor') ?? defaults.seedColor.name),
+      brightness: Brightness.values
+          .byName(prefs.getString('brightness') ?? defaults.brightness.name),
+      contrastLevel: prefs.getDouble('contrastLevel') ?? defaults.contrastLevel,
+      dynamicSchemeVariant: DynamicSchemeVariant.values.byName(
+          prefs.getString('dynamicSchemeVariant') ??
+              defaults.dynamicSchemeVariant.name),
       previousVersion:
           prefs.getString('previousVersion') ?? defaults.previousVersion,
     );
@@ -121,7 +129,10 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     );
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
     await _prefs.setInt('log_limit', settings.logLimit);
-    await _prefs.setString('theme', settings.appTheme.stringify);
+    await _prefs.setString('seedColor', settings.seedColor.name);
+    await _prefs.setString('brightness', settings.brightness.name);
+    await _prefs.setDouble('contrastLevel', settings.contrastLevel);
+    await _prefs.setString('dynamicSchemeVariant', settings.dynamicSchemeVariant.name);
     await _prefs.setString('previousVersion', settings.previousVersion);
 
     _settings = settings;

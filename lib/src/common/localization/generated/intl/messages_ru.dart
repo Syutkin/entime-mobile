@@ -282,6 +282,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Задержка перед автоматическим подставлением новых номеров"),
         "I18nSettings_bluetooth":
             MessageLookupByLibrary.simpleMessage("Bluetooth"),
+        "I18nSettings_brightness":
+            MessageLookupByLibrary.simpleMessage("Светлая тема"),
         "I18nSettings_checkUpdateAtStartup":
             MessageLookupByLibrary.simpleMessage(
                 "Проверка обновлений при старте"),

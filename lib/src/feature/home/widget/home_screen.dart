@@ -303,7 +303,7 @@ class _FinishFilterButton extends StatelessWidget {
               switch (value) {
                 case FilterFinish.hideMarked:
                   settingsBloc.add(
-                    SettingsEventUpdate(
+                    SettingsEvent.update(
                       settings:
                           settings.copyWith(hideMarked: !settings.hideMarked),
                     ),
@@ -311,7 +311,7 @@ class _FinishFilterButton extends StatelessWidget {
                   break;
                 case FilterFinish.hideNumbers:
                   settingsBloc.add(
-                    SettingsEventUpdate(
+                    SettingsEvent.update(
                       settings: settings.copyWith(
                         hideNumbers: !settings.hideNumbers,
                       ),
@@ -320,7 +320,7 @@ class _FinishFilterButton extends StatelessWidget {
                   break;
                 case FilterFinish.hideManual:
                   settingsBloc.add(
-                    SettingsEventUpdate(
+                    SettingsEvent.update(
                       settings:
                           settings.copyWith(hideManual: !settings.hideManual),
                     ),
@@ -328,7 +328,7 @@ class _FinishFilterButton extends StatelessWidget {
                   break;
                 case FilterFinish.setDefaults:
                   settingsBloc.add(
-                    SettingsEventUpdate(
+                    SettingsEvent.update(
                       settings: settings.copyWith(
                         hideMarked: true,
                         hideNumbers: false,
@@ -470,14 +470,14 @@ class _MenuButton extends StatelessWidget {
                   case MenuButton.fab:
                     if (activeTab == AppTab.start) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings:
                               settings.copyWith(startFab: !settings.startFab),
                         ),
                       );
                     } else if (activeTab == AppTab.finish) {
                       settingsBloc.add(
-                        SettingsEventUpdate(
+                        SettingsEvent.update(
                           settings: settings.copyWith(
                             finishFab: !settings.finishFab,
                           ),
@@ -508,7 +508,7 @@ class _MenuButton extends StatelessWidget {
                     break;
                   case MenuButton.countdown:
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings:
                             settings.copyWith(countdown: !settings.countdown),
                       ),

@@ -183,9 +183,19 @@ class EntimeAppView extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<SettingsBloc, SettingsState>(
         buildWhen: (previousState, state) =>
-            previousState.settings.appTheme != state.settings.appTheme,
+            previousState.settings.seedColor != state.settings.seedColor ||
+            previousState.settings.brightness != state.settings.brightness ||
+            previousState.settings.contrastLevel !=
+                state.settings.contrastLevel ||
+            previousState.settings.dynamicSchemeVariant !=
+                state.settings.dynamicSchemeVariant,
         builder: (context, state) => MaterialApp(
-          theme: appThemeData[state.settings.appTheme],
+          theme: appThemeData(
+            seedColor: state.settings.seedColor,
+            brightness: state.settings.brightness,
+            contrastLevel: state.settings.contrastLevel,
+            dynamicSchemeVariant: state.settings.dynamicSchemeVariant,
+          ),
           title: Pubspec.name,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,

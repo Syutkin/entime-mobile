@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-09T02:03:47.090423",
+  "@@last_modified": "2024-10-10T06:40:32.869881",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -222,6 +222,11 @@
   },
   "I18nSettings_themes": "Темы",
   "@I18nSettings_themes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_brightness": "Светлая тема",
+  "@I18nSettings_brightness": {
     "type": "text",
     "placeholders": {}
   },

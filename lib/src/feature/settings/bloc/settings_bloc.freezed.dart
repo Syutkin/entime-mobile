@@ -40,23 +40,23 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SettingsEventInitialize value) initialize,
-    required TResult Function(SettingsEventSetDefault value) setDefault,
-    required TResult Function(SettingsEventUpdate value) update,
+    required TResult Function(_SettingsEventInitialize value) initialize,
+    required TResult Function(_SettingsEventSetDefault value) setDefault,
+    required TResult Function(_SettingsEventUpdate value) update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SettingsEventInitialize value)? initialize,
-    TResult? Function(SettingsEventSetDefault value)? setDefault,
-    TResult? Function(SettingsEventUpdate value)? update,
+    TResult? Function(_SettingsEventInitialize value)? initialize,
+    TResult? Function(_SettingsEventSetDefault value)? setDefault,
+    TResult? Function(_SettingsEventUpdate value)? update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SettingsEventInitialize value)? initialize,
-    TResult Function(SettingsEventSetDefault value)? setDefault,
-    TResult Function(SettingsEventUpdate value)? update,
+    TResult Function(_SettingsEventInitialize value)? initialize,
+    TResult Function(_SettingsEventSetDefault value)? setDefault,
+    TResult Function(_SettingsEventUpdate value)? update,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -106,7 +106,7 @@ class __$$SettingsEventInitializeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SettingsEventInitializeImpl implements SettingsEventInitialize {
+class _$SettingsEventInitializeImpl implements _SettingsEventInitialize {
   const _$SettingsEventInitializeImpl();
 
   @override
@@ -161,9 +161,9 @@ class _$SettingsEventInitializeImpl implements SettingsEventInitialize {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SettingsEventInitialize value) initialize,
-    required TResult Function(SettingsEventSetDefault value) setDefault,
-    required TResult Function(SettingsEventUpdate value) update,
+    required TResult Function(_SettingsEventInitialize value) initialize,
+    required TResult Function(_SettingsEventSetDefault value) setDefault,
+    required TResult Function(_SettingsEventUpdate value) update,
   }) {
     return initialize(this);
   }
@@ -171,9 +171,9 @@ class _$SettingsEventInitializeImpl implements SettingsEventInitialize {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SettingsEventInitialize value)? initialize,
-    TResult? Function(SettingsEventSetDefault value)? setDefault,
-    TResult? Function(SettingsEventUpdate value)? update,
+    TResult? Function(_SettingsEventInitialize value)? initialize,
+    TResult? Function(_SettingsEventSetDefault value)? setDefault,
+    TResult? Function(_SettingsEventUpdate value)? update,
   }) {
     return initialize?.call(this);
   }
@@ -181,9 +181,9 @@ class _$SettingsEventInitializeImpl implements SettingsEventInitialize {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SettingsEventInitialize value)? initialize,
-    TResult Function(SettingsEventSetDefault value)? setDefault,
-    TResult Function(SettingsEventUpdate value)? update,
+    TResult Function(_SettingsEventInitialize value)? initialize,
+    TResult Function(_SettingsEventSetDefault value)? setDefault,
+    TResult Function(_SettingsEventUpdate value)? update,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -193,8 +193,8 @@ class _$SettingsEventInitializeImpl implements SettingsEventInitialize {
   }
 }
 
-abstract class SettingsEventInitialize implements SettingsEvent {
-  const factory SettingsEventInitialize() = _$SettingsEventInitializeImpl;
+abstract class _SettingsEventInitialize implements SettingsEvent {
+  const factory _SettingsEventInitialize() = _$SettingsEventInitializeImpl;
 }
 
 /// @nodoc
@@ -220,7 +220,7 @@ class __$$SettingsEventSetDefaultImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SettingsEventSetDefaultImpl implements SettingsEventSetDefault {
+class _$SettingsEventSetDefaultImpl implements _SettingsEventSetDefault {
   const _$SettingsEventSetDefaultImpl();
 
   @override
@@ -275,9 +275,9 @@ class _$SettingsEventSetDefaultImpl implements SettingsEventSetDefault {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SettingsEventInitialize value) initialize,
-    required TResult Function(SettingsEventSetDefault value) setDefault,
-    required TResult Function(SettingsEventUpdate value) update,
+    required TResult Function(_SettingsEventInitialize value) initialize,
+    required TResult Function(_SettingsEventSetDefault value) setDefault,
+    required TResult Function(_SettingsEventUpdate value) update,
   }) {
     return setDefault(this);
   }
@@ -285,9 +285,9 @@ class _$SettingsEventSetDefaultImpl implements SettingsEventSetDefault {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SettingsEventInitialize value)? initialize,
-    TResult? Function(SettingsEventSetDefault value)? setDefault,
-    TResult? Function(SettingsEventUpdate value)? update,
+    TResult? Function(_SettingsEventInitialize value)? initialize,
+    TResult? Function(_SettingsEventSetDefault value)? setDefault,
+    TResult? Function(_SettingsEventUpdate value)? update,
   }) {
     return setDefault?.call(this);
   }
@@ -295,9 +295,9 @@ class _$SettingsEventSetDefaultImpl implements SettingsEventSetDefault {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SettingsEventInitialize value)? initialize,
-    TResult Function(SettingsEventSetDefault value)? setDefault,
-    TResult Function(SettingsEventUpdate value)? update,
+    TResult Function(_SettingsEventInitialize value)? initialize,
+    TResult Function(_SettingsEventSetDefault value)? setDefault,
+    TResult Function(_SettingsEventUpdate value)? update,
     required TResult orElse(),
   }) {
     if (setDefault != null) {
@@ -307,8 +307,8 @@ class _$SettingsEventSetDefaultImpl implements SettingsEventSetDefault {
   }
 }
 
-abstract class SettingsEventSetDefault implements SettingsEvent {
-  const factory SettingsEventSetDefault() = _$SettingsEventSetDefaultImpl;
+abstract class _SettingsEventSetDefault implements SettingsEvent {
+  const factory _SettingsEventSetDefault() = _$SettingsEventSetDefaultImpl;
 }
 
 /// @nodoc
@@ -358,7 +358,7 @@ class __$$SettingsEventUpdateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SettingsEventUpdateImpl implements SettingsEventUpdate {
+class _$SettingsEventUpdateImpl implements _SettingsEventUpdate {
   const _$SettingsEventUpdateImpl({required this.settings});
 
   @override
@@ -427,9 +427,9 @@ class _$SettingsEventUpdateImpl implements SettingsEventUpdate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SettingsEventInitialize value) initialize,
-    required TResult Function(SettingsEventSetDefault value) setDefault,
-    required TResult Function(SettingsEventUpdate value) update,
+    required TResult Function(_SettingsEventInitialize value) initialize,
+    required TResult Function(_SettingsEventSetDefault value) setDefault,
+    required TResult Function(_SettingsEventUpdate value) update,
   }) {
     return update(this);
   }
@@ -437,9 +437,9 @@ class _$SettingsEventUpdateImpl implements SettingsEventUpdate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SettingsEventInitialize value)? initialize,
-    TResult? Function(SettingsEventSetDefault value)? setDefault,
-    TResult? Function(SettingsEventUpdate value)? update,
+    TResult? Function(_SettingsEventInitialize value)? initialize,
+    TResult? Function(_SettingsEventSetDefault value)? setDefault,
+    TResult? Function(_SettingsEventUpdate value)? update,
   }) {
     return update?.call(this);
   }
@@ -447,9 +447,9 @@ class _$SettingsEventUpdateImpl implements SettingsEventUpdate {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SettingsEventInitialize value)? initialize,
-    TResult Function(SettingsEventSetDefault value)? setDefault,
-    TResult Function(SettingsEventUpdate value)? update,
+    TResult Function(_SettingsEventInitialize value)? initialize,
+    TResult Function(_SettingsEventSetDefault value)? setDefault,
+    TResult Function(_SettingsEventUpdate value)? update,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -459,8 +459,8 @@ class _$SettingsEventUpdateImpl implements SettingsEventUpdate {
   }
 }
 
-abstract class SettingsEventUpdate implements SettingsEvent {
-  const factory SettingsEventUpdate({required final AppSettings settings}) =
+abstract class _SettingsEventUpdate implements SettingsEvent {
+  const factory _SettingsEventUpdate({required final AppSettings settings}) =
       _$SettingsEventUpdateImpl;
 
   AppSettings get settings;

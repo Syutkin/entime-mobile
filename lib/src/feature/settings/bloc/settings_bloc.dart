@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,17 +12,21 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsProvider settingsProvider;
 
   SettingsBloc(this.settingsProvider)
-      : super(_SettingsState(settings: settingsProvider.settings)) {
-    on<SettingsEventInitialize>((event, emit) {
-      emit(_SettingsState(settings: settingsProvider.settings));
-    });
-    on<SettingsEventSetDefault>((event, emit) {
-      emit(_SettingsState(settings: settingsProvider.settings));
-      settingsProvider.setDefaults();
-    });
-    on<SettingsEventUpdate>((event, emit) {
-      emit(_SettingsState(settings: event.settings));
-      settingsProvider.update(event.settings);
+      : super(SettingsState(settings: settingsProvider.settings)) {
+    on<SettingsEvent>(transformer: sequential(), (event, emit) async {
+      await event.map(
+        initialize: (event) {
+          emit(SettingsState(settings: settingsProvider.settings));
+        },
+        setDefault: (event) async {
+          emit(SettingsState(settings: settingsProvider.settings));
+          await settingsProvider.setDefaults();
+        },
+        update: (event) async {
+          emit(SettingsState(settings: event.settings));
+          await settingsProvider.update(event.settings);
+        },
+      );
     });
   }
 }

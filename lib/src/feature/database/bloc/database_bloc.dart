@@ -289,17 +289,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             startTime: event.startTime,
             forceAdd: event.forceAdd,
           );
-          //ToDo: popup с вопросом обновлять или нет стартовое время или номер
           if (startingParticipants != null && !event.forceAdd) {
-            // add(
-            //   DatabaseEvent.emitState(
-            //     notification: Notification.updateNumber(
-            //       existedStartingParticipants: startingParticipants,
-            //       number: event.number,
-            //       startTime: event.startTime,
-            //     ),
-            //   ),
-            // );
             final notification = Notification.updateNumber(
               existedStartingParticipants: startingParticipants,
               number: event.number,

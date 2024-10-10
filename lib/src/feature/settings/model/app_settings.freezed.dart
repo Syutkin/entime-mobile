@@ -62,7 +62,11 @@ mixin _$AppSettings {
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   int get logLimit => throw _privateConstructorUsedError; // активная тема
-  AppTheme get appTheme =>
+// required AppTheme appTheme,
+  ColorSeed get seedColor => throw _privateConstructorUsedError;
+  Brightness get brightness => throw _privateConstructorUsedError;
+  double get contrastLevel => throw _privateConstructorUsedError;
+  DynamicSchemeVariant get dynamicSchemeVariant =>
       throw _privateConstructorUsedError; // версия при предыдущем запуске
   String get previousVersion => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -98,7 +102,10 @@ mixin _$AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)
         $default, {
     required TResult Function(
@@ -132,7 +139,10 @@ mixin _$AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)
         defaults,
   }) =>
@@ -170,7 +180,10 @@ mixin _$AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         $default, {
     TResult? Function(
@@ -204,7 +217,10 @@ mixin _$AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         defaults,
   }) =>
@@ -242,7 +258,10 @@ mixin _$AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         $default, {
     TResult Function(
@@ -276,7 +295,10 @@ mixin _$AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         defaults,
     required TResult orElse(),
@@ -346,7 +368,10 @@ abstract class $AppSettingsCopyWith<$Res> {
       int substituteNumbersDelay,
       int deltaInSeconds,
       int logLimit,
-      AppTheme appTheme,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
       String previousVersion});
 }
 
@@ -395,7 +420,10 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? substituteNumbersDelay = null,
     Object? deltaInSeconds = null,
     Object? logLimit = null,
-    Object? appTheme = null,
+    Object? seedColor = null,
+    Object? brightness = null,
+    Object? contrastLevel = null,
+    Object? dynamicSchemeVariant = null,
     Object? previousVersion = null,
   }) {
     return _then(_value.copyWith(
@@ -519,10 +547,22 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
               as int,
-      appTheme: null == appTheme
-          ? _value.appTheme
-          : appTheme // ignore: cast_nullable_to_non_nullable
-              as AppTheme,
+      seedColor: null == seedColor
+          ? _value.seedColor
+          : seedColor // ignore: cast_nullable_to_non_nullable
+              as ColorSeed,
+      brightness: null == brightness
+          ? _value.brightness
+          : brightness // ignore: cast_nullable_to_non_nullable
+              as Brightness,
+      contrastLevel: null == contrastLevel
+          ? _value.contrastLevel
+          : contrastLevel // ignore: cast_nullable_to_non_nullable
+              as double,
+      dynamicSchemeVariant: null == dynamicSchemeVariant
+          ? _value.dynamicSchemeVariant
+          : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
+              as DynamicSchemeVariant,
       previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
@@ -570,7 +610,10 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       int substituteNumbersDelay,
       int deltaInSeconds,
       int logLimit,
-      AppTheme appTheme,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
       String previousVersion});
 }
 
@@ -617,7 +660,10 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? substituteNumbersDelay = null,
     Object? deltaInSeconds = null,
     Object? logLimit = null,
-    Object? appTheme = null,
+    Object? seedColor = null,
+    Object? brightness = null,
+    Object? contrastLevel = null,
+    Object? dynamicSchemeVariant = null,
     Object? previousVersion = null,
   }) {
     return _then(_$AppSettingsImpl(
@@ -741,10 +787,22 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
               as int,
-      appTheme: null == appTheme
-          ? _value.appTheme
-          : appTheme // ignore: cast_nullable_to_non_nullable
-              as AppTheme,
+      seedColor: null == seedColor
+          ? _value.seedColor
+          : seedColor // ignore: cast_nullable_to_non_nullable
+              as ColorSeed,
+      brightness: null == brightness
+          ? _value.brightness
+          : brightness // ignore: cast_nullable_to_non_nullable
+              as Brightness,
+      contrastLevel: null == contrastLevel
+          ? _value.contrastLevel
+          : contrastLevel // ignore: cast_nullable_to_non_nullable
+              as double,
+      dynamicSchemeVariant: null == dynamicSchemeVariant
+          ? _value.dynamicSchemeVariant
+          : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
+              as DynamicSchemeVariant,
       previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
@@ -787,7 +845,10 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.substituteNumbersDelay,
       required this.deltaInSeconds,
       required this.logLimit,
-      required this.appTheme,
+      required this.seedColor,
+      required this.brightness,
+      required this.contrastLevel,
+      required this.dynamicSchemeVariant,
       required this.previousVersion});
 
 // звук
@@ -873,15 +934,22 @@ class _$AppSettingsImpl implements _AppSettings {
   @override
   final int logLimit;
 // активная тема
+// required AppTheme appTheme,
   @override
-  final AppTheme appTheme;
+  final ColorSeed seedColor;
+  @override
+  final Brightness brightness;
+  @override
+  final double contrastLevel;
+  @override
+  final DynamicSchemeVariant dynamicSchemeVariant;
 // версия при предыдущем запуске
   @override
   final String previousVersion;
 
   @override
   String toString() {
-    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
+    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
   }
 
   @override
@@ -941,8 +1009,14 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.deltaInSeconds == deltaInSeconds) &&
             (identical(other.logLimit, logLimit) ||
                 other.logLimit == logLimit) &&
-            (identical(other.appTheme, appTheme) ||
-                other.appTheme == appTheme) &&
+            (identical(other.seedColor, seedColor) ||
+                other.seedColor == seedColor) &&
+            (identical(other.brightness, brightness) ||
+                other.brightness == brightness) &&
+            (identical(other.contrastLevel, contrastLevel) ||
+                other.contrastLevel == contrastLevel) &&
+            (identical(other.dynamicSchemeVariant, dynamicSchemeVariant) ||
+                other.dynamicSchemeVariant == dynamicSchemeVariant) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion));
   }
@@ -980,7 +1054,10 @@ class _$AppSettingsImpl implements _AppSettings {
         substituteNumbersDelay,
         deltaInSeconds,
         logLimit,
-        appTheme,
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
         previousVersion
       ]);
 
@@ -1026,7 +1103,10 @@ class _$AppSettingsImpl implements _AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)
         $default, {
     required TResult Function(
@@ -1060,7 +1140,10 @@ class _$AppSettingsImpl implements _AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)
         defaults,
   }) {
@@ -1095,7 +1178,10 @@ class _$AppSettingsImpl implements _AppSettings {
         substituteNumbersDelay,
         deltaInSeconds,
         logLimit,
-        appTheme,
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
         previousVersion);
   }
 
@@ -1133,7 +1219,10 @@ class _$AppSettingsImpl implements _AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         $default, {
     TResult? Function(
@@ -1167,7 +1256,10 @@ class _$AppSettingsImpl implements _AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         defaults,
   }) {
@@ -1202,7 +1294,10 @@ class _$AppSettingsImpl implements _AppSettings {
         substituteNumbersDelay,
         deltaInSeconds,
         logLimit,
-        appTheme,
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
         previousVersion);
   }
 
@@ -1240,7 +1335,10 @@ class _$AppSettingsImpl implements _AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         $default, {
     TResult Function(
@@ -1274,7 +1372,10 @@ class _$AppSettingsImpl implements _AppSettings {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         defaults,
     required TResult orElse(),
@@ -1311,7 +1412,10 @@ class _$AppSettingsImpl implements _AppSettings {
           substituteNumbersDelay,
           deltaInSeconds,
           logLimit,
-          appTheme,
+          seedColor,
+          brightness,
+          contrastLevel,
+          dynamicSchemeVariant,
           previousVersion);
     }
     return orElse();
@@ -1381,7 +1485,10 @@ abstract class _AppSettings implements AppSettings {
       required final int substituteNumbersDelay,
       required final int deltaInSeconds,
       required final int logLimit,
-      required final AppTheme appTheme,
+      required final ColorSeed seedColor,
+      required final Brightness brightness,
+      required final double contrastLevel,
+      required final DynamicSchemeVariant dynamicSchemeVariant,
       required final String previousVersion}) = _$AppSettingsImpl;
 
 // звук
@@ -1451,8 +1558,16 @@ abstract class _AppSettings implements AppSettings {
 // -1 = без ограничений
   @override
   int get logLimit; // активная тема
+// required AppTheme appTheme,
   @override
-  AppTheme get appTheme; // версия при предыдущем запуске
+  ColorSeed get seedColor;
+  @override
+  Brightness get brightness;
+  @override
+  double get contrastLevel;
+  @override
+  DynamicSchemeVariant
+      get dynamicSchemeVariant; // версия при предыдущем запуске
   @override
   String get previousVersion;
 
@@ -1503,7 +1618,10 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       int substituteNumbersDelay,
       int deltaInSeconds,
       int logLimit,
-      AppTheme appTheme,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
       String previousVersion});
 }
 
@@ -1550,7 +1668,10 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? substituteNumbersDelay = null,
     Object? deltaInSeconds = null,
     Object? logLimit = null,
-    Object? appTheme = null,
+    Object? seedColor = null,
+    Object? brightness = null,
+    Object? contrastLevel = null,
+    Object? dynamicSchemeVariant = null,
     Object? previousVersion = null,
   }) {
     return _then(_$AppSettingsDefaultsImpl(
@@ -1674,10 +1795,22 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
               as int,
-      appTheme: null == appTheme
-          ? _value.appTheme
-          : appTheme // ignore: cast_nullable_to_non_nullable
-              as AppTheme,
+      seedColor: null == seedColor
+          ? _value.seedColor
+          : seedColor // ignore: cast_nullable_to_non_nullable
+              as ColorSeed,
+      brightness: null == brightness
+          ? _value.brightness
+          : brightness // ignore: cast_nullable_to_non_nullable
+              as Brightness,
+      contrastLevel: null == contrastLevel
+          ? _value.contrastLevel
+          : contrastLevel // ignore: cast_nullable_to_non_nullable
+              as double,
+      dynamicSchemeVariant: null == dynamicSchemeVariant
+          ? _value.dynamicSchemeVariant
+          : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
+              as DynamicSchemeVariant,
       previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
@@ -1720,7 +1853,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.substituteNumbersDelay = 500,
       this.deltaInSeconds = 15,
       this.logLimit = -1,
-      this.appTheme = AppTheme.lightBlue,
+      this.seedColor = ColorSeed.blue,
+      this.brightness = Brightness.light,
+      this.contrastLevel = -1.0,
+      this.dynamicSchemeVariant = DynamicSchemeVariant.vibrant,
       this.previousVersion = '0.0.0'});
 
 // звук
@@ -1839,9 +1975,19 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @JsonKey()
   final int logLimit;
 // активная тема
+// @Default(AppTheme.lightBlue) AppTheme appTheme,
   @override
   @JsonKey()
-  final AppTheme appTheme;
+  final ColorSeed seedColor;
+  @override
+  @JsonKey()
+  final Brightness brightness;
+  @override
+  @JsonKey()
+  final double contrastLevel;
+  @override
+  @JsonKey()
+  final DynamicSchemeVariant dynamicSchemeVariant;
 // версия при предыдущем запуске
   @override
   @JsonKey()
@@ -1849,7 +1995,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
+    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
   }
 
   @override
@@ -1909,8 +2055,14 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.deltaInSeconds == deltaInSeconds) &&
             (identical(other.logLimit, logLimit) ||
                 other.logLimit == logLimit) &&
-            (identical(other.appTheme, appTheme) ||
-                other.appTheme == appTheme) &&
+            (identical(other.seedColor, seedColor) ||
+                other.seedColor == seedColor) &&
+            (identical(other.brightness, brightness) ||
+                other.brightness == brightness) &&
+            (identical(other.contrastLevel, contrastLevel) ||
+                other.contrastLevel == contrastLevel) &&
+            (identical(other.dynamicSchemeVariant, dynamicSchemeVariant) ||
+                other.dynamicSchemeVariant == dynamicSchemeVariant) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion));
   }
@@ -1948,7 +2100,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         substituteNumbersDelay,
         deltaInSeconds,
         logLimit,
-        appTheme,
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
         previousVersion
       ]);
 
@@ -1995,7 +2150,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)
         $default, {
     required TResult Function(
@@ -2029,7 +2187,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)
         defaults,
   }) {
@@ -2064,7 +2225,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         substituteNumbersDelay,
         deltaInSeconds,
         logLimit,
-        appTheme,
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
         previousVersion);
   }
 
@@ -2102,7 +2266,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         $default, {
     TResult? Function(
@@ -2136,7 +2303,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         defaults,
   }) {
@@ -2171,7 +2341,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         substituteNumbersDelay,
         deltaInSeconds,
         logLimit,
-        appTheme,
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
         previousVersion);
   }
 
@@ -2209,7 +2382,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         $default, {
     TResult Function(
@@ -2243,7 +2419,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int substituteNumbersDelay,
             int deltaInSeconds,
             int logLimit,
-            AppTheme appTheme,
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
             String previousVersion)?
         defaults,
     required TResult orElse(),
@@ -2280,7 +2459,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           substituteNumbersDelay,
           deltaInSeconds,
           logLimit,
-          appTheme,
+          seedColor,
+          brightness,
+          contrastLevel,
+          dynamicSchemeVariant,
           previousVersion);
     }
     return orElse();
@@ -2350,7 +2532,10 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final int substituteNumbersDelay,
       final int deltaInSeconds,
       final int logLimit,
-      final AppTheme appTheme,
+      final ColorSeed seedColor,
+      final Brightness brightness,
+      final double contrastLevel,
+      final DynamicSchemeVariant dynamicSchemeVariant,
       final String previousVersion}) = _$AppSettingsDefaultsImpl;
 
 // звук
@@ -2421,8 +2606,16 @@ abstract class _AppSettingsDefaults implements AppSettings {
 // -1 = без ограничений
   @override
   int get logLimit; // активная тема
+// @Default(AppTheme.lightBlue) AppTheme appTheme,
   @override
-  AppTheme get appTheme; // версия при предыдущем запуске
+  ColorSeed get seedColor;
+  @override
+  Brightness get brightness;
+  @override
+  double get contrastLevel;
+  @override
+  DynamicSchemeVariant
+      get dynamicSchemeVariant; // версия при предыдущем запуске
   @override
   String get previousVersion;
 

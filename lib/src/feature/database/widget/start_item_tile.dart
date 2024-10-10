@@ -21,82 +21,99 @@ class StartItemTile extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => InkWell(
-        onTap: () {
-          onTap?.call();
-        },
-        child: Dismissible(
-          key: UniqueKey(),
-          background: Container(
-            color: Theme.of(context).colorScheme.secondary,
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.all(5),
-            child: Text(
-              Localization.current.I18nStart_didNotStart,
-              style:
-                  DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2),
-            ),
+  Widget build(BuildContext context) {
+    final cardColor = isHighlighted
+        //TODO: test colors
+        ? Theme.of(context).colorScheme.primaryContainer
+        : Theme.of(context).colorScheme.surface;
+
+    final textColor = isHighlighted
+        //TODO: test colors
+        ? Theme.of(context).colorScheme.onPrimaryContainer
+        : Theme.of(context).colorScheme.onSurface;
+
+    return InkWell(
+      onTap: () {
+        onTap?.call();
+      },
+      child: Dismissible(
+        key: UniqueKey(),
+        background: Container(
+          color: Theme.of(context).colorScheme.secondary,
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.all(5),
+          child: Text(
+            Localization.current.I18nStart_didNotStart,
+            style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2),
           ),
-          direction: DismissDirection.endToStart,
-          onDismissed: (direction) {
-            onDismissed?.call(direction);
-          },
-          child: Card(
-            margin: const EdgeInsets.all(2),
-            color: isHighlighted
-                //TODO: test colors
-                ? Theme.of(context).colorScheme.background
-                : Theme.of(context).colorScheme.surface,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Row(
-                children: <Widget>[
-                  Flexible(
-                    flex: 20,
-                    child: Align(
-                      child: Text(
-                        item.number.toString(),
-                        style: DefaultTextStyle.of(context)
-                            .style
-                            .apply(fontSizeFactor: 2, fontWeightDelta: 2),
-                      ),
+        ),
+        direction: DismissDirection.endToStart,
+        onDismissed: (direction) {
+          onDismissed?.call(direction);
+        },
+        child: Card(
+          margin: const EdgeInsets.all(2),
+          color: cardColor,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              children: <Widget>[
+                Flexible(
+                  flex: 20,
+                  child: Align(
+                    child: Text(
+                      item.number.toString(),
+                      style: DefaultTextStyle.of(context).style.apply(
+                            fontSizeFactor: 2,
+                            fontWeightDelta: 2,
+                            color: textColor,
+                          ),
                     ),
                   ),
-                  Flexible(
-                    flex: 30,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        countdown ?? item.startTime,
-                        style: DefaultTextStyle.of(context)
-                            .style
-                            .apply(fontSizeFactor: 1.5),
-                      ),
+                ),
+                Flexible(
+                  flex: 30,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      countdown ?? item.startTime,
+                      style: DefaultTextStyle.of(context).style.apply(
+                            fontSizeFactor: 1.5,
+                            color: textColor,
+                          ),
                     ),
                   ),
-                  Flexible(
-                    flex: 25,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(item.manualCorrection.toString().strip()),
+                ),
+                Flexible(
+                  flex: 25,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      item.manualCorrection.toString().strip(),
+                      style: DefaultTextStyle.of(context).style.apply(
+                            color: textColor,
+                          ),
                     ),
                   ),
-                  Flexible(
-                    flex: 25,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        item.automaticCorrection.toString().strip(),
-                        style: DefaultTextStyle.of(context)
-                            .style
-                            .apply(fontSizeFactor: 1.5),
-                      ),
+                ),
+                Flexible(
+                  flex: 25,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      item.automaticCorrection.toString().strip(),
+                      style: DefaultTextStyle.of(context).style.apply(
+                            fontSizeFactor: 1.5,
+                            color: textColor,
+                          ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
 }
