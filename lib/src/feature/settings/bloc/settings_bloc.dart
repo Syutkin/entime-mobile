@@ -19,8 +19,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           emit(SettingsState(settings: settingsProvider.settings));
         },
         setDefault: (event) async {
-          emit(SettingsState(settings: settingsProvider.settings));
           await settingsProvider.setDefaults();
+          emit(SettingsState(settings: settingsProvider.settings));
         },
         update: (event) async {
           emit(SettingsState(settings: event.settings));

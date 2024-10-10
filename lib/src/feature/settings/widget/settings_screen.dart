@@ -433,6 +433,7 @@ class _SettingsList extends StatelessWidget {
                 ),
               ],
             ),
+            // ToDo: добавить выбор контраста и dynamicSchemeVariant
             SettingsSection(
               title: Text(Localization.current.I18nSettings_themes),
               tiles: _themes(settingsBloc),

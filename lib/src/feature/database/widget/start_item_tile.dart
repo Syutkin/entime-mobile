@@ -39,12 +39,15 @@ class StartItemTile extends StatelessWidget {
       child: Dismissible(
         key: UniqueKey(),
         background: Container(
-          color: Theme.of(context).colorScheme.secondary,
+          color: Theme.of(context).colorScheme.primaryContainer,
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.all(5),
           child: Text(
             Localization.current.I18nStart_didNotStart,
-            style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2),
+            style: DefaultTextStyle.of(context).style.apply(
+                  fontSizeFactor: 1.5,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
           ),
         ),
         direction: DismissDirection.endToStart,

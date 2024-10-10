@@ -27,14 +27,14 @@ class FinishItemTile extends StatelessWidget {
   Widget build(BuildContext context) => Dismissible(
         key: UniqueKey(),
         background: Container(
-          color: Theme.of(context).colorScheme.secondary,
+          color: Theme.of(context).colorScheme.primaryContainer,
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.all(5),
           child: Text(
             Localization.current.I18nProtocol_hide,
             style: DefaultTextStyle.of(context).style.apply(
                   fontSizeFactor: 1.5,
-                  color: Theme.of(context).colorScheme.onSecondary,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                 ),
           ),
         ),
@@ -60,6 +60,8 @@ class FinishItemTile extends StatelessWidget {
             builder: (context, candidateData, rejectedData) => Card(
               margin: const EdgeInsets.all(2),
               child: ListTile(
+                tileColor: Theme.of(context).colorScheme.surface,
+                textColor: Theme.of(context).colorScheme.onSurface,
                 contentPadding: EdgeInsets.zero,
                 onTap: () {
                   onTap?.call();

@@ -63,10 +63,10 @@ dependency_overrides:
   flutter_bluetooth_serial:
     git: https://github.com/Syutkin/flutter_bluetooth_serial.git
   settings_ui:
-    path: ../flutter-settings-ui
-#    git:
-#      url: https://github.com/yako-dev/flutter-settings-ui
-#      ref: dev
+#    path: ../flutter-settings-ui
+    git:
+      url: https://github.com/yako-dev/flutter-settings-ui
+      ref: dev
   # open_filex:
   #   git: https://github.com/GoldenSoju/open_file.git
 
