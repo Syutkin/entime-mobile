@@ -51,8 +51,21 @@ class ModuleSettingsInitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool updated = false;
-    return WillPopScope(
-      onWillPop: () async => _onBackPressed(context, updated),
+    // migration from WillPopScope to PopScope is taken from
+    // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, result) async {
+        if (didPop) {
+          return;
+        }
+        final NavigatorState navigator = Navigator.of(context);
+        final bool shouldPop = await _onBackPressed(context, updated);
+        if (shouldPop) {
+          navigator.pop();
+        }
+      },
+      // onWillPop: () async => _onBackPressed(context, updated),
       child: Scaffold(
         appBar: AppBar(
           title: Text(Localization.current.I18nModuleSettings_moduleSettings),

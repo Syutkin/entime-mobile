@@ -17,10 +17,10 @@ class LogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<LogBloc>(context).add(const LogEvent.show());
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, result) {
         BlocProvider.of<LogBloc>(context).add(const LogEvent.hide());
-        return true;
       },
       child: Scaffold(
         // ToDo: фильтры в аппбаре
