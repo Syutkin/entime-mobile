@@ -1,12 +1,12 @@
 // ToDo: get rid of this ignore
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../feature/database/bloc/database_bloc.dart';
-
+// import 'package:file_picker/file_picker.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+//
+// import '../../feature/database/bloc/database_bloc.dart';
+//
 export 'package:filesize/filesize.dart';
 
 // Future<String?> createNewProtocolFile(
@@ -90,34 +90,34 @@ export 'package:filesize/filesize.dart';
 //   );
 // }
 
-Future<void> loadFile(BuildContext context) async {
-  final databaseBloc = BlocProvider.of<DatabaseBloc>(context);
-  final PlatformFile? platformFile = await _pickFile();
-  if (platformFile != null && platformFile.path != null) {
-    // if (platformFile.extension == 'sqlite' || platformFile.extension == 'db') {
-    //   File? file = File(platformFile.path!);
-    //   file = await _checkExists(context, file);
-    //   // Если null - файл уже существовал и не перезаписываем,
-    //   // то ничего делать не нужно
-    //   if (file != null) {
-    //     protocolBloc.add(SelectProtocol(file: file.path));
-    //     // Navigator.of(context).pop();
-    //   }
-    // } else
-    if (platformFile.extension == 'csv') {
-      databaseBloc.state.mapOrNull(initialized: (state) {
-        databaseBloc.add(DatabaseEvent.loadStartFromCsv(csv: platformFile));
-      });
-    }
-  }
-}
+// Future<void> loadFile(BuildContext context) async {
+//   final databaseBloc = BlocProvider.of<DatabaseBloc>(context);
+//   final PlatformFile? platformFile = await _pickFile();
+//   if (platformFile != null && platformFile.path != null) {
+//     // if (platformFile.extension == 'sqlite' || platformFile.extension == 'db') {
+//     //   File? file = File(platformFile.path!);
+//     //   file = await _checkExists(context, file);
+//     //   // Если null - файл уже существовал и не перезаписываем,
+//     //   // то ничего делать не нужно
+//     //   if (file != null) {
+//     //     protocolBloc.add(SelectProtocol(file: file.path));
+//     //     // Navigator.of(context).pop();
+//     //   }
+//     // } else
+//     if (platformFile.extension == 'csv') {
+//       databaseBloc.state.mapOrNull(initialized: (state) {
+//         databaseBloc.add(DatabaseEvent.createRaceFromCsv(csv: platformFile));
+//       });
+//     }
+//   }
+// }
 
-Future<PlatformFile?> _pickFile() async {
-  final result = await FilePicker.platform.pickFiles(
-    withData: true,
-  );
-  return result?.files.first;
-}
+// Future<PlatformFile?> _pickFile() async {
+//   final result = await FilePicker.platform.pickFiles(
+//     withData: true,
+//   );
+//   return result?.files.first;
+// }
 
 // Проверка на существование файла в рабочей директории перед копированием
 // выбранного файла

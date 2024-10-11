@@ -2,8 +2,9 @@
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:entime/src/common/logger/logger.dart';
+import 'package:entime/src/feature/csv/model/race_csv.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -242,6 +243,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         deselectRace: (event) {
           _race = null;
           _stage = null;
+          var settings =
+              _settingsProvider.settings.copyWith(raceId: -1, stageId: -1);
+          _settingsProvider.update(settings);
           _emitState();
         },
         addStage: (event) async {
@@ -395,7 +399,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _db.setDNFForStage(stage: event.stage, number: event.number);
         },
         addNumberToFinish: (event) async {
-          // final update = await _db.addNumberToFinish(
           await _db.addNumberToFinish(
             stage: event.stage,
             finishId: event.finishId,
@@ -411,9 +414,20 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               .get();
           _emitState();
         },
+        selectAwaitingNumber: (event) {
+          _awaitingNumber = event.number;
+          _emitState();
+        },
+        deselectAwaitingNumber: (event) {
+          _awaitingNumber = null;
+          _emitState();
+        },
         //ToDo:
-        loadStartFromCsv: (event) {
-          throw ('Not implemented');
+        createRaceFromRaceCsv: (event) async {
+          int id = await _db.createRaceFromRaceCsv(event.race);
+          final race = await _db.getRace(id);
+          _stage = null;
+          add(DatabaseEvent.selectRace(race));
         },
         //ToDo:
         shareStart: (event) {
@@ -422,14 +436,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         //ToDo:
         shareFinish: (event) {
           throw ('Not implemented');
-        },
-        selectAwaitingNumber: (event) {
-          _awaitingNumber = event.number;
-          _emitState();
-        },
-        deselectAwaitingNumber: (event) {
-          _awaitingNumber = null;
-          _emitState();
         },
       );
     });

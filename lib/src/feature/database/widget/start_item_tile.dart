@@ -23,12 +23,10 @@ class StartItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardColor = isHighlighted
-        //TODO: test colors
         ? Theme.of(context).colorScheme.primaryContainer
         : Theme.of(context).colorScheme.surface;
 
     final textColor = isHighlighted
-        //TODO: test colors
         ? Theme.of(context).colorScheme.onPrimaryContainer
         : Theme.of(context).colorScheme.onSurface;
 

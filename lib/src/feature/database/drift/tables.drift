@@ -114,6 +114,19 @@ _getStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false
 _addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
 _deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
 
+
+_addRider:
+INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment)
+VALUES(:name, :nickname, :birthday, :team, :city, :email, :phone, :comment);
+
+_addParticipant:
+INSERT INTO participants (race_id, rider_id, number, category, rfid)
+VALUES(:race_id, :rider_id, :number, :category, :rfid);
+
+_addStartInfo:
+INSERT INTO starts (stage_id, participant_id, start_time)
+VALUES(:stage_id, :participant_id, :start_time);
+
 _getNumberAtStarts AS NumberAtStart:
 SELECT
 	starts.id as start_id,

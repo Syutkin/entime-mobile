@@ -126,11 +126,11 @@ sealed class Pubspec {
     2024,
     10,
     10,
-    3,
-    20,
-    39,
-    941,
-    575,
+    17,
+    54,
+    41,
+    374,
+    690,
   );
 
   /// Name
@@ -415,7 +415,7 @@ sealed class Pubspec {
     'bloc_concurrency': r'^0.2.5',
     'bot_toast': r'^4.1.3',
     'csv': r'^6.0.0',
-    'device_info_plus': r'^10.1.2',
+    'device_info_plus': r'^11.0.0',
     'drift': r'^2.20.3',
     'equatable': r'^2.0.5',
     'file_picker': r'^8.1.2',
@@ -439,7 +439,7 @@ sealed class Pubspec {
     'rxdart': r'^0.28.0',
     'sentry_flutter': r'^8.9.0',
     'settings_ui': r'^2.0.2',
-    'share_plus': r'^10.0.2',
+    'share_plus': r'^10.0.3',
     'shared_preferences': r'^2.3.2',
     'soundpool': r'^2.4.1',
     'sqlite3': r'^2.4.6',
@@ -473,6 +473,12 @@ sealed class Pubspec {
   static const Map<String, Object> dependencyOverrides = <String, Object>{
     'flutter_bluetooth_serial': <String, Object>{
       'git': r'https://github.com/Syutkin/flutter_bluetooth_serial.git',
+    },
+    'settings_ui': <String, Object>{
+      'git': <String, Object>{
+        'url': r'https://github.com/yako-dev/flutter-settings-ui',
+        'ref': r'dev',
+      },
     },
   };
 

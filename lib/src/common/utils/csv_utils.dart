@@ -95,7 +95,7 @@ class CsvToMapConverter {
   List<Map<String, dynamic>> convert(String csv) {
     final list = converter.convert<dynamic>(csv);
     final List<dynamic> legend = list.first
-        .map((dynamic category) => category.toString().toLowerCase())
+        .map((dynamic category) => category.toString())
         .toList();
     final List<Map<String, dynamic>> maps = [];
     list.sublist(1).forEach((l) {

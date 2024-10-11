@@ -10,12 +10,14 @@ _$StartItemCsvImpl _$$StartItemCsvImplFromJson(Map<String, dynamic> json) =>
     _$StartItemCsvImpl(
       category: json['category'] as String?,
       number: (json['number'] as num).toInt(),
-      name: json['name'] as String?,
+      name: json['name'] as String,
       nickname: json['nickname'] as String?,
       age: json['age'] as String?,
       team: json['team'] as String?,
       city: json['city'] as String?,
-      startTime: json['startTime'] as String?,
+      startTimes: (json['startTimes'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
     );
 
 Map<String, dynamic> _$$StartItemCsvImplToJson(_$StartItemCsvImpl instance) =>
@@ -27,5 +29,5 @@ Map<String, dynamic> _$$StartItemCsvImplToJson(_$StartItemCsvImpl instance) =>
       'age': instance.age,
       'team': instance.team,
       'city': instance.city,
-      'startTime': instance.startTime,
+      'startTimes': instance.startTimes,
     };

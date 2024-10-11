@@ -3507,6 +3507,65 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Future<int> _addRider(
+      {required String name,
+      String? nickname,
+      String? birthday,
+      String? team,
+      String? city,
+      String? email,
+      String? phone,
+      String? comment}) {
+    return customInsert(
+      'INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)',
+      variables: [
+        Variable<String>(name),
+        Variable<String>(nickname),
+        Variable<String>(birthday),
+        Variable<String>(team),
+        Variable<String>(city),
+        Variable<String>(email),
+        Variable<String>(phone),
+        Variable<String>(comment)
+      ],
+      updates: {riders},
+    );
+  }
+
+  Future<int> _addParticipant(
+      {required int raceId,
+      required int riderId,
+      required int number,
+      String? category,
+      String? rfid}) {
+    return customInsert(
+      'INSERT INTO participants (race_id, rider_id, number, category, rfid) VALUES (?1, ?2, ?3, ?4, ?5)',
+      variables: [
+        Variable<int>(raceId),
+        Variable<int>(riderId),
+        Variable<int>(number),
+        Variable<String>(category),
+        Variable<String>(rfid)
+      ],
+      updates: {participants},
+    );
+  }
+
+  Future<int> _addStartInfo(
+      {required int stageId,
+      required int participantId,
+      required String startTime}) {
+    return customInsert(
+      'INSERT INTO starts (stage_id, participant_id, start_time) VALUES (?1, ?2, ?3)',
+      variables: [
+        Variable<int>(stageId),
+        Variable<int>(participantId),
+        Variable<String>(startTime)
+      ],
+      updates: {starts},
+    );
+  }
+
   Selectable<NumberAtStart> _getNumberAtStarts(
       {required int stageId, required int number}) {
     return customSelect(

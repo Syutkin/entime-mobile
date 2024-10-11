@@ -90,11 +90,11 @@ mixin _$DatabaseEvent {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -168,11 +168,11 @@ mixin _$DatabaseEvent {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -246,11 +246,11 @@ mixin _$DatabaseEvent {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -290,12 +290,13 @@ mixin _$DatabaseEvent {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -330,11 +331,11 @@ mixin _$DatabaseEvent {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -369,11 +370,11 @@ mixin _$DatabaseEvent {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -513,11 +514,11 @@ class _$InitializeImpl implements _Initialize {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return initialize();
   }
@@ -594,11 +595,11 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return initialize?.call();
   }
@@ -675,11 +676,11 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -725,12 +726,13 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return initialize(this);
   }
@@ -768,11 +770,11 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return initialize?.call(this);
   }
@@ -810,11 +812,11 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -1211,11 +1213,11 @@ class _$EmitStateImpl implements _EmitState {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return emitState(
         race,
@@ -1307,11 +1309,11 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return emitState?.call(
         race,
@@ -1403,11 +1405,11 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (emitState != null) {
@@ -1468,12 +1470,13 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return emitState(this);
   }
@@ -1511,11 +1514,11 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return emitState?.call(this);
   }
@@ -1553,11 +1556,11 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (emitState != null) {
@@ -1749,11 +1752,11 @@ class _$AddRaceImpl implements _AddRace {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return addRace(race);
   }
@@ -1830,11 +1833,11 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return addRace?.call(race);
   }
@@ -1911,11 +1914,11 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -1961,12 +1964,13 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addRace(this);
   }
@@ -2004,11 +2008,11 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addRace?.call(this);
   }
@@ -2046,11 +2050,11 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -2212,11 +2216,11 @@ class _$DeleteRaceImpl implements _DeleteRace {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return deleteRace(id);
   }
@@ -2293,11 +2297,11 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return deleteRace?.call(id);
   }
@@ -2374,11 +2378,11 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (deleteRace != null) {
@@ -2424,12 +2428,13 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return deleteRace(this);
   }
@@ -2467,11 +2472,11 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return deleteRace?.call(this);
   }
@@ -2509,11 +2514,11 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (deleteRace != null) {
@@ -2648,11 +2653,11 @@ class _$GetRacesImpl implements _GetRaces {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return getRaces();
   }
@@ -2729,11 +2734,11 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return getRaces?.call();
   }
@@ -2810,11 +2815,11 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (getRaces != null) {
@@ -2860,12 +2865,13 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getRaces(this);
   }
@@ -2903,11 +2909,11 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getRaces?.call(this);
   }
@@ -2945,11 +2951,11 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (getRaces != null) {
@@ -3104,11 +3110,11 @@ class _$SelectRaceImpl implements _SelectRace {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return selectRace(race);
   }
@@ -3185,11 +3191,11 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return selectRace?.call(race);
   }
@@ -3266,11 +3272,11 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (selectRace != null) {
@@ -3316,12 +3322,13 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return selectRace(this);
   }
@@ -3359,11 +3366,11 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return selectRace?.call(this);
   }
@@ -3401,11 +3408,11 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (selectRace != null) {
@@ -3540,11 +3547,11 @@ class _$DeselectRaceImpl implements _DeselectRace {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return deselectRace();
   }
@@ -3621,11 +3628,11 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return deselectRace?.call();
   }
@@ -3702,11 +3709,11 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (deselectRace != null) {
@@ -3752,12 +3759,13 @@ class _$DeselectRaceImpl implements _DeselectRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return deselectRace(this);
   }
@@ -3795,11 +3803,11 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return deselectRace?.call(this);
   }
@@ -3837,11 +3845,11 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (deselectRace != null) {
@@ -3996,11 +4004,11 @@ class _$AddStageImpl implements _AddStage {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return addStage(stage);
   }
@@ -4077,11 +4085,11 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return addStage?.call(stage);
   }
@@ -4158,11 +4166,11 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (addStage != null) {
@@ -4208,12 +4216,13 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addStage(this);
   }
@@ -4251,11 +4260,11 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addStage?.call(this);
   }
@@ -4293,11 +4302,11 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (addStage != null) {
@@ -4459,11 +4468,11 @@ class _$DeleteStageImpl implements _DeleteStage {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return deleteStage(id);
   }
@@ -4540,11 +4549,11 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return deleteStage?.call(id);
   }
@@ -4621,11 +4630,11 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (deleteStage != null) {
@@ -4671,12 +4680,13 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return deleteStage(this);
   }
@@ -4714,11 +4724,11 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return deleteStage?.call(this);
   }
@@ -4756,11 +4766,11 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (deleteStage != null) {
@@ -4922,11 +4932,11 @@ class _$GetStagesImpl implements _GetStages {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return getStages(raceId);
   }
@@ -5003,11 +5013,11 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return getStages?.call(raceId);
   }
@@ -5084,11 +5094,11 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (getStages != null) {
@@ -5134,12 +5144,13 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getStages(this);
   }
@@ -5177,11 +5188,11 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getStages?.call(this);
   }
@@ -5219,11 +5230,11 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (getStages != null) {
@@ -5386,11 +5397,11 @@ class _$SelectStageImpl implements _SelectStage {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return selectStage(stage);
   }
@@ -5467,11 +5478,11 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return selectStage?.call(stage);
   }
@@ -5548,11 +5559,11 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (selectStage != null) {
@@ -5598,12 +5609,13 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return selectStage(this);
   }
@@ -5641,11 +5653,11 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return selectStage?.call(this);
   }
@@ -5683,11 +5695,11 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (selectStage != null) {
@@ -5852,11 +5864,11 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return getParticipantsAtStart(stageId);
   }
@@ -5933,11 +5945,11 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return getParticipantsAtStart?.call(stageId);
   }
@@ -6014,11 +6026,11 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (getParticipantsAtStart != null) {
@@ -6064,12 +6076,13 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getParticipantsAtStart(this);
   }
@@ -6107,11 +6120,11 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getParticipantsAtStart?.call(this);
   }
@@ -6149,11 +6162,11 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (getParticipantsAtStart != null) {
@@ -6349,11 +6362,11 @@ class _$AddStartNumberImpl implements _AddStartNumber {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return addStartNumber(stage, number, startTime, forceAdd);
   }
@@ -6430,11 +6443,11 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return addStartNumber?.call(stage, number, startTime, forceAdd);
   }
@@ -6511,11 +6524,11 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (addStartNumber != null) {
@@ -6561,12 +6574,13 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addStartNumber(this);
   }
@@ -6604,11 +6618,11 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addStartNumber?.call(this);
   }
@@ -6646,11 +6660,11 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (addStartNumber != null) {
@@ -6896,11 +6910,11 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return updateStartingInfo(
         startTime,
@@ -6984,11 +6998,11 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return updateStartingInfo?.call(
         startTime,
@@ -7072,11 +7086,11 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (updateStartingInfo != null) {
@@ -7129,12 +7143,13 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return updateStartingInfo(this);
   }
@@ -7172,11 +7187,11 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return updateStartingInfo?.call(this);
   }
@@ -7214,11 +7229,11 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (updateStartingInfo != null) {
@@ -7456,11 +7471,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return updateAutomaticCorrection(
         stageId, startTime, correction, timeStamp, forceUpdate, deltaInSeconds);
@@ -7538,11 +7553,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return updateAutomaticCorrection?.call(
         stageId, startTime, correction, timeStamp, forceUpdate, deltaInSeconds);
@@ -7620,11 +7635,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (updateAutomaticCorrection != null) {
@@ -7671,12 +7686,13 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return updateAutomaticCorrection(this);
   }
@@ -7714,11 +7730,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return updateAutomaticCorrection?.call(this);
   }
@@ -7756,11 +7772,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (updateAutomaticCorrection != null) {
@@ -7954,11 +7970,11 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return updateManualStartTime(stageId, time, deltaInSeconds);
   }
@@ -8035,11 +8051,11 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return updateManualStartTime?.call(stageId, time, deltaInSeconds);
   }
@@ -8116,11 +8132,11 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (updateManualStartTime != null) {
@@ -8166,12 +8182,13 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return updateManualStartTime(this);
   }
@@ -8209,11 +8226,11 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return updateManualStartTime?.call(this);
   }
@@ -8251,11 +8268,11 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (updateManualStartTime != null) {
@@ -8432,11 +8449,11 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return setStatusForStartId(startId, status);
   }
@@ -8513,11 +8530,11 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return setStatusForStartId?.call(startId, status);
   }
@@ -8594,11 +8611,11 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (setStatusForStartId != null) {
@@ -8644,12 +8661,13 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return setStatusForStartId(this);
   }
@@ -8687,11 +8705,11 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return setStatusForStartId?.call(this);
   }
@@ -8729,11 +8747,11 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (setStatusForStartId != null) {
@@ -8900,11 +8918,11 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return getFinishesFromStage(stageId);
   }
@@ -8981,11 +8999,11 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return getFinishesFromStage?.call(stageId);
   }
@@ -9062,11 +9080,11 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (getFinishesFromStage != null) {
@@ -9112,12 +9130,13 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getFinishesFromStage(this);
   }
@@ -9155,11 +9174,11 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getFinishesFromStage?.call(this);
   }
@@ -9197,11 +9216,11 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (getFinishesFromStage != null) {
@@ -9451,11 +9470,11 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return addFinishTime(stage, finishTime, timeStamp, finishDelay,
         substituteNumbers, substituteNumbersDelay, dateTimeNow, number);
@@ -9533,11 +9552,11 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return addFinishTime?.call(stage, finishTime, timeStamp, finishDelay,
         substituteNumbers, substituteNumbersDelay, dateTimeNow, number);
@@ -9615,11 +9634,11 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (addFinishTime != null) {
@@ -9666,12 +9685,13 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addFinishTime(this);
   }
@@ -9709,11 +9729,11 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addFinishTime?.call(this);
   }
@@ -9751,11 +9771,11 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (addFinishTime != null) {
@@ -9951,11 +9971,11 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return addFinishTimeManual(stageId, finishTime, number);
   }
@@ -10032,11 +10052,11 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return addFinishTimeManual?.call(stageId, finishTime, number);
   }
@@ -10113,11 +10133,11 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (addFinishTimeManual != null) {
@@ -10163,12 +10183,13 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addFinishTimeManual(this);
   }
@@ -10206,11 +10227,11 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addFinishTimeManual?.call(this);
   }
@@ -10248,11 +10269,11 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (addFinishTimeManual != null) {
@@ -10422,11 +10443,11 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return clearStartResultsDebug(stageId);
   }
@@ -10503,11 +10524,11 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return clearStartResultsDebug?.call(stageId);
   }
@@ -10584,11 +10605,11 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (clearStartResultsDebug != null) {
@@ -10634,12 +10655,13 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return clearStartResultsDebug(this);
   }
@@ -10677,11 +10699,11 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return clearStartResultsDebug?.call(this);
   }
@@ -10719,11 +10741,11 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (clearStartResultsDebug != null) {
@@ -10889,11 +10911,11 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return clearFinishResultsDebug(stageId);
   }
@@ -10970,11 +10992,11 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return clearFinishResultsDebug?.call(stageId);
   }
@@ -11051,11 +11073,11 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (clearFinishResultsDebug != null) {
@@ -11101,12 +11123,13 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return clearFinishResultsDebug(this);
   }
@@ -11144,11 +11167,11 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return clearFinishResultsDebug?.call(this);
   }
@@ -11186,11 +11209,11 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (clearFinishResultsDebug != null) {
@@ -11354,11 +11377,11 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return hideAllFinises(stageId);
   }
@@ -11435,11 +11458,11 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return hideAllFinises?.call(stageId);
   }
@@ -11516,11 +11539,11 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (hideAllFinises != null) {
@@ -11566,12 +11589,13 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return hideAllFinises(this);
   }
@@ -11609,11 +11633,11 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return hideAllFinises?.call(this);
   }
@@ -11651,11 +11675,11 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (hideAllFinises != null) {
@@ -11827,11 +11851,11 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return clearNumberAtFinish(stage, number);
   }
@@ -11908,11 +11932,11 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return clearNumberAtFinish?.call(stage, number);
   }
@@ -11989,11 +12013,11 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (clearNumberAtFinish != null) {
@@ -12039,12 +12063,13 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return clearNumberAtFinish(this);
   }
@@ -12082,11 +12107,11 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return clearNumberAtFinish?.call(this);
   }
@@ -12124,11 +12149,11 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (clearNumberAtFinish != null) {
@@ -12303,11 +12328,11 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return setDNSForStage(stage, number);
   }
@@ -12384,11 +12409,11 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return setDNSForStage?.call(stage, number);
   }
@@ -12465,11 +12490,11 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (setDNSForStage != null) {
@@ -12515,12 +12540,13 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return setDNSForStage(this);
   }
@@ -12558,11 +12584,11 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return setDNSForStage?.call(this);
   }
@@ -12600,11 +12626,11 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (setDNSForStage != null) {
@@ -12779,11 +12805,11 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return setDNFForStage(stage, number);
   }
@@ -12860,11 +12886,11 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return setDNFForStage?.call(stage, number);
   }
@@ -12941,11 +12967,11 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (setDNFForStage != null) {
@@ -12991,12 +13017,13 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return setDNFForStage(this);
   }
@@ -13034,11 +13061,11 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return setDNFForStage?.call(this);
   }
@@ -13076,11 +13103,11 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (setDNFForStage != null) {
@@ -13245,11 +13272,11 @@ class _$HideFinishImpl implements _HideFinish {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return hideFinish(id);
   }
@@ -13326,11 +13353,11 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return hideFinish?.call(id);
   }
@@ -13407,11 +13434,11 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (hideFinish != null) {
@@ -13457,12 +13484,13 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return hideFinish(this);
   }
@@ -13500,11 +13528,11 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return hideFinish?.call(this);
   }
@@ -13542,11 +13570,11 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (hideFinish != null) {
@@ -13740,11 +13768,11 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return addNumberToFinish(stage, finishId, number, finishTime);
   }
@@ -13821,11 +13849,11 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return addNumberToFinish?.call(stage, finishId, number, finishTime);
   }
@@ -13902,11 +13930,11 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (addNumberToFinish != null) {
@@ -13952,12 +13980,13 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addNumberToFinish(this);
   }
@@ -13995,11 +14024,11 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addNumberToFinish?.call(this);
   }
@@ -14037,11 +14066,11 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (addNumberToFinish != null) {
@@ -14222,11 +14251,11 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return getNumbersOnTraceNow(stageId, dateTimeNow);
   }
@@ -14303,11 +14332,11 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return getNumbersOnTraceNow?.call(stageId, dateTimeNow);
   }
@@ -14384,11 +14413,11 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (getNumbersOnTraceNow != null) {
@@ -14434,12 +14463,13 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getNumbersOnTraceNow(this);
   }
@@ -14477,11 +14507,11 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getNumbersOnTraceNow?.call(this);
   }
@@ -14519,11 +14549,11 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (getNumbersOnTraceNow != null) {
@@ -14546,1327 +14576,6 @@ abstract class _GetNumbersOnTraceNow implements DatabaseEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetNumbersOnTraceNowImplCopyWith<_$GetNumbersOnTraceNowImpl>
       get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoadStartFromCsvImplCopyWith<$Res> {
-  factory _$$LoadStartFromCsvImplCopyWith(_$LoadStartFromCsvImpl value,
-          $Res Function(_$LoadStartFromCsvImpl) then) =
-      __$$LoadStartFromCsvImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({PlatformFile? csv});
-}
-
-/// @nodoc
-class __$$LoadStartFromCsvImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$LoadStartFromCsvImpl>
-    implements _$$LoadStartFromCsvImplCopyWith<$Res> {
-  __$$LoadStartFromCsvImplCopyWithImpl(_$LoadStartFromCsvImpl _value,
-      $Res Function(_$LoadStartFromCsvImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? csv = freezed,
-  }) {
-    return _then(_$LoadStartFromCsvImpl(
-      csv: freezed == csv
-          ? _value.csv
-          : csv // ignore: cast_nullable_to_non_nullable
-              as PlatformFile?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoadStartFromCsvImpl implements _LoadStartFromCsv {
-  const _$LoadStartFromCsvImpl({this.csv});
-
-  @override
-  final PlatformFile? csv;
-
-  @override
-  String toString() {
-    return 'DatabaseEvent.loadStartFromCsv(csv: $csv)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadStartFromCsvImpl &&
-            (identical(other.csv, csv) || other.csv == csv));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, csv);
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadStartFromCsvImplCopyWith<_$LoadStartFromCsvImpl> get copyWith =>
-      __$$LoadStartFromCsvImplCopyWithImpl<_$LoadStartFromCsvImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)
-        emitState,
-    required TResult Function(Race race) addRace,
-    required TResult Function(int id) deleteRace,
-    required TResult Function() getRaces,
-    required TResult Function(Race race) selectRace,
-    required TResult Function() deselectRace,
-    required TResult Function(Stage stage) addStage,
-    required TResult Function(int id) deleteStage,
-    required TResult Function(int raceId) getStages,
-    required TResult Function(Stage stage) selectStage,
-    required TResult Function(int stageId) getParticipantsAtStart,
-    required TResult Function(
-            Stage stage, int number, String startTime, bool forceAdd)
-        addStartNumber,
-    required TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)
-        updateStartingInfo,
-    required TResult Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
-        updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, int deltaInSeconds)
-        updateManualStartTime,
-    required TResult Function(int startId, ParticipantStatus status)
-        setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
-    required TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)
-        addFinishTime,
-    required TResult Function(int stageId, String finishTime, int? number)
-        addFinishTimeManual,
-    required TResult Function(int stageId) clearStartResultsDebug,
-    required TResult Function(int stageId) clearFinishResultsDebug,
-    required TResult Function(int stageId) hideAllFinises,
-    required TResult Function(Stage stage, int number) clearNumberAtFinish,
-    required TResult Function(Stage stage, int number) setDNSForStage,
-    required TResult Function(Stage stage, int number) setDNFForStage,
-    required TResult Function(int id) hideFinish,
-    required TResult Function(
-            Stage stage, int finishId, int number, String finishTime)
-        addNumberToFinish,
-    required TResult Function(int stageId, DateTime dateTimeNow)
-        getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
-    required TResult Function(int number) selectAwaitingNumber,
-    required TResult Function() deselectAwaitingNumber,
-  }) {
-    return loadStartFromCsv(csv);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult? Function(Race race)? addRace,
-    TResult? Function(int id)? deleteRace,
-    TResult? Function()? getRaces,
-    TResult? Function(Race race)? selectRace,
-    TResult? Function()? deselectRace,
-    TResult? Function(Stage stage)? addStage,
-    TResult? Function(int id)? deleteStage,
-    TResult? Function(int raceId)? getStages,
-    TResult? Function(Stage stage)? selectStage,
-    TResult? Function(int stageId)? getParticipantsAtStart,
-    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult? Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult? Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult? Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
-    TResult? Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult? Function(int stageId, String finishTime, int? number)?
-        addFinishTimeManual,
-    TResult? Function(int stageId)? clearStartResultsDebug,
-    TResult? Function(int stageId)? clearFinishResultsDebug,
-    TResult? Function(int stageId)? hideAllFinises,
-    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult? Function(Stage stage, int number)? setDNSForStage,
-    TResult? Function(Stage stage, int number)? setDNFForStage,
-    TResult? Function(int id)? hideFinish,
-    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
-    TResult? Function(int number)? selectAwaitingNumber,
-    TResult? Function()? deselectAwaitingNumber,
-  }) {
-    return loadStartFromCsv?.call(csv);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function()? getRaces,
-    TResult Function(Race race)? selectRace,
-    TResult Function()? deselectRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int raceId)? getStages,
-    TResult Function(Stage stage)? selectStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
-    TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult Function(int stageId, String finishTime, int? number)?
-        addFinishTimeManual,
-    TResult Function(int stageId)? clearStartResultsDebug,
-    TResult Function(int stageId)? clearFinishResultsDebug,
-    TResult Function(int stageId)? hideAllFinises,
-    TResult Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult Function(Stage stage, int number)? setDNSForStage,
-    TResult Function(Stage stage, int number)? setDNFForStage,
-    TResult Function(int id)? hideFinish,
-    TResult Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
-    required TResult orElse(),
-  }) {
-    if (loadStartFromCsv != null) {
-      return loadStartFromCsv(csv);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialize value) initialize,
-    required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_DeleteRace value) deleteRace,
-    required TResult Function(_GetRaces value) getRaces,
-    required TResult Function(_SelectRace value) selectRace,
-    required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
-    required TResult Function(_DeleteStage value) deleteStage,
-    required TResult Function(_GetStages value) getStages,
-    required TResult Function(_SelectStage value) selectStage,
-    required TResult Function(_GetParticipantsAtStart value)
-        getParticipantsAtStart,
-    required TResult Function(_AddStartNumber value) addStartNumber,
-    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
-    required TResult Function(_UpdateAutomaticCorrection value)
-        updateAutomaticCorrection,
-    required TResult Function(_UpdateManualStartTime value)
-        updateManualStartTime,
-    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
-    required TResult Function(_AddFinishTime value) addFinishTime,
-    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
-    required TResult Function(_ClearStartResultsDebug value)
-        clearStartResultsDebug,
-    required TResult Function(_ClearFinishResultsDebug value)
-        clearFinishResultsDebug,
-    required TResult Function(_HideAllFinises value) hideAllFinises,
-    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
-    required TResult Function(_SetDNSForStage value) setDNSForStage,
-    required TResult Function(_SetDNFForStage value) setDNFForStage,
-    required TResult Function(_HideFinish value) hideFinish,
-    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
-    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
-    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
-    required TResult Function(_DeselectAwaitingNumber value)
-        deselectAwaitingNumber,
-  }) {
-    return loadStartFromCsv(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_DeleteRace value)? deleteRace,
-    TResult? Function(_GetRaces value)? getRaces,
-    TResult? Function(_SelectRace value)? selectRace,
-    TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
-    TResult? Function(_DeleteStage value)? deleteStage,
-    TResult? Function(_GetStages value)? getStages,
-    TResult? Function(_SelectStage value)? selectStage,
-    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult? Function(_AddStartNumber value)? addStartNumber,
-    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult? Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
-    TResult? Function(_AddFinishTime value)? addFinishTime,
-    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult? Function(_HideAllFinises value)? hideAllFinises,
-    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult? Function(_SetDNSForStage value)? setDNSForStage,
-    TResult? Function(_SetDNFForStage value)? setDNFForStage,
-    TResult? Function(_HideFinish value)? hideFinish,
-    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
-    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-  }) {
-    return loadStartFromCsv?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_GetRaces value)? getRaces,
-    TResult Function(_SelectRace value)? selectRace,
-    TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetStages value)? getStages,
-    TResult Function(_SelectStage value)? selectStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
-    TResult Function(_AddFinishTime value)? addFinishTime,
-    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult Function(_HideAllFinises value)? hideAllFinises,
-    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(_SetDNSForStage value)? setDNSForStage,
-    TResult Function(_SetDNFForStage value)? setDNFForStage,
-    TResult Function(_HideFinish value)? hideFinish,
-    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
-    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    required TResult orElse(),
-  }) {
-    if (loadStartFromCsv != null) {
-      return loadStartFromCsv(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadStartFromCsv implements DatabaseEvent {
-  const factory _LoadStartFromCsv({final PlatformFile? csv}) =
-      _$LoadStartFromCsvImpl;
-
-  PlatformFile? get csv;
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadStartFromCsvImplCopyWith<_$LoadStartFromCsvImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SshareStartImplCopyWith<$Res> {
-  factory _$$SshareStartImplCopyWith(
-          _$SshareStartImpl value, $Res Function(_$SshareStartImpl) then) =
-      __$$SshareStartImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$SshareStartImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$SshareStartImpl>
-    implements _$$SshareStartImplCopyWith<$Res> {
-  __$$SshareStartImplCopyWithImpl(
-      _$SshareStartImpl _value, $Res Function(_$SshareStartImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$SshareStartImpl implements _SshareStart {
-  const _$SshareStartImpl();
-
-  @override
-  String toString() {
-    return 'DatabaseEvent.shareStart()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SshareStartImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)
-        emitState,
-    required TResult Function(Race race) addRace,
-    required TResult Function(int id) deleteRace,
-    required TResult Function() getRaces,
-    required TResult Function(Race race) selectRace,
-    required TResult Function() deselectRace,
-    required TResult Function(Stage stage) addStage,
-    required TResult Function(int id) deleteStage,
-    required TResult Function(int raceId) getStages,
-    required TResult Function(Stage stage) selectStage,
-    required TResult Function(int stageId) getParticipantsAtStart,
-    required TResult Function(
-            Stage stage, int number, String startTime, bool forceAdd)
-        addStartNumber,
-    required TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)
-        updateStartingInfo,
-    required TResult Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
-        updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, int deltaInSeconds)
-        updateManualStartTime,
-    required TResult Function(int startId, ParticipantStatus status)
-        setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
-    required TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)
-        addFinishTime,
-    required TResult Function(int stageId, String finishTime, int? number)
-        addFinishTimeManual,
-    required TResult Function(int stageId) clearStartResultsDebug,
-    required TResult Function(int stageId) clearFinishResultsDebug,
-    required TResult Function(int stageId) hideAllFinises,
-    required TResult Function(Stage stage, int number) clearNumberAtFinish,
-    required TResult Function(Stage stage, int number) setDNSForStage,
-    required TResult Function(Stage stage, int number) setDNFForStage,
-    required TResult Function(int id) hideFinish,
-    required TResult Function(
-            Stage stage, int finishId, int number, String finishTime)
-        addNumberToFinish,
-    required TResult Function(int stageId, DateTime dateTimeNow)
-        getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
-    required TResult Function(int number) selectAwaitingNumber,
-    required TResult Function() deselectAwaitingNumber,
-  }) {
-    return shareStart();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult? Function(Race race)? addRace,
-    TResult? Function(int id)? deleteRace,
-    TResult? Function()? getRaces,
-    TResult? Function(Race race)? selectRace,
-    TResult? Function()? deselectRace,
-    TResult? Function(Stage stage)? addStage,
-    TResult? Function(int id)? deleteStage,
-    TResult? Function(int raceId)? getStages,
-    TResult? Function(Stage stage)? selectStage,
-    TResult? Function(int stageId)? getParticipantsAtStart,
-    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult? Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult? Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult? Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
-    TResult? Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult? Function(int stageId, String finishTime, int? number)?
-        addFinishTimeManual,
-    TResult? Function(int stageId)? clearStartResultsDebug,
-    TResult? Function(int stageId)? clearFinishResultsDebug,
-    TResult? Function(int stageId)? hideAllFinises,
-    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult? Function(Stage stage, int number)? setDNSForStage,
-    TResult? Function(Stage stage, int number)? setDNFForStage,
-    TResult? Function(int id)? hideFinish,
-    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
-    TResult? Function(int number)? selectAwaitingNumber,
-    TResult? Function()? deselectAwaitingNumber,
-  }) {
-    return shareStart?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function()? getRaces,
-    TResult Function(Race race)? selectRace,
-    TResult Function()? deselectRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int raceId)? getStages,
-    TResult Function(Stage stage)? selectStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
-    TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult Function(int stageId, String finishTime, int? number)?
-        addFinishTimeManual,
-    TResult Function(int stageId)? clearStartResultsDebug,
-    TResult Function(int stageId)? clearFinishResultsDebug,
-    TResult Function(int stageId)? hideAllFinises,
-    TResult Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult Function(Stage stage, int number)? setDNSForStage,
-    TResult Function(Stage stage, int number)? setDNFForStage,
-    TResult Function(int id)? hideFinish,
-    TResult Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
-    required TResult orElse(),
-  }) {
-    if (shareStart != null) {
-      return shareStart();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialize value) initialize,
-    required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_DeleteRace value) deleteRace,
-    required TResult Function(_GetRaces value) getRaces,
-    required TResult Function(_SelectRace value) selectRace,
-    required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
-    required TResult Function(_DeleteStage value) deleteStage,
-    required TResult Function(_GetStages value) getStages,
-    required TResult Function(_SelectStage value) selectStage,
-    required TResult Function(_GetParticipantsAtStart value)
-        getParticipantsAtStart,
-    required TResult Function(_AddStartNumber value) addStartNumber,
-    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
-    required TResult Function(_UpdateAutomaticCorrection value)
-        updateAutomaticCorrection,
-    required TResult Function(_UpdateManualStartTime value)
-        updateManualStartTime,
-    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
-    required TResult Function(_AddFinishTime value) addFinishTime,
-    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
-    required TResult Function(_ClearStartResultsDebug value)
-        clearStartResultsDebug,
-    required TResult Function(_ClearFinishResultsDebug value)
-        clearFinishResultsDebug,
-    required TResult Function(_HideAllFinises value) hideAllFinises,
-    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
-    required TResult Function(_SetDNSForStage value) setDNSForStage,
-    required TResult Function(_SetDNFForStage value) setDNFForStage,
-    required TResult Function(_HideFinish value) hideFinish,
-    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
-    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
-    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
-    required TResult Function(_DeselectAwaitingNumber value)
-        deselectAwaitingNumber,
-  }) {
-    return shareStart(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_DeleteRace value)? deleteRace,
-    TResult? Function(_GetRaces value)? getRaces,
-    TResult? Function(_SelectRace value)? selectRace,
-    TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
-    TResult? Function(_DeleteStage value)? deleteStage,
-    TResult? Function(_GetStages value)? getStages,
-    TResult? Function(_SelectStage value)? selectStage,
-    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult? Function(_AddStartNumber value)? addStartNumber,
-    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult? Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
-    TResult? Function(_AddFinishTime value)? addFinishTime,
-    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult? Function(_HideAllFinises value)? hideAllFinises,
-    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult? Function(_SetDNSForStage value)? setDNSForStage,
-    TResult? Function(_SetDNFForStage value)? setDNFForStage,
-    TResult? Function(_HideFinish value)? hideFinish,
-    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
-    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-  }) {
-    return shareStart?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_GetRaces value)? getRaces,
-    TResult Function(_SelectRace value)? selectRace,
-    TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetStages value)? getStages,
-    TResult Function(_SelectStage value)? selectStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
-    TResult Function(_AddFinishTime value)? addFinishTime,
-    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult Function(_HideAllFinises value)? hideAllFinises,
-    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(_SetDNSForStage value)? setDNSForStage,
-    TResult Function(_SetDNFForStage value)? setDNFForStage,
-    TResult Function(_HideFinish value)? hideFinish,
-    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
-    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    required TResult orElse(),
-  }) {
-    if (shareStart != null) {
-      return shareStart(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SshareStart implements DatabaseEvent {
-  const factory _SshareStart() = _$SshareStartImpl;
-}
-
-/// @nodoc
-abstract class _$$ShareFinishImplCopyWith<$Res> {
-  factory _$$ShareFinishImplCopyWith(
-          _$ShareFinishImpl value, $Res Function(_$ShareFinishImpl) then) =
-      __$$ShareFinishImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ShareFinishImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$ShareFinishImpl>
-    implements _$$ShareFinishImplCopyWith<$Res> {
-  __$$ShareFinishImplCopyWithImpl(
-      _$ShareFinishImpl _value, $Res Function(_$ShareFinishImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$ShareFinishImpl implements _ShareFinish {
-  const _$ShareFinishImpl();
-
-  @override
-  String toString() {
-    return 'DatabaseEvent.shareFinish()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ShareFinishImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)
-        emitState,
-    required TResult Function(Race race) addRace,
-    required TResult Function(int id) deleteRace,
-    required TResult Function() getRaces,
-    required TResult Function(Race race) selectRace,
-    required TResult Function() deselectRace,
-    required TResult Function(Stage stage) addStage,
-    required TResult Function(int id) deleteStage,
-    required TResult Function(int raceId) getStages,
-    required TResult Function(Stage stage) selectStage,
-    required TResult Function(int stageId) getParticipantsAtStart,
-    required TResult Function(
-            Stage stage, int number, String startTime, bool forceAdd)
-        addStartNumber,
-    required TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)
-        updateStartingInfo,
-    required TResult Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
-        updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, int deltaInSeconds)
-        updateManualStartTime,
-    required TResult Function(int startId, ParticipantStatus status)
-        setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
-    required TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)
-        addFinishTime,
-    required TResult Function(int stageId, String finishTime, int? number)
-        addFinishTimeManual,
-    required TResult Function(int stageId) clearStartResultsDebug,
-    required TResult Function(int stageId) clearFinishResultsDebug,
-    required TResult Function(int stageId) hideAllFinises,
-    required TResult Function(Stage stage, int number) clearNumberAtFinish,
-    required TResult Function(Stage stage, int number) setDNSForStage,
-    required TResult Function(Stage stage, int number) setDNFForStage,
-    required TResult Function(int id) hideFinish,
-    required TResult Function(
-            Stage stage, int finishId, int number, String finishTime)
-        addNumberToFinish,
-    required TResult Function(int stageId, DateTime dateTimeNow)
-        getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
-    required TResult Function(int number) selectAwaitingNumber,
-    required TResult Function() deselectAwaitingNumber,
-  }) {
-    return shareFinish();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult? Function(Race race)? addRace,
-    TResult? Function(int id)? deleteRace,
-    TResult? Function()? getRaces,
-    TResult? Function(Race race)? selectRace,
-    TResult? Function()? deselectRace,
-    TResult? Function(Stage stage)? addStage,
-    TResult? Function(int id)? deleteStage,
-    TResult? Function(int raceId)? getStages,
-    TResult? Function(Stage stage)? selectStage,
-    TResult? Function(int stageId)? getParticipantsAtStart,
-    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult? Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult? Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult? Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
-    TResult? Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult? Function(int stageId, String finishTime, int? number)?
-        addFinishTimeManual,
-    TResult? Function(int stageId)? clearStartResultsDebug,
-    TResult? Function(int stageId)? clearFinishResultsDebug,
-    TResult? Function(int stageId)? hideAllFinises,
-    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult? Function(Stage stage, int number)? setDNSForStage,
-    TResult? Function(Stage stage, int number)? setDNFForStage,
-    TResult? Function(int id)? hideFinish,
-    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
-    TResult? Function(int number)? selectAwaitingNumber,
-    TResult? Function()? deselectAwaitingNumber,
-  }) {
-    return shareFinish?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult Function(Race race)? addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function()? getRaces,
-    TResult Function(Race race)? selectRace,
-    TResult Function()? deselectRace,
-    TResult Function(Stage stage)? addStage,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int raceId)? getStages,
-    TResult Function(Stage stage)? selectStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
-    TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult Function(int stageId, String finishTime, int? number)?
-        addFinishTimeManual,
-    TResult Function(int stageId)? clearStartResultsDebug,
-    TResult Function(int stageId)? clearFinishResultsDebug,
-    TResult Function(int stageId)? hideAllFinises,
-    TResult Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult Function(Stage stage, int number)? setDNSForStage,
-    TResult Function(Stage stage, int number)? setDNFForStage,
-    TResult Function(int id)? hideFinish,
-    TResult Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
-    required TResult orElse(),
-  }) {
-    if (shareFinish != null) {
-      return shareFinish();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialize value) initialize,
-    required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_DeleteRace value) deleteRace,
-    required TResult Function(_GetRaces value) getRaces,
-    required TResult Function(_SelectRace value) selectRace,
-    required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
-    required TResult Function(_DeleteStage value) deleteStage,
-    required TResult Function(_GetStages value) getStages,
-    required TResult Function(_SelectStage value) selectStage,
-    required TResult Function(_GetParticipantsAtStart value)
-        getParticipantsAtStart,
-    required TResult Function(_AddStartNumber value) addStartNumber,
-    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
-    required TResult Function(_UpdateAutomaticCorrection value)
-        updateAutomaticCorrection,
-    required TResult Function(_UpdateManualStartTime value)
-        updateManualStartTime,
-    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
-    required TResult Function(_AddFinishTime value) addFinishTime,
-    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
-    required TResult Function(_ClearStartResultsDebug value)
-        clearStartResultsDebug,
-    required TResult Function(_ClearFinishResultsDebug value)
-        clearFinishResultsDebug,
-    required TResult Function(_HideAllFinises value) hideAllFinises,
-    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
-    required TResult Function(_SetDNSForStage value) setDNSForStage,
-    required TResult Function(_SetDNFForStage value) setDNFForStage,
-    required TResult Function(_HideFinish value) hideFinish,
-    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
-    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
-    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
-    required TResult Function(_DeselectAwaitingNumber value)
-        deselectAwaitingNumber,
-  }) {
-    return shareFinish(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_DeleteRace value)? deleteRace,
-    TResult? Function(_GetRaces value)? getRaces,
-    TResult? Function(_SelectRace value)? selectRace,
-    TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
-    TResult? Function(_DeleteStage value)? deleteStage,
-    TResult? Function(_GetStages value)? getStages,
-    TResult? Function(_SelectStage value)? selectStage,
-    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult? Function(_AddStartNumber value)? addStartNumber,
-    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult? Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
-    TResult? Function(_AddFinishTime value)? addFinishTime,
-    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult? Function(_HideAllFinises value)? hideAllFinises,
-    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult? Function(_SetDNSForStage value)? setDNSForStage,
-    TResult? Function(_SetDNFForStage value)? setDNFForStage,
-    TResult? Function(_HideFinish value)? hideFinish,
-    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
-    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-  }) {
-    return shareFinish?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_GetRaces value)? getRaces,
-    TResult Function(_SelectRace value)? selectRace,
-    TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetStages value)? getStages,
-    TResult Function(_SelectStage value)? selectStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
-    TResult Function(_AddFinishTime value)? addFinishTime,
-    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult Function(_HideAllFinises value)? hideAllFinises,
-    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(_SetDNSForStage value)? setDNSForStage,
-    TResult Function(_SetDNFForStage value)? setDNFForStage,
-    TResult Function(_HideFinish value)? hideFinish,
-    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
-    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    required TResult orElse(),
-  }) {
-    if (shareFinish != null) {
-      return shareFinish(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ShareFinish implements DatabaseEvent {
-  const factory _ShareFinish() = _$ShareFinishImpl;
 }
 
 /// @nodoc
@@ -16011,11 +14720,11 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return selectAwaitingNumber(number);
   }
@@ -16092,11 +14801,11 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return selectAwaitingNumber?.call(number);
   }
@@ -16173,11 +14882,11 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (selectAwaitingNumber != null) {
@@ -16223,12 +14932,13 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return selectAwaitingNumber(this);
   }
@@ -16266,11 +14976,11 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return selectAwaitingNumber?.call(this);
   }
@@ -16308,11 +15018,11 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (selectAwaitingNumber != null) {
@@ -16451,11 +15161,11 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
         addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
         getNumbersOnTraceNow,
-    required TResult Function(PlatformFile? csv) loadStartFromCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
   }) {
     return deselectAwaitingNumber();
   }
@@ -16532,11 +15242,11 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
   }) {
     return deselectAwaitingNumber?.call();
   }
@@ -16613,11 +15323,11 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
         addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(PlatformFile? csv)? loadStartFromCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
     required TResult orElse(),
   }) {
     if (deselectAwaitingNumber != null) {
@@ -16663,12 +15373,13 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_LoadStartFromCsv value) loadStartFromCsv,
-    required TResult Function(_SshareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return deselectAwaitingNumber(this);
   }
@@ -16706,11 +15417,11 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult? Function(_SshareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return deselectAwaitingNumber?.call(this);
   }
@@ -16748,11 +15459,11 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_LoadStartFromCsv value)? loadStartFromCsv,
-    TResult Function(_SshareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
     if (deselectAwaitingNumber != null) {
@@ -16764,6 +15475,1331 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
 
 abstract class _DeselectAwaitingNumber implements DatabaseEvent {
   const factory _DeselectAwaitingNumber() = _$DeselectAwaitingNumberImpl;
+}
+
+/// @nodoc
+abstract class _$$CreateRaceFromRaceCsvImplCopyWith<$Res> {
+  factory _$$CreateRaceFromRaceCsvImplCopyWith(
+          _$CreateRaceFromRaceCsvImpl value,
+          $Res Function(_$CreateRaceFromRaceCsvImpl) then) =
+      __$$CreateRaceFromRaceCsvImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({RaceCsv race});
+}
+
+/// @nodoc
+class __$$CreateRaceFromRaceCsvImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$CreateRaceFromRaceCsvImpl>
+    implements _$$CreateRaceFromRaceCsvImplCopyWith<$Res> {
+  __$$CreateRaceFromRaceCsvImplCopyWithImpl(_$CreateRaceFromRaceCsvImpl _value,
+      $Res Function(_$CreateRaceFromRaceCsvImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? race = null,
+  }) {
+    return _then(_$CreateRaceFromRaceCsvImpl(
+      race: null == race
+          ? _value.race
+          : race // ignore: cast_nullable_to_non_nullable
+              as RaceCsv,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
+  const _$CreateRaceFromRaceCsvImpl({required this.race});
+
+  @override
+  final RaceCsv race;
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.createRaceFromRaceCsv(race: $race)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateRaceFromRaceCsvImpl &&
+            (identical(other.race, race) || other.race == race));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, race);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateRaceFromRaceCsvImplCopyWith<_$CreateRaceFromRaceCsvImpl>
+      get copyWith => __$$CreateRaceFromRaceCsvImplCopyWithImpl<
+          _$CreateRaceFromRaceCsvImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<Trail> trails,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
+        emitState,
+    required TResult Function(Race race) addRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function() getRaces,
+    required TResult Function(Race race) selectRace,
+    required TResult Function() deselectRace,
+    required TResult Function(Stage stage) addStage,
+    required TResult Function(int id) deleteStage,
+    required TResult Function(int raceId) getStages,
+    required TResult Function(Stage stage) selectStage,
+    required TResult Function(int stageId) getParticipantsAtStart,
+    required TResult Function(
+            Stage stage, int number, String startTime, bool forceAdd)
+        addStartNumber,
+    required TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)
+        updateStartingInfo,
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
+        updateAutomaticCorrection,
+    required TResult Function(int stageId, DateTime time, int deltaInSeconds)
+        updateManualStartTime,
+    required TResult Function(int startId, ParticipantStatus status)
+        setStatusForStartId,
+    required TResult Function(int stageId) getFinishesFromStage,
+    required TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timeStamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)
+        addFinishTime,
+    required TResult Function(int stageId, String finishTime, int? number)
+        addFinishTimeManual,
+    required TResult Function(int stageId) clearStartResultsDebug,
+    required TResult Function(int stageId) clearFinishResultsDebug,
+    required TResult Function(int stageId) hideAllFinises,
+    required TResult Function(Stage stage, int number) clearNumberAtFinish,
+    required TResult Function(Stage stage, int number) setDNSForStage,
+    required TResult Function(Stage stage, int number) setDNFForStage,
+    required TResult Function(int id) hideFinish,
+    required TResult Function(
+            Stage stage, int finishId, int number, String finishTime)
+        addNumberToFinish,
+    required TResult Function(int stageId, DateTime dateTimeNow)
+        getNumbersOnTraceNow,
+    required TResult Function(int number) selectAwaitingNumber,
+    required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
+  }) {
+    return createRaceFromRaceCsv(race);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<Trail> trails,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function()? getRaces,
+    TResult? Function(Race race)? selectRace,
+    TResult? Function()? deselectRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int raceId)? getStages,
+    TResult? Function(Stage stage)? selectStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult? Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult? Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult? Function(int stageId)? getFinishesFromStage,
+    TResult? Function(
+            Stage stage,
+            String finishTime,
+            DateTime timeStamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult? Function(int stageId, String finishTime, int? number)?
+        addFinishTimeManual,
+    TResult? Function(int stageId)? clearStartResultsDebug,
+    TResult? Function(int stageId)? clearFinishResultsDebug,
+    TResult? Function(int stageId)? hideAllFinises,
+    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult? Function(Stage stage, int number)? setDNSForStage,
+    TResult? Function(Stage stage, int number)? setDNFForStage,
+    TResult? Function(int id)? hideFinish,
+    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+  }) {
+    return createRaceFromRaceCsv?.call(race);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<Trail> trails,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function()? getRaces,
+    TResult Function(Race race)? selectRace,
+    TResult Function()? deselectRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int raceId)? getStages,
+    TResult Function(Stage stage)? selectStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult Function(int stageId, DateTime time, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult Function(int stageId)? getFinishesFromStage,
+    TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timeStamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult Function(int stageId, String finishTime, int? number)?
+        addFinishTimeManual,
+    TResult Function(int stageId)? clearStartResultsDebug,
+    TResult Function(int stageId)? clearFinishResultsDebug,
+    TResult Function(int stageId)? hideAllFinises,
+    TResult Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult Function(Stage stage, int number)? setDNSForStage,
+    TResult Function(Stage stage, int number)? setDNFForStage,
+    TResult Function(int id)? hideFinish,
+    TResult Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int number)? selectAwaitingNumber,
+    TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
+    required TResult orElse(),
+  }) {
+    if (createRaceFromRaceCsv != null) {
+      return createRaceFromRaceCsv(race);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_GetRaces value) getRaces,
+    required TResult Function(_SelectRace value) selectRace,
+    required TResult Function(_DeselectRace value) deselectRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_DeleteStage value) deleteStage,
+    required TResult Function(_GetStages value) getStages,
+    required TResult Function(_SelectStage value) selectStage,
+    required TResult Function(_GetParticipantsAtStart value)
+        getParticipantsAtStart,
+    required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
+    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
+    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
+    required TResult Function(_AddFinishTime value) addFinishTime,
+    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
+    required TResult Function(_ClearStartResultsDebug value)
+        clearStartResultsDebug,
+    required TResult Function(_ClearFinishResultsDebug value)
+        clearFinishResultsDebug,
+    required TResult Function(_HideAllFinises value) hideAllFinises,
+    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
+    required TResult Function(_SetDNSForStage value) setDNSForStage,
+    required TResult Function(_SetDNFForStage value) setDNFForStage,
+    required TResult Function(_HideFinish value) hideFinish,
+    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
+    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
+    required TResult Function(_DeselectAwaitingNumber value)
+        deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
+  }) {
+    return createRaceFromRaceCsv(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_GetRaces value)? getRaces,
+    TResult? Function(_SelectRace value)? selectRace,
+    TResult? Function(_DeselectRace value)? deselectRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetStages value)? getStages,
+    TResult? Function(_SelectStage value)? selectStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
+    TResult? Function(_AddFinishTime value)? addFinishTime,
+    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult? Function(_HideAllFinises value)? hideAllFinises,
+    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(_SetDNSForStage value)? setDNSForStage,
+    TResult? Function(_SetDNFForStage value)? setDNFForStage,
+    TResult? Function(_HideFinish value)? hideFinish,
+    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
+  }) {
+    return createRaceFromRaceCsv?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_GetRaces value)? getRaces,
+    TResult Function(_SelectRace value)? selectRace,
+    TResult Function(_DeselectRace value)? deselectRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetStages value)? getStages,
+    TResult Function(_SelectStage value)? selectStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
+    TResult Function(_AddFinishTime value)? addFinishTime,
+    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult Function(_HideAllFinises value)? hideAllFinises,
+    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult Function(_SetDNSForStage value)? setDNSForStage,
+    TResult Function(_SetDNFForStage value)? setDNFForStage,
+    TResult Function(_HideFinish value)? hideFinish,
+    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
+    required TResult orElse(),
+  }) {
+    if (createRaceFromRaceCsv != null) {
+      return createRaceFromRaceCsv(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateRaceFromRaceCsv implements DatabaseEvent {
+  const factory _CreateRaceFromRaceCsv({required final RaceCsv race}) =
+      _$CreateRaceFromRaceCsvImpl;
+
+  RaceCsv get race;
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreateRaceFromRaceCsvImplCopyWith<_$CreateRaceFromRaceCsvImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SshareStartImplCopyWith<$Res> {
+  factory _$$SshareStartImplCopyWith(
+          _$SshareStartImpl value, $Res Function(_$SshareStartImpl) then) =
+      __$$SshareStartImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SshareStartImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$SshareStartImpl>
+    implements _$$SshareStartImplCopyWith<$Res> {
+  __$$SshareStartImplCopyWithImpl(
+      _$SshareStartImpl _value, $Res Function(_$SshareStartImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SshareStartImpl implements _SshareStart {
+  const _$SshareStartImpl();
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.shareStart()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SshareStartImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<Trail> trails,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
+        emitState,
+    required TResult Function(Race race) addRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function() getRaces,
+    required TResult Function(Race race) selectRace,
+    required TResult Function() deselectRace,
+    required TResult Function(Stage stage) addStage,
+    required TResult Function(int id) deleteStage,
+    required TResult Function(int raceId) getStages,
+    required TResult Function(Stage stage) selectStage,
+    required TResult Function(int stageId) getParticipantsAtStart,
+    required TResult Function(
+            Stage stage, int number, String startTime, bool forceAdd)
+        addStartNumber,
+    required TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)
+        updateStartingInfo,
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
+        updateAutomaticCorrection,
+    required TResult Function(int stageId, DateTime time, int deltaInSeconds)
+        updateManualStartTime,
+    required TResult Function(int startId, ParticipantStatus status)
+        setStatusForStartId,
+    required TResult Function(int stageId) getFinishesFromStage,
+    required TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timeStamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)
+        addFinishTime,
+    required TResult Function(int stageId, String finishTime, int? number)
+        addFinishTimeManual,
+    required TResult Function(int stageId) clearStartResultsDebug,
+    required TResult Function(int stageId) clearFinishResultsDebug,
+    required TResult Function(int stageId) hideAllFinises,
+    required TResult Function(Stage stage, int number) clearNumberAtFinish,
+    required TResult Function(Stage stage, int number) setDNSForStage,
+    required TResult Function(Stage stage, int number) setDNFForStage,
+    required TResult Function(int id) hideFinish,
+    required TResult Function(
+            Stage stage, int finishId, int number, String finishTime)
+        addNumberToFinish,
+    required TResult Function(int stageId, DateTime dateTimeNow)
+        getNumbersOnTraceNow,
+    required TResult Function(int number) selectAwaitingNumber,
+    required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
+  }) {
+    return shareStart();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<Trail> trails,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function()? getRaces,
+    TResult? Function(Race race)? selectRace,
+    TResult? Function()? deselectRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int raceId)? getStages,
+    TResult? Function(Stage stage)? selectStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult? Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult? Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult? Function(int stageId)? getFinishesFromStage,
+    TResult? Function(
+            Stage stage,
+            String finishTime,
+            DateTime timeStamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult? Function(int stageId, String finishTime, int? number)?
+        addFinishTimeManual,
+    TResult? Function(int stageId)? clearStartResultsDebug,
+    TResult? Function(int stageId)? clearFinishResultsDebug,
+    TResult? Function(int stageId)? hideAllFinises,
+    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult? Function(Stage stage, int number)? setDNSForStage,
+    TResult? Function(Stage stage, int number)? setDNFForStage,
+    TResult? Function(int id)? hideFinish,
+    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+  }) {
+    return shareStart?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<Trail> trails,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function()? getRaces,
+    TResult Function(Race race)? selectRace,
+    TResult Function()? deselectRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int raceId)? getStages,
+    TResult Function(Stage stage)? selectStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult Function(int stageId, DateTime time, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult Function(int stageId)? getFinishesFromStage,
+    TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timeStamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult Function(int stageId, String finishTime, int? number)?
+        addFinishTimeManual,
+    TResult Function(int stageId)? clearStartResultsDebug,
+    TResult Function(int stageId)? clearFinishResultsDebug,
+    TResult Function(int stageId)? hideAllFinises,
+    TResult Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult Function(Stage stage, int number)? setDNSForStage,
+    TResult Function(Stage stage, int number)? setDNFForStage,
+    TResult Function(int id)? hideFinish,
+    TResult Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int number)? selectAwaitingNumber,
+    TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
+    required TResult orElse(),
+  }) {
+    if (shareStart != null) {
+      return shareStart();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_GetRaces value) getRaces,
+    required TResult Function(_SelectRace value) selectRace,
+    required TResult Function(_DeselectRace value) deselectRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_DeleteStage value) deleteStage,
+    required TResult Function(_GetStages value) getStages,
+    required TResult Function(_SelectStage value) selectStage,
+    required TResult Function(_GetParticipantsAtStart value)
+        getParticipantsAtStart,
+    required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
+    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
+    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
+    required TResult Function(_AddFinishTime value) addFinishTime,
+    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
+    required TResult Function(_ClearStartResultsDebug value)
+        clearStartResultsDebug,
+    required TResult Function(_ClearFinishResultsDebug value)
+        clearFinishResultsDebug,
+    required TResult Function(_HideAllFinises value) hideAllFinises,
+    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
+    required TResult Function(_SetDNSForStage value) setDNSForStage,
+    required TResult Function(_SetDNFForStage value) setDNFForStage,
+    required TResult Function(_HideFinish value) hideFinish,
+    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
+    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
+    required TResult Function(_DeselectAwaitingNumber value)
+        deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
+  }) {
+    return shareStart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_GetRaces value)? getRaces,
+    TResult? Function(_SelectRace value)? selectRace,
+    TResult? Function(_DeselectRace value)? deselectRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetStages value)? getStages,
+    TResult? Function(_SelectStage value)? selectStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
+    TResult? Function(_AddFinishTime value)? addFinishTime,
+    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult? Function(_HideAllFinises value)? hideAllFinises,
+    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(_SetDNSForStage value)? setDNSForStage,
+    TResult? Function(_SetDNFForStage value)? setDNFForStage,
+    TResult? Function(_HideFinish value)? hideFinish,
+    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
+  }) {
+    return shareStart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_GetRaces value)? getRaces,
+    TResult Function(_SelectRace value)? selectRace,
+    TResult Function(_DeselectRace value)? deselectRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetStages value)? getStages,
+    TResult Function(_SelectStage value)? selectStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
+    TResult Function(_AddFinishTime value)? addFinishTime,
+    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult Function(_HideAllFinises value)? hideAllFinises,
+    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult Function(_SetDNSForStage value)? setDNSForStage,
+    TResult Function(_SetDNFForStage value)? setDNFForStage,
+    TResult Function(_HideFinish value)? hideFinish,
+    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
+    required TResult orElse(),
+  }) {
+    if (shareStart != null) {
+      return shareStart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SshareStart implements DatabaseEvent {
+  const factory _SshareStart() = _$SshareStartImpl;
+}
+
+/// @nodoc
+abstract class _$$ShareFinishImplCopyWith<$Res> {
+  factory _$$ShareFinishImplCopyWith(
+          _$ShareFinishImpl value, $Res Function(_$ShareFinishImpl) then) =
+      __$$ShareFinishImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ShareFinishImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$ShareFinishImpl>
+    implements _$$ShareFinishImplCopyWith<$Res> {
+  __$$ShareFinishImplCopyWithImpl(
+      _$ShareFinishImpl _value, $Res Function(_$ShareFinishImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ShareFinishImpl implements _ShareFinish {
+  const _$ShareFinishImpl();
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.shareFinish()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ShareFinishImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<Trail> trails,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
+        emitState,
+    required TResult Function(Race race) addRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function() getRaces,
+    required TResult Function(Race race) selectRace,
+    required TResult Function() deselectRace,
+    required TResult Function(Stage stage) addStage,
+    required TResult Function(int id) deleteStage,
+    required TResult Function(int raceId) getStages,
+    required TResult Function(Stage stage) selectStage,
+    required TResult Function(int stageId) getParticipantsAtStart,
+    required TResult Function(
+            Stage stage, int number, String startTime, bool forceAdd)
+        addStartNumber,
+    required TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)
+        updateStartingInfo,
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
+        updateAutomaticCorrection,
+    required TResult Function(int stageId, DateTime time, int deltaInSeconds)
+        updateManualStartTime,
+    required TResult Function(int startId, ParticipantStatus status)
+        setStatusForStartId,
+    required TResult Function(int stageId) getFinishesFromStage,
+    required TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timeStamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)
+        addFinishTime,
+    required TResult Function(int stageId, String finishTime, int? number)
+        addFinishTimeManual,
+    required TResult Function(int stageId) clearStartResultsDebug,
+    required TResult Function(int stageId) clearFinishResultsDebug,
+    required TResult Function(int stageId) hideAllFinises,
+    required TResult Function(Stage stage, int number) clearNumberAtFinish,
+    required TResult Function(Stage stage, int number) setDNSForStage,
+    required TResult Function(Stage stage, int number) setDNFForStage,
+    required TResult Function(int id) hideFinish,
+    required TResult Function(
+            Stage stage, int finishId, int number, String finishTime)
+        addNumberToFinish,
+    required TResult Function(int stageId, DateTime dateTimeNow)
+        getNumbersOnTraceNow,
+    required TResult Function(int number) selectAwaitingNumber,
+    required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
+  }) {
+    return shareFinish();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<Trail> trails,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult? Function(Race race)? addRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function()? getRaces,
+    TResult? Function(Race race)? selectRace,
+    TResult? Function()? deselectRace,
+    TResult? Function(Stage stage)? addStage,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int raceId)? getStages,
+    TResult? Function(Stage stage)? selectStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult? Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult? Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult? Function(int stageId)? getFinishesFromStage,
+    TResult? Function(
+            Stage stage,
+            String finishTime,
+            DateTime timeStamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult? Function(int stageId, String finishTime, int? number)?
+        addFinishTimeManual,
+    TResult? Function(int stageId)? clearStartResultsDebug,
+    TResult? Function(int stageId)? clearFinishResultsDebug,
+    TResult? Function(int stageId)? hideAllFinises,
+    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult? Function(Stage stage, int number)? setDNSForStage,
+    TResult? Function(Stage stage, int number)? setDNFForStage,
+    TResult? Function(int id)? hideFinish,
+    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+  }) {
+    return shareFinish?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<Trail> trails,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult Function(Race race)? addRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function()? getRaces,
+    TResult Function(Race race)? selectRace,
+    TResult Function()? deselectRace,
+    TResult Function(Stage stage)? addStage,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int raceId)? getStages,
+    TResult Function(Stage stage)? selectStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection,
+            int stageId,
+            int participantId)?
+        updateStartingInfo,
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult Function(int stageId, DateTime time, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult Function(int stageId)? getFinishesFromStage,
+    TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timeStamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult Function(int stageId, String finishTime, int? number)?
+        addFinishTimeManual,
+    TResult Function(int stageId)? clearStartResultsDebug,
+    TResult Function(int stageId)? clearFinishResultsDebug,
+    TResult Function(int stageId)? hideAllFinises,
+    TResult Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult Function(Stage stage, int number)? setDNSForStage,
+    TResult Function(Stage stage, int number)? setDNFForStage,
+    TResult Function(int id)? hideFinish,
+    TResult Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int number)? selectAwaitingNumber,
+    TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
+    required TResult orElse(),
+  }) {
+    if (shareFinish != null) {
+      return shareFinish();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_GetRaces value) getRaces,
+    required TResult Function(_SelectRace value) selectRace,
+    required TResult Function(_DeselectRace value) deselectRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_DeleteStage value) deleteStage,
+    required TResult Function(_GetStages value) getStages,
+    required TResult Function(_SelectStage value) selectStage,
+    required TResult Function(_GetParticipantsAtStart value)
+        getParticipantsAtStart,
+    required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
+    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
+    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
+    required TResult Function(_AddFinishTime value) addFinishTime,
+    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
+    required TResult Function(_ClearStartResultsDebug value)
+        clearStartResultsDebug,
+    required TResult Function(_ClearFinishResultsDebug value)
+        clearFinishResultsDebug,
+    required TResult Function(_HideAllFinises value) hideAllFinises,
+    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
+    required TResult Function(_SetDNSForStage value) setDNSForStage,
+    required TResult Function(_SetDNFForStage value) setDNFForStage,
+    required TResult Function(_HideFinish value) hideFinish,
+    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
+    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
+    required TResult Function(_DeselectAwaitingNumber value)
+        deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
+  }) {
+    return shareFinish(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_GetRaces value)? getRaces,
+    TResult? Function(_SelectRace value)? selectRace,
+    TResult? Function(_DeselectRace value)? deselectRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetStages value)? getStages,
+    TResult? Function(_SelectStage value)? selectStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
+    TResult? Function(_AddFinishTime value)? addFinishTime,
+    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult? Function(_HideAllFinises value)? hideAllFinises,
+    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(_SetDNSForStage value)? setDNSForStage,
+    TResult? Function(_SetDNFForStage value)? setDNFForStage,
+    TResult? Function(_HideFinish value)? hideFinish,
+    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
+  }) {
+    return shareFinish?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_GetRaces value)? getRaces,
+    TResult Function(_SelectRace value)? selectRace,
+    TResult Function(_DeselectRace value)? deselectRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetStages value)? getStages,
+    TResult Function(_SelectStage value)? selectStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
+    TResult Function(_AddFinishTime value)? addFinishTime,
+    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult Function(_HideAllFinises value)? hideAllFinises,
+    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult Function(_SetDNSForStage value)? setDNSForStage,
+    TResult Function(_SetDNFForStage value)? setDNFForStage,
+    TResult Function(_HideFinish value)? hideFinish,
+    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
+    required TResult orElse(),
+  }) {
+    if (shareFinish != null) {
+      return shareFinish(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShareFinish implements DatabaseEvent {
+  const factory _ShareFinish() = _$ShareFinishImpl;
 }
 
 /// @nodoc

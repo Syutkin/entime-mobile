@@ -6,6 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../common/localization/localization.dart';
 import '../../../common/widget/header_widget.dart';
 import '../../bluetooth/bluetooth.dart';
+import '../../csv/csv.dart';
 import '../../database/bloc/database_bloc.dart';
 import '../../database/widget/races_list_page.dart';
 import '../../database/widget/stages_list_page.dart';
@@ -44,6 +45,9 @@ class _InitPage extends State<InitPage> {
               : const SizedBox(width: 0, height: 0),
           !kReleaseMode
               ? const _DebugNewDatabase()
+              : const SizedBox(width: 0, height: 0),
+          !kReleaseMode
+              ? const _DebugTestCsv()
               : const SizedBox(width: 0, height: 0),
         ],
       );
@@ -196,6 +200,24 @@ class _DebugNewDatabase extends StatelessWidget {
       );
 }
 
+class _DebugTestCsv extends StatelessWidget {
+  const _DebugTestCsv();
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<DatabaseBloc>();
+    return TextButton(
+      onPressed: () async {
+        var race = await StartlistProvider().getStartCsv();
+        if (race != null) {
+          bloc.add(DatabaseEvent.createRaceFromRaceCsv(race: race));
+        }
+      },
+      child: const Text('CSV Test'),
+    );
+  }
+}
+
 class _SelectRaceWidget extends StatelessWidget {
   const _SelectRaceWidget();
 
@@ -203,6 +225,7 @@ class _SelectRaceWidget extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<DatabaseBloc, DatabaseState>(
           builder: (context, databaseState) {
+        final bloc = context.read<DatabaseBloc>();
         return databaseState.map(initial: (initial) {
           return ListTile(
             leading: IconButton(
@@ -211,6 +234,10 @@ class _SelectRaceWidget extends StatelessWidget {
             ),
             title: Text(Localization.current.I18nInit_selectRace),
             subtitle: Text(Localization.current.I18nInit_selectStage),
+            trailing: IconButton(
+              icon: Icon(MdiIcons.fileImportOutline),
+              onPressed: () {},
+            ),
           );
         }, initialized: (initialized) {
           void routeToSelectRace() {
@@ -237,6 +264,15 @@ class _SelectRaceWidget extends StatelessWidget {
             subtitle: initialized.stage == null
                 ? Text(Localization.current.I18nInit_selectStage)
                 : Text(initialized.stage!.name),
+            trailing: IconButton(
+              icon: Icon(MdiIcons.fileImportOutline),
+              onPressed: () async {
+                var race = await StartlistProvider().getStartCsv();
+                if (race != null) {
+                  bloc.add(DatabaseEvent.createRaceFromRaceCsv(race: race));
+                }
+              },
+            ),
           );
         });
       });

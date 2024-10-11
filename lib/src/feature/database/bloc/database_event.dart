@@ -147,21 +147,21 @@ class DatabaseEvent with _$DatabaseEvent {
     required DateTime dateTimeNow,
   }) = _GetNumbersOnTraceNow;
 
+  const factory DatabaseEvent.selectAwaitingNumber({
+    required int number,
+  }) = _SelectAwaitingNumber;
+
+  const factory DatabaseEvent.deselectAwaitingNumber() =
+  _DeselectAwaitingNumber;
+
   //ToDO:
-  const factory DatabaseEvent.loadStartFromCsv({
-    PlatformFile? csv,
-  }) = _LoadStartFromCsv;
+  const factory DatabaseEvent.createRaceFromRaceCsv({
+    required RaceCsv race,
+  }) = _CreateRaceFromRaceCsv;
 
   //ToDO:
   const factory DatabaseEvent.shareStart() = _SshareStart;
 
   //ToDO:
   const factory DatabaseEvent.shareFinish() = _ShareFinish;
-
-  const factory DatabaseEvent.selectAwaitingNumber({
-    required int number,
-  }) = _SelectAwaitingNumber;
-
-  const factory DatabaseEvent.deselectAwaitingNumber() =
-      _DeselectAwaitingNumber;
 }

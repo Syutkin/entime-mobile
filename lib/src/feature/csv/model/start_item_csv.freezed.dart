@@ -22,12 +22,12 @@ StartItemCsv _$StartItemCsvFromJson(Map<String, dynamic> json) {
 mixin _$StartItemCsv {
   String? get category => throw _privateConstructorUsedError;
   int get number => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String? get nickname => throw _privateConstructorUsedError;
   String? get age => throw _privateConstructorUsedError;
   String? get team => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
-  String? get startTime => throw _privateConstructorUsedError;
+  Map<String, String>? get startTimes => throw _privateConstructorUsedError;
 
   /// Serializes this StartItemCsv to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,12 +48,12 @@ abstract class $StartItemCsvCopyWith<$Res> {
   $Res call(
       {String? category,
       int number,
-      String? name,
+      String name,
       String? nickname,
       String? age,
       String? team,
       String? city,
-      String? startTime});
+      Map<String, String>? startTimes});
 }
 
 /// @nodoc
@@ -73,12 +73,12 @@ class _$StartItemCsvCopyWithImpl<$Res, $Val extends StartItemCsv>
   $Res call({
     Object? category = freezed,
     Object? number = null,
-    Object? name = freezed,
+    Object? name = null,
     Object? nickname = freezed,
     Object? age = freezed,
     Object? team = freezed,
     Object? city = freezed,
-    Object? startTime = freezed,
+    Object? startTimes = freezed,
   }) {
     return _then(_value.copyWith(
       category: freezed == category
@@ -89,10 +89,10 @@ class _$StartItemCsvCopyWithImpl<$Res, $Val extends StartItemCsv>
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       nickname: freezed == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -109,10 +109,10 @@ class _$StartItemCsvCopyWithImpl<$Res, $Val extends StartItemCsv>
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      startTime: freezed == startTime
-          ? _value.startTime
-          : startTime // ignore: cast_nullable_to_non_nullable
-              as String?,
+      startTimes: freezed == startTimes
+          ? _value.startTimes
+          : startTimes // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
     ) as $Val);
   }
 }
@@ -128,12 +128,12 @@ abstract class _$$StartItemCsvImplCopyWith<$Res>
   $Res call(
       {String? category,
       int number,
-      String? name,
+      String name,
       String? nickname,
       String? age,
       String? team,
       String? city,
-      String? startTime});
+      Map<String, String>? startTimes});
 }
 
 /// @nodoc
@@ -151,12 +151,12 @@ class __$$StartItemCsvImplCopyWithImpl<$Res>
   $Res call({
     Object? category = freezed,
     Object? number = null,
-    Object? name = freezed,
+    Object? name = null,
     Object? nickname = freezed,
     Object? age = freezed,
     Object? team = freezed,
     Object? city = freezed,
-    Object? startTime = freezed,
+    Object? startTimes = freezed,
   }) {
     return _then(_$StartItemCsvImpl(
       category: freezed == category
@@ -167,10 +167,10 @@ class __$$StartItemCsvImplCopyWithImpl<$Res>
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       nickname: freezed == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -187,10 +187,10 @@ class __$$StartItemCsvImplCopyWithImpl<$Res>
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      startTime: freezed == startTime
-          ? _value.startTime
-          : startTime // ignore: cast_nullable_to_non_nullable
-              as String?,
+      startTimes: freezed == startTimes
+          ? _value._startTimes
+          : startTimes // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
     ));
   }
 }
@@ -201,12 +201,13 @@ class _$StartItemCsvImpl implements _StartItemCsv {
   const _$StartItemCsvImpl(
       {this.category,
       required this.number,
-      this.name,
+      required this.name,
       this.nickname,
       this.age,
       this.team,
       this.city,
-      this.startTime});
+      final Map<String, String>? startTimes})
+      : _startTimes = startTimes;
 
   factory _$StartItemCsvImpl.fromJson(Map<String, dynamic> json) =>
       _$$StartItemCsvImplFromJson(json);
@@ -216,7 +217,7 @@ class _$StartItemCsvImpl implements _StartItemCsv {
   @override
   final int number;
   @override
-  final String? name;
+  final String name;
   @override
   final String? nickname;
   @override
@@ -225,12 +226,19 @@ class _$StartItemCsvImpl implements _StartItemCsv {
   final String? team;
   @override
   final String? city;
+  final Map<String, String>? _startTimes;
   @override
-  final String? startTime;
+  Map<String, String>? get startTimes {
+    final value = _startTimes;
+    if (value == null) return null;
+    if (_startTimes is EqualUnmodifiableMapView) return _startTimes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'StartItemCsv(category: $category, number: $number, name: $name, nickname: $nickname, age: $age, team: $team, city: $city, startTime: $startTime)';
+    return 'StartItemCsv(category: $category, number: $number, name: $name, nickname: $nickname, age: $age, team: $team, city: $city, startTimes: $startTimes)';
   }
 
   @override
@@ -247,14 +255,14 @@ class _$StartItemCsvImpl implements _StartItemCsv {
             (identical(other.age, age) || other.age == age) &&
             (identical(other.team, team) || other.team == team) &&
             (identical(other.city, city) || other.city == city) &&
-            (identical(other.startTime, startTime) ||
-                other.startTime == startTime));
+            const DeepCollectionEquality()
+                .equals(other._startTimes, _startTimes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, category, number, name, nickname,
-      age, team, city, startTime);
+      age, team, city, const DeepCollectionEquality().hash(_startTimes));
 
   /// Create a copy of StartItemCsv
   /// with the given fields replaced by the non-null parameter values.
@@ -276,12 +284,12 @@ abstract class _StartItemCsv implements StartItemCsv {
   const factory _StartItemCsv(
       {final String? category,
       required final int number,
-      final String? name,
+      required final String name,
       final String? nickname,
       final String? age,
       final String? team,
       final String? city,
-      final String? startTime}) = _$StartItemCsvImpl;
+      final Map<String, String>? startTimes}) = _$StartItemCsvImpl;
 
   factory _StartItemCsv.fromJson(Map<String, dynamic> json) =
       _$StartItemCsvImpl.fromJson;
@@ -291,7 +299,7 @@ abstract class _StartItemCsv implements StartItemCsv {
   @override
   int get number;
   @override
-  String? get name;
+  String get name;
   @override
   String? get nickname;
   @override
@@ -301,7 +309,7 @@ abstract class _StartItemCsv implements StartItemCsv {
   @override
   String? get city;
   @override
-  String? get startTime;
+  Map<String, String>? get startTimes;
 
   /// Create a copy of StartItemCsv
   /// with the given fields replaced by the non-null parameter values.

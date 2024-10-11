@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:entime/src/common/utils/consts.dart';
+import 'package:entime/src/feature/csv/model/race_csv.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
@@ -52,6 +53,13 @@ class AppDatabase extends _$AppDatabase {
     return _getRaces();
   }
 
+  Future<Race> getRace(int id) {
+    return (select(races)
+          ..where((r) => r.id.equals(id))
+          ..limit(1))
+        .getSingle();
+  }
+
   /// Добавляет новую гонку
   Future<int> addRace(
       {required String name,
@@ -84,6 +92,46 @@ class AppDatabase extends _$AppDatabase {
   /// Удаляет спецучасток с [id]
   Future<int> deleteStage({required int id}) {
     return _deleteStage(id: id);
+  }
+
+  /// Добавляет гонщика
+  Future<int> addRider({
+    required String name,
+    String? nickname,
+    String? city,
+    String? team,
+    String? birthday,
+    String? comment,
+    String? email,
+    String? phone,
+  }) {
+    return _addRider(
+      name: name,
+      nickname: nickname,
+      city: city,
+      team: team,
+      birthday: birthday,
+      comment: comment,
+      email: email,
+      phone: phone,
+    );
+  }
+
+  /// Добавляет участника соревнований
+  Future<int> addParticipant({
+    required int raceId,
+    required int riderId,
+    required int number,
+    String? category,
+    String? rfid,
+  }) {
+    return _addParticipant(
+      raceId: raceId,
+      riderId: riderId,
+      number: number,
+      category: category,
+      rfid: rfid,
+    );
   }
 
   /// Список участников на старте
@@ -695,6 +743,37 @@ class AppDatabase extends _$AppDatabase {
     );
     logger.i('Database -> Set DNF to number: $number at stageId: ${stage.id}');
     return rowCount;
+  }
+
+  Future<int> createRaceFromRaceCsv(RaceCsv race) async {
+    final raceId = await addRace(name: race.fileName.split('.').first);
+    final Map<String, int> stages = {};
+    for (var stageName in race.stageNames) {
+      stages[stageName] = await addStage(raceId: raceId, name: stageName);
+    }
+    for (var item in race.startItems) {
+      final riderId = await addRider(
+        name: item.name,
+        nickname: item.nickname,
+        city: item.city,
+        team: item.team,
+        birthday: item.age,
+      );
+      final participantId = await addParticipant(
+        raceId: raceId,
+        riderId: riderId,
+        number: item.number,
+        category: item.category,
+      );
+      for (var stageName in stages.keys) {
+        final startId = await _addStartInfo(
+          stageId: stages[stageName]!,
+          participantId: participantId,
+          startTime: item.startTimes![stageName]!,
+        );
+      }
+    }
+    return raceId;
   }
 
 // -------------------------
