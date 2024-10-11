@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-10T06:40:32.869881",
+  "@@last_modified": "2024-10-11T05:16:06.123910",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -668,21 +668,21 @@
       "nickname": {}
     }
   },
-  "I18nStart_participantCity": "Категория: {city}",
+  "I18nStart_participantCity": "Город: {city}",
   "@I18nStart_participantCity": {
     "type": "text",
     "placeholders": {
       "city": {}
     }
   },
-  "I18nStart_participantTeam": "Категория: {team}",
+  "I18nStart_participantTeam": "Команда: {team}",
   "@I18nStart_participantTeam": {
     "type": "text",
     "placeholders": {
       "team": {}
     }
   },
-  "I18nStart_participantYear": "Категория: {year}",
+  "I18nStart_participantYear": "Год/Возраст: {year}",
   "@I18nStart_participantYear": {
     "type": "text",
     "placeholders": {

@@ -197,11 +197,13 @@ class AppDatabase extends _$AppDatabase {
       logger.i(
         'Database -> Creating new participant with number $number and start time $startTime...',
       );
-      final raceName = await (select(races)
+      // Поскольку имя участика обязательно, ставим ему вместо имени название соревнования
+      // ToDo: возможность редактировать гонщиков
+      final raceName = (await (select(races)
             ..where(
               (name) => races.id.equals(stage.raceId),
             ))
-          .get();
+          .get()).first.name;
       final int ridersId = await into(riders).insert(
         RidersCompanion(
           name: Value('$number, $raceName'),
@@ -766,7 +768,7 @@ class AppDatabase extends _$AppDatabase {
         category: item.category,
       );
       for (var stageName in stages.keys) {
-        final startId = await _addStartInfo(
+        await _addStartInfo(
           stageId: stages[stageName]!,
           participantId: participantId,
           startTime: item.startTimes![stageName]!,

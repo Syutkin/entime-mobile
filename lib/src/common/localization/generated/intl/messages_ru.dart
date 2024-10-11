@@ -65,7 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m20(category) => "Категория: ${category}";
 
-  static String m21(city) => "Категория: ${city}";
+  static String m21(city) => "Город: ${city}";
 
   static String m22(nickname) => "Никнейм: ${nickname}";
 
@@ -73,9 +73,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m24(number, name) => "№${number}, ${name}";
 
-  static String m25(team) => "Категория: ${team}";
+  static String m25(team) => "Команда: ${team}";
 
-  static String m26(year) => "Категория: ${year}";
+  static String m26(year) => "Год/Возраст: ${year}";
 
   static String m18(current, total) => "${current} из ${total}";
 

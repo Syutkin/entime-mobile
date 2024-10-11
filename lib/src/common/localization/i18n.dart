@@ -762,17 +762,17 @@ class I18nStart {
         args: [nickname],
       );
   static String participantCity(String city) => Intl.message(
-        'Категория: $city',
+        'Город: $city',
         name: 'I18nStart_participantCity',
         args: [city],
       );
   static String participantTeam(String team) => Intl.message(
-        'Категория: $team',
+        'Команда: $team',
         name: 'I18nStart_participantTeam',
         args: [team],
       );
   static String participantYear(int year) => Intl.message(
-        'Категория: $year',
+        'Год/Возраст: $year',
         name: 'I18nStart_participantYear',
         args: [year],
       );

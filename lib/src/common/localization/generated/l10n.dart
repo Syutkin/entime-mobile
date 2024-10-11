@@ -1305,30 +1305,30 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Категория: {city}`
+  /// `Город: {city}`
   String I18nStart_participantCity(Object city) {
     return Intl.message(
-      'Категория: $city',
+      'Город: $city',
       name: 'I18nStart_participantCity',
       desc: '',
       args: [city],
     );
   }
 
-  /// `Категория: {team}`
+  /// `Команда: {team}`
   String I18nStart_participantTeam(Object team) {
     return Intl.message(
-      'Категория: $team',
+      'Команда: $team',
       name: 'I18nStart_participantTeam',
       desc: '',
       args: [team],
     );
   }
 
-  /// `Категория: {year}`
+  /// `Год/Возраст: {year}`
   String I18nStart_participantYear(Object year) {
     return Intl.message(
-      'Категория: $year',
+      'Год/Возраст: $year',
       name: 'I18nStart_participantYear',
       desc: '',
       args: [year],

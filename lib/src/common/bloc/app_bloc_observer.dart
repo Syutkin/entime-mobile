@@ -20,11 +20,11 @@ class AppBlocObserver extends BlocObserver {
     logger.e(error);
   }
 
-  // @override
-  // void onTransition(Bloc bloc, Transition transition) {
-  //   super.onTransition(bloc, transition);
-  //   if (bloc.toString() != "Instance of 'CountdownBloc'") {
-  //     logger.d('Transition: $transition');
-  //   }
-  // }
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    if (bloc.toString() != "Instance of 'CountdownBloc'") {
+      logger.t('Transition: $transition');
+    }
+  }
 }
