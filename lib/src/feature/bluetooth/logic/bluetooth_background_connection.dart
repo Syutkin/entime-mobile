@@ -16,10 +16,13 @@ abstract class IBluetoothBackgroundConnection {
   Future<void> connect(
     BluetoothDevice bluetoothDevice,
   );
+
   Stream<String> get message;
+
   bool get isConnected;
 
   Future<void> start();
+
   Future<void> stop();
 
   /// Отсылает [text] в Bluetooth Serial
@@ -31,6 +34,7 @@ abstract class IBluetoothBackgroundConnection {
   Future<void> dispose();
 
   void onDisconnect(VoidCallback callback);
+
   void onSendError(ErrorHandler error);
 }
 
@@ -79,11 +83,10 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   Future<void> connect(
     BluetoothDevice bluetoothDevice,
   ) async {
-    _connection = await BluetoothConnection.toAddress(bluetoothDevice.address)
-        .catchError((dynamic error) {
-      logger.e(
-        'BluetoothConnection -> Cannot connect, exception occurred: $error',
-      );
+    BluetoothConnection.toAddress(bluetoothDevice.address).then((connection) {
+      _connection = connection;
+    }).catchError((error) {
+      logger.e('BluetoothConnection -> Cannot connect', error: error);
     });
 
     // if (_connection != null) {
