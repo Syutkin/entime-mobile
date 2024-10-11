@@ -25,7 +25,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
         add(const UpdateFromFile());
       })
       ..onError((error) {
-        logger.e('UpdateBloc: Download error: $error');
+        logger.e('UpdateBloc: Download error', error: error);
         add(const CancelDownload());
       });
 

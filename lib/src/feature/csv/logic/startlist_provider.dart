@@ -34,9 +34,18 @@ class StartlistProvider {
         stageNames: riders.first.startTimes?.keys.toList() ?? [],
         startItems: riders,
       );
+    } on Exception catch (e) {
+      logger.e(
+        'CSV -> Exception while parsing starting list',
+        error: e,
+      );
+      return null;
     } on Error catch (e) {
-      logger.e('CSV -> Error at parsing starting list: $e '
-          'StackTrace: ${e.stackTrace}');
+      logger.e(
+        'CSV -> Error at parsing starting list',
+        error: e,
+        stackTrace: e.stackTrace,
+      );
       return null;
     }
   }

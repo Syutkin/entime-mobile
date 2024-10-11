@@ -82,7 +82,7 @@ class UpdateProvider {
         }
       }
     } on Exception catch (e) {
-      logger.e('Update_provider -> Some error: $e');
+      logger.e('Update_provider -> Some error', error: e);
     }
     return _canUpdate;
   }
@@ -104,11 +104,12 @@ class UpdateProvider {
           return null;
         }
       } on Exception catch (e) {
-        logger.e('Update_provider -> Exception: $e');
+        logger.e('Update_provider -> Exception', error: e);
         return null;
         // Может возникнуть при получении некорректного json от github
       } on Error catch (e) {
-        logger.e('Update_provider -> Error: $e');
+        logger.e('Update_provider -> Error',
+            error: e, stackTrace: e.stackTrace);
         return null;
       }
     }
@@ -161,7 +162,7 @@ class UpdateProvider {
                 _onDownloadComplete();
               },
               onError: (dynamic error) {
-                logger.e('Update_provider -> Error: $error');
+                logger.e('Update_provider -> Error', error: error);
                 _onError(error as String);
               },
               cancelOnError: true,
@@ -170,7 +171,7 @@ class UpdateProvider {
             _onError('Update_provider -> response.contentLength is null');
           }
         } on Exception catch (e) {
-          logger.e(e);
+          logger.e('Update_provider -> Exception', error: e);
         }
       }
     } else {

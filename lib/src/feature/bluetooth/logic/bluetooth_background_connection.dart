@@ -127,7 +127,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
         result = true;
       } on Exception catch (e) {
         // Ignore error, but notify state
-        logger.e('Error sending message: $e');
+        logger.e('Error sending message', error: e);
         _onSendError('$e');
         result = false;
       }

@@ -89,9 +89,8 @@ Future<void> main() async {
         },
         appRunner: () => runApp(app),
       );
-      // ignore: avoid_catches_without_on_clauses
-    } catch (e) {
-      logger.e('SentryFlutter error: $e');
+    } on Exception catch (e) {
+      logger.e('SentryFlutter error', error: e);
       runApp(app);
     }
   } else {

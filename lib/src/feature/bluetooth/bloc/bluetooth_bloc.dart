@@ -300,9 +300,10 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         return BluetoothMessage.automaticStart(
           automaticStart: automaticStart,
         );
-      } on Error catch (e) {
+      } on Exception catch (e) {
         logger.e(
-          'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage: $e',
+          'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage',
+          error: e,
         );
         return const BluetoothMessage.empty();
       }
