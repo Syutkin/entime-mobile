@@ -750,34 +750,36 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> createRaceFromRaceCsv(RaceCsv race) async {
-    final raceId =
+    var raceId =
         await addRace(name: path.basenameWithoutExtension(race.fileName));
-    final Map<String, int> stages = {};
-    for (var stageName in race.stageNames) {
-      stages[stageName] = await addStage(raceId: raceId, name: stageName);
-    }
-    for (var item in race.startItems) {
-      final riderId = await addRider(
-        name: item.name,
-        nickname: item.nickname,
-        city: item.city,
-        team: item.team,
-        birthday: item.age,
-      );
-      final participantId = await addParticipant(
-        raceId: raceId,
-        riderId: riderId,
-        number: item.number,
-        category: item.category,
-      );
-      for (var stageName in stages.keys) {
-        await _addStartInfo(
-          stageId: stages[stageName]!,
-          participantId: participantId,
-          startTime: item.startTimes![stageName]!,
-        );
+    Map<String, int> stages = {};
+    await transaction(() async {
+      for (var stageName in race.stageNames) {
+        stages[stageName] = await addStage(raceId: raceId, name: stageName);
       }
-    }
+      for (var item in race.startItems) {
+        final riderId = await addRider(
+          name: item.name,
+          nickname: item.nickname,
+          city: item.city,
+          team: item.team,
+          birthday: item.age,
+        );
+        final participantId = await addParticipant(
+          raceId: raceId,
+          riderId: riderId,
+          number: item.number,
+          category: item.category,
+        );
+        for (var stageName in stages.keys) {
+          await _addStartInfo(
+            stageId: stages[stageName]!,
+            participantId: participantId,
+            startTime: item.startTimes![stageName]!,
+          );
+        }
+      }
+    });
     return raceId;
   }
 

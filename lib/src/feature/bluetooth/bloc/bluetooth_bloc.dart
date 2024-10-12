@@ -143,8 +143,10 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               _messageSubscription = bluetoothProvider
                   .bluetoothBackgroundConnection.message
                   .listen(
-                (message) =>
-                    add(BluetoothEvent.messageReceived(message: message)),
+                (message) => add(BluetoothEvent.messageReceived(
+                  message: message,
+                  stageId: stageId,
+                )),
               );
               bluetoothProvider.bluetoothBackgroundConnection.onDisconnect(() {
                 add(const BluetoothEvent.disconnected());
@@ -229,16 +231,22 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               emit(BluetoothBlocState.connected(message: message));
             },
             countdown: (countdown) async {
-              await audioController.playCountdown(
-                time: countdown,
-                stageId: stageId,
-              );
+              final stageId = event.stageId;
+              if (stageId != null) {
+                await audioController.playCountdown(
+                  time: countdown,
+                  stageId: stageId,
+                );
+              }
             },
             voice: (time) async {
-              await audioController.callParticipant(
-                time: time,
-                stageId: stageId,
-              );
+              final stageId = event.stageId;
+              if (stageId != null) {
+                await audioController.callParticipant(
+                  time: time,
+                  stageId: stageId,
+                );
+              }
             },
             moduleSettings: (moduleSettings) {
               emit(BluetoothBlocState.connected(message: message));
