@@ -462,9 +462,9 @@ class _MenuButton extends StatelessWidget {
                 switch (value) {
                   case MenuButton.share:
                     if (activeTab == AppTab.start) {
-                      databaseBloc.add(const DatabaseEvent.shareStart());
+                      databaseBloc.add(DatabaseEvent.shareStart());
                     } else if (activeTab == AppTab.finish) {
-                      databaseBloc.add(const DatabaseEvent.shareFinish());
+                      databaseBloc.add(DatabaseEvent.shareFinish());
                     }
                     break;
                   case MenuButton.fab:

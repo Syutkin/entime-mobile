@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-11T05:16:06.123910",
+  "@@last_modified": "2024-10-12T03:15:11.371246",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -378,6 +378,22 @@
   "@I18nProtocol_time": {
     "type": "text",
     "placeholders": {}
+  },
+  "I18nProtocol_shareStartResults": "Результаты стартов гонки {raceName}, этап {stageName}",
+  "@I18nProtocol_shareStartResults": {
+    "type": "text",
+    "placeholders": {
+      "raceName": {},
+      "stageName": {}
+    }
+  },
+  "I18nProtocol_shareFinishResults": "Результаты финишей гонки {raceName}, этап {stageName}",
+  "@I18nProtocol_shareFinishResults": {
+    "type": "text",
+    "placeholders": {
+      "raceName": {},
+      "stageName": {}
+    }
   },
   "I18nBluetooth_unknownDevice": "Неизвестное устройство",
   "@I18nBluetooth_unknownDevice": {

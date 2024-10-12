@@ -32,7 +32,7 @@ void main() async {
     test('saveCsv', () async {
       // Сохраняем с использованием saveCsv,
       // потом считываем и сравниваем с исходником
-      final saveCsvFile = await saveCsv(csv, 'suffix', 'filePath');
+      final saveCsvFile = await saveCsv(csv, 'suffix');
       expect(saveCsvFile != null, true);
       expect(saveCsvFile!.readAsStringSync(), csv);
       saveCsvFile.deleteSync();

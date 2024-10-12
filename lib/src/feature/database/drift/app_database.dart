@@ -200,10 +200,12 @@ class AppDatabase extends _$AppDatabase {
       // Поскольку имя участика обязательно, ставим ему вместо имени название соревнования
       // ToDo: возможность редактировать гонщиков
       final raceName = (await (select(races)
-            ..where(
-              (name) => races.id.equals(stage.raceId),
-            ))
-          .get()).first.name;
+                ..where(
+                  (name) => races.id.equals(stage.raceId),
+                ))
+              .get())
+          .first
+          .name;
       final int ridersId = await into(riders).insert(
         RidersCompanion(
           name: Value('$number, $raceName'),
@@ -748,7 +750,8 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> createRaceFromRaceCsv(RaceCsv race) async {
-    final raceId = await addRace(name: race.fileName.split('.').first);
+    final raceId =
+        await addRace(name: path.basenameWithoutExtension(race.fileName));
     final Map<String, int> stages = {};
     for (var stageName in race.stageNames) {
       stages[stageName] = await addStage(raceId: raceId, name: stageName);
@@ -776,6 +779,14 @@ class AppDatabase extends _$AppDatabase {
       }
     }
     return raceId;
+  }
+
+  Future<List<StartForCsv>> getStartResults(int stageId) async {
+    return await _getStartsForCsv(stageId: stageId).get();
+  }
+
+  Future<List<FinishForCsv>> getFinishResults(int stageId) async {
+    return await _getFinishesForCsv(stageId: stageId).get();
   }
 
 // -------------------------

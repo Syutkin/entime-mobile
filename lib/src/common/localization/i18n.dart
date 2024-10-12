@@ -228,9 +228,9 @@ class I18nSettings {
       );
 
   static String get brightness => Intl.message(
-    'Светлая тема',
-    name: 'I18nSettings_brightness',
-  );
+        'Светлая тема',
+        name: 'I18nSettings_brightness',
+      );
 
   static String get journal => Intl.message(
         'Журнал',
@@ -379,6 +379,20 @@ class I18nProtocol {
   static String get time => Intl.message(
         'Время',
         name: 'I18nProtocol_time',
+      );
+
+  static String shareStartResults(String raceName, String stageName) =>
+      Intl.message(
+        'Результаты стартов гонки $raceName, этап $stageName',
+        name: 'I18nProtocol_shareStartResults',
+        args: [raceName, stageName],
+      );
+
+  static String shareFinishResults(String raceName, String stageName) =>
+      Intl.message(
+        'Результаты финишей гонки $raceName, этап $stageName',
+        name: 'I18nProtocol_shareFinishResults',
+        args: [raceName, stageName],
       );
 }
 
@@ -654,14 +668,14 @@ class I18nInit {
   //     );
 
   static String get selectRace => Intl.message(
-    'Выберите соревнование',
-    name: 'I18nInit_selectRace',
-  );
+        'Выберите соревнование',
+        name: 'I18nInit_selectRace',
+      );
 
   static String get selectStage => Intl.message(
-    'Выберите спецучасток',
-    name: 'I18nInit_selectStage',
-  );
+        'Выберите спецучасток',
+        name: 'I18nInit_selectStage',
+      );
 
   static String get pressToSelect => Intl.message(
         'Нажмите чтобы выбрать',
@@ -714,14 +728,17 @@ class I18nStart {
         '№',
         name: 'I18nStart_sliverNumber',
       );
+
   static String get sliverStart => Intl.message(
         'Старт',
         name: 'I18nStart_sliverStart',
       );
+
   static String get sliverManualCorrection => Intl.message(
         'Ручная\r\nпоправка',
         name: 'I18nStart_sliverManualCorrection',
       );
+
   static String get sliverAutomaticCorrection => Intl.message(
         'Авто\r\nпоправка',
         name: 'I18nStart_sliverAutomaticCorrection',
@@ -756,21 +773,25 @@ class I18nStart {
         name: 'I18nStart_participantCategory',
         args: [category],
       );
+
   static String participantNickname(String nickname) => Intl.message(
         'Никнейм: $nickname',
         name: 'I18nStart_participantNickname',
         args: [nickname],
       );
+
   static String participantCity(String city) => Intl.message(
         'Город: $city',
         name: 'I18nStart_participantCity',
         args: [city],
       );
+
   static String participantTeam(String team) => Intl.message(
         'Команда: $team',
         name: 'I18nStart_participantTeam',
         args: [team],
       );
+
   static String participantYear(int year) => Intl.message(
         'Год/Возраст: $year',
         name: 'I18nStart_participantYear',

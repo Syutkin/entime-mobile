@@ -1,16 +1,18 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:entime/src/common/logger/logger.dart';
-import 'package:entime/src/feature/csv/model/race_csv.dart';
-import 'package:entime/src/feature/database/model/participant_status.dart';
-// import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:share_plus/share_plus.dart';
 
+import '../../../common/localization/localization.dart';
+import '../../../common/logger/logger.dart';
+import '../../../common/utils/csv_utils.dart';
+import '../../../feature/csv/csv.dart';
 import '../../settings/logic/settings_provider.dart';
 import '../drift/app_database.dart';
 import '../model/notification.dart';
+import '../model/participant_status.dart';
 
 part 'database_bloc.freezed.dart';
 part 'database_event.dart';
@@ -422,20 +424,55 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           _awaitingNumber = null;
           _emitState();
         },
-        //ToDo:
         createRaceFromRaceCsv: (event) async {
           int id = await _db.createRaceFromRaceCsv(event.race);
           final race = await _db.getRace(id);
           _stage = null;
           add(DatabaseEvent.selectRace(race));
         },
-        //ToDo:
-        shareStart: (event) {
-          throw ('Not implemented');
+        shareStart: (event) async {
+          final race = _race;
+          final stage = _stage;
+          final stageId = stage?.id;
+          if (race != null && stage != null && stageId != null) {
+            var startList = await _db.getStartResults(stageId);
+            List<Map<String, dynamic>> startMap = [];
+            for (var start in startList) {
+              startMap.add(start.row.data);
+            }
+            final csv = mapListToCsv(startMap);
+            if (csv != null) {
+              final filename = '${race.name}-${stage.name}-start';
+              final file = await saveCsv(csv, filename);
+              if (file != null) {
+                await Share.shareXFiles([XFile(file.path)],
+                    text: Localization.current
+                        .I18nProtocol_shareStartResults(race.name, stage.name));
+              }
+            }
+          }
         },
-        //ToDo:
-        shareFinish: (event) {
-          throw ('Not implemented');
+        shareFinish: (event) async {
+          final race = _race;
+          final stage = _stage;
+          final stageId = stage?.id;
+          if (race != null && stage != null && stageId != null) {
+            var finishList = await _db.getFinishResults(stageId);
+            List<Map<String, dynamic>> finishMap = [];
+            for (var start in finishList) {
+              finishMap.add(start.row.data);
+            }
+            final csv = mapListToCsv(finishMap);
+            if (csv != null) {
+              final filename = '${race.name}-${stage.name}-finish';
+              final file = await saveCsv(csv, filename);
+              if (file != null) {
+                await Share.shareXFiles([XFile(file.path)],
+                    text: Localization.current.I18nProtocol_shareFinishResults(
+                        race.name, stage.name));
+              }
+            }
+          }
         },
       );
     });

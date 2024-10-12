@@ -295,7 +295,7 @@ mixin _$DatabaseEvent {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) =>
       throw _privateConstructorUsedError;
@@ -334,7 +334,7 @@ mixin _$DatabaseEvent {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) =>
       throw _privateConstructorUsedError;
@@ -373,7 +373,7 @@ mixin _$DatabaseEvent {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) =>
@@ -731,7 +731,7 @@ class _$InitializeImpl implements _Initialize {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return initialize(this);
@@ -773,7 +773,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return initialize?.call(this);
@@ -815,7 +815,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -1475,7 +1475,7 @@ class _$EmitStateImpl implements _EmitState {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return emitState(this);
@@ -1517,7 +1517,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return emitState?.call(this);
@@ -1559,7 +1559,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -1969,7 +1969,7 @@ class _$AddRaceImpl implements _AddRace {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addRace(this);
@@ -2011,7 +2011,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addRace?.call(this);
@@ -2053,7 +2053,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -2433,7 +2433,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return deleteRace(this);
@@ -2475,7 +2475,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return deleteRace?.call(this);
@@ -2517,7 +2517,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -2870,7 +2870,7 @@ class _$GetRacesImpl implements _GetRaces {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getRaces(this);
@@ -2912,7 +2912,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getRaces?.call(this);
@@ -2954,7 +2954,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -3327,7 +3327,7 @@ class _$SelectRaceImpl implements _SelectRace {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return selectRace(this);
@@ -3369,7 +3369,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return selectRace?.call(this);
@@ -3411,7 +3411,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -3764,7 +3764,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return deselectRace(this);
@@ -3806,7 +3806,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return deselectRace?.call(this);
@@ -3848,7 +3848,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -4221,7 +4221,7 @@ class _$AddStageImpl implements _AddStage {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addStage(this);
@@ -4263,7 +4263,7 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addStage?.call(this);
@@ -4305,7 +4305,7 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -4685,7 +4685,7 @@ class _$DeleteStageImpl implements _DeleteStage {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return deleteStage(this);
@@ -4727,7 +4727,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return deleteStage?.call(this);
@@ -4769,7 +4769,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -5149,7 +5149,7 @@ class _$GetStagesImpl implements _GetStages {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getStages(this);
@@ -5191,7 +5191,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getStages?.call(this);
@@ -5233,7 +5233,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -5614,7 +5614,7 @@ class _$SelectStageImpl implements _SelectStage {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return selectStage(this);
@@ -5656,7 +5656,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return selectStage?.call(this);
@@ -5698,7 +5698,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -6081,7 +6081,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getParticipantsAtStart(this);
@@ -6123,7 +6123,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getParticipantsAtStart?.call(this);
@@ -6165,7 +6165,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -6579,7 +6579,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addStartNumber(this);
@@ -6621,7 +6621,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addStartNumber?.call(this);
@@ -6663,7 +6663,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -7148,7 +7148,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return updateStartingInfo(this);
@@ -7190,7 +7190,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return updateStartingInfo?.call(this);
@@ -7232,7 +7232,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -7691,7 +7691,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return updateAutomaticCorrection(this);
@@ -7733,7 +7733,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return updateAutomaticCorrection?.call(this);
@@ -7775,7 +7775,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -8187,7 +8187,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return updateManualStartTime(this);
@@ -8229,7 +8229,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return updateManualStartTime?.call(this);
@@ -8271,7 +8271,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -8666,7 +8666,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return setStatusForStartId(this);
@@ -8708,7 +8708,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return setStatusForStartId?.call(this);
@@ -8750,7 +8750,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -9135,7 +9135,7 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getFinishesFromStage(this);
@@ -9177,7 +9177,7 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getFinishesFromStage?.call(this);
@@ -9219,7 +9219,7 @@ class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -9690,7 +9690,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addFinishTime(this);
@@ -9732,7 +9732,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addFinishTime?.call(this);
@@ -9774,7 +9774,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -10188,7 +10188,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addFinishTimeManual(this);
@@ -10230,7 +10230,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addFinishTimeManual?.call(this);
@@ -10272,7 +10272,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -10660,7 +10660,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return clearStartResultsDebug(this);
@@ -10702,7 +10702,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return clearStartResultsDebug?.call(this);
@@ -10744,7 +10744,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -11128,7 +11128,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return clearFinishResultsDebug(this);
@@ -11170,7 +11170,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return clearFinishResultsDebug?.call(this);
@@ -11212,7 +11212,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -11594,7 +11594,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return hideAllFinises(this);
@@ -11636,7 +11636,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return hideAllFinises?.call(this);
@@ -11678,7 +11678,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -12068,7 +12068,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return clearNumberAtFinish(this);
@@ -12110,7 +12110,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return clearNumberAtFinish?.call(this);
@@ -12152,7 +12152,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -12545,7 +12545,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return setDNSForStage(this);
@@ -12587,7 +12587,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return setDNSForStage?.call(this);
@@ -12629,7 +12629,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -13022,7 +13022,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return setDNFForStage(this);
@@ -13064,7 +13064,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return setDNFForStage?.call(this);
@@ -13106,7 +13106,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -13489,7 +13489,7 @@ class _$HideFinishImpl implements _HideFinish {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return hideFinish(this);
@@ -13531,7 +13531,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return hideFinish?.call(this);
@@ -13573,7 +13573,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -13985,7 +13985,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return addNumberToFinish(this);
@@ -14027,7 +14027,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return addNumberToFinish?.call(this);
@@ -14069,7 +14069,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -14468,7 +14468,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return getNumbersOnTraceNow(this);
@@ -14510,7 +14510,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return getNumbersOnTraceNow?.call(this);
@@ -14552,7 +14552,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -14937,7 +14937,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return selectAwaitingNumber(this);
@@ -14979,7 +14979,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return selectAwaitingNumber?.call(this);
@@ -15021,7 +15021,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -15378,7 +15378,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return deselectAwaitingNumber(this);
@@ -15420,7 +15420,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return deselectAwaitingNumber?.call(this);
@@ -15462,7 +15462,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -15836,7 +15836,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return createRaceFromRaceCsv(this);
@@ -15878,7 +15878,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return createRaceFromRaceCsv?.call(this);
@@ -15920,7 +15920,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -15945,18 +15945,18 @@ abstract class _CreateRaceFromRaceCsv implements DatabaseEvent {
 }
 
 /// @nodoc
-abstract class _$$SshareStartImplCopyWith<$Res> {
-  factory _$$SshareStartImplCopyWith(
-          _$SshareStartImpl value, $Res Function(_$SshareStartImpl) then) =
-      __$$SshareStartImplCopyWithImpl<$Res>;
+abstract class _$$ShareStartImplCopyWith<$Res> {
+  factory _$$ShareStartImplCopyWith(
+          _$ShareStartImpl value, $Res Function(_$ShareStartImpl) then) =
+      __$$ShareStartImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SshareStartImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$SshareStartImpl>
-    implements _$$SshareStartImplCopyWith<$Res> {
-  __$$SshareStartImplCopyWithImpl(
-      _$SshareStartImpl _value, $Res Function(_$SshareStartImpl) _then)
+class __$$ShareStartImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$ShareStartImpl>
+    implements _$$ShareStartImplCopyWith<$Res> {
+  __$$ShareStartImplCopyWithImpl(
+      _$ShareStartImpl _value, $Res Function(_$ShareStartImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DatabaseEvent
@@ -15965,8 +15965,8 @@ class __$$SshareStartImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SshareStartImpl implements _SshareStart {
-  const _$SshareStartImpl();
+class _$ShareStartImpl implements _ShareStart {
+  const _$ShareStartImpl();
 
   @override
   String toString() {
@@ -15976,7 +15976,7 @@ class _$SshareStartImpl implements _SshareStart {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SshareStartImpl);
+        (other.runtimeType == runtimeType && other is _$ShareStartImpl);
   }
 
   @override
@@ -16274,7 +16274,7 @@ class _$SshareStartImpl implements _SshareStart {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return shareStart(this);
@@ -16316,7 +16316,7 @@ class _$SshareStartImpl implements _SshareStart {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return shareStart?.call(this);
@@ -16358,7 +16358,7 @@ class _$SshareStartImpl implements _SshareStart {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {
@@ -16369,8 +16369,8 @@ class _$SshareStartImpl implements _SshareStart {
   }
 }
 
-abstract class _SshareStart implements DatabaseEvent {
-  const factory _SshareStart() = _$SshareStartImpl;
+abstract class _ShareStart implements DatabaseEvent {
+  const factory _ShareStart() = _$ShareStartImpl;
 }
 
 /// @nodoc
@@ -16703,7 +16703,7 @@ class _$ShareFinishImpl implements _ShareFinish {
         deselectAwaitingNumber,
     required TResult Function(_CreateRaceFromRaceCsv value)
         createRaceFromRaceCsv,
-    required TResult Function(_SshareStart value) shareStart,
+    required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
   }) {
     return shareFinish(this);
@@ -16745,7 +16745,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_SshareStart value)? shareStart,
+    TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
   }) {
     return shareFinish?.call(this);
@@ -16787,7 +16787,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_SshareStart value)? shareStart,
+    TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     required TResult orElse(),
   }) {

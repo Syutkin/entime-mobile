@@ -152,15 +152,14 @@ class DatabaseEvent with _$DatabaseEvent {
   }) = _SelectAwaitingNumber;
 
   const factory DatabaseEvent.deselectAwaitingNumber() =
-  _DeselectAwaitingNumber;
+      _DeselectAwaitingNumber;
 
-  //ToDO:
   const factory DatabaseEvent.createRaceFromRaceCsv({
     required RaceCsv race,
   }) = _CreateRaceFromRaceCsv;
 
   //ToDO:
-  const factory DatabaseEvent.shareStart() = _SshareStart;
+  const factory DatabaseEvent.shareStart() = _ShareStart;
 
   //ToDO:
   const factory DatabaseEvent.shareFinish() = _ShareFinish;

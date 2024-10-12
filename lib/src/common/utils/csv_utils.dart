@@ -2,12 +2,11 @@ import 'dart:io';
 
 import 'package:csv/csv.dart';
 import 'package:csv/csv_settings_autodetection.dart';
-import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../logger/logger.dart';
 
-/// Convert a map list to csv
+/// Convert a list of maps to csv
 String? mapListToCsv(
   List<Map<String, dynamic>>? mapList, {
   ListToCsvConverter? converter,
@@ -53,7 +52,7 @@ String? mapListToCsv(
 }
 
 // Save csv to file
-Future<File?> saveCsv(String csv, String suffix, String filePath) async {
+Future<File?> saveCsv(String csv, String filename) async {
   final directory = Platform.isAndroid
       ? await getExternalStorageDirectory()
       : await getApplicationDocumentsDirectory();
@@ -61,7 +60,7 @@ Future<File?> saveCsv(String csv, String suffix, String filePath) async {
     return null;
   }
   final file = File(
-    '${directory.path}/${basenameWithoutExtension(filePath)}-$suffix.csv',
+    '${directory.path}/$filename.csv',
   );
   await file.writeAsString(csv);
   logger.i('saveCsv -> Saved csv to file ${file.path}');
@@ -94,9 +93,8 @@ class CsvToMapConverter {
 
   List<Map<String, dynamic>> convert(String csv) {
     final list = converter.convert<dynamic>(csv);
-    final List<dynamic> legend = list.first
-        .map((dynamic category) => category.toString())
-        .toList();
+    final List<dynamic> legend =
+        list.first.map((dynamic category) => category.toString()).toList();
     final List<Map<String, dynamic>> maps = [];
     list.sublist(1).forEach((l) {
       final map = <String, dynamic>{};

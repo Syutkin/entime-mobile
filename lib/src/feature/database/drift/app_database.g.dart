@@ -3578,6 +3578,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           participants,
         }).map((QueryRow row) => NumberAtStart(
+          row: row,
           startId: row.readNullable<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
@@ -3610,6 +3611,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           riders,
           starts,
         }).map((QueryRow row) => ParticipantAtStart(
+          row: row,
           riderId: row.read<int>('rider_id'),
           raceId: row.read<int>('race_id'),
           number: row.read<int>('number'),
@@ -3650,6 +3652,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           participants,
         }).map((QueryRow row) => StartingParticipant(
+          row: row,
           startId: row.readNullable<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
@@ -3707,6 +3710,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           participants,
         }).map((QueryRow row) => StartingParticipant(
+          row: row,
           startId: row.readNullable<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
@@ -3757,6 +3761,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           participants,
           starts,
         }).map((QueryRow row) => NextStartingParticipant(
+          row: row,
           number: row.read<int>('number'),
           startTime: row.read<String>('start_time'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
@@ -3796,6 +3801,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           riders,
         }).map((QueryRow row) => GetStartingParticipantBetweenTimesResult(
+          row: row,
           number: row.read<int>('number'),
           startTime: row.read<String>('start_time'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
@@ -3825,6 +3831,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           starts,
           participants,
         }).map((QueryRow row) => StartingParticipant(
+          row: row,
           startId: row.readNullable<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
@@ -3982,6 +3989,38 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       updates: {starts},
       updateKind: UpdateKind.update,
     );
+  }
+
+  Selectable<StartForCsv> _getStartsForCsv({required int stageId}) {
+    return customSelect(
+        'SELECT participants.number AS number, starts.start_time AS start_time, IFNULL(starts.automatic_correction, IFNULL(starts.manual_correction, \'DNS\')) AS automatic_correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL AND(starts.automatic_correction NOTNULL OR starts.manual_correction NOTNULL OR starts.status_id = 2)ORDER BY starts.start_time ASC',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          participants,
+          starts,
+        }).map((QueryRow row) => StartForCsv(
+          row: row,
+          number: row.read<int>('number'),
+          startTime: row.read<String>('start_time'),
+          automaticCorrection: row.read<String>('automatic_correction'),
+        ));
+  }
+
+  Selectable<FinishForCsv> _getFinishesForCsv({required int stageId}) {
+    return customSelect(
+        'SELECT number, finish_time FROM finishes WHERE stage_id = ?1 AND number NOTNULL ORDER BY finish_time ASC',
+        variables: [
+          Variable<int>(stageId)
+        ],
+        readsFrom: {
+          finishes,
+        }).map((QueryRow row) => FinishForCsv(
+          row: row,
+          number: row.readNullable<int>('number'),
+          finishTime: row.readNullable<String>('finish_time'),
+        ));
   }
 
   @override
@@ -5493,7 +5532,7 @@ class $AppDatabaseManager {
   $LogsTableManager get logs => $LogsTableManager(_db, _db.logs);
 }
 
-class NumberAtStart {
+class NumberAtStart extends CustomResultSet {
   final int? startId;
   final int stageId;
   final int participantId;
@@ -5512,6 +5551,7 @@ class NumberAtStart {
   final String? rfid;
   final int participantStatusId;
   NumberAtStart({
+    required QueryRow row,
     this.startId,
     required this.stageId,
     required this.participantId,
@@ -5529,10 +5569,10 @@ class NumberAtStart {
     this.category,
     this.rfid,
     required this.participantStatusId,
-  });
+  }) : super(row);
 }
 
-class ParticipantAtStart {
+class ParticipantAtStart extends CustomResultSet {
   final int riderId;
   final int raceId;
   final int number;
@@ -5558,6 +5598,7 @@ class ParticipantAtStart {
   final int? manualCorrection;
   final int statusId;
   ParticipantAtStart({
+    required QueryRow row,
     required this.riderId,
     required this.raceId,
     required this.number,
@@ -5582,10 +5623,10 @@ class ParticipantAtStart {
     this.manualStartTime,
     this.manualCorrection,
     required this.statusId,
-  });
+  }) : super(row);
 }
 
-class StartingParticipant {
+class StartingParticipant extends CustomResultSet {
   final int? startId;
   final int stageId;
   final int participantId;
@@ -5604,6 +5645,7 @@ class StartingParticipant {
   final String? rfid;
   final int participantStatus;
   StartingParticipant({
+    required QueryRow row,
     this.startId,
     required this.stageId,
     required this.participantId,
@@ -5621,35 +5663,59 @@ class StartingParticipant {
     this.category,
     this.rfid,
     required this.participantStatus,
-  });
+  }) : super(row);
 }
 
-class NextStartingParticipant {
+class NextStartingParticipant extends CustomResultSet {
   final int number;
   final String startTime;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String? manualStartTime;
   NextStartingParticipant({
+    required QueryRow row,
     required this.number,
     required this.startTime,
     this.automaticStartTime,
     this.automaticCorrection,
     this.manualStartTime,
-  });
+  }) : super(row);
 }
 
-class GetStartingParticipantBetweenTimesResult {
+class GetStartingParticipantBetweenTimesResult extends CustomResultSet {
   final int number;
   final String startTime;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String name;
   GetStartingParticipantBetweenTimesResult({
+    required QueryRow row,
     required this.number,
     required this.startTime,
     this.automaticStartTime,
     this.automaticCorrection,
     required this.name,
-  });
+  }) : super(row);
+}
+
+class StartForCsv extends CustomResultSet {
+  final int number;
+  final String startTime;
+  final String automaticCorrection;
+  StartForCsv({
+    required QueryRow row,
+    required this.number,
+    required this.startTime,
+    required this.automaticCorrection,
+  }) : super(row);
+}
+
+class FinishForCsv extends CustomResultSet {
+  final int? number;
+  final String? finishTime;
+  FinishForCsv({
+    required QueryRow row,
+    this.number,
+    this.finishTime,
+  }) : super(row);
 }

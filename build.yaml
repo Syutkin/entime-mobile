@@ -13,3 +13,4 @@ targets:
       drift_dev:
         options:
           named_parameters: true
+          raw_result_set_data: true

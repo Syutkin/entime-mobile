@@ -421,21 +421,28 @@ WHERE
     AND stage_id = :stage_id
     AND p.number = :number;
 
-/*
-getStartForCsv:
-SELECT participants.number as number,
-	starts.start_time,
-	IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, 'DNS')) starts.automatic_correction as automatic_correction
+_getStartsForCsv AS StartForCsv:
+SELECT
+    participants.number as number,
+	starts.start_time as start_time,
+	IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, 'DNS')) as automatic_correction
 FROM starts, participants
 WHERE
 	starts.participant_id = participants.id
 	AND starts.stage_id = :stage_id
-	AND start_time NOTNULL
-	AND	(automatic_correction NOT NULL
-    	OR manual_correction NOT NULL
-       	OR automatic_start_time IS 'DNS')
-ORDER BY starttime ASC;
-*/
+	AND starts.start_time NOTNULL
+	AND	(starts.automatic_correction NOTNULL
+	    OR starts.manual_correction NOTNULL
+	    OR starts.status_id = 2)            -- 2 это DNS
+ORDER BY starts.start_time ASC;
+
+_getFinishesForCsv AS FinishForCsv:
+SELECT number, finish_time
+FROM finishes
+WHERE
+    stage_id = :stage_id
+    AND number NOTNULL
+ORDER BY finish_time ASC;
 
 
 /* --- for testing --- */

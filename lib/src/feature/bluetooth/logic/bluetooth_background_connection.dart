@@ -68,17 +68,6 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
     _onSendError = error;
   }
 
-  // void _fromConnection(BluetoothConnection? connection) {
-  //   if (_connection != null) {
-  //     _connection!.input!.listen(_onDataReceived).onDone(() {
-  //       // Сообщаем что соединение закрыто
-  //       // Далее на основе того, когда это произошло,
-  //       // определяем кто закрыл соединение (в BluetoothBloc event/state)
-  //       _onDisconnect();
-  //     });
-  //   }
-  // }
-
   @override
   Future<void> connect(
     BluetoothDevice bluetoothDevice,
@@ -89,14 +78,12 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
       logger.e('BluetoothConnection -> Cannot connect', error: error);
     });
 
-    // if (_connection != null) {
     _connection?.input?.listen(_onDataReceived).onDone(() {
       // Сообщаем что соединение закрыто
       // Далее на основе того, когда это произошло,
       // определяем кто закрыл соединение (в BluetoothBloc event/state)
       _onDisconnect();
     });
-    // }
 
     // BluetoothBackgroundConnection._fromConnection(connection);
   }

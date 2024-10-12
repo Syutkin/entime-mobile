@@ -781,6 +781,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Результаты стартов гонки {raceName}, этап {stageName}`
+  String I18nProtocol_shareStartResults(Object raceName, Object stageName) {
+    return Intl.message(
+      'Результаты стартов гонки $raceName, этап $stageName',
+      name: 'I18nProtocol_shareStartResults',
+      desc: '',
+      args: [raceName, stageName],
+    );
+  }
+
+  /// `Результаты финишей гонки {raceName}, этап {stageName}`
+  String I18nProtocol_shareFinishResults(Object raceName, Object stageName) {
+    return Intl.message(
+      'Результаты финишей гонки $raceName, этап $stageName',
+      name: 'I18nProtocol_shareFinishResults',
+      desc: '',
+      args: [raceName, stageName],
+    );
+  }
+
   /// `Неизвестное устройство`
   String get I18nBluetooth_unknownDevice {
     return Intl.message(
