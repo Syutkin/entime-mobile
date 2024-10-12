@@ -373,30 +373,9 @@ class _MenuButton extends StatelessWidget {
                       ),
                     ),
                   );
+                  menuItems.add(PopupMenuDivider());
                 }
-                menuItems.add(
-                  PopupMenuItem(
-                    value: MenuButton.share,
-                    child: ListTile(
-                      leading: const Icon(Icons.share),
-                      title: Text(Localization.current.I18nHome_share),
-                    ),
-                  ),
-                );
               });
-              // else {
-              // menuItems.add(
-              //   PopupMenuItem(
-              //     value: MenuButton.selectStartProtocol,
-              //     child: ListTile(
-              //       leading: Icon(MdiIcons.database),
-              //       title: Text(
-              //         Localization.current.I18nHome_selectStartProtocol,
-              //       ),
-              //     ),
-              //   ),
-              // );
-              // }
               if (activeTab == AppTab.start) {
                 menuItems.add(
                   PopupMenuItem(
@@ -417,20 +396,18 @@ class _MenuButton extends StatelessWidget {
                   ),
                 ),
               );
+              menuItems.add(PopupMenuDivider());
+              menuItems.add(
+                PopupMenuItem(
+                  value: MenuButton.share,
+                  child: ListTile(
+                    leading: const Icon(Icons.share),
+                    title: Text(Localization.current.I18nHome_share),
+                  ),
+                ),
+              );
             } else {
-              menuItems
-                  // ..add(
-                  //   PopupMenuItem(
-                  //     value: MenuButton.selectStartProtocol,
-                  //     child: ListTile(
-                  //       leading: Icon(MdiIcons.database),
-                  //       title: Text(
-                  //         Localization.current.I18nHome_selectStartProtocol,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // )
-                  .add(
+              menuItems.add(
                 PopupMenuItem(
                   value: MenuButton.bluetooth,
                   child: ListTile(
@@ -440,21 +417,22 @@ class _MenuButton extends StatelessWidget {
                 ),
               );
             }
-            databaseBloc.state.mapOrNull(initialized: (state) async {
-              if (activeTab == AppTab.start) {
-                menuItems.add(
-                  PopupMenuItem(
-                    value: MenuButton.importCsv,
-                    child: ListTile(
-                      leading: Icon(MdiIcons.import),
-                      title: Text(
-                        Localization.current.I18nHome_importStartProtocolCsv,
-                      ),
-                    ),
-                  ),
-                );
-              }
-            });
+
+            // databaseBloc.state.mapOrNull(initialized: (state) async {
+            //   if (activeTab == AppTab.start) {
+            //     menuItems.add(
+            //       PopupMenuItem(
+            //         value: MenuButton.importCsv,
+            //         child: ListTile(
+            //           leading: Icon(MdiIcons.import),
+            //           title: Text(
+            //             Localization.current.I18nHome_importStartProtocolCsv,
+            //           ),
+            //         ),
+            //       ),
+            //     );
+            //   }
+            // });
 
             return PopupMenuButton<MenuButton>(
               itemBuilder: (context) => menuItems,
