@@ -14,6 +14,13 @@ ThemeData appThemeData({
       contrastLevel: contrastLevel,
       dynamicSchemeVariant: dynamicSchemeVariant,
     ),
+    // For supporting predictive back
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        // Use PredictiveBackPageTransitionsBuilder to get the predictive back route transition!
+        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+      },
+    ),
   );
 }
 

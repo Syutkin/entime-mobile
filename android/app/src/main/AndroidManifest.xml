@@ -25,6 +25,7 @@
         android:label="Entime"
         android:name="${applicationName}"
         android:icon="@mipmap/entime"
+        android:enableOnBackInvokedCallback="true"
         >
         <activity
             android:name=".MainActivity"
