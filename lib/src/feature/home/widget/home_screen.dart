@@ -418,22 +418,6 @@ class _MenuButton extends StatelessWidget {
               );
             }
 
-            // databaseBloc.state.mapOrNull(initialized: (state) async {
-            //   if (activeTab == AppTab.start) {
-            //     menuItems.add(
-            //       PopupMenuItem(
-            //         value: MenuButton.importCsv,
-            //         child: ListTile(
-            //           leading: Icon(MdiIcons.import),
-            //           title: Text(
-            //             Localization.current.I18nHome_importStartProtocolCsv,
-            //           ),
-            //         ),
-            //       ),
-            //     );
-            //   }
-            // });
-
             return PopupMenuButton<MenuButton>(
               itemBuilder: (context) => menuItems,
               onSelected: (value) async {
@@ -491,10 +475,6 @@ class _MenuButton extends StatelessWidget {
                             settings.copyWith(countdown: !settings.countdown),
                       ),
                     );
-                    break;
-                  case MenuButton.importCsv:
-                    // ToDo:
-                    // databaseBloc.add(const DatabaseEvent.createRaceFromCsv());
                     break;
                 }
               },
