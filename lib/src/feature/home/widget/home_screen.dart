@@ -266,10 +266,10 @@ class _FinishFilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settingsBloc = context.read<SettingsBloc>();
-    final settings = settingsBloc.state.settings;
     return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, protocolState) {
+      builder: (context, settingsState) {
+        final settingsBloc = context.read<SettingsBloc>();
+        final settings = settingsState.settings;
         if (activeTab == AppTab.finish) {
           final menuItems = <PopupMenuEntry<FilterFinish>>[
             CheckedPopupMenuItem(

@@ -55,17 +55,16 @@ class AppDatabase extends _$AppDatabase {
 
   Future<Race> getRace(int id) {
     return (select(races)
-          ..where((r) => r.id.equals(id))
-          ..limit(1))
+      ..where((r) => r.id.equals(id))
+      ..limit(1))
         .getSingle();
   }
 
   /// Добавляет новую гонку
-  Future<int> addRace(
-      {required String name,
-      String? startDate,
-      String? finishDate,
-      String? location}) {
+  Future<int> addRace({required String name,
+    String? startDate,
+    String? finishDate,
+    String? location}) {
     return _addRace(
         name: name,
         startDate: startDate,
@@ -171,7 +170,7 @@ class AppDatabase extends _$AppDatabase {
       if (res.isNotEmpty) {
         logger.i(
           'Database -> Start time $startTime '
-          'already set or number $number already started',
+              'already set or number $number already started',
         );
         return res;
       } else {
@@ -185,11 +184,11 @@ class AppDatabase extends _$AppDatabase {
       'Database -> Checking number $number at participants...',
     );
     final participantAtRace = await (select(participants)
-          ..where(
+      ..where(
             (participant) =>
-                participant.number.equals(number) &
-                participant.raceId.equals(stage.raceId),
-          ))
+        participant.number.equals(number) &
+        participant.raceId.equals(stage.raceId),
+      ))
         .get();
 
     if (participantAtRace.isEmpty) {
@@ -200,10 +199,10 @@ class AppDatabase extends _$AppDatabase {
       // Поскольку имя участика обязательно, ставим ему вместо имени название соревнования
       // ToDo: возможность редактировать гонщиков
       final raceName = (await (select(races)
-                ..where(
-                  (name) => races.id.equals(stage.raceId),
-                ))
-              .get())
+        ..where(
+              (name) => races.id.equals(stage.raceId),
+        ))
+          .get())
           .first
           .name;
       final int ridersId = await into(riders).insert(
@@ -231,11 +230,11 @@ class AppDatabase extends _$AppDatabase {
       );
       //Номер уже участвует в соревновании, ищем его на старте
       final start = await (select(starts)
-            ..where(
+        ..where(
               (start) =>
-                  start.stageId.equals(stage.id!) &
-                  start.participantId.equals(participantAtRace.first.id!),
-            ))
+          start.stageId.equals(stage.id!) &
+          start.participantId.equals(participantAtRace.first.id!),
+        ))
           .get();
       // Если номера не было в стартовом протоколе на СУ, добавляем
       if (start.isEmpty) {
@@ -255,10 +254,10 @@ class AppDatabase extends _$AppDatabase {
           'Database -> Number $number already in starts list. Update start time to $startTime...',
         );
         await (update(starts)
-              ..where(
+          ..where(
                 (start) =>
-                    start.participantId.equals(participantAtRace.first.id!),
-              ))
+                start.participantId.equals(participantAtRace.first.id!),
+          ))
             .write(
           StartsCompanion(
             automaticCorrection: const Value(null),
@@ -276,14 +275,13 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Устанавливает информацию об участнике на старте
-  Future<int> setStartingInfo(
-      {required String startTime,
-      String? automaticStartTime,
-      int? automaticCorrection,
-      String? manualStartTime,
-      int? manualCorrection,
-      required int stageId,
-      required int participantId}) {
+  Future<int> setStartingInfo({required String startTime,
+    String? automaticStartTime,
+    int? automaticCorrection,
+    String? manualStartTime,
+    int? manualCorrection,
+    required int stageId,
+    required int participantId}) {
     return _setStartingInfo(
       startTime: startTime,
       stageId: stageId,
@@ -341,11 +339,11 @@ class AppDatabase extends _$AppDatabase {
       }
 
       final result = await (update(starts)
-            ..where(
+        ..where(
               (start) =>
-                  start.stageId.equals(stageId) &
-                  start.startTime.isBetweenValues(before, after),
-            ))
+          start.stageId.equals(stageId) &
+          start.startTime.isBetweenValues(before, after),
+        ))
           .write(
         StartsCompanion(
           automaticCorrection: Value(correction),
@@ -360,7 +358,7 @@ class AppDatabase extends _$AppDatabase {
     } else {
       logger.i(
           'Database -> Can not find participant with start time around $time '
-          'with $deltaInSeconds seconds delta');
+              'with $deltaInSeconds seconds delta');
     }
     return null;
   }
@@ -379,7 +377,7 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     int result = 0;
     final DateTime timeBefore =
-        time.subtract(Duration(seconds: deltaInSeconds));
+    time.subtract(Duration(seconds: deltaInSeconds));
     final DateTime timeAfter = time.add(Duration(seconds: deltaInSeconds));
     final String before = DateFormat(shortTimeFormat).format(timeBefore);
     final String after = DateFormat(shortTimeFormat).format(timeAfter);
@@ -393,7 +391,7 @@ class AppDatabase extends _$AppDatabase {
 
     if (participantsAroundTime.isNotEmpty) {
       final DateTime? startTime =
-          participantsAroundTime.first.startTime.toDateTime();
+      participantsAroundTime.first.startTime.toDateTime();
       if (startTime == null) {
         logger.e('Wrong time format: $startTime, can not convert to DateTime');
         return result;
@@ -408,18 +406,18 @@ class AppDatabase extends _$AppDatabase {
       if (result > 0) {
         logger.i(
           'Database -> Update manual start time for participant with id '
-          '${participantsAroundTime.first.participantId}',
+              '${participantsAroundTime.first.participantId}',
         );
       } else {
         logger.i(
           'Database -> Error at updating manual start time for participant with id '
-          '${participantsAroundTime.first.participantId}',
+              '${participantsAroundTime.first.participantId}',
         );
       }
     } else {
       logger.i(
           'Database -> Can not find participant with start time around $manualStartTime '
-          'with $deltaInSeconds seconds delta');
+              'with $deltaInSeconds seconds delta');
     }
     return result;
   }
@@ -440,7 +438,7 @@ class AppDatabase extends _$AppDatabase {
       return 0;
     }
     final DateTime timeAfter =
-        beepDateTime.add(Duration(seconds: deltaInSeconds));
+    beepDateTime.add(Duration(seconds: deltaInSeconds));
     final String after = DateFormat(shortTimeFormat).format(timeAfter);
     final startingCount = await _getForBeep(
       stageId: stageId,
@@ -452,7 +450,7 @@ class AppDatabase extends _$AppDatabase {
 
 //Используется для голосового сообщения
   Future<List<GetStartingParticipantBetweenTimesResult>>
-      getStartingParticipants({
+  getStartingParticipants({
     required String time,
     required int stageId,
   }) async {
@@ -487,7 +485,8 @@ class AppDatabase extends _$AppDatabase {
           'Database -> Set ${status.name.toUpperCase()} to startId: $startId');
     } else {
       logger.i(
-          'Database -> Can not find startId: $startId, ${status.name.toUpperCase()} not set');
+          'Database -> Can not find startId: $startId, ${status.name
+              .toUpperCase()} not set');
     }
     return result;
   }
@@ -502,8 +501,25 @@ class AppDatabase extends _$AppDatabase {
 
   // ----------------финиш----------------
 
-  Selectable<Finish> getFinishesFromStage({required int stageId}) {
-    return _getFinishesFromStage(stageId: stageId);
+  Selectable<Finish> getFinishesFromStage({required int stageId,
+    bool hideManual = false,
+    bool hideMarked = true,
+    bool hideNumbers = false}) {
+    final List<Expression<bool>> predicates = [];
+    return _getFinishesFromStage(
+        predicate: (finishes) {
+          predicates.add(finishes.stageId.equals(stageId));
+          if (hideMarked) {
+            predicates.add(finishes.isHidden.equals(!hideMarked));
+          }
+          if (hideManual) {
+            predicates.add(finishes.isManual.equals(!hideManual));
+          }
+          if (hideNumbers) {
+            predicates.add(finishes.number.isNull());
+          }
+          return predicates.reduce((a, b) => a & b);
+        });
   }
 
   /// Записывает финишное время
@@ -535,7 +551,7 @@ class AppDatabase extends _$AppDatabase {
     int? workingNumber = number;
     // узнаём предыдущее нескрытое автоматическое время
     final prevFinishTime =
-        await _getLastFinishTime(stageId: stage.id!).getSingleOrNull();
+    await _getLastFinishTime(stageId: stage.id!).getSingleOrNull();
     // проверяем разницу между предыдущей и поступившей отсечкой
     if (prevFinishTime != null) {
       final prevFinishDateTime = prevFinishTime.toDateTime();
@@ -643,8 +659,8 @@ class AppDatabase extends _$AppDatabase {
         'Database -> Finish info for $rowCount starting participants cleared');
     rowCount = await customUpdate(
       'UPDATE finishes '
-      'SET number = NULL, is_hidden = false '
-      'WHERE stage_id = ?',
+          'SET number = NULL, is_hidden = false '
+          'WHERE stage_id = ?',
       variables: [Variable.withInt(stageId)],
       updates: {finishes},
       updateKind: UpdateKind.update,
@@ -704,8 +720,8 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     await customUpdate(
       'UPDATE finishes '
-      'SET number = NULL '
-      'WHERE number = ? AND stage_id = ?',
+          'SET number = NULL '
+          'WHERE number = ? AND stage_id = ?',
       variables: [
         Variable.withInt(number),
         Variable.withInt(stage.id!),
@@ -751,7 +767,7 @@ class AppDatabase extends _$AppDatabase {
 
   Future<int> createRaceFromRaceCsv(RaceCsv race) async {
     var raceId =
-        await addRace(name: path.basenameWithoutExtension(race.fileName));
+    await addRace(name: path.basenameWithoutExtension(race.fileName));
     Map<String, int> stages = {};
     await transaction(() async {
       for (var stageName in race.stageNames) {
@@ -873,8 +889,8 @@ class AppDatabase extends _$AppDatabase {
     dateTimeNow ??= DateTime.now();
     int? number;
     final numbersOnTraceNow =
-        await getNumbersOnTraceNow(stageId: stageId, dateTimeNow: dateTimeNow)
-            .get();
+    await getNumbersOnTraceNow(stageId: stageId, dateTimeNow: dateTimeNow)
+        .get();
     if (numbersOnTraceNow.isNotEmpty) {
       number = numbersOnTraceNow.first.number;
       logger.i('Database -> Awaiting number: $number');
@@ -885,7 +901,7 @@ class AppDatabase extends _$AppDatabase {
   Future<DateTime?> _lastFinishTime({required int stageId}) async {
     DateTime? result;
     final res =
-        await _getLastFinishTimeWithNumber(stageId: stageId).getSingleOrNull();
+    await _getLastFinishTimeWithNumber(stageId: stageId).getSingleOrNull();
 
     if (res != null) {
       result = res.toDateTime();

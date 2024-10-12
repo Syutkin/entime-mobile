@@ -3852,13 +3852,21 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
-  Selectable<Finish> _getFinishesFromStage({required int stageId}) {
-    return customSelect('SELECT * FROM finishes WHERE stage_id = ?1',
+  Selectable<Finish> _getFinishesFromStage(
+      {GetFinishesFromStage$predicate? predicate}) {
+    var $arrayStartIndex = 1;
+    final generatedpredicate = $write(
+        predicate?.call(this.finishes) ?? const CustomExpression('(TRUE)'),
+        startIndex: $arrayStartIndex);
+    $arrayStartIndex += generatedpredicate.amountOfVariables;
+    return customSelect(
+        'SELECT * FROM finishes WHERE ${generatedpredicate.sql}',
         variables: [
-          Variable<int>(stageId)
+          ...generatedpredicate.introducedVariables
         ],
         readsFrom: {
           finishes,
+          ...generatedpredicate.watchedTables,
         }).asyncMap(finishes.mapFromRow);
   }
 
@@ -5697,6 +5705,9 @@ class GetStartingParticipantBetweenTimesResult extends CustomResultSet {
     required this.name,
   }) : super(row);
 }
+
+typedef GetFinishesFromStage$predicate = Expression<bool> Function(
+    Finishes finishes);
 
 class StartForCsv extends CustomResultSet {
   final int number;

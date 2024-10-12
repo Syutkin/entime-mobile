@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
+import 'dart:async';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,7 +17,9 @@ import '../model/notification.dart';
 import '../model/participant_status.dart';
 
 part 'database_bloc.freezed.dart';
+
 part 'database_event.dart';
+
 part 'database_state.dart';
 
 class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
@@ -31,8 +35,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   List<Trail> _trails = [];
   List<StartingParticipant> _numbersOnTrace = [];
 
-  // Notification? _notification;
-
   Race? _race;
   Stage? _stage;
 
@@ -45,6 +47,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   int? _awaitingNumber;
 
   final SettingsProvider _settingsProvider;
+
+  late StreamSubscription<List<Finish>> _finishSubscription;
 
   void _emitState({
     Notification? notification,
@@ -78,14 +82,14 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         super(DatabaseState.initial()) {
     _db.getRaces().watch().listen((event) async {
       _races = event;
-      logger.d('DatabaseBloc -> getRaces().watch()');
+      logger.t('DatabaseBloc -> getRaces().watch()');
       _emitState();
     });
 
     _db.select(_db.stages).watch().listen((event) async {
       final raceId = _race?.id ?? 0;
       _stages = await _db.getStages(raceId: raceId).get();
-      logger.d('DatabaseBloc -> getStages(raceId: $raceId).watch()');
+      logger.t('DatabaseBloc -> getStages(raceId: $raceId).watch()');
       _emitState();
     });
 
@@ -102,17 +106,23 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     _db.select(_db.starts).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
       _participants = await _db.getParticipantsAtStart(stageId: stageId).get();
-      logger.d(
+      logger.t(
           'DatabaseBloc -> getParticipantsAtStart(stageId: $stageId).watch()');
       _emitState();
     });
 
-    //ToDo: сделать фильтры
-    _db.select(_db.finishes).watch().listen((event) async {
+    _finishSubscription =
+        _db.select(_db.finishes).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
-      _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
+      _finishes = await _db
+          .getFinishesFromStage(
+              stageId: stageId,
+              hideManual: _hideManual,
+              hideMarked: _hideMarked,
+              hideNumbers: _hideNumbers)
+          .get();
       logger
-          .d('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
+          .t('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
       _emitState();
     });
 
@@ -122,7 +132,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     // });
 
     _db
-        .getNumbersOnTraceNow(stageId: 0, dateTimeNow: DateTime.now())
+        .getNumbersOnTraceNow(
+          stageId: 0,
+          dateTimeNow: DateTime.now(),
+        )
         .watch()
         .listen((event) async {
       final stageId = _stage?.id ?? 0;
@@ -130,25 +143,41 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           .getNumbersOnTraceNow(stageId: stageId, dateTimeNow: DateTime.now())
           .get();
       logger
-          .d('DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()');
+          .t('DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()');
       _emitState();
+    });
 
-      _settingsProvider.state.listen((state) {
-        // условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
-        if (_hideMarked != state.hideMarked ||
-            _hideNumbers != state.hideNumbers ||
-            _hideManual != state.hideManual) {
-          _hideMarked = state.hideMarked;
-          _hideNumbers = state.hideNumbers;
-          _hideManual = state.hideManual;
-          logger.d(
-            'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
-          );
-        }
-        _finishDelay = state.finishDelay;
-        _substituteNumbers = state.substituteNumbers;
-        _substituteNumbersDelay = state.substituteNumbersDelay;
-      });
+    _settingsProvider.state.listen((state) async {
+      // ToDo: условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
+      // if (_hideMarked != state.hideMarked ||
+      //     _hideNumbers != state.hideNumbers ||
+      //     _hideManual != state.hideManual) {
+      if (true) {
+        _hideMarked = state.hideMarked;
+        _hideNumbers = state.hideNumbers;
+        _hideManual = state.hideManual;
+        _finishSubscription.cancel();
+        _finishSubscription =
+            _db.select(_db.finishes).watch().listen((event) async {
+          final stageId = _stage?.id ?? 0;
+          _finishes = await _db
+              .getFinishesFromStage(
+                  stageId: stageId,
+                  hideManual: _hideManual,
+                  hideMarked: _hideMarked,
+                  hideNumbers: _hideNumbers)
+              .get();
+          logger.t(
+              'DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
+          _emitState();
+        });
+        logger.t(
+          'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
+        );
+      }
+      _finishDelay = state.finishDelay;
+      _substituteNumbers = state.substituteNumbers;
+      _substituteNumbersDelay = state.substituteNumbersDelay;
     });
 
     on<DatabaseEvent>(transformer: sequential(), (event, emit) async {

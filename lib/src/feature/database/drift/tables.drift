@@ -348,8 +348,8 @@ ORDER BY starts.start_time ASC;
 
 /* --- Finish --- */
 
-_getFinishesFromStage:
-SELECT * FROM finishes WHERE stage_id = :stage_id;
+_getFinishesFromStage ($predicate = TRUE):
+SELECT * FROM finishes WHERE $predicate;
 
 _getLastFinishTime:
 SELECT finish_time
