@@ -65,6 +65,10 @@ class AppSettings with _$AppSettings {
     // дельта в секундах для автоматического подставления стартового времени
     required int deltaInSeconds,
 
+    // задержка в миллисекундах перед обновлением стартовой поправки,
+    // если она уже была установлена
+    required int updateStartCorrectionDelay,
+
     // лог
     // ограничение количества показываемых строк в окне лога
     // -1 = без ограничений
@@ -140,6 +144,10 @@ class AppSettings with _$AppSettings {
     // дельта в секундах для автоматического подставления стартового времени
     @Default(15) int deltaInSeconds,
 
+    // задержка в миллисекундах перед обновлением стартовой поправки,
+    // если она уже была установлена
+    @Default(2000) int updateStartCorrectionDelay,
+
     // лог
     // ограничение количества показываемых строк в окне лога
     // -1 = без ограничений
@@ -148,9 +156,10 @@ class AppSettings with _$AppSettings {
     // активная тема
     // @Default(AppTheme.lightBlue) AppTheme appTheme,
     @Default(ColorSeed.blue) ColorSeed seedColor,
-    @Default(Brightness.light)  Brightness brightness,
+    @Default(Brightness.light) Brightness brightness,
     @Default(-1.0) double contrastLevel,
-    @Default(DynamicSchemeVariant.vibrant) DynamicSchemeVariant dynamicSchemeVariant,
+    @Default(DynamicSchemeVariant.vibrant)
+    DynamicSchemeVariant dynamicSchemeVariant,
 
     // версия при предыдущем запуске
     @Default('0.0.0') String previousVersion,

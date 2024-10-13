@@ -81,7 +81,6 @@ class DatabaseEvent with _$DatabaseEvent {
     required ParticipantStatus status,
   }) = _SetStatusForStartId;
 
-  //ToDO: настроить фильтры
   const factory DatabaseEvent.getFinishesFromStage({
     required int stageId,
   }) = _GetFinishesFromStage;
@@ -103,7 +102,6 @@ class DatabaseEvent with _$DatabaseEvent {
     int? number,
   }) = _AddFinishTimeManual;
 
-  //ToDO
   const factory DatabaseEvent.clearStartResultsDebug(
     int stageId,
   ) = _ClearStartResultsDebug;

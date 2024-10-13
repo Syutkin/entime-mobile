@@ -58,7 +58,11 @@ mixin _$AppSettings {
   bool get substituteNumbers => throw _privateConstructorUsedError;
   int get substituteNumbersDelay =>
       throw _privateConstructorUsedError; // дельта в секундах для автоматического подставления стартового времени
-  int get deltaInSeconds => throw _privateConstructorUsedError; // лог
+  int get deltaInSeconds =>
+      throw _privateConstructorUsedError; // задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  int get updateStartCorrectionDelay =>
+      throw _privateConstructorUsedError; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   int get logLimit => throw _privateConstructorUsedError; // активная тема
@@ -101,6 +105,7 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -138,6 +143,7 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -179,6 +185,7 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -216,6 +223,7 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -257,6 +265,7 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -294,6 +303,7 @@ mixin _$AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -367,6 +377,7 @@ abstract class $AppSettingsCopyWith<$Res> {
       bool substituteNumbers,
       int substituteNumbersDelay,
       int deltaInSeconds,
+      int updateStartCorrectionDelay,
       int logLimit,
       ColorSeed seedColor,
       Brightness brightness,
@@ -419,6 +430,7 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
     Object? deltaInSeconds = null,
+    Object? updateStartCorrectionDelay = null,
     Object? logLimit = null,
     Object? seedColor = null,
     Object? brightness = null,
@@ -543,6 +555,10 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.deltaInSeconds
           : deltaInSeconds // ignore: cast_nullable_to_non_nullable
               as int,
+      updateStartCorrectionDelay: null == updateStartCorrectionDelay
+          ? _value.updateStartCorrectionDelay
+          : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
+              as int,
       logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
@@ -609,6 +625,7 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       bool substituteNumbers,
       int substituteNumbersDelay,
       int deltaInSeconds,
+      int updateStartCorrectionDelay,
       int logLimit,
       ColorSeed seedColor,
       Brightness brightness,
@@ -659,6 +676,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
     Object? deltaInSeconds = null,
+    Object? updateStartCorrectionDelay = null,
     Object? logLimit = null,
     Object? seedColor = null,
     Object? brightness = null,
@@ -783,6 +801,10 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.deltaInSeconds
           : deltaInSeconds // ignore: cast_nullable_to_non_nullable
               as int,
+      updateStartCorrectionDelay: null == updateStartCorrectionDelay
+          ? _value.updateStartCorrectionDelay
+          : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
+              as int,
       logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
@@ -844,6 +866,7 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.substituteNumbers,
       required this.substituteNumbersDelay,
       required this.deltaInSeconds,
+      required this.updateStartCorrectionDelay,
       required this.logLimit,
       required this.seedColor,
       required this.brightness,
@@ -928,6 +951,10 @@ class _$AppSettingsImpl implements _AppSettings {
 // дельта в секундах для автоматического подставления стартового времени
   @override
   final int deltaInSeconds;
+// задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  @override
+  final int updateStartCorrectionDelay;
 // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
@@ -949,7 +976,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
+    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
   }
 
   @override
@@ -1007,6 +1034,10 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
+            (identical(other.updateStartCorrectionDelay,
+                    updateStartCorrectionDelay) ||
+                other.updateStartCorrectionDelay ==
+                    updateStartCorrectionDelay) &&
             (identical(other.logLimit, logLimit) ||
                 other.logLimit == logLimit) &&
             (identical(other.seedColor, seedColor) ||
@@ -1053,6 +1084,7 @@ class _$AppSettingsImpl implements _AppSettings {
         substituteNumbers,
         substituteNumbersDelay,
         deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
         seedColor,
         brightness,
@@ -1102,6 +1134,7 @@ class _$AppSettingsImpl implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -1139,6 +1172,7 @@ class _$AppSettingsImpl implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -1177,6 +1211,7 @@ class _$AppSettingsImpl implements _AppSettings {
         substituteNumbers,
         substituteNumbersDelay,
         deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
         seedColor,
         brightness,
@@ -1218,6 +1253,7 @@ class _$AppSettingsImpl implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -1255,6 +1291,7 @@ class _$AppSettingsImpl implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -1293,6 +1330,7 @@ class _$AppSettingsImpl implements _AppSettings {
         substituteNumbers,
         substituteNumbersDelay,
         deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
         seedColor,
         brightness,
@@ -1334,6 +1372,7 @@ class _$AppSettingsImpl implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -1371,6 +1410,7 @@ class _$AppSettingsImpl implements _AppSettings {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -1411,6 +1451,7 @@ class _$AppSettingsImpl implements _AppSettings {
           substituteNumbers,
           substituteNumbersDelay,
           deltaInSeconds,
+          updateStartCorrectionDelay,
           logLimit,
           seedColor,
           brightness,
@@ -1484,6 +1525,7 @@ abstract class _AppSettings implements AppSettings {
       required final bool substituteNumbers,
       required final int substituteNumbersDelay,
       required final int deltaInSeconds,
+      required final int updateStartCorrectionDelay,
       required final int logLimit,
       required final ColorSeed seedColor,
       required final Brightness brightness,
@@ -1553,7 +1595,10 @@ abstract class _AppSettings implements AppSettings {
   @override
   int get substituteNumbersDelay; // дельта в секундах для автоматического подставления стартового времени
   @override
-  int get deltaInSeconds; // лог
+  int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  @override
+  int get updateStartCorrectionDelay; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   @override
@@ -1617,6 +1662,7 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       bool substituteNumbers,
       int substituteNumbersDelay,
       int deltaInSeconds,
+      int updateStartCorrectionDelay,
       int logLimit,
       ColorSeed seedColor,
       Brightness brightness,
@@ -1667,6 +1713,7 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
     Object? deltaInSeconds = null,
+    Object? updateStartCorrectionDelay = null,
     Object? logLimit = null,
     Object? seedColor = null,
     Object? brightness = null,
@@ -1791,6 +1838,10 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.deltaInSeconds
           : deltaInSeconds // ignore: cast_nullable_to_non_nullable
               as int,
+      updateStartCorrectionDelay: null == updateStartCorrectionDelay
+          ? _value.updateStartCorrectionDelay
+          : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
+              as int,
       logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
@@ -1852,6 +1903,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.substituteNumbers = false,
       this.substituteNumbersDelay = 500,
       this.deltaInSeconds = 15,
+      this.updateStartCorrectionDelay = 2000,
       this.logLimit = -1,
       this.seedColor = ColorSeed.blue,
       this.brightness = Brightness.light,
@@ -1968,6 +2020,11 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final int deltaInSeconds;
+// задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  @override
+  @JsonKey()
+  final int updateStartCorrectionDelay;
 // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
@@ -1995,7 +2052,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
+    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
   }
 
   @override
@@ -2053,6 +2110,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
+            (identical(other.updateStartCorrectionDelay,
+                    updateStartCorrectionDelay) ||
+                other.updateStartCorrectionDelay ==
+                    updateStartCorrectionDelay) &&
             (identical(other.logLimit, logLimit) ||
                 other.logLimit == logLimit) &&
             (identical(other.seedColor, seedColor) ||
@@ -2099,6 +2160,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         substituteNumbers,
         substituteNumbersDelay,
         deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
         seedColor,
         brightness,
@@ -2149,6 +2211,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -2186,6 +2249,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -2224,6 +2288,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         substituteNumbers,
         substituteNumbersDelay,
         deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
         seedColor,
         brightness,
@@ -2265,6 +2330,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -2302,6 +2368,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -2340,6 +2407,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         substituteNumbers,
         substituteNumbersDelay,
         deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
         seedColor,
         brightness,
@@ -2381,6 +2449,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -2418,6 +2487,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool substituteNumbers,
             int substituteNumbersDelay,
             int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
             ColorSeed seedColor,
             Brightness brightness,
@@ -2458,6 +2528,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           substituteNumbers,
           substituteNumbersDelay,
           deltaInSeconds,
+          updateStartCorrectionDelay,
           logLimit,
           seedColor,
           brightness,
@@ -2531,6 +2602,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final bool substituteNumbers,
       final int substituteNumbersDelay,
       final int deltaInSeconds,
+      final int updateStartCorrectionDelay,
       final int logLimit,
       final ColorSeed seedColor,
       final Brightness brightness,
@@ -2601,7 +2673,10 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   int get substituteNumbersDelay; // дельта в секундах для автоматического подставления стартового времени
   @override
-  int get deltaInSeconds; // лог
+  int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  @override
+  int get updateStartCorrectionDelay; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   @override

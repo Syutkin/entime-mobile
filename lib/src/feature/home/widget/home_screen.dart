@@ -83,9 +83,14 @@ class HomeScreen extends StatelessWidget {
                   // Если новая поправка для номера отличается от предыдущей
                   // более чем на две секунды, то уточняем, точно ли обновлять?
                   // Если разница менее двух секунд, то молча игнорируем отсечку
-                  // ToDo: засунуть 2000 в настройки
+                  final updateStartCorrectionDelay = context
+                      .read<SettingsBloc>()
+                      .state
+                      .settings
+                      .updateStartCorrectionDelay;
                   if (prevCorrection != null &&
-                      data.correction - prevCorrection > 2000) {
+                      data.correction - prevCorrection >
+                          updateStartCorrectionDelay) {
                     final String text =
                         Localization.current.I18nHome_updateAutomaticCorrection(
                       data.number,

@@ -34,7 +34,6 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   bool _isEnabled = false;
 
-  // ToDo: change stageId to actual value for voice control
   int _stageId = -1;
 
   StreamSubscription<String>? _messageSubscription;

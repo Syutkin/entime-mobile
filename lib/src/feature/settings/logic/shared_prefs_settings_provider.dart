@@ -58,6 +58,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
           defaults.substituteNumbersDelay,
       deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
+      updateStartCorrectionDelay: prefs.getInt('updateStartCorrectionDelay') ??
+          defaults.updateStartCorrectionDelay,
       logLimit: prefs.getInt('logLimit') ?? defaults.logLimit,
       seedColor: ColorSeed.values
           .byName(prefs.getString('seedColor') ?? defaults.seedColor.name),
@@ -124,15 +126,16 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setInt('finishDelay', settings.finishDelay);
     await _prefs.setBool('substituteNumbers', settings.substituteNumbers);
     await _prefs.setInt(
-      'substituteNumbersDelay',
-      settings.substituteNumbersDelay,
-    );
+        'substituteNumbersDelay', settings.substituteNumbersDelay);
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
+    await _prefs.setInt(
+        'updateStartCorrectionDelay', settings.updateStartCorrectionDelay);
     await _prefs.setInt('log_limit', settings.logLimit);
     await _prefs.setString('seedColor', settings.seedColor.name);
     await _prefs.setString('brightness', settings.brightness.name);
     await _prefs.setDouble('contrastLevel', settings.contrastLevel);
-    await _prefs.setString('dynamicSchemeVariant', settings.dynamicSchemeVariant.name);
+    await _prefs.setString(
+        'dynamicSchemeVariant', settings.dynamicSchemeVariant.name);
     await _prefs.setString('previousVersion', settings.previousVersion);
 
     _settings = settings;
