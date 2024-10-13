@@ -185,7 +185,8 @@ class EntimeAppView extends StatelessWidget {
             previousState.settings.contrastLevel !=
                 state.settings.contrastLevel ||
             previousState.settings.dynamicSchemeVariant !=
-                state.settings.dynamicSchemeVariant,
+                state.settings.dynamicSchemeVariant ||
+            previousState.settings.language != state.settings.language,
         builder: (context, state) => MaterialApp(
           theme: appThemeData(
             seedColor: state.settings.seedColor,

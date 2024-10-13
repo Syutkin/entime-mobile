@@ -92,6 +92,7 @@ class _SettingsList extends StatelessWidget {
                   },
                 ),
                 SettingsTile(
+                  enabled: false,
                   title: Text(Localization.current.I18nSettings_language),
                   trailing: DropdownMenu<String>(
                     width: null,
