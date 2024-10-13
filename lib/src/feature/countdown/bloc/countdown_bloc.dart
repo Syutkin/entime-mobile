@@ -19,8 +19,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   CountdownBloc({
     required CountdownAtStart countdown,
     required int stageId,
-  })
-      : _countdown = countdown,
+  })  : _countdown = countdown,
         _stageId = stageId,
         super(const CountdownState.initial()) {
     if (stageId > 0) {
@@ -52,7 +51,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
               CountdownState.working(
                 text: event.text,
                 nextStartTime:
-                DateFormat(shortTimeFormat).format(nextStartTime),
+                    DateFormat(shortTimeFormat).format(nextStartTime),
               ),
             );
           }

@@ -22,9 +22,7 @@ import '../model/notification.dart';
 import '../model/participant_status.dart';
 
 part 'database_bloc.freezed.dart';
-
 part 'database_event.dart';
-
 part 'database_state.dart';
 
 class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
@@ -264,10 +262,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           },
           addRace: (event) async {
             await _db.addRace(
-              name: event.race.name,
-              startDate: event.race.startDate,
-              finishDate: event.race.finishDate,
-              location: event.race.location,
+              name: event.name,
+              startDate: event.startDate?.toIso8601String(),
+              finishDate: event.finishDate?.toIso8601String(),
+              location: event.location,
             );
           },
           deleteRace: (event) async {
@@ -279,12 +277,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           selectRace: (event) {
             _race = event.race;
             var raceId = event.race.id;
-            if (raceId != null) {
-              var settings =
-                  _settingsProvider.settings.copyWith(raceId: raceId);
-              _settingsProvider.update(settings);
-              add(DatabaseEvent.getStages(raceId));
-            }
+            var settings = _settingsProvider.settings.copyWith(raceId: raceId);
+            _settingsProvider.update(settings);
+            add(DatabaseEvent.getStages(raceId));
           },
           deselectRace: (event) {
             _race = null;
@@ -296,9 +291,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           },
           addStage: (event) async {
             await _db.addStage(
-              raceId: event.stage.raceId,
-              name: event.stage.name,
-              trailId: event.stage.trailId,
+              raceId: event.raceId,
+              name: event.name,
+              trailId: event.trailId,
             );
           },
           deleteStage: (event) async {
@@ -313,20 +308,17 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             var stageId = event.stage.id;
 
             /// Fill state with data
-            if (stageId != null) {
-              var settings =
-                  _settingsProvider.settings.copyWith(stageId: stageId);
-              _settingsProvider.update(settings);
-              _participants =
-                  await _db.getParticipantsAtStart(stageId: stageId).get();
-              _numbersOnTrace = await _db
-                  .getNumbersOnTraceNow(
-                      stageId: stageId, dateTimeNow: DateTime.now())
-                  .get();
-              _finishes =
-                  await _db.getFinishesFromStage(stageId: stageId).get();
-              _emitState();
-            }
+            var settings =
+                _settingsProvider.settings.copyWith(stageId: stageId);
+            _settingsProvider.update(settings);
+            _participants =
+                await _db.getParticipantsAtStart(stageId: stageId).get();
+            _numbersOnTrace = await _db
+                .getNumbersOnTraceNow(
+                    stageId: stageId, dateTimeNow: DateTime.now())
+                .get();
+            _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
+            _emitState();
           },
           getParticipantsAtStart: (event) async {
             _participants =

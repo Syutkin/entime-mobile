@@ -548,5 +548,4 @@ sealed class Pubspec {
       'use_deferred_loading': false,
     },
   };
-
 }

@@ -54,13 +54,9 @@ Future<void> addStagePopup(BuildContext context, {required int raceId}) async {
             if (formKey.currentState!.validate()) {
               context.read<DatabaseBloc>().add(
                     DatabaseEvent.addStage(
-                      Stage(
-                        name: stageName,
-                        raceId: raceId,
-                        trailId: trailId,
-                        isActive: true,
-                        isDeleted: false,
-                      ),
+                      raceId: raceId,
+                      name: stageName,
+                      trailId: trailId,
                     ),
                   );
               Navigator.of(context).pop();

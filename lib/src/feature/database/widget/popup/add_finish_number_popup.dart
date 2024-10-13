@@ -15,7 +15,7 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
   Stage? stage = databaseBloc.state.stage;
 
   final formKey = GlobalKey<FormState>();
-  if (finishId != null && finishTime != null && stage != null) {
+  if (finishTime != null && stage != null) {
     return showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(

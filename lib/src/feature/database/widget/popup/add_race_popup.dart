@@ -72,12 +72,11 @@ Future<void> addRacePopup(BuildContext context) async {
             if (formKey.currentState!.validate()) {
               context.read<DatabaseBloc>().add(
                     DatabaseEvent.addRace(
-                      Race(
-                        name: raceName,
-                        startDate: startDate?.toIso8601String(),
-                        finishDate: finishDate?.toIso8601String(),
-                        isDeleted: false,
-                      ),
+                      name: raceName,
+                      startDate: startDate,
+                      finishDate: finishDate,
+                      // ToDo: указать локацию
+                      // location: location,
                     ),
                   );
               Navigator.of(context).pop();

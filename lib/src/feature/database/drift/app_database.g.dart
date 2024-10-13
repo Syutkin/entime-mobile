@@ -10,11 +10,10 @@ class Races extends Table with TableInfo<Races, Race> {
   Races(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      hasAutoIncrement: true,
+      'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY NOT NULL');
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
@@ -100,7 +99,7 @@ class Races extends Table with TableInfo<Races, Race> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Race(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       startDate: attachedDatabase.typeMapping
@@ -124,14 +123,14 @@ class Races extends Table with TableInfo<Races, Race> {
 }
 
 class Race extends DataClass implements Insertable<Race> {
-  final int? id;
+  final int id;
   final String name;
   final String? startDate;
   final String? finishDate;
   final String? location;
   final bool isDeleted;
   const Race(
-      {this.id,
+      {required this.id,
       required this.name,
       this.startDate,
       this.finishDate,
@@ -140,9 +139,7 @@ class Race extends DataClass implements Insertable<Race> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || startDate != null) {
       map['start_date'] = Variable<String>(startDate);
@@ -159,7 +156,7 @@ class Race extends DataClass implements Insertable<Race> {
 
   RacesCompanion toCompanion(bool nullToAbsent) {
     return RacesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       name: Value(name),
       startDate: startDate == null && nullToAbsent
           ? const Value.absent()
@@ -178,7 +175,7 @@ class Race extends DataClass implements Insertable<Race> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Race(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       startDate: serializer.fromJson<String?>(json['start_date']),
       finishDate: serializer.fromJson<String?>(json['finish_date']),
@@ -190,7 +187,7 @@ class Race extends DataClass implements Insertable<Race> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
       'start_date': serializer.toJson<String?>(startDate),
       'finish_date': serializer.toJson<String?>(finishDate),
@@ -200,14 +197,14 @@ class Race extends DataClass implements Insertable<Race> {
   }
 
   Race copyWith(
-          {Value<int?> id = const Value.absent(),
+          {int? id,
           String? name,
           Value<String?> startDate = const Value.absent(),
           Value<String?> finishDate = const Value.absent(),
           Value<String?> location = const Value.absent(),
           bool? isDeleted}) =>
       Race(
-        id: id.present ? id.value : this.id,
+        id: id ?? this.id,
         name: name ?? this.name,
         startDate: startDate.present ? startDate.value : this.startDate,
         finishDate: finishDate.present ? finishDate.value : this.finishDate,
@@ -255,7 +252,7 @@ class Race extends DataClass implements Insertable<Race> {
 }
 
 class RacesCompanion extends UpdateCompanion<Race> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<String> name;
   final Value<String?> startDate;
   final Value<String?> finishDate;
@@ -296,7 +293,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
   }
 
   RacesCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<String>? name,
       Value<String?>? startDate,
       Value<String?>? finishDate,
@@ -357,11 +354,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   Trails(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      hasAutoIncrement: true,
+      'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY NOT NULL');
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
@@ -454,7 +450,7 @@ class Trails extends Table with TableInfo<Trails, Trail> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Trail(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       distance: attachedDatabase.typeMapping
@@ -480,7 +476,7 @@ class Trails extends Table with TableInfo<Trails, Trail> {
 }
 
 class Trail extends DataClass implements Insertable<Trail> {
-  final int? id;
+  final int id;
   final String name;
   final int? distance;
   final int? elevation;
@@ -488,7 +484,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   final String? link;
   final String? comment;
   const Trail(
-      {this.id,
+      {required this.id,
       required this.name,
       this.distance,
       this.elevation,
@@ -498,9 +494,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || distance != null) {
       map['distance'] = Variable<int>(distance);
@@ -522,7 +516,7 @@ class Trail extends DataClass implements Insertable<Trail> {
 
   TrailsCompanion toCompanion(bool nullToAbsent) {
     return TrailsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       name: Value(name),
       distance: distance == null && nullToAbsent
           ? const Value.absent()
@@ -544,7 +538,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Trail(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       distance: serializer.fromJson<int?>(json['distance']),
       elevation: serializer.fromJson<int?>(json['elevation']),
@@ -557,7 +551,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
       'distance': serializer.toJson<int?>(distance),
       'elevation': serializer.toJson<int?>(elevation),
@@ -568,7 +562,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   }
 
   Trail copyWith(
-          {Value<int?> id = const Value.absent(),
+          {int? id,
           String? name,
           Value<int?> distance = const Value.absent(),
           Value<int?> elevation = const Value.absent(),
@@ -576,7 +570,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           Value<String?> link = const Value.absent(),
           Value<String?> comment = const Value.absent()}) =>
       Trail(
-        id: id.present ? id.value : this.id,
+        id: id ?? this.id,
         name: name ?? this.name,
         distance: distance.present ? distance.value : this.distance,
         elevation: elevation.present ? elevation.value : this.elevation,
@@ -627,7 +621,7 @@ class Trail extends DataClass implements Insertable<Trail> {
 }
 
 class TrailsCompanion extends UpdateCompanion<Trail> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<String> name;
   final Value<int?> distance;
   final Value<int?> elevation;
@@ -673,7 +667,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   }
 
   TrailsCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<String>? name,
       Value<int?>? distance,
       Value<int?>? elevation,
@@ -740,11 +734,10 @@ class Stages extends Table with TableInfo<Stages, Stage> {
   Stages(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      hasAutoIncrement: true,
+      'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY NOT NULL');
   static const VerificationMeta _trailIdMeta =
       const VerificationMeta('trailId');
   late final GeneratedColumn<int> trailId = GeneratedColumn<int>(
@@ -830,7 +823,7 @@ class Stages extends Table with TableInfo<Stages, Stage> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Stage(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       trailId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}trail_id']),
       raceId: attachedDatabase.typeMapping
@@ -859,14 +852,14 @@ class Stages extends Table with TableInfo<Stages, Stage> {
 }
 
 class Stage extends DataClass implements Insertable<Stage> {
-  final int? id;
+  final int id;
   final int? trailId;
   final int raceId;
   final String name;
   final bool isActive;
   final bool isDeleted;
   const Stage(
-      {this.id,
+      {required this.id,
       this.trailId,
       required this.raceId,
       required this.name,
@@ -875,9 +868,7 @@ class Stage extends DataClass implements Insertable<Stage> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
+    map['id'] = Variable<int>(id);
     if (!nullToAbsent || trailId != null) {
       map['trail_id'] = Variable<int>(trailId);
     }
@@ -890,7 +881,7 @@ class Stage extends DataClass implements Insertable<Stage> {
 
   StagesCompanion toCompanion(bool nullToAbsent) {
     return StagesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       trailId: trailId == null && nullToAbsent
           ? const Value.absent()
           : Value(trailId),
@@ -905,7 +896,7 @@ class Stage extends DataClass implements Insertable<Stage> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Stage(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       trailId: serializer.fromJson<int?>(json['trail_id']),
       raceId: serializer.fromJson<int>(json['race_id']),
       name: serializer.fromJson<String>(json['name']),
@@ -917,7 +908,7 @@ class Stage extends DataClass implements Insertable<Stage> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'trail_id': serializer.toJson<int?>(trailId),
       'race_id': serializer.toJson<int>(raceId),
       'name': serializer.toJson<String>(name),
@@ -927,14 +918,14 @@ class Stage extends DataClass implements Insertable<Stage> {
   }
 
   Stage copyWith(
-          {Value<int?> id = const Value.absent(),
+          {int? id,
           Value<int?> trailId = const Value.absent(),
           int? raceId,
           String? name,
           bool? isActive,
           bool? isDeleted}) =>
       Stage(
-        id: id.present ? id.value : this.id,
+        id: id ?? this.id,
         trailId: trailId.present ? trailId.value : this.trailId,
         raceId: raceId ?? this.raceId,
         name: name ?? this.name,
@@ -981,7 +972,7 @@ class Stage extends DataClass implements Insertable<Stage> {
 }
 
 class StagesCompanion extends UpdateCompanion<Stage> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<int?> trailId;
   final Value<int> raceId;
   final Value<String> name;
@@ -1023,7 +1014,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
   }
 
   StagesCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<int?>? trailId,
       Value<int>? raceId,
       Value<String>? name,
@@ -1084,11 +1075,10 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   Riders(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      hasAutoIncrement: true,
+      'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY NOT NULL');
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
@@ -1200,7 +1190,7 @@ class Riders extends Table with TableInfo<Riders, Rider> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Rider(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       nickname: attachedDatabase.typeMapping
@@ -1230,7 +1220,7 @@ class Riders extends Table with TableInfo<Riders, Rider> {
 }
 
 class Rider extends DataClass implements Insertable<Rider> {
-  final int? id;
+  final int id;
   final String name;
   final String? nickname;
   final String? birthday;
@@ -1240,7 +1230,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   final String? phone;
   final String? comment;
   const Rider(
-      {this.id,
+      {required this.id,
       required this.name,
       this.nickname,
       this.birthday,
@@ -1252,9 +1242,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || nickname != null) {
       map['nickname'] = Variable<String>(nickname);
@@ -1282,7 +1270,7 @@ class Rider extends DataClass implements Insertable<Rider> {
 
   RidersCompanion toCompanion(bool nullToAbsent) {
     return RidersCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       name: Value(name),
       nickname: nickname == null && nullToAbsent
           ? const Value.absent()
@@ -1306,7 +1294,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Rider(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       nickname: serializer.fromJson<String?>(json['nickname']),
       birthday: serializer.fromJson<String?>(json['birthday']),
@@ -1321,7 +1309,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
       'nickname': serializer.toJson<String?>(nickname),
       'birthday': serializer.toJson<String?>(birthday),
@@ -1334,7 +1322,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   }
 
   Rider copyWith(
-          {Value<int?> id = const Value.absent(),
+          {int? id,
           String? name,
           Value<String?> nickname = const Value.absent(),
           Value<String?> birthday = const Value.absent(),
@@ -1344,7 +1332,7 @@ class Rider extends DataClass implements Insertable<Rider> {
           Value<String?> phone = const Value.absent(),
           Value<String?> comment = const Value.absent()}) =>
       Rider(
-        id: id.present ? id.value : this.id,
+        id: id ?? this.id,
         name: name ?? this.name,
         nickname: nickname.present ? nickname.value : this.nickname,
         birthday: birthday.present ? birthday.value : this.birthday,
@@ -1403,7 +1391,7 @@ class Rider extends DataClass implements Insertable<Rider> {
 }
 
 class RidersCompanion extends UpdateCompanion<Rider> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<String> name;
   final Value<String?> nickname;
   final Value<String?> birthday;
@@ -1459,7 +1447,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
   }
 
   RidersCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<String>? name,
       Value<String?>? nickname,
       Value<String?>? birthday,
@@ -1538,11 +1526,10 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
   Statuses(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      hasAutoIncrement: true,
+      'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY NOT NULL');
   static const VerificationMeta _typeMeta = const VerificationMeta('type');
   late final GeneratedColumn<String> type = GeneratedColumn<String>(
       'type', aliasedName, false,
@@ -1580,7 +1567,7 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Status(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       type: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
     );
@@ -1596,22 +1583,20 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
 }
 
 class Status extends DataClass implements Insertable<Status> {
-  final int? id;
+  final int id;
   final String type;
-  const Status({this.id, required this.type});
+  const Status({required this.id, required this.type});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['type'] = Variable<String>(type);
     return map;
   }
 
   StatusesCompanion toCompanion(bool nullToAbsent) {
     return StatusesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       type: Value(type),
     );
   }
@@ -1620,7 +1605,7 @@ class Status extends DataClass implements Insertable<Status> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Status(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       type: serializer.fromJson<String>(json['type']),
     );
   }
@@ -1628,14 +1613,13 @@ class Status extends DataClass implements Insertable<Status> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'type': serializer.toJson<String>(type),
     };
   }
 
-  Status copyWith({Value<int?> id = const Value.absent(), String? type}) =>
-      Status(
-        id: id.present ? id.value : this.id,
+  Status copyWith({int? id, String? type}) => Status(
+        id: id ?? this.id,
         type: type ?? this.type,
       );
   Status copyWithCompanion(StatusesCompanion data) {
@@ -1663,7 +1647,7 @@ class Status extends DataClass implements Insertable<Status> {
 }
 
 class StatusesCompanion extends UpdateCompanion<Status> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<String> type;
   const StatusesCompanion({
     this.id = const Value.absent(),
@@ -1683,7 +1667,7 @@ class StatusesCompanion extends UpdateCompanion<Status> {
     });
   }
 
-  StatusesCompanion copyWith({Value<int?>? id, Value<String>? type}) {
+  StatusesCompanion copyWith({Value<int>? id, Value<String>? type}) {
     return StatusesCompanion(
       id: id ?? this.id,
       type: type ?? this.type,
@@ -1719,11 +1703,10 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   Participants(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      hasAutoIncrement: true,
+      'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY NOT NULL');
   static const VerificationMeta _raceIdMeta = const VerificationMeta('raceId');
   late final GeneratedColumn<int> raceId = GeneratedColumn<int>(
       'race_id', aliasedName, false,
@@ -1820,7 +1803,7 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Participant(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       raceId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}race_id'])!,
       riderId: attachedDatabase.typeMapping
@@ -1852,7 +1835,7 @@ class Participants extends Table with TableInfo<Participants, Participant> {
 }
 
 class Participant extends DataClass implements Insertable<Participant> {
-  final int? id;
+  final int id;
   final int raceId;
   final int riderId;
   final int number;
@@ -1862,7 +1845,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   final String? rfid;
   final int statusId;
   const Participant(
-      {this.id,
+      {required this.id,
       required this.raceId,
       required this.riderId,
       required this.number,
@@ -1872,9 +1855,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['race_id'] = Variable<int>(raceId);
     map['rider_id'] = Variable<int>(riderId);
     map['number'] = Variable<int>(number);
@@ -1890,7 +1871,7 @@ class Participant extends DataClass implements Insertable<Participant> {
 
   ParticipantsCompanion toCompanion(bool nullToAbsent) {
     return ParticipantsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       raceId: Value(raceId),
       riderId: Value(riderId),
       number: Value(number),
@@ -1906,7 +1887,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Participant(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       raceId: serializer.fromJson<int>(json['race_id']),
       riderId: serializer.fromJson<int>(json['rider_id']),
       number: serializer.fromJson<int>(json['number']),
@@ -1919,7 +1900,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'race_id': serializer.toJson<int>(raceId),
       'rider_id': serializer.toJson<int>(riderId),
       'number': serializer.toJson<int>(number),
@@ -1930,7 +1911,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   }
 
   Participant copyWith(
-          {Value<int?> id = const Value.absent(),
+          {int? id,
           int? raceId,
           int? riderId,
           int? number,
@@ -1938,7 +1919,7 @@ class Participant extends DataClass implements Insertable<Participant> {
           Value<String?> rfid = const Value.absent(),
           int? statusId}) =>
       Participant(
-        id: id.present ? id.value : this.id,
+        id: id ?? this.id,
         raceId: raceId ?? this.raceId,
         riderId: riderId ?? this.riderId,
         number: number ?? this.number,
@@ -1989,7 +1970,7 @@ class Participant extends DataClass implements Insertable<Participant> {
 }
 
 class ParticipantsCompanion extends UpdateCompanion<Participant> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<int> raceId;
   final Value<int> riderId;
   final Value<int> number;
@@ -2037,7 +2018,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   }
 
   ParticipantsCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<int>? raceId,
       Value<int>? riderId,
       Value<int>? number,
@@ -2104,11 +2085,10 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
   Finishes(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      hasAutoIncrement: true,
+      'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY NOT NULL');
   static const VerificationMeta _stageIdMeta =
       const VerificationMeta('stageId');
   late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
@@ -2206,7 +2186,7 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Finish(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       stageId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}stage_id'])!,
       number: attachedDatabase.typeMapping
@@ -2235,7 +2215,7 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
 }
 
 class Finish extends DataClass implements Insertable<Finish> {
-  final int? id;
+  final int id;
   final int stageId;
   final int? number;
   final String? timestamp;
@@ -2243,7 +2223,7 @@ class Finish extends DataClass implements Insertable<Finish> {
   final bool isHidden;
   final bool isManual;
   const Finish(
-      {this.id,
+      {required this.id,
       required this.stageId,
       this.number,
       this.timestamp,
@@ -2253,9 +2233,7 @@ class Finish extends DataClass implements Insertable<Finish> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['stage_id'] = Variable<int>(stageId);
     if (!nullToAbsent || number != null) {
       map['number'] = Variable<int>(number);
@@ -2273,7 +2251,7 @@ class Finish extends DataClass implements Insertable<Finish> {
 
   FinishesCompanion toCompanion(bool nullToAbsent) {
     return FinishesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       stageId: Value(stageId),
       number:
           number == null && nullToAbsent ? const Value.absent() : Value(number),
@@ -2292,7 +2270,7 @@ class Finish extends DataClass implements Insertable<Finish> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Finish(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       stageId: serializer.fromJson<int>(json['stage_id']),
       number: serializer.fromJson<int?>(json['number']),
       timestamp: serializer.fromJson<String?>(json['timestamp']),
@@ -2305,7 +2283,7 @@ class Finish extends DataClass implements Insertable<Finish> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'stage_id': serializer.toJson<int>(stageId),
       'number': serializer.toJson<int?>(number),
       'timestamp': serializer.toJson<String?>(timestamp),
@@ -2316,7 +2294,7 @@ class Finish extends DataClass implements Insertable<Finish> {
   }
 
   Finish copyWith(
-          {Value<int?> id = const Value.absent(),
+          {int? id,
           int? stageId,
           Value<int?> number = const Value.absent(),
           Value<String?> timestamp = const Value.absent(),
@@ -2324,7 +2302,7 @@ class Finish extends DataClass implements Insertable<Finish> {
           bool? isHidden,
           bool? isManual}) =>
       Finish(
-        id: id.present ? id.value : this.id,
+        id: id ?? this.id,
         stageId: stageId ?? this.stageId,
         number: number.present ? number.value : this.number,
         timestamp: timestamp.present ? timestamp.value : this.timestamp,
@@ -2376,7 +2354,7 @@ class Finish extends DataClass implements Insertable<Finish> {
 }
 
 class FinishesCompanion extends UpdateCompanion<Finish> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<int> stageId;
   final Value<int?> number;
   final Value<String?> timestamp;
@@ -2422,7 +2400,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
   }
 
   FinishesCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<int>? stageId,
       Value<int?>? number,
       Value<String?>? timestamp,
@@ -2489,11 +2467,10 @@ class Starts extends Table with TableInfo<Starts, Start> {
   Starts(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, true,
-      hasAutoIncrement: true,
+      'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      $customConstraints: 'PRIMARY KEY NOT NULL');
   static const VerificationMeta _stageIdMeta =
       const VerificationMeta('stageId');
   late final GeneratedColumn<int> stageId = GeneratedColumn<int>(
@@ -2658,7 +2635,7 @@ class Starts extends Table with TableInfo<Starts, Start> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Start(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id']),
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       stageId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}stage_id'])!,
       participantId: attachedDatabase.typeMapping
@@ -2699,7 +2676,7 @@ class Starts extends Table with TableInfo<Starts, Start> {
 }
 
 class Start extends DataClass implements Insertable<Start> {
-  final int? id;
+  final int id;
   final int stageId;
   final int participantId;
   final String startTime;
@@ -2711,7 +2688,7 @@ class Start extends DataClass implements Insertable<Start> {
   final int statusId;
   final int? finishId;
   const Start(
-      {this.id,
+      {required this.id,
       required this.stageId,
       required this.participantId,
       required this.startTime,
@@ -2725,9 +2702,7 @@ class Start extends DataClass implements Insertable<Start> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
-    }
+    map['id'] = Variable<int>(id);
     map['stage_id'] = Variable<int>(stageId);
     map['participant_id'] = Variable<int>(participantId);
     map['start_time'] = Variable<String>(startTime);
@@ -2755,7 +2730,7 @@ class Start extends DataClass implements Insertable<Start> {
 
   StartsCompanion toCompanion(bool nullToAbsent) {
     return StartsCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      id: Value(id),
       stageId: Value(stageId),
       participantId: Value(participantId),
       startTime: Value(startTime),
@@ -2785,7 +2760,7 @@ class Start extends DataClass implements Insertable<Start> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Start(
-      id: serializer.fromJson<int?>(json['id']),
+      id: serializer.fromJson<int>(json['id']),
       stageId: serializer.fromJson<int>(json['stage_id']),
       participantId: serializer.fromJson<int>(json['participant_id']),
       startTime: serializer.fromJson<String>(json['start_time']),
@@ -2804,7 +2779,7 @@ class Start extends DataClass implements Insertable<Start> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int?>(id),
+      'id': serializer.toJson<int>(id),
       'stage_id': serializer.toJson<int>(stageId),
       'participant_id': serializer.toJson<int>(participantId),
       'start_time': serializer.toJson<String>(startTime),
@@ -2819,7 +2794,7 @@ class Start extends DataClass implements Insertable<Start> {
   }
 
   Start copyWith(
-          {Value<int?> id = const Value.absent(),
+          {int? id,
           int? stageId,
           int? participantId,
           String? startTime,
@@ -2831,7 +2806,7 @@ class Start extends DataClass implements Insertable<Start> {
           int? statusId,
           Value<int?> finishId = const Value.absent()}) =>
       Start(
-        id: id.present ? id.value : this.id,
+        id: id ?? this.id,
         stageId: stageId ?? this.stageId,
         participantId: participantId ?? this.participantId,
         startTime: startTime ?? this.startTime,
@@ -2926,7 +2901,7 @@ class Start extends DataClass implements Insertable<Start> {
 }
 
 class StartsCompanion extends UpdateCompanion<Start> {
-  final Value<int?> id;
+  final Value<int> id;
   final Value<int> stageId;
   final Value<int> participantId;
   final Value<String> startTime;
@@ -2996,7 +2971,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
   }
 
   StartsCompanion copyWith(
-      {Value<int?>? id,
+      {Value<int>? id,
       Value<int>? stageId,
       Value<int>? participantId,
       Value<String>? startTime,
@@ -3090,7 +3065,7 @@ class Logs extends Table with TableInfo<Logs, Log> {
       'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      $customConstraints: 'PRIMARY KEY UNIQUE');
+      $customConstraints: 'PRIMARY KEY NOT NULL');
   static const VerificationMeta _levelMeta = const VerificationMeta('level');
   late final GeneratedColumnWithTypeConverter<LogLevel, String> level =
       GeneratedColumn<String>('level', aliasedName, false,
@@ -3465,7 +3440,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Future<int> _deleteRace({int? id}) {
+  Future<int> _deleteRace({required int id}) {
     return customUpdate(
       'UPDATE races SET is_deleted = TRUE WHERE id = ?1',
       variables: [Variable<int>(id)],
@@ -3498,7 +3473,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Future<int> _deleteStage({int? id}) {
+  Future<int> _deleteStage({required int id}) {
     return customUpdate(
       'UPDATE stages SET is_deleted = TRUE WHERE id = ?1',
       variables: [Variable<int>(id)],
@@ -3579,7 +3554,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           participants,
         }).map((QueryRow row) => NumberAtStart(
           row: row,
-          startId: row.readNullable<int>('start_id'),
+          startId: row.read<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
@@ -3626,7 +3601,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           email: row.readNullable<String>('email'),
           phone: row.readNullable<String>('phone'),
           comment: row.readNullable<String>('comment'),
-          startId: row.readNullable<int>('start_id'),
+          startId: row.read<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
@@ -3653,7 +3628,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           participants,
         }).map((QueryRow row) => StartingParticipant(
           row: row,
-          startId: row.readNullable<int>('start_id'),
+          startId: row.read<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
@@ -3711,7 +3686,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           participants,
         }).map((QueryRow row) => StartingParticipant(
           row: row,
-          startId: row.readNullable<int>('start_id'),
+          startId: row.read<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
@@ -3810,7 +3785,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
-  Future<int> _setDNSForStartId({required int statusId, int? id}) {
+  Future<int> _setDNSForStartId({required int statusId, required int id}) {
     return customUpdate(
       'UPDATE starts SET status_id = ?1, automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL WHERE id = ?2',
       variables: [Variable<int>(statusId), Variable<int>(id)],
@@ -3832,7 +3807,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           participants,
         }).map((QueryRow row) => StartingParticipant(
           row: row,
-          startId: row.readNullable<int>('start_id'),
+          startId: row.read<int>('start_id'),
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
@@ -3942,7 +3917,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Future<int> _hideFinish({int? id}) {
+  Future<int> _hideFinish({required int id}) {
     return customUpdate(
       'UPDATE finishes SET is_hidden = TRUE WHERE id = ?1',
       variables: [Variable<int>(id)],
@@ -3972,7 +3947,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).asyncMap(finishes.mapFromRow);
   }
 
-  Future<int> _setNumberToFinish({int? number, int? id}) {
+  Future<int> _setNumberToFinish({int? number, required int id}) {
     return customUpdate(
       'UPDATE finishes SET number = ?1 WHERE id = ?2',
       variables: [Variable<int>(number), Variable<int>(id)],
@@ -4049,7 +4024,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 }
 
 typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   required String name,
   Value<String?> startDate,
   Value<String?> finishDate,
@@ -4057,7 +4032,7 @@ typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
   Value<bool> isDeleted,
 });
 typedef $RacesUpdateCompanionBuilder = RacesCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   Value<String> name,
   Value<String?> startDate,
   Value<String?> finishDate,
@@ -4149,7 +4124,7 @@ class $RacesTableManager extends RootTableManager<
           filteringComposer: $RacesFilterComposer(ComposerState(db, table)),
           orderingComposer: $RacesOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<String?> startDate = const Value.absent(),
             Value<String?> finishDate = const Value.absent(),
@@ -4165,7 +4140,7 @@ class $RacesTableManager extends RootTableManager<
             isDeleted: isDeleted,
           ),
           createCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             required String name,
             Value<String?> startDate = const Value.absent(),
             Value<String?> finishDate = const Value.absent(),
@@ -4199,7 +4174,7 @@ typedef $RacesProcessedTableManager = ProcessedTableManager<
     Race,
     PrefetchHooks Function()>;
 typedef $TrailsCreateCompanionBuilder = TrailsCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   required String name,
   Value<int?> distance,
   Value<int?> elevation,
@@ -4208,7 +4183,7 @@ typedef $TrailsCreateCompanionBuilder = TrailsCompanion Function({
   Value<String?> comment,
 });
 typedef $TrailsUpdateCompanionBuilder = TrailsCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   Value<String> name,
   Value<int?> distance,
   Value<int?> elevation,
@@ -4311,7 +4286,7 @@ class $TrailsTableManager extends RootTableManager<
           filteringComposer: $TrailsFilterComposer(ComposerState(db, table)),
           orderingComposer: $TrailsOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<int?> distance = const Value.absent(),
             Value<int?> elevation = const Value.absent(),
@@ -4329,7 +4304,7 @@ class $TrailsTableManager extends RootTableManager<
             comment: comment,
           ),
           createCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             required String name,
             Value<int?> distance = const Value.absent(),
             Value<int?> elevation = const Value.absent(),
@@ -4365,7 +4340,7 @@ typedef $TrailsProcessedTableManager = ProcessedTableManager<
     Trail,
     PrefetchHooks Function()>;
 typedef $StagesCreateCompanionBuilder = StagesCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   Value<int?> trailId,
   required int raceId,
   required String name,
@@ -4373,7 +4348,7 @@ typedef $StagesCreateCompanionBuilder = StagesCompanion Function({
   Value<bool> isDeleted,
 });
 typedef $StagesUpdateCompanionBuilder = StagesCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   Value<int?> trailId,
   Value<int> raceId,
   Value<String> name,
@@ -4465,7 +4440,7 @@ class $StagesTableManager extends RootTableManager<
           filteringComposer: $StagesFilterComposer(ComposerState(db, table)),
           orderingComposer: $StagesOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<int?> trailId = const Value.absent(),
             Value<int> raceId = const Value.absent(),
             Value<String> name = const Value.absent(),
@@ -4481,7 +4456,7 @@ class $StagesTableManager extends RootTableManager<
             isDeleted: isDeleted,
           ),
           createCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<int?> trailId = const Value.absent(),
             required int raceId,
             required String name,
@@ -4515,7 +4490,7 @@ typedef $StagesProcessedTableManager = ProcessedTableManager<
     Stage,
     PrefetchHooks Function()>;
 typedef $RidersCreateCompanionBuilder = RidersCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   required String name,
   Value<String?> nickname,
   Value<String?> birthday,
@@ -4526,7 +4501,7 @@ typedef $RidersCreateCompanionBuilder = RidersCompanion Function({
   Value<String?> comment,
 });
 typedef $RidersUpdateCompanionBuilder = RidersCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   Value<String> name,
   Value<String?> nickname,
   Value<String?> birthday,
@@ -4651,7 +4626,7 @@ class $RidersTableManager extends RootTableManager<
           filteringComposer: $RidersFilterComposer(ComposerState(db, table)),
           orderingComposer: $RidersOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<String?> nickname = const Value.absent(),
             Value<String?> birthday = const Value.absent(),
@@ -4673,7 +4648,7 @@ class $RidersTableManager extends RootTableManager<
             comment: comment,
           ),
           createCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             required String name,
             Value<String?> nickname = const Value.absent(),
             Value<String?> birthday = const Value.absent(),
@@ -4713,11 +4688,11 @@ typedef $RidersProcessedTableManager = ProcessedTableManager<
     Rider,
     PrefetchHooks Function()>;
 typedef $StatusesCreateCompanionBuilder = StatusesCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   required String type,
 });
 typedef $StatusesUpdateCompanionBuilder = StatusesCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   Value<String> type,
 });
 
@@ -4766,7 +4741,7 @@ class $StatusesTableManager extends RootTableManager<
           filteringComposer: $StatusesFilterComposer(ComposerState(db, table)),
           orderingComposer: $StatusesOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<String> type = const Value.absent(),
           }) =>
               StatusesCompanion(
@@ -4774,7 +4749,7 @@ class $StatusesTableManager extends RootTableManager<
             type: type,
           ),
           createCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             required String type,
           }) =>
               StatusesCompanion.insert(
@@ -4800,7 +4775,7 @@ typedef $StatusesProcessedTableManager = ProcessedTableManager<
     Status,
     PrefetchHooks Function()>;
 typedef $ParticipantsCreateCompanionBuilder = ParticipantsCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   required int raceId,
   required int riderId,
   required int number,
@@ -4809,7 +4784,7 @@ typedef $ParticipantsCreateCompanionBuilder = ParticipantsCompanion Function({
   Value<int> statusId,
 });
 typedef $ParticipantsUpdateCompanionBuilder = ParticipantsCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   Value<int> raceId,
   Value<int> riderId,
   Value<int> number,
@@ -4916,7 +4891,7 @@ class $ParticipantsTableManager extends RootTableManager<
           orderingComposer:
               $ParticipantsOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<int> raceId = const Value.absent(),
             Value<int> riderId = const Value.absent(),
             Value<int> number = const Value.absent(),
@@ -4934,7 +4909,7 @@ class $ParticipantsTableManager extends RootTableManager<
             statusId: statusId,
           ),
           createCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             required int raceId,
             required int riderId,
             required int number,
@@ -4970,7 +4945,7 @@ typedef $ParticipantsProcessedTableManager = ProcessedTableManager<
     Participant,
     PrefetchHooks Function()>;
 typedef $FinishesCreateCompanionBuilder = FinishesCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   required int stageId,
   Value<int?> number,
   Value<String?> timestamp,
@@ -4979,7 +4954,7 @@ typedef $FinishesCreateCompanionBuilder = FinishesCompanion Function({
   Value<bool> isManual,
 });
 typedef $FinishesUpdateCompanionBuilder = FinishesCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   Value<int> stageId,
   Value<int?> number,
   Value<String?> timestamp,
@@ -5083,7 +5058,7 @@ class $FinishesTableManager extends RootTableManager<
           filteringComposer: $FinishesFilterComposer(ComposerState(db, table)),
           orderingComposer: $FinishesOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<int> stageId = const Value.absent(),
             Value<int?> number = const Value.absent(),
             Value<String?> timestamp = const Value.absent(),
@@ -5101,7 +5076,7 @@ class $FinishesTableManager extends RootTableManager<
             isManual: isManual,
           ),
           createCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             required int stageId,
             Value<int?> number = const Value.absent(),
             Value<String?> timestamp = const Value.absent(),
@@ -5137,7 +5112,7 @@ typedef $FinishesProcessedTableManager = ProcessedTableManager<
     Finish,
     PrefetchHooks Function()>;
 typedef $StartsCreateCompanionBuilder = StartsCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   required int stageId,
   required int participantId,
   required String startTime,
@@ -5150,7 +5125,7 @@ typedef $StartsCreateCompanionBuilder = StartsCompanion Function({
   Value<int?> finishId,
 });
 typedef $StartsUpdateCompanionBuilder = StartsCompanion Function({
-  Value<int?> id,
+  Value<int> id,
   Value<int> stageId,
   Value<int> participantId,
   Value<String> startTime,
@@ -5297,7 +5272,7 @@ class $StartsTableManager extends RootTableManager<
           filteringComposer: $StartsFilterComposer(ComposerState(db, table)),
           orderingComposer: $StartsOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<int> stageId = const Value.absent(),
             Value<int> participantId = const Value.absent(),
             Value<String> startTime = const Value.absent(),
@@ -5323,7 +5298,7 @@ class $StartsTableManager extends RootTableManager<
             finishId: finishId,
           ),
           createCompanionCallback: ({
-            Value<int?> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             required int stageId,
             required int participantId,
             required String startTime,
@@ -5541,7 +5516,7 @@ class $AppDatabaseManager {
 }
 
 class NumberAtStart extends CustomResultSet {
-  final int? startId;
+  final int startId;
   final int stageId;
   final int participantId;
   final String startTime;
@@ -5560,7 +5535,7 @@ class NumberAtStart extends CustomResultSet {
   final int participantStatusId;
   NumberAtStart({
     required QueryRow row,
-    this.startId,
+    required this.startId,
     required this.stageId,
     required this.participantId,
     required this.startTime,
@@ -5595,7 +5570,7 @@ class ParticipantAtStart extends CustomResultSet {
   final String? email;
   final String? phone;
   final String? comment;
-  final int? startId;
+  final int startId;
   final int stageId;
   final int participantId;
   final String startTime;
@@ -5621,7 +5596,7 @@ class ParticipantAtStart extends CustomResultSet {
     this.email,
     this.phone,
     this.comment,
-    this.startId,
+    required this.startId,
     required this.stageId,
     required this.participantId,
     required this.startTime,
@@ -5635,7 +5610,7 @@ class ParticipantAtStart extends CustomResultSet {
 }
 
 class StartingParticipant extends CustomResultSet {
-  final int? startId;
+  final int startId;
   final int stageId;
   final int participantId;
   final String startTime;
@@ -5654,7 +5629,7 @@ class StartingParticipant extends CustomResultSet {
   final int participantStatus;
   StartingParticipant({
     required QueryRow row,
-    this.startId,
+    required this.startId,
     required this.stageId,
     required this.participantId,
     required this.startTime,

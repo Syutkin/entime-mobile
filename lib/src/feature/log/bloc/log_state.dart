@@ -4,5 +4,5 @@ part of 'log_bloc.dart';
 class LogState with _$LogState {
   const factory LogState.initial() = _Initial;
   const factory LogState.initialized({List<Log>? log, bool? updateLogScreen}) =
-  _Initialized;
+      _Initialized;
 }

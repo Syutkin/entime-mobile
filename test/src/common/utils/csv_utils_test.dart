@@ -8,7 +8,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -47,10 +46,8 @@ void main() async {
       final csvMapCsv = mapListToCsv(csvMap);
       testFile.writeAsStringSync(csvMapCsv ?? '');
 
-      final referenceLines = referenceFile.readAsLinesSync()
-        ..removeAt(0);
-      final testLines = testFile.readAsLinesSync()
-        ..removeAt(0);
+      final referenceLines = referenceFile.readAsLinesSync()..removeAt(0);
+      final testLines = testFile.readAsLinesSync()..removeAt(0);
       expect(testLines, referenceLines);
       testFile.deleteSync();
       expect(testFile.existsSync(), false);

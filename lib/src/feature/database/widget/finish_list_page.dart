@@ -175,9 +175,7 @@ class _FinishListPage extends State<FinishListPage> {
                     final finishId = item.id;
                     final number = details.data;
                     final finishTime = item.finishTime;
-                    if (stage != null &&
-                        finishId != null &&
-                        finishTime != null) {
+                    if (stage != null && finishTime != null) {
                       databaseBloc.add(
                         DatabaseEvent.addNumberToFinish(
                           stage: stage,
@@ -192,9 +190,7 @@ class _FinishListPage extends State<FinishListPage> {
                   onDismissed: (direction) {
                     final databaseBloc = context.read<DatabaseBloc>();
                     final id = item.id;
-                    if (id != null) {
-                      databaseBloc.add(DatabaseEvent.hideFinish(id: id));
-                    }
+                    databaseBloc.add(DatabaseEvent.hideFinish(id: id));
                   },
                 );
               },
@@ -272,9 +268,7 @@ class _FinishListPage extends State<FinishListPage> {
           //   return;
           // }
           final stageId = stage.id;
-          if (stageId != null) {
-            databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
-          }
+          databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
           break;
       }
     }
@@ -428,7 +422,7 @@ class _FinishListPage extends State<FinishListPage> {
                       BluetoothEvent.messageReceived(
                         message:
                             'F12:12:12,121#\r\nF13:13:13,131#\r\nF14:14:14,141#\r\nF15:16:17,181#',
-                        stageId: stage!.id!,
+                        stageId: stage!.id,
                       ),
                     );
                     //_parseBT("F19:24:05,123#");

@@ -78,7 +78,3 @@ class _InitPage extends State<InitPage> {
     );
   }
 }
-
-
-
-

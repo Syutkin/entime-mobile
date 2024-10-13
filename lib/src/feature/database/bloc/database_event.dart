@@ -22,7 +22,12 @@ class DatabaseEvent with _$DatabaseEvent {
     required bool? updateFinishNumber,
   }) = _EmitState;
 
-  const factory DatabaseEvent.addRace(Race race) = _AddRace;
+  const factory DatabaseEvent.addRace({
+    required String name,
+    DateTime? startDate,
+    DateTime? finishDate,
+    String? location,
+  }) = _AddRace;
 
   const factory DatabaseEvent.deleteRace(int id) = _DeleteRace;
 
@@ -32,7 +37,11 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.deselectRace() = _DeselectRace;
 
-  const factory DatabaseEvent.addStage(Stage stage) = _AddStage;
+  const factory DatabaseEvent.addStage({
+    required String name,
+    required int raceId,
+    int? trailId,
+  }) = _AddStage;
 
   const factory DatabaseEvent.deleteStage(int id) = _DeleteStage;
 

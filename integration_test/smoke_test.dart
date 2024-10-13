@@ -53,8 +53,6 @@ void main() async {
     settingsProvider: settings,
   );
 
-
-
   final CountdownAtStart countdown = CountdownAtStart(database: database);
 
   testWidgets('Smoke test', (tester) async {

@@ -730,8 +730,8 @@ void main() {
           database: database,
           settingsProvider: settingsProvider,
         ),
-        act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        act: (bloc) => bloc.add(
+            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
       );
 
@@ -757,8 +757,8 @@ void main() {
           database: database,
           settingsProvider: settingsProvider,
         ),
-        act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        act: (bloc) => bloc.add(
+            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <Matcher>[
           isA<BluetoothConnectedState>().having(
             (state) => state.message,
@@ -794,8 +794,8 @@ void main() {
           database: database,
           settingsProvider: settingsProvider,
         ),
-        act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        act: (bloc) => bloc.add(
+            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
       );
 
@@ -821,8 +821,8 @@ void main() {
           database: database,
           settingsProvider: settingsProvider,
         ),
-        act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        act: (bloc) => bloc.add(
+            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
       );
 
@@ -848,8 +848,8 @@ void main() {
           database: database,
           settingsProvider: settingsProvider,
         ),
-        act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        act: (bloc) => bloc.add(
+            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <Matcher>[
           isA<BluetoothConnectedState>().having(
             (state) => state.message,
@@ -885,8 +885,8 @@ void main() {
           database: database,
           settingsProvider: settingsProvider,
         ),
-        act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        act: (bloc) => bloc.add(
+            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
       );
     });

@@ -164,7 +164,7 @@ class AppDatabase extends _$AppDatabase {
         'Database -> Checking start time $startTime and number $number...',
       );
       final res = await _getExistedStartingParticipants(
-        stageId: stage.id!,
+        stageId: stage.id,
         startTime: startTime,
         number: number,
       ).get();
@@ -222,7 +222,7 @@ class AppDatabase extends _$AppDatabase {
         StartsCompanion(
           startTime: Value(startTime),
           participantId: Value(participantsId),
-          stageId: Value(stage.id!),
+          stageId: Value(stage.id),
         ),
       );
     } else {
@@ -233,8 +233,8 @@ class AppDatabase extends _$AppDatabase {
       final start = await (select(starts)
             ..where(
               (start) =>
-                  start.stageId.equals(stage.id!) &
-                  start.participantId.equals(participantAtRace.first.id!),
+                  start.stageId.equals(stage.id) &
+                  start.participantId.equals(participantAtRace.first.id),
             ))
           .get();
       // Если номера не было в стартовом протоколе на СУ, добавляем
@@ -245,8 +245,8 @@ class AppDatabase extends _$AppDatabase {
         await into(starts).insert(
           StartsCompanion(
             startTime: Value(startTime),
-            participantId: Value(participantAtRace.first.id!),
-            stageId: Value(stage.id!),
+            participantId: Value(participantAtRace.first.id),
+            stageId: Value(stage.id),
           ),
         );
       } else {
@@ -257,7 +257,7 @@ class AppDatabase extends _$AppDatabase {
         await (update(starts)
               ..where(
                 (start) =>
-                    start.participantId.equals(participantAtRace.first.id!),
+                    start.participantId.equals(participantAtRace.first.id),
               ))
             .write(
           StartsCompanion(
@@ -552,7 +552,7 @@ class AppDatabase extends _$AppDatabase {
     int? workingNumber = number;
     // узнаём предыдущее нескрытое автоматическое время
     final prevFinishTime =
-        await _getLastFinishTime(stageId: stage.id!).getSingleOrNull();
+        await _getLastFinishTime(stageId: stage.id).getSingleOrNull();
     // проверяем разницу между предыдущей и поступившей отсечкой
     if (prevFinishTime != null) {
       final prevFinishDateTime = prevFinishTime.toDateTime();
@@ -573,26 +573,26 @@ class AppDatabase extends _$AppDatabase {
       // если нет нескрытого предыдущего времени - ставим номер
       if (prevFinishTime == null) {
         workingNumber = await _getAwaitingNumber(
-          stageId: stage.id!,
+          stageId: stage.id,
           dateTimeNow: dateTimeNow,
         );
       } else {
         // ищем предыдущее время финиша с номером
-        final lastFinishTime = await _lastFinishTime(stageId: stage.id!);
+        final lastFinishTime = await _lastFinishTime(stageId: stage.id);
         // если есть, проверяем разницу между финишами
         // если больше разницы в настройках - ставим номер
         if (lastFinishTime != null) {
           final difference = finishTime.difference(lastFinishTime);
           if (difference.inMilliseconds > substituteNumbersDelay) {
             workingNumber = await _getAwaitingNumber(
-              stageId: stage.id!,
+              stageId: stage.id,
               dateTimeNow: dateTimeNow,
             );
           }
           // если предыдущего времени с номером нет - ставим номер
         } else {
           workingNumber = await _getAwaitingNumber(
-            stageId: stage.id!,
+            stageId: stage.id,
             dateTimeNow: dateTimeNow,
           );
         }
@@ -601,7 +601,7 @@ class AppDatabase extends _$AppDatabase {
 
     final String phoneTime = DateFormat(longTimeFormat).format(timeStamp);
     final finishId = await _addFinishTime(
-      stageId: stage.id!,
+      stageId: stage.id,
       finishTime: finish,
       // ToDO: use drift DATETIME format
       timestamp: phoneTime,
@@ -612,7 +612,7 @@ class AppDatabase extends _$AppDatabase {
     if (workingNumber != null) {
       await _setFinishInfoToStart(
         raceId: stage.raceId,
-        stageId: stage.id!,
+        stageId: stage.id,
         number: workingNumber,
         finishId: finishId,
       );
@@ -677,7 +677,7 @@ class AppDatabase extends _$AppDatabase {
     required String finishTime,
   }) async {
     final existingNumber = await _getNumberAtFinishes(
-      stageId: stage.id!,
+      stageId: stage.id,
       number: number,
     ).get();
     if (existingNumber.isNotEmpty) {
@@ -698,7 +698,7 @@ class AppDatabase extends _$AppDatabase {
       }
       rowCount = await _setFinishInfoToStart(
         raceId: stage.raceId,
-        stageId: stage.id!,
+        stageId: stage.id,
         number: number,
         finishId: finishId,
       );
@@ -725,14 +725,14 @@ class AppDatabase extends _$AppDatabase {
       'WHERE number = ? AND stage_id = ?',
       variables: [
         Variable.withInt(number),
-        Variable.withInt(stage.id!),
+        Variable.withInt(stage.id),
       ],
       updates: {finishes},
       updateKind: UpdateKind.update,
     );
     await _setFinishInfoToStart(
       raceId: stage.raceId,
-      stageId: stage.id!,
+      stageId: stage.id,
       number: number,
     );
     logger.i('Database -> Finish info for number $number removed');
@@ -744,7 +744,7 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     final rowCount = await _setStatusForNumberAtStage(
       raceId: stage.raceId,
-      stageId: stage.id!,
+      stageId: stage.id,
       number: number,
       statusId: ParticipantStatus.dns.index,
     );
@@ -758,7 +758,7 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     final rowCount = await _setStatusForNumberAtStage(
       raceId: stage.raceId,
-      stageId: stage.id!,
+      stageId: stage.id,
       number: number,
       statusId: ParticipantStatus.dnf.index,
     );

@@ -3,7 +3,7 @@ import '../../log/model/log_source.dart';
 import '../../log/model/log_source_direction.dart';
 
 CREATE TABLE races (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY NOT NULL,
 	name text NOT NULL,
 	start_date text,
 	finish_date text,
@@ -12,7 +12,7 @@ CREATE TABLE races (
 ) AS Race;
 
 CREATE TABLE stages (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY NOT NULL,
 	trail_id integer,
 	race_id integer NOT NULL,
 	name text NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE stages (
 );
 
 CREATE TABLE riders (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY NOT NULL,
 	name text NOT NULL,
 	nickname text,
 	birthday text,
@@ -35,12 +35,12 @@ CREATE TABLE riders (
 );
 
 CREATE TABLE statuses (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY NOT NULL,
 	type text NOT NULL
 ) AS Status;
 
 CREATE TABLE participants (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY NOT NULL,
 	race_id integer NOT NULL,
 	rider_id integer NOT NULL,
 	number integer NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE participants (
 );
 
 CREATE TABLE starts (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY NOT NULL,
 	stage_id integer NOT NULL,
 	participant_id integer NOT NULL,
 	start_time text NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE starts (
 );
 
 CREATE TABLE finishes (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY NOT NULL,
 	stage_id integer NOT NULL,
 	number integer,
 	timestamp text,
@@ -82,7 +82,7 @@ CREATE TABLE finishes (
 ) AS Finish;
 
 CREATE TABLE trails (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY NOT NULL,
 	name text NOT NULL,
 	distance integer,
 	elevation integer,
@@ -91,10 +91,8 @@ CREATE TABLE trails (
 	comment text
 );
 
-
-
 CREATE TABLE logs (
-    id INTEGER PRIMARY KEY UNIQUE,
+    id INTEGER PRIMARY KEY NOT NULL,
     level ENUMNAME(LogLevel) NOT NULL,
     timestamp TEXT NOT NULL,
     source ENUMNAME(LogSource) NOT NULL,
