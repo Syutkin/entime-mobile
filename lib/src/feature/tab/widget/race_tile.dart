@@ -16,44 +16,32 @@ class RaceTile extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<DatabaseBloc, DatabaseState>(
           builder: (context, databaseState) {
-        return databaseState.map(initial: (initial) {
-          return ListTile(
-            leading: IconButton(
-              icon: Icon(MdiIcons.flagCheckered),
-              onPressed: () {},
-            ),
-            title: Text(Localization.current.I18nInit_selectRace),
-            subtitle: Text(Localization.current.I18nInit_selectStage),
-            trailing: _RaceMenuButton(),
-          );
-        }, initialized: (initialized) {
-          void routeToSelectRace() {
-            if (initialized.race != null && initialized.stage != null) {
-              context.read<DatabaseBloc>().add(DatabaseEvent.deselectRace());
-            }
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                  builder: (context) => const _SelectRaceRouterWidget()),
-            );
+        void routeToSelectRace() {
+          if (databaseState.race != null && databaseState.stage != null) {
+            context.read<DatabaseBloc>().add(DatabaseEvent.deselectRace());
           }
-
-          return ListTile(
-            onTap: () => routeToSelectRace(),
-            leading: IconButton(
-              icon: Icon(MdiIcons.flagCheckered),
-              onPressed: () {
-                routeToSelectRace();
-              },
-            ),
-            title: initialized.race == null
-                ? Text(Localization.current.I18nInit_selectRace)
-                : Text(initialized.race!.name),
-            subtitle: initialized.stage == null
-                ? Text(Localization.current.I18nInit_selectStage)
-                : Text(initialized.stage!.name),
-            trailing: _RaceMenuButton(),
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+                builder: (context) => const _SelectRaceRouterWidget()),
           );
-        });
+        }
+
+        return ListTile(
+          onTap: () => routeToSelectRace(),
+          leading: IconButton(
+            icon: Icon(MdiIcons.flagCheckered),
+            onPressed: () {
+              routeToSelectRace();
+            },
+          ),
+          title: databaseState.race == null
+              ? Text(Localization.current.I18nInit_selectRace)
+              : Text(databaseState.race!.name),
+          subtitle: databaseState.stage == null
+              ? Text(Localization.current.I18nInit_selectStage)
+              : Text(databaseState.stage!.name),
+          trailing: _RaceMenuButton(),
+        );
       });
 }
 
@@ -62,29 +50,25 @@ class _SelectRaceRouterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, state) => state.map(
-              initial: (state) => const CircularProgressIndicator(),
-              initialized: (state) {
-                var race = state.race;
-                var stage = state.stage;
-                if (race == null) {
-                  return RacesListPage();
-                } else {
-                  if (stage == null) {
-                    return StagesListPage(
-                      race: race,
-                    );
-                  } else {
-                    _onWidgetDidBuild(() {
-                      Navigator.pop(context);
-                    });
-                  }
-                }
-                return const SizedBox();
-              })),
-    );
+    return Scaffold(body:
+        BlocBuilder<DatabaseBloc, DatabaseState>(builder: (context, state) {
+      var race = state.race;
+      var stage = state.stage;
+      if (race == null) {
+        return RacesListPage();
+      } else {
+        if (stage == null) {
+          return StagesListPage(
+            race: race,
+          );
+        } else {
+          _onWidgetDidBuild(() {
+            Navigator.pop(context);
+          });
+        }
+      }
+      return const SizedBox();
+    }));
   }
 
   void _onWidgetDidBuild(Function callback) {
@@ -95,7 +79,7 @@ class _SelectRaceRouterWidget extends StatelessWidget {
 }
 
 class _RaceMenuButton extends StatelessWidget {
-  const _RaceMenuButton({super.key});
+  const _RaceMenuButton();
 
   @override
   Widget build(BuildContext context) {

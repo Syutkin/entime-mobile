@@ -62,68 +62,63 @@ class _FinishListPage extends State<FinishListPage> {
   Widget build(BuildContext context) =>
       BlocListener<DatabaseBloc, DatabaseState>(
         listener: (context, state) {
-          state.mapOrNull(initialized: (state) {
-            // toast с автоматически проставленным номером
-            final autoFinishNumber = state.autoFinishNumber;
-            logger.d('autoFinishNumber: $autoFinishNumber');
-            if (autoFinishNumber != null) {
-              final databaseBloc = context.read<DatabaseBloc>();
-              BotToast.showAttachedWidget(
-                verticalOffset: 36.0,
-                attachedBuilder: (cancel) => Card(
-                  child: ListTile(
-                    title: Text(
-                      Localization.current.I18nProtocol_finishNumber(
-                        '$autoFinishNumber',
-                      ),
+          // toast с автоматически проставленным номером
+          final autoFinishNumber = state.autoFinishNumber;
+          logger.d('autoFinishNumber: $autoFinishNumber');
+          if (autoFinishNumber != null) {
+            final databaseBloc = context.read<DatabaseBloc>();
+            BotToast.showAttachedWidget(
+              verticalOffset: 36.0,
+              attachedBuilder: (cancel) => Card(
+                child: ListTile(
+                  title: Text(
+                    Localization.current.I18nProtocol_finishNumber(
+                      '$autoFinishNumber',
                     ),
-                    trailing: TextButton(
-                      onPressed: () {
-                        final stage = state.stage;
-                        if (stage != null) {
-                          databaseBloc.add(
-                            DatabaseEvent.clearNumberAtFinish(
-                              stage: stage,
-                              number: autoFinishNumber,
-                            ),
-                          );
-                        }
-                        cancel();
-                      },
-                      child: Text(
-                        MaterialLocalizations.of(context).cancelButtonLabel,
-                      ),
+                  ),
+                  trailing: TextButton(
+                    onPressed: () {
+                      final stage = state.stage;
+                      if (stage != null) {
+                        databaseBloc.add(
+                          DatabaseEvent.clearNumberAtFinish(
+                            stage: stage,
+                            number: autoFinishNumber,
+                          ),
+                        );
+                      }
+                      cancel();
+                    },
+                    child: Text(
+                      MaterialLocalizations.of(context).cancelButtonLabel,
                     ),
                   ),
                 ),
-                // enableSafeArea: false,
-                animationDuration: const Duration(milliseconds: 300),
-                duration: const Duration(seconds: 3),
-                targetContext: context,
-              );
-            }
-          });
+              ),
+              // enableSafeArea: false,
+              animationDuration: const Duration(milliseconds: 300),
+              duration: const Duration(seconds: 3),
+              targetContext: context,
+            );
+          }
         },
         child: Scaffold(
           body: BlocBuilder<DatabaseBloc, DatabaseState>(
-            builder: (context, state) => state.map(
-                initial: (state) => const SizedBox.shrink(),
-                initialized: (state) {
-                  // ToDo: настройки? более интересное поведение?
-                  // ToDo: Перематывать только при первоначальном показе всех отсечек?
-                  // скролл на последнюю запись если показываем скрытые отсечки
-                  if (!BlocProvider.of<SettingsBloc>(context)
-                      .state
-                      .settings
-                      .hideMarked) {
-                    SchedulerBinding.instance.addPostFrameCallback((_) {
-                      scrollToEnd(_scrollController);
-                    });
-                  }
-                  // return const SizedBox.shrink();
-                  return _finishList(state.finishes);
-                }),
-          ),
+              builder: (context, state) {
+            // ToDo: настройки? более интересное поведение?
+            // ToDo: Перематывать только при первоначальном показе всех отсечек?
+            // скролл на последнюю запись если показываем скрытые отсечки
+            if (!BlocProvider.of<SettingsBloc>(context)
+                .state
+                .settings
+                .hideMarked) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                scrollToEnd(_scrollController);
+              });
+            }
+            // return const SizedBox.shrink();
+            return _finishList(state.finishes);
+          }),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
@@ -176,12 +171,7 @@ class _FinishListPage extends State<FinishListPage> {
                   },
                   onAccept: (details) {
                     final databaseBloc = context.read<DatabaseBloc>();
-                    Stage? stage;
-                    databaseBloc.state.map(
-                        initial: (_) {},
-                        initialized: (state) {
-                          stage = state.stage;
-                        });
+                    var stage = databaseBloc.state.stage;
                     final finishId = item.id;
                     final number = details.data;
                     final finishTime = item.finishTime;
@@ -190,7 +180,7 @@ class _FinishListPage extends State<FinishListPage> {
                         finishTime != null) {
                       databaseBloc.add(
                         DatabaseEvent.addNumberToFinish(
-                          stage: stage!,
+                          stage: stage,
                           finishId: finishId,
                           number: number,
                           finishTime: finishTime,
@@ -216,52 +206,45 @@ class _FinishListPage extends State<FinishListPage> {
 
   Widget _getNumbersOnTrace(BuildContext context) =>
       BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, state) => state.map(
-                initial: (state) => const SizedBox.shrink(),
-                initialized: (state) {
-                  return SizedBox(
-                    height: 50,
-                    width: double.maxFinite,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.numbersOnTrace.length,
-                      itemBuilder: (context, index) {
-                        final item = state.numbersOnTrace[index];
-                        final isSelected = item.number == state.awaitingNumber;
-                        return NumberOnTraceTile(
-                          number: item.number,
-                          onTap: () {
-                            final databaseBloc = context.read<DatabaseBloc>();
-                            isSelected
-                                ? databaseBloc
-                                    .add(DatabaseEvent.deselectAwaitingNumber())
-                                : databaseBloc.add(
-                                    DatabaseEvent.selectAwaitingNumber(
-                                      number: item.number,
-                                    ),
-                                  );
-                          },
-                          onTapDown: _storePosition,
-                          onLongPress: () async {
-                            await _numberOnTracePopup(item.number);
-                          },
-                          isSelected: isSelected,
-                        );
-                      },
-                    ),
-                  );
-                },
-              ));
+        builder: (context, state) {
+          return SizedBox(
+            height: 50,
+            width: double.maxFinite,
+            child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: state.numbersOnTrace.length,
+              itemBuilder: (context, index) {
+                final item = state.numbersOnTrace[index];
+                final isSelected = item.number == state.awaitingNumber;
+                return NumberOnTraceTile(
+                  number: item.number,
+                  onTap: () {
+                    final databaseBloc = context.read<DatabaseBloc>();
+                    isSelected
+                        ? databaseBloc
+                            .add(DatabaseEvent.deselectAwaitingNumber())
+                        : databaseBloc.add(
+                            DatabaseEvent.selectAwaitingNumber(
+                              number: item.number,
+                            ),
+                          );
+                  },
+                  onTapDown: _storePosition,
+                  onLongPress: () async {
+                    await _numberOnTracePopup(item.number);
+                  },
+                  isSelected: isSelected,
+                );
+              },
+            ),
+          );
+        },
+      );
 
   Future<void> _clearPopup(int? number) async {
     final databaseBloc = context.read<DatabaseBloc>();
-    Stage? stage;
-    databaseBloc.state.map(
-        initial: (_) {},
-        initialized: (state) {
-          stage = state.stage;
-        });
+    Stage? stage = databaseBloc.state.stage;
     final RenderBox overlay =
         Overlay.of(context).context.findRenderObject() as RenderBox;
     final FinishPopupMenu? result = await showMenu<FinishPopupMenu>(
@@ -281,14 +264,14 @@ class _FinishListPage extends State<FinishListPage> {
             //   return;
             // }
             databaseBloc.add(DatabaseEvent.clearNumberAtFinish(
-                stage: stage!, number: number));
+                stage: stage, number: number));
           }
           break;
         case FinishPopupMenu.hideAll:
           // if (!mounted) {
           //   return;
           // }
-          final stageId = stage?.id;
+          final stageId = stage.id;
           if (stageId != null) {
             databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
           }
@@ -327,12 +310,7 @@ class _FinishListPage extends State<FinishListPage> {
 
   Future<void> _numberOnTracePopup(int number) async {
     final databaseBloc = context.read<DatabaseBloc>();
-    Stage? stage;
-    databaseBloc.state.map(
-        initial: (_) {},
-        initialized: (state) {
-          stage = state.stage;
-        });
+    Stage? stage = databaseBloc.state.stage;
     final RenderBox overlay =
         Overlay.of(context).context.findRenderObject() as RenderBox;
     final ParticipantStatus? result = await showMenu(
@@ -353,14 +331,14 @@ class _FinishListPage extends State<FinishListPage> {
             return;
           }
           databaseBloc
-              .add(DatabaseEvent.setDNSForStage(stage: stage!, number: number));
+              .add(DatabaseEvent.setDNSForStage(stage: stage, number: number));
           break;
         case ParticipantStatus.dnf:
           if (!mounted) {
             return;
           }
           databaseBloc
-              .add(DatabaseEvent.setDNFForStage(stage: stage!, number: number));
+              .add(DatabaseEvent.setDNFForStage(stage: stage, number: number));
           break;
         case ParticipantStatus.dsq:
           break;
@@ -413,12 +391,7 @@ class _FinishListPage extends State<FinishListPage> {
 
   List<Widget> _getFooterButtons(BuildContext context) {
     final databaseBloc = context.read<DatabaseBloc>();
-    Stage? stage;
-    databaseBloc.state.map(
-        initial: (_) {},
-        initialized: (state) {
-          stage = state.stage;
-        });
+    Stage? stage = databaseBloc.state.stage;
     if (!kReleaseMode) {
       return <Widget>[
         Column(
@@ -494,15 +467,10 @@ class _FinishListPage extends State<FinishListPage> {
 //    now = now.add(diff.duration); //добавляем поправку (см. class Difference)
     final finishTime = DateFormat(longTimeFormat).format(now);
     final databaseBloc = context.read<DatabaseBloc>();
-    int? stageId;
-    databaseBloc.state.map(
-        initial: (_) {},
-        initialized: (state) {
-          stageId = state.stage?.id;
-        });
+    int? stageId = databaseBloc.state.stage?.id;
     if (stageId != null) {
       databaseBloc.add(DatabaseEvent.addFinishTimeManual(
-          stageId: stageId!, finishTime: finishTime));
+          stageId: stageId, finishTime: finishTime));
     }
   }
 
@@ -515,15 +483,10 @@ class _FinishListPage extends State<FinishListPage> {
     final databaseBloc = context.read<DatabaseBloc>();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final now = DateTime.now();
-      int? stageId;
-      databaseBloc.state.map(
-          initial: (_) {},
-          initialized: (state) {
-            stageId = state.stage?.id;
-          });
+      int? stageId = databaseBloc.state.stage?.id;
       if (prevMinute != now.minute && now.second > 0 && stageId != null) {
         databaseBloc.add(DatabaseEvent.getNumbersOnTraceNow(
-            stageId: stageId!, dateTimeNow: now));
+            stageId: stageId, dateTimeNow: now));
         prevMinute = now.minute;
       }
     });

@@ -17449,91 +17449,41 @@ abstract class _ShareDatabase implements DatabaseEvent {
 
 /// @nodoc
 mixin _$DatabaseState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            bool? updateFinishNumber,
-            int? autoFinishNumber,
-            int? awaitingNumber)
-        initialized,
-  }) =>
+  Race? get race => throw _privateConstructorUsedError;
+  Stage? get stage => throw _privateConstructorUsedError;
+  List<Race> get races => throw _privateConstructorUsedError;
+  List<Stage> get stages => throw _privateConstructorUsedError;
+  List<Rider> get riders => throw _privateConstructorUsedError;
+  List<Status> get statuses => throw _privateConstructorUsedError;
+  List<ParticipantAtStart> get participants =>
       throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            bool? updateFinishNumber,
-            int? autoFinishNumber,
-            int? awaitingNumber)?
-        initialized,
-  }) =>
+  List<Start> get starts => throw _privateConstructorUsedError;
+  List<Finish> get finishes => throw _privateConstructorUsedError;
+  List<Trail> get trails => throw _privateConstructorUsedError;
+  List<StartingParticipant> get numbersOnTrace =>
       throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            bool? updateFinishNumber,
-            int? autoFinishNumber,
-            int? awaitingNumber)?
-        initialized,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Initialized value) initialized,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Initialized value)? initialized,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Initialized value)? initialized,
-    required TResult orElse(),
-  }) =>
+  Notification? get notification =>
+      throw _privateConstructorUsedError; // Стартовое время и номер, которые хотим установить
+// StartTime? startTime,
+// Автоматический старт из стартового модуля
+// Служит для проверки, установлено ли уже стартовое время или нет
+// AutomaticStart? automaticStart,
+// Предыдущее стартовое время номера, которому предлагается
+// поставить новое. Запоминаем для передачи его в UI popup.
+// Используется два раза, и при установке автоматического стартового времени
+// и при ручном вводе нового времени старта
+// List<StartingParticipant>? previousStart,
+// Изменить время финиша для номера
+  bool? get updateFinishNumber =>
+      throw _privateConstructorUsedError; // Автоматически подставленный в финишное время номер
+  int? get autoFinishNumber =>
+      throw _privateConstructorUsedError; // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+  int? get awaitingNumber => throw _privateConstructorUsedError;
+
+  /// Create a copy of DatabaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $DatabaseStateCopyWith<DatabaseState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -17542,180 +17492,6 @@ abstract class $DatabaseStateCopyWith<$Res> {
   factory $DatabaseStateCopyWith(
           DatabaseState value, $Res Function(DatabaseState) then) =
       _$DatabaseStateCopyWithImpl<$Res, DatabaseState>;
-}
-
-/// @nodoc
-class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
-    implements $DatabaseStateCopyWith<$Res> {
-  _$DatabaseStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DatabaseState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$DatabaseStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DatabaseState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'DatabaseState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            bool? updateFinishNumber,
-            int? autoFinishNumber,
-            int? awaitingNumber)
-        initialized,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            bool? updateFinishNumber,
-            int? autoFinishNumber,
-            int? awaitingNumber)?
-        initialized,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            bool? updateFinishNumber,
-            int? autoFinishNumber,
-            int? awaitingNumber)?
-        initialized,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Initialized value) initialized,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Initialized value)? initialized,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Initialized value)? initialized,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements DatabaseState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$InitializedImplCopyWith<$Res> {
-  factory _$$InitializedImplCopyWith(
-          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
-      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {Race? race,
@@ -17738,11 +17514,150 @@ abstract class _$$InitializedImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$InitializedImplCopyWithImpl<$Res>
-    extends _$DatabaseStateCopyWithImpl<$Res, _$InitializedImpl>
-    implements _$$InitializedImplCopyWith<$Res> {
-  __$$InitializedImplCopyWithImpl(
-      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
+class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
+    implements $DatabaseStateCopyWith<$Res> {
+  _$DatabaseStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of DatabaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? race = freezed,
+    Object? stage = freezed,
+    Object? races = null,
+    Object? stages = null,
+    Object? riders = null,
+    Object? statuses = null,
+    Object? participants = null,
+    Object? starts = null,
+    Object? finishes = null,
+    Object? trails = null,
+    Object? numbersOnTrace = null,
+    Object? notification = freezed,
+    Object? updateFinishNumber = freezed,
+    Object? autoFinishNumber = freezed,
+    Object? awaitingNumber = freezed,
+  }) {
+    return _then(_value.copyWith(
+      race: freezed == race
+          ? _value.race
+          : race // ignore: cast_nullable_to_non_nullable
+              as Race?,
+      stage: freezed == stage
+          ? _value.stage
+          : stage // ignore: cast_nullable_to_non_nullable
+              as Stage?,
+      races: null == races
+          ? _value.races
+          : races // ignore: cast_nullable_to_non_nullable
+              as List<Race>,
+      stages: null == stages
+          ? _value.stages
+          : stages // ignore: cast_nullable_to_non_nullable
+              as List<Stage>,
+      riders: null == riders
+          ? _value.riders
+          : riders // ignore: cast_nullable_to_non_nullable
+              as List<Rider>,
+      statuses: null == statuses
+          ? _value.statuses
+          : statuses // ignore: cast_nullable_to_non_nullable
+              as List<Status>,
+      participants: null == participants
+          ? _value.participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<ParticipantAtStart>,
+      starts: null == starts
+          ? _value.starts
+          : starts // ignore: cast_nullable_to_non_nullable
+              as List<Start>,
+      finishes: null == finishes
+          ? _value.finishes
+          : finishes // ignore: cast_nullable_to_non_nullable
+              as List<Finish>,
+      trails: null == trails
+          ? _value.trails
+          : trails // ignore: cast_nullable_to_non_nullable
+              as List<Trail>,
+      numbersOnTrace: null == numbersOnTrace
+          ? _value.numbersOnTrace
+          : numbersOnTrace // ignore: cast_nullable_to_non_nullable
+              as List<StartingParticipant>,
+      notification: freezed == notification
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as Notification?,
+      updateFinishNumber: freezed == updateFinishNumber
+          ? _value.updateFinishNumber
+          : updateFinishNumber // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      autoFinishNumber: freezed == autoFinishNumber
+          ? _value.autoFinishNumber
+          : autoFinishNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      awaitingNumber: freezed == awaitingNumber
+          ? _value.awaitingNumber
+          : awaitingNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+
+  /// Create a copy of DatabaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $NotificationCopyWith<$Res>? get notification {
+    if (_value.notification == null) {
+      return null;
+    }
+
+    return $NotificationCopyWith<$Res>(_value.notification!, (value) {
+      return _then(_value.copyWith(notification: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$DatabaseStateImplCopyWith<$Res>
+    implements $DatabaseStateCopyWith<$Res> {
+  factory _$$DatabaseStateImplCopyWith(
+          _$DatabaseStateImpl value, $Res Function(_$DatabaseStateImpl) then) =
+      __$$DatabaseStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {Race? race,
+      Stage? stage,
+      List<Race> races,
+      List<Stage> stages,
+      List<Rider> riders,
+      List<Status> statuses,
+      List<ParticipantAtStart> participants,
+      List<Start> starts,
+      List<Finish> finishes,
+      List<Trail> trails,
+      List<StartingParticipant> numbersOnTrace,
+      Notification? notification,
+      bool? updateFinishNumber,
+      int? autoFinishNumber,
+      int? awaitingNumber});
+
+  @override
+  $NotificationCopyWith<$Res>? get notification;
+}
+
+/// @nodoc
+class __$$DatabaseStateImplCopyWithImpl<$Res>
+    extends _$DatabaseStateCopyWithImpl<$Res, _$DatabaseStateImpl>
+    implements _$$DatabaseStateImplCopyWith<$Res> {
+  __$$DatabaseStateImplCopyWithImpl(
+      _$DatabaseStateImpl _value, $Res Function(_$DatabaseStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DatabaseState
@@ -17766,7 +17681,7 @@ class __$$InitializedImplCopyWithImpl<$Res>
     Object? autoFinishNumber = freezed,
     Object? awaitingNumber = freezed,
   }) {
-    return _then(_$InitializedImpl(
+    return _then(_$DatabaseStateImpl(
       race: freezed == race
           ? _value.race
           : race // ignore: cast_nullable_to_non_nullable
@@ -17829,26 +17744,12 @@ class __$$InitializedImplCopyWithImpl<$Res>
               as int?,
     ));
   }
-
-  /// Create a copy of DatabaseState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $NotificationCopyWith<$Res>? get notification {
-    if (_value.notification == null) {
-      return null;
-    }
-
-    return $NotificationCopyWith<$Res>(_value.notification!, (value) {
-      return _then(_value.copyWith(notification: value));
-    });
-  }
 }
 
 /// @nodoc
 
-class _$InitializedImpl implements _Initialized {
-  const _$InitializedImpl(
+class _$DatabaseStateImpl implements _DatabaseState {
+  const _$DatabaseStateImpl(
       {this.race,
       this.stage,
       required final List<Race> races,
@@ -17974,14 +17875,14 @@ class _$InitializedImpl implements _Initialized {
 
   @override
   String toString() {
-    return 'DatabaseState.initialized(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification, updateFinishNumber: $updateFinishNumber, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
+    return 'DatabaseState(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification, updateFinishNumber: $updateFinishNumber, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InitializedImpl &&
+            other is _$DatabaseStateImpl &&
             const DeepCollectionEquality().equals(other.race, race) &&
             const DeepCollectionEquality().equals(other.stage, stage) &&
             const DeepCollectionEquality().equals(other._races, _races) &&
@@ -18029,167 +17930,12 @@ class _$InitializedImpl implements _Initialized {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
-      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            bool? updateFinishNumber,
-            int? autoFinishNumber,
-            int? awaitingNumber)
-        initialized,
-  }) {
-    return initialized(
-        race,
-        stage,
-        races,
-        stages,
-        riders,
-        statuses,
-        participants,
-        starts,
-        finishes,
-        trails,
-        numbersOnTrace,
-        notification,
-        updateFinishNumber,
-        autoFinishNumber,
-        awaitingNumber);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            bool? updateFinishNumber,
-            int? autoFinishNumber,
-            int? awaitingNumber)?
-        initialized,
-  }) {
-    return initialized?.call(
-        race,
-        stage,
-        races,
-        stages,
-        riders,
-        statuses,
-        participants,
-        starts,
-        finishes,
-        trails,
-        numbersOnTrace,
-        notification,
-        updateFinishNumber,
-        autoFinishNumber,
-        awaitingNumber);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            bool? updateFinishNumber,
-            int? autoFinishNumber,
-            int? awaitingNumber)?
-        initialized,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(
-          race,
-          stage,
-          races,
-          stages,
-          riders,
-          statuses,
-          participants,
-          starts,
-          finishes,
-          trails,
-          numbersOnTrace,
-          notification,
-          updateFinishNumber,
-          autoFinishNumber,
-          awaitingNumber);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Initialized value) initialized,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Initialized value)? initialized,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Initialized value)? initialized,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
+  _$$DatabaseStateImplCopyWith<_$DatabaseStateImpl> get copyWith =>
+      __$$DatabaseStateImplCopyWithImpl<_$DatabaseStateImpl>(this, _$identity);
 }
 
-abstract class _Initialized implements DatabaseState {
-  const factory _Initialized(
+abstract class _DatabaseState implements DatabaseState {
+  const factory _DatabaseState(
       {final Race? race,
       final Stage? stage,
       required final List<Race> races,
@@ -18204,19 +17950,31 @@ abstract class _Initialized implements DatabaseState {
       final Notification? notification,
       final bool? updateFinishNumber,
       final int? autoFinishNumber,
-      final int? awaitingNumber}) = _$InitializedImpl;
+      final int? awaitingNumber}) = _$DatabaseStateImpl;
 
+  @override
   Race? get race;
+  @override
   Stage? get stage;
+  @override
   List<Race> get races;
+  @override
   List<Stage> get stages;
+  @override
   List<Rider> get riders;
+  @override
   List<Status> get statuses;
+  @override
   List<ParticipantAtStart> get participants;
+  @override
   List<Start> get starts;
+  @override
   List<Finish> get finishes;
+  @override
   List<Trail> get trails;
+  @override
   List<StartingParticipant> get numbersOnTrace;
+  @override
   Notification?
       get notification; // Стартовое время и номер, которые хотим установить
 // StartTime? startTime,
@@ -18229,15 +17987,19 @@ abstract class _Initialized implements DatabaseState {
 // и при ручном вводе нового времени старта
 // List<StartingParticipant>? previousStart,
 // Изменить время финиша для номера
+  @override
   bool?
       get updateFinishNumber; // Автоматически подставленный в финишное время номер
+  @override
   int?
       get autoFinishNumber; // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+  @override
   int? get awaitingNumber;
 
   /// Create a copy of DatabaseState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+  _$$DatabaseStateImplCopyWith<_$DatabaseStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

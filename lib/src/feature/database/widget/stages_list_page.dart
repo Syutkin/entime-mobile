@@ -25,9 +25,7 @@ class StagesListPage extends StatelessWidget {
           },
         ),
         body: BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, state) => state.map(
-            initial: (state) => const CircularProgressIndicator(),
-            initialized: (state) {
+          builder: (context, state)  {
               final count = state.stages.length;
               return ListView.builder(
                 itemCount: count,
@@ -70,6 +68,5 @@ class StagesListPage extends StatelessWidget {
               );
             },
           ),
-        ),
       );
 }

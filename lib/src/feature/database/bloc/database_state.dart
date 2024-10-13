@@ -2,9 +2,7 @@ part of 'database_bloc.dart';
 
 @freezed
 class DatabaseState with _$DatabaseState {
-  const factory DatabaseState.initial() = _Initial;
-
-  const factory DatabaseState.initialized({
+  const factory DatabaseState({
     Race? race,
     Stage? stage,
     required List<Race> races,
@@ -39,5 +37,5 @@ class DatabaseState with _$DatabaseState {
 
     // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
     int? awaitingNumber,
-  }) = _Initialized;
+  }) = _DatabaseState;
 }

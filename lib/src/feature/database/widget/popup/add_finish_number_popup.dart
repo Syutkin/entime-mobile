@@ -12,12 +12,7 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
   final databaseBloc = context.read<DatabaseBloc>();
   final finishId = item.id;
   final finishTime = item.finishTime;
-  Stage? stage;
-  databaseBloc.state.map(
-      initial: (_) {},
-      initialized: (state) {
-        stage = state.stage;
-      });
+  Stage? stage = databaseBloc.state.stage;
 
   final formKey = GlobalKey<FormState>();
   if (finishId != null && finishTime != null && stage != null) {
@@ -71,7 +66,7 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
                     finishId: finishId,
                     number: number,
                     finishTime: finishTime,
-                    stage: stage!,
+                    stage: stage,
                   ),
                 );
                 Navigator.of(context).pop();
@@ -81,30 +76,26 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
           ),
           BlocListener<DatabaseBloc, DatabaseState>(
             listener: (context, state) async {
-              state.map(
-                  initial: (state) {},
-                  initialized: (state) async {
-                    if (state.updateFinishNumber != null &&
-                        !state.updateFinishNumber!) {
-                      final bool? update =
-                          await updateFinishTimePopup(context, number);
-                      if (update != null && update) {
-                        databaseBloc
-                          ..add(DatabaseEvent.clearNumberAtFinish(
-                            stage: stage!,
-                            number: number,
-                          ))
-                          ..add(
-                            DatabaseEvent.addNumberToFinish(
-                              finishId: finishId,
-                              number: number,
-                              finishTime: finishTime,
-                              stage: stage!,
-                            ),
-                          );
-                      }
-                    }
-                  });
+              if (state.updateFinishNumber != null &&
+                  !state.updateFinishNumber!) {
+                final bool? update =
+                    await updateFinishTimePopup(context, number);
+                if (update != null && update) {
+                  databaseBloc
+                    ..add(DatabaseEvent.clearNumberAtFinish(
+                      stage: stage,
+                      number: number,
+                    ))
+                    ..add(
+                      DatabaseEvent.addNumberToFinish(
+                        finishId: finishId,
+                        number: number,
+                        finishTime: finishTime,
+                        stage: stage,
+                      ),
+                    );
+                }
+              }
             },
             child: Container(),
           ),

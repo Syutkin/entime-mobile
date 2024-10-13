@@ -125,12 +125,12 @@ sealed class Pubspec {
   static final DateTime timestamp = DateTime.utc(
     2024,
     10,
-    11,
-    21,
-    50,
-    32,
-    402,
-    702,
+    13,
+    8,
+    15,
+    17,
+    423,
+    822,
   );
 
   /// Name
@@ -431,6 +431,7 @@ sealed class Pubspec {
     'logger': r'^2.4.0',
     'material_design_icons_flutter': r'^7.0.7296',
     'meta': r'^1.15.0',
+    'nested': r'^1.0.0',
     'open_filex': r'^4.5.0',
     'path': r'^1.9.0',
     'path_provider': r'^2.1.4',

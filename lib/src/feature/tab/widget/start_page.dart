@@ -11,25 +11,22 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DatabaseBloc, DatabaseState>(
-        builder: (context, state) => state.map(
-            initial: (state) => const CircularProgressIndicator(),
-            initialized: (state) {
-              var race = state.race;
-              var stage = state.stage;
-              if (race == null) {
-                return RacesListPage();
-              } else {
-                if (stage == null) {
-                  return StagesListPage(
-                    race: race,
-                  );
-                } else {
-                  return StartListPage(
-                    // stage: stage,
-                  );
-                }
-              }
-            }));
+    return BlocBuilder<DatabaseBloc, DatabaseState>(builder: (context, state) {
+      var race = state.race;
+      var stage = state.stage;
+      if (race == null) {
+        return RacesListPage();
+      } else {
+        if (stage == null) {
+          return StagesListPage(
+            race: race,
+          );
+        } else {
+          return StartListPage(
+              // stage: stage,
+              );
+        }
+      }
+    });
   }
 }

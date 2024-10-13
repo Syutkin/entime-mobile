@@ -22,7 +22,9 @@ import '../model/notification.dart';
 import '../model/participant_status.dart';
 
 part 'database_bloc.freezed.dart';
+
 part 'database_event.dart';
+
 part 'database_state.dart';
 
 class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
@@ -82,7 +84,16 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       required SettingsProvider settingsProvider})
       : _db = database,
         _settingsProvider = settingsProvider,
-        super(DatabaseState.initial()) {
+        super(DatabaseState(
+            races: [],
+            stages: [],
+            riders: [],
+            statuses: [],
+            participants: [],
+            starts: [],
+            finishes: [],
+            trails: [],
+            numbersOnTrace: [])) {
     _db.getRaces().watch().listen((event) async {
       _races = event;
       logger.t('DatabaseBloc -> getRaces().watch()');
@@ -233,7 +244,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           },
           emitState: (event) {
             emit(
-              DatabaseState.initialized(
+              DatabaseState(
                 race: event.race,
                 stage: event.stage,
                 races: event.races,
@@ -510,9 +521,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             }
           },
           shareDatabase: (event) async {
-            final String timeStamp = DateFormat(longDateFormat).format(DateTime.now());
+            final String timeStamp =
+                DateFormat(longDateFormat).format(DateTime.now());
             final dbFolder = await getApplicationDocumentsDirectory();
-            final file = File(path.join(dbFolder.path, 'database_backup_$timeStamp.sqlite'));
+            final file = File(
+                path.join(dbFolder.path, 'database_backup_$timeStamp.sqlite'));
             await _db.exportInto(file);
             await Share.shareXFiles([XFile(file.path)]);
           });

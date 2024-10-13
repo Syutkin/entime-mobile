@@ -92,8 +92,7 @@ class HomeScreen extends StatelessWidget {
               message?.whenOrNull(
                 automaticStart: (automaticStart) {
                   var databaseBloc = context.read<DatabaseBloc>();
-                  var stageId = databaseBloc.state
-                      .mapOrNull(initialized: (state) => state.stage?.id);
+                  var stageId = databaseBloc.state.stage?.id;
                   if (stageId != null) {
                     databaseBloc.add(
                       DatabaseEvent.updateAutomaticCorrection(
@@ -108,8 +107,7 @@ class HomeScreen extends StatelessWidget {
                 },
                 finish: (time, timeStamp) {
                   var databaseBloc = context.read<DatabaseBloc>();
-                  var stage = databaseBloc.state
-                      .mapOrNull(initialized: (state) => state.stage);
+                  var stage = databaseBloc.state.stage;
                   if (stage != null) {
                     databaseBloc.add(
                       DatabaseEvent.addFinishTime(
@@ -135,49 +133,47 @@ class HomeScreen extends StatelessWidget {
       BlocListener<DatabaseBloc, DatabaseState>(
         listener: (context, state) async {
           final databaseBloc = context.read<DatabaseBloc>();
-          databaseBloc.state.mapOrNull(initialized: (state) async {
-            // Обновление автоматического времени старта
-            final notification = state.notification;
-            if (notification != null) {
-              notification.mapOrNull(updateAutomaticCorrection: (data) async {
-                final prevCorrection =
-                    data.previousStarts.first.automaticCorrection;
-                // Если новая поправка для номера отличается от предыдущей
-                // более чем на две секунды, то уточняем, точно ли обновлять?
-                // Если разница менее двух секунд, то молча игнорируем отсечку
-                final updateStartCorrectionDelay = context
-                    .read<SettingsBloc>()
-                    .state
-                    .settings
-                    .updateStartCorrectionDelay;
-                if (prevCorrection != null &&
-                    data.correction - prevCorrection >
-                        updateStartCorrectionDelay) {
-                  final String text =
-                      Localization.current.I18nHome_updateAutomaticCorrection(
-                    data.number,
-                    data.previousStarts.first.automaticCorrection!,
-                    data.correction,
+          // Обновление автоматического времени старта
+          final notification = state.notification;
+          if (notification != null) {
+            notification.mapOrNull(updateAutomaticCorrection: (data) async {
+              final prevCorrection =
+                  data.previousStarts.first.automaticCorrection;
+              // Если новая поправка для номера отличается от предыдущей
+              // более чем на две секунды, то уточняем, точно ли обновлять?
+              // Если разница менее двух секунд, то молча игнорируем отсечку
+              final updateStartCorrectionDelay = context
+                  .read<SettingsBloc>()
+                  .state
+                  .settings
+                  .updateStartCorrectionDelay;
+              if (prevCorrection != null &&
+                  data.correction - prevCorrection >
+                      updateStartCorrectionDelay) {
+                final String text =
+                    Localization.current.I18nHome_updateAutomaticCorrection(
+                  data.number,
+                  data.previousStarts.first.automaticCorrection!,
+                  data.correction,
+                );
+                final bool? update = await overwriteStartTimePopup(
+                  context: context,
+                  text: text,
+                );
+                if (update ?? false) {
+                  databaseBloc.add(
+                    DatabaseEvent.updateAutomaticCorrection(
+                      stageId: data.previousStarts.first.stageId,
+                      startTime: data.startTime,
+                      timeStamp: data.timeStamp,
+                      correction: data.correction,
+                      forceUpdate: true,
+                    ),
                   );
-                  final bool? update = await overwriteStartTimePopup(
-                    context: context,
-                    text: text,
-                  );
-                  if (update ?? false) {
-                    databaseBloc.add(
-                      DatabaseEvent.updateAutomaticCorrection(
-                        stageId: data.previousStarts.first.stageId,
-                        startTime: data.startTime,
-                        timeStamp: data.timeStamp,
-                        correction: data.correction,
-                        forceUpdate: true,
-                      ),
-                    );
-                  }
                 }
-              });
-            }
-          });
+              }
+            });
+          }
         },
       );
 
@@ -227,25 +223,19 @@ class _TextTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, state) => state.map(initial: (_) {
-                return const Text(Pubspec.name);
-              }, initialized: (state) {
-                final stage = state.stage;
-                if (stage != null) {
-                  return Text(stage.name);
-                } else {
-                  final race = state.race;
-                  if (race != null) {
-                    return Text(race.name);
-                  } else {
-                    return Text(Pubspec.name);
-                  }
-                }
-              })
-          // protocolState is ProtocolSelectedState
-          //     ? Text(basenameWithoutExtension(protocolState.databasePath))
-          );
+      BlocBuilder<DatabaseBloc, DatabaseState>(builder: (context, state) {
+        final stage = state.stage;
+        if (stage != null) {
+          return Text(stage.name);
+        } else {
+          final race = state.race;
+          if (race != null) {
+            return Text(race.name);
+          } else {
+            return Text(Pubspec.name);
+          }
+        }
+      });
 }
 
 class _FinishFilterButton extends StatelessWidget {
@@ -353,20 +343,18 @@ class _MenuButton extends StatelessWidget {
             final databaseBloc = context.read<DatabaseBloc>();
             final menuItems = <PopupMenuEntry<HomeMenuButton>>[];
             if (activeTab == AppTab.start || activeTab == AppTab.finish) {
-              databaseBloc.state.mapOrNull(initialized: (state) async {
-                if (activeTab == AppTab.start) {
-                  menuItems.add(
-                    PopupMenuItem(
-                      value: HomeMenuButton.addRacer,
-                      child: ListTile(
-                        leading: const Icon(Icons.add),
-                        title: Text(Localization.current.I18nHome_addRacer),
-                      ),
+              if (activeTab == AppTab.start) {
+                menuItems.add(
+                  PopupMenuItem(
+                    value: HomeMenuButton.addRacer,
+                    child: ListTile(
+                      leading: const Icon(Icons.add),
+                      title: Text(Localization.current.I18nHome_addRacer),
                     ),
-                  );
-                  menuItems.add(PopupMenuDivider());
-                }
-              });
+                  ),
+                );
+                menuItems.add(PopupMenuDivider());
+              }
               if (activeTab == AppTab.start) {
                 menuItems.add(
                   PopupMenuItem(
@@ -439,15 +427,13 @@ class _MenuButton extends StatelessWidget {
                     }
                     break;
                   case HomeMenuButton.addRacer:
-                    databaseBloc.state.mapOrNull(initialized: (state) async {
-                      final stage = state.stage;
-                      if (stage != null) {
-                        await addRacerPopup(
-                          context: context,
-                          stage: stage,
-                        );
-                      }
-                    });
+                    final stage = databaseBloc.state.stage;
+                    if (stage != null) {
+                      await addRacerPopup(
+                        context: context,
+                        stage: stage,
+                      );
+                    }
                     break;
                   case HomeMenuButton.selectRace:
                     await Navigator.of(context).push(

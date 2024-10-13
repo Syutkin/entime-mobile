@@ -21,9 +21,7 @@ import '../drift/app_database.dart';
 import 'start_item_tile.dart';
 
 part 'popup/add_racer_popup.dart';
-
 part 'popup/edit_start_time_popup.dart';
-
 part 'popup/overwrite_start_time_popup.dart';
 
 class StartListPage extends StatefulWidget {
@@ -200,17 +198,12 @@ class _StartListPage extends State<StartListPage> {
 
   Future<void> _addManualStartTime(DatabaseBloc bloc) async {
     final time = DateTime.now();
-    int? stageId;
-    bloc.state.maybeMap(
-        initialized: (state) {
-          stageId = state.stage?.id;
-        },
-        orElse: () {});
+    int? stageId = bloc.state.stage?.id;
 
     if (stageId != null) {
       bloc.add(
         DatabaseEvent.updateManualStartTime(
-          stageId: stageId!,
+          stageId: stageId,
           time: time,
         ),
       );
@@ -232,70 +225,65 @@ class _StartListPage extends State<StartListPage> {
     return BlocListener<DatabaseBloc, DatabaseState>(
       listener: (context, state) {
         var databaseBloc = context.read<DatabaseBloc>();
-        state.mapOrNull(
-          initialized: (state) {
-            // Добавление нового стартового времени
-            // Если стартовое время уже присвоено другому номеру
-            state.notification?.mapOrNull(
-              updateNumber: (notification) async {
-                String text = '';
-                for (final element
-                    in notification.existedStartingParticipants) {
-                  if (element.automaticStartTime == null &&
-                      element.manualStartTime == null) {
-                    text += Localization.current.I18nHome_equalStartTime(
-                      notification.startTime,
-                      element.number,
+        {
+          // Добавление нового стартового времени
+          // Если стартовое время уже присвоено другому номеру
+          state.notification?.mapOrNull(
+            updateNumber: (notification) async {
+              String text = '';
+              for (final element in notification.existedStartingParticipants) {
+                if (element.automaticStartTime == null &&
+                    element.manualStartTime == null) {
+                  text += Localization.current.I18nHome_equalStartTime(
+                    notification.startTime,
+                    element.number,
+                    notification.number,
+                  );
+                } else {
+                  if (element.automaticStartTime != null) {
+                    text += Localization.current
+                        .I18nHome_updateAutomaticStartCorrection(
                       notification.number,
+                      element.automaticStartTime!,
+                    );
+                  } else if (element.manualStartTime != null) {
+                    text += Localization.current
+                        .I18nHome_updateAutomaticStartCorrection(
+                      notification.number,
+                      element.manualStartTime!,
                     );
                   } else {
-                    if (element.automaticStartTime != null) {
-                      text += Localization.current
-                          .I18nHome_updateAutomaticStartCorrection(
-                        notification.number,
-                        element.automaticStartTime!,
-                      );
-                    } else if (element.manualStartTime != null) {
-                      text += Localization.current
-                          .I18nHome_updateAutomaticStartCorrection(
-                        notification.number,
-                        element.manualStartTime!,
-                      );
-                    } else {
-                      text += Localization.current.I18nHome_errorAddParticipant(
-                        MaterialLocalizations.of(context).cancelButtonLabel,
-                      );
-                    }
-                  }
-                }
-                final update = await overwriteStartTimePopup(
-                  context: context,
-                  text: text,
-                );
-
-                if (update ?? false) {
-                  var stage = state.stage;
-                  if (stage != null) {
-                    databaseBloc.add(
-                      DatabaseEvent.addStartNumber(
-                        stage: stage,
-                        // stage: widget.stage,
-                        number: notification.number,
-                        startTime: notification.startTime,
-                        forceAdd: true,
-                      ),
+                    text += Localization.current.I18nHome_errorAddParticipant(
+                      MaterialLocalizations.of(context).cancelButtonLabel,
                     );
                   }
                 }
-              },
-            );
-          },
-        );
+              }
+              final update = await overwriteStartTimePopup(
+                context: context,
+                text: text,
+              );
+
+              if (update ?? false) {
+                var stage = state.stage;
+                if (stage != null) {
+                  databaseBloc.add(
+                    DatabaseEvent.addStartNumber(
+                      stage: stage,
+                      // stage: widget.stage,
+                      number: notification.number,
+                      startTime: notification.startTime,
+                      forceAdd: true,
+                    ),
+                  );
+                }
+              }
+            },
+          );
+        }
       },
       child: BlocBuilder<DatabaseBloc, DatabaseState>(
-        builder: (context, state) => state.map(
-            initial: (state) => const SizedBox.shrink(),
-            initialized: (state) {
+        builder: (context, state)  {
               final databaseBloc = context.read<DatabaseBloc>();
               // final stage = state.stage;
               return Scaffold(
@@ -364,15 +352,12 @@ class _StartListPage extends State<StartListPage> {
                     kReleaseMode ? null : _persistentFooterButtons(context),
               );
             }),
-      ),
     );
   }
 
   List<Widget> _persistentFooterButtons(BuildContext context) {
     final databaseBloc = context.read<DatabaseBloc>();
-    final stage = databaseBloc.state.mapOrNull(initialized: (state) {
-      return state.stage;
-    });
+    final stage = databaseBloc.state.stage;
     final stageId = stage!.id!;
     return <Widget>[
       TextButton(
@@ -399,13 +384,6 @@ class _StartListPage extends State<StartListPage> {
         },
         child: const Icon(Icons.volume_up),
       ),
-      // TextButton(
-      //   onPressed: () async {
-      //     BlocProvider.of<ProtocolBloc>(context)
-      //         .add(const ProtocolClearStartResultsDebug());
-      //   },
-      //   child: const Icon(Icons.clear_all),
-      // ),
       TextButton(
         onPressed: () {
           databaseBloc.add(
