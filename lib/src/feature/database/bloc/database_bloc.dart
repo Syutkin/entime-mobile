@@ -6,12 +6,14 @@ import 'dart:io';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/logger/logger.dart';
+import '../../../common/utils/consts.dart';
 import '../../../common/utils/csv_utils.dart';
 import '../../../feature/csv/csv.dart';
 import '../../settings/logic/settings_provider.dart';
@@ -508,8 +510,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             }
           },
           shareDatabase: (event) async {
+            final String timeStamp = DateFormat(longDateFormat).format(DateTime.now());
             final dbFolder = await getApplicationDocumentsDirectory();
-            final file = File(path.join(dbFolder.path, 'database.sqlite'));
+            final file = File(path.join(dbFolder.path, 'database_backup_$timeStamp.sqlite'));
             await _db.exportInto(file);
             await Share.shareXFiles([XFile(file.path)]);
           });
