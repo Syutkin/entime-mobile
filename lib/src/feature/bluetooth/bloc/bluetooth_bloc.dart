@@ -51,7 +51,6 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     settingsProvider.state.listen((state) {
       _reconnect = state.reconnect;
       _stageId = state.stageId;
-      print('stageID: $_stageId');
     });
 
     on<BluetoothEvent>(transformer: sequential(), (event, emit) async {

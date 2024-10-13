@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:nested/nested.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../constants/pubspec.yaml.g.dart';
@@ -23,8 +24,67 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      // Следим за поступающей информацией от Bluetooth
+  Widget build(BuildContext context) => MultiBlocListener(
+        listeners: [
+          // Следим за поступающей информацией от Bluetooth
+          _listenToBluetooth(),
+          // Следим за повторной установкой стартового времени для участника
+          _listenToNewStartTime(),
+        ],
+        child: BlocBuilder<TabBloc, AppTab>(
+          builder: (context, activeTab) => DefaultTabController(
+            length: 3,
+            child: Scaffold(
+              drawer: const AppDrawer(),
+              appBar: AppBar(
+                title: const _TextTitle(),
+                actions: <Widget>[
+                  _FinishFilterButton(activeTab: activeTab),
+                  const BluetoothButton(),
+                  _MenuButton(activeTab: activeTab),
+                ],
+                bottom: TabBar(
+                  onTap: (index) {
+                    final bloc = context.read<TabBloc>();
+                    switch (index) {
+                      case 0:
+                        bloc.add(const TabEvent.updated(AppTab.init));
+                        break;
+                      case 1:
+                        bloc.add(const TabEvent.updated(AppTab.start));
+                        break;
+                      case 2:
+                        bloc.add(const TabEvent.updated(AppTab.finish));
+                        break;
+                    }
+                  },
+                  tabs: <Widget>[
+                    Tab(icon: Text(Localization.current.I18nHome_home)),
+                    Tab(icon: Text(Localization.current.I18nHome_start)),
+                    Tab(icon: Text(Localization.current.I18nHome_finish)),
+                  ],
+                ),
+              ),
+              body: MultiBlocListener(
+                listeners: [
+                  // Следим за наличием новой версии
+                  _listenToUpdater(),
+                ],
+                child: const TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: <Widget>[
+                    InitPage(),
+                    StartPage(),
+                    FinishPage(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+  SingleChildWidget _listenToBluetooth() =>
       BlocListener<BluetoothBloc, BluetoothBlocState>(
         listener: (context, state) {
           state.whenOrNull(
@@ -69,170 +129,96 @@ class HomeScreen extends StatelessWidget {
             },
           );
         },
-        // Следим за повторной установкой стартового времени для участника
-        child: BlocListener<DatabaseBloc, DatabaseState>(
-          listener: (context, state) async {
-            final databaseBloc = context.read<DatabaseBloc>();
-            databaseBloc.state.mapOrNull(initialized: (state) async {
-              // Обновление автоматического времени старта
-              final notification = state.notification;
-              if (notification != null) {
-                notification.mapOrNull(updateAutomaticCorrection: (data) async {
-                  final prevCorrection =
-                      data.previousStarts.first.automaticCorrection;
-                  // Если новая поправка для номера отличается от предыдущей
-                  // более чем на две секунды, то уточняем, точно ли обновлять?
-                  // Если разница менее двух секунд, то молча игнорируем отсечку
-                  final updateStartCorrectionDelay = context
-                      .read<SettingsBloc>()
-                      .state
-                      .settings
-                      .updateStartCorrectionDelay;
-                  if (prevCorrection != null &&
-                      data.correction - prevCorrection >
-                          updateStartCorrectionDelay) {
-                    final String text =
-                        Localization.current.I18nHome_updateAutomaticCorrection(
-                      data.number,
-                      data.previousStarts.first.automaticCorrection!,
-                      data.correction,
+      );
+
+  SingleChildWidget _listenToNewStartTime() =>
+      BlocListener<DatabaseBloc, DatabaseState>(
+        listener: (context, state) async {
+          final databaseBloc = context.read<DatabaseBloc>();
+          databaseBloc.state.mapOrNull(initialized: (state) async {
+            // Обновление автоматического времени старта
+            final notification = state.notification;
+            if (notification != null) {
+              notification.mapOrNull(updateAutomaticCorrection: (data) async {
+                final prevCorrection =
+                    data.previousStarts.first.automaticCorrection;
+                // Если новая поправка для номера отличается от предыдущей
+                // более чем на две секунды, то уточняем, точно ли обновлять?
+                // Если разница менее двух секунд, то молча игнорируем отсечку
+                final updateStartCorrectionDelay = context
+                    .read<SettingsBloc>()
+                    .state
+                    .settings
+                    .updateStartCorrectionDelay;
+                if (prevCorrection != null &&
+                    data.correction - prevCorrection >
+                        updateStartCorrectionDelay) {
+                  final String text =
+                      Localization.current.I18nHome_updateAutomaticCorrection(
+                    data.number,
+                    data.previousStarts.first.automaticCorrection!,
+                    data.correction,
+                  );
+                  final bool? update = await overwriteStartTimePopup(
+                    context: context,
+                    text: text,
+                  );
+                  if (update ?? false) {
+                    databaseBloc.add(
+                      DatabaseEvent.updateAutomaticCorrection(
+                        stageId: data.previousStarts.first.stageId,
+                        startTime: data.startTime,
+                        timeStamp: data.timeStamp,
+                        correction: data.correction,
+                        forceUpdate: true,
+                      ),
                     );
-                    final bool? update = await overwriteStartTimePopup(
-                      context: context,
-                      text: text,
-                    );
-                    if (update ?? false) {
-                      databaseBloc.add(
-                        DatabaseEvent.updateAutomaticCorrection(
-                          stageId: data.previousStarts.first.stageId,
-                          startTime: data.startTime,
-                          timeStamp: data.timeStamp,
-                          correction: data.correction,
-                          forceUpdate: true,
-                        ),
-                      );
-                    }
                   }
-                });
-              }
-              // if (state.automaticStart != null &&
-              //     state.automaticStart!.updating) {
-              //   final String text =
-              //       Localization.current.I18nHome_updateAutomaticCorrection(
-              //     state.previousStart!.first.number,
-              //     state.previousStart!.first.automaticCorrection!,
-              //     state.automaticStart!.correction,
-              //   );
-              //   final bool? update = await overwriteStartTimePopup(
-              //     context: context,
-              //     text: text,
-              //   );
-              //   final stageId = state.stage?.id;
-              //   if (update != null && update && stageId != null) {
-              //     databaseBloc.add(
-              //       DatabaseEvent.updateAutomaticCorrection(
-              //         stageId: stageId,
-              //         automaticStart: state.automaticStart!,
-              //         forceUpdate: true,
-              //       ),
-              //     );
-              //   }
-              // }
-            });
-          },
-          child: BlocBuilder<TabBloc, AppTab>(
-            builder: (context, activeTab) => DefaultTabController(
-              length: 3,
-              child: Scaffold(
-                drawer: const AppDrawer(),
-                appBar: AppBar(
-                  title: const _TextTitle(),
-                  actions: <Widget>[
-                    _FinishFilterButton(activeTab: activeTab),
-                    const BluetoothButton(),
-                    _MenuButton(activeTab: activeTab),
-                  ],
-                  bottom: TabBar(
-                    onTap: (index) {
-                      final bloc = context.read<TabBloc>();
-                      switch (index) {
-                        case 0:
-                          bloc.add(const TabEvent.updated(AppTab.init));
-                          break;
-                        case 1:
-                          bloc.add(const TabEvent.updated(AppTab.start));
-                          break;
-                        case 2:
-                          bloc.add(const TabEvent.updated(AppTab.finish));
-                          break;
-                      }
-                    },
-                    tabs: <Widget>[
-                      Tab(icon: Text(Localization.current.I18nHome_home)),
-                      Tab(icon: Text(Localization.current.I18nHome_start)),
-                      Tab(icon: Text(Localization.current.I18nHome_finish)),
-                    ],
-                  ),
+                }
+              });
+            }
+          });
+        },
+      );
+
+  SingleChildWidget _listenToUpdater() => BlocListener<UpdateBloc, UpdateState>(
+        listenWhen: (previousState, state) {
+          // ловим показ наличия обновления
+          if (previousState is UpdateInitial && state is UpdateAvailable) {
+            return true;
+            // ловим показ ченджлога
+          } else if (previousState is UpdateInitial && state is UpdateInitial) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        listener: (context, state) async {
+          if (state is UpdateAvailable && !Scaffold.of(context).isDrawerOpen) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  Localization.current.I18nHome_updateAvailable(state.version),
                 ),
-                body: MultiBlocListener(
-                  listeners: [
-                    BlocListener<UpdateBloc, UpdateState>(
-                      listenWhen: (previousState, state) {
-                        // ловим показ наличия обновления
-                        if (previousState is UpdateInitial &&
-                            state is UpdateAvailable) {
-                          return true;
-                          // ловим показ ченджлога
-                        } else if (previousState is UpdateInitial &&
-                            state is UpdateInitial) {
-                          return true;
-                        } else {
-                          return false;
-                        }
-                      },
-                      listener: (context, state) async {
-                        if (state is UpdateAvailable &&
-                            !Scaffold.of(context).isDrawerOpen) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                Localization.current
-                                    .I18nHome_updateAvailable(state.version),
-                              ),
-                              action: SnackBarAction(
-                                onPressed: () {
-                                  BlocProvider.of<UpdateBloc>(context)
-                                      .add(const DownloadUpdate());
-                                  Scaffold.of(context).openDrawer();
-                                },
-                                label: Localization.current.I18nHome_update,
-                              ),
-                            ),
-                          );
-                        } else if (state is UpdateInitial &&
-                            state.showChangelog != null &&
-                            state.showChangelog!.show) {
-                          await showChangelogAtStartup(
-                            context,
-                            state.showChangelog!.previousVersion!,
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                  child: const TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: <Widget>[
-                      InitPage(),
-                      StartPage(),
-                      FinishPage(),
-                    ],
-                  ),
+                action: SnackBarAction(
+                  onPressed: () {
+                    BlocProvider.of<UpdateBloc>(context)
+                        .add(const DownloadUpdate());
+                    Scaffold.of(context).openDrawer();
+                  },
+                  label: Localization.current.I18nHome_update,
                 ),
               ),
-            ),
-          ),
-        ),
+            );
+          } else if (state is UpdateInitial &&
+              state.showChangelog != null &&
+              state.showChangelog!.show) {
+            await showChangelogAtStartup(
+              context,
+              state.showChangelog!.previousVersion!,
+            );
+          }
+        },
       );
 }
 
