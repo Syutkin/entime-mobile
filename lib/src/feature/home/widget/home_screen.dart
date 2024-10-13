@@ -18,7 +18,7 @@ import '../../tab/widget/finish_page.dart';
 import '../../tab/widget/init_page.dart';
 import '../../tab/widget/start_page.dart';
 import '../../update/update.dart';
-import '../model/menu_button.dart';
+import '../model/home_menu_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -351,13 +351,13 @@ class _MenuButton extends StatelessWidget {
             final settingsBloc = context.read<SettingsBloc>();
             final settings = settingsBloc.state.settings;
             final databaseBloc = context.read<DatabaseBloc>();
-            final menuItems = <PopupMenuEntry<MenuButton>>[];
+            final menuItems = <PopupMenuEntry<HomeMenuButton>>[];
             if (activeTab == AppTab.start || activeTab == AppTab.finish) {
               databaseBloc.state.mapOrNull(initialized: (state) async {
                 if (activeTab == AppTab.start) {
                   menuItems.add(
                     PopupMenuItem(
-                      value: MenuButton.addRacer,
+                      value: HomeMenuButton.addRacer,
                       child: ListTile(
                         leading: const Icon(Icons.add),
                         title: Text(Localization.current.I18nHome_addRacer),
@@ -370,7 +370,7 @@ class _MenuButton extends StatelessWidget {
               if (activeTab == AppTab.start) {
                 menuItems.add(
                   PopupMenuItem(
-                    value: MenuButton.countdown,
+                    value: HomeMenuButton.countdown,
                     child: ListTile(
                       leading: Icon(MdiIcons.timer),
                       title: Text(Localization.current.I18nHome_countdown),
@@ -380,7 +380,7 @@ class _MenuButton extends StatelessWidget {
               }
               menuItems.add(
                 PopupMenuItem(
-                  value: MenuButton.fab,
+                  value: HomeMenuButton.fab,
                   child: ListTile(
                     leading: Icon(MdiIcons.handBackLeft),
                     title: Text(Localization.current.I18nHome_fab),
@@ -390,7 +390,7 @@ class _MenuButton extends StatelessWidget {
               menuItems.add(PopupMenuDivider());
               menuItems.add(
                 PopupMenuItem(
-                  value: MenuButton.share,
+                  value: HomeMenuButton.share,
                   child: ListTile(
                     leading: const Icon(Icons.share),
                     title: Text(Localization.current.I18nHome_share),
@@ -400,7 +400,7 @@ class _MenuButton extends StatelessWidget {
             } else {
               menuItems.add(
                 PopupMenuItem(
-                  value: MenuButton.bluetooth,
+                  value: HomeMenuButton.bluetooth,
                   child: ListTile(
                     leading: const Icon(Icons.bluetooth),
                     title: Text(Localization.current.I18nHome_bluetooth),
@@ -409,18 +409,18 @@ class _MenuButton extends StatelessWidget {
               );
             }
 
-            return PopupMenuButton<MenuButton>(
+            return PopupMenuButton<HomeMenuButton>(
               itemBuilder: (context) => menuItems,
               onSelected: (value) async {
                 switch (value) {
-                  case MenuButton.share:
+                  case HomeMenuButton.share:
                     if (activeTab == AppTab.start) {
                       databaseBloc.add(DatabaseEvent.shareStart());
                     } else if (activeTab == AppTab.finish) {
                       databaseBloc.add(DatabaseEvent.shareFinish());
                     }
                     break;
-                  case MenuButton.fab:
+                  case HomeMenuButton.fab:
                     if (activeTab == AppTab.start) {
                       settingsBloc.add(
                         SettingsEvent.update(
@@ -438,7 +438,7 @@ class _MenuButton extends StatelessWidget {
                       );
                     }
                     break;
-                  case MenuButton.addRacer:
+                  case HomeMenuButton.addRacer:
                     databaseBloc.state.mapOrNull(initialized: (state) async {
                       final stage = state.stage;
                       if (stage != null) {
@@ -449,17 +449,17 @@ class _MenuButton extends StatelessWidget {
                       }
                     });
                     break;
-                  case MenuButton.selectRace:
+                  case HomeMenuButton.selectRace:
                     await Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (context) => const RacesListPage(),
                       ),
                     );
                     break;
-                  case MenuButton.bluetooth:
+                  case HomeMenuButton.bluetooth:
                     await selectBluetoothDevice(context);
                     break;
-                  case MenuButton.countdown:
+                  case HomeMenuButton.countdown:
                     settingsBloc.add(
                       SettingsEvent.update(
                         settings:

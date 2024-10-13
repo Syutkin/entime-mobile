@@ -154,9 +154,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nHome_updateManualStartCorrection": m6,
         "I18nInit_bluetoothModule":
             MessageLookupByLibrary.simpleMessage("Bluetooth модуль"),
-        "I18nInit_dbFile":
-            MessageLookupByLibrary.simpleMessage("Файл базы данных"),
         "I18nInit_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "I18nInit_exportFromCsv":
+            MessageLookupByLibrary.simpleMessage("Экспорт протокола из csv"),
         "I18nInit_noData": MessageLookupByLibrary.simpleMessage("Нет данных"),
         "I18nInit_pressToSelect":
             MessageLookupByLibrary.simpleMessage("Нажмите чтобы выбрать"),

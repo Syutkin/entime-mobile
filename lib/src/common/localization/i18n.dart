@@ -662,11 +662,6 @@ class I18nHome {
 }
 
 class I18nInit {
-  // static String get startProtocol => Intl.message(
-  //       'Стартовый протокол',
-  //       name: 'I18nInit_startProtocol',
-  //     );
-
   static String get selectRace => Intl.message(
         'Выберите соревнование',
         name: 'I18nInit_selectRace',
@@ -707,9 +702,9 @@ class I18nInit {
         name: 'I18nInit_delete',
       );
 
-  static String get dbFile => Intl.message(
-        'Файл базы данных',
-        name: 'I18nInit_dbFile',
+  static String get exportFromCsv => Intl.message(
+        'Экспорт протокола из csv',
+        name: 'I18nInit_exportFromCsv',
       );
 }
 

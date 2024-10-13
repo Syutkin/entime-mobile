@@ -110,8 +110,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nHome_updateManualStartCorrection": m6,
         "I18nInit_bluetoothModule":
             MessageLookupByLibrary.simpleMessage("Bluetooth module"),
-        "I18nInit_dbFile":
-            MessageLookupByLibrary.simpleMessage("Database file"),
         "I18nInit_delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "I18nInit_noData": MessageLookupByLibrary.simpleMessage("No data"),
         "I18nInit_pressToSelect":

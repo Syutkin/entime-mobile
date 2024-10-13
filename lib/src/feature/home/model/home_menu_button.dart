@@ -1,4 +1,4 @@
-enum MenuButton {
+enum HomeMenuButton {
   share,
   fab,
   addRacer,

@@ -1195,11 +1195,11 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Файл базы данных`
-  String get I18nInit_dbFile {
+  /// `Экспорт протокола из csv`
+  String get I18nInit_exportFromCsv {
     return Intl.message(
-      'Файл базы данных',
-      name: 'I18nInit_dbFile',
+      'Экспорт протокола из csv',
+      name: 'I18nInit_exportFromCsv',
       desc: '',
       args: [],
     );
