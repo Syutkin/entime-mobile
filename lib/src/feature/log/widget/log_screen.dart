@@ -40,7 +40,6 @@ class LogScreen extends StatelessWidget {
                 });
                 return Scrollbar(
                   // ToDo: при нажатии показывать всю инфу в попапе
-                  // child: ListView.separated(
                   child: ListView.builder(
                     controller: _scrollController,
                     shrinkWrap: true,
@@ -77,12 +76,6 @@ class LogScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    // separatorBuilder: (BuildContext context, int index) =>
-                    //     const Divider(
-                    //   indent: 10,
-                    //   endIndent: 10,
-                    //   thickness: 2,
-                    // ),
                   ),
                 );
               } else {

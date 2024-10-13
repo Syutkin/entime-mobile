@@ -154,8 +154,6 @@ class EntimeApp extends StatelessWidget {
             create: (context) => BluetoothBloc(
               audioController: audioController,
               bluetoothProvider: bluetoothProvider,
-              // protocolProvider: protocolProvider,
-              // logProvider: logProvider,
               settingsProvider: settingsProvider,
               database: database,
             )..add(const BluetoothEvent.initialize()),
