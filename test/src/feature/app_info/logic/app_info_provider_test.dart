@@ -57,10 +57,17 @@ void main() {
         deviceInfo: deviceInfo,
       );
 
-      expect(
-        appInfoProvider.version,
-        '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}',
-      );
+      if (Pubspec.version.preRelease.isEmpty) {
+        expect(
+          appInfoProvider.version,
+          '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}',
+        );
+      } else {
+        expect(
+          appInfoProvider.version,
+          Pubspec.version.canonical,
+        );
+      }
     });
 
     test('Get supported abi', () async {

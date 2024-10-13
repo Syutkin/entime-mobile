@@ -9,7 +9,9 @@ class AppBlocObserver extends BlocObserver {
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
 
-    if (bloc.toString() != "Instance of 'CountdownBloc'") {
+    if ('$event'.contains('DatabaseEvent.emitState')) {
+      logger.d('Event: DatabaseEvent.emitState');
+    } else if (bloc.toString() != "Instance of 'CountdownBloc'") {
       logger.d('Event: $event');
     }
   }

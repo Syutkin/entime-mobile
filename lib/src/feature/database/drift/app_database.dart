@@ -502,8 +502,8 @@ class AppDatabase extends _$AppDatabase {
   // ----------------финиш----------------
 
   Selectable<Finish> getFinishesFromStage({required int stageId,
-    bool hideManual = false,
     bool hideMarked = true,
+    bool hideManual = false,
     bool hideNumbers = false}) {
     final List<Expression<bool>> predicates = [];
     return _getFinishesFromStage(

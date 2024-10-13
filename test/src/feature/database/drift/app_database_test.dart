@@ -1023,28 +1023,39 @@ void main() {
         var timeStamp = '10:05:23,456';
 
         await db.addFinishTime(
-            stage: stage,
-            finish: finish,
-            timeStamp: timeStamp.toDateTime()!);
+            stage: stage, finish: finish, timeStamp: timeStamp.toDateTime()!);
 
         await db.addFinishTime(
-            stage: stage,
-            finish: finish,
-            timeStamp: timeStamp.toDateTime()!);
+            stage: stage, finish: finish, timeStamp: timeStamp.toDateTime()!);
 
-        var result = await db.getFinishesFromStage(stageId: stage.id!).get();
+        var result = await db
+            .getFinishesFromStage(
+              stageId: stage.id!,
+              hideMarked: false,
+            )
+            .get();
         expect(result[0].isHidden, false);
         expect(result[1].isHidden, false);
 
         var count = await db.hideFinish(result[0].id!);
         expect(count, 1);
 
-        result = await db.getFinishesFromStage(stageId: stage.id!).get();
+        result = await db
+            .getFinishesFromStage(
+              stageId: stage.id!,
+              hideMarked: false,
+            )
+            .get();
         expect(result[0].isHidden, true);
         expect(result[1].isHidden, false);
 
         count = await db.hideFinish(result[1].id!);
-        result = await db.getFinishesFromStage(stageId: stage.id!).get();
+        result = await db
+            .getFinishesFromStage(
+              stageId: stage.id!,
+              hideMarked: false,
+            )
+            .get();
         expect(result[0].isHidden, true);
         expect(result[1].isHidden, true);
       });
@@ -1057,30 +1068,29 @@ void main() {
         var timeStamp = '10:05:23,456';
 
         await db.addFinishTime(
-            stage: stage,
-            finish: finish,
-            timeStamp: timeStamp.toDateTime()!);
+            stage: stage, finish: finish, timeStamp: timeStamp.toDateTime()!);
 
         var result = await db.hideAllFinishes(stage.id!);
         expect(result, 1);
 
         await db.addFinishTime(
-            stage: stage,
-            finish: finish,
-            timeStamp: timeStamp.toDateTime()!);
+            stage: stage, finish: finish, timeStamp: timeStamp.toDateTime()!);
 
         result = await db.hideAllFinishes(stage.id!);
         expect(result, 2);
 
         await db.addFinishTime(
-            stage: stage,
-            finish: finish,
-            timeStamp: timeStamp.toDateTime()!);
+            stage: stage, finish: finish, timeStamp: timeStamp.toDateTime()!);
 
         result = await db.hideAllFinishes(stage.id!);
         expect(result, 3);
 
-        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        var finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id!,
+              hideMarked: false,
+            )
+            .get();
         expect(finishes.length, 3);
         expect(finishes[0].isHidden, true);
         expect(finishes[1].isHidden, true);
@@ -1095,9 +1105,7 @@ void main() {
         var timeStamp = '10:05:23,456';
 
         var result = await db.addFinishTime(
-            stage: stage,
-            finish: finish,
-            timeStamp: timeStamp.toDateTime()!);
+            stage: stage, finish: finish, timeStamp: timeStamp.toDateTime()!);
 
         expect(result, null);
 
@@ -1119,14 +1127,10 @@ void main() {
         var timeStamp2 = '10:05:23,459';
 
         await db.addFinishTime(
-            stage: stage,
-            finish: finish1,
-            timeStamp: timeStamp1.toDateTime()!);
+            stage: stage, finish: finish1, timeStamp: timeStamp1.toDateTime()!);
 
         await db.addFinishTime(
-            stage: stage,
-            finish: finish2,
-            timeStamp: timeStamp2.toDateTime()!);
+            stage: stage, finish: finish2, timeStamp: timeStamp2.toDateTime()!);
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
         expect(finishes.length, 2);
@@ -1364,7 +1368,12 @@ void main() {
         );
         expect(addNumber3, number2);
 
-        var finishes = await db.getFinishesFromStage(stageId: stage.id!).get();
+        var finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id!,
+              hideMarked: false,
+            )
+            .get();
         expect(finishes.length, 3);
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, number1);

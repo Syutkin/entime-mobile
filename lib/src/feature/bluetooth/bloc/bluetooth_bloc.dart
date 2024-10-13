@@ -35,7 +35,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   bool _isEnabled = false;
 
   // ToDo: change stageId to actual value for voice control
-  int stageId = -1;
+  int _stageId = -1;
 
   StreamSubscription<String>? _messageSubscription;
 
@@ -51,6 +51,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   }) : super(const BluetoothBlocState.notInitialized()) {
     settingsProvider.state.listen((state) {
       _reconnect = state.reconnect;
+      _stageId = state.stageId;
+      print('stageID: $_stageId');
     });
 
     on<BluetoothEvent>(transformer: sequential(), (event, emit) async {
@@ -145,7 +147,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
                   .listen(
                 (message) => add(BluetoothEvent.messageReceived(
                   message: message,
-                  stageId: stageId,
+                  stageId: _stageId,
                 )),
               );
               bluetoothProvider.bluetoothBackgroundConnection.onDisconnect(() {
@@ -232,21 +234,17 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             },
             countdown: (countdown) async {
               final stageId = event.stageId;
-              if (stageId != null) {
-                await audioController.playCountdown(
-                  time: countdown,
-                  stageId: stageId,
-                );
-              }
+              await audioController.playCountdown(
+                time: countdown,
+                stageId: stageId,
+              );
             },
             voice: (time) async {
               final stageId = event.stageId;
-              if (stageId != null) {
-                await audioController.callParticipant(
-                  time: time,
-                  stageId: stageId,
-                );
-              }
+              await audioController.callParticipant(
+                time: time,
+                stageId: stageId,
+              );
             },
             moduleSettings: (moduleSettings) {
               emit(BluetoothBlocState.connected(message: message));
@@ -309,6 +307,12 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           automaticStart: automaticStart,
         );
       } on Exception catch (e) {
+        logger.e(
+          'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage',
+          error: e,
+        );
+        return const BluetoothMessage.empty();
+      } on Error catch (e) {
         logger.e(
           'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage',
           error: e,

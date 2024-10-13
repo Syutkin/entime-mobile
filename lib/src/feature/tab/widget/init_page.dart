@@ -12,6 +12,7 @@ import '../../database/widget/races_list_page.dart';
 import '../../database/widget/stages_list_page.dart';
 import '../../log/log.dart';
 import '../../module_settings/module_settings.dart';
+import '../../settings/bloc/settings_bloc.dart';
 
 class InitPage extends StatefulWidget {
   const InitPage({
@@ -159,8 +160,13 @@ class _DebugCountdownButton extends StatelessWidget {
         // _device = event.device;
         // ignore: no-empty-block
         onPressed: () {
-          // BlocProvider.of<BluetoothBloc>(context)
-          //     .add(MessageReceived('B19:00:56#'));
+          final settingsBloc = context.read<SettingsBloc>();
+          final stageId = settingsBloc.state.settings.stageId;
+          BlocProvider.of<BluetoothBloc>(context)
+              .add(BluetoothEvent.messageReceived(
+            message: 'B19:00:56#',
+            stageId: stageId,
+          ));
           // showChangelogAtStartup(context, '0.3.2');
 
           // BlocProvider.of<BluetoothBloc>(context).audioService.countdown();

@@ -14,7 +14,6 @@ abstract class IAudioController {
 
 class AudioController implements IAudioController {
   final IAudioService _audioService;
-  // final IProtocolProvider _protocolProvider;
   final SettingsProvider _settingsProvider;
 
   final AppDatabase _db;

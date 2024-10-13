@@ -15,7 +15,6 @@ import '../../../../helpers/shared_prefs_defaults.dart';
 
 class MockBluetoothProvider extends Mock implements BluetoothProvider {}
 
-
 class MockAppDatabase extends Mock implements AppDatabase {}
 
 class MockAudioService extends Mock implements AudioService {}
@@ -656,10 +655,12 @@ void main() {
     });
     group('on messageReceived:', () {
       late String message;
+      late int stageId;
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'received correct automaticStart',
         setUp: () {
           message = r'$10:00:01,123;1234#';
+          stageId = 1;
           when(
             () => database.addLog(
               level: LogLevel.information,
@@ -677,8 +678,8 @@ void main() {
           database: database,
           settingsProvider: settingsProvider,
         ),
-        act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message)),
+        act: (bloc) => bloc.add(
+            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <Matcher>[
           isA<BluetoothConnectedState>().having(
             (state) => state.message,
@@ -711,6 +712,7 @@ void main() {
         'received incorrect automaticStart',
         setUp: () {
           message = r'$10:00:01,123.1234#';
+          stageId = 1;
           when(
             () => database.addLog(
               level: LogLevel.information,
@@ -729,7 +731,7 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message)),
+            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
       );
 
@@ -737,6 +739,7 @@ void main() {
         'received finish',
         setUp: () {
           message = 'F10:00:01,123#';
+          stageId = 1;
           when(
             () => database.addLog(
               level: LogLevel.information,
@@ -755,7 +758,7 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message)),
+            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <Matcher>[
           isA<BluetoothConnectedState>().having(
             (state) => state.message,
@@ -773,6 +776,7 @@ void main() {
         'received countdown',
         setUp: () {
           message = 'B10:00:01,123#';
+          stageId = 1;
           when(
             () => database.addLog(
               level: LogLevel.information,
@@ -791,7 +795,7 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message)),
+            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
       );
 
@@ -799,6 +803,7 @@ void main() {
         'received voice',
         setUp: () {
           message = 'V10:00:01,123#';
+          stageId = 1;
           when(
             () => database.addLog(
               level: LogLevel.information,
@@ -817,7 +822,7 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message)),
+            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
       );
 
@@ -825,6 +830,7 @@ void main() {
         'received moduleSettings json',
         setUp: () {
           message = '{ settings: { key, value } }';
+          stageId = 1;
           when(
             () => database.addLog(
               level: LogLevel.information,
@@ -843,7 +849,7 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message)),
+            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <Matcher>[
           isA<BluetoothConnectedState>().having(
             (state) => state.message,
@@ -861,6 +867,7 @@ void main() {
         'received incorrect message',
         setUp: () {
           message = '10:00:01,123.1234';
+          stageId = 1;
           when(
             () => database.addLog(
               level: LogLevel.information,
@@ -879,7 +886,7 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) =>
-            bloc.add(BluetoothEvent.messageReceived(message: message)),
+            bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
       );
     });

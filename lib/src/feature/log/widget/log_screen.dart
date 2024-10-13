@@ -7,6 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../common/localization/localization.dart';
 import '../../../common/utils/helper.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
+import '../../settings/bloc/settings_bloc.dart';
 import '../log.dart';
 
 class LogScreen extends StatelessWidget {
@@ -101,9 +102,12 @@ class LogScreen extends StatelessWidget {
           children: <Widget>[
             TextButton(
               onPressed: () async {
+                final settingsBloc = context.read<SettingsBloc>();
+                final stageId = settingsBloc.state.settings.stageId;
                 BlocProvider.of<BluetoothBloc>(context).add(
-                  const BluetoothEvent.messageReceived(
+                  BluetoothEvent.messageReceived(
                     message: 'F12:12:12,121#',
+                    stageId: stageId,
                   ),
                 );
               },

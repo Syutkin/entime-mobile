@@ -381,6 +381,7 @@ class _StartListPage extends State<StartListPage> {
             BluetoothEvent.messageReceived(
               message:
                   'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+              stageId: stageId,
             ),
           );
         },
@@ -392,6 +393,7 @@ class _StartListPage extends State<StartListPage> {
             BluetoothEvent.messageReceived(
               message:
                   'B${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+              stageId: stageId,
             ),
           );
         },
@@ -448,12 +450,14 @@ class _StartListPage extends State<StartListPage> {
           BlocProvider.of<BluetoothBloc>(context).add(
             BluetoothEvent.messageReceived(
               message: r'$' '15:31:01,121;$cor#',
+              stageId: stageId,
             ),
           );
           final int cor2 = Random().nextInt(9999) - 5000;
           BlocProvider.of<BluetoothBloc>(context).add(
             BluetoothEvent.messageReceived(
               message: r'$' '15:31:01,121;$cor2#',
+              stageId: stageId,
             ),
           );
         },

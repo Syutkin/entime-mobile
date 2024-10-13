@@ -23,7 +23,7 @@ class BluetoothEvent with _$BluetoothEvent {
 
   const factory BluetoothEvent.messageReceived({
     required String message,
-    int? stageId,
+    required int stageId,
   }) = _MessageReceived;
 
   const factory BluetoothEvent.sendMessage({required String message}) =

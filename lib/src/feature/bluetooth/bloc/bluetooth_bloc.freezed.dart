@@ -28,7 +28,7 @@ mixin _$BluetoothEvent {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ mixin _$BluetoothEvent {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) =>
       throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ mixin _$BluetoothEvent {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) =>
@@ -181,7 +181,7 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return initialize();
@@ -199,7 +199,7 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return initialize?.call();
@@ -217,7 +217,7 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
@@ -338,7 +338,7 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return enable();
@@ -356,7 +356,7 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return enable?.call();
@@ -374,7 +374,7 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
@@ -495,7 +495,7 @@ class _$DisableBluetoothImpl implements _DisableBluetooth {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return disable();
@@ -513,7 +513,7 @@ class _$DisableBluetoothImpl implements _DisableBluetooth {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return disable?.call();
@@ -531,7 +531,7 @@ class _$DisableBluetoothImpl implements _DisableBluetooth {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
@@ -680,7 +680,7 @@ class _$SelectDeviceImpl implements _SelectDevice {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return selectDevice(deviceWithAvailability);
@@ -698,7 +698,7 @@ class _$SelectDeviceImpl implements _SelectDevice {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return selectDevice?.call(deviceWithAvailability);
@@ -716,7 +716,7 @@ class _$SelectDeviceImpl implements _SelectDevice {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
@@ -847,7 +847,7 @@ class _$ConnectedImpl implements _Connected {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return connected();
@@ -865,7 +865,7 @@ class _$ConnectedImpl implements _Connected {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return connected?.call();
@@ -883,7 +883,7 @@ class _$ConnectedImpl implements _Connected {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
@@ -1032,7 +1032,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return connect(selectedDevice);
@@ -1050,7 +1050,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return connect?.call(selectedDevice);
@@ -1068,7 +1068,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
@@ -1198,7 +1198,7 @@ class _$DisconnectImpl implements _Disconnect {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return disconnect();
@@ -1216,7 +1216,7 @@ class _$DisconnectImpl implements _Disconnect {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return disconnect?.call();
@@ -1234,7 +1234,7 @@ class _$DisconnectImpl implements _Disconnect {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
@@ -1355,7 +1355,7 @@ class _$DisconnectedImpl implements _Disconnected {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return disconnected();
@@ -1373,7 +1373,7 @@ class _$DisconnectedImpl implements _Disconnected {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return disconnected?.call();
@@ -1391,7 +1391,7 @@ class _$DisconnectedImpl implements _Disconnected {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
@@ -1467,7 +1467,7 @@ abstract class _$$MessageReceivedImplCopyWith<$Res> {
           $Res Function(_$MessageReceivedImpl) then) =
       __$$MessageReceivedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message, int? stageId});
+  $Res call({String message, int stageId});
 }
 
 /// @nodoc
@@ -1484,17 +1484,17 @@ class __$$MessageReceivedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
-    Object? stageId = freezed,
+    Object? stageId = null,
   }) {
     return _then(_$MessageReceivedImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      stageId: freezed == stageId
+      stageId: null == stageId
           ? _value.stageId
           : stageId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ));
   }
 }
@@ -1502,12 +1502,12 @@ class __$$MessageReceivedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MessageReceivedImpl implements _MessageReceived {
-  const _$MessageReceivedImpl({required this.message, this.stageId});
+  const _$MessageReceivedImpl({required this.message, required this.stageId});
 
   @override
   final String message;
   @override
-  final int? stageId;
+  final int stageId;
 
   @override
   String toString() {
@@ -1548,7 +1548,7 @@ class _$MessageReceivedImpl implements _MessageReceived {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return messageReceived(message, stageId);
@@ -1566,7 +1566,7 @@ class _$MessageReceivedImpl implements _MessageReceived {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return messageReceived?.call(message, stageId);
@@ -1584,7 +1584,7 @@ class _$MessageReceivedImpl implements _MessageReceived {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
@@ -1653,10 +1653,10 @@ class _$MessageReceivedImpl implements _MessageReceived {
 abstract class _MessageReceived implements BluetoothEvent {
   const factory _MessageReceived(
       {required final String message,
-      final int? stageId}) = _$MessageReceivedImpl;
+      required final int stageId}) = _$MessageReceivedImpl;
 
   String get message;
-  int? get stageId;
+  int get stageId;
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1743,7 +1743,7 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
-    required TResult Function(String message, int? stageId) messageReceived,
+    required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
   }) {
     return sendMessage(message);
@@ -1761,7 +1761,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
-    TResult? Function(String message, int? stageId)? messageReceived,
+    TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
   }) {
     return sendMessage?.call(message);
@@ -1779,7 +1779,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
     TResult Function()? disconnected,
-    TResult Function(String message, int? stageId)? messageReceived,
+    TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
   }) {
