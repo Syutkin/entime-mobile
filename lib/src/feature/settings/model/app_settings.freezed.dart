@@ -16,6 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AppSettings {
+// язык
+  String get language =>
+      throw _privateConstructorUsedError; // = "ru", // локаль
 // звук
   bool get sound => throw _privateConstructorUsedError; // вкл/выкл
 // звук обратного отсчёта
@@ -25,8 +28,8 @@ mixin _$AppSettings {
   double get volume => throw _privateConstructorUsedError; // громкость
   double get pitch => throw _privateConstructorUsedError; // тон речи
   double get rate => throw _privateConstructorUsedError; // скорость речи
-  String get language =>
-      throw _privateConstructorUsedError; // = "ru-RU", // язык
+  String get voiceLanguage =>
+      throw _privateConstructorUsedError; // = "ru-RU", // язык tts
 // id выбранного соревнования и участка
   int get raceId => throw _privateConstructorUsedError;
   int get stageId =>
@@ -76,6 +79,7 @@ mixin _$AppSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -83,7 +87,7 @@ mixin _$AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -114,6 +118,7 @@ mixin _$AppSettings {
             String previousVersion)
         $default, {
     required TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -121,7 +126,7 @@ mixin _$AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -156,6 +161,7 @@ mixin _$AppSettings {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -163,7 +169,7 @@ mixin _$AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -194,6 +200,7 @@ mixin _$AppSettings {
             String previousVersion)?
         $default, {
     TResult? Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -201,7 +208,7 @@ mixin _$AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -236,6 +243,7 @@ mixin _$AppSettings {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -243,7 +251,7 @@ mixin _$AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -274,6 +282,7 @@ mixin _$AppSettings {
             String previousVersion)?
         $default, {
     TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -281,7 +290,7 @@ mixin _$AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -348,14 +357,15 @@ abstract class $AppSettingsCopyWith<$Res> {
       _$AppSettingsCopyWithImpl<$Res, AppSettings>;
   @useResult
   $Res call(
-      {bool sound,
+      {String language,
+      bool sound,
       bool beep,
       bool voice,
       bool voiceName,
       double volume,
       double pitch,
       double rate,
-      String language,
+      String voiceLanguage,
       int raceId,
       int stageId,
       bool wakelock,
@@ -401,6 +411,7 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? language = null,
     Object? sound = null,
     Object? beep = null,
     Object? voice = null,
@@ -408,7 +419,7 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? volume = null,
     Object? pitch = null,
     Object? rate = null,
-    Object? language = null,
+    Object? voiceLanguage = null,
     Object? raceId = null,
     Object? stageId = null,
     Object? wakelock = null,
@@ -439,6 +450,10 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? previousVersion = null,
   }) {
     return _then(_value.copyWith(
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
       sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
@@ -467,9 +482,9 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
+      voiceLanguage: null == voiceLanguage
+          ? _value.voiceLanguage
+          : voiceLanguage // ignore: cast_nullable_to_non_nullable
               as String,
       raceId: null == raceId
           ? _value.raceId
@@ -596,14 +611,15 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool sound,
+      {String language,
+      bool sound,
       bool beep,
       bool voice,
       bool voiceName,
       double volume,
       double pitch,
       double rate,
-      String language,
+      String voiceLanguage,
       int raceId,
       int stageId,
       bool wakelock,
@@ -647,6 +663,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? language = null,
     Object? sound = null,
     Object? beep = null,
     Object? voice = null,
@@ -654,7 +671,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? volume = null,
     Object? pitch = null,
     Object? rate = null,
-    Object? language = null,
+    Object? voiceLanguage = null,
     Object? raceId = null,
     Object? stageId = null,
     Object? wakelock = null,
@@ -685,6 +702,10 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? previousVersion = null,
   }) {
     return _then(_$AppSettingsImpl(
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
       sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
@@ -713,9 +734,9 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
+      voiceLanguage: null == voiceLanguage
+          ? _value.voiceLanguage
+          : voiceLanguage // ignore: cast_nullable_to_non_nullable
               as String,
       raceId: null == raceId
           ? _value.raceId
@@ -837,14 +858,15 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
 
 class _$AppSettingsImpl implements _AppSettings {
   const _$AppSettingsImpl(
-      {required this.sound,
+      {required this.language,
+      required this.sound,
       required this.beep,
       required this.voice,
       required this.voiceName,
       required this.volume,
       required this.pitch,
       required this.rate,
-      required this.language,
+      required this.voiceLanguage,
       required this.raceId,
       required this.stageId,
       required this.wakelock,
@@ -874,6 +896,10 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.dynamicSchemeVariant,
       required this.previousVersion});
 
+// язык
+  @override
+  final String language;
+// = "ru", // локаль
 // звук
   @override
   final bool sound;
@@ -896,8 +922,8 @@ class _$AppSettingsImpl implements _AppSettings {
   final double rate;
 // скорость речи
   @override
-  final String language;
-// = "ru-RU", // язык
+  final String voiceLanguage;
+// = "ru-RU", // язык tts
 // id выбранного соревнования и участка
   @override
   final int raceId;
@@ -976,7 +1002,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
+    return 'AppSettings(language: $language, sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
   }
 
   @override
@@ -984,6 +1010,8 @@ class _$AppSettingsImpl implements _AppSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppSettingsImpl &&
+            (identical(other.language, language) ||
+                other.language == language) &&
             (identical(other.sound, sound) || other.sound == sound) &&
             (identical(other.beep, beep) || other.beep == beep) &&
             (identical(other.voice, voice) || other.voice == voice) &&
@@ -992,8 +1020,8 @@ class _$AppSettingsImpl implements _AppSettings {
             (identical(other.volume, volume) || other.volume == volume) &&
             (identical(other.pitch, pitch) || other.pitch == pitch) &&
             (identical(other.rate, rate) || other.rate == rate) &&
-            (identical(other.language, language) ||
-                other.language == language) &&
+            (identical(other.voiceLanguage, voiceLanguage) ||
+                other.voiceLanguage == voiceLanguage) &&
             (identical(other.raceId, raceId) || other.raceId == raceId) &&
             (identical(other.stageId, stageId) || other.stageId == stageId) &&
             (identical(other.wakelock, wakelock) ||
@@ -1055,6 +1083,7 @@ class _$AppSettingsImpl implements _AppSettings {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        language,
         sound,
         beep,
         voice,
@@ -1062,7 +1091,7 @@ class _$AppSettingsImpl implements _AppSettings {
         volume,
         pitch,
         rate,
-        language,
+        voiceLanguage,
         raceId,
         stageId,
         wakelock,
@@ -1105,6 +1134,7 @@ class _$AppSettingsImpl implements _AppSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -1112,7 +1142,7 @@ class _$AppSettingsImpl implements _AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -1143,6 +1173,7 @@ class _$AppSettingsImpl implements _AppSettings {
             String previousVersion)
         $default, {
     required TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -1150,7 +1181,7 @@ class _$AppSettingsImpl implements _AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -1182,6 +1213,7 @@ class _$AppSettingsImpl implements _AppSettings {
         defaults,
   }) {
     return $default(
+        language,
         sound,
         beep,
         voice,
@@ -1189,7 +1221,7 @@ class _$AppSettingsImpl implements _AppSettings {
         volume,
         pitch,
         rate,
-        language,
+        voiceLanguage,
         raceId,
         stageId,
         wakelock,
@@ -1224,6 +1256,7 @@ class _$AppSettingsImpl implements _AppSettings {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -1231,7 +1264,7 @@ class _$AppSettingsImpl implements _AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -1262,6 +1295,7 @@ class _$AppSettingsImpl implements _AppSettings {
             String previousVersion)?
         $default, {
     TResult? Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -1269,7 +1303,7 @@ class _$AppSettingsImpl implements _AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -1301,6 +1335,7 @@ class _$AppSettingsImpl implements _AppSettings {
         defaults,
   }) {
     return $default?.call(
+        language,
         sound,
         beep,
         voice,
@@ -1308,7 +1343,7 @@ class _$AppSettingsImpl implements _AppSettings {
         volume,
         pitch,
         rate,
-        language,
+        voiceLanguage,
         raceId,
         stageId,
         wakelock,
@@ -1343,6 +1378,7 @@ class _$AppSettingsImpl implements _AppSettings {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -1350,7 +1386,7 @@ class _$AppSettingsImpl implements _AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -1381,6 +1417,7 @@ class _$AppSettingsImpl implements _AppSettings {
             String previousVersion)?
         $default, {
     TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -1388,7 +1425,7 @@ class _$AppSettingsImpl implements _AppSettings {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -1422,6 +1459,7 @@ class _$AppSettingsImpl implements _AppSettings {
   }) {
     if ($default != null) {
       return $default(
+          language,
           sound,
           beep,
           voice,
@@ -1429,7 +1467,7 @@ class _$AppSettingsImpl implements _AppSettings {
           volume,
           pitch,
           rate,
-          language,
+          voiceLanguage,
           raceId,
           stageId,
           wakelock,
@@ -1496,14 +1534,15 @@ class _$AppSettingsImpl implements _AppSettings {
 
 abstract class _AppSettings implements AppSettings {
   const factory _AppSettings(
-      {required final bool sound,
+      {required final String language,
+      required final bool sound,
       required final bool beep,
       required final bool voice,
       required final bool voiceName,
       required final double volume,
       required final double pitch,
       required final double rate,
-      required final String language,
+      required final String voiceLanguage,
       required final int raceId,
       required final int stageId,
       required final bool wakelock,
@@ -1533,6 +1572,9 @@ abstract class _AppSettings implements AppSettings {
       required final DynamicSchemeVariant dynamicSchemeVariant,
       required final String previousVersion}) = _$AppSettingsImpl;
 
+// язык
+  @override
+  String get language; // = "ru", // локаль
 // звук
   @override
   bool get sound; // вкл/выкл
@@ -1550,7 +1592,7 @@ abstract class _AppSettings implements AppSettings {
   @override
   double get rate; // скорость речи
   @override
-  String get language; // = "ru-RU", // язык
+  String get voiceLanguage; // = "ru-RU", // язык tts
 // id выбранного соревнования и участка
   @override
   int get raceId;
@@ -1633,14 +1675,15 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool sound,
+      {String language,
+      bool sound,
       bool beep,
       bool voice,
       bool voiceName,
       double volume,
       double pitch,
       double rate,
-      String language,
+      String voiceLanguage,
       int raceId,
       int stageId,
       bool wakelock,
@@ -1684,6 +1727,7 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? language = null,
     Object? sound = null,
     Object? beep = null,
     Object? voice = null,
@@ -1691,7 +1735,7 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? volume = null,
     Object? pitch = null,
     Object? rate = null,
-    Object? language = null,
+    Object? voiceLanguage = null,
     Object? raceId = null,
     Object? stageId = null,
     Object? wakelock = null,
@@ -1722,6 +1766,10 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? previousVersion = null,
   }) {
     return _then(_$AppSettingsDefaultsImpl(
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
       sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
@@ -1750,9 +1798,9 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
+      voiceLanguage: null == voiceLanguage
+          ? _value.voiceLanguage
+          : voiceLanguage // ignore: cast_nullable_to_non_nullable
               as String,
       raceId: null == raceId
           ? _value.raceId
@@ -1874,14 +1922,15 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
 
 class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   const _$AppSettingsDefaultsImpl(
-      {this.sound = true,
+      {this.language = 'ru',
+      this.sound = true,
       this.beep = true,
       this.voice = true,
       this.voiceName = true,
       this.volume = 1.0,
       this.pitch = 1.0,
       this.rate = 0.5,
-      this.language = 'ru-RU',
+      this.voiceLanguage = 'ru-RU',
       this.raceId = -1,
       this.stageId = -1,
       this.wakelock = true,
@@ -1911,6 +1960,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.dynamicSchemeVariant = DynamicSchemeVariant.vibrant,
       this.previousVersion = '0.0.0'});
 
+// язык
+  @override
+  @JsonKey()
+  final String language;
 // звук
   @override
   @JsonKey()
@@ -1943,7 +1996,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 // скорость речи
   @override
   @JsonKey()
-  final String language;
+  final String voiceLanguage;
 // = "ru-RU", // язык
 // ToDo: не изменять эти настройки при установке значений по умолчанию
 // id выбранного соревнования и участка
@@ -2052,7 +2105,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
+    return 'AppSettings.defaults(language: $language, sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
   }
 
   @override
@@ -2060,6 +2113,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppSettingsDefaultsImpl &&
+            (identical(other.language, language) ||
+                other.language == language) &&
             (identical(other.sound, sound) || other.sound == sound) &&
             (identical(other.beep, beep) || other.beep == beep) &&
             (identical(other.voice, voice) || other.voice == voice) &&
@@ -2068,8 +2123,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             (identical(other.volume, volume) || other.volume == volume) &&
             (identical(other.pitch, pitch) || other.pitch == pitch) &&
             (identical(other.rate, rate) || other.rate == rate) &&
-            (identical(other.language, language) ||
-                other.language == language) &&
+            (identical(other.voiceLanguage, voiceLanguage) ||
+                other.voiceLanguage == voiceLanguage) &&
             (identical(other.raceId, raceId) || other.raceId == raceId) &&
             (identical(other.stageId, stageId) || other.stageId == stageId) &&
             (identical(other.wakelock, wakelock) ||
@@ -2131,6 +2186,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        language,
         sound,
         beep,
         voice,
@@ -2138,7 +2194,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         volume,
         pitch,
         rate,
-        language,
+        voiceLanguage,
         raceId,
         stageId,
         wakelock,
@@ -2182,6 +2238,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -2189,7 +2246,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -2220,6 +2277,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             String previousVersion)
         $default, {
     required TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -2227,7 +2285,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -2259,6 +2317,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         defaults,
   }) {
     return defaults(
+        language,
         sound,
         beep,
         voice,
@@ -2266,7 +2325,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         volume,
         pitch,
         rate,
-        language,
+        voiceLanguage,
         raceId,
         stageId,
         wakelock,
@@ -2301,6 +2360,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -2308,7 +2368,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -2339,6 +2399,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             String previousVersion)?
         $default, {
     TResult? Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -2346,7 +2407,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -2378,6 +2439,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         defaults,
   }) {
     return defaults?.call(
+        language,
         sound,
         beep,
         voice,
@@ -2385,7 +2447,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         volume,
         pitch,
         rate,
-        language,
+        voiceLanguage,
         raceId,
         stageId,
         wakelock,
@@ -2420,6 +2482,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -2427,7 +2490,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -2458,6 +2521,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             String previousVersion)?
         $default, {
     TResult Function(
+            String language,
             bool sound,
             bool beep,
             bool voice,
@@ -2465,7 +2529,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double volume,
             double pitch,
             double rate,
-            String language,
+            String voiceLanguage,
             int raceId,
             int stageId,
             bool wakelock,
@@ -2499,6 +2563,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   }) {
     if (defaults != null) {
       return defaults(
+          language,
           sound,
           beep,
           voice,
@@ -2506,7 +2571,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           volume,
           pitch,
           rate,
-          language,
+          voiceLanguage,
           raceId,
           stageId,
           wakelock,
@@ -2573,14 +2638,15 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
 abstract class _AppSettingsDefaults implements AppSettings {
   const factory _AppSettingsDefaults(
-      {final bool sound,
+      {final String language,
+      final bool sound,
       final bool beep,
       final bool voice,
       final bool voiceName,
       final double volume,
       final double pitch,
       final double rate,
-      final String language,
+      final String voiceLanguage,
       final int raceId,
       final int stageId,
       final bool wakelock,
@@ -2610,7 +2676,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final DynamicSchemeVariant dynamicSchemeVariant,
       final String previousVersion}) = _$AppSettingsDefaultsImpl;
 
-// звук
+// язык
+  @override
+  String get language; // звук
   @override
   bool get sound; // вкл/выкл
 // звук обратного отсчёта
@@ -2627,7 +2695,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   double get rate; // скорость речи
   @override
-  String get language; // = "ru-RU", // язык
+  String get voiceLanguage; // = "ru-RU", // язык
 // ToDo: не изменять эти настройки при установке значений по умолчанию
 // id выбранного соревнования и участка
   @override

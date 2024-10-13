@@ -26,6 +26,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     const defaults = AppSettings.defaults();
     final prefs = await SharedPreferences.getInstance();
     final settings = AppSettings(
+      language: prefs.getString('language') ?? defaults.language,
       sound: prefs.getBool('sound') ?? defaults.sound,
       beep: prefs.getBool('beep') ?? defaults.beep,
       voice: prefs.getBool('voice') ?? defaults.voice,
@@ -33,7 +34,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       volume: prefs.getDouble('volume') ?? defaults.volume,
       pitch: prefs.getDouble('pitch') ?? defaults.pitch,
       rate: prefs.getDouble('rate') ?? defaults.rate,
-      language: prefs.getString('language') ?? defaults.language,
+      voiceLanguage: prefs.getString('voiceLanguage') ?? defaults.voiceLanguage,
       raceId: prefs.getInt('raceId') ?? -1,
       stageId: prefs.getInt('stageId') ?? -1,
       wakelock: prefs.getBool('wakelock') ?? defaults.wakelock,
@@ -98,6 +99,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     if (settings.wakelock != _settings.wakelock) {
       await WakelockPlus.toggle(enable: settings.wakelock);
     }
+    await _prefs.setString('language', settings.language);
     await _prefs.setBool('sound', settings.sound);
     await _prefs.setBool('beep', settings.beep);
     await _prefs.setBool('voice', settings.voice);
@@ -105,7 +107,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setDouble('volume', settings.volume);
     await _prefs.setDouble('pitch', settings.pitch);
     await _prefs.setDouble('rate', settings.rate);
-    await _prefs.setString('language', settings.language);
+    await _prefs.setString('voiceLanguage', settings.voiceLanguage);
     await _prefs.setInt('raceId', settings.raceId);
     await _prefs.setInt('stageId', settings.stageId);
     await _prefs.setBool('wakelock', settings.wakelock);

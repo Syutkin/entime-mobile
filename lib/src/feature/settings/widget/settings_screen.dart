@@ -91,6 +91,26 @@ class _SettingsList extends StatelessWidget {
                     );
                   },
                 ),
+                SettingsTile(
+                  title: Text(Localization.current.I18nSettings_language),
+                  trailing: DropdownMenu<String>(
+                    width: null,
+                    inputDecorationTheme: InputDecorationTheme(border: InputBorder.none),
+                    dropdownMenuEntries: _dropdownMenuEntries(),
+                    initialSelection: Localizations.localeOf(context).languageCode,
+                    onSelected: (locale) {
+                      if (locale != null) {
+                        Localization.delegate.load(Locale(locale));
+                        settingsBloc.add(
+                          SettingsEvent.update(
+                            settings: settingsState.settings
+                                .copyWith(language: locale),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
               ],
             ),
             SettingsSection(
@@ -192,7 +212,7 @@ class _SettingsList extends StatelessWidget {
                   },
                 ),
                 SettingsTile(
-                  title: Text(Localization.current.I18nSettings_language),
+                  title: Text(Localization.current.I18nSettings_voiceLanguage),
                   //leading:  Icon(Icons.language),
                   // trailing: Text(settingsState.settings.language),
                   trailing: Text(Intl.getCurrentLocale()),
@@ -551,5 +571,16 @@ class _SettingsList extends StatelessWidget {
       );
     }
     return result;
+  }
+
+  List<DropdownMenuEntry<String>> _dropdownMenuEntries() {
+    List<DropdownMenuEntry<String>> entries = [];
+    for (var locale in Localization.supportedLocales) {
+      entries.add(DropdownMenuEntry(
+        value: locale.languageCode,
+        label: locale.languageCode,
+      ));
+    }
+    return entries;
   }
 }

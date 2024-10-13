@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'consts.dart';
+import '../../constants/date_time_formats.dart';
 
 extension Strip on String? {
   String strip() {

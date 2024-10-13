@@ -211,6 +211,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Язык`
+  String get I18nSettings_language {
+    return Intl.message(
+      'Язык',
+      name: 'I18nSettings_language',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Обратный отсчёт`
   String get I18nSettings_countdown {
     return Intl.message(
@@ -282,10 +292,10 @@ class GeneratedLocalization {
   }
 
   /// `Язык`
-  String get I18nSettings_language {
+  String get I18nSettings_voiceLanguage {
     return Intl.message(
       'Язык',
-      name: 'I18nSettings_language',
+      name: 'I18nSettings_voiceLanguage',
       desc: '',
       args: [],
     );

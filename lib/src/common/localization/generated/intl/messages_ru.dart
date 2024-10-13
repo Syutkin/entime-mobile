@@ -370,6 +370,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_update":
             MessageLookupByLibrary.simpleMessage("Обновление"),
         "I18nSettings_voice": MessageLookupByLibrary.simpleMessage("Голос"),
+        "I18nSettings_voiceLanguage":
+            MessageLookupByLibrary.simpleMessage("Язык"),
         "I18nSettings_voiceMessages":
             MessageLookupByLibrary.simpleMessage("Голосовые сообщения"),
         "I18nSettings_voicePitch":

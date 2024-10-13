@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:entime/src/common/utils/consts.dart';
+import 'package:entime/src/constants/date_time_formats.dart';
 import 'package:entime/src/feature/csv/model/race_csv.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:intl/intl.dart';

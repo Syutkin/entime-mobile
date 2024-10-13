@@ -90,6 +90,11 @@ class I18nSettings {
         name: 'I18nSettings_wakelock',
       );
 
+  static String get language => Intl.message(
+    'Язык',
+    name: 'I18nSettings_language',
+  );
+
   static String get countdown => Intl.message(
         'Обратный отсчёт',
         name: 'I18nSettings_countdown',
@@ -125,9 +130,9 @@ class I18nSettings {
         name: 'I18nSettings_rate',
       );
 
-  static String get language => Intl.message(
+  static String get voiceLanguage => Intl.message(
         'Язык',
-        name: 'I18nSettings_language',
+        name: 'I18nSettings_voiceLanguage',
       );
 
   static String get startScreen => Intl.message(

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-13T10:39:15.639861",
+  "@@last_modified": "2024-10-13T14:10:48.602235",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -86,6 +86,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nSettings_language": "Язык",
+  "@I18nSettings_language": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nSettings_countdown": "Обратный отсчёт",
   "@I18nSettings_countdown": {
     "type": "text",
@@ -121,8 +126,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_language": "Язык",
-  "@I18nSettings_language": {
+  "I18nSettings_voiceLanguage": "Язык",
+  "@I18nSettings_voiceLanguage": {
     "type": "text",
     "placeholders": {}
   },

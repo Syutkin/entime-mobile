@@ -8,6 +8,9 @@ part 'app_settings.freezed.dart';
 @freezed
 class AppSettings with _$AppSettings {
   const factory AppSettings({
+    // язык
+    required String language, // = "ru", // локаль
+
     // звук
     required bool sound, // вкл/выкл
 
@@ -20,7 +23,7 @@ class AppSettings with _$AppSettings {
     required double volume, // громкость
     required double pitch, // тон речи
     required double rate, // скорость речи
-    required String language, // = "ru-RU", // язык
+    required String voiceLanguage, // = "ru-RU", // язык tts
 
     // id выбранного соревнования и участка
     required int raceId,
@@ -86,6 +89,9 @@ class AppSettings with _$AppSettings {
   }) = _AppSettings;
 
   const factory AppSettings.defaults({
+    // язык
+    @Default('ru') String language,
+
     // звук
     @Default(true) bool sound, // вкл/выкл
 
@@ -98,7 +104,7 @@ class AppSettings with _$AppSettings {
     @Default(1.0) double volume, // громкость
     @Default(1.0) double pitch, // тон речи
     @Default(0.5) double rate, // скорость речи
-    @Default('ru-RU') String language, // = "ru-RU", // язык
+    @Default('ru-RU') String voiceLanguage, // = "ru-RU", // язык
 
     // ToDo: не изменять эти настройки при установке значений по умолчанию
     // id выбранного соревнования и участка
