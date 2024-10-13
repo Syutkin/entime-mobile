@@ -158,9 +158,9 @@ class DatabaseEvent with _$DatabaseEvent {
     required RaceCsv race,
   }) = _CreateRaceFromRaceCsv;
 
-  //ToDO:
   const factory DatabaseEvent.shareStart() = _ShareStart;
 
-  //ToDO:
   const factory DatabaseEvent.shareFinish() = _ShareFinish;
+
+  const factory DatabaseEvent.shareDatabase() = _ShareDatabase;
 }

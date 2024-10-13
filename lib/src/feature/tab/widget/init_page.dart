@@ -196,13 +196,10 @@ class _DebugNewDatabase extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextButton(
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (context) => const RacesListPage(),
-            ),
-          );
+          final bloc = context.read<DatabaseBloc>();
+          bloc.add(DatabaseEvent.shareDatabase());
         },
-        child: const Text('New database'),
+        child: const Text('Share database'),
       );
 }
 
