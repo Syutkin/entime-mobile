@@ -9,6 +9,7 @@ import '../audio.dart';
 
 abstract class IAudioController {
   Future<void> playCountdown({required String time, required int stageId});
+
   Future<void> callParticipant({required String time, required int stageId});
 }
 
@@ -35,11 +36,6 @@ class AudioController implements IAudioController {
     required String time,
     required int stageId,
   }) async {
-    // await _protocolProvider.state.value.map(
-    //   notSelected: (value) {
-    //     logger.i('Bluetooth -> Protocol not selected');
-    //   },
-    //   selected: (value) async {
     if (await _db.checkParticipantAroundStartTime(
           time: time,
           stageId: stageId,
@@ -52,8 +48,6 @@ class AudioController implements IAudioController {
         'Bluetooth -> Cannot find participant with start time around $time',
       );
     }
-    // },
-    // );
   }
 
   @override
@@ -62,10 +56,6 @@ class AudioController implements IAudioController {
     required int stageId,
   }) async {
     logger.i('StartPage -> Voice time: $time');
-    // if (sound && voice) {
-    // await _protocolProvider.state.value.map(
-    //   selected: (value) async {
-    // List<GetStartingParticipantAndFollowingResult> participant;
     final List<String> start = [];
     String newVoiceText = '';
 
@@ -85,17 +75,20 @@ class AudioController implements IAudioController {
         'First participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
       );
       newVoiceText = 'На старт приглашается номер ${participant.first.number}';
-      _settingsProvider.settings.voiceName /*&& participant.first.name != null*/
+      // Имена участников, которые были добавлены автоматически на старте,
+      // начинаются с номера. Такие имена не произносим
+      _settingsProvider.settings.voiceName &&
+              !RegExp(r'^[0-9]').hasMatch(participant.first.name)
           ? newVoiceText += ', ${participant.first.name}.'
           : newVoiceText += '.';
       participant =
           await _db.getStartingParticipants(time: start[1], stageId: stageId);
       if (participant.isNotEmpty) {
         newVoiceText += ' Следующий номер ${participant.first.number}';
-        if (_settingsProvider.settings
-                .voiceName /*&&
-            participant.first.name != null*/
-            ) {
+        // Имена участников, которые были добавлены автоматически на старте,
+        // начинаются с номера. Такие имена не произносим
+        if (_settingsProvider.settings.voiceName &&
+            !RegExp(r'^[0-9]').hasMatch(participant.first.name)) {
           newVoiceText += ', ${participant.first.name}.';
         } else {
           newVoiceText += '.';
@@ -111,7 +104,10 @@ class AudioController implements IAudioController {
           'Second participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
         );
         newVoiceText = 'Готовится номер ${participant.first.number}';
-        if (_settingsProvider.settings.voiceName) {
+        // Имена участников, которые были добавлены автоматически на старте,
+        // начинаются с номера. Такие имена не произносим
+        if (_settingsProvider.settings.voiceName &&
+            !RegExp(r'^[0-9]').hasMatch(participant.first.name)) {
           newVoiceText += ', ${participant.first.name}.';
         } else {
           newVoiceText += '.';
@@ -149,10 +145,5 @@ class AudioController implements IAudioController {
       }
     }
     await _audioService.speak(newVoiceText);
-    // },
-    // notSelected: (value) {
-    //   logger.i('Bluetooth -> Protocol not selected');
-    // },
-    // );
   }
 }
