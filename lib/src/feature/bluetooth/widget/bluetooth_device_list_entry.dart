@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../common/utils/helper.dart';
+import 'utils/dbm_text_style.dart';
 
 class BluetoothDeviceListEntry extends ListTile {
   BluetoothDeviceListEntry({

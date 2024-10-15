@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:entime/src/common/utils/helper.dart';
+import 'package:entime/src/common/utils/extension_on_string.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter_test/flutter_test.dart';

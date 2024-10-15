@@ -10,7 +10,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../common/localization/localization.dart';
 import '../../../constants/date_time_formats.dart';
-import '../../../common/utils/helper.dart';
+import '../../../common/utils/extension_on_string.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';

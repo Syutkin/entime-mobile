@@ -12,7 +12,7 @@ import 'package:sqlite3/sqlite3.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 
 import '../../../common/logger/logger.dart';
-import '../../../common/utils/helper.dart';
+import '../../../common/utils/extension_on_string.dart';
 import '../../log/log.dart';
 
 part 'app_database.g.dart';

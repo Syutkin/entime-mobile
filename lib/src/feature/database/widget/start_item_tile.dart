@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../common/utils/helper.dart';
+import '../../../common/utils/extension_on_string.dart';
 import '../drift/app_database.dart';
 
 class StartItemTile extends StatelessWidget {
