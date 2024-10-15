@@ -95,7 +95,6 @@ class _SettingsList extends StatelessWidget {
                   enabled: false,
                   title: Text(Localization.current.I18nSettings_language),
                   trailing: DropdownMenu<String>(
-                    width: null,
                     inputDecorationTheme: InputDecorationTheme(border: InputBorder.none),
                     dropdownMenuEntries: _dropdownMenuEntries(),
                     initialSelection: Localizations.localeOf(context).languageCode,
