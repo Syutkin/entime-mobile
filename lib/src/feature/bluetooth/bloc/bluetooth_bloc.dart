@@ -18,13 +18,11 @@ part 'bluetooth_bloc_event.dart';
 part 'bluetooth_bloc_state.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
-  final IBluetoothProvider bluetoothProvider;
+  final IBluetoothProvider _bluetoothProvider;
 
-  // final IProtocolProvider protocolProvider;
-  // final ILogProvider logProvider;
-  final AppDatabase database;
-  final IAudioController audioController;
-  final SettingsProvider settingsProvider;
+  final AppDatabase _database;
+  final IAudioController _audioController;
+  final SettingsProvider _settingsProvider;
 
   BluetoothDevice? _bluetoothDevice;
 
@@ -40,17 +38,28 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   BluetoothDevice? get bluetoothDevice => _bluetoothDevice;
 
+  IBluetoothProvider get bluetoothProvider => _bluetoothProvider;
+
   BluetoothBloc({
-    required this.settingsProvider,
-    // required this.logProvider,
-    required this.audioController,
-    required this.bluetoothProvider,
-    // required this.protocolProvider,
-    required this.database,
-  }) : super(const BluetoothBlocState.notInitialized()) {
-    settingsProvider.state.listen((state) {
+    required IBluetoothProvider bluetoothProvider,
+    required AppDatabase database,
+    required IAudioController audioController,
+    required SettingsProvider settingsProvider,
+  })  : _bluetoothProvider = bluetoothProvider,
+        _database = database,
+        _audioController = audioController,
+        _settingsProvider = settingsProvider,
+        super(const BluetoothBlocState.notInitialized()) {
+    _settingsProvider.state.listen((state) {
       _reconnect = state.reconnect;
       _stageId = state.stageId;
+    });
+
+    bluetoothProvider.flutterBluetoothSerial.onStateChanged().listen((btState) {
+      if (btState == BluetoothState.STATE_OFF ||
+          btState == BluetoothState.STATE_ON) {
+        add(BluetoothEvent.initialize());
+      }
     });
 
     on<BluetoothEvent>(transformer: sequential(), (event, emit) async {
@@ -228,14 +237,14 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             },
             countdown: (countdown) async {
               final stageId = event.stageId;
-              await audioController.playCountdown(
+              await _audioController.playCountdown(
                 time: countdown,
                 stageId: stageId,
               );
             },
             voice: (time) async {
               final stageId = event.stageId;
-              await audioController.callParticipant(
+              await _audioController.callParticipant(
                 time: time,
                 stageId: stageId,
               );
@@ -253,7 +262,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               .bluetoothBackgroundConnection
               .sendMessage(event.message);
           if (isMessageSended) {
-            await database.addLog(
+            await _database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
               direction: LogSourceDirection.output,
@@ -270,13 +279,13 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     _messageSubscription?.cancel();
     // protocolSubscription.cancel();
     // settingsSubscription.cancel();
-    bluetoothProvider.dispose();
+    _bluetoothProvider.dispose();
     return super.close();
   }
 
   BluetoothMessage _parseBT(String message, DateTime timeStamp) {
     String parsedMessage = message;
-    database.addLog(
+    _database.addLog(
       level: LogLevel.information,
       source: LogSource.bluetooth,
       direction: LogSourceDirection.output,

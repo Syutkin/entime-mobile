@@ -3,14 +3,14 @@ part of 'bluetooth_bloc.dart';
 @freezed
 class BluetoothBlocState with _$BluetoothBlocState {
   const factory BluetoothBlocState.notInitialized() =
-      BluetoothNotInitializedState;
-  const factory BluetoothBlocState.notEnabled() = BluetoothNotEnabledState;
-  const factory BluetoothBlocState.connecting() = BluetoothConnectingState;
+      BluetoothNotInitialized;
+  const factory BluetoothBlocState.notEnabled() = BluetoothNotEnabled;
+  const factory BluetoothBlocState.connecting() = BluetoothConnecting;
   const factory BluetoothBlocState.connected({BluetoothMessage? message}) =
-      BluetoothConnectedState;
+      BluetoothConnected;
   const factory BluetoothBlocState.disconnecting() =
-      BluetoothDisconnectingState;
+      BluetoothDisconnecting;
   const factory BluetoothBlocState.disconnected({
     BluetoothDevice? bluetoothDevice,
-  }) = BluetoothDisconnectedState;
+  }) = BluetoothDisconnected;
 }

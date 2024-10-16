@@ -456,7 +456,7 @@ void main() {
         ),
         skip: 2,
         expect: () => <Matcher>[
-          isA<BluetoothConnectedState>().having(
+          isA<BluetoothConnected>().having(
             (state) => state.message,
             'BluetoothMessageFinish',
             isA<BluetoothMessageFinish>().having(
@@ -656,7 +656,7 @@ void main() {
         act: (bloc) => bloc.add(
             BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <Matcher>[
-          isA<BluetoothConnectedState>().having(
+          isA<BluetoothConnected>().having(
             (state) => state.message,
             'BluetoothMessageAutomaticStart',
             isA<BluetoothMessageAutomaticStart>().having(
@@ -735,7 +735,7 @@ void main() {
         act: (bloc) => bloc.add(
             BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <Matcher>[
-          isA<BluetoothConnectedState>().having(
+          isA<BluetoothConnected>().having(
             (state) => state.message,
             'BluetoothMessageFinish',
             isA<BluetoothMessageFinish>().having(
@@ -826,7 +826,7 @@ void main() {
         act: (bloc) => bloc.add(
             BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <Matcher>[
-          isA<BluetoothConnectedState>().having(
+          isA<BluetoothConnected>().having(
             (state) => state.message,
             'BluetoothMessageModuleSettings',
             isA<BluetoothMessageModuleSettings>().having(
