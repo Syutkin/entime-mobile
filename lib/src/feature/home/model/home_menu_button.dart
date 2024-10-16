@@ -5,4 +5,5 @@ enum HomeMenuButton {
   selectRace,
   bluetooth,
   countdown,
+  countdownPage,
 }

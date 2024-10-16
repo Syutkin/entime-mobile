@@ -86,9 +86,9 @@ class I18nSettings {
       );
 
   static String get language => Intl.message(
-    'Язык',
-    name: 'I18nSettings_language',
-  );
+        'Язык',
+        name: 'I18nSettings_language',
+      );
 
   static String get countdown => Intl.message(
         'Обратный отсчёт',
@@ -606,7 +606,7 @@ class I18nHome {
       );
 
   static String get addRacer => Intl.message(
-        'Добавить',
+        'Добавить участника',
         name: 'I18nHome_addRacer',
       );
 
@@ -623,6 +623,11 @@ class I18nHome {
   static String get countdown => Intl.message(
         'Обратный отсчёт',
         name: 'I18nHome_countdown',
+      );
+
+  static String get countdownPage => Intl.message(
+        'Страница с обратным отсчётом',
+        name: 'I18nHome_countdownPage',
       );
 
   static String get fab => Intl.message(

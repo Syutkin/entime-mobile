@@ -161,16 +161,6 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Bluetooth`
-  String get I18nSettings_bluetooth {
-    return Intl.message(
-      'Bluetooth',
-      name: 'I18nSettings_bluetooth',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Переподключение`
   String get I18nSettings_reconnect {
     return Intl.message(
@@ -1015,10 +1005,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Добавить`
+  /// `Добавить участника`
   String get I18nHome_addRacer {
     return Intl.message(
-      'Добавить',
+      'Добавить участника',
       name: 'I18nHome_addRacer',
       desc: '',
       args: [],
@@ -1050,6 +1040,16 @@ class GeneratedLocalization {
     return Intl.message(
       'Обратный отсчёт',
       name: 'I18nHome_countdown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Страница с обратным отсчётом`
+  String get I18nHome_countdownPage {
+    return Intl.message(
+      'Страница с обратным отсчётом',
+      name: 'I18nHome_countdownPage',
       desc: '',
       args: [],
     );

@@ -1,3 +1,4 @@
+import 'package:entime/src/feature/countdown/widget/countdown_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -354,8 +355,15 @@ class _MenuButton extends StatelessWidget {
                   ),
                 );
                 menuItems.add(PopupMenuDivider());
-              }
-              if (activeTab == AppTab.start) {
+                menuItems.add(
+                  PopupMenuItem(
+                    value: HomeMenuButton.countdownPage,
+                    child: ListTile(
+                      leading: Icon(MdiIcons.timer),
+                      title: Text(Localization.current.I18nHome_countdownPage),
+                    ),
+                  ),
+                );
                 menuItems.add(
                   PopupMenuItem(
                     value: HomeMenuButton.countdown,
@@ -453,6 +461,12 @@ class _MenuButton extends StatelessWidget {
                       ),
                     );
                     break;
+                  case HomeMenuButton.countdownPage:
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (context) => const CountdownPage(),
+                      ),
+                    );
                 }
               },
             );

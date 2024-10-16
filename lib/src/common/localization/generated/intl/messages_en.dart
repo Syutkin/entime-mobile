@@ -230,8 +230,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_autosubstitutionDelay":
             MessageLookupByLibrary.simpleMessage(
                 "Delay before autosubstitute new numbers"),
-        "I18nSettings_bluetooth":
-            MessageLookupByLibrary.simpleMessage("Bluetooth"),
         "I18nSettings_checkUpdateAtStartup":
             MessageLookupByLibrary.simpleMessage("Check updates at startup"),
         "I18nSettings_countdown":

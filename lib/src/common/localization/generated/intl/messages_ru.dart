@@ -125,10 +125,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nHelp_manual": MessageLookupByLibrary.simpleMessage("Руководство"),
         "I18nHelp_manualMd": MessageLookupByLibrary.simpleMessage(
             "# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку \"Start\", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку \"Finish\", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  "),
-        "I18nHome_addRacer": MessageLookupByLibrary.simpleMessage("Добавить"),
+        "I18nHome_addRacer":
+            MessageLookupByLibrary.simpleMessage("Добавить участника"),
         "I18nHome_bluetooth": MessageLookupByLibrary.simpleMessage("Bluetooth"),
         "I18nHome_countdown":
             MessageLookupByLibrary.simpleMessage("Обратный отсчёт"),
+        "I18nHome_countdownPage": MessageLookupByLibrary.simpleMessage(
+            "Страница с обратным отсчётом"),
         "I18nHome_equalStartTime": m1,
         "I18nHome_errorAddParticipant": m2,
         "I18nHome_fab": MessageLookupByLibrary.simpleMessage("FAB"),
@@ -288,8 +291,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_autosubstitutionDelay":
             MessageLookupByLibrary.simpleMessage(
                 "Задержка перед автоматическим подставлением новых номеров"),
-        "I18nSettings_bluetooth":
-            MessageLookupByLibrary.simpleMessage("Bluetooth"),
         "I18nSettings_brightness":
             MessageLookupByLibrary.simpleMessage("Светлая тема"),
         "I18nSettings_checkUpdateAtStartup":

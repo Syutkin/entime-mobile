@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-13T14:10:48.602235",
+  "@@last_modified": "2024-10-16T12:20:39.957143",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -58,11 +58,6 @@
   },
   "I18nSettings_general": "Основные",
   "@I18nSettings_general": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_bluetooth": "Bluetooth",
-  "@I18nSettings_bluetooth": {
     "type": "text",
     "placeholders": {}
   },
@@ -520,7 +515,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nHome_addRacer": "Добавить",
+  "I18nHome_addRacer": "Добавить участника",
   "@I18nHome_addRacer": {
     "type": "text",
     "placeholders": {}
@@ -537,6 +532,11 @@
   },
   "I18nHome_countdown": "Обратный отсчёт",
   "@I18nHome_countdown": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nHome_countdownPage": "Страница с обратным отсчётом",
+  "@I18nHome_countdownPage": {
     "type": "text",
     "placeholders": {}
   },
