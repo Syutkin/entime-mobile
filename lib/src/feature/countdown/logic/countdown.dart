@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../constants/date_time_formats.dart';
 import '../../../common/utils/extension_on_string.dart';
+import '../../../constants/date_time_formats.dart';
 import '../../database/drift/app_database.dart';
 import '../model/tick.dart';
 
@@ -14,7 +14,7 @@ class CountdownAtStart {
 
   BehaviorSubject<Tick> value = BehaviorSubject();
 
-  DateTime? _nextStartTime;
+  NextStartingParticipant? _nextStartingParticipant;
   bool _isFinished = false;
 
   void setStageId(int stageId) {
@@ -27,13 +27,13 @@ class CountdownAtStart {
     //subscribe to changes at starts table
     _db.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
       _isFinished = false;
-      _nextStartTime =
-          await _getNextStarttime(time: DateTime.now(), stageId: stageId);
+      _nextStartingParticipant = await _getNextStartingParticipant(
+          time: DateTime.now(), stageId: stageId);
     });
 
     _timer?.cancel();
-    _nextStartTime =
-        await _getNextStarttime(time: DateTime.now(), stageId: stageId);
+    _nextStartingParticipant = await _getNextStartingParticipant(
+        time: DateTime.now(), stageId: stageId);
     _isFinished = false;
     await _countdown(stageId: stageId);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -51,13 +51,15 @@ class CountdownAtStart {
 
   Future<void> _countdown({required int stageId}) async {
     final now = DateTime.now();
-    final nextStartTime = _nextStartTime;
-    if (nextStartTime != null) {
+    final nextStartingParticipant = _nextStartingParticipant;
+    if (nextStartingParticipant != null) {
+      var nextStartTime = nextStartingParticipant.startTime.toDateTime()!;
       if (nextStartTime.isAfter(now)) {
         value.add(
           Tick(
             text: _formatDuration(nextStartTime.difference(now)),
             nextStartTime: nextStartTime,
+            number: nextStartingParticipant.number,
           ),
         );
       } else {
@@ -66,16 +68,18 @@ class CountdownAtStart {
             Tick(
               text: 'GO',
               nextStartTime: nextStartTime,
+              number: nextStartingParticipant.number,
             ),
           );
         } else {
-          _nextStartTime = null;
+          _nextStartingParticipant = null;
         }
       }
     } else {
       if (!_isFinished) {
-        _nextStartTime = await _getNextStarttime(time: now, stageId: stageId);
-        if (_nextStartTime == null) {
+        _nextStartingParticipant =
+            await _getNextStartingParticipant(time: now, stageId: stageId);
+        if (_nextStartingParticipant == null) {
           _isFinished = true;
           value.add(const Tick(text: 'Fin'));
         }
@@ -83,18 +87,18 @@ class CountdownAtStart {
     }
   }
 
-  Future<DateTime?> _getNextStarttime({
+  Future<NextStartingParticipant?> _getNextStartingParticipant({
     required DateTime time,
     required int stageId,
   }) async {
-    final res = await _db
+    final nextStart = await _db
         .getNextStartingParticipants(
           stageId: stageId,
           time: DateFormat(shortTimeFormat).format(time),
         )
         .get();
-
-    return res.isNotEmpty ? res.first.startTime.toDateTime() : null;
+    // .startTime.toDateTime()
+    return nextStart.isNotEmpty ? nextStart.first : null;
   }
 
   String _formatDuration(Duration duration) {

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,35 +19,37 @@ class CountdownPage extends StatelessWidget {
           }, orElse: () {
             return '';
           });
-          return Stack(
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  width: 200,
+          var number = state.maybeMap(working: (state) {
+            return state.number;
+          }, orElse: () {
+            return null;
+          });
+          return Center(
+            child: Column(
+              children: [
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 50,
                   child: FittedBox(
                     child: Padding(
                       padding: const EdgeInsets.all(8),
-                      child: Text(
-                        '25',
-                      ),
+                      // child: Text('${number ?? ""}'),
+                      child: Text('$number'),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: FittedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text(
-                      text,
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 50,
+                  child: FittedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(text),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         }),
       );

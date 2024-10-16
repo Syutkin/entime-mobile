@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CountdownEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String text, DateTime? nextStartTime) tick,
+    required TResult Function(Tick tick) tick,
     required TResult Function(int stageId) start,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String text, DateTime? nextStartTime)? tick,
+    TResult? Function(Tick tick)? tick,
     TResult? Function(int stageId)? start,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String text, DateTime? nextStartTime)? tick,
+    TResult Function(Tick tick)? tick,
     TResult Function(int stageId)? start,
     required TResult orElse(),
   }) =>
@@ -83,7 +83,7 @@ abstract class _$$TickEventImplCopyWith<$Res> {
           _$TickEventImpl value, $Res Function(_$TickEventImpl) then) =
       __$$TickEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String text, DateTime? nextStartTime});
+  $Res call({Tick tick});
 }
 
 /// @nodoc
@@ -99,18 +99,13 @@ class __$$TickEventImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
-    Object? nextStartTime = freezed,
+    Object? tick = null,
   }) {
     return _then(_$TickEventImpl(
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      nextStartTime: freezed == nextStartTime
-          ? _value.nextStartTime
-          : nextStartTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      null == tick
+          ? _value.tick
+          : tick // ignore: cast_nullable_to_non_nullable
+              as Tick,
     ));
   }
 }
@@ -118,16 +113,14 @@ class __$$TickEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TickEventImpl implements _TickEvent {
-  const _$TickEventImpl({required this.text, this.nextStartTime});
+  const _$TickEventImpl(this.tick);
 
   @override
-  final String text;
-  @override
-  final DateTime? nextStartTime;
+  final Tick tick;
 
   @override
   String toString() {
-    return 'CountdownEvent.tick(text: $text, nextStartTime: $nextStartTime)';
+    return 'CountdownEvent.tick(tick: $tick)';
   }
 
   @override
@@ -135,13 +128,11 @@ class _$TickEventImpl implements _TickEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TickEventImpl &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.nextStartTime, nextStartTime) ||
-                other.nextStartTime == nextStartTime));
+            (identical(other.tick, tick) || other.tick == tick));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, text, nextStartTime);
+  int get hashCode => Object.hash(runtimeType, tick);
 
   /// Create a copy of CountdownEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -154,30 +145,30 @@ class _$TickEventImpl implements _TickEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String text, DateTime? nextStartTime) tick,
+    required TResult Function(Tick tick) tick,
     required TResult Function(int stageId) start,
   }) {
-    return tick(text, nextStartTime);
+    return tick(this.tick);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String text, DateTime? nextStartTime)? tick,
+    TResult? Function(Tick tick)? tick,
     TResult? Function(int stageId)? start,
   }) {
-    return tick?.call(text, nextStartTime);
+    return tick?.call(this.tick);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String text, DateTime? nextStartTime)? tick,
+    TResult Function(Tick tick)? tick,
     TResult Function(int stageId)? start,
     required TResult orElse(),
   }) {
     if (tick != null) {
-      return tick(text, nextStartTime);
+      return tick(this.tick);
     }
     return orElse();
   }
@@ -215,12 +206,9 @@ class _$TickEventImpl implements _TickEvent {
 }
 
 abstract class _TickEvent implements CountdownEvent {
-  const factory _TickEvent(
-      {required final String text,
-      final DateTime? nextStartTime}) = _$TickEventImpl;
+  const factory _TickEvent(final Tick tick) = _$TickEventImpl;
 
-  String get text;
-  DateTime? get nextStartTime;
+  Tick get tick;
 
   /// Create a copy of CountdownEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -297,7 +285,7 @@ class _$TickInitImpl implements _TickInit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String text, DateTime? nextStartTime) tick,
+    required TResult Function(Tick tick) tick,
     required TResult Function(int stageId) start,
   }) {
     return start(stageId);
@@ -306,7 +294,7 @@ class _$TickInitImpl implements _TickInit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String text, DateTime? nextStartTime)? tick,
+    TResult? Function(Tick tick)? tick,
     TResult? Function(int stageId)? start,
   }) {
     return start?.call(stageId);
@@ -315,7 +303,7 @@ class _$TickInitImpl implements _TickInit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String text, DateTime? nextStartTime)? tick,
+    TResult Function(Tick tick)? tick,
     TResult Function(int stageId)? start,
     required TResult orElse(),
   }) {
@@ -374,19 +362,20 @@ mixin _$CountdownState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String text, String? nextStartTime) working,
+    required TResult Function(String text, String? nextStartTime, int? number)
+        working,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String text, String? nextStartTime)? working,
+    TResult? Function(String text, String? nextStartTime, int? number)? working,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String text, String? nextStartTime)? working,
+    TResult Function(String text, String? nextStartTime, int? number)? working,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -476,7 +465,8 @@ class _$CountdownInitialStateImpl implements _CountdownInitialState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String text, String? nextStartTime) working,
+    required TResult Function(String text, String? nextStartTime, int? number)
+        working,
   }) {
     return initial();
   }
@@ -485,7 +475,7 @@ class _$CountdownInitialStateImpl implements _CountdownInitialState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String text, String? nextStartTime)? working,
+    TResult? Function(String text, String? nextStartTime, int? number)? working,
   }) {
     return initial?.call();
   }
@@ -494,7 +484,7 @@ class _$CountdownInitialStateImpl implements _CountdownInitialState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String text, String? nextStartTime)? working,
+    TResult Function(String text, String? nextStartTime, int? number)? working,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -546,7 +536,7 @@ abstract class _$$CountdownWorkingStateImplCopyWith<$Res> {
           $Res Function(_$CountdownWorkingStateImpl) then) =
       __$$CountdownWorkingStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String text, String? nextStartTime});
+  $Res call({String text, String? nextStartTime, int? number});
 }
 
 /// @nodoc
@@ -564,6 +554,7 @@ class __$$CountdownWorkingStateImplCopyWithImpl<$Res>
   $Res call({
     Object? text = null,
     Object? nextStartTime = freezed,
+    Object? number = freezed,
   }) {
     return _then(_$CountdownWorkingStateImpl(
       text: null == text
@@ -574,6 +565,10 @@ class __$$CountdownWorkingStateImplCopyWithImpl<$Res>
           ? _value.nextStartTime
           : nextStartTime // ignore: cast_nullable_to_non_nullable
               as String?,
+      number: freezed == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -581,16 +576,19 @@ class __$$CountdownWorkingStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CountdownWorkingStateImpl implements _CountdownWorkingState {
-  const _$CountdownWorkingStateImpl({required this.text, this.nextStartTime});
+  const _$CountdownWorkingStateImpl(
+      {required this.text, this.nextStartTime, this.number});
 
   @override
   final String text;
   @override
   final String? nextStartTime;
+  @override
+  final int? number;
 
   @override
   String toString() {
-    return 'CountdownState.working(text: $text, nextStartTime: $nextStartTime)';
+    return 'CountdownState.working(text: $text, nextStartTime: $nextStartTime, number: $number)';
   }
 
   @override
@@ -600,11 +598,12 @@ class _$CountdownWorkingStateImpl implements _CountdownWorkingState {
             other is _$CountdownWorkingStateImpl &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.nextStartTime, nextStartTime) ||
-                other.nextStartTime == nextStartTime));
+                other.nextStartTime == nextStartTime) &&
+            (identical(other.number, number) || other.number == number));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, text, nextStartTime);
+  int get hashCode => Object.hash(runtimeType, text, nextStartTime, number);
 
   /// Create a copy of CountdownState
   /// with the given fields replaced by the non-null parameter values.
@@ -619,29 +618,30 @@ class _$CountdownWorkingStateImpl implements _CountdownWorkingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String text, String? nextStartTime) working,
+    required TResult Function(String text, String? nextStartTime, int? number)
+        working,
   }) {
-    return working(text, nextStartTime);
+    return working(text, nextStartTime, number);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String text, String? nextStartTime)? working,
+    TResult? Function(String text, String? nextStartTime, int? number)? working,
   }) {
-    return working?.call(text, nextStartTime);
+    return working?.call(text, nextStartTime, number);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String text, String? nextStartTime)? working,
+    TResult Function(String text, String? nextStartTime, int? number)? working,
     required TResult orElse(),
   }) {
     if (working != null) {
-      return working(text, nextStartTime);
+      return working(text, nextStartTime, number);
     }
     return orElse();
   }
@@ -681,10 +681,12 @@ class _$CountdownWorkingStateImpl implements _CountdownWorkingState {
 abstract class _CountdownWorkingState implements CountdownState {
   const factory _CountdownWorkingState(
       {required final String text,
-      final String? nextStartTime}) = _$CountdownWorkingStateImpl;
+      final String? nextStartTime,
+      final int? number}) = _$CountdownWorkingStateImpl;
 
   String get text;
   String? get nextStartTime;
+  int? get number;
 
   /// Create a copy of CountdownState
   /// with the given fields replaced by the non-null parameter values.

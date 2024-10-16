@@ -7,5 +7,6 @@ class CountdownState with _$CountdownState {
   const factory CountdownState.working({
     required String text,
     String? nextStartTime,
+    int? number,
   }) = _CountdownWorkingState;
 }

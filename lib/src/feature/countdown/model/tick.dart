@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 class Tick {
   final String text;
   final DateTime? nextStartTime;
+  final int? number;
 
-  const Tick({required this.text, this.nextStartTime});
+  const Tick({required this.text, this.nextStartTime, this.number});
 }

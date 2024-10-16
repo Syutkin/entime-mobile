@@ -212,7 +212,7 @@ class _StartListPage extends State<StartListPage> {
 
   String? _activeStartTime(CountdownState countdownState) =>
       countdownState.whenOrNull(
-        working: (text, nextStartTime) => nextStartTime ?? '',
+        working: (text, nextStartTime, number) => nextStartTime ?? '',
       );
 
   String? _countdownFromState(CountdownState countdownState) =>

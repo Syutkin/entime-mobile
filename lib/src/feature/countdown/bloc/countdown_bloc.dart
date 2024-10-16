@@ -5,11 +5,10 @@ import 'package:intl/intl.dart';
 
 import '../../../constants/date_time_formats.dart';
 import '../logic/countdown.dart';
+import '../model/tick.dart';
 
 part 'countdown_bloc.freezed.dart';
-
 part 'countdown_event.dart';
-
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
@@ -27,10 +26,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     }
     _countdown.value.listen((value) {
       add(
-        CountdownEvent.tick(
-          text: value.text,
-          nextStartTime: value.nextStartTime,
-        ),
+        CountdownEvent.tick(value),
       );
     });
 
@@ -43,15 +39,18 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
           // await _countdown(stageId: stageId);
         },
         tick: (event) {
-          final nextStartTime = event.nextStartTime;
+          final nextStartTime = event.tick.nextStartTime;
           if (nextStartTime == null) {
-            emit(CountdownState.working(text: event.text));
+            emit(CountdownState.working(
+              text: event.tick.text,
+            ));
           } else {
             emit(
               CountdownState.working(
-                text: event.text,
+                text: event.tick.text,
                 nextStartTime:
                     DateFormat(shortTimeFormat).format(nextStartTime),
+                number: event.tick.number,
               ),
             );
           }
