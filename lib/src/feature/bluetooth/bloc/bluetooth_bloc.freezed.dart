@@ -20,7 +20,6 @@ mixin _$BluetoothEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -36,7 +35,6 @@ mixin _$BluetoothEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -51,7 +49,6 @@ mixin _$BluetoothEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -67,7 +64,6 @@ mixin _$BluetoothEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -81,7 +77,6 @@ mixin _$BluetoothEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -95,7 +90,6 @@ mixin _$BluetoothEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,
@@ -173,7 +167,6 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -192,7 +185,6 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -210,7 +202,6 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -232,7 +223,6 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -249,7 +239,6 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -266,7 +255,6 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,
@@ -330,7 +318,6 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -349,7 +336,6 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -367,7 +353,6 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -389,7 +374,6 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -406,7 +390,6 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -423,7 +406,6 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,
@@ -442,163 +424,6 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
 
 abstract class _EnableBluetooth implements BluetoothEvent {
   const factory _EnableBluetooth() = _$EnableBluetoothImpl;
-}
-
-/// @nodoc
-abstract class _$$DisableBluetoothImplCopyWith<$Res> {
-  factory _$$DisableBluetoothImplCopyWith(_$DisableBluetoothImpl value,
-          $Res Function(_$DisableBluetoothImpl) then) =
-      __$$DisableBluetoothImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$DisableBluetoothImplCopyWithImpl<$Res>
-    extends _$BluetoothEventCopyWithImpl<$Res, _$DisableBluetoothImpl>
-    implements _$$DisableBluetoothImplCopyWith<$Res> {
-  __$$DisableBluetoothImplCopyWithImpl(_$DisableBluetoothImpl _value,
-      $Res Function(_$DisableBluetoothImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of BluetoothEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$DisableBluetoothImpl implements _DisableBluetooth {
-  const _$DisableBluetoothImpl();
-
-  @override
-  String toString() {
-    return 'BluetoothEvent.disable()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DisableBluetoothImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function() enable,
-    required TResult Function() disable,
-    required TResult Function(
-            BluetoothDeviceWithAvailability? deviceWithAvailability)
-        selectDevice,
-    required TResult Function() connected,
-    required TResult Function(BluetoothDevice? selectedDevice) connect,
-    required TResult Function() disconnect,
-    required TResult Function() disconnected,
-    required TResult Function(String message, int stageId) messageReceived,
-    required TResult Function(String message) sendMessage,
-  }) {
-    return disable();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function()? enable,
-    TResult? Function()? disable,
-    TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-        selectDevice,
-    TResult? Function()? connected,
-    TResult? Function(BluetoothDevice? selectedDevice)? connect,
-    TResult? Function()? disconnect,
-    TResult? Function()? disconnected,
-    TResult? Function(String message, int stageId)? messageReceived,
-    TResult? Function(String message)? sendMessage,
-  }) {
-    return disable?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function()? enable,
-    TResult Function()? disable,
-    TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-        selectDevice,
-    TResult Function()? connected,
-    TResult Function(BluetoothDevice? selectedDevice)? connect,
-    TResult Function()? disconnect,
-    TResult Function()? disconnected,
-    TResult Function(String message, int stageId)? messageReceived,
-    TResult Function(String message)? sendMessage,
-    required TResult orElse(),
-  }) {
-    if (disable != null) {
-      return disable();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeBluetooth value) initialize,
-    required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
-    required TResult Function(_SelectDevice value) selectDevice,
-    required TResult Function(_Connected value) connected,
-    required TResult Function(_Connect value) connect,
-    required TResult Function(_Disconnect value) disconnect,
-    required TResult Function(_Disconnected value) disconnected,
-    required TResult Function(_MessageReceived value) messageReceived,
-    required TResult Function(_SendMessage value) sendMessage,
-  }) {
-    return disable(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeBluetooth value)? initialize,
-    TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
-    TResult? Function(_SelectDevice value)? selectDevice,
-    TResult? Function(_Connected value)? connected,
-    TResult? Function(_Connect value)? connect,
-    TResult? Function(_Disconnect value)? disconnect,
-    TResult? Function(_Disconnected value)? disconnected,
-    TResult? Function(_MessageReceived value)? messageReceived,
-    TResult? Function(_SendMessage value)? sendMessage,
-  }) {
-    return disable?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeBluetooth value)? initialize,
-    TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
-    TResult Function(_SelectDevice value)? selectDevice,
-    TResult Function(_Connected value)? connected,
-    TResult Function(_Connect value)? connect,
-    TResult Function(_Disconnect value)? disconnect,
-    TResult Function(_Disconnected value)? disconnected,
-    TResult Function(_MessageReceived value)? messageReceived,
-    TResult Function(_SendMessage value)? sendMessage,
-    required TResult orElse(),
-  }) {
-    if (disable != null) {
-      return disable(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DisableBluetooth implements BluetoothEvent {
-  const factory _DisableBluetooth() = _$DisableBluetoothImpl;
 }
 
 /// @nodoc
@@ -672,7 +497,6 @@ class _$SelectDeviceImpl implements _SelectDevice {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -691,7 +515,6 @@ class _$SelectDeviceImpl implements _SelectDevice {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -709,7 +532,6 @@ class _$SelectDeviceImpl implements _SelectDevice {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -731,7 +553,6 @@ class _$SelectDeviceImpl implements _SelectDevice {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -748,7 +569,6 @@ class _$SelectDeviceImpl implements _SelectDevice {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -765,7 +585,6 @@ class _$SelectDeviceImpl implements _SelectDevice {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,
@@ -839,7 +658,6 @@ class _$ConnectedImpl implements _Connected {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -858,7 +676,6 @@ class _$ConnectedImpl implements _Connected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -876,7 +693,6 @@ class _$ConnectedImpl implements _Connected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -898,7 +714,6 @@ class _$ConnectedImpl implements _Connected {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -915,7 +730,6 @@ class _$ConnectedImpl implements _Connected {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -932,7 +746,6 @@ class _$ConnectedImpl implements _Connected {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,
@@ -1024,7 +837,6 @@ class _$ConnectImpl implements _Connect {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -1043,7 +855,6 @@ class _$ConnectImpl implements _Connect {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -1061,7 +872,6 @@ class _$ConnectImpl implements _Connect {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -1083,7 +893,6 @@ class _$ConnectImpl implements _Connect {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -1100,7 +909,6 @@ class _$ConnectImpl implements _Connect {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -1117,7 +925,6 @@ class _$ConnectImpl implements _Connect {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,
@@ -1190,7 +997,6 @@ class _$DisconnectImpl implements _Disconnect {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -1209,7 +1015,6 @@ class _$DisconnectImpl implements _Disconnect {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -1227,7 +1032,6 @@ class _$DisconnectImpl implements _Disconnect {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -1249,7 +1053,6 @@ class _$DisconnectImpl implements _Disconnect {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -1266,7 +1069,6 @@ class _$DisconnectImpl implements _Disconnect {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -1283,7 +1085,6 @@ class _$DisconnectImpl implements _Disconnect {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,
@@ -1347,7 +1148,6 @@ class _$DisconnectedImpl implements _Disconnected {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -1366,7 +1166,6 @@ class _$DisconnectedImpl implements _Disconnected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -1384,7 +1183,6 @@ class _$DisconnectedImpl implements _Disconnected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -1406,7 +1204,6 @@ class _$DisconnectedImpl implements _Disconnected {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -1423,7 +1220,6 @@ class _$DisconnectedImpl implements _Disconnected {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -1440,7 +1236,6 @@ class _$DisconnectedImpl implements _Disconnected {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,
@@ -1540,7 +1335,6 @@ class _$MessageReceivedImpl implements _MessageReceived {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -1559,7 +1353,6 @@ class _$MessageReceivedImpl implements _MessageReceived {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -1577,7 +1370,6 @@ class _$MessageReceivedImpl implements _MessageReceived {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -1599,7 +1391,6 @@ class _$MessageReceivedImpl implements _MessageReceived {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -1616,7 +1407,6 @@ class _$MessageReceivedImpl implements _MessageReceived {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -1633,7 +1423,6 @@ class _$MessageReceivedImpl implements _MessageReceived {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,
@@ -1735,7 +1524,6 @@ class _$SendMessageImpl implements _SendMessage {
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
     required TResult Function() enable,
-    required TResult Function() disable,
     required TResult Function(
             BluetoothDeviceWithAvailability? deviceWithAvailability)
         selectDevice,
@@ -1754,7 +1542,6 @@ class _$SendMessageImpl implements _SendMessage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
-    TResult? Function()? disable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult? Function()? connected,
@@ -1772,7 +1559,6 @@ class _$SendMessageImpl implements _SendMessage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
-    TResult Function()? disable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
         selectDevice,
     TResult Function()? connected,
@@ -1794,7 +1580,6 @@ class _$SendMessageImpl implements _SendMessage {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
     required TResult Function(_EnableBluetooth value) enable,
-    required TResult Function(_DisableBluetooth value) disable,
     required TResult Function(_SelectDevice value) selectDevice,
     required TResult Function(_Connected value) connected,
     required TResult Function(_Connect value) connect,
@@ -1811,7 +1596,6 @@ class _$SendMessageImpl implements _SendMessage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
     TResult? Function(_EnableBluetooth value)? enable,
-    TResult? Function(_DisableBluetooth value)? disable,
     TResult? Function(_SelectDevice value)? selectDevice,
     TResult? Function(_Connected value)? connected,
     TResult? Function(_Connect value)? connect,
@@ -1828,7 +1612,6 @@ class _$SendMessageImpl implements _SendMessage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
     TResult Function(_EnableBluetooth value)? enable,
-    TResult Function(_DisableBluetooth value)? disable,
     TResult Function(_SelectDevice value)? selectDevice,
     TResult Function(_Connected value)? connected,
     TResult Function(_Connect value)? connect,

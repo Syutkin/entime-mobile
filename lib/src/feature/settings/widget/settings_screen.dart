@@ -37,19 +37,6 @@ class _SettingsList extends StatelessWidget {
               title: Text(Localization.current.I18nSettings_general),
               tiles: [
                 SettingsTile.switchTile(
-                  title: Text(Localization.current.I18nSettings_bluetooth),
-                  initialValue: bluetoothState is! BluetoothNotEnabledState,
-                  onToggle: (value) {
-                    value
-                        ? context
-                            .read<BluetoothBloc>()
-                            .add(const BluetoothEvent.enable())
-                        : context
-                            .read<BluetoothBloc>()
-                            .add(const BluetoothEvent.disable());
-                  },
-                ),
-                SettingsTile.switchTile(
                   title: Text(Localization.current.I18nSettings_reconnect),
                   description: Text(
                     Localization.current.I18nSettings_reconnectDescription,

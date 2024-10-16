@@ -6,8 +6,6 @@ class BluetoothEvent with _$BluetoothEvent {
 
   const factory BluetoothEvent.enable() = _EnableBluetooth;
 
-  const factory BluetoothEvent.disable() = _DisableBluetooth;
-
   const factory BluetoothEvent.selectDevice({
     BluetoothDeviceWithAvailability? deviceWithAvailability,
   }) = _SelectDevice;

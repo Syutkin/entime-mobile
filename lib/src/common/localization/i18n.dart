@@ -65,11 +65,6 @@ class I18nSettings {
         name: 'I18nSettings_general',
       );
 
-  static String get bluetooth => Intl.message(
-        'Bluetooth',
-        name: 'I18nSettings_bluetooth',
-      );
-
   static String get reconnect => Intl.message(
         'Переподключение',
         name: 'I18nSettings_reconnect',

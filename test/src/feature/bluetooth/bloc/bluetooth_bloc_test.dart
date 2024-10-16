@@ -231,31 +231,6 @@ void main() {
         expect: () => [const BluetoothBlocState.disconnected()],
       );
     });
-    group('on disable:', () {
-      blocTest<BluetoothBloc, BluetoothBlocState>(
-        'successfully disabled',
-        setUp: () {
-          when(
-            () => flutterBluetoothSerial.isEnabled,
-          ).thenAnswer(
-            (_) => Future.value(false),
-          );
-          when(
-            () => flutterBluetoothSerial.requestDisable(),
-          ).thenAnswer(
-            (_) => Future.value(true),
-          );
-        },
-        build: () => BluetoothBloc(
-          audioController: audioController,
-          bluetoothProvider: bluetoothProvider,
-          settingsProvider: settingsProvider,
-          database: database,
-        ),
-        act: (bloc) => bloc.add(const BluetoothEvent.disable()),
-        expect: () => [const BluetoothBlocState.notEnabled()],
-      );
-    });
 
     group('on selectDevice:', () {
       blocTest<BluetoothBloc, BluetoothBlocState>(

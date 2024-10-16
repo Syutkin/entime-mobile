@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-dev+149',
+    representation: r'0.5.0-dev+153',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-dev+149',
+    canonical: r'0.5.0-dev+153',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,19 +118,19 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'149'],
+    build: <String>[r'153'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2024,
     10,
-    13,
-    8,
-    15,
-    17,
-    423,
-    822,
+    16,
+    6,
+    46,
+    41,
+    185,
+    170,
   );
 
   /// Name
@@ -416,7 +416,7 @@ sealed class Pubspec {
     'bot_toast': r'^4.1.3',
     'csv': r'^6.0.0',
     'device_info_plus': r'^11.0.0',
-    'drift': r'^2.20.3',
+    'drift': r'^2.21.0',
     'equatable': r'^2.0.5',
     'file_picker': r'^8.1.2',
     'filesize': r'^2.0.1',
@@ -453,7 +453,7 @@ sealed class Pubspec {
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^9.1.7',
     'build_runner': r'^2.4.13',
-    'drift_dev': r'^2.20.3',
+    'drift_dev': r'^2.21.0',
     'flutter_lints': r'^5.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
@@ -547,5 +547,12 @@ sealed class Pubspec {
       'output_dir': r'lib/src/common/localization/generated',
       'use_deferred_loading': false,
     },
+    'cider': <String, Object>{
+      'link_template': <String, Object>{
+        'tag': r'https://github.com/Syutkin/entime-mobile/releases/tag/%tag%',
+        'diff': r'https://github.com/Syutkin/entime-mobile/compare/%from%...%to%',
+      },
+    },
   };
+
 }

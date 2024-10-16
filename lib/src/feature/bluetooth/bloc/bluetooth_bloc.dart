@@ -70,10 +70,6 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           await bluetoothProvider.flutterBluetoothSerial.requestEnable();
           add(const BluetoothEvent.initialize());
         },
-        disable: (event) async {
-          await bluetoothProvider.flutterBluetoothSerial.requestDisable();
-          add(const BluetoothEvent.initialize());
-        },
         selectDevice: (event) async {
           _reconnectActive = false;
           final device = event.deviceWithAvailability;
