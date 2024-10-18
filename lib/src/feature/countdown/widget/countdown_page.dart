@@ -24,12 +24,24 @@ class CountdownPage extends StatelessWidget {
           }, orElse: () {
             return null;
           });
+
           return Center(
-            child: OrientationBuilder(builder: (context, orientation) {
-              return orientation == Orientation.portrait
-                  ? Column(children: _items(number, text))
-                  : Row(children: _items(number, text));
-            }),
+            child: number == null
+                ? ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(
+                        width: double.infinity, height: double.infinity),
+                    child: FittedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Text(text),
+                      ),
+                    ),
+                  )
+                : OrientationBuilder(builder: (context, orientation) {
+                    return orientation == Orientation.portrait
+                        ? Column(children: _items(number, text))
+                        : Row(children: _items(number, text));
+                  }),
           );
         }),
       );
