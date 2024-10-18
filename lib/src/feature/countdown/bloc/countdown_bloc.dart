@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
 import '../../../constants/date_time_formats.dart';
+import '../../audio/audio.dart';
 import '../logic/countdown.dart';
 import '../model/tick.dart';
 
@@ -12,13 +13,16 @@ part 'countdown_event.dart';
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
+  final IAudioController _audioController;
   final CountdownAtStart _countdown;
   final int _stageId;
 
   CountdownBloc({
+    required IAudioController audioController,
     required CountdownAtStart countdown,
     required int stageId,
-  })  : _countdown = countdown,
+  })  : _audioController = audioController,
+        _countdown = countdown,
         _stageId = stageId,
         super(const CountdownState.initial()) {
     if (stageId > 0) {
@@ -52,6 +56,9 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
               ),
             );
           }
+        },
+        beep: (_CountdownBeep event) {
+          _audioController.beep();
         },
       );
     });

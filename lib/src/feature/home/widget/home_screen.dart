@@ -7,6 +7,7 @@ import 'package:nested/nested.dart';
 import '../../../common/localization/localization.dart';
 import '../../../constants/pubspec.yaml.g.dart';
 import '../../bluetooth/bluetooth.dart';
+import '../../countdown/bloc/countdown_bloc.dart';
 import '../../database/bloc/database_bloc.dart';
 import '../../database/model/filter_finish.dart';
 import '../../database/widget/races_list_page.dart';
@@ -31,6 +32,7 @@ class HomeScreen extends StatelessWidget {
           _listenToBluetooth(),
           // Следим за повторной установкой стартового времени для участника
           _listenToNewStartTime(),
+          _listenToCountdownBeep(),
         ],
         child: BlocBuilder<TabBloc, AppTab>(
           builder: (context, activeTab) => DefaultTabController(
@@ -217,6 +219,19 @@ class HomeScreen extends StatelessWidget {
           }
         },
       );
+
+  SingleChildWidget _listenToCountdownBeep() {
+    return BlocListener<CountdownBloc, CountdownState>(
+      listener: (context, state) {
+        state.whenOrNull(working: (text, nextStartTime, number) {
+          // за три секунды до старта запускаем "бип"
+          if (text == '3') {
+            context.read<CountdownBloc>().add(CountdownEvent.beep());
+          }
+        });
+      },
+    );
+  }
 }
 
 class _TextTitle extends StatelessWidget {

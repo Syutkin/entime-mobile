@@ -2,6 +2,7 @@ part of 'countdown_bloc.dart';
 
 @freezed
 class CountdownEvent with _$CountdownEvent {
-  const factory CountdownEvent.tick(Tick tick) = _TickEvent;
-  const factory CountdownEvent.start({required int stageId}) = _TickInit;
+  const factory CountdownEvent.tick(Tick tick) = _CountdownTick;
+  const factory CountdownEvent.start({required int stageId}) = _CountdownStart;
+  const factory CountdownEvent.beep() = _CountdownBeep;
 }

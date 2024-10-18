@@ -146,6 +146,7 @@ class EntimeApp extends StatelessWidget {
           ),
           BlocProvider<CountdownBloc>(
             create: (context) => CountdownBloc(
+              audioController: audioController,
               countdown: countdown,
               stageId: settingsProvider.settings.stageId,
             ),
