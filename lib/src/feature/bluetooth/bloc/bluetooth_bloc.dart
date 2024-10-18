@@ -236,11 +236,15 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               emit(BluetoothBlocState.connected(message: message));
             },
             countdown: (countdown) async {
-              final stageId = event.stageId;
-              await _audioController.playCountdown(
-                time: countdown,
-                stageId: stageId,
-              );
+              // Запускаем звуковой обратный отсчёт только если не используем
+              // время из приложения
+              if (!_settingsProvider.settings.beepFromApp) {
+                final stageId = event.stageId;
+                await _audioController.playCountdown(
+                  time: countdown,
+                  stageId: stageId,
+                );
+              }
             },
             voice: (time) async {
               final stageId = event.stageId;

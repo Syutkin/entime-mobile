@@ -22,7 +22,10 @@ mixin _$AppSettings {
 // звук
   bool get sound => throw _privateConstructorUsedError; // вкл/выкл
 // звук обратного отсчёта
-  bool get beep => throw _privateConstructorUsedError; // голосовые сообщения
+  bool get beep =>
+      throw _privateConstructorUsedError; // звуком обратного отсчёта управляет приложение
+  bool get beepFromApp =>
+      throw _privateConstructorUsedError; // голосовые сообщения
   bool get voice => throw _privateConstructorUsedError;
   bool get voiceName => throw _privateConstructorUsedError;
   double get volume => throw _privateConstructorUsedError; // громкость
@@ -82,6 +85,7 @@ mixin _$AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -121,6 +125,7 @@ mixin _$AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -164,6 +169,7 @@ mixin _$AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -203,6 +209,7 @@ mixin _$AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -246,6 +253,7 @@ mixin _$AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -285,6 +293,7 @@ mixin _$AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -360,6 +369,7 @@ abstract class $AppSettingsCopyWith<$Res> {
       {String language,
       bool sound,
       bool beep,
+      bool beepFromApp,
       bool voice,
       bool voiceName,
       double volume,
@@ -414,6 +424,7 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? language = null,
     Object? sound = null,
     Object? beep = null,
+    Object? beepFromApp = null,
     Object? voice = null,
     Object? voiceName = null,
     Object? volume = null,
@@ -461,6 +472,10 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
       beep: null == beep
           ? _value.beep
           : beep // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beepFromApp: null == beepFromApp
+          ? _value.beepFromApp
+          : beepFromApp // ignore: cast_nullable_to_non_nullable
               as bool,
       voice: null == voice
           ? _value.voice
@@ -614,6 +629,7 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       {String language,
       bool sound,
       bool beep,
+      bool beepFromApp,
       bool voice,
       bool voiceName,
       double volume,
@@ -666,6 +682,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? language = null,
     Object? sound = null,
     Object? beep = null,
+    Object? beepFromApp = null,
     Object? voice = null,
     Object? voiceName = null,
     Object? volume = null,
@@ -713,6 +730,10 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
       beep: null == beep
           ? _value.beep
           : beep // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beepFromApp: null == beepFromApp
+          ? _value.beepFromApp
+          : beepFromApp // ignore: cast_nullable_to_non_nullable
               as bool,
       voice: null == voice
           ? _value.voice
@@ -861,6 +882,7 @@ class _$AppSettingsImpl implements _AppSettings {
       {required this.language,
       required this.sound,
       required this.beep,
+      required this.beepFromApp,
       required this.voice,
       required this.voiceName,
       required this.volume,
@@ -907,6 +929,9 @@ class _$AppSettingsImpl implements _AppSettings {
 // звук обратного отсчёта
   @override
   final bool beep;
+// звуком обратного отсчёта управляет приложение
+  @override
+  final bool beepFromApp;
 // голосовые сообщения
   @override
   final bool voice;
@@ -1002,7 +1027,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(language: $language, sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
+    return 'AppSettings(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
   }
 
   @override
@@ -1014,6 +1039,8 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.language == language) &&
             (identical(other.sound, sound) || other.sound == sound) &&
             (identical(other.beep, beep) || other.beep == beep) &&
+            (identical(other.beepFromApp, beepFromApp) ||
+                other.beepFromApp == beepFromApp) &&
             (identical(other.voice, voice) || other.voice == voice) &&
             (identical(other.voiceName, voiceName) ||
                 other.voiceName == voiceName) &&
@@ -1086,6 +1113,7 @@ class _$AppSettingsImpl implements _AppSettings {
         language,
         sound,
         beep,
+        beepFromApp,
         voice,
         voiceName,
         volume,
@@ -1137,6 +1165,7 @@ class _$AppSettingsImpl implements _AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -1176,6 +1205,7 @@ class _$AppSettingsImpl implements _AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -1216,6 +1246,7 @@ class _$AppSettingsImpl implements _AppSettings {
         language,
         sound,
         beep,
+        beepFromApp,
         voice,
         voiceName,
         volume,
@@ -1259,6 +1290,7 @@ class _$AppSettingsImpl implements _AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -1298,6 +1330,7 @@ class _$AppSettingsImpl implements _AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -1338,6 +1371,7 @@ class _$AppSettingsImpl implements _AppSettings {
         language,
         sound,
         beep,
+        beepFromApp,
         voice,
         voiceName,
         volume,
@@ -1381,6 +1415,7 @@ class _$AppSettingsImpl implements _AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -1420,6 +1455,7 @@ class _$AppSettingsImpl implements _AppSettings {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -1462,6 +1498,7 @@ class _$AppSettingsImpl implements _AppSettings {
           language,
           sound,
           beep,
+          beepFromApp,
           voice,
           voiceName,
           volume,
@@ -1537,6 +1574,7 @@ abstract class _AppSettings implements AppSettings {
       {required final String language,
       required final bool sound,
       required final bool beep,
+      required final bool beepFromApp,
       required final bool voice,
       required final bool voiceName,
       required final double volume,
@@ -1580,7 +1618,9 @@ abstract class _AppSettings implements AppSettings {
   bool get sound; // вкл/выкл
 // звук обратного отсчёта
   @override
-  bool get beep; // голосовые сообщения
+  bool get beep; // звуком обратного отсчёта управляет приложение
+  @override
+  bool get beepFromApp; // голосовые сообщения
   @override
   bool get voice;
   @override
@@ -1678,6 +1718,7 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       {String language,
       bool sound,
       bool beep,
+      bool beepFromApp,
       bool voice,
       bool voiceName,
       double volume,
@@ -1730,6 +1771,7 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? language = null,
     Object? sound = null,
     Object? beep = null,
+    Object? beepFromApp = null,
     Object? voice = null,
     Object? voiceName = null,
     Object? volume = null,
@@ -1777,6 +1819,10 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
       beep: null == beep
           ? _value.beep
           : beep // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beepFromApp: null == beepFromApp
+          ? _value.beepFromApp
+          : beepFromApp // ignore: cast_nullable_to_non_nullable
               as bool,
       voice: null == voice
           ? _value.voice
@@ -1925,6 +1971,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       {this.language = 'ru',
       this.sound = true,
       this.beep = true,
+      this.beepFromApp = false,
       this.voice = true,
       this.voiceName = true,
       this.volume = 1.0,
@@ -1973,6 +2020,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final bool beep;
+// звуком обратного отсчёта управляет приложение
+  @override
+  @JsonKey()
+  final bool beepFromApp;
 // голосовые сообщения
   @override
   @JsonKey()
@@ -2105,7 +2156,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(language: $language, sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
+    return 'AppSettings.defaults(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
   }
 
   @override
@@ -2117,6 +2168,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.language == language) &&
             (identical(other.sound, sound) || other.sound == sound) &&
             (identical(other.beep, beep) || other.beep == beep) &&
+            (identical(other.beepFromApp, beepFromApp) ||
+                other.beepFromApp == beepFromApp) &&
             (identical(other.voice, voice) || other.voice == voice) &&
             (identical(other.voiceName, voiceName) ||
                 other.voiceName == voiceName) &&
@@ -2189,6 +2242,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         language,
         sound,
         beep,
+        beepFromApp,
         voice,
         voiceName,
         volume,
@@ -2241,6 +2295,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -2280,6 +2335,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -2320,6 +2376,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         language,
         sound,
         beep,
+        beepFromApp,
         voice,
         voiceName,
         volume,
@@ -2363,6 +2420,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -2402,6 +2460,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -2442,6 +2501,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         language,
         sound,
         beep,
+        beepFromApp,
         voice,
         voiceName,
         volume,
@@ -2485,6 +2545,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -2524,6 +2585,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
             bool voiceName,
             double volume,
@@ -2566,6 +2628,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           language,
           sound,
           beep,
+          beepFromApp,
           voice,
           voiceName,
           volume,
@@ -2641,6 +2704,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
       {final String language,
       final bool sound,
       final bool beep,
+      final bool beepFromApp,
       final bool voice,
       final bool voiceName,
       final double volume,
@@ -2683,7 +2747,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
   bool get sound; // вкл/выкл
 // звук обратного отсчёта
   @override
-  bool get beep; // голосовые сообщения
+  bool get beep; // звуком обратного отсчёта управляет приложение
+  @override
+  bool get beepFromApp; // голосовые сообщения
   @override
   bool get voice; // использовать голосовые сообщения
   @override

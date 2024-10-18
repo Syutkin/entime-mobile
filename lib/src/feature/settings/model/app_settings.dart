@@ -16,6 +16,8 @@ class AppSettings with _$AppSettings {
 
     // звук обратного отсчёта
     required bool beep,
+    // звуком обратного отсчёта управляет приложение
+    required bool beepFromApp,
 
     // голосовые сообщения
     required bool voice,
@@ -97,6 +99,8 @@ class AppSettings with _$AppSettings {
 
     // звук обратного отсчёта
     @Default(true) bool beep,
+    // звуком обратного отсчёта управляет приложение
+    @Default(false) bool beepFromApp,
 
     // голосовые сообщения
     @Default(true) bool voice, // использовать голосовые сообщения

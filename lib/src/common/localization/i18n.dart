@@ -95,6 +95,16 @@ class I18nSettings {
         name: 'I18nSettings_countdown',
       );
 
+  static String get countdownFromApp => Intl.message(
+    'Использовать время приложения',
+    name: 'I18nSettings_countdownFromApp',
+  );
+
+  static String get countdownFromAppDetails => Intl.message(
+    'Для озвучивания без модуля',
+    name: 'I18nSettings_countdownFromAppDetails',
+  );
+
   static String get voiceMessages => Intl.message(
         'Голосовые сообщения',
         name: 'I18nSettings_voiceMessages',

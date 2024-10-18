@@ -29,6 +29,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       language: prefs.getString('language') ?? defaults.language,
       sound: prefs.getBool('sound') ?? defaults.sound,
       beep: prefs.getBool('beep') ?? defaults.beep,
+      beepFromApp: prefs.getBool('beepFromApp') ?? defaults.beepFromApp,
       voice: prefs.getBool('voice') ?? defaults.voice,
       voiceName: prefs.getBool('voiceName') ?? defaults.voiceName,
       volume: prefs.getDouble('volume') ?? defaults.volume,
@@ -102,6 +103,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setString('language', settings.language);
     await _prefs.setBool('sound', settings.sound);
     await _prefs.setBool('beep', settings.beep);
+    await _prefs.setBool('beepFromApp', settings.beepFromApp);
     await _prefs.setBool('voice', settings.voice);
     await _prefs.setBool('voiceName', settings.voiceName);
     await _prefs.setDouble('volume', settings.volume);

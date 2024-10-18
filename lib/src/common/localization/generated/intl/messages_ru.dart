@@ -302,6 +302,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Обратный отсчёт"),
         "I18nSettings_countdownAtStartSize":
             MessageLookupByLibrary.simpleMessage("Размер обратного отсчёта"),
+        "I18nSettings_countdownFromApp": MessageLookupByLibrary.simpleMessage(
+            "Использовать время приложения"),
+        "I18nSettings_countdownFromAppDetails":
+            MessageLookupByLibrary.simpleMessage("Для озвучивания без модуля"),
         "I18nSettings_darkBlue":
             MessageLookupByLibrary.simpleMessage("Синяя тёмная тема"),
         "I18nSettings_darkRed":

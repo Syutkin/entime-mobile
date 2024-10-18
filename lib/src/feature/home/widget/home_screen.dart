@@ -223,12 +223,14 @@ class HomeScreen extends StatelessWidget {
   SingleChildWidget _listenToCountdownBeep() {
     return BlocListener<CountdownBloc, CountdownState>(
       listener: (context, state) {
-        state.whenOrNull(working: (text, nextStartTime, number) {
-          // за три секунды до старта запускаем "бип"
-          if (text == '3') {
-            context.read<CountdownBloc>().add(CountdownEvent.beep());
-          }
-        });
+        if (context.read<SettingsBloc>().state.settings.beepFromApp) {
+          state.whenOrNull(working: (text, nextStartTime, number) {
+            // за три секунды до старта запускаем "бип"
+            if (text == '3') {
+              context.read<CountdownBloc>().add(CountdownEvent.beep());
+            }
+          });
+        }
       },
     );
   }

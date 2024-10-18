@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-16T12:20:39.957143",
+  "@@last_modified": "2024-10-18T16:41:06.629562",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -88,6 +88,16 @@
   },
   "I18nSettings_countdown": "Обратный отсчёт",
   "@I18nSettings_countdown": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_countdownFromApp": "Использовать время приложения",
+  "@I18nSettings_countdownFromApp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_countdownFromAppDetails": "Для озвучивания без модуля",
+  "@I18nSettings_countdownFromAppDetails": {
     "type": "text",
     "placeholders": {}
   },
