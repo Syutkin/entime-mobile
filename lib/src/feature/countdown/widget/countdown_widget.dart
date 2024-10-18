@@ -18,9 +18,10 @@ class CountdownWidget extends StatelessWidget {
     final FloatingActionButtonThemeData floatingActionButtonTheme =
         theme.floatingActionButtonTheme;
     final Color foregroundColor = floatingActionButtonTheme.foregroundColor ??
-        theme.colorScheme.onSecondary;
+        theme.colorScheme.onPrimaryContainer;
     final Color backgroundColor = floatingActionButtonTheme.backgroundColor ??
-        theme.colorScheme.secondary;
+        theme.colorScheme.primaryContainer;
+
 
     return Container(
       width: size,
