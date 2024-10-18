@@ -25,32 +25,38 @@ class CountdownPage extends StatelessWidget {
             return null;
           });
           return Center(
-            child: Column(
-              children: [
-                Flexible(
-                  fit: FlexFit.tight,
-                  flex: 50,
-                  child: FittedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      // child: Text('${number ?? ""}'),
-                      child: Text('$number'),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  fit: FlexFit.tight,
-                  flex: 50,
-                  child: FittedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(text),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: OrientationBuilder(builder: (context, orientation) {
+              return orientation == Orientation.portrait
+                  ? Column(children: _items(number, text))
+                  : Row(children: _items(number, text));
+            }),
           );
         }),
       );
+
+  List<Widget> _items(int? number, String text) {
+    return [
+      Flexible(
+        fit: FlexFit.tight,
+        flex: 50,
+        child: FittedBox(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text('${number ?? ""}'),
+            // child: Text('$number'),
+          ),
+        ),
+      ),
+      Flexible(
+        fit: FlexFit.tight,
+        flex: 50,
+        child: FittedBox(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(text),
+          ),
+        ),
+      ),
+    ];
+  }
 }

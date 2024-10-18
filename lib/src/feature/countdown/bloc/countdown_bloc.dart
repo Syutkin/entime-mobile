@@ -25,9 +25,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
       _countdown.start(_stageId);
     }
     _countdown.value.listen((value) {
-      add(
-        CountdownEvent.tick(value),
-      );
+      add(CountdownEvent.tick(value));
     });
 
     on<CountdownEvent>(transformer: sequential(), (event, emit) {
