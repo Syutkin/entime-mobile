@@ -717,9 +717,9 @@ class I18nInit {
         name: 'I18nInit_delete',
       );
 
-  static String get exportFromCsv => Intl.message(
-        'Экспорт протокола из csv',
-        name: 'I18nInit_exportFromCsv',
+  static String get importFromCsv => Intl.message(
+        'Импорт протокола из csv',
+        name: 'I18nInit_importFromCsv',
       );
 }
 

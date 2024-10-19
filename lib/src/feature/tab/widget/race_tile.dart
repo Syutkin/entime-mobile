@@ -90,7 +90,7 @@ class _RaceMenuButton extends StatelessWidget {
         value: RaceMenuButton.import,
         child: ListTile(
           leading: Icon(MdiIcons.fileImportOutline),
-          title: Text(Localization.current.I18nInit_exportFromCsv),
+          title: Text(Localization.current.I18nInit_importFromCsv),
         ),
       ),
     );

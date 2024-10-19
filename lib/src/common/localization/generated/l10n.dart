@@ -1225,11 +1225,11 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Экспорт протокола из csv`
-  String get I18nInit_exportFromCsv {
+  /// `Импорт протокола из csv`
+  String get I18nInit_importFromCsv {
     return Intl.message(
-      'Экспорт протокола из csv',
-      name: 'I18nInit_exportFromCsv',
+      'Импорт протокола из csv',
+      name: 'I18nInit_importFromCsv',
       desc: '',
       args: [],
     );

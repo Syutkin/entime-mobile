@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-18T16:41:06.629562",
+  "@@last_modified": "2024-10-20T02:08:59.733338",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -625,8 +625,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nInit_exportFromCsv": "Экспорт протокола из csv",
-  "@I18nInit_exportFromCsv": {
+  "I18nInit_importFromCsv": "Импорт протокола из csv",
+  "@I18nInit_importFromCsv": {
     "type": "text",
     "placeholders": {}
   },
