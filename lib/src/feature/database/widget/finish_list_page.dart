@@ -210,6 +210,7 @@ class _FinishListPage extends State<FinishListPage> {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: state.numbersOnTrace.length,
+              padding: EdgeInsets.only(left: 5),
               itemBuilder: (context, index) {
                 final item = state.numbersOnTrace[index];
                 final isSelected = item.number == state.awaitingNumber;

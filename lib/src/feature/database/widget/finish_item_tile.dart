@@ -45,6 +45,12 @@ class FinishItemTile extends StatelessWidget {
           onTapDown: (details) {
             onTapDown?.call(details);
           },
+          onTap: () {
+            onTap?.call();
+          },
+          onLongPress: () {
+            onLongPress?.call();
+          },
           child: DragTarget<int>(
             // не даёт переписать номер через drag'n'drop
             onWillAcceptWithDetails: (details) {
@@ -59,23 +65,14 @@ class FinishItemTile extends StatelessWidget {
             },
             builder: (context, candidateData, rejectedData) => Card(
               margin: const EdgeInsets.all(2),
-              child: ListTile(
-                tileColor: Theme.of(context).colorScheme.surface,
-                textColor: Theme.of(context).colorScheme.onSurface,
-                contentPadding: EdgeInsets.zero,
-                onTap: () {
-                  onTap?.call();
-                },
-                onLongPress: () {
-                  onLongPress?.call();
-                },
-                title: Row(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
                   children: <Widget>[
                     Flexible(
                       flex: 15,
                       child: Align(
-                        child:
-                            _addIcon(item.isManual), //Icon(Icons.add_circle),
+                        child: _addIcon(item.isManual), //Icon(Icons.add_circle),
                       ),
                     ),
                     Flexible(
