@@ -25,29 +25,30 @@ class NumberOnTraceTile extends StatelessWidget {
             constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
           ),
           data: number,
-          // ToDo: InkWell splashes
-          child: InkWell(
+          child: Material(
+            elevation: 6,
             borderRadius: const BorderRadius.all(Radius.circular(12)),
-            onTap: () {
-              onTap?.call();
-            },
-            onTapDown: (details) {
-              onTapDown?.call(details);
-            },
-            onLongPress: () {
-              onLongPress?.call();
-            },
-            child: _numberOnTrace(context, number),
-            // child: _colorButton(context, number),
+            child: InkWell(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              onTap: () {
+                onTap?.call();
+              },
+              onTapDown: (details) {
+                onTapDown?.call(details);
+              },
+              onLongPress: () {
+                onLongPress?.call();
+              },
+              child: _numberOnTrace(context, number),
+              // child: _colorButton(context, number),
+            ),
           ),
         ),
       );
 
-  Widget _numberOnTrace(BuildContext context, int number) => Material(
-        elevation: 6,
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        child: Container(
-          constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
+  Widget _numberOnTrace(BuildContext context, int number) => ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
+        child: Ink(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             color: isSelected
