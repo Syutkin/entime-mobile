@@ -27,6 +27,7 @@ class NumberOnTraceTile extends StatelessWidget {
           data: number,
           // ToDo: InkWell splashes
           child: InkWell(
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
             onTap: () {
               onTap?.call();
             },
@@ -36,7 +37,6 @@ class NumberOnTraceTile extends StatelessWidget {
             onLongPress: () {
               onLongPress?.call();
             },
-
             child: _numberOnTrace(context, number),
             // child: _colorButton(context, number),
           ),
@@ -46,9 +46,7 @@ class NumberOnTraceTile extends StatelessWidget {
   Widget _numberOnTrace(BuildContext context, int number) => Material(
         elevation: 6,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
-        // child: Container(
         child: Container(
-          // margin: const EdgeInsets.only(left: 5),
           constraints: const BoxConstraints(minWidth: 50, minHeight: 50),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(12)),

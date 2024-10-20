@@ -11,9 +11,9 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../constants/date_time_formats.dart';
 import '../../../common/utils/helper.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
+import '../../../constants/date_time_formats.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../bloc/database_bloc.dart';

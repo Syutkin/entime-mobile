@@ -64,7 +64,7 @@ class FinishItemTile extends StatelessWidget {
               onAccept?.call(details);
             },
             builder: (context, candidateData, rejectedData) => Card(
-              margin: const EdgeInsets.all(2),
+              margin: const EdgeInsets.all(2.0),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -72,7 +72,8 @@ class FinishItemTile extends StatelessWidget {
                     Flexible(
                       flex: 15,
                       child: Align(
-                        child: _addIcon(item.isManual), //Icon(Icons.add_circle),
+                        child:
+                            _addIcon(item.isManual), //Icon(Icons.add_circle),
                       ),
                     ),
                     Flexible(
@@ -83,7 +84,7 @@ class FinishItemTile extends StatelessWidget {
                           item.finishTime.strip(),
                           style: DefaultTextStyle.of(context)
                               .style
-                              .apply(fontSizeFactor: 2),
+                              .apply(fontSizeFactor: 1.5),
                         ),
                       ),
                     ),

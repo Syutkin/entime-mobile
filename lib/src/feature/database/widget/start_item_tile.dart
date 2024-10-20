@@ -22,13 +22,11 @@ class StartItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardColor = isHighlighted
-        ? Theme.of(context).colorScheme.primaryContainer
-        : Theme.of(context).colorScheme.surface;
+    final cardColor =
+        isHighlighted ? Theme.of(context).colorScheme.primaryContainer : null;
 
-    final textColor = isHighlighted
-        ? Theme.of(context).colorScheme.onPrimaryContainer
-        : Theme.of(context).colorScheme.onSurface;
+    final textColor =
+        isHighlighted ? Theme.of(context).colorScheme.onPrimaryContainer : null;
 
     return InkWell(
       onTap: () {
