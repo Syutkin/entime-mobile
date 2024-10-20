@@ -72,8 +72,8 @@ class FinishItemTile extends StatelessWidget {
                     Flexible(
                       flex: 15,
                       child: Align(
-                        child:
-                            _addIcon(item.isManual), //Icon(Icons.add_circle),
+                        child: _addIcon(
+                            context, item.isManual), //Icon(Icons.add_circle),
                       ),
                     ),
                     Flexible(
@@ -109,11 +109,17 @@ class FinishItemTile extends StatelessWidget {
         ),
       );
 
-  Widget _addIcon(bool manual) {
+  Widget _addIcon(BuildContext context, bool manual) {
     if (manual) {
-      return Icon(MdiIcons.handBackLeft);
+      return Icon(
+        MdiIcons.handBackLeft,
+        color: Theme.of(context).colorScheme.onSurface,
+      );
     } else {
-      return Icon(MdiIcons.cpu64Bit);
+      return Icon(
+        MdiIcons.cpu64Bit,
+        color: Theme.of(context).colorScheme.onSurface,
+      );
     }
   }
 }
