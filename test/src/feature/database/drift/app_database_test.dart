@@ -1400,7 +1400,151 @@ void main() {
           substituteNumbers: true,
           finishDelay: finishDelay,
         );
+
         expect(addNumber, null);
+      });
+    });
+
+    group('Test getFinishesFromStage', () {
+      test('Test filters', () async {
+        var stage = (await db.getStages(raceId: 1).get()).first;
+        var finishTime = '10:05:23,56';
+        var manualFinishTime = '10:05:23,12';
+        var number = 1;
+
+        for (var i = 0; i < 10; i++) {
+          await db.addFinishTimeManual(
+            stageId: stage.id,
+            finishTime: manualFinishTime + i.toString(),
+          );
+          await db.addFinishTime(
+              stage: stage,
+              finish: finishTime + i.toString(),
+              timeStamp: DateTime.now());
+        }
+        for (var i = 1; i < 7; i++) {
+          await db.addNumberToFinish(
+              stage: stage,
+              finishId: i,
+              number: number + i,
+              finishTime: 'finishTime');
+        }
+
+        await db.hideFinish(1);
+        await db.hideFinish(2);
+        await db.hideFinish(14);
+        await db.hideFinish(15);
+
+        //      number  isManual isMarked
+        //    /-------/---------/--------/
+        // 1  /   +   /    +    /    +   /
+        // 2  /   +   /         /    +   /
+        // 3  /   +   /    +    /        /
+        // 4  /   +   /         /        /
+        // 5  /   +   /    +    /        /
+        // 6  /   +   /         /        /
+        // 7  /       /    +    /        /
+        // 8  /       /         /        /
+        // 9  /       /    +    /        /
+        // 10 /       /         /        /
+        // 11 /       /    +    /        /
+        // 12 /       /         /        /
+        // 13 /       /    +    /        /
+        // 14 /       /         /    +   /
+        // 15 /       /    +    /    +   /
+        // 16 /       /         /        /
+        // 17 /       /    +    /        /
+        // 18 /       /         /        /
+        // 19 /       /    +    /        /
+        // 20 /       /         /        /
+
+        // all finishes
+        var finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id,
+              hideMarked: false,
+              hideManual: false,
+              hideNumbers: false,
+            )
+            .get();
+        expect(finishes.length, 20);
+
+        // hide marked
+        finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id,
+              hideMarked: true,
+              hideManual: false,
+              hideNumbers: false,
+            )
+            .get();
+        expect(finishes.length, 16);
+
+        // hide with numbers
+        finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id,
+              hideMarked: false,
+              hideManual: false,
+              hideNumbers: true,
+            )
+            .get();
+        expect(finishes.length, 14);
+
+        // hide manual
+        finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id,
+              hideMarked: false,
+              hideManual: true,
+              hideNumbers: false,
+            )
+            .get();
+        expect(finishes.length, 10);
+
+        // hide marked and manual
+        finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id,
+              hideMarked: true,
+              hideManual: true,
+              hideNumbers: false,
+            )
+            .get();
+        expect(finishes.length, 8);
+
+        // hide marked and numbers
+        finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id,
+              hideMarked: true,
+              hideManual: false,
+              hideNumbers: true,
+            )
+            .get();
+        expect(finishes.length, 12);
+
+        // hide manual and numbers
+        finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id,
+              hideMarked: false,
+              hideManual: true,
+              hideNumbers: true,
+            )
+            .get();
+        expect(finishes.length, 7);
+
+        // hide all
+        finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id,
+              hideMarked: true,
+              hideManual: true,
+              hideNumbers: true,
+            )
+            .get();
+        expect(finishes.length, 6);
       });
     });
 
