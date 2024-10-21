@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-dev+257',
+    representation: r'0.5.0-dev+264',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-dev+257',
+    canonical: r'0.5.0-dev+264',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,19 +118,19 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'257'],
+    build: <String>[r'264'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2024,
     10,
-    18,
-    13,
-    20,
-    44,
-    900,
-    307,
+    21,
+    9,
+    54,
+    9,
+    126,
+    767,
   );
 
   /// Name

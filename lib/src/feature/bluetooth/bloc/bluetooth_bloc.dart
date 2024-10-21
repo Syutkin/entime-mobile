@@ -14,7 +14,9 @@ import '../../settings/settings.dart';
 import '../bluetooth.dart';
 
 part 'bluetooth_bloc.freezed.dart';
+
 part 'bluetooth_bloc_event.dart';
+
 part 'bluetooth_bloc_state.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
@@ -247,11 +249,15 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               }
             },
             voice: (time) async {
-              final stageId = event.stageId;
-              await _audioController.callParticipant(
-                time: time,
-                stageId: stageId,
-              );
+              // Вызываем участника голосом только если не используем
+              // время из приложения
+              if (!_settingsProvider.settings.voiceFromApp) {
+                final stageId = event.stageId;
+                await _audioController.callParticipant(
+                  time: time,
+                  stageId: stageId,
+                );
+              }
             },
             moduleSettings: (moduleSettings) {
               emit(BluetoothBlocState.connected(message: message));

@@ -261,6 +261,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Использовать время приложения`
+  String get I18nSettings_voiceFromApp {
+    return Intl.message(
+      'Использовать время приложения',
+      name: 'I18nSettings_voiceFromApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Для озвучивания без модуля`
+  String get I18nSettings_voiceFromAppDetails {
+    return Intl.message(
+      'Для озвучивания без модуля',
+      name: 'I18nSettings_voiceFromAppDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Называть имена участников`
   String get I18nSettings_participantsName {
     return Intl.message(

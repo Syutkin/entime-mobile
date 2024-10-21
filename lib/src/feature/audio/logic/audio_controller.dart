@@ -63,7 +63,7 @@ class AudioController implements IAudioController {
     required String time,
     required int stageId,
   }) async {
-    logger.i('StartPage -> Voice time: $time');
+    logger.i('AudioController -> Voice time: $time');
     final List<String> start = [];
     String newVoiceText = '';
 
@@ -74,49 +74,49 @@ class AudioController implements IAudioController {
       dateTime = dateTime.add(const Duration(minutes: 1));
       start.add(DateFormat(shortTimeFormat).format(dateTime));
     }
-    var participant =
+    var participants =
         await _db.getStartingParticipants(time: time, stageId: stageId);
-    if (participant.isNotEmpty) {
+    if (participants.isNotEmpty) {
       _isStarted = true;
       _isBetweenCategory = false;
       logger.d(
         'First participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
       );
-      newVoiceText = 'На старт приглашается номер ${participant.first.number}';
+      newVoiceText = 'На старт приглашается номер ${participants.first.number}';
       // Имена участников, которые были добавлены автоматически на старте,
       // начинаются с номера. Такие имена не произносим
       _settingsProvider.settings.voiceName &&
-              !RegExp(r'^[0-9]').hasMatch(participant.first.name)
-          ? newVoiceText += ', ${participant.first.name}.'
+              !RegExp(r'^[0-9]').hasMatch(participants.first.name)
+          ? newVoiceText += ', ${participants.first.name}.'
           : newVoiceText += '.';
-      participant =
+      participants =
           await _db.getStartingParticipants(time: start[1], stageId: stageId);
-      if (participant.isNotEmpty) {
-        newVoiceText += ' Следующий номер ${participant.first.number}';
+      if (participants.isNotEmpty) {
+        newVoiceText += ' Следующий номер ${participants.first.number}';
         // Имена участников, которые были добавлены автоматически на старте,
         // начинаются с номера. Такие имена не произносим
         if (_settingsProvider.settings.voiceName &&
-            !RegExp(r'^[0-9]').hasMatch(participant.first.name)) {
-          newVoiceText += ', ${participant.first.name}.';
+            !RegExp(r'^[0-9]').hasMatch(participants.first.name)) {
+          newVoiceText += ', ${participants.first.name}.';
         } else {
           newVoiceText += '.';
         }
       }
     } else {
-      participant =
+      participants =
           await _db.getStartingParticipants(time: start[1], stageId: stageId);
-      if (participant.isNotEmpty) {
+      if (participants.isNotEmpty) {
         _isStarted = true;
         _isBetweenCategory = false;
         logger.d(
           'Second participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
         );
-        newVoiceText = 'Готовится номер ${participant.first.number}';
+        newVoiceText = 'Готовится номер ${participants.first.number}';
         // Имена участников, которые были добавлены автоматически на старте,
         // начинаются с номера. Такие имена не произносим
         if (_settingsProvider.settings.voiceName &&
-            !RegExp(r'^[0-9]').hasMatch(participant.first.name)) {
-          newVoiceText += ', ${participant.first.name}.';
+            !RegExp(r'^[0-9]').hasMatch(participants.first.name)) {
+          newVoiceText += ', ${participants.first.name}.';
         } else {
           newVoiceText += '.';
         }

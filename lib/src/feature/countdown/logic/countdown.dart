@@ -51,12 +51,14 @@ class CountdownAtStart {
 
   Future<void> _countdown({required int stageId}) async {
     final now = DateTime.now();
+    final second = now.second;
     final nextStartingParticipant = _nextStartingParticipant;
     if (nextStartingParticipant != null) {
       var nextStartTime = nextStartingParticipant.startTime.toDateTime()!;
       if (nextStartTime.isAfter(now)) {
         value.add(
           Tick(
+            second: second,
             text: _formatDuration(nextStartTime.difference(now)),
             nextStartTime: nextStartTime,
             number: nextStartingParticipant.number,
@@ -66,6 +68,7 @@ class CountdownAtStart {
         if (nextStartTime.isAfter(now.subtract(const Duration(seconds: 10)))) {
           value.add(
             Tick(
+              second: second,
               text: 'GO',
               nextStartTime: nextStartTime,
               number: nextStartingParticipant.number,
@@ -81,7 +84,7 @@ class CountdownAtStart {
             await _getNextStartingParticipant(time: now, stageId: stageId);
         if (_nextStartingParticipant == null) {
           _isFinished = true;
-          value.add(const Tick(text: 'Fin'));
+          value.add(Tick(second: second, text: 'Fin'));
         }
       }
     }

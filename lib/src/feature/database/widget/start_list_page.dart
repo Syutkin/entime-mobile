@@ -9,10 +9,10 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../constants/date_time_formats.dart';
 import '../../../common/utils/extension_on_string.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
+import '../../../constants/date_time_formats.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../countdown/countdown.dart';
 import '../../settings/settings.dart';
@@ -62,9 +62,10 @@ class _StartListPage extends State<StartListPage> {
                     } else {
                       // Обновлять только там, где есть обратный отсчёт
                       return isHighlighted &&
-                          (previous.mapOrNull(working: (state) => state.text) !=
+                          (previous.mapOrNull(
+                                  working: (state) => state.tick.text) !=
                               current.mapOrNull(
-                                working: (state) => state.text,
+                                working: (state) => state.tick.text,
                               ));
                     }
                   },
@@ -127,7 +128,7 @@ class _StartListPage extends State<StartListPage> {
                     final countdownWidget = CountdownWidget(
                       key: _countdownKey,
                       size: settingsState.settings.countdownSize,
-                      text: state.text,
+                      text: state.tick.text,
                     );
                     return Draggable(
                       feedback: countdownWidget,
@@ -212,12 +213,14 @@ class _StartListPage extends State<StartListPage> {
 
   String? _activeStartTime(CountdownState countdownState) =>
       countdownState.whenOrNull(
-        working: (text, nextStartTime, number) => nextStartTime ?? '',
+        working: (tick) => tick.nextStartTime != null
+            ? DateFormat(shortTimeFormat).format(tick.nextStartTime!)
+            : '',
       );
 
   String? _countdownFromState(CountdownState countdownState) =>
       countdownState.mapOrNull(
-        working: (state) => state.text,
+        working: (state) => state.tick.text,
       );
 
   @override

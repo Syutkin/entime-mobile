@@ -32,7 +32,8 @@ class HomeScreen extends StatelessWidget {
           _listenToBluetooth(),
           // Следим за повторной установкой стартового времени для участника
           _listenToNewStartTime(),
-          _listenToCountdownBeep(),
+          // Используем обратный отсчёт из приложения для звуковых эффектов
+          _listenToCountdownEvents(),
         ],
         child: BlocBuilder<TabBloc, AppTab>(
           builder: (context, activeTab) => DefaultTabController(
@@ -220,14 +221,27 @@ class HomeScreen extends StatelessWidget {
         },
       );
 
-  SingleChildWidget _listenToCountdownBeep() {
+  SingleChildWidget _listenToCountdownEvents() {
     return BlocListener<CountdownBloc, CountdownState>(
       listener: (context, state) {
         if (context.read<SettingsBloc>().state.settings.beepFromApp) {
-          state.whenOrNull(working: (text, nextStartTime, number) {
+          state.whenOrNull(working: (tick) {
             // за три секунды до старта запускаем "бип"
-            if (text == '3') {
+            if (tick.text == '3') {
               context.read<CountdownBloc>().add(CountdownEvent.beep());
+            }
+          });
+        }
+        if (context.read<SettingsBloc>().state.settings.voiceFromApp) {
+          state.whenOrNull(working: (tick) {
+            // на 15 секунде ищем участников для голосового вызова
+            if (tick.second == 15) {
+              var stageId = context.read<DatabaseBloc>().state.stage?.id;
+              if (stageId != null) {
+                context
+                    .read<CountdownBloc>()
+                    .add(CountdownEvent.callParticipant(stageId: stageId));
+              }
             }
           });
         }

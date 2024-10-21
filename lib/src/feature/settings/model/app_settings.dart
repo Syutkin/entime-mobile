@@ -21,6 +21,7 @@ class AppSettings with _$AppSettings {
 
     // голосовые сообщения
     required bool voice,
+    required bool voiceFromApp,
     required bool voiceName,
     required double volume, // громкость
     required double pitch, // тон речи
@@ -104,6 +105,7 @@ class AppSettings with _$AppSettings {
 
     // голосовые сообщения
     @Default(true) bool voice, // использовать голосовые сообщения
+    @Default(false) bool voiceFromApp, // использовать голосовые сообщения и брать данные из приложения
     @Default(true) bool voiceName, // называть имена участников
     @Default(1.0) double volume, // громкость
     @Default(1.0) double pitch, // тон речи

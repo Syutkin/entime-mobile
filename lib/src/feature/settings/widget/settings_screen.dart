@@ -152,6 +152,22 @@ class _SettingsList extends StatelessWidget {
               SettingsTile.switchTile(
                 enabled: settingsState.settings.sound &&
                     settingsState.settings.voice,
+                title: Text(Localization.current.I18nSettings_voiceFromApp),
+                description: Text(
+                    Localization.current.I18nSettings_voiceFromAppDetails),
+                //leading:  Icon(MdiIcons.textToSpeech),
+                initialValue: settingsState.settings.voiceFromApp,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings.copyWith(voiceFromApp: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile.switchTile(
+                enabled: settingsState.settings.sound &&
+                    settingsState.settings.voice,
                 title: Text(Localization.current.I18nSettings_participantsName),
                 // titleMaxLines: 2,
                 //leading:  Icon(MdiIcons.textToSpeech),

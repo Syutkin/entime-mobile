@@ -21,6 +21,7 @@ mixin _$CountdownEvent {
     required TResult Function(Tick tick) tick,
     required TResult Function(int stageId) start,
     required TResult Function() beep,
+    required TResult Function(int stageId) callParticipant,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$CountdownEvent {
     TResult? Function(Tick tick)? tick,
     TResult? Function(int stageId)? start,
     TResult? Function()? beep,
+    TResult? Function(int stageId)? callParticipant,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$CountdownEvent {
     TResult Function(Tick tick)? tick,
     TResult Function(int stageId)? start,
     TResult Function()? beep,
+    TResult Function(int stageId)? callParticipant,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$CountdownEvent {
     required TResult Function(_CountdownTick value) tick,
     required TResult Function(_CountdownStart value) start,
     required TResult Function(_CountdownBeep value) beep,
+    required TResult Function(_CountdownCallParticipant value) callParticipant,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$CountdownEvent {
     TResult? Function(_CountdownTick value)? tick,
     TResult? Function(_CountdownStart value)? start,
     TResult? Function(_CountdownBeep value)? beep,
+    TResult? Function(_CountdownCallParticipant value)? callParticipant,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$CountdownEvent {
     TResult Function(_CountdownTick value)? tick,
     TResult Function(_CountdownStart value)? start,
     TResult Function(_CountdownBeep value)? beep,
+    TResult Function(_CountdownCallParticipant value)? callParticipant,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +160,7 @@ class _$CountdownTickImpl implements _CountdownTick {
     required TResult Function(Tick tick) tick,
     required TResult Function(int stageId) start,
     required TResult Function() beep,
+    required TResult Function(int stageId) callParticipant,
   }) {
     return tick(this.tick);
   }
@@ -164,6 +171,7 @@ class _$CountdownTickImpl implements _CountdownTick {
     TResult? Function(Tick tick)? tick,
     TResult? Function(int stageId)? start,
     TResult? Function()? beep,
+    TResult? Function(int stageId)? callParticipant,
   }) {
     return tick?.call(this.tick);
   }
@@ -174,6 +182,7 @@ class _$CountdownTickImpl implements _CountdownTick {
     TResult Function(Tick tick)? tick,
     TResult Function(int stageId)? start,
     TResult Function()? beep,
+    TResult Function(int stageId)? callParticipant,
     required TResult orElse(),
   }) {
     if (tick != null) {
@@ -188,6 +197,7 @@ class _$CountdownTickImpl implements _CountdownTick {
     required TResult Function(_CountdownTick value) tick,
     required TResult Function(_CountdownStart value) start,
     required TResult Function(_CountdownBeep value) beep,
+    required TResult Function(_CountdownCallParticipant value) callParticipant,
   }) {
     return tick(this);
   }
@@ -198,6 +208,7 @@ class _$CountdownTickImpl implements _CountdownTick {
     TResult? Function(_CountdownTick value)? tick,
     TResult? Function(_CountdownStart value)? start,
     TResult? Function(_CountdownBeep value)? beep,
+    TResult? Function(_CountdownCallParticipant value)? callParticipant,
   }) {
     return tick?.call(this);
   }
@@ -208,6 +219,7 @@ class _$CountdownTickImpl implements _CountdownTick {
     TResult Function(_CountdownTick value)? tick,
     TResult Function(_CountdownStart value)? start,
     TResult Function(_CountdownBeep value)? beep,
+    TResult Function(_CountdownCallParticipant value)? callParticipant,
     required TResult orElse(),
   }) {
     if (tick != null) {
@@ -301,6 +313,7 @@ class _$CountdownStartImpl implements _CountdownStart {
     required TResult Function(Tick tick) tick,
     required TResult Function(int stageId) start,
     required TResult Function() beep,
+    required TResult Function(int stageId) callParticipant,
   }) {
     return start(stageId);
   }
@@ -311,6 +324,7 @@ class _$CountdownStartImpl implements _CountdownStart {
     TResult? Function(Tick tick)? tick,
     TResult? Function(int stageId)? start,
     TResult? Function()? beep,
+    TResult? Function(int stageId)? callParticipant,
   }) {
     return start?.call(stageId);
   }
@@ -321,6 +335,7 @@ class _$CountdownStartImpl implements _CountdownStart {
     TResult Function(Tick tick)? tick,
     TResult Function(int stageId)? start,
     TResult Function()? beep,
+    TResult Function(int stageId)? callParticipant,
     required TResult orElse(),
   }) {
     if (start != null) {
@@ -335,6 +350,7 @@ class _$CountdownStartImpl implements _CountdownStart {
     required TResult Function(_CountdownTick value) tick,
     required TResult Function(_CountdownStart value) start,
     required TResult Function(_CountdownBeep value) beep,
+    required TResult Function(_CountdownCallParticipant value) callParticipant,
   }) {
     return start(this);
   }
@@ -345,6 +361,7 @@ class _$CountdownStartImpl implements _CountdownStart {
     TResult? Function(_CountdownTick value)? tick,
     TResult? Function(_CountdownStart value)? start,
     TResult? Function(_CountdownBeep value)? beep,
+    TResult? Function(_CountdownCallParticipant value)? callParticipant,
   }) {
     return start?.call(this);
   }
@@ -355,6 +372,7 @@ class _$CountdownStartImpl implements _CountdownStart {
     TResult Function(_CountdownTick value)? tick,
     TResult Function(_CountdownStart value)? start,
     TResult Function(_CountdownBeep value)? beep,
+    TResult Function(_CountdownCallParticipant value)? callParticipant,
     required TResult orElse(),
   }) {
     if (start != null) {
@@ -421,6 +439,7 @@ class _$CountdownBeepImpl implements _CountdownBeep {
     required TResult Function(Tick tick) tick,
     required TResult Function(int stageId) start,
     required TResult Function() beep,
+    required TResult Function(int stageId) callParticipant,
   }) {
     return beep();
   }
@@ -431,6 +450,7 @@ class _$CountdownBeepImpl implements _CountdownBeep {
     TResult? Function(Tick tick)? tick,
     TResult? Function(int stageId)? start,
     TResult? Function()? beep,
+    TResult? Function(int stageId)? callParticipant,
   }) {
     return beep?.call();
   }
@@ -441,6 +461,7 @@ class _$CountdownBeepImpl implements _CountdownBeep {
     TResult Function(Tick tick)? tick,
     TResult Function(int stageId)? start,
     TResult Function()? beep,
+    TResult Function(int stageId)? callParticipant,
     required TResult orElse(),
   }) {
     if (beep != null) {
@@ -455,6 +476,7 @@ class _$CountdownBeepImpl implements _CountdownBeep {
     required TResult Function(_CountdownTick value) tick,
     required TResult Function(_CountdownStart value) start,
     required TResult Function(_CountdownBeep value) beep,
+    required TResult Function(_CountdownCallParticipant value) callParticipant,
   }) {
     return beep(this);
   }
@@ -465,6 +487,7 @@ class _$CountdownBeepImpl implements _CountdownBeep {
     TResult? Function(_CountdownTick value)? tick,
     TResult? Function(_CountdownStart value)? start,
     TResult? Function(_CountdownBeep value)? beep,
+    TResult? Function(_CountdownCallParticipant value)? callParticipant,
   }) {
     return beep?.call(this);
   }
@@ -475,6 +498,7 @@ class _$CountdownBeepImpl implements _CountdownBeep {
     TResult Function(_CountdownTick value)? tick,
     TResult Function(_CountdownStart value)? start,
     TResult Function(_CountdownBeep value)? beep,
+    TResult Function(_CountdownCallParticipant value)? callParticipant,
     required TResult orElse(),
   }) {
     if (beep != null) {
@@ -489,24 +513,179 @@ abstract class _CountdownBeep implements CountdownEvent {
 }
 
 /// @nodoc
+abstract class _$$CountdownCallParticipantImplCopyWith<$Res> {
+  factory _$$CountdownCallParticipantImplCopyWith(
+          _$CountdownCallParticipantImpl value,
+          $Res Function(_$CountdownCallParticipantImpl) then) =
+      __$$CountdownCallParticipantImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int stageId});
+}
+
+/// @nodoc
+class __$$CountdownCallParticipantImplCopyWithImpl<$Res>
+    extends _$CountdownEventCopyWithImpl<$Res, _$CountdownCallParticipantImpl>
+    implements _$$CountdownCallParticipantImplCopyWith<$Res> {
+  __$$CountdownCallParticipantImplCopyWithImpl(
+      _$CountdownCallParticipantImpl _value,
+      $Res Function(_$CountdownCallParticipantImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CountdownEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? stageId = null,
+  }) {
+    return _then(_$CountdownCallParticipantImpl(
+      stageId: null == stageId
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CountdownCallParticipantImpl implements _CountdownCallParticipant {
+  const _$CountdownCallParticipantImpl({required this.stageId});
+
+  @override
+  final int stageId;
+
+  @override
+  String toString() {
+    return 'CountdownEvent.callParticipant(stageId: $stageId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CountdownCallParticipantImpl &&
+            (identical(other.stageId, stageId) || other.stageId == stageId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, stageId);
+
+  /// Create a copy of CountdownEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CountdownCallParticipantImplCopyWith<_$CountdownCallParticipantImpl>
+      get copyWith => __$$CountdownCallParticipantImplCopyWithImpl<
+          _$CountdownCallParticipantImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Tick tick) tick,
+    required TResult Function(int stageId) start,
+    required TResult Function() beep,
+    required TResult Function(int stageId) callParticipant,
+  }) {
+    return callParticipant(stageId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Tick tick)? tick,
+    TResult? Function(int stageId)? start,
+    TResult? Function()? beep,
+    TResult? Function(int stageId)? callParticipant,
+  }) {
+    return callParticipant?.call(stageId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Tick tick)? tick,
+    TResult Function(int stageId)? start,
+    TResult Function()? beep,
+    TResult Function(int stageId)? callParticipant,
+    required TResult orElse(),
+  }) {
+    if (callParticipant != null) {
+      return callParticipant(stageId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CountdownTick value) tick,
+    required TResult Function(_CountdownStart value) start,
+    required TResult Function(_CountdownBeep value) beep,
+    required TResult Function(_CountdownCallParticipant value) callParticipant,
+  }) {
+    return callParticipant(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CountdownTick value)? tick,
+    TResult? Function(_CountdownStart value)? start,
+    TResult? Function(_CountdownBeep value)? beep,
+    TResult? Function(_CountdownCallParticipant value)? callParticipant,
+  }) {
+    return callParticipant?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CountdownTick value)? tick,
+    TResult Function(_CountdownStart value)? start,
+    TResult Function(_CountdownBeep value)? beep,
+    TResult Function(_CountdownCallParticipant value)? callParticipant,
+    required TResult orElse(),
+  }) {
+    if (callParticipant != null) {
+      return callParticipant(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CountdownCallParticipant implements CountdownEvent {
+  const factory _CountdownCallParticipant({required final int stageId}) =
+      _$CountdownCallParticipantImpl;
+
+  int get stageId;
+
+  /// Create a copy of CountdownEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CountdownCallParticipantImplCopyWith<_$CountdownCallParticipantImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CountdownState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String text, String? nextStartTime, int? number)
-        working,
+    required TResult Function(Tick tick) working,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String text, String? nextStartTime, int? number)? working,
+    TResult? Function(Tick tick)? working,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String text, String? nextStartTime, int? number)? working,
+    TResult Function(Tick tick)? working,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -596,8 +775,7 @@ class _$CountdownInitialStateImpl implements _CountdownInitialState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String text, String? nextStartTime, int? number)
-        working,
+    required TResult Function(Tick tick) working,
   }) {
     return initial();
   }
@@ -606,7 +784,7 @@ class _$CountdownInitialStateImpl implements _CountdownInitialState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String text, String? nextStartTime, int? number)? working,
+    TResult? Function(Tick tick)? working,
   }) {
     return initial?.call();
   }
@@ -615,7 +793,7 @@ class _$CountdownInitialStateImpl implements _CountdownInitialState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String text, String? nextStartTime, int? number)? working,
+    TResult Function(Tick tick)? working,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -667,7 +845,7 @@ abstract class _$$CountdownWorkingStateImplCopyWith<$Res> {
           $Res Function(_$CountdownWorkingStateImpl) then) =
       __$$CountdownWorkingStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String text, String? nextStartTime, int? number});
+  $Res call({Tick tick});
 }
 
 /// @nodoc
@@ -683,23 +861,13 @@ class __$$CountdownWorkingStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
-    Object? nextStartTime = freezed,
-    Object? number = freezed,
+    Object? tick = null,
   }) {
     return _then(_$CountdownWorkingStateImpl(
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      nextStartTime: freezed == nextStartTime
-          ? _value.nextStartTime
-          : nextStartTime // ignore: cast_nullable_to_non_nullable
-              as String?,
-      number: freezed == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as int?,
+      tick: null == tick
+          ? _value.tick
+          : tick // ignore: cast_nullable_to_non_nullable
+              as Tick,
     ));
   }
 }
@@ -707,19 +875,14 @@ class __$$CountdownWorkingStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CountdownWorkingStateImpl implements _CountdownWorkingState {
-  const _$CountdownWorkingStateImpl(
-      {required this.text, this.nextStartTime, this.number});
+  const _$CountdownWorkingStateImpl({required this.tick});
 
   @override
-  final String text;
-  @override
-  final String? nextStartTime;
-  @override
-  final int? number;
+  final Tick tick;
 
   @override
   String toString() {
-    return 'CountdownState.working(text: $text, nextStartTime: $nextStartTime, number: $number)';
+    return 'CountdownState.working(tick: $tick)';
   }
 
   @override
@@ -727,14 +890,11 @@ class _$CountdownWorkingStateImpl implements _CountdownWorkingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CountdownWorkingStateImpl &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.nextStartTime, nextStartTime) ||
-                other.nextStartTime == nextStartTime) &&
-            (identical(other.number, number) || other.number == number));
+            (identical(other.tick, tick) || other.tick == tick));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, text, nextStartTime, number);
+  int get hashCode => Object.hash(runtimeType, tick);
 
   /// Create a copy of CountdownState
   /// with the given fields replaced by the non-null parameter values.
@@ -749,30 +909,29 @@ class _$CountdownWorkingStateImpl implements _CountdownWorkingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String text, String? nextStartTime, int? number)
-        working,
+    required TResult Function(Tick tick) working,
   }) {
-    return working(text, nextStartTime, number);
+    return working(tick);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String text, String? nextStartTime, int? number)? working,
+    TResult? Function(Tick tick)? working,
   }) {
-    return working?.call(text, nextStartTime, number);
+    return working?.call(tick);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String text, String? nextStartTime, int? number)? working,
+    TResult Function(Tick tick)? working,
     required TResult orElse(),
   }) {
     if (working != null) {
-      return working(text, nextStartTime, number);
+      return working(tick);
     }
     return orElse();
   }
@@ -810,14 +969,10 @@ class _$CountdownWorkingStateImpl implements _CountdownWorkingState {
 }
 
 abstract class _CountdownWorkingState implements CountdownState {
-  const factory _CountdownWorkingState(
-      {required final String text,
-      final String? nextStartTime,
-      final int? number}) = _$CountdownWorkingStateImpl;
+  const factory _CountdownWorkingState({required final Tick tick}) =
+      _$CountdownWorkingStateImpl;
 
-  String get text;
-  String? get nextStartTime;
-  int? get number;
+  Tick get tick;
 
   /// Create a copy of CountdownState
   /// with the given fields replaced by the non-null parameter values.

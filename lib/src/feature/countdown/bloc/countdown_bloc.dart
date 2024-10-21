@@ -15,7 +15,6 @@ part 'countdown_state.dart';
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   final IAudioController _audioController;
   final CountdownAtStart _countdown;
-  final int _stageId;
 
   CountdownBloc({
     required IAudioController audioController,
@@ -23,10 +22,9 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     required int stageId,
   })  : _audioController = audioController,
         _countdown = countdown,
-        _stageId = stageId,
         super(const CountdownState.initial()) {
     if (stageId > 0) {
-      _countdown.start(_stageId);
+      _countdown.start(stageId);
     }
     _countdown.value.listen((value) {
       add(CountdownEvent.tick(value));
@@ -44,21 +42,29 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
           final nextStartTime = event.tick.nextStartTime;
           if (nextStartTime == null) {
             emit(CountdownState.working(
-              text: event.tick.text,
+              tick: Tick(text: event.tick.text, second: event.tick.second),
             ));
           } else {
             emit(
               CountdownState.working(
-                text: event.tick.text,
-                nextStartTime:
-                    DateFormat(shortTimeFormat).format(nextStartTime),
-                number: event.tick.number,
+                tick: Tick(
+                  text: event.tick.text,
+                  nextStartTime: nextStartTime,
+                  number: event.tick.number,
+                  second: event.tick.second,
+                ),
               ),
             );
           }
         },
         beep: (_CountdownBeep event) {
           _audioController.beep();
+        },
+        callParticipant: (event) {
+          _audioController.callParticipant(
+            time: DateFormat(shortTimeFormat).format(DateTime.now()),
+            stageId: event.stageId,
+          );
         },
       );
     });

@@ -15,12 +15,12 @@ class CountdownPage extends StatelessWidget {
         body: BlocBuilder<CountdownBloc, CountdownState>(
             builder: (context, state) {
           var text = state.maybeMap(working: (state) {
-            return state.text;
+            return state.tick.text;
           }, orElse: () {
             return '';
           });
           var number = state.maybeMap(working: (state) {
-            return state.number;
+            return state.tick.number;
           }, orElse: () {
             return null;
           });

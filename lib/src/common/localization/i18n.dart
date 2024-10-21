@@ -115,6 +115,16 @@ class I18nSettings {
         name: 'I18nSettings_voice',
       );
 
+  static String get voiceFromApp => Intl.message(
+    'Использовать время приложения',
+    name: 'I18nSettings_voiceFromApp',
+  );
+
+  static String get voiceFromAppDetails => Intl.message(
+    'Для озвучивания без модуля',
+    name: 'I18nSettings_voiceFromAppDetails',
+  );
+
   static String get participantsName => Intl.message(
         'Называть имена участников',
         name: 'I18nSettings_participantsName',

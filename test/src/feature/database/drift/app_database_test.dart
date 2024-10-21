@@ -1587,7 +1587,7 @@ void main() {
         var number2 = 7;
         var number3 = 14;
 
-        var addNumber1 = await db.addFinishTime(
+        final addNumber1 = await db.addFinishTime(
           stage: stage,
           finish: finish1,
           timeStamp: timeStamp1.toDateTime()!,
@@ -1596,7 +1596,7 @@ void main() {
         );
         expect(addNumber1, number1);
 
-        var addNumber2 = await db.addFinishTime(
+        final addNumber2 = await db.addFinishTime(
           stage: stage,
           finish: finish2,
           timeStamp: timeStamp2.toDateTime()!,
@@ -1605,7 +1605,7 @@ void main() {
         );
         expect(addNumber2, number2);
 
-        var addNumber3 = await db.addFinishTime(
+        final addNumber3 = await db.addFinishTime(
           stage: stage,
           finish: finish3,
           timeStamp: timeStamp3.toDateTime()!,
