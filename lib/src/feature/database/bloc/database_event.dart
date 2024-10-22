@@ -90,9 +90,9 @@ class DatabaseEvent with _$DatabaseEvent {
     required ParticipantStatus status,
   }) = _SetStatusForStartId;
 
-  const factory DatabaseEvent.getFinishesFromStage({
-    required int stageId,
-  }) = _GetFinishesFromStage;
+  // const factory DatabaseEvent.getFinishesFromStage({
+  //   required int stageId,
+  // }) = _GetFinishesFromStage;
 
   const factory DatabaseEvent.addFinishTime({
     required Stage stage,

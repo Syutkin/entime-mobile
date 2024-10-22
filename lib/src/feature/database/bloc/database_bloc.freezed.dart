@@ -67,7 +67,6 @@ mixin _$DatabaseEvent {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -150,7 +149,6 @@ mixin _$DatabaseEvent {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -231,7 +229,6 @@ mixin _$DatabaseEvent {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -285,7 +282,6 @@ mixin _$DatabaseEvent {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -329,7 +325,6 @@ mixin _$DatabaseEvent {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -369,7 +364,6 @@ mixin _$DatabaseEvent {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -503,7 +497,6 @@ class _$InitializeImpl implements _Initialize {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -589,7 +582,6 @@ class _$InitializeImpl implements _Initialize {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -673,7 +665,6 @@ class _$InitializeImpl implements _Initialize {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -733,7 +724,6 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -780,7 +770,6 @@ class _$InitializeImpl implements _Initialize {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -823,7 +812,6 @@ class _$InitializeImpl implements _Initialize {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -1214,7 +1202,6 @@ class _$EmitStateImpl implements _EmitState {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -1315,7 +1302,6 @@ class _$EmitStateImpl implements _EmitState {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -1414,7 +1400,6 @@ class _$EmitStateImpl implements _EmitState {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -1489,7 +1474,6 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -1536,7 +1520,6 @@ class _$EmitStateImpl implements _EmitState {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -1579,7 +1562,6 @@ class _$EmitStateImpl implements _EmitState {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -1797,7 +1779,6 @@ class _$AddRaceImpl implements _AddRace {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -1883,7 +1864,6 @@ class _$AddRaceImpl implements _AddRace {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -1967,7 +1947,6 @@ class _$AddRaceImpl implements _AddRace {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -2027,7 +2006,6 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -2074,7 +2052,6 @@ class _$AddRaceImpl implements _AddRace {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -2117,7 +2094,6 @@ class _$AddRaceImpl implements _AddRace {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -2280,7 +2256,6 @@ class _$DeleteRaceImpl implements _DeleteRace {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -2366,7 +2341,6 @@ class _$DeleteRaceImpl implements _DeleteRace {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -2450,7 +2424,6 @@ class _$DeleteRaceImpl implements _DeleteRace {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -2510,7 +2483,6 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -2557,7 +2529,6 @@ class _$DeleteRaceImpl implements _DeleteRace {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -2600,7 +2571,6 @@ class _$DeleteRaceImpl implements _DeleteRace {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -2729,7 +2699,6 @@ class _$GetRacesImpl implements _GetRaces {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -2815,7 +2784,6 @@ class _$GetRacesImpl implements _GetRaces {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -2899,7 +2867,6 @@ class _$GetRacesImpl implements _GetRaces {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -2959,7 +2926,6 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -3006,7 +2972,6 @@ class _$GetRacesImpl implements _GetRaces {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -3049,7 +3014,6 @@ class _$GetRacesImpl implements _GetRaces {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -3198,7 +3162,6 @@ class _$SelectRaceImpl implements _SelectRace {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -3284,7 +3247,6 @@ class _$SelectRaceImpl implements _SelectRace {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -3368,7 +3330,6 @@ class _$SelectRaceImpl implements _SelectRace {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -3428,7 +3389,6 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -3475,7 +3435,6 @@ class _$SelectRaceImpl implements _SelectRace {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -3518,7 +3477,6 @@ class _$SelectRaceImpl implements _SelectRace {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -3647,7 +3605,6 @@ class _$DeselectRaceImpl implements _DeselectRace {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -3733,7 +3690,6 @@ class _$DeselectRaceImpl implements _DeselectRace {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -3817,7 +3773,6 @@ class _$DeselectRaceImpl implements _DeselectRace {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -3877,7 +3832,6 @@ class _$DeselectRaceImpl implements _DeselectRace {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -3924,7 +3878,6 @@ class _$DeselectRaceImpl implements _DeselectRace {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -3967,7 +3920,6 @@ class _$DeselectRaceImpl implements _DeselectRace {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -4132,7 +4084,6 @@ class _$AddStageImpl implements _AddStage {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -4218,7 +4169,6 @@ class _$AddStageImpl implements _AddStage {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -4302,7 +4252,6 @@ class _$AddStageImpl implements _AddStage {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -4362,7 +4311,6 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -4409,7 +4357,6 @@ class _$AddStageImpl implements _AddStage {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -4452,7 +4399,6 @@ class _$AddStageImpl implements _AddStage {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -4613,7 +4559,6 @@ class _$DeleteStageImpl implements _DeleteStage {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -4699,7 +4644,6 @@ class _$DeleteStageImpl implements _DeleteStage {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -4783,7 +4727,6 @@ class _$DeleteStageImpl implements _DeleteStage {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -4843,7 +4786,6 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -4890,7 +4832,6 @@ class _$DeleteStageImpl implements _DeleteStage {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -4933,7 +4874,6 @@ class _$DeleteStageImpl implements _DeleteStage {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -5089,7 +5029,6 @@ class _$GetStagesImpl implements _GetStages {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -5175,7 +5114,6 @@ class _$GetStagesImpl implements _GetStages {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -5259,7 +5197,6 @@ class _$GetStagesImpl implements _GetStages {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -5319,7 +5256,6 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -5366,7 +5302,6 @@ class _$GetStagesImpl implements _GetStages {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -5409,7 +5344,6 @@ class _$GetStagesImpl implements _GetStages {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -5566,7 +5500,6 @@ class _$SelectStageImpl implements _SelectStage {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -5652,7 +5585,6 @@ class _$SelectStageImpl implements _SelectStage {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -5736,7 +5668,6 @@ class _$SelectStageImpl implements _SelectStage {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -5796,7 +5727,6 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -5843,7 +5773,6 @@ class _$SelectStageImpl implements _SelectStage {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -5886,7 +5815,6 @@ class _$SelectStageImpl implements _SelectStage {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -6045,7 +5973,6 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -6131,7 +6058,6 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -6215,7 +6141,6 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -6275,7 +6200,6 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -6322,7 +6246,6 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -6365,7 +6288,6 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -6555,7 +6477,6 @@ class _$AddStartNumberImpl implements _AddStartNumber {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -6641,7 +6562,6 @@ class _$AddStartNumberImpl implements _AddStartNumber {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -6725,7 +6645,6 @@ class _$AddStartNumberImpl implements _AddStartNumber {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -6785,7 +6704,6 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -6832,7 +6750,6 @@ class _$AddStartNumberImpl implements _AddStartNumber {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -6875,7 +6792,6 @@ class _$AddStartNumberImpl implements _AddStartNumber {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -7115,7 +7031,6 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -7208,7 +7123,6 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -7299,7 +7213,6 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -7366,7 +7279,6 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -7413,7 +7325,6 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -7456,7 +7367,6 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -7688,7 +7598,6 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -7775,7 +7684,6 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -7860,7 +7768,6 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -7921,7 +7828,6 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -7968,7 +7874,6 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -8011,7 +7916,6 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -8199,7 +8103,6 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -8285,7 +8188,6 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -8369,7 +8271,6 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -8429,7 +8330,6 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -8476,7 +8376,6 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -8519,7 +8418,6 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -8690,7 +8588,6 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -8776,7 +8673,6 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -8860,7 +8756,6 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -8920,7 +8815,6 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -8967,7 +8861,6 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -9010,7 +8903,6 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -9050,485 +8942,6 @@ abstract class _SetStatusForStartId implements DatabaseEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SetStatusForStartIdImplCopyWith<_$SetStatusForStartIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$GetFinishesFromStageImplCopyWith<$Res> {
-  factory _$$GetFinishesFromStageImplCopyWith(_$GetFinishesFromStageImpl value,
-          $Res Function(_$GetFinishesFromStageImpl) then) =
-      __$$GetFinishesFromStageImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int stageId});
-}
-
-/// @nodoc
-class __$$GetFinishesFromStageImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$GetFinishesFromStageImpl>
-    implements _$$GetFinishesFromStageImplCopyWith<$Res> {
-  __$$GetFinishesFromStageImplCopyWithImpl(_$GetFinishesFromStageImpl _value,
-      $Res Function(_$GetFinishesFromStageImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? stageId = null,
-  }) {
-    return _then(_$GetFinishesFromStageImpl(
-      stageId: null == stageId
-          ? _value.stageId
-          : stageId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetFinishesFromStageImpl implements _GetFinishesFromStage {
-  const _$GetFinishesFromStageImpl({required this.stageId});
-
-  @override
-  final int stageId;
-
-  @override
-  String toString() {
-    return 'DatabaseEvent.getFinishesFromStage(stageId: $stageId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetFinishesFromStageImpl &&
-            (identical(other.stageId, stageId) || other.stageId == stageId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, stageId);
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetFinishesFromStageImplCopyWith<_$GetFinishesFromStageImpl>
-      get copyWith =>
-          __$$GetFinishesFromStageImplCopyWithImpl<_$GetFinishesFromStageImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)
-        emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
-    required TResult Function(int id) deleteRace,
-    required TResult Function() getRaces,
-    required TResult Function(Race race) selectRace,
-    required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int id) deleteStage,
-    required TResult Function(int raceId) getStages,
-    required TResult Function(Stage stage) selectStage,
-    required TResult Function(int stageId) getParticipantsAtStart,
-    required TResult Function(
-            Stage stage, int number, String startTime, bool forceAdd)
-        addStartNumber,
-    required TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)
-        updateStartingInfo,
-    required TResult Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)
-        updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, int deltaInSeconds)
-        updateManualStartTime,
-    required TResult Function(int startId, ParticipantStatus status)
-        setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
-    required TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)
-        addFinishTime,
-    required TResult Function(int stageId, String finishTime, int? number)
-        addFinishTimeManual,
-    required TResult Function(int stageId) clearStartResultsDebug,
-    required TResult Function(int stageId) clearFinishResultsDebug,
-    required TResult Function(int stageId) hideAllFinises,
-    required TResult Function(Stage stage, int number) clearNumberAtFinish,
-    required TResult Function(Stage stage, int number) setDNSForStage,
-    required TResult Function(Stage stage, int number) setDNFForStage,
-    required TResult Function(int id) hideFinish,
-    required TResult Function(
-            Stage stage, int finishId, int number, String finishTime)
-        addNumberToFinish,
-    required TResult Function(int stageId, DateTime dateTimeNow)
-        getNumbersOnTraceNow,
-    required TResult Function(int number) selectAwaitingNumber,
-    required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
-    required TResult Function() shareDatabase,
-  }) {
-    return getFinishesFromStage(stageId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
-    TResult? Function(int id)? deleteRace,
-    TResult? Function()? getRaces,
-    TResult? Function(Race race)? selectRace,
-    TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
-    TResult? Function(int id)? deleteStage,
-    TResult? Function(int raceId)? getStages,
-    TResult? Function(Stage stage)? selectStage,
-    TResult? Function(int stageId)? getParticipantsAtStart,
-    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult? Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult? Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult? Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
-    TResult? Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult? Function(int stageId, String finishTime, int? number)?
-        addFinishTimeManual,
-    TResult? Function(int stageId)? clearStartResultsDebug,
-    TResult? Function(int stageId)? clearFinishResultsDebug,
-    TResult? Function(int stageId)? hideAllFinises,
-    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult? Function(Stage stage, int number)? setDNSForStage,
-    TResult? Function(Stage stage, int number)? setDNFForStage,
-    TResult? Function(int id)? hideFinish,
-    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(int number)? selectAwaitingNumber,
-    TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
-    TResult? Function()? shareDatabase,
-  }) {
-    return getFinishesFromStage?.call(stageId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function()? getRaces,
-    TResult Function(Race race)? selectRace,
-    TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int raceId)? getStages,
-    TResult Function(Stage stage)? selectStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult Function(int stageId, String startTime, int correction,
-            DateTime timeStamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
-    TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timeStamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult Function(int stageId, String finishTime, int? number)?
-        addFinishTimeManual,
-    TResult Function(int stageId)? clearStartResultsDebug,
-    TResult Function(int stageId)? clearFinishResultsDebug,
-    TResult Function(int stageId)? hideAllFinises,
-    TResult Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult Function(Stage stage, int number)? setDNSForStage,
-    TResult Function(Stage stage, int number)? setDNFForStage,
-    TResult Function(int id)? hideFinish,
-    TResult Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function()? shareDatabase,
-    required TResult orElse(),
-  }) {
-    if (getFinishesFromStage != null) {
-      return getFinishesFromStage(stageId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialize value) initialize,
-    required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_DeleteRace value) deleteRace,
-    required TResult Function(_GetRaces value) getRaces,
-    required TResult Function(_SelectRace value) selectRace,
-    required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
-    required TResult Function(_DeleteStage value) deleteStage,
-    required TResult Function(_GetStages value) getStages,
-    required TResult Function(_SelectStage value) selectStage,
-    required TResult Function(_GetParticipantsAtStart value)
-        getParticipantsAtStart,
-    required TResult Function(_AddStartNumber value) addStartNumber,
-    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
-    required TResult Function(_UpdateAutomaticCorrection value)
-        updateAutomaticCorrection,
-    required TResult Function(_UpdateManualStartTime value)
-        updateManualStartTime,
-    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
-    required TResult Function(_AddFinishTime value) addFinishTime,
-    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
-    required TResult Function(_ClearStartResultsDebug value)
-        clearStartResultsDebug,
-    required TResult Function(_ClearFinishResultsDebug value)
-        clearFinishResultsDebug,
-    required TResult Function(_HideAllFinises value) hideAllFinises,
-    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
-    required TResult Function(_SetDNSForStage value) setDNSForStage,
-    required TResult Function(_SetDNFForStage value) setDNFForStage,
-    required TResult Function(_HideFinish value) hideFinish,
-    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
-    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
-    required TResult Function(_DeselectAwaitingNumber value)
-        deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_ShareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
-    required TResult Function(_ShareDatabase value) shareDatabase,
-  }) {
-    return getFinishesFromStage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_DeleteRace value)? deleteRace,
-    TResult? Function(_GetRaces value)? getRaces,
-    TResult? Function(_SelectRace value)? selectRace,
-    TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
-    TResult? Function(_DeleteStage value)? deleteStage,
-    TResult? Function(_GetStages value)? getStages,
-    TResult? Function(_SelectStage value)? selectStage,
-    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult? Function(_AddStartNumber value)? addStartNumber,
-    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult? Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
-    TResult? Function(_AddFinishTime value)? addFinishTime,
-    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult? Function(_HideAllFinises value)? hideAllFinises,
-    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult? Function(_SetDNSForStage value)? setDNSForStage,
-    TResult? Function(_SetDNFForStage value)? setDNFForStage,
-    TResult? Function(_HideFinish value)? hideFinish,
-    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_ShareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
-    TResult? Function(_ShareDatabase value)? shareDatabase,
-  }) {
-    return getFinishesFromStage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_GetRaces value)? getRaces,
-    TResult Function(_SelectRace value)? selectRace,
-    TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetStages value)? getStages,
-    TResult Function(_SelectStage value)? selectStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
-    TResult Function(_AddFinishTime value)? addFinishTime,
-    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult Function(_HideAllFinises value)? hideAllFinises,
-    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(_SetDNSForStage value)? setDNSForStage,
-    TResult Function(_SetDNFForStage value)? setDNFForStage,
-    TResult Function(_HideFinish value)? hideFinish,
-    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_ShareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
-    TResult Function(_ShareDatabase value)? shareDatabase,
-    required TResult orElse(),
-  }) {
-    if (getFinishesFromStage != null) {
-      return getFinishesFromStage(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GetFinishesFromStage implements DatabaseEvent {
-  const factory _GetFinishesFromStage({required final int stageId}) =
-      _$GetFinishesFromStageImpl;
-
-  int get stageId;
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetFinishesFromStageImplCopyWith<_$GetFinishesFromStageImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -9735,7 +9148,6 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -9822,7 +9234,6 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -9907,7 +9318,6 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -9968,7 +9378,6 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -10015,7 +9424,6 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -10058,7 +9466,6 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -10248,7 +9655,6 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -10334,7 +9740,6 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -10418,7 +9823,6 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -10478,7 +9882,6 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -10525,7 +9928,6 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -10568,7 +9970,6 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -10732,7 +10133,6 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -10818,7 +10218,6 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -10902,7 +10301,6 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -10962,7 +10360,6 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -11009,7 +10406,6 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -11052,7 +10448,6 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -11212,7 +10607,6 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -11298,7 +10692,6 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -11382,7 +10775,6 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -11442,7 +10834,6 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -11489,7 +10880,6 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -11532,7 +10922,6 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -11690,7 +11079,6 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -11776,7 +11164,6 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -11860,7 +11247,6 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -11920,7 +11306,6 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -11967,7 +11352,6 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -12010,7 +11394,6 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -12176,7 +11559,6 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -12262,7 +11644,6 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -12346,7 +11727,6 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -12406,7 +11786,6 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -12453,7 +11832,6 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -12496,7 +11874,6 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -12665,7 +12042,6 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -12751,7 +12127,6 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -12835,7 +12210,6 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -12895,7 +12269,6 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -12942,7 +12315,6 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -12985,7 +12357,6 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -13154,7 +12525,6 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -13240,7 +12610,6 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -13324,7 +12693,6 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -13384,7 +12752,6 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -13431,7 +12798,6 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -13474,7 +12840,6 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -13633,7 +12998,6 @@ class _$HideFinishImpl implements _HideFinish {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -13719,7 +13083,6 @@ class _$HideFinishImpl implements _HideFinish {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -13803,7 +13166,6 @@ class _$HideFinishImpl implements _HideFinish {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -13863,7 +13225,6 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -13910,7 +13271,6 @@ class _$HideFinishImpl implements _HideFinish {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -13953,7 +13313,6 @@ class _$HideFinishImpl implements _HideFinish {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -14141,7 +13500,6 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -14227,7 +13585,6 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -14311,7 +13668,6 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -14371,7 +13727,6 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -14418,7 +13773,6 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -14461,7 +13815,6 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -14636,7 +13989,6 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -14722,7 +14074,6 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -14806,7 +14157,6 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -14866,7 +14216,6 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -14913,7 +14262,6 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -14956,7 +14304,6 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -15117,7 +14464,6 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -15203,7 +14549,6 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -15287,7 +14632,6 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -15347,7 +14691,6 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -15394,7 +14737,6 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -15437,7 +14779,6 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -15570,7 +14911,6 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -15656,7 +14996,6 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -15740,7 +15079,6 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -15800,7 +15138,6 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -15847,7 +15184,6 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -15890,7 +15226,6 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -16040,7 +15375,6 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -16126,7 +15460,6 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -16210,7 +15543,6 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -16270,7 +15602,6 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -16317,7 +15648,6 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -16360,7 +15690,6 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -16490,7 +15819,6 @@ class _$ShareStartImpl implements _ShareStart {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -16576,7 +15904,6 @@ class _$ShareStartImpl implements _ShareStart {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -16660,7 +15987,6 @@ class _$ShareStartImpl implements _ShareStart {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -16720,7 +16046,6 @@ class _$ShareStartImpl implements _ShareStart {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -16767,7 +16092,6 @@ class _$ShareStartImpl implements _ShareStart {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -16810,7 +16134,6 @@ class _$ShareStartImpl implements _ShareStart {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -16931,7 +16254,6 @@ class _$ShareFinishImpl implements _ShareFinish {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -17017,7 +16339,6 @@ class _$ShareFinishImpl implements _ShareFinish {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -17101,7 +16422,6 @@ class _$ShareFinishImpl implements _ShareFinish {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -17161,7 +16481,6 @@ class _$ShareFinishImpl implements _ShareFinish {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -17208,7 +16527,6 @@ class _$ShareFinishImpl implements _ShareFinish {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -17251,7 +16569,6 @@ class _$ShareFinishImpl implements _ShareFinish {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -17372,7 +16689,6 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
-    required TResult Function(int stageId) getFinishesFromStage,
     required TResult Function(
             Stage stage,
             String finishTime,
@@ -17458,7 +16774,6 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult? Function(int stageId)? getFinishesFromStage,
     TResult? Function(
             Stage stage,
             String finishTime,
@@ -17542,7 +16857,6 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
-    TResult Function(int stageId)? getFinishesFromStage,
     TResult Function(
             Stage stage,
             String finishTime,
@@ -17602,7 +16916,6 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     required TResult Function(_UpdateManualStartTime value)
         updateManualStartTime,
     required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_GetFinishesFromStage value) getFinishesFromStage,
     required TResult Function(_AddFinishTime value) addFinishTime,
     required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
     required TResult Function(_ClearStartResultsDebug value)
@@ -17649,7 +16962,6 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
         updateAutomaticCorrection,
     TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult? Function(_AddFinishTime value)? addFinishTime,
     TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
@@ -17692,7 +17004,6 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
         updateAutomaticCorrection,
     TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
     TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_GetFinishesFromStage value)? getFinishesFromStage,
     TResult Function(_AddFinishTime value)? addFinishTime,
     TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
     TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,

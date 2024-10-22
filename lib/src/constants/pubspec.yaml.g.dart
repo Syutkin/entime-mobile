@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-dev+266',
+    representation: r'0.5.0-dev+267',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-dev+266',
+    canonical: r'0.5.0-dev+267',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,19 +118,19 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'266'],
+    build: <String>[r'267'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2024,
     10,
-    21,
-    12,
-    7,
-    14,
-    967,
-    540,
+    22,
+    19,
+    32,
+    31,
+    415,
+    355,
   );
 
   /// Name
@@ -177,7 +177,7 @@ sealed class Pubspec {
   /// While providing a homepage is optional,
   /// please provide it or repository (or both).
   /// It helps users understand where your package is coming from.
-  static const String homepage = r'';
+  static const String homepage = r'https://github.com/Syutkin/entime-mobile';
 
   /// Repository
   ///
@@ -192,7 +192,7 @@ sealed class Pubspec {
   /// While providing a repository is optional,
   /// please provide it or homepage (or both).
   /// It helps users understand where your package is coming from.
-  static const String repository = r'';
+  static const String repository = r'https://github.com/Syutkin/entime-mobile';
 
   /// Issue tracker
   ///
@@ -205,7 +205,7 @@ sealed class Pubspec {
   /// If issue_tracker is missing but repository is present and points to GitHub,
   /// then the pub.dev site uses the default issue tracker
   /// (https://github.com/<user>/<repository>/issues).
-  static const String issueTracker = r'';
+  static const String issueTracker = r'https://github.com/Syutkin/entime-mobile/issues';
 
   /// Documentation
   ///
@@ -229,7 +229,7 @@ sealed class Pubspec {
   /// ```yaml
   /// publish_to: none
   /// ```
-  static const String publishTo = r'https://pub.dev/';
+  static const String publishTo = r'none';
 
   /// Funding
   ///

@@ -63,8 +63,6 @@ class _DebugCountdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
-        // _device = event.device;
-        // ignore: no-empty-block
         onPressed: () {
           final settingsBloc = context.read<SettingsBloc>();
           final stageId = settingsBloc.state.settings.stageId;

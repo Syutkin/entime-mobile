@@ -161,9 +161,9 @@ class UpdateProvider {
                 _downloaded = true;
                 _onDownloadComplete();
               },
-              onError: (dynamic error) {
+              onError: (Object error) {
                 logger.e('Update_provider -> Error', error: error);
-                _onError(error as String);
+                _onError(error.toString());
               },
               cancelOnError: true,
             );

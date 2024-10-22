@@ -387,7 +387,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               ));
             }
           },
-          getFinishesFromStage: (event) {},
+          // getFinishesFromStage: (event) {},
           addFinishTime: (event) async {
             final autoFinishNumber = await _db.addFinishTime(
               stage: event.stage,
