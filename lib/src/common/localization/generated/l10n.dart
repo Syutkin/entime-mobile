@@ -2027,6 +2027,26 @@ class GeneratedLocalization {
       args: [],
     );
   }
+
+  /// `NTP offset`
+  String get I18nNtp_ntpOffset {
+    return Intl.message(
+      'NTP offset',
+      name: 'I18nNtp_ntpOffset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Смещение на {offset} миллисекунд`
+  String I18nNtp_offsetInMilliseconds(Object offset) {
+    return Intl.message(
+      'Смещение на $offset миллисекунд',
+      name: 'I18nNtp_offsetInMilliseconds',
+      desc: '',
+      args: [offset],
+    );
+  }
 }
 
 class AppLocalizationDelegate

@@ -96,14 +96,14 @@ class I18nSettings {
       );
 
   static String get countdownFromApp => Intl.message(
-    'Использовать время приложения',
-    name: 'I18nSettings_countdownFromApp',
-  );
+        'Использовать время приложения',
+        name: 'I18nSettings_countdownFromApp',
+      );
 
   static String get countdownFromAppDetails => Intl.message(
-    'Для озвучивания без модуля',
-    name: 'I18nSettings_countdownFromAppDetails',
-  );
+        'Для озвучивания без модуля',
+        name: 'I18nSettings_countdownFromAppDetails',
+      );
 
   static String get voiceMessages => Intl.message(
         'Голосовые сообщения',
@@ -116,14 +116,14 @@ class I18nSettings {
       );
 
   static String get voiceFromApp => Intl.message(
-    'Использовать время приложения',
-    name: 'I18nSettings_voiceFromApp',
-  );
+        'Использовать время приложения',
+        name: 'I18nSettings_voiceFromApp',
+      );
 
   static String get voiceFromAppDetails => Intl.message(
-    'Для озвучивания без модуля',
-    name: 'I18nSettings_voiceFromAppDetails',
-  );
+        'Для озвучивания без модуля',
+        name: 'I18nSettings_voiceFromAppDetails',
+      );
 
   static String get participantsName => Intl.message(
         'Называть имена участников',
@@ -1144,5 +1144,18 @@ class I18nDatabase {
   static String get trail => Intl.message(
         'Трейл',
         name: 'I18nDatabase_trail',
+      );
+}
+
+class I18nNtp {
+  static String get ntpOffset => Intl.message(
+        'NTP offset',
+        name: 'I18nNtp_ntpOffset',
+      );
+
+  static String offsetInMilliseconds(int offset) => Intl.message(
+        'Смещение на $offset миллисекунд',
+        name: 'I18nNtp_offsetInMilliseconds',
+        args: [offset],
       );
 }

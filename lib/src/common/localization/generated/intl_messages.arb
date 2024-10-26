@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-21T12:49:15.689695",
+  "@@last_modified": "2024-10-26T11:40:51.766083",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -1054,5 +1054,17 @@
   "@I18nDatabase_trail": {
     "type": "text",
     "placeholders": {}
+  },
+  "I18nNtp_ntpOffset": "NTP offset",
+  "@I18nNtp_ntpOffset": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nNtp_offsetInMilliseconds": "Смещение на {offset} миллисекунд",
+  "@I18nNtp_offsetInMilliseconds": {
+    "type": "text",
+    "placeholders": {
+      "offset": {}
+    }
   }
 }

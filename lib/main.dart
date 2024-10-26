@@ -2,6 +2,8 @@ import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/src/constants/pubspec.yaml.g.dart';
+import 'package:entime/src/feature/ntp/bloc/ntp_bloc.dart';
+import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,6 +73,8 @@ Future<void> main() async {
 
   final CountdownAtStart countdown = CountdownAtStart(database: database);
 
+  final ntpProvider = NtpProvider();
+
   final app = EntimeApp(
     settingsProvider: settings,
     updateProvider: updateProvider,
@@ -79,6 +83,7 @@ Future<void> main() async {
     appInfo: appInfo,
     database: database,
     countdown: countdown,
+    ntpProvider: ntpProvider,
   );
 
   if (kReleaseMode) {
@@ -108,6 +113,7 @@ class EntimeApp extends StatelessWidget {
   // final ILogProvider logProvider;
   final AppDatabase database;
   final CountdownAtStart countdown;
+  final INtpProvider ntpProvider;
 
   const EntimeApp({
     super.key,
@@ -118,6 +124,7 @@ class EntimeApp extends StatelessWidget {
     required this.appInfo,
     required this.database,
     required this.countdown,
+    required this.ntpProvider,
   });
 
   @override
@@ -166,6 +173,9 @@ class EntimeApp extends StatelessWidget {
           ),
           BlocProvider<AppInfoCubit>(
             create: (context) => AppInfoCubit(appInfo: appInfo),
+          ),
+          BlocProvider<NtpBloc>(
+            create: (context) => NtpBloc(ntpProvider),
           ),
         ],
         child: const EntimeAppView(),

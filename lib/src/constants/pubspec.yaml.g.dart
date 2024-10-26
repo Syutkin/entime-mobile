@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-dev+267',
+    representation: r'0.5.0-dev+268',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-dev+267',
+    canonical: r'0.5.0-dev+268',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,19 +118,19 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'267'],
+    build: <String>[r'268'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2024,
     10,
-    22,
-    19,
-    32,
-    31,
-    415,
-    355,
+    26,
+    9,
+    41,
+    14,
+    787,
+    933,
   );
 
   /// Name
@@ -447,6 +447,7 @@ sealed class Pubspec {
     'sqlite3_flutter_libs': r'^0.5.24',
     'url_launcher': r'^6.3.1',
     'wakelock_plus': r'^1.2.8',
+    'flutter_ntp': r'^0.0.2',
   };
 
   /// Developer dependencies
@@ -474,6 +475,9 @@ sealed class Pubspec {
   static const Map<String, Object> dependencyOverrides = <String, Object>{
     'flutter_bluetooth_serial': <String, Object>{
       'git': r'https://github.com/Syutkin/flutter_bluetooth_serial.git',
+    },
+    'flutter_ntp': <String, Object>{
+      'path': r'../flutter_ntp',
     },
     'settings_ui': <String, Object>{
       'git': <String, Object>{

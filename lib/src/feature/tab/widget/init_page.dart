@@ -3,6 +3,7 @@ import 'package:entime/src/feature/tab/widget/race_tile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../ntp/widget/ntp_tile.dart';
 import 'debug_init_widgets.dart';
 
 class InitPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _InitPage extends State<InitPage> {
         children: <Widget>[
           const RaceTile(),
           const BluetoothTile(),
+          const NtpTile(),
           if (!kReleaseMode) ...debugButtons(),
         ],
       );

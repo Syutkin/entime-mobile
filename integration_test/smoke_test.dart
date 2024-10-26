@@ -8,6 +8,7 @@ import 'package:entime/src/feature/audio/logic/audio_service.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/countdown/logic/countdown.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
+import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/update/update.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,8 @@ void main() async {
 
   final CountdownAtStart countdown = CountdownAtStart(database: database);
 
+  final INtpProvider ntpProvider = NtpProvider();
+
   testWidgets('Smoke test', (tester) async {
     await tester.pumpWidget(
       EntimeApp(
@@ -65,6 +68,7 @@ void main() async {
         appInfo: appInfo,
         database: database,
         countdown: countdown,
+        ntpProvider: ntpProvider,
       ),
     ); // Create main app
     await tester.pumpAndSettle(); // Finish animations and scheduled microtasks

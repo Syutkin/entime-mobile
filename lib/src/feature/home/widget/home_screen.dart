@@ -1,7 +1,5 @@
-import 'package:entime/src/feature/countdown/widget/countdown_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nested/nested.dart';
 
 import '../../../common/localization/localization.dart';
@@ -10,7 +8,6 @@ import '../../bluetooth/bluetooth.dart';
 import '../../countdown/bloc/countdown_bloc.dart';
 import '../../database/bloc/database_bloc.dart';
 import '../../database/model/filter_finish.dart';
-import '../../database/widget/races_list_page.dart';
 import '../../database/widget/start_list_page.dart';
 import '../../drawer/widget/app_drawer.dart';
 import '../../module_settings/module_settings.dart';
@@ -20,7 +17,7 @@ import '../../tab/widget/finish_page.dart';
 import '../../tab/widget/init_page.dart';
 import '../../tab/widget/start_page.dart';
 import '../../update/update.dart';
-import '../model/home_menu_button.dart';
+import 'menu_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,6 +31,8 @@ class HomeScreen extends StatelessWidget {
           _listenToNewStartTime(),
           // Используем обратный отсчёт из приложения для звуковых эффектов
           _listenToCountdownEvents(),
+          // Следим за наличием новой версии
+          _listenToUpdater(),
         ],
         child: BlocBuilder<TabBloc, AppTab>(
           builder: (context, activeTab) => DefaultTabController(
@@ -45,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                 actions: <Widget>[
                   _FinishFilterButton(activeTab: activeTab),
                   const BluetoothButton(),
-                  _MenuButton(activeTab: activeTab),
+                  MenuButton(activeTab: activeTab),
                 ],
                 bottom: TabBar(
                   onTap: (index) {
@@ -69,19 +68,13 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              body: MultiBlocListener(
-                listeners: [
-                  // Следим за наличием новой версии
-                  _listenToUpdater(),
+              body: const TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: <Widget>[
+                  InitPage(),
+                  StartPage(),
+                  FinishPage(),
                 ],
-                child: const TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: <Widget>[
-                    InitPage(),
-                    StartPage(),
-                    FinishPage(),
-                  ],
-                ),
               ),
             ),
           ),
@@ -358,150 +351,4 @@ class _FinishFilterButton extends StatelessWidget {
       },
     );
   }
-}
-
-class _MenuButton extends StatelessWidget {
-  final AppTab activeTab;
-
-  const _MenuButton({required this.activeTab});
-
-  @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<SettingsBloc, SettingsState>(
-        builder: (context, state) => BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, protocolState) {
-            final settingsBloc = context.read<SettingsBloc>();
-            final settings = settingsBloc.state.settings;
-            final databaseBloc = context.read<DatabaseBloc>();
-            final menuItems = <PopupMenuEntry<HomeMenuButton>>[];
-            if (activeTab == AppTab.start || activeTab == AppTab.finish) {
-              if (activeTab == AppTab.start) {
-                menuItems.add(
-                  PopupMenuItem(
-                    value: HomeMenuButton.addRacer,
-                    child: ListTile(
-                      leading: const Icon(Icons.add),
-                      title: Text(Localization.current.I18nHome_addRacer),
-                    ),
-                  ),
-                );
-                menuItems.add(PopupMenuDivider());
-                menuItems.add(
-                  PopupMenuItem(
-                    value: HomeMenuButton.countdownPage,
-                    child: ListTile(
-                      leading: Icon(MdiIcons.timer),
-                      title: Text(Localization.current.I18nHome_countdownPage),
-                    ),
-                  ),
-                );
-                menuItems.add(
-                  PopupMenuItem(
-                    value: HomeMenuButton.countdown,
-                    child: ListTile(
-                      leading: Icon(MdiIcons.timer),
-                      title: Text(Localization.current.I18nHome_countdown),
-                    ),
-                  ),
-                );
-              }
-              menuItems.add(
-                PopupMenuItem(
-                  value: HomeMenuButton.fab,
-                  child: ListTile(
-                    leading: Icon(MdiIcons.handBackLeft),
-                    title: Text(Localization.current.I18nHome_fab),
-                  ),
-                ),
-              );
-              menuItems.add(PopupMenuDivider());
-              menuItems.add(
-                PopupMenuItem(
-                  value: HomeMenuButton.share,
-                  child: ListTile(
-                    leading: const Icon(Icons.share),
-                    title: Text(Localization.current.I18nHome_share),
-                  ),
-                ),
-              );
-            } else {
-              menuItems.add(
-                PopupMenuItem(
-                  value: HomeMenuButton.bluetooth,
-                  child: ListTile(
-                    leading: const Icon(Icons.bluetooth),
-                    title: Text(Localization.current.I18nHome_bluetooth),
-                  ),
-                ),
-              );
-            }
-
-            return PopupMenuButton<HomeMenuButton>(
-              itemBuilder: (context) => menuItems,
-              onSelected: (value) async {
-                switch (value) {
-                  case HomeMenuButton.share:
-                    if (activeTab == AppTab.start) {
-                      databaseBloc.add(DatabaseEvent.shareStart());
-                    } else if (activeTab == AppTab.finish) {
-                      databaseBloc.add(DatabaseEvent.shareFinish());
-                    }
-                    break;
-                  case HomeMenuButton.fab:
-                    if (activeTab == AppTab.start) {
-                      settingsBloc.add(
-                        SettingsEvent.update(
-                          settings:
-                              settings.copyWith(startFab: !settings.startFab),
-                        ),
-                      );
-                    } else if (activeTab == AppTab.finish) {
-                      settingsBloc.add(
-                        SettingsEvent.update(
-                          settings: settings.copyWith(
-                            finishFab: !settings.finishFab,
-                          ),
-                        ),
-                      );
-                    }
-                    break;
-                  case HomeMenuButton.addRacer:
-                    final stage = databaseBloc.state.stage;
-                    if (stage != null) {
-                      await addRacerPopup(
-                        context: context,
-                        stage: stage,
-                      );
-                    }
-                    break;
-                  case HomeMenuButton.selectRace:
-                    await Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (context) => const RacesListPage(),
-                      ),
-                    );
-                    break;
-                  case HomeMenuButton.bluetooth:
-                    await selectBluetoothDevice(context);
-                    break;
-                  case HomeMenuButton.countdown:
-                    settingsBloc.add(
-                      SettingsEvent.update(
-                        settings:
-                            settings.copyWith(countdown: !settings.countdown),
-                      ),
-                    );
-                    break;
-                  case HomeMenuButton.countdownPage:
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (context) => const CountdownPage(),
-                      ),
-                    );
-                }
-              },
-            );
-          },
-        ),
-      );
 }
