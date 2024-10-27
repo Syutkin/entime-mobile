@@ -2,6 +2,8 @@ import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/src/constants/pubspec.yaml.g.dart';
+import 'package:entime/src/feature/connectivity/bloc/connectivity_bloc.dart';
+import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
 import 'package:entime/src/feature/ntp/bloc/ntp_bloc.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:flutter/foundation.dart';
@@ -32,48 +34,41 @@ import 'src/feature/update/update.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await BlocOverrides.runZoned(
-  //   () async {
-  //     await runMain();
-  //   },
-  //   blocObserver: AppBlocObserver(),
-  //   eventTransformer: bloc_concurrency.sequential(),
-  // );
   Bloc.observer = AppBlocObserver();
   Bloc.transformer = bloc_concurrency.sequential<dynamic>();
 
-  final AppDatabase database = AppDatabase();
+  final database = AppDatabase();
 
   final androidInfo = await DeviceInfoPlugin().androidInfo;
   final settings = await SharedPrefsSettingsProvider.load();
   final appInfo = await AppInfoProvider.load(
     deviceInfo: androidInfo,
   );
-  final UpdateProvider updateProvider = await UpdateProvider.init(
+  final updateProvider = await UpdateProvider.init(
     client: http.Client(),
     appInfoProvider: appInfo,
     settingsProvider: settings,
   );
-  final FlutterBluetoothSerial flutterBluetoothSerial =
-      FlutterBluetoothSerial.instance;
-  final IBluetoothBackgroundConnection bluetoothBackgroundConnection =
-      BluetoothBackgroundConnection();
-  final IBluetoothProvider bluetoothProvider = BluetoothProvider(
+  final flutterBluetoothSerial = FlutterBluetoothSerial.instance;
+  final bluetoothBackgroundConnection = BluetoothBackgroundConnection();
+  final bluetoothProvider = BluetoothProvider(
     flutterBluetoothSerial: flutterBluetoothSerial,
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 
-  final IAudioService audioService = AudioService(settings: settings);
-  final IAudioController audioController = AudioController(
+  final audioService = AudioService(settings: settings);
+  final audioController = AudioController(
     audioService: audioService,
     database: database,
     // protocolProvider: protocolProvider,
     settingsProvider: settings,
   );
 
-  final CountdownAtStart countdown = CountdownAtStart(database: database);
+  final countdown = CountdownAtStart(database: database);
 
   final ntpProvider = NtpProvider();
+
+  final connectivityProvider = ConnectivityProvider.init();
 
   final app = EntimeApp(
     settingsProvider: settings,
@@ -84,6 +79,7 @@ Future<void> main() async {
     database: database,
     countdown: countdown,
     ntpProvider: ntpProvider,
+    connectivityProvider: connectivityProvider,
   );
 
   if (kReleaseMode) {
@@ -114,6 +110,7 @@ class EntimeApp extends StatelessWidget {
   final AppDatabase database;
   final CountdownAtStart countdown;
   final INtpProvider ntpProvider;
+  final IConnectivityProvider connectivityProvider;
 
   const EntimeApp({
     super.key,
@@ -125,6 +122,7 @@ class EntimeApp extends StatelessWidget {
     required this.database,
     required this.countdown,
     required this.ntpProvider,
+    required this.connectivityProvider,
   });
 
   @override
@@ -177,6 +175,9 @@ class EntimeApp extends StatelessWidget {
           BlocProvider<NtpBloc>(
             create: (context) => NtpBloc(ntpProvider),
           ),
+          BlocProvider<ConnectivityBloc>(
+            create: (context) => ConnectivityBloc(connectivityProvider),
+          )
         ],
         child: const EntimeAppView(),
       );

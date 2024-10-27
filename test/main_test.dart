@@ -8,6 +8,7 @@ import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/countdown/logic/countdown.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/home/home.dart';
+import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/tab/tab.dart';
@@ -44,6 +45,7 @@ class MockAppDatabase extends Mock implements AppDatabase {}
 
 class MockINtpProvider extends Mock implements INtpProvider {}
 
+class MockIConnectivityProvider extends Mock implements IConnectivityProvider {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -58,6 +60,7 @@ void main() {
   late AppDatabase database;
   late CountdownAtStart countdown;
   late INtpProvider ntpProvider;
+  late IConnectivityProvider connectivityProvider;
 
   setUpAll(() async {
     Bloc.observer = AppBlocObserver();
@@ -77,6 +80,7 @@ void main() {
     database = MockAppDatabase();
     countdown = CountdownAtStart(database: database);
     ntpProvider = MockINtpProvider();
+    connectivityProvider = MockIConnectivityProvider();
   });
 
   group('EntimeApp', () {
@@ -91,6 +95,7 @@ void main() {
           database: database,
           countdown: countdown,
           ntpProvider: ntpProvider,
+          connectivityProvider: connectivityProvider,
         ),
       ); // Create main app
       expect(find.byType(EntimeAppView), findsOneWidget);

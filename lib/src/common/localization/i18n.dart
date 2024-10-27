@@ -1153,8 +1153,11 @@ class I18nNtp {
         name: 'I18nNtp_ntpOffset',
       );
 
-  static String offsetInMilliseconds(int offset) => Intl.message(
-        'Смещение на $offset миллисекунд',
+  static String offsetInMilliseconds(int offset) => Intl.plural(
+        offset,
+        one: 'Смещение $offset миллисекунда',
+        few: 'Смещение $offset миллисекунды',
+        other: 'Смещение $offset миллисекунд',
         name: 'I18nNtp_offsetInMilliseconds',
         args: [offset],
       );

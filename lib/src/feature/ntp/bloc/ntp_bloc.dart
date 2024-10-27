@@ -6,7 +6,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../common/logger/logger.dart';
 
 part 'ntp_bloc.freezed.dart';
+
 part 'ntp_event.dart';
+
 part 'ntp_state.dart';
 
 class NtpBloc extends Bloc<NtpEvent, NtpState> {
@@ -14,8 +16,9 @@ class NtpBloc extends Bloc<NtpEvent, NtpState> {
 
   int _offset = 0;
 
-  NtpBloc(INtpProvider ntpProvider)
-      : _ntpProvider = ntpProvider,
+  NtpBloc(
+    INtpProvider ntpProvider,
+  )   : _ntpProvider = ntpProvider,
         super(NtpState.initial(0)) {
     on<NtpEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
