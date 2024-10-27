@@ -14,9 +14,7 @@ import '../../settings/settings.dart';
 import '../bluetooth.dart';
 
 part 'bluetooth_bloc.freezed.dart';
-
 part 'bluetooth_bloc_event.dart';
-
 part 'bluetooth_bloc_state.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
@@ -225,11 +223,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         },
         messageReceived: (event) {
           //Пришло соообщение из Bluetooth serial
-          final DateTime timeStamp = DateTime.now();
+          final DateTime now = DateTime.now();
           logger.i(
-            'Bluetooth -> Received message: ${event.message}, time: $timeStamp',
+            'Bluetooth -> Received message: ${event.message}, time: $now',
           );
-          final BluetoothMessage message = _parseBT(event.message, timeStamp);
+          final BluetoothMessage message = _parseBT(event.message, now);
           message.when(
             automaticStart: (automaticStart) {
               emit(BluetoothBlocState.connected(message: message));
@@ -287,13 +285,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   @override
   Future<void> close() {
     _messageSubscription?.cancel();
-    // protocolSubscription.cancel();
-    // settingsSubscription.cancel();
     _bluetoothProvider.dispose();
     return super.close();
   }
 
-  BluetoothMessage _parseBT(String message, DateTime timeStamp) {
+  BluetoothMessage _parseBT(String message, DateTime now) {
     String parsedMessage = message;
     _database.addLog(
       level: LogLevel.information,
@@ -312,7 +308,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         final AutomaticStart automaticStart = AutomaticStart(
           messageList.first,
           correction,
-          timeStamp,
+          now.toUtc(),
           // Проверяем обновлять или нет в HomeScreen BlocListener
           updating: false,
         );
@@ -343,7 +339,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     } else if (parsedMessage.startsWith('F') && parsedMessage.endsWith('#')) {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
       logger.t('Bluetooth -> Message parsed: finish: $parsedMessage');
-      return BluetoothMessage.finish(time: parsedMessage, timeStamp: timeStamp);
+      return BluetoothMessage.finish(
+          time: parsedMessage, timestamp: now.toUtc());
     } else if (parsedMessage.startsWith('{') && parsedMessage.endsWith('}')) {
       logger.i('Bluetooth -> Parsing JSON...');
       return BluetoothMessage.moduleSettings(json: parsedMessage);

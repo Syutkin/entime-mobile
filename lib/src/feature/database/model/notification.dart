@@ -16,7 +16,7 @@ class Notification with _$Notification {
     required List<StartingParticipant> previousStarts,
     required int number,
     required String startTime,
-    required DateTime timeStamp,
+    required DateTime timestamp,
     required int correction,
   }) = _UpdateAutomaticCorrection;
 }

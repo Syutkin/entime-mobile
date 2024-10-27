@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AutomaticStart {
   String get time => throw _privateConstructorUsedError;
   int get correction => throw _privateConstructorUsedError;
-  DateTime get timeStamp => throw _privateConstructorUsedError;
+  DateTime get timestamp => throw _privateConstructorUsedError;
   bool get updating => throw _privateConstructorUsedError;
   set updating(bool value) => throw _privateConstructorUsedError;
 
@@ -35,7 +35,7 @@ abstract class $AutomaticStartCopyWith<$Res> {
           AutomaticStart value, $Res Function(AutomaticStart) then) =
       _$AutomaticStartCopyWithImpl<$Res, AutomaticStart>;
   @useResult
-  $Res call({String time, int correction, DateTime timeStamp, bool updating});
+  $Res call({String time, int correction, DateTime timestamp, bool updating});
 }
 
 /// @nodoc
@@ -55,7 +55,7 @@ class _$AutomaticStartCopyWithImpl<$Res, $Val extends AutomaticStart>
   $Res call({
     Object? time = null,
     Object? correction = null,
-    Object? timeStamp = null,
+    Object? timestamp = null,
     Object? updating = null,
   }) {
     return _then(_value.copyWith(
@@ -67,9 +67,9 @@ class _$AutomaticStartCopyWithImpl<$Res, $Val extends AutomaticStart>
           ? _value.correction
           : correction // ignore: cast_nullable_to_non_nullable
               as int,
-      timeStamp: null == timeStamp
-          ? _value.timeStamp
-          : timeStamp // ignore: cast_nullable_to_non_nullable
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
       updating: null == updating
           ? _value.updating
@@ -87,7 +87,7 @@ abstract class _$$AutomaticStartImplCopyWith<$Res>
       __$$AutomaticStartImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String time, int correction, DateTime timeStamp, bool updating});
+  $Res call({String time, int correction, DateTime timestamp, bool updating});
 }
 
 /// @nodoc
@@ -105,7 +105,7 @@ class __$$AutomaticStartImplCopyWithImpl<$Res>
   $Res call({
     Object? time = null,
     Object? correction = null,
-    Object? timeStamp = null,
+    Object? timestamp = null,
     Object? updating = null,
   }) {
     return _then(_$AutomaticStartImpl(
@@ -117,9 +117,9 @@ class __$$AutomaticStartImplCopyWithImpl<$Res>
           ? _value.correction
           : correction // ignore: cast_nullable_to_non_nullable
               as int,
-      null == timeStamp
-          ? _value.timeStamp
-          : timeStamp // ignore: cast_nullable_to_non_nullable
+      null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
       updating: null == updating
           ? _value.updating
@@ -132,7 +132,7 @@ class __$$AutomaticStartImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AutomaticStartImpl implements _AutomaticStart {
-  _$AutomaticStartImpl(this.time, this.correction, this.timeStamp,
+  _$AutomaticStartImpl(this.time, this.correction, this.timestamp,
       {this.updating = false});
 
   @override
@@ -140,14 +140,14 @@ class _$AutomaticStartImpl implements _AutomaticStart {
   @override
   final int correction;
   @override
-  final DateTime timeStamp;
+  final DateTime timestamp;
   @override
   @JsonKey()
   bool updating;
 
   @override
   String toString() {
-    return 'AutomaticStart(time: $time, correction: $correction, timeStamp: $timeStamp, updating: $updating)';
+    return 'AutomaticStart(time: $time, correction: $correction, timestamp: $timestamp, updating: $updating)';
   }
 
   /// Create a copy of AutomaticStart
@@ -162,7 +162,7 @@ class _$AutomaticStartImpl implements _AutomaticStart {
 
 abstract class _AutomaticStart implements AutomaticStart {
   factory _AutomaticStart(
-      final String time, final int correction, final DateTime timeStamp,
+      final String time, final int correction, final DateTime timestamp,
       {bool updating}) = _$AutomaticStartImpl;
 
   @override
@@ -170,7 +170,7 @@ abstract class _AutomaticStart implements AutomaticStart {
   @override
   int get correction;
   @override
-  DateTime get timeStamp;
+  DateTime get timestamp;
   @override
   bool get updating;
   set updating(bool value);

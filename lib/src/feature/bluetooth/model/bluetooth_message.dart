@@ -11,7 +11,7 @@ class BluetoothMessage with _$BluetoothMessage {
   }) = BluetoothMessageAutomaticStart;
   const factory BluetoothMessage.finish({
     required String time,
-    required DateTime timeStamp,
+    required DateTime timestamp,
   }) = BluetoothMessageFinish;
   const factory BluetoothMessage.countdown({required String time}) =
       BluetoothMessageCountdown;

@@ -304,7 +304,7 @@ class AppDatabase extends _$AppDatabase {
     required int stageId,
     required String time,
     required int correction,
-    required DateTime timeStamp,
+    required DateTime timestamp,
     bool forceUpdate = false,
     required int deltaInSeconds,
   }) async {
@@ -318,7 +318,7 @@ class AppDatabase extends _$AppDatabase {
         .format(dateGoTime.subtract(Duration(seconds: deltaInSeconds)));
     final String after = DateFormat(shortTimeFormat)
         .format(dateGoTime.add(Duration(seconds: deltaInSeconds)));
-    final String phoneTime = DateFormat(longTimeFormat).format(timeStamp);
+    // final String phoneTime = DateFormat(longTimeFormat).format(timestamp);
 
     // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
@@ -352,7 +352,7 @@ class AppDatabase extends _$AppDatabase {
           automaticStartTime: Value(time),
           // startTime: Value(phoneTime),
           // ToDO: use drift DATETIME format
-          timestamp: Value(phoneTime),
+          timestamp: Value(timestamp.toIso8601String()),
           // statusId: const Value(1),
         ),
       );
@@ -375,6 +375,7 @@ class AppDatabase extends _$AppDatabase {
   Future<int> updateManualStartTime({
     required int stageId,
     required DateTime time,
+    required DateTime timestamp,
     int deltaInSeconds = 15,
   }) async {
     int result = 0;
@@ -404,6 +405,7 @@ class AppDatabase extends _$AppDatabase {
         stageId: stageId,
         manualCorrection: correction.inMilliseconds,
         manualStartTime: manualStartTime,
+        timestamp: timestamp.toIso8601String(),
       );
       if (result > 0) {
         logger.i(
@@ -534,7 +536,7 @@ class AppDatabase extends _$AppDatabase {
     required Stage stage,
     required String finish,
     // ToDO: use drift DATETIME format
-    required DateTime timeStamp,
+    required DateTime timestamp,
     int finishDelay = 0,
     bool substituteNumbers = false,
     int substituteNumbersDelay = 0,
@@ -599,12 +601,12 @@ class AppDatabase extends _$AppDatabase {
       }
     }
 
-    final String phoneTime = DateFormat(longTimeFormat).format(timeStamp);
+    // final String phoneTime = DateFormat(longTimeFormat).format(timestamp);
     final finishId = await _addFinishTime(
       stageId: stage.id,
       finishTime: finish,
       // ToDO: use drift DATETIME format
-      timestamp: phoneTime,
+      timestamp: timestamp.toIso8601String(),
       number: workingNumber,
       isHidden: isHidden,
     );
@@ -626,11 +628,14 @@ class AppDatabase extends _$AppDatabase {
   Future<int> addFinishTimeManual({
     required int stageId,
     required String finishTime,
+    required DateTime timestamp,
     int? number,
   }) async {
+    // final String phoneTime = DateFormat(longTimeFormat).format(timestamp);
     final finishId = await _addFinishTimeManual(
       stageId: stageId,
       finishTime: finishTime,
+      timestamp: timestamp.toIso8601String(),
       number: number,
     );
     logger.i('Database -> Manual finish time added: $finishTime');

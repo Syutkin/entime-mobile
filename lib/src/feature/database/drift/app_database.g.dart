@@ -2105,17 +2105,17 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
   late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
-      'timestamp', aliasedName, true,
+      'timestamp', aliasedName, false,
       type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
   static const VerificationMeta _finishTimeMeta =
       const VerificationMeta('finishTime');
   late final GeneratedColumn<String> finishTime = GeneratedColumn<String>(
-      'finish_time', aliasedName, true,
+      'finish_time', aliasedName, false,
       type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      $customConstraints: '');
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
   static const VerificationMeta _isHiddenMeta =
       const VerificationMeta('isHidden');
   late final GeneratedColumn<bool> isHidden = GeneratedColumn<bool>(
@@ -2161,12 +2161,16 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
     if (data.containsKey('timestamp')) {
       context.handle(_timestampMeta,
           timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
+    } else if (isInserting) {
+      context.missing(_timestampMeta);
     }
     if (data.containsKey('finish_time')) {
       context.handle(
           _finishTimeMeta,
           finishTime.isAcceptableOrUnknown(
               data['finish_time']!, _finishTimeMeta));
+    } else if (isInserting) {
+      context.missing(_finishTimeMeta);
     }
     if (data.containsKey('is_hidden')) {
       context.handle(_isHiddenMeta,
@@ -2192,9 +2196,9 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
       number: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}number']),
       timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
+          .read(DriftSqlType.string, data['${effectivePrefix}timestamp'])!,
       finishTime: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}finish_time']),
+          .read(DriftSqlType.string, data['${effectivePrefix}finish_time'])!,
       isHidden: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_hidden'])!,
       isManual: attachedDatabase.typeMapping
@@ -2218,16 +2222,16 @@ class Finish extends DataClass implements Insertable<Finish> {
   final int id;
   final int stageId;
   final int? number;
-  final String? timestamp;
-  final String? finishTime;
+  final String timestamp;
+  final String finishTime;
   final bool isHidden;
   final bool isManual;
   const Finish(
       {required this.id,
       required this.stageId,
       this.number,
-      this.timestamp,
-      this.finishTime,
+      required this.timestamp,
+      required this.finishTime,
       required this.isHidden,
       required this.isManual});
   @override
@@ -2238,12 +2242,8 @@ class Finish extends DataClass implements Insertable<Finish> {
     if (!nullToAbsent || number != null) {
       map['number'] = Variable<int>(number);
     }
-    if (!nullToAbsent || timestamp != null) {
-      map['timestamp'] = Variable<String>(timestamp);
-    }
-    if (!nullToAbsent || finishTime != null) {
-      map['finish_time'] = Variable<String>(finishTime);
-    }
+    map['timestamp'] = Variable<String>(timestamp);
+    map['finish_time'] = Variable<String>(finishTime);
     map['is_hidden'] = Variable<bool>(isHidden);
     map['is_manual'] = Variable<bool>(isManual);
     return map;
@@ -2255,12 +2255,8 @@ class Finish extends DataClass implements Insertable<Finish> {
       stageId: Value(stageId),
       number:
           number == null && nullToAbsent ? const Value.absent() : Value(number),
-      timestamp: timestamp == null && nullToAbsent
-          ? const Value.absent()
-          : Value(timestamp),
-      finishTime: finishTime == null && nullToAbsent
-          ? const Value.absent()
-          : Value(finishTime),
+      timestamp: Value(timestamp),
+      finishTime: Value(finishTime),
       isHidden: Value(isHidden),
       isManual: Value(isManual),
     );
@@ -2273,8 +2269,8 @@ class Finish extends DataClass implements Insertable<Finish> {
       id: serializer.fromJson<int>(json['id']),
       stageId: serializer.fromJson<int>(json['stage_id']),
       number: serializer.fromJson<int?>(json['number']),
-      timestamp: serializer.fromJson<String?>(json['timestamp']),
-      finishTime: serializer.fromJson<String?>(json['finish_time']),
+      timestamp: serializer.fromJson<String>(json['timestamp']),
+      finishTime: serializer.fromJson<String>(json['finish_time']),
       isHidden: serializer.fromJson<bool>(json['is_hidden']),
       isManual: serializer.fromJson<bool>(json['is_manual']),
     );
@@ -2286,8 +2282,8 @@ class Finish extends DataClass implements Insertable<Finish> {
       'id': serializer.toJson<int>(id),
       'stage_id': serializer.toJson<int>(stageId),
       'number': serializer.toJson<int?>(number),
-      'timestamp': serializer.toJson<String?>(timestamp),
-      'finish_time': serializer.toJson<String?>(finishTime),
+      'timestamp': serializer.toJson<String>(timestamp),
+      'finish_time': serializer.toJson<String>(finishTime),
       'is_hidden': serializer.toJson<bool>(isHidden),
       'is_manual': serializer.toJson<bool>(isManual),
     };
@@ -2297,16 +2293,16 @@ class Finish extends DataClass implements Insertable<Finish> {
           {int? id,
           int? stageId,
           Value<int?> number = const Value.absent(),
-          Value<String?> timestamp = const Value.absent(),
-          Value<String?> finishTime = const Value.absent(),
+          String? timestamp,
+          String? finishTime,
           bool? isHidden,
           bool? isManual}) =>
       Finish(
         id: id ?? this.id,
         stageId: stageId ?? this.stageId,
         number: number.present ? number.value : this.number,
-        timestamp: timestamp.present ? timestamp.value : this.timestamp,
-        finishTime: finishTime.present ? finishTime.value : this.finishTime,
+        timestamp: timestamp ?? this.timestamp,
+        finishTime: finishTime ?? this.finishTime,
         isHidden: isHidden ?? this.isHidden,
         isManual: isManual ?? this.isManual,
       );
@@ -2357,8 +2353,8 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
   final Value<int> id;
   final Value<int> stageId;
   final Value<int?> number;
-  final Value<String?> timestamp;
-  final Value<String?> finishTime;
+  final Value<String> timestamp;
+  final Value<String> finishTime;
   final Value<bool> isHidden;
   final Value<bool> isManual;
   const FinishesCompanion({
@@ -2374,11 +2370,13 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
     this.id = const Value.absent(),
     required int stageId,
     this.number = const Value.absent(),
-    this.timestamp = const Value.absent(),
-    this.finishTime = const Value.absent(),
+    required String timestamp,
+    required String finishTime,
     this.isHidden = const Value.absent(),
     this.isManual = const Value.absent(),
-  }) : stageId = Value(stageId);
+  })  : stageId = Value(stageId),
+        timestamp = Value(timestamp),
+        finishTime = Value(finishTime);
   static Insertable<Finish> custom({
     Expression<int>? id,
     Expression<int>? stageId,
@@ -2403,8 +2401,8 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
       {Value<int>? id,
       Value<int>? stageId,
       Value<int?>? number,
-      Value<String?>? timestamp,
-      Value<String?>? finishTime,
+      Value<String>? timestamp,
+      Value<String>? finishTime,
       Value<bool>? isHidden,
       Value<bool>? isManual}) {
     return FinishesCompanion(
@@ -3709,13 +3707,15 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Future<int> _setManualStartTime(
       {String? manualStartTime,
       int? manualCorrection,
+      String? timestamp,
       required int participantId,
       required int stageId}) {
     return customUpdate(
-      'UPDATE starts SET manual_start_time = ?1, manual_correction = ?2 WHERE participant_id = ?3 AND stage_id = ?4',
+      'UPDATE starts SET manual_start_time = ?1, manual_correction = ?2, timestamp = ?3 WHERE participant_id = ?4 AND stage_id = ?5',
       variables: [
         Variable<String>(manualStartTime),
         Variable<int>(manualCorrection),
+        Variable<String>(timestamp),
         Variable<int>(participantId),
         Variable<int>(stageId)
       ],
@@ -3845,7 +3845,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).asyncMap(finishes.mapFromRow);
   }
 
-  Selectable<String?> _getLastFinishTime({required int stageId}) {
+  Selectable<String> _getLastFinishTime({required int stageId}) {
     return customSelect(
         'SELECT finish_time FROM finishes WHERE stage_id = ?1 AND is_hidden = FALSE AND is_manual = FALSE ORDER BY finish_time DESC LIMIT 1',
         variables: [
@@ -3853,10 +3853,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ],
         readsFrom: {
           finishes,
-        }).map((QueryRow row) => row.readNullable<String>('finish_time'));
+        }).map((QueryRow row) => row.read<String>('finish_time'));
   }
 
-  Selectable<String?> _getLastFinishTimeWithNumber({required int stageId}) {
+  Selectable<String> _getLastFinishTimeWithNumber({required int stageId}) {
     return customSelect(
         'SELECT finish_time FROM finishes WHERE stage_id = ?1 AND number NOTNULL AND finish_time NOT LIKE \'DNS\' AND finish_time NOT LIKE \'DNF\' ORDER BY finish_time DESC LIMIT 1',
         variables: [
@@ -3864,13 +3864,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ],
         readsFrom: {
           finishes,
-        }).map((QueryRow row) => row.readNullable<String>('finish_time'));
+        }).map((QueryRow row) => row.read<String>('finish_time'));
   }
 
   Future<int> _addFinishTime(
       {required int stageId,
-      String? finishTime,
-      String? timestamp,
+      required String finishTime,
+      required String timestamp,
       int? number,
       required bool isHidden}) {
     return customInsert(
@@ -3905,12 +3905,16 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   }
 
   Future<int> _addFinishTimeManual(
-      {required int stageId, String? finishTime, int? number}) {
+      {required int stageId,
+      required String finishTime,
+      required String timestamp,
+      int? number}) {
     return customInsert(
-      'INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_manual) VALUES (?1, ?2, ?2, ?3, TRUE)',
+      'INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_manual) VALUES (?1, ?2, ?3, ?4, TRUE)',
       variables: [
         Variable<int>(stageId),
         Variable<String>(finishTime),
+        Variable<String>(timestamp),
         Variable<int>(number)
       ],
       updates: {finishes},
@@ -4002,7 +4006,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).map((QueryRow row) => FinishForCsv(
           row: row,
           number: row.readNullable<int>('number'),
-          finishTime: row.readNullable<String>('finish_time'),
+          finishTime: row.read<String>('finish_time'),
         ));
   }
 
@@ -5071,8 +5075,8 @@ typedef $FinishesCreateCompanionBuilder = FinishesCompanion Function({
   Value<int> id,
   required int stageId,
   Value<int?> number,
-  Value<String?> timestamp,
-  Value<String?> finishTime,
+  required String timestamp,
+  required String finishTime,
   Value<bool> isHidden,
   Value<bool> isManual,
 });
@@ -5080,8 +5084,8 @@ typedef $FinishesUpdateCompanionBuilder = FinishesCompanion Function({
   Value<int> id,
   Value<int> stageId,
   Value<int?> number,
-  Value<String?> timestamp,
-  Value<String?> finishTime,
+  Value<String> timestamp,
+  Value<String> finishTime,
   Value<bool> isHidden,
   Value<bool> isManual,
 });
@@ -5202,8 +5206,8 @@ class $FinishesTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<int> stageId = const Value.absent(),
             Value<int?> number = const Value.absent(),
-            Value<String?> timestamp = const Value.absent(),
-            Value<String?> finishTime = const Value.absent(),
+            Value<String> timestamp = const Value.absent(),
+            Value<String> finishTime = const Value.absent(),
             Value<bool> isHidden = const Value.absent(),
             Value<bool> isManual = const Value.absent(),
           }) =>
@@ -5220,8 +5224,8 @@ class $FinishesTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             required int stageId,
             Value<int?> number = const Value.absent(),
-            Value<String?> timestamp = const Value.absent(),
-            Value<String?> finishTime = const Value.absent(),
+            required String timestamp,
+            required String finishTime,
             Value<bool> isHidden = const Value.absent(),
             Value<bool> isManual = const Value.absent(),
           }) =>
@@ -5886,10 +5890,10 @@ class StartForCsv extends CustomResultSet {
 
 class FinishForCsv extends CustomResultSet {
   final int? number;
-  final String? finishTime;
+  final String finishTime;
   FinishForCsv({
     required QueryRow row,
     this.number,
-    this.finishTime,
+    required this.finishTime,
   }) : super(row);
 }

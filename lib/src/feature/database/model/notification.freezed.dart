@@ -26,7 +26,7 @@ mixin _$Notification {
             String startTime)
         updateNumber,
     required TResult Function(List<StartingParticipant> previousStarts,
-            int number, String startTime, DateTime timeStamp, int correction)
+            int number, String startTime, DateTime timestamp, int correction)
         updateAutomaticCorrection,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$Notification {
             int number, String startTime)?
         updateNumber,
     TResult? Function(List<StartingParticipant> previousStarts, int number,
-            String startTime, DateTime timeStamp, int correction)?
+            String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ mixin _$Notification {
             int number, String startTime)?
         updateNumber,
     TResult Function(List<StartingParticipant> previousStarts, int number,
-            String startTime, DateTime timeStamp, int correction)?
+            String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
     required TResult orElse(),
   }) =>
@@ -234,7 +234,7 @@ class _$UpdateNumberImpl implements _UpdateNumber {
             String startTime)
         updateNumber,
     required TResult Function(List<StartingParticipant> previousStarts,
-            int number, String startTime, DateTime timeStamp, int correction)
+            int number, String startTime, DateTime timestamp, int correction)
         updateAutomaticCorrection,
   }) {
     return updateNumber(existedStartingParticipants, number, startTime);
@@ -247,7 +247,7 @@ class _$UpdateNumberImpl implements _UpdateNumber {
             int number, String startTime)?
         updateNumber,
     TResult? Function(List<StartingParticipant> previousStarts, int number,
-            String startTime, DateTime timeStamp, int correction)?
+            String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
   }) {
     return updateNumber?.call(existedStartingParticipants, number, startTime);
@@ -260,7 +260,7 @@ class _$UpdateNumberImpl implements _UpdateNumber {
             int number, String startTime)?
         updateNumber,
     TResult Function(List<StartingParticipant> previousStarts, int number,
-            String startTime, DateTime timeStamp, int correction)?
+            String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
     required TResult orElse(),
   }) {
@@ -338,7 +338,7 @@ abstract class _$$UpdateAutomaticCorrectionImplCopyWith<$Res>
       {List<StartingParticipant> previousStarts,
       int number,
       String startTime,
-      DateTime timeStamp,
+      DateTime timestamp,
       int correction});
 }
 
@@ -359,7 +359,7 @@ class __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>
     Object? previousStarts = null,
     Object? number = null,
     Object? startTime = null,
-    Object? timeStamp = null,
+    Object? timestamp = null,
     Object? correction = null,
   }) {
     return _then(_$UpdateAutomaticCorrectionImpl(
@@ -375,9 +375,9 @@ class __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as String,
-      timeStamp: null == timeStamp
-          ? _value.timeStamp
-          : timeStamp // ignore: cast_nullable_to_non_nullable
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
       correction: null == correction
           ? _value.correction
@@ -394,7 +394,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
       {required final List<StartingParticipant> previousStarts,
       required this.number,
       required this.startTime,
-      required this.timeStamp,
+      required this.timestamp,
       required this.correction})
       : _previousStarts = previousStarts;
 
@@ -411,13 +411,13 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   @override
   final String startTime;
   @override
-  final DateTime timeStamp;
+  final DateTime timestamp;
   @override
   final int correction;
 
   @override
   String toString() {
-    return 'Notification.updateAutomaticCorrection(previousStarts: $previousStarts, number: $number, startTime: $startTime, timeStamp: $timeStamp, correction: $correction)';
+    return 'Notification.updateAutomaticCorrection(previousStarts: $previousStarts, number: $number, startTime: $startTime, timestamp: $timestamp, correction: $correction)';
   }
 
   @override
@@ -430,8 +430,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             (identical(other.number, number) || other.number == number) &&
             (identical(other.startTime, startTime) ||
                 other.startTime == startTime) &&
-            (identical(other.timeStamp, timeStamp) ||
-                other.timeStamp == timeStamp) &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
             (identical(other.correction, correction) ||
                 other.correction == correction));
   }
@@ -442,7 +442,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
       const DeepCollectionEquality().hash(_previousStarts),
       number,
       startTime,
-      timeStamp,
+      timestamp,
       correction);
 
   /// Create a copy of Notification
@@ -463,11 +463,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             String startTime)
         updateNumber,
     required TResult Function(List<StartingParticipant> previousStarts,
-            int number, String startTime, DateTime timeStamp, int correction)
+            int number, String startTime, DateTime timestamp, int correction)
         updateAutomaticCorrection,
   }) {
     return updateAutomaticCorrection(
-        previousStarts, number, startTime, timeStamp, correction);
+        previousStarts, number, startTime, timestamp, correction);
   }
 
   @override
@@ -477,11 +477,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             int number, String startTime)?
         updateNumber,
     TResult? Function(List<StartingParticipant> previousStarts, int number,
-            String startTime, DateTime timeStamp, int correction)?
+            String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
   }) {
     return updateAutomaticCorrection?.call(
-        previousStarts, number, startTime, timeStamp, correction);
+        previousStarts, number, startTime, timestamp, correction);
   }
 
   @override
@@ -491,13 +491,13 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             int number, String startTime)?
         updateNumber,
     TResult Function(List<StartingParticipant> previousStarts, int number,
-            String startTime, DateTime timeStamp, int correction)?
+            String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
     required TResult orElse(),
   }) {
     if (updateAutomaticCorrection != null) {
       return updateAutomaticCorrection(
-          previousStarts, number, startTime, timeStamp, correction);
+          previousStarts, number, startTime, timestamp, correction);
     }
     return orElse();
   }
@@ -542,7 +542,7 @@ abstract class _UpdateAutomaticCorrection implements Notification {
       {required final List<StartingParticipant> previousStarts,
       required final int number,
       required final String startTime,
-      required final DateTime timeStamp,
+      required final DateTime timestamp,
       required final int correction}) = _$UpdateAutomaticCorrectionImpl;
 
   List<StartingParticipant> get previousStarts;
@@ -550,7 +550,7 @@ abstract class _UpdateAutomaticCorrection implements Notification {
   int get number;
   @override
   String get startTime;
-  DateTime get timeStamp;
+  DateTime get timestamp;
   int get correction;
 
   /// Create a copy of Notification

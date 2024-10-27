@@ -19,7 +19,7 @@ mixin _$BluetoothMessage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AutomaticStart automaticStart) automaticStart,
-    required TResult Function(String time, DateTime timeStamp) finish,
+    required TResult Function(String time, DateTime timestamp) finish,
     required TResult Function(String time) countdown,
     required TResult Function(String time) voice,
     required TResult Function(String json) moduleSettings,
@@ -29,7 +29,7 @@ mixin _$BluetoothMessage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AutomaticStart automaticStart)? automaticStart,
-    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time, DateTime timestamp)? finish,
     TResult? Function(String time)? countdown,
     TResult? Function(String time)? voice,
     TResult? Function(String json)? moduleSettings,
@@ -39,7 +39,7 @@ mixin _$BluetoothMessage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
+    TResult Function(String time, DateTime timestamp)? finish,
     TResult Function(String time)? countdown,
     TResult Function(String time)? voice,
     TResult Function(String json)? moduleSettings,
@@ -191,7 +191,7 @@ class _$BluetoothMessageAutomaticStartImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AutomaticStart automaticStart) automaticStart,
-    required TResult Function(String time, DateTime timeStamp) finish,
+    required TResult Function(String time, DateTime timestamp) finish,
     required TResult Function(String time) countdown,
     required TResult Function(String time) voice,
     required TResult Function(String json) moduleSettings,
@@ -204,7 +204,7 @@ class _$BluetoothMessageAutomaticStartImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AutomaticStart automaticStart)? automaticStart,
-    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time, DateTime timestamp)? finish,
     TResult? Function(String time)? countdown,
     TResult? Function(String time)? voice,
     TResult? Function(String json)? moduleSettings,
@@ -217,7 +217,7 @@ class _$BluetoothMessageAutomaticStartImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
+    TResult Function(String time, DateTime timestamp)? finish,
     TResult Function(String time)? countdown,
     TResult Function(String time)? voice,
     TResult Function(String json)? moduleSettings,
@@ -298,7 +298,7 @@ abstract class _$$BluetoothMessageFinishImplCopyWith<$Res> {
           $Res Function(_$BluetoothMessageFinishImpl) then) =
       __$$BluetoothMessageFinishImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String time, DateTime timeStamp});
+  $Res call({String time, DateTime timestamp});
 }
 
 /// @nodoc
@@ -316,16 +316,16 @@ class __$$BluetoothMessageFinishImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? time = null,
-    Object? timeStamp = null,
+    Object? timestamp = null,
   }) {
     return _then(_$BluetoothMessageFinishImpl(
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as String,
-      timeStamp: null == timeStamp
-          ? _value.timeStamp
-          : timeStamp // ignore: cast_nullable_to_non_nullable
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -335,16 +335,16 @@ class __$$BluetoothMessageFinishImplCopyWithImpl<$Res>
 
 class _$BluetoothMessageFinishImpl implements BluetoothMessageFinish {
   const _$BluetoothMessageFinishImpl(
-      {required this.time, required this.timeStamp});
+      {required this.time, required this.timestamp});
 
   @override
   final String time;
   @override
-  final DateTime timeStamp;
+  final DateTime timestamp;
 
   @override
   String toString() {
-    return 'BluetoothMessage.finish(time: $time, timeStamp: $timeStamp)';
+    return 'BluetoothMessage.finish(time: $time, timestamp: $timestamp)';
   }
 
   @override
@@ -353,12 +353,12 @@ class _$BluetoothMessageFinishImpl implements BluetoothMessageFinish {
         (other.runtimeType == runtimeType &&
             other is _$BluetoothMessageFinishImpl &&
             (identical(other.time, time) || other.time == time) &&
-            (identical(other.timeStamp, timeStamp) ||
-                other.timeStamp == timeStamp));
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, time, timeStamp);
+  int get hashCode => Object.hash(runtimeType, time, timestamp);
 
   /// Create a copy of BluetoothMessage
   /// with the given fields replaced by the non-null parameter values.
@@ -373,33 +373,33 @@ class _$BluetoothMessageFinishImpl implements BluetoothMessageFinish {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AutomaticStart automaticStart) automaticStart,
-    required TResult Function(String time, DateTime timeStamp) finish,
+    required TResult Function(String time, DateTime timestamp) finish,
     required TResult Function(String time) countdown,
     required TResult Function(String time) voice,
     required TResult Function(String json) moduleSettings,
     required TResult Function() empty,
   }) {
-    return finish(time, timeStamp);
+    return finish(time, timestamp);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AutomaticStart automaticStart)? automaticStart,
-    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time, DateTime timestamp)? finish,
     TResult? Function(String time)? countdown,
     TResult? Function(String time)? voice,
     TResult? Function(String json)? moduleSettings,
     TResult? Function()? empty,
   }) {
-    return finish?.call(time, timeStamp);
+    return finish?.call(time, timestamp);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
+    TResult Function(String time, DateTime timestamp)? finish,
     TResult Function(String time)? countdown,
     TResult Function(String time)? voice,
     TResult Function(String json)? moduleSettings,
@@ -407,7 +407,7 @@ class _$BluetoothMessageFinishImpl implements BluetoothMessageFinish {
     required TResult orElse(),
   }) {
     if (finish != null) {
-      return finish(time, timeStamp);
+      return finish(time, timestamp);
     }
     return orElse();
   }
@@ -461,10 +461,10 @@ class _$BluetoothMessageFinishImpl implements BluetoothMessageFinish {
 abstract class BluetoothMessageFinish implements BluetoothMessage {
   const factory BluetoothMessageFinish(
       {required final String time,
-      required final DateTime timeStamp}) = _$BluetoothMessageFinishImpl;
+      required final DateTime timestamp}) = _$BluetoothMessageFinishImpl;
 
   String get time;
-  DateTime get timeStamp;
+  DateTime get timestamp;
 
   /// Create a copy of BluetoothMessage
   /// with the given fields replaced by the non-null parameter values.
@@ -546,7 +546,7 @@ class _$BluetoothMessageCountdownImpl implements BluetoothMessageCountdown {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AutomaticStart automaticStart) automaticStart,
-    required TResult Function(String time, DateTime timeStamp) finish,
+    required TResult Function(String time, DateTime timestamp) finish,
     required TResult Function(String time) countdown,
     required TResult Function(String time) voice,
     required TResult Function(String json) moduleSettings,
@@ -559,7 +559,7 @@ class _$BluetoothMessageCountdownImpl implements BluetoothMessageCountdown {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AutomaticStart automaticStart)? automaticStart,
-    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time, DateTime timestamp)? finish,
     TResult? Function(String time)? countdown,
     TResult? Function(String time)? voice,
     TResult? Function(String json)? moduleSettings,
@@ -572,7 +572,7 @@ class _$BluetoothMessageCountdownImpl implements BluetoothMessageCountdown {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
+    TResult Function(String time, DateTime timestamp)? finish,
     TResult Function(String time)? countdown,
     TResult Function(String time)? voice,
     TResult Function(String json)? moduleSettings,
@@ -715,7 +715,7 @@ class _$BluetoothMessageVoiceImpl implements BluetoothMessageVoice {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AutomaticStart automaticStart) automaticStart,
-    required TResult Function(String time, DateTime timeStamp) finish,
+    required TResult Function(String time, DateTime timestamp) finish,
     required TResult Function(String time) countdown,
     required TResult Function(String time) voice,
     required TResult Function(String json) moduleSettings,
@@ -728,7 +728,7 @@ class _$BluetoothMessageVoiceImpl implements BluetoothMessageVoice {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AutomaticStart automaticStart)? automaticStart,
-    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time, DateTime timestamp)? finish,
     TResult? Function(String time)? countdown,
     TResult? Function(String time)? voice,
     TResult? Function(String json)? moduleSettings,
@@ -741,7 +741,7 @@ class _$BluetoothMessageVoiceImpl implements BluetoothMessageVoice {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
+    TResult Function(String time, DateTime timestamp)? finish,
     TResult Function(String time)? countdown,
     TResult Function(String time)? voice,
     TResult Function(String json)? moduleSettings,
@@ -888,7 +888,7 @@ class _$BluetoothMessageModuleSettingsImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AutomaticStart automaticStart) automaticStart,
-    required TResult Function(String time, DateTime timeStamp) finish,
+    required TResult Function(String time, DateTime timestamp) finish,
     required TResult Function(String time) countdown,
     required TResult Function(String time) voice,
     required TResult Function(String json) moduleSettings,
@@ -901,7 +901,7 @@ class _$BluetoothMessageModuleSettingsImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AutomaticStart automaticStart)? automaticStart,
-    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time, DateTime timestamp)? finish,
     TResult? Function(String time)? countdown,
     TResult? Function(String time)? voice,
     TResult? Function(String json)? moduleSettings,
@@ -914,7 +914,7 @@ class _$BluetoothMessageModuleSettingsImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
+    TResult Function(String time, DateTime timestamp)? finish,
     TResult Function(String time)? countdown,
     TResult Function(String time)? voice,
     TResult Function(String json)? moduleSettings,
@@ -1031,7 +1031,7 @@ class _$BluetoothMessageEmptyImpl implements BluetoothMessageEmpty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AutomaticStart automaticStart) automaticStart,
-    required TResult Function(String time, DateTime timeStamp) finish,
+    required TResult Function(String time, DateTime timestamp) finish,
     required TResult Function(String time) countdown,
     required TResult Function(String time) voice,
     required TResult Function(String json) moduleSettings,
@@ -1044,7 +1044,7 @@ class _$BluetoothMessageEmptyImpl implements BluetoothMessageEmpty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AutomaticStart automaticStart)? automaticStart,
-    TResult? Function(String time, DateTime timeStamp)? finish,
+    TResult? Function(String time, DateTime timestamp)? finish,
     TResult? Function(String time)? countdown,
     TResult? Function(String time)? voice,
     TResult? Function(String json)? moduleSettings,
@@ -1057,7 +1057,7 @@ class _$BluetoothMessageEmptyImpl implements BluetoothMessageEmpty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AutomaticStart automaticStart)? automaticStart,
-    TResult Function(String time, DateTime timeStamp)? finish,
+    TResult Function(String time, DateTime timestamp)? finish,
     TResult Function(String time)? countdown,
     TResult Function(String time)? voice,
     TResult Function(String json)? moduleSettings,

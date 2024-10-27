@@ -15,6 +15,7 @@ import '../../../common/utils/helper.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
+import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../bloc/database_bloc.dart';
 import '../drift/app_database.dart';
@@ -175,7 +176,7 @@ class _FinishListPage extends State<FinishListPage> {
                     final finishId = item.id;
                     final number = details.data;
                     final finishTime = item.finishTime;
-                    if (stage != null && finishTime != null) {
+                    if (stage != null) {
                       databaseBloc.add(
                         DatabaseEvent.addNumberToFinish(
                           stage: stage,
@@ -397,11 +398,12 @@ class _FinishListPage extends State<FinishListPage> {
               children: <Widget>[
                 TextButton(
                   onPressed: () async {
+                    final now = DateTime.now();
+                    final timestamp = now.toUtc();
                     databaseBloc.add(
                       DatabaseEvent.addFinishTime(
-                        finishTime:
-                            DateFormat(longTimeFormat).format(DateTime.now()),
-                        timeStamp: DateTime.now(),
+                        finishTime: DateFormat(longTimeFormat).format(now),
+                        timestamp: timestamp,
                         stage: stage!,
                       ),
                     );
@@ -459,13 +461,19 @@ class _FinishListPage extends State<FinishListPage> {
 
   Future<void> _addFinishTimeManual() async {
     final now = DateTime.now();
-//    now = now.add(diff.duration); //добавляем поправку (см. class Difference)
-    final finishTime = DateFormat(longTimeFormat).format(now);
+    final timestamp = now.toUtc();
+    final offset = context.read<NtpBloc>().state.offset;
+    //добавляем ntp offset к ручному времени
+    final manual = now.add(Duration(microseconds: offset));
+    final finishTime = DateFormat(longTimeFormat).format(manual);
     final databaseBloc = context.read<DatabaseBloc>();
     int? stageId = databaseBloc.state.stage?.id;
     if (stageId != null) {
       databaseBloc.add(DatabaseEvent.addFinishTimeManual(
-          stageId: stageId, finishTime: finishTime));
+        stageId: stageId,
+        finishTime: finishTime,
+        timestamp: timestamp,
+      ));
     }
   }
 

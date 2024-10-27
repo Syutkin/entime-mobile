@@ -71,10 +71,9 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.updateAutomaticCorrection({
     required int stageId,
-    // required AutomaticStart automaticStart,
     required String startTime,
     required int correction,
-    required DateTime timeStamp,
+    required DateTime timestamp,
     @Default(false) bool forceUpdate,
     int? deltaInSeconds,
   }) = _UpdateAutomaticCorrection;
@@ -82,6 +81,7 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.updateManualStartTime({
     required int stageId,
     required DateTime time,
+    required DateTime timestamp,
     @Default(15) int deltaInSeconds,
   }) = _UpdateManualStartTime;
 
@@ -97,7 +97,7 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.addFinishTime({
     required Stage stage,
     required String finishTime,
-    required DateTime timeStamp,
+    required DateTime timestamp,
     int? finishDelay,
     bool? substituteNumbers,
     int? substituteNumbersDelay,
@@ -108,6 +108,7 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.addFinishTimeManual({
     required int stageId,
     required String finishTime,
+    required DateTime timestamp,
     int? number,
   }) = _AddFinishTimeManual;
 

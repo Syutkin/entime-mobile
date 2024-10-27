@@ -29,7 +29,7 @@ abstract interface class INtpProvider {
 
 class NtpProvider implements INtpProvider {
   @override
-  // TODO: implement offset
+  // TODO: implement offset stream
   Stream<int> get offset => throw UnimplementedError();
 
   @override

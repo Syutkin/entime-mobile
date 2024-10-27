@@ -74,8 +74,8 @@ CREATE TABLE finishes (
 	id INTEGER PRIMARY KEY NOT NULL,
 	stage_id integer NOT NULL,
 	number integer,
-	timestamp text,
-	finish_time text,
+	timestamp text NOT NULL,
+	finish_time text NOT NULL,
 	is_hidden BOOLEAN NOT NULL DEFAULT false,
 	is_manual BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (stage_id) REFERENCES stages(id)
@@ -254,7 +254,8 @@ _setManualStartTime:
 UPDATE starts
 SET
 	manual_start_time = :manual_start_time,
-	manual_correction = :manual_correction
+	manual_correction = :manual_correction,
+	timestamp = :timestamp
 WHERE
 	participant_id = :participant_id
 	AND stage_id = :stage_id;
@@ -383,7 +384,7 @@ WHERE
 
 _addFinishTimeManual:
 INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_manual)
-VALUES (:stage_id, :finish_time, :finish_time, :number, true);
+VALUES (:stage_id, :finish_time, :timestamp, :number, true);
 
 _hideFinish:
 UPDATE finishes SET is_hidden = true WHERE id = :id;

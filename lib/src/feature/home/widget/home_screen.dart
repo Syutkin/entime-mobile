@@ -96,13 +96,13 @@ class HomeScreen extends StatelessWidget {
                         stageId: stageId,
                         startTime: automaticStart.time,
                         correction: automaticStart.correction,
-                        timeStamp: automaticStart.timeStamp,
+                        timestamp: automaticStart.timestamp,
                         forceUpdate: automaticStart.updating,
                       ),
                     );
                   }
                 },
-                finish: (time, timeStamp) {
+                finish: (time, timestamp) {
                   var databaseBloc = context.read<DatabaseBloc>();
                   var stage = databaseBloc.state.stage;
                   if (stage != null) {
@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                       DatabaseEvent.addFinishTime(
                         stage: stage,
                         finishTime: time,
-                        timeStamp: timeStamp,
+                        timestamp: timestamp,
                       ),
                     );
                   }
@@ -162,7 +162,7 @@ class HomeScreen extends StatelessWidget {
                     DatabaseEvent.updateAutomaticCorrection(
                       stageId: data.previousStarts.first.stageId,
                       startTime: data.startTime,
-                      timeStamp: data.timeStamp,
+                      timestamp: data.timestamp,
                       correction: data.correction,
                       forceUpdate: true,
                     ),

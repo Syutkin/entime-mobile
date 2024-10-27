@@ -15,6 +15,7 @@ import '../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../countdown/countdown.dart';
+import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/settings.dart';
 import '../bloc/database_bloc.dart';
 import '../drift/app_database.dart';
@@ -197,15 +198,17 @@ class _StartListPage extends State<StartListPage> {
   RenderBox _getRenderBox(GlobalKey key) =>
       key.currentContext!.findRenderObject() as RenderBox;
 
-  Future<void> _addManualStartTime(DatabaseBloc bloc) async {
-    final time = DateTime.now();
+  Future<void> _addManualStartTime(
+      DatabaseBloc bloc, DateTime now, int offset) async {
     int? stageId = bloc.state.stage?.id;
-
     if (stageId != null) {
+      //добавляем ntp offset к ручному времени старта
+      final manualStartTime = now.add(Duration(microseconds: offset));
       bloc.add(
         DatabaseEvent.updateManualStartTime(
           stageId: stageId,
-          time: time,
+          time: manualStartTime,
+          timestamp: now.toUtc(),
         ),
       );
     }
@@ -341,7 +344,11 @@ class _StartListPage extends State<StartListPage> {
                   width: settingsState.settings.startFabSize,
                   child: FittedBox(
                     child: FloatingActionButton(
-                      onPressed: () => _addManualStartTime(databaseBloc),
+                      onPressed: () {
+                        final now = DateTime.now();
+                        final offset = context.read<NtpBloc>().state.offset;
+                        _addManualStartTime(databaseBloc, now, offset);
+                      },
                       child: Icon(MdiIcons.handBackLeft),
                     ),
                   ),
@@ -393,7 +400,7 @@ class _StartListPage extends State<StartListPage> {
             DatabaseEvent.updateAutomaticCorrection(
               stageId: stageId,
               correction: 1234,
-              timeStamp: DateTime.now(),
+              timestamp: DateTime.timestamp(),
               startTime: DateFormat(longTimeFormat).format(DateTime.now()),
               // deltaInSeconds: ,
               // forceUpdate: ,
