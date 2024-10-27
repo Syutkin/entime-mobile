@@ -2038,10 +2038,43 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Смещение на {offset} миллисекунд`
-  String I18nNtp_offsetInMilliseconds(Object offset) {
+  /// `Нажмите для синхронизации`
+  String get I18nNtp_sync {
     return Intl.message(
-      'Смещение на $offset миллисекунд',
+      'Нажмите для синхронизации',
+      name: 'I18nNtp_sync',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Синхронизация...`
+  String get I18nNtp_syncing {
+    return Intl.message(
+      'Синхронизация...',
+      name: 'I18nNtp_syncing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка синхронизации`
+  String get I18nNtp_syncError {
+    return Intl.message(
+      'Ошибка синхронизации',
+      name: 'I18nNtp_syncError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{offset,plural, =1{Смещение {offset} миллисекунда}few{Смещение {offset} миллисекунды}other{Смещение {offset} миллисекунд}}`
+  String I18nNtp_offsetInMilliseconds(num offset) {
+    return Intl.plural(
+      offset,
+      one: 'Смещение $offset миллисекунда',
+      few: 'Смещение $offset миллисекунды',
+      other: 'Смещение $offset миллисекунд',
       name: 'I18nNtp_offsetInMilliseconds',
       desc: '',
       args: [offset],

@@ -54,7 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m13(type) => "Неизвестный тип модуля: ${type}";
 
-  static String m20(offset) => "Смещение на ${offset} миллисекунд";
+  static String m20(offset) =>
+      "${Intl.plural(offset, one: 'Смещение ${offset} миллисекунда', few: 'Смещение ${offset} миллисекунды', other: 'Смещение ${offset} миллисекунд')}";
 
   static String m14(number) => "Финишировал номер ${number}";
 
@@ -268,6 +269,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Сеть"),
         "I18nNtp_ntpOffset": MessageLookupByLibrary.simpleMessage("NTP offset"),
         "I18nNtp_offsetInMilliseconds": m20,
+        "I18nNtp_sync":
+            MessageLookupByLibrary.simpleMessage("Нажмите для синхронизации"),
+        "I18nNtp_syncError":
+            MessageLookupByLibrary.simpleMessage("Ошибка синхронизации"),
+        "I18nNtp_syncing":
+            MessageLookupByLibrary.simpleMessage("Синхронизация..."),
         "I18nProtocol_clearNumber":
             MessageLookupByLibrary.simpleMessage("Убрать номер"),
         "I18nProtocol_didNotFinish":

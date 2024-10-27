@@ -1153,6 +1153,21 @@ class I18nNtp {
         name: 'I18nNtp_ntpOffset',
       );
 
+  static String get sync => Intl.message(
+    'Нажмите для синхронизации',
+    name: 'I18nNtp_sync',
+  );
+
+  static String get syncing => Intl.message(
+    'Синхронизация...',
+    name: 'I18nNtp_syncing',
+  );
+
+  static String get syncError => Intl.message(
+    'Ошибка синхронизации',
+    name: 'I18nNtp_syncError',
+  );
+
   static String offsetInMilliseconds(int offset) => Intl.plural(
         offset,
         one: 'Смещение $offset миллисекунда',

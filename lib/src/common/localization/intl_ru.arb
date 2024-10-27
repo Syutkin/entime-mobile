@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-26T11:40:51.766083",
+  "@@last_modified": "2024-10-27T12:15:27.083085",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -1060,7 +1060,22 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nNtp_offsetInMilliseconds": "Смещение на {offset} миллисекунд",
+  "I18nNtp_sync": "Нажмите для синхронизации",
+  "@I18nNtp_sync": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nNtp_syncing": "Синхронизация...",
+  "@I18nNtp_syncing": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nNtp_syncError": "Ошибка синхронизации",
+  "@I18nNtp_syncError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nNtp_offsetInMilliseconds": "{offset,plural, =1{Смещение {offset} миллисекунда}few{Смещение {offset} миллисекунды}other{Смещение {offset} миллисекунд}}",
   "@I18nNtp_offsetInMilliseconds": {
     "type": "text",
     "placeholders": {
