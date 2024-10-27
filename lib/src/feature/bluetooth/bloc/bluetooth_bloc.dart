@@ -36,6 +36,10 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   StreamSubscription<String>? _messageSubscription;
 
+  late StreamSubscription<AppSettings> _settingsSubscription;
+
+  late StreamSubscription<BluetoothState> _btStateSubscription;
+
   BluetoothDevice? get bluetoothDevice => _bluetoothDevice;
 
   IBluetoothProvider get bluetoothProvider => _bluetoothProvider;
@@ -50,12 +54,14 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         _audioController = audioController,
         _settingsProvider = settingsProvider,
         super(const BluetoothBlocState.notInitialized()) {
-    _settingsProvider.state.listen((state) {
+    _settingsSubscription = _settingsProvider.state.listen((state) {
       _reconnect = state.reconnect;
       _stageId = state.stageId;
     });
 
-    bluetoothProvider.flutterBluetoothSerial.onStateChanged().listen((btState) {
+    _btStateSubscription = bluetoothProvider.flutterBluetoothSerial
+        .onStateChanged()
+        .listen((btState) {
       if (btState == BluetoothState.STATE_OFF ||
           btState == BluetoothState.STATE_ON) {
         add(BluetoothEvent.initialize());
@@ -285,6 +291,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   @override
   Future<void> close() {
     _messageSubscription?.cancel();
+    _btStateSubscription.cancel();
+    _settingsSubscription.cancel();
     _bluetoothProvider.dispose();
     return super.close();
   }

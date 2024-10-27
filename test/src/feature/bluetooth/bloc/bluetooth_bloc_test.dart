@@ -68,9 +68,9 @@ void main() {
         flutterBluetoothSerial,
       );
       when(
-        () => bluetoothProvider.flutterBluetoothSerial,
-      ).thenReturn(
-        flutterBluetoothSerial,
+        () => flutterBluetoothSerial.onStateChanged(),
+      ).thenAnswer(
+        (_) => Stream.fromIterable([]),
       );
       when(
         () => bluetoothProvider.bluetoothBackgroundConnection,
