@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-alpha.1+277',
+    representation: r'0.5.0-alpha.1+278',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-alpha.1+277',
+    canonical: r'0.5.0-alpha.1+278',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,7 +118,7 @@ sealed class Pubspec {
     preRelease: <String>[r'alpha', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'277'],
+    build: <String>[r'278'],
   );
 
   /// Build date and time (UTC)
@@ -126,11 +126,11 @@ sealed class Pubspec {
     2024,
     10,
     28,
-    9,
-    12,
-    37,
-    978,
-    928,
+    10,
+    4,
+    42,
+    177,
+    523,
   );
 
   /// Name
@@ -415,14 +415,14 @@ sealed class Pubspec {
     'bloc_concurrency': r'^0.2.5',
     'bot_toast': r'^4.1.3',
     'csv': r'^6.0.0',
-    'device_info_plus': r'^11.0.0',
+    'device_info_plus': r'^11.1.0',
     'drift': r'^2.21.0',
     'equatable': r'^2.0.5',
-    'file_picker': r'^8.1.2',
+    'file_picker': r'^8.1.3',
     'filesize': r'^2.0.1',
     'flutter_bloc': r'^8.1.6',
     'flutter_bluetooth_serial': r'^0.4.0',
-    'flutter_markdown': r'^0.7.3+2',
+    'flutter_markdown': r'^0.7.4+1',
     'flutter_tts': r'^4.0.2',
     'freezed_annotation': r'^2.4.4',
     'json_annotation': r'^4.9.0',
@@ -440,11 +440,11 @@ sealed class Pubspec {
     'rxdart': r'^0.28.0',
     'sentry_flutter': r'^8.9.0',
     'settings_ui': r'^2.0.2',
-    'share_plus': r'^10.0.3',
+    'share_plus': r'^10.1.1',
     'shared_preferences': r'^2.3.2',
     'soundpool': r'^2.4.1',
-    'sqlite3': r'^2.4.6',
-    'sqlite3_flutter_libs': r'^0.5.24',
+    'sqlite3': r'^2.4.7',
+    'sqlite3_flutter_libs': r'^0.5.26',
     'url_launcher': r'^6.3.1',
     'wakelock_plus': r'^1.2.8',
     'flutter_ntp': r'^0.0.2',
@@ -455,7 +455,7 @@ sealed class Pubspec {
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^9.1.7',
     'build_runner': r'^2.4.13',
-    'drift_dev': r'^2.21.0',
+    'drift_dev': r'^2.21.2',
     'flutter_lints': r'^5.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
@@ -477,7 +477,7 @@ sealed class Pubspec {
       'git': r'https://github.com/Syutkin/flutter_bluetooth_serial.git',
     },
     'flutter_ntp': <String, Object>{
-      'path': r'../flutter_ntp',
+      'git': r'https://github.com/Syutkin/flutter_ntp',
     },
     'settings_ui': <String, Object>{
       'git': <String, Object>{
