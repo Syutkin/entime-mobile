@@ -89,6 +89,9 @@ class AppSettings with _$AppSettings {
 
     // версия при предыдущем запуске
     required String previousVersion,
+
+    // обновлять ntp offset при запуске
+    required bool updateNtpOffsetAtStartup,
   }) = _AppSettings;
 
   const factory AppSettings.defaults({
@@ -175,5 +178,8 @@ class AppSettings with _$AppSettings {
 
     // версия при предыдущем запуске
     @Default('0.0.0') String previousVersion,
+
+    // обновлять ntp offset при запуске
+    @Default(false) bool updateNtpOffsetAtStartup,
   }) = _AppSettingsDefaults;
 }

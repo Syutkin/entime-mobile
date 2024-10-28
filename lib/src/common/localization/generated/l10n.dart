@@ -691,6 +691,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `NTP смещение`
+  String get I18nSettings_ntpOffset {
+    return Intl.message(
+      'NTP смещение',
+      name: 'I18nSettings_ntpOffset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Синхронизировать при старте приложения`
+  String get I18nSettings_ntpOffsetDescription {
+    return Intl.message(
+      'Синхронизировать при старте приложения',
+      name: 'I18nSettings_ntpOffsetDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Введите номер финишировавшего участника`
   String get I18nProtocol_enterFinishNumber {
     return Intl.message(

@@ -203,13 +203,14 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             );
-          } else if (state is UpdateInitial &&
-              state.showChangelog != null &&
-              state.showChangelog!.show) {
-            await showChangelogAtStartup(
-              context,
-              state.showChangelog!.previousVersion!,
-            );
+          } else if (state is UpdateInitial) {
+            final showChangelog = state.showChangelog;
+            final previousVersion = showChangelog?.previousVersion;
+            if (showChangelog != null &&
+                showChangelog.show &&
+                previousVersion != null) {
+              await showChangelogAtStartup(context, previousVersion);
+            }
           }
         },
       );

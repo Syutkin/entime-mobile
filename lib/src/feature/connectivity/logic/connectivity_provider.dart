@@ -6,7 +6,9 @@ import 'package:rxdart/rxdart.dart';
 import '../../../common/logger/logger.dart';
 
 abstract interface class IConnectivityProvider {
-  Stream<bool> get isConnected;
+  Stream<bool> get onConnectivityChanged;
+
+  bool get isConnected;
 
   Future<void> dispose();
 }
@@ -20,7 +22,10 @@ class ConnectivityProvider implements IConnectivityProvider {
     ..add(false);
 
   @override
-  Stream<bool> get isConnected => _connectionController.stream;
+  Stream<bool> get onConnectivityChanged => _connectionController.stream;
+
+  @override
+  bool get isConnected => _currentConnection;
 
   ConnectivityProvider._() {
     _connectivitySubscription =

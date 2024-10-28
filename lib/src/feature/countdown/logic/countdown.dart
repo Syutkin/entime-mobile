@@ -54,28 +54,31 @@ class CountdownAtStart {
     final second = now.second;
     final nextStartingParticipant = _nextStartingParticipant;
     if (nextStartingParticipant != null) {
-      var nextStartTime = nextStartingParticipant.startTime.toDateTime()!;
-      if (nextStartTime.isAfter(now)) {
-        value.add(
-          Tick(
-            second: second,
-            text: _formatDuration(nextStartTime.difference(now)),
-            nextStartTime: nextStartTime,
-            number: nextStartingParticipant.number,
-          ),
-        );
-      } else {
-        if (nextStartTime.isAfter(now.subtract(const Duration(seconds: 10)))) {
+      var nextStartTime = nextStartingParticipant.startTime.toDateTime();
+      if (nextStartTime != null) {
+        if (nextStartTime.isAfter(now)) {
           value.add(
             Tick(
               second: second,
-              text: 'GO',
+              text: _formatDuration(nextStartTime.difference(now)),
               nextStartTime: nextStartTime,
               number: nextStartingParticipant.number,
             ),
           );
         } else {
-          _nextStartingParticipant = null;
+          if (nextStartTime
+              .isAfter(now.subtract(const Duration(seconds: 10)))) {
+            value.add(
+              Tick(
+                second: second,
+                text: 'GO',
+                nextStartTime: nextStartTime,
+                number: nextStartingParticipant.number,
+              ),
+            );
+          } else {
+            _nextStartingParticipant = null;
+          }
         }
       }
     } else {

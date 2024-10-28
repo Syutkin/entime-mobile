@@ -353,6 +353,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_lightRed":
             MessageLookupByLibrary.simpleMessage("Красная светлая тема"),
         "I18nSettings_milliseconds": m16,
+        "I18nSettings_ntpOffset":
+            MessageLookupByLibrary.simpleMessage("NTP смещение"),
+        "I18nSettings_ntpOffsetDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "Синхронизировать при старте приложения"),
         "I18nSettings_numberOfLines":
             MessageLookupByLibrary.simpleMessage("Количество строк"),
         "I18nSettings_participantsName":

@@ -331,6 +331,16 @@ class I18nSettings {
         'Красная тёмная тема',
         name: 'I18nSettings_darkRed',
       );
+
+  static String get ntpOffset => Intl.message(
+        'NTP смещение',
+        name: 'I18nSettings_ntpOffset',
+      );
+
+  static String get ntpOffsetDescription => Intl.message(
+        'Синхронизировать при старте приложения',
+        name: 'I18nSettings_ntpOffsetDescription',
+      );
 }
 
 class I18nProtocol {
@@ -1154,19 +1164,19 @@ class I18nNtp {
       );
 
   static String get sync => Intl.message(
-    'Нажмите для синхронизации',
-    name: 'I18nNtp_sync',
-  );
+        'Нажмите для синхронизации',
+        name: 'I18nNtp_sync',
+      );
 
   static String get syncing => Intl.message(
-    'Синхронизация...',
-    name: 'I18nNtp_syncing',
-  );
+        'Синхронизация...',
+        name: 'I18nNtp_syncing',
+      );
 
   static String get syncError => Intl.message(
-    'Ошибка синхронизации',
-    name: 'I18nNtp_syncError',
-  );
+        'Ошибка синхронизации',
+        name: 'I18nNtp_syncError',
+      );
 
   static String offsetInMilliseconds(int offset) => Intl.plural(
         offset,

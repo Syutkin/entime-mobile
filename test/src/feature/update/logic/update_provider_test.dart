@@ -2,7 +2,6 @@ import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/update/update.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -75,7 +74,8 @@ void main() async {
       expect(await updater.isUpdateAvailable(), true);
     });
 
-    test('Update available but check disabled at settings', () async {
+    test('Update available but check disabled at settings',
+        skip: 'Remove this setting from provider', () async {
       when(
         () => appInfoProvider.appName,
       ).thenAnswer((realInvocation) => 'entime');

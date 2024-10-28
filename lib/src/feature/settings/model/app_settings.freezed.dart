@@ -79,7 +79,9 @@ mixin _$AppSettings {
   double get contrastLevel => throw _privateConstructorUsedError;
   DynamicSchemeVariant get dynamicSchemeVariant =>
       throw _privateConstructorUsedError; // версия при предыдущем запуске
-  String get previousVersion => throw _privateConstructorUsedError;
+  String get previousVersion =>
+      throw _privateConstructorUsedError; // обновлять ntp offset при запуске
+  bool get updateNtpOffsetAtStartup => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
@@ -121,7 +123,8 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         $default, {
     required TResult Function(
             String language,
@@ -162,7 +165,8 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         defaults,
   }) =>
       throw _privateConstructorUsedError;
@@ -207,7 +211,8 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
     TResult? Function(
             String language,
@@ -248,7 +253,8 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
   }) =>
       throw _privateConstructorUsedError;
@@ -293,7 +299,8 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
     TResult Function(
             String language,
@@ -334,7 +341,8 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
     required TResult orElse(),
   }) =>
@@ -411,7 +419,8 @@ abstract class $AppSettingsCopyWith<$Res> {
       Brightness brightness,
       double contrastLevel,
       DynamicSchemeVariant dynamicSchemeVariant,
-      String previousVersion});
+      String previousVersion,
+      bool updateNtpOffsetAtStartup});
 }
 
 /// @nodoc
@@ -468,6 +477,7 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? contrastLevel = null,
     Object? dynamicSchemeVariant = null,
     Object? previousVersion = null,
+    Object? updateNtpOffsetAtStartup = null,
   }) {
     return _then(_value.copyWith(
       language: null == language
@@ -626,6 +636,10 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
               as String,
+      updateNtpOffsetAtStartup: null == updateNtpOffsetAtStartup
+          ? _value.updateNtpOffsetAtStartup
+          : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -677,7 +691,8 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       Brightness brightness,
       double contrastLevel,
       DynamicSchemeVariant dynamicSchemeVariant,
-      String previousVersion});
+      String previousVersion,
+      bool updateNtpOffsetAtStartup});
 }
 
 /// @nodoc
@@ -732,6 +747,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? contrastLevel = null,
     Object? dynamicSchemeVariant = null,
     Object? previousVersion = null,
+    Object? updateNtpOffsetAtStartup = null,
   }) {
     return _then(_$AppSettingsImpl(
       language: null == language
@@ -890,6 +906,10 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
               as String,
+      updateNtpOffsetAtStartup: null == updateNtpOffsetAtStartup
+          ? _value.updateNtpOffsetAtStartup
+          : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -936,7 +956,8 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.brightness,
       required this.contrastLevel,
       required this.dynamicSchemeVariant,
-      required this.previousVersion});
+      required this.previousVersion,
+      required this.updateNtpOffsetAtStartup});
 
 // язык
   @override
@@ -1046,10 +1067,13 @@ class _$AppSettingsImpl implements _AppSettings {
 // версия при предыдущем запуске
   @override
   final String previousVersion;
+// обновлять ntp offset при запуске
+  @override
+  final bool updateNtpOffsetAtStartup;
 
   @override
   String toString() {
-    return 'AppSettings(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
+    return 'AppSettings(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -1128,7 +1152,10 @@ class _$AppSettingsImpl implements _AppSettings {
             (identical(other.dynamicSchemeVariant, dynamicSchemeVariant) ||
                 other.dynamicSchemeVariant == dynamicSchemeVariant) &&
             (identical(other.previousVersion, previousVersion) ||
-                other.previousVersion == previousVersion));
+                other.previousVersion == previousVersion) &&
+            (identical(
+                    other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
+                other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
   @override
@@ -1172,7 +1199,8 @@ class _$AppSettingsImpl implements _AppSettings {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
-        previousVersion
+        previousVersion,
+        updateNtpOffsetAtStartup
       ]);
 
   /// Create a copy of AppSettings
@@ -1225,7 +1253,8 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         $default, {
     required TResult Function(
             String language,
@@ -1266,7 +1295,8 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         defaults,
   }) {
     return $default(
@@ -1308,7 +1338,8 @@ class _$AppSettingsImpl implements _AppSettings {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
-        previousVersion);
+        previousVersion,
+        updateNtpOffsetAtStartup);
   }
 
   @override
@@ -1353,7 +1384,8 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
     TResult? Function(
             String language,
@@ -1394,7 +1426,8 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
   }) {
     return $default?.call(
@@ -1436,7 +1469,8 @@ class _$AppSettingsImpl implements _AppSettings {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
-        previousVersion);
+        previousVersion,
+        updateNtpOffsetAtStartup);
   }
 
   @override
@@ -1481,7 +1515,8 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
     TResult Function(
             String language,
@@ -1522,7 +1557,8 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
     required TResult orElse(),
   }) {
@@ -1566,7 +1602,8 @@ class _$AppSettingsImpl implements _AppSettings {
           brightness,
           contrastLevel,
           dynamicSchemeVariant,
-          previousVersion);
+          previousVersion,
+          updateNtpOffsetAtStartup);
     }
     return orElse();
   }
@@ -1643,7 +1680,8 @@ abstract class _AppSettings implements AppSettings {
       required final Brightness brightness,
       required final double contrastLevel,
       required final DynamicSchemeVariant dynamicSchemeVariant,
-      required final String previousVersion}) = _$AppSettingsImpl;
+      required final String previousVersion,
+      required final bool updateNtpOffsetAtStartup}) = _$AppSettingsImpl;
 
 // язык
   @override
@@ -1733,7 +1771,9 @@ abstract class _AppSettings implements AppSettings {
   DynamicSchemeVariant
       get dynamicSchemeVariant; // версия при предыдущем запуске
   @override
-  String get previousVersion;
+  String get previousVersion; // обновлять ntp offset при запуске
+  @override
+  bool get updateNtpOffsetAtStartup;
 
   /// Create a copy of AppSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -1790,7 +1830,8 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       Brightness brightness,
       double contrastLevel,
       DynamicSchemeVariant dynamicSchemeVariant,
-      String previousVersion});
+      String previousVersion,
+      bool updateNtpOffsetAtStartup});
 }
 
 /// @nodoc
@@ -1845,6 +1886,7 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? contrastLevel = null,
     Object? dynamicSchemeVariant = null,
     Object? previousVersion = null,
+    Object? updateNtpOffsetAtStartup = null,
   }) {
     return _then(_$AppSettingsDefaultsImpl(
       language: null == language
@@ -2003,6 +2045,10 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
               as String,
+      updateNtpOffsetAtStartup: null == updateNtpOffsetAtStartup
+          ? _value.updateNtpOffsetAtStartup
+          : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2049,7 +2095,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.brightness = Brightness.light,
       this.contrastLevel = -1.0,
       this.dynamicSchemeVariant = DynamicSchemeVariant.vibrant,
-      this.previousVersion = '0.0.0'});
+      this.previousVersion = '0.0.0',
+      this.updateNtpOffsetAtStartup = false});
 
 // язык
   @override
@@ -2201,10 +2248,14 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final String previousVersion;
+// обновлять ntp offset при запуске
+  @override
+  @JsonKey()
+  final bool updateNtpOffsetAtStartup;
 
   @override
   String toString() {
-    return 'AppSettings.defaults(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion)';
+    return 'AppSettings.defaults(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -2283,7 +2334,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             (identical(other.dynamicSchemeVariant, dynamicSchemeVariant) ||
                 other.dynamicSchemeVariant == dynamicSchemeVariant) &&
             (identical(other.previousVersion, previousVersion) ||
-                other.previousVersion == previousVersion));
+                other.previousVersion == previousVersion) &&
+            (identical(
+                    other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
+                other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
   @override
@@ -2327,7 +2381,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
-        previousVersion
+        previousVersion,
+        updateNtpOffsetAtStartup
       ]);
 
   /// Create a copy of AppSettings
@@ -2381,7 +2436,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         $default, {
     required TResult Function(
             String language,
@@ -2422,7 +2478,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         defaults,
   }) {
     return defaults(
@@ -2464,7 +2521,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
-        previousVersion);
+        previousVersion,
+        updateNtpOffsetAtStartup);
   }
 
   @override
@@ -2509,7 +2567,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
     TResult? Function(
             String language,
@@ -2550,7 +2609,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
   }) {
     return defaults?.call(
@@ -2592,7 +2652,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
-        previousVersion);
+        previousVersion,
+        updateNtpOffsetAtStartup);
   }
 
   @override
@@ -2637,7 +2698,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
     TResult Function(
             String language,
@@ -2678,7 +2740,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
-            String previousVersion)?
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
     required TResult orElse(),
   }) {
@@ -2722,7 +2785,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           brightness,
           contrastLevel,
           dynamicSchemeVariant,
-          previousVersion);
+          previousVersion,
+          updateNtpOffsetAtStartup);
     }
     return orElse();
   }
@@ -2799,7 +2863,8 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final Brightness brightness,
       final double contrastLevel,
       final DynamicSchemeVariant dynamicSchemeVariant,
-      final String previousVersion}) = _$AppSettingsDefaultsImpl;
+      final String previousVersion,
+      final bool updateNtpOffsetAtStartup}) = _$AppSettingsDefaultsImpl;
 
 // язык
   @override
@@ -2890,7 +2955,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
   DynamicSchemeVariant
       get dynamicSchemeVariant; // версия при предыдущем запуске
   @override
-  String get previousVersion;
+  String get previousVersion; // обновлять ntp offset при запуске
+  @override
+  bool get updateNtpOffsetAtStartup;
 
   /// Create a copy of AppSettings
   /// with the given fields replaced by the non-null parameter values.

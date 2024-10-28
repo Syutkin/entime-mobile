@@ -17,7 +17,7 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
       : _connectivityProvider = connectivityProvider,
         super(const ConnectivityState.state(false)) {
     _onConnectionSubscription =
-        _connectivityProvider.isConnected.listen((data) {
+        _connectivityProvider.onConnectivityChanged.listen((data) {
       add(ConnectivityEvent.emit(data));
     });
 

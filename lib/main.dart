@@ -166,8 +166,7 @@ class EntimeApp extends StatelessWidget {
           ),
           BlocProvider<UpdateBloc>(
             create: (context) => UpdateBloc(updateProvider: updateProvider)
-              ..add(const PopupChangelog())
-              ..add(const CheckUpdate()),
+              ..add(const UpdateEvent.popupChangelog()),
           ),
           BlocProvider<AppInfoCubit>(
             create: (context) => AppInfoCubit(appInfo: appInfo),
@@ -189,36 +188,45 @@ class EntimeAppView extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<SettingsBloc, SettingsState>(
-        buildWhen: (previousState, state) =>
-            previousState.settings.seedColor != state.settings.seedColor ||
-            previousState.settings.brightness != state.settings.brightness ||
-            previousState.settings.contrastLevel !=
-                state.settings.contrastLevel ||
-            previousState.settings.dynamicSchemeVariant !=
-                state.settings.dynamicSchemeVariant ||
-            previousState.settings.language != state.settings.language,
-        builder: (context, state) => MaterialApp(
-          theme: appThemeData(
-            seedColor: state.settings.seedColor,
-            brightness: state.settings.brightness,
-            contrastLevel: state.settings.contrastLevel,
-            dynamicSchemeVariant: state.settings.dynamicSchemeVariant,
-          ),
-          title: Pubspec.name,
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            Localization.delegate,
-          ],
-          supportedLocales: Localization.supportedLocales,
-          //1. call BotToastInit
-          builder: BotToastInit(),
-          //2. registered route observer
-          navigatorObservers: [BotToastNavigatorObserver()],
-          home: const HomeScreen(),
+  Widget build(BuildContext context) {
+    final settings = context.read<SettingsBloc>().state.settings;
+    if (settings.updateNtpOffsetAtStartup) {
+      context.read<NtpBloc>().add(NtpEvent.getNtpOffset());
+    }
+    if (settings.checkUpdates) {
+      context.read<UpdateBloc>().add(const UpdateEvent.checkUpdate());
+    }
+
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      buildWhen: (previousState, state) =>
+          previousState.settings.seedColor != state.settings.seedColor ||
+          previousState.settings.brightness != state.settings.brightness ||
+          previousState.settings.contrastLevel !=
+              state.settings.contrastLevel ||
+          previousState.settings.dynamicSchemeVariant !=
+              state.settings.dynamicSchemeVariant ||
+          previousState.settings.language != state.settings.language,
+      builder: (context, state) => MaterialApp(
+        theme: appThemeData(
+          seedColor: state.settings.seedColor,
+          brightness: state.settings.brightness,
+          contrastLevel: state.settings.contrastLevel,
+          dynamicSchemeVariant: state.settings.dynamicSchemeVariant,
         ),
-      );
+        title: Pubspec.name,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          Localization.delegate,
+        ],
+        supportedLocales: Localization.supportedLocales,
+        //1. call BotToastInit
+        builder: BotToastInit(),
+        //2. registered route observer
+        navigatorObservers: [BotToastNavigatorObserver()],
+        home: const HomeScreen(),
+      ),
+    );
+  }
 }

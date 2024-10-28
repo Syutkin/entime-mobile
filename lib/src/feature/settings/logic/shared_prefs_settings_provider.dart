@@ -74,6 +74,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
               defaults.dynamicSchemeVariant.name),
       previousVersion:
           prefs.getString('previousVersion') ?? defaults.previousVersion,
+      updateNtpOffsetAtStartup: prefs.getBool('updateNtpOffsetAtStartup') ??
+          defaults.updateNtpOffsetAtStartup,
     );
 
     await WakelockPlus.toggle(enable: settings.wakelock);
@@ -94,7 +96,12 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   @override
   Future<void> setDefaults() async {
-    await _save(const AppSettings.defaults());
+    // не сбрасываем выбранные гонку и этап
+    final defaults = AppSettings.defaults().copyWith(
+      raceId: _prefs.getInt('raceId') ?? -1,
+      stageId: _prefs.getInt('stageId') ?? -1,
+    );
+    await _save(defaults);
   }
 
   Future<void> _save(AppSettings settings) async {
@@ -143,6 +150,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setString(
         'dynamicSchemeVariant', settings.dynamicSchemeVariant.name);
     await _prefs.setString('previousVersion', settings.previousVersion);
+    await _prefs.setBool(
+        'updateNtpOffsetAtStartup', settings.updateNtpOffsetAtStartup);
 
     _settings = settings;
     _appSettingsController.add(_settings);

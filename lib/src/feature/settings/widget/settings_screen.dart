@@ -50,13 +50,16 @@ class _SettingsList extends StatelessWidget {
                 },
               ),
               SettingsTile.switchTile(
-                title: Text(Localization.current.I18nSettings_sound),
-                //leading:  Icon(Icons.volume_up),
-                initialValue: settingsState.settings.sound,
+                title: Text(Localization.current.I18nSettings_ntpOffset),
+                description: Text(
+                  Localization.current.I18nSettings_ntpOffsetDescription,
+                ),
+                initialValue: settingsState.settings.updateNtpOffsetAtStartup,
                 onToggle: (value) {
                   settingsBloc.add(
                     SettingsEvent.update(
-                      settings: settingsState.settings.copyWith(sound: value),
+                      settings: settingsState.settings
+                          .copyWith(updateNtpOffsetAtStartup: value),
                     ),
                   );
                 },
@@ -75,7 +78,20 @@ class _SettingsList extends StatelessWidget {
                   );
                 },
               ),
+              SettingsTile.switchTile(
+                title: Text(Localization.current.I18nSettings_sound),
+                //leading:  Icon(Icons.volume_up),
+                initialValue: settingsState.settings.sound,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings.copyWith(sound: value),
+                    ),
+                  );
+                },
+              ),
               SettingsTile(
+                // ToDo: выбор локализации
                 enabled: false,
                 title: Text(Localization.current.I18nSettings_language),
                 trailing: DropdownMenu<String>(
@@ -153,14 +169,15 @@ class _SettingsList extends StatelessWidget {
                 enabled: settingsState.settings.sound &&
                     settingsState.settings.voice,
                 title: Text(Localization.current.I18nSettings_voiceFromApp),
-                description: Text(
-                    Localization.current.I18nSettings_voiceFromAppDetails),
+                description:
+                    Text(Localization.current.I18nSettings_voiceFromAppDetails),
                 //leading:  Icon(MdiIcons.textToSpeech),
                 initialValue: settingsState.settings.voiceFromApp,
                 onToggle: (value) {
                   settingsBloc.add(
                     SettingsEvent.update(
-                      settings: settingsState.settings.copyWith(voiceFromApp: value),
+                      settings:
+                          settingsState.settings.copyWith(voiceFromApp: value),
                     ),
                   );
                 },

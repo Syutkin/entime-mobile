@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-27T12:15:27.083085",
+  "@@last_modified": "2024-10-28T10:23:11.591631",
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
     "type": "text",
@@ -327,6 +327,16 @@
   },
   "I18nSettings_darkRed": "Красная тёмная тема",
   "@I18nSettings_darkRed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_ntpOffset": "NTP смещение",
+  "@I18nSettings_ntpOffset": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_ntpOffsetDescription": "Синхронизировать при старте приложения",
+  "@I18nSettings_ntpOffsetDescription": {
     "type": "text",
     "placeholders": {}
   },

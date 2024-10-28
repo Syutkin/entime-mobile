@@ -1,5 +1,7 @@
 import 'package:flutter_ntp/flutter_ntp.dart';
 
+import '../../../common/logger/logger.dart';
+
 abstract interface class INtpProvider {
   INtpProvider({
     String? lookUpAddress,

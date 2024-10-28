@@ -5,11 +5,9 @@ import '../../../common/logger/logger.dart';
 import '../logic/update_provider.dart';
 import '../model/show_changelog.dart';
 
-part 'update_event.dart';
-
-part 'update_state.dart';
-
 part 'update_bloc.freezed.dart';
+part 'update_event.dart';
+part 'update_state.dart';
 
 class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
   final UpdateProvider updateProvider;
