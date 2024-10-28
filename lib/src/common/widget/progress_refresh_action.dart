@@ -7,8 +7,8 @@ class ProgressRefreshAction extends StatelessWidget {
   const ProgressRefreshAction({
     required this.isLoading,
     required this.onPressed,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

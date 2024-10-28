@@ -4,5 +4,6 @@ part of 'module_settings_bloc.dart';
 class ModuleSettingsEvent with _$ModuleSettingsEvent {
   const factory ModuleSettingsEvent.get(final String json) = GetModuleSettings;
   const factory ModuleSettingsEvent.update(
-      final ModuleSettingsProvider moduleSettings,) = UpdateModuleSettings;
+    final ModuleSettingsProvider moduleSettings,
+  ) = UpdateModuleSettings;
 }

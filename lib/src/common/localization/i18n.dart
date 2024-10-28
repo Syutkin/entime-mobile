@@ -2,6 +2,23 @@
 
 import 'package:intl/intl.dart';
 
+class I18nCore {
+  static String get delete => Intl.message(
+        'Удалить',
+        name: 'I18nCore_delete',
+      );
+
+  static String get warning => Intl.message(
+        'Предупреждение',
+        name: 'I18nCore_warning',
+      );
+
+  static String get correction => Intl.message(
+        'Поправка',
+        name: 'I18nCore_correction',
+      );
+}
+
 class I18nUpdate {
   static String get whatsNew => Intl.message(
         'Что нового',
@@ -48,11 +65,6 @@ class I18nSettings {
         name: 'I18nSettings_general',
       );
 
-  static String get bluetooth => Intl.message(
-        'Bluetooth',
-        name: 'I18nSettings_bluetooth',
-      );
-
   static String get reconnect => Intl.message(
         'Переподключение',
         name: 'I18nSettings_reconnect',
@@ -73,9 +85,24 @@ class I18nSettings {
         name: 'I18nSettings_wakelock',
       );
 
+  static String get language => Intl.message(
+        'Язык',
+        name: 'I18nSettings_language',
+      );
+
   static String get countdown => Intl.message(
         'Обратный отсчёт',
         name: 'I18nSettings_countdown',
+      );
+
+  static String get countdownFromApp => Intl.message(
+        'Использовать время приложения',
+        name: 'I18nSettings_countdownFromApp',
+      );
+
+  static String get countdownFromAppDetails => Intl.message(
+        'Для озвучивания без модуля',
+        name: 'I18nSettings_countdownFromAppDetails',
       );
 
   static String get voiceMessages => Intl.message(
@@ -86,6 +113,16 @@ class I18nSettings {
   static String get voice => Intl.message(
         'Голос',
         name: 'I18nSettings_voice',
+      );
+
+  static String get voiceFromApp => Intl.message(
+        'Использовать время приложения',
+        name: 'I18nSettings_voiceFromApp',
+      );
+
+  static String get voiceFromAppDetails => Intl.message(
+        'Для озвучивания без модуля',
+        name: 'I18nSettings_voiceFromAppDetails',
       );
 
   static String get participantsName => Intl.message(
@@ -108,9 +145,9 @@ class I18nSettings {
         name: 'I18nSettings_rate',
       );
 
-  static String get language => Intl.message(
+  static String get voiceLanguage => Intl.message(
         'Язык',
-        name: 'I18nSettings_language',
+        name: 'I18nSettings_voiceLanguage',
       );
 
   static String get startScreen => Intl.message(
@@ -210,6 +247,11 @@ class I18nSettings {
         name: 'I18nSettings_themes',
       );
 
+  static String get brightness => Intl.message(
+        'Светлая тема',
+        name: 'I18nSettings_brightness',
+      );
+
   static String get journal => Intl.message(
         'Журнал',
         name: 'I18nSettings_journal',
@@ -289,6 +331,16 @@ class I18nSettings {
         'Красная тёмная тема',
         name: 'I18nSettings_darkRed',
       );
+
+  static String get ntpOffset => Intl.message(
+        'NTP смещение',
+        name: 'I18nSettings_ntpOffset',
+      );
+
+  static String get ntpOffsetDescription => Intl.message(
+        'Синхронизировать при старте приложения',
+        name: 'I18nSettings_ntpOffsetDescription',
+      );
 }
 
 class I18nProtocol {
@@ -357,6 +409,20 @@ class I18nProtocol {
   static String get time => Intl.message(
         'Время',
         name: 'I18nProtocol_time',
+      );
+
+  static String shareStartResults(String raceName, String stageName) =>
+      Intl.message(
+        'Результаты стартов гонки $raceName, этап $stageName',
+        name: 'I18nProtocol_shareStartResults',
+        args: [raceName, stageName],
+      );
+
+  static String shareFinishResults(String raceName, String stageName) =>
+      Intl.message(
+        'Результаты финишей гонки $raceName, этап $stageName',
+        name: 'I18nProtocol_shareFinishResults',
+        args: [raceName, stageName],
       );
 }
 
@@ -570,7 +636,7 @@ class I18nHome {
       );
 
   static String get addRacer => Intl.message(
-        'Добавить',
+        'Добавить участника',
         name: 'I18nHome_addRacer',
       );
 
@@ -587,6 +653,11 @@ class I18nHome {
   static String get countdown => Intl.message(
         'Обратный отсчёт',
         name: 'I18nHome_countdown',
+      );
+
+  static String get countdownPage => Intl.message(
+        'Страница с обратным отсчётом',
+        name: 'I18nHome_countdownPage',
       );
 
   static String get fab => Intl.message(
@@ -626,9 +697,14 @@ class I18nHome {
 }
 
 class I18nInit {
-  static String get startProtocol => Intl.message(
-        'Стартовый протокол',
-        name: 'I18nInit_startProtocol',
+  static String get selectRace => Intl.message(
+        'Выберите соревнование',
+        name: 'I18nInit_selectRace',
+      );
+
+  static String get selectStage => Intl.message(
+        'Выберите спецучасток',
+        name: 'I18nInit_selectStage',
       );
 
   static String get pressToSelect => Intl.message(
@@ -661,11 +737,109 @@ class I18nInit {
         name: 'I18nInit_delete',
       );
 
-  static String get dbFile => Intl.message(
-        'Файл базы данных',
-        name: 'I18nInit_dbFile',
+  static String get importFromCsv => Intl.message(
+        'Импорт протокола из csv',
+        name: 'I18nInit_importFromCsv',
       );
 }
+
+class I18nStart {
+  static String get didNotStart => Intl.message(
+        'Не стартовал',
+        name: 'I18nStart_didNotStart',
+      );
+
+  static String get addParticipant => Intl.message(
+        'Добавить участника',
+        name: 'I18nStart_addParticipant',
+      );
+
+  static String get sliverNumber => Intl.message(
+        '№',
+        name: 'I18nStart_sliverNumber',
+      );
+
+  static String get sliverStart => Intl.message(
+        'Старт',
+        name: 'I18nStart_sliverStart',
+      );
+
+  static String get sliverManualCorrection => Intl.message(
+        'Ручная\r\nпоправка',
+        name: 'I18nStart_sliverManualCorrection',
+      );
+
+  static String get sliverAutomaticCorrection => Intl.message(
+        'Авто\r\nпоправка',
+        name: 'I18nStart_sliverAutomaticCorrection',
+      );
+
+// edit_start_time_popup
+  static String get incorrectCorrection => Intl.message(
+        'Неверное значение поправки',
+        name: 'I18nStart_incorrectCorrection',
+      );
+
+  static String get incorrectTime => Intl.message(
+        'Неверное значение времени',
+        name: 'I18nStart_incorrectTime',
+      );
+
+  static String participantNumber(int number) => Intl.message(
+        'Участник №$number',
+        name: 'I18nStart_participantNumber',
+        args: [number],
+      );
+
+  static String participantNumberWithName(int number, String name) =>
+      Intl.message(
+        '№$number, $name',
+        name: 'I18nStart_participantNumberWithName',
+        args: [number, name],
+      );
+
+  static String participantCategory(String category) => Intl.message(
+        'Категория: $category',
+        name: 'I18nStart_participantCategory',
+        args: [category],
+      );
+
+  static String participantNickname(String nickname) => Intl.message(
+        'Никнейм: $nickname',
+        name: 'I18nStart_participantNickname',
+        args: [nickname],
+      );
+
+  static String participantCity(String city) => Intl.message(
+        'Город: $city',
+        name: 'I18nStart_participantCity',
+        args: [city],
+      );
+
+  static String participantTeam(String team) => Intl.message(
+        'Команда: $team',
+        name: 'I18nStart_participantTeam',
+        args: [team],
+      );
+
+  static String participantYear(int year) => Intl.message(
+        'Год/Возраст: $year',
+        name: 'I18nStart_participantYear',
+        args: [year],
+      );
+
+  static String get startTime => Intl.message(
+        'Время старта',
+        name: 'I18nStart_startTime',
+      );
+
+  static String get startTimeAtSmartphone => Intl.message(
+        'Время старта на смартфоне',
+        name: 'I18nStart_startTimeAtSmartphone',
+      );
+}
+
+class I18nFinish {}
 
 class I18nLog {
   static String get bluetoothInformation => Intl.message(
@@ -933,5 +1107,83 @@ class I18nModuleSettings {
         'Неизвестный тип модуля: $type',
         name: 'I18nModuleSettings_unknownModuleType',
         args: [type],
+      );
+}
+
+class I18nDatabase {
+  static String get races => Intl.message(
+        'Соревнования',
+        name: 'I18nDatabase_races',
+      );
+
+  static String get addRace => Intl.message(
+        'Создать соревнование',
+        name: 'I18nDatabase_addRace',
+      );
+
+  static String get raceName => Intl.message(
+        'Название соревнования',
+        name: 'I18nDatabase_raceName',
+      );
+
+  static String get enterRaceName => Intl.message(
+        'Введите название соревнования',
+        name: 'I18nDatabase_enterRaceName',
+      );
+
+  static String get raceDates => Intl.message(
+        'Даты проведения',
+        name: 'I18nDatabase_raceDates',
+      );
+
+  static String get addStage => Intl.message(
+        'Создать спецучасток',
+        name: 'I18nDatabase_addStage',
+      );
+
+  static String get stageName => Intl.message(
+        'Название спецучастка',
+        name: 'I18nDatabase_stageName',
+      );
+
+  static String get enterStageName => Intl.message(
+        'Введите название спецучастка',
+        name: 'I18nDatabase_enterStageName',
+      );
+
+  static String get trail => Intl.message(
+        'Трейл',
+        name: 'I18nDatabase_trail',
+      );
+}
+
+class I18nNtp {
+  static String get ntpOffset => Intl.message(
+        'NTP offset',
+        name: 'I18nNtp_ntpOffset',
+      );
+
+  static String get sync => Intl.message(
+        'Нажмите для синхронизации',
+        name: 'I18nNtp_sync',
+      );
+
+  static String get syncing => Intl.message(
+        'Синхронизация...',
+        name: 'I18nNtp_syncing',
+      );
+
+  static String get syncError => Intl.message(
+        'Ошибка синхронизации',
+        name: 'I18nNtp_syncError',
+      );
+
+  static String offsetInMilliseconds(int offset) => Intl.plural(
+        offset,
+        one: 'Смещение $offset миллисекунда',
+        few: 'Смещение $offset миллисекунды',
+        other: 'Смещение $offset миллисекунд',
+        name: 'I18nNtp_offsetInMilliseconds',
+        args: [offset],
       );
 }

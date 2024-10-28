@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'app_settings.dart';
 
@@ -12,22 +12,31 @@ part of 'app_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AppSettings {
+// язык
+  String get language =>
+      throw _privateConstructorUsedError; // = "ru", // локаль
 // звук
   bool get sound => throw _privateConstructorUsedError; // вкл/выкл
 // звук обратного отсчёта
-  bool get beep => throw _privateConstructorUsedError; // голосовые сообщения
+  bool get beep =>
+      throw _privateConstructorUsedError; // звуком обратного отсчёта управляет приложение
+  bool get beepFromApp =>
+      throw _privateConstructorUsedError; // голосовые сообщения
   bool get voice => throw _privateConstructorUsedError;
+  bool get voiceFromApp => throw _privateConstructorUsedError;
   bool get voiceName => throw _privateConstructorUsedError;
   double get volume => throw _privateConstructorUsedError; // громкость
   double get pitch => throw _privateConstructorUsedError; // тон речи
   double get rate => throw _privateConstructorUsedError; // скорость речи
-  String get language =>
-      throw _privateConstructorUsedError; // = "ru-RU", // язык
-  String get recentFile =>
+  String get voiceLanguage =>
+      throw _privateConstructorUsedError; // = "ru-RU", // язык tts
+// id выбранного соревнования и участка
+  int get raceId => throw _privateConstructorUsedError;
+  int get stageId =>
       throw _privateConstructorUsedError; // всегда включённый экран
   bool get wakelock =>
       throw _privateConstructorUsedError; // кнопки "добавить вручную" на экранах старта и финиша
@@ -54,25 +63,41 @@ mixin _$AppSettings {
   int get finishDelay =>
       throw _privateConstructorUsedError; // автоподстановка номеров в финишном протоколе
   bool get substituteNumbers => throw _privateConstructorUsedError;
-  int get substituteNumbersDelay => throw _privateConstructorUsedError; // лог
+  int get substituteNumbersDelay =>
+      throw _privateConstructorUsedError; // дельта в секундах для автоматического подставления стартового времени
+  int get deltaInSeconds =>
+      throw _privateConstructorUsedError; // задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  int get updateStartCorrectionDelay =>
+      throw _privateConstructorUsedError; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   int get logLimit => throw _privateConstructorUsedError; // активная тема
-  AppTheme get appTheme =>
+// required AppTheme appTheme,
+  ColorSeed get seedColor => throw _privateConstructorUsedError;
+  Brightness get brightness => throw _privateConstructorUsedError;
+  double get contrastLevel => throw _privateConstructorUsedError;
+  DynamicSchemeVariant get dynamicSchemeVariant =>
       throw _privateConstructorUsedError; // версия при предыдущем запуске
-  String get previousVersion => throw _privateConstructorUsedError;
+  String get previousVersion =>
+      throw _privateConstructorUsedError; // обновлять ntp offset при запуске
+  bool get updateNtpOffsetAtStartup => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -91,20 +116,30 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         $default, {
     required TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -123,24 +158,34 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         defaults,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
+    TResult? Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -159,20 +204,30 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
-    TResult Function(
+    TResult? Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -191,24 +246,34 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -227,20 +292,30 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
     TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -259,9 +334,15 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
     required TResult orElse(),
   }) =>
@@ -274,8 +355,8 @@ mixin _$AppSettings {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_AppSettings value)? $default, {
-    TResult Function(_AppSettingsDefaults value)? defaults,
+    TResult? Function(_AppSettings value)? $default, {
+    TResult? Function(_AppSettingsDefaults value)? defaults,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -286,7 +367,9 @@ mixin _$AppSettings {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppSettingsCopyWith<AppSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -295,17 +378,22 @@ mixin _$AppSettings {
 abstract class $AppSettingsCopyWith<$Res> {
   factory $AppSettingsCopyWith(
           AppSettings value, $Res Function(AppSettings) then) =
-      _$AppSettingsCopyWithImpl<$Res>;
+      _$AppSettingsCopyWithImpl<$Res, AppSettings>;
+  @useResult
   $Res call(
-      {bool sound,
+      {String language,
+      bool sound,
       bool beep,
+      bool beepFromApp,
       bool voice,
+      bool voiceFromApp,
       bool voiceName,
       double volume,
       double pitch,
       double rate,
-      String language,
-      String recentFile,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
       bool wakelock,
       bool startFab,
       double startFabSize,
@@ -324,194 +412,260 @@ abstract class $AppSettingsCopyWith<$Res> {
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
       int logLimit,
-      AppTheme appTheme,
-      String previousVersion});
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup});
 }
 
 /// @nodoc
-class _$AppSettingsCopyWithImpl<$Res> implements $AppSettingsCopyWith<$Res> {
+class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
+    implements $AppSettingsCopyWith<$Res> {
   _$AppSettingsCopyWithImpl(this._value, this._then);
 
-  final AppSettings _value;
   // ignore: unused_field
-  final $Res Function(AppSettings) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sound = freezed,
-    Object? beep = freezed,
-    Object? voice = freezed,
-    Object? voiceName = freezed,
-    Object? volume = freezed,
-    Object? pitch = freezed,
-    Object? rate = freezed,
-    Object? language = freezed,
-    Object? recentFile = freezed,
-    Object? wakelock = freezed,
-    Object? startFab = freezed,
-    Object? startFabSize = freezed,
-    Object? finishFab = freezed,
-    Object? finishFabSize = freezed,
-    Object? countdown = freezed,
-    Object? countdownSize = freezed,
-    Object? countdownLeft = freezed,
-    Object? countdownTop = freezed,
-    Object? countdownAtStartTime = freezed,
-    Object? checkUpdates = freezed,
-    Object? hideMarked = freezed,
-    Object? hideNumbers = freezed,
-    Object? hideManual = freezed,
-    Object? reconnect = freezed,
-    Object? finishDelay = freezed,
-    Object? substituteNumbers = freezed,
-    Object? substituteNumbersDelay = freezed,
-    Object? logLimit = freezed,
-    Object? appTheme = freezed,
-    Object? previousVersion = freezed,
+    Object? language = null,
+    Object? sound = null,
+    Object? beep = null,
+    Object? beepFromApp = null,
+    Object? voice = null,
+    Object? voiceFromApp = null,
+    Object? voiceName = null,
+    Object? volume = null,
+    Object? pitch = null,
+    Object? rate = null,
+    Object? voiceLanguage = null,
+    Object? raceId = null,
+    Object? stageId = null,
+    Object? wakelock = null,
+    Object? startFab = null,
+    Object? startFabSize = null,
+    Object? finishFab = null,
+    Object? finishFabSize = null,
+    Object? countdown = null,
+    Object? countdownSize = null,
+    Object? countdownLeft = null,
+    Object? countdownTop = null,
+    Object? countdownAtStartTime = null,
+    Object? checkUpdates = null,
+    Object? hideMarked = null,
+    Object? hideNumbers = null,
+    Object? hideManual = null,
+    Object? reconnect = null,
+    Object? finishDelay = null,
+    Object? substituteNumbers = null,
+    Object? substituteNumbersDelay = null,
+    Object? deltaInSeconds = null,
+    Object? updateStartCorrectionDelay = null,
+    Object? logLimit = null,
+    Object? seedColor = null,
+    Object? brightness = null,
+    Object? contrastLevel = null,
+    Object? dynamicSchemeVariant = null,
+    Object? previousVersion = null,
+    Object? updateNtpOffsetAtStartup = null,
   }) {
     return _then(_value.copyWith(
-      sound: sound == freezed
-          ? _value.sound
-          : sound // ignore: cast_nullable_to_non_nullable
-              as bool,
-      beep: beep == freezed
-          ? _value.beep
-          : beep // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voice: voice == freezed
-          ? _value.voice
-          : voice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voiceName: voiceName == freezed
-          ? _value.voiceName
-          : voiceName // ignore: cast_nullable_to_non_nullable
-              as bool,
-      volume: volume == freezed
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      pitch: pitch == freezed
-          ? _value.pitch
-          : pitch // ignore: cast_nullable_to_non_nullable
-              as double,
-      rate: rate == freezed
-          ? _value.rate
-          : rate // ignore: cast_nullable_to_non_nullable
-              as double,
-      language: language == freezed
+      language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      recentFile: recentFile == freezed
-          ? _value.recentFile
-          : recentFile // ignore: cast_nullable_to_non_nullable
+      sound: null == sound
+          ? _value.sound
+          : sound // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beep: null == beep
+          ? _value.beep
+          : beep // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beepFromApp: null == beepFromApp
+          ? _value.beepFromApp
+          : beepFromApp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voice: null == voice
+          ? _value.voice
+          : voice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voiceFromApp: null == voiceFromApp
+          ? _value.voiceFromApp
+          : voiceFromApp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voiceName: null == voiceName
+          ? _value.voiceName
+          : voiceName // ignore: cast_nullable_to_non_nullable
+              as bool,
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      pitch: null == pitch
+          ? _value.pitch
+          : pitch // ignore: cast_nullable_to_non_nullable
+              as double,
+      rate: null == rate
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as double,
+      voiceLanguage: null == voiceLanguage
+          ? _value.voiceLanguage
+          : voiceLanguage // ignore: cast_nullable_to_non_nullable
               as String,
-      wakelock: wakelock == freezed
+      raceId: null == raceId
+          ? _value.raceId
+          : raceId // ignore: cast_nullable_to_non_nullable
+              as int,
+      stageId: null == stageId
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
+      wakelock: null == wakelock
           ? _value.wakelock
           : wakelock // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFab: startFab == freezed
+      startFab: null == startFab
           ? _value.startFab
           : startFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFabSize: startFabSize == freezed
+      startFabSize: null == startFabSize
           ? _value.startFabSize
           : startFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      finishFab: finishFab == freezed
+      finishFab: null == finishFab
           ? _value.finishFab
           : finishFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishFabSize: finishFabSize == freezed
+      finishFabSize: null == finishFabSize
           ? _value.finishFabSize
           : finishFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdown: countdown == freezed
+      countdown: null == countdown
           ? _value.countdown
           : countdown // ignore: cast_nullable_to_non_nullable
               as bool,
-      countdownSize: countdownSize == freezed
+      countdownSize: null == countdownSize
           ? _value.countdownSize
           : countdownSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownLeft: countdownLeft == freezed
+      countdownLeft: null == countdownLeft
           ? _value.countdownLeft
           : countdownLeft // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownTop: countdownTop == freezed
+      countdownTop: null == countdownTop
           ? _value.countdownTop
           : countdownTop // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownAtStartTime: countdownAtStartTime == freezed
+      countdownAtStartTime: null == countdownAtStartTime
           ? _value.countdownAtStartTime
           : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      checkUpdates: checkUpdates == freezed
+      checkUpdates: null == checkUpdates
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: hideMarked == freezed
+      hideMarked: null == hideMarked
           ? _value.hideMarked
           : hideMarked // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: hideNumbers == freezed
+      hideNumbers: null == hideNumbers
           ? _value.hideNumbers
           : hideNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: hideManual == freezed
+      hideManual: null == hideManual
           ? _value.hideManual
           : hideManual // ignore: cast_nullable_to_non_nullable
               as bool,
-      reconnect: reconnect == freezed
+      reconnect: null == reconnect
           ? _value.reconnect
           : reconnect // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishDelay: finishDelay == freezed
+      finishDelay: null == finishDelay
           ? _value.finishDelay
           : finishDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      substituteNumbers: substituteNumbers == freezed
+      substituteNumbers: null == substituteNumbers
           ? _value.substituteNumbers
           : substituteNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      substituteNumbersDelay: substituteNumbersDelay == freezed
+      substituteNumbersDelay: null == substituteNumbersDelay
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      logLimit: logLimit == freezed
+      deltaInSeconds: null == deltaInSeconds
+          ? _value.deltaInSeconds
+          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+              as int,
+      updateStartCorrectionDelay: null == updateStartCorrectionDelay
+          ? _value.updateStartCorrectionDelay
+          : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
+              as int,
+      logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
               as int,
-      appTheme: appTheme == freezed
-          ? _value.appTheme
-          : appTheme // ignore: cast_nullable_to_non_nullable
-              as AppTheme,
-      previousVersion: previousVersion == freezed
+      seedColor: null == seedColor
+          ? _value.seedColor
+          : seedColor // ignore: cast_nullable_to_non_nullable
+              as ColorSeed,
+      brightness: null == brightness
+          ? _value.brightness
+          : brightness // ignore: cast_nullable_to_non_nullable
+              as Brightness,
+      contrastLevel: null == contrastLevel
+          ? _value.contrastLevel
+          : contrastLevel // ignore: cast_nullable_to_non_nullable
+              as double,
+      dynamicSchemeVariant: null == dynamicSchemeVariant
+          ? _value.dynamicSchemeVariant
+          : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
+              as DynamicSchemeVariant,
+      previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+      updateNtpOffsetAtStartup: null == updateNtpOffsetAtStartup
+          ? _value.updateNtpOffsetAtStartup
+          : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_AppSettingsCopyWith<$Res>
+abstract class _$$AppSettingsImplCopyWith<$Res>
     implements $AppSettingsCopyWith<$Res> {
-  factory _$$_AppSettingsCopyWith(
-          _$_AppSettings value, $Res Function(_$_AppSettings) then) =
-      __$$_AppSettingsCopyWithImpl<$Res>;
+  factory _$$AppSettingsImplCopyWith(
+          _$AppSettingsImpl value, $Res Function(_$AppSettingsImpl) then) =
+      __$$AppSettingsImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {bool sound,
+      {String language,
+      bool sound,
       bool beep,
+      bool beepFromApp,
       bool voice,
+      bool voiceFromApp,
       bool voiceName,
       double volume,
       double pitch,
       double rate,
-      String language,
-      String recentFile,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
       bool wakelock,
       bool startFab,
       double startFabSize,
@@ -530,192 +684,253 @@ abstract class _$$_AppSettingsCopyWith<$Res>
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
       int logLimit,
-      AppTheme appTheme,
-      String previousVersion});
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup});
 }
 
 /// @nodoc
-class __$$_AppSettingsCopyWithImpl<$Res> extends _$AppSettingsCopyWithImpl<$Res>
-    implements _$$_AppSettingsCopyWith<$Res> {
-  __$$_AppSettingsCopyWithImpl(
-      _$_AppSettings _value, $Res Function(_$_AppSettings) _then)
-      : super(_value, (v) => _then(v as _$_AppSettings));
+class __$$AppSettingsImplCopyWithImpl<$Res>
+    extends _$AppSettingsCopyWithImpl<$Res, _$AppSettingsImpl>
+    implements _$$AppSettingsImplCopyWith<$Res> {
+  __$$AppSettingsImplCopyWithImpl(
+      _$AppSettingsImpl _value, $Res Function(_$AppSettingsImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_AppSettings get _value => super._value as _$_AppSettings;
-
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sound = freezed,
-    Object? beep = freezed,
-    Object? voice = freezed,
-    Object? voiceName = freezed,
-    Object? volume = freezed,
-    Object? pitch = freezed,
-    Object? rate = freezed,
-    Object? language = freezed,
-    Object? recentFile = freezed,
-    Object? wakelock = freezed,
-    Object? startFab = freezed,
-    Object? startFabSize = freezed,
-    Object? finishFab = freezed,
-    Object? finishFabSize = freezed,
-    Object? countdown = freezed,
-    Object? countdownSize = freezed,
-    Object? countdownLeft = freezed,
-    Object? countdownTop = freezed,
-    Object? countdownAtStartTime = freezed,
-    Object? checkUpdates = freezed,
-    Object? hideMarked = freezed,
-    Object? hideNumbers = freezed,
-    Object? hideManual = freezed,
-    Object? reconnect = freezed,
-    Object? finishDelay = freezed,
-    Object? substituteNumbers = freezed,
-    Object? substituteNumbersDelay = freezed,
-    Object? logLimit = freezed,
-    Object? appTheme = freezed,
-    Object? previousVersion = freezed,
+    Object? language = null,
+    Object? sound = null,
+    Object? beep = null,
+    Object? beepFromApp = null,
+    Object? voice = null,
+    Object? voiceFromApp = null,
+    Object? voiceName = null,
+    Object? volume = null,
+    Object? pitch = null,
+    Object? rate = null,
+    Object? voiceLanguage = null,
+    Object? raceId = null,
+    Object? stageId = null,
+    Object? wakelock = null,
+    Object? startFab = null,
+    Object? startFabSize = null,
+    Object? finishFab = null,
+    Object? finishFabSize = null,
+    Object? countdown = null,
+    Object? countdownSize = null,
+    Object? countdownLeft = null,
+    Object? countdownTop = null,
+    Object? countdownAtStartTime = null,
+    Object? checkUpdates = null,
+    Object? hideMarked = null,
+    Object? hideNumbers = null,
+    Object? hideManual = null,
+    Object? reconnect = null,
+    Object? finishDelay = null,
+    Object? substituteNumbers = null,
+    Object? substituteNumbersDelay = null,
+    Object? deltaInSeconds = null,
+    Object? updateStartCorrectionDelay = null,
+    Object? logLimit = null,
+    Object? seedColor = null,
+    Object? brightness = null,
+    Object? contrastLevel = null,
+    Object? dynamicSchemeVariant = null,
+    Object? previousVersion = null,
+    Object? updateNtpOffsetAtStartup = null,
   }) {
-    return _then(_$_AppSettings(
-      sound: sound == freezed
-          ? _value.sound
-          : sound // ignore: cast_nullable_to_non_nullable
-              as bool,
-      beep: beep == freezed
-          ? _value.beep
-          : beep // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voice: voice == freezed
-          ? _value.voice
-          : voice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voiceName: voiceName == freezed
-          ? _value.voiceName
-          : voiceName // ignore: cast_nullable_to_non_nullable
-              as bool,
-      volume: volume == freezed
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      pitch: pitch == freezed
-          ? _value.pitch
-          : pitch // ignore: cast_nullable_to_non_nullable
-              as double,
-      rate: rate == freezed
-          ? _value.rate
-          : rate // ignore: cast_nullable_to_non_nullable
-              as double,
-      language: language == freezed
+    return _then(_$AppSettingsImpl(
+      language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      recentFile: recentFile == freezed
-          ? _value.recentFile
-          : recentFile // ignore: cast_nullable_to_non_nullable
+      sound: null == sound
+          ? _value.sound
+          : sound // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beep: null == beep
+          ? _value.beep
+          : beep // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beepFromApp: null == beepFromApp
+          ? _value.beepFromApp
+          : beepFromApp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voice: null == voice
+          ? _value.voice
+          : voice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voiceFromApp: null == voiceFromApp
+          ? _value.voiceFromApp
+          : voiceFromApp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voiceName: null == voiceName
+          ? _value.voiceName
+          : voiceName // ignore: cast_nullable_to_non_nullable
+              as bool,
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      pitch: null == pitch
+          ? _value.pitch
+          : pitch // ignore: cast_nullable_to_non_nullable
+              as double,
+      rate: null == rate
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as double,
+      voiceLanguage: null == voiceLanguage
+          ? _value.voiceLanguage
+          : voiceLanguage // ignore: cast_nullable_to_non_nullable
               as String,
-      wakelock: wakelock == freezed
+      raceId: null == raceId
+          ? _value.raceId
+          : raceId // ignore: cast_nullable_to_non_nullable
+              as int,
+      stageId: null == stageId
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
+      wakelock: null == wakelock
           ? _value.wakelock
           : wakelock // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFab: startFab == freezed
+      startFab: null == startFab
           ? _value.startFab
           : startFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFabSize: startFabSize == freezed
+      startFabSize: null == startFabSize
           ? _value.startFabSize
           : startFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      finishFab: finishFab == freezed
+      finishFab: null == finishFab
           ? _value.finishFab
           : finishFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishFabSize: finishFabSize == freezed
+      finishFabSize: null == finishFabSize
           ? _value.finishFabSize
           : finishFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdown: countdown == freezed
+      countdown: null == countdown
           ? _value.countdown
           : countdown // ignore: cast_nullable_to_non_nullable
               as bool,
-      countdownSize: countdownSize == freezed
+      countdownSize: null == countdownSize
           ? _value.countdownSize
           : countdownSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownLeft: countdownLeft == freezed
+      countdownLeft: null == countdownLeft
           ? _value.countdownLeft
           : countdownLeft // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownTop: countdownTop == freezed
+      countdownTop: null == countdownTop
           ? _value.countdownTop
           : countdownTop // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownAtStartTime: countdownAtStartTime == freezed
+      countdownAtStartTime: null == countdownAtStartTime
           ? _value.countdownAtStartTime
           : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      checkUpdates: checkUpdates == freezed
+      checkUpdates: null == checkUpdates
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: hideMarked == freezed
+      hideMarked: null == hideMarked
           ? _value.hideMarked
           : hideMarked // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: hideNumbers == freezed
+      hideNumbers: null == hideNumbers
           ? _value.hideNumbers
           : hideNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: hideManual == freezed
+      hideManual: null == hideManual
           ? _value.hideManual
           : hideManual // ignore: cast_nullable_to_non_nullable
               as bool,
-      reconnect: reconnect == freezed
+      reconnect: null == reconnect
           ? _value.reconnect
           : reconnect // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishDelay: finishDelay == freezed
+      finishDelay: null == finishDelay
           ? _value.finishDelay
           : finishDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      substituteNumbers: substituteNumbers == freezed
+      substituteNumbers: null == substituteNumbers
           ? _value.substituteNumbers
           : substituteNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      substituteNumbersDelay: substituteNumbersDelay == freezed
+      substituteNumbersDelay: null == substituteNumbersDelay
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      logLimit: logLimit == freezed
+      deltaInSeconds: null == deltaInSeconds
+          ? _value.deltaInSeconds
+          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+              as int,
+      updateStartCorrectionDelay: null == updateStartCorrectionDelay
+          ? _value.updateStartCorrectionDelay
+          : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
+              as int,
+      logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
               as int,
-      appTheme: appTheme == freezed
-          ? _value.appTheme
-          : appTheme // ignore: cast_nullable_to_non_nullable
-              as AppTheme,
-      previousVersion: previousVersion == freezed
+      seedColor: null == seedColor
+          ? _value.seedColor
+          : seedColor // ignore: cast_nullable_to_non_nullable
+              as ColorSeed,
+      brightness: null == brightness
+          ? _value.brightness
+          : brightness // ignore: cast_nullable_to_non_nullable
+              as Brightness,
+      contrastLevel: null == contrastLevel
+          ? _value.contrastLevel
+          : contrastLevel // ignore: cast_nullable_to_non_nullable
+              as double,
+      dynamicSchemeVariant: null == dynamicSchemeVariant
+          ? _value.dynamicSchemeVariant
+          : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
+              as DynamicSchemeVariant,
+      previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
               as String,
+      updateNtpOffsetAtStartup: null == updateNtpOffsetAtStartup
+          ? _value.updateNtpOffsetAtStartup
+          : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AppSettings implements _AppSettings {
-  const _$_AppSettings(
-      {required this.sound,
+class _$AppSettingsImpl implements _AppSettings {
+  const _$AppSettingsImpl(
+      {required this.language,
+      required this.sound,
       required this.beep,
+      required this.beepFromApp,
       required this.voice,
+      required this.voiceFromApp,
       required this.voiceName,
       required this.volume,
       required this.pitch,
       required this.rate,
-      required this.language,
-      required this.recentFile,
+      required this.voiceLanguage,
+      required this.raceId,
+      required this.stageId,
       required this.wakelock,
       required this.startFab,
       required this.startFabSize,
@@ -734,10 +949,20 @@ class _$_AppSettings implements _AppSettings {
       required this.finishDelay,
       required this.substituteNumbers,
       required this.substituteNumbersDelay,
+      required this.deltaInSeconds,
+      required this.updateStartCorrectionDelay,
       required this.logLimit,
-      required this.appTheme,
-      required this.previousVersion});
+      required this.seedColor,
+      required this.brightness,
+      required this.contrastLevel,
+      required this.dynamicSchemeVariant,
+      required this.previousVersion,
+      required this.updateNtpOffsetAtStartup});
 
+// язык
+  @override
+  final String language;
+// = "ru", // локаль
 // звук
   @override
   final bool sound;
@@ -745,9 +970,14 @@ class _$_AppSettings implements _AppSettings {
 // звук обратного отсчёта
   @override
   final bool beep;
+// звуком обратного отсчёта управляет приложение
+  @override
+  final bool beepFromApp;
 // голосовые сообщения
   @override
   final bool voice;
+  @override
+  final bool voiceFromApp;
   @override
   final bool voiceName;
   @override
@@ -760,10 +990,13 @@ class _$_AppSettings implements _AppSettings {
   final double rate;
 // скорость речи
   @override
-  final String language;
-// = "ru-RU", // язык
+  final String voiceLanguage;
+// = "ru-RU", // язык tts
+// id выбранного соревнования и участка
   @override
-  final String recentFile;
+  final int raceId;
+  @override
+  final int stageId;
 // всегда включённый экран
   @override
   final bool wakelock;
@@ -809,128 +1042,192 @@ class _$_AppSettings implements _AppSettings {
   final bool substituteNumbers;
   @override
   final int substituteNumbersDelay;
+// дельта в секундах для автоматического подставления стартового времени
+  @override
+  final int deltaInSeconds;
+// задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  @override
+  final int updateStartCorrectionDelay;
 // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
   @override
   final int logLimit;
 // активная тема
+// required AppTheme appTheme,
   @override
-  final AppTheme appTheme;
+  final ColorSeed seedColor;
+  @override
+  final Brightness brightness;
+  @override
+  final double contrastLevel;
+  @override
+  final DynamicSchemeVariant dynamicSchemeVariant;
 // версия при предыдущем запуске
   @override
   final String previousVersion;
+// обновлять ntp offset при запуске
+  @override
+  final bool updateNtpOffsetAtStartup;
 
   @override
   String toString() {
-    return 'AppSettings(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
+    return 'AppSettings(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppSettings &&
-            const DeepCollectionEquality().equals(other.sound, sound) &&
-            const DeepCollectionEquality().equals(other.beep, beep) &&
-            const DeepCollectionEquality().equals(other.voice, voice) &&
-            const DeepCollectionEquality().equals(other.voiceName, voiceName) &&
-            const DeepCollectionEquality().equals(other.volume, volume) &&
-            const DeepCollectionEquality().equals(other.pitch, pitch) &&
-            const DeepCollectionEquality().equals(other.rate, rate) &&
-            const DeepCollectionEquality().equals(other.language, language) &&
-            const DeepCollectionEquality()
-                .equals(other.recentFile, recentFile) &&
-            const DeepCollectionEquality().equals(other.wakelock, wakelock) &&
-            const DeepCollectionEquality().equals(other.startFab, startFab) &&
-            const DeepCollectionEquality()
-                .equals(other.startFabSize, startFabSize) &&
-            const DeepCollectionEquality().equals(other.finishFab, finishFab) &&
-            const DeepCollectionEquality()
-                .equals(other.finishFabSize, finishFabSize) &&
-            const DeepCollectionEquality().equals(other.countdown, countdown) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownSize, countdownSize) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownLeft, countdownLeft) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownTop, countdownTop) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownAtStartTime, countdownAtStartTime) &&
-            const DeepCollectionEquality()
-                .equals(other.checkUpdates, checkUpdates) &&
-            const DeepCollectionEquality()
-                .equals(other.hideMarked, hideMarked) &&
-            const DeepCollectionEquality()
-                .equals(other.hideNumbers, hideNumbers) &&
-            const DeepCollectionEquality()
-                .equals(other.hideManual, hideManual) &&
-            const DeepCollectionEquality().equals(other.reconnect, reconnect) &&
-            const DeepCollectionEquality()
-                .equals(other.finishDelay, finishDelay) &&
-            const DeepCollectionEquality()
-                .equals(other.substituteNumbers, substituteNumbers) &&
-            const DeepCollectionEquality()
-                .equals(other.substituteNumbersDelay, substituteNumbersDelay) &&
-            const DeepCollectionEquality().equals(other.logLimit, logLimit) &&
-            const DeepCollectionEquality().equals(other.appTheme, appTheme) &&
-            const DeepCollectionEquality()
-                .equals(other.previousVersion, previousVersion));
+            other is _$AppSettingsImpl &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.sound, sound) || other.sound == sound) &&
+            (identical(other.beep, beep) || other.beep == beep) &&
+            (identical(other.beepFromApp, beepFromApp) ||
+                other.beepFromApp == beepFromApp) &&
+            (identical(other.voice, voice) || other.voice == voice) &&
+            (identical(other.voiceFromApp, voiceFromApp) ||
+                other.voiceFromApp == voiceFromApp) &&
+            (identical(other.voiceName, voiceName) ||
+                other.voiceName == voiceName) &&
+            (identical(other.volume, volume) || other.volume == volume) &&
+            (identical(other.pitch, pitch) || other.pitch == pitch) &&
+            (identical(other.rate, rate) || other.rate == rate) &&
+            (identical(other.voiceLanguage, voiceLanguage) ||
+                other.voiceLanguage == voiceLanguage) &&
+            (identical(other.raceId, raceId) || other.raceId == raceId) &&
+            (identical(other.stageId, stageId) || other.stageId == stageId) &&
+            (identical(other.wakelock, wakelock) ||
+                other.wakelock == wakelock) &&
+            (identical(other.startFab, startFab) ||
+                other.startFab == startFab) &&
+            (identical(other.startFabSize, startFabSize) ||
+                other.startFabSize == startFabSize) &&
+            (identical(other.finishFab, finishFab) ||
+                other.finishFab == finishFab) &&
+            (identical(other.finishFabSize, finishFabSize) ||
+                other.finishFabSize == finishFabSize) &&
+            (identical(other.countdown, countdown) ||
+                other.countdown == countdown) &&
+            (identical(other.countdownSize, countdownSize) ||
+                other.countdownSize == countdownSize) &&
+            (identical(other.countdownLeft, countdownLeft) ||
+                other.countdownLeft == countdownLeft) &&
+            (identical(other.countdownTop, countdownTop) ||
+                other.countdownTop == countdownTop) &&
+            (identical(other.countdownAtStartTime, countdownAtStartTime) ||
+                other.countdownAtStartTime == countdownAtStartTime) &&
+            (identical(other.checkUpdates, checkUpdates) ||
+                other.checkUpdates == checkUpdates) &&
+            (identical(other.hideMarked, hideMarked) ||
+                other.hideMarked == hideMarked) &&
+            (identical(other.hideNumbers, hideNumbers) ||
+                other.hideNumbers == hideNumbers) &&
+            (identical(other.hideManual, hideManual) ||
+                other.hideManual == hideManual) &&
+            (identical(other.reconnect, reconnect) ||
+                other.reconnect == reconnect) &&
+            (identical(other.finishDelay, finishDelay) ||
+                other.finishDelay == finishDelay) &&
+            (identical(other.substituteNumbers, substituteNumbers) ||
+                other.substituteNumbers == substituteNumbers) &&
+            (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
+                other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.deltaInSeconds, deltaInSeconds) ||
+                other.deltaInSeconds == deltaInSeconds) &&
+            (identical(other.updateStartCorrectionDelay,
+                    updateStartCorrectionDelay) ||
+                other.updateStartCorrectionDelay ==
+                    updateStartCorrectionDelay) &&
+            (identical(other.logLimit, logLimit) ||
+                other.logLimit == logLimit) &&
+            (identical(other.seedColor, seedColor) ||
+                other.seedColor == seedColor) &&
+            (identical(other.brightness, brightness) ||
+                other.brightness == brightness) &&
+            (identical(other.contrastLevel, contrastLevel) ||
+                other.contrastLevel == contrastLevel) &&
+            (identical(other.dynamicSchemeVariant, dynamicSchemeVariant) ||
+                other.dynamicSchemeVariant == dynamicSchemeVariant) &&
+            (identical(other.previousVersion, previousVersion) ||
+                other.previousVersion == previousVersion) &&
+            (identical(
+                    other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
+                other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(sound),
-        const DeepCollectionEquality().hash(beep),
-        const DeepCollectionEquality().hash(voice),
-        const DeepCollectionEquality().hash(voiceName),
-        const DeepCollectionEquality().hash(volume),
-        const DeepCollectionEquality().hash(pitch),
-        const DeepCollectionEquality().hash(rate),
-        const DeepCollectionEquality().hash(language),
-        const DeepCollectionEquality().hash(recentFile),
-        const DeepCollectionEquality().hash(wakelock),
-        const DeepCollectionEquality().hash(startFab),
-        const DeepCollectionEquality().hash(startFabSize),
-        const DeepCollectionEquality().hash(finishFab),
-        const DeepCollectionEquality().hash(finishFabSize),
-        const DeepCollectionEquality().hash(countdown),
-        const DeepCollectionEquality().hash(countdownSize),
-        const DeepCollectionEquality().hash(countdownLeft),
-        const DeepCollectionEquality().hash(countdownTop),
-        const DeepCollectionEquality().hash(countdownAtStartTime),
-        const DeepCollectionEquality().hash(checkUpdates),
-        const DeepCollectionEquality().hash(hideMarked),
-        const DeepCollectionEquality().hash(hideNumbers),
-        const DeepCollectionEquality().hash(hideManual),
-        const DeepCollectionEquality().hash(reconnect),
-        const DeepCollectionEquality().hash(finishDelay),
-        const DeepCollectionEquality().hash(substituteNumbers),
-        const DeepCollectionEquality().hash(substituteNumbersDelay),
-        const DeepCollectionEquality().hash(logLimit),
-        const DeepCollectionEquality().hash(appTheme),
-        const DeepCollectionEquality().hash(previousVersion)
+        language,
+        sound,
+        beep,
+        beepFromApp,
+        voice,
+        voiceFromApp,
+        voiceName,
+        volume,
+        pitch,
+        rate,
+        voiceLanguage,
+        raceId,
+        stageId,
+        wakelock,
+        startFab,
+        startFabSize,
+        finishFab,
+        finishFabSize,
+        countdown,
+        countdownSize,
+        countdownLeft,
+        countdownTop,
+        countdownAtStartTime,
+        checkUpdates,
+        hideMarked,
+        hideNumbers,
+        hideManual,
+        reconnect,
+        finishDelay,
+        substituteNumbers,
+        substituteNumbersDelay,
+        deltaInSeconds,
+        updateStartCorrectionDelay,
+        logLimit,
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
+        previousVersion,
+        updateNtpOffsetAtStartup
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_AppSettingsCopyWith<_$_AppSettings> get copyWith =>
-      __$$_AppSettingsCopyWithImpl<_$_AppSettings>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$AppSettingsImplCopyWith<_$AppSettingsImpl> get copyWith =>
+      __$$AppSettingsImplCopyWithImpl<_$AppSettingsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -949,20 +1246,30 @@ class _$_AppSettings implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         $default, {
     required TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -981,21 +1288,31 @@ class _$_AppSettings implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         defaults,
   }) {
     return $default(
+        language,
         sound,
         beep,
+        beepFromApp,
         voice,
+        voiceFromApp,
         voiceName,
         volume,
         pitch,
         rate,
-        language,
-        recentFile,
+        voiceLanguage,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -1014,24 +1331,34 @@ class _$_AppSettings implements _AppSettings {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
-        appTheme,
-        previousVersion);
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
+        previousVersion,
+        updateNtpOffsetAtStartup);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
+    TResult? Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1050,20 +1377,30 @@ class _$_AppSettings implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
-    TResult Function(
+    TResult? Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1082,21 +1419,31 @@ class _$_AppSettings implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
   }) {
     return $default?.call(
+        language,
         sound,
         beep,
+        beepFromApp,
         voice,
+        voiceFromApp,
         voiceName,
         volume,
         pitch,
         rate,
-        language,
-        recentFile,
+        voiceLanguage,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -1115,24 +1462,34 @@ class _$_AppSettings implements _AppSettings {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
-        appTheme,
-        previousVersion);
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
+        previousVersion,
+        updateNtpOffsetAtStartup);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1151,20 +1508,30 @@ class _$_AppSettings implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
     TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1183,23 +1550,33 @@ class _$_AppSettings implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
     required TResult orElse(),
   }) {
     if ($default != null) {
       return $default(
+          language,
           sound,
           beep,
+          beepFromApp,
           voice,
+          voiceFromApp,
           voiceName,
           volume,
           pitch,
           rate,
-          language,
-          recentFile,
+          voiceLanguage,
+          raceId,
+          stageId,
           wakelock,
           startFab,
           startFabSize,
@@ -1218,9 +1595,15 @@ class _$_AppSettings implements _AppSettings {
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
+          deltaInSeconds,
+          updateStartCorrectionDelay,
           logLimit,
-          appTheme,
-          previousVersion);
+          seedColor,
+          brightness,
+          contrastLevel,
+          dynamicSchemeVariant,
+          previousVersion,
+          updateNtpOffsetAtStartup);
     }
     return orElse();
   }
@@ -1237,8 +1620,8 @@ class _$_AppSettings implements _AppSettings {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_AppSettings value)? $default, {
-    TResult Function(_AppSettingsDefaults value)? defaults,
+    TResult? Function(_AppSettings value)? $default, {
+    TResult? Function(_AppSettingsDefaults value)? defaults,
   }) {
     return $default?.call(this);
   }
@@ -1259,15 +1642,19 @@ class _$_AppSettings implements _AppSettings {
 
 abstract class _AppSettings implements AppSettings {
   const factory _AppSettings(
-      {required final bool sound,
+      {required final String language,
+      required final bool sound,
       required final bool beep,
+      required final bool beepFromApp,
       required final bool voice,
+      required final bool voiceFromApp,
       required final bool voiceName,
       required final double volume,
       required final double pitch,
       required final double rate,
-      required final String language,
-      required final String recentFile,
+      required final String voiceLanguage,
+      required final int raceId,
+      required final int stageId,
       required final bool wakelock,
       required final bool startFab,
       required final double startFabSize,
@@ -1286,96 +1673,138 @@ abstract class _AppSettings implements AppSettings {
       required final int finishDelay,
       required final bool substituteNumbers,
       required final int substituteNumbersDelay,
+      required final int deltaInSeconds,
+      required final int updateStartCorrectionDelay,
       required final int logLimit,
-      required final AppTheme appTheme,
-      required final String previousVersion}) = _$_AppSettings;
+      required final ColorSeed seedColor,
+      required final Brightness brightness,
+      required final double contrastLevel,
+      required final DynamicSchemeVariant dynamicSchemeVariant,
+      required final String previousVersion,
+      required final bool updateNtpOffsetAtStartup}) = _$AppSettingsImpl;
 
-  @override // звук
-  bool get sound;
-  @override // вкл/выкл
+// язык
+  @override
+  String get language; // = "ru", // локаль
+// звук
+  @override
+  bool get sound; // вкл/выкл
 // звук обратного отсчёта
-  bool get beep;
-  @override // голосовые сообщения
+  @override
+  bool get beep; // звуком обратного отсчёта управляет приложение
+  @override
+  bool get beepFromApp; // голосовые сообщения
+  @override
   bool get voice;
+  @override
+  bool get voiceFromApp;
   @override
   bool get voiceName;
   @override
-  double get volume;
-  @override // громкость
-  double get pitch;
-  @override // тон речи
-  double get rate;
-  @override // скорость речи
-  String get language;
-  @override // = "ru-RU", // язык
-  String get recentFile;
-  @override // всегда включённый экран
-  bool get wakelock;
-  @override // кнопки "добавить вручную" на экранах старта и финиша
+  double get volume; // громкость
+  @override
+  double get pitch; // тон речи
+  @override
+  double get rate; // скорость речи
+  @override
+  String get voiceLanguage; // = "ru-RU", // язык tts
+// id выбранного соревнования и участка
+  @override
+  int get raceId;
+  @override
+  int get stageId; // всегда включённый экран
+  @override
+  bool get wakelock; // кнопки "добавить вручную" на экранах старта и финиша
+  @override
   bool get startFab;
   @override
   double get startFabSize;
   @override
   bool get finishFab;
   @override
-  double get finishFabSize;
-  @override // обратный отсчёт на экране старта
+  double get finishFabSize; // обратный отсчёт на экране старта
+  @override
   bool get countdown;
   @override
   double get countdownSize;
   @override
   double get countdownLeft;
   @override
-  double get countdownTop;
-  @override // показывать обратный отсчёт вместо стартового времени
-  bool get countdownAtStartTime;
-  @override // проверка обновлений
-  bool get checkUpdates;
-  @override // выборка значений в финише
+  double
+      get countdownTop; // показывать обратный отсчёт вместо стартового времени
+  @override
+  bool get countdownAtStartTime; // проверка обновлений
+  @override
+  bool get checkUpdates; // выборка значений в финише
+  @override
   bool get hideMarked;
   @override
   bool get hideNumbers;
   @override
-  bool get hideManual;
-  @override // восстанавливать Bluetooth подключение при обрыве
-  bool get reconnect;
-  @override // задержка в миллисекундах перед показыванием нового финишного времени
-  int get finishDelay;
-  @override // автоподстановка номеров в финишном протоколе
+  bool get hideManual; // восстанавливать Bluetooth подключение при обрыве
+  @override
+  bool
+      get reconnect; // задержка в миллисекундах перед показыванием нового финишного времени
+  @override
+  int get finishDelay; // автоподстановка номеров в финишном протоколе
+  @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay;
-  @override // лог
+  int get substituteNumbersDelay; // дельта в секундах для автоматического подставления стартового времени
+  @override
+  int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  @override
+  int get updateStartCorrectionDelay; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
-  int get logLimit;
-  @override // активная тема
-  AppTheme get appTheme;
-  @override // версия при предыдущем запуске
-  String get previousVersion;
   @override
-  @JsonKey(ignore: true)
-  _$$_AppSettingsCopyWith<_$_AppSettings> get copyWith =>
+  int get logLimit; // активная тема
+// required AppTheme appTheme,
+  @override
+  ColorSeed get seedColor;
+  @override
+  Brightness get brightness;
+  @override
+  double get contrastLevel;
+  @override
+  DynamicSchemeVariant
+      get dynamicSchemeVariant; // версия при предыдущем запуске
+  @override
+  String get previousVersion; // обновлять ntp offset при запуске
+  @override
+  bool get updateNtpOffsetAtStartup;
+
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AppSettingsImplCopyWith<_$AppSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AppSettingsDefaultsCopyWith<$Res>
+abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
     implements $AppSettingsCopyWith<$Res> {
-  factory _$$_AppSettingsDefaultsCopyWith(_$_AppSettingsDefaults value,
-          $Res Function(_$_AppSettingsDefaults) then) =
-      __$$_AppSettingsDefaultsCopyWithImpl<$Res>;
+  factory _$$AppSettingsDefaultsImplCopyWith(_$AppSettingsDefaultsImpl value,
+          $Res Function(_$AppSettingsDefaultsImpl) then) =
+      __$$AppSettingsDefaultsImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {bool sound,
+      {String language,
+      bool sound,
       bool beep,
+      bool beepFromApp,
       bool voice,
+      bool voiceFromApp,
       bool voiceName,
       double volume,
       double pitch,
       double rate,
-      String language,
-      String recentFile,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
       bool wakelock,
       bool startFab,
       double startFabSize,
@@ -1394,193 +1823,253 @@ abstract class _$$_AppSettingsDefaultsCopyWith<$Res>
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
       int logLimit,
-      AppTheme appTheme,
-      String previousVersion});
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup});
 }
 
 /// @nodoc
-class __$$_AppSettingsDefaultsCopyWithImpl<$Res>
-    extends _$AppSettingsCopyWithImpl<$Res>
-    implements _$$_AppSettingsDefaultsCopyWith<$Res> {
-  __$$_AppSettingsDefaultsCopyWithImpl(_$_AppSettingsDefaults _value,
-      $Res Function(_$_AppSettingsDefaults) _then)
-      : super(_value, (v) => _then(v as _$_AppSettingsDefaults));
+class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
+    extends _$AppSettingsCopyWithImpl<$Res, _$AppSettingsDefaultsImpl>
+    implements _$$AppSettingsDefaultsImplCopyWith<$Res> {
+  __$$AppSettingsDefaultsImplCopyWithImpl(_$AppSettingsDefaultsImpl _value,
+      $Res Function(_$AppSettingsDefaultsImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_AppSettingsDefaults get _value => super._value as _$_AppSettingsDefaults;
-
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sound = freezed,
-    Object? beep = freezed,
-    Object? voice = freezed,
-    Object? voiceName = freezed,
-    Object? volume = freezed,
-    Object? pitch = freezed,
-    Object? rate = freezed,
-    Object? language = freezed,
-    Object? recentFile = freezed,
-    Object? wakelock = freezed,
-    Object? startFab = freezed,
-    Object? startFabSize = freezed,
-    Object? finishFab = freezed,
-    Object? finishFabSize = freezed,
-    Object? countdown = freezed,
-    Object? countdownSize = freezed,
-    Object? countdownLeft = freezed,
-    Object? countdownTop = freezed,
-    Object? countdownAtStartTime = freezed,
-    Object? checkUpdates = freezed,
-    Object? hideMarked = freezed,
-    Object? hideNumbers = freezed,
-    Object? hideManual = freezed,
-    Object? reconnect = freezed,
-    Object? finishDelay = freezed,
-    Object? substituteNumbers = freezed,
-    Object? substituteNumbersDelay = freezed,
-    Object? logLimit = freezed,
-    Object? appTheme = freezed,
-    Object? previousVersion = freezed,
+    Object? language = null,
+    Object? sound = null,
+    Object? beep = null,
+    Object? beepFromApp = null,
+    Object? voice = null,
+    Object? voiceFromApp = null,
+    Object? voiceName = null,
+    Object? volume = null,
+    Object? pitch = null,
+    Object? rate = null,
+    Object? voiceLanguage = null,
+    Object? raceId = null,
+    Object? stageId = null,
+    Object? wakelock = null,
+    Object? startFab = null,
+    Object? startFabSize = null,
+    Object? finishFab = null,
+    Object? finishFabSize = null,
+    Object? countdown = null,
+    Object? countdownSize = null,
+    Object? countdownLeft = null,
+    Object? countdownTop = null,
+    Object? countdownAtStartTime = null,
+    Object? checkUpdates = null,
+    Object? hideMarked = null,
+    Object? hideNumbers = null,
+    Object? hideManual = null,
+    Object? reconnect = null,
+    Object? finishDelay = null,
+    Object? substituteNumbers = null,
+    Object? substituteNumbersDelay = null,
+    Object? deltaInSeconds = null,
+    Object? updateStartCorrectionDelay = null,
+    Object? logLimit = null,
+    Object? seedColor = null,
+    Object? brightness = null,
+    Object? contrastLevel = null,
+    Object? dynamicSchemeVariant = null,
+    Object? previousVersion = null,
+    Object? updateNtpOffsetAtStartup = null,
   }) {
-    return _then(_$_AppSettingsDefaults(
-      sound: sound == freezed
-          ? _value.sound
-          : sound // ignore: cast_nullable_to_non_nullable
-              as bool,
-      beep: beep == freezed
-          ? _value.beep
-          : beep // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voice: voice == freezed
-          ? _value.voice
-          : voice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voiceName: voiceName == freezed
-          ? _value.voiceName
-          : voiceName // ignore: cast_nullable_to_non_nullable
-              as bool,
-      volume: volume == freezed
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      pitch: pitch == freezed
-          ? _value.pitch
-          : pitch // ignore: cast_nullable_to_non_nullable
-              as double,
-      rate: rate == freezed
-          ? _value.rate
-          : rate // ignore: cast_nullable_to_non_nullable
-              as double,
-      language: language == freezed
+    return _then(_$AppSettingsDefaultsImpl(
+      language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      recentFile: recentFile == freezed
-          ? _value.recentFile
-          : recentFile // ignore: cast_nullable_to_non_nullable
+      sound: null == sound
+          ? _value.sound
+          : sound // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beep: null == beep
+          ? _value.beep
+          : beep // ignore: cast_nullable_to_non_nullable
+              as bool,
+      beepFromApp: null == beepFromApp
+          ? _value.beepFromApp
+          : beepFromApp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voice: null == voice
+          ? _value.voice
+          : voice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voiceFromApp: null == voiceFromApp
+          ? _value.voiceFromApp
+          : voiceFromApp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      voiceName: null == voiceName
+          ? _value.voiceName
+          : voiceName // ignore: cast_nullable_to_non_nullable
+              as bool,
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+      pitch: null == pitch
+          ? _value.pitch
+          : pitch // ignore: cast_nullable_to_non_nullable
+              as double,
+      rate: null == rate
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as double,
+      voiceLanguage: null == voiceLanguage
+          ? _value.voiceLanguage
+          : voiceLanguage // ignore: cast_nullable_to_non_nullable
               as String,
-      wakelock: wakelock == freezed
+      raceId: null == raceId
+          ? _value.raceId
+          : raceId // ignore: cast_nullable_to_non_nullable
+              as int,
+      stageId: null == stageId
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
+      wakelock: null == wakelock
           ? _value.wakelock
           : wakelock // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFab: startFab == freezed
+      startFab: null == startFab
           ? _value.startFab
           : startFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      startFabSize: startFabSize == freezed
+      startFabSize: null == startFabSize
           ? _value.startFabSize
           : startFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      finishFab: finishFab == freezed
+      finishFab: null == finishFab
           ? _value.finishFab
           : finishFab // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishFabSize: finishFabSize == freezed
+      finishFabSize: null == finishFabSize
           ? _value.finishFabSize
           : finishFabSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdown: countdown == freezed
+      countdown: null == countdown
           ? _value.countdown
           : countdown // ignore: cast_nullable_to_non_nullable
               as bool,
-      countdownSize: countdownSize == freezed
+      countdownSize: null == countdownSize
           ? _value.countdownSize
           : countdownSize // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownLeft: countdownLeft == freezed
+      countdownLeft: null == countdownLeft
           ? _value.countdownLeft
           : countdownLeft // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownTop: countdownTop == freezed
+      countdownTop: null == countdownTop
           ? _value.countdownTop
           : countdownTop // ignore: cast_nullable_to_non_nullable
               as double,
-      countdownAtStartTime: countdownAtStartTime == freezed
+      countdownAtStartTime: null == countdownAtStartTime
           ? _value.countdownAtStartTime
           : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      checkUpdates: checkUpdates == freezed
+      checkUpdates: null == checkUpdates
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: hideMarked == freezed
+      hideMarked: null == hideMarked
           ? _value.hideMarked
           : hideMarked // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: hideNumbers == freezed
+      hideNumbers: null == hideNumbers
           ? _value.hideNumbers
           : hideNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: hideManual == freezed
+      hideManual: null == hideManual
           ? _value.hideManual
           : hideManual // ignore: cast_nullable_to_non_nullable
               as bool,
-      reconnect: reconnect == freezed
+      reconnect: null == reconnect
           ? _value.reconnect
           : reconnect // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishDelay: finishDelay == freezed
+      finishDelay: null == finishDelay
           ? _value.finishDelay
           : finishDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      substituteNumbers: substituteNumbers == freezed
+      substituteNumbers: null == substituteNumbers
           ? _value.substituteNumbers
           : substituteNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      substituteNumbersDelay: substituteNumbersDelay == freezed
+      substituteNumbersDelay: null == substituteNumbersDelay
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
-      logLimit: logLimit == freezed
+      deltaInSeconds: null == deltaInSeconds
+          ? _value.deltaInSeconds
+          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+              as int,
+      updateStartCorrectionDelay: null == updateStartCorrectionDelay
+          ? _value.updateStartCorrectionDelay
+          : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
+              as int,
+      logLimit: null == logLimit
           ? _value.logLimit
           : logLimit // ignore: cast_nullable_to_non_nullable
               as int,
-      appTheme: appTheme == freezed
-          ? _value.appTheme
-          : appTheme // ignore: cast_nullable_to_non_nullable
-              as AppTheme,
-      previousVersion: previousVersion == freezed
+      seedColor: null == seedColor
+          ? _value.seedColor
+          : seedColor // ignore: cast_nullable_to_non_nullable
+              as ColorSeed,
+      brightness: null == brightness
+          ? _value.brightness
+          : brightness // ignore: cast_nullable_to_non_nullable
+              as Brightness,
+      contrastLevel: null == contrastLevel
+          ? _value.contrastLevel
+          : contrastLevel // ignore: cast_nullable_to_non_nullable
+              as double,
+      dynamicSchemeVariant: null == dynamicSchemeVariant
+          ? _value.dynamicSchemeVariant
+          : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
+              as DynamicSchemeVariant,
+      previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
               as String,
+      updateNtpOffsetAtStartup: null == updateNtpOffsetAtStartup
+          ? _value.updateNtpOffsetAtStartup
+          : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AppSettingsDefaults implements _AppSettingsDefaults {
-  const _$_AppSettingsDefaults(
-      {this.sound = true,
+class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
+  const _$AppSettingsDefaultsImpl(
+      {this.language = 'ru',
+      this.sound = true,
       this.beep = true,
+      this.beepFromApp = false,
       this.voice = true,
+      this.voiceFromApp = false,
       this.voiceName = true,
       this.volume = 1.0,
       this.pitch = 1.0,
       this.rate = 0.5,
-      this.language = 'ru-RU',
-      this.recentFile = '',
+      this.voiceLanguage = 'ru-RU',
+      this.raceId = -1,
+      this.stageId = -1,
       this.wakelock = true,
       this.startFab = true,
       this.startFabSize = 75,
@@ -1599,10 +2088,20 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
       this.finishDelay = 350,
       this.substituteNumbers = false,
       this.substituteNumbersDelay = 500,
+      this.deltaInSeconds = 15,
+      this.updateStartCorrectionDelay = 2000,
       this.logLimit = -1,
-      this.appTheme = AppTheme.lightBlue,
-      this.previousVersion = '0.0.0'});
+      this.seedColor = ColorSeed.blue,
+      this.brightness = Brightness.light,
+      this.contrastLevel = -1.0,
+      this.dynamicSchemeVariant = DynamicSchemeVariant.vibrant,
+      this.previousVersion = '0.0.0',
+      this.updateNtpOffsetAtStartup = false});
 
+// язык
+  @override
+  @JsonKey()
+  final String language;
 // звук
   @override
   @JsonKey()
@@ -1612,11 +2111,19 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final bool beep;
+// звуком обратного отсчёта управляет приложение
+  @override
+  @JsonKey()
+  final bool beepFromApp;
 // голосовые сообщения
   @override
   @JsonKey()
   final bool voice;
 // использовать голосовые сообщения
+  @override
+  @JsonKey()
+  final bool voiceFromApp;
+// использовать голосовые сообщения и брать данные из приложения
   @override
   @JsonKey()
   final bool voiceName;
@@ -1635,11 +2142,16 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
 // скорость речи
   @override
   @JsonKey()
-  final String language;
+  final String voiceLanguage;
 // = "ru-RU", // язык
+// ToDo: не изменять эти настройки при установке значений по умолчанию
+// id выбранного соревнования и участка
   @override
   @JsonKey()
-  final String recentFile;
+  final int raceId;
+  @override
+  @JsonKey()
+  final int stageId;
 // всегда включённый экран
   @override
   @JsonKey()
@@ -1703,6 +2215,15 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final int substituteNumbersDelay;
+// дельта в секундах для автоматического подставления стартового времени
+  @override
+  @JsonKey()
+  final int deltaInSeconds;
+// задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  @override
+  @JsonKey()
+  final int updateStartCorrectionDelay;
 // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
@@ -1710,125 +2231,186 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
   @JsonKey()
   final int logLimit;
 // активная тема
+// @Default(AppTheme.lightBlue) AppTheme appTheme,
   @override
   @JsonKey()
-  final AppTheme appTheme;
+  final ColorSeed seedColor;
+  @override
+  @JsonKey()
+  final Brightness brightness;
+  @override
+  @JsonKey()
+  final double contrastLevel;
+  @override
+  @JsonKey()
+  final DynamicSchemeVariant dynamicSchemeVariant;
 // версия при предыдущем запуске
   @override
   @JsonKey()
   final String previousVersion;
+// обновлять ntp offset при запуске
+  @override
+  @JsonKey()
+  final bool updateNtpOffsetAtStartup;
 
   @override
   String toString() {
-    return 'AppSettings.defaults(sound: $sound, beep: $beep, voice: $voice, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, language: $language, recentFile: $recentFile, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, logLimit: $logLimit, appTheme: $appTheme, previousVersion: $previousVersion)';
+    return 'AppSettings.defaults(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppSettingsDefaults &&
-            const DeepCollectionEquality().equals(other.sound, sound) &&
-            const DeepCollectionEquality().equals(other.beep, beep) &&
-            const DeepCollectionEquality().equals(other.voice, voice) &&
-            const DeepCollectionEquality().equals(other.voiceName, voiceName) &&
-            const DeepCollectionEquality().equals(other.volume, volume) &&
-            const DeepCollectionEquality().equals(other.pitch, pitch) &&
-            const DeepCollectionEquality().equals(other.rate, rate) &&
-            const DeepCollectionEquality().equals(other.language, language) &&
-            const DeepCollectionEquality()
-                .equals(other.recentFile, recentFile) &&
-            const DeepCollectionEquality().equals(other.wakelock, wakelock) &&
-            const DeepCollectionEquality().equals(other.startFab, startFab) &&
-            const DeepCollectionEquality()
-                .equals(other.startFabSize, startFabSize) &&
-            const DeepCollectionEquality().equals(other.finishFab, finishFab) &&
-            const DeepCollectionEquality()
-                .equals(other.finishFabSize, finishFabSize) &&
-            const DeepCollectionEquality().equals(other.countdown, countdown) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownSize, countdownSize) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownLeft, countdownLeft) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownTop, countdownTop) &&
-            const DeepCollectionEquality()
-                .equals(other.countdownAtStartTime, countdownAtStartTime) &&
-            const DeepCollectionEquality()
-                .equals(other.checkUpdates, checkUpdates) &&
-            const DeepCollectionEquality()
-                .equals(other.hideMarked, hideMarked) &&
-            const DeepCollectionEquality()
-                .equals(other.hideNumbers, hideNumbers) &&
-            const DeepCollectionEquality()
-                .equals(other.hideManual, hideManual) &&
-            const DeepCollectionEquality().equals(other.reconnect, reconnect) &&
-            const DeepCollectionEquality()
-                .equals(other.finishDelay, finishDelay) &&
-            const DeepCollectionEquality()
-                .equals(other.substituteNumbers, substituteNumbers) &&
-            const DeepCollectionEquality()
-                .equals(other.substituteNumbersDelay, substituteNumbersDelay) &&
-            const DeepCollectionEquality().equals(other.logLimit, logLimit) &&
-            const DeepCollectionEquality().equals(other.appTheme, appTheme) &&
-            const DeepCollectionEquality()
-                .equals(other.previousVersion, previousVersion));
+            other is _$AppSettingsDefaultsImpl &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.sound, sound) || other.sound == sound) &&
+            (identical(other.beep, beep) || other.beep == beep) &&
+            (identical(other.beepFromApp, beepFromApp) ||
+                other.beepFromApp == beepFromApp) &&
+            (identical(other.voice, voice) || other.voice == voice) &&
+            (identical(other.voiceFromApp, voiceFromApp) ||
+                other.voiceFromApp == voiceFromApp) &&
+            (identical(other.voiceName, voiceName) ||
+                other.voiceName == voiceName) &&
+            (identical(other.volume, volume) || other.volume == volume) &&
+            (identical(other.pitch, pitch) || other.pitch == pitch) &&
+            (identical(other.rate, rate) || other.rate == rate) &&
+            (identical(other.voiceLanguage, voiceLanguage) ||
+                other.voiceLanguage == voiceLanguage) &&
+            (identical(other.raceId, raceId) || other.raceId == raceId) &&
+            (identical(other.stageId, stageId) || other.stageId == stageId) &&
+            (identical(other.wakelock, wakelock) ||
+                other.wakelock == wakelock) &&
+            (identical(other.startFab, startFab) ||
+                other.startFab == startFab) &&
+            (identical(other.startFabSize, startFabSize) ||
+                other.startFabSize == startFabSize) &&
+            (identical(other.finishFab, finishFab) ||
+                other.finishFab == finishFab) &&
+            (identical(other.finishFabSize, finishFabSize) ||
+                other.finishFabSize == finishFabSize) &&
+            (identical(other.countdown, countdown) ||
+                other.countdown == countdown) &&
+            (identical(other.countdownSize, countdownSize) ||
+                other.countdownSize == countdownSize) &&
+            (identical(other.countdownLeft, countdownLeft) ||
+                other.countdownLeft == countdownLeft) &&
+            (identical(other.countdownTop, countdownTop) ||
+                other.countdownTop == countdownTop) &&
+            (identical(other.countdownAtStartTime, countdownAtStartTime) ||
+                other.countdownAtStartTime == countdownAtStartTime) &&
+            (identical(other.checkUpdates, checkUpdates) ||
+                other.checkUpdates == checkUpdates) &&
+            (identical(other.hideMarked, hideMarked) ||
+                other.hideMarked == hideMarked) &&
+            (identical(other.hideNumbers, hideNumbers) ||
+                other.hideNumbers == hideNumbers) &&
+            (identical(other.hideManual, hideManual) ||
+                other.hideManual == hideManual) &&
+            (identical(other.reconnect, reconnect) ||
+                other.reconnect == reconnect) &&
+            (identical(other.finishDelay, finishDelay) ||
+                other.finishDelay == finishDelay) &&
+            (identical(other.substituteNumbers, substituteNumbers) ||
+                other.substituteNumbers == substituteNumbers) &&
+            (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
+                other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.deltaInSeconds, deltaInSeconds) ||
+                other.deltaInSeconds == deltaInSeconds) &&
+            (identical(other.updateStartCorrectionDelay,
+                    updateStartCorrectionDelay) ||
+                other.updateStartCorrectionDelay ==
+                    updateStartCorrectionDelay) &&
+            (identical(other.logLimit, logLimit) ||
+                other.logLimit == logLimit) &&
+            (identical(other.seedColor, seedColor) ||
+                other.seedColor == seedColor) &&
+            (identical(other.brightness, brightness) ||
+                other.brightness == brightness) &&
+            (identical(other.contrastLevel, contrastLevel) ||
+                other.contrastLevel == contrastLevel) &&
+            (identical(other.dynamicSchemeVariant, dynamicSchemeVariant) ||
+                other.dynamicSchemeVariant == dynamicSchemeVariant) &&
+            (identical(other.previousVersion, previousVersion) ||
+                other.previousVersion == previousVersion) &&
+            (identical(
+                    other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
+                other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(sound),
-        const DeepCollectionEquality().hash(beep),
-        const DeepCollectionEquality().hash(voice),
-        const DeepCollectionEquality().hash(voiceName),
-        const DeepCollectionEquality().hash(volume),
-        const DeepCollectionEquality().hash(pitch),
-        const DeepCollectionEquality().hash(rate),
-        const DeepCollectionEquality().hash(language),
-        const DeepCollectionEquality().hash(recentFile),
-        const DeepCollectionEquality().hash(wakelock),
-        const DeepCollectionEquality().hash(startFab),
-        const DeepCollectionEquality().hash(startFabSize),
-        const DeepCollectionEquality().hash(finishFab),
-        const DeepCollectionEquality().hash(finishFabSize),
-        const DeepCollectionEquality().hash(countdown),
-        const DeepCollectionEquality().hash(countdownSize),
-        const DeepCollectionEquality().hash(countdownLeft),
-        const DeepCollectionEquality().hash(countdownTop),
-        const DeepCollectionEquality().hash(countdownAtStartTime),
-        const DeepCollectionEquality().hash(checkUpdates),
-        const DeepCollectionEquality().hash(hideMarked),
-        const DeepCollectionEquality().hash(hideNumbers),
-        const DeepCollectionEquality().hash(hideManual),
-        const DeepCollectionEquality().hash(reconnect),
-        const DeepCollectionEquality().hash(finishDelay),
-        const DeepCollectionEquality().hash(substituteNumbers),
-        const DeepCollectionEquality().hash(substituteNumbersDelay),
-        const DeepCollectionEquality().hash(logLimit),
-        const DeepCollectionEquality().hash(appTheme),
-        const DeepCollectionEquality().hash(previousVersion)
+        language,
+        sound,
+        beep,
+        beepFromApp,
+        voice,
+        voiceFromApp,
+        voiceName,
+        volume,
+        pitch,
+        rate,
+        voiceLanguage,
+        raceId,
+        stageId,
+        wakelock,
+        startFab,
+        startFabSize,
+        finishFab,
+        finishFabSize,
+        countdown,
+        countdownSize,
+        countdownLeft,
+        countdownTop,
+        countdownAtStartTime,
+        checkUpdates,
+        hideMarked,
+        hideNumbers,
+        hideManual,
+        reconnect,
+        finishDelay,
+        substituteNumbers,
+        substituteNumbersDelay,
+        deltaInSeconds,
+        updateStartCorrectionDelay,
+        logLimit,
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
+        previousVersion,
+        updateNtpOffsetAtStartup
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$_AppSettingsDefaultsCopyWith<_$_AppSettingsDefaults> get copyWith =>
-      __$$_AppSettingsDefaultsCopyWithImpl<_$_AppSettingsDefaults>(
+  @pragma('vm:prefer-inline')
+  _$$AppSettingsDefaultsImplCopyWith<_$AppSettingsDefaultsImpl> get copyWith =>
+      __$$AppSettingsDefaultsImplCopyWithImpl<_$AppSettingsDefaultsImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1847,20 +2429,30 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         $default, {
     required TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1879,21 +2471,31 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)
         defaults,
   }) {
     return defaults(
+        language,
         sound,
         beep,
+        beepFromApp,
         voice,
+        voiceFromApp,
         voiceName,
         volume,
         pitch,
         rate,
-        language,
-        recentFile,
+        voiceLanguage,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -1912,24 +2514,34 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
-        appTheme,
-        previousVersion);
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
+        previousVersion,
+        updateNtpOffsetAtStartup);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
+    TResult? Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1948,20 +2560,30 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
-    TResult Function(
+    TResult? Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -1980,21 +2602,31 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
   }) {
     return defaults?.call(
+        language,
         sound,
         beep,
+        beepFromApp,
         voice,
+        voiceFromApp,
         voiceName,
         volume,
         pitch,
         rate,
-        language,
-        recentFile,
+        voiceLanguage,
+        raceId,
+        stageId,
         wakelock,
         startFab,
         startFabSize,
@@ -2013,24 +2645,34 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        deltaInSeconds,
+        updateStartCorrectionDelay,
         logLimit,
-        appTheme,
-        previousVersion);
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
+        previousVersion,
+        updateNtpOffsetAtStartup);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -2049,20 +2691,30 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         $default, {
     TResult Function(
+            String language,
             bool sound,
             bool beep,
+            bool beepFromApp,
             bool voice,
+            bool voiceFromApp,
             bool voiceName,
             double volume,
             double pitch,
             double rate,
-            String language,
-            String recentFile,
+            String voiceLanguage,
+            int raceId,
+            int stageId,
             bool wakelock,
             bool startFab,
             double startFabSize,
@@ -2081,23 +2733,33 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            int deltaInSeconds,
+            int updateStartCorrectionDelay,
             int logLimit,
-            AppTheme appTheme,
-            String previousVersion)?
+            ColorSeed seedColor,
+            Brightness brightness,
+            double contrastLevel,
+            DynamicSchemeVariant dynamicSchemeVariant,
+            String previousVersion,
+            bool updateNtpOffsetAtStartup)?
         defaults,
     required TResult orElse(),
   }) {
     if (defaults != null) {
       return defaults(
+          language,
           sound,
           beep,
+          beepFromApp,
           voice,
+          voiceFromApp,
           voiceName,
           volume,
           pitch,
           rate,
-          language,
-          recentFile,
+          voiceLanguage,
+          raceId,
+          stageId,
           wakelock,
           startFab,
           startFabSize,
@@ -2116,9 +2778,15 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
+          deltaInSeconds,
+          updateStartCorrectionDelay,
           logLimit,
-          appTheme,
-          previousVersion);
+          seedColor,
+          brightness,
+          contrastLevel,
+          dynamicSchemeVariant,
+          previousVersion,
+          updateNtpOffsetAtStartup);
     }
     return orElse();
   }
@@ -2135,8 +2803,8 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_AppSettings value)? $default, {
-    TResult Function(_AppSettingsDefaults value)? defaults,
+    TResult? Function(_AppSettings value)? $default, {
+    TResult? Function(_AppSettingsDefaults value)? defaults,
   }) {
     return defaults?.call(this);
   }
@@ -2157,15 +2825,19 @@ class _$_AppSettingsDefaults implements _AppSettingsDefaults {
 
 abstract class _AppSettingsDefaults implements AppSettings {
   const factory _AppSettingsDefaults(
-      {final bool sound,
+      {final String language,
+      final bool sound,
       final bool beep,
+      final bool beepFromApp,
       final bool voice,
+      final bool voiceFromApp,
       final bool voiceName,
       final double volume,
       final double pitch,
       final double rate,
-      final String language,
-      final String recentFile,
+      final String voiceLanguage,
+      final int raceId,
+      final int stageId,
       final bool wakelock,
       final bool startFab,
       final double startFabSize,
@@ -2184,75 +2856,113 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final int finishDelay,
       final bool substituteNumbers,
       final int substituteNumbersDelay,
+      final int deltaInSeconds,
+      final int updateStartCorrectionDelay,
       final int logLimit,
-      final AppTheme appTheme,
-      final String previousVersion}) = _$_AppSettingsDefaults;
+      final ColorSeed seedColor,
+      final Brightness brightness,
+      final double contrastLevel,
+      final DynamicSchemeVariant dynamicSchemeVariant,
+      final String previousVersion,
+      final bool updateNtpOffsetAtStartup}) = _$AppSettingsDefaultsImpl;
 
-  @override // звук
-  bool get sound;
-  @override // вкл/выкл
+// язык
+  @override
+  String get language; // звук
+  @override
+  bool get sound; // вкл/выкл
 // звук обратного отсчёта
-  bool get beep;
-  @override // голосовые сообщения
-  bool get voice;
-  @override // использовать голосовые сообщения
-  bool get voiceName;
-  @override // называть имена участников
-  double get volume;
-  @override // громкость
-  double get pitch;
-  @override // тон речи
-  double get rate;
-  @override // скорость речи
-  String get language;
-  @override // = "ru-RU", // язык
-  String get recentFile;
-  @override // всегда включённый экран
-  bool get wakelock;
-  @override // кнопки "добавить вручную" на экранах старта и финиша
+  @override
+  bool get beep; // звуком обратного отсчёта управляет приложение
+  @override
+  bool get beepFromApp; // голосовые сообщения
+  @override
+  bool get voice; // использовать голосовые сообщения
+  @override
+  bool
+      get voiceFromApp; // использовать голосовые сообщения и брать данные из приложения
+  @override
+  bool get voiceName; // называть имена участников
+  @override
+  double get volume; // громкость
+  @override
+  double get pitch; // тон речи
+  @override
+  double get rate; // скорость речи
+  @override
+  String get voiceLanguage; // = "ru-RU", // язык
+// ToDo: не изменять эти настройки при установке значений по умолчанию
+// id выбранного соревнования и участка
+  @override
+  int get raceId;
+  @override
+  int get stageId; // всегда включённый экран
+  @override
+  bool get wakelock; // кнопки "добавить вручную" на экранах старта и финиша
+  @override
   bool get startFab;
   @override
   double get startFabSize;
   @override
   bool get finishFab;
   @override
-  double get finishFabSize;
-  @override // обратный отсчёт на экране старта
+  double get finishFabSize; // обратный отсчёт на экране старта
+  @override
   bool get countdown;
   @override
   double get countdownSize;
   @override
   double get countdownLeft;
   @override
-  double get countdownTop;
-  @override // показывать обратный отсчёт вместо стартового времени
-  bool get countdownAtStartTime;
-  @override // проверка обновлений
-  bool get checkUpdates;
-  @override // выборка значений в финише
+  double
+      get countdownTop; // показывать обратный отсчёт вместо стартового времени
+  @override
+  bool get countdownAtStartTime; // проверка обновлений
+  @override
+  bool get checkUpdates; // выборка значений в финише
+  @override
   bool get hideMarked;
   @override
   bool get hideNumbers;
   @override
-  bool get hideManual;
-  @override // восстанавливать Bluetooth подключение при обрыве
-  bool get reconnect;
-  @override // задержка в миллисекундах перед показыванием нового финишного времени
-  int get finishDelay;
-  @override // автоподстановка номеров в финишном протоколе
+  bool get hideManual; // восстанавливать Bluetooth подключение при обрыве
+  @override
+  bool
+      get reconnect; // задержка в миллисекундах перед показыванием нового финишного времени
+  @override
+  int get finishDelay; // автоподстановка номеров в финишном протоколе
+  @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay;
-  @override // лог
+  int get substituteNumbersDelay; // дельта в секундах для автоматического подставления стартового времени
+  @override
+  int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
+// если она уже была установлена
+  @override
+  int get updateStartCorrectionDelay; // лог
 // ограничение количества показываемых строк в окне лога
 // -1 = без ограничений
-  int get logLimit;
-  @override // активная тема
-  AppTheme get appTheme;
-  @override // версия при предыдущем запуске
-  String get previousVersion;
   @override
-  @JsonKey(ignore: true)
-  _$$_AppSettingsDefaultsCopyWith<_$_AppSettingsDefaults> get copyWith =>
+  int get logLimit; // активная тема
+// @Default(AppTheme.lightBlue) AppTheme appTheme,
+  @override
+  ColorSeed get seedColor;
+  @override
+  Brightness get brightness;
+  @override
+  double get contrastLevel;
+  @override
+  DynamicSchemeVariant
+      get dynamicSchemeVariant; // версия при предыдущем запуске
+  @override
+  String get previousVersion; // обновлять ntp offset при запуске
+  @override
+  bool get updateNtpOffsetAtStartup;
+
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AppSettingsDefaultsImplCopyWith<_$AppSettingsDefaultsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

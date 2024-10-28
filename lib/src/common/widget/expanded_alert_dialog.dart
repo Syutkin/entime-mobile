@@ -10,21 +10,21 @@ class ExpandedAlertDialog extends StatelessWidget {
   final List<Widget>? actions;
 
   const ExpandedAlertDialog({
-    Key? key,
+    super.key,
     this.height,
     this.width,
     this.scrollable = false,
     this.title,
     this.content,
     this.actions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => AlertDialog(
         scrollable: scrollable,
         title: title,
         content: SizedBox(
-          width: width,
+          width: width ?? MediaQuery.of(context).size.width * 0.9,
           height: height,
           child: content,
         ),

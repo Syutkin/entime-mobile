@@ -1,122 +1,72 @@
-import 'dart:async';
-
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
-import '../../../common/utils/helper.dart';
-import '../../protocol/protocol.dart';
-import '../../tab/tab.dart';
+import '../../../constants/date_time_formats.dart';
+import '../../audio/audio.dart';
+import '../logic/countdown.dart';
+import '../model/tick.dart';
 
 part 'countdown_bloc.freezed.dart';
 part 'countdown_event.dart';
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
-  final IProtocolProvider protocolProvider;
-  late final StreamSubscription<ProtocolState> protocolSubscription;
-  late final StreamSubscription<AppTab> tabSubscription;
-
-  Timer? _timer;
-  List<StartItem> _participant = [];
-  DateTime? _nextStartTime;
-  bool _isFinished = false;
+  final IAudioController _audioController;
+  final CountdownAtStart _countdown;
 
   CountdownBloc({
-    required this.protocolProvider,
-  }) : super(const CountdownInitialState()) {
-    _startTimer();
+    required IAudioController audioController,
+    required CountdownAtStart countdown,
+    required int stageId,
+  })  : _audioController = audioController,
+        _countdown = countdown,
+        super(const CountdownState.initial()) {
+    if (stageId > 0) {
+      _countdown.start(stageId);
+    }
+    _countdown.value.listen((value) {
+      add(CountdownEvent.tick(value));
+    });
 
-    on<CountdownEvent>(transformer: sequential(), (event, emit) async {
-      await event.map(
-        reload: (event) async {
-          _nextStartTime = await _getNextStarttime(DateTime.now());
-          _isFinished = false;
-          await _countdown();
+    on<CountdownEvent>(transformer: sequential(), (event, emit) {
+      event.map(
+        start: (event) async {
+          await _countdown.start(event.stageId);
+          // _nextStartTime = await _getNextStarttime(DateTime.now());
+          // _isFinished = false;
+          // await _countdown(stageId: stageId);
         },
         tick: (event) {
-          final nextStartTime = _nextStartTime;
-          nextStartTime == null
-              ? emit(CountdownWorkingState(text: event.text))
-              : emit(
-                  CountdownWorkingState(
-                    text: event.text,
-                    nextStartTime: DateFormat('HH:mm:ss').format(nextStartTime),
-                  ),
-                );
+          final nextStartTime = event.tick.nextStartTime;
+          if (nextStartTime == null) {
+            emit(CountdownState.working(
+              tick: Tick(text: event.tick.text, second: event.tick.second),
+            ));
+          } else {
+            emit(
+              CountdownState.working(
+                tick: Tick(
+                  text: event.tick.text,
+                  nextStartTime: nextStartTime,
+                  number: event.tick.number,
+                  second: event.tick.second,
+                ),
+              ),
+            );
+          }
+        },
+        beep: (_CountdownBeep event) {
+          _audioController.beep();
+        },
+        callParticipant: (event) {
+          _audioController.callParticipant(
+            time: DateFormat(shortTimeFormat).format(DateTime.now()),
+            stageId: event.stageId,
+          );
         },
       );
     });
-  }
-
-  @override
-  Future<void> close() {
-    protocolSubscription.cancel();
-    tabSubscription.cancel();
-    _timer?.cancel();
-    return super.close();
-  }
-
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      _countdown();
-    });
-  }
-
-  Future<void> _countdown() async {
-    await protocolProvider.state.value.whenOrNull(
-      selected: (updated) async {
-        final now = DateTime.now();
-        final nextStartTime = _nextStartTime;
-        if (nextStartTime != null) {
-          if (nextStartTime.isAfter(now)) {
-            add(
-              TickEvent(
-                text: _formatDuration(nextStartTime.difference(now)),
-              ),
-            );
-          } else {
-            if (nextStartTime
-                .isAfter(now.subtract(const Duration(seconds: 10)))) {
-              add(const TickEvent(text: 'GO'));
-            } else {
-              _nextStartTime = null;
-            }
-          }
-        } else {
-          if (!_isFinished) {
-            _nextStartTime = await _getNextStarttime(now);
-            if (_nextStartTime == null) {
-              _isFinished = true;
-              add(const TickEvent(text: ''));
-            }
-          }
-        }
-      },
-    );
-  }
-
-  Future<DateTime?> _getNextStarttime(DateTime time) async {
-    _participant = await protocolProvider
-        .getNextParticipants(DateFormat('HH:mm:ss').format(time));
-    return _participant.isNotEmpty && _participant.first.starttime != null
-        ? strTimeToDateTime(_participant.first.starttime!)
-        : null;
-  }
-
-  String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    final String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    if (duration.inHours > 0) {
-      return '${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds';
-    } else if (duration.inMinutes > 0) {
-      return '$twoDigitMinutes:$twoDigitSeconds';
-    } else if (duration.inSeconds > 0) {
-      return '${duration.inSeconds}';
-    } else {
-      return 'GO';
-    }
   }
 }

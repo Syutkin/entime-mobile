@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Splash extends StatelessWidget {
   final String? text;
 
-  const Splash({this.text, Key? key}) : super(key: key);
+  const Splash({this.text, super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(

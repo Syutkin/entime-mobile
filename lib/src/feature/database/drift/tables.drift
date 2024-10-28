@@ -1,0 +1,447 @@
+import '../../log/model/log_level.dart';
+import '../../log/model/log_source.dart';
+import '../../log/model/log_source_direction.dart';
+
+CREATE TABLE races (
+	id INTEGER PRIMARY KEY NOT NULL,
+	name text NOT NULL,
+	start_date text,
+	finish_date text,
+	location text,
+	is_deleted BOOLEAN NOT NULL DEFAULT false
+) AS Race;
+
+CREATE TABLE stages (
+	id INTEGER PRIMARY KEY NOT NULL,
+	trail_id integer,
+	race_id integer NOT NULL,
+	name text NOT NULL,
+	is_active BOOLEAN NOT NULL DEFAULT true,
+	is_deleted BOOLEAN NOT NULL DEFAULT false,
+    FOREIGN KEY (trail_id) REFERENCES trails(id),
+    FOREIGN KEY (race_id) REFERENCES races(id)
+);
+
+CREATE TABLE riders (
+	id INTEGER PRIMARY KEY NOT NULL,
+	name text NOT NULL,
+	nickname text,
+	birthday text,
+	team text,
+	city text,
+	email text,
+	phone text,
+	comment text
+);
+
+CREATE TABLE statuses (
+	id INTEGER PRIMARY KEY NOT NULL,
+	type text NOT NULL
+) AS Status;
+
+CREATE TABLE participants (
+	id INTEGER PRIMARY KEY NOT NULL,
+	race_id integer NOT NULL,
+	rider_id integer NOT NULL,
+	number integer NOT NULL,
+	category text, /* может быть NULL для быстрого добавления номера на старте */
+	rfid text,
+	status_id integer NOT NULL DEFAULT 1,
+    FOREIGN KEY (rider_id) REFERENCES riders(id),
+    FOREIGN KEY (race_id) REFERENCES races(id),
+    FOREIGN KEY (status_id) REFERENCES statuses(id)
+);
+
+CREATE TABLE starts (
+	id INTEGER PRIMARY KEY NOT NULL,
+	stage_id integer NOT NULL,
+	participant_id integer NOT NULL,
+	start_time text NOT NULL,
+	timestamp text,
+	automatic_start_time text,
+	automatic_correction integer,
+	manual_start_time text,
+	manual_correction integer,
+	status_id integer NOT NULL DEFAULT 1,
+	finish_id integer,
+    FOREIGN KEY (stage_id) REFERENCES stages(id),
+    FOREIGN KEY (participant_id) REFERENCES participants(id),
+	FOREIGN KEY (finish_id) REFERENCES finishes(id),
+	FOREIGN KEY (status_id) REFERENCES statuses(id)
+);
+
+CREATE TABLE finishes (
+	id INTEGER PRIMARY KEY NOT NULL,
+	stage_id integer NOT NULL,
+	number integer,
+	timestamp text NOT NULL,
+	finish_time text NOT NULL,
+	is_hidden BOOLEAN NOT NULL DEFAULT false,
+	is_manual BOOLEAN NOT NULL DEFAULT false,
+    FOREIGN KEY (stage_id) REFERENCES stages(id)
+) AS Finish;
+
+CREATE TABLE trails (
+	id INTEGER PRIMARY KEY NOT NULL,
+	name text NOT NULL,
+	distance integer,
+	elevation integer,
+	gpx_track blob,
+	link text,
+	comment text
+);
+
+CREATE TABLE logs (
+    id INTEGER PRIMARY KEY NOT NULL,
+    level ENUMNAME(LogLevel) NOT NULL,
+    timestamp TEXT NOT NULL,
+    source ENUMNAME(LogSource) NOT NULL,
+    direction ENUMNAME(LogSourceDirection) NOT NULL,
+    raw_data TEXT
+);
+
+_getRaces: SELECT * FROM races WHERE is_deleted = false;
+
+_addRace:
+INSERT INTO races (name, start_date, finish_date, location)
+VALUES (:name, :start_date, :finish_date, :location);
+
+_deleteRace: UPDATE races SET is_deleted = true WHERE id = :id;
+
+_getStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false;
+_addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
+_deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
+
+
+_addRider:
+INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment)
+VALUES(:name, :nickname, :birthday, :team, :city, :email, :phone, :comment);
+
+_addParticipant:
+INSERT INTO participants (race_id, rider_id, number, category, rfid)
+VALUES(:race_id, :rider_id, :number, :category, :rfid);
+
+_addStartInfo:
+INSERT INTO starts (stage_id, participant_id, start_time)
+VALUES(:stage_id, :participant_id, :start_time);
+
+_getNumberAtStarts AS NumberAtStart:
+SELECT
+	starts.id as start_id,
+	stage_id,
+	participant_id,
+	start_time,
+	timestamp,
+	automatic_start_time,
+	automatic_correction,
+	manual_start_time,
+	manual_correction,
+	starts.status_id as start_status_id,
+	finish_id,
+    race_id,
+    rider_id,
+    number,
+    category,
+    rfid,
+    participants.status_id as participant_status_id
+FROM starts, participants
+WHERE
+    participants.id = starts.participant_id
+    AND starts.stage_id = :stage_id
+    AND participants.number = :number;
+
+
+-- Old protocol
+_getParticipantsAtStart AS ParticipantAtStart:
+SELECT
+	participants.rider_id as rider_id,
+	participants.race_id as race_id,
+	participants.number as number,
+	participants.category as category,
+	participants.rfid as rfid,
+	participants.status_id as participant_status_id,
+	riders.name as name,
+	riders.nickname as nickname,
+	riders.birthday as birthday,
+	riders.team as team,
+	riders.city as city,
+	riders.email as email,
+	riders.phone as phone,
+	riders.comment as comment,
+	starts.id as start_id,
+	starts.stage_id as stage_id,
+	starts.participant_id as participant_id,
+	starts.start_time as start_time,
+	starts.timestamp as timestamp,
+	starts.automatic_start_time as automatic_start_time,
+	starts.automatic_correction as automatic_correction,
+	starts.manual_start_time as manual_start_time,
+	starts.manual_correction as manual_correction,
+	starts.status_id as status_id
+FROM participants, riders, starts
+WHERE 
+	participants.rider_id = riders.id
+    AND starts.participant_id = participants.id
+	AND stage_id = :stage_id
+	AND starts.status_id = 1
+	AND participants.status_id = 1
+ORDER BY start_time ASC;
+
+_getExistedStartingParticipants AS StartingParticipant:
+SELECT
+	starts.id as start_id,
+	stage_id,
+	participant_id,
+	start_time,
+	timestamp,
+	automatic_start_time,
+	automatic_correction,
+	manual_start_time,
+	manual_correction,
+	starts.status_id as start_status,
+	finish_id,
+    race_id,
+    rider_id,
+    number,
+    category,
+    rfid,
+    participants.status_id as participant_status
+FROM starts, participants
+WHERE 
+	starts.participant_id = participants.id
+	AND stage_id = :stage_id
+	AND (start_time IS :start_time
+    	OR (number IS :number
+      	AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));
+
+_setStartingInfo:
+UPDATE starts
+SET start_time = :start_time,
+	automatic_start_time = :automatic_start_time,
+    automatic_correction = :automatic_correction,
+    manual_start_time = :manual_start_time,
+    manual_correction = :manual_correction
+WHERE
+	stage_id = :stage_id
+	AND participant_id = :participant_id;
+
+_getParticipantAroundTime AS StartingParticipant:
+SELECT
+	starts.id as start_id,
+	stage_id,
+	participant_id,
+	start_time,
+	timestamp,
+	automatic_start_time,
+	automatic_correction,
+	manual_start_time,
+	manual_correction,
+	starts.status_id as start_status,
+	finish_id,
+    race_id,
+    rider_id,
+    number,
+    category,
+    rfid,
+    participants.status_id as participant_status
+FROM starts, participants
+WHERE
+	stage_id = :stage_id
+	AND participants.id = starts.participant_id
+	AND start_time BETWEEN :before AND :after;
+
+_setManualStartTime:
+UPDATE starts
+SET
+	manual_start_time = :manual_start_time,
+	manual_correction = :manual_correction,
+	timestamp = :timestamp
+WHERE
+	participant_id = :participant_id
+	AND stage_id = :stage_id;
+
+_getNextStartingParticipants AS NextStartingParticipant:
+SELECT 
+	participants.number as number,
+  	starts.start_time as start_time,
+	starts.automatic_start_time as automatic_start_time,
+	starts.automatic_correction as automatic_correction,
+	starts.manual_start_time as manual_start_time
+FROM
+	starts, participants
+WHERE starts.participant_id = participants.id
+	AND starts.stage_id = :stage_id
+	AND start_time > :time
+	AND automatic_start_time ISNULL
+	AND manual_start_time ISNULL
+	AND participants.status_id = 1
+	AND starts.status_id = 1
+ORDER BY start_time ASC;
+
+_getForBeep:
+SELECT COUNT(*) FROM starts
+WHERE
+	starts.stage_id = :stage_id
+	AND start_time BETWEEN :beepTime AND :afterTime
+  	AND automatic_start_time ISNULL
+	AND status_id = 1;
+
+_getStartingParticipantBetweenTimes:
+SELECT
+	participants.number as number,
+	starts.start_time as start_time,
+	starts.automatic_start_time as automatic_start_time,
+	starts.automatic_correction as automatic_correction,
+	riders.name as name
+FROM
+	starts, participants, riders
+WHERE
+	starts.participant_id = participants.id
+	AND participants.rider_id = riders.id
+	AND starts.stage_id = :stage_id
+	AND (start_time BETWEEN :time AND :after)
+	AND automatic_start_time ISNULL
+	AND starts.status_id = 1;
+
+_setDNSForStartId:
+UPDATE starts
+SET
+    status_id = :status_id,
+	automatic_correction = NULL,
+	automatic_start_time = NULL,
+	manual_correction = NULL,
+	manual_start_time = NULL,
+	timestamp = NULL
+WHERE
+	id = :id;
+
+_getNumbersOnTraceNow AS StartingParticipant:
+SELECT
+	starts.id as start_id,
+	stage_id,
+	participant_id,
+	start_time,
+	timestamp,
+	automatic_start_time,
+	automatic_correction,
+	manual_start_time,
+	manual_correction,
+	starts.status_id as start_status,
+	finish_id,
+    race_id,
+    rider_id,
+    number,
+    category,
+    rfid,
+    participants.status_id as participant_status
+FROM starts, participants
+WHERE
+    starts.participant_id = participants.id
+    AND starts.stage_id = :stage_id
+    AND julianday(time(:time_now)) > julianday(time(starts.start_time))
+    AND starts.finish_id ISNULL
+    AND starts.status_id = 1
+    AND starts.automatic_start_time ISNULL
+ORDER BY starts.start_time ASC;
+
+
+/* --- Finish --- */
+
+_getFinishesFromStage ($predicate = TRUE):
+SELECT * FROM finishes WHERE $predicate;
+
+_getLastFinishTime:
+SELECT finish_time
+FROM finishes
+WHERE
+    stage_id = :stage_id
+    AND is_hidden = false
+    AND is_manual = false
+ORDER BY finish_time DESC LIMIT 1;
+
+_getLastFinishTimeWithNumber:
+SELECT finish_time
+FROM finishes
+WHERE
+    stage_id = :stage_id
+    AND number NOTNULL
+    AND finish_time NOT like 'DNS'
+    AND finish_time NOT like 'DNF'
+ORDER BY finish_time DESC LIMIT 1;
+
+_addFinishTime:
+INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_hidden)
+VALUES (:stage_id, :finish_time, :timestamp, :number, :is_hidden);
+
+_setFinishInfoToStart:
+UPDATE starts
+SET finish_id = :finish_id
+FROM (SELECT id, number FROM participants WHERE race_id = :race_id ) as p
+WHERE
+    starts.participant_id = p.id
+    AND stage_id = :stage_id
+    AND p.number = :number;
+
+_addFinishTimeManual:
+INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_manual)
+VALUES (:stage_id, :finish_time, :timestamp, :number, true);
+
+_hideFinish:
+UPDATE finishes SET is_hidden = true WHERE id = :id;
+
+_hideAllFinishes:
+UPDATE finishes SET is_hidden = true WHERE stage_id = :stage_id;
+
+_getNumberAtFinishes:
+SELECT *
+FROM finishes
+WHERE
+    stage_id = :stage_id
+    AND number = :number;
+
+_setNumberToFinish:
+UPDATE finishes
+SET number = :number
+WHERE id = :id;
+
+/*
+_clearNumberAtFinish:
+UPDATE finishes
+SET number = :number
+WHERE id = :id;
+*/
+
+_setStatusForNumberAtStage:
+UPDATE starts
+SET status_id = :status_id
+FROM (SELECT id, number FROM participants WHERE race_id = :race_id ) as p
+WHERE
+    starts.participant_id = p.id
+    AND stage_id = :stage_id
+    AND p.number = :number;
+
+_getStartsForCsv AS StartForCsv:
+SELECT
+    participants.number as number,
+	starts.start_time as start_time,
+	IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, 'DNS')) as automatic_correction
+FROM starts, participants
+WHERE
+	starts.participant_id = participants.id
+	AND starts.stage_id = :stage_id
+	AND starts.start_time NOTNULL
+	AND	(starts.automatic_correction NOTNULL
+	    OR starts.manual_correction NOTNULL
+	    OR starts.status_id = 2)            -- 2 это DNS
+ORDER BY starts.start_time ASC;
+
+_getFinishesForCsv AS FinishForCsv:
+SELECT number, finish_time
+FROM finishes
+WHERE
+    stage_id = :stage_id
+    AND number NOTNULL
+ORDER BY finish_time ASC;
+
+
+/* --- for testing --- */

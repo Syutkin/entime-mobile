@@ -1,5 +1,3 @@
-// ignore_for_file: use_setters_to_change_properties, avoid_catching_errors
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -79,42 +77,39 @@ class UpdateProvider {
         final latestVersion = Version.parse(_latestRelease!.tagName);
         final currentVersion = Version.parse(_appInfo.version);
         if (latestVersion > currentVersion) {
-          logger.i('Update_provider: Update to $latestVersion available');
+          logger.i('Update_provider -> Update to $latestVersion available');
           _canUpdate = true;
         }
       }
     } on Exception catch (e) {
-      logger.e('Some error: $e');
+      logger.e('Update_provider -> Some error', error: e);
     }
     return _canUpdate;
   }
 
   Future<Release?> _getLatestRelease() async {
-    if (_settingsProvider.settings.checkUpdates) {
-      final url = Uri.parse(
-        'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
-      );
-      try {
-        final response = await _client.get(url);
-        if (response.statusCode == 200) {
-          final release = Release.fromJson(
-            jsonDecode(response.body) as Map<String, dynamic>,
-          );
-          return release;
-        } else {
-          logger.d('StatusCode: ${response.statusCode}');
-          return null;
-        }
-      } on Exception catch (e) {
-        logger.e('Exception: $e');
-        return null;
-        // Может возникнуть при получении ошибочного json от github
-      } on Error catch (e) {
-        logger.e('Error: $e');
+    final url = Uri.parse(
+      'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
+    );
+    try {
+      final response = await _client.get(url);
+      if (response.statusCode == 200) {
+        final release = Release.fromJson(
+          jsonDecode(response.body) as Map<String, dynamic>,
+        );
+        return release;
+      } else {
+        logger.d('Update_provider -> StatusCode: ${response.statusCode}');
         return null;
       }
+    } on Exception catch (e) {
+      logger.e('Update_provider -> Exception', error: e);
+      return null;
+      // Может возникнуть при получении некорректного json от github
+    } on Error catch (e) {
+      logger.e('Update_provider -> Error', error: e, stackTrace: e.stackTrace);
+      return null;
     }
-    return null;
   }
 
   Future<void> downloadUpdate() async {
@@ -146,7 +141,7 @@ class UpdateProvider {
           _updateFileSize = response.contentLength;
 
           if (_updateFileSize != null) {
-            logger.d('Update_provider: contentLength: $_updateFileSize');
+            logger.d('Update_provider -> contentLength: $_updateFileSize');
 
             final List<int> bytes = [];
 
@@ -162,21 +157,21 @@ class UpdateProvider {
                 _downloaded = true;
                 _onDownloadComplete();
               },
-              onError: (dynamic error) {
-                logger.e('Update_provider: Error: $error');
-                _onError(error as String);
+              onError: (Object error) {
+                logger.e('Update_provider -> Error', error: error);
+                _onError(error.toString());
               },
               cancelOnError: true,
             );
           } else {
-            _onError('response.contentLength is null');
+            _onError('Update_provider -> response.contentLength is null');
           }
         } on Exception catch (e) {
-          logger.e(e);
+          logger.e('Update_provider -> Exception', error: e);
         }
       }
     } else {
-      logger.w('Update_provider: Can not access file system');
+      logger.w('Update_provider -> Can not access file system');
     }
   }
 

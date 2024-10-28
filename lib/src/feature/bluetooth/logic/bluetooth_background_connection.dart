@@ -16,10 +16,13 @@ abstract class IBluetoothBackgroundConnection {
   Future<void> connect(
     BluetoothDevice bluetoothDevice,
   );
+
   Stream<String> get message;
+
   bool get isConnected;
 
   Future<void> start();
+
   Future<void> stop();
 
   /// Отсылает [text] в Bluetooth Serial
@@ -31,6 +34,7 @@ abstract class IBluetoothBackgroundConnection {
   Future<void> dispose();
 
   void onDisconnect(VoidCallback callback);
+
   void onSendError(ErrorHandler error);
 }
 
@@ -64,36 +68,22 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
     _onSendError = error;
   }
 
-  // void _fromConnection(BluetoothConnection? connection) {
-  //   if (_connection != null) {
-  //     _connection!.input!.listen(_onDataReceived).onDone(() {
-  //       // Сообщаем что соединение закрыто
-  //       // Далее на основе того, когда это произошло,
-  //       // определяем кто закрыл соединение (в BluetoothBloc event/state)
-  //       _onDisconnect();
-  //     });
-  //   }
-  // }
-
   @override
   Future<void> connect(
     BluetoothDevice bluetoothDevice,
   ) async {
-    _connection = await BluetoothConnection.toAddress(bluetoothDevice.address)
-        .catchError((dynamic error) {
-      logger.e(
-        'BluetoothConnection -> Cannot connect, exception occurred: $error',
-      );
+    BluetoothConnection.toAddress(bluetoothDevice.address).then((connection) {
+      _connection = connection;
+    }).catchError((error) {
+      logger.e('BluetoothConnection -> Cannot connect', error: error);
     });
 
-    // if (_connection != null) {
     _connection?.input?.listen(_onDataReceived).onDone(() {
       // Сообщаем что соединение закрыто
       // Далее на основе того, когда это произошло,
       // определяем кто закрыл соединение (в BluetoothBloc event/state)
       _onDisconnect();
     });
-    // }
 
     // BluetoothBackgroundConnection._fromConnection(connection);
   }
@@ -122,12 +112,12 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
     if (text.isNotEmpty) {
       try {
         logger.i('Sending message: $text');
-        _connection?.output.add(utf8.encode('$text\r\n') as Uint8List);
+        _connection?.output.add(utf8.encode('$text\r\n'));
         await _connection?.output.allSent;
         result = true;
       } on Exception catch (e) {
         // Ignore error, but notify state
-        logger.e('Error sending message: $e');
+        logger.e('Error sending message', error: e);
         _onSendError('$e');
         result = false;
       }

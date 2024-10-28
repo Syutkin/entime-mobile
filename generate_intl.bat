@@ -1,1 +1,1 @@
-flutter pub global run intl_generator:extract_to_arb --output-dir=lib/src/common/localization/generated .\lib\src\common\localization\i18n.dart && copy .\lib\src\common\localization\generated\intl_messages.arb .\lib\src\common\localization\intl_ru.arb
+flutter pub global run intl_translation:extract_to_arb --output-dir=lib/src/common/localization/generated .\lib\src\common\localization\i18n.dart && copy .\lib\src\common\localization\generated\intl_messages.arb .\lib\src\common\localization\intl_ru.arb

@@ -1,5 +1,5 @@
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:entime/src/constants/pubspec.yaml.g.dart' as pubspec;
+import 'package:entime/src/constants/pubspec.yaml.g.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -11,6 +11,7 @@ import 'app_info_provider_test.mocks.dart';
 // Create new instances of this class in each test.
 @GenerateMocks([AndroidDeviceInfo])
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   group('AppInfoProvider:', () {
     test('Initialize', () async {
       final deviceInfo = MockAndroidDeviceInfo();
@@ -32,7 +33,7 @@ void main() {
 
       expect(
         appInfoProvider.appName,
-        pubspec.name,
+        Pubspec.name,
       );
     });
 
@@ -45,7 +46,7 @@ void main() {
 
       expect(
         appInfoProvider.buildNumber,
-        pubspec.build.toString(),
+        Pubspec.version.build[0],
       );
     });
 
@@ -56,10 +57,17 @@ void main() {
         deviceInfo: deviceInfo,
       );
 
-      expect(
-        appInfoProvider.version,
-        pubspec.version,
-      );
+      if (Pubspec.version.preRelease.isEmpty) {
+        expect(
+          appInfoProvider.version,
+          '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}',
+        );
+      } else {
+        expect(
+          appInfoProvider.version,
+          Pubspec.version.canonical,
+        );
+      }
     });
 
     test('Get supported abi', () async {

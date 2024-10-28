@@ -9,7 +9,6 @@ class Localization extends generated.GeneratedLocalization {
   Localization._();
   static const LocalizationsDelegate<Localization> delegate =
       _LocalizationView(generated.AppLocalizationDelegate());
-  //ignore: avoid-global-state
   static late Localization current;
   static List<Locale> get supportedLocales =>
       const generated.AppLocalizationDelegate().supportedLocales;

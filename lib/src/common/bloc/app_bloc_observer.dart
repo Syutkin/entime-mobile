@@ -9,7 +9,9 @@ class AppBlocObserver extends BlocObserver {
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
 
-    if (bloc.toString() != "Instance of 'CountdownBloc'") {
+    if ('$event'.contains('DatabaseEvent.emitState')) {
+      logger.d('Event: DatabaseEvent.emitState');
+    } else if (bloc.toString() != "Instance of 'CountdownBloc'") {
       logger.d('Event: $event');
     }
   }
@@ -17,14 +19,14 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
-    logger.e(error);
+    logger.e('Bloc unknown error', error: error, stackTrace: stackTrace);
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
     if (bloc.toString() != "Instance of 'CountdownBloc'") {
-      logger.d('Transition: $transition');
+      logger.t('Transition: $transition');
     }
   }
 }

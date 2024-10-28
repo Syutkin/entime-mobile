@@ -6,11 +6,11 @@ class CountdownWidget extends StatelessWidget {
   final double elevation;
 
   const CountdownWidget({
-    Key? key,
+    super.key,
     this.size = 75,
     this.text = '',
     this.elevation = 6,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,10 @@ class CountdownWidget extends StatelessWidget {
     final FloatingActionButtonThemeData floatingActionButtonTheme =
         theme.floatingActionButtonTheme;
     final Color foregroundColor = floatingActionButtonTheme.foregroundColor ??
-        theme.colorScheme.onSecondary;
+        theme.colorScheme.onPrimaryContainer;
     final Color backgroundColor = floatingActionButtonTheme.backgroundColor ??
-        theme.colorScheme.secondary;
+        theme.colorScheme.primaryContainer;
+
 
     return Container(
       width: size,
@@ -39,7 +40,7 @@ class CountdownWidget extends StatelessWidget {
             child: Text(
               text,
               style: floatingActionButtonTheme.extendedTextStyle ??
-                  theme.textTheme.button!.copyWith(color: foregroundColor),
+                  theme.textTheme.labelLarge!.copyWith(color: foregroundColor),
             ),
           ),
         ),

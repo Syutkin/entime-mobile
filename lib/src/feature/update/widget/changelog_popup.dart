@@ -23,26 +23,27 @@ Future<void> showChangelogAtStartup(
       markdownData = markdownData.substring(0, i);
     }
   }
-  return showDialog(
-    context: context,
-    barrierDismissible: true,
-    builder: (context) => AlertDialog(
-      // scrollable: true,
-      title: Text(I18nUpdate.whatsNew),
-      // content: changelogMarkdown(markdownData),
-      // workaround with width, see https://github.com/flutter/flutter/issues/18108
-      content: SizedBox(
-        width: double.maxFinite,
-        child: changelogMarkdown(markdownData),
-      ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(MaterialLocalizations.of(context).okButtonLabel),
+  if (context.mounted) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        // scrollable: true,
+        title: Text(I18nUpdate.whatsNew),
+        // content: changelogMarkdown(markdownData),
+        // workaround with width, see https://github.com/flutter/flutter/issues/18108
+        content: SizedBox(
+          width: double.maxFinite,
+          child: changelogMarkdown(markdownData),
         ),
-      ],
-    ),
-  );
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(MaterialLocalizations.of(context).okButtonLabel),
+          ),
+        ],
+      ),
+    );
+  }
 }

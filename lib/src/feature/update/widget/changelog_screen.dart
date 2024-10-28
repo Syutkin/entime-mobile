@@ -6,8 +6,7 @@ import 'changelog_markdown.dart';
 class ChangelogScreen extends StatelessWidget {
   final String markdownData;
 
-  const ChangelogScreen({required this.markdownData, Key? key})
-      : super(key: key);
+  const ChangelogScreen({required this.markdownData, super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(

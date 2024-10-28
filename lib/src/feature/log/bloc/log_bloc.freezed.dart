@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'log_bloc.dart';
 
@@ -12,7 +12,7 @@ part of 'log_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LogEvent {
@@ -29,11 +29,11 @@ mixin _$LogEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<LogLevel>? level, List<LogSource>? source,
+    TResult? Function(List<LogLevel>? level, List<LogSource>? source,
             List<LogSourceDirection>? direction)?
         show,
-    TResult Function()? hide,
-    TResult Function(LogLevel level, LogSource source, String rawData,
+    TResult? Function()? hide,
+    TResult? Function(LogLevel level, LogSource source, String rawData,
             LogSourceDirection? direction)?
         add,
   }) =>
@@ -52,23 +52,23 @@ mixin _$LogEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ShowLog value) show,
-    required TResult Function(HideLog value) hide,
-    required TResult Function(LogAdd value) add,
+    required TResult Function(_Show value) show,
+    required TResult Function(_Hide value) hide,
+    required TResult Function(_Add value) add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ShowLog value)? show,
-    TResult Function(HideLog value)? hide,
-    TResult Function(LogAdd value)? add,
+    TResult? Function(_Show value)? show,
+    TResult? Function(_Hide value)? hide,
+    TResult? Function(_Add value)? add,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ShowLog value)? show,
-    TResult Function(HideLog value)? hide,
-    TResult Function(LogAdd value)? add,
+    TResult Function(_Show value)? show,
+    TResult Function(_Hide value)? hide,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -77,22 +77,29 @@ mixin _$LogEvent {
 /// @nodoc
 abstract class $LogEventCopyWith<$Res> {
   factory $LogEventCopyWith(LogEvent value, $Res Function(LogEvent) then) =
-      _$LogEventCopyWithImpl<$Res>;
+      _$LogEventCopyWithImpl<$Res, LogEvent>;
 }
 
 /// @nodoc
-class _$LogEventCopyWithImpl<$Res> implements $LogEventCopyWith<$Res> {
+class _$LogEventCopyWithImpl<$Res, $Val extends LogEvent>
+    implements $LogEventCopyWith<$Res> {
   _$LogEventCopyWithImpl(this._value, this._then);
 
-  final LogEvent _value;
   // ignore: unused_field
-  final $Res Function(LogEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of LogEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$ShowLogCopyWith<$Res> {
-  factory _$$ShowLogCopyWith(_$ShowLog value, $Res Function(_$ShowLog) then) =
-      __$$ShowLogCopyWithImpl<$Res>;
+abstract class _$$ShowImplCopyWith<$Res> {
+  factory _$$ShowImplCopyWith(
+          _$ShowImpl value, $Res Function(_$ShowImpl) then) =
+      __$$ShowImplCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {List<LogLevel>? level,
       List<LogSource>? source,
@@ -100,30 +107,31 @@ abstract class _$$ShowLogCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ShowLogCopyWithImpl<$Res> extends _$LogEventCopyWithImpl<$Res>
-    implements _$$ShowLogCopyWith<$Res> {
-  __$$ShowLogCopyWithImpl(_$ShowLog _value, $Res Function(_$ShowLog) _then)
-      : super(_value, (v) => _then(v as _$ShowLog));
+class __$$ShowImplCopyWithImpl<$Res>
+    extends _$LogEventCopyWithImpl<$Res, _$ShowImpl>
+    implements _$$ShowImplCopyWith<$Res> {
+  __$$ShowImplCopyWithImpl(_$ShowImpl _value, $Res Function(_$ShowImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$ShowLog get _value => super._value as _$ShowLog;
-
+  /// Create a copy of LogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? level = freezed,
     Object? source = freezed,
     Object? direction = freezed,
   }) {
-    return _then(_$ShowLog(
-      level: level == freezed
+    return _then(_$ShowImpl(
+      level: freezed == level
           ? _value._level
           : level // ignore: cast_nullable_to_non_nullable
               as List<LogLevel>?,
-      source: source == freezed
+      source: freezed == source
           ? _value._source
           : source // ignore: cast_nullable_to_non_nullable
               as List<LogSource>?,
-      direction: direction == freezed
+      direction: freezed == direction
           ? _value._direction
           : direction // ignore: cast_nullable_to_non_nullable
               as List<LogSourceDirection>?,
@@ -133,8 +141,8 @@ class __$$ShowLogCopyWithImpl<$Res> extends _$LogEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ShowLog implements ShowLog {
-  const _$ShowLog(
+class _$ShowImpl implements _Show {
+  const _$ShowImpl(
       {final List<LogLevel>? level,
       final List<LogSource>? source,
       final List<LogSourceDirection>? direction})
@@ -147,6 +155,7 @@ class _$ShowLog implements ShowLog {
   List<LogLevel>? get level {
     final value = _level;
     if (value == null) return null;
+    if (_level is EqualUnmodifiableListView) return _level;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -156,6 +165,7 @@ class _$ShowLog implements ShowLog {
   List<LogSource>? get source {
     final value = _source;
     if (value == null) return null;
+    if (_source is EqualUnmodifiableListView) return _source;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -165,6 +175,7 @@ class _$ShowLog implements ShowLog {
   List<LogSourceDirection>? get direction {
     final value = _direction;
     if (value == null) return null;
+    if (_direction is EqualUnmodifiableListView) return _direction;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -175,10 +186,10 @@ class _$ShowLog implements ShowLog {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ShowLog &&
+            other is _$ShowImpl &&
             const DeepCollectionEquality().equals(other._level, _level) &&
             const DeepCollectionEquality().equals(other._source, _source) &&
             const DeepCollectionEquality()
@@ -192,10 +203,13 @@ class _$ShowLog implements ShowLog {
       const DeepCollectionEquality().hash(_source),
       const DeepCollectionEquality().hash(_direction));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$ShowLogCopyWith<_$ShowLog> get copyWith =>
-      __$$ShowLogCopyWithImpl<_$ShowLog>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ShowImplCopyWith<_$ShowImpl> get copyWith =>
+      __$$ShowImplCopyWithImpl<_$ShowImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -214,11 +228,11 @@ class _$ShowLog implements ShowLog {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<LogLevel>? level, List<LogSource>? source,
+    TResult? Function(List<LogLevel>? level, List<LogSource>? source,
             List<LogSourceDirection>? direction)?
         show,
-    TResult Function()? hide,
-    TResult Function(LogLevel level, LogSource source, String rawData,
+    TResult? Function()? hide,
+    TResult? Function(LogLevel level, LogSource source, String rawData,
             LogSourceDirection? direction)?
         add,
   }) {
@@ -246,9 +260,9 @@ class _$ShowLog implements ShowLog {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ShowLog value) show,
-    required TResult Function(HideLog value) hide,
-    required TResult Function(LogAdd value) add,
+    required TResult Function(_Show value) show,
+    required TResult Function(_Hide value) hide,
+    required TResult Function(_Add value) add,
   }) {
     return show(this);
   }
@@ -256,9 +270,9 @@ class _$ShowLog implements ShowLog {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ShowLog value)? show,
-    TResult Function(HideLog value)? hide,
-    TResult Function(LogAdd value)? add,
+    TResult? Function(_Show value)? show,
+    TResult? Function(_Hide value)? hide,
+    TResult? Function(_Add value)? add,
   }) {
     return show?.call(this);
   }
@@ -266,9 +280,9 @@ class _$ShowLog implements ShowLog {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ShowLog value)? show,
-    TResult Function(HideLog value)? hide,
-    TResult Function(LogAdd value)? add,
+    TResult Function(_Show value)? show,
+    TResult Function(_Hide value)? hide,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) {
     if (show != null) {
@@ -278,40 +292,45 @@ class _$ShowLog implements ShowLog {
   }
 }
 
-abstract class ShowLog implements LogEvent {
-  const factory ShowLog(
+abstract class _Show implements LogEvent {
+  const factory _Show(
       {final List<LogLevel>? level,
       final List<LogSource>? source,
-      final List<LogSourceDirection>? direction}) = _$ShowLog;
+      final List<LogSourceDirection>? direction}) = _$ShowImpl;
 
   List<LogLevel>? get level;
   List<LogSource>? get source;
   List<LogSourceDirection>? get direction;
-  @JsonKey(ignore: true)
-  _$$ShowLogCopyWith<_$ShowLog> get copyWith =>
+
+  /// Create a copy of LogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ShowImplCopyWith<_$ShowImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$HideLogCopyWith<$Res> {
-  factory _$$HideLogCopyWith(_$HideLog value, $Res Function(_$HideLog) then) =
-      __$$HideLogCopyWithImpl<$Res>;
+abstract class _$$HideImplCopyWith<$Res> {
+  factory _$$HideImplCopyWith(
+          _$HideImpl value, $Res Function(_$HideImpl) then) =
+      __$$HideImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$HideLogCopyWithImpl<$Res> extends _$LogEventCopyWithImpl<$Res>
-    implements _$$HideLogCopyWith<$Res> {
-  __$$HideLogCopyWithImpl(_$HideLog _value, $Res Function(_$HideLog) _then)
-      : super(_value, (v) => _then(v as _$HideLog));
+class __$$HideImplCopyWithImpl<$Res>
+    extends _$LogEventCopyWithImpl<$Res, _$HideImpl>
+    implements _$$HideImplCopyWith<$Res> {
+  __$$HideImplCopyWithImpl(_$HideImpl _value, $Res Function(_$HideImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$HideLog get _value => super._value as _$HideLog;
+  /// Create a copy of LogEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$HideLog implements HideLog {
-  const _$HideLog();
+class _$HideImpl implements _Hide {
+  const _$HideImpl();
 
   @override
   String toString() {
@@ -319,9 +338,9 @@ class _$HideLog implements HideLog {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$HideLog);
+        (other.runtimeType == runtimeType && other is _$HideImpl);
   }
 
   @override
@@ -344,11 +363,11 @@ class _$HideLog implements HideLog {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<LogLevel>? level, List<LogSource>? source,
+    TResult? Function(List<LogLevel>? level, List<LogSource>? source,
             List<LogSourceDirection>? direction)?
         show,
-    TResult Function()? hide,
-    TResult Function(LogLevel level, LogSource source, String rawData,
+    TResult? Function()? hide,
+    TResult? Function(LogLevel level, LogSource source, String rawData,
             LogSourceDirection? direction)?
         add,
   }) {
@@ -376,9 +395,9 @@ class _$HideLog implements HideLog {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ShowLog value) show,
-    required TResult Function(HideLog value) hide,
-    required TResult Function(LogAdd value) add,
+    required TResult Function(_Show value) show,
+    required TResult Function(_Hide value) hide,
+    required TResult Function(_Add value) add,
   }) {
     return hide(this);
   }
@@ -386,9 +405,9 @@ class _$HideLog implements HideLog {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ShowLog value)? show,
-    TResult Function(HideLog value)? hide,
-    TResult Function(LogAdd value)? add,
+    TResult? Function(_Show value)? show,
+    TResult? Function(_Hide value)? hide,
+    TResult? Function(_Add value)? add,
   }) {
     return hide?.call(this);
   }
@@ -396,9 +415,9 @@ class _$HideLog implements HideLog {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ShowLog value)? show,
-    TResult Function(HideLog value)? hide,
-    TResult Function(LogAdd value)? add,
+    TResult Function(_Show value)? show,
+    TResult Function(_Hide value)? hide,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) {
     if (hide != null) {
@@ -408,14 +427,15 @@ class _$HideLog implements HideLog {
   }
 }
 
-abstract class HideLog implements LogEvent {
-  const factory HideLog() = _$HideLog;
+abstract class _Hide implements LogEvent {
+  const factory _Hide() = _$HideImpl;
 }
 
 /// @nodoc
-abstract class _$$LogAddCopyWith<$Res> {
-  factory _$$LogAddCopyWith(_$LogAdd value, $Res Function(_$LogAdd) then) =
-      __$$LogAddCopyWithImpl<$Res>;
+abstract class _$$AddImplCopyWith<$Res> {
+  factory _$$AddImplCopyWith(_$AddImpl value, $Res Function(_$AddImpl) then) =
+      __$$AddImplCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {LogLevel level,
       LogSource source,
@@ -424,35 +444,36 @@ abstract class _$$LogAddCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LogAddCopyWithImpl<$Res> extends _$LogEventCopyWithImpl<$Res>
-    implements _$$LogAddCopyWith<$Res> {
-  __$$LogAddCopyWithImpl(_$LogAdd _value, $Res Function(_$LogAdd) _then)
-      : super(_value, (v) => _then(v as _$LogAdd));
+class __$$AddImplCopyWithImpl<$Res>
+    extends _$LogEventCopyWithImpl<$Res, _$AddImpl>
+    implements _$$AddImplCopyWith<$Res> {
+  __$$AddImplCopyWithImpl(_$AddImpl _value, $Res Function(_$AddImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$LogAdd get _value => super._value as _$LogAdd;
-
+  /// Create a copy of LogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? level = freezed,
-    Object? source = freezed,
-    Object? rawData = freezed,
+    Object? level = null,
+    Object? source = null,
+    Object? rawData = null,
     Object? direction = freezed,
   }) {
-    return _then(_$LogAdd(
-      level: level == freezed
+    return _then(_$AddImpl(
+      level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as LogLevel,
-      source: source == freezed
+      source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as LogSource,
-      rawData: rawData == freezed
+      rawData: null == rawData
           ? _value.rawData
           : rawData // ignore: cast_nullable_to_non_nullable
               as String,
-      direction: direction == freezed
+      direction: freezed == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as LogSourceDirection?,
@@ -462,8 +483,8 @@ class __$$LogAddCopyWithImpl<$Res> extends _$LogEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LogAdd implements LogAdd {
-  const _$LogAdd(
+class _$AddImpl implements _Add {
+  const _$AddImpl(
       {required this.level,
       required this.source,
       required this.rawData,
@@ -484,28 +505,28 @@ class _$LogAdd implements LogAdd {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LogAdd &&
-            const DeepCollectionEquality().equals(other.level, level) &&
-            const DeepCollectionEquality().equals(other.source, source) &&
-            const DeepCollectionEquality().equals(other.rawData, rawData) &&
-            const DeepCollectionEquality().equals(other.direction, direction));
+            other is _$AddImpl &&
+            (identical(other.level, level) || other.level == level) &&
+            (identical(other.source, source) || other.source == source) &&
+            (identical(other.rawData, rawData) || other.rawData == rawData) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(level),
-      const DeepCollectionEquality().hash(source),
-      const DeepCollectionEquality().hash(rawData),
-      const DeepCollectionEquality().hash(direction));
+  int get hashCode =>
+      Object.hash(runtimeType, level, source, rawData, direction);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$LogAddCopyWith<_$LogAdd> get copyWith =>
-      __$$LogAddCopyWithImpl<_$LogAdd>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
+      __$$AddImplCopyWithImpl<_$AddImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -524,11 +545,11 @@ class _$LogAdd implements LogAdd {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<LogLevel>? level, List<LogSource>? source,
+    TResult? Function(List<LogLevel>? level, List<LogSource>? source,
             List<LogSourceDirection>? direction)?
         show,
-    TResult Function()? hide,
-    TResult Function(LogLevel level, LogSource source, String rawData,
+    TResult? Function()? hide,
+    TResult? Function(LogLevel level, LogSource source, String rawData,
             LogSourceDirection? direction)?
         add,
   }) {
@@ -556,9 +577,9 @@ class _$LogAdd implements LogAdd {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ShowLog value) show,
-    required TResult Function(HideLog value) hide,
-    required TResult Function(LogAdd value) add,
+    required TResult Function(_Show value) show,
+    required TResult Function(_Hide value) hide,
+    required TResult Function(_Add value) add,
   }) {
     return add(this);
   }
@@ -566,9 +587,9 @@ class _$LogAdd implements LogAdd {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ShowLog value)? show,
-    TResult Function(HideLog value)? hide,
-    TResult Function(LogAdd value)? add,
+    TResult? Function(_Show value)? show,
+    TResult? Function(_Hide value)? hide,
+    TResult? Function(_Add value)? add,
   }) {
     return add?.call(this);
   }
@@ -576,9 +597,9 @@ class _$LogAdd implements LogAdd {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ShowLog value)? show,
-    TResult Function(HideLog value)? hide,
-    TResult Function(LogAdd value)? add,
+    TResult Function(_Show value)? show,
+    TResult Function(_Hide value)? hide,
+    TResult Function(_Add value)? add,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -588,19 +609,22 @@ class _$LogAdd implements LogAdd {
   }
 }
 
-abstract class LogAdd implements LogEvent {
-  const factory LogAdd(
+abstract class _Add implements LogEvent {
+  const factory _Add(
       {required final LogLevel level,
       required final LogSource source,
       required final String rawData,
-      final LogSourceDirection? direction}) = _$LogAdd;
+      final LogSourceDirection? direction}) = _$AddImpl;
 
   LogLevel get level;
   LogSource get source;
   String get rawData;
   LogSourceDirection? get direction;
-  @JsonKey(ignore: true)
-  _$$LogAddCopyWith<_$LogAdd> get copyWith =>
+
+  /// Create a copy of LogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -609,38 +633,39 @@ mixin _$LogState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Log>? log, bool? updateLogScreen) open,
+    required TResult Function(List<Log>? log, bool? updateLogScreen)
+        initialized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<Log>? log, bool? updateLogScreen)? open,
+    TResult? Function()? initial,
+    TResult? Function(List<Log>? log, bool? updateLogScreen)? initialized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Log>? log, bool? updateLogScreen)? open,
+    TResult Function(List<Log>? log, bool? updateLogScreen)? initialized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LogInitial value) initial,
-    required TResult Function(LogOpen value) open,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LogInitial value)? initial,
-    TResult Function(LogOpen value)? open,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LogInitial value)? initial,
-    TResult Function(LogOpen value)? open,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -649,40 +674,46 @@ mixin _$LogState {
 /// @nodoc
 abstract class $LogStateCopyWith<$Res> {
   factory $LogStateCopyWith(LogState value, $Res Function(LogState) then) =
-      _$LogStateCopyWithImpl<$Res>;
+      _$LogStateCopyWithImpl<$Res, LogState>;
 }
 
 /// @nodoc
-class _$LogStateCopyWithImpl<$Res> implements $LogStateCopyWith<$Res> {
+class _$LogStateCopyWithImpl<$Res, $Val extends LogState>
+    implements $LogStateCopyWith<$Res> {
   _$LogStateCopyWithImpl(this._value, this._then);
 
-  final LogState _value;
   // ignore: unused_field
-  final $Res Function(LogState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of LogState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$LogInitialCopyWith<$Res> {
-  factory _$$LogInitialCopyWith(
-          _$LogInitial value, $Res Function(_$LogInitial) then) =
-      __$$LogInitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LogInitialCopyWithImpl<$Res> extends _$LogStateCopyWithImpl<$Res>
-    implements _$$LogInitialCopyWith<$Res> {
-  __$$LogInitialCopyWithImpl(
-      _$LogInitial _value, $Res Function(_$LogInitial) _then)
-      : super(_value, (v) => _then(v as _$LogInitial));
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$LogStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$LogInitial get _value => super._value as _$LogInitial;
+  /// Create a copy of LogState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LogInitial implements LogInitial {
-  const _$LogInitial();
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -690,9 +721,9 @@ class _$LogInitial implements LogInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LogInitial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -702,7 +733,8 @@ class _$LogInitial implements LogInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Log>? log, bool? updateLogScreen) open,
+    required TResult Function(List<Log>? log, bool? updateLogScreen)
+        initialized,
   }) {
     return initial();
   }
@@ -710,8 +742,8 @@ class _$LogInitial implements LogInitial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<Log>? log, bool? updateLogScreen)? open,
+    TResult? Function()? initial,
+    TResult? Function(List<Log>? log, bool? updateLogScreen)? initialized,
   }) {
     return initial?.call();
   }
@@ -720,7 +752,7 @@ class _$LogInitial implements LogInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Log>? log, bool? updateLogScreen)? open,
+    TResult Function(List<Log>? log, bool? updateLogScreen)? initialized,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -732,8 +764,8 @@ class _$LogInitial implements LogInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LogInitial value) initial,
-    required TResult Function(LogOpen value) open,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
   }) {
     return initial(this);
   }
@@ -741,8 +773,8 @@ class _$LogInitial implements LogInitial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LogInitial value)? initial,
-    TResult Function(LogOpen value)? open,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
   }) {
     return initial?.call(this);
   }
@@ -750,8 +782,8 @@ class _$LogInitial implements LogInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LogInitial value)? initial,
-    TResult Function(LogOpen value)? open,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -761,37 +793,41 @@ class _$LogInitial implements LogInitial {
   }
 }
 
-abstract class LogInitial implements LogState {
-  const factory LogInitial() = _$LogInitial;
+abstract class _Initial implements LogState {
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$LogOpenCopyWith<$Res> {
-  factory _$$LogOpenCopyWith(_$LogOpen value, $Res Function(_$LogOpen) then) =
-      __$$LogOpenCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({List<Log>? log, bool? updateLogScreen});
 }
 
 /// @nodoc
-class __$$LogOpenCopyWithImpl<$Res> extends _$LogStateCopyWithImpl<$Res>
-    implements _$$LogOpenCopyWith<$Res> {
-  __$$LogOpenCopyWithImpl(_$LogOpen _value, $Res Function(_$LogOpen) _then)
-      : super(_value, (v) => _then(v as _$LogOpen));
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$LogStateCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$LogOpen get _value => super._value as _$LogOpen;
-
+  /// Create a copy of LogState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? log = freezed,
     Object? updateLogScreen = freezed,
   }) {
-    return _then(_$LogOpen(
-      log: log == freezed
+    return _then(_$InitializedImpl(
+      log: freezed == log
           ? _value._log
           : log // ignore: cast_nullable_to_non_nullable
               as List<Log>?,
-      updateLogScreen: updateLogScreen == freezed
+      updateLogScreen: freezed == updateLogScreen
           ? _value.updateLogScreen
           : updateLogScreen // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -801,14 +837,16 @@ class __$$LogOpenCopyWithImpl<$Res> extends _$LogStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LogOpen implements LogOpen {
-  const _$LogOpen({final List<Log>? log, this.updateLogScreen}) : _log = log;
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl({final List<Log>? log, this.updateLogScreen})
+      : _log = log;
 
   final List<Log>? _log;
   @override
   List<Log>? get log {
     final value = _log;
     if (value == null) return null;
+    if (_log is EqualUnmodifiableListView) return _log;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -818,57 +856,59 @@ class _$LogOpen implements LogOpen {
 
   @override
   String toString() {
-    return 'LogState.open(log: $log, updateLogScreen: $updateLogScreen)';
+    return 'LogState.initialized(log: $log, updateLogScreen: $updateLogScreen)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LogOpen &&
+            other is _$InitializedImpl &&
             const DeepCollectionEquality().equals(other._log, _log) &&
-            const DeepCollectionEquality()
-                .equals(other.updateLogScreen, updateLogScreen));
+            (identical(other.updateLogScreen, updateLogScreen) ||
+                other.updateLogScreen == updateLogScreen));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_log),
-      const DeepCollectionEquality().hash(updateLogScreen));
+      runtimeType, const DeepCollectionEquality().hash(_log), updateLogScreen);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LogState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$LogOpenCopyWith<_$LogOpen> get copyWith =>
-      __$$LogOpenCopyWithImpl<_$LogOpen>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Log>? log, bool? updateLogScreen) open,
+    required TResult Function(List<Log>? log, bool? updateLogScreen)
+        initialized,
   }) {
-    return open(log, updateLogScreen);
+    return initialized(log, updateLogScreen);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<Log>? log, bool? updateLogScreen)? open,
+    TResult? Function()? initial,
+    TResult? Function(List<Log>? log, bool? updateLogScreen)? initialized,
   }) {
-    return open?.call(log, updateLogScreen);
+    return initialized?.call(log, updateLogScreen);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Log>? log, bool? updateLogScreen)? open,
+    TResult Function(List<Log>? log, bool? updateLogScreen)? initialized,
     required TResult orElse(),
   }) {
-    if (open != null) {
-      return open(log, updateLogScreen);
+    if (initialized != null) {
+      return initialized(log, updateLogScreen);
     }
     return orElse();
   }
@@ -876,42 +916,45 @@ class _$LogOpen implements LogOpen {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LogInitial value) initial,
-    required TResult Function(LogOpen value) open,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
   }) {
-    return open(this);
+    return initialized(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LogInitial value)? initial,
-    TResult Function(LogOpen value)? open,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
   }) {
-    return open?.call(this);
+    return initialized?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LogInitial value)? initial,
-    TResult Function(LogOpen value)? open,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
     required TResult orElse(),
   }) {
-    if (open != null) {
-      return open(this);
+    if (initialized != null) {
+      return initialized(this);
     }
     return orElse();
   }
 }
 
-abstract class LogOpen implements LogState {
-  const factory LogOpen({final List<Log>? log, final bool? updateLogScreen}) =
-      _$LogOpen;
+abstract class _Initialized implements LogState {
+  const factory _Initialized(
+      {final List<Log>? log, final bool? updateLogScreen}) = _$InitializedImpl;
 
   List<Log>? get log;
   bool? get updateLogScreen;
-  @JsonKey(ignore: true)
-  _$$LogOpenCopyWith<_$LogOpen> get copyWith =>
+
+  /// Create a copy of LogState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,14 +6,14 @@ class LogEvent with _$LogEvent {
     List<LogLevel>? level,
     List<LogSource>? source,
     List<LogSourceDirection>? direction,
-  }) = ShowLog;
+  }) = _Show;
 
-  const factory LogEvent.hide() = HideLog;
+  const factory LogEvent.hide() = _Hide;
 
   const factory LogEvent.add({
     required LogLevel level,
     required LogSource source,
     required String rawData,
     LogSourceDirection? direction,
-  }) = LogAdd;
+  }) = _Add;
 }

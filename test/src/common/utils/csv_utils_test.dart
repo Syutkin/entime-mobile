@@ -1,3 +1,6 @@
+@Skip('Relies heavily on file system')
+library;
+
 import 'dart:io';
 
 import 'package:entime/src/common/utils/csv_utils.dart';
@@ -6,21 +9,29 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async {
-  final Directory directory = await getApplicationDocumentsDirectory();
-  final File testFile = File(join(directory.path, 'test_csv.csv'));
-  final referenceFile = File('test/src/common/utils/startlist.csv');
-  if (testFile.existsSync()) {
-    testFile.deleteSync();
-  }
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  late Directory directory;
+  late File testFile;
+  late File referenceFile;
 
   group('csv_utils:', () {
+    setUpAll(() async {
+      directory = await getApplicationDocumentsDirectory();
+      testFile = File(join(directory.path, 'test_csv.csv'));
+      referenceFile = File('test/src/common/utils/startlist.csv');
+      if (testFile.existsSync()) {
+        testFile.deleteSync();
+      }
+    });
+
     final csv = Platform.isLinux
         ? referenceFile.readAsLinesSync().join('\r\n') //Linux EOL hack
         : referenceFile.readAsStringSync();
     test('saveCsv', () async {
       // Сохраняем с использованием saveCsv,
       // потом считываем и сравниваем с исходником
-      final saveCsvFile = await saveCsv(csv, 'suffix', 'filePath');
+      final saveCsvFile = await saveCsv(csv, 'suffix');
       expect(saveCsvFile != null, true);
       expect(saveCsvFile!.readAsStringSync(), csv);
       saveCsvFile.deleteSync();

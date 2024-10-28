@@ -6,12 +6,13 @@ part of 'updater.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Release _$$_ReleaseFromJson(Map<String, dynamic> json) => _$_Release(
+_$ReleaseImpl _$$ReleaseImplFromJson(Map<String, dynamic> json) =>
+    _$ReleaseImpl(
       url: json['url'] as String,
       assetsUrl: json['assets_url'] as String,
       uploadUrl: json['upload_url'] as String,
       htmlUrl: json['html_url'] as String,
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       author: Author.fromJson(json['author'] as Map<String, dynamic>),
       nodeId: json['node_id'] as String,
       tagName: json['tag_name'] as String,
@@ -29,7 +30,7 @@ _$_Release _$$_ReleaseFromJson(Map<String, dynamic> json) => _$_Release(
       body: json['body'] as String,
     );
 
-Map<String, dynamic> _$$_ReleaseToJson(_$_Release instance) =>
+Map<String, dynamic> _$$ReleaseImplToJson(_$ReleaseImpl instance) =>
     <String, dynamic>{
       'url': instance.url,
       'assets_url': instance.assetsUrl,
@@ -51,23 +52,24 @@ Map<String, dynamic> _$$_ReleaseToJson(_$_Release instance) =>
       'body': instance.body,
     };
 
-_$_Asset _$$_AssetFromJson(Map<String, dynamic> json) => _$_Asset(
+_$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
       url: json['url'] as String,
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       nodeId: json['node_id'] as String,
       name: json['name'] as String,
       label: json['label'],
       uploader: Author.fromJson(json['uploader'] as Map<String, dynamic>),
       contentType: json['content_type'] as String,
       state: json['state'] as String,
-      size: json['size'] as int,
-      downloadCount: json['download_count'] as int,
+      size: (json['size'] as num).toInt(),
+      downloadCount: (json['download_count'] as num).toInt(),
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
       browserDownloadUrl: json['browser_download_url'] as String,
     );
 
-Map<String, dynamic> _$$_AssetToJson(_$_Asset instance) => <String, dynamic>{
+Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
+    <String, dynamic>{
       'url': instance.url,
       'id': instance.id,
       'node_id': instance.nodeId,
@@ -83,9 +85,9 @@ Map<String, dynamic> _$$_AssetToJson(_$_Asset instance) => <String, dynamic>{
       'browser_download_url': instance.browserDownloadUrl,
     };
 
-_$_Author _$$_AuthorFromJson(Map<String, dynamic> json) => _$_Author(
+_$AuthorImpl _$$AuthorImplFromJson(Map<String, dynamic> json) => _$AuthorImpl(
       login: json['login'] as String,
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       nodeId: json['node_id'] as String,
       avatarUrl: json['avatar_url'] as String,
       gravatarId: json['gravatar_id'] as String,
@@ -104,7 +106,8 @@ _$_Author _$$_AuthorFromJson(Map<String, dynamic> json) => _$_Author(
       siteAdmin: json['site_admin'] as bool,
     );
 
-Map<String, dynamic> _$$_AuthorToJson(_$_Author instance) => <String, dynamic>{
+Map<String, dynamic> _$$AuthorImplToJson(_$AuthorImpl instance) =>
+    <String, dynamic>{
       'login': instance.login,
       'id': instance.id,
       'node_id': instance.nodeId,

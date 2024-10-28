@@ -1,52 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/bluetooth_bloc.dart';
-import 'select_bonded_device.dart';
+import '../bluetooth.dart';
 
 class BluetoothButton extends StatelessWidget {
-  const BluetoothButton({
-    Key? key,
-  }) : super(key: key);
+  const BluetoothButton({super.key});
 
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<BluetoothBloc, BluetoothBlocState>(
         builder: (context, state) {
-          if (BlocProvider.of<BluetoothBloc>(context).bluetoothDevice != null) {
-            return state.maybeWhen(
-              connected: (device) => IconButton(
-                icon: const Icon(Icons.bluetooth_connected),
-                onPressed: () async {
-                  BlocProvider.of<BluetoothBloc>(context)
-                      .add(const BluetoothEvent.disconnect());
-                },
-              ),
-              connecting: () => IconButton(
-                icon: const Icon(Icons.bluetooth_searching),
-                onPressed: () async {
-                  BlocProvider.of<BluetoothBloc>(context)
-                      .add(const BluetoothEvent.disconnect());
-                },
-              ),
-              orElse: () => IconButton(
-                icon: const Icon(Icons.bluetooth),
-                onPressed: () async {
-                  BlocProvider.of<BluetoothBloc>(context).add(
-                    BluetoothEvent.connect(
-                      selectedDevice: BlocProvider.of<BluetoothBloc>(context)
-                          .bluetoothDevice,
-                    ),
-                  );
-                },
-              ),
-            );
-          } else {
-            return IconButton(
-              icon: const Icon(Icons.settings_bluetooth),
-              onPressed: () => selectBluetoothDevice(context),
-            );
-          }
+          final bloc = BlocProvider.of<BluetoothBloc>(context);
+          return state.maybeWhen(
+            notEnabled: () => IconButton(
+              icon: const Icon(Icons.bluetooth_disabled),
+              onPressed: () async {
+                bloc.add(const BluetoothEvent.enable());
+              },
+            ),
+            orElse: () {
+              if (bloc.bluetoothDevice != null) {
+                return state.maybeWhen(
+                  connected: (device) => IconButton(
+                    icon: const Icon(Icons.bluetooth_connected),
+                    onPressed: () async {
+                      bloc.add(const BluetoothEvent.disconnect());
+                    },
+                  ),
+                  connecting: () => IconButton(
+                    icon: const Icon(Icons.bluetooth_searching),
+                    onPressed: () async {
+                      bloc.add(const BluetoothEvent.disconnect());
+                    },
+                  ),
+                  orElse: () => IconButton(
+                    icon: const Icon(Icons.bluetooth),
+                    onPressed: () async {
+                      bloc.add(
+                        BluetoothEvent.connect(
+                          selectedDevice: bloc.bluetoothDevice,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return IconButton(
+                  icon: const Icon(Icons.settings_bluetooth),
+                  onPressed: () => selectBluetoothDevice(context),
+                );
+              }
+            },
+          );
         },
       );
 }

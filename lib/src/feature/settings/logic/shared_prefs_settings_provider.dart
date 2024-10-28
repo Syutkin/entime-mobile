@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../settings.dart';
 
@@ -26,15 +26,19 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     const defaults = AppSettings.defaults();
     final prefs = await SharedPreferences.getInstance();
     final settings = AppSettings(
+      language: prefs.getString('language') ?? defaults.language,
       sound: prefs.getBool('sound') ?? defaults.sound,
       beep: prefs.getBool('beep') ?? defaults.beep,
+      beepFromApp: prefs.getBool('beepFromApp') ?? defaults.beepFromApp,
       voice: prefs.getBool('voice') ?? defaults.voice,
+      voiceFromApp: prefs.getBool('voiceFromApp') ?? defaults.voiceFromApp,
       voiceName: prefs.getBool('voiceName') ?? defaults.voiceName,
       volume: prefs.getDouble('volume') ?? defaults.volume,
       pitch: prefs.getDouble('pitch') ?? defaults.pitch,
       rate: prefs.getDouble('rate') ?? defaults.rate,
-      language: prefs.getString('language') ?? defaults.language,
-      recentFile: prefs.getString('recentFile') ?? defaults.recentFile,
+      voiceLanguage: prefs.getString('voiceLanguage') ?? defaults.voiceLanguage,
+      raceId: prefs.getInt('raceId') ?? -1,
+      stageId: prefs.getInt('stageId') ?? -1,
       wakelock: prefs.getBool('wakelock') ?? defaults.wakelock,
       startFab: prefs.getBool('startFab') ?? defaults.startFab,
       startFabSize: prefs.getDouble('startFabSize') ?? defaults.startFabSize,
@@ -56,16 +60,25 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           prefs.getBool('substituteNumbers') ?? defaults.substituteNumbers,
       substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
           defaults.substituteNumbersDelay,
+      deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
+      updateStartCorrectionDelay: prefs.getInt('updateStartCorrectionDelay') ??
+          defaults.updateStartCorrectionDelay,
       logLimit: prefs.getInt('logLimit') ?? defaults.logLimit,
-      appTheme: themeFromString(prefs.getString('theme')),
+      seedColor: ColorSeed.values
+          .byName(prefs.getString('seedColor') ?? defaults.seedColor.name),
+      brightness: Brightness.values
+          .byName(prefs.getString('brightness') ?? defaults.brightness.name),
+      contrastLevel: prefs.getDouble('contrastLevel') ?? defaults.contrastLevel,
+      dynamicSchemeVariant: DynamicSchemeVariant.values.byName(
+          prefs.getString('dynamicSchemeVariant') ??
+              defaults.dynamicSchemeVariant.name),
       previousVersion:
           prefs.getString('previousVersion') ?? defaults.previousVersion,
+      updateNtpOffsetAtStartup: prefs.getBool('updateNtpOffsetAtStartup') ??
+          defaults.updateNtpOffsetAtStartup,
     );
 
-    // Для похождения тестов, пока Wakelock не поддерживает Linux,
-    if (!Platform.isLinux) {
-      await Wakelock.toggle(enable: settings.wakelock);
-    }
+    await WakelockPlus.toggle(enable: settings.wakelock);
 
     return SharedPrefsSettingsProvider._(
       prefs,
@@ -83,25 +96,31 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   @override
   Future<void> setDefaults() async {
-    await _save(const AppSettings.defaults());
+    // не сбрасываем выбранные гонку и этап
+    final defaults = AppSettings.defaults().copyWith(
+      raceId: _prefs.getInt('raceId') ?? -1,
+      stageId: _prefs.getInt('stageId') ?? -1,
+    );
+    await _save(defaults);
   }
 
   Future<void> _save(AppSettings settings) async {
     if (settings.wakelock != _settings.wakelock) {
-      // Для похождения тестов, пока Wakelock не поддерживает Linux,
-      if (!Platform.isLinux) {
-        await Wakelock.toggle(enable: settings.wakelock);
-      }
+      await WakelockPlus.toggle(enable: settings.wakelock);
     }
+    await _prefs.setString('language', settings.language);
     await _prefs.setBool('sound', settings.sound);
     await _prefs.setBool('beep', settings.beep);
+    await _prefs.setBool('beepFromApp', settings.beepFromApp);
     await _prefs.setBool('voice', settings.voice);
+    await _prefs.setBool('voiceFromApp', settings.voiceFromApp);
     await _prefs.setBool('voiceName', settings.voiceName);
     await _prefs.setDouble('volume', settings.volume);
     await _prefs.setDouble('pitch', settings.pitch);
     await _prefs.setDouble('rate', settings.rate);
-    await _prefs.setString('language', settings.language);
-    await _prefs.setString('recentFile', settings.recentFile);
+    await _prefs.setString('voiceLanguage', settings.voiceLanguage);
+    await _prefs.setInt('raceId', settings.raceId);
+    await _prefs.setInt('stageId', settings.stageId);
     await _prefs.setBool('wakelock', settings.wakelock);
     await _prefs.setBool('start_fab', settings.startFab);
     await _prefs.setDouble('start_fab_size', settings.startFabSize);
@@ -120,12 +139,19 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setInt('finishDelay', settings.finishDelay);
     await _prefs.setBool('substituteNumbers', settings.substituteNumbers);
     await _prefs.setInt(
-      'substituteNumbersDelay',
-      settings.substituteNumbersDelay,
-    );
+        'substituteNumbersDelay', settings.substituteNumbersDelay);
+    await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
+    await _prefs.setInt(
+        'updateStartCorrectionDelay', settings.updateStartCorrectionDelay);
     await _prefs.setInt('log_limit', settings.logLimit);
-    await _prefs.setString('theme', settings.appTheme.stringify);
+    await _prefs.setString('seedColor', settings.seedColor.name);
+    await _prefs.setString('brightness', settings.brightness.name);
+    await _prefs.setDouble('contrastLevel', settings.contrastLevel);
+    await _prefs.setString(
+        'dynamicSchemeVariant', settings.dynamicSchemeVariant.name);
     await _prefs.setString('previousVersion', settings.previousVersion);
+    await _prefs.setBool(
+        'updateNtpOffsetAtStartup', settings.updateNtpOffsetAtStartup);
 
     _settings = settings;
     _appSettingsController.add(_settings);

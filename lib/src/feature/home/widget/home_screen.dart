@@ -1,45 +1,119 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:path/path.dart';
+import 'package:nested/nested.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../constants/pubspec.yaml.g.dart';
 import '../../bluetooth/bluetooth.dart';
+import '../../countdown/bloc/countdown_bloc.dart';
+import '../../database/bloc/database_bloc.dart';
+import '../../database/model/filter_finish.dart';
+import '../../database/widget/start_list_page.dart';
 import '../../drawer/widget/app_drawer.dart';
-import '../../init/init.dart';
 import '../../module_settings/module_settings.dart';
-import '../../protocol/protocol.dart';
-import '../../protocol_screens/protocol_screens.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../../tab/tab.dart';
+import '../../tab/widget/finish_page.dart';
+import '../../tab/widget/init_page.dart';
+import '../../tab/widget/start_page.dart';
 import '../../update/update.dart';
-import 'add_racer_popup.dart';
+import 'menu_button.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      // Следим за поступающей информацией от Bluetooth
+  Widget build(BuildContext context) => MultiBlocListener(
+        listeners: [
+          // Следим за поступающей информацией от Bluetooth
+          _listenToBluetooth(),
+          // Следим за повторной установкой стартового времени для участника
+          _listenToNewStartTime(),
+          // Используем обратный отсчёт из приложения для звуковых эффектов
+          _listenToCountdownEvents(),
+          // Следим за наличием новой версии
+          _listenToUpdater(),
+        ],
+        child: BlocBuilder<TabBloc, AppTab>(
+          builder: (context, activeTab) => DefaultTabController(
+            length: 3,
+            child: Scaffold(
+              drawer: const AppDrawer(),
+              appBar: AppBar(
+                title: const _TextTitle(),
+                actions: <Widget>[
+                  _FinishFilterButton(activeTab: activeTab),
+                  const BluetoothButton(),
+                  MenuButton(activeTab: activeTab),
+                ],
+                bottom: TabBar(
+                  onTap: (index) {
+                    final bloc = context.read<TabBloc>();
+                    switch (index) {
+                      case 0:
+                        bloc.add(const TabEvent.updated(AppTab.init));
+                        break;
+                      case 1:
+                        bloc.add(const TabEvent.updated(AppTab.start));
+                        break;
+                      case 2:
+                        bloc.add(const TabEvent.updated(AppTab.finish));
+                        break;
+                    }
+                  },
+                  tabs: <Widget>[
+                    Tab(icon: Text(Localization.current.I18nHome_home)),
+                    Tab(icon: Text(Localization.current.I18nHome_start)),
+                    Tab(icon: Text(Localization.current.I18nHome_finish)),
+                  ],
+                ),
+              ),
+              body: const TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: <Widget>[
+                  InitPage(),
+                  StartPage(),
+                  FinishPage(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+
+  SingleChildWidget _listenToBluetooth() =>
       BlocListener<BluetoothBloc, BluetoothBlocState>(
         listener: (context, state) {
           state.whenOrNull(
             connected: (message) {
               message?.whenOrNull(
                 automaticStart: (automaticStart) {
-                  context.read<ProtocolBloc>().add(
-                        ProtocolEvent.updateAutomaticCorrection(
-                          automaticStart: automaticStart,
-                        ),
-                      );
+                  var databaseBloc = context.read<DatabaseBloc>();
+                  var stageId = databaseBloc.state.stage?.id;
+                  if (stageId != null) {
+                    databaseBloc.add(
+                      DatabaseEvent.updateAutomaticCorrection(
+                        stageId: stageId,
+                        startTime: automaticStart.time,
+                        correction: automaticStart.correction,
+                        timestamp: automaticStart.timestamp,
+                        forceUpdate: automaticStart.updating,
+                      ),
+                    );
+                  }
                 },
-                finish: (time, timeStamp) {
-                  context.read<ProtocolBloc>().add(
-                        ProtocolEvent.addFinishTime(
-                          time: time,
-                          timeStamp: timeStamp,
-                        ),
-                      );
+                finish: (time, timestamp) {
+                  var databaseBloc = context.read<DatabaseBloc>();
+                  var stage = databaseBloc.state.stage;
+                  if (stage != null) {
+                    databaseBloc.add(
+                      DatabaseEvent.addFinishTime(
+                        stage: stage,
+                        finishTime: time,
+                        timestamp: timestamp,
+                      ),
+                    );
+                  }
                 },
                 moduleSettings: (moduleSettings) {
                   context
@@ -50,208 +124,159 @@ class HomeScreen extends StatelessWidget {
             },
           );
         },
-        // Следим за повторной установкой стартового времени для участника
-        child: BlocListener<ProtocolBloc, ProtocolState>(
-          listener: (context, state) async {
-            final protocolBloc = context.read<ProtocolBloc>();
-            final materialLocalization = MaterialLocalizations.of(context);
-            if (state is ProtocolSelectedState) {
-              // Обновление автоматического времени старта
-              if (state.automaticStart != null &&
-                  state.automaticStart!.updating) {
+      );
+
+  SingleChildWidget _listenToNewStartTime() =>
+      BlocListener<DatabaseBloc, DatabaseState>(
+        listener: (context, state) async {
+          final databaseBloc = context.read<DatabaseBloc>();
+          // Обновление автоматического времени старта
+          final notification = state.notification;
+          if (notification != null) {
+            notification.mapOrNull(updateAutomaticCorrection: (data) async {
+              final prevCorrection =
+                  data.previousStarts.first.automaticCorrection;
+              // Если новая поправка для номера отличается от предыдущей
+              // более чем на две секунды, то уточняем, точно ли обновлять?
+              // Если разница менее двух секунд, то молча игнорируем отсечку
+              final updateStartCorrectionDelay = context
+                  .read<SettingsBloc>()
+                  .state
+                  .settings
+                  .updateStartCorrectionDelay;
+              if (prevCorrection != null &&
+                  data.correction - prevCorrection >
+                      updateStartCorrectionDelay) {
                 final String text =
                     Localization.current.I18nHome_updateAutomaticCorrection(
-                  state.previousStart!.first.number,
-                  state.previousStart!.first.automaticcorrection!,
-                  state.automaticStart!.correction,
+                  data.number,
+                  data.previousStarts.first.automaticCorrection!,
+                  data.correction,
                 );
                 final bool? update = await overwriteStartTimePopup(
                   context: context,
                   text: text,
                 );
-                if (update != null && update) {
-                  protocolBloc.add(
-                    ProtocolUpdateAutomaticCorrection(
-                      automaticStart: state.automaticStart!,
+                if (update ?? false) {
+                  databaseBloc.add(
+                    DatabaseEvent.updateAutomaticCorrection(
+                      stageId: data.previousStarts.first.stageId,
+                      startTime: data.startTime,
+                      timestamp: data.timestamp,
+                      correction: data.correction,
                       forceUpdate: true,
                     ),
                   );
                 }
               }
-              // Добавление нового стартового времени
-              if (state.previousStart != null && state.startTime != null) {
-                // Если стартовое время уже присвоено другому номеру
-                String text = '';
-                for (final element in state.previousStart!) {
-                  if (element.automaticstarttime == null &&
-                      element.manualstarttime == null) {
-                    text += Localization.current.I18nHome_equalStartTime(
-                      state.startTime!.time,
-                      element.number,
-                      state.startTime!.number,
-                    );
-                  } else {
-                    if (element.automaticstarttime != null) {
-                      text += Localization.current
-                          .I18nHome_updateAutomaticStartCorrection(
-                        state.startTime!.number,
-                        element.automaticstarttime!,
-                      );
-                    } else if (element.manualstarttime != null) {
-                      text += Localization.current
-                          .I18nHome_updateAutomaticStartCorrection(
-                        state.startTime!.number,
-                        element.manualstarttime!,
-                      );
-                    } else {
-                      text += Localization.current.I18nHome_errorAddParticipant(
-                        materialLocalization.cancelButtonLabel,
-                      );
-                    }
-                  }
-                }
+            });
+          }
+        },
+      );
 
-                final bool? update = await overwriteStartTimePopup(
-                  context: context,
-                  text: text,
-                );
-
-                if (update != null && update) {
-                  protocolBloc.add(
-                    ProtocolAddStartNumber(
-                      startTime: state.startTime!,
-                      forceAdd: true,
-                    ),
-                  );
-                }
-              }
-            }
-          },
-          child: BlocBuilder<TabBloc, AppTab>(
-            builder: (context, activeTab) => DefaultTabController(
-              length: 3,
-              child: Scaffold(
-                drawer: const AppDrawer(),
-                appBar: AppBar(
-                  title: const _TextTitle(),
-                  actions: <Widget>[
-                    _FinishFilterButton(activeTab: activeTab),
-                    const BluetoothButton(),
-                    _MenuButton(activeTab: activeTab),
-                  ],
-                  bottom: TabBar(
-                    onTap: (index) {
-                      final bloc = context.read<TabBloc>();
-                      switch (index) {
-                        case 0:
-                          bloc.add(const TabEvent.updated(AppTab.init));
-                          break;
-                        case 1:
-                          bloc.add(const TabEvent.updated(AppTab.start));
-                          break;
-                        case 2:
-                          bloc.add(const TabEvent.updated(AppTab.finish));
-                          break;
-                      }
-                    },
-                    tabs: <Widget>[
-                      Tab(icon: Text(Localization.current.I18nHome_home)),
-                      Tab(icon: Text(Localization.current.I18nHome_start)),
-                      Tab(icon: Text(Localization.current.I18nHome_finish)),
-                    ],
-                  ),
+  SingleChildWidget _listenToUpdater() => BlocListener<UpdateBloc, UpdateState>(
+        listenWhen: (previousState, state) {
+          // ловим показ наличия обновления
+          if (previousState is UpdateInitial && state is UpdateAvailable) {
+            return true;
+            // ловим показ ченджлога
+          } else if (previousState is UpdateInitial && state is UpdateInitial) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        listener: (context, state) async {
+          if (state is UpdateAvailable && !Scaffold.of(context).isDrawerOpen) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  Localization.current.I18nHome_updateAvailable(state.version),
                 ),
-                body: MultiBlocListener(
-                  listeners: [
-                    BlocListener<UpdateBloc, UpdateState>(
-                      listenWhen: (previousState, state) {
-                        // ловим показ наличия обновления
-                        if (previousState is UpdateInitial &&
-                            state is UpdateAvailable) {
-                          return true;
-                          // ловим показ ченджлога
-                        } else if (previousState is UpdateInitial &&
-                            state is UpdateInitial) {
-                          return true;
-                        } else {
-                          return false;
-                        }
-                      },
-                      listener: (context, state) async {
-                        if (state is UpdateAvailable &&
-                            !Scaffold.of(context).isDrawerOpen) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                Localization.current
-                                    .I18nHome_updateAvailable(state.version),
-                              ),
-                              action: SnackBarAction(
-                                onPressed: () {
-                                  BlocProvider.of<UpdateBloc>(context)
-                                      .add(const DownloadUpdate());
-                                  Scaffold.of(context).openDrawer();
-                                },
-                                label: Localization.current.I18nHome_update,
-                              ),
-                            ),
-                          );
-                        } else if (state is UpdateInitial &&
-                            state.showChangelog != null &&
-                            state.showChangelog!.show) {
-                          await showChangelogAtStartup(
-                            context,
-                            state.showChangelog!.previousVersion!,
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                  child: const TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: <Widget>[
-                      InitScreen(),
-                      StartScreen(),
-                      FinishScreen(),
-                    ],
-                  ),
+                action: SnackBarAction(
+                  onPressed: () {
+                    BlocProvider.of<UpdateBloc>(context)
+                        .add(const DownloadUpdate());
+                    Scaffold.of(context).openDrawer();
+                  },
+                  label: Localization.current.I18nHome_update,
                 ),
               ),
-            ),
-          ),
-        ),
+            );
+          } else if (state is UpdateInitial) {
+            final showChangelog = state.showChangelog;
+            final previousVersion = showChangelog?.previousVersion;
+            if (showChangelog != null &&
+                showChangelog.show &&
+                previousVersion != null) {
+              await showChangelogAtStartup(context, previousVersion);
+            }
+          }
+        },
       );
+
+  SingleChildWidget _listenToCountdownEvents() {
+    return BlocListener<CountdownBloc, CountdownState>(
+      listener: (context, state) {
+        if (context.read<SettingsBloc>().state.settings.beepFromApp) {
+          state.whenOrNull(working: (tick) {
+            // за три секунды до старта запускаем "бип"
+            if (tick.text == '3') {
+              context.read<CountdownBloc>().add(CountdownEvent.beep());
+            }
+          });
+        }
+        if (context.read<SettingsBloc>().state.settings.voiceFromApp) {
+          state.whenOrNull(working: (tick) {
+            // на 15 секунде ищем участников для голосового вызова
+            if (tick.second == 15) {
+              var stageId = context.read<DatabaseBloc>().state.stage?.id;
+              if (stageId != null) {
+                context
+                    .read<CountdownBloc>()
+                    .add(CountdownEvent.callParticipant(stageId: stageId));
+              }
+            }
+          });
+        }
+      },
+    );
+  }
 }
 
 class _TextTitle extends StatelessWidget {
-  const _TextTitle({
-    Key? key,
-  }) : super(key: key);
+  const _TextTitle();
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<ProtocolBloc, ProtocolState>(
-        builder: (context, protocolState) =>
-            protocolState is ProtocolSelectedState
-                ? Text(basenameWithoutExtension(protocolState.databasePath))
-                : const Text('Entime'),
-      );
+      BlocBuilder<DatabaseBloc, DatabaseState>(builder: (context, state) {
+        final stage = state.stage;
+        if (stage != null) {
+          return Text(stage.name);
+        } else {
+          final race = state.race;
+          if (race != null) {
+            return Text(race.name);
+          } else {
+            return Text(Pubspec.name);
+          }
+        }
+      });
 }
 
 class _FinishFilterButton extends StatelessWidget {
   const _FinishFilterButton({
-    Key? key,
     required this.activeTab,
-  }) : super(key: key);
+  });
 
   final AppTab activeTab;
 
   @override
   Widget build(BuildContext context) {
-    final settingsBloc = context.read<SettingsBloc>();
-    final settings = settingsBloc.state.settings;
     return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, protocolState) {
+      builder: (context, settingsState) {
+        final settingsBloc = context.read<SettingsBloc>();
+        final settings = settingsState.settings;
         if (activeTab == AppTab.finish) {
           final menuItems = <PopupMenuEntry<FilterFinish>>[
             CheckedPopupMenuItem(
@@ -276,7 +301,7 @@ class _FinishFilterButton extends StatelessWidget {
                 leading: const SizedBox(width: 0, height: 0),
                 title: Text(Localization.current.I18nHome_setDefaults),
               ),
-            )
+            ),
           ];
           return PopupMenuButton<FilterFinish>(
             icon: const Icon(Icons.filter_list),
@@ -285,7 +310,7 @@ class _FinishFilterButton extends StatelessWidget {
               switch (value) {
                 case FilterFinish.hideMarked:
                   settingsBloc.add(
-                    SettingsEventUpdate(
+                    SettingsEvent.update(
                       settings:
                           settings.copyWith(hideMarked: !settings.hideMarked),
                     ),
@@ -293,7 +318,7 @@ class _FinishFilterButton extends StatelessWidget {
                   break;
                 case FilterFinish.hideNumbers:
                   settingsBloc.add(
-                    SettingsEventUpdate(
+                    SettingsEvent.update(
                       settings: settings.copyWith(
                         hideNumbers: !settings.hideNumbers,
                       ),
@@ -302,7 +327,7 @@ class _FinishFilterButton extends StatelessWidget {
                   break;
                 case FilterFinish.hideManual:
                   settingsBloc.add(
-                    SettingsEventUpdate(
+                    SettingsEvent.update(
                       settings:
                           settings.copyWith(hideManual: !settings.hideManual),
                     ),
@@ -310,7 +335,7 @@ class _FinishFilterButton extends StatelessWidget {
                   break;
                 case FilterFinish.setDefaults:
                   settingsBloc.add(
-                    SettingsEventUpdate(
+                    SettingsEvent.update(
                       settings: settings.copyWith(
                         hideMarked: true,
                         hideNumbers: false,
@@ -327,167 +352,4 @@ class _FinishFilterButton extends StatelessWidget {
       },
     );
   }
-}
-
-class _MenuButton extends StatelessWidget {
-  final AppTab activeTab;
-
-  const _MenuButton({Key? key, required this.activeTab}) : super(key: key);
-  @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<SettingsBloc, SettingsState>(
-        builder: (context, state) => BlocBuilder<ProtocolBloc, ProtocolState>(
-          builder: (context, protocolState) {
-            final settingsBloc = context.read<SettingsBloc>();
-            final settings = settingsBloc.state.settings;
-            final protocolBloc = context.read<ProtocolBloc>();
-            final menuItems = <PopupMenuEntry<MenuButton>>[];
-            if (activeTab == AppTab.start || activeTab == AppTab.finish) {
-              if (protocolState is ProtocolSelectedState) {
-                if (activeTab == AppTab.start) {
-                  menuItems.add(
-                    PopupMenuItem(
-                      value: MenuButton.addRacer,
-                      child: ListTile(
-                        leading: const Icon(Icons.add),
-                        title: Text(Localization.current.I18nHome_addRacer),
-                      ),
-                    ),
-                  );
-                }
-                menuItems.add(
-                  PopupMenuItem(
-                    value: MenuButton.share,
-                    child: ListTile(
-                      leading: const Icon(Icons.share),
-                      title: Text(Localization.current.I18nHome_share),
-                    ),
-                  ),
-                );
-              } else {
-                menuItems.add(
-                  PopupMenuItem(
-                    value: MenuButton.selectStartProtocol,
-                    child: ListTile(
-                      leading: const Icon(MdiIcons.database),
-                      title: Text(
-                        Localization.current.I18nHome_selectStartProtocol,
-                      ),
-                    ),
-                  ),
-                );
-              }
-              if (activeTab == AppTab.start) {
-                menuItems.add(
-                  PopupMenuItem(
-                    value: MenuButton.countdown,
-                    child: ListTile(
-                      leading: const Icon(MdiIcons.timer),
-                      title: Text(Localization.current.I18nHome_countdown),
-                    ),
-                  ),
-                );
-              }
-              menuItems.add(
-                PopupMenuItem(
-                  value: MenuButton.fab,
-                  child: ListTile(
-                    leading: const Icon(MdiIcons.handBackLeft),
-                    title: Text(Localization.current.I18nHome_fab),
-                  ),
-                ),
-              );
-            } else {
-              menuItems
-                ..add(
-                  PopupMenuItem(
-                    value: MenuButton.selectStartProtocol,
-                    child: ListTile(
-                      leading: const Icon(MdiIcons.database),
-                      title: Text(
-                        Localization.current.I18nHome_selectStartProtocol,
-                      ),
-                    ),
-                  ),
-                )
-                ..add(
-                  PopupMenuItem(
-                    value: MenuButton.bluetooth,
-                    child: ListTile(
-                      leading: const Icon(Icons.bluetooth),
-                      title: Text(Localization.current.I18nHome_bluetooth),
-                    ),
-                  ),
-                );
-            }
-            if (protocolState is ProtocolSelectedState &&
-                activeTab == AppTab.start) {
-              menuItems.add(
-                PopupMenuItem(
-                  value: MenuButton.importCsv,
-                  child: ListTile(
-                    leading: const Icon(MdiIcons.import),
-                    title: Text(
-                      Localization.current.I18nHome_importStartProtocolCsv,
-                    ),
-                  ),
-                ),
-              );
-            }
-
-            return PopupMenuButton<MenuButton>(
-              itemBuilder: (context) => menuItems,
-              onSelected: (value) async {
-                switch (value) {
-                  case MenuButton.share:
-                    if (activeTab == AppTab.start) {
-                      protocolBloc.add(const ProtocolShareStart());
-                    } else if (activeTab == AppTab.finish) {
-                      protocolBloc.add(const ProtocolShareFinish());
-                    }
-                    break;
-                  case MenuButton.fab:
-                    if (activeTab == AppTab.start) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings:
-                              settings.copyWith(startFab: !settings.startFab),
-                        ),
-                      );
-                    } else if (activeTab == AppTab.finish) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings: settings.copyWith(
-                            finishFab: !settings.finishFab,
-                          ),
-                        ),
-                      );
-                    }
-                    break;
-                  case MenuButton.addRacer:
-                    await addRacerPopup(context);
-                    break;
-                  case MenuButton.selectStartProtocol:
-                    await routeToSelectFileScreen(context);
-                    break;
-                  case MenuButton.bluetooth:
-                    await selectBluetoothDevice(context);
-                    break;
-                  case MenuButton.countdown:
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings:
-                            settings.copyWith(countdown: !settings.countdown),
-                      ),
-                    );
-                    break;
-                  case MenuButton.importCsv:
-                    protocolBloc.add(const ProtocolLoadStartFromCsv());
-                    break;
-                }
-              },
-            );
-          },
-        ),
-      );
 }

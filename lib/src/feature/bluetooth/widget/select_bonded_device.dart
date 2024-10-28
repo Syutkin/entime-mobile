@@ -26,8 +26,7 @@ class SelectBondedDeviceScreen extends StatefulWidget {
   /// Then, if they are not available, they would be disabled from the selection.
   final bool checkAvailability;
 
-  const SelectBondedDeviceScreen({this.checkAvailability = true, Key? key})
-      : super(key: key);
+  const SelectBondedDeviceScreen({this.checkAvailability = true, super.key});
 
   @override
   State<SelectBondedDeviceScreen> createState() => _SelectBondedDeviceScreen();
@@ -139,7 +138,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
               : IconButton(
                   icon: const Icon(Icons.replay),
                   onPressed: _restartDiscovery,
-                )
+                ),
         ],
       ),
       body: ListView(children: list),

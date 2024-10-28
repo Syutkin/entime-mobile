@@ -5,13 +5,12 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../bloc/settings_bloc.dart';
 import '../model/theme.dart';
 import 'settings_popups.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -23,465 +22,523 @@ class SettingsScreen extends StatelessWidget {
 }
 
 class _SettingsList extends StatelessWidget {
-  const _SettingsList({Key? key}) : super(key: key);
+  const _SettingsList();
 
   @override
   Widget build(BuildContext context) {
     final settingsBloc = context.read<SettingsBloc>();
     return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, settingsState) =>
-          BlocBuilder<BluetoothBloc, BluetoothBlocState>(
-        builder: (context, bluetoothState) => SettingsList(
-          sections: [
-            SettingsSection(
-              title: Text(Localization.current.I18nSettings_general),
-              tiles: [
-                SettingsTile.switchTile(
-                  title: Text(Localization.current.I18nSettings_bluetooth),
-                  initialValue: bluetoothState is! BluetoothNotEnabledState,
-                  onToggle: (value) {
-                    value
-                        ? context
-                            .read<BluetoothBloc>()
-                            .add(const BluetoothEvent.enable())
-                        : context
-                            .read<BluetoothBloc>()
-                            .add(const BluetoothEvent.disable());
-                  },
+      builder: (context, settingsState) => SettingsList(
+        sections: [
+          SettingsSection(
+            title: Text(Localization.current.I18nSettings_general),
+            tiles: [
+              SettingsTile.switchTile(
+                title: Text(Localization.current.I18nSettings_reconnect),
+                description: Text(
+                  Localization.current.I18nSettings_reconnectDescription,
                 ),
-                SettingsTile.switchTile(
-                  title: Text(Localization.current.I18nSettings_reconnect),
-                  description: Text(
-                    Localization.current.I18nSettings_reconnectDescription,
-                  ),
-                  //leading:  Icon(Icons.bluetooth),
-                  initialValue: settingsState.settings.reconnect,
-                  onToggle: (value) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings:
-                            settingsState.settings.copyWith(reconnect: value),
-                      ),
-                    );
-                  },
-                ),
-                SettingsTile.switchTile(
-                  title: Text(Localization.current.I18nSettings_sound),
-                  //leading:  Icon(Icons.volume_up),
-                  initialValue: settingsState.settings.sound,
-                  onToggle: (value) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings: settingsState.settings.copyWith(sound: value),
-                      ),
-                    );
-                  },
-                ),
-                SettingsTile.switchTile(
-                  title: Text(Localization.current.I18nSettings_wakelock),
-                  // titleMaxLines: 2,
-                  //leading:  Icon(Icons.lightbulb_outline),
-                  initialValue: settingsState.settings.wakelock,
-                  onToggle: (value) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings:
-                            settingsState.settings.copyWith(wakelock: value),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            SettingsSection(
-              title: Text(Localization.current.I18nSettings_countdown),
-              tiles: [
-                SettingsTile.switchTile(
-                  title: Text(Localization.current.I18nSettings_countdown),
-                  //leading:  Icon(Icons.timer),
-                  initialValue: settingsState.settings.beep,
-                  onToggle: (value) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings: settingsState.settings.copyWith(beep: value),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            SettingsSection(
-              title: Text(Localization.current.I18nSettings_voiceMessages),
-              tiles: [
-                SettingsTile.switchTile(
-                  title: Text(Localization.current.I18nSettings_voice),
-                  //leading:  Icon(MdiIcons.textToSpeech),
-                  initialValue: settingsState.settings.voice,
-                  onToggle: (value) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings: settingsState.settings.copyWith(voice: value),
-                      ),
-                    );
-                  },
-                ),
-                SettingsTile.switchTile(
-                  title:
-                      Text(Localization.current.I18nSettings_participantsName),
-                  // titleMaxLines: 2,
-                  //leading:  Icon(MdiIcons.textToSpeech),
-                  initialValue: settingsState.settings.voiceName,
-                  onToggle: (value) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings:
-                            settingsState.settings.copyWith(voiceName: value),
-                      ),
-                    );
-                  },
-                ),
-                SettingsTile(
-                  title: Text(Localization.current.I18nSettings_volume),
-                  //leading:  Icon(Icons.volume_up),
-                  trailing:
-                      Text('${(settingsState.settings.volume * 100).round()}%'),
-                  onPressed: (context) async {
-                    final value = await setVolumePopup(context, settingsState);
-                    if (value != null) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings:
-                              settingsState.settings.copyWith(volume: value),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                SettingsTile(
-                  title: Text(Localization.current.I18nSettings_pitch),
-                  //leading:  Icon(Icons.record_voice_over),
-                  trailing:
-                      Text(settingsState.settings.pitch.toStringAsFixed(2)),
-                  onPressed: (context) async {
-                    final value = await setPitchPopup(context, settingsState);
-                    if (value != null) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings:
-                              settingsState.settings.copyWith(pitch: value),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                SettingsTile(
-                  title: Text(Localization.current.I18nSettings_rate),
-                  //leading:  Icon(MdiIcons.playSpeed),
-                  trailing:
-                      Text(settingsState.settings.rate.toStringAsFixed(2)),
-                  onPressed: (context) async {
-                    final value = await setRatePopup(context, settingsState);
-                    if (value != null) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings:
-                              settingsState.settings.copyWith(rate: value),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                SettingsTile(
-                  title: Text(Localization.current.I18nSettings_language),
-                  //leading:  Icon(Icons.language),
-                  // trailing: Text(settingsState.settings.language),
-                  trailing: Text(Intl.getCurrentLocale()),
-                  //ToDo: change locale
-                  // onPressed: (context) {},
-                ),
-              ],
-            ),
-            SettingsSection(
-              title: Text(Localization.current.I18nSettings_startScreen),
-              tiles: [
-                SettingsTile.switchTile(
-                  title: Text(Localization.current.I18nSettings_startButton),
-                  //leading:  Icon(MdiIcons.handBackLeft),
-                  initialValue: settingsState.settings.startFab,
-                  onToggle: (value) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings:
-                            settingsState.settings.copyWith(startFab: value),
-                      ),
-                    );
-                  },
-                ),
-                SettingsTile(
-                  title:
-                      Text(Localization.current.I18nSettings_startButtonSize),
-                  //leading:  Icon(MdiIcons.handBackLeft),
-                  trailing: Text(
-                    Localization.current.I18nSettings_pixelSize(
-                      (settingsState.settings.startFabSize).round(),
+                //leading:  Icon(Icons.bluetooth),
+                initialValue: settingsState.settings.reconnect,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                          settingsState.settings.copyWith(reconnect: value),
                     ),
-                  ),
-                  onPressed: (context) async {
-                    final value = await setFloatingButtonSizePopup(
-                      context,
-                      settingsState.settings.startFabSize,
-                      text: Localization
-                          .current.I18nSettings_startButtonSizeDescription,
-                    );
-                    if (value != null) {
+                  );
+                },
+              ),
+              SettingsTile.switchTile(
+                title: Text(Localization.current.I18nSettings_ntpOffset),
+                description: Text(
+                  Localization.current.I18nSettings_ntpOffsetDescription,
+                ),
+                initialValue: settingsState.settings.updateNtpOffsetAtStartup,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings
+                          .copyWith(updateNtpOffsetAtStartup: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile.switchTile(
+                title: Text(Localization.current.I18nSettings_wakelock),
+                // titleMaxLines: 2,
+                //leading:  Icon(Icons.lightbulb_outline),
+                initialValue: settingsState.settings.wakelock,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                          settingsState.settings.copyWith(wakelock: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile.switchTile(
+                title: Text(Localization.current.I18nSettings_sound),
+                //leading:  Icon(Icons.volume_up),
+                initialValue: settingsState.settings.sound,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings.copyWith(sound: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile(
+                // ToDo: выбор локализации
+                enabled: false,
+                title: Text(Localization.current.I18nSettings_language),
+                trailing: DropdownMenu<String>(
+                  inputDecorationTheme:
+                      InputDecorationTheme(border: InputBorder.none),
+                  dropdownMenuEntries: _dropdownMenuEntries(),
+                  initialSelection:
+                      Localizations.localeOf(context).languageCode,
+                  onSelected: (locale) {
+                    if (locale != null) {
+                      Localization.delegate.load(Locale(locale));
                       settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings: settingsState.settings
-                              .copyWith(startFabSize: value),
+                        SettingsEvent.update(
+                          settings:
+                              settingsState.settings.copyWith(language: locale),
                         ),
                       );
                     }
                   },
                 ),
-                SettingsTile.switchTile(
-                  title:
-                      Text(Localization.current.I18nSettings_countdownAtStart),
-                  //leading:  Icon(MdiIcons.timer),
-                  initialValue: settingsState.settings.countdown,
-                  onToggle: (value) {
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: Text(Localization.current.I18nSettings_countdown),
+            tiles: [
+              SettingsTile.switchTile(
+                enabled: settingsState.settings.sound,
+                title: Text(Localization.current.I18nSettings_countdown),
+                //leading:  Icon(Icons.timer),
+                initialValue: settingsState.settings.beep,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings.copyWith(beep: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile.switchTile(
+                enabled:
+                    settingsState.settings.sound && settingsState.settings.beep,
+                title: Text(Localization.current.I18nSettings_countdownFromApp),
+                description: Text(
+                    Localization.current.I18nSettings_countdownFromAppDetails),
+                initialValue: settingsState.settings.beepFromApp,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                          settingsState.settings.copyWith(beepFromApp: value),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: Text(Localization.current.I18nSettings_voiceMessages),
+            tiles: [
+              SettingsTile.switchTile(
+                enabled: settingsState.settings.sound,
+                title: Text(Localization.current.I18nSettings_voice),
+                //leading:  Icon(MdiIcons.textToSpeech),
+                initialValue: settingsState.settings.voice,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings.copyWith(voice: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile.switchTile(
+                enabled: settingsState.settings.sound &&
+                    settingsState.settings.voice,
+                title: Text(Localization.current.I18nSettings_voiceFromApp),
+                description:
+                    Text(Localization.current.I18nSettings_voiceFromAppDetails),
+                //leading:  Icon(MdiIcons.textToSpeech),
+                initialValue: settingsState.settings.voiceFromApp,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                          settingsState.settings.copyWith(voiceFromApp: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile.switchTile(
+                enabled: settingsState.settings.sound &&
+                    settingsState.settings.voice,
+                title: Text(Localization.current.I18nSettings_participantsName),
+                // titleMaxLines: 2,
+                //leading:  Icon(MdiIcons.textToSpeech),
+                initialValue: settingsState.settings.voiceName,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                          settingsState.settings.copyWith(voiceName: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile(
+                enabled: settingsState.settings.sound &&
+                    settingsState.settings.voice,
+                title: Text(Localization.current.I18nSettings_volume),
+                //leading:  Icon(Icons.volume_up),
+                trailing:
+                    Text('${(settingsState.settings.volume * 100).round()}%'),
+                onPressed: (context) async {
+                  final value = await setVolumePopup(context, settingsState);
+                  if (value != null) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings:
-                            settingsState.settings.copyWith(countdown: value),
+                            settingsState.settings.copyWith(volume: value),
                       ),
                     );
-                  },
-                ),
-                SettingsTile(
-                  title: Text(
-                    Localization.current.I18nSettings_countdownAtStartSize,
-                  ),
-                  //leading:  Icon(MdiIcons.timer),
-                  trailing: Text(
-                    Localization.current.I18nSettings_pixelSize(
-                      (settingsState.settings.startFabSize).round(),
-                    ),
-                  ),
-                  onPressed: (context) async {
-                    final value = await setFloatingButtonSizePopup(
-                      context,
-                      settingsState.settings.countdownSize,
-                      text: Localization
-                          .current.I18nSettings_countdownAtStartSize,
-                    );
-                    if (value != null) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings: settingsState.settings
-                              .copyWith(countdownSize: value),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                SettingsTile.switchTile(
-                  title: Text(
-                    Localization.current.I18nSettings_replaceStartCountdown,
-                  ),
-                  // titleMaxLines: 2,
-                  //leading:  Icon(MdiIcons.timer),
-                  initialValue: settingsState.settings.countdownAtStartTime,
-                  onToggle: (value) {
+                  }
+                },
+              ),
+              SettingsTile(
+                enabled: settingsState.settings.sound &&
+                    settingsState.settings.voice,
+                title: Text(Localization.current.I18nSettings_pitch),
+                //leading:  Icon(Icons.record_voice_over),
+                trailing: Text(settingsState.settings.pitch.toStringAsFixed(2)),
+                onPressed: (context) async {
+                  final value = await setPitchPopup(context, settingsState);
+                  if (value != null) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
+                        settings: settingsState.settings.copyWith(pitch: value),
+                      ),
+                    );
+                  }
+                },
+              ),
+              SettingsTile(
+                enabled: settingsState.settings.sound &&
+                    settingsState.settings.voice,
+                title: Text(Localization.current.I18nSettings_rate),
+                //leading:  Icon(MdiIcons.playSpeed),
+                trailing: Text(settingsState.settings.rate.toStringAsFixed(2)),
+                onPressed: (context) async {
+                  final value = await setRatePopup(context, settingsState);
+                  if (value != null) {
+                    settingsBloc.add(
+                      SettingsEvent.update(
+                        settings: settingsState.settings.copyWith(rate: value),
+                      ),
+                    );
+                  }
+                },
+              ),
+              SettingsTile(
+                enabled: settingsState.settings.sound &&
+                    settingsState.settings.voice,
+                title: Text(Localization.current.I18nSettings_voiceLanguage),
+                //leading:  Icon(Icons.language),
+                // trailing: Text(settingsState.settings.language),
+                trailing: Text(Intl.getCurrentLocale()),
+                //ToDo: change locale
+                // onPressed: (context) {},
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: Text(Localization.current.I18nSettings_startScreen),
+            tiles: [
+              SettingsTile.switchTile(
+                title: Text(Localization.current.I18nSettings_startButton),
+                //leading:  Icon(MdiIcons.handBackLeft),
+                initialValue: settingsState.settings.startFab,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                          settingsState.settings.copyWith(startFab: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile(
+                title: Text(Localization.current.I18nSettings_startButtonSize),
+                //leading:  Icon(MdiIcons.handBackLeft),
+                trailing: Text(
+                  Localization.current.I18nSettings_pixelSize(
+                    settingsState.settings.startFabSize.round(),
+                  ),
+                ),
+                onPressed: (context) async {
+                  final value = await setFloatingButtonSizePopup(
+                    context,
+                    settingsState.settings.startFabSize,
+                    text: Localization
+                        .current.I18nSettings_startButtonSizeDescription,
+                  );
+                  if (value != null) {
+                    settingsBloc.add(
+                      SettingsEvent.update(
                         settings: settingsState.settings
-                            .copyWith(countdownAtStartTime: value),
+                            .copyWith(startFabSize: value),
                       ),
                     );
-                  },
-                ),
-              ],
-            ),
-            SettingsSection(
-              title: Text(Localization.current.I18nSettings_finishScreen),
-              tiles: [
-                SettingsTile(
-                  title:
-                      Text(Localization.current.I18nSettings_delayForNewEvents),
-                  // titleMaxLines: 2,
-                  trailing: Text(
-                    Localization.current.I18nSettings_milliseconds(
-                      settingsState.settings.finishDelay,
+                  }
+                },
+              ),
+              SettingsTile.switchTile(
+                title: Text(Localization.current.I18nSettings_countdownAtStart),
+                //leading:  Icon(MdiIcons.timer),
+                initialValue: settingsState.settings.countdown,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                          settingsState.settings.copyWith(countdown: value),
                     ),
-                  ),
-                  //leading:  Icon(MdiIcons.clockOutline),
-                  onPressed: (context) async {
-                    final value = await setDelayPopup(
-                      context,
-                      settingsState.settings.finishDelay,
-                      Localization.current.I18nSettings_delayForNewEvents,
-                    );
-                    if (value != null) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings: settingsState.settings
-                              .copyWith(finishDelay: value),
-                        ),
-                      );
-                    }
-                  },
+                  );
+                },
+              ),
+              SettingsTile(
+                title: Text(
+                  Localization.current.I18nSettings_countdownAtStartSize,
                 ),
-                SettingsTile.switchTile(
-                  title:
-                      Text(Localization.current.I18nSettings_autosubstitution),
-                  //leading:  Icon(MdiIcons.autoFix),
-                  initialValue: settingsState.settings.substituteNumbers,
-                  onToggle: (value) {
+                //leading:  Icon(MdiIcons.timer),
+                trailing: Text(
+                  Localization.current.I18nSettings_pixelSize(
+                    settingsState.settings.startFabSize.round(),
+                  ),
+                ),
+                onPressed: (context) async {
+                  final value = await setFloatingButtonSizePopup(
+                    context,
+                    settingsState.settings.countdownSize,
+                    text:
+                        Localization.current.I18nSettings_countdownAtStartSize,
+                  );
+                  if (value != null) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings: settingsState.settings
-                            .copyWith(substituteNumbers: value),
+                            .copyWith(countdownSize: value),
                       ),
                     );
-                  },
+                  }
+                },
+              ),
+              SettingsTile.switchTile(
+                title: Text(
+                  Localization.current.I18nSettings_replaceStartCountdown,
                 ),
-                SettingsTile(
-                  title: Text(
+                // titleMaxLines: 2,
+                //leading:  Icon(MdiIcons.timer),
+                initialValue: settingsState.settings.countdownAtStartTime,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings
+                          .copyWith(countdownAtStartTime: value),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: Text(Localization.current.I18nSettings_finishScreen),
+            tiles: [
+              SettingsTile(
+                title:
+                    Text(Localization.current.I18nSettings_delayForNewEvents),
+                // titleMaxLines: 2,
+                trailing: Text(
+                  Localization.current.I18nSettings_milliseconds(
+                    settingsState.settings.finishDelay,
+                  ),
+                ),
+                //leading:  Icon(MdiIcons.clockOutline),
+                onPressed: (context) async {
+                  final value = await setDelayPopup(
+                    context,
+                    settingsState.settings.finishDelay,
+                    Localization.current.I18nSettings_delayForNewEvents,
+                  );
+                  if (value != null) {
+                    settingsBloc.add(
+                      SettingsEvent.update(
+                        settings:
+                            settingsState.settings.copyWith(finishDelay: value),
+                      ),
+                    );
+                  }
+                },
+              ),
+              SettingsTile.switchTile(
+                title: Text(Localization.current.I18nSettings_autosubstitution),
+                //leading:  Icon(MdiIcons.autoFix),
+                initialValue: settingsState.settings.substituteNumbers,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings
+                          .copyWith(substituteNumbers: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile(
+                title: Text(
+                  Localization.current.I18nSettings_autosubstitutionDelay,
+                ),
+                trailing: Text(
+                  Localization.current.I18nSettings_milliseconds(
+                    settingsState.settings.finishDelay,
+                  ),
+                ),
+                //leading:  Icon(MdiIcons.clockOutline),
+                onPressed: (context) async {
+                  final value = await setDelayPopup(
+                    context,
+                    settingsState.settings.substituteNumbersDelay,
                     Localization.current.I18nSettings_autosubstitutionDelay,
-                  ),
-                  trailing: Text(
-                    Localization.current.I18nSettings_milliseconds(
-                      settingsState.settings.finishDelay,
-                    ),
-                  ),
-                  //leading:  Icon(MdiIcons.clockOutline),
-                  onPressed: (context) async {
-                    final value = await setDelayPopup(
-                      context,
-                      settingsState.settings.substituteNumbersDelay,
-                      Localization.current.I18nSettings_autosubstitutionDelay,
-                    );
-                    if (value != null) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings: settingsState.settings
-                              .copyWith(substituteNumbersDelay: value),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                SettingsTile.switchTile(
-                  title: Text(Localization.current.I18nSettings_finishButton),
-                  //leading:  Icon(MdiIcons.handBackLeft),
-                  initialValue: settingsState.settings.finishFab,
-                  onToggle: (value) {
+                  );
+                  if (value != null) {
                     settingsBloc.add(
-                      SettingsEventUpdate(
-                        settings:
-                            settingsState.settings.copyWith(finishFab: value),
-                      ),
-                    );
-                  },
-                ),
-                SettingsTile(
-                  title:
-                      Text(Localization.current.I18nSettings_finishButtonSize),
-                  trailing: Text(
-                    Localization.current.I18nSettings_pixelSize(
-                      (settingsState.settings.finishFabSize).round(),
-                    ),
-                  ),
-                  //leading:  Icon(MdiIcons.handBackLeft),
-                  onPressed: (context) async {
-                    final value = await setFloatingButtonSizePopup(
-                      context,
-                      settingsState.settings.finishFabSize,
-                      text: Localization
-                          .current.I18nSettings_finishButtonSizeDescription,
-                    );
-                    if (value != null) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings: settingsState.settings
-                              .copyWith(finishFabSize: value),
-                        ),
-                      );
-                    }
-                  },
-                ),
-              ],
-            ),
-            SettingsSection(
-              title: Text(Localization.current.I18nSettings_update),
-              tiles: [
-                SettingsTile.switchTile(
-                  title: Text(
-                    Localization.current.I18nSettings_checkUpdateAtStartup,
-                  ),
-                  // titleMaxLines: 2,
-                  //leading:  Icon(MdiIcons.update),
-                  initialValue: settingsState.settings.checkUpdates,
-                  onToggle: (value) {
-                    settingsBloc.add(
-                      SettingsEventUpdate(
+                      SettingsEvent.update(
                         settings: settingsState.settings
-                            .copyWith(checkUpdates: value),
+                            .copyWith(substituteNumbersDelay: value),
                       ),
                     );
-                  },
-                ),
-              ],
-            ),
-            SettingsSection(
-              title: Text(Localization.current.I18nSettings_themes),
-              tiles: _themes(settingsBloc),
-            ),
-            SettingsSection(
-              title: Text(Localization.current.I18nSettings_journal),
-              tiles: [
-                SettingsTile(
-                  title: Text(
-                    Localization.current.I18nSettings_journalLinesNumber,
+                  }
+                },
+              ),
+              SettingsTile.switchTile(
+                title: Text(Localization.current.I18nSettings_finishButton),
+                //leading:  Icon(MdiIcons.handBackLeft),
+                initialValue: settingsState.settings.finishFab,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                          settingsState.settings.copyWith(finishFab: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile(
+                title: Text(Localization.current.I18nSettings_finishButtonSize),
+                trailing: Text(
+                  Localization.current.I18nSettings_pixelSize(
+                    settingsState.settings.finishFabSize.round(),
                   ),
-                  // titleMaxLines: 2,
-                  trailing: settingsState.settings.logLimit > -1
-                      ? Text('${settingsState.settings.logLimit}')
-                      // : Text('без ограничений'),
-                      : const Icon(MdiIcons.infinity),
-                  //leading:  Icon(MdiIcons.filter),
-                  onPressed: (context) async {
-                    final int? value = await setLogLimitPopup(
-                      context,
-                      settingsState.settings.logLimit,
+                ),
+                //leading:  Icon(MdiIcons.handBackLeft),
+                onPressed: (context) async {
+                  final value = await setFloatingButtonSizePopup(
+                    context,
+                    settingsState.settings.finishFabSize,
+                    text: Localization
+                        .current.I18nSettings_finishButtonSizeDescription,
+                  );
+                  if (value != null) {
+                    settingsBloc.add(
+                      SettingsEvent.update(
+                        settings: settingsState.settings
+                            .copyWith(finishFabSize: value),
+                      ),
                     );
-                    if (value != null) {
-                      settingsBloc.add(
-                        SettingsEventUpdate(
-                          settings:
-                              settingsState.settings.copyWith(logLimit: value),
-                        ),
-                      );
-                    }
-                  },
+                  }
+                },
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: Text(Localization.current.I18nSettings_update),
+            tiles: [
+              SettingsTile.switchTile(
+                title: Text(
+                  Localization.current.I18nSettings_checkUpdateAtStartup,
                 ),
-              ],
-            ),
-            SettingsSection(
-              title: Text(Localization.current.I18nSettings_defaults),
-              tiles: [
-                SettingsTile(
-                  title:
-                      Text(Localization.current.I18nSettings_resetToDefaults),
-                  //leading:  Icon(MdiIcons.backupRestore),
-                  onPressed: (context) {
-                    settingsBloc.add(const SettingsEventSetDefault());
-                  },
+                // titleMaxLines: 2,
+                //leading:  Icon(MdiIcons.update),
+                initialValue: settingsState.settings.checkUpdates,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                          settingsState.settings.copyWith(checkUpdates: value),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          // ToDo: добавить выбор контраста и dynamicSchemeVariant
+          SettingsSection(
+            title: Text(Localization.current.I18nSettings_themes),
+            tiles: _themes(settingsBloc),
+          ),
+          SettingsSection(
+            title: Text(Localization.current.I18nSettings_journal),
+            tiles: [
+              SettingsTile(
+                title: Text(
+                  Localization.current.I18nSettings_journalLinesNumber,
                 ),
-              ],
-            ),
-          ],
-        ),
+                // titleMaxLines: 2,
+                trailing: settingsState.settings.logLimit > -1
+                    ? Text('${settingsState.settings.logLimit}')
+                    // : Text('без ограничений'),
+                    : Icon(MdiIcons.infinity),
+                //leading:  Icon(MdiIcons.filter),
+                onPressed: (context) async {
+                  final int? value = await setLogLimitPopup(
+                    context,
+                    settingsState.settings.logLimit,
+                  );
+                  if (value != null) {
+                    settingsBloc.add(
+                      SettingsEvent.update(
+                        settings:
+                            settingsState.settings.copyWith(logLimit: value),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: Text(Localization.current.I18nSettings_defaults),
+            tiles: [
+              SettingsTile(
+                title: Text(Localization.current.I18nSettings_resetToDefaults),
+                //leading:  Icon(MdiIcons.backupRestore),
+                onPressed: (context) {
+                  settingsBloc.add(const SettingsEvent.setDefault());
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -489,38 +546,60 @@ class _SettingsList extends StatelessWidget {
   List<SettingsTile> _themes(SettingsBloc bloc) {
     final settings = bloc.state.settings;
     final List<SettingsTile> result = [];
-    final AppTheme appTheme = settings.appTheme;
-    for (final element in AppTheme.values) {
+    final seedColor = settings.seedColor;
+    result.add(
+      SettingsTile.switchTile(
+        title: Text(
+          Localization.current.I18nSettings_brightness,
+        ),
+        // titleMaxLines: 2,
+        //leading:  Icon(MdiIcons.timer),
+        initialValue: settings.brightness == Brightness.light ? true : false,
+        onToggle: (value) {
+          bloc.add(
+            SettingsEvent.update(
+              settings: settings.copyWith(
+                  brightness: value ? Brightness.light : Brightness.dark),
+            ),
+          );
+        },
+      ),
+    );
+    for (final colorSeed in ColorSeed.values) {
       result.add(
         SettingsTile(
-          title: Text(element.str()),
+          title: Text(colorSeed.name),
           leading: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: appThemeData[element]!.colorScheme.background,
+              color: appThemeData(
+                seedColor: colorSeed,
+                brightness: settings.brightness,
+              ).colorScheme.surface,
             ),
             child: Icon(
               MdiIcons.palette,
-              color: appThemeData[element]!.colorScheme.primary,
+              color: appThemeData(
+                seedColor: colorSeed,
+                brightness: settings.brightness,
+              ).colorScheme.primary,
             ),
           ),
           trailing: Radio(
-            groupValue: appTheme,
+            groupValue: seedColor,
             onChanged: (value) {
-              // settingsBloc.add(ThemeChanged(element));
               bloc.add(
-                SettingsEventUpdate(
-                  settings: settings.copyWith(appTheme: element),
+                SettingsEvent.update(
+                  settings: settings.copyWith(seedColor: colorSeed),
                 ),
               );
             },
-            value: element,
+            value: colorSeed,
           ),
           onPressed: (context) {
-            // settingsBloc.add(ThemeChanged(element));
             bloc.add(
-              SettingsEventUpdate(
-                settings: settings.copyWith(appTheme: element),
+              SettingsEvent.update(
+                settings: settings.copyWith(seedColor: colorSeed),
               ),
             );
           },
@@ -528,5 +607,16 @@ class _SettingsList extends StatelessWidget {
       );
     }
     return result;
+  }
+
+  List<DropdownMenuEntry<String>> _dropdownMenuEntries() {
+    List<DropdownMenuEntry<String>> entries = [];
+    for (var locale in Localization.supportedLocales) {
+      entries.add(DropdownMenuEntry(
+        value: locale.languageCode,
+        label: locale.languageCode,
+      ));
+    }
+    return entries;
   }
 }

@@ -1,112 +1,45 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/localization/localization.dart';
-
-// ToDo: use new enums from dart 2.17
-enum AppTheme {
-  lightBlue,
-  darkBlue,
-  lightRed,
-  darkRed,
+ThemeData appThemeData({
+  ColorSeed seedColor = ColorSeed.blue,
+  Brightness brightness = Brightness.light,
+  double contrastLevel = -1.0,
+  DynamicSchemeVariant dynamicSchemeVariant = DynamicSchemeVariant.vibrant,
+}) {
+  return ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: seedColor.color,
+      brightness: brightness,
+      contrastLevel: contrastLevel,
+      dynamicSchemeVariant: dynamicSchemeVariant,
+    ),
+    // For supporting predictive back
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        // Use PredictiveBackPageTransitionsBuilder to get the predictive back route transition!
+        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+      },
+    ),
+  );
 }
 
-AppTheme themeFromString(String? type) {
-  if (type == null) {
-    return AppTheme.lightBlue;
-  }
-  switch (type) {
-    case 'lightBlue':
-      return AppTheme.lightBlue;
-    case 'darkBlue':
-      return AppTheme.darkBlue;
-    case 'lightRed':
-      return AppTheme.lightRed;
-    case 'darkRed':
-      return AppTheme.darkRed;
-    default:
-      return AppTheme.lightBlue;
-  }
+enum ColorSeed {
+  baseColor('M3 Baseline', Color(0xff6750a4)),
+  indigo('Indigo', Colors.indigo),
+  blue('Blue', Colors.blue),
+  teal('Teal', Colors.teal),
+  green('Green', Colors.green),
+  yellow('Yellow', Colors.yellow),
+  orange('Orange', Colors.orange),
+  deepOrange('Deep Orange', Colors.deepOrange),
+  pink('Pink', Colors.pink),
+  brightBlue('Bright Blue', Color(0xFF0000FF)),
+  brightGreen('Bright Green', Color(0xFF00FF00)),
+  brightRed('Bright Red', Color(0xFFFF0000));
+
+  const ColorSeed(this.label, this.color);
+
+  final String label;
+  final Color color;
 }
-
-extension AppThemeStr on AppTheme {
-  String get stringify {
-    switch (this) {
-      case AppTheme.lightBlue:
-        return 'lightBlue';
-      case AppTheme.darkBlue:
-        return 'darkBlue';
-      case AppTheme.lightRed:
-        return 'lightRed';
-      case AppTheme.darkRed:
-        return 'darkRed';
-    }
-  }
-
-  String str(/*BuildContext context*/) {
-    switch (this) {
-      case AppTheme.lightBlue:
-        return Localization.current.I18nSettings_lightBlue;
-      case AppTheme.darkBlue:
-        return Localization.current.I18nSettings_darkBlue;
-      case AppTheme.lightRed:
-        return Localization.current.I18nSettings_lightRed;
-      case AppTheme.darkRed:
-        return Localization.current.I18nSettings_darkRed;
-    }
-  }
-}
-
-final appThemeData = {
-  AppTheme.lightBlue: ThemeData(
-    colorScheme: ColorScheme.fromSwatch(
-      accentColor: Colors.blue,
-    ).copyWith(secondary: Colors.blue),
-    toggleableActiveColor: Colors.blue,
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.blue),
-      ),
-    ),
-    indicatorColor: Colors.blue,
-  ),
-  AppTheme.darkBlue: ThemeData(
-    colorScheme: ColorScheme.fromSwatch(
-      brightness: Brightness.dark,
-      accentColor: Colors.blue,
-    ).copyWith(secondary: Colors.blue),
-    toggleableActiveColor: Colors.blue,
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.blue),
-      ),
-    ),
-    indicatorColor: Colors.blue,
-  ),
-  AppTheme.lightRed: ThemeData(
-    colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: Colors.red,
-      accentColor: Colors.red,
-    ).copyWith(secondary: Colors.red),
-    toggleableActiveColor: Colors.red,
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.red),
-      ),
-    ),
-    indicatorColor: Colors.red,
-  ),
-  AppTheme.darkRed: ThemeData(
-    colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: Colors.red,
-      brightness: Brightness.dark,
-      accentColor: Colors.red,
-    ).copyWith(secondary: Colors.red),
-    toggleableActiveColor: Colors.red,
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.red),
-      ),
-    ),
-    indicatorColor: Colors.red,
-  ),
-};

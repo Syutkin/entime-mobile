@@ -1,12 +1,12 @@
+import 'package:filesize/filesize.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../common/utils/file_utils.dart';
 import '../bloc/update_bloc.dart';
 
 class Updater extends StatelessWidget {
-  const Updater({Key? key}) : super(key: key);
+  const Updater({super.key});
 
   @override
   Widget build(BuildContext context) => BlocBuilder<UpdateBloc, UpdateState>(

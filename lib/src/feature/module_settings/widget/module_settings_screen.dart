@@ -9,7 +9,7 @@ import '../bloc/module_settings_bloc.dart';
 import 'popups.dart';
 
 class ModuleSettingsInitScreen extends StatelessWidget {
-  const ModuleSettingsInitScreen({Key? key}) : super(key: key);
+  const ModuleSettingsInitScreen({super.key});
 
   Future<bool> _onBackPressed(BuildContext context, bool updated) async {
     if (updated) {
@@ -22,7 +22,9 @@ class ModuleSettingsInitScreen extends StatelessWidget {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                BlocProvider.of<BluetoothBloc>(context).add( BluetoothEvent.sendMessage(message:  BlocProvider.of<ModuleSettingsBloc>(context)
+                BlocProvider.of<BluetoothBloc>(context).add(
+                  BluetoothEvent.sendMessage(
+                    message: BlocProvider.of<ModuleSettingsBloc>(context)
                         .moduleSettings
                         .write,
                   ),
@@ -36,7 +38,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
               child: Text(
                 MaterialLocalizations.of(context).cancelButtonLabel,
               ),
-            )
+            ),
           ],
         ),
       );
@@ -49,8 +51,21 @@ class ModuleSettingsInitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool updated = false;
-    return WillPopScope(
-      onWillPop: () async => _onBackPressed(context, updated),
+    // migration from WillPopScope to PopScope is taken from
+    // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, result) async {
+        if (didPop) {
+          return;
+        }
+        final NavigatorState navigator = Navigator.of(context);
+        final bool shouldPop = await _onBackPressed(context, updated);
+        if (shouldPop) {
+          navigator.pop();
+        }
+      },
+      // onWillPop: () async => _onBackPressed(context, updated),
       child: Scaffold(
         appBar: AppBar(
           title: Text(Localization.current.I18nModuleSettings_moduleSettings),
@@ -81,9 +96,9 @@ class ModuleSettingsScreen extends StatelessWidget {
   final VoidCallback onChanged;
 
   const ModuleSettingsScreen({
-    Key? key,
+    super.key,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
