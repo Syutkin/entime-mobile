@@ -69,9 +69,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   }
 
   @override
-  Future<void> connect(
-    BluetoothDevice bluetoothDevice,
-  ) async {
+  Future<void> connect(BluetoothDevice bluetoothDevice) async {
     BluetoothConnection.toAddress(bluetoothDevice.address).then((connection) {
       _connection = connection;
     }).catchError((error) {
