@@ -50,9 +50,11 @@ jobs:
           lcov -r coverage/lcov.info -o coverage/lcov.info "lib/**.freezed.dart" "lib/**.g.dart" "lib/src/common/localization/**.dart" "test/**.mocks.dart"
 
       - name: Upload to Codecov
-        uses: codecov/codecov-action@v3.1.0
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Buld APK
+      - name: Build APK
         run: flutter build apk --target-platform android-arm,android-arm64,android-x64 --split-per-abi
         env:
           KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
