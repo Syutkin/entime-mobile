@@ -43,4 +43,6 @@ jobs:
           lcov -r coverage/lcov.info -o coverage/lcov.info "lib/**.freezed.dart" "lib/**.g.dart" "lib/src/common/localization/**.dart" "test/**.mocks.dart"
         
       - name: Upload to Codecov
-        uses: codecov/codecov-action@v3.1.0
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
