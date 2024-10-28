@@ -2,20 +2,28 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/src/constants/pubspec.yaml.g.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
-import 'app_info_provider_test.mocks.dart';
+class MockAndroidDeviceInfo extends Mock implements AndroidDeviceInfo {}
 
-// Generate a MockClient using the Mockito package.
-// Create new instances of this class in each test.
-@GenerateMocks([AndroidDeviceInfo])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  late MockAndroidDeviceInfo deviceInfo;
+  late AppInfoProvider appInfoProvider;
+
+  setUpAll(() {
+    deviceInfo = MockAndroidDeviceInfo();
+  });
+
+  setUp(() async {
+    appInfoProvider = await AppInfoProvider.load(
+      deviceInfo: deviceInfo,
+    );
+  });
+
   group('AppInfoProvider:', () {
     test('Initialize', () async {
-      final deviceInfo = MockAndroidDeviceInfo();
-
       expect(
         await AppInfoProvider.load(
           deviceInfo: deviceInfo,
@@ -25,12 +33,6 @@ void main() {
     });
 
     test('Get appName', () async {
-      final deviceInfo = MockAndroidDeviceInfo();
-
-      final appInfoProvider = await AppInfoProvider.load(
-        deviceInfo: deviceInfo,
-      );
-
       expect(
         appInfoProvider.appName,
         Pubspec.name,
@@ -38,12 +40,6 @@ void main() {
     });
 
     test('Get buildNumber', () async {
-      final deviceInfo = MockAndroidDeviceInfo();
-
-      final appInfoProvider = await AppInfoProvider.load(
-        deviceInfo: deviceInfo,
-      );
-
       expect(
         appInfoProvider.buildNumber,
         Pubspec.version.build[0],
@@ -51,12 +47,6 @@ void main() {
     });
 
     test('Get version', () async {
-      final deviceInfo = MockAndroidDeviceInfo();
-
-      final appInfoProvider = await AppInfoProvider.load(
-        deviceInfo: deviceInfo,
-      );
-
       if (Pubspec.version.preRelease.isEmpty) {
         expect(
           appInfoProvider.version,
@@ -71,14 +61,8 @@ void main() {
     });
 
     test('Get supported abi', () async {
-      final deviceInfo = MockAndroidDeviceInfo();
-
-      final appInfoProvider = await AppInfoProvider.load(
-        deviceInfo: deviceInfo,
-      );
-
       when(
-        deviceInfo.supportedAbis,
+        () => deviceInfo.supportedAbis,
       ).thenAnswer((realInvocation) => ['arm64-v8a', 'armeabi-v7a', 'x86_64']);
 
       expect(
@@ -87,7 +71,7 @@ void main() {
       );
 
       when(
-        deviceInfo.supportedAbis,
+        () => deviceInfo.supportedAbis,
       ).thenAnswer((realInvocation) => ['armeabi-v7a', 'arm64-v8a', 'x86_64']);
 
       expect(
@@ -96,7 +80,7 @@ void main() {
       );
 
       when(
-        deviceInfo.supportedAbis,
+        () => deviceInfo.supportedAbis,
       ).thenAnswer((realInvocation) => ['1', '2', '3']);
 
       expect(
@@ -106,14 +90,8 @@ void main() {
     });
 
     test('Get deviceSupported32BitAbis', () async {
-      final deviceInfo = MockAndroidDeviceInfo();
-
-      final appInfoProvider = await AppInfoProvider.load(
-        deviceInfo: deviceInfo,
-      );
-
       when(
-        deviceInfo.supported32BitAbis,
+        () => deviceInfo.supported32BitAbis,
       ).thenAnswer((realInvocation) => ['armeabi-v7a']);
 
       expect(
@@ -123,14 +101,8 @@ void main() {
     });
 
     test('Get deviceSupported64BitAbis', () async {
-      final deviceInfo = MockAndroidDeviceInfo();
-
-      final appInfoProvider = await AppInfoProvider.load(
-        deviceInfo: deviceInfo,
-      );
-
       when(
-        deviceInfo.supported64BitAbis,
+        () => deviceInfo.supported64BitAbis,
       ).thenAnswer((realInvocation) => ['arm64-v8a', 'x86_64']);
 
       expect(
@@ -140,14 +112,8 @@ void main() {
     });
 
     test('Get deviceSupportedAbis', () async {
-      final deviceInfo = MockAndroidDeviceInfo();
-
-      final appInfoProvider = await AppInfoProvider.load(
-        deviceInfo: deviceInfo,
-      );
-
       when(
-        deviceInfo.supportedAbis,
+        () => deviceInfo.supportedAbis,
       ).thenAnswer((realInvocation) => ['armeabi-v7a', 'arm64-v8a', 'x86_64']);
 
       expect(

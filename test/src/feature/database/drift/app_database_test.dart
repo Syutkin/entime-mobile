@@ -13,7 +13,7 @@ void main() {
   int deltaInSeconds = 15;
 
   setUp(() {
-    db = AppDatabase.forTesting(DatabaseConnection(NativeDatabase.memory()));
+    db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory()));
 
     // populate DB
     for (var query in PopDB().queries) {
