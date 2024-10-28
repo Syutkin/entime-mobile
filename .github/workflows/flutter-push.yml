@@ -1,8 +1,12 @@
 name: Flutter PR
 
 on:
-  pull_request:
+  push:
     branches: [ master ]
+    paths:
+      - "**.dart"
+      - "!**.g.dart"
+      - "!**.freezed.dart"
 
 jobs:
   build:
