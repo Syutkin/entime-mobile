@@ -1,1054 +1,1085 @@
 {
-    "@@last_modified": "2022-08-07T09:47:21+0000",
-    "I18nUpdate_whatsNew": "What's new",
-    "@I18nUpdate_whatsNew": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nUpdate_connecting": "Connecting...",
-    "@I18nUpdate_connecting": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nUpdate_updateToVersion": "Update to {version}",
-    "@I18nUpdate_updateToVersion": {
-        "type": "text",
-        "placeholders_order": [
-            "version"
-        ],
-        "placeholders": {
-            "version": {}
-        }
-    },
-    "I18nUpdate_checkForUpdates": "Check for updates",
-    "@I18nUpdate_checkForUpdates": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nUpdate_changelog": "Changelog",
-    "@I18nUpdate_changelog": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nUpdate_downloaded": "{current} from {total}",
-    "@I18nUpdate_downloaded": {
-        "description": "Сколько скачано байт относительно общего количества",
-        "type": "text",
-        "placeholders_order": [
-            "current",
-            "total"
-        ],
-        "placeholders": {
-            "current": {},
-            "total": {}
-        }
-    },
-    "I18nSettings_settings": "Settings",
-    "@I18nSettings_settings": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_general": "General",
-    "@I18nSettings_general": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_bluetooth": "Bluetooth",
-    "@I18nSettings_bluetooth": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_reconnect": "Reconnect",
-    "@I18nSettings_reconnect": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_reconnectDescription": "Trying to reconnect when disconnected",
-    "@I18nSettings_reconnectDescription": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_sound": "Sound",
-    "@I18nSettings_sound": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_wakelock": "Wakelock",
-    "@I18nSettings_wakelock": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_countdown": "Countdown",
-    "@I18nSettings_countdown": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_voiceMessages": "Voice messages",
-    "@I18nSettings_voiceMessages": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_voice": "Voice",
-    "@I18nSettings_voice": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_participantsName": "Name the participants",
-    "@I18nSettings_participantsName": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_volume": "Volume",
-    "@I18nSettings_volume": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_pitch": "Pitch",
-    "@I18nSettings_pitch": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_rate": "Rate",
-    "@I18nSettings_rate": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_language": "Language",
-    "@I18nSettings_language": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_startScreen": "Start screen",
-    "@I18nSettings_startScreen": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_startButton": "Timestamp button",
-    "@I18nSettings_startButton": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_startButtonSize": "Timestamp button size",
-    "@I18nSettings_startButtonSize": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_pixelSize": "{size}px",
-    "@I18nSettings_pixelSize": {
-        "type": "text",
-        "placeholders_order": [
-            "size"
-        ],
-        "placeholders": {
-            "size": {}
-        }
-    },
-    "I18nSettings_startButtonSizeDescription": "Timestamp button size at start screen",
-    "@I18nSettings_startButtonSizeDescription": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_countdownAtStart": "Countdown",
-    "@I18nSettings_countdownAtStart": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_countdownAtStartSize": "Countdown size",
-    "@I18nSettings_countdownAtStartSize": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_replaceStartCountdown": "Replace start time with countdown",
-    "@I18nSettings_replaceStartCountdown": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_finishScreen": "Finish screen",
-    "@I18nSettings_finishScreen": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_delayForNewEvents": "Delay before show new timestamps",
-    "@I18nSettings_delayForNewEvents": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_milliseconds": "{milliseconds}ms",
-    "@I18nSettings_milliseconds": {
-        "type": "text",
-        "placeholders_order": [
-            "milliseconds"
-        ],
-        "placeholders": {
-            "milliseconds": {}
-        }
-    },
-    "I18nSettings_autosubstitution": "Autosubstitute numbers",
-    "@I18nSettings_autosubstitution": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_autosubstitutionDelay": "Delay before autosubstitute new numbers",
-    "@I18nSettings_autosubstitutionDelay": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_finishButton": "Timestamp button",
-    "@I18nSettings_finishButton": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_finishButtonSize": "Timestamp button size",
-    "@I18nSettings_finishButtonSize": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_finishButtonSizeDescription": "Timestamp button size at finish screen",
-    "@I18nSettings_finishButtonSizeDescription": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_update": "Update",
-    "@I18nSettings_update": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_checkUpdateAtStartup": "Check updates at startup",
-    "@I18nSettings_checkUpdateAtStartup": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_themes": "Themes",
-    "@I18nSettings_themes": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_journal": "Journal",
-    "@I18nSettings_journal": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_journalLinesNumber": "Number of records displayed",
-    "@I18nSettings_journalLinesNumber": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_defaults": "Defaults",
-    "@I18nSettings_defaults": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_resetToDefaults": "Reset to defaults",
-    "@I18nSettings_resetToDefaults": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_journalLinesNumberPopup": "Number of visible lines at journal",
-    "@I18nSettings_journalLinesNumberPopup": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_numberOfLines": "Number of lines",
-    "@I18nSettings_numberOfLines": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_enterNumber": "Enter positive number,\nempty or negative number -\nno limitation",
-    "@I18nSettings_enterNumber": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_delay": "Delay",
-    "@I18nSettings_delay": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_incorrectDelay": "Incorrect delay",
-    "@I18nSettings_incorrectDelay": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_voicePitch": "Voice pitch",
-    "@I18nSettings_voicePitch": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_voiceRate": "Voice rate",
-    "@I18nSettings_voiceRate": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_voiceVolume": "Voice volume",
-    "@I18nSettings_voiceVolume": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_lightBlue": "Light blue theme",
-    "@I18nSettings_lightBlue": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_darkBlue": "Dark blue theme",
-    "@I18nSettings_darkBlue": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_lightRed": "Light red theme",
-    "@I18nSettings_lightRed": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nSettings_darkRed": "Dark red theme",
-    "@I18nSettings_darkRed": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_enterFinishNumber": "Enter number for finished participant",
-    "@I18nProtocol_enterFinishNumber": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_number": "Number",
-    "@I18nProtocol_number": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_incorrectNumber": "Incorrect number",
-    "@I18nProtocol_incorrectNumber": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_warning": "Warning",
-    "@I18nProtocol_warning": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_updateNumber": "Finish time for participant with number {number} already setted. Set new value?",
-    "@I18nProtocol_updateNumber": {
-        "type": "text",
-        "placeholders_order": [
-            "number"
-        ],
-        "placeholders": {
-            "number": {}
-        }
-    },
-    "I18nProtocol_hide": "Hide",
-    "@I18nProtocol_hide": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_finishNumber": "Number {number} finished",
-    "@I18nProtocol_finishNumber": {
-        "type": "text",
-        "placeholders_order": [
-            "number"
-        ],
-        "placeholders": {
-            "number": {}
-        }
-    },
-    "I18nProtocol_clearNumber": "Clear number",
-    "@I18nProtocol_clearNumber": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_hideAll": "Hide all",
-    "@I18nProtocol_hideAll": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_didNotStart": "Did not start",
-    "@I18nProtocol_didNotStart": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_didNotFinish": "Did not finish",
-    "@I18nProtocol_didNotFinish": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_type": "Type",
-    "@I18nProtocol_type": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nProtocol_time": "Time",
-    "@I18nProtocol_time": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nBluetooth_unknownDevice": "Unknown device",
-    "@I18nBluetooth_unknownDevice": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nBluetooth_dbm": "dBm",
-    "@I18nBluetooth_dbm": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nBluetooth_selectDevice": "Select device",
-    "@I18nBluetooth_selectDevice": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nCountdown_countdown": "Countdown",
-    "@I18nCountdown_countdown": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nDrawer_settings": "Settings",
-    "@I18nDrawer_settings": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nDrawer_help": "Help",
-    "@I18nDrawer_help": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nDrawer_about": "About",
-    "@I18nDrawer_about": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nDrawer_version": "v{version}",
-    "@I18nDrawer_version": {
-        "type": "text",
-        "placeholders_order": [
-            "version"
-        ],
-        "placeholders": {
-            "version": {}
-        }
-    },
-    "I18nHelp_manual": "Manual",
-    "@I18nHelp_manual": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHelp_manualMd": "# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку \"Start\", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку \"Finish\", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  ",
-    "@I18nHelp_manualMd": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_updateAutomaticCorrection": "Участнику под номером {number} уже установлена стартовая поправка {prevCorrection}. Обновить её на {correction}?",
-    "@I18nHome_updateAutomaticCorrection": {
-        "type": "text",
-        "placeholders_order": [
-            "number",
-            "prevCorrection",
-            "correction"
-        ],
-        "placeholders": {
-            "number": {},
-            "prevCorrection": {},
-            "correction": {}
-        }
-    },
-    "I18nHome_equalStartTime": "Стартовое время {time} уже присвоено номеру {prevNumber}. Вы уверены что хотите установить одинаковое стартовое время для номеров {currentNumber} и {prevNumber}?\n",
-    "@I18nHome_equalStartTime": {
-        "type": "text",
-        "placeholders_order": [
-            "time",
-            "prevNumber",
-            "currentNumber"
-        ],
-        "placeholders": {
-            "time": {},
-            "prevNumber": {},
-            "currentNumber": {}
-        }
-    },
-    "I18nHome_updateAutomaticStartCorrection": "У номера {number} уже проставлена автоматическая стартовая отсечка: {automaticCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
-    "@I18nHome_updateAutomaticStartCorrection": {
-        "type": "text",
-        "placeholders_order": [
-            "number",
-            "automaticCorrection"
-        ],
-        "placeholders": {
-            "number": {},
-            "automaticCorrection": {}
-        }
-    },
-    "I18nHome_updateManualStartCorrection": "У номера {number} уже проставлена ручная стартовая отсечка: {manualCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
-    "@I18nHome_updateManualStartCorrection": {
-        "type": "text",
-        "placeholders_order": [
-            "number",
-            "manualCorrection"
-        ],
-        "placeholders": {
-            "number": {},
-            "manualCorrection": {}
-        }
-    },
-    "I18nHome_errorAddParticipant": "Error when adding participant! Press \"{cancelButtonLabel}\" to continue\n",
-    "@I18nHome_errorAddParticipant": {
-        "type": "text",
-        "placeholders_order": [
-            "cancelButtonLabel"
-        ],
-        "placeholders": {
-            "cancelButtonLabel": {}
-        }
-    },
-    "I18nHome_home": "Home",
-    "@I18nHome_home": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_start": "Start",
-    "@I18nHome_start": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_finish": "Finish",
-    "@I18nHome_finish": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_updateAvailable": "Update available",
-    "@I18nHome_updateAvailable": {
-        "type": "text",
-        "placeholders_order": [
-            "version"
-        ],
-        "placeholders": {
-            "version": {}
-        }
-    },
-    "I18nHome_update": "Update",
-    "@I18nHome_update": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_addRacer": "Add",
-    "@I18nHome_addRacer": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_share": "Share",
-    "@I18nHome_share": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_selectStartProtocol": "Start protocol",
-    "@I18nHome_selectStartProtocol": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_countdown": "Countdown",
-    "@I18nHome_countdown": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_fab": "FAB",
-    "@I18nHome_fab": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_importStartProtocolCsv": "Import start protocol",
-    "@I18nHome_importStartProtocolCsv": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_bluetooth": "Bluetooth",
-    "@I18nHome_bluetooth": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_hideMarked": "Hided",
-    "@I18nHome_hideMarked": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_hideNumbers": "With numbers",
-    "@I18nHome_hideNumbers": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_hideManual": "Manual",
-    "@I18nHome_hideManual": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nHome_setDefaults": "Defaults",
-    "@I18nHome_setDefaults": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nInit_startProtocol": "Start protocol",
-    "@I18nInit_startProtocol": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nInit_pressToSelect": "Press to select",
-    "@I18nInit_pressToSelect": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nInit_bluetoothModule": "Bluetooth module",
-    "@I18nInit_bluetoothModule": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nInit_selectFile": "Select file",
-    "@I18nInit_selectFile": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nInit_noData": "No data",
-    "@I18nInit_noData": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nInit_share": "Share",
-    "@I18nInit_share": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nInit_delete": "Delete",
-    "@I18nInit_delete": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nInit_dbFile": "Database file",
-    "@I18nInit_dbFile": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nLog_bluetoothInformation": "Bluetooth information",
-    "@I18nLog_bluetoothInformation": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_saveSettingsToModule": "Save settings to module?",
-    "@I18nModuleSettings_saveSettingsToModule": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_moduleSettings": "Module settings",
-    "@I18nModuleSettings_moduleSettings": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_errorLoadSettings": "Error load settings!",
-    "@I18nModuleSettings_errorLoadSettings": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_awaitingSettings": "Awaiting settings",
-    "@I18nModuleSettings_awaitingSettings": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_module": "Module",
-    "@I18nModuleSettings_module": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_buzzer": "Buzzer",
-    "@I18nModuleSettings_buzzer": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_shortFrequency": "Short beep frequency",
-    "@I18nModuleSettings_shortFrequency": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_selectShortFrequency": "Select short beep frequency",
-    "@I18nModuleSettings_selectShortFrequency": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_longFrequency": "Long beep frequency",
-    "@I18nModuleSettings_longFrequency": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_selectLongFrequency": "Select long beep frequency",
-    "@I18nModuleSettings_selectLongFrequency": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_noteFrequency": "Note {note}, {frequency}Hz",
-    "@I18nModuleSettings_noteFrequency": {
-        "type": "text",
-        "placeholders_order": [
-            "note",
-            "frequency"
-        ],
-        "placeholders": {
-            "note": {},
-            "frequency": {}
-        }
-    },
-    "I18nModuleSettings_lora": "LoRa",
-    "@I18nModuleSettings_lora": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_frequency": "Frequency",
-    "@I18nModuleSettings_frequency": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_frequencyHz": "{frequency} Hz",
-    "@I18nModuleSettings_frequencyHz": {
-        "type": "text",
-        "placeholders_order": [
-            "frequency"
-        ],
-        "placeholders": {
-            "frequency": {}
-        }
-    },
-    "I18nModuleSettings_txPower": "TX Power",
-    "@I18nModuleSettings_txPower": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_spreadingFactor": "Spreading Factor",
-    "@I18nModuleSettings_spreadingFactor": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_signalBandwidth": "Signal Bandwidth",
-    "@I18nModuleSettings_signalBandwidth": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_codingRateDenominator": "Coding Rate Denominator",
-    "@I18nModuleSettings_codingRateDenominator": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_preambleLength": "Preamble Length",
-    "@I18nModuleSettings_preambleLength": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_syncWord": "Sync Word",
-    "@I18nModuleSettings_syncWord": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_crc": "CRC",
-    "@I18nModuleSettings_crc": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_screen": "Screen",
-    "@I18nModuleSettings_screen": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_tft": "TFT",
-    "@I18nModuleSettings_tft": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_sleepMode": "Sleeping mode",
-    "@I18nModuleSettings_sleepMode": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_sleepModeSeconds": "{seconds, plural, =1 {{seconds} second} one {second} other {seconds}}",
-    "@I18nModuleSettings_sleepModeSeconds": {
-        "type": "text",
-        "placeholders_order": [
-            "seconds"
-        ],
-        "placeholders": {
-            "seconds": {}
-        }
-    },
-    "I18nModuleSettings_turnOnAtEvent": "Turn on after event",
-    "@I18nModuleSettings_turnOnAtEvent": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_bluetooth": "Bluetooth",
-    "@I18nModuleSettings_bluetooth": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_bluetoothModuleName": "Module name",
-    "@I18nModuleSettings_bluetoothModuleName": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_bluetoothModuleNumber": "Module number",
-    "@I18nModuleSettings_bluetoothModuleNumber": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_bluetoothNumber": "Number",
-    "@I18nModuleSettings_bluetoothNumber": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_enterBluetoothModuleNumber": "Enter module number",
-    "@I18nModuleSettings_enterBluetoothModuleNumber": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_wifi": "WiFi",
-    "@I18nModuleSettings_wifi": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_wifiNetwork": "Network",
-    "@I18nModuleSettings_wifiNetwork": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_enterWifiSsid": "Enter WiFi SSID",
-    "@I18nModuleSettings_enterWifiSsid": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_enterWifiPassword": "Enter password for {ssid}",
-    "@I18nModuleSettings_enterWifiPassword": {
-        "type": "text",
-        "placeholders_order": [
-            "ssid"
-        ],
-        "placeholders": {
-            "ssid": {}
-        }
-    },
-    "I18nModuleSettings_password": "Password",
-    "@I18nModuleSettings_password": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_vcc": "VCC",
-    "@I18nModuleSettings_vcc": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_resistor1": "R1",
-    "@I18nModuleSettings_resistor1": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_resistor2": "R2",
-    "@I18nModuleSettings_resistor2": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_ohm": "Ohm",
-    "@I18nModuleSettings_ohm": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_resistorOhm": "{ohm} Ohm",
-    "@I18nModuleSettings_resistorOhm": {
-        "type": "text",
-        "placeholders_order": [
-            "ohm"
-        ],
-        "placeholders": {
-            "ohm": {}
-        }
-    },
-    "I18nModuleSettings_enterResistor1": "Enter resistor 1 value",
-    "@I18nModuleSettings_enterResistor1": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_enterResistor2": "Enter resistor 2 value",
-    "@I18nModuleSettings_enterResistor2": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_enterMeasuredVoltage": "Enter measured voltage",
-    "@I18nModuleSettings_enterMeasuredVoltage": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_mv": "mV",
-    "@I18nModuleSettings_mv": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_enterCurrentVoltage": "Enter current voltage at batteries",
-    "@I18nModuleSettings_enterCurrentVoltage": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_brightness": "Brightness",
-    "@I18nModuleSettings_brightness": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_setBrightness": "Set panel brightness",
-    "@I18nModuleSettings_setBrightness": {
-        "type": "text",
-        "placeholders_order": [],
-        "placeholders": {}
-    },
-    "I18nModuleSettings_brightnessInt": "Brightness {brightness}",
-    "@I18nModuleSettings_brightnessInt": {
-        "type": "text",
-        "placeholders_order": [
-            "brightness"
-        ],
-        "placeholders": {
-            "brightness": {}
-        }
-    },
-    "I18nModuleSettings_unknownModuleType": "Unknown module type: {type}",
-    "@I18nModuleSettings_unknownModuleType": {
-        "type": "text",
-        "placeholders_order": [
-            "type"
-        ],
-        "placeholders": {
-            "type": {}
-        }
-    }
+	"@@last_modified": "2022-08-07T09:47:21+0000",
+	"I18nUpdate_whatsNew": "What's new",
+	"@I18nUpdate_whatsNew": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nUpdate_connecting": "Connecting...",
+	"@I18nUpdate_connecting": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nUpdate_updateToVersion": "Update to {version}",
+	"@I18nUpdate_updateToVersion": {
+		"type": "text",
+		"placeholders_order": [
+			"version"
+		],
+		"placeholders": {
+			"version": {}
+		}
+	},
+	"I18nUpdate_checkForUpdates": "Check for updates",
+	"@I18nUpdate_checkForUpdates": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nUpdate_changelog": "Changelog",
+	"@I18nUpdate_changelog": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nUpdate_downloaded": "{current} from {total}",
+	"@I18nUpdate_downloaded": {
+		"description": "Сколько скачано байт относительно общего количества",
+		"type": "text",
+		"placeholders_order": [
+			"current",
+			"total"
+		],
+		"placeholders": {
+			"current": {},
+			"total": {}
+		}
+	},
+	"I18nSettings_settings": "Settings",
+	"@I18nSettings_settings": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_general": "General",
+	"@I18nSettings_general": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_reconnect": "Reconnect",
+	"@I18nSettings_reconnect": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_reconnectDescription": "Trying to reconnect when disconnected",
+	"@I18nSettings_reconnectDescription": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_sound": "Sound",
+	"@I18nSettings_sound": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_wakelock": "Wakelock",
+	"@I18nSettings_wakelock": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_countdown": "Countdown",
+	"@I18nSettings_countdown": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_voiceMessages": "Voice messages",
+	"@I18nSettings_voiceMessages": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_voice": "Voice",
+	"@I18nSettings_voice": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_participantsName": "Name the participants",
+	"@I18nSettings_participantsName": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_volume": "Volume",
+	"@I18nSettings_volume": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_pitch": "Pitch",
+	"@I18nSettings_pitch": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_rate": "Rate",
+	"@I18nSettings_rate": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_language": "Language",
+	"@I18nSettings_language": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_startScreen": "Start screen",
+	"@I18nSettings_startScreen": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_startButton": "Timestamp button",
+	"@I18nSettings_startButton": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_startButtonSize": "Timestamp button size",
+	"@I18nSettings_startButtonSize": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_pixelSize": "{size}px",
+	"@I18nSettings_pixelSize": {
+		"type": "text",
+		"placeholders_order": [
+			"size"
+		],
+		"placeholders": {
+			"size": {}
+		}
+	},
+	"I18nSettings_startButtonSizeDescription": "Timestamp button size at start screen",
+	"@I18nSettings_startButtonSizeDescription": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_countdownAtStart": "Countdown",
+	"@I18nSettings_countdownAtStart": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_countdownAtStartSize": "Countdown size",
+	"@I18nSettings_countdownAtStartSize": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_replaceStartCountdown": "Replace start time with countdown",
+	"@I18nSettings_replaceStartCountdown": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_finishScreen": "Finish screen",
+	"@I18nSettings_finishScreen": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_delayForNewEvents": "Delay before show new timestamps",
+	"@I18nSettings_delayForNewEvents": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_milliseconds": "{milliseconds}ms",
+	"@I18nSettings_milliseconds": {
+		"type": "text",
+		"placeholders_order": [
+			"milliseconds"
+		],
+		"placeholders": {
+			"milliseconds": {}
+		}
+	},
+	"I18nSettings_autosubstitution": "Autosubstitute numbers",
+	"@I18nSettings_autosubstitution": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_autosubstitutionDelay": "Delay before autosubstitute new numbers",
+	"@I18nSettings_autosubstitutionDelay": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_finishButton": "Timestamp button",
+	"@I18nSettings_finishButton": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_finishButtonSize": "Timestamp button size",
+	"@I18nSettings_finishButtonSize": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_finishButtonSizeDescription": "Timestamp button size at finish screen",
+	"@I18nSettings_finishButtonSizeDescription": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_update": "Update",
+	"@I18nSettings_update": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_checkUpdateAtStartup": "Check updates at startup",
+	"@I18nSettings_checkUpdateAtStartup": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_themes": "Themes",
+	"@I18nSettings_themes": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_journal": "Journal",
+	"@I18nSettings_journal": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_journalLinesNumber": "Number of records displayed",
+	"@I18nSettings_journalLinesNumber": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_defaults": "Defaults",
+	"@I18nSettings_defaults": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_resetToDefaults": "Reset to defaults",
+	"@I18nSettings_resetToDefaults": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_journalLinesNumberPopup": "Number of visible lines at journal",
+	"@I18nSettings_journalLinesNumberPopup": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_numberOfLines": "Number of lines",
+	"@I18nSettings_numberOfLines": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_enterNumber": "Enter positive number,\nempty or negative number -\nno limitation",
+	"@I18nSettings_enterNumber": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_delay": "Delay",
+	"@I18nSettings_delay": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_incorrectDelay": "Incorrect delay",
+	"@I18nSettings_incorrectDelay": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_voicePitch": "Voice pitch",
+	"@I18nSettings_voicePitch": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_voiceRate": "Voice rate",
+	"@I18nSettings_voiceRate": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_voiceVolume": "Voice volume",
+	"@I18nSettings_voiceVolume": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_lightBlue": "Light blue theme",
+	"@I18nSettings_lightBlue": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_darkBlue": "Dark blue theme",
+	"@I18nSettings_darkBlue": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_lightRed": "Light red theme",
+	"@I18nSettings_lightRed": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nSettings_darkRed": "Dark red theme",
+	"@I18nSettings_darkRed": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_enterFinishNumber": "Enter number for finished participant",
+	"@I18nProtocol_enterFinishNumber": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_number": "Number",
+	"@I18nProtocol_number": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_incorrectNumber": "Incorrect number",
+	"@I18nProtocol_incorrectNumber": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_warning": "Warning",
+	"@I18nProtocol_warning": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_updateNumber": "Finish time for participant with number {number} already setted. Set new value?",
+	"@I18nProtocol_updateNumber": {
+		"type": "text",
+		"placeholders_order": [
+			"number"
+		],
+		"placeholders": {
+			"number": {}
+		}
+	},
+	"I18nProtocol_hide": "Hide",
+	"@I18nProtocol_hide": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_finishNumber": "Number {number} finished",
+	"@I18nProtocol_finishNumber": {
+		"type": "text",
+		"placeholders_order": [
+			"number"
+		],
+		"placeholders": {
+			"number": {}
+		}
+	},
+	"I18nProtocol_clearNumber": "Clear number",
+	"@I18nProtocol_clearNumber": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_hideAll": "Hide all",
+	"@I18nProtocol_hideAll": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_didNotStart": "Did not start",
+	"@I18nProtocol_didNotStart": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_didNotFinish": "Did not finish",
+	"@I18nProtocol_didNotFinish": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_type": "Type",
+	"@I18nProtocol_type": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nProtocol_time": "Time",
+	"@I18nProtocol_time": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nBluetooth_unknownDevice": "Unknown device",
+	"@I18nBluetooth_unknownDevice": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nBluetooth_dbm": "dBm",
+	"@I18nBluetooth_dbm": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nBluetooth_selectDevice": "Select device",
+	"@I18nBluetooth_selectDevice": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nCountdown_countdown": "Countdown",
+	"@I18nCountdown_countdown": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nDrawer_settings": "Settings",
+	"@I18nDrawer_settings": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nDrawer_help": "Help",
+	"@I18nDrawer_help": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nDrawer_about": "About",
+	"@I18nDrawer_about": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nDrawer_version": "v{version}",
+	"@I18nDrawer_version": {
+		"type": "text",
+		"placeholders_order": [
+			"version"
+		],
+		"placeholders": {
+			"version": {}
+		}
+	},
+	"I18nHelp_manual": "Manual",
+	"@I18nHelp_manual": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHelp_manualMd": "# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку \"Start\", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку \"Finish\", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  ",
+	"@I18nHelp_manualMd": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_updateAutomaticCorrection": "Участнику под номером {number} уже установлена стартовая поправка {prevCorrection}. Обновить её на {correction}?",
+	"@I18nHome_updateAutomaticCorrection": {
+		"type": "text",
+		"placeholders_order": [
+			"number",
+			"prevCorrection",
+			"correction"
+		],
+		"placeholders": {
+			"number": {},
+			"prevCorrection": {},
+			"correction": {}
+		}
+	},
+	"I18nHome_equalStartTime": "Стартовое время {time} уже присвоено номеру {prevNumber}. Вы уверены что хотите установить одинаковое стартовое время для номеров {currentNumber} и {prevNumber}?\n",
+	"@I18nHome_equalStartTime": {
+		"type": "text",
+		"placeholders_order": [
+			"time",
+			"prevNumber",
+			"currentNumber"
+		],
+		"placeholders": {
+			"time": {},
+			"prevNumber": {},
+			"currentNumber": {}
+		}
+	},
+	"I18nHome_updateAutomaticStartCorrection": "У номера {number} уже проставлена автоматическая стартовая отсечка: {automaticCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
+	"@I18nHome_updateAutomaticStartCorrection": {
+		"type": "text",
+		"placeholders_order": [
+			"number",
+			"automaticCorrection"
+		],
+		"placeholders": {
+			"number": {},
+			"automaticCorrection": {}
+		}
+	},
+	"I18nHome_updateManualStartCorrection": "У номера {number} уже проставлена ручная стартовая отсечка: {manualCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
+	"@I18nHome_updateManualStartCorrection": {
+		"type": "text",
+		"placeholders_order": [
+			"number",
+			"manualCorrection"
+		],
+		"placeholders": {
+			"number": {},
+			"manualCorrection": {}
+		}
+	},
+	"I18nHome_errorAddParticipant": "Error when adding participant! Press \"{cancelButtonLabel}\" to continue\n",
+	"@I18nHome_errorAddParticipant": {
+		"type": "text",
+		"placeholders_order": [
+			"cancelButtonLabel"
+		],
+		"placeholders": {
+			"cancelButtonLabel": {}
+		}
+	},
+	"I18nHome_home": "Home",
+	"@I18nHome_home": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_start": "Start",
+	"@I18nHome_start": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_finish": "Finish",
+	"@I18nHome_finish": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_updateAvailable": "Update available",
+	"@I18nHome_updateAvailable": {
+		"type": "text",
+		"placeholders_order": [
+			"version"
+		],
+		"placeholders": {
+			"version": {}
+		}
+	},
+	"I18nHome_update": "Update",
+	"@I18nHome_update": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_addRacer": "Add",
+	"@I18nHome_addRacer": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_share": "Share",
+	"@I18nHome_share": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_selectStartProtocol": "Start protocol",
+	"@I18nHome_selectStartProtocol": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_countdown": "Countdown",
+	"@I18nHome_countdown": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_fab": "FAB",
+	"@I18nHome_fab": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_importStartProtocolCsv": "Import start protocol",
+	"@I18nHome_importStartProtocolCsv": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_bluetooth": "Bluetooth",
+	"@I18nHome_bluetooth": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_hideMarked": "Hided",
+	"@I18nHome_hideMarked": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_hideNumbers": "With numbers",
+	"@I18nHome_hideNumbers": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_hideManual": "Manual",
+	"@I18nHome_hideManual": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nHome_setDefaults": "Defaults",
+	"@I18nHome_setDefaults": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nInit_pressToSelect": "Press to select",
+	"@I18nInit_pressToSelect": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nInit_bluetoothModule": "Bluetooth module",
+	"@I18nInit_bluetoothModule": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nInit_selectFile": "Select file",
+	"@I18nInit_selectFile": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nInit_noData": "No data",
+	"@I18nInit_noData": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nInit_share": "Share",
+	"@I18nInit_share": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nInit_delete": "Delete",
+	"@I18nInit_delete": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nLog_bluetoothInformation": "Bluetooth information",
+	"@I18nLog_bluetoothInformation": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_saveSettingsToModule": "Save settings to module?",
+	"@I18nModuleSettings_saveSettingsToModule": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_moduleSettings": "Module settings",
+	"@I18nModuleSettings_moduleSettings": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_errorLoadSettings": "Error load settings!",
+	"@I18nModuleSettings_errorLoadSettings": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_awaitingSettings": "Awaiting settings",
+	"@I18nModuleSettings_awaitingSettings": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_module": "Module",
+	"@I18nModuleSettings_module": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_buzzer": "Buzzer",
+	"@I18nModuleSettings_buzzer": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_shortFrequency": "Short beep frequency",
+	"@I18nModuleSettings_shortFrequency": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_selectShortFrequency": "Select short beep frequency",
+	"@I18nModuleSettings_selectShortFrequency": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_longFrequency": "Long beep frequency",
+	"@I18nModuleSettings_longFrequency": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_selectLongFrequency": "Select long beep frequency",
+	"@I18nModuleSettings_selectLongFrequency": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_noteFrequency": "Note {note}, {frequency}Hz",
+	"@I18nModuleSettings_noteFrequency": {
+		"type": "text",
+		"placeholders_order": [
+			"note",
+			"frequency"
+		],
+		"placeholders": {
+			"note": {},
+			"frequency": {}
+		}
+	},
+	"I18nModuleSettings_lora": "LoRa",
+	"@I18nModuleSettings_lora": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_frequency": "Frequency",
+	"@I18nModuleSettings_frequency": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_frequencyHz": "{frequency} Hz",
+	"@I18nModuleSettings_frequencyHz": {
+		"type": "text",
+		"placeholders_order": [
+			"frequency"
+		],
+		"placeholders": {
+			"frequency": {}
+		}
+	},
+	"I18nModuleSettings_txPower": "TX Power",
+	"@I18nModuleSettings_txPower": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_spreadingFactor": "Spreading Factor",
+	"@I18nModuleSettings_spreadingFactor": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_signalBandwidth": "Signal Bandwidth",
+	"@I18nModuleSettings_signalBandwidth": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_codingRateDenominator": "Coding Rate Denominator",
+	"@I18nModuleSettings_codingRateDenominator": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_preambleLength": "Preamble Length",
+	"@I18nModuleSettings_preambleLength": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_syncWord": "Sync Word",
+	"@I18nModuleSettings_syncWord": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_crc": "CRC",
+	"@I18nModuleSettings_crc": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_screen": "Screen",
+	"@I18nModuleSettings_screen": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_tft": "TFT",
+	"@I18nModuleSettings_tft": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_sleepMode": "Sleeping mode",
+	"@I18nModuleSettings_sleepMode": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_sleepModeSeconds": "{seconds, plural, =1 {{seconds} second} one {second} other {seconds}}",
+	"@I18nModuleSettings_sleepModeSeconds": {
+		"type": "text",
+		"placeholders_order": [
+			"seconds"
+		],
+		"placeholders": {
+			"seconds": {}
+		}
+	},
+	"I18nModuleSettings_turnOnAtEvent": "Turn on after event",
+	"@I18nModuleSettings_turnOnAtEvent": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_bluetooth": "Bluetooth",
+	"@I18nModuleSettings_bluetooth": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_bluetoothModuleName": "Module name",
+	"@I18nModuleSettings_bluetoothModuleName": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_bluetoothModuleNumber": "Module number",
+	"@I18nModuleSettings_bluetoothModuleNumber": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_bluetoothNumber": "Number",
+	"@I18nModuleSettings_bluetoothNumber": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_enterBluetoothModuleNumber": "Enter module number",
+	"@I18nModuleSettings_enterBluetoothModuleNumber": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_wifi": "WiFi",
+	"@I18nModuleSettings_wifi": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_wifiNetwork": "Network",
+	"@I18nModuleSettings_wifiNetwork": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_enterWifiSsid": "Enter WiFi SSID",
+	"@I18nModuleSettings_enterWifiSsid": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_enterWifiPassword": "Enter password for {ssid}",
+	"@I18nModuleSettings_enterWifiPassword": {
+		"type": "text",
+		"placeholders_order": [
+			"ssid"
+		],
+		"placeholders": {
+			"ssid": {}
+		}
+	},
+	"I18nModuleSettings_password": "Password",
+	"@I18nModuleSettings_password": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_vcc": "VCC",
+	"@I18nModuleSettings_vcc": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_resistor1": "R1",
+	"@I18nModuleSettings_resistor1": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_resistor2": "R2",
+	"@I18nModuleSettings_resistor2": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_ohm": "Ohm",
+	"@I18nModuleSettings_ohm": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_resistorOhm": "{ohm} Ohm",
+	"@I18nModuleSettings_resistorOhm": {
+		"type": "text",
+		"placeholders_order": [
+			"ohm"
+		],
+		"placeholders": {
+			"ohm": {}
+		}
+	},
+	"I18nModuleSettings_enterResistor1": "Enter resistor 1 value",
+	"@I18nModuleSettings_enterResistor1": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_enterResistor2": "Enter resistor 2 value",
+	"@I18nModuleSettings_enterResistor2": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_enterMeasuredVoltage": "Enter measured voltage",
+	"@I18nModuleSettings_enterMeasuredVoltage": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_mv": "mV",
+	"@I18nModuleSettings_mv": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_enterCurrentVoltage": "Enter current voltage at batteries",
+	"@I18nModuleSettings_enterCurrentVoltage": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_brightness": "Brightness",
+	"@I18nModuleSettings_brightness": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_setBrightness": "Set panel brightness",
+	"@I18nModuleSettings_setBrightness": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_brightnessInt": "Brightness {brightness}",
+	"@I18nModuleSettings_brightnessInt": {
+		"type": "text",
+		"placeholders_order": [
+			"brightness"
+		],
+		"placeholders": {
+			"brightness": {}
+		}
+	},
+	"I18nModuleSettings_unknownModuleType": "Unknown module type: {type}",
+	"@I18nModuleSettings_unknownModuleType": {
+		"type": "text",
+		"placeholders_order": [
+			"type"
+		],
+		"placeholders": {
+			"type": {}
+		}
+	},
+	"I18nCore_correction": "Correction",
+	"I18nCore_delete": "Delete",
+	"I18nCore_edit": "Edit",
+	"I18nCore_warning": "Warning",
+	"I18nDatabase_addRace": "Create a competition",
+	"I18nDatabase_addStage": "Create a stage",
+	"I18nDatabase_enterRaceName": "Enter the name of the competition",
+	"I18nDatabase_enterStageName": "Enter the name of the stage",
+	"I18nDatabase_raceDates": "Dates of Conduct",
+	"I18nDatabase_raceName": "Competition name",
+	"I18nDatabase_races": "Competitions",
+	"I18nDatabase_stageName": "Stage name",
+	"I18nDatabase_trail": "Trail",
+	"I18nHome_countdownPage": "Countdown page",
+	"I18nInit_importFromCsv": "Import protocol from csv",
+	"I18nInit_selectRace": "Select the competition",
+	"I18nInit_selectStage": "Select the stage",
+	"I18nNtp_ntpOffset": "NTP offset",
+	"I18nNtp_offsetInMilliseconds": "{offset,plural, =1{{offset} millisecond offset}other{{offset} milliseconds offset}}",
+	"I18nNtp_sync": "Press to sync",
+	"I18nNtp_syncError": "Synchronization error",
+	"I18nNtp_syncing": "Syncing...",
+	"I18nProtocol_shareFinishResults": "Results of the finish of the race {raceName}, stage {stageName}",
+	"I18nProtocol_shareStartResults": "Results of the race {raceName}, stage {stageName}",
+	"I18nSettings_brightness": "Light theme",
+	"I18nSettings_countdownFromApp": "Use the app's time",
+	"I18nSettings_countdownFromAppDetails": "For playback without a module",
+	"I18nSettings_ntpOffset": "NTP offset",
+	"I18nSettings_ntpOffsetDescription": "Synchronize on application startup",
+	"I18nSettings_voiceFromApp": "Use the app's time",
+	"I18nSettings_voiceFromAppDetails": "For playback without a module",
+	"I18nSettings_voiceLanguage": "Language",
+	"I18nStart_addParticipant": "Add participant",
+	"I18nStart_didNotStart": "Did not start",
+	"I18nStart_incorrectCorrection": "Incorrect correction",
+	"I18nStart_incorrectTime": "Incorrect time",
+	"I18nStart_participantCategory": "Category: {category}",
+	"I18nStart_participantCity": "City: {city}",
+	"I18nStart_participantNickname": "Nickname: {nickname}",
+	"I18nStart_participantNumber": "Participant No. {number}",
+	"I18nStart_participantNumberWithName": "No. {number}, {name}",
+	"I18nStart_participantTeam": "Team: {team}",
+	"I18nStart_participantYear": "Year/Age: {year}",
+	"I18nStart_sliverAutomaticCorrection": "Auto\ncorrection",
+	"I18nStart_sliverManualCorrection": "Manual\nCorrection",
+	"I18nStart_sliverNumber": "No.",
+	"I18nStart_sliverStart": "Start",
+	"I18nStart_startTime": "Start Time",
+	"I18nStart_startTimeAtSmartphone": "App's start time"
 }

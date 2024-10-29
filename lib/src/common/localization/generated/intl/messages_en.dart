@@ -54,18 +54,41 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m13(type) => "Unknown module type: ${type}";
 
-  static String m14(number) => "Number ${number} finished";
+  static String m14(offset) =>
+      "${Intl.plural(offset, one: '${offset} millisecond offset', other: '${offset} milliseconds offset')}";
 
-  static String m15(number) =>
+  static String m15(number) => "Number ${number} finished";
+
+  static String m16(raceName, stageName) =>
+      "Results of the finish of the race ${raceName}, stage ${stageName}";
+
+  static String m17(raceName, stageName) =>
+      "Results of the race ${raceName}, stage ${stageName}";
+
+  static String m18(number) =>
       "Finish time for participant with number ${number} already setted. Set new value?";
 
-  static String m16(milliseconds) => "${milliseconds}ms";
+  static String m19(milliseconds) => "${milliseconds}ms";
 
-  static String m17(size) => "${size}px";
+  static String m20(size) => "${size}px";
 
-  static String m18(current, total) => "${current} from ${total}";
+  static String m21(category) => "Category: ${category}";
 
-  static String m19(version) => "Update to ${version}";
+  static String m22(city) => "City: ${city}";
+
+  static String m23(nickname) => "Nickname: ${nickname}";
+
+  static String m24(number) => "Participant No. ${number}";
+
+  static String m25(number, name) => "No. ${number}, ${name}";
+
+  static String m26(team) => "Team: ${team}";
+
+  static String m27(year) => "Year/Age: ${year}";
+
+  static String m28(current, total) => "${current} from ${total}";
+
+  static String m29(version) => "Update to ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -74,8 +97,30 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select device"),
         "I18nBluetooth_unknownDevice":
             MessageLookupByLibrary.simpleMessage("Unknown device"),
+        "I18nCore_correction":
+            MessageLookupByLibrary.simpleMessage("Correction"),
+        "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "I18nCore_edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "I18nCore_warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "I18nCountdown_countdown":
             MessageLookupByLibrary.simpleMessage("Countdown"),
+        "I18nDatabase_addRace":
+            MessageLookupByLibrary.simpleMessage("Create a competition"),
+        "I18nDatabase_addStage":
+            MessageLookupByLibrary.simpleMessage("Create a stage"),
+        "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
+            "Enter the name of the competition"),
+        "I18nDatabase_enterStageName":
+            MessageLookupByLibrary.simpleMessage("Enter the name of the stage"),
+        "I18nDatabase_raceDates":
+            MessageLookupByLibrary.simpleMessage("Dates of Conduct"),
+        "I18nDatabase_raceName":
+            MessageLookupByLibrary.simpleMessage("Competition name"),
+        "I18nDatabase_races":
+            MessageLookupByLibrary.simpleMessage("Competitions"),
+        "I18nDatabase_stageName":
+            MessageLookupByLibrary.simpleMessage("Stage name"),
+        "I18nDatabase_trail": MessageLookupByLibrary.simpleMessage("Trail"),
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("About"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Help"),
         "I18nDrawer_settings": MessageLookupByLibrary.simpleMessage("Settings"),
@@ -86,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nHome_addRacer": MessageLookupByLibrary.simpleMessage("Add"),
         "I18nHome_bluetooth": MessageLookupByLibrary.simpleMessage("Bluetooth"),
         "I18nHome_countdown": MessageLookupByLibrary.simpleMessage("Countdown"),
+        "I18nHome_countdownPage":
+            MessageLookupByLibrary.simpleMessage("Countdown page"),
         "I18nHome_equalStartTime": m1,
         "I18nHome_errorAddParticipant": m2,
         "I18nHome_fab": MessageLookupByLibrary.simpleMessage("FAB"),
@@ -111,11 +158,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nInit_bluetoothModule":
             MessageLookupByLibrary.simpleMessage("Bluetooth module"),
         "I18nInit_delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "I18nInit_importFromCsv":
+            MessageLookupByLibrary.simpleMessage("Import protocol from csv"),
         "I18nInit_noData": MessageLookupByLibrary.simpleMessage("No data"),
         "I18nInit_pressToSelect":
             MessageLookupByLibrary.simpleMessage("Press to select"),
         "I18nInit_selectFile":
             MessageLookupByLibrary.simpleMessage("Select file"),
+        "I18nInit_selectRace":
+            MessageLookupByLibrary.simpleMessage("Select the competition"),
+        "I18nInit_selectStage":
+            MessageLookupByLibrary.simpleMessage("Select the stage"),
         "I18nInit_share": MessageLookupByLibrary.simpleMessage("Share"),
         "I18nLog_bluetoothInformation":
             MessageLookupByLibrary.simpleMessage("Bluetooth information"),
@@ -206,6 +259,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nModuleSettings_wifi": MessageLookupByLibrary.simpleMessage("WiFi"),
         "I18nModuleSettings_wifiNetwork":
             MessageLookupByLibrary.simpleMessage("Network"),
+        "I18nNtp_ntpOffset": MessageLookupByLibrary.simpleMessage("NTP offset"),
+        "I18nNtp_offsetInMilliseconds": m14,
+        "I18nNtp_sync": MessageLookupByLibrary.simpleMessage("Press to sync"),
+        "I18nNtp_syncError":
+            MessageLookupByLibrary.simpleMessage("Synchronization error"),
+        "I18nNtp_syncing": MessageLookupByLibrary.simpleMessage("Syncing..."),
         "I18nProtocol_clearNumber":
             MessageLookupByLibrary.simpleMessage("Clear number"),
         "I18nProtocol_didNotFinish":
@@ -214,22 +273,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Did not start"),
         "I18nProtocol_enterFinishNumber": MessageLookupByLibrary.simpleMessage(
             "Enter number for finished participant"),
-        "I18nProtocol_finishNumber": m14,
+        "I18nProtocol_finishNumber": m15,
         "I18nProtocol_hide": MessageLookupByLibrary.simpleMessage("Hide"),
         "I18nProtocol_hideAll":
             MessageLookupByLibrary.simpleMessage("Hide all"),
         "I18nProtocol_incorrectNumber":
             MessageLookupByLibrary.simpleMessage("Incorrect number"),
         "I18nProtocol_number": MessageLookupByLibrary.simpleMessage("Number"),
+        "I18nProtocol_shareFinishResults": m16,
+        "I18nProtocol_shareStartResults": m17,
         "I18nProtocol_time": MessageLookupByLibrary.simpleMessage("Time"),
         "I18nProtocol_type": MessageLookupByLibrary.simpleMessage("Type"),
-        "I18nProtocol_updateNumber": m15,
+        "I18nProtocol_updateNumber": m18,
         "I18nProtocol_warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "I18nSettings_autosubstitution":
             MessageLookupByLibrary.simpleMessage("Autosubstitute numbers"),
         "I18nSettings_autosubstitutionDelay":
             MessageLookupByLibrary.simpleMessage(
                 "Delay before autosubstitute new numbers"),
+        "I18nSettings_brightness":
+            MessageLookupByLibrary.simpleMessage("Light theme"),
         "I18nSettings_checkUpdateAtStartup":
             MessageLookupByLibrary.simpleMessage("Check updates at startup"),
         "I18nSettings_countdown":
@@ -238,6 +301,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Countdown"),
         "I18nSettings_countdownAtStartSize":
             MessageLookupByLibrary.simpleMessage("Countdown size"),
+        "I18nSettings_countdownFromApp":
+            MessageLookupByLibrary.simpleMessage("Use the app\'s time"),
+        "I18nSettings_countdownFromAppDetails":
+            MessageLookupByLibrary.simpleMessage(
+                "For playback without a module"),
         "I18nSettings_darkBlue":
             MessageLookupByLibrary.simpleMessage("Dark blue theme"),
         "I18nSettings_darkRed":
@@ -273,13 +341,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Light blue theme"),
         "I18nSettings_lightRed":
             MessageLookupByLibrary.simpleMessage("Light red theme"),
-        "I18nSettings_milliseconds": m16,
+        "I18nSettings_milliseconds": m19,
+        "I18nSettings_ntpOffset":
+            MessageLookupByLibrary.simpleMessage("NTP offset"),
+        "I18nSettings_ntpOffsetDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "Synchronize on application startup"),
         "I18nSettings_numberOfLines":
             MessageLookupByLibrary.simpleMessage("Number of lines"),
         "I18nSettings_participantsName":
             MessageLookupByLibrary.simpleMessage("Name the participants"),
         "I18nSettings_pitch": MessageLookupByLibrary.simpleMessage("Pitch"),
-        "I18nSettings_pixelSize": m17,
+        "I18nSettings_pixelSize": m20,
         "I18nSettings_rate": MessageLookupByLibrary.simpleMessage("Rate"),
         "I18nSettings_reconnect":
             MessageLookupByLibrary.simpleMessage("Reconnect"),
@@ -306,6 +379,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_themes": MessageLookupByLibrary.simpleMessage("Themes"),
         "I18nSettings_update": MessageLookupByLibrary.simpleMessage("Update"),
         "I18nSettings_voice": MessageLookupByLibrary.simpleMessage("Voice"),
+        "I18nSettings_voiceFromApp":
+            MessageLookupByLibrary.simpleMessage("Use the app\'s time"),
+        "I18nSettings_voiceFromAppDetails":
+            MessageLookupByLibrary.simpleMessage(
+                "For playback without a module"),
+        "I18nSettings_voiceLanguage":
+            MessageLookupByLibrary.simpleMessage("Language"),
         "I18nSettings_voiceMessages":
             MessageLookupByLibrary.simpleMessage("Voice messages"),
         "I18nSettings_voicePitch":
@@ -317,14 +397,39 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_volume": MessageLookupByLibrary.simpleMessage("Volume"),
         "I18nSettings_wakelock":
             MessageLookupByLibrary.simpleMessage("Wakelock"),
+        "I18nStart_addParticipant":
+            MessageLookupByLibrary.simpleMessage("Add participant"),
+        "I18nStart_didNotStart":
+            MessageLookupByLibrary.simpleMessage("Did not start"),
+        "I18nStart_incorrectCorrection":
+            MessageLookupByLibrary.simpleMessage("Incorrect correction"),
+        "I18nStart_incorrectTime":
+            MessageLookupByLibrary.simpleMessage("Incorrect time"),
+        "I18nStart_participantCategory": m21,
+        "I18nStart_participantCity": m22,
+        "I18nStart_participantNickname": m23,
+        "I18nStart_participantNumber": m24,
+        "I18nStart_participantNumberWithName": m25,
+        "I18nStart_participantTeam": m26,
+        "I18nStart_participantYear": m27,
+        "I18nStart_sliverAutomaticCorrection":
+            MessageLookupByLibrary.simpleMessage("Auto\ncorrection"),
+        "I18nStart_sliverManualCorrection":
+            MessageLookupByLibrary.simpleMessage("Manual\nCorrection"),
+        "I18nStart_sliverNumber": MessageLookupByLibrary.simpleMessage("No."),
+        "I18nStart_sliverStart": MessageLookupByLibrary.simpleMessage("Start"),
+        "I18nStart_startTime":
+            MessageLookupByLibrary.simpleMessage("Start Time"),
+        "I18nStart_startTimeAtSmartphone":
+            MessageLookupByLibrary.simpleMessage("App\'s start time"),
         "I18nUpdate_changelog":
             MessageLookupByLibrary.simpleMessage("Changelog"),
         "I18nUpdate_checkForUpdates":
             MessageLookupByLibrary.simpleMessage("Check for updates"),
         "I18nUpdate_connecting":
             MessageLookupByLibrary.simpleMessage("Connecting..."),
-        "I18nUpdate_downloaded": m18,
-        "I18nUpdate_updateToVersion": m19,
+        "I18nUpdate_downloaded": m28,
+        "I18nUpdate_updateToVersion": m29,
         "I18nUpdate_whatsNew":
             MessageLookupByLibrary.simpleMessage("What\'s new")
       };

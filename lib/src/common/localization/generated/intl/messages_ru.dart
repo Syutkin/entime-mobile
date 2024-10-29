@@ -54,41 +54,41 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m13(type) => "Неизвестный тип модуля: ${type}";
 
-  static String m20(offset) =>
+  static String m14(offset) =>
       "${Intl.plural(offset, one: 'Смещение ${offset} миллисекунда', few: 'Смещение ${offset} миллисекунды', other: 'Смещение ${offset} миллисекунд')}";
 
-  static String m14(number) => "Финишировал номер ${number}";
+  static String m15(number) => "Финишировал номер ${number}";
 
-  static String m21(raceName, stageName) =>
+  static String m16(raceName, stageName) =>
       "Результаты финишей гонки ${raceName}, этап ${stageName}";
 
-  static String m22(raceName, stageName) =>
+  static String m17(raceName, stageName) =>
       "Результаты стартов гонки ${raceName}, этап ${stageName}";
 
-  static String m15(number) =>
+  static String m18(number) =>
       "Участнику с номером ${number} уже присвоено финишное время. Установить новое значение?";
 
-  static String m16(milliseconds) => "${milliseconds}мс";
+  static String m19(milliseconds) => "${milliseconds}мс";
 
-  static String m17(size) => "${size}px";
+  static String m20(size) => "${size}px";
 
-  static String m23(category) => "Категория: ${category}";
+  static String m21(category) => "Категория: ${category}";
 
-  static String m24(city) => "Город: ${city}";
+  static String m22(city) => "Город: ${city}";
 
-  static String m25(nickname) => "Никнейм: ${nickname}";
+  static String m23(nickname) => "Никнейм: ${nickname}";
 
-  static String m26(number) => "Участник №${number}";
+  static String m24(number) => "Участник №${number}";
 
-  static String m27(number, name) => "№${number}, ${name}";
+  static String m25(number, name) => "№${number}, ${name}";
 
-  static String m28(team) => "Команда: ${team}";
+  static String m26(team) => "Команда: ${team}";
 
-  static String m29(year) => "Год/Возраст: ${year}";
+  static String m27(year) => "Год/Возраст: ${year}";
 
-  static String m18(current, total) => "${current} из ${total}";
+  static String m28(current, total) => "${current} из ${total}";
 
-  static String m19(version) => "Обновить до ${version}";
+  static String m29(version) => "Обновить до ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -99,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Неизвестное устройство"),
         "I18nCore_correction": MessageLookupByLibrary.simpleMessage("Поправка"),
         "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "I18nCore_edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
         "I18nCore_warning":
             MessageLookupByLibrary.simpleMessage("Предупреждение"),
         "I18nCountdown_countdown":
@@ -268,7 +269,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nModuleSettings_wifiNetwork":
             MessageLookupByLibrary.simpleMessage("Сеть"),
         "I18nNtp_ntpOffset": MessageLookupByLibrary.simpleMessage("NTP offset"),
-        "I18nNtp_offsetInMilliseconds": m20,
+        "I18nNtp_offsetInMilliseconds": m14,
         "I18nNtp_sync":
             MessageLookupByLibrary.simpleMessage("Нажмите для синхронизации"),
         "I18nNtp_syncError":
@@ -283,18 +284,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Не стартовал"),
         "I18nProtocol_enterFinishNumber": MessageLookupByLibrary.simpleMessage(
             "Введите номер финишировавшего участника"),
-        "I18nProtocol_finishNumber": m14,
+        "I18nProtocol_finishNumber": m15,
         "I18nProtocol_hide": MessageLookupByLibrary.simpleMessage("Скрыть"),
         "I18nProtocol_hideAll":
             MessageLookupByLibrary.simpleMessage("Скрыть всё"),
         "I18nProtocol_incorrectNumber":
             MessageLookupByLibrary.simpleMessage("Неверный номер"),
         "I18nProtocol_number": MessageLookupByLibrary.simpleMessage("Номер"),
-        "I18nProtocol_shareFinishResults": m21,
-        "I18nProtocol_shareStartResults": m22,
+        "I18nProtocol_shareFinishResults": m16,
+        "I18nProtocol_shareStartResults": m17,
         "I18nProtocol_time": MessageLookupByLibrary.simpleMessage("Время"),
         "I18nProtocol_type": MessageLookupByLibrary.simpleMessage("Тип"),
-        "I18nProtocol_updateNumber": m15,
+        "I18nProtocol_updateNumber": m18,
         "I18nProtocol_warning":
             MessageLookupByLibrary.simpleMessage("Предупреждение"),
         "I18nSettings_autosubstitution":
@@ -346,13 +347,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Количество показываемых записей"),
         "I18nSettings_journalLinesNumberPopup":
             MessageLookupByLibrary.simpleMessage(
-                "Количество отображамых строк в журнале"),
+                "Количество отображаемых строк в журнале"),
         "I18nSettings_language": MessageLookupByLibrary.simpleMessage("Язык"),
         "I18nSettings_lightBlue":
             MessageLookupByLibrary.simpleMessage("Синяя светлая тема"),
         "I18nSettings_lightRed":
             MessageLookupByLibrary.simpleMessage("Красная светлая тема"),
-        "I18nSettings_milliseconds": m16,
+        "I18nSettings_milliseconds": m19,
         "I18nSettings_ntpOffset":
             MessageLookupByLibrary.simpleMessage("NTP смещение"),
         "I18nSettings_ntpOffsetDescription":
@@ -363,7 +364,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_participantsName":
             MessageLookupByLibrary.simpleMessage("Называть имена участников"),
         "I18nSettings_pitch": MessageLookupByLibrary.simpleMessage("Тембр"),
-        "I18nSettings_pixelSize": m17,
+        "I18nSettings_pixelSize": m20,
         "I18nSettings_rate": MessageLookupByLibrary.simpleMessage("Скорость"),
         "I18nSettings_reconnect":
             MessageLookupByLibrary.simpleMessage("Переподключение"),
@@ -417,17 +418,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Неверное значение поправки"),
         "I18nStart_incorrectTime":
             MessageLookupByLibrary.simpleMessage("Неверное значение времени"),
-        "I18nStart_participantCategory": m23,
-        "I18nStart_participantCity": m24,
-        "I18nStart_participantNickname": m25,
-        "I18nStart_participantNumber": m26,
-        "I18nStart_participantNumberWithName": m27,
-        "I18nStart_participantTeam": m28,
-        "I18nStart_participantYear": m29,
+        "I18nStart_participantCategory": m21,
+        "I18nStart_participantCity": m22,
+        "I18nStart_participantNickname": m23,
+        "I18nStart_participantNumber": m24,
+        "I18nStart_participantNumberWithName": m25,
+        "I18nStart_participantTeam": m26,
+        "I18nStart_participantYear": m27,
         "I18nStart_sliverAutomaticCorrection":
-            MessageLookupByLibrary.simpleMessage("Авто\r\nпоправка"),
+            MessageLookupByLibrary.simpleMessage("Авто\nпоправка"),
         "I18nStart_sliverManualCorrection":
-            MessageLookupByLibrary.simpleMessage("Ручная\r\nпоправка"),
+            MessageLookupByLibrary.simpleMessage("Ручная\nпоправка"),
         "I18nStart_sliverNumber": MessageLookupByLibrary.simpleMessage("№"),
         "I18nStart_sliverStart": MessageLookupByLibrary.simpleMessage("Старт"),
         "I18nStart_startTime":
@@ -440,8 +441,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Проверить обновления"),
         "I18nUpdate_connecting":
             MessageLookupByLibrary.simpleMessage("Соединение..."),
-        "I18nUpdate_downloaded": m18,
-        "I18nUpdate_updateToVersion": m19,
+        "I18nUpdate_downloaded": m28,
+        "I18nUpdate_updateToVersion": m29,
         "I18nUpdate_whatsNew":
             MessageLookupByLibrary.simpleMessage("Что нового")
       };

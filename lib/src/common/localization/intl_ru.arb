@@ -1,1095 +1,925 @@
 {
-  "@@last_modified": "2024-10-28T10:23:11.591631",
-  "I18nCore_delete": "Удалить",
-  "@I18nCore_delete": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nCore_warning": "Предупреждение",
-  "@I18nCore_warning": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nCore_correction": "Поправка",
-  "@I18nCore_correction": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nUpdate_whatsNew": "Что нового",
-  "@I18nUpdate_whatsNew": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nUpdate_connecting": "Соединение...",
-  "@I18nUpdate_connecting": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nUpdate_updateToVersion": "Обновить до {version}",
-  "@I18nUpdate_updateToVersion": {
-    "type": "text",
-    "placeholders": {
-      "version": {}
-    }
-  },
-  "I18nUpdate_checkForUpdates": "Проверить обновления",
-  "@I18nUpdate_checkForUpdates": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nUpdate_changelog": "Список изменений",
-  "@I18nUpdate_changelog": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nUpdate_downloaded": "{current} из {total}",
-  "@I18nUpdate_downloaded": {
-    "description": "Сколько скачано байт относительно общего количества",
-    "type": "text",
-    "placeholders": {
-      "current": {},
-      "total": {}
-    }
-  },
-  "I18nSettings_settings": "Настройки",
-  "@I18nSettings_settings": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_general": "Основные",
-  "@I18nSettings_general": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_reconnect": "Переподключение",
-  "@I18nSettings_reconnect": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_reconnectDescription": "Пытаться переподключится к модулю при обрыве связи",
-  "@I18nSettings_reconnectDescription": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_sound": "Звук",
-  "@I18nSettings_sound": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_wakelock": "Всегда включённый экран",
-  "@I18nSettings_wakelock": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_language": "Язык",
-  "@I18nSettings_language": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_countdown": "Обратный отсчёт",
-  "@I18nSettings_countdown": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_countdownFromApp": "Использовать время приложения",
-  "@I18nSettings_countdownFromApp": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_countdownFromAppDetails": "Для озвучивания без модуля",
-  "@I18nSettings_countdownFromAppDetails": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_voiceMessages": "Голосовые сообщения",
-  "@I18nSettings_voiceMessages": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_voice": "Голос",
-  "@I18nSettings_voice": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_voiceFromApp": "Использовать время приложения",
-  "@I18nSettings_voiceFromApp": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_voiceFromAppDetails": "Для озвучивания без модуля",
-  "@I18nSettings_voiceFromAppDetails": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_participantsName": "Называть имена участников",
-  "@I18nSettings_participantsName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_volume": "Громкость",
-  "@I18nSettings_volume": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_pitch": "Тембр",
-  "@I18nSettings_pitch": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_rate": "Скорость",
-  "@I18nSettings_rate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_voiceLanguage": "Язык",
-  "@I18nSettings_voiceLanguage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_startScreen": "Стартовый экран",
-  "@I18nSettings_startScreen": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_startButton": "Кнопка \"отсечка\"",
-  "@I18nSettings_startButton": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_startButtonSize": "Размер кнопки \"отсечка\"",
-  "@I18nSettings_startButtonSize": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_pixelSize": "{size}px",
-  "@I18nSettings_pixelSize": {
-    "type": "text",
-    "placeholders": {
-      "size": {}
-    }
-  },
-  "I18nSettings_startButtonSizeDescription": "Размер кнопки \"отсечка\" на стартовом экране",
-  "@I18nSettings_startButtonSizeDescription": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_countdownAtStart": "Обратный отсчёт",
-  "@I18nSettings_countdownAtStart": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_countdownAtStartSize": "Размер обратного отсчёта",
-  "@I18nSettings_countdownAtStartSize": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_replaceStartCountdown": "Заменять время старта обратным отсчётом",
-  "@I18nSettings_replaceStartCountdown": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_finishScreen": "Финишный экран",
-  "@I18nSettings_finishScreen": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_delayForNewEvents": "Задержка перед показом новых отсечек",
-  "@I18nSettings_delayForNewEvents": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_milliseconds": "{milliseconds}мс",
-  "@I18nSettings_milliseconds": {
-    "type": "text",
-    "placeholders": {
-      "milliseconds": {}
-    }
-  },
-  "I18nSettings_autosubstitution": "Автоподстановка номеров",
-  "@I18nSettings_autosubstitution": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_autosubstitutionDelay": "Задержка перед автоматическим подставлением новых номеров",
-  "@I18nSettings_autosubstitutionDelay": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_finishButton": "Кнопка \"отсечка\"",
-  "@I18nSettings_finishButton": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_finishButtonSize": "Размер кнопки \"отсечка\"",
-  "@I18nSettings_finishButtonSize": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_finishButtonSizeDescription": "Размер кнопки \"отсечка\" на финишном экране",
-  "@I18nSettings_finishButtonSizeDescription": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_update": "Обновление",
-  "@I18nSettings_update": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_checkUpdateAtStartup": "Проверка обновлений при старте",
-  "@I18nSettings_checkUpdateAtStartup": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_themes": "Темы",
-  "@I18nSettings_themes": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_brightness": "Светлая тема",
-  "@I18nSettings_brightness": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_journal": "Журнал",
-  "@I18nSettings_journal": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_journalLinesNumber": "Количество показываемых записей",
-  "@I18nSettings_journalLinesNumber": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_journalLinesNumberPopup": "Количество отображамых строк в журнале",
-  "@I18nSettings_journalLinesNumberPopup": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_numberOfLines": "Количество строк",
-  "@I18nSettings_numberOfLines": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_enterNumber": "Введите положительное число,\r\nпустая строка или отрицательное\r\n- без ограничений",
-  "@I18nSettings_enterNumber": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_defaults": "По умолчанию",
-  "@I18nSettings_defaults": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_resetToDefaults": "Настройки по умолчанию",
-  "@I18nSettings_resetToDefaults": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_delay": "Задержка",
-  "@I18nSettings_delay": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_incorrectDelay": "Неверная задержка",
-  "@I18nSettings_incorrectDelay": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_voicePitch": "Тембр голоса",
-  "@I18nSettings_voicePitch": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_voiceRate": "Скорость произношения",
-  "@I18nSettings_voiceRate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_voiceVolume": "Громкость голоса",
-  "@I18nSettings_voiceVolume": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_lightBlue": "Синяя светлая тема",
-  "@I18nSettings_lightBlue": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_darkBlue": "Синяя тёмная тема",
-  "@I18nSettings_darkBlue": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_lightRed": "Красная светлая тема",
-  "@I18nSettings_lightRed": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_darkRed": "Красная тёмная тема",
-  "@I18nSettings_darkRed": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_ntpOffset": "NTP смещение",
-  "@I18nSettings_ntpOffset": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nSettings_ntpOffsetDescription": "Синхронизировать при старте приложения",
-  "@I18nSettings_ntpOffsetDescription": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_enterFinishNumber": "Введите номер финишировавшего участника",
-  "@I18nProtocol_enterFinishNumber": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_number": "Номер",
-  "@I18nProtocol_number": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_incorrectNumber": "Неверный номер",
-  "@I18nProtocol_incorrectNumber": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_warning": "Предупреждение",
-  "@I18nProtocol_warning": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_updateNumber": "Участнику с номером {number} уже присвоено финишное время. Установить новое значение?",
-  "@I18nProtocol_updateNumber": {
-    "type": "text",
-    "placeholders": {
-      "number": {}
-    }
-  },
-  "I18nProtocol_hide": "Скрыть",
-  "@I18nProtocol_hide": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_finishNumber": "Финишировал номер {number}",
-  "@I18nProtocol_finishNumber": {
-    "type": "text",
-    "placeholders": {
-      "number": {}
-    }
-  },
-  "I18nProtocol_clearNumber": "Убрать номер",
-  "@I18nProtocol_clearNumber": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_hideAll": "Скрыть всё",
-  "@I18nProtocol_hideAll": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_didNotStart": "Не стартовал",
-  "@I18nProtocol_didNotStart": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_didNotFinish": "Не финишировал",
-  "@I18nProtocol_didNotFinish": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_type": "Тип",
-  "@I18nProtocol_type": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_time": "Время",
-  "@I18nProtocol_time": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nProtocol_shareStartResults": "Результаты стартов гонки {raceName}, этап {stageName}",
-  "@I18nProtocol_shareStartResults": {
-    "type": "text",
-    "placeholders": {
-      "raceName": {},
-      "stageName": {}
-    }
-  },
-  "I18nProtocol_shareFinishResults": "Результаты финишей гонки {raceName}, этап {stageName}",
-  "@I18nProtocol_shareFinishResults": {
-    "type": "text",
-    "placeholders": {
-      "raceName": {},
-      "stageName": {}
-    }
-  },
-  "I18nBluetooth_unknownDevice": "Неизвестное устройство",
-  "@I18nBluetooth_unknownDevice": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nBluetooth_dbm": "дБм",
-  "@I18nBluetooth_dbm": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nBluetooth_selectDevice": "Выберите устройство",
-  "@I18nBluetooth_selectDevice": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nCountdown_countdown": "Обратный отсчёт",
-  "@I18nCountdown_countdown": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDrawer_settings": "Настройки",
-  "@I18nDrawer_settings": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDrawer_help": "Помощь",
-  "@I18nDrawer_help": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDrawer_about": "О программе",
-  "@I18nDrawer_about": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDrawer_version": "v{version}",
-  "@I18nDrawer_version": {
-    "type": "text",
-    "placeholders": {
-      "version": {}
-    }
-  },
-  "I18nHelp_manual": "Руководство",
-  "@I18nHelp_manual": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHelp_manualMd": "# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку \"Start\", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку \"Finish\", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  ",
-  "@I18nHelp_manualMd": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_updateAutomaticCorrection": "Участнику под номером {number} уже установлена стартовая поправка {prevCorrection}. Обновить её на {correction}?",
-  "@I18nHome_updateAutomaticCorrection": {
-    "type": "text",
-    "placeholders": {
-      "number": {},
-      "prevCorrection": {},
-      "correction": {}
-    }
-  },
-  "I18nHome_equalStartTime": "Стартовое время {time} уже присвоено номеру {prevNumber}. Вы уверены что хотите установить одинаковое стартовое время для номеров {currentNumber} и {prevNumber}?\n",
-  "@I18nHome_equalStartTime": {
-    "type": "text",
-    "placeholders": {
-      "time": {},
-      "prevNumber": {},
-      "currentNumber": {}
-    }
-  },
-  "I18nHome_updateAutomaticStartCorrection": "У номера {number} уже проставлена автоматическая стартовая отсечка: {automaticCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
-  "@I18nHome_updateAutomaticStartCorrection": {
-    "type": "text",
-    "placeholders": {
-      "number": {},
-      "automaticCorrection": {}
-    }
-  },
-  "I18nHome_updateManualStartCorrection": "У номера {number} уже проставлена ручная стартовая отсечка: {manualCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
-  "@I18nHome_updateManualStartCorrection": {
-    "type": "text",
-    "placeholders": {
-      "number": {},
-      "manualCorrection": {}
-    }
-  },
-  "I18nHome_errorAddParticipant": "Ошибка при добавлении участника! Для продолжения нажмите \"{cancelButtonLabel}\"\n",
-  "@I18nHome_errorAddParticipant": {
-    "type": "text",
-    "placeholders": {
-      "cancelButtonLabel": {}
-    }
-  },
-  "I18nHome_home": "Начало",
-  "@I18nHome_home": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_start": "Старт",
-  "@I18nHome_start": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_finish": "Финиш",
-  "@I18nHome_finish": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_updateAvailable": "Доступна новая версия {version}",
-  "@I18nHome_updateAvailable": {
-    "type": "text",
-    "placeholders": {
-      "version": {}
-    }
-  },
-  "I18nHome_update": "Обновить",
-  "@I18nHome_update": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_addRacer": "Добавить участника",
-  "@I18nHome_addRacer": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_share": "Поделиться",
-  "@I18nHome_share": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_selectStartProtocol": "Стартовый протокол",
-  "@I18nHome_selectStartProtocol": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_countdown": "Обратный отсчёт",
-  "@I18nHome_countdown": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_countdownPage": "Страница с обратным отсчётом",
-  "@I18nHome_countdownPage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_fab": "FAB",
-  "@I18nHome_fab": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_importStartProtocolCsv": "Импорт стартового протокола",
-  "@I18nHome_importStartProtocolCsv": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_bluetooth": "Bluetooth",
-  "@I18nHome_bluetooth": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_hideMarked": "Скрытые",
-  "@I18nHome_hideMarked": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_hideNumbers": "С номерами",
-  "@I18nHome_hideNumbers": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_hideManual": "Ручная отсечка",
-  "@I18nHome_hideManual": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_setDefaults": "По умолчанию",
-  "@I18nHome_setDefaults": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nInit_selectRace": "Выберите соревнование",
-  "@I18nInit_selectRace": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nInit_selectStage": "Выберите спецучасток",
-  "@I18nInit_selectStage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nInit_pressToSelect": "Нажмите чтобы выбрать",
-  "@I18nInit_pressToSelect": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nInit_bluetoothModule": "Bluetooth модуль",
-  "@I18nInit_bluetoothModule": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nInit_selectFile": "Выберите файл",
-  "@I18nInit_selectFile": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nInit_noData": "Нет данных",
-  "@I18nInit_noData": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nInit_share": "Поделиться",
-  "@I18nInit_share": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nInit_delete": "Удалить",
-  "@I18nInit_delete": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nInit_importFromCsv": "Импорт протокола из csv",
-  "@I18nInit_importFromCsv": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_didNotStart": "Не стартовал",
-  "@I18nStart_didNotStart": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_addParticipant": "Добавить участника",
-  "@I18nStart_addParticipant": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_sliverNumber": "№",
-  "@I18nStart_sliverNumber": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_sliverStart": "Старт",
-  "@I18nStart_sliverStart": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_sliverManualCorrection": "Ручная\r\nпоправка",
-  "@I18nStart_sliverManualCorrection": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_sliverAutomaticCorrection": "Авто\r\nпоправка",
-  "@I18nStart_sliverAutomaticCorrection": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_incorrectCorrection": "Неверное значение поправки",
-  "@I18nStart_incorrectCorrection": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_incorrectTime": "Неверное значение времени",
-  "@I18nStart_incorrectTime": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_participantNumber": "Участник №{number}",
-  "@I18nStart_participantNumber": {
-    "type": "text",
-    "placeholders": {
-      "number": {}
-    }
-  },
-  "I18nStart_participantNumberWithName": "№{number}, {name}",
-  "@I18nStart_participantNumberWithName": {
-    "type": "text",
-    "placeholders": {
-      "number": {},
-      "name": {}
-    }
-  },
-  "I18nStart_participantCategory": "Категория: {category}",
-  "@I18nStart_participantCategory": {
-    "type": "text",
-    "placeholders": {
-      "category": {}
-    }
-  },
-  "I18nStart_participantNickname": "Никнейм: {nickname}",
-  "@I18nStart_participantNickname": {
-    "type": "text",
-    "placeholders": {
-      "nickname": {}
-    }
-  },
-  "I18nStart_participantCity": "Город: {city}",
-  "@I18nStart_participantCity": {
-    "type": "text",
-    "placeholders": {
-      "city": {}
-    }
-  },
-  "I18nStart_participantTeam": "Команда: {team}",
-  "@I18nStart_participantTeam": {
-    "type": "text",
-    "placeholders": {
-      "team": {}
-    }
-  },
-  "I18nStart_participantYear": "Год/Возраст: {year}",
-  "@I18nStart_participantYear": {
-    "type": "text",
-    "placeholders": {
-      "year": {}
-    }
-  },
-  "I18nStart_startTime": "Время старта",
-  "@I18nStart_startTime": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nStart_startTimeAtSmartphone": "Время старта на смартфоне",
-  "@I18nStart_startTimeAtSmartphone": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nLog_bluetoothInformation": "Информация Bluetooth",
-  "@I18nLog_bluetoothInformation": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_saveSettingsToModule": "Записать новые настройки в модуль?",
-  "@I18nModuleSettings_saveSettingsToModule": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_moduleSettings": "Настройки модуля",
-  "@I18nModuleSettings_moduleSettings": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_errorLoadSettings": "Ошибка загрузки настроек!",
-  "@I18nModuleSettings_errorLoadSettings": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_awaitingSettings": "Ждём настройки...",
-  "@I18nModuleSettings_awaitingSettings": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_module": "Модуль",
-  "@I18nModuleSettings_module": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_buzzer": "Buzzer",
-  "@I18nModuleSettings_buzzer": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_shortFrequency": "Частота коротких гудков",
-  "@I18nModuleSettings_shortFrequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_selectShortFrequency": "Выберите частоту короткого гудка",
-  "@I18nModuleSettings_selectShortFrequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_longFrequency": "Частота длинных гудков",
-  "@I18nModuleSettings_longFrequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_selectLongFrequency": "Выберите частоту длинного гудка",
-  "@I18nModuleSettings_selectLongFrequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_noteFrequency": "Нота {note}, {frequency}Гц",
-  "@I18nModuleSettings_noteFrequency": {
-    "type": "text",
-    "placeholders": {
-      "note": {},
-      "frequency": {}
-    }
-  },
-  "I18nModuleSettings_lora": "LoRa",
-  "@I18nModuleSettings_lora": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_frequency": "Частота",
-  "@I18nModuleSettings_frequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_frequencyHz": "{frequency}Гц",
-  "@I18nModuleSettings_frequencyHz": {
-    "type": "text",
-    "placeholders": {
-      "frequency": {}
-    }
-  },
-  "I18nModuleSettings_txPower": "TX Power",
-  "@I18nModuleSettings_txPower": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_spreadingFactor": "Spreading Factor",
-  "@I18nModuleSettings_spreadingFactor": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_signalBandwidth": "Signal Bandwidth",
-  "@I18nModuleSettings_signalBandwidth": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_codingRateDenominator": "Coding Rate Denominator",
-  "@I18nModuleSettings_codingRateDenominator": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_preambleLength": "Preamble Length",
-  "@I18nModuleSettings_preambleLength": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_syncWord": "Sync Word",
-  "@I18nModuleSettings_syncWord": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_crc": "CRC",
-  "@I18nModuleSettings_crc": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_screen": "Экран",
-  "@I18nModuleSettings_screen": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_tft": "TFT",
-  "@I18nModuleSettings_tft": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_sleepMode": "Спящий режим",
-  "@I18nModuleSettings_sleepMode": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_sleepModeSeconds": "{seconds,plural, =1{{seconds} секунда}few{{seconds} секунды}other{секунд}}",
-  "@I18nModuleSettings_sleepModeSeconds": {
-    "type": "text",
-    "placeholders": {
-      "seconds": {}
-    }
-  },
-  "I18nModuleSettings_turnOnAtEvent": "Включать после события",
-  "@I18nModuleSettings_turnOnAtEvent": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_bluetooth": "Bluetooth",
-  "@I18nModuleSettings_bluetooth": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_bluetoothModuleName": "Имя модуля",
-  "@I18nModuleSettings_bluetoothModuleName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_bluetoothModuleNumber": "Номер модуля",
-  "@I18nModuleSettings_bluetoothModuleNumber": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_bluetoothNumber": "Номер",
-  "@I18nModuleSettings_bluetoothNumber": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_enterBluetoothModuleNumber": "Введите номер модуля",
-  "@I18nModuleSettings_enterBluetoothModuleNumber": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_wifi": "WiFi",
-  "@I18nModuleSettings_wifi": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_wifiNetwork": "Сеть",
-  "@I18nModuleSettings_wifiNetwork": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_enterWifiSsid": "Введите имя WiFi сети",
-  "@I18nModuleSettings_enterWifiSsid": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_enterWifiPassword": "Введите пароль WiFi сети {ssid}",
-  "@I18nModuleSettings_enterWifiPassword": {
-    "type": "text",
-    "placeholders": {
-      "ssid": {}
-    }
-  },
-  "I18nModuleSettings_password": "Пароль",
-  "@I18nModuleSettings_password": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_vcc": "VCC",
-  "@I18nModuleSettings_vcc": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_resistor1": "R1",
-  "@I18nModuleSettings_resistor1": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_resistor2": "R2",
-  "@I18nModuleSettings_resistor2": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_ohm": "Ом",
-  "@I18nModuleSettings_ohm": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_resistorOhm": "{ohm} Ом",
-  "@I18nModuleSettings_resistorOhm": {
-    "type": "text",
-    "placeholders": {
-      "ohm": {}
-    }
-  },
-  "I18nModuleSettings_enterResistor1": "Введите значение резистора R1",
-  "@I18nModuleSettings_enterResistor1": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_enterResistor2": "Введите значение резистора R2",
-  "@I18nModuleSettings_enterResistor2": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_enterMeasuredVoltage": "Ввод измеренного напряжения",
-  "@I18nModuleSettings_enterMeasuredVoltage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_mv": "мВ",
-  "@I18nModuleSettings_mv": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_enterCurrentVoltage": "Введите текущее значение напряжения на батареях",
-  "@I18nModuleSettings_enterCurrentVoltage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_brightness": "Яркость",
-  "@I18nModuleSettings_brightness": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_setBrightness": "Установите яркость панели",
-  "@I18nModuleSettings_setBrightness": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_brightnessInt": "Яркость {brightness}",
-  "@I18nModuleSettings_brightnessInt": {
-    "type": "text",
-    "placeholders": {
-      "brightness": {}
-    }
-  },
-  "I18nModuleSettings_unknownModuleType": "Неизвестный тип модуля: {type}",
-  "@I18nModuleSettings_unknownModuleType": {
-    "type": "text",
-    "placeholders": {
-      "type": {}
-    }
-  },
-  "I18nDatabase_races": "Соревнования",
-  "@I18nDatabase_races": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDatabase_addRace": "Создать соревнование",
-  "@I18nDatabase_addRace": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDatabase_raceName": "Название соревнования",
-  "@I18nDatabase_raceName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDatabase_enterRaceName": "Введите название соревнования",
-  "@I18nDatabase_enterRaceName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDatabase_raceDates": "Даты проведения",
-  "@I18nDatabase_raceDates": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDatabase_addStage": "Создать спецучасток",
-  "@I18nDatabase_addStage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDatabase_stageName": "Название спецучастка",
-  "@I18nDatabase_stageName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDatabase_enterStageName": "Введите название спецучастка",
-  "@I18nDatabase_enterStageName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nDatabase_trail": "Трейл",
-  "@I18nDatabase_trail": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nNtp_ntpOffset": "NTP offset",
-  "@I18nNtp_ntpOffset": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nNtp_sync": "Нажмите для синхронизации",
-  "@I18nNtp_sync": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nNtp_syncing": "Синхронизация...",
-  "@I18nNtp_syncing": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nNtp_syncError": "Ошибка синхронизации",
-  "@I18nNtp_syncError": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nNtp_offsetInMilliseconds": "{offset,plural, =1{Смещение {offset} миллисекунда}few{Смещение {offset} миллисекунды}other{Смещение {offset} миллисекунд}}",
-  "@I18nNtp_offsetInMilliseconds": {
-    "type": "text",
-    "placeholders": {
-      "offset": {}
-    }
-  }
+	"@@last_modified": "2024-10-29T10:45:20.346908",
+	"I18nCore_edit": "Редактировать",
+	"@I18nCore_edit": {
+		"type": "text"
+	},
+	"I18nCore_delete": "Удалить",
+	"@I18nCore_delete": {
+		"type": "text"
+	},
+	"I18nCore_warning": "Предупреждение",
+	"@I18nCore_warning": {
+		"type": "text"
+	},
+	"I18nCore_correction": "Поправка",
+	"@I18nCore_correction": {
+		"type": "text"
+	},
+	"I18nUpdate_whatsNew": "Что нового",
+	"@I18nUpdate_whatsNew": {
+		"type": "text"
+	},
+	"I18nUpdate_connecting": "Соединение...",
+	"@I18nUpdate_connecting": {
+		"type": "text"
+	},
+	"I18nUpdate_updateToVersion": "Обновить до {version}",
+	"@I18nUpdate_updateToVersion": {
+		"type": "text",
+		"placeholders": {
+			"version": {}
+		}
+	},
+	"I18nUpdate_checkForUpdates": "Проверить обновления",
+	"@I18nUpdate_checkForUpdates": {
+		"type": "text"
+	},
+	"I18nUpdate_changelog": "Список изменений",
+	"@I18nUpdate_changelog": {
+		"type": "text"
+	},
+	"I18nUpdate_downloaded": "{current} из {total}",
+	"@I18nUpdate_downloaded": {
+		"description": "Сколько скачано байт относительно общего количества",
+		"type": "text",
+		"placeholders": {
+			"current": {},
+			"total": {}
+		}
+	},
+	"I18nSettings_settings": "Настройки",
+	"@I18nSettings_settings": {
+		"type": "text"
+	},
+	"I18nSettings_general": "Основные",
+	"@I18nSettings_general": {
+		"type": "text"
+	},
+	"I18nSettings_reconnect": "Переподключение",
+	"@I18nSettings_reconnect": {
+		"type": "text"
+	},
+	"I18nSettings_reconnectDescription": "Пытаться переподключится к модулю при обрыве связи",
+	"@I18nSettings_reconnectDescription": {
+		"type": "text"
+	},
+	"I18nSettings_sound": "Звук",
+	"@I18nSettings_sound": {
+		"type": "text"
+	},
+	"I18nSettings_wakelock": "Всегда включённый экран",
+	"@I18nSettings_wakelock": {
+		"type": "text"
+	},
+	"I18nSettings_language": "Язык",
+	"@I18nSettings_language": {
+		"type": "text"
+	},
+	"I18nSettings_countdown": "Обратный отсчёт",
+	"@I18nSettings_countdown": {
+		"type": "text"
+	},
+	"I18nSettings_countdownFromApp": "Использовать время приложения",
+	"@I18nSettings_countdownFromApp": {
+		"type": "text"
+	},
+	"I18nSettings_countdownFromAppDetails": "Для озвучивания без модуля",
+	"@I18nSettings_countdownFromAppDetails": {
+		"type": "text"
+	},
+	"I18nSettings_voiceMessages": "Голосовые сообщения",
+	"@I18nSettings_voiceMessages": {
+		"type": "text"
+	},
+	"I18nSettings_voice": "Голос",
+	"@I18nSettings_voice": {
+		"type": "text"
+	},
+	"I18nSettings_voiceFromApp": "Использовать время приложения",
+	"@I18nSettings_voiceFromApp": {
+		"type": "text"
+	},
+	"I18nSettings_voiceFromAppDetails": "Для озвучивания без модуля",
+	"@I18nSettings_voiceFromAppDetails": {
+		"type": "text"
+	},
+	"I18nSettings_participantsName": "Называть имена участников",
+	"@I18nSettings_participantsName": {
+		"type": "text"
+	},
+	"I18nSettings_volume": "Громкость",
+	"@I18nSettings_volume": {
+		"type": "text"
+	},
+	"I18nSettings_pitch": "Тембр",
+	"@I18nSettings_pitch": {
+		"type": "text"
+	},
+	"I18nSettings_rate": "Скорость",
+	"@I18nSettings_rate": {
+		"type": "text"
+	},
+	"I18nSettings_voiceLanguage": "Язык",
+	"@I18nSettings_voiceLanguage": {
+		"type": "text"
+	},
+	"I18nSettings_startScreen": "Стартовый экран",
+	"@I18nSettings_startScreen": {
+		"type": "text"
+	},
+	"I18nSettings_startButton": "Кнопка \"отсечка\"",
+	"@I18nSettings_startButton": {
+		"type": "text"
+	},
+	"I18nSettings_startButtonSize": "Размер кнопки \"отсечка\"",
+	"@I18nSettings_startButtonSize": {
+		"type": "text"
+	},
+	"I18nSettings_pixelSize": "{size}px",
+	"@I18nSettings_pixelSize": {
+		"type": "text",
+		"placeholders": {
+			"size": {}
+		}
+	},
+	"I18nSettings_startButtonSizeDescription": "Размер кнопки \"отсечка\" на стартовом экране",
+	"@I18nSettings_startButtonSizeDescription": {
+		"type": "text"
+	},
+	"I18nSettings_countdownAtStart": "Обратный отсчёт",
+	"@I18nSettings_countdownAtStart": {
+		"type": "text"
+	},
+	"I18nSettings_countdownAtStartSize": "Размер обратного отсчёта",
+	"@I18nSettings_countdownAtStartSize": {
+		"type": "text"
+	},
+	"I18nSettings_replaceStartCountdown": "Заменять время старта обратным отсчётом",
+	"@I18nSettings_replaceStartCountdown": {
+		"type": "text"
+	},
+	"I18nSettings_finishScreen": "Финишный экран",
+	"@I18nSettings_finishScreen": {
+		"type": "text"
+	},
+	"I18nSettings_delayForNewEvents": "Задержка перед показом новых отсечек",
+	"@I18nSettings_delayForNewEvents": {
+		"type": "text"
+	},
+	"I18nSettings_milliseconds": "{milliseconds}мс",
+	"@I18nSettings_milliseconds": {
+		"type": "text",
+		"placeholders": {
+			"milliseconds": {}
+		}
+	},
+	"I18nSettings_autosubstitution": "Автоподстановка номеров",
+	"@I18nSettings_autosubstitution": {
+		"type": "text"
+	},
+	"I18nSettings_autosubstitutionDelay": "Задержка перед автоматическим подставлением новых номеров",
+	"@I18nSettings_autosubstitutionDelay": {
+		"type": "text"
+	},
+	"I18nSettings_finishButton": "Кнопка \"отсечка\"",
+	"@I18nSettings_finishButton": {
+		"type": "text"
+	},
+	"I18nSettings_finishButtonSize": "Размер кнопки \"отсечка\"",
+	"@I18nSettings_finishButtonSize": {
+		"type": "text"
+	},
+	"I18nSettings_finishButtonSizeDescription": "Размер кнопки \"отсечка\" на финишном экране",
+	"@I18nSettings_finishButtonSizeDescription": {
+		"type": "text"
+	},
+	"I18nSettings_update": "Обновление",
+	"@I18nSettings_update": {
+		"type": "text"
+	},
+	"I18nSettings_checkUpdateAtStartup": "Проверка обновлений при старте",
+	"@I18nSettings_checkUpdateAtStartup": {
+		"type": "text"
+	},
+	"I18nSettings_themes": "Темы",
+	"@I18nSettings_themes": {
+		"type": "text"
+	},
+	"I18nSettings_brightness": "Светлая тема",
+	"@I18nSettings_brightness": {
+		"type": "text"
+	},
+	"I18nSettings_journal": "Журнал",
+	"@I18nSettings_journal": {
+		"type": "text"
+	},
+	"I18nSettings_journalLinesNumber": "Количество показываемых записей",
+	"@I18nSettings_journalLinesNumber": {
+		"type": "text"
+	},
+	"I18nSettings_journalLinesNumberPopup": "Количество отображаемых строк в журнале",
+	"@I18nSettings_journalLinesNumberPopup": {
+		"type": "text"
+	},
+	"I18nSettings_numberOfLines": "Количество строк",
+	"@I18nSettings_numberOfLines": {
+		"type": "text"
+	},
+	"I18nSettings_enterNumber": "Введите положительное число,\r\nпустая строка или отрицательное\r\n- без ограничений",
+	"@I18nSettings_enterNumber": {
+		"type": "text"
+	},
+	"I18nSettings_defaults": "По умолчанию",
+	"@I18nSettings_defaults": {
+		"type": "text"
+	},
+	"I18nSettings_resetToDefaults": "Настройки по умолчанию",
+	"@I18nSettings_resetToDefaults": {
+		"type": "text"
+	},
+	"I18nSettings_delay": "Задержка",
+	"@I18nSettings_delay": {
+		"type": "text"
+	},
+	"I18nSettings_incorrectDelay": "Неверная задержка",
+	"@I18nSettings_incorrectDelay": {
+		"type": "text"
+	},
+	"I18nSettings_voicePitch": "Тембр голоса",
+	"@I18nSettings_voicePitch": {
+		"type": "text"
+	},
+	"I18nSettings_voiceRate": "Скорость произношения",
+	"@I18nSettings_voiceRate": {
+		"type": "text"
+	},
+	"I18nSettings_voiceVolume": "Громкость голоса",
+	"@I18nSettings_voiceVolume": {
+		"type": "text"
+	},
+	"I18nSettings_lightBlue": "Синяя светлая тема",
+	"@I18nSettings_lightBlue": {
+		"type": "text"
+	},
+	"I18nSettings_darkBlue": "Синяя тёмная тема",
+	"@I18nSettings_darkBlue": {
+		"type": "text"
+	},
+	"I18nSettings_lightRed": "Красная светлая тема",
+	"@I18nSettings_lightRed": {
+		"type": "text"
+	},
+	"I18nSettings_darkRed": "Красная тёмная тема",
+	"@I18nSettings_darkRed": {
+		"type": "text"
+	},
+	"I18nSettings_ntpOffset": "NTP смещение",
+	"@I18nSettings_ntpOffset": {
+		"type": "text"
+	},
+	"I18nSettings_ntpOffsetDescription": "Синхронизировать при старте приложения",
+	"@I18nSettings_ntpOffsetDescription": {
+		"type": "text"
+	},
+	"I18nProtocol_enterFinishNumber": "Введите номер финишировавшего участника",
+	"@I18nProtocol_enterFinishNumber": {
+		"type": "text"
+	},
+	"I18nProtocol_number": "Номер",
+	"@I18nProtocol_number": {
+		"type": "text"
+	},
+	"I18nProtocol_incorrectNumber": "Неверный номер",
+	"@I18nProtocol_incorrectNumber": {
+		"type": "text"
+	},
+	"I18nProtocol_warning": "Предупреждение",
+	"@I18nProtocol_warning": {
+		"type": "text"
+	},
+	"I18nProtocol_updateNumber": "Участнику с номером {number} уже присвоено финишное время. Установить новое значение?",
+	"@I18nProtocol_updateNumber": {
+		"type": "text",
+		"placeholders": {
+			"number": {}
+		}
+	},
+	"I18nProtocol_hide": "Скрыть",
+	"@I18nProtocol_hide": {
+		"type": "text"
+	},
+	"I18nProtocol_finishNumber": "Финишировал номер {number}",
+	"@I18nProtocol_finishNumber": {
+		"type": "text",
+		"placeholders": {
+			"number": {}
+		}
+	},
+	"I18nProtocol_clearNumber": "Убрать номер",
+	"@I18nProtocol_clearNumber": {
+		"type": "text"
+	},
+	"I18nProtocol_hideAll": "Скрыть всё",
+	"@I18nProtocol_hideAll": {
+		"type": "text"
+	},
+	"I18nProtocol_didNotStart": "Не стартовал",
+	"@I18nProtocol_didNotStart": {
+		"type": "text"
+	},
+	"I18nProtocol_didNotFinish": "Не финишировал",
+	"@I18nProtocol_didNotFinish": {
+		"type": "text"
+	},
+	"I18nProtocol_type": "Тип",
+	"@I18nProtocol_type": {
+		"type": "text"
+	},
+	"I18nProtocol_time": "Время",
+	"@I18nProtocol_time": {
+		"type": "text"
+	},
+	"I18nProtocol_shareStartResults": "Результаты стартов гонки {raceName}, этап {stageName}",
+	"@I18nProtocol_shareStartResults": {
+		"type": "text",
+		"placeholders": {
+			"raceName": {},
+			"stageName": {}
+		}
+	},
+	"I18nProtocol_shareFinishResults": "Результаты финишей гонки {raceName}, этап {stageName}",
+	"@I18nProtocol_shareFinishResults": {
+		"type": "text",
+		"placeholders": {
+			"raceName": {},
+			"stageName": {}
+		}
+	},
+	"I18nBluetooth_unknownDevice": "Неизвестное устройство",
+	"@I18nBluetooth_unknownDevice": {
+		"type": "text"
+	},
+	"I18nBluetooth_dbm": "дБм",
+	"@I18nBluetooth_dbm": {
+		"type": "text"
+	},
+	"I18nBluetooth_selectDevice": "Выберите устройство",
+	"@I18nBluetooth_selectDevice": {
+		"type": "text"
+	},
+	"I18nCountdown_countdown": "Обратный отсчёт",
+	"@I18nCountdown_countdown": {
+		"type": "text"
+	},
+	"I18nDrawer_settings": "Настройки",
+	"@I18nDrawer_settings": {
+		"type": "text"
+	},
+	"I18nDrawer_help": "Помощь",
+	"@I18nDrawer_help": {
+		"type": "text"
+	},
+	"I18nDrawer_about": "О программе",
+	"@I18nDrawer_about": {
+		"type": "text"
+	},
+	"I18nDrawer_version": "v{version}",
+	"@I18nDrawer_version": {
+		"type": "text",
+		"placeholders": {
+			"version": {}
+		}
+	},
+	"I18nHelp_manual": "Руководство",
+	"@I18nHelp_manual": {
+		"type": "text"
+	},
+	"I18nHelp_manualMd": "# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку \"Start\", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку \"Finish\", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  ",
+	"@I18nHelp_manualMd": {
+		"type": "text"
+	},
+	"I18nHome_updateAutomaticCorrection": "Участнику под номером {number} уже установлена стартовая поправка {prevCorrection}. Обновить её на {correction}?",
+	"@I18nHome_updateAutomaticCorrection": {
+		"type": "text",
+		"placeholders": {
+			"number": {},
+			"prevCorrection": {},
+			"correction": {}
+		}
+	},
+	"I18nHome_equalStartTime": "Стартовое время {time} уже присвоено номеру {prevNumber}. Вы уверены что хотите установить одинаковое стартовое время для номеров {currentNumber} и {prevNumber}?\n",
+	"@I18nHome_equalStartTime": {
+		"type": "text",
+		"placeholders": {
+			"time": {},
+			"prevNumber": {},
+			"currentNumber": {}
+		}
+	},
+	"I18nHome_updateAutomaticStartCorrection": "У номера {number} уже проставлена автоматическая стартовая отсечка: {automaticCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
+	"@I18nHome_updateAutomaticStartCorrection": {
+		"type": "text",
+		"placeholders": {
+			"number": {},
+			"automaticCorrection": {}
+		}
+	},
+	"I18nHome_updateManualStartCorrection": "У номера {number} уже проставлена ручная стартовая отсечка: {manualCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
+	"@I18nHome_updateManualStartCorrection": {
+		"type": "text",
+		"placeholders": {
+			"number": {},
+			"manualCorrection": {}
+		}
+	},
+	"I18nHome_errorAddParticipant": "Ошибка при добавлении участника! Для продолжения нажмите \"{cancelButtonLabel}\"\n",
+	"@I18nHome_errorAddParticipant": {
+		"type": "text",
+		"placeholders": {
+			"cancelButtonLabel": {}
+		}
+	},
+	"I18nHome_home": "Начало",
+	"@I18nHome_home": {
+		"type": "text"
+	},
+	"I18nHome_start": "Старт",
+	"@I18nHome_start": {
+		"type": "text"
+	},
+	"I18nHome_finish": "Финиш",
+	"@I18nHome_finish": {
+		"type": "text"
+	},
+	"I18nHome_updateAvailable": "Доступна новая версия {version}",
+	"@I18nHome_updateAvailable": {
+		"type": "text",
+		"placeholders": {
+			"version": {}
+		}
+	},
+	"I18nHome_update": "Обновить",
+	"@I18nHome_update": {
+		"type": "text"
+	},
+	"I18nHome_addRacer": "Добавить участника",
+	"@I18nHome_addRacer": {
+		"type": "text"
+	},
+	"I18nHome_share": "Поделиться",
+	"@I18nHome_share": {
+		"type": "text"
+	},
+	"I18nHome_selectStartProtocol": "Стартовый протокол",
+	"@I18nHome_selectStartProtocol": {
+		"type": "text"
+	},
+	"I18nHome_countdown": "Обратный отсчёт",
+	"@I18nHome_countdown": {
+		"type": "text"
+	},
+	"I18nHome_countdownPage": "Страница с обратным отсчётом",
+	"@I18nHome_countdownPage": {
+		"type": "text"
+	},
+	"I18nHome_fab": "FAB",
+	"@I18nHome_fab": {
+		"type": "text"
+	},
+	"I18nHome_importStartProtocolCsv": "Импорт стартового протокола",
+	"@I18nHome_importStartProtocolCsv": {
+		"type": "text"
+	},
+	"I18nHome_bluetooth": "Bluetooth",
+	"@I18nHome_bluetooth": {
+		"type": "text"
+	},
+	"I18nHome_hideMarked": "Скрытые",
+	"@I18nHome_hideMarked": {
+		"type": "text"
+	},
+	"I18nHome_hideNumbers": "С номерами",
+	"@I18nHome_hideNumbers": {
+		"type": "text"
+	},
+	"I18nHome_hideManual": "Ручная отсечка",
+	"@I18nHome_hideManual": {
+		"type": "text"
+	},
+	"I18nHome_setDefaults": "По умолчанию",
+	"@I18nHome_setDefaults": {
+		"type": "text"
+	},
+	"I18nInit_selectRace": "Выберите соревнование",
+	"@I18nInit_selectRace": {
+		"type": "text"
+	},
+	"I18nInit_selectStage": "Выберите спецучасток",
+	"@I18nInit_selectStage": {
+		"type": "text"
+	},
+	"I18nInit_pressToSelect": "Нажмите чтобы выбрать",
+	"@I18nInit_pressToSelect": {
+		"type": "text"
+	},
+	"I18nInit_bluetoothModule": "Bluetooth модуль",
+	"@I18nInit_bluetoothModule": {
+		"type": "text"
+	},
+	"I18nInit_selectFile": "Выберите файл",
+	"@I18nInit_selectFile": {
+		"type": "text"
+	},
+	"I18nInit_noData": "Нет данных",
+	"@I18nInit_noData": {
+		"type": "text"
+	},
+	"I18nInit_share": "Поделиться",
+	"@I18nInit_share": {
+		"type": "text"
+	},
+	"I18nInit_delete": "Удалить",
+	"@I18nInit_delete": {
+		"type": "text"
+	},
+	"I18nInit_importFromCsv": "Импорт протокола из csv",
+	"@I18nInit_importFromCsv": {
+		"type": "text"
+	},
+	"I18nStart_didNotStart": "Не стартовал",
+	"@I18nStart_didNotStart": {
+		"type": "text"
+	},
+	"I18nStart_addParticipant": "Добавить участника",
+	"@I18nStart_addParticipant": {
+		"type": "text"
+	},
+	"I18nStart_sliverNumber": "№",
+	"@I18nStart_sliverNumber": {
+		"type": "text"
+	},
+	"I18nStart_sliverStart": "Старт",
+	"@I18nStart_sliverStart": {
+		"type": "text"
+	},
+	"I18nStart_sliverManualCorrection": "Ручная\nпоправка",
+	"@I18nStart_sliverManualCorrection": {
+		"type": "text"
+	},
+	"I18nStart_sliverAutomaticCorrection": "Авто\nпоправка",
+	"@I18nStart_sliverAutomaticCorrection": {
+		"type": "text"
+	},
+	"I18nStart_incorrectCorrection": "Неверное значение поправки",
+	"@I18nStart_incorrectCorrection": {
+		"type": "text"
+	},
+	"I18nStart_incorrectTime": "Неверное значение времени",
+	"@I18nStart_incorrectTime": {
+		"type": "text"
+	},
+	"I18nStart_participantNumber": "Участник №{number}",
+	"@I18nStart_participantNumber": {
+		"type": "text",
+		"placeholders": {
+			"number": {}
+		}
+	},
+	"I18nStart_participantNumberWithName": "№{number}, {name}",
+	"@I18nStart_participantNumberWithName": {
+		"type": "text",
+		"placeholders": {
+			"number": {},
+			"name": {}
+		}
+	},
+	"I18nStart_participantCategory": "Категория: {category}",
+	"@I18nStart_participantCategory": {
+		"type": "text",
+		"placeholders": {
+			"category": {}
+		}
+	},
+	"I18nStart_participantNickname": "Никнейм: {nickname}",
+	"@I18nStart_participantNickname": {
+		"type": "text",
+		"placeholders": {
+			"nickname": {}
+		}
+	},
+	"I18nStart_participantCity": "Город: {city}",
+	"@I18nStart_participantCity": {
+		"type": "text",
+		"placeholders": {
+			"city": {}
+		}
+	},
+	"I18nStart_participantTeam": "Команда: {team}",
+	"@I18nStart_participantTeam": {
+		"type": "text",
+		"placeholders": {
+			"team": {}
+		}
+	},
+	"I18nStart_participantYear": "Год/Возраст: {year}",
+	"@I18nStart_participantYear": {
+		"type": "text",
+		"placeholders": {
+			"year": {}
+		}
+	},
+	"I18nStart_startTime": "Время старта",
+	"@I18nStart_startTime": {
+		"type": "text"
+	},
+	"I18nStart_startTimeAtSmartphone": "Время старта на смартфоне",
+	"@I18nStart_startTimeAtSmartphone": {
+		"type": "text"
+	},
+	"I18nLog_bluetoothInformation": "Информация Bluetooth",
+	"@I18nLog_bluetoothInformation": {
+		"type": "text"
+	},
+	"I18nModuleSettings_saveSettingsToModule": "Записать новые настройки в модуль?",
+	"@I18nModuleSettings_saveSettingsToModule": {
+		"type": "text"
+	},
+	"I18nModuleSettings_moduleSettings": "Настройки модуля",
+	"@I18nModuleSettings_moduleSettings": {
+		"type": "text"
+	},
+	"I18nModuleSettings_errorLoadSettings": "Ошибка загрузки настроек!",
+	"@I18nModuleSettings_errorLoadSettings": {
+		"type": "text"
+	},
+	"I18nModuleSettings_awaitingSettings": "Ждём настройки...",
+	"@I18nModuleSettings_awaitingSettings": {
+		"type": "text"
+	},
+	"I18nModuleSettings_module": "Модуль",
+	"@I18nModuleSettings_module": {
+		"type": "text"
+	},
+	"I18nModuleSettings_buzzer": "Buzzer",
+	"@I18nModuleSettings_buzzer": {
+		"type": "text"
+	},
+	"I18nModuleSettings_shortFrequency": "Частота коротких гудков",
+	"@I18nModuleSettings_shortFrequency": {
+		"type": "text"
+	},
+	"I18nModuleSettings_selectShortFrequency": "Выберите частоту короткого гудка",
+	"@I18nModuleSettings_selectShortFrequency": {
+		"type": "text"
+	},
+	"I18nModuleSettings_longFrequency": "Частота длинных гудков",
+	"@I18nModuleSettings_longFrequency": {
+		"type": "text"
+	},
+	"I18nModuleSettings_selectLongFrequency": "Выберите частоту длинного гудка",
+	"@I18nModuleSettings_selectLongFrequency": {
+		"type": "text"
+	},
+	"I18nModuleSettings_noteFrequency": "Нота {note}, {frequency}Гц",
+	"@I18nModuleSettings_noteFrequency": {
+		"type": "text",
+		"placeholders": {
+			"note": {},
+			"frequency": {}
+		}
+	},
+	"I18nModuleSettings_lora": "LoRa",
+	"@I18nModuleSettings_lora": {
+		"type": "text"
+	},
+	"I18nModuleSettings_frequency": "Частота",
+	"@I18nModuleSettings_frequency": {
+		"type": "text"
+	},
+	"I18nModuleSettings_frequencyHz": "{frequency}Гц",
+	"@I18nModuleSettings_frequencyHz": {
+		"type": "text",
+		"placeholders": {
+			"frequency": {}
+		}
+	},
+	"I18nModuleSettings_txPower": "TX Power",
+	"@I18nModuleSettings_txPower": {
+		"type": "text"
+	},
+	"I18nModuleSettings_spreadingFactor": "Spreading Factor",
+	"@I18nModuleSettings_spreadingFactor": {
+		"type": "text"
+	},
+	"I18nModuleSettings_signalBandwidth": "Signal Bandwidth",
+	"@I18nModuleSettings_signalBandwidth": {
+		"type": "text"
+	},
+	"I18nModuleSettings_codingRateDenominator": "Coding Rate Denominator",
+	"@I18nModuleSettings_codingRateDenominator": {
+		"type": "text"
+	},
+	"I18nModuleSettings_preambleLength": "Preamble Length",
+	"@I18nModuleSettings_preambleLength": {
+		"type": "text"
+	},
+	"I18nModuleSettings_syncWord": "Sync Word",
+	"@I18nModuleSettings_syncWord": {
+		"type": "text"
+	},
+	"I18nModuleSettings_crc": "CRC",
+	"@I18nModuleSettings_crc": {
+		"type": "text"
+	},
+	"I18nModuleSettings_screen": "Экран",
+	"@I18nModuleSettings_screen": {
+		"type": "text"
+	},
+	"I18nModuleSettings_tft": "TFT",
+	"@I18nModuleSettings_tft": {
+		"type": "text"
+	},
+	"I18nModuleSettings_sleepMode": "Спящий режим",
+	"@I18nModuleSettings_sleepMode": {
+		"type": "text"
+	},
+	"I18nModuleSettings_sleepModeSeconds": "{seconds,plural, =1{{seconds} секунда}few{{seconds} секунды}other{секунд}}",
+	"@I18nModuleSettings_sleepModeSeconds": {
+		"type": "text",
+		"placeholders": {
+			"seconds": {}
+		}
+	},
+	"I18nModuleSettings_turnOnAtEvent": "Включать после события",
+	"@I18nModuleSettings_turnOnAtEvent": {
+		"type": "text"
+	},
+	"I18nModuleSettings_bluetooth": "Bluetooth",
+	"@I18nModuleSettings_bluetooth": {
+		"type": "text"
+	},
+	"I18nModuleSettings_bluetoothModuleName": "Имя модуля",
+	"@I18nModuleSettings_bluetoothModuleName": {
+		"type": "text"
+	},
+	"I18nModuleSettings_bluetoothModuleNumber": "Номер модуля",
+	"@I18nModuleSettings_bluetoothModuleNumber": {
+		"type": "text"
+	},
+	"I18nModuleSettings_bluetoothNumber": "Номер",
+	"@I18nModuleSettings_bluetoothNumber": {
+		"type": "text"
+	},
+	"I18nModuleSettings_enterBluetoothModuleNumber": "Введите номер модуля",
+	"@I18nModuleSettings_enterBluetoothModuleNumber": {
+		"type": "text"
+	},
+	"I18nModuleSettings_wifi": "WiFi",
+	"@I18nModuleSettings_wifi": {
+		"type": "text"
+	},
+	"I18nModuleSettings_wifiNetwork": "Сеть",
+	"@I18nModuleSettings_wifiNetwork": {
+		"type": "text"
+	},
+	"I18nModuleSettings_enterWifiSsid": "Введите имя WiFi сети",
+	"@I18nModuleSettings_enterWifiSsid": {
+		"type": "text"
+	},
+	"I18nModuleSettings_enterWifiPassword": "Введите пароль WiFi сети {ssid}",
+	"@I18nModuleSettings_enterWifiPassword": {
+		"type": "text",
+		"placeholders": {
+			"ssid": {}
+		}
+	},
+	"I18nModuleSettings_password": "Пароль",
+	"@I18nModuleSettings_password": {
+		"type": "text"
+	},
+	"I18nModuleSettings_vcc": "VCC",
+	"@I18nModuleSettings_vcc": {
+		"type": "text"
+	},
+	"I18nModuleSettings_resistor1": "R1",
+	"@I18nModuleSettings_resistor1": {
+		"type": "text"
+	},
+	"I18nModuleSettings_resistor2": "R2",
+	"@I18nModuleSettings_resistor2": {
+		"type": "text"
+	},
+	"I18nModuleSettings_ohm": "Ом",
+	"@I18nModuleSettings_ohm": {
+		"type": "text"
+	},
+	"I18nModuleSettings_resistorOhm": "{ohm} Ом",
+	"@I18nModuleSettings_resistorOhm": {
+		"type": "text",
+		"placeholders": {
+			"ohm": {}
+		}
+	},
+	"I18nModuleSettings_enterResistor1": "Введите значение резистора R1",
+	"@I18nModuleSettings_enterResistor1": {
+		"type": "text"
+	},
+	"I18nModuleSettings_enterResistor2": "Введите значение резистора R2",
+	"@I18nModuleSettings_enterResistor2": {
+		"type": "text"
+	},
+	"I18nModuleSettings_enterMeasuredVoltage": "Ввод измеренного напряжения",
+	"@I18nModuleSettings_enterMeasuredVoltage": {
+		"type": "text"
+	},
+	"I18nModuleSettings_mv": "мВ",
+	"@I18nModuleSettings_mv": {
+		"type": "text"
+	},
+	"I18nModuleSettings_enterCurrentVoltage": "Введите текущее значение напряжения на батареях",
+	"@I18nModuleSettings_enterCurrentVoltage": {
+		"type": "text"
+	},
+	"I18nModuleSettings_brightness": "Яркость",
+	"@I18nModuleSettings_brightness": {
+		"type": "text"
+	},
+	"I18nModuleSettings_setBrightness": "Установите яркость панели",
+	"@I18nModuleSettings_setBrightness": {
+		"type": "text"
+	},
+	"I18nModuleSettings_brightnessInt": "Яркость {brightness}",
+	"@I18nModuleSettings_brightnessInt": {
+		"type": "text",
+		"placeholders": {
+			"brightness": {}
+		}
+	},
+	"I18nModuleSettings_unknownModuleType": "Неизвестный тип модуля: {type}",
+	"@I18nModuleSettings_unknownModuleType": {
+		"type": "text",
+		"placeholders": {
+			"type": {}
+		}
+	},
+	"I18nDatabase_races": "Соревнования",
+	"@I18nDatabase_races": {
+		"type": "text"
+	},
+	"I18nDatabase_addRace": "Создать соревнование",
+	"@I18nDatabase_addRace": {
+		"type": "text"
+	},
+	"I18nDatabase_raceName": "Название соревнования",
+	"@I18nDatabase_raceName": {
+		"type": "text"
+	},
+	"I18nDatabase_enterRaceName": "Введите название соревнования",
+	"@I18nDatabase_enterRaceName": {
+		"type": "text"
+	},
+	"I18nDatabase_raceDates": "Даты проведения",
+	"@I18nDatabase_raceDates": {
+		"type": "text"
+	},
+	"I18nDatabase_addStage": "Создать спецучасток",
+	"@I18nDatabase_addStage": {
+		"type": "text"
+	},
+	"I18nDatabase_stageName": "Название спецучастка",
+	"@I18nDatabase_stageName": {
+		"type": "text"
+	},
+	"I18nDatabase_enterStageName": "Введите название спецучастка",
+	"@I18nDatabase_enterStageName": {
+		"type": "text"
+	},
+	"I18nDatabase_trail": "Трейл",
+	"@I18nDatabase_trail": {
+		"type": "text"
+	},
+	"I18nNtp_ntpOffset": "NTP offset",
+	"@I18nNtp_ntpOffset": {
+		"type": "text"
+	},
+	"I18nNtp_sync": "Нажмите для синхронизации",
+	"@I18nNtp_sync": {
+		"type": "text"
+	},
+	"I18nNtp_syncing": "Синхронизация...",
+	"@I18nNtp_syncing": {
+		"type": "text"
+	},
+	"I18nNtp_syncError": "Ошибка синхронизации",
+	"@I18nNtp_syncError": {
+		"type": "text"
+	},
+	"I18nNtp_offsetInMilliseconds": "{offset,plural, =1{Смещение {offset} миллисекунда}few{Смещение {offset} миллисекунды}other{Смещение {offset} миллисекунд}}",
+	"@I18nNtp_offsetInMilliseconds": {
+		"type": "text",
+		"placeholders": {
+			"offset": {}
+		}
+	}
 }

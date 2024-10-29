@@ -3,6 +3,11 @@
 import 'package:intl/intl.dart';
 
 class I18nCore {
+  static String get edit => Intl.message(
+        'Редактировать',
+        name: 'I18nCore_edit',
+      );
+
   static String get delete => Intl.message(
         'Удалить',
         name: 'I18nCore_delete',
