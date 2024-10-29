@@ -499,7 +499,7 @@
 		"placeholders_order": [],
 		"placeholders": {}
 	},
-	"I18nHome_updateAutomaticCorrection": "Участнику под номером {number} уже установлена стартовая поправка {prevCorrection}. Обновить её на {correction}?",
+	"I18nHome_updateAutomaticCorrection": "Participant number {number} already has the initial correction {prevCorrection} set. Would you like to update it to {correction}?",
 	"@I18nHome_updateAutomaticCorrection": {
 		"type": "text",
 		"placeholders_order": [
@@ -513,7 +513,7 @@
 			"correction": {}
 		}
 	},
-	"I18nHome_equalStartTime": "Стартовое время {time} уже присвоено номеру {prevNumber}. Вы уверены что хотите установить одинаковое стартовое время для номеров {currentNumber} и {prevNumber}?\n",
+	"I18nHome_equalStartTime": "The start time {time} has already been assigned to number {prevNumber}. Are you sure you want to set the same start time for numbers {currentNumber} and {prevNumber}?",
 	"@I18nHome_equalStartTime": {
 		"type": "text",
 		"placeholders_order": [
@@ -527,7 +527,7 @@
 			"currentNumber": {}
 		}
 	},
-	"I18nHome_updateAutomaticStartCorrection": "У номера {number} уже проставлена автоматическая стартовая отсечка: {automaticCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
+	"I18nHome_updateAutomaticStartCorrection": "For number {number}, the automatic start timer has already been set to: {automaticCorrection}. Would you like to set a new start time and remove the previous setting?",
 	"@I18nHome_updateAutomaticStartCorrection": {
 		"type": "text",
 		"placeholders_order": [
@@ -539,7 +539,7 @@
 			"automaticCorrection": {}
 		}
 	},
-	"I18nHome_updateManualStartCorrection": "У номера {number} уже проставлена ручная стартовая отсечка: {manualCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n",
+	"I18nHome_updateManualStartCorrection": "For number {number}, the manual start time has already been set: {manualCorrection}. Would you like to set a new start time and remove the previous entry?",
 	"@I18nHome_updateManualStartCorrection": {
 		"type": "text",
 		"placeholders_order": [

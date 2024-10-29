@@ -561,10 +561,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Количество отображаемых строк в журнале`
+  /// `Количество отображамых строк в журнале`
   String get I18nSettings_journalLinesNumberPopup {
     return Intl.message(
-      'Количество отображаемых строк в журнале',
+      'Количество отображамых строк в журнале',
       name: 'I18nSettings_journalLinesNumberPopup',
       desc: '',
       args: [],
@@ -1325,20 +1325,20 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Ручная\nпоправка`
+  /// `Ручная\r\nпоправка`
   String get I18nStart_sliverManualCorrection {
     return Intl.message(
-      'Ручная\nпоправка',
+      'Ручная\r\nпоправка',
       name: 'I18nStart_sliverManualCorrection',
       desc: '',
       args: [],
     );
   }
 
-  /// `Авто\nпоправка`
+  /// `Авто\r\nпоправка`
   String get I18nStart_sliverAutomaticCorrection {
     return Intl.message(
-      'Авто\nпоправка',
+      'Авто\r\nпоправка',
       name: 'I18nStart_sliverAutomaticCorrection',
       desc: '',
       args: [],

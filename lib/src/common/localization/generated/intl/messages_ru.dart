@@ -347,7 +347,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Количество показываемых записей"),
         "I18nSettings_journalLinesNumberPopup":
             MessageLookupByLibrary.simpleMessage(
-                "Количество отображаемых строк в журнале"),
+                "Количество отображамых строк в журнале"),
         "I18nSettings_language": MessageLookupByLibrary.simpleMessage("Язык"),
         "I18nSettings_lightBlue":
             MessageLookupByLibrary.simpleMessage("Синяя светлая тема"),
@@ -426,9 +426,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nStart_participantTeam": m26,
         "I18nStart_participantYear": m27,
         "I18nStart_sliverAutomaticCorrection":
-            MessageLookupByLibrary.simpleMessage("Авто\nпоправка"),
+            MessageLookupByLibrary.simpleMessage("Авто\r\nпоправка"),
         "I18nStart_sliverManualCorrection":
-            MessageLookupByLibrary.simpleMessage("Ручная\nпоправка"),
+            MessageLookupByLibrary.simpleMessage("Ручная\r\nпоправка"),
         "I18nStart_sliverNumber": MessageLookupByLibrary.simpleMessage("№"),
         "I18nStart_sliverStart": MessageLookupByLibrary.simpleMessage("Старт"),
         "I18nStart_startTime":

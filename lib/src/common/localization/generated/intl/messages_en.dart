@@ -23,21 +23,21 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(version) => "v${version}";
 
   static String m1(time, prevNumber, currentNumber) =>
-      "Стартовое время ${time} уже присвоено номеру ${prevNumber}. Вы уверены что хотите установить одинаковое стартовое время для номеров ${currentNumber} и ${prevNumber}?\n";
+      "The start time ${time} has already been assigned to number ${prevNumber}. Are you sure you want to set the same start time for numbers ${currentNumber} and ${prevNumber}?";
 
   static String m2(cancelButtonLabel) =>
       "Error when adding participant! Press \"${cancelButtonLabel}\" to continue\n";
 
   static String m3(number, prevCorrection, correction) =>
-      "Участнику под номером ${number} уже установлена стартовая поправка ${prevCorrection}. Обновить её на ${correction}?";
+      "Participant number ${number} already has the initial correction ${prevCorrection} set. Would you like to update it to ${correction}?";
 
   static String m4(number, automaticCorrection) =>
-      "У номера ${number} уже проставлена автоматическая стартовая отсечка: ${automaticCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n";
+      "For number ${number}, the automatic start timer has already been set to: ${automaticCorrection}. Would you like to set a new start time and remove the previous setting?";
 
   static String m5(version) => "Update available";
 
   static String m6(number, manualCorrection) =>
-      "У номера ${number} уже проставлена ручная стартовая отсечка: ${manualCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n";
+      "For number ${number}, the manual start time has already been set: ${manualCorrection}. Would you like to set a new start time and remove the previous entry?";
 
   static String m7(brightness) => "Brightness ${brightness}";
 
