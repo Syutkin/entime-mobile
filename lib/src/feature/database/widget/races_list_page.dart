@@ -1,3 +1,4 @@
+import 'package:entime/src/feature/database/widget/race_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -13,8 +14,7 @@ class RacesListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateFormat formatter =
-        DateFormat.yMd(Localizations.localeOf(context).languageCode);
+
     return Scaffold(
       appBar: AppBar(title: Text(Localization.current.I18nDatabase_races)),
       floatingActionButton: FloatingActionButton(
@@ -30,33 +30,7 @@ class RacesListPage extends StatelessWidget {
             itemCount: count,
             itemBuilder: (context, index) {
               final race = state.races[index];
-              return ListTile(
-                title: Text(race.name),
-                subtitle: (race.startDate != null && race.finishDate != null)
-                    ? Text(
-                        '${formatter.format(DateTime.parse(race.startDate!))} - ${formatter.format(DateTime.parse(race.finishDate!))}',
-                      )
-                    : const SizedBox.shrink(),
-                onTap: () {
-                  context
-                      .read<DatabaseBloc>()
-                      .add(DatabaseEvent.selectRace(race));
-                },
-                trailing: PopupMenuButton<void>(
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => <PopupMenuEntry<void>>[
-                    PopupMenuItem<void>(
-                      onTap: () => context
-                          .read<DatabaseBloc>()
-                          .add(DatabaseEvent.deleteRace(race.id)),
-                      child: ListTile(
-                        leading: const Icon(Icons.delete),
-                        title: Text(Localization.current.I18nCore_delete),
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              return RaceItemTile(race: race);
             },
           );
         },

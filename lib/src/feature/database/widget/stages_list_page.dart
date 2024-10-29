@@ -1,9 +1,9 @@
+import 'package:entime/src/feature/database/widget/stages_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
-import '../../countdown/countdown.dart';
 import '../bloc/database_bloc.dart';
 import '../drift/app_database.dart';
 
@@ -31,39 +31,7 @@ class StagesListPage extends StatelessWidget {
               itemCount: count,
               itemBuilder: (context, index) {
                 final stage = state.stages[index];
-                return ListTile(
-                  title: Text(stage.name),
-                  onTap: () {
-                    // context
-                    //     .read<DatabaseBloc>()
-                    //     .add(DatabaseEvent.getParticipantsAtStart(stage.id!));
-                    context
-                        .read<DatabaseBloc>()
-                        .add(DatabaseEvent.selectStage(stage));
-                    context
-                        .read<CountdownBloc>()
-                        .add(CountdownEvent.start(stageId: stage.id));
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute<void>(
-                    //     builder: (context) => StartListPage(),
-                    //   ),
-                    // );
-                  },
-                  trailing: PopupMenuButton<void>(
-                    icon: const Icon(Icons.more_vert),
-                    itemBuilder: (context) => <PopupMenuEntry<void>>[
-                      PopupMenuItem<void>(
-                        onTap: () => context
-                            .read<DatabaseBloc>()
-                            .add(DatabaseEvent.deleteStage(stage.id)),
-                        child: ListTile(
-                          leading: const Icon(Icons.delete),
-                          title: Text(Localization.current.I18nCore_delete),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+                return StagesItemTile(stage: stage);
               },
             );
           },

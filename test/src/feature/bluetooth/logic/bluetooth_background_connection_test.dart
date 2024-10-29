@@ -1,15 +1,11 @@
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-
-class MockBluetoothConnection extends Mock implements BluetoothConnection {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late IBluetoothBackgroundConnection bbc;
   late BluetoothDevice bluetoothDevice;
-  late BluetoothConnection bluetoothConnection;
 
   setUp(() {
     bbc = BluetoothBackgroundConnection();
@@ -18,7 +14,6 @@ void main() {
       name: 'Bluetooth device',
     );
 
-    bluetoothConnection = MockBluetoothConnection();
   });
 
   group('Test BluetoothBackgroundConnection', () {
