@@ -1126,8 +1126,13 @@ class I18nDatabase {
         name: 'I18nDatabase_addRace',
       );
 
+  static String get editRace => Intl.message(
+        'Редактирование',
+        name: 'I18nDatabase_editRace',
+      );
+
   static String get raceName => Intl.message(
-        'Название соревнования',
+        'Название',
         name: 'I18nDatabase_raceName',
       );
 
@@ -1140,6 +1145,26 @@ class I18nDatabase {
         'Даты проведения',
         name: 'I18nDatabase_raceDates',
       );
+
+  static String get raceUrl => Intl.message(
+        'Сайт',
+        name: 'I18nDatabase_raceUrl',
+      );
+
+  static String get incorrectRaceUrl => Intl.message(
+        'Некорректная ссылка',
+        name: 'I18nDatabase_incorrectRaceUrl',
+      );
+
+  static String get raceLocation => Intl.message(
+    'Место проведения',
+    name: 'I18nDatabase_raceLocation',
+  );
+
+  static String get raceDescription => Intl.message(
+    'Описание',
+    name: 'I18nDatabase_raceDescription',
+  );
 
   static String get addStage => Intl.message(
         'Создать спецучасток',

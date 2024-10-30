@@ -1,10 +1,9 @@
-import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/localization/localization.dart';
-import '../bloc/database_bloc.dart';
+import '../database.dart';
 
 class RaceItemTile extends StatelessWidget {
   const RaceItemTile({
@@ -39,9 +38,8 @@ class RaceItemTile extends StatelessWidget {
   List<PopupMenuEntry<void>> _menuEntryList(BuildContext context) {
     return <PopupMenuEntry<void>>[
       PopupMenuItem<void>(
-        // ToDo: implement race edit
         onTap: () {
-          throw 'Not implemented';
+          updateRacePopup(context, race);
         },
         child: ListTile(
           leading: const Icon(Icons.edit),

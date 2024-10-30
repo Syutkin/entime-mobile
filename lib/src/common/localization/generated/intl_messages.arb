@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-29T13:20:21.262006",
+  "@@last_modified": "2024-10-31T01:55:51.284347",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1035,7 +1035,12 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nDatabase_raceName": "Название соревнования",
+  "I18nDatabase_editRace": "Редактирование",
+  "@I18nDatabase_editRace": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_raceName": "Название",
   "@I18nDatabase_raceName": {
     "type": "text",
     "placeholders": {}
@@ -1047,6 +1052,26 @@
   },
   "I18nDatabase_raceDates": "Даты проведения",
   "@I18nDatabase_raceDates": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_raceUrl": "Сайт",
+  "@I18nDatabase_raceUrl": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_incorrectRaceUrl": "Некорректная ссылка",
+  "@I18nDatabase_incorrectRaceUrl": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_raceLocation": "Место проведения",
+  "@I18nDatabase_raceLocation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_raceDescription": "Описание",
+  "@I18nDatabase_raceDescription": {
     "type": "text",
     "placeholders": {}
   },

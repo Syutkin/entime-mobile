@@ -108,14 +108,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создать соревнование"),
         "I18nDatabase_addStage":
             MessageLookupByLibrary.simpleMessage("Создать спецучасток"),
+        "I18nDatabase_editRace":
+            MessageLookupByLibrary.simpleMessage("Редактирование"),
         "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
             "Введите название соревнования"),
         "I18nDatabase_enterStageName": MessageLookupByLibrary.simpleMessage(
             "Введите название спецучастка"),
+        "I18nDatabase_incorrectRaceUrl":
+            MessageLookupByLibrary.simpleMessage("Некорректная ссылка"),
         "I18nDatabase_raceDates":
             MessageLookupByLibrary.simpleMessage("Даты проведения"),
+        "I18nDatabase_raceDescription":
+            MessageLookupByLibrary.simpleMessage("Описание"),
+        "I18nDatabase_raceLocation":
+            MessageLookupByLibrary.simpleMessage("Место проведения"),
         "I18nDatabase_raceName":
-            MessageLookupByLibrary.simpleMessage("Название соревнования"),
+            MessageLookupByLibrary.simpleMessage("Название"),
+        "I18nDatabase_raceUrl": MessageLookupByLibrary.simpleMessage("Сайт"),
         "I18nDatabase_races":
             MessageLookupByLibrary.simpleMessage("Соревнования"),
         "I18nDatabase_stageName":

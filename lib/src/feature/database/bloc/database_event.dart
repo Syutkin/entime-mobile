@@ -29,6 +29,16 @@ class DatabaseEvent with _$DatabaseEvent {
     String? location,
   }) = _AddRace;
 
+  const factory DatabaseEvent.updateRace({
+    required int id,
+    String? name,
+    DateTime? startDate,
+    DateTime? finishDate,
+    String? location,
+    String? url,
+    String? description,
+  }) = _UpdateRace;
+
   const factory DatabaseEvent.deleteRace(int id) = _DeleteRace;
 
   const factory DatabaseEvent.getRaces() = _GetRaces;

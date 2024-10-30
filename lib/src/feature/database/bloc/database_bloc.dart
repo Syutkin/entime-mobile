@@ -278,6 +278,17 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         deleteRace: (event) async {
           await _db.deleteRace(id: event.id);
         },
+        updateRace: (event) async {
+          await _db.updateRace(
+            id: event.id,
+            name: event.name,
+            startDate: event.startDate,
+            finishDate: event.finishDate,
+            location: event.location,
+            url: event.url,
+            description: event.description,
+          );
+        },
         getRaces: (event) async {
           _races = await _db.getRaces().get();
         },

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +16,7 @@ import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../countdown/countdown.dart';
 import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/settings.dart';
-import '../bloc/database_bloc.dart';
-import '../drift/app_database.dart';
-import 'start_item_tile.dart';
+import '../database.dart';
 
 part 'popup/add_racer_popup.dart';
 part 'popup/edit_start_time_popup.dart';

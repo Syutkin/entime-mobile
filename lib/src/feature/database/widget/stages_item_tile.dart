@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../countdown/countdown.dart';
-import '../bloc/database_bloc.dart';
-import '../drift/app_database.dart';
+import '../database.dart';
 
 class StagesItemTile extends StatelessWidget {
   const StagesItemTile({

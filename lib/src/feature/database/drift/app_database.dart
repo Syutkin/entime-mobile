@@ -78,6 +78,33 @@ class AppDatabase extends _$AppDatabase {
     return _deleteRace(id: id);
   }
 
+  /// Обновление информации о гонке с [id]
+  Future<int> updateRace({
+    required int id,
+    String? name,
+    DateTime? startDate,
+    DateTime? finishDate,
+    String? location,
+    String? url,
+    String? description,
+  }) async {
+    final raceId = await (update(races)
+          ..where(
+            (race) => race.id.equals(id),
+          ))
+        .write(
+      RacesCompanion(
+        name: name != null ? Value(name) : Value.absent(),
+        startDate: startDate != null ? Value(startDate.toIso8601String()) : Value.absent(),
+        finishDate: finishDate != null ? Value(finishDate.toIso8601String()) : Value.absent(),
+        location: location != null ? Value(location) : Value.absent(),
+        url: url != null ? Value(url) : Value.absent(),
+        description: description != null ? Value(description) : Value.absent(),
+      ),
+    );
+    return raceId;
+  }
+
   /// Весь список спецучастков, кроме "удалённых" (is_deleted = true)
   Selectable<Stage> getStages({required int raceId}) {
     return _getStages(raceId: raceId);

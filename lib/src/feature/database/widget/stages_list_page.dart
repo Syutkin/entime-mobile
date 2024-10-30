@@ -1,11 +1,9 @@
-import 'package:entime/src/feature/database/widget/stages_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
-import '../bloc/database_bloc.dart';
-import '../drift/app_database.dart';
+import '../database.dart';
 
 part 'popup/add_stage_popup.dart';
 

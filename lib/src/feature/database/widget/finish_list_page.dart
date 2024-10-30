@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
-import 'package:entime/src/common/logger/logger.dart';
-import 'package:entime/src/feature/database/widget/popup/add_finish_number_popup.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -11,17 +9,14 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../common/logger/logger.dart';
 import '../../../common/utils/helper.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/bloc/settings_bloc.dart';
-import '../bloc/database_bloc.dart';
-import '../drift/app_database.dart';
-import '../model/participant_status.dart';
-import 'finish_item_tile.dart';
-import 'number_on_trace_tile.dart';
+import '../database.dart';
 
 enum FinishPopupMenu { clearNumber, hideAll }
 

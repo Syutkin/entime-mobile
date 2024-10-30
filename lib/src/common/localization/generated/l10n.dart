@@ -1988,10 +1988,20 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Название соревнования`
+  /// `Редактирование`
+  String get I18nDatabase_editRace {
+    return Intl.message(
+      'Редактирование',
+      name: 'I18nDatabase_editRace',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Название`
   String get I18nDatabase_raceName {
     return Intl.message(
-      'Название соревнования',
+      'Название',
       name: 'I18nDatabase_raceName',
       desc: '',
       args: [],
@@ -2013,6 +2023,46 @@ class GeneratedLocalization {
     return Intl.message(
       'Даты проведения',
       name: 'I18nDatabase_raceDates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сайт`
+  String get I18nDatabase_raceUrl {
+    return Intl.message(
+      'Сайт',
+      name: 'I18nDatabase_raceUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректная ссылка`
+  String get I18nDatabase_incorrectRaceUrl {
+    return Intl.message(
+      'Некорректная ссылка',
+      name: 'I18nDatabase_incorrectRaceUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Место проведения`
+  String get I18nDatabase_raceLocation {
+    return Intl.message(
+      'Место проведения',
+      name: 'I18nDatabase_raceLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Описание`
+  String get I18nDatabase_raceDescription {
+    return Intl.message(
+      'Описание',
+      name: 'I18nDatabase_raceDescription',
       desc: '',
       args: [],
     );
