@@ -8,6 +8,7 @@ import '../../../common/widget/expanded_alert_dialog.dart';
 import '../bloc/database_bloc.dart';
 
 part 'popup/add_race_popup.dart';
+part 'popup/edit_race_popup.dart';
 
 class RacesListPage extends StatelessWidget {
   const RacesListPage({super.key});

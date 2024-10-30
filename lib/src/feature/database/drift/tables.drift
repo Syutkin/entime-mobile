@@ -8,6 +8,8 @@ CREATE TABLE races (
 	start_date text,
 	finish_date text,
 	location text,
+	url text,
+	description text,
 	is_deleted BOOLEAN NOT NULL DEFAULT false
 ) AS Race;
 
@@ -16,6 +18,7 @@ CREATE TABLE stages (
 	trail_id integer,
 	race_id integer NOT NULL,
 	name text NOT NULL,
+	description text,
 	is_active BOOLEAN NOT NULL DEFAULT true,
 	is_deleted BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (trail_id) REFERENCES trails(id),
@@ -87,8 +90,8 @@ CREATE TABLE trails (
 	distance integer,
 	elevation integer,
 	gpx_track blob,
-	link text,
-	comment text
+	url text,
+	description text
 );
 
 CREATE TABLE logs (

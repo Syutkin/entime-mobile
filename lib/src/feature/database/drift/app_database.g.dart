@@ -41,6 +41,19 @@ class Races extends Table with TableInfo<Races, Race> {
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
+  static const VerificationMeta _urlMeta = const VerificationMeta('url');
+  late final GeneratedColumn<String> url = GeneratedColumn<String>(
+      'url', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _descriptionMeta =
+      const VerificationMeta('description');
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+      'description', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
   static const VerificationMeta _isDeletedMeta =
       const VerificationMeta('isDeleted');
   late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
@@ -51,7 +64,7 @@ class Races extends Table with TableInfo<Races, Race> {
       defaultValue: const CustomExpression('FALSE'));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, startDate, finishDate, location, isDeleted];
+      [id, name, startDate, finishDate, location, url, description, isDeleted];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -85,6 +98,16 @@ class Races extends Table with TableInfo<Races, Race> {
       context.handle(_locationMeta,
           location.isAcceptableOrUnknown(data['location']!, _locationMeta));
     }
+    if (data.containsKey('url')) {
+      context.handle(
+          _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
+    }
+    if (data.containsKey('description')) {
+      context.handle(
+          _descriptionMeta,
+          description.isAcceptableOrUnknown(
+              data['description']!, _descriptionMeta));
+    }
     if (data.containsKey('is_deleted')) {
       context.handle(_isDeletedMeta,
           isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
@@ -108,6 +131,10 @@ class Races extends Table with TableInfo<Races, Race> {
           .read(DriftSqlType.string, data['${effectivePrefix}finish_date']),
       location: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}location']),
+      url: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}url']),
+      description: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}description']),
       isDeleted: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
     );
@@ -128,6 +155,8 @@ class Race extends DataClass implements Insertable<Race> {
   final String? startDate;
   final String? finishDate;
   final String? location;
+  final String? url;
+  final String? description;
   final bool isDeleted;
   const Race(
       {required this.id,
@@ -135,6 +164,8 @@ class Race extends DataClass implements Insertable<Race> {
       this.startDate,
       this.finishDate,
       this.location,
+      this.url,
+      this.description,
       required this.isDeleted});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -149,6 +180,12 @@ class Race extends DataClass implements Insertable<Race> {
     }
     if (!nullToAbsent || location != null) {
       map['location'] = Variable<String>(location);
+    }
+    if (!nullToAbsent || url != null) {
+      map['url'] = Variable<String>(url);
+    }
+    if (!nullToAbsent || description != null) {
+      map['description'] = Variable<String>(description);
     }
     map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
@@ -167,6 +204,10 @@ class Race extends DataClass implements Insertable<Race> {
       location: location == null && nullToAbsent
           ? const Value.absent()
           : Value(location),
+      url: url == null && nullToAbsent ? const Value.absent() : Value(url),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       isDeleted: Value(isDeleted),
     );
   }
@@ -180,6 +221,8 @@ class Race extends DataClass implements Insertable<Race> {
       startDate: serializer.fromJson<String?>(json['start_date']),
       finishDate: serializer.fromJson<String?>(json['finish_date']),
       location: serializer.fromJson<String?>(json['location']),
+      url: serializer.fromJson<String?>(json['url']),
+      description: serializer.fromJson<String?>(json['description']),
       isDeleted: serializer.fromJson<bool>(json['is_deleted']),
     );
   }
@@ -192,6 +235,8 @@ class Race extends DataClass implements Insertable<Race> {
       'start_date': serializer.toJson<String?>(startDate),
       'finish_date': serializer.toJson<String?>(finishDate),
       'location': serializer.toJson<String?>(location),
+      'url': serializer.toJson<String?>(url),
+      'description': serializer.toJson<String?>(description),
       'is_deleted': serializer.toJson<bool>(isDeleted),
     };
   }
@@ -202,6 +247,8 @@ class Race extends DataClass implements Insertable<Race> {
           Value<String?> startDate = const Value.absent(),
           Value<String?> finishDate = const Value.absent(),
           Value<String?> location = const Value.absent(),
+          Value<String?> url = const Value.absent(),
+          Value<String?> description = const Value.absent(),
           bool? isDeleted}) =>
       Race(
         id: id ?? this.id,
@@ -209,6 +256,8 @@ class Race extends DataClass implements Insertable<Race> {
         startDate: startDate.present ? startDate.value : this.startDate,
         finishDate: finishDate.present ? finishDate.value : this.finishDate,
         location: location.present ? location.value : this.location,
+        url: url.present ? url.value : this.url,
+        description: description.present ? description.value : this.description,
         isDeleted: isDeleted ?? this.isDeleted,
       );
   Race copyWithCompanion(RacesCompanion data) {
@@ -219,6 +268,9 @@ class Race extends DataClass implements Insertable<Race> {
       finishDate:
           data.finishDate.present ? data.finishDate.value : this.finishDate,
       location: data.location.present ? data.location.value : this.location,
+      url: data.url.present ? data.url.value : this.url,
+      description:
+          data.description.present ? data.description.value : this.description,
       isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
@@ -231,14 +283,16 @@ class Race extends DataClass implements Insertable<Race> {
           ..write('startDate: $startDate, ')
           ..write('finishDate: $finishDate, ')
           ..write('location: $location, ')
+          ..write('url: $url, ')
+          ..write('description: $description, ')
           ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, name, startDate, finishDate, location, isDeleted);
+  int get hashCode => Object.hash(
+      id, name, startDate, finishDate, location, url, description, isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -248,6 +302,8 @@ class Race extends DataClass implements Insertable<Race> {
           other.startDate == this.startDate &&
           other.finishDate == this.finishDate &&
           other.location == this.location &&
+          other.url == this.url &&
+          other.description == this.description &&
           other.isDeleted == this.isDeleted);
 }
 
@@ -257,6 +313,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
   final Value<String?> startDate;
   final Value<String?> finishDate;
   final Value<String?> location;
+  final Value<String?> url;
+  final Value<String?> description;
   final Value<bool> isDeleted;
   const RacesCompanion({
     this.id = const Value.absent(),
@@ -264,6 +322,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
     this.startDate = const Value.absent(),
     this.finishDate = const Value.absent(),
     this.location = const Value.absent(),
+    this.url = const Value.absent(),
+    this.description = const Value.absent(),
     this.isDeleted = const Value.absent(),
   });
   RacesCompanion.insert({
@@ -272,6 +332,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
     this.startDate = const Value.absent(),
     this.finishDate = const Value.absent(),
     this.location = const Value.absent(),
+    this.url = const Value.absent(),
+    this.description = const Value.absent(),
     this.isDeleted = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Race> custom({
@@ -280,6 +342,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
     Expression<String>? startDate,
     Expression<String>? finishDate,
     Expression<String>? location,
+    Expression<String>? url,
+    Expression<String>? description,
     Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
@@ -288,6 +352,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
       if (startDate != null) 'start_date': startDate,
       if (finishDate != null) 'finish_date': finishDate,
       if (location != null) 'location': location,
+      if (url != null) 'url': url,
+      if (description != null) 'description': description,
       if (isDeleted != null) 'is_deleted': isDeleted,
     });
   }
@@ -298,6 +364,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
       Value<String?>? startDate,
       Value<String?>? finishDate,
       Value<String?>? location,
+      Value<String?>? url,
+      Value<String?>? description,
       Value<bool>? isDeleted}) {
     return RacesCompanion(
       id: id ?? this.id,
@@ -305,6 +373,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
       startDate: startDate ?? this.startDate,
       finishDate: finishDate ?? this.finishDate,
       location: location ?? this.location,
+      url: url ?? this.url,
+      description: description ?? this.description,
       isDeleted: isDeleted ?? this.isDeleted,
     );
   }
@@ -327,6 +397,12 @@ class RacesCompanion extends UpdateCompanion<Race> {
     if (location.present) {
       map['location'] = Variable<String>(location.value);
     }
+    if (url.present) {
+      map['url'] = Variable<String>(url.value);
+    }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
+    }
     if (isDeleted.present) {
       map['is_deleted'] = Variable<bool>(isDeleted.value);
     }
@@ -341,6 +417,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
           ..write('startDate: $startDate, ')
           ..write('finishDate: $finishDate, ')
           ..write('location: $location, ')
+          ..write('url: $url, ')
+          ..write('description: $description, ')
           ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
@@ -385,22 +463,22 @@ class Trails extends Table with TableInfo<Trails, Trail> {
       type: DriftSqlType.blob,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _linkMeta = const VerificationMeta('link');
-  late final GeneratedColumn<String> link = GeneratedColumn<String>(
-      'link', aliasedName, true,
+  static const VerificationMeta _urlMeta = const VerificationMeta('url');
+  late final GeneratedColumn<String> url = GeneratedColumn<String>(
+      'url', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _commentMeta =
-      const VerificationMeta('comment');
-  late final GeneratedColumn<String> comment = GeneratedColumn<String>(
-      'comment', aliasedName, true,
+  static const VerificationMeta _descriptionMeta =
+      const VerificationMeta('description');
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+      'description', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, distance, elevation, gpxTrack, link, comment];
+      [id, name, distance, elevation, gpxTrack, url, description];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -432,13 +510,15 @@ class Trails extends Table with TableInfo<Trails, Trail> {
       context.handle(_gpxTrackMeta,
           gpxTrack.isAcceptableOrUnknown(data['gpx_track']!, _gpxTrackMeta));
     }
-    if (data.containsKey('link')) {
+    if (data.containsKey('url')) {
       context.handle(
-          _linkMeta, link.isAcceptableOrUnknown(data['link']!, _linkMeta));
+          _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
     }
-    if (data.containsKey('comment')) {
-      context.handle(_commentMeta,
-          comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
+    if (data.containsKey('description')) {
+      context.handle(
+          _descriptionMeta,
+          description.isAcceptableOrUnknown(
+              data['description']!, _descriptionMeta));
     }
     return context;
   }
@@ -459,10 +539,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
           .read(DriftSqlType.int, data['${effectivePrefix}elevation']),
       gpxTrack: attachedDatabase.typeMapping
           .read(DriftSqlType.blob, data['${effectivePrefix}gpx_track']),
-      link: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}link']),
-      comment: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}comment']),
+      url: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}url']),
+      description: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}description']),
     );
   }
 
@@ -481,16 +561,16 @@ class Trail extends DataClass implements Insertable<Trail> {
   final int? distance;
   final int? elevation;
   final Uint8List? gpxTrack;
-  final String? link;
-  final String? comment;
+  final String? url;
+  final String? description;
   const Trail(
       {required this.id,
       required this.name,
       this.distance,
       this.elevation,
       this.gpxTrack,
-      this.link,
-      this.comment});
+      this.url,
+      this.description});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -505,11 +585,11 @@ class Trail extends DataClass implements Insertable<Trail> {
     if (!nullToAbsent || gpxTrack != null) {
       map['gpx_track'] = Variable<Uint8List>(gpxTrack);
     }
-    if (!nullToAbsent || link != null) {
-      map['link'] = Variable<String>(link);
+    if (!nullToAbsent || url != null) {
+      map['url'] = Variable<String>(url);
     }
-    if (!nullToAbsent || comment != null) {
-      map['comment'] = Variable<String>(comment);
+    if (!nullToAbsent || description != null) {
+      map['description'] = Variable<String>(description);
     }
     return map;
   }
@@ -527,10 +607,10 @@ class Trail extends DataClass implements Insertable<Trail> {
       gpxTrack: gpxTrack == null && nullToAbsent
           ? const Value.absent()
           : Value(gpxTrack),
-      link: link == null && nullToAbsent ? const Value.absent() : Value(link),
-      comment: comment == null && nullToAbsent
+      url: url == null && nullToAbsent ? const Value.absent() : Value(url),
+      description: description == null && nullToAbsent
           ? const Value.absent()
-          : Value(comment),
+          : Value(description),
     );
   }
 
@@ -543,8 +623,8 @@ class Trail extends DataClass implements Insertable<Trail> {
       distance: serializer.fromJson<int?>(json['distance']),
       elevation: serializer.fromJson<int?>(json['elevation']),
       gpxTrack: serializer.fromJson<Uint8List?>(json['gpx_track']),
-      link: serializer.fromJson<String?>(json['link']),
-      comment: serializer.fromJson<String?>(json['comment']),
+      url: serializer.fromJson<String?>(json['url']),
+      description: serializer.fromJson<String?>(json['description']),
     );
   }
   @override
@@ -556,8 +636,8 @@ class Trail extends DataClass implements Insertable<Trail> {
       'distance': serializer.toJson<int?>(distance),
       'elevation': serializer.toJson<int?>(elevation),
       'gpx_track': serializer.toJson<Uint8List?>(gpxTrack),
-      'link': serializer.toJson<String?>(link),
-      'comment': serializer.toJson<String?>(comment),
+      'url': serializer.toJson<String?>(url),
+      'description': serializer.toJson<String?>(description),
     };
   }
 
@@ -567,16 +647,16 @@ class Trail extends DataClass implements Insertable<Trail> {
           Value<int?> distance = const Value.absent(),
           Value<int?> elevation = const Value.absent(),
           Value<Uint8List?> gpxTrack = const Value.absent(),
-          Value<String?> link = const Value.absent(),
-          Value<String?> comment = const Value.absent()}) =>
+          Value<String?> url = const Value.absent(),
+          Value<String?> description = const Value.absent()}) =>
       Trail(
         id: id ?? this.id,
         name: name ?? this.name,
         distance: distance.present ? distance.value : this.distance,
         elevation: elevation.present ? elevation.value : this.elevation,
         gpxTrack: gpxTrack.present ? gpxTrack.value : this.gpxTrack,
-        link: link.present ? link.value : this.link,
-        comment: comment.present ? comment.value : this.comment,
+        url: url.present ? url.value : this.url,
+        description: description.present ? description.value : this.description,
       );
   Trail copyWithCompanion(TrailsCompanion data) {
     return Trail(
@@ -585,8 +665,9 @@ class Trail extends DataClass implements Insertable<Trail> {
       distance: data.distance.present ? data.distance.value : this.distance,
       elevation: data.elevation.present ? data.elevation.value : this.elevation,
       gpxTrack: data.gpxTrack.present ? data.gpxTrack.value : this.gpxTrack,
-      link: data.link.present ? data.link.value : this.link,
-      comment: data.comment.present ? data.comment.value : this.comment,
+      url: data.url.present ? data.url.value : this.url,
+      description:
+          data.description.present ? data.description.value : this.description,
     );
   }
 
@@ -598,15 +679,15 @@ class Trail extends DataClass implements Insertable<Trail> {
           ..write('distance: $distance, ')
           ..write('elevation: $elevation, ')
           ..write('gpxTrack: $gpxTrack, ')
-          ..write('link: $link, ')
-          ..write('comment: $comment')
+          ..write('url: $url, ')
+          ..write('description: $description')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(id, name, distance, elevation,
-      $driftBlobEquality.hash(gpxTrack), link, comment);
+      $driftBlobEquality.hash(gpxTrack), url, description);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -616,8 +697,8 @@ class Trail extends DataClass implements Insertable<Trail> {
           other.distance == this.distance &&
           other.elevation == this.elevation &&
           $driftBlobEquality.equals(other.gpxTrack, this.gpxTrack) &&
-          other.link == this.link &&
-          other.comment == this.comment);
+          other.url == this.url &&
+          other.description == this.description);
 }
 
 class TrailsCompanion extends UpdateCompanion<Trail> {
@@ -626,16 +707,16 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   final Value<int?> distance;
   final Value<int?> elevation;
   final Value<Uint8List?> gpxTrack;
-  final Value<String?> link;
-  final Value<String?> comment;
+  final Value<String?> url;
+  final Value<String?> description;
   const TrailsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.distance = const Value.absent(),
     this.elevation = const Value.absent(),
     this.gpxTrack = const Value.absent(),
-    this.link = const Value.absent(),
-    this.comment = const Value.absent(),
+    this.url = const Value.absent(),
+    this.description = const Value.absent(),
   });
   TrailsCompanion.insert({
     this.id = const Value.absent(),
@@ -643,8 +724,8 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.distance = const Value.absent(),
     this.elevation = const Value.absent(),
     this.gpxTrack = const Value.absent(),
-    this.link = const Value.absent(),
-    this.comment = const Value.absent(),
+    this.url = const Value.absent(),
+    this.description = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Trail> custom({
     Expression<int>? id,
@@ -652,8 +733,8 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     Expression<int>? distance,
     Expression<int>? elevation,
     Expression<Uint8List>? gpxTrack,
-    Expression<String>? link,
-    Expression<String>? comment,
+    Expression<String>? url,
+    Expression<String>? description,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -661,8 +742,8 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       if (distance != null) 'distance': distance,
       if (elevation != null) 'elevation': elevation,
       if (gpxTrack != null) 'gpx_track': gpxTrack,
-      if (link != null) 'link': link,
-      if (comment != null) 'comment': comment,
+      if (url != null) 'url': url,
+      if (description != null) 'description': description,
     });
   }
 
@@ -672,16 +753,16 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       Value<int?>? distance,
       Value<int?>? elevation,
       Value<Uint8List?>? gpxTrack,
-      Value<String?>? link,
-      Value<String?>? comment}) {
+      Value<String?>? url,
+      Value<String?>? description}) {
     return TrailsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       distance: distance ?? this.distance,
       elevation: elevation ?? this.elevation,
       gpxTrack: gpxTrack ?? this.gpxTrack,
-      link: link ?? this.link,
-      comment: comment ?? this.comment,
+      url: url ?? this.url,
+      description: description ?? this.description,
     );
   }
 
@@ -703,11 +784,11 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     if (gpxTrack.present) {
       map['gpx_track'] = Variable<Uint8List>(gpxTrack.value);
     }
-    if (link.present) {
-      map['link'] = Variable<String>(link.value);
+    if (url.present) {
+      map['url'] = Variable<String>(url.value);
     }
-    if (comment.present) {
-      map['comment'] = Variable<String>(comment.value);
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
     }
     return map;
   }
@@ -720,8 +801,8 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
           ..write('distance: $distance, ')
           ..write('elevation: $elevation, ')
           ..write('gpxTrack: $gpxTrack, ')
-          ..write('link: $link, ')
-          ..write('comment: $comment')
+          ..write('url: $url, ')
+          ..write('description: $description')
           ..write(')'))
         .toString();
   }
@@ -757,6 +838,13 @@ class Stages extends Table with TableInfo<Stages, Stage> {
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
+  static const VerificationMeta _descriptionMeta =
+      const VerificationMeta('description');
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+      'description', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
   static const VerificationMeta _isActiveMeta =
       const VerificationMeta('isActive');
   late final GeneratedColumn<bool> isActive = GeneratedColumn<bool>(
@@ -775,7 +863,7 @@ class Stages extends Table with TableInfo<Stages, Stage> {
       defaultValue: const CustomExpression('FALSE'));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, trailId, raceId, name, isActive, isDeleted];
+      [id, trailId, raceId, name, description, isActive, isDeleted];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -805,6 +893,12 @@ class Stages extends Table with TableInfo<Stages, Stage> {
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
+    if (data.containsKey('description')) {
+      context.handle(
+          _descriptionMeta,
+          description.isAcceptableOrUnknown(
+              data['description']!, _descriptionMeta));
+    }
     if (data.containsKey('is_active')) {
       context.handle(_isActiveMeta,
           isActive.isAcceptableOrUnknown(data['is_active']!, _isActiveMeta));
@@ -830,6 +924,8 @@ class Stages extends Table with TableInfo<Stages, Stage> {
           .read(DriftSqlType.int, data['${effectivePrefix}race_id'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      description: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}description']),
       isActive: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_active'])!,
       isDeleted: attachedDatabase.typeMapping
@@ -856,6 +952,7 @@ class Stage extends DataClass implements Insertable<Stage> {
   final int? trailId;
   final int raceId;
   final String name;
+  final String? description;
   final bool isActive;
   final bool isDeleted;
   const Stage(
@@ -863,6 +960,7 @@ class Stage extends DataClass implements Insertable<Stage> {
       this.trailId,
       required this.raceId,
       required this.name,
+      this.description,
       required this.isActive,
       required this.isDeleted});
   @override
@@ -874,6 +972,9 @@ class Stage extends DataClass implements Insertable<Stage> {
     }
     map['race_id'] = Variable<int>(raceId);
     map['name'] = Variable<String>(name);
+    if (!nullToAbsent || description != null) {
+      map['description'] = Variable<String>(description);
+    }
     map['is_active'] = Variable<bool>(isActive);
     map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
@@ -887,6 +988,9 @@ class Stage extends DataClass implements Insertable<Stage> {
           : Value(trailId),
       raceId: Value(raceId),
       name: Value(name),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       isActive: Value(isActive),
       isDeleted: Value(isDeleted),
     );
@@ -900,6 +1004,7 @@ class Stage extends DataClass implements Insertable<Stage> {
       trailId: serializer.fromJson<int?>(json['trail_id']),
       raceId: serializer.fromJson<int>(json['race_id']),
       name: serializer.fromJson<String>(json['name']),
+      description: serializer.fromJson<String?>(json['description']),
       isActive: serializer.fromJson<bool>(json['is_active']),
       isDeleted: serializer.fromJson<bool>(json['is_deleted']),
     );
@@ -912,6 +1017,7 @@ class Stage extends DataClass implements Insertable<Stage> {
       'trail_id': serializer.toJson<int?>(trailId),
       'race_id': serializer.toJson<int>(raceId),
       'name': serializer.toJson<String>(name),
+      'description': serializer.toJson<String?>(description),
       'is_active': serializer.toJson<bool>(isActive),
       'is_deleted': serializer.toJson<bool>(isDeleted),
     };
@@ -922,6 +1028,7 @@ class Stage extends DataClass implements Insertable<Stage> {
           Value<int?> trailId = const Value.absent(),
           int? raceId,
           String? name,
+          Value<String?> description = const Value.absent(),
           bool? isActive,
           bool? isDeleted}) =>
       Stage(
@@ -929,6 +1036,7 @@ class Stage extends DataClass implements Insertable<Stage> {
         trailId: trailId.present ? trailId.value : this.trailId,
         raceId: raceId ?? this.raceId,
         name: name ?? this.name,
+        description: description.present ? description.value : this.description,
         isActive: isActive ?? this.isActive,
         isDeleted: isDeleted ?? this.isDeleted,
       );
@@ -938,6 +1046,8 @@ class Stage extends DataClass implements Insertable<Stage> {
       trailId: data.trailId.present ? data.trailId.value : this.trailId,
       raceId: data.raceId.present ? data.raceId.value : this.raceId,
       name: data.name.present ? data.name.value : this.name,
+      description:
+          data.description.present ? data.description.value : this.description,
       isActive: data.isActive.present ? data.isActive.value : this.isActive,
       isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
@@ -950,6 +1060,7 @@ class Stage extends DataClass implements Insertable<Stage> {
           ..write('trailId: $trailId, ')
           ..write('raceId: $raceId, ')
           ..write('name: $name, ')
+          ..write('description: $description, ')
           ..write('isActive: $isActive, ')
           ..write('isDeleted: $isDeleted')
           ..write(')'))
@@ -958,7 +1069,7 @@ class Stage extends DataClass implements Insertable<Stage> {
 
   @override
   int get hashCode =>
-      Object.hash(id, trailId, raceId, name, isActive, isDeleted);
+      Object.hash(id, trailId, raceId, name, description, isActive, isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -967,6 +1078,7 @@ class Stage extends DataClass implements Insertable<Stage> {
           other.trailId == this.trailId &&
           other.raceId == this.raceId &&
           other.name == this.name &&
+          other.description == this.description &&
           other.isActive == this.isActive &&
           other.isDeleted == this.isDeleted);
 }
@@ -976,6 +1088,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
   final Value<int?> trailId;
   final Value<int> raceId;
   final Value<String> name;
+  final Value<String?> description;
   final Value<bool> isActive;
   final Value<bool> isDeleted;
   const StagesCompanion({
@@ -983,6 +1096,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     this.trailId = const Value.absent(),
     this.raceId = const Value.absent(),
     this.name = const Value.absent(),
+    this.description = const Value.absent(),
     this.isActive = const Value.absent(),
     this.isDeleted = const Value.absent(),
   });
@@ -991,6 +1105,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     this.trailId = const Value.absent(),
     required int raceId,
     required String name,
+    this.description = const Value.absent(),
     this.isActive = const Value.absent(),
     this.isDeleted = const Value.absent(),
   })  : raceId = Value(raceId),
@@ -1000,6 +1115,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     Expression<int>? trailId,
     Expression<int>? raceId,
     Expression<String>? name,
+    Expression<String>? description,
     Expression<bool>? isActive,
     Expression<bool>? isDeleted,
   }) {
@@ -1008,6 +1124,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
       if (trailId != null) 'trail_id': trailId,
       if (raceId != null) 'race_id': raceId,
       if (name != null) 'name': name,
+      if (description != null) 'description': description,
       if (isActive != null) 'is_active': isActive,
       if (isDeleted != null) 'is_deleted': isDeleted,
     });
@@ -1018,6 +1135,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
       Value<int?>? trailId,
       Value<int>? raceId,
       Value<String>? name,
+      Value<String?>? description,
       Value<bool>? isActive,
       Value<bool>? isDeleted}) {
     return StagesCompanion(
@@ -1025,6 +1143,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
       trailId: trailId ?? this.trailId,
       raceId: raceId ?? this.raceId,
       name: name ?? this.name,
+      description: description ?? this.description,
       isActive: isActive ?? this.isActive,
       isDeleted: isDeleted ?? this.isDeleted,
     );
@@ -1045,6 +1164,9 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     if (name.present) {
       map['name'] = Variable<String>(name.value);
     }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
+    }
     if (isActive.present) {
       map['is_active'] = Variable<bool>(isActive.value);
     }
@@ -1061,6 +1183,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
           ..write('trailId: $trailId, ')
           ..write('raceId: $raceId, ')
           ..write('name: $name, ')
+          ..write('description: $description, ')
           ..write('isActive: $isActive, ')
           ..write('isDeleted: $isDeleted')
           ..write(')'))
@@ -4033,6 +4156,8 @@ typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
   Value<String?> startDate,
   Value<String?> finishDate,
   Value<String?> location,
+  Value<String?> url,
+  Value<String?> description,
   Value<bool> isDeleted,
 });
 typedef $RacesUpdateCompanionBuilder = RacesCompanion Function({
@@ -4041,6 +4166,8 @@ typedef $RacesUpdateCompanionBuilder = RacesCompanion Function({
   Value<String?> startDate,
   Value<String?> finishDate,
   Value<String?> location,
+  Value<String?> url,
+  Value<String?> description,
   Value<bool> isDeleted,
 });
 
@@ -4066,6 +4193,12 @@ class $RacesFilterComposer extends Composer<_$AppDatabase, Races> {
 
   ColumnFilters<String> get location => $composableBuilder(
       column: $table.location, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<bool> get isDeleted => $composableBuilder(
       column: $table.isDeleted, builder: (column) => ColumnFilters(column));
@@ -4094,6 +4227,12 @@ class $RacesOrderingComposer extends Composer<_$AppDatabase, Races> {
   ColumnOrderings<String> get location => $composableBuilder(
       column: $table.location, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnOrderings(column));
+
   ColumnOrderings<bool> get isDeleted => $composableBuilder(
       column: $table.isDeleted, builder: (column) => ColumnOrderings(column));
 }
@@ -4120,6 +4259,12 @@ class $RacesAnnotationComposer extends Composer<_$AppDatabase, Races> {
 
   GeneratedColumn<String> get location =>
       $composableBuilder(column: $table.location, builder: (column) => column);
+
+  GeneratedColumn<String> get url =>
+      $composableBuilder(column: $table.url, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
 
   GeneratedColumn<bool> get isDeleted =>
       $composableBuilder(column: $table.isDeleted, builder: (column) => column);
@@ -4153,6 +4298,8 @@ class $RacesTableManager extends RootTableManager<
             Value<String?> startDate = const Value.absent(),
             Value<String?> finishDate = const Value.absent(),
             Value<String?> location = const Value.absent(),
+            Value<String?> url = const Value.absent(),
+            Value<String?> description = const Value.absent(),
             Value<bool> isDeleted = const Value.absent(),
           }) =>
               RacesCompanion(
@@ -4161,6 +4308,8 @@ class $RacesTableManager extends RootTableManager<
             startDate: startDate,
             finishDate: finishDate,
             location: location,
+            url: url,
+            description: description,
             isDeleted: isDeleted,
           ),
           createCompanionCallback: ({
@@ -4169,6 +4318,8 @@ class $RacesTableManager extends RootTableManager<
             Value<String?> startDate = const Value.absent(),
             Value<String?> finishDate = const Value.absent(),
             Value<String?> location = const Value.absent(),
+            Value<String?> url = const Value.absent(),
+            Value<String?> description = const Value.absent(),
             Value<bool> isDeleted = const Value.absent(),
           }) =>
               RacesCompanion.insert(
@@ -4177,6 +4328,8 @@ class $RacesTableManager extends RootTableManager<
             startDate: startDate,
             finishDate: finishDate,
             location: location,
+            url: url,
+            description: description,
             isDeleted: isDeleted,
           ),
           withReferenceMapper: (p0) => p0
@@ -4204,8 +4357,8 @@ typedef $TrailsCreateCompanionBuilder = TrailsCompanion Function({
   Value<int?> distance,
   Value<int?> elevation,
   Value<Uint8List?> gpxTrack,
-  Value<String?> link,
-  Value<String?> comment,
+  Value<String?> url,
+  Value<String?> description,
 });
 typedef $TrailsUpdateCompanionBuilder = TrailsCompanion Function({
   Value<int> id,
@@ -4213,8 +4366,8 @@ typedef $TrailsUpdateCompanionBuilder = TrailsCompanion Function({
   Value<int?> distance,
   Value<int?> elevation,
   Value<Uint8List?> gpxTrack,
-  Value<String?> link,
-  Value<String?> comment,
+  Value<String?> url,
+  Value<String?> description,
 });
 
 class $TrailsFilterComposer extends Composer<_$AppDatabase, Trails> {
@@ -4240,11 +4393,11 @@ class $TrailsFilterComposer extends Composer<_$AppDatabase, Trails> {
   ColumnFilters<Uint8List> get gpxTrack => $composableBuilder(
       column: $table.gpxTrack, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get link => $composableBuilder(
-      column: $table.link, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get comment => $composableBuilder(
-      column: $table.comment, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnFilters(column));
 }
 
 class $TrailsOrderingComposer extends Composer<_$AppDatabase, Trails> {
@@ -4270,11 +4423,11 @@ class $TrailsOrderingComposer extends Composer<_$AppDatabase, Trails> {
   ColumnOrderings<Uint8List> get gpxTrack => $composableBuilder(
       column: $table.gpxTrack, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get link => $composableBuilder(
-      column: $table.link, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get comment => $composableBuilder(
-      column: $table.comment, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnOrderings(column));
 }
 
 class $TrailsAnnotationComposer extends Composer<_$AppDatabase, Trails> {
@@ -4300,11 +4453,11 @@ class $TrailsAnnotationComposer extends Composer<_$AppDatabase, Trails> {
   GeneratedColumn<Uint8List> get gpxTrack =>
       $composableBuilder(column: $table.gpxTrack, builder: (column) => column);
 
-  GeneratedColumn<String> get link =>
-      $composableBuilder(column: $table.link, builder: (column) => column);
+  GeneratedColumn<String> get url =>
+      $composableBuilder(column: $table.url, builder: (column) => column);
 
-  GeneratedColumn<String> get comment =>
-      $composableBuilder(column: $table.comment, builder: (column) => column);
+  GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
 }
 
 class $TrailsTableManager extends RootTableManager<
@@ -4335,8 +4488,8 @@ class $TrailsTableManager extends RootTableManager<
             Value<int?> distance = const Value.absent(),
             Value<int?> elevation = const Value.absent(),
             Value<Uint8List?> gpxTrack = const Value.absent(),
-            Value<String?> link = const Value.absent(),
-            Value<String?> comment = const Value.absent(),
+            Value<String?> url = const Value.absent(),
+            Value<String?> description = const Value.absent(),
           }) =>
               TrailsCompanion(
             id: id,
@@ -4344,8 +4497,8 @@ class $TrailsTableManager extends RootTableManager<
             distance: distance,
             elevation: elevation,
             gpxTrack: gpxTrack,
-            link: link,
-            comment: comment,
+            url: url,
+            description: description,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -4353,8 +4506,8 @@ class $TrailsTableManager extends RootTableManager<
             Value<int?> distance = const Value.absent(),
             Value<int?> elevation = const Value.absent(),
             Value<Uint8List?> gpxTrack = const Value.absent(),
-            Value<String?> link = const Value.absent(),
-            Value<String?> comment = const Value.absent(),
+            Value<String?> url = const Value.absent(),
+            Value<String?> description = const Value.absent(),
           }) =>
               TrailsCompanion.insert(
             id: id,
@@ -4362,8 +4515,8 @@ class $TrailsTableManager extends RootTableManager<
             distance: distance,
             elevation: elevation,
             gpxTrack: gpxTrack,
-            link: link,
-            comment: comment,
+            url: url,
+            description: description,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -4389,6 +4542,7 @@ typedef $StagesCreateCompanionBuilder = StagesCompanion Function({
   Value<int?> trailId,
   required int raceId,
   required String name,
+  Value<String?> description,
   Value<bool> isActive,
   Value<bool> isDeleted,
 });
@@ -4397,6 +4551,7 @@ typedef $StagesUpdateCompanionBuilder = StagesCompanion Function({
   Value<int?> trailId,
   Value<int> raceId,
   Value<String> name,
+  Value<String?> description,
   Value<bool> isActive,
   Value<bool> isDeleted,
 });
@@ -4420,6 +4575,9 @@ class $StagesFilterComposer extends Composer<_$AppDatabase, Stages> {
 
   ColumnFilters<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<bool> get isActive => $composableBuilder(
       column: $table.isActive, builder: (column) => ColumnFilters(column));
@@ -4448,6 +4606,9 @@ class $StagesOrderingComposer extends Composer<_$AppDatabase, Stages> {
   ColumnOrderings<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnOrderings(column));
+
   ColumnOrderings<bool> get isActive => $composableBuilder(
       column: $table.isActive, builder: (column) => ColumnOrderings(column));
 
@@ -4474,6 +4635,9 @@ class $StagesAnnotationComposer extends Composer<_$AppDatabase, Stages> {
 
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
 
   GeneratedColumn<bool> get isActive =>
       $composableBuilder(column: $table.isActive, builder: (column) => column);
@@ -4509,6 +4673,7 @@ class $StagesTableManager extends RootTableManager<
             Value<int?> trailId = const Value.absent(),
             Value<int> raceId = const Value.absent(),
             Value<String> name = const Value.absent(),
+            Value<String?> description = const Value.absent(),
             Value<bool> isActive = const Value.absent(),
             Value<bool> isDeleted = const Value.absent(),
           }) =>
@@ -4517,6 +4682,7 @@ class $StagesTableManager extends RootTableManager<
             trailId: trailId,
             raceId: raceId,
             name: name,
+            description: description,
             isActive: isActive,
             isDeleted: isDeleted,
           ),
@@ -4525,6 +4691,7 @@ class $StagesTableManager extends RootTableManager<
             Value<int?> trailId = const Value.absent(),
             required int raceId,
             required String name,
+            Value<String?> description = const Value.absent(),
             Value<bool> isActive = const Value.absent(),
             Value<bool> isDeleted = const Value.absent(),
           }) =>
@@ -4533,6 +4700,7 @@ class $StagesTableManager extends RootTableManager<
             trailId: trailId,
             raceId: raceId,
             name: name,
+            description: description,
             isActive: isActive,
             isDeleted: isDeleted,
           ),
