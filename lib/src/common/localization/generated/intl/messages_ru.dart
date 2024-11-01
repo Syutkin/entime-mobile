@@ -116,6 +116,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введите название спецучастка"),
         "I18nDatabase_incorrectRaceUrl":
             MessageLookupByLibrary.simpleMessage("Некорректная ссылка"),
+        "I18nDatabase_isActiveStage":
+            MessageLookupByLibrary.simpleMessage("Активный"),
         "I18nDatabase_raceDates":
             MessageLookupByLibrary.simpleMessage("Даты проведения"),
         "I18nDatabase_raceDescription":
@@ -127,6 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nDatabase_raceUrl": MessageLookupByLibrary.simpleMessage("Сайт"),
         "I18nDatabase_races":
             MessageLookupByLibrary.simpleMessage("Соревнования"),
+        "I18nDatabase_stageDescription":
+            MessageLookupByLibrary.simpleMessage("Описание"),
         "I18nDatabase_stageName":
             MessageLookupByLibrary.simpleMessage("Название спецучастка"),
         "I18nDatabase_trail": MessageLookupByLibrary.simpleMessage("Трейл"),

@@ -36,23 +36,22 @@ mixin _$DatabaseEvent {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -130,23 +129,22 @@ mixin _$DatabaseEvent {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -221,23 +219,22 @@ mixin _$DatabaseEvent {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -297,13 +294,12 @@ mixin _$DatabaseEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -343,13 +339,12 @@ mixin _$DatabaseEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -383,13 +378,12 @@ mixin _$DatabaseEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -502,23 +496,22 @@ class _$InitializeImpl implements _Initialize {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -599,23 +592,22 @@ class _$InitializeImpl implements _Initialize {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -693,23 +685,22 @@ class _$InitializeImpl implements _Initialize {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -775,13 +766,12 @@ class _$InitializeImpl implements _Initialize {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -824,13 +814,12 @@ class _$InitializeImpl implements _Initialize {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -867,13 +856,12 @@ class _$InitializeImpl implements _Initialize {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -1243,23 +1231,22 @@ class _$EmitStateImpl implements _EmitState {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -1355,23 +1342,22 @@ class _$EmitStateImpl implements _EmitState {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -1464,23 +1450,22 @@ class _$EmitStateImpl implements _EmitState {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -1561,13 +1546,12 @@ class _$EmitStateImpl implements _EmitState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -1610,13 +1594,12 @@ class _$EmitStateImpl implements _EmitState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -1653,13 +1636,12 @@ class _$EmitStateImpl implements _EmitState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -1738,559 +1720,13 @@ abstract class _EmitState implements DatabaseEvent {
 }
 
 /// @nodoc
-abstract class _$$AddRaceImplCopyWith<$Res> {
-  factory _$$AddRaceImplCopyWith(
-          _$AddRaceImpl value, $Res Function(_$AddRaceImpl) then) =
-      __$$AddRaceImplCopyWithImpl<$Res>;
+abstract class _$$UpsertRaceImplCopyWith<$Res> {
+  factory _$$UpsertRaceImplCopyWith(
+          _$UpsertRaceImpl value, $Res Function(_$UpsertRaceImpl) then) =
+      __$$UpsertRaceImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {String name,
-      DateTime? startDate,
-      DateTime? finishDate,
-      String? location});
-}
-
-/// @nodoc
-class __$$AddRaceImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$AddRaceImpl>
-    implements _$$AddRaceImplCopyWith<$Res> {
-  __$$AddRaceImplCopyWithImpl(
-      _$AddRaceImpl _value, $Res Function(_$AddRaceImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = null,
-    Object? startDate = freezed,
-    Object? finishDate = freezed,
-    Object? location = freezed,
-  }) {
-    return _then(_$AddRaceImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      startDate: freezed == startDate
-          ? _value.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      finishDate: freezed == finishDate
-          ? _value.finishDate
-          : finishDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AddRaceImpl implements _AddRace {
-  const _$AddRaceImpl(
-      {required this.name, this.startDate, this.finishDate, this.location});
-
-  @override
-  final String name;
-  @override
-  final DateTime? startDate;
-  @override
-  final DateTime? finishDate;
-  @override
-  final String? location;
-
-  @override
-  String toString() {
-    return 'DatabaseEvent.addRace(name: $name, startDate: $startDate, finishDate: $finishDate, location: $location)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddRaceImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.startDate, startDate) ||
-                other.startDate == startDate) &&
-            (identical(other.finishDate, finishDate) ||
-                other.finishDate == finishDate) &&
-            (identical(other.location, location) ||
-                other.location == location));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, startDate, finishDate, location);
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddRaceImplCopyWith<_$AddRaceImpl> get copyWith =>
-      __$$AddRaceImplCopyWithImpl<_$AddRaceImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)
-        emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
-    required TResult Function(
-            int id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)
-        updateRace,
-    required TResult Function(int id) deleteRace,
-    required TResult Function() getRaces,
-    required TResult Function(Race race) selectRace,
-    required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int id) deleteStage,
-    required TResult Function(int raceId) getStages,
-    required TResult Function(Stage stage) selectStage,
-    required TResult Function(int stageId) getParticipantsAtStart,
-    required TResult Function(
-            Stage stage, int number, String startTime, bool forceAdd)
-        addStartNumber,
-    required TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)
-        updateStartingInfo,
-    required TResult Function(int stageId, String startTime, int correction,
-            DateTime timestamp, bool forceUpdate, int? deltaInSeconds)
-        updateAutomaticCorrection,
-    required TResult Function(
-            int stageId, DateTime time, DateTime timestamp, int deltaInSeconds)
-        updateManualStartTime,
-    required TResult Function(int startId, ParticipantStatus status)
-        setStatusForStartId,
-    required TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timestamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)
-        addFinishTime,
-    required TResult Function(
-            int stageId, String finishTime, DateTime timestamp, int? number)
-        addFinishTimeManual,
-    required TResult Function(int stageId) clearStartResultsDebug,
-    required TResult Function(int stageId) clearFinishResultsDebug,
-    required TResult Function(int stageId) hideAllFinises,
-    required TResult Function(Stage stage, int number) clearNumberAtFinish,
-    required TResult Function(Stage stage, int number) setDNSForStage,
-    required TResult Function(Stage stage, int number) setDNFForStage,
-    required TResult Function(int id) hideFinish,
-    required TResult Function(
-            Stage stage, int finishId, int number, String finishTime)
-        addNumberToFinish,
-    required TResult Function(int stageId, DateTime dateTimeNow)
-        getNumbersOnTraceNow,
-    required TResult Function(int number) selectAwaitingNumber,
-    required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function() shareStart,
-    required TResult Function() shareFinish,
-    required TResult Function() shareDatabase,
-  }) {
-    return addRace(name, startDate, finishDate, location);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
-    TResult? Function(
-            int id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
-        updateRace,
-    TResult? Function(int id)? deleteRace,
-    TResult? Function()? getRaces,
-    TResult? Function(Race race)? selectRace,
-    TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
-    TResult? Function(int id)? deleteStage,
-    TResult? Function(int raceId)? getStages,
-    TResult? Function(Stage stage)? selectStage,
-    TResult? Function(int stageId)? getParticipantsAtStart,
-    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult? Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult? Function(int stageId, String startTime, int correction,
-            DateTime timestamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult? Function(
-            int stageId, DateTime time, DateTime timestamp, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult? Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult? Function(
-            Stage stage,
-            String finishTime,
-            DateTime timestamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult? Function(
-            int stageId, String finishTime, DateTime timestamp, int? number)?
-        addFinishTimeManual,
-    TResult? Function(int stageId)? clearStartResultsDebug,
-    TResult? Function(int stageId)? clearFinishResultsDebug,
-    TResult? Function(int stageId)? hideAllFinises,
-    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult? Function(Stage stage, int number)? setDNSForStage,
-    TResult? Function(Stage stage, int number)? setDNFForStage,
-    TResult? Function(int id)? hideFinish,
-    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult? Function(int number)? selectAwaitingNumber,
-    TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function()? shareStart,
-    TResult? Function()? shareFinish,
-    TResult? Function()? shareDatabase,
-  }) {
-    return addRace?.call(name, startDate, finishDate, location);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(
-            Race? race,
-            Stage? stage,
-            List<Race> races,
-            List<Stage> stages,
-            List<Rider> riders,
-            List<Status> statuses,
-            List<ParticipantAtStart> participants,
-            List<Start> starts,
-            List<Finish> finishes,
-            List<Trail> trails,
-            List<StartingParticipant> numbersOnTrace,
-            Notification? notification,
-            int? autoFinishNumber,
-            int? awaitingNumber,
-            bool? updateFinishNumber)?
-        emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
-    TResult Function(
-            int id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
-        updateRace,
-    TResult Function(int id)? deleteRace,
-    TResult Function()? getRaces,
-    TResult Function(Race race)? selectRace,
-    TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
-    TResult Function(int id)? deleteStage,
-    TResult Function(int raceId)? getStages,
-    TResult Function(Stage stage)? selectStage,
-    TResult Function(int stageId)? getParticipantsAtStart,
-    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
-        addStartNumber,
-    TResult Function(
-            String startTime,
-            String? automaticStartTime,
-            int? automaticCorrection,
-            String? manualStartTime,
-            int? manualCorrection,
-            int stageId,
-            int participantId)?
-        updateStartingInfo,
-    TResult Function(int stageId, String startTime, int correction,
-            DateTime timestamp, bool forceUpdate, int? deltaInSeconds)?
-        updateAutomaticCorrection,
-    TResult Function(
-            int stageId, DateTime time, DateTime timestamp, int deltaInSeconds)?
-        updateManualStartTime,
-    TResult Function(int startId, ParticipantStatus status)?
-        setStatusForStartId,
-    TResult Function(
-            Stage stage,
-            String finishTime,
-            DateTime timestamp,
-            int? finishDelay,
-            bool? substituteNumbers,
-            int? substituteNumbersDelay,
-            DateTime? dateTimeNow,
-            int? number)?
-        addFinishTime,
-    TResult Function(
-            int stageId, String finishTime, DateTime timestamp, int? number)?
-        addFinishTimeManual,
-    TResult Function(int stageId)? clearStartResultsDebug,
-    TResult Function(int stageId)? clearFinishResultsDebug,
-    TResult Function(int stageId)? hideAllFinises,
-    TResult Function(Stage stage, int number)? clearNumberAtFinish,
-    TResult Function(Stage stage, int number)? setDNSForStage,
-    TResult Function(Stage stage, int number)? setDNFForStage,
-    TResult Function(int id)? hideFinish,
-    TResult Function(Stage stage, int finishId, int number, String finishTime)?
-        addNumberToFinish,
-    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
-    TResult Function(int number)? selectAwaitingNumber,
-    TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function()? shareStart,
-    TResult Function()? shareFinish,
-    TResult Function()? shareDatabase,
-    required TResult orElse(),
-  }) {
-    if (addRace != null) {
-      return addRace(name, startDate, finishDate, location);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialize value) initialize,
-    required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
-    required TResult Function(_DeleteRace value) deleteRace,
-    required TResult Function(_GetRaces value) getRaces,
-    required TResult Function(_SelectRace value) selectRace,
-    required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
-    required TResult Function(_DeleteStage value) deleteStage,
-    required TResult Function(_GetStages value) getStages,
-    required TResult Function(_SelectStage value) selectStage,
-    required TResult Function(_GetParticipantsAtStart value)
-        getParticipantsAtStart,
-    required TResult Function(_AddStartNumber value) addStartNumber,
-    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
-    required TResult Function(_UpdateAutomaticCorrection value)
-        updateAutomaticCorrection,
-    required TResult Function(_UpdateManualStartTime value)
-        updateManualStartTime,
-    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
-    required TResult Function(_AddFinishTime value) addFinishTime,
-    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
-    required TResult Function(_ClearStartResultsDebug value)
-        clearStartResultsDebug,
-    required TResult Function(_ClearFinishResultsDebug value)
-        clearFinishResultsDebug,
-    required TResult Function(_HideAllFinises value) hideAllFinises,
-    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
-    required TResult Function(_SetDNSForStage value) setDNSForStage,
-    required TResult Function(_SetDNFForStage value) setDNFForStage,
-    required TResult Function(_HideFinish value) hideFinish,
-    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
-    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
-    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
-    required TResult Function(_DeselectAwaitingNumber value)
-        deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_ShareStart value) shareStart,
-    required TResult Function(_ShareFinish value) shareFinish,
-    required TResult Function(_ShareDatabase value) shareDatabase,
-  }) {
-    return addRace(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
-    TResult? Function(_DeleteRace value)? deleteRace,
-    TResult? Function(_GetRaces value)? getRaces,
-    TResult? Function(_SelectRace value)? selectRace,
-    TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
-    TResult? Function(_DeleteStage value)? deleteStage,
-    TResult? Function(_GetStages value)? getStages,
-    TResult? Function(_SelectStage value)? selectStage,
-    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult? Function(_AddStartNumber value)? addStartNumber,
-    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult? Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult? Function(_AddFinishTime value)? addFinishTime,
-    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult? Function(_HideAllFinises value)? hideAllFinises,
-    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult? Function(_SetDNSForStage value)? setDNSForStage,
-    TResult? Function(_SetDNFForStage value)? setDNFForStage,
-    TResult? Function(_HideFinish value)? hideFinish,
-    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_ShareStart value)? shareStart,
-    TResult? Function(_ShareFinish value)? shareFinish,
-    TResult? Function(_ShareDatabase value)? shareDatabase,
-  }) {
-    return addRace?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialize value)? initialize,
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
-    TResult Function(_DeleteRace value)? deleteRace,
-    TResult Function(_GetRaces value)? getRaces,
-    TResult Function(_SelectRace value)? selectRace,
-    TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
-    TResult Function(_DeleteStage value)? deleteStage,
-    TResult Function(_GetStages value)? getStages,
-    TResult Function(_SelectStage value)? selectStage,
-    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
-    TResult Function(_AddStartNumber value)? addStartNumber,
-    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
-    TResult Function(_UpdateAutomaticCorrection value)?
-        updateAutomaticCorrection,
-    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
-    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
-    TResult Function(_AddFinishTime value)? addFinishTime,
-    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
-    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
-    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
-    TResult Function(_HideAllFinises value)? hideAllFinises,
-    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
-    TResult Function(_SetDNSForStage value)? setDNSForStage,
-    TResult Function(_SetDNFForStage value)? setDNFForStage,
-    TResult Function(_HideFinish value)? hideFinish,
-    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
-    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
-    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
-    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_ShareStart value)? shareStart,
-    TResult Function(_ShareFinish value)? shareFinish,
-    TResult Function(_ShareDatabase value)? shareDatabase,
-    required TResult orElse(),
-  }) {
-    if (addRace != null) {
-      return addRace(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AddRace implements DatabaseEvent {
-  const factory _AddRace(
-      {required final String name,
-      final DateTime? startDate,
-      final DateTime? finishDate,
-      final String? location}) = _$AddRaceImpl;
-
-  String get name;
-  DateTime? get startDate;
-  DateTime? get finishDate;
-  String? get location;
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddRaceImplCopyWith<_$AddRaceImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpdateRaceImplCopyWith<$Res> {
-  factory _$$UpdateRaceImplCopyWith(
-          _$UpdateRaceImpl value, $Res Function(_$UpdateRaceImpl) then) =
-      __$$UpdateRaceImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {int id,
+      {int? id,
       String? name,
       DateTime? startDate,
       DateTime? finishDate,
@@ -2300,11 +1736,11 @@ abstract class _$$UpdateRaceImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$UpdateRaceImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$UpdateRaceImpl>
-    implements _$$UpdateRaceImplCopyWith<$Res> {
-  __$$UpdateRaceImplCopyWithImpl(
-      _$UpdateRaceImpl _value, $Res Function(_$UpdateRaceImpl) _then)
+class __$$UpsertRaceImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$UpsertRaceImpl>
+    implements _$$UpsertRaceImplCopyWith<$Res> {
+  __$$UpsertRaceImplCopyWithImpl(
+      _$UpsertRaceImpl _value, $Res Function(_$UpsertRaceImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DatabaseEvent
@@ -2312,7 +1748,7 @@ class __$$UpdateRaceImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = freezed,
     Object? startDate = freezed,
     Object? finishDate = freezed,
@@ -2320,11 +1756,11 @@ class __$$UpdateRaceImplCopyWithImpl<$Res>
     Object? url = freezed,
     Object? description = freezed,
   }) {
-    return _then(_$UpdateRaceImpl(
-      id: null == id
+    return _then(_$UpsertRaceImpl(
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -2355,9 +1791,9 @@ class __$$UpdateRaceImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateRaceImpl implements _UpdateRace {
-  const _$UpdateRaceImpl(
-      {required this.id,
+class _$UpsertRaceImpl implements _UpsertRace {
+  const _$UpsertRaceImpl(
+      {this.id,
       this.name,
       this.startDate,
       this.finishDate,
@@ -2366,7 +1802,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
       this.description});
 
   @override
-  final int id;
+  final int? id;
   @override
   final String? name;
   @override
@@ -2382,14 +1818,14 @@ class _$UpdateRaceImpl implements _UpdateRace {
 
   @override
   String toString() {
-    return 'DatabaseEvent.updateRace(id: $id, name: $name, startDate: $startDate, finishDate: $finishDate, location: $location, url: $url, description: $description)';
+    return 'DatabaseEvent.upsertRace(id: $id, name: $name, startDate: $startDate, finishDate: $finishDate, location: $location, url: $url, description: $description)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateRaceImpl &&
+            other is _$UpsertRaceImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.startDate, startDate) ||
@@ -2412,8 +1848,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdateRaceImplCopyWith<_$UpdateRaceImpl> get copyWith =>
-      __$$UpdateRaceImplCopyWithImpl<_$UpdateRaceImpl>(this, _$identity);
+  _$$UpsertRaceImplCopyWith<_$UpsertRaceImpl> get copyWith =>
+      __$$UpsertRaceImplCopyWithImpl<_$UpsertRaceImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2436,23 +1872,22 @@ class _$UpdateRaceImpl implements _UpdateRace {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -2509,7 +1944,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
   }) {
-    return updateRace(
+    return upsertRace(
         id, name, startDate, finishDate, location, url, description);
   }
 
@@ -2534,23 +1969,22 @@ class _$UpdateRaceImpl implements _UpdateRace {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -2604,7 +2038,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
   }) {
-    return updateRace?.call(
+    return upsertRace?.call(
         id, name, startDate, finishDate, location, url, description);
   }
 
@@ -2629,23 +2063,22 @@ class _$UpdateRaceImpl implements _UpdateRace {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -2700,8 +2133,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function()? shareDatabase,
     required TResult orElse(),
   }) {
-    if (updateRace != null) {
-      return updateRace(
+    if (upsertRace != null) {
+      return upsertRace(
           id, name, startDate, finishDate, location, url, description);
     }
     return orElse();
@@ -2712,13 +2145,12 @@ class _$UpdateRaceImpl implements _UpdateRace {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -2753,7 +2185,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
   }) {
-    return updateRace(this);
+    return upsertRace(this);
   }
 
   @override
@@ -2761,13 +2193,12 @@ class _$UpdateRaceImpl implements _UpdateRace {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -2796,7 +2227,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
   }) {
-    return updateRace?.call(this);
+    return upsertRace?.call(this);
   }
 
   @override
@@ -2804,13 +2235,12 @@ class _$UpdateRaceImpl implements _UpdateRace {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -2840,24 +2270,24 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function(_ShareDatabase value)? shareDatabase,
     required TResult orElse(),
   }) {
-    if (updateRace != null) {
-      return updateRace(this);
+    if (upsertRace != null) {
+      return upsertRace(this);
     }
     return orElse();
   }
 }
 
-abstract class _UpdateRace implements DatabaseEvent {
-  const factory _UpdateRace(
-      {required final int id,
+abstract class _UpsertRace implements DatabaseEvent {
+  const factory _UpsertRace(
+      {final int? id,
       final String? name,
       final DateTime? startDate,
       final DateTime? finishDate,
       final String? location,
       final String? url,
-      final String? description}) = _$UpdateRaceImpl;
+      final String? description}) = _$UpsertRaceImpl;
 
-  int get id;
+  int? get id;
   String? get name;
   DateTime? get startDate;
   DateTime? get finishDate;
@@ -2868,7 +2298,7 @@ abstract class _UpdateRace implements DatabaseEvent {
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateRaceImplCopyWith<_$UpdateRaceImpl> get copyWith =>
+  _$$UpsertRaceImplCopyWith<_$UpsertRaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2958,23 +2388,22 @@ class _$DeleteRaceImpl implements _DeleteRace {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -3055,23 +2484,22 @@ class _$DeleteRaceImpl implements _DeleteRace {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -3149,23 +2577,22 @@ class _$DeleteRaceImpl implements _DeleteRace {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -3231,13 +2658,12 @@ class _$DeleteRaceImpl implements _DeleteRace {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -3280,13 +2706,12 @@ class _$DeleteRaceImpl implements _DeleteRace {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -3323,13 +2748,12 @@ class _$DeleteRaceImpl implements _DeleteRace {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -3437,23 +2861,22 @@ class _$GetRacesImpl implements _GetRaces {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -3534,23 +2957,22 @@ class _$GetRacesImpl implements _GetRaces {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -3628,23 +3050,22 @@ class _$GetRacesImpl implements _GetRaces {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -3710,13 +3131,12 @@ class _$GetRacesImpl implements _GetRaces {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -3759,13 +3179,12 @@ class _$GetRacesImpl implements _GetRaces {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -3802,13 +3221,12 @@ class _$GetRacesImpl implements _GetRaces {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -3936,23 +3354,22 @@ class _$SelectRaceImpl implements _SelectRace {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -4033,23 +3450,22 @@ class _$SelectRaceImpl implements _SelectRace {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -4127,23 +3543,22 @@ class _$SelectRaceImpl implements _SelectRace {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -4209,13 +3624,12 @@ class _$SelectRaceImpl implements _SelectRace {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -4258,13 +3672,12 @@ class _$SelectRaceImpl implements _SelectRace {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -4301,13 +3714,12 @@ class _$SelectRaceImpl implements _SelectRace {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -4415,23 +3827,22 @@ class _$DeselectRaceImpl implements _DeselectRace {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -4512,23 +3923,22 @@ class _$DeselectRaceImpl implements _DeselectRace {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -4606,23 +4016,22 @@ class _$DeselectRaceImpl implements _DeselectRace {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -4688,13 +4097,12 @@ class _$DeselectRaceImpl implements _DeselectRace {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -4737,13 +4145,12 @@ class _$DeselectRaceImpl implements _DeselectRace {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -4780,13 +4187,12 @@ class _$DeselectRaceImpl implements _DeselectRace {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -4828,20 +4234,27 @@ abstract class _DeselectRace implements DatabaseEvent {
 }
 
 /// @nodoc
-abstract class _$$AddStageImplCopyWith<$Res> {
-  factory _$$AddStageImplCopyWith(
-          _$AddStageImpl value, $Res Function(_$AddStageImpl) then) =
-      __$$AddStageImplCopyWithImpl<$Res>;
+abstract class _$$UpsertStageImplCopyWith<$Res> {
+  factory _$$UpsertStageImplCopyWith(
+          _$UpsertStageImpl value, $Res Function(_$UpsertStageImpl) then) =
+      __$$UpsertStageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String name, int raceId, int? trailId});
+  $Res call(
+      {int? id,
+      String? name,
+      String? description,
+      int? raceId,
+      int? trailId,
+      bool? isActive,
+      bool? isDeleted});
 }
 
 /// @nodoc
-class __$$AddStageImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$AddStageImpl>
-    implements _$$AddStageImplCopyWith<$Res> {
-  __$$AddStageImplCopyWithImpl(
-      _$AddStageImpl _value, $Res Function(_$AddStageImpl) _then)
+class __$$UpsertStageImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$UpsertStageImpl>
+    implements _$$UpsertStageImplCopyWith<$Res> {
+  __$$UpsertStageImplCopyWithImpl(
+      _$UpsertStageImpl _value, $Res Function(_$UpsertStageImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DatabaseEvent
@@ -4849,65 +4262,107 @@ class __$$AddStageImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? raceId = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? description = freezed,
+    Object? raceId = freezed,
     Object? trailId = freezed,
+    Object? isActive = freezed,
+    Object? isDeleted = freezed,
   }) {
-    return _then(_$AddStageImpl(
-      name: null == name
+    return _then(_$UpsertStageImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      raceId: null == raceId
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      raceId: freezed == raceId
           ? _value.raceId
           : raceId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       trailId: freezed == trailId
           ? _value.trailId
           : trailId // ignore: cast_nullable_to_non_nullable
               as int?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isDeleted: freezed == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$AddStageImpl implements _AddStage {
-  const _$AddStageImpl(
-      {required this.name, required this.raceId, this.trailId});
+class _$UpsertStageImpl implements _UpsertStage {
+  const _$UpsertStageImpl(
+      {this.id,
+      this.name,
+      this.description,
+      this.raceId,
+      this.trailId,
+      this.isActive,
+      this.isDeleted});
 
   @override
-  final String name;
+  final int? id;
   @override
-  final int raceId;
+  final String? name;
+  @override
+  final String? description;
+  @override
+  final int? raceId;
   @override
   final int? trailId;
+  @override
+  final bool? isActive;
+  @override
+  final bool? isDeleted;
 
   @override
   String toString() {
-    return 'DatabaseEvent.addStage(name: $name, raceId: $raceId, trailId: $trailId)';
+    return 'DatabaseEvent.upsertStage(id: $id, name: $name, description: $description, raceId: $raceId, trailId: $trailId, isActive: $isActive, isDeleted: $isDeleted)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddStageImpl &&
+            other is _$UpsertStageImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.raceId, raceId) || other.raceId == raceId) &&
-            (identical(other.trailId, trailId) || other.trailId == trailId));
+            (identical(other.trailId, trailId) || other.trailId == trailId) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
+            (identical(other.isDeleted, isDeleted) ||
+                other.isDeleted == isDeleted));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, raceId, trailId);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, description, raceId, trailId, isActive, isDeleted);
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddStageImplCopyWith<_$AddStageImpl> get copyWith =>
-      __$$AddStageImplCopyWithImpl<_$AddStageImpl>(this, _$identity);
+  _$$UpsertStageImplCopyWith<_$UpsertStageImpl> get copyWith =>
+      __$$UpsertStageImplCopyWithImpl<_$UpsertStageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4930,23 +4385,22 @@ class _$AddStageImpl implements _AddStage {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -5003,7 +4457,8 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
   }) {
-    return addStage(name, raceId, trailId);
+    return upsertStage(
+        id, name, description, raceId, trailId, isActive, isDeleted);
   }
 
   @override
@@ -5027,23 +4482,22 @@ class _$AddStageImpl implements _AddStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -5097,7 +4551,8 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
   }) {
-    return addStage?.call(name, raceId, trailId);
+    return upsertStage?.call(
+        id, name, description, raceId, trailId, isActive, isDeleted);
   }
 
   @override
@@ -5121,23 +4576,22 @@ class _$AddStageImpl implements _AddStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -5192,8 +4646,9 @@ class _$AddStageImpl implements _AddStage {
     TResult Function()? shareDatabase,
     required TResult orElse(),
   }) {
-    if (addStage != null) {
-      return addStage(name, raceId, trailId);
+    if (upsertStage != null) {
+      return upsertStage(
+          id, name, description, raceId, trailId, isActive, isDeleted);
     }
     return orElse();
   }
@@ -5203,13 +4658,12 @@ class _$AddStageImpl implements _AddStage {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -5244,7 +4698,7 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
   }) {
-    return addStage(this);
+    return upsertStage(this);
   }
 
   @override
@@ -5252,13 +4706,12 @@ class _$AddStageImpl implements _AddStage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -5287,7 +4740,7 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
   }) {
-    return addStage?.call(this);
+    return upsertStage?.call(this);
   }
 
   @override
@@ -5295,13 +4748,12 @@ class _$AddStageImpl implements _AddStage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -5331,27 +4783,35 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(_ShareDatabase value)? shareDatabase,
     required TResult orElse(),
   }) {
-    if (addStage != null) {
-      return addStage(this);
+    if (upsertStage != null) {
+      return upsertStage(this);
     }
     return orElse();
   }
 }
 
-abstract class _AddStage implements DatabaseEvent {
-  const factory _AddStage(
-      {required final String name,
-      required final int raceId,
-      final int? trailId}) = _$AddStageImpl;
+abstract class _UpsertStage implements DatabaseEvent {
+  const factory _UpsertStage(
+      {final int? id,
+      final String? name,
+      final String? description,
+      final int? raceId,
+      final int? trailId,
+      final bool? isActive,
+      final bool? isDeleted}) = _$UpsertStageImpl;
 
-  String get name;
-  int get raceId;
+  int? get id;
+  String? get name;
+  String? get description;
+  int? get raceId;
   int? get trailId;
+  bool? get isActive;
+  bool? get isDeleted;
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddStageImplCopyWith<_$AddStageImpl> get copyWith =>
+  _$$UpsertStageImplCopyWith<_$UpsertStageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -5441,23 +4901,22 @@ class _$DeleteStageImpl implements _DeleteStage {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -5538,23 +4997,22 @@ class _$DeleteStageImpl implements _DeleteStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -5632,23 +5090,22 @@ class _$DeleteStageImpl implements _DeleteStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -5714,13 +5171,12 @@ class _$DeleteStageImpl implements _DeleteStage {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -5763,13 +5219,12 @@ class _$DeleteStageImpl implements _DeleteStage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -5806,13 +5261,12 @@ class _$DeleteStageImpl implements _DeleteStage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -5947,23 +5401,22 @@ class _$GetStagesImpl implements _GetStages {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -6044,23 +5497,22 @@ class _$GetStagesImpl implements _GetStages {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -6138,23 +5590,22 @@ class _$GetStagesImpl implements _GetStages {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -6220,13 +5671,12 @@ class _$GetStagesImpl implements _GetStages {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -6269,13 +5719,12 @@ class _$GetStagesImpl implements _GetStages {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -6312,13 +5761,12 @@ class _$GetStagesImpl implements _GetStages {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -6454,23 +5902,22 @@ class _$SelectStageImpl implements _SelectStage {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -6551,23 +5998,22 @@ class _$SelectStageImpl implements _SelectStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -6645,23 +6091,22 @@ class _$SelectStageImpl implements _SelectStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -6727,13 +6172,12 @@ class _$SelectStageImpl implements _SelectStage {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -6776,13 +6220,12 @@ class _$SelectStageImpl implements _SelectStage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -6819,13 +6262,12 @@ class _$SelectStageImpl implements _SelectStage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -6963,23 +6405,22 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -7060,23 +6501,22 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -7154,23 +6594,22 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -7236,13 +6675,12 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -7285,13 +6723,12 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -7328,13 +6765,12 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -7503,23 +6939,22 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -7600,23 +7035,22 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -7694,23 +7128,22 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -7776,13 +7209,12 @@ class _$AddStartNumberImpl implements _AddStartNumber {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -7825,13 +7257,12 @@ class _$AddStartNumberImpl implements _AddStartNumber {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -7868,13 +7299,12 @@ class _$AddStartNumberImpl implements _AddStartNumber {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -8093,23 +7523,22 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -8197,23 +7626,22 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -8298,23 +7726,22 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -8387,13 +7814,12 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -8436,13 +7862,12 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -8479,13 +7904,12 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -8695,23 +8119,22 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -8793,23 +8216,22 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -8888,23 +8310,22 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -8971,13 +8392,12 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -9020,13 +8440,12 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -9063,13 +8482,12 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -9250,23 +8668,22 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -9347,23 +8764,22 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -9442,23 +8858,22 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -9524,13 +8939,12 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -9573,13 +8987,12 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -9616,13 +9029,12 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -9774,23 +9186,22 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -9871,23 +9282,22 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -9965,23 +9375,22 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -10047,13 +9456,12 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -10096,13 +9504,12 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -10139,13 +9546,12 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -10370,23 +9776,22 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -10468,23 +9873,22 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -10563,23 +9967,22 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -10646,13 +10049,12 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -10695,13 +10097,12 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -10738,13 +10139,12 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -10926,23 +10326,22 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -11023,23 +10422,22 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -11117,23 +10515,22 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -11199,13 +10596,12 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -11248,13 +10644,12 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -11291,13 +10686,12 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -11442,23 +10836,22 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -11539,23 +10932,22 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -11633,23 +11025,22 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -11715,13 +11106,12 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -11764,13 +11154,12 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -11807,13 +11196,12 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -11952,23 +11340,22 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -12049,23 +11436,22 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -12143,23 +11529,22 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -12225,13 +11610,12 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -12274,13 +11658,12 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -12317,13 +11700,12 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -12460,23 +11842,22 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -12557,23 +11938,22 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -12651,23 +12031,22 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -12733,13 +12112,12 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -12782,13 +12160,12 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -12825,13 +12202,12 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -12976,23 +12352,22 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -13073,23 +12448,22 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -13167,23 +12541,22 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -13249,13 +12622,12 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -13298,13 +12670,12 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -13341,13 +12712,12 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -13495,23 +12865,22 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -13592,23 +12961,22 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -13686,23 +13054,22 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -13768,13 +13135,12 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -13817,13 +13183,12 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -13860,13 +13225,12 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -14014,23 +13378,22 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -14111,23 +13474,22 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -14205,23 +13567,22 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -14287,13 +13648,12 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -14336,13 +13696,12 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -14379,13 +13738,12 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -14523,23 +13881,22 @@ class _$HideFinishImpl implements _HideFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -14620,23 +13977,22 @@ class _$HideFinishImpl implements _HideFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -14714,23 +14070,22 @@ class _$HideFinishImpl implements _HideFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -14796,13 +14151,12 @@ class _$HideFinishImpl implements _HideFinish {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -14845,13 +14199,12 @@ class _$HideFinishImpl implements _HideFinish {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -14888,13 +14241,12 @@ class _$HideFinishImpl implements _HideFinish {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -15061,23 +14413,22 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -15158,23 +14509,22 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -15252,23 +14602,22 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -15334,13 +14683,12 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -15383,13 +14731,12 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -15426,13 +14773,12 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -15586,23 +14932,22 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -15683,23 +15028,22 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -15777,23 +15121,22 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -15859,13 +15202,12 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -15908,13 +15250,12 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -15951,13 +15292,12 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -16097,23 +15437,22 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -16194,23 +15533,22 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -16288,23 +15626,22 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -16370,13 +15707,12 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -16419,13 +15755,12 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -16462,13 +15797,12 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -16580,23 +15914,22 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -16677,23 +16010,22 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -16771,23 +16103,22 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -16853,13 +16184,12 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -16902,13 +16232,12 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -16945,13 +16274,12 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -17080,23 +16408,22 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -17177,23 +16504,22 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -17271,23 +16597,22 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -17353,13 +16678,12 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -17402,13 +16726,12 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -17445,13 +16768,12 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -17560,23 +16882,22 @@ class _$ShareStartImpl implements _ShareStart {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -17657,23 +16978,22 @@ class _$ShareStartImpl implements _ShareStart {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -17751,23 +17071,22 @@ class _$ShareStartImpl implements _ShareStart {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -17833,13 +17152,12 @@ class _$ShareStartImpl implements _ShareStart {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -17882,13 +17200,12 @@ class _$ShareStartImpl implements _ShareStart {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -17925,13 +17242,12 @@ class _$ShareStartImpl implements _ShareStart {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -18031,23 +17347,22 @@ class _$ShareFinishImpl implements _ShareFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -18128,23 +17443,22 @@ class _$ShareFinishImpl implements _ShareFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -18222,23 +17536,22 @@ class _$ShareFinishImpl implements _ShareFinish {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -18304,13 +17617,12 @@ class _$ShareFinishImpl implements _ShareFinish {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -18353,13 +17665,12 @@ class _$ShareFinishImpl implements _ShareFinish {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -18396,13 +17707,12 @@ class _$ShareFinishImpl implements _ShareFinish {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,
@@ -18502,23 +17812,22 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             int? awaitingNumber,
             bool? updateFinishNumber)
         emitState,
-    required TResult Function(String name, DateTime? startDate,
-            DateTime? finishDate, String? location)
-        addRace,
     required TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)
-        updateRace,
+        upsertRace,
     required TResult Function(int id) deleteRace,
     required TResult Function() getRaces,
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
-    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
     required TResult Function(Stage stage) selectStage,
@@ -18599,23 +17908,22 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult? Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult? Function(int id)? deleteRace,
     TResult? Function()? getRaces,
     TResult? Function(Race race)? selectRace,
     TResult? Function()? deselectRace,
-    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
     TResult? Function(Stage stage)? selectStage,
@@ -18693,23 +18001,22 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             int? awaitingNumber,
             bool? updateFinishNumber)?
         emitState,
-    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
-            String? location)?
-        addRace,
     TResult Function(
-            int id,
+            int? id,
             String? name,
             DateTime? startDate,
             DateTime? finishDate,
             String? location,
             String? url,
             String? description)?
-        updateRace,
+        upsertRace,
     TResult Function(int id)? deleteRace,
     TResult Function()? getRaces,
     TResult Function(Race race)? selectRace,
     TResult Function()? deselectRace,
-    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
     TResult Function(Stage stage)? selectStage,
@@ -18775,13 +18082,12 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddRace value) addRace,
-    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
     required TResult Function(_DeleteRace value) deleteRace,
     required TResult Function(_GetRaces value) getRaces,
     required TResult Function(_SelectRace value) selectRace,
     required TResult Function(_DeselectRace value) deselectRace,
-    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
     required TResult Function(_DeleteStage value) deleteStage,
     required TResult Function(_GetStages value) getStages,
     required TResult Function(_SelectStage value) selectStage,
@@ -18824,13 +18130,12 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddRace value)? addRace,
-    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
     TResult? Function(_DeleteRace value)? deleteRace,
     TResult? Function(_GetRaces value)? getRaces,
     TResult? Function(_SelectRace value)? selectRace,
     TResult? Function(_DeselectRace value)? deselectRace,
-    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
     TResult? Function(_DeleteStage value)? deleteStage,
     TResult? Function(_GetStages value)? getStages,
     TResult? Function(_SelectStage value)? selectStage,
@@ -18867,13 +18172,12 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddRace value)? addRace,
-    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
     TResult Function(_DeleteRace value)? deleteRace,
     TResult Function(_GetRaces value)? getRaces,
     TResult Function(_SelectRace value)? selectRace,
     TResult Function(_DeselectRace value)? deselectRace,
-    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
     TResult Function(_DeleteStage value)? deleteStage,
     TResult Function(_GetStages value)? getStages,
     TResult Function(_SelectStage value)? selectStage,

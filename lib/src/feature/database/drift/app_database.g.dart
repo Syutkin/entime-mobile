@@ -3548,14 +3548,18 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       {required String name,
       String? startDate,
       String? finishDate,
-      String? location}) {
+      String? location,
+      String? url,
+      String? description}) {
     return customInsert(
-      'INSERT INTO races (name, start_date, finish_date, location) VALUES (?1, ?2, ?3, ?4)',
+      'INSERT INTO races (name, start_date, finish_date, location, url, description) VALUES (?1, ?2, ?3, ?4, ?5, ?6)',
       variables: [
         Variable<String>(name),
         Variable<String>(startDate),
         Variable<String>(finishDate),
-        Variable<String>(location)
+        Variable<String>(location),
+        Variable<String>(url),
+        Variable<String>(description)
       ],
       updates: {races},
     );

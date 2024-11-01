@@ -27,9 +27,13 @@ class FinishItemTile extends StatelessWidget {
   Widget build(BuildContext context) => Dismissible(
         key: UniqueKey(),
         background: Container(
-          color: Theme.of(context).colorScheme.primaryContainer,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Theme.of(context).colorScheme.primaryContainer,
+          ),
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.all(5),
+          margin: const EdgeInsets.all(2),
           child: Text(
             Localization.current.I18nProtocol_hide,
             style: DefaultTextStyle.of(context).style.apply(

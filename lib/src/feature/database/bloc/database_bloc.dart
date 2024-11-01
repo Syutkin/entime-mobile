@@ -145,10 +145,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       _emitState();
     });
 
-    // _db.select(_db.trails).watch().listen((event) async {
-    //   _trails = event;
-    //   add( DatabaseEvent.onChanged());
-    // });
+    _db.select(_db.trails).watch().listen((event) async {
+      _trails = event;
+      logger.t('DatabaseBloc -> getTrails().watch()');
+      _emitState();
+    });
 
     _numbersOnTraceSubscription = _db
         .getNumbersOnTraceNow(
@@ -267,19 +268,32 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             ),
           );
         },
-        addRace: (event) async {
-          await _db.addRace(
-            name: event.name,
-            startDate: event.startDate?.toIso8601String(),
-            finishDate: event.finishDate?.toIso8601String(),
-            location: event.location,
-          );
-        },
+        // addRace: (event) async {
+        //   await _db.addRace(
+        //     name: event.name,
+        //     startDate: event.startDate,
+        //     finishDate: event.finishDate,
+        //     location: event.location,
+        //     url: event.url,
+        //     description: event.description,
+        //   );
+        // },
         deleteRace: (event) async {
           await _db.deleteRace(id: event.id);
         },
-        updateRace: (event) async {
-          await _db.updateRace(
+        // updateRace: (event) async {
+        //   await _db.updateRace(
+        //     id: event.id,
+        //     name: event.name,
+        //     startDate: event.startDate,
+        //     finishDate: event.finishDate,
+        //     location: event.location,
+        //     url: event.url,
+        //     description: event.description,
+        //   );
+        // },
+        upsertRace: (event) async {
+          await _db.upsertRace(
             id: event.id,
             name: event.name,
             startDate: event.startDate,
@@ -307,11 +321,22 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           _settingsProvider.update(settings);
           _emitState();
         },
-        addStage: (event) async {
-          await _db.addStage(
-            raceId: event.raceId,
+        // addStage: (event) async {
+        //   await _db.addStage(
+        //     raceId: event.raceId,
+        //     name: event.name,
+        //     trailId: event.trailId,
+        //   );
+        // },
+        upsertStage: (event) async {
+          await _db.upsertStage(
+            id: event.id,
             name: event.name,
+            description: event.description,
+            raceId: event.raceId,
             trailId: event.trailId,
+            isActive: event.isActive,
+            isDeleted: event.isDeleted,
           );
         },
         deleteStage: (event) async {

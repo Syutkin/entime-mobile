@@ -2098,6 +2098,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Описание`
+  String get I18nDatabase_stageDescription {
+    return Intl.message(
+      'Описание',
+      name: 'I18nDatabase_stageDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Активный`
+  String get I18nDatabase_isActiveStage {
+    return Intl.message(
+      'Активный',
+      name: 'I18nDatabase_isActiveStage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Трейл`
   String get I18nDatabase_trail {
     return Intl.message(

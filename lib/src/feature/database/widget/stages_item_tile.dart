@@ -27,9 +27,8 @@ class StagesItemTile extends StatelessWidget {
         icon: const Icon(Icons.more_vert),
         itemBuilder: (context) => <PopupMenuEntry<void>>[
           PopupMenuItem<void>(
-            // ToDo: implement stage edit
             onTap: () {
-              throw 'Not implemented';
+              updateStagePopup(context, stage: stage);
             },
             child: ListTile(
               leading: const Icon(Icons.edit),

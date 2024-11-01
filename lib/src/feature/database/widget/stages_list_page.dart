@@ -5,7 +5,8 @@ import '../../../common/localization/localization.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../database.dart';
 
-part 'popup/add_stage_popup.dart';
+// part 'popup/add_stage_popup.dart';
+part 'popup/add_or_update_stage_popup.dart';
 
 class StagesListPage extends StatelessWidget {
   final Race race;
@@ -19,7 +20,7 @@ class StagesListPage extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            addStagePopup(context, raceId: race.id);
+            addStagePopup(context, race: race);
           },
         ),
         body: BlocBuilder<DatabaseBloc, DatabaseState>(

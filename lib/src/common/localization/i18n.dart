@@ -1157,14 +1157,14 @@ class I18nDatabase {
       );
 
   static String get raceLocation => Intl.message(
-    'Место проведения',
-    name: 'I18nDatabase_raceLocation',
-  );
+        'Место проведения',
+        name: 'I18nDatabase_raceLocation',
+      );
 
   static String get raceDescription => Intl.message(
-    'Описание',
-    name: 'I18nDatabase_raceDescription',
-  );
+        'Описание',
+        name: 'I18nDatabase_raceDescription',
+      );
 
   static String get addStage => Intl.message(
         'Создать спецучасток',
@@ -1180,6 +1180,16 @@ class I18nDatabase {
         'Введите название спецучастка',
         name: 'I18nDatabase_enterStageName',
       );
+
+  static String get stageDescription => Intl.message(
+        'Описание',
+        name: 'I18nDatabase_stageDescription',
+      );
+
+  static String get isActiveStage => Intl.message(
+    'Активный',
+    name: 'I18nDatabase_isActiveStage',
+  );
 
   static String get trail => Intl.message(
         'Трейл',

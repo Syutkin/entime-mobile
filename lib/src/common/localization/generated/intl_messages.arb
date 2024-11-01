@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-31T01:55:51.284347",
+  "@@last_modified": "2024-10-31T18:01:26.695753",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1087,6 +1087,16 @@
   },
   "I18nDatabase_enterStageName": "Введите название спецучастка",
   "@I18nDatabase_enterStageName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_stageDescription": "Описание",
+  "@I18nDatabase_stageDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_isActiveStage": "Активный",
+  "@I18nDatabase_isActiveStage": {
     "type": "text",
     "placeholders": {}
   },

@@ -13,7 +13,8 @@ void main() {
   int deltaInSeconds = 15;
 
   setUp(() {
-    db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory()));
+    db = AppDatabase.customConnection(
+        DatabaseConnection(NativeDatabase.memory()));
 
     // populate DB
     for (var query in PopDB().queries) {
@@ -40,13 +41,13 @@ void main() {
 
     test('Add race', () async {
       const raceName = 'race1';
-      const startDate = '01-01-2020';
-      const finishDate = '02-01-2020';
+      final startDate = DateTime(2020, 1, 1);
+      final finishDate = DateTime(2020, 1, 2);
       const location = 'location';
       const raceName2 = 'race2';
       const raceName3 = 'race3';
 
-      await db.addRace(
+      await db.upsertRace(
         name: raceName,
         startDate: startDate,
         finishDate: finishDate,
@@ -56,11 +57,11 @@ void main() {
       List<Race> racesList = await db.getRaces().get();
       expect(racesList.length, 3);
       expect(racesList[2].name, raceName);
-      expect(racesList[2].startDate, startDate);
-      expect(racesList[2].finishDate, finishDate);
+      expect(racesList[2].startDate, startDate.toIso8601String());
+      expect(racesList[2].finishDate, finishDate.toIso8601String());
       expect(racesList[2].location, location);
 
-      await db.addRace(
+      await db.upsertRace(
         name: raceName2,
       );
 
@@ -72,7 +73,7 @@ void main() {
       expect(racesList[3].finishDate, null);
       expect(racesList[3].location, null);
 
-      await db.addRace(
+      await db.upsertRace(
         name: raceName3,
       );
 
@@ -83,11 +84,11 @@ void main() {
 
     test('Delete race', () async {
       const raceName = 'race1';
-      const startDate = '01-01-2020';
-      const finishDate = '02-01-2020';
+      final startDate = DateTime(2020, 1, 1);
+      final finishDate = DateTime(2020, 1, 2);
       const location = 'location';
 
-      await db.addRace(
+      await db.upsertRace(
         name: raceName,
         startDate: startDate,
         finishDate: finishDate,
@@ -104,10 +105,13 @@ void main() {
       expect(racesList.length, 1);
     });
 
+    // ToDo:
+    test('Update race', () async {});
+
     test('Add stage', () async {
       const stageName = 'stage1';
 
-      await db.addStage(
+      await db.upsertStage(
         name: stageName,
         raceId: 1,
       );
@@ -120,7 +124,7 @@ void main() {
     test('Delete stage', () async {
       const stageName = 'stage1';
 
-      await db.addStage(
+      await db.upsertStage(
         name: stageName,
         raceId: 1,
       );
@@ -524,7 +528,7 @@ void main() {
       test('Add correct manual start time', () async {
         var stage = (await db.getStages(raceId: 1).get()).first;
         var startTime = '10:15:00';
-        var manualStartTime= '10:15:03,001';
+        var manualStartTime = '10:15:03,001';
         var timestamp = manualStartTime.toDateTime()!;
         var correction = -3001;
 
@@ -566,7 +570,7 @@ void main() {
       test('Check delta at manual', () async {
         var stage = (await db.getStages(raceId: 1).get()).first;
         var startTime = '10:15:00';
-       var  manualStartTime = '10:15:03,001';
+        var manualStartTime = '10:15:03,001';
         var timestamp = manualStartTime.toDateTime()!;
         var correction = -3001;
         var delta = 1;

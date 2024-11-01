@@ -106,8 +106,8 @@ CREATE TABLE logs (
 _getRaces: SELECT * FROM races WHERE is_deleted = false;
 
 _addRace:
-INSERT INTO races (name, start_date, finish_date, location)
-VALUES (:name, :start_date, :finish_date, :location);
+INSERT INTO races (name, start_date, finish_date, location, url, description)
+VALUES (:name, :start_date, :finish_date, :location, :url, :description);
 
 _deleteRace: UPDATE races SET is_deleted = true WHERE id = :id;
 

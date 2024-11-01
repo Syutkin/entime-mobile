@@ -1,14 +1,22 @@
 part of '../races_list_page.dart';
 
-Future<void> updateRacePopup(BuildContext context, Race race) async {
-  var name = race.name;
+Future<void> addRacePopup(BuildContext context) {
+  return _upsertRacePopup(context);
+}
+
+Future<void> updateRacePopup(BuildContext context, Race race) {
+  return _upsertRacePopup(context, race);
+}
+
+Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
+  var name = race?.name ?? '';
   var startDate =
-      race.startDate != null ? DateTime.tryParse(race.startDate!) : null;
+      race?.startDate != null ? DateTime.tryParse(race!.startDate!) : null;
   var finishDate =
-      race.finishDate != null ? DateTime.tryParse(race.finishDate!) : null;
-  var location = race.location;
-  var url = race.url;
-  var description = race.description;
+      race?.finishDate != null ? DateTime.tryParse(race!.finishDate!) : null;
+  var location = race?.location;
+  var url = race?.url;
+  var description = race?.description;
   final languageCode = Localizations.localeOf(context).languageCode;
   final DateFormat formatter = DateFormat.yMd(languageCode);
   final dateController = TextEditingController();
@@ -20,8 +28,9 @@ Future<void> updateRacePopup(BuildContext context, Race race) async {
   return showDialog<void>(
     context: context,
     builder: (context) => ExpandedAlertDialog(
-      // title: Text(Localization.current.I18nDatabase_editRace),
-      title: Text(name),
+      title: race == null
+          ? Text(Localization.current.I18nDatabase_editRace)
+          : Text(name),
       content: Form(
         key: formKey,
         onChanged: () {
@@ -32,7 +41,6 @@ Future<void> updateRacePopup(BuildContext context, Race race) async {
         },
         child: ListView(
           shrinkWrap: true,
-          // mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             // Название гонки
             TextFormField(
@@ -93,6 +101,7 @@ Future<void> updateRacePopup(BuildContext context, Race race) async {
                   return null;
                 } else {
                   RegExp regExp = RegExp(
+                    // ToDo: пропускать русские домены
                     // Простой валидатор домена
                     r'^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}$',
                     caseSensitive: false,
@@ -133,17 +142,18 @@ Future<void> updateRacePopup(BuildContext context, Race race) async {
         TextButton(
           onPressed: () async {
             if (formKey.currentState!.validate()) {
-              context.read<DatabaseBloc>().add(
-                    DatabaseEvent.updateRace(
-                      id: race.id,
-                      name: name,
-                      startDate: startDate,
-                      finishDate: finishDate,
-                      location: location,
-                      url: url,
-                      description: description,
-                    ),
-                  );
+              final bloc = context.read<DatabaseBloc>();
+                bloc.add(
+                  DatabaseEvent.upsertRace(
+                    id: race?.id,
+                    name: name,
+                    startDate: startDate,
+                    finishDate: finishDate,
+                    location: location,
+                    url: url,
+                    description: description,
+                  ),
+                );
               Navigator.of(context).pop();
             }
           },
