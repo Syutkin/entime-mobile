@@ -93,6 +93,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
                 }
               },
             ),
+            // ToDo: загрузка gpx трека
             TextFormField(
               // initialValue: location,
               decoration: InputDecoration(

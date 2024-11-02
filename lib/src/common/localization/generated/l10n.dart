@@ -2238,6 +2238,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Активен`
+  String get I18nDatabase_trailIsActive {
+    return Intl.message(
+      'Активен',
+      name: 'I18nDatabase_trailIsActive',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NTP offset`
   String get I18nNtp_ntpOffset {
     return Intl.message(

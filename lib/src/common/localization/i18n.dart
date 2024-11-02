@@ -1250,6 +1250,11 @@ class I18nDatabase {
     'Описание',
     name: 'I18nDatabase_trailDescription',
   );
+
+  static String get trailIsActive => Intl.message(
+    'Активен',
+    name: 'I18nDatabase_trailIsActive',
+  );
 }
 
 class I18nNtp {

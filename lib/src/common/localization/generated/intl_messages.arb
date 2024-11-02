@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-11-02T23:06:14.692345",
+  "@@last_modified": "2024-11-03T01:20:15.018064",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1157,6 +1157,11 @@
   },
   "I18nDatabase_trailDescription": "Описание",
   "@I18nDatabase_trailDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_trailIsActive": "Активен",
+  "@I18nDatabase_trailIsActive": {
     "type": "text",
     "placeholders": {}
   },

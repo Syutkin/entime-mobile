@@ -151,7 +151,8 @@ class EntimeApp extends StatelessWidget {
             )..add(const DatabaseEvent.initialize()),
           ),
           BlocProvider<TrailsBloc>(
-            create: (context) => TrailsBloc(database: database),
+            create: (context) =>
+                TrailsBloc(database: database),
           ),
           BlocProvider<CountdownBloc>(
             create: (context) => CountdownBloc(

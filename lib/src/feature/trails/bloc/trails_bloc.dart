@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -8,9 +9,7 @@ import '../../../common/logger/logger.dart';
 import '../../database/database.dart';
 
 part 'trails_bloc.freezed.dart';
-
 part 'trails_event.dart';
-
 part 'trails_state.dart';
 
 class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
@@ -18,20 +17,21 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
 
   List<Trail> _trails = [];
 
+  late StreamSubscription<List<Trail>> _trailsSubscription;
+
   TrailsBloc({
     required AppDatabase database,
   })  : _db = database,
         super(const TrailsState.initial()) {
-    _db.getTrails().watch().listen((event) async {
+    _trailsSubscription = _db.getTrails().watch().listen((event) async {
       _trails = event;
-      logger.t('DatabaseBloc -> getTrails().watch()');
+      logger.t('TrailsBloc -> getTrails().watch()');
       add(TrailsEvent.getTrails());
     });
 
     on<TrailsEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         getTrails: (_GetTrails event) async {
-          // _trails = await _db.getTrails().get();
           emit(TrailsState.initialized(trails: _trails));
         },
         addTrail: (_AddTrail event) async {
@@ -75,5 +75,11 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
         },
       );
     });
+  }
+
+  @override
+  Future<void> close() {
+    _trailsSubscription.cancel();
+    return super.close();
   }
 }

@@ -150,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Перепад высот"),
         "I18nDatabase_trailGpxTrack":
             MessageLookupByLibrary.simpleMessage("Трек"),
+        "I18nDatabase_trailIsActive":
+            MessageLookupByLibrary.simpleMessage("Активен"),
         "I18nDatabase_trailName":
             MessageLookupByLibrary.simpleMessage("Название"),
         "I18nDatabase_trailUrl": MessageLookupByLibrary.simpleMessage("Ссылка"),

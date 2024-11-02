@@ -23,17 +23,8 @@ Future<void> _upsertStagePopup(
   var name = stage?.name ?? '';
   var description = stage?.description;
   var trailId = stage?.trailId;
+  // Трейл у которого id = trailId
   Trail? trail;
-  if (trailId != null) {
-    context.read<TrailsBloc>().state.mapOrNull(initialized: (state) {
-      for (var t in state.trails) {
-        if (t.id == trailId) {
-          trail = t;
-          break;
-        }
-      }
-    });
-  }
   var isActive = stage?.isActive ?? true;
 
   final formKey = GlobalKey<FormState>();
@@ -76,7 +67,7 @@ Future<void> _upsertStagePopup(
               keyboardType: TextInputType.multiline,
               maxLines: null,
             ),
-            // ToDo: сделать красиво
+            // ToDo: сделать красиво (selectedItemBuilder?)
             // ToDo: сделать текстовый поиск
             // ToDo: сделать возможность убрать выбор
             // Трейл этапа
@@ -85,7 +76,19 @@ Future<void> _upsertStagePopup(
                 return state.map(initial: (state) {
                   return SizedBox.shrink();
                 }, initialized: (state) {
+                  if (trailId != null) {
+                    context.read<TrailsBloc>().state.mapOrNull(
+                        initialized: (state) {
+                      for (var t in state.trails) {
+                        if (t.id == trailId) {
+                          trail = t;
+                          break;
+                        }
+                      }
+                    });
+                  }
                   return DropdownButtonFormField<Trail?>(
+                    style: Theme.of(context).textTheme.bodyLarge,
                     value: trail,
                     decoration: InputDecoration(
                       labelText: Localization.current.I18nDatabase_trail,
@@ -110,7 +113,7 @@ Future<void> _upsertStagePopup(
               initialValue: isActive,
               builder: (FormFieldState<bool> state) {
                 return SwitchListTile(
-                  title: Text('Активен'),
+                  title: Text(Localization.current.I18nDatabase_trailIsActive),
                   value: isActive,
                   onChanged: (bool value) {
                     isActive = value;
