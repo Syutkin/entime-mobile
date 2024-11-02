@@ -23,9 +23,6 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
         title: Text(Localization.current.I18nProtocol_enterFinishNumber),
         content: Form(
           key: formKey,
-          onChanged: () {
-            Form.of(primaryFocus!.context!).validate();
-          },
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -36,6 +33,7 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
                   labelText: Localization.current.I18nProtocol_number,
                 ),
                 controller: numberController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   if (value == null) {
                     return Localization.current.I18nProtocol_incorrectNumber;

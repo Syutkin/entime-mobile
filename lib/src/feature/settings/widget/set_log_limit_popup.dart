@@ -15,9 +15,6 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
       title: Text(Localization.current.I18nSettings_journalLinesNumberPopup),
       content: Form(
         key: formKey,
-        onChanged: () {
-          Form.of(primaryFocus!.context!).validate();
-        },
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -28,6 +25,7 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
                 labelText: Localization.current.I18nSettings_numberOfLines,
               ),
               controller: delayController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value == '' || value == '-') {
                   newLimit = -1;

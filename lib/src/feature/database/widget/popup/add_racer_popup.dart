@@ -17,12 +17,6 @@ Future<void> addRacerPopup({
       title: Text(Localization.current.I18nStart_addParticipant),
       content: Form(
         key: formKey,
-        onChanged: () {
-          final formState = primaryFocus?.context;
-          if (formState != null) {
-            Form.of(formState).validate();
-          }
-        },
         child: Column(
           children: <Widget>[
             TextFormField(
@@ -31,6 +25,7 @@ Future<void> addRacerPopup({
               decoration: InputDecoration(
                 labelText: Localization.current.I18nProtocol_number,
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null) {
                   return Localization.current.I18nProtocol_incorrectNumber;

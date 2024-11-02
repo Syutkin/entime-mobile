@@ -23,6 +23,17 @@ Future<void> _upsertStagePopup(
   var name = stage?.name ?? '';
   var description = stage?.description;
   var trailId = stage?.trailId;
+  Trail? trail;
+  if (trailId != null) {
+    context.read<TrailsBloc>().state.mapOrNull(initialized: (state) {
+      for (var t in state.trails) {
+        if (t.id == trailId) {
+          trail = t;
+          break;
+        }
+      }
+    });
+  }
   var isActive = stage?.isActive ?? true;
 
   final formKey = GlobalKey<FormState>();
@@ -34,12 +45,6 @@ Future<void> _upsertStagePopup(
           : Text(name),
       content: Form(
         key: formKey,
-        onChanged: () {
-          final formState = primaryFocus?.context;
-          if (formState != null) {
-            Form.of(formState).validate();
-          }
-        },
         child: ListView(
           shrinkWrap: true,
           children: <Widget>[
@@ -50,6 +55,7 @@ Future<void> _upsertStagePopup(
               decoration: InputDecoration(
                 labelText: Localization.current.I18nDatabase_stageName,
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return Localization.current.I18nDatabase_enterStageName;
@@ -70,17 +76,33 @@ Future<void> _upsertStagePopup(
               keyboardType: TextInputType.multiline,
               maxLines: null,
             ),
-            //ToDo: Выбор трейла для спецучастка
+            // ToDo: сделать красиво
+            // ToDo: сделать текстовый поиск
+            // ToDo: сделать возможность убрать выбор
             // Трейл этапа
-            DropdownButtonFormField<int?>(
-              value: trailId,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_trail,
-              ),
-              onChanged: (value) {
-                trailId = value;
+            BlocBuilder<TrailsBloc, TrailsState>(
+              builder: (context, state) {
+                return state.map(initial: (state) {
+                  return SizedBox.shrink();
+                }, initialized: (state) {
+                  return DropdownButtonFormField<Trail?>(
+                    value: trail,
+                    decoration: InputDecoration(
+                      labelText: Localization.current.I18nDatabase_trail,
+                    ),
+                    onChanged: (value) {
+                      trail = value;
+                      trailId = trail?.id;
+                    },
+                    items: state.trails.map((value) {
+                      return DropdownMenuItem<Trail>(
+                        value: value,
+                        child: Text(value.name),
+                      );
+                    }).toList(),
+                  );
+                });
               },
-              items: [],
             ),
 
             // Активен ли этап (если не активен, это может обозначать его отмену)
@@ -128,8 +150,6 @@ Future<void> _upsertStagePopup(
       ],
     ),
   );
-
-  
 }
 
 // List<DropdownMenuItem<int?>>? _builder(BuildContext context) {

@@ -13,7 +13,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
   var distance = trail?.distance;
   var elevation = trail?.elevation;
   var gpxTrack = trail?.gpxTrack;
-  String? fileExtension = trail?.fileExtension;
+  var fileExtension = trail?.fileExtension;
   var url = trail?.url;
   var description = trail?.description;
   final formKey = GlobalKey<FormState>();
@@ -25,12 +25,6 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
           : Text(name),
       content: Form(
         key: formKey,
-        onChanged: () {
-          final formState = primaryFocus?.context;
-          if (formState != null) {
-            Form.of(formState).validate();
-          }
-        },
         child: ListView(
           shrinkWrap: true,
           children: <Widget>[
@@ -41,6 +35,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
               decoration: InputDecoration(
                 labelText: Localization.current.I18nDatabase_trailName,
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return Localization.current.I18nDatabase_enterTrailName;
@@ -57,6 +52,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
                 labelText: Localization.current.I18nDatabase_trailDistance,
               ),
               keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   distance = null;
@@ -80,6 +76,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
                 labelText: Localization.current.I18nDatabase_trailElevation,
               ),
               keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   elevation = null;
@@ -110,6 +107,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
               decoration: InputDecoration(
                 labelText: Localization.current.I18nDatabase_trailUrl,
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   url = '';
@@ -123,7 +121,6 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
                   }
                 }
               },
-              autovalidateMode: AutovalidateMode.always,
             ),
             TextFormField(
               initialValue: description,

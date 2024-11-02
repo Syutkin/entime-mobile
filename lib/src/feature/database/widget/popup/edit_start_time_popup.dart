@@ -52,9 +52,6 @@ Future<void> editStartTime(
       ),
       content: Form(
         key: formKey,
-        onChanged: () {
-          Form.of(primaryFocus!.context!).validate();
-        },
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -98,6 +95,7 @@ Future<void> editStartTime(
                 labelText: Localization.current.I18nStart_startTime,
                 icon: Icon(MdiIcons.clock),
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => validateStartTime(value),
             ),
             TextFormField(
@@ -107,6 +105,7 @@ Future<void> editStartTime(
                 icon: Icon(MdiIcons.cpu64Bit),
                 labelText: Localization.current.I18nCore_correction,
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => validateCorrection(value),
             ),
             TextFormField(
@@ -116,6 +115,7 @@ Future<void> editStartTime(
                 labelText: Localization.current.I18nStart_startTime,
                 icon: Icon(MdiIcons.cpu64Bit),
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => validateStartTime(value),
             ),
             TextFormField(
@@ -135,6 +135,7 @@ Future<void> editStartTime(
                 icon: Icon(MdiIcons.handBackLeft),
                 labelText: Localization.current.I18nCore_correction,
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => validateCorrection(value),
             ),
             TextFormField(
@@ -144,6 +145,7 @@ Future<void> editStartTime(
                 labelText: Localization.current.I18nStart_startTime,
                 icon: Icon(MdiIcons.handBackLeft),
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => validateStartTime(value),
             ),
           ],

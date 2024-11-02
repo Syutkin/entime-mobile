@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
+import '../../trails/bloc/trails_bloc.dart';
 import '../database.dart';
 
 // part 'popup/add_stage_popup.dart';

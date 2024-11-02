@@ -33,12 +33,6 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
           : Text(name),
       content: Form(
         key: formKey,
-        onChanged: () {
-          final formState = primaryFocus?.context;
-          if (formState != null) {
-            Form.of(formState).validate();
-          }
-        },
         child: ListView(
           shrinkWrap: true,
           children: <Widget>[
@@ -49,6 +43,7 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
               decoration: InputDecoration(
                 labelText: Localization.current.I18nDatabase_raceName,
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return Localization.current.I18nDatabase_enterRaceName;
@@ -95,6 +90,7 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
               decoration: InputDecoration(
                 labelText: Localization.current.I18nDatabase_raceUrl,
               ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   url = '';
@@ -108,7 +104,6 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
                   }
                 }
               },
-              autovalidateMode: AutovalidateMode.always,
             ),
             TextFormField(
               initialValue: description,
