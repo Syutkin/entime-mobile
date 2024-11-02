@@ -15,7 +15,7 @@ repository: https://github.com/Syutkin/entime-mobile
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.5.0-alpha.1+292
+version: 0.5.0-alpha.1+293
 
 environment:
   sdk: ^3.5.0

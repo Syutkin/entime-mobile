@@ -53,11 +53,10 @@ class AppDatabase extends _$AppDatabase {
     return _getRaces();
   }
 
-  Future<Race> getRace(int id) {
+  Future<Race?> getRace(int id) {
     return (select(races)
-          ..where((r) => r.id.equals(id))
-          ..limit(1))
-        .getSingle();
+      ..where((r) => r.id.equals(id) & r.isDeleted.not())
+      ..limit(1)).getSingleOrNull();
   }
 
   /// Добавляет новую гонку

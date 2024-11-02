@@ -33,7 +33,8 @@ class LogScreen extends StatelessWidget {
             return state.map(initial: (_) {
               return const CircularProgressIndicator();
             }, initialized: (state) {
-              if (state.log != null) {
+              final log = state.log;
+              if (log != null) {
                 // скролл на последнюю запись
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   scrollToEnd(_scrollController);
@@ -43,7 +44,7 @@ class LogScreen extends StatelessWidget {
                   child: ListView.builder(
                     controller: _scrollController,
                     shrinkWrap: true,
-                    itemCount: state.log!.length,
+                    itemCount: log.length,
                     itemBuilder: (context, index) {
                       final item = state.log![index];
                       return ListTile(

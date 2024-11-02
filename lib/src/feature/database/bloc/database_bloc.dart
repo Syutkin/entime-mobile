@@ -507,8 +507,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         createRaceFromRaceCsv: (event) async {
           int id = await _db.createRaceFromRaceCsv(event.race);
           final race = await _db.getRace(id);
-          _stage = null;
-          add(DatabaseEvent.selectRace(race));
+          if (race != null) {
+            _stage = null;
+            add(DatabaseEvent.selectRace(race));
+          }
         },
         shareStart: (event) async {
           final race = _race;

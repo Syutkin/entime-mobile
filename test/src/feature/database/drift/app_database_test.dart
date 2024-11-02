@@ -105,6 +105,21 @@ void main() {
       expect(racesList.length, 1);
     });
 
+    test('Get race', () async {
+      const id = 1;
+      final race = await db.getRace(id);
+      expect(race!.id, id);
+    });
+
+    test('Get only non deleted race', () async {
+      const id = 1;
+      var race = await db.getRace(id);
+      expect(race!.id, id);
+      await db.deleteRace(id: id);
+      race = await db.getRace(id);
+      expect(race, null);
+    });
+
     // ToDo:
     test('Update race', () async {});
 
