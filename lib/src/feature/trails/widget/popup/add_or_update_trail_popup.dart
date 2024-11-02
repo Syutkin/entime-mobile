@@ -13,6 +13,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
   var distance = trail?.distance;
   var elevation = trail?.elevation;
   var gpxTrack = trail?.gpxTrack;
+  String? fileExtension = trail?.fileExtension;
   var url = trail?.url;
   var description = trail?.description;
   final formKey = GlobalKey<FormState>();
@@ -158,6 +159,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
                   gpxTrack: gpxTrack,
                   url: url,
                   description: description,
+                  fileExtension: fileExtension,
                 ),
               );
               Navigator.of(context).pop();

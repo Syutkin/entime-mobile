@@ -91,7 +91,8 @@ CREATE TABLE trails (
 	name text NOT NULL,
 	distance integer,
 	elevation integer,
-	gpx_track blob,
+	gpx_track blob(20MB),
+	file_extension text,
 	url text,
 	description text,
 	is_deleted BOOLEAN NOT NULL DEFAULT false

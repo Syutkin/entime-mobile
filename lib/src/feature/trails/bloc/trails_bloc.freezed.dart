@@ -19,8 +19,14 @@ mixin _$TrailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getTrails,
-    required TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)
+    required TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)
         addTrail,
     required TResult Function(
             int id,
@@ -28,6 +34,7 @@ mixin _$TrailsEvent {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description)
         updateTrail,
@@ -37,6 +44,7 @@ mixin _$TrailsEvent {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)
@@ -47,11 +55,24 @@ mixin _$TrailsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getTrails,
-    TResult? Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -59,6 +80,7 @@ mixin _$TrailsEvent {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
@@ -69,11 +91,24 @@ mixin _$TrailsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getTrails,
-    TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -81,6 +116,7 @@ mixin _$TrailsEvent {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
@@ -182,8 +218,14 @@ class _$GetTrailsImpl implements _GetTrails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getTrails,
-    required TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)
+    required TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)
         addTrail,
     required TResult Function(
             int id,
@@ -191,6 +233,7 @@ class _$GetTrailsImpl implements _GetTrails {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description)
         updateTrail,
@@ -200,6 +243,7 @@ class _$GetTrailsImpl implements _GetTrails {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)
@@ -213,11 +257,24 @@ class _$GetTrailsImpl implements _GetTrails {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getTrails,
-    TResult? Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -225,6 +282,7 @@ class _$GetTrailsImpl implements _GetTrails {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
@@ -238,11 +296,24 @@ class _$GetTrailsImpl implements _GetTrails {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getTrails,
-    TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -250,6 +321,7 @@ class _$GetTrailsImpl implements _GetTrails {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
@@ -319,6 +391,7 @@ abstract class _$$AddTrailImplCopyWith<$Res> {
       int? distance,
       int? elevation,
       Uint8List? gpxTrack,
+      String? fileExtension,
       String? url,
       String? description});
 }
@@ -340,6 +413,7 @@ class __$$AddTrailImplCopyWithImpl<$Res>
     Object? distance = freezed,
     Object? elevation = freezed,
     Object? gpxTrack = freezed,
+    Object? fileExtension = freezed,
     Object? url = freezed,
     Object? description = freezed,
   }) {
@@ -360,6 +434,10 @@ class __$$AddTrailImplCopyWithImpl<$Res>
           ? _value.gpxTrack
           : gpxTrack // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
+      fileExtension: freezed == fileExtension
+          ? _value.fileExtension
+          : fileExtension // ignore: cast_nullable_to_non_nullable
+              as String?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -380,6 +458,7 @@ class _$AddTrailImpl implements _AddTrail {
       this.distance,
       this.elevation,
       this.gpxTrack,
+      this.fileExtension,
       this.url,
       this.description});
 
@@ -392,13 +471,15 @@ class _$AddTrailImpl implements _AddTrail {
   @override
   final Uint8List? gpxTrack;
   @override
+  final String? fileExtension;
+  @override
   final String? url;
   @override
   final String? description;
 
   @override
   String toString() {
-    return 'TrailsEvent.addTrail(name: $name, distance: $distance, elevation: $elevation, gpxTrack: $gpxTrack, url: $url, description: $description)';
+    return 'TrailsEvent.addTrail(name: $name, distance: $distance, elevation: $elevation, gpxTrack: $gpxTrack, fileExtension: $fileExtension, url: $url, description: $description)';
   }
 
   @override
@@ -412,14 +493,23 @@ class _$AddTrailImpl implements _AddTrail {
             (identical(other.elevation, elevation) ||
                 other.elevation == elevation) &&
             const DeepCollectionEquality().equals(other.gpxTrack, gpxTrack) &&
+            (identical(other.fileExtension, fileExtension) ||
+                other.fileExtension == fileExtension) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, distance, elevation,
-      const DeepCollectionEquality().hash(gpxTrack), url, description);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      distance,
+      elevation,
+      const DeepCollectionEquality().hash(gpxTrack),
+      fileExtension,
+      url,
+      description);
 
   /// Create a copy of TrailsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -433,8 +523,14 @@ class _$AddTrailImpl implements _AddTrail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getTrails,
-    required TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)
+    required TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)
         addTrail,
     required TResult Function(
             int id,
@@ -442,6 +538,7 @@ class _$AddTrailImpl implements _AddTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description)
         updateTrail,
@@ -451,24 +548,39 @@ class _$AddTrailImpl implements _AddTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)
         upsertTrail,
     required TResult Function(int id) deleteTrail,
   }) {
-    return addTrail(name, distance, elevation, gpxTrack, url, description);
+    return addTrail(
+        name, distance, elevation, gpxTrack, fileExtension, url, description);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getTrails,
-    TResult? Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -476,6 +588,7 @@ class _$AddTrailImpl implements _AddTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
@@ -483,18 +596,31 @@ class _$AddTrailImpl implements _AddTrail {
     TResult? Function(int id)? deleteTrail,
   }) {
     return addTrail?.call(
-        name, distance, elevation, gpxTrack, url, description);
+        name, distance, elevation, gpxTrack, fileExtension, url, description);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getTrails,
-    TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -502,6 +628,7 @@ class _$AddTrailImpl implements _AddTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
@@ -510,7 +637,8 @@ class _$AddTrailImpl implements _AddTrail {
     required TResult orElse(),
   }) {
     if (addTrail != null) {
-      return addTrail(name, distance, elevation, gpxTrack, url, description);
+      return addTrail(
+          name, distance, elevation, gpxTrack, fileExtension, url, description);
     }
     return orElse();
   }
@@ -562,6 +690,7 @@ abstract class _AddTrail implements TrailsEvent {
       final int? distance,
       final int? elevation,
       final Uint8List? gpxTrack,
+      final String? fileExtension,
       final String? url,
       final String? description}) = _$AddTrailImpl;
 
@@ -569,6 +698,7 @@ abstract class _AddTrail implements TrailsEvent {
   int? get distance;
   int? get elevation;
   Uint8List? get gpxTrack;
+  String? get fileExtension;
   String? get url;
   String? get description;
 
@@ -591,6 +721,7 @@ abstract class _$$UpdateTrailImplCopyWith<$Res> {
       int? distance,
       int? elevation,
       Uint8List? gpxTrack,
+      String? fileExtension,
       String? url,
       String? description});
 }
@@ -613,6 +744,7 @@ class __$$UpdateTrailImplCopyWithImpl<$Res>
     Object? distance = freezed,
     Object? elevation = freezed,
     Object? gpxTrack = freezed,
+    Object? fileExtension = freezed,
     Object? url = freezed,
     Object? description = freezed,
   }) {
@@ -637,6 +769,10 @@ class __$$UpdateTrailImplCopyWithImpl<$Res>
           ? _value.gpxTrack
           : gpxTrack // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
+      fileExtension: freezed == fileExtension
+          ? _value.fileExtension
+          : fileExtension // ignore: cast_nullable_to_non_nullable
+              as String?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -658,6 +794,7 @@ class _$UpdateTrailImpl implements _UpdateTrail {
       this.distance,
       this.elevation,
       this.gpxTrack,
+      this.fileExtension,
       this.url,
       this.description});
 
@@ -672,13 +809,15 @@ class _$UpdateTrailImpl implements _UpdateTrail {
   @override
   final Uint8List? gpxTrack;
   @override
+  final String? fileExtension;
+  @override
   final String? url;
   @override
   final String? description;
 
   @override
   String toString() {
-    return 'TrailsEvent.updateTrail(id: $id, name: $name, distance: $distance, elevation: $elevation, gpxTrack: $gpxTrack, url: $url, description: $description)';
+    return 'TrailsEvent.updateTrail(id: $id, name: $name, distance: $distance, elevation: $elevation, gpxTrack: $gpxTrack, fileExtension: $fileExtension, url: $url, description: $description)';
   }
 
   @override
@@ -693,14 +832,24 @@ class _$UpdateTrailImpl implements _UpdateTrail {
             (identical(other.elevation, elevation) ||
                 other.elevation == elevation) &&
             const DeepCollectionEquality().equals(other.gpxTrack, gpxTrack) &&
+            (identical(other.fileExtension, fileExtension) ||
+                other.fileExtension == fileExtension) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, distance, elevation,
-      const DeepCollectionEquality().hash(gpxTrack), url, description);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      distance,
+      elevation,
+      const DeepCollectionEquality().hash(gpxTrack),
+      fileExtension,
+      url,
+      description);
 
   /// Create a copy of TrailsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -714,8 +863,14 @@ class _$UpdateTrailImpl implements _UpdateTrail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getTrails,
-    required TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)
+    required TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)
         addTrail,
     required TResult Function(
             int id,
@@ -723,6 +878,7 @@ class _$UpdateTrailImpl implements _UpdateTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description)
         updateTrail,
@@ -732,25 +888,39 @@ class _$UpdateTrailImpl implements _UpdateTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)
         upsertTrail,
     required TResult Function(int id) deleteTrail,
   }) {
-    return updateTrail(
-        id, name, distance, elevation, gpxTrack, url, description);
+    return updateTrail(id, name, distance, elevation, gpxTrack, fileExtension,
+        url, description);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getTrails,
-    TResult? Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -758,25 +928,39 @@ class _$UpdateTrailImpl implements _UpdateTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
         upsertTrail,
     TResult? Function(int id)? deleteTrail,
   }) {
-    return updateTrail?.call(
-        id, name, distance, elevation, gpxTrack, url, description);
+    return updateTrail?.call(id, name, distance, elevation, gpxTrack,
+        fileExtension, url, description);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getTrails,
-    TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -784,6 +968,7 @@ class _$UpdateTrailImpl implements _UpdateTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
@@ -792,8 +977,8 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     required TResult orElse(),
   }) {
     if (updateTrail != null) {
-      return updateTrail(
-          id, name, distance, elevation, gpxTrack, url, description);
+      return updateTrail(id, name, distance, elevation, gpxTrack, fileExtension,
+          url, description);
     }
     return orElse();
   }
@@ -846,6 +1031,7 @@ abstract class _UpdateTrail implements TrailsEvent {
       final int? distance,
       final int? elevation,
       final Uint8List? gpxTrack,
+      final String? fileExtension,
       final String? url,
       final String? description}) = _$UpdateTrailImpl;
 
@@ -854,6 +1040,7 @@ abstract class _UpdateTrail implements TrailsEvent {
   int? get distance;
   int? get elevation;
   Uint8List? get gpxTrack;
+  String? get fileExtension;
   String? get url;
   String? get description;
 
@@ -876,6 +1063,7 @@ abstract class _$$UpsertTrailImplCopyWith<$Res> {
       int? distance,
       int? elevation,
       Uint8List? gpxTrack,
+      String? fileExtension,
       String? url,
       String? description,
       bool? isDeleted});
@@ -899,6 +1087,7 @@ class __$$UpsertTrailImplCopyWithImpl<$Res>
     Object? distance = freezed,
     Object? elevation = freezed,
     Object? gpxTrack = freezed,
+    Object? fileExtension = freezed,
     Object? url = freezed,
     Object? description = freezed,
     Object? isDeleted = freezed,
@@ -924,6 +1113,10 @@ class __$$UpsertTrailImplCopyWithImpl<$Res>
           ? _value.gpxTrack
           : gpxTrack // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
+      fileExtension: freezed == fileExtension
+          ? _value.fileExtension
+          : fileExtension // ignore: cast_nullable_to_non_nullable
+              as String?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -949,6 +1142,7 @@ class _$UpsertTrailImpl implements _UpsertTrail {
       this.distance,
       this.elevation,
       this.gpxTrack,
+      this.fileExtension,
       this.url,
       this.description,
       this.isDeleted});
@@ -964,6 +1158,8 @@ class _$UpsertTrailImpl implements _UpsertTrail {
   @override
   final Uint8List? gpxTrack;
   @override
+  final String? fileExtension;
+  @override
   final String? url;
   @override
   final String? description;
@@ -972,7 +1168,7 @@ class _$UpsertTrailImpl implements _UpsertTrail {
 
   @override
   String toString() {
-    return 'TrailsEvent.upsertTrail(id: $id, name: $name, distance: $distance, elevation: $elevation, gpxTrack: $gpxTrack, url: $url, description: $description, isDeleted: $isDeleted)';
+    return 'TrailsEvent.upsertTrail(id: $id, name: $name, distance: $distance, elevation: $elevation, gpxTrack: $gpxTrack, fileExtension: $fileExtension, url: $url, description: $description, isDeleted: $isDeleted)';
   }
 
   @override
@@ -987,6 +1183,8 @@ class _$UpsertTrailImpl implements _UpsertTrail {
             (identical(other.elevation, elevation) ||
                 other.elevation == elevation) &&
             const DeepCollectionEquality().equals(other.gpxTrack, gpxTrack) &&
+            (identical(other.fileExtension, fileExtension) ||
+                other.fileExtension == fileExtension) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -1002,6 +1200,7 @@ class _$UpsertTrailImpl implements _UpsertTrail {
       distance,
       elevation,
       const DeepCollectionEquality().hash(gpxTrack),
+      fileExtension,
       url,
       description,
       isDeleted);
@@ -1018,8 +1217,14 @@ class _$UpsertTrailImpl implements _UpsertTrail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getTrails,
-    required TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)
+    required TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)
         addTrail,
     required TResult Function(
             int id,
@@ -1027,6 +1232,7 @@ class _$UpsertTrailImpl implements _UpsertTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description)
         updateTrail,
@@ -1036,25 +1242,39 @@ class _$UpsertTrailImpl implements _UpsertTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)
         upsertTrail,
     required TResult Function(int id) deleteTrail,
   }) {
-    return upsertTrail(
-        id, name, distance, elevation, gpxTrack, url, description, isDeleted);
+    return upsertTrail(id, name, distance, elevation, gpxTrack, fileExtension,
+        url, description, isDeleted);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getTrails,
-    TResult? Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -1062,25 +1282,39 @@ class _$UpsertTrailImpl implements _UpsertTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
         upsertTrail,
     TResult? Function(int id)? deleteTrail,
   }) {
-    return upsertTrail?.call(
-        id, name, distance, elevation, gpxTrack, url, description, isDeleted);
+    return upsertTrail?.call(id, name, distance, elevation, gpxTrack,
+        fileExtension, url, description, isDeleted);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getTrails,
-    TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -1088,6 +1322,7 @@ class _$UpsertTrailImpl implements _UpsertTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
@@ -1096,8 +1331,8 @@ class _$UpsertTrailImpl implements _UpsertTrail {
     required TResult orElse(),
   }) {
     if (upsertTrail != null) {
-      return upsertTrail(
-          id, name, distance, elevation, gpxTrack, url, description, isDeleted);
+      return upsertTrail(id, name, distance, elevation, gpxTrack, fileExtension,
+          url, description, isDeleted);
     }
     return orElse();
   }
@@ -1150,6 +1385,7 @@ abstract class _UpsertTrail implements TrailsEvent {
       final int? distance,
       final int? elevation,
       final Uint8List? gpxTrack,
+      final String? fileExtension,
       final String? url,
       final String? description,
       final bool? isDeleted}) = _$UpsertTrailImpl;
@@ -1159,6 +1395,7 @@ abstract class _UpsertTrail implements TrailsEvent {
   int? get distance;
   int? get elevation;
   Uint8List? get gpxTrack;
+  String? get fileExtension;
   String? get url;
   String? get description;
   bool? get isDeleted;
@@ -1239,8 +1476,14 @@ class _$DeleteTrailImpl implements _DeleteTrail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getTrails,
-    required TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)
+    required TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)
         addTrail,
     required TResult Function(
             int id,
@@ -1248,6 +1491,7 @@ class _$DeleteTrailImpl implements _DeleteTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description)
         updateTrail,
@@ -1257,6 +1501,7 @@ class _$DeleteTrailImpl implements _DeleteTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)
@@ -1270,11 +1515,24 @@ class _$DeleteTrailImpl implements _DeleteTrail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getTrails,
-    TResult? Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -1282,6 +1540,7 @@ class _$DeleteTrailImpl implements _DeleteTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?
@@ -1295,11 +1554,24 @@ class _$DeleteTrailImpl implements _DeleteTrail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getTrails,
-    TResult Function(String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            Uint8List? gpxTrack, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
+            String? fileExtension,
+            String? url,
+            String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -1307,6 +1579,7 @@ class _$DeleteTrailImpl implements _DeleteTrail {
             int? distance,
             int? elevation,
             Uint8List? gpxTrack,
+            String? fileExtension,
             String? url,
             String? description,
             bool? isDeleted)?

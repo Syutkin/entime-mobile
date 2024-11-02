@@ -42,6 +42,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
             url: event.url,
             description: event.description,
             gpxTrack: event.gpxTrack,
+            fileExtension: event.fileExtension,
           );
         },
         updateTrail: (_UpdateTrail event) async {
@@ -53,6 +54,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
             url: event.url,
             description: event.description,
             gpxTrack: event.gpxTrack,
+            fileExtension: event.fileExtension,
           );
         },
         upsertTrail: (_UpsertTrail event) async {
@@ -64,6 +66,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
             url: event.url,
             description: event.description,
             gpxTrack: event.gpxTrack,
+            fileExtension: event.fileExtension,
             isDeleted: event.isDeleted,
           );
         },

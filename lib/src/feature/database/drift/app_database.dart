@@ -227,8 +227,8 @@ class AppDatabase extends _$AppDatabase {
   /// Возвращает [Trail] с [id]
   Future<Trail?> getTrail(int id) {
     return (select(trails)
-      ..where((r) => r.id.equals(id) & r.isDeleted.not())
-      ..limit(1))
+          ..where((r) => r.id.equals(id) & r.isDeleted.not())
+          ..limit(1))
         .getSingleOrNull();
   }
 
@@ -238,6 +238,7 @@ class AppDatabase extends _$AppDatabase {
     int? distance,
     int? elevation,
     Uint8List? gpxTrack,
+    String? fileExtension,
     String? url,
     String? description,
   }) {
@@ -246,6 +247,7 @@ class AppDatabase extends _$AppDatabase {
       distance: distance,
       elevation: elevation,
       gpxTrack: gpxTrack,
+      fileExtension: fileExtension,
       url: url,
       description: description,
     );
@@ -258,6 +260,7 @@ class AppDatabase extends _$AppDatabase {
     int? distance,
     int? elevation,
     Uint8List? gpxTrack,
+    String? fileExtension,
     String? url,
     String? description,
   }) async {
@@ -267,6 +270,7 @@ class AppDatabase extends _$AppDatabase {
       distance: distance,
       elevation: elevation,
       gpxTrack: gpxTrack,
+      fileExtension: fileExtension,
       url: url,
       description: description,
     );
@@ -279,6 +283,7 @@ class AppDatabase extends _$AppDatabase {
     int? distance,
     int? elevation,
     Uint8List? gpxTrack,
+    String? fileExtension,
     String? url,
     String? description,
     bool? isDeleted,
@@ -290,12 +295,13 @@ class AppDatabase extends _$AppDatabase {
         distance: distance != null ? Value(distance) : Value.absent(),
         elevation: elevation != null ? Value(elevation) : Value.absent(),
         gpxTrack: gpxTrack != null ? Value(gpxTrack) : Value.absent(),
+        fileExtension:
+            fileExtension != null ? Value(fileExtension) : Value.absent(),
         url: url != null ? Value(url) : Value.absent(),
         description: description != null ? Value(description) : Value.absent(),
         isDeleted: isDeleted != null ? Value(isDeleted) : Value.absent(),
       ),
     );
-
     return trailId;
   }
 

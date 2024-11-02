@@ -45,8 +45,7 @@ class TrailListPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          context.read<TrailsBloc>().add(TrailsEvent.addTrail(name: 'name'));
-          // addRacePopup(context);
+          addTrailPopup(context);
         },
       ),
     );

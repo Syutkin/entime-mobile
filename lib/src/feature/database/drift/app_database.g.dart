@@ -463,6 +463,13 @@ class Trails extends Table with TableInfo<Trails, Trail> {
       type: DriftSqlType.blob,
       requiredDuringInsert: false,
       $customConstraints: '');
+  static const VerificationMeta _fileExtensionMeta =
+      const VerificationMeta('fileExtension');
+  late final GeneratedColumn<String> fileExtension = GeneratedColumn<String>(
+      'file_extension', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
   static const VerificationMeta _urlMeta = const VerificationMeta('url');
   late final GeneratedColumn<String> url = GeneratedColumn<String>(
       'url', aliasedName, true,
@@ -485,8 +492,17 @@ class Trails extends Table with TableInfo<Trails, Trail> {
       $customConstraints: 'NOT NULL DEFAULT FALSE',
       defaultValue: const CustomExpression('FALSE'));
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, name, distance, elevation, gpxTrack, url, description, isDeleted];
+  List<GeneratedColumn> get $columns => [
+        id,
+        name,
+        distance,
+        elevation,
+        gpxTrack,
+        fileExtension,
+        url,
+        description,
+        isDeleted
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -517,6 +533,12 @@ class Trails extends Table with TableInfo<Trails, Trail> {
     if (data.containsKey('gpx_track')) {
       context.handle(_gpxTrackMeta,
           gpxTrack.isAcceptableOrUnknown(data['gpx_track']!, _gpxTrackMeta));
+    }
+    if (data.containsKey('file_extension')) {
+      context.handle(
+          _fileExtensionMeta,
+          fileExtension.isAcceptableOrUnknown(
+              data['file_extension']!, _fileExtensionMeta));
     }
     if (data.containsKey('url')) {
       context.handle(
@@ -551,6 +573,8 @@ class Trails extends Table with TableInfo<Trails, Trail> {
           .read(DriftSqlType.int, data['${effectivePrefix}elevation']),
       gpxTrack: attachedDatabase.typeMapping
           .read(DriftSqlType.blob, data['${effectivePrefix}gpx_track']),
+      fileExtension: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}file_extension']),
       url: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}url']),
       description: attachedDatabase.typeMapping
@@ -575,6 +599,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   final int? distance;
   final int? elevation;
   final Uint8List? gpxTrack;
+  final String? fileExtension;
   final String? url;
   final String? description;
   final bool isDeleted;
@@ -584,6 +609,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       this.distance,
       this.elevation,
       this.gpxTrack,
+      this.fileExtension,
       this.url,
       this.description,
       required this.isDeleted});
@@ -600,6 +626,9 @@ class Trail extends DataClass implements Insertable<Trail> {
     }
     if (!nullToAbsent || gpxTrack != null) {
       map['gpx_track'] = Variable<Uint8List>(gpxTrack);
+    }
+    if (!nullToAbsent || fileExtension != null) {
+      map['file_extension'] = Variable<String>(fileExtension);
     }
     if (!nullToAbsent || url != null) {
       map['url'] = Variable<String>(url);
@@ -624,6 +653,9 @@ class Trail extends DataClass implements Insertable<Trail> {
       gpxTrack: gpxTrack == null && nullToAbsent
           ? const Value.absent()
           : Value(gpxTrack),
+      fileExtension: fileExtension == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fileExtension),
       url: url == null && nullToAbsent ? const Value.absent() : Value(url),
       description: description == null && nullToAbsent
           ? const Value.absent()
@@ -641,6 +673,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       distance: serializer.fromJson<int?>(json['distance']),
       elevation: serializer.fromJson<int?>(json['elevation']),
       gpxTrack: serializer.fromJson<Uint8List?>(json['gpx_track']),
+      fileExtension: serializer.fromJson<String?>(json['file_extension']),
       url: serializer.fromJson<String?>(json['url']),
       description: serializer.fromJson<String?>(json['description']),
       isDeleted: serializer.fromJson<bool>(json['is_deleted']),
@@ -655,6 +688,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       'distance': serializer.toJson<int?>(distance),
       'elevation': serializer.toJson<int?>(elevation),
       'gpx_track': serializer.toJson<Uint8List?>(gpxTrack),
+      'file_extension': serializer.toJson<String?>(fileExtension),
       'url': serializer.toJson<String?>(url),
       'description': serializer.toJson<String?>(description),
       'is_deleted': serializer.toJson<bool>(isDeleted),
@@ -667,6 +701,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           Value<int?> distance = const Value.absent(),
           Value<int?> elevation = const Value.absent(),
           Value<Uint8List?> gpxTrack = const Value.absent(),
+          Value<String?> fileExtension = const Value.absent(),
           Value<String?> url = const Value.absent(),
           Value<String?> description = const Value.absent(),
           bool? isDeleted}) =>
@@ -676,6 +711,8 @@ class Trail extends DataClass implements Insertable<Trail> {
         distance: distance.present ? distance.value : this.distance,
         elevation: elevation.present ? elevation.value : this.elevation,
         gpxTrack: gpxTrack.present ? gpxTrack.value : this.gpxTrack,
+        fileExtension:
+            fileExtension.present ? fileExtension.value : this.fileExtension,
         url: url.present ? url.value : this.url,
         description: description.present ? description.value : this.description,
         isDeleted: isDeleted ?? this.isDeleted,
@@ -687,6 +724,9 @@ class Trail extends DataClass implements Insertable<Trail> {
       distance: data.distance.present ? data.distance.value : this.distance,
       elevation: data.elevation.present ? data.elevation.value : this.elevation,
       gpxTrack: data.gpxTrack.present ? data.gpxTrack.value : this.gpxTrack,
+      fileExtension: data.fileExtension.present
+          ? data.fileExtension.value
+          : this.fileExtension,
       url: data.url.present ? data.url.value : this.url,
       description:
           data.description.present ? data.description.value : this.description,
@@ -702,6 +742,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           ..write('distance: $distance, ')
           ..write('elevation: $elevation, ')
           ..write('gpxTrack: $gpxTrack, ')
+          ..write('fileExtension: $fileExtension, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
           ..write('isDeleted: $isDeleted')
@@ -710,8 +751,16 @@ class Trail extends DataClass implements Insertable<Trail> {
   }
 
   @override
-  int get hashCode => Object.hash(id, name, distance, elevation,
-      $driftBlobEquality.hash(gpxTrack), url, description, isDeleted);
+  int get hashCode => Object.hash(
+      id,
+      name,
+      distance,
+      elevation,
+      $driftBlobEquality.hash(gpxTrack),
+      fileExtension,
+      url,
+      description,
+      isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -721,6 +770,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           other.distance == this.distance &&
           other.elevation == this.elevation &&
           $driftBlobEquality.equals(other.gpxTrack, this.gpxTrack) &&
+          other.fileExtension == this.fileExtension &&
           other.url == this.url &&
           other.description == this.description &&
           other.isDeleted == this.isDeleted);
@@ -732,6 +782,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   final Value<int?> distance;
   final Value<int?> elevation;
   final Value<Uint8List?> gpxTrack;
+  final Value<String?> fileExtension;
   final Value<String?> url;
   final Value<String?> description;
   final Value<bool> isDeleted;
@@ -741,6 +792,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.distance = const Value.absent(),
     this.elevation = const Value.absent(),
     this.gpxTrack = const Value.absent(),
+    this.fileExtension = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
     this.isDeleted = const Value.absent(),
@@ -751,6 +803,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.distance = const Value.absent(),
     this.elevation = const Value.absent(),
     this.gpxTrack = const Value.absent(),
+    this.fileExtension = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
     this.isDeleted = const Value.absent(),
@@ -761,6 +814,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     Expression<int>? distance,
     Expression<int>? elevation,
     Expression<Uint8List>? gpxTrack,
+    Expression<String>? fileExtension,
     Expression<String>? url,
     Expression<String>? description,
     Expression<bool>? isDeleted,
@@ -771,6 +825,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       if (distance != null) 'distance': distance,
       if (elevation != null) 'elevation': elevation,
       if (gpxTrack != null) 'gpx_track': gpxTrack,
+      if (fileExtension != null) 'file_extension': fileExtension,
       if (url != null) 'url': url,
       if (description != null) 'description': description,
       if (isDeleted != null) 'is_deleted': isDeleted,
@@ -783,6 +838,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       Value<int?>? distance,
       Value<int?>? elevation,
       Value<Uint8List?>? gpxTrack,
+      Value<String?>? fileExtension,
       Value<String?>? url,
       Value<String?>? description,
       Value<bool>? isDeleted}) {
@@ -792,6 +848,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       distance: distance ?? this.distance,
       elevation: elevation ?? this.elevation,
       gpxTrack: gpxTrack ?? this.gpxTrack,
+      fileExtension: fileExtension ?? this.fileExtension,
       url: url ?? this.url,
       description: description ?? this.description,
       isDeleted: isDeleted ?? this.isDeleted,
@@ -816,6 +873,9 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     if (gpxTrack.present) {
       map['gpx_track'] = Variable<Uint8List>(gpxTrack.value);
     }
+    if (fileExtension.present) {
+      map['file_extension'] = Variable<String>(fileExtension.value);
+    }
     if (url.present) {
       map['url'] = Variable<String>(url.value);
     }
@@ -836,6 +896,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
           ..write('distance: $distance, ')
           ..write('elevation: $elevation, ')
           ..write('gpxTrack: $gpxTrack, ')
+          ..write('fileExtension: $fileExtension, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
           ..write('isDeleted: $isDeleted')
@@ -4435,6 +4496,7 @@ typedef $TrailsCreateCompanionBuilder = TrailsCompanion Function({
   Value<int?> distance,
   Value<int?> elevation,
   Value<Uint8List?> gpxTrack,
+  Value<String?> fileExtension,
   Value<String?> url,
   Value<String?> description,
   Value<bool> isDeleted,
@@ -4445,6 +4507,7 @@ typedef $TrailsUpdateCompanionBuilder = TrailsCompanion Function({
   Value<int?> distance,
   Value<int?> elevation,
   Value<Uint8List?> gpxTrack,
+  Value<String?> fileExtension,
   Value<String?> url,
   Value<String?> description,
   Value<bool> isDeleted,
@@ -4472,6 +4535,9 @@ class $TrailsFilterComposer extends Composer<_$AppDatabase, Trails> {
 
   ColumnFilters<Uint8List> get gpxTrack => $composableBuilder(
       column: $table.gpxTrack, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get fileExtension => $composableBuilder(
+      column: $table.fileExtension, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get url => $composableBuilder(
       column: $table.url, builder: (column) => ColumnFilters(column));
@@ -4506,6 +4572,10 @@ class $TrailsOrderingComposer extends Composer<_$AppDatabase, Trails> {
   ColumnOrderings<Uint8List> get gpxTrack => $composableBuilder(
       column: $table.gpxTrack, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<String> get fileExtension => $composableBuilder(
+      column: $table.fileExtension,
+      builder: (column) => ColumnOrderings(column));
+
   ColumnOrderings<String> get url => $composableBuilder(
       column: $table.url, builder: (column) => ColumnOrderings(column));
 
@@ -4538,6 +4608,9 @@ class $TrailsAnnotationComposer extends Composer<_$AppDatabase, Trails> {
 
   GeneratedColumn<Uint8List> get gpxTrack =>
       $composableBuilder(column: $table.gpxTrack, builder: (column) => column);
+
+  GeneratedColumn<String> get fileExtension => $composableBuilder(
+      column: $table.fileExtension, builder: (column) => column);
 
   GeneratedColumn<String> get url =>
       $composableBuilder(column: $table.url, builder: (column) => column);
@@ -4577,6 +4650,7 @@ class $TrailsTableManager extends RootTableManager<
             Value<int?> distance = const Value.absent(),
             Value<int?> elevation = const Value.absent(),
             Value<Uint8List?> gpxTrack = const Value.absent(),
+            Value<String?> fileExtension = const Value.absent(),
             Value<String?> url = const Value.absent(),
             Value<String?> description = const Value.absent(),
             Value<bool> isDeleted = const Value.absent(),
@@ -4587,6 +4661,7 @@ class $TrailsTableManager extends RootTableManager<
             distance: distance,
             elevation: elevation,
             gpxTrack: gpxTrack,
+            fileExtension: fileExtension,
             url: url,
             description: description,
             isDeleted: isDeleted,
@@ -4597,6 +4672,7 @@ class $TrailsTableManager extends RootTableManager<
             Value<int?> distance = const Value.absent(),
             Value<int?> elevation = const Value.absent(),
             Value<Uint8List?> gpxTrack = const Value.absent(),
+            Value<String?> fileExtension = const Value.absent(),
             Value<String?> url = const Value.absent(),
             Value<String?> description = const Value.absent(),
             Value<bool> isDeleted = const Value.absent(),
@@ -4607,6 +4683,7 @@ class $TrailsTableManager extends RootTableManager<
             distance: distance,
             elevation: elevation,
             gpxTrack: gpxTrack,
+            fileExtension: fileExtension,
             url: url,
             description: description,
             isDeleted: isDeleted,

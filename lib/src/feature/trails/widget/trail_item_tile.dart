@@ -1,6 +1,7 @@
 import 'package:entime/src/feature/trails/widget/trail_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../database/database.dart';
@@ -18,6 +19,9 @@ class TrailItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(trail.name),
+      leading: trail.fileExtension != null
+          ? Icon(MdiIcons.mapMarkerOutline)
+          : Icon(MdiIcons.mapMarkerOffOutline),
       trailing: PopupMenuButton<void>(
         icon: const Icon(Icons.more_vert),
         itemBuilder: (context) => <PopupMenuEntry<void>>[

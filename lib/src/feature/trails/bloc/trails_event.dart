@@ -9,6 +9,7 @@ class TrailsEvent with _$TrailsEvent {
     int? distance,
     int? elevation,
     Uint8List? gpxTrack,
+    String? fileExtension,
     String? url,
     String? description,
   }) = _AddTrail;
@@ -19,6 +20,7 @@ class TrailsEvent with _$TrailsEvent {
     int? distance,
     int? elevation,
     Uint8List? gpxTrack,
+    String? fileExtension,
     String? url,
     String? description,
   }) = _UpdateTrail;
@@ -29,6 +31,7 @@ class TrailsEvent with _$TrailsEvent {
     int? distance,
     int? elevation,
     Uint8List? gpxTrack,
+    String? fileExtension,
     String? url,
     String? description,
     bool? isDeleted,
