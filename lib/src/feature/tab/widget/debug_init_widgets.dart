@@ -1,3 +1,4 @@
+import 'package:entime/src/feature/trails/widget/trail_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,8 +13,8 @@ List<Widget> debugButtons() {
   List<Widget> widgets = [];
   widgets.add(const Header(text: 'Debug'));
   widgets.add(_DebugAddLogButton());
-  widgets.add(_DebugAddLogButton());
   widgets.add(_DebugLogButton());
+  widgets.add(_DebugTrailsButton());
   widgets.add(_DebugCountdownButton());
   widgets.add(_DebugVoiceButton());
   widgets.add(_DebugNewDatabase());
@@ -57,6 +58,25 @@ class _DebugAddLogButton extends StatelessWidget {
         child: const Text('Add Log'),
       );
 }
+
+class _DebugTrailsButton extends StatelessWidget {
+  const _DebugTrailsButton();
+
+  @override
+  Widget build(BuildContext context) => TextButton(
+    onPressed: () {
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (context) => TrailListPage(
+            //moduleSettings: moduleSettings,
+          ),
+        ),
+      );
+    },
+    child: const Text('Show Trails'),
+  );
+}
+
 
 class _DebugCountdownButton extends StatelessWidget {
   const _DebugCountdownButton();

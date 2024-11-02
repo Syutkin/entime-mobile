@@ -14,7 +14,6 @@ class DatabaseEvent with _$DatabaseEvent {
     required List<ParticipantAtStart> participants,
     required List<Start> starts,
     required List<Finish> finishes,
-    required List<Trail> trails,
     required List<StartingParticipant> numbersOnTrace,
     required Notification? notification,
     required int? autoFinishNumber,

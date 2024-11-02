@@ -1187,14 +1187,69 @@ class I18nDatabase {
       );
 
   static String get isActiveStage => Intl.message(
-    'Активный',
-    name: 'I18nDatabase_isActiveStage',
-  );
+        'Активный',
+        name: 'I18nDatabase_isActiveStage',
+      );
 
   static String get trail => Intl.message(
         'Трейл',
         name: 'I18nDatabase_trail',
       );
+
+  static String get trails => Intl.message(
+        'Трейлы',
+        name: 'I18nDatabase_trails',
+      );
+
+  static String get trailName => Intl.message(
+    'Название трейла',
+    name: 'I18nDatabase_trailName',
+  );
+
+  static String get enterTrailName => Intl.message(
+    'Введите название трейла',
+    name: 'I18nDatabase_enterTrailName',
+  );
+
+  static String get trailDistance => Intl.message(
+    'Длина трейла',
+    name: 'I18nDatabase_trailDistance',
+  );
+
+  static String get incorrectTrailDistance => Intl.message(
+    'Неверная длина',
+    name: 'I18nDatabase_incorrectTrailDistance',
+  );
+
+  static String get trailElevation => Intl.message(
+    'Перепад высот на трейле',
+    name: 'I18nDatabase_trailElevation',
+  );
+
+  static String get incorrectTrailElevation => Intl.message(
+    'Неверный перепад высот',
+    name: 'I18nDatabase_incorrectTrailElevation',
+  );
+
+  static String get trailGpxTrack => Intl.message(
+    'Трек трейла',
+    name: 'I18nDatabase_trailGpxTrack',
+  );
+
+  static String get trailUrl => Intl.message(
+    'Ссылка на трейл',
+    name: 'I18nDatabase_trailUrl',
+  );
+
+  static String get incorrectTrailUrl => Intl.message(
+    'Некорректная ссылка',
+    name: 'I18nDatabase_incorrectTrailUrl',
+  );
+
+  static String get trailDescription => Intl.message(
+    'Описание',
+    name: 'I18nDatabase_trailDescription',
+  );
 }
 
 class I18nNtp {

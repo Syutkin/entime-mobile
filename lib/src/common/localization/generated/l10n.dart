@@ -2128,6 +2128,116 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Трейлы`
+  String get I18nDatabase_trails {
+    return Intl.message(
+      'Трейлы',
+      name: 'I18nDatabase_trails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Название трейла`
+  String get I18nDatabase_trailName {
+    return Intl.message(
+      'Название трейла',
+      name: 'I18nDatabase_trailName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите название трейла`
+  String get I18nDatabase_enterTrailName {
+    return Intl.message(
+      'Введите название трейла',
+      name: 'I18nDatabase_enterTrailName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Длина трейла`
+  String get I18nDatabase_trailDistance {
+    return Intl.message(
+      'Длина трейла',
+      name: 'I18nDatabase_trailDistance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверная длина`
+  String get I18nDatabase_incorrectTrailDistance {
+    return Intl.message(
+      'Неверная длина',
+      name: 'I18nDatabase_incorrectTrailDistance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Перепад высот на трейле`
+  String get I18nDatabase_trailElevation {
+    return Intl.message(
+      'Перепад высот на трейле',
+      name: 'I18nDatabase_trailElevation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверный перепад высот`
+  String get I18nDatabase_incorrectTrailElevation {
+    return Intl.message(
+      'Неверный перепад высот',
+      name: 'I18nDatabase_incorrectTrailElevation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Трек трейла`
+  String get I18nDatabase_trailGpxTrack {
+    return Intl.message(
+      'Трек трейла',
+      name: 'I18nDatabase_trailGpxTrack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ссылка на трейл`
+  String get I18nDatabase_trailUrl {
+    return Intl.message(
+      'Ссылка на трейл',
+      name: 'I18nDatabase_trailUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректная ссылка`
+  String get I18nDatabase_incorrectTrailUrl {
+    return Intl.message(
+      'Некорректная ссылка',
+      name: 'I18nDatabase_incorrectTrailUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Описание`
+  String get I18nDatabase_trailDescription {
+    return Intl.message(
+      'Описание',
+      name: 'I18nDatabase_trailDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NTP offset`
   String get I18nNtp_ntpOffset {
     return Intl.message(

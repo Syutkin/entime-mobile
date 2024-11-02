@@ -29,7 +29,6 @@ mixin _$DatabaseEvent {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -140,7 +139,6 @@ mixin _$DatabaseEvent {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -243,7 +241,6 @@ mixin _$DatabaseEvent {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -542,7 +539,6 @@ class _$InitializeImpl implements _Initialize {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -656,7 +652,6 @@ class _$InitializeImpl implements _Initialize {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -762,7 +757,6 @@ class _$InitializeImpl implements _Initialize {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -1024,7 +1018,6 @@ abstract class _$$EmitStateImplCopyWith<$Res> {
       List<ParticipantAtStart> participants,
       List<Start> starts,
       List<Finish> finishes,
-      List<Trail> trails,
       List<StartingParticipant> numbersOnTrace,
       Notification? notification,
       int? autoFinishNumber,
@@ -1056,7 +1049,6 @@ class __$$EmitStateImplCopyWithImpl<$Res>
     Object? participants = null,
     Object? starts = null,
     Object? finishes = null,
-    Object? trails = null,
     Object? numbersOnTrace = null,
     Object? notification = freezed,
     Object? autoFinishNumber = freezed,
@@ -1100,10 +1092,6 @@ class __$$EmitStateImplCopyWithImpl<$Res>
           ? _value._finishes
           : finishes // ignore: cast_nullable_to_non_nullable
               as List<Finish>,
-      trails: null == trails
-          ? _value._trails
-          : trails // ignore: cast_nullable_to_non_nullable
-              as List<Trail>,
       numbersOnTrace: null == numbersOnTrace
           ? _value._numbersOnTrace
           : numbersOnTrace // ignore: cast_nullable_to_non_nullable
@@ -1155,7 +1143,6 @@ class _$EmitStateImpl implements _EmitState {
       required final List<ParticipantAtStart> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
-      required final List<Trail> trails,
       required final List<StartingParticipant> numbersOnTrace,
       required this.notification,
       required this.autoFinishNumber,
@@ -1168,7 +1155,6 @@ class _$EmitStateImpl implements _EmitState {
         _participants = participants,
         _starts = starts,
         _finishes = finishes,
-        _trails = trails,
         _numbersOnTrace = numbersOnTrace;
 
   @override
@@ -1231,14 +1217,6 @@ class _$EmitStateImpl implements _EmitState {
     return EqualUnmodifiableListView(_finishes);
   }
 
-  final List<Trail> _trails;
-  @override
-  List<Trail> get trails {
-    if (_trails is EqualUnmodifiableListView) return _trails;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_trails);
-  }
-
   final List<StartingParticipant> _numbersOnTrace;
   @override
   List<StartingParticipant> get numbersOnTrace {
@@ -1258,7 +1236,7 @@ class _$EmitStateImpl implements _EmitState {
 
   @override
   String toString() {
-    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
+    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
   }
 
   @override
@@ -1276,7 +1254,6 @@ class _$EmitStateImpl implements _EmitState {
                 .equals(other._participants, _participants) &&
             const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
-            const DeepCollectionEquality().equals(other._trails, _trails) &&
             const DeepCollectionEquality()
                 .equals(other._numbersOnTrace, _numbersOnTrace) &&
             (identical(other.notification, notification) ||
@@ -1301,7 +1278,6 @@ class _$EmitStateImpl implements _EmitState {
       const DeepCollectionEquality().hash(_participants),
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
-      const DeepCollectionEquality().hash(_trails),
       const DeepCollectionEquality().hash(_numbersOnTrace),
       notification,
       autoFinishNumber,
@@ -1330,7 +1306,6 @@ class _$EmitStateImpl implements _EmitState {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -1437,7 +1412,6 @@ class _$EmitStateImpl implements _EmitState {
         participants,
         starts,
         finishes,
-        trails,
         numbersOnTrace,
         notification,
         autoFinishNumber,
@@ -1459,7 +1433,6 @@ class _$EmitStateImpl implements _EmitState {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -1558,7 +1531,6 @@ class _$EmitStateImpl implements _EmitState {
         participants,
         starts,
         finishes,
-        trails,
         numbersOnTrace,
         notification,
         autoFinishNumber,
@@ -1580,7 +1552,6 @@ class _$EmitStateImpl implements _EmitState {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -1681,7 +1652,6 @@ class _$EmitStateImpl implements _EmitState {
           participants,
           starts,
           finishes,
-          trails,
           numbersOnTrace,
           notification,
           autoFinishNumber,
@@ -1848,7 +1818,6 @@ abstract class _EmitState implements DatabaseEvent {
       required final List<ParticipantAtStart> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
-      required final List<Trail> trails,
       required final List<StartingParticipant> numbersOnTrace,
       required final Notification? notification,
       required final int? autoFinishNumber,
@@ -1864,7 +1833,6 @@ abstract class _EmitState implements DatabaseEvent {
   List<ParticipantAtStart> get participants;
   List<Start> get starts;
   List<Finish> get finishes;
-  List<Trail> get trails;
   List<StartingParticipant> get numbersOnTrace;
   Notification? get notification;
   int? get autoFinishNumber;
@@ -2014,7 +1982,6 @@ class _$AddRaceImpl implements _AddRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -2128,7 +2095,6 @@ class _$AddRaceImpl implements _AddRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -2235,7 +2201,6 @@ class _$AddRaceImpl implements _AddRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -2646,7 +2611,6 @@ class _$UpdateRaceImpl implements _UpdateRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -2761,7 +2725,6 @@ class _$UpdateRaceImpl implements _UpdateRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -2868,7 +2831,6 @@ class _$UpdateRaceImpl implements _UpdateRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -3282,7 +3244,6 @@ class _$UpsertRaceImpl implements _UpsertRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -3397,7 +3358,6 @@ class _$UpsertRaceImpl implements _UpsertRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -3504,7 +3464,6 @@ class _$UpsertRaceImpl implements _UpsertRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -3851,7 +3810,6 @@ class _$DeleteRaceImpl implements _DeleteRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -3965,7 +3923,6 @@ class _$DeleteRaceImpl implements _DeleteRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -4071,7 +4028,6 @@ class _$DeleteRaceImpl implements _DeleteRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -4377,7 +4333,6 @@ class _$GetRacesImpl implements _GetRaces {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -4491,7 +4446,6 @@ class _$GetRacesImpl implements _GetRaces {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -4597,7 +4551,6 @@ class _$GetRacesImpl implements _GetRaces {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -4923,7 +4876,6 @@ class _$SelectRaceImpl implements _SelectRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -5037,7 +4989,6 @@ class _$SelectRaceImpl implements _SelectRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -5143,7 +5094,6 @@ class _$SelectRaceImpl implements _SelectRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -5449,7 +5399,6 @@ class _$DeselectRaceImpl implements _DeselectRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -5563,7 +5512,6 @@ class _$DeselectRaceImpl implements _DeselectRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -5669,7 +5617,6 @@ class _$DeselectRaceImpl implements _DeselectRace {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -6011,7 +5958,6 @@ class _$AddStageImpl implements _AddStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -6125,7 +6071,6 @@ class _$AddStageImpl implements _AddStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -6231,7 +6176,6 @@ class _$AddStageImpl implements _AddStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -6635,7 +6579,6 @@ class _$UpsertStageImpl implements _UpsertStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -6750,7 +6693,6 @@ class _$UpsertStageImpl implements _UpsertStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -6857,7 +6799,6 @@ class _$UpsertStageImpl implements _UpsertStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -7204,7 +7145,6 @@ class _$DeleteStageImpl implements _DeleteStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -7318,7 +7258,6 @@ class _$DeleteStageImpl implements _DeleteStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -7424,7 +7363,6 @@ class _$DeleteStageImpl implements _DeleteStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -7757,7 +7695,6 @@ class _$GetStagesImpl implements _GetStages {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -7871,7 +7808,6 @@ class _$GetStagesImpl implements _GetStages {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -7977,7 +7913,6 @@ class _$GetStagesImpl implements _GetStages {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -8311,7 +8246,6 @@ class _$SelectStageImpl implements _SelectStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -8425,7 +8359,6 @@ class _$SelectStageImpl implements _SelectStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -8531,7 +8464,6 @@ class _$SelectStageImpl implements _SelectStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -8867,7 +8799,6 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -8981,7 +8912,6 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -9087,7 +9017,6 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -9454,7 +9383,6 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -9568,7 +9496,6 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -9674,7 +9601,6 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -10091,7 +10017,6 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -10212,7 +10137,6 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -10325,7 +10249,6 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -10740,7 +10663,6 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -10855,7 +10777,6 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -10962,7 +10883,6 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -11342,7 +11262,6 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -11456,7 +11375,6 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -11563,7 +11481,6 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -11913,7 +11830,6 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -12027,7 +11943,6 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -12133,7 +12048,6 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -12556,7 +12470,6 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -12671,7 +12584,6 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -12778,7 +12690,6 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -13159,7 +13070,6 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -13273,7 +13183,6 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -13379,7 +13288,6 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -13722,7 +13630,6 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -13836,7 +13743,6 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -13942,7 +13848,6 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -14279,7 +14184,6 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -14393,7 +14297,6 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -14499,7 +14402,6 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -14834,7 +14736,6 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -14948,7 +14849,6 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -15054,7 +14954,6 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -15397,7 +15296,6 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -15511,7 +15409,6 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -15617,7 +15514,6 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -15963,7 +15859,6 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -16077,7 +15972,6 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -16183,7 +16077,6 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -16529,7 +16422,6 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -16643,7 +16535,6 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -16749,7 +16640,6 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -17085,7 +16975,6 @@ class _$HideFinishImpl implements _HideFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -17199,7 +17088,6 @@ class _$HideFinishImpl implements _HideFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -17305,7 +17193,6 @@ class _$HideFinishImpl implements _HideFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -17670,7 +17557,6 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -17784,7 +17670,6 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -17890,7 +17775,6 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -18242,7 +18126,6 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -18356,7 +18239,6 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -18462,7 +18344,6 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -18800,7 +18681,6 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -18914,7 +18794,6 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -19020,7 +18899,6 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -19330,7 +19208,6 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -19444,7 +19321,6 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -19550,7 +19426,6 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -19877,7 +19752,6 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -19991,7 +19865,6 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -20097,7 +19970,6 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -20404,7 +20276,6 @@ class _$ShareStartImpl implements _ShareStart {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -20518,7 +20389,6 @@ class _$ShareStartImpl implements _ShareStart {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -20624,7 +20494,6 @@ class _$ShareStartImpl implements _ShareStart {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -20922,7 +20791,6 @@ class _$ShareFinishImpl implements _ShareFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -21036,7 +20904,6 @@ class _$ShareFinishImpl implements _ShareFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -21142,7 +21009,6 @@ class _$ShareFinishImpl implements _ShareFinish {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -21440,7 +21306,6 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -21554,7 +21419,6 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -21660,7 +21524,6 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
-            List<Trail> trails,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
             int? autoFinishNumber,
@@ -21918,7 +21781,6 @@ mixin _$DatabaseState {
       throw _privateConstructorUsedError;
   List<Start> get starts => throw _privateConstructorUsedError;
   List<Finish> get finishes => throw _privateConstructorUsedError;
-  List<Trail> get trails => throw _privateConstructorUsedError;
   List<StartingParticipant> get numbersOnTrace =>
       throw _privateConstructorUsedError;
   Notification? get notification =>
@@ -21962,7 +21824,6 @@ abstract class $DatabaseStateCopyWith<$Res> {
       List<ParticipantAtStart> participants,
       List<Start> starts,
       List<Finish> finishes,
-      List<Trail> trails,
       List<StartingParticipant> numbersOnTrace,
       Notification? notification,
       bool? updateFinishNumber,
@@ -21996,7 +21857,6 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
     Object? participants = null,
     Object? starts = null,
     Object? finishes = null,
-    Object? trails = null,
     Object? numbersOnTrace = null,
     Object? notification = freezed,
     Object? updateFinishNumber = freezed,
@@ -22040,10 +21900,6 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
           ? _value.finishes
           : finishes // ignore: cast_nullable_to_non_nullable
               as List<Finish>,
-      trails: null == trails
-          ? _value.trails
-          : trails // ignore: cast_nullable_to_non_nullable
-              as List<Trail>,
       numbersOnTrace: null == numbersOnTrace
           ? _value.numbersOnTrace
           : numbersOnTrace // ignore: cast_nullable_to_non_nullable
@@ -22100,7 +21956,6 @@ abstract class _$$DatabaseStateImplCopyWith<$Res>
       List<ParticipantAtStart> participants,
       List<Start> starts,
       List<Finish> finishes,
-      List<Trail> trails,
       List<StartingParticipant> numbersOnTrace,
       Notification? notification,
       bool? updateFinishNumber,
@@ -22133,7 +21988,6 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
     Object? participants = null,
     Object? starts = null,
     Object? finishes = null,
-    Object? trails = null,
     Object? numbersOnTrace = null,
     Object? notification = freezed,
     Object? updateFinishNumber = freezed,
@@ -22177,10 +22031,6 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
           ? _value._finishes
           : finishes // ignore: cast_nullable_to_non_nullable
               as List<Finish>,
-      trails: null == trails
-          ? _value._trails
-          : trails // ignore: cast_nullable_to_non_nullable
-              as List<Trail>,
       numbersOnTrace: null == numbersOnTrace
           ? _value._numbersOnTrace
           : numbersOnTrace // ignore: cast_nullable_to_non_nullable
@@ -22218,7 +22068,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
       required final List<ParticipantAtStart> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
-      required final List<Trail> trails,
       required final List<StartingParticipant> numbersOnTrace,
       this.notification,
       this.updateFinishNumber,
@@ -22231,7 +22080,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
         _participants = participants,
         _starts = starts,
         _finishes = finishes,
-        _trails = trails,
         _numbersOnTrace = numbersOnTrace;
 
   @override
@@ -22294,14 +22142,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
     return EqualUnmodifiableListView(_finishes);
   }
 
-  final List<Trail> _trails;
-  @override
-  List<Trail> get trails {
-    if (_trails is EqualUnmodifiableListView) return _trails;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_trails);
-  }
-
   final List<StartingParticipant> _numbersOnTrace;
   @override
   List<StartingParticipant> get numbersOnTrace {
@@ -22334,7 +22174,7 @@ class _$DatabaseStateImpl implements _DatabaseState {
 
   @override
   String toString() {
-    return 'DatabaseState(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, trails: $trails, numbersOnTrace: $numbersOnTrace, notification: $notification, updateFinishNumber: $updateFinishNumber, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
+    return 'DatabaseState(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, updateFinishNumber: $updateFinishNumber, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
   }
 
   @override
@@ -22352,7 +22192,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
                 .equals(other._participants, _participants) &&
             const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
-            const DeepCollectionEquality().equals(other._trails, _trails) &&
             const DeepCollectionEquality()
                 .equals(other._numbersOnTrace, _numbersOnTrace) &&
             (identical(other.notification, notification) ||
@@ -22377,7 +22216,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
       const DeepCollectionEquality().hash(_participants),
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
-      const DeepCollectionEquality().hash(_trails),
       const DeepCollectionEquality().hash(_numbersOnTrace),
       notification,
       updateFinishNumber,
@@ -22404,7 +22242,6 @@ abstract class _DatabaseState implements DatabaseState {
       required final List<ParticipantAtStart> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
-      required final List<Trail> trails,
       required final List<StartingParticipant> numbersOnTrace,
       final Notification? notification,
       final bool? updateFinishNumber,
@@ -22429,8 +22266,6 @@ abstract class _DatabaseState implements DatabaseState {
   List<Start> get starts;
   @override
   List<Finish> get finishes;
-  @override
-  List<Trail> get trails;
   @override
   List<StartingParticipant> get numbersOnTrace;
   @override

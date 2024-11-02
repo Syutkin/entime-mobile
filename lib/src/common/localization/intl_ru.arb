@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-10-31T18:01:26.695753",
+  "@@last_modified": "2024-11-02T22:22:15.279184",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1102,6 +1102,61 @@
   },
   "I18nDatabase_trail": "Трейл",
   "@I18nDatabase_trail": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_trails": "Трейлы",
+  "@I18nDatabase_trails": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_trailName": "Название трейла",
+  "@I18nDatabase_trailName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_enterTrailName": "Введите название трейла",
+  "@I18nDatabase_enterTrailName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_trailDistance": "Длина трейла",
+  "@I18nDatabase_trailDistance": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_incorrectTrailDistance": "Неверная длина",
+  "@I18nDatabase_incorrectTrailDistance": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_trailElevation": "Перепад высот на трейле",
+  "@I18nDatabase_trailElevation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_incorrectTrailElevation": "Неверный перепад высот",
+  "@I18nDatabase_incorrectTrailElevation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_trailGpxTrack": "Трек трейла",
+  "@I18nDatabase_trailGpxTrack": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_trailUrl": "Ссылка на трейл",
+  "@I18nDatabase_trailUrl": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_incorrectTrailUrl": "Некорректная ссылка",
+  "@I18nDatabase_incorrectTrailUrl": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_trailDescription": "Описание",
+  "@I18nDatabase_trailDescription": {
     "type": "text",
     "placeholders": {}
   },

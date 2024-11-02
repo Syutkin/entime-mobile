@@ -6,6 +6,7 @@ import 'package:entime/src/feature/connectivity/bloc/connectivity_bloc.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
 import 'package:entime/src/feature/ntp/bloc/ntp_bloc.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
+import 'package:entime/src/feature/trails/bloc/trails_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -148,6 +149,9 @@ class EntimeApp extends StatelessWidget {
               database: database,
               settingsProvider: settingsProvider,
             )..add(const DatabaseEvent.initialize()),
+          ),
+          BlocProvider<TrailsBloc>(
+            create: (context) => TrailsBloc(database: database),
           ),
           BlocProvider<CountdownBloc>(
             create: (context) => CountdownBloc(

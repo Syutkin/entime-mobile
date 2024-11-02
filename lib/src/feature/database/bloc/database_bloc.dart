@@ -36,7 +36,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   List<ParticipantAtStart> _participants = [];
   List<Start> _starts = [];
   List<Finish> _finishes = [];
-  List<Trail> _trails = [];
   List<StartingParticipant> _numbersOnTrace = [];
 
   Race? _race;
@@ -75,7 +74,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       participants: _participants,
       starts: _starts,
       finishes: _finishes,
-      trails: _trails,
       numbersOnTrace: _numbersOnTrace,
       notification: notification,
       autoFinishNumber: autoFinishNumber,
@@ -97,7 +95,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             participants: [],
             starts: [],
             finishes: [],
-            trails: [],
             numbersOnTrace: [])) {
     _racesSubscription = _db.getRaces().watch().listen((event) async {
       _races = event;
@@ -145,11 +142,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       _emitState();
     });
 
-    _db.select(_db.trails).watch().listen((event) async {
-      _trails = event;
-      logger.t('DatabaseBloc -> getTrails().watch()');
-      _emitState();
-    });
+
 
     _numbersOnTraceSubscription = _db
         .getNumbersOnTraceNow(
@@ -260,7 +253,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               participants: event.participants,
               starts: event.starts,
               finishes: event.finishes,
-              trails: event.trails,
               numbersOnTrace: event.numbersOnTrace,
               notification: event.notification,
               autoFinishNumber: event.autoFinishNumber,

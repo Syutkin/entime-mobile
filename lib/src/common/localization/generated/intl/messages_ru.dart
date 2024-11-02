@@ -114,7 +114,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введите название соревнования"),
         "I18nDatabase_enterStageName": MessageLookupByLibrary.simpleMessage(
             "Введите название спецучастка"),
+        "I18nDatabase_enterTrailName":
+            MessageLookupByLibrary.simpleMessage("Введите название трейла"),
         "I18nDatabase_incorrectRaceUrl":
+            MessageLookupByLibrary.simpleMessage("Некорректная ссылка"),
+        "I18nDatabase_incorrectTrailDistance":
+            MessageLookupByLibrary.simpleMessage("Неверная длина"),
+        "I18nDatabase_incorrectTrailElevation":
+            MessageLookupByLibrary.simpleMessage("Неверный перепад высот"),
+        "I18nDatabase_incorrectTrailUrl":
             MessageLookupByLibrary.simpleMessage("Некорректная ссылка"),
         "I18nDatabase_isActiveStage":
             MessageLookupByLibrary.simpleMessage("Активный"),
@@ -134,6 +142,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nDatabase_stageName":
             MessageLookupByLibrary.simpleMessage("Название спецучастка"),
         "I18nDatabase_trail": MessageLookupByLibrary.simpleMessage("Трейл"),
+        "I18nDatabase_trailDescription":
+            MessageLookupByLibrary.simpleMessage("Описание"),
+        "I18nDatabase_trailDistance":
+            MessageLookupByLibrary.simpleMessage("Длина трейла"),
+        "I18nDatabase_trailElevation":
+            MessageLookupByLibrary.simpleMessage("Перепад высот на трейле"),
+        "I18nDatabase_trailGpxTrack":
+            MessageLookupByLibrary.simpleMessage("Трек трейла"),
+        "I18nDatabase_trailName":
+            MessageLookupByLibrary.simpleMessage("Название трейла"),
+        "I18nDatabase_trailUrl":
+            MessageLookupByLibrary.simpleMessage("Ссылка на трейл"),
+        "I18nDatabase_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
         "I18nDrawer_settings":

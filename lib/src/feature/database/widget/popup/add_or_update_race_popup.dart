@@ -100,15 +100,7 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
                   url = '';
                   return null;
                 } else {
-                  RegExp regExp = RegExp(
-                    // ToDo: пропускать русские домены
-                    // Простой валидатор домена
-                    r'^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}$',
-                    caseSensitive: false,
-                    multiLine: false,
-                  );
-                  final isUrl = regExp.hasMatch(value);
-                  if (isUrl) {
+                  if (value.isUrl) {
                     url = value;
                     return null;
                   } else {
