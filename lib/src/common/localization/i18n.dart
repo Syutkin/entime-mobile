@@ -1202,7 +1202,7 @@ class I18nDatabase {
       );
 
   static String get trailName => Intl.message(
-    'Название трейла',
+    'Название',
     name: 'I18nDatabase_trailName',
   );
 
@@ -1212,7 +1212,7 @@ class I18nDatabase {
   );
 
   static String get trailDistance => Intl.message(
-    'Длина трейла',
+    'Длина',
     name: 'I18nDatabase_trailDistance',
   );
 
@@ -1222,7 +1222,7 @@ class I18nDatabase {
   );
 
   static String get trailElevation => Intl.message(
-    'Перепад высот на трейле',
+    'Перепад высот',
     name: 'I18nDatabase_trailElevation',
   );
 
@@ -1232,12 +1232,12 @@ class I18nDatabase {
   );
 
   static String get trailGpxTrack => Intl.message(
-    'Трек трейла',
+    'Трек',
     name: 'I18nDatabase_trailGpxTrack',
   );
 
   static String get trailUrl => Intl.message(
-    'Ссылка на трейл',
+    'Ссылка',
     name: 'I18nDatabase_trailUrl',
   );
 

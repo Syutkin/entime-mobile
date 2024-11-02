@@ -1,4 +1,5 @@
 import 'package:entime/src/common/utils/extension_on_string.dart';
+import 'package:entime/src/feature/trails/widget/trail_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,8 +20,8 @@ class TrailListPage extends StatelessWidget {
     BlocProvider.of<TrailsBloc>(context).add(const TrailsEvent.getTrails());
     return Scaffold(
       appBar: AppBar(
-          title: Text(Localization.current.I18nDatabase_trails),
-          ),
+        title: Text(Localization.current.I18nDatabase_trails),
+      ),
       body: BlocBuilder<TrailsBloc, TrailsState>(
         builder: (context, state) {
           return state.map(initial: (state) {
@@ -34,36 +35,7 @@ class TrailListPage extends StatelessWidget {
                 itemCount: trails.length,
                 itemBuilder: (context, index) {
                   final trail = trails[index];
-                  return ListTile(
-                    title: Text(trail.name),
-                    // contentPadding: EdgeInsets.zero,
-                    // title: Row(
-                    //   children: <Widget>[
-                    //     Flexible(
-                    //       flex: 10,
-                    //       child: Align(
-                    //         child: _LogLevelIcon(level: item.level),
-                    //       ),
-                    //     ),
-                    //     Flexible(
-                    //       flex: 10,
-                    //       child: Align(
-                    //         child: _LogSourceIcon(
-                    //           source: item.source.name,
-                    //           direction: item.direction.name,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     Flexible(
-                    //       flex: 80,
-                    //       child: Align(
-                    //         alignment: Alignment.centerLeft,
-                    //         child: Text(item.rawData ?? ''),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                  );
+                  return TrailItemTile(trail: trail);
                 },
               ),
             );

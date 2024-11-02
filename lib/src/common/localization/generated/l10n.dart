@@ -2138,10 +2138,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Название трейла`
+  /// `Название`
   String get I18nDatabase_trailName {
     return Intl.message(
-      'Название трейла',
+      'Название',
       name: 'I18nDatabase_trailName',
       desc: '',
       args: [],
@@ -2158,10 +2158,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Длина трейла`
+  /// `Длина`
   String get I18nDatabase_trailDistance {
     return Intl.message(
-      'Длина трейла',
+      'Длина',
       name: 'I18nDatabase_trailDistance',
       desc: '',
       args: [],
@@ -2178,10 +2178,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Перепад высот на трейле`
+  /// `Перепад высот`
   String get I18nDatabase_trailElevation {
     return Intl.message(
-      'Перепад высот на трейле',
+      'Перепад высот',
       name: 'I18nDatabase_trailElevation',
       desc: '',
       args: [],
@@ -2198,20 +2198,20 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Трек трейла`
+  /// `Трек`
   String get I18nDatabase_trailGpxTrack {
     return Intl.message(
-      'Трек трейла',
+      'Трек',
       name: 'I18nDatabase_trailGpxTrack',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ссылка на трейл`
+  /// `Ссылка`
   String get I18nDatabase_trailUrl {
     return Intl.message(
-      'Ссылка на трейл',
+      'Ссылка',
       name: 'I18nDatabase_trailUrl',
       desc: '',
       args: [],

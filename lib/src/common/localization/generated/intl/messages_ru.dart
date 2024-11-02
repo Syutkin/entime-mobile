@@ -145,15 +145,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nDatabase_trailDescription":
             MessageLookupByLibrary.simpleMessage("Описание"),
         "I18nDatabase_trailDistance":
-            MessageLookupByLibrary.simpleMessage("Длина трейла"),
+            MessageLookupByLibrary.simpleMessage("Длина"),
         "I18nDatabase_trailElevation":
-            MessageLookupByLibrary.simpleMessage("Перепад высот на трейле"),
+            MessageLookupByLibrary.simpleMessage("Перепад высот"),
         "I18nDatabase_trailGpxTrack":
-            MessageLookupByLibrary.simpleMessage("Трек трейла"),
+            MessageLookupByLibrary.simpleMessage("Трек"),
         "I18nDatabase_trailName":
-            MessageLookupByLibrary.simpleMessage("Название трейла"),
-        "I18nDatabase_trailUrl":
-            MessageLookupByLibrary.simpleMessage("Ссылка на трейл"),
+            MessageLookupByLibrary.simpleMessage("Название"),
+        "I18nDatabase_trailUrl": MessageLookupByLibrary.simpleMessage("Ссылка"),
         "I18nDatabase_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),

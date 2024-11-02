@@ -8,7 +8,9 @@ import '../../../common/logger/logger.dart';
 import '../../database/database.dart';
 
 part 'trails_bloc.freezed.dart';
+
 part 'trails_event.dart';
+
 part 'trails_state.dart';
 
 class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
@@ -42,9 +44,32 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
             gpxTrack: event.gpxTrack,
           );
         },
-        updateTrail: (_UpdateTrail value) {},
-        upsertTrail: (_UpsertTrail value) {},
-        deleteTrail: (_DeleteTrail value) {},
+        updateTrail: (_UpdateTrail event) async {
+          await _db.updateTrail(
+            id: event.id,
+            name: event.name,
+            elevation: event.elevation,
+            distance: event.distance,
+            url: event.url,
+            description: event.description,
+            gpxTrack: event.gpxTrack,
+          );
+        },
+        upsertTrail: (_UpsertTrail event) async {
+          await _db.upsertTrail(
+            id: event.id,
+            name: event.name,
+            elevation: event.elevation,
+            distance: event.distance,
+            url: event.url,
+            description: event.description,
+            gpxTrack: event.gpxTrack,
+            isDeleted: event.isDeleted,
+          );
+        },
+        deleteTrail: (_DeleteTrail event) async {
+          await _db.deleteTrail(event.id);
+        },
       );
     });
   }

@@ -14,11 +14,11 @@ class TrailsEvent with _$TrailsEvent {
   }) = _AddTrail;
 
   const factory TrailsEvent.updateTrail({
-    int? id,
+    required int id,
     String? name,
-    DateTime? startDate,
-    DateTime? finishDate,
-    String? location,
+    int? distance,
+    int? elevation,
+    Uint8List? gpxTrack,
     String? url,
     String? description,
   }) = _UpdateTrail;

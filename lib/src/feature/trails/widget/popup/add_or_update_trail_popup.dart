@@ -11,7 +11,7 @@ Future<void> updateTrailPopup(BuildContext context, Trail trail) {
 Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
   var name = trail?.name ?? '';
   var distance = trail?.distance;
-  var elevation = trail?.distance;
+  var elevation = trail?.elevation;
   var gpxTrack = trail?.gpxTrack;
   var url = trail?.url;
   var description = trail?.description;
@@ -61,9 +61,9 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
                   distance = null;
                   return null;
                 } else {
-                  final dist = int.tryParse(value);
-                  if (distance != null) {
-                    distance = dist;
+                  final number = int.tryParse(value);
+                  if (number != null) {
+                    distance = number;
                     return null;
                   } else {
                     return Localization
@@ -84,9 +84,9 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
                   elevation = null;
                   return null;
                 } else {
-                  final dist = int.tryParse(value);
-                  if (elevation != null) {
-                    elevation = dist;
+                  final number = int.tryParse(value);
+                  if (number != null) {
+                    elevation = number;
                     return null;
                   } else {
                     return Localization

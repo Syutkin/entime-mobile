@@ -23,11 +23,11 @@ mixin _$TrailsEvent {
             Uint8List? gpxTrack, String? url, String? description)
         addTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
             String? url,
             String? description)
         updateTrail,
@@ -50,14 +50,8 @@ mixin _$TrailsEvent {
     TResult? Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult? Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult? Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -78,14 +72,8 @@ mixin _$TrailsEvent {
     TResult Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -198,11 +186,11 @@ class _$GetTrailsImpl implements _GetTrails {
             Uint8List? gpxTrack, String? url, String? description)
         addTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
             String? url,
             String? description)
         updateTrail,
@@ -228,14 +216,8 @@ class _$GetTrailsImpl implements _GetTrails {
     TResult? Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult? Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult? Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -259,14 +241,8 @@ class _$GetTrailsImpl implements _GetTrails {
     TResult Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -461,11 +437,11 @@ class _$AddTrailImpl implements _AddTrail {
             Uint8List? gpxTrack, String? url, String? description)
         addTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
             String? url,
             String? description)
         updateTrail,
@@ -491,14 +467,8 @@ class _$AddTrailImpl implements _AddTrail {
     TResult? Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult? Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult? Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -523,14 +493,8 @@ class _$AddTrailImpl implements _AddTrail {
     TResult Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -622,11 +586,11 @@ abstract class _$$UpdateTrailImplCopyWith<$Res> {
       __$$UpdateTrailImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {int? id,
+      {int id,
       String? name,
-      DateTime? startDate,
-      DateTime? finishDate,
-      String? location,
+      int? distance,
+      int? elevation,
+      Uint8List? gpxTrack,
       String? url,
       String? description});
 }
@@ -644,35 +608,35 @@ class __$$UpdateTrailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? name = freezed,
-    Object? startDate = freezed,
-    Object? finishDate = freezed,
-    Object? location = freezed,
+    Object? distance = freezed,
+    Object? elevation = freezed,
+    Object? gpxTrack = freezed,
     Object? url = freezed,
     Object? description = freezed,
   }) {
     return _then(_$UpdateTrailImpl(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      startDate: freezed == startDate
-          ? _value.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      finishDate: freezed == finishDate
-          ? _value.finishDate
-          : finishDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String?,
+      distance: freezed == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as int?,
+      elevation: freezed == elevation
+          ? _value.elevation
+          : elevation // ignore: cast_nullable_to_non_nullable
+              as int?,
+      gpxTrack: freezed == gpxTrack
+          ? _value.gpxTrack
+          : gpxTrack // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -689,24 +653,24 @@ class __$$UpdateTrailImplCopyWithImpl<$Res>
 
 class _$UpdateTrailImpl implements _UpdateTrail {
   const _$UpdateTrailImpl(
-      {this.id,
+      {required this.id,
       this.name,
-      this.startDate,
-      this.finishDate,
-      this.location,
+      this.distance,
+      this.elevation,
+      this.gpxTrack,
       this.url,
       this.description});
 
   @override
-  final int? id;
+  final int id;
   @override
   final String? name;
   @override
-  final DateTime? startDate;
+  final int? distance;
   @override
-  final DateTime? finishDate;
+  final int? elevation;
   @override
-  final String? location;
+  final Uint8List? gpxTrack;
   @override
   final String? url;
   @override
@@ -714,7 +678,7 @@ class _$UpdateTrailImpl implements _UpdateTrail {
 
   @override
   String toString() {
-    return 'TrailsEvent.updateTrail(id: $id, name: $name, startDate: $startDate, finishDate: $finishDate, location: $location, url: $url, description: $description)';
+    return 'TrailsEvent.updateTrail(id: $id, name: $name, distance: $distance, elevation: $elevation, gpxTrack: $gpxTrack, url: $url, description: $description)';
   }
 
   @override
@@ -724,20 +688,19 @@ class _$UpdateTrailImpl implements _UpdateTrail {
             other is _$UpdateTrailImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.startDate, startDate) ||
-                other.startDate == startDate) &&
-            (identical(other.finishDate, finishDate) ||
-                other.finishDate == finishDate) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.distance, distance) ||
+                other.distance == distance) &&
+            (identical(other.elevation, elevation) ||
+                other.elevation == elevation) &&
+            const DeepCollectionEquality().equals(other.gpxTrack, gpxTrack) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, startDate, finishDate, location, url, description);
+  int get hashCode => Object.hash(runtimeType, id, name, distance, elevation,
+      const DeepCollectionEquality().hash(gpxTrack), url, description);
 
   /// Create a copy of TrailsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -755,11 +718,11 @@ class _$UpdateTrailImpl implements _UpdateTrail {
             Uint8List? gpxTrack, String? url, String? description)
         addTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
             String? url,
             String? description)
         updateTrail,
@@ -776,7 +739,7 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     required TResult Function(int id) deleteTrail,
   }) {
     return updateTrail(
-        id, name, startDate, finishDate, location, url, description);
+        id, name, distance, elevation, gpxTrack, url, description);
   }
 
   @override
@@ -786,14 +749,8 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     TResult? Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult? Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult? Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -808,7 +765,7 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     TResult? Function(int id)? deleteTrail,
   }) {
     return updateTrail?.call(
-        id, name, startDate, finishDate, location, url, description);
+        id, name, distance, elevation, gpxTrack, url, description);
   }
 
   @override
@@ -818,14 +775,8 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     TResult Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -842,7 +793,7 @@ class _$UpdateTrailImpl implements _UpdateTrail {
   }) {
     if (updateTrail != null) {
       return updateTrail(
-          id, name, startDate, finishDate, location, url, description);
+          id, name, distance, elevation, gpxTrack, url, description);
     }
     return orElse();
   }
@@ -890,19 +841,19 @@ class _$UpdateTrailImpl implements _UpdateTrail {
 
 abstract class _UpdateTrail implements TrailsEvent {
   const factory _UpdateTrail(
-      {final int? id,
+      {required final int id,
       final String? name,
-      final DateTime? startDate,
-      final DateTime? finishDate,
-      final String? location,
+      final int? distance,
+      final int? elevation,
+      final Uint8List? gpxTrack,
       final String? url,
       final String? description}) = _$UpdateTrailImpl;
 
-  int? get id;
+  int get id;
   String? get name;
-  DateTime? get startDate;
-  DateTime? get finishDate;
-  String? get location;
+  int? get distance;
+  int? get elevation;
+  Uint8List? get gpxTrack;
   String? get url;
   String? get description;
 
@@ -1071,11 +1022,11 @@ class _$UpsertTrailImpl implements _UpsertTrail {
             Uint8List? gpxTrack, String? url, String? description)
         addTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
             String? url,
             String? description)
         updateTrail,
@@ -1102,14 +1053,8 @@ class _$UpsertTrailImpl implements _UpsertTrail {
     TResult? Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult? Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult? Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -1134,14 +1079,8 @@ class _$UpsertTrailImpl implements _UpsertTrail {
     TResult Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult Function(
             int? id,
@@ -1304,11 +1243,11 @@ class _$DeleteTrailImpl implements _DeleteTrail {
             Uint8List? gpxTrack, String? url, String? description)
         addTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
+            int? distance,
+            int? elevation,
+            Uint8List? gpxTrack,
             String? url,
             String? description)
         updateTrail,
@@ -1334,14 +1273,8 @@ class _$DeleteTrailImpl implements _DeleteTrail {
     TResult? Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult? Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult? Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult? Function(
             int? id,
@@ -1365,14 +1298,8 @@ class _$DeleteTrailImpl implements _DeleteTrail {
     TResult Function(String? name, int? distance, int? elevation,
             Uint8List? gpxTrack, String? url, String? description)?
         addTrail,
-    TResult Function(
-            int? id,
-            String? name,
-            DateTime? startDate,
-            DateTime? finishDate,
-            String? location,
-            String? url,
-            String? description)?
+    TResult Function(int id, String? name, int? distance, int? elevation,
+            Uint8List? gpxTrack, String? url, String? description)?
         updateTrail,
     TResult Function(
             int? id,

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-11-02T22:22:15.279184",
+  "@@last_modified": "2024-11-02T23:06:14.692345",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1110,7 +1110,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nDatabase_trailName": "Название трейла",
+  "I18nDatabase_trailName": "Название",
   "@I18nDatabase_trailName": {
     "type": "text",
     "placeholders": {}
@@ -1120,7 +1120,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nDatabase_trailDistance": "Длина трейла",
+  "I18nDatabase_trailDistance": "Длина",
   "@I18nDatabase_trailDistance": {
     "type": "text",
     "placeholders": {}
@@ -1130,7 +1130,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nDatabase_trailElevation": "Перепад высот на трейле",
+  "I18nDatabase_trailElevation": "Перепад высот",
   "@I18nDatabase_trailElevation": {
     "type": "text",
     "placeholders": {}
@@ -1140,12 +1140,12 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nDatabase_trailGpxTrack": "Трек трейла",
+  "I18nDatabase_trailGpxTrack": "Трек",
   "@I18nDatabase_trailGpxTrack": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nDatabase_trailUrl": "Ссылка на трейл",
+  "I18nDatabase_trailUrl": "Ссылка",
   "@I18nDatabase_trailUrl": {
     "type": "text",
     "placeholders": {}
