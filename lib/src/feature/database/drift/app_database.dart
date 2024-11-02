@@ -55,66 +55,61 @@ class AppDatabase extends _$AppDatabase {
 
   Future<Race?> getRace(int id) {
     return (select(races)
-      ..where((r) => r.id.equals(id) & r.isDeleted.not())
-      ..limit(1)).getSingleOrNull();
+          ..where((r) => r.id.equals(id) & r.isDeleted.not())
+          ..limit(1))
+        .getSingleOrNull();
   }
 
   /// Добавляет новую гонку
-  // Future<int> addRace({
-  //   required String name,
-  //   DateTime? startDate,
-  //   DateTime? finishDate,
-  //   String? location,
-  //   String? url,
-  //   String? description,
-  // }) {
-  //   return _addRace(
-  //     name: name,
-  //     startDate: startDate?.toIso8601String(),
-  //     finishDate: finishDate?.toIso8601String(),
-  //     location: location,
-  //     url: url,
-  //     description: description,
-  //   );
-  // }
+  Future<int> addRace({
+    required String name,
+    DateTime? startDate,
+    DateTime? finishDate,
+    String? location,
+    String? url,
+    String? description,
+  }) {
+    return upsertRace(
+      name: name,
+      startDate: startDate,
+      finishDate: finishDate,
+      location: location,
+      url: url,
+      description: description,
+    );
+  }
 
   /// Удаляет гонку с [id]
-  Future<int> deleteRace({required int id}) {
-    return _deleteRace(id: id);
+  Future<int> deleteRace(int id) {
+    return (update(races)..where((r) => r.id.equals(id))).write(
+      RacesCompanion(
+        isDeleted: Value(true),
+      ),
+    );
   }
 
   /// Обновление информации о гонке с [id]
-  // Future<int> updateRace({
-  //   required int id,
-  //   String? name,
-  //   DateTime? startDate,
-  //   DateTime? finishDate,
-  //   String? location,
-  //   String? url,
-  //   String? description,
-  // }) async {
-  //   final raceId = await (update(races)
-  //         ..where(
-  //           (race) => race.id.equals(id),
-  //         ))
-  //       .write(
-  //     RacesCompanion(
-  //       name: name != null ? Value(name) : Value.absent(),
-  //       startDate: startDate != null
-  //           ? Value(startDate.toIso8601String())
-  //           : Value.absent(),
-  //       finishDate: finishDate != null
-  //           ? Value(finishDate.toIso8601String())
-  //           : Value.absent(),
-  //       location: location != null ? Value(location) : Value.absent(),
-  //       url: url != null ? Value(url) : Value.absent(),
-  //       description: description != null ? Value(description) : Value.absent(),
-  //     ),
-  //   );
-  //   return raceId;
-  // }
+  Future<int> updateRace({
+    required int id,
+    String? name,
+    DateTime? startDate,
+    DateTime? finishDate,
+    String? location,
+    String? url,
+    String? description,
+  }) async {
+    return upsertRace(
+      id: id,
+      name: name,
+      startDate: startDate,
+      finishDate: finishDate,
+      location: location,
+      url: url,
+      description: description,
+    );
+  }
 
-  /// Создание гонки или обновление информации о гонке с [id]
+  /// Добавляет новую гонку или обновление информации о гонке с [id]
   Future<int> upsertRace({
     int? id,
     String? name,
@@ -150,41 +145,54 @@ class AppDatabase extends _$AppDatabase {
     return _getStages(raceId: raceId);
   }
 
-  /// Добавляет спецучасток
-  // Future<int> addStage(
-  //     {int? trailId, required int raceId, required String name}) {
-  //   return _addStage(raceId: raceId, name: name, trailId: trailId);
-  // }
-
-  /// Удаляет спецучасток с [id]
-  Future<int> deleteStage({required int id}) {
-    return _deleteStage(id: id);
+  /// Возвращает [Stage] с [id]
+  Future<Stage?> getStage(int id) {
+    return (select(stages)
+          ..where((r) => r.id.equals(id) & r.isDeleted.not())
+          ..limit(1))
+        .getSingleOrNull();
   }
 
-  /// Создание гоночного этапа или обновление информации этапа с [id]
-  // Future<int> updateStage({
-  //   required int id,
-  //   String? name,
-  //   String? description,
-  //   int? raceId,
-  //   int? trailId,
-  //   bool? isActive,
-  // }) async {
-  //   final stageId = await (update(stages)
-  //         ..where(
-  //           (stage) => stage.id.equals(id),
-  //         ))
-  //       .write(
-  //     StagesCompanion(
-  //       name: name != null ? Value(name) : Value.absent(),
-  //       description: description != null ? Value(description) : Value.absent(),
-  //       raceId: raceId != null ? Value(raceId) : Value.absent(),
-  //       trailId: trailId != null ? Value(trailId) : Value.absent(),
-  //       isActive: isActive != null ? Value(isActive) : Value.absent(),
-  //     ),
-  //   );
-  //   return stageId;
-  // }
+  /// Добавляет спецучасток
+  Future<int> addStage({
+    int? trailId,
+    required int raceId,
+    required String name,
+  }) {
+    return upsertStage(
+      raceId: raceId,
+      name: name,
+      trailId: trailId,
+    );
+  }
+
+  /// Удаляет спецучасток с [id]
+  Future<int> deleteStage(int id) {
+    return (update(stages)..where((r) => r.id.equals(id))).write(
+      StagesCompanion(
+        isDeleted: Value(true),
+      ),
+    );
+  }
+
+  /// Обновление информации о гоночном этапе с [id]
+  Future<int> updateStage({
+    required int id,
+    String? name,
+    String? description,
+    int? raceId,
+    int? trailId,
+    bool? isActive,
+  }) async {
+    return upsertStage(
+      id: id,
+      name: name,
+      description: description,
+      raceId: raceId,
+      trailId: trailId,
+      isActive: isActive,
+    );
+  }
 
   /// Создание гоночного этапа или обновление информации этапа с [id]
   Future<int> upsertStage({
@@ -208,20 +216,96 @@ class AppDatabase extends _$AppDatabase {
       ),
     );
 
-    // final stageId = await (update(stages)
-    //       ..where(
-    //         (stage) => stage.id.equals(id),
-    //       ))
-    //     .write(
-    //   StagesCompanion(
-    //     name: name != null ? Value(name) : Value.absent(),
-    //     description: description != null ? Value(description) : Value.absent(),
-    //     raceId: raceId != null ? Value(raceId) : Value.absent(),
-    //     trailId: trailId != null ? Value(trailId) : Value.absent(),
-    //     isActive: isActive != null ? Value(isActive) : Value.absent(),
-    //   ),
-    // );
     return stageId;
+  }
+
+  /// Весь список трейлов, кроме "удалённых" (is_deleted = true)
+  Selectable<Trail> getTrails() {
+    return _getTrails();
+  }
+
+  /// Возвращает [Trail] с [id]
+  Future<Trail?> getTrail(int id) {
+    return (select(trails)
+      ..where((r) => r.id.equals(id) & r.isDeleted.not())
+      ..limit(1))
+        .getSingleOrNull();
+  }
+
+  /// Добавляет трейл
+  Future<int> addTrail({
+    required String? name,
+    int? distance,
+    int? elevation,
+    Uint8List? gpxTrack,
+    String? url,
+    String? description,
+  }) {
+    return upsertTrail(
+      name: name,
+      distance: distance,
+      elevation: elevation,
+      gpxTrack: gpxTrack,
+      url: url,
+      description: description,
+    );
+  }
+
+  /// Обновление информации о гоночном этапе с [id]
+  Future<int> updateTrail({
+    required int id,
+    String? name,
+    int? distance,
+    int? elevation,
+    Uint8List? gpxTrack,
+    String? url,
+    String? description,
+  }) async {
+    return upsertTrail(
+      id: id,
+      name: name,
+      distance: distance,
+      elevation: elevation,
+      gpxTrack: gpxTrack,
+      url: url,
+      description: description,
+    );
+  }
+
+  /// Создание трейла или обновление информации о трейле с [id]
+  Future<int> upsertTrail({
+    int? id,
+    String? name,
+    int? distance,
+    int? elevation,
+    Uint8List? gpxTrack,
+    String? url,
+    String? description,
+    bool? isDeleted,
+  }) async {
+    final trailId = await into(trails).insertOnConflictUpdate(
+      TrailsCompanion(
+        id: id != null ? Value(id) : Value.absent(),
+        name: name != null ? Value(name) : Value.absent(),
+        distance: distance != null ? Value(distance) : Value.absent(),
+        elevation: elevation != null ? Value(elevation) : Value.absent(),
+        gpxTrack: gpxTrack != null ? Value(gpxTrack) : Value.absent(),
+        url: url != null ? Value(url) : Value.absent(),
+        description: description != null ? Value(description) : Value.absent(),
+        isDeleted: isDeleted != null ? Value(isDeleted) : Value.absent(),
+      ),
+    );
+
+    return trailId;
+  }
+
+  /// Удаляет трейл с [id]
+  Future<int> deleteTrail(int id) {
+    return (update(trails)..where((r) => r.id.equals(id))).write(
+      TrailsCompanion(
+        isDeleted: Value(true),
+      ),
+    );
   }
 
   /// Добавляет гонщика
@@ -903,11 +987,11 @@ class AppDatabase extends _$AppDatabase {
 
   Future<int> createRaceFromRaceCsv(RaceCsv race) async {
     var raceId =
-        await upsertRace(name: path.basenameWithoutExtension(race.fileName));
+        await addRace(name: path.basenameWithoutExtension(race.fileName));
     Map<String, int> stages = {};
     await transaction(() async {
       for (var stageName in race.stageNames) {
-        stages[stageName] = await upsertStage(raceId: raceId, name: stageName);
+        stages[stageName] = await addStage(raceId: raceId, name: stageName);
       }
       for (var item in race.startItems) {
         final riderId = await addRider(

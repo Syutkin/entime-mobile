@@ -476,9 +476,17 @@ class Trails extends Table with TableInfo<Trails, Trail> {
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
+  static const VerificationMeta _isDeletedMeta =
+      const VerificationMeta('isDeleted');
+  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
+      'is_deleted', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      $customConstraints: 'NOT NULL DEFAULT FALSE',
+      defaultValue: const CustomExpression('FALSE'));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, distance, elevation, gpxTrack, url, description];
+      [id, name, distance, elevation, gpxTrack, url, description, isDeleted];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -520,6 +528,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
           description.isAcceptableOrUnknown(
               data['description']!, _descriptionMeta));
     }
+    if (data.containsKey('is_deleted')) {
+      context.handle(_isDeletedMeta,
+          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
+    }
     return context;
   }
 
@@ -543,6 +555,8 @@ class Trails extends Table with TableInfo<Trails, Trail> {
           .read(DriftSqlType.string, data['${effectivePrefix}url']),
       description: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}description']),
+      isDeleted: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
     );
   }
 
@@ -563,6 +577,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   final Uint8List? gpxTrack;
   final String? url;
   final String? description;
+  final bool isDeleted;
   const Trail(
       {required this.id,
       required this.name,
@@ -570,7 +585,8 @@ class Trail extends DataClass implements Insertable<Trail> {
       this.elevation,
       this.gpxTrack,
       this.url,
-      this.description});
+      this.description,
+      required this.isDeleted});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -591,6 +607,7 @@ class Trail extends DataClass implements Insertable<Trail> {
     if (!nullToAbsent || description != null) {
       map['description'] = Variable<String>(description);
     }
+    map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
   }
 
@@ -611,6 +628,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       description: description == null && nullToAbsent
           ? const Value.absent()
           : Value(description),
+      isDeleted: Value(isDeleted),
     );
   }
 
@@ -625,6 +643,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       gpxTrack: serializer.fromJson<Uint8List?>(json['gpx_track']),
       url: serializer.fromJson<String?>(json['url']),
       description: serializer.fromJson<String?>(json['description']),
+      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
     );
   }
   @override
@@ -638,6 +657,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       'gpx_track': serializer.toJson<Uint8List?>(gpxTrack),
       'url': serializer.toJson<String?>(url),
       'description': serializer.toJson<String?>(description),
+      'is_deleted': serializer.toJson<bool>(isDeleted),
     };
   }
 
@@ -648,7 +668,8 @@ class Trail extends DataClass implements Insertable<Trail> {
           Value<int?> elevation = const Value.absent(),
           Value<Uint8List?> gpxTrack = const Value.absent(),
           Value<String?> url = const Value.absent(),
-          Value<String?> description = const Value.absent()}) =>
+          Value<String?> description = const Value.absent(),
+          bool? isDeleted}) =>
       Trail(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -657,6 +678,7 @@ class Trail extends DataClass implements Insertable<Trail> {
         gpxTrack: gpxTrack.present ? gpxTrack.value : this.gpxTrack,
         url: url.present ? url.value : this.url,
         description: description.present ? description.value : this.description,
+        isDeleted: isDeleted ?? this.isDeleted,
       );
   Trail copyWithCompanion(TrailsCompanion data) {
     return Trail(
@@ -668,6 +690,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       url: data.url.present ? data.url.value : this.url,
       description:
           data.description.present ? data.description.value : this.description,
+      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
 
@@ -680,14 +703,15 @@ class Trail extends DataClass implements Insertable<Trail> {
           ..write('elevation: $elevation, ')
           ..write('gpxTrack: $gpxTrack, ')
           ..write('url: $url, ')
-          ..write('description: $description')
+          ..write('description: $description, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(id, name, distance, elevation,
-      $driftBlobEquality.hash(gpxTrack), url, description);
+      $driftBlobEquality.hash(gpxTrack), url, description, isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -698,7 +722,8 @@ class Trail extends DataClass implements Insertable<Trail> {
           other.elevation == this.elevation &&
           $driftBlobEquality.equals(other.gpxTrack, this.gpxTrack) &&
           other.url == this.url &&
-          other.description == this.description);
+          other.description == this.description &&
+          other.isDeleted == this.isDeleted);
 }
 
 class TrailsCompanion extends UpdateCompanion<Trail> {
@@ -709,6 +734,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   final Value<Uint8List?> gpxTrack;
   final Value<String?> url;
   final Value<String?> description;
+  final Value<bool> isDeleted;
   const TrailsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -717,6 +743,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.gpxTrack = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   });
   TrailsCompanion.insert({
     this.id = const Value.absent(),
@@ -726,6 +753,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.gpxTrack = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Trail> custom({
     Expression<int>? id,
@@ -735,6 +763,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     Expression<Uint8List>? gpxTrack,
     Expression<String>? url,
     Expression<String>? description,
+    Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -744,6 +773,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       if (gpxTrack != null) 'gpx_track': gpxTrack,
       if (url != null) 'url': url,
       if (description != null) 'description': description,
+      if (isDeleted != null) 'is_deleted': isDeleted,
     });
   }
 
@@ -754,7 +784,8 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       Value<int?>? elevation,
       Value<Uint8List?>? gpxTrack,
       Value<String?>? url,
-      Value<String?>? description}) {
+      Value<String?>? description,
+      Value<bool>? isDeleted}) {
     return TrailsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -763,6 +794,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       gpxTrack: gpxTrack ?? this.gpxTrack,
       url: url ?? this.url,
       description: description ?? this.description,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 
@@ -790,6 +822,9 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     if (description.present) {
       map['description'] = Variable<String>(description.value);
     }
+    if (isDeleted.present) {
+      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    }
     return map;
   }
 
@@ -802,7 +837,8 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
           ..write('elevation: $elevation, ')
           ..write('gpxTrack: $gpxTrack, ')
           ..write('url: $url, ')
-          ..write('description: $description')
+          ..write('description: $description, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
@@ -1253,9 +1289,27 @@ class Riders extends Table with TableInfo<Riders, Rider> {
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
+  static const VerificationMeta _isDeletedMeta =
+      const VerificationMeta('isDeleted');
+  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
+      'is_deleted', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      $customConstraints: 'NOT NULL DEFAULT FALSE',
+      defaultValue: const CustomExpression('FALSE'));
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, name, nickname, birthday, team, city, email, phone, comment];
+  List<GeneratedColumn> get $columns => [
+        id,
+        name,
+        nickname,
+        birthday,
+        team,
+        city,
+        email,
+        phone,
+        comment,
+        isDeleted
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1303,6 +1357,10 @@ class Riders extends Table with TableInfo<Riders, Rider> {
       context.handle(_commentMeta,
           comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
     }
+    if (data.containsKey('is_deleted')) {
+      context.handle(_isDeletedMeta,
+          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
+    }
     return context;
   }
 
@@ -1330,6 +1388,8 @@ class Riders extends Table with TableInfo<Riders, Rider> {
           .read(DriftSqlType.string, data['${effectivePrefix}phone']),
       comment: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}comment']),
+      isDeleted: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
     );
   }
 
@@ -1352,6 +1412,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   final String? email;
   final String? phone;
   final String? comment;
+  final bool isDeleted;
   const Rider(
       {required this.id,
       required this.name,
@@ -1361,7 +1422,8 @@ class Rider extends DataClass implements Insertable<Rider> {
       this.city,
       this.email,
       this.phone,
-      this.comment});
+      this.comment,
+      required this.isDeleted});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1388,6 +1450,7 @@ class Rider extends DataClass implements Insertable<Rider> {
     if (!nullToAbsent || comment != null) {
       map['comment'] = Variable<String>(comment);
     }
+    map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
   }
 
@@ -1410,6 +1473,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       comment: comment == null && nullToAbsent
           ? const Value.absent()
           : Value(comment),
+      isDeleted: Value(isDeleted),
     );
   }
 
@@ -1426,6 +1490,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       email: serializer.fromJson<String?>(json['email']),
       phone: serializer.fromJson<String?>(json['phone']),
       comment: serializer.fromJson<String?>(json['comment']),
+      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
     );
   }
   @override
@@ -1441,6 +1506,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       'email': serializer.toJson<String?>(email),
       'phone': serializer.toJson<String?>(phone),
       'comment': serializer.toJson<String?>(comment),
+      'is_deleted': serializer.toJson<bool>(isDeleted),
     };
   }
 
@@ -1453,7 +1519,8 @@ class Rider extends DataClass implements Insertable<Rider> {
           Value<String?> city = const Value.absent(),
           Value<String?> email = const Value.absent(),
           Value<String?> phone = const Value.absent(),
-          Value<String?> comment = const Value.absent()}) =>
+          Value<String?> comment = const Value.absent(),
+          bool? isDeleted}) =>
       Rider(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -1464,6 +1531,7 @@ class Rider extends DataClass implements Insertable<Rider> {
         email: email.present ? email.value : this.email,
         phone: phone.present ? phone.value : this.phone,
         comment: comment.present ? comment.value : this.comment,
+        isDeleted: isDeleted ?? this.isDeleted,
       );
   Rider copyWithCompanion(RidersCompanion data) {
     return Rider(
@@ -1476,6 +1544,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       email: data.email.present ? data.email.value : this.email,
       phone: data.phone.present ? data.phone.value : this.phone,
       comment: data.comment.present ? data.comment.value : this.comment,
+      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
 
@@ -1490,14 +1559,15 @@ class Rider extends DataClass implements Insertable<Rider> {
           ..write('city: $city, ')
           ..write('email: $email, ')
           ..write('phone: $phone, ')
-          ..write('comment: $comment')
+          ..write('comment: $comment, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
-      id, name, nickname, birthday, team, city, email, phone, comment);
+  int get hashCode => Object.hash(id, name, nickname, birthday, team, city,
+      email, phone, comment, isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1510,7 +1580,8 @@ class Rider extends DataClass implements Insertable<Rider> {
           other.city == this.city &&
           other.email == this.email &&
           other.phone == this.phone &&
-          other.comment == this.comment);
+          other.comment == this.comment &&
+          other.isDeleted == this.isDeleted);
 }
 
 class RidersCompanion extends UpdateCompanion<Rider> {
@@ -1523,6 +1594,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
   final Value<String?> email;
   final Value<String?> phone;
   final Value<String?> comment;
+  final Value<bool> isDeleted;
   const RidersCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -1533,6 +1605,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     this.email = const Value.absent(),
     this.phone = const Value.absent(),
     this.comment = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   });
   RidersCompanion.insert({
     this.id = const Value.absent(),
@@ -1544,6 +1617,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     this.email = const Value.absent(),
     this.phone = const Value.absent(),
     this.comment = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Rider> custom({
     Expression<int>? id,
@@ -1555,6 +1629,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     Expression<String>? email,
     Expression<String>? phone,
     Expression<String>? comment,
+    Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1566,6 +1641,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
       if (email != null) 'email': email,
       if (phone != null) 'phone': phone,
       if (comment != null) 'comment': comment,
+      if (isDeleted != null) 'is_deleted': isDeleted,
     });
   }
 
@@ -1578,7 +1654,8 @@ class RidersCompanion extends UpdateCompanion<Rider> {
       Value<String?>? city,
       Value<String?>? email,
       Value<String?>? phone,
-      Value<String?>? comment}) {
+      Value<String?>? comment,
+      Value<bool>? isDeleted}) {
     return RidersCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -1589,6 +1666,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
       email: email ?? this.email,
       phone: phone ?? this.phone,
       comment: comment ?? this.comment,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 
@@ -1622,6 +1700,9 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     if (comment.present) {
       map['comment'] = Variable<String>(comment.value);
     }
+    if (isDeleted.present) {
+      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    }
     return map;
   }
 
@@ -1636,7 +1717,8 @@ class RidersCompanion extends UpdateCompanion<Rider> {
           ..write('city: $city, ')
           ..write('email: $email, ')
           ..write('phone: $phone, ')
-          ..write('comment: $comment')
+          ..write('comment: $comment, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
@@ -1870,9 +1952,17 @@ class Participants extends Table with TableInfo<Participants, Participant> {
       requiredDuringInsert: false,
       $customConstraints: 'NOT NULL DEFAULT 1',
       defaultValue: const CustomExpression('1'));
+  static const VerificationMeta _isDeletedMeta =
+      const VerificationMeta('isDeleted');
+  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
+      'is_deleted', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      $customConstraints: 'NOT NULL DEFAULT FALSE',
+      defaultValue: const CustomExpression('FALSE'));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, raceId, riderId, number, category, rfid, statusId];
+      [id, raceId, riderId, number, category, rfid, statusId, isDeleted];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1916,6 +2006,10 @@ class Participants extends Table with TableInfo<Participants, Participant> {
       context.handle(_statusIdMeta,
           statusId.isAcceptableOrUnknown(data['status_id']!, _statusIdMeta));
     }
+    if (data.containsKey('is_deleted')) {
+      context.handle(_isDeletedMeta,
+          isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta));
+    }
     return context;
   }
 
@@ -1939,6 +2033,8 @@ class Participants extends Table with TableInfo<Participants, Participant> {
           .read(DriftSqlType.string, data['${effectivePrefix}rfid']),
       statusId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}status_id'])!,
+      isDeleted: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_deleted'])!,
     );
   }
 
@@ -1967,6 +2063,7 @@ class Participant extends DataClass implements Insertable<Participant> {
   /// может быть NULL для быстрого добавления номера на старте
   final String? rfid;
   final int statusId;
+  final bool isDeleted;
   const Participant(
       {required this.id,
       required this.raceId,
@@ -1974,7 +2071,8 @@ class Participant extends DataClass implements Insertable<Participant> {
       required this.number,
       this.category,
       this.rfid,
-      required this.statusId});
+      required this.statusId,
+      required this.isDeleted});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1989,6 +2087,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       map['rfid'] = Variable<String>(rfid);
     }
     map['status_id'] = Variable<int>(statusId);
+    map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
   }
 
@@ -2003,6 +2102,7 @@ class Participant extends DataClass implements Insertable<Participant> {
           : Value(category),
       rfid: rfid == null && nullToAbsent ? const Value.absent() : Value(rfid),
       statusId: Value(statusId),
+      isDeleted: Value(isDeleted),
     );
   }
 
@@ -2017,6 +2117,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       category: serializer.fromJson<String?>(json['category']),
       rfid: serializer.fromJson<String?>(json['rfid']),
       statusId: serializer.fromJson<int>(json['status_id']),
+      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
     );
   }
   @override
@@ -2030,6 +2131,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       'category': serializer.toJson<String?>(category),
       'rfid': serializer.toJson<String?>(rfid),
       'status_id': serializer.toJson<int>(statusId),
+      'is_deleted': serializer.toJson<bool>(isDeleted),
     };
   }
 
@@ -2040,7 +2142,8 @@ class Participant extends DataClass implements Insertable<Participant> {
           int? number,
           Value<String?> category = const Value.absent(),
           Value<String?> rfid = const Value.absent(),
-          int? statusId}) =>
+          int? statusId,
+          bool? isDeleted}) =>
       Participant(
         id: id ?? this.id,
         raceId: raceId ?? this.raceId,
@@ -2049,6 +2152,7 @@ class Participant extends DataClass implements Insertable<Participant> {
         category: category.present ? category.value : this.category,
         rfid: rfid.present ? rfid.value : this.rfid,
         statusId: statusId ?? this.statusId,
+        isDeleted: isDeleted ?? this.isDeleted,
       );
   Participant copyWithCompanion(ParticipantsCompanion data) {
     return Participant(
@@ -2059,6 +2163,7 @@ class Participant extends DataClass implements Insertable<Participant> {
       category: data.category.present ? data.category.value : this.category,
       rfid: data.rfid.present ? data.rfid.value : this.rfid,
       statusId: data.statusId.present ? data.statusId.value : this.statusId,
+      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
 
@@ -2071,14 +2176,15 @@ class Participant extends DataClass implements Insertable<Participant> {
           ..write('number: $number, ')
           ..write('category: $category, ')
           ..write('rfid: $rfid, ')
-          ..write('statusId: $statusId')
+          ..write('statusId: $statusId, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, raceId, riderId, number, category, rfid, statusId);
+  int get hashCode => Object.hash(
+      id, raceId, riderId, number, category, rfid, statusId, isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2089,7 +2195,8 @@ class Participant extends DataClass implements Insertable<Participant> {
           other.number == this.number &&
           other.category == this.category &&
           other.rfid == this.rfid &&
-          other.statusId == this.statusId);
+          other.statusId == this.statusId &&
+          other.isDeleted == this.isDeleted);
 }
 
 class ParticipantsCompanion extends UpdateCompanion<Participant> {
@@ -2100,6 +2207,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   final Value<String?> category;
   final Value<String?> rfid;
   final Value<int> statusId;
+  final Value<bool> isDeleted;
   const ParticipantsCompanion({
     this.id = const Value.absent(),
     this.raceId = const Value.absent(),
@@ -2108,6 +2216,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     this.category = const Value.absent(),
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   });
   ParticipantsCompanion.insert({
     this.id = const Value.absent(),
@@ -2117,6 +2226,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     this.category = const Value.absent(),
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
+    this.isDeleted = const Value.absent(),
   })  : raceId = Value(raceId),
         riderId = Value(riderId),
         number = Value(number);
@@ -2128,6 +2238,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     Expression<String>? category,
     Expression<String>? rfid,
     Expression<int>? statusId,
+    Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2137,6 +2248,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       if (category != null) 'category': category,
       if (rfid != null) 'rfid': rfid,
       if (statusId != null) 'status_id': statusId,
+      if (isDeleted != null) 'is_deleted': isDeleted,
     });
   }
 
@@ -2147,7 +2259,8 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       Value<int>? number,
       Value<String?>? category,
       Value<String?>? rfid,
-      Value<int>? statusId}) {
+      Value<int>? statusId,
+      Value<bool>? isDeleted}) {
     return ParticipantsCompanion(
       id: id ?? this.id,
       raceId: raceId ?? this.raceId,
@@ -2156,6 +2269,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       category: category ?? this.category,
       rfid: rfid ?? this.rfid,
       statusId: statusId ?? this.statusId,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 
@@ -2183,6 +2297,9 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     if (statusId.present) {
       map['status_id'] = Variable<int>(statusId.value);
     }
+    if (isDeleted.present) {
+      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    }
     return map;
   }
 
@@ -2195,7 +2312,8 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
           ..write('number: $number, ')
           ..write('category: $category, ')
           ..write('rfid: $rfid, ')
-          ..write('statusId: $statusId')
+          ..write('statusId: $statusId, ')
+          ..write('isDeleted: $isDeleted')
           ..write(')'))
         .toString();
   }
@@ -3544,36 +3662,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).asyncMap(races.mapFromRow);
   }
 
-  Future<int> _addRace(
-      {required String name,
-      String? startDate,
-      String? finishDate,
-      String? location,
-      String? url,
-      String? description}) {
-    return customInsert(
-      'INSERT INTO races (name, start_date, finish_date, location, url, description) VALUES (?1, ?2, ?3, ?4, ?5, ?6)',
-      variables: [
-        Variable<String>(name),
-        Variable<String>(startDate),
-        Variable<String>(finishDate),
-        Variable<String>(location),
-        Variable<String>(url),
-        Variable<String>(description)
-      ],
-      updates: {races},
-    );
-  }
-
-  Future<int> _deleteRace({required int id}) {
-    return customUpdate(
-      'UPDATE races SET is_deleted = TRUE WHERE id = ?1',
-      variables: [Variable<int>(id)],
-      updates: {races},
-      updateKind: UpdateKind.update,
-    );
-  }
-
   Selectable<Stage> _getStages({required int raceId}) {
     return customSelect(
         'SELECT * FROM stages WHERE race_id = ?1 AND is_deleted = FALSE',
@@ -3585,26 +3673,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).asyncMap(stages.mapFromRow);
   }
 
-  Future<int> _addStage(
-      {int? trailId, required int raceId, required String name}) {
-    return customInsert(
-      'INSERT INTO stages (trail_id, race_id, name) VALUES (?1, ?2, ?3)',
-      variables: [
-        Variable<int>(trailId),
-        Variable<int>(raceId),
-        Variable<String>(name)
-      ],
-      updates: {stages},
-    );
-  }
-
-  Future<int> _deleteStage({required int id}) {
-    return customUpdate(
-      'UPDATE stages SET is_deleted = TRUE WHERE id = ?1',
-      variables: [Variable<int>(id)],
-      updates: {stages},
-      updateKind: UpdateKind.update,
-    );
+  Selectable<Trail> _getTrails() {
+    return customSelect('SELECT * FROM trails WHERE is_deleted = FALSE',
+        variables: [],
+        readsFrom: {
+          trails,
+        }).asyncMap(trails.mapFromRow);
   }
 
   Future<int> _addRider(
@@ -4363,6 +4437,7 @@ typedef $TrailsCreateCompanionBuilder = TrailsCompanion Function({
   Value<Uint8List?> gpxTrack,
   Value<String?> url,
   Value<String?> description,
+  Value<bool> isDeleted,
 });
 typedef $TrailsUpdateCompanionBuilder = TrailsCompanion Function({
   Value<int> id,
@@ -4372,6 +4447,7 @@ typedef $TrailsUpdateCompanionBuilder = TrailsCompanion Function({
   Value<Uint8List?> gpxTrack,
   Value<String?> url,
   Value<String?> description,
+  Value<bool> isDeleted,
 });
 
 class $TrailsFilterComposer extends Composer<_$AppDatabase, Trails> {
@@ -4402,6 +4478,9 @@ class $TrailsFilterComposer extends Composer<_$AppDatabase, Trails> {
 
   ColumnFilters<String> get description => $composableBuilder(
       column: $table.description, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isDeleted => $composableBuilder(
+      column: $table.isDeleted, builder: (column) => ColumnFilters(column));
 }
 
 class $TrailsOrderingComposer extends Composer<_$AppDatabase, Trails> {
@@ -4432,6 +4511,9 @@ class $TrailsOrderingComposer extends Composer<_$AppDatabase, Trails> {
 
   ColumnOrderings<String> get description => $composableBuilder(
       column: $table.description, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isDeleted => $composableBuilder(
+      column: $table.isDeleted, builder: (column) => ColumnOrderings(column));
 }
 
 class $TrailsAnnotationComposer extends Composer<_$AppDatabase, Trails> {
@@ -4462,6 +4544,9 @@ class $TrailsAnnotationComposer extends Composer<_$AppDatabase, Trails> {
 
   GeneratedColumn<String> get description => $composableBuilder(
       column: $table.description, builder: (column) => column);
+
+  GeneratedColumn<bool> get isDeleted =>
+      $composableBuilder(column: $table.isDeleted, builder: (column) => column);
 }
 
 class $TrailsTableManager extends RootTableManager<
@@ -4494,6 +4579,7 @@ class $TrailsTableManager extends RootTableManager<
             Value<Uint8List?> gpxTrack = const Value.absent(),
             Value<String?> url = const Value.absent(),
             Value<String?> description = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
           }) =>
               TrailsCompanion(
             id: id,
@@ -4503,6 +4589,7 @@ class $TrailsTableManager extends RootTableManager<
             gpxTrack: gpxTrack,
             url: url,
             description: description,
+            isDeleted: isDeleted,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -4512,6 +4599,7 @@ class $TrailsTableManager extends RootTableManager<
             Value<Uint8List?> gpxTrack = const Value.absent(),
             Value<String?> url = const Value.absent(),
             Value<String?> description = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
           }) =>
               TrailsCompanion.insert(
             id: id,
@@ -4521,6 +4609,7 @@ class $TrailsTableManager extends RootTableManager<
             gpxTrack: gpxTrack,
             url: url,
             description: description,
+            isDeleted: isDeleted,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -4737,6 +4826,7 @@ typedef $RidersCreateCompanionBuilder = RidersCompanion Function({
   Value<String?> email,
   Value<String?> phone,
   Value<String?> comment,
+  Value<bool> isDeleted,
 });
 typedef $RidersUpdateCompanionBuilder = RidersCompanion Function({
   Value<int> id,
@@ -4748,6 +4838,7 @@ typedef $RidersUpdateCompanionBuilder = RidersCompanion Function({
   Value<String?> email,
   Value<String?> phone,
   Value<String?> comment,
+  Value<bool> isDeleted,
 });
 
 class $RidersFilterComposer extends Composer<_$AppDatabase, Riders> {
@@ -4784,6 +4875,9 @@ class $RidersFilterComposer extends Composer<_$AppDatabase, Riders> {
 
   ColumnFilters<String> get comment => $composableBuilder(
       column: $table.comment, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isDeleted => $composableBuilder(
+      column: $table.isDeleted, builder: (column) => ColumnFilters(column));
 }
 
 class $RidersOrderingComposer extends Composer<_$AppDatabase, Riders> {
@@ -4820,6 +4914,9 @@ class $RidersOrderingComposer extends Composer<_$AppDatabase, Riders> {
 
   ColumnOrderings<String> get comment => $composableBuilder(
       column: $table.comment, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isDeleted => $composableBuilder(
+      column: $table.isDeleted, builder: (column) => ColumnOrderings(column));
 }
 
 class $RidersAnnotationComposer extends Composer<_$AppDatabase, Riders> {
@@ -4856,6 +4953,9 @@ class $RidersAnnotationComposer extends Composer<_$AppDatabase, Riders> {
 
   GeneratedColumn<String> get comment =>
       $composableBuilder(column: $table.comment, builder: (column) => column);
+
+  GeneratedColumn<bool> get isDeleted =>
+      $composableBuilder(column: $table.isDeleted, builder: (column) => column);
 }
 
 class $RidersTableManager extends RootTableManager<
@@ -4890,6 +4990,7 @@ class $RidersTableManager extends RootTableManager<
             Value<String?> email = const Value.absent(),
             Value<String?> phone = const Value.absent(),
             Value<String?> comment = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
           }) =>
               RidersCompanion(
             id: id,
@@ -4901,6 +5002,7 @@ class $RidersTableManager extends RootTableManager<
             email: email,
             phone: phone,
             comment: comment,
+            isDeleted: isDeleted,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -4912,6 +5014,7 @@ class $RidersTableManager extends RootTableManager<
             Value<String?> email = const Value.absent(),
             Value<String?> phone = const Value.absent(),
             Value<String?> comment = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
           }) =>
               RidersCompanion.insert(
             id: id,
@@ -4923,6 +5026,7 @@ class $RidersTableManager extends RootTableManager<
             email: email,
             phone: phone,
             comment: comment,
+            isDeleted: isDeleted,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -5062,6 +5166,7 @@ typedef $ParticipantsCreateCompanionBuilder = ParticipantsCompanion Function({
   Value<String?> category,
   Value<String?> rfid,
   Value<int> statusId,
+  Value<bool> isDeleted,
 });
 typedef $ParticipantsUpdateCompanionBuilder = ParticipantsCompanion Function({
   Value<int> id,
@@ -5071,6 +5176,7 @@ typedef $ParticipantsUpdateCompanionBuilder = ParticipantsCompanion Function({
   Value<String?> category,
   Value<String?> rfid,
   Value<int> statusId,
+  Value<bool> isDeleted,
 });
 
 class $ParticipantsFilterComposer
@@ -5102,6 +5208,9 @@ class $ParticipantsFilterComposer
 
   ColumnFilters<int> get statusId => $composableBuilder(
       column: $table.statusId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get isDeleted => $composableBuilder(
+      column: $table.isDeleted, builder: (column) => ColumnFilters(column));
 }
 
 class $ParticipantsOrderingComposer
@@ -5133,6 +5242,9 @@ class $ParticipantsOrderingComposer
 
   ColumnOrderings<int> get statusId => $composableBuilder(
       column: $table.statusId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get isDeleted => $composableBuilder(
+      column: $table.isDeleted, builder: (column) => ColumnOrderings(column));
 }
 
 class $ParticipantsAnnotationComposer
@@ -5164,6 +5276,9 @@ class $ParticipantsAnnotationComposer
 
   GeneratedColumn<int> get statusId =>
       $composableBuilder(column: $table.statusId, builder: (column) => column);
+
+  GeneratedColumn<bool> get isDeleted =>
+      $composableBuilder(column: $table.isDeleted, builder: (column) => column);
 }
 
 class $ParticipantsTableManager extends RootTableManager<
@@ -5196,6 +5311,7 @@ class $ParticipantsTableManager extends RootTableManager<
             Value<String?> category = const Value.absent(),
             Value<String?> rfid = const Value.absent(),
             Value<int> statusId = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
           }) =>
               ParticipantsCompanion(
             id: id,
@@ -5205,6 +5321,7 @@ class $ParticipantsTableManager extends RootTableManager<
             category: category,
             rfid: rfid,
             statusId: statusId,
+            isDeleted: isDeleted,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -5214,6 +5331,7 @@ class $ParticipantsTableManager extends RootTableManager<
             Value<String?> category = const Value.absent(),
             Value<String?> rfid = const Value.absent(),
             Value<int> statusId = const Value.absent(),
+            Value<bool> isDeleted = const Value.absent(),
           }) =>
               ParticipantsCompanion.insert(
             id: id,
@@ -5223,6 +5341,7 @@ class $ParticipantsTableManager extends RootTableManager<
             category: category,
             rfid: rfid,
             statusId: statusId,
+            isDeleted: isDeleted,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))

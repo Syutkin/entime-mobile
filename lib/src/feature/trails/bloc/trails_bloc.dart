@@ -17,7 +17,9 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
         super(const TrailsState.initial()) {
     on<TrailsEvent>(transformer: sequential(), (event, emit) async {
       // TODO: implement event handler
-      await event.map(getTrails: (_GetTrails value) async {  });
+      await event.map(getTrails: (_GetTrails value) async {
+        // _db.getT
+      });
     });
   }
 }

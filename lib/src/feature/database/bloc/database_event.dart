@@ -22,24 +22,24 @@ class DatabaseEvent with _$DatabaseEvent {
     required bool? updateFinishNumber,
   }) = _EmitState;
 
-  // const factory DatabaseEvent.addRace({
-  //   required String name,
-  //   DateTime? startDate,
-  //   DateTime? finishDate,
-  //   String? location,
-  //   String? url,
-  //   String? description,
-  // }) = _AddRace;
-  //
-  // const factory DatabaseEvent.updateRace({
-  //   required int id,
-  //   String? name,
-  //   DateTime? startDate,
-  //   DateTime? finishDate,
-  //   String? location,
-  //   String? url,
-  //   String? description,
-  // }) = _UpdateRace;
+  const factory DatabaseEvent.addRace({
+    required String name,
+    DateTime? startDate,
+    DateTime? finishDate,
+    String? location,
+    String? url,
+    String? description,
+  }) = _AddRace;
+
+  const factory DatabaseEvent.updateRace({
+    required int id,
+    String? name,
+    DateTime? startDate,
+    DateTime? finishDate,
+    String? location,
+    String? url,
+    String? description,
+  }) = _UpdateRace;
 
   const factory DatabaseEvent.upsertRace({
     int? id,
@@ -59,11 +59,11 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.deselectRace() = _DeselectRace;
 
-  // const factory DatabaseEvent.addStage({
-  //   required String name,
-  //   required int raceId,
-  //   int? trailId,
-  // }) = _AddStage;
+  const factory DatabaseEvent.addStage({
+    required String name,
+    required int raceId,
+    int? trailId,
+  }) = _AddStage;
 
   const factory DatabaseEvent.upsertStage({
     int? id,

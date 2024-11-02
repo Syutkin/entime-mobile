@@ -39,119 +39,261 @@ void main() {
       expect(participantsList.length, 79);
     });
 
-    test('Add race', () async {
-      const raceName = 'race1';
-      final startDate = DateTime(2020, 1, 1);
-      final finishDate = DateTime(2020, 1, 2);
-      const location = 'location';
-      const raceName2 = 'race2';
-      const raceName3 = 'race3';
+    group('Races tests', () {
+      test('Add race', () async {
+        const raceName = 'race1';
+        final startDate = DateTime(2020, 1, 1);
+        final finishDate = DateTime(2020, 1, 2);
+        const location = 'location';
+        const raceName2 = 'race2';
+        const raceName3 = 'race3';
 
-      await db.upsertRace(
-        name: raceName,
-        startDate: startDate,
-        finishDate: finishDate,
-        location: location,
-      );
+        await db.addRace(
+          name: raceName,
+          startDate: startDate,
+          finishDate: finishDate,
+          location: location,
+        );
 
-      List<Race> racesList = await db.getRaces().get();
-      expect(racesList.length, 3);
-      expect(racesList[2].name, raceName);
-      expect(racesList[2].startDate, startDate.toIso8601String());
-      expect(racesList[2].finishDate, finishDate.toIso8601String());
-      expect(racesList[2].location, location);
+        List<Race> racesList = await db.getRaces().get();
+        expect(racesList.length, 3);
+        expect(racesList[2].name, raceName);
+        expect(racesList[2].startDate, startDate.toIso8601String());
+        expect(racesList[2].finishDate, finishDate.toIso8601String());
+        expect(racesList[2].location, location);
 
-      await db.upsertRace(
-        name: raceName2,
-      );
+        await db.addRace(
+          name: raceName2,
+        );
 
-      racesList = await db.getRaces().get();
+        racesList = await db.getRaces().get();
 
-      expect(racesList.length, 4);
-      expect(racesList[3].name, raceName2);
-      expect(racesList[3].startDate, null);
-      expect(racesList[3].finishDate, null);
-      expect(racesList[3].location, null);
+        expect(racesList.length, 4);
+        expect(racesList[3].name, raceName2);
+        expect(racesList[3].startDate, null);
+        expect(racesList[3].finishDate, null);
+        expect(racesList[3].location, null);
 
-      await db.upsertRace(
-        name: raceName3,
-      );
+        await db.addRace(
+          name: raceName3,
+        );
 
-      racesList = await db.getRaces().get();
-      expect(racesList.length, 5);
-      expect(racesList[4].name, raceName3);
+        racesList = await db.getRaces().get();
+        expect(racesList.length, 5);
+        expect(racesList[4].name, raceName3);
+      });
+
+      test('Delete race', () async {
+        const raceName = 'race1';
+        final startDate = DateTime(2020, 1, 1);
+        final finishDate = DateTime(2020, 1, 2);
+        const location = 'location';
+
+        await db.addRace(
+          name: raceName,
+          startDate: startDate,
+          finishDate: finishDate,
+          location: location,
+        );
+
+        var result = await db.deleteRace(1);
+        expect(result, 1);
+        result = await db.deleteRace(2);
+        expect(result, 1);
+
+        final racesList = await db.getRaces().get();
+        expect(racesList.first.name, raceName);
+        expect(racesList.length, 1);
+      });
+
+      test('Get race', () async {
+        const id = 1;
+        final race = await db.getRace(id);
+        expect(race!.id, id);
+      });
+
+      test('Get only non deleted race', () async {
+        const id = 1;
+        var race = await db.getRace(id);
+        expect(race!.id, id);
+        await db.deleteRace(id);
+        race = await db.getRace(id);
+        expect(race, null);
+      });
+
+      test('Update race', () async {
+        const raceName = 'race1';
+        const newName = 'newName';
+        const description = 'description';
+        const location = 'location';
+        const url = 'url';
+        final startDate = DateTime(2020, 1, 1);
+        final finishDate = DateTime(2020, 1, 2);
+
+        final id = await db.addRace(
+          name: raceName,
+        );
+
+        var race = await db.getRace(id);
+        expect(race!.name, raceName);
+        expect(race.description, null);
+        expect(race.url, null);
+        expect(race.location, null);
+        expect(race.startDate, null);
+        expect(race.finishDate, null);
+
+        await db.updateRace(
+          id: id,
+          description: description,
+          name: newName,
+          location: location,
+          url: url,
+          startDate: startDate,
+          finishDate: finishDate,
+        );
+
+        race = await db.getRace(id);
+        expect(race!.name, newName);
+        expect(race.description, description);
+        expect(race.url, url);
+        expect(race.location, location);
+        expect(race.startDate, startDate.toIso8601String());
+        expect(race.finishDate, finishDate.toIso8601String());
+      });
     });
 
-    test('Delete race', () async {
-      const raceName = 'race1';
-      final startDate = DateTime(2020, 1, 1);
-      final finishDate = DateTime(2020, 1, 2);
-      const location = 'location';
+    group('Stages tests', () {
+      test('Add stage', () async {
+        const stageName = 'stage1';
 
-      await db.upsertRace(
-        name: raceName,
-        startDate: startDate,
-        finishDate: finishDate,
-        location: location,
-      );
+        await db.addStage(
+          name: stageName,
+          raceId: 1,
+        );
 
-      var result = await db.deleteRace(id: 1);
-      expect(result, 1);
-      result = await db.deleteRace(id: 2);
-      expect(result, 1);
+        final stagesList = await db.getStages(raceId: 1).get();
+        expect(stagesList[4].name, stageName);
+        expect(stagesList.length, 5);
+      });
 
-      final racesList = await db.getRaces().get();
-      expect(racesList.first.name, raceName);
-      expect(racesList.length, 1);
+      test('Delete stage', () async {
+        const stageName = 'stage1';
+
+        await db.addStage(
+          name: stageName,
+          raceId: 1,
+        );
+
+        var stagesList = await db.getStages(raceId: 1).get();
+        expect(stagesList.length, 5);
+        expect(stagesList[4].name, stageName);
+
+        await db.deleteStage(1);
+        stagesList = await db.getStages(raceId: 1).get();
+        expect(stagesList.length, 4);
+        expect(stagesList[3].name, stageName);
+      });
+
+      test('Update stage', () async {
+        const stageName = 'stage1';
+        const description = 'description';
+        const newName = 'newName';
+
+        final id = await db.addStage(
+          name: stageName,
+          raceId: 1,
+        );
+
+        var stage = await db.getStage(id);
+        expect(stage!.name, stageName);
+        expect(stage.description, null);
+        expect(stage.raceId, 1);
+        expect(stage.isActive, true);
+
+        await db.updateStage(
+          id: id,
+          description: description,
+          name: newName,
+          raceId: 2,
+          isActive: false,
+        );
+
+        stage = await db.getStage(id);
+        expect(stage!.name, newName);
+        expect(stage.description, description);
+        expect(stage.raceId, 2);
+        expect(stage.isActive, false);
+      });
     });
 
-    test('Get race', () async {
-      const id = 1;
-      final race = await db.getRace(id);
-      expect(race!.id, id);
-    });
+    group('Trails tests', () {
+      test('Add trail', () async {
+        const trailName = 'trailName';
 
-    test('Get only non deleted race', () async {
-      const id = 1;
-      var race = await db.getRace(id);
-      expect(race!.id, id);
-      await db.deleteRace(id: id);
-      race = await db.getRace(id);
-      expect(race, null);
-    });
+        var trails = await db.getTrails().get();
+        expect(trails.length, 0);
 
-    // ToDo:
-    test('Update race', () async {});
+        await db.addTrail(name: trailName);
+        trails = await db.getTrails().get();
+        expect(trails.length, 1);
 
-    test('Add stage', () async {
-      const stageName = 'stage1';
+        final trail = trails.first;
+        expect(trail.id, 1);
+        expect(trail.name, trailName);
+        expect(trail.description, null);
+        expect(trail.url, null);
+        expect(trail.distance, null);
+        expect(trail.elevation, null);
+        expect(trail.gpxTrack, null);
+        expect(trail.isDeleted, false);
+      });
 
-      await db.upsertStage(
-        name: stageName,
-        raceId: 1,
-      );
+      test('Delete trail', () async {
+        const trailName = 'trailName';
 
-      final stagesList = await db.getStages(raceId: 1).get();
-      expect(stagesList[4].name, stageName);
-      expect(stagesList.length, 5);
-    });
+        final id = await db.addTrail(name: trailName);
+        var trails = await db.getTrails().get();
+        expect(trails.length, 1);
 
-    test('Delete stage', () async {
-      const stageName = 'stage1';
+        await db.deleteTrail(id);
+        trails = await db.getTrails().get();
+        expect(trails.length, 0);
+      });
 
-      await db.upsertStage(
-        name: stageName,
-        raceId: 1,
-      );
+      test('Update trail', () async {
+        const trailName = 'trailName';
+        const newName = 'newName';
+        const description = 'description';
+        const url = 'url';
+        const distance = 111;
+        const elevation = 222;
+        final gpxTrack = Uint8List.fromList(List.generate(255, (i) => i));
 
-      var stagesList = await db.getStages(raceId: 1).get();
-      expect(stagesList.length, 5);
-      expect(stagesList[4].name, stageName);
+        final id = await db.addTrail(name: trailName);
+        var trails = await db.getTrails().get();
+        expect(trails.length, 1);
 
-      await db.deleteStage(id: 1);
-      stagesList = await db.getStages(raceId: 1).get();
-      expect(stagesList.length, 4);
-      expect(stagesList[3].name, stageName);
+        await db.updateTrail(
+          id: id,
+          description: description,
+          name: newName,
+          url: url,
+          distance: distance,
+          elevation: elevation,
+          gpxTrack: gpxTrack,
+        );
+
+        trails = await db.getTrails().get();
+        final trail = trails.first;
+        expect(trail.id, 1);
+        expect(trail.name, newName);
+        expect(trail.description, description);
+        expect(trail.url, url);
+        expect(trail.distance, distance);
+        expect(trail.elevation, elevation);
+        expect(trail.gpxTrack, gpxTrack);
+        expect(trail.isDeleted, false);
+      });
     });
 
     group('Test setStartingInfo', () {

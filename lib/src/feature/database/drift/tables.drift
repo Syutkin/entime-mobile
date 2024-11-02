@@ -34,7 +34,8 @@ CREATE TABLE riders (
 	city text,
 	email text,
 	phone text,
-	comment text
+	comment text,
+	is_deleted BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE statuses (
@@ -50,6 +51,7 @@ CREATE TABLE participants (
 	category text, /* может быть NULL для быстрого добавления номера на старте */
 	rfid text,
 	status_id integer NOT NULL DEFAULT 1,
+	is_deleted BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (rider_id) REFERENCES riders(id),
     FOREIGN KEY (race_id) REFERENCES races(id),
     FOREIGN KEY (status_id) REFERENCES statuses(id)
@@ -91,7 +93,8 @@ CREATE TABLE trails (
 	elevation integer,
 	gpx_track blob,
 	url text,
-	description text
+	description text,
+	is_deleted BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE logs (
@@ -105,16 +108,21 @@ CREATE TABLE logs (
 
 _getRaces: SELECT * FROM races WHERE is_deleted = false;
 
+/*
 _addRace:
 INSERT INTO races (name, start_date, finish_date, location, url, description)
 VALUES (:name, :start_date, :finish_date, :location, :url, :description);
 
 _deleteRace: UPDATE races SET is_deleted = true WHERE id = :id;
+*/
 
 _getStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false;
+/*
 _addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
 _deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
+*/
 
+_getTrails: SELECT * FROM trails WHERE is_deleted = false;
 
 _addRider:
 INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment)
