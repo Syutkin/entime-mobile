@@ -24,6 +24,10 @@ class Tts {
       });
   }
 
+  Future<String?> get getDefaultEngine async {
+    return flutterTts.getDefaultEngine as String?;
+  }
+
   Future<dynamic> setLanguage(String language) =>
       flutterTts.setLanguage(language);
 
