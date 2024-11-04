@@ -9,8 +9,6 @@ part 'settings_event.dart';
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  SettingsProvider settingsProvider;
-
   SettingsBloc(this.settingsProvider)
       : super(SettingsState(settings: settingsProvider.settings)) {
     on<SettingsEvent>(transformer: sequential(), (event, emit) async {
@@ -29,4 +27,5 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       );
     });
   }
+  SettingsProvider settingsProvider;
 }

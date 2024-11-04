@@ -5,7 +5,7 @@ Future<int?> setDelayPopup(
   int delay,
   String title,
 ) async {
-  int newDelay = delay;
+  var newDelay = delay;
 
   final delayController = TextEditingController()..text = newDelay.toString();
 
@@ -33,7 +33,7 @@ Future<int?> setDelayPopup(
                 if (value == null) {
                   return Localization.current.I18nSettings_incorrectDelay;
                 }
-                final int? integer = int.tryParse(value);
+                final integer = int.tryParse(value);
                 if (integer == null || integer < 0) {
                   return Localization.current.I18nSettings_incorrectDelay;
                 }

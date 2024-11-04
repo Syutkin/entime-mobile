@@ -7,8 +7,8 @@ import '../database.dart';
 
 class StagesItemTile extends StatelessWidget {
   const StagesItemTile({
-    super.key,
     required this.stage,
+    super.key,
   });
 
   final Stage stage;
@@ -35,7 +35,7 @@ class StagesItemTile extends StatelessWidget {
               title: Text(Localization.current.I18nCore_edit),
             ),
           ),
-          PopupMenuDivider(),
+          const PopupMenuDivider(),
           PopupMenuItem<void>(
             // ToDo: confirmation dialog
             onTap: () => context

@@ -12,8 +12,8 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
   var name = trail?.name ?? '';
   var distance = trail?.distance;
   var elevation = trail?.elevation;
-  var gpxTrack = trail?.gpxTrack;
-  var fileExtension = trail?.fileExtension;
+  final gpxTrack = trail?.gpxTrack;
+  final fileExtension = trail?.fileExtension;
   var url = trail?.url;
   var description = trail?.description;
   final formKey = GlobalKey<FormState>();
@@ -147,19 +147,18 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
         TextButton(
           onPressed: () async {
             if (formKey.currentState!.validate()) {
-              final bloc = context.read<TrailsBloc>();
-              bloc.add(
-                TrailsEvent.upsertTrail(
-                  id: trail?.id,
-                  name: name,
-                  elevation: elevation,
-                  distance: distance,
-                  gpxTrack: gpxTrack,
-                  url: url,
-                  description: description,
-                  fileExtension: fileExtension,
-                ),
-              );
+              context.read<TrailsBloc>().add(
+                    TrailsEvent.upsertTrail(
+                      id: trail?.id,
+                      name: name,
+                      elevation: elevation,
+                      distance: distance,
+                      gpxTrack: gpxTrack,
+                      url: url,
+                      description: description,
+                      fileExtension: fileExtension,
+                    ),
+                  );
               Navigator.of(context).pop();
             }
           },

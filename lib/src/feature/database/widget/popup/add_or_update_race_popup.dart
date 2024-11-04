@@ -18,7 +18,7 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
   var url = race?.url;
   var description = race?.description;
   final languageCode = Localizations.localeOf(context).languageCode;
-  final DateFormat formatter = DateFormat.yMd(languageCode);
+  final formatter = DateFormat.yMd(languageCode);
   final dateController = TextEditingController();
   if (startDate != null && finishDate != null) {
     dateController.text =
@@ -129,18 +129,17 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
         TextButton(
           onPressed: () async {
             if (formKey.currentState!.validate()) {
-              final bloc = context.read<DatabaseBloc>();
-                bloc.add(
-                  DatabaseEvent.upsertRace(
-                    id: race?.id,
-                    name: name,
-                    startDate: startDate,
-                    finishDate: finishDate,
-                    location: location,
-                    url: url,
-                    description: description,
-                  ),
-                );
+              context.read<DatabaseBloc>().add(
+                    DatabaseEvent.upsertRace(
+                      id: race?.id,
+                      name: name,
+                      startDate: startDate,
+                      finishDate: finishDate,
+                      location: location,
+                      url: url,
+                      description: description,
+                    ),
+                  );
               Navigator.of(context).pop();
             }
           },

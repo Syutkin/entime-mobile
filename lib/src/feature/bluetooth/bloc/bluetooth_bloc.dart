@@ -18,32 +18,6 @@ part 'bluetooth_bloc_event.dart';
 part 'bluetooth_bloc_state.dart';
 
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
-  final IBluetoothProvider _bluetoothProvider;
-
-  final AppDatabase _database;
-  final IAudioController _audioController;
-  final SettingsProvider _settingsProvider;
-
-  BluetoothDevice? _bluetoothDevice;
-
-  bool _reconnect = true;
-  bool _reconnectActive = false;
-  final int _reconnectDelay = 1;
-
-  bool _isEnabled = false;
-
-  int _stageId = -1;
-
-  StreamSubscription<String>? _messageSubscription;
-
-  late StreamSubscription<AppSettings> _settingsSubscription;
-
-  late StreamSubscription<BluetoothState> _btStateSubscription;
-
-  BluetoothDevice? get bluetoothDevice => _bluetoothDevice;
-
-  IBluetoothProvider get bluetoothProvider => _bluetoothProvider;
-
   BluetoothBloc({
     required IBluetoothProvider bluetoothProvider,
     required AppDatabase database,
@@ -64,7 +38,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         .listen((btState) {
       if (btState == BluetoothState.STATE_OFF ||
           btState == BluetoothState.STATE_ON) {
-        add(BluetoothEvent.initialize());
+        add(const BluetoothEvent.initialize());
       }
     });
 
@@ -154,10 +128,12 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               _messageSubscription = bluetoothProvider
                   .bluetoothBackgroundConnection.message
                   .listen(
-                (message) => add(BluetoothEvent.messageReceived(
-                  message: message,
-                  stageId: _stageId,
-                )),
+                (message) => add(
+                  BluetoothEvent.messageReceived(
+                    message: message,
+                    stageId: _stageId,
+                  ),
+                ),
               );
               bluetoothProvider.bluetoothBackgroundConnection.onDisconnect(() {
                 add(const BluetoothEvent.disconnected());
@@ -229,11 +205,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         },
         messageReceived: (event) {
           //Пришло соообщение из Bluetooth serial
-          final DateTime now = DateTime.now();
+          final now = DateTime.now();
           logger.i(
             'Bluetooth -> Received message: ${event.message}, time: $now',
           );
-          final BluetoothMessage message = _parseBT(event.message, now);
+          final message = _parseBT(event.message, now);
           message.when(
             automaticStart: (automaticStart) {
               emit(BluetoothBlocState.connected(message: message));
@@ -288,6 +264,32 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     });
   }
 
+  final IBluetoothProvider _bluetoothProvider;
+
+  final AppDatabase _database;
+  final IAudioController _audioController;
+  final SettingsProvider _settingsProvider;
+
+  BluetoothDevice? _bluetoothDevice;
+
+  bool _reconnect = true;
+  bool _reconnectActive = false;
+  final int _reconnectDelay = 1;
+
+  bool _isEnabled = false;
+
+  int _stageId = -1;
+
+  StreamSubscription<String>? _messageSubscription;
+
+  late StreamSubscription<AppSettings> _settingsSubscription;
+
+  late StreamSubscription<BluetoothState> _btStateSubscription;
+
+  BluetoothDevice? get bluetoothDevice => _bluetoothDevice;
+
+  IBluetoothProvider get bluetoothProvider => _bluetoothProvider;
+
   @override
   Future<void> close() {
     _messageSubscription?.cancel();
@@ -298,7 +300,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   }
 
   BluetoothMessage _parseBT(String message, DateTime now) {
-    String parsedMessage = message;
+    var parsedMessage = message;
     _database.addLog(
       level: LogLevel.information,
       source: LogSource.bluetooth,
@@ -308,16 +310,17 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     if (parsedMessage.startsWith(r'$') && parsedMessage.endsWith('#')) {
       try {
         parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
-        final List<String> messageList = parsedMessage.split(';');
-        final int correction = int.parse(messageList[1]);
+        final messageList = parsedMessage.split(';');
+        final correction = int.parse(messageList[1]);
         logger
           ..d('Bluetooth -> correction: $correction')
           ..d('Bluetooth -> gotime: ${messageList.first}');
-        final AutomaticStart automaticStart = AutomaticStart(
+        final automaticStart = AutomaticStart(
           messageList.first,
           correction,
           now.toUtc(),
           // Проверяем обновлять или нет в HomeScreen BlocListener
+          // ignore: avoid_redundant_argument_values
           updating: false,
         );
         return BluetoothMessage.automaticStart(
@@ -329,7 +332,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           error: e,
         );
         return const BluetoothMessage.empty();
-      } on Error catch (e) {
+      } catch (e) {
         logger.e(
           'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage',
           error: e,
@@ -348,7 +351,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
       parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
       logger.t('Bluetooth -> Message parsed: finish: $parsedMessage');
       return BluetoothMessage.finish(
-          time: parsedMessage, timestamp: now.toUtc());
+        time: parsedMessage,
+        timestamp: now.toUtc(),
+      );
     } else if (parsedMessage.startsWith('{') && parsedMessage.endsWith('}')) {
       logger.i('Bluetooth -> Parsing JSON...');
       return BluetoothMessage.moduleSettings(json: parsedMessage);

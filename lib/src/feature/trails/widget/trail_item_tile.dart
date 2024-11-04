@@ -9,8 +9,8 @@ import '../bloc/trails_bloc.dart';
 
 class TrailItemTile extends StatelessWidget {
   const TrailItemTile({
-    super.key,
     required this.trail,
+    super.key,
   });
 
   final Trail trail;
@@ -34,7 +34,7 @@ class TrailItemTile extends StatelessWidget {
               title: Text(Localization.current.I18nCore_edit),
             ),
           ),
-          PopupMenuDivider(),
+          const PopupMenuDivider(),
           PopupMenuItem<void>(
             // ToDo: confirmation dialog
             onTap: () => context

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CountdownWidget extends StatelessWidget {
-  final double size;
-  final String text;
-  final double elevation;
-
   const CountdownWidget({
     super.key,
     this.size = 75,
@@ -12,16 +8,18 @@ class CountdownWidget extends StatelessWidget {
     this.elevation = 6,
   });
 
+  final double size;
+  final String text;
+  final double elevation;
+
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final FloatingActionButtonThemeData floatingActionButtonTheme =
-        theme.floatingActionButtonTheme;
-    final Color foregroundColor = floatingActionButtonTheme.foregroundColor ??
+    final theme = Theme.of(context);
+    final floatingActionButtonTheme = theme.floatingActionButtonTheme;
+    final foregroundColor = floatingActionButtonTheme.foregroundColor ??
         theme.colorScheme.onPrimaryContainer;
-    final Color backgroundColor = floatingActionButtonTheme.backgroundColor ??
+    final backgroundColor = floatingActionButtonTheme.backgroundColor ??
         theme.colorScheme.primaryContainer;
-
 
     return Container(
       width: size,

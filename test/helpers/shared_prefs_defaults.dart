@@ -1,4 +1,4 @@
-var sharedPrefsDefaults = <String, Object>{
+Map<String, Object> sharedPrefsDefaults = <String, Object>{
   'sound': true,
   'beep': true,
   'voice': true,

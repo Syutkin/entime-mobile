@@ -6,22 +6,21 @@ import '../../../common/utils/extension_on_string.dart';
 import '../database.dart';
 
 class FinishItemTile extends StatelessWidget {
-  final GestureTapCallback? onTap;
-  final GestureTapDownCallback? onTapDown;
-  final GestureLongPressCallback? onLongPress;
-  final DismissDirectionCallback? onDismissed;
-  final DragTargetAcceptWithDetails<int>? onAccept;
-  final Finish item;
-
   const FinishItemTile({
-    super.key,
     required this.item,
+    super.key,
     this.onTap,
     this.onTapDown,
     this.onLongPress,
     this.onDismissed,
     this.onAccept,
   });
+  final GestureTapCallback? onTap;
+  final GestureTapDownCallback? onTapDown;
+  final GestureLongPressCallback? onLongPress;
+  final DismissDirectionCallback? onDismissed;
+  final DragTargetAcceptWithDetails<int>? onAccept;
+  final Finish item;
 
   @override
   Widget build(BuildContext context) => Dismissible(
@@ -68,16 +67,18 @@ class FinishItemTile extends StatelessWidget {
               onAccept?.call(details);
             },
             builder: (context, candidateData, rejectedData) => Card(
-              margin: const EdgeInsets.all(2.0),
+              margin: const EdgeInsets.all(2),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8),
                 child: Row(
                   children: <Widget>[
                     Flexible(
                       flex: 15,
                       child: Align(
                         child: _addIcon(
-                            context, item.isManual), //Icon(Icons.add_circle),
+                          context,
+                          item.isManual,
+                        ), //Icon(Icons.add_circle),
                       ),
                     ),
                     Flexible(

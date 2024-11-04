@@ -1,10 +1,10 @@
 part of 'popups.dart';
 
 class Note {
+  Note(this.name, this.frequency);
+
   int frequency;
   String name;
-
-  Note(this.name, this.frequency);
 }
 
 Future<int?> buzzerFrequencyPopup({
@@ -12,7 +12,7 @@ Future<int?> buzzerFrequencyPopup({
   required BuildContext context,
   required int frequency,
 }) async {
-  final List<Note> notes = [
+  final notes = <Note>[
     Note('B0', 31),
     Note('C1', 33),
     Note('CS1', 35),
@@ -105,8 +105,8 @@ Future<int?> buzzerFrequencyPopup({
   ];
 
   int startNote() {
-    int i = 0;
-    for (final Note note in notes) {
+    var i = 0;
+    for (final note in notes) {
       if (note.frequency == frequency) {
         return i;
       }
@@ -115,7 +115,7 @@ Future<int?> buzzerFrequencyPopup({
     return 53; //default, note E5, 659Hz
   }
 
-  double value = startNote().toDouble();
+  var value = startNote().toDouble();
 
   return showDialog<int>(
     context: context,

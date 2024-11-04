@@ -22,11 +22,11 @@ Future<void> selectBluetoothDevice(BuildContext context) async {
 }
 
 class SelectBondedDeviceScreen extends StatefulWidget {
+  const SelectBondedDeviceScreen({this.checkAvailability = true, super.key});
+
   /// If true, on page start there is performed discovery upon the bonded devices.
   /// Then, if they are not available, they would be disabled from the selection.
   final bool checkAvailability;
-
-  const SelectBondedDeviceScreen({this.checkAvailability = true, super.key});
 
   @override
   State<SelectBondedDeviceScreen> createState() => _SelectBondedDeviceScreen();
@@ -80,7 +80,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
     _discoveryStreamSubscription =
         FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
       setState(() {
-        final Iterator<BluetoothDeviceWithAvailability> i = devices.iterator;
+        final i = devices.iterator;
         while (i.moveNext()) {
           final device = i.current;
           if (device.device == r.device) {
@@ -108,7 +108,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<BluetoothDeviceListEntry> list = devices
+    final list = devices
         .map(
           (device) => BluetoothDeviceListEntry(
             device: device.device,
@@ -124,21 +124,22 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
       appBar: AppBar(
         title: Text(Localization.current.I18nBluetooth_selectDevice),
         actions: <Widget>[
-          _isDiscovering
-              ? FittedBox(
-                  child: Container(
-                    margin: const EdgeInsets.all(16),
-                    child: const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.white,
-                      ),
-                    ),
+          if (_isDiscovering)
+            FittedBox(
+              child: Container(
+                margin: const EdgeInsets.all(16),
+                child: const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Colors.white,
                   ),
-                )
-              : IconButton(
-                  icon: const Icon(Icons.replay),
-                  onPressed: _restartDiscovery,
                 ),
+              ),
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.replay),
+              onPressed: _restartDiscovery,
+            ),
         ],
       ),
       body: ListView(children: list),

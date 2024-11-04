@@ -4,17 +4,11 @@ import '../audio.dart';
 
 abstract class IAudioService {
   Future<void> countdown();
+
   Future<void> speak(String text);
 }
 
 class AudioService implements IAudioService {
-  final IAudioProvider _audio = AudioProvider();
-  final SettingsProvider _settings;
-
-  bool _sound = true;
-  bool _voice = true;
-  bool _beep = true;
-
   AudioService({required SettingsProvider settings}) : _settings = settings {
     _settings.state.listen((settings) {
       _sound = settings.sound;
@@ -27,6 +21,13 @@ class AudioService implements IAudioService {
         ..setPitch(settings.pitch);
     });
   }
+
+  final IAudioProvider _audio = AudioProvider();
+  final SettingsProvider _settings;
+
+  bool _sound = true;
+  bool _voice = true;
+  bool _beep = true;
 
   @override
   Future<void> countdown() async {

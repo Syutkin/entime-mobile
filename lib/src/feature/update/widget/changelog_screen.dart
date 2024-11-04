@@ -4,9 +4,8 @@ import '../../../common/localization/localization.dart';
 import 'changelog_markdown.dart';
 
 class ChangelogScreen extends StatelessWidget {
-  final String markdownData;
-
   const ChangelogScreen({required this.markdownData, super.key});
+  final String markdownData;
 
   @override
   Widget build(BuildContext context) => Scaffold(

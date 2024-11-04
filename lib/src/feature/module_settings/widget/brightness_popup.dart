@@ -5,7 +5,7 @@ Future<int?> brightnessPopup({
   required int initialValue,
   required BuildContext context,
 }) async {
-  double brightness = initialValue.toDouble();
+  var brightness = initialValue.toDouble();
   return showDialog<int>(
     context: context,
     builder: (context) => AlertDialog(

@@ -6,12 +6,12 @@ import 'utils/dbm_text_style.dart';
 
 class BluetoothDeviceListEntry extends ListTile {
   BluetoothDeviceListEntry({
-    super.key,
     required BluetoothDevice device,
     int? rssi,
     super.onTap,
     super.onLongPress,
     super.enabled,
+    super.key,
   }) : super(
           leading: const Icon(Icons.devices),
           // @TODO . !BluetoothClass! class aware icon
@@ -37,15 +37,15 @@ class BluetoothDeviceListEntry extends ListTile {
                   ),
                 )
               else
-                const SizedBox(width: 0, height: 0),
+                const SizedBox.shrink(),
               if (device.isConnected)
                 const Icon(Icons.import_export)
               else
-                const SizedBox(width: 0, height: 0),
+                const SizedBox.shrink(),
               if (device.isBonded)
                 const Icon(Icons.link)
               else
-                const SizedBox(width: 0, height: 0),
+                const SizedBox.shrink(),
             ],
           ),
         );

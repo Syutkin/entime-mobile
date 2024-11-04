@@ -6,27 +6,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'connectivity_bloc.freezed.dart';
+
 part 'connectivity_event.dart';
+
 part 'connectivity_state.dart';
 
 class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
-  final IConnectivityProvider _connectivityProvider;
-  late StreamSubscription<bool> _onConnectionSubscription;
-
   ConnectivityBloc(IConnectivityProvider connectivityProvider)
       : _connectivityProvider = connectivityProvider,
-        super(const ConnectivityState.state(false)) {
+        super(const ConnectivityState.state(isConnected: false)) {
     _onConnectionSubscription =
         _connectivityProvider.onConnectivityChanged.listen((data) {
-      add(ConnectivityEvent.emit(data));
+      add(ConnectivityEvent.emit(isConnected: data));
     });
 
     on<ConnectivityEvent>(transformer: sequential(), (event, emit) {
-      event.map(emit: (value) {
-        emit(ConnectivityState.state(event.isConnected));
-      });
+      event.map(
+        emit: (value) {
+          emit(ConnectivityState.state(isConnected: event.isConnected));
+        },
+      );
     });
   }
+
+  final IConnectivityProvider _connectivityProvider;
+  late StreamSubscription<bool> _onConnectionSubscription;
 
   @override
   Future<void> close() {

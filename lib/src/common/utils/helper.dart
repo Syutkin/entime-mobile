@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 /// Scrolls lists to end
 void scrollToEnd(ScrollController scrollController) {
   scrollController.animateTo(
@@ -9,4 +8,3 @@ void scrollToEnd(ScrollController scrollController) {
     curve: Curves.fastOutSlowIn,
   );
 }
-

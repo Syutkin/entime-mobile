@@ -8,9 +8,8 @@ import '../../app_info/bloc/app_info_cubit.dart';
 import '../../update/widget/changelog_screen.dart';
 
 class AboutPopup extends StatelessWidget {
-  static const double _textVerticalSeparation = 18;
-
   const AboutPopup({super.key});
+  static const double _textVerticalSeparation = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,7 @@ class AboutPopup extends StatelessWidget {
                               text: 'syutkin@fraction.team',
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () async {
-                                  final Uri emailLaunchUri = Uri(
+                                  final emailLaunchUri = Uri(
                                     scheme: 'mailto',
                                     path: 'syutkin@fraction.team',
                                     queryParameters: <String, String>{
@@ -95,8 +94,7 @@ class AboutPopup extends StatelessWidget {
         TextButton(
           onPressed: () async {
             final navigator = Navigator.of(context);
-            final String changelogData =
-                await rootBundle.loadString('CHANGELOG.md');
+            final changelogData = await rootBundle.loadString('CHANGELOG.md');
             await navigator.push(
               MaterialPageRoute<void>(
                 builder: (context) =>

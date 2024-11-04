@@ -8,11 +8,11 @@ import '../../drift/app_database.dart';
 Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
   final numberController = TextEditingController()
     ..text = (item.number ?? '').toString();
-  int number = 0;
+  var number = 0;
   final databaseBloc = context.read<DatabaseBloc>();
   final finishId = item.id;
   final finishTime = item.finishTime;
-  Stage? stage = databaseBloc.state.stage;
+  final stage = databaseBloc.state.stage;
 
   final formKey = GlobalKey<FormState>();
   if (stage != null) {
@@ -38,7 +38,7 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
                   if (value == null) {
                     return Localization.current.I18nProtocol_incorrectNumber;
                   }
-                  final int? num = int.tryParse(value);
+                  final num = int.tryParse(value);
                   if (num == null || num < 1) {
                     return Localization.current.I18nProtocol_incorrectNumber;
                   }
@@ -76,14 +76,15 @@ Future<void> addFinishNumberPopup(BuildContext context, Finish item) async {
             listener: (context, state) async {
               if (state.updateFinishNumber != null &&
                   !state.updateFinishNumber!) {
-                final bool? update =
-                    await updateFinishTimePopup(context, number);
+                final update = await updateFinishTimePopup(context, number);
                 if (update != null && update) {
                   databaseBloc
-                    ..add(DatabaseEvent.clearNumberAtFinish(
-                      stage: stage,
-                      number: number,
-                    ))
+                    ..add(
+                      DatabaseEvent.clearNumberAtFinish(
+                        stage: stage,
+                        number: number,
+                      ),
+                    )
                     ..add(
                       DatabaseEvent.addNumberToFinish(
                         finishId: finishId,

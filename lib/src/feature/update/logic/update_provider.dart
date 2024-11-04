@@ -19,6 +19,13 @@ typedef DownloadHandler = void Function(int current, int total);
 typedef ErrorHandler = void Function(String error);
 
 class UpdateProvider {
+  UpdateProvider._(
+    http.Client client,
+    AppInfoProvider appInfo,
+    SettingsProvider settingsProvider,
+  )   : _client = client,
+        _appInfo = appInfo,
+        _settingsProvider = settingsProvider;
   final http.Client _client;
   Release? _latestRelease;
 
@@ -37,14 +44,6 @@ class UpdateProvider {
   String get latestVersion => _latestRelease?.tagName ?? '';
 
   int? _updateFileSize = -1;
-
-  UpdateProvider._(
-    http.Client client,
-    AppInfoProvider appInfo,
-    SettingsProvider settingsProvider,
-  )   : _client = client,
-        _appInfo = appInfo,
-        _settingsProvider = settingsProvider;
 
   static Future<UpdateProvider> init({
     required http.Client client,
@@ -106,8 +105,8 @@ class UpdateProvider {
       logger.e('Update_provider -> Exception', error: e);
       return null;
       // Может возникнуть при получении некорректного json от github
-    } on Error catch (e) {
-      logger.e('Update_provider -> Error', error: e, stackTrace: e.stackTrace);
+    } catch (e, st) {
+      logger.e('Update_provider -> Error', error: e, stackTrace: st);
       return null;
     }
   }
@@ -125,7 +124,7 @@ class UpdateProvider {
             '$_dir/${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk',
           );
 
-          String url = '';
+          var url = '';
 
           for (final asset in _latestRelease!.assets) {
             if (asset.name ==
@@ -136,14 +135,14 @@ class UpdateProvider {
 
           final request = http.Request('GET', Uri.parse(url));
           // _client = http.Client();
-          final http.StreamedResponse response = await _client.send(request);
+          final response = await _client.send(request);
 
           _updateFileSize = response.contentLength;
 
           if (_updateFileSize != null) {
             logger.d('Update_provider -> contentLength: $_updateFileSize');
 
-            final List<int> bytes = [];
+            final bytes = <int>[];
 
             response.stream.listen(
               (newBytes) {

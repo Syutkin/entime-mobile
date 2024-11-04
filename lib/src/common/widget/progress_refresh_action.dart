@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ProgressRefreshAction extends StatelessWidget {
-  final bool isLoading;
-  final void Function() onPressed;
-
   const ProgressRefreshAction({
     required this.isLoading,
     required this.onPressed,
     super.key,
   });
+
+  final bool isLoading;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {

@@ -22,9 +22,8 @@ class BluetoothTile extends StatelessWidget {
           BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
               Localization.current.I18nInit_pressToSelect,
         ),
-        trailing: state is BluetoothConnected
-            ? _bluetoothButtons(context)
-            : null,
+        trailing:
+            state is BluetoothConnected ? _bluetoothButtons(context) : null,
       ),
     );
   }

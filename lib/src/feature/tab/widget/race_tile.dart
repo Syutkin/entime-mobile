@@ -15,34 +15,36 @@ class RaceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, databaseState) {
-        void routeToSelectRace() {
-          if (databaseState.race != null && databaseState.stage != null) {
-            context.read<DatabaseBloc>().add(DatabaseEvent.deselectRace());
+        builder: (context, databaseState) {
+          void routeToSelectRace() {
+            if (databaseState.race != null && databaseState.stage != null) {
+              context
+                  .read<DatabaseBloc>()
+                  .add(const DatabaseEvent.deselectRace());
+            }
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (context) => const _SelectRaceRouterWidget(),
+              ),
+            );
           }
-          Navigator.of(context).push(
-            MaterialPageRoute<void>(
-                builder: (context) => const _SelectRaceRouterWidget()),
-          );
-        }
 
-        return ListTile(
-          onTap: () => routeToSelectRace(),
-          leading: IconButton(
-            icon: Icon(MdiIcons.flagCheckered),
-            onPressed: () {
-              routeToSelectRace();
-            },
-          ),
-          title: databaseState.race == null
-              ? Text(Localization.current.I18nInit_selectRace)
-              : Text(databaseState.race!.name),
-          subtitle: databaseState.stage == null
-              ? Text(Localization.current.I18nInit_selectStage)
-              : Text(databaseState.stage!.name),
-          trailing: _RaceMenuButton(),
-        );
-      });
+          return ListTile(
+            onTap: routeToSelectRace,
+            leading: IconButton(
+              icon: Icon(MdiIcons.flagCheckered),
+              onPressed: routeToSelectRace,
+            ),
+            title: databaseState.race == null
+                ? Text(Localization.current.I18nInit_selectRace)
+                : Text(databaseState.race!.name),
+            subtitle: databaseState.stage == null
+                ? Text(Localization.current.I18nInit_selectStage)
+                : Text(databaseState.stage!.name),
+            trailing: const _RaceMenuButton(),
+          );
+        },
+      );
 }
 
 class _SelectRaceRouterWidget extends StatelessWidget {
@@ -50,28 +52,31 @@ class _SelectRaceRouterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body:
-        BlocBuilder<DatabaseBloc, DatabaseState>(builder: (context, state) {
-      var race = state.race;
-      var stage = state.stage;
-      if (race == null) {
-        return RacesListPage();
-      } else {
-        if (stage == null) {
-          return StagesListPage(
-            race: race,
-          );
-        } else {
-          _onWidgetDidBuild(() {
-            Navigator.pop(context);
-          });
-        }
-      }
-      return const SizedBox();
-    }));
+    return Scaffold(
+      body: BlocBuilder<DatabaseBloc, DatabaseState>(
+        builder: (context, state) {
+          final race = state.race;
+          final stage = state.stage;
+          if (race == null) {
+            return const RacesListPage();
+          } else {
+            if (stage == null) {
+              return StagesListPage(
+                race: race,
+              );
+            } else {
+              _onWidgetDidBuild(() {
+                Navigator.pop(context);
+              });
+            }
+          }
+          return const SizedBox();
+        },
+      ),
+    );
   }
 
-  void _onWidgetDidBuild(Function callback) {
+  void _onWidgetDidBuild(void Function() callback) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       callback();
     });
@@ -84,8 +89,7 @@ class _RaceMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final databaseBloc = context.read<DatabaseBloc>();
-    final menuItems = <PopupMenuEntry<RaceMenuButton>>[];
-    menuItems.add(
+    final menuItems = <PopupMenuEntry<RaceMenuButton>>[
       PopupMenuItem(
         value: RaceMenuButton.import,
         child: ListTile(
@@ -93,17 +97,16 @@ class _RaceMenuButton extends StatelessWidget {
           title: Text(Localization.current.I18nInit_importFromCsv),
         ),
       ),
-    );
+    ];
     return PopupMenuButton<RaceMenuButton>(
       itemBuilder: (context) => menuItems,
       onSelected: (value) async {
         switch (value) {
           case RaceMenuButton.import:
-            var race = await StartlistProvider().getStartCsv();
+            final race = await StartlistProvider().getStartCsv();
             if (race != null) {
               databaseBloc.add(DatabaseEvent.createRaceFromRaceCsv(race: race));
             }
-            break;
         }
       },
     );

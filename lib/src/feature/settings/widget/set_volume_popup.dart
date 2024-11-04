@@ -4,7 +4,7 @@ Future<double?> setVolumePopup(
   BuildContext context,
   SettingsState settingsState,
 ) async {
-  double value = settingsState.settings.volume;
+  var value = settingsState.settings.volume;
   return showDialog<double>(
     context: context,
     builder: (context) => AlertDialog(

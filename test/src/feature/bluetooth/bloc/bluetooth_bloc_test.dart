@@ -47,8 +47,9 @@ void main() {
   setUpAll(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMessageHandler(
-            'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
-            (obj) async => obj);
+      'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
+      (obj) async => obj,
+    );
   });
 
   group('BluetoothBloc:', () {
@@ -60,7 +61,7 @@ void main() {
       bluetoothBackgroundConnection = MockBluetoothBackgroundConnection();
       database = MockAppDatabase();
       audioController = MockAudioController();
-      settings = AppSettings.defaults();
+      settings = const AppSettings.defaults();
 
       when(
         () => bluetoothProvider.flutterBluetoothSerial,
@@ -125,13 +126,17 @@ void main() {
       );
       when(
         () => audioController.playCountdown(
-            time: any(named: 'time'), stageId: any(named: 'stageId')),
+          time: any(named: 'time'),
+          stageId: any(named: 'stageId'),
+        ),
       ).thenAnswer(
         (_) => Future.value(),
       );
       when(
         () => audioController.callParticipant(
-            time: any(named: 'time'), stageId: any(named: 'stageId')),
+          time: any(named: 'time'),
+          stageId: any(named: 'stageId'),
+        ),
       ).thenAnswer(
         (_) => Future.value(),
       );
@@ -654,7 +659,8 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(
-            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+          BluetoothEvent.messageReceived(message: message, stageId: stageId),
+        ),
         expect: () => <Matcher>[
           isA<BluetoothConnected>().having(
             (state) => state.message,
@@ -706,7 +712,8 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(
-            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+          BluetoothEvent.messageReceived(message: message, stageId: stageId),
+        ),
         expect: () => <BluetoothBlocState>[],
       );
 
@@ -733,7 +740,8 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(
-            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+          BluetoothEvent.messageReceived(message: message, stageId: stageId),
+        ),
         expect: () => <Matcher>[
           isA<BluetoothConnected>().having(
             (state) => state.message,
@@ -770,7 +778,8 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(
-            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+          BluetoothEvent.messageReceived(message: message, stageId: stageId),
+        ),
         expect: () => <BluetoothBlocState>[],
       );
 
@@ -797,7 +806,8 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(
-            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+          BluetoothEvent.messageReceived(message: message, stageId: stageId),
+        ),
         expect: () => <BluetoothBlocState>[],
       );
 
@@ -824,7 +834,8 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(
-            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+          BluetoothEvent.messageReceived(message: message, stageId: stageId),
+        ),
         expect: () => <Matcher>[
           isA<BluetoothConnected>().having(
             (state) => state.message,
@@ -861,7 +872,8 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) => bloc.add(
-            BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+          BluetoothEvent.messageReceived(message: message, stageId: stageId),
+        ),
         expect: () => <BluetoothBlocState>[],
       );
     });

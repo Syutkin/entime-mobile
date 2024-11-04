@@ -52,13 +52,10 @@ class HomeScreen extends StatelessWidget {
                     switch (index) {
                       case 0:
                         bloc.add(const TabEvent.updated(AppTab.init));
-                        break;
                       case 1:
                         bloc.add(const TabEvent.updated(AppTab.start));
-                        break;
                       case 2:
                         bloc.add(const TabEvent.updated(AppTab.finish));
-                        break;
                     }
                   },
                   tabs: <Widget>[
@@ -88,8 +85,8 @@ class HomeScreen extends StatelessWidget {
             connected: (message) {
               message?.whenOrNull(
                 automaticStart: (automaticStart) {
-                  var databaseBloc = context.read<DatabaseBloc>();
-                  var stageId = databaseBloc.state.stage?.id;
+                  final databaseBloc = context.read<DatabaseBloc>();
+                  final stageId = databaseBloc.state.stage?.id;
                   if (stageId != null) {
                     databaseBloc.add(
                       DatabaseEvent.updateAutomaticCorrection(
@@ -103,8 +100,8 @@ class HomeScreen extends StatelessWidget {
                   }
                 },
                 finish: (time, timestamp) {
-                  var databaseBloc = context.read<DatabaseBloc>();
-                  var stage = databaseBloc.state.stage;
+                  final databaseBloc = context.read<DatabaseBloc>();
+                  final stage = databaseBloc.state.stage;
                   if (stage != null) {
                     databaseBloc.add(
                       DatabaseEvent.addFinishTime(
@@ -133,43 +130,45 @@ class HomeScreen extends StatelessWidget {
           // Обновление автоматического времени старта
           final notification = state.notification;
           if (notification != null) {
-            notification.mapOrNull(updateAutomaticCorrection: (data) async {
-              final prevCorrection =
-                  data.previousStarts.first.automaticCorrection;
-              // Если новая поправка для номера отличается от предыдущей
-              // более чем на две секунды, то уточняем, точно ли обновлять?
-              // Если разница менее двух секунд, то молча игнорируем отсечку
-              final updateStartCorrectionDelay = context
-                  .read<SettingsBloc>()
-                  .state
-                  .settings
-                  .updateStartCorrectionDelay;
-              if (prevCorrection != null &&
-                  data.correction - prevCorrection >
-                      updateStartCorrectionDelay) {
-                final String text =
-                    Localization.current.I18nHome_updateAutomaticCorrection(
-                  data.number,
-                  data.previousStarts.first.automaticCorrection!,
-                  data.correction,
-                );
-                final bool? update = await overwriteStartTimePopup(
-                  context: context,
-                  text: text,
-                );
-                if (update ?? false) {
-                  databaseBloc.add(
-                    DatabaseEvent.updateAutomaticCorrection(
-                      stageId: data.previousStarts.first.stageId,
-                      startTime: data.startTime,
-                      timestamp: data.timestamp,
-                      correction: data.correction,
-                      forceUpdate: true,
-                    ),
+            await notification.mapOrNull(
+              updateAutomaticCorrection: (data) async {
+                final prevCorrection =
+                    data.previousStarts.first.automaticCorrection;
+                // Если новая поправка для номера отличается от предыдущей
+                // более чем на две секунды, то уточняем, точно ли обновлять?
+                // Если разница менее двух секунд, то молча игнорируем отсечку
+                final updateStartCorrectionDelay = context
+                    .read<SettingsBloc>()
+                    .state
+                    .settings
+                    .updateStartCorrectionDelay;
+                if (prevCorrection != null &&
+                    data.correction - prevCorrection >
+                        updateStartCorrectionDelay) {
+                  final text =
+                      Localization.current.I18nHome_updateAutomaticCorrection(
+                    data.number,
+                    data.previousStarts.first.automaticCorrection!,
+                    data.correction,
                   );
+                  final update = await overwriteStartTimePopup(
+                    context: context,
+                    text: text,
+                  );
+                  if (update ?? false) {
+                    databaseBloc.add(
+                      DatabaseEvent.updateAutomaticCorrection(
+                        stageId: data.previousStarts.first.stageId,
+                        startTime: data.startTime,
+                        timestamp: data.timestamp,
+                        correction: data.correction,
+                        forceUpdate: true,
+                      ),
+                    );
+                  }
                 }
-              }
-            });
+              },
+            );
           }
         },
       );
@@ -219,25 +218,29 @@ class HomeScreen extends StatelessWidget {
     return BlocListener<CountdownBloc, CountdownState>(
       listener: (context, state) {
         if (context.read<SettingsBloc>().state.settings.beepFromApp) {
-          state.whenOrNull(working: (tick) {
-            // за три секунды до старта запускаем "бип"
-            if (tick.text == '3') {
-              context.read<CountdownBloc>().add(CountdownEvent.beep());
-            }
-          });
+          state.whenOrNull(
+            working: (tick) {
+              // за три секунды до старта запускаем "бип"
+              if (tick.text == '3') {
+                context.read<CountdownBloc>().add(const CountdownEvent.beep());
+              }
+            },
+          );
         }
         if (context.read<SettingsBloc>().state.settings.voiceFromApp) {
-          state.whenOrNull(working: (tick) {
-            // на 15 секунде ищем участников для голосового вызова
-            if (tick.second == 15) {
-              var stageId = context.read<DatabaseBloc>().state.stage?.id;
-              if (stageId != null) {
-                context
-                    .read<CountdownBloc>()
-                    .add(CountdownEvent.callParticipant(stageId: stageId));
+          state.whenOrNull(
+            working: (tick) {
+              // на 15 секунде ищем участников для голосового вызова
+              if (tick.second == 15) {
+                final stageId = context.read<DatabaseBloc>().state.stage?.id;
+                if (stageId != null) {
+                  context
+                      .read<CountdownBloc>()
+                      .add(CountdownEvent.callParticipant(stageId: stageId));
+                }
               }
-            }
-          });
+            },
+          );
         }
       },
     );
@@ -249,19 +252,21 @@ class _TextTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<DatabaseBloc, DatabaseState>(builder: (context, state) {
-        final stage = state.stage;
-        if (stage != null) {
-          return Text(stage.name);
-        } else {
-          final race = state.race;
-          if (race != null) {
-            return Text(race.name);
+      BlocBuilder<DatabaseBloc, DatabaseState>(
+        builder: (context, state) {
+          final stage = state.stage;
+          if (stage != null) {
+            return Text(stage.name);
           } else {
-            return Text(Pubspec.name);
+            final race = state.race;
+            if (race != null) {
+              return Text(race.name);
+            } else {
+              return const Text(Pubspec.name);
+            }
           }
-        }
-      });
+        },
+      );
 }
 
 class _FinishFilterButton extends StatelessWidget {
@@ -298,7 +303,7 @@ class _FinishFilterButton extends StatelessWidget {
             PopupMenuItem(
               value: FilterFinish.setDefaults,
               child: ListTile(
-                leading: const SizedBox(width: 0, height: 0),
+                leading: const SizedBox.shrink(),
                 title: Text(Localization.current.I18nHome_setDefaults),
               ),
             ),
@@ -315,7 +320,6 @@ class _FinishFilterButton extends StatelessWidget {
                           settings.copyWith(hideMarked: !settings.hideMarked),
                     ),
                   );
-                  break;
                 case FilterFinish.hideNumbers:
                   settingsBloc.add(
                     SettingsEvent.update(
@@ -324,7 +328,6 @@ class _FinishFilterButton extends StatelessWidget {
                       ),
                     ),
                   );
-                  break;
                 case FilterFinish.hideManual:
                   settingsBloc.add(
                     SettingsEvent.update(
@@ -332,7 +335,6 @@ class _FinishFilterButton extends StatelessWidget {
                           settings.copyWith(hideManual: !settings.hideManual),
                     ),
                   );
-                  break;
                 case FilterFinish.setDefaults:
                   settingsBloc.add(
                     SettingsEvent.update(
@@ -343,12 +345,11 @@ class _FinishFilterButton extends StatelessWidget {
                       ),
                     ),
                   );
-                  break;
               }
             },
           );
         }
-        return const SizedBox(width: 0, height: 0);
+        return const SizedBox.shrink();
       },
     );
   }

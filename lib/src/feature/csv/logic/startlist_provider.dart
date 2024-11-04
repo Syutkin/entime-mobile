@@ -23,8 +23,8 @@ class StartlistProvider {
       if (maps.isEmpty) {
         maps = CsvToMapConverter(fieldDelimiter: ';').convert(csv);
       }
-      final List<StartItemCsv> riders = [];
-      for (var map in maps) {
+      final riders = <StartItemCsv>[];
+      for (final map in maps) {
         final rider = StartItemCsv.fromMap(map);
         riders.add(rider);
       }
@@ -40,18 +40,18 @@ class StartlistProvider {
         error: e,
       );
       return null;
-    } on Error catch (e) {
+    } catch (e, st) {
       logger.e(
         'CSV -> Error at parsing starting list',
         error: e,
-        stackTrace: e.stackTrace,
+        stackTrace: st,
       );
       return null;
     }
   }
 
   Future<PlatformFile?> _pickCsv() async {
-    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+    final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['csv'],
       withData: true,

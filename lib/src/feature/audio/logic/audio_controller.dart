@@ -16,6 +16,13 @@ abstract class IAudioController {
 }
 
 class AudioController implements IAudioController {
+  AudioController({
+    required IAudioService audioService,
+    required AppDatabase database,
+    required SettingsProvider settingsProvider,
+  })  : _audioService = audioService,
+        _db = database,
+        _settingsProvider = settingsProvider;
   final IAudioService _audioService;
   final SettingsProvider _settingsProvider;
 
@@ -24,14 +31,6 @@ class AudioController implements IAudioController {
   // для голоса
   bool _isStarted = false;
   bool _isBetweenCategory = false;
-
-  AudioController({
-    required IAudioService audioService,
-    required AppDatabase database,
-    required SettingsProvider settingsProvider,
-  })  : _audioService = audioService,
-        _db = database,
-        _settingsProvider = settingsProvider;
 
   @override
   Future<void> beep() async {
@@ -64,11 +63,11 @@ class AudioController implements IAudioController {
     required int stageId,
   }) async {
     logger.i('AudioController -> Voice time: $time');
-    final List<String> start = [];
-    String newVoiceText = '';
+    final start = <String>[];
+    var newVoiceText = '';
 
     //высчитываем диапазоны времени участников
-    DateTime? dateTime = time.toDateTime();
+    var dateTime = time.toDateTime();
     if (dateTime != null) {
       start.add(DateFormat(shortTimeFormat).format(dateTime));
       dateTime = dateTime.add(const Duration(minutes: 1));
@@ -86,7 +85,7 @@ class AudioController implements IAudioController {
       // Имена участников, которые были добавлены автоматически на старте,
       // начинаются с номера. Такие имена не произносим
       _settingsProvider.settings.voiceName &&
-              !RegExp(r'^[0-9]').hasMatch(participants.first.name)
+              !RegExp('^[0-9]').hasMatch(participants.first.name)
           ? newVoiceText += ', ${participants.first.name}.'
           : newVoiceText += '.';
       participants =
@@ -96,7 +95,7 @@ class AudioController implements IAudioController {
         // Имена участников, которые были добавлены автоматически на старте,
         // начинаются с номера. Такие имена не произносим
         if (_settingsProvider.settings.voiceName &&
-            !RegExp(r'^[0-9]').hasMatch(participants.first.name)) {
+            !RegExp('^[0-9]').hasMatch(participants.first.name)) {
           newVoiceText += ', ${participants.first.name}.';
         } else {
           newVoiceText += '.';
@@ -115,7 +114,7 @@ class AudioController implements IAudioController {
         // Имена участников, которые были добавлены автоматически на старте,
         // начинаются с номера. Такие имена не произносим
         if (_settingsProvider.settings.voiceName &&
-            !RegExp(r'^[0-9]').hasMatch(participants.first.name)) {
+            !RegExp('^[0-9]').hasMatch(participants.first.name)) {
           newVoiceText += ', ${participants.first.name}.';
         } else {
           newVoiceText += '.';
@@ -132,13 +131,13 @@ class AudioController implements IAudioController {
               .get();
           if (participants.isNotEmpty) {
             _isBetweenCategory = true;
-            final DateTime? lastStart = start.first.toDateTime();
+            final lastStart = start.first.toDateTime();
             DateTime? nextStart;
             // if (participants.first.startTime != null) {
             nextStart = participants.first.startTime.toDateTime();
             // }
             if (lastStart != null && nextStart != null) {
-              final Duration delay = nextStart.difference(lastStart);
+              final delay = nextStart.difference(lastStart);
               newVoiceText =
                   'Старт следующего участника номер ${participants.first.number}, ';
               newVoiceText += 'через ${delay.inMinutes} мин 30 с';

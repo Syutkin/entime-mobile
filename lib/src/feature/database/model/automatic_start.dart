@@ -5,9 +5,9 @@ part 'automatic_start.freezed.dart';
 @unfreezed
 class AutomaticStart with _$AutomaticStart {
   factory AutomaticStart(
-    final String time,
-    final int correction,
-    final DateTime timestamp, {
+    String time,
+    int correction,
+    DateTime timestamp, {
     @Default(false) bool updating,
   }) = _AutomaticStart;
 }

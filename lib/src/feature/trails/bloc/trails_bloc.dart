@@ -13,12 +13,6 @@ part 'trails_event.dart';
 part 'trails_state.dart';
 
 class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
-  final AppDatabase _db;
-
-  List<Trail> _trails = [];
-
-  late StreamSubscription<List<Trail>> _trailsSubscription;
-
   TrailsBloc({
     required AppDatabase database,
   })  : _db = database,
@@ -26,7 +20,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
     _trailsSubscription = _db.getTrails().watch().listen((event) async {
       _trails = event;
       logger.t('TrailsBloc -> getTrails().watch()');
-      add(TrailsEvent.getTrails());
+      add(const TrailsEvent.getTrails());
     });
 
     on<TrailsEvent>(transformer: sequential(), (event, emit) async {
@@ -76,6 +70,11 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
       );
     });
   }
+  final AppDatabase _db;
+
+  List<Trail> _trails = [];
+
+  late StreamSubscription<List<Trail>> _trailsSubscription;
 
   @override
   Future<void> close() {

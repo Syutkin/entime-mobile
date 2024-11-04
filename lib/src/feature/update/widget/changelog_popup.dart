@@ -8,7 +8,7 @@ Future<void> showChangelogAtStartup(
   BuildContext context,
   String fromVersion,
 ) async {
-  String markdownData = await rootBundle.loadString('CHANGELOG.md');
+  var markdownData = await rootBundle.loadString('CHANGELOG.md');
   // Обрезает ченджлог ниже ранее запущенной версии
   // В противном случае показывает весь
   var i = markdownData.indexOf(fromVersion);

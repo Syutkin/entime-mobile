@@ -40,6 +40,7 @@ abstract class IBluetoothBackgroundConnection {
 
 class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   BluetoothConnection? _connection;
+  StreamSubscription<Uint8List>? _connectionSubscription;
 
   String _messageBuffer = '';
   String _messagePacket = '';
@@ -70,20 +71,21 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
 
   @override
   Future<void> connect(BluetoothDevice bluetoothDevice) async {
-    BluetoothConnection.toAddress(bluetoothDevice.address).then((connection) {
-      _connection = connection;
-    }).catchError((error) {
-      logger.e('BluetoothConnection -> Cannot connect', error: error);
-    });
-
-    _connection?.input?.listen(_onDataReceived).onDone(() {
-      // Сообщаем что соединение закрыто
-      // Далее на основе того, когда это произошло,
-      // определяем кто закрыл соединение (в BluetoothBloc event/state)
-      _onDisconnect();
-    });
-
-    // BluetoothBackgroundConnection._fromConnection(connection);
+    try {
+      await _connection?.close();
+      _connection =
+          await BluetoothConnection.toAddress(bluetoothDevice.address);
+      _connectionSubscription = _connection?.input?.listen(_onDataReceived);
+      _connectionSubscription?.onDone(() async {
+        // Сообщаем что соединение закрыто
+        // Далее на основе того, когда это произошло,
+        // определяем кто закрыл соединение (в BluetoothBloc event/state)
+        _onDisconnect();
+        await _connectionSubscription?.cancel();
+      });
+    } catch (e) {
+      logger.e('BluetoothConnection -> Cannot connect', error: e);
+    }
   }
 
   @override
@@ -99,12 +101,13 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   @override
   Future<void> dispose() async {
     await _messageController.close();
+    await _connectionSubscription?.cancel();
     await _connection?.finish();
   }
 
   @override
   Future<bool> sendMessage(String text) async {
-    bool result = false;
+    var result = false;
     text.trim();
     //textEditingController.clear();
     if (text.isNotEmpty) {
@@ -127,7 +130,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
     // Create message if there is '\r\n' sequence
     _messageBuffer += String.fromCharCodes(data);
     while (_messageBuffer.contains('\r\n')) {
-      final int index = _messageBuffer.indexOf('\r\n');
+      final index = _messageBuffer.indexOf('\r\n');
       _messagePacket = _messageBuffer.substring(0, index).trim();
       _messageController.add(_messagePacket);
       _messageBuffer = _messageBuffer.substring(index + 2);

@@ -8,6 +8,9 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 import '../settings.dart';
 
 class SharedPrefsSettingsProvider extends SettingsProvider {
+  SharedPrefsSettingsProvider._(SharedPreferences prefs, AppSettings settings)
+      : _prefs = prefs,
+        _settings = settings;
   final SharedPreferences _prefs;
   AppSettings _settings;
 
@@ -17,10 +20,6 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   @override
   BehaviorSubject<AppSettings> get state => _appSettingsController;
   final _appSettingsController = BehaviorSubject<AppSettings>();
-
-  SharedPrefsSettingsProvider._(SharedPreferences prefs, AppSettings settings)
-      : _prefs = prefs,
-        _settings = settings;
 
   static Future<SharedPrefsSettingsProvider> load() async {
     const defaults = AppSettings.defaults();
@@ -70,8 +69,9 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           .byName(prefs.getString('brightness') ?? defaults.brightness.name),
       contrastLevel: prefs.getDouble('contrastLevel') ?? defaults.contrastLevel,
       dynamicSchemeVariant: DynamicSchemeVariant.values.byName(
-          prefs.getString('dynamicSchemeVariant') ??
-              defaults.dynamicSchemeVariant.name),
+        prefs.getString('dynamicSchemeVariant') ??
+            defaults.dynamicSchemeVariant.name,
+      ),
       previousVersion:
           prefs.getString('previousVersion') ?? defaults.previousVersion,
       updateNtpOffsetAtStartup: prefs.getBool('updateNtpOffsetAtStartup') ??
@@ -97,7 +97,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   @override
   Future<void> setDefaults() async {
     // не сбрасываем выбранные гонку и этап
-    final defaults = AppSettings.defaults().copyWith(
+    final defaults = const AppSettings.defaults().copyWith(
       raceId: _prefs.getInt('raceId') ?? -1,
       stageId: _prefs.getInt('stageId') ?? -1,
     );
@@ -139,19 +139,27 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setInt('finishDelay', settings.finishDelay);
     await _prefs.setBool('substituteNumbers', settings.substituteNumbers);
     await _prefs.setInt(
-        'substituteNumbersDelay', settings.substituteNumbersDelay);
+      'substituteNumbersDelay',
+      settings.substituteNumbersDelay,
+    );
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
     await _prefs.setInt(
-        'updateStartCorrectionDelay', settings.updateStartCorrectionDelay);
+      'updateStartCorrectionDelay',
+      settings.updateStartCorrectionDelay,
+    );
     await _prefs.setInt('log_limit', settings.logLimit);
     await _prefs.setString('seedColor', settings.seedColor.name);
     await _prefs.setString('brightness', settings.brightness.name);
     await _prefs.setDouble('contrastLevel', settings.contrastLevel);
     await _prefs.setString(
-        'dynamicSchemeVariant', settings.dynamicSchemeVariant.name);
+      'dynamicSchemeVariant',
+      settings.dynamicSchemeVariant.name,
+    );
     await _prefs.setString('previousVersion', settings.previousVersion);
     await _prefs.setBool(
-        'updateNtpOffsetAtStartup', settings.updateNtpOffsetAtStartup);
+      'updateNtpOffsetAtStartup',
+      settings.updateNtpOffsetAtStartup,
+    );
 
     _settings = settings;
     _appSettingsController.add(_settings);

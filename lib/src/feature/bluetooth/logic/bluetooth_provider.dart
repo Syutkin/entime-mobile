@@ -4,20 +4,20 @@ import '../bluetooth.dart';
 
 abstract class IBluetoothProvider {
   FlutterBluetoothSerial get flutterBluetoothSerial;
+
   IBluetoothBackgroundConnection get bluetoothBackgroundConnection;
 
   Future<void> dispose();
 }
 
 class BluetoothProvider implements IBluetoothProvider {
-  final FlutterBluetoothSerial _flutterBluetoothSerial;
-  final IBluetoothBackgroundConnection _bluetoothBackgroundConnection;
-
   BluetoothProvider({
     required FlutterBluetoothSerial flutterBluetoothSerial,
     required IBluetoothBackgroundConnection bluetoothBackgroundConnection,
   })  : _flutterBluetoothSerial = flutterBluetoothSerial,
         _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
+  final FlutterBluetoothSerial _flutterBluetoothSerial;
+  final IBluetoothBackgroundConnection _bluetoothBackgroundConnection;
 
   @override
   FlutterBluetoothSerial get flutterBluetoothSerial => _flutterBluetoothSerial;

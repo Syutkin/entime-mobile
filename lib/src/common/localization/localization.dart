@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'generated/l10n.dart' as generated
-    show GeneratedLocalization, AppLocalizationDelegate;
+    show AppLocalizationDelegate, GeneratedLocalization;
 
 @sealed
 class Localization extends generated.GeneratedLocalization {

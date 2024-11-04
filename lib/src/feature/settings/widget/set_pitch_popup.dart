@@ -4,7 +4,7 @@ Future<double?> setPitchPopup(
   BuildContext context,
   SettingsState settingsState,
 ) async {
-  double value = settingsState.settings.pitch;
+  var value = settingsState.settings.pitch;
   return showDialog<double>(
     context: context,
     builder: (context) => AlertDialog(

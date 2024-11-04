@@ -55,39 +55,43 @@ Future<void> editStartTime(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            item.category != null && item.category!.isNotEmpty
-                ? Text(
-                    Localization.current
-                        .I18nStart_participantCategory(item.category!),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
-                : const SizedBox(),
-            item.nickname != null && item.nickname!.isNotEmpty
-                ? Text(
-                    Localization.current
-                        .I18nStart_participantNickname(item.nickname!),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
-                : const SizedBox(),
-            item.city != null && item.city!.isNotEmpty
-                ? Text(
-                    Localization.current.I18nStart_participantCity(item.city!),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
-                : const SizedBox(),
-            item.team != null && item.team!.isNotEmpty
-                ? Text(
-                    Localization.current.I18nStart_participantTeam(item.team!),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
-                : const SizedBox(),
-            item.birthday != null && item.birthday!.isNotEmpty
-                ? Text(
-                    Localization.current
-                        .I18nStart_participantYear(item.birthday!),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
-                : const SizedBox(),
+            if (item.category != null && item.category!.isNotEmpty)
+              Text(
+                Localization.current
+                    .I18nStart_participantCategory(item.category!),
+                style: Theme.of(context).textTheme.titleMedium,
+              )
+            else
+              const SizedBox(),
+            if (item.nickname != null && item.nickname!.isNotEmpty)
+              Text(
+                Localization.current
+                    .I18nStart_participantNickname(item.nickname!),
+                style: Theme.of(context).textTheme.titleMedium,
+              )
+            else
+              const SizedBox(),
+            if (item.city != null && item.city!.isNotEmpty)
+              Text(
+                Localization.current.I18nStart_participantCity(item.city!),
+                style: Theme.of(context).textTheme.titleMedium,
+              )
+            else
+              const SizedBox(),
+            if (item.team != null && item.team!.isNotEmpty)
+              Text(
+                Localization.current.I18nStart_participantTeam(item.team!),
+                style: Theme.of(context).textTheme.titleMedium,
+              )
+            else
+              const SizedBox(),
+            if (item.birthday != null && item.birthday!.isNotEmpty)
+              Text(
+                Localization.current.I18nStart_participantYear(item.birthday!),
+                style: Theme.of(context).textTheme.titleMedium,
+              )
+            else
+              const SizedBox(),
             TextFormField(
               controller: startTimeController,
               keyboardType: TextInputType.datetime,
@@ -96,7 +100,7 @@ Future<void> editStartTime(
                 icon: Icon(MdiIcons.clock),
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => validateStartTime(value),
+              validator: validateStartTime,
             ),
             TextFormField(
               controller: automaticCorrectionController,
@@ -106,7 +110,7 @@ Future<void> editStartTime(
                 labelText: Localization.current.I18nCore_correction,
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => validateCorrection(value),
+              validator: validateCorrection,
             ),
             TextFormField(
               controller: automaticStartTimeController,
@@ -116,7 +120,7 @@ Future<void> editStartTime(
                 icon: Icon(MdiIcons.cpu64Bit),
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => validateStartTime(value),
+              validator: validateStartTime,
             ),
             TextFormField(
               controller: automaticPhoneTimeController,
@@ -136,7 +140,7 @@ Future<void> editStartTime(
                 labelText: Localization.current.I18nCore_correction,
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => validateCorrection(value),
+              validator: validateCorrection,
             ),
             TextFormField(
               controller: manualStartTimeController,
@@ -146,7 +150,7 @@ Future<void> editStartTime(
                 icon: Icon(MdiIcons.handBackLeft),
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => validateStartTime(value),
+              validator: validateStartTime,
             ),
           ],
         ),

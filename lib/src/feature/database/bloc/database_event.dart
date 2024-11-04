@@ -91,13 +91,13 @@ class DatabaseEvent with _$DatabaseEvent {
   }) = _AddStartNumber;
 
   const factory DatabaseEvent.updateStartingInfo({
+    required int stageId,
+    required int participantId,
     required String startTime,
     String? automaticStartTime,
     int? automaticCorrection,
     String? manualStartTime,
     int? manualCorrection,
-    required int stageId,
-    required int participantId,
   }) = _UpdateStartingInfo;
 
   const factory DatabaseEvent.updateAutomaticCorrection({

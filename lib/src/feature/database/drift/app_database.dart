@@ -32,8 +32,9 @@ class AppDatabase extends _$AppDatabase {
         // Create all tables
         await m.createAll();
         // Populate DB with statuses
-        await customInsert('''INSERT INTO statuses (id, type) VALUES
-          (1, '${ParticipantStatus.active.name}'),
+        await customInsert('''
+        INSERT INTO statuses (id, type) VALUES
+        (1, '${ParticipantStatus.active.name}'),
         (2, '${ParticipantStatus.dns.name}'),
         (3, '${ParticipantStatus.dnf.name}'),
         (4, '${ParticipantStatus.dsq.name}');''');
@@ -82,7 +83,7 @@ class AppDatabase extends _$AppDatabase {
   /// Удаляет гонку с [id]
   Future<int> deleteRace(int id) {
     return (update(races)..where((r) => r.id.equals(id))).write(
-      RacesCompanion(
+      const RacesCompanion(
         isDeleted: Value(true),
       ),
     );
@@ -122,18 +123,19 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     final raceId = await into(races).insertOnConflictUpdate(
       RacesCompanion(
-        id: id != null ? Value(id) : Value.absent(),
-        name: name != null ? Value(name) : Value.absent(),
+        id: id != null ? Value(id) : const Value.absent(),
+        name: name != null ? Value(name) : const Value.absent(),
         startDate: startDate != null
             ? Value(startDate.toIso8601String())
-            : Value.absent(),
+            : const Value.absent(),
         finishDate: finishDate != null
             ? Value(finishDate.toIso8601String())
-            : Value.absent(),
-        location: location != null ? Value(location) : Value.absent(),
-        url: url != null ? Value(url) : Value.absent(),
-        description: description != null ? Value(description) : Value.absent(),
-        isDeleted: isDeleted != null ? Value(isDeleted) : Value.absent(),
+            : const Value.absent(),
+        location: location != null ? Value(location) : const Value.absent(),
+        url: url != null ? Value(url) : const Value.absent(),
+        description:
+            description != null ? Value(description) : const Value.absent(),
+        isDeleted: isDeleted != null ? Value(isDeleted) : const Value.absent(),
       ),
     );
 
@@ -155,9 +157,9 @@ class AppDatabase extends _$AppDatabase {
 
   /// Добавляет спецучасток
   Future<int> addStage({
-    int? trailId,
     required int raceId,
     required String name,
+    int? trailId,
   }) {
     return upsertStage(
       raceId: raceId,
@@ -169,7 +171,7 @@ class AppDatabase extends _$AppDatabase {
   /// Удаляет спецучасток с [id]
   Future<int> deleteStage(int id) {
     return (update(stages)..where((r) => r.id.equals(id))).write(
-      StagesCompanion(
+      const StagesCompanion(
         isDeleted: Value(true),
       ),
     );
@@ -206,13 +208,14 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     final stageId = await into(stages).insertOnConflictUpdate(
       StagesCompanion(
-        id: id != null ? Value(id) : Value.absent(),
-        name: name != null ? Value(name) : Value.absent(),
-        description: description != null ? Value(description) : Value.absent(),
-        raceId: raceId != null ? Value(raceId) : Value.absent(),
-        trailId: trailId != null ? Value(trailId) : Value.absent(),
-        isActive: isActive != null ? Value(isActive) : Value.absent(),
-        isDeleted: isDeleted != null ? Value(isDeleted) : Value.absent(),
+        id: id != null ? Value(id) : const Value.absent(),
+        name: name != null ? Value(name) : const Value.absent(),
+        description:
+            description != null ? Value(description) : const Value.absent(),
+        raceId: raceId != null ? Value(raceId) : const Value.absent(),
+        trailId: trailId != null ? Value(trailId) : const Value.absent(),
+        isActive: isActive != null ? Value(isActive) : const Value.absent(),
+        isDeleted: isDeleted != null ? Value(isDeleted) : const Value.absent(),
       ),
     );
 
@@ -290,16 +293,17 @@ class AppDatabase extends _$AppDatabase {
   }) async {
     final trailId = await into(trails).insertOnConflictUpdate(
       TrailsCompanion(
-        id: id != null ? Value(id) : Value.absent(),
-        name: name != null ? Value(name) : Value.absent(),
-        distance: distance != null ? Value(distance) : Value.absent(),
-        elevation: elevation != null ? Value(elevation) : Value.absent(),
-        gpxTrack: gpxTrack != null ? Value(gpxTrack) : Value.absent(),
+        id: id != null ? Value(id) : const Value.absent(),
+        name: name != null ? Value(name) : const Value.absent(),
+        distance: distance != null ? Value(distance) : const Value.absent(),
+        elevation: elevation != null ? Value(elevation) : const Value.absent(),
+        gpxTrack: gpxTrack != null ? Value(gpxTrack) : const Value.absent(),
         fileExtension:
-            fileExtension != null ? Value(fileExtension) : Value.absent(),
-        url: url != null ? Value(url) : Value.absent(),
-        description: description != null ? Value(description) : Value.absent(),
-        isDeleted: isDeleted != null ? Value(isDeleted) : Value.absent(),
+            fileExtension != null ? Value(fileExtension) : const Value.absent(),
+        url: url != null ? Value(url) : const Value.absent(),
+        description:
+            description != null ? Value(description) : const Value.absent(),
+        isDeleted: isDeleted != null ? Value(isDeleted) : const Value.absent(),
       ),
     );
     return trailId;
@@ -308,7 +312,7 @@ class AppDatabase extends _$AppDatabase {
   /// Удаляет трейл с [id]
   Future<int> deleteTrail(int id) {
     return (update(trails)..where((r) => r.id.equals(id))).write(
-      TrailsCompanion(
+      const TrailsCompanion(
         isDeleted: Value(true),
       ),
     );
@@ -359,8 +363,9 @@ class AppDatabase extends _$AppDatabase {
   /// Список содержит только участников со статусом [ParticipantStatus.active]
   /// Статус учитывается и для старта на спецучастке,
   /// и непосредственно для участника
-  Selectable<ParticipantAtStart> getParticipantsAtStart(
-      {required int stageId}) {
+  Selectable<ParticipantAtStart> getParticipantsAtStart({
+    required int stageId,
+  }) {
     return _getParticipantsAtStart(stageId: stageId);
   }
 
@@ -426,12 +431,12 @@ class AppDatabase extends _$AppDatabase {
               .get())
           .first
           .name;
-      final int ridersId = await into(riders).insert(
+      final ridersId = await into(riders).insert(
         RidersCompanion(
           name: Value('$number, $raceName'),
         ),
       );
-      final int participantsId = await into(participants).insert(
+      final participantsId = await into(participants).insert(
         ParticipantsCompanion(
           number: Value(number),
           raceId: Value(stage.raceId),
@@ -496,14 +501,15 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Устанавливает информацию об участнике на старте
-  Future<int> setStartingInfo(
-      {required String startTime,
-      String? automaticStartTime,
-      int? automaticCorrection,
-      String? manualStartTime,
-      int? manualCorrection,
-      required int stageId,
-      required int participantId}) {
+  Future<int> setStartingInfo({
+    required String startTime,
+    required int stageId,
+    required int participantId,
+    String? automaticStartTime,
+    int? automaticCorrection,
+    String? manualStartTime,
+    int? manualCorrection,
+  }) {
     return _setStartingInfo(
       startTime: startTime,
       stageId: stageId,
@@ -525,18 +531,18 @@ class AppDatabase extends _$AppDatabase {
     required String time,
     required int correction,
     required DateTime timestamp,
-    bool forceUpdate = false,
     required int deltaInSeconds,
+    bool forceUpdate = false,
   }) async {
-    final DateTime? dateGoTime = time.toDateTime();
+    final dateGoTime = time.toDateTime();
     if (dateGoTime == null) {
       throw FormatException('Invalid time format: $time');
       // assert(dateGoTime != null, 'dateGoTime must not be null');
       //   return null;
     }
-    final String before = DateFormat(shortTimeFormat)
+    final before = DateFormat(shortTimeFormat)
         .format(dateGoTime.subtract(Duration(seconds: deltaInSeconds)));
-    final String after = DateFormat(shortTimeFormat)
+    final after = DateFormat(shortTimeFormat)
         .format(dateGoTime.add(Duration(seconds: deltaInSeconds)));
     // final String phoneTime = DateFormat(longTimeFormat).format(timestamp);
 
@@ -598,13 +604,12 @@ class AppDatabase extends _$AppDatabase {
     required DateTime timestamp,
     int deltaInSeconds = 15,
   }) async {
-    int result = 0;
-    final DateTime timeBefore =
-        time.subtract(Duration(seconds: deltaInSeconds));
-    final DateTime timeAfter = time.add(Duration(seconds: deltaInSeconds));
-    final String before = DateFormat(shortTimeFormat).format(timeBefore);
-    final String after = DateFormat(shortTimeFormat).format(timeAfter);
-    final String manualStartTime = DateFormat(longTimeFormat).format(time);
+    var result = 0;
+    final timeBefore = time.subtract(Duration(seconds: deltaInSeconds));
+    final timeAfter = time.add(Duration(seconds: deltaInSeconds));
+    final before = DateFormat(shortTimeFormat).format(timeBefore);
+    final after = DateFormat(shortTimeFormat).format(timeAfter);
+    final manualStartTime = DateFormat(longTimeFormat).format(time);
 
     final participantsAroundTime = await _getParticipantAroundTime(
       stageId: stageId,
@@ -613,13 +618,12 @@ class AppDatabase extends _$AppDatabase {
     ).get();
 
     if (participantsAroundTime.isNotEmpty) {
-      final DateTime? startTime =
-          participantsAroundTime.first.startTime.toDateTime();
+      final startTime = participantsAroundTime.first.startTime.toDateTime();
       if (startTime == null) {
         logger.e('Wrong time format: $startTime, can not convert to DateTime');
         return result;
       }
-      final Duration correction = startTime.difference(time);
+      final correction = startTime.difference(time);
       result = await _setManualStartTime(
         participantId: participantsAroundTime.first.participantId,
         stageId: stageId,
@@ -656,14 +660,13 @@ class AppDatabase extends _$AppDatabase {
     required int stageId,
     int deltaInSeconds = 10,
   }) async {
-    final DateTime? beepDateTime = time.toDateTime();
+    final beepDateTime = time.toDateTime();
     if (beepDateTime == null) {
       logger.e('Wrong time format: $time, can not convert to DateTime');
       return 0;
     }
-    final DateTime timeAfter =
-        beepDateTime.add(Duration(seconds: deltaInSeconds));
-    final String after = DateFormat(shortTimeFormat).format(timeAfter);
+    final timeAfter = beepDateTime.add(Duration(seconds: deltaInSeconds));
+    final after = DateFormat(shortTimeFormat).format(timeAfter);
     final startingCount = await _getForBeep(
       stageId: stageId,
       beepTime: time,
@@ -678,12 +681,12 @@ class AppDatabase extends _$AppDatabase {
     required String time,
     required int stageId,
   }) async {
-    final DateTime? dateTime = time.toDateTime();
+    final dateTime = time.toDateTime();
     if (dateTime == null) {
       logger.e('Wrong time format: $time, can not convert to DateTime');
       return <GetStartingParticipantBetweenTimesResult>[];
     }
-    final String after = DateFormat(shortTimeFormat)
+    final after = DateFormat(shortTimeFormat)
         .format(dateTime.add(const Duration(minutes: 1)));
     return _getStartingParticipantBetweenTimes(
       time: time,
@@ -692,8 +695,10 @@ class AppDatabase extends _$AppDatabase {
     ).get();
   }
 
-  Selectable<NextStartingParticipant> getNextStartingParticipants(
-      {required int stageId, required String time}) {
+  Selectable<NextStartingParticipant> getNextStartingParticipants({
+    required int stageId,
+    required String time,
+  }) {
     return _getNextStartingParticipants(stageId: stageId, time: time);
   }
 
@@ -701,15 +706,17 @@ class AppDatabase extends _$AppDatabase {
     required int startId,
     required ParticipantStatus status,
   }) async {
-    var status = ParticipantStatus.dns;
+    const status = ParticipantStatus.dns;
     final result = await _setDNSForStartId(id: startId, statusId: status.index);
 
     if (result > 0) {
       logger.i(
-          'Database -> Set ${status.name.toUpperCase()} to startId: $startId');
+        'Database -> Set ${status.name.toUpperCase()} to startId: $startId',
+      );
     } else {
       logger.i(
-          'Database -> Can not find startId: $startId, ${status.name.toUpperCase()} not set');
+        'Database -> Can not find startId: $startId, ${status.name.toUpperCase()} not set',
+      );
     }
     return result;
   }
@@ -718,31 +725,34 @@ class AppDatabase extends _$AppDatabase {
     required int stageId,
     required DateTime dateTimeNow,
   }) {
-    var timeNow = DateFormat(sqlTimeFormat).format(dateTimeNow);
+    final timeNow = DateFormat(sqlTimeFormat).format(dateTimeNow);
     return _getNumbersOnTraceNow(stageId: stageId, timeNow: timeNow);
   }
 
   // ----------------финиш----------------
 
-  Selectable<Finish> getFinishesFromStage(
-      {required int stageId,
-      bool hideMarked = true,
-      bool hideManual = false,
-      bool hideNumbers = false}) {
-    final List<Expression<bool>> predicates = [];
-    return _getFinishesFromStage(predicate: (finishes) {
-      predicates.add(finishes.stageId.equals(stageId));
-      if (hideMarked) {
-        predicates.add(finishes.isHidden.equals(!hideMarked));
-      }
-      if (hideManual) {
-        predicates.add(finishes.isManual.equals(!hideManual));
-      }
-      if (hideNumbers) {
-        predicates.add(finishes.number.isNull());
-      }
-      return predicates.reduce((a, b) => a & b);
-    });
+  Selectable<Finish> getFinishesFromStage({
+    required int stageId,
+    bool hideMarked = true,
+    bool hideManual = false,
+    bool hideNumbers = false,
+  }) {
+    final predicates = <Expression<bool>>[];
+    return _getFinishesFromStage(
+      predicate: (finishes) {
+        predicates.add(finishes.stageId.equals(stageId));
+        if (hideMarked) {
+          predicates.add(finishes.isHidden.equals(!hideMarked));
+        }
+        if (hideManual) {
+          predicates.add(finishes.isManual.equals(!hideManual));
+        }
+        if (hideNumbers) {
+          predicates.add(finishes.number.isNull());
+        }
+        return predicates.reduce((a, b) => a & b);
+      },
+    );
   }
 
   /// Записывает финишное время
@@ -770,8 +780,8 @@ class AppDatabase extends _$AppDatabase {
       logger.e('Wrong time format: $finishTime, can not convert to DateTime');
       return null;
     }
-    bool isHidden = false;
-    int? workingNumber = number;
+    var isHidden = false;
+    var workingNumber = number;
     // узнаём предыдущее нескрытое автоматическое время
     final prevFinishTime =
         await _getLastFinishTime(stageId: stage.id).getSingleOrNull();
@@ -875,14 +885,15 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<void> clearFinishResultsDebug(int stageId) async {
-    int rowCount = await customUpdate(
+    var rowCount = await customUpdate(
       'UPDATE starts SET finish_id = NULL WHERE stage_id = ?',
       variables: [Variable.withInt(stageId)],
       updates: {starts},
       updateKind: UpdateKind.update,
     );
     logger.d(
-        'Database -> Finish info for $rowCount starting participants cleared');
+      'Database -> Finish info for $rowCount starting participants cleared',
+    );
     rowCount = await customUpdate(
       'UPDATE finishes '
       'SET number = NULL, is_hidden = false '
@@ -891,8 +902,9 @@ class AppDatabase extends _$AppDatabase {
       updates: {finishes},
       updateKind: UpdateKind.update,
     );
-    logger.d('Database -> $rowCount finish results cleared');
-    logger.i('Database -> Results cleared');
+    logger
+      ..d('Database -> $rowCount finish results cleared')
+      ..i('Database -> Results cleared');
   }
 
   Future<bool> addNumberToFinish({
@@ -992,14 +1004,14 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> createRaceFromRaceCsv(RaceCsv race) async {
-    var raceId =
+    final raceId =
         await addRace(name: path.basenameWithoutExtension(race.fileName));
-    Map<String, int> stages = {};
+    final stages = <String, int>{};
     await transaction(() async {
-      for (var stageName in race.stageNames) {
+      for (final stageName in race.stageNames) {
         stages[stageName] = await addStage(raceId: raceId, name: stageName);
       }
-      for (var item in race.startItems) {
+      for (final item in race.startItems) {
         final riderId = await addRider(
           name: item.name,
           nickname: item.nickname,
@@ -1013,7 +1025,7 @@ class AppDatabase extends _$AppDatabase {
           number: item.number,
           category: item.category,
         );
-        for (var stageName in stages.keys) {
+        for (final stageName in stages.keys) {
           await _addStartInfo(
             stageId: stages[stageName]!,
             participantId: participantId,
@@ -1026,11 +1038,11 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<List<StartForCsv>> getStartResults(int stageId) async {
-    return await _getStartsForCsv(stageId: stageId).get();
+    return _getStartsForCsv(stageId: stageId).get();
   }
 
   Future<List<FinishForCsv>> getFinishResults(int stageId) async {
-    return await _getFinishesForCsv(stageId: stageId).get();
+    return _getFinishesForCsv(stageId: stageId).get();
   }
 
 // -------------------------
@@ -1042,12 +1054,12 @@ class AppDatabase extends _$AppDatabase {
     List<LogSourceDirection>? direction,
     int limit = -1,
   }) async {
-    final selectLog = 'SELECT * FROM logs';
-    final List<String> whereArgs = [];
+    const selectLog = 'SELECT * FROM logs';
+    final whereArgs = <String>[];
     String where;
 
     if (level != null && level.isNotEmpty) {
-      final List<String> args = [];
+      final args = <String>[];
       for (final type in level) {
         args.add("level LIKE '${type.name}'");
       }
@@ -1055,7 +1067,7 @@ class AppDatabase extends _$AppDatabase {
     }
 
     if (source != null && source.isNotEmpty) {
-      final List<String> args = [];
+      final args = <String>[];
       for (final type in source) {
         args.add("source LIKE '${type.name}'");
       }
@@ -1063,7 +1075,7 @@ class AppDatabase extends _$AppDatabase {
     }
 
     if (direction != null && direction.isNotEmpty) {
-      final List<String> args = [];
+      final args = <String>[];
       for (final type in direction) {
         args.add("direction LIKE '${type.name}'");
       }
@@ -1091,8 +1103,8 @@ class AppDatabase extends _$AppDatabase {
     required String rawData,
     LogSourceDirection? direction,
   }) async {
-    final String timeStamp = DateFormat(longDateFormat).format(DateTime.now());
-    final int logId = await into(logs).insert(
+    final timeStamp = DateFormat(longDateFormat).format(DateTime.now());
+    final logId = await into(logs).insert(
       LogsCompanion(
         level: Value(level),
         // ToDO: use drift DATETIME format
@@ -1151,8 +1163,10 @@ class AppDatabase extends _$AppDatabase {
 // -------------------------
 // для тестирования
 
-  Selectable<NumberAtStart> getNumberAtStarts(
-      {required int stageId, required int number}) {
+  Selectable<NumberAtStart> getNumberAtStarts({
+    required int stageId,
+    required int number,
+  }) {
     return _getNumberAtStarts(stageId: stageId, number: number);
   }
 }

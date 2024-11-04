@@ -6,7 +6,7 @@ Future<double?> setFloatingButtonSizePopup(
   String text = '',
 }) async {
   // text = 'Размер кнопки "+"';
-  double newValue = value;
+  var newValue = value;
   return showDialog<double>(
     context: context,
     builder: (context) => AlertDialog(

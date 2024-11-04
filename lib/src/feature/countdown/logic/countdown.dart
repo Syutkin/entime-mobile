@@ -9,6 +9,7 @@ import '../../database/drift/app_database.dart';
 import '../model/tick.dart';
 
 class CountdownAtStart {
+  CountdownAtStart({required AppDatabase database}) : _db = database;
   final AppDatabase _db;
   Timer? _timer;
 
@@ -21,19 +22,21 @@ class CountdownAtStart {
     start(stageId);
   }
 
-  CountdownAtStart({required AppDatabase database}) : _db = database;
-
   Future<void> start(int stageId) async {
     //subscribe to changes at starts table
     _db.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
       _isFinished = false;
       _nextStartingParticipant = await _getNextStartingParticipant(
-          time: DateTime.now(), stageId: stageId);
+        time: DateTime.now(),
+        stageId: stageId,
+      );
     });
 
     _timer?.cancel();
     _nextStartingParticipant = await _getNextStartingParticipant(
-        time: DateTime.now(), stageId: stageId);
+      time: DateTime.now(),
+      stageId: stageId,
+    );
     _isFinished = false;
     await _countdown(stageId: stageId);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -54,7 +57,7 @@ class CountdownAtStart {
     final second = now.second;
     final nextStartingParticipant = _nextStartingParticipant;
     if (nextStartingParticipant != null) {
-      var nextStartTime = nextStartingParticipant.startTime.toDateTime();
+      final nextStartTime = nextStartingParticipant.startTime.toDateTime();
       if (nextStartTime != null) {
         if (nextStartTime.isAfter(now)) {
           value.add(
@@ -109,8 +112,8 @@ class CountdownAtStart {
 
   String _formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    final String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    final twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    final twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
     if (duration.inHours > 0) {
       return '${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds';
     } else if (duration.inMinutes > 0) {

@@ -1,12 +1,14 @@
 import 'package:flutter_ntp/flutter_ntp.dart';
 
 abstract interface class INtpProvider {
-  INtpProvider({
-    String? lookUpAddress,
-    int? port,
-    Duration? timeout,
-    Duration? cacheDuration,
-  }) {
+  INtpProvider(
+      // {
+      // String? lookUpAddress,
+      // int? port,
+      // Duration? timeout,
+      // Duration? cacheDuration,
+      // }
+      ) {
     // ToDo: start offset stream
   }
 
@@ -39,28 +41,26 @@ class NtpProvider implements INtpProvider {
     Duration? timeout,
     Duration? cacheDuration,
   }) {
-    Future<int> offset;
-    offset = FlutterNTP.getNtpOffset(
+    return FlutterNTP.getNtpOffset(
       lookUpAddress: lookUpAddress,
       port: port,
-      timeout: timeout ?? Duration(seconds: 5),
-      cacheDuration: cacheDuration ?? Duration(hours: 1),
+      timeout: timeout ?? const Duration(seconds: 5),
+      cacheDuration: cacheDuration ?? const Duration(hours: 1),
     );
-
-    return offset;
   }
 
   @override
-  Future<DateTime> now(
-      {String? lookUpAddress,
-      int? port,
-      Duration? timeout,
-      Duration? cacheDuration}) {
+  Future<DateTime> now({
+    String? lookUpAddress,
+    int? port,
+    Duration? timeout,
+    Duration? cacheDuration,
+  }) {
     final now = FlutterNTP.now(
       lookUpAddress: lookUpAddress,
       port: port,
       timeout: timeout,
-      cacheDuration: cacheDuration ?? Duration(hours: 1),
+      cacheDuration: cacheDuration ?? const Duration(hours: 1),
     );
 
     return now;

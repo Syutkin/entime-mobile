@@ -11,20 +11,22 @@ class FinishPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DatabaseBloc, DatabaseState>(builder: (context, state) {
-      var race = state.race;
-      var stage = state.stage;
-      if (race == null) {
-        return RacesListPage();
-      } else {
-        if (stage == null) {
-          return StagesListPage(
-            race: race,
-          );
+    return BlocBuilder<DatabaseBloc, DatabaseState>(
+      builder: (context, state) {
+        final race = state.race;
+        final stage = state.stage;
+        if (race == null) {
+          return const RacesListPage();
         } else {
-          return FinishListPage();
+          if (stage == null) {
+            return StagesListPage(
+              race: race,
+            );
+          } else {
+            return const FinishListPage();
+          }
         }
-      }
-    });
+      },
+    );
   }
 }

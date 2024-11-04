@@ -1,12 +1,12 @@
 class PopDB {
-  List<String> queries = [];
-
   PopDB() {
     queries
-      ..add('''INSERT INTO races (id, name) VALUES
+      ..add('''
+INSERT INTO races (id, name) VALUES
 (1, 'гонка1'),
 (2, 'гонка2');''')
-      ..add('''INSERT INTO stages (id, race_id, name) VALUES
+      ..add('''
+INSERT INTO stages (id, race_id, name) VALUES
 (1, 1, 'СУ1'),
 (2, 1, 'СУ2'),
 (3, 1, 'СУ3'),
@@ -923,4 +923,6 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (8,79,"14:18:00");''',
       );
   }
+
+  List<String> queries = [];
 }

@@ -4,9 +4,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import '../../../common/localization/localization.dart';
 
 class HelpPage extends StatelessWidget {
-  String get _markdownData => Localization.current.I18nHelp_manualMd;
-
   const HelpPage({super.key});
+  String get _markdownData => Localization.current.I18nHelp_manualMd;
 
   @override
   Widget build(BuildContext context) => Scaffold(

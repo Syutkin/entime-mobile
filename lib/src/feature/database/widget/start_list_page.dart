@@ -48,7 +48,7 @@ class _StartListPage extends State<StartListPage> {
               childCount: startList.length,
               (context, index) {
                 final item = startList[index];
-                bool isHighlighted = false;
+                var isHighlighted = false;
                 return BlocBuilder<CountdownBloc, CountdownState>(
                   buildWhen: (previous, current) {
                     final previousIsHighlighted =
@@ -61,7 +61,8 @@ class _StartListPage extends State<StartListPage> {
                       // Обновлять только там, где есть обратный отсчёт
                       return isHighlighted &&
                           (previous.mapOrNull(
-                                  working: (state) => state.tick.text) !=
+                                working: (state) => state.tick.text,
+                              ) !=
                               current.mapOrNull(
                                 working: (state) => state.tick.text,
                               ));
@@ -86,8 +87,9 @@ class _StartListPage extends State<StartListPage> {
                       onDismissed: (direction) {
                         BlocProvider.of<DatabaseBloc>(context).add(
                           DatabaseEvent.setStatusForStartId(
-                              startId: item.startId,
-                              status: ParticipantStatus.dns),
+                            startId: item.startId,
+                            status: ParticipantStatus.dns,
+                          ),
                         );
                       },
                       isHighlighted: isHighlighted,
@@ -130,9 +132,8 @@ class _StartListPage extends State<StartListPage> {
                     );
                     return Draggable(
                       feedback: countdownWidget,
-                      childWhenDragging: const SizedBox(width: 0, height: 0),
-                      onDragEnd: (dragDetails) =>
-                          _placeCountdownWidget(dragDetails),
+                      childWhenDragging: const SizedBox.shrink(),
+                      onDragEnd: _placeCountdownWidget,
                       child: countdownWidget,
                     );
                   },
@@ -143,9 +144,8 @@ class _StartListPage extends State<StartListPage> {
                     );
                     return Draggable(
                       feedback: countdownWidget,
-                      childWhenDragging: const SizedBox(width: 0, height: 0),
-                      onDragEnd: (dragDetails) =>
-                          _placeCountdownWidget(dragDetails),
+                      childWhenDragging: const SizedBox.shrink(),
+                      onDragEnd: _placeCountdownWidget,
                       child: countdownWidget,
                     );
                   },
@@ -153,51 +153,56 @@ class _StartListPage extends State<StartListPage> {
               ),
             );
           } else {
-            return const SizedBox(width: 0, height: 0);
+            return const SizedBox.shrink();
           }
         },
       );
 
   void _placeCountdownWidget(DraggableDetails dragDetails) {
     final stackRenderBox = _getRenderBox(_stackKey);
-    final stackOffset = stackRenderBox.localToGlobal(Offset.zero);
-    final stackSize = stackRenderBox.size;
     final countdownRenderBox = _getRenderBox(_countdownKey);
+    if (stackRenderBox != null && countdownRenderBox != null) {
+      final stackOffset = stackRenderBox.localToGlobal(Offset.zero);
+      final stackSize = stackRenderBox.size;
 
-    var dx = dragDetails.offset.dx;
-    var dy = dragDetails.offset.dy - stackOffset.dy;
+      var dx = dragDetails.offset.dx;
+      var dy = dragDetails.offset.dy - stackOffset.dy;
 
-    if (dx < stackOffset.dx) {
-      dx = stackOffset.dx;
-    }
-    if (dx > stackSize.width - countdownRenderBox.size.width) {
-      dx = stackSize.width - countdownRenderBox.size.width;
-    }
-    if (dy < 0) {
-      dy = 0;
-    }
-    if (dy > stackSize.height - countdownRenderBox.size.height) {
-      dy = stackSize.height - countdownRenderBox.size.height;
-    }
+      if (dx < stackOffset.dx) {
+        dx = stackOffset.dx;
+      }
+      if (dx > stackSize.width - countdownRenderBox.size.width) {
+        dx = stackSize.width - countdownRenderBox.size.width;
+      }
+      if (dy < 0) {
+        dy = 0;
+      }
+      if (dy > stackSize.height - countdownRenderBox.size.height) {
+        dy = stackSize.height - countdownRenderBox.size.height;
+      }
 
-    final settingsBloc = context.read<SettingsBloc>();
-    final settings = settingsBloc.state.settings;
-    settingsBloc.add(
-      SettingsEvent.update(
-        settings: settings.copyWith(
-          countdownLeft: dx,
-          countdownTop: dy,
+      final settingsBloc = context.read<SettingsBloc>();
+      final settings = settingsBloc.state.settings;
+      settingsBloc.add(
+        SettingsEvent.update(
+          settings: settings.copyWith(
+            countdownLeft: dx,
+            countdownTop: dy,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
-  RenderBox _getRenderBox(GlobalKey key) =>
-      key.currentContext!.findRenderObject() as RenderBox;
+  RenderBox? _getRenderBox(GlobalKey key) =>
+      key.currentContext!.findRenderObject() as RenderBox?;
 
   Future<void> _addManualStartTime(
-      DatabaseBloc bloc, DateTime now, int offset) async {
-    int? stageId = bloc.state.stage?.id;
+    DatabaseBloc bloc,
+    DateTime now,
+    int offset,
+  ) async {
+    final stageId = bloc.state.stage?.id;
     if (stageId != null) {
       //добавляем ntp offset к ручному времени старта
       final manualStartTime = now.add(Duration(microseconds: offset));
@@ -227,13 +232,13 @@ class _StartListPage extends State<StartListPage> {
   Widget build(BuildContext context) {
     return BlocListener<DatabaseBloc, DatabaseState>(
       listener: (context, state) {
-        var databaseBloc = context.read<DatabaseBloc>();
+        final databaseBloc = context.read<DatabaseBloc>();
         {
           // Добавление нового стартового времени
           // Если стартовое время уже присвоено другому номеру
           state.notification?.mapOrNull(
             updateNumber: (notification) async {
-              String text = '';
+              var text = '';
               for (final element in notification.existedStartingParticipants) {
                 if (element.automaticStartTime == null &&
                     element.manualStartTime == null) {
@@ -268,7 +273,7 @@ class _StartListPage extends State<StartListPage> {
               );
 
               if (update ?? false) {
-                var stage = state.stage;
+                final stage = state.stage;
                 if (stage != null) {
                   databaseBloc.add(
                     DatabaseEvent.addStartNumber(
@@ -285,80 +290,81 @@ class _StartListPage extends State<StartListPage> {
           );
         }
       },
-      child:
-          BlocBuilder<DatabaseBloc, DatabaseState>(builder: (context, state) {
-        final databaseBloc = context.read<DatabaseBloc>();
-        // final stage = state.stage;
-        return Scaffold(
-          // appBar: AppBar(
-          //   title: Text(stage?.name ?? 'n/a'),
-          //   actions: [
-          //     PopupMenuButton<int>(
-          //       icon: const Icon(Icons.more_vert),
-          //       itemBuilder: (context) => <PopupMenuEntry<int>>[
-          //         PopupMenuItem<int>(
-          //           value: 1,
-          //           child: ListTile(
-          //             leading: const Icon(Icons.add),
-          //             title: Text(Localization.current.I18nHome_addRacer),
-          //           ),
-          //         ),
-          //       ],
-          //       onSelected: (value) async {
-          //         switch (value) {
-          //           case 1:
-          //             if (stage != null) {
-          //               await addRacerPopup(
-          //                 context: context,
-          //                 stage: stage,
-          //               );
-          //             }
-          //             break;
-          //         }
-          //       },
-          //     ),
-          //   ],
-          // ),
-          body: Stack(
-            key: _stackKey,
-            children: [
-              _startList(state.participants),
-              _showCountdown(),
-            ],
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
-            buildWhen: (previous, current) =>
-                previous.settings.startFab != current.settings.startFab,
-            builder: (
-              context,
-              settingsState,
-            ) {
-              if (settingsState.settings.startFab) {
-                return SizedBox(
-                  height: settingsState.settings.startFabSize,
-                  width: settingsState.settings.startFabSize,
-                  child: FittedBox(
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        final now = DateTime.now();
-                        final offset = context.read<NtpBloc>().state.offset;
-                        _addManualStartTime(databaseBloc, now, offset);
-                      },
-                      child: Icon(MdiIcons.handBackLeft),
+      child: BlocBuilder<DatabaseBloc, DatabaseState>(
+        builder: (context, state) {
+          final databaseBloc = context.read<DatabaseBloc>();
+          // final stage = state.stage;
+          return Scaffold(
+            // appBar: AppBar(
+            //   title: Text(stage?.name ?? 'n/a'),
+            //   actions: [
+            //     PopupMenuButton<int>(
+            //       icon: const Icon(Icons.more_vert),
+            //       itemBuilder: (context) => <PopupMenuEntry<int>>[
+            //         PopupMenuItem<int>(
+            //           value: 1,
+            //           child: ListTile(
+            //             leading: const Icon(Icons.add),
+            //             title: Text(Localization.current.I18nHome_addRacer),
+            //           ),
+            //         ),
+            //       ],
+            //       onSelected: (value) async {
+            //         switch (value) {
+            //           case 1:
+            //             if (stage != null) {
+            //               await addRacerPopup(
+            //                 context: context,
+            //                 stage: stage,
+            //               );
+            //             }
+            //             break;
+            //         }
+            //       },
+            //     ),
+            //   ],
+            // ),
+            body: Stack(
+              key: _stackKey,
+              children: [
+                _startList(state.participants),
+                _showCountdown(),
+              ],
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
+              buildWhen: (previous, current) =>
+                  previous.settings.startFab != current.settings.startFab,
+              builder: (
+                context,
+                settingsState,
+              ) {
+                if (settingsState.settings.startFab) {
+                  return SizedBox(
+                    height: settingsState.settings.startFabSize,
+                    width: settingsState.settings.startFabSize,
+                    child: FittedBox(
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          final now = DateTime.now();
+                          final offset = context.read<NtpBloc>().state.offset;
+                          _addManualStartTime(databaseBloc, now, offset);
+                        },
+                        child: Icon(MdiIcons.handBackLeft),
+                      ),
                     ),
-                  ),
-                );
-              } else {
-                return const SizedBox(width: 0, height: 0);
-              }
-            },
-          ),
-          persistentFooterButtons:
-              kReleaseMode ? null : _persistentFooterButtons(context),
-        );
-      }),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            ),
+            persistentFooterButtons:
+                kReleaseMode ? null : _persistentFooterButtons(context),
+          );
+        },
+      ),
     );
   }
 
@@ -431,14 +437,14 @@ class _StartListPage extends State<StartListPage> {
           //     ),
           //   ),
           // );
-          final int cor = Random().nextInt(9999) - 5000;
+          final cor = Random().nextInt(9999) - 5000;
           BlocProvider.of<BluetoothBloc>(context).add(
             BluetoothEvent.messageReceived(
               message: r'$' '15:31:01,121;$cor#',
               stageId: stageId,
             ),
           );
-          final int cor2 = Random().nextInt(9999) - 5000;
+          final cor2 = Random().nextInt(9999) - 5000;
           BlocProvider.of<BluetoothBloc>(context).add(
             BluetoothEvent.messageReceived(
               message: r'$' '15:31:01,121;$cor2#',

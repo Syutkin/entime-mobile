@@ -8,7 +8,7 @@ Future<void> addRacerPopup({
   final duration = Duration(hours: now.hour, minutes: now.minute) +
       const Duration(minutes: 1);
   var time = duration < const Duration(days: 1) ? duration : Duration.zero;
-  int number = 0;
+  var number = 0;
   final formKey = GlobalKey<FormState>();
   return showDialog<void>(
     context: context,
@@ -30,7 +30,7 @@ Future<void> addRacerPopup({
                 if (value == null) {
                   return Localization.current.I18nProtocol_incorrectNumber;
                 }
-                final int? num = int.tryParse(value);
+                final num = int.tryParse(value);
                 if (num == null || num < 1) {
                   return Localization.current.I18nProtocol_incorrectNumber;
                 }
@@ -67,7 +67,7 @@ Future<void> addRacerPopup({
             if (formKey.currentState!.validate()) {
               // Форматирование Duration отсюда:
               // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
-              final String startTime =
+              final startTime =
                   time.toString().split('.').first.padLeft(8, '0');
               context.read<DatabaseBloc>().add(
                     DatabaseEvent.addStartNumber(

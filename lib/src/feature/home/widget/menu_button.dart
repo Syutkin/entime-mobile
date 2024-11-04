@@ -12,9 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MenuButton extends StatelessWidget {
+  const MenuButton({required this.activeTab, super.key});
   final AppTab activeTab;
-
-  const MenuButton({super.key, required this.activeTab});
 
   @override
   Widget build(BuildContext context) =>
@@ -27,54 +26,57 @@ class MenuButton extends StatelessWidget {
             final menuItems = <PopupMenuEntry<HomeMenuButton>>[];
             if (activeTab == AppTab.start || activeTab == AppTab.finish) {
               if (activeTab == AppTab.start) {
-                menuItems.add(
-                  PopupMenuItem(
-                    value: HomeMenuButton.addRacer,
-                    child: ListTile(
-                      leading: const Icon(Icons.add),
-                      title: Text(Localization.current.I18nHome_addRacer),
+                menuItems
+                  ..add(
+                    PopupMenuItem(
+                      value: HomeMenuButton.addRacer,
+                      child: ListTile(
+                        leading: const Icon(Icons.add),
+                        title: Text(Localization.current.I18nHome_addRacer),
+                      ),
                     ),
-                  ),
-                );
-                menuItems.add(PopupMenuDivider());
-                menuItems.add(
-                  PopupMenuItem(
-                    value: HomeMenuButton.countdownPage,
-                    child: ListTile(
-                      leading: Icon(MdiIcons.timer),
-                      title: Text(Localization.current.I18nHome_countdownPage),
+                  )
+                  ..add(const PopupMenuDivider())
+                  ..add(
+                    PopupMenuItem(
+                      value: HomeMenuButton.countdownPage,
+                      child: ListTile(
+                        leading: Icon(MdiIcons.timer),
+                        title:
+                            Text(Localization.current.I18nHome_countdownPage),
+                      ),
                     ),
-                  ),
-                );
-                menuItems.add(
-                  PopupMenuItem(
-                    value: HomeMenuButton.countdown,
-                    child: ListTile(
-                      leading: Icon(MdiIcons.timer),
-                      title: Text(Localization.current.I18nHome_countdown),
+                  )
+                  ..add(
+                    PopupMenuItem(
+                      value: HomeMenuButton.countdown,
+                      child: ListTile(
+                        leading: Icon(MdiIcons.timer),
+                        title: Text(Localization.current.I18nHome_countdown),
+                      ),
                     ),
-                  ),
-                );
+                  );
               }
-              menuItems.add(
-                PopupMenuItem(
-                  value: HomeMenuButton.fab,
-                  child: ListTile(
-                    leading: Icon(MdiIcons.handBackLeft),
-                    title: Text(Localization.current.I18nHome_fab),
+              menuItems
+                ..add(
+                  PopupMenuItem(
+                    value: HomeMenuButton.fab,
+                    child: ListTile(
+                      leading: Icon(MdiIcons.handBackLeft),
+                      title: Text(Localization.current.I18nHome_fab),
+                    ),
                   ),
-                ),
-              );
-              menuItems.add(PopupMenuDivider());
-              menuItems.add(
-                PopupMenuItem(
-                  value: HomeMenuButton.share,
-                  child: ListTile(
-                    leading: const Icon(Icons.share),
-                    title: Text(Localization.current.I18nHome_share),
+                )
+                ..add(const PopupMenuDivider())
+                ..add(
+                  PopupMenuItem(
+                    value: HomeMenuButton.share,
+                    child: ListTile(
+                      leading: const Icon(Icons.share),
+                      title: Text(Localization.current.I18nHome_share),
+                    ),
                   ),
-                ),
-              );
+                );
             } else {
               menuItems.add(
                 PopupMenuItem(
@@ -93,11 +95,10 @@ class MenuButton extends StatelessWidget {
                 switch (value) {
                   case HomeMenuButton.share:
                     if (activeTab == AppTab.start) {
-                      databaseBloc.add(DatabaseEvent.shareStart());
+                      databaseBloc.add(const DatabaseEvent.shareStart());
                     } else if (activeTab == AppTab.finish) {
-                      databaseBloc.add(DatabaseEvent.shareFinish());
+                      databaseBloc.add(const DatabaseEvent.shareFinish());
                     }
-                    break;
                   case HomeMenuButton.fab:
                     if (activeTab == AppTab.start) {
                       settingsBloc.add(
@@ -115,7 +116,6 @@ class MenuButton extends StatelessWidget {
                         ),
                       );
                     }
-                    break;
                   case HomeMenuButton.addRacer:
                     final stage = databaseBloc.state.stage;
                     if (stage != null) {
@@ -124,17 +124,14 @@ class MenuButton extends StatelessWidget {
                         stage: stage,
                       );
                     }
-                    break;
                   case HomeMenuButton.selectRace:
                     await Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (context) => const RacesListPage(),
                       ),
                     );
-                    break;
                   case HomeMenuButton.bluetooth:
                     await selectBluetoothDevice(context);
-                    break;
                   case HomeMenuButton.countdown:
                     settingsBloc.add(
                       SettingsEvent.update(
@@ -142,9 +139,8 @@ class MenuButton extends StatelessWidget {
                             settings.copyWith(countdown: !settings.countdown),
                       ),
                     );
-                    break;
                   case HomeMenuButton.countdownPage:
-                    Navigator.of(context).push(
+                    await Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (context) => const CountdownPage(),
                       ),

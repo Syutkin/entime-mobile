@@ -100,21 +100,22 @@ class _FinishListPage extends State<FinishListPage> {
         },
         child: Scaffold(
           body: BlocBuilder<DatabaseBloc, DatabaseState>(
-              builder: (context, state) {
-            // ToDo: настройки? более интересное поведение?
-            // ToDo: Перематывать только при первоначальном показе всех отсечек?
-            // скролл на последнюю запись если показываем скрытые отсечки
-            if (!BlocProvider.of<SettingsBloc>(context)
-                .state
-                .settings
-                .hideMarked) {
-              SchedulerBinding.instance.addPostFrameCallback((_) {
-                scrollToEnd(_scrollController);
-              });
-            }
-            // return const SizedBox.shrink();
-            return _finishList(state.finishes);
-          }),
+            builder: (context, state) {
+              // ToDo: настройки? более интересное поведение?
+              // ToDo: Перематывать только при первоначальном показе всех отсечек?
+              // скролл на последнюю запись если показываем скрытые отсечки
+              if (!BlocProvider.of<SettingsBloc>(context)
+                  .state
+                  .settings
+                  .hideMarked) {
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  scrollToEnd(_scrollController);
+                });
+              }
+              // return const SizedBox.shrink();
+              return _finishList(state.finishes);
+            },
+          ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
@@ -128,13 +129,13 @@ class _FinishListPage extends State<FinishListPage> {
                   width: settingsState.settings.finishFabSize,
                   child: FittedBox(
                     child: FloatingActionButton(
-                      onPressed: () => _addFinishTimeManual(),
+                      onPressed: _addFinishTimeManual,
                       child: Icon(MdiIcons.handBackLeft),
                     ),
                   ),
                 );
               }
-              return const SizedBox(width: 0, height: 0);
+              return const SizedBox.shrink();
             },
           ),
           persistentFooterButtons: _getFooterButtons(context),
@@ -167,7 +168,7 @@ class _FinishListPage extends State<FinishListPage> {
                   },
                   onAccept: (details) {
                     final databaseBloc = context.read<DatabaseBloc>();
-                    var stage = databaseBloc.state.stage;
+                    final stage = databaseBloc.state.stage;
                     final finishId = item.id;
                     final number = details.data;
                     final finishTime = item.finishTime;
@@ -206,7 +207,7 @@ class _FinishListPage extends State<FinishListPage> {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: state.numbersOnTrace.length,
-              padding: EdgeInsets.only(left: 5),
+              padding: const EdgeInsets.only(left: 5),
               itemBuilder: (context, index) {
                 final item = state.numbersOnTrace[index];
                 final isSelected = item.number == state.awaitingNumber;
@@ -216,7 +217,7 @@ class _FinishListPage extends State<FinishListPage> {
                     final databaseBloc = context.read<DatabaseBloc>();
                     isSelected
                         ? databaseBloc
-                            .add(DatabaseEvent.deselectAwaitingNumber())
+                            .add(const DatabaseEvent.deselectAwaitingNumber())
                         : databaseBloc.add(
                             DatabaseEvent.selectAwaitingNumber(
                               number: item.number,
@@ -237,36 +238,39 @@ class _FinishListPage extends State<FinishListPage> {
 
   Future<void> _clearPopup(int? number) async {
     final databaseBloc = context.read<DatabaseBloc>();
-    Stage? stage = databaseBloc.state.stage;
-    final RenderBox overlay =
-        Overlay.of(context).context.findRenderObject() as RenderBox;
-    final FinishPopupMenu? result = await showMenu<FinishPopupMenu>(
-      items: _getPopupMenu(context, number),
-      context: context,
-      position: RelativeRect.fromRect(
-        _tapPosition & const Size(60, 60), // smaller rect, the touch area
-        Offset.zero &
-            overlay.semanticBounds.size, // Bigger rect, the entire screen
-      ),
-    );
-    if (result != null && stage != null) {
-      switch (result) {
-        case FinishPopupMenu.clearNumber:
-          if (number != null) {
+    final stage = databaseBloc.state.stage;
+    final overlay = Overlay.of(context).context.findRenderObject();
+    if (overlay != null) {
+      final result = await showMenu<FinishPopupMenu>(
+        items: _getPopupMenu(context, number),
+        context: context,
+        position: RelativeRect.fromRect(
+          _tapPosition & const Size(60, 60), // smaller rect, the touch area
+          Offset.zero &
+              overlay.semanticBounds.size, // Bigger rect, the entire screen
+        ),
+      );
+      if (result != null && stage != null) {
+        switch (result) {
+          case FinishPopupMenu.clearNumber:
+            if (number != null) {
+              // if (!mounted) {
+              //   return;
+              // }
+              databaseBloc.add(
+                DatabaseEvent.clearNumberAtFinish(
+                  stage: stage,
+                  number: number,
+                ),
+              );
+            }
+          case FinishPopupMenu.hideAll:
             // if (!mounted) {
             //   return;
             // }
-            databaseBloc.add(DatabaseEvent.clearNumberAtFinish(
-                stage: stage, number: number));
-          }
-          break;
-        case FinishPopupMenu.hideAll:
-          // if (!mounted) {
-          //   return;
-          // }
-          final stageId = stage.id;
-          databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
-          break;
+            final stageId = stage.id;
+            databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
+        }
       }
     }
   }
@@ -301,40 +305,41 @@ class _FinishListPage extends State<FinishListPage> {
 
   Future<void> _numberOnTracePopup(int number) async {
     final databaseBloc = context.read<DatabaseBloc>();
-    Stage? stage = databaseBloc.state.stage;
-    final RenderBox overlay =
-        Overlay.of(context).context.findRenderObject() as RenderBox;
-    final ParticipantStatus? result = await showMenu(
-      items: _getNumberOnTracePopupMenu(context, number),
-      context: context,
-      position: RelativeRect.fromRect(
-        _tapPosition & const Size(40, 40), // smaller rect, the touch area
-        Offset.zero &
-            overlay.semanticBounds.size, // Bigger rect, the entire screen
-      ),
-    );
-    if (result != null && stage != null) {
-      switch (result) {
-        case ParticipantStatus.active:
-          break;
-        case ParticipantStatus.dns:
-          if (!mounted) {
-            return;
-          }
-          databaseBloc
-              .add(DatabaseEvent.setDNSForStage(stage: stage, number: number));
-          break;
-        case ParticipantStatus.dnf:
-          if (!mounted) {
-            return;
-          }
-          databaseBloc
-              .add(DatabaseEvent.setDNFForStage(stage: stage, number: number));
-          break;
-        case ParticipantStatus.dsq:
-          break;
-        case ParticipantStatus.unknown:
-          break;
+    final stage = databaseBloc.state.stage;
+    final overlay = Overlay.of(context).context.findRenderObject();
+    if (overlay != null) {
+      final result = await showMenu(
+        items: _getNumberOnTracePopupMenu(context, number),
+        context: context,
+        position: RelativeRect.fromRect(
+          _tapPosition & const Size(40, 40), // smaller rect, the touch area
+          Offset.zero &
+              overlay.semanticBounds.size, // Bigger rect, the entire screen
+        ),
+      );
+      if (result != null && stage != null) {
+        switch (result) {
+          case ParticipantStatus.active:
+            break;
+          case ParticipantStatus.dns:
+            if (!mounted) {
+              return;
+            }
+            databaseBloc.add(
+              DatabaseEvent.setDNSForStage(stage: stage, number: number),
+            );
+          case ParticipantStatus.dnf:
+            if (!mounted) {
+              return;
+            }
+            databaseBloc.add(
+              DatabaseEvent.setDNFForStage(stage: stage, number: number),
+            );
+          case ParticipantStatus.dsq:
+            break;
+          case ParticipantStatus.unknown:
+            break;
+        }
       }
     }
   }
@@ -365,24 +370,34 @@ class _FinishListPage extends State<FinishListPage> {
     return list;
   }
 
-  RelativeRect buttonMenuPosition(BuildContext buildContext) {
-    final RenderBox bar = buildContext.findRenderObject() as RenderBox;
-    final RenderBox overlay =
-        Overlay.of(buildContext).context.findRenderObject() as RenderBox;
-    // ignore: omit_local_variable_types
-    final RelativeRect position = RelativeRect.fromRect(
-      Rect.fromPoints(
-        bar.localToGlobal(bar.size.bottomRight(Offset.zero), ancestor: overlay),
-        bar.localToGlobal(bar.size.bottomRight(Offset.zero), ancestor: overlay),
-      ),
-      Offset.zero & overlay.size,
-    );
-    return position;
+  RelativeRect? buttonMenuPosition(BuildContext buildContext) {
+    final bar = buildContext.findRenderObject() as RenderBox?;
+    final overlay =
+        Overlay.of(buildContext).context.findRenderObject() as RenderBox?;
+    if (bar != null && overlay != null) {
+      // ignore: omit_local_variable_types
+      final RelativeRect position = RelativeRect.fromRect(
+        Rect.fromPoints(
+          bar.localToGlobal(
+            bar.size.bottomRight(Offset.zero),
+            ancestor: overlay,
+          ),
+          bar.localToGlobal(
+            bar.size.bottomRight(Offset.zero),
+            ancestor: overlay,
+          ),
+        ),
+        Offset.zero & overlay.size,
+      );
+      return position;
+    } else {
+      return null;
+    }
   }
 
   List<Widget> _getFooterButtons(BuildContext context) {
     final databaseBloc = context.read<DatabaseBloc>();
-    Stage? stage = databaseBloc.state.stage;
+    final stage = databaseBloc.state.stage;
     if (!kReleaseMode) {
       return <Widget>[
         Column(
@@ -462,13 +477,15 @@ class _FinishListPage extends State<FinishListPage> {
     final manual = now.add(Duration(microseconds: offset));
     final finishTime = DateFormat(longTimeFormat).format(manual);
     final databaseBloc = context.read<DatabaseBloc>();
-    int? stageId = databaseBloc.state.stage?.id;
+    final stageId = databaseBloc.state.stage?.id;
     if (stageId != null) {
-      databaseBloc.add(DatabaseEvent.addFinishTimeManual(
-        stageId: stageId,
-        finishTime: finishTime,
-        timestamp: timestamp,
-      ));
+      databaseBloc.add(
+        DatabaseEvent.addFinishTimeManual(
+          stageId: stageId,
+          finishTime: finishTime,
+          timestamp: timestamp,
+        ),
+      );
     }
   }
 
@@ -481,10 +498,14 @@ class _FinishListPage extends State<FinishListPage> {
     final databaseBloc = context.read<DatabaseBloc>();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final now = DateTime.now();
-      int? stageId = databaseBloc.state.stage?.id;
+      final stageId = databaseBloc.state.stage?.id;
       if (prevMinute != now.minute && now.second > 0 && stageId != null) {
-        databaseBloc.add(DatabaseEvent.getNumbersOnTraceNow(
-            stageId: stageId, dateTimeNow: now));
+        databaseBloc.add(
+          DatabaseEvent.getNumbersOnTraceNow(
+            stageId: stageId,
+            dateTimeNow: now,
+          ),
+        );
         prevMinute = now.minute;
       }
     });

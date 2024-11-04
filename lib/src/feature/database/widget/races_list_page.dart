@@ -15,7 +15,6 @@ class RacesListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: Text(Localization.current.I18nDatabase_races)),
       floatingActionButton: FloatingActionButton(

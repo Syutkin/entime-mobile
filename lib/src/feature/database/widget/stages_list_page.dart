@@ -10,8 +10,8 @@ import '../database.dart';
 part 'popup/add_or_update_stage_popup.dart';
 
 class StagesListPage extends StatelessWidget {
-  final Race race;
   const StagesListPage({required this.race, super.key});
+  final Race race;
 
   @override
   Widget build(BuildContext context) => Scaffold(

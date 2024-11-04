@@ -9,9 +9,9 @@ part 'start_item_csv.g.dart';
 @freezed
 class StartItemCsv with _$StartItemCsv {
   const factory StartItemCsv({
-    String? category,
     required int number,
     required String name,
+    String? category,
     String? nickname,
     String? age,
     String? team,
@@ -30,9 +30,9 @@ class StartItemCsv with _$StartItemCsv {
     String? age;
     String? team;
     String? city;
-    Map<String, String> startTimes = {};
-    for (var key in map.keys) {
-      var element = key.toLowerCase().trim();
+    final startTimes = <String, String>{};
+    for (final key in map.keys) {
+      final element = key.toLowerCase().trim();
       if (Legend.category.contains(element)) {
         category = map[key].toString();
       } else if (Legend.number.contains(element)) {

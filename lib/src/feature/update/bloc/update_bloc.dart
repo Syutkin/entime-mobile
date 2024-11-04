@@ -10,8 +10,6 @@ part 'update_event.dart';
 part 'update_state.dart';
 
 class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
-  final UpdateProvider updateProvider;
-
   UpdateBloc({
     required this.updateProvider,
   }) : super(const UpdateInitial()) {
@@ -28,7 +26,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       });
 
     on<CheckUpdate>((event, emit) async {
-      final bool update = await updateProvider.isUpdateAvailable();
+      final update = await updateProvider.isUpdateAvailable();
       if (update) {
         emit(UpdateAvailable(version: updateProvider.latestVersion));
       } else {
@@ -61,4 +59,5 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       emit(UpdateInitial(showChangelog: await updateProvider.showChangelog()));
     });
   }
+  final UpdateProvider updateProvider;
 }

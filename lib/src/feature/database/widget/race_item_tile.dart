@@ -7,15 +7,15 @@ import '../database.dart';
 
 class RaceItemTile extends StatelessWidget {
   const RaceItemTile({
-    super.key,
     required this.race,
+    super.key,
   });
 
   final Race race;
 
   @override
   Widget build(BuildContext context) {
-    final DateFormat formatter =
+    final formatter =
         DateFormat.yMd(Localizations.localeOf(context).languageCode);
     return ListTile(
       title: Text(race.name),
@@ -30,7 +30,7 @@ class RaceItemTile extends StatelessWidget {
       },
       trailing: PopupMenuButton<void>(
         icon: const Icon(Icons.more_vert),
-        itemBuilder: (context) => _menuEntryList(context),
+        itemBuilder: _menuEntryList,
       ),
     );
   }
@@ -46,7 +46,7 @@ class RaceItemTile extends StatelessWidget {
           title: Text(Localization.current.I18nCore_edit),
         ),
       ),
-      PopupMenuDivider(),
+      const PopupMenuDivider(),
       PopupMenuItem<void>(
         // ToDo: confirmation dialog
         onTap: () =>

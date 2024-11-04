@@ -1,7 +1,7 @@
 part of 'settings_popups.dart';
 
 Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
-  int newLimit = limit;
+  var newLimit = limit;
 
   final delayController = TextEditingController()
     ..text = (newLimit < 0 ? '' : newLimit).toString();
@@ -31,7 +31,7 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
                   newLimit = -1;
                   return null;
                 }
-                final int? val = int.tryParse(value);
+                final val = int.tryParse(value);
                 if (val == null) {
                   return Localization.current.I18nSettings_enterNumber;
                 }

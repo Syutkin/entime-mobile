@@ -7,9 +7,9 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final double height = textTheme.bodyLarge!.fontSize! * 3;
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    final height = textTheme.bodyLarge!.fontSize! * 3;
     return Container(
       height: height,
       decoration: BoxDecoration(

@@ -3,12 +3,11 @@ import 'package:device_info_plus/device_info_plus.dart';
 import '../../../constants/pubspec.yaml.g.dart';
 
 class AppInfoProvider {
-  final AndroidDeviceInfo _deviceInfo;
-  final List<String> _supportedAbis = ['armeabi-v7a', 'arm64-v8a', 'x86_64'];
-
   AppInfoProvider._(
     AndroidDeviceInfo deviceInfo,
   ) : _deviceInfo = deviceInfo;
+  final AndroidDeviceInfo _deviceInfo;
+  final List<String> _supportedAbis = ['armeabi-v7a', 'arm64-v8a', 'x86_64'];
 
   static Future<AppInfoProvider> load({
     required AndroidDeviceInfo deviceInfo,

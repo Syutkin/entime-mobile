@@ -73,38 +73,42 @@ Future<void> _upsertStagePopup(
             // Трейл этапа
             BlocBuilder<TrailsBloc, TrailsState>(
               builder: (context, state) {
-                return state.map(initial: (state) {
-                  return SizedBox.shrink();
-                }, initialized: (state) {
-                  if (trailId != null) {
-                    context.read<TrailsBloc>().state.mapOrNull(
+                return state.map(
+                  initial: (state) {
+                    return const SizedBox.shrink();
+                  },
+                  initialized: (state) {
+                    if (trailId != null) {
+                      context.read<TrailsBloc>().state.mapOrNull(
                         initialized: (state) {
-                      for (var t in state.trails) {
-                        if (t.id == trailId) {
-                          trail = t;
-                          break;
-                        }
-                      }
-                    });
-                  }
-                  return DropdownButtonFormField<Trail?>(
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    value: trail,
-                    decoration: InputDecoration(
-                      labelText: Localization.current.I18nDatabase_trail,
-                    ),
-                    onChanged: (value) {
-                      trail = value;
-                      trailId = trail?.id;
-                    },
-                    items: state.trails.map((value) {
-                      return DropdownMenuItem<Trail>(
-                        value: value,
-                        child: Text(value.name),
+                          for (final t in state.trails) {
+                            if (t.id == trailId) {
+                              trail = t;
+                              break;
+                            }
+                          }
+                        },
                       );
-                    }).toList(),
-                  );
-                });
+                    }
+                    return DropdownButtonFormField<Trail?>(
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      value: trail,
+                      decoration: InputDecoration(
+                        labelText: Localization.current.I18nDatabase_trail,
+                      ),
+                      onChanged: (value) {
+                        trail = value;
+                        trailId = trail?.id;
+                      },
+                      items: state.trails.map((value) {
+                        return DropdownMenuItem<Trail>(
+                          value: value,
+                          child: Text(value.name),
+                        );
+                      }).toList(),
+                    );
+                  },
+                );
               },
             ),
 

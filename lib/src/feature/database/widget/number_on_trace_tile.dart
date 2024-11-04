@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
 class NumberOnTraceTile extends StatelessWidget {
+  const NumberOnTraceTile({
+    required this.number,
+    super.key,
+    this.onTap,
+    this.onTapDown,
+    this.onLongPress,
+    this.isSelected = false,
+  });
   final int number;
   final bool isSelected;
   final GestureTapCallback? onTap;
   final GestureTapDownCallback? onTapDown;
   final GestureLongPressCallback? onLongPress;
 
-  const NumberOnTraceTile({
-    super.key,
-    required this.number,
-    this.onTap,
-    this.onTapDown,
-    this.onLongPress,
-    this.isSelected = false,
-  });
-
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(left: 3.0, right: 3.0),
+        padding: const EdgeInsets.only(left: 3, right: 3),
         child: Draggable(
           feedback: _dragTile(context),
           childWhenDragging: ConstrainedBox(

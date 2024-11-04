@@ -50,7 +50,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool updated = false;
+    var updated = false;
     // migration from WillPopScope to PopScope is taken from
     // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
     return PopScope(
@@ -59,8 +59,8 @@ class ModuleSettingsInitScreen extends StatelessWidget {
         if (didPop) {
           return;
         }
-        final NavigatorState navigator = Navigator.of(context);
-        final bool shouldPop = await _onBackPressed(context, updated);
+        final navigator = Navigator.of(context);
+        final shouldPop = await _onBackPressed(context, updated);
         if (shouldPop) {
           navigator.pop();
         }
@@ -93,12 +93,11 @@ class ModuleSettingsInitScreen extends StatelessWidget {
 }
 
 class ModuleSettingsScreen extends StatelessWidget {
-  final VoidCallback onChanged;
-
   const ModuleSettingsScreen({
-    super.key,
     required this.onChanged,
+    super.key,
   });
+  final VoidCallback onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +140,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   ),
                   //leading:  Icon(MdiIcons.wave),
                   onPressed: (context) async {
-                    final int? hz = await buzzerFrequencyPopup(
+                    final hz = await buzzerFrequencyPopup(
                       frequency: bloc.moduleSettings.shortFrequency,
                       context: context,
                       text: Localization
@@ -165,7 +164,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   ),
                   //leading:  Icon(MdiIcons.wave),
                   onPressed: (context) async {
-                    final int? hz = await buzzerFrequencyPopup(
+                    final hz = await buzzerFrequencyPopup(
                       frequency: bloc.moduleSettings.longFrequency,
                       context: context,
                       text: Localization
@@ -374,7 +373,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   trailing: Text('${bloc.moduleSettings.bluetoothNumber}'),
                   //leading:  Icon(MdiIcons.bluetooth),
                   onPressed: (context) async {
-                    final int? number = await bluetoothNumberPopup(
+                    final number = await bluetoothNumberPopup(
                       context: context,
                       labelText: Localization
                           .current.I18nModuleSettings_bluetoothNumber,
@@ -441,7 +440,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   ),
                   //leading:  Icon(MdiIcons.resistor),
                   onPressed: (context) async {
-                    final int? r1 = await vccPopup(
+                    final r1 = await vccPopup(
                       context: context,
                       labelText: Localization.current.I18nModuleSettings_ohm,
                       text: Localization
@@ -465,7 +464,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   ),
                   //leading:  Icon(MdiIcons.resistor),
                   onPressed: (context) async {
-                    final int? r2 = await vccPopup(
+                    final r2 = await vccPopup(
                       context: context,
                       labelText: Localization.current.I18nModuleSettings_ohm,
                       text: Localization
@@ -486,7 +485,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   // subtitle: Text('${_bloc.moduleSettings.vBat} мВ'),
                   //leading:  Icon(MdiIcons.batteryCharging),
                   onPressed: (context) async {
-                    final int? mv = await vccPopup(
+                    final mv = await vccPopup(
                       context: context,
                       labelText: Localization.current.I18nModuleSettings_mv,
                       text: Localization
@@ -552,7 +551,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   description: Text('${bloc.moduleSettings.bluetoothNumber}'),
                   //leading:  Icon(MdiIcons.bluetooth),
                   onPressed: (context) async {
-                    final int? number = await bluetoothNumberPopup(
+                    final number = await bluetoothNumberPopup(
                       context: context,
                       labelText: Localization
                           .current.I18nModuleSettings_bluetoothNumber,
@@ -573,7 +572,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   description: Text('${bloc.moduleSettings.brightness}'),
                   //leading:  Icon(MdiIcons.brightness1),
                   onPressed: (context) async {
-                    final int? number = await brightnessPopup(
+                    final number = await brightnessPopup(
                       initialValue: bloc.moduleSettings.brightness,
                       context: context,
                       text:
@@ -608,7 +607,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   description: Text(bloc.moduleSettings.ssid),
                   //leading:  Icon(MdiIcons.wifi),
                   onPressed: (context) async {
-                    final String? ssid = await wifiSettingsPopup(
+                    final ssid = await wifiSettingsPopup(
                       context: context,
                       labelText: Localization.current.I18nModuleSettings_wifi,
                       text:
@@ -628,7 +627,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                   //subtitle: Text('${(moduleSettings.password)}'),
                   //leading:  Icon(MdiIcons.wifi),
                   onPressed: (context) async {
-                    final String? password = await wifiSettingsPopup(
+                    final password = await wifiSettingsPopup(
                       context: context,
                       labelText:
                           Localization.current.I18nModuleSettings_password,

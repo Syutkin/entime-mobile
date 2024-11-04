@@ -21,7 +21,7 @@ class Legend {
     'год',
     'год рождения',
     'дата рождения',
-    'age'
+    'age',
   ];
   static const List<String> team = [
     'команда',

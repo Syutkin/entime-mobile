@@ -16,27 +16,34 @@ class NtpTile extends StatelessWidget {
           return ListTile(
             enabled: context.read<ConnectivityBloc>().state.isConnected,
             onTap: () async {
-              context.read<NtpBloc>().add(NtpEvent.getNtpOffset());
+              context.read<NtpBloc>().add(const NtpEvent.getNtpOffset());
             },
             leading: IconButton(
               icon: Icon(MdiIcons.timerSyncOutline),
               onPressed: () {
-                context.read<NtpBloc>().add(NtpEvent.getNtpOffset());
+                context.read<NtpBloc>().add(const NtpEvent.getNtpOffset());
               },
             ),
             title: Text(Localization.current.I18nNtp_ntpOffset),
             subtitle: BlocBuilder<NtpBloc, NtpState>(
               builder: (context, state) {
-                return state.map(initial: (state) {
-                  return Text(Localization.current.I18nNtp_sync);
-                }, loading: (state) {
-                  return Text(Localization.current.I18nNtp_syncing);
-                }, success: (state) {
-                  return Text(Localization.current
-                      .I18nNtp_offsetInMilliseconds(state.offset ~/ 1000));
-                }, failure: (state) {
-                  return Text(Localization.current.I18nNtp_syncError);
-                });
+                return state.map(
+                  initial: (state) {
+                    return Text(Localization.current.I18nNtp_sync);
+                  },
+                  loading: (state) {
+                    return Text(Localization.current.I18nNtp_syncing);
+                  },
+                  success: (state) {
+                    return Text(
+                      Localization.current
+                          .I18nNtp_offsetInMilliseconds(state.offset ~/ 1000),
+                    );
+                  },
+                  failure: (state) {
+                    return Text(Localization.current.I18nNtp_syncError);
+                  },
+                );
               },
             ),
           );

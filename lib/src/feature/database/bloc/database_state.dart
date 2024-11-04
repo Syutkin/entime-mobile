@@ -3,8 +3,6 @@ part of 'database_bloc.dart';
 @freezed
 class DatabaseState with _$DatabaseState {
   const factory DatabaseState({
-    Race? race,
-    Stage? stage,
     required List<Race> races,
     required List<Stage> stages,
     required List<Rider> riders,
@@ -13,6 +11,8 @@ class DatabaseState with _$DatabaseState {
     required List<Start> starts,
     required List<Finish> finishes,
     required List<StartingParticipant> numbersOnTrace,
+    Race? race,
+    Stage? stage,
     Notification? notification,
 
     // Стартовое время и номер, которые хотим установить

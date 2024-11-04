@@ -13,9 +13,6 @@ part 'countdown_event.dart';
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
-  final IAudioController _audioController;
-  final CountdownAtStart _countdown;
-
   CountdownBloc({
     required IAudioController audioController,
     required CountdownAtStart countdown,
@@ -41,9 +38,11 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
         tick: (event) {
           final nextStartTime = event.tick.nextStartTime;
           if (nextStartTime == null) {
-            emit(CountdownState.working(
-              tick: Tick(text: event.tick.text, second: event.tick.second),
-            ));
+            emit(
+              CountdownState.working(
+                tick: Tick(text: event.tick.text, second: event.tick.second),
+              ),
+            );
           } else {
             emit(
               CountdownState.working(
@@ -69,4 +68,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
       );
     });
   }
+
+  final IAudioController _audioController;
+  final CountdownAtStart _countdown;
 }

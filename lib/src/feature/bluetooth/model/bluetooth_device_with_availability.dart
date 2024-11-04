@@ -7,10 +7,6 @@ enum BluetoothDeviceAvailability {
 }
 
 class BluetoothDeviceWithAvailability extends BluetoothDevice {
-  BluetoothDevice device;
-  BluetoothDeviceAvailability availability;
-  int? rssi;
-
   BluetoothDeviceWithAvailability(this.device, this.availability, [this.rssi])
       : super(
           address: device.address,
@@ -19,4 +15,8 @@ class BluetoothDeviceWithAvailability extends BluetoothDevice {
           isConnected: device.isConnected,
           type: device.type,
         );
+
+  BluetoothDevice device;
+  BluetoothDeviceAvailability availability;
+  int? rssi;
 }

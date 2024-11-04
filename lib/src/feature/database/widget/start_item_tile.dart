@@ -5,20 +5,19 @@ import '../../../common/utils/extension_on_string.dart';
 import '../database.dart';
 
 class StartItemTile extends StatelessWidget {
-  final GestureTapCallback? onTap;
-  final DismissDirectionCallback? onDismissed;
-  final ParticipantAtStart item;
-  final bool isHighlighted;
-  final String? countdown;
-
   const StartItemTile({
-    super.key,
     required this.item,
+    super.key,
     this.isHighlighted = false,
     this.onTap,
     this.onDismissed,
     this.countdown,
   });
+  final GestureTapCallback? onTap;
+  final DismissDirectionCallback? onDismissed;
+  final ParticipantAtStart item;
+  final bool isHighlighted;
+  final String? countdown;
 
   @override
   Widget build(BuildContext context) {

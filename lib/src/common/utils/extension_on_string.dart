@@ -20,12 +20,11 @@ extension StringExt on String {
   }
 
   bool get isUrl {
-    RegExp regExp = RegExp(
+    final regExp = RegExp(
       // ToDo: пропускать русские домены
       // Простой валидатор домена
       r'^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}$',
       caseSensitive: false,
-      multiLine: false,
     );
     return regExp.hasMatch(this);
   }

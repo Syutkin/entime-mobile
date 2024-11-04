@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ExpandedAlertDialog extends StatelessWidget {
-  final double? width;
-  final double? height;
-
-  final bool scrollable;
-  final Widget? title;
-  final Widget? content;
-  final List<Widget>? actions;
-
   const ExpandedAlertDialog({
     super.key,
     this.height,
@@ -18,6 +10,13 @@ class ExpandedAlertDialog extends StatelessWidget {
     this.content,
     this.actions,
   });
+  final double? width;
+  final double? height;
+
+  final bool scrollable;
+  final Widget? title;
+  final Widget? content;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) => AlertDialog(

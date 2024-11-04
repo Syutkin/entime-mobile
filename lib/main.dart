@@ -101,6 +101,19 @@ Future<void> main() async {
 }
 
 class EntimeApp extends StatelessWidget {
+  const EntimeApp({
+    required this.settingsProvider,
+    required this.updateProvider,
+    required this.bluetoothProvider,
+    required this.audioController,
+    required this.appInfo,
+    required this.database,
+    required this.countdown,
+    required this.ntpProvider,
+    required this.connectivityProvider,
+    super.key,
+  });
+
   final SettingsProvider settingsProvider;
   final AppInfoProvider appInfo;
   final UpdateProvider updateProvider;
@@ -112,19 +125,6 @@ class EntimeApp extends StatelessWidget {
   final CountdownAtStart countdown;
   final INtpProvider ntpProvider;
   final IConnectivityProvider connectivityProvider;
-
-  const EntimeApp({
-    super.key,
-    required this.settingsProvider,
-    required this.updateProvider,
-    required this.bluetoothProvider,
-    required this.audioController,
-    required this.appInfo,
-    required this.database,
-    required this.countdown,
-    required this.ntpProvider,
-    required this.connectivityProvider,
-  });
 
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
@@ -151,8 +151,7 @@ class EntimeApp extends StatelessWidget {
             )..add(const DatabaseEvent.initialize()),
           ),
           BlocProvider<TrailsBloc>(
-            create: (context) =>
-                TrailsBloc(database: database),
+            create: (context) => TrailsBloc(database: database),
           ),
           BlocProvider<CountdownBloc>(
             create: (context) => CountdownBloc(
@@ -181,7 +180,7 @@ class EntimeApp extends StatelessWidget {
           ),
           BlocProvider<ConnectivityBloc>(
             create: (context) => ConnectivityBloc(connectivityProvider),
-          )
+          ),
         ],
         child: const EntimeAppView(),
       );
@@ -196,7 +195,7 @@ class EntimeAppView extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.read<SettingsBloc>().state.settings;
     if (settings.updateNtpOffsetAtStartup) {
-      context.read<NtpBloc>().add(NtpEvent.getNtpOffset());
+      context.read<NtpBloc>().add(const NtpEvent.getNtpOffset());
     }
     if (settings.checkUpdates) {
       context.read<UpdateBloc>().add(const UpdateEvent.checkUpdate());

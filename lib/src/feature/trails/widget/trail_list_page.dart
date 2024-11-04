@@ -11,9 +11,8 @@ import '../bloc/trails_bloc.dart';
 part 'popup/add_or_update_trail_popup.dart';
 
 class TrailListPage extends StatelessWidget {
-  final _scrollController = ScrollController();
-
   TrailListPage({super.key});
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +23,25 @@ class TrailListPage extends StatelessWidget {
       ),
       body: BlocBuilder<TrailsBloc, TrailsState>(
         builder: (context, state) {
-          return state.map(initial: (state) {
-            return const CircularProgressIndicator();
-          }, initialized: (state) {
-            final trails = state.trails;
-            return Scrollbar(
-              child: ListView.builder(
-                controller: _scrollController,
-                shrinkWrap: true,
-                itemCount: trails.length,
-                itemBuilder: (context, index) {
-                  final trail = trails[index];
-                  return TrailItemTile(trail: trail);
-                },
-              ),
-            );
-          });
+          return state.map(
+            initial: (state) {
+              return const CircularProgressIndicator();
+            },
+            initialized: (state) {
+              final trails = state.trails;
+              return Scrollbar(
+                child: ListView.builder(
+                  controller: _scrollController,
+                  shrinkWrap: true,
+                  itemCount: trails.length,
+                  itemBuilder: (context, index) {
+                    final trail = trails[index];
+                    return TrailItemTile(trail: trail);
+                  },
+                ),
+              );
+            },
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(

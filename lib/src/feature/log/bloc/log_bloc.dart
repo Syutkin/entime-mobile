@@ -13,19 +13,12 @@ part 'log_event.dart';
 part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {
-  final AppDatabase _db;
-  final SettingsProvider _settingsProvider;
-
-  int _limit = -1;
-
-  List<Log> _log = [];
-
-  LogBloc(
-      {required AppDatabase database,
-      required SettingsProvider settingsProvider})
-      : _db = database,
+  LogBloc({
+    required AppDatabase database,
+    required SettingsProvider settingsProvider,
+  })  : _db = database,
         _settingsProvider = settingsProvider,
-        super(LogState.initial()) {
+        super(const LogState.initial()) {
     _settingsProvider.state.listen((state) {
       _limit = state.logLimit;
     });
@@ -50,11 +43,13 @@ class LogBloc extends Bloc<LogEvent, LogState> {
           //   direction: event.direction,
           //   rawData: event.rawData,
           // );
-          state.mapOrNull(initialized: (state) {
-            if (state.updateLogScreen ?? false) {
-              add(const LogEvent.show());
-            }
-          });
+          state.mapOrNull(
+            initialized: (state) {
+              if (state.updateLogScreen ?? false) {
+                add(const LogEvent.show());
+              }
+            },
+          );
         },
         show: (_Show event) async {
           _log = await _db.getLog(limit: _limit);
@@ -76,4 +71,10 @@ class LogBloc extends Bloc<LogEvent, LogState> {
       );
     });
   }
+  final AppDatabase _db;
+  final SettingsProvider _settingsProvider;
+
+  int _limit = -1;
+
+  List<Log> _log = [];
 }

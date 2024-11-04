@@ -69,8 +69,6 @@ Future<File?> saveCsv(String csv, String filename) async {
 
 //CSV to List<Map<String, String>> instead of the normal List<List<String>> scheme of the original csv package
 class CsvToMapConverter {
-  late CsvToListConverter converter;
-
   CsvToMapConverter({
     String? fieldDelimiter = defaultFieldDelimiter,
     String? textDelimiter = defaultTextDelimiter,
@@ -91,14 +89,16 @@ class CsvToMapConverter {
     );
   }
 
+  late CsvToListConverter converter;
+
   List<Map<String, dynamic>> convert(String csv) {
     final list = converter.convert<dynamic>(csv);
     final List<dynamic> legend =
         list.first.map((dynamic category) => category.toString()).toList();
-    final List<Map<String, dynamic>> maps = [];
+    final maps = <Map<String, dynamic>>[];
     list.sublist(1).forEach((l) {
       final map = <String, dynamic>{};
-      for (int i = 0; i < legend.length; i++) {
+      for (var i = 0; i < legend.length; i++) {
         map.putIfAbsent('${legend[i]}', () => l[i]);
       }
       maps.add(map);

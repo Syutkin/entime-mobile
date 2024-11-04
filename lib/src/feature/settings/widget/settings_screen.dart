@@ -96,7 +96,7 @@ class _SettingsList extends StatelessWidget {
                 title: Text(Localization.current.I18nSettings_language),
                 trailing: DropdownMenu<String>(
                   inputDecorationTheme:
-                      InputDecorationTheme(border: InputBorder.none),
+                      const InputDecorationTheme(border: InputBorder.none),
                   dropdownMenuEntries: _dropdownMenuEntries(),
                   initialSelection:
                       Localizations.localeOf(context).languageCode,
@@ -136,7 +136,8 @@ class _SettingsList extends StatelessWidget {
                     settingsState.settings.sound && settingsState.settings.beep,
                 title: Text(Localization.current.I18nSettings_countdownFromApp),
                 description: Text(
-                    Localization.current.I18nSettings_countdownFromAppDetails),
+                  Localization.current.I18nSettings_countdownFromAppDetails,
+                ),
                 initialValue: settingsState.settings.beepFromApp,
                 onToggle: (value) {
                   settingsBloc.add(
@@ -510,7 +511,7 @@ class _SettingsList extends StatelessWidget {
                     : Icon(MdiIcons.infinity),
                 //leading:  Icon(MdiIcons.filter),
                 onPressed: (context) async {
-                  final int? value = await setLogLimitPopup(
+                  final value = await setLogLimitPopup(
                     context,
                     settingsState.settings.logLimit,
                   );
@@ -545,7 +546,7 @@ class _SettingsList extends StatelessWidget {
 
   List<SettingsTile> _themes(SettingsBloc bloc) {
     final settings = bloc.state.settings;
-    final List<SettingsTile> result = [];
+    final result = <SettingsTile>[];
     final seedColor = settings.seedColor;
     result.add(
       SettingsTile.switchTile(
@@ -554,12 +555,13 @@ class _SettingsList extends StatelessWidget {
         ),
         // titleMaxLines: 2,
         //leading:  Icon(MdiIcons.timer),
-        initialValue: settings.brightness == Brightness.light ? true : false,
+        initialValue: settings.brightness == Brightness.light,
         onToggle: (value) {
           bloc.add(
             SettingsEvent.update(
               settings: settings.copyWith(
-                  brightness: value ? Brightness.light : Brightness.dark),
+                brightness: value ? Brightness.light : Brightness.dark,
+              ),
             ),
           );
         },
@@ -610,12 +612,14 @@ class _SettingsList extends StatelessWidget {
   }
 
   List<DropdownMenuEntry<String>> _dropdownMenuEntries() {
-    List<DropdownMenuEntry<String>> entries = [];
-    for (var locale in Localization.supportedLocales) {
-      entries.add(DropdownMenuEntry(
-        value: locale.languageCode,
-        label: locale.languageCode,
-      ));
+    final entries = <DropdownMenuEntry<String>>[];
+    for (final locale in Localization.supportedLocales) {
+      entries.add(
+        DropdownMenuEntry(
+          value: locale.languageCode,
+          label: locale.languageCode,
+        ),
+      );
     }
     return entries;
   }

@@ -4,7 +4,7 @@ Future<double?> setRatePopup(
   BuildContext context,
   SettingsState settingsState,
 ) async {
-  double value = settingsState.settings.rate;
+  var value = settingsState.settings.rate;
   return showDialog<double>(
     context: context,
     builder: (context) => AlertDialog(

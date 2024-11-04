@@ -2,15 +2,14 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 
 class SliverSubHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
   SliverSubHeaderDelegate({
     required this.minHeight,
     required this.maxHeight,
     required this.child,
   });
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
 
   @override
   double get minExtent => minHeight;
