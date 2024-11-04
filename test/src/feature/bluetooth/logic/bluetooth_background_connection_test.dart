@@ -9,11 +9,10 @@ void main() {
 
   setUp(() {
     bbc = BluetoothBackgroundConnection();
-    bluetoothDevice = BluetoothDevice(
+    bluetoothDevice = const BluetoothDevice(
       address: '00:00:00:00:00',
       name: 'Bluetooth device',
     );
-
   });
 
   group('Test BluetoothBackgroundConnection', () {

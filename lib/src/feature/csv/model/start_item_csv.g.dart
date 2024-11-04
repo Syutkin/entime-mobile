@@ -8,9 +8,9 @@ part of 'start_item_csv.dart';
 
 _$StartItemCsvImpl _$$StartItemCsvImplFromJson(Map<String, dynamic> json) =>
     _$StartItemCsvImpl(
-      category: json['category'] as String?,
       number: (json['number'] as num).toInt(),
       name: json['name'] as String,
+      category: json['category'] as String?,
       nickname: json['nickname'] as String?,
       age: json['age'] as String?,
       team: json['team'] as String?,
@@ -22,9 +22,9 @@ _$StartItemCsvImpl _$$StartItemCsvImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$StartItemCsvImplToJson(_$StartItemCsvImpl instance) =>
     <String, dynamic>{
-      'category': instance.category,
       'number': instance.number,
       'name': instance.name,
+      'category': instance.category,
       'nickname': instance.nickname,
       'age': instance.age,
       'team': instance.team,

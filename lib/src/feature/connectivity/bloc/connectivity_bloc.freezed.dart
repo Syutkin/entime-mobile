@@ -118,7 +118,7 @@ class __$$EmitImplCopyWithImpl<$Res>
     Object? isConnected = null,
   }) {
     return _then(_$EmitImpl(
-      null == isConnected
+      isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -129,7 +129,7 @@ class __$$EmitImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$EmitImpl implements _Emit {
-  const _$EmitImpl(this.isConnected);
+  const _$EmitImpl({required this.isConnected});
 
   @override
   final bool isConnected;
@@ -217,7 +217,7 @@ class _$EmitImpl implements _Emit {
 }
 
 abstract class _Emit implements ConnectivityEvent {
-  const factory _Emit(final bool isConnected) = _$EmitImpl;
+  const factory _Emit({required final bool isConnected}) = _$EmitImpl;
 
   @override
   bool get isConnected;
@@ -335,7 +335,7 @@ class __$$ConnectivityStateImplCopyWithImpl<$Res>
     Object? isConnected = null,
   }) {
     return _then(_$ConnectivityStateImpl(
-      null == isConnected
+      isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -346,7 +346,7 @@ class __$$ConnectivityStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ConnectivityStateImpl implements _ConnectivityState {
-  const _$ConnectivityStateImpl(this.isConnected);
+  const _$ConnectivityStateImpl({required this.isConnected});
 
   @override
   final bool isConnected;
@@ -435,7 +435,7 @@ class _$ConnectivityStateImpl implements _ConnectivityState {
 }
 
 abstract class _ConnectivityState implements ConnectivityState {
-  const factory _ConnectivityState(final bool isConnected) =
+  const factory _ConnectivityState({required final bool isConnected}) =
       _$ConnectivityStateImpl;
 
   @override

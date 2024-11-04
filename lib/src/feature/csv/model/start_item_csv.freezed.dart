@@ -20,9 +20,9 @@ StartItemCsv _$StartItemCsvFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$StartItemCsv {
-  String? get category => throw _privateConstructorUsedError;
   int get number => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
   String? get nickname => throw _privateConstructorUsedError;
   String? get age => throw _privateConstructorUsedError;
   String? get team => throw _privateConstructorUsedError;
@@ -46,9 +46,9 @@ abstract class $StartItemCsvCopyWith<$Res> {
       _$StartItemCsvCopyWithImpl<$Res, StartItemCsv>;
   @useResult
   $Res call(
-      {String? category,
-      int number,
+      {int number,
       String name,
+      String? category,
       String? nickname,
       String? age,
       String? team,
@@ -71,9 +71,9 @@ class _$StartItemCsvCopyWithImpl<$Res, $Val extends StartItemCsv>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? category = freezed,
     Object? number = null,
     Object? name = null,
+    Object? category = freezed,
     Object? nickname = freezed,
     Object? age = freezed,
     Object? team = freezed,
@@ -81,10 +81,6 @@ class _$StartItemCsvCopyWithImpl<$Res, $Val extends StartItemCsv>
     Object? startTimes = freezed,
   }) {
     return _then(_value.copyWith(
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String?,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -93,6 +89,10 @@ class _$StartItemCsvCopyWithImpl<$Res, $Val extends StartItemCsv>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
       nickname: freezed == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -126,9 +126,9 @@ abstract class _$$StartItemCsvImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? category,
-      int number,
+      {int number,
       String name,
+      String? category,
       String? nickname,
       String? age,
       String? team,
@@ -149,9 +149,9 @@ class __$$StartItemCsvImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? category = freezed,
     Object? number = null,
     Object? name = null,
+    Object? category = freezed,
     Object? nickname = freezed,
     Object? age = freezed,
     Object? team = freezed,
@@ -159,10 +159,6 @@ class __$$StartItemCsvImplCopyWithImpl<$Res>
     Object? startTimes = freezed,
   }) {
     return _then(_$StartItemCsvImpl(
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String?,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -171,6 +167,10 @@ class __$$StartItemCsvImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
       nickname: freezed == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -199,9 +199,9 @@ class __$$StartItemCsvImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$StartItemCsvImpl implements _StartItemCsv {
   const _$StartItemCsvImpl(
-      {this.category,
-      required this.number,
+      {required this.number,
       required this.name,
+      this.category,
       this.nickname,
       this.age,
       this.team,
@@ -213,11 +213,11 @@ class _$StartItemCsvImpl implements _StartItemCsv {
       _$$StartItemCsvImplFromJson(json);
 
   @override
-  final String? category;
-  @override
   final int number;
   @override
   final String name;
+  @override
+  final String? category;
   @override
   final String? nickname;
   @override
@@ -238,7 +238,7 @@ class _$StartItemCsvImpl implements _StartItemCsv {
 
   @override
   String toString() {
-    return 'StartItemCsv(category: $category, number: $number, name: $name, nickname: $nickname, age: $age, team: $team, city: $city, startTimes: $startTimes)';
+    return 'StartItemCsv(number: $number, name: $name, category: $category, nickname: $nickname, age: $age, team: $team, city: $city, startTimes: $startTimes)';
   }
 
   @override
@@ -246,10 +246,10 @@ class _$StartItemCsvImpl implements _StartItemCsv {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StartItemCsvImpl &&
-            (identical(other.category, category) ||
-                other.category == category) &&
             (identical(other.number, number) || other.number == number) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.age, age) || other.age == age) &&
@@ -261,7 +261,7 @@ class _$StartItemCsvImpl implements _StartItemCsv {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, category, number, name, nickname,
+  int get hashCode => Object.hash(runtimeType, number, name, category, nickname,
       age, team, city, const DeepCollectionEquality().hash(_startTimes));
 
   /// Create a copy of StartItemCsv
@@ -282,9 +282,9 @@ class _$StartItemCsvImpl implements _StartItemCsv {
 
 abstract class _StartItemCsv implements StartItemCsv {
   const factory _StartItemCsv(
-      {final String? category,
-      required final int number,
+      {required final int number,
       required final String name,
+      final String? category,
       final String? nickname,
       final String? age,
       final String? team,
@@ -295,11 +295,11 @@ abstract class _StartItemCsv implements StartItemCsv {
       _$StartItemCsvImpl.fromJson;
 
   @override
-  String? get category;
-  @override
   int get number;
   @override
   String get name;
+  @override
+  String? get category;
   @override
   String? get nickname;
   @override

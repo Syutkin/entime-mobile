@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-alpha.1+300',
+    representation: r'0.5.0-alpha.1+301',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-alpha.1+300',
+    canonical: r'0.5.0-alpha.1+301',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,19 +118,19 @@ sealed class Pubspec {
     preRelease: <String>[r'alpha', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'300'],
+    build: <String>[r'301'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2024,
     11,
-    3,
-    16,
-    10,
-    18,
-    505,
-    63,
+    4,
+    20,
+    39,
+    13,
+    329,
+    565,
   );
 
   /// Name
@@ -406,28 +406,30 @@ sealed class Pubspec {
   /// For more information,
   /// see [Package dependencies](https://dart.dev/tools/pub/dependencies).
   static const Map<String, Object> dependencies = <String, Object>{
-    'flutter': <String, Object>{
-      'sdk': r'flutter',
-    },
-    'flutter_localizations': <String, Object>{
-      'sdk': r'flutter',
-    },
     'bloc_concurrency': r'^0.2.5',
     'bot_toast': r'^4.1.3',
+    'connectivity_plus': r'^6.1.0',
     'csv': r'^6.0.0',
     'device_info_plus': r'^11.1.0',
     'drift': r'^2.21.0',
     'equatable': r'^2.0.5',
     'file_picker': r'^8.1.3',
     'filesize': r'^2.0.1',
+    'flutter': <String, Object>{
+      'sdk': r'flutter',
+    },
     'flutter_bloc': r'^8.1.6',
     'flutter_bluetooth_serial': r'^0.4.0',
+    'flutter_localizations': <String, Object>{
+      'sdk': r'flutter',
+    },
     'flutter_markdown': r'^0.7.4+1',
+    'flutter_ntp': r'^0.0.2',
     'flutter_tts': r'^4.0.2',
     'freezed_annotation': r'^2.4.4',
-    'json_annotation': r'^4.9.0',
     'http': r'^1.2.2',
     'intl': r'^0.19.0',
+    'json_annotation': r'^4.9.0',
     'logger': r'^2.4.0',
     'material_design_icons_flutter': r'^7.0.7296',
     'meta': r'^1.15.0',
@@ -447,8 +449,6 @@ sealed class Pubspec {
     'sqlite3_flutter_libs': r'^0.5.26',
     'url_launcher': r'^6.3.1',
     'wakelock_plus': r'^1.2.8',
-    'flutter_ntp': r'^0.0.2',
-    'connectivity_plus': r'^6.1.0',
   };
 
   /// Developer dependencies
@@ -461,13 +461,14 @@ sealed class Pubspec {
       'sdk': r'flutter',
     },
     'freezed': r'^2.5.7',
-    'json_serializable': r'^6.8.0',
     'integration_test': <String, Object>{
       'sdk': r'flutter',
     },
+    'json_serializable': r'^6.8.0',
     'mocktail': r'^1.0.4',
     'pubspec_generator': r'^4.0.0',
     'test': r'^1.25.7',
+    'very_good_analysis': r'^6.0.0',
   };
 
   /// Dependency overrides

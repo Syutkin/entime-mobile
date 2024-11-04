@@ -17,8 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AutomaticStart {
   String get time => throw _privateConstructorUsedError;
+  set time(String value) => throw _privateConstructorUsedError;
   int get correction => throw _privateConstructorUsedError;
+  set correction(int value) => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
+  set timestamp(DateTime value) => throw _privateConstructorUsedError;
   bool get updating => throw _privateConstructorUsedError;
   set updating(bool value) => throw _privateConstructorUsedError;
 
@@ -136,11 +139,11 @@ class _$AutomaticStartImpl implements _AutomaticStart {
       {this.updating = false});
 
   @override
-  final String time;
+  String time;
   @override
-  final int correction;
+  int correction;
   @override
-  final DateTime timestamp;
+  DateTime timestamp;
   @override
   @JsonKey()
   bool updating;
@@ -161,16 +164,18 @@ class _$AutomaticStartImpl implements _AutomaticStart {
 }
 
 abstract class _AutomaticStart implements AutomaticStart {
-  factory _AutomaticStart(
-      final String time, final int correction, final DateTime timestamp,
+  factory _AutomaticStart(String time, int correction, DateTime timestamp,
       {bool updating}) = _$AutomaticStartImpl;
 
   @override
   String get time;
+  set time(String value);
   @override
   int get correction;
+  set correction(int value);
   @override
   DateTime get timestamp;
+  set timestamp(DateTime value);
   @override
   bool get updating;
   set updating(bool value);
