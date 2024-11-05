@@ -42,7 +42,7 @@ Future<void> editStartTime(
   return showDialog<void>(
     context: context,
     builder: (context) => ExpandedAlertDialog(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.sizeOf(context).width * 0.9,
       scrollable: true,
       title: Text(
         item.name.isEmpty

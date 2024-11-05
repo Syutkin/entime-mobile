@@ -6,7 +6,6 @@ import '../../../common/widget/expanded_alert_dialog.dart';
 import '../../trails/bloc/trails_bloc.dart';
 import '../database.dart';
 
-// part 'popup/add_stage_popup.dart';
 part 'popup/add_or_update_stage_popup.dart';
 
 class StagesListPage extends StatelessWidget {

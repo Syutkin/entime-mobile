@@ -68,11 +68,13 @@ class HomeScreen extends StatelessWidget {
                       icon: Text(Localization.current.I18nHome_home),
                     ),
                     Tab(
-                        key: const Key('StartTab'),
-                        icon: Text(Localization.current.I18nHome_start)),
+                      key: const Key('StartTab'),
+                      icon: Text(Localization.current.I18nHome_start),
+                    ),
                     Tab(
-                        key: const Key('FinishTab'),
-                        icon: Text(Localization.current.I18nHome_finish)),
+                      key: const Key('FinishTab'),
+                      icon: Text(Localization.current.I18nHome_finish),
+                    ),
                   ],
                 ),
               ),
