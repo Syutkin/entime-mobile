@@ -9,7 +9,6 @@ import '../../countdown/bloc/countdown_bloc.dart';
 import '../../database/bloc/database_bloc.dart';
 import '../../database/model/filter_finish.dart';
 import '../../database/widget/start_list_page.dart';
-import '../../drawer/widget/app_drawer.dart';
 import '../../module_settings/module_settings.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../../tab/tab.dart';
@@ -17,6 +16,7 @@ import '../../tab/widget/finish_page.dart';
 import '../../tab/widget/init_page.dart';
 import '../../tab/widget/start_page.dart';
 import '../../update/update.dart';
+import 'app_drawer.dart';
 import 'menu_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,9 +44,13 @@ class HomeScreen extends StatelessWidget {
                 actions: <Widget>[
                   _FinishFilterButton(activeTab: activeTab),
                   const BluetoothButton(),
-                  MenuButton(activeTab: activeTab),
+                  MenuButton(
+                    key: const Key('HomeAppBarMenuButton'),
+                    activeTab: activeTab,
+                  ),
                 ],
                 bottom: TabBar(
+                  key: const Key('TabBar'),
                   onTap: (index) {
                     final bloc = context.read<TabBloc>();
                     switch (index) {
@@ -59,9 +63,16 @@ class HomeScreen extends StatelessWidget {
                     }
                   },
                   tabs: <Widget>[
-                    Tab(icon: Text(Localization.current.I18nHome_home)),
-                    Tab(icon: Text(Localization.current.I18nHome_start)),
-                    Tab(icon: Text(Localization.current.I18nHome_finish)),
+                    Tab(
+                      key: const Key('InitTab'),
+                      icon: Text(Localization.current.I18nHome_home),
+                    ),
+                    Tab(
+                        key: const Key('StartTab'),
+                        icon: Text(Localization.current.I18nHome_start)),
+                    Tab(
+                        key: const Key('FinishTab'),
+                        icon: Text(Localization.current.I18nHome_finish)),
                   ],
                 ),
               ),

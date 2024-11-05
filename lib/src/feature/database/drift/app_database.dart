@@ -598,6 +598,8 @@ class AppDatabase extends _$AppDatabase {
   ///и устанавливает ему текущее время старта в ручную отсечку
   ///
   ///Возращает 0 если участник не найден и количество обновлённых участников в случае успеха
+  ///
+  /// Конечно, участник по хорошему должен быть один, но мало ли что там в бд записано
   Future<int> updateManualStartTime({
     required int stageId,
     required DateTime time,

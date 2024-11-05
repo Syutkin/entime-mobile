@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-alpha.1+302',
+    representation: r'0.5.0-alpha.1+303',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-alpha.1+302',
+    canonical: r'0.5.0-alpha.1+303',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,19 +118,19 @@ sealed class Pubspec {
     preRelease: <String>[r'alpha', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'302'],
+    build: <String>[r'303'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2024,
     11,
-    4,
-    20,
-    58,
-    20,
-    603,
-    680,
+    5,
+    16,
+    3,
+    13,
+    23,
+    644,
   );
 
   /// Name
@@ -466,6 +466,7 @@ sealed class Pubspec {
     },
     'json_serializable': r'^6.8.0',
     'mocktail': r'^1.0.4',
+    'patrol': r'^3.12.0',
     'pubspec_generator': r'^4.0.0',
     'test': r'^1.25.7',
     'very_good_analysis': r'^6.0.0',
@@ -555,6 +556,12 @@ sealed class Pubspec {
       'link_template': <String, Object>{
         'tag': r'https://github.com/Syutkin/entime-mobile/releases/tag/%tag%',
         'diff': r'https://github.com/Syutkin/entime-mobile/compare/%from%...%to%',
+      },
+    },
+    'patrol': <String, Object>{
+      'app_name': r'entime',
+      'android': <String, Object>{
+        'package_name': r'site.syutkin.entime',
       },
     },
   };

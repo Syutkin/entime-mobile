@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../common/localization/localization.dart';
 import '../../app_info/app_info.dart';
 import '../../help/widget/help_screen.dart';
-import '../../home/widget/about_popup.dart';
 import '../../settings/widget/settings_screen.dart';
 import '../../update/widget/updater_widget.dart';
+import 'about_popup.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});

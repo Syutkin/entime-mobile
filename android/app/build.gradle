@@ -42,7 +42,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion flutter.compileSdkVersion
 
     lintOptions {
         disable 'InvalidPackage'
@@ -50,10 +50,12 @@ android {
 
     defaultConfig {
         applicationId "site.syutkin.entime"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        testInstrumentationRunner "pl.leancode.patrol.PatrolJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: "true"
     }
 
     signingConfigs {
@@ -70,7 +72,15 @@ android {
         }
     }
 
-    flutter {
-        source '../..'
+    testOptions {
+        execution "ANDROIDX_TEST_ORCHESTRATOR"
     }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    androidTestUtil 'androidx.test:orchestrator:1.4.2'
 }
