@@ -92,6 +92,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "I18nBluetooth_bluetoothNotAvailable":
+            MessageLookupByLibrary.simpleMessage(
+                "Bluetooth недоступен на устройстве"),
         "I18nBluetooth_dbm": MessageLookupByLibrary.simpleMessage("дБм"),
         "I18nBluetooth_selectDevice":
             MessageLookupByLibrary.simpleMessage("Выберите устройство"),

@@ -12,6 +12,10 @@ class BluetoothButton extends StatelessWidget {
         builder: (context, state) {
           final bloc = BlocProvider.of<BluetoothBloc>(context);
           return state.maybeWhen(
+            notAvailable: () => const IconButton(
+              icon: Icon(Icons.bluetooth_disabled),
+              onPressed: null,
+            ),
             notEnabled: () => IconButton(
               icon: const Icon(Icons.bluetooth_disabled),
               onPressed: () async {

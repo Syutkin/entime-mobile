@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-11-03T01:20:15.018064",
+  "@@last_modified": "2024-11-15T23:35:34.397008",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -442,6 +442,11 @@
   },
   "I18nBluetooth_selectDevice": "Выберите устройство",
   "@I18nBluetooth_selectDevice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nBluetooth_bluetoothNotAvailable": "Bluetooth недоступен на устройстве",
+  "@I18nBluetooth_bluetoothNotAvailable": {
     "type": "text",
     "placeholders": {}
   },

@@ -14,16 +14,33 @@ class BluetoothTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BluetoothBloc, BluetoothBlocState>(
       builder: (context, state) => ListTile(
-        enabled: state is! BluetoothNotEnabled,
+        // enabled: state is! BluetoothNotEnabled,
+        enabled: state.maybeMap(
+          notAvailable: (_) => false,
+          notEnabled: (_) => false,
+          notInitialized: (_) => false,
+          orElse: () => true,
+        ),
         onTap: () => selectBluetoothDevice(context),
         leading: const BluetoothButton(),
-        title: Text(Localization.current.I18nInit_bluetoothModule),
-        subtitle: Text(
-          BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
-              Localization.current.I18nInit_pressToSelect,
+        title: state.maybeMap(
+          notAvailable: (_) => Text(Localization.current.I18nBluetooth_bluetoothNotAvailable),
+          orElse: () => Text(Localization.current.I18nInit_bluetoothModule),
         ),
-        trailing:
-            state is BluetoothConnected ? _bluetoothButtons(context) : null,
+        subtitle: state.maybeMap(
+          notAvailable: (_) => null,
+          orElse: () => Text(
+            BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
+                Localization.current.I18nInit_pressToSelect,
+          ),
+        ),
+        trailing: state.maybeMap(
+          connected: (_) => _bluetoothButtons(context),
+          orElse: () {
+            return null;
+          },
+        ),
+        // state is BluetoothConnected ? _bluetoothButtons(context) : null,
       ),
     );
   }

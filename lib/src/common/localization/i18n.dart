@@ -446,6 +446,11 @@ class I18nBluetooth {
         'Выберите устройство',
         name: 'I18nBluetooth_selectDevice',
       );
+
+  static String get bluetoothNotAvailable => Intl.message(
+    'Bluetooth недоступен на устройстве',
+    name: 'I18nBluetooth_bluetoothNotAvailable',
+  );
 }
 
 class I18nCountdown {

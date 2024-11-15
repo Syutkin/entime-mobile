@@ -901,6 +901,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Bluetooth недоступен на устройстве`
+  String get I18nBluetooth_bluetoothNotAvailable {
+    return Intl.message(
+      'Bluetooth недоступен на устройстве',
+      name: 'I18nBluetooth_bluetoothNotAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Обратный отсчёт`
   String get I18nCountdown_countdown {
     return Intl.message(

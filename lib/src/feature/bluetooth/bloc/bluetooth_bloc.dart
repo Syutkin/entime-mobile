@@ -45,15 +45,25 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     on<BluetoothEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         initialize: (event) async {
-          _isEnabled =
-              await bluetoothProvider.flutterBluetoothSerial.isEnabled ?? false;
-          _isEnabled
-              ? emit(
-                  BluetoothBlocState.disconnected(
-                    bluetoothDevice: _bluetoothDevice,
-                  ),
-                )
-              : emit(const BluetoothBlocState.notEnabled());
+          final isAvailable =
+              await bluetoothProvider.flutterBluetoothSerial.isAvailable ??
+                  false;
+          if (isAvailable) {
+            final isEnabled =
+                await bluetoothProvider.flutterBluetoothSerial.isEnabled ??
+                    false;
+            if (isEnabled) {
+              emit(
+                BluetoothBlocState.disconnected(
+                  bluetoothDevice: _bluetoothDevice,
+                ),
+              );
+            } else {
+              emit(const BluetoothBlocState.notEnabled());
+            }
+          } else {
+            emit(const BluetoothBlocState.notAvailable());
+          }
         },
         enable: (event) async {
           await bluetoothProvider.flutterBluetoothSerial.requestEnable();
@@ -275,8 +285,6 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   bool _reconnect = true;
   bool _reconnectActive = false;
   final int _reconnectDelay = 1;
-
-  bool _isEnabled = false;
 
   int _stageId = -1;
 
