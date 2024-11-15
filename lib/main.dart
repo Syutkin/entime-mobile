@@ -91,7 +91,7 @@ Future<void> main() async {
         },
         appRunner: () => runApp(app),
       );
-    } on Exception catch (e) {
+    } catch (e) {
       logger.e('SentryFlutter error', error: e);
       runApp(app);
     }
