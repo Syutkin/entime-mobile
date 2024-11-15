@@ -154,8 +154,37 @@ void main() {
 
     group('on initialize:', () {
       blocTest<BluetoothBloc, BluetoothBlocState>(
+        'FlutterBluetoothSerial: bluetooth not available',
+        setUp: () {
+          when(
+            () => flutterBluetoothSerial.isAvailable,
+          ).thenAnswer(
+            (_) => Future.value(false),
+          );
+          when(
+            () => flutterBluetoothSerial.isEnabled,
+          ).thenAnswer(
+            (_) => Future.value(false),
+          );
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          settingsProvider: settingsProvider,
+          database: database,
+        ),
+        act: (bloc) => bloc.add(const BluetoothEvent.initialize()),
+        expect: () => [const BluetoothBlocState.notAvailable()],
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial not enabled',
         setUp: () {
+          when(
+            () => flutterBluetoothSerial.isAvailable,
+          ).thenAnswer(
+            (_) => Future.value(true),
+          );
           when(
             () => flutterBluetoothSerial.isEnabled,
           ).thenAnswer(
@@ -176,6 +205,11 @@ void main() {
         'FlutterBluetoothSerial enabled',
         setUp: () {
           when(
+                () => flutterBluetoothSerial.isAvailable,
+          ).thenAnswer(
+                (_) => Future.value(true),
+          );
+          when(
             () => flutterBluetoothSerial.isEnabled,
           ).thenAnswer(
             (_) => Future.value(true),
@@ -194,6 +228,11 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial null',
         setUp: () {
+          when(
+                () => flutterBluetoothSerial.isAvailable,
+          ).thenAnswer(
+                (_) => Future.value(true),
+          );
           when(
             () => flutterBluetoothSerial.isEnabled,
           ).thenAnswer(
@@ -215,6 +254,11 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'successfully enabled',
         setUp: () {
+          when(
+                () => flutterBluetoothSerial.isAvailable,
+          ).thenAnswer(
+                (_) => Future.value(true),
+          );
           when(
             () => flutterBluetoothSerial.isEnabled,
           ).thenAnswer(
@@ -461,8 +505,9 @@ void main() {
         ),
         skip: 2,
         expect: () => <Matcher>[
-          isA<BluetoothConnected>().having(
-            (state) => state.message,
+          isA<BluetoothBlocState>().having(
+            (state) => state.maybeMap(
+                connected: (state) => state.message, orElse: () => null),
             'BluetoothMessageFinish',
             isA<BluetoothMessageFinish>().having(
               (message) => message.time,
@@ -662,8 +707,9 @@ void main() {
           BluetoothEvent.messageReceived(message: message, stageId: stageId),
         ),
         expect: () => <Matcher>[
-          isA<BluetoothConnected>().having(
-            (state) => state.message,
+          isA<BluetoothBlocState>().having(
+            (state) => state.maybeMap(
+                connected: (state) => state.message, orElse: () => null),
             'BluetoothMessageAutomaticStart',
             isA<BluetoothMessageAutomaticStart>().having(
               (bluetoothMessage) => bluetoothMessage.automaticStart,
@@ -743,8 +789,9 @@ void main() {
           BluetoothEvent.messageReceived(message: message, stageId: stageId),
         ),
         expect: () => <Matcher>[
-          isA<BluetoothConnected>().having(
-            (state) => state.message,
+          isA<BluetoothBlocState>().having(
+            (state) => state.maybeMap(
+                connected: (state) => state.message, orElse: () => null),
             'BluetoothMessageFinish',
             isA<BluetoothMessageFinish>().having(
               (message) => message.time,
@@ -752,6 +799,15 @@ void main() {
               '10:00:01,123',
             ),
           ),
+          // isA<BluetoothConnected>().having(
+          //   (state) => state.message,
+          //   'BluetoothMessageFinish',
+          //   isA<BluetoothMessageFinish>().having(
+          //     (message) => message.time,
+          //     'finish',
+          //     '10:00:01,123',
+          //   ),
+          // ),
         ],
       );
 
@@ -837,8 +893,9 @@ void main() {
           BluetoothEvent.messageReceived(message: message, stageId: stageId),
         ),
         expect: () => <Matcher>[
-          isA<BluetoothConnected>().having(
-            (state) => state.message,
+          isA<BluetoothBlocState>().having(
+            (state) => state.maybeMap(
+                connected: (state) => state.message, orElse: () => null),
             'BluetoothMessageModuleSettings',
             isA<BluetoothMessageModuleSettings>().having(
               (settings) => settings.json,
