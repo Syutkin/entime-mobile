@@ -14,7 +14,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
     required this.updateProvider,
   }) : super(const UpdateInitial()) {
     updateProvider
-      ..setDownloadingHandler((current, total) {
+      ..onDownloading((current, total) {
         add(UpdateDownloading(bytes: current, total: total));
       })
       ..onDownloadComplete(() {

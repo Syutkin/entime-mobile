@@ -1646,6 +1646,7 @@ mixin _$BluetoothBlocState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() notInitialized,
+    required TResult Function() notAvailable,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
     required TResult Function(BluetoothMessage? message) connected,
@@ -1656,6 +1657,7 @@ mixin _$BluetoothBlocState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notInitialized,
+    TResult? Function()? notAvailable,
     TResult? Function()? notEnabled,
     TResult? Function()? connecting,
     TResult? Function(BluetoothMessage? message)? connected,
@@ -1666,6 +1668,7 @@ mixin _$BluetoothBlocState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notInitialized,
+    TResult Function()? notAvailable,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
     TResult Function(BluetoothMessage? message)? connected,
@@ -1676,32 +1679,35 @@ mixin _$BluetoothBlocState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(BluetoothNotInitialized value) notInitialized,
-    required TResult Function(BluetoothNotEnabled value) notEnabled,
-    required TResult Function(BluetoothConnecting value) connecting,
-    required TResult Function(BluetoothConnected value) connected,
-    required TResult Function(BluetoothDisconnecting value) disconnecting,
-    required TResult Function(BluetoothDisconnected value) disconnected,
+    required TResult Function(_BluetoothNotInitialized value) notInitialized,
+    required TResult Function(_BluetoothNotAvailable value) notAvailable,
+    required TResult Function(_BluetoothNotEnabled value) notEnabled,
+    required TResult Function(_BluetoothConnecting value) connecting,
+    required TResult Function(_BluetoothConnected value) connected,
+    required TResult Function(_BluetoothDisconnecting value) disconnecting,
+    required TResult Function(_BluetoothDisconnected value) disconnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(BluetoothNotInitialized value)? notInitialized,
-    TResult? Function(BluetoothNotEnabled value)? notEnabled,
-    TResult? Function(BluetoothConnecting value)? connecting,
-    TResult? Function(BluetoothConnected value)? connected,
-    TResult? Function(BluetoothDisconnecting value)? disconnecting,
-    TResult? Function(BluetoothDisconnected value)? disconnected,
+    TResult? Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult? Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult? Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult? Function(_BluetoothConnecting value)? connecting,
+    TResult? Function(_BluetoothConnected value)? connected,
+    TResult? Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult? Function(_BluetoothDisconnected value)? disconnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(BluetoothNotInitialized value)? notInitialized,
-    TResult Function(BluetoothNotEnabled value)? notEnabled,
-    TResult Function(BluetoothConnecting value)? connecting,
-    TResult Function(BluetoothConnected value)? connected,
-    TResult Function(BluetoothDisconnecting value)? disconnecting,
-    TResult Function(BluetoothDisconnected value)? disconnected,
+    TResult Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult Function(_BluetoothConnecting value)? connecting,
+    TResult Function(_BluetoothConnected value)? connected,
+    TResult Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult Function(_BluetoothDisconnected value)? disconnected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1752,7 +1758,7 @@ class __$$BluetoothNotInitializedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothNotInitializedImpl implements BluetoothNotInitialized {
+class _$BluetoothNotInitializedImpl implements _BluetoothNotInitialized {
   const _$BluetoothNotInitializedImpl();
 
   @override
@@ -1774,6 +1780,7 @@ class _$BluetoothNotInitializedImpl implements BluetoothNotInitialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() notInitialized,
+    required TResult Function() notAvailable,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
     required TResult Function(BluetoothMessage? message) connected,
@@ -1787,6 +1794,7 @@ class _$BluetoothNotInitializedImpl implements BluetoothNotInitialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notInitialized,
+    TResult? Function()? notAvailable,
     TResult? Function()? notEnabled,
     TResult? Function()? connecting,
     TResult? Function(BluetoothMessage? message)? connected,
@@ -1800,6 +1808,7 @@ class _$BluetoothNotInitializedImpl implements BluetoothNotInitialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notInitialized,
+    TResult Function()? notAvailable,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
     TResult Function(BluetoothMessage? message)? connected,
@@ -1816,12 +1825,13 @@ class _$BluetoothNotInitializedImpl implements BluetoothNotInitialized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(BluetoothNotInitialized value) notInitialized,
-    required TResult Function(BluetoothNotEnabled value) notEnabled,
-    required TResult Function(BluetoothConnecting value) connecting,
-    required TResult Function(BluetoothConnected value) connected,
-    required TResult Function(BluetoothDisconnecting value) disconnecting,
-    required TResult Function(BluetoothDisconnected value) disconnected,
+    required TResult Function(_BluetoothNotInitialized value) notInitialized,
+    required TResult Function(_BluetoothNotAvailable value) notAvailable,
+    required TResult Function(_BluetoothNotEnabled value) notEnabled,
+    required TResult Function(_BluetoothConnecting value) connecting,
+    required TResult Function(_BluetoothConnected value) connected,
+    required TResult Function(_BluetoothDisconnecting value) disconnecting,
+    required TResult Function(_BluetoothDisconnected value) disconnected,
   }) {
     return notInitialized(this);
   }
@@ -1829,12 +1839,13 @@ class _$BluetoothNotInitializedImpl implements BluetoothNotInitialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(BluetoothNotInitialized value)? notInitialized,
-    TResult? Function(BluetoothNotEnabled value)? notEnabled,
-    TResult? Function(BluetoothConnecting value)? connecting,
-    TResult? Function(BluetoothConnected value)? connected,
-    TResult? Function(BluetoothDisconnecting value)? disconnecting,
-    TResult? Function(BluetoothDisconnected value)? disconnected,
+    TResult? Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult? Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult? Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult? Function(_BluetoothConnecting value)? connecting,
+    TResult? Function(_BluetoothConnected value)? connected,
+    TResult? Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult? Function(_BluetoothDisconnected value)? disconnected,
   }) {
     return notInitialized?.call(this);
   }
@@ -1842,12 +1853,13 @@ class _$BluetoothNotInitializedImpl implements BluetoothNotInitialized {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(BluetoothNotInitialized value)? notInitialized,
-    TResult Function(BluetoothNotEnabled value)? notEnabled,
-    TResult Function(BluetoothConnecting value)? connecting,
-    TResult Function(BluetoothConnected value)? connected,
-    TResult Function(BluetoothDisconnecting value)? disconnecting,
-    TResult Function(BluetoothDisconnected value)? disconnected,
+    TResult Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult Function(_BluetoothConnecting value)? connecting,
+    TResult Function(_BluetoothConnected value)? connected,
+    TResult Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult Function(_BluetoothDisconnected value)? disconnected,
     required TResult orElse(),
   }) {
     if (notInitialized != null) {
@@ -1857,8 +1869,145 @@ class _$BluetoothNotInitializedImpl implements BluetoothNotInitialized {
   }
 }
 
-abstract class BluetoothNotInitialized implements BluetoothBlocState {
-  const factory BluetoothNotInitialized() = _$BluetoothNotInitializedImpl;
+abstract class _BluetoothNotInitialized implements BluetoothBlocState {
+  const factory _BluetoothNotInitialized() = _$BluetoothNotInitializedImpl;
+}
+
+/// @nodoc
+abstract class _$$BluetoothNotAvailableImplCopyWith<$Res> {
+  factory _$$BluetoothNotAvailableImplCopyWith(
+          _$BluetoothNotAvailableImpl value,
+          $Res Function(_$BluetoothNotAvailableImpl) then) =
+      __$$BluetoothNotAvailableImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BluetoothNotAvailableImplCopyWithImpl<$Res>
+    extends _$BluetoothBlocStateCopyWithImpl<$Res, _$BluetoothNotAvailableImpl>
+    implements _$$BluetoothNotAvailableImplCopyWith<$Res> {
+  __$$BluetoothNotAvailableImplCopyWithImpl(_$BluetoothNotAvailableImpl _value,
+      $Res Function(_$BluetoothNotAvailableImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BluetoothBlocState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$BluetoothNotAvailableImpl implements _BluetoothNotAvailable {
+  const _$BluetoothNotAvailableImpl();
+
+  @override
+  String toString() {
+    return 'BluetoothBlocState.notAvailable()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BluetoothNotAvailableImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() notInitialized,
+    required TResult Function() notAvailable,
+    required TResult Function() notEnabled,
+    required TResult Function() connecting,
+    required TResult Function(BluetoothMessage? message) connected,
+    required TResult Function() disconnecting,
+    required TResult Function(BluetoothDevice? bluetoothDevice) disconnected,
+  }) {
+    return notAvailable();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notInitialized,
+    TResult? Function()? notAvailable,
+    TResult? Function()? notEnabled,
+    TResult? Function()? connecting,
+    TResult? Function(BluetoothMessage? message)? connected,
+    TResult? Function()? disconnecting,
+    TResult? Function(BluetoothDevice? bluetoothDevice)? disconnected,
+  }) {
+    return notAvailable?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notInitialized,
+    TResult Function()? notAvailable,
+    TResult Function()? notEnabled,
+    TResult Function()? connecting,
+    TResult Function(BluetoothMessage? message)? connected,
+    TResult Function()? disconnecting,
+    TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
+    required TResult orElse(),
+  }) {
+    if (notAvailable != null) {
+      return notAvailable();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_BluetoothNotInitialized value) notInitialized,
+    required TResult Function(_BluetoothNotAvailable value) notAvailable,
+    required TResult Function(_BluetoothNotEnabled value) notEnabled,
+    required TResult Function(_BluetoothConnecting value) connecting,
+    required TResult Function(_BluetoothConnected value) connected,
+    required TResult Function(_BluetoothDisconnecting value) disconnecting,
+    required TResult Function(_BluetoothDisconnected value) disconnected,
+  }) {
+    return notAvailable(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult? Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult? Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult? Function(_BluetoothConnecting value)? connecting,
+    TResult? Function(_BluetoothConnected value)? connected,
+    TResult? Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult? Function(_BluetoothDisconnected value)? disconnected,
+  }) {
+    return notAvailable?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult Function(_BluetoothConnecting value)? connecting,
+    TResult Function(_BluetoothConnected value)? connected,
+    TResult Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult Function(_BluetoothDisconnected value)? disconnected,
+    required TResult orElse(),
+  }) {
+    if (notAvailable != null) {
+      return notAvailable(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _BluetoothNotAvailable implements BluetoothBlocState {
+  const factory _BluetoothNotAvailable() = _$BluetoothNotAvailableImpl;
 }
 
 /// @nodoc
@@ -1882,7 +2031,7 @@ class __$$BluetoothNotEnabledImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothNotEnabledImpl implements BluetoothNotEnabled {
+class _$BluetoothNotEnabledImpl implements _BluetoothNotEnabled {
   const _$BluetoothNotEnabledImpl();
 
   @override
@@ -1904,6 +2053,7 @@ class _$BluetoothNotEnabledImpl implements BluetoothNotEnabled {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() notInitialized,
+    required TResult Function() notAvailable,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
     required TResult Function(BluetoothMessage? message) connected,
@@ -1917,6 +2067,7 @@ class _$BluetoothNotEnabledImpl implements BluetoothNotEnabled {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notInitialized,
+    TResult? Function()? notAvailable,
     TResult? Function()? notEnabled,
     TResult? Function()? connecting,
     TResult? Function(BluetoothMessage? message)? connected,
@@ -1930,6 +2081,7 @@ class _$BluetoothNotEnabledImpl implements BluetoothNotEnabled {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notInitialized,
+    TResult Function()? notAvailable,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
     TResult Function(BluetoothMessage? message)? connected,
@@ -1946,12 +2098,13 @@ class _$BluetoothNotEnabledImpl implements BluetoothNotEnabled {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(BluetoothNotInitialized value) notInitialized,
-    required TResult Function(BluetoothNotEnabled value) notEnabled,
-    required TResult Function(BluetoothConnecting value) connecting,
-    required TResult Function(BluetoothConnected value) connected,
-    required TResult Function(BluetoothDisconnecting value) disconnecting,
-    required TResult Function(BluetoothDisconnected value) disconnected,
+    required TResult Function(_BluetoothNotInitialized value) notInitialized,
+    required TResult Function(_BluetoothNotAvailable value) notAvailable,
+    required TResult Function(_BluetoothNotEnabled value) notEnabled,
+    required TResult Function(_BluetoothConnecting value) connecting,
+    required TResult Function(_BluetoothConnected value) connected,
+    required TResult Function(_BluetoothDisconnecting value) disconnecting,
+    required TResult Function(_BluetoothDisconnected value) disconnected,
   }) {
     return notEnabled(this);
   }
@@ -1959,12 +2112,13 @@ class _$BluetoothNotEnabledImpl implements BluetoothNotEnabled {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(BluetoothNotInitialized value)? notInitialized,
-    TResult? Function(BluetoothNotEnabled value)? notEnabled,
-    TResult? Function(BluetoothConnecting value)? connecting,
-    TResult? Function(BluetoothConnected value)? connected,
-    TResult? Function(BluetoothDisconnecting value)? disconnecting,
-    TResult? Function(BluetoothDisconnected value)? disconnected,
+    TResult? Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult? Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult? Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult? Function(_BluetoothConnecting value)? connecting,
+    TResult? Function(_BluetoothConnected value)? connected,
+    TResult? Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult? Function(_BluetoothDisconnected value)? disconnected,
   }) {
     return notEnabled?.call(this);
   }
@@ -1972,12 +2126,13 @@ class _$BluetoothNotEnabledImpl implements BluetoothNotEnabled {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(BluetoothNotInitialized value)? notInitialized,
-    TResult Function(BluetoothNotEnabled value)? notEnabled,
-    TResult Function(BluetoothConnecting value)? connecting,
-    TResult Function(BluetoothConnected value)? connected,
-    TResult Function(BluetoothDisconnecting value)? disconnecting,
-    TResult Function(BluetoothDisconnected value)? disconnected,
+    TResult Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult Function(_BluetoothConnecting value)? connecting,
+    TResult Function(_BluetoothConnected value)? connected,
+    TResult Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult Function(_BluetoothDisconnected value)? disconnected,
     required TResult orElse(),
   }) {
     if (notEnabled != null) {
@@ -1987,8 +2142,8 @@ class _$BluetoothNotEnabledImpl implements BluetoothNotEnabled {
   }
 }
 
-abstract class BluetoothNotEnabled implements BluetoothBlocState {
-  const factory BluetoothNotEnabled() = _$BluetoothNotEnabledImpl;
+abstract class _BluetoothNotEnabled implements BluetoothBlocState {
+  const factory _BluetoothNotEnabled() = _$BluetoothNotEnabledImpl;
 }
 
 /// @nodoc
@@ -2012,7 +2167,7 @@ class __$$BluetoothConnectingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothConnectingImpl implements BluetoothConnecting {
+class _$BluetoothConnectingImpl implements _BluetoothConnecting {
   const _$BluetoothConnectingImpl();
 
   @override
@@ -2034,6 +2189,7 @@ class _$BluetoothConnectingImpl implements BluetoothConnecting {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() notInitialized,
+    required TResult Function() notAvailable,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
     required TResult Function(BluetoothMessage? message) connected,
@@ -2047,6 +2203,7 @@ class _$BluetoothConnectingImpl implements BluetoothConnecting {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notInitialized,
+    TResult? Function()? notAvailable,
     TResult? Function()? notEnabled,
     TResult? Function()? connecting,
     TResult? Function(BluetoothMessage? message)? connected,
@@ -2060,6 +2217,7 @@ class _$BluetoothConnectingImpl implements BluetoothConnecting {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notInitialized,
+    TResult Function()? notAvailable,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
     TResult Function(BluetoothMessage? message)? connected,
@@ -2076,12 +2234,13 @@ class _$BluetoothConnectingImpl implements BluetoothConnecting {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(BluetoothNotInitialized value) notInitialized,
-    required TResult Function(BluetoothNotEnabled value) notEnabled,
-    required TResult Function(BluetoothConnecting value) connecting,
-    required TResult Function(BluetoothConnected value) connected,
-    required TResult Function(BluetoothDisconnecting value) disconnecting,
-    required TResult Function(BluetoothDisconnected value) disconnected,
+    required TResult Function(_BluetoothNotInitialized value) notInitialized,
+    required TResult Function(_BluetoothNotAvailable value) notAvailable,
+    required TResult Function(_BluetoothNotEnabled value) notEnabled,
+    required TResult Function(_BluetoothConnecting value) connecting,
+    required TResult Function(_BluetoothConnected value) connected,
+    required TResult Function(_BluetoothDisconnecting value) disconnecting,
+    required TResult Function(_BluetoothDisconnected value) disconnected,
   }) {
     return connecting(this);
   }
@@ -2089,12 +2248,13 @@ class _$BluetoothConnectingImpl implements BluetoothConnecting {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(BluetoothNotInitialized value)? notInitialized,
-    TResult? Function(BluetoothNotEnabled value)? notEnabled,
-    TResult? Function(BluetoothConnecting value)? connecting,
-    TResult? Function(BluetoothConnected value)? connected,
-    TResult? Function(BluetoothDisconnecting value)? disconnecting,
-    TResult? Function(BluetoothDisconnected value)? disconnected,
+    TResult? Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult? Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult? Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult? Function(_BluetoothConnecting value)? connecting,
+    TResult? Function(_BluetoothConnected value)? connected,
+    TResult? Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult? Function(_BluetoothDisconnected value)? disconnected,
   }) {
     return connecting?.call(this);
   }
@@ -2102,12 +2262,13 @@ class _$BluetoothConnectingImpl implements BluetoothConnecting {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(BluetoothNotInitialized value)? notInitialized,
-    TResult Function(BluetoothNotEnabled value)? notEnabled,
-    TResult Function(BluetoothConnecting value)? connecting,
-    TResult Function(BluetoothConnected value)? connected,
-    TResult Function(BluetoothDisconnecting value)? disconnecting,
-    TResult Function(BluetoothDisconnected value)? disconnected,
+    TResult Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult Function(_BluetoothConnecting value)? connecting,
+    TResult Function(_BluetoothConnected value)? connected,
+    TResult Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult Function(_BluetoothDisconnected value)? disconnected,
     required TResult orElse(),
   }) {
     if (connecting != null) {
@@ -2117,8 +2278,8 @@ class _$BluetoothConnectingImpl implements BluetoothConnecting {
   }
 }
 
-abstract class BluetoothConnecting implements BluetoothBlocState {
-  const factory BluetoothConnecting() = _$BluetoothConnectingImpl;
+abstract class _BluetoothConnecting implements BluetoothBlocState {
+  const factory _BluetoothConnecting() = _$BluetoothConnectingImpl;
 }
 
 /// @nodoc
@@ -2172,7 +2333,7 @@ class __$$BluetoothConnectedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothConnectedImpl implements BluetoothConnected {
+class _$BluetoothConnectedImpl implements _BluetoothConnected {
   const _$BluetoothConnectedImpl({this.message});
 
   @override
@@ -2207,6 +2368,7 @@ class _$BluetoothConnectedImpl implements BluetoothConnected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() notInitialized,
+    required TResult Function() notAvailable,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
     required TResult Function(BluetoothMessage? message) connected,
@@ -2220,6 +2382,7 @@ class _$BluetoothConnectedImpl implements BluetoothConnected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notInitialized,
+    TResult? Function()? notAvailable,
     TResult? Function()? notEnabled,
     TResult? Function()? connecting,
     TResult? Function(BluetoothMessage? message)? connected,
@@ -2233,6 +2396,7 @@ class _$BluetoothConnectedImpl implements BluetoothConnected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notInitialized,
+    TResult Function()? notAvailable,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
     TResult Function(BluetoothMessage? message)? connected,
@@ -2249,12 +2413,13 @@ class _$BluetoothConnectedImpl implements BluetoothConnected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(BluetoothNotInitialized value) notInitialized,
-    required TResult Function(BluetoothNotEnabled value) notEnabled,
-    required TResult Function(BluetoothConnecting value) connecting,
-    required TResult Function(BluetoothConnected value) connected,
-    required TResult Function(BluetoothDisconnecting value) disconnecting,
-    required TResult Function(BluetoothDisconnected value) disconnected,
+    required TResult Function(_BluetoothNotInitialized value) notInitialized,
+    required TResult Function(_BluetoothNotAvailable value) notAvailable,
+    required TResult Function(_BluetoothNotEnabled value) notEnabled,
+    required TResult Function(_BluetoothConnecting value) connecting,
+    required TResult Function(_BluetoothConnected value) connected,
+    required TResult Function(_BluetoothDisconnecting value) disconnecting,
+    required TResult Function(_BluetoothDisconnected value) disconnected,
   }) {
     return connected(this);
   }
@@ -2262,12 +2427,13 @@ class _$BluetoothConnectedImpl implements BluetoothConnected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(BluetoothNotInitialized value)? notInitialized,
-    TResult? Function(BluetoothNotEnabled value)? notEnabled,
-    TResult? Function(BluetoothConnecting value)? connecting,
-    TResult? Function(BluetoothConnected value)? connected,
-    TResult? Function(BluetoothDisconnecting value)? disconnecting,
-    TResult? Function(BluetoothDisconnected value)? disconnected,
+    TResult? Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult? Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult? Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult? Function(_BluetoothConnecting value)? connecting,
+    TResult? Function(_BluetoothConnected value)? connected,
+    TResult? Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult? Function(_BluetoothDisconnected value)? disconnected,
   }) {
     return connected?.call(this);
   }
@@ -2275,12 +2441,13 @@ class _$BluetoothConnectedImpl implements BluetoothConnected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(BluetoothNotInitialized value)? notInitialized,
-    TResult Function(BluetoothNotEnabled value)? notEnabled,
-    TResult Function(BluetoothConnecting value)? connecting,
-    TResult Function(BluetoothConnected value)? connected,
-    TResult Function(BluetoothDisconnecting value)? disconnecting,
-    TResult Function(BluetoothDisconnected value)? disconnected,
+    TResult Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult Function(_BluetoothConnecting value)? connecting,
+    TResult Function(_BluetoothConnected value)? connected,
+    TResult Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult Function(_BluetoothDisconnected value)? disconnected,
     required TResult orElse(),
   }) {
     if (connected != null) {
@@ -2290,8 +2457,8 @@ class _$BluetoothConnectedImpl implements BluetoothConnected {
   }
 }
 
-abstract class BluetoothConnected implements BluetoothBlocState {
-  const factory BluetoothConnected({final BluetoothMessage? message}) =
+abstract class _BluetoothConnected implements BluetoothBlocState {
+  const factory _BluetoothConnected({final BluetoothMessage? message}) =
       _$BluetoothConnectedImpl;
 
   BluetoothMessage? get message;
@@ -2326,7 +2493,7 @@ class __$$BluetoothDisconnectingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothDisconnectingImpl implements BluetoothDisconnecting {
+class _$BluetoothDisconnectingImpl implements _BluetoothDisconnecting {
   const _$BluetoothDisconnectingImpl();
 
   @override
@@ -2348,6 +2515,7 @@ class _$BluetoothDisconnectingImpl implements BluetoothDisconnecting {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() notInitialized,
+    required TResult Function() notAvailable,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
     required TResult Function(BluetoothMessage? message) connected,
@@ -2361,6 +2529,7 @@ class _$BluetoothDisconnectingImpl implements BluetoothDisconnecting {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notInitialized,
+    TResult? Function()? notAvailable,
     TResult? Function()? notEnabled,
     TResult? Function()? connecting,
     TResult? Function(BluetoothMessage? message)? connected,
@@ -2374,6 +2543,7 @@ class _$BluetoothDisconnectingImpl implements BluetoothDisconnecting {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notInitialized,
+    TResult Function()? notAvailable,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
     TResult Function(BluetoothMessage? message)? connected,
@@ -2390,12 +2560,13 @@ class _$BluetoothDisconnectingImpl implements BluetoothDisconnecting {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(BluetoothNotInitialized value) notInitialized,
-    required TResult Function(BluetoothNotEnabled value) notEnabled,
-    required TResult Function(BluetoothConnecting value) connecting,
-    required TResult Function(BluetoothConnected value) connected,
-    required TResult Function(BluetoothDisconnecting value) disconnecting,
-    required TResult Function(BluetoothDisconnected value) disconnected,
+    required TResult Function(_BluetoothNotInitialized value) notInitialized,
+    required TResult Function(_BluetoothNotAvailable value) notAvailable,
+    required TResult Function(_BluetoothNotEnabled value) notEnabled,
+    required TResult Function(_BluetoothConnecting value) connecting,
+    required TResult Function(_BluetoothConnected value) connected,
+    required TResult Function(_BluetoothDisconnecting value) disconnecting,
+    required TResult Function(_BluetoothDisconnected value) disconnected,
   }) {
     return disconnecting(this);
   }
@@ -2403,12 +2574,13 @@ class _$BluetoothDisconnectingImpl implements BluetoothDisconnecting {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(BluetoothNotInitialized value)? notInitialized,
-    TResult? Function(BluetoothNotEnabled value)? notEnabled,
-    TResult? Function(BluetoothConnecting value)? connecting,
-    TResult? Function(BluetoothConnected value)? connected,
-    TResult? Function(BluetoothDisconnecting value)? disconnecting,
-    TResult? Function(BluetoothDisconnected value)? disconnected,
+    TResult? Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult? Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult? Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult? Function(_BluetoothConnecting value)? connecting,
+    TResult? Function(_BluetoothConnected value)? connected,
+    TResult? Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult? Function(_BluetoothDisconnected value)? disconnected,
   }) {
     return disconnecting?.call(this);
   }
@@ -2416,12 +2588,13 @@ class _$BluetoothDisconnectingImpl implements BluetoothDisconnecting {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(BluetoothNotInitialized value)? notInitialized,
-    TResult Function(BluetoothNotEnabled value)? notEnabled,
-    TResult Function(BluetoothConnecting value)? connecting,
-    TResult Function(BluetoothConnected value)? connected,
-    TResult Function(BluetoothDisconnecting value)? disconnecting,
-    TResult Function(BluetoothDisconnected value)? disconnected,
+    TResult Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult Function(_BluetoothConnecting value)? connecting,
+    TResult Function(_BluetoothConnected value)? connected,
+    TResult Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult Function(_BluetoothDisconnected value)? disconnected,
     required TResult orElse(),
   }) {
     if (disconnecting != null) {
@@ -2431,8 +2604,8 @@ class _$BluetoothDisconnectingImpl implements BluetoothDisconnecting {
   }
 }
 
-abstract class BluetoothDisconnecting implements BluetoothBlocState {
-  const factory BluetoothDisconnecting() = _$BluetoothDisconnectingImpl;
+abstract class _BluetoothDisconnecting implements BluetoothBlocState {
+  const factory _BluetoothDisconnecting() = _$BluetoothDisconnectingImpl;
 }
 
 /// @nodoc
@@ -2471,7 +2644,7 @@ class __$$BluetoothDisconnectedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothDisconnectedImpl implements BluetoothDisconnected {
+class _$BluetoothDisconnectedImpl implements _BluetoothDisconnected {
   const _$BluetoothDisconnectedImpl({this.bluetoothDevice});
 
   @override
@@ -2507,6 +2680,7 @@ class _$BluetoothDisconnectedImpl implements BluetoothDisconnected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() notInitialized,
+    required TResult Function() notAvailable,
     required TResult Function() notEnabled,
     required TResult Function() connecting,
     required TResult Function(BluetoothMessage? message) connected,
@@ -2520,6 +2694,7 @@ class _$BluetoothDisconnectedImpl implements BluetoothDisconnected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notInitialized,
+    TResult? Function()? notAvailable,
     TResult? Function()? notEnabled,
     TResult? Function()? connecting,
     TResult? Function(BluetoothMessage? message)? connected,
@@ -2533,6 +2708,7 @@ class _$BluetoothDisconnectedImpl implements BluetoothDisconnected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notInitialized,
+    TResult Function()? notAvailable,
     TResult Function()? notEnabled,
     TResult Function()? connecting,
     TResult Function(BluetoothMessage? message)? connected,
@@ -2549,12 +2725,13 @@ class _$BluetoothDisconnectedImpl implements BluetoothDisconnected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(BluetoothNotInitialized value) notInitialized,
-    required TResult Function(BluetoothNotEnabled value) notEnabled,
-    required TResult Function(BluetoothConnecting value) connecting,
-    required TResult Function(BluetoothConnected value) connected,
-    required TResult Function(BluetoothDisconnecting value) disconnecting,
-    required TResult Function(BluetoothDisconnected value) disconnected,
+    required TResult Function(_BluetoothNotInitialized value) notInitialized,
+    required TResult Function(_BluetoothNotAvailable value) notAvailable,
+    required TResult Function(_BluetoothNotEnabled value) notEnabled,
+    required TResult Function(_BluetoothConnecting value) connecting,
+    required TResult Function(_BluetoothConnected value) connected,
+    required TResult Function(_BluetoothDisconnecting value) disconnecting,
+    required TResult Function(_BluetoothDisconnected value) disconnected,
   }) {
     return disconnected(this);
   }
@@ -2562,12 +2739,13 @@ class _$BluetoothDisconnectedImpl implements BluetoothDisconnected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(BluetoothNotInitialized value)? notInitialized,
-    TResult? Function(BluetoothNotEnabled value)? notEnabled,
-    TResult? Function(BluetoothConnecting value)? connecting,
-    TResult? Function(BluetoothConnected value)? connected,
-    TResult? Function(BluetoothDisconnecting value)? disconnecting,
-    TResult? Function(BluetoothDisconnected value)? disconnected,
+    TResult? Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult? Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult? Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult? Function(_BluetoothConnecting value)? connecting,
+    TResult? Function(_BluetoothConnected value)? connected,
+    TResult? Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult? Function(_BluetoothDisconnected value)? disconnected,
   }) {
     return disconnected?.call(this);
   }
@@ -2575,12 +2753,13 @@ class _$BluetoothDisconnectedImpl implements BluetoothDisconnected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(BluetoothNotInitialized value)? notInitialized,
-    TResult Function(BluetoothNotEnabled value)? notEnabled,
-    TResult Function(BluetoothConnecting value)? connecting,
-    TResult Function(BluetoothConnected value)? connected,
-    TResult Function(BluetoothDisconnecting value)? disconnecting,
-    TResult Function(BluetoothDisconnected value)? disconnected,
+    TResult Function(_BluetoothNotInitialized value)? notInitialized,
+    TResult Function(_BluetoothNotAvailable value)? notAvailable,
+    TResult Function(_BluetoothNotEnabled value)? notEnabled,
+    TResult Function(_BluetoothConnecting value)? connecting,
+    TResult Function(_BluetoothConnected value)? connected,
+    TResult Function(_BluetoothDisconnecting value)? disconnecting,
+    TResult Function(_BluetoothDisconnected value)? disconnected,
     required TResult orElse(),
   }) {
     if (disconnected != null) {
@@ -2590,8 +2769,8 @@ class _$BluetoothDisconnectedImpl implements BluetoothDisconnected {
   }
 }
 
-abstract class BluetoothDisconnected implements BluetoothBlocState {
-  const factory BluetoothDisconnected(
+abstract class _BluetoothDisconnected implements BluetoothBlocState {
+  const factory _BluetoothDisconnected(
       {final BluetoothDevice? bluetoothDevice}) = _$BluetoothDisconnectedImpl;
 
   BluetoothDevice? get bluetoothDevice;
