@@ -23,62 +23,62 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => MultiBlocListener(
-        listeners: [
-          // Следим за поступающей информацией от Bluetooth
-          _listenToBluetooth(),
-          // Следим за повторной установкой стартового времени для участника
-          _listenToNewStartTime(),
-          // Используем обратный отсчёт из приложения для звуковых эффектов
-          _listenToCountdownEvents(),
-          // Следим за наличием новой версии
-          _listenToUpdater(),
-        ],
-        child: BlocBuilder<TabBloc, AppTab>(
-          builder: (context, activeTab) => DefaultTabController(
-            length: 3,
-            child: Scaffold(
-              drawer: const AppDrawer(),
-              appBar: AppBar(
-                title: const _TextTitle(),
-                actions: <Widget>[
-                  _FinishFilterButton(activeTab: activeTab),
-                  const BluetoothButton(),
-                  MenuButton(
-                    key: const Key('HomeAppBarMenuButton'),
-                    activeTab: activeTab,
+  Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(
+        builder: (context, activeTab) => DefaultTabController(
+          length: 3,
+          child: Scaffold(
+            drawer: const AppDrawer(),
+            appBar: AppBar(
+              title: const _TextTitle(),
+              actions: <Widget>[
+                _FinishFilterButton(activeTab: activeTab),
+                const BluetoothButton(),
+                MenuButton(
+                  key: const Key('HomeAppBarMenuButton'),
+                  activeTab: activeTab,
+                ),
+              ],
+              bottom: TabBar(
+                key: const Key('TabBar'),
+                onTap: (index) {
+                  final bloc = context.read<TabBloc>();
+                  switch (index) {
+                    case 0:
+                      bloc.add(const TabEvent.updated(AppTab.init));
+                    case 1:
+                      bloc.add(const TabEvent.updated(AppTab.start));
+                    case 2:
+                      bloc.add(const TabEvent.updated(AppTab.finish));
+                  }
+                },
+                tabs: <Widget>[
+                  Tab(
+                    key: const Key('InitTab'),
+                    icon: Text(Localization.current.I18nHome_home),
+                  ),
+                  Tab(
+                    key: const Key('StartTab'),
+                    icon: Text(Localization.current.I18nHome_start),
+                  ),
+                  Tab(
+                    key: const Key('FinishTab'),
+                    icon: Text(Localization.current.I18nHome_finish),
                   ),
                 ],
-                bottom: TabBar(
-                  key: const Key('TabBar'),
-                  onTap: (index) {
-                    final bloc = context.read<TabBloc>();
-                    switch (index) {
-                      case 0:
-                        bloc.add(const TabEvent.updated(AppTab.init));
-                      case 1:
-                        bloc.add(const TabEvent.updated(AppTab.start));
-                      case 2:
-                        bloc.add(const TabEvent.updated(AppTab.finish));
-                    }
-                  },
-                  tabs: <Widget>[
-                    Tab(
-                      key: const Key('InitTab'),
-                      icon: Text(Localization.current.I18nHome_home),
-                    ),
-                    Tab(
-                      key: const Key('StartTab'),
-                      icon: Text(Localization.current.I18nHome_start),
-                    ),
-                    Tab(
-                      key: const Key('FinishTab'),
-                      icon: Text(Localization.current.I18nHome_finish),
-                    ),
-                  ],
-                ),
               ),
-              body: const TabBarView(
+            ),
+            body: MultiBlocListener(
+              listeners: [
+                // Следим за поступающей информацией от Bluetooth
+                _listenToBluetooth(),
+                // Следим за повторной установкой стартового времени для участника
+                _listenToNewStartTime(),
+                // Используем обратный отсчёт из приложения для звуковых эффектов
+                _listenToCountdownEvents(),
+                // Следим за наличием новой версии
+                _listenToUpdater(),
+              ],
+              child: const TabBarView(
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
                   InitPage(),
