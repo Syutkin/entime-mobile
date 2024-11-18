@@ -26,9 +26,18 @@ class _SettingsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final settingsThemeData = const SettingsThemeData().copyWith(
+      settingsListBackground: colorScheme.surface,
+      settingsTileTextColor: colorScheme.onSurface,
+      titleTextColor: colorScheme.primary,
+    );
     final settingsBloc = context.read<SettingsBloc>();
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, settingsState) => SettingsList(
+        platform: DevicePlatform.android,
+        darkTheme:settingsThemeData,
+        lightTheme: settingsThemeData,
         sections: [
           SettingsSection(
             title: Text(Localization.current.I18nSettings_general),

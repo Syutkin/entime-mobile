@@ -69,7 +69,6 @@ void main() {
       ),
     );
 
-    expect($(HomeScreen), findsNothing);
     expect($(HomeScreen), findsOneWidget);
 
     // await $('Go to the quiz').tap();

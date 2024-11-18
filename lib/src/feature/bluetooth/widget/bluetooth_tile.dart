@@ -14,7 +14,6 @@ class BluetoothTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BluetoothBloc, BluetoothBlocState>(
       builder: (context, state) => ListTile(
-        // enabled: state is! BluetoothNotEnabled,
         enabled: state.maybeMap(
           notAvailable: (_) => false,
           notEnabled: (_) => false,

@@ -7,7 +7,7 @@ import 'package:patrol/patrol.dart';
 void main() {
   patrolTest(
     'counter state is the same after going to home and switching apps',
-    ($) async {
+        ($) async {
       // Replace later with your app's main widget
       await $.pumpWidgetAndSettle(
         MaterialApp(
@@ -19,7 +19,6 @@ void main() {
       );
 
       expect($('app'), findsOneWidget);
-      expect($('app'), findsNothing);
       if (!Platform.isMacOS) {
         await $.native.pressHome();
       }
