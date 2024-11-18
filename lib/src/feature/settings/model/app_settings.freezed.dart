@@ -78,6 +78,8 @@ mixin _$AppSettings {
   Brightness get brightness => throw _privateConstructorUsedError;
   double get contrastLevel => throw _privateConstructorUsedError;
   DynamicSchemeVariant get dynamicSchemeVariant =>
+      throw _privateConstructorUsedError;
+  bool get isOLEDBackground =>
       throw _privateConstructorUsedError; // версия при предыдущем запуске
   String get previousVersion =>
       throw _privateConstructorUsedError; // обновлять ntp offset при запуске
@@ -123,6 +125,7 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)
         $default, {
@@ -165,6 +168,7 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)
         defaults,
@@ -211,6 +215,7 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         $default, {
@@ -253,6 +258,7 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         defaults,
@@ -299,6 +305,7 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         $default, {
@@ -341,6 +348,7 @@ mixin _$AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         defaults,
@@ -419,6 +427,7 @@ abstract class $AppSettingsCopyWith<$Res> {
       Brightness brightness,
       double contrastLevel,
       DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
       String previousVersion,
       bool updateNtpOffsetAtStartup});
 }
@@ -476,6 +485,7 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? brightness = null,
     Object? contrastLevel = null,
     Object? dynamicSchemeVariant = null,
+    Object? isOLEDBackground = null,
     Object? previousVersion = null,
     Object? updateNtpOffsetAtStartup = null,
   }) {
@@ -632,6 +642,10 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.dynamicSchemeVariant
           : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
               as DynamicSchemeVariant,
+      isOLEDBackground: null == isOLEDBackground
+          ? _value.isOLEDBackground
+          : isOLEDBackground // ignore: cast_nullable_to_non_nullable
+              as bool,
       previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
@@ -691,6 +705,7 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       Brightness brightness,
       double contrastLevel,
       DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
       String previousVersion,
       bool updateNtpOffsetAtStartup});
 }
@@ -746,6 +761,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? brightness = null,
     Object? contrastLevel = null,
     Object? dynamicSchemeVariant = null,
+    Object? isOLEDBackground = null,
     Object? previousVersion = null,
     Object? updateNtpOffsetAtStartup = null,
   }) {
@@ -902,6 +918,10 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.dynamicSchemeVariant
           : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
               as DynamicSchemeVariant,
+      isOLEDBackground: null == isOLEDBackground
+          ? _value.isOLEDBackground
+          : isOLEDBackground // ignore: cast_nullable_to_non_nullable
+              as bool,
       previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
@@ -956,6 +976,7 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.brightness,
       required this.contrastLevel,
       required this.dynamicSchemeVariant,
+      required this.isOLEDBackground,
       required this.previousVersion,
       required this.updateNtpOffsetAtStartup});
 
@@ -1064,6 +1085,8 @@ class _$AppSettingsImpl implements _AppSettings {
   final double contrastLevel;
   @override
   final DynamicSchemeVariant dynamicSchemeVariant;
+  @override
+  final bool isOLEDBackground;
 // версия при предыдущем запуске
   @override
   final String previousVersion;
@@ -1073,7 +1096,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -1151,6 +1174,8 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.contrastLevel == contrastLevel) &&
             (identical(other.dynamicSchemeVariant, dynamicSchemeVariant) ||
                 other.dynamicSchemeVariant == dynamicSchemeVariant) &&
+            (identical(other.isOLEDBackground, isOLEDBackground) ||
+                other.isOLEDBackground == isOLEDBackground) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion) &&
             (identical(
@@ -1199,6 +1224,7 @@ class _$AppSettingsImpl implements _AppSettings {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
+        isOLEDBackground,
         previousVersion,
         updateNtpOffsetAtStartup
       ]);
@@ -1253,6 +1279,7 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)
         $default, {
@@ -1295,6 +1322,7 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)
         defaults,
@@ -1338,6 +1366,7 @@ class _$AppSettingsImpl implements _AppSettings {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
+        isOLEDBackground,
         previousVersion,
         updateNtpOffsetAtStartup);
   }
@@ -1384,6 +1413,7 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         $default, {
@@ -1426,6 +1456,7 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         defaults,
@@ -1469,6 +1500,7 @@ class _$AppSettingsImpl implements _AppSettings {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
+        isOLEDBackground,
         previousVersion,
         updateNtpOffsetAtStartup);
   }
@@ -1515,6 +1547,7 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         $default, {
@@ -1557,6 +1590,7 @@ class _$AppSettingsImpl implements _AppSettings {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         defaults,
@@ -1602,6 +1636,7 @@ class _$AppSettingsImpl implements _AppSettings {
           brightness,
           contrastLevel,
           dynamicSchemeVariant,
+          isOLEDBackground,
           previousVersion,
           updateNtpOffsetAtStartup);
     }
@@ -1680,6 +1715,7 @@ abstract class _AppSettings implements AppSettings {
       required final Brightness brightness,
       required final double contrastLevel,
       required final DynamicSchemeVariant dynamicSchemeVariant,
+      required final bool isOLEDBackground,
       required final String previousVersion,
       required final bool updateNtpOffsetAtStartup}) = _$AppSettingsImpl;
 
@@ -1768,8 +1804,9 @@ abstract class _AppSettings implements AppSettings {
   @override
   double get contrastLevel;
   @override
-  DynamicSchemeVariant
-      get dynamicSchemeVariant; // версия при предыдущем запуске
+  DynamicSchemeVariant get dynamicSchemeVariant;
+  @override
+  bool get isOLEDBackground; // версия при предыдущем запуске
   @override
   String get previousVersion; // обновлять ntp offset при запуске
   @override
@@ -1830,6 +1867,7 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       Brightness brightness,
       double contrastLevel,
       DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
       String previousVersion,
       bool updateNtpOffsetAtStartup});
 }
@@ -1885,6 +1923,7 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? brightness = null,
     Object? contrastLevel = null,
     Object? dynamicSchemeVariant = null,
+    Object? isOLEDBackground = null,
     Object? previousVersion = null,
     Object? updateNtpOffsetAtStartup = null,
   }) {
@@ -2041,6 +2080,10 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.dynamicSchemeVariant
           : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
               as DynamicSchemeVariant,
+      isOLEDBackground: null == isOLEDBackground
+          ? _value.isOLEDBackground
+          : isOLEDBackground // ignore: cast_nullable_to_non_nullable
+              as bool,
       previousVersion: null == previousVersion
           ? _value.previousVersion
           : previousVersion // ignore: cast_nullable_to_non_nullable
@@ -2095,6 +2138,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.brightness = Brightness.light,
       this.contrastLevel = -1.0,
       this.dynamicSchemeVariant = DynamicSchemeVariant.vibrant,
+      this.isOLEDBackground = false,
       this.previousVersion = '0.0.0',
       this.updateNtpOffsetAtStartup = false});
 
@@ -2244,6 +2288,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final DynamicSchemeVariant dynamicSchemeVariant;
+  @override
+  @JsonKey()
+  final bool isOLEDBackground;
 // версия при предыдущем запуске
   @override
   @JsonKey()
@@ -2255,7 +2302,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings.defaults(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -2333,6 +2380,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.contrastLevel == contrastLevel) &&
             (identical(other.dynamicSchemeVariant, dynamicSchemeVariant) ||
                 other.dynamicSchemeVariant == dynamicSchemeVariant) &&
+            (identical(other.isOLEDBackground, isOLEDBackground) ||
+                other.isOLEDBackground == isOLEDBackground) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion) &&
             (identical(
@@ -2381,6 +2430,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
+        isOLEDBackground,
         previousVersion,
         updateNtpOffsetAtStartup
       ]);
@@ -2436,6 +2486,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)
         $default, {
@@ -2478,6 +2529,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)
         defaults,
@@ -2521,6 +2573,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
+        isOLEDBackground,
         previousVersion,
         updateNtpOffsetAtStartup);
   }
@@ -2567,6 +2620,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         $default, {
@@ -2609,6 +2663,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         defaults,
@@ -2652,6 +2707,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         brightness,
         contrastLevel,
         dynamicSchemeVariant,
+        isOLEDBackground,
         previousVersion,
         updateNtpOffsetAtStartup);
   }
@@ -2698,6 +2754,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         $default, {
@@ -2740,6 +2797,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             Brightness brightness,
             double contrastLevel,
             DynamicSchemeVariant dynamicSchemeVariant,
+            bool isOLEDBackground,
             String previousVersion,
             bool updateNtpOffsetAtStartup)?
         defaults,
@@ -2785,6 +2843,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           brightness,
           contrastLevel,
           dynamicSchemeVariant,
+          isOLEDBackground,
           previousVersion,
           updateNtpOffsetAtStartup);
     }
@@ -2863,6 +2922,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final Brightness brightness,
       final double contrastLevel,
       final DynamicSchemeVariant dynamicSchemeVariant,
+      final bool isOLEDBackground,
       final String previousVersion,
       final bool updateNtpOffsetAtStartup}) = _$AppSettingsDefaultsImpl;
 
@@ -2952,8 +3012,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   double get contrastLevel;
   @override
-  DynamicSchemeVariant
-      get dynamicSchemeVariant; // версия при предыдущем запуске
+  DynamicSchemeVariant get dynamicSchemeVariant;
+  @override
+  bool get isOLEDBackground; // версия при предыдущем запуске
   @override
   String get previousVersion; // обновлять ntp offset при запуске
   @override

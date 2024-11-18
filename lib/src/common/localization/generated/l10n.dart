@@ -541,6 +541,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Чёрный фон (для OLED)`
+  String get I18nSettings_oLEDBackground {
+    return Intl.message(
+      'Чёрный фон (для OLED)',
+      name: 'I18nSettings_oLEDBackground',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Журнал`
   String get I18nSettings_journal {
     return Intl.message(

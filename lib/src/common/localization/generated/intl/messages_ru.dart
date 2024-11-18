@@ -399,6 +399,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Синхронизировать при старте приложения"),
         "I18nSettings_numberOfLines":
             MessageLookupByLibrary.simpleMessage("Количество строк"),
+        "I18nSettings_oLEDBackground":
+            MessageLookupByLibrary.simpleMessage("Чёрный фон (для OLED)"),
         "I18nSettings_participantsName":
             MessageLookupByLibrary.simpleMessage("Называть имена участников"),
         "I18nSettings_pitch": MessageLookupByLibrary.simpleMessage("Тембр"),

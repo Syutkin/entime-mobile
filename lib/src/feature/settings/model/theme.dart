@@ -5,6 +5,9 @@ ThemeData appThemeData({
   Brightness brightness = Brightness.light,
   double contrastLevel = -1.0,
   DynamicSchemeVariant dynamicSchemeVariant = DynamicSchemeVariant.vibrant,
+
+  /// Set surface color to black for all dark themes
+  bool isOLEDBackground = false,
 }) {
   return ThemeData(
     useMaterial3: true,
@@ -13,6 +16,9 @@ ThemeData appThemeData({
       brightness: brightness,
       contrastLevel: contrastLevel,
       dynamicSchemeVariant: dynamicSchemeVariant,
+      surface: brightness == Brightness.dark && isOLEDBackground
+          ? Colors.black
+          : null,
     ),
     // For supporting predictive back
     pageTransitionsTheme: const PageTransitionsTheme(

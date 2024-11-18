@@ -257,6 +257,11 @@ class I18nSettings {
         name: 'I18nSettings_brightness',
       );
 
+  static String get oLEDBackground => Intl.message(
+        'Чёрный фон (для OLED)',
+        name: 'I18nSettings_oLEDBackground',
+      );
+
   static String get journal => Intl.message(
         'Журнал',
         name: 'I18nSettings_journal',
@@ -448,9 +453,9 @@ class I18nBluetooth {
       );
 
   static String get bluetoothNotAvailable => Intl.message(
-    'Bluetooth недоступен на устройстве',
-    name: 'I18nBluetooth_bluetoothNotAvailable',
-  );
+        'Bluetooth недоступен на устройстве',
+        name: 'I18nBluetooth_bluetoothNotAvailable',
+      );
 }
 
 class I18nCountdown {

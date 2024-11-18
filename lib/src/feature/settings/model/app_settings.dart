@@ -86,6 +86,7 @@ class AppSettings with _$AppSettings {
     required Brightness brightness,
     required double contrastLevel,
     required DynamicSchemeVariant dynamicSchemeVariant,
+    required bool isOLEDBackground,
 
     // версия при предыдущем запуске
     required String previousVersion,
@@ -177,6 +178,7 @@ class AppSettings with _$AppSettings {
     @Default(-1.0) double contrastLevel,
     @Default(DynamicSchemeVariant.vibrant)
     DynamicSchemeVariant dynamicSchemeVariant,
+    @Default(false) bool isOLEDBackground,
 
     // версия при предыдущем запуске
     @Default('0.0.0') String previousVersion,

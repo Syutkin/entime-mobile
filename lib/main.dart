@@ -209,13 +209,16 @@ class EntimeAppView extends StatelessWidget {
               state.settings.contrastLevel ||
           previousState.settings.dynamicSchemeVariant !=
               state.settings.dynamicSchemeVariant ||
-          previousState.settings.language != state.settings.language,
+          previousState.settings.language != state.settings.language ||
+          previousState.settings.isOLEDBackground !=
+              state.settings.isOLEDBackground,
       builder: (context, state) => MaterialApp(
         theme: appThemeData(
           seedColor: state.settings.seedColor,
           brightness: state.settings.brightness,
           contrastLevel: state.settings.contrastLevel,
           dynamicSchemeVariant: state.settings.dynamicSchemeVariant,
+          isOLEDBackground: state.settings.isOLEDBackground,
         ),
         title: Pubspec.name,
         localizationsDelegates: const [

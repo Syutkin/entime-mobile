@@ -72,6 +72,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
         prefs.getString('dynamicSchemeVariant') ??
             defaults.dynamicSchemeVariant.name,
       ),
+      isOLEDBackground:
+          prefs.getBool('isOLEDBackground') ?? defaults.isOLEDBackground,
       previousVersion:
           prefs.getString('previousVersion') ?? defaults.previousVersion,
       updateNtpOffsetAtStartup: prefs.getBool('updateNtpOffsetAtStartup') ??
@@ -155,6 +157,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       'dynamicSchemeVariant',
       settings.dynamicSchemeVariant.name,
     );
+    await _prefs.setBool('isOLEDBackground', settings.isOLEDBackground);
     await _prefs.setString('previousVersion', settings.previousVersion);
     await _prefs.setBool(
       'updateNtpOffsetAtStartup',

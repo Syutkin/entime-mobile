@@ -23,7 +23,8 @@ class BluetoothTile extends StatelessWidget {
         onTap: () => selectBluetoothDevice(context),
         leading: const BluetoothButton(),
         title: state.maybeMap(
-          notAvailable: (_) => Text(Localization.current.I18nBluetooth_bluetoothNotAvailable),
+          notAvailable: (_) =>
+              Text(Localization.current.I18nBluetooth_bluetoothNotAvailable),
           orElse: () => Text(Localization.current.I18nInit_bluetoothModule),
         ),
         subtitle: state.maybeMap(

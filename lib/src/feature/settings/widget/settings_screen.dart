@@ -36,7 +36,7 @@ class _SettingsList extends StatelessWidget {
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, settingsState) => SettingsList(
         platform: DevicePlatform.android,
-        darkTheme:settingsThemeData,
+        darkTheme: settingsThemeData,
         lightTheme: settingsThemeData,
         sections: [
           SettingsSection(
@@ -557,25 +557,41 @@ class _SettingsList extends StatelessWidget {
     final settings = bloc.state.settings;
     final result = <SettingsTile>[];
     final seedColor = settings.seedColor;
-    result.add(
-      SettingsTile.switchTile(
-        title: Text(
-          Localization.current.I18nSettings_brightness,
-        ),
-        // titleMaxLines: 2,
-        //leading:  Icon(MdiIcons.timer),
-        initialValue: settings.brightness == Brightness.light,
-        onToggle: (value) {
-          bloc.add(
-            SettingsEvent.update(
-              settings: settings.copyWith(
-                brightness: value ? Brightness.light : Brightness.dark,
+    result
+      ..add(
+        SettingsTile.switchTile(
+          title: Text(
+            Localization.current.I18nSettings_brightness,
+          ),
+          initialValue: settings.brightness == Brightness.light,
+          onToggle: (value) {
+            bloc.add(
+              SettingsEvent.update(
+                settings: settings.copyWith(
+                  brightness: value ? Brightness.light : Brightness.dark,
+                ),
               ),
-            ),
-          );
-        },
-      ),
-    );
+            );
+          },
+        ),
+      )
+      ..add(
+        SettingsTile.switchTile(
+          title: Text(
+            Localization.current.I18nSettings_oLEDBackground,
+          ),
+          initialValue: settings.isOLEDBackground,
+          onToggle: (value) {
+            bloc.add(
+              SettingsEvent.update(
+                settings: settings.copyWith(
+                  isOLEDBackground: value,
+                ),
+              ),
+            );
+          },
+        ),
+      );
     for (final colorSeed in ColorSeed.values) {
       result.add(
         SettingsTile(
