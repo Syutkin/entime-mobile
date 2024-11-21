@@ -27,18 +27,16 @@ def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 } else {
-    keystoreProperties.setProperty('storePassword', System.getenv('KEY_STORE_PASSWORD')?: "");
-    keystoreProperties.setProperty('keyPassword', System.getenv('KEY_PASSWORD')?: "");
-    keystoreProperties.setProperty('keyAlias', System.getenv('ALIAS')?: "");
-    keystoreProperties.setProperty('storeFile', System.getenv('KEY_PATH')?: "");
+    keystoreProperties.setProperty('storePassword', System.getenv('KEY_STORE_PASSWORD')?: "")
+    keystoreProperties.setProperty('keyPassword', System.getenv('KEY_PASSWORD')?: "")
+    keystoreProperties.setProperty('keyAlias', System.getenv('ALIAS')?: "")
+    keystoreProperties.setProperty('storeFile', System.getenv('KEY_PATH')?: "")
 }
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    namespace "site.syutkin.entime"
 
-    lintOptions {
-        disable 'InvalidPackage'
-    }
+    compileSdkVersion flutter.compileSdkVersion
 
     defaultConfig {
         applicationId "site.syutkin.entime"
@@ -52,20 +50,29 @@ android {
 
     signingConfigs {
         release {
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            storePassword keystoreProperties['storePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
+            storeFile = keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword = keystoreProperties['storePassword']
+            keyAlias = keystoreProperties['keyAlias']
+            keyPassword = keystoreProperties['keyPassword']
         }
-        buildTypes {
-            release {
-                signingConfig signingConfigs.release
-            }
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.release
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
 
     testOptions {
         execution "ANDROIDX_TEST_ORCHESTRATOR"
+    }
+    lint {
+        disable 'InvalidPackage'
     }
 }
 
