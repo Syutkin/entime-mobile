@@ -17,79 +17,62 @@ class LogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<LogBloc>(context).add(const LogEvent.show());
-    return PopScope(
-      onPopInvokedWithResult: (didPop, result) {
-        BlocProvider.of<LogBloc>(context).add(const LogEvent.hide());
-      },
-      child: Scaffold(
-        // ToDo: фильтры в аппбаре
-        appBar: AppBar(
-          title: Text(Localization.current.I18nLog_bluetoothInformation),
-        ),
-        body: BlocBuilder<LogBloc, LogState>(
-          builder: (context, state) {
-            return state.map(
-              initial: (_) {
-                return const CircularProgressIndicator();
-              },
-              initialized: (state) {
-                final log = state.log;
-                if (log != null) {
-                  // скролл на последнюю запись
-                  SchedulerBinding.instance.addPostFrameCallback((_) {
-                    scrollToEnd(_scrollController);
-                  });
-                  return Scrollbar(
-                    // ToDo: при нажатии показывать всю инфу в попапе
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      // shrinkWrap: true,
-                      itemCount: log.length,
-                      itemBuilder: (context, index) {
-                        final item = state.log![index];
-                        return ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: Row(
-                            children: <Widget>[
-                              Flexible(
-                                flex: 10,
-                                child: Align(
-                                  child: _LogLevelIcon(level: item.level),
-                                ),
-                              ),
-                              Flexible(
-                                flex: 10,
-                                child: Align(
-                                  child: _LogSourceIcon(
-                                    source: item.source.name,
-                                    direction: item.direction.name,
-                                  ),
-                                ),
-                              ),
-                              Flexible(
-                                flex: 80,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(item.rawData ?? ''),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
-            );
-          },
-        ),
-        persistentFooterButtons:
-            !kReleaseMode ? _getDebugButtons(context) : null,
+    return Scaffold(
+      // ToDo: фильтры в аппбаре
+      appBar: AppBar(
+        title: Text(Localization.current.I18nLog_bluetoothInformation),
       ),
+      body: BlocBuilder<LogBloc, LogState>(
+        builder: (context, state) {
+          final log = state.log;
+          print(log);
+          // скролл на последнюю запись
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            scrollToEnd(_scrollController);
+          });
+          return Scrollbar(
+            // ToDo: при нажатии показывать всю инфу в попапе
+            child: ListView.builder(
+              controller: _scrollController,
+              // shrinkWrap: true,
+              itemCount: log.length,
+              itemBuilder: (context, index) {
+                final item = state.log[index];
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Row(
+                    children: <Widget>[
+                      Flexible(
+                        flex: 10,
+                        child: Align(
+                          child: _LogLevelIcon(level: item.level),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 10,
+                        child: Align(
+                          child: _LogSourceIcon(
+                            source: item.source.name,
+                            direction: item.direction.name,
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 80,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(item.rawData ?? ''),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
+      persistentFooterButtons: !kReleaseMode ? _getDebugButtons(context) : null,
     );
   }
 

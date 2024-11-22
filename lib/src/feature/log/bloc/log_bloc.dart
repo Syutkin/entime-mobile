@@ -1,12 +1,13 @@
+import 'dart:async';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../common/logger/logger.dart';
 import '../../database/drift/app_database.dart';
 import '../../settings/settings.dart';
-import '../model/log_level.dart';
-import '../model/log_source.dart';
-import '../model/log_source_direction.dart';
+import '../log.dart';
 
 part 'log_bloc.freezed.dart';
 part 'log_event.dart';
@@ -18,15 +19,17 @@ class LogBloc extends Bloc<LogEvent, LogState> {
     required SettingsProvider settingsProvider,
   })  : _db = database,
         _settingsProvider = settingsProvider,
-        super(const LogState.initial()) {
+        super(const LogState(log: [])) {
     _settingsProvider.state.listen((state) {
       _limit = state.logLimit;
     });
 
-    // _db.select(_db.logs).watch().listen((event) async {
-    //   _log = event;
-    //   logger.d('LogBloc -> (_db.logs).watch()');
-    // });
+    _logsSubscription =
+        _db.managers.logs.watch().listen((event) async {
+      logger.d('LogBloc -> (_db.logs).watch()');
+      _log = await _db.getLog(limit: _limit);
+      add(const LogEvent.emitState());
+    });
 
     // logProvider.state.listen((state) {
     //   if (state == const DBState.selected(updated: true)) {
@@ -36,36 +39,14 @@ class LogBloc extends Bloc<LogEvent, LogState> {
 
     on<LogEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
-        add: (_Add event) async {
-          // LogEvent.add(
-          //   level: event.level,
-          //   source: event.source,
-          //   direction: event.direction,
-          //   rawData: event.rawData,
-          // );
-          state.mapOrNull(
-            initialized: (state) {
-              if (state.updateLogScreen ?? false) {
-                add(const LogEvent.show());
-              }
-            },
-          );
+        emitState: (_EmitState event) async {
+          emit(LogState(log: _log));
         },
-        show: (_Show event) async {
-          _log = await _db.getLog(limit: _limit);
-          emit(
-            LogState.initialized(
-              log: _log,
-              updateLogScreen: true,
-            ),
-          );
-        },
-        hide: (_Hide event) async {
-          emit(
-            LogState.initialized(
-              log: _log,
-              updateLogScreen: false,
-            ),
+        add: (_AddLog event) {
+          _db.addLog(
+            level: event.level,
+            source: event.source,
+            rawData: event.rawData,
           );
         },
       );
@@ -77,4 +58,12 @@ class LogBloc extends Bloc<LogEvent, LogState> {
   int _limit = -1;
 
   List<Log> _log = [];
+
+  late StreamSubscription<List<Log>> _logsSubscription;
+
+  @override
+  Future<void> close() {
+    _logsSubscription.cancel();
+    return super.close();
+  }
 }

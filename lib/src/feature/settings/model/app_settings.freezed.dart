@@ -2133,7 +2133,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.substituteNumbersDelay = 500,
       this.deltaInSeconds = 15,
       this.updateStartCorrectionDelay = 2000,
-      this.logLimit = -1,
+      this.logLimit = 100,
       this.seedColor = ColorSeed.blue,
       this.brightness = Brightness.light,
       this.contrastLevel = -1.0,

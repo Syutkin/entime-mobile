@@ -169,7 +169,7 @@ class AppSettings with _$AppSettings {
     // лог
     // ограничение количества показываемых строк в окне лога
     // -1 = без ограничений
-    @Default(-1) int logLimit,
+    @Default(100) int logLimit,
 
     // активная тема
     // @Default(AppTheme.lightBlue) AppTheme appTheme,
