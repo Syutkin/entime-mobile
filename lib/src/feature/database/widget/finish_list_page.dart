@@ -144,7 +144,7 @@ class _FinishListPage extends State<FinishListPage> {
 
   Widget _finishList(List<Finish> finishProtocol) => CustomScrollView(
         controller: _scrollController,
-        shrinkWrap: true,
+        // shrinkWrap: true,
         slivers: [
           SliverPersistentHeader(
             pinned: true,
@@ -204,7 +204,7 @@ class _FinishListPage extends State<FinishListPage> {
             height: 50,
             width: double.maxFinite,
             child: ListView.builder(
-              shrinkWrap: true,
+              // shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: state.numbersOnTrace.length,
               padding: const EdgeInsets.only(left: 5),

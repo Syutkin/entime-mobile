@@ -32,7 +32,7 @@ class TrailsListPage extends StatelessWidget {
               return Scrollbar(
                 child: ListView.builder(
                   controller: _scrollController,
-                  shrinkWrap: true,
+                  // shrinkWrap: true,
                   itemCount: trails.length,
                   itemBuilder: (context, index) {
                     final trail = trails[index];

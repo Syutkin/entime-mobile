@@ -44,7 +44,7 @@ class LogScreen extends StatelessWidget {
                     // ToDo: при нажатии показывать всю инфу в попапе
                     child: ListView.builder(
                       controller: _scrollController,
-                      shrinkWrap: true,
+                      // shrinkWrap: true,
                       itemCount: log.length,
                       itemBuilder: (context, index) {
                         final item = state.log![index];

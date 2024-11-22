@@ -26,7 +26,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [Trail? trail]) async {
       content: Form(
         key: formKey,
         child: ListView(
-          shrinkWrap: true,
+          // shrinkWrap: true,
           children: <Widget>[
             // Название трейла
             TextFormField(

@@ -37,7 +37,7 @@ Future<void> _upsertStagePopup(
       content: Form(
         key: formKey,
         child: ListView(
-          shrinkWrap: true,
+          // shrinkWrap: true,
           children: <Widget>[
             // Название этапа
             TextFormField(

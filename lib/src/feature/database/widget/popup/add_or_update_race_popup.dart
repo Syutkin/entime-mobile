@@ -34,7 +34,7 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
       content: Form(
         key: formKey,
         child: ListView(
-          shrinkWrap: true,
+          // shrinkWrap: true,
           children: <Widget>[
             // Название гонки
             TextFormField(
