@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-11-18T22:34:57.095971",
+  "@@last_modified": "2024-11-22T20:52:26.851194",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -662,6 +662,11 @@
   },
   "I18nInit_importFromCsv": "Импорт протокола из csv",
   "@I18nInit_importFromCsv": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nInit_trails": "Трейлы",
+  "@I18nInit_trails": {
     "type": "text",
     "placeholders": {}
   },

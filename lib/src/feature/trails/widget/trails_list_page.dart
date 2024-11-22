@@ -10,8 +10,8 @@ import '../bloc/trails_bloc.dart';
 
 part 'popup/add_or_update_trail_popup.dart';
 
-class TrailListPage extends StatelessWidget {
-  TrailListPage({super.key});
+class TrailsListPage extends StatelessWidget {
+  TrailsListPage({super.key});
   final _scrollController = ScrollController();
 
   @override

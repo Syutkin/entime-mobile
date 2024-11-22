@@ -212,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nInit_selectStage":
             MessageLookupByLibrary.simpleMessage("Выберите спецучасток"),
         "I18nInit_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
+        "I18nInit_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
         "I18nLog_bluetoothInformation":
             MessageLookupByLibrary.simpleMessage("Информация Bluetooth"),
         "I18nModuleSettings_awaitingSettings":

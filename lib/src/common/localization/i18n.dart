@@ -756,6 +756,11 @@ class I18nInit {
         'Импорт протокола из csv',
         name: 'I18nInit_importFromCsv',
       );
+
+  static String get trails => Intl.message(
+    'Трейлы',
+    name: 'I18nInit_trails',
+  );
 }
 
 class I18nStart {

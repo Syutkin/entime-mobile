@@ -1,4 +1,4 @@
-import 'package:entime/src/feature/trails/widget/trail_list_page.dart';
+import 'package:entime/src/feature/trails/widget/trails_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -68,7 +68,7 @@ class _DebugTrailsButton extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute<void>(
-              builder: (context) => TrailListPage(
+              builder: (context) => TrailsListPage(
                   //moduleSettings: moduleSettings,
                   ),
             ),

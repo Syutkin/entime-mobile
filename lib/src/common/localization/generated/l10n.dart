@@ -1305,6 +1305,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Трейлы`
+  String get I18nInit_trails {
+    return Intl.message(
+      'Трейлы',
+      name: 'I18nInit_trails',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Не стартовал`
   String get I18nStart_didNotStart {
     return Intl.message(

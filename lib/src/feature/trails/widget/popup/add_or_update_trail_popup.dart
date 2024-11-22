@@ -1,4 +1,4 @@
-part of '../trail_list_page.dart';
+part of '../trails_list_page.dart';
 
 Future<void> addTrailPopup(BuildContext context) {
   return _upsertTrailPopup(context);

@@ -1,4 +1,4 @@
-import 'package:entime/src/feature/trails/widget/trail_list_page.dart';
+import 'package:entime/src/feature/trails/widget/trails_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
