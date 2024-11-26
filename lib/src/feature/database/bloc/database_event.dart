@@ -202,4 +202,8 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.shareFinish() = _ShareFinish;
 
   const factory DatabaseEvent.shareDatabase() = _ShareDatabase;
+
+  const factory DatabaseEvent.shareTrack({
+    required TrailInfo trail,
+  }) = _ShareTrack;
 }

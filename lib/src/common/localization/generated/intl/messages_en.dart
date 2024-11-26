@@ -148,7 +148,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Start protocol"),
         "I18nHome_setDefaults":
             MessageLookupByLibrary.simpleMessage("Defaults"),
-        "I18nHome_share": MessageLookupByLibrary.simpleMessage("Share"),
         "I18nHome_start": MessageLookupByLibrary.simpleMessage("Start"),
         "I18nHome_update": MessageLookupByLibrary.simpleMessage("Update"),
         "I18nHome_updateAutomaticCorrection": m3,

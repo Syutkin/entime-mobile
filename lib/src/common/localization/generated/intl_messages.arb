@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-11-22T23:20:39.376894",
+  "@@last_modified": "2024-11-23T02:29:34.367851",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -7,6 +7,11 @@
   },
   "I18nCore_delete": "Удалить",
   "@I18nCore_delete": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nCore_share": "Поделиться",
+  "@I18nCore_share": {
     "type": "text",
     "placeholders": {}
   },
@@ -562,11 +567,6 @@
   },
   "I18nHome_addRacer": "Добавить участника",
   "@I18nHome_addRacer": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nHome_share": "Поделиться",
-  "@I18nHome_share": {
     "type": "text",
     "placeholders": {}
   },

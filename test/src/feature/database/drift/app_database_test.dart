@@ -246,8 +246,6 @@ void main() {
         expect(trail.url, null);
         expect(trail.distance, null);
         expect(trail.elevation, null);
-        expect(trail.gpxTrack, null);
-        expect(trail.isDeleted, false);
       });
 
       test('Delete trail', () async {
@@ -269,7 +267,6 @@ void main() {
         const url = 'url';
         const distance = 111;
         const elevation = 222;
-        final gpxTrack = Uint8List.fromList(List.generate(255, (i) => i));
 
         final id = await db.addTrail(name: trailName);
         var trails = await db.getTrails().get();
@@ -282,7 +279,6 @@ void main() {
           url: url,
           distance: distance,
           elevation: elevation,
-          gpxTrack: gpxTrack,
         );
 
         trails = await db.getTrails().get();
@@ -293,8 +289,6 @@ void main() {
         expect(trail.url, url);
         expect(trail.distance, distance);
         expect(trail.elevation, elevation);
-        expect(trail.gpxTrack, gpxTrack);
-        expect(trail.isDeleted, false);
       });
     });
 

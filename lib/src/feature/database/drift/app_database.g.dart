@@ -425,6 +425,425 @@ class RacesCompanion extends UpdateCompanion<Race> {
   }
 }
 
+class TrackFiles extends Table with TableInfo<TrackFiles, TrackFile> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  TrackFiles(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      $customConstraints: 'PRIMARY KEY NOT NULL');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _extensionMeta =
+      const VerificationMeta('extension');
+  late final GeneratedColumn<String> extension = GeneratedColumn<String>(
+      'extension', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _sizeMeta = const VerificationMeta('size');
+  late final GeneratedColumn<int> size = GeneratedColumn<int>(
+      'size', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _descriptionMeta =
+      const VerificationMeta('description');
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+      'description', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _hashSha1Meta =
+      const VerificationMeta('hashSha1');
+  late final GeneratedColumn<String> hashSha1 = GeneratedColumn<String>(
+      'hash_sha1', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _dataMeta = const VerificationMeta('data');
+  late final GeneratedColumn<Uint8List> data = GeneratedColumn<Uint8List>(
+      'data', aliasedName, false,
+      type: DriftSqlType.blob,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _timestampMeta =
+      const VerificationMeta('timestamp');
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+      'timestamp', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, name, extension, size, description, hashSha1, data, timestamp];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'track_files';
+  @override
+  VerificationContext validateIntegrity(Insertable<TrackFile> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('extension')) {
+      context.handle(_extensionMeta,
+          extension.isAcceptableOrUnknown(data['extension']!, _extensionMeta));
+    }
+    if (data.containsKey('size')) {
+      context.handle(
+          _sizeMeta, size.isAcceptableOrUnknown(data['size']!, _sizeMeta));
+    } else if (isInserting) {
+      context.missing(_sizeMeta);
+    }
+    if (data.containsKey('description')) {
+      context.handle(
+          _descriptionMeta,
+          description.isAcceptableOrUnknown(
+              data['description']!, _descriptionMeta));
+    }
+    if (data.containsKey('hash_sha1')) {
+      context.handle(_hashSha1Meta,
+          hashSha1.isAcceptableOrUnknown(data['hash_sha1']!, _hashSha1Meta));
+    } else if (isInserting) {
+      context.missing(_hashSha1Meta);
+    }
+    if (data.containsKey('data')) {
+      context.handle(
+          _dataMeta, this.data.isAcceptableOrUnknown(data['data']!, _dataMeta));
+    } else if (isInserting) {
+      context.missing(_dataMeta);
+    }
+    if (data.containsKey('timestamp')) {
+      context.handle(_timestampMeta,
+          timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
+    } else if (isInserting) {
+      context.missing(_timestampMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  TrackFile map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TrackFile(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      extension: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}extension']),
+      size: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}size'])!,
+      description: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}description']),
+      hashSha1: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}hash_sha1'])!,
+      data: attachedDatabase.typeMapping
+          .read(DriftSqlType.blob, data['${effectivePrefix}data'])!,
+      timestamp: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}timestamp'])!,
+    );
+  }
+
+  @override
+  TrackFiles createAlias(String alias) {
+    return TrackFiles(attachedDatabase, alias);
+  }
+
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class TrackFile extends DataClass implements Insertable<TrackFile> {
+  final int id;
+  final String name;
+  final String? extension;
+  final int size;
+  final String? description;
+  final String hashSha1;
+  final Uint8List data;
+  final String timestamp;
+  const TrackFile(
+      {required this.id,
+      required this.name,
+      this.extension,
+      required this.size,
+      this.description,
+      required this.hashSha1,
+      required this.data,
+      required this.timestamp});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || extension != null) {
+      map['extension'] = Variable<String>(extension);
+    }
+    map['size'] = Variable<int>(size);
+    if (!nullToAbsent || description != null) {
+      map['description'] = Variable<String>(description);
+    }
+    map['hash_sha1'] = Variable<String>(hashSha1);
+    map['data'] = Variable<Uint8List>(data);
+    map['timestamp'] = Variable<String>(timestamp);
+    return map;
+  }
+
+  TrackFilesCompanion toCompanion(bool nullToAbsent) {
+    return TrackFilesCompanion(
+      id: Value(id),
+      name: Value(name),
+      extension: extension == null && nullToAbsent
+          ? const Value.absent()
+          : Value(extension),
+      size: Value(size),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
+      hashSha1: Value(hashSha1),
+      data: Value(data),
+      timestamp: Value(timestamp),
+    );
+  }
+
+  factory TrackFile.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TrackFile(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      extension: serializer.fromJson<String?>(json['extension']),
+      size: serializer.fromJson<int>(json['size']),
+      description: serializer.fromJson<String?>(json['description']),
+      hashSha1: serializer.fromJson<String>(json['hash_sha1']),
+      data: serializer.fromJson<Uint8List>(json['data']),
+      timestamp: serializer.fromJson<String>(json['timestamp']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'extension': serializer.toJson<String?>(extension),
+      'size': serializer.toJson<int>(size),
+      'description': serializer.toJson<String?>(description),
+      'hash_sha1': serializer.toJson<String>(hashSha1),
+      'data': serializer.toJson<Uint8List>(data),
+      'timestamp': serializer.toJson<String>(timestamp),
+    };
+  }
+
+  TrackFile copyWith(
+          {int? id,
+          String? name,
+          Value<String?> extension = const Value.absent(),
+          int? size,
+          Value<String?> description = const Value.absent(),
+          String? hashSha1,
+          Uint8List? data,
+          String? timestamp}) =>
+      TrackFile(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        extension: extension.present ? extension.value : this.extension,
+        size: size ?? this.size,
+        description: description.present ? description.value : this.description,
+        hashSha1: hashSha1 ?? this.hashSha1,
+        data: data ?? this.data,
+        timestamp: timestamp ?? this.timestamp,
+      );
+  TrackFile copyWithCompanion(TrackFilesCompanion data) {
+    return TrackFile(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      extension: data.extension.present ? data.extension.value : this.extension,
+      size: data.size.present ? data.size.value : this.size,
+      description:
+          data.description.present ? data.description.value : this.description,
+      hashSha1: data.hashSha1.present ? data.hashSha1.value : this.hashSha1,
+      data: data.data.present ? data.data.value : this.data,
+      timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TrackFile(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('extension: $extension, ')
+          ..write('size: $size, ')
+          ..write('description: $description, ')
+          ..write('hashSha1: $hashSha1, ')
+          ..write('data: $data, ')
+          ..write('timestamp: $timestamp')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, extension, size, description,
+      hashSha1, $driftBlobEquality.hash(data), timestamp);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TrackFile &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.extension == this.extension &&
+          other.size == this.size &&
+          other.description == this.description &&
+          other.hashSha1 == this.hashSha1 &&
+          $driftBlobEquality.equals(other.data, this.data) &&
+          other.timestamp == this.timestamp);
+}
+
+class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<String?> extension;
+  final Value<int> size;
+  final Value<String?> description;
+  final Value<String> hashSha1;
+  final Value<Uint8List> data;
+  final Value<String> timestamp;
+  const TrackFilesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.extension = const Value.absent(),
+    this.size = const Value.absent(),
+    this.description = const Value.absent(),
+    this.hashSha1 = const Value.absent(),
+    this.data = const Value.absent(),
+    this.timestamp = const Value.absent(),
+  });
+  TrackFilesCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    this.extension = const Value.absent(),
+    required int size,
+    this.description = const Value.absent(),
+    required String hashSha1,
+    required Uint8List data,
+    required String timestamp,
+  })  : name = Value(name),
+        size = Value(size),
+        hashSha1 = Value(hashSha1),
+        data = Value(data),
+        timestamp = Value(timestamp);
+  static Insertable<TrackFile> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<String>? extension,
+    Expression<int>? size,
+    Expression<String>? description,
+    Expression<String>? hashSha1,
+    Expression<Uint8List>? data,
+    Expression<String>? timestamp,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (extension != null) 'extension': extension,
+      if (size != null) 'size': size,
+      if (description != null) 'description': description,
+      if (hashSha1 != null) 'hash_sha1': hashSha1,
+      if (data != null) 'data': data,
+      if (timestamp != null) 'timestamp': timestamp,
+    });
+  }
+
+  TrackFilesCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? name,
+      Value<String?>? extension,
+      Value<int>? size,
+      Value<String?>? description,
+      Value<String>? hashSha1,
+      Value<Uint8List>? data,
+      Value<String>? timestamp}) {
+    return TrackFilesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      extension: extension ?? this.extension,
+      size: size ?? this.size,
+      description: description ?? this.description,
+      hashSha1: hashSha1 ?? this.hashSha1,
+      data: data ?? this.data,
+      timestamp: timestamp ?? this.timestamp,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (extension.present) {
+      map['extension'] = Variable<String>(extension.value);
+    }
+    if (size.present) {
+      map['size'] = Variable<int>(size.value);
+    }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
+    }
+    if (hashSha1.present) {
+      map['hash_sha1'] = Variable<String>(hashSha1.value);
+    }
+    if (data.present) {
+      map['data'] = Variable<Uint8List>(data.value);
+    }
+    if (timestamp.present) {
+      map['timestamp'] = Variable<String>(timestamp.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TrackFilesCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('extension: $extension, ')
+          ..write('size: $size, ')
+          ..write('description: $description, ')
+          ..write('hashSha1: $hashSha1, ')
+          ..write('data: $data, ')
+          ..write('timestamp: $timestamp')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class Trails extends Table with TableInfo<Trails, Trail> {
   @override
   final GeneratedDatabase attachedDatabase;
@@ -456,18 +875,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
       type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _gpxTrackMeta =
-      const VerificationMeta('gpxTrack');
-  late final GeneratedColumn<Uint8List> gpxTrack = GeneratedColumn<Uint8List>(
-      'gpx_track', aliasedName, true,
-      type: DriftSqlType.blob,
-      requiredDuringInsert: false,
-      $customConstraints: '');
-  static const VerificationMeta _fileExtensionMeta =
-      const VerificationMeta('fileExtension');
-  late final GeneratedColumn<String> fileExtension = GeneratedColumn<String>(
-      'file_extension', aliasedName, true,
-      type: DriftSqlType.string,
+  static const VerificationMeta _fileIdMeta = const VerificationMeta('fileId');
+  late final GeneratedColumn<int> fileId = GeneratedColumn<int>(
+      'file_id', aliasedName, true,
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _urlMeta = const VerificationMeta('url');
@@ -492,17 +903,8 @@ class Trails extends Table with TableInfo<Trails, Trail> {
       $customConstraints: 'NOT NULL DEFAULT FALSE',
       defaultValue: const CustomExpression('FALSE'));
   @override
-  List<GeneratedColumn> get $columns => [
-        id,
-        name,
-        distance,
-        elevation,
-        gpxTrack,
-        fileExtension,
-        url,
-        description,
-        isDeleted
-      ];
+  List<GeneratedColumn> get $columns =>
+      [id, name, distance, elevation, fileId, url, description, isDeleted];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -530,15 +932,9 @@ class Trails extends Table with TableInfo<Trails, Trail> {
       context.handle(_elevationMeta,
           elevation.isAcceptableOrUnknown(data['elevation']!, _elevationMeta));
     }
-    if (data.containsKey('gpx_track')) {
-      context.handle(_gpxTrackMeta,
-          gpxTrack.isAcceptableOrUnknown(data['gpx_track']!, _gpxTrackMeta));
-    }
-    if (data.containsKey('file_extension')) {
-      context.handle(
-          _fileExtensionMeta,
-          fileExtension.isAcceptableOrUnknown(
-              data['file_extension']!, _fileExtensionMeta));
+    if (data.containsKey('file_id')) {
+      context.handle(_fileIdMeta,
+          fileId.isAcceptableOrUnknown(data['file_id']!, _fileIdMeta));
     }
     if (data.containsKey('url')) {
       context.handle(
@@ -571,10 +967,8 @@ class Trails extends Table with TableInfo<Trails, Trail> {
           .read(DriftSqlType.int, data['${effectivePrefix}distance']),
       elevation: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}elevation']),
-      gpxTrack: attachedDatabase.typeMapping
-          .read(DriftSqlType.blob, data['${effectivePrefix}gpx_track']),
-      fileExtension: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}file_extension']),
+      fileId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}file_id']),
       url: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}url']),
       description: attachedDatabase.typeMapping
@@ -590,6 +984,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   }
 
   @override
+  List<String> get customConstraints => const [
+        'FOREIGN KEY(file_id)REFERENCES track_files(id)ON DELETE SET NULL'
+      ];
+  @override
   bool get dontWriteConstraints => true;
 }
 
@@ -598,8 +996,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   final String name;
   final int? distance;
   final int? elevation;
-  final Uint8List? gpxTrack;
-  final String? fileExtension;
+  final int? fileId;
   final String? url;
   final String? description;
   final bool isDeleted;
@@ -608,8 +1005,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       required this.name,
       this.distance,
       this.elevation,
-      this.gpxTrack,
-      this.fileExtension,
+      this.fileId,
       this.url,
       this.description,
       required this.isDeleted});
@@ -624,11 +1020,8 @@ class Trail extends DataClass implements Insertable<Trail> {
     if (!nullToAbsent || elevation != null) {
       map['elevation'] = Variable<int>(elevation);
     }
-    if (!nullToAbsent || gpxTrack != null) {
-      map['gpx_track'] = Variable<Uint8List>(gpxTrack);
-    }
-    if (!nullToAbsent || fileExtension != null) {
-      map['file_extension'] = Variable<String>(fileExtension);
+    if (!nullToAbsent || fileId != null) {
+      map['file_id'] = Variable<int>(fileId);
     }
     if (!nullToAbsent || url != null) {
       map['url'] = Variable<String>(url);
@@ -650,12 +1043,8 @@ class Trail extends DataClass implements Insertable<Trail> {
       elevation: elevation == null && nullToAbsent
           ? const Value.absent()
           : Value(elevation),
-      gpxTrack: gpxTrack == null && nullToAbsent
-          ? const Value.absent()
-          : Value(gpxTrack),
-      fileExtension: fileExtension == null && nullToAbsent
-          ? const Value.absent()
-          : Value(fileExtension),
+      fileId:
+          fileId == null && nullToAbsent ? const Value.absent() : Value(fileId),
       url: url == null && nullToAbsent ? const Value.absent() : Value(url),
       description: description == null && nullToAbsent
           ? const Value.absent()
@@ -672,8 +1061,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       name: serializer.fromJson<String>(json['name']),
       distance: serializer.fromJson<int?>(json['distance']),
       elevation: serializer.fromJson<int?>(json['elevation']),
-      gpxTrack: serializer.fromJson<Uint8List?>(json['gpx_track']),
-      fileExtension: serializer.fromJson<String?>(json['file_extension']),
+      fileId: serializer.fromJson<int?>(json['file_id']),
       url: serializer.fromJson<String?>(json['url']),
       description: serializer.fromJson<String?>(json['description']),
       isDeleted: serializer.fromJson<bool>(json['is_deleted']),
@@ -687,8 +1075,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       'name': serializer.toJson<String>(name),
       'distance': serializer.toJson<int?>(distance),
       'elevation': serializer.toJson<int?>(elevation),
-      'gpx_track': serializer.toJson<Uint8List?>(gpxTrack),
-      'file_extension': serializer.toJson<String?>(fileExtension),
+      'file_id': serializer.toJson<int?>(fileId),
       'url': serializer.toJson<String?>(url),
       'description': serializer.toJson<String?>(description),
       'is_deleted': serializer.toJson<bool>(isDeleted),
@@ -700,8 +1087,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           String? name,
           Value<int?> distance = const Value.absent(),
           Value<int?> elevation = const Value.absent(),
-          Value<Uint8List?> gpxTrack = const Value.absent(),
-          Value<String?> fileExtension = const Value.absent(),
+          Value<int?> fileId = const Value.absent(),
           Value<String?> url = const Value.absent(),
           Value<String?> description = const Value.absent(),
           bool? isDeleted}) =>
@@ -710,9 +1096,7 @@ class Trail extends DataClass implements Insertable<Trail> {
         name: name ?? this.name,
         distance: distance.present ? distance.value : this.distance,
         elevation: elevation.present ? elevation.value : this.elevation,
-        gpxTrack: gpxTrack.present ? gpxTrack.value : this.gpxTrack,
-        fileExtension:
-            fileExtension.present ? fileExtension.value : this.fileExtension,
+        fileId: fileId.present ? fileId.value : this.fileId,
         url: url.present ? url.value : this.url,
         description: description.present ? description.value : this.description,
         isDeleted: isDeleted ?? this.isDeleted,
@@ -723,10 +1107,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       name: data.name.present ? data.name.value : this.name,
       distance: data.distance.present ? data.distance.value : this.distance,
       elevation: data.elevation.present ? data.elevation.value : this.elevation,
-      gpxTrack: data.gpxTrack.present ? data.gpxTrack.value : this.gpxTrack,
-      fileExtension: data.fileExtension.present
-          ? data.fileExtension.value
-          : this.fileExtension,
+      fileId: data.fileId.present ? data.fileId.value : this.fileId,
       url: data.url.present ? data.url.value : this.url,
       description:
           data.description.present ? data.description.value : this.description,
@@ -741,8 +1122,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           ..write('name: $name, ')
           ..write('distance: $distance, ')
           ..write('elevation: $elevation, ')
-          ..write('gpxTrack: $gpxTrack, ')
-          ..write('fileExtension: $fileExtension, ')
+          ..write('fileId: $fileId, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
           ..write('isDeleted: $isDeleted')
@@ -752,15 +1132,7 @@ class Trail extends DataClass implements Insertable<Trail> {
 
   @override
   int get hashCode => Object.hash(
-      id,
-      name,
-      distance,
-      elevation,
-      $driftBlobEquality.hash(gpxTrack),
-      fileExtension,
-      url,
-      description,
-      isDeleted);
+      id, name, distance, elevation, fileId, url, description, isDeleted);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -769,8 +1141,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           other.name == this.name &&
           other.distance == this.distance &&
           other.elevation == this.elevation &&
-          $driftBlobEquality.equals(other.gpxTrack, this.gpxTrack) &&
-          other.fileExtension == this.fileExtension &&
+          other.fileId == this.fileId &&
           other.url == this.url &&
           other.description == this.description &&
           other.isDeleted == this.isDeleted);
@@ -781,8 +1152,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   final Value<String> name;
   final Value<int?> distance;
   final Value<int?> elevation;
-  final Value<Uint8List?> gpxTrack;
-  final Value<String?> fileExtension;
+  final Value<int?> fileId;
   final Value<String?> url;
   final Value<String?> description;
   final Value<bool> isDeleted;
@@ -791,8 +1161,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.name = const Value.absent(),
     this.distance = const Value.absent(),
     this.elevation = const Value.absent(),
-    this.gpxTrack = const Value.absent(),
-    this.fileExtension = const Value.absent(),
+    this.fileId = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
     this.isDeleted = const Value.absent(),
@@ -802,8 +1171,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     required String name,
     this.distance = const Value.absent(),
     this.elevation = const Value.absent(),
-    this.gpxTrack = const Value.absent(),
-    this.fileExtension = const Value.absent(),
+    this.fileId = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
     this.isDeleted = const Value.absent(),
@@ -813,8 +1181,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     Expression<String>? name,
     Expression<int>? distance,
     Expression<int>? elevation,
-    Expression<Uint8List>? gpxTrack,
-    Expression<String>? fileExtension,
+    Expression<int>? fileId,
     Expression<String>? url,
     Expression<String>? description,
     Expression<bool>? isDeleted,
@@ -824,8 +1191,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       if (name != null) 'name': name,
       if (distance != null) 'distance': distance,
       if (elevation != null) 'elevation': elevation,
-      if (gpxTrack != null) 'gpx_track': gpxTrack,
-      if (fileExtension != null) 'file_extension': fileExtension,
+      if (fileId != null) 'file_id': fileId,
       if (url != null) 'url': url,
       if (description != null) 'description': description,
       if (isDeleted != null) 'is_deleted': isDeleted,
@@ -837,8 +1203,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       Value<String>? name,
       Value<int?>? distance,
       Value<int?>? elevation,
-      Value<Uint8List?>? gpxTrack,
-      Value<String?>? fileExtension,
+      Value<int?>? fileId,
       Value<String?>? url,
       Value<String?>? description,
       Value<bool>? isDeleted}) {
@@ -847,8 +1212,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       name: name ?? this.name,
       distance: distance ?? this.distance,
       elevation: elevation ?? this.elevation,
-      gpxTrack: gpxTrack ?? this.gpxTrack,
-      fileExtension: fileExtension ?? this.fileExtension,
+      fileId: fileId ?? this.fileId,
       url: url ?? this.url,
       description: description ?? this.description,
       isDeleted: isDeleted ?? this.isDeleted,
@@ -870,11 +1234,8 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     if (elevation.present) {
       map['elevation'] = Variable<int>(elevation.value);
     }
-    if (gpxTrack.present) {
-      map['gpx_track'] = Variable<Uint8List>(gpxTrack.value);
-    }
-    if (fileExtension.present) {
-      map['file_extension'] = Variable<String>(fileExtension.value);
+    if (fileId.present) {
+      map['file_id'] = Variable<int>(fileId.value);
     }
     if (url.present) {
       map['url'] = Variable<String>(url.value);
@@ -895,8 +1256,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
           ..write('name: $name, ')
           ..write('distance: $distance, ')
           ..write('elevation: $elevation, ')
-          ..write('gpxTrack: $gpxTrack, ')
-          ..write('fileExtension: $fileExtension, ')
+          ..write('fileId: $fileId, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
           ..write('isDeleted: $isDeleted')
@@ -1037,8 +1397,8 @@ class Stages extends Table with TableInfo<Stages, Stage> {
 
   @override
   List<String> get customConstraints => const [
-        'FOREIGN KEY(trail_id)REFERENCES trails(id)',
-        'FOREIGN KEY(race_id)REFERENCES races(id)'
+        'FOREIGN KEY(trail_id)REFERENCES trails(id)ON DELETE SET NULL',
+        'FOREIGN KEY(race_id)REFERENCES races(id)ON DELETE CASCADE'
       ];
   @override
   bool get dontWriteConstraints => true;
@@ -2107,7 +2467,7 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   @override
   List<String> get customConstraints => const [
         'FOREIGN KEY(rider_id)REFERENCES riders(id)',
-        'FOREIGN KEY(race_id)REFERENCES races(id)',
+        'FOREIGN KEY(race_id)REFERENCES races(id)ON DELETE CASCADE',
         'FOREIGN KEY(status_id)REFERENCES statuses(id)'
       ];
   @override
@@ -2515,7 +2875,7 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
 
   @override
   List<String> get customConstraints =>
-      const ['FOREIGN KEY(stage_id)REFERENCES stages(id)'];
+      const ['FOREIGN KEY(stage_id)REFERENCES stages(id)ON DELETE CASCADE'];
   @override
   bool get dontWriteConstraints => true;
 }
@@ -2966,7 +3326,7 @@ class Starts extends Table with TableInfo<Starts, Start> {
 
   @override
   List<String> get customConstraints => const [
-        'FOREIGN KEY(stage_id)REFERENCES stages(id)',
+        'FOREIGN KEY(stage_id)REFERENCES stages(id)ON DELETE CASCADE',
         'FOREIGN KEY(participant_id)REFERENCES participants(id)',
         'FOREIGN KEY(finish_id)REFERENCES finishes(id)',
         'FOREIGN KEY(status_id)REFERENCES statuses(id)'
@@ -3707,6 +4067,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final Races races = Races(this);
+  late final TrackFiles trackFiles = TrackFiles(this);
   late final Trails trails = Trails(this);
   late final Stages stages = Stages(this);
   late final Riders riders = Riders(this);
@@ -3734,12 +4095,54 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         }).asyncMap(stages.mapFromRow);
   }
 
-  Selectable<Trail> _getTrails() {
-    return customSelect('SELECT * FROM trails WHERE is_deleted = FALSE',
+  Selectable<TrailInfo> _getTrails() {
+    return customSelect(
+        'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1 FROM trails,track_files WHERE trails.file_id = track_files.id AND trails.is_deleted = FALSE',
         variables: [],
         readsFrom: {
           trails,
-        }).asyncMap(trails.mapFromRow);
+          trackFiles,
+        }).map((QueryRow row) => TrailInfo(
+          row: row,
+          id: row.read<int>('id'),
+          name: row.read<String>('name'),
+          distance: row.readNullable<int>('distance'),
+          elevation: row.readNullable<int>('elevation'),
+          fileId: row.readNullable<int>('file_id'),
+          url: row.readNullable<String>('url'),
+          description: row.readNullable<String>('description'),
+          fileName: row.read<String>('file_name'),
+          fileExtension: row.readNullable<String>('file_extension'),
+          fileSize: row.read<int>('file_size'),
+          fileDescription: row.readNullable<String>('file_description'),
+          fileHashSha1: row.read<String>('file_hash_sha1'),
+        ));
+  }
+
+  Selectable<TrailInfo> _getTrail({required int id}) {
+    return customSelect(
+        'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1 FROM trails,track_files WHERE trails.id = ?1 AND trails.file_id = track_files.id AND trails.is_deleted = FALSE',
+        variables: [
+          Variable<int>(id)
+        ],
+        readsFrom: {
+          trails,
+          trackFiles,
+        }).map((QueryRow row) => TrailInfo(
+          row: row,
+          id: row.read<int>('id'),
+          name: row.read<String>('name'),
+          distance: row.readNullable<int>('distance'),
+          elevation: row.readNullable<int>('elevation'),
+          fileId: row.readNullable<int>('file_id'),
+          url: row.readNullable<String>('url'),
+          description: row.readNullable<String>('description'),
+          fileName: row.read<String>('file_name'),
+          fileExtension: row.readNullable<String>('file_extension'),
+          fileSize: row.read<int>('file_size'),
+          fileDescription: row.readNullable<String>('file_description'),
+          fileHashSha1: row.read<String>('file_hash_sha1'),
+        ));
   }
 
   Future<int> _addRider(
@@ -4278,6 +4681,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
         races,
+        trackFiles,
         trails,
         stages,
         riders,
@@ -4287,6 +4691,53 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         starts,
         logs
       ];
+  @override
+  StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules(
+        [
+          WritePropagation(
+            on: TableUpdateQuery.onTableName('track_files',
+                limitUpdateKind: UpdateKind.delete),
+            result: [
+              TableUpdate('trails', kind: UpdateKind.update),
+            ],
+          ),
+          WritePropagation(
+            on: TableUpdateQuery.onTableName('trails',
+                limitUpdateKind: UpdateKind.delete),
+            result: [
+              TableUpdate('stages', kind: UpdateKind.update),
+            ],
+          ),
+          WritePropagation(
+            on: TableUpdateQuery.onTableName('races',
+                limitUpdateKind: UpdateKind.delete),
+            result: [
+              TableUpdate('stages', kind: UpdateKind.delete),
+            ],
+          ),
+          WritePropagation(
+            on: TableUpdateQuery.onTableName('races',
+                limitUpdateKind: UpdateKind.delete),
+            result: [
+              TableUpdate('participants', kind: UpdateKind.delete),
+            ],
+          ),
+          WritePropagation(
+            on: TableUpdateQuery.onTableName('stages',
+                limitUpdateKind: UpdateKind.delete),
+            result: [
+              TableUpdate('finishes', kind: UpdateKind.delete),
+            ],
+          ),
+          WritePropagation(
+            on: TableUpdateQuery.onTableName('stages',
+                limitUpdateKind: UpdateKind.delete),
+            result: [
+              TableUpdate('starts', kind: UpdateKind.delete),
+            ],
+          ),
+        ],
+      );
 }
 
 typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
@@ -4490,13 +4941,214 @@ typedef $RacesProcessedTableManager = ProcessedTableManager<
     (Race, BaseReferences<_$AppDatabase, Races, Race>),
     Race,
     PrefetchHooks Function()>;
+typedef $TrackFilesCreateCompanionBuilder = TrackFilesCompanion Function({
+  Value<int> id,
+  required String name,
+  Value<String?> extension,
+  required int size,
+  Value<String?> description,
+  required String hashSha1,
+  required Uint8List data,
+  required String timestamp,
+});
+typedef $TrackFilesUpdateCompanionBuilder = TrackFilesCompanion Function({
+  Value<int> id,
+  Value<String> name,
+  Value<String?> extension,
+  Value<int> size,
+  Value<String?> description,
+  Value<String> hashSha1,
+  Value<Uint8List> data,
+  Value<String> timestamp,
+});
+
+class $TrackFilesFilterComposer extends Composer<_$AppDatabase, TrackFiles> {
+  $TrackFilesFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get extension => $composableBuilder(
+      column: $table.extension, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get size => $composableBuilder(
+      column: $table.size, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get hashSha1 => $composableBuilder(
+      column: $table.hashSha1, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<Uint8List> get data => $composableBuilder(
+      column: $table.data, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get timestamp => $composableBuilder(
+      column: $table.timestamp, builder: (column) => ColumnFilters(column));
+}
+
+class $TrackFilesOrderingComposer extends Composer<_$AppDatabase, TrackFiles> {
+  $TrackFilesOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get extension => $composableBuilder(
+      column: $table.extension, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get size => $composableBuilder(
+      column: $table.size, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get hashSha1 => $composableBuilder(
+      column: $table.hashSha1, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<Uint8List> get data => $composableBuilder(
+      column: $table.data, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get timestamp => $composableBuilder(
+      column: $table.timestamp, builder: (column) => ColumnOrderings(column));
+}
+
+class $TrackFilesAnnotationComposer
+    extends Composer<_$AppDatabase, TrackFiles> {
+  $TrackFilesAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get extension =>
+      $composableBuilder(column: $table.extension, builder: (column) => column);
+
+  GeneratedColumn<int> get size =>
+      $composableBuilder(column: $table.size, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
+
+  GeneratedColumn<String> get hashSha1 =>
+      $composableBuilder(column: $table.hashSha1, builder: (column) => column);
+
+  GeneratedColumn<Uint8List> get data =>
+      $composableBuilder(column: $table.data, builder: (column) => column);
+
+  GeneratedColumn<String> get timestamp =>
+      $composableBuilder(column: $table.timestamp, builder: (column) => column);
+}
+
+class $TrackFilesTableManager extends RootTableManager<
+    _$AppDatabase,
+    TrackFiles,
+    TrackFile,
+    $TrackFilesFilterComposer,
+    $TrackFilesOrderingComposer,
+    $TrackFilesAnnotationComposer,
+    $TrackFilesCreateCompanionBuilder,
+    $TrackFilesUpdateCompanionBuilder,
+    (TrackFile, BaseReferences<_$AppDatabase, TrackFiles, TrackFile>),
+    TrackFile,
+    PrefetchHooks Function()> {
+  $TrackFilesTableManager(_$AppDatabase db, TrackFiles table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $TrackFilesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $TrackFilesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $TrackFilesAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String?> extension = const Value.absent(),
+            Value<int> size = const Value.absent(),
+            Value<String?> description = const Value.absent(),
+            Value<String> hashSha1 = const Value.absent(),
+            Value<Uint8List> data = const Value.absent(),
+            Value<String> timestamp = const Value.absent(),
+          }) =>
+              TrackFilesCompanion(
+            id: id,
+            name: name,
+            extension: extension,
+            size: size,
+            description: description,
+            hashSha1: hashSha1,
+            data: data,
+            timestamp: timestamp,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String name,
+            Value<String?> extension = const Value.absent(),
+            required int size,
+            Value<String?> description = const Value.absent(),
+            required String hashSha1,
+            required Uint8List data,
+            required String timestamp,
+          }) =>
+              TrackFilesCompanion.insert(
+            id: id,
+            name: name,
+            extension: extension,
+            size: size,
+            description: description,
+            hashSha1: hashSha1,
+            data: data,
+            timestamp: timestamp,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $TrackFilesProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    TrackFiles,
+    TrackFile,
+    $TrackFilesFilterComposer,
+    $TrackFilesOrderingComposer,
+    $TrackFilesAnnotationComposer,
+    $TrackFilesCreateCompanionBuilder,
+    $TrackFilesUpdateCompanionBuilder,
+    (TrackFile, BaseReferences<_$AppDatabase, TrackFiles, TrackFile>),
+    TrackFile,
+    PrefetchHooks Function()>;
 typedef $TrailsCreateCompanionBuilder = TrailsCompanion Function({
   Value<int> id,
   required String name,
   Value<int?> distance,
   Value<int?> elevation,
-  Value<Uint8List?> gpxTrack,
-  Value<String?> fileExtension,
+  Value<int?> fileId,
   Value<String?> url,
   Value<String?> description,
   Value<bool> isDeleted,
@@ -4506,8 +5158,7 @@ typedef $TrailsUpdateCompanionBuilder = TrailsCompanion Function({
   Value<String> name,
   Value<int?> distance,
   Value<int?> elevation,
-  Value<Uint8List?> gpxTrack,
-  Value<String?> fileExtension,
+  Value<int?> fileId,
   Value<String?> url,
   Value<String?> description,
   Value<bool> isDeleted,
@@ -4533,11 +5184,8 @@ class $TrailsFilterComposer extends Composer<_$AppDatabase, Trails> {
   ColumnFilters<int> get elevation => $composableBuilder(
       column: $table.elevation, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<Uint8List> get gpxTrack => $composableBuilder(
-      column: $table.gpxTrack, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<String> get fileExtension => $composableBuilder(
-      column: $table.fileExtension, builder: (column) => ColumnFilters(column));
+  ColumnFilters<int> get fileId => $composableBuilder(
+      column: $table.fileId, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get url => $composableBuilder(
       column: $table.url, builder: (column) => ColumnFilters(column));
@@ -4569,12 +5217,8 @@ class $TrailsOrderingComposer extends Composer<_$AppDatabase, Trails> {
   ColumnOrderings<int> get elevation => $composableBuilder(
       column: $table.elevation, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<Uint8List> get gpxTrack => $composableBuilder(
-      column: $table.gpxTrack, builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get fileExtension => $composableBuilder(
-      column: $table.fileExtension,
-      builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<int> get fileId => $composableBuilder(
+      column: $table.fileId, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get url => $composableBuilder(
       column: $table.url, builder: (column) => ColumnOrderings(column));
@@ -4606,11 +5250,8 @@ class $TrailsAnnotationComposer extends Composer<_$AppDatabase, Trails> {
   GeneratedColumn<int> get elevation =>
       $composableBuilder(column: $table.elevation, builder: (column) => column);
 
-  GeneratedColumn<Uint8List> get gpxTrack =>
-      $composableBuilder(column: $table.gpxTrack, builder: (column) => column);
-
-  GeneratedColumn<String> get fileExtension => $composableBuilder(
-      column: $table.fileExtension, builder: (column) => column);
+  GeneratedColumn<int> get fileId =>
+      $composableBuilder(column: $table.fileId, builder: (column) => column);
 
   GeneratedColumn<String> get url =>
       $composableBuilder(column: $table.url, builder: (column) => column);
@@ -4649,8 +5290,7 @@ class $TrailsTableManager extends RootTableManager<
             Value<String> name = const Value.absent(),
             Value<int?> distance = const Value.absent(),
             Value<int?> elevation = const Value.absent(),
-            Value<Uint8List?> gpxTrack = const Value.absent(),
-            Value<String?> fileExtension = const Value.absent(),
+            Value<int?> fileId = const Value.absent(),
             Value<String?> url = const Value.absent(),
             Value<String?> description = const Value.absent(),
             Value<bool> isDeleted = const Value.absent(),
@@ -4660,8 +5300,7 @@ class $TrailsTableManager extends RootTableManager<
             name: name,
             distance: distance,
             elevation: elevation,
-            gpxTrack: gpxTrack,
-            fileExtension: fileExtension,
+            fileId: fileId,
             url: url,
             description: description,
             isDeleted: isDeleted,
@@ -4671,8 +5310,7 @@ class $TrailsTableManager extends RootTableManager<
             required String name,
             Value<int?> distance = const Value.absent(),
             Value<int?> elevation = const Value.absent(),
-            Value<Uint8List?> gpxTrack = const Value.absent(),
-            Value<String?> fileExtension = const Value.absent(),
+            Value<int?> fileId = const Value.absent(),
             Value<String?> url = const Value.absent(),
             Value<String?> description = const Value.absent(),
             Value<bool> isDeleted = const Value.absent(),
@@ -4682,8 +5320,7 @@ class $TrailsTableManager extends RootTableManager<
             name: name,
             distance: distance,
             elevation: elevation,
-            gpxTrack: gpxTrack,
-            fileExtension: fileExtension,
+            fileId: fileId,
             url: url,
             description: description,
             isDeleted: isDeleted,
@@ -6062,6 +6699,8 @@ class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
   $RacesTableManager get races => $RacesTableManager(_db, _db.races);
+  $TrackFilesTableManager get trackFiles =>
+      $TrackFilesTableManager(_db, _db.trackFiles);
   $TrailsTableManager get trails => $TrailsTableManager(_db, _db.trails);
   $StagesTableManager get stages => $StagesTableManager(_db, _db.stages);
   $RidersTableManager get riders => $RidersTableManager(_db, _db.riders);
@@ -6073,6 +6712,36 @@ class $AppDatabaseManager {
       $FinishesTableManager(_db, _db.finishes);
   $StartsTableManager get starts => $StartsTableManager(_db, _db.starts);
   $LogsTableManager get logs => $LogsTableManager(_db, _db.logs);
+}
+
+class TrailInfo extends CustomResultSet {
+  final int id;
+  final String name;
+  final int? distance;
+  final int? elevation;
+  final int? fileId;
+  final String? url;
+  final String? description;
+  final String fileName;
+  final String? fileExtension;
+  final int fileSize;
+  final String? fileDescription;
+  final String fileHashSha1;
+  TrailInfo({
+    required QueryRow row,
+    required this.id,
+    required this.name,
+    this.distance,
+    this.elevation,
+    this.fileId,
+    this.url,
+    this.description,
+    required this.fileName,
+    this.fileExtension,
+    required this.fileSize,
+    this.fileDescription,
+    required this.fileHashSha1,
+  }) : super(row);
 }
 
 class NumberAtStart extends CustomResultSet {

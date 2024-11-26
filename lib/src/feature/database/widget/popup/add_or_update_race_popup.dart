@@ -90,6 +90,7 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
               decoration: InputDecoration(
                 labelText: Localization.current.I18nDatabase_raceUrl,
               ),
+              keyboardType: TextInputType.url,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null || value.isEmpty) {

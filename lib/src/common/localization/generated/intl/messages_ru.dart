@@ -103,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nCore_correction": MessageLookupByLibrary.simpleMessage("Поправка"),
         "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "I18nCore_edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
+        "I18nCore_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
         "I18nCore_warning":
             MessageLookupByLibrary.simpleMessage("Предупреждение"),
         "I18nCountdown_countdown":
@@ -190,7 +191,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Стартовый протокол"),
         "I18nHome_setDefaults":
             MessageLookupByLibrary.simpleMessage("По умолчанию"),
-        "I18nHome_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
         "I18nHome_start": MessageLookupByLibrary.simpleMessage("Старт"),
         "I18nHome_update": MessageLookupByLibrary.simpleMessage("Обновить"),
         "I18nHome_updateAutomaticCorrection": m3,

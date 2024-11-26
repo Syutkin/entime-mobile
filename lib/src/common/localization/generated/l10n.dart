@@ -71,6 +71,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Поделиться`
+  String get I18nCore_share {
+    return Intl.message(
+      'Поделиться',
+      name: 'I18nCore_share',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Предупреждение`
   String get I18nCore_warning {
     return Intl.message(
@@ -1100,16 +1110,6 @@ class GeneratedLocalization {
     return Intl.message(
       'Добавить участника',
       name: 'I18nHome_addRacer',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Поделиться`
-  String get I18nHome_share {
-    return Intl.message(
-      'Поделиться',
-      name: 'I18nHome_share',
       desc: '',
       args: [],
     );

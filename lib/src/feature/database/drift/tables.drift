@@ -21,8 +21,8 @@ CREATE TABLE stages (
 	description text,
 	is_active BOOLEAN NOT NULL DEFAULT true,
 	is_deleted BOOLEAN NOT NULL DEFAULT false,
-    FOREIGN KEY (trail_id) REFERENCES trails(id),
-    FOREIGN KEY (race_id) REFERENCES races(id)
+    FOREIGN KEY (trail_id) REFERENCES trails(id) ON DELETE SET NULL,
+    FOREIGN KEY (race_id) REFERENCES races(id) ON DELETE CASCADE
 );
 
 CREATE TABLE riders (
@@ -53,7 +53,7 @@ CREATE TABLE participants (
 	status_id integer NOT NULL DEFAULT 1,
 	is_deleted BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (rider_id) REFERENCES riders(id),
-    FOREIGN KEY (race_id) REFERENCES races(id),
+    FOREIGN KEY (race_id) REFERENCES races(id) ON DELETE CASCADE,
     FOREIGN KEY (status_id) REFERENCES statuses(id)
 );
 
@@ -69,7 +69,7 @@ CREATE TABLE starts (
 	manual_correction integer,
 	status_id integer NOT NULL DEFAULT 1,
 	finish_id integer,
-    FOREIGN KEY (stage_id) REFERENCES stages(id),
+    FOREIGN KEY (stage_id) REFERENCES stages(id) ON DELETE CASCADE,
     FOREIGN KEY (participant_id) REFERENCES participants(id),
 	FOREIGN KEY (finish_id) REFERENCES finishes(id),
 	FOREIGN KEY (status_id) REFERENCES statuses(id)
@@ -83,7 +83,7 @@ CREATE TABLE finishes (
 	finish_time text NOT NULL,
 	is_hidden BOOLEAN NOT NULL DEFAULT false,
 	is_manual BOOLEAN NOT NULL DEFAULT false,
-    FOREIGN KEY (stage_id) REFERENCES stages(id)
+    FOREIGN KEY (stage_id) REFERENCES stages(id) ON DELETE CASCADE
 ) AS Finish;
 
 CREATE TABLE trails (
@@ -91,20 +91,31 @@ CREATE TABLE trails (
 	name text NOT NULL,
 	distance integer,
 	elevation integer,
-	gpx_track blob(20MB),
-	file_extension text,
+	file_id integer,
 	url text,
 	description text,
-	is_deleted BOOLEAN NOT NULL DEFAULT false
+	is_deleted BOOLEAN NOT NULL DEFAULT false,
+	FOREIGN KEY (file_id) REFERENCES track_files(id) ON DELETE SET NULL
 );
 
 CREATE TABLE logs (
     id INTEGER PRIMARY KEY NOT NULL,
     level ENUMNAME(LogLevel) NOT NULL,
-    timestamp TEXT NOT NULL,
+    timestamp text NOT NULL,
     source ENUMNAME(LogSource) NOT NULL,
     direction ENUMNAME(LogSourceDirection) NOT NULL,
-    raw_data TEXT
+    raw_data text
+);
+
+CREATE TABLE track_files (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name text NOT NULL,
+    extension text,
+    size int NOT NULL,
+    description text,
+    hash_sha1 text NOT NULL,
+    data blob(20MB) NOT NULL,
+    timestamp text NOT NULL
 );
 
 _getRaces: SELECT * FROM races WHERE is_deleted = false;
@@ -123,7 +134,45 @@ _addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race
 _deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
 */
 
-_getTrails: SELECT * FROM trails WHERE is_deleted = false;
+/*_getTrails: SELECT * FROM trails WHERE is_deleted = false;*/
+_getTrails AS TrailInfo:
+SELECT
+	trails.id as id,
+	trails.name as name,
+	trails.distance as distance,
+	trails.elevation as elevation,
+	trails.file_id as file_id,
+	trails.url as url,
+	trails.description as description,
+    track_files.name as file_name,
+    track_files.extension as file_extension,
+    track_files.size as file_size,
+    track_files.description as file_description,
+    track_files.hash_sha1 as file_hash_sha1
+FROM trails, track_files
+WHERE
+    trails.file_id = track_files.id AND
+    trails.is_deleted = false;
+
+_getTrail AS TrailInfo:
+SELECT
+	trails.id as id,
+	trails.name as name,
+	trails.distance as distance,
+	trails.elevation as elevation,
+	trails.file_id as file_id,
+	trails.url as url,
+	trails.description as description,
+    track_files.name as file_name,
+    track_files.extension as file_extension,
+    track_files.size as file_size,
+    track_files.description as file_description,
+    track_files.hash_sha1 as file_hash_sha1
+FROM trails, track_files
+WHERE
+    trails.id = :id AND
+    trails.file_id = track_files.id AND
+    trails.is_deleted = false;
 
 _addRider:
 INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment)

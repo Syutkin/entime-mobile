@@ -13,18 +13,30 @@ class TrailItemTile extends StatelessWidget {
     super.key,
   });
 
-  final Trail trail;
+  final TrailInfo trail;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(trail.name),
-      leading: trail.fileExtension != null
+      leading: trail.fileExtension != null && trail.fileExtension!.isNotEmpty
           ? Icon(MdiIcons.mapMarkerOutline)
           : Icon(MdiIcons.mapMarkerOffOutline),
       trailing: PopupMenuButton<void>(
         icon: const Icon(Icons.more_vert),
         itemBuilder: (context) => <PopupMenuEntry<void>>[
+          if (trail.fileExtension != null && trail.fileExtension!.isNotEmpty)
+            PopupMenuItem<void>(
+              onTap: () async {
+                context
+                    .read<DatabaseBloc>()
+                    .add(DatabaseEvent.shareTrack(trail: trail));
+              },
+              child: ListTile(
+                leading: const Icon(Icons.share),
+                title: Text(Localization.current.I18nCore_share),
+              ),
+            ),
           PopupMenuItem<void>(
             onTap: () {
               updateTrailPopup(context, trail);
