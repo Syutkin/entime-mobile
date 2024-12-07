@@ -1,9 +1,11 @@
 import 'package:entime/src/feature/trails/widget/trails_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../constants/date_time_formats.dart';
 import '../../database/database.dart';
 import '../bloc/trails_bloc.dart';
 
@@ -17,9 +19,16 @@ class TrailItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ToDo: Переделать информацию о трейле
+    var date = '';
+    final timestamp = trail.timestamp;
+    if (timestamp != null) {
+      date = DateFormat(shortDateFormat).format(DateTime.parse(timestamp).toLocal());
+    }
     return ListTile(
       title: Text(trail.name),
-      leading: trail.fileExtension != null && trail.fileExtension!.isNotEmpty
+      subtitle: Text('${trail.fileSize}, $date, ${trail.fileHashSha1}'),
+      leading: trail.fileId != null
           ? Icon(MdiIcons.mapMarkerOutline)
           : Icon(MdiIcons.mapMarkerOffOutline),
       trailing: PopupMenuButton<void>(

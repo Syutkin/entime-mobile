@@ -8,9 +8,9 @@ class TrailsEvent with _$TrailsEvent {
     required String name,
     int? distance,
     int? elevation,
-    int? fileId,
     String? url,
     String? description,
+    String? filePath,
   }) = _AddTrail;
 
   const factory TrailsEvent.updateTrail({

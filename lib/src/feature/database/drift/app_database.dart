@@ -237,36 +237,20 @@ class AppDatabase extends _$AppDatabase {
     required String name,
     int? distance,
     int? elevation,
-    String? filePath,
     String? url,
     String? description,
+    int? fileId,
   }) async {
-    int trailId = 1;
-    // Новый трейл без трека
-    if (filePath == null) {
-      trailId = await into(trails).insert(
+     final trailId = await into(trails).insert(
         TrailsCompanion(
           name: Value(name),
           distance: Value(distance),
           elevation: Value(elevation),
           url: Value(url),
           description: Value(description),
+          fileId: Value(fileId),
         ),
       );
-    } else {
-      // Новый трейл с новым треком
-
-    //   final trackId = await addTrack(
-    //     name: name,
-    //     elevation: elevation,
-    //     distance: distance,
-    //     url: event.url,
-    //     description: event.description,
-    //     fileId: event.fileId,
-    //   );
-
-    }
-
     return trailId;
   }
 

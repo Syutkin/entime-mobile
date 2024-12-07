@@ -24,6 +24,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
         super(const TrailsState.initial()) {
     _trailsSubscription = _db.getTrails().watch().listen((event) async {
       _trails = event;
+      print(_trails);
       logger.t('TrailsBloc -> getTrails().watch()');
       add(const TrailsEvent.getTrails());
     });
@@ -34,14 +35,34 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
           emit(TrailsState.initialized(trails: _trails));
         },
         addTrail: (_AddTrail event) async {
-          // await _db.addTrail(
-          //   name: event.name,
-          //   elevation: event.elevation,
-          //   distance: event.distance,
-          //   url: event.url,
-          //   description: event.description,
-          //   filePath: event.fileId,
-          // );
+          int? trackId;
+          // Сохраняем трейл если указан путь к файлу
+          if (event.filePath != null && event.filePath!.isNotEmpty) {
+            await state.whenOrNull(
+              initialized: (trails, track) async {
+                if (track != null) {
+                  trackId = await _db.managers.trackFiles.create(
+                    (o) => o(
+                      name: track.name,
+                      data: track.data,
+                      hashSha1: track.hashSha1,
+                      timestamp: track.timestamp,
+                      size: track.size,
+                    ),
+                  );
+                }
+              },
+            );
+          }
+          // Записываем трейл
+         await _db.addTrail(
+            name: event.name,
+            elevation: event.elevation,
+            distance: event.distance,
+            url: event.url,
+            description: event.description,
+            fileId: trackId,
+          );
         },
         updateTrail: (_UpdateTrail event) async {
           await _db.updateTrail(
@@ -70,90 +91,40 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
           await _db.deleteTrail(event.id);
         },
         loadTrack: (event) async {
-          emit(TrailsState.loadingTrack(trails: _trails));
           final file = File(event.filePath);
-
           if (file.existsSync()) {
+            emit(TrailsState.loadingTrack(trails: _trails));
             try {
-              // ToDo: расчитывать distance и elevation
+              // ToDo: рассчитывать distance и elevation
               final name = path.basename(event.filePath);
               final extension = path.extension(event.filePath);
               final size = await file.length();
               final timestamp = DateTime.now().toUtc().toIso8601String();
               final data = <int>[];
 
-              file.openRead().listen(data.addAll, onDone: () {
-                final fileHash = sha1.convert(data);
-                add(
-                  TrailsEvent.emitTrack(
-                    track: TrackFile(
-                      id: -1,
-                      name: name,
-                      extension: extension,
-                      size: size,
-                      hashSha1: fileHash.toString(),
-                      data: Uint8List(0),
-                      timestamp: timestamp,
+              file.openRead().listen(
+                data.addAll,
+                onDone: () {
+                  final fileHash = sha1.convert(data);
+                  add(
+                    TrailsEvent.emitTrack(
+                      track: TrackFile(
+                        id: -1,
+                        name: name,
+                        extension: extension,
+                        size: size,
+                        hashSha1: fileHash.toString(),
+                        data: Uint8List(0),
+                        timestamp: timestamp,
+                      ),
                     ),
-                  ),
-                );
-              });
-
-              // final sink = file.openRead().listen(
-              //   (onData) {
-              //     streamData += onData;
-              //   },
-              //   onDone: () {
-              //     final fileHashStream = sha1.convert(streamData);
-              //     print('fileHash == fileHashStream: ${fileHash == fileHashStream}');
-              //     emit(
-              //       TrailsState.initialized(
-              //         trails: _trails,
-              //         track: TrackFile(
-              //           id: 1,
-              //           name: name,
-              //           size: size,
-              //           hashSha1: fileHash.toString(),
-              //           data: data,
-              //           timestamp: timestamp,
-              //         ),
-              //       ),
-              //     );
-              //   },
-              //   onError: (_) {
-              //   },
-              // );
-
-              // await sink.cancel();
-
-              // final trackId = await _db.managers.trackFiles.create(
-              //   (row) => row(
-              //     name: name,
-              //     size: size,
-              //     data: data,
-              //     hashSha1: fileHash.toString(),
-              //     extension: Value(extension),
-              //     timestamp: timestamp,
-              //   ),
-              // );
-              // emit(
-              //   TrailsState.initialized(
-              //     trails: _trails,
-              //     track: TrackFile(
-              //       id: 1,
-              //       name: name,
-              //       size: size,
-              //       hashSha1: fileHash.toString(),
-              //       data: data,
-              //       timestamp: timestamp,
-              //     ),
-              //   ),
-              // );
+                  );
+                },
+              );
             } catch (e) {
               logger.e('TrailsBloc -> Error reading file: ${event.filePath}');
+              emit(TrailsState.initialized(trails: _trails));
             }
-          } else {
-            emit(TrailsState.initialized(trails: _trails));
           }
         },
         unloadTrack: (event) {

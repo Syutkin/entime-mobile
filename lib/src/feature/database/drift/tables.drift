@@ -98,15 +98,6 @@ CREATE TABLE trails (
 	FOREIGN KEY (file_id) REFERENCES track_files(id) ON DELETE SET NULL
 );
 
-CREATE TABLE logs (
-    id INTEGER PRIMARY KEY NOT NULL,
-    level ENUMNAME(LogLevel) NOT NULL,
-    timestamp text NOT NULL,
-    source ENUMNAME(LogSource) NOT NULL,
-    direction ENUMNAME(LogSourceDirection) NOT NULL,
-    raw_data text
-);
-
 CREATE TABLE track_files (
     id INTEGER PRIMARY KEY NOT NULL,
     name text NOT NULL,
@@ -117,6 +108,16 @@ CREATE TABLE track_files (
     data blob(20MB) NOT NULL,
     timestamp text NOT NULL
 );
+
+CREATE TABLE logs (
+    id INTEGER PRIMARY KEY NOT NULL,
+    level ENUMNAME(LogLevel) NOT NULL,
+    timestamp text NOT NULL,
+    source ENUMNAME(LogSource) NOT NULL,
+    direction ENUMNAME(LogSourceDirection) NOT NULL,
+    raw_data text
+);
+
 
 _getRaces: SELECT * FROM races WHERE is_deleted = false;
 
@@ -148,10 +149,11 @@ SELECT
     track_files.extension as file_extension,
     track_files.size as file_size,
     track_files.description as file_description,
-    track_files.hash_sha1 as file_hash_sha1
-FROM trails, track_files
+    track_files.hash_sha1 as file_hash_sha1,
+    track_files.timestamp as timestamp
+FROM trails LEFT JOIN track_files
+ON trails.file_id = track_files.id
 WHERE
-    trails.file_id = track_files.id AND
     trails.is_deleted = false;
 
 _getTrail AS TrailInfo:
@@ -167,11 +169,12 @@ SELECT
     track_files.extension as file_extension,
     track_files.size as file_size,
     track_files.description as file_description,
-    track_files.hash_sha1 as file_hash_sha1
-FROM trails, track_files
+    track_files.hash_sha1 as file_hash_sha1,
+    track_files.timestamp as timestamp
+FROM trails LEFT JOIN track_files
+ON trails.file_id = track_files.id
 WHERE
     trails.id = :id AND
-    trails.file_id = track_files.id AND
     trails.is_deleted = false;
 
 _addRider:

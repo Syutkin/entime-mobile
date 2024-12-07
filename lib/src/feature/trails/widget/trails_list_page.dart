@@ -32,6 +32,7 @@ class TrailsListPage extends StatelessWidget {
           return state.maybeMap(
             initialized: (state) {
               final trails = state.trails;
+              print('trails count: ${trails.length}');
               return Scrollbar(
                 child: ListView.builder(
                   controller: _scrollController,

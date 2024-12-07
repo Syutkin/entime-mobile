@@ -13,24 +13,26 @@ class SelectFileFormField extends FormField<File> {
     super.enabled,
     super.autovalidateMode,
     super.restorationId,
-  }) : super(builder: (FormFieldState<File> state) {
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.remove),
-                onPressed: () {
-                  // state.didChange(state.value - 1);
-                },
-              ),
-              Text(state.value.toString()),
-              IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: () {
-                  // state.didChange(state.value + 1);
-                },
-              ),
-            ],
-          );
-        },);
+  }) : super(
+          builder: (FormFieldState<File> state) {
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.remove),
+                  onPressed: () {
+                    // state.didChange(state.value - 1);
+                  },
+                ),
+                Text(state.value.toString()),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    // state.didChange(state.value + 1);
+                  },
+                ),
+              ],
+            );
+          },
+        );
 }

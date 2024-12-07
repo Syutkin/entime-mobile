@@ -252,7 +252,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                           distance: distance,
                           url: url,
                           description: description,
-                          // filePath: path,
+                          filePath: path,
                         ),
                       );
                 }
@@ -277,18 +277,18 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                   logger.e('Trails -> Can not load gpx file: $e');
                 }
               }
-              context.read<TrailsBloc>().add(
-                    TrailsEvent.upsertTrail(
-                      id: trail?.id,
-                      name: name,
-                      elevation: elevation,
-                      distance: distance,
-                      // gpxTrack: gpxTrack,
-                      url: url,
-                      description: description,
-                      // fileExtension: fileExtension,
-                    ),
-                  );
+              // context.read<TrailsBloc>().add(
+              //       TrailsEvent.upsertTrail(
+              //         id: trail?.id,
+              //         name: name,
+              //         elevation: elevation,
+              //         distance: distance,
+              //         // gpxTrack: gpxTrack,
+              //         url: url,
+              //         description: description,
+              //         // fileExtension: fileExtension,
+              //       ),
+              //     );
               Navigator.of(context).pop();
             }
           },

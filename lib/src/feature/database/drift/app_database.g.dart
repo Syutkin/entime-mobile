@@ -4097,7 +4097,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Selectable<TrailInfo> _getTrails() {
     return customSelect(
-        'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1 FROM trails,track_files WHERE trails.file_id = track_files.id AND trails.is_deleted = FALSE',
+        'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1, track_files.timestamp AS timestamp FROM trails LEFT JOIN track_files ON trails.file_id = track_files.id WHERE trails.is_deleted = FALSE',
         variables: [],
         readsFrom: {
           trails,
@@ -4111,17 +4111,18 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           fileId: row.readNullable<int>('file_id'),
           url: row.readNullable<String>('url'),
           description: row.readNullable<String>('description'),
-          fileName: row.read<String>('file_name'),
+          fileName: row.readNullable<String>('file_name'),
           fileExtension: row.readNullable<String>('file_extension'),
-          fileSize: row.read<int>('file_size'),
+          fileSize: row.readNullable<int>('file_size'),
           fileDescription: row.readNullable<String>('file_description'),
-          fileHashSha1: row.read<String>('file_hash_sha1'),
+          fileHashSha1: row.readNullable<String>('file_hash_sha1'),
+          timestamp: row.readNullable<String>('timestamp'),
         ));
   }
 
   Selectable<TrailInfo> _getTrail({required int id}) {
     return customSelect(
-        'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1 FROM trails,track_files WHERE trails.id = ?1 AND trails.file_id = track_files.id AND trails.is_deleted = FALSE',
+        'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1, track_files.timestamp AS timestamp FROM trails LEFT JOIN track_files ON trails.file_id = track_files.id WHERE trails.id = ?1 AND trails.is_deleted = FALSE',
         variables: [
           Variable<int>(id)
         ],
@@ -4137,11 +4138,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           fileId: row.readNullable<int>('file_id'),
           url: row.readNullable<String>('url'),
           description: row.readNullable<String>('description'),
-          fileName: row.read<String>('file_name'),
+          fileName: row.readNullable<String>('file_name'),
           fileExtension: row.readNullable<String>('file_extension'),
-          fileSize: row.read<int>('file_size'),
+          fileSize: row.readNullable<int>('file_size'),
           fileDescription: row.readNullable<String>('file_description'),
-          fileHashSha1: row.read<String>('file_hash_sha1'),
+          fileHashSha1: row.readNullable<String>('file_hash_sha1'),
+          timestamp: row.readNullable<String>('timestamp'),
         ));
   }
 
@@ -6722,11 +6724,12 @@ class TrailInfo extends CustomResultSet {
   final int? fileId;
   final String? url;
   final String? description;
-  final String fileName;
+  final String? fileName;
   final String? fileExtension;
-  final int fileSize;
+  final int? fileSize;
   final String? fileDescription;
-  final String fileHashSha1;
+  final String? fileHashSha1;
+  final String? timestamp;
   TrailInfo({
     required QueryRow row,
     required this.id,
@@ -6736,11 +6739,12 @@ class TrailInfo extends CustomResultSet {
     this.fileId,
     this.url,
     this.description,
-    required this.fileName,
+    this.fileName,
     this.fileExtension,
-    required this.fileSize,
+    this.fileSize,
     this.fileDescription,
-    required this.fileHashSha1,
+    this.fileHashSha1,
+    this.timestamp,
   }) : super(row);
 }
 
