@@ -229,8 +229,8 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
               // ToDo: вот тут планируется добавлять/удалять трейл и трек
               // Надо наверно забить на апсерт, и добавление/обновление определять по
               // trail == null
-              // Создаём новую запись
 
+              // Создаём новую запись
               if (trail == null) {
                 if (path == null) {
                   // Новый трейл без трека
@@ -256,25 +256,26 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                         ),
                       );
                 }
-              }
-
-              if (path != null) {
-                try {
-                  context.read<TrailsBloc>().add(
-                        TrailsEvent.upsertTrail(
-                          id: trail?.id,
-                          name: name,
-                          elevation: elevation,
-                          distance: distance,
-                          // filePath: path,
-                          // gpxTrack: File(path).readAsBytesSync(),
-                          url: url,
-                          description: description,
-                          // fileExtension: path.split('.').last,
-                        ),
-                      );
-                } on FileSystemException catch (e) {
-                  logger.e('Trails -> Can not load gpx file: $e');
+              } else {
+                // ToDo: Редактируем трейл
+                if (path != null) {
+                  try {
+                    context.read<TrailsBloc>().add(
+                          TrailsEvent.upsertTrail(
+                            id: trail.id,
+                            name: name,
+                            elevation: elevation,
+                            distance: distance,
+                            // filePath: path,
+                            // gpxTrack: File(path).readAsBytesSync(),
+                            url: url,
+                            description: description,
+                            // fileExtension: path.split('.').last,
+                          ),
+                        );
+                  } on FileSystemException catch (e) {
+                    logger.e('Trails -> Can not load gpx file: $e');
+                  }
                 }
               }
               // context.read<TrailsBloc>().add(

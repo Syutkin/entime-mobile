@@ -241,16 +241,16 @@ class AppDatabase extends _$AppDatabase {
     String? description,
     int? fileId,
   }) async {
-     final trailId = await into(trails).insert(
-        TrailsCompanion(
-          name: Value(name),
-          distance: Value(distance),
-          elevation: Value(elevation),
-          url: Value(url),
-          description: Value(description),
-          fileId: Value(fileId),
-        ),
-      );
+    final trailId = await into(trails).insert(
+      TrailsCompanion(
+        name: Value(name),
+        distance: Value(distance),
+        elevation: Value(elevation),
+        url: Value(url),
+        description: Value(description),
+        fileId: Value(fileId),
+      ),
+    );
     return trailId;
   }
 
@@ -292,9 +292,6 @@ class AppDatabase extends _$AppDatabase {
         name: name != null ? Value(name) : const Value.absent(),
         distance: distance != null ? Value(distance) : const Value.absent(),
         elevation: elevation != null ? Value(elevation) : const Value.absent(),
-        // gpxTrack: gpxTrack != null ? Value(gpxTrack) : const Value.absent(),
-        // fileExtension:
-        //     fileExtension != null ? Value(fileExtension) : const Value.absent(),
         url: url != null ? Value(url) : const Value.absent(),
         description:
             description != null ? Value(description) : const Value.absent(),
@@ -307,11 +304,36 @@ class AppDatabase extends _$AppDatabase {
 
   /// Удаляет трейл с [id]
   Future<int> deleteTrail(int id) async {
+    // ToDo: если был файл трека, то вот его надо бы удалять
     return (update(trails)..where((r) => r.id.equals(id))).write(
       const TrailsCompanion(
         isDeleted: Value(true),
       ),
     );
+  }
+
+  /// Добавляет трек
+  ///
+  /// Если есть трек с [track.hashSha1] и [track.size], то возвращает его [id]
+  Future<int> addTrack(TrackFile track) async {
+    final trackId =
+        await _getTrackIdByHash(hashSha1: track.hashSha1, size: track.size)
+            .getSingleOrNull();
+    if (trackId != null) {
+      return trackId;
+    } else {
+      return managers.trackFiles.create(
+        (o) => o(
+          name: track.name,
+          extension: Value(track.extension),
+          description: Value(track.description),
+          size: track.size,
+          hashSha1: track.hashSha1,
+          timestamp: track.timestamp,
+          data: track.data,
+        ),
+      );
+    }
   }
 
   /// Удаляет трек с [id]
@@ -320,6 +342,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Возвращает [TrackFile] с [id]
+  /// ToDo: возврат с data и без
   Future<TrackFile?> getTrack(int id) async {
     return (select(trackFiles)
           ..where((r) => r.id.equals(id))

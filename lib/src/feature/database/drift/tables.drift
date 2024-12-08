@@ -177,6 +177,12 @@ WHERE
     trails.id = :id AND
     trails.is_deleted = false;
 
+_getTrackIdByHash:
+SELECT id
+FROM track_files
+WHERE hash_sha1 = :hash_sha1 AND size = :size
+LIMIT 1;
+
 _addRider:
 INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment)
 VALUES(:name, :nickname, :birthday, :team, :city, :email, :phone, :comment);

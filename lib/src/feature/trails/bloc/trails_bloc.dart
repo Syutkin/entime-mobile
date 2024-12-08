@@ -24,7 +24,6 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
         super(const TrailsState.initial()) {
     _trailsSubscription = _db.getTrails().watch().listen((event) async {
       _trails = event;
-      print(_trails);
       logger.t('TrailsBloc -> getTrails().watch()');
       add(const TrailsEvent.getTrails());
     });
@@ -36,21 +35,27 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
         },
         addTrail: (_AddTrail event) async {
           int? trackId;
-          // Сохраняем трейл если указан путь к файлу
+          // Сохраняем трек если указан путь к файлу
           if (event.filePath != null && event.filePath!.isNotEmpty) {
             await state.whenOrNull(
-              initialized: (trails, track) async {
+              initialized: (_, track) async {
+                final startTime = DateTime.now();
                 if (track != null) {
-                  trackId = await _db.managers.trackFiles.create(
-                    (o) => o(
-                      name: track.name,
-                      data: track.data,
-                      hashSha1: track.hashSha1,
-                      timestamp: track.timestamp,
-                      size: track.size,
-                    ),
-                  );
+                  trackId = await _db.addTrack(track);
+                  // trackId = await _db.managers.trackFiles.create(
+                  //   (o) => o(
+                  //     name: track.name,
+                  //     data: track.data,
+                  //     hashSha1: track.hashSha1,
+                  //     timestamp: track.timestamp,
+                  //     size: track.size,
+                  //     extension: Value(track.extension),
+                  //     description: Value(track.description),
+                  //   ),
+                  // );
                 }
+                final duration  = DateTime.now().difference(startTime);
+                print('Duration: ${duration.inMilliseconds} ms');
               },
             );
           }
@@ -112,6 +117,8 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
                         id: -1,
                         name: name,
                         extension: extension,
+                        // ToDo: Description
+                        // description: null,
                         size: size,
                         hashSha1: fileHash.toString(),
                         data: Uint8List(0),

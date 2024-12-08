@@ -4147,6 +4147,19 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
+  Selectable<int> _getTrackIdByHash(
+      {required String hashSha1, required int size}) {
+    return customSelect(
+        'SELECT id FROM track_files WHERE hash_sha1 = ?1 AND size = ?2 LIMIT 1',
+        variables: [
+          Variable<String>(hashSha1),
+          Variable<int>(size)
+        ],
+        readsFrom: {
+          trackFiles,
+        }).map((QueryRow row) => row.read<int>('id'));
+  }
+
   Future<int> _addRider(
       {required String name,
       String? nickname,
