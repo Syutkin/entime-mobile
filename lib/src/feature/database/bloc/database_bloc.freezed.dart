@@ -124,6 +124,7 @@ mixin _$DatabaseEvent {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -226,6 +227,7 @@ mixin _$DatabaseEvent {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -328,6 +330,7 @@ mixin _$DatabaseEvent {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -377,6 +380,7 @@ mixin _$DatabaseEvent {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -419,6 +423,7 @@ mixin _$DatabaseEvent {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -461,6 +466,7 @@ mixin _$DatabaseEvent {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -634,6 +640,7 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return initialize();
   }
@@ -739,6 +746,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return initialize?.call();
   }
@@ -844,6 +852,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -899,6 +908,7 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return initialize(this);
   }
@@ -944,6 +954,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return initialize?.call(this);
   }
@@ -989,6 +1000,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -1401,6 +1413,7 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return emitState(
         race,
@@ -1520,6 +1533,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return emitState?.call(
         race,
@@ -1639,6 +1653,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (emitState != null) {
@@ -1708,6 +1723,7 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return emitState(this);
   }
@@ -1753,6 +1769,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return emitState?.call(this);
   }
@@ -1798,6 +1815,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (emitState != null) {
@@ -2077,6 +2095,7 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return addRace(name, startDate, finishDate, location, url, description);
   }
@@ -2182,6 +2201,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return addRace?.call(
         name, startDate, finishDate, location, url, description);
@@ -2288,6 +2308,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -2343,6 +2364,7 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return addRace(this);
   }
@@ -2388,6 +2410,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return addRace?.call(this);
   }
@@ -2433,6 +2456,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (addRace != null) {
@@ -2706,6 +2730,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return updateRace(
         id, name, startDate, finishDate, location, url, description);
@@ -2812,6 +2837,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return updateRace?.call(
         id, name, startDate, finishDate, location, url, description);
@@ -2918,6 +2944,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (updateRace != null) {
@@ -2974,6 +3001,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return updateRace(this);
   }
@@ -3019,6 +3047,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return updateRace?.call(this);
   }
@@ -3064,6 +3093,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (updateRace != null) {
@@ -3339,6 +3369,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return upsertRace(
         id, name, startDate, finishDate, location, url, description);
@@ -3445,6 +3476,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return upsertRace?.call(
         id, name, startDate, finishDate, location, url, description);
@@ -3551,6 +3583,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (upsertRace != null) {
@@ -3607,6 +3640,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return upsertRace(this);
   }
@@ -3652,6 +3686,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return upsertRace?.call(this);
   }
@@ -3697,6 +3732,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (upsertRace != null) {
@@ -3905,6 +3941,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return deleteRace(id);
   }
@@ -4010,6 +4047,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return deleteRace?.call(id);
   }
@@ -4115,6 +4153,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (deleteRace != null) {
@@ -4170,6 +4209,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return deleteRace(this);
   }
@@ -4215,6 +4255,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return deleteRace?.call(this);
   }
@@ -4260,6 +4301,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (deleteRace != null) {
@@ -4428,6 +4470,7 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return getRaces();
   }
@@ -4533,6 +4576,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return getRaces?.call();
   }
@@ -4638,6 +4682,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (getRaces != null) {
@@ -4693,6 +4738,7 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return getRaces(this);
   }
@@ -4738,6 +4784,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return getRaces?.call(this);
   }
@@ -4783,6 +4830,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (getRaces != null) {
@@ -4971,6 +5019,7 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return selectRace(race);
   }
@@ -5076,6 +5125,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return selectRace?.call(race);
   }
@@ -5181,6 +5231,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (selectRace != null) {
@@ -5236,6 +5287,7 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return selectRace(this);
   }
@@ -5281,6 +5333,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return selectRace?.call(this);
   }
@@ -5326,6 +5379,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (selectRace != null) {
@@ -5494,6 +5548,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return deselectRace();
   }
@@ -5599,6 +5654,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return deselectRace?.call();
   }
@@ -5704,6 +5760,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (deselectRace != null) {
@@ -5759,6 +5816,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return deselectRace(this);
   }
@@ -5804,6 +5862,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return deselectRace?.call(this);
   }
@@ -5849,6 +5908,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (deselectRace != null) {
@@ -6053,6 +6113,7 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return addStage(name, raceId, trailId);
   }
@@ -6158,6 +6219,7 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return addStage?.call(name, raceId, trailId);
   }
@@ -6263,6 +6325,7 @@ class _$AddStageImpl implements _AddStage {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (addStage != null) {
@@ -6318,6 +6381,7 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return addStage(this);
   }
@@ -6363,6 +6427,7 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return addStage?.call(this);
   }
@@ -6408,6 +6473,7 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (addStage != null) {
@@ -6674,6 +6740,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return upsertStage(
         id, name, description, raceId, trailId, isActive, isDeleted);
@@ -6780,6 +6847,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return upsertStage?.call(
         id, name, description, raceId, trailId, isActive, isDeleted);
@@ -6886,6 +6954,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (upsertStage != null) {
@@ -6942,6 +7011,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return upsertStage(this);
   }
@@ -6987,6 +7057,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return upsertStage?.call(this);
   }
@@ -7032,6 +7103,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (upsertStage != null) {
@@ -7240,6 +7312,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return deleteStage(id);
   }
@@ -7345,6 +7418,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return deleteStage?.call(id);
   }
@@ -7450,6 +7524,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (deleteStage != null) {
@@ -7505,6 +7580,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return deleteStage(this);
   }
@@ -7550,6 +7626,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return deleteStage?.call(this);
   }
@@ -7595,6 +7672,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (deleteStage != null) {
@@ -7790,6 +7868,7 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return getStages(raceId);
   }
@@ -7895,6 +7974,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return getStages?.call(raceId);
   }
@@ -8000,6 +8080,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (getStages != null) {
@@ -8055,6 +8136,7 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return getStages(this);
   }
@@ -8100,6 +8182,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return getStages?.call(this);
   }
@@ -8145,6 +8228,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (getStages != null) {
@@ -8341,6 +8425,7 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return selectStage(stage);
   }
@@ -8446,6 +8531,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return selectStage?.call(stage);
   }
@@ -8551,6 +8637,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (selectStage != null) {
@@ -8606,6 +8693,7 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return selectStage(this);
   }
@@ -8651,6 +8739,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return selectStage?.call(this);
   }
@@ -8696,6 +8785,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (selectStage != null) {
@@ -8894,6 +8984,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return getParticipantsAtStart(stageId);
   }
@@ -8999,6 +9090,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return getParticipantsAtStart?.call(stageId);
   }
@@ -9104,6 +9196,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (getParticipantsAtStart != null) {
@@ -9159,6 +9252,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return getParticipantsAtStart(this);
   }
@@ -9204,6 +9298,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return getParticipantsAtStart?.call(this);
   }
@@ -9249,6 +9344,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (getParticipantsAtStart != null) {
@@ -9478,6 +9574,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return addStartNumber(stage, number, startTime, forceAdd);
   }
@@ -9583,6 +9680,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return addStartNumber?.call(stage, number, startTime, forceAdd);
   }
@@ -9688,6 +9786,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (addStartNumber != null) {
@@ -9743,6 +9842,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return addStartNumber(this);
   }
@@ -9788,6 +9888,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return addStartNumber?.call(this);
   }
@@ -9833,6 +9934,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (addStartNumber != null) {
@@ -10112,6 +10214,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return updateStartingInfo(
         stageId,
@@ -10224,6 +10327,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return updateStartingInfo?.call(
         stageId,
@@ -10336,6 +10440,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (updateStartingInfo != null) {
@@ -10398,6 +10503,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return updateStartingInfo(this);
   }
@@ -10443,6 +10549,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return updateStartingInfo?.call(this);
   }
@@ -10488,6 +10595,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (updateStartingInfo != null) {
@@ -10758,6 +10866,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return updateAutomaticCorrection(
         stageId, startTime, correction, timestamp, forceUpdate, deltaInSeconds);
@@ -10864,6 +10973,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return updateAutomaticCorrection?.call(
         stageId, startTime, correction, timestamp, forceUpdate, deltaInSeconds);
@@ -10970,6 +11080,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (updateAutomaticCorrection != null) {
@@ -11026,6 +11137,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return updateAutomaticCorrection(this);
   }
@@ -11071,6 +11183,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return updateAutomaticCorrection?.call(this);
   }
@@ -11116,6 +11229,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (updateAutomaticCorrection != null) {
@@ -11357,6 +11471,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return updateManualStartTime(stageId, time, timestamp, deltaInSeconds);
   }
@@ -11462,6 +11577,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return updateManualStartTime?.call(
         stageId, time, timestamp, deltaInSeconds);
@@ -11568,6 +11684,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (updateManualStartTime != null) {
@@ -11623,6 +11740,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return updateManualStartTime(this);
   }
@@ -11668,6 +11786,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return updateManualStartTime?.call(this);
   }
@@ -11713,6 +11832,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (updateManualStartTime != null) {
@@ -11925,6 +12045,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return setStatusForStartId(startId, status);
   }
@@ -12030,6 +12151,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return setStatusForStartId?.call(startId, status);
   }
@@ -12135,6 +12257,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (setStatusForStartId != null) {
@@ -12190,6 +12313,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return setStatusForStartId(this);
   }
@@ -12235,6 +12359,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return setStatusForStartId?.call(this);
   }
@@ -12280,6 +12405,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (setStatusForStartId != null) {
@@ -12565,6 +12691,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return addFinishTime(stage, finishTime, timestamp, finishDelay,
         substituteNumbers, substituteNumbersDelay, dateTimeNow, number);
@@ -12671,6 +12798,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return addFinishTime?.call(stage, finishTime, timestamp, finishDelay,
         substituteNumbers, substituteNumbersDelay, dateTimeNow, number);
@@ -12777,6 +12905,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (addFinishTime != null) {
@@ -12833,6 +12962,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return addFinishTime(this);
   }
@@ -12878,6 +13008,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return addFinishTime?.call(this);
   }
@@ -12923,6 +13054,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (addFinishTime != null) {
@@ -13165,6 +13297,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return addFinishTimeManual(stageId, finishTime, timestamp, number);
   }
@@ -13270,6 +13403,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return addFinishTimeManual?.call(stageId, finishTime, timestamp, number);
   }
@@ -13375,6 +13509,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (addFinishTimeManual != null) {
@@ -13430,6 +13565,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return addFinishTimeManual(this);
   }
@@ -13475,6 +13611,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return addFinishTimeManual?.call(this);
   }
@@ -13520,6 +13657,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (addFinishTimeManual != null) {
@@ -13725,6 +13863,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return clearStartResultsDebug(stageId);
   }
@@ -13830,6 +13969,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return clearStartResultsDebug?.call(stageId);
   }
@@ -13935,6 +14075,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (clearStartResultsDebug != null) {
@@ -13990,6 +14131,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return clearStartResultsDebug(this);
   }
@@ -14035,6 +14177,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return clearStartResultsDebug?.call(this);
   }
@@ -14080,6 +14223,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (clearStartResultsDebug != null) {
@@ -14279,6 +14423,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return clearFinishResultsDebug(stageId);
   }
@@ -14384,6 +14529,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return clearFinishResultsDebug?.call(stageId);
   }
@@ -14489,6 +14635,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (clearFinishResultsDebug != null) {
@@ -14544,6 +14691,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return clearFinishResultsDebug(this);
   }
@@ -14589,6 +14737,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return clearFinishResultsDebug?.call(this);
   }
@@ -14634,6 +14783,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (clearFinishResultsDebug != null) {
@@ -14831,6 +14981,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return hideAllFinises(stageId);
   }
@@ -14936,6 +15087,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return hideAllFinises?.call(stageId);
   }
@@ -15041,6 +15193,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (hideAllFinises != null) {
@@ -15096,6 +15249,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return hideAllFinises(this);
   }
@@ -15141,6 +15295,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return hideAllFinises?.call(this);
   }
@@ -15186,6 +15341,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (hideAllFinises != null) {
@@ -15391,6 +15547,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return clearNumberAtFinish(stage, number);
   }
@@ -15496,6 +15653,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return clearNumberAtFinish?.call(stage, number);
   }
@@ -15601,6 +15759,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (clearNumberAtFinish != null) {
@@ -15656,6 +15815,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return clearNumberAtFinish(this);
   }
@@ -15701,6 +15861,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return clearNumberAtFinish?.call(this);
   }
@@ -15746,6 +15907,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (clearNumberAtFinish != null) {
@@ -15954,6 +16116,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return setDNSForStage(stage, number);
   }
@@ -16059,6 +16222,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return setDNSForStage?.call(stage, number);
   }
@@ -16164,6 +16328,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (setDNSForStage != null) {
@@ -16219,6 +16384,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return setDNSForStage(this);
   }
@@ -16264,6 +16430,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return setDNSForStage?.call(this);
   }
@@ -16309,6 +16476,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (setDNSForStage != null) {
@@ -16517,6 +16685,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return setDNFForStage(stage, number);
   }
@@ -16622,6 +16791,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return setDNFForStage?.call(stage, number);
   }
@@ -16727,6 +16897,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (setDNFForStage != null) {
@@ -16782,6 +16953,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return setDNFForStage(this);
   }
@@ -16827,6 +16999,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return setDNFForStage?.call(this);
   }
@@ -16872,6 +17045,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (setDNFForStage != null) {
@@ -17070,6 +17244,7 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return hideFinish(id);
   }
@@ -17175,6 +17350,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return hideFinish?.call(id);
   }
@@ -17280,6 +17456,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (hideFinish != null) {
@@ -17335,6 +17512,7 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return hideFinish(this);
   }
@@ -17380,6 +17558,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return hideFinish?.call(this);
   }
@@ -17425,6 +17604,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (hideFinish != null) {
@@ -17652,6 +17832,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return addNumberToFinish(stage, finishId, number, finishTime);
   }
@@ -17757,6 +17938,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return addNumberToFinish?.call(stage, finishId, number, finishTime);
   }
@@ -17862,6 +18044,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (addNumberToFinish != null) {
@@ -17917,6 +18100,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return addNumberToFinish(this);
   }
@@ -17962,6 +18146,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return addNumberToFinish?.call(this);
   }
@@ -18007,6 +18192,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (addNumberToFinish != null) {
@@ -18221,6 +18407,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return getNumbersOnTraceNow(stageId, dateTimeNow);
   }
@@ -18326,6 +18513,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return getNumbersOnTraceNow?.call(stageId, dateTimeNow);
   }
@@ -18431,6 +18619,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (getNumbersOnTraceNow != null) {
@@ -18486,6 +18675,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return getNumbersOnTraceNow(this);
   }
@@ -18531,6 +18721,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return getNumbersOnTraceNow?.call(this);
   }
@@ -18576,6 +18767,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (getNumbersOnTraceNow != null) {
@@ -18776,6 +18968,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return selectAwaitingNumber(number);
   }
@@ -18881,6 +19074,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return selectAwaitingNumber?.call(number);
   }
@@ -18986,6 +19180,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (selectAwaitingNumber != null) {
@@ -19041,6 +19236,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return selectAwaitingNumber(this);
   }
@@ -19086,6 +19282,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return selectAwaitingNumber?.call(this);
   }
@@ -19131,6 +19328,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (selectAwaitingNumber != null) {
@@ -19303,6 +19501,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return deselectAwaitingNumber();
   }
@@ -19408,6 +19607,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return deselectAwaitingNumber?.call();
   }
@@ -19513,6 +19713,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (deselectAwaitingNumber != null) {
@@ -19568,6 +19769,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return deselectAwaitingNumber(this);
   }
@@ -19613,6 +19815,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return deselectAwaitingNumber?.call(this);
   }
@@ -19658,6 +19861,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (deselectAwaitingNumber != null) {
@@ -19847,6 +20051,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return createRaceFromRaceCsv(race);
   }
@@ -19952,6 +20157,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return createRaceFromRaceCsv?.call(race);
   }
@@ -20057,6 +20263,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (createRaceFromRaceCsv != null) {
@@ -20112,6 +20319,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return createRaceFromRaceCsv(this);
   }
@@ -20157,6 +20365,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return createRaceFromRaceCsv?.call(this);
   }
@@ -20202,6 +20411,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (createRaceFromRaceCsv != null) {
@@ -20371,6 +20581,7 @@ class _$ShareStartImpl implements _ShareStart {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return shareStart();
   }
@@ -20476,6 +20687,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return shareStart?.call();
   }
@@ -20581,6 +20793,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (shareStart != null) {
@@ -20636,6 +20849,7 @@ class _$ShareStartImpl implements _ShareStart {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return shareStart(this);
   }
@@ -20681,6 +20895,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return shareStart?.call(this);
   }
@@ -20726,6 +20941,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (shareStart != null) {
@@ -20886,6 +21102,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return shareFinish();
   }
@@ -20991,6 +21208,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return shareFinish?.call();
   }
@@ -21096,6 +21314,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (shareFinish != null) {
@@ -21151,6 +21370,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return shareFinish(this);
   }
@@ -21196,6 +21416,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return shareFinish?.call(this);
   }
@@ -21241,6 +21462,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (shareFinish != null) {
@@ -21401,6 +21623,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return shareDatabase();
   }
@@ -21506,6 +21729,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return shareDatabase?.call();
   }
@@ -21611,6 +21835,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
     if (shareDatabase != null) {
@@ -21666,6 +21891,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
   }) {
     return shareDatabase(this);
   }
@@ -21711,6 +21937,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
   }) {
     return shareDatabase?.call(this);
   }
@@ -21756,6 +21983,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
     if (shareDatabase != null) {
@@ -21767,6 +21995,564 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
 
 abstract class _ShareDatabase implements DatabaseEvent {
   const factory _ShareDatabase() = _$ShareDatabaseImpl;
+}
+
+/// @nodoc
+abstract class _$$ShareTrackImplCopyWith<$Res> {
+  factory _$$ShareTrackImplCopyWith(
+          _$ShareTrackImpl value, $Res Function(_$ShareTrackImpl) then) =
+      __$$ShareTrackImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({TrailInfo trail});
+}
+
+/// @nodoc
+class __$$ShareTrackImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$ShareTrackImpl>
+    implements _$$ShareTrackImplCopyWith<$Res> {
+  __$$ShareTrackImplCopyWithImpl(
+      _$ShareTrackImpl _value, $Res Function(_$ShareTrackImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? trail = freezed,
+  }) {
+    return _then(_$ShareTrackImpl(
+      trail: freezed == trail
+          ? _value.trail
+          : trail // ignore: cast_nullable_to_non_nullable
+              as TrailInfo,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ShareTrackImpl implements _ShareTrack {
+  const _$ShareTrackImpl({required this.trail});
+
+  @override
+  final TrailInfo trail;
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.shareTrack(trail: $trail)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShareTrackImpl &&
+            const DeepCollectionEquality().equals(other.trail, trail));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(trail));
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShareTrackImplCopyWith<_$ShareTrackImpl> get copyWith =>
+      __$$ShareTrackImplCopyWithImpl<_$ShareTrackImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
+        emitState,
+    required TResult Function(
+            String name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)
+        addRace,
+    required TResult Function(
+            int id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)
+        updateRace,
+    required TResult Function(
+            int? id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)
+        upsertRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function() getRaces,
+    required TResult Function(Race race) selectRace,
+    required TResult Function() deselectRace,
+    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(int? id, String? name, String? description,
+            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+        upsertStage,
+    required TResult Function(int id) deleteStage,
+    required TResult Function(int raceId) getStages,
+    required TResult Function(Stage stage) selectStage,
+    required TResult Function(int stageId) getParticipantsAtStart,
+    required TResult Function(
+            Stage stage, int number, String startTime, bool forceAdd)
+        addStartNumber,
+    required TResult Function(
+            int stageId,
+            int participantId,
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection)
+        updateStartingInfo,
+    required TResult Function(int stageId, String startTime, int correction,
+            DateTime timestamp, bool forceUpdate, int? deltaInSeconds)
+        updateAutomaticCorrection,
+    required TResult Function(
+            int stageId, DateTime time, DateTime timestamp, int deltaInSeconds)
+        updateManualStartTime,
+    required TResult Function(int startId, ParticipantStatus status)
+        setStatusForStartId,
+    required TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timestamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)
+        addFinishTime,
+    required TResult Function(
+            int stageId, String finishTime, DateTime timestamp, int? number)
+        addFinishTimeManual,
+    required TResult Function(int stageId) clearStartResultsDebug,
+    required TResult Function(int stageId) clearFinishResultsDebug,
+    required TResult Function(int stageId) hideAllFinises,
+    required TResult Function(Stage stage, int number) clearNumberAtFinish,
+    required TResult Function(Stage stage, int number) setDNSForStage,
+    required TResult Function(Stage stage, int number) setDNFForStage,
+    required TResult Function(int id) hideFinish,
+    required TResult Function(
+            Stage stage, int finishId, int number, String finishTime)
+        addNumberToFinish,
+    required TResult Function(int stageId, DateTime dateTimeNow)
+        getNumbersOnTraceNow,
+    required TResult Function(int number) selectAwaitingNumber,
+    required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
+    required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
+  }) {
+    return shareTrack(trail);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
+            String? location, String? url, String? description)?
+        addRace,
+    TResult? Function(
+            int id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        updateRace,
+    TResult? Function(
+            int? id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        upsertRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function()? getRaces,
+    TResult? Function(Race race)? selectRace,
+    TResult? Function()? deselectRace,
+    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int raceId)? getStages,
+    TResult? Function(Stage stage)? selectStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult? Function(
+            int stageId,
+            int participantId,
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection)?
+        updateStartingInfo,
+    TResult? Function(int stageId, String startTime, int correction,
+            DateTime timestamp, bool forceUpdate, int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult? Function(
+            int stageId, DateTime time, DateTime timestamp, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult? Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult? Function(
+            Stage stage,
+            String finishTime,
+            DateTime timestamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult? Function(
+            int stageId, String finishTime, DateTime timestamp, int? number)?
+        addFinishTimeManual,
+    TResult? Function(int stageId)? clearStartResultsDebug,
+    TResult? Function(int stageId)? clearFinishResultsDebug,
+    TResult? Function(int stageId)? hideAllFinises,
+    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult? Function(Stage stage, int number)? setDNSForStage,
+    TResult? Function(Stage stage, int number)? setDNFForStage,
+    TResult? Function(int id)? hideFinish,
+    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
+  }) {
+    return shareTrack?.call(trail);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<Rider> riders,
+            List<Status> statuses,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
+            String? location, String? url, String? description)?
+        addRace,
+    TResult Function(
+            int id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        updateRace,
+    TResult Function(
+            int? id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        upsertRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function()? getRaces,
+    TResult Function(Race race)? selectRace,
+    TResult Function()? deselectRace,
+    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted)?
+        upsertStage,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int raceId)? getStages,
+    TResult Function(Stage stage)? selectStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            int stageId,
+            int participantId,
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection)?
+        updateStartingInfo,
+    TResult Function(int stageId, String startTime, int correction,
+            DateTime timestamp, bool forceUpdate, int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult Function(
+            int stageId, DateTime time, DateTime timestamp, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timestamp,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult Function(
+            int stageId, String finishTime, DateTime timestamp, int? number)?
+        addFinishTimeManual,
+    TResult Function(int stageId)? clearStartResultsDebug,
+    TResult Function(int stageId)? clearFinishResultsDebug,
+    TResult Function(int stageId)? hideAllFinises,
+    TResult Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult Function(Stage stage, int number)? setDNSForStage,
+    TResult Function(Stage stage, int number)? setDNFForStage,
+    TResult Function(int id)? hideFinish,
+    TResult Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int number)? selectAwaitingNumber,
+    TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
+    TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
+    required TResult orElse(),
+  }) {
+    if (shareTrack != null) {
+      return shareTrack(trail);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_GetRaces value) getRaces,
+    required TResult Function(_SelectRace value) selectRace,
+    required TResult Function(_DeselectRace value) deselectRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
+    required TResult Function(_DeleteStage value) deleteStage,
+    required TResult Function(_GetStages value) getStages,
+    required TResult Function(_SelectStage value) selectStage,
+    required TResult Function(_GetParticipantsAtStart value)
+        getParticipantsAtStart,
+    required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
+    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
+    required TResult Function(_AddFinishTime value) addFinishTime,
+    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
+    required TResult Function(_ClearStartResultsDebug value)
+        clearStartResultsDebug,
+    required TResult Function(_ClearFinishResultsDebug value)
+        clearFinishResultsDebug,
+    required TResult Function(_HideAllFinises value) hideAllFinises,
+    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
+    required TResult Function(_SetDNSForStage value) setDNSForStage,
+    required TResult Function(_SetDNFForStage value) setDNFForStage,
+    required TResult Function(_HideFinish value) hideFinish,
+    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
+    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
+    required TResult Function(_DeselectAwaitingNumber value)
+        deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_ShareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
+    required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
+  }) {
+    return shareTrack(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_GetRaces value)? getRaces,
+    TResult? Function(_SelectRace value)? selectRace,
+    TResult? Function(_DeselectRace value)? deselectRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetStages value)? getStages,
+    TResult? Function(_SelectStage value)? selectStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult? Function(_AddFinishTime value)? addFinishTime,
+    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult? Function(_HideAllFinises value)? hideAllFinises,
+    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(_SetDNSForStage value)? setDNSForStage,
+    TResult? Function(_SetDNFForStage value)? setDNFForStage,
+    TResult? Function(_HideFinish value)? hideFinish,
+    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_ShareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
+    TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
+  }) {
+    return shareTrack?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_GetRaces value)? getRaces,
+    TResult Function(_SelectRace value)? selectRace,
+    TResult Function(_DeselectRace value)? deselectRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetStages value)? getStages,
+    TResult Function(_SelectStage value)? selectStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult Function(_AddFinishTime value)? addFinishTime,
+    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult Function(_HideAllFinises value)? hideAllFinises,
+    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult Function(_SetDNSForStage value)? setDNSForStage,
+    TResult Function(_SetDNFForStage value)? setDNFForStage,
+    TResult Function(_HideFinish value)? hideFinish,
+    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_ShareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
+    TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
+    required TResult orElse(),
+  }) {
+    if (shareTrack != null) {
+      return shareTrack(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShareTrack implements DatabaseEvent {
+  const factory _ShareTrack({required final TrailInfo trail}) =
+      _$ShareTrackImpl;
+
+  TrailInfo get trail;
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ShareTrackImplCopyWith<_$ShareTrackImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -73,7 +73,7 @@ class MenuButton extends StatelessWidget {
                     value: HomeMenuButton.share,
                     child: ListTile(
                       leading: const Icon(Icons.share),
-                      title: Text(Localization.current.I18nHome_share),
+                      title: Text(Localization.current.I18nCore_share),
                     ),
                   ),
                 );

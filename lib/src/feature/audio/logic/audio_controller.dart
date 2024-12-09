@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 import '../../../common/logger/logger.dart';
-import '../../../common/utils/extension_on_string.dart';
+import '../../../common/utils/extensions.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../database/drift/app_database.dart';
 import '../../settings/settings.dart';

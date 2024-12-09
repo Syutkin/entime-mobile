@@ -71,6 +71,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Поделиться`
+  String get I18nCore_share {
+    return Intl.message(
+      'Поделиться',
+      name: 'I18nCore_share',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Предупреждение`
   String get I18nCore_warning {
     return Intl.message(
@@ -1100,16 +1110,6 @@ class GeneratedLocalization {
     return Intl.message(
       'Добавить участника',
       name: 'I18nHome_addRacer',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Поделиться`
-  String get I18nHome_share {
-    return Intl.message(
-      'Поделиться',
-      name: 'I18nHome_share',
       desc: '',
       args: [],
     );
@@ -2275,6 +2275,26 @@ class GeneratedLocalization {
       name: 'I18nDatabase_trailIsActive',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Максимальный размер {limit} Мб`
+  String I18nDatabase_uploadLimit(Object limit) {
+    return Intl.message(
+      'Максимальный размер $limit Мб',
+      name: 'I18nDatabase_uploadLimit',
+      desc: '',
+      args: [limit],
+    );
+  }
+
+  /// `Вы уверены, что хотите удалить трейл "{trailName}"?`
+  String I18nDatabase_deleteTrail(Object trailName) {
+    return Intl.message(
+      'Вы уверены, что хотите удалить трейл "$trailName"?',
+      name: 'I18nDatabase_deleteTrail',
+      desc: '',
+      args: [trailName],
     );
   }
 

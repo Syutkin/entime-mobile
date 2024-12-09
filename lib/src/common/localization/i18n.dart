@@ -13,6 +13,11 @@ class I18nCore {
         name: 'I18nCore_delete',
       );
 
+  static String get share => Intl.message(
+        'Поделиться',
+        name: 'I18nCore_share',
+      );
+
   static String get warning => Intl.message(
         'Предупреждение',
         name: 'I18nCore_warning',
@@ -655,11 +660,6 @@ class I18nHome {
         name: 'I18nHome_addRacer',
       );
 
-  static String get share => Intl.message(
-        'Поделиться',
-        name: 'I18nHome_share',
-      );
-
   static String get selectStartProtocol => Intl.message(
         'Стартовый протокол',
         name: 'I18nHome_selectStartProtocol',
@@ -758,9 +758,9 @@ class I18nInit {
       );
 
   static String get trails => Intl.message(
-    'Трейлы',
-    name: 'I18nInit_trails',
-  );
+        'Трейлы',
+        name: 'I18nInit_trails',
+      );
 }
 
 class I18nStart {
@@ -1270,6 +1270,20 @@ class I18nDatabase {
         'Активен',
         name: 'I18nDatabase_trailIsActive',
       );
+
+  static String uploadLimit(double limit) {
+    return Intl.message(
+      'Максимальный размер $limit Мб',
+      name: 'I18nDatabase_uploadLimit',
+      args: [limit],
+    );
+  }
+
+  static String deleteTrail(String trailName) => Intl.message(
+    'Вы уверены, что хотите удалить трейл "$trailName"?',
+    name: 'I18nDatabase_deleteTrail',
+    args: [trailName],
+  );
 }
 
 class I18nNtp {

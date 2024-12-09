@@ -24,8 +24,7 @@ class LogBloc extends Bloc<LogEvent, LogState> {
       _limit = state.logLimit;
     });
 
-    _logsSubscription =
-        _db.managers.logs.watch().listen((event) async {
+    _logsSubscription = _db.managers.logs.watch().listen((event) async {
       logger.d('LogBloc -> (_db.logs).watch()');
       _log = await _db.getLog(limit: _limit);
       add(const LogEvent.emitState());

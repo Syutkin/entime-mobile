@@ -20,6 +20,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
+  static String m30(trailName) =>
+      "Вы уверены, что хотите удалить трейл \"${trailName}\"?";
+
+  static String m31(limit) => "Максимальный размер ${limit} Мб";
+
   static String m0(version) => "v${version}";
 
   static String m1(time, prevNumber, currentNumber) =>
@@ -103,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nCore_correction": MessageLookupByLibrary.simpleMessage("Поправка"),
         "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "I18nCore_edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
+        "I18nCore_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
         "I18nCore_warning":
             MessageLookupByLibrary.simpleMessage("Предупреждение"),
         "I18nCountdown_countdown":
@@ -111,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создать соревнование"),
         "I18nDatabase_addStage":
             MessageLookupByLibrary.simpleMessage("Создать спецучасток"),
+        "I18nDatabase_deleteTrail": m30,
         "I18nDatabase_editRace":
             MessageLookupByLibrary.simpleMessage("Редактирование"),
         "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
@@ -159,6 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Название"),
         "I18nDatabase_trailUrl": MessageLookupByLibrary.simpleMessage("Ссылка"),
         "I18nDatabase_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
+        "I18nDatabase_uploadLimit": m31,
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
         "I18nDrawer_settings":
@@ -190,7 +198,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Стартовый протокол"),
         "I18nHome_setDefaults":
             MessageLookupByLibrary.simpleMessage("По умолчанию"),
-        "I18nHome_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
         "I18nHome_start": MessageLookupByLibrary.simpleMessage("Старт"),
         "I18nHome_update": MessageLookupByLibrary.simpleMessage("Обновить"),
         "I18nHome_updateAutomaticCorrection": m3,

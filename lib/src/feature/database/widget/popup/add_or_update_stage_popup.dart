@@ -24,7 +24,7 @@ Future<void> _upsertStagePopup(
   var description = stage?.description;
   var trailId = stage?.trailId;
   // Трейл у которого id = trailId
-  Trail? trail;
+  TrailInfo? trail;
   var isActive = stage?.isActive ?? true;
 
   final formKey = GlobalKey<FormState>();
@@ -74,7 +74,10 @@ Future<void> _upsertStagePopup(
             BlocBuilder<TrailsBloc, TrailsState>(
               builder: (context, state) {
                 return state.map(
-                  initial: (state) {
+                  initial: (_) {
+                    return const SizedBox.shrink();
+                  },
+                  loadingTrack: (_) {
                     return const SizedBox.shrink();
                   },
                   initialized: (state) {
@@ -90,7 +93,7 @@ Future<void> _upsertStagePopup(
                         },
                       );
                     }
-                    return DropdownButtonFormField<Trail?>(
+                    return DropdownButtonFormField<TrailInfo?>(
                       style: Theme.of(context).textTheme.bodyLarge,
                       value: trail,
                       decoration: InputDecoration(
@@ -101,7 +104,7 @@ Future<void> _upsertStagePopup(
                         trailId = trail?.id;
                       },
                       items: state.trails.map((value) {
-                        return DropdownMenuItem<Trail>(
+                        return DropdownMenuItem<TrailInfo>(
                           value: value,
                           child: Text(value.name),
                         );

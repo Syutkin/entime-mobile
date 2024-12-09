@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_final_fields
-
 import 'dart:async';
 import 'dart:io';
 
@@ -517,12 +515,34 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         },
         shareDatabase: (event) async {
           final timeStamp = DateFormat(longDateFormat).format(DateTime.now());
-          final dbFolder = await getApplicationDocumentsDirectory();
+          final dbDir = await getApplicationDocumentsDirectory();
           final file = File(
-            path.join(dbFolder.path, 'database_backup_$timeStamp.sqlite'),
+            path.join(dbDir.path, 'database_backup_$timeStamp.sqlite'),
           );
           await _db.exportInto(file);
           await Share.shareXFiles([XFile(file.path)]);
+        },
+        shareTrack: (event) async {
+          final fileId = event.trail.fileId;
+          if (fileId != null) {
+            final track = await _db.getTrack(fileId);
+            if (track != null) {
+              final dir = await getTemporaryDirectory();
+              var fileName = track.name;
+              if (track.extension != null) {
+                fileName += '.${track.extension}';
+              }
+              final file = File(
+                path.join(dir.path, fileName),
+              );
+              // final sink = file.openWrite()
+              //   // writeAsBytes(trail.info! as List<int>);
+              //   ..write(track.data);
+              // await sink.close();
+              await file.writeAsBytes(track.data);
+              await Share.shareXFiles([XFile(file.path)]);
+            }
+          }
         },
       );
     });
