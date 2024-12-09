@@ -23,7 +23,8 @@ class TrailItemTile extends StatelessWidget {
     var date = '';
     final timestamp = trail.timestamp;
     if (timestamp != null) {
-      date = DateFormat(shortDateFormat).format(DateTime.parse(timestamp).toLocal());
+      date = DateFormat(shortDateFormat)
+          .format(DateTime.parse(timestamp).toLocal());
     }
     return ListTile(
       title: Text(trail.name),

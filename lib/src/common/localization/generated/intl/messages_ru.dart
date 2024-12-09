@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
+  static String m30(limit) => "Максимальный размер ${limit} Мб";
+
   static String m0(version) => "v${version}";
 
   static String m1(time, prevNumber, currentNumber) =>
@@ -160,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Название"),
         "I18nDatabase_trailUrl": MessageLookupByLibrary.simpleMessage("Ссылка"),
         "I18nDatabase_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
+        "I18nDatabase_uploadLimit": m30,
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
         "I18nDrawer_settings":

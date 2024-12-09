@@ -22,19 +22,17 @@ mixin _$TrailsEvent {
     required TResult Function(String name, int? distance, int? elevation,
             String? url, String? description, String? filePath)
         addTrail,
-    required TResult Function(int id, String? name, int? distance,
-            int? elevation, int? fileId, String? url, String? description)
-        updateTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
             int? distance,
             int? elevation,
-            int? fileId,
             String? url,
             String? description,
-            bool? isDeleted)
-        upsertTrail,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)
+        updateTrail,
     required TResult Function(int id) deleteTrail,
     required TResult Function(String filePath) loadTrack,
     required TResult Function() unloadTrack,
@@ -47,12 +45,17 @@ mixin _$TrailsEvent {
     TResult? Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult? Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult? Function(int id)? deleteTrail,
     TResult? Function(String filePath)? loadTrack,
     TResult? Function()? unloadTrack,
@@ -65,12 +68,17 @@ mixin _$TrailsEvent {
     TResult Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult Function(int id)? deleteTrail,
     TResult Function(String filePath)? loadTrack,
     TResult Function()? unloadTrack,
@@ -83,7 +91,6 @@ mixin _$TrailsEvent {
     required TResult Function(_GetTrails value) getTrails,
     required TResult Function(_AddTrail value) addTrail,
     required TResult Function(_UpdateTrail value) updateTrail,
-    required TResult Function(_UpsertTrail value) upsertTrail,
     required TResult Function(_DeleteTrail value) deleteTrail,
     required TResult Function(_LoadTrack value) loadTrack,
     required TResult Function(_UnloadTrack value) unloadTrack,
@@ -95,7 +102,6 @@ mixin _$TrailsEvent {
     TResult? Function(_GetTrails value)? getTrails,
     TResult? Function(_AddTrail value)? addTrail,
     TResult? Function(_UpdateTrail value)? updateTrail,
-    TResult? Function(_UpsertTrail value)? upsertTrail,
     TResult? Function(_DeleteTrail value)? deleteTrail,
     TResult? Function(_LoadTrack value)? loadTrack,
     TResult? Function(_UnloadTrack value)? unloadTrack,
@@ -107,7 +113,6 @@ mixin _$TrailsEvent {
     TResult Function(_GetTrails value)? getTrails,
     TResult Function(_AddTrail value)? addTrail,
     TResult Function(_UpdateTrail value)? updateTrail,
-    TResult Function(_UpsertTrail value)? upsertTrail,
     TResult Function(_DeleteTrail value)? deleteTrail,
     TResult Function(_LoadTrack value)? loadTrack,
     TResult Function(_UnloadTrack value)? unloadTrack,
@@ -183,19 +188,17 @@ class _$GetTrailsImpl implements _GetTrails {
     required TResult Function(String name, int? distance, int? elevation,
             String? url, String? description, String? filePath)
         addTrail,
-    required TResult Function(int id, String? name, int? distance,
-            int? elevation, int? fileId, String? url, String? description)
-        updateTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
             int? distance,
             int? elevation,
-            int? fileId,
             String? url,
             String? description,
-            bool? isDeleted)
-        upsertTrail,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)
+        updateTrail,
     required TResult Function(int id) deleteTrail,
     required TResult Function(String filePath) loadTrack,
     required TResult Function() unloadTrack,
@@ -211,12 +214,17 @@ class _$GetTrailsImpl implements _GetTrails {
     TResult? Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult? Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult? Function(int id)? deleteTrail,
     TResult? Function(String filePath)? loadTrack,
     TResult? Function()? unloadTrack,
@@ -232,12 +240,17 @@ class _$GetTrailsImpl implements _GetTrails {
     TResult Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult Function(int id)? deleteTrail,
     TResult Function(String filePath)? loadTrack,
     TResult Function()? unloadTrack,
@@ -256,7 +269,6 @@ class _$GetTrailsImpl implements _GetTrails {
     required TResult Function(_GetTrails value) getTrails,
     required TResult Function(_AddTrail value) addTrail,
     required TResult Function(_UpdateTrail value) updateTrail,
-    required TResult Function(_UpsertTrail value) upsertTrail,
     required TResult Function(_DeleteTrail value) deleteTrail,
     required TResult Function(_LoadTrack value) loadTrack,
     required TResult Function(_UnloadTrack value) unloadTrack,
@@ -271,7 +283,6 @@ class _$GetTrailsImpl implements _GetTrails {
     TResult? Function(_GetTrails value)? getTrails,
     TResult? Function(_AddTrail value)? addTrail,
     TResult? Function(_UpdateTrail value)? updateTrail,
-    TResult? Function(_UpsertTrail value)? upsertTrail,
     TResult? Function(_DeleteTrail value)? deleteTrail,
     TResult? Function(_LoadTrack value)? loadTrack,
     TResult? Function(_UnloadTrack value)? unloadTrack,
@@ -286,7 +297,6 @@ class _$GetTrailsImpl implements _GetTrails {
     TResult Function(_GetTrails value)? getTrails,
     TResult Function(_AddTrail value)? addTrail,
     TResult Function(_UpdateTrail value)? updateTrail,
-    TResult Function(_UpsertTrail value)? upsertTrail,
     TResult Function(_DeleteTrail value)? deleteTrail,
     TResult Function(_LoadTrack value)? loadTrack,
     TResult Function(_UnloadTrack value)? unloadTrack,
@@ -433,19 +443,17 @@ class _$AddTrailImpl implements _AddTrail {
     required TResult Function(String name, int? distance, int? elevation,
             String? url, String? description, String? filePath)
         addTrail,
-    required TResult Function(int id, String? name, int? distance,
-            int? elevation, int? fileId, String? url, String? description)
-        updateTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
             int? distance,
             int? elevation,
-            int? fileId,
             String? url,
             String? description,
-            bool? isDeleted)
-        upsertTrail,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)
+        updateTrail,
     required TResult Function(int id) deleteTrail,
     required TResult Function(String filePath) loadTrack,
     required TResult Function() unloadTrack,
@@ -461,12 +469,17 @@ class _$AddTrailImpl implements _AddTrail {
     TResult? Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult? Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult? Function(int id)? deleteTrail,
     TResult? Function(String filePath)? loadTrack,
     TResult? Function()? unloadTrack,
@@ -483,12 +496,17 @@ class _$AddTrailImpl implements _AddTrail {
     TResult Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult Function(int id)? deleteTrail,
     TResult Function(String filePath)? loadTrack,
     TResult Function()? unloadTrack,
@@ -507,7 +525,6 @@ class _$AddTrailImpl implements _AddTrail {
     required TResult Function(_GetTrails value) getTrails,
     required TResult Function(_AddTrail value) addTrail,
     required TResult Function(_UpdateTrail value) updateTrail,
-    required TResult Function(_UpsertTrail value) upsertTrail,
     required TResult Function(_DeleteTrail value) deleteTrail,
     required TResult Function(_LoadTrack value) loadTrack,
     required TResult Function(_UnloadTrack value) unloadTrack,
@@ -522,7 +539,6 @@ class _$AddTrailImpl implements _AddTrail {
     TResult? Function(_GetTrails value)? getTrails,
     TResult? Function(_AddTrail value)? addTrail,
     TResult? Function(_UpdateTrail value)? updateTrail,
-    TResult? Function(_UpsertTrail value)? upsertTrail,
     TResult? Function(_DeleteTrail value)? deleteTrail,
     TResult? Function(_LoadTrack value)? loadTrack,
     TResult? Function(_UnloadTrack value)? unloadTrack,
@@ -537,7 +553,6 @@ class _$AddTrailImpl implements _AddTrail {
     TResult Function(_GetTrails value)? getTrails,
     TResult Function(_AddTrail value)? addTrail,
     TResult Function(_UpdateTrail value)? updateTrail,
-    TResult Function(_UpsertTrail value)? upsertTrail,
     TResult Function(_DeleteTrail value)? deleteTrail,
     TResult Function(_LoadTrack value)? loadTrack,
     TResult Function(_UnloadTrack value)? unloadTrack,
@@ -585,9 +600,11 @@ abstract class _$$UpdateTrailImplCopyWith<$Res> {
       String? name,
       int? distance,
       int? elevation,
-      int? fileId,
       String? url,
-      String? description});
+      String? description,
+      String? filePath,
+      int? fileId,
+      bool deleteTrack});
 }
 
 /// @nodoc
@@ -607,9 +624,11 @@ class __$$UpdateTrailImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? distance = freezed,
     Object? elevation = freezed,
-    Object? fileId = freezed,
     Object? url = freezed,
     Object? description = freezed,
+    Object? filePath = freezed,
+    Object? fileId = freezed,
+    Object? deleteTrack = null,
   }) {
     return _then(_$UpdateTrailImpl(
       id: null == id
@@ -628,10 +647,6 @@ class __$$UpdateTrailImplCopyWithImpl<$Res>
           ? _value.elevation
           : elevation // ignore: cast_nullable_to_non_nullable
               as int?,
-      fileId: freezed == fileId
-          ? _value.fileId
-          : fileId // ignore: cast_nullable_to_non_nullable
-              as int?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -640,6 +655,18 @@ class __$$UpdateTrailImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      filePath: freezed == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fileId: freezed == fileId
+          ? _value.fileId
+          : fileId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      deleteTrack: null == deleteTrack
+          ? _value.deleteTrack
+          : deleteTrack // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -652,9 +679,11 @@ class _$UpdateTrailImpl implements _UpdateTrail {
       this.name,
       this.distance,
       this.elevation,
-      this.fileId,
       this.url,
-      this.description});
+      this.description,
+      this.filePath,
+      this.fileId,
+      this.deleteTrack = false});
 
   @override
   final int id;
@@ -665,15 +694,20 @@ class _$UpdateTrailImpl implements _UpdateTrail {
   @override
   final int? elevation;
   @override
-  final int? fileId;
-  @override
   final String? url;
   @override
   final String? description;
+  @override
+  final String? filePath;
+  @override
+  final int? fileId;
+  @override
+  @JsonKey()
+  final bool deleteTrack;
 
   @override
   String toString() {
-    return 'TrailsEvent.updateTrail(id: $id, name: $name, distance: $distance, elevation: $elevation, fileId: $fileId, url: $url, description: $description)';
+    return 'TrailsEvent.updateTrail(id: $id, name: $name, distance: $distance, elevation: $elevation, url: $url, description: $description, filePath: $filePath, fileId: $fileId, deleteTrack: $deleteTrack)';
   }
 
   @override
@@ -687,15 +721,19 @@ class _$UpdateTrailImpl implements _UpdateTrail {
                 other.distance == distance) &&
             (identical(other.elevation, elevation) ||
                 other.elevation == elevation) &&
-            (identical(other.fileId, fileId) || other.fileId == fileId) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.filePath, filePath) ||
+                other.filePath == filePath) &&
+            (identical(other.fileId, fileId) || other.fileId == fileId) &&
+            (identical(other.deleteTrack, deleteTrack) ||
+                other.deleteTrack == deleteTrack));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, distance, elevation, fileId, url, description);
+  int get hashCode => Object.hash(runtimeType, id, name, distance, elevation,
+      url, description, filePath, fileId, deleteTrack);
 
   /// Create a copy of TrailsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -712,25 +750,24 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     required TResult Function(String name, int? distance, int? elevation,
             String? url, String? description, String? filePath)
         addTrail,
-    required TResult Function(int id, String? name, int? distance,
-            int? elevation, int? fileId, String? url, String? description)
-        updateTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
             int? distance,
             int? elevation,
-            int? fileId,
             String? url,
             String? description,
-            bool? isDeleted)
-        upsertTrail,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)
+        updateTrail,
     required TResult Function(int id) deleteTrail,
     required TResult Function(String filePath) loadTrack,
     required TResult Function() unloadTrack,
     required TResult Function(TrackFile track) emitTrack,
   }) {
-    return updateTrail(id, name, distance, elevation, fileId, url, description);
+    return updateTrail(id, name, distance, elevation, url, description,
+        filePath, fileId, deleteTrack);
   }
 
   @override
@@ -740,19 +777,24 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     TResult? Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult? Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult? Function(int id)? deleteTrail,
     TResult? Function(String filePath)? loadTrack,
     TResult? Function()? unloadTrack,
     TResult? Function(TrackFile track)? emitTrack,
   }) {
-    return updateTrail?.call(
-        id, name, distance, elevation, fileId, url, description);
+    return updateTrail?.call(id, name, distance, elevation, url, description,
+        filePath, fileId, deleteTrack);
   }
 
   @override
@@ -762,12 +804,17 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     TResult Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult Function(int id)? deleteTrail,
     TResult Function(String filePath)? loadTrack,
     TResult Function()? unloadTrack,
@@ -775,8 +822,8 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     required TResult orElse(),
   }) {
     if (updateTrail != null) {
-      return updateTrail(
-          id, name, distance, elevation, fileId, url, description);
+      return updateTrail(id, name, distance, elevation, url, description,
+          filePath, fileId, deleteTrack);
     }
     return orElse();
   }
@@ -787,7 +834,6 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     required TResult Function(_GetTrails value) getTrails,
     required TResult Function(_AddTrail value) addTrail,
     required TResult Function(_UpdateTrail value) updateTrail,
-    required TResult Function(_UpsertTrail value) upsertTrail,
     required TResult Function(_DeleteTrail value) deleteTrail,
     required TResult Function(_LoadTrack value) loadTrack,
     required TResult Function(_UnloadTrack value) unloadTrack,
@@ -802,7 +848,6 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     TResult? Function(_GetTrails value)? getTrails,
     TResult? Function(_AddTrail value)? addTrail,
     TResult? Function(_UpdateTrail value)? updateTrail,
-    TResult? Function(_UpsertTrail value)? upsertTrail,
     TResult? Function(_DeleteTrail value)? deleteTrail,
     TResult? Function(_LoadTrack value)? loadTrack,
     TResult? Function(_UnloadTrack value)? unloadTrack,
@@ -817,7 +862,6 @@ class _$UpdateTrailImpl implements _UpdateTrail {
     TResult Function(_GetTrails value)? getTrails,
     TResult Function(_AddTrail value)? addTrail,
     TResult Function(_UpdateTrail value)? updateTrail,
-    TResult Function(_UpsertTrail value)? upsertTrail,
     TResult Function(_DeleteTrail value)? deleteTrail,
     TResult Function(_LoadTrack value)? loadTrack,
     TResult Function(_UnloadTrack value)? unloadTrack,
@@ -837,318 +881,26 @@ abstract class _UpdateTrail implements TrailsEvent {
       final String? name,
       final int? distance,
       final int? elevation,
-      final int? fileId,
       final String? url,
-      final String? description}) = _$UpdateTrailImpl;
+      final String? description,
+      final String? filePath,
+      final int? fileId,
+      final bool deleteTrack}) = _$UpdateTrailImpl;
 
   int get id;
   String? get name;
   int? get distance;
   int? get elevation;
-  int? get fileId;
   String? get url;
   String? get description;
+  String? get filePath;
+  int? get fileId;
+  bool get deleteTrack;
 
   /// Create a copy of TrailsEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateTrailImplCopyWith<_$UpdateTrailImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpsertTrailImplCopyWith<$Res> {
-  factory _$$UpsertTrailImplCopyWith(
-          _$UpsertTrailImpl value, $Res Function(_$UpsertTrailImpl) then) =
-      __$$UpsertTrailImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {int? id,
-      String? name,
-      int? distance,
-      int? elevation,
-      int? fileId,
-      String? url,
-      String? description,
-      bool? isDeleted});
-}
-
-/// @nodoc
-class __$$UpsertTrailImplCopyWithImpl<$Res>
-    extends _$TrailsEventCopyWithImpl<$Res, _$UpsertTrailImpl>
-    implements _$$UpsertTrailImplCopyWith<$Res> {
-  __$$UpsertTrailImplCopyWithImpl(
-      _$UpsertTrailImpl _value, $Res Function(_$UpsertTrailImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TrailsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? distance = freezed,
-    Object? elevation = freezed,
-    Object? fileId = freezed,
-    Object? url = freezed,
-    Object? description = freezed,
-    Object? isDeleted = freezed,
-  }) {
-    return _then(_$UpsertTrailImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      distance: freezed == distance
-          ? _value.distance
-          : distance // ignore: cast_nullable_to_non_nullable
-              as int?,
-      elevation: freezed == elevation
-          ? _value.elevation
-          : elevation // ignore: cast_nullable_to_non_nullable
-              as int?,
-      fileId: freezed == fileId
-          ? _value.fileId
-          : fileId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isDeleted: freezed == isDeleted
-          ? _value.isDeleted
-          : isDeleted // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UpsertTrailImpl implements _UpsertTrail {
-  const _$UpsertTrailImpl(
-      {this.id,
-      this.name,
-      this.distance,
-      this.elevation,
-      this.fileId,
-      this.url,
-      this.description,
-      this.isDeleted});
-
-  @override
-  final int? id;
-  @override
-  final String? name;
-  @override
-  final int? distance;
-  @override
-  final int? elevation;
-  @override
-  final int? fileId;
-  @override
-  final String? url;
-  @override
-  final String? description;
-  @override
-  final bool? isDeleted;
-
-  @override
-  String toString() {
-    return 'TrailsEvent.upsertTrail(id: $id, name: $name, distance: $distance, elevation: $elevation, fileId: $fileId, url: $url, description: $description, isDeleted: $isDeleted)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpsertTrailImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.distance, distance) ||
-                other.distance == distance) &&
-            (identical(other.elevation, elevation) ||
-                other.elevation == elevation) &&
-            (identical(other.fileId, fileId) || other.fileId == fileId) &&
-            (identical(other.url, url) || other.url == url) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.isDeleted, isDeleted) ||
-                other.isDeleted == isDeleted));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name, distance, elevation,
-      fileId, url, description, isDeleted);
-
-  /// Create a copy of TrailsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpsertTrailImplCopyWith<_$UpsertTrailImpl> get copyWith =>
-      __$$UpsertTrailImplCopyWithImpl<_$UpsertTrailImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getTrails,
-    required TResult Function(String name, int? distance, int? elevation,
-            String? url, String? description, String? filePath)
-        addTrail,
-    required TResult Function(int id, String? name, int? distance,
-            int? elevation, int? fileId, String? url, String? description)
-        updateTrail,
-    required TResult Function(
-            int? id,
-            String? name,
-            int? distance,
-            int? elevation,
-            int? fileId,
-            String? url,
-            String? description,
-            bool? isDeleted)
-        upsertTrail,
-    required TResult Function(int id) deleteTrail,
-    required TResult Function(String filePath) loadTrack,
-    required TResult Function() unloadTrack,
-    required TResult Function(TrackFile track) emitTrack,
-  }) {
-    return upsertTrail(
-        id, name, distance, elevation, fileId, url, description, isDeleted);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getTrails,
-    TResult? Function(String name, int? distance, int? elevation, String? url,
-            String? description, String? filePath)?
-        addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
-        updateTrail,
-    TResult? Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
-    TResult? Function(int id)? deleteTrail,
-    TResult? Function(String filePath)? loadTrack,
-    TResult? Function()? unloadTrack,
-    TResult? Function(TrackFile track)? emitTrack,
-  }) {
-    return upsertTrail?.call(
-        id, name, distance, elevation, fileId, url, description, isDeleted);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getTrails,
-    TResult Function(String name, int? distance, int? elevation, String? url,
-            String? description, String? filePath)?
-        addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
-        updateTrail,
-    TResult Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
-    TResult Function(int id)? deleteTrail,
-    TResult Function(String filePath)? loadTrack,
-    TResult Function()? unloadTrack,
-    TResult Function(TrackFile track)? emitTrack,
-    required TResult orElse(),
-  }) {
-    if (upsertTrail != null) {
-      return upsertTrail(
-          id, name, distance, elevation, fileId, url, description, isDeleted);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetTrails value) getTrails,
-    required TResult Function(_AddTrail value) addTrail,
-    required TResult Function(_UpdateTrail value) updateTrail,
-    required TResult Function(_UpsertTrail value) upsertTrail,
-    required TResult Function(_DeleteTrail value) deleteTrail,
-    required TResult Function(_LoadTrack value) loadTrack,
-    required TResult Function(_UnloadTrack value) unloadTrack,
-    required TResult Function(_EmitTrack value) emitTrack,
-  }) {
-    return upsertTrail(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetTrails value)? getTrails,
-    TResult? Function(_AddTrail value)? addTrail,
-    TResult? Function(_UpdateTrail value)? updateTrail,
-    TResult? Function(_UpsertTrail value)? upsertTrail,
-    TResult? Function(_DeleteTrail value)? deleteTrail,
-    TResult? Function(_LoadTrack value)? loadTrack,
-    TResult? Function(_UnloadTrack value)? unloadTrack,
-    TResult? Function(_EmitTrack value)? emitTrack,
-  }) {
-    return upsertTrail?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetTrails value)? getTrails,
-    TResult Function(_AddTrail value)? addTrail,
-    TResult Function(_UpdateTrail value)? updateTrail,
-    TResult Function(_UpsertTrail value)? upsertTrail,
-    TResult Function(_DeleteTrail value)? deleteTrail,
-    TResult Function(_LoadTrack value)? loadTrack,
-    TResult Function(_UnloadTrack value)? unloadTrack,
-    TResult Function(_EmitTrack value)? emitTrack,
-    required TResult orElse(),
-  }) {
-    if (upsertTrail != null) {
-      return upsertTrail(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpsertTrail implements TrailsEvent {
-  const factory _UpsertTrail(
-      {final int? id,
-      final String? name,
-      final int? distance,
-      final int? elevation,
-      final int? fileId,
-      final String? url,
-      final String? description,
-      final bool? isDeleted}) = _$UpsertTrailImpl;
-
-  int? get id;
-  String? get name;
-  int? get distance;
-  int? get elevation;
-  int? get fileId;
-  String? get url;
-  String? get description;
-  bool? get isDeleted;
-
-  /// Create a copy of TrailsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpsertTrailImplCopyWith<_$UpsertTrailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1224,19 +976,17 @@ class _$DeleteTrailImpl implements _DeleteTrail {
     required TResult Function(String name, int? distance, int? elevation,
             String? url, String? description, String? filePath)
         addTrail,
-    required TResult Function(int id, String? name, int? distance,
-            int? elevation, int? fileId, String? url, String? description)
-        updateTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
             int? distance,
             int? elevation,
-            int? fileId,
             String? url,
             String? description,
-            bool? isDeleted)
-        upsertTrail,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)
+        updateTrail,
     required TResult Function(int id) deleteTrail,
     required TResult Function(String filePath) loadTrack,
     required TResult Function() unloadTrack,
@@ -1252,12 +1002,17 @@ class _$DeleteTrailImpl implements _DeleteTrail {
     TResult? Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult? Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult? Function(int id)? deleteTrail,
     TResult? Function(String filePath)? loadTrack,
     TResult? Function()? unloadTrack,
@@ -1273,12 +1028,17 @@ class _$DeleteTrailImpl implements _DeleteTrail {
     TResult Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult Function(int id)? deleteTrail,
     TResult Function(String filePath)? loadTrack,
     TResult Function()? unloadTrack,
@@ -1297,7 +1057,6 @@ class _$DeleteTrailImpl implements _DeleteTrail {
     required TResult Function(_GetTrails value) getTrails,
     required TResult Function(_AddTrail value) addTrail,
     required TResult Function(_UpdateTrail value) updateTrail,
-    required TResult Function(_UpsertTrail value) upsertTrail,
     required TResult Function(_DeleteTrail value) deleteTrail,
     required TResult Function(_LoadTrack value) loadTrack,
     required TResult Function(_UnloadTrack value) unloadTrack,
@@ -1312,7 +1071,6 @@ class _$DeleteTrailImpl implements _DeleteTrail {
     TResult? Function(_GetTrails value)? getTrails,
     TResult? Function(_AddTrail value)? addTrail,
     TResult? Function(_UpdateTrail value)? updateTrail,
-    TResult? Function(_UpsertTrail value)? upsertTrail,
     TResult? Function(_DeleteTrail value)? deleteTrail,
     TResult? Function(_LoadTrack value)? loadTrack,
     TResult? Function(_UnloadTrack value)? unloadTrack,
@@ -1327,7 +1085,6 @@ class _$DeleteTrailImpl implements _DeleteTrail {
     TResult Function(_GetTrails value)? getTrails,
     TResult Function(_AddTrail value)? addTrail,
     TResult Function(_UpdateTrail value)? updateTrail,
-    TResult Function(_UpsertTrail value)? upsertTrail,
     TResult Function(_DeleteTrail value)? deleteTrail,
     TResult Function(_LoadTrack value)? loadTrack,
     TResult Function(_UnloadTrack value)? unloadTrack,
@@ -1426,19 +1183,17 @@ class _$LoadTrackImpl implements _LoadTrack {
     required TResult Function(String name, int? distance, int? elevation,
             String? url, String? description, String? filePath)
         addTrail,
-    required TResult Function(int id, String? name, int? distance,
-            int? elevation, int? fileId, String? url, String? description)
-        updateTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
             int? distance,
             int? elevation,
-            int? fileId,
             String? url,
             String? description,
-            bool? isDeleted)
-        upsertTrail,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)
+        updateTrail,
     required TResult Function(int id) deleteTrail,
     required TResult Function(String filePath) loadTrack,
     required TResult Function() unloadTrack,
@@ -1454,12 +1209,17 @@ class _$LoadTrackImpl implements _LoadTrack {
     TResult? Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult? Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult? Function(int id)? deleteTrail,
     TResult? Function(String filePath)? loadTrack,
     TResult? Function()? unloadTrack,
@@ -1475,12 +1235,17 @@ class _$LoadTrackImpl implements _LoadTrack {
     TResult Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult Function(int id)? deleteTrail,
     TResult Function(String filePath)? loadTrack,
     TResult Function()? unloadTrack,
@@ -1499,7 +1264,6 @@ class _$LoadTrackImpl implements _LoadTrack {
     required TResult Function(_GetTrails value) getTrails,
     required TResult Function(_AddTrail value) addTrail,
     required TResult Function(_UpdateTrail value) updateTrail,
-    required TResult Function(_UpsertTrail value) upsertTrail,
     required TResult Function(_DeleteTrail value) deleteTrail,
     required TResult Function(_LoadTrack value) loadTrack,
     required TResult Function(_UnloadTrack value) unloadTrack,
@@ -1514,7 +1278,6 @@ class _$LoadTrackImpl implements _LoadTrack {
     TResult? Function(_GetTrails value)? getTrails,
     TResult? Function(_AddTrail value)? addTrail,
     TResult? Function(_UpdateTrail value)? updateTrail,
-    TResult? Function(_UpsertTrail value)? upsertTrail,
     TResult? Function(_DeleteTrail value)? deleteTrail,
     TResult? Function(_LoadTrack value)? loadTrack,
     TResult? Function(_UnloadTrack value)? unloadTrack,
@@ -1529,7 +1292,6 @@ class _$LoadTrackImpl implements _LoadTrack {
     TResult Function(_GetTrails value)? getTrails,
     TResult Function(_AddTrail value)? addTrail,
     TResult Function(_UpdateTrail value)? updateTrail,
-    TResult Function(_UpsertTrail value)? upsertTrail,
     TResult Function(_DeleteTrail value)? deleteTrail,
     TResult Function(_LoadTrack value)? loadTrack,
     TResult Function(_UnloadTrack value)? unloadTrack,
@@ -1600,19 +1362,17 @@ class _$UnloadTrackImpl implements _UnloadTrack {
     required TResult Function(String name, int? distance, int? elevation,
             String? url, String? description, String? filePath)
         addTrail,
-    required TResult Function(int id, String? name, int? distance,
-            int? elevation, int? fileId, String? url, String? description)
-        updateTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
             int? distance,
             int? elevation,
-            int? fileId,
             String? url,
             String? description,
-            bool? isDeleted)
-        upsertTrail,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)
+        updateTrail,
     required TResult Function(int id) deleteTrail,
     required TResult Function(String filePath) loadTrack,
     required TResult Function() unloadTrack,
@@ -1628,12 +1388,17 @@ class _$UnloadTrackImpl implements _UnloadTrack {
     TResult? Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult? Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult? Function(int id)? deleteTrail,
     TResult? Function(String filePath)? loadTrack,
     TResult? Function()? unloadTrack,
@@ -1649,12 +1414,17 @@ class _$UnloadTrackImpl implements _UnloadTrack {
     TResult Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult Function(int id)? deleteTrail,
     TResult Function(String filePath)? loadTrack,
     TResult Function()? unloadTrack,
@@ -1673,7 +1443,6 @@ class _$UnloadTrackImpl implements _UnloadTrack {
     required TResult Function(_GetTrails value) getTrails,
     required TResult Function(_AddTrail value) addTrail,
     required TResult Function(_UpdateTrail value) updateTrail,
-    required TResult Function(_UpsertTrail value) upsertTrail,
     required TResult Function(_DeleteTrail value) deleteTrail,
     required TResult Function(_LoadTrack value) loadTrack,
     required TResult Function(_UnloadTrack value) unloadTrack,
@@ -1688,7 +1457,6 @@ class _$UnloadTrackImpl implements _UnloadTrack {
     TResult? Function(_GetTrails value)? getTrails,
     TResult? Function(_AddTrail value)? addTrail,
     TResult? Function(_UpdateTrail value)? updateTrail,
-    TResult? Function(_UpsertTrail value)? upsertTrail,
     TResult? Function(_DeleteTrail value)? deleteTrail,
     TResult? Function(_LoadTrack value)? loadTrack,
     TResult? Function(_UnloadTrack value)? unloadTrack,
@@ -1703,7 +1471,6 @@ class _$UnloadTrackImpl implements _UnloadTrack {
     TResult Function(_GetTrails value)? getTrails,
     TResult Function(_AddTrail value)? addTrail,
     TResult Function(_UpdateTrail value)? updateTrail,
-    TResult Function(_UpsertTrail value)? upsertTrail,
     TResult Function(_DeleteTrail value)? deleteTrail,
     TResult Function(_LoadTrack value)? loadTrack,
     TResult Function(_UnloadTrack value)? unloadTrack,
@@ -1794,19 +1561,17 @@ class _$EmitTrackImpl implements _EmitTrack {
     required TResult Function(String name, int? distance, int? elevation,
             String? url, String? description, String? filePath)
         addTrail,
-    required TResult Function(int id, String? name, int? distance,
-            int? elevation, int? fileId, String? url, String? description)
-        updateTrail,
     required TResult Function(
-            int? id,
+            int id,
             String? name,
             int? distance,
             int? elevation,
-            int? fileId,
             String? url,
             String? description,
-            bool? isDeleted)
-        upsertTrail,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)
+        updateTrail,
     required TResult Function(int id) deleteTrail,
     required TResult Function(String filePath) loadTrack,
     required TResult Function() unloadTrack,
@@ -1822,12 +1587,17 @@ class _$EmitTrackImpl implements _EmitTrack {
     TResult? Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult? Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult? Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult? Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult? Function(int id)? deleteTrail,
     TResult? Function(String filePath)? loadTrack,
     TResult? Function()? unloadTrack,
@@ -1843,12 +1613,17 @@ class _$EmitTrackImpl implements _EmitTrack {
     TResult Function(String name, int? distance, int? elevation, String? url,
             String? description, String? filePath)?
         addTrail,
-    TResult Function(int id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description)?
+    TResult Function(
+            int id,
+            String? name,
+            int? distance,
+            int? elevation,
+            String? url,
+            String? description,
+            String? filePath,
+            int? fileId,
+            bool deleteTrack)?
         updateTrail,
-    TResult Function(int? id, String? name, int? distance, int? elevation,
-            int? fileId, String? url, String? description, bool? isDeleted)?
-        upsertTrail,
     TResult Function(int id)? deleteTrail,
     TResult Function(String filePath)? loadTrack,
     TResult Function()? unloadTrack,
@@ -1867,7 +1642,6 @@ class _$EmitTrackImpl implements _EmitTrack {
     required TResult Function(_GetTrails value) getTrails,
     required TResult Function(_AddTrail value) addTrail,
     required TResult Function(_UpdateTrail value) updateTrail,
-    required TResult Function(_UpsertTrail value) upsertTrail,
     required TResult Function(_DeleteTrail value) deleteTrail,
     required TResult Function(_LoadTrack value) loadTrack,
     required TResult Function(_UnloadTrack value) unloadTrack,
@@ -1882,7 +1656,6 @@ class _$EmitTrackImpl implements _EmitTrack {
     TResult? Function(_GetTrails value)? getTrails,
     TResult? Function(_AddTrail value)? addTrail,
     TResult? Function(_UpdateTrail value)? updateTrail,
-    TResult? Function(_UpsertTrail value)? upsertTrail,
     TResult? Function(_DeleteTrail value)? deleteTrail,
     TResult? Function(_LoadTrack value)? loadTrack,
     TResult? Function(_UnloadTrack value)? unloadTrack,
@@ -1897,7 +1670,6 @@ class _$EmitTrackImpl implements _EmitTrack {
     TResult Function(_GetTrails value)? getTrails,
     TResult Function(_AddTrail value)? addTrail,
     TResult Function(_UpdateTrail value)? updateTrail,
-    TResult Function(_UpsertTrail value)? upsertTrail,
     TResult Function(_DeleteTrail value)? deleteTrail,
     TResult Function(_LoadTrack value)? loadTrack,
     TResult Function(_UnloadTrack value)? unloadTrack,

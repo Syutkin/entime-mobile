@@ -12,7 +12,7 @@ import 'package:sqlite3/sqlite3.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 
 import '../../../common/logger/logger.dart';
-import '../../../common/utils/extension_on_string.dart';
+import '../../../common/utils/extensions.dart';
 import '../../log/log.dart';
 
 part 'app_database.g.dart';
@@ -260,7 +260,7 @@ class AppDatabase extends _$AppDatabase {
     String? name,
     int? distance,
     int? elevation,
-    int? fileId,
+    Value<int?>? fileId,
     String? url,
     String? description,
   }) async {
@@ -281,7 +281,7 @@ class AppDatabase extends _$AppDatabase {
     String? name,
     int? distance,
     int? elevation,
-    int? fileId,
+    Value<int?>? fileId,
     String? url,
     String? description,
     bool? isDeleted,
@@ -295,7 +295,7 @@ class AppDatabase extends _$AppDatabase {
         url: url != null ? Value(url) : const Value.absent(),
         description:
             description != null ? Value(description) : const Value.absent(),
-        fileId: fileId != null ? Value(fileId) : const Value.absent(),
+        fileId: fileId ?? const Value.absent(),
         isDeleted: isDeleted != null ? Value(isDeleted) : const Value.absent(),
       ),
     );
@@ -314,7 +314,7 @@ class AppDatabase extends _$AppDatabase {
 
   /// Добавляет трек
   ///
-  /// Если есть трек с [track.hashSha1] и [track.size], то возвращает его [id]
+  /// Если есть трек с hashSha1 и size, то возвращает его id
   Future<int> addTrack(TrackFile track) async {
     final trackId =
         await _getTrackIdByHash(hashSha1: track.hashSha1, size: track.size)

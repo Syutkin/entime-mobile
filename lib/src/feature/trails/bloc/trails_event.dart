@@ -18,21 +18,12 @@ class TrailsEvent with _$TrailsEvent {
     String? name,
     int? distance,
     int? elevation,
-    int? fileId,
     String? url,
     String? description,
+    String? filePath,
+    int? fileId,
+    @Default(false) bool deleteTrack,
   }) = _UpdateTrail;
-
-  const factory TrailsEvent.upsertTrail({
-    int? id,
-    String? name,
-    int? distance,
-    int? elevation,
-    int? fileId,
-    String? url,
-    String? description,
-    bool? isDeleted,
-  }) = _UpsertTrail;
 
   const factory TrailsEvent.deleteTrail(int id) = _DeleteTrail;
 

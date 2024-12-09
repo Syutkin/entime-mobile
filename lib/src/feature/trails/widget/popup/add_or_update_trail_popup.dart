@@ -13,17 +13,50 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
   var distance = trail?.distance;
   var elevation = trail?.elevation;
   PlatformFile? file;
-  // var gpxTrack = trail?.gpxTrack;
-  var fileExtension = trail?.fileExtension;
   var url = trail?.url;
   var description = trail?.description;
-  // var isTrackDeleted = false;
+  var deleteTrack = false;
 
   final formKey = GlobalKey<FormState>();
 
   final nameController = TextEditingController()..text = name;
   final filePickerController = TextEditingController()
-    ..text = fileExtension ?? '';
+    ..text = (trail?.fileName ?? '') + (trail?.fileExtension ?? '');
+
+  IconButton addTrackIconButton(TrailsBloc bloc) {
+    return IconButton(
+      onPressed: () async {
+        file = (await FilePicker.platform.pickFiles(
+                // type: FileType.custom,
+                // allowedExtensions: ['csv'],
+                // withData: true,
+                ))
+            ?.files
+            .first;
+        final path = file?.path;
+        if (file != null && path != null) {
+          bloc.add(TrailsEvent.loadTrack(filePath: path));
+          filePickerController.text = file?.name ?? '';
+          if (nameController.text.isEmpty) {
+            final name = (file?.name.split('.')?..removeLast())?.join('.');
+            nameController.text = name ?? '';
+          }
+        }
+      },
+      icon: const Icon(Icons.add_location_alt_outlined),
+    );
+  }
+
+  IconButton removeTrackIconButton(TrailsBloc bloc) {
+    return IconButton(
+      onPressed: () async {
+        deleteTrack = true;
+        bloc.add(const TrailsEvent.unloadTrack());
+        filePickerController.text = '';
+      },
+      icon: const Icon(Icons.delete),
+    );
+  }
 
   return showDialog<void>(
     context: context,
@@ -73,6 +106,21 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                               Localization.current.I18nDatabase_trailGpxTrack,
                         ),
                         keyboardType: TextInputType.none,
+                        autovalidateMode: AutovalidateMode.always,
+                        validator: (_) {
+                          return state.maybeMap(
+                              initialized: (state) {
+                                final size = state.track?.size;
+                                // max upload size in bytes
+                                if (size != null && size > uploadMaxSize) {
+                                  return Localization.current
+                                      .I18nDatabase_uploadLimit(uploadMaxSize/1024/1024);
+                                } else {
+                                  return null;
+                                }
+                              },
+                              orElse: () => null);
+                        },
                       ),
                     ),
                     state.map(
@@ -82,48 +130,21 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                       initialized: (state) {
                         final bloc = context.read<TrailsBloc>();
                         if (state.track == null) {
-                          return IconButton(
-                            onPressed: () async {
-                              file = (await FilePicker.platform.pickFiles(
-                                      // type: FileType.custom,
-                                      // allowedExtensions: ['csv'],
-                                      // withData: true,
-                                      ))
-                                  ?.files
-                                  .first;
-                              final path = file?.path;
-                              if (file != null && path != null) {
-                                bloc.add(TrailsEvent.loadTrack(filePath: path));
-                                filePickerController.text = file?.name ?? '';
-                                if (nameController.text.isEmpty) {
-                                  final name = (file?.name.split('.')
-                                        ?..removeLast())
-                                      ?.join('.');
-                                  nameController.text = name ?? '';
-                                }
-                              }
-                            },
-                            icon: const Icon(Icons.add_location_alt_outlined),
-                          );
+                          return addTrackIconButton(bloc);
                         } else {
-                          return IconButton(
-                            onPressed: () async {
-                              bloc.add(const TrailsEvent.unloadTrack());
-                              filePickerController.text = '';
-                            },
-                            icon: const Icon(Icons.delete),
-                          );
+                          return removeTrackIconButton(bloc);
                         }
                       },
                       loadingTrack: (state) {
                         final size = Theme.of(context).iconTheme.size ?? 24;
                         return Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(12),
                           child: SizedBox(
                             height: size,
                             width: size,
                             child: const Center(
-                                child: CircularProgressIndicator()),
+                              child: CircularProgressIndicator(),
+                            ),
                           ),
                         );
                       },
@@ -226,70 +247,33 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
           onPressed: () {
             if (formKey.currentState!.validate()) {
               final path = file?.path;
-              // ToDo: вот тут планируется добавлять/удалять трейл и трек
-              // Надо наверно забить на апсерт, и добавление/обновление определять по
-              // trail == null
-
               // Создаём новую запись
               if (trail == null) {
-                if (path == null) {
-                  // Новый трейл без трека
-                  context.read<TrailsBloc>().add(
-                        TrailsEvent.addTrail(
-                          name: name,
-                          elevation: elevation,
-                          distance: distance,
-                          url: url,
-                          description: description,
-                        ),
-                      );
-                } else {
-                  // Новый трейл с файлом
-                  context.read<TrailsBloc>().add(
-                        TrailsEvent.addTrail(
-                          name: name,
-                          elevation: elevation,
-                          distance: distance,
-                          url: url,
-                          description: description,
-                          filePath: path,
-                        ),
-                      );
-                }
+                context.read<TrailsBloc>().add(
+                      TrailsEvent.addTrail(
+                        name: name,
+                        elevation: elevation,
+                        distance: distance,
+                        url: url,
+                        description: description,
+                        filePath: path,
+                      ),
+                    );
               } else {
-                // ToDo: Редактируем трейл
-                if (path != null) {
-                  try {
-                    context.read<TrailsBloc>().add(
-                          TrailsEvent.upsertTrail(
-                            id: trail.id,
-                            name: name,
-                            elevation: elevation,
-                            distance: distance,
-                            // filePath: path,
-                            // gpxTrack: File(path).readAsBytesSync(),
-                            url: url,
-                            description: description,
-                            // fileExtension: path.split('.').last,
-                          ),
-                        );
-                  } on FileSystemException catch (e) {
-                    logger.e('Trails -> Can not load gpx file: $e');
-                  }
-                }
+                context.read<TrailsBloc>().add(
+                      TrailsEvent.updateTrail(
+                        id: trail.id,
+                        name: name,
+                        elevation: elevation,
+                        distance: distance,
+                        url: url,
+                        description: description,
+                        fileId: trail.fileId,
+                        deleteTrack: deleteTrack,
+                        filePath: path,
+                      ),
+                    );
               }
-              // context.read<TrailsBloc>().add(
-              //       TrailsEvent.upsertTrail(
-              //         id: trail?.id,
-              //         name: name,
-              //         elevation: elevation,
-              //         distance: distance,
-              //         // gpxTrack: gpxTrack,
-              //         url: url,
-              //         description: description,
-              //         // fileExtension: fileExtension,
-              //       ),
-              //     );
               Navigator.of(context).pop();
             }
           },

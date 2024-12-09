@@ -14,9 +14,9 @@ class I18nCore {
       );
 
   static String get share => Intl.message(
-    'Поделиться',
-    name: 'I18nCore_share',
-  );
+        'Поделиться',
+        name: 'I18nCore_share',
+      );
 
   static String get warning => Intl.message(
         'Предупреждение',
@@ -1270,6 +1270,14 @@ class I18nDatabase {
         'Активен',
         name: 'I18nDatabase_trailIsActive',
       );
+
+  static String uploadLimit(double limit) {
+    return Intl.message(
+      'Максимальный размер $limit Мб',
+      name: 'I18nDatabase_uploadLimit',
+      args: [limit],
+    );
+  }
 }
 
 class I18nNtp {

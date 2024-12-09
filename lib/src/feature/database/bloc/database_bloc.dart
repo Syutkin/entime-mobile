@@ -535,10 +535,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               final file = File(
                 path.join(dir.path, fileName),
               );
-              final sink = file.openWrite()
-                // writeAsBytes(trail.info! as List<int>);
-                ..write(track.data);
-              await sink.close();
+              // final sink = file.openWrite()
+              //   // writeAsBytes(trail.info! as List<int>);
+              //   ..write(track.data);
+              // await sink.close();
+              await file.writeAsBytes(track.data);
               await Share.shareXFiles([XFile(file.path)]);
             }
           }

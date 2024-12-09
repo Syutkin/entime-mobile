@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../common/utils/extension_on_string.dart';
+import '../../../common/utils/extensions.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../database/drift/app_database.dart';
 import '../model/tick.dart';

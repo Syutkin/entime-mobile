@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crypto/crypto.dart';
+import 'package:drift/drift.dart' hide JsonKey;
+import 'package:entime/src/common/utils/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:path/path.dart' as path;
 
 import '../../../common/logger/logger.dart';
+import '../../../constants/config.dart';
 import '../../database/database.dart';
 
 part 'trails_bloc.freezed.dart';
@@ -35,32 +37,19 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
         },
         addTrail: (_AddTrail event) async {
           int? trackId;
+          final filePath = event.filePath;
           // Сохраняем трек если указан путь к файлу
-          if (event.filePath != null && event.filePath!.isNotEmpty) {
+          if (filePath != null && filePath.isNotEmpty) {
             await state.whenOrNull(
               initialized: (_, track) async {
-                final startTime = DateTime.now();
                 if (track != null) {
                   trackId = await _db.addTrack(track);
-                  // trackId = await _db.managers.trackFiles.create(
-                  //   (o) => o(
-                  //     name: track.name,
-                  //     data: track.data,
-                  //     hashSha1: track.hashSha1,
-                  //     timestamp: track.timestamp,
-                  //     size: track.size,
-                  //     extension: Value(track.extension),
-                  //     description: Value(track.description),
-                  //   ),
-                  // );
                 }
-                final duration  = DateTime.now().difference(startTime);
-                print('Duration: ${duration.inMilliseconds} ms');
               },
             );
           }
           // Записываем трейл
-         await _db.addTrail(
+          await _db.addTrail(
             name: event.name,
             elevation: event.elevation,
             distance: event.distance,
@@ -70,6 +59,24 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
           );
         },
         updateTrail: (_UpdateTrail event) async {
+          final fileId = event.fileId;
+          Value<int?>? trackId;
+          // Если надо удалить старый файл, ставим null в trackId
+          if (event.deleteTrack && fileId != null) {
+            trackId = const Value(null);
+          }
+          final filePath = event.filePath;
+          // Сохраняем трек если указан путь к файлу
+          if (filePath != null && filePath.isNotEmpty) {
+            await state.whenOrNull(
+              initialized: (_, track) async {
+                if (track != null) {
+                  trackId = Value(await _db.addTrack(track));
+                }
+              },
+            );
+          }
+          // Обновляем трейл
           await _db.updateTrail(
             id: event.id,
             name: event.name,
@@ -77,20 +84,13 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
             distance: event.distance,
             url: event.url,
             description: event.description,
-            fileId: event.fileId,
+            fileId: trackId,
           );
-        },
-        upsertTrail: (_UpsertTrail event) async {
-          await _db.upsertTrail(
-            id: event.id,
-            name: event.name,
-            elevation: event.elevation,
-            distance: event.distance,
-            url: event.url,
-            description: event.description,
-            fileId: event.fileId,
-            isDeleted: event.isDeleted,
-          );
+          // Удаляем старый файл трека
+          // ToDo: передалть на очистку сирот
+          if (event.deleteTrack && fileId != null) {
+            await _db.deleteTrack(fileId);
+          }
         },
         deleteTrail: (_DeleteTrail event) async {
           await _db.deleteTrail(event.id);
@@ -101,33 +101,51 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
             emit(TrailsState.loadingTrack(trails: _trails));
             try {
               // ToDo: рассчитывать distance и elevation
-              final name = path.basename(event.filePath);
+              final name = path.basenameWithoutExtension(event.filePath);
               final extension = path.extension(event.filePath);
               final size = await file.length();
               final timestamp = DateTime.now().toUtc().toIso8601String();
               final data = <int>[];
 
-              file.openRead().listen(
-                data.addAll,
-                onDone: () {
-                  final fileHash = sha1.convert(data);
-                  add(
-                    TrailsEvent.emitTrack(
-                      track: TrackFile(
-                        id: -1,
-                        name: name,
-                        extension: extension,
-                        // ToDo: Description
-                        // description: null,
-                        size: size,
-                        hashSha1: fileHash.toString(),
-                        data: Uint8List(0),
-                        timestamp: timestamp,
-                      ),
+              if (size > uploadMaxSize) {
+                add(
+                  TrailsEvent.emitTrack(
+                    track: TrackFile(
+                      id: -1,
+                      name: name,
+                      extension: extension,
+                      // ToDo: Description
+                      // description: null,
+                      size: size,
+                      hashSha1: '',
+                      data: Uint8List(0),
+                      timestamp: timestamp,
                     ),
-                  );
-                },
-              );
+                  ),
+                );
+              } else {
+                file.openRead().listen(
+                  data.addAll,
+                  onDone: () {
+                    final fileHash = sha1.convert(data);
+                    add(
+                      TrailsEvent.emitTrack(
+                        track: TrackFile(
+                          id: -1,
+                          name: name,
+                          extension: extension,
+                          // ToDo: Description
+                          // description: null,
+                          size: size,
+                          hashSha1: fileHash.toString(),
+                          data: data.asUint8List(),
+                          timestamp: timestamp,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
             } catch (e) {
               logger.e('TrailsBloc -> Error reading file: ${event.filePath}');
               emit(TrailsState.initialized(trails: _trails));

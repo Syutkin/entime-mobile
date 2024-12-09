@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-11-23T02:29:34.367851",
+  "@@last_modified": "2024-12-09T05:45:59.550846",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1179,6 +1179,13 @@
   "@I18nDatabase_trailIsActive": {
     "type": "text",
     "placeholders": {}
+  },
+  "I18nDatabase_uploadLimit": "Максимальный размер {limit} Мб",
+  "@I18nDatabase_uploadLimit": {
+    "type": "text",
+    "placeholders": {
+      "limit": {}
+    }
   },
   "I18nNtp_ntpOffset": "NTP offset",
   "@I18nNtp_ntpOffset": {

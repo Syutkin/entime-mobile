@@ -2278,6 +2278,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Максимальный размер {limit} Мб`
+  String I18nDatabase_uploadLimit(Object limit) {
+    return Intl.message(
+      'Максимальный размер $limit Мб',
+      name: 'I18nDatabase_uploadLimit',
+      desc: '',
+      args: [limit],
+    );
+  }
+
   /// `NTP offset`
   String get I18nNtp_ntpOffset {
     return Intl.message(

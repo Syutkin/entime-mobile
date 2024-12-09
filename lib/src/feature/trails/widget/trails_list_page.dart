@@ -1,15 +1,14 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:entime/src/common/utils/extension_on_string.dart';
+import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/feature/trails/widget/trail_item_tile.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../common/logger/logger.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
+import '../../../constants/config.dart';
 import '../../database/database.dart';
 import '../bloc/trails_bloc.dart';
 
@@ -32,7 +31,6 @@ class TrailsListPage extends StatelessWidget {
           return state.maybeMap(
             initialized: (state) {
               final trails = state.trails;
-              print('trails count: ${trails.length}');
               return Scrollbar(
                 child: ListView.builder(
                   controller: _scrollController,
