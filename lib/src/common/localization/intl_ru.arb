@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-09T05:45:59.550846",
+  "@@last_modified": "2024-12-09T06:22:14.389012",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1185,6 +1185,13 @@
     "type": "text",
     "placeholders": {
       "limit": {}
+    }
+  },
+  "I18nDatabase_deleteTrail": "Вы уверены, что хотите удалить трейл \"{trailName}\"?",
+  "@I18nDatabase_deleteTrail": {
+    "type": "text",
+    "placeholders": {
+      "trailName": {}
     }
   },
   "I18nNtp_ntpOffset": "NTP offset",

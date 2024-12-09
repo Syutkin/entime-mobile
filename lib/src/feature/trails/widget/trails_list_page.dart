@@ -13,6 +13,7 @@ import '../../database/database.dart';
 import '../bloc/trails_bloc.dart';
 
 part 'popup/add_or_update_trail_popup.dart';
+part 'popup/delete_trail_popup.dart';
 
 class TrailsListPage extends StatelessWidget {
   TrailsListPage({super.key});

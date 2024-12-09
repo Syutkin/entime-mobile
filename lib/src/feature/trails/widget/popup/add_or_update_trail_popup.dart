@@ -86,13 +86,6 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                 }
               },
             ),
-            // ToDo: загрузка gpx трека
-            // ToDo: при загрузке даже 30Мб уже ощутимо лагает
-            // ToDo: 1. не загружать сам трек в списке трейлов
-            // ToDo: 2. сделать поле "есть ли трек"?
-            // ToDo: 3. загружать только при шаринге
-            // ToDo: 4. шаринг убрать из UI
-            // ToDo: 5. при загрузке тоже ощутимо тормозит, может загружать как-то по другому в бд?
             BlocBuilder<TrailsBloc, TrailsState>(
               builder: (context, state) {
                 return Row(
@@ -109,17 +102,20 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                         autovalidateMode: AutovalidateMode.always,
                         validator: (_) {
                           return state.maybeMap(
-                              initialized: (state) {
-                                final size = state.track?.size;
-                                // max upload size in bytes
-                                if (size != null && size > uploadMaxSize) {
-                                  return Localization.current
-                                      .I18nDatabase_uploadLimit(uploadMaxSize/1024/1024);
-                                } else {
-                                  return null;
-                                }
-                              },
-                              orElse: () => null);
+                            initialized: (state) {
+                              final size = state.track?.size;
+                              // max upload size in bytes
+                              if (size != null && size > uploadMaxSize) {
+                                return Localization.current
+                                    .I18nDatabase_uploadLimit(
+                                  uploadMaxSize / 1024 / 1024,
+                                );
+                              } else {
+                                return null;
+                              }
+                            },
+                            orElse: () => null,
+                          );
                         },
                       ),
                     ),
@@ -129,6 +125,8 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                       },
                       initialized: (state) {
                         final bloc = context.read<TrailsBloc>();
+                        // ToDo: При редактировании трейла, если есть трек
+                        // ToDo: во время начальной загрузки сменить кнопку "выбрать" на "удалить"
                         if (state.track == null) {
                           return addTrackIconButton(bloc);
                         } else {

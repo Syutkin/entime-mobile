@@ -87,7 +87,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
             fileId: trackId,
           );
           // Удаляем старый файл трека
-          // ToDo: передалть на очистку сирот
+          // ToDo: переделать на очистку сирот
           if (event.deleteTrack && fileId != null) {
             await _db.deleteTrack(fileId);
           }

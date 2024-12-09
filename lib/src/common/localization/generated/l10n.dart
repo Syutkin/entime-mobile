@@ -2288,6 +2288,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Вы уверены, что хотите удалить трейл "{trailName}"?`
+  String I18nDatabase_deleteTrail(Object trailName) {
+    return Intl.message(
+      'Вы уверены, что хотите удалить трейл "$trailName"?',
+      name: 'I18nDatabase_deleteTrail',
+      desc: '',
+      args: [trailName],
+    );
+  }
+
   /// `NTP offset`
   String get I18nNtp_ntpOffset {
     return Intl.message(

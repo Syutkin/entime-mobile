@@ -59,9 +59,16 @@ class TrailItemTile extends StatelessWidget {
           const PopupMenuDivider(),
           PopupMenuItem<void>(
             // ToDo: confirmation dialog
-            onTap: () => context
-                .read<TrailsBloc>()
-                .add(TrailsEvent.deleteTrail(trail.id)),
+            onTap: () async {
+              final bloc = context.read<TrailsBloc>();
+              final deleteTrail = await deleteTrailPopup(
+                context: context,
+                trailName: trail.name,
+              );
+              if (deleteTrail ?? false) {
+                bloc.add(TrailsEvent.deleteTrail(trail.id));
+              }
+            },
             child: ListTile(
               leading: const Icon(Icons.delete),
               title: Text(Localization.current.I18nCore_delete),

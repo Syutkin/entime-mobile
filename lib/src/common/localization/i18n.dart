@@ -1278,6 +1278,12 @@ class I18nDatabase {
       args: [limit],
     );
   }
+
+  static String deleteTrail(String trailName) => Intl.message(
+    'Вы уверены, что хотите удалить трейл "$trailName"?',
+    name: 'I18nDatabase_deleteTrail',
+    args: [trailName],
+  );
 }
 
 class I18nNtp {
