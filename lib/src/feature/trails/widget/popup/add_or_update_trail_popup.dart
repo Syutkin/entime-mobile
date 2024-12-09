@@ -5,6 +5,22 @@ Future<void> addTrailPopup(BuildContext context) {
 }
 
 Future<void> updateTrailPopup(BuildContext context, TrailInfo trail) {
+  // Если у трейла есть трек, то для показа начальной кнопки "удалить" трек,
+  // эмитим стейт с "dummy" треком
+  if (trail.fileId != null) {
+    context.read<TrailsBloc>().add(
+          TrailsEvent.emitTrack(
+            track: TrackFile(
+              id: -1,
+              name: '',
+              size: 0,
+              hashSha1: '',
+              data: Uint8List(0),
+              timestamp: '',
+            ),
+          ),
+        );
+  }
   return _upsertTrailPopup(context, trail);
 }
 

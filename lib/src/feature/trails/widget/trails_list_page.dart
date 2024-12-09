@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/feature/trails/widget/trail_item_tile.dart';
