@@ -6,4 +6,6 @@ enum HomeMenuButton {
   bluetooth,
   countdown,
   countdownPage,
+  showFinishDifference,
+  showColorFinishDifference,
 }

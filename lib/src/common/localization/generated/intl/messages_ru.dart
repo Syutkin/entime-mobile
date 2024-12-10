@@ -202,6 +202,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Стартовый протокол"),
         "I18nHome_setDefaults":
             MessageLookupByLibrary.simpleMessage("По умолчанию"),
+        "I18nHome_showColorFinishDifference":
+            MessageLookupByLibrary.simpleMessage("Цветовая индикация разницы"),
+        "I18nHome_showFinishDifference":
+            MessageLookupByLibrary.simpleMessage("Разница во времени"),
         "I18nHome_start": MessageLookupByLibrary.simpleMessage("Старт"),
         "I18nHome_update": MessageLookupByLibrary.simpleMessage("Обновить"),
         "I18nHome_updateAutomaticCorrection": m3,
@@ -332,6 +336,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Не финишировал"),
         "I18nProtocol_didNotStart":
             MessageLookupByLibrary.simpleMessage("Не стартовал"),
+        "I18nProtocol_difference":
+            MessageLookupByLibrary.simpleMessage("Разница"),
         "I18nProtocol_enterFinishNumber": MessageLookupByLibrary.simpleMessage(
             "Введите номер финишировавшего участника"),
         "I18nProtocol_finishNumber": m15,
@@ -386,12 +392,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_finishButtonSizeDescription":
             MessageLookupByLibrary.simpleMessage(
                 "Размер кнопки \"отсечка\" на финишном экране"),
+        "I18nSettings_finishDifference":
+            MessageLookupByLibrary.simpleMessage("Порог цветовой индикации"),
         "I18nSettings_finishScreen":
             MessageLookupByLibrary.simpleMessage("Финишный экран"),
         "I18nSettings_general":
             MessageLookupByLibrary.simpleMessage("Основные"),
         "I18nSettings_incorrectDelay":
             MessageLookupByLibrary.simpleMessage("Неверная задержка"),
+        "I18nSettings_incorrectFinishDifference":
+            MessageLookupByLibrary.simpleMessage("Неверный порог"),
         "I18nSettings_journal": MessageLookupByLibrary.simpleMessage("Журнал"),
         "I18nSettings_journalLinesNumber": MessageLookupByLibrary.simpleMessage(
             "Количество показываемых записей"),
@@ -430,6 +440,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Настройки по умолчанию"),
         "I18nSettings_settings":
             MessageLookupByLibrary.simpleMessage("Настройки"),
+        "I18nSettings_showColorFinishDifference":
+            MessageLookupByLibrary.simpleMessage(
+                "Выделение цветом разницы во времени"),
+        "I18nSettings_showColorFinishDifferenceDescription":
+            MessageLookupByLibrary.simpleMessage("При достижении порога"),
+        "I18nSettings_showFinishDifference":
+            MessageLookupByLibrary.simpleMessage(
+                "Показывать разницу во времени"),
+        "I18nSettings_showFinishDifferenceDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "Между временем модуля и временем устройства"),
         "I18nSettings_sound": MessageLookupByLibrary.simpleMessage("Звук"),
         "I18nSettings_startButton":
             MessageLookupByLibrary.simpleMessage("Кнопка \"отсечка\""),

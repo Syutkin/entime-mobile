@@ -511,6 +511,66 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Показывать разницу во времени`
+  String get I18nSettings_showFinishDifference {
+    return Intl.message(
+      'Показывать разницу во времени',
+      name: 'I18nSettings_showFinishDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Между временем модуля и временем устройства`
+  String get I18nSettings_showFinishDifferenceDescription {
+    return Intl.message(
+      'Между временем модуля и временем устройства',
+      name: 'I18nSettings_showFinishDifferenceDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выделение цветом разницы во времени`
+  String get I18nSettings_showColorFinishDifference {
+    return Intl.message(
+      'Выделение цветом разницы во времени',
+      name: 'I18nSettings_showColorFinishDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `При достижении порога`
+  String get I18nSettings_showColorFinishDifferenceDescription {
+    return Intl.message(
+      'При достижении порога',
+      name: 'I18nSettings_showColorFinishDifferenceDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Порог цветовой индикации`
+  String get I18nSettings_finishDifference {
+    return Intl.message(
+      'Порог цветовой индикации',
+      name: 'I18nSettings_finishDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверный порог`
+  String get I18nSettings_incorrectFinishDifference {
+    return Intl.message(
+      'Неверный порог',
+      name: 'I18nSettings_incorrectFinishDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Обновление`
   String get I18nSettings_update {
     return Intl.message(
@@ -871,6 +931,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Разница`
+  String get I18nProtocol_difference {
+    return Intl.message(
+      'Разница',
+      name: 'I18nProtocol_difference',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Результаты стартов гонки {raceName}, этап {stageName}`
   String I18nProtocol_shareStartResults(Object raceName, Object stageName) {
     return Intl.message(
@@ -1150,6 +1220,26 @@ class GeneratedLocalization {
     return Intl.message(
       'FAB',
       name: 'I18nHome_fab',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Разница во времени`
+  String get I18nHome_showFinishDifference {
+    return Intl.message(
+      'Разница во времени',
+      name: 'I18nHome_showFinishDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Цветовая индикация разницы`
+  String get I18nHome_showColorFinishDifference {
+    return Intl.message(
+      'Цветовая индикация разницы',
+      name: 'I18nHome_showColorFinishDifference',
       desc: '',
       args: [],
     );

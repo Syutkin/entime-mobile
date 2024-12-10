@@ -242,6 +242,36 @@ class I18nSettings {
         name: 'I18nSettings_finishButtonSizeDescription',
       );
 
+  static String get showFinishDifference => Intl.message(
+        'Показывать разницу во времени',
+        name: 'I18nSettings_showFinishDifference',
+      );
+
+  static String get showFinishDifferenceDescription => Intl.message(
+        'Между временем модуля и временем устройства',
+        name: 'I18nSettings_showFinishDifferenceDescription',
+      );
+
+  static String get showColorFinishDifference => Intl.message(
+        'Выделение цветом разницы во времени',
+        name: 'I18nSettings_showColorFinishDifference',
+      );
+
+  static String get showColorFinishDifferenceDescription => Intl.message(
+        'При достижении порога',
+        name: 'I18nSettings_showColorFinishDifferenceDescription',
+      );
+
+  static String get finishDifference => Intl.message(
+        'Порог цветовой индикации',
+        name: 'I18nSettings_finishDifference',
+      );
+
+  static String get incorrectFinishDifference => Intl.message(
+        'Неверный порог',
+        name: 'I18nSettings_incorrectFinishDifference',
+      );
+
   static String get update => Intl.message(
         'Обновление',
         name: 'I18nSettings_update',
@@ -425,6 +455,11 @@ class I18nProtocol {
         'Время',
         name: 'I18nProtocol_time',
       );
+
+  static String get difference => Intl.message(
+    'Разница',
+    name: 'I18nProtocol_difference',
+  );
 
   static String shareStartResults(String raceName, String stageName) =>
       Intl.message(
@@ -678,6 +713,16 @@ class I18nHome {
   static String get fab => Intl.message(
         'FAB',
         name: 'I18nHome_fab',
+      );
+
+  static String get showFinishDifference => Intl.message(
+        'Разница во времени',
+        name: 'I18nHome_showFinishDifference',
+      );
+
+  static String get showColorFinishDifference => Intl.message(
+        'Цветовая индикация разницы',
+        name: 'I18nHome_showColorFinishDifference',
       );
 
   static String get importStartProtocolCsv => Intl.message(
@@ -1207,10 +1252,10 @@ class I18nDatabase {
       );
 
   static String deleteStage(String stageName) => Intl.message(
-    'Вы уверены, что хотите удалить этап "$stageName"?',
-    name: 'I18nDatabase_deleteStage',
-    args: [stageName],
-  );
+        'Вы уверены, что хотите удалить этап "$stageName"?',
+        name: 'I18nDatabase_deleteStage',
+        args: [stageName],
+      );
 
   static String get trail => Intl.message(
         'Трейл',
@@ -1286,10 +1331,10 @@ class I18nDatabase {
   }
 
   static String deleteTrail(String trailName) => Intl.message(
-    'Вы уверены, что хотите удалить трейл "$trailName"?',
-    name: 'I18nDatabase_deleteTrail',
-    args: [trailName],
-  );
+        'Вы уверены, что хотите удалить трейл "$trailName"?',
+        name: 'I18nDatabase_deleteTrail',
+        args: [trailName],
+      );
 }
 
 class I18nNtp {

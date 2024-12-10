@@ -57,6 +57,26 @@ class MenuButton extends StatelessWidget {
                     ),
                   );
               }
+              if (activeTab == AppTab.finish) {
+                menuItems..add(
+                  PopupMenuItem(
+                    value: HomeMenuButton.showFinishDifference,
+                    child: ListTile(
+                      leading: Icon(MdiIcons.timer),
+                      title: Text(Localization.current.I18nHome_showFinishDifference),
+                    ),
+                  ),
+                )
+                ..add(
+                  PopupMenuItem(
+                    value: HomeMenuButton.showColorFinishDifference,
+                    child: ListTile(
+                      leading: Icon(MdiIcons.palette),
+                      title: Text(Localization.current.I18nHome_showColorFinishDifference),
+                    ),
+                  ),
+                );
+              }
               menuItems
                 ..add(
                   PopupMenuItem(
@@ -143,6 +163,22 @@ class MenuButton extends StatelessWidget {
                     await Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (context) => const CountdownPage(),
+                      ),
+                    );
+                  case HomeMenuButton.showFinishDifference:
+                    settingsBloc.add(
+                      SettingsEvent.update(
+                        settings: settings.copyWith(
+                            showFinishDifference:
+                                !settings.showFinishDifference),
+                      ),
+                    );
+                  case HomeMenuButton.showColorFinishDifference:
+                    settingsBloc.add(
+                      SettingsEvent.update(
+                        settings: settings.copyWith(
+                            showColorFinishDifference:
+                                !settings.showColorFinishDifference),
                       ),
                     );
                 }

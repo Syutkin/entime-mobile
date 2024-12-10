@@ -19,7 +19,8 @@ mixin _$AppSettings {
 // язык
   String get language =>
       throw _privateConstructorUsedError; // = "ru", // локаль
-// звук
+// восстанавливать Bluetooth подключение при обрыве
+  bool get reconnect => throw _privateConstructorUsedError; // звук
   bool get sound => throw _privateConstructorUsedError; // вкл/выкл
 // звук обратного отсчёта
   bool get beep =>
@@ -57,13 +58,18 @@ mixin _$AppSettings {
   bool get hideMarked => throw _privateConstructorUsedError;
   bool get hideNumbers => throw _privateConstructorUsedError;
   bool get hideManual =>
-      throw _privateConstructorUsedError; // восстанавливать Bluetooth подключение при обрыве
-  bool get reconnect =>
       throw _privateConstructorUsedError; // задержка в миллисекундах перед показыванием нового финишного времени
   int get finishDelay =>
       throw _privateConstructorUsedError; // автоподстановка номеров в финишном протоколе
   bool get substituteNumbers => throw _privateConstructorUsedError;
   int get substituteNumbersDelay =>
+      throw _privateConstructorUsedError; // показывать разницу между временем финиша с модуля и временем устройства
+  bool get showFinishDifference =>
+      throw _privateConstructorUsedError; // показывать разницу цветом между временем финиша с модуля и временем устройства
+  bool get showColorFinishDifference =>
+      throw _privateConstructorUsedError; // разница между временем финиша с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  int get finishDifference =>
       throw _privateConstructorUsedError; // дельта в секундах для автоматического подставления стартового времени
   int get deltaInSeconds =>
       throw _privateConstructorUsedError; // задержка в миллисекундах перед обновлением стартовой поправки,
@@ -88,6 +94,7 @@ mixin _$AppSettings {
   TResult when<TResult extends Object?>(
     TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -114,10 +121,12 @@ mixin _$AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -131,6 +140,7 @@ mixin _$AppSettings {
         $default, {
     required TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -157,10 +167,12 @@ mixin _$AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -178,6 +190,7 @@ mixin _$AppSettings {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -204,10 +217,12 @@ mixin _$AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -221,6 +236,7 @@ mixin _$AppSettings {
         $default, {
     TResult? Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -247,10 +263,12 @@ mixin _$AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -268,6 +286,7 @@ mixin _$AppSettings {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -294,10 +313,12 @@ mixin _$AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -311,6 +332,7 @@ mixin _$AppSettings {
         $default, {
     TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -337,10 +359,12 @@ mixin _$AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -390,6 +414,7 @@ abstract class $AppSettingsCopyWith<$Res> {
   @useResult
   $Res call(
       {String language,
+      bool reconnect,
       bool sound,
       bool beep,
       bool beepFromApp,
@@ -416,10 +441,12 @@ abstract class $AppSettingsCopyWith<$Res> {
       bool hideMarked,
       bool hideNumbers,
       bool hideManual,
-      bool reconnect,
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifference,
       int deltaInSeconds,
       int updateStartCorrectionDelay,
       int logLimit,
@@ -448,6 +475,7 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
   @override
   $Res call({
     Object? language = null,
+    Object? reconnect = null,
     Object? sound = null,
     Object? beep = null,
     Object? beepFromApp = null,
@@ -474,10 +502,12 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? hideMarked = null,
     Object? hideNumbers = null,
     Object? hideManual = null,
-    Object? reconnect = null,
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
+    Object? showFinishDifference = null,
+    Object? showColorFinishDifference = null,
+    Object? finishDifference = null,
     Object? deltaInSeconds = null,
     Object? updateStartCorrectionDelay = null,
     Object? logLimit = null,
@@ -494,6 +524,10 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      reconnect: null == reconnect
+          ? _value.reconnect
+          : reconnect // ignore: cast_nullable_to_non_nullable
+              as bool,
       sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
@@ -598,10 +632,6 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.hideManual
           : hideManual // ignore: cast_nullable_to_non_nullable
               as bool,
-      reconnect: null == reconnect
-          ? _value.reconnect
-          : reconnect // ignore: cast_nullable_to_non_nullable
-              as bool,
       finishDelay: null == finishDelay
           ? _value.finishDelay
           : finishDelay // ignore: cast_nullable_to_non_nullable
@@ -613,6 +643,18 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
       substituteNumbersDelay: null == substituteNumbersDelay
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
+              as int,
+      showFinishDifference: null == showFinishDifference
+          ? _value.showFinishDifference
+          : showFinishDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showColorFinishDifference: null == showColorFinishDifference
+          ? _value.showColorFinishDifference
+          : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      finishDifference: null == finishDifference
+          ? _value.finishDifference
+          : finishDifference // ignore: cast_nullable_to_non_nullable
               as int,
       deltaInSeconds: null == deltaInSeconds
           ? _value.deltaInSeconds
@@ -668,6 +710,7 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
   @useResult
   $Res call(
       {String language,
+      bool reconnect,
       bool sound,
       bool beep,
       bool beepFromApp,
@@ -694,10 +737,12 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       bool hideMarked,
       bool hideNumbers,
       bool hideManual,
-      bool reconnect,
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifference,
       int deltaInSeconds,
       int updateStartCorrectionDelay,
       int logLimit,
@@ -724,6 +769,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? language = null,
+    Object? reconnect = null,
     Object? sound = null,
     Object? beep = null,
     Object? beepFromApp = null,
@@ -750,10 +796,12 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? hideMarked = null,
     Object? hideNumbers = null,
     Object? hideManual = null,
-    Object? reconnect = null,
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
+    Object? showFinishDifference = null,
+    Object? showColorFinishDifference = null,
+    Object? finishDifference = null,
     Object? deltaInSeconds = null,
     Object? updateStartCorrectionDelay = null,
     Object? logLimit = null,
@@ -770,6 +818,10 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      reconnect: null == reconnect
+          ? _value.reconnect
+          : reconnect // ignore: cast_nullable_to_non_nullable
+              as bool,
       sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
@@ -874,10 +926,6 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.hideManual
           : hideManual // ignore: cast_nullable_to_non_nullable
               as bool,
-      reconnect: null == reconnect
-          ? _value.reconnect
-          : reconnect // ignore: cast_nullable_to_non_nullable
-              as bool,
       finishDelay: null == finishDelay
           ? _value.finishDelay
           : finishDelay // ignore: cast_nullable_to_non_nullable
@@ -889,6 +937,18 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
       substituteNumbersDelay: null == substituteNumbersDelay
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
+              as int,
+      showFinishDifference: null == showFinishDifference
+          ? _value.showFinishDifference
+          : showFinishDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showColorFinishDifference: null == showColorFinishDifference
+          ? _value.showColorFinishDifference
+          : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      finishDifference: null == finishDifference
+          ? _value.finishDifference
+          : finishDifference // ignore: cast_nullable_to_non_nullable
               as int,
       deltaInSeconds: null == deltaInSeconds
           ? _value.deltaInSeconds
@@ -939,6 +999,7 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
 class _$AppSettingsImpl implements _AppSettings {
   const _$AppSettingsImpl(
       {required this.language,
+      required this.reconnect,
       required this.sound,
       required this.beep,
       required this.beepFromApp,
@@ -965,10 +1026,12 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.hideMarked,
       required this.hideNumbers,
       required this.hideManual,
-      required this.reconnect,
       required this.finishDelay,
       required this.substituteNumbers,
       required this.substituteNumbersDelay,
+      required this.showFinishDifference,
+      required this.showColorFinishDifference,
+      required this.finishDifference,
       required this.deltaInSeconds,
       required this.updateStartCorrectionDelay,
       required this.logLimit,
@@ -984,6 +1047,9 @@ class _$AppSettingsImpl implements _AppSettings {
   @override
   final String language;
 // = "ru", // локаль
+// восстанавливать Bluetooth подключение при обрыве
+  @override
+  final bool reconnect;
 // звук
   @override
   final bool sound;
@@ -1052,9 +1118,6 @@ class _$AppSettingsImpl implements _AppSettings {
   final bool hideNumbers;
   @override
   final bool hideManual;
-// восстанавливать Bluetooth подключение при обрыве
-  @override
-  final bool reconnect;
 // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   final int finishDelay;
@@ -1063,6 +1126,16 @@ class _$AppSettingsImpl implements _AppSettings {
   final bool substituteNumbers;
   @override
   final int substituteNumbersDelay;
+// показывать разницу между временем финиша с модуля и временем устройства
+  @override
+  final bool showFinishDifference;
+// показывать разницу цветом между временем финиша с модуля и временем устройства
+  @override
+  final bool showColorFinishDifference;
+// разница между временем финиша с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  @override
+  final int finishDifference;
 // дельта в секундах для автоматического подставления стартового времени
   @override
   final int deltaInSeconds;
@@ -1096,7 +1169,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -1106,6 +1179,8 @@ class _$AppSettingsImpl implements _AppSettings {
             other is _$AppSettingsImpl &&
             (identical(other.language, language) ||
                 other.language == language) &&
+            (identical(other.reconnect, reconnect) ||
+                other.reconnect == reconnect) &&
             (identical(other.sound, sound) || other.sound == sound) &&
             (identical(other.beep, beep) || other.beep == beep) &&
             (identical(other.beepFromApp, beepFromApp) ||
@@ -1150,14 +1225,18 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.hideNumbers == hideNumbers) &&
             (identical(other.hideManual, hideManual) ||
                 other.hideManual == hideManual) &&
-            (identical(other.reconnect, reconnect) ||
-                other.reconnect == reconnect) &&
             (identical(other.finishDelay, finishDelay) ||
                 other.finishDelay == finishDelay) &&
             (identical(other.substituteNumbers, substituteNumbers) ||
                 other.substituteNumbers == substituteNumbers) &&
             (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.showFinishDifference, showFinishDifference) ||
+                other.showFinishDifference == showFinishDifference) &&
+            (identical(other.showColorFinishDifference, showColorFinishDifference) ||
+                other.showColorFinishDifference == showColorFinishDifference) &&
+            (identical(other.finishDifference, finishDifference) ||
+                other.finishDifference == finishDifference) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
             (identical(other.updateStartCorrectionDelay,
@@ -1178,8 +1257,7 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.isOLEDBackground == isOLEDBackground) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion) &&
-            (identical(
-                    other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
+            (identical(other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
                 other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
@@ -1187,6 +1265,7 @@ class _$AppSettingsImpl implements _AppSettings {
   int get hashCode => Object.hashAll([
         runtimeType,
         language,
+        reconnect,
         sound,
         beep,
         beepFromApp,
@@ -1213,10 +1292,12 @@ class _$AppSettingsImpl implements _AppSettings {
         hideMarked,
         hideNumbers,
         hideManual,
-        reconnect,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showFinishDifference,
+        showColorFinishDifference,
+        finishDifference,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -1242,6 +1323,7 @@ class _$AppSettingsImpl implements _AppSettings {
   TResult when<TResult extends Object?>(
     TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -1268,10 +1350,12 @@ class _$AppSettingsImpl implements _AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1285,6 +1369,7 @@ class _$AppSettingsImpl implements _AppSettings {
         $default, {
     required TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -1311,10 +1396,12 @@ class _$AppSettingsImpl implements _AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1329,6 +1416,7 @@ class _$AppSettingsImpl implements _AppSettings {
   }) {
     return $default(
         language,
+        reconnect,
         sound,
         beep,
         beepFromApp,
@@ -1355,10 +1443,12 @@ class _$AppSettingsImpl implements _AppSettings {
         hideMarked,
         hideNumbers,
         hideManual,
-        reconnect,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showFinishDifference,
+        showColorFinishDifference,
+        finishDifference,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -1376,6 +1466,7 @@ class _$AppSettingsImpl implements _AppSettings {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -1402,10 +1493,12 @@ class _$AppSettingsImpl implements _AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1419,6 +1512,7 @@ class _$AppSettingsImpl implements _AppSettings {
         $default, {
     TResult? Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -1445,10 +1539,12 @@ class _$AppSettingsImpl implements _AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1463,6 +1559,7 @@ class _$AppSettingsImpl implements _AppSettings {
   }) {
     return $default?.call(
         language,
+        reconnect,
         sound,
         beep,
         beepFromApp,
@@ -1489,10 +1586,12 @@ class _$AppSettingsImpl implements _AppSettings {
         hideMarked,
         hideNumbers,
         hideManual,
-        reconnect,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showFinishDifference,
+        showColorFinishDifference,
+        finishDifference,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -1510,6 +1609,7 @@ class _$AppSettingsImpl implements _AppSettings {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -1536,10 +1636,12 @@ class _$AppSettingsImpl implements _AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1553,6 +1655,7 @@ class _$AppSettingsImpl implements _AppSettings {
         $default, {
     TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -1579,10 +1682,12 @@ class _$AppSettingsImpl implements _AppSettings {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1599,6 +1704,7 @@ class _$AppSettingsImpl implements _AppSettings {
     if ($default != null) {
       return $default(
           language,
+          reconnect,
           sound,
           beep,
           beepFromApp,
@@ -1625,10 +1731,12 @@ class _$AppSettingsImpl implements _AppSettings {
           hideMarked,
           hideNumbers,
           hideManual,
-          reconnect,
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
+          showFinishDifference,
+          showColorFinishDifference,
+          finishDifference,
           deltaInSeconds,
           updateStartCorrectionDelay,
           logLimit,
@@ -1678,6 +1786,7 @@ class _$AppSettingsImpl implements _AppSettings {
 abstract class _AppSettings implements AppSettings {
   const factory _AppSettings(
       {required final String language,
+      required final bool reconnect,
       required final bool sound,
       required final bool beep,
       required final bool beepFromApp,
@@ -1704,10 +1813,12 @@ abstract class _AppSettings implements AppSettings {
       required final bool hideMarked,
       required final bool hideNumbers,
       required final bool hideManual,
-      required final bool reconnect,
       required final int finishDelay,
       required final bool substituteNumbers,
       required final int substituteNumbersDelay,
+      required final bool showFinishDifference,
+      required final bool showColorFinishDifference,
+      required final int finishDifference,
       required final int deltaInSeconds,
       required final int updateStartCorrectionDelay,
       required final int logLimit,
@@ -1722,7 +1833,9 @@ abstract class _AppSettings implements AppSettings {
 // язык
   @override
   String get language; // = "ru", // локаль
-// звук
+// восстанавливать Bluetooth подключение при обрыве
+  @override
+  bool get reconnect; // звук
   @override
   bool get sound; // вкл/выкл
 // звук обратного отсчёта
@@ -1777,16 +1890,23 @@ abstract class _AppSettings implements AppSettings {
   @override
   bool get hideNumbers;
   @override
-  bool get hideManual; // восстанавливать Bluetooth подключение при обрыве
-  @override
   bool
-      get reconnect; // задержка в миллисекундах перед показыванием нового финишного времени
+      get hideManual; // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   int get finishDelay; // автоподстановка номеров в финишном протоколе
   @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay; // дельта в секундах для автоматического подставления стартового времени
+  int get substituteNumbersDelay; // показывать разницу между временем финиша с модуля и временем устройства
+  @override
+  bool
+      get showFinishDifference; // показывать разницу цветом между временем финиша с модуля и временем устройства
+  @override
+  bool
+      get showColorFinishDifference; // разница между временем финиша с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  @override
+  int get finishDifference; // дельта в секундах для автоматического подставления стартового времени
   @override
   int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
 // если она уже была установлена
@@ -1830,6 +1950,7 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
   @useResult
   $Res call(
       {String language,
+      bool reconnect,
       bool sound,
       bool beep,
       bool beepFromApp,
@@ -1856,10 +1977,12 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       bool hideMarked,
       bool hideNumbers,
       bool hideManual,
-      bool reconnect,
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifference,
       int deltaInSeconds,
       int updateStartCorrectionDelay,
       int logLimit,
@@ -1886,6 +2009,7 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? language = null,
+    Object? reconnect = null,
     Object? sound = null,
     Object? beep = null,
     Object? beepFromApp = null,
@@ -1912,10 +2036,12 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? hideMarked = null,
     Object? hideNumbers = null,
     Object? hideManual = null,
-    Object? reconnect = null,
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
+    Object? showFinishDifference = null,
+    Object? showColorFinishDifference = null,
+    Object? finishDifference = null,
     Object? deltaInSeconds = null,
     Object? updateStartCorrectionDelay = null,
     Object? logLimit = null,
@@ -1932,6 +2058,10 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      reconnect: null == reconnect
+          ? _value.reconnect
+          : reconnect // ignore: cast_nullable_to_non_nullable
+              as bool,
       sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
@@ -2036,10 +2166,6 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.hideManual
           : hideManual // ignore: cast_nullable_to_non_nullable
               as bool,
-      reconnect: null == reconnect
-          ? _value.reconnect
-          : reconnect // ignore: cast_nullable_to_non_nullable
-              as bool,
       finishDelay: null == finishDelay
           ? _value.finishDelay
           : finishDelay // ignore: cast_nullable_to_non_nullable
@@ -2051,6 +2177,18 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
       substituteNumbersDelay: null == substituteNumbersDelay
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
+              as int,
+      showFinishDifference: null == showFinishDifference
+          ? _value.showFinishDifference
+          : showFinishDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showColorFinishDifference: null == showColorFinishDifference
+          ? _value.showColorFinishDifference
+          : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      finishDifference: null == finishDifference
+          ? _value.finishDifference
+          : finishDifference // ignore: cast_nullable_to_non_nullable
               as int,
       deltaInSeconds: null == deltaInSeconds
           ? _value.deltaInSeconds
@@ -2101,6 +2239,7 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
 class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   const _$AppSettingsDefaultsImpl(
       {this.language = 'ru',
+      this.reconnect = true,
       this.sound = true,
       this.beep = true,
       this.beepFromApp = false,
@@ -2127,10 +2266,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.hideMarked = true,
       this.hideNumbers = false,
       this.hideManual = false,
-      this.reconnect = true,
       this.finishDelay = 350,
       this.substituteNumbers = false,
       this.substituteNumbersDelay = 500,
+      this.showFinishDifference = false,
+      this.showColorFinishDifference = false,
+      this.finishDifference = 2000,
       this.deltaInSeconds = 15,
       this.updateStartCorrectionDelay = 2000,
       this.logLimit = 100,
@@ -2146,6 +2287,10 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final String language;
+// восстанавливать Bluetooth подключение при обрыве
+  @override
+  @JsonKey()
+  final bool reconnect;
 // звук
   @override
   @JsonKey()
@@ -2244,10 +2389,6 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final bool hideManual;
-// восстанавливать Bluetooth подключение при обрыве
-  @override
-  @JsonKey()
-  final bool reconnect;
 // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   @JsonKey()
@@ -2259,6 +2400,19 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final int substituteNumbersDelay;
+// показывать разницу между временем финиша с модуля и временем устройства
+  @override
+  @JsonKey()
+  final bool showFinishDifference;
+// показывать разницу цветом между временем финиша с модуля и временем устройства
+  @override
+  @JsonKey()
+  final bool showColorFinishDifference;
+// разница между временем финиша с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  @override
+  @JsonKey()
+  final int finishDifference;
 // дельта в секундах для автоматического подставления стартового времени
   @override
   @JsonKey()
@@ -2302,7 +2456,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(language: $language, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, reconnect: $reconnect, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings.defaults(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -2312,6 +2466,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             other is _$AppSettingsDefaultsImpl &&
             (identical(other.language, language) ||
                 other.language == language) &&
+            (identical(other.reconnect, reconnect) ||
+                other.reconnect == reconnect) &&
             (identical(other.sound, sound) || other.sound == sound) &&
             (identical(other.beep, beep) || other.beep == beep) &&
             (identical(other.beepFromApp, beepFromApp) ||
@@ -2356,14 +2512,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.hideNumbers == hideNumbers) &&
             (identical(other.hideManual, hideManual) ||
                 other.hideManual == hideManual) &&
-            (identical(other.reconnect, reconnect) ||
-                other.reconnect == reconnect) &&
             (identical(other.finishDelay, finishDelay) ||
                 other.finishDelay == finishDelay) &&
             (identical(other.substituteNumbers, substituteNumbers) ||
                 other.substituteNumbers == substituteNumbers) &&
             (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.showFinishDifference, showFinishDifference) ||
+                other.showFinishDifference == showFinishDifference) &&
+            (identical(other.showColorFinishDifference, showColorFinishDifference) ||
+                other.showColorFinishDifference == showColorFinishDifference) &&
+            (identical(other.finishDifference, finishDifference) ||
+                other.finishDifference == finishDifference) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
             (identical(other.updateStartCorrectionDelay,
@@ -2384,8 +2544,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.isOLEDBackground == isOLEDBackground) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion) &&
-            (identical(
-                    other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
+            (identical(other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
                 other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
@@ -2393,6 +2552,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   int get hashCode => Object.hashAll([
         runtimeType,
         language,
+        reconnect,
         sound,
         beep,
         beepFromApp,
@@ -2419,10 +2579,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         hideMarked,
         hideNumbers,
         hideManual,
-        reconnect,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showFinishDifference,
+        showColorFinishDifference,
+        finishDifference,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -2449,6 +2611,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   TResult when<TResult extends Object?>(
     TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -2475,10 +2638,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2492,6 +2657,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         $default, {
     required TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -2518,10 +2684,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2536,6 +2704,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   }) {
     return defaults(
         language,
+        reconnect,
         sound,
         beep,
         beepFromApp,
@@ -2562,10 +2731,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         hideMarked,
         hideNumbers,
         hideManual,
-        reconnect,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showFinishDifference,
+        showColorFinishDifference,
+        finishDifference,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -2583,6 +2754,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -2609,10 +2781,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2626,6 +2800,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         $default, {
     TResult? Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -2652,10 +2827,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2670,6 +2847,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   }) {
     return defaults?.call(
         language,
+        reconnect,
         sound,
         beep,
         beepFromApp,
@@ -2696,10 +2874,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         hideMarked,
         hideNumbers,
         hideManual,
-        reconnect,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showFinishDifference,
+        showColorFinishDifference,
+        finishDifference,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -2717,6 +2897,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -2743,10 +2924,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2760,6 +2943,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         $default, {
     TResult Function(
             String language,
+            bool reconnect,
             bool sound,
             bool beep,
             bool beepFromApp,
@@ -2786,10 +2970,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
-            bool reconnect,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showFinishDifference,
+            bool showColorFinishDifference,
+            int finishDifference,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2806,6 +2992,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
     if (defaults != null) {
       return defaults(
           language,
+          reconnect,
           sound,
           beep,
           beepFromApp,
@@ -2832,10 +3019,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           hideMarked,
           hideNumbers,
           hideManual,
-          reconnect,
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
+          showFinishDifference,
+          showColorFinishDifference,
+          finishDifference,
           deltaInSeconds,
           updateStartCorrectionDelay,
           logLimit,
@@ -2885,6 +3074,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 abstract class _AppSettingsDefaults implements AppSettings {
   const factory _AppSettingsDefaults(
       {final String language,
+      final bool reconnect,
       final bool sound,
       final bool beep,
       final bool beepFromApp,
@@ -2911,10 +3101,12 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final bool hideMarked,
       final bool hideNumbers,
       final bool hideManual,
-      final bool reconnect,
       final int finishDelay,
       final bool substituteNumbers,
       final int substituteNumbersDelay,
+      final bool showFinishDifference,
+      final bool showColorFinishDifference,
+      final int finishDifference,
       final int deltaInSeconds,
       final int updateStartCorrectionDelay,
       final int logLimit,
@@ -2928,7 +3120,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
 
 // язык
   @override
-  String get language; // звук
+  String get language; // восстанавливать Bluetooth подключение при обрыве
+  @override
+  bool get reconnect; // звук
   @override
   bool get sound; // вкл/выкл
 // звук обратного отсчёта
@@ -2985,16 +3179,23 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   bool get hideNumbers;
   @override
-  bool get hideManual; // восстанавливать Bluetooth подключение при обрыве
-  @override
   bool
-      get reconnect; // задержка в миллисекундах перед показыванием нового финишного времени
+      get hideManual; // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   int get finishDelay; // автоподстановка номеров в финишном протоколе
   @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay; // дельта в секундах для автоматического подставления стартового времени
+  int get substituteNumbersDelay; // показывать разницу между временем финиша с модуля и временем устройства
+  @override
+  bool
+      get showFinishDifference; // показывать разницу цветом между временем финиша с модуля и временем устройства
+  @override
+  bool
+      get showColorFinishDifference; // разница между временем финиша с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  @override
+  int get finishDifference; // дельта в секундах для автоматического подставления стартового времени
   @override
   int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
 // если она уже была установлена

@@ -11,6 +11,9 @@ class AppSettings with _$AppSettings {
     // язык
     required String language, // = "ru", // локаль
 
+    // восстанавливать Bluetooth подключение при обрыве
+    required bool reconnect,
+
     // звук
     required bool sound, // вкл/выкл
 
@@ -58,15 +61,22 @@ class AppSettings with _$AppSettings {
     required bool hideNumbers,
     required bool hideManual,
 
-    // восстанавливать Bluetooth подключение при обрыве
-    required bool reconnect,
-
     // задержка в миллисекундах перед показыванием нового финишного времени
     required int finishDelay,
 
     // автоподстановка номеров в финишном протоколе
     required bool substituteNumbers,
     required int substituteNumbersDelay,
+
+    // показывать разницу между временем финиша с модуля и временем устройства
+    required bool showFinishDifference,
+
+    // показывать разницу цветом между временем финиша с модуля и временем устройства
+    required bool showColorFinishDifference,
+
+    // разница между временем финиша с модуля и временем устройства в миллисекундах
+    // при превышении которого будет цветовая индикация
+    required int finishDifference,
 
     // дельта в секундах для автоматического подставления стартового времени
     required int deltaInSeconds,
@@ -98,6 +108,9 @@ class AppSettings with _$AppSettings {
   const factory AppSettings.defaults({
     // язык
     @Default('ru') String language,
+
+    // восстанавливать Bluetooth подключение при обрыве
+    @Default(true) bool reconnect,
 
     // звук
     @Default(true) bool sound, // вкл/выкл
@@ -149,15 +162,22 @@ class AppSettings with _$AppSettings {
     @Default(false) bool hideNumbers,
     @Default(false) bool hideManual,
 
-    // восстанавливать Bluetooth подключение при обрыве
-    @Default(true) bool reconnect,
-
     // задержка в миллисекундах перед показыванием нового финишного времени
     @Default(350) int finishDelay,
 
     // автоподстановка номеров в финишном протоколе
     @Default(false) bool substituteNumbers,
     @Default(500) int substituteNumbersDelay,
+
+    // показывать разницу между временем финиша с модуля и временем устройства
+    @Default(false) bool showFinishDifference,
+
+    // показывать разницу цветом между временем финиша с модуля и временем устройства
+    @Default(false) bool showColorFinishDifference,
+
+    // разница между временем финиша с модуля и временем устройства в миллисекундах
+    // при превышении которого будет цветовая индикация
+    @Default(2000) int finishDifference,
 
     // дельта в секундах для автоматического подставления стартового времени
     @Default(15) int deltaInSeconds,

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
@@ -408,11 +409,17 @@ class _FinishListPage extends State<FinishListPage> {
               children: <Widget>[
                 TextButton(
                   onPressed: () async {
-                    final now = DateTime.now();
-                    final timestamp = now.toUtc();
+                    final rand = Random().nextInt(10000) - 5000;
+                    // print(rand);
+                    final duration = Duration(milliseconds: rand);
+                    // print(duration);
+                    final timestamp = DateTime.now();
+                    final finishTime = timestamp.add(duration);
+                    // print(finishTime);
                     databaseBloc.add(
                       DatabaseEvent.addFinishTime(
-                        finishTime: DateFormat(longTimeFormat).format(now),
+                        finishTime:
+                            DateFormat(longTimeFormat).format(finishTime),
                         timestamp: timestamp,
                         stage: stage!,
                       ),
@@ -470,11 +477,10 @@ class _FinishListPage extends State<FinishListPage> {
   }
 
   Future<void> _addFinishTimeManual() async {
-    final now = DateTime.now();
-    final timestamp = now.toUtc();
+    final timestamp = DateTime.now();
     final offset = context.read<NtpBloc>().state.offset;
     //добавляем ntp offset к ручному времени
-    final manual = now.add(Duration(microseconds: offset));
+    final manual = timestamp.add(Duration(microseconds: offset));
     final finishTime = DateFormat(longTimeFormat).format(manual);
     final databaseBloc = context.read<DatabaseBloc>();
     final stageId = databaseBloc.state.stage?.id;
@@ -510,16 +516,6 @@ class _FinishListPage extends State<FinishListPage> {
       }
     });
   }
-
-// void _selectStartDB(context) async {
-//   var file =
-//       await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-//     return SelectFileScreen();
-//   }));
-//   BlocProvider.of<ProtocolBloc>(context).add(SelectProtocol(file));
-//   BlocProvider.of<SettingsBloc>(context)
-//       .add(SetStringValueEvent(recentFile: file));
-// }
 }
 
 class _SliverFinishSubHeader extends StatelessWidget {
@@ -529,29 +525,43 @@ class _SliverFinishSubHeader extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Row(
-            children: <Widget>[
-              Flexible(
-                flex: 15,
-                child: Align(
-                  child: Text(Localization.current.I18nProtocol_type),
-                ),
-              ),
-              Flexible(
-                flex: 65,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(Localization.current.I18nProtocol_time),
-                ),
-              ),
-              Flexible(
-                flex: 20,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(Localization.current.I18nProtocol_number),
-                ),
-              ),
-            ],
+          child: BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (context, state) {
+              final showDifference = state.settings.showFinishDifference;
+              return Row(
+                children: <Widget>[
+                  Flexible(
+                    flex: 15,
+                    child: Align(
+                      child: Text(Localization.current.I18nProtocol_type),
+                    ),
+                  ),
+                  Flexible(
+                    flex: showDifference ? 45 : 65,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(Localization.current.I18nProtocol_time),
+                    ),
+                  ),
+                  if (showDifference)
+                    Flexible(
+                      flex: 20,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(Localization.current.I18nProtocol_difference),
+                        // child: Text('Difference'),
+                      ),
+                    ),
+                  Flexible(
+                    flex: 20,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(Localization.current.I18nProtocol_number),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       );

@@ -59,6 +59,12 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           prefs.getBool('substituteNumbers') ?? defaults.substituteNumbers,
       substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
           defaults.substituteNumbersDelay,
+      showFinishDifference: prefs.getBool('showFinishDifference') ??
+          defaults.showFinishDifference,
+      showColorFinishDifference: prefs.getBool('showColorFinishDifference') ??
+          defaults.showColorFinishDifference,
+      finishDifference:
+          prefs.getInt('finishDifference') ?? defaults.finishDifference,
       deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
       updateStartCorrectionDelay: prefs.getInt('updateStartCorrectionDelay') ??
           defaults.updateStartCorrectionDelay,
@@ -144,6 +150,10 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       'substituteNumbersDelay',
       settings.substituteNumbersDelay,
     );
+    await _prefs.setBool('showFinishDifference', settings.showFinishDifference);
+    await _prefs.setBool(
+        'showColorFinishDifference', settings.showColorFinishDifference,);
+    await _prefs.setInt('finishDifference', settings.finishDifference);
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
     await _prefs.setInt(
       'updateStartCorrectionDelay',

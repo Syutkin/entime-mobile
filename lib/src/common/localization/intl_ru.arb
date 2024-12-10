@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-10T08:19:16.798996",
+  "@@last_modified": "2024-12-11T02:35:01.581179",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -240,6 +240,36 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nSettings_showFinishDifference": "Показывать разницу во времени",
+  "@I18nSettings_showFinishDifference": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showFinishDifferenceDescription": "Между временем модуля и временем устройства",
+  "@I18nSettings_showFinishDifferenceDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showColorFinishDifference": "Выделение цветом разницы во времени",
+  "@I18nSettings_showColorFinishDifference": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showColorFinishDifferenceDescription": "При достижении порога",
+  "@I18nSettings_showColorFinishDifferenceDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_finishDifference": "Порог цветовой индикации",
+  "@I18nSettings_finishDifference": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_incorrectFinishDifference": "Неверный порог",
+  "@I18nSettings_incorrectFinishDifference": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nSettings_update": "Обновление",
   "@I18nSettings_update": {
     "type": "text",
@@ -424,6 +454,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nProtocol_difference": "Разница",
+  "@I18nProtocol_difference": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nProtocol_shareStartResults": "Результаты стартов гонки {raceName}, этап {stageName}",
   "@I18nProtocol_shareStartResults": {
     "type": "text",
@@ -587,6 +622,16 @@
   },
   "I18nHome_fab": "FAB",
   "@I18nHome_fab": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nHome_showFinishDifference": "Разница во времени",
+  "@I18nHome_showFinishDifference": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nHome_showColorFinishDifference": "Цветовая индикация разницы",
+  "@I18nHome_showColorFinishDifference": {
     "type": "text",
     "placeholders": {}
   },

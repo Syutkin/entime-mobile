@@ -326,7 +326,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         final automaticStart = AutomaticStart(
           messageList.first,
           correction,
-          now.toUtc(),
+          now,
           // Проверяем обновлять или нет в HomeScreen BlocListener
           // ignore: avoid_redundant_argument_values
           updating: false,
@@ -360,7 +360,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
       logger.t('Bluetooth -> Message parsed: finish: $parsedMessage');
       return BluetoothMessage.finish(
         time: parsedMessage,
-        timestamp: now.toUtc(),
+        timestamp: now,
       );
     } else if (parsedMessage.startsWith('{') && parsedMessage.endsWith('}')) {
       logger.i('Bluetooth -> Parsing JSON...');

@@ -478,6 +478,68 @@ class _SettingsList extends StatelessWidget {
                   }
                 },
               ),
+              SettingsTile.switchTile(
+                title: Text(
+                  Localization.current.I18nSettings_showFinishDifference,
+                ),
+                description: Text(
+                  Localization
+                      .current.I18nSettings_showFinishDifferenceDescription,
+                ),
+                initialValue: settingsState.settings.showFinishDifference,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings
+                          .copyWith(showFinishDifference: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile.switchTile(
+                enabled: settingsState.settings.showFinishDifference,
+                title: Text(
+                  Localization.current.I18nSettings_showColorFinishDifference,
+                ),
+                description: Text(
+                  Localization.current
+                      .I18nSettings_showColorFinishDifferenceDescription,
+                ),
+                initialValue: settingsState.settings.showColorFinishDifference,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings
+                          .copyWith(showColorFinishDifference: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile(
+                enabled: settingsState.settings.showFinishDifference,
+                title: Text(Localization.current.I18nSettings_finishDifference),
+                trailing: Text(
+                  Localization.current.I18nSettings_milliseconds(
+                    settingsState.settings.finishDifference,
+                  ),
+                ),
+                //leading:  Icon(MdiIcons.handBackLeft),
+                onPressed: (context) async {
+                  final value = await setFinishDifferencePopup(
+                    context,
+                    difference: settingsState.settings.finishDifference,
+                    title: Localization.current.I18nSettings_finishDifference,
+                  );
+                  if (value != null) {
+                    settingsBloc.add(
+                      SettingsEvent.update(
+                        settings: settingsState.settings
+                            .copyWith(finishDifference: value),
+                      ),
+                    );
+                  }
+                },
+              ),
             ],
           ),
           SettingsSection(

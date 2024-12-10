@@ -210,7 +210,7 @@ class _StartListPage extends State<StartListPage> {
         DatabaseEvent.updateManualStartTime(
           stageId: stageId,
           time: manualStartTime,
-          timestamp: now.toUtc(),
+          timestamp: now,
         ),
       );
     }
