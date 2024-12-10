@@ -2148,6 +2148,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Вы уверены, что хотите удалить этап "{stageName}"?`
+  String I18nDatabase_deleteStage(Object stageName) {
+    return Intl.message(
+      'Вы уверены, что хотите удалить этап "$stageName"?',
+      name: 'I18nDatabase_deleteStage',
+      desc: '',
+      args: [stageName],
+    );
+  }
+
   /// `Трейл`
   String get I18nDatabase_trail {
     return Intl.message(

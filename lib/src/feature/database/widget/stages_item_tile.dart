@@ -17,6 +17,7 @@ class StagesItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(stage.name),
+      enabled: stage.isActive,
       onTap: () {
         context.read<DatabaseBloc>().add(DatabaseEvent.selectStage(stage));
         context
@@ -37,10 +38,16 @@ class StagesItemTile extends StatelessWidget {
           ),
           const PopupMenuDivider(),
           PopupMenuItem<void>(
-            // ToDo: confirmation dialog
-            onTap: () => context
-                .read<DatabaseBloc>()
-                .add(DatabaseEvent.deleteStage(stage.id)),
+            onTap: () async {
+              final bloc = context.read<DatabaseBloc>();
+              final deleteTrail = await deleteStagePopup(
+                context: context,
+                stageName: stage.name,
+              );
+              if (deleteTrail ?? false) {
+                bloc.add(DatabaseEvent.deleteStage(stage.id));
+              }
+            },
             child: ListTile(
               leading: const Icon(Icons.delete),
               title: Text(Localization.current.I18nCore_delete),

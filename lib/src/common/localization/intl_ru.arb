@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-09T06:22:14.389012",
+  "@@last_modified": "2024-12-10T08:19:16.798996",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1114,6 +1114,13 @@
   "@I18nDatabase_isActiveStage": {
     "type": "text",
     "placeholders": {}
+  },
+  "I18nDatabase_deleteStage": "Вы уверены, что хотите удалить этап \"{stageName}\"?",
+  "@I18nDatabase_deleteStage": {
+    "type": "text",
+    "placeholders": {
+      "stageName": {}
+    }
   },
   "I18nDatabase_trail": "Трейл",
   "@I18nDatabase_trail": {

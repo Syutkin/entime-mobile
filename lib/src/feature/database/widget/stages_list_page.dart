@@ -7,6 +7,7 @@ import '../../trails/bloc/trails_bloc.dart';
 import '../database.dart';
 
 part 'popup/add_or_update_stage_popup.dart';
+part 'popup/delete_stage_popup.dart';
 
 class StagesListPage extends StatelessWidget {
   const StagesListPage({required this.race, super.key});

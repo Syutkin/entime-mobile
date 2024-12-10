@@ -1206,6 +1206,12 @@ class I18nDatabase {
         name: 'I18nDatabase_isActiveStage',
       );
 
+  static String deleteStage(String stageName) => Intl.message(
+    'Вы уверены, что хотите удалить этап "$stageName"?',
+    name: 'I18nDatabase_deleteStage',
+    args: [stageName],
+  );
+
   static String get trail => Intl.message(
         'Трейл',
         name: 'I18nDatabase_trail',

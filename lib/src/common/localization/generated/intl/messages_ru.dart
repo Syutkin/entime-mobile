@@ -20,10 +20,13 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m30(trailName) =>
+  static String m30(stageName) =>
+      "Вы уверены, что хотите удалить этап \"${stageName}\"?";
+
+  static String m31(trailName) =>
       "Вы уверены, что хотите удалить трейл \"${trailName}\"?";
 
-  static String m31(limit) => "Максимальный размер ${limit} Мб";
+  static String m32(limit) => "Максимальный размер ${limit} Мб";
 
   static String m0(version) => "v${version}";
 
@@ -117,7 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создать соревнование"),
         "I18nDatabase_addStage":
             MessageLookupByLibrary.simpleMessage("Создать спецучасток"),
-        "I18nDatabase_deleteTrail": m30,
+        "I18nDatabase_deleteStage": m30,
+        "I18nDatabase_deleteTrail": m31,
         "I18nDatabase_editRace":
             MessageLookupByLibrary.simpleMessage("Редактирование"),
         "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
@@ -166,7 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Название"),
         "I18nDatabase_trailUrl": MessageLookupByLibrary.simpleMessage("Ссылка"),
         "I18nDatabase_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
-        "I18nDatabase_uploadLimit": m31,
+        "I18nDatabase_uploadLimit": m32,
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
         "I18nDrawer_settings":
