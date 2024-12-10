@@ -66,8 +66,15 @@ mixin _$DatabaseEvent {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -173,7 +180,7 @@ mixin _$DatabaseEvent {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -276,7 +283,7 @@ mixin _$DatabaseEvent {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -582,8 +589,15 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -692,7 +706,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -798,7 +812,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -1355,8 +1369,15 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -1479,7 +1500,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -1599,7 +1620,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -2037,8 +2058,15 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -2147,7 +2175,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -2254,7 +2282,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -2672,8 +2700,15 @@ class _$UpdateRaceImpl implements _UpdateRace {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -2783,7 +2818,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -2890,7 +2925,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -3311,8 +3346,15 @@ class _$UpsertRaceImpl implements _UpsertRace {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -3422,7 +3464,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -3529,7 +3571,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -3883,8 +3925,15 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -3993,7 +4042,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -4099,7 +4148,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -4412,8 +4461,15 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -4522,7 +4578,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -4628,7 +4684,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -4961,8 +5017,15 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -5071,7 +5134,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -5177,7 +5240,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -5490,8 +5553,15 @@ class _$DeselectRaceImpl implements _DeselectRace {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -5600,7 +5670,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -5706,7 +5776,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -6055,8 +6125,15 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -6165,7 +6242,7 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -6271,7 +6348,7 @@ class _$AddStageImpl implements _AddStage {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -6513,7 +6590,8 @@ abstract class _$$UpsertStageImplCopyWith<$Res> {
       int? raceId,
       int? trailId,
       bool? isActive,
-      bool? isDeleted});
+      bool? isDeleted,
+      bool removeTrailId});
 }
 
 /// @nodoc
@@ -6536,6 +6614,7 @@ class __$$UpsertStageImplCopyWithImpl<$Res>
     Object? trailId = freezed,
     Object? isActive = freezed,
     Object? isDeleted = freezed,
+    Object? removeTrailId = null,
   }) {
     return _then(_$UpsertStageImpl(
       id: freezed == id
@@ -6566,6 +6645,10 @@ class __$$UpsertStageImplCopyWithImpl<$Res>
           ? _value.isDeleted
           : isDeleted // ignore: cast_nullable_to_non_nullable
               as bool?,
+      removeTrailId: null == removeTrailId
+          ? _value.removeTrailId
+          : removeTrailId // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -6580,7 +6663,8 @@ class _$UpsertStageImpl implements _UpsertStage {
       this.raceId,
       this.trailId,
       this.isActive,
-      this.isDeleted});
+      this.isDeleted,
+      this.removeTrailId = false});
 
   @override
   final int? id;
@@ -6596,10 +6680,13 @@ class _$UpsertStageImpl implements _UpsertStage {
   final bool? isActive;
   @override
   final bool? isDeleted;
+  @override
+  @JsonKey()
+  final bool removeTrailId;
 
   @override
   String toString() {
-    return 'DatabaseEvent.upsertStage(id: $id, name: $name, description: $description, raceId: $raceId, trailId: $trailId, isActive: $isActive, isDeleted: $isDeleted)';
+    return 'DatabaseEvent.upsertStage(id: $id, name: $name, description: $description, raceId: $raceId, trailId: $trailId, isActive: $isActive, isDeleted: $isDeleted, removeTrailId: $removeTrailId)';
   }
 
   @override
@@ -6616,12 +6703,14 @@ class _$UpsertStageImpl implements _UpsertStage {
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
             (identical(other.isDeleted, isDeleted) ||
-                other.isDeleted == isDeleted));
+                other.isDeleted == isDeleted) &&
+            (identical(other.removeTrailId, removeTrailId) ||
+                other.removeTrailId == removeTrailId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, description, raceId, trailId, isActive, isDeleted);
+  int get hashCode => Object.hash(runtimeType, id, name, description, raceId,
+      trailId, isActive, isDeleted, removeTrailId);
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -6682,8 +6771,15 @@ class _$UpsertStageImpl implements _UpsertStage {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -6742,8 +6838,8 @@ class _$UpsertStageImpl implements _UpsertStage {
     required TResult Function() shareDatabase,
     required TResult Function(TrailInfo trail) shareTrack,
   }) {
-    return upsertStage(
-        id, name, description, raceId, trailId, isActive, isDeleted);
+    return upsertStage(id, name, description, raceId, trailId, isActive,
+        isDeleted, removeTrailId);
   }
 
   @override
@@ -6793,7 +6889,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -6849,8 +6945,8 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult? Function()? shareDatabase,
     TResult? Function(TrailInfo trail)? shareTrack,
   }) {
-    return upsertStage?.call(
-        id, name, description, raceId, trailId, isActive, isDeleted);
+    return upsertStage?.call(id, name, description, raceId, trailId, isActive,
+        isDeleted, removeTrailId);
   }
 
   @override
@@ -6900,7 +6996,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -6958,8 +7054,8 @@ class _$UpsertStageImpl implements _UpsertStage {
     required TResult orElse(),
   }) {
     if (upsertStage != null) {
-      return upsertStage(
-          id, name, description, raceId, trailId, isActive, isDeleted);
+      return upsertStage(id, name, description, raceId, trailId, isActive,
+          isDeleted, removeTrailId);
     }
     return orElse();
   }
@@ -7121,7 +7217,8 @@ abstract class _UpsertStage implements DatabaseEvent {
       final int? raceId,
       final int? trailId,
       final bool? isActive,
-      final bool? isDeleted}) = _$UpsertStageImpl;
+      final bool? isDeleted,
+      final bool removeTrailId}) = _$UpsertStageImpl;
 
   int? get id;
   String? get name;
@@ -7130,6 +7227,7 @@ abstract class _UpsertStage implements DatabaseEvent {
   int? get trailId;
   bool? get isActive;
   bool? get isDeleted;
+  bool get removeTrailId;
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -7254,8 +7352,15 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -7364,7 +7469,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -7470,7 +7575,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -7810,8 +7915,15 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -7920,7 +8032,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -8026,7 +8138,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -8367,8 +8479,15 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -8477,7 +8596,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -8583,7 +8702,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -8926,8 +9045,15 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -9036,7 +9162,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -9142,7 +9268,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -9516,8 +9642,15 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -9626,7 +9759,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -9732,7 +9865,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -10156,8 +10289,15 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -10273,7 +10413,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -10386,7 +10526,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -10808,8 +10948,15 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -10919,7 +11066,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -11026,7 +11173,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -11413,8 +11560,15 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -11523,7 +11677,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -11630,7 +11784,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -11987,8 +12141,15 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -12097,7 +12258,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -12203,7 +12364,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -12633,8 +12794,15 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -12744,7 +12912,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -12851,7 +13019,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -13239,8 +13407,15 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -13349,7 +13524,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -13455,7 +13630,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -13805,8 +13980,15 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -13915,7 +14097,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -14021,7 +14203,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -14365,8 +14547,15 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -14475,7 +14664,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -14581,7 +14770,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -14923,8 +15112,15 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -15033,7 +15229,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -15139,7 +15335,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -15489,8 +15685,15 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -15599,7 +15802,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -15705,7 +15908,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -16058,8 +16261,15 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -16168,7 +16378,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -16274,7 +16484,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -16627,8 +16837,15 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -16737,7 +16954,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -16843,7 +17060,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -17186,8 +17403,15 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -17296,7 +17520,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -17402,7 +17626,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -17774,8 +17998,15 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -17884,7 +18115,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -17990,7 +18221,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -18349,8 +18580,15 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -18459,7 +18697,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -18565,7 +18803,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -18910,8 +19148,15 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -19020,7 +19265,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -19126,7 +19371,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -19443,8 +19688,15 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -19553,7 +19805,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -19659,7 +19911,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -19993,8 +20245,15 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -20103,7 +20362,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -20209,7 +20468,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -20523,8 +20782,15 @@ class _$ShareStartImpl implements _ShareStart {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -20633,7 +20899,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -20739,7 +21005,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -21044,8 +21310,15 @@ class _$ShareFinishImpl implements _ShareFinish {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -21154,7 +21427,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -21260,7 +21533,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -21565,8 +21838,15 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -21675,7 +21955,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -21781,7 +22061,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,
@@ -22114,8 +22394,15 @@ class _$ShareTrackImpl implements _ShareTrack {
     required TResult Function(Race race) selectRace,
     required TResult Function() deselectRace,
     required TResult Function(String name, int raceId, int? trailId) addStage,
-    required TResult Function(int? id, String? name, String? description,
-            int? raceId, int? trailId, bool? isActive, bool? isDeleted)
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
         upsertStage,
     required TResult Function(int id) deleteStage,
     required TResult Function(int raceId) getStages,
@@ -22224,7 +22511,7 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult? Function()? deselectRace,
     TResult? Function(String name, int raceId, int? trailId)? addStage,
     TResult? Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult? Function(int id)? deleteStage,
     TResult? Function(int raceId)? getStages,
@@ -22330,7 +22617,7 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult Function()? deselectRace,
     TResult Function(String name, int raceId, int? trailId)? addStage,
     TResult Function(int? id, String? name, String? description, int? raceId,
-            int? trailId, bool? isActive, bool? isDeleted)?
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
         upsertStage,
     TResult Function(int id)? deleteStage,
     TResult Function(int raceId)? getStages,

@@ -67,9 +67,6 @@ Future<void> _upsertStagePopup(
               keyboardType: TextInputType.multiline,
               maxLines: null,
             ),
-            // ToDo: сделать красиво (selectedItemBuilder?)
-            // ToDo: сделать текстовый поиск
-            // ToDo: сделать возможность убрать выбор
             // Трейл этапа
             BlocBuilder<TrailsBloc, TrailsState>(
               builder: (context, state) {
@@ -93,22 +90,31 @@ Future<void> _upsertStagePopup(
                         },
                       );
                     }
-                    return DropdownButtonFormField<TrailInfo?>(
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      value: trail,
-                      decoration: InputDecoration(
+                    return DropDownTextField(
+                      initialValue: trail?.name,
+                      enableSearch: true,
+                      textFieldDecoration: InputDecoration(
                         labelText: Localization.current.I18nDatabase_trail,
                       ),
-                      onChanged: (value) {
-                        trail = value;
-                        trailId = trail?.id;
-                      },
-                      items: state.trails.map((value) {
-                        return DropdownMenuItem<TrailInfo>(
+                      searchDecoration: InputDecoration(
+                        hintText: Localization.current.I18nDatabase_trail,
+                      ),
+                      dropDownItemCount: state.trails.length,
+                      dropDownList: state.trails.map((value) {
+                        return DropDownValueModel(
                           value: value,
-                          child: Text(value.name),
+                          name: value.name,
                         );
                       }).toList(),
+                      onChanged: (valModel) {
+                        if (valModel is DropDownValueModel) {
+                          trail = valModel.value as TrailInfo;
+                          trailId = trail?.id;
+                        } else {
+                          trail = null;
+                          trailId = null;
+                        }
+                      },
                     );
                   },
                 );
@@ -150,6 +156,7 @@ Future<void> _upsertStagePopup(
                       raceId: raceId,
                       trailId: trailId,
                       isActive: isActive,
+                      removeTrailId: trailId == null,
                     ),
                   );
               Navigator.of(context).pop();

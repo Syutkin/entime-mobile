@@ -205,7 +205,14 @@ class AppDatabase extends _$AppDatabase {
     int? trailId,
     bool? isActive,
     bool? isDeleted,
+    bool removeTrailId = false,
   }) async {
+    Value<int?>? trailIdValue;
+    if (removeTrailId) {
+      trailIdValue = const Value(null);
+    } else {
+      trailIdValue = trailId != null ? Value(trailId) : const Value.absent();
+    }
     final stageId = await into(stages).insertOnConflictUpdate(
       StagesCompanion(
         id: id != null ? Value(id) : const Value.absent(),
@@ -213,7 +220,7 @@ class AppDatabase extends _$AppDatabase {
         description:
             description != null ? Value(description) : const Value.absent(),
         raceId: raceId != null ? Value(raceId) : const Value.absent(),
-        trailId: trailId != null ? Value(trailId) : const Value.absent(),
+        trailId: trailIdValue,
         isActive: isActive != null ? Value(isActive) : const Value.absent(),
         isDeleted: isDeleted != null ? Value(isDeleted) : const Value.absent(),
       ),

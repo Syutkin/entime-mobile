@@ -72,6 +72,7 @@ class DatabaseEvent with _$DatabaseEvent {
     int? trailId,
     bool? isActive,
     bool? isDeleted,
+    @Default(false) bool removeTrailId,
   }) = _UpsertStage;
 
   const factory DatabaseEvent.deleteStage(int id) = _DeleteStage;

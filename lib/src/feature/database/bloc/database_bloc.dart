@@ -280,6 +280,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             trailId: event.trailId,
             isActive: event.isActive,
             isDeleted: event.isDeleted,
+            removeTrailId: event.removeTrailId,
           );
         },
         deleteStage: (event) async {
