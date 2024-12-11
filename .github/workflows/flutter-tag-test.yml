@@ -1,9 +1,9 @@
-name: Flutter TAG prerelease
+name: Flutter TAG test
 
 on:
   push:
     tags:
-      - '*.*.*-*'
+      - 'test*'
 
 jobs:
   build:
@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v2
-        with:
-          distribution: 'zulu'
-          java-version: '21'
+      - uses: actions/checkout@v4
+#      - uses: actions/setup-java@v2
+#        with:
+#          distribution: 'zulu'
+#          java-version: '21'
 
       - uses: subosito/flutter-action@v2
         with:
@@ -35,24 +35,24 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Generate with build_runner
-        run: flutter pub run build_runner build --delete-conflicting-outputs
+#      - name: Generate with build_runner
+#        run: flutter pub run build_runner build --delete-conflicting-outputs
 
-      - name: Analyze project source
-        run: flutter analyze --no-fatal-infos
+#      - name: Analyze project source
+#        run: flutter analyze --no-fatal-infos
 
-      - name: Run tests and collect coverage
-        run: flutter test --coverage test/
-
-      - name: Clean coverage
-        run: |
-          sudo apt-get -y install lcov
-          lcov -r coverage/lcov.info -o coverage/lcov.info "lib/**.freezed.dart" "lib/**.g.dart" "lib/src/common/localization/**.dart" "test/**.mocks.dart"
-
-      - name: Upload to Codecov
-        uses: codecov/codecov-action@v4
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+#      - name: Run tests and collect coverage
+#        run: flutter test --coverage test/
+#
+#      - name: Clean coverage
+#        run: |
+#          sudo apt-get -y install lcov
+#          lcov -r coverage/lcov.info -o coverage/lcov.info "lib/**.freezed.dart" "lib/**.g.dart" "lib/src/common/localization/**.dart" "test/**.mocks.dart"
+#
+#      - name: Upload to Codecov
+#        uses: codecov/codecov-action@v4
+#        env:
+#          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Build APK
         run: flutter build apk --target-platform android-arm,android-arm64,android-x64 --split-per-abi

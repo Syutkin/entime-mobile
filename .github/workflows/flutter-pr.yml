@@ -18,7 +18,7 @@ jobs:
           channel: 'stable' # or: 'beta', 'dev' or 'master'
           cache: true
 
-      - run: flutter --version
+      - run: flutter doctor -v
 
       - name: Install dependencies
         run: flutter pub get
