@@ -48,6 +48,7 @@ class FinishItemTile extends StatelessWidget {
         onDismissed?.call(direction);
       },
       child: InkWell(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         onTapDown: (details) {
           onTapDown?.call(details);
         },

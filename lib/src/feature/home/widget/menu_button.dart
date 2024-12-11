@@ -58,24 +58,30 @@ class MenuButton extends StatelessWidget {
                   );
               }
               if (activeTab == AppTab.finish) {
-                menuItems..add(
-                  PopupMenuItem(
-                    value: HomeMenuButton.showFinishDifference,
-                    child: ListTile(
-                      leading: Icon(MdiIcons.timer),
-                      title: Text(Localization.current.I18nHome_showFinishDifference),
+                menuItems
+                  ..add(
+                    PopupMenuItem(
+                      value: HomeMenuButton.showFinishDifference,
+                      child: ListTile(
+                        leading: Icon(MdiIcons.timer),
+                        title: Text(
+                          Localization.current.I18nHome_showFinishDifference,
+                        ),
+                      ),
                     ),
-                  ),
-                )
-                ..add(
-                  PopupMenuItem(
-                    value: HomeMenuButton.showColorFinishDifference,
-                    child: ListTile(
-                      leading: Icon(MdiIcons.palette),
-                      title: Text(Localization.current.I18nHome_showColorFinishDifference),
+                  )
+                  ..add(
+                    PopupMenuItem(
+                      value: HomeMenuButton.showColorFinishDifference,
+                      child: ListTile(
+                        leading: Icon(MdiIcons.palette),
+                        title: Text(
+                          Localization
+                              .current.I18nHome_showColorFinishDifference,
+                        ),
+                      ),
                     ),
-                  ),
-                );
+                  );
               }
               menuItems
                 ..add(
@@ -169,16 +175,17 @@ class MenuButton extends StatelessWidget {
                     settingsBloc.add(
                       SettingsEvent.update(
                         settings: settings.copyWith(
-                            showFinishDifference:
-                                !settings.showFinishDifference),
+                          showFinishDifference: !settings.showFinishDifference,
+                        ),
                       ),
                     );
                   case HomeMenuButton.showColorFinishDifference:
                     settingsBloc.add(
                       SettingsEvent.update(
                         settings: settings.copyWith(
-                            showColorFinishDifference:
-                                !settings.showColorFinishDifference),
+                          showColorFinishDifference:
+                              !settings.showColorFinishDifference,
+                        ),
                       ),
                     );
                 }

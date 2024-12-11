@@ -28,6 +28,7 @@ class StartItemTile extends StatelessWidget {
         isHighlighted ? Theme.of(context).colorScheme.onPrimaryContainer : null;
 
     return InkWell(
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
       onTap: () {
         onTap?.call();
       },
