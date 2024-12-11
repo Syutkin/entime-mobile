@@ -68,10 +68,22 @@ jobs:
 #          for f in build/app/outputs/flutter-apk/app*; do mv "$f" "$(echo "$f" | sed s/-release//)"; done
 #          for f in build/app/outputs/flutter-apk/app*; do mv "$f" "$(echo "$f" | sed s/app/entime-${{ env.RELEASE_VERSION }}/)"; done
 
-      - name: Create a release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/flutter-apk/entime*.apk,build/app/outputs/flutter-apk/entime*.sha1"
-          if: ${{ contains( github.ref_name, 'test*' ) }}
-          prerelease: true
+
+      - name: Check Tag
+        id: check-tag
+        run: |
+          if [[ ${{ github.event.ref }} =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "match=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Build
+        if: steps.check-tag.outputs.match == 'true'
+        run: |
+          echo "Tag is a match"
+
+#      - name: Create a release
+#        uses: ncipollo/release-action@v1
+#        with:
+#          artifacts: "build/app/outputs/flutter-apk/entime*.apk,build/app/outputs/flutter-apk/entime*.sha1"
+#          if: ${{ github.ref_name == 'test*' }}
+#          prerelease: true
 #          token: ${{ secrets.TOKEN }}
