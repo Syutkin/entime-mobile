@@ -78,15 +78,21 @@ jobs:
             echo "IS_RELEASE=true" >> $GITHUB_ENV
           fi
 
+      - name: Echo
+        run: |
+          echo ${{ env.IS_RELEASE }}
+
       - name: release
-        if: env.IS_RELEASE == 'true'
+        if: ${{ env.IS_RELEASE == 'true' }}
+#        if: env.IS_RELEASE == 'true'
         run: |
           echo "Tag is a release"
 
       - name: pre
-        if: env.IS_RELEASE == 'false'
+        if: ${{ env.IS_RELEASE == 'false' }}
         run: |
           echo "Tag is a pre"
+          
           
 
 
