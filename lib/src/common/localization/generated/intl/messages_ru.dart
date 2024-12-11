@@ -151,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nDatabase_raceUrl": MessageLookupByLibrary.simpleMessage("Сайт"),
         "I18nDatabase_races":
             MessageLookupByLibrary.simpleMessage("Соревнования"),
+        "I18nDatabase_searchTrail":
+            MessageLookupByLibrary.simpleMessage("Найти..."),
         "I18nDatabase_stageDescription":
             MessageLookupByLibrary.simpleMessage("Описание"),
         "I18nDatabase_stageName":

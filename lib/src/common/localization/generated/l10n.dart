@@ -2378,6 +2378,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Найти...`
+  String get I18nDatabase_searchTrail {
+    return Intl.message(
+      'Найти...',
+      name: 'I18nDatabase_searchTrail',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Максимальный размер {limit} Мб`
   String I18nDatabase_uploadLimit(Object limit) {
     return Intl.message(

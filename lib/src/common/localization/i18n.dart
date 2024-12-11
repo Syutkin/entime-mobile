@@ -1322,6 +1322,11 @@ class I18nDatabase {
         name: 'I18nDatabase_trailIsActive',
       );
 
+  static String get searchTrail => Intl.message(
+    'Найти...',
+    name: 'I18nDatabase_searchTrail',
+  );
+
   static String uploadLimit(double limit) {
     return Intl.message(
       'Максимальный размер $limit Мб',
