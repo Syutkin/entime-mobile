@@ -2,8 +2,6 @@ name: Flutter TAG prerelease
 
 on:
   push:
-    branches:
-      - master
     tags:
       - '*.*.*-*'
 

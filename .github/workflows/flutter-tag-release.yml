@@ -2,8 +2,6 @@ name: Flutter TAG release
 
 on:
   push:
-    branches:
-      - master
     tags:
       - '*.*.*'
       - '!*.*.*-*'
