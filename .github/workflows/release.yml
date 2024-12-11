@@ -74,7 +74,7 @@ jobs:
       - name: Rename APK
         run: |
           for f in build/app/outputs/flutter-apk/app*; do mv "$f" "$(echo "$f" | sed s/-release//)"; done
-          for f in build/app/outputs/flutter-apk/app*; do mv "$f" "$(echo "$f" | sed s/app/entime-${{ env.RELEASE_VERSION }}/)"; done
+          for f in build/app/outputs/flutter-apk/app*; do mv "$f" "$(echo "$f" | sed s/app-/entime-${{ env.RELEASE_VERSION }}-/)"; done
 
       - name: Create a release
         uses: ncipollo/release-action@v1
