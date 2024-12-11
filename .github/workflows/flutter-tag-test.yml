@@ -73,24 +73,24 @@ jobs:
       - name: Check Tag
         run: |
           if [[ ${{ env.RELEASE_VERSION }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "IS_RELEASE=true" >> $GITHUB_ENV
+            echo "IS_PRERELEASE=false" >> $GITHUB_ENV
           else
-            echo "IS_RELEASE=false" >> $GITHUB_ENV
+            echo "IS_PRERELEASE=true" >> $GITHUB_ENV
           fi
 
       - name: Echo
         run: |
-          echo ${{ env.IS_RELEASE }}
+          echo ${{ env.IS_PRERELEASE }}
+
+      - name: prerelease
+        if: ${{ env.IS_PRERELEASE == 'true' }}
+        run: |
+          echo "Tag is a prerelease"
 
       - name: release
-        if: ${{ env.IS_RELEASE == 'true' }}
+        if: ${{ env.IS_PRERELEASE == 'false' }}
         run: |
           echo "Tag is a release"
-
-      - name: pre
-        if: ${{ env.IS_RELEASE == 'false' }}
-        run: |
-          echo "Tag is a pre"
           
           
 
@@ -99,6 +99,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/entime*.apk,build/app/outputs/flutter-apk/entime*.sha1"
-          if: ${{ github.ref_name == 'test*' }}
-          prerelease: ${{ env.IS_RELEASE }}
+          prerelease: ${{ env.IS_PRERELEASE }}
 #          token: ${{ secrets.TOKEN }}
