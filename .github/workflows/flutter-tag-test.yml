@@ -23,7 +23,11 @@ jobs:
 #          cache: true
 
       - name: Get tag name
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        run: |
+          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          if [[ ${{ env.RELEASE_VERSION }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "IS_RELEASE=true" >> $GITHUB_ENV
+          fi
 
 #      - name: Get signing key
 #        run: echo $SIGNING_KEY | base64 -d > android/app/key.jks
@@ -69,20 +73,20 @@ jobs:
 #          for f in build/app/outputs/flutter-apk/app*; do mv "$f" "$(echo "$f" | sed s/app/entime-${{ env.RELEASE_VERSION }}/)"; done
 
 
-      - name: Check Tag
-        id: check-tag
-        run: |
-          if [[ ${{ env.RELEASE_VERSION }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-              echo "match=true" >> $GITHUB_OUTPUT
-          fi
+#      - name: Check Tag
+#        id: check-tag
+#        run: |
+#          if [[ ${{ env.RELEASE_VERSION }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+#              echo "match=true" >> $GITHUB_OUTPUT
+#          fi
 
       - name: release
-        if: steps.check-tag.outputs.match == 'true'
+        if: env.IS_RELEASE == 'true'
         run: |
           echo "Tag is a release"
 
       - name: pre
-        if: steps.check-tag.outputs.match == 'false'
+        if: env.IS_RELEASE == 'false'
         run: |
           echo "Tag is a pre"
           
