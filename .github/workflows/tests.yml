@@ -1,7 +1,14 @@
-name: Flutter Push
+name: Analyze and run tests
 
 on:
   push:
+    branches:
+      - master
+    paths:
+      - "**.dart"
+      - "!**.g.dart"
+      - "!**.freezed.dart"
+  pull_request:
     branches:
       - master
     paths:

@@ -10,6 +10,7 @@ jobs:
     name: Test, build and prerelease APK
     runs-on: ubuntu-latest
 
+    if: github.repository == 'octo-org/octo-repo-prod'
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
