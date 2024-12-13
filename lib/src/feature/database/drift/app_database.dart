@@ -291,7 +291,6 @@ class AppDatabase extends _$AppDatabase {
     Value<int?>? fileId,
     String? url,
     String? description,
-    bool? isDeleted,
   }) async {
     final trailId = await into(trails).insertOnConflictUpdate(
       TrailsCompanion(
@@ -303,7 +302,6 @@ class AppDatabase extends _$AppDatabase {
         description:
             description != null ? Value(description) : const Value.absent(),
         fileId: fileId ?? const Value.absent(),
-        isDeleted: isDeleted != null ? Value(isDeleted) : const Value.absent(),
       ),
     );
     return trailId;

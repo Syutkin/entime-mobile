@@ -1,5 +1,6 @@
 //ignore_for_file: avoid_redundant_argument_values
-import 'package:drift/drift.dart';
+import 'package:crypto/crypto.dart';
+import 'package:drift/drift.dart' hide isNotNull;
 import 'package:drift/native.dart';
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
@@ -289,6 +290,157 @@ void main() {
         expect(trail.url, url);
         expect(trail.distance, distance);
         expect(trail.elevation, elevation);
+      });
+    });
+
+    group('Tracks tests', () {
+      test('Add track', () async {
+        final timestamp = DateTime.now().toUtc().toIso8601String();
+        const content = 'File content';
+        final data = content.codeUnits.asUint8List();
+        final hashSha1 = sha1.convert(data);
+        final track = TrackFile(
+          id: -1,
+          name: 'fileName',
+          size: data.length,
+          hashSha1: hashSha1.toString(),
+          data: data,
+          timestamp: timestamp,
+        );
+        final id = await db.addTrack(track);
+        expect(id, 1);
+      });
+
+      test('Check added track', () async {
+        final now = DateTime.now();
+        final timestamp = now.toUtc().toIso8601String();
+        const content = 'File content';
+        final data = content.codeUnits.asUint8List();
+        final hashSha1 = sha1.convert(data);
+        const description = 'description';
+        const extension = 'gxp';
+        final track = TrackFile(
+          id: -1,
+          name: 'fileName',
+          size: data.length,
+          hashSha1: hashSha1.toString(),
+          data: data,
+          timestamp: timestamp,
+          description: description,
+          extension: extension,
+        );
+
+        await db.addTrack(track);
+
+        final getTrack = await db.getTrack(1);
+        expect(getTrack, isNotNull);
+        expect(getTrack!.id, 1);
+        expect(getTrack.name, track.name);
+        expect(getTrack.size, track.size);
+        expect(getTrack.hashSha1, track.hashSha1);
+        expect(getTrack.data, track.data);
+        expect(getTrack.timestamp, track.timestamp);
+        expect(getTrack.description, track.description);
+        expect(getTrack.description, track.description);
+
+        expect(String.fromCharCodes(getTrack.data), content);
+        expect(DateTime.parse(getTrack.timestamp).toLocal(), now);
+      });
+
+      test('Add two tracks with different files', () async {
+        var name = 'fileName';
+        final timestamp = DateTime.now().toUtc().toIso8601String();
+        var content = 'File content';
+        var data = content.codeUnits.asUint8List();
+        var hashSha1 = sha1.convert(data);
+        var track = TrackFile(
+          id: -1,
+          name: name,
+          size: data.length,
+          hashSha1: hashSha1.toString(),
+          data: data,
+          timestamp: timestamp,
+        );
+        var id = await db.addTrack(track);
+        expect(id, 1);
+
+        name = 'fileName 2';
+        content = 'File content 2';
+        data = content.codeUnits.asUint8List();
+        hashSha1 = sha1.convert(data);
+        track = TrackFile(
+          id: -1,
+          name: name,
+          size: data.length,
+          hashSha1: hashSha1.toString(),
+          data: data,
+          timestamp: timestamp,
+        );
+        id = await db.addTrack(track);
+        expect(id, 2);
+
+        final tracks = await db.select(db.trackFiles).get();
+        expect(tracks.length, 2);
+      });
+
+      test('Do not add second track with same file', () async {
+        var name = 'fileName';
+        final timestamp = DateTime.now().toUtc().toIso8601String();
+        const content = 'File content';
+        final data = content.codeUnits.asUint8List();
+        final hashSha1 = sha1.convert(data);
+        var track = TrackFile(
+          id: -1,
+          name: name,
+          size: data.length,
+          hashSha1: hashSha1.toString(),
+          data: data,
+          timestamp: timestamp,
+        );
+        var id = await db.addTrack(track);
+        expect(id, 1);
+
+        name = 'fileName 2';
+        track = TrackFile(
+          id: -1,
+          name: name,
+          size: data.length,
+          hashSha1: hashSha1.toString(),
+          data: data,
+          timestamp: timestamp,
+        );
+        id = await db.addTrack(track);
+        expect(id, 1);
+
+        final tracks = await db.select(db.trackFiles).get();
+        expect(tracks.length, 1);
+      });
+
+      test('Delete track', () async {
+        final timestamp = DateTime.now().toUtc().toIso8601String();
+        const content = 'File content';
+        final data = content.codeUnits.asUint8List();
+        final hashSha1 = sha1.convert(data);
+        final track = TrackFile(
+          id: -1,
+          name: 'fileName',
+          size: data.length,
+          hashSha1: hashSha1.toString(),
+          data: data,
+          timestamp: timestamp,
+        );
+        final id = await db.addTrack(track);
+        expect(id, 1);
+        final deletedId = await db.deleteTrack(id);
+        expect(deletedId, 1);
+        final tracks = await db.select(db.trackFiles).get();
+        expect(tracks.length, 0);
+      });
+
+      test('Trying to delete unexisted track', () async {
+        const unexistedId = 555;
+        final id = await db.deleteTrack(unexistedId);
+        expect(id, 0);
       });
     });
 
