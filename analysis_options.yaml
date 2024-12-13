@@ -38,8 +38,8 @@ linter:
     avoid_print: true
     flutter_style_todos: false
     lines_longer_than_80_chars: false
+    one_member_abstracts: false
     public_member_api_docs: false
-
 
 # Additional information about this file can be found at
 # https://dart.dev/tools/analysis

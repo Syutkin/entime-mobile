@@ -1,3 +1,4 @@
+// ignore_for_file: use_setters_to_change_properties
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -51,21 +52,15 @@ class UpdateProvider {
   }) async =>
       UpdateProvider._(client, appInfoProvider, settingsProvider);
 
-  void onDownloading(DownloadingHandler callback) {
-    _downloadingHandler = callback;
-  }
+  void onDownloading(DownloadingHandler callback) =>
+      _downloadingHandler = callback;
 
-  void onDownloadComplete(VoidCallback callback) {
-    _onDownloadComplete = callback;
-  }
+  void onDownloadComplete(VoidCallback callback) =>
+      _onDownloadComplete = callback;
 
-  void onError(ErrorHandler error) {
-    _onError = error;
-  }
+  void onError(ErrorHandler error) => _onError = error;
 
-  void stop() {
-    _client.close();
-  }
+  void stop() => _client.close();
 
   Future<bool> isUpdateAvailable() async {
     _canUpdate = false;
