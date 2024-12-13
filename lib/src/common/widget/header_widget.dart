@@ -16,7 +16,7 @@ class Header extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
+            color: Colors.black.withValues(alpha: 0.25),
             blurRadius: 3, // has the effect of softening the shadow
             spreadRadius: 1, // has the effect of extending the shadow
             offset: const Offset(
