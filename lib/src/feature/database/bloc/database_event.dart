@@ -198,6 +198,11 @@ class DatabaseEvent with _$DatabaseEvent {
     required RaceCsv race,
   }) = _CreateRaceFromRaceCsv;
 
+  const factory DatabaseEvent.createStagesFromStagesCsv({
+    required int raceId,
+    required StagesCsv stages,
+  }) = _CreateStagesFromStagesCsvv;
+
   const factory DatabaseEvent.shareStart() = _ShareStart;
 
   const factory DatabaseEvent.shareFinish() = _ShareFinish;

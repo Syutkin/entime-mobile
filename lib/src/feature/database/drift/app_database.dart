@@ -4,6 +4,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:entime/src/constants/date_time_formats.dart';
 import 'package:entime/src/feature/csv/model/race_csv.dart';
+import 'package:entime/src/feature/csv/model/stages_csv.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
@@ -688,7 +689,6 @@ class AppDatabase extends _$AppDatabase {
           'Database -> Can not find participant with start time around $manualStartTime '
           'with $deltaInSeconds seconds delta');
     }
-    print(result);
     return result;
   }
 
@@ -1075,6 +1075,32 @@ class AppDatabase extends _$AppDatabase {
       }
     });
     return raceId;
+  }
+
+  Future<int> createStagesFromStagesCsv(int raceId, StagesCsv stagesCsv) async {
+    final stages = <String, int>{};
+    await transaction(() async {
+      for (final stageName in stagesCsv.stageNames) {
+        stages[stageName] = await addStage(raceId: raceId, name: stageName);
+      }
+      for (final item in stagesCsv.startItems) {
+        for (final stageName in stages.keys) {
+          await addStartNumber(
+            stage: Stage(
+              id: stages[stageName]!,
+              raceId: raceId,
+              name: stageName,
+              isActive: true,
+              isDeleted: false,
+            ),
+            number: item.number,
+            startTime: item.startTimes![stageName]!,
+            forceAdd: true,
+          );
+        }
+      }
+    });
+    return stages.length;
   }
 
   Future<List<StartForCsv>> getStartResults(int stageId) async {

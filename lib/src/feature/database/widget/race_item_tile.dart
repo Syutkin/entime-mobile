@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../csv/csv.dart';
 import '../database.dart';
 
 class RaceItemTile extends StatelessWidget {
@@ -46,11 +47,36 @@ class RaceItemTile extends StatelessWidget {
           title: Text(Localization.current.I18nCore_edit),
         ),
       ),
+      PopupMenuItem<void>(
+        onTap: () async {
+          final bloc = context.read<DatabaseBloc>();
+          final stages = await StartlistProvider().getStagesCsv();
+          if (stages != null) {
+            bloc.add(
+              DatabaseEvent.createStagesFromStagesCsv(
+                raceId: race.id,
+                stages: stages,
+              ),
+            );
+          }
+        },
+        child: ListTile(
+          leading: const Icon(Icons.add),
+          title: Text(Localization.current.I18nHome_importStagesCsv),
+        ),
+      ),
       const PopupMenuDivider(),
       PopupMenuItem<void>(
-        // ToDo: confirmation dialog
-        onTap: () =>
-            context.read<DatabaseBloc>().add(DatabaseEvent.deleteRace(race.id)),
+        onTap: () async {
+          final bloc = context.read<DatabaseBloc>();
+          final deleteRace = await deleteRacePopup(
+            context: context,
+            raceName: race.name,
+          );
+          if (deleteRace ?? false) {
+            bloc.add(DatabaseEvent.deleteRace(race.id));
+          }
+        },
         child: ListTile(
           leading: const Icon(Icons.delete),
           title: Text(Localization.current.I18nCore_delete),

@@ -1255,6 +1255,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Импорт этапов`
+  String get I18nHome_importStagesCsv {
+    return Intl.message(
+      'Импорт этапов',
+      name: 'I18nHome_importStagesCsv',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Bluetooth`
   String get I18nHome_bluetooth {
     return Intl.message(
@@ -2235,6 +2245,16 @@ class GeneratedLocalization {
       name: 'I18nDatabase_isActiveStage',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Вы уверены, что хотите удалить гонку "{raceName}"?`
+  String I18nDatabase_deleteRace(Object raceName) {
+    return Intl.message(
+      'Вы уверены, что хотите удалить гонку "$raceName"?',
+      name: 'I18nDatabase_deleteRace',
+      desc: '',
+      args: [raceName],
     );
   }
 

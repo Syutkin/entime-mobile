@@ -730,6 +730,11 @@ class I18nHome {
         name: 'I18nHome_importStartProtocolCsv',
       );
 
+  static String get importStagesCsv => Intl.message(
+    'Импорт этапов',
+    name: 'I18nHome_importStagesCsv',
+  );
+
   static String get bluetooth => Intl.message(
         'Bluetooth',
         name: 'I18nHome_bluetooth',
@@ -1250,6 +1255,12 @@ class I18nDatabase {
         'Активный',
         name: 'I18nDatabase_isActiveStage',
       );
+
+  static String deleteRace(String raceName) => Intl.message(
+    'Вы уверены, что хотите удалить гонку "$raceName"?',
+    name: 'I18nDatabase_deleteRace',
+    args: [raceName],
+  );
 
   static String deleteStage(String stageName) => Intl.message(
         'Вы уверены, что хотите удалить этап "$stageName"?',

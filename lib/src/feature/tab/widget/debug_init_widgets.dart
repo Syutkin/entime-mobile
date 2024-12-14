@@ -132,12 +132,12 @@ class _DebugTestCsv extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<DatabaseBloc>();
+    // final bloc = context.read<DatabaseBloc>();
     return TextButton(
       onPressed: () async {
-        final race = await StartlistProvider().getStartCsv();
-        if (race != null) {
-          bloc.add(DatabaseEvent.createRaceFromRaceCsv(race: race));
+        final stages = await StartlistProvider().getStagesCsv();
+        if (stages != null) {
+          // bloc.add(DatabaseEvent.createStagesFromStagesCsv(stages: stages));
         }
       },
       child: const Text('CSV Test'),

@@ -15,6 +15,7 @@ import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../../feature/csv/csv.dart';
+import '../../csv/model/stages_csv.dart';
 import '../../settings/logic/settings_provider.dart';
 import '../drift/app_database.dart';
 import '../model/notification.dart';
@@ -463,6 +464,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             _stage = null;
             add(DatabaseEvent.selectRace(race));
           }
+        },
+        createStagesFromStagesCsv: (event) async {
+          await _db.createStagesFromStagesCsv(event.raceId, event.stages);
         },
         shareStart: (event) async {
           final race = _race;

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-11T11:44:24.080253",
+  "@@last_modified": "2024-12-14T18:50:19.704268",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -640,6 +640,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nHome_importStagesCsv": "Импорт этапов",
+  "@I18nHome_importStagesCsv": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nHome_bluetooth": "Bluetooth",
   "@I18nHome_bluetooth": {
     "type": "text",
@@ -1159,6 +1164,13 @@
   "@I18nDatabase_isActiveStage": {
     "type": "text",
     "placeholders": {}
+  },
+  "I18nDatabase_deleteRace": "Вы уверены, что хотите удалить гонку \"{raceName}\"?",
+  "@I18nDatabase_deleteRace": {
+    "type": "text",
+    "placeholders": {
+      "raceName": {}
+    }
   },
   "I18nDatabase_deleteStage": "Вы уверены, что хотите удалить этап \"{stageName}\"?",
   "@I18nDatabase_deleteStage": {
