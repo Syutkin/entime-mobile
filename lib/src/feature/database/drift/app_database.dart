@@ -627,7 +627,6 @@ class AppDatabase extends _$AppDatabase {
     return null;
   }
 
-  //ToDo: исправить выставление значения только первому совпадению
   ///Устанавливает ручное стартовое время для участника
   ///
   ///Ищет участника с временем рядом с текущим (плюс-минус [deltaInSeconds] секунд)
@@ -656,35 +655,40 @@ class AppDatabase extends _$AppDatabase {
     ).get();
 
     if (participantsAroundTime.isNotEmpty) {
-      final startTime = participantsAroundTime.first.startTime.toDateTime();
-      if (startTime == null) {
-        logger.e('Wrong time format: $startTime, can not convert to DateTime');
-        return result;
-      }
-      final correction = startTime.difference(time);
-      result = await _setManualStartTime(
-        participantId: participantsAroundTime.first.participantId,
-        stageId: stageId,
-        manualCorrection: correction.inMilliseconds,
-        manualStartTime: manualStartTime,
-        timestamp: timestamp,
-      );
-      if (result > 0) {
-        logger.i(
-          'Database -> Update manual start time for participant with id '
-          '${participantsAroundTime.first.participantId}',
+      for (final participant in participantsAroundTime) {
+        final startTime = participant.startTime.toDateTime();
+        if (startTime == null) {
+          logger
+              .e('Wrong time format: $startTime, can not convert to DateTime');
+          return result;
+        }
+        final correction = startTime.difference(time);
+        final count = await _setManualStartTime(
+          participantId: participant.participantId,
+          stageId: stageId,
+          manualCorrection: correction.inMilliseconds,
+          manualStartTime: manualStartTime,
+          timestamp: timestamp,
         );
-      } else {
-        logger.i(
-          'Database -> Error at updating manual start time for participant with id '
-          '${participantsAroundTime.first.participantId}',
-        );
+        result += count;
+        if (count > 0) {
+          logger.i(
+            'Database -> Update manual start time for participant with id '
+            '${participant.participantId}',
+          );
+        } else {
+          logger.i(
+            'Database -> Error at updating manual start time for participant with id '
+            '${participant.participantId}',
+          );
+        }
       }
     } else {
       logger.i(
           'Database -> Can not find participant with start time around $manualStartTime '
           'with $deltaInSeconds seconds delta');
     }
+    print(result);
     return result;
   }
 
@@ -803,7 +807,6 @@ class AppDatabase extends _$AppDatabase {
   Future<int?> addFinishTime({
     required Stage stage,
     required String finish,
-    // ToDO: use drift DATETIME format
     required DateTime timestamp,
     int finishDelay = 0,
     bool substituteNumbers = false,
@@ -873,7 +876,6 @@ class AppDatabase extends _$AppDatabase {
     final finishId = await _addFinishTime(
       stageId: stage.id,
       finishTime: finish,
-      // ToDO: use drift DATETIME format
       timestamp: timestamp,
       number: workingNumber,
       isHidden: isHidden,
@@ -1145,7 +1147,6 @@ class AppDatabase extends _$AppDatabase {
     final logId = await into(logs).insert(
       LogsCompanion(
         level: Value(level),
-        // ToDO: use drift DATETIME format
         timestamp: Value(timestamp),
         source: Value(source),
         direction: Value(direction ?? LogSourceDirection.undefined),
