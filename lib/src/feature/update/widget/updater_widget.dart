@@ -1,8 +1,8 @@
-import 'package:filesize/filesize.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../common/utils/filesize.dart';
 import '../bloc/update_bloc.dart';
 
 class Updater extends StatelessWidget {

@@ -477,9 +477,9 @@ class TrackFiles extends Table with TableInfo<TrackFiles, TrackFile> {
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
       'timestamp', aliasedName, false,
-      type: DriftSqlType.string,
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   @override
@@ -562,7 +562,7 @@ class TrackFiles extends Table with TableInfo<TrackFiles, TrackFile> {
       data: attachedDatabase.typeMapping
           .read(DriftSqlType.blob, data['${effectivePrefix}data'])!,
       timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
     );
   }
 
@@ -583,7 +583,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
   final String? description;
   final String hashSha1;
   final Uint8List data;
-  final String timestamp;
+  final DateTime timestamp;
   const TrackFile(
       {required this.id,
       required this.name,
@@ -607,7 +607,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
     }
     map['hash_sha1'] = Variable<String>(hashSha1);
     map['data'] = Variable<Uint8List>(data);
-    map['timestamp'] = Variable<String>(timestamp);
+    map['timestamp'] = Variable<DateTime>(timestamp);
     return map;
   }
 
@@ -639,7 +639,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
       description: serializer.fromJson<String?>(json['description']),
       hashSha1: serializer.fromJson<String>(json['hash_sha1']),
       data: serializer.fromJson<Uint8List>(json['data']),
-      timestamp: serializer.fromJson<String>(json['timestamp']),
+      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
     );
   }
   @override
@@ -653,7 +653,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
       'description': serializer.toJson<String?>(description),
       'hash_sha1': serializer.toJson<String>(hashSha1),
       'data': serializer.toJson<Uint8List>(data),
-      'timestamp': serializer.toJson<String>(timestamp),
+      'timestamp': serializer.toJson<DateTime>(timestamp),
     };
   }
 
@@ -665,7 +665,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
           Value<String?> description = const Value.absent(),
           String? hashSha1,
           Uint8List? data,
-          String? timestamp}) =>
+          DateTime? timestamp}) =>
       TrackFile(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -730,7 +730,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
   final Value<String?> description;
   final Value<String> hashSha1;
   final Value<Uint8List> data;
-  final Value<String> timestamp;
+  final Value<DateTime> timestamp;
   const TrackFilesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -749,7 +749,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
     this.description = const Value.absent(),
     required String hashSha1,
     required Uint8List data,
-    required String timestamp,
+    required DateTime timestamp,
   })  : name = Value(name),
         size = Value(size),
         hashSha1 = Value(hashSha1),
@@ -763,7 +763,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
     Expression<String>? description,
     Expression<String>? hashSha1,
     Expression<Uint8List>? data,
-    Expression<String>? timestamp,
+    Expression<DateTime>? timestamp,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -785,7 +785,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
       Value<String?>? description,
       Value<String>? hashSha1,
       Value<Uint8List>? data,
-      Value<String>? timestamp}) {
+      Value<DateTime>? timestamp}) {
     return TrackFilesCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -823,7 +823,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
       map['data'] = Variable<Uint8List>(data.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String>(timestamp.value);
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
     }
     return map;
   }
@@ -1696,13 +1696,13 @@ class Riders extends Table with TableInfo<Riders, Rider> {
       'email', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
-      $customConstraints: '');
+      $customConstraints: 'UNIQUE');
   static const VerificationMeta _phoneMeta = const VerificationMeta('phone');
   late final GeneratedColumn<String> phone = GeneratedColumn<String>(
       'phone', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
-      $customConstraints: '');
+      $customConstraints: 'UNIQUE');
   static const VerificationMeta _commentMeta =
       const VerificationMeta('comment');
   late final GeneratedColumn<String> comment = GeneratedColumn<String>(
@@ -2766,9 +2766,9 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
       $customConstraints: '');
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
       'timestamp', aliasedName, false,
-      type: DriftSqlType.string,
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _finishTimeMeta =
@@ -2858,7 +2858,7 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
       number: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}number']),
       timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
       finishTime: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}finish_time'])!,
       isHidden: attachedDatabase.typeMapping
@@ -2884,7 +2884,7 @@ class Finish extends DataClass implements Insertable<Finish> {
   final int id;
   final int stageId;
   final int? number;
-  final String timestamp;
+  final DateTime timestamp;
   final String finishTime;
   final bool isHidden;
   final bool isManual;
@@ -2904,7 +2904,7 @@ class Finish extends DataClass implements Insertable<Finish> {
     if (!nullToAbsent || number != null) {
       map['number'] = Variable<int>(number);
     }
-    map['timestamp'] = Variable<String>(timestamp);
+    map['timestamp'] = Variable<DateTime>(timestamp);
     map['finish_time'] = Variable<String>(finishTime);
     map['is_hidden'] = Variable<bool>(isHidden);
     map['is_manual'] = Variable<bool>(isManual);
@@ -2931,7 +2931,7 @@ class Finish extends DataClass implements Insertable<Finish> {
       id: serializer.fromJson<int>(json['id']),
       stageId: serializer.fromJson<int>(json['stage_id']),
       number: serializer.fromJson<int?>(json['number']),
-      timestamp: serializer.fromJson<String>(json['timestamp']),
+      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
       finishTime: serializer.fromJson<String>(json['finish_time']),
       isHidden: serializer.fromJson<bool>(json['is_hidden']),
       isManual: serializer.fromJson<bool>(json['is_manual']),
@@ -2944,7 +2944,7 @@ class Finish extends DataClass implements Insertable<Finish> {
       'id': serializer.toJson<int>(id),
       'stage_id': serializer.toJson<int>(stageId),
       'number': serializer.toJson<int?>(number),
-      'timestamp': serializer.toJson<String>(timestamp),
+      'timestamp': serializer.toJson<DateTime>(timestamp),
       'finish_time': serializer.toJson<String>(finishTime),
       'is_hidden': serializer.toJson<bool>(isHidden),
       'is_manual': serializer.toJson<bool>(isManual),
@@ -2955,7 +2955,7 @@ class Finish extends DataClass implements Insertable<Finish> {
           {int? id,
           int? stageId,
           Value<int?> number = const Value.absent(),
-          String? timestamp,
+          DateTime? timestamp,
           String? finishTime,
           bool? isHidden,
           bool? isManual}) =>
@@ -3015,7 +3015,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
   final Value<int> id;
   final Value<int> stageId;
   final Value<int?> number;
-  final Value<String> timestamp;
+  final Value<DateTime> timestamp;
   final Value<String> finishTime;
   final Value<bool> isHidden;
   final Value<bool> isManual;
@@ -3032,7 +3032,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
     this.id = const Value.absent(),
     required int stageId,
     this.number = const Value.absent(),
-    required String timestamp,
+    required DateTime timestamp,
     required String finishTime,
     this.isHidden = const Value.absent(),
     this.isManual = const Value.absent(),
@@ -3043,7 +3043,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
     Expression<int>? id,
     Expression<int>? stageId,
     Expression<int>? number,
-    Expression<String>? timestamp,
+    Expression<DateTime>? timestamp,
     Expression<String>? finishTime,
     Expression<bool>? isHidden,
     Expression<bool>? isManual,
@@ -3063,7 +3063,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
       {Value<int>? id,
       Value<int>? stageId,
       Value<int?>? number,
-      Value<String>? timestamp,
+      Value<DateTime>? timestamp,
       Value<String>? finishTime,
       Value<bool>? isHidden,
       Value<bool>? isManual}) {
@@ -3091,7 +3091,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
       map['number'] = Variable<int>(number.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String>(timestamp.value);
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
     }
     if (finishTime.present) {
       map['finish_time'] = Variable<String>(finishTime.value);
@@ -3154,9 +3154,9 @@ class Starts extends Table with TableInfo<Starts, Start> {
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
       'timestamp', aliasedName, true,
-      type: DriftSqlType.string,
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _automaticStartTimeMeta =
@@ -3303,7 +3303,7 @@ class Starts extends Table with TableInfo<Starts, Start> {
       startTime: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}start_time'])!,
       timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp']),
       automaticStartTime: attachedDatabase.typeMapping.read(
           DriftSqlType.string, data['${effectivePrefix}automatic_start_time']),
       automaticCorrection: attachedDatabase.typeMapping.read(
@@ -3340,7 +3340,7 @@ class Start extends DataClass implements Insertable<Start> {
   final int stageId;
   final int participantId;
   final String startTime;
-  final String? timestamp;
+  final DateTime? timestamp;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String? manualStartTime;
@@ -3367,7 +3367,7 @@ class Start extends DataClass implements Insertable<Start> {
     map['participant_id'] = Variable<int>(participantId);
     map['start_time'] = Variable<String>(startTime);
     if (!nullToAbsent || timestamp != null) {
-      map['timestamp'] = Variable<String>(timestamp);
+      map['timestamp'] = Variable<DateTime>(timestamp);
     }
     if (!nullToAbsent || automaticStartTime != null) {
       map['automatic_start_time'] = Variable<String>(automaticStartTime);
@@ -3424,7 +3424,7 @@ class Start extends DataClass implements Insertable<Start> {
       stageId: serializer.fromJson<int>(json['stage_id']),
       participantId: serializer.fromJson<int>(json['participant_id']),
       startTime: serializer.fromJson<String>(json['start_time']),
-      timestamp: serializer.fromJson<String?>(json['timestamp']),
+      timestamp: serializer.fromJson<DateTime?>(json['timestamp']),
       automaticStartTime:
           serializer.fromJson<String?>(json['automatic_start_time']),
       automaticCorrection:
@@ -3443,7 +3443,7 @@ class Start extends DataClass implements Insertable<Start> {
       'stage_id': serializer.toJson<int>(stageId),
       'participant_id': serializer.toJson<int>(participantId),
       'start_time': serializer.toJson<String>(startTime),
-      'timestamp': serializer.toJson<String?>(timestamp),
+      'timestamp': serializer.toJson<DateTime?>(timestamp),
       'automatic_start_time': serializer.toJson<String?>(automaticStartTime),
       'automatic_correction': serializer.toJson<int?>(automaticCorrection),
       'manual_start_time': serializer.toJson<String?>(manualStartTime),
@@ -3458,7 +3458,7 @@ class Start extends DataClass implements Insertable<Start> {
           int? stageId,
           int? participantId,
           String? startTime,
-          Value<String?> timestamp = const Value.absent(),
+          Value<DateTime?> timestamp = const Value.absent(),
           Value<String?> automaticStartTime = const Value.absent(),
           Value<int?> automaticCorrection = const Value.absent(),
           Value<String?> manualStartTime = const Value.absent(),
@@ -3565,7 +3565,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
   final Value<int> stageId;
   final Value<int> participantId;
   final Value<String> startTime;
-  final Value<String?> timestamp;
+  final Value<DateTime?> timestamp;
   final Value<String?> automaticStartTime;
   final Value<int?> automaticCorrection;
   final Value<String?> manualStartTime;
@@ -3605,7 +3605,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
     Expression<int>? stageId,
     Expression<int>? participantId,
     Expression<String>? startTime,
-    Expression<String>? timestamp,
+    Expression<DateTime>? timestamp,
     Expression<String>? automaticStartTime,
     Expression<int>? automaticCorrection,
     Expression<String>? manualStartTime,
@@ -3635,7 +3635,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
       Value<int>? stageId,
       Value<int>? participantId,
       Value<String>? startTime,
-      Value<String?>? timestamp,
+      Value<DateTime?>? timestamp,
       Value<String?>? automaticStartTime,
       Value<int?>? automaticCorrection,
       Value<String?>? manualStartTime,
@@ -3673,7 +3673,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
       map['start_time'] = Variable<String>(startTime.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String>(timestamp.value);
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
     }
     if (automaticStartTime.present) {
       map['automatic_start_time'] = Variable<String>(automaticStartTime.value);
@@ -3735,9 +3735,9 @@ class Logs extends Table with TableInfo<Logs, Log> {
           .withConverter<LogLevel>(Logs.$converterlevel);
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
       'timestamp', aliasedName, false,
-      type: DriftSqlType.string,
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _sourceMeta = const VerificationMeta('source');
@@ -3805,7 +3805,7 @@ class Logs extends Table with TableInfo<Logs, Log> {
       level: Logs.$converterlevel.fromSql(attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}level'])!),
       timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
       source: Logs.$convertersource.fromSql(attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}source'])!),
       direction: Logs.$converterdirection.fromSql(attachedDatabase.typeMapping
@@ -3834,7 +3834,7 @@ class Logs extends Table with TableInfo<Logs, Log> {
 class Log extends DataClass implements Insertable<Log> {
   final int id;
   final LogLevel level;
-  final String timestamp;
+  final DateTime timestamp;
   final LogSource source;
   final LogSourceDirection direction;
   final String? rawData;
@@ -3852,7 +3852,7 @@ class Log extends DataClass implements Insertable<Log> {
     {
       map['level'] = Variable<String>(Logs.$converterlevel.toSql(level));
     }
-    map['timestamp'] = Variable<String>(timestamp);
+    map['timestamp'] = Variable<DateTime>(timestamp);
     {
       map['source'] = Variable<String>(Logs.$convertersource.toSql(source));
     }
@@ -3886,7 +3886,7 @@ class Log extends DataClass implements Insertable<Log> {
       id: serializer.fromJson<int>(json['id']),
       level: Logs.$converterlevel
           .fromJson(serializer.fromJson<String>(json['level'])),
-      timestamp: serializer.fromJson<String>(json['timestamp']),
+      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
       source: Logs.$convertersource
           .fromJson(serializer.fromJson<String>(json['source'])),
       direction: Logs.$converterdirection
@@ -3900,7 +3900,7 @@ class Log extends DataClass implements Insertable<Log> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'level': serializer.toJson<String>(Logs.$converterlevel.toJson(level)),
-      'timestamp': serializer.toJson<String>(timestamp),
+      'timestamp': serializer.toJson<DateTime>(timestamp),
       'source': serializer.toJson<String>(Logs.$convertersource.toJson(source)),
       'direction':
           serializer.toJson<String>(Logs.$converterdirection.toJson(direction)),
@@ -3911,7 +3911,7 @@ class Log extends DataClass implements Insertable<Log> {
   Log copyWith(
           {int? id,
           LogLevel? level,
-          String? timestamp,
+          DateTime? timestamp,
           LogSource? source,
           LogSourceDirection? direction,
           Value<String?> rawData = const Value.absent()}) =>
@@ -3965,7 +3965,7 @@ class Log extends DataClass implements Insertable<Log> {
 class LogsCompanion extends UpdateCompanion<Log> {
   final Value<int> id;
   final Value<LogLevel> level;
-  final Value<String> timestamp;
+  final Value<DateTime> timestamp;
   final Value<LogSource> source;
   final Value<LogSourceDirection> direction;
   final Value<String?> rawData;
@@ -3980,7 +3980,7 @@ class LogsCompanion extends UpdateCompanion<Log> {
   LogsCompanion.insert({
     this.id = const Value.absent(),
     required LogLevel level,
-    required String timestamp,
+    required DateTime timestamp,
     required LogSource source,
     required LogSourceDirection direction,
     this.rawData = const Value.absent(),
@@ -3991,7 +3991,7 @@ class LogsCompanion extends UpdateCompanion<Log> {
   static Insertable<Log> custom({
     Expression<int>? id,
     Expression<String>? level,
-    Expression<String>? timestamp,
+    Expression<DateTime>? timestamp,
     Expression<String>? source,
     Expression<String>? direction,
     Expression<String>? rawData,
@@ -4009,7 +4009,7 @@ class LogsCompanion extends UpdateCompanion<Log> {
   LogsCompanion copyWith(
       {Value<int>? id,
       Value<LogLevel>? level,
-      Value<String>? timestamp,
+      Value<DateTime>? timestamp,
       Value<LogSource>? source,
       Value<LogSourceDirection>? direction,
       Value<String?>? rawData}) {
@@ -4033,7 +4033,7 @@ class LogsCompanion extends UpdateCompanion<Log> {
       map['level'] = Variable<String>(Logs.$converterlevel.toSql(level.value));
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String>(timestamp.value);
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
     }
     if (source.present) {
       map['source'] =
@@ -4116,7 +4116,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           fileSize: row.readNullable<int>('file_size'),
           fileDescription: row.readNullable<String>('file_description'),
           fileHashSha1: row.readNullable<String>('file_hash_sha1'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
         ));
   }
 
@@ -4143,7 +4143,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           fileSize: row.readNullable<int>('file_size'),
           fileDescription: row.readNullable<String>('file_description'),
           fileHashSha1: row.readNullable<String>('file_hash_sha1'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
         ));
   }
 
@@ -4236,7 +4236,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4283,7 +4283,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4310,7 +4310,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4368,7 +4368,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4387,7 +4387,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Future<int> _setManualStartTime(
       {String? manualStartTime,
       int? manualCorrection,
-      String? timestamp,
+      DateTime? timestamp,
       required int participantId,
       required int stageId}) {
     return customUpdate(
@@ -4395,7 +4395,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       variables: [
         Variable<String>(manualStartTime),
         Variable<int>(manualCorrection),
-        Variable<String>(timestamp),
+        Variable<DateTime>(timestamp),
         Variable<int>(participantId),
         Variable<int>(stageId)
       ],
@@ -4491,7 +4491,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4550,7 +4550,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Future<int> _addFinishTime(
       {required int stageId,
       required String finishTime,
-      required String timestamp,
+      required DateTime timestamp,
       int? number,
       required bool isHidden}) {
     return customInsert(
@@ -4558,7 +4558,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       variables: [
         Variable<int>(stageId),
         Variable<String>(finishTime),
-        Variable<String>(timestamp),
+        Variable<DateTime>(timestamp),
         Variable<int>(number),
         Variable<bool>(isHidden)
       ],
@@ -4587,14 +4587,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Future<int> _addFinishTimeManual(
       {required int stageId,
       required String finishTime,
-      required String timestamp,
+      required DateTime timestamp,
       int? number}) {
     return customInsert(
       'INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_manual) VALUES (?1, ?2, ?3, ?4, TRUE)',
       variables: [
         Variable<int>(stageId),
         Variable<String>(finishTime),
-        Variable<String>(timestamp),
+        Variable<DateTime>(timestamp),
         Variable<int>(number)
       ],
       updates: {finishes},
@@ -4753,6 +4753,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           ),
         ],
       );
+  @override
+  DriftDatabaseOptions get options =>
+      const DriftDatabaseOptions(storeDateTimeAsText: true);
 }
 
 typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
@@ -4964,7 +4967,7 @@ typedef $TrackFilesCreateCompanionBuilder = TrackFilesCompanion Function({
   Value<String?> description,
   required String hashSha1,
   required Uint8List data,
-  required String timestamp,
+  required DateTime timestamp,
 });
 typedef $TrackFilesUpdateCompanionBuilder = TrackFilesCompanion Function({
   Value<int> id,
@@ -4974,7 +4977,7 @@ typedef $TrackFilesUpdateCompanionBuilder = TrackFilesCompanion Function({
   Value<String?> description,
   Value<String> hashSha1,
   Value<Uint8List> data,
-  Value<String> timestamp,
+  Value<DateTime> timestamp,
 });
 
 class $TrackFilesFilterComposer extends Composer<_$AppDatabase, TrackFiles> {
@@ -5006,7 +5009,7 @@ class $TrackFilesFilterComposer extends Composer<_$AppDatabase, TrackFiles> {
   ColumnFilters<Uint8List> get data => $composableBuilder(
       column: $table.data, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get timestamp => $composableBuilder(
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnFilters(column));
 }
 
@@ -5039,7 +5042,7 @@ class $TrackFilesOrderingComposer extends Composer<_$AppDatabase, TrackFiles> {
   ColumnOrderings<Uint8List> get data => $composableBuilder(
       column: $table.data, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get timestamp => $composableBuilder(
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnOrderings(column));
 }
 
@@ -5073,7 +5076,7 @@ class $TrackFilesAnnotationComposer
   GeneratedColumn<Uint8List> get data =>
       $composableBuilder(column: $table.data, builder: (column) => column);
 
-  GeneratedColumn<String> get timestamp =>
+  GeneratedColumn<DateTime> get timestamp =>
       $composableBuilder(column: $table.timestamp, builder: (column) => column);
 }
 
@@ -5107,7 +5110,7 @@ class $TrackFilesTableManager extends RootTableManager<
             Value<String?> description = const Value.absent(),
             Value<String> hashSha1 = const Value.absent(),
             Value<Uint8List> data = const Value.absent(),
-            Value<String> timestamp = const Value.absent(),
+            Value<DateTime> timestamp = const Value.absent(),
           }) =>
               TrackFilesCompanion(
             id: id,
@@ -5127,7 +5130,7 @@ class $TrackFilesTableManager extends RootTableManager<
             Value<String?> description = const Value.absent(),
             required String hashSha1,
             required Uint8List data,
-            required String timestamp,
+            required DateTime timestamp,
           }) =>
               TrackFilesCompanion.insert(
             id: id,
@@ -6095,7 +6098,7 @@ typedef $FinishesCreateCompanionBuilder = FinishesCompanion Function({
   Value<int> id,
   required int stageId,
   Value<int?> number,
-  required String timestamp,
+  required DateTime timestamp,
   required String finishTime,
   Value<bool> isHidden,
   Value<bool> isManual,
@@ -6104,7 +6107,7 @@ typedef $FinishesUpdateCompanionBuilder = FinishesCompanion Function({
   Value<int> id,
   Value<int> stageId,
   Value<int?> number,
-  Value<String> timestamp,
+  Value<DateTime> timestamp,
   Value<String> finishTime,
   Value<bool> isHidden,
   Value<bool> isManual,
@@ -6127,7 +6130,7 @@ class $FinishesFilterComposer extends Composer<_$AppDatabase, Finishes> {
   ColumnFilters<int> get number => $composableBuilder(
       column: $table.number, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get timestamp => $composableBuilder(
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get finishTime => $composableBuilder(
@@ -6157,7 +6160,7 @@ class $FinishesOrderingComposer extends Composer<_$AppDatabase, Finishes> {
   ColumnOrderings<int> get number => $composableBuilder(
       column: $table.number, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get timestamp => $composableBuilder(
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get finishTime => $composableBuilder(
@@ -6187,7 +6190,7 @@ class $FinishesAnnotationComposer extends Composer<_$AppDatabase, Finishes> {
   GeneratedColumn<int> get number =>
       $composableBuilder(column: $table.number, builder: (column) => column);
 
-  GeneratedColumn<String> get timestamp =>
+  GeneratedColumn<DateTime> get timestamp =>
       $composableBuilder(column: $table.timestamp, builder: (column) => column);
 
   GeneratedColumn<String> get finishTime => $composableBuilder(
@@ -6226,7 +6229,7 @@ class $FinishesTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<int> stageId = const Value.absent(),
             Value<int?> number = const Value.absent(),
-            Value<String> timestamp = const Value.absent(),
+            Value<DateTime> timestamp = const Value.absent(),
             Value<String> finishTime = const Value.absent(),
             Value<bool> isHidden = const Value.absent(),
             Value<bool> isManual = const Value.absent(),
@@ -6244,7 +6247,7 @@ class $FinishesTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             required int stageId,
             Value<int?> number = const Value.absent(),
-            required String timestamp,
+            required DateTime timestamp,
             required String finishTime,
             Value<bool> isHidden = const Value.absent(),
             Value<bool> isManual = const Value.absent(),
@@ -6282,7 +6285,7 @@ typedef $StartsCreateCompanionBuilder = StartsCompanion Function({
   required int stageId,
   required int participantId,
   required String startTime,
-  Value<String?> timestamp,
+  Value<DateTime?> timestamp,
   Value<String?> automaticStartTime,
   Value<int?> automaticCorrection,
   Value<String?> manualStartTime,
@@ -6295,7 +6298,7 @@ typedef $StartsUpdateCompanionBuilder = StartsCompanion Function({
   Value<int> stageId,
   Value<int> participantId,
   Value<String> startTime,
-  Value<String?> timestamp,
+  Value<DateTime?> timestamp,
   Value<String?> automaticStartTime,
   Value<int?> automaticCorrection,
   Value<String?> manualStartTime,
@@ -6324,7 +6327,7 @@ class $StartsFilterComposer extends Composer<_$AppDatabase, Starts> {
   ColumnFilters<String> get startTime => $composableBuilder(
       column: $table.startTime, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get timestamp => $composableBuilder(
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get automaticStartTime => $composableBuilder(
@@ -6371,7 +6374,7 @@ class $StartsOrderingComposer extends Composer<_$AppDatabase, Starts> {
   ColumnOrderings<String> get startTime => $composableBuilder(
       column: $table.startTime, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get timestamp => $composableBuilder(
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get automaticStartTime => $composableBuilder(
@@ -6417,7 +6420,7 @@ class $StartsAnnotationComposer extends Composer<_$AppDatabase, Starts> {
   GeneratedColumn<String> get startTime =>
       $composableBuilder(column: $table.startTime, builder: (column) => column);
 
-  GeneratedColumn<String> get timestamp =>
+  GeneratedColumn<DateTime> get timestamp =>
       $composableBuilder(column: $table.timestamp, builder: (column) => column);
 
   GeneratedColumn<String> get automaticStartTime => $composableBuilder(
@@ -6466,7 +6469,7 @@ class $StartsTableManager extends RootTableManager<
             Value<int> stageId = const Value.absent(),
             Value<int> participantId = const Value.absent(),
             Value<String> startTime = const Value.absent(),
-            Value<String?> timestamp = const Value.absent(),
+            Value<DateTime?> timestamp = const Value.absent(),
             Value<String?> automaticStartTime = const Value.absent(),
             Value<int?> automaticCorrection = const Value.absent(),
             Value<String?> manualStartTime = const Value.absent(),
@@ -6492,7 +6495,7 @@ class $StartsTableManager extends RootTableManager<
             required int stageId,
             required int participantId,
             required String startTime,
-            Value<String?> timestamp = const Value.absent(),
+            Value<DateTime?> timestamp = const Value.absent(),
             Value<String?> automaticStartTime = const Value.absent(),
             Value<int?> automaticCorrection = const Value.absent(),
             Value<String?> manualStartTime = const Value.absent(),
@@ -6535,7 +6538,7 @@ typedef $StartsProcessedTableManager = ProcessedTableManager<
 typedef $LogsCreateCompanionBuilder = LogsCompanion Function({
   Value<int> id,
   required LogLevel level,
-  required String timestamp,
+  required DateTime timestamp,
   required LogSource source,
   required LogSourceDirection direction,
   Value<String?> rawData,
@@ -6543,7 +6546,7 @@ typedef $LogsCreateCompanionBuilder = LogsCompanion Function({
 typedef $LogsUpdateCompanionBuilder = LogsCompanion Function({
   Value<int> id,
   Value<LogLevel> level,
-  Value<String> timestamp,
+  Value<DateTime> timestamp,
   Value<LogSource> source,
   Value<LogSourceDirection> direction,
   Value<String?> rawData,
@@ -6565,7 +6568,7 @@ class $LogsFilterComposer extends Composer<_$AppDatabase, Logs> {
           column: $table.level,
           builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<String> get timestamp => $composableBuilder(
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnFilters(column));
 
   ColumnWithTypeConverterFilters<LogSource, LogSource, String> get source =>
@@ -6596,7 +6599,7 @@ class $LogsOrderingComposer extends Composer<_$AppDatabase, Logs> {
   ColumnOrderings<String> get level => $composableBuilder(
       column: $table.level, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get timestamp => $composableBuilder(
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get source => $composableBuilder(
@@ -6623,7 +6626,7 @@ class $LogsAnnotationComposer extends Composer<_$AppDatabase, Logs> {
   GeneratedColumnWithTypeConverter<LogLevel, String> get level =>
       $composableBuilder(column: $table.level, builder: (column) => column);
 
-  GeneratedColumn<String> get timestamp =>
+  GeneratedColumn<DateTime> get timestamp =>
       $composableBuilder(column: $table.timestamp, builder: (column) => column);
 
   GeneratedColumnWithTypeConverter<LogSource, String> get source =>
@@ -6661,7 +6664,7 @@ class $LogsTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<LogLevel> level = const Value.absent(),
-            Value<String> timestamp = const Value.absent(),
+            Value<DateTime> timestamp = const Value.absent(),
             Value<LogSource> source = const Value.absent(),
             Value<LogSourceDirection> direction = const Value.absent(),
             Value<String?> rawData = const Value.absent(),
@@ -6677,7 +6680,7 @@ class $LogsTableManager extends RootTableManager<
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required LogLevel level,
-            required String timestamp,
+            required DateTime timestamp,
             required LogSource source,
             required LogSourceDirection direction,
             Value<String?> rawData = const Value.absent(),
@@ -6742,7 +6745,7 @@ class TrailInfo extends CustomResultSet {
   final int? fileSize;
   final String? fileDescription;
   final String? fileHashSha1;
-  final String? timestamp;
+  final DateTime? timestamp;
   TrailInfo({
     required QueryRow row,
     required this.id,
@@ -6766,7 +6769,7 @@ class NumberAtStart extends CustomResultSet {
   final int stageId;
   final int participantId;
   final String startTime;
-  final String? timestamp;
+  final DateTime? timestamp;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String? manualStartTime;
@@ -6820,7 +6823,7 @@ class ParticipantAtStart extends CustomResultSet {
   final int stageId;
   final int participantId;
   final String startTime;
-  final String? timestamp;
+  final DateTime? timestamp;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String? manualStartTime;
@@ -6860,7 +6863,7 @@ class StartingParticipant extends CustomResultSet {
   final int stageId;
   final int participantId;
   final String startTime;
-  final String? timestamp;
+  final DateTime? timestamp;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String? manualStartTime;

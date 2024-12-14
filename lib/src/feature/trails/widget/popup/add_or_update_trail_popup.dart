@@ -16,7 +16,7 @@ Future<void> updateTrailPopup(BuildContext context, TrailInfo trail) {
               size: 0,
               hashSha1: '',
               data: Uint8List(0),
-              timestamp: '',
+              timestamp: DateTime.now(),
             ),
           ),
         );

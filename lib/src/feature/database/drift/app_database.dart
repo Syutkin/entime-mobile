@@ -614,8 +614,7 @@ class AppDatabase extends _$AppDatabase {
           automaticCorrection: Value(correction),
           automaticStartTime: Value(time),
           // startTime: Value(phoneTime),
-          // ToDO: use drift DATETIME format
-          timestamp: Value(timestamp.toUtc().toIso8601String()),
+          timestamp: Value(timestamp),
           // statusId: const Value(1),
         ),
       );
@@ -668,7 +667,7 @@ class AppDatabase extends _$AppDatabase {
         stageId: stageId,
         manualCorrection: correction.inMilliseconds,
         manualStartTime: manualStartTime,
-        timestamp: timestamp.toUtc().toIso8601String(),
+        timestamp: timestamp,
       );
       if (result > 0) {
         logger.i(
@@ -875,7 +874,7 @@ class AppDatabase extends _$AppDatabase {
       stageId: stage.id,
       finishTime: finish,
       // ToDO: use drift DATETIME format
-      timestamp: timestamp.toUtc().toIso8601String(),
+      timestamp: timestamp,
       number: workingNumber,
       isHidden: isHidden,
     );
@@ -904,7 +903,7 @@ class AppDatabase extends _$AppDatabase {
     final finishId = await _addFinishTimeManual(
       stageId: stageId,
       finishTime: finishTime,
-      timestamp: timestamp.toUtc().toIso8601String(),
+      timestamp: timestamp,
       number: number,
     );
     logger.i('Database -> Manual finish time added: $finishTime');
@@ -1142,12 +1141,12 @@ class AppDatabase extends _$AppDatabase {
     required String rawData,
     LogSourceDirection? direction,
   }) async {
-    final timeStamp = DateTime.now().toUtc().toIso8601String();
+    final timestamp = DateTime.now();
     final logId = await into(logs).insert(
       LogsCompanion(
         level: Value(level),
         // ToDO: use drift DATETIME format
-        timestamp: Value(timeStamp),
+        timestamp: Value(timestamp),
         source: Value(source),
         direction: Value(direction ?? LogSourceDirection.undefined),
         rawData: Value(rawData),

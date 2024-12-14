@@ -295,7 +295,7 @@ void main() {
 
     group('Tracks tests', () {
       test('Add track', () async {
-        final timestamp = DateTime.now().toUtc().toIso8601String();
+        final timestamp = DateTime.now();
         const content = 'File content';
         final data = content.codeUnits.asUint8List();
         final hashSha1 = sha1.convert(data);
@@ -312,8 +312,7 @@ void main() {
       });
 
       test('Check added track', () async {
-        final now = DateTime.now();
-        final timestamp = now.toUtc().toIso8601String();
+        final timestamp = DateTime.now();
         const content = 'File content';
         final data = content.codeUnits.asUint8List();
         final hashSha1 = sha1.convert(data);
@@ -344,12 +343,12 @@ void main() {
         expect(getTrack.description, track.description);
 
         expect(String.fromCharCodes(getTrack.data), content);
-        expect(DateTime.parse(getTrack.timestamp).toLocal(), now);
+        expect(getTrack.timestamp, timestamp);
       });
 
       test('Add two tracks with different files', () async {
         var name = 'fileName';
-        final timestamp = DateTime.now().toUtc().toIso8601String();
+        final timestamp = DateTime.now();
         var content = 'File content';
         var data = content.codeUnits.asUint8List();
         var hashSha1 = sha1.convert(data);
@@ -385,7 +384,7 @@ void main() {
 
       test('Do not add second track with same file', () async {
         var name = 'fileName';
-        final timestamp = DateTime.now().toUtc().toIso8601String();
+        final timestamp = DateTime.now();
         const content = 'File content';
         final data = content.codeUnits.asUint8List();
         final hashSha1 = sha1.convert(data);
@@ -417,7 +416,7 @@ void main() {
       });
 
       test('Delete track', () async {
-        final timestamp = DateTime.now().toUtc().toIso8601String();
+        final timestamp = DateTime.now();
         const content = 'File content';
         final data = content.codeUnits.asUint8List();
         final hashSha1 = sha1.convert(data);
@@ -670,7 +669,7 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const startTime = '10:15:00';
         const automaticStartTime = '10:15:01,123';
-        final timestamp = '10:15:01,001'.toDateTime()!.toUtc();
+        final timestamp = '10:15:01,001'.toDateTime()!;
         const correction = 1234;
 
         final result = await db.updateAutomaticCorrection(
@@ -693,7 +692,7 @@ void main() {
         expect(start.first.automaticCorrection, correction);
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
-        expect(start.first.timestamp, timestamp.toIso8601String());
+        expect(start.first.timestamp, timestamp);
       });
 
       test('Add correct correction to started participant', () async {
@@ -701,8 +700,8 @@ void main() {
         const startTime = '10:15:00';
         const automaticStartTime = '10:15:01,123';
         const automaticStartTimeNew = '10:15:05,678';
-        final timestamp = '10:15:01,001'.toDateTime()!.toUtc();
-        final timestampNew = '10:15:05,555'.toDateTime()!.toUtc();
+        final timestamp = '10:15:01,001'.toDateTime()!;
+        final timestampNew = '10:15:05,555'.toDateTime()!;
         const correction = 1234;
         const correctionNew = 5678;
 
@@ -735,7 +734,7 @@ void main() {
         expect(start.first.automaticCorrection, correction);
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
-        expect(start.first.timestamp, timestamp.toIso8601String());
+        expect(start.first.timestamp, timestamp);
       });
 
       test('Force update correction', () async {
@@ -743,8 +742,8 @@ void main() {
         const startTime = '10:15:00';
         const automaticStartTime = '10:15:01,123';
         const automaticStartTimeNew = '10:15:05,678';
-        final timestamp = '10:15:01,001'.toDateTime()!.toUtc();
-        final timestampNew = '10:15:05,555'.toDateTime()!.toUtc();
+        final timestamp = '10:15:01,001'.toDateTime()!;
+        final timestampNew = '10:15:05,555'.toDateTime()!;
         const correction = 1234;
         const correctionNew = 5678;
 
@@ -778,13 +777,13 @@ void main() {
         expect(start.first.automaticCorrection, correctionNew);
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
-        expect(start.first.timestamp, timestampNew.toIso8601String());
+        expect(start.first.timestamp, timestampNew);
       });
 
       test('Add incorrect automaticStartTime', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const automaticStartTime = '10:15-01,123';
-        final timestamp = '10:15:01,001'.toDateTime()!.toUtc();
+        final timestamp = '10:15:01,001'.toDateTime()!;
         const correction = 1234;
 
         expect(
@@ -803,7 +802,7 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const startTime = '10:15:00';
         const automaticStartTime = '10:15:03,123';
-        final timestamp = '10:15:03,001'.toDateTime()!.toUtc();
+        final timestamp = '10:15:03,001'.toDateTime()!;
         const correction = 1234;
         const delta = 1;
 
@@ -842,7 +841,7 @@ void main() {
         final result = await db.updateManualStartTime(
           stageId: stage.id,
           time: timestamp,
-          timestamp: timestamp.toUtc(),
+          timestamp: timestamp,
         );
         expect(result, 1);
 
@@ -857,7 +856,7 @@ void main() {
         expect(start.first.automaticCorrection, null);
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
-        expect(start.first.timestamp, timestamp.toUtc().toIso8601String());
+        expect(start.first.timestamp, timestamp);
         expect(start.first.manualStartTime, manualStartTime);
         expect(start.first.manualCorrection, correction);
       });
@@ -869,7 +868,7 @@ void main() {
         final result = await db.updateManualStartTime(
           stageId: stage.id,
           time: timestamp,
-          timestamp: timestamp.toUtc(),
+          timestamp: timestamp,
         );
         expect(result, 0);
       });
@@ -885,7 +884,7 @@ void main() {
         var result = await db.updateManualStartTime(
           stageId: stage.id,
           time: timestamp,
-          timestamp: timestamp.toUtc(),
+          timestamp: timestamp,
           deltaInSeconds: delta,
         );
         expect(result, 0);
@@ -908,7 +907,7 @@ void main() {
         result = await db.updateManualStartTime(
           stageId: stage.id,
           time: timestamp,
-          timestamp: timestamp.toUtc(),
+          timestamp: timestamp,
         );
         expect(result, 1);
 
@@ -923,7 +922,7 @@ void main() {
         expect(start.first.automaticCorrection, null);
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
-        expect(start.first.timestamp, timestamp.toUtc().toIso8601String());
+        expect(start.first.timestamp, timestamp);
         expect(start.first.manualStartTime, manualStartTime);
         expect(start.first.manualCorrection, correction);
       });
@@ -1030,7 +1029,7 @@ void main() {
         final automaticStartTime = startTime.replaceAll(':00', ':01,123');
         final manualStartTime = startTime.replaceAll(':00', ':01,523');
         final timestampString = startTime.replaceAll(':00', ':01,001');
-        final timestamp = timestampString.toDateTime()!.toUtc();
+        final timestamp = timestampString.toDateTime()!;
         const automaticCorrection = -1523;
 
         final correctionResult = await db.updateAutomaticCorrection(
@@ -1060,7 +1059,7 @@ void main() {
         expect(start.first.automaticCorrection, automaticCorrection);
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
-        expect(start.first.timestamp, timestamp.toIso8601String());
+        expect(start.first.timestamp, timestamp);
         expect(start.first.manualStartTime, manualStartTime);
         expect(start.first.manualCorrection, automaticCorrection);
 
@@ -1439,7 +1438,7 @@ void main() {
       test('New automatic finish time', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish = '10:05:23,123';
-        final timestamp = '10:05:23,456'.toDateTime()!.toUtc();
+        final timestamp = '10:05:23,456'.toDateTime()!;
 
         final result = await db.addFinishTime(
           stage: stage,
@@ -1454,7 +1453,7 @@ void main() {
         expect(finishes.first.stageId, stage.id);
         expect(finishes.first.number, null);
         expect(finishes.first.finishTime, finish);
-        expect(finishes.first.timestamp, timestamp.toIso8601String());
+        expect(finishes.first.timestamp, timestamp);
         expect(finishes.first.isHidden, false);
         expect(finishes.first.isManual, false);
       });
@@ -1463,8 +1462,8 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish1 = '10:05:23,123';
         const finish2 = '10:05:23,129';
-        final timestamp1 = '10:05:23,456'.toDateTime()!.toUtc();
-        final timestamp2 = '10:05:23,459'.toDateTime()!.toUtc();
+        final timestamp1 = '10:05:23,456'.toDateTime()!;
+        final timestamp2 = '10:05:23,459'.toDateTime()!;
 
         await db.addFinishTime(
           stage: stage,
@@ -1483,7 +1482,7 @@ void main() {
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, null);
         expect(finishes[1].finishTime, finish2);
-        expect(finishes[1].timestamp, timestamp2.toIso8601String());
+        expect(finishes[1].timestamp, timestamp2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
       });
@@ -1491,7 +1490,7 @@ void main() {
       test('Automatic add number to first finish time', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish1 = '10:05:23,123';
-        final timestamp1 = '10:05:23,456'.toDateTime()!.toUtc();
+        final timestamp1 = '10:05:23,456'.toDateTime()!;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number = 2;
 
@@ -1509,7 +1508,7 @@ void main() {
         expect(finishes.first.stageId, stage.id);
         expect(finishes.first.number, number);
         expect(finishes.first.finishTime, finish1);
-        expect(finishes.first.timestamp, timestamp1.toIso8601String());
+        expect(finishes.first.timestamp, timestamp1);
         expect(finishes.first.isHidden, false);
         expect(finishes.first.isManual, false);
       });
@@ -1518,8 +1517,8 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish1 = '10:05:23,123';
         const finish2 = '10:05:25,129';
-        final timestamp1 = '10:05:23,456'.toDateTime()!.toUtc();
-        final timestamp2 = '10:05:25,459'.toDateTime()!.toUtc();
+        final timestamp1 = '10:05:23,456'.toDateTime()!;
+        final timestamp2 = '10:05:25,459'.toDateTime()!;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number1 = 2;
 
@@ -1545,13 +1544,13 @@ void main() {
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, null);
         expect(finishes[0].finishTime, finish1);
-        expect(finishes[0].timestamp, timestamp1.toIso8601String());
+        expect(finishes[0].timestamp, timestamp1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, number1);
         expect(finishes[1].finishTime, finish2);
-        expect(finishes[1].timestamp, timestamp2.toIso8601String());
+        expect(finishes[1].timestamp, timestamp2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
       });
@@ -1560,8 +1559,8 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish1 = '10:05:23,123';
         const finish2 = '10:05:25,129';
-        final timestamp1 = '10:05:23,456'.toDateTime()!.toUtc();
-        final timestamp2 = '10:05:25,459'.toDateTime()!.toUtc();
+        final timestamp1 = '10:05:23,456'.toDateTime()!;
+        final timestamp2 = '10:05:25,459'.toDateTime()!;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number1 = 2;
         const number2 = 7;
@@ -1589,13 +1588,13 @@ void main() {
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, number1);
         expect(finishes[0].finishTime, finish1);
-        expect(finishes[0].timestamp, timestamp1.toIso8601String());
+        expect(finishes[0].timestamp, timestamp1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, number2);
         expect(finishes[1].finishTime, finish2);
-        expect(finishes[1].timestamp, timestamp2.toIso8601String());
+        expect(finishes[1].timestamp, timestamp2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
       });
@@ -1609,9 +1608,9 @@ void main() {
         const finish1 = '10:05:23,123';
         const finish2 = '10:05:23,129';
         const finish3 = '10:05:25,129';
-        final timestamp1 = '10:05:23,456'.toDateTime()!.toUtc();
-        final timestamp2 = '10:05:23,459'.toDateTime()!.toUtc();
-        final timestamp3 = '10:05:25,459'.toDateTime()!.toUtc();
+        final timestamp1 = '10:05:23,456'.toDateTime()!;
+        final timestamp2 = '10:05:23,459'.toDateTime()!;
+        final timestamp3 = '10:05:25,459'.toDateTime()!;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const substituteNumbersDelay = 1000;
         const number1 = 2;
@@ -1652,19 +1651,19 @@ void main() {
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, number1);
         expect(finishes[0].finishTime, finish1);
-        expect(finishes[0].timestamp, timestamp1.toIso8601String());
+        expect(finishes[0].timestamp, timestamp1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, null);
         expect(finishes[1].finishTime, finish2);
-        expect(finishes[1].timestamp, timestamp2.toIso8601String());
+        expect(finishes[1].timestamp, timestamp2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
         expect(finishes[2].stageId, stage.id);
         expect(finishes[2].number, number2);
         expect(finishes[2].finishTime, finish3);
-        expect(finishes[2].timestamp, timestamp3.toIso8601String());
+        expect(finishes[2].timestamp, timestamp3);
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
       });
@@ -1676,9 +1675,9 @@ void main() {
         const finish1 = '10:05:23,123';
         const finish2 = '10:05:23,129';
         const finish3 = '10:05:25,129';
-        final timestamp1 = '10:05:23,456'.toDateTime()!.toUtc();
-        final timestamp2 = '10:05:23,459'.toDateTime()!.toUtc();
-        final timestamp3 = '10:05:25,459'.toDateTime()!.toUtc();
+        final timestamp1 = '10:05:23,456'.toDateTime()!;
+        final timestamp2 = '10:05:23,459'.toDateTime()!;
+        final timestamp3 = '10:05:25,459'.toDateTime()!;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const finishDelay = 1000;
         const number1 = 2;
@@ -1724,19 +1723,19 @@ void main() {
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, number1);
         expect(finishes[0].finishTime, finish1);
-        expect(finishes[0].timestamp, timestamp1.toIso8601String());
+        expect(finishes[0].timestamp, timestamp1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, null);
         expect(finishes[1].finishTime, finish2);
-        expect(finishes[1].timestamp, timestamp2.toIso8601String());
+        expect(finishes[1].timestamp, timestamp2);
         expect(finishes[1].isHidden, true);
         expect(finishes[1].isManual, false);
         expect(finishes[2].stageId, stage.id);
         expect(finishes[2].number, number2);
         expect(finishes[2].finishTime, finish3);
-        expect(finishes[2].timestamp, timestamp3.toIso8601String());
+        expect(finishes[2].timestamp, timestamp3);
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
       });
@@ -1744,7 +1743,7 @@ void main() {
       test('Add incorrect finish time', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish = '10:05-23,123';
-        final timestamp = '10:05:23,456'.toDateTime()!.toUtc();
+        final timestamp = '10:05:23,456'.toDateTime()!;
         const finishDelay = 1000;
 
         final addNumber = await db.addFinishTime(
@@ -1939,9 +1938,9 @@ void main() {
         const finish1 = '10:05:23,123';
         const finish2 = '10:05:23,129';
         const finish3 = '10:05:25,129';
-        final timestamp1 = '10:05:23,456'.toDateTime()!.toUtc();
-        final timestamp2 = '10:05:24,459'.toDateTime()!.toUtc();
-        final timestamp3 = '10:05:25,459'.toDateTime()!.toUtc();
+        final timestamp1 = '10:05:23,456'.toDateTime()!;
+        final timestamp2 = '10:05:24,459'.toDateTime()!;
+        final timestamp3 = '10:05:25,459'.toDateTime()!;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number1 = 2;
         const number2 = 7;
@@ -1979,19 +1978,19 @@ void main() {
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, number1);
         expect(finishes[0].finishTime, finish1);
-        expect(finishes[0].timestamp, timestamp1.toIso8601String());
+        expect(finishes[0].timestamp, timestamp1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, number2);
         expect(finishes[1].finishTime, finish2);
-        expect(finishes[1].timestamp, timestamp2.toIso8601String());
+        expect(finishes[1].timestamp, timestamp2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
         expect(finishes[2].stageId, stage.id);
         expect(finishes[2].number, number3);
         expect(finishes[2].finishTime, finish3);
-        expect(finishes[2].timestamp, timestamp3.toIso8601String());
+        expect(finishes[2].timestamp, timestamp3);
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
 
@@ -2019,19 +2018,19 @@ void main() {
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, null);
         expect(finishes[0].finishTime, finish1);
-        expect(finishes[0].timestamp, timestamp1.toIso8601String());
+        expect(finishes[0].timestamp, timestamp1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, null);
         expect(finishes[1].finishTime, finish2);
-        expect(finishes[1].timestamp, timestamp2.toIso8601String());
+        expect(finishes[1].timestamp, timestamp2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
         expect(finishes[2].stageId, stage.id);
         expect(finishes[2].number, null);
         expect(finishes[2].finishTime, finish3);
-        expect(finishes[2].timestamp, timestamp3.toIso8601String());
+        expect(finishes[2].timestamp, timestamp3);
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
 
@@ -2058,7 +2057,7 @@ void main() {
       test('Clear number at finish', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish = '10:05:23,123';
-        final timestamp = '10:05:23,456'.toDateTime()!.toUtc();
+        final timestamp = '10:05:23,456'.toDateTime()!;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number = 2;
 
@@ -2076,7 +2075,7 @@ void main() {
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, number);
         expect(finishes[0].finishTime, finish);
-        expect(finishes[0].timestamp, timestamp.toIso8601String());
+        expect(finishes[0].timestamp, timestamp);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
 
@@ -2093,7 +2092,7 @@ void main() {
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, null);
         expect(finishes[0].finishTime, finish);
-        expect(finishes[0].timestamp, timestamp.toIso8601String());
+        expect(finishes[0].timestamp, timestamp);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
 

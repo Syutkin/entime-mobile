@@ -32,8 +32,8 @@ CREATE TABLE riders (
 	birthday text,
 	team text,
 	city text,
-	email text,
-	phone text,
+	email text UNIQUE,
+	phone text UNIQUE,
 	comment text,
 	is_deleted BOOLEAN NOT NULL DEFAULT false
 );
@@ -62,7 +62,7 @@ CREATE TABLE starts (
 	stage_id integer NOT NULL,
 	participant_id integer NOT NULL,
 	start_time text NOT NULL,
-	timestamp text,
+	timestamp DATETIME,
 	automatic_start_time text,
 	automatic_correction integer,
 	manual_start_time text,
@@ -79,7 +79,7 @@ CREATE TABLE finishes (
 	id INTEGER PRIMARY KEY NOT NULL,
 	stage_id integer NOT NULL,
 	number integer,
-	timestamp text NOT NULL,
+	timestamp DATETIME NOT NULL,
 	finish_time text NOT NULL,
 	is_hidden BOOLEAN NOT NULL DEFAULT false,
 	is_manual BOOLEAN NOT NULL DEFAULT false,
@@ -106,13 +106,13 @@ CREATE TABLE track_files (
     description text,
     hash_sha1 text NOT NULL,
     data blob(20MB) NOT NULL,
-    timestamp text NOT NULL
+    timestamp DATETIME NOT NULL
 );
 
 CREATE TABLE logs (
     id INTEGER PRIMARY KEY NOT NULL,
     level ENUMNAME(LogLevel) NOT NULL,
-    timestamp text NOT NULL,
+    timestamp DATETIME NOT NULL,
     source ENUMNAME(LogSource) NOT NULL,
     direction ENUMNAME(LogSourceDirection) NOT NULL,
     raw_data text

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../constants/date_time_formats.dart';
+import '../../../common/utils/filesize.dart';
 import '../../database/database.dart';
 import '../bloc/trails_bloc.dart';
 
@@ -19,16 +19,22 @@ class TrailItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ToDo: Переделать информацию о трейле
-    var date = '';
     final timestamp = trail.timestamp;
-    if (timestamp != null) {
-      date = DateFormat(shortDateFormat)
-          .format(DateTime.parse(timestamp).toLocal());
-    }
+    final fileSize = trail.fileSize;
+    final subtitle = <String>[
+      if (timestamp != null) DateFormat.yMMMd().format(timestamp),
+      if (fileSize != null) filesize(fileSize),
+    ];
     return ListTile(
       title: Text(trail.name),
-      subtitle: Text('${trail.fileSize}, $date, ${trail.fileHashSha1}'),
+      subtitle: subtitle.isNotEmpty
+          ? Text(
+              subtitle.join(', '),
+              style: DefaultTextStyle.of(context).style.apply(
+                    fontSizeFactor: 0.75,
+                  ),
+            )
+          : null,
       leading: trail.fileId != null
           ? Icon(MdiIcons.mapMarkerOutline)
           : Icon(MdiIcons.mapMarkerOffOutline),

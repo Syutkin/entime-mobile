@@ -104,7 +104,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
               final name = path.basenameWithoutExtension(event.filePath);
               final extension = path.extension(event.filePath);
               final size = await file.length();
-              final timestamp = DateTime.now().toUtc().toIso8601String();
+              final timestamp = DateTime.now();
               final data = <int>[];
 
               if (size > uploadMaxSize) {
