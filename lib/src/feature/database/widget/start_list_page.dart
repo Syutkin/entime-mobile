@@ -375,16 +375,24 @@ class _StartListPage extends State<StartListPage> {
     return <Widget>[
       TextButton(
         onPressed: () {
-          BlocProvider.of<BluetoothBloc>(context).add(
-            BluetoothEvent.messageReceived(
-              message:
-                  'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
-              stageId: stageId,
-            ),
+          BlocProvider.of<DatabaseBloc>(context).add(
+            DatabaseEvent.clearStartResultsDebug(stageId),
           );
         },
-        child: const Icon(Icons.record_voice_over_rounded),
+        child: const Icon(Icons.clear_all),
       ),
+      // TextButton(
+      //   onPressed: () {
+      //     BlocProvider.of<BluetoothBloc>(context).add(
+      //       BluetoothEvent.messageReceived(
+      //         message:
+      //             'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+      //         stageId: stageId,
+      //       ),
+      //     );
+      //   },
+      //   child: const Icon(Icons.record_voice_over_rounded),
+      // ),
       TextButton(
         onPressed: () {
           BlocProvider.of<BluetoothBloc>(context).add(

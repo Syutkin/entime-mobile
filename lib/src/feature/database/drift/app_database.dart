@@ -924,29 +924,6 @@ class AppDatabase extends _$AppDatabase {
     return rowCount;
   }
 
-  Future<void> clearFinishResultsDebug(int stageId) async {
-    var rowCount = await customUpdate(
-      'UPDATE starts SET finish_id = NULL WHERE stage_id = ?',
-      variables: [Variable.withInt(stageId)],
-      updates: {starts},
-      updateKind: UpdateKind.update,
-    );
-    logger.d(
-      'Database -> Finish info for $rowCount starting participants cleared',
-    );
-    rowCount = await customUpdate(
-      'UPDATE finishes '
-      'SET number = NULL, is_hidden = false '
-      'WHERE stage_id = ?',
-      variables: [Variable.withInt(stageId)],
-      updates: {finishes},
-      updateKind: UpdateKind.update,
-    );
-    logger
-      ..d('Database -> $rowCount finish results cleared')
-      ..i('Database -> Results cleared');
-  }
-
   Future<bool> addNumberToFinish({
     required Stage stage,
     required int finishId,
@@ -1226,13 +1203,50 @@ class AppDatabase extends _$AppDatabase {
   }
 
 // -------------------------
-// для тестирования
+// для тестирования и дебага
 
   Selectable<NumberAtStart> getNumberAtStarts({
     required int stageId,
     required int number,
   }) {
     return _getNumberAtStarts(stageId: stageId, number: number);
+  }
+
+  Future<int> clearStartResultsDebug({required int stageId}) async {
+    final rowCount = await managers.starts.filter((f) => f.stageId(stageId)).update(
+          (f) => StartsCompanion(
+            automaticCorrection: const Value(null),
+            automaticStartTime: const Value(null),
+            timestamp: const Value(null),
+            manualCorrection: const Value(null),
+            manualStartTime: const Value(null),
+            statusId: Value(ParticipantStatus.active.index),
+            finishId: const Value(null),
+          ),
+        );
+    logger.d('Database -> $rowCount start results cleared');
+    return rowCount;
+  }
+
+  Future<void> clearFinishResultsDebug(int stageId) async {
+    var rowCount = await customUpdate(
+      'UPDATE starts SET finish_id = NULL WHERE stage_id = ?',
+      variables: [Variable.withInt(stageId)],
+      updates: {starts},
+      updateKind: UpdateKind.update,
+    );
+    logger.d(
+      'Database -> Finish info for $rowCount starting participants cleared',
+    );
+    rowCount = await customUpdate(
+      'UPDATE finishes '
+      'SET number = NULL, is_hidden = false '
+      'WHERE stage_id = ?',
+      variables: [Variable.withInt(stageId)],
+      updates: {finishes},
+      updateKind: UpdateKind.update,
+    );
+    logger.d('Database -> $rowCount finish results cleared');
   }
 }
 

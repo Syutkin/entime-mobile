@@ -405,9 +405,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             number: event.number,
           );
         },
-        //ToDo:
-        clearStartResultsDebug: (event) {
-          throw Exception('Not implemented');
+        clearStartResultsDebug: (event) async {
+          await _db.clearStartResultsDebug(stageId: event.stageId);
         },
         clearFinishResultsDebug: (event) async {
           await _db.clearFinishResultsDebug(event.stageId);
