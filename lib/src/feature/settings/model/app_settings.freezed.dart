@@ -2333,7 +2333,6 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @JsonKey()
   final String voiceLanguage;
 // = "ru-RU", // язык
-// ToDo: не изменять эти настройки при установке значений по умолчанию
 // id выбранного соревнования и участка
   @override
   @JsonKey()
@@ -3145,7 +3144,6 @@ abstract class _AppSettingsDefaults implements AppSettings {
   double get rate; // скорость речи
   @override
   String get voiceLanguage; // = "ru-RU", // язык
-// ToDo: не изменять эти настройки при установке значений по умолчанию
 // id выбранного соревнования и участка
   @override
   int get raceId;

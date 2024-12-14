@@ -131,7 +131,6 @@ class AppSettings with _$AppSettings {
     @Default(0.5) double rate, // скорость речи
     @Default('ru-RU') String voiceLanguage, // = "ru-RU", // язык
 
-    // ToDo: не изменять эти настройки при установке значений по умолчанию
     // id выбранного соревнования и участка
     @Default(-1) int raceId,
     @Default(-1) int stageId,
