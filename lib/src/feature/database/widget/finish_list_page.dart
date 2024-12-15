@@ -164,14 +164,12 @@ class _FinishListPage extends State<FinishListPage> {
                 previous.settings.showManual != current.settings.showManual ||
                 previous.settings.showNumbers != current.settings.showNumbers,
             builder: (context, state) {
-              print('finishProtocol.length: ${finishProtocol.length}');
               final filteredList = filterFinishList(
                 finishProtocol,
                 showHidden: state.settings.showHidden,
                 showManual: state.settings.showManual,
                 showNumbers: state.settings.showNumbers,
               );
-              print('filteredList.length: ${filteredList.length}');
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
                   childCount: filteredList.length,
