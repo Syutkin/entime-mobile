@@ -212,6 +212,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("По умолчанию"),
         "I18nHome_showColorFinishDifference":
             MessageLookupByLibrary.simpleMessage("Цветовая индикация разницы"),
+        "I18nHome_showDNF": MessageLookupByLibrary.simpleMessage("DNF"),
+        "I18nHome_showDNS": MessageLookupByLibrary.simpleMessage("DNS"),
+        "I18nHome_showDSQ": MessageLookupByLibrary.simpleMessage("DSQ"),
         "I18nHome_showFinishDifference":
             MessageLookupByLibrary.simpleMessage("Разница во времени"),
         "I18nHome_start": MessageLookupByLibrary.simpleMessage("Старт"),

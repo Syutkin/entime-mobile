@@ -759,6 +759,21 @@ class I18nHome {
         'По умолчанию',
         name: 'I18nHome_setDefaults',
       );
+
+  static String get showDNS => Intl.message(
+    'DNS',
+    name: 'I18nHome_showDNS',
+  );
+
+  static String get showDNF => Intl.message(
+    'DNF',
+    name: 'I18nHome_showDNF',
+  );
+
+  static String get showDSQ => Intl.message(
+    'DSQ',
+    name: 'I18nHome_showDSQ',
+  );
 }
 
 class I18nInit {

@@ -1315,6 +1315,36 @@ class GeneratedLocalization {
     );
   }
 
+  /// `DNS`
+  String get I18nHome_showDNS {
+    return Intl.message(
+      'DNS',
+      name: 'I18nHome_showDNS',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DNF`
+  String get I18nHome_showDNF {
+    return Intl.message(
+      'DNF',
+      name: 'I18nHome_showDNF',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DSQ`
+  String get I18nHome_showDSQ {
+    return Intl.message(
+      'DSQ',
+      name: 'I18nHome_showDSQ',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Выберите соревнование`
   String get I18nInit_selectRace {
     return Intl.message(

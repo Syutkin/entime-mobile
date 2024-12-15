@@ -1,3 +1,4 @@
+import 'package:entime/src/feature/settings/model/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
@@ -8,6 +9,7 @@ import '../../bluetooth/bluetooth.dart';
 import '../../countdown/bloc/countdown_bloc.dart';
 import '../../database/bloc/database_bloc.dart';
 import '../../database/model/filter_finish.dart';
+import '../../database/model/filter_start.dart';
 import '../../database/widget/start_list_page.dart';
 import '../../module_settings/module_settings.dart';
 import '../../settings/bloc/settings_bloc.dart';
@@ -31,7 +33,7 @@ class HomeScreen extends StatelessWidget {
             appBar: AppBar(
               title: const _TextTitle(),
               actions: <Widget>[
-                _FinishFilterButton(activeTab: activeTab),
+                _FilterButton(activeTab: activeTab),
                 const BluetoothButton(),
                 MenuButton(
                   key: const Key('HomeAppBarMenuButton'),
@@ -282,8 +284,8 @@ class _TextTitle extends StatelessWidget {
       );
 }
 
-class _FinishFilterButton extends StatelessWidget {
-  const _FinishFilterButton({
+class _FilterButton extends StatelessWidget {
+  const _FilterButton({
     required this.activeTab,
   });
 
@@ -295,7 +297,74 @@ class _FinishFilterButton extends StatelessWidget {
       builder: (context, settingsState) {
         final settingsBloc = context.read<SettingsBloc>();
         final settings = settingsState.settings;
-        if (activeTab == AppTab.finish) {
+        if (activeTab == AppTab.start) {
+          final menuItems = <PopupMenuEntry<FilterStart>>[
+            CheckedPopupMenuItem(
+              value: FilterStart.showDNS,
+              checked: settings.showDNS,
+              child: Text(Localization.current.I18nHome_showDNS),
+            ),
+            CheckedPopupMenuItem(
+              value: FilterStart.showDNF,
+              checked: settings.showDNF,
+              child: Text(Localization.current.I18nHome_showDNF),
+            ),
+            CheckedPopupMenuItem(
+              value: FilterStart.showDSQ,
+              checked: settings.showDSQ,
+              child: Text(Localization.current.I18nHome_showDSQ),
+            ),
+            const PopupMenuDivider(),
+            PopupMenuItem(
+              value: FilterStart.setDefaults,
+              child: ListTile(
+                leading: const SizedBox.shrink(),
+                title: Text(Localization.current.I18nHome_setDefaults),
+              ),
+            ),
+          ];
+          return PopupMenuButton<FilterStart>(
+            icon: const Icon(Icons.filter_list),
+            itemBuilder: (context) => menuItems,
+            onSelected: (value) async {
+              switch (value) {
+                case FilterStart.showDNS:
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                      settings.copyWith(showDNS: !settings.showDNS),
+                    ),
+                  );
+                case FilterStart.showDNF:
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settings.copyWith(
+                        showDNF: !settings.showDNF,
+                      ),
+                    ),
+                  );
+                case FilterStart.showDSQ:
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings:
+                      settings.copyWith(showDSQ: !settings.showDSQ),
+                    ),
+                  );
+                case FilterStart.setDefaults:
+                  const defaults = AppSettings.defaults();
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settings.copyWith(
+                        showDNS: defaults.showDNS,
+                        showDNF: defaults.showDNF,
+                        showDSQ: defaults.showDSQ,
+                      ),
+                    ),
+                  );
+              }
+            },
+          );
+        } else if (activeTab == AppTab.finish) {
           final menuItems = <PopupMenuEntry<FilterFinish>>[
             CheckedPopupMenuItem(
               value: FilterFinish.hideMarked,
@@ -349,12 +418,13 @@ class _FinishFilterButton extends StatelessWidget {
                     ),
                   );
                 case FilterFinish.setDefaults:
+                  const defaults = AppSettings.defaults();
                   settingsBloc.add(
                     SettingsEvent.update(
                       settings: settings.copyWith(
-                        hideMarked: true,
-                        hideNumbers: false,
-                        hideManual: false,
+                        hideMarked: defaults.hideMarked,
+                        hideNumbers: defaults.hideNumbers,
+                        hideManual: defaults.hideManual,
                       ),
                     ),
                   );

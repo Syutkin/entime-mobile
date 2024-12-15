@@ -56,7 +56,12 @@ class AppSettings with _$AppSettings {
     // проверка обновлений
     required bool checkUpdates,
 
-    // выборка значений в финише
+    // выборка значений на старте
+    required bool showDNS,
+    required bool showDNF,
+    required bool showDSQ,
+
+    // выборка значений на финише
     required bool hideMarked,
     required bool hideNumbers,
     required bool hideManual,
@@ -156,7 +161,12 @@ class AppSettings with _$AppSettings {
     // проверка обновлений
     @Default(true) bool checkUpdates,
 
-    // выборка значений в финише
+    // выборка значений на старте
+    @Default(false) bool showDNS,
+    @Default(false) bool showDNF,
+    @Default(false) bool showDSQ,
+
+    // выборка значений на финише
     @Default(true) bool hideMarked,
     @Default(false) bool hideNumbers,
     @Default(false) bool hideManual,

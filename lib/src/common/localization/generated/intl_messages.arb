@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-14T18:50:19.704268",
+  "@@last_modified": "2024-12-15T10:12:59.537007",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -667,6 +667,21 @@
   },
   "I18nHome_setDefaults": "По умолчанию",
   "@I18nHome_setDefaults": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nHome_showDNS": "DNS",
+  "@I18nHome_showDNS": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nHome_showDNF": "DNF",
+  "@I18nHome_showDNF": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nHome_showDSQ": "DSQ",
+  "@I18nHome_showDSQ": {
     "type": "text",
     "placeholders": {}
   },

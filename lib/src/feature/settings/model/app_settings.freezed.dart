@@ -54,7 +54,11 @@ mixin _$AppSettings {
   bool get countdownAtStartTime =>
       throw _privateConstructorUsedError; // проверка обновлений
   bool get checkUpdates =>
-      throw _privateConstructorUsedError; // выборка значений в финише
+      throw _privateConstructorUsedError; // выборка значений на старте
+  bool get showDNS => throw _privateConstructorUsedError;
+  bool get showDNF => throw _privateConstructorUsedError;
+  bool get showDSQ =>
+      throw _privateConstructorUsedError; // выборка значений на финише
   bool get hideMarked => throw _privateConstructorUsedError;
   bool get hideNumbers => throw _privateConstructorUsedError;
   bool get hideManual =>
@@ -118,6 +122,9 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -164,6 +171,9 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -214,6 +224,9 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -260,6 +273,9 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -310,6 +326,9 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -356,6 +375,9 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -438,6 +460,9 @@ abstract class $AppSettingsCopyWith<$Res> {
       double countdownTop,
       bool countdownAtStartTime,
       bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
       bool hideMarked,
       bool hideNumbers,
       bool hideManual,
@@ -499,6 +524,9 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? countdownTop = null,
     Object? countdownAtStartTime = null,
     Object? checkUpdates = null,
+    Object? showDNS = null,
+    Object? showDNF = null,
+    Object? showDSQ = null,
     Object? hideMarked = null,
     Object? hideNumbers = null,
     Object? hideManual = null,
@@ -620,6 +648,18 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
+      showDNS: null == showDNS
+          ? _value.showDNS
+          : showDNS // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showDNF: null == showDNF
+          ? _value.showDNF
+          : showDNF // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showDSQ: null == showDSQ
+          ? _value.showDSQ
+          : showDSQ // ignore: cast_nullable_to_non_nullable
+              as bool,
       hideMarked: null == hideMarked
           ? _value.hideMarked
           : hideMarked // ignore: cast_nullable_to_non_nullable
@@ -734,6 +774,9 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       double countdownTop,
       bool countdownAtStartTime,
       bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
       bool hideMarked,
       bool hideNumbers,
       bool hideManual,
@@ -793,6 +836,9 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? countdownTop = null,
     Object? countdownAtStartTime = null,
     Object? checkUpdates = null,
+    Object? showDNS = null,
+    Object? showDNF = null,
+    Object? showDSQ = null,
     Object? hideMarked = null,
     Object? hideNumbers = null,
     Object? hideManual = null,
@@ -914,6 +960,18 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
+      showDNS: null == showDNS
+          ? _value.showDNS
+          : showDNS // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showDNF: null == showDNF
+          ? _value.showDNF
+          : showDNF // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showDSQ: null == showDSQ
+          ? _value.showDSQ
+          : showDSQ // ignore: cast_nullable_to_non_nullable
+              as bool,
       hideMarked: null == hideMarked
           ? _value.hideMarked
           : hideMarked // ignore: cast_nullable_to_non_nullable
@@ -1023,6 +1081,9 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.countdownTop,
       required this.countdownAtStartTime,
       required this.checkUpdates,
+      required this.showDNS,
+      required this.showDNF,
+      required this.showDSQ,
       required this.hideMarked,
       required this.hideNumbers,
       required this.hideManual,
@@ -1111,7 +1172,14 @@ class _$AppSettingsImpl implements _AppSettings {
 // проверка обновлений
   @override
   final bool checkUpdates;
-// выборка значений в финише
+// выборка значений на старте
+  @override
+  final bool showDNS;
+  @override
+  final bool showDNF;
+  @override
+  final bool showDSQ;
+// выборка значений на финише
   @override
   final bool hideMarked;
   @override
@@ -1169,7 +1237,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -1219,6 +1287,9 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.countdownAtStartTime == countdownAtStartTime) &&
             (identical(other.checkUpdates, checkUpdates) ||
                 other.checkUpdates == checkUpdates) &&
+            (identical(other.showDNS, showDNS) || other.showDNS == showDNS) &&
+            (identical(other.showDNF, showDNF) || other.showDNF == showDNF) &&
+            (identical(other.showDSQ, showDSQ) || other.showDSQ == showDSQ) &&
             (identical(other.hideMarked, hideMarked) ||
                 other.hideMarked == hideMarked) &&
             (identical(other.hideNumbers, hideNumbers) ||
@@ -1289,6 +1360,9 @@ class _$AppSettingsImpl implements _AppSettings {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
+        showDNS,
+        showDNF,
+        showDSQ,
         hideMarked,
         hideNumbers,
         hideManual,
@@ -1347,6 +1421,9 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -1393,6 +1470,9 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -1440,6 +1520,9 @@ class _$AppSettingsImpl implements _AppSettings {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
+        showDNS,
+        showDNF,
+        showDSQ,
         hideMarked,
         hideNumbers,
         hideManual,
@@ -1490,6 +1573,9 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -1536,6 +1622,9 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -1583,6 +1672,9 @@ class _$AppSettingsImpl implements _AppSettings {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
+        showDNS,
+        showDNF,
+        showDSQ,
         hideMarked,
         hideNumbers,
         hideManual,
@@ -1633,6 +1725,9 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -1679,6 +1774,9 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -1728,6 +1826,9 @@ class _$AppSettingsImpl implements _AppSettings {
           countdownTop,
           countdownAtStartTime,
           checkUpdates,
+          showDNS,
+          showDNF,
+          showDSQ,
           hideMarked,
           hideNumbers,
           hideManual,
@@ -1810,6 +1911,9 @@ abstract class _AppSettings implements AppSettings {
       required final double countdownTop,
       required final bool countdownAtStartTime,
       required final bool checkUpdates,
+      required final bool showDNS,
+      required final bool showDNF,
+      required final bool showDSQ,
       required final bool hideMarked,
       required final bool hideNumbers,
       required final bool hideManual,
@@ -1884,7 +1988,13 @@ abstract class _AppSettings implements AppSettings {
   @override
   bool get countdownAtStartTime; // проверка обновлений
   @override
-  bool get checkUpdates; // выборка значений в финише
+  bool get checkUpdates; // выборка значений на старте
+  @override
+  bool get showDNS;
+  @override
+  bool get showDNF;
+  @override
+  bool get showDSQ; // выборка значений на финише
   @override
   bool get hideMarked;
   @override
@@ -1974,6 +2084,9 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       double countdownTop,
       bool countdownAtStartTime,
       bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
       bool hideMarked,
       bool hideNumbers,
       bool hideManual,
@@ -2033,6 +2146,9 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? countdownTop = null,
     Object? countdownAtStartTime = null,
     Object? checkUpdates = null,
+    Object? showDNS = null,
+    Object? showDNF = null,
+    Object? showDSQ = null,
     Object? hideMarked = null,
     Object? hideNumbers = null,
     Object? hideManual = null,
@@ -2154,6 +2270,18 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
+      showDNS: null == showDNS
+          ? _value.showDNS
+          : showDNS // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showDNF: null == showDNF
+          ? _value.showDNF
+          : showDNF // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showDSQ: null == showDSQ
+          ? _value.showDSQ
+          : showDSQ // ignore: cast_nullable_to_non_nullable
+              as bool,
       hideMarked: null == hideMarked
           ? _value.hideMarked
           : hideMarked // ignore: cast_nullable_to_non_nullable
@@ -2263,6 +2391,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.countdownTop = 0,
       this.countdownAtStartTime = true,
       this.checkUpdates = true,
+      this.showDNS = false,
+      this.showDNF = false,
+      this.showDSQ = false,
       this.hideMarked = true,
       this.hideNumbers = false,
       this.hideManual = false,
@@ -2378,7 +2509,17 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final bool checkUpdates;
-// выборка значений в финише
+// выборка значений на старте
+  @override
+  @JsonKey()
+  final bool showDNS;
+  @override
+  @JsonKey()
+  final bool showDNF;
+  @override
+  @JsonKey()
+  final bool showDSQ;
+// выборка значений на финише
   @override
   @JsonKey()
   final bool hideMarked;
@@ -2455,7 +2596,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings.defaults(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -2505,6 +2646,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.countdownAtStartTime == countdownAtStartTime) &&
             (identical(other.checkUpdates, checkUpdates) ||
                 other.checkUpdates == checkUpdates) &&
+            (identical(other.showDNS, showDNS) || other.showDNS == showDNS) &&
+            (identical(other.showDNF, showDNF) || other.showDNF == showDNF) &&
+            (identical(other.showDSQ, showDSQ) || other.showDSQ == showDSQ) &&
             (identical(other.hideMarked, hideMarked) ||
                 other.hideMarked == hideMarked) &&
             (identical(other.hideNumbers, hideNumbers) ||
@@ -2575,6 +2719,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
+        showDNS,
+        showDNF,
+        showDSQ,
         hideMarked,
         hideNumbers,
         hideManual,
@@ -2634,6 +2781,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -2680,6 +2830,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -2727,6 +2880,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
+        showDNS,
+        showDNF,
+        showDSQ,
         hideMarked,
         hideNumbers,
         hideManual,
@@ -2777,6 +2933,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -2823,6 +2982,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -2870,6 +3032,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
+        showDNS,
+        showDNF,
+        showDSQ,
         hideMarked,
         hideNumbers,
         hideManual,
@@ -2920,6 +3085,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -2966,6 +3134,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
             bool hideMarked,
             bool hideNumbers,
             bool hideManual,
@@ -3015,6 +3186,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           countdownTop,
           countdownAtStartTime,
           checkUpdates,
+          showDNS,
+          showDNF,
+          showDSQ,
           hideMarked,
           hideNumbers,
           hideManual,
@@ -3097,6 +3271,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final double countdownTop,
       final bool countdownAtStartTime,
       final bool checkUpdates,
+      final bool showDNS,
+      final bool showDNF,
+      final bool showDSQ,
       final bool hideMarked,
       final bool hideNumbers,
       final bool hideManual,
@@ -3171,7 +3348,13 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   bool get countdownAtStartTime; // проверка обновлений
   @override
-  bool get checkUpdates; // выборка значений в финише
+  bool get checkUpdates; // выборка значений на старте
+  @override
+  bool get showDNS;
+  @override
+  bool get showDNF;
+  @override
+  bool get showDSQ; // выборка значений на финише
   @override
   bool get hideMarked;
   @override

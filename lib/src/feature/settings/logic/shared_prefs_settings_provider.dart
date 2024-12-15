@@ -50,6 +50,9 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       countdownAtStartTime: prefs.getBool('countdownAtStartTime') ??
           defaults.countdownAtStartTime,
       checkUpdates: prefs.getBool('checkUpdates') ?? defaults.checkUpdates,
+      showDNS: prefs.getBool('showDNS') ?? defaults.showDNS,
+      showDNF: prefs.getBool('showDNF') ?? defaults.showDNF,
+      showDSQ: prefs.getBool('showDSQ') ?? defaults.showDSQ,
       hideMarked: prefs.getBool('hideMarked') ?? defaults.hideMarked,
       hideNumbers: prefs.getBool('hideNumbers') ?? defaults.hideNumbers,
       hideManual: prefs.getBool('hideManual') ?? defaults.hideManual,
@@ -140,6 +143,9 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setDouble('countdownTop', settings.countdownTop);
     await _prefs.setBool('countdownAtStartTime', settings.countdownAtStartTime);
     await _prefs.setBool('checkUpdates', settings.checkUpdates);
+    await _prefs.setBool('showDNS', settings.showDNS);
+    await _prefs.setBool('showDNF', settings.showDNF);
+    await _prefs.setBool('showDSQ', settings.showDSQ);
     await _prefs.setBool('hideMarked', settings.hideMarked);
     await _prefs.setBool('hideNumbers', settings.hideNumbers);
     await _prefs.setBool('hideManual', settings.hideManual);
