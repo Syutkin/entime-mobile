@@ -68,7 +68,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     //   add( DatabaseEvent.onChanged());
     // });
 
-    _startsSubscription = _db.select(_db.starts).watch().listen((event) async {
+    _startsSubscription =
+        _db.getParticipantsAtStart(stageId: 0).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
       _participants = await _db.getParticipantsAtStart(stageId: stageId).get();
       logger.t(
@@ -578,7 +579,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   late StreamSubscription<List<Race>> _racesSubscription;
   late StreamSubscription<List<Stage>> _stagesSubscription;
-  late StreamSubscription<List<Start>> _startsSubscription;
+  late StreamSubscription<List<ParticipantAtStart>> _startsSubscription;
   late StreamSubscription<List<Finish>> _finishesSubscription;
   late StreamSubscription<List<StartingParticipant>>
       _numbersOnTraceSubscription;

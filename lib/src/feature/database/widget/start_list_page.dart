@@ -43,66 +43,83 @@ class _StartListPage extends State<StartListPage> {
               child: _SliverStartSubHeader(),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: startList.length,
-              (context, index) {
-                final item = startList[index];
-                var isHighlighted = false;
-                return BlocBuilder<CountdownBloc, CountdownState>(
-                  buildWhen: (previous, current) {
-                    final previousIsHighlighted =
-                        item.startTime == _activeStartTime(previous);
-                    isHighlighted = item.startTime == _activeStartTime(current);
-                    // Обновлять при сдвигании следующего старта (убирать подсветку)
-                    if (previousIsHighlighted && !isHighlighted) {
-                      return true;
-                    } else {
-                      // Обновлять только там, где есть обратный отсчёт
-                      return isHighlighted &&
-                          (previous.mapOrNull(
-                                working: (state) => state.tick.text,
-                              ) !=
-                              current.mapOrNull(
-                                working: (state) => state.tick.text,
-                              ));
-                    }
-                  },
-                  builder: (context, countdownState) =>
-                      BlocBuilder<SettingsBloc, SettingsState>(
-                    buildWhen: (previous, current) =>
-                        previous.settings.countdownAtStartTime !=
-                        current.settings.countdownAtStartTime,
-                    builder: (
-                      context,
-                      settingsState,
-                    ) =>
-                        StartItemTile(
-                      item: item,
-                      onTap: () async {
-                        await editStartTime(context, item);
+          BlocBuilder<SettingsBloc, SettingsState>(
+            buildWhen: (previous, current) =>
+                previous.settings.showDNS != current.settings.showDNS ||
+                previous.settings.showDNF != current.settings.showDNF ||
+                previous.settings.showDSQ != current.settings.showDSQ,
+            builder: (context, state) {
+              final filteredList = _filterStartList(
+                startList,
+                showDNS: state.settings.showDNS,
+                showDNF: state.settings.showDNF,
+                showDSQ: state.settings.showDSQ,
+              );
+              print('filteredList.length: ${filteredList.length}');
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: filteredList.length,
+                  (context, index) {
+                    final item = filteredList[index];
+                    var isHighlighted = false;
+                    return BlocBuilder<CountdownBloc, CountdownState>(
+                      buildWhen: (previous, current) {
+                        final previousIsHighlighted =
+                            item.startTime == _activeStartTime(previous);
+                        isHighlighted =
+                            item.startTime == _activeStartTime(current);
+                        // Обновлять при сдвигании следующего старта (убирать подсветку)
+                        if (previousIsHighlighted && !isHighlighted) {
+                          return true;
+                        } else {
+                          // Обновлять только там, где есть обратный отсчёт
+                          return isHighlighted &&
+                              (previous.mapOrNull(
+                                    working: (state) => state.tick.text,
+                                  ) !=
+                                  current.mapOrNull(
+                                    working: (state) => state.tick.text,
+                                  ));
+                        }
                       },
+                      builder: (context, countdownState) =>
+                          BlocBuilder<SettingsBloc, SettingsState>(
+                        buildWhen: (previous, current) =>
+                            previous.settings.countdownAtStartTime !=
+                            current.settings.countdownAtStartTime,
+                        builder: (
+                          context,
+                          settingsState,
+                        ) =>
+                            StartItemTile(
+                          item: item,
+                          onTap: () async {
+                            await editStartTime(context, item);
+                          },
 
-                      /// Set DNS on dismissed
-                      onDismissed: (direction) {
-                        BlocProvider.of<DatabaseBloc>(context).add(
-                          DatabaseEvent.setStatusForStartId(
-                            startId: item.startId,
-                            status: ParticipantStatus.dns,
-                          ),
-                        );
-                      },
-                      isHighlighted: isHighlighted,
-                      countdown: settingsState.settings.countdownAtStartTime &&
-                              isHighlighted
-                          ? _countdownFromState(countdownState)
-                          : null,
-                    ),
-                  ),
-                );
-              },
-              // childCount: startList.length,
-            ),
+                          /// Set DNS on dismissed
+                          onDismissed: (direction) {
+                            BlocProvider.of<DatabaseBloc>(context).add(
+                              DatabaseEvent.setStatusForStartId(
+                                startId: item.startId,
+                                status: ParticipantStatus.dns,
+                              ),
+                            );
+                          },
+                          isHighlighted: isHighlighted,
+                          countdown:
+                              settingsState.settings.countdownAtStartTime &&
+                                      isHighlighted
+                                  ? _countdownFromState(countdownState)
+                                  : null,
+                        ),
+                      ),
+                    );
+                  },
+                  // childCount: startList.length,
+                ),
+              );
+            },
           ),
         ],
       );
@@ -463,6 +480,33 @@ class _StartListPage extends State<StartListPage> {
         child: const Icon(Icons.bluetooth),
       ),
     ];
+  }
+
+  List<ParticipantAtStart> _filterStartList(
+    List<ParticipantAtStart> list, {
+    required bool showDNS,
+    required bool showDNF,
+    required bool showDSQ,
+  }) {
+    // Do not apply filters to list
+    if (showDNS && showDNF && showDSQ) {
+      return list;
+    } else {
+      return list.where((e) {
+        final result = (e.statusId == ParticipantStatus.active.index &&
+                e.participantStatusId == ParticipantStatus.active.index) ||
+            (showDNS &&
+                (e.participantStatusId == ParticipantStatus.dns.index ||
+                    e.statusId == ParticipantStatus.dns.index)) ||
+            (showDNF &&
+                (e.participantStatusId == ParticipantStatus.dnf.index ||
+                    e.statusId == ParticipantStatus.dnf.index)) ||
+            (showDSQ &&
+                (e.participantStatusId == ParticipantStatus.dsq.index ||
+                    e.statusId == ParticipantStatus.dsq.index));
+        return result;
+      }).toList();
+    }
   }
 }
 

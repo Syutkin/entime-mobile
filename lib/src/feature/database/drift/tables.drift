@@ -253,8 +253,8 @@ WHERE
 	participants.rider_id = riders.id
     AND starts.participant_id = participants.id
 	AND stage_id = :stage_id
-	AND starts.status_id = 1
-	AND participants.status_id = 1
+--	AND starts.status_id = 1
+--	AND participants.status_id = 1
 ORDER BY start_time ASC;
 
 _getExistedStartingParticipants AS StartingParticipant:
