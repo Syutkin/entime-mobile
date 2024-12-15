@@ -84,13 +84,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       _finishes = await _db
           .getFinishesFromStage(
             stageId: stageId,
-            hideManual: _hideManual,
-            hideMarked: _hideMarked,
-            hideNumbers: _hideNumbers,
+            // hideManual: _hideManual,
+            // hideMarked: _hideMarked,
+            // hideNumbers: _hideNumbers,
           )
           .get();
       logger
-          .t('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
+          .d('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
       _emitState();
     });
 
@@ -116,31 +116,31 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       //     _hideNumbers != state.hideNumbers ||
       //     _hideManual != state.hideManual) {
       //ignore: literal_only_boolean_expressions
-      if (true) {
-        _hideMarked = state.hideMarked;
-        _hideNumbers = state.hideNumbers;
-        _hideManual = state.hideManual;
-        await _finishesSubscription.cancel();
-        _finishesSubscription =
-            _db.select(_db.finishes).watch().listen((event) async {
-          final stageId = _stage?.id ?? 0;
-          _finishes = await _db
-              .getFinishesFromStage(
-                stageId: stageId,
-                hideManual: _hideManual,
-                hideMarked: _hideMarked,
-                hideNumbers: _hideNumbers,
-              )
-              .get();
-          logger.t(
-            'DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()',
-          );
-          _emitState();
-        });
-        logger.t(
-          'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
-        );
-      }
+      // if (true) {
+      //   _hideMarked = state.hideMarked;
+      //   _hideNumbers = state.hideNumbers;
+      //   _hideManual = state.hideManual;
+      //   await _finishesSubscription.cancel();
+      //   _finishesSubscription =
+      //       _db.select(_db.finishes).watch().listen((event) async {
+      //     final stageId = _stage?.id ?? 0;
+      //     _finishes = await _db
+      //         .getFinishesFromStage(
+      //           stageId: stageId,
+      //           hideManual: _hideManual,
+      //           hideMarked: _hideMarked,
+      //           hideNumbers: _hideNumbers,
+      //         )
+      //         .get();
+      //     logger.t(
+      //       'DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()',
+      //     );
+      //     _emitState();
+      //   });
+      //   logger.t(
+      //     'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
+      //   );
+      // }
       _finishDelay = state.finishDelay;
       _substituteNumbers = state.substituteNumbers;
       _substituteNumbersDelay = state.substituteNumbersDelay;
@@ -567,9 +567,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   Race? _race;
   Stage? _stage;
 
-  bool _hideMarked = true;
-  bool _hideNumbers = false;
-  bool _hideManual = false;
+  // bool _hideMarked = true;
+  // bool _hideNumbers = false;
+  // bool _hideManual = false;
   late int _finishDelay;
   late bool _substituteNumbers;
   late int _substituteNumbersDelay;

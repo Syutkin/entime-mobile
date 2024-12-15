@@ -740,19 +740,19 @@ class I18nHome {
         name: 'I18nHome_bluetooth',
       );
 
-  static String get hideMarked => Intl.message(
+  static String get showHidden => Intl.message(
         'Скрытые',
-        name: 'I18nHome_hideMarked',
+        name: 'I18nHome_showHidden',
       );
 
-  static String get hideNumbers => Intl.message(
+  static String get showNumbers => Intl.message(
         'С номерами',
-        name: 'I18nHome_hideNumbers',
+        name: 'I18nHome_showNumbers',
       );
 
-  static String get hideManual => Intl.message(
+  static String get showManual => Intl.message(
         'Ручная отсечка',
-        name: 'I18nHome_hideManual',
+        name: 'I18nHome_showManual',
       );
 
   static String get setDefaults => Intl.message(

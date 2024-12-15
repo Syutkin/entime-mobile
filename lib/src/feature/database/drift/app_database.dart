@@ -775,25 +775,26 @@ class AppDatabase extends _$AppDatabase {
 
   Selectable<Finish> getFinishesFromStage({
     required int stageId,
-    bool hideMarked = true,
-    bool hideManual = false,
-    bool hideNumbers = false,
+    // bool hideMarked = true,
+    // bool hideManual = false,
+    // bool hideNumbers = false,
   }) {
-    final predicates = <Expression<bool>>[];
+    // final predicates = <Expression<bool>>[];
     return _getFinishesFromStage(
-      predicate: (finishes) {
-        predicates.add(finishes.stageId.equals(stageId));
-        if (hideMarked) {
-          predicates.add(finishes.isHidden.equals(!hideMarked));
-        }
-        if (hideManual) {
-          predicates.add(finishes.isManual.equals(!hideManual));
-        }
-        if (hideNumbers) {
-          predicates.add(finishes.number.isNull());
-        }
-        return predicates.reduce((a, b) => a & b);
-      },
+      stageId: stageId,
+      // predicate: (finishes) {
+      //   predicates.add(finishes.stageId.equals(stageId));
+      //   if (hideMarked) {
+      //     predicates.add(finishes.isHidden.equals(!hideMarked));
+      //   }
+      //   if (hideManual) {
+      //     predicates.add(finishes.isManual.equals(!hideManual));
+      //   }
+      //   if (hideNumbers) {
+      //     predicates.add(finishes.number.isNull());
+      //   }
+      //   return predicates.reduce((a, b) => a & b);
+      // },
     );
   }
 

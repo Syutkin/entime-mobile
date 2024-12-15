@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-15T10:12:59.537007",
+  "@@last_modified": "2024-12-15T12:42:06.611407",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -650,18 +650,18 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nHome_hideMarked": "Скрытые",
-  "@I18nHome_hideMarked": {
+  "I18nHome_showHidden": "Скрытые",
+  "@I18nHome_showHidden": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nHome_hideNumbers": "С номерами",
-  "@I18nHome_hideNumbers": {
+  "I18nHome_showNumbers": "С номерами",
+  "@I18nHome_showNumbers": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nHome_hideManual": "Ручная отсечка",
-  "@I18nHome_hideManual": {
+  "I18nHome_showManual": "Ручная отсечка",
+  "@I18nHome_showManual": {
     "type": "text",
     "placeholders": {}
   },

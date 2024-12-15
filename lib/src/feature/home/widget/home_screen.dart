@@ -367,19 +367,19 @@ class _FilterButton extends StatelessWidget {
         } else if (activeTab == AppTab.finish) {
           final menuItems = <PopupMenuEntry<FilterFinish>>[
             CheckedPopupMenuItem(
-              value: FilterFinish.hideMarked,
-              checked: !settings.hideMarked,
-              child: Text(Localization.current.I18nHome_hideMarked),
+              value: FilterFinish.showHidden,
+              checked: settings.showHidden,
+              child: Text(Localization.current.I18nHome_showHidden),
             ),
             CheckedPopupMenuItem(
-              value: FilterFinish.hideNumbers,
-              checked: !settings.hideNumbers,
-              child: Text(Localization.current.I18nHome_hideNumbers),
+              value: FilterFinish.showNumbers,
+              checked: settings.showNumbers,
+              child: Text(Localization.current.I18nHome_showNumbers),
             ),
             CheckedPopupMenuItem(
-              value: FilterFinish.hideManual,
-              checked: !settings.hideManual,
-              child: Text(Localization.current.I18nHome_hideManual),
+              value: FilterFinish.showManual,
+              checked: settings.showManual,
+              child: Text(Localization.current.I18nHome_showManual),
             ),
             const PopupMenuDivider(),
             PopupMenuItem(
@@ -395,26 +395,26 @@ class _FilterButton extends StatelessWidget {
             itemBuilder: (context) => menuItems,
             onSelected: (value) async {
               switch (value) {
-                case FilterFinish.hideMarked:
+                case FilterFinish.showHidden:
                   settingsBloc.add(
                     SettingsEvent.update(
                       settings:
-                          settings.copyWith(hideMarked: !settings.hideMarked),
+                          settings.copyWith(showHidden: !settings.showHidden),
                     ),
                   );
-                case FilterFinish.hideNumbers:
+                case FilterFinish.showNumbers:
                   settingsBloc.add(
                     SettingsEvent.update(
                       settings: settings.copyWith(
-                        hideNumbers: !settings.hideNumbers,
+                        showNumbers: !settings.showNumbers,
                       ),
                     ),
                   );
-                case FilterFinish.hideManual:
+                case FilterFinish.showManual:
                   settingsBloc.add(
                     SettingsEvent.update(
                       settings:
-                          settings.copyWith(hideManual: !settings.hideManual),
+                          settings.copyWith(showManual: !settings.showManual),
                     ),
                   );
                 case FilterFinish.setDefaults:
@@ -422,9 +422,9 @@ class _FilterButton extends StatelessWidget {
                   settingsBloc.add(
                     SettingsEvent.update(
                       settings: settings.copyWith(
-                        hideMarked: defaults.hideMarked,
-                        hideNumbers: defaults.hideNumbers,
-                        hideManual: defaults.hideManual,
+                        showHidden: defaults.showHidden,
+                        showNumbers: defaults.showNumbers,
+                        showManual: defaults.showManual,
                       ),
                     ),
                   );

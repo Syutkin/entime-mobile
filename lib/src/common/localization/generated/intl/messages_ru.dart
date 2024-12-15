@@ -196,11 +196,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nHome_errorAddParticipant": m2,
         "I18nHome_fab": MessageLookupByLibrary.simpleMessage("FAB"),
         "I18nHome_finish": MessageLookupByLibrary.simpleMessage("Финиш"),
-        "I18nHome_hideManual":
-            MessageLookupByLibrary.simpleMessage("Ручная отсечка"),
-        "I18nHome_hideMarked": MessageLookupByLibrary.simpleMessage("Скрытые"),
-        "I18nHome_hideNumbers":
-            MessageLookupByLibrary.simpleMessage("С номерами"),
         "I18nHome_home": MessageLookupByLibrary.simpleMessage("Начало"),
         "I18nHome_importStagesCsv":
             MessageLookupByLibrary.simpleMessage("Импорт этапов"),
@@ -217,6 +212,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nHome_showDSQ": MessageLookupByLibrary.simpleMessage("DSQ"),
         "I18nHome_showFinishDifference":
             MessageLookupByLibrary.simpleMessage("Разница во времени"),
+        "I18nHome_showHidden": MessageLookupByLibrary.simpleMessage("Скрытые"),
+        "I18nHome_showManual":
+            MessageLookupByLibrary.simpleMessage("Ручная отсечка"),
+        "I18nHome_showNumbers":
+            MessageLookupByLibrary.simpleMessage("С номерами"),
         "I18nHome_start": MessageLookupByLibrary.simpleMessage("Старт"),
         "I18nHome_update": MessageLookupByLibrary.simpleMessage("Обновить"),
         "I18nHome_updateAutomaticCorrection": m3,

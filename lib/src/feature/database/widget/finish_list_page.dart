@@ -18,6 +18,7 @@ import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../database.dart';
+import '../logic/filter_finish_list.dart';
 
 enum FinishPopupMenu { clearNumber, hideAll }
 
@@ -105,10 +106,12 @@ class _FinishListPage extends State<FinishListPage> {
               // ToDo: настройки? более интересное поведение?
               // ToDo: Перематывать только при первоначальном показе всех отсечек?
               // скролл на последнюю запись если показываем скрытые отсечки
-              if (!BlocProvider.of<SettingsBloc>(context)
+              // сейчас перематывает при любом обновлении, например каждую минуту
+              // при обновлении участников на трассе
+              if (BlocProvider.of<SettingsBloc>(context)
                   .state
                   .settings
-                  .hideMarked) {
+                  .showHidden) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   scrollToEnd(_scrollController);
                 });
@@ -155,45 +158,61 @@ class _FinishListPage extends State<FinishListPage> {
               child: _SliverFinishSubHeader(),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final item = finishProtocol[index];
-                return FinishItemTile(
-                  item: item,
-                  onTap: () async {
-                    await addFinishNumberPopup(context, item);
+          BlocBuilder<SettingsBloc, SettingsState>(
+            buildWhen: (previous, current) =>
+                previous.settings.showHidden != current.settings.showHidden ||
+                previous.settings.showManual != current.settings.showManual ||
+                previous.settings.showNumbers != current.settings.showNumbers,
+            builder: (context, state) {
+              print('finishProtocol.length: ${finishProtocol.length}');
+              final filteredList = filterFinishList(
+                finishProtocol,
+                showHidden: state.settings.showHidden,
+                showManual: state.settings.showManual,
+                showNumbers: state.settings.showNumbers,
+              );
+              print('filteredList.length: ${filteredList.length}');
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: filteredList.length,
+                  (context, index) {
+                    final item = filteredList[index];
+                    return FinishItemTile(
+                      item: item,
+                      onTap: () async {
+                        await addFinishNumberPopup(context, item);
+                      },
+                      onLongPress: () async {
+                        await _clearPopup(item.number);
+                      },
+                      onAccept: (details) {
+                        final databaseBloc = context.read<DatabaseBloc>();
+                        final stage = databaseBloc.state.stage;
+                        final finishId = item.id;
+                        final number = details.data;
+                        final finishTime = item.finishTime;
+                        if (stage != null) {
+                          databaseBloc.add(
+                            DatabaseEvent.addNumberToFinish(
+                              stage: stage,
+                              finishId: finishId,
+                              number: number,
+                              finishTime: finishTime,
+                            ),
+                          );
+                        }
+                      },
+                      onTapDown: _storePosition,
+                      onDismissed: (direction) {
+                        final databaseBloc = context.read<DatabaseBloc>();
+                        final id = item.id;
+                        databaseBloc.add(DatabaseEvent.hideFinish(id: id));
+                      },
+                    );
                   },
-                  onLongPress: () async {
-                    await _clearPopup(item.number);
-                  },
-                  onAccept: (details) {
-                    final databaseBloc = context.read<DatabaseBloc>();
-                    final stage = databaseBloc.state.stage;
-                    final finishId = item.id;
-                    final number = details.data;
-                    final finishTime = item.finishTime;
-                    if (stage != null) {
-                      databaseBloc.add(
-                        DatabaseEvent.addNumberToFinish(
-                          stage: stage,
-                          finishId: finishId,
-                          number: number,
-                          finishTime: finishTime,
-                        ),
-                      );
-                    }
-                  },
-                  onTapDown: _storePosition,
-                  onDismissed: (direction) {
-                    final databaseBloc = context.read<DatabaseBloc>();
-                    final id = item.id;
-                    databaseBloc.add(DatabaseEvent.hideFinish(id: id));
-                  },
-                );
-              },
-              childCount: finishProtocol.length,
-            ),
+                ),
+              );
+            },
           ),
         ],
       );
@@ -548,7 +567,8 @@ class _SliverFinishSubHeader extends StatelessWidget {
                       flex: 20,
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(Localization.current.I18nProtocol_difference),
+                        child:
+                            Text(Localization.current.I18nProtocol_difference),
                         // child: Text('Difference'),
                       ),
                     ),

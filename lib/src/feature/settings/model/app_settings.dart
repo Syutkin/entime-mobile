@@ -62,9 +62,9 @@ class AppSettings with _$AppSettings {
     required bool showDSQ,
 
     // выборка значений на финише
-    required bool hideMarked,
-    required bool hideNumbers,
-    required bool hideManual,
+    required bool showHidden,
+    required bool showNumbers,
+    required bool showManual,
 
     // задержка в миллисекундах перед показыванием нового финишного времени
     required int finishDelay,
@@ -167,9 +167,9 @@ class AppSettings with _$AppSettings {
     @Default(false) bool showDSQ,
 
     // выборка значений на финише
-    @Default(true) bool hideMarked,
-    @Default(false) bool hideNumbers,
-    @Default(false) bool hideManual,
+    @Default(false) bool showHidden,
+    @Default(true) bool showNumbers,
+    @Default(true) bool showManual,
 
     // задержка в миллисекундах перед показыванием нового финишного времени
     @Default(350) int finishDelay,

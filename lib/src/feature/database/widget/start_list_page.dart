@@ -17,6 +17,7 @@ import '../../countdown/countdown.dart';
 import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/settings.dart';
 import '../database.dart';
+import '../logic/filter_start_list.dart';
 
 part 'popup/add_racer_popup.dart';
 part 'popup/edit_start_time_popup.dart';
@@ -49,13 +50,12 @@ class _StartListPage extends State<StartListPage> {
                 previous.settings.showDNF != current.settings.showDNF ||
                 previous.settings.showDSQ != current.settings.showDSQ,
             builder: (context, state) {
-              final filteredList = _filterStartList(
+              final filteredList = filterStartList(
                 startList,
                 showDNS: state.settings.showDNS,
                 showDNF: state.settings.showDNF,
                 showDSQ: state.settings.showDSQ,
               );
-              print('filteredList.length: ${filteredList.length}');
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
                   childCount: filteredList.length,
@@ -480,33 +480,6 @@ class _StartListPage extends State<StartListPage> {
         child: const Icon(Icons.bluetooth),
       ),
     ];
-  }
-
-  List<ParticipantAtStart> _filterStartList(
-    List<ParticipantAtStart> list, {
-    required bool showDNS,
-    required bool showDNF,
-    required bool showDSQ,
-  }) {
-    // Do not apply filters to list
-    if (showDNS && showDNF && showDSQ) {
-      return list;
-    } else {
-      return list.where((e) {
-        final result = (e.statusId == ParticipantStatus.active.index &&
-                e.participantStatusId == ParticipantStatus.active.index) ||
-            (showDNS &&
-                (e.participantStatusId == ParticipantStatus.dns.index ||
-                    e.statusId == ParticipantStatus.dns.index)) ||
-            (showDNF &&
-                (e.participantStatusId == ParticipantStatus.dnf.index ||
-                    e.statusId == ParticipantStatus.dnf.index)) ||
-            (showDSQ &&
-                (e.participantStatusId == ParticipantStatus.dsq.index ||
-                    e.statusId == ParticipantStatus.dsq.index));
-        return result;
-      }).toList();
-    }
   }
 }
 

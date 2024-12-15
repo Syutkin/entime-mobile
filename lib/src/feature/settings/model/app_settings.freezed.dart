@@ -59,9 +59,9 @@ mixin _$AppSettings {
   bool get showDNF => throw _privateConstructorUsedError;
   bool get showDSQ =>
       throw _privateConstructorUsedError; // выборка значений на финише
-  bool get hideMarked => throw _privateConstructorUsedError;
-  bool get hideNumbers => throw _privateConstructorUsedError;
-  bool get hideManual =>
+  bool get showHidden => throw _privateConstructorUsedError;
+  bool get showNumbers => throw _privateConstructorUsedError;
+  bool get showManual =>
       throw _privateConstructorUsedError; // задержка в миллисекундах перед показыванием нового финишного времени
   int get finishDelay =>
       throw _privateConstructorUsedError; // автоподстановка номеров в финишном протоколе
@@ -125,9 +125,9 @@ mixin _$AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -174,9 +174,9 @@ mixin _$AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -227,9 +227,9 @@ mixin _$AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -276,9 +276,9 @@ mixin _$AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -329,9 +329,9 @@ mixin _$AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -378,9 +378,9 @@ mixin _$AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -463,9 +463,9 @@ abstract class $AppSettingsCopyWith<$Res> {
       bool showDNS,
       bool showDNF,
       bool showDSQ,
-      bool hideMarked,
-      bool hideNumbers,
-      bool hideManual,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
@@ -527,9 +527,9 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? showDNS = null,
     Object? showDNF = null,
     Object? showDSQ = null,
-    Object? hideMarked = null,
-    Object? hideNumbers = null,
-    Object? hideManual = null,
+    Object? showHidden = null,
+    Object? showNumbers = null,
+    Object? showManual = null,
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
@@ -660,17 +660,17 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.showDSQ
           : showDSQ // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: null == hideMarked
-          ? _value.hideMarked
-          : hideMarked // ignore: cast_nullable_to_non_nullable
+      showHidden: null == showHidden
+          ? _value.showHidden
+          : showHidden // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: null == hideNumbers
-          ? _value.hideNumbers
-          : hideNumbers // ignore: cast_nullable_to_non_nullable
+      showNumbers: null == showNumbers
+          ? _value.showNumbers
+          : showNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: null == hideManual
-          ? _value.hideManual
-          : hideManual // ignore: cast_nullable_to_non_nullable
+      showManual: null == showManual
+          ? _value.showManual
+          : showManual // ignore: cast_nullable_to_non_nullable
               as bool,
       finishDelay: null == finishDelay
           ? _value.finishDelay
@@ -777,9 +777,9 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       bool showDNS,
       bool showDNF,
       bool showDSQ,
-      bool hideMarked,
-      bool hideNumbers,
-      bool hideManual,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
@@ -839,9 +839,9 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? showDNS = null,
     Object? showDNF = null,
     Object? showDSQ = null,
-    Object? hideMarked = null,
-    Object? hideNumbers = null,
-    Object? hideManual = null,
+    Object? showHidden = null,
+    Object? showNumbers = null,
+    Object? showManual = null,
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
@@ -972,17 +972,17 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.showDSQ
           : showDSQ // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: null == hideMarked
-          ? _value.hideMarked
-          : hideMarked // ignore: cast_nullable_to_non_nullable
+      showHidden: null == showHidden
+          ? _value.showHidden
+          : showHidden // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: null == hideNumbers
-          ? _value.hideNumbers
-          : hideNumbers // ignore: cast_nullable_to_non_nullable
+      showNumbers: null == showNumbers
+          ? _value.showNumbers
+          : showNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: null == hideManual
-          ? _value.hideManual
-          : hideManual // ignore: cast_nullable_to_non_nullable
+      showManual: null == showManual
+          ? _value.showManual
+          : showManual // ignore: cast_nullable_to_non_nullable
               as bool,
       finishDelay: null == finishDelay
           ? _value.finishDelay
@@ -1084,9 +1084,9 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.showDNS,
       required this.showDNF,
       required this.showDSQ,
-      required this.hideMarked,
-      required this.hideNumbers,
-      required this.hideManual,
+      required this.showHidden,
+      required this.showNumbers,
+      required this.showManual,
       required this.finishDelay,
       required this.substituteNumbers,
       required this.substituteNumbersDelay,
@@ -1181,11 +1181,11 @@ class _$AppSettingsImpl implements _AppSettings {
   final bool showDSQ;
 // выборка значений на финише
   @override
-  final bool hideMarked;
+  final bool showHidden;
   @override
-  final bool hideNumbers;
+  final bool showNumbers;
   @override
-  final bool hideManual;
+  final bool showManual;
 // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   final int finishDelay;
@@ -1237,7 +1237,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, showHidden: $showHidden, showNumbers: $showNumbers, showManual: $showManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -1290,12 +1290,12 @@ class _$AppSettingsImpl implements _AppSettings {
             (identical(other.showDNS, showDNS) || other.showDNS == showDNS) &&
             (identical(other.showDNF, showDNF) || other.showDNF == showDNF) &&
             (identical(other.showDSQ, showDSQ) || other.showDSQ == showDSQ) &&
-            (identical(other.hideMarked, hideMarked) ||
-                other.hideMarked == hideMarked) &&
-            (identical(other.hideNumbers, hideNumbers) ||
-                other.hideNumbers == hideNumbers) &&
-            (identical(other.hideManual, hideManual) ||
-                other.hideManual == hideManual) &&
+            (identical(other.showHidden, showHidden) ||
+                other.showHidden == showHidden) &&
+            (identical(other.showNumbers, showNumbers) ||
+                other.showNumbers == showNumbers) &&
+            (identical(other.showManual, showManual) ||
+                other.showManual == showManual) &&
             (identical(other.finishDelay, finishDelay) ||
                 other.finishDelay == finishDelay) &&
             (identical(other.substituteNumbers, substituteNumbers) ||
@@ -1363,9 +1363,9 @@ class _$AppSettingsImpl implements _AppSettings {
         showDNS,
         showDNF,
         showDSQ,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
@@ -1424,9 +1424,9 @@ class _$AppSettingsImpl implements _AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -1473,9 +1473,9 @@ class _$AppSettingsImpl implements _AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -1523,9 +1523,9 @@ class _$AppSettingsImpl implements _AppSettings {
         showDNS,
         showDNF,
         showDSQ,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
@@ -1576,9 +1576,9 @@ class _$AppSettingsImpl implements _AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -1625,9 +1625,9 @@ class _$AppSettingsImpl implements _AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -1675,9 +1675,9 @@ class _$AppSettingsImpl implements _AppSettings {
         showDNS,
         showDNF,
         showDSQ,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
@@ -1728,9 +1728,9 @@ class _$AppSettingsImpl implements _AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -1777,9 +1777,9 @@ class _$AppSettingsImpl implements _AppSettings {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -1829,9 +1829,9 @@ class _$AppSettingsImpl implements _AppSettings {
           showDNS,
           showDNF,
           showDSQ,
-          hideMarked,
-          hideNumbers,
-          hideManual,
+          showHidden,
+          showNumbers,
+          showManual,
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
@@ -1914,9 +1914,9 @@ abstract class _AppSettings implements AppSettings {
       required final bool showDNS,
       required final bool showDNF,
       required final bool showDSQ,
-      required final bool hideMarked,
-      required final bool hideNumbers,
-      required final bool hideManual,
+      required final bool showHidden,
+      required final bool showNumbers,
+      required final bool showManual,
       required final int finishDelay,
       required final bool substituteNumbers,
       required final int substituteNumbersDelay,
@@ -1996,12 +1996,12 @@ abstract class _AppSettings implements AppSettings {
   @override
   bool get showDSQ; // выборка значений на финише
   @override
-  bool get hideMarked;
+  bool get showHidden;
   @override
-  bool get hideNumbers;
+  bool get showNumbers;
   @override
   bool
-      get hideManual; // задержка в миллисекундах перед показыванием нового финишного времени
+      get showManual; // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   int get finishDelay; // автоподстановка номеров в финишном протоколе
   @override
@@ -2087,9 +2087,9 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       bool showDNS,
       bool showDNF,
       bool showDSQ,
-      bool hideMarked,
-      bool hideNumbers,
-      bool hideManual,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
@@ -2149,9 +2149,9 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? showDNS = null,
     Object? showDNF = null,
     Object? showDSQ = null,
-    Object? hideMarked = null,
-    Object? hideNumbers = null,
-    Object? hideManual = null,
+    Object? showHidden = null,
+    Object? showNumbers = null,
+    Object? showManual = null,
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
@@ -2282,17 +2282,17 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.showDSQ
           : showDSQ // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: null == hideMarked
-          ? _value.hideMarked
-          : hideMarked // ignore: cast_nullable_to_non_nullable
+      showHidden: null == showHidden
+          ? _value.showHidden
+          : showHidden // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: null == hideNumbers
-          ? _value.hideNumbers
-          : hideNumbers // ignore: cast_nullable_to_non_nullable
+      showNumbers: null == showNumbers
+          ? _value.showNumbers
+          : showNumbers // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: null == hideManual
-          ? _value.hideManual
-          : hideManual // ignore: cast_nullable_to_non_nullable
+      showManual: null == showManual
+          ? _value.showManual
+          : showManual // ignore: cast_nullable_to_non_nullable
               as bool,
       finishDelay: null == finishDelay
           ? _value.finishDelay
@@ -2394,9 +2394,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.showDNS = false,
       this.showDNF = false,
       this.showDSQ = false,
-      this.hideMarked = true,
-      this.hideNumbers = false,
-      this.hideManual = false,
+      this.showHidden = false,
+      this.showNumbers = true,
+      this.showManual = true,
       this.finishDelay = 350,
       this.substituteNumbers = false,
       this.substituteNumbersDelay = 500,
@@ -2522,13 +2522,13 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 // выборка значений на финише
   @override
   @JsonKey()
-  final bool hideMarked;
+  final bool showHidden;
   @override
   @JsonKey()
-  final bool hideNumbers;
+  final bool showNumbers;
   @override
   @JsonKey()
-  final bool hideManual;
+  final bool showManual;
 // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   @JsonKey()
@@ -2596,7 +2596,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings.defaults(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, showHidden: $showHidden, showNumbers: $showNumbers, showManual: $showManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -2649,12 +2649,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             (identical(other.showDNS, showDNS) || other.showDNS == showDNS) &&
             (identical(other.showDNF, showDNF) || other.showDNF == showDNF) &&
             (identical(other.showDSQ, showDSQ) || other.showDSQ == showDSQ) &&
-            (identical(other.hideMarked, hideMarked) ||
-                other.hideMarked == hideMarked) &&
-            (identical(other.hideNumbers, hideNumbers) ||
-                other.hideNumbers == hideNumbers) &&
-            (identical(other.hideManual, hideManual) ||
-                other.hideManual == hideManual) &&
+            (identical(other.showHidden, showHidden) ||
+                other.showHidden == showHidden) &&
+            (identical(other.showNumbers, showNumbers) ||
+                other.showNumbers == showNumbers) &&
+            (identical(other.showManual, showManual) ||
+                other.showManual == showManual) &&
             (identical(other.finishDelay, finishDelay) ||
                 other.finishDelay == finishDelay) &&
             (identical(other.substituteNumbers, substituteNumbers) ||
@@ -2722,9 +2722,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         showDNS,
         showDNF,
         showDSQ,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
@@ -2784,9 +2784,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -2833,9 +2833,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -2883,9 +2883,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         showDNS,
         showDNF,
         showDSQ,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
@@ -2936,9 +2936,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -2985,9 +2985,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -3035,9 +3035,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         showDNS,
         showDNF,
         showDSQ,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
@@ -3088,9 +3088,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -3137,9 +3137,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             bool showDNS,
             bool showDNF,
             bool showDSQ,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
@@ -3189,9 +3189,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           showDNS,
           showDNF,
           showDSQ,
-          hideMarked,
-          hideNumbers,
-          hideManual,
+          showHidden,
+          showNumbers,
+          showManual,
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
@@ -3274,9 +3274,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final bool showDNS,
       final bool showDNF,
       final bool showDSQ,
-      final bool hideMarked,
-      final bool hideNumbers,
-      final bool hideManual,
+      final bool showHidden,
+      final bool showNumbers,
+      final bool showManual,
       final int finishDelay,
       final bool substituteNumbers,
       final int substituteNumbersDelay,
@@ -3356,12 +3356,12 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   bool get showDSQ; // выборка значений на финише
   @override
-  bool get hideMarked;
+  bool get showHidden;
   @override
-  bool get hideNumbers;
+  bool get showNumbers;
   @override
   bool
-      get hideManual; // задержка в миллисекундах перед показыванием нового финишного времени
+      get showManual; // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   int get finishDelay; // автоподстановка номеров в финишном протоколе
   @override

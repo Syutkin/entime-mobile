@@ -1276,30 +1276,30 @@ class GeneratedLocalization {
   }
 
   /// `Скрытые`
-  String get I18nHome_hideMarked {
+  String get I18nHome_showHidden {
     return Intl.message(
       'Скрытые',
-      name: 'I18nHome_hideMarked',
+      name: 'I18nHome_showHidden',
       desc: '',
       args: [],
     );
   }
 
   /// `С номерами`
-  String get I18nHome_hideNumbers {
+  String get I18nHome_showNumbers {
     return Intl.message(
       'С номерами',
-      name: 'I18nHome_hideNumbers',
+      name: 'I18nHome_showNumbers',
       desc: '',
       args: [],
     );
   }
 
   /// `Ручная отсечка`
-  String get I18nHome_hideManual {
+  String get I18nHome_showManual {
     return Intl.message(
       'Ручная отсечка',
-      name: 'I18nHome_hideManual',
+      name: 'I18nHome_showManual',
       desc: '',
       args: [],
     );
