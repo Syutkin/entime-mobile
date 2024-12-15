@@ -113,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Неизвестное устройство"),
         "I18nCore_correction": MessageLookupByLibrary.simpleMessage("Поправка"),
         "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "I18nCore_dnf": MessageLookupByLibrary.simpleMessage("DNF"),
+        "I18nCore_dns": MessageLookupByLibrary.simpleMessage("DNS"),
+        "I18nCore_dsq": MessageLookupByLibrary.simpleMessage("DSQ"),
         "I18nCore_edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
         "I18nCore_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
         "I18nCore_warning":

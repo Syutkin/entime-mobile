@@ -27,6 +27,20 @@ class StartItemTile extends StatelessWidget {
     final textColor =
         isHighlighted ? Theme.of(context).colorScheme.onPrimaryContainer : null;
 
+    final isNotActive = item.statusId != ParticipantStatus.active.index ||
+        item.participantStatusId != ParticipantStatus.active.index;
+
+    var status = '';
+    if (isNotActive) {
+      if (item.statusId == ParticipantStatus.dns.index) {
+        status = Localization.current.I18nCore_dns;
+      } else if (item.statusId == ParticipantStatus.dnf.index) {
+        status = Localization.current.I18nCore_dnf;
+      } else if (item.participantStatusId == ParticipantStatus.dsq.index) {
+        status = Localization.current.I18nCore_dsq;
+      }
+    }
+
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(12)),
       onTap: () {
@@ -88,7 +102,9 @@ class StartItemTile extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      item.manualCorrection.toString().strip(),
+                      isNotActive
+                          ? status
+                          : item.manualCorrection.toString().strip(),
                       style: DefaultTextStyle.of(context).style.apply(
                             color: textColor,
                           ),

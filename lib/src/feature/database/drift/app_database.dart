@@ -775,26 +775,9 @@ class AppDatabase extends _$AppDatabase {
 
   Selectable<Finish> getFinishesFromStage({
     required int stageId,
-    // bool hideMarked = true,
-    // bool hideManual = false,
-    // bool hideNumbers = false,
   }) {
-    // final predicates = <Expression<bool>>[];
     return _getFinishesFromStage(
       stageId: stageId,
-      // predicate: (finishes) {
-      //   predicates.add(finishes.stageId.equals(stageId));
-      //   if (hideMarked) {
-      //     predicates.add(finishes.isHidden.equals(!hideMarked));
-      //   }
-      //   if (hideManual) {
-      //     predicates.add(finishes.isManual.equals(!hideManual));
-      //   }
-      //   if (hideNumbers) {
-      //     predicates.add(finishes.number.isNull());
-      //   }
-      //   return predicates.reduce((a, b) => a & b);
-      // },
     );
   }
 
@@ -1214,17 +1197,18 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> clearStartResultsDebug({required int stageId}) async {
-    final rowCount = await managers.starts.filter((f) => f.stageId(stageId)).update(
-          (f) => StartsCompanion(
-            automaticCorrection: const Value(null),
-            automaticStartTime: const Value(null),
-            timestamp: const Value(null),
-            manualCorrection: const Value(null),
-            manualStartTime: const Value(null),
-            statusId: Value(ParticipantStatus.active.index),
-            finishId: const Value(null),
-          ),
-        );
+    final rowCount =
+        await managers.starts.filter((f) => f.stageId(stageId)).update(
+              (f) => StartsCompanion(
+                automaticCorrection: const Value(null),
+                automaticStartTime: const Value(null),
+                timestamp: const Value(null),
+                manualCorrection: const Value(null),
+                manualStartTime: const Value(null),
+                statusId: Value(ParticipantStatus.active.index),
+                finishId: const Value(null),
+              ),
+            );
     logger.d('Database -> $rowCount start results cleared');
     return rowCount;
   }

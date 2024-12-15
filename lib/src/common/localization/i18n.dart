@@ -27,6 +27,21 @@ class I18nCore {
         'Поправка',
         name: 'I18nCore_correction',
       );
+
+  static String get dns => Intl.message(
+        'DNS',
+        name: 'I18nCore_dns',
+      );
+
+  static String get dnf => Intl.message(
+        'DNF',
+        name: 'I18nCore_dnf',
+      );
+
+  static String get dsq => Intl.message(
+        'DSQ',
+        name: 'I18nCore_dsq',
+      );
 }
 
 class I18nUpdate {
@@ -457,9 +472,9 @@ class I18nProtocol {
       );
 
   static String get difference => Intl.message(
-    'Разница',
-    name: 'I18nProtocol_difference',
-  );
+        'Разница',
+        name: 'I18nProtocol_difference',
+      );
 
   static String shareStartResults(String raceName, String stageName) =>
       Intl.message(
@@ -731,9 +746,9 @@ class I18nHome {
       );
 
   static String get importStagesCsv => Intl.message(
-    'Импорт этапов',
-    name: 'I18nHome_importStagesCsv',
-  );
+        'Импорт этапов',
+        name: 'I18nHome_importStagesCsv',
+      );
 
   static String get bluetooth => Intl.message(
         'Bluetooth',
@@ -761,19 +776,19 @@ class I18nHome {
       );
 
   static String get showDNS => Intl.message(
-    'DNS',
-    name: 'I18nHome_showDNS',
-  );
+        'DNS',
+        name: 'I18nHome_showDNS',
+      );
 
   static String get showDNF => Intl.message(
-    'DNF',
-    name: 'I18nHome_showDNF',
-  );
+        'DNF',
+        name: 'I18nHome_showDNF',
+      );
 
   static String get showDSQ => Intl.message(
-    'DSQ',
-    name: 'I18nHome_showDSQ',
-  );
+        'DSQ',
+        name: 'I18nHome_showDSQ',
+      );
 }
 
 class I18nInit {
@@ -1272,10 +1287,10 @@ class I18nDatabase {
       );
 
   static String deleteRace(String raceName) => Intl.message(
-    'Вы уверены, что хотите удалить гонку "$raceName"?',
-    name: 'I18nDatabase_deleteRace',
-    args: [raceName],
-  );
+        'Вы уверены, что хотите удалить гонку "$raceName"?',
+        name: 'I18nDatabase_deleteRace',
+        args: [raceName],
+      );
 
   static String deleteStage(String stageName) => Intl.message(
         'Вы уверены, что хотите удалить этап "$stageName"?',
@@ -1349,9 +1364,9 @@ class I18nDatabase {
       );
 
   static String get searchTrail => Intl.message(
-    'Найти...',
-    name: 'I18nDatabase_searchTrail',
-  );
+        'Найти...',
+        name: 'I18nDatabase_searchTrail',
+      );
 
   static String uploadLimit(double limit) {
     return Intl.message(

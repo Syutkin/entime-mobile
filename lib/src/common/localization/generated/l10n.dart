@@ -101,6 +101,36 @@ class GeneratedLocalization {
     );
   }
 
+  /// `DNS`
+  String get I18nCore_dns {
+    return Intl.message(
+      'DNS',
+      name: 'I18nCore_dns',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DNF`
+  String get I18nCore_dnf {
+    return Intl.message(
+      'DNF',
+      name: 'I18nCore_dnf',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DSQ`
+  String get I18nCore_dsq {
+    return Intl.message(
+      'DSQ',
+      name: 'I18nCore_dsq',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Что нового`
   String get I18nUpdate_whatsNew {
     return Intl.message(
