@@ -32,12 +32,12 @@ class StartItemTile extends StatelessWidget {
 
     var status = '';
     if (isNotActive) {
-      if (item.statusId == ParticipantStatus.dns.index) {
+      if (item.participantStatusId == ParticipantStatus.dsq.index) {
+        status = Localization.current.I18nCore_dsq;
+      } else if (item.statusId == ParticipantStatus.dns.index) {
         status = Localization.current.I18nCore_dns;
       } else if (item.statusId == ParticipantStatus.dnf.index) {
         status = Localization.current.I18nCore_dnf;
-      } else if (item.participantStatusId == ParticipantStatus.dsq.index) {
-        status = Localization.current.I18nCore_dsq;
       }
     }
 
