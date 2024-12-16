@@ -63,7 +63,9 @@ class MenuButton extends StatelessWidget {
                     PopupMenuItem(
                       value: HomeMenuButton.showFinishDifference,
                       child: ListTile(
-                        leading: Icon(MdiIcons.timer),
+                        leading: settings.showFinishDifference
+                            ? Icon(MdiIcons.timer)
+                            : const SizedBox.shrink(),
                         title: Text(
                           Localization.current.I18nHome_showFinishDifference,
                         ),
@@ -74,7 +76,9 @@ class MenuButton extends StatelessWidget {
                     PopupMenuItem(
                       value: HomeMenuButton.showColorFinishDifference,
                       child: ListTile(
-                        leading: Icon(MdiIcons.palette),
+                        leading: settings.showColorFinishDifference
+                            ? Icon(MdiIcons.palette)
+                            : const SizedBox.shrink(),
                         title: Text(
                           Localization
                               .current.I18nHome_showColorFinishDifference,
