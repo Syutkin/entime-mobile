@@ -29,7 +29,7 @@ void main() {
   }
 
   group('StartItemTile', () {
-    setUpAll(() {
+    setUp(() {
       row = MockQueryRow();
       name = 'Name';
       number = 7;
@@ -253,6 +253,7 @@ void main() {
       expect(find.text(startTime), findsOneWidget);
       expect(find.text(automaticCorrection.toString()), findsOneWidget);
       expect(find.text(manualCorrection.toString()), findsOneWidget);
+
     });
   });
 }

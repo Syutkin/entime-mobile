@@ -557,10 +557,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   List<Race> _races = [];
   List<Stage> _stages = [];
-  List<Rider> _riders = [];
-  List<Status> _statuses = [];
+  final List<Rider> _riders = [];
+  final List<Status> _statuses = [];
   List<ParticipantAtStart> _participants = [];
-  List<Start> _starts = [];
+  final List<Start> _starts = [];
   List<Finish> _finishes = [];
   List<StartingParticipant> _numbersOnTrace = [];
 

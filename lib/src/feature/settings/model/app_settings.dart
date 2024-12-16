@@ -81,7 +81,7 @@ class AppSettings with _$AppSettings {
 
     // разница между временем финиша с модуля и временем устройства в миллисекундах
     // при превышении которого будет цветовая индикация
-    required int finishDifference,
+    required int finishDifferenceThreshold,
 
     // дельта в секундах для автоматического подставления стартового времени
     required int deltaInSeconds,
@@ -186,7 +186,7 @@ class AppSettings with _$AppSettings {
 
     // разница между временем финиша с модуля и временем устройства в миллисекундах
     // при превышении которого будет цветовая индикация
-    @Default(2000) int finishDifference,
+    @Default(2000) int finishDifferenceThreshold,
 
     // дельта в секундах для автоматического подставления стартового времени
     @Default(15) int deltaInSeconds,
