@@ -106,6 +106,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required String startTime,
     required int correction,
     required DateTime timestamp,
+    required int ntpOffset,
     @Default(false) bool forceUpdate,
     int? deltaInSeconds,
   }) = _UpdateAutomaticCorrection;
@@ -114,6 +115,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required int stageId,
     required DateTime time,
     required DateTime timestamp,
+    required int ntpOffset,
     @Default(15) int deltaInSeconds,
   }) = _UpdateManualStartTime;
 
@@ -130,6 +132,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required Stage stage,
     required String finishTime,
     required DateTime timestamp,
+    required int ntpOffset,
     int? finishDelay,
     bool? substituteNumbers,
     int? substituteNumbersDelay,
@@ -141,6 +144,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required int stageId,
     required String finishTime,
     required DateTime timestamp,
+    required int ntpOffset,
     int? number,
   }) = _AddFinishTimeManual;
 

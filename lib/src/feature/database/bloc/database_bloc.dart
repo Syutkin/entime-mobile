@@ -349,6 +349,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             stageId: event.stageId,
             time: event.time,
             timestamp: event.timestamp,
+            ntpOffset: event.ntpOffset,
             deltaInSeconds: event.deltaInSeconds,
           );
         },
@@ -364,6 +365,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             time: event.startTime,
             correction: event.correction,
             timestamp: event.timestamp,
+            ntpOffset: event.ntpOffset,
             deltaInSeconds: event.deltaInSeconds ??
                 settingsProvider.settings.deltaInSeconds,
             forceUpdate: event.forceUpdate,
@@ -385,6 +387,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             stage: event.stage,
             finish: event.finishTime,
             timestamp: event.timestamp,
+            ntpOffset: event.ntpOffset,
             finishDelay: event.finishDelay ?? _finishDelay,
             substituteNumbers: event.substituteNumbers ?? _substituteNumbers,
             substituteNumbersDelay:
@@ -403,6 +406,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             stageId: event.stageId,
             finishTime: event.finishTime,
             timestamp: event.timestamp,
+            ntpOffset: event.ntpOffset,
             number: event.number,
           );
         },

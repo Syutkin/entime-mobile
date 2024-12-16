@@ -432,12 +432,14 @@ class _FinishListPage extends State<FinishListPage> {
                     // print(duration);
                     final timestamp = DateTime.now();
                     final finishTime = timestamp.add(duration);
+                    final ntpOffset = Random().nextInt(10000) - 5000;
                     // print(finishTime);
                     databaseBloc.add(
                       DatabaseEvent.addFinishTime(
                         finishTime:
                             DateFormat(longTimeFormat).format(finishTime),
                         timestamp: timestamp,
+                        ntpOffset: ntpOffset,
                         stage: stage!,
                       ),
                     );
@@ -507,6 +509,7 @@ class _FinishListPage extends State<FinishListPage> {
           stageId: stageId,
           finishTime: finishTime,
           timestamp: timestamp,
+          ntpOffset: offset,
         ),
       );
     }

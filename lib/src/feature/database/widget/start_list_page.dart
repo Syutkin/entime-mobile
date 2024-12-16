@@ -228,6 +228,7 @@ class _StartListPage extends State<StartListPage> {
           stageId: stageId,
           time: manualStartTime,
           timestamp: now,
+          ntpOffset: offset,
         ),
       );
     }
@@ -430,6 +431,7 @@ class _StartListPage extends State<StartListPage> {
               correction: 1234,
               timestamp: DateTime.timestamp(),
               startTime: DateFormat(longTimeFormat).format(DateTime.now()),
+              ntpOffset: 2345,
               // deltaInSeconds: ,
               // forceUpdate: ,
             ),

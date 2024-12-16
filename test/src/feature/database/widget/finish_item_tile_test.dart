@@ -56,6 +56,7 @@ void main() {
         id: 1,
         stageId: 1,
         timestamp: timestamp,
+        ntpOffset: 0,
         finishTime: finishTime,
         isHidden: false,
         isManual: false,
@@ -81,6 +82,7 @@ void main() {
         id: 1,
         stageId: 1,
         timestamp: timestamp,
+        ntpOffset: 0,
         finishTime: finishTime,
         isHidden: false,
         isManual: true,
@@ -90,8 +92,10 @@ void main() {
       await tester.pumpWidget(testWidget(item));
       await tester.pumpAndSettle();
 
-      expect((tester.firstWidget(find.byType(Icon)) as Icon).icon,
-          MdiIcons.handBackLeft);
+      expect(
+        (tester.firstWidget(find.byType(Icon)) as Icon).icon,
+        MdiIcons.handBackLeft,
+      );
     });
 
     testWidgets('Show difference if enabled at settings',
@@ -104,6 +108,7 @@ void main() {
         id: 1,
         stageId: 1,
         timestamp: timestamp,
+        ntpOffset: 0,
         finishTime: finishTime,
         isHidden: false,
         isManual: true,
@@ -131,6 +136,7 @@ void main() {
         id: 1,
         stageId: 1,
         timestamp: timestamp,
+        ntpOffset: 0,
         finishTime: finishTime,
         isHidden: false,
         isManual: true,
@@ -167,6 +173,7 @@ void main() {
         id: 1,
         stageId: 1,
         timestamp: timestamp,
+        ntpOffset: 0,
         finishTime: finishTime,
         isHidden: false,
         isManual: true,

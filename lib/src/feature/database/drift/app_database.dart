@@ -530,6 +530,7 @@ class AppDatabase extends _$AppDatabase {
             manualStartTime: const Value(null),
             startTime: Value(startTime),
             timestamp: const Value(null),
+            ntpOffset: const Value(null),
             statusId: const Value(1),
           ),
         );
@@ -569,6 +570,7 @@ class AppDatabase extends _$AppDatabase {
     required String time,
     required int correction,
     required DateTime timestamp,
+    required int ntpOffset,
     required int deltaInSeconds,
     bool forceUpdate = false,
   }) async {
@@ -614,9 +616,8 @@ class AppDatabase extends _$AppDatabase {
         StartsCompanion(
           automaticCorrection: Value(correction),
           automaticStartTime: Value(time),
-          // startTime: Value(phoneTime),
           timestamp: Value(timestamp),
-          // statusId: const Value(1),
+          ntpOffset: Value(ntpOffset),
         ),
       );
       logger.i('Database -> updated: $result lines');
@@ -640,6 +641,7 @@ class AppDatabase extends _$AppDatabase {
     required int stageId,
     required DateTime time,
     required DateTime timestamp,
+    required int ntpOffset,
     int deltaInSeconds = 15,
   }) async {
     var result = 0;
@@ -670,6 +672,7 @@ class AppDatabase extends _$AppDatabase {
           manualCorrection: correction.inMilliseconds,
           manualStartTime: manualStartTime,
           timestamp: timestamp,
+          ntpOffset: ntpOffset,
         );
         result += count;
         if (count > 0) {
@@ -792,6 +795,7 @@ class AppDatabase extends _$AppDatabase {
     required Stage stage,
     required String finish,
     required DateTime timestamp,
+    required int ntpOffset,
     int finishDelay = 0,
     bool substituteNumbers = false,
     int substituteNumbersDelay = 0,
@@ -861,6 +865,7 @@ class AppDatabase extends _$AppDatabase {
       stageId: stage.id,
       finishTime: finish,
       timestamp: timestamp,
+      ntpOffset: ntpOffset,
       number: workingNumber,
       isHidden: isHidden,
     );
@@ -883,6 +888,7 @@ class AppDatabase extends _$AppDatabase {
     required int stageId,
     required String finishTime,
     required DateTime timestamp,
+    required int ntpOffset,
     int? number,
   }) async {
     // final String phoneTime = DateFormat(longTimeFormat).format(timestamp);
@@ -890,6 +896,7 @@ class AppDatabase extends _$AppDatabase {
       stageId: stageId,
       finishTime: finishTime,
       timestamp: timestamp,
+      ntpOffset: ntpOffset,
       number: number,
     );
     logger.i('Database -> Manual finish time added: $finishTime');
@@ -1203,6 +1210,7 @@ class AppDatabase extends _$AppDatabase {
                 automaticCorrection: const Value(null),
                 automaticStartTime: const Value(null),
                 timestamp: const Value(null),
+                ntpOffset: const Value(null),
                 manualCorrection: const Value(null),
                 manualStartTime: const Value(null),
                 statusId: Value(ParticipantStatus.active.index),

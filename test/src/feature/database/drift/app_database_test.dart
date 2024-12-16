@@ -671,12 +671,14 @@ void main() {
         const automaticStartTime = '10:15:01,123';
         final timestamp = '10:15:01,001'.toDateTime()!;
         const correction = 1234;
+        const offset = 3456;
 
         final result = await db.updateAutomaticCorrection(
           stageId: stage.id,
           time: automaticStartTime,
           correction: correction,
           timestamp: timestamp,
+          ntpOffset: offset,
           deltaInSeconds: deltaInSeconds,
         );
         expect(result, null);
@@ -693,6 +695,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestamp);
+        expect(start.first.ntpOffset, offset);
       });
 
       test('Add correct correction to started participant', () async {
@@ -704,12 +707,15 @@ void main() {
         final timestampNew = '10:15:05,555'.toDateTime()!;
         const correction = 1234;
         const correctionNew = 5678;
+        const offset = 3456;
+        const offsetNew = 9876;
 
         var result = await db.updateAutomaticCorrection(
           stageId: stage.id,
           time: automaticStartTime,
           correction: correction,
           timestamp: timestamp,
+          ntpOffset: offset,
           deltaInSeconds: deltaInSeconds,
         );
         expect(result, null);
@@ -719,6 +725,7 @@ void main() {
           time: automaticStartTimeNew,
           correction: correctionNew,
           timestamp: timestampNew,
+          ntpOffset: offsetNew,
           deltaInSeconds: deltaInSeconds,
         );
         expect(result?.length, 1);
@@ -735,6 +742,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestamp);
+        expect(start.first.ntpOffset, offset);
       });
 
       test('Force update correction', () async {
@@ -746,12 +754,15 @@ void main() {
         final timestampNew = '10:15:05,555'.toDateTime()!;
         const correction = 1234;
         const correctionNew = 5678;
+        const offset = 3456;
+        const offsetNew = 9876;
 
         var result = await db.updateAutomaticCorrection(
           stageId: stage.id,
           time: automaticStartTime,
           correction: correction,
           timestamp: timestamp,
+          ntpOffset: offset,
           deltaInSeconds: deltaInSeconds,
         );
         expect(result, null);
@@ -761,6 +772,7 @@ void main() {
           time: automaticStartTimeNew,
           correction: correctionNew,
           timestamp: timestampNew,
+          ntpOffset: offsetNew,
           forceUpdate: true,
           deltaInSeconds: deltaInSeconds,
         );
@@ -778,6 +790,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestampNew);
+        expect(start.first.ntpOffset, offsetNew);
       });
 
       test('Add incorrect automaticStartTime', () async {
@@ -785,6 +798,7 @@ void main() {
         const automaticStartTime = '10:15-01,123';
         final timestamp = '10:15:01,001'.toDateTime()!;
         const correction = 1234;
+        const offset = 3456;
 
         expect(
           () => db.updateAutomaticCorrection(
@@ -792,6 +806,7 @@ void main() {
             time: automaticStartTime,
             correction: correction,
             timestamp: timestamp,
+            ntpOffset: offset,
             deltaInSeconds: deltaInSeconds,
           ),
           throwsA(isA<FormatException>()),
@@ -803,6 +818,7 @@ void main() {
         const startTime = '10:15:00';
         const automaticStartTime = '10:15:03,123';
         final timestamp = '10:15:03,001'.toDateTime()!;
+        const offset = 3456;
         const correction = 1234;
         const delta = 1;
 
@@ -811,6 +827,7 @@ void main() {
           time: automaticStartTime,
           correction: correction,
           timestamp: timestamp,
+          ntpOffset: offset,
           deltaInSeconds: delta,
         );
         expect(result, null);
@@ -827,6 +844,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, null);
+        expect(start.first.ntpOffset, null);
       });
     });
 
@@ -836,12 +854,14 @@ void main() {
         const startTime = '10:15:00';
         const manualStartTime = '10:15:03,001';
         final timestamp = manualStartTime.toDateTime()!;
+        const offset = 3456;
         const correction = -3001;
 
         final result = await db.updateManualStartTime(
           stageId: stage.id,
           time: timestamp,
           timestamp: timestamp,
+          ntpOffset: offset,
         );
         expect(result, 1);
 
@@ -857,6 +877,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestamp);
+        expect(start.first.ntpOffset, offset);
         expect(start.first.manualStartTime, manualStartTime);
         expect(start.first.manualCorrection, correction);
       });
@@ -864,11 +885,13 @@ void main() {
       test('Participant around time does not exists', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         final timestamp = '00:15:03,001'.toDateTime()!;
+        const offset = 3456;
 
         final result = await db.updateManualStartTime(
           stageId: stage.id,
           time: timestamp,
           timestamp: timestamp,
+          ntpOffset: offset,
         );
         expect(result, 0);
       });
@@ -878,6 +901,7 @@ void main() {
         const startTime = '10:15:00';
         const manualStartTime = '10:15:03,001';
         final timestamp = manualStartTime.toDateTime()!;
+        const offset = 3456;
         const correction = -3001;
         const delta = 1;
 
@@ -885,6 +909,7 @@ void main() {
           stageId: stage.id,
           time: timestamp,
           timestamp: timestamp,
+          ntpOffset: offset,
           deltaInSeconds: delta,
         );
         expect(result, 0);
@@ -901,6 +926,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, null);
+        expect(start.first.ntpOffset, null);
         expect(start.first.manualStartTime, null);
         expect(start.first.manualCorrection, null);
 
@@ -908,6 +934,7 @@ void main() {
           stageId: stage.id,
           time: timestamp,
           timestamp: timestamp,
+          ntpOffset: offset,
         );
         expect(result, 1);
 
@@ -923,6 +950,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestamp);
+        expect(start.first.ntpOffset, offset);
         expect(start.first.manualStartTime, manualStartTime);
         expect(start.first.manualCorrection, correction);
       });
@@ -1030,6 +1058,7 @@ void main() {
         final manualStartTime = startTime.replaceAll(':00', ':01,523');
         final timestampString = startTime.replaceAll(':00', ':01,001');
         final timestamp = timestampString.toDateTime()!;
+        const offset = 3456;
         const automaticCorrection = -1523;
 
         final correctionResult = await db.updateAutomaticCorrection(
@@ -1037,6 +1066,7 @@ void main() {
           time: automaticStartTime,
           correction: automaticCorrection,
           timestamp: timestamp,
+          ntpOffset: offset,
           deltaInSeconds: deltaInSeconds,
         );
         expect(correctionResult, null);
@@ -1045,6 +1075,7 @@ void main() {
           stageId: stage.id,
           time: manualStartTime.toDateTime()!,
           timestamp: timestamp,
+          ntpOffset: offset,
         );
         expect(manualResult, 1);
 
@@ -1060,6 +1091,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestamp);
+        expect(start.first.ntpOffset, offset);
         expect(start.first.manualStartTime, manualStartTime);
         expect(start.first.manualCorrection, automaticCorrection);
 
@@ -1081,6 +1113,7 @@ void main() {
         expect(participants.first.automaticCorrection, null);
         expect(participants.first.startTime, startTime);
         expect(participants.first.timestamp, null);
+        expect(participants.first.ntpOffset, null);
         expect(participants.first.manualStartTime, null);
         expect(participants.first.manualCorrection, null);
       });
@@ -1099,6 +1132,7 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finishTime = '10:05:23,123';
         const timestamp = '10:05:23,456';
+        const offset = 3456;
         const number = 2;
 
         var startInfo = (await db
@@ -1111,6 +1145,7 @@ void main() {
           stage: stage,
           finish: finishTime,
           timestamp: timestamp.toDateTime()!,
+          ntpOffset: offset,
         );
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id).get();
@@ -1139,18 +1174,21 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finishTime = '10:05:23,123';
         const timestamp = '10:05:23,456';
+        const offset = 3456;
         const number = 2;
 
         await db.addFinishTime(
           stage: stage,
           finish: finishTime,
           timestamp: timestamp.toDateTime()!,
+          ntpOffset: offset,
         );
 
         await db.addFinishTime(
           stage: stage,
           finish: finishTime,
           timestamp: timestamp.toDateTime()!,
+          ntpOffset: offset,
         );
 
         final finishes = await db.getFinishesFromStage(stageId: stage.id).get();
@@ -1179,6 +1217,7 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finishTime = '10:05:23,123';
         const timestamp = '10:05:23,456';
+        const offset = 3456;
         const number = 999;
 
         final startInfo =
@@ -1189,6 +1228,7 @@ void main() {
           stage: stage,
           finish: finishTime,
           timestamp: timestamp.toDateTime()!,
+          ntpOffset: offset,
         );
 
         var finishes = await db.getFinishesFromStage(stageId: stage.id).get();
@@ -1259,6 +1299,7 @@ void main() {
         final dateTimeNow = '10:02:01.111'.toDateTime()!;
         const finishTime = '10:01:23,123';
         const timestamp = '10:01:23,456';
+        const offset = 3456;
         const number = 2;
         const number2 = 7;
 
@@ -1276,6 +1317,7 @@ void main() {
           stage: stage,
           finish: finishTime,
           timestamp: timestamp.toDateTime()!,
+          ntpOffset: offset,
         );
 
         final finishes = await db.getFinishesFromStage(stageId: stage.id).get();
@@ -1337,113 +1379,18 @@ void main() {
       });
     });
 
-    // group('Test hideFinish', () {
-    //   test('Finish hided successfully', () async {
-    //     final stage = (await db.getStages(raceId: 1).get()).first;
-    //     const finish = '10:05:23,123';
-    //     const timestamp = '10:05:23,456';
-    //
-    //     await db.addFinishTime(
-    //       stage: stage,
-    //       finish: finish,
-    //       timestamp: timestamp.toDateTime()!,
-    //     );
-    //
-    //     await db.addFinishTime(
-    //       stage: stage,
-    //       finish: finish,
-    //       timestamp: timestamp.toDateTime()!,
-    //     );
-    //
-    //     var result = await db
-    //         .getFinishesFromStage(
-    //           stageId: stage.id,
-    //           hideMarked: false,
-    //         )
-    //         .get();
-    //     expect(result[0].isHidden, false);
-    //     expect(result[1].isHidden, false);
-    //
-    //     var count = await db.hideFinish(result[0].id);
-    //     expect(count, 1);
-    //
-    //     result = await db
-    //         .getFinishesFromStage(
-    //           stageId: stage.id,
-    //           hideMarked: false,
-    //         )
-    //         .get();
-    //     expect(result[0].isHidden, true);
-    //     expect(result[1].isHidden, false);
-    //
-    //     count = await db.hideFinish(result[1].id);
-    //     result = await db
-    //         .getFinishesFromStage(
-    //           stageId: stage.id,
-    //           hideMarked: false,
-    //         )
-    //         .get();
-    //     expect(result[0].isHidden, true);
-    //     expect(result[1].isHidden, true);
-    //   });
-    // });
-
-    // group('Test hideAllFinish', () {
-    //   test('Finishes hided successfully', () async {
-    //     final stage = (await db.getStages(raceId: 1).get()).first;
-    //     const finish = '10:05:23,123';
-    //     const timestamp = '10:05:23,456';
-    //
-    //     await db.addFinishTime(
-    //       stage: stage,
-    //       finish: finish,
-    //       timestamp: timestamp.toDateTime()!,
-    //     );
-    //
-    //     var result = await db.hideAllFinishes(stage.id);
-    //     expect(result, 1);
-    //
-    //     await db.addFinishTime(
-    //       stage: stage,
-    //       finish: finish,
-    //       timestamp: timestamp.toDateTime()!,
-    //     );
-    //
-    //     result = await db.hideAllFinishes(stage.id);
-    //     expect(result, 2);
-    //
-    //     await db.addFinishTime(
-    //       stage: stage,
-    //       finish: finish,
-    //       timestamp: timestamp.toDateTime()!,
-    //     );
-    //
-    //     result = await db.hideAllFinishes(stage.id);
-    //     expect(result, 3);
-    //
-    //     final finishes = await db
-    //         .getFinishesFromStage(
-    //           stageId: stage.id,
-    //           hideMarked: false,
-    //         )
-    //         .get();
-    //     expect(finishes.length, 3);
-    //     expect(finishes[0].isHidden, true);
-    //     expect(finishes[1].isHidden, true);
-    //     expect(finishes[2].isHidden, true);
-    //   });
-    // });
-
     group('Test addFinishTime', () {
       test('New automatic finish time', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish = '10:05:23,123';
         final timestamp = '10:05:23,456'.toDateTime()!;
+        const offset = 3456;
 
         final result = await db.addFinishTime(
           stage: stage,
           finish: finish,
           timestamp: timestamp,
+          ntpOffset: offset,
         );
 
         expect(result, null);
@@ -1454,6 +1401,7 @@ void main() {
         expect(finishes.first.number, null);
         expect(finishes.first.finishTime, finish);
         expect(finishes.first.timestamp, timestamp);
+        expect(finishes.first.ntpOffset, offset);
         expect(finishes.first.isHidden, false);
         expect(finishes.first.isManual, false);
       });
@@ -1464,17 +1412,21 @@ void main() {
         const finish2 = '10:05:23,129';
         final timestamp1 = '10:05:23,456'.toDateTime()!;
         final timestamp2 = '10:05:23,459'.toDateTime()!;
+        const offset1 = 3456;
+        const offset2 = 4567;
 
         await db.addFinishTime(
           stage: stage,
           finish: finish1,
           timestamp: timestamp1,
+          ntpOffset: offset1,
         );
 
         await db.addFinishTime(
           stage: stage,
           finish: finish2,
           timestamp: timestamp2,
+          ntpOffset: offset2,
         );
 
         final finishes = await db.getFinishesFromStage(stageId: stage.id).get();
@@ -1483,6 +1435,7 @@ void main() {
         expect(finishes[1].number, null);
         expect(finishes[1].finishTime, finish2);
         expect(finishes[1].timestamp, timestamp2);
+        expect(finishes[1].ntpOffset, offset2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
       });
@@ -1491,6 +1444,7 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish1 = '10:05:23,123';
         final timestamp1 = '10:05:23,456'.toDateTime()!;
+        const offset1 = 3456;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number = 2;
 
@@ -1498,6 +1452,7 @@ void main() {
           stage: stage,
           finish: finish1,
           timestamp: timestamp1,
+          ntpOffset: offset1,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
         );
@@ -1509,6 +1464,7 @@ void main() {
         expect(finishes.first.number, number);
         expect(finishes.first.finishTime, finish1);
         expect(finishes.first.timestamp, timestamp1);
+        expect(finishes.first.ntpOffset, offset1);
         expect(finishes.first.isHidden, false);
         expect(finishes.first.isManual, false);
       });
@@ -1519,6 +1475,8 @@ void main() {
         const finish2 = '10:05:25,129';
         final timestamp1 = '10:05:23,456'.toDateTime()!;
         final timestamp2 = '10:05:25,459'.toDateTime()!;
+        const offset1 = 3456;
+        const offset2 = 4567;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number1 = 2;
 
@@ -1526,6 +1484,7 @@ void main() {
           stage: stage,
           finish: finish1,
           timestamp: timestamp1,
+          ntpOffset: offset1,
           dateTimeNow: dateTimeNow,
         );
         expect(addNumber1, null);
@@ -1534,6 +1493,7 @@ void main() {
           stage: stage,
           finish: finish2,
           timestamp: timestamp2,
+          ntpOffset: offset2,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
         );
@@ -1545,12 +1505,14 @@ void main() {
         expect(finishes[0].number, null);
         expect(finishes[0].finishTime, finish1);
         expect(finishes[0].timestamp, timestamp1);
+        expect(finishes[0].ntpOffset, offset1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, number1);
         expect(finishes[1].finishTime, finish2);
         expect(finishes[1].timestamp, timestamp2);
+        expect(finishes[1].ntpOffset, offset2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
       });
@@ -1561,6 +1523,8 @@ void main() {
         const finish2 = '10:05:25,129';
         final timestamp1 = '10:05:23,456'.toDateTime()!;
         final timestamp2 = '10:05:25,459'.toDateTime()!;
+        const offset1 = 3456;
+        const offset2 = 4567;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number1 = 2;
         const number2 = 7;
@@ -1569,6 +1533,7 @@ void main() {
           stage: stage,
           finish: finish1,
           timestamp: timestamp1,
+          ntpOffset: offset1,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
         );
@@ -1578,6 +1543,7 @@ void main() {
           stage: stage,
           finish: finish2,
           timestamp: timestamp2,
+          ntpOffset: offset2,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
         );
@@ -1589,12 +1555,14 @@ void main() {
         expect(finishes[0].number, number1);
         expect(finishes[0].finishTime, finish1);
         expect(finishes[0].timestamp, timestamp1);
+        expect(finishes[0].ntpOffset, offset1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, number2);
         expect(finishes[1].finishTime, finish2);
         expect(finishes[1].timestamp, timestamp2);
+        expect(finishes[1].ntpOffset, offset2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
       });
@@ -1611,6 +1579,9 @@ void main() {
         final timestamp1 = '10:05:23,456'.toDateTime()!;
         final timestamp2 = '10:05:23,459'.toDateTime()!;
         final timestamp3 = '10:05:25,459'.toDateTime()!;
+        const offset1 = 3456;
+        const offset2 = 4567;
+        const offset3 = 5678;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const substituteNumbersDelay = 1000;
         const number1 = 2;
@@ -1620,6 +1591,7 @@ void main() {
           stage: stage,
           finish: finish1,
           timestamp: timestamp1,
+          ntpOffset: offset1,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
           substituteNumbersDelay: substituteNumbersDelay,
@@ -1630,6 +1602,7 @@ void main() {
           stage: stage,
           finish: finish2,
           timestamp: timestamp2,
+          ntpOffset: offset2,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
           substituteNumbersDelay: substituteNumbersDelay,
@@ -1640,6 +1613,7 @@ void main() {
           stage: stage,
           finish: finish3,
           timestamp: timestamp3,
+          ntpOffset: offset3,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
           substituteNumbersDelay: substituteNumbersDelay,
@@ -1652,18 +1626,21 @@ void main() {
         expect(finishes[0].number, number1);
         expect(finishes[0].finishTime, finish1);
         expect(finishes[0].timestamp, timestamp1);
+        expect(finishes[0].ntpOffset, offset1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, null);
         expect(finishes[1].finishTime, finish2);
         expect(finishes[1].timestamp, timestamp2);
+        expect(finishes[1].ntpOffset, offset2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
         expect(finishes[2].stageId, stage.id);
         expect(finishes[2].number, number2);
         expect(finishes[2].finishTime, finish3);
         expect(finishes[2].timestamp, timestamp3);
+        expect(finishes[2].ntpOffset, offset3);
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
       });
@@ -1678,6 +1655,9 @@ void main() {
         final timestamp1 = '10:05:23,456'.toDateTime()!;
         final timestamp2 = '10:05:23,459'.toDateTime()!;
         final timestamp3 = '10:05:25,459'.toDateTime()!;
+        const offset1 = 3456;
+        const offset2 = 4567;
+        const offset3 = 5678;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const finishDelay = 1000;
         const number1 = 2;
@@ -1687,6 +1667,7 @@ void main() {
           stage: stage,
           finish: finish1,
           timestamp: timestamp1,
+          ntpOffset: offset1,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
           finishDelay: finishDelay,
@@ -1697,6 +1678,7 @@ void main() {
           stage: stage,
           finish: finish2,
           timestamp: timestamp2,
+          ntpOffset: offset2,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
           finishDelay: finishDelay,
@@ -1707,6 +1689,7 @@ void main() {
           stage: stage,
           finish: finish3,
           timestamp: timestamp3,
+          ntpOffset: offset3,
           substituteNumbers: true,
           dateTimeNow: dateTimeNow,
           finishDelay: finishDelay,
@@ -1724,18 +1707,21 @@ void main() {
         expect(finishes[0].number, number1);
         expect(finishes[0].finishTime, finish1);
         expect(finishes[0].timestamp, timestamp1);
+        expect(finishes[0].ntpOffset, offset1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, null);
         expect(finishes[1].finishTime, finish2);
         expect(finishes[1].timestamp, timestamp2);
+        expect(finishes[1].ntpOffset, offset2);
         expect(finishes[1].isHidden, true);
         expect(finishes[1].isManual, false);
         expect(finishes[2].stageId, stage.id);
         expect(finishes[2].number, number2);
         expect(finishes[2].finishTime, finish3);
         expect(finishes[2].timestamp, timestamp3);
+        expect(finishes[2].ntpOffset, offset3);
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
       });
@@ -1744,12 +1730,14 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish = '10:05-23,123';
         final timestamp = '10:05:23,456'.toDateTime()!;
+        const offset = 3456;
         const finishDelay = 1000;
 
         final addNumber = await db.addFinishTime(
           stage: stage,
           finish: finish,
           timestamp: timestamp,
+          ntpOffset: offset,
           substituteNumbers: true,
           finishDelay: finishDelay,
         );
@@ -1908,11 +1896,13 @@ void main() {
       test('New manual finish time', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finishTime = '10:05:23,123';
+        const offset = 3456;
 
         var addFinish = await db.addFinishTimeManual(
           stageId: stage.id,
           finishTime: finishTime,
           timestamp: DateTime.timestamp(),
+          ntpOffset: offset,
         );
         expect(addFinish, 1);
 
@@ -1920,6 +1910,7 @@ void main() {
           stageId: stage.id,
           finishTime: finishTime,
           timestamp: DateTime.timestamp(),
+          ntpOffset: offset,
         );
         expect(addFinish, 2);
 
@@ -1927,6 +1918,7 @@ void main() {
           stageId: stage.id,
           finishTime: finishTime,
           timestamp: DateTime.timestamp(),
+          ntpOffset: offset,
         );
         expect(addFinish, 3);
       });
@@ -1941,6 +1933,9 @@ void main() {
         final timestamp1 = '10:05:23,456'.toDateTime()!;
         final timestamp2 = '10:05:24,459'.toDateTime()!;
         final timestamp3 = '10:05:25,459'.toDateTime()!;
+        const offset1 = 3456;
+        const offset2 = 4567;
+        const offset3 = 5678;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number1 = 2;
         const number2 = 7;
@@ -1950,6 +1945,7 @@ void main() {
           stage: stage,
           finish: finish1,
           timestamp: timestamp1,
+          ntpOffset: offset1,
           dateTimeNow: dateTimeNow,
           number: number1,
         );
@@ -1959,6 +1955,7 @@ void main() {
           stage: stage,
           finish: finish2,
           timestamp: timestamp2,
+          ntpOffset: offset2,
           dateTimeNow: dateTimeNow,
           number: number2,
         );
@@ -1968,6 +1965,7 @@ void main() {
           stage: stage,
           finish: finish3,
           timestamp: timestamp3,
+          ntpOffset: offset3,
           dateTimeNow: dateTimeNow,
           number: number3,
         );
@@ -1979,18 +1977,21 @@ void main() {
         expect(finishes[0].number, number1);
         expect(finishes[0].finishTime, finish1);
         expect(finishes[0].timestamp, timestamp1);
+        expect(finishes[0].ntpOffset, offset1);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
         expect(finishes[1].stageId, stage.id);
         expect(finishes[1].number, number2);
         expect(finishes[1].finishTime, finish2);
         expect(finishes[1].timestamp, timestamp2);
+        expect(finishes[1].ntpOffset, offset2);
         expect(finishes[1].isHidden, false);
         expect(finishes[1].isManual, false);
         expect(finishes[2].stageId, stage.id);
         expect(finishes[2].number, number3);
         expect(finishes[2].finishTime, finish3);
         expect(finishes[2].timestamp, timestamp3);
+        expect(finishes[2].ntpOffset, offset3);
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
 
@@ -2058,6 +2059,7 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const finish = '10:05:23,123';
         final timestamp = '10:05:23,456'.toDateTime()!;
+        const offset = 3456;
         final dateTimeNow = '10:05:28,111'.toDateTime();
         const number = 2;
 
@@ -2065,6 +2067,7 @@ void main() {
           stage: stage,
           finish: finish,
           timestamp: timestamp,
+          ntpOffset: offset,
           dateTimeNow: dateTimeNow,
           number: number,
         );
@@ -2076,6 +2079,7 @@ void main() {
         expect(finishes[0].number, number);
         expect(finishes[0].finishTime, finish);
         expect(finishes[0].timestamp, timestamp);
+        expect(finishes[0].ntpOffset, offset);
         expect(finishes[0].isHidden, false);
         expect(finishes[0].isManual, false);
 

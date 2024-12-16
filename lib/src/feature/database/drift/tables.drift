@@ -63,6 +63,7 @@ CREATE TABLE starts (
 	participant_id integer NOT NULL,
 	start_time text NOT NULL,
 	timestamp DATETIME,
+	ntp_offset integer,
 	automatic_start_time text,
 	automatic_correction integer,
 	manual_start_time text,
@@ -80,6 +81,7 @@ CREATE TABLE finishes (
 	stage_id integer NOT NULL,
 	number integer,
 	timestamp DATETIME NOT NULL,
+	ntp_offset integer NOT NULL,
 	finish_time text NOT NULL,
 	is_hidden BOOLEAN NOT NULL DEFAULT false,
 	is_manual BOOLEAN NOT NULL DEFAULT false,
@@ -202,6 +204,7 @@ SELECT
 	participant_id,
 	start_time,
 	timestamp,
+	ntp_offset,
 	automatic_start_time,
 	automatic_correction,
 	manual_start_time,
@@ -243,6 +246,7 @@ SELECT
 	starts.participant_id as participant_id,
 	starts.start_time as start_time,
 	starts.timestamp as timestamp,
+	starts.ntp_offset as ntp_offset,
 	starts.automatic_start_time as automatic_start_time,
 	starts.automatic_correction as automatic_correction,
 	starts.manual_start_time as manual_start_time,
@@ -264,6 +268,7 @@ SELECT
 	participant_id,
 	start_time,
 	timestamp,
+	ntp_offset,
 	automatic_start_time,
 	automatic_correction,
 	manual_start_time,
@@ -302,6 +307,7 @@ SELECT
 	participant_id,
 	start_time,
 	timestamp,
+	ntp_offset,
 	automatic_start_time,
 	automatic_correction,
 	manual_start_time,
@@ -325,7 +331,8 @@ UPDATE starts
 SET
 	manual_start_time = :manual_start_time,
 	manual_correction = :manual_correction,
-	timestamp = :timestamp
+	timestamp = :timestamp,
+	ntp_offset = :ntp_offset
 WHERE
 	participant_id = :participant_id
 	AND stage_id = :stage_id;
@@ -381,7 +388,8 @@ SET
 	automatic_start_time = NULL,
 	manual_correction = NULL,
 	manual_start_time = NULL,
-	timestamp = NULL
+	timestamp = NULL,
+	ntp_offset = NULL
 WHERE
 	id = :id;
 
@@ -392,6 +400,7 @@ SELECT
 	participant_id,
 	start_time,
 	timestamp,
+	ntp_offset,
 	automatic_start_time,
 	automatic_correction,
 	manual_start_time,
@@ -429,6 +438,7 @@ WHERE
     AND is_manual = false
 ORDER BY finish_time DESC LIMIT 1;
 
+-- ToDo: fix "AND finish_time NOT like 'DNS'"
 _getLastFinishTimeWithNumber:
 SELECT finish_time
 FROM finishes
@@ -440,8 +450,8 @@ WHERE
 ORDER BY finish_time DESC LIMIT 1;
 
 _addFinishTime:
-INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_hidden)
-VALUES (:stage_id, :finish_time, :timestamp, :number, :is_hidden);
+INSERT INTO finishes (stage_id, finish_time, timestamp, ntp_offset, number, is_hidden)
+VALUES (:stage_id, :finish_time, :timestamp, :ntp_offset, :number, :is_hidden);
 
 _setFinishInfoToStart:
 UPDATE starts
@@ -453,8 +463,8 @@ WHERE
     AND p.number = :number;
 
 _addFinishTimeManual:
-INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_manual)
-VALUES (:stage_id, :finish_time, :timestamp, :number, true);
+INSERT INTO finishes (stage_id, finish_time, timestamp, ntp_offset, number, is_manual)
+VALUES (:stage_id, :finish_time, :timestamp, :ntp_offset, :number, true);
 
 _hideFinish:
 UPDATE finishes SET is_hidden = true WHERE id = :id;

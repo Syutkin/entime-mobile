@@ -12,6 +12,7 @@ import '../../database/model/filter_finish.dart';
 import '../../database/model/filter_start.dart';
 import '../../database/widget/start_list_page.dart';
 import '../../module_settings/module_settings.dart';
+import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../../tab/tab.dart';
 import '../../tab/widget/finish_page.dart';
@@ -101,6 +102,7 @@ class HomeScreen extends StatelessWidget {
               message?.whenOrNull(
                 automaticStart: (automaticStart) {
                   final databaseBloc = context.read<DatabaseBloc>();
+                  final offset = context.read<NtpBloc>().state.offset;
                   final stageId = databaseBloc.state.stage?.id;
                   if (stageId != null) {
                     databaseBloc.add(
@@ -109,6 +111,7 @@ class HomeScreen extends StatelessWidget {
                         startTime: automaticStart.time,
                         correction: automaticStart.correction,
                         timestamp: automaticStart.timestamp,
+                        ntpOffset: offset,
                         forceUpdate: automaticStart.updating,
                       ),
                     );
@@ -116,6 +119,7 @@ class HomeScreen extends StatelessWidget {
                 },
                 finish: (time, timestamp) {
                   final databaseBloc = context.read<DatabaseBloc>();
+                  final offset = context.read<NtpBloc>().state.offset;
                   final stage = databaseBloc.state.stage;
                   if (stage != null) {
                     databaseBloc.add(
@@ -123,6 +127,7 @@ class HomeScreen extends StatelessWidget {
                         stage: stage,
                         finishTime: time,
                         timestamp: timestamp,
+                        ntpOffset: offset,
                       ),
                     );
                   }
@@ -141,10 +146,11 @@ class HomeScreen extends StatelessWidget {
   SingleChildWidget _listenToNewStartTime() =>
       BlocListener<DatabaseBloc, DatabaseState>(
         listener: (context, state) async {
-          final databaseBloc = context.read<DatabaseBloc>();
           // Обновление автоматического времени старта
           final notification = state.notification;
           if (notification != null) {
+            final databaseBloc = context.read<DatabaseBloc>();
+            final offset = context.read<NtpBloc>().state.offset;
             await notification.mapOrNull(
               updateAutomaticCorrection: (data) async {
                 final prevCorrection =
@@ -176,6 +182,7 @@ class HomeScreen extends StatelessWidget {
                         stageId: data.previousStarts.first.stageId,
                         startTime: data.startTime,
                         timestamp: data.timestamp,
+                        ntpOffset: offset,
                         correction: data.correction,
                         forceUpdate: true,
                       ),
