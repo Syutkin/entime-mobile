@@ -20,13 +20,16 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m30(stageName) =>
+  static String m30(raceName) =>
+      "Вы уверены, что хотите удалить гонку \"${raceName}\"?";
+
+  static String m31(stageName) =>
       "Вы уверены, что хотите удалить этап \"${stageName}\"?";
 
-  static String m31(trailName) =>
+  static String m32(trailName) =>
       "Вы уверены, что хотите удалить трейл \"${trailName}\"?";
 
-  static String m32(limit) => "Максимальный размер ${limit} Мб";
+  static String m33(limit) => "Максимальный размер ${limit} Мб";
 
   static String m0(version) => "v${version}";
 
@@ -110,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Неизвестное устройство"),
         "I18nCore_correction": MessageLookupByLibrary.simpleMessage("Поправка"),
         "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "I18nCore_dnf": MessageLookupByLibrary.simpleMessage("DNF"),
+        "I18nCore_dns": MessageLookupByLibrary.simpleMessage("DNS"),
+        "I18nCore_dsq": MessageLookupByLibrary.simpleMessage("DSQ"),
         "I18nCore_edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
         "I18nCore_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
         "I18nCore_warning":
@@ -120,8 +126,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создать соревнование"),
         "I18nDatabase_addStage":
             MessageLookupByLibrary.simpleMessage("Создать спецучасток"),
-        "I18nDatabase_deleteStage": m30,
-        "I18nDatabase_deleteTrail": m31,
+        "I18nDatabase_deleteRace": m30,
+        "I18nDatabase_deleteStage": m31,
+        "I18nDatabase_deleteTrail": m32,
         "I18nDatabase_editRace":
             MessageLookupByLibrary.simpleMessage("Редактирование"),
         "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
@@ -151,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nDatabase_raceUrl": MessageLookupByLibrary.simpleMessage("Сайт"),
         "I18nDatabase_races":
             MessageLookupByLibrary.simpleMessage("Соревнования"),
+        "I18nDatabase_searchTrail":
+            MessageLookupByLibrary.simpleMessage("Найти..."),
         "I18nDatabase_stageDescription":
             MessageLookupByLibrary.simpleMessage("Описание"),
         "I18nDatabase_stageName":
@@ -170,7 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Название"),
         "I18nDatabase_trailUrl": MessageLookupByLibrary.simpleMessage("Ссылка"),
         "I18nDatabase_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
-        "I18nDatabase_uploadLimit": m32,
+        "I18nDatabase_uploadLimit": m33,
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
         "I18nDrawer_settings":
@@ -190,12 +199,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nHome_errorAddParticipant": m2,
         "I18nHome_fab": MessageLookupByLibrary.simpleMessage("FAB"),
         "I18nHome_finish": MessageLookupByLibrary.simpleMessage("Финиш"),
-        "I18nHome_hideManual":
-            MessageLookupByLibrary.simpleMessage("Ручная отсечка"),
-        "I18nHome_hideMarked": MessageLookupByLibrary.simpleMessage("Скрытые"),
-        "I18nHome_hideNumbers":
-            MessageLookupByLibrary.simpleMessage("С номерами"),
         "I18nHome_home": MessageLookupByLibrary.simpleMessage("Начало"),
+        "I18nHome_importStagesCsv":
+            MessageLookupByLibrary.simpleMessage("Импорт этапов"),
         "I18nHome_importStartProtocolCsv":
             MessageLookupByLibrary.simpleMessage("Импорт стартового протокола"),
         "I18nHome_selectStartProtocol":
@@ -204,8 +210,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("По умолчанию"),
         "I18nHome_showColorFinishDifference":
             MessageLookupByLibrary.simpleMessage("Цветовая индикация разницы"),
+        "I18nHome_showDNF": MessageLookupByLibrary.simpleMessage("DNF"),
+        "I18nHome_showDNS": MessageLookupByLibrary.simpleMessage("DNS"),
+        "I18nHome_showDSQ": MessageLookupByLibrary.simpleMessage("DSQ"),
         "I18nHome_showFinishDifference":
             MessageLookupByLibrary.simpleMessage("Разница во времени"),
+        "I18nHome_showHidden": MessageLookupByLibrary.simpleMessage("Скрытые"),
+        "I18nHome_showManual":
+            MessageLookupByLibrary.simpleMessage("Ручная отсечка"),
+        "I18nHome_showNumbers":
+            MessageLookupByLibrary.simpleMessage("С номерами"),
         "I18nHome_start": MessageLookupByLibrary.simpleMessage("Старт"),
         "I18nHome_update": MessageLookupByLibrary.simpleMessage("Обновить"),
         "I18nHome_updateAutomaticCorrection": m3,

@@ -56,10 +56,15 @@ class AppSettings with _$AppSettings {
     // проверка обновлений
     required bool checkUpdates,
 
-    // выборка значений в финише
-    required bool hideMarked,
-    required bool hideNumbers,
-    required bool hideManual,
+    // выборка значений на старте
+    required bool showDNS,
+    required bool showDNF,
+    required bool showDSQ,
+
+    // выборка значений на финише
+    required bool showHidden,
+    required bool showNumbers,
+    required bool showManual,
 
     // задержка в миллисекундах перед показыванием нового финишного времени
     required int finishDelay,
@@ -76,7 +81,7 @@ class AppSettings with _$AppSettings {
 
     // разница между временем финиша с модуля и временем устройства в миллисекундах
     // при превышении которого будет цветовая индикация
-    required int finishDifference,
+    required int finishDifferenceThreshold,
 
     // дельта в секундах для автоматического подставления стартового времени
     required int deltaInSeconds,
@@ -131,7 +136,6 @@ class AppSettings with _$AppSettings {
     @Default(0.5) double rate, // скорость речи
     @Default('ru-RU') String voiceLanguage, // = "ru-RU", // язык
 
-    // ToDo: не изменять эти настройки при установке значений по умолчанию
     // id выбранного соревнования и участка
     @Default(-1) int raceId,
     @Default(-1) int stageId,
@@ -157,10 +161,15 @@ class AppSettings with _$AppSettings {
     // проверка обновлений
     @Default(true) bool checkUpdates,
 
-    // выборка значений в финише
-    @Default(true) bool hideMarked,
-    @Default(false) bool hideNumbers,
-    @Default(false) bool hideManual,
+    // выборка значений на старте
+    @Default(false) bool showDNS,
+    @Default(false) bool showDNF,
+    @Default(false) bool showDSQ,
+
+    // выборка значений на финише
+    @Default(false) bool showHidden,
+    @Default(true) bool showNumbers,
+    @Default(true) bool showManual,
 
     // задержка в миллисекундах перед показыванием нового финишного времени
     @Default(350) int finishDelay,
@@ -177,7 +186,7 @@ class AppSettings with _$AppSettings {
 
     // разница между временем финиша с модуля и временем устройства в миллисекундах
     // при превышении которого будет цветовая индикация
-    @Default(2000) int finishDifference,
+    @Default(2000) int finishDifferenceThreshold,
 
     // дельта в секундах для автоматического подставления стартового времени
     @Default(15) int deltaInSeconds,

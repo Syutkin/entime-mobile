@@ -11,7 +11,6 @@ class CountdownPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar:
             AppBar(title: Text(Localization.current.I18nCountdown_countdown)),
-        // ToDo: страница с обратным отсчётом и звуковым сопровождением
         body: BlocBuilder<CountdownBloc, CountdownState>(
           builder: (context, state) {
             final text = state.maybeMap(

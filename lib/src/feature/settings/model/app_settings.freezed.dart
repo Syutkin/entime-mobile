@@ -54,10 +54,14 @@ mixin _$AppSettings {
   bool get countdownAtStartTime =>
       throw _privateConstructorUsedError; // проверка обновлений
   bool get checkUpdates =>
-      throw _privateConstructorUsedError; // выборка значений в финише
-  bool get hideMarked => throw _privateConstructorUsedError;
-  bool get hideNumbers => throw _privateConstructorUsedError;
-  bool get hideManual =>
+      throw _privateConstructorUsedError; // выборка значений на старте
+  bool get showDNS => throw _privateConstructorUsedError;
+  bool get showDNF => throw _privateConstructorUsedError;
+  bool get showDSQ =>
+      throw _privateConstructorUsedError; // выборка значений на финише
+  bool get showHidden => throw _privateConstructorUsedError;
+  bool get showNumbers => throw _privateConstructorUsedError;
+  bool get showManual =>
       throw _privateConstructorUsedError; // задержка в миллисекундах перед показыванием нового финишного времени
   int get finishDelay =>
       throw _privateConstructorUsedError; // автоподстановка номеров в финишном протоколе
@@ -69,7 +73,7 @@ mixin _$AppSettings {
   bool get showColorFinishDifference =>
       throw _privateConstructorUsedError; // разница между временем финиша с модуля и временем устройства в миллисекундах
 // при превышении которого будет цветовая индикация
-  int get finishDifference =>
+  int get finishDifferenceThreshold =>
       throw _privateConstructorUsedError; // дельта в секундах для автоматического подставления стартового времени
   int get deltaInSeconds =>
       throw _privateConstructorUsedError; // задержка в миллисекундах перед обновлением стартовой поправки,
@@ -118,15 +122,18 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -164,15 +171,18 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -214,15 +224,18 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -260,15 +273,18 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -310,15 +326,18 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -356,15 +375,18 @@ mixin _$AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -438,15 +460,18 @@ abstract class $AppSettingsCopyWith<$Res> {
       double countdownTop,
       bool countdownAtStartTime,
       bool checkUpdates,
-      bool hideMarked,
-      bool hideNumbers,
-      bool hideManual,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
       bool showFinishDifference,
       bool showColorFinishDifference,
-      int finishDifference,
+      int finishDifferenceThreshold,
       int deltaInSeconds,
       int updateStartCorrectionDelay,
       int logLimit,
@@ -499,15 +524,18 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? countdownTop = null,
     Object? countdownAtStartTime = null,
     Object? checkUpdates = null,
-    Object? hideMarked = null,
-    Object? hideNumbers = null,
-    Object? hideManual = null,
+    Object? showDNS = null,
+    Object? showDNF = null,
+    Object? showDSQ = null,
+    Object? showHidden = null,
+    Object? showNumbers = null,
+    Object? showManual = null,
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
     Object? showFinishDifference = null,
     Object? showColorFinishDifference = null,
-    Object? finishDifference = null,
+    Object? finishDifferenceThreshold = null,
     Object? deltaInSeconds = null,
     Object? updateStartCorrectionDelay = null,
     Object? logLimit = null,
@@ -620,17 +648,29 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: null == hideMarked
-          ? _value.hideMarked
-          : hideMarked // ignore: cast_nullable_to_non_nullable
+      showDNS: null == showDNS
+          ? _value.showDNS
+          : showDNS // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: null == hideNumbers
-          ? _value.hideNumbers
-          : hideNumbers // ignore: cast_nullable_to_non_nullable
+      showDNF: null == showDNF
+          ? _value.showDNF
+          : showDNF // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: null == hideManual
-          ? _value.hideManual
-          : hideManual // ignore: cast_nullable_to_non_nullable
+      showDSQ: null == showDSQ
+          ? _value.showDSQ
+          : showDSQ // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showHidden: null == showHidden
+          ? _value.showHidden
+          : showHidden // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showNumbers: null == showNumbers
+          ? _value.showNumbers
+          : showNumbers // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showManual: null == showManual
+          ? _value.showManual
+          : showManual // ignore: cast_nullable_to_non_nullable
               as bool,
       finishDelay: null == finishDelay
           ? _value.finishDelay
@@ -652,9 +692,9 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.showColorFinishDifference
           : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishDifference: null == finishDifference
-          ? _value.finishDifference
-          : finishDifference // ignore: cast_nullable_to_non_nullable
+      finishDifferenceThreshold: null == finishDifferenceThreshold
+          ? _value.finishDifferenceThreshold
+          : finishDifferenceThreshold // ignore: cast_nullable_to_non_nullable
               as int,
       deltaInSeconds: null == deltaInSeconds
           ? _value.deltaInSeconds
@@ -734,15 +774,18 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       double countdownTop,
       bool countdownAtStartTime,
       bool checkUpdates,
-      bool hideMarked,
-      bool hideNumbers,
-      bool hideManual,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
       bool showFinishDifference,
       bool showColorFinishDifference,
-      int finishDifference,
+      int finishDifferenceThreshold,
       int deltaInSeconds,
       int updateStartCorrectionDelay,
       int logLimit,
@@ -793,15 +836,18 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? countdownTop = null,
     Object? countdownAtStartTime = null,
     Object? checkUpdates = null,
-    Object? hideMarked = null,
-    Object? hideNumbers = null,
-    Object? hideManual = null,
+    Object? showDNS = null,
+    Object? showDNF = null,
+    Object? showDSQ = null,
+    Object? showHidden = null,
+    Object? showNumbers = null,
+    Object? showManual = null,
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
     Object? showFinishDifference = null,
     Object? showColorFinishDifference = null,
-    Object? finishDifference = null,
+    Object? finishDifferenceThreshold = null,
     Object? deltaInSeconds = null,
     Object? updateStartCorrectionDelay = null,
     Object? logLimit = null,
@@ -914,17 +960,29 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: null == hideMarked
-          ? _value.hideMarked
-          : hideMarked // ignore: cast_nullable_to_non_nullable
+      showDNS: null == showDNS
+          ? _value.showDNS
+          : showDNS // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: null == hideNumbers
-          ? _value.hideNumbers
-          : hideNumbers // ignore: cast_nullable_to_non_nullable
+      showDNF: null == showDNF
+          ? _value.showDNF
+          : showDNF // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: null == hideManual
-          ? _value.hideManual
-          : hideManual // ignore: cast_nullable_to_non_nullable
+      showDSQ: null == showDSQ
+          ? _value.showDSQ
+          : showDSQ // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showHidden: null == showHidden
+          ? _value.showHidden
+          : showHidden // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showNumbers: null == showNumbers
+          ? _value.showNumbers
+          : showNumbers // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showManual: null == showManual
+          ? _value.showManual
+          : showManual // ignore: cast_nullable_to_non_nullable
               as bool,
       finishDelay: null == finishDelay
           ? _value.finishDelay
@@ -946,9 +1004,9 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.showColorFinishDifference
           : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishDifference: null == finishDifference
-          ? _value.finishDifference
-          : finishDifference // ignore: cast_nullable_to_non_nullable
+      finishDifferenceThreshold: null == finishDifferenceThreshold
+          ? _value.finishDifferenceThreshold
+          : finishDifferenceThreshold // ignore: cast_nullable_to_non_nullable
               as int,
       deltaInSeconds: null == deltaInSeconds
           ? _value.deltaInSeconds
@@ -1023,15 +1081,18 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.countdownTop,
       required this.countdownAtStartTime,
       required this.checkUpdates,
-      required this.hideMarked,
-      required this.hideNumbers,
-      required this.hideManual,
+      required this.showDNS,
+      required this.showDNF,
+      required this.showDSQ,
+      required this.showHidden,
+      required this.showNumbers,
+      required this.showManual,
       required this.finishDelay,
       required this.substituteNumbers,
       required this.substituteNumbersDelay,
       required this.showFinishDifference,
       required this.showColorFinishDifference,
-      required this.finishDifference,
+      required this.finishDifferenceThreshold,
       required this.deltaInSeconds,
       required this.updateStartCorrectionDelay,
       required this.logLimit,
@@ -1111,13 +1172,20 @@ class _$AppSettingsImpl implements _AppSettings {
 // проверка обновлений
   @override
   final bool checkUpdates;
-// выборка значений в финише
+// выборка значений на старте
   @override
-  final bool hideMarked;
+  final bool showDNS;
   @override
-  final bool hideNumbers;
+  final bool showDNF;
   @override
-  final bool hideManual;
+  final bool showDSQ;
+// выборка значений на финише
+  @override
+  final bool showHidden;
+  @override
+  final bool showNumbers;
+  @override
+  final bool showManual;
 // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   final int finishDelay;
@@ -1135,7 +1203,7 @@ class _$AppSettingsImpl implements _AppSettings {
 // разница между временем финиша с модуля и временем устройства в миллисекундах
 // при превышении которого будет цветовая индикация
   @override
-  final int finishDifference;
+  final int finishDifferenceThreshold;
 // дельта в секундах для автоматического подставления стартового времени
   @override
   final int deltaInSeconds;
@@ -1169,7 +1237,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, showHidden: $showHidden, showNumbers: $showNumbers, showManual: $showManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifferenceThreshold: $finishDifferenceThreshold, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -1219,12 +1287,15 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.countdownAtStartTime == countdownAtStartTime) &&
             (identical(other.checkUpdates, checkUpdates) ||
                 other.checkUpdates == checkUpdates) &&
-            (identical(other.hideMarked, hideMarked) ||
-                other.hideMarked == hideMarked) &&
-            (identical(other.hideNumbers, hideNumbers) ||
-                other.hideNumbers == hideNumbers) &&
-            (identical(other.hideManual, hideManual) ||
-                other.hideManual == hideManual) &&
+            (identical(other.showDNS, showDNS) || other.showDNS == showDNS) &&
+            (identical(other.showDNF, showDNF) || other.showDNF == showDNF) &&
+            (identical(other.showDSQ, showDSQ) || other.showDSQ == showDSQ) &&
+            (identical(other.showHidden, showHidden) ||
+                other.showHidden == showHidden) &&
+            (identical(other.showNumbers, showNumbers) ||
+                other.showNumbers == showNumbers) &&
+            (identical(other.showManual, showManual) ||
+                other.showManual == showManual) &&
             (identical(other.finishDelay, finishDelay) ||
                 other.finishDelay == finishDelay) &&
             (identical(other.substituteNumbers, substituteNumbers) ||
@@ -1235,8 +1306,8 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.showFinishDifference == showFinishDifference) &&
             (identical(other.showColorFinishDifference, showColorFinishDifference) ||
                 other.showColorFinishDifference == showColorFinishDifference) &&
-            (identical(other.finishDifference, finishDifference) ||
-                other.finishDifference == finishDifference) &&
+            (identical(other.finishDifferenceThreshold, finishDifferenceThreshold) ||
+                other.finishDifferenceThreshold == finishDifferenceThreshold) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
             (identical(other.updateStartCorrectionDelay,
@@ -1289,15 +1360,18 @@ class _$AppSettingsImpl implements _AppSettings {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showDNS,
+        showDNF,
+        showDSQ,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
         showFinishDifference,
         showColorFinishDifference,
-        finishDifference,
+        finishDifferenceThreshold,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -1347,15 +1421,18 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1393,15 +1470,18 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1440,15 +1520,18 @@ class _$AppSettingsImpl implements _AppSettings {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showDNS,
+        showDNF,
+        showDSQ,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
         showFinishDifference,
         showColorFinishDifference,
-        finishDifference,
+        finishDifferenceThreshold,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -1490,15 +1573,18 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1536,15 +1622,18 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1583,15 +1672,18 @@ class _$AppSettingsImpl implements _AppSettings {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showDNS,
+        showDNF,
+        showDSQ,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
         showFinishDifference,
         showColorFinishDifference,
-        finishDifference,
+        finishDifferenceThreshold,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -1633,15 +1725,18 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1679,15 +1774,18 @@ class _$AppSettingsImpl implements _AppSettings {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -1728,15 +1826,18 @@ class _$AppSettingsImpl implements _AppSettings {
           countdownTop,
           countdownAtStartTime,
           checkUpdates,
-          hideMarked,
-          hideNumbers,
-          hideManual,
+          showDNS,
+          showDNF,
+          showDSQ,
+          showHidden,
+          showNumbers,
+          showManual,
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
           showFinishDifference,
           showColorFinishDifference,
-          finishDifference,
+          finishDifferenceThreshold,
           deltaInSeconds,
           updateStartCorrectionDelay,
           logLimit,
@@ -1810,15 +1911,18 @@ abstract class _AppSettings implements AppSettings {
       required final double countdownTop,
       required final bool countdownAtStartTime,
       required final bool checkUpdates,
-      required final bool hideMarked,
-      required final bool hideNumbers,
-      required final bool hideManual,
+      required final bool showDNS,
+      required final bool showDNF,
+      required final bool showDSQ,
+      required final bool showHidden,
+      required final bool showNumbers,
+      required final bool showManual,
       required final int finishDelay,
       required final bool substituteNumbers,
       required final int substituteNumbersDelay,
       required final bool showFinishDifference,
       required final bool showColorFinishDifference,
-      required final int finishDifference,
+      required final int finishDifferenceThreshold,
       required final int deltaInSeconds,
       required final int updateStartCorrectionDelay,
       required final int logLimit,
@@ -1884,14 +1988,20 @@ abstract class _AppSettings implements AppSettings {
   @override
   bool get countdownAtStartTime; // проверка обновлений
   @override
-  bool get checkUpdates; // выборка значений в финише
+  bool get checkUpdates; // выборка значений на старте
   @override
-  bool get hideMarked;
+  bool get showDNS;
   @override
-  bool get hideNumbers;
+  bool get showDNF;
+  @override
+  bool get showDSQ; // выборка значений на финише
+  @override
+  bool get showHidden;
+  @override
+  bool get showNumbers;
   @override
   bool
-      get hideManual; // задержка в миллисекундах перед показыванием нового финишного времени
+      get showManual; // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   int get finishDelay; // автоподстановка номеров в финишном протоколе
   @override
@@ -1906,7 +2016,7 @@ abstract class _AppSettings implements AppSettings {
       get showColorFinishDifference; // разница между временем финиша с модуля и временем устройства в миллисекундах
 // при превышении которого будет цветовая индикация
   @override
-  int get finishDifference; // дельта в секундах для автоматического подставления стартового времени
+  int get finishDifferenceThreshold; // дельта в секундах для автоматического подставления стартового времени
   @override
   int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
 // если она уже была установлена
@@ -1974,15 +2084,18 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       double countdownTop,
       bool countdownAtStartTime,
       bool checkUpdates,
-      bool hideMarked,
-      bool hideNumbers,
-      bool hideManual,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
       bool showFinishDifference,
       bool showColorFinishDifference,
-      int finishDifference,
+      int finishDifferenceThreshold,
       int deltaInSeconds,
       int updateStartCorrectionDelay,
       int logLimit,
@@ -2033,15 +2146,18 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? countdownTop = null,
     Object? countdownAtStartTime = null,
     Object? checkUpdates = null,
-    Object? hideMarked = null,
-    Object? hideNumbers = null,
-    Object? hideManual = null,
+    Object? showDNS = null,
+    Object? showDNF = null,
+    Object? showDSQ = null,
+    Object? showHidden = null,
+    Object? showNumbers = null,
+    Object? showManual = null,
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
     Object? showFinishDifference = null,
     Object? showColorFinishDifference = null,
-    Object? finishDifference = null,
+    Object? finishDifferenceThreshold = null,
     Object? deltaInSeconds = null,
     Object? updateStartCorrectionDelay = null,
     Object? logLimit = null,
@@ -2154,17 +2270,29 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.checkUpdates
           : checkUpdates // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideMarked: null == hideMarked
-          ? _value.hideMarked
-          : hideMarked // ignore: cast_nullable_to_non_nullable
+      showDNS: null == showDNS
+          ? _value.showDNS
+          : showDNS // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideNumbers: null == hideNumbers
-          ? _value.hideNumbers
-          : hideNumbers // ignore: cast_nullable_to_non_nullable
+      showDNF: null == showDNF
+          ? _value.showDNF
+          : showDNF // ignore: cast_nullable_to_non_nullable
               as bool,
-      hideManual: null == hideManual
-          ? _value.hideManual
-          : hideManual // ignore: cast_nullable_to_non_nullable
+      showDSQ: null == showDSQ
+          ? _value.showDSQ
+          : showDSQ // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showHidden: null == showHidden
+          ? _value.showHidden
+          : showHidden // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showNumbers: null == showNumbers
+          ? _value.showNumbers
+          : showNumbers // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showManual: null == showManual
+          ? _value.showManual
+          : showManual // ignore: cast_nullable_to_non_nullable
               as bool,
       finishDelay: null == finishDelay
           ? _value.finishDelay
@@ -2186,9 +2314,9 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.showColorFinishDifference
           : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
               as bool,
-      finishDifference: null == finishDifference
-          ? _value.finishDifference
-          : finishDifference // ignore: cast_nullable_to_non_nullable
+      finishDifferenceThreshold: null == finishDifferenceThreshold
+          ? _value.finishDifferenceThreshold
+          : finishDifferenceThreshold // ignore: cast_nullable_to_non_nullable
               as int,
       deltaInSeconds: null == deltaInSeconds
           ? _value.deltaInSeconds
@@ -2263,15 +2391,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.countdownTop = 0,
       this.countdownAtStartTime = true,
       this.checkUpdates = true,
-      this.hideMarked = true,
-      this.hideNumbers = false,
-      this.hideManual = false,
+      this.showDNS = false,
+      this.showDNF = false,
+      this.showDSQ = false,
+      this.showHidden = false,
+      this.showNumbers = true,
+      this.showManual = true,
       this.finishDelay = 350,
       this.substituteNumbers = false,
       this.substituteNumbersDelay = 500,
       this.showFinishDifference = false,
       this.showColorFinishDifference = false,
-      this.finishDifference = 2000,
+      this.finishDifferenceThreshold = 2000,
       this.deltaInSeconds = 15,
       this.updateStartCorrectionDelay = 2000,
       this.logLimit = 100,
@@ -2333,7 +2464,6 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @JsonKey()
   final String voiceLanguage;
 // = "ru-RU", // язык
-// ToDo: не изменять эти настройки при установке значений по умолчанию
 // id выбранного соревнования и участка
   @override
   @JsonKey()
@@ -2379,16 +2509,26 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final bool checkUpdates;
-// выборка значений в финише
+// выборка значений на старте
   @override
   @JsonKey()
-  final bool hideMarked;
+  final bool showDNS;
   @override
   @JsonKey()
-  final bool hideNumbers;
+  final bool showDNF;
   @override
   @JsonKey()
-  final bool hideManual;
+  final bool showDSQ;
+// выборка значений на финише
+  @override
+  @JsonKey()
+  final bool showHidden;
+  @override
+  @JsonKey()
+  final bool showNumbers;
+  @override
+  @JsonKey()
+  final bool showManual;
 // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   @JsonKey()
@@ -2412,7 +2552,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 // при превышении которого будет цветовая индикация
   @override
   @JsonKey()
-  final int finishDifference;
+  final int finishDifferenceThreshold;
 // дельта в секундах для автоматического подставления стартового времени
   @override
   @JsonKey()
@@ -2456,7 +2596,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, hideMarked: $hideMarked, hideNumbers: $hideNumbers, hideManual: $hideManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifference: $finishDifference, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings.defaults(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, showHidden: $showHidden, showNumbers: $showNumbers, showManual: $showManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifferenceThreshold: $finishDifferenceThreshold, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -2506,12 +2646,15 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.countdownAtStartTime == countdownAtStartTime) &&
             (identical(other.checkUpdates, checkUpdates) ||
                 other.checkUpdates == checkUpdates) &&
-            (identical(other.hideMarked, hideMarked) ||
-                other.hideMarked == hideMarked) &&
-            (identical(other.hideNumbers, hideNumbers) ||
-                other.hideNumbers == hideNumbers) &&
-            (identical(other.hideManual, hideManual) ||
-                other.hideManual == hideManual) &&
+            (identical(other.showDNS, showDNS) || other.showDNS == showDNS) &&
+            (identical(other.showDNF, showDNF) || other.showDNF == showDNF) &&
+            (identical(other.showDSQ, showDSQ) || other.showDSQ == showDSQ) &&
+            (identical(other.showHidden, showHidden) ||
+                other.showHidden == showHidden) &&
+            (identical(other.showNumbers, showNumbers) ||
+                other.showNumbers == showNumbers) &&
+            (identical(other.showManual, showManual) ||
+                other.showManual == showManual) &&
             (identical(other.finishDelay, finishDelay) ||
                 other.finishDelay == finishDelay) &&
             (identical(other.substituteNumbers, substituteNumbers) ||
@@ -2522,8 +2665,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.showFinishDifference == showFinishDifference) &&
             (identical(other.showColorFinishDifference, showColorFinishDifference) ||
                 other.showColorFinishDifference == showColorFinishDifference) &&
-            (identical(other.finishDifference, finishDifference) ||
-                other.finishDifference == finishDifference) &&
+            (identical(other.finishDifferenceThreshold, finishDifferenceThreshold) ||
+                other.finishDifferenceThreshold == finishDifferenceThreshold) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
             (identical(other.updateStartCorrectionDelay,
@@ -2576,15 +2719,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showDNS,
+        showDNF,
+        showDSQ,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
         showFinishDifference,
         showColorFinishDifference,
-        finishDifference,
+        finishDifferenceThreshold,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -2635,15 +2781,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2681,15 +2830,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2728,15 +2880,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showDNS,
+        showDNF,
+        showDSQ,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
         showFinishDifference,
         showColorFinishDifference,
-        finishDifference,
+        finishDifferenceThreshold,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -2778,15 +2933,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2824,15 +2982,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2871,15 +3032,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         countdownTop,
         countdownAtStartTime,
         checkUpdates,
-        hideMarked,
-        hideNumbers,
-        hideManual,
+        showDNS,
+        showDNF,
+        showDSQ,
+        showHidden,
+        showNumbers,
+        showManual,
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
         showFinishDifference,
         showColorFinishDifference,
-        finishDifference,
+        finishDifferenceThreshold,
         deltaInSeconds,
         updateStartCorrectionDelay,
         logLimit,
@@ -2921,15 +3085,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -2967,15 +3134,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             double countdownTop,
             bool countdownAtStartTime,
             bool checkUpdates,
-            bool hideMarked,
-            bool hideNumbers,
-            bool hideManual,
+            bool showDNS,
+            bool showDNF,
+            bool showDSQ,
+            bool showHidden,
+            bool showNumbers,
+            bool showManual,
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
             bool showFinishDifference,
             bool showColorFinishDifference,
-            int finishDifference,
+            int finishDifferenceThreshold,
             int deltaInSeconds,
             int updateStartCorrectionDelay,
             int logLimit,
@@ -3016,15 +3186,18 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           countdownTop,
           countdownAtStartTime,
           checkUpdates,
-          hideMarked,
-          hideNumbers,
-          hideManual,
+          showDNS,
+          showDNF,
+          showDSQ,
+          showHidden,
+          showNumbers,
+          showManual,
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
           showFinishDifference,
           showColorFinishDifference,
-          finishDifference,
+          finishDifferenceThreshold,
           deltaInSeconds,
           updateStartCorrectionDelay,
           logLimit,
@@ -3098,15 +3271,18 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final double countdownTop,
       final bool countdownAtStartTime,
       final bool checkUpdates,
-      final bool hideMarked,
-      final bool hideNumbers,
-      final bool hideManual,
+      final bool showDNS,
+      final bool showDNF,
+      final bool showDSQ,
+      final bool showHidden,
+      final bool showNumbers,
+      final bool showManual,
       final int finishDelay,
       final bool substituteNumbers,
       final int substituteNumbersDelay,
       final bool showFinishDifference,
       final bool showColorFinishDifference,
-      final int finishDifference,
+      final int finishDifferenceThreshold,
       final int deltaInSeconds,
       final int updateStartCorrectionDelay,
       final int logLimit,
@@ -3145,7 +3321,6 @@ abstract class _AppSettingsDefaults implements AppSettings {
   double get rate; // скорость речи
   @override
   String get voiceLanguage; // = "ru-RU", // язык
-// ToDo: не изменять эти настройки при установке значений по умолчанию
 // id выбранного соревнования и участка
   @override
   int get raceId;
@@ -3173,14 +3348,20 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   bool get countdownAtStartTime; // проверка обновлений
   @override
-  bool get checkUpdates; // выборка значений в финише
+  bool get checkUpdates; // выборка значений на старте
   @override
-  bool get hideMarked;
+  bool get showDNS;
   @override
-  bool get hideNumbers;
+  bool get showDNF;
+  @override
+  bool get showDSQ; // выборка значений на финише
+  @override
+  bool get showHidden;
+  @override
+  bool get showNumbers;
   @override
   bool
-      get hideManual; // задержка в миллисекундах перед показыванием нового финишного времени
+      get showManual; // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   int get finishDelay; // автоподстановка номеров в финишном протоколе
   @override
@@ -3195,7 +3376,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
       get showColorFinishDifference; // разница между временем финиша с модуля и временем устройства в миллисекундах
 // при превышении которого будет цветовая индикация
   @override
-  int get finishDifference; // дельта в секундах для автоматического подставления стартового времени
+  int get finishDifferenceThreshold; // дельта в секундах для автоматического подставления стартового времени
   @override
   int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
 // если она уже была установлена

@@ -90,31 +90,33 @@ Future<void> _upsertStagePopup(
                         },
                       );
                     }
-                    return DropDownTextField(
-                      initialValue: trail?.name,
-                      enableSearch: true,
-                      textFieldDecoration: InputDecoration(
-                        labelText: Localization.current.I18nDatabase_trail,
-                      ),
-                      searchDecoration: InputDecoration(
-                        hintText: Localization.current.I18nDatabase_trail,
-                      ),
-                      dropDownItemCount: state.trails.length,
-                      dropDownList: state.trails.map((value) {
-                        return DropDownValueModel(
-                          value: value,
-                          name: value.name,
-                        );
-                      }).toList(),
-                      onChanged: (valModel) {
-                        if (valModel is DropDownValueModel) {
-                          trail = valModel.value as TrailInfo;
-                          trailId = trail?.id;
-                        } else {
-                          trail = null;
-                          trailId = null;
-                        }
+                    return DropdownSearch<TrailInfo>(
+                      selectedItem: trail,
+                      items: (filter, loadProps) => state.trails,
+                      itemAsString: (value) => value.name,
+                      compareFn: (item1, item2) => item1.name == item2.name,
+                      onChanged: (value) {
+                        trail = value;
+                        trailId = trail?.id;
                       },
+                      decoratorProps: DropDownDecoratorProps(
+                        decoration: InputDecoration(
+                          labelText: Localization.current.I18nDatabase_trail,
+                        ),
+                      ),
+                      suffixProps: const DropdownSuffixProps(
+                        clearButtonProps: ClearButtonProps(isVisible: true),
+                      ),
+                      popupProps: PopupProps.menu(
+                        showSearchBox: true,
+                        searchDelay: Duration.zero,
+                        searchFieldProps: TextFieldProps(
+                          decoration: InputDecoration(
+                              hintText: Localization.current.I18nDatabase_searchTrail,
+                          ),
+                        ),
+                        // fit: FlexFit.loose,
+                      ),
                     );
                   },
                 );

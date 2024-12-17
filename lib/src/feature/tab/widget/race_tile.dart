@@ -103,7 +103,7 @@ class _RaceMenuButton extends StatelessWidget {
       onSelected: (value) async {
         switch (value) {
           case RaceMenuButton.import:
-            final race = await StartlistProvider().getStartCsv();
+            final race = await StartlistProvider().getRaceCsv();
             if (race != null) {
               databaseBloc.add(DatabaseEvent.createRaceFromRaceCsv(race: race));
             }

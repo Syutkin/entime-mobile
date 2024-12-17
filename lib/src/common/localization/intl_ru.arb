@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-11T02:35:01.581179",
+  "@@last_modified": "2024-12-15T15:19:33.223293",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -22,6 +22,21 @@
   },
   "I18nCore_correction": "Поправка",
   "@I18nCore_correction": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nCore_dns": "DNS",
+  "@I18nCore_dns": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nCore_dnf": "DNF",
+  "@I18nCore_dnf": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nCore_dsq": "DSQ",
+  "@I18nCore_dsq": {
     "type": "text",
     "placeholders": {}
   },
@@ -640,28 +655,48 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nHome_importStagesCsv": "Импорт этапов",
+  "@I18nHome_importStagesCsv": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nHome_bluetooth": "Bluetooth",
   "@I18nHome_bluetooth": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nHome_hideMarked": "Скрытые",
-  "@I18nHome_hideMarked": {
+  "I18nHome_showHidden": "Скрытые",
+  "@I18nHome_showHidden": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nHome_hideNumbers": "С номерами",
-  "@I18nHome_hideNumbers": {
+  "I18nHome_showNumbers": "С номерами",
+  "@I18nHome_showNumbers": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nHome_hideManual": "Ручная отсечка",
-  "@I18nHome_hideManual": {
+  "I18nHome_showManual": "Ручная отсечка",
+  "@I18nHome_showManual": {
     "type": "text",
     "placeholders": {}
   },
   "I18nHome_setDefaults": "По умолчанию",
   "@I18nHome_setDefaults": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nHome_showDNS": "DNS",
+  "@I18nHome_showDNS": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nHome_showDNF": "DNF",
+  "@I18nHome_showDNF": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nHome_showDSQ": "DSQ",
+  "@I18nHome_showDSQ": {
     "type": "text",
     "placeholders": {}
   },
@@ -1160,6 +1195,13 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nDatabase_deleteRace": "Вы уверены, что хотите удалить гонку \"{raceName}\"?",
+  "@I18nDatabase_deleteRace": {
+    "type": "text",
+    "placeholders": {
+      "raceName": {}
+    }
+  },
   "I18nDatabase_deleteStage": "Вы уверены, что хотите удалить этап \"{stageName}\"?",
   "@I18nDatabase_deleteStage": {
     "type": "text",
@@ -1229,6 +1271,11 @@
   },
   "I18nDatabase_trailIsActive": "Активен",
   "@I18nDatabase_trailIsActive": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_searchTrail": "Найти...",
+  "@I18nDatabase_searchTrail": {
     "type": "text",
     "placeholders": {}
   },

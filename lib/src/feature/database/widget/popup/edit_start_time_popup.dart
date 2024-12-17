@@ -16,7 +16,9 @@ Future<void> editStartTime(
   automaticCorrectionController.text =
       (item.automaticCorrection ?? '').toString();
   automaticStartTimeController.text = item.automaticStartTime ?? '';
-  automaticPhoneTimeController.text = item.timestamp ?? '';
+  automaticPhoneTimeController.text = item.timestamp != null
+      ? DateFormat(longTimeFormat).format(item.timestamp!)
+      : '';
   final formKey = GlobalKey<FormState>();
 
   String? validateCorrection(String? value) {

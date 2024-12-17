@@ -14,3 +14,4 @@ targets:
         options:
           named_parameters: true
           raw_result_set_data: true
+          store_date_time_values_as_text: true

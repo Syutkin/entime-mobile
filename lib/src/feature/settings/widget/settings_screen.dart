@@ -520,21 +520,21 @@ class _SettingsList extends StatelessWidget {
                 title: Text(Localization.current.I18nSettings_finishDifference),
                 trailing: Text(
                   Localization.current.I18nSettings_milliseconds(
-                    settingsState.settings.finishDifference,
+                    settingsState.settings.finishDifferenceThreshold,
                   ),
                 ),
                 //leading:  Icon(MdiIcons.handBackLeft),
                 onPressed: (context) async {
                   final value = await setFinishDifferencePopup(
                     context,
-                    difference: settingsState.settings.finishDifference,
+                    difference: settingsState.settings.finishDifferenceThreshold,
                     title: Localization.current.I18nSettings_finishDifference,
                   );
                   if (value != null) {
                     settingsBloc.add(
                       SettingsEvent.update(
                         settings: settingsState.settings
-                            .copyWith(finishDifference: value),
+                            .copyWith(finishDifferenceThreshold: value),
                       ),
                     );
                   }

@@ -5,7 +5,7 @@ import 'package:soundpool/soundpool.dart';
 
 import 'beep_provider.dart';
 
-class SoundpoolProvider extends BeepProvider {
+class SoundpoolProvider with BeepProvider {
   SoundpoolProvider() {
     soundId = _loadSound();
   }

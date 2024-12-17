@@ -16,7 +16,7 @@ Future<void> updateTrailPopup(BuildContext context, TrailInfo trail) {
               size: 0,
               hashSha1: '',
               data: Uint8List(0),
-              timestamp: '',
+              timestamp: DateTime.now(),
             ),
           ),
         );
@@ -141,8 +141,6 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                       },
                       initialized: (state) {
                         final bloc = context.read<TrailsBloc>();
-                        // ToDo: При редактировании трейла, если есть трек
-                        // ToDo: во время начальной загрузки сменить кнопку "выбрать" на "удалить"
                         if (state.track == null) {
                           return addTrackIconButton(bloc);
                         } else {

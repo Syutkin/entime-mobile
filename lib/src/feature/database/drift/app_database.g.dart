@@ -477,9 +477,9 @@ class TrackFiles extends Table with TableInfo<TrackFiles, TrackFile> {
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
       'timestamp', aliasedName, false,
-      type: DriftSqlType.string,
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   @override
@@ -562,7 +562,7 @@ class TrackFiles extends Table with TableInfo<TrackFiles, TrackFile> {
       data: attachedDatabase.typeMapping
           .read(DriftSqlType.blob, data['${effectivePrefix}data'])!,
       timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
     );
   }
 
@@ -583,7 +583,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
   final String? description;
   final String hashSha1;
   final Uint8List data;
-  final String timestamp;
+  final DateTime timestamp;
   const TrackFile(
       {required this.id,
       required this.name,
@@ -607,7 +607,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
     }
     map['hash_sha1'] = Variable<String>(hashSha1);
     map['data'] = Variable<Uint8List>(data);
-    map['timestamp'] = Variable<String>(timestamp);
+    map['timestamp'] = Variable<DateTime>(timestamp);
     return map;
   }
 
@@ -639,7 +639,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
       description: serializer.fromJson<String?>(json['description']),
       hashSha1: serializer.fromJson<String>(json['hash_sha1']),
       data: serializer.fromJson<Uint8List>(json['data']),
-      timestamp: serializer.fromJson<String>(json['timestamp']),
+      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
     );
   }
   @override
@@ -653,7 +653,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
       'description': serializer.toJson<String?>(description),
       'hash_sha1': serializer.toJson<String>(hashSha1),
       'data': serializer.toJson<Uint8List>(data),
-      'timestamp': serializer.toJson<String>(timestamp),
+      'timestamp': serializer.toJson<DateTime>(timestamp),
     };
   }
 
@@ -665,7 +665,7 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
           Value<String?> description = const Value.absent(),
           String? hashSha1,
           Uint8List? data,
-          String? timestamp}) =>
+          DateTime? timestamp}) =>
       TrackFile(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -730,7 +730,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
   final Value<String?> description;
   final Value<String> hashSha1;
   final Value<Uint8List> data;
-  final Value<String> timestamp;
+  final Value<DateTime> timestamp;
   const TrackFilesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -749,7 +749,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
     this.description = const Value.absent(),
     required String hashSha1,
     required Uint8List data,
-    required String timestamp,
+    required DateTime timestamp,
   })  : name = Value(name),
         size = Value(size),
         hashSha1 = Value(hashSha1),
@@ -763,7 +763,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
     Expression<String>? description,
     Expression<String>? hashSha1,
     Expression<Uint8List>? data,
-    Expression<String>? timestamp,
+    Expression<DateTime>? timestamp,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -785,7 +785,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
       Value<String?>? description,
       Value<String>? hashSha1,
       Value<Uint8List>? data,
-      Value<String>? timestamp}) {
+      Value<DateTime>? timestamp}) {
     return TrackFilesCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -823,7 +823,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFile> {
       map['data'] = Variable<Uint8List>(data.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String>(timestamp.value);
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
     }
     return map;
   }
@@ -1696,13 +1696,13 @@ class Riders extends Table with TableInfo<Riders, Rider> {
       'email', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
-      $customConstraints: '');
+      $customConstraints: 'UNIQUE');
   static const VerificationMeta _phoneMeta = const VerificationMeta('phone');
   late final GeneratedColumn<String> phone = GeneratedColumn<String>(
       'phone', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
-      $customConstraints: '');
+      $customConstraints: 'UNIQUE');
   static const VerificationMeta _commentMeta =
       const VerificationMeta('comment');
   late final GeneratedColumn<String> comment = GeneratedColumn<String>(
@@ -2766,9 +2766,16 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
       $customConstraints: '');
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
       'timestamp', aliasedName, false,
-      type: DriftSqlType.string,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: true,
+      $customConstraints: 'NOT NULL');
+  static const VerificationMeta _ntpOffsetMeta =
+      const VerificationMeta('ntpOffset');
+  late final GeneratedColumn<int> ntpOffset = GeneratedColumn<int>(
+      'ntp_offset', aliasedName, false,
+      type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _finishTimeMeta =
@@ -2795,8 +2802,16 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
       $customConstraints: 'NOT NULL DEFAULT FALSE',
       defaultValue: const CustomExpression('FALSE'));
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, stageId, number, timestamp, finishTime, isHidden, isManual];
+  List<GeneratedColumn> get $columns => [
+        id,
+        stageId,
+        number,
+        timestamp,
+        ntpOffset,
+        finishTime,
+        isHidden,
+        isManual
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2825,6 +2840,12 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
           timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
     } else if (isInserting) {
       context.missing(_timestampMeta);
+    }
+    if (data.containsKey('ntp_offset')) {
+      context.handle(_ntpOffsetMeta,
+          ntpOffset.isAcceptableOrUnknown(data['ntp_offset']!, _ntpOffsetMeta));
+    } else if (isInserting) {
+      context.missing(_ntpOffsetMeta);
     }
     if (data.containsKey('finish_time')) {
       context.handle(
@@ -2858,7 +2879,9 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
       number: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}number']),
       timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
+      ntpOffset: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}ntp_offset'])!,
       finishTime: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}finish_time'])!,
       isHidden: attachedDatabase.typeMapping
@@ -2884,7 +2907,8 @@ class Finish extends DataClass implements Insertable<Finish> {
   final int id;
   final int stageId;
   final int? number;
-  final String timestamp;
+  final DateTime timestamp;
+  final int ntpOffset;
   final String finishTime;
   final bool isHidden;
   final bool isManual;
@@ -2893,6 +2917,7 @@ class Finish extends DataClass implements Insertable<Finish> {
       required this.stageId,
       this.number,
       required this.timestamp,
+      required this.ntpOffset,
       required this.finishTime,
       required this.isHidden,
       required this.isManual});
@@ -2904,7 +2929,8 @@ class Finish extends DataClass implements Insertable<Finish> {
     if (!nullToAbsent || number != null) {
       map['number'] = Variable<int>(number);
     }
-    map['timestamp'] = Variable<String>(timestamp);
+    map['timestamp'] = Variable<DateTime>(timestamp);
+    map['ntp_offset'] = Variable<int>(ntpOffset);
     map['finish_time'] = Variable<String>(finishTime);
     map['is_hidden'] = Variable<bool>(isHidden);
     map['is_manual'] = Variable<bool>(isManual);
@@ -2918,6 +2944,7 @@ class Finish extends DataClass implements Insertable<Finish> {
       number:
           number == null && nullToAbsent ? const Value.absent() : Value(number),
       timestamp: Value(timestamp),
+      ntpOffset: Value(ntpOffset),
       finishTime: Value(finishTime),
       isHidden: Value(isHidden),
       isManual: Value(isManual),
@@ -2931,7 +2958,8 @@ class Finish extends DataClass implements Insertable<Finish> {
       id: serializer.fromJson<int>(json['id']),
       stageId: serializer.fromJson<int>(json['stage_id']),
       number: serializer.fromJson<int?>(json['number']),
-      timestamp: serializer.fromJson<String>(json['timestamp']),
+      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
+      ntpOffset: serializer.fromJson<int>(json['ntp_offset']),
       finishTime: serializer.fromJson<String>(json['finish_time']),
       isHidden: serializer.fromJson<bool>(json['is_hidden']),
       isManual: serializer.fromJson<bool>(json['is_manual']),
@@ -2944,7 +2972,8 @@ class Finish extends DataClass implements Insertable<Finish> {
       'id': serializer.toJson<int>(id),
       'stage_id': serializer.toJson<int>(stageId),
       'number': serializer.toJson<int?>(number),
-      'timestamp': serializer.toJson<String>(timestamp),
+      'timestamp': serializer.toJson<DateTime>(timestamp),
+      'ntp_offset': serializer.toJson<int>(ntpOffset),
       'finish_time': serializer.toJson<String>(finishTime),
       'is_hidden': serializer.toJson<bool>(isHidden),
       'is_manual': serializer.toJson<bool>(isManual),
@@ -2955,7 +2984,8 @@ class Finish extends DataClass implements Insertable<Finish> {
           {int? id,
           int? stageId,
           Value<int?> number = const Value.absent(),
-          String? timestamp,
+          DateTime? timestamp,
+          int? ntpOffset,
           String? finishTime,
           bool? isHidden,
           bool? isManual}) =>
@@ -2964,6 +2994,7 @@ class Finish extends DataClass implements Insertable<Finish> {
         stageId: stageId ?? this.stageId,
         number: number.present ? number.value : this.number,
         timestamp: timestamp ?? this.timestamp,
+        ntpOffset: ntpOffset ?? this.ntpOffset,
         finishTime: finishTime ?? this.finishTime,
         isHidden: isHidden ?? this.isHidden,
         isManual: isManual ?? this.isManual,
@@ -2974,6 +3005,7 @@ class Finish extends DataClass implements Insertable<Finish> {
       stageId: data.stageId.present ? data.stageId.value : this.stageId,
       number: data.number.present ? data.number.value : this.number,
       timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+      ntpOffset: data.ntpOffset.present ? data.ntpOffset.value : this.ntpOffset,
       finishTime:
           data.finishTime.present ? data.finishTime.value : this.finishTime,
       isHidden: data.isHidden.present ? data.isHidden.value : this.isHidden,
@@ -2988,6 +3020,7 @@ class Finish extends DataClass implements Insertable<Finish> {
           ..write('stageId: $stageId, ')
           ..write('number: $number, ')
           ..write('timestamp: $timestamp, ')
+          ..write('ntpOffset: $ntpOffset, ')
           ..write('finishTime: $finishTime, ')
           ..write('isHidden: $isHidden, ')
           ..write('isManual: $isManual')
@@ -2996,8 +3029,8 @@ class Finish extends DataClass implements Insertable<Finish> {
   }
 
   @override
-  int get hashCode => Object.hash(
-      id, stageId, number, timestamp, finishTime, isHidden, isManual);
+  int get hashCode => Object.hash(id, stageId, number, timestamp, ntpOffset,
+      finishTime, isHidden, isManual);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3006,6 +3039,7 @@ class Finish extends DataClass implements Insertable<Finish> {
           other.stageId == this.stageId &&
           other.number == this.number &&
           other.timestamp == this.timestamp &&
+          other.ntpOffset == this.ntpOffset &&
           other.finishTime == this.finishTime &&
           other.isHidden == this.isHidden &&
           other.isManual == this.isManual);
@@ -3015,7 +3049,8 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
   final Value<int> id;
   final Value<int> stageId;
   final Value<int?> number;
-  final Value<String> timestamp;
+  final Value<DateTime> timestamp;
+  final Value<int> ntpOffset;
   final Value<String> finishTime;
   final Value<bool> isHidden;
   final Value<bool> isManual;
@@ -3024,6 +3059,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
     this.stageId = const Value.absent(),
     this.number = const Value.absent(),
     this.timestamp = const Value.absent(),
+    this.ntpOffset = const Value.absent(),
     this.finishTime = const Value.absent(),
     this.isHidden = const Value.absent(),
     this.isManual = const Value.absent(),
@@ -3032,18 +3068,21 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
     this.id = const Value.absent(),
     required int stageId,
     this.number = const Value.absent(),
-    required String timestamp,
+    required DateTime timestamp,
+    required int ntpOffset,
     required String finishTime,
     this.isHidden = const Value.absent(),
     this.isManual = const Value.absent(),
   })  : stageId = Value(stageId),
         timestamp = Value(timestamp),
+        ntpOffset = Value(ntpOffset),
         finishTime = Value(finishTime);
   static Insertable<Finish> custom({
     Expression<int>? id,
     Expression<int>? stageId,
     Expression<int>? number,
-    Expression<String>? timestamp,
+    Expression<DateTime>? timestamp,
+    Expression<int>? ntpOffset,
     Expression<String>? finishTime,
     Expression<bool>? isHidden,
     Expression<bool>? isManual,
@@ -3053,6 +3092,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
       if (stageId != null) 'stage_id': stageId,
       if (number != null) 'number': number,
       if (timestamp != null) 'timestamp': timestamp,
+      if (ntpOffset != null) 'ntp_offset': ntpOffset,
       if (finishTime != null) 'finish_time': finishTime,
       if (isHidden != null) 'is_hidden': isHidden,
       if (isManual != null) 'is_manual': isManual,
@@ -3063,7 +3103,8 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
       {Value<int>? id,
       Value<int>? stageId,
       Value<int?>? number,
-      Value<String>? timestamp,
+      Value<DateTime>? timestamp,
+      Value<int>? ntpOffset,
       Value<String>? finishTime,
       Value<bool>? isHidden,
       Value<bool>? isManual}) {
@@ -3072,6 +3113,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
       stageId: stageId ?? this.stageId,
       number: number ?? this.number,
       timestamp: timestamp ?? this.timestamp,
+      ntpOffset: ntpOffset ?? this.ntpOffset,
       finishTime: finishTime ?? this.finishTime,
       isHidden: isHidden ?? this.isHidden,
       isManual: isManual ?? this.isManual,
@@ -3091,7 +3133,10 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
       map['number'] = Variable<int>(number.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String>(timestamp.value);
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
+    }
+    if (ntpOffset.present) {
+      map['ntp_offset'] = Variable<int>(ntpOffset.value);
     }
     if (finishTime.present) {
       map['finish_time'] = Variable<String>(finishTime.value);
@@ -3112,6 +3157,7 @@ class FinishesCompanion extends UpdateCompanion<Finish> {
           ..write('stageId: $stageId, ')
           ..write('number: $number, ')
           ..write('timestamp: $timestamp, ')
+          ..write('ntpOffset: $ntpOffset, ')
           ..write('finishTime: $finishTime, ')
           ..write('isHidden: $isHidden, ')
           ..write('isManual: $isManual')
@@ -3154,9 +3200,16 @@ class Starts extends Table with TableInfo<Starts, Start> {
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
       'timestamp', aliasedName, true,
-      type: DriftSqlType.string,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _ntpOffsetMeta =
+      const VerificationMeta('ntpOffset');
+  late final GeneratedColumn<int> ntpOffset = GeneratedColumn<int>(
+      'ntp_offset', aliasedName, true,
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
       $customConstraints: '');
   static const VerificationMeta _automaticStartTimeMeta =
@@ -3209,6 +3262,7 @@ class Starts extends Table with TableInfo<Starts, Start> {
         participantId,
         startTime,
         timestamp,
+        ntpOffset,
         automaticStartTime,
         automaticCorrection,
         manualStartTime,
@@ -3252,6 +3306,10 @@ class Starts extends Table with TableInfo<Starts, Start> {
     if (data.containsKey('timestamp')) {
       context.handle(_timestampMeta,
           timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
+    }
+    if (data.containsKey('ntp_offset')) {
+      context.handle(_ntpOffsetMeta,
+          ntpOffset.isAcceptableOrUnknown(data['ntp_offset']!, _ntpOffsetMeta));
     }
     if (data.containsKey('automatic_start_time')) {
       context.handle(
@@ -3303,7 +3361,9 @@ class Starts extends Table with TableInfo<Starts, Start> {
       startTime: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}start_time'])!,
       timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp']),
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp']),
+      ntpOffset: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}ntp_offset']),
       automaticStartTime: attachedDatabase.typeMapping.read(
           DriftSqlType.string, data['${effectivePrefix}automatic_start_time']),
       automaticCorrection: attachedDatabase.typeMapping.read(
@@ -3340,7 +3400,8 @@ class Start extends DataClass implements Insertable<Start> {
   final int stageId;
   final int participantId;
   final String startTime;
-  final String? timestamp;
+  final DateTime? timestamp;
+  final int? ntpOffset;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String? manualStartTime;
@@ -3353,6 +3414,7 @@ class Start extends DataClass implements Insertable<Start> {
       required this.participantId,
       required this.startTime,
       this.timestamp,
+      this.ntpOffset,
       this.automaticStartTime,
       this.automaticCorrection,
       this.manualStartTime,
@@ -3367,7 +3429,10 @@ class Start extends DataClass implements Insertable<Start> {
     map['participant_id'] = Variable<int>(participantId);
     map['start_time'] = Variable<String>(startTime);
     if (!nullToAbsent || timestamp != null) {
-      map['timestamp'] = Variable<String>(timestamp);
+      map['timestamp'] = Variable<DateTime>(timestamp);
+    }
+    if (!nullToAbsent || ntpOffset != null) {
+      map['ntp_offset'] = Variable<int>(ntpOffset);
     }
     if (!nullToAbsent || automaticStartTime != null) {
       map['automatic_start_time'] = Variable<String>(automaticStartTime);
@@ -3397,6 +3462,9 @@ class Start extends DataClass implements Insertable<Start> {
       timestamp: timestamp == null && nullToAbsent
           ? const Value.absent()
           : Value(timestamp),
+      ntpOffset: ntpOffset == null && nullToAbsent
+          ? const Value.absent()
+          : Value(ntpOffset),
       automaticStartTime: automaticStartTime == null && nullToAbsent
           ? const Value.absent()
           : Value(automaticStartTime),
@@ -3424,7 +3492,8 @@ class Start extends DataClass implements Insertable<Start> {
       stageId: serializer.fromJson<int>(json['stage_id']),
       participantId: serializer.fromJson<int>(json['participant_id']),
       startTime: serializer.fromJson<String>(json['start_time']),
-      timestamp: serializer.fromJson<String?>(json['timestamp']),
+      timestamp: serializer.fromJson<DateTime?>(json['timestamp']),
+      ntpOffset: serializer.fromJson<int?>(json['ntp_offset']),
       automaticStartTime:
           serializer.fromJson<String?>(json['automatic_start_time']),
       automaticCorrection:
@@ -3443,7 +3512,8 @@ class Start extends DataClass implements Insertable<Start> {
       'stage_id': serializer.toJson<int>(stageId),
       'participant_id': serializer.toJson<int>(participantId),
       'start_time': serializer.toJson<String>(startTime),
-      'timestamp': serializer.toJson<String?>(timestamp),
+      'timestamp': serializer.toJson<DateTime?>(timestamp),
+      'ntp_offset': serializer.toJson<int?>(ntpOffset),
       'automatic_start_time': serializer.toJson<String?>(automaticStartTime),
       'automatic_correction': serializer.toJson<int?>(automaticCorrection),
       'manual_start_time': serializer.toJson<String?>(manualStartTime),
@@ -3458,7 +3528,8 @@ class Start extends DataClass implements Insertable<Start> {
           int? stageId,
           int? participantId,
           String? startTime,
-          Value<String?> timestamp = const Value.absent(),
+          Value<DateTime?> timestamp = const Value.absent(),
+          Value<int?> ntpOffset = const Value.absent(),
           Value<String?> automaticStartTime = const Value.absent(),
           Value<int?> automaticCorrection = const Value.absent(),
           Value<String?> manualStartTime = const Value.absent(),
@@ -3471,6 +3542,7 @@ class Start extends DataClass implements Insertable<Start> {
         participantId: participantId ?? this.participantId,
         startTime: startTime ?? this.startTime,
         timestamp: timestamp.present ? timestamp.value : this.timestamp,
+        ntpOffset: ntpOffset.present ? ntpOffset.value : this.ntpOffset,
         automaticStartTime: automaticStartTime.present
             ? automaticStartTime.value
             : this.automaticStartTime,
@@ -3495,6 +3567,7 @@ class Start extends DataClass implements Insertable<Start> {
           : this.participantId,
       startTime: data.startTime.present ? data.startTime.value : this.startTime,
       timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+      ntpOffset: data.ntpOffset.present ? data.ntpOffset.value : this.ntpOffset,
       automaticStartTime: data.automaticStartTime.present
           ? data.automaticStartTime.value
           : this.automaticStartTime,
@@ -3520,6 +3593,7 @@ class Start extends DataClass implements Insertable<Start> {
           ..write('participantId: $participantId, ')
           ..write('startTime: $startTime, ')
           ..write('timestamp: $timestamp, ')
+          ..write('ntpOffset: $ntpOffset, ')
           ..write('automaticStartTime: $automaticStartTime, ')
           ..write('automaticCorrection: $automaticCorrection, ')
           ..write('manualStartTime: $manualStartTime, ')
@@ -3537,6 +3611,7 @@ class Start extends DataClass implements Insertable<Start> {
       participantId,
       startTime,
       timestamp,
+      ntpOffset,
       automaticStartTime,
       automaticCorrection,
       manualStartTime,
@@ -3552,6 +3627,7 @@ class Start extends DataClass implements Insertable<Start> {
           other.participantId == this.participantId &&
           other.startTime == this.startTime &&
           other.timestamp == this.timestamp &&
+          other.ntpOffset == this.ntpOffset &&
           other.automaticStartTime == this.automaticStartTime &&
           other.automaticCorrection == this.automaticCorrection &&
           other.manualStartTime == this.manualStartTime &&
@@ -3565,7 +3641,8 @@ class StartsCompanion extends UpdateCompanion<Start> {
   final Value<int> stageId;
   final Value<int> participantId;
   final Value<String> startTime;
-  final Value<String?> timestamp;
+  final Value<DateTime?> timestamp;
+  final Value<int?> ntpOffset;
   final Value<String?> automaticStartTime;
   final Value<int?> automaticCorrection;
   final Value<String?> manualStartTime;
@@ -3578,6 +3655,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
     this.participantId = const Value.absent(),
     this.startTime = const Value.absent(),
     this.timestamp = const Value.absent(),
+    this.ntpOffset = const Value.absent(),
     this.automaticStartTime = const Value.absent(),
     this.automaticCorrection = const Value.absent(),
     this.manualStartTime = const Value.absent(),
@@ -3591,6 +3669,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
     required int participantId,
     required String startTime,
     this.timestamp = const Value.absent(),
+    this.ntpOffset = const Value.absent(),
     this.automaticStartTime = const Value.absent(),
     this.automaticCorrection = const Value.absent(),
     this.manualStartTime = const Value.absent(),
@@ -3605,7 +3684,8 @@ class StartsCompanion extends UpdateCompanion<Start> {
     Expression<int>? stageId,
     Expression<int>? participantId,
     Expression<String>? startTime,
-    Expression<String>? timestamp,
+    Expression<DateTime>? timestamp,
+    Expression<int>? ntpOffset,
     Expression<String>? automaticStartTime,
     Expression<int>? automaticCorrection,
     Expression<String>? manualStartTime,
@@ -3619,6 +3699,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
       if (participantId != null) 'participant_id': participantId,
       if (startTime != null) 'start_time': startTime,
       if (timestamp != null) 'timestamp': timestamp,
+      if (ntpOffset != null) 'ntp_offset': ntpOffset,
       if (automaticStartTime != null)
         'automatic_start_time': automaticStartTime,
       if (automaticCorrection != null)
@@ -3635,7 +3716,8 @@ class StartsCompanion extends UpdateCompanion<Start> {
       Value<int>? stageId,
       Value<int>? participantId,
       Value<String>? startTime,
-      Value<String?>? timestamp,
+      Value<DateTime?>? timestamp,
+      Value<int?>? ntpOffset,
       Value<String?>? automaticStartTime,
       Value<int?>? automaticCorrection,
       Value<String?>? manualStartTime,
@@ -3648,6 +3730,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
       participantId: participantId ?? this.participantId,
       startTime: startTime ?? this.startTime,
       timestamp: timestamp ?? this.timestamp,
+      ntpOffset: ntpOffset ?? this.ntpOffset,
       automaticStartTime: automaticStartTime ?? this.automaticStartTime,
       automaticCorrection: automaticCorrection ?? this.automaticCorrection,
       manualStartTime: manualStartTime ?? this.manualStartTime,
@@ -3673,7 +3756,10 @@ class StartsCompanion extends UpdateCompanion<Start> {
       map['start_time'] = Variable<String>(startTime.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String>(timestamp.value);
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
+    }
+    if (ntpOffset.present) {
+      map['ntp_offset'] = Variable<int>(ntpOffset.value);
     }
     if (automaticStartTime.present) {
       map['automatic_start_time'] = Variable<String>(automaticStartTime.value);
@@ -3704,6 +3790,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
           ..write('participantId: $participantId, ')
           ..write('startTime: $startTime, ')
           ..write('timestamp: $timestamp, ')
+          ..write('ntpOffset: $ntpOffset, ')
           ..write('automaticStartTime: $automaticStartTime, ')
           ..write('automaticCorrection: $automaticCorrection, ')
           ..write('manualStartTime: $manualStartTime, ')
@@ -3735,9 +3822,9 @@ class Logs extends Table with TableInfo<Logs, Log> {
           .withConverter<LogLevel>(Logs.$converterlevel);
   static const VerificationMeta _timestampMeta =
       const VerificationMeta('timestamp');
-  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
       'timestamp', aliasedName, false,
-      type: DriftSqlType.string,
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _sourceMeta = const VerificationMeta('source');
@@ -3805,7 +3892,7 @@ class Logs extends Table with TableInfo<Logs, Log> {
       level: Logs.$converterlevel.fromSql(attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}level'])!),
       timestamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}timestamp'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
       source: Logs.$convertersource.fromSql(attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}source'])!),
       direction: Logs.$converterdirection.fromSql(attachedDatabase.typeMapping
@@ -3834,7 +3921,7 @@ class Logs extends Table with TableInfo<Logs, Log> {
 class Log extends DataClass implements Insertable<Log> {
   final int id;
   final LogLevel level;
-  final String timestamp;
+  final DateTime timestamp;
   final LogSource source;
   final LogSourceDirection direction;
   final String? rawData;
@@ -3852,7 +3939,7 @@ class Log extends DataClass implements Insertable<Log> {
     {
       map['level'] = Variable<String>(Logs.$converterlevel.toSql(level));
     }
-    map['timestamp'] = Variable<String>(timestamp);
+    map['timestamp'] = Variable<DateTime>(timestamp);
     {
       map['source'] = Variable<String>(Logs.$convertersource.toSql(source));
     }
@@ -3886,7 +3973,7 @@ class Log extends DataClass implements Insertable<Log> {
       id: serializer.fromJson<int>(json['id']),
       level: Logs.$converterlevel
           .fromJson(serializer.fromJson<String>(json['level'])),
-      timestamp: serializer.fromJson<String>(json['timestamp']),
+      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
       source: Logs.$convertersource
           .fromJson(serializer.fromJson<String>(json['source'])),
       direction: Logs.$converterdirection
@@ -3900,7 +3987,7 @@ class Log extends DataClass implements Insertable<Log> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'level': serializer.toJson<String>(Logs.$converterlevel.toJson(level)),
-      'timestamp': serializer.toJson<String>(timestamp),
+      'timestamp': serializer.toJson<DateTime>(timestamp),
       'source': serializer.toJson<String>(Logs.$convertersource.toJson(source)),
       'direction':
           serializer.toJson<String>(Logs.$converterdirection.toJson(direction)),
@@ -3911,7 +3998,7 @@ class Log extends DataClass implements Insertable<Log> {
   Log copyWith(
           {int? id,
           LogLevel? level,
-          String? timestamp,
+          DateTime? timestamp,
           LogSource? source,
           LogSourceDirection? direction,
           Value<String?> rawData = const Value.absent()}) =>
@@ -3965,7 +4052,7 @@ class Log extends DataClass implements Insertable<Log> {
 class LogsCompanion extends UpdateCompanion<Log> {
   final Value<int> id;
   final Value<LogLevel> level;
-  final Value<String> timestamp;
+  final Value<DateTime> timestamp;
   final Value<LogSource> source;
   final Value<LogSourceDirection> direction;
   final Value<String?> rawData;
@@ -3980,7 +4067,7 @@ class LogsCompanion extends UpdateCompanion<Log> {
   LogsCompanion.insert({
     this.id = const Value.absent(),
     required LogLevel level,
-    required String timestamp,
+    required DateTime timestamp,
     required LogSource source,
     required LogSourceDirection direction,
     this.rawData = const Value.absent(),
@@ -3991,7 +4078,7 @@ class LogsCompanion extends UpdateCompanion<Log> {
   static Insertable<Log> custom({
     Expression<int>? id,
     Expression<String>? level,
-    Expression<String>? timestamp,
+    Expression<DateTime>? timestamp,
     Expression<String>? source,
     Expression<String>? direction,
     Expression<String>? rawData,
@@ -4009,7 +4096,7 @@ class LogsCompanion extends UpdateCompanion<Log> {
   LogsCompanion copyWith(
       {Value<int>? id,
       Value<LogLevel>? level,
-      Value<String>? timestamp,
+      Value<DateTime>? timestamp,
       Value<LogSource>? source,
       Value<LogSourceDirection>? direction,
       Value<String?>? rawData}) {
@@ -4033,7 +4120,7 @@ class LogsCompanion extends UpdateCompanion<Log> {
       map['level'] = Variable<String>(Logs.$converterlevel.toSql(level.value));
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<String>(timestamp.value);
+      map['timestamp'] = Variable<DateTime>(timestamp.value);
     }
     if (source.present) {
       map['source'] =
@@ -4116,7 +4203,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           fileSize: row.readNullable<int>('file_size'),
           fileDescription: row.readNullable<String>('file_description'),
           fileHashSha1: row.readNullable<String>('file_hash_sha1'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
         ));
   }
 
@@ -4143,7 +4230,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           fileSize: row.readNullable<int>('file_size'),
           fileDescription: row.readNullable<String>('file_description'),
           fileHashSha1: row.readNullable<String>('file_hash_sha1'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
         ));
   }
 
@@ -4222,7 +4309,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<NumberAtStart> _getNumberAtStarts(
       {required int stageId, required int number}) {
     return customSelect(
-        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status_id, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status_id FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status_id, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status_id FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
         variables: [
           Variable<int>(stageId),
           Variable<int>(number)
@@ -4236,7 +4323,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
+          ntpOffset: row.readNullable<int>('ntp_offset'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4255,7 +4343,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<ParticipantAtStart> _getParticipantsAtStart(
       {required int stageId}) {
     return customSelect(
-        'SELECT participants.rider_id AS rider_id, participants.race_id AS race_id, participants.number AS number, participants.category AS category, participants.rfid AS rfid, participants.status_id AS participant_status_id, riders.name AS name, riders.nickname AS nickname, riders.birthday AS birthday, riders.team AS team, riders.city AS city, riders.email AS email, riders.phone AS phone, riders.comment AS comment, starts.id AS start_id, starts.stage_id AS stage_id, starts.participant_id AS participant_id, starts.start_time AS start_time, starts.timestamp AS timestamp, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time, starts.manual_correction AS manual_correction, starts.status_id AS status_id FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 AND starts.status_id = 1 AND participants.status_id = 1 ORDER BY start_time ASC',
+        'SELECT participants.rider_id AS rider_id, participants.race_id AS race_id, participants.number AS number, participants.category AS category, participants.rfid AS rfid, participants.status_id AS participant_status_id, riders.name AS name, riders.nickname AS nickname, riders.birthday AS birthday, riders.team AS team, riders.city AS city, riders.email AS email, riders.phone AS phone, riders.comment AS comment, starts.id AS start_id, starts.stage_id AS stage_id, starts.participant_id AS participant_id, starts.start_time AS start_time, starts.timestamp AS timestamp, starts.ntp_offset AS ntp_offset, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time, starts.manual_correction AS manual_correction, starts.status_id AS status_id FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 ORDER BY start_time ASC',
         variables: [
           Variable<int>(stageId)
         ],
@@ -4283,7 +4371,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
+          ntpOffset: row.readNullable<int>('ntp_offset'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4295,7 +4384,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<StartingParticipant> _getExistedStartingParticipants(
       {required int stageId, required String startTime, required int number}) {
     return customSelect(
-        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND stage_id = ?1 AND(start_time IS ?2 OR(number IS ?3 AND(automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND stage_id = ?1 AND(start_time IS ?2 OR(number IS ?3 AND(automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
         variables: [
           Variable<int>(stageId),
           Variable<String>(startTime),
@@ -4310,7 +4399,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
+          ntpOffset: row.readNullable<int>('ntp_offset'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4353,7 +4443,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<StartingParticipant> _getParticipantAroundTime(
       {required int stageId, required String before, required String after}) {
     return customSelect(
-        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE stage_id = ?1 AND participants.id = starts.participant_id AND start_time BETWEEN ?2 AND ?3',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE stage_id = ?1 AND participants.id = starts.participant_id AND start_time BETWEEN ?2 AND ?3',
         variables: [
           Variable<int>(stageId),
           Variable<String>(before),
@@ -4368,7 +4458,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
+          ntpOffset: row.readNullable<int>('ntp_offset'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4387,15 +4478,17 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Future<int> _setManualStartTime(
       {String? manualStartTime,
       int? manualCorrection,
-      String? timestamp,
+      DateTime? timestamp,
+      int? ntpOffset,
       required int participantId,
       required int stageId}) {
     return customUpdate(
-      'UPDATE starts SET manual_start_time = ?1, manual_correction = ?2, timestamp = ?3 WHERE participant_id = ?4 AND stage_id = ?5',
+      'UPDATE starts SET manual_start_time = ?1, manual_correction = ?2, timestamp = ?3, ntp_offset = ?4 WHERE participant_id = ?5 AND stage_id = ?6',
       variables: [
         Variable<String>(manualStartTime),
         Variable<int>(manualCorrection),
-        Variable<String>(timestamp),
+        Variable<DateTime>(timestamp),
+        Variable<int>(ntpOffset),
         Variable<int>(participantId),
         Variable<int>(stageId)
       ],
@@ -4467,7 +4560,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Future<int> _setDNSForStartId({required int statusId, required int id}) {
     return customUpdate(
-      'UPDATE starts SET status_id = ?1, automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL WHERE id = ?2',
+      'UPDATE starts SET status_id = ?1, automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL, ntp_offset = NULL WHERE id = ?2',
       variables: [Variable<int>(statusId), Variable<int>(id)],
       updates: {starts},
       updateKind: UpdateKind.update,
@@ -4477,7 +4570,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Selectable<StartingParticipant> _getNumbersOnTraceNow(
       {required int stageId, required String timeNow}) {
     return customSelect(
-        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND starts.status_id = 1 AND starts.automatic_start_time ISNULL ORDER BY starts.start_time ASC',
+        'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND starts.status_id = 1 AND starts.automatic_start_time ISNULL ORDER BY starts.start_time ASC',
         variables: [
           Variable<int>(stageId),
           Variable<String>(timeNow)
@@ -4491,7 +4584,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           stageId: row.read<int>('stage_id'),
           participantId: row.read<int>('participant_id'),
           startTime: row.read<String>('start_time'),
-          timestamp: row.readNullable<String>('timestamp'),
+          timestamp: row.readNullable<DateTime>('timestamp'),
+          ntpOffset: row.readNullable<int>('ntp_offset'),
           automaticStartTime: row.readNullable<String>('automatic_start_time'),
           automaticCorrection: row.readNullable<int>('automatic_correction'),
           manualStartTime: row.readNullable<String>('manual_start_time'),
@@ -4507,21 +4601,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
-  Selectable<Finish> _getFinishesFromStage(
-      {GetFinishesFromStage$predicate? predicate}) {
-    var $arrayStartIndex = 1;
-    final generatedpredicate = $write(
-        predicate?.call(this.finishes) ?? const CustomExpression('(TRUE)'),
-        startIndex: $arrayStartIndex);
-    $arrayStartIndex += generatedpredicate.amountOfVariables;
-    return customSelect(
-        'SELECT * FROM finishes WHERE ${generatedpredicate.sql}',
+  Selectable<Finish> _getFinishesFromStage({required int stageId}) {
+    return customSelect('SELECT * FROM finishes WHERE stage_id = ?1',
         variables: [
-          ...generatedpredicate.introducedVariables
+          Variable<int>(stageId)
         ],
         readsFrom: {
           finishes,
-          ...generatedpredicate.watchedTables,
         }).asyncMap(finishes.mapFromRow);
   }
 
@@ -4550,15 +4636,17 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Future<int> _addFinishTime(
       {required int stageId,
       required String finishTime,
-      required String timestamp,
+      required DateTime timestamp,
+      required int ntpOffset,
       int? number,
       required bool isHidden}) {
     return customInsert(
-      'INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_hidden) VALUES (?1, ?2, ?3, ?4, ?5)',
+      'INSERT INTO finishes (stage_id, finish_time, timestamp, ntp_offset, number, is_hidden) VALUES (?1, ?2, ?3, ?4, ?5, ?6)',
       variables: [
         Variable<int>(stageId),
         Variable<String>(finishTime),
-        Variable<String>(timestamp),
+        Variable<DateTime>(timestamp),
+        Variable<int>(ntpOffset),
         Variable<int>(number),
         Variable<bool>(isHidden)
       ],
@@ -4587,14 +4675,16 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Future<int> _addFinishTimeManual(
       {required int stageId,
       required String finishTime,
-      required String timestamp,
+      required DateTime timestamp,
+      required int ntpOffset,
       int? number}) {
     return customInsert(
-      'INSERT INTO finishes (stage_id, finish_time, timestamp, number, is_manual) VALUES (?1, ?2, ?3, ?4, TRUE)',
+      'INSERT INTO finishes (stage_id, finish_time, timestamp, ntp_offset, number, is_manual) VALUES (?1, ?2, ?3, ?4, ?5, TRUE)',
       variables: [
         Variable<int>(stageId),
         Variable<String>(finishTime),
-        Variable<String>(timestamp),
+        Variable<DateTime>(timestamp),
+        Variable<int>(ntpOffset),
         Variable<int>(number)
       ],
       updates: {finishes},
@@ -4753,6 +4843,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           ),
         ],
       );
+  @override
+  DriftDatabaseOptions get options =>
+      const DriftDatabaseOptions(storeDateTimeAsText: true);
 }
 
 typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
@@ -4964,7 +5057,7 @@ typedef $TrackFilesCreateCompanionBuilder = TrackFilesCompanion Function({
   Value<String?> description,
   required String hashSha1,
   required Uint8List data,
-  required String timestamp,
+  required DateTime timestamp,
 });
 typedef $TrackFilesUpdateCompanionBuilder = TrackFilesCompanion Function({
   Value<int> id,
@@ -4974,7 +5067,7 @@ typedef $TrackFilesUpdateCompanionBuilder = TrackFilesCompanion Function({
   Value<String?> description,
   Value<String> hashSha1,
   Value<Uint8List> data,
-  Value<String> timestamp,
+  Value<DateTime> timestamp,
 });
 
 class $TrackFilesFilterComposer extends Composer<_$AppDatabase, TrackFiles> {
@@ -5006,7 +5099,7 @@ class $TrackFilesFilterComposer extends Composer<_$AppDatabase, TrackFiles> {
   ColumnFilters<Uint8List> get data => $composableBuilder(
       column: $table.data, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get timestamp => $composableBuilder(
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnFilters(column));
 }
 
@@ -5039,7 +5132,7 @@ class $TrackFilesOrderingComposer extends Composer<_$AppDatabase, TrackFiles> {
   ColumnOrderings<Uint8List> get data => $composableBuilder(
       column: $table.data, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get timestamp => $composableBuilder(
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnOrderings(column));
 }
 
@@ -5073,7 +5166,7 @@ class $TrackFilesAnnotationComposer
   GeneratedColumn<Uint8List> get data =>
       $composableBuilder(column: $table.data, builder: (column) => column);
 
-  GeneratedColumn<String> get timestamp =>
+  GeneratedColumn<DateTime> get timestamp =>
       $composableBuilder(column: $table.timestamp, builder: (column) => column);
 }
 
@@ -5107,7 +5200,7 @@ class $TrackFilesTableManager extends RootTableManager<
             Value<String?> description = const Value.absent(),
             Value<String> hashSha1 = const Value.absent(),
             Value<Uint8List> data = const Value.absent(),
-            Value<String> timestamp = const Value.absent(),
+            Value<DateTime> timestamp = const Value.absent(),
           }) =>
               TrackFilesCompanion(
             id: id,
@@ -5127,7 +5220,7 @@ class $TrackFilesTableManager extends RootTableManager<
             Value<String?> description = const Value.absent(),
             required String hashSha1,
             required Uint8List data,
-            required String timestamp,
+            required DateTime timestamp,
           }) =>
               TrackFilesCompanion.insert(
             id: id,
@@ -6095,7 +6188,8 @@ typedef $FinishesCreateCompanionBuilder = FinishesCompanion Function({
   Value<int> id,
   required int stageId,
   Value<int?> number,
-  required String timestamp,
+  required DateTime timestamp,
+  required int ntpOffset,
   required String finishTime,
   Value<bool> isHidden,
   Value<bool> isManual,
@@ -6104,7 +6198,8 @@ typedef $FinishesUpdateCompanionBuilder = FinishesCompanion Function({
   Value<int> id,
   Value<int> stageId,
   Value<int?> number,
-  Value<String> timestamp,
+  Value<DateTime> timestamp,
+  Value<int> ntpOffset,
   Value<String> finishTime,
   Value<bool> isHidden,
   Value<bool> isManual,
@@ -6127,8 +6222,11 @@ class $FinishesFilterComposer extends Composer<_$AppDatabase, Finishes> {
   ColumnFilters<int> get number => $composableBuilder(
       column: $table.number, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get timestamp => $composableBuilder(
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get ntpOffset => $composableBuilder(
+      column: $table.ntpOffset, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get finishTime => $composableBuilder(
       column: $table.finishTime, builder: (column) => ColumnFilters(column));
@@ -6157,8 +6255,11 @@ class $FinishesOrderingComposer extends Composer<_$AppDatabase, Finishes> {
   ColumnOrderings<int> get number => $composableBuilder(
       column: $table.number, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get timestamp => $composableBuilder(
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get ntpOffset => $composableBuilder(
+      column: $table.ntpOffset, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get finishTime => $composableBuilder(
       column: $table.finishTime, builder: (column) => ColumnOrderings(column));
@@ -6187,8 +6288,11 @@ class $FinishesAnnotationComposer extends Composer<_$AppDatabase, Finishes> {
   GeneratedColumn<int> get number =>
       $composableBuilder(column: $table.number, builder: (column) => column);
 
-  GeneratedColumn<String> get timestamp =>
+  GeneratedColumn<DateTime> get timestamp =>
       $composableBuilder(column: $table.timestamp, builder: (column) => column);
+
+  GeneratedColumn<int> get ntpOffset =>
+      $composableBuilder(column: $table.ntpOffset, builder: (column) => column);
 
   GeneratedColumn<String> get finishTime => $composableBuilder(
       column: $table.finishTime, builder: (column) => column);
@@ -6226,7 +6330,8 @@ class $FinishesTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<int> stageId = const Value.absent(),
             Value<int?> number = const Value.absent(),
-            Value<String> timestamp = const Value.absent(),
+            Value<DateTime> timestamp = const Value.absent(),
+            Value<int> ntpOffset = const Value.absent(),
             Value<String> finishTime = const Value.absent(),
             Value<bool> isHidden = const Value.absent(),
             Value<bool> isManual = const Value.absent(),
@@ -6236,6 +6341,7 @@ class $FinishesTableManager extends RootTableManager<
             stageId: stageId,
             number: number,
             timestamp: timestamp,
+            ntpOffset: ntpOffset,
             finishTime: finishTime,
             isHidden: isHidden,
             isManual: isManual,
@@ -6244,7 +6350,8 @@ class $FinishesTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             required int stageId,
             Value<int?> number = const Value.absent(),
-            required String timestamp,
+            required DateTime timestamp,
+            required int ntpOffset,
             required String finishTime,
             Value<bool> isHidden = const Value.absent(),
             Value<bool> isManual = const Value.absent(),
@@ -6254,6 +6361,7 @@ class $FinishesTableManager extends RootTableManager<
             stageId: stageId,
             number: number,
             timestamp: timestamp,
+            ntpOffset: ntpOffset,
             finishTime: finishTime,
             isHidden: isHidden,
             isManual: isManual,
@@ -6282,7 +6390,8 @@ typedef $StartsCreateCompanionBuilder = StartsCompanion Function({
   required int stageId,
   required int participantId,
   required String startTime,
-  Value<String?> timestamp,
+  Value<DateTime?> timestamp,
+  Value<int?> ntpOffset,
   Value<String?> automaticStartTime,
   Value<int?> automaticCorrection,
   Value<String?> manualStartTime,
@@ -6295,7 +6404,8 @@ typedef $StartsUpdateCompanionBuilder = StartsCompanion Function({
   Value<int> stageId,
   Value<int> participantId,
   Value<String> startTime,
-  Value<String?> timestamp,
+  Value<DateTime?> timestamp,
+  Value<int?> ntpOffset,
   Value<String?> automaticStartTime,
   Value<int?> automaticCorrection,
   Value<String?> manualStartTime,
@@ -6324,8 +6434,11 @@ class $StartsFilterComposer extends Composer<_$AppDatabase, Starts> {
   ColumnFilters<String> get startTime => $composableBuilder(
       column: $table.startTime, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get timestamp => $composableBuilder(
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get ntpOffset => $composableBuilder(
+      column: $table.ntpOffset, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get automaticStartTime => $composableBuilder(
       column: $table.automaticStartTime,
@@ -6371,8 +6484,11 @@ class $StartsOrderingComposer extends Composer<_$AppDatabase, Starts> {
   ColumnOrderings<String> get startTime => $composableBuilder(
       column: $table.startTime, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get timestamp => $composableBuilder(
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get ntpOffset => $composableBuilder(
+      column: $table.ntpOffset, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get automaticStartTime => $composableBuilder(
       column: $table.automaticStartTime,
@@ -6417,8 +6533,11 @@ class $StartsAnnotationComposer extends Composer<_$AppDatabase, Starts> {
   GeneratedColumn<String> get startTime =>
       $composableBuilder(column: $table.startTime, builder: (column) => column);
 
-  GeneratedColumn<String> get timestamp =>
+  GeneratedColumn<DateTime> get timestamp =>
       $composableBuilder(column: $table.timestamp, builder: (column) => column);
+
+  GeneratedColumn<int> get ntpOffset =>
+      $composableBuilder(column: $table.ntpOffset, builder: (column) => column);
 
   GeneratedColumn<String> get automaticStartTime => $composableBuilder(
       column: $table.automaticStartTime, builder: (column) => column);
@@ -6466,7 +6585,8 @@ class $StartsTableManager extends RootTableManager<
             Value<int> stageId = const Value.absent(),
             Value<int> participantId = const Value.absent(),
             Value<String> startTime = const Value.absent(),
-            Value<String?> timestamp = const Value.absent(),
+            Value<DateTime?> timestamp = const Value.absent(),
+            Value<int?> ntpOffset = const Value.absent(),
             Value<String?> automaticStartTime = const Value.absent(),
             Value<int?> automaticCorrection = const Value.absent(),
             Value<String?> manualStartTime = const Value.absent(),
@@ -6480,6 +6600,7 @@ class $StartsTableManager extends RootTableManager<
             participantId: participantId,
             startTime: startTime,
             timestamp: timestamp,
+            ntpOffset: ntpOffset,
             automaticStartTime: automaticStartTime,
             automaticCorrection: automaticCorrection,
             manualStartTime: manualStartTime,
@@ -6492,7 +6613,8 @@ class $StartsTableManager extends RootTableManager<
             required int stageId,
             required int participantId,
             required String startTime,
-            Value<String?> timestamp = const Value.absent(),
+            Value<DateTime?> timestamp = const Value.absent(),
+            Value<int?> ntpOffset = const Value.absent(),
             Value<String?> automaticStartTime = const Value.absent(),
             Value<int?> automaticCorrection = const Value.absent(),
             Value<String?> manualStartTime = const Value.absent(),
@@ -6506,6 +6628,7 @@ class $StartsTableManager extends RootTableManager<
             participantId: participantId,
             startTime: startTime,
             timestamp: timestamp,
+            ntpOffset: ntpOffset,
             automaticStartTime: automaticStartTime,
             automaticCorrection: automaticCorrection,
             manualStartTime: manualStartTime,
@@ -6535,7 +6658,7 @@ typedef $StartsProcessedTableManager = ProcessedTableManager<
 typedef $LogsCreateCompanionBuilder = LogsCompanion Function({
   Value<int> id,
   required LogLevel level,
-  required String timestamp,
+  required DateTime timestamp,
   required LogSource source,
   required LogSourceDirection direction,
   Value<String?> rawData,
@@ -6543,7 +6666,7 @@ typedef $LogsCreateCompanionBuilder = LogsCompanion Function({
 typedef $LogsUpdateCompanionBuilder = LogsCompanion Function({
   Value<int> id,
   Value<LogLevel> level,
-  Value<String> timestamp,
+  Value<DateTime> timestamp,
   Value<LogSource> source,
   Value<LogSourceDirection> direction,
   Value<String?> rawData,
@@ -6565,7 +6688,7 @@ class $LogsFilterComposer extends Composer<_$AppDatabase, Logs> {
           column: $table.level,
           builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<String> get timestamp => $composableBuilder(
+  ColumnFilters<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnFilters(column));
 
   ColumnWithTypeConverterFilters<LogSource, LogSource, String> get source =>
@@ -6596,7 +6719,7 @@ class $LogsOrderingComposer extends Composer<_$AppDatabase, Logs> {
   ColumnOrderings<String> get level => $composableBuilder(
       column: $table.level, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get timestamp => $composableBuilder(
+  ColumnOrderings<DateTime> get timestamp => $composableBuilder(
       column: $table.timestamp, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get source => $composableBuilder(
@@ -6623,7 +6746,7 @@ class $LogsAnnotationComposer extends Composer<_$AppDatabase, Logs> {
   GeneratedColumnWithTypeConverter<LogLevel, String> get level =>
       $composableBuilder(column: $table.level, builder: (column) => column);
 
-  GeneratedColumn<String> get timestamp =>
+  GeneratedColumn<DateTime> get timestamp =>
       $composableBuilder(column: $table.timestamp, builder: (column) => column);
 
   GeneratedColumnWithTypeConverter<LogSource, String> get source =>
@@ -6661,7 +6784,7 @@ class $LogsTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<LogLevel> level = const Value.absent(),
-            Value<String> timestamp = const Value.absent(),
+            Value<DateTime> timestamp = const Value.absent(),
             Value<LogSource> source = const Value.absent(),
             Value<LogSourceDirection> direction = const Value.absent(),
             Value<String?> rawData = const Value.absent(),
@@ -6677,7 +6800,7 @@ class $LogsTableManager extends RootTableManager<
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required LogLevel level,
-            required String timestamp,
+            required DateTime timestamp,
             required LogSource source,
             required LogSourceDirection direction,
             Value<String?> rawData = const Value.absent(),
@@ -6742,7 +6865,7 @@ class TrailInfo extends CustomResultSet {
   final int? fileSize;
   final String? fileDescription;
   final String? fileHashSha1;
-  final String? timestamp;
+  final DateTime? timestamp;
   TrailInfo({
     required QueryRow row,
     required this.id,
@@ -6766,7 +6889,8 @@ class NumberAtStart extends CustomResultSet {
   final int stageId;
   final int participantId;
   final String startTime;
-  final String? timestamp;
+  final DateTime? timestamp;
+  final int? ntpOffset;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String? manualStartTime;
@@ -6786,6 +6910,7 @@ class NumberAtStart extends CustomResultSet {
     required this.participantId,
     required this.startTime,
     this.timestamp,
+    this.ntpOffset,
     this.automaticStartTime,
     this.automaticCorrection,
     this.manualStartTime,
@@ -6820,7 +6945,8 @@ class ParticipantAtStart extends CustomResultSet {
   final int stageId;
   final int participantId;
   final String startTime;
-  final String? timestamp;
+  final DateTime? timestamp;
+  final int? ntpOffset;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String? manualStartTime;
@@ -6847,6 +6973,7 @@ class ParticipantAtStart extends CustomResultSet {
     required this.participantId,
     required this.startTime,
     this.timestamp,
+    this.ntpOffset,
     this.automaticStartTime,
     this.automaticCorrection,
     this.manualStartTime,
@@ -6860,7 +6987,8 @@ class StartingParticipant extends CustomResultSet {
   final int stageId;
   final int participantId;
   final String startTime;
-  final String? timestamp;
+  final DateTime? timestamp;
+  final int? ntpOffset;
   final String? automaticStartTime;
   final int? automaticCorrection;
   final String? manualStartTime;
@@ -6880,6 +7008,7 @@ class StartingParticipant extends CustomResultSet {
     required this.participantId,
     required this.startTime,
     this.timestamp,
+    this.ntpOffset,
     this.automaticStartTime,
     this.automaticCorrection,
     this.manualStartTime,
@@ -6926,9 +7055,6 @@ class GetStartingParticipantBetweenTimesResult extends CustomResultSet {
     required this.name,
   }) : super(row);
 }
-
-typedef GetFinishesFromStage$predicate = Expression<bool> Function(
-    Finishes finishes);
 
 class StartForCsv extends CustomResultSet {
   final int number;

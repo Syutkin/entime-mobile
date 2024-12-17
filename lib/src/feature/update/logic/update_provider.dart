@@ -1,10 +1,11 @@
+// ignore_for_file: use_setters_to_change_properties
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:open_filex/open_filex.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pub_semver/pub_semver.dart';
 
@@ -51,21 +52,15 @@ class UpdateProvider {
   }) async =>
       UpdateProvider._(client, appInfoProvider, settingsProvider);
 
-  void onDownloading(DownloadingHandler callback) {
-    _downloadingHandler = callback;
-  }
+  void onDownloading(DownloadingHandler callback) =>
+      _downloadingHandler = callback;
 
-  void onDownloadComplete(VoidCallback callback) {
-    _onDownloadComplete = callback;
-  }
+  void onDownloadComplete(VoidCallback callback) =>
+      _onDownloadComplete = callback;
 
-  void onError(ErrorHandler error) {
-    _onError = error;
-  }
+  void onError(ErrorHandler error) => _onError = error;
 
-  void stop() {
-    _client.close();
-  }
+  void stop() => _client.close();
 
   Future<bool> isUpdateAvailable() async {
     _canUpdate = false;
@@ -172,7 +167,7 @@ class UpdateProvider {
         _downloaded &&
         _latestRelease != null &&
         _downloadedFile != null) {
-      final result = await OpenFilex.open(_downloadedFile!.path);
+      final result = await OpenFile.open(_downloadedFile!.path);
       logger.d(result.message);
     }
   }

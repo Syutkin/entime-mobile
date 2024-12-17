@@ -137,10 +137,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nHome_errorAddParticipant": m2,
         "I18nHome_fab": MessageLookupByLibrary.simpleMessage("FAB"),
         "I18nHome_finish": MessageLookupByLibrary.simpleMessage("Finish"),
-        "I18nHome_hideManual": MessageLookupByLibrary.simpleMessage("Manual"),
-        "I18nHome_hideMarked": MessageLookupByLibrary.simpleMessage("Hided"),
-        "I18nHome_hideNumbers":
-            MessageLookupByLibrary.simpleMessage("With numbers"),
         "I18nHome_home": MessageLookupByLibrary.simpleMessage("Home"),
         "I18nHome_importStartProtocolCsv":
             MessageLookupByLibrary.simpleMessage("Import start protocol"),

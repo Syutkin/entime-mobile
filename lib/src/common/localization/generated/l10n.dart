@@ -101,6 +101,36 @@ class GeneratedLocalization {
     );
   }
 
+  /// `DNS`
+  String get I18nCore_dns {
+    return Intl.message(
+      'DNS',
+      name: 'I18nCore_dns',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DNF`
+  String get I18nCore_dnf {
+    return Intl.message(
+      'DNF',
+      name: 'I18nCore_dnf',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DSQ`
+  String get I18nCore_dsq {
+    return Intl.message(
+      'DSQ',
+      name: 'I18nCore_dsq',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Что нового`
   String get I18nUpdate_whatsNew {
     return Intl.message(
@@ -1255,6 +1285,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Импорт этапов`
+  String get I18nHome_importStagesCsv {
+    return Intl.message(
+      'Импорт этапов',
+      name: 'I18nHome_importStagesCsv',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Bluetooth`
   String get I18nHome_bluetooth {
     return Intl.message(
@@ -1266,30 +1306,30 @@ class GeneratedLocalization {
   }
 
   /// `Скрытые`
-  String get I18nHome_hideMarked {
+  String get I18nHome_showHidden {
     return Intl.message(
       'Скрытые',
-      name: 'I18nHome_hideMarked',
+      name: 'I18nHome_showHidden',
       desc: '',
       args: [],
     );
   }
 
   /// `С номерами`
-  String get I18nHome_hideNumbers {
+  String get I18nHome_showNumbers {
     return Intl.message(
       'С номерами',
-      name: 'I18nHome_hideNumbers',
+      name: 'I18nHome_showNumbers',
       desc: '',
       args: [],
     );
   }
 
   /// `Ручная отсечка`
-  String get I18nHome_hideManual {
+  String get I18nHome_showManual {
     return Intl.message(
       'Ручная отсечка',
-      name: 'I18nHome_hideManual',
+      name: 'I18nHome_showManual',
       desc: '',
       args: [],
     );
@@ -1300,6 +1340,36 @@ class GeneratedLocalization {
     return Intl.message(
       'По умолчанию',
       name: 'I18nHome_setDefaults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DNS`
+  String get I18nHome_showDNS {
+    return Intl.message(
+      'DNS',
+      name: 'I18nHome_showDNS',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DNF`
+  String get I18nHome_showDNF {
+    return Intl.message(
+      'DNF',
+      name: 'I18nHome_showDNF',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DSQ`
+  String get I18nHome_showDSQ {
+    return Intl.message(
+      'DSQ',
+      name: 'I18nHome_showDSQ',
       desc: '',
       args: [],
     );
@@ -2238,6 +2308,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Вы уверены, что хотите удалить гонку "{raceName}"?`
+  String I18nDatabase_deleteRace(Object raceName) {
+    return Intl.message(
+      'Вы уверены, что хотите удалить гонку "$raceName"?',
+      name: 'I18nDatabase_deleteRace',
+      desc: '',
+      args: [raceName],
+    );
+  }
+
   /// `Вы уверены, что хотите удалить этап "{stageName}"?`
   String I18nDatabase_deleteStage(Object stageName) {
     return Intl.message(
@@ -2373,6 +2453,16 @@ class GeneratedLocalization {
     return Intl.message(
       'Активен',
       name: 'I18nDatabase_trailIsActive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Найти...`
+  String get I18nDatabase_searchTrail {
+    return Intl.message(
+      'Найти...',
+      name: 'I18nDatabase_searchTrail',
       desc: '',
       args: [],
     );

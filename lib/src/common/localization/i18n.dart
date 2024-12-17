@@ -27,6 +27,21 @@ class I18nCore {
         'Поправка',
         name: 'I18nCore_correction',
       );
+
+  static String get dns => Intl.message(
+        'DNS',
+        name: 'I18nCore_dns',
+      );
+
+  static String get dnf => Intl.message(
+        'DNF',
+        name: 'I18nCore_dnf',
+      );
+
+  static String get dsq => Intl.message(
+        'DSQ',
+        name: 'I18nCore_dsq',
+      );
 }
 
 class I18nUpdate {
@@ -457,9 +472,9 @@ class I18nProtocol {
       );
 
   static String get difference => Intl.message(
-    'Разница',
-    name: 'I18nProtocol_difference',
-  );
+        'Разница',
+        name: 'I18nProtocol_difference',
+      );
 
   static String shareStartResults(String raceName, String stageName) =>
       Intl.message(
@@ -730,29 +745,49 @@ class I18nHome {
         name: 'I18nHome_importStartProtocolCsv',
       );
 
+  static String get importStagesCsv => Intl.message(
+        'Импорт этапов',
+        name: 'I18nHome_importStagesCsv',
+      );
+
   static String get bluetooth => Intl.message(
         'Bluetooth',
         name: 'I18nHome_bluetooth',
       );
 
-  static String get hideMarked => Intl.message(
+  static String get showHidden => Intl.message(
         'Скрытые',
-        name: 'I18nHome_hideMarked',
+        name: 'I18nHome_showHidden',
       );
 
-  static String get hideNumbers => Intl.message(
+  static String get showNumbers => Intl.message(
         'С номерами',
-        name: 'I18nHome_hideNumbers',
+        name: 'I18nHome_showNumbers',
       );
 
-  static String get hideManual => Intl.message(
+  static String get showManual => Intl.message(
         'Ручная отсечка',
-        name: 'I18nHome_hideManual',
+        name: 'I18nHome_showManual',
       );
 
   static String get setDefaults => Intl.message(
         'По умолчанию',
         name: 'I18nHome_setDefaults',
+      );
+
+  static String get showDNS => Intl.message(
+        'DNS',
+        name: 'I18nHome_showDNS',
+      );
+
+  static String get showDNF => Intl.message(
+        'DNF',
+        name: 'I18nHome_showDNF',
+      );
+
+  static String get showDSQ => Intl.message(
+        'DSQ',
+        name: 'I18nHome_showDSQ',
       );
 }
 
@@ -1251,6 +1286,12 @@ class I18nDatabase {
         name: 'I18nDatabase_isActiveStage',
       );
 
+  static String deleteRace(String raceName) => Intl.message(
+        'Вы уверены, что хотите удалить гонку "$raceName"?',
+        name: 'I18nDatabase_deleteRace',
+        args: [raceName],
+      );
+
   static String deleteStage(String stageName) => Intl.message(
         'Вы уверены, что хотите удалить этап "$stageName"?',
         name: 'I18nDatabase_deleteStage',
@@ -1320,6 +1361,11 @@ class I18nDatabase {
   static String get trailIsActive => Intl.message(
         'Активен',
         name: 'I18nDatabase_trailIsActive',
+      );
+
+  static String get searchTrail => Intl.message(
+        'Найти...',
+        name: 'I18nDatabase_searchTrail',
       );
 
   static String uploadLimit(double limit) {

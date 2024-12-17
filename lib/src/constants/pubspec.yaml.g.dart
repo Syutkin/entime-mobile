@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-alpha.2+346',
+    representation: r'0.5.0-alpha.2+348',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-alpha.2+346',
+    canonical: r'0.5.0-alpha.2+348',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,19 +118,19 @@ sealed class Pubspec {
     preRelease: <String>[r'alpha', r'2'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'346'],
+    build: <String>[r'348'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2024,
     12,
-    11,
+    17,
     6,
-    54,
-    20,
-    203,
-    673,
+    39,
+    57,
+    97,
+    843,
   );
 
   /// Name
@@ -409,15 +409,14 @@ sealed class Pubspec {
   static const Map<String, Object> dependencies = <String, Object>{
     'bloc_concurrency': r'^0.2.5',
     'bot_toast': r'^4.1.3',
-    'connectivity_plus': r'^6.1.0',
+    'connectivity_plus': r'^6.1.1',
     'crypto': r'^3.0.6',
     'csv': r'^6.0.0',
-    'device_info_plus': r'^11.1.1',
+    'device_info_plus': r'^11.2.0',
     'drift': r'^2.22.1',
-    'dropdown_textfield': r'^1.2.0',
+    'dropdown_search': r'^6.0.1',
     'equatable': r'^2.0.7',
-    'file_picker': r'^8.1.4',
-    'filesize': r'^2.0.1',
+    'file_picker': r'^8.1.6',
     'flutter': <String, Object>{
       'sdk': r'flutter',
     },
@@ -437,15 +436,15 @@ sealed class Pubspec {
     'material_design_icons_flutter': r'^7.0.7296',
     'meta': r'^1.15.0',
     'nested': r'^1.0.0',
-    'open_filex': r'^4.5.0',
+    'open_file': r'^3.5.10',
     'path': r'^1.9.0',
     'path_provider': r'^2.1.5',
     'permission_handler': r'^11.3.1',
-    'pub_semver': r'^2.1.4',
+    'pub_semver': r'^2.1.5',
     'rxdart': r'^0.28.0',
-    'sentry_flutter': r'^8.10.1',
+    'sentry_flutter': r'^8.11.1',
     'settings_ui': r'^2.0.2',
-    'share_plus': r'^10.1.2',
+    'share_plus': r'^10.1.3',
     'shared_preferences': r'^2.3.3',
     'soundpool': r'^2.4.1',
     'sqlite3': r'^2.5.0',
@@ -470,6 +469,7 @@ sealed class Pubspec {
     'json_serializable': r'^6.9.0',
     'mocktail': r'^1.0.4',
     'patrol': r'^3.13.1',
+    'patrol_finders': r'^2.5.1',
     'pubspec_generator': r'^4.0.0',
     'test': r'^1.25.7',
     'very_good_analysis': r'^6.0.0',

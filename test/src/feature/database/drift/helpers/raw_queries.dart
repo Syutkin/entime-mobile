@@ -1,3 +1,5 @@
+part of '../app_database_test.dart';
+
 class PopDB {
   PopDB() {
     queries

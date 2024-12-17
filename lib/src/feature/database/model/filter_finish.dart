@@ -1,7 +1,7 @@
 /// Список в меню фильтрации финишных отсечек
 enum FilterFinish {
-  hideMarked,
-  hideNumbers,
-  hideManual,
+  showHidden,
+  showManual,
+  showNumbers,
   setDefaults,
 }

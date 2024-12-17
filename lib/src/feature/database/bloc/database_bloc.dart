@@ -15,6 +15,7 @@ import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../../feature/csv/csv.dart';
+import '../../csv/model/stages_csv.dart';
 import '../../settings/logic/settings_provider.dart';
 import '../drift/app_database.dart';
 import '../model/notification.dart';
@@ -67,7 +68,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     //   add( DatabaseEvent.onChanged());
     // });
 
-    _startsSubscription = _db.select(_db.starts).watch().listen((event) async {
+    _startsSubscription =
+        _db.getParticipantsAtStart(stageId: 0).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
       _participants = await _db.getParticipantsAtStart(stageId: stageId).get();
       logger.t(
@@ -82,13 +84,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       _finishes = await _db
           .getFinishesFromStage(
             stageId: stageId,
-            hideManual: _hideManual,
-            hideMarked: _hideMarked,
-            hideNumbers: _hideNumbers,
+            // hideManual: _hideManual,
+            // hideMarked: _hideMarked,
+            // hideNumbers: _hideNumbers,
           )
           .get();
       logger
-          .t('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
+          .d('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
       _emitState();
     });
 
@@ -114,31 +116,31 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       //     _hideNumbers != state.hideNumbers ||
       //     _hideManual != state.hideManual) {
       //ignore: literal_only_boolean_expressions
-      if (true) {
-        _hideMarked = state.hideMarked;
-        _hideNumbers = state.hideNumbers;
-        _hideManual = state.hideManual;
-        await _finishesSubscription.cancel();
-        _finishesSubscription =
-            _db.select(_db.finishes).watch().listen((event) async {
-          final stageId = _stage?.id ?? 0;
-          _finishes = await _db
-              .getFinishesFromStage(
-                stageId: stageId,
-                hideManual: _hideManual,
-                hideMarked: _hideMarked,
-                hideNumbers: _hideNumbers,
-              )
-              .get();
-          logger.t(
-            'DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()',
-          );
-          _emitState();
-        });
-        logger.t(
-          'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
-        );
-      }
+      // if (true) {
+      //   _hideMarked = state.hideMarked;
+      //   _hideNumbers = state.hideNumbers;
+      //   _hideManual = state.hideManual;
+      //   await _finishesSubscription.cancel();
+      //   _finishesSubscription =
+      //       _db.select(_db.finishes).watch().listen((event) async {
+      //     final stageId = _stage?.id ?? 0;
+      //     _finishes = await _db
+      //         .getFinishesFromStage(
+      //           stageId: stageId,
+      //           hideManual: _hideManual,
+      //           hideMarked: _hideMarked,
+      //           hideNumbers: _hideNumbers,
+      //         )
+      //         .get();
+      //     logger.t(
+      //       'DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()',
+      //     );
+      //     _emitState();
+      //   });
+      //   logger.t(
+      //     'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
+      //   );
+      // }
       _finishDelay = state.finishDelay;
       _substituteNumbers = state.substituteNumbers;
       _substituteNumbersDelay = state.substituteNumbersDelay;
@@ -347,6 +349,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             stageId: event.stageId,
             time: event.time,
             timestamp: event.timestamp,
+            ntpOffset: event.ntpOffset,
             deltaInSeconds: event.deltaInSeconds,
           );
         },
@@ -362,6 +365,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             time: event.startTime,
             correction: event.correction,
             timestamp: event.timestamp,
+            ntpOffset: event.ntpOffset,
             deltaInSeconds: event.deltaInSeconds ??
                 settingsProvider.settings.deltaInSeconds,
             forceUpdate: event.forceUpdate,
@@ -383,6 +387,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             stage: event.stage,
             finish: event.finishTime,
             timestamp: event.timestamp,
+            ntpOffset: event.ntpOffset,
             finishDelay: event.finishDelay ?? _finishDelay,
             substituteNumbers: event.substituteNumbers ?? _substituteNumbers,
             substituteNumbersDelay:
@@ -401,12 +406,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             stageId: event.stageId,
             finishTime: event.finishTime,
             timestamp: event.timestamp,
+            ntpOffset: event.ntpOffset,
             number: event.number,
           );
         },
-        //ToDo:
-        clearStartResultsDebug: (event) {
-          throw Exception('Not implemented');
+        clearStartResultsDebug: (event) async {
+          await _db.clearStartResultsDebug(stageId: event.stageId);
         },
         clearFinishResultsDebug: (event) async {
           await _db.clearFinishResultsDebug(event.stageId);
@@ -463,6 +468,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             _stage = null;
             add(DatabaseEvent.selectRace(race));
           }
+        },
+        createStagesFromStagesCsv: (event) async {
+          await _db.createStagesFromStagesCsv(event.raceId, event.stages);
         },
         shareStart: (event) async {
           final race = _race;
@@ -553,19 +561,19 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   List<Race> _races = [];
   List<Stage> _stages = [];
-  List<Rider> _riders = [];
-  List<Status> _statuses = [];
+  final List<Rider> _riders = [];
+  final List<Status> _statuses = [];
   List<ParticipantAtStart> _participants = [];
-  List<Start> _starts = [];
+  final List<Start> _starts = [];
   List<Finish> _finishes = [];
   List<StartingParticipant> _numbersOnTrace = [];
 
   Race? _race;
   Stage? _stage;
 
-  bool _hideMarked = true;
-  bool _hideNumbers = false;
-  bool _hideManual = false;
+  // bool _hideMarked = true;
+  // bool _hideNumbers = false;
+  // bool _hideManual = false;
   late int _finishDelay;
   late bool _substituteNumbers;
   late int _substituteNumbersDelay;
@@ -575,7 +583,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   late StreamSubscription<List<Race>> _racesSubscription;
   late StreamSubscription<List<Stage>> _stagesSubscription;
-  late StreamSubscription<List<Start>> _startsSubscription;
+  late StreamSubscription<List<ParticipantAtStart>> _startsSubscription;
   late StreamSubscription<List<Finish>> _finishesSubscription;
   late StreamSubscription<List<StartingParticipant>>
       _numbersOnTraceSubscription;

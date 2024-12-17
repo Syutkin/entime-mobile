@@ -50,9 +50,12 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       countdownAtStartTime: prefs.getBool('countdownAtStartTime') ??
           defaults.countdownAtStartTime,
       checkUpdates: prefs.getBool('checkUpdates') ?? defaults.checkUpdates,
-      hideMarked: prefs.getBool('hideMarked') ?? defaults.hideMarked,
-      hideNumbers: prefs.getBool('hideNumbers') ?? defaults.hideNumbers,
-      hideManual: prefs.getBool('hideManual') ?? defaults.hideManual,
+      showDNS: prefs.getBool('showDNS') ?? defaults.showDNS,
+      showDNF: prefs.getBool('showDNF') ?? defaults.showDNF,
+      showDSQ: prefs.getBool('showDSQ') ?? defaults.showDSQ,
+      showHidden: prefs.getBool('showHidden') ?? defaults.showHidden,
+      showNumbers: prefs.getBool('showNumbers') ?? defaults.showNumbers,
+      showManual: prefs.getBool('showManual') ?? defaults.showManual,
       reconnect: prefs.getBool('reconnect') ?? defaults.reconnect,
       finishDelay: prefs.getInt('finishDelay') ?? defaults.finishDelay,
       substituteNumbers:
@@ -63,8 +66,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           defaults.showFinishDifference,
       showColorFinishDifference: prefs.getBool('showColorFinishDifference') ??
           defaults.showColorFinishDifference,
-      finishDifference:
-          prefs.getInt('finishDifference') ?? defaults.finishDifference,
+      finishDifferenceThreshold:
+          prefs.getInt('finishDifferenceThreshold') ?? defaults.finishDifferenceThreshold,
       deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
       updateStartCorrectionDelay: prefs.getInt('updateStartCorrectionDelay') ??
           defaults.updateStartCorrectionDelay,
@@ -140,9 +143,12 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setDouble('countdownTop', settings.countdownTop);
     await _prefs.setBool('countdownAtStartTime', settings.countdownAtStartTime);
     await _prefs.setBool('checkUpdates', settings.checkUpdates);
-    await _prefs.setBool('hideMarked', settings.hideMarked);
-    await _prefs.setBool('hideNumbers', settings.hideNumbers);
-    await _prefs.setBool('hideManual', settings.hideManual);
+    await _prefs.setBool('showDNS', settings.showDNS);
+    await _prefs.setBool('showDNF', settings.showDNF);
+    await _prefs.setBool('showDSQ', settings.showDSQ);
+    await _prefs.setBool('showHidden', settings.showHidden);
+    await _prefs.setBool('showNumbers', settings.showNumbers);
+    await _prefs.setBool('showManual', settings.showManual);
     await _prefs.setBool('reconnect', settings.reconnect);
     await _prefs.setInt('finishDelay', settings.finishDelay);
     await _prefs.setBool('substituteNumbers', settings.substituteNumbers);
@@ -153,7 +159,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     await _prefs.setBool('showFinishDifference', settings.showFinishDifference);
     await _prefs.setBool(
         'showColorFinishDifference', settings.showColorFinishDifference,);
-    await _prefs.setInt('finishDifference', settings.finishDifference);
+    await _prefs.setInt('finishDifferenceThreshold', settings.finishDifferenceThreshold);
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
     await _prefs.setInt(
       'updateStartCorrectionDelay',

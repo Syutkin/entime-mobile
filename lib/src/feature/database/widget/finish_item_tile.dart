@@ -74,21 +74,29 @@ class FinishItemTile extends StatelessWidget {
             return BlocBuilder<SettingsBloc, SettingsState>(
               builder: (context, state) {
                 final difference = item.finishTime.toDateTime()?.difference(
-                          DateTime.parse(item.timestamp).toLocal(),
+                          item.timestamp,
                         ) ??
                     Duration.zero;
                 final showDifference = state.settings.showFinishDifference;
                 Color? cardColor;
                 Color? textColor;
-                if (state.settings.showFinishDifference) {
-                  final isBigDifference = difference.inMilliseconds.abs() >
-                      state.settings.finishDifference;
-                  if (isBigDifference &&
-                      state.settings.showColorFinishDifference) {
-                    cardColor = Theme.of(context).colorScheme.error;
-                    textColor = Theme.of(context).colorScheme.onError;
-                  }
+                final isBigDifference = difference.inMilliseconds.abs() >
+                    state.settings.finishDifferenceThreshold;
+
+                if (isBigDifference &&
+                    state.settings.showColorFinishDifference) {
+                  cardColor = Theme.of(context).colorScheme.error;
+                  textColor = Theme.of(context).colorScheme.onError;
                 }
+                // if (state.settings.showFinishDifference) {
+                //   final isBigDifference = difference.inMilliseconds.abs() >
+                //       state.settings.finishDifferenceThreshold;
+                //   if (isBigDifference &&
+                //       state.settings.showColorFinishDifference) {
+                //     cardColor = Theme.of(context).colorScheme.error;
+                //     textColor = Theme.of(context).colorScheme.onError;
+                //   }
+                // }
                 return Card(
                   color: cardColor,
                   margin: const EdgeInsets.all(2),

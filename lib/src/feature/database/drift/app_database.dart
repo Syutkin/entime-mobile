@@ -4,6 +4,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:entime/src/constants/date_time_formats.dart';
 import 'package:entime/src/feature/csv/model/race_csv.dart';
+import 'package:entime/src/feature/csv/model/stages_csv.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
@@ -291,7 +292,6 @@ class AppDatabase extends _$AppDatabase {
     Value<int?>? fileId,
     String? url,
     String? description,
-    bool? isDeleted,
   }) async {
     final trailId = await into(trails).insertOnConflictUpdate(
       TrailsCompanion(
@@ -303,7 +303,6 @@ class AppDatabase extends _$AppDatabase {
         description:
             description != null ? Value(description) : const Value.absent(),
         fileId: fileId ?? const Value.absent(),
-        isDeleted: isDeleted != null ? Value(isDeleted) : const Value.absent(),
       ),
     );
     return trailId;
@@ -531,6 +530,7 @@ class AppDatabase extends _$AppDatabase {
             manualStartTime: const Value(null),
             startTime: Value(startTime),
             timestamp: const Value(null),
+            ntpOffset: const Value(null),
             statusId: const Value(1),
           ),
         );
@@ -570,6 +570,7 @@ class AppDatabase extends _$AppDatabase {
     required String time,
     required int correction,
     required DateTime timestamp,
+    required int ntpOffset,
     required int deltaInSeconds,
     bool forceUpdate = false,
   }) async {
@@ -615,10 +616,8 @@ class AppDatabase extends _$AppDatabase {
         StartsCompanion(
           automaticCorrection: Value(correction),
           automaticStartTime: Value(time),
-          // startTime: Value(phoneTime),
-          // ToDO: use drift DATETIME format
-          timestamp: Value(timestamp.toUtc().toIso8601String()),
-          // statusId: const Value(1),
+          timestamp: Value(timestamp),
+          ntpOffset: Value(ntpOffset),
         ),
       );
       logger.i('Database -> updated: $result lines');
@@ -630,7 +629,6 @@ class AppDatabase extends _$AppDatabase {
     return null;
   }
 
-  //ToDo: исправить выставление значения только первому совпадению
   ///Устанавливает ручное стартовое время для участника
   ///
   ///Ищет участника с временем рядом с текущим (плюс-минус [deltaInSeconds] секунд)
@@ -643,6 +641,7 @@ class AppDatabase extends _$AppDatabase {
     required int stageId,
     required DateTime time,
     required DateTime timestamp,
+    required int ntpOffset,
     int deltaInSeconds = 15,
   }) async {
     var result = 0;
@@ -659,29 +658,34 @@ class AppDatabase extends _$AppDatabase {
     ).get();
 
     if (participantsAroundTime.isNotEmpty) {
-      final startTime = participantsAroundTime.first.startTime.toDateTime();
-      if (startTime == null) {
-        logger.e('Wrong time format: $startTime, can not convert to DateTime');
-        return result;
-      }
-      final correction = startTime.difference(time);
-      result = await _setManualStartTime(
-        participantId: participantsAroundTime.first.participantId,
-        stageId: stageId,
-        manualCorrection: correction.inMilliseconds,
-        manualStartTime: manualStartTime,
-        timestamp: timestamp.toUtc().toIso8601String(),
-      );
-      if (result > 0) {
-        logger.i(
-          'Database -> Update manual start time for participant with id '
-          '${participantsAroundTime.first.participantId}',
+      for (final participant in participantsAroundTime) {
+        final startTime = participant.startTime.toDateTime();
+        if (startTime == null) {
+          logger
+              .e('Wrong time format: $startTime, can not convert to DateTime');
+          return result;
+        }
+        final correction = startTime.difference(time);
+        final count = await _setManualStartTime(
+          participantId: participant.participantId,
+          stageId: stageId,
+          manualCorrection: correction.inMilliseconds,
+          manualStartTime: manualStartTime,
+          timestamp: timestamp,
+          ntpOffset: ntpOffset,
         );
-      } else {
-        logger.i(
-          'Database -> Error at updating manual start time for participant with id '
-          '${participantsAroundTime.first.participantId}',
-        );
+        result += count;
+        if (count > 0) {
+          logger.i(
+            'Database -> Update manual start time for participant with id '
+            '${participant.participantId}',
+          );
+        } else {
+          logger.i(
+            'Database -> Error at updating manual start time for participant with id '
+            '${participant.participantId}',
+          );
+        }
       }
     } else {
       logger.i(
@@ -774,25 +778,9 @@ class AppDatabase extends _$AppDatabase {
 
   Selectable<Finish> getFinishesFromStage({
     required int stageId,
-    bool hideMarked = true,
-    bool hideManual = false,
-    bool hideNumbers = false,
   }) {
-    final predicates = <Expression<bool>>[];
     return _getFinishesFromStage(
-      predicate: (finishes) {
-        predicates.add(finishes.stageId.equals(stageId));
-        if (hideMarked) {
-          predicates.add(finishes.isHidden.equals(!hideMarked));
-        }
-        if (hideManual) {
-          predicates.add(finishes.isManual.equals(!hideManual));
-        }
-        if (hideNumbers) {
-          predicates.add(finishes.number.isNull());
-        }
-        return predicates.reduce((a, b) => a & b);
-      },
+      stageId: stageId,
     );
   }
 
@@ -806,8 +794,8 @@ class AppDatabase extends _$AppDatabase {
   Future<int?> addFinishTime({
     required Stage stage,
     required String finish,
-    // ToDO: use drift DATETIME format
     required DateTime timestamp,
+    required int ntpOffset,
     int finishDelay = 0,
     bool substituteNumbers = false,
     int substituteNumbersDelay = 0,
@@ -876,8 +864,8 @@ class AppDatabase extends _$AppDatabase {
     final finishId = await _addFinishTime(
       stageId: stage.id,
       finishTime: finish,
-      // ToDO: use drift DATETIME format
-      timestamp: timestamp.toUtc().toIso8601String(),
+      timestamp: timestamp,
+      ntpOffset: ntpOffset,
       number: workingNumber,
       isHidden: isHidden,
     );
@@ -900,13 +888,15 @@ class AppDatabase extends _$AppDatabase {
     required int stageId,
     required String finishTime,
     required DateTime timestamp,
+    required int ntpOffset,
     int? number,
   }) async {
     // final String phoneTime = DateFormat(longTimeFormat).format(timestamp);
     final finishId = await _addFinishTimeManual(
       stageId: stageId,
       finishTime: finishTime,
-      timestamp: timestamp.toUtc().toIso8601String(),
+      timestamp: timestamp,
+      ntpOffset: ntpOffset,
       number: number,
     );
     logger.i('Database -> Manual finish time added: $finishTime');
@@ -923,29 +913,6 @@ class AppDatabase extends _$AppDatabase {
     final rowCount = await _hideAllFinishes(stageId: stageId);
     logger.i('Database -> All finish times hided');
     return rowCount;
-  }
-
-  Future<void> clearFinishResultsDebug(int stageId) async {
-    var rowCount = await customUpdate(
-      'UPDATE starts SET finish_id = NULL WHERE stage_id = ?',
-      variables: [Variable.withInt(stageId)],
-      updates: {starts},
-      updateKind: UpdateKind.update,
-    );
-    logger.d(
-      'Database -> Finish info for $rowCount starting participants cleared',
-    );
-    rowCount = await customUpdate(
-      'UPDATE finishes '
-      'SET number = NULL, is_hidden = false '
-      'WHERE stage_id = ?',
-      variables: [Variable.withInt(stageId)],
-      updates: {finishes},
-      updateKind: UpdateKind.update,
-    );
-    logger
-      ..d('Database -> $rowCount finish results cleared')
-      ..i('Database -> Results cleared');
   }
 
   Future<bool> addNumberToFinish({
@@ -1078,6 +1045,32 @@ class AppDatabase extends _$AppDatabase {
     return raceId;
   }
 
+  Future<int> createStagesFromStagesCsv(int raceId, StagesCsv stagesCsv) async {
+    final stages = <String, int>{};
+    await transaction(() async {
+      for (final stageName in stagesCsv.stageNames) {
+        stages[stageName] = await addStage(raceId: raceId, name: stageName);
+      }
+      for (final item in stagesCsv.startItems) {
+        for (final stageName in stages.keys) {
+          await addStartNumber(
+            stage: Stage(
+              id: stages[stageName]!,
+              raceId: raceId,
+              name: stageName,
+              isActive: true,
+              isDeleted: false,
+            ),
+            number: item.number,
+            startTime: item.startTimes![stageName]!,
+            forceAdd: true,
+          );
+        }
+      }
+    });
+    return stages.length;
+  }
+
   Future<List<StartForCsv>> getStartResults(int stageId) async {
     return _getStartsForCsv(stageId: stageId).get();
   }
@@ -1144,12 +1137,11 @@ class AppDatabase extends _$AppDatabase {
     required String rawData,
     LogSourceDirection? direction,
   }) async {
-    final timeStamp = DateTime.now().toUtc().toIso8601String();
+    final timestamp = DateTime.now();
     final logId = await into(logs).insert(
       LogsCompanion(
         level: Value(level),
-        // ToDO: use drift DATETIME format
-        timestamp: Value(timeStamp),
+        timestamp: Value(timestamp),
         source: Value(source),
         direction: Value(direction ?? LogSourceDirection.undefined),
         rawData: Value(rawData),
@@ -1202,13 +1194,52 @@ class AppDatabase extends _$AppDatabase {
   }
 
 // -------------------------
-// для тестирования
+// для тестирования и дебага
 
   Selectable<NumberAtStart> getNumberAtStarts({
     required int stageId,
     required int number,
   }) {
     return _getNumberAtStarts(stageId: stageId, number: number);
+  }
+
+  Future<int> clearStartResultsDebug({required int stageId}) async {
+    final rowCount =
+        await managers.starts.filter((f) => f.stageId(stageId)).update(
+              (f) => StartsCompanion(
+                automaticCorrection: const Value(null),
+                automaticStartTime: const Value(null),
+                timestamp: const Value(null),
+                ntpOffset: const Value(null),
+                manualCorrection: const Value(null),
+                manualStartTime: const Value(null),
+                statusId: Value(ParticipantStatus.active.index),
+                finishId: const Value(null),
+              ),
+            );
+    logger.d('Database -> $rowCount start results cleared');
+    return rowCount;
+  }
+
+  Future<void> clearFinishResultsDebug(int stageId) async {
+    var rowCount = await customUpdate(
+      'UPDATE starts SET finish_id = NULL WHERE stage_id = ?',
+      variables: [Variable.withInt(stageId)],
+      updates: {starts},
+      updateKind: UpdateKind.update,
+    );
+    logger.d(
+      'Database -> Finish info for $rowCount starting participants cleared',
+    );
+    rowCount = await customUpdate(
+      'UPDATE finishes '
+      'SET number = NULL, is_hidden = false '
+      'WHERE stage_id = ?',
+      variables: [Variable.withInt(stageId)],
+      updates: {finishes},
+      updateKind: UpdateKind.update,
+    );
+    logger.d('Database -> $rowCount finish results cleared');
   }
 }
 

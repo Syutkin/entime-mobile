@@ -17,6 +17,7 @@ import '../../countdown/countdown.dart';
 import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/settings.dart';
 import '../database.dart';
+import '../logic/filter_start_list.dart';
 
 part 'popup/add_racer_popup.dart';
 part 'popup/edit_start_time_popup.dart';
@@ -43,66 +44,82 @@ class _StartListPage extends State<StartListPage> {
               child: _SliverStartSubHeader(),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: startList.length,
-              (context, index) {
-                final item = startList[index];
-                var isHighlighted = false;
-                return BlocBuilder<CountdownBloc, CountdownState>(
-                  buildWhen: (previous, current) {
-                    final previousIsHighlighted =
-                        item.startTime == _activeStartTime(previous);
-                    isHighlighted = item.startTime == _activeStartTime(current);
-                    // Обновлять при сдвигании следующего старта (убирать подсветку)
-                    if (previousIsHighlighted && !isHighlighted) {
-                      return true;
-                    } else {
-                      // Обновлять только там, где есть обратный отсчёт
-                      return isHighlighted &&
-                          (previous.mapOrNull(
-                                working: (state) => state.tick.text,
-                              ) !=
-                              current.mapOrNull(
-                                working: (state) => state.tick.text,
-                              ));
-                    }
-                  },
-                  builder: (context, countdownState) =>
-                      BlocBuilder<SettingsBloc, SettingsState>(
-                    buildWhen: (previous, current) =>
-                        previous.settings.countdownAtStartTime !=
-                        current.settings.countdownAtStartTime,
-                    builder: (
-                      context,
-                      settingsState,
-                    ) =>
-                        StartItemTile(
-                      item: item,
-                      onTap: () async {
-                        await editStartTime(context, item);
+          BlocBuilder<SettingsBloc, SettingsState>(
+            buildWhen: (previous, current) =>
+                previous.settings.showDNS != current.settings.showDNS ||
+                previous.settings.showDNF != current.settings.showDNF ||
+                previous.settings.showDSQ != current.settings.showDSQ,
+            builder: (context, state) {
+              final filteredList = filterStartList(
+                startList,
+                showDNS: state.settings.showDNS,
+                showDNF: state.settings.showDNF,
+                showDSQ: state.settings.showDSQ,
+              );
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: filteredList.length,
+                  (context, index) {
+                    final item = filteredList[index];
+                    var isHighlighted = false;
+                    return BlocBuilder<CountdownBloc, CountdownState>(
+                      buildWhen: (previous, current) {
+                        final previousIsHighlighted =
+                            item.startTime == _activeStartTime(previous);
+                        isHighlighted =
+                            item.startTime == _activeStartTime(current);
+                        // Обновлять при сдвигании следующего старта (убирать подсветку)
+                        if (previousIsHighlighted && !isHighlighted) {
+                          return true;
+                        } else {
+                          // Обновлять только там, где есть обратный отсчёт
+                          return isHighlighted &&
+                              (previous.mapOrNull(
+                                    working: (state) => state.tick.text,
+                                  ) !=
+                                  current.mapOrNull(
+                                    working: (state) => state.tick.text,
+                                  ));
+                        }
                       },
+                      builder: (context, countdownState) =>
+                          BlocBuilder<SettingsBloc, SettingsState>(
+                        buildWhen: (previous, current) =>
+                            previous.settings.countdownAtStartTime !=
+                            current.settings.countdownAtStartTime,
+                        builder: (
+                          context,
+                          settingsState,
+                        ) =>
+                            StartItemTile(
+                          item: item,
+                          onTap: () async {
+                            await editStartTime(context, item);
+                          },
 
-                      /// Set DNS on dismissed
-                      onDismissed: (direction) {
-                        BlocProvider.of<DatabaseBloc>(context).add(
-                          DatabaseEvent.setStatusForStartId(
-                            startId: item.startId,
-                            status: ParticipantStatus.dns,
-                          ),
-                        );
-                      },
-                      isHighlighted: isHighlighted,
-                      countdown: settingsState.settings.countdownAtStartTime &&
-                              isHighlighted
-                          ? _countdownFromState(countdownState)
-                          : null,
-                    ),
-                  ),
-                );
-              },
-              // childCount: startList.length,
-            ),
+                          /// Set DNS on dismissed
+                          onDismissed: (direction) {
+                            BlocProvider.of<DatabaseBloc>(context).add(
+                              DatabaseEvent.setStatusForStartId(
+                                startId: item.startId,
+                                status: ParticipantStatus.dns,
+                              ),
+                            );
+                          },
+                          isHighlighted: isHighlighted,
+                          countdown:
+                              settingsState.settings.countdownAtStartTime &&
+                                      isHighlighted
+                                  ? _countdownFromState(countdownState)
+                                  : null,
+                        ),
+                      ),
+                    );
+                  },
+                  // childCount: startList.length,
+                ),
+              );
+            },
           ),
         ],
       );
@@ -211,6 +228,7 @@ class _StartListPage extends State<StartListPage> {
           stageId: stageId,
           time: manualStartTime,
           timestamp: now,
+          ntpOffset: offset,
         ),
       );
     }
@@ -375,16 +393,24 @@ class _StartListPage extends State<StartListPage> {
     return <Widget>[
       TextButton(
         onPressed: () {
-          BlocProvider.of<BluetoothBloc>(context).add(
-            BluetoothEvent.messageReceived(
-              message:
-                  'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
-              stageId: stageId,
-            ),
+          BlocProvider.of<DatabaseBloc>(context).add(
+            DatabaseEvent.clearStartResultsDebug(stageId),
           );
         },
-        child: const Icon(Icons.record_voice_over_rounded),
+        child: const Icon(Icons.clear_all),
       ),
+      // TextButton(
+      //   onPressed: () {
+      //     BlocProvider.of<BluetoothBloc>(context).add(
+      //       BluetoothEvent.messageReceived(
+      //         message:
+      //             'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+      //         stageId: stageId,
+      //       ),
+      //     );
+      //   },
+      //   child: const Icon(Icons.record_voice_over_rounded),
+      // ),
       TextButton(
         onPressed: () {
           BlocProvider.of<BluetoothBloc>(context).add(
@@ -405,6 +431,7 @@ class _StartListPage extends State<StartListPage> {
               correction: 1234,
               timestamp: DateTime.timestamp(),
               startTime: DateFormat(longTimeFormat).format(DateTime.now()),
+              ntpOffset: 2345,
               // deltaInSeconds: ,
               // forceUpdate: ,
             ),
