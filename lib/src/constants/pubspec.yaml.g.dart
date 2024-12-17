@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-alpha.2+348',
+    representation: r'0.3.1+348',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-alpha.2+348',
+    canonical: r'0.3.1+348',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -108,14 +108,14 @@ sealed class Pubspec {
     /// MINOR version when you add functionality
     /// in a backward compatible manner.
     /// The minor version number: 2 in "1.2.3".
-    minor: 5,
+    minor: 3,
 
     /// PATCH version when you make backward compatible bug fixes.
     /// The patch version number: 3 in "1.2.3".
-    patch: 0,
+    patch: 1,
 
     /// The pre-release identifier: "foo" in "1.2.3-foo".
-    preRelease: <String>[r'alpha', r'2'],
+    preRelease: <String>[],
 
     /// The build identifier: "foo" in "1.2.3+foo".
     build: <String>[r'348'],
@@ -126,11 +126,11 @@ sealed class Pubspec {
     2024,
     12,
     17,
-    6,
-    39,
-    57,
-    97,
-    843,
+    14,
+    50,
+    28,
+    498,
+    139,
   );
 
   /// Name
@@ -205,8 +205,7 @@ sealed class Pubspec {
   /// If issue_tracker is missing but repository is present and points to GitHub,
   /// then the pub.dev site uses the default issue tracker
   /// (https://github.com/<user>/<repository>/issues).
-  static const String issueTracker =
-      r'https://github.com/Syutkin/entime-mobile/issues';
+  static const String issueTracker = r'https://github.com/Syutkin/entime-mobile/issues';
 
   /// Documentation
   ///
@@ -559,8 +558,7 @@ sealed class Pubspec {
     'cider': <String, Object>{
       'link_template': <String, Object>{
         'tag': r'https://github.com/Syutkin/entime-mobile/releases/tag/%tag%',
-        'diff':
-            r'https://github.com/Syutkin/entime-mobile/compare/%from%...%to%',
+        'diff': r'https://github.com/Syutkin/entime-mobile/compare/%from%...%to%',
       },
     },
     'patrol': <String, Object>{
@@ -570,4 +568,5 @@ sealed class Pubspec {
       },
     },
   };
+
 }

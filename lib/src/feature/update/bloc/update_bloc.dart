@@ -59,5 +59,5 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       emit(UpdateInitial(showChangelog: await updateProvider.showChangelog()));
     });
   }
-  final UpdateProvider updateProvider;
+  final IUpdateProvider updateProvider;
 }

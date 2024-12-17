@@ -1,4 +1,3 @@
-// ignore_for_file: use_setters_to_change_properties
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -7,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:pub_semver/pub_semver.dart';
 
 import '../../../common/logger/logger.dart';
@@ -18,7 +18,22 @@ import '../model/updater.dart';
 typedef DownloadingHandler = void Function(int current, int total);
 typedef ErrorHandler = void Function(String error);
 
-class UpdateProvider {
+abstract interface class IUpdateProvider {
+  String get latestVersion;
+
+  Future<bool> isUpdateAvailable();
+  Future<void> downloadUpdate();
+  Future<void> installApk();
+  Future<ShowChangelog> showChangelog();
+
+  void onDownloading(DownloadingHandler callback);
+  void onDownloadComplete(VoidCallback callback);
+  void onError(ErrorHandler error);
+
+  void stop();
+}
+
+class UpdateProvider implements IUpdateProvider {
   UpdateProvider._(
     http.Client client,
     AppInfoProvider appInfo,
@@ -31,16 +46,16 @@ class UpdateProvider {
 
   bool _canUpdate = false;
   bool _downloaded = false;
-  String? _dir;
 
   File? _downloadedFile;
 
   final AppInfoProvider _appInfo;
   final SettingsProvider _settingsProvider;
-  late DownloadingHandler _downloadingHandler;
-  late VoidCallback _onDownloadComplete;
-  late ErrorHandler _onError;
+  DownloadingHandler? _downloadingHandler;
+  VoidCallback? _onDownloadComplete;
+  ErrorHandler? _onError;
 
+  @override
   String get latestVersion => _latestRelease?.tagName ?? '';
 
   int? _updateFileSize = -1;
@@ -52,16 +67,21 @@ class UpdateProvider {
   }) async =>
       UpdateProvider._(client, appInfoProvider, settingsProvider);
 
+  @override
   void onDownloading(DownloadingHandler callback) =>
       _downloadingHandler = callback;
 
+  @override
   void onDownloadComplete(VoidCallback callback) =>
       _onDownloadComplete = callback;
 
+  @override
   void onError(ErrorHandler error) => _onError = error;
 
+  @override
   void stop() => _client.close();
 
+  @override
   Future<bool> isUpdateAvailable() async {
     _canUpdate = false;
     try {
@@ -105,17 +125,17 @@ class UpdateProvider {
     }
   }
 
+  @override
   Future<void> downloadUpdate() async {
     if (_canUpdate && _latestRelease != null && _appInfo.abi != null) {
       try {
-        _dir = (await getDownloadsDirectory())?.path;
-        _dir ??= (await getApplicationDocumentsDirectory()).path;
+        var dir = (await getDownloadsDirectory())?.path;
+        dir ??= (await getApplicationDocumentsDirectory()).path;
         _downloadedFile = File(
-          '$_dir/${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk',
+          '$dir/${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk',
         );
 
         var url = '';
-
         for (final asset in _latestRelease!.assets) {
           if (asset.name ==
               '${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk') {
@@ -137,22 +157,22 @@ class UpdateProvider {
             (newBytes) {
               // update progress
               bytes.addAll(newBytes);
-              _downloadingHandler(bytes.length, _updateFileSize!);
+              _downloadingHandler?.call(bytes.length, _updateFileSize!);
             },
             onDone: () async {
               // save file
               await _downloadedFile?.writeAsBytes(bytes);
               _downloaded = true;
-              _onDownloadComplete();
+              _onDownloadComplete?.call();
             },
             onError: (Object error) {
               logger.e('Update_provider -> Error', error: error);
-              _onError(error.toString());
+              _onError?.call(error.toString());
             },
             cancelOnError: true,
           );
         } else {
-          _onError('Update_provider -> response.contentLength is null');
+          _onError?.call('Update_provider -> response.contentLength is null');
         }
       } on Exception catch (e) {
         logger.e('Update_provider -> Exception', error: e);
@@ -162,16 +182,22 @@ class UpdateProvider {
     }
   }
 
+  @override
   Future<void> installApk() async {
     if (_canUpdate &&
         _downloaded &&
         _latestRelease != null &&
         _downloadedFile != null) {
-      final result = await OpenFile.open(_downloadedFile!.path);
-      logger.d(result.message);
+      if (await Permission.requestInstallPackages.request().isGranted) {
+        final result = await OpenFile.open(_downloadedFile!.path);
+        logger.d(result.message);
+      } else {
+        logger.d('Can not update, installing packages is denied');
+      }
     }
   }
 
+  @override
   Future<ShowChangelog> showChangelog() async {
     // final settings = _settingsProvider.settings;
     final previousVersion =
