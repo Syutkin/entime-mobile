@@ -23,6 +23,11 @@ class I18nCore {
         name: 'I18nCore_warning',
       );
 
+  static String get details => Intl.message(
+        'Подробнее',
+        name: 'I18nCore_details',
+      );
+
   static String get correction => Intl.message(
         'Поправка',
         name: 'I18nCore_correction',
@@ -41,6 +46,16 @@ class I18nCore {
   static String get dsq => Intl.message(
         'DSQ',
         name: 'I18nCore_dsq',
+      );
+
+  static String get yes => Intl.message(
+        'Да',
+        name: 'I18nCore_yes',
+      );
+
+  static String get no => Intl.message(
+        'Нет',
+        name: 'I18nCore_no',
       );
 }
 
@@ -488,6 +503,16 @@ class I18nProtocol {
         'Результаты финишей гонки $raceName, этап $stageName',
         name: 'I18nProtocol_shareFinishResults',
         args: [raceName, stageName],
+      );
+
+  static String get startTimeCutoff => Intl.message(
+        'Стартовая отсечка',
+        name: 'I18nProtocol_startTimeCutoff',
+      );
+
+  static String get finishTimeCutoff => Intl.message(
+        'Финишная отсечка',
+        name: 'I18nProtocol_finishTimeCutoff',
       );
 }
 
@@ -939,7 +964,32 @@ class I18nStart {
       );
 }
 
-class I18nFinish {}
+class I18nFinish {
+  static String get finishTime => Intl.message(
+        'Финишное время',
+        name: 'I18nFinish_finishTime',
+      );
+
+  static String get finishTimestamp => Intl.message(
+        'Время записи на устройстве',
+        name: 'I18nFinish_finishTimestamp',
+      );
+
+  static String get manualTime => Intl.message(
+        'Ручная отсечка',
+        name: 'I18nFinish_manualTime',
+      );
+
+  static String get automaticTime => Intl.message(
+        'Автоматическая отсечка',
+        name: 'I18nFinish_automaticTime',
+      );
+
+  static String get hiddenCutoff => Intl.message(
+        'Скрытая',
+        name: 'I18nFinish_hiddenCutoff',
+      );
+}
 
 class I18nLog {
   static String get bluetoothInformation => Intl.message(

@@ -37,7 +37,7 @@ class NtpTile extends StatelessWidget {
                   success: (state) {
                     return Text(
                       Localization.current
-                          .I18nNtp_offsetInMilliseconds(state.offset ~/ 1000),
+                          .I18nNtp_offsetInMilliseconds(state.offset),
                     );
                   },
                   failure: (state) {

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:entime/src/feature/database/widget/popup/finish_details.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ import '../database.dart';
 import '../logic/filter_finish_list.dart';
 import 'popup/change_finish_time_to_number_popup.dart';
 
-enum FinishPopupMenu { clearNumber, hideAll }
+enum FinishPopupMenu { details, clearNumber, hideAll }
 
 class FinishListPage extends StatefulWidget {
   const FinishListPage({super.key});
@@ -209,7 +210,7 @@ class _FinishListPage extends State<FinishListPage> {
                         await addFinishNumberPopup(context, item);
                       },
                       onLongPress: () async {
-                        await _clearPopup(item.number);
+                        await _finishTilePopup(item);
                       },
                       onAccept: (details) {
                         final databaseBloc = context.read<DatabaseBloc>();
@@ -282,13 +283,13 @@ class _FinishListPage extends State<FinishListPage> {
         },
       );
 
-  Future<void> _clearPopup(int? number) async {
+  Future<void> _finishTilePopup(Finish item) async {
     final databaseBloc = context.read<DatabaseBloc>();
     final stage = databaseBloc.state.stage;
     final overlay = Overlay.of(context).context.findRenderObject();
     if (overlay != null) {
       final result = await showMenu<FinishPopupMenu>(
-        items: _getPopupMenu(context, number),
+        items: _getPopupMenu(context, item),
         context: context,
         position: RelativeRect.fromRect(
           _tapPosition & const Size(60, 60), // smaller rect, the touch area
@@ -299,6 +300,7 @@ class _FinishListPage extends State<FinishListPage> {
       if (result != null && stage != null) {
         switch (result) {
           case FinishPopupMenu.clearNumber:
+            final number = item.number;
             if (number != null) {
               databaseBloc.add(
                 DatabaseEvent.clearNumberAtFinish(
@@ -310,6 +312,11 @@ class _FinishListPage extends State<FinishListPage> {
           case FinishPopupMenu.hideAll:
             final stageId = stage.id;
             databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
+          case FinishPopupMenu.details:
+            final currentContext = context;
+            if (currentContext.mounted) {
+              await finishDetails(currentContext, item);
+            }
         }
       }
     }
@@ -317,30 +324,28 @@ class _FinishListPage extends State<FinishListPage> {
 
   List<PopupMenuEntry<FinishPopupMenu>> _getPopupMenu(
     BuildContext context,
-    int? number,
+    Finish? item,
   ) {
-    final list = <PopupMenuEntry<FinishPopupMenu>>[];
-    if (number != null) {
-      list
-        ..add(
-          PopupMenuItem(
-            value: FinishPopupMenu.clearNumber,
-            child: Text(Localization.current.I18nProtocol_clearNumber),
-          ),
-        )
-        ..add(
-          const PopupMenuDivider(
-            height: 5,
-          ),
-        );
-    }
-    list.add(
+    final number = item?.number;
+    return <PopupMenuEntry<FinishPopupMenu>>[
+      PopupMenuItem(
+        value: FinishPopupMenu.details,
+        child: Text(Localization.current.I18nCore_details),
+      ),
+      if (number != null)
+        PopupMenuItem(
+          value: FinishPopupMenu.clearNumber,
+          child: Text(Localization.current.I18nProtocol_clearNumber),
+        ),
+      if (number != null)
+        const PopupMenuDivider(
+          height: 5,
+        ),
       PopupMenuItem(
         value: FinishPopupMenu.hideAll,
         child: Text(Localization.current.I18nProtocol_hideAll),
       ),
-    );
-    return list;
+    ];
   }
 
   Future<void> _numberOnTracePopup(int number) async {
@@ -521,8 +526,7 @@ class _FinishListPage extends State<FinishListPage> {
     final timestamp = DateTime.now();
     final offset = context.read<NtpBloc>().state.offset;
     //добавляем ntp offset к ручному времени
-    final manual =
-        timestamp.add(Duration(microseconds: offset)); // ToDo: microseconds?
+    final manual = timestamp.add(Duration(milliseconds: offset));
     final finishTime = DateFormat(longTimeFormat).format(manual);
     final databaseBloc = context.read<DatabaseBloc>();
     final stageId = databaseBloc.state.stage?.id;

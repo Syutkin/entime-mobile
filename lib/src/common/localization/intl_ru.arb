@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-15T15:19:33.223293",
+  "@@last_modified": "2024-12-17T15:01:21.301093",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -20,6 +20,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nCore_details": "Подробнее",
+  "@I18nCore_details": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nCore_correction": "Поправка",
   "@I18nCore_correction": {
     "type": "text",
@@ -37,6 +42,16 @@
   },
   "I18nCore_dsq": "DSQ",
   "@I18nCore_dsq": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nCore_yes": "Да",
+  "@I18nCore_yes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nCore_no": "Нет",
+  "@I18nCore_no": {
     "type": "text",
     "placeholders": {}
   },
@@ -490,6 +505,16 @@
       "stageName": {}
     }
   },
+  "I18nProtocol_startTimeCutoff": "Стартовая отсечка",
+  "@I18nProtocol_startTimeCutoff": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nProtocol_finishTimeCutoff": "Финишная отсечка",
+  "@I18nProtocol_finishTimeCutoff": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nBluetooth_unknownDevice": "Неизвестное устройство",
   "@I18nBluetooth_unknownDevice": {
     "type": "text",
@@ -847,6 +872,31 @@
   },
   "I18nStart_startTimeAtSmartphone": "Время старта на смартфоне",
   "@I18nStart_startTimeAtSmartphone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_finishTime": "Финишное время",
+  "@I18nFinish_finishTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_finishTimestamp": "Время записи на устройстве",
+  "@I18nFinish_finishTimestamp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_manualTime": "Ручная отсечка",
+  "@I18nFinish_manualTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_automaticTime": "Автоматическая отсечка",
+  "@I18nFinish_automaticTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_hiddenCutoff": "Скрытая",
+  "@I18nFinish_hiddenCutoff": {
     "type": "text",
     "placeholders": {}
   },

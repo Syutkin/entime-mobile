@@ -38,5 +38,6 @@ class NtpBloc extends Bloc<NtpEvent, NtpState> {
   }
   final INtpProvider _ntpProvider;
 
+  /// NTP delay in milliseconds
   int _offset = 0;
 }

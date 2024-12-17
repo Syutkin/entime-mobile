@@ -91,6 +91,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Подробнее`
+  String get I18nCore_details {
+    return Intl.message(
+      'Подробнее',
+      name: 'I18nCore_details',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Поправка`
   String get I18nCore_correction {
     return Intl.message(
@@ -126,6 +136,26 @@ class GeneratedLocalization {
     return Intl.message(
       'DSQ',
       name: 'I18nCore_dsq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Да`
+  String get I18nCore_yes {
+    return Intl.message(
+      'Да',
+      name: 'I18nCore_yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Нет`
+  String get I18nCore_no {
+    return Intl.message(
+      'Нет',
+      name: 'I18nCore_no',
       desc: '',
       args: [],
     );
@@ -991,6 +1021,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Стартовая отсечка`
+  String get I18nProtocol_startTimeCutoff {
+    return Intl.message(
+      'Стартовая отсечка',
+      name: 'I18nProtocol_startTimeCutoff',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Финишная отсечка`
+  String get I18nProtocol_finishTimeCutoff {
+    return Intl.message(
+      'Финишная отсечка',
+      name: 'I18nProtocol_finishTimeCutoff',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Неизвестное устройство`
   String get I18nBluetooth_unknownDevice {
     return Intl.message(
@@ -1640,6 +1690,56 @@ class GeneratedLocalization {
     return Intl.message(
       'Время старта на смартфоне',
       name: 'I18nStart_startTimeAtSmartphone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Финишное время`
+  String get I18nFinish_finishTime {
+    return Intl.message(
+      'Финишное время',
+      name: 'I18nFinish_finishTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Время записи на устройстве`
+  String get I18nFinish_finishTimestamp {
+    return Intl.message(
+      'Время записи на устройстве',
+      name: 'I18nFinish_finishTimestamp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ручная отсечка`
+  String get I18nFinish_manualTime {
+    return Intl.message(
+      'Ручная отсечка',
+      name: 'I18nFinish_manualTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Автоматическая отсечка`
+  String get I18nFinish_automaticTime {
+    return Intl.message(
+      'Автоматическая отсечка',
+      name: 'I18nFinish_automaticTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Скрытая`
+  String get I18nFinish_hiddenCutoff {
+    return Intl.message(
+      'Скрытая',
+      name: 'I18nFinish_hiddenCutoff',
       desc: '',
       args: [],
     );

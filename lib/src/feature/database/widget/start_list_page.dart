@@ -222,7 +222,7 @@ class _StartListPage extends State<StartListPage> {
     final stageId = bloc.state.stage?.id;
     if (stageId != null) {
       //добавляем ntp offset к ручному времени старта
-      final manualStartTime = now.add(Duration(microseconds: offset));
+      final manualStartTime = now.add(Duration(milliseconds: offset));
       bloc.add(
         DatabaseEvent.updateManualStartTime(
           stageId: stageId,

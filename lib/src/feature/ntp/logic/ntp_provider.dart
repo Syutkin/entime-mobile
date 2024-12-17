@@ -19,6 +19,7 @@ abstract interface class INtpProvider {
     Duration? cacheDuration,
   });
 
+  /// Return NTP delay in milliseconds
   Future<int> getNtpOffset({
     String? lookUpAddress,
     int? port,
@@ -40,13 +41,14 @@ class NtpProvider implements INtpProvider {
     int? port,
     Duration? timeout,
     Duration? cacheDuration,
-  }) {
-    return FlutterNTP.getNtpOffset(
+  }) async {
+    final offset = await FlutterNTP.getNtpOffset(
       lookUpAddress: lookUpAddress,
       port: port,
       timeout: timeout ?? const Duration(seconds: 5),
       cacheDuration: cacheDuration ?? const Duration(hours: 1),
     );
+    return offset ~/ 1000;
   }
 
   @override

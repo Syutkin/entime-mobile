@@ -171,9 +171,3 @@ Future<void> _upsertStagePopup(
     ),
   );
 }
-
-// List<DropdownMenuItem<int?>>? _builder(BuildContext context) {
-//   final bloc = context.read<DatabaseBloc>();
-//   final trails = bloc.state.trails;
-//   return trails.map<DropdownMenuItem<int>>((value) { }).toList();
-// }
