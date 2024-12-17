@@ -4,6 +4,7 @@ import 'package:entime/src/feature/database/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol_finders/patrol_finders.dart';
 
 class MockQueryRow extends Mock implements QueryRow {}
 
@@ -41,7 +42,7 @@ void main() {
       countdown = '03:56:27';
     });
 
-    testWidgets('Show all basic info', (WidgetTester tester) async {
+    patrolWidgetTest('Show all basic info', (PatrolTester $) async {
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -59,23 +60,22 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         testWithLocale(
           StartItemTile(
             item: item,
           ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      expect(find.text(number.toString()), findsOneWidget);
-      expect(find.text(startTime), findsOneWidget);
-      expect(find.text(automaticCorrection.toString()), findsOneWidget);
-      expect(find.text(manualCorrection.toString()), findsOneWidget);
+      expect($(number.toString()), findsOneWidget);
+      expect($(startTime), findsOneWidget);
+      expect($(automaticCorrection.toString()), findsOneWidget);
+      expect($(manualCorrection.toString()), findsOneWidget);
     });
 
-    testWidgets('If countdown presents, show it instead of startTime',
-        (WidgetTester tester) async {
+    patrolWidgetTest('If countdown presents, show it instead of startTime',
+        (PatrolTester $) async {
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -93,7 +93,7 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         testWithLocale(
           StartItemTile(
             item: item,
@@ -101,18 +101,17 @@ void main() {
           ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      expect(find.text(number.toString()), findsOneWidget);
-      expect(find.text(startTime), findsNothing);
-      expect(find.text(automaticCorrection.toString()), findsOneWidget);
-      expect(find.text(manualCorrection.toString()), findsOneWidget);
-      expect(find.text(countdown), findsOneWidget);
+      expect($(number.toString()), findsOneWidget);
+      expect($(startTime), findsNothing);
+      expect($(automaticCorrection.toString()), findsOneWidget);
+      expect($(manualCorrection.toString()), findsOneWidget);
+      expect($(countdown), findsOneWidget);
     });
 
-    testWidgets(
+    patrolWidgetTest(
         'If participant is dns, show status name instead of manualCorrection',
-        (WidgetTester tester) async {
+        (PatrolTester $) async {
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -130,25 +129,24 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.dns.index,
       );
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         testWithLocale(
           StartItemTile(
             item: item,
           ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      expect(find.text(number.toString()), findsOneWidget);
-      expect(find.text(startTime), findsOneWidget);
-      expect(find.text(automaticCorrection.toString()), findsOneWidget);
-      expect(find.text(manualCorrection.toString()), findsNothing);
-      expect(find.text(Localization.current.I18nCore_dns), findsOneWidget);
+      expect($(number.toString()), findsOneWidget);
+      expect($(startTime), findsOneWidget);
+      expect($(automaticCorrection.toString()), findsOneWidget);
+      expect($(manualCorrection.toString()), findsNothing);
+      expect($(Localization.current.I18nCore_dns), findsOneWidget);
     });
 
-    testWidgets(
+    patrolWidgetTest(
         'If participant is dnf, show status name instead of manualCorrection',
-        (WidgetTester tester) async {
+        (PatrolTester $) async {
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -166,25 +164,24 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.dnf.index,
       );
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         testWithLocale(
           StartItemTile(
             item: item,
           ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      expect(find.text(number.toString()), findsOneWidget);
-      expect(find.text(startTime), findsOneWidget);
-      expect(find.text(automaticCorrection.toString()), findsOneWidget);
-      expect(find.text(manualCorrection.toString()), findsNothing);
-      expect(find.text(Localization.current.I18nCore_dnf), findsOneWidget);
+      expect($(number.toString()), findsOneWidget);
+      expect($(startTime), findsOneWidget);
+      expect($(automaticCorrection.toString()), findsOneWidget);
+      expect($(manualCorrection.toString()), findsNothing);
+      expect($(Localization.current.I18nCore_dnf), findsOneWidget);
     });
 
-    testWidgets(
+    patrolWidgetTest(
         'If participant is dsq, show status name instead of manualCorrection',
-        (WidgetTester tester) async {
+        (PatrolTester $) async {
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -202,23 +199,22 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.dns.index,
       );
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         testWithLocale(
           StartItemTile(
             item: item,
           ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      expect(find.text(number.toString()), findsOneWidget);
-      expect(find.text(startTime), findsOneWidget);
-      expect(find.text(automaticCorrection.toString()), findsOneWidget);
-      expect(find.text(manualCorrection.toString()), findsNothing);
-      expect(find.text(Localization.current.I18nCore_dsq), findsOneWidget);
+      expect($(number.toString()), findsOneWidget);
+      expect($(startTime), findsOneWidget);
+      expect($(automaticCorrection.toString()), findsOneWidget);
+      expect($(manualCorrection.toString()), findsNothing);
+      expect($(Localization.current.I18nCore_dsq), findsOneWidget);
     });
 
-    testWidgets('Change color if highlighted', (WidgetTester tester) async {
+    patrolWidgetTest('Change color if highlighted', (PatrolTester $) async {
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -236,7 +232,7 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         testWithLocale(
           StartItemTile(
             item: item,
@@ -244,16 +240,14 @@ void main() {
           ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      final context = tester.element(find.byType(StartItemTile));
-      final color = (tester.firstWidget(find.byType(Card)) as Card).color;
+      final context = $.tester.element(find.byType(StartItemTile));
+      final color = ($.tester.firstWidget(find.byType(Card)) as Card).color;
 
       expect(color, Theme.of(context).colorScheme.primaryContainer);
-      expect(find.text(startTime), findsOneWidget);
-      expect(find.text(automaticCorrection.toString()), findsOneWidget);
-      expect(find.text(manualCorrection.toString()), findsOneWidget);
-
+      expect($(startTime), findsOneWidget);
+      expect($(automaticCorrection.toString()), findsOneWidget);
+      expect($(manualCorrection.toString()), findsOneWidget);
     });
   });
 }

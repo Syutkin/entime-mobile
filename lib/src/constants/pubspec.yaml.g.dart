@@ -125,12 +125,12 @@ sealed class Pubspec {
   static final DateTime timestamp = DateTime.utc(
     2024,
     12,
-    14,
-    2,
-    59,
-    43,
-    450,
-    832,
+    17,
+    6,
+    39,
+    57,
+    97,
+    843,
   );
 
   /// Name
@@ -416,7 +416,7 @@ sealed class Pubspec {
     'drift': r'^2.22.1',
     'dropdown_search': r'^6.0.1',
     'equatable': r'^2.0.7',
-    'file_picker': r'8.1.4',
+    'file_picker': r'^8.1.6',
     'flutter': <String, Object>{
       'sdk': r'flutter',
     },
@@ -442,9 +442,9 @@ sealed class Pubspec {
     'permission_handler': r'^11.3.1',
     'pub_semver': r'^2.1.5',
     'rxdart': r'^0.28.0',
-    'sentry_flutter': r'^8.11.0',
+    'sentry_flutter': r'^8.11.1',
     'settings_ui': r'^2.0.2',
-    'share_plus': r'^10.1.2',
+    'share_plus': r'^10.1.3',
     'shared_preferences': r'^2.3.3',
     'soundpool': r'^2.4.1',
     'sqlite3': r'^2.5.0',
@@ -469,6 +469,7 @@ sealed class Pubspec {
     'json_serializable': r'^6.9.0',
     'mocktail': r'^1.0.4',
     'patrol': r'^3.13.1',
+    'patrol_finders': r'^2.5.1',
     'pubspec_generator': r'^4.0.0',
     'test': r'^1.25.7',
     'very_good_analysis': r'^6.0.0',

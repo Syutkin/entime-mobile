@@ -499,7 +499,7 @@ class _FinishListPage extends State<FinishListPage> {
     final timestamp = DateTime.now();
     final offset = context.read<NtpBloc>().state.offset;
     //добавляем ntp offset к ручному времени
-    final manual = timestamp.add(Duration(microseconds: offset));
+    final manual = timestamp.add(Duration(microseconds: offset)); // ToDo: microseconds?
     final finishTime = DateFormat(longTimeFormat).format(manual);
     final databaseBloc = context.read<DatabaseBloc>();
     final stageId = databaseBloc.state.stage?.id;

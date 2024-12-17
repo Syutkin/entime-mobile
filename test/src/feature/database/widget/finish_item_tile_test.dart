@@ -10,6 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol_finders/patrol_finders.dart';
 
 class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
     implements SettingsBloc {}
@@ -48,7 +49,7 @@ void main() {
       settings = const AppSettings.defaults();
     });
 
-    testWidgets('Show all basic info', (WidgetTester tester) async {
+    patrolWidgetTest('Show all basic info', (PatrolTester $) async {
       when(() => settingsBloc.state)
           .thenReturn(SettingsState(settings: settings));
 
@@ -63,18 +64,17 @@ void main() {
         number: number,
       );
 
-      await tester.pumpWidget(testWidget(item));
-      await tester.pumpAndSettle();
+      await $.pumpWidgetAndSettle(testWidget(item));
 
-      expect(find.text(number.toString()), findsOneWidget);
-      expect(find.text(finishTime), findsOneWidget);
-      expect(find.byType(Icon), findsOneWidget);
-      final icon = (tester.firstWidget(find.byType(Icon)) as Icon).icon;
+      expect($(number.toString()), findsOneWidget);
+      expect($(finishTime), findsOneWidget);
+      expect($(Icon), findsOneWidget);
+      final icon = ($.tester.firstWidget($(Icon)) as Icon).icon;
       expect(icon, MdiIcons.cpu64Bit);
     });
 
-    testWidgets('Correct hand icon for manual time',
-        (WidgetTester tester) async {
+    patrolWidgetTest('Correct hand icon for manual time',
+        (PatrolTester $) async {
       when(() => settingsBloc.state)
           .thenReturn(SettingsState(settings: settings));
 
@@ -89,17 +89,16 @@ void main() {
         number: number,
       );
 
-      await tester.pumpWidget(testWidget(item));
-      await tester.pumpAndSettle();
+      await $.pumpWidgetAndSettle(testWidget(item));
 
       expect(
-        (tester.firstWidget(find.byType(Icon)) as Icon).icon,
+        ($.tester.firstWidget($(Icon)) as Icon).icon,
         MdiIcons.handBackLeft,
       );
     });
 
-    testWidgets('Show difference if enabled at settings',
-        (WidgetTester tester) async {
+    patrolWidgetTest('Show difference if enabled at settings',
+        (PatrolTester $) async {
       settings = settings.copyWith(showFinishDifference: true);
       when(() => settingsBloc.state)
           .thenReturn(SettingsState(settings: settings));
@@ -115,15 +114,14 @@ void main() {
         number: number,
       );
 
-      await tester.pumpWidget(testWidget(item));
-      await tester.pumpAndSettle();
+      await $.pumpWidgetAndSettle(testWidget(item));
 
-      expect(find.text(difference), findsOneWidget);
+      expect($(difference), findsOneWidget);
     });
 
-    testWidgets(
+    patrolWidgetTest(
         'Change color if difference more than threshold and enabled at settings',
-        (WidgetTester tester) async {
+        (PatrolTester $) async {
       settings = settings.copyWith(
         showFinishDifference: false,
         showColorFinishDifference: true,
@@ -143,24 +141,22 @@ void main() {
         number: number,
       );
 
-      await tester.pumpWidget(testWidget(item));
-      await tester.pumpAndSettle();
+      await $.pumpWidgetAndSettle(testWidget(item));
 
-      final context = tester.element(find.byType(FinishItemTile));
-      final cardColor = (tester.firstWidget(find.byType(Card)) as Card).color;
-      final textColor =
-          (tester.firstWidget(find.byType(Text)) as Text).style?.color;
-      final iconColor = (tester.firstWidget(find.byType(Icon)) as Icon).color;
+      final context = $.tester.element($(FinishItemTile));
+      final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
+      final textColor = ($.tester.firstWidget($(Text)) as Text).style?.color;
+      final iconColor = ($.tester.firstWidget($(Icon)) as Icon).color;
 
       expect(cardColor, Theme.of(context).colorScheme.error);
       expect(textColor, Theme.of(context).colorScheme.onError);
       expect(iconColor, Theme.of(context).colorScheme.onError);
-      expect(find.text(difference), findsNothing);
-      expect(find.byType(Flexible), findsNWidgets(3));
+      expect($(difference), findsNothing);
+      expect($(Flexible), findsNWidgets(3));
     });
 
-    testWidgets('Change color and show difference if enabled at settings',
-        (WidgetTester tester) async {
+    patrolWidgetTest('Change color and show difference if enabled at settings',
+        (PatrolTester $) async {
       settings = settings.copyWith(
         showFinishDifference: true,
         showColorFinishDifference: true,
@@ -180,20 +176,18 @@ void main() {
         number: number,
       );
 
-      await tester.pumpWidget(testWidget(item));
-      await tester.pumpAndSettle();
+      await $.pumpWidgetAndSettle(testWidget(item));
 
-      final context = tester.element(find.byType(FinishItemTile));
-      final cardColor = (tester.firstWidget(find.byType(Card)) as Card).color;
-      final textColor =
-          (tester.firstWidget(find.byType(Text)) as Text).style?.color;
-      final iconColor = (tester.firstWidget(find.byType(Icon)) as Icon).color;
+      final context = $.tester.element($(FinishItemTile));
+      final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
+      final textColor = ($.tester.firstWidget($(Text)) as Text).style?.color;
+      final iconColor = ($.tester.firstWidget($(Icon)) as Icon).color;
 
       expect(cardColor, Theme.of(context).colorScheme.error);
       expect(textColor, Theme.of(context).colorScheme.onError);
       expect(iconColor, Theme.of(context).colorScheme.onError);
-      expect(find.text(difference), findsOneWidget);
-      expect(find.byType(Flexible), findsNWidgets(4));
+      expect($(difference), findsOneWidget);
+      expect($(Flexible), findsNWidgets(4));
     });
   });
 }

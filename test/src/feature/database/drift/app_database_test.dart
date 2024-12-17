@@ -7,7 +7,7 @@ import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'raw_queries.dart';
+part 'helpers/raw_queries.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
