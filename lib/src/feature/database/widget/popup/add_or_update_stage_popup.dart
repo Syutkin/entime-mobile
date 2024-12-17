@@ -112,7 +112,8 @@ Future<void> _upsertStagePopup(
                         searchDelay: Duration.zero,
                         searchFieldProps: TextFieldProps(
                           decoration: InputDecoration(
-                              hintText: Localization.current.I18nDatabase_searchTrail,
+                            hintText:
+                                Localization.current.I18nDatabase_searchTrail,
                           ),
                         ),
                         // fit: FlexFit.loose,

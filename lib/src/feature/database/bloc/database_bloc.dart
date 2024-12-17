@@ -324,7 +324,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             forceAdd: event.forceAdd,
           );
           if (startingParticipants != null && !event.forceAdd) {
-            final notification = Notification.updateNumber(
+            final notification = Notification.updateStartNumber(
               existedStartingParticipants: startingParticipants,
               number: event.number,
               startTime: event.startTime,
@@ -436,13 +436,24 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _db.setDNFForStage(stage: event.stage, number: event.number);
         },
         addNumberToFinish: (event) async {
-          await _db.addNumberToFinish(
+          final success = await _db.addNumberToFinish(
             stage: event.stage,
             finishId: event.finishId,
             number: event.number,
             finishTime: event.finishTime,
           );
-          _emitState();
+          if (success) {
+            _emitState();
+          } else {
+            _emitState(
+              notification: Notification.changeFinishTimeToNumber(
+                stage: event.stage,
+                finishId: event.finishId,
+                number: event.number,
+                finishTime: event.finishTime,
+              ),
+            );
+          }
         },
         getNumbersOnTraceNow: (event) async {
           _numbersOnTrace = await _db

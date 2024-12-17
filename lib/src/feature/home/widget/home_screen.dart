@@ -338,8 +338,7 @@ class _FilterButton extends StatelessWidget {
                 case FilterStart.showDNS:
                   settingsBloc.add(
                     SettingsEvent.update(
-                      settings:
-                      settings.copyWith(showDNS: !settings.showDNS),
+                      settings: settings.copyWith(showDNS: !settings.showDNS),
                     ),
                   );
                 case FilterStart.showDNF:
@@ -353,8 +352,7 @@ class _FilterButton extends StatelessWidget {
                 case FilterStart.showDSQ:
                   settingsBloc.add(
                     SettingsEvent.update(
-                      settings:
-                      settings.copyWith(showDSQ: !settings.showDSQ),
+                      settings: settings.copyWith(showDSQ: !settings.showDSQ),
                     ),
                   );
                 case FilterStart.setDefaults:

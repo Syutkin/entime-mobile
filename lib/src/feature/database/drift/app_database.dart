@@ -915,6 +915,7 @@ class AppDatabase extends _$AppDatabase {
     return rowCount;
   }
 
+  // Возвращает false если номеру уже присвоена финишная отсечка
   Future<bool> addNumberToFinish({
     required Stage stage,
     required int finishId,

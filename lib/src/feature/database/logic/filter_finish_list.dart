@@ -1,11 +1,11 @@
 import '../database.dart';
 
 List<Finish> filterFinishList(
-    List<Finish> list, {
-      required bool showHidden,
-      required bool showManual,
-      required bool showNumbers,
-    }) {
+  List<Finish> list, {
+  required bool showHidden,
+  required bool showManual,
+  required bool showNumbers,
+}) {
   // Do not apply filters to list
   if (showHidden && showManual && showNumbers) {
     return list;

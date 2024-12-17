@@ -255,7 +255,7 @@ class _StartListPage extends State<StartListPage> {
           // Добавление нового стартового времени
           // Если стартовое время уже присвоено другому номеру
           state.notification?.mapOrNull(
-            updateNumber: (notification) async {
+            updateStartNumber: (notification) async {
               var text = '';
               for (final element in notification.existedStartingParticipants) {
                 if (element.automaticStartTime == null &&

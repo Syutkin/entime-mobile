@@ -24745,24 +24745,20 @@ mixin _$DatabaseState {
   List<Finish> get finishes => throw _privateConstructorUsedError;
   List<StartingParticipant> get numbersOnTrace =>
       throw _privateConstructorUsedError;
+
+  /// Выбранная гонка
   Race? get race => throw _privateConstructorUsedError;
+
+  ///Выбранный этап
   Stage? get stage => throw _privateConstructorUsedError;
-  Notification? get notification =>
-      throw _privateConstructorUsedError; // Стартовое время и номер, которые хотим установить
-// StartTime? startTime,
-// Автоматический старт из стартового модуля
-// Служит для проверки, установлено ли уже стартовое время или нет
-// AutomaticStart? automaticStart,
-// Предыдущее стартовое время номера, которому предлагается
-// поставить новое. Запоминаем для передачи его в UI popup.
-// Используется два раза, и при установке автоматического стартового времени
-// и при ручном вводе нового времени старта
-// List<StartingParticipant>? previousStart,
-// Изменить время финиша для номера
-  bool? get updateFinishNumber =>
-      throw _privateConstructorUsedError; // Автоматически подставленный в финишное время номер
-  int? get autoFinishNumber =>
-      throw _privateConstructorUsedError; // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+
+  /// Информация для различных всплывающих уведомлений
+  Notification? get notification => throw _privateConstructorUsedError;
+
+  /// Автоматически подставленный в финишное время номер
+  int? get autoFinishNumber => throw _privateConstructorUsedError;
+
+  /// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
   int? get awaitingNumber => throw _privateConstructorUsedError;
 
   /// Create a copy of DatabaseState
@@ -24790,7 +24786,6 @@ abstract class $DatabaseStateCopyWith<$Res> {
       Race? race,
       Stage? stage,
       Notification? notification,
-      bool? updateFinishNumber,
       int? autoFinishNumber,
       int? awaitingNumber});
 
@@ -24823,7 +24818,6 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
     Object? race = freezed,
     Object? stage = freezed,
     Object? notification = freezed,
-    Object? updateFinishNumber = freezed,
     Object? autoFinishNumber = freezed,
     Object? awaitingNumber = freezed,
   }) {
@@ -24872,10 +24866,6 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as Notification?,
-      updateFinishNumber: freezed == updateFinishNumber
-          ? _value.updateFinishNumber
-          : updateFinishNumber // ignore: cast_nullable_to_non_nullable
-              as bool?,
       autoFinishNumber: freezed == autoFinishNumber
           ? _value.autoFinishNumber
           : autoFinishNumber // ignore: cast_nullable_to_non_nullable
@@ -24922,7 +24912,6 @@ abstract class _$$DatabaseStateImplCopyWith<$Res>
       Race? race,
       Stage? stage,
       Notification? notification,
-      bool? updateFinishNumber,
       int? autoFinishNumber,
       int? awaitingNumber});
 
@@ -24954,7 +24943,6 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
     Object? race = freezed,
     Object? stage = freezed,
     Object? notification = freezed,
-    Object? updateFinishNumber = freezed,
     Object? autoFinishNumber = freezed,
     Object? awaitingNumber = freezed,
   }) {
@@ -25003,10 +24991,6 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as Notification?,
-      updateFinishNumber: freezed == updateFinishNumber
-          ? _value.updateFinishNumber
-          : updateFinishNumber // ignore: cast_nullable_to_non_nullable
-              as bool?,
       autoFinishNumber: freezed == autoFinishNumber
           ? _value.autoFinishNumber
           : autoFinishNumber // ignore: cast_nullable_to_non_nullable
@@ -25034,7 +25018,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
       this.race,
       this.stage,
       this.notification,
-      this.updateFinishNumber,
       this.autoFinishNumber,
       this.awaitingNumber})
       : _races = races,
@@ -25110,35 +25093,29 @@ class _$DatabaseStateImpl implements _DatabaseState {
     return EqualUnmodifiableListView(_numbersOnTrace);
   }
 
+  /// Выбранная гонка
   @override
   final Race? race;
+
+  ///Выбранный этап
   @override
   final Stage? stage;
+
+  /// Информация для различных всплывающих уведомлений
   @override
   final Notification? notification;
-// Стартовое время и номер, которые хотим установить
-// StartTime? startTime,
-// Автоматический старт из стартового модуля
-// Служит для проверки, установлено ли уже стартовое время или нет
-// AutomaticStart? automaticStart,
-// Предыдущее стартовое время номера, которому предлагается
-// поставить новое. Запоминаем для передачи его в UI popup.
-// Используется два раза, и при установке автоматического стартового времени
-// и при ручном вводе нового времени старта
-// List<StartingParticipant>? previousStart,
-// Изменить время финиша для номера
-  @override
-  final bool? updateFinishNumber;
-// Автоматически подставленный в финишное время номер
+
+  /// Автоматически подставленный в финишное время номер
   @override
   final int? autoFinishNumber;
-// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+
+  /// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
   @override
   final int? awaitingNumber;
 
   @override
   String toString() {
-    return 'DatabaseState(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, updateFinishNumber: $updateFinishNumber, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
+    return 'DatabaseState(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
   }
 
   @override
@@ -25160,8 +25137,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
             const DeepCollectionEquality().equals(other.stage, stage) &&
             (identical(other.notification, notification) ||
                 other.notification == notification) &&
-            (identical(other.updateFinishNumber, updateFinishNumber) ||
-                other.updateFinishNumber == updateFinishNumber) &&
             (identical(other.autoFinishNumber, autoFinishNumber) ||
                 other.autoFinishNumber == autoFinishNumber) &&
             (identical(other.awaitingNumber, awaitingNumber) ||
@@ -25182,7 +25157,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
       const DeepCollectionEquality().hash(race),
       const DeepCollectionEquality().hash(stage),
       notification,
-      updateFinishNumber,
       autoFinishNumber,
       awaitingNumber);
 
@@ -25208,7 +25182,6 @@ abstract class _DatabaseState implements DatabaseState {
       final Race? race,
       final Stage? stage,
       final Notification? notification,
-      final bool? updateFinishNumber,
       final int? autoFinishNumber,
       final int? awaitingNumber}) = _$DatabaseStateImpl;
 
@@ -25228,29 +25201,24 @@ abstract class _DatabaseState implements DatabaseState {
   List<Finish> get finishes;
   @override
   List<StartingParticipant> get numbersOnTrace;
+
+  /// Выбранная гонка
   @override
   Race? get race;
+
+  ///Выбранный этап
   @override
   Stage? get stage;
+
+  /// Информация для различных всплывающих уведомлений
   @override
-  Notification?
-      get notification; // Стартовое время и номер, которые хотим установить
-// StartTime? startTime,
-// Автоматический старт из стартового модуля
-// Служит для проверки, установлено ли уже стартовое время или нет
-// AutomaticStart? automaticStart,
-// Предыдущее стартовое время номера, которому предлагается
-// поставить новое. Запоминаем для передачи его в UI popup.
-// Используется два раза, и при установке автоматического стартового времени
-// и при ручном вводе нового времени старта
-// List<StartingParticipant>? previousStart,
-// Изменить время финиша для номера
+  Notification? get notification;
+
+  /// Автоматически подставленный в финишное время номер
   @override
-  bool?
-      get updateFinishNumber; // Автоматически подставленный в финишное время номер
-  @override
-  int?
-      get autoFinishNumber; // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+  int? get autoFinishNumber;
+
+  /// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
   @override
   int? get awaitingNumber;
 

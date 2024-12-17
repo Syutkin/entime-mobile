@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -19,6 +20,7 @@ import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../database.dart';
 import '../logic/filter_finish_list.dart';
+import 'popup/change_finish_time_to_number_popup.dart';
 
 enum FinishPopupMenu { clearNumber, hideAll }
 
@@ -60,11 +62,12 @@ class _FinishListPage extends State<FinishListPage> {
   Widget build(BuildContext context) =>
       BlocListener<DatabaseBloc, DatabaseState>(
         listener: (context, state) {
+          final databaseBloc = context.read<DatabaseBloc>();
+
           // toast с автоматически проставленным номером
           final autoFinishNumber = state.autoFinishNumber;
           logger.d('autoFinishNumber: $autoFinishNumber');
           if (autoFinishNumber != null) {
-            final databaseBloc = context.read<DatabaseBloc>();
             BotToast.showAttachedWidget(
               verticalOffset: 36.0,
               attachedBuilder: (cancel) => Card(
@@ -95,10 +98,35 @@ class _FinishListPage extends State<FinishListPage> {
               ),
               // enableSafeArea: false,
               animationDuration: const Duration(milliseconds: 300),
-              duration: const Duration(seconds: 3),
+              duration: const Duration(seconds: 5),
               targetContext: context,
             );
           }
+
+          // Вызывается, если номеру уже присвоена финишная отсечка
+          state.notification?.mapOrNull(
+            changeFinishTimeToNumber: (notification) async {
+              final update =
+                  await updateFinishTimePopup(context, notification.number);
+              if (update != null && update) {
+                databaseBloc
+                  ..add(
+                    DatabaseEvent.clearNumberAtFinish(
+                      stage: notification.stage,
+                      number: notification.number,
+                    ),
+                  )
+                  ..add(
+                    DatabaseEvent.addNumberToFinish(
+                      finishId: notification.finishId,
+                      number: notification.number,
+                      finishTime: notification.finishTime,
+                      stage: notification.stage,
+                    ),
+                  );
+              }
+            },
+          );
         },
         child: Scaffold(
           body: BlocBuilder<DatabaseBloc, DatabaseState>(
@@ -272,9 +300,6 @@ class _FinishListPage extends State<FinishListPage> {
         switch (result) {
           case FinishPopupMenu.clearNumber:
             if (number != null) {
-              // if (!mounted) {
-              //   return;
-              // }
               databaseBloc.add(
                 DatabaseEvent.clearNumberAtFinish(
                   stage: stage,
@@ -283,9 +308,6 @@ class _FinishListPage extends State<FinishListPage> {
               );
             }
           case FinishPopupMenu.hideAll:
-            // if (!mounted) {
-            //   return;
-            // }
             final stageId = stage.id;
             databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
         }
@@ -499,7 +521,8 @@ class _FinishListPage extends State<FinishListPage> {
     final timestamp = DateTime.now();
     final offset = context.read<NtpBloc>().state.offset;
     //добавляем ntp offset к ручному времени
-    final manual = timestamp.add(Duration(microseconds: offset)); // ToDo: microseconds?
+    final manual =
+        timestamp.add(Duration(microseconds: offset)); // ToDo: microseconds?
     final finishTime = DateFormat(longTimeFormat).format(manual);
     final databaseBloc = context.read<DatabaseBloc>();
     final stageId = databaseBloc.state.stage?.id;

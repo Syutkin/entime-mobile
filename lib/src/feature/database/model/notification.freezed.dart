@@ -17,59 +17,70 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Notification {
   int get number => throw _privateConstructorUsedError;
-  String get startTime => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             List<StartingParticipant> existedStartingParticipants,
             int number,
             String startTime)
-        updateNumber,
+        updateStartNumber,
     required TResult Function(List<StartingParticipant> previousStarts,
             int number, String startTime, DateTime timestamp, int correction)
         updateAutomaticCorrection,
+    required TResult Function(
+            int finishId, int number, String finishTime, Stage stage)
+        changeFinishTimeToNumber,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
-        updateNumber,
+        updateStartNumber,
     TResult? Function(List<StartingParticipant> previousStarts, int number,
             String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
+    TResult? Function(int finishId, int number, String finishTime, Stage stage)?
+        changeFinishTimeToNumber,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
-        updateNumber,
+        updateStartNumber,
     TResult Function(List<StartingParticipant> previousStarts, int number,
             String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
+    TResult Function(int finishId, int number, String finishTime, Stage stage)?
+        changeFinishTimeToNumber,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_UpdateNumber value) updateNumber,
+    required TResult Function(_UpdateStartNumber value) updateStartNumber,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
+    required TResult Function(_ChangeFinishTimeToNumber value)
+        changeFinishTimeToNumber,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UpdateNumber value)? updateNumber,
+    TResult? Function(_UpdateStartNumber value)? updateStartNumber,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
+    TResult? Function(_ChangeFinishTimeToNumber value)?
+        changeFinishTimeToNumber,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_UpdateNumber value)? updateNumber,
+    TResult Function(_UpdateStartNumber value)? updateStartNumber,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
+    TResult Function(_ChangeFinishTimeToNumber value)? changeFinishTimeToNumber,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -87,7 +98,7 @@ abstract class $NotificationCopyWith<$Res> {
           Notification value, $Res Function(Notification) then) =
       _$NotificationCopyWithImpl<$Res, Notification>;
   @useResult
-  $Res call({int number, String startTime});
+  $Res call({int number});
 }
 
 /// @nodoc
@@ -106,27 +117,22 @@ class _$NotificationCopyWithImpl<$Res, $Val extends Notification>
   @override
   $Res call({
     Object? number = null,
-    Object? startTime = null,
   }) {
     return _then(_value.copyWith(
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      startTime: null == startTime
-          ? _value.startTime
-          : startTime // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$UpdateNumberImplCopyWith<$Res>
+abstract class _$$UpdateStartNumberImplCopyWith<$Res>
     implements $NotificationCopyWith<$Res> {
-  factory _$$UpdateNumberImplCopyWith(
-          _$UpdateNumberImpl value, $Res Function(_$UpdateNumberImpl) then) =
-      __$$UpdateNumberImplCopyWithImpl<$Res>;
+  factory _$$UpdateStartNumberImplCopyWith(_$UpdateStartNumberImpl value,
+          $Res Function(_$UpdateStartNumberImpl) then) =
+      __$$UpdateStartNumberImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -136,11 +142,11 @@ abstract class _$$UpdateNumberImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$UpdateNumberImplCopyWithImpl<$Res>
-    extends _$NotificationCopyWithImpl<$Res, _$UpdateNumberImpl>
-    implements _$$UpdateNumberImplCopyWith<$Res> {
-  __$$UpdateNumberImplCopyWithImpl(
-      _$UpdateNumberImpl _value, $Res Function(_$UpdateNumberImpl) _then)
+class __$$UpdateStartNumberImplCopyWithImpl<$Res>
+    extends _$NotificationCopyWithImpl<$Res, _$UpdateStartNumberImpl>
+    implements _$$UpdateStartNumberImplCopyWith<$Res> {
+  __$$UpdateStartNumberImplCopyWithImpl(_$UpdateStartNumberImpl _value,
+      $Res Function(_$UpdateStartNumberImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of Notification
@@ -152,7 +158,7 @@ class __$$UpdateNumberImplCopyWithImpl<$Res>
     Object? number = null,
     Object? startTime = null,
   }) {
-    return _then(_$UpdateNumberImpl(
+    return _then(_$UpdateStartNumberImpl(
       existedStartingParticipants: null == existedStartingParticipants
           ? _value._existedStartingParticipants
           : existedStartingParticipants // ignore: cast_nullable_to_non_nullable
@@ -171,8 +177,8 @@ class __$$UpdateNumberImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateNumberImpl implements _UpdateNumber {
-  const _$UpdateNumberImpl(
+class _$UpdateStartNumberImpl implements _UpdateStartNumber {
+  const _$UpdateStartNumberImpl(
       {required final List<StartingParticipant> existedStartingParticipants,
       required this.number,
       required this.startTime})
@@ -194,14 +200,14 @@ class _$UpdateNumberImpl implements _UpdateNumber {
 
   @override
   String toString() {
-    return 'Notification.updateNumber(existedStartingParticipants: $existedStartingParticipants, number: $number, startTime: $startTime)';
+    return 'Notification.updateStartNumber(existedStartingParticipants: $existedStartingParticipants, number: $number, startTime: $startTime)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateNumberImpl &&
+            other is _$UpdateStartNumberImpl &&
             const DeepCollectionEquality().equals(
                 other._existedStartingParticipants,
                 _existedStartingParticipants) &&
@@ -222,8 +228,9 @@ class _$UpdateNumberImpl implements _UpdateNumber {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdateNumberImplCopyWith<_$UpdateNumberImpl> get copyWith =>
-      __$$UpdateNumberImplCopyWithImpl<_$UpdateNumberImpl>(this, _$identity);
+  _$$UpdateStartNumberImplCopyWith<_$UpdateStartNumberImpl> get copyWith =>
+      __$$UpdateStartNumberImplCopyWithImpl<_$UpdateStartNumberImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -232,12 +239,15 @@ class _$UpdateNumberImpl implements _UpdateNumber {
             List<StartingParticipant> existedStartingParticipants,
             int number,
             String startTime)
-        updateNumber,
+        updateStartNumber,
     required TResult Function(List<StartingParticipant> previousStarts,
             int number, String startTime, DateTime timestamp, int correction)
         updateAutomaticCorrection,
+    required TResult Function(
+            int finishId, int number, String finishTime, Stage stage)
+        changeFinishTimeToNumber,
   }) {
-    return updateNumber(existedStartingParticipants, number, startTime);
+    return updateStartNumber(existedStartingParticipants, number, startTime);
   }
 
   @override
@@ -245,12 +255,15 @@ class _$UpdateNumberImpl implements _UpdateNumber {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
-        updateNumber,
+        updateStartNumber,
     TResult? Function(List<StartingParticipant> previousStarts, int number,
             String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
+    TResult? Function(int finishId, int number, String finishTime, Stage stage)?
+        changeFinishTimeToNumber,
   }) {
-    return updateNumber?.call(existedStartingParticipants, number, startTime);
+    return updateStartNumber?.call(
+        existedStartingParticipants, number, startTime);
   }
 
   @override
@@ -258,14 +271,16 @@ class _$UpdateNumberImpl implements _UpdateNumber {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
-        updateNumber,
+        updateStartNumber,
     TResult Function(List<StartingParticipant> previousStarts, int number,
             String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
+    TResult Function(int finishId, int number, String finishTime, Stage stage)?
+        changeFinishTimeToNumber,
     required TResult orElse(),
   }) {
-    if (updateNumber != null) {
-      return updateNumber(existedStartingParticipants, number, startTime);
+    if (updateStartNumber != null) {
+      return updateStartNumber(existedStartingParticipants, number, startTime);
     }
     return orElse();
   }
@@ -273,55 +288,59 @@ class _$UpdateNumberImpl implements _UpdateNumber {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_UpdateNumber value) updateNumber,
+    required TResult Function(_UpdateStartNumber value) updateStartNumber,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
+    required TResult Function(_ChangeFinishTimeToNumber value)
+        changeFinishTimeToNumber,
   }) {
-    return updateNumber(this);
+    return updateStartNumber(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UpdateNumber value)? updateNumber,
+    TResult? Function(_UpdateStartNumber value)? updateStartNumber,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
+    TResult? Function(_ChangeFinishTimeToNumber value)?
+        changeFinishTimeToNumber,
   }) {
-    return updateNumber?.call(this);
+    return updateStartNumber?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_UpdateNumber value)? updateNumber,
+    TResult Function(_UpdateStartNumber value)? updateStartNumber,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
+    TResult Function(_ChangeFinishTimeToNumber value)? changeFinishTimeToNumber,
     required TResult orElse(),
   }) {
-    if (updateNumber != null) {
-      return updateNumber(this);
+    if (updateStartNumber != null) {
+      return updateStartNumber(this);
     }
     return orElse();
   }
 }
 
-abstract class _UpdateNumber implements Notification {
-  const factory _UpdateNumber(
+abstract class _UpdateStartNumber implements Notification {
+  const factory _UpdateStartNumber(
       {required final List<StartingParticipant> existedStartingParticipants,
       required final int number,
-      required final String startTime}) = _$UpdateNumberImpl;
+      required final String startTime}) = _$UpdateStartNumberImpl;
 
   List<StartingParticipant> get existedStartingParticipants;
   @override
   int get number;
-  @override
   String get startTime;
 
   /// Create a copy of Notification
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateNumberImplCopyWith<_$UpdateNumberImpl> get copyWith =>
+  _$$UpdateStartNumberImplCopyWith<_$UpdateStartNumberImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -461,10 +480,13 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             List<StartingParticipant> existedStartingParticipants,
             int number,
             String startTime)
-        updateNumber,
+        updateStartNumber,
     required TResult Function(List<StartingParticipant> previousStarts,
             int number, String startTime, DateTime timestamp, int correction)
         updateAutomaticCorrection,
+    required TResult Function(
+            int finishId, int number, String finishTime, Stage stage)
+        changeFinishTimeToNumber,
   }) {
     return updateAutomaticCorrection(
         previousStarts, number, startTime, timestamp, correction);
@@ -475,10 +497,12 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
-        updateNumber,
+        updateStartNumber,
     TResult? Function(List<StartingParticipant> previousStarts, int number,
             String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
+    TResult? Function(int finishId, int number, String finishTime, Stage stage)?
+        changeFinishTimeToNumber,
   }) {
     return updateAutomaticCorrection?.call(
         previousStarts, number, startTime, timestamp, correction);
@@ -489,10 +513,12 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<StartingParticipant> existedStartingParticipants,
             int number, String startTime)?
-        updateNumber,
+        updateStartNumber,
     TResult Function(List<StartingParticipant> previousStarts, int number,
             String startTime, DateTime timestamp, int correction)?
         updateAutomaticCorrection,
+    TResult Function(int finishId, int number, String finishTime, Stage stage)?
+        changeFinishTimeToNumber,
     required TResult orElse(),
   }) {
     if (updateAutomaticCorrection != null) {
@@ -505,9 +531,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_UpdateNumber value) updateNumber,
+    required TResult Function(_UpdateStartNumber value) updateStartNumber,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
+    required TResult Function(_ChangeFinishTimeToNumber value)
+        changeFinishTimeToNumber,
   }) {
     return updateAutomaticCorrection(this);
   }
@@ -515,9 +543,11 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UpdateNumber value)? updateNumber,
+    TResult? Function(_UpdateStartNumber value)? updateStartNumber,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
+    TResult? Function(_ChangeFinishTimeToNumber value)?
+        changeFinishTimeToNumber,
   }) {
     return updateAutomaticCorrection?.call(this);
   }
@@ -525,9 +555,10 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_UpdateNumber value)? updateNumber,
+    TResult Function(_UpdateStartNumber value)? updateStartNumber,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
+    TResult Function(_ChangeFinishTimeToNumber value)? changeFinishTimeToNumber,
     required TResult orElse(),
   }) {
     if (updateAutomaticCorrection != null) {
@@ -548,7 +579,6 @@ abstract class _UpdateAutomaticCorrection implements Notification {
   List<StartingParticipant> get previousStarts;
   @override
   int get number;
-  @override
   String get startTime;
   DateTime get timestamp;
   int get correction;
@@ -558,5 +588,219 @@ abstract class _UpdateAutomaticCorrection implements Notification {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateAutomaticCorrectionImplCopyWith<_$UpdateAutomaticCorrectionImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChangeFinishTimeToNumberImplCopyWith<$Res>
+    implements $NotificationCopyWith<$Res> {
+  factory _$$ChangeFinishTimeToNumberImplCopyWith(
+          _$ChangeFinishTimeToNumberImpl value,
+          $Res Function(_$ChangeFinishTimeToNumberImpl) then) =
+      __$$ChangeFinishTimeToNumberImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int finishId, int number, String finishTime, Stage stage});
+}
+
+/// @nodoc
+class __$$ChangeFinishTimeToNumberImplCopyWithImpl<$Res>
+    extends _$NotificationCopyWithImpl<$Res, _$ChangeFinishTimeToNumberImpl>
+    implements _$$ChangeFinishTimeToNumberImplCopyWith<$Res> {
+  __$$ChangeFinishTimeToNumberImplCopyWithImpl(
+      _$ChangeFinishTimeToNumberImpl _value,
+      $Res Function(_$ChangeFinishTimeToNumberImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? finishId = null,
+    Object? number = null,
+    Object? finishTime = null,
+    Object? stage = freezed,
+  }) {
+    return _then(_$ChangeFinishTimeToNumberImpl(
+      finishId: null == finishId
+          ? _value.finishId
+          : finishId // ignore: cast_nullable_to_non_nullable
+              as int,
+      number: null == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+      finishTime: null == finishTime
+          ? _value.finishTime
+          : finishTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      stage: freezed == stage
+          ? _value.stage
+          : stage // ignore: cast_nullable_to_non_nullable
+              as Stage,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangeFinishTimeToNumberImpl implements _ChangeFinishTimeToNumber {
+  const _$ChangeFinishTimeToNumberImpl(
+      {required this.finishId,
+      required this.number,
+      required this.finishTime,
+      required this.stage});
+
+  @override
+  final int finishId;
+  @override
+  final int number;
+  @override
+  final String finishTime;
+  @override
+  final Stage stage;
+
+  @override
+  String toString() {
+    return 'Notification.changeFinishTimeToNumber(finishId: $finishId, number: $number, finishTime: $finishTime, stage: $stage)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeFinishTimeToNumberImpl &&
+            (identical(other.finishId, finishId) ||
+                other.finishId == finishId) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.finishTime, finishTime) ||
+                other.finishTime == finishTime) &&
+            const DeepCollectionEquality().equals(other.stage, stage));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, finishId, number, finishTime,
+      const DeepCollectionEquality().hash(stage));
+
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeFinishTimeToNumberImplCopyWith<_$ChangeFinishTimeToNumberImpl>
+      get copyWith => __$$ChangeFinishTimeToNumberImplCopyWithImpl<
+          _$ChangeFinishTimeToNumberImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            List<StartingParticipant> existedStartingParticipants,
+            int number,
+            String startTime)
+        updateStartNumber,
+    required TResult Function(List<StartingParticipant> previousStarts,
+            int number, String startTime, DateTime timestamp, int correction)
+        updateAutomaticCorrection,
+    required TResult Function(
+            int finishId, int number, String finishTime, Stage stage)
+        changeFinishTimeToNumber,
+  }) {
+    return changeFinishTimeToNumber(finishId, number, finishTime, stage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<StartingParticipant> existedStartingParticipants,
+            int number, String startTime)?
+        updateStartNumber,
+    TResult? Function(List<StartingParticipant> previousStarts, int number,
+            String startTime, DateTime timestamp, int correction)?
+        updateAutomaticCorrection,
+    TResult? Function(int finishId, int number, String finishTime, Stage stage)?
+        changeFinishTimeToNumber,
+  }) {
+    return changeFinishTimeToNumber?.call(finishId, number, finishTime, stage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<StartingParticipant> existedStartingParticipants,
+            int number, String startTime)?
+        updateStartNumber,
+    TResult Function(List<StartingParticipant> previousStarts, int number,
+            String startTime, DateTime timestamp, int correction)?
+        updateAutomaticCorrection,
+    TResult Function(int finishId, int number, String finishTime, Stage stage)?
+        changeFinishTimeToNumber,
+    required TResult orElse(),
+  }) {
+    if (changeFinishTimeToNumber != null) {
+      return changeFinishTimeToNumber(finishId, number, finishTime, stage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UpdateStartNumber value) updateStartNumber,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
+    required TResult Function(_ChangeFinishTimeToNumber value)
+        changeFinishTimeToNumber,
+  }) {
+    return changeFinishTimeToNumber(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UpdateStartNumber value)? updateStartNumber,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult? Function(_ChangeFinishTimeToNumber value)?
+        changeFinishTimeToNumber,
+  }) {
+    return changeFinishTimeToNumber?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UpdateStartNumber value)? updateStartNumber,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult Function(_ChangeFinishTimeToNumber value)? changeFinishTimeToNumber,
+    required TResult orElse(),
+  }) {
+    if (changeFinishTimeToNumber != null) {
+      return changeFinishTimeToNumber(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangeFinishTimeToNumber implements Notification {
+  const factory _ChangeFinishTimeToNumber(
+      {required final int finishId,
+      required final int number,
+      required final String finishTime,
+      required final Stage stage}) = _$ChangeFinishTimeToNumberImpl;
+
+  int get finishId;
+  @override
+  int get number;
+  String get finishTime;
+  Stage get stage;
+
+  /// Create a copy of Notification
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChangeFinishTimeToNumberImplCopyWith<_$ChangeFinishTimeToNumberImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

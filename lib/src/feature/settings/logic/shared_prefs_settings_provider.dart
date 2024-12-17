@@ -66,8 +66,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           defaults.showFinishDifference,
       showColorFinishDifference: prefs.getBool('showColorFinishDifference') ??
           defaults.showColorFinishDifference,
-      finishDifferenceThreshold:
-          prefs.getInt('finishDifferenceThreshold') ?? defaults.finishDifferenceThreshold,
+      finishDifferenceThreshold: prefs.getInt('finishDifferenceThreshold') ??
+          defaults.finishDifferenceThreshold,
       deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
       updateStartCorrectionDelay: prefs.getInt('updateStartCorrectionDelay') ??
           defaults.updateStartCorrectionDelay,
@@ -158,8 +158,13 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
     );
     await _prefs.setBool('showFinishDifference', settings.showFinishDifference);
     await _prefs.setBool(
-        'showColorFinishDifference', settings.showColorFinishDifference,);
-    await _prefs.setInt('finishDifferenceThreshold', settings.finishDifferenceThreshold);
+      'showColorFinishDifference',
+      settings.showColorFinishDifference,
+    );
+    await _prefs.setInt(
+      'finishDifferenceThreshold',
+      settings.finishDifferenceThreshold,
+    );
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
     await _prefs.setInt(
       'updateStartCorrectionDelay',

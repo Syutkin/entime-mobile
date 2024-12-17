@@ -527,7 +527,8 @@ class _SettingsList extends StatelessWidget {
                 onPressed: (context) async {
                   final value = await setFinishDifferencePopup(
                     context,
-                    difference: settingsState.settings.finishDifferenceThreshold,
+                    difference:
+                        settingsState.settings.finishDifferenceThreshold,
                     title: Localization.current.I18nSettings_finishDifference,
                   );
                   if (value != null) {
