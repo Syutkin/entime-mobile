@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
@@ -33,6 +34,8 @@ abstract interface class IUpdateProvider {
   void stop();
 }
 
+
+/// Тут. Всё. Очень. Плохо.
 class UpdateProvider implements IUpdateProvider {
   UpdateProvider._(
     http.Client client,
@@ -45,9 +48,9 @@ class UpdateProvider implements IUpdateProvider {
   Release? _latestRelease;
 
   bool _canUpdate = false;
-  bool _downloaded = false;
+  bool _isDownloaded = false;
 
-  File? _downloadedFile;
+  File? _isDownloadedFile;
 
   final AppInfoProvider _appInfo;
   final SettingsProvider _settingsProvider;
@@ -131,19 +134,31 @@ class UpdateProvider implements IUpdateProvider {
       try {
         var dir = (await getDownloadsDirectory())?.path;
         dir ??= (await getApplicationDocumentsDirectory()).path;
-        _downloadedFile = File(
-          '$dir/${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk',
-        );
+        final fileName =
+            '${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk';
+        final hashFileName = '$fileName.sha1';
 
-        var url = '';
+        _isDownloadedFile = File('$dir/$fileName');
+
+        String? fileUrl;
+        String? referenceHash;
         for (final asset in _latestRelease!.assets) {
-          if (asset.name ==
-              '${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk') {
-            url = asset.browserDownloadUrl;
+          if (asset.name == fileName) {
+            fileUrl = asset.browserDownloadUrl;
+          } else if (asset.name == hashFileName) {
+            referenceHash = await _getReferenceHash(asset.browserDownloadUrl);
           }
         }
 
-        final request = http.Request('GET', Uri.parse(url));
+        if (fileUrl == null) {
+          logger.w(
+            'Update_provider -> Can not find remote url for filename: $fileName',
+          );
+          _onError?.call("Can't get downloading link");
+          return;
+        }
+
+        final request = http.Request('GET', Uri.parse(fileUrl));
         final response = await _client.send(request);
 
         _updateFileSize = response.contentLength;
@@ -161,35 +176,62 @@ class UpdateProvider implements IUpdateProvider {
             },
             onDone: () async {
               // save file
-              await _downloadedFile?.writeAsBytes(bytes);
-              _downloaded = true;
+              await _isDownloadedFile?.writeAsBytes(bytes);
+
+              // Если файла хэша нет, то не проверяем
+              if (referenceHash != null && referenceHash.isNotEmpty) {
+                final fileHash =
+                    (await sha1.bind(_isDownloadedFile!.openRead()).first)
+                        .toString();
+                if (referenceHash != fileHash) {
+                  logger.e('Update_provider -> Error: Hash mismatch. Got: $fileHash, expected: $referenceHash');
+                  _onError?.call('File Hash mismatch');
+                  return;
+                }
+              }
+              _isDownloaded = true;
               _onDownloadComplete?.call();
             },
-            onError: (Object error) {
-              logger.e('Update_provider -> Error', error: error);
-              _onError?.call(error.toString());
+            onError: (Object e) {
+              logger.e('Update_provider -> Error', error: e);
+              _onError?.call('Error occurred while downloading file: $e');
             },
             cancelOnError: true,
           );
         } else {
-          _onError?.call('Update_provider -> response.contentLength is null');
+          logger.e('Update_provider -> response.contentLength is null');
+          _onError?.call('File length is null');
         }
       } on Exception catch (e) {
         logger.e('Update_provider -> Exception', error: e);
+        _onError?.call('Exception: $e');
       } catch (e, st) {
         logger.e('Update_provider -> Unknown error', error: e, stackTrace: st);
+        _onError?.call('Unknown error: $e');
       }
+    }
+  }
+
+  Future<String?> _getReferenceHash(String url) async {
+    final response = await _client.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      logger.d(
+        'Update_provider -> Can not get file hash: StatusCode: ${response.statusCode}',
+      );
+      return null;
     }
   }
 
   @override
   Future<void> installApk() async {
     if (_canUpdate &&
-        _downloaded &&
+        _isDownloaded &&
         _latestRelease != null &&
-        _downloadedFile != null) {
+        _isDownloadedFile != null) {
       if (await Permission.requestInstallPackages.request().isGranted) {
-        final result = await OpenFile.open(_downloadedFile!.path);
+        final result = await OpenFile.open(_isDownloadedFile!.path);
         logger.d(result.message);
       } else {
         logger.d('Can not update, installing packages is denied');
