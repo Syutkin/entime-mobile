@@ -385,9 +385,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nProtocol_updateNumber": m18,
         "I18nProtocol_warning":
             MessageLookupByLibrary.simpleMessage("Предупреждение"),
-        "I18nSettings_autosubstitution":
+        "I18nSettings_autoSubstitution":
             MessageLookupByLibrary.simpleMessage("Автоподстановка номеров"),
-        "I18nSettings_autosubstitutionDelay":
+        "I18nSettings_autoSubstitutionDelay":
             MessageLookupByLibrary.simpleMessage(
                 "Задержка перед автоматическим подставлением новых номеров"),
         "I18nSettings_brightness":
@@ -438,7 +438,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Количество показываемых записей"),
         "I18nSettings_journalLinesNumberPopup":
             MessageLookupByLibrary.simpleMessage(
-                "Количество отображамых строк в журнале"),
+                "Количество отображаемых строк в журнале"),
         "I18nSettings_language": MessageLookupByLibrary.simpleMessage("Язык"),
         "I18nSettings_lightBlue":
             MessageLookupByLibrary.simpleMessage("Синяя светлая тема"),
@@ -463,7 +463,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Переподключение"),
         "I18nSettings_reconnectDescription":
             MessageLookupByLibrary.simpleMessage(
-                "Пытаться переподключится к модулю при обрыве связи"),
+                "Пытаться переподключиться к модулю при обрыве связи"),
         "I18nSettings_replaceStartCountdown":
             MessageLookupByLibrary.simpleMessage(
                 "Заменять время старта обратным отсчётом"),

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-17T15:01:21.301093",
+  "@@last_modified": "2024-12-19T06:40:25.995529",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -106,7 +106,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_reconnectDescription": "Пытаться переподключится к модулю при обрыве связи",
+  "I18nSettings_reconnectDescription": "Пытаться переподключиться к модулю при обрыве связи",
   "@I18nSettings_reconnectDescription": {
     "type": "text",
     "placeholders": {}
@@ -245,13 +245,13 @@
       "milliseconds": {}
     }
   },
-  "I18nSettings_autosubstitution": "Автоподстановка номеров",
-  "@I18nSettings_autosubstitution": {
+  "I18nSettings_autoSubstitution": "Автоподстановка номеров",
+  "@I18nSettings_autoSubstitution": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_autosubstitutionDelay": "Задержка перед автоматическим подставлением новых номеров",
-  "@I18nSettings_autosubstitutionDelay": {
+  "I18nSettings_autoSubstitutionDelay": "Задержка перед автоматическим подставлением новых номеров",
+  "@I18nSettings_autoSubstitutionDelay": {
     "type": "text",
     "placeholders": {}
   },
@@ -335,7 +335,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_journalLinesNumberPopup": "Количество отображамых строк в журнале",
+  "I18nSettings_journalLinesNumberPopup": "Количество отображаемых строк в журнале",
   "@I18nSettings_journalLinesNumberPopup": {
     "type": "text",
     "placeholders": {}

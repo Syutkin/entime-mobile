@@ -111,7 +111,7 @@ class I18nSettings {
       );
 
   static String get reconnectDescription => Intl.message(
-        'Пытаться переподключится к модулю при обрыве связи',
+        'Пытаться переподключиться к модулю при обрыве связи',
         name: 'I18nSettings_reconnectDescription',
       );
 
@@ -247,14 +247,14 @@ class I18nSettings {
         args: [milliseconds],
       );
 
-  static String get autosubstitution => Intl.message(
+  static String get autoSubstitution => Intl.message(
         'Автоподстановка номеров',
-        name: 'I18nSettings_autosubstitution',
+        name: 'I18nSettings_autoSubstitution',
       );
 
-  static String get autosubstitutionDelay => Intl.message(
+  static String get autoSubstitutionDelay => Intl.message(
         'Задержка перед автоматическим подставлением новых номеров',
-        name: 'I18nSettings_autosubstitutionDelay',
+        name: 'I18nSettings_autoSubstitutionDelay',
       );
 
   static String get finishButton => Intl.message(
@@ -338,7 +338,7 @@ class I18nSettings {
       );
 
   static String get journalLinesNumberPopup => Intl.message(
-        'Количество отображамых строк в журнале',
+        'Количество отображаемых строк в журнале',
         name: 'I18nSettings_journalLinesNumberPopup',
       );
 

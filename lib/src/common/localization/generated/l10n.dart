@@ -251,10 +251,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Пытаться переподключится к модулю при обрыве связи`
+  /// `Пытаться переподключиться к модулю при обрыве связи`
   String get I18nSettings_reconnectDescription {
     return Intl.message(
-      'Пытаться переподключится к модулю при обрыве связи',
+      'Пытаться переподключиться к модулю при обрыве связи',
       name: 'I18nSettings_reconnectDescription',
       desc: '',
       args: [],
@@ -522,20 +522,20 @@ class GeneratedLocalization {
   }
 
   /// `Автоподстановка номеров`
-  String get I18nSettings_autosubstitution {
+  String get I18nSettings_autoSubstitution {
     return Intl.message(
       'Автоподстановка номеров',
-      name: 'I18nSettings_autosubstitution',
+      name: 'I18nSettings_autoSubstitution',
       desc: '',
       args: [],
     );
   }
 
   /// `Задержка перед автоматическим подставлением новых номеров`
-  String get I18nSettings_autosubstitutionDelay {
+  String get I18nSettings_autoSubstitutionDelay {
     return Intl.message(
       'Задержка перед автоматическим подставлением новых номеров',
-      name: 'I18nSettings_autosubstitutionDelay',
+      name: 'I18nSettings_autoSubstitutionDelay',
       desc: '',
       args: [],
     );
@@ -701,10 +701,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Количество отображамых строк в журнале`
+  /// `Количество отображаемых строк в журнале`
   String get I18nSettings_journalLinesNumberPopup {
     return Intl.message(
-      'Количество отображамых строк в журнале',
+      'Количество отображаемых строк в журнале',
       name: 'I18nSettings_journalLinesNumberPopup',
       desc: '',
       args: [],

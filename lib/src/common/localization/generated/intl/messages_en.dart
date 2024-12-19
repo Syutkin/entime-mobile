@@ -281,11 +281,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nProtocol_type": MessageLookupByLibrary.simpleMessage("Type"),
         "I18nProtocol_updateNumber": m18,
         "I18nProtocol_warning": MessageLookupByLibrary.simpleMessage("Warning"),
-        "I18nSettings_autosubstitution":
-            MessageLookupByLibrary.simpleMessage("Autosubstitute numbers"),
-        "I18nSettings_autosubstitutionDelay":
-            MessageLookupByLibrary.simpleMessage(
-                "Delay before autosubstitute new numbers"),
         "I18nSettings_brightness":
             MessageLookupByLibrary.simpleMessage("Light theme"),
         "I18nSettings_checkUpdateAtStartup":

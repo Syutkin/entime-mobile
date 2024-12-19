@@ -402,7 +402,7 @@ class _SettingsList extends StatelessWidget {
                 },
               ),
               SettingsTile.switchTile(
-                title: Text(Localization.current.I18nSettings_autosubstitution),
+                title: Text(Localization.current.I18nSettings_autoSubstitution),
                 //leading:  Icon(MdiIcons.autoFix),
                 initialValue: settingsState.settings.substituteNumbers,
                 onToggle: (value) {
@@ -416,7 +416,7 @@ class _SettingsList extends StatelessWidget {
               ),
               SettingsTile(
                 title: Text(
-                  Localization.current.I18nSettings_autosubstitutionDelay,
+                  Localization.current.I18nSettings_autoSubstitutionDelay,
                 ),
                 trailing: Text(
                   Localization.current.I18nSettings_milliseconds(
@@ -428,7 +428,7 @@ class _SettingsList extends StatelessWidget {
                   final value = await setDelayPopup(
                     context,
                     settingsState.settings.substituteNumbersDelay,
-                    Localization.current.I18nSettings_autosubstitutionDelay,
+                    Localization.current.I18nSettings_autoSubstitutionDelay,
                   );
                   if (value != null) {
                     settingsBloc.add(
