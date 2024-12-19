@@ -13,7 +13,6 @@ Future<void> addRacerPopup({
   return showDialog<void>(
     context: context,
     builder: (context) => ExpandedAlertDialog(
-      width: MediaQuery.sizeOf(context).width * 0.9,
       title: Text(Localization.current.I18nStart_addParticipant),
       content: Form(
         key: formKey,
@@ -55,33 +54,27 @@ Future<void> addRacerPopup({
           ],
         ),
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          if (formKey.currentState!.validate()) {
+            // Форматирование Duration отсюда:
+            // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
+            final startTime = time.toString().split('.').first.padLeft(8, '0');
+            context.read<DatabaseBloc>().add(
+                  DatabaseEvent.addStartNumber(
+                    stage: stage,
+                    number: number,
+                    startTime: startTime,
+                  ),
+                );
             Navigator.of(context).pop();
-          },
-          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-        ),
-        TextButton(
-          onPressed: () async {
-            if (formKey.currentState!.validate()) {
-              // Форматирование Duration отсюда:
-              // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
-              final startTime =
-                  time.toString().split('.').first.padLeft(8, '0');
-              context.read<DatabaseBloc>().add(
-                    DatabaseEvent.addStartNumber(
-                      stage: stage,
-                      number: number,
-                      startTime: startTime,
-                    ),
-                  );
-              Navigator.of(context).pop();
-            }
-          },
-          child: Text(MaterialLocalizations.of(context).okButtonLabel),
-        ),
-      ],
+          }
+        },
+      ),
     ),
   );
 }

@@ -157,37 +157,32 @@ Future<void> editStartTime(
           ],
         ),
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          if (formKey.currentState!.validate()) {
+            final automaticCorrection =
+                int.tryParse(automaticCorrectionController.text);
+            final manualCorrection =
+                int.tryParse(manualCorrectionController.text);
+            context.read<DatabaseBloc>().add(
+                  DatabaseEvent.updateStartingInfo(
+                    startTime: startTimeController.text,
+                    automaticStartTime: automaticStartTimeController.text,
+                    automaticCorrection: automaticCorrection,
+                    manualStartTime: manualStartTimeController.text,
+                    manualCorrection: manualCorrection,
+                    stageId: item.stageId,
+                    participantId: item.participantId,
+                  ),
+                );
             Navigator.of(context).pop();
-          },
-          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-        ),
-        TextButton(
-          onPressed: () {
-            if (formKey.currentState!.validate()) {
-              final automaticCorrection =
-                  int.tryParse(automaticCorrectionController.text);
-              final manualCorrection =
-                  int.tryParse(manualCorrectionController.text);
-              context.read<DatabaseBloc>().add(
-                    DatabaseEvent.updateStartingInfo(
-                      startTime: startTimeController.text,
-                      automaticStartTime: automaticStartTimeController.text,
-                      automaticCorrection: automaticCorrection,
-                      manualStartTime: manualStartTimeController.text,
-                      manualCorrection: manualCorrection,
-                      stageId: item.stageId,
-                      participantId: item.participantId,
-                    ),
-                  );
-              Navigator.of(context).pop();
-            }
-          },
-          child: Text(MaterialLocalizations.of(context).saveButtonLabel),
-        ),
-      ],
+          }
+        },
+      ),
     ),
   );
 }

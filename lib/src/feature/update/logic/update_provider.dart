@@ -34,7 +34,6 @@ abstract interface class IUpdateProvider {
   void stop();
 }
 
-
 /// Тут. Всё. Очень. Плохо.
 class UpdateProvider implements IUpdateProvider {
   UpdateProvider._(
@@ -184,7 +183,8 @@ class UpdateProvider implements IUpdateProvider {
                     (await sha1.bind(_isDownloadedFile!.openRead()).first)
                         .toString();
                 if (referenceHash != fileHash) {
-                  logger.e('Update_provider -> Error: Hash mismatch. Got: $fileHash, expected: $referenceHash');
+                  logger.e(
+                      'Update_provider -> Error: Hash mismatch. Got: $fileHash, expected: $referenceHash');
                   _onError?.call('File Hash mismatch');
                   return;
                 }

@@ -42,25 +42,20 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
           ],
         ),
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-        ),
-        TextButton(
-          onPressed: () async {
-            if (formKey.currentState!.validate()) {
-              if (newLimit < -1) {
-                newLimit = -1;
-              }
-              Navigator.of(context).pop(newLimit);
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          if (formKey.currentState!.validate()) {
+            if (newLimit < -1) {
+              newLimit = -1;
             }
-          },
-          child: Text(MaterialLocalizations.of(context).okButtonLabel),
-        ),
-      ],
+            Navigator.of(context).pop(newLimit);
+          }
+        },
+      ),
     ),
   );
 }

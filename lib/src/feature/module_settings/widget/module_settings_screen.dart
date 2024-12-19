@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../common/widget/cancel_ok_buttons.dart';
 import '../../../common/widget/splash_widget.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../bloc/module_settings_bloc.dart';
@@ -19,27 +20,24 @@ class ModuleSettingsInitScreen extends StatelessWidget {
           title: Text(
             Localization.current.I18nModuleSettings_saveSettingsToModule,
           ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                BlocProvider.of<BluetoothBloc>(context).add(
-                  BluetoothEvent.sendMessage(
-                    message: BlocProvider.of<ModuleSettingsBloc>(context)
-                        .moduleSettings
-                        .write,
-                  ),
-                );
-                Navigator.pop(context, true);
-              },
-              child: Text(MaterialLocalizations.of(context).okButtonLabel),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, true),
-              child: Text(
-                MaterialLocalizations.of(context).cancelButtonLabel,
-              ),
-            ),
-          ],
+          actions: cancelOkButtons(
+            context: context,
+            onCancelPressed: () {
+              // ToDo: зачем тут contex? и передача одинаковых значений в Navigator.pop
+              Navigator.pop(context, true);
+            },
+            onOkPressed: () {
+              BlocProvider.of<BluetoothBloc>(context).add(
+                BluetoothEvent.sendMessage(
+                  message: BlocProvider.of<ModuleSettingsBloc>(context)
+                      .moduleSettings
+                      .write,
+                ),
+              );
+              // ToDo: зачем тут contex? и передача одинаковых значений в Navigator.pop
+              Navigator.pop(context, true);
+            },
+          ),
         ),
       );
       return true;

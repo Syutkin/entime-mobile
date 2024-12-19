@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/localization/localization.dart';
+import '../../../../common/widget/cancel_ok_buttons.dart';
 
 Future<bool?> updateFinishTimePopup(BuildContext context, int number) async =>
     showDialog<bool>(
@@ -21,20 +22,15 @@ class UpdateFinishTimePopup extends StatelessWidget {
     return AlertDialog(
       title: Text(Localization.current.I18nProtocol_warning),
       content: Text(Localization.current.I18nProtocol_updateNumber(number)),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(false);
-          },
-          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(true);
-          },
-          child: Text(MaterialLocalizations.of(context).okButtonLabel),
-        ),
-      ],
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop(false);
+        },
+        onOkPressed: () {
+          Navigator.of(context).pop(true);
+        },
+      ),
     );
   }
 }

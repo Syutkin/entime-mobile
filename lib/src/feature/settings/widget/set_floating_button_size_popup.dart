@@ -29,20 +29,15 @@ Future<double?> setFloatingButtonSizePopup(
           ],
         ),
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(newValue);
-          },
-          child: Text(MaterialLocalizations.of(context).okButtonLabel),
-        ),
-      ],
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          Navigator.of(context).pop(newValue);
+        },
+      ),
     ),
   );
 }

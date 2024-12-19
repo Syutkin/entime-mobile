@@ -47,22 +47,17 @@ Future<int?> setFinishDifferencePopup(
           ],
         ),
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-        ),
-        TextButton(
-          onPressed: () async {
-            if (formKey.currentState!.validate()) {
-              Navigator.of(context).pop(newDifference);
-            }
-          },
-          child: Text(MaterialLocalizations.of(context).okButtonLabel),
-        ),
-      ],
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          if (formKey.currentState!.validate()) {
+            Navigator.of(context).pop(newDifference);
+          }
+        },
+      ),
     ),
   );
 }
