@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:entime/src/common/widget/cancel_ok_buttons.dart';
+import 'package:entime/src/feature/database/widget/popup/edit_racer_popup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -96,6 +97,13 @@ class _StartListPage extends State<StartListPage> {
                           item: item,
                           onTap: () async {
                             await editStartTime(context, item);
+                          },
+                          onLongPress: () {
+                            //ToDo: popup menu
+                            editRacerPopup(
+                              context: context,
+                              participantAtStart: item,
+                            );
                           },
 
                           /// Set DNS on dismissed

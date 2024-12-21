@@ -333,6 +333,24 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             // _notification = null;
           }
         },
+        updateRacer: (event) async {
+          await _db.updateRider(
+            id: event.riderId,
+            name: event.name,
+            nickname: event.nickname,
+            birthday: event.birthday,
+            team: event.team,
+            city: event.city,
+            email: event.email,
+            phone: event.phone,
+            comment: event.comment,
+          );
+          await _db.updateParticipant(
+            id: event.participantId,
+            riderId: event.riderId,
+            category: event.category,
+          );
+        },
         updateStartingInfo: (event) async {
           await _db.setStartingInfo(
             startTime: event.startTime,

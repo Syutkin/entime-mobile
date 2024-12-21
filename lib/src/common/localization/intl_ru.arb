@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-19T06:40:25.995529",
+  "@@last_modified": "2024-12-21T18:35:55.548326",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -815,6 +815,16 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nStart_incorrectName": "Некорректное имя",
+  "@I18nStart_incorrectName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_emptyName": "Имя не должно быть пустым",
+  "@I18nStart_emptyName": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nStart_participantNumber": "Участник №{number}",
   "@I18nStart_participantNumber": {
     "type": "text",
@@ -1169,6 +1179,51 @@
     "placeholders": {
       "type": {}
     }
+  },
+  "I18nDatabase_category": "Категория",
+  "@I18nDatabase_category": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_name": "Имя",
+  "@I18nDatabase_name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_nickname": "Никнейм",
+  "@I18nDatabase_nickname": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_birthday": "Дата/Год рождения",
+  "@I18nDatabase_birthday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_team": "Команда",
+  "@I18nDatabase_team": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_city": "Город",
+  "@I18nDatabase_city": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_email": "Электронная почта",
+  "@I18nDatabase_email": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_phone": "Телефон",
+  "@I18nDatabase_phone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_comment": "Комментарий",
+  "@I18nDatabase_comment": {
+    "type": "text",
+    "placeholders": {}
   },
   "I18nDatabase_races": "Соревнования",
   "@I18nDatabase_races": {

@@ -899,7 +899,7 @@ class I18nStart {
         name: 'I18nStart_sliverAutomaticCorrection',
       );
 
-// edit_start_time_popup
+  // edit_start_time_popup
   static String get incorrectCorrection => Intl.message(
         'Неверное значение поправки',
         name: 'I18nStart_incorrectCorrection',
@@ -908,6 +908,17 @@ class I18nStart {
   static String get incorrectTime => Intl.message(
         'Неверное значение времени',
         name: 'I18nStart_incorrectTime',
+      );
+
+  // edit_racer_popup
+  static String get incorrectName => Intl.message(
+        'Некорректное имя',
+        name: 'I18nStart_incorrectName',
+      );
+
+  static String get emptyName => Intl.message(
+        'Имя не должно быть пустым',
+        name: 'I18nStart_emptyName',
       );
 
   static String participantNumber(int number) => Intl.message(
@@ -1261,6 +1272,51 @@ class I18nModuleSettings {
 }
 
 class I18nDatabase {
+  static String get category => Intl.message(
+        'Категория',
+        name: 'I18nDatabase_category',
+      );
+
+  static String get name => Intl.message(
+        'Имя',
+        name: 'I18nDatabase_name',
+      );
+
+  static String get nickname => Intl.message(
+        'Никнейм',
+        name: 'I18nDatabase_nickname',
+      );
+
+  static String get birthday => Intl.message(
+        'Дата/Год рождения',
+        name: 'I18nDatabase_birthday',
+      );
+
+  static String get team => Intl.message(
+        'Команда',
+        name: 'I18nDatabase_team',
+      );
+
+  static String get city => Intl.message(
+        'Город',
+        name: 'I18nDatabase_city',
+      );
+
+  static String get email => Intl.message(
+        'Электронная почта',
+        name: 'I18nDatabase_email',
+      );
+
+  static String get phone => Intl.message(
+        'Телефон',
+        name: 'I18nDatabase_phone',
+      );
+
+  static String get comment => Intl.message(
+    'Комментарий',
+    name: 'I18nDatabase_comment',
+  );
+
   static String get races => Intl.message(
         'Соревнования',
         name: 'I18nDatabase_races',

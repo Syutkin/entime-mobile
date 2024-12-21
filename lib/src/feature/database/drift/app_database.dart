@@ -379,6 +379,34 @@ class AppDatabase extends _$AppDatabase {
     );
   }
 
+  /// Обновляет гонщика
+  Future<int> updateRider({
+    required int id,
+    String? name,
+    String? nickname,
+    String? birthday,
+    String? team,
+    String? city,
+    String? email,
+    String? phone,
+    String? comment,
+    bool isDeleted = false,
+  }) {
+    return (update(riders)..where((r) => r.id.equals(id))).write(
+      RidersCompanion(
+        name: name == null ? const Value.absent() : Value(name),
+        nickname: nickname == null ? const Value.absent() : Value(nickname),
+        birthday: birthday == null ? const Value.absent() : Value(birthday),
+        team: team == null ? const Value.absent() : Value(team),
+        city: city == null ? const Value.absent() : Value(city),
+        email: email == null ? const Value.absent() : Value(email),
+        phone: phone == null ? const Value.absent() : Value(phone),
+        comment: comment == null ? const Value.absent() : Value(comment),
+        isDeleted: Value(isDeleted),
+      ),
+    );
+  }
+
   /// Добавляет участника соревнований
   Future<int> addParticipant({
     required int raceId,
@@ -393,6 +421,30 @@ class AppDatabase extends _$AppDatabase {
       number: number,
       category: category,
       rfid: rfid,
+    );
+  }
+
+  /// Обновляет участника соревнований
+  Future<int> updateParticipant({
+    required int id,
+    int? raceId,
+    int? riderId,
+    int? number,
+    int? statusId,
+    String? category,
+    String? rfid,
+    bool isDeleted = false,
+  }) {
+    return (update(participants)..where((p) => p.id.equals(id))).write(
+      ParticipantsCompanion(
+        raceId: raceId == null ? const Value.absent() : Value(raceId),
+        riderId: riderId == null ? const Value.absent() : Value(riderId),
+        number: number == null ? const Value.absent() : Value(number),
+        category: category == null ? const Value.absent() : Value(category),
+        rfid: rfid == null ? const Value.absent() : Value(rfid),
+        statusId: statusId == null ? const Value.absent() : Value(statusId),
+        isDeleted: Value(isDeleted),
+      ),
     );
   }
 

@@ -184,7 +184,8 @@ class UpdateProvider implements IUpdateProvider {
                         .toString();
                 if (referenceHash != fileHash) {
                   logger.e(
-                      'Update_provider -> Error: Hash mismatch. Got: $fileHash, expected: $referenceHash');
+                    'Update_provider -> Error: Hash mismatch. Got: $fileHash, expected: $referenceHash',
+                  );
                   _onError?.call('File Hash mismatch');
                   return;
                 }

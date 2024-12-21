@@ -91,6 +91,20 @@ class DatabaseEvent with _$DatabaseEvent {
     @Default(false) bool forceAdd,
   }) = _AddStartNumber;
 
+  const factory DatabaseEvent.updateRacer({
+    required int riderId,
+    required int participantId,
+    String? name,
+    String? category,
+    String? nickname,
+    String? birthday,
+    String? team,
+    String? city,
+    String? email,
+    String? phone,
+    String? comment,
+  }) = _UpdateRacer;
+
   const factory DatabaseEvent.updateStartingInfo({
     required int stageId,
     required int participantId,

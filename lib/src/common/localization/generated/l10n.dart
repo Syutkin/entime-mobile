@@ -1605,6 +1605,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Некорректное имя`
+  String get I18nStart_incorrectName {
+    return Intl.message(
+      'Некорректное имя',
+      name: 'I18nStart_incorrectName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя не должно быть пустым`
+  String get I18nStart_emptyName {
+    return Intl.message(
+      'Имя не должно быть пустым',
+      name: 'I18nStart_emptyName',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Участник №{number}`
   String I18nStart_participantNumber(Object number) {
     return Intl.message(
@@ -2255,6 +2275,96 @@ class GeneratedLocalization {
       name: 'I18nModuleSettings_unknownModuleType',
       desc: '',
       args: [type],
+    );
+  }
+
+  /// `Категория`
+  String get I18nDatabase_category {
+    return Intl.message(
+      'Категория',
+      name: 'I18nDatabase_category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя`
+  String get I18nDatabase_name {
+    return Intl.message(
+      'Имя',
+      name: 'I18nDatabase_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Никнейм`
+  String get I18nDatabase_nickname {
+    return Intl.message(
+      'Никнейм',
+      name: 'I18nDatabase_nickname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Дата/Год рождения`
+  String get I18nDatabase_birthday {
+    return Intl.message(
+      'Дата/Год рождения',
+      name: 'I18nDatabase_birthday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Команда`
+  String get I18nDatabase_team {
+    return Intl.message(
+      'Команда',
+      name: 'I18nDatabase_team',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Город`
+  String get I18nDatabase_city {
+    return Intl.message(
+      'Город',
+      name: 'I18nDatabase_city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Электронная почта`
+  String get I18nDatabase_email {
+    return Intl.message(
+      'Электронная почта',
+      name: 'I18nDatabase_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Телефон`
+  String get I18nDatabase_phone {
+    return Intl.message(
+      'Телефон',
+      name: 'I18nDatabase_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Комментарий`
+  String get I18nDatabase_comment {
+    return Intl.message(
+      'Комментарий',
+      name: 'I18nDatabase_comment',
+      desc: '',
+      args: [],
     );
   }
 

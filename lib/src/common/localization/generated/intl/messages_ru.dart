@@ -129,11 +129,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создать соревнование"),
         "I18nDatabase_addStage":
             MessageLookupByLibrary.simpleMessage("Создать спецучасток"),
+        "I18nDatabase_birthday":
+            MessageLookupByLibrary.simpleMessage("Дата/Год рождения"),
+        "I18nDatabase_category":
+            MessageLookupByLibrary.simpleMessage("Категория"),
+        "I18nDatabase_city": MessageLookupByLibrary.simpleMessage("Город"),
+        "I18nDatabase_comment":
+            MessageLookupByLibrary.simpleMessage("Комментарий"),
         "I18nDatabase_deleteRace": m30,
         "I18nDatabase_deleteStage": m31,
         "I18nDatabase_deleteTrail": m32,
         "I18nDatabase_editRace":
             MessageLookupByLibrary.simpleMessage("Редактирование"),
+        "I18nDatabase_email":
+            MessageLookupByLibrary.simpleMessage("Электронная почта"),
         "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
             "Введите название соревнования"),
         "I18nDatabase_enterStageName": MessageLookupByLibrary.simpleMessage(
@@ -150,6 +159,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Некорректная ссылка"),
         "I18nDatabase_isActiveStage":
             MessageLookupByLibrary.simpleMessage("Активный"),
+        "I18nDatabase_name": MessageLookupByLibrary.simpleMessage("Имя"),
+        "I18nDatabase_nickname":
+            MessageLookupByLibrary.simpleMessage("Никнейм"),
+        "I18nDatabase_phone": MessageLookupByLibrary.simpleMessage("Телефон"),
         "I18nDatabase_raceDates":
             MessageLookupByLibrary.simpleMessage("Даты проведения"),
         "I18nDatabase_raceDescription":
@@ -167,6 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Описание"),
         "I18nDatabase_stageName":
             MessageLookupByLibrary.simpleMessage("Название спецучастка"),
+        "I18nDatabase_team": MessageLookupByLibrary.simpleMessage("Команда"),
         "I18nDatabase_trail": MessageLookupByLibrary.simpleMessage("Трейл"),
         "I18nDatabase_trailDescription":
             MessageLookupByLibrary.simpleMessage("Описание"),
@@ -518,8 +532,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Добавить участника"),
         "I18nStart_didNotStart":
             MessageLookupByLibrary.simpleMessage("Не стартовал"),
+        "I18nStart_emptyName":
+            MessageLookupByLibrary.simpleMessage("Имя не должно быть пустым"),
         "I18nStart_incorrectCorrection":
             MessageLookupByLibrary.simpleMessage("Неверное значение поправки"),
+        "I18nStart_incorrectName":
+            MessageLookupByLibrary.simpleMessage("Некорректное имя"),
         "I18nStart_incorrectTime":
             MessageLookupByLibrary.simpleMessage("Неверное значение времени"),
         "I18nStart_participantCategory": m21,

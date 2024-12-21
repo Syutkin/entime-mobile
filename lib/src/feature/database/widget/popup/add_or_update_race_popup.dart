@@ -93,11 +93,11 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
               keyboardType: TextInputType.url,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value.isNullOrEmpty) {
                   url = '';
                   return null;
                 } else {
-                  if (value.isUrl) {
+                  if (value.isValidUrl) {
                     url = value;
                     return null;
                   } else {

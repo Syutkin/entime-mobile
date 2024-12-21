@@ -221,11 +221,11 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
               keyboardType: TextInputType.url,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value.isNullOrEmpty) {
                   url = '';
                   return null;
                 } else {
-                  if (value.isUrl) {
+                  if (value.isValidUrl) {
                     url = value;
                     return null;
                   } else {
