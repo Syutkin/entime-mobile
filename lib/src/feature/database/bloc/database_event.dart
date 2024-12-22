@@ -94,7 +94,7 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.updateRacer({
     required int riderId,
     required int participantId,
-    String? name,
+    required String name,
     String? category,
     String? nickname,
     String? birthday,

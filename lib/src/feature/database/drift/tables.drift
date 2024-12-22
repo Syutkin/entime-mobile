@@ -185,9 +185,9 @@ FROM track_files
 WHERE hash_sha1 = :hash_sha1 AND size = :size
 LIMIT 1;
 
-_addRider:
-INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment)
-VALUES(:name, :nickname, :birthday, :team, :city, :email, :phone, :comment);
+-- _addRider:
+-- INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment)
+-- VALUES(:name, :nickname, :birthday, :team, :city, :email, :phone, :comment);
 
 _addParticipant:
 INSERT INTO participants (race_id, rider_id, number, category, rfid)

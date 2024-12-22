@@ -367,15 +367,20 @@ class AppDatabase extends _$AppDatabase {
     String? email,
     String? phone,
   }) {
-    return _addRider(
-      name: name,
-      nickname: nickname,
-      city: city,
-      team: team,
-      birthday: birthday,
-      comment: comment,
-      email: email,
-      phone: phone,
+    return into(riders).insert(
+      RidersCompanion(
+        name: Value(name),
+        nickname:
+            nickname.isNotNullOrEmpty ? Value(nickname) : const Value.absent(),
+        birthday:
+            birthday.isNotNullOrEmpty ? Value(birthday) : const Value.absent(),
+        team: team.isNotNullOrEmpty ? Value(team) : const Value.absent(),
+        city: city.isNotNullOrEmpty ? Value(city) : const Value.absent(),
+        email: email.isNotNullOrEmpty ? Value(email) : const Value.absent(),
+        phone: phone.isNotNullOrEmpty ? Value(phone) : const Value.absent(),
+        comment:
+            comment.isNotNullOrEmpty ? Value(comment) : const Value.absent(),
+      ),
     );
   }
 
@@ -395,13 +400,41 @@ class AppDatabase extends _$AppDatabase {
     return (update(riders)..where((r) => r.id.equals(id))).write(
       RidersCompanion(
         name: name == null ? const Value.absent() : Value(name),
-        nickname: nickname == null ? const Value.absent() : Value(nickname),
-        birthday: birthday == null ? const Value.absent() : Value(birthday),
-        team: team == null ? const Value.absent() : Value(team),
-        city: city == null ? const Value.absent() : Value(city),
-        email: email == null ? const Value.absent() : Value(email),
-        phone: phone == null ? const Value.absent() : Value(phone),
-        comment: comment == null ? const Value.absent() : Value(comment),
+        nickname: nickname == null
+            ? const Value.absent()
+            : nickname.isNotEmpty
+                ? Value(nickname)
+                : const Value(null),
+        birthday: birthday == null
+            ? const Value.absent()
+            : birthday.isNotEmpty
+                ? Value(birthday)
+                : const Value(null),
+        team: team == null
+            ? const Value.absent()
+            : team.isNotEmpty
+                ? Value(team)
+                : const Value(null),
+        city: city == null
+            ? const Value.absent()
+            : city.isNotEmpty
+                ? Value(city)
+                : const Value(null),
+        email: email == null
+            ? const Value.absent()
+            : email.isNotEmpty
+                ? Value(email)
+                : const Value(null),
+        phone: phone == null
+            ? const Value.absent()
+            : phone.isNotEmpty
+                ? Value(phone)
+                : const Value(null),
+        comment: comment == null
+            ? const Value.absent()
+            : comment.isNotEmpty
+                ? Value(comment)
+                : const Value(null),
         isDeleted: Value(isDeleted),
       ),
     );
@@ -1095,6 +1128,33 @@ class AppDatabase extends _$AppDatabase {
         }
       }
     });
+    // await transaction(() async {
+    //   for (final stageName in race.stageNames) {
+    //     stages[stageName] = await addStage(raceId: raceId, name: stageName);
+    //   }
+    //   for (final item in race.startItems) {
+    //     final riderId = await addRider(
+    //       name: item.name,
+    //       nickname: item.nickname,
+    //       city: item.city,
+    //       team: item.team,
+    //       birthday: item.age,
+    //     );
+    //     final participantId = await addParticipant(
+    //       raceId: raceId,
+    //       riderId: riderId,
+    //       number: item.number,
+    //       category: item.category,
+    //     );
+    //     for (final stageName in stages.keys) {
+    //       await _addStartInfo(
+    //         stageId: stages[stageName]!,
+    //         participantId: participantId,
+    //         startTime: item.startTimes![stageName]!,
+    //       );
+    //     }
+    //   }
+    // });
     return raceId;
   }
 

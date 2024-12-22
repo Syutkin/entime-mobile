@@ -103,6 +103,7 @@ class _StartListPage extends State<StartListPage> {
                             editRacerPopup(
                               context: context,
                               participantAtStart: item,
+                              riders: context.read<DatabaseBloc>().state.riders,
                             );
                           },
 

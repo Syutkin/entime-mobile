@@ -86,7 +86,7 @@ mixin _$DatabaseEvent {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -213,7 +213,7 @@ mixin _$DatabaseEvent {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -337,7 +337,7 @@ mixin _$DatabaseEvent {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -682,7 +682,7 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -812,7 +812,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -939,7 +939,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -1535,7 +1535,7 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -1679,7 +1679,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -1820,7 +1820,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -2297,7 +2297,7 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -2427,7 +2427,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -2555,7 +2555,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -3012,7 +3012,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -3143,7 +3143,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -3271,7 +3271,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -3731,7 +3731,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -3862,7 +3862,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -3990,7 +3990,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -4383,7 +4383,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -4513,7 +4513,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -4640,7 +4640,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -4992,7 +4992,7 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -5122,7 +5122,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -5249,7 +5249,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -5621,7 +5621,7 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -5751,7 +5751,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -5878,7 +5878,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -6230,7 +6230,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -6360,7 +6360,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -6487,7 +6487,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -6875,7 +6875,7 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -7005,7 +7005,7 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -7132,7 +7132,7 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -7594,7 +7594,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -7725,7 +7725,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -7853,7 +7853,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -8248,7 +8248,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -8378,7 +8378,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -8505,7 +8505,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -8884,7 +8884,7 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -9014,7 +9014,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -9141,7 +9141,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -9521,7 +9521,7 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -9651,7 +9651,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -9778,7 +9778,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -10160,7 +10160,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -10290,7 +10290,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -10417,7 +10417,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -10830,7 +10830,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -10960,7 +10960,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -11087,7 +11087,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -11346,7 +11346,7 @@ abstract class _$$UpdateRacerImplCopyWith<$Res> {
   $Res call(
       {int riderId,
       int participantId,
-      String? name,
+      String name,
       String? category,
       String? nickname,
       String? birthday,
@@ -11372,7 +11372,7 @@ class __$$UpdateRacerImplCopyWithImpl<$Res>
   $Res call({
     Object? riderId = null,
     Object? participantId = null,
-    Object? name = freezed,
+    Object? name = null,
     Object? category = freezed,
     Object? nickname = freezed,
     Object? birthday = freezed,
@@ -11391,10 +11391,10 @@ class __$$UpdateRacerImplCopyWithImpl<$Res>
           ? _value.participantId
           : participantId // ignore: cast_nullable_to_non_nullable
               as int,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -11437,7 +11437,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
   const _$UpdateRacerImpl(
       {required this.riderId,
       required this.participantId,
-      this.name,
+      required this.name,
       this.category,
       this.nickname,
       this.birthday,
@@ -11452,7 +11452,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
   @override
   final int participantId;
   @override
-  final String? name;
+  final String name;
   @override
   final String? category;
   @override
@@ -11580,7 +11580,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -11711,7 +11711,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -11839,7 +11839,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -12075,7 +12075,7 @@ abstract class _UpdateRacer implements DatabaseEvent {
   const factory _UpdateRacer(
       {required final int riderId,
       required final int participantId,
-      final String? name,
+      required final String name,
       final String? category,
       final String? nickname,
       final String? birthday,
@@ -12087,7 +12087,7 @@ abstract class _UpdateRacer implements DatabaseEvent {
 
   int get riderId;
   int get participantId;
-  String? get name;
+  String get name;
   String? get category;
   String? get nickname;
   String? get birthday;
@@ -12317,7 +12317,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -12454,7 +12454,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -12588,7 +12588,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -13060,7 +13060,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -13191,7 +13191,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -13319,7 +13319,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -13761,7 +13761,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -13892,7 +13892,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -14020,7 +14020,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -14419,7 +14419,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -14549,7 +14549,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -14676,7 +14676,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -15157,7 +15157,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -15288,7 +15288,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -15424,7 +15424,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -15868,7 +15868,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -15999,7 +15999,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -16127,7 +16127,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -16519,7 +16519,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -16649,7 +16649,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -16776,7 +16776,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -17159,7 +17159,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -17289,7 +17289,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -17416,7 +17416,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -17797,7 +17797,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -17927,7 +17927,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -18054,7 +18054,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -18443,7 +18443,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -18573,7 +18573,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -18700,7 +18700,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -19092,7 +19092,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -19222,7 +19222,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -19349,7 +19349,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -19741,7 +19741,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -19871,7 +19871,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -19998,7 +19998,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -20380,7 +20380,7 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -20510,7 +20510,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -20637,7 +20637,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -21048,7 +21048,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -21178,7 +21178,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -21305,7 +21305,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -21703,7 +21703,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -21833,7 +21833,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -21960,7 +21960,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -22344,7 +22344,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -22474,7 +22474,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -22601,7 +22601,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -22957,7 +22957,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -23087,7 +23087,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -23214,7 +23214,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -23587,7 +23587,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -23717,7 +23717,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -23844,7 +23844,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -24236,7 +24236,7 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -24366,7 +24366,7 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -24493,7 +24493,7 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -24848,7 +24848,7 @@ class _$ShareStartImpl implements _ShareStart {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -24978,7 +24978,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -25105,7 +25105,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -25449,7 +25449,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -25579,7 +25579,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -25706,7 +25706,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -26050,7 +26050,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -26180,7 +26180,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -26307,7 +26307,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -26679,7 +26679,7 @@ class _$ShareTrackImpl implements _ShareTrack {
     required TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -26809,7 +26809,7 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult? Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,
@@ -26936,7 +26936,7 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult Function(
             int riderId,
             int participantId,
-            String? name,
+            String name,
             String? category,
             String? nickname,
             String? birthday,

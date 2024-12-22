@@ -58,10 +58,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       _emitState();
     });
 
-    // _db.select(_db.riders).watch().listen((event) async {
-    //   _riders = event;
-    //   add( DatabaseEvent.onChanged());
-    // });
+    _db.select(_db.riders).watch().listen((event) async {
+      _riders = event;
+      _emitState();
+    });
 
     // _db.select(_db.statuses).watch().listen((event) async {
     //   _statuses = event;
@@ -334,22 +334,40 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           }
         },
         updateRacer: (event) async {
-          await _db.updateRider(
-            id: event.riderId,
-            name: event.name,
-            nickname: event.nickname,
-            birthday: event.birthday,
-            team: event.team,
-            city: event.city,
-            email: event.email,
-            phone: event.phone,
-            comment: event.comment,
-          );
-          await _db.updateParticipant(
-            id: event.participantId,
-            riderId: event.riderId,
-            category: event.category,
-          );
+          if (event.riderId >= 0) {
+            await _db.updateRider(
+              id: event.riderId,
+              name: event.name,
+              nickname: event.nickname,
+              birthday: event.birthday,
+              team: event.team,
+              city: event.city,
+              email: event.email,
+              phone: event.phone,
+              comment: event.comment,
+            );
+            await _db.updateParticipant(
+              id: event.participantId,
+              riderId: event.riderId,
+              category: event.category,
+            );
+          } else {
+            final riderId = await _db.addRider(
+              name: event.name,
+              nickname: event.nickname,
+              birthday: event.birthday,
+              team: event.team,
+              city: event.city,
+              email: event.email,
+              phone: event.phone,
+              comment: event.comment,
+            );
+            await _db.updateParticipant(
+              id: event.participantId,
+              riderId: riderId,
+              category: event.category,
+            );
+          }
         },
         updateStartingInfo: (event) async {
           await _db.setStartingInfo(
@@ -590,7 +608,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   List<Race> _races = [];
   List<Stage> _stages = [];
-  final List<Rider> _riders = [];
+  List<Rider> _riders = [];
   final List<Status> _statuses = [];
   List<ParticipantAtStart> _participants = [];
   final List<Start> _starts = [];
