@@ -9,6 +9,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required Stage? stage,
     required List<Race> races,
     required List<Stage> stages,
+    required List<String?> categories,
     required List<Rider> riders,
     required List<Status> statuses,
     required List<ParticipantAtStart> participants,

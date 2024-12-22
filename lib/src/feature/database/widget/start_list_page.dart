@@ -104,6 +104,8 @@ class _StartListPage extends State<StartListPage> {
                               context: context,
                               participantAtStart: item,
                               riders: context.read<DatabaseBloc>().state.riders,
+                              categories:
+                                  context.read<DatabaseBloc>().state.categories,
                             );
                           },
 

@@ -160,6 +160,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nDatabase_isActiveStage":
             MessageLookupByLibrary.simpleMessage("Активный"),
         "I18nDatabase_name": MessageLookupByLibrary.simpleMessage("Имя"),
+        "I18nDatabase_newCategory":
+            MessageLookupByLibrary.simpleMessage("Новая категория?"),
+        "I18nDatabase_newRider":
+            MessageLookupByLibrary.simpleMessage("Новый гонщик?"),
         "I18nDatabase_nickname":
             MessageLookupByLibrary.simpleMessage("Никнейм"),
         "I18nDatabase_phone": MessageLookupByLibrary.simpleMessage("Телефон"),
@@ -533,11 +537,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nStart_didNotStart":
             MessageLookupByLibrary.simpleMessage("Не стартовал"),
         "I18nStart_emptyName":
-            MessageLookupByLibrary.simpleMessage("Имя не должно быть пустым"),
+            MessageLookupByLibrary.simpleMessage("Введите имя"),
+        "I18nStart_incorrectBirthday": MessageLookupByLibrary.simpleMessage(
+            "Некорректная дата/год рождения"),
+        "I18nStart_incorrectCity": MessageLookupByLibrary.simpleMessage(
+            "Некорректное название города"),
         "I18nStart_incorrectCorrection":
             MessageLookupByLibrary.simpleMessage("Неверное значение поправки"),
+        "I18nStart_incorrectEmail":
+            MessageLookupByLibrary.simpleMessage("Некорректный е-мейл"),
         "I18nStart_incorrectName":
             MessageLookupByLibrary.simpleMessage("Некорректное имя"),
+        "I18nStart_incorrectNickname":
+            MessageLookupByLibrary.simpleMessage("Некорректный никнейм"),
         "I18nStart_incorrectTime":
             MessageLookupByLibrary.simpleMessage("Неверное значение времени"),
         "I18nStart_participantCategory": m21,

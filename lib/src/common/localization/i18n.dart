@@ -917,9 +917,29 @@ class I18nStart {
       );
 
   static String get emptyName => Intl.message(
-        'Имя не должно быть пустым',
+        'Введите имя',
         name: 'I18nStart_emptyName',
       );
+
+  static String get incorrectNickname => Intl.message(
+    'Некорректный никнейм',
+    name: 'I18nStart_incorrectNickname',
+  );
+
+  static String get incorrectBirthday => Intl.message(
+    'Некорректная дата/год рождения',
+    name: 'I18nStart_incorrectBirthday',
+  );
+
+  static String get incorrectCity => Intl.message(
+    'Некорректное название города',
+    name: 'I18nStart_incorrectCity',
+  );
+
+  static String get incorrectEmail => Intl.message(
+    'Некорректный е-мейл',
+    name: 'I18nStart_incorrectEmail',
+  );
 
   static String participantNumber(int number) => Intl.message(
         'Участник №$number',
@@ -1487,6 +1507,16 @@ class I18nDatabase {
         name: 'I18nDatabase_deleteTrail',
         args: [trailName],
       );
+
+  static String get newCategory => Intl.message(
+    'Новая категория?',
+    name: 'I18nDatabase_newCategory',
+  );
+
+  static String get newRider => Intl.message(
+    'Новый гонщик?',
+    name: 'I18nDatabase_newRider',
+  );
 }
 
 class I18nNtp {

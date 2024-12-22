@@ -15,7 +15,7 @@ repository: https://github.com/Syutkin/entime-mobile
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.5.0-alpha.2+374
+version: 0.5.0-alpha.2+376
 
 environment:
   sdk: ^3.5.0
@@ -29,7 +29,8 @@ dependencies:
   csv: ^6.0.0
   device_info_plus: ^11.2.0
   drift: ^2.22.1
-  dropdown_search: ^7.0.0-pre
+#  ToDo: После полноценного релиза 7.0.0 проверить работу PopupProps.autocomplete
+  dropdown_search: ^6.0.1
   equatable: ^2.0.7
   file_picker: ^8.1.6
 #  filesize: ^2.0.1

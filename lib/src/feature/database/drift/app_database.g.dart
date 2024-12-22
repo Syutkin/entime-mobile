@@ -4266,6 +4266,17 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Selectable<String?> _getCategories({required int raceId}) {
+    return customSelect(
+        'SELECT category FROM participants WHERE race_id = ?1 GROUP BY category',
+        variables: [
+          Variable<int>(raceId)
+        ],
+        readsFrom: {
+          participants,
+        }).map((QueryRow row) => row.readNullable<String>('category'));
+  }
+
   Future<int> _addStartInfo(
       {required int stageId,
       required int participantId,

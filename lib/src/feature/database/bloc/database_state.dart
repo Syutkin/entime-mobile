@@ -5,6 +5,7 @@ class DatabaseState with _$DatabaseState {
   const factory DatabaseState({
     required List<Race> races,
     required List<Stage> stages,
+    required List<String?> categories,
     required List<Rider> riders,
     required List<Status> statuses,
     required List<ParticipantAtStart> participants,

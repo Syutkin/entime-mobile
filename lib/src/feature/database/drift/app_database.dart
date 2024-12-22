@@ -481,6 +481,11 @@ class AppDatabase extends _$AppDatabase {
     );
   }
 
+  /// Категории, принимающие участие в соревновании
+  Future<List<String?>> getCategories(int raceId) {
+    return _getCategories(raceId: raceId).get();
+  }
+
   /// Список участников на старте
   ///
   /// Список содержит только участников со статусом [ParticipantStatus.active]

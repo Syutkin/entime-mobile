@@ -12,31 +12,29 @@ Future<void> editRacerPopup({
   required BuildContext context,
   required ParticipantAtStart participantAtStart,
   required List<Rider> riders,
+  required List<String?> categories,
 }) async {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) => EditRacerPopup(
       item: participantAtStart,
       riders: riders,
+      categories: categories,
     ),
   );
 }
 
-// category
-// name
-// nickname
-// birthday
-// team
-// city
-// email
-// phone
-// comment
-
 class EditRacerPopup extends StatefulWidget {
-  const EditRacerPopup({required this.item, required this.riders, super.key});
+  const EditRacerPopup({
+    required this.item,
+    required this.riders,
+    required this.categories,
+    super.key,
+  });
 
   final ParticipantAtStart item;
   final List<Rider> riders;
+  final List<String?> categories;
 
   @override
   State<EditRacerPopup> createState() => _EditRacerPopupState();
@@ -44,37 +42,46 @@ class EditRacerPopup extends StatefulWidget {
 
 class _EditRacerPopupState extends State<EditRacerPopup> {
   final formKey = GlobalKey<FormState>();
-
-  final dropdownKey = GlobalKey<DropdownSearchState<Rider>>();
-
-  final categoryController = TextEditingController();
-
-  final nameController = TextEditingController();
-
+  final categoryDropdownKey = GlobalKey<DropdownSearchState<String?>>();
+  final riderDropdownKey = GlobalKey<DropdownSearchState<Rider>>();
+  final teamDropdownKey = GlobalKey<DropdownSearchState<String?>>();
+  final cityDropdownKey = GlobalKey<DropdownSearchState<String?>>();
   final nicknameController = TextEditingController();
-
   final birthdayController = TextEditingController();
-
   final teamController = TextEditingController();
-
   final cityController = TextEditingController();
-
   final emailController = TextEditingController();
-
   final phoneController = TextEditingController();
-
   final commentController = TextEditingController();
-
   final riders = <Rider>[];
+  final categories = <String?>[];
+  late final List<String?> teams;
+  late final List<String?> cities;
 
   @override
   void initState() {
     riders.addAll(widget.riders);
-    categoryController.text = widget.item.category ?? '';
+    teams = riders
+        .map((e) {
+          if (e.team.isNotNullOrEmpty) {
+            return e.team;
+          }
+        })
+        .toSet()
+        .toList()
+      ..remove(null);
+    cities = riders
+        .map((e) {
+          if (e.city.isNotNullOrEmpty) {
+            return e.city;
+          }
+        })
+        .toSet()
+        .toList()
+      ..remove(null);
+    categories.addAll(widget.categories);
     nicknameController.text = widget.item.nickname ?? '';
     birthdayController.text = widget.item.birthday ?? '';
-    teamController.text = widget.item.team ?? '';
-    cityController.text = widget.item.city ?? '';
     emailController.text = widget.item.email ?? '';
     phoneController.text = widget.item.phone ?? '';
     commentController.text = widget.item.comment ?? '';
@@ -91,58 +98,85 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            TextFormField(
-              //ToDo: dropdown_search
-              controller: categoryController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_category,
+            DropdownSearch<String?>(
+              key: categoryDropdownKey,
+              selectedItem: widget.item.category,
+              items: (f, cs) => categories,
+              compareFn: (item1, item2) => item1 == item2,
+              decoratorProps: DropDownDecoratorProps(
+                decoration: InputDecoration(
+                  labelText: Localization.current.I18nDatabase_category,
+                ),
+              ),
+              // ToDo: потом заменить на PopupProps.autocomplete
+              // Но пока сыпет ошибку если жать бекспейс при пустом поле
+              // И не срабатывает валидатор
+              popupProps: PopupProps.menu(
+                showSearchBox: true,
+                fit: FlexFit.loose,
+                searchDelay: Duration.zero,
+                emptyBuilder: (context, query) {
+                  return ListTile(
+                    title: Text(Localization.current.I18nDatabase_newCategory),
+                    trailing: TextButton(
+                      onPressed: () {
+                        categoryDropdownKey.currentState!
+                            .changeSelectedItem(query);
+                        categoryDropdownKey.currentState!.closeDropDownSearch();
+                        setState(() {
+                          categories.insert(0, query);
+                        });
+                      },
+                      child: Text(Localization.current.I18nCore_yes),
+                    ),
+                  );
+                },
               ),
             ),
-            // ToDo: dropdown_search
-            // ToDo: выбор из существующих riders
             DropdownSearch<Rider>(
-              key: dropdownKey,
+              key: riderDropdownKey,
               selectedItem:
                   riders.firstWhere((rider) => rider.id == widget.item.riderId),
               items: (f, cs) => riders,
               itemAsString: (value) => value.name,
               compareFn: (item1, item2) => item1.id == item2.id,
               // При выборе райдера из существующего списка, обновляем нижеследующие поля
-              //
-              onSelected: (value) {
+              onChanged: (value) {
                 nicknameController.text = value?.nickname ?? '';
                 birthdayController.text = value?.birthday ?? '';
-                teamController.text = value?.team ?? '';
-                cityController.text = value?.city ?? '';
+                teamDropdownKey.currentState!.changeSelectedItem(value?.team);
+                cityDropdownKey.currentState!.changeSelectedItem(value?.city);
                 emailController.text = value?.email ?? '';
                 phoneController.text = value?.phone ?? '';
                 commentController.text = value?.comment ?? '';
               },
               validator: validateRider,
+              autoValidateMode: AutovalidateMode.always,
               decoratorProps: DropDownDecoratorProps(
                 decoration: InputDecoration(
                   labelText: Localization.current.I18nDatabase_name,
                 ),
               ),
-              popupProps: PopupProps.autocomplete(
-                searchFieldProps: TextFieldProps(controller: nameController),
+              popupProps: PopupProps.menu(
+                showSearchBox: true,
                 fit: FlexFit.loose,
                 searchDelay: Duration.zero,
                 emptyBuilder: (context, query) {
-                  return TextButton(
-                    onPressed: () {
-                      final rider =
-                          Rider(id: -1, name: query, isDeleted: false);
-                      dropdownKey.currentState!.changeSelectedItem(rider);
-                      dropdownKey.currentState!.closeDropDownSearch();
-                      setState(() {
-                        riders.insert(0, rider);
-                        // searchFieldController.text = '';
-                      });
-                    },
-                    //ToDo: красивая кнопка
-                    child: const Text('add and set as selected item'),
+                  return ListTile(
+                    title: Text(Localization.current.I18nDatabase_newRider),
+                    trailing: TextButton(
+                      onPressed: () {
+                        final rider =
+                            Rider(id: -1, name: query, isDeleted: false);
+                        riderDropdownKey.currentState!
+                            .changeSelectedItem(rider);
+                        riderDropdownKey.currentState!.closeDropDownSearch();
+                        setState(() {
+                          riders.insert(0, rider);
+                        });
+                      },
+                      child: Text(Localization.current.I18nCore_yes),
+                    ),
                   );
                 },
               ),
@@ -162,24 +196,72 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
                 labelText: Localization.current.I18nDatabase_birthday,
               ),
               validator: validateBirthday,
-              autovalidateMode: AutovalidateMode.onUnfocus,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
 
-            TextFormField(
-              //ToDo: dropdown_search
-              controller: teamController,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_team,
+            /// Команда
+            DropdownSearch<String?>(
+              key: teamDropdownKey,
+              selectedItem: widget.item.team,
+              items: (f, cs) => teams,
+              compareFn: (item1, item2) => item1 == item2,
+              decoratorProps: DropDownDecoratorProps(
+                decoration: InputDecoration(
+                  labelText: Localization.current.I18nDatabase_team,
+                ),
+              ),
+              popupProps: PopupProps.menu(
+                showSearchBox: true,
+                fit: FlexFit.loose,
+                searchDelay: Duration.zero,
+                searchFieldProps: TextFieldProps(controller: teamController),
+                emptyBuilder: (context, query) {
+                  return ListTile(
+                    title: Text(teamController.text),
+                    onTap: () {
+                      teamDropdownKey.currentState!.changeSelectedItem(query);
+                      teamDropdownKey.currentState!.closeDropDownSearch();
+                      teamController.text = '';
+                      setState(() {
+                        teams.insert(0, query);
+                      });
+                    },
+                  );
+                },
               ),
             ),
-            TextFormField(
-              //ToDo: dropdown_search
-              controller: cityController,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_city,
+
+            /// Город
+            DropdownSearch<String?>(
+              key: cityDropdownKey,
+              selectedItem: widget.item.city,
+              items: (f, cs) => cities,
+              compareFn: (item1, item2) => item1 == item2,
+              decoratorProps: DropDownDecoratorProps(
+                decoration: InputDecoration(
+                  labelText: Localization.current.I18nDatabase_city,
+                ),
               ),
               validator: validateCity,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              autoValidateMode: AutovalidateMode.always,
+              popupProps: PopupProps.menu(
+                showSearchBox: true,
+                fit: FlexFit.loose,
+                searchDelay: Duration.zero,
+                emptyBuilder: (context, query) {
+                  return ListTile(
+                    title: Text(cityController.text),
+                    onTap: () {
+                      cityDropdownKey.currentState!.changeSelectedItem(query);
+                      cityDropdownKey.currentState!.closeDropDownSearch();
+                      cityController.text = '';
+                      setState(() {
+                        cities.insert(0, query);
+                      });
+                    },
+                  );
+                },
+              ),
             ),
             TextFormField(
               controller: emailController,
@@ -219,17 +301,18 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
         },
         onOkPressed: () {
           if (formKey.currentState!.validate()) {
-            final rider = dropdownKey.currentState!.getSelectedItem!;
+            final rider = riderDropdownKey.currentState!.getSelectedItem!;
+            final category = categoryDropdownKey.currentState!.getSelectedItem;
             context.read<DatabaseBloc>().add(
                   DatabaseEvent.updateRacer(
                     riderId: rider.id,
                     participantId: widget.item.participantId,
-                    category: categoryController.text,
+                    category: category,
                     name: rider.name,
                     nickname: nicknameController.text,
                     birthday: birthdayController.text,
-                    team: teamController.text,
-                    city: cityController.text,
+                    team: teamDropdownKey.currentState!.getSelectedItem,
+                    city: cityDropdownKey.currentState!.getSelectedItem,
                     email: emailController.text,
                     phone: phoneController.text,
                     comment: commentController.text,
@@ -242,14 +325,11 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
     );
   }
 
-  //ToDo:
   String? validateRider(Rider? rider) {
     if (rider == null) {
-      // ToDo: localization
-      return 'error';
-    } else {
-      return validateName(rider.name);
+      return Localization.current.I18nStart_emptyName;
     }
+    return validateName(rider.name);
   }
 
   String? validateName(String? name) {
@@ -259,28 +339,58 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
     if (RegExp(r'^[ a-zA-Zа-яёА-ЯЁ0-9._-]+$', caseSensitive: false)
         .hasMatch(name!)) {
       return null;
-    } else {
-      return Localization.current.I18nStart_incorrectName;
     }
+    return Localization.current.I18nStart_incorrectName;
   }
 
-  // ToDo:
-  String? validateNickname(String? name) {
-    return null;
+  String? validateNickname(String? nickname) {
+    if (nickname.isNullOrEmpty) {
+      return null;
+    }
+    if (RegExp(r'^[ a-zA-Zа-яёА-ЯЁ0-9._-]+$', caseSensitive: false)
+        .hasMatch(nickname!)) {
+      return null;
+    }
+    return Localization.current.I18nStart_incorrectNickname;
   }
 
-  // ToDo:
-  String? validateBirthday(String? name) {
-    return null;
+  String? validateBirthday(String? birthday) {
+    if (birthday.isNullOrEmpty) {
+      return null;
+    }
+    final date = DateTime.tryParse(birthday!);
+    if (date != null && 1900 < date.year && date.year < DateTime.now().year) {
+      return null;
+    }
+    final year = int.tryParse(birthday);
+    if (year != null && 1900 < year && year < DateTime.now().year) {
+      return null;
+    }
+    // Если не год/дата, а возраст
+    if (year != null && 0 < year && year < 150) {
+      return null;
+    }
+    return Localization.current.I18nStart_incorrectBirthday;
   }
 
-  // ToDo:
-  String? validateCity(String? name) {
-    return null;
+  String? validateCity(String? city) {
+    if (city.isNullOrEmpty) {
+      return null;
+    }
+    if (RegExp(r'^[ a-zA-Zа-яёА-ЯЁ0-9._-]+$', caseSensitive: false)
+        .hasMatch(city!)) {
+      return null;
+    }
+    return Localization.current.I18nStart_incorrectCity;
   }
 
-  // ToDo:
-  String? validateEmail(String? name) {
-    return null;
+  String? validateEmail(String? email) {
+    if (email.isNullOrEmpty) {
+      return null;
+    }
+    if (email.isValidEmail) {
+      return null;
+    }
+    return Localization.current.I18nStart_incorrectEmail;
   }
 }

@@ -95,7 +95,7 @@ Future<void> _upsertStagePopup(
                       items: (filter, loadProps) => state.trails,
                       itemAsString: (value) => value.name,
                       compareFn: (item1, item2) => item1.name == item2.name,
-                      onSelected: (value) {
+                      onChanged: (value) {
                         trail = value;
                         trailId = trail?.id;
                       },
@@ -107,7 +107,7 @@ Future<void> _upsertStagePopup(
                       suffixProps: const DropdownSuffixProps(
                         clearButtonProps: ClearButtonProps(isVisible: true),
                       ),
-                      popupProps: PopupProps.autocomplete(
+                      popupProps: PopupProps.menu(
                         showSearchBox: true,
                         searchDelay: Duration.zero,
                         searchFieldProps: TextFieldProps(

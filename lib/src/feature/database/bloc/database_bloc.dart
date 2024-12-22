@@ -37,6 +37,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           const DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -71,7 +72,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     _startsSubscription =
         _db.getParticipantsAtStart(stageId: 0).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
+      final raceId = _race?.id ?? 0;
       _participants = await _db.getParticipantsAtStart(stageId: stageId).get();
+      _categories = await _db.getCategories(raceId);
       logger.t(
         'DatabaseBloc -> getParticipantsAtStart(stageId: $stageId).watch()',
       );
@@ -201,6 +204,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               stage: event.stage,
               races: event.races,
               stages: event.stages,
+              categories: event.categories,
               riders: event.riders,
               statuses: event.statuses,
               participants: event.participants,
@@ -608,6 +612,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   List<Race> _races = [];
   List<Stage> _stages = [];
+  List<String?> _categories = [];
   List<Rider> _riders = [];
   final List<Status> _statuses = [];
   List<ParticipantAtStart> _participants = [];
@@ -647,6 +652,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         stage: _stage,
         races: _races,
         stages: _stages,
+        categories: _categories,
         riders: _riders,
         statuses: _statuses,
         participants: _participants,

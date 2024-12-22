@@ -1615,11 +1615,51 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Имя не должно быть пустым`
+  /// `Введите имя`
   String get I18nStart_emptyName {
     return Intl.message(
-      'Имя не должно быть пустым',
+      'Введите имя',
       name: 'I18nStart_emptyName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректный никнейм`
+  String get I18nStart_incorrectNickname {
+    return Intl.message(
+      'Некорректный никнейм',
+      name: 'I18nStart_incorrectNickname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректная дата/год рождения`
+  String get I18nStart_incorrectBirthday {
+    return Intl.message(
+      'Некорректная дата/год рождения',
+      name: 'I18nStart_incorrectBirthday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректное название города`
+  String get I18nStart_incorrectCity {
+    return Intl.message(
+      'Некорректное название города',
+      name: 'I18nStart_incorrectCity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректный е-мейл`
+  String get I18nStart_incorrectEmail {
+    return Intl.message(
+      'Некорректный е-мейл',
+      name: 'I18nStart_incorrectEmail',
       desc: '',
       args: [],
     );
@@ -2695,6 +2735,26 @@ class GeneratedLocalization {
       name: 'I18nDatabase_deleteTrail',
       desc: '',
       args: [trailName],
+    );
+  }
+
+  /// `Новая категория?`
+  String get I18nDatabase_newCategory {
+    return Intl.message(
+      'Новая категория?',
+      name: 'I18nDatabase_newCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Новый гонщик?`
+  String get I18nDatabase_newRider {
+    return Intl.message(
+      'Новый гонщик?',
+      name: 'I18nDatabase_newRider',
+      desc: '',
+      args: [],
     );
   }
 

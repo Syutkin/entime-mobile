@@ -24,6 +24,7 @@ mixin _$DatabaseEvent {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -164,6 +165,7 @@ mixin _$DatabaseEvent {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -288,6 +290,7 @@ mixin _$DatabaseEvent {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -620,6 +623,7 @@ class _$InitializeImpl implements _Initialize {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -763,6 +767,7 @@ class _$InitializeImpl implements _Initialize {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -890,6 +895,7 @@ class _$InitializeImpl implements _Initialize {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -1185,6 +1191,7 @@ abstract class _$$EmitStateImplCopyWith<$Res> {
       Stage? stage,
       List<Race> races,
       List<Stage> stages,
+      List<String?> categories,
       List<Rider> riders,
       List<Status> statuses,
       List<ParticipantAtStart> participants,
@@ -1216,6 +1223,7 @@ class __$$EmitStateImplCopyWithImpl<$Res>
     Object? stage = freezed,
     Object? races = null,
     Object? stages = null,
+    Object? categories = null,
     Object? riders = null,
     Object? statuses = null,
     Object? participants = null,
@@ -1244,6 +1252,10 @@ class __$$EmitStateImplCopyWithImpl<$Res>
           ? _value._stages
           : stages // ignore: cast_nullable_to_non_nullable
               as List<Stage>,
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String?>,
       riders: null == riders
           ? _value._riders
           : riders // ignore: cast_nullable_to_non_nullable
@@ -1310,6 +1322,7 @@ class _$EmitStateImpl implements _EmitState {
       required this.stage,
       required final List<Race> races,
       required final List<Stage> stages,
+      required final List<String?> categories,
       required final List<Rider> riders,
       required final List<Status> statuses,
       required final List<ParticipantAtStart> participants,
@@ -1322,6 +1335,7 @@ class _$EmitStateImpl implements _EmitState {
       required this.updateFinishNumber})
       : _races = races,
         _stages = stages,
+        _categories = categories,
         _riders = riders,
         _statuses = statuses,
         _participants = participants,
@@ -1347,6 +1361,14 @@ class _$EmitStateImpl implements _EmitState {
     if (_stages is EqualUnmodifiableListView) return _stages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_stages);
+  }
+
+  final List<String?> _categories;
+  @override
+  List<String?> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
   }
 
   final List<Rider> _riders;
@@ -1408,7 +1430,7 @@ class _$EmitStateImpl implements _EmitState {
 
   @override
   String toString() {
-    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
+    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, categories: $categories, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
   }
 
   @override
@@ -1420,6 +1442,8 @@ class _$EmitStateImpl implements _EmitState {
             const DeepCollectionEquality().equals(other.stage, stage) &&
             const DeepCollectionEquality().equals(other._races, _races) &&
             const DeepCollectionEquality().equals(other._stages, _stages) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
             const DeepCollectionEquality().equals(other._riders, _riders) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses) &&
             const DeepCollectionEquality()
@@ -1445,6 +1469,7 @@ class _$EmitStateImpl implements _EmitState {
       const DeepCollectionEquality().hash(stage),
       const DeepCollectionEquality().hash(_races),
       const DeepCollectionEquality().hash(_stages),
+      const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(_riders),
       const DeepCollectionEquality().hash(_statuses),
       const DeepCollectionEquality().hash(_participants),
@@ -1473,6 +1498,7 @@ class _$EmitStateImpl implements _EmitState {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -1609,6 +1635,7 @@ class _$EmitStateImpl implements _EmitState {
         stage,
         races,
         stages,
+        categories,
         riders,
         statuses,
         participants,
@@ -1630,6 +1657,7 @@ class _$EmitStateImpl implements _EmitState {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -1750,6 +1778,7 @@ class _$EmitStateImpl implements _EmitState {
         stage,
         races,
         stages,
+        categories,
         riders,
         statuses,
         participants,
@@ -1771,6 +1800,7 @@ class _$EmitStateImpl implements _EmitState {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -1893,6 +1923,7 @@ class _$EmitStateImpl implements _EmitState {
           stage,
           races,
           stages,
+          categories,
           riders,
           statuses,
           participants,
@@ -2071,6 +2102,7 @@ abstract class _EmitState implements DatabaseEvent {
       required final Stage? stage,
       required final List<Race> races,
       required final List<Stage> stages,
+      required final List<String?> categories,
       required final List<Rider> riders,
       required final List<Status> statuses,
       required final List<ParticipantAtStart> participants,
@@ -2086,6 +2118,7 @@ abstract class _EmitState implements DatabaseEvent {
   Stage? get stage;
   List<Race> get races;
   List<Stage> get stages;
+  List<String?> get categories;
   List<Rider> get riders;
   List<Status> get statuses;
   List<ParticipantAtStart> get participants;
@@ -2235,6 +2268,7 @@ class _$AddRaceImpl implements _AddRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -2378,6 +2412,7 @@ class _$AddRaceImpl implements _AddRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -2506,6 +2541,7 @@ class _$AddRaceImpl implements _AddRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -2950,6 +2986,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -3094,6 +3131,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -3222,6 +3260,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -3669,6 +3708,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -3813,6 +3853,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -3941,6 +3982,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -4321,6 +4363,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -4464,6 +4507,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -4591,6 +4635,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -4930,6 +4975,7 @@ class _$GetRacesImpl implements _GetRaces {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -5073,6 +5119,7 @@ class _$GetRacesImpl implements _GetRaces {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -5200,6 +5247,7 @@ class _$GetRacesImpl implements _GetRaces {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -5559,6 +5607,7 @@ class _$SelectRaceImpl implements _SelectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -5702,6 +5751,7 @@ class _$SelectRaceImpl implements _SelectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -5829,6 +5879,7 @@ class _$SelectRaceImpl implements _SelectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -6168,6 +6219,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -6311,6 +6363,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -6438,6 +6491,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -6813,6 +6867,7 @@ class _$AddStageImpl implements _AddStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -6956,6 +7011,7 @@ class _$AddStageImpl implements _AddStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -7083,6 +7139,7 @@ class _$AddStageImpl implements _AddStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -7532,6 +7589,7 @@ class _$UpsertStageImpl implements _UpsertStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -7676,6 +7734,7 @@ class _$UpsertStageImpl implements _UpsertStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -7804,6 +7863,7 @@ class _$UpsertStageImpl implements _UpsertStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -8186,6 +8246,7 @@ class _$DeleteStageImpl implements _DeleteStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -8329,6 +8390,7 @@ class _$DeleteStageImpl implements _DeleteStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -8456,6 +8518,7 @@ class _$DeleteStageImpl implements _DeleteStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -8822,6 +8885,7 @@ class _$GetStagesImpl implements _GetStages {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -8965,6 +9029,7 @@ class _$GetStagesImpl implements _GetStages {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -9092,6 +9157,7 @@ class _$GetStagesImpl implements _GetStages {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -9459,6 +9525,7 @@ class _$SelectStageImpl implements _SelectStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -9602,6 +9669,7 @@ class _$SelectStageImpl implements _SelectStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -9729,6 +9797,7 @@ class _$SelectStageImpl implements _SelectStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -10098,6 +10167,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -10241,6 +10311,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -10368,6 +10439,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -10768,6 +10840,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -10911,6 +10984,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -11038,6 +11112,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -11518,6 +11593,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -11662,6 +11738,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -11790,6 +11867,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -12255,6 +12333,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -12405,6 +12484,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -12539,6 +12619,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -12998,6 +13079,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -13142,6 +13224,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -13270,6 +13353,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -13699,6 +13783,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -13843,6 +13928,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -13971,6 +14057,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -14357,6 +14444,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -14500,6 +14588,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -14627,6 +14716,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -15095,6 +15185,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -15239,6 +15330,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -15375,6 +15467,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -15806,6 +15899,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -15950,6 +16044,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -16078,6 +16173,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -16457,6 +16553,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -16600,6 +16697,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -16727,6 +16825,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -17097,6 +17196,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -17240,6 +17340,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -17367,6 +17468,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -17735,6 +17837,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -17878,6 +17981,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -18005,6 +18109,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -18381,6 +18486,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -18524,6 +18630,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -18651,6 +18758,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -19030,6 +19138,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -19173,6 +19282,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -19300,6 +19410,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -19679,6 +19790,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -19822,6 +19934,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -19949,6 +20062,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -20318,6 +20432,7 @@ class _$HideFinishImpl implements _HideFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -20461,6 +20576,7 @@ class _$HideFinishImpl implements _HideFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -20588,6 +20704,7 @@ class _$HideFinishImpl implements _HideFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -20986,6 +21103,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -21129,6 +21247,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -21256,6 +21375,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -21641,6 +21761,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -21784,6 +21905,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -21911,6 +22033,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -22282,6 +22405,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -22425,6 +22549,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -22552,6 +22677,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -22895,6 +23021,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -23038,6 +23165,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -23165,6 +23293,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -23525,6 +23654,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -23668,6 +23798,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -23795,6 +23926,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -24174,6 +24306,7 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -24317,6 +24450,7 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -24444,6 +24578,7 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -24786,6 +24921,7 @@ class _$ShareStartImpl implements _ShareStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -24929,6 +25065,7 @@ class _$ShareStartImpl implements _ShareStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -25056,6 +25193,7 @@ class _$ShareStartImpl implements _ShareStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -25387,6 +25525,7 @@ class _$ShareFinishImpl implements _ShareFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -25530,6 +25669,7 @@ class _$ShareFinishImpl implements _ShareFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -25657,6 +25797,7 @@ class _$ShareFinishImpl implements _ShareFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -25988,6 +26129,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -26131,6 +26273,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -26258,6 +26401,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -26617,6 +26761,7 @@ class _$ShareTrackImpl implements _ShareTrack {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -26760,6 +26905,7 @@ class _$ShareTrackImpl implements _ShareTrack {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -26887,6 +27033,7 @@ class _$ShareTrackImpl implements _ShareTrack {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
             List<Status> statuses,
             List<ParticipantAtStart> participants,
@@ -27184,6 +27331,7 @@ abstract class _ShareTrack implements DatabaseEvent {
 mixin _$DatabaseState {
   List<Race> get races => throw _privateConstructorUsedError;
   List<Stage> get stages => throw _privateConstructorUsedError;
+  List<String?> get categories => throw _privateConstructorUsedError;
   List<Rider> get riders => throw _privateConstructorUsedError;
   List<Status> get statuses => throw _privateConstructorUsedError;
   List<ParticipantAtStart> get participants =>
@@ -27224,6 +27372,7 @@ abstract class $DatabaseStateCopyWith<$Res> {
   $Res call(
       {List<Race> races,
       List<Stage> stages,
+      List<String?> categories,
       List<Rider> riders,
       List<Status> statuses,
       List<ParticipantAtStart> participants,
@@ -27256,6 +27405,7 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
   $Res call({
     Object? races = null,
     Object? stages = null,
+    Object? categories = null,
     Object? riders = null,
     Object? statuses = null,
     Object? participants = null,
@@ -27277,6 +27427,10 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
           ? _value.stages
           : stages // ignore: cast_nullable_to_non_nullable
               as List<Stage>,
+      categories: null == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String?>,
       riders: null == riders
           ? _value.riders
           : riders // ignore: cast_nullable_to_non_nullable
@@ -27350,6 +27504,7 @@ abstract class _$$DatabaseStateImplCopyWith<$Res>
   $Res call(
       {List<Race> races,
       List<Stage> stages,
+      List<String?> categories,
       List<Rider> riders,
       List<Status> statuses,
       List<ParticipantAtStart> participants,
@@ -27381,6 +27536,7 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
   $Res call({
     Object? races = null,
     Object? stages = null,
+    Object? categories = null,
     Object? riders = null,
     Object? statuses = null,
     Object? participants = null,
@@ -27402,6 +27558,10 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
           ? _value._stages
           : stages // ignore: cast_nullable_to_non_nullable
               as List<Stage>,
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String?>,
       riders: null == riders
           ? _value._riders
           : riders // ignore: cast_nullable_to_non_nullable
@@ -27456,6 +27616,7 @@ class _$DatabaseStateImpl implements _DatabaseState {
   const _$DatabaseStateImpl(
       {required final List<Race> races,
       required final List<Stage> stages,
+      required final List<String?> categories,
       required final List<Rider> riders,
       required final List<Status> statuses,
       required final List<ParticipantAtStart> participants,
@@ -27469,6 +27630,7 @@ class _$DatabaseStateImpl implements _DatabaseState {
       this.awaitingNumber})
       : _races = races,
         _stages = stages,
+        _categories = categories,
         _riders = riders,
         _statuses = statuses,
         _participants = participants,
@@ -27490,6 +27652,14 @@ class _$DatabaseStateImpl implements _DatabaseState {
     if (_stages is EqualUnmodifiableListView) return _stages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_stages);
+  }
+
+  final List<String?> _categories;
+  @override
+  List<String?> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
   }
 
   final List<Rider> _riders;
@@ -27562,7 +27732,7 @@ class _$DatabaseStateImpl implements _DatabaseState {
 
   @override
   String toString() {
-    return 'DatabaseState(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
+    return 'DatabaseState(races: $races, stages: $stages, categories: $categories, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
   }
 
   @override
@@ -27572,6 +27742,8 @@ class _$DatabaseStateImpl implements _DatabaseState {
             other is _$DatabaseStateImpl &&
             const DeepCollectionEquality().equals(other._races, _races) &&
             const DeepCollectionEquality().equals(other._stages, _stages) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
             const DeepCollectionEquality().equals(other._riders, _riders) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses) &&
             const DeepCollectionEquality()
@@ -27595,6 +27767,7 @@ class _$DatabaseStateImpl implements _DatabaseState {
       runtimeType,
       const DeepCollectionEquality().hash(_races),
       const DeepCollectionEquality().hash(_stages),
+      const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(_riders),
       const DeepCollectionEquality().hash(_statuses),
       const DeepCollectionEquality().hash(_participants),
@@ -27620,6 +27793,7 @@ abstract class _DatabaseState implements DatabaseState {
   const factory _DatabaseState(
       {required final List<Race> races,
       required final List<Stage> stages,
+      required final List<String?> categories,
       required final List<Rider> riders,
       required final List<Status> statuses,
       required final List<ParticipantAtStart> participants,
@@ -27636,6 +27810,8 @@ abstract class _DatabaseState implements DatabaseState {
   List<Race> get races;
   @override
   List<Stage> get stages;
+  @override
+  List<String?> get categories;
   @override
   List<Rider> get riders;
   @override

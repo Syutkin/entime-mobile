@@ -56,6 +56,7 @@ void main() {
           const DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -80,6 +81,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -104,6 +106,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -129,6 +132,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -154,6 +158,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -184,6 +189,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -214,6 +220,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -244,6 +251,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -274,6 +282,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -297,6 +306,7 @@ void main() {
           const DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -319,6 +329,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],
@@ -341,6 +352,7 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
             statuses: [],
             participants: [],

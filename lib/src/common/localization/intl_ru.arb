@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-21T18:35:55.548326",
+  "@@last_modified": "2024-12-22T20:39:32.036008",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -820,8 +820,28 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nStart_emptyName": "Имя не должно быть пустым",
+  "I18nStart_emptyName": "Введите имя",
   "@I18nStart_emptyName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectNickname": "Некорректный никнейм",
+  "@I18nStart_incorrectNickname": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectBirthday": "Некорректная дата/год рождения",
+  "@I18nStart_incorrectBirthday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectCity": "Некорректное название города",
+  "@I18nStart_incorrectCity": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectEmail": "Некорректный е-мейл",
+  "@I18nStart_incorrectEmail": {
     "type": "text",
     "placeholders": {}
   },
@@ -1397,6 +1417,16 @@
     "placeholders": {
       "trailName": {}
     }
+  },
+  "I18nDatabase_newCategory": "Новая категория?",
+  "@I18nDatabase_newCategory": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_newRider": "Новый гонщик?",
+  "@I18nDatabase_newRider": {
+    "type": "text",
+    "placeholders": {}
   },
   "I18nNtp_ntpOffset": "NTP offset",
   "@I18nNtp_ntpOffset": {
