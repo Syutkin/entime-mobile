@@ -356,6 +356,11 @@ class AppDatabase extends _$AppDatabase {
         .getSingleOrNull();
   }
 
+  /// Список "неудалённых" гонщиков
+  Selectable<Rider> get getRiders {
+    return _getRiders(isDeleted: false);
+  }
+
   /// Добавляет гонщика
   Future<int> addRider({
     required String name,
@@ -395,7 +400,7 @@ class AppDatabase extends _$AppDatabase {
     String? email,
     String? phone,
     String? comment,
-    bool isDeleted = false,
+    bool? isDeleted,
   }) {
     return (update(riders)..where((r) => r.id.equals(id))).write(
       RidersCompanion(
@@ -435,7 +440,7 @@ class AppDatabase extends _$AppDatabase {
             : comment.isNotEmpty
                 ? Value(comment)
                 : const Value(null),
-        isDeleted: Value(isDeleted),
+        isDeleted: isDeleted == null ? const Value.absent() : Value(isDeleted),
       ),
     );
   }

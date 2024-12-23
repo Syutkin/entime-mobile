@@ -1525,6 +1525,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Гонщики`
+  String get I18nInit_riders {
+    return Intl.message(
+      'Гонщики',
+      name: 'I18nInit_riders',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Не стартовал`
   String get I18nStart_didNotStart {
     return Intl.message(
@@ -2753,6 +2763,16 @@ class GeneratedLocalization {
     return Intl.message(
       'Новый гонщик?',
       name: 'I18nDatabase_newRider',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Редактирование гонщика`
+  String get I18nDatabase_editRider {
+    return Intl.message(
+      'Редактирование гонщика',
+      name: 'I18nDatabase_editRider',
       desc: '',
       args: [],
     );

@@ -141,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nDatabase_deleteTrail": m32,
         "I18nDatabase_editRace":
             MessageLookupByLibrary.simpleMessage("Редактирование"),
+        "I18nDatabase_editRider":
+            MessageLookupByLibrary.simpleMessage("Редактирование гонщика"),
         "I18nDatabase_email":
             MessageLookupByLibrary.simpleMessage("Электронная почта"),
         "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
@@ -265,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nInit_noData": MessageLookupByLibrary.simpleMessage("Нет данных"),
         "I18nInit_pressToSelect":
             MessageLookupByLibrary.simpleMessage("Нажмите чтобы выбрать"),
+        "I18nInit_riders": MessageLookupByLibrary.simpleMessage("Гонщики"),
         "I18nInit_selectFile":
             MessageLookupByLibrary.simpleMessage("Выберите файл"),
         "I18nInit_selectRace":

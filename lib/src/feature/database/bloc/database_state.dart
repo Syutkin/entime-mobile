@@ -7,7 +7,6 @@ class DatabaseState with _$DatabaseState {
     required List<Stage> stages,
     required List<String?> categories,
     required List<Rider> riders,
-    required List<Status> statuses,
     required List<ParticipantAtStart> participants,
     required List<Start> starts,
     required List<Finish> finishes,

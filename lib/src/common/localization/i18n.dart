@@ -866,6 +866,11 @@ class I18nInit {
         'Трейлы',
         name: 'I18nInit_trails',
       );
+
+  static String get riders => Intl.message(
+        'Гонщики',
+        name: 'I18nInit_riders',
+      );
 }
 
 class I18nStart {
@@ -922,24 +927,24 @@ class I18nStart {
       );
 
   static String get incorrectNickname => Intl.message(
-    'Некорректный никнейм',
-    name: 'I18nStart_incorrectNickname',
-  );
+        'Некорректный никнейм',
+        name: 'I18nStart_incorrectNickname',
+      );
 
   static String get incorrectBirthday => Intl.message(
-    'Некорректная дата/год рождения',
-    name: 'I18nStart_incorrectBirthday',
-  );
+        'Некорректная дата/год рождения',
+        name: 'I18nStart_incorrectBirthday',
+      );
 
   static String get incorrectCity => Intl.message(
-    'Некорректное название города',
-    name: 'I18nStart_incorrectCity',
-  );
+        'Некорректное название города',
+        name: 'I18nStart_incorrectCity',
+      );
 
   static String get incorrectEmail => Intl.message(
-    'Некорректный е-мейл',
-    name: 'I18nStart_incorrectEmail',
-  );
+        'Некорректный е-мейл',
+        name: 'I18nStart_incorrectEmail',
+      );
 
   static String participantNumber(int number) => Intl.message(
         'Участник №$number',
@@ -1333,9 +1338,9 @@ class I18nDatabase {
       );
 
   static String get comment => Intl.message(
-    'Комментарий',
-    name: 'I18nDatabase_comment',
-  );
+        'Комментарий',
+        name: 'I18nDatabase_comment',
+      );
 
   static String get races => Intl.message(
         'Соревнования',
@@ -1509,14 +1514,19 @@ class I18nDatabase {
       );
 
   static String get newCategory => Intl.message(
-    'Новая категория?',
-    name: 'I18nDatabase_newCategory',
-  );
+        'Новая категория?',
+        name: 'I18nDatabase_newCategory',
+      );
 
   static String get newRider => Intl.message(
-    'Новый гонщик?',
-    name: 'I18nDatabase_newRider',
-  );
+        'Новый гонщик?',
+        name: 'I18nDatabase_newRider',
+      );
+
+  static String get editRider => Intl.message(
+        'Редактирование гонщика',
+        name: 'I18nDatabase_editRider',
+      );
 }
 
 class I18nNtp {
