@@ -10,11 +10,13 @@ class StartItemTile extends StatelessWidget {
     super.key,
     this.isHighlighted = false,
     this.onTap,
+    this.onTapDown,
     this.onLongPress,
     this.onDismissed,
     this.countdown,
   });
   final GestureTapCallback? onTap;
+  final GestureTapDownCallback? onTapDown;
   final GestureLongPressCallback? onLongPress;
   final DismissDirectionCallback? onDismissed;
   final ParticipantAtStart item;
@@ -46,6 +48,7 @@ class StartItemTile extends StatelessWidget {
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(12)),
       onTap: onTap?.call,
+      onTapDown: onTapDown?.call,
       onLongPress: onLongPress?.call,
       child: Dismissible(
         key: UniqueKey(),

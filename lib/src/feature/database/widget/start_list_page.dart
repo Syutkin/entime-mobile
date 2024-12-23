@@ -25,6 +25,8 @@ part 'popup/add_racer_popup.dart';
 part 'popup/edit_start_time_popup.dart';
 part 'popup/overwrite_start_time_popup.dart';
 
+enum StartPopupMenu { /*detail,*/ edit }
+
 class StartListPage extends StatefulWidget {
   const StartListPage({super.key});
 
@@ -35,6 +37,12 @@ class StartListPage extends StatefulWidget {
 class _StartListPage extends State<StartListPage> {
   final GlobalKey _stackKey = GlobalKey();
   final GlobalKey _countdownKey = GlobalKey();
+
+  late Offset _tapPosition;
+
+  void _storePosition(TapDownDetails details) {
+    _tapPosition = details.globalPosition;
+  }
 
   Widget _startList(List<ParticipantAtStart> startList) => CustomScrollView(
         slivers: [
@@ -98,15 +106,9 @@ class _StartListPage extends State<StartListPage> {
                           onTap: () async {
                             await editStartTime(context, item);
                           },
-                          onLongPress: () {
-                            //ToDo: popup menu
-                            editRacerPopup(
-                              context: context,
-                              participantAtStart: item,
-                              riders: context.read<DatabaseBloc>().state.riders,
-                              categories:
-                                  context.read<DatabaseBloc>().state.categories,
-                            );
+                          onTapDown: _storePosition,
+                          onLongPress: () async {
+                            await _startTilePopup(item);
                           },
 
                           /// Set DNS on dismissed
@@ -492,6 +494,48 @@ class _StartListPage extends State<StartListPage> {
           );
         },
         child: const Icon(Icons.bluetooth),
+      ),
+    ];
+  }
+
+  Future<void> _startTilePopup(ParticipantAtStart item) async {
+    final overlay = Overlay.of(context).context.findRenderObject();
+    if (overlay != null) {
+      final result = await showMenu<StartPopupMenu>(
+        items: _getPopupMenu(context, item),
+        context: context,
+        position: RelativeRect.fromRect(
+          _tapPosition & const Size(60, 60), // smaller rect, the touch area
+          Offset.zero &
+              overlay.semanticBounds.size, // Bigger rect, the entire screen
+        ),
+      );
+      if (result != null) {
+        switch (result) {
+          case StartPopupMenu.edit:
+            final currentContext = context;
+            if (currentContext.mounted) {
+              await editRacerPopup(
+                context: currentContext,
+                participantAtStart: item,
+                riders: currentContext.read<DatabaseBloc>().state.riders,
+                categories:
+                    currentContext.read<DatabaseBloc>().state.categories,
+              );
+            }
+        }
+      }
+    }
+  }
+
+  List<PopupMenuEntry<StartPopupMenu>> _getPopupMenu(
+    BuildContext context,
+    ParticipantAtStart item,
+  ) {
+    return <PopupMenuEntry<StartPopupMenu>>[
+      PopupMenuItem(
+        value: StartPopupMenu.edit,
+        child: Text(Localization.current.I18nCore_edit),
       ),
     ];
   }

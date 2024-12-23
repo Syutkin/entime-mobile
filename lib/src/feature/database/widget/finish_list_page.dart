@@ -415,31 +415,6 @@ class _FinishListPage extends State<FinishListPage> {
     return list;
   }
 
-  RelativeRect? buttonMenuPosition(BuildContext buildContext) {
-    final bar = buildContext.findRenderObject() as RenderBox?;
-    final overlay =
-        Overlay.of(buildContext).context.findRenderObject() as RenderBox?;
-    if (bar != null && overlay != null) {
-      // ignore: omit_local_variable_types
-      final RelativeRect position = RelativeRect.fromRect(
-        Rect.fromPoints(
-          bar.localToGlobal(
-            bar.size.bottomRight(Offset.zero),
-            ancestor: overlay,
-          ),
-          bar.localToGlobal(
-            bar.size.bottomRight(Offset.zero),
-            ancestor: overlay,
-          ),
-        ),
-        Offset.zero & overlay.size,
-      );
-      return position;
-    } else {
-      return null;
-    }
-  }
-
   List<Widget> _getFooterButtons(BuildContext context) {
     final databaseBloc = context.read<DatabaseBloc>();
     final stage = databaseBloc.state.stage;
