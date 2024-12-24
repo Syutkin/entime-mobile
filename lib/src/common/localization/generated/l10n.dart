@@ -572,6 +572,46 @@ class GeneratedLocalization {
   }
 
   /// `Показывать разницу во времени`
+  String get I18nSettings_showStartDifference {
+    return Intl.message(
+      'Показывать разницу во времени',
+      name: 'I18nSettings_showStartDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Между временем модуля и временем устройства`
+  String get I18nSettings_showStartDifferenceDescription {
+    return Intl.message(
+      'Между временем модуля и временем устройства',
+      name: 'I18nSettings_showStartDifferenceDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выделение цветом разницы во времени`
+  String get I18nSettings_showColorStartDifference {
+    return Intl.message(
+      'Выделение цветом разницы во времени',
+      name: 'I18nSettings_showColorStartDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `При достижении порога между временем модуля и временем устройства`
+  String get I18nSettings_showColorStartDifferenceDescription {
+    return Intl.message(
+      'При достижении порога между временем модуля и временем устройства',
+      name: 'I18nSettings_showColorStartDifferenceDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Показывать разницу во времени`
   String get I18nSettings_showFinishDifference {
     return Intl.message(
       'Показывать разницу во времени',
@@ -612,20 +652,20 @@ class GeneratedLocalization {
   }
 
   /// `Порог цветовой индикации`
-  String get I18nSettings_finishDifference {
+  String get I18nSettings_startFinishDifference {
     return Intl.message(
       'Порог цветовой индикации',
-      name: 'I18nSettings_finishDifference',
+      name: 'I18nSettings_startFinishDifference',
       desc: '',
       args: [],
     );
   }
 
   /// `Неверный порог`
-  String get I18nSettings_incorrectFinishDifference {
+  String get I18nSettings_incorrectStartFinishDifference {
     return Intl.message(
       'Неверный порог',
-      name: 'I18nSettings_incorrectFinishDifference',
+      name: 'I18nSettings_incorrectStartFinishDifference',
       desc: '',
       args: [],
     );

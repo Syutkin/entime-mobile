@@ -444,15 +444,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_finishButtonSizeDescription":
             MessageLookupByLibrary.simpleMessage(
                 "Размер кнопки \"отсечка\" на финишном экране"),
-        "I18nSettings_finishDifference":
-            MessageLookupByLibrary.simpleMessage("Порог цветовой индикации"),
         "I18nSettings_finishScreen":
             MessageLookupByLibrary.simpleMessage("Финишный экран"),
         "I18nSettings_general":
             MessageLookupByLibrary.simpleMessage("Основные"),
         "I18nSettings_incorrectDelay":
             MessageLookupByLibrary.simpleMessage("Неверная задержка"),
-        "I18nSettings_incorrectFinishDifference":
+        "I18nSettings_incorrectStartFinishDifference":
             MessageLookupByLibrary.simpleMessage("Неверный порог"),
         "I18nSettings_journal": MessageLookupByLibrary.simpleMessage("Журнал"),
         "I18nSettings_journalLinesNumber": MessageLookupByLibrary.simpleMessage(
@@ -497,10 +495,22 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Выделение цветом разницы во времени"),
         "I18nSettings_showColorFinishDifferenceDescription":
             MessageLookupByLibrary.simpleMessage("При достижении порога"),
+        "I18nSettings_showColorStartDifference":
+            MessageLookupByLibrary.simpleMessage(
+                "Выделение цветом разницы во времени"),
+        "I18nSettings_showColorStartDifferenceDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "При достижении порога между временем модуля и временем устройства"),
         "I18nSettings_showFinishDifference":
             MessageLookupByLibrary.simpleMessage(
                 "Показывать разницу во времени"),
         "I18nSettings_showFinishDifferenceDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "Между временем модуля и временем устройства"),
+        "I18nSettings_showStartDifference":
+            MessageLookupByLibrary.simpleMessage(
+                "Показывать разницу во времени"),
+        "I18nSettings_showStartDifferenceDescription":
             MessageLookupByLibrary.simpleMessage(
                 "Между временем модуля и временем устройства"),
         "I18nSettings_sound": MessageLookupByLibrary.simpleMessage("Звук"),
@@ -511,6 +521,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_startButtonSizeDescription":
             MessageLookupByLibrary.simpleMessage(
                 "Размер кнопки \"отсечка\" на стартовом экране"),
+        "I18nSettings_startFinishDifference":
+            MessageLookupByLibrary.simpleMessage("Порог цветовой индикации"),
         "I18nSettings_startScreen":
             MessageLookupByLibrary.simpleMessage("Стартовый экран"),
         "I18nSettings_themes": MessageLookupByLibrary.simpleMessage("Темы"),

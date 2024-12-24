@@ -272,6 +272,26 @@ class I18nSettings {
         name: 'I18nSettings_finishButtonSizeDescription',
       );
 
+  static String get showStartDifference => Intl.message(
+        'Показывать разницу во времени',
+        name: 'I18nSettings_showStartDifference',
+      );
+
+  static String get showStartDifferenceDescription => Intl.message(
+        'Между временем модуля и временем устройства',
+        name: 'I18nSettings_showStartDifferenceDescription',
+      );
+
+  static String get showColorStartDifference => Intl.message(
+        'Выделение цветом разницы во времени',
+        name: 'I18nSettings_showColorStartDifference',
+      );
+
+  static String get showColorStartDifferenceDescription => Intl.message(
+        'При достижении порога между временем модуля и временем устройства',
+        name: 'I18nSettings_showColorStartDifferenceDescription',
+      );
+
   static String get showFinishDifference => Intl.message(
         'Показывать разницу во времени',
         name: 'I18nSettings_showFinishDifference',
@@ -292,14 +312,14 @@ class I18nSettings {
         name: 'I18nSettings_showColorFinishDifferenceDescription',
       );
 
-  static String get finishDifference => Intl.message(
-        'Порог цветовой индикации',
-        name: 'I18nSettings_finishDifference',
-      );
+  static String get startFinishDifference => Intl.message(
+    'Порог цветовой индикации',
+    name: 'I18nSettings_startFinishDifference',
+  );
 
-  static String get incorrectFinishDifference => Intl.message(
+  static String get incorrectStartFinishDifference => Intl.message(
         'Неверный порог',
-        name: 'I18nSettings_incorrectFinishDifference',
+        name: 'I18nSettings_incorrectStartFinishDifference',
       );
 
   static String get update => Intl.message(

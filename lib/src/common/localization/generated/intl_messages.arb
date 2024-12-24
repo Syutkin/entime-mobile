@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-23T16:46:35.486762",
+  "@@last_modified": "2024-12-24T12:33:05.620647",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -270,6 +270,26 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nSettings_showStartDifference": "Показывать разницу во времени",
+  "@I18nSettings_showStartDifference": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showStartDifferenceDescription": "Между временем модуля и временем устройства",
+  "@I18nSettings_showStartDifferenceDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showColorStartDifference": "Выделение цветом разницы во времени",
+  "@I18nSettings_showColorStartDifference": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showColorStartDifferenceDescription": "При достижении порога между временем модуля и временем устройства",
+  "@I18nSettings_showColorStartDifferenceDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nSettings_showFinishDifference": "Показывать разницу во времени",
   "@I18nSettings_showFinishDifference": {
     "type": "text",
@@ -290,13 +310,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_finishDifference": "Порог цветовой индикации",
-  "@I18nSettings_finishDifference": {
+  "I18nSettings_startFinishDifference": "Порог цветовой индикации",
+  "@I18nSettings_startFinishDifference": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_incorrectFinishDifference": "Неверный порог",
-  "@I18nSettings_incorrectFinishDifference": {
+  "I18nSettings_incorrectStartFinishDifference": "Неверный порог",
+  "@I18nSettings_incorrectStartFinishDifference": {
     "type": "text",
     "placeholders": {}
   },

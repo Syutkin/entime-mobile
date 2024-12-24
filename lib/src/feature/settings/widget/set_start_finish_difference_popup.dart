@@ -1,6 +1,6 @@
 part of 'settings_popups.dart';
 
-Future<int?> setFinishDifferencePopup(
+Future<int?> setStartFinishDifferencePopup(
   BuildContext context, {
   required int difference,
   required String title,
@@ -26,19 +26,19 @@ Future<int?> setFinishDifferencePopup(
               keyboardType: TextInputType.number,
               autofocus: true,
               decoration: InputDecoration(
-                labelText: Localization.current.I18nSettings_finishDifference,
+                labelText: Localization.current.I18nSettings_startFinishDifference,
               ),
               controller: delayController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null) {
                   return Localization
-                      .current.I18nSettings_incorrectFinishDifference;
+                      .current.I18nSettings_incorrectStartFinishDifference;
                 }
                 final integer = int.tryParse(value);
                 if (integer == null || integer < 0) {
                   return Localization
-                      .current.I18nSettings_incorrectFinishDifference;
+                      .current.I18nSettings_incorrectStartFinishDifference;
                 }
                 newDifference = integer;
                 return null;

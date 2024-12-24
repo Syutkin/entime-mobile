@@ -370,6 +370,67 @@ class _SettingsList extends StatelessWidget {
                   );
                 },
               ),
+              // SettingsTile.switchTile(
+              //   title: Text(
+              //     Localization.current.I18nSettings_showStartDifference,
+              //   ),
+              //   description: Text(
+              //     Localization
+              //         .current.I18nSettings_showStartDifferenceDescription,
+              //   ),
+              //   initialValue: settingsState.settings.showStartDifference,
+              //   onToggle: (value) {
+              //     settingsBloc.add(
+              //       SettingsEvent.update(
+              //         settings: settingsState.settings
+              //             .copyWith(showStartDifference: value),
+              //       ),
+              //     );
+              //   },
+              // ),
+              SettingsTile.switchTile(
+                title: Text(
+                  Localization.current.I18nSettings_showColorStartDifference,
+                ),
+                description: Text(
+                  Localization
+                      .current.I18nSettings_showColorStartDifferenceDescription,
+                ),
+                initialValue: settingsState.settings.showColorStartDifference,
+                onToggle: (value) {
+                  settingsBloc.add(
+                    SettingsEvent.update(
+                      settings: settingsState.settings
+                          .copyWith(showColorStartDifference: value),
+                    ),
+                  );
+                },
+              ),
+              SettingsTile(
+                enabled: settingsState.settings.showColorStartDifference,
+                title: Text(Localization.current.I18nSettings_startFinishDifference),
+                trailing: Text(
+                  Localization.current.I18nSettings_milliseconds(
+                    settingsState.settings.startDifferenceThreshold,
+                  ),
+                ),
+                //leading:  Icon(MdiIcons.handBackLeft),
+                onPressed: (context) async {
+                  final value = await setStartFinishDifferencePopup(
+                    context,
+                    difference: settingsState.settings.startDifferenceThreshold,
+                    title: Localization.current.I18nSettings_startFinishDifference,
+                  );
+                  if (value != null) {
+                    settingsBloc.add(
+                      SettingsEvent.update(
+                        settings: settingsState.settings
+                            .copyWith(startDifferenceThreshold: value),
+                      ),
+                    );
+                  }
+                },
+              ),
             ],
           ),
           SettingsSection(
@@ -497,7 +558,6 @@ class _SettingsList extends StatelessWidget {
                 },
               ),
               SettingsTile.switchTile(
-                enabled: settingsState.settings.showFinishDifference,
                 title: Text(
                   Localization.current.I18nSettings_showColorFinishDifference,
                 ),
@@ -516,8 +576,8 @@ class _SettingsList extends StatelessWidget {
                 },
               ),
               SettingsTile(
-                enabled: settingsState.settings.showFinishDifference,
-                title: Text(Localization.current.I18nSettings_finishDifference),
+                enabled: settingsState.settings.showColorFinishDifference,
+                title: Text(Localization.current.I18nSettings_startFinishDifference),
                 trailing: Text(
                   Localization.current.I18nSettings_milliseconds(
                     settingsState.settings.finishDifferenceThreshold,
@@ -525,11 +585,11 @@ class _SettingsList extends StatelessWidget {
                 ),
                 //leading:  Icon(MdiIcons.handBackLeft),
                 onPressed: (context) async {
-                  final value = await setFinishDifferencePopup(
+                  final value = await setStartFinishDifferencePopup(
                     context,
                     difference:
                         settingsState.settings.finishDifferenceThreshold,
-                    title: Localization.current.I18nSettings_finishDifference,
+                    title: Localization.current.I18nSettings_startFinishDifference,
                   );
                   if (value != null) {
                     settingsBloc.add(
@@ -640,6 +700,7 @@ class _SettingsList extends StatelessWidget {
       )
       ..add(
         SettingsTile.switchTile(
+          enabled: settings.brightness == Brightness.dark,
           title: Text(
             Localization.current.I18nSettings_oLEDBackground,
           ),

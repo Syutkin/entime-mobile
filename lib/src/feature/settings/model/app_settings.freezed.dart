@@ -67,6 +67,13 @@ mixin _$AppSettings {
       throw _privateConstructorUsedError; // автоподстановка номеров в финишном протоколе
   bool get substituteNumbers => throw _privateConstructorUsedError;
   int get substituteNumbersDelay =>
+      throw _privateConstructorUsedError; // показывать разницу между автоматическим временем старта с модуля и временем устройства
+  bool get showStartDifference =>
+      throw _privateConstructorUsedError; // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+  bool get showColorStartDifference =>
+      throw _privateConstructorUsedError; // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  int get startDifferenceThreshold =>
       throw _privateConstructorUsedError; // показывать разницу между временем финиша с модуля и временем устройства
   bool get showFinishDifference =>
       throw _privateConstructorUsedError; // показывать разницу цветом между временем финиша с модуля и временем устройства
@@ -131,6 +138,9 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -180,6 +190,9 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -233,6 +246,9 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -282,6 +298,9 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -335,6 +354,9 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -384,6 +406,9 @@ mixin _$AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -469,6 +494,9 @@ abstract class $AppSettingsCopyWith<$Res> {
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
       bool showFinishDifference,
       bool showColorFinishDifference,
       int finishDifferenceThreshold,
@@ -533,6 +561,9 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
+    Object? showStartDifference = null,
+    Object? showColorStartDifference = null,
+    Object? startDifferenceThreshold = null,
     Object? showFinishDifference = null,
     Object? showColorFinishDifference = null,
     Object? finishDifferenceThreshold = null,
@@ -684,6 +715,18 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
+      showStartDifference: null == showStartDifference
+          ? _value.showStartDifference
+          : showStartDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showColorStartDifference: null == showColorStartDifference
+          ? _value.showColorStartDifference
+          : showColorStartDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startDifferenceThreshold: null == startDifferenceThreshold
+          ? _value.startDifferenceThreshold
+          : startDifferenceThreshold // ignore: cast_nullable_to_non_nullable
+              as int,
       showFinishDifference: null == showFinishDifference
           ? _value.showFinishDifference
           : showFinishDifference // ignore: cast_nullable_to_non_nullable
@@ -783,6 +826,9 @@ abstract class _$$AppSettingsImplCopyWith<$Res>
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
       bool showFinishDifference,
       bool showColorFinishDifference,
       int finishDifferenceThreshold,
@@ -845,6 +891,9 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
+    Object? showStartDifference = null,
+    Object? showColorStartDifference = null,
+    Object? startDifferenceThreshold = null,
     Object? showFinishDifference = null,
     Object? showColorFinishDifference = null,
     Object? finishDifferenceThreshold = null,
@@ -996,6 +1045,18 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
+      showStartDifference: null == showStartDifference
+          ? _value.showStartDifference
+          : showStartDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showColorStartDifference: null == showColorStartDifference
+          ? _value.showColorStartDifference
+          : showColorStartDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startDifferenceThreshold: null == startDifferenceThreshold
+          ? _value.startDifferenceThreshold
+          : startDifferenceThreshold // ignore: cast_nullable_to_non_nullable
+              as int,
       showFinishDifference: null == showFinishDifference
           ? _value.showFinishDifference
           : showFinishDifference // ignore: cast_nullable_to_non_nullable
@@ -1090,6 +1151,9 @@ class _$AppSettingsImpl implements _AppSettings {
       required this.finishDelay,
       required this.substituteNumbers,
       required this.substituteNumbersDelay,
+      required this.showStartDifference,
+      required this.showColorStartDifference,
+      required this.startDifferenceThreshold,
       required this.showFinishDifference,
       required this.showColorFinishDifference,
       required this.finishDifferenceThreshold,
@@ -1194,6 +1258,16 @@ class _$AppSettingsImpl implements _AppSettings {
   final bool substituteNumbers;
   @override
   final int substituteNumbersDelay;
+// показывать разницу между автоматическим временем старта с модуля и временем устройства
+  @override
+  final bool showStartDifference;
+// показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+  @override
+  final bool showColorStartDifference;
+// разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  @override
+  final int startDifferenceThreshold;
 // показывать разницу между временем финиша с модуля и временем устройства
   @override
   final bool showFinishDifference;
@@ -1237,7 +1311,7 @@ class _$AppSettingsImpl implements _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, showHidden: $showHidden, showNumbers: $showNumbers, showManual: $showManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifferenceThreshold: $finishDifferenceThreshold, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, showHidden: $showHidden, showNumbers: $showNumbers, showManual: $showManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showStartDifference: $showStartDifference, showColorStartDifference: $showColorStartDifference, startDifferenceThreshold: $startDifferenceThreshold, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifferenceThreshold: $finishDifferenceThreshold, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -1302,6 +1376,12 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.substituteNumbers == substituteNumbers) &&
             (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.showStartDifference, showStartDifference) ||
+                other.showStartDifference == showStartDifference) &&
+            (identical(other.showColorStartDifference, showColorStartDifference) ||
+                other.showColorStartDifference == showColorStartDifference) &&
+            (identical(other.startDifferenceThreshold, startDifferenceThreshold) ||
+                other.startDifferenceThreshold == startDifferenceThreshold) &&
             (identical(other.showFinishDifference, showFinishDifference) ||
                 other.showFinishDifference == showFinishDifference) &&
             (identical(other.showColorFinishDifference, showColorFinishDifference) ||
@@ -1310,8 +1390,7 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.finishDifferenceThreshold == finishDifferenceThreshold) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
-            (identical(other.updateStartCorrectionDelay,
-                    updateStartCorrectionDelay) ||
+            (identical(other.updateStartCorrectionDelay, updateStartCorrectionDelay) ||
                 other.updateStartCorrectionDelay ==
                     updateStartCorrectionDelay) &&
             (identical(other.logLimit, logLimit) ||
@@ -1328,8 +1407,7 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.isOLEDBackground == isOLEDBackground) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion) &&
-            (identical(other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
-                other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
+            (identical(other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) || other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
   @override
@@ -1369,6 +1447,9 @@ class _$AppSettingsImpl implements _AppSettings {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showStartDifference,
+        showColorStartDifference,
+        startDifferenceThreshold,
         showFinishDifference,
         showColorFinishDifference,
         finishDifferenceThreshold,
@@ -1430,6 +1511,9 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -1479,6 +1563,9 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -1529,6 +1616,9 @@ class _$AppSettingsImpl implements _AppSettings {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showStartDifference,
+        showColorStartDifference,
+        startDifferenceThreshold,
         showFinishDifference,
         showColorFinishDifference,
         finishDifferenceThreshold,
@@ -1582,6 +1672,9 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -1631,6 +1724,9 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -1681,6 +1777,9 @@ class _$AppSettingsImpl implements _AppSettings {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showStartDifference,
+        showColorStartDifference,
+        startDifferenceThreshold,
         showFinishDifference,
         showColorFinishDifference,
         finishDifferenceThreshold,
@@ -1734,6 +1833,9 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -1783,6 +1885,9 @@ class _$AppSettingsImpl implements _AppSettings {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -1835,6 +1940,9 @@ class _$AppSettingsImpl implements _AppSettings {
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
+          showStartDifference,
+          showColorStartDifference,
+          startDifferenceThreshold,
           showFinishDifference,
           showColorFinishDifference,
           finishDifferenceThreshold,
@@ -1920,6 +2028,9 @@ abstract class _AppSettings implements AppSettings {
       required final int finishDelay,
       required final bool substituteNumbers,
       required final int substituteNumbersDelay,
+      required final bool showStartDifference,
+      required final bool showColorStartDifference,
+      required final int startDifferenceThreshold,
       required final bool showFinishDifference,
       required final bool showColorFinishDifference,
       required final int finishDifferenceThreshold,
@@ -2007,7 +2118,16 @@ abstract class _AppSettings implements AppSettings {
   @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay; // показывать разницу между временем финиша с модуля и временем устройства
+  int get substituteNumbersDelay; // показывать разницу между автоматическим временем старта с модуля и временем устройства
+  @override
+  bool
+      get showStartDifference; // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+  @override
+  bool
+      get showColorStartDifference; // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  @override
+  int get startDifferenceThreshold; // показывать разницу между временем финиша с модуля и временем устройства
   @override
   bool
       get showFinishDifference; // показывать разницу цветом между временем финиша с модуля и временем устройства
@@ -2093,6 +2213,9 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       int finishDelay,
       bool substituteNumbers,
       int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
       bool showFinishDifference,
       bool showColorFinishDifference,
       int finishDifferenceThreshold,
@@ -2155,6 +2278,9 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? finishDelay = null,
     Object? substituteNumbers = null,
     Object? substituteNumbersDelay = null,
+    Object? showStartDifference = null,
+    Object? showColorStartDifference = null,
+    Object? startDifferenceThreshold = null,
     Object? showFinishDifference = null,
     Object? showColorFinishDifference = null,
     Object? finishDifferenceThreshold = null,
@@ -2306,6 +2432,18 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
           ? _value.substituteNumbersDelay
           : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
               as int,
+      showStartDifference: null == showStartDifference
+          ? _value.showStartDifference
+          : showStartDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showColorStartDifference: null == showColorStartDifference
+          ? _value.showColorStartDifference
+          : showColorStartDifference // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startDifferenceThreshold: null == startDifferenceThreshold
+          ? _value.startDifferenceThreshold
+          : startDifferenceThreshold // ignore: cast_nullable_to_non_nullable
+              as int,
       showFinishDifference: null == showFinishDifference
           ? _value.showFinishDifference
           : showFinishDifference // ignore: cast_nullable_to_non_nullable
@@ -2400,6 +2538,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.finishDelay = 350,
       this.substituteNumbers = false,
       this.substituteNumbersDelay = 500,
+      this.showStartDifference = false,
+      this.showColorStartDifference = false,
+      this.startDifferenceThreshold = 2000,
       this.showFinishDifference = false,
       this.showColorFinishDifference = false,
       this.finishDifferenceThreshold = 2000,
@@ -2540,6 +2681,19 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final int substituteNumbersDelay;
+// показывать разницу между автоматическим временем старта с модуля и временем устройства
+  @override
+  @JsonKey()
+  final bool showStartDifference;
+// показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+  @override
+  @JsonKey()
+  final bool showColorStartDifference;
+// разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  @override
+  @JsonKey()
+  final int startDifferenceThreshold;
 // показывать разницу между временем финиша с модуля и временем устройства
   @override
   @JsonKey()
@@ -2596,7 +2750,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 
   @override
   String toString() {
-    return 'AppSettings.defaults(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, showHidden: $showHidden, showNumbers: $showNumbers, showManual: $showManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifferenceThreshold: $finishDifferenceThreshold, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
+    return 'AppSettings.defaults(language: $language, reconnect: $reconnect, sound: $sound, beep: $beep, beepFromApp: $beepFromApp, voice: $voice, voiceFromApp: $voiceFromApp, voiceName: $voiceName, volume: $volume, pitch: $pitch, rate: $rate, voiceLanguage: $voiceLanguage, raceId: $raceId, stageId: $stageId, wakelock: $wakelock, startFab: $startFab, startFabSize: $startFabSize, finishFab: $finishFab, finishFabSize: $finishFabSize, countdown: $countdown, countdownSize: $countdownSize, countdownLeft: $countdownLeft, countdownTop: $countdownTop, countdownAtStartTime: $countdownAtStartTime, checkUpdates: $checkUpdates, showDNS: $showDNS, showDNF: $showDNF, showDSQ: $showDSQ, showHidden: $showHidden, showNumbers: $showNumbers, showManual: $showManual, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, showStartDifference: $showStartDifference, showColorStartDifference: $showColorStartDifference, startDifferenceThreshold: $startDifferenceThreshold, showFinishDifference: $showFinishDifference, showColorFinishDifference: $showColorFinishDifference, finishDifferenceThreshold: $finishDifferenceThreshold, deltaInSeconds: $deltaInSeconds, updateStartCorrectionDelay: $updateStartCorrectionDelay, logLimit: $logLimit, seedColor: $seedColor, brightness: $brightness, contrastLevel: $contrastLevel, dynamicSchemeVariant: $dynamicSchemeVariant, isOLEDBackground: $isOLEDBackground, previousVersion: $previousVersion, updateNtpOffsetAtStartup: $updateNtpOffsetAtStartup)';
   }
 
   @override
@@ -2661,6 +2815,12 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.substituteNumbers == substituteNumbers) &&
             (identical(other.substituteNumbersDelay, substituteNumbersDelay) ||
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
+            (identical(other.showStartDifference, showStartDifference) ||
+                other.showStartDifference == showStartDifference) &&
+            (identical(other.showColorStartDifference, showColorStartDifference) ||
+                other.showColorStartDifference == showColorStartDifference) &&
+            (identical(other.startDifferenceThreshold, startDifferenceThreshold) ||
+                other.startDifferenceThreshold == startDifferenceThreshold) &&
             (identical(other.showFinishDifference, showFinishDifference) ||
                 other.showFinishDifference == showFinishDifference) &&
             (identical(other.showColorFinishDifference, showColorFinishDifference) ||
@@ -2669,8 +2829,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.finishDifferenceThreshold == finishDifferenceThreshold) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
-            (identical(other.updateStartCorrectionDelay,
-                    updateStartCorrectionDelay) ||
+            (identical(other.updateStartCorrectionDelay, updateStartCorrectionDelay) ||
                 other.updateStartCorrectionDelay ==
                     updateStartCorrectionDelay) &&
             (identical(other.logLimit, logLimit) ||
@@ -2687,8 +2846,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.isOLEDBackground == isOLEDBackground) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion) &&
-            (identical(other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) ||
-                other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
+            (identical(other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) || other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
   @override
@@ -2728,6 +2886,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showStartDifference,
+        showColorStartDifference,
+        startDifferenceThreshold,
         showFinishDifference,
         showColorFinishDifference,
         finishDifferenceThreshold,
@@ -2790,6 +2951,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -2839,6 +3003,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -2889,6 +3056,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showStartDifference,
+        showColorStartDifference,
+        startDifferenceThreshold,
         showFinishDifference,
         showColorFinishDifference,
         finishDifferenceThreshold,
@@ -2942,6 +3112,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -2991,6 +3164,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -3041,6 +3217,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         finishDelay,
         substituteNumbers,
         substituteNumbersDelay,
+        showStartDifference,
+        showColorStartDifference,
+        startDifferenceThreshold,
         showFinishDifference,
         showColorFinishDifference,
         finishDifferenceThreshold,
@@ -3094,6 +3273,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -3143,6 +3325,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
             int finishDelay,
             bool substituteNumbers,
             int substituteNumbersDelay,
+            bool showStartDifference,
+            bool showColorStartDifference,
+            int startDifferenceThreshold,
             bool showFinishDifference,
             bool showColorFinishDifference,
             int finishDifferenceThreshold,
@@ -3195,6 +3380,9 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
           finishDelay,
           substituteNumbers,
           substituteNumbersDelay,
+          showStartDifference,
+          showColorStartDifference,
+          startDifferenceThreshold,
           showFinishDifference,
           showColorFinishDifference,
           finishDifferenceThreshold,
@@ -3280,6 +3468,9 @@ abstract class _AppSettingsDefaults implements AppSettings {
       final int finishDelay,
       final bool substituteNumbers,
       final int substituteNumbersDelay,
+      final bool showStartDifference,
+      final bool showColorStartDifference,
+      final int startDifferenceThreshold,
       final bool showFinishDifference,
       final bool showColorFinishDifference,
       final int finishDifferenceThreshold,
@@ -3367,7 +3558,16 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   bool get substituteNumbers;
   @override
-  int get substituteNumbersDelay; // показывать разницу между временем финиша с модуля и временем устройства
+  int get substituteNumbersDelay; // показывать разницу между автоматическим временем старта с модуля и временем устройства
+  @override
+  bool
+      get showStartDifference; // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+  @override
+  bool
+      get showColorStartDifference; // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+// при превышении которого будет цветовая индикация
+  @override
+  int get startDifferenceThreshold; // показывать разницу между временем финиша с модуля и временем устройства
   @override
   bool
       get showFinishDifference; // показывать разницу цветом между временем финиша с модуля и временем устройства
