@@ -1,9 +1,9 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../common/logger/logger.dart';
 import '../logic/update_provider.dart';
-import '../model/show_changelog.dart';
 
 part 'update_bloc.freezed.dart';
 part 'update_event.dart';
@@ -12,52 +12,75 @@ part 'update_state.dart';
 class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
   UpdateBloc({
     required this.updateProvider,
-  }) : super(const UpdateInitial()) {
+  }) : super(const UpdateState.initial()) {
     updateProvider
       ..onDownloading((current, total) {
-        add(UpdateDownloading(bytes: current, total: total));
+        add(UpdateEvent.downloading(bytes: current, total: total));
       })
       ..onDownloadComplete(() {
-        add(const UpdateFromFile());
+        add(const UpdateEvent.updateFromFile());
       })
       ..onError((error) {
         logger.e('UpdateBloc: Download error', error: error);
-        add(const CancelDownload());
+        add(UpdateEvent.downloadError(error: error));
+        // add(const UpdateEvent.cancelDownload());
       });
 
-    on<CheckUpdate>((event, emit) async {
-      final update = await updateProvider.isUpdateAvailable();
-      if (update) {
-        emit(UpdateAvailable(version: updateProvider.latestVersion));
-      } else {
-        emit(const UpdateInitial());
-      }
-    });
-
-    on<DownloadUpdate>((event, emit) async {
-      if (state is UpdateAvailable) {
-        emit(const UpdateConnecting());
-        await updateProvider.downloadUpdate();
-      }
-    });
-
-    on<UpdateDownloading>((event, emit) {
-      emit(UpdateDownloadInProgress(bytes: event.bytes, total: event.total));
-    });
-
-    on<UpdateFromFile>((event, emit) {
-      updateProvider.installApk();
-      emit(UpdateAvailable(version: updateProvider.latestVersion));
-    });
-
-    on<CancelDownload>((event, emit) {
-      updateProvider.stop();
-      emit(UpdateAvailable(version: updateProvider.latestVersion));
-    });
-
-    on<PopupChangelog>((event, emit) async {
-      emit(UpdateInitial(showChangelog: await updateProvider.showChangelog()));
+    on<UpdateEvent>(transformer: sequential(), (event, emit) async {
+      await event.map(
+        checkUpdate: (event) async {
+          final update = await updateProvider.isUpdateAvailable();
+          if (update) {
+            emit(
+              UpdateState.updateAvailable(
+                version: updateProvider.latestVersion,
+              ),
+            );
+          } else {
+            emit(const UpdateState.initial());
+          }
+        },
+        downloadUpdate: (event) async {
+          await state.mapOrNull(
+            updateAvailable: (state) async {
+              emit(const UpdateState.connecting());
+              await updateProvider.downloadUpdate();
+            },
+          );
+        },
+        downloading: (event) {
+          emit(UpdateState.downloading(bytes: event.bytes, total: event.total));
+        },
+        updateFromFile: (_UpdateFromFileEvent value) {
+          updateProvider.installApk();
+          emit(
+            UpdateState.updateAvailable(
+              version: updateProvider.latestVersion,
+            ),
+          );
+        },
+        cancelDownload: (event) {
+          updateProvider.stop();
+          emit(
+            UpdateState.updateAvailable(
+              version: updateProvider.latestVersion,
+            ),
+          );
+        },
+        downloadError: (event) {
+          emit(
+            UpdateState.downloadError(error: event.error),
+          );
+        },
+        popupChangelog: (event) async {
+          emit(
+            UpdateState.initial(
+              changelog: await updateProvider.showChangelog(),
+            ),
+          );
+        },
+      );
     });
   }
-  final UpdateProvider updateProvider;
+  final IUpdateProvider updateProvider;
 }

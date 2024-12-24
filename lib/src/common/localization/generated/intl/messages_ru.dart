@@ -113,24 +113,38 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Неизвестное устройство"),
         "I18nCore_correction": MessageLookupByLibrary.simpleMessage("Поправка"),
         "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "I18nCore_details": MessageLookupByLibrary.simpleMessage("Подробнее"),
         "I18nCore_dnf": MessageLookupByLibrary.simpleMessage("DNF"),
         "I18nCore_dns": MessageLookupByLibrary.simpleMessage("DNS"),
         "I18nCore_dsq": MessageLookupByLibrary.simpleMessage("DSQ"),
         "I18nCore_edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
+        "I18nCore_no": MessageLookupByLibrary.simpleMessage("Нет"),
         "I18nCore_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
         "I18nCore_warning":
             MessageLookupByLibrary.simpleMessage("Предупреждение"),
+        "I18nCore_yes": MessageLookupByLibrary.simpleMessage("Да"),
         "I18nCountdown_countdown":
             MessageLookupByLibrary.simpleMessage("Обратный отсчёт"),
         "I18nDatabase_addRace":
             MessageLookupByLibrary.simpleMessage("Создать соревнование"),
         "I18nDatabase_addStage":
             MessageLookupByLibrary.simpleMessage("Создать спецучасток"),
+        "I18nDatabase_birthday":
+            MessageLookupByLibrary.simpleMessage("Дата/Год рождения"),
+        "I18nDatabase_category":
+            MessageLookupByLibrary.simpleMessage("Категория"),
+        "I18nDatabase_city": MessageLookupByLibrary.simpleMessage("Город"),
+        "I18nDatabase_comment":
+            MessageLookupByLibrary.simpleMessage("Комментарий"),
         "I18nDatabase_deleteRace": m30,
         "I18nDatabase_deleteStage": m31,
         "I18nDatabase_deleteTrail": m32,
         "I18nDatabase_editRace":
             MessageLookupByLibrary.simpleMessage("Редактирование"),
+        "I18nDatabase_editRider":
+            MessageLookupByLibrary.simpleMessage("Редактирование гонщика"),
+        "I18nDatabase_email":
+            MessageLookupByLibrary.simpleMessage("Электронная почта"),
         "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
             "Введите название соревнования"),
         "I18nDatabase_enterStageName": MessageLookupByLibrary.simpleMessage(
@@ -147,6 +161,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Некорректная ссылка"),
         "I18nDatabase_isActiveStage":
             MessageLookupByLibrary.simpleMessage("Активный"),
+        "I18nDatabase_name": MessageLookupByLibrary.simpleMessage("Имя"),
+        "I18nDatabase_newCategory":
+            MessageLookupByLibrary.simpleMessage("Новая категория?"),
+        "I18nDatabase_newRider":
+            MessageLookupByLibrary.simpleMessage("Новый гонщик?"),
+        "I18nDatabase_nickname":
+            MessageLookupByLibrary.simpleMessage("Никнейм"),
+        "I18nDatabase_phone": MessageLookupByLibrary.simpleMessage("Телефон"),
         "I18nDatabase_raceDates":
             MessageLookupByLibrary.simpleMessage("Даты проведения"),
         "I18nDatabase_raceDescription":
@@ -164,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Описание"),
         "I18nDatabase_stageName":
             MessageLookupByLibrary.simpleMessage("Название спецучастка"),
+        "I18nDatabase_team": MessageLookupByLibrary.simpleMessage("Команда"),
         "I18nDatabase_trail": MessageLookupByLibrary.simpleMessage("Трейл"),
         "I18nDatabase_trailDescription":
             MessageLookupByLibrary.simpleMessage("Описание"),
@@ -185,6 +208,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nDrawer_settings":
             MessageLookupByLibrary.simpleMessage("Настройки"),
         "I18nDrawer_version": m0,
+        "I18nFinish_automaticTime":
+            MessageLookupByLibrary.simpleMessage("Автоматическая отсечка"),
+        "I18nFinish_finishTime":
+            MessageLookupByLibrary.simpleMessage("Финишное время"),
+        "I18nFinish_finishTimestamp":
+            MessageLookupByLibrary.simpleMessage("Время записи на устройстве"),
+        "I18nFinish_hiddenCutoff":
+            MessageLookupByLibrary.simpleMessage("Скрытая"),
+        "I18nFinish_manualTime":
+            MessageLookupByLibrary.simpleMessage("Ручная отсечка"),
         "I18nHelp_manual": MessageLookupByLibrary.simpleMessage("Руководство"),
         "I18nHelp_manualMd": MessageLookupByLibrary.simpleMessage(
             "# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку \"Start\", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку \"Finish\", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  "),
@@ -234,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nInit_noData": MessageLookupByLibrary.simpleMessage("Нет данных"),
         "I18nInit_pressToSelect":
             MessageLookupByLibrary.simpleMessage("Нажмите чтобы выбрать"),
+        "I18nInit_riders": MessageLookupByLibrary.simpleMessage("Гонщики"),
         "I18nInit_selectFile":
             MessageLookupByLibrary.simpleMessage("Выберите файл"),
         "I18nInit_selectRace":
@@ -355,6 +389,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nProtocol_enterFinishNumber": MessageLookupByLibrary.simpleMessage(
             "Введите номер финишировавшего участника"),
         "I18nProtocol_finishNumber": m15,
+        "I18nProtocol_finishTimeCutoff":
+            MessageLookupByLibrary.simpleMessage("Финишная отсечка"),
         "I18nProtocol_hide": MessageLookupByLibrary.simpleMessage("Скрыть"),
         "I18nProtocol_hideAll":
             MessageLookupByLibrary.simpleMessage("Скрыть всё"),
@@ -363,14 +399,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nProtocol_number": MessageLookupByLibrary.simpleMessage("Номер"),
         "I18nProtocol_shareFinishResults": m16,
         "I18nProtocol_shareStartResults": m17,
+        "I18nProtocol_startTimeCutoff":
+            MessageLookupByLibrary.simpleMessage("Стартовая отсечка"),
         "I18nProtocol_time": MessageLookupByLibrary.simpleMessage("Время"),
         "I18nProtocol_type": MessageLookupByLibrary.simpleMessage("Тип"),
         "I18nProtocol_updateNumber": m18,
         "I18nProtocol_warning":
             MessageLookupByLibrary.simpleMessage("Предупреждение"),
-        "I18nSettings_autosubstitution":
+        "I18nSettings_autoSubstitution":
             MessageLookupByLibrary.simpleMessage("Автоподстановка номеров"),
-        "I18nSettings_autosubstitutionDelay":
+        "I18nSettings_autoSubstitutionDelay":
             MessageLookupByLibrary.simpleMessage(
                 "Задержка перед автоматическим подставлением новых номеров"),
         "I18nSettings_brightness":
@@ -406,22 +444,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_finishButtonSizeDescription":
             MessageLookupByLibrary.simpleMessage(
                 "Размер кнопки \"отсечка\" на финишном экране"),
-        "I18nSettings_finishDifference":
-            MessageLookupByLibrary.simpleMessage("Порог цветовой индикации"),
         "I18nSettings_finishScreen":
             MessageLookupByLibrary.simpleMessage("Финишный экран"),
         "I18nSettings_general":
             MessageLookupByLibrary.simpleMessage("Основные"),
         "I18nSettings_incorrectDelay":
             MessageLookupByLibrary.simpleMessage("Неверная задержка"),
-        "I18nSettings_incorrectFinishDifference":
+        "I18nSettings_incorrectStartFinishDifference":
             MessageLookupByLibrary.simpleMessage("Неверный порог"),
         "I18nSettings_journal": MessageLookupByLibrary.simpleMessage("Журнал"),
         "I18nSettings_journalLinesNumber": MessageLookupByLibrary.simpleMessage(
             "Количество показываемых записей"),
         "I18nSettings_journalLinesNumberPopup":
             MessageLookupByLibrary.simpleMessage(
-                "Количество отображамых строк в журнале"),
+                "Количество отображаемых строк в журнале"),
         "I18nSettings_language": MessageLookupByLibrary.simpleMessage("Язык"),
         "I18nSettings_lightBlue":
             MessageLookupByLibrary.simpleMessage("Синяя светлая тема"),
@@ -446,7 +482,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Переподключение"),
         "I18nSettings_reconnectDescription":
             MessageLookupByLibrary.simpleMessage(
-                "Пытаться переподключится к модулю при обрыве связи"),
+                "Пытаться переподключиться к модулю при обрыве связи"),
         "I18nSettings_replaceStartCountdown":
             MessageLookupByLibrary.simpleMessage(
                 "Заменять время старта обратным отсчётом"),
@@ -459,10 +495,22 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Выделение цветом разницы во времени"),
         "I18nSettings_showColorFinishDifferenceDescription":
             MessageLookupByLibrary.simpleMessage("При достижении порога"),
+        "I18nSettings_showColorStartDifference":
+            MessageLookupByLibrary.simpleMessage(
+                "Выделение цветом разницы во времени"),
+        "I18nSettings_showColorStartDifferenceDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "При достижении порога между временем модуля и временем устройства"),
         "I18nSettings_showFinishDifference":
             MessageLookupByLibrary.simpleMessage(
                 "Показывать разницу во времени"),
         "I18nSettings_showFinishDifferenceDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "Между временем модуля и временем устройства"),
+        "I18nSettings_showStartDifference":
+            MessageLookupByLibrary.simpleMessage(
+                "Показывать разницу во времени"),
+        "I18nSettings_showStartDifferenceDescription":
             MessageLookupByLibrary.simpleMessage(
                 "Между временем модуля и временем устройства"),
         "I18nSettings_sound": MessageLookupByLibrary.simpleMessage("Звук"),
@@ -473,6 +521,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_startButtonSizeDescription":
             MessageLookupByLibrary.simpleMessage(
                 "Размер кнопки \"отсечка\" на стартовом экране"),
+        "I18nSettings_startFinishDifference":
+            MessageLookupByLibrary.simpleMessage("Порог цветовой индикации"),
         "I18nSettings_startScreen":
             MessageLookupByLibrary.simpleMessage("Стартовый экран"),
         "I18nSettings_themes": MessageLookupByLibrary.simpleMessage("Темы"),
@@ -501,8 +551,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Добавить участника"),
         "I18nStart_didNotStart":
             MessageLookupByLibrary.simpleMessage("Не стартовал"),
+        "I18nStart_emptyName":
+            MessageLookupByLibrary.simpleMessage("Введите имя"),
+        "I18nStart_incorrectBirthday": MessageLookupByLibrary.simpleMessage(
+            "Некорректная дата/год рождения"),
+        "I18nStart_incorrectCity": MessageLookupByLibrary.simpleMessage(
+            "Некорректное название города"),
         "I18nStart_incorrectCorrection":
             MessageLookupByLibrary.simpleMessage("Неверное значение поправки"),
+        "I18nStart_incorrectEmail":
+            MessageLookupByLibrary.simpleMessage("Некорректный е-мейл"),
+        "I18nStart_incorrectName":
+            MessageLookupByLibrary.simpleMessage("Некорректное имя"),
+        "I18nStart_incorrectNickname":
+            MessageLookupByLibrary.simpleMessage("Некорректный никнейм"),
         "I18nStart_incorrectTime":
             MessageLookupByLibrary.simpleMessage("Неверное значение времени"),
         "I18nStart_participantCategory": m21,

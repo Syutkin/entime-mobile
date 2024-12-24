@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:entime/src/feature/database/widget/popup/finish_details.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -19,8 +21,9 @@ import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../database.dart';
 import '../logic/filter_finish_list.dart';
+import 'popup/change_finish_time_to_number_popup.dart';
 
-enum FinishPopupMenu { clearNumber, hideAll }
+enum FinishPopupMenu { details, clearNumber, hideAll }
 
 class FinishListPage extends StatefulWidget {
   const FinishListPage({super.key});
@@ -60,11 +63,12 @@ class _FinishListPage extends State<FinishListPage> {
   Widget build(BuildContext context) =>
       BlocListener<DatabaseBloc, DatabaseState>(
         listener: (context, state) {
+          final databaseBloc = context.read<DatabaseBloc>();
+
           // toast с автоматически проставленным номером
           final autoFinishNumber = state.autoFinishNumber;
           logger.d('autoFinishNumber: $autoFinishNumber');
           if (autoFinishNumber != null) {
-            final databaseBloc = context.read<DatabaseBloc>();
             BotToast.showAttachedWidget(
               verticalOffset: 36.0,
               attachedBuilder: (cancel) => Card(
@@ -95,10 +99,35 @@ class _FinishListPage extends State<FinishListPage> {
               ),
               // enableSafeArea: false,
               animationDuration: const Duration(milliseconds: 300),
-              duration: const Duration(seconds: 3),
+              duration: const Duration(seconds: 5),
               targetContext: context,
             );
           }
+
+          // Вызывается, если номеру уже присвоена финишная отсечка
+          state.notification?.mapOrNull(
+            changeFinishTimeToNumber: (notification) async {
+              final update =
+                  await updateFinishTimePopup(context, notification.number);
+              if (update != null && update) {
+                databaseBloc
+                  ..add(
+                    DatabaseEvent.clearNumberAtFinish(
+                      stage: notification.stage,
+                      number: notification.number,
+                    ),
+                  )
+                  ..add(
+                    DatabaseEvent.addNumberToFinish(
+                      finishId: notification.finishId,
+                      number: notification.number,
+                      finishTime: notification.finishTime,
+                      stage: notification.stage,
+                    ),
+                  );
+              }
+            },
+          );
         },
         child: Scaffold(
           body: BlocBuilder<DatabaseBloc, DatabaseState>(
@@ -181,7 +210,7 @@ class _FinishListPage extends State<FinishListPage> {
                         await addFinishNumberPopup(context, item);
                       },
                       onLongPress: () async {
-                        await _clearPopup(item.number);
+                        await _finishTilePopup(item);
                       },
                       onAccept: (details) {
                         final databaseBloc = context.read<DatabaseBloc>();
@@ -254,13 +283,13 @@ class _FinishListPage extends State<FinishListPage> {
         },
       );
 
-  Future<void> _clearPopup(int? number) async {
+  Future<void> _finishTilePopup(Finish item) async {
     final databaseBloc = context.read<DatabaseBloc>();
     final stage = databaseBloc.state.stage;
     final overlay = Overlay.of(context).context.findRenderObject();
     if (overlay != null) {
       final result = await showMenu<FinishPopupMenu>(
-        items: _getPopupMenu(context, number),
+        items: _getPopupMenu(context, item),
         context: context,
         position: RelativeRect.fromRect(
           _tapPosition & const Size(60, 60), // smaller rect, the touch area
@@ -271,10 +300,8 @@ class _FinishListPage extends State<FinishListPage> {
       if (result != null && stage != null) {
         switch (result) {
           case FinishPopupMenu.clearNumber:
+            final number = item.number;
             if (number != null) {
-              // if (!mounted) {
-              //   return;
-              // }
               databaseBloc.add(
                 DatabaseEvent.clearNumberAtFinish(
                   stage: stage,
@@ -283,11 +310,13 @@ class _FinishListPage extends State<FinishListPage> {
               );
             }
           case FinishPopupMenu.hideAll:
-            // if (!mounted) {
-            //   return;
-            // }
             final stageId = stage.id;
             databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
+          case FinishPopupMenu.details:
+            final currentContext = context;
+            if (currentContext.mounted) {
+              await finishDetails(currentContext, item);
+            }
         }
       }
     }
@@ -295,30 +324,28 @@ class _FinishListPage extends State<FinishListPage> {
 
   List<PopupMenuEntry<FinishPopupMenu>> _getPopupMenu(
     BuildContext context,
-    int? number,
+    Finish? item,
   ) {
-    final list = <PopupMenuEntry<FinishPopupMenu>>[];
-    if (number != null) {
-      list
-        ..add(
-          PopupMenuItem(
-            value: FinishPopupMenu.clearNumber,
-            child: Text(Localization.current.I18nProtocol_clearNumber),
-          ),
-        )
-        ..add(
-          const PopupMenuDivider(
-            height: 5,
-          ),
-        );
-    }
-    list.add(
+    final number = item?.number;
+    return <PopupMenuEntry<FinishPopupMenu>>[
+      PopupMenuItem(
+        value: FinishPopupMenu.details,
+        child: Text(Localization.current.I18nCore_details),
+      ),
+      if (number != null)
+        PopupMenuItem(
+          value: FinishPopupMenu.clearNumber,
+          child: Text(Localization.current.I18nProtocol_clearNumber),
+        ),
+      if (number != null)
+        const PopupMenuDivider(
+          height: 5,
+        ),
       PopupMenuItem(
         value: FinishPopupMenu.hideAll,
         child: Text(Localization.current.I18nProtocol_hideAll),
       ),
-    );
-    return list;
+    ];
   }
 
   Future<void> _numberOnTracePopup(int number) async {
@@ -386,31 +413,6 @@ class _FinishListPage extends State<FinishListPage> {
       ),
     ];
     return list;
-  }
-
-  RelativeRect? buttonMenuPosition(BuildContext buildContext) {
-    final bar = buildContext.findRenderObject() as RenderBox?;
-    final overlay =
-        Overlay.of(buildContext).context.findRenderObject() as RenderBox?;
-    if (bar != null && overlay != null) {
-      // ignore: omit_local_variable_types
-      final RelativeRect position = RelativeRect.fromRect(
-        Rect.fromPoints(
-          bar.localToGlobal(
-            bar.size.bottomRight(Offset.zero),
-            ancestor: overlay,
-          ),
-          bar.localToGlobal(
-            bar.size.bottomRight(Offset.zero),
-            ancestor: overlay,
-          ),
-        ),
-        Offset.zero & overlay.size,
-      );
-      return position;
-    } else {
-      return null;
-    }
   }
 
   List<Widget> _getFooterButtons(BuildContext context) {
@@ -499,7 +501,7 @@ class _FinishListPage extends State<FinishListPage> {
     final timestamp = DateTime.now();
     final offset = context.read<NtpBloc>().state.offset;
     //добавляем ntp offset к ручному времени
-    final manual = timestamp.add(Duration(microseconds: offset)); // ToDo: microseconds?
+    final manual = timestamp.add(Duration(milliseconds: offset));
     final finishTime = DateFormat(longTimeFormat).format(manual);
     final databaseBloc = context.read<DatabaseBloc>();
     final stageId = databaseBloc.state.stage?.id;

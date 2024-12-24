@@ -93,11 +93,11 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
               keyboardType: TextInputType.url,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value.isNullOrEmpty) {
                   url = '';
                   return null;
                 } else {
-                  if (value.isUrl) {
+                  if (value.isValidUrl) {
                     url = value;
                     return null;
                   } else {
@@ -120,33 +120,28 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
           ],
         ),
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          if (formKey.currentState!.validate()) {
+            context.read<DatabaseBloc>().add(
+                  DatabaseEvent.upsertRace(
+                    id: race?.id,
+                    name: name,
+                    startDate: startDate,
+                    finishDate: finishDate,
+                    location: location,
+                    url: url,
+                    description: description,
+                  ),
+                );
             Navigator.of(context).pop();
-          },
-          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-        ),
-        TextButton(
-          onPressed: () async {
-            if (formKey.currentState!.validate()) {
-              context.read<DatabaseBloc>().add(
-                    DatabaseEvent.upsertRace(
-                      id: race?.id,
-                      name: name,
-                      startDate: startDate,
-                      finishDate: finishDate,
-                      location: location,
-                      url: url,
-                      description: description,
-                    ),
-                  );
-              Navigator.of(context).pop();
-            }
-          },
-          child: Text(MaterialLocalizations.of(context).okButtonLabel),
-        ),
-      ],
+          }
+        },
+      ),
     ),
   );
 }

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-15T15:19:33.223293",
+  "@@last_modified": "2024-12-24T12:33:05.620647",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -20,6 +20,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nCore_details": "Подробнее",
+  "@I18nCore_details": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nCore_correction": "Поправка",
   "@I18nCore_correction": {
     "type": "text",
@@ -37,6 +42,16 @@
   },
   "I18nCore_dsq": "DSQ",
   "@I18nCore_dsq": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nCore_yes": "Да",
+  "@I18nCore_yes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nCore_no": "Нет",
+  "@I18nCore_no": {
     "type": "text",
     "placeholders": {}
   },
@@ -91,7 +106,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_reconnectDescription": "Пытаться переподключится к модулю при обрыве связи",
+  "I18nSettings_reconnectDescription": "Пытаться переподключиться к модулю при обрыве связи",
   "@I18nSettings_reconnectDescription": {
     "type": "text",
     "placeholders": {}
@@ -230,13 +245,13 @@
       "milliseconds": {}
     }
   },
-  "I18nSettings_autosubstitution": "Автоподстановка номеров",
-  "@I18nSettings_autosubstitution": {
+  "I18nSettings_autoSubstitution": "Автоподстановка номеров",
+  "@I18nSettings_autoSubstitution": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_autosubstitutionDelay": "Задержка перед автоматическим подставлением новых номеров",
-  "@I18nSettings_autosubstitutionDelay": {
+  "I18nSettings_autoSubstitutionDelay": "Задержка перед автоматическим подставлением новых номеров",
+  "@I18nSettings_autoSubstitutionDelay": {
     "type": "text",
     "placeholders": {}
   },
@@ -252,6 +267,26 @@
   },
   "I18nSettings_finishButtonSizeDescription": "Размер кнопки \"отсечка\" на финишном экране",
   "@I18nSettings_finishButtonSizeDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showStartDifference": "Показывать разницу во времени",
+  "@I18nSettings_showStartDifference": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showStartDifferenceDescription": "Между временем модуля и временем устройства",
+  "@I18nSettings_showStartDifferenceDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showColorStartDifference": "Выделение цветом разницы во времени",
+  "@I18nSettings_showColorStartDifference": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_showColorStartDifferenceDescription": "При достижении порога между временем модуля и временем устройства",
+  "@I18nSettings_showColorStartDifferenceDescription": {
     "type": "text",
     "placeholders": {}
   },
@@ -275,13 +310,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_finishDifference": "Порог цветовой индикации",
-  "@I18nSettings_finishDifference": {
+  "I18nSettings_startFinishDifference": "Порог цветовой индикации",
+  "@I18nSettings_startFinishDifference": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_incorrectFinishDifference": "Неверный порог",
-  "@I18nSettings_incorrectFinishDifference": {
+  "I18nSettings_incorrectStartFinishDifference": "Неверный порог",
+  "@I18nSettings_incorrectStartFinishDifference": {
     "type": "text",
     "placeholders": {}
   },
@@ -320,7 +355,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nSettings_journalLinesNumberPopup": "Количество отображамых строк в журнале",
+  "I18nSettings_journalLinesNumberPopup": "Количество отображаемых строк в журнале",
   "@I18nSettings_journalLinesNumberPopup": {
     "type": "text",
     "placeholders": {}
@@ -489,6 +524,16 @@
       "raceName": {},
       "stageName": {}
     }
+  },
+  "I18nProtocol_startTimeCutoff": "Стартовая отсечка",
+  "@I18nProtocol_startTimeCutoff": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nProtocol_finishTimeCutoff": "Финишная отсечка",
+  "@I18nProtocol_finishTimeCutoff": {
+    "type": "text",
+    "placeholders": {}
   },
   "I18nBluetooth_unknownDevice": "Неизвестное устройство",
   "@I18nBluetooth_unknownDevice": {
@@ -750,6 +795,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nInit_riders": "Гонщики",
+  "@I18nInit_riders": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nStart_didNotStart": "Не стартовал",
   "@I18nStart_didNotStart": {
     "type": "text",
@@ -787,6 +837,36 @@
   },
   "I18nStart_incorrectTime": "Неверное значение времени",
   "@I18nStart_incorrectTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectName": "Некорректное имя",
+  "@I18nStart_incorrectName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_emptyName": "Введите имя",
+  "@I18nStart_emptyName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectNickname": "Некорректный никнейм",
+  "@I18nStart_incorrectNickname": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectBirthday": "Некорректная дата/год рождения",
+  "@I18nStart_incorrectBirthday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectCity": "Некорректное название города",
+  "@I18nStart_incorrectCity": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectEmail": "Некорректный е-мейл",
+  "@I18nStart_incorrectEmail": {
     "type": "text",
     "placeholders": {}
   },
@@ -847,6 +927,31 @@
   },
   "I18nStart_startTimeAtSmartphone": "Время старта на смартфоне",
   "@I18nStart_startTimeAtSmartphone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_finishTime": "Финишное время",
+  "@I18nFinish_finishTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_finishTimestamp": "Время записи на устройстве",
+  "@I18nFinish_finishTimestamp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_manualTime": "Ручная отсечка",
+  "@I18nFinish_manualTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_automaticTime": "Автоматическая отсечка",
+  "@I18nFinish_automaticTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nFinish_hiddenCutoff": "Скрытая",
+  "@I18nFinish_hiddenCutoff": {
     "type": "text",
     "placeholders": {}
   },
@@ -1120,6 +1225,51 @@
       "type": {}
     }
   },
+  "I18nDatabase_category": "Категория",
+  "@I18nDatabase_category": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_name": "Имя",
+  "@I18nDatabase_name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_nickname": "Никнейм",
+  "@I18nDatabase_nickname": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_birthday": "Дата/Год рождения",
+  "@I18nDatabase_birthday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_team": "Команда",
+  "@I18nDatabase_team": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_city": "Город",
+  "@I18nDatabase_city": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_email": "Электронная почта",
+  "@I18nDatabase_email": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_phone": "Телефон",
+  "@I18nDatabase_phone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_comment": "Комментарий",
+  "@I18nDatabase_comment": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nDatabase_races": "Соревнования",
   "@I18nDatabase_races": {
     "type": "text",
@@ -1292,6 +1442,21 @@
     "placeholders": {
       "trailName": {}
     }
+  },
+  "I18nDatabase_newCategory": "Новая категория?",
+  "@I18nDatabase_newCategory": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_newRider": "Новый гонщик?",
+  "@I18nDatabase_newRider": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nDatabase_editRider": "Редактирование гонщика",
+  "@I18nDatabase_editRider": {
+    "type": "text",
+    "placeholders": {}
   },
   "I18nNtp_ntpOffset": "NTP offset",
   "@I18nNtp_ntpOffset": {

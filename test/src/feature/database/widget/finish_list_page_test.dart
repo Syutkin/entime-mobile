@@ -56,8 +56,8 @@ void main() {
           const DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: [],
@@ -80,8 +80,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: finishes(count),
@@ -104,8 +104,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: finishes(count),
@@ -129,8 +129,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: finishes(count),
@@ -154,8 +154,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: finishes(count),
@@ -184,8 +184,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: finishes(count),
@@ -214,8 +214,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: finishes(count),
@@ -244,8 +244,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: finishes(count),
@@ -274,8 +274,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: finishes(count),
@@ -297,8 +297,8 @@ void main() {
           const DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: [],
@@ -319,8 +319,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: [],
@@ -341,8 +341,8 @@ void main() {
           DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: [],

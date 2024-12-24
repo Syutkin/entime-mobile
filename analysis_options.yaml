@@ -35,7 +35,9 @@ linter:
   # producing the lint.
   rules:
     always_use_package_imports: false
+    avoid_catches_without_on_clauses: false
     avoid_print: true
+    document_ignores: false
     flutter_style_todos: false
     lines_longer_than_80_chars: false
     one_member_abstracts: false

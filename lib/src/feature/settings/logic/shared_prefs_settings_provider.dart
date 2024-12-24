@@ -62,12 +62,18 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           prefs.getBool('substituteNumbers') ?? defaults.substituteNumbers,
       substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
           defaults.substituteNumbersDelay,
+      showStartDifference: prefs.getBool('showStartDifference') ??
+          defaults.showStartDifference,
+      showColorStartDifference: prefs.getBool('showColorStartDifference') ??
+          defaults.showColorStartDifference,
+      startDifferenceThreshold: prefs.getInt('startDifferenceThreshold') ??
+          defaults.startDifferenceThreshold,
       showFinishDifference: prefs.getBool('showFinishDifference') ??
           defaults.showFinishDifference,
       showColorFinishDifference: prefs.getBool('showColorFinishDifference') ??
           defaults.showColorFinishDifference,
-      finishDifferenceThreshold:
-          prefs.getInt('finishDifferenceThreshold') ?? defaults.finishDifferenceThreshold,
+      finishDifferenceThreshold: prefs.getInt('finishDifferenceThreshold') ??
+          defaults.finishDifferenceThreshold,
       deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
       updateStartCorrectionDelay: prefs.getInt('updateStartCorrectionDelay') ??
           defaults.updateStartCorrectionDelay,
@@ -156,10 +162,24 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       'substituteNumbersDelay',
       settings.substituteNumbersDelay,
     );
+    await _prefs.setBool('showStartDifference', settings.showStartDifference);
+    await _prefs.setBool(
+      'showColorStartDifference',
+      settings.showColorStartDifference,
+    );
+    await _prefs.setInt(
+      'startDifferenceThreshold',
+      settings.startDifferenceThreshold,
+    );
     await _prefs.setBool('showFinishDifference', settings.showFinishDifference);
     await _prefs.setBool(
-        'showColorFinishDifference', settings.showColorFinishDifference,);
-    await _prefs.setInt('finishDifferenceThreshold', settings.finishDifferenceThreshold);
+      'showColorFinishDifference',
+      settings.showColorFinishDifference,
+    );
+    await _prefs.setInt(
+      'finishDifferenceThreshold',
+      settings.finishDifferenceThreshold,
+    );
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
     await _prefs.setInt(
       'updateStartCorrectionDelay',

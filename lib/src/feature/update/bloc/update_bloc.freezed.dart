@@ -23,6 +23,7 @@ mixin _$UpdateEvent {
     required TResult Function() downloadUpdate,
     required TResult Function(int bytes, int total) downloading,
     required TResult Function() cancelDownload,
+    required TResult Function(String error) downloadError,
     required TResult Function() updateFromFile,
   }) =>
       throw _privateConstructorUsedError;
@@ -33,6 +34,7 @@ mixin _$UpdateEvent {
     TResult? Function()? downloadUpdate,
     TResult? Function(int bytes, int total)? downloading,
     TResult? Function()? cancelDownload,
+    TResult? Function(String error)? downloadError,
     TResult? Function()? updateFromFile,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,38 +45,42 @@ mixin _$UpdateEvent {
     TResult Function()? downloadUpdate,
     TResult Function(int bytes, int total)? downloading,
     TResult Function()? cancelDownload,
+    TResult Function(String error)? downloadError,
     TResult Function()? updateFromFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckUpdate value) checkUpdate,
-    required TResult Function(PopupChangelog value) popupChangelog,
-    required TResult Function(DownloadUpdate value) downloadUpdate,
-    required TResult Function(UpdateDownloading value) downloading,
-    required TResult Function(CancelDownload value) cancelDownload,
-    required TResult Function(UpdateFromFile value) updateFromFile,
+    required TResult Function(_CheckUpdateEvent value) checkUpdate,
+    required TResult Function(_PopupChangelogEvent value) popupChangelog,
+    required TResult Function(_DownloadUpdateEvent value) downloadUpdate,
+    required TResult Function(_UpdateDownloadingEvent value) downloading,
+    required TResult Function(_CancelDownloadEvent value) cancelDownload,
+    required TResult Function(_DownloadErrorEvent value) downloadError,
+    required TResult Function(_UpdateFromFileEvent value) updateFromFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckUpdate value)? checkUpdate,
-    TResult? Function(PopupChangelog value)? popupChangelog,
-    TResult? Function(DownloadUpdate value)? downloadUpdate,
-    TResult? Function(UpdateDownloading value)? downloading,
-    TResult? Function(CancelDownload value)? cancelDownload,
-    TResult? Function(UpdateFromFile value)? updateFromFile,
+    TResult? Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult? Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult? Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult? Function(_UpdateDownloadingEvent value)? downloading,
+    TResult? Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult? Function(_DownloadErrorEvent value)? downloadError,
+    TResult? Function(_UpdateFromFileEvent value)? updateFromFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckUpdate value)? checkUpdate,
-    TResult Function(PopupChangelog value)? popupChangelog,
-    TResult Function(DownloadUpdate value)? downloadUpdate,
-    TResult Function(UpdateDownloading value)? downloading,
-    TResult Function(CancelDownload value)? cancelDownload,
-    TResult Function(UpdateFromFile value)? updateFromFile,
+    TResult Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult Function(_UpdateDownloadingEvent value)? downloading,
+    TResult Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult Function(_DownloadErrorEvent value)? downloadError,
+    TResult Function(_UpdateFromFileEvent value)? updateFromFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -102,18 +108,18 @@ class _$UpdateEventCopyWithImpl<$Res, $Val extends UpdateEvent>
 }
 
 /// @nodoc
-abstract class _$$CheckUpdateImplCopyWith<$Res> {
-  factory _$$CheckUpdateImplCopyWith(
-          _$CheckUpdateImpl value, $Res Function(_$CheckUpdateImpl) then) =
-      __$$CheckUpdateImplCopyWithImpl<$Res>;
+abstract class _$$CheckUpdateEventImplCopyWith<$Res> {
+  factory _$$CheckUpdateEventImplCopyWith(_$CheckUpdateEventImpl value,
+          $Res Function(_$CheckUpdateEventImpl) then) =
+      __$$CheckUpdateEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CheckUpdateImplCopyWithImpl<$Res>
-    extends _$UpdateEventCopyWithImpl<$Res, _$CheckUpdateImpl>
-    implements _$$CheckUpdateImplCopyWith<$Res> {
-  __$$CheckUpdateImplCopyWithImpl(
-      _$CheckUpdateImpl _value, $Res Function(_$CheckUpdateImpl) _then)
+class __$$CheckUpdateEventImplCopyWithImpl<$Res>
+    extends _$UpdateEventCopyWithImpl<$Res, _$CheckUpdateEventImpl>
+    implements _$$CheckUpdateEventImplCopyWith<$Res> {
+  __$$CheckUpdateEventImplCopyWithImpl(_$CheckUpdateEventImpl _value,
+      $Res Function(_$CheckUpdateEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of UpdateEvent
@@ -122,8 +128,8 @@ class __$$CheckUpdateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CheckUpdateImpl implements CheckUpdate {
-  const _$CheckUpdateImpl();
+class _$CheckUpdateEventImpl implements _CheckUpdateEvent {
+  const _$CheckUpdateEventImpl();
 
   @override
   String toString() {
@@ -133,7 +139,7 @@ class _$CheckUpdateImpl implements CheckUpdate {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CheckUpdateImpl);
+        (other.runtimeType == runtimeType && other is _$CheckUpdateEventImpl);
   }
 
   @override
@@ -147,6 +153,7 @@ class _$CheckUpdateImpl implements CheckUpdate {
     required TResult Function() downloadUpdate,
     required TResult Function(int bytes, int total) downloading,
     required TResult Function() cancelDownload,
+    required TResult Function(String error) downloadError,
     required TResult Function() updateFromFile,
   }) {
     return checkUpdate();
@@ -160,6 +167,7 @@ class _$CheckUpdateImpl implements CheckUpdate {
     TResult? Function()? downloadUpdate,
     TResult? Function(int bytes, int total)? downloading,
     TResult? Function()? cancelDownload,
+    TResult? Function(String error)? downloadError,
     TResult? Function()? updateFromFile,
   }) {
     return checkUpdate?.call();
@@ -173,6 +181,7 @@ class _$CheckUpdateImpl implements CheckUpdate {
     TResult Function()? downloadUpdate,
     TResult Function(int bytes, int total)? downloading,
     TResult Function()? cancelDownload,
+    TResult Function(String error)? downloadError,
     TResult Function()? updateFromFile,
     required TResult orElse(),
   }) {
@@ -185,12 +194,13 @@ class _$CheckUpdateImpl implements CheckUpdate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckUpdate value) checkUpdate,
-    required TResult Function(PopupChangelog value) popupChangelog,
-    required TResult Function(DownloadUpdate value) downloadUpdate,
-    required TResult Function(UpdateDownloading value) downloading,
-    required TResult Function(CancelDownload value) cancelDownload,
-    required TResult Function(UpdateFromFile value) updateFromFile,
+    required TResult Function(_CheckUpdateEvent value) checkUpdate,
+    required TResult Function(_PopupChangelogEvent value) popupChangelog,
+    required TResult Function(_DownloadUpdateEvent value) downloadUpdate,
+    required TResult Function(_UpdateDownloadingEvent value) downloading,
+    required TResult Function(_CancelDownloadEvent value) cancelDownload,
+    required TResult Function(_DownloadErrorEvent value) downloadError,
+    required TResult Function(_UpdateFromFileEvent value) updateFromFile,
   }) {
     return checkUpdate(this);
   }
@@ -198,12 +208,13 @@ class _$CheckUpdateImpl implements CheckUpdate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckUpdate value)? checkUpdate,
-    TResult? Function(PopupChangelog value)? popupChangelog,
-    TResult? Function(DownloadUpdate value)? downloadUpdate,
-    TResult? Function(UpdateDownloading value)? downloading,
-    TResult? Function(CancelDownload value)? cancelDownload,
-    TResult? Function(UpdateFromFile value)? updateFromFile,
+    TResult? Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult? Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult? Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult? Function(_UpdateDownloadingEvent value)? downloading,
+    TResult? Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult? Function(_DownloadErrorEvent value)? downloadError,
+    TResult? Function(_UpdateFromFileEvent value)? updateFromFile,
   }) {
     return checkUpdate?.call(this);
   }
@@ -211,12 +222,13 @@ class _$CheckUpdateImpl implements CheckUpdate {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckUpdate value)? checkUpdate,
-    TResult Function(PopupChangelog value)? popupChangelog,
-    TResult Function(DownloadUpdate value)? downloadUpdate,
-    TResult Function(UpdateDownloading value)? downloading,
-    TResult Function(CancelDownload value)? cancelDownload,
-    TResult Function(UpdateFromFile value)? updateFromFile,
+    TResult Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult Function(_UpdateDownloadingEvent value)? downloading,
+    TResult Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult Function(_DownloadErrorEvent value)? downloadError,
+    TResult Function(_UpdateFromFileEvent value)? updateFromFile,
     required TResult orElse(),
   }) {
     if (checkUpdate != null) {
@@ -226,23 +238,23 @@ class _$CheckUpdateImpl implements CheckUpdate {
   }
 }
 
-abstract class CheckUpdate implements UpdateEvent {
-  const factory CheckUpdate() = _$CheckUpdateImpl;
+abstract class _CheckUpdateEvent implements UpdateEvent {
+  const factory _CheckUpdateEvent() = _$CheckUpdateEventImpl;
 }
 
 /// @nodoc
-abstract class _$$PopupChangelogImplCopyWith<$Res> {
-  factory _$$PopupChangelogImplCopyWith(_$PopupChangelogImpl value,
-          $Res Function(_$PopupChangelogImpl) then) =
-      __$$PopupChangelogImplCopyWithImpl<$Res>;
+abstract class _$$PopupChangelogEventImplCopyWith<$Res> {
+  factory _$$PopupChangelogEventImplCopyWith(_$PopupChangelogEventImpl value,
+          $Res Function(_$PopupChangelogEventImpl) then) =
+      __$$PopupChangelogEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PopupChangelogImplCopyWithImpl<$Res>
-    extends _$UpdateEventCopyWithImpl<$Res, _$PopupChangelogImpl>
-    implements _$$PopupChangelogImplCopyWith<$Res> {
-  __$$PopupChangelogImplCopyWithImpl(
-      _$PopupChangelogImpl _value, $Res Function(_$PopupChangelogImpl) _then)
+class __$$PopupChangelogEventImplCopyWithImpl<$Res>
+    extends _$UpdateEventCopyWithImpl<$Res, _$PopupChangelogEventImpl>
+    implements _$$PopupChangelogEventImplCopyWith<$Res> {
+  __$$PopupChangelogEventImplCopyWithImpl(_$PopupChangelogEventImpl _value,
+      $Res Function(_$PopupChangelogEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of UpdateEvent
@@ -251,8 +263,8 @@ class __$$PopupChangelogImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PopupChangelogImpl implements PopupChangelog {
-  const _$PopupChangelogImpl();
+class _$PopupChangelogEventImpl implements _PopupChangelogEvent {
+  const _$PopupChangelogEventImpl();
 
   @override
   String toString() {
@@ -262,7 +274,8 @@ class _$PopupChangelogImpl implements PopupChangelog {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PopupChangelogImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$PopupChangelogEventImpl);
   }
 
   @override
@@ -276,6 +289,7 @@ class _$PopupChangelogImpl implements PopupChangelog {
     required TResult Function() downloadUpdate,
     required TResult Function(int bytes, int total) downloading,
     required TResult Function() cancelDownload,
+    required TResult Function(String error) downloadError,
     required TResult Function() updateFromFile,
   }) {
     return popupChangelog();
@@ -289,6 +303,7 @@ class _$PopupChangelogImpl implements PopupChangelog {
     TResult? Function()? downloadUpdate,
     TResult? Function(int bytes, int total)? downloading,
     TResult? Function()? cancelDownload,
+    TResult? Function(String error)? downloadError,
     TResult? Function()? updateFromFile,
   }) {
     return popupChangelog?.call();
@@ -302,6 +317,7 @@ class _$PopupChangelogImpl implements PopupChangelog {
     TResult Function()? downloadUpdate,
     TResult Function(int bytes, int total)? downloading,
     TResult Function()? cancelDownload,
+    TResult Function(String error)? downloadError,
     TResult Function()? updateFromFile,
     required TResult orElse(),
   }) {
@@ -314,12 +330,13 @@ class _$PopupChangelogImpl implements PopupChangelog {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckUpdate value) checkUpdate,
-    required TResult Function(PopupChangelog value) popupChangelog,
-    required TResult Function(DownloadUpdate value) downloadUpdate,
-    required TResult Function(UpdateDownloading value) downloading,
-    required TResult Function(CancelDownload value) cancelDownload,
-    required TResult Function(UpdateFromFile value) updateFromFile,
+    required TResult Function(_CheckUpdateEvent value) checkUpdate,
+    required TResult Function(_PopupChangelogEvent value) popupChangelog,
+    required TResult Function(_DownloadUpdateEvent value) downloadUpdate,
+    required TResult Function(_UpdateDownloadingEvent value) downloading,
+    required TResult Function(_CancelDownloadEvent value) cancelDownload,
+    required TResult Function(_DownloadErrorEvent value) downloadError,
+    required TResult Function(_UpdateFromFileEvent value) updateFromFile,
   }) {
     return popupChangelog(this);
   }
@@ -327,12 +344,13 @@ class _$PopupChangelogImpl implements PopupChangelog {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckUpdate value)? checkUpdate,
-    TResult? Function(PopupChangelog value)? popupChangelog,
-    TResult? Function(DownloadUpdate value)? downloadUpdate,
-    TResult? Function(UpdateDownloading value)? downloading,
-    TResult? Function(CancelDownload value)? cancelDownload,
-    TResult? Function(UpdateFromFile value)? updateFromFile,
+    TResult? Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult? Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult? Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult? Function(_UpdateDownloadingEvent value)? downloading,
+    TResult? Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult? Function(_DownloadErrorEvent value)? downloadError,
+    TResult? Function(_UpdateFromFileEvent value)? updateFromFile,
   }) {
     return popupChangelog?.call(this);
   }
@@ -340,12 +358,13 @@ class _$PopupChangelogImpl implements PopupChangelog {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckUpdate value)? checkUpdate,
-    TResult Function(PopupChangelog value)? popupChangelog,
-    TResult Function(DownloadUpdate value)? downloadUpdate,
-    TResult Function(UpdateDownloading value)? downloading,
-    TResult Function(CancelDownload value)? cancelDownload,
-    TResult Function(UpdateFromFile value)? updateFromFile,
+    TResult Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult Function(_UpdateDownloadingEvent value)? downloading,
+    TResult Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult Function(_DownloadErrorEvent value)? downloadError,
+    TResult Function(_UpdateFromFileEvent value)? updateFromFile,
     required TResult orElse(),
   }) {
     if (popupChangelog != null) {
@@ -355,23 +374,23 @@ class _$PopupChangelogImpl implements PopupChangelog {
   }
 }
 
-abstract class PopupChangelog implements UpdateEvent {
-  const factory PopupChangelog() = _$PopupChangelogImpl;
+abstract class _PopupChangelogEvent implements UpdateEvent {
+  const factory _PopupChangelogEvent() = _$PopupChangelogEventImpl;
 }
 
 /// @nodoc
-abstract class _$$DownloadUpdateImplCopyWith<$Res> {
-  factory _$$DownloadUpdateImplCopyWith(_$DownloadUpdateImpl value,
-          $Res Function(_$DownloadUpdateImpl) then) =
-      __$$DownloadUpdateImplCopyWithImpl<$Res>;
+abstract class _$$DownloadUpdateEventImplCopyWith<$Res> {
+  factory _$$DownloadUpdateEventImplCopyWith(_$DownloadUpdateEventImpl value,
+          $Res Function(_$DownloadUpdateEventImpl) then) =
+      __$$DownloadUpdateEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DownloadUpdateImplCopyWithImpl<$Res>
-    extends _$UpdateEventCopyWithImpl<$Res, _$DownloadUpdateImpl>
-    implements _$$DownloadUpdateImplCopyWith<$Res> {
-  __$$DownloadUpdateImplCopyWithImpl(
-      _$DownloadUpdateImpl _value, $Res Function(_$DownloadUpdateImpl) _then)
+class __$$DownloadUpdateEventImplCopyWithImpl<$Res>
+    extends _$UpdateEventCopyWithImpl<$Res, _$DownloadUpdateEventImpl>
+    implements _$$DownloadUpdateEventImplCopyWith<$Res> {
+  __$$DownloadUpdateEventImplCopyWithImpl(_$DownloadUpdateEventImpl _value,
+      $Res Function(_$DownloadUpdateEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of UpdateEvent
@@ -380,8 +399,8 @@ class __$$DownloadUpdateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DownloadUpdateImpl implements DownloadUpdate {
-  const _$DownloadUpdateImpl();
+class _$DownloadUpdateEventImpl implements _DownloadUpdateEvent {
+  const _$DownloadUpdateEventImpl();
 
   @override
   String toString() {
@@ -391,7 +410,8 @@ class _$DownloadUpdateImpl implements DownloadUpdate {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DownloadUpdateImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$DownloadUpdateEventImpl);
   }
 
   @override
@@ -405,6 +425,7 @@ class _$DownloadUpdateImpl implements DownloadUpdate {
     required TResult Function() downloadUpdate,
     required TResult Function(int bytes, int total) downloading,
     required TResult Function() cancelDownload,
+    required TResult Function(String error) downloadError,
     required TResult Function() updateFromFile,
   }) {
     return downloadUpdate();
@@ -418,6 +439,7 @@ class _$DownloadUpdateImpl implements DownloadUpdate {
     TResult? Function()? downloadUpdate,
     TResult? Function(int bytes, int total)? downloading,
     TResult? Function()? cancelDownload,
+    TResult? Function(String error)? downloadError,
     TResult? Function()? updateFromFile,
   }) {
     return downloadUpdate?.call();
@@ -431,6 +453,7 @@ class _$DownloadUpdateImpl implements DownloadUpdate {
     TResult Function()? downloadUpdate,
     TResult Function(int bytes, int total)? downloading,
     TResult Function()? cancelDownload,
+    TResult Function(String error)? downloadError,
     TResult Function()? updateFromFile,
     required TResult orElse(),
   }) {
@@ -443,12 +466,13 @@ class _$DownloadUpdateImpl implements DownloadUpdate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckUpdate value) checkUpdate,
-    required TResult Function(PopupChangelog value) popupChangelog,
-    required TResult Function(DownloadUpdate value) downloadUpdate,
-    required TResult Function(UpdateDownloading value) downloading,
-    required TResult Function(CancelDownload value) cancelDownload,
-    required TResult Function(UpdateFromFile value) updateFromFile,
+    required TResult Function(_CheckUpdateEvent value) checkUpdate,
+    required TResult Function(_PopupChangelogEvent value) popupChangelog,
+    required TResult Function(_DownloadUpdateEvent value) downloadUpdate,
+    required TResult Function(_UpdateDownloadingEvent value) downloading,
+    required TResult Function(_CancelDownloadEvent value) cancelDownload,
+    required TResult Function(_DownloadErrorEvent value) downloadError,
+    required TResult Function(_UpdateFromFileEvent value) updateFromFile,
   }) {
     return downloadUpdate(this);
   }
@@ -456,12 +480,13 @@ class _$DownloadUpdateImpl implements DownloadUpdate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckUpdate value)? checkUpdate,
-    TResult? Function(PopupChangelog value)? popupChangelog,
-    TResult? Function(DownloadUpdate value)? downloadUpdate,
-    TResult? Function(UpdateDownloading value)? downloading,
-    TResult? Function(CancelDownload value)? cancelDownload,
-    TResult? Function(UpdateFromFile value)? updateFromFile,
+    TResult? Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult? Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult? Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult? Function(_UpdateDownloadingEvent value)? downloading,
+    TResult? Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult? Function(_DownloadErrorEvent value)? downloadError,
+    TResult? Function(_UpdateFromFileEvent value)? updateFromFile,
   }) {
     return downloadUpdate?.call(this);
   }
@@ -469,12 +494,13 @@ class _$DownloadUpdateImpl implements DownloadUpdate {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckUpdate value)? checkUpdate,
-    TResult Function(PopupChangelog value)? popupChangelog,
-    TResult Function(DownloadUpdate value)? downloadUpdate,
-    TResult Function(UpdateDownloading value)? downloading,
-    TResult Function(CancelDownload value)? cancelDownload,
-    TResult Function(UpdateFromFile value)? updateFromFile,
+    TResult Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult Function(_UpdateDownloadingEvent value)? downloading,
+    TResult Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult Function(_DownloadErrorEvent value)? downloadError,
+    TResult Function(_UpdateFromFileEvent value)? updateFromFile,
     required TResult orElse(),
   }) {
     if (downloadUpdate != null) {
@@ -484,25 +510,27 @@ class _$DownloadUpdateImpl implements DownloadUpdate {
   }
 }
 
-abstract class DownloadUpdate implements UpdateEvent {
-  const factory DownloadUpdate() = _$DownloadUpdateImpl;
+abstract class _DownloadUpdateEvent implements UpdateEvent {
+  const factory _DownloadUpdateEvent() = _$DownloadUpdateEventImpl;
 }
 
 /// @nodoc
-abstract class _$$UpdateDownloadingImplCopyWith<$Res> {
-  factory _$$UpdateDownloadingImplCopyWith(_$UpdateDownloadingImpl value,
-          $Res Function(_$UpdateDownloadingImpl) then) =
-      __$$UpdateDownloadingImplCopyWithImpl<$Res>;
+abstract class _$$UpdateDownloadingEventImplCopyWith<$Res> {
+  factory _$$UpdateDownloadingEventImplCopyWith(
+          _$UpdateDownloadingEventImpl value,
+          $Res Function(_$UpdateDownloadingEventImpl) then) =
+      __$$UpdateDownloadingEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int bytes, int total});
 }
 
 /// @nodoc
-class __$$UpdateDownloadingImplCopyWithImpl<$Res>
-    extends _$UpdateEventCopyWithImpl<$Res, _$UpdateDownloadingImpl>
-    implements _$$UpdateDownloadingImplCopyWith<$Res> {
-  __$$UpdateDownloadingImplCopyWithImpl(_$UpdateDownloadingImpl _value,
-      $Res Function(_$UpdateDownloadingImpl) _then)
+class __$$UpdateDownloadingEventImplCopyWithImpl<$Res>
+    extends _$UpdateEventCopyWithImpl<$Res, _$UpdateDownloadingEventImpl>
+    implements _$$UpdateDownloadingEventImplCopyWith<$Res> {
+  __$$UpdateDownloadingEventImplCopyWithImpl(
+      _$UpdateDownloadingEventImpl _value,
+      $Res Function(_$UpdateDownloadingEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of UpdateEvent
@@ -513,7 +541,7 @@ class __$$UpdateDownloadingImplCopyWithImpl<$Res>
     Object? bytes = null,
     Object? total = null,
   }) {
-    return _then(_$UpdateDownloadingImpl(
+    return _then(_$UpdateDownloadingEventImpl(
       bytes: null == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
@@ -528,8 +556,9 @@ class __$$UpdateDownloadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateDownloadingImpl implements UpdateDownloading {
-  const _$UpdateDownloadingImpl({required this.bytes, required this.total});
+class _$UpdateDownloadingEventImpl implements _UpdateDownloadingEvent {
+  const _$UpdateDownloadingEventImpl(
+      {required this.bytes, required this.total});
 
   @override
   final int bytes;
@@ -545,7 +574,7 @@ class _$UpdateDownloadingImpl implements UpdateDownloading {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateDownloadingImpl &&
+            other is _$UpdateDownloadingEventImpl &&
             (identical(other.bytes, bytes) || other.bytes == bytes) &&
             (identical(other.total, total) || other.total == total));
   }
@@ -558,9 +587,9 @@ class _$UpdateDownloadingImpl implements UpdateDownloading {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdateDownloadingImplCopyWith<_$UpdateDownloadingImpl> get copyWith =>
-      __$$UpdateDownloadingImplCopyWithImpl<_$UpdateDownloadingImpl>(
-          this, _$identity);
+  _$$UpdateDownloadingEventImplCopyWith<_$UpdateDownloadingEventImpl>
+      get copyWith => __$$UpdateDownloadingEventImplCopyWithImpl<
+          _$UpdateDownloadingEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -570,6 +599,7 @@ class _$UpdateDownloadingImpl implements UpdateDownloading {
     required TResult Function() downloadUpdate,
     required TResult Function(int bytes, int total) downloading,
     required TResult Function() cancelDownload,
+    required TResult Function(String error) downloadError,
     required TResult Function() updateFromFile,
   }) {
     return downloading(bytes, total);
@@ -583,6 +613,7 @@ class _$UpdateDownloadingImpl implements UpdateDownloading {
     TResult? Function()? downloadUpdate,
     TResult? Function(int bytes, int total)? downloading,
     TResult? Function()? cancelDownload,
+    TResult? Function(String error)? downloadError,
     TResult? Function()? updateFromFile,
   }) {
     return downloading?.call(bytes, total);
@@ -596,6 +627,7 @@ class _$UpdateDownloadingImpl implements UpdateDownloading {
     TResult Function()? downloadUpdate,
     TResult Function(int bytes, int total)? downloading,
     TResult Function()? cancelDownload,
+    TResult Function(String error)? downloadError,
     TResult Function()? updateFromFile,
     required TResult orElse(),
   }) {
@@ -608,12 +640,13 @@ class _$UpdateDownloadingImpl implements UpdateDownloading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckUpdate value) checkUpdate,
-    required TResult Function(PopupChangelog value) popupChangelog,
-    required TResult Function(DownloadUpdate value) downloadUpdate,
-    required TResult Function(UpdateDownloading value) downloading,
-    required TResult Function(CancelDownload value) cancelDownload,
-    required TResult Function(UpdateFromFile value) updateFromFile,
+    required TResult Function(_CheckUpdateEvent value) checkUpdate,
+    required TResult Function(_PopupChangelogEvent value) popupChangelog,
+    required TResult Function(_DownloadUpdateEvent value) downloadUpdate,
+    required TResult Function(_UpdateDownloadingEvent value) downloading,
+    required TResult Function(_CancelDownloadEvent value) cancelDownload,
+    required TResult Function(_DownloadErrorEvent value) downloadError,
+    required TResult Function(_UpdateFromFileEvent value) updateFromFile,
   }) {
     return downloading(this);
   }
@@ -621,12 +654,13 @@ class _$UpdateDownloadingImpl implements UpdateDownloading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckUpdate value)? checkUpdate,
-    TResult? Function(PopupChangelog value)? popupChangelog,
-    TResult? Function(DownloadUpdate value)? downloadUpdate,
-    TResult? Function(UpdateDownloading value)? downloading,
-    TResult? Function(CancelDownload value)? cancelDownload,
-    TResult? Function(UpdateFromFile value)? updateFromFile,
+    TResult? Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult? Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult? Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult? Function(_UpdateDownloadingEvent value)? downloading,
+    TResult? Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult? Function(_DownloadErrorEvent value)? downloadError,
+    TResult? Function(_UpdateFromFileEvent value)? updateFromFile,
   }) {
     return downloading?.call(this);
   }
@@ -634,12 +668,13 @@ class _$UpdateDownloadingImpl implements UpdateDownloading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckUpdate value)? checkUpdate,
-    TResult Function(PopupChangelog value)? popupChangelog,
-    TResult Function(DownloadUpdate value)? downloadUpdate,
-    TResult Function(UpdateDownloading value)? downloading,
-    TResult Function(CancelDownload value)? cancelDownload,
-    TResult Function(UpdateFromFile value)? updateFromFile,
+    TResult Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult Function(_UpdateDownloadingEvent value)? downloading,
+    TResult Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult Function(_DownloadErrorEvent value)? downloadError,
+    TResult Function(_UpdateFromFileEvent value)? updateFromFile,
     required TResult orElse(),
   }) {
     if (downloading != null) {
@@ -649,10 +684,10 @@ class _$UpdateDownloadingImpl implements UpdateDownloading {
   }
 }
 
-abstract class UpdateDownloading implements UpdateEvent {
-  const factory UpdateDownloading(
+abstract class _UpdateDownloadingEvent implements UpdateEvent {
+  const factory _UpdateDownloadingEvent(
       {required final int bytes,
-      required final int total}) = _$UpdateDownloadingImpl;
+      required final int total}) = _$UpdateDownloadingEventImpl;
 
   int get bytes;
   int get total;
@@ -660,23 +695,23 @@ abstract class UpdateDownloading implements UpdateEvent {
   /// Create a copy of UpdateEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateDownloadingImplCopyWith<_$UpdateDownloadingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UpdateDownloadingEventImplCopyWith<_$UpdateDownloadingEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CancelDownloadImplCopyWith<$Res> {
-  factory _$$CancelDownloadImplCopyWith(_$CancelDownloadImpl value,
-          $Res Function(_$CancelDownloadImpl) then) =
-      __$$CancelDownloadImplCopyWithImpl<$Res>;
+abstract class _$$CancelDownloadEventImplCopyWith<$Res> {
+  factory _$$CancelDownloadEventImplCopyWith(_$CancelDownloadEventImpl value,
+          $Res Function(_$CancelDownloadEventImpl) then) =
+      __$$CancelDownloadEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CancelDownloadImplCopyWithImpl<$Res>
-    extends _$UpdateEventCopyWithImpl<$Res, _$CancelDownloadImpl>
-    implements _$$CancelDownloadImplCopyWith<$Res> {
-  __$$CancelDownloadImplCopyWithImpl(
-      _$CancelDownloadImpl _value, $Res Function(_$CancelDownloadImpl) _then)
+class __$$CancelDownloadEventImplCopyWithImpl<$Res>
+    extends _$UpdateEventCopyWithImpl<$Res, _$CancelDownloadEventImpl>
+    implements _$$CancelDownloadEventImplCopyWith<$Res> {
+  __$$CancelDownloadEventImplCopyWithImpl(_$CancelDownloadEventImpl _value,
+      $Res Function(_$CancelDownloadEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of UpdateEvent
@@ -685,8 +720,8 @@ class __$$CancelDownloadImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CancelDownloadImpl implements CancelDownload {
-  const _$CancelDownloadImpl();
+class _$CancelDownloadEventImpl implements _CancelDownloadEvent {
+  const _$CancelDownloadEventImpl();
 
   @override
   String toString() {
@@ -696,7 +731,8 @@ class _$CancelDownloadImpl implements CancelDownload {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CancelDownloadImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$CancelDownloadEventImpl);
   }
 
   @override
@@ -710,6 +746,7 @@ class _$CancelDownloadImpl implements CancelDownload {
     required TResult Function() downloadUpdate,
     required TResult Function(int bytes, int total) downloading,
     required TResult Function() cancelDownload,
+    required TResult Function(String error) downloadError,
     required TResult Function() updateFromFile,
   }) {
     return cancelDownload();
@@ -723,6 +760,7 @@ class _$CancelDownloadImpl implements CancelDownload {
     TResult? Function()? downloadUpdate,
     TResult? Function(int bytes, int total)? downloading,
     TResult? Function()? cancelDownload,
+    TResult? Function(String error)? downloadError,
     TResult? Function()? updateFromFile,
   }) {
     return cancelDownload?.call();
@@ -736,6 +774,7 @@ class _$CancelDownloadImpl implements CancelDownload {
     TResult Function()? downloadUpdate,
     TResult Function(int bytes, int total)? downloading,
     TResult Function()? cancelDownload,
+    TResult Function(String error)? downloadError,
     TResult Function()? updateFromFile,
     required TResult orElse(),
   }) {
@@ -748,12 +787,13 @@ class _$CancelDownloadImpl implements CancelDownload {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckUpdate value) checkUpdate,
-    required TResult Function(PopupChangelog value) popupChangelog,
-    required TResult Function(DownloadUpdate value) downloadUpdate,
-    required TResult Function(UpdateDownloading value) downloading,
-    required TResult Function(CancelDownload value) cancelDownload,
-    required TResult Function(UpdateFromFile value) updateFromFile,
+    required TResult Function(_CheckUpdateEvent value) checkUpdate,
+    required TResult Function(_PopupChangelogEvent value) popupChangelog,
+    required TResult Function(_DownloadUpdateEvent value) downloadUpdate,
+    required TResult Function(_UpdateDownloadingEvent value) downloading,
+    required TResult Function(_CancelDownloadEvent value) cancelDownload,
+    required TResult Function(_DownloadErrorEvent value) downloadError,
+    required TResult Function(_UpdateFromFileEvent value) updateFromFile,
   }) {
     return cancelDownload(this);
   }
@@ -761,12 +801,13 @@ class _$CancelDownloadImpl implements CancelDownload {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckUpdate value)? checkUpdate,
-    TResult? Function(PopupChangelog value)? popupChangelog,
-    TResult? Function(DownloadUpdate value)? downloadUpdate,
-    TResult? Function(UpdateDownloading value)? downloading,
-    TResult? Function(CancelDownload value)? cancelDownload,
-    TResult? Function(UpdateFromFile value)? updateFromFile,
+    TResult? Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult? Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult? Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult? Function(_UpdateDownloadingEvent value)? downloading,
+    TResult? Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult? Function(_DownloadErrorEvent value)? downloadError,
+    TResult? Function(_UpdateFromFileEvent value)? updateFromFile,
   }) {
     return cancelDownload?.call(this);
   }
@@ -774,12 +815,13 @@ class _$CancelDownloadImpl implements CancelDownload {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckUpdate value)? checkUpdate,
-    TResult Function(PopupChangelog value)? popupChangelog,
-    TResult Function(DownloadUpdate value)? downloadUpdate,
-    TResult Function(UpdateDownloading value)? downloading,
-    TResult Function(CancelDownload value)? cancelDownload,
-    TResult Function(UpdateFromFile value)? updateFromFile,
+    TResult Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult Function(_UpdateDownloadingEvent value)? downloading,
+    TResult Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult Function(_DownloadErrorEvent value)? downloadError,
+    TResult Function(_UpdateFromFileEvent value)? updateFromFile,
     required TResult orElse(),
   }) {
     if (cancelDownload != null) {
@@ -789,23 +831,195 @@ class _$CancelDownloadImpl implements CancelDownload {
   }
 }
 
-abstract class CancelDownload implements UpdateEvent {
-  const factory CancelDownload() = _$CancelDownloadImpl;
+abstract class _CancelDownloadEvent implements UpdateEvent {
+  const factory _CancelDownloadEvent() = _$CancelDownloadEventImpl;
 }
 
 /// @nodoc
-abstract class _$$UpdateFromFileImplCopyWith<$Res> {
-  factory _$$UpdateFromFileImplCopyWith(_$UpdateFromFileImpl value,
-          $Res Function(_$UpdateFromFileImpl) then) =
-      __$$UpdateFromFileImplCopyWithImpl<$Res>;
+abstract class _$$DownloadErrorEventImplCopyWith<$Res> {
+  factory _$$DownloadErrorEventImplCopyWith(_$DownloadErrorEventImpl value,
+          $Res Function(_$DownloadErrorEventImpl) then) =
+      __$$DownloadErrorEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
 }
 
 /// @nodoc
-class __$$UpdateFromFileImplCopyWithImpl<$Res>
-    extends _$UpdateEventCopyWithImpl<$Res, _$UpdateFromFileImpl>
-    implements _$$UpdateFromFileImplCopyWith<$Res> {
-  __$$UpdateFromFileImplCopyWithImpl(
-      _$UpdateFromFileImpl _value, $Res Function(_$UpdateFromFileImpl) _then)
+class __$$DownloadErrorEventImplCopyWithImpl<$Res>
+    extends _$UpdateEventCopyWithImpl<$Res, _$DownloadErrorEventImpl>
+    implements _$$DownloadErrorEventImplCopyWith<$Res> {
+  __$$DownloadErrorEventImplCopyWithImpl(_$DownloadErrorEventImpl _value,
+      $Res Function(_$DownloadErrorEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UpdateEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$DownloadErrorEventImpl(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DownloadErrorEventImpl implements _DownloadErrorEvent {
+  const _$DownloadErrorEventImpl({required this.error});
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'UpdateEvent.downloadError(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DownloadErrorEventImpl &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of UpdateEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DownloadErrorEventImplCopyWith<_$DownloadErrorEventImpl> get copyWith =>
+      __$$DownloadErrorEventImplCopyWithImpl<_$DownloadErrorEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() checkUpdate,
+    required TResult Function() popupChangelog,
+    required TResult Function() downloadUpdate,
+    required TResult Function(int bytes, int total) downloading,
+    required TResult Function() cancelDownload,
+    required TResult Function(String error) downloadError,
+    required TResult Function() updateFromFile,
+  }) {
+    return downloadError(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? checkUpdate,
+    TResult? Function()? popupChangelog,
+    TResult? Function()? downloadUpdate,
+    TResult? Function(int bytes, int total)? downloading,
+    TResult? Function()? cancelDownload,
+    TResult? Function(String error)? downloadError,
+    TResult? Function()? updateFromFile,
+  }) {
+    return downloadError?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checkUpdate,
+    TResult Function()? popupChangelog,
+    TResult Function()? downloadUpdate,
+    TResult Function(int bytes, int total)? downloading,
+    TResult Function()? cancelDownload,
+    TResult Function(String error)? downloadError,
+    TResult Function()? updateFromFile,
+    required TResult orElse(),
+  }) {
+    if (downloadError != null) {
+      return downloadError(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CheckUpdateEvent value) checkUpdate,
+    required TResult Function(_PopupChangelogEvent value) popupChangelog,
+    required TResult Function(_DownloadUpdateEvent value) downloadUpdate,
+    required TResult Function(_UpdateDownloadingEvent value) downloading,
+    required TResult Function(_CancelDownloadEvent value) cancelDownload,
+    required TResult Function(_DownloadErrorEvent value) downloadError,
+    required TResult Function(_UpdateFromFileEvent value) updateFromFile,
+  }) {
+    return downloadError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult? Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult? Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult? Function(_UpdateDownloadingEvent value)? downloading,
+    TResult? Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult? Function(_DownloadErrorEvent value)? downloadError,
+    TResult? Function(_UpdateFromFileEvent value)? updateFromFile,
+  }) {
+    return downloadError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult Function(_UpdateDownloadingEvent value)? downloading,
+    TResult Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult Function(_DownloadErrorEvent value)? downloadError,
+    TResult Function(_UpdateFromFileEvent value)? updateFromFile,
+    required TResult orElse(),
+  }) {
+    if (downloadError != null) {
+      return downloadError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DownloadErrorEvent implements UpdateEvent {
+  const factory _DownloadErrorEvent({required final String error}) =
+      _$DownloadErrorEventImpl;
+
+  String get error;
+
+  /// Create a copy of UpdateEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DownloadErrorEventImplCopyWith<_$DownloadErrorEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateFromFileEventImplCopyWith<$Res> {
+  factory _$$UpdateFromFileEventImplCopyWith(_$UpdateFromFileEventImpl value,
+          $Res Function(_$UpdateFromFileEventImpl) then) =
+      __$$UpdateFromFileEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UpdateFromFileEventImplCopyWithImpl<$Res>
+    extends _$UpdateEventCopyWithImpl<$Res, _$UpdateFromFileEventImpl>
+    implements _$$UpdateFromFileEventImplCopyWith<$Res> {
+  __$$UpdateFromFileEventImplCopyWithImpl(_$UpdateFromFileEventImpl _value,
+      $Res Function(_$UpdateFromFileEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of UpdateEvent
@@ -814,8 +1028,8 @@ class __$$UpdateFromFileImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateFromFileImpl implements UpdateFromFile {
-  const _$UpdateFromFileImpl();
+class _$UpdateFromFileEventImpl implements _UpdateFromFileEvent {
+  const _$UpdateFromFileEventImpl();
 
   @override
   String toString() {
@@ -825,7 +1039,8 @@ class _$UpdateFromFileImpl implements UpdateFromFile {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UpdateFromFileImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateFromFileEventImpl);
   }
 
   @override
@@ -839,6 +1054,7 @@ class _$UpdateFromFileImpl implements UpdateFromFile {
     required TResult Function() downloadUpdate,
     required TResult Function(int bytes, int total) downloading,
     required TResult Function() cancelDownload,
+    required TResult Function(String error) downloadError,
     required TResult Function() updateFromFile,
   }) {
     return updateFromFile();
@@ -852,6 +1068,7 @@ class _$UpdateFromFileImpl implements UpdateFromFile {
     TResult? Function()? downloadUpdate,
     TResult? Function(int bytes, int total)? downloading,
     TResult? Function()? cancelDownload,
+    TResult? Function(String error)? downloadError,
     TResult? Function()? updateFromFile,
   }) {
     return updateFromFile?.call();
@@ -865,6 +1082,7 @@ class _$UpdateFromFileImpl implements UpdateFromFile {
     TResult Function()? downloadUpdate,
     TResult Function(int bytes, int total)? downloading,
     TResult Function()? cancelDownload,
+    TResult Function(String error)? downloadError,
     TResult Function()? updateFromFile,
     required TResult orElse(),
   }) {
@@ -877,12 +1095,13 @@ class _$UpdateFromFileImpl implements UpdateFromFile {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckUpdate value) checkUpdate,
-    required TResult Function(PopupChangelog value) popupChangelog,
-    required TResult Function(DownloadUpdate value) downloadUpdate,
-    required TResult Function(UpdateDownloading value) downloading,
-    required TResult Function(CancelDownload value) cancelDownload,
-    required TResult Function(UpdateFromFile value) updateFromFile,
+    required TResult Function(_CheckUpdateEvent value) checkUpdate,
+    required TResult Function(_PopupChangelogEvent value) popupChangelog,
+    required TResult Function(_DownloadUpdateEvent value) downloadUpdate,
+    required TResult Function(_UpdateDownloadingEvent value) downloading,
+    required TResult Function(_CancelDownloadEvent value) cancelDownload,
+    required TResult Function(_DownloadErrorEvent value) downloadError,
+    required TResult Function(_UpdateFromFileEvent value) updateFromFile,
   }) {
     return updateFromFile(this);
   }
@@ -890,12 +1109,13 @@ class _$UpdateFromFileImpl implements UpdateFromFile {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckUpdate value)? checkUpdate,
-    TResult? Function(PopupChangelog value)? popupChangelog,
-    TResult? Function(DownloadUpdate value)? downloadUpdate,
-    TResult? Function(UpdateDownloading value)? downloading,
-    TResult? Function(CancelDownload value)? cancelDownload,
-    TResult? Function(UpdateFromFile value)? updateFromFile,
+    TResult? Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult? Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult? Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult? Function(_UpdateDownloadingEvent value)? downloading,
+    TResult? Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult? Function(_DownloadErrorEvent value)? downloadError,
+    TResult? Function(_UpdateFromFileEvent value)? updateFromFile,
   }) {
     return updateFromFile?.call(this);
   }
@@ -903,12 +1123,13 @@ class _$UpdateFromFileImpl implements UpdateFromFile {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckUpdate value)? checkUpdate,
-    TResult Function(PopupChangelog value)? popupChangelog,
-    TResult Function(DownloadUpdate value)? downloadUpdate,
-    TResult Function(UpdateDownloading value)? downloading,
-    TResult Function(CancelDownload value)? cancelDownload,
-    TResult Function(UpdateFromFile value)? updateFromFile,
+    TResult Function(_CheckUpdateEvent value)? checkUpdate,
+    TResult Function(_PopupChangelogEvent value)? popupChangelog,
+    TResult Function(_DownloadUpdateEvent value)? downloadUpdate,
+    TResult Function(_UpdateDownloadingEvent value)? downloading,
+    TResult Function(_CancelDownloadEvent value)? cancelDownload,
+    TResult Function(_DownloadErrorEvent value)? downloadError,
+    TResult Function(_UpdateFromFileEvent value)? updateFromFile,
     required TResult orElse(),
   }) {
     if (updateFromFile != null) {
@@ -918,60 +1139,65 @@ class _$UpdateFromFileImpl implements UpdateFromFile {
   }
 }
 
-abstract class UpdateFromFile implements UpdateEvent {
-  const factory UpdateFromFile() = _$UpdateFromFileImpl;
+abstract class _UpdateFromFileEvent implements UpdateEvent {
+  const factory _UpdateFromFileEvent() = _$UpdateFromFileEventImpl;
 }
 
 /// @nodoc
 mixin _$UpdateState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
-    required TResult Function(int bytes, int total) downloadInProgress,
+    required TResult Function(int bytes, int total) downloading,
+    required TResult Function(String error) downloadError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
-    TResult? Function(int bytes, int total)? downloadInProgress,
+    TResult? Function(int bytes, int total)? downloading,
+    TResult? Function(String error)? downloadError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
-    TResult Function(int bytes, int total)? downloadInProgress,
+    TResult Function(int bytes, int total)? downloading,
+    TResult Function(String error)? downloadError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UpdateInitial value) initial,
-    required TResult Function(UpdateAvailable value) updateAvailable,
-    required TResult Function(UpdateConnecting value) connecting,
-    required TResult Function(UpdateDownloadInProgress value)
-        downloadInProgress,
+    required TResult Function(_UpdateInitial value) initial,
+    required TResult Function(_UpdateAvailable value) updateAvailable,
+    required TResult Function(_UpdateConnecting value) connecting,
+    required TResult Function(_UpdateDownloading value) downloading,
+    required TResult Function(_UpdateDownloadError value) downloadError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UpdateInitial value)? initial,
-    TResult? Function(UpdateAvailable value)? updateAvailable,
-    TResult? Function(UpdateConnecting value)? connecting,
-    TResult? Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult? Function(_UpdateInitial value)? initial,
+    TResult? Function(_UpdateAvailable value)? updateAvailable,
+    TResult? Function(_UpdateConnecting value)? connecting,
+    TResult? Function(_UpdateDownloading value)? downloading,
+    TResult? Function(_UpdateDownloadError value)? downloadError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UpdateInitial value)? initial,
-    TResult Function(UpdateAvailable value)? updateAvailable,
-    TResult Function(UpdateConnecting value)? connecting,
-    TResult Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult Function(_UpdateInitial value)? initial,
+    TResult Function(_UpdateAvailable value)? updateAvailable,
+    TResult Function(_UpdateConnecting value)? connecting,
+    TResult Function(_UpdateDownloading value)? downloading,
+    TResult Function(_UpdateDownloadError value)? downloadError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1004,9 +1230,7 @@ abstract class _$$UpdateInitialImplCopyWith<$Res> {
           _$UpdateInitialImpl value, $Res Function(_$UpdateInitialImpl) then) =
       __$$UpdateInitialImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ShowChangelog? showChangelog});
-
-  $ShowChangelogCopyWith<$Res>? get showChangelog;
+  $Res call({String? changelog});
 }
 
 /// @nodoc
@@ -1022,42 +1246,28 @@ class __$$UpdateInitialImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? showChangelog = freezed,
+    Object? changelog = freezed,
   }) {
     return _then(_$UpdateInitialImpl(
-      showChangelog: freezed == showChangelog
-          ? _value.showChangelog
-          : showChangelog // ignore: cast_nullable_to_non_nullable
-              as ShowChangelog?,
+      changelog: freezed == changelog
+          ? _value.changelog
+          : changelog // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
-  }
-
-  /// Create a copy of UpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ShowChangelogCopyWith<$Res>? get showChangelog {
-    if (_value.showChangelog == null) {
-      return null;
-    }
-
-    return $ShowChangelogCopyWith<$Res>(_value.showChangelog!, (value) {
-      return _then(_value.copyWith(showChangelog: value));
-    });
   }
 }
 
 /// @nodoc
 
-class _$UpdateInitialImpl implements UpdateInitial {
-  const _$UpdateInitialImpl({this.showChangelog});
+class _$UpdateInitialImpl implements _UpdateInitial {
+  const _$UpdateInitialImpl({this.changelog});
 
   @override
-  final ShowChangelog? showChangelog;
+  final String? changelog;
 
   @override
   String toString() {
-    return 'UpdateState.initial(showChangelog: $showChangelog)';
+    return 'UpdateState.initial(changelog: $changelog)';
   }
 
   @override
@@ -1065,12 +1275,12 @@ class _$UpdateInitialImpl implements UpdateInitial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateInitialImpl &&
-            (identical(other.showChangelog, showChangelog) ||
-                other.showChangelog == showChangelog));
+            (identical(other.changelog, changelog) ||
+                other.changelog == changelog));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, showChangelog);
+  int get hashCode => Object.hash(runtimeType, changelog);
 
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
@@ -1083,36 +1293,39 @@ class _$UpdateInitialImpl implements UpdateInitial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
-    required TResult Function(int bytes, int total) downloadInProgress,
+    required TResult Function(int bytes, int total) downloading,
+    required TResult Function(String error) downloadError,
   }) {
-    return initial(showChangelog);
+    return initial(changelog);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
-    TResult? Function(int bytes, int total)? downloadInProgress,
+    TResult? Function(int bytes, int total)? downloading,
+    TResult? Function(String error)? downloadError,
   }) {
-    return initial?.call(showChangelog);
+    return initial?.call(changelog);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
-    TResult Function(int bytes, int total)? downloadInProgress,
+    TResult Function(int bytes, int total)? downloading,
+    TResult Function(String error)? downloadError,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(showChangelog);
+      return initial(changelog);
     }
     return orElse();
   }
@@ -1120,11 +1333,11 @@ class _$UpdateInitialImpl implements UpdateInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UpdateInitial value) initial,
-    required TResult Function(UpdateAvailable value) updateAvailable,
-    required TResult Function(UpdateConnecting value) connecting,
-    required TResult Function(UpdateDownloadInProgress value)
-        downloadInProgress,
+    required TResult Function(_UpdateInitial value) initial,
+    required TResult Function(_UpdateAvailable value) updateAvailable,
+    required TResult Function(_UpdateConnecting value) connecting,
+    required TResult Function(_UpdateDownloading value) downloading,
+    required TResult Function(_UpdateDownloadError value) downloadError,
   }) {
     return initial(this);
   }
@@ -1132,10 +1345,11 @@ class _$UpdateInitialImpl implements UpdateInitial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UpdateInitial value)? initial,
-    TResult? Function(UpdateAvailable value)? updateAvailable,
-    TResult? Function(UpdateConnecting value)? connecting,
-    TResult? Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult? Function(_UpdateInitial value)? initial,
+    TResult? Function(_UpdateAvailable value)? updateAvailable,
+    TResult? Function(_UpdateConnecting value)? connecting,
+    TResult? Function(_UpdateDownloading value)? downloading,
+    TResult? Function(_UpdateDownloadError value)? downloadError,
   }) {
     return initial?.call(this);
   }
@@ -1143,10 +1357,11 @@ class _$UpdateInitialImpl implements UpdateInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UpdateInitial value)? initial,
-    TResult Function(UpdateAvailable value)? updateAvailable,
-    TResult Function(UpdateConnecting value)? connecting,
-    TResult Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult Function(_UpdateInitial value)? initial,
+    TResult Function(_UpdateAvailable value)? updateAvailable,
+    TResult Function(_UpdateConnecting value)? connecting,
+    TResult Function(_UpdateDownloading value)? downloading,
+    TResult Function(_UpdateDownloadError value)? downloadError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1156,11 +1371,10 @@ class _$UpdateInitialImpl implements UpdateInitial {
   }
 }
 
-abstract class UpdateInitial implements UpdateState {
-  const factory UpdateInitial({final ShowChangelog? showChangelog}) =
-      _$UpdateInitialImpl;
+abstract class _UpdateInitial implements UpdateState {
+  const factory _UpdateInitial({final String? changelog}) = _$UpdateInitialImpl;
 
-  ShowChangelog? get showChangelog;
+  String? get changelog;
 
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
@@ -1204,7 +1418,7 @@ class __$$UpdateAvailableImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateAvailableImpl implements UpdateAvailable {
+class _$UpdateAvailableImpl implements _UpdateAvailable {
   const _$UpdateAvailableImpl({required this.version});
 
   @override
@@ -1238,10 +1452,11 @@ class _$UpdateAvailableImpl implements UpdateAvailable {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
-    required TResult Function(int bytes, int total) downloadInProgress,
+    required TResult Function(int bytes, int total) downloading,
+    required TResult Function(String error) downloadError,
   }) {
     return updateAvailable(version);
   }
@@ -1249,10 +1464,11 @@ class _$UpdateAvailableImpl implements UpdateAvailable {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
-    TResult? Function(int bytes, int total)? downloadInProgress,
+    TResult? Function(int bytes, int total)? downloading,
+    TResult? Function(String error)? downloadError,
   }) {
     return updateAvailable?.call(version);
   }
@@ -1260,10 +1476,11 @@ class _$UpdateAvailableImpl implements UpdateAvailable {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
-    TResult Function(int bytes, int total)? downloadInProgress,
+    TResult Function(int bytes, int total)? downloading,
+    TResult Function(String error)? downloadError,
     required TResult orElse(),
   }) {
     if (updateAvailable != null) {
@@ -1275,11 +1492,11 @@ class _$UpdateAvailableImpl implements UpdateAvailable {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UpdateInitial value) initial,
-    required TResult Function(UpdateAvailable value) updateAvailable,
-    required TResult Function(UpdateConnecting value) connecting,
-    required TResult Function(UpdateDownloadInProgress value)
-        downloadInProgress,
+    required TResult Function(_UpdateInitial value) initial,
+    required TResult Function(_UpdateAvailable value) updateAvailable,
+    required TResult Function(_UpdateConnecting value) connecting,
+    required TResult Function(_UpdateDownloading value) downloading,
+    required TResult Function(_UpdateDownloadError value) downloadError,
   }) {
     return updateAvailable(this);
   }
@@ -1287,10 +1504,11 @@ class _$UpdateAvailableImpl implements UpdateAvailable {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UpdateInitial value)? initial,
-    TResult? Function(UpdateAvailable value)? updateAvailable,
-    TResult? Function(UpdateConnecting value)? connecting,
-    TResult? Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult? Function(_UpdateInitial value)? initial,
+    TResult? Function(_UpdateAvailable value)? updateAvailable,
+    TResult? Function(_UpdateConnecting value)? connecting,
+    TResult? Function(_UpdateDownloading value)? downloading,
+    TResult? Function(_UpdateDownloadError value)? downloadError,
   }) {
     return updateAvailable?.call(this);
   }
@@ -1298,10 +1516,11 @@ class _$UpdateAvailableImpl implements UpdateAvailable {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UpdateInitial value)? initial,
-    TResult Function(UpdateAvailable value)? updateAvailable,
-    TResult Function(UpdateConnecting value)? connecting,
-    TResult Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult Function(_UpdateInitial value)? initial,
+    TResult Function(_UpdateAvailable value)? updateAvailable,
+    TResult Function(_UpdateConnecting value)? connecting,
+    TResult Function(_UpdateDownloading value)? downloading,
+    TResult Function(_UpdateDownloadError value)? downloadError,
     required TResult orElse(),
   }) {
     if (updateAvailable != null) {
@@ -1311,8 +1530,8 @@ class _$UpdateAvailableImpl implements UpdateAvailable {
   }
 }
 
-abstract class UpdateAvailable implements UpdateState {
-  const factory UpdateAvailable({required final String version}) =
+abstract class _UpdateAvailable implements UpdateState {
+  const factory _UpdateAvailable({required final String version}) =
       _$UpdateAvailableImpl;
 
   String get version;
@@ -1345,7 +1564,7 @@ class __$$UpdateConnectingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateConnectingImpl implements UpdateConnecting {
+class _$UpdateConnectingImpl implements _UpdateConnecting {
   const _$UpdateConnectingImpl();
 
   @override
@@ -1365,10 +1584,11 @@ class _$UpdateConnectingImpl implements UpdateConnecting {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
-    required TResult Function(int bytes, int total) downloadInProgress,
+    required TResult Function(int bytes, int total) downloading,
+    required TResult Function(String error) downloadError,
   }) {
     return connecting();
   }
@@ -1376,10 +1596,11 @@ class _$UpdateConnectingImpl implements UpdateConnecting {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
-    TResult? Function(int bytes, int total)? downloadInProgress,
+    TResult? Function(int bytes, int total)? downloading,
+    TResult? Function(String error)? downloadError,
   }) {
     return connecting?.call();
   }
@@ -1387,10 +1608,11 @@ class _$UpdateConnectingImpl implements UpdateConnecting {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
-    TResult Function(int bytes, int total)? downloadInProgress,
+    TResult Function(int bytes, int total)? downloading,
+    TResult Function(String error)? downloadError,
     required TResult orElse(),
   }) {
     if (connecting != null) {
@@ -1402,11 +1624,11 @@ class _$UpdateConnectingImpl implements UpdateConnecting {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UpdateInitial value) initial,
-    required TResult Function(UpdateAvailable value) updateAvailable,
-    required TResult Function(UpdateConnecting value) connecting,
-    required TResult Function(UpdateDownloadInProgress value)
-        downloadInProgress,
+    required TResult Function(_UpdateInitial value) initial,
+    required TResult Function(_UpdateAvailable value) updateAvailable,
+    required TResult Function(_UpdateConnecting value) connecting,
+    required TResult Function(_UpdateDownloading value) downloading,
+    required TResult Function(_UpdateDownloadError value) downloadError,
   }) {
     return connecting(this);
   }
@@ -1414,10 +1636,11 @@ class _$UpdateConnectingImpl implements UpdateConnecting {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UpdateInitial value)? initial,
-    TResult? Function(UpdateAvailable value)? updateAvailable,
-    TResult? Function(UpdateConnecting value)? connecting,
-    TResult? Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult? Function(_UpdateInitial value)? initial,
+    TResult? Function(_UpdateAvailable value)? updateAvailable,
+    TResult? Function(_UpdateConnecting value)? connecting,
+    TResult? Function(_UpdateDownloading value)? downloading,
+    TResult? Function(_UpdateDownloadError value)? downloadError,
   }) {
     return connecting?.call(this);
   }
@@ -1425,10 +1648,11 @@ class _$UpdateConnectingImpl implements UpdateConnecting {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UpdateInitial value)? initial,
-    TResult Function(UpdateAvailable value)? updateAvailable,
-    TResult Function(UpdateConnecting value)? connecting,
-    TResult Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult Function(_UpdateInitial value)? initial,
+    TResult Function(_UpdateAvailable value)? updateAvailable,
+    TResult Function(_UpdateConnecting value)? connecting,
+    TResult Function(_UpdateDownloading value)? downloading,
+    TResult Function(_UpdateDownloadError value)? downloadError,
     required TResult orElse(),
   }) {
     if (connecting != null) {
@@ -1438,27 +1662,25 @@ class _$UpdateConnectingImpl implements UpdateConnecting {
   }
 }
 
-abstract class UpdateConnecting implements UpdateState {
-  const factory UpdateConnecting() = _$UpdateConnectingImpl;
+abstract class _UpdateConnecting implements UpdateState {
+  const factory _UpdateConnecting() = _$UpdateConnectingImpl;
 }
 
 /// @nodoc
-abstract class _$$UpdateDownloadInProgressImplCopyWith<$Res> {
-  factory _$$UpdateDownloadInProgressImplCopyWith(
-          _$UpdateDownloadInProgressImpl value,
-          $Res Function(_$UpdateDownloadInProgressImpl) then) =
-      __$$UpdateDownloadInProgressImplCopyWithImpl<$Res>;
+abstract class _$$UpdateDownloadingImplCopyWith<$Res> {
+  factory _$$UpdateDownloadingImplCopyWith(_$UpdateDownloadingImpl value,
+          $Res Function(_$UpdateDownloadingImpl) then) =
+      __$$UpdateDownloadingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int bytes, int total});
 }
 
 /// @nodoc
-class __$$UpdateDownloadInProgressImplCopyWithImpl<$Res>
-    extends _$UpdateStateCopyWithImpl<$Res, _$UpdateDownloadInProgressImpl>
-    implements _$$UpdateDownloadInProgressImplCopyWith<$Res> {
-  __$$UpdateDownloadInProgressImplCopyWithImpl(
-      _$UpdateDownloadInProgressImpl _value,
-      $Res Function(_$UpdateDownloadInProgressImpl) _then)
+class __$$UpdateDownloadingImplCopyWithImpl<$Res>
+    extends _$UpdateStateCopyWithImpl<$Res, _$UpdateDownloadingImpl>
+    implements _$$UpdateDownloadingImplCopyWith<$Res> {
+  __$$UpdateDownloadingImplCopyWithImpl(_$UpdateDownloadingImpl _value,
+      $Res Function(_$UpdateDownloadingImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of UpdateState
@@ -1469,7 +1691,7 @@ class __$$UpdateDownloadInProgressImplCopyWithImpl<$Res>
     Object? bytes = null,
     Object? total = null,
   }) {
-    return _then(_$UpdateDownloadInProgressImpl(
+    return _then(_$UpdateDownloadingImpl(
       bytes: null == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
@@ -1484,9 +1706,8 @@ class __$$UpdateDownloadInProgressImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateDownloadInProgressImpl implements UpdateDownloadInProgress {
-  const _$UpdateDownloadInProgressImpl(
-      {required this.bytes, required this.total});
+class _$UpdateDownloadingImpl implements _UpdateDownloading {
+  const _$UpdateDownloadingImpl({required this.bytes, required this.total});
 
   @override
   final int bytes;
@@ -1495,14 +1716,14 @@ class _$UpdateDownloadInProgressImpl implements UpdateDownloadInProgress {
 
   @override
   String toString() {
-    return 'UpdateState.downloadInProgress(bytes: $bytes, total: $total)';
+    return 'UpdateState.downloading(bytes: $bytes, total: $total)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateDownloadInProgressImpl &&
+            other is _$UpdateDownloadingImpl &&
             (identical(other.bytes, bytes) || other.bytes == bytes) &&
             (identical(other.total, total) || other.total == total));
   }
@@ -1515,43 +1736,46 @@ class _$UpdateDownloadInProgressImpl implements UpdateDownloadInProgress {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdateDownloadInProgressImplCopyWith<_$UpdateDownloadInProgressImpl>
-      get copyWith => __$$UpdateDownloadInProgressImplCopyWithImpl<
-          _$UpdateDownloadInProgressImpl>(this, _$identity);
+  _$$UpdateDownloadingImplCopyWith<_$UpdateDownloadingImpl> get copyWith =>
+      __$$UpdateDownloadingImplCopyWithImpl<_$UpdateDownloadingImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
-    required TResult Function(int bytes, int total) downloadInProgress,
+    required TResult Function(int bytes, int total) downloading,
+    required TResult Function(String error) downloadError,
   }) {
-    return downloadInProgress(bytes, total);
+    return downloading(bytes, total);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
-    TResult? Function(int bytes, int total)? downloadInProgress,
+    TResult? Function(int bytes, int total)? downloading,
+    TResult? Function(String error)? downloadError,
   }) {
-    return downloadInProgress?.call(bytes, total);
+    return downloading?.call(bytes, total);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
-    TResult Function(int bytes, int total)? downloadInProgress,
+    TResult Function(int bytes, int total)? downloading,
+    TResult Function(String error)? downloadError,
     required TResult orElse(),
   }) {
-    if (downloadInProgress != null) {
-      return downloadInProgress(bytes, total);
+    if (downloading != null) {
+      return downloading(bytes, total);
     }
     return orElse();
   }
@@ -1559,46 +1783,48 @@ class _$UpdateDownloadInProgressImpl implements UpdateDownloadInProgress {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UpdateInitial value) initial,
-    required TResult Function(UpdateAvailable value) updateAvailable,
-    required TResult Function(UpdateConnecting value) connecting,
-    required TResult Function(UpdateDownloadInProgress value)
-        downloadInProgress,
+    required TResult Function(_UpdateInitial value) initial,
+    required TResult Function(_UpdateAvailable value) updateAvailable,
+    required TResult Function(_UpdateConnecting value) connecting,
+    required TResult Function(_UpdateDownloading value) downloading,
+    required TResult Function(_UpdateDownloadError value) downloadError,
   }) {
-    return downloadInProgress(this);
+    return downloading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UpdateInitial value)? initial,
-    TResult? Function(UpdateAvailable value)? updateAvailable,
-    TResult? Function(UpdateConnecting value)? connecting,
-    TResult? Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult? Function(_UpdateInitial value)? initial,
+    TResult? Function(_UpdateAvailable value)? updateAvailable,
+    TResult? Function(_UpdateConnecting value)? connecting,
+    TResult? Function(_UpdateDownloading value)? downloading,
+    TResult? Function(_UpdateDownloadError value)? downloadError,
   }) {
-    return downloadInProgress?.call(this);
+    return downloading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UpdateInitial value)? initial,
-    TResult Function(UpdateAvailable value)? updateAvailable,
-    TResult Function(UpdateConnecting value)? connecting,
-    TResult Function(UpdateDownloadInProgress value)? downloadInProgress,
+    TResult Function(_UpdateInitial value)? initial,
+    TResult Function(_UpdateAvailable value)? updateAvailable,
+    TResult Function(_UpdateConnecting value)? connecting,
+    TResult Function(_UpdateDownloading value)? downloading,
+    TResult Function(_UpdateDownloadError value)? downloadError,
     required TResult orElse(),
   }) {
-    if (downloadInProgress != null) {
-      return downloadInProgress(this);
+    if (downloading != null) {
+      return downloading(this);
     }
     return orElse();
   }
 }
 
-abstract class UpdateDownloadInProgress implements UpdateState {
-  const factory UpdateDownloadInProgress(
+abstract class _UpdateDownloading implements UpdateState {
+  const factory _UpdateDownloading(
       {required final int bytes,
-      required final int total}) = _$UpdateDownloadInProgressImpl;
+      required final int total}) = _$UpdateDownloadingImpl;
 
   int get bytes;
   int get total;
@@ -1606,6 +1832,166 @@ abstract class UpdateDownloadInProgress implements UpdateState {
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateDownloadInProgressImplCopyWith<_$UpdateDownloadInProgressImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$UpdateDownloadingImplCopyWith<_$UpdateDownloadingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateDownloadErrorImplCopyWith<$Res> {
+  factory _$$UpdateDownloadErrorImplCopyWith(_$UpdateDownloadErrorImpl value,
+          $Res Function(_$UpdateDownloadErrorImpl) then) =
+      __$$UpdateDownloadErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$UpdateDownloadErrorImplCopyWithImpl<$Res>
+    extends _$UpdateStateCopyWithImpl<$Res, _$UpdateDownloadErrorImpl>
+    implements _$$UpdateDownloadErrorImplCopyWith<$Res> {
+  __$$UpdateDownloadErrorImplCopyWithImpl(_$UpdateDownloadErrorImpl _value,
+      $Res Function(_$UpdateDownloadErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$UpdateDownloadErrorImpl(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateDownloadErrorImpl implements _UpdateDownloadError {
+  const _$UpdateDownloadErrorImpl({required this.error});
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'UpdateState.downloadError(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateDownloadErrorImpl &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of UpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateDownloadErrorImplCopyWith<_$UpdateDownloadErrorImpl> get copyWith =>
+      __$$UpdateDownloadErrorImplCopyWithImpl<_$UpdateDownloadErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? changelog) initial,
+    required TResult Function(String version) updateAvailable,
+    required TResult Function() connecting,
+    required TResult Function(int bytes, int total) downloading,
+    required TResult Function(String error) downloadError,
+  }) {
+    return downloadError(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? changelog)? initial,
+    TResult? Function(String version)? updateAvailable,
+    TResult? Function()? connecting,
+    TResult? Function(int bytes, int total)? downloading,
+    TResult? Function(String error)? downloadError,
+  }) {
+    return downloadError?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? changelog)? initial,
+    TResult Function(String version)? updateAvailable,
+    TResult Function()? connecting,
+    TResult Function(int bytes, int total)? downloading,
+    TResult Function(String error)? downloadError,
+    required TResult orElse(),
+  }) {
+    if (downloadError != null) {
+      return downloadError(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UpdateInitial value) initial,
+    required TResult Function(_UpdateAvailable value) updateAvailable,
+    required TResult Function(_UpdateConnecting value) connecting,
+    required TResult Function(_UpdateDownloading value) downloading,
+    required TResult Function(_UpdateDownloadError value) downloadError,
+  }) {
+    return downloadError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UpdateInitial value)? initial,
+    TResult? Function(_UpdateAvailable value)? updateAvailable,
+    TResult? Function(_UpdateConnecting value)? connecting,
+    TResult? Function(_UpdateDownloading value)? downloading,
+    TResult? Function(_UpdateDownloadError value)? downloadError,
+  }) {
+    return downloadError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UpdateInitial value)? initial,
+    TResult Function(_UpdateAvailable value)? updateAvailable,
+    TResult Function(_UpdateConnecting value)? connecting,
+    TResult Function(_UpdateDownloading value)? downloading,
+    TResult Function(_UpdateDownloadError value)? downloadError,
+    required TResult orElse(),
+  }) {
+    if (downloadError != null) {
+      return downloadError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateDownloadError implements UpdateState {
+  const factory _UpdateDownloadError({required final String error}) =
+      _$UpdateDownloadErrorImpl;
+
+  String get error;
+
+  /// Create a copy of UpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateDownloadErrorImplCopyWith<_$UpdateDownloadErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

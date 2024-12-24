@@ -37,8 +37,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           const DatabaseState(
             races: [],
             stages: [],
+            categories: [],
             riders: [],
-            statuses: [],
             participants: [],
             starts: [],
             finishes: [],
@@ -58,20 +58,17 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       _emitState();
     });
 
-    // _db.select(_db.riders).watch().listen((event) async {
-    //   _riders = event;
-    //   add( DatabaseEvent.onChanged());
-    // });
-
-    // _db.select(_db.statuses).watch().listen((event) async {
-    //   _statuses = event;
-    //   add( DatabaseEvent.onChanged());
-    // });
+    _ridersSubscription = _db.getRiders.watch().listen((event) async {
+      _riders = event;
+      _emitState();
+    });
 
     _startsSubscription =
         _db.getParticipantsAtStart(stageId: 0).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
+      final raceId = _race?.id ?? 0;
       _participants = await _db.getParticipantsAtStart(stageId: stageId).get();
+      _categories = await _db.getCategories(raceId);
       logger.t(
         'DatabaseBloc -> getParticipantsAtStart(stageId: $stageId).watch()',
       );
@@ -81,14 +78,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     _finishesSubscription =
         _db.select(_db.finishes).watch().listen((event) async {
       final stageId = _stage?.id ?? 0;
-      _finishes = await _db
-          .getFinishesFromStage(
-            stageId: stageId,
-            // hideManual: _hideManual,
-            // hideMarked: _hideMarked,
-            // hideNumbers: _hideNumbers,
-          )
-          .get();
+      _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
       logger
           .d('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
       _emitState();
@@ -111,36 +101,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     });
 
     _appSettingsSubscription = _settingsProvider.state.listen((state) async {
-      // ToDo: условия чтобы не дёргать запросами sqlite базу при каждом изменении настроек
-      // if (_hideMarked != state.hideMarked ||
-      //     _hideNumbers != state.hideNumbers ||
-      //     _hideManual != state.hideManual) {
-      //ignore: literal_only_boolean_expressions
-      // if (true) {
-      //   _hideMarked = state.hideMarked;
-      //   _hideNumbers = state.hideNumbers;
-      //   _hideManual = state.hideManual;
-      //   await _finishesSubscription.cancel();
-      //   _finishesSubscription =
-      //       _db.select(_db.finishes).watch().listen((event) async {
-      //     final stageId = _stage?.id ?? 0;
-      //     _finishes = await _db
-      //         .getFinishesFromStage(
-      //           stageId: stageId,
-      //           hideManual: _hideManual,
-      //           hideMarked: _hideMarked,
-      //           hideNumbers: _hideNumbers,
-      //         )
-      //         .get();
-      //     logger.t(
-      //       'DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()',
-      //     );
-      //     _emitState();
-      //   });
-      //   logger.t(
-      //     'hideMarked: $_hideMarked, hideNumbers: $_hideNumbers, hideManual: $_hideManual, ',
-      //   );
-      // }
       _finishDelay = state.finishDelay;
       _substituteNumbers = state.substituteNumbers;
       _substituteNumbersDelay = state.substituteNumbersDelay;
@@ -169,30 +129,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               }
             }
           }
-
-          // _races = await _db.select(_db.races).get();
-          // _stages = await _db.select(_db.stages).get();
-          // _riders = await _db.select(_db.riders).get();
-          // _statuses = await _db.select(_db.statuses).get();
-          // _participants = await _db.select(_db.participants).get();
-          // _starts = await _db.select(_db.starts).get();
-          // _finishes = await _db.select(_db.finishes).get();
-          // _trails = await _db.select(_db.trails).get();
-          // emit(
-          //   DatabaseState.initialized(
-          //     race: _race,
-          //     stage: _stage,
-          //     races: _races,
-          //     stages: _stages,
-          //     riders: _riders,
-          //     statuses: _statuses,
-          //     participants: _participants,
-          //     starts: _starts,
-          //     finishes: _finishes,
-          //     trails: _trails,
-          //     numbersOnTrace: _numbersOnTrace,
-          //   ),
-          // );
         },
         emitState: (event) {
           emit(
@@ -201,8 +137,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               stage: event.stage,
               races: event.races,
               stages: event.stages,
+              categories: event.categories,
               riders: event.riders,
-              statuses: event.statuses,
               participants: event.participants,
               starts: event.starts,
               finishes: event.finishes,
@@ -324,13 +260,63 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             forceAdd: event.forceAdd,
           );
           if (startingParticipants != null && !event.forceAdd) {
-            final notification = Notification.updateNumber(
+            final notification = Notification.updateStartNumber(
               existedStartingParticipants: startingParticipants,
               number: event.number,
               startTime: event.startTime,
             );
             _emitState(notification: notification);
             // _notification = null;
+          }
+        },
+        updateRider: (event) async {
+          await _db.updateRider(
+            id: event.riderId,
+            name: event.name,
+            nickname: event.nickname,
+            birthday: event.birthday,
+            team: event.team,
+            city: event.city,
+            email: event.email,
+            phone: event.phone,
+            comment: event.comment,
+            isDeleted: event.isDeleted,
+          );
+        },
+        updateRacer: (event) async {
+          if (event.riderId >= 0) {
+            await _db.updateRider(
+              id: event.riderId,
+              name: event.name,
+              nickname: event.nickname,
+              birthday: event.birthday,
+              team: event.team,
+              city: event.city,
+              email: event.email,
+              phone: event.phone,
+              comment: event.comment,
+            );
+            await _db.updateParticipant(
+              id: event.participantId,
+              riderId: event.riderId,
+              category: event.category,
+            );
+          } else {
+            final riderId = await _db.addRider(
+              name: event.name,
+              nickname: event.nickname,
+              birthday: event.birthday,
+              team: event.team,
+              city: event.city,
+              email: event.email,
+              phone: event.phone,
+              comment: event.comment,
+            );
+            await _db.updateParticipant(
+              id: event.participantId,
+              riderId: riderId,
+              category: event.category,
+            );
           }
         },
         updateStartingInfo: (event) async {
@@ -436,13 +422,24 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _db.setDNFForStage(stage: event.stage, number: event.number);
         },
         addNumberToFinish: (event) async {
-          await _db.addNumberToFinish(
+          final success = await _db.addNumberToFinish(
             stage: event.stage,
             finishId: event.finishId,
             number: event.number,
             finishTime: event.finishTime,
           );
-          _emitState();
+          if (success) {
+            _emitState();
+          } else {
+            _emitState(
+              notification: Notification.changeFinishTimeToNumber(
+                stage: event.stage,
+                finishId: event.finishId,
+                number: event.number,
+                finishTime: event.finishTime,
+              ),
+            );
+          }
         },
         getNumbersOnTraceNow: (event) async {
           _numbersOnTrace = await _db
@@ -561,8 +558,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   List<Race> _races = [];
   List<Stage> _stages = [];
-  final List<Rider> _riders = [];
-  final List<Status> _statuses = [];
+  List<String?> _categories = [];
+  List<Rider> _riders = [];
   List<ParticipantAtStart> _participants = [];
   final List<Start> _starts = [];
   List<Finish> _finishes = [];
@@ -571,9 +568,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   Race? _race;
   Stage? _stage;
 
-  // bool _hideMarked = true;
-  // bool _hideNumbers = false;
-  // bool _hideManual = false;
   late int _finishDelay;
   late bool _substituteNumbers;
   late int _substituteNumbersDelay;
@@ -583,6 +577,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   late StreamSubscription<List<Race>> _racesSubscription;
   late StreamSubscription<List<Stage>> _stagesSubscription;
+  late StreamSubscription<List<Rider>> _ridersSubscription;
   late StreamSubscription<List<ParticipantAtStart>> _startsSubscription;
   late StreamSubscription<List<Finish>> _finishesSubscription;
   late StreamSubscription<List<StartingParticipant>>
@@ -600,8 +595,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         stage: _stage,
         races: _races,
         stages: _stages,
+        categories: _categories,
         riders: _riders,
-        statuses: _statuses,
         participants: _participants,
         starts: _starts,
         finishes: _finishes,
@@ -618,6 +613,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   Future<void> close() {
     _racesSubscription.cancel();
     _stagesSubscription.cancel();
+    _ridersSubscription.cancel();
     _startsSubscription.cancel();
     _finishesSubscription.cancel();
     _numbersOnTraceSubscription.cancel();

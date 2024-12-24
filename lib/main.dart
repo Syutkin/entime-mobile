@@ -61,7 +61,6 @@ Future<void> main() async {
   final audioController = AudioController(
     audioService: audioService,
     database: database,
-    // protocolProvider: protocolProvider,
     settingsProvider: settings,
   );
 
@@ -116,7 +115,7 @@ class EntimeApp extends StatelessWidget {
 
   final SettingsProvider settingsProvider;
   final AppInfoProvider appInfo;
-  final UpdateProvider updateProvider;
+  final IUpdateProvider updateProvider;
   final IBluetoothProvider bluetoothProvider;
   final IAudioController audioController;
 

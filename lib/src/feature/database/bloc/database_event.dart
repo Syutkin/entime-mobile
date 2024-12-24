@@ -9,8 +9,8 @@ class DatabaseEvent with _$DatabaseEvent {
     required Stage? stage,
     required List<Race> races,
     required List<Stage> stages,
+    required List<String?> categories,
     required List<Rider> riders,
-    required List<Status> statuses,
     required List<ParticipantAtStart> participants,
     required List<Start> starts,
     required List<Finish> finishes,
@@ -90,6 +90,33 @@ class DatabaseEvent with _$DatabaseEvent {
     required String startTime,
     @Default(false) bool forceAdd,
   }) = _AddStartNumber;
+
+  const factory DatabaseEvent.updateRider({
+    required int riderId,
+    required String name,
+    String? nickname,
+    String? birthday,
+    String? team,
+    String? city,
+    String? email,
+    String? phone,
+    String? comment,
+    bool? isDeleted,
+  }) = _UpdateRider;
+
+  const factory DatabaseEvent.updateRacer({
+    required int riderId,
+    required int participantId,
+    required String name,
+    String? category,
+    String? nickname,
+    String? birthday,
+    String? team,
+    String? city,
+    String? email,
+    String? phone,
+    String? comment,
+  }) = _UpdateRacer;
 
   const factory DatabaseEvent.updateStartingInfo({
     required int stageId,

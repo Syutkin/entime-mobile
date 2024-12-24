@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-alpha.2+348',
+    representation: r'0.5.0-beta.1+381',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-alpha.2+348',
+    canonical: r'0.5.0-beta.1+381',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -115,22 +115,22 @@ sealed class Pubspec {
     patch: 0,
 
     /// The pre-release identifier: "foo" in "1.2.3-foo".
-    preRelease: <String>[r'alpha', r'2'],
+    preRelease: <String>[r'beta', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'348'],
+    build: <String>[r'381'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2024,
     12,
-    17,
-    6,
-    39,
-    57,
-    97,
-    843,
+    24,
+    14,
+    5,
+    14,
+    903,
+    728,
   );
 
   /// Name
@@ -442,21 +442,21 @@ sealed class Pubspec {
     'permission_handler': r'^11.3.1',
     'pub_semver': r'^2.1.5',
     'rxdart': r'^0.28.0',
-    'sentry_flutter': r'^8.11.1',
+    'sentry_flutter': r'^8.12.0',
     'settings_ui': r'^2.0.2',
     'share_plus': r'^10.1.3',
-    'shared_preferences': r'^2.3.3',
+    'shared_preferences': r'^2.3.4',
     'soundpool': r'^2.4.1',
     'sqlite3': r'^2.5.0',
-    'sqlite3_flutter_libs': r'^0.5.27',
+    'sqlite3_flutter_libs': r'^0.5.28',
     'url_launcher': r'^6.3.1',
-    'wakelock_plus': r'^1.2.8',
+    'wakelock_plus': r'^1.2.10',
   };
 
   /// Developer dependencies
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^9.1.7',
-    'build_runner': r'^2.4.13',
+    'build_runner': r'^2.4.14',
     'drift_dev': r'^2.22.1',
     'flutter_lints': r'^5.0.0',
     'flutter_test': <String, Object>{
@@ -468,11 +468,11 @@ sealed class Pubspec {
     },
     'json_serializable': r'^6.9.0',
     'mocktail': r'^1.0.4',
-    'patrol': r'^3.13.1',
-    'patrol_finders': r'^2.5.1',
+    'patrol': r'^3.13.2',
+    'patrol_finders': r'^2.6.0',
     'pubspec_generator': r'^4.0.0',
-    'test': r'^1.25.7',
-    'very_good_analysis': r'^6.0.0',
+    'test': r'^1.25.8',
+    'very_good_analysis': r'^7.0.0',
   };
 
   /// Dependency overrides

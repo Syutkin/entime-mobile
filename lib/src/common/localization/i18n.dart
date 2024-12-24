@@ -23,6 +23,11 @@ class I18nCore {
         name: 'I18nCore_warning',
       );
 
+  static String get details => Intl.message(
+        'Подробнее',
+        name: 'I18nCore_details',
+      );
+
   static String get correction => Intl.message(
         'Поправка',
         name: 'I18nCore_correction',
@@ -41,6 +46,16 @@ class I18nCore {
   static String get dsq => Intl.message(
         'DSQ',
         name: 'I18nCore_dsq',
+      );
+
+  static String get yes => Intl.message(
+        'Да',
+        name: 'I18nCore_yes',
+      );
+
+  static String get no => Intl.message(
+        'Нет',
+        name: 'I18nCore_no',
       );
 }
 
@@ -96,7 +111,7 @@ class I18nSettings {
       );
 
   static String get reconnectDescription => Intl.message(
-        'Пытаться переподключится к модулю при обрыве связи',
+        'Пытаться переподключиться к модулю при обрыве связи',
         name: 'I18nSettings_reconnectDescription',
       );
 
@@ -232,14 +247,14 @@ class I18nSettings {
         args: [milliseconds],
       );
 
-  static String get autosubstitution => Intl.message(
+  static String get autoSubstitution => Intl.message(
         'Автоподстановка номеров',
-        name: 'I18nSettings_autosubstitution',
+        name: 'I18nSettings_autoSubstitution',
       );
 
-  static String get autosubstitutionDelay => Intl.message(
+  static String get autoSubstitutionDelay => Intl.message(
         'Задержка перед автоматическим подставлением новых номеров',
-        name: 'I18nSettings_autosubstitutionDelay',
+        name: 'I18nSettings_autoSubstitutionDelay',
       );
 
   static String get finishButton => Intl.message(
@@ -255,6 +270,26 @@ class I18nSettings {
   static String get finishButtonSizeDescription => Intl.message(
         'Размер кнопки "отсечка" на финишном экране',
         name: 'I18nSettings_finishButtonSizeDescription',
+      );
+
+  static String get showStartDifference => Intl.message(
+        'Показывать разницу во времени',
+        name: 'I18nSettings_showStartDifference',
+      );
+
+  static String get showStartDifferenceDescription => Intl.message(
+        'Между временем модуля и временем устройства',
+        name: 'I18nSettings_showStartDifferenceDescription',
+      );
+
+  static String get showColorStartDifference => Intl.message(
+        'Выделение цветом разницы во времени',
+        name: 'I18nSettings_showColorStartDifference',
+      );
+
+  static String get showColorStartDifferenceDescription => Intl.message(
+        'При достижении порога между временем модуля и временем устройства',
+        name: 'I18nSettings_showColorStartDifferenceDescription',
       );
 
   static String get showFinishDifference => Intl.message(
@@ -277,14 +312,14 @@ class I18nSettings {
         name: 'I18nSettings_showColorFinishDifferenceDescription',
       );
 
-  static String get finishDifference => Intl.message(
-        'Порог цветовой индикации',
-        name: 'I18nSettings_finishDifference',
-      );
+  static String get startFinishDifference => Intl.message(
+    'Порог цветовой индикации',
+    name: 'I18nSettings_startFinishDifference',
+  );
 
-  static String get incorrectFinishDifference => Intl.message(
+  static String get incorrectStartFinishDifference => Intl.message(
         'Неверный порог',
-        name: 'I18nSettings_incorrectFinishDifference',
+        name: 'I18nSettings_incorrectStartFinishDifference',
       );
 
   static String get update => Intl.message(
@@ -323,7 +358,7 @@ class I18nSettings {
       );
 
   static String get journalLinesNumberPopup => Intl.message(
-        'Количество отображамых строк в журнале',
+        'Количество отображаемых строк в журнале',
         name: 'I18nSettings_journalLinesNumberPopup',
       );
 
@@ -488,6 +523,16 @@ class I18nProtocol {
         'Результаты финишей гонки $raceName, этап $stageName',
         name: 'I18nProtocol_shareFinishResults',
         args: [raceName, stageName],
+      );
+
+  static String get startTimeCutoff => Intl.message(
+        'Стартовая отсечка',
+        name: 'I18nProtocol_startTimeCutoff',
+      );
+
+  static String get finishTimeCutoff => Intl.message(
+        'Финишная отсечка',
+        name: 'I18nProtocol_finishTimeCutoff',
       );
 }
 
@@ -841,6 +886,11 @@ class I18nInit {
         'Трейлы',
         name: 'I18nInit_trails',
       );
+
+  static String get riders => Intl.message(
+        'Гонщики',
+        name: 'I18nInit_riders',
+      );
 }
 
 class I18nStart {
@@ -874,7 +924,7 @@ class I18nStart {
         name: 'I18nStart_sliverAutomaticCorrection',
       );
 
-// edit_start_time_popup
+  // edit_start_time_popup
   static String get incorrectCorrection => Intl.message(
         'Неверное значение поправки',
         name: 'I18nStart_incorrectCorrection',
@@ -883,6 +933,37 @@ class I18nStart {
   static String get incorrectTime => Intl.message(
         'Неверное значение времени',
         name: 'I18nStart_incorrectTime',
+      );
+
+  // edit_racer_popup
+  static String get incorrectName => Intl.message(
+        'Некорректное имя',
+        name: 'I18nStart_incorrectName',
+      );
+
+  static String get emptyName => Intl.message(
+        'Введите имя',
+        name: 'I18nStart_emptyName',
+      );
+
+  static String get incorrectNickname => Intl.message(
+        'Некорректный никнейм',
+        name: 'I18nStart_incorrectNickname',
+      );
+
+  static String get incorrectBirthday => Intl.message(
+        'Некорректная дата/год рождения',
+        name: 'I18nStart_incorrectBirthday',
+      );
+
+  static String get incorrectCity => Intl.message(
+        'Некорректное название города',
+        name: 'I18nStart_incorrectCity',
+      );
+
+  static String get incorrectEmail => Intl.message(
+        'Некорректный е-мейл',
+        name: 'I18nStart_incorrectEmail',
       );
 
   static String participantNumber(int number) => Intl.message(
@@ -939,7 +1020,32 @@ class I18nStart {
       );
 }
 
-class I18nFinish {}
+class I18nFinish {
+  static String get finishTime => Intl.message(
+        'Финишное время',
+        name: 'I18nFinish_finishTime',
+      );
+
+  static String get finishTimestamp => Intl.message(
+        'Время записи на устройстве',
+        name: 'I18nFinish_finishTimestamp',
+      );
+
+  static String get manualTime => Intl.message(
+        'Ручная отсечка',
+        name: 'I18nFinish_manualTime',
+      );
+
+  static String get automaticTime => Intl.message(
+        'Автоматическая отсечка',
+        name: 'I18nFinish_automaticTime',
+      );
+
+  static String get hiddenCutoff => Intl.message(
+        'Скрытая',
+        name: 'I18nFinish_hiddenCutoff',
+      );
+}
 
 class I18nLog {
   static String get bluetoothInformation => Intl.message(
@@ -1211,6 +1317,51 @@ class I18nModuleSettings {
 }
 
 class I18nDatabase {
+  static String get category => Intl.message(
+        'Категория',
+        name: 'I18nDatabase_category',
+      );
+
+  static String get name => Intl.message(
+        'Имя',
+        name: 'I18nDatabase_name',
+      );
+
+  static String get nickname => Intl.message(
+        'Никнейм',
+        name: 'I18nDatabase_nickname',
+      );
+
+  static String get birthday => Intl.message(
+        'Дата/Год рождения',
+        name: 'I18nDatabase_birthday',
+      );
+
+  static String get team => Intl.message(
+        'Команда',
+        name: 'I18nDatabase_team',
+      );
+
+  static String get city => Intl.message(
+        'Город',
+        name: 'I18nDatabase_city',
+      );
+
+  static String get email => Intl.message(
+        'Электронная почта',
+        name: 'I18nDatabase_email',
+      );
+
+  static String get phone => Intl.message(
+        'Телефон',
+        name: 'I18nDatabase_phone',
+      );
+
+  static String get comment => Intl.message(
+        'Комментарий',
+        name: 'I18nDatabase_comment',
+      );
+
   static String get races => Intl.message(
         'Соревнования',
         name: 'I18nDatabase_races',
@@ -1380,6 +1531,21 @@ class I18nDatabase {
         'Вы уверены, что хотите удалить трейл "$trailName"?',
         name: 'I18nDatabase_deleteTrail',
         args: [trailName],
+      );
+
+  static String get newCategory => Intl.message(
+        'Новая категория?',
+        name: 'I18nDatabase_newCategory',
+      );
+
+  static String get newRider => Intl.message(
+        'Новый гонщик?',
+        name: 'I18nDatabase_newRider',
+      );
+
+  static String get editRider => Intl.message(
+        'Редактирование гонщика',
+        name: 'I18nDatabase_editRider',
       );
 }
 

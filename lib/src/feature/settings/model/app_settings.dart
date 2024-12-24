@@ -73,6 +73,16 @@ class AppSettings with _$AppSettings {
     required bool substituteNumbers,
     required int substituteNumbersDelay,
 
+    // показывать разницу между автоматическим временем старта с модуля и временем устройства
+    required bool showStartDifference,
+
+    // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+    required bool showColorStartDifference,
+
+    // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+    // при превышении которого будет цветовая индикация
+    required int startDifferenceThreshold,
+
     // показывать разницу между временем финиша с модуля и временем устройства
     required bool showFinishDifference,
 
@@ -177,6 +187,16 @@ class AppSettings with _$AppSettings {
     // автоподстановка номеров в финишном протоколе
     @Default(false) bool substituteNumbers,
     @Default(500) int substituteNumbersDelay,
+
+    // показывать разницу между автоматическим временем старта с модуля и временем устройства
+    @Default(false)  bool showStartDifference,
+
+    // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+    @Default(false)  bool showColorStartDifference,
+
+    // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+    // при превышении которого будет цветовая индикация
+    @Default(2000) int startDifferenceThreshold,
 
     // показывать разницу между временем финиша с модуля и временем устройства
     @Default(false) bool showFinishDifference,

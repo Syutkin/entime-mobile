@@ -221,11 +221,11 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
               keyboardType: TextInputType.url,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value.isNullOrEmpty) {
                   url = '';
                   return null;
                 } else {
-                  if (value.isUrl) {
+                  if (value.isValidUrl) {
                     url = value;
                     return null;
                   } else {
@@ -248,50 +248,45 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
           ],
         ),
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-        ),
-        TextButton(
-          onPressed: () {
-            if (formKey.currentState!.validate()) {
-              final path = file?.path;
-              // Создаём новую запись
-              if (trail == null) {
-                context.read<TrailsBloc>().add(
-                      TrailsEvent.addTrail(
-                        name: name,
-                        elevation: elevation,
-                        distance: distance,
-                        url: url,
-                        description: description,
-                        filePath: path,
-                      ),
-                    );
-              } else {
-                context.read<TrailsBloc>().add(
-                      TrailsEvent.updateTrail(
-                        id: trail.id,
-                        name: name,
-                        elevation: elevation,
-                        distance: distance,
-                        url: url,
-                        description: description,
-                        fileId: trail.fileId,
-                        deleteTrack: deleteTrack,
-                        filePath: path,
-                      ),
-                    );
-              }
-              Navigator.of(context).pop();
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          if (formKey.currentState!.validate()) {
+            final path = file?.path;
+            // Создаём новую запись
+            if (trail == null) {
+              context.read<TrailsBloc>().add(
+                    TrailsEvent.addTrail(
+                      name: name,
+                      elevation: elevation,
+                      distance: distance,
+                      url: url,
+                      description: description,
+                      filePath: path,
+                    ),
+                  );
+            } else {
+              context.read<TrailsBloc>().add(
+                    TrailsEvent.updateTrail(
+                      id: trail.id,
+                      name: name,
+                      elevation: elevation,
+                      distance: distance,
+                      url: url,
+                      description: description,
+                      fileId: trail.fileId,
+                      deleteTrack: deleteTrack,
+                      filePath: path,
+                    ),
+                  );
             }
-          },
-          child: Text(MaterialLocalizations.of(context).okButtonLabel),
-        ),
-      ],
+            Navigator.of(context).pop();
+          }
+        },
+      ),
     ),
   );
 }

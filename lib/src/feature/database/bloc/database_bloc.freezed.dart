@@ -24,8 +24,8 @@ mixin _$DatabaseEvent {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -83,6 +83,31 @@ mixin _$DatabaseEvent {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -151,8 +176,8 @@ mixin _$DatabaseEvent {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -197,6 +222,31 @@ mixin _$DatabaseEvent {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -262,8 +312,8 @@ mixin _$DatabaseEvent {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -308,6 +358,31 @@ mixin _$DatabaseEvent {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -385,6 +460,8 @@ mixin _$DatabaseEvent {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -435,6 +512,8 @@ mixin _$DatabaseEvent {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -480,6 +559,8 @@ mixin _$DatabaseEvent {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -578,8 +659,8 @@ class _$InitializeImpl implements _Initialize {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -637,6 +718,31 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -708,8 +814,8 @@ class _$InitializeImpl implements _Initialize {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -754,6 +860,31 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -822,8 +953,8 @@ class _$InitializeImpl implements _Initialize {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -868,6 +999,31 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -951,6 +1107,8 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -1004,6 +1162,8 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -1052,6 +1212,8 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -1101,8 +1263,8 @@ abstract class _$$EmitStateImplCopyWith<$Res> {
       Stage? stage,
       List<Race> races,
       List<Stage> stages,
+      List<String?> categories,
       List<Rider> riders,
-      List<Status> statuses,
       List<ParticipantAtStart> participants,
       List<Start> starts,
       List<Finish> finishes,
@@ -1132,8 +1294,8 @@ class __$$EmitStateImplCopyWithImpl<$Res>
     Object? stage = freezed,
     Object? races = null,
     Object? stages = null,
+    Object? categories = null,
     Object? riders = null,
-    Object? statuses = null,
     Object? participants = null,
     Object? starts = null,
     Object? finishes = null,
@@ -1160,14 +1322,14 @@ class __$$EmitStateImplCopyWithImpl<$Res>
           ? _value._stages
           : stages // ignore: cast_nullable_to_non_nullable
               as List<Stage>,
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String?>,
       riders: null == riders
           ? _value._riders
           : riders // ignore: cast_nullable_to_non_nullable
               as List<Rider>,
-      statuses: null == statuses
-          ? _value._statuses
-          : statuses // ignore: cast_nullable_to_non_nullable
-              as List<Status>,
       participants: null == participants
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -1226,8 +1388,8 @@ class _$EmitStateImpl implements _EmitState {
       required this.stage,
       required final List<Race> races,
       required final List<Stage> stages,
+      required final List<String?> categories,
       required final List<Rider> riders,
-      required final List<Status> statuses,
       required final List<ParticipantAtStart> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
@@ -1238,8 +1400,8 @@ class _$EmitStateImpl implements _EmitState {
       required this.updateFinishNumber})
       : _races = races,
         _stages = stages,
+        _categories = categories,
         _riders = riders,
-        _statuses = statuses,
         _participants = participants,
         _starts = starts,
         _finishes = finishes,
@@ -1265,20 +1427,20 @@ class _$EmitStateImpl implements _EmitState {
     return EqualUnmodifiableListView(_stages);
   }
 
+  final List<String?> _categories;
+  @override
+  List<String?> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
   final List<Rider> _riders;
   @override
   List<Rider> get riders {
     if (_riders is EqualUnmodifiableListView) return _riders;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_riders);
-  }
-
-  final List<Status> _statuses;
-  @override
-  List<Status> get statuses {
-    if (_statuses is EqualUnmodifiableListView) return _statuses;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_statuses);
   }
 
   final List<ParticipantAtStart> _participants;
@@ -1324,7 +1486,7 @@ class _$EmitStateImpl implements _EmitState {
 
   @override
   String toString() {
-    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
+    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
   }
 
   @override
@@ -1336,8 +1498,9 @@ class _$EmitStateImpl implements _EmitState {
             const DeepCollectionEquality().equals(other.stage, stage) &&
             const DeepCollectionEquality().equals(other._races, _races) &&
             const DeepCollectionEquality().equals(other._stages, _stages) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
             const DeepCollectionEquality().equals(other._riders, _riders) &&
-            const DeepCollectionEquality().equals(other._statuses, _statuses) &&
             const DeepCollectionEquality()
                 .equals(other._participants, _participants) &&
             const DeepCollectionEquality().equals(other._starts, _starts) &&
@@ -1361,8 +1524,8 @@ class _$EmitStateImpl implements _EmitState {
       const DeepCollectionEquality().hash(stage),
       const DeepCollectionEquality().hash(_races),
       const DeepCollectionEquality().hash(_stages),
+      const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(_riders),
-      const DeepCollectionEquality().hash(_statuses),
       const DeepCollectionEquality().hash(_participants),
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
@@ -1389,8 +1552,8 @@ class _$EmitStateImpl implements _EmitState {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -1448,6 +1611,31 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -1512,8 +1700,8 @@ class _$EmitStateImpl implements _EmitState {
         stage,
         races,
         stages,
+        categories,
         riders,
-        statuses,
         participants,
         starts,
         finishes,
@@ -1533,8 +1721,8 @@ class _$EmitStateImpl implements _EmitState {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -1579,6 +1767,31 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -1640,8 +1853,8 @@ class _$EmitStateImpl implements _EmitState {
         stage,
         races,
         stages,
+        categories,
         riders,
-        statuses,
         participants,
         starts,
         finishes,
@@ -1661,8 +1874,8 @@ class _$EmitStateImpl implements _EmitState {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -1707,6 +1920,31 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -1770,8 +2008,8 @@ class _$EmitStateImpl implements _EmitState {
           stage,
           races,
           stages,
+          categories,
           riders,
-          statuses,
           participants,
           starts,
           finishes,
@@ -1804,6 +2042,8 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -1857,6 +2097,8 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -1905,6 +2147,8 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -1945,8 +2189,8 @@ abstract class _EmitState implements DatabaseEvent {
       required final Stage? stage,
       required final List<Race> races,
       required final List<Stage> stages,
+      required final List<String?> categories,
       required final List<Rider> riders,
-      required final List<Status> statuses,
       required final List<ParticipantAtStart> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
@@ -1960,8 +2204,8 @@ abstract class _EmitState implements DatabaseEvent {
   Stage? get stage;
   List<Race> get races;
   List<Stage> get stages;
+  List<String?> get categories;
   List<Rider> get riders;
-  List<Status> get statuses;
   List<ParticipantAtStart> get participants;
   List<Start> get starts;
   List<Finish> get finishes;
@@ -2109,8 +2353,8 @@ class _$AddRaceImpl implements _AddRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -2168,6 +2412,31 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -2239,8 +2508,8 @@ class _$AddRaceImpl implements _AddRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -2285,6 +2554,31 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -2354,8 +2648,8 @@ class _$AddRaceImpl implements _AddRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -2400,6 +2694,31 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -2483,6 +2802,8 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -2536,6 +2857,8 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -2584,6 +2907,8 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -2782,8 +3107,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -2841,6 +3166,31 @@ class _$UpdateRaceImpl implements _UpdateRace {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -2913,8 +3263,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -2959,6 +3309,31 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -3028,8 +3403,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -3074,6 +3449,31 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -3158,6 +3558,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -3211,6 +3613,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -3259,6 +3663,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -3459,8 +3865,8 @@ class _$UpsertRaceImpl implements _UpsertRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -3518,6 +3924,31 @@ class _$UpsertRaceImpl implements _UpsertRace {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -3590,8 +4021,8 @@ class _$UpsertRaceImpl implements _UpsertRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -3636,6 +4067,31 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -3705,8 +4161,8 @@ class _$UpsertRaceImpl implements _UpsertRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -3751,6 +4207,31 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -3835,6 +4316,8 @@ class _$UpsertRaceImpl implements _UpsertRace {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -3888,6 +4371,8 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -3936,6 +4421,8 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -4069,8 +4556,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -4128,6 +4615,31 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -4199,8 +4711,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -4245,6 +4757,31 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -4313,8 +4850,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -4359,6 +4896,31 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -4442,6 +5004,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -4495,6 +5059,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -4543,6 +5109,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -4636,8 +5204,8 @@ class _$GetRacesImpl implements _GetRaces {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -4695,6 +5263,31 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -4766,8 +5359,8 @@ class _$GetRacesImpl implements _GetRaces {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -4812,6 +5405,31 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -4880,8 +5498,8 @@ class _$GetRacesImpl implements _GetRaces {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -4926,6 +5544,31 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -5009,6 +5652,8 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -5062,6 +5707,8 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -5110,6 +5757,8 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -5223,8 +5872,8 @@ class _$SelectRaceImpl implements _SelectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -5282,6 +5931,31 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -5353,8 +6027,8 @@ class _$SelectRaceImpl implements _SelectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -5399,6 +6073,31 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -5467,8 +6166,8 @@ class _$SelectRaceImpl implements _SelectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -5513,6 +6212,31 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -5596,6 +6320,8 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -5649,6 +6375,8 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -5697,6 +6425,8 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -5790,8 +6520,8 @@ class _$DeselectRaceImpl implements _DeselectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -5849,6 +6579,31 @@ class _$DeselectRaceImpl implements _DeselectRace {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -5920,8 +6675,8 @@ class _$DeselectRaceImpl implements _DeselectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -5966,6 +6721,31 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -6034,8 +6814,8 @@ class _$DeselectRaceImpl implements _DeselectRace {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -6080,6 +6860,31 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -6163,6 +6968,8 @@ class _$DeselectRaceImpl implements _DeselectRace {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -6216,6 +7023,8 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -6264,6 +7073,8 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -6393,8 +7204,8 @@ class _$AddStageImpl implements _AddStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -6452,6 +7263,31 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -6523,8 +7359,8 @@ class _$AddStageImpl implements _AddStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -6569,6 +7405,31 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -6637,8 +7498,8 @@ class _$AddStageImpl implements _AddStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -6683,6 +7544,31 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -6766,6 +7652,8 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -6819,6 +7707,8 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -6867,6 +7757,8 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -7070,8 +7962,8 @@ class _$UpsertStageImpl implements _UpsertStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -7129,6 +8021,31 @@ class _$UpsertStageImpl implements _UpsertStage {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -7201,8 +8118,8 @@ class _$UpsertStageImpl implements _UpsertStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -7247,6 +8164,31 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -7316,8 +8258,8 @@ class _$UpsertStageImpl implements _UpsertStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -7362,6 +8304,31 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -7446,6 +8413,8 @@ class _$UpsertStageImpl implements _UpsertStage {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -7499,6 +8468,8 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -7547,6 +8518,8 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -7682,8 +8655,8 @@ class _$DeleteStageImpl implements _DeleteStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -7741,6 +8714,31 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -7812,8 +8810,8 @@ class _$DeleteStageImpl implements _DeleteStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -7858,6 +8856,31 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -7926,8 +8949,8 @@ class _$DeleteStageImpl implements _DeleteStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -7972,6 +8995,31 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -8055,6 +9103,8 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -8108,6 +9158,8 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -8156,6 +9208,8 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -8276,8 +9330,8 @@ class _$GetStagesImpl implements _GetStages {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -8335,6 +9389,31 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -8406,8 +9485,8 @@ class _$GetStagesImpl implements _GetStages {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -8452,6 +9531,31 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -8520,8 +9624,8 @@ class _$GetStagesImpl implements _GetStages {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -8566,6 +9670,31 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -8649,6 +9778,8 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -8702,6 +9833,8 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -8750,6 +9883,8 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -8871,8 +10006,8 @@ class _$SelectStageImpl implements _SelectStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -8930,6 +10065,31 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -9001,8 +10161,8 @@ class _$SelectStageImpl implements _SelectStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -9047,6 +10207,31 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -9115,8 +10300,8 @@ class _$SelectStageImpl implements _SelectStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -9161,6 +10346,31 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -9244,6 +10454,8 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -9297,6 +10509,8 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -9345,6 +10559,8 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -9468,8 +10684,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -9527,6 +10743,31 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -9598,8 +10839,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -9644,6 +10885,31 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -9712,8 +10978,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -9758,6 +11024,31 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -9841,6 +11132,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -9894,6 +11187,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -9942,6 +11237,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -10096,8 +11393,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -10155,6 +11452,31 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -10226,8 +11548,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -10272,6 +11594,31 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -10340,8 +11687,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -10386,6 +11733,31 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -10469,6 +11841,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -10522,6 +11896,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -10570,6 +11946,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -10620,6 +11998,1605 @@ abstract class _AddStartNumber implements DatabaseEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddStartNumberImplCopyWith<_$AddStartNumberImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateRiderImplCopyWith<$Res> {
+  factory _$$UpdateRiderImplCopyWith(
+          _$UpdateRiderImpl value, $Res Function(_$UpdateRiderImpl) then) =
+      __$$UpdateRiderImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {int riderId,
+      String name,
+      String? nickname,
+      String? birthday,
+      String? team,
+      String? city,
+      String? email,
+      String? phone,
+      String? comment,
+      bool? isDeleted});
+}
+
+/// @nodoc
+class __$$UpdateRiderImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$UpdateRiderImpl>
+    implements _$$UpdateRiderImplCopyWith<$Res> {
+  __$$UpdateRiderImplCopyWithImpl(
+      _$UpdateRiderImpl _value, $Res Function(_$UpdateRiderImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? riderId = null,
+    Object? name = null,
+    Object? nickname = freezed,
+    Object? birthday = freezed,
+    Object? team = freezed,
+    Object? city = freezed,
+    Object? email = freezed,
+    Object? phone = freezed,
+    Object? comment = freezed,
+    Object? isDeleted = freezed,
+  }) {
+    return _then(_$UpdateRiderImpl(
+      riderId: null == riderId
+          ? _value.riderId
+          : riderId // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      nickname: freezed == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as String?,
+      team: freezed == team
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDeleted: freezed == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateRiderImpl implements _UpdateRider {
+  const _$UpdateRiderImpl(
+      {required this.riderId,
+      required this.name,
+      this.nickname,
+      this.birthday,
+      this.team,
+      this.city,
+      this.email,
+      this.phone,
+      this.comment,
+      this.isDeleted});
+
+  @override
+  final int riderId;
+  @override
+  final String name;
+  @override
+  final String? nickname;
+  @override
+  final String? birthday;
+  @override
+  final String? team;
+  @override
+  final String? city;
+  @override
+  final String? email;
+  @override
+  final String? phone;
+  @override
+  final String? comment;
+  @override
+  final bool? isDeleted;
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.updateRider(riderId: $riderId, name: $name, nickname: $nickname, birthday: $birthday, team: $team, city: $city, email: $email, phone: $phone, comment: $comment, isDeleted: $isDeleted)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateRiderImpl &&
+            (identical(other.riderId, riderId) || other.riderId == riderId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday) &&
+            (identical(other.team, team) || other.team == team) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.isDeleted, isDeleted) ||
+                other.isDeleted == isDeleted));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, riderId, name, nickname,
+      birthday, team, city, email, phone, comment, isDeleted);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateRiderImplCopyWith<_$UpdateRiderImpl> get copyWith =>
+      __$$UpdateRiderImplCopyWithImpl<_$UpdateRiderImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<String?> categories,
+            List<Rider> riders,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
+        emitState,
+    required TResult Function(
+            String name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)
+        addRace,
+    required TResult Function(
+            int id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)
+        updateRace,
+    required TResult Function(
+            int? id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)
+        upsertRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function() getRaces,
+    required TResult Function(Race race) selectRace,
+    required TResult Function() deselectRace,
+    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
+        upsertStage,
+    required TResult Function(int id) deleteStage,
+    required TResult Function(int raceId) getStages,
+    required TResult Function(Stage stage) selectStage,
+    required TResult Function(int stageId) getParticipantsAtStart,
+    required TResult Function(
+            Stage stage, int number, String startTime, bool forceAdd)
+        addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
+    required TResult Function(
+            int stageId,
+            int participantId,
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection)
+        updateStartingInfo,
+    required TResult Function(
+            int stageId,
+            String startTime,
+            int correction,
+            DateTime timestamp,
+            int ntpOffset,
+            bool forceUpdate,
+            int? deltaInSeconds)
+        updateAutomaticCorrection,
+    required TResult Function(int stageId, DateTime time, DateTime timestamp,
+            int ntpOffset, int deltaInSeconds)
+        updateManualStartTime,
+    required TResult Function(int startId, ParticipantStatus status)
+        setStatusForStartId,
+    required TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timestamp,
+            int ntpOffset,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)
+        addFinishTime,
+    required TResult Function(int stageId, String finishTime,
+            DateTime timestamp, int ntpOffset, int? number)
+        addFinishTimeManual,
+    required TResult Function(int stageId) clearStartResultsDebug,
+    required TResult Function(int stageId) clearFinishResultsDebug,
+    required TResult Function(int stageId) hideAllFinises,
+    required TResult Function(Stage stage, int number) clearNumberAtFinish,
+    required TResult Function(Stage stage, int number) setDNSForStage,
+    required TResult Function(Stage stage, int number) setDNFForStage,
+    required TResult Function(int id) hideFinish,
+    required TResult Function(
+            Stage stage, int finishId, int number, String finishTime)
+        addNumberToFinish,
+    required TResult Function(int stageId, DateTime dateTimeNow)
+        getNumbersOnTraceNow,
+    required TResult Function(int number) selectAwaitingNumber,
+    required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function(int raceId, StagesCsv stages)
+        createStagesFromStagesCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
+    required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
+  }) {
+    return updateRider(riderId, name, nickname, birthday, team, city, email,
+        phone, comment, isDeleted);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<String?> categories,
+            List<Rider> riders,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
+            String? location, String? url, String? description)?
+        addRace,
+    TResult? Function(
+            int id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        updateRace,
+    TResult? Function(
+            int? id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        upsertRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function()? getRaces,
+    TResult? Function(Race race)? selectRace,
+    TResult? Function()? deselectRace,
+    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
+        upsertStage,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int raceId)? getStages,
+    TResult? Function(Stage stage)? selectStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
+    TResult? Function(
+            int stageId,
+            int participantId,
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection)?
+        updateStartingInfo,
+    TResult? Function(
+            int stageId,
+            String startTime,
+            int correction,
+            DateTime timestamp,
+            int ntpOffset,
+            bool forceUpdate,
+            int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult? Function(int stageId, DateTime time, DateTime timestamp,
+            int ntpOffset, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult? Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult? Function(
+            Stage stage,
+            String finishTime,
+            DateTime timestamp,
+            int ntpOffset,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult? Function(int stageId, String finishTime, DateTime timestamp,
+            int ntpOffset, int? number)?
+        addFinishTimeManual,
+    TResult? Function(int stageId)? clearStartResultsDebug,
+    TResult? Function(int stageId)? clearFinishResultsDebug,
+    TResult? Function(int stageId)? hideAllFinises,
+    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult? Function(Stage stage, int number)? setDNSForStage,
+    TResult? Function(Stage stage, int number)? setDNFForStage,
+    TResult? Function(int id)? hideFinish,
+    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
+  }) {
+    return updateRider?.call(riderId, name, nickname, birthday, team, city,
+        email, phone, comment, isDeleted);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<String?> categories,
+            List<Rider> riders,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
+            String? location, String? url, String? description)?
+        addRace,
+    TResult Function(
+            int id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        updateRace,
+    TResult Function(
+            int? id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        upsertRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function()? getRaces,
+    TResult Function(Race race)? selectRace,
+    TResult Function()? deselectRace,
+    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
+        upsertStage,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int raceId)? getStages,
+    TResult Function(Stage stage)? selectStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
+    TResult Function(
+            int stageId,
+            int participantId,
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection)?
+        updateStartingInfo,
+    TResult Function(
+            int stageId,
+            String startTime,
+            int correction,
+            DateTime timestamp,
+            int ntpOffset,
+            bool forceUpdate,
+            int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult Function(int stageId, DateTime time, DateTime timestamp,
+            int ntpOffset, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timestamp,
+            int ntpOffset,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult Function(int stageId, String finishTime, DateTime timestamp,
+            int ntpOffset, int? number)?
+        addFinishTimeManual,
+    TResult Function(int stageId)? clearStartResultsDebug,
+    TResult Function(int stageId)? clearFinishResultsDebug,
+    TResult Function(int stageId)? hideAllFinises,
+    TResult Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult Function(Stage stage, int number)? setDNSForStage,
+    TResult Function(Stage stage, int number)? setDNFForStage,
+    TResult Function(int id)? hideFinish,
+    TResult Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int number)? selectAwaitingNumber,
+    TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
+    TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
+    required TResult orElse(),
+  }) {
+    if (updateRider != null) {
+      return updateRider(riderId, name, nickname, birthday, team, city, email,
+          phone, comment, isDeleted);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_GetRaces value) getRaces,
+    required TResult Function(_SelectRace value) selectRace,
+    required TResult Function(_DeselectRace value) deselectRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
+    required TResult Function(_DeleteStage value) deleteStage,
+    required TResult Function(_GetStages value) getStages,
+    required TResult Function(_SelectStage value) selectStage,
+    required TResult Function(_GetParticipantsAtStart value)
+        getParticipantsAtStart,
+    required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
+    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
+    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
+    required TResult Function(_AddFinishTime value) addFinishTime,
+    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
+    required TResult Function(_ClearStartResultsDebug value)
+        clearStartResultsDebug,
+    required TResult Function(_ClearFinishResultsDebug value)
+        clearFinishResultsDebug,
+    required TResult Function(_HideAllFinises value) hideAllFinises,
+    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
+    required TResult Function(_SetDNSForStage value) setDNSForStage,
+    required TResult Function(_SetDNFForStage value) setDNFForStage,
+    required TResult Function(_HideFinish value) hideFinish,
+    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
+    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
+    required TResult Function(_DeselectAwaitingNumber value)
+        deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_CreateStagesFromStagesCsvv value)
+        createStagesFromStagesCsv,
+    required TResult Function(_ShareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
+    required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
+  }) {
+    return updateRider(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_GetRaces value)? getRaces,
+    TResult? Function(_SelectRace value)? selectRace,
+    TResult? Function(_DeselectRace value)? deselectRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetStages value)? getStages,
+    TResult? Function(_SelectStage value)? selectStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult? Function(_AddFinishTime value)? addFinishTime,
+    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult? Function(_HideAllFinises value)? hideAllFinises,
+    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(_SetDNSForStage value)? setDNSForStage,
+    TResult? Function(_SetDNFForStage value)? setDNFForStage,
+    TResult? Function(_HideFinish value)? hideFinish,
+    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_CreateStagesFromStagesCsvv value)?
+        createStagesFromStagesCsv,
+    TResult? Function(_ShareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
+    TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
+  }) {
+    return updateRider?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_GetRaces value)? getRaces,
+    TResult Function(_SelectRace value)? selectRace,
+    TResult Function(_DeselectRace value)? deselectRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetStages value)? getStages,
+    TResult Function(_SelectStage value)? selectStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult Function(_AddFinishTime value)? addFinishTime,
+    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult Function(_HideAllFinises value)? hideAllFinises,
+    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult Function(_SetDNSForStage value)? setDNSForStage,
+    TResult Function(_SetDNFForStage value)? setDNFForStage,
+    TResult Function(_HideFinish value)? hideFinish,
+    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_CreateStagesFromStagesCsvv value)?
+        createStagesFromStagesCsv,
+    TResult Function(_ShareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
+    TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
+    required TResult orElse(),
+  }) {
+    if (updateRider != null) {
+      return updateRider(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateRider implements DatabaseEvent {
+  const factory _UpdateRider(
+      {required final int riderId,
+      required final String name,
+      final String? nickname,
+      final String? birthday,
+      final String? team,
+      final String? city,
+      final String? email,
+      final String? phone,
+      final String? comment,
+      final bool? isDeleted}) = _$UpdateRiderImpl;
+
+  int get riderId;
+  String get name;
+  String? get nickname;
+  String? get birthday;
+  String? get team;
+  String? get city;
+  String? get email;
+  String? get phone;
+  String? get comment;
+  bool? get isDeleted;
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateRiderImplCopyWith<_$UpdateRiderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateRacerImplCopyWith<$Res> {
+  factory _$$UpdateRacerImplCopyWith(
+          _$UpdateRacerImpl value, $Res Function(_$UpdateRacerImpl) then) =
+      __$$UpdateRacerImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {int riderId,
+      int participantId,
+      String name,
+      String? category,
+      String? nickname,
+      String? birthday,
+      String? team,
+      String? city,
+      String? email,
+      String? phone,
+      String? comment});
+}
+
+/// @nodoc
+class __$$UpdateRacerImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$UpdateRacerImpl>
+    implements _$$UpdateRacerImplCopyWith<$Res> {
+  __$$UpdateRacerImplCopyWithImpl(
+      _$UpdateRacerImpl _value, $Res Function(_$UpdateRacerImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? riderId = null,
+    Object? participantId = null,
+    Object? name = null,
+    Object? category = freezed,
+    Object? nickname = freezed,
+    Object? birthday = freezed,
+    Object? team = freezed,
+    Object? city = freezed,
+    Object? email = freezed,
+    Object? phone = freezed,
+    Object? comment = freezed,
+  }) {
+    return _then(_$UpdateRacerImpl(
+      riderId: null == riderId
+          ? _value.riderId
+          : riderId // ignore: cast_nullable_to_non_nullable
+              as int,
+      participantId: null == participantId
+          ? _value.participantId
+          : participantId // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nickname: freezed == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as String?,
+      team: freezed == team
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateRacerImpl implements _UpdateRacer {
+  const _$UpdateRacerImpl(
+      {required this.riderId,
+      required this.participantId,
+      required this.name,
+      this.category,
+      this.nickname,
+      this.birthday,
+      this.team,
+      this.city,
+      this.email,
+      this.phone,
+      this.comment});
+
+  @override
+  final int riderId;
+  @override
+  final int participantId;
+  @override
+  final String name;
+  @override
+  final String? category;
+  @override
+  final String? nickname;
+  @override
+  final String? birthday;
+  @override
+  final String? team;
+  @override
+  final String? city;
+  @override
+  final String? email;
+  @override
+  final String? phone;
+  @override
+  final String? comment;
+
+  @override
+  String toString() {
+    return 'DatabaseEvent.updateRacer(riderId: $riderId, participantId: $participantId, name: $name, category: $category, nickname: $nickname, birthday: $birthday, team: $team, city: $city, email: $email, phone: $phone, comment: $comment)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateRacerImpl &&
+            (identical(other.riderId, riderId) || other.riderId == riderId) &&
+            (identical(other.participantId, participantId) ||
+                other.participantId == participantId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday) &&
+            (identical(other.team, team) || other.team == team) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.comment, comment) || other.comment == comment));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, riderId, participantId, name,
+      category, nickname, birthday, team, city, email, phone, comment);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateRacerImplCopyWith<_$UpdateRacerImpl> get copyWith =>
+      __$$UpdateRacerImplCopyWithImpl<_$UpdateRacerImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<String?> categories,
+            List<Rider> riders,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)
+        emitState,
+    required TResult Function(
+            String name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)
+        addRace,
+    required TResult Function(
+            int id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)
+        updateRace,
+    required TResult Function(
+            int? id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)
+        upsertRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function() getRaces,
+    required TResult Function(Race race) selectRace,
+    required TResult Function() deselectRace,
+    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(
+            int? id,
+            String? name,
+            String? description,
+            int? raceId,
+            int? trailId,
+            bool? isActive,
+            bool? isDeleted,
+            bool removeTrailId)
+        upsertStage,
+    required TResult Function(int id) deleteStage,
+    required TResult Function(int raceId) getStages,
+    required TResult Function(Stage stage) selectStage,
+    required TResult Function(int stageId) getParticipantsAtStart,
+    required TResult Function(
+            Stage stage, int number, String startTime, bool forceAdd)
+        addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
+    required TResult Function(
+            int stageId,
+            int participantId,
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection)
+        updateStartingInfo,
+    required TResult Function(
+            int stageId,
+            String startTime,
+            int correction,
+            DateTime timestamp,
+            int ntpOffset,
+            bool forceUpdate,
+            int? deltaInSeconds)
+        updateAutomaticCorrection,
+    required TResult Function(int stageId, DateTime time, DateTime timestamp,
+            int ntpOffset, int deltaInSeconds)
+        updateManualStartTime,
+    required TResult Function(int startId, ParticipantStatus status)
+        setStatusForStartId,
+    required TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timestamp,
+            int ntpOffset,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)
+        addFinishTime,
+    required TResult Function(int stageId, String finishTime,
+            DateTime timestamp, int ntpOffset, int? number)
+        addFinishTimeManual,
+    required TResult Function(int stageId) clearStartResultsDebug,
+    required TResult Function(int stageId) clearFinishResultsDebug,
+    required TResult Function(int stageId) hideAllFinises,
+    required TResult Function(Stage stage, int number) clearNumberAtFinish,
+    required TResult Function(Stage stage, int number) setDNSForStage,
+    required TResult Function(Stage stage, int number) setDNFForStage,
+    required TResult Function(int id) hideFinish,
+    required TResult Function(
+            Stage stage, int finishId, int number, String finishTime)
+        addNumberToFinish,
+    required TResult Function(int stageId, DateTime dateTimeNow)
+        getNumbersOnTraceNow,
+    required TResult Function(int number) selectAwaitingNumber,
+    required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function(int raceId, StagesCsv stages)
+        createStagesFromStagesCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
+    required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
+  }) {
+    return updateRacer(riderId, participantId, name, category, nickname,
+        birthday, team, city, email, phone, comment);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<String?> categories,
+            List<Rider> riders,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult? Function(String name, DateTime? startDate, DateTime? finishDate,
+            String? location, String? url, String? description)?
+        addRace,
+    TResult? Function(
+            int id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        updateRace,
+    TResult? Function(
+            int? id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        upsertRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function()? getRaces,
+    TResult? Function(Race race)? selectRace,
+    TResult? Function()? deselectRace,
+    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
+        upsertStage,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int raceId)? getStages,
+    TResult? Function(Stage stage)? selectStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
+    TResult? Function(
+            int stageId,
+            int participantId,
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection)?
+        updateStartingInfo,
+    TResult? Function(
+            int stageId,
+            String startTime,
+            int correction,
+            DateTime timestamp,
+            int ntpOffset,
+            bool forceUpdate,
+            int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult? Function(int stageId, DateTime time, DateTime timestamp,
+            int ntpOffset, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult? Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult? Function(
+            Stage stage,
+            String finishTime,
+            DateTime timestamp,
+            int ntpOffset,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult? Function(int stageId, String finishTime, DateTime timestamp,
+            int ntpOffset, int? number)?
+        addFinishTimeManual,
+    TResult? Function(int stageId)? clearStartResultsDebug,
+    TResult? Function(int stageId)? clearFinishResultsDebug,
+    TResult? Function(int stageId)? hideAllFinises,
+    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult? Function(Stage stage, int number)? setDNSForStage,
+    TResult? Function(Stage stage, int number)? setDNFForStage,
+    TResult? Function(int id)? hideFinish,
+    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
+  }) {
+    return updateRacer?.call(riderId, participantId, name, category, nickname,
+        birthday, team, city, email, phone, comment);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            Race? race,
+            Stage? stage,
+            List<Race> races,
+            List<Stage> stages,
+            List<String?> categories,
+            List<Rider> riders,
+            List<ParticipantAtStart> participants,
+            List<Start> starts,
+            List<Finish> finishes,
+            List<StartingParticipant> numbersOnTrace,
+            Notification? notification,
+            int? autoFinishNumber,
+            int? awaitingNumber,
+            bool? updateFinishNumber)?
+        emitState,
+    TResult Function(String name, DateTime? startDate, DateTime? finishDate,
+            String? location, String? url, String? description)?
+        addRace,
+    TResult Function(
+            int id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        updateRace,
+    TResult Function(
+            int? id,
+            String? name,
+            DateTime? startDate,
+            DateTime? finishDate,
+            String? location,
+            String? url,
+            String? description)?
+        upsertRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function()? getRaces,
+    TResult Function(Race race)? selectRace,
+    TResult Function()? deselectRace,
+    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(int? id, String? name, String? description, int? raceId,
+            int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId)?
+        upsertStage,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int raceId)? getStages,
+    TResult Function(Stage stage)? selectStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+        addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
+    TResult Function(
+            int stageId,
+            int participantId,
+            String startTime,
+            String? automaticStartTime,
+            int? automaticCorrection,
+            String? manualStartTime,
+            int? manualCorrection)?
+        updateStartingInfo,
+    TResult Function(
+            int stageId,
+            String startTime,
+            int correction,
+            DateTime timestamp,
+            int ntpOffset,
+            bool forceUpdate,
+            int? deltaInSeconds)?
+        updateAutomaticCorrection,
+    TResult Function(int stageId, DateTime time, DateTime timestamp,
+            int ntpOffset, int deltaInSeconds)?
+        updateManualStartTime,
+    TResult Function(int startId, ParticipantStatus status)?
+        setStatusForStartId,
+    TResult Function(
+            Stage stage,
+            String finishTime,
+            DateTime timestamp,
+            int ntpOffset,
+            int? finishDelay,
+            bool? substituteNumbers,
+            int? substituteNumbersDelay,
+            DateTime? dateTimeNow,
+            int? number)?
+        addFinishTime,
+    TResult Function(int stageId, String finishTime, DateTime timestamp,
+            int ntpOffset, int? number)?
+        addFinishTimeManual,
+    TResult Function(int stageId)? clearStartResultsDebug,
+    TResult Function(int stageId)? clearFinishResultsDebug,
+    TResult Function(int stageId)? hideAllFinises,
+    TResult Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult Function(Stage stage, int number)? setDNSForStage,
+    TResult Function(Stage stage, int number)? setDNFForStage,
+    TResult Function(int id)? hideFinish,
+    TResult Function(Stage stage, int finishId, int number, String finishTime)?
+        addNumberToFinish,
+    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int number)? selectAwaitingNumber,
+    TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
+    TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
+    required TResult orElse(),
+  }) {
+    if (updateRacer != null) {
+      return updateRacer(riderId, participantId, name, category, nickname,
+          birthday, team, city, email, phone, comment);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_GetRaces value) getRaces,
+    required TResult Function(_SelectRace value) selectRace,
+    required TResult Function(_DeselectRace value) deselectRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
+    required TResult Function(_DeleteStage value) deleteStage,
+    required TResult Function(_GetStages value) getStages,
+    required TResult Function(_SelectStage value) selectStage,
+    required TResult Function(_GetParticipantsAtStart value)
+        getParticipantsAtStart,
+    required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
+    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateAutomaticCorrection value)
+        updateAutomaticCorrection,
+    required TResult Function(_UpdateManualStartTime value)
+        updateManualStartTime,
+    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
+    required TResult Function(_AddFinishTime value) addFinishTime,
+    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
+    required TResult Function(_ClearStartResultsDebug value)
+        clearStartResultsDebug,
+    required TResult Function(_ClearFinishResultsDebug value)
+        clearFinishResultsDebug,
+    required TResult Function(_HideAllFinises value) hideAllFinises,
+    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
+    required TResult Function(_SetDNSForStage value) setDNSForStage,
+    required TResult Function(_SetDNFForStage value) setDNFForStage,
+    required TResult Function(_HideFinish value) hideFinish,
+    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
+    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
+    required TResult Function(_DeselectAwaitingNumber value)
+        deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+        createRaceFromRaceCsv,
+    required TResult Function(_CreateStagesFromStagesCsvv value)
+        createStagesFromStagesCsv,
+    required TResult Function(_ShareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
+    required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
+  }) {
+    return updateRacer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_GetRaces value)? getRaces,
+    TResult? Function(_SelectRace value)? selectRace,
+    TResult? Function(_DeselectRace value)? deselectRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetStages value)? getStages,
+    TResult? Function(_SelectStage value)? selectStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult? Function(_AddFinishTime value)? addFinishTime,
+    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult? Function(_HideAllFinises value)? hideAllFinises,
+    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(_SetDNSForStage value)? setDNSForStage,
+    TResult? Function(_SetDNFForStage value)? setDNFForStage,
+    TResult? Function(_HideFinish value)? hideFinish,
+    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_CreateStagesFromStagesCsvv value)?
+        createStagesFromStagesCsv,
+    TResult? Function(_ShareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
+    TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
+  }) {
+    return updateRacer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_GetRaces value)? getRaces,
+    TResult Function(_SelectRace value)? selectRace,
+    TResult Function(_DeselectRace value)? deselectRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetStages value)? getStages,
+    TResult Function(_SelectStage value)? selectStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateAutomaticCorrection value)?
+        updateAutomaticCorrection,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult Function(_AddFinishTime value)? addFinishTime,
+    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult Function(_HideAllFinises value)? hideAllFinises,
+    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult Function(_SetDNSForStage value)? setDNSForStage,
+    TResult Function(_SetDNFForStage value)? setDNFForStage,
+    TResult Function(_HideFinish value)? hideFinish,
+    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_CreateStagesFromStagesCsvv value)?
+        createStagesFromStagesCsv,
+    TResult Function(_ShareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
+    TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
+    required TResult orElse(),
+  }) {
+    if (updateRacer != null) {
+      return updateRacer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateRacer implements DatabaseEvent {
+  const factory _UpdateRacer(
+      {required final int riderId,
+      required final int participantId,
+      required final String name,
+      final String? category,
+      final String? nickname,
+      final String? birthday,
+      final String? team,
+      final String? city,
+      final String? email,
+      final String? phone,
+      final String? comment}) = _$UpdateRacerImpl;
+
+  int get riderId;
+  int get participantId;
+  String get name;
+  String? get category;
+  String? get nickname;
+  String? get birthday;
+  String? get team;
+  String? get city;
+  String? get email;
+  String? get phone;
+  String? get comment;
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateRacerImplCopyWith<_$UpdateRacerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -10774,8 +13751,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -10833,6 +13810,31 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -10911,8 +13913,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -10957,6 +13959,31 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -11032,8 +14059,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -11078,6 +14105,31 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -11168,6 +14220,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -11221,6 +14275,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -11269,6 +14325,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -11475,8 +14533,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -11534,6 +14592,31 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -11606,8 +14689,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -11652,6 +14735,31 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -11721,8 +14829,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -11767,6 +14875,31 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -11851,6 +14984,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -11904,6 +15039,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -11952,6 +15089,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -12134,8 +15273,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -12193,6 +15332,31 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -12265,8 +15429,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -12311,6 +15475,31 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -12380,8 +15569,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -12426,6 +15615,31 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -12510,6 +15724,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -12563,6 +15779,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -12611,6 +15829,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -12750,8 +15970,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -12809,6 +16029,31 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -12880,8 +16125,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -12926,6 +16171,31 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -12994,8 +16264,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -13040,6 +16310,31 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -13123,6 +16418,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -13176,6 +16473,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -13224,6 +16523,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -13446,8 +16747,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -13505,6 +16806,31 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -13577,8 +16903,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -13623,6 +16949,31 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -13700,8 +17051,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -13746,6 +17097,31 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -13830,6 +17206,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -13883,6 +17261,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -13931,6 +17311,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -14115,8 +17497,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -14174,6 +17556,31 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -14246,8 +17653,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -14292,6 +17699,31 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -14361,8 +17793,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -14407,6 +17839,31 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -14491,6 +17948,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -14544,6 +18003,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -14592,6 +18053,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -14724,8 +18187,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -14783,6 +18246,31 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -14854,8 +18342,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -14900,6 +18388,31 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -14968,8 +18481,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -15014,6 +18527,31 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -15097,6 +18635,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -15150,6 +18690,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -15198,6 +18740,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -15322,8 +18866,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -15381,6 +18925,31 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -15452,8 +19021,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -15498,6 +19067,31 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -15566,8 +19160,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -15612,6 +19206,31 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -15695,6 +19314,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -15748,6 +19369,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -15796,6 +19419,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -15918,8 +19543,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -15977,6 +19602,31 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -16048,8 +19698,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -16094,6 +19744,31 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -16162,8 +19837,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -16208,6 +19883,31 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -16291,6 +19991,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -16344,6 +20046,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -16392,6 +20096,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -16522,8 +20228,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -16581,6 +20287,31 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -16652,8 +20383,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -16698,6 +20429,31 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -16766,8 +20522,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -16812,6 +20568,31 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -16895,6 +20676,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -16948,6 +20731,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -16996,6 +20781,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -17129,8 +20916,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -17188,6 +20975,31 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -17259,8 +21071,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -17305,6 +21117,31 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -17373,8 +21210,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -17419,6 +21256,31 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -17502,6 +21364,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -17555,6 +21419,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -17603,6 +21469,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -17736,8 +21604,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -17795,6 +21663,31 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -17866,8 +21759,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -17912,6 +21805,31 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -17980,8 +21898,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -18026,6 +21944,31 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -18109,6 +22052,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -18162,6 +22107,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -18210,6 +22157,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -18333,8 +22282,8 @@ class _$HideFinishImpl implements _HideFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -18392,6 +22341,31 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -18463,8 +22437,8 @@ class _$HideFinishImpl implements _HideFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -18509,6 +22483,31 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -18577,8 +22576,8 @@ class _$HideFinishImpl implements _HideFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -18623,6 +22622,31 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -18706,6 +22730,8 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -18759,6 +22785,8 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -18807,6 +22835,8 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -18959,8 +22989,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -19018,6 +23048,31 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -19089,8 +23144,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -19135,6 +23190,31 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -19203,8 +23283,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -19249,6 +23329,31 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -19332,6 +23437,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -19385,6 +23492,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -19433,6 +23542,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -19572,8 +23683,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -19631,6 +23742,31 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -19702,8 +23838,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -19748,6 +23884,31 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -19816,8 +23977,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -19862,6 +24023,31 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -19945,6 +24131,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -19998,6 +24186,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -20046,6 +24236,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -20171,8 +24363,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -20230,6 +24422,31 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -20301,8 +24518,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -20347,6 +24564,31 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -20415,8 +24657,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -20461,6 +24703,31 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -20544,6 +24811,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -20597,6 +24866,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -20645,6 +24916,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -20742,8 +25015,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -20801,6 +25074,31 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -20872,8 +25170,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -20918,6 +25216,31 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -20986,8 +25309,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -21032,6 +25355,31 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -21115,6 +25463,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -21168,6 +25518,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -21216,6 +25568,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -21330,8 +25684,8 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -21389,6 +25743,31 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -21460,8 +25839,8 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -21506,6 +25885,31 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -21574,8 +25978,8 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -21620,6 +26024,31 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -21703,6 +26132,8 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -21756,6 +26187,8 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -21804,6 +26237,8 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -21937,8 +26372,8 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -21996,6 +26431,31 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -22067,8 +26527,8 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -22113,6 +26573,31 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -22181,8 +26666,8 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -22227,6 +26712,31 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -22310,6 +26820,8 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -22363,6 +26875,8 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -22411,6 +26925,8 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -22507,8 +27023,8 @@ class _$ShareStartImpl implements _ShareStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -22566,6 +27082,31 @@ class _$ShareStartImpl implements _ShareStart {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -22637,8 +27178,8 @@ class _$ShareStartImpl implements _ShareStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -22683,6 +27224,31 @@ class _$ShareStartImpl implements _ShareStart {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -22751,8 +27317,8 @@ class _$ShareStartImpl implements _ShareStart {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -22797,6 +27363,31 @@ class _$ShareStartImpl implements _ShareStart {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -22880,6 +27471,8 @@ class _$ShareStartImpl implements _ShareStart {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -22933,6 +27526,8 @@ class _$ShareStartImpl implements _ShareStart {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -22981,6 +27576,8 @@ class _$ShareStartImpl implements _ShareStart {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -23066,8 +27663,8 @@ class _$ShareFinishImpl implements _ShareFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -23125,6 +27722,31 @@ class _$ShareFinishImpl implements _ShareFinish {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -23196,8 +27818,8 @@ class _$ShareFinishImpl implements _ShareFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -23242,6 +27864,31 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -23310,8 +27957,8 @@ class _$ShareFinishImpl implements _ShareFinish {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -23356,6 +28003,31 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -23439,6 +28111,8 @@ class _$ShareFinishImpl implements _ShareFinish {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -23492,6 +28166,8 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -23540,6 +28216,8 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -23625,8 +28303,8 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -23684,6 +28362,31 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -23755,8 +28458,8 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -23801,6 +28504,31 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -23869,8 +28597,8 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -23915,6 +28643,31 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -23998,6 +28751,8 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -24051,6 +28806,8 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -24099,6 +28856,8 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -24212,8 +28971,8 @@ class _$ShareTrackImpl implements _ShareTrack {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -24271,6 +29030,31 @@ class _$ShareTrackImpl implements _ShareTrack {
     required TResult Function(
             Stage stage, int number, String startTime, bool forceAdd)
         addStartNumber,
+    required TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)
+        updateRider,
+    required TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)
+        updateRacer,
     required TResult Function(
             int stageId,
             int participantId,
@@ -24342,8 +29126,8 @@ class _$ShareTrackImpl implements _ShareTrack {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -24388,6 +29172,31 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult? Function(int stageId)? getParticipantsAtStart,
     TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult? Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult? Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult? Function(
             int stageId,
             int participantId,
@@ -24456,8 +29265,8 @@ class _$ShareTrackImpl implements _ShareTrack {
             Stage? stage,
             List<Race> races,
             List<Stage> stages,
+            List<String?> categories,
             List<Rider> riders,
-            List<Status> statuses,
             List<ParticipantAtStart> participants,
             List<Start> starts,
             List<Finish> finishes,
@@ -24502,6 +29311,31 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult Function(int stageId)? getParticipantsAtStart,
     TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
         addStartNumber,
+    TResult Function(
+            int riderId,
+            String name,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment,
+            bool? isDeleted)?
+        updateRider,
+    TResult Function(
+            int riderId,
+            int participantId,
+            String name,
+            String? category,
+            String? nickname,
+            String? birthday,
+            String? team,
+            String? city,
+            String? email,
+            String? phone,
+            String? comment)?
+        updateRacer,
     TResult Function(
             int stageId,
             int participantId,
@@ -24585,6 +29419,8 @@ class _$ShareTrackImpl implements _ShareTrack {
     required TResult Function(_GetParticipantsAtStart value)
         getParticipantsAtStart,
     required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
     required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
     required TResult Function(_UpdateAutomaticCorrection value)
         updateAutomaticCorrection,
@@ -24638,6 +29474,8 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult? Function(_SelectStage value)? selectStage,
     TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
     TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult? Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -24686,6 +29524,8 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult Function(_SelectStage value)? selectStage,
     TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
     TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
     TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
     TResult Function(_UpdateAutomaticCorrection value)?
         updateAutomaticCorrection,
@@ -24737,32 +29577,28 @@ abstract class _ShareTrack implements DatabaseEvent {
 mixin _$DatabaseState {
   List<Race> get races => throw _privateConstructorUsedError;
   List<Stage> get stages => throw _privateConstructorUsedError;
+  List<String?> get categories => throw _privateConstructorUsedError;
   List<Rider> get riders => throw _privateConstructorUsedError;
-  List<Status> get statuses => throw _privateConstructorUsedError;
   List<ParticipantAtStart> get participants =>
       throw _privateConstructorUsedError;
   List<Start> get starts => throw _privateConstructorUsedError;
   List<Finish> get finishes => throw _privateConstructorUsedError;
   List<StartingParticipant> get numbersOnTrace =>
       throw _privateConstructorUsedError;
+
+  /// Выбранная гонка
   Race? get race => throw _privateConstructorUsedError;
+
+  ///Выбранный этап
   Stage? get stage => throw _privateConstructorUsedError;
-  Notification? get notification =>
-      throw _privateConstructorUsedError; // Стартовое время и номер, которые хотим установить
-// StartTime? startTime,
-// Автоматический старт из стартового модуля
-// Служит для проверки, установлено ли уже стартовое время или нет
-// AutomaticStart? automaticStart,
-// Предыдущее стартовое время номера, которому предлагается
-// поставить новое. Запоминаем для передачи его в UI popup.
-// Используется два раза, и при установке автоматического стартового времени
-// и при ручном вводе нового времени старта
-// List<StartingParticipant>? previousStart,
-// Изменить время финиша для номера
-  bool? get updateFinishNumber =>
-      throw _privateConstructorUsedError; // Автоматически подставленный в финишное время номер
-  int? get autoFinishNumber =>
-      throw _privateConstructorUsedError; // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+
+  /// Информация для различных всплывающих уведомлений
+  Notification? get notification => throw _privateConstructorUsedError;
+
+  /// Автоматически подставленный в финишное время номер
+  int? get autoFinishNumber => throw _privateConstructorUsedError;
+
+  /// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
   int? get awaitingNumber => throw _privateConstructorUsedError;
 
   /// Create a copy of DatabaseState
@@ -24781,8 +29617,8 @@ abstract class $DatabaseStateCopyWith<$Res> {
   $Res call(
       {List<Race> races,
       List<Stage> stages,
+      List<String?> categories,
       List<Rider> riders,
-      List<Status> statuses,
       List<ParticipantAtStart> participants,
       List<Start> starts,
       List<Finish> finishes,
@@ -24790,7 +29626,6 @@ abstract class $DatabaseStateCopyWith<$Res> {
       Race? race,
       Stage? stage,
       Notification? notification,
-      bool? updateFinishNumber,
       int? autoFinishNumber,
       int? awaitingNumber});
 
@@ -24814,8 +29649,8 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
   $Res call({
     Object? races = null,
     Object? stages = null,
+    Object? categories = null,
     Object? riders = null,
-    Object? statuses = null,
     Object? participants = null,
     Object? starts = null,
     Object? finishes = null,
@@ -24823,7 +29658,6 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
     Object? race = freezed,
     Object? stage = freezed,
     Object? notification = freezed,
-    Object? updateFinishNumber = freezed,
     Object? autoFinishNumber = freezed,
     Object? awaitingNumber = freezed,
   }) {
@@ -24836,14 +29670,14 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
           ? _value.stages
           : stages // ignore: cast_nullable_to_non_nullable
               as List<Stage>,
+      categories: null == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String?>,
       riders: null == riders
           ? _value.riders
           : riders // ignore: cast_nullable_to_non_nullable
               as List<Rider>,
-      statuses: null == statuses
-          ? _value.statuses
-          : statuses // ignore: cast_nullable_to_non_nullable
-              as List<Status>,
       participants: null == participants
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -24872,10 +29706,6 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as Notification?,
-      updateFinishNumber: freezed == updateFinishNumber
-          ? _value.updateFinishNumber
-          : updateFinishNumber // ignore: cast_nullable_to_non_nullable
-              as bool?,
       autoFinishNumber: freezed == autoFinishNumber
           ? _value.autoFinishNumber
           : autoFinishNumber // ignore: cast_nullable_to_non_nullable
@@ -24913,8 +29743,8 @@ abstract class _$$DatabaseStateImplCopyWith<$Res>
   $Res call(
       {List<Race> races,
       List<Stage> stages,
+      List<String?> categories,
       List<Rider> riders,
-      List<Status> statuses,
       List<ParticipantAtStart> participants,
       List<Start> starts,
       List<Finish> finishes,
@@ -24922,7 +29752,6 @@ abstract class _$$DatabaseStateImplCopyWith<$Res>
       Race? race,
       Stage? stage,
       Notification? notification,
-      bool? updateFinishNumber,
       int? autoFinishNumber,
       int? awaitingNumber});
 
@@ -24945,8 +29774,8 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
   $Res call({
     Object? races = null,
     Object? stages = null,
+    Object? categories = null,
     Object? riders = null,
-    Object? statuses = null,
     Object? participants = null,
     Object? starts = null,
     Object? finishes = null,
@@ -24954,7 +29783,6 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
     Object? race = freezed,
     Object? stage = freezed,
     Object? notification = freezed,
-    Object? updateFinishNumber = freezed,
     Object? autoFinishNumber = freezed,
     Object? awaitingNumber = freezed,
   }) {
@@ -24967,14 +29795,14 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
           ? _value._stages
           : stages // ignore: cast_nullable_to_non_nullable
               as List<Stage>,
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String?>,
       riders: null == riders
           ? _value._riders
           : riders // ignore: cast_nullable_to_non_nullable
               as List<Rider>,
-      statuses: null == statuses
-          ? _value._statuses
-          : statuses // ignore: cast_nullable_to_non_nullable
-              as List<Status>,
       participants: null == participants
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -25003,10 +29831,6 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as Notification?,
-      updateFinishNumber: freezed == updateFinishNumber
-          ? _value.updateFinishNumber
-          : updateFinishNumber // ignore: cast_nullable_to_non_nullable
-              as bool?,
       autoFinishNumber: freezed == autoFinishNumber
           ? _value.autoFinishNumber
           : autoFinishNumber // ignore: cast_nullable_to_non_nullable
@@ -25025,8 +29849,8 @@ class _$DatabaseStateImpl implements _DatabaseState {
   const _$DatabaseStateImpl(
       {required final List<Race> races,
       required final List<Stage> stages,
+      required final List<String?> categories,
       required final List<Rider> riders,
-      required final List<Status> statuses,
       required final List<ParticipantAtStart> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
@@ -25034,13 +29858,12 @@ class _$DatabaseStateImpl implements _DatabaseState {
       this.race,
       this.stage,
       this.notification,
-      this.updateFinishNumber,
       this.autoFinishNumber,
       this.awaitingNumber})
       : _races = races,
         _stages = stages,
+        _categories = categories,
         _riders = riders,
-        _statuses = statuses,
         _participants = participants,
         _starts = starts,
         _finishes = finishes,
@@ -25062,20 +29885,20 @@ class _$DatabaseStateImpl implements _DatabaseState {
     return EqualUnmodifiableListView(_stages);
   }
 
+  final List<String?> _categories;
+  @override
+  List<String?> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
   final List<Rider> _riders;
   @override
   List<Rider> get riders {
     if (_riders is EqualUnmodifiableListView) return _riders;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_riders);
-  }
-
-  final List<Status> _statuses;
-  @override
-  List<Status> get statuses {
-    if (_statuses is EqualUnmodifiableListView) return _statuses;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_statuses);
   }
 
   final List<ParticipantAtStart> _participants;
@@ -25110,35 +29933,29 @@ class _$DatabaseStateImpl implements _DatabaseState {
     return EqualUnmodifiableListView(_numbersOnTrace);
   }
 
+  /// Выбранная гонка
   @override
   final Race? race;
+
+  ///Выбранный этап
   @override
   final Stage? stage;
+
+  /// Информация для различных всплывающих уведомлений
   @override
   final Notification? notification;
-// Стартовое время и номер, которые хотим установить
-// StartTime? startTime,
-// Автоматический старт из стартового модуля
-// Служит для проверки, установлено ли уже стартовое время или нет
-// AutomaticStart? automaticStart,
-// Предыдущее стартовое время номера, которому предлагается
-// поставить новое. Запоминаем для передачи его в UI popup.
-// Используется два раза, и при установке автоматического стартового времени
-// и при ручном вводе нового времени старта
-// List<StartingParticipant>? previousStart,
-// Изменить время финиша для номера
-  @override
-  final bool? updateFinishNumber;
-// Автоматически подставленный в финишное время номер
+
+  /// Автоматически подставленный в финишное время номер
   @override
   final int? autoFinishNumber;
-// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+
+  /// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
   @override
   final int? awaitingNumber;
 
   @override
   String toString() {
-    return 'DatabaseState(races: $races, stages: $stages, riders: $riders, statuses: $statuses, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, updateFinishNumber: $updateFinishNumber, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
+    return 'DatabaseState(races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
   }
 
   @override
@@ -25148,8 +29965,9 @@ class _$DatabaseStateImpl implements _DatabaseState {
             other is _$DatabaseStateImpl &&
             const DeepCollectionEquality().equals(other._races, _races) &&
             const DeepCollectionEquality().equals(other._stages, _stages) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
             const DeepCollectionEquality().equals(other._riders, _riders) &&
-            const DeepCollectionEquality().equals(other._statuses, _statuses) &&
             const DeepCollectionEquality()
                 .equals(other._participants, _participants) &&
             const DeepCollectionEquality().equals(other._starts, _starts) &&
@@ -25160,8 +29978,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
             const DeepCollectionEquality().equals(other.stage, stage) &&
             (identical(other.notification, notification) ||
                 other.notification == notification) &&
-            (identical(other.updateFinishNumber, updateFinishNumber) ||
-                other.updateFinishNumber == updateFinishNumber) &&
             (identical(other.autoFinishNumber, autoFinishNumber) ||
                 other.autoFinishNumber == autoFinishNumber) &&
             (identical(other.awaitingNumber, awaitingNumber) ||
@@ -25173,8 +29989,8 @@ class _$DatabaseStateImpl implements _DatabaseState {
       runtimeType,
       const DeepCollectionEquality().hash(_races),
       const DeepCollectionEquality().hash(_stages),
+      const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(_riders),
-      const DeepCollectionEquality().hash(_statuses),
       const DeepCollectionEquality().hash(_participants),
       const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
@@ -25182,7 +29998,6 @@ class _$DatabaseStateImpl implements _DatabaseState {
       const DeepCollectionEquality().hash(race),
       const DeepCollectionEquality().hash(stage),
       notification,
-      updateFinishNumber,
       autoFinishNumber,
       awaitingNumber);
 
@@ -25199,8 +30014,8 @@ abstract class _DatabaseState implements DatabaseState {
   const factory _DatabaseState(
       {required final List<Race> races,
       required final List<Stage> stages,
+      required final List<String?> categories,
       required final List<Rider> riders,
-      required final List<Status> statuses,
       required final List<ParticipantAtStart> participants,
       required final List<Start> starts,
       required final List<Finish> finishes,
@@ -25208,7 +30023,6 @@ abstract class _DatabaseState implements DatabaseState {
       final Race? race,
       final Stage? stage,
       final Notification? notification,
-      final bool? updateFinishNumber,
       final int? autoFinishNumber,
       final int? awaitingNumber}) = _$DatabaseStateImpl;
 
@@ -25217,9 +30031,9 @@ abstract class _DatabaseState implements DatabaseState {
   @override
   List<Stage> get stages;
   @override
-  List<Rider> get riders;
+  List<String?> get categories;
   @override
-  List<Status> get statuses;
+  List<Rider> get riders;
   @override
   List<ParticipantAtStart> get participants;
   @override
@@ -25228,29 +30042,24 @@ abstract class _DatabaseState implements DatabaseState {
   List<Finish> get finishes;
   @override
   List<StartingParticipant> get numbersOnTrace;
+
+  /// Выбранная гонка
   @override
   Race? get race;
+
+  ///Выбранный этап
   @override
   Stage? get stage;
+
+  /// Информация для различных всплывающих уведомлений
   @override
-  Notification?
-      get notification; // Стартовое время и номер, которые хотим установить
-// StartTime? startTime,
-// Автоматический старт из стартового модуля
-// Служит для проверки, установлено ли уже стартовое время или нет
-// AutomaticStart? automaticStart,
-// Предыдущее стартовое время номера, которому предлагается
-// поставить новое. Запоминаем для передачи его в UI popup.
-// Используется два раза, и при установке автоматического стартового времени
-// и при ручном вводе нового времени старта
-// List<StartingParticipant>? previousStart,
-// Изменить время финиша для номера
+  Notification? get notification;
+
+  /// Автоматически подставленный в финишное время номер
   @override
-  bool?
-      get updateFinishNumber; // Автоматически подставленный в финишное время номер
-  @override
-  int?
-      get autoFinishNumber; // Номер, который будет автоматически подставлен в следующую автоматическую отсечку
+  int? get autoFinishNumber;
+
+  /// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
   @override
   int? get awaitingNumber;
 

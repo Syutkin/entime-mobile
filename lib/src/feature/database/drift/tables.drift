@@ -27,7 +27,7 @@ CREATE TABLE stages (
 
 CREATE TABLE riders (
 	id INTEGER PRIMARY KEY NOT NULL,
-	name text NOT NULL,
+	name text NOT NULL COLLATE NOCASE,
 	nickname text,
 	birthday text,
 	team text,
@@ -185,13 +185,20 @@ FROM track_files
 WHERE hash_sha1 = :hash_sha1 AND size = :size
 LIMIT 1;
 
-_addRider:
-INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment)
-VALUES(:name, :nickname, :birthday, :team, :city, :email, :phone, :comment);
+-- _addRider:
+-- INSERT INTO riders (name, nickname, birthday, team, city, email, phone, comment)
+-- VALUES(:name, :nickname, :birthday, :team, :city, :email, :phone, :comment);
+
+-- ToDo: dunno why nocase didn't work
+_getRiders:
+SELECT * FROM riders WHERE is_deleted = :is_deleted ORDER BY name COLLATE NOCASE ASC ;
 
 _addParticipant:
 INSERT INTO participants (race_id, rider_id, number, category, rfid)
 VALUES(:race_id, :rider_id, :number, :category, :rfid);
+
+_getCategories:
+SELECT category FROM participants WHERE race_id = :race_id GROUP BY category;
 
 _addStartInfo:
 INSERT INTO starts (stage_id, participant_id, start_time)

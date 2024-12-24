@@ -197,42 +197,61 @@ class HomeScreen extends StatelessWidget {
 
   SingleChildWidget _listenToUpdater() => BlocListener<UpdateBloc, UpdateState>(
         listenWhen: (previousState, state) {
-          // ловим показ наличия обновления
-          if (previousState is UpdateInitial && state is UpdateAvailable) {
-            return true;
-            // ловим показ ченджлога
-          } else if (previousState is UpdateInitial && state is UpdateInitial) {
-            return true;
-          } else {
-            return false;
-          }
+          // // ловим показ наличия обновления
+          // if (previousState is UpdateInitial && state is UpdateAvailable) {
+          //   return true;
+          //   // ловим показ ченджлога
+          // } else if (previousState is UpdateInitial && state is UpdateInitial) {
+          //   return true;
+          // } else {
+          //   return false;
+          // }
+          return previousState.maybeMap(
+            initial: (initial) {
+              return state.maybeMap(
+                initial: (_) {
+                  return true;
+                },
+                updateAvailable: (_) {
+                  return true;
+                },
+                orElse: () {
+                  return false;
+                },
+              );
+            },
+            orElse: () {
+              return false;
+            },
+          );
         },
         listener: (context, state) async {
-          if (state is UpdateAvailable && !Scaffold.of(context).isDrawerOpen) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  Localization.current.I18nHome_updateAvailable(state.version),
-                ),
-                action: SnackBarAction(
-                  onPressed: () {
-                    BlocProvider.of<UpdateBloc>(context)
-                        .add(const DownloadUpdate());
-                    Scaffold.of(context).openDrawer();
-                  },
-                  label: Localization.current.I18nHome_update,
-                ),
-              ),
-            );
-          } else if (state is UpdateInitial) {
-            final showChangelog = state.showChangelog;
-            final previousVersion = showChangelog?.previousVersion;
-            if (showChangelog != null &&
-                showChangelog.show &&
-                previousVersion != null) {
-              await showChangelogAtStartup(context, previousVersion);
-            }
-          }
+          await state.whenOrNull(
+            updateAvailable: (version) {
+              if (!Scaffold.of(context).isDrawerOpen) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      Localization.current.I18nHome_updateAvailable(version),
+                    ),
+                    action: SnackBarAction(
+                      onPressed: () {
+                        BlocProvider.of<UpdateBloc>(context)
+                            .add(const UpdateEvent.downloadUpdate());
+                        Scaffold.of(context).openDrawer();
+                      },
+                      label: Localization.current.I18nHome_update,
+                    ),
+                  ),
+                );
+              }
+            },
+            initial: (changelog) async {
+              if (changelog != null) {
+                await showChangelogAtStartup(context, changelog);
+              }
+            },
+          );
         },
       );
 
@@ -338,8 +357,7 @@ class _FilterButton extends StatelessWidget {
                 case FilterStart.showDNS:
                   settingsBloc.add(
                     SettingsEvent.update(
-                      settings:
-                      settings.copyWith(showDNS: !settings.showDNS),
+                      settings: settings.copyWith(showDNS: !settings.showDNS),
                     ),
                   );
                 case FilterStart.showDNF:
@@ -353,8 +371,7 @@ class _FilterButton extends StatelessWidget {
                 case FilterStart.showDSQ:
                   settingsBloc.add(
                     SettingsEvent.update(
-                      settings:
-                      settings.copyWith(showDSQ: !settings.showDSQ),
+                      settings: settings.copyWith(showDSQ: !settings.showDSQ),
                     ),
                   );
                 case FilterStart.setDefaults:

@@ -91,6 +91,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Подробнее`
+  String get I18nCore_details {
+    return Intl.message(
+      'Подробнее',
+      name: 'I18nCore_details',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Поправка`
   String get I18nCore_correction {
     return Intl.message(
@@ -126,6 +136,26 @@ class GeneratedLocalization {
     return Intl.message(
       'DSQ',
       name: 'I18nCore_dsq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Да`
+  String get I18nCore_yes {
+    return Intl.message(
+      'Да',
+      name: 'I18nCore_yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Нет`
+  String get I18nCore_no {
+    return Intl.message(
+      'Нет',
+      name: 'I18nCore_no',
       desc: '',
       args: [],
     );
@@ -221,10 +251,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Пытаться переподключится к модулю при обрыве связи`
+  /// `Пытаться переподключиться к модулю при обрыве связи`
   String get I18nSettings_reconnectDescription {
     return Intl.message(
-      'Пытаться переподключится к модулю при обрыве связи',
+      'Пытаться переподключиться к модулю при обрыве связи',
       name: 'I18nSettings_reconnectDescription',
       desc: '',
       args: [],
@@ -492,20 +522,20 @@ class GeneratedLocalization {
   }
 
   /// `Автоподстановка номеров`
-  String get I18nSettings_autosubstitution {
+  String get I18nSettings_autoSubstitution {
     return Intl.message(
       'Автоподстановка номеров',
-      name: 'I18nSettings_autosubstitution',
+      name: 'I18nSettings_autoSubstitution',
       desc: '',
       args: [],
     );
   }
 
   /// `Задержка перед автоматическим подставлением новых номеров`
-  String get I18nSettings_autosubstitutionDelay {
+  String get I18nSettings_autoSubstitutionDelay {
     return Intl.message(
       'Задержка перед автоматическим подставлением новых номеров',
-      name: 'I18nSettings_autosubstitutionDelay',
+      name: 'I18nSettings_autoSubstitutionDelay',
       desc: '',
       args: [],
     );
@@ -536,6 +566,46 @@ class GeneratedLocalization {
     return Intl.message(
       'Размер кнопки "отсечка" на финишном экране',
       name: 'I18nSettings_finishButtonSizeDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Показывать разницу во времени`
+  String get I18nSettings_showStartDifference {
+    return Intl.message(
+      'Показывать разницу во времени',
+      name: 'I18nSettings_showStartDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Между временем модуля и временем устройства`
+  String get I18nSettings_showStartDifferenceDescription {
+    return Intl.message(
+      'Между временем модуля и временем устройства',
+      name: 'I18nSettings_showStartDifferenceDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выделение цветом разницы во времени`
+  String get I18nSettings_showColorStartDifference {
+    return Intl.message(
+      'Выделение цветом разницы во времени',
+      name: 'I18nSettings_showColorStartDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `При достижении порога между временем модуля и временем устройства`
+  String get I18nSettings_showColorStartDifferenceDescription {
+    return Intl.message(
+      'При достижении порога между временем модуля и временем устройства',
+      name: 'I18nSettings_showColorStartDifferenceDescription',
       desc: '',
       args: [],
     );
@@ -582,20 +652,20 @@ class GeneratedLocalization {
   }
 
   /// `Порог цветовой индикации`
-  String get I18nSettings_finishDifference {
+  String get I18nSettings_startFinishDifference {
     return Intl.message(
       'Порог цветовой индикации',
-      name: 'I18nSettings_finishDifference',
+      name: 'I18nSettings_startFinishDifference',
       desc: '',
       args: [],
     );
   }
 
   /// `Неверный порог`
-  String get I18nSettings_incorrectFinishDifference {
+  String get I18nSettings_incorrectStartFinishDifference {
     return Intl.message(
       'Неверный порог',
-      name: 'I18nSettings_incorrectFinishDifference',
+      name: 'I18nSettings_incorrectStartFinishDifference',
       desc: '',
       args: [],
     );
@@ -671,10 +741,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Количество отображамых строк в журнале`
+  /// `Количество отображаемых строк в журнале`
   String get I18nSettings_journalLinesNumberPopup {
     return Intl.message(
-      'Количество отображамых строк в журнале',
+      'Количество отображаемых строк в журнале',
       name: 'I18nSettings_journalLinesNumberPopup',
       desc: '',
       args: [],
@@ -988,6 +1058,26 @@ class GeneratedLocalization {
       name: 'I18nProtocol_shareFinishResults',
       desc: '',
       args: [raceName, stageName],
+    );
+  }
+
+  /// `Стартовая отсечка`
+  String get I18nProtocol_startTimeCutoff {
+    return Intl.message(
+      'Стартовая отсечка',
+      name: 'I18nProtocol_startTimeCutoff',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Финишная отсечка`
+  String get I18nProtocol_finishTimeCutoff {
+    return Intl.message(
+      'Финишная отсечка',
+      name: 'I18nProtocol_finishTimeCutoff',
+      desc: '',
+      args: [],
     );
   }
 
@@ -1475,6 +1565,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Гонщики`
+  String get I18nInit_riders {
+    return Intl.message(
+      'Гонщики',
+      name: 'I18nInit_riders',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Не стартовал`
   String get I18nStart_didNotStart {
     return Intl.message(
@@ -1550,6 +1650,66 @@ class GeneratedLocalization {
     return Intl.message(
       'Неверное значение времени',
       name: 'I18nStart_incorrectTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректное имя`
+  String get I18nStart_incorrectName {
+    return Intl.message(
+      'Некорректное имя',
+      name: 'I18nStart_incorrectName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите имя`
+  String get I18nStart_emptyName {
+    return Intl.message(
+      'Введите имя',
+      name: 'I18nStart_emptyName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректный никнейм`
+  String get I18nStart_incorrectNickname {
+    return Intl.message(
+      'Некорректный никнейм',
+      name: 'I18nStart_incorrectNickname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректная дата/год рождения`
+  String get I18nStart_incorrectBirthday {
+    return Intl.message(
+      'Некорректная дата/год рождения',
+      name: 'I18nStart_incorrectBirthday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректное название города`
+  String get I18nStart_incorrectCity {
+    return Intl.message(
+      'Некорректное название города',
+      name: 'I18nStart_incorrectCity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Некорректный е-мейл`
+  String get I18nStart_incorrectEmail {
+    return Intl.message(
+      'Некорректный е-мейл',
+      name: 'I18nStart_incorrectEmail',
       desc: '',
       args: [],
     );
@@ -1640,6 +1800,56 @@ class GeneratedLocalization {
     return Intl.message(
       'Время старта на смартфоне',
       name: 'I18nStart_startTimeAtSmartphone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Финишное время`
+  String get I18nFinish_finishTime {
+    return Intl.message(
+      'Финишное время',
+      name: 'I18nFinish_finishTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Время записи на устройстве`
+  String get I18nFinish_finishTimestamp {
+    return Intl.message(
+      'Время записи на устройстве',
+      name: 'I18nFinish_finishTimestamp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ручная отсечка`
+  String get I18nFinish_manualTime {
+    return Intl.message(
+      'Ручная отсечка',
+      name: 'I18nFinish_manualTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Автоматическая отсечка`
+  String get I18nFinish_automaticTime {
+    return Intl.message(
+      'Автоматическая отсечка',
+      name: 'I18nFinish_automaticTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Скрытая`
+  String get I18nFinish_hiddenCutoff {
+    return Intl.message(
+      'Скрытая',
+      name: 'I18nFinish_hiddenCutoff',
       desc: '',
       args: [],
     );
@@ -2158,6 +2368,96 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Категория`
+  String get I18nDatabase_category {
+    return Intl.message(
+      'Категория',
+      name: 'I18nDatabase_category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя`
+  String get I18nDatabase_name {
+    return Intl.message(
+      'Имя',
+      name: 'I18nDatabase_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Никнейм`
+  String get I18nDatabase_nickname {
+    return Intl.message(
+      'Никнейм',
+      name: 'I18nDatabase_nickname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Дата/Год рождения`
+  String get I18nDatabase_birthday {
+    return Intl.message(
+      'Дата/Год рождения',
+      name: 'I18nDatabase_birthday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Команда`
+  String get I18nDatabase_team {
+    return Intl.message(
+      'Команда',
+      name: 'I18nDatabase_team',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Город`
+  String get I18nDatabase_city {
+    return Intl.message(
+      'Город',
+      name: 'I18nDatabase_city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Электронная почта`
+  String get I18nDatabase_email {
+    return Intl.message(
+      'Электронная почта',
+      name: 'I18nDatabase_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Телефон`
+  String get I18nDatabase_phone {
+    return Intl.message(
+      'Телефон',
+      name: 'I18nDatabase_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Комментарий`
+  String get I18nDatabase_comment {
+    return Intl.message(
+      'Комментарий',
+      name: 'I18nDatabase_comment',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Соревнования`
   String get I18nDatabase_races {
     return Intl.message(
@@ -2485,6 +2785,36 @@ class GeneratedLocalization {
       name: 'I18nDatabase_deleteTrail',
       desc: '',
       args: [trailName],
+    );
+  }
+
+  /// `Новая категория?`
+  String get I18nDatabase_newCategory {
+    return Intl.message(
+      'Новая категория?',
+      name: 'I18nDatabase_newCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Новый гонщик?`
+  String get I18nDatabase_newRider {
+    return Intl.message(
+      'Новый гонщик?',
+      name: 'I18nDatabase_newRider',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Редактирование гонщика`
+  String get I18nDatabase_editRider {
+    return Intl.message(
+      'Редактирование гонщика',
+      name: 'I18nDatabase_editRider',
+      desc: '',
+      args: [],
     );
   }
 

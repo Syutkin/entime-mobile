@@ -112,7 +112,8 @@ Future<void> _upsertStagePopup(
                         searchDelay: Duration.zero,
                         searchFieldProps: TextFieldProps(
                           decoration: InputDecoration(
-                              hintText: Localization.current.I18nDatabase_searchTrail,
+                            hintText:
+                                Localization.current.I18nDatabase_searchTrail,
                           ),
                         ),
                         // fit: FlexFit.loose,
@@ -140,39 +141,28 @@ Future<void> _upsertStagePopup(
           ],
         ),
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          if (formKey.currentState!.validate()) {
+            context.read<DatabaseBloc>().add(
+                  DatabaseEvent.upsertStage(
+                    id: stage?.id,
+                    name: name,
+                    description: description,
+                    raceId: raceId,
+                    trailId: trailId,
+                    isActive: isActive,
+                    removeTrailId: trailId == null,
+                  ),
+                );
             Navigator.of(context).pop();
-          },
-          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-        ),
-        TextButton(
-          onPressed: () async {
-            if (formKey.currentState!.validate()) {
-              context.read<DatabaseBloc>().add(
-                    DatabaseEvent.upsertStage(
-                      id: stage?.id,
-                      name: name,
-                      description: description,
-                      raceId: raceId,
-                      trailId: trailId,
-                      isActive: isActive,
-                      removeTrailId: trailId == null,
-                    ),
-                  );
-              Navigator.of(context).pop();
-            }
-          },
-          child: Text(MaterialLocalizations.of(context).okButtonLabel),
-        ),
-      ],
+          }
+        },
+      ),
     ),
   );
 }
-
-// List<DropdownMenuItem<int?>>? _builder(BuildContext context) {
-//   final bloc = context.read<DatabaseBloc>();
-//   final trails = bloc.state.trails;
-//   return trails.map<DropdownMenuItem<int>>((value) { }).toList();
-// }
