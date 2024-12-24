@@ -1147,7 +1147,7 @@ abstract class _UpdateFromFileEvent implements UpdateEvent {
 mixin _$UpdateState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
     required TResult Function(int bytes, int total) downloading,
@@ -1156,7 +1156,7 @@ mixin _$UpdateState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
     TResult? Function(int bytes, int total)? downloading,
@@ -1165,7 +1165,7 @@ mixin _$UpdateState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
     TResult Function(int bytes, int total)? downloading,
@@ -1230,9 +1230,7 @@ abstract class _$$UpdateInitialImplCopyWith<$Res> {
           _$UpdateInitialImpl value, $Res Function(_$UpdateInitialImpl) then) =
       __$$UpdateInitialImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ShowChangelog? showChangelog});
-
-  $ShowChangelogCopyWith<$Res>? get showChangelog;
+  $Res call({String? changelog});
 }
 
 /// @nodoc
@@ -1248,42 +1246,28 @@ class __$$UpdateInitialImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? showChangelog = freezed,
+    Object? changelog = freezed,
   }) {
     return _then(_$UpdateInitialImpl(
-      showChangelog: freezed == showChangelog
-          ? _value.showChangelog
-          : showChangelog // ignore: cast_nullable_to_non_nullable
-              as ShowChangelog?,
+      changelog: freezed == changelog
+          ? _value.changelog
+          : changelog // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
-  }
-
-  /// Create a copy of UpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ShowChangelogCopyWith<$Res>? get showChangelog {
-    if (_value.showChangelog == null) {
-      return null;
-    }
-
-    return $ShowChangelogCopyWith<$Res>(_value.showChangelog!, (value) {
-      return _then(_value.copyWith(showChangelog: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$UpdateInitialImpl implements _UpdateInitial {
-  const _$UpdateInitialImpl({this.showChangelog});
+  const _$UpdateInitialImpl({this.changelog});
 
   @override
-  final ShowChangelog? showChangelog;
+  final String? changelog;
 
   @override
   String toString() {
-    return 'UpdateState.initial(showChangelog: $showChangelog)';
+    return 'UpdateState.initial(changelog: $changelog)';
   }
 
   @override
@@ -1291,12 +1275,12 @@ class _$UpdateInitialImpl implements _UpdateInitial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateInitialImpl &&
-            (identical(other.showChangelog, showChangelog) ||
-                other.showChangelog == showChangelog));
+            (identical(other.changelog, changelog) ||
+                other.changelog == changelog));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, showChangelog);
+  int get hashCode => Object.hash(runtimeType, changelog);
 
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
@@ -1309,31 +1293,31 @@ class _$UpdateInitialImpl implements _UpdateInitial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
     required TResult Function(int bytes, int total) downloading,
     required TResult Function(String error) downloadError,
   }) {
-    return initial(showChangelog);
+    return initial(changelog);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
     TResult? Function(int bytes, int total)? downloading,
     TResult? Function(String error)? downloadError,
   }) {
-    return initial?.call(showChangelog);
+    return initial?.call(changelog);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
     TResult Function(int bytes, int total)? downloading,
@@ -1341,7 +1325,7 @@ class _$UpdateInitialImpl implements _UpdateInitial {
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(showChangelog);
+      return initial(changelog);
     }
     return orElse();
   }
@@ -1388,10 +1372,9 @@ class _$UpdateInitialImpl implements _UpdateInitial {
 }
 
 abstract class _UpdateInitial implements UpdateState {
-  const factory _UpdateInitial({final ShowChangelog? showChangelog}) =
-      _$UpdateInitialImpl;
+  const factory _UpdateInitial({final String? changelog}) = _$UpdateInitialImpl;
 
-  ShowChangelog? get showChangelog;
+  String? get changelog;
 
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
@@ -1469,7 +1452,7 @@ class _$UpdateAvailableImpl implements _UpdateAvailable {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
     required TResult Function(int bytes, int total) downloading,
@@ -1481,7 +1464,7 @@ class _$UpdateAvailableImpl implements _UpdateAvailable {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
     TResult? Function(int bytes, int total)? downloading,
@@ -1493,7 +1476,7 @@ class _$UpdateAvailableImpl implements _UpdateAvailable {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
     TResult Function(int bytes, int total)? downloading,
@@ -1601,7 +1584,7 @@ class _$UpdateConnectingImpl implements _UpdateConnecting {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
     required TResult Function(int bytes, int total) downloading,
@@ -1613,7 +1596,7 @@ class _$UpdateConnectingImpl implements _UpdateConnecting {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
     TResult? Function(int bytes, int total)? downloading,
@@ -1625,7 +1608,7 @@ class _$UpdateConnectingImpl implements _UpdateConnecting {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
     TResult Function(int bytes, int total)? downloading,
@@ -1760,7 +1743,7 @@ class _$UpdateDownloadingImpl implements _UpdateDownloading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
     required TResult Function(int bytes, int total) downloading,
@@ -1772,7 +1755,7 @@ class _$UpdateDownloadingImpl implements _UpdateDownloading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
     TResult? Function(int bytes, int total)? downloading,
@@ -1784,7 +1767,7 @@ class _$UpdateDownloadingImpl implements _UpdateDownloading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
     TResult Function(int bytes, int total)? downloading,
@@ -1922,7 +1905,7 @@ class _$UpdateDownloadErrorImpl implements _UpdateDownloadError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ShowChangelog? showChangelog) initial,
+    required TResult Function(String? changelog) initial,
     required TResult Function(String version) updateAvailable,
     required TResult Function() connecting,
     required TResult Function(int bytes, int total) downloading,
@@ -1934,7 +1917,7 @@ class _$UpdateDownloadErrorImpl implements _UpdateDownloadError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ShowChangelog? showChangelog)? initial,
+    TResult? Function(String? changelog)? initial,
     TResult? Function(String version)? updateAvailable,
     TResult? Function()? connecting,
     TResult? Function(int bytes, int total)? downloading,
@@ -1946,7 +1929,7 @@ class _$UpdateDownloadErrorImpl implements _UpdateDownloadError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ShowChangelog? showChangelog)? initial,
+    TResult Function(String? changelog)? initial,
     TResult Function(String version)? updateAvailable,
     TResult Function()? connecting,
     TResult Function(int bytes, int total)? downloading,

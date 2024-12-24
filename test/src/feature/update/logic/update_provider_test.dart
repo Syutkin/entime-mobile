@@ -19,7 +19,7 @@ void main() async {
   late MockAppInfoProvider appInfoProvider;
   late SharedPrefsSettingsProvider settings;
 
-  setUpAll(() async {
+  setUp(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMessageHandler(
       'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
@@ -254,6 +254,10 @@ void main() async {
   group('UpdateProvider.latestVersion', () {
     test('latestVersion exists', () async {
       when(
+        () => appInfoProvider.version,
+      ).thenAnswer((realInvocation) => '0.0.1');
+
+      when(
         () => client.get(
           Uri.parse(
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
@@ -319,8 +323,9 @@ void main() async {
 
       expect(
         await updater.showChangelog(),
-        const ShowChangelog(),
+        null,
       );
+
       // Текущая версия должна быть сохранена в настройках
       expect(
         settings.settings.previousVersion,
@@ -328,7 +333,11 @@ void main() async {
       );
     });
 
-    test('Second start', () async {
+    test('Second start, do not show changelog', () async {
+      await settings.update(
+        const AppSettings.defaults().copyWith(previousVersion: '1.0.1'),
+      );
+
       final updater = await UpdateProvider.init(
         client: client,
         appInfoProvider: appInfoProvider,
@@ -343,11 +352,15 @@ void main() async {
 
       expect(
         await updater.showChangelog(),
-        const ShowChangelog(),
+        null,
       );
     });
 
     test('Program updated', () async {
+      await settings.update(
+        const AppSettings.defaults().copyWith(previousVersion: '1.0.1'),
+      );
+
       final updater = await UpdateProvider.init(
         client: client,
         appInfoProvider: appInfoProvider,
@@ -357,20 +370,18 @@ void main() async {
       when(
         () => appInfoProvider.version,
       ).thenAnswer(
-        (realInvocation) => '2.0.1',
+        (realInvocation) => '999.0.1',
       );
 
-      expect(
-        await updater.showChangelog(),
-        const ShowChangelog(
-          show: true,
-          currentVersion: '2.0.1',
-          previousVersion: '1.0.1',
-        ),
-      );
+      // empty changelog 'cos version 999.0.1 didn't exists
+      expect(await updater.showChangelog(), '');
     });
 
     test('Updated to dev version', () async {
+      await settings.update(
+        const AppSettings.defaults().copyWith(previousVersion: '1.0.1'),
+      );
+
       final updater = await UpdateProvider.init(
         client: client,
         appInfoProvider: appInfoProvider,
@@ -384,14 +395,8 @@ void main() async {
       );
 
       // на dev версиях не покаываем ченджлог и не сохраняем версию в настройки
-      expect(
-        await updater.showChangelog(),
-        const ShowChangelog(),
-      );
-      expect(
-        settings.settings.previousVersion,
-        '2.0.1',
-      );
+      expect(await updater.showChangelog(), null);
+      expect(settings.settings.previousVersion, '1.0.1');
     });
   });
 }

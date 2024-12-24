@@ -246,12 +246,9 @@ class HomeScreen extends StatelessWidget {
                 );
               }
             },
-            initial: (showChangelog) async {
-              final previousVersion = showChangelog?.previousVersion;
-              if (showChangelog != null &&
-                  showChangelog.show &&
-                  previousVersion != null) {
-                await showChangelogAtStartup(context, previousVersion);
+            initial: (changelog) async {
+              if (changelog != null) {
+                await showChangelogAtStartup(context, changelog);
               }
             },
           );

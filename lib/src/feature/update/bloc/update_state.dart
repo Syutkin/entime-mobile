@@ -2,7 +2,7 @@ part of 'update_bloc.dart';
 
 @freezed
 class UpdateState with _$UpdateState {
-  const factory UpdateState.initial({ShowChangelog? showChangelog}) =
+  const factory UpdateState.initial({String? changelog}) =
       _UpdateInitial;
 
   // Есть обновление, вызываем попап с вопросом обновлять или нет

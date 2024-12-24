@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:crypto/crypto.dart';
+import 'package:entime/src/feature/update/logic/changelog_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
@@ -13,7 +14,6 @@ import 'package:pub_semver/pub_semver.dart';
 import '../../../common/logger/logger.dart';
 import '../../app_info/logic/app_info_provider.dart';
 import '../../settings/settings.dart';
-import '../model/show_changelog.dart';
 import '../model/updater.dart';
 
 typedef DownloadingHandler = void Function(int current, int total);
@@ -25,7 +25,7 @@ abstract interface class IUpdateProvider {
   Future<bool> isUpdateAvailable();
   Future<void> downloadUpdate();
   Future<void> installApk();
-  Future<ShowChangelog> showChangelog();
+  Future<String?> showChangelog();
 
   void onDownloading(DownloadingHandler callback);
   void onDownloadComplete(VoidCallback callback);
@@ -241,10 +241,11 @@ class UpdateProvider implements IUpdateProvider {
   }
 
   @override
-  Future<ShowChangelog> showChangelog() async {
+  Future<String?> showChangelog() async {
     // final settings = _settingsProvider.settings;
     final previousVersion =
         Version.parse(_settingsProvider.settings.previousVersion);
+
     final currentVersion = Version.parse(_appInfo.version);
     // Не показывать ченджлог для не релизных версий и первого запуска
     // Не изменять значение последней запущенной версии для не релизных версий
@@ -255,13 +256,15 @@ class UpdateProvider implements IUpdateProvider {
       if (currentVersion > previousVersion &&
           previousVersion !=
               Version.parse(_settingsProvider.getDefaults().previousVersion)) {
-        return ShowChangelog(
-          show: true,
-          previousVersion: previousVersion.toString(),
-          currentVersion: currentVersion.toString(),
-        );
+        return ChangelogProvider().changelog(currentVersion.toString(), previousVersion.toString());
+        // return ShowChangelog(
+        //   show: true,
+        //   markdown: markdown,
+        //   previousVersion: previousVersion.toString(),
+        //   // currentVersion: currentVersion.toString(),
+        // );
       }
     }
-    return const ShowChangelog();
+    return null;
   }
 }

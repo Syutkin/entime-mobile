@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../common/logger/logger.dart';
 import '../logic/update_provider.dart';
-import '../model/show_changelog.dart';
 
 part 'update_bloc.freezed.dart';
 part 'update_event.dart';
@@ -76,7 +75,7 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
         popupChangelog: (event) async {
           emit(
             UpdateState.initial(
-              showChangelog: await updateProvider.showChangelog(),
+              changelog: await updateProvider.showChangelog(),
             ),
           );
         },
