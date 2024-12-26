@@ -1211,47 +1211,40 @@ class AppDatabase extends _$AppDatabase {
     List<LogSourceDirection>? direction,
     int limit = -1,
   }) async {
-    const selectLog = 'SELECT * FROM logs';
-    final whereArgs = <String>[];
-    String where;
+    final whereArgs = <Expression<bool>>[];
 
     if (level != null && level.isNotEmpty) {
-      final args = <String>[];
+      final args = <Expression<bool>>[];
       for (final type in level) {
-        args.add("level LIKE '${type.name}'");
+        args.add(logs.level.isValue(type.name));
       }
-      whereArgs.add(args.join(' OR '));
+      whereArgs.add(args.reduce((value, element) => value | element));
     }
 
     if (source != null && source.isNotEmpty) {
-      final args = <String>[];
+      final args = <Expression<bool>>[];
       for (final type in source) {
-        args.add("source LIKE '${type.name}'");
+        args.add(logs.source.isValue(type.name));
       }
-      whereArgs.add(args.join(' OR '));
+      whereArgs.add(args.reduce((value, element) => value | element));
     }
 
     if (direction != null && direction.isNotEmpty) {
-      final args = <String>[];
+      final args = <Expression<bool>>[];
       for (final type in direction) {
-        args.add("direction LIKE '${type.name}'");
+        args.add(logs.direction.isValue(type.name));
       }
-      whereArgs.add(args.join(' OR '));
+      whereArgs.add(args.reduce((value, element) => value | element));
     }
 
-    if (limit >= 0) {
-      whereArgs.add('ROWID > (SELECT MAX(ROWID) FROM log) - $limit');
-    }
-
-    final List<Log> log;
+    Expression<bool>? predicate;
     if (whereArgs.isNotEmpty) {
-      where = '(${whereArgs.join(') AND (')})';
-      log = (await customSelect('$selectLog $where;', readsFrom: {logs}).get())
-          .cast<Log>();
-    } else {
-      log = await select(logs).get();
+      predicate = whereArgs.reduce((value, element) => value & element);
     }
-    return log;
+    return _getLog(
+      predicate: predicate == null ? null : (l) => predicate!,
+      limit: (l) => Limit(limit, 0),
+    ).get();
   }
 
   Future<int> addLog({

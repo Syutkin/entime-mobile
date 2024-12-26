@@ -530,5 +530,7 @@ WHERE
     AND number NOTNULL
 ORDER BY finish_time ASC;
 
+_getLog($predicate = TRUE):
+SELECT * FROM logs WHERE $predicate ORDER BY id DESC LIMIT $limit;
 
 /* --- for testing --- */

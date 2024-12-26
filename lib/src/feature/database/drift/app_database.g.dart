@@ -4777,6 +4777,29 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         ));
   }
 
+  Selectable<Log> _getLog(
+      {GetLog$predicate? predicate, required GetLog$limit limit}) {
+    var $arrayStartIndex = 1;
+    final generatedpredicate = $write(
+        predicate?.call(this.logs) ?? const CustomExpression('(TRUE)'),
+        startIndex: $arrayStartIndex);
+    $arrayStartIndex += generatedpredicate.amountOfVariables;
+    final generatedlimit =
+        $write(limit(this.logs), startIndex: $arrayStartIndex);
+    $arrayStartIndex += generatedlimit.amountOfVariables;
+    return customSelect(
+        'SELECT * FROM logs WHERE ${generatedpredicate.sql} ORDER BY id DESC ${generatedlimit.sql}',
+        variables: [
+          ...generatedpredicate.introducedVariables,
+          ...generatedlimit.introducedVariables
+        ],
+        readsFrom: {
+          logs,
+          ...generatedpredicate.watchedTables,
+          ...generatedlimit.watchedTables,
+        }).asyncMap(logs.mapFromRow);
+  }
+
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -7074,3 +7097,6 @@ class FinishForCsv extends CustomResultSet {
     required this.finishTime,
   }) : super(row);
 }
+
+typedef GetLog$predicate = Expression<bool> Function(Logs logs);
+typedef GetLog$limit = Limit Function(Logs logs);

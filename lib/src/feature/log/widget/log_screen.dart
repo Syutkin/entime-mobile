@@ -26,9 +26,10 @@ class LogScreen extends StatelessWidget {
         builder: (context, state) {
           final log = state.log;
           // скролл на последнюю запись
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            scrollToEnd(_scrollController);
-          });
+          // SchedulerBinding.instance.addPostFrameCallback((_) {
+          //   scrollToEnd(_scrollController);
+          // });
+          print(log.length);
           return Scrollbar(
             // ToDo: при нажатии показывать всю инфу в попапе
             child: ListView.builder(
