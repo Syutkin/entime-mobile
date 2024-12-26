@@ -1,3 +1,4 @@
+// ignore_for_file: always_put_required_named_parameters_first
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'module_settings.freezed.dart';

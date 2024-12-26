@@ -60,7 +60,10 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
 
       return true;
     } on Exception catch (e) {
-      logger.e('Exception at parsing ModuleSettings json', error: e);
+      logger.e('Exception at parsing ModuleSettingsEntime json', error: e);
+      return false;
+    } catch (e) {
+      logger.e('Unknown error at parsing ModuleSettingsEntime json', error: e);
       return false;
     }
   }
