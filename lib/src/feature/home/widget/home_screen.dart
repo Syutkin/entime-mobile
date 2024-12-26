@@ -164,7 +164,7 @@ class HomeScreen extends StatelessWidget {
                     .settings
                     .updateStartCorrectionDelay;
                 if (prevCorrection != null &&
-                    data.correction - prevCorrection >
+                    prevCorrection - data.correction >
                         updateStartCorrectionDelay) {
                   final text =
                       Localization.current.I18nHome_updateAutomaticCorrection(
