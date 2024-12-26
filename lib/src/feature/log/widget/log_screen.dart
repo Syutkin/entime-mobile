@@ -1,11 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../common/utils/helper.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../log.dart';
@@ -25,11 +23,6 @@ class LogScreen extends StatelessWidget {
       body: BlocBuilder<LogBloc, LogState>(
         builder: (context, state) {
           final log = state.log;
-          // скролл на последнюю запись
-          // SchedulerBinding.instance.addPostFrameCallback((_) {
-          //   scrollToEnd(_scrollController);
-          // });
-          print(log.length);
           return Scrollbar(
             // ToDo: при нажатии показывать всю инфу в попапе
             child: ListView.builder(
@@ -52,8 +45,8 @@ class LogScreen extends StatelessWidget {
                         flex: 10,
                         child: Align(
                           child: _LogSourceIcon(
-                            source: item.source.name,
-                            direction: item.direction.name,
+                            source: item.source,
+                            direction: item.direction,
                           ),
                         ),
                       ),
@@ -103,29 +96,30 @@ class _LogSourceIcon extends StatelessWidget {
     required this.direction,
   });
 
-  final String source;
-  final String? direction;
+  final LogSource source;
+  final LogSourceDirection? direction;
 
   @override
   Widget build(BuildContext context) {
     switch (source) {
-      case 'Bluetooth':
+      case LogSource.bluetooth:
         switch (direction) {
-          case 'In':
+          case LogSourceDirection.input:
             return Icon(MdiIcons.bluetoothTransfer);
-          case 'Out':
+          case LogSourceDirection.output:
             return Icon(MdiIcons.bluetoothTransfer);
-          case 'Undefined':
+          case LogSourceDirection.undefined:
             return Icon(MdiIcons.bluetooth);
-          default:
+          case null:
             return Icon(MdiIcons.bluetooth);
         }
-      case 'Other':
+      case LogSource.other:
         return Icon(MdiIcons.cloudPrintOutline);
-      case 'Unknown':
+      case LogSource.unknown:
         return const Icon(Icons.help_outline);
-      default:
-        return const Icon(Icons.help_outline);
+      case LogSource.app:
+        // ToDo: change icon
+        return const Icon(Icons.settings_applications);
     }
   }
 }
