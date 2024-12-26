@@ -7,6 +7,7 @@ part 'module_settings.g.dart';
 @freezed
 class ModSettingsModelType with _$ModSettingsModelType {
   const factory ModSettingsModelType({
+    @JsonKey(name: 'Type')
     required String type,
   }) = _ModSettingsModelType;
 
@@ -17,10 +18,15 @@ class ModSettingsModelType with _$ModSettingsModelType {
 @freezed
 class ModSettingsModelLed with _$ModSettingsModelLed {
   const factory ModSettingsModelLed({
-    required bool read,
+    @JsonKey(name: 'Read')
+    bool? read,
+    @JsonKey(name: 'Type')
     required String type,
+    @JsonKey(name: 'Bluetooth')
     required Bluetooth bluetooth,
+    @JsonKey(name: 'WiFi')
     required WiFi wiFi,
+    @JsonKey(name: 'LedPanel')
     required LedPanel ledPanel,
   }) = _ModSettingsModelLed;
 
@@ -31,13 +37,21 @@ class ModSettingsModelLed with _$ModSettingsModelLed {
 @freezed
 class ModSettingsModel with _$ModSettingsModel {
   const factory ModSettingsModel({
-    required bool read,
+    @JsonKey(name: 'Read')
+    bool? read,
+    @JsonKey(name: 'Type')
     required String type,
+    @JsonKey(name: 'Bluetooth')
     required Bluetooth bluetooth,
+    @JsonKey(name: 'LoRa')
     required LoRa loRa,
+    @JsonKey(name: 'WiFi')
     required WiFi wiFi,
+    @JsonKey(name: 'TFT')
     required Tft tft,
+    @JsonKey(name: 'Buzzer')
     required Buzzer buzzer,
+    @JsonKey(name: 'VCC')
     required Vcc vcc,
   }) = _ModSettingsModel;
 

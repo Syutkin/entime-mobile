@@ -20,6 +20,7 @@ ModSettingsModelType _$ModSettingsModelTypeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ModSettingsModelType {
+  @JsonKey(name: 'Type')
   String get type => throw _privateConstructorUsedError;
 
   /// Serializes this ModSettingsModelType to a JSON map.
@@ -38,7 +39,7 @@ abstract class $ModSettingsModelTypeCopyWith<$Res> {
           $Res Function(ModSettingsModelType) then) =
       _$ModSettingsModelTypeCopyWithImpl<$Res, ModSettingsModelType>;
   @useResult
-  $Res call({String type});
+  $Res call({@JsonKey(name: 'Type') String type});
 }
 
 /// @nodoc
@@ -76,7 +77,7 @@ abstract class _$$ModSettingsModelTypeImplCopyWith<$Res>
       __$$ModSettingsModelTypeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String type});
+  $Res call({@JsonKey(name: 'Type') String type});
 }
 
 /// @nodoc
@@ -106,12 +107,13 @@ class __$$ModSettingsModelTypeImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ModSettingsModelTypeImpl implements _ModSettingsModelType {
-  const _$ModSettingsModelTypeImpl({required this.type});
+  const _$ModSettingsModelTypeImpl({@JsonKey(name: 'Type') required this.type});
 
   factory _$ModSettingsModelTypeImpl.fromJson(Map<String, dynamic> json) =>
       _$$ModSettingsModelTypeImplFromJson(json);
 
   @override
+  @JsonKey(name: 'Type')
   final String type;
 
   @override
@@ -150,13 +152,15 @@ class _$ModSettingsModelTypeImpl implements _ModSettingsModelType {
 }
 
 abstract class _ModSettingsModelType implements ModSettingsModelType {
-  const factory _ModSettingsModelType({required final String type}) =
+  const factory _ModSettingsModelType(
+          {@JsonKey(name: 'Type') required final String type}) =
       _$ModSettingsModelTypeImpl;
 
   factory _ModSettingsModelType.fromJson(Map<String, dynamic> json) =
       _$ModSettingsModelTypeImpl.fromJson;
 
   @override
+  @JsonKey(name: 'Type')
   String get type;
 
   /// Create a copy of ModSettingsModelType
@@ -173,10 +177,15 @@ ModSettingsModelLed _$ModSettingsModelLedFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ModSettingsModelLed {
-  bool get read => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Read')
+  bool? get read => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Type')
   String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Bluetooth')
   Bluetooth get bluetooth => throw _privateConstructorUsedError;
+  @JsonKey(name: 'WiFi')
   WiFi get wiFi => throw _privateConstructorUsedError;
+  @JsonKey(name: 'LedPanel')
   LedPanel get ledPanel => throw _privateConstructorUsedError;
 
   /// Serializes this ModSettingsModelLed to a JSON map.
@@ -196,11 +205,11 @@ abstract class $ModSettingsModelLedCopyWith<$Res> {
       _$ModSettingsModelLedCopyWithImpl<$Res, ModSettingsModelLed>;
   @useResult
   $Res call(
-      {bool read,
-      String type,
-      Bluetooth bluetooth,
-      WiFi wiFi,
-      LedPanel ledPanel});
+      {@JsonKey(name: 'Read') bool? read,
+      @JsonKey(name: 'Type') String type,
+      @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
+      @JsonKey(name: 'WiFi') WiFi wiFi,
+      @JsonKey(name: 'LedPanel') LedPanel ledPanel});
 
   $BluetoothCopyWith<$Res> get bluetooth;
   $WiFiCopyWith<$Res> get wiFi;
@@ -222,17 +231,17 @@ class _$ModSettingsModelLedCopyWithImpl<$Res, $Val extends ModSettingsModelLed>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? read = null,
+    Object? read = freezed,
     Object? type = null,
     Object? bluetooth = null,
     Object? wiFi = null,
     Object? ledPanel = null,
   }) {
     return _then(_value.copyWith(
-      read: null == read
+      read: freezed == read
           ? _value.read
           : read // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -292,11 +301,11 @@ abstract class _$$ModSettingsModelLedImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool read,
-      String type,
-      Bluetooth bluetooth,
-      WiFi wiFi,
-      LedPanel ledPanel});
+      {@JsonKey(name: 'Read') bool? read,
+      @JsonKey(name: 'Type') String type,
+      @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
+      @JsonKey(name: 'WiFi') WiFi wiFi,
+      @JsonKey(name: 'LedPanel') LedPanel ledPanel});
 
   @override
   $BluetoothCopyWith<$Res> get bluetooth;
@@ -319,17 +328,17 @@ class __$$ModSettingsModelLedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? read = null,
+    Object? read = freezed,
     Object? type = null,
     Object? bluetooth = null,
     Object? wiFi = null,
     Object? ledPanel = null,
   }) {
     return _then(_$ModSettingsModelLedImpl(
-      read: null == read
+      read: freezed == read
           ? _value.read
           : read // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -354,24 +363,29 @@ class __$$ModSettingsModelLedImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ModSettingsModelLedImpl implements _ModSettingsModelLed {
   const _$ModSettingsModelLedImpl(
-      {required this.read,
-      required this.type,
-      required this.bluetooth,
-      required this.wiFi,
-      required this.ledPanel});
+      {@JsonKey(name: 'Read') this.read,
+      @JsonKey(name: 'Type') required this.type,
+      @JsonKey(name: 'Bluetooth') required this.bluetooth,
+      @JsonKey(name: 'WiFi') required this.wiFi,
+      @JsonKey(name: 'LedPanel') required this.ledPanel});
 
   factory _$ModSettingsModelLedImpl.fromJson(Map<String, dynamic> json) =>
       _$$ModSettingsModelLedImplFromJson(json);
 
   @override
-  final bool read;
+  @JsonKey(name: 'Read')
+  final bool? read;
   @override
+  @JsonKey(name: 'Type')
   final String type;
   @override
+  @JsonKey(name: 'Bluetooth')
   final Bluetooth bluetooth;
   @override
+  @JsonKey(name: 'WiFi')
   final WiFi wiFi;
   @override
+  @JsonKey(name: 'LedPanel')
   final LedPanel ledPanel;
 
   @override
@@ -417,24 +431,30 @@ class _$ModSettingsModelLedImpl implements _ModSettingsModelLed {
 
 abstract class _ModSettingsModelLed implements ModSettingsModelLed {
   const factory _ModSettingsModelLed(
-      {required final bool read,
-      required final String type,
-      required final Bluetooth bluetooth,
-      required final WiFi wiFi,
-      required final LedPanel ledPanel}) = _$ModSettingsModelLedImpl;
+          {@JsonKey(name: 'Read') final bool? read,
+          @JsonKey(name: 'Type') required final String type,
+          @JsonKey(name: 'Bluetooth') required final Bluetooth bluetooth,
+          @JsonKey(name: 'WiFi') required final WiFi wiFi,
+          @JsonKey(name: 'LedPanel') required final LedPanel ledPanel}) =
+      _$ModSettingsModelLedImpl;
 
   factory _ModSettingsModelLed.fromJson(Map<String, dynamic> json) =
       _$ModSettingsModelLedImpl.fromJson;
 
   @override
-  bool get read;
+  @JsonKey(name: 'Read')
+  bool? get read;
   @override
+  @JsonKey(name: 'Type')
   String get type;
   @override
+  @JsonKey(name: 'Bluetooth')
   Bluetooth get bluetooth;
   @override
+  @JsonKey(name: 'WiFi')
   WiFi get wiFi;
   @override
+  @JsonKey(name: 'LedPanel')
   LedPanel get ledPanel;
 
   /// Create a copy of ModSettingsModelLed
@@ -451,13 +471,21 @@ ModSettingsModel _$ModSettingsModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ModSettingsModel {
-  bool get read => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Read')
+  bool? get read => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Type')
   String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Bluetooth')
   Bluetooth get bluetooth => throw _privateConstructorUsedError;
+  @JsonKey(name: 'LoRa')
   LoRa get loRa => throw _privateConstructorUsedError;
+  @JsonKey(name: 'WiFi')
   WiFi get wiFi => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TFT')
   Tft get tft => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Buzzer')
   Buzzer get buzzer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'VCC')
   Vcc get vcc => throw _privateConstructorUsedError;
 
   /// Serializes this ModSettingsModel to a JSON map.
@@ -477,14 +505,14 @@ abstract class $ModSettingsModelCopyWith<$Res> {
       _$ModSettingsModelCopyWithImpl<$Res, ModSettingsModel>;
   @useResult
   $Res call(
-      {bool read,
-      String type,
-      Bluetooth bluetooth,
-      LoRa loRa,
-      WiFi wiFi,
-      Tft tft,
-      Buzzer buzzer,
-      Vcc vcc});
+      {@JsonKey(name: 'Read') bool? read,
+      @JsonKey(name: 'Type') String type,
+      @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
+      @JsonKey(name: 'LoRa') LoRa loRa,
+      @JsonKey(name: 'WiFi') WiFi wiFi,
+      @JsonKey(name: 'TFT') Tft tft,
+      @JsonKey(name: 'Buzzer') Buzzer buzzer,
+      @JsonKey(name: 'VCC') Vcc vcc});
 
   $BluetoothCopyWith<$Res> get bluetooth;
   $LoRaCopyWith<$Res> get loRa;
@@ -509,7 +537,7 @@ class _$ModSettingsModelCopyWithImpl<$Res, $Val extends ModSettingsModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? read = null,
+    Object? read = freezed,
     Object? type = null,
     Object? bluetooth = null,
     Object? loRa = null,
@@ -519,10 +547,10 @@ class _$ModSettingsModelCopyWithImpl<$Res, $Val extends ModSettingsModel>
     Object? vcc = null,
   }) {
     return _then(_value.copyWith(
-      read: null == read
+      read: freezed == read
           ? _value.read
           : read // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -624,14 +652,14 @@ abstract class _$$ModSettingsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool read,
-      String type,
-      Bluetooth bluetooth,
-      LoRa loRa,
-      WiFi wiFi,
-      Tft tft,
-      Buzzer buzzer,
-      Vcc vcc});
+      {@JsonKey(name: 'Read') bool? read,
+      @JsonKey(name: 'Type') String type,
+      @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
+      @JsonKey(name: 'LoRa') LoRa loRa,
+      @JsonKey(name: 'WiFi') WiFi wiFi,
+      @JsonKey(name: 'TFT') Tft tft,
+      @JsonKey(name: 'Buzzer') Buzzer buzzer,
+      @JsonKey(name: 'VCC') Vcc vcc});
 
   @override
   $BluetoothCopyWith<$Res> get bluetooth;
@@ -660,7 +688,7 @@ class __$$ModSettingsModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? read = null,
+    Object? read = freezed,
     Object? type = null,
     Object? bluetooth = null,
     Object? loRa = null,
@@ -670,10 +698,10 @@ class __$$ModSettingsModelImplCopyWithImpl<$Res>
     Object? vcc = null,
   }) {
     return _then(_$ModSettingsModelImpl(
-      read: null == read
+      read: freezed == read
           ? _value.read
           : read // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -710,33 +738,41 @@ class __$$ModSettingsModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ModSettingsModelImpl implements _ModSettingsModel {
   const _$ModSettingsModelImpl(
-      {required this.read,
-      required this.type,
-      required this.bluetooth,
-      required this.loRa,
-      required this.wiFi,
-      required this.tft,
-      required this.buzzer,
-      required this.vcc});
+      {@JsonKey(name: 'Read') this.read,
+      @JsonKey(name: 'Type') required this.type,
+      @JsonKey(name: 'Bluetooth') required this.bluetooth,
+      @JsonKey(name: 'LoRa') required this.loRa,
+      @JsonKey(name: 'WiFi') required this.wiFi,
+      @JsonKey(name: 'TFT') required this.tft,
+      @JsonKey(name: 'Buzzer') required this.buzzer,
+      @JsonKey(name: 'VCC') required this.vcc});
 
   factory _$ModSettingsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ModSettingsModelImplFromJson(json);
 
   @override
-  final bool read;
+  @JsonKey(name: 'Read')
+  final bool? read;
   @override
+  @JsonKey(name: 'Type')
   final String type;
   @override
+  @JsonKey(name: 'Bluetooth')
   final Bluetooth bluetooth;
   @override
+  @JsonKey(name: 'LoRa')
   final LoRa loRa;
   @override
+  @JsonKey(name: 'WiFi')
   final WiFi wiFi;
   @override
+  @JsonKey(name: 'TFT')
   final Tft tft;
   @override
+  @JsonKey(name: 'Buzzer')
   final Buzzer buzzer;
   @override
+  @JsonKey(name: 'VCC')
   final Vcc vcc;
 
   @override
@@ -784,33 +820,41 @@ class _$ModSettingsModelImpl implements _ModSettingsModel {
 
 abstract class _ModSettingsModel implements ModSettingsModel {
   const factory _ModSettingsModel(
-      {required final bool read,
-      required final String type,
-      required final Bluetooth bluetooth,
-      required final LoRa loRa,
-      required final WiFi wiFi,
-      required final Tft tft,
-      required final Buzzer buzzer,
-      required final Vcc vcc}) = _$ModSettingsModelImpl;
+      {@JsonKey(name: 'Read') final bool? read,
+      @JsonKey(name: 'Type') required final String type,
+      @JsonKey(name: 'Bluetooth') required final Bluetooth bluetooth,
+      @JsonKey(name: 'LoRa') required final LoRa loRa,
+      @JsonKey(name: 'WiFi') required final WiFi wiFi,
+      @JsonKey(name: 'TFT') required final Tft tft,
+      @JsonKey(name: 'Buzzer') required final Buzzer buzzer,
+      @JsonKey(name: 'VCC') required final Vcc vcc}) = _$ModSettingsModelImpl;
 
   factory _ModSettingsModel.fromJson(Map<String, dynamic> json) =
       _$ModSettingsModelImpl.fromJson;
 
   @override
-  bool get read;
+  @JsonKey(name: 'Read')
+  bool? get read;
   @override
+  @JsonKey(name: 'Type')
   String get type;
   @override
+  @JsonKey(name: 'Bluetooth')
   Bluetooth get bluetooth;
   @override
+  @JsonKey(name: 'LoRa')
   LoRa get loRa;
   @override
+  @JsonKey(name: 'WiFi')
   WiFi get wiFi;
   @override
+  @JsonKey(name: 'TFT')
   Tft get tft;
   @override
+  @JsonKey(name: 'Buzzer')
   Buzzer get buzzer;
   @override
+  @JsonKey(name: 'VCC')
   Vcc get vcc;
 
   /// Create a copy of ModSettingsModel

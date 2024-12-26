@@ -41,18 +41,20 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
   }
 
   @override
-  String get write => ModSettingsModelLed(
-        read: false,
-        type: type,
-        // Bluetooth
-        bluetooth: Bluetooth(
-          active: bluetooth,
-          name: bluetoothName,
-          number: bluetoothNumber,
-        ),
-        // WiFi
-        wiFi: WiFi(active: wifi, ssid: ssid, passwd: password),
-        //LedPanel
-        ledPanel: LedPanel(brightness: brightness),
-      ).toString();
+  String get write => json.encode(
+        ModSettingsModelLed(
+          read: false,
+          type: type,
+          // Bluetooth
+          bluetooth: Bluetooth(
+            active: bluetooth,
+            name: bluetoothName,
+            number: bluetoothNumber,
+          ),
+          // WiFi
+          wiFi: WiFi(active: wifi, ssid: ssid, passwd: password),
+          //LedPanel
+          ledPanel: LedPanel(brightness: brightness),
+        ).toJson(),
+      );
 }

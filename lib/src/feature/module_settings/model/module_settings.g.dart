@@ -9,59 +9,59 @@ part of 'module_settings.dart';
 _$ModSettingsModelTypeImpl _$$ModSettingsModelTypeImplFromJson(
         Map<String, dynamic> json) =>
     _$ModSettingsModelTypeImpl(
-      type: json['type'] as String,
+      type: json['Type'] as String,
     );
 
 Map<String, dynamic> _$$ModSettingsModelTypeImplToJson(
         _$ModSettingsModelTypeImpl instance) =>
     <String, dynamic>{
-      'type': instance.type,
+      'Type': instance.type,
     };
 
 _$ModSettingsModelLedImpl _$$ModSettingsModelLedImplFromJson(
         Map<String, dynamic> json) =>
     _$ModSettingsModelLedImpl(
-      read: json['read'] as bool,
-      type: json['type'] as String,
-      bluetooth: Bluetooth.fromJson(json['bluetooth'] as Map<String, dynamic>),
-      wiFi: WiFi.fromJson(json['wiFi'] as Map<String, dynamic>),
-      ledPanel: LedPanel.fromJson(json['ledPanel'] as Map<String, dynamic>),
+      read: json['Read'] as bool?,
+      type: json['Type'] as String,
+      bluetooth: Bluetooth.fromJson(json['Bluetooth'] as Map<String, dynamic>),
+      wiFi: WiFi.fromJson(json['WiFi'] as Map<String, dynamic>),
+      ledPanel: LedPanel.fromJson(json['LedPanel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ModSettingsModelLedImplToJson(
         _$ModSettingsModelLedImpl instance) =>
     <String, dynamic>{
-      'read': instance.read,
-      'type': instance.type,
-      'bluetooth': instance.bluetooth,
-      'wiFi': instance.wiFi,
-      'ledPanel': instance.ledPanel,
+      'Read': instance.read,
+      'Type': instance.type,
+      'Bluetooth': instance.bluetooth,
+      'WiFi': instance.wiFi,
+      'LedPanel': instance.ledPanel,
     };
 
 _$ModSettingsModelImpl _$$ModSettingsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ModSettingsModelImpl(
-      read: json['read'] as bool,
-      type: json['type'] as String,
-      bluetooth: Bluetooth.fromJson(json['bluetooth'] as Map<String, dynamic>),
-      loRa: LoRa.fromJson(json['loRa'] as Map<String, dynamic>),
-      wiFi: WiFi.fromJson(json['wiFi'] as Map<String, dynamic>),
-      tft: Tft.fromJson(json['tft'] as Map<String, dynamic>),
-      buzzer: Buzzer.fromJson(json['buzzer'] as Map<String, dynamic>),
-      vcc: Vcc.fromJson(json['vcc'] as Map<String, dynamic>),
+      read: json['Read'] as bool?,
+      type: json['Type'] as String,
+      bluetooth: Bluetooth.fromJson(json['Bluetooth'] as Map<String, dynamic>),
+      loRa: LoRa.fromJson(json['LoRa'] as Map<String, dynamic>),
+      wiFi: WiFi.fromJson(json['WiFi'] as Map<String, dynamic>),
+      tft: Tft.fromJson(json['TFT'] as Map<String, dynamic>),
+      buzzer: Buzzer.fromJson(json['Buzzer'] as Map<String, dynamic>),
+      vcc: Vcc.fromJson(json['VCC'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ModSettingsModelImplToJson(
         _$ModSettingsModelImpl instance) =>
     <String, dynamic>{
-      'read': instance.read,
-      'type': instance.type,
-      'bluetooth': instance.bluetooth,
-      'loRa': instance.loRa,
-      'wiFi': instance.wiFi,
-      'tft': instance.tft,
-      'buzzer': instance.buzzer,
-      'vcc': instance.vcc,
+      'Read': instance.read,
+      'Type': instance.type,
+      'Bluetooth': instance.bluetooth,
+      'LoRa': instance.loRa,
+      'WiFi': instance.wiFi,
+      'TFT': instance.tft,
+      'Buzzer': instance.buzzer,
+      'VCC': instance.vcc,
     };
 
 _$BluetoothImpl _$$BluetoothImplFromJson(Map<String, dynamic> json) =>
