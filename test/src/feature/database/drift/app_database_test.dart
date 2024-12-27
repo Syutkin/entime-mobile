@@ -291,6 +291,15 @@ void main() {
         expect(trail.distance, distance);
         expect(trail.elevation, elevation);
       });
+
+      test('Get trail', () async {
+        const trailName = 'trailName';
+
+        final id = await db.addTrail(name: trailName);
+        final trail = await db.getTrail(id);
+        expect(trail, isNotNull);
+        expect(trail?.name, trailName);
+      });
     });
 
     group('Tracks tests', () {
@@ -440,6 +449,177 @@ void main() {
         const unexistedId = 555;
         final id = await db.deleteTrack(unexistedId);
         expect(id, 0);
+      });
+    });
+
+    group('Riders tests', () {
+      test('Get riders', () async {
+        final riders = await db.getRiders.get();
+        expect(riders.length, 79);
+      });
+
+      test('Add and get rider', () async {
+        const name = 'name';
+        const nickname = 'nickname';
+        const birthday = '10-10-2000';
+        const city = 'city';
+        const comment = 'comment';
+        const email = 'email@mail.mail';
+        const phone = '+79990009999';
+        const team = 'team';
+
+        final id = await db.addRider(
+          name: name,
+          nickname: nickname,
+          birthday: birthday,
+          city: city,
+          comment: comment,
+          email: email,
+          phone: phone,
+          team: team,
+        );
+
+        final riders = await db.getRiders.get();
+        expect(id, 80);
+        expect(riders.length, 80);
+        expect(riders.first.name, name);
+        expect(riders.first.nickname, nickname);
+        expect(riders.first.birthday, birthday);
+        expect(riders.first.city, city);
+        expect(riders.first.comment, comment);
+        expect(riders.first.email, email);
+        expect(riders.first.phone, phone);
+        expect(riders.first.team, team);
+      });
+
+      test('Update rider', () async {
+        const id = 50;
+        const name = 'name';
+        const nickname = 'nickname';
+        const birthday = '10-10-2000';
+        const city = 'city';
+        const comment = 'comment';
+        const email = 'email@mail.mail';
+        const phone = '+79990009999';
+        const team = 'team';
+
+        final count = await db.updateRider(
+          id: id,
+          name: name,
+          nickname: nickname,
+          birthday: birthday,
+          city: city,
+          comment: comment,
+          email: email,
+          phone: phone,
+          team: team,
+        );
+
+        final riders = await db.getRiders.get();
+        // Гонщик будет первым из-за сортировки по именам
+        expect(count, 1);
+        expect(riders.first.id, id);
+        expect(riders.first.name, name);
+        expect(riders.first.nickname, nickname);
+        expect(riders.first.birthday, birthday);
+        expect(riders.first.city, city);
+        expect(riders.first.comment, comment);
+        expect(riders.first.email, email);
+        expect(riders.first.phone, phone);
+        expect(riders.first.team, team);
+      });
+
+      test('Trying to update non existed rider', () async {
+        const id = 99;
+        const name = 'name';
+
+        final count = await db.updateRider(
+          id: id,
+          name: name,
+        );
+
+        final riders = await db.getRiders.get();
+        // Гонщик будет первым из-за сортировки по именам
+        expect(count, 0);
+        expect(riders.length, 79);
+      });
+
+      test('"Delete" rider', () async {
+        const id = 5;
+
+        final count = await db.updateRider(
+          id: id,
+          isDeleted: true,
+        );
+
+        final riders = await db.getRiders.get();
+        expect(count, 1);
+        expect(riders.length, 78);
+      });
+    });
+
+    group('Participants tests', () {
+      test('Update participant', () async {
+        const raceId = 2;
+        const riderId = 5;
+        const stageId = 1;
+        const number = 55;
+        const newNumber = 100;
+        const statusId = 1;
+        const category = 'category';
+        const rfid = 'rfid';
+        // const isDeleted = false;
+
+        final existed = await db
+            .getNumberAtStarts(stageId: stageId, number: number)
+            .getSingle();
+
+        final id = existed.participantId;
+        expect(id, 21);
+        expect(existed.raceId, 1);
+        expect(existed.riderId, 21);
+
+        final count = await db.updateParticipant(
+          id: id,
+          raceId: raceId,
+          riderId: riderId,
+          number: newNumber,
+          statusId: statusId,
+          category: category,
+          rfid: rfid,
+        );
+
+        expect(count, 1);
+
+        final updated = await db
+            .getNumberAtStarts(stageId: stageId, number: newNumber)
+            .getSingle();
+
+        expect(updated.participantId, id);
+        expect(updated.raceId, raceId);
+        expect(updated.riderId, riderId);
+        expect(updated.category, category);
+        expect(updated.rfid, rfid);
+      });
+    });
+
+    group('Categories tests', () {
+      test('Get categories', () async {
+        const id = 1;
+        const raceId = 1;
+        const category = 'category';
+
+        var categories = await db.getCategories(raceId);
+        expect(categories.length, 5);
+
+        await db.updateParticipant(
+          id: id,
+          category: category,
+        );
+        categories = await db.getCategories(raceId);
+
+        expect(categories.length, 6);
+        expect(categories.contains(category), true);
       });
     });
 

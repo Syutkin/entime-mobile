@@ -356,7 +356,7 @@ class AppDatabase extends _$AppDatabase {
         .getSingleOrNull();
   }
 
-  /// Список "неудалённых" гонщиков
+  /// Список "неудалённых" гонщиков, отсортированных по именам
   Selectable<Rider> get getRiders {
     return _getRiders(isDeleted: false);
   }
@@ -446,21 +446,21 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Добавляет участника соревнований
-  Future<int> addParticipant({
-    required int raceId,
-    required int riderId,
-    required int number,
-    String? category,
-    String? rfid,
-  }) {
-    return _addParticipant(
-      raceId: raceId,
-      riderId: riderId,
-      number: number,
-      category: category,
-      rfid: rfid,
-    );
-  }
+  // Future<int> _addParticipant({
+  //   required int raceId,
+  //   required int riderId,
+  //   required int number,
+  //   String? category,
+  //   String? rfid,
+  // }) {
+  //   return _addParticipant(
+  //     raceId: raceId,
+  //     riderId: riderId,
+  //     number: number,
+  //     category: category,
+  //     rfid: rfid,
+  //   );
+  // }
 
   /// Обновляет участника соревнований
   Future<int> updateParticipant({
@@ -1123,7 +1123,7 @@ class AppDatabase extends _$AppDatabase {
           team: item.team,
           birthday: item.age,
         );
-        final participantId = await addParticipant(
+        final participantId = await _addParticipant(
           raceId: raceId,
           riderId: riderId,
           number: item.number,
@@ -1138,33 +1138,6 @@ class AppDatabase extends _$AppDatabase {
         }
       }
     });
-    // await transaction(() async {
-    //   for (final stageName in race.stageNames) {
-    //     stages[stageName] = await addStage(raceId: raceId, name: stageName);
-    //   }
-    //   for (final item in race.startItems) {
-    //     final riderId = await addRider(
-    //       name: item.name,
-    //       nickname: item.nickname,
-    //       city: item.city,
-    //       team: item.team,
-    //       birthday: item.age,
-    //     );
-    //     final participantId = await addParticipant(
-    //       raceId: raceId,
-    //       riderId: riderId,
-    //       number: item.number,
-    //       category: item.category,
-    //     );
-    //     for (final stageName in stages.keys) {
-    //       await _addStartInfo(
-    //         stageId: stages[stageName]!,
-    //         participantId: participantId,
-    //         startTime: item.startTimes![stageName]!,
-    //       );
-    //     }
-    //   }
-    // });
     return raceId;
   }
 
