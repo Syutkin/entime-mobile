@@ -325,5 +325,52 @@ void main() {
       expect($(automaticCorrection.toString()), findsOneWidget);
       expect($(manualCorrection.toString()), findsOneWidget);
     });
+
+    patrolWidgetTest('Take into account ntpOffset and do not change color',
+            (PatrolTester $) async {
+          settings = settings.copyWith(showColorStartDifference: true);
+          when(() => settingsBloc.state)
+              .thenReturn(SettingsState(settings: settings));
+          final now = DateTime.now();
+
+          automaticStartTime = DateFormat(longTimeFormat).format(
+            now.add(Duration(milliseconds: settings.startDifferenceThreshold + 10)),
+          );
+
+          final item = ParticipantAtStart(
+            row: row,
+            riderId: 1,
+            raceId: 1,
+            number: number,
+            participantStatusId: ParticipantStatus.active.index,
+            name: name,
+            startId: 1,
+            stageId: 1,
+            participantId: 1,
+            startTime: startTime,
+            timestamp: now,
+            automaticStartTime: automaticStartTime,
+            automaticCorrection: automaticCorrection,
+            manualStartTime: manualStartTime,
+            manualCorrection: manualCorrection,
+            statusId: ParticipantStatus.active.index,
+            ntpOffset: settings.startDifferenceThreshold,
+          );
+          await $.pumpWidgetAndSettle(
+            testWithLocale(
+              StartItemTile(
+                item: item,
+              ),
+            ),
+          );
+
+          final color = ($.tester.firstWidget(find.byType(Card)) as Card).color;
+
+          expect(color, null);
+          expect($(startTime), findsOneWidget);
+          expect($(automaticCorrection.toString()), findsOneWidget);
+          expect($(manualCorrection.toString()), findsOneWidget);
+        });
+
   });
 }

@@ -189,5 +189,34 @@ void main() {
       expect($(difference), findsOneWidget);
       expect($(Flexible), findsNWidgets(4));
     });
+
+    patrolWidgetTest('Take into account ntpOffset when show difference',
+        (PatrolTester $) async {
+      settings = settings.copyWith(
+        showFinishDifference: true,
+        showColorFinishDifference: true,
+        finishDifferenceThreshold: 1,
+      );
+      when(() => settingsBloc.state)
+          .thenReturn(SettingsState(settings: settings));
+
+      const offset = -300;
+      final curDifference = int.parse(difference) - offset;
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: offset,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: true,
+        number: number,
+      );
+
+      await $.pumpWidgetAndSettle(testWidget(item));
+
+      expect($(curDifference.toString()), findsOneWidget);
+    });
   });
 }
