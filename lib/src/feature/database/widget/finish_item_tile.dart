@@ -74,7 +74,9 @@ class FinishItemTile extends StatelessWidget {
             return BlocBuilder<SettingsBloc, SettingsState>(
               builder: (context, state) {
                 final difference = item.finishTime.toDateTime()?.difference(
-                          item.timestamp,
+                          item.timestamp
+                              // При подсчёте разницы учитываем записанный NTP офсет
+                              .add(Duration(milliseconds: item.ntpOffset)),
                         ) ??
                     Duration.zero;
                 final showDifference = state.settings.showFinishDifference;

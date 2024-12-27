@@ -41,7 +41,9 @@ class StartItemTile extends StatelessWidget {
 
         if (item.timestamp != null) {
           difference = item.automaticStartTime.toDateTime()?.difference(
-                    item.timestamp!,
+                    // При подсчёте разницы учитываем записанный NTP офсет
+                    item.timestamp!
+                        .add(Duration(milliseconds: item.ntpOffset ?? 0)),
                   ) ??
               Duration.zero;
           // ToDo: показывать разницу в числах?
