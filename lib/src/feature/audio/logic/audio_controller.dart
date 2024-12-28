@@ -12,7 +12,7 @@ abstract class IAudioController {
 
   Future<void> playCountdown({required String time, required int stageId});
 
-  Future<void> callParticipant({required String time, required int stageId});
+  Future<String> callParticipant({required String time, required int stageId});
 }
 
 class AudioController implements IAudioController {
@@ -58,7 +58,7 @@ class AudioController implements IAudioController {
   }
 
   @override
-  Future<void> callParticipant({
+  Future<String> callParticipant({
     required String time,
     required int stageId,
   }) async {
@@ -152,5 +152,6 @@ class AudioController implements IAudioController {
       }
     }
     await _audioService.speak(newVoiceText);
+    return newVoiceText;
   }
 }

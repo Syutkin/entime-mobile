@@ -10,26 +10,26 @@ void scrollToEnd(ScrollController scrollController) {
 }
 
 /// Position of screen tap
-RelativeRect? getButtonMenuPosition(BuildContext buildContext) {
-  final bar = buildContext.findRenderObject() as RenderBox?;
-  final overlay =
-  Overlay.of(buildContext).context.findRenderObject() as RenderBox?;
-  if (bar != null && overlay != null) {
-    final position = RelativeRect.fromRect(
-      Rect.fromPoints(
-        bar.localToGlobal(
-          bar.size.bottomRight(Offset.zero),
-          ancestor: overlay,
-        ),
-        bar.localToGlobal(
-          bar.size.bottomRight(Offset.zero),
-          ancestor: overlay,
-        ),
-      ),
-      Offset.zero & overlay.size,
-    );
-    return position;
-  } else {
-    return null;
-  }
-}
+// RelativeRect? getButtonMenuPosition(BuildContext buildContext) {
+//   final bar = buildContext.findRenderObject() as RenderBox?;
+//   final overlay =
+//   Overlay.of(buildContext).context.findRenderObject() as RenderBox?;
+//   if (bar != null && overlay != null) {
+//     final position = RelativeRect.fromRect(
+//       Rect.fromPoints(
+//         bar.localToGlobal(
+//           bar.size.bottomRight(Offset.zero),
+//           ancestor: overlay,
+//         ),
+//         bar.localToGlobal(
+//           bar.size.bottomRight(Offset.zero),
+//           ancestor: overlay,
+//         ),
+//       ),
+//       Offset.zero & overlay.size,
+//     );
+//     return position;
+//   } else {
+//     return null;
+//   }
+// }

@@ -46,7 +46,7 @@ jobs:
       - name: Clean coverage
         run: | 
           sudo apt-get -y install lcov
-          lcov -r coverage/lcov.info -o coverage/lcov.info "lib/**.freezed.dart" "lib/**.g.dart" "lib/src/common/localization/**.dart" "test/**.mocks.dart"
+          lcov -r coverage/lcov.info -o coverage/lcov.info "lib/**.freezed.dart" "lib/**.g.dart" "lib/src/common/localization/*" --ignore-errors unused
         
       - name: Upload to Codecov
         uses: codecov/codecov-action@v4

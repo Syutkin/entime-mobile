@@ -138,7 +138,9 @@ void main() {
           stageId: any(named: 'stageId'),
         ),
       ).thenAnswer(
-        (_) => Future.value(),
+        (_) async {
+          return '';
+        },
       );
     });
 
