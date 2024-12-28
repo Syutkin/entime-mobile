@@ -328,10 +328,6 @@ class _FinishListPage extends State<FinishListPage> {
   ) {
     final number = item?.number;
     return <PopupMenuEntry<FinishPopupMenu>>[
-      PopupMenuItem(
-        value: FinishPopupMenu.details,
-        child: Text(Localization.current.I18nCore_details),
-      ),
       if (number != null)
         PopupMenuItem(
           value: FinishPopupMenu.clearNumber,
@@ -344,6 +340,11 @@ class _FinishListPage extends State<FinishListPage> {
       PopupMenuItem(
         value: FinishPopupMenu.hideAll,
         child: Text(Localization.current.I18nProtocol_hideAll),
+      ),
+      const PopupMenuDivider(),
+      PopupMenuItem(
+        value: FinishPopupMenu.details,
+        child: Text(Localization.current.I18nCore_details),
       ),
     ];
   }
