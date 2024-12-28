@@ -26,7 +26,8 @@ Future<int?> setStartFinishDifferencePopup(
               keyboardType: TextInputType.number,
               autofocus: true,
               decoration: InputDecoration(
-                labelText: Localization.current.I18nSettings_startFinishDifference,
+                labelText:
+                    Localization.current.I18nSettings_startFinishDifference,
               ),
               controller: delayController,
               autovalidateMode: AutovalidateMode.onUserInteraction,

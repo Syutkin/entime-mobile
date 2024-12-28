@@ -18,7 +18,7 @@ class NtpBloc extends Bloc<NtpEvent, NtpState> {
         super(const NtpState.initial(0)) {
     on<NtpEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
-        getNtpOffset: (_GetNtpOffset value) async {
+        getNtpOffset: (event) async {
           emit(NtpState.loading(_offset));
           try {
             _offset = await _ntpProvider.getNtpOffset(

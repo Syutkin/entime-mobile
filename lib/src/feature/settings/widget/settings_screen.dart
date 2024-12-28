@@ -408,7 +408,8 @@ class _SettingsList extends StatelessWidget {
               ),
               SettingsTile(
                 enabled: settingsState.settings.showColorStartDifference,
-                title: Text(Localization.current.I18nSettings_startFinishDifference),
+                title: Text(
+                    Localization.current.I18nSettings_startFinishDifference),
                 trailing: Text(
                   Localization.current.I18nSettings_milliseconds(
                     settingsState.settings.startDifferenceThreshold,
@@ -419,7 +420,8 @@ class _SettingsList extends StatelessWidget {
                   final value = await setStartFinishDifferencePopup(
                     context,
                     difference: settingsState.settings.startDifferenceThreshold,
-                    title: Localization.current.I18nSettings_startFinishDifference,
+                    title:
+                        Localization.current.I18nSettings_startFinishDifference,
                   );
                   if (value != null) {
                     settingsBloc.add(
@@ -577,7 +579,8 @@ class _SettingsList extends StatelessWidget {
               ),
               SettingsTile(
                 enabled: settingsState.settings.showColorFinishDifference,
-                title: Text(Localization.current.I18nSettings_startFinishDifference),
+                title: Text(
+                    Localization.current.I18nSettings_startFinishDifference),
                 trailing: Text(
                   Localization.current.I18nSettings_milliseconds(
                     settingsState.settings.finishDifferenceThreshold,
@@ -589,7 +592,8 @@ class _SettingsList extends StatelessWidget {
                     context,
                     difference:
                         settingsState.settings.finishDifferenceThreshold,
-                    title: Localization.current.I18nSettings_startFinishDifference,
+                    title:
+                        Localization.current.I18nSettings_startFinishDifference,
                   );
                   if (value != null) {
                     settingsBloc.add(

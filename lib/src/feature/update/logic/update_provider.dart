@@ -256,7 +256,8 @@ class UpdateProvider implements IUpdateProvider {
       if (currentVersion > previousVersion &&
           previousVersion !=
               Version.parse(_settingsProvider.getDefaults().previousVersion)) {
-        return ChangelogProvider().changelog(currentVersion.toString(), previousVersion.toString());
+        return ChangelogProvider()
+            .changelog(currentVersion.toString(), previousVersion.toString());
         // return ShowChangelog(
         //   show: true,
         //   markdown: markdown,

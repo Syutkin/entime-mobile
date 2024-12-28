@@ -189,10 +189,10 @@ class AppSettings with _$AppSettings {
     @Default(500) int substituteNumbersDelay,
 
     // показывать разницу между автоматическим временем старта с модуля и временем устройства
-    @Default(false)  bool showStartDifference,
+    @Default(false) bool showStartDifference,
 
     // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
-    @Default(false)  bool showColorStartDifference,
+    @Default(false) bool showColorStartDifference,
 
     // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
     // при превышении которого будет цветовая индикация

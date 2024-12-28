@@ -57,13 +57,19 @@ void main() {
     );
   });
 
+  tearDown(() async {
+    await db.close();
+  });
+
   group(
     'IAudioController tests',
     () {
       group('callParticipant tests', () {
+        setUp(() {
+          when(() => appSettings.voiceName).thenReturn(true);
+        });
         test("Competition didn't start yet", () async {
           time = '09:50:45';
-          when(() => appSettings.voiceName).thenReturn(true);
 
           final result = await ac.callParticipant(time: time, stageId: stageId);
           expect(
@@ -74,7 +80,6 @@ void main() {
 
         test('Call participant to prepare', () async {
           time = '09:58:45';
-          when(() => appSettings.voiceName).thenReturn(true);
 
           final result = await ac.callParticipant(time: time, stageId: stageId);
           expect(
@@ -85,7 +90,6 @@ void main() {
 
         test('Call first participant', () async {
           time = '09:59:45';
-          when(() => appSettings.voiceName).thenReturn(true);
 
           final result = await ac.callParticipant(time: time, stageId: stageId);
           expect(
@@ -96,7 +100,6 @@ void main() {
 
         test('Call second participant', () async {
           time = '10:00:45';
-          when(() => appSettings.voiceName).thenReturn(true);
 
           final result = await ac.callParticipant(time: time, stageId: stageId);
           expect(
@@ -108,7 +111,6 @@ void main() {
         test('Last participant at category', () async {
           const time1 = '10:08:45';
           const time2 = '10:09:45';
-          when(() => appSettings.voiceName).thenReturn(true);
 
           final result1 =
               await ac.callParticipant(time: time1, stageId: stageId);
@@ -126,7 +128,6 @@ void main() {
 
         test('Empty time between categories', () async {
           time = '10:09:45';
-          when(() => appSettings.voiceName).thenReturn(true);
 
           final result = await ac.callParticipant(time: time, stageId: stageId);
           expect(
@@ -138,7 +139,6 @@ void main() {
         test('Call last participant', () async {
           const time1 = '11:47:45';
           const time2 = '11:48:45';
-          when(() => appSettings.voiceName).thenReturn(true);
 
           final result1 =
               await ac.callParticipant(time: time1, stageId: stageId);
@@ -156,7 +156,6 @@ void main() {
 
         test('Do not call participant by name if first character is num',
             () async {
-
           // (1,"Алексахина Варвара","Zoenor",35,"ТимАк","Занаду"),
           await db.updateRider(
             id: 1,
@@ -170,7 +169,6 @@ void main() {
           );
 
           time = '09:58:45';
-          when(() => appSettings.voiceName).thenReturn(true);
 
           var result = await ac.callParticipant(time: time, stageId: stageId);
           expect(
@@ -178,11 +176,9 @@ void main() {
             'Готовится номер 2.',
           );
 
-
           time = '11:17:45';
-          when(() => appSettings.voiceName).thenReturn(true);
 
-           result = await ac.callParticipant(time: time, stageId: stageId);
+          result = await ac.callParticipant(time: time, stageId: stageId);
           expect(
             result,
             'На старт приглашается номер 52, Смелоч Антон. Следующий номер 63.',
@@ -194,6 +190,31 @@ void main() {
           expect(
             result,
             'На старт приглашается номер 63. Следующий номер 74, Якушев Дементий.',
+          );
+        });
+      });
+
+      group('callParticipant but with voiceName disabled', () {
+        setUp(() {
+          when(() => appSettings.voiceName).thenReturn(false);
+        });
+        test('Call participant to prepare but w/o name', () async {
+          time = '09:58:45';
+
+          final result = await ac.callParticipant(time: time, stageId: stageId);
+          expect(
+            result,
+            'Готовится номер 2.',
+          );
+        });
+
+        test('Call first participant but w/o name', () async {
+          time = '09:59:45';
+
+          final result = await ac.callParticipant(time: time, stageId: stageId);
+          expect(
+            result,
+            'На старт приглашается номер 2. Следующий номер 7.',
           );
         });
       });

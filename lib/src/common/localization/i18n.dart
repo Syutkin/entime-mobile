@@ -313,9 +313,9 @@ class I18nSettings {
       );
 
   static String get startFinishDifference => Intl.message(
-    'Порог цветовой индикации',
-    name: 'I18nSettings_startFinishDifference',
-  );
+        'Порог цветовой индикации',
+        name: 'I18nSettings_startFinishDifference',
+      );
 
   static String get incorrectStartFinishDifference => Intl.message(
         'Неверный порог',

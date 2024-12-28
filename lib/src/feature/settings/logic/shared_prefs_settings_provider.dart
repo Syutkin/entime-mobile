@@ -62,8 +62,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           prefs.getBool('substituteNumbers') ?? defaults.substituteNumbers,
       substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
           defaults.substituteNumbersDelay,
-      showStartDifference: prefs.getBool('showStartDifference') ??
-          defaults.showStartDifference,
+      showStartDifference:
+          prefs.getBool('showStartDifference') ?? defaults.showStartDifference,
       showColorStartDifference: prefs.getBool('showColorStartDifference') ??
           defaults.showColorStartDifference,
       startDifferenceThreshold: prefs.getInt('startDifferenceThreshold') ??
