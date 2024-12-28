@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 TextStyle dBmTextStyle(int rssi) {
-  /*  */ if (rssi >= -35) {
+  /*  */
+  if (rssi >= -35) {
     return TextStyle(color: Colors.greenAccent[700]);
   } else if (rssi >= -45) {
     return TextStyle(

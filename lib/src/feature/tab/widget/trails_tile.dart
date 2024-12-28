@@ -10,11 +10,9 @@ class TrailsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void routeToTrailsListPage() {
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (context) => TrailsListPage(),
-        ),
-      );
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute<void>(builder: (context) => TrailsListPage()));
     }
 
     return ListTile(

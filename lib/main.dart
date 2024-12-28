@@ -42,9 +42,7 @@ Future<void> main() async {
 
   final androidInfo = await DeviceInfoPlugin().androidInfo;
   final settings = await SharedPrefsSettingsProvider.load();
-  final appInfo = await AppInfoProvider.load(
-    deviceInfo: androidInfo,
-  );
+  final appInfo = await AppInfoProvider.load(deviceInfo: androidInfo);
   final updateProvider = await UpdateProvider.init(
     client: http.Client(),
     appInfoProvider: appInfo,
@@ -84,12 +82,9 @@ Future<void> main() async {
 
   if (kReleaseMode) {
     try {
-      await SentryFlutter.init(
-        (options) async {
-          options.tracesSampleRate = 1.0;
-        },
-        appRunner: () => runApp(app),
-      );
+      await SentryFlutter.init((options) async {
+        options.tracesSampleRate = 1.0;
+      }, appRunner: () => runApp(app));
     } catch (e) {
       logger.e('SentryFlutter error', error: e);
       runApp(app);
@@ -127,68 +122,66 @@ class EntimeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
-        providers: [
-          BlocProvider<TabBloc>(
-            create: (context) => TabBloc(),
-          ),
-          BlocProvider<SettingsBloc>(
-            create: (context) => SettingsBloc(settingsProvider),
-          ),
-          BlocProvider<ModuleSettingsBloc>(
-            create: (context) => ModuleSettingsBloc(),
-          ),
-          BlocProvider<LogBloc>(
-            create: (context) => LogBloc(
-              settingsProvider: settingsProvider,
-              database: database,
-            ),
-          ),
-          BlocProvider<DatabaseBloc>(
-            create: (context) => DatabaseBloc(
+    providers: [
+      BlocProvider<TabBloc>(create: (context) => TabBloc()),
+      BlocProvider<SettingsBloc>(
+        create: (context) => SettingsBloc(settingsProvider),
+      ),
+      BlocProvider<ModuleSettingsBloc>(
+        create: (context) => ModuleSettingsBloc(),
+      ),
+      BlocProvider<LogBloc>(
+        create:
+            (context) =>
+                LogBloc(settingsProvider: settingsProvider, database: database),
+      ),
+      BlocProvider<DatabaseBloc>(
+        create:
+            (context) => DatabaseBloc(
               database: database,
               settingsProvider: settingsProvider,
             )..add(const DatabaseEvent.initialize()),
-          ),
-          BlocProvider<TrailsBloc>(
-            create: (context) => TrailsBloc(database: database),
-          ),
-          BlocProvider<CountdownBloc>(
-            create: (context) => CountdownBloc(
+      ),
+      BlocProvider<TrailsBloc>(
+        create: (context) => TrailsBloc(database: database),
+      ),
+      BlocProvider<CountdownBloc>(
+        create:
+            (context) => CountdownBloc(
               audioController: audioController,
               countdown: countdown,
               stageId: settingsProvider.settings.stageId,
             ),
-          ),
-          BlocProvider<BluetoothBloc>(
-            create: (context) => BluetoothBloc(
+      ),
+      BlocProvider<BluetoothBloc>(
+        create:
+            (context) => BluetoothBloc(
               audioController: audioController,
               bluetoothProvider: bluetoothProvider,
               settingsProvider: settingsProvider,
               database: database,
             )..add(const BluetoothEvent.initialize()),
-          ),
-          BlocProvider<UpdateBloc>(
-            create: (context) => UpdateBloc(updateProvider: updateProvider)
-              ..add(const UpdateEvent.popupChangelog()),
-          ),
-          BlocProvider<AppInfoCubit>(
-            create: (context) => AppInfoCubit(appInfo: appInfo),
-          ),
-          BlocProvider<NtpBloc>(
-            create: (context) => NtpBloc(ntpProvider),
-          ),
-          BlocProvider<ConnectivityBloc>(
-            create: (context) => ConnectivityBloc(connectivityProvider),
-          ),
-        ],
-        child: const EntimeAppView(),
-      );
+      ),
+      BlocProvider<UpdateBloc>(
+        create:
+            (context) =>
+                UpdateBloc(updateProvider: updateProvider)
+                  ..add(const UpdateEvent.popupChangelog()),
+      ),
+      BlocProvider<AppInfoCubit>(
+        create: (context) => AppInfoCubit(appInfo: appInfo),
+      ),
+      BlocProvider<NtpBloc>(create: (context) => NtpBloc(ntpProvider)),
+      BlocProvider<ConnectivityBloc>(
+        create: (context) => ConnectivityBloc(connectivityProvider),
+      ),
+    ],
+    child: const EntimeAppView(),
+  );
 }
 
 class EntimeAppView extends StatelessWidget {
-  const EntimeAppView({
-    super.key,
-  });
+  const EntimeAppView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -201,38 +194,40 @@ class EntimeAppView extends StatelessWidget {
     }
 
     return BlocBuilder<SettingsBloc, SettingsState>(
-      buildWhen: (previousState, state) =>
-          previousState.settings.seedColor != state.settings.seedColor ||
-          previousState.settings.brightness != state.settings.brightness ||
-          previousState.settings.contrastLevel !=
-              state.settings.contrastLevel ||
-          previousState.settings.dynamicSchemeVariant !=
-              state.settings.dynamicSchemeVariant ||
-          previousState.settings.language != state.settings.language ||
-          previousState.settings.isOLEDBackground !=
-              state.settings.isOLEDBackground,
-      builder: (context, state) => MaterialApp(
-        theme: appThemeData(
-          seedColor: state.settings.seedColor,
-          brightness: state.settings.brightness,
-          contrastLevel: state.settings.contrastLevel,
-          dynamicSchemeVariant: state.settings.dynamicSchemeVariant,
-          isOLEDBackground: state.settings.isOLEDBackground,
-        ),
-        title: Pubspec.name,
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          Localization.delegate,
-        ],
-        supportedLocales: Localization.supportedLocales,
-        //1. call BotToastInit
-        builder: BotToastInit(),
-        //2. registered route observer
-        navigatorObservers: [BotToastNavigatorObserver()],
-        home: const HomeScreen(),
-      ),
+      buildWhen:
+          (previousState, state) =>
+              previousState.settings.seedColor != state.settings.seedColor ||
+              previousState.settings.brightness != state.settings.brightness ||
+              previousState.settings.contrastLevel !=
+                  state.settings.contrastLevel ||
+              previousState.settings.dynamicSchemeVariant !=
+                  state.settings.dynamicSchemeVariant ||
+              previousState.settings.language != state.settings.language ||
+              previousState.settings.isOLEDBackground !=
+                  state.settings.isOLEDBackground,
+      builder:
+          (context, state) => MaterialApp(
+            theme: appThemeData(
+              seedColor: state.settings.seedColor,
+              brightness: state.settings.brightness,
+              contrastLevel: state.settings.contrastLevel,
+              dynamicSchemeVariant: state.settings.dynamicSchemeVariant,
+              isOLEDBackground: state.settings.isOLEDBackground,
+            ),
+            title: Pubspec.name,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              Localization.delegate,
+            ],
+            supportedLocales: Localization.supportedLocales,
+            //1. call BotToastInit
+            builder: BotToastInit(),
+            //2. registered route observer
+            navigatorObservers: [BotToastNavigatorObserver()],
+            home: const HomeScreen(),
+          ),
     );
   }
 }

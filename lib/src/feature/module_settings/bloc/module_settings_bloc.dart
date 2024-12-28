@@ -11,9 +11,7 @@ part 'module_settings_state.dart';
 class ModuleSettingsBloc
     extends Bloc<ModuleSettingsEvent, ModuleSettingsState> {
   ModuleSettingsBloc() : super(const ModuleSettingsUninitialized()) {
-    on<GetModuleSettings>(
-      _handleGetModuleSettings,
-    );
+    on<GetModuleSettings>(_handleGetModuleSettings);
     // on<ModuleSettingsLoaded>((event, emit) {});
     on<UpdateModuleSettings>((event, emit) {
       emit(const ModuleSettingsLoading());

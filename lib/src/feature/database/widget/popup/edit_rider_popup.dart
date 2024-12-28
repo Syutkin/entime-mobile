@@ -8,11 +8,9 @@ Future<void> editRiderPopup({
 }) async {
   return showDialog<void>(
     context: context,
-    builder: (BuildContext context) => EditRiderPopup(
-      rider: rider,
-      teams: teams,
-      cities: cities,
-    ),
+    builder:
+        (BuildContext context) =>
+            EditRiderPopup(rider: rider, teams: teams, cities: cities),
   );
 }
 
@@ -266,18 +264,18 @@ class _EditRiderPopupState extends State<EditRiderPopup> {
           if (formKey.currentState!.validate()) {
             // final rider = riderDropdownKey.currentState!.getSelectedItem!;
             context.read<DatabaseBloc>().add(
-                  DatabaseEvent.updateRider(
-                    riderId: widget.rider.id,
-                    name: nameController.text,
-                    nickname: nicknameController.text,
-                    birthday: birthdayController.text,
-                    team: teamDropdownKey.currentState!.getSelectedItem,
-                    city: cityDropdownKey.currentState!.getSelectedItem,
-                    email: emailController.text,
-                    phone: phoneController.text,
-                    comment: commentController.text,
-                  ),
-                );
+              DatabaseEvent.updateRider(
+                riderId: widget.rider.id,
+                name: nameController.text,
+                nickname: nicknameController.text,
+                birthday: birthdayController.text,
+                team: teamDropdownKey.currentState!.getSelectedItem,
+                city: cityDropdownKey.currentState!.getSelectedItem,
+                email: emailController.text,
+                phone: phoneController.text,
+                comment: commentController.text,
+              ),
+            );
             Navigator.of(context).pop();
           }
         },

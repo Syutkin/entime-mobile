@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import '../../../common/logger/logger.dart';
-import '../../module_settings/model/module_settings.dart';
+import '../model/module_settings.dart';
 import 'module_settings_provider.dart';
 
 class ModuleSettingsEntime extends ModuleSettingsProvider {
@@ -70,50 +70,46 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
 
   @override
   String get write => json.encode(
-        ModSettingsModel(
-          // запись данных
-          read: false,
-          type: type,
-          // Bluetooth
-          bluetooth: Bluetooth(
-            active: bluetooth,
-            name: bluetoothName,
-            number: bluetoothNumber,
-          ),
-          // LoRa
-          loRa: LoRa(
-            active: lora,
-            frequency: frequency,
-            txPower: txPower,
-            spreadingFactor: spreadingFactor,
-            signalBandwidth: signalBandwidth,
-            codingRateDenom: codingRateDenominator,
-            preambleLength: preambleLength,
-            syncWord: syncWord,
-            crc: crc,
-          ),
-          // WiFi
-          wiFi: WiFi(
-            active: wifi,
-            ssid: ssid,
-            passwd: password,
-          ),
-          // TFT
+    ModSettingsModel(
+      // запись данных
+      read: false,
+      type: type,
+      // Bluetooth
+      bluetooth: Bluetooth(
+        active: bluetooth,
+        name: bluetoothName,
+        number: bluetoothNumber,
+      ),
+      // LoRa
+      loRa: LoRa(
+        active: lora,
+        frequency: frequency,
+        txPower: txPower,
+        spreadingFactor: spreadingFactor,
+        signalBandwidth: signalBandwidth,
+        codingRateDenom: codingRateDenominator,
+        preambleLength: preambleLength,
+        syncWord: syncWord,
+        crc: crc,
+      ),
+      // WiFi
+      wiFi: WiFi(active: wifi, ssid: ssid, passwd: password),
 
-          tft: Tft(
-            active: tft,
-            timeout: timeout,
-            timeoutDuration: timeoutDuration,
-            turnOnAtEvent: turnOnAtEvent,
-          ),
-          //Buzzer
-          buzzer: Buzzer(
-            active: buzzer,
-            shortFrequency: shortFrequency,
-            longFrequency: longFrequency,
-          ),
-          //VCC
-          vcc: Vcc(r1: r1, r2: r2, vbat: vBat),
-        ).toJson(),
-      );
+      // TFT
+      tft: Tft(
+        active: tft,
+        timeout: timeout,
+        timeoutDuration: timeoutDuration,
+        turnOnAtEvent: turnOnAtEvent,
+      ),
+      //Buzzer
+      buzzer: Buzzer(
+        active: buzzer,
+        shortFrequency: shortFrequency,
+        longFrequency: longFrequency,
+      ),
+      //VCC
+      vcc: Vcc(r1: r1, r2: r2, vbat: vBat),
+    ).toJson(),
+  );
 }

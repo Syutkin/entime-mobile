@@ -31,20 +31,20 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   DatabaseBloc({
     required AppDatabase database,
     required SettingsProvider settingsProvider,
-  })  : _db = database,
-        _settingsProvider = settingsProvider,
-        super(
-          const DatabaseState(
-            races: [],
-            stages: [],
-            categories: [],
-            riders: [],
-            participants: [],
-            starts: [],
-            finishes: [],
-            numbersOnTrace: [],
-          ),
-        ) {
+  }) : _db = database,
+       _settingsProvider = settingsProvider,
+       super(
+         const DatabaseState(
+           races: [],
+           stages: [],
+           categories: [],
+           riders: [],
+           participants: [],
+           starts: [],
+           finishes: [],
+           numbersOnTrace: [],
+         ),
+       ) {
     _racesSubscription = _db.getRaces().watch().listen((event) async {
       _races = event;
       logger.t('DatabaseBloc -> getRaces().watch()');
@@ -63,42 +63,48 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
       _emitState();
     });
 
-    _startsSubscription =
-        _db.getParticipantsAtStart(stageId: 0).watch().listen((event) async {
+    _startsSubscription = _db.getParticipantsAtStart(stageId: 0).watch().listen(
+      (event) async {
+        final stageId = _stage?.id ?? 0;
+        final raceId = _race?.id ?? 0;
+        _participants =
+            await _db.getParticipantsAtStart(stageId: stageId).get();
+        _categories = await _db.getCategories(raceId);
+        logger.t(
+          'DatabaseBloc -> getParticipantsAtStart(stageId: $stageId).watch()',
+        );
+        _emitState();
+      },
+    );
+
+    _finishesSubscription = _db.select(_db.finishes).watch().listen((
+      event,
+    ) async {
       final stageId = _stage?.id ?? 0;
-      final raceId = _race?.id ?? 0;
-      _participants = await _db.getParticipantsAtStart(stageId: stageId).get();
-      _categories = await _db.getCategories(raceId);
-      logger.t(
-        'DatabaseBloc -> getParticipantsAtStart(stageId: $stageId).watch()',
+      _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
+      logger.d(
+        'DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()',
       );
       _emitState();
     });
 
-    _finishesSubscription =
-        _db.select(_db.finishes).watch().listen((event) async {
-      final stageId = _stage?.id ?? 0;
-      _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
-      logger
-          .d('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
-      _emitState();
-    });
-
     _numbersOnTraceSubscription = _db
-        .getNumbersOnTraceNow(
-          stageId: 0,
-          dateTimeNow: DateTime.now(),
-        )
+        .getNumbersOnTraceNow(stageId: 0, dateTimeNow: DateTime.now())
         .watch()
         .listen((event) async {
-      final stageId = _stage?.id ?? 0;
-      _numbersOnTrace = await _db
-          .getNumbersOnTraceNow(stageId: stageId, dateTimeNow: DateTime.now())
-          .get();
-      logger
-          .t('DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()');
-      _emitState();
-    });
+          final stageId = _stage?.id ?? 0;
+          _numbersOnTrace =
+              await _db
+                  .getNumbersOnTraceNow(
+                    stageId: stageId,
+                    dateTimeNow: DateTime.now(),
+                  )
+                  .get();
+          logger.t(
+            'DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()',
+          );
+          _emitState();
+        });
 
     _appSettingsSubscription = _settingsProvider.state.listen((state) async {
       _finishDelay = state.finishDelay;
@@ -197,8 +203,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         deselectRace: (event) {
           _race = null;
           _stage = null;
-          final settings =
-              _settingsProvider.settings.copyWith(raceId: -1, stageId: -1);
+          final settings = _settingsProvider.settings.copyWith(
+            raceId: -1,
+            stageId: -1,
+          );
           _settingsProvider.update(settings);
           _emitState();
         },
@@ -233,17 +241,19 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           final stageId = event.stage.id;
 
           /// Fill state with data
-          final settings =
-              _settingsProvider.settings.copyWith(stageId: stageId);
+          final settings = _settingsProvider.settings.copyWith(
+            stageId: stageId,
+          );
           await _settingsProvider.update(settings);
           _participants =
               await _db.getParticipantsAtStart(stageId: stageId).get();
-          _numbersOnTrace = await _db
-              .getNumbersOnTraceNow(
-                stageId: stageId,
-                dateTimeNow: DateTime.now(),
-              )
-              .get();
+          _numbersOnTrace =
+              await _db
+                  .getNumbersOnTraceNow(
+                    stageId: stageId,
+                    dateTimeNow: DateTime.now(),
+                  )
+                  .get();
           _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
           _emitState();
         },
@@ -352,7 +362,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             correction: event.correction,
             timestamp: event.timestamp,
             ntpOffset: event.ntpOffset,
-            deltaInSeconds: event.deltaInSeconds ??
+            deltaInSeconds:
+                event.deltaInSeconds ??
                 settingsProvider.settings.deltaInSeconds,
             forceUpdate: event.forceUpdate,
           );
@@ -442,12 +453,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           }
         },
         getNumbersOnTraceNow: (event) async {
-          _numbersOnTrace = await _db
-              .getNumbersOnTraceNow(
-                stageId: event.stageId,
-                dateTimeNow: event.dateTimeNow,
-              )
-              .get();
+          _numbersOnTrace =
+              await _db
+                  .getNumbersOnTraceNow(
+                    stageId: event.stageId,
+                    dateTimeNow: event.dateTimeNow,
+                  )
+                  .get();
           _emitState();
         },
         selectAwaitingNumber: (event) {
@@ -486,8 +498,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               if (file != null) {
                 await Share.shareXFiles(
                   [XFile(file.path)],
-                  text: Localization.current
-                      .I18nProtocol_shareStartResults(race.name, stage.name),
+                  text: Localization.current.I18nProtocol_shareStartResults(
+                    race.name,
+                    stage.name,
+                  ),
                 );
               }
             }
@@ -538,9 +552,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               if (track.extension != null) {
                 fileName += '.${track.extension}';
               }
-              final file = File(
-                path.join(dir.path, fileName),
-              );
+              final file = File(path.join(dir.path, fileName));
               // final sink = file.openWrite()
               //   // writeAsBytes(trail.info! as List<int>);
               //   ..write(track.data);
@@ -581,7 +593,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   late StreamSubscription<List<ParticipantAtStart>> _startsSubscription;
   late StreamSubscription<List<Finish>> _finishesSubscription;
   late StreamSubscription<List<StartingParticipant>>
-      _numbersOnTraceSubscription;
+  _numbersOnTraceSubscription;
   late StreamSubscription<AppSettings> _appSettingsSubscription;
 
   void _emitState({

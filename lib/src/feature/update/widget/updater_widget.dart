@@ -10,79 +10,81 @@ class Updater extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<UpdateBloc, UpdateState>(
-        builder: (context, state) {
-          return state.map(
-            initial: (_) {
-              return ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-                title: Text(Localization.current.I18nUpdate_checkForUpdates),
-                onTap: () {
-                  BlocProvider.of<UpdateBloc>(context)
-                      .add(const UpdateEvent.checkUpdate());
-                },
-              );
+    builder: (context, state) {
+      return state.map(
+        initial: (_) {
+          return ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
+            title: Text(Localization.current.I18nUpdate_checkForUpdates),
+            onTap: () {
+              BlocProvider.of<UpdateBloc>(
+                context,
+              ).add(const UpdateEvent.checkUpdate());
             },
-            updateAvailable: (updateAvailable) {
-              return ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-                title: Text(
-                  Localization.current
-                      .I18nUpdate_updateToVersion(updateAvailable.version),
+          );
+        },
+        updateAvailable: (updateAvailable) {
+          return ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
+            title: Text(
+              Localization.current.I18nUpdate_updateToVersion(
+                updateAvailable.version,
+              ),
+            ),
+            onTap: () {
+              BlocProvider.of<UpdateBloc>(
+                context,
+              ).add(const UpdateEvent.downloadUpdate());
+            },
+          );
+        },
+        connecting: (_) {
+          return ListTile(
+            title: Stack(
+              alignment: Alignment.center,
+              children: [
+                const LinearProgressIndicator(minHeight: 24),
+                Text(
+                  Localization.current.I18nUpdate_connecting,
+                  textAlign: TextAlign.center,
                 ),
-                onTap: () {
-                  BlocProvider.of<UpdateBloc>(context)
-                      .add(const UpdateEvent.downloadUpdate());
-                },
-              );
-            },
-            connecting: (_) {
-              return ListTile(
-                title: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    const LinearProgressIndicator(
-                      minHeight: 24,
-                    ),
-                    Text(
-                      Localization.current.I18nUpdate_connecting,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+              ],
+            ),
+          );
+        },
+        downloading: (downloading) {
+          return ListTile(
+            title: Stack(
+              alignment: Alignment.center,
+              children: [
+                LinearProgressIndicator(
+                  minHeight: 24,
+                  value: downloading.bytes / downloading.total,
                 ),
-              );
-            },
-            downloading: (downloading) {
-              return ListTile(
-                title: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    LinearProgressIndicator(
-                      minHeight: 24,
-                      value: downloading.bytes / downloading.total,
-                    ),
-                    Text(
-                      Localization.current.I18nUpdate_downloaded(
-                        filesize(downloading.bytes),
-                        filesize(downloading.total),
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                Text(
+                  Localization.current.I18nUpdate_downloaded(
+                    filesize(downloading.bytes),
+                    filesize(downloading.total),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              );
-            },
-            downloadError: (downloadError) {
-              return ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-                // title: Text(Localization.current.I18nUpdate_checkForUpdates),
-                title: Text(downloadError.error),
-                onTap: () {
-                  BlocProvider.of<UpdateBloc>(context)
-                      .add(const UpdateEvent.checkUpdate());
-                },
-              );
+              ],
+            ),
+          );
+        },
+        downloadError: (downloadError) {
+          return ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
+            // title: Text(Localization.current.I18nUpdate_checkForUpdates),
+            title: Text(downloadError.error),
+            onTap: () {
+              BlocProvider.of<UpdateBloc>(
+                context,
+              ).add(const UpdateEvent.checkUpdate());
             },
           );
         },
       );
+    },
+  );
 }

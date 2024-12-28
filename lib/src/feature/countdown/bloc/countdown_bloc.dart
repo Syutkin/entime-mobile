@@ -17,9 +17,9 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     required IAudioController audioController,
     required CountdownAtStart countdown,
     required int stageId,
-  })  : _audioController = audioController,
-        _countdown = countdown,
-        super(const CountdownState.initial()) {
+  }) : _audioController = audioController,
+       _countdown = countdown,
+       super(const CountdownState.initial()) {
     if (stageId > 0) {
       _countdown.start(stageId);
     }

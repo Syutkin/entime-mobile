@@ -17,9 +17,8 @@ class UpdateState with _$UpdateState {
     required int total,
   }) = _UpdateDownloading;
 
-  const factory UpdateState.downloadError({
-    required String error,
-  }) = _UpdateDownloadError;
+  const factory UpdateState.downloadError({required String error}) =
+      _UpdateDownloadError;
 
   // При удачном обновлении (возможно не нужен, т.к. просто вернуть Initial)
   // const factory UpdateState.complete() = UpdateState;

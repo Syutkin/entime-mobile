@@ -9,10 +9,4 @@
 /// [dnf] не финишировал
 ///
 /// [dsq] дисквалифицирован
-enum ParticipantStatus {
-  unknown,
-  active,
-  dns,
-  dnf,
-  dsq,
-}
+enum ParticipantStatus { unknown, active, dns, dnf, dsq }

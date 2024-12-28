@@ -19,10 +19,7 @@ void main() {
         bluetoothBackgroundConnection: bluetoothBackgroundConnection,
       );
 
-      expect(
-        bluetoothProvider,
-        isA<IBluetoothProvider>(),
-      );
+      expect(bluetoothProvider, isA<IBluetoothProvider>());
     });
   });
 }

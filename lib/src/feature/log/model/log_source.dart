@@ -1,6 +1,1 @@
-enum LogSource {
-  unknown,
-  bluetooth,
-  app,
-  other,
-}
+enum LogSource { unknown, bluetooth, app, other }

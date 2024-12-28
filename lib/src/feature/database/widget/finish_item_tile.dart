@@ -39,9 +39,9 @@ class FinishItemTile extends StatelessWidget {
         child: Text(
           Localization.current.I18nProtocol_hide,
           style: DefaultTextStyle.of(context).style.apply(
-                fontSizeFactor: 1.5,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-              ),
+            fontSizeFactor: 1.5,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+          ),
         ),
       ),
       onDismissed: (direction) {
@@ -73,16 +73,18 @@ class FinishItemTile extends StatelessWidget {
           builder: (context, candidateData, rejectedData) {
             return BlocBuilder<SettingsBloc, SettingsState>(
               builder: (context, state) {
-                final difference = item.finishTime.toDateTime()?.difference(
-                          item.timestamp
-                              // При подсчёте разницы учитываем записанный NTP офсет
-                              .add(Duration(milliseconds: item.ntpOffset)),
-                        ) ??
+                final difference =
+                    item.finishTime.toDateTime()?.difference(
+                      item.timestamp
+                      // При подсчёте разницы учитываем записанный NTP офсет
+                      .add(Duration(milliseconds: item.ntpOffset)),
+                    ) ??
                     Duration.zero;
                 final showDifference = state.settings.showFinishDifference;
                 Color? cardColor;
                 Color? textColor;
-                final isBigDifference = difference.inMilliseconds.abs() >
+                final isBigDifference =
+                    difference.inMilliseconds.abs() >
                     state.settings.finishDifferenceThreshold;
 
                 if (isBigDifference &&
@@ -122,9 +124,10 @@ class FinishItemTile extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               item.finishTime.strip(),
-                              style: DefaultTextStyle.of(context)
-                                  .style
-                                  .apply(fontSizeFactor: 1.5, color: textColor),
+                              style: DefaultTextStyle.of(context).style.apply(
+                                fontSizeFactor: 1.5,
+                                color: textColor,
+                              ),
                             ),
                           ),
                         ),
@@ -134,9 +137,9 @@ class FinishItemTile extends StatelessWidget {
                             child: Align(
                               child: Text(
                                 '${difference.inMilliseconds}',
-                                style: DefaultTextStyle.of(context)
-                                    .style
-                                    .apply(color: textColor),
+                                style: DefaultTextStyle.of(
+                                  context,
+                                ).style.apply(color: textColor),
                               ),
                             ),
                           ),
@@ -147,9 +150,10 @@ class FinishItemTile extends StatelessWidget {
                               candidateData.isEmpty
                                   ? item.number.toString().strip()
                                   : candidateData.first.toString(),
-                              style: DefaultTextStyle.of(context)
-                                  .style
-                                  .apply(fontSizeFactor: 2, color: textColor),
+                              style: DefaultTextStyle.of(context).style.apply(
+                                fontSizeFactor: 2,
+                                color: textColor,
+                              ),
                             ),
                           ),
                         ),

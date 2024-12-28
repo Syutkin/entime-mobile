@@ -69,8 +69,9 @@ class CountdownAtStart {
             ),
           );
         } else {
-          if (nextStartTime
-              .isAfter(now.subtract(const Duration(seconds: 10)))) {
+          if (nextStartTime.isAfter(
+            now.subtract(const Duration(seconds: 10)),
+          )) {
             value.add(
               Tick(
                 second: second,
@@ -86,8 +87,10 @@ class CountdownAtStart {
       }
     } else {
       if (!_isFinished) {
-        _nextStartingParticipant =
-            await _getNextStartingParticipant(time: now, stageId: stageId);
+        _nextStartingParticipant = await _getNextStartingParticipant(
+          time: now,
+          stageId: stageId,
+        );
         if (_nextStartingParticipant == null) {
           _isFinished = true;
           value.add(Tick(second: second, text: 'Fin'));
@@ -100,12 +103,13 @@ class CountdownAtStart {
     required DateTime time,
     required int stageId,
   }) async {
-    final nextStart = await _db
-        .getNextStartingParticipants(
-          stageId: stageId,
-          time: DateFormat(shortTimeFormat).format(time),
-        )
-        .get();
+    final nextStart =
+        await _db
+            .getNextStartingParticipants(
+              stageId: stageId,
+              time: DateFormat(shortTimeFormat).format(time),
+            )
+            .get();
     // .startTime.toDateTime()
     return nextStart.isNotEmpty ? nextStart.first : null;
   }

@@ -13,12 +13,12 @@ part 'connectivity_state.dart';
 
 class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   ConnectivityBloc(IConnectivityProvider connectivityProvider)
-      : _connectivityProvider = connectivityProvider,
-        super(const ConnectivityState.state(isConnected: false)) {
-    _onConnectionSubscription =
-        _connectivityProvider.onConnectivityChanged.listen((data) {
-      add(ConnectivityEvent.emit(isConnected: data));
-    });
+    : _connectivityProvider = connectivityProvider,
+      super(const ConnectivityState.state(isConnected: false)) {
+    _onConnectionSubscription = _connectivityProvider.onConnectivityChanged
+        .listen((data) {
+          add(ConnectivityEvent.emit(isConnected: data));
+        });
 
     on<ConnectivityEvent>(transformer: sequential(), (event, emit) {
       event.map(

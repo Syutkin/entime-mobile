@@ -6,10 +6,7 @@ import '../../countdown/countdown.dart';
 import '../database.dart';
 
 class StagesItemTile extends StatelessWidget {
-  const StagesItemTile({
-    required this.stage,
-    super.key,
-  });
+  const StagesItemTile({required this.stage, super.key});
 
   final Stage stage;
 
@@ -20,40 +17,41 @@ class StagesItemTile extends StatelessWidget {
       enabled: stage.isActive,
       onTap: () {
         context.read<DatabaseBloc>().add(DatabaseEvent.selectStage(stage));
-        context
-            .read<CountdownBloc>()
-            .add(CountdownEvent.start(stageId: stage.id));
+        context.read<CountdownBloc>().add(
+          CountdownEvent.start(stageId: stage.id),
+        );
       },
       trailing: PopupMenuButton<void>(
         icon: const Icon(Icons.more_vert),
-        itemBuilder: (context) => <PopupMenuEntry<void>>[
-          PopupMenuItem<void>(
-            onTap: () {
-              updateStagePopup(context, stage: stage);
-            },
-            child: ListTile(
-              leading: const Icon(Icons.edit),
-              title: Text(Localization.current.I18nCore_edit),
-            ),
-          ),
-          const PopupMenuDivider(),
-          PopupMenuItem<void>(
-            onTap: () async {
-              final bloc = context.read<DatabaseBloc>();
-              final deleteTrail = await deleteStagePopup(
-                context: context,
-                stageName: stage.name,
-              );
-              if (deleteTrail ?? false) {
-                bloc.add(DatabaseEvent.deleteStage(stage.id));
-              }
-            },
-            child: ListTile(
-              leading: const Icon(Icons.delete),
-              title: Text(Localization.current.I18nCore_delete),
-            ),
-          ),
-        ],
+        itemBuilder:
+            (context) => <PopupMenuEntry<void>>[
+              PopupMenuItem<void>(
+                onTap: () {
+                  updateStagePopup(context, stage: stage);
+                },
+                child: ListTile(
+                  leading: const Icon(Icons.edit),
+                  title: Text(Localization.current.I18nCore_edit),
+                ),
+              ),
+              const PopupMenuDivider(),
+              PopupMenuItem<void>(
+                onTap: () async {
+                  final bloc = context.read<DatabaseBloc>();
+                  final deleteTrail = await deleteStagePopup(
+                    context: context,
+                    stageName: stage.name,
+                  );
+                  if (deleteTrail ?? false) {
+                    bloc.add(DatabaseEvent.deleteStage(stage.id));
+                  }
+                },
+                child: ListTile(
+                  leading: const Icon(Icons.delete),
+                  title: Text(Localization.current.I18nCore_delete),
+                ),
+              ),
+            ],
       ),
     );
   }

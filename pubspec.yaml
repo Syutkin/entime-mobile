@@ -15,10 +15,10 @@ repository: https://github.com/Syutkin/entime-mobile
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.5.0-beta.1+396
+version: 0.5.0-beta.1+397
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0-209.1.beta
   flutter: ^3.24.0
 
 dependencies:
@@ -84,11 +84,12 @@ dependency_overrides:
 dev_dependencies:
   bloc_test: ^9.1.7
   build_runner: ^2.4.14
+  dart_style: ^3.0.0
   drift_dev: ^2.22.1
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^2.5.7
+  freezed: ^3.0.0-0.0.dev
   integration_test:
     sdk: flutter
   json_serializable: ^6.9.0

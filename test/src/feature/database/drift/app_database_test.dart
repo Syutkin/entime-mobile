@@ -65,9 +65,7 @@ void main() {
         expect(racesList[2].finishDate, finishDate.toIso8601String());
         expect(racesList[2].location, location);
 
-        await db.addRace(
-          name: raceName2,
-        );
+        await db.addRace(name: raceName2);
 
         racesList = await db.getRaces().get();
 
@@ -77,9 +75,7 @@ void main() {
         expect(racesList[3].finishDate, null);
         expect(racesList[3].location, null);
 
-        await db.addRace(
-          name: raceName3,
-        );
+        await db.addRace(name: raceName3);
 
         racesList = await db.getRaces().get();
         expect(racesList.length, 5);
@@ -133,9 +129,7 @@ void main() {
         final startDate = DateTime(2020, 1, 1);
         final finishDate = DateTime(2020, 1, 2);
 
-        final id = await db.addRace(
-          name: raceName,
-        );
+        final id = await db.addRace(name: raceName);
 
         var race = await db.getRace(id);
         expect(race!.name, raceName);
@@ -169,10 +163,7 @@ void main() {
       test('Add stage', () async {
         const stageName = 'stage1';
 
-        await db.addStage(
-          name: stageName,
-          raceId: 1,
-        );
+        await db.addStage(name: stageName, raceId: 1);
 
         final stagesList = await db.getStages(raceId: 1).get();
         expect(stagesList[4].name, stageName);
@@ -182,10 +173,7 @@ void main() {
       test('Delete stage', () async {
         const stageName = 'stage1';
 
-        await db.addStage(
-          name: stageName,
-          raceId: 1,
-        );
+        await db.addStage(name: stageName, raceId: 1);
 
         var stagesList = await db.getStages(raceId: 1).get();
         expect(stagesList.length, 5);
@@ -202,10 +190,7 @@ void main() {
         const description = 'description';
         const newName = 'newName';
 
-        final id = await db.addStage(
-          name: stageName,
-          raceId: 1,
-        );
+        final id = await db.addStage(name: stageName, raceId: 1);
 
         var stage = await db.getStage(id);
         expect(stage!.name, stageName);
@@ -533,10 +518,7 @@ void main() {
         const id = 99;
         const name = 'name';
 
-        final count = await db.updateRider(
-          id: id,
-          name: name,
-        );
+        final count = await db.updateRider(id: id, name: name);
 
         final riders = await db.getRiders.get();
         // Гонщик будет первым из-за сортировки по именам
@@ -547,10 +529,7 @@ void main() {
       test('"Delete" rider', () async {
         const id = 5;
 
-        final count = await db.updateRider(
-          id: id,
-          isDeleted: true,
-        );
+        final count = await db.updateRider(id: id, isDeleted: true);
 
         final riders = await db.getRiders.get();
         expect(count, 1);
@@ -570,9 +549,10 @@ void main() {
         const rfid = 'rfid';
         // const isDeleted = false;
 
-        final existed = await db
-            .getNumberAtStarts(stageId: stageId, number: number)
-            .getSingle();
+        final existed =
+            await db
+                .getNumberAtStarts(stageId: stageId, number: number)
+                .getSingle();
 
         final id = existed.participantId;
         expect(id, 21);
@@ -591,9 +571,10 @@ void main() {
 
         expect(count, 1);
 
-        final updated = await db
-            .getNumberAtStarts(stageId: stageId, number: newNumber)
-            .getSingle();
+        final updated =
+            await db
+                .getNumberAtStarts(stageId: stageId, number: newNumber)
+                .getSingle();
 
         expect(updated.participantId, id);
         expect(updated.raceId, raceId);
@@ -612,10 +593,7 @@ void main() {
         var categories = await db.getCategories(raceId);
         expect(categories.length, 5);
 
-        await db.updateParticipant(
-          id: id,
-          category: category,
-        );
+        await db.updateParticipant(id: id, category: category);
         categories = await db.getCategories(raceId);
 
         expect(categories.length, 6);
@@ -632,10 +610,11 @@ void main() {
         const manualCorrection = 1234;
         const automaticCorrection = -4331;
         const number = 2;
-        var participant = (await db
-                .getNumberAtStarts(stageId: stage.id, number: number)
-                .get())
-            .first;
+        var participant =
+            (await db
+                    .getNumberAtStarts(stageId: stage.id, number: number)
+                    .get())
+                .first;
         final participantId = participant.participantId;
 
         final rowsUpdated = await db.setStartingInfo(
@@ -649,10 +628,11 @@ void main() {
         );
         expect(rowsUpdated, 1);
 
-        participant = (await db
-                .getNumberAtStarts(stageId: stage.id, number: number)
-                .get())
-            .first;
+        participant =
+            (await db
+                    .getNumberAtStarts(stageId: stage.id, number: number)
+                    .get())
+                .first;
         expect(participant.number, number);
         expect(participant.participantId, participantId);
         expect(participant.startTime, startTime);
@@ -670,10 +650,11 @@ void main() {
         const manualCorrection = 1234;
         const automaticCorrection = -4331;
         const number = 2;
-        var participant = (await db
-                .getNumberAtStarts(stageId: stage.id, number: number)
-                .get())
-            .first;
+        var participant =
+            (await db
+                    .getNumberAtStarts(stageId: stage.id, number: number)
+                    .get())
+                .first;
         final participantId = participant.participantId;
 
         var rowsUpdated = await db.setStartingInfo(
@@ -694,10 +675,11 @@ void main() {
         );
         expect(rowsUpdated, 1);
 
-        participant = (await db
-                .getNumberAtStarts(stageId: stage.id, number: number)
-                .get())
-            .first;
+        participant =
+            (await db
+                    .getNumberAtStarts(stageId: stage.id, number: number)
+                    .get())
+                .first;
         expect(participant.number, number);
         expect(participant.participantId, participantId);
         expect(participant.startTime, startTime);
@@ -793,28 +775,23 @@ void main() {
         expect(participants.length, 0);
       });
 
-      test(
-          'Add new start number. Number exist at participants list, '
+      test('Add new start number. Number exist at participants list, '
           'but not exists at starts', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const startTime = '01:00:00';
         const number = 1;
 
         // get participant with number
-        final startInfo = (await db
-                .getNumberAtStarts(
-                  stageId: stage.id,
-                  number: number,
-                )
-                .get())
-            .first;
+        final startInfo =
+            (await db
+                    .getNumberAtStarts(stageId: stage.id, number: number)
+                    .get())
+                .first;
 
         // delete participant with number at start
-        await (db.delete(db.starts)
-              ..where(
-                (start) => start.participantId.isValue(startInfo.participantId),
-              ))
-            .go();
+        await (db.delete(db.starts)..where(
+          (start) => start.participantId.isValue(startInfo.participantId),
+        )).go();
 
         var participantsList =
             await db.getParticipantsAtStart(stageId: stage.id).get();
@@ -832,13 +809,11 @@ void main() {
         expect(participantsList.length, 79);
 
         // get participant with number
-        final startInfoNew = (await db
-                .getNumberAtStarts(
-                  stageId: stage.id,
-                  number: number,
-                )
-                .get())
-            .first;
+        final startInfoNew =
+            (await db
+                    .getNumberAtStarts(stageId: stage.id, number: number)
+                    .get())
+                .first;
         expect(startInfoNew.number, startInfo.number);
         expect(startInfoNew.startTime, startTime);
         expect(startInfoNew.category, startInfo.category);
@@ -1200,12 +1175,10 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const time = '09:59:53,001';
 
-        final result = await db
-            .getNextStartingParticipants(
-              stageId: stage.id,
-              time: time,
-            )
-            .get();
+        final result =
+            await db
+                .getNextStartingParticipants(stageId: stage.id, time: time)
+                .get();
         expect(result.length, 79);
         expect(result.first.number, 2);
       });
@@ -1214,12 +1187,10 @@ void main() {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const time = '23:14:53,001';
 
-        final result = await db
-            .getNextStartingParticipants(
-              stageId: stage.id,
-              time: time,
-            )
-            .get();
+        final result =
+            await db
+                .getNextStartingParticipants(stageId: stage.id, time: time)
+                .get();
         expect(result.length, 0);
       });
     });
@@ -1315,10 +1286,11 @@ void main() {
         const offset = 3456;
         const number = 2;
 
-        var startInfo = (await db
-                .getNumberAtStarts(stageId: stage.id, number: number)
-                .get())
-            .first;
+        var startInfo =
+            (await db
+                    .getNumberAtStarts(stageId: stage.id, number: number)
+                    .get())
+                .first;
         expect(startInfo.finishId, null);
 
         await db.addFinishTime(
@@ -1343,10 +1315,11 @@ void main() {
         finishes = await db.getFinishesFromStage(stageId: stage.id).get();
         expect(finishes.first.number, number);
 
-        startInfo = (await db
-                .getNumberAtStarts(stageId: stage.id, number: number)
-                .get())
-            .first;
+        startInfo =
+            (await db
+                    .getNumberAtStarts(stageId: stage.id, number: number)
+                    .get())
+                .first;
         expect(startInfo.finishId, 1);
       });
 
@@ -1438,24 +1411,26 @@ void main() {
       test('No numbers on trace', () async {
         final stageId = (await db.getStages(raceId: 1).get()).first.id;
         final dateTimeNow = '09:00:00.111'.toDateTime()!;
-        final result = await db
-            .getNumbersOnTraceNow(
-              stageId: stageId,
-              dateTimeNow: dateTimeNow,
-            )
-            .get();
+        final result =
+            await db
+                .getNumbersOnTraceNow(
+                  stageId: stageId,
+                  dateTimeNow: dateTimeNow,
+                )
+                .get();
 
         expect(result.length, 0);
       });
       test('One number on trace', () async {
         final stageId = (await db.getStages(raceId: 1).get()).first.id;
         final dateTimeNow = '10:00:01.111'.toDateTime()!;
-        final result = await db
-            .getNumbersOnTraceNow(
-              stageId: stageId,
-              dateTimeNow: dateTimeNow,
-            )
-            .get();
+        final result =
+            await db
+                .getNumbersOnTraceNow(
+                  stageId: stageId,
+                  dateTimeNow: dateTimeNow,
+                )
+                .get();
 
         expect(result.length, 1);
         expect(result.first.number, 2);
@@ -1463,12 +1438,13 @@ void main() {
       test('All numbers on trace', () async {
         final stageId = (await db.getStages(raceId: 1).get()).first.id;
         final dateTimeNow = '23:00:01.111'.toDateTime()!;
-        final result = await db
-            .getNumbersOnTraceNow(
-              stageId: stageId,
-              dateTimeNow: dateTimeNow,
-            )
-            .get();
+        final result =
+            await db
+                .getNumbersOnTraceNow(
+                  stageId: stageId,
+                  dateTimeNow: dateTimeNow,
+                )
+                .get();
 
         expect(result.length, 79);
         expect(result.first.number, 2);
@@ -1483,12 +1459,13 @@ void main() {
         const number = 2;
         const number2 = 7;
 
-        var result = await db
-            .getNumbersOnTraceNow(
-              stageId: stage.id,
-              dateTimeNow: dateTimeNow,
-            )
-            .get();
+        var result =
+            await db
+                .getNumbersOnTraceNow(
+                  stageId: stage.id,
+                  dateTimeNow: dateTimeNow,
+                )
+                .get();
 
         expect(result.length, 3);
         expect(result.first.number, 2);
@@ -1511,12 +1488,13 @@ void main() {
           finishTime: finishTime,
         );
 
-        result = await db
-            .getNumbersOnTraceNow(
-              stageId: stage.id,
-              dateTimeNow: dateTimeNow,
-            )
-            .get();
+        result =
+            await db
+                .getNumbersOnTraceNow(
+                  stageId: stage.id,
+                  dateTimeNow: dateTimeNow,
+                )
+                .get();
         expect(result.length, 2);
         expect(result.first.number, number2);
       });
@@ -1526,12 +1504,13 @@ void main() {
         const number = 2;
         const number2 = 7;
 
-        var result = await db
-            .getNumbersOnTraceNow(
-              stageId: stage.id,
-              dateTimeNow: dateTimeNow,
-            )
-            .get();
+        var result =
+            await db
+                .getNumbersOnTraceNow(
+                  stageId: stage.id,
+                  dateTimeNow: dateTimeNow,
+                )
+                .get();
 
         expect(result.length, 3);
         expect(result.first.number, 2);
@@ -1547,12 +1526,13 @@ void main() {
         );
         expect(resultStatus, 1);
 
-        result = await db
-            .getNumbersOnTraceNow(
-              stageId: stage.id,
-              dateTimeNow: dateTimeNow,
-            )
-            .get();
+        result =
+            await db
+                .getNumbersOnTraceNow(
+                  stageId: stage.id,
+                  dateTimeNow: dateTimeNow,
+                )
+                .get();
 
         expect(result.length, 2);
         expect(result.first.number, number2);
@@ -1750,80 +1730,83 @@ void main() {
       // Пытаемся добавлять номера во все отсечки,
       // Но добавится только в первую и третью, т.к. разница между первой и второй
       // меньше [substituteNumbersDelay]
-      test('Automatic add number to all, but substituteNumbersDelay at work',
-          () async {
-        final stage = (await db.getStages(raceId: 1).get()).first;
-        const finish1 = '10:05:23,123';
-        const finish2 = '10:05:23,129';
-        const finish3 = '10:05:25,129';
-        final timestamp1 = '10:05:23,456'.toDateTime()!;
-        final timestamp2 = '10:05:23,459'.toDateTime()!;
-        final timestamp3 = '10:05:25,459'.toDateTime()!;
-        const offset1 = 3456;
-        const offset2 = 4567;
-        const offset3 = 5678;
-        final dateTimeNow = '10:05:28,111'.toDateTime();
-        const substituteNumbersDelay = 1000;
-        const number1 = 2;
-        const number2 = 7;
+      test(
+        'Automatic add number to all, but substituteNumbersDelay at work',
+        () async {
+          final stage = (await db.getStages(raceId: 1).get()).first;
+          const finish1 = '10:05:23,123';
+          const finish2 = '10:05:23,129';
+          const finish3 = '10:05:25,129';
+          final timestamp1 = '10:05:23,456'.toDateTime()!;
+          final timestamp2 = '10:05:23,459'.toDateTime()!;
+          final timestamp3 = '10:05:25,459'.toDateTime()!;
+          const offset1 = 3456;
+          const offset2 = 4567;
+          const offset3 = 5678;
+          final dateTimeNow = '10:05:28,111'.toDateTime();
+          const substituteNumbersDelay = 1000;
+          const number1 = 2;
+          const number2 = 7;
 
-        final addNumber1 = await db.addFinishTime(
-          stage: stage,
-          finish: finish1,
-          timestamp: timestamp1,
-          ntpOffset: offset1,
-          substituteNumbers: true,
-          dateTimeNow: dateTimeNow,
-          substituteNumbersDelay: substituteNumbersDelay,
-        );
-        expect(addNumber1, number1);
+          final addNumber1 = await db.addFinishTime(
+            stage: stage,
+            finish: finish1,
+            timestamp: timestamp1,
+            ntpOffset: offset1,
+            substituteNumbers: true,
+            dateTimeNow: dateTimeNow,
+            substituteNumbersDelay: substituteNumbersDelay,
+          );
+          expect(addNumber1, number1);
 
-        final addNumber2 = await db.addFinishTime(
-          stage: stage,
-          finish: finish2,
-          timestamp: timestamp2,
-          ntpOffset: offset2,
-          substituteNumbers: true,
-          dateTimeNow: dateTimeNow,
-          substituteNumbersDelay: substituteNumbersDelay,
-        );
-        expect(addNumber2, null);
+          final addNumber2 = await db.addFinishTime(
+            stage: stage,
+            finish: finish2,
+            timestamp: timestamp2,
+            ntpOffset: offset2,
+            substituteNumbers: true,
+            dateTimeNow: dateTimeNow,
+            substituteNumbersDelay: substituteNumbersDelay,
+          );
+          expect(addNumber2, null);
 
-        final addNumber3 = await db.addFinishTime(
-          stage: stage,
-          finish: finish3,
-          timestamp: timestamp3,
-          ntpOffset: offset3,
-          substituteNumbers: true,
-          dateTimeNow: dateTimeNow,
-          substituteNumbersDelay: substituteNumbersDelay,
-        );
-        expect(addNumber3, number2);
+          final addNumber3 = await db.addFinishTime(
+            stage: stage,
+            finish: finish3,
+            timestamp: timestamp3,
+            ntpOffset: offset3,
+            substituteNumbers: true,
+            dateTimeNow: dateTimeNow,
+            substituteNumbersDelay: substituteNumbersDelay,
+          );
+          expect(addNumber3, number2);
 
-        final finishes = await db.getFinishesFromStage(stageId: stage.id).get();
-        expect(finishes.length, 3);
-        expect(finishes[0].stageId, stage.id);
-        expect(finishes[0].number, number1);
-        expect(finishes[0].finishTime, finish1);
-        expect(finishes[0].timestamp, timestamp1);
-        expect(finishes[0].ntpOffset, offset1);
-        expect(finishes[0].isHidden, false);
-        expect(finishes[0].isManual, false);
-        expect(finishes[1].stageId, stage.id);
-        expect(finishes[1].number, null);
-        expect(finishes[1].finishTime, finish2);
-        expect(finishes[1].timestamp, timestamp2);
-        expect(finishes[1].ntpOffset, offset2);
-        expect(finishes[1].isHidden, false);
-        expect(finishes[1].isManual, false);
-        expect(finishes[2].stageId, stage.id);
-        expect(finishes[2].number, number2);
-        expect(finishes[2].finishTime, finish3);
-        expect(finishes[2].timestamp, timestamp3);
-        expect(finishes[2].ntpOffset, offset3);
-        expect(finishes[2].isHidden, false);
-        expect(finishes[2].isManual, false);
-      });
+          final finishes =
+              await db.getFinishesFromStage(stageId: stage.id).get();
+          expect(finishes.length, 3);
+          expect(finishes[0].stageId, stage.id);
+          expect(finishes[0].number, number1);
+          expect(finishes[0].finishTime, finish1);
+          expect(finishes[0].timestamp, timestamp1);
+          expect(finishes[0].ntpOffset, offset1);
+          expect(finishes[0].isHidden, false);
+          expect(finishes[0].isManual, false);
+          expect(finishes[1].stageId, stage.id);
+          expect(finishes[1].number, null);
+          expect(finishes[1].finishTime, finish2);
+          expect(finishes[1].timestamp, timestamp2);
+          expect(finishes[1].ntpOffset, offset2);
+          expect(finishes[1].isHidden, false);
+          expect(finishes[1].isManual, false);
+          expect(finishes[2].stageId, stage.id);
+          expect(finishes[2].number, number2);
+          expect(finishes[2].finishTime, finish3);
+          expect(finishes[2].timestamp, timestamp3);
+          expect(finishes[2].ntpOffset, offset3);
+          expect(finishes[2].isHidden, false);
+          expect(finishes[2].isManual, false);
+        },
+      );
 
       // Пытаемся добавлять номера во все отсечки,
       // Но добавится только в первую и третью, т.к. вторую автоматически скроет
@@ -1876,12 +1859,13 @@ void main() {
         );
         expect(addNumber3, number2);
 
-        final finishes = await db
-            .getFinishesFromStage(
-              stageId: stage.id,
-              // hideMarked: false,
-            )
-            .get();
+        final finishes =
+            await db
+                .getFinishesFromStage(
+                  stageId: stage.id,
+                  // hideMarked: false,
+                )
+                .get();
         expect(finishes.length, 3);
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, number1);
@@ -2175,15 +2159,18 @@ void main() {
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
 
-        var start1 = await db
-            .getNumberAtStarts(stageId: stage.id, number: number1)
-            .get();
-        var start2 = await db
-            .getNumberAtStarts(stageId: stage.id, number: number2)
-            .get();
-        var start3 = await db
-            .getNumberAtStarts(stageId: stage.id, number: number3)
-            .get();
+        var start1 =
+            await db
+                .getNumberAtStarts(stageId: stage.id, number: number1)
+                .get();
+        var start2 =
+            await db
+                .getNumberAtStarts(stageId: stage.id, number: number2)
+                .get();
+        var start3 =
+            await db
+                .getNumberAtStarts(stageId: stage.id, number: number3)
+                .get();
 
         expect(start1.length, 1);
         expect(start1.first.finishId, 1);
@@ -2215,15 +2202,18 @@ void main() {
         expect(finishes[2].isHidden, false);
         expect(finishes[2].isManual, false);
 
-        start1 = await db
-            .getNumberAtStarts(stageId: stage.id, number: number1)
-            .get();
-        start2 = await db
-            .getNumberAtStarts(stageId: stage.id, number: number2)
-            .get();
-        start3 = await db
-            .getNumberAtStarts(stageId: stage.id, number: number3)
-            .get();
+        start1 =
+            await db
+                .getNumberAtStarts(stageId: stage.id, number: number1)
+                .get();
+        start2 =
+            await db
+                .getNumberAtStarts(stageId: stage.id, number: number2)
+                .get();
+        start3 =
+            await db
+                .getNumberAtStarts(stageId: stage.id, number: number3)
+                .get();
 
         expect(start1.length, 1);
         expect(start1.first.finishId, null);
@@ -2333,10 +2323,8 @@ Future<List<Start>> startsByStartTime({
   required String startTime,
   required int stageId,
 }) {
-  return (db.select(db.starts)
-        ..where(
-          (start) =>
-              start.startTime.equals(startTime) & start.stageId.equals(stageId),
-        ))
-      .get();
+  return (db.select(db.starts)..where(
+    (start) =>
+        start.startTime.equals(startTime) & start.stageId.equals(stageId),
+  )).get();
 }

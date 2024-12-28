@@ -55,16 +55,17 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
     // Setup a list of the bonded devices
     FlutterBluetoothSerial.instance.getBondedDevices().then((bondedDevices) {
       setState(() {
-        devices = bondedDevices
-            .map(
-              (device) => BluetoothDeviceWithAvailability(
-                device,
-                widget.checkAvailability
-                    ? BluetoothDeviceAvailability.maybe
-                    : BluetoothDeviceAvailability.yes,
-              ),
-            )
-            .toList();
+        devices =
+            bondedDevices
+                .map(
+                  (device) => BluetoothDeviceWithAvailability(
+                    device,
+                    widget.checkAvailability
+                        ? BluetoothDeviceAvailability.maybe
+                        : BluetoothDeviceAvailability.yes,
+                  ),
+                )
+                .toList();
       });
     });
   }
@@ -77,20 +78,21 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   }
 
   void _startDiscovery() {
-    _discoveryStreamSubscription =
-        FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
-      setState(() {
-        final i = devices.iterator;
-        while (i.moveNext()) {
-          final device = i.current;
-          if (device.device == r.device) {
-            device
-              ..availability = BluetoothDeviceAvailability.yes
-              ..rssi = r.rssi;
-          }
-        }
-      });
-    });
+    _discoveryStreamSubscription = FlutterBluetoothSerial.instance
+        .startDiscovery()
+        .listen((r) {
+          setState(() {
+            final i = devices.iterator;
+            while (i.moveNext()) {
+              final device = i.current;
+              if (device.device == r.device) {
+                device
+                  ..availability = BluetoothDeviceAvailability.yes
+                  ..rssi = r.rssi;
+              }
+            }
+          });
+        });
 
     _discoveryStreamSubscription?.onDone(() {
       setState(() {
@@ -108,18 +110,19 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final list = devices
-        .map(
-          (device) => BluetoothDeviceListEntry(
-            device: device.device,
-            rssi: device.rssi,
-//      enabled: _device.availability == BluetoothDeviceAvailability.yes,
-            onTap: () {
-              Navigator.of(context).pop(device);
-            },
-          ),
-        )
-        .toList();
+    final list =
+        devices
+            .map(
+              (device) => BluetoothDeviceListEntry(
+                device: device.device,
+                rssi: device.rssi,
+                //      enabled: _device.availability == BluetoothDeviceAvailability.yes,
+                onTap: () {
+                  Navigator.of(context).pop(device);
+                },
+              ),
+            )
+            .toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(Localization.current.I18nBluetooth_selectDevice),
@@ -129,9 +132,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
               child: Container(
                 margin: const EdgeInsets.all(16),
                 child: const CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Colors.white,
-                  ),
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               ),
             )

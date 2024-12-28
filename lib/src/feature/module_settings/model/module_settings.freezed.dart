@@ -12,7 +12,8 @@ part of 'module_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 ModSettingsModelType _$ModSettingsModelTypeFromJson(Map<String, dynamic> json) {
   return _ModSettingsModelType.fromJson(json);
@@ -35,16 +36,19 @@ mixin _$ModSettingsModelType {
 
 /// @nodoc
 abstract class $ModSettingsModelTypeCopyWith<$Res> {
-  factory $ModSettingsModelTypeCopyWith(ModSettingsModelType value,
-          $Res Function(ModSettingsModelType) then) =
-      _$ModSettingsModelTypeCopyWithImpl<$Res, ModSettingsModelType>;
+  factory $ModSettingsModelTypeCopyWith(
+    ModSettingsModelType value,
+    $Res Function(ModSettingsModelType) then,
+  ) = _$ModSettingsModelTypeCopyWithImpl<$Res, ModSettingsModelType>;
   @useResult
   $Res call({@JsonKey(name: 'Type') String type});
 }
 
 /// @nodoc
-class _$ModSettingsModelTypeCopyWithImpl<$Res,
-        $Val extends ModSettingsModelType>
+class _$ModSettingsModelTypeCopyWithImpl<
+  $Res,
+  $Val extends ModSettingsModelType
+>
     implements $ModSettingsModelTypeCopyWith<$Res> {
   _$ModSettingsModelTypeCopyWithImpl(this._value, this._then);
 
@@ -57,24 +61,27 @@ class _$ModSettingsModelTypeCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-  }) {
-    return _then(_value.copyWith(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? type = null}) {
+    return _then(
+      _value.copyWith(
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$ModSettingsModelTypeImplCopyWith<$Res>
     implements $ModSettingsModelTypeCopyWith<$Res> {
-  factory _$$ModSettingsModelTypeImplCopyWith(_$ModSettingsModelTypeImpl value,
-          $Res Function(_$ModSettingsModelTypeImpl) then) =
-      __$$ModSettingsModelTypeImplCopyWithImpl<$Res>;
+  factory _$$ModSettingsModelTypeImplCopyWith(
+    _$ModSettingsModelTypeImpl value,
+    $Res Function(_$ModSettingsModelTypeImpl) then,
+  ) = __$$ModSettingsModelTypeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'Type') String type});
@@ -84,23 +91,25 @@ abstract class _$$ModSettingsModelTypeImplCopyWith<$Res>
 class __$$ModSettingsModelTypeImplCopyWithImpl<$Res>
     extends _$ModSettingsModelTypeCopyWithImpl<$Res, _$ModSettingsModelTypeImpl>
     implements _$$ModSettingsModelTypeImplCopyWith<$Res> {
-  __$$ModSettingsModelTypeImplCopyWithImpl(_$ModSettingsModelTypeImpl _value,
-      $Res Function(_$ModSettingsModelTypeImpl) _then)
-      : super(_value, _then);
+  __$$ModSettingsModelTypeImplCopyWithImpl(
+    _$ModSettingsModelTypeImpl _value,
+    $Res Function(_$ModSettingsModelTypeImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ModSettingsModelType
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-  }) {
-    return _then(_$ModSettingsModelTypeImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? type = null}) {
+    return _then(
+      _$ModSettingsModelTypeImpl(
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -139,22 +148,22 @@ class _$ModSettingsModelTypeImpl implements _ModSettingsModelType {
   @override
   @pragma('vm:prefer-inline')
   _$$ModSettingsModelTypeImplCopyWith<_$ModSettingsModelTypeImpl>
-      get copyWith =>
-          __$$ModSettingsModelTypeImplCopyWithImpl<_$ModSettingsModelTypeImpl>(
-              this, _$identity);
+  get copyWith =>
+      __$$ModSettingsModelTypeImplCopyWithImpl<_$ModSettingsModelTypeImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ModSettingsModelTypeImplToJson(
-      this,
-    );
+    return _$$ModSettingsModelTypeImplToJson(this);
   }
 }
 
 abstract class _ModSettingsModelType implements ModSettingsModelType {
-  const factory _ModSettingsModelType(
-          {@JsonKey(name: 'Type') required final String type}) =
-      _$ModSettingsModelTypeImpl;
+  const factory _ModSettingsModelType({
+    @JsonKey(name: 'Type') required final String type,
+  }) = _$ModSettingsModelTypeImpl;
 
   factory _ModSettingsModelType.fromJson(Map<String, dynamic> json) =
       _$ModSettingsModelTypeImpl.fromJson;
@@ -168,7 +177,7 @@ abstract class _ModSettingsModelType implements ModSettingsModelType {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ModSettingsModelTypeImplCopyWith<_$ModSettingsModelTypeImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 ModSettingsModelLed _$ModSettingsModelLedFromJson(Map<String, dynamic> json) {
@@ -201,15 +210,17 @@ mixin _$ModSettingsModelLed {
 /// @nodoc
 abstract class $ModSettingsModelLedCopyWith<$Res> {
   factory $ModSettingsModelLedCopyWith(
-          ModSettingsModelLed value, $Res Function(ModSettingsModelLed) then) =
-      _$ModSettingsModelLedCopyWithImpl<$Res, ModSettingsModelLed>;
+    ModSettingsModelLed value,
+    $Res Function(ModSettingsModelLed) then,
+  ) = _$ModSettingsModelLedCopyWithImpl<$Res, ModSettingsModelLed>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'Read') bool? read,
-      @JsonKey(name: 'Type') String type,
-      @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
-      @JsonKey(name: 'WiFi') WiFi wiFi,
-      @JsonKey(name: 'LedPanel') LedPanel ledPanel});
+  $Res call({
+    @JsonKey(name: 'Read') bool? read,
+    @JsonKey(name: 'Type') String type,
+    @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
+    @JsonKey(name: 'WiFi') WiFi wiFi,
+    @JsonKey(name: 'LedPanel') LedPanel ledPanel,
+  });
 
   $BluetoothCopyWith<$Res> get bluetooth;
   $WiFiCopyWith<$Res> get wiFi;
@@ -237,28 +248,36 @@ class _$ModSettingsModelLedCopyWithImpl<$Res, $Val extends ModSettingsModelLed>
     Object? wiFi = null,
     Object? ledPanel = null,
   }) {
-    return _then(_value.copyWith(
-      read: freezed == read
-          ? _value.read
-          : read // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      bluetooth: null == bluetooth
-          ? _value.bluetooth
-          : bluetooth // ignore: cast_nullable_to_non_nullable
-              as Bluetooth,
-      wiFi: null == wiFi
-          ? _value.wiFi
-          : wiFi // ignore: cast_nullable_to_non_nullable
-              as WiFi,
-      ledPanel: null == ledPanel
-          ? _value.ledPanel
-          : ledPanel // ignore: cast_nullable_to_non_nullable
-              as LedPanel,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            read:
+                freezed == read
+                    ? _value.read
+                    : read // ignore: cast_nullable_to_non_nullable
+                        as bool?,
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as String,
+            bluetooth:
+                null == bluetooth
+                    ? _value.bluetooth
+                    : bluetooth // ignore: cast_nullable_to_non_nullable
+                        as Bluetooth,
+            wiFi:
+                null == wiFi
+                    ? _value.wiFi
+                    : wiFi // ignore: cast_nullable_to_non_nullable
+                        as WiFi,
+            ledPanel:
+                null == ledPanel
+                    ? _value.ledPanel
+                    : ledPanel // ignore: cast_nullable_to_non_nullable
+                        as LedPanel,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of ModSettingsModelLed
@@ -295,17 +314,19 @@ class _$ModSettingsModelLedCopyWithImpl<$Res, $Val extends ModSettingsModelLed>
 /// @nodoc
 abstract class _$$ModSettingsModelLedImplCopyWith<$Res>
     implements $ModSettingsModelLedCopyWith<$Res> {
-  factory _$$ModSettingsModelLedImplCopyWith(_$ModSettingsModelLedImpl value,
-          $Res Function(_$ModSettingsModelLedImpl) then) =
-      __$$ModSettingsModelLedImplCopyWithImpl<$Res>;
+  factory _$$ModSettingsModelLedImplCopyWith(
+    _$ModSettingsModelLedImpl value,
+    $Res Function(_$ModSettingsModelLedImpl) then,
+  ) = __$$ModSettingsModelLedImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'Read') bool? read,
-      @JsonKey(name: 'Type') String type,
-      @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
-      @JsonKey(name: 'WiFi') WiFi wiFi,
-      @JsonKey(name: 'LedPanel') LedPanel ledPanel});
+  $Res call({
+    @JsonKey(name: 'Read') bool? read,
+    @JsonKey(name: 'Type') String type,
+    @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
+    @JsonKey(name: 'WiFi') WiFi wiFi,
+    @JsonKey(name: 'LedPanel') LedPanel ledPanel,
+  });
 
   @override
   $BluetoothCopyWith<$Res> get bluetooth;
@@ -319,9 +340,10 @@ abstract class _$$ModSettingsModelLedImplCopyWith<$Res>
 class __$$ModSettingsModelLedImplCopyWithImpl<$Res>
     extends _$ModSettingsModelLedCopyWithImpl<$Res, _$ModSettingsModelLedImpl>
     implements _$$ModSettingsModelLedImplCopyWith<$Res> {
-  __$$ModSettingsModelLedImplCopyWithImpl(_$ModSettingsModelLedImpl _value,
-      $Res Function(_$ModSettingsModelLedImpl) _then)
-      : super(_value, _then);
+  __$$ModSettingsModelLedImplCopyWithImpl(
+    _$ModSettingsModelLedImpl _value,
+    $Res Function(_$ModSettingsModelLedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ModSettingsModelLed
   /// with the given fields replaced by the non-null parameter values.
@@ -334,40 +356,48 @@ class __$$ModSettingsModelLedImplCopyWithImpl<$Res>
     Object? wiFi = null,
     Object? ledPanel = null,
   }) {
-    return _then(_$ModSettingsModelLedImpl(
-      read: freezed == read
-          ? _value.read
-          : read // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      bluetooth: null == bluetooth
-          ? _value.bluetooth
-          : bluetooth // ignore: cast_nullable_to_non_nullable
-              as Bluetooth,
-      wiFi: null == wiFi
-          ? _value.wiFi
-          : wiFi // ignore: cast_nullable_to_non_nullable
-              as WiFi,
-      ledPanel: null == ledPanel
-          ? _value.ledPanel
-          : ledPanel // ignore: cast_nullable_to_non_nullable
-              as LedPanel,
-    ));
+    return _then(
+      _$ModSettingsModelLedImpl(
+        read:
+            freezed == read
+                ? _value.read
+                : read // ignore: cast_nullable_to_non_nullable
+                    as bool?,
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as String,
+        bluetooth:
+            null == bluetooth
+                ? _value.bluetooth
+                : bluetooth // ignore: cast_nullable_to_non_nullable
+                    as Bluetooth,
+        wiFi:
+            null == wiFi
+                ? _value.wiFi
+                : wiFi // ignore: cast_nullable_to_non_nullable
+                    as WiFi,
+        ledPanel:
+            null == ledPanel
+                ? _value.ledPanel
+                : ledPanel // ignore: cast_nullable_to_non_nullable
+                    as LedPanel,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ModSettingsModelLedImpl implements _ModSettingsModelLed {
-  const _$ModSettingsModelLedImpl(
-      {@JsonKey(name: 'Read') this.read,
-      @JsonKey(name: 'Type') required this.type,
-      @JsonKey(name: 'Bluetooth') required this.bluetooth,
-      @JsonKey(name: 'WiFi') required this.wiFi,
-      @JsonKey(name: 'LedPanel') required this.ledPanel});
+  const _$ModSettingsModelLedImpl({
+    @JsonKey(name: 'Read') this.read,
+    @JsonKey(name: 'Type') required this.type,
+    @JsonKey(name: 'Bluetooth') required this.bluetooth,
+    @JsonKey(name: 'WiFi') required this.wiFi,
+    @JsonKey(name: 'LedPanel') required this.ledPanel,
+  });
 
   factory _$ModSettingsModelLedImpl.fromJson(Map<String, dynamic> json) =>
       _$$ModSettingsModelLedImplFromJson(json);
@@ -419,24 +449,24 @@ class _$ModSettingsModelLedImpl implements _ModSettingsModelLed {
   @pragma('vm:prefer-inline')
   _$$ModSettingsModelLedImplCopyWith<_$ModSettingsModelLedImpl> get copyWith =>
       __$$ModSettingsModelLedImplCopyWithImpl<_$ModSettingsModelLedImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ModSettingsModelLedImplToJson(
-      this,
-    );
+    return _$$ModSettingsModelLedImplToJson(this);
   }
 }
 
 abstract class _ModSettingsModelLed implements ModSettingsModelLed {
-  const factory _ModSettingsModelLed(
-          {@JsonKey(name: 'Read') final bool? read,
-          @JsonKey(name: 'Type') required final String type,
-          @JsonKey(name: 'Bluetooth') required final Bluetooth bluetooth,
-          @JsonKey(name: 'WiFi') required final WiFi wiFi,
-          @JsonKey(name: 'LedPanel') required final LedPanel ledPanel}) =
-      _$ModSettingsModelLedImpl;
+  const factory _ModSettingsModelLed({
+    @JsonKey(name: 'Read') final bool? read,
+    @JsonKey(name: 'Type') required final String type,
+    @JsonKey(name: 'Bluetooth') required final Bluetooth bluetooth,
+    @JsonKey(name: 'WiFi') required final WiFi wiFi,
+    @JsonKey(name: 'LedPanel') required final LedPanel ledPanel,
+  }) = _$ModSettingsModelLedImpl;
 
   factory _ModSettingsModelLed.fromJson(Map<String, dynamic> json) =
       _$ModSettingsModelLedImpl.fromJson;
@@ -501,18 +531,20 @@ mixin _$ModSettingsModel {
 /// @nodoc
 abstract class $ModSettingsModelCopyWith<$Res> {
   factory $ModSettingsModelCopyWith(
-          ModSettingsModel value, $Res Function(ModSettingsModel) then) =
-      _$ModSettingsModelCopyWithImpl<$Res, ModSettingsModel>;
+    ModSettingsModel value,
+    $Res Function(ModSettingsModel) then,
+  ) = _$ModSettingsModelCopyWithImpl<$Res, ModSettingsModel>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'Read') bool? read,
-      @JsonKey(name: 'Type') String type,
-      @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
-      @JsonKey(name: 'LoRa') LoRa loRa,
-      @JsonKey(name: 'WiFi') WiFi wiFi,
-      @JsonKey(name: 'TFT') Tft tft,
-      @JsonKey(name: 'Buzzer') Buzzer buzzer,
-      @JsonKey(name: 'VCC') Vcc vcc});
+  $Res call({
+    @JsonKey(name: 'Read') bool? read,
+    @JsonKey(name: 'Type') String type,
+    @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
+    @JsonKey(name: 'LoRa') LoRa loRa,
+    @JsonKey(name: 'WiFi') WiFi wiFi,
+    @JsonKey(name: 'TFT') Tft tft,
+    @JsonKey(name: 'Buzzer') Buzzer buzzer,
+    @JsonKey(name: 'VCC') Vcc vcc,
+  });
 
   $BluetoothCopyWith<$Res> get bluetooth;
   $LoRaCopyWith<$Res> get loRa;
@@ -546,40 +578,51 @@ class _$ModSettingsModelCopyWithImpl<$Res, $Val extends ModSettingsModel>
     Object? buzzer = null,
     Object? vcc = null,
   }) {
-    return _then(_value.copyWith(
-      read: freezed == read
-          ? _value.read
-          : read // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      bluetooth: null == bluetooth
-          ? _value.bluetooth
-          : bluetooth // ignore: cast_nullable_to_non_nullable
-              as Bluetooth,
-      loRa: null == loRa
-          ? _value.loRa
-          : loRa // ignore: cast_nullable_to_non_nullable
-              as LoRa,
-      wiFi: null == wiFi
-          ? _value.wiFi
-          : wiFi // ignore: cast_nullable_to_non_nullable
-              as WiFi,
-      tft: null == tft
-          ? _value.tft
-          : tft // ignore: cast_nullable_to_non_nullable
-              as Tft,
-      buzzer: null == buzzer
-          ? _value.buzzer
-          : buzzer // ignore: cast_nullable_to_non_nullable
-              as Buzzer,
-      vcc: null == vcc
-          ? _value.vcc
-          : vcc // ignore: cast_nullable_to_non_nullable
-              as Vcc,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            read:
+                freezed == read
+                    ? _value.read
+                    : read // ignore: cast_nullable_to_non_nullable
+                        as bool?,
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as String,
+            bluetooth:
+                null == bluetooth
+                    ? _value.bluetooth
+                    : bluetooth // ignore: cast_nullable_to_non_nullable
+                        as Bluetooth,
+            loRa:
+                null == loRa
+                    ? _value.loRa
+                    : loRa // ignore: cast_nullable_to_non_nullable
+                        as LoRa,
+            wiFi:
+                null == wiFi
+                    ? _value.wiFi
+                    : wiFi // ignore: cast_nullable_to_non_nullable
+                        as WiFi,
+            tft:
+                null == tft
+                    ? _value.tft
+                    : tft // ignore: cast_nullable_to_non_nullable
+                        as Tft,
+            buzzer:
+                null == buzzer
+                    ? _value.buzzer
+                    : buzzer // ignore: cast_nullable_to_non_nullable
+                        as Buzzer,
+            vcc:
+                null == vcc
+                    ? _value.vcc
+                    : vcc // ignore: cast_nullable_to_non_nullable
+                        as Vcc,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of ModSettingsModel
@@ -646,20 +689,22 @@ class _$ModSettingsModelCopyWithImpl<$Res, $Val extends ModSettingsModel>
 /// @nodoc
 abstract class _$$ModSettingsModelImplCopyWith<$Res>
     implements $ModSettingsModelCopyWith<$Res> {
-  factory _$$ModSettingsModelImplCopyWith(_$ModSettingsModelImpl value,
-          $Res Function(_$ModSettingsModelImpl) then) =
-      __$$ModSettingsModelImplCopyWithImpl<$Res>;
+  factory _$$ModSettingsModelImplCopyWith(
+    _$ModSettingsModelImpl value,
+    $Res Function(_$ModSettingsModelImpl) then,
+  ) = __$$ModSettingsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'Read') bool? read,
-      @JsonKey(name: 'Type') String type,
-      @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
-      @JsonKey(name: 'LoRa') LoRa loRa,
-      @JsonKey(name: 'WiFi') WiFi wiFi,
-      @JsonKey(name: 'TFT') Tft tft,
-      @JsonKey(name: 'Buzzer') Buzzer buzzer,
-      @JsonKey(name: 'VCC') Vcc vcc});
+  $Res call({
+    @JsonKey(name: 'Read') bool? read,
+    @JsonKey(name: 'Type') String type,
+    @JsonKey(name: 'Bluetooth') Bluetooth bluetooth,
+    @JsonKey(name: 'LoRa') LoRa loRa,
+    @JsonKey(name: 'WiFi') WiFi wiFi,
+    @JsonKey(name: 'TFT') Tft tft,
+    @JsonKey(name: 'Buzzer') Buzzer buzzer,
+    @JsonKey(name: 'VCC') Vcc vcc,
+  });
 
   @override
   $BluetoothCopyWith<$Res> get bluetooth;
@@ -679,9 +724,10 @@ abstract class _$$ModSettingsModelImplCopyWith<$Res>
 class __$$ModSettingsModelImplCopyWithImpl<$Res>
     extends _$ModSettingsModelCopyWithImpl<$Res, _$ModSettingsModelImpl>
     implements _$$ModSettingsModelImplCopyWith<$Res> {
-  __$$ModSettingsModelImplCopyWithImpl(_$ModSettingsModelImpl _value,
-      $Res Function(_$ModSettingsModelImpl) _then)
-      : super(_value, _then);
+  __$$ModSettingsModelImplCopyWithImpl(
+    _$ModSettingsModelImpl _value,
+    $Res Function(_$ModSettingsModelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ModSettingsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -697,55 +743,66 @@ class __$$ModSettingsModelImplCopyWithImpl<$Res>
     Object? buzzer = null,
     Object? vcc = null,
   }) {
-    return _then(_$ModSettingsModelImpl(
-      read: freezed == read
-          ? _value.read
-          : read // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      bluetooth: null == bluetooth
-          ? _value.bluetooth
-          : bluetooth // ignore: cast_nullable_to_non_nullable
-              as Bluetooth,
-      loRa: null == loRa
-          ? _value.loRa
-          : loRa // ignore: cast_nullable_to_non_nullable
-              as LoRa,
-      wiFi: null == wiFi
-          ? _value.wiFi
-          : wiFi // ignore: cast_nullable_to_non_nullable
-              as WiFi,
-      tft: null == tft
-          ? _value.tft
-          : tft // ignore: cast_nullable_to_non_nullable
-              as Tft,
-      buzzer: null == buzzer
-          ? _value.buzzer
-          : buzzer // ignore: cast_nullable_to_non_nullable
-              as Buzzer,
-      vcc: null == vcc
-          ? _value.vcc
-          : vcc // ignore: cast_nullable_to_non_nullable
-              as Vcc,
-    ));
+    return _then(
+      _$ModSettingsModelImpl(
+        read:
+            freezed == read
+                ? _value.read
+                : read // ignore: cast_nullable_to_non_nullable
+                    as bool?,
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as String,
+        bluetooth:
+            null == bluetooth
+                ? _value.bluetooth
+                : bluetooth // ignore: cast_nullable_to_non_nullable
+                    as Bluetooth,
+        loRa:
+            null == loRa
+                ? _value.loRa
+                : loRa // ignore: cast_nullable_to_non_nullable
+                    as LoRa,
+        wiFi:
+            null == wiFi
+                ? _value.wiFi
+                : wiFi // ignore: cast_nullable_to_non_nullable
+                    as WiFi,
+        tft:
+            null == tft
+                ? _value.tft
+                : tft // ignore: cast_nullable_to_non_nullable
+                    as Tft,
+        buzzer:
+            null == buzzer
+                ? _value.buzzer
+                : buzzer // ignore: cast_nullable_to_non_nullable
+                    as Buzzer,
+        vcc:
+            null == vcc
+                ? _value.vcc
+                : vcc // ignore: cast_nullable_to_non_nullable
+                    as Vcc,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ModSettingsModelImpl implements _ModSettingsModel {
-  const _$ModSettingsModelImpl(
-      {@JsonKey(name: 'Read') this.read,
-      @JsonKey(name: 'Type') required this.type,
-      @JsonKey(name: 'Bluetooth') required this.bluetooth,
-      @JsonKey(name: 'LoRa') required this.loRa,
-      @JsonKey(name: 'WiFi') required this.wiFi,
-      @JsonKey(name: 'TFT') required this.tft,
-      @JsonKey(name: 'Buzzer') required this.buzzer,
-      @JsonKey(name: 'VCC') required this.vcc});
+  const _$ModSettingsModelImpl({
+    @JsonKey(name: 'Read') this.read,
+    @JsonKey(name: 'Type') required this.type,
+    @JsonKey(name: 'Bluetooth') required this.bluetooth,
+    @JsonKey(name: 'LoRa') required this.loRa,
+    @JsonKey(name: 'WiFi') required this.wiFi,
+    @JsonKey(name: 'TFT') required this.tft,
+    @JsonKey(name: 'Buzzer') required this.buzzer,
+    @JsonKey(name: 'VCC') required this.vcc,
+  });
 
   factory _$ModSettingsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ModSettingsModelImplFromJson(json);
@@ -799,7 +856,16 @@ class _$ModSettingsModelImpl implements _ModSettingsModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, read, type, bluetooth, loRa, wiFi, tft, buzzer, vcc);
+    runtimeType,
+    read,
+    type,
+    bluetooth,
+    loRa,
+    wiFi,
+    tft,
+    buzzer,
+    vcc,
+  );
 
   /// Create a copy of ModSettingsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -808,26 +874,27 @@ class _$ModSettingsModelImpl implements _ModSettingsModel {
   @pragma('vm:prefer-inline')
   _$$ModSettingsModelImplCopyWith<_$ModSettingsModelImpl> get copyWith =>
       __$$ModSettingsModelImplCopyWithImpl<_$ModSettingsModelImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ModSettingsModelImplToJson(
-      this,
-    );
+    return _$$ModSettingsModelImplToJson(this);
   }
 }
 
 abstract class _ModSettingsModel implements ModSettingsModel {
-  const factory _ModSettingsModel(
-      {@JsonKey(name: 'Read') final bool? read,
-      @JsonKey(name: 'Type') required final String type,
-      @JsonKey(name: 'Bluetooth') required final Bluetooth bluetooth,
-      @JsonKey(name: 'LoRa') required final LoRa loRa,
-      @JsonKey(name: 'WiFi') required final WiFi wiFi,
-      @JsonKey(name: 'TFT') required final Tft tft,
-      @JsonKey(name: 'Buzzer') required final Buzzer buzzer,
-      @JsonKey(name: 'VCC') required final Vcc vcc}) = _$ModSettingsModelImpl;
+  const factory _ModSettingsModel({
+    @JsonKey(name: 'Read') final bool? read,
+    @JsonKey(name: 'Type') required final String type,
+    @JsonKey(name: 'Bluetooth') required final Bluetooth bluetooth,
+    @JsonKey(name: 'LoRa') required final LoRa loRa,
+    @JsonKey(name: 'WiFi') required final WiFi wiFi,
+    @JsonKey(name: 'TFT') required final Tft tft,
+    @JsonKey(name: 'Buzzer') required final Buzzer buzzer,
+    @JsonKey(name: 'VCC') required final Vcc vcc,
+  }) = _$ModSettingsModelImpl;
 
   factory _ModSettingsModel.fromJson(Map<String, dynamic> json) =
       _$ModSettingsModelImpl.fromJson;
@@ -912,20 +979,26 @@ class _$BluetoothCopyWithImpl<$Res, $Val extends Bluetooth>
     Object? name = null,
     Object? number = null,
   }) {
-    return _then(_value.copyWith(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            active:
+                null == active
+                    ? _value.active
+                    : active // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            number:
+                null == number
+                    ? _value.number
+                    : number // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -933,8 +1006,9 @@ class _$BluetoothCopyWithImpl<$Res, $Val extends Bluetooth>
 abstract class _$$BluetoothImplCopyWith<$Res>
     implements $BluetoothCopyWith<$Res> {
   factory _$$BluetoothImplCopyWith(
-          _$BluetoothImpl value, $Res Function(_$BluetoothImpl) then) =
-      __$$BluetoothImplCopyWithImpl<$Res>;
+    _$BluetoothImpl value,
+    $Res Function(_$BluetoothImpl) then,
+  ) = __$$BluetoothImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool active, String name, int number});
@@ -945,8 +1019,9 @@ class __$$BluetoothImplCopyWithImpl<$Res>
     extends _$BluetoothCopyWithImpl<$Res, _$BluetoothImpl>
     implements _$$BluetoothImplCopyWith<$Res> {
   __$$BluetoothImplCopyWithImpl(
-      _$BluetoothImpl _value, $Res Function(_$BluetoothImpl) _then)
-      : super(_value, _then);
+    _$BluetoothImpl _value,
+    $Res Function(_$BluetoothImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Bluetooth
   /// with the given fields replaced by the non-null parameter values.
@@ -957,28 +1032,36 @@ class __$$BluetoothImplCopyWithImpl<$Res>
     Object? name = null,
     Object? number = null,
   }) {
-    return _then(_$BluetoothImpl(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$BluetoothImpl(
+        active:
+            null == active
+                ? _value.active
+                : active // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        number:
+            null == number
+                ? _value.number
+                : number // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$BluetoothImpl implements _Bluetooth {
-  const _$BluetoothImpl(
-      {required this.active, required this.name, required this.number});
+  const _$BluetoothImpl({
+    required this.active,
+    required this.name,
+    required this.number,
+  });
 
   factory _$BluetoothImpl.fromJson(Map<String, dynamic> json) =>
       _$$BluetoothImplFromJson(json);
@@ -1019,17 +1102,16 @@ class _$BluetoothImpl implements _Bluetooth {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BluetoothImplToJson(
-      this,
-    );
+    return _$$BluetoothImplToJson(this);
   }
 }
 
 abstract class _Bluetooth implements Bluetooth {
-  const factory _Bluetooth(
-      {required final bool active,
-      required final String name,
-      required final int number}) = _$BluetoothImpl;
+  const factory _Bluetooth({
+    required final bool active,
+    required final String name,
+    required final int number,
+  }) = _$BluetoothImpl;
 
   factory _Bluetooth.fromJson(Map<String, dynamic> json) =
       _$BluetoothImpl.fromJson;
@@ -1095,28 +1177,35 @@ class _$BuzzerCopyWithImpl<$Res, $Val extends Buzzer>
     Object? shortFrequency = null,
     Object? longFrequency = null,
   }) {
-    return _then(_value.copyWith(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      shortFrequency: null == shortFrequency
-          ? _value.shortFrequency
-          : shortFrequency // ignore: cast_nullable_to_non_nullable
-              as int,
-      longFrequency: null == longFrequency
-          ? _value.longFrequency
-          : longFrequency // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            active:
+                null == active
+                    ? _value.active
+                    : active // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            shortFrequency:
+                null == shortFrequency
+                    ? _value.shortFrequency
+                    : shortFrequency // ignore: cast_nullable_to_non_nullable
+                        as int,
+            longFrequency:
+                null == longFrequency
+                    ? _value.longFrequency
+                    : longFrequency // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$BuzzerImplCopyWith<$Res> implements $BuzzerCopyWith<$Res> {
   factory _$$BuzzerImplCopyWith(
-          _$BuzzerImpl value, $Res Function(_$BuzzerImpl) then) =
-      __$$BuzzerImplCopyWithImpl<$Res>;
+    _$BuzzerImpl value,
+    $Res Function(_$BuzzerImpl) then,
+  ) = __$$BuzzerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool active, int shortFrequency, int longFrequency});
@@ -1127,8 +1216,9 @@ class __$$BuzzerImplCopyWithImpl<$Res>
     extends _$BuzzerCopyWithImpl<$Res, _$BuzzerImpl>
     implements _$$BuzzerImplCopyWith<$Res> {
   __$$BuzzerImplCopyWithImpl(
-      _$BuzzerImpl _value, $Res Function(_$BuzzerImpl) _then)
-      : super(_value, _then);
+    _$BuzzerImpl _value,
+    $Res Function(_$BuzzerImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Buzzer
   /// with the given fields replaced by the non-null parameter values.
@@ -1139,30 +1229,36 @@ class __$$BuzzerImplCopyWithImpl<$Res>
     Object? shortFrequency = null,
     Object? longFrequency = null,
   }) {
-    return _then(_$BuzzerImpl(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      shortFrequency: null == shortFrequency
-          ? _value.shortFrequency
-          : shortFrequency // ignore: cast_nullable_to_non_nullable
-              as int,
-      longFrequency: null == longFrequency
-          ? _value.longFrequency
-          : longFrequency // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$BuzzerImpl(
+        active:
+            null == active
+                ? _value.active
+                : active // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        shortFrequency:
+            null == shortFrequency
+                ? _value.shortFrequency
+                : shortFrequency // ignore: cast_nullable_to_non_nullable
+                    as int,
+        longFrequency:
+            null == longFrequency
+                ? _value.longFrequency
+                : longFrequency // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$BuzzerImpl implements _Buzzer {
-  const _$BuzzerImpl(
-      {required this.active,
-      required this.shortFrequency,
-      required this.longFrequency});
+  const _$BuzzerImpl({
+    required this.active,
+    required this.shortFrequency,
+    required this.longFrequency,
+  });
 
   factory _$BuzzerImpl.fromJson(Map<String, dynamic> json) =>
       _$$BuzzerImplFromJson(json);
@@ -1206,17 +1302,16 @@ class _$BuzzerImpl implements _Buzzer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BuzzerImplToJson(
-      this,
-    );
+    return _$$BuzzerImplToJson(this);
   }
 }
 
 abstract class _Buzzer implements Buzzer {
-  const factory _Buzzer(
-      {required final bool active,
-      required final int shortFrequency,
-      required final int longFrequency}) = _$BuzzerImpl;
+  const factory _Buzzer({
+    required final bool active,
+    required final int shortFrequency,
+    required final int longFrequency,
+  }) = _$BuzzerImpl;
 
   factory _Buzzer.fromJson(Map<String, dynamic> json) = _$BuzzerImpl.fromJson;
 
@@ -1265,16 +1360,17 @@ abstract class $LoRaCopyWith<$Res> {
   factory $LoRaCopyWith(LoRa value, $Res Function(LoRa) then) =
       _$LoRaCopyWithImpl<$Res, LoRa>;
   @useResult
-  $Res call(
-      {bool active,
-      int frequency,
-      int txPower,
-      int spreadingFactor,
-      int signalBandwidth,
-      int codingRateDenom,
-      int preambleLength,
-      int syncWord,
-      bool crc});
+  $Res call({
+    bool active,
+    int frequency,
+    int txPower,
+    int spreadingFactor,
+    int signalBandwidth,
+    int codingRateDenom,
+    int preambleLength,
+    int syncWord,
+    bool crc,
+  });
 }
 
 /// @nodoc
@@ -1302,64 +1398,78 @@ class _$LoRaCopyWithImpl<$Res, $Val extends LoRa>
     Object? syncWord = null,
     Object? crc = null,
   }) {
-    return _then(_value.copyWith(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      frequency: null == frequency
-          ? _value.frequency
-          : frequency // ignore: cast_nullable_to_non_nullable
-              as int,
-      txPower: null == txPower
-          ? _value.txPower
-          : txPower // ignore: cast_nullable_to_non_nullable
-              as int,
-      spreadingFactor: null == spreadingFactor
-          ? _value.spreadingFactor
-          : spreadingFactor // ignore: cast_nullable_to_non_nullable
-              as int,
-      signalBandwidth: null == signalBandwidth
-          ? _value.signalBandwidth
-          : signalBandwidth // ignore: cast_nullable_to_non_nullable
-              as int,
-      codingRateDenom: null == codingRateDenom
-          ? _value.codingRateDenom
-          : codingRateDenom // ignore: cast_nullable_to_non_nullable
-              as int,
-      preambleLength: null == preambleLength
-          ? _value.preambleLength
-          : preambleLength // ignore: cast_nullable_to_non_nullable
-              as int,
-      syncWord: null == syncWord
-          ? _value.syncWord
-          : syncWord // ignore: cast_nullable_to_non_nullable
-              as int,
-      crc: null == crc
-          ? _value.crc
-          : crc // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            active:
+                null == active
+                    ? _value.active
+                    : active // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            frequency:
+                null == frequency
+                    ? _value.frequency
+                    : frequency // ignore: cast_nullable_to_non_nullable
+                        as int,
+            txPower:
+                null == txPower
+                    ? _value.txPower
+                    : txPower // ignore: cast_nullable_to_non_nullable
+                        as int,
+            spreadingFactor:
+                null == spreadingFactor
+                    ? _value.spreadingFactor
+                    : spreadingFactor // ignore: cast_nullable_to_non_nullable
+                        as int,
+            signalBandwidth:
+                null == signalBandwidth
+                    ? _value.signalBandwidth
+                    : signalBandwidth // ignore: cast_nullable_to_non_nullable
+                        as int,
+            codingRateDenom:
+                null == codingRateDenom
+                    ? _value.codingRateDenom
+                    : codingRateDenom // ignore: cast_nullable_to_non_nullable
+                        as int,
+            preambleLength:
+                null == preambleLength
+                    ? _value.preambleLength
+                    : preambleLength // ignore: cast_nullable_to_non_nullable
+                        as int,
+            syncWord:
+                null == syncWord
+                    ? _value.syncWord
+                    : syncWord // ignore: cast_nullable_to_non_nullable
+                        as int,
+            crc:
+                null == crc
+                    ? _value.crc
+                    : crc // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$LoRaImplCopyWith<$Res> implements $LoRaCopyWith<$Res> {
   factory _$$LoRaImplCopyWith(
-          _$LoRaImpl value, $Res Function(_$LoRaImpl) then) =
-      __$$LoRaImplCopyWithImpl<$Res>;
+    _$LoRaImpl value,
+    $Res Function(_$LoRaImpl) then,
+  ) = __$$LoRaImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool active,
-      int frequency,
-      int txPower,
-      int spreadingFactor,
-      int signalBandwidth,
-      int codingRateDenom,
-      int preambleLength,
-      int syncWord,
-      bool crc});
+  $Res call({
+    bool active,
+    int frequency,
+    int txPower,
+    int spreadingFactor,
+    int signalBandwidth,
+    int codingRateDenom,
+    int preambleLength,
+    int syncWord,
+    bool crc,
+  });
 }
 
 /// @nodoc
@@ -1367,7 +1477,7 @@ class __$$LoRaImplCopyWithImpl<$Res>
     extends _$LoRaCopyWithImpl<$Res, _$LoRaImpl>
     implements _$$LoRaImplCopyWith<$Res> {
   __$$LoRaImplCopyWithImpl(_$LoRaImpl _value, $Res Function(_$LoRaImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of LoRa
   /// with the given fields replaced by the non-null parameter values.
@@ -1384,60 +1494,72 @@ class __$$LoRaImplCopyWithImpl<$Res>
     Object? syncWord = null,
     Object? crc = null,
   }) {
-    return _then(_$LoRaImpl(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      frequency: null == frequency
-          ? _value.frequency
-          : frequency // ignore: cast_nullable_to_non_nullable
-              as int,
-      txPower: null == txPower
-          ? _value.txPower
-          : txPower // ignore: cast_nullable_to_non_nullable
-              as int,
-      spreadingFactor: null == spreadingFactor
-          ? _value.spreadingFactor
-          : spreadingFactor // ignore: cast_nullable_to_non_nullable
-              as int,
-      signalBandwidth: null == signalBandwidth
-          ? _value.signalBandwidth
-          : signalBandwidth // ignore: cast_nullable_to_non_nullable
-              as int,
-      codingRateDenom: null == codingRateDenom
-          ? _value.codingRateDenom
-          : codingRateDenom // ignore: cast_nullable_to_non_nullable
-              as int,
-      preambleLength: null == preambleLength
-          ? _value.preambleLength
-          : preambleLength // ignore: cast_nullable_to_non_nullable
-              as int,
-      syncWord: null == syncWord
-          ? _value.syncWord
-          : syncWord // ignore: cast_nullable_to_non_nullable
-              as int,
-      crc: null == crc
-          ? _value.crc
-          : crc // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$LoRaImpl(
+        active:
+            null == active
+                ? _value.active
+                : active // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        frequency:
+            null == frequency
+                ? _value.frequency
+                : frequency // ignore: cast_nullable_to_non_nullable
+                    as int,
+        txPower:
+            null == txPower
+                ? _value.txPower
+                : txPower // ignore: cast_nullable_to_non_nullable
+                    as int,
+        spreadingFactor:
+            null == spreadingFactor
+                ? _value.spreadingFactor
+                : spreadingFactor // ignore: cast_nullable_to_non_nullable
+                    as int,
+        signalBandwidth:
+            null == signalBandwidth
+                ? _value.signalBandwidth
+                : signalBandwidth // ignore: cast_nullable_to_non_nullable
+                    as int,
+        codingRateDenom:
+            null == codingRateDenom
+                ? _value.codingRateDenom
+                : codingRateDenom // ignore: cast_nullable_to_non_nullable
+                    as int,
+        preambleLength:
+            null == preambleLength
+                ? _value.preambleLength
+                : preambleLength // ignore: cast_nullable_to_non_nullable
+                    as int,
+        syncWord:
+            null == syncWord
+                ? _value.syncWord
+                : syncWord // ignore: cast_nullable_to_non_nullable
+                    as int,
+        crc:
+            null == crc
+                ? _value.crc
+                : crc // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LoRaImpl implements _LoRa {
-  const _$LoRaImpl(
-      {required this.active,
-      required this.frequency,
-      required this.txPower,
-      required this.spreadingFactor,
-      required this.signalBandwidth,
-      required this.codingRateDenom,
-      required this.preambleLength,
-      required this.syncWord,
-      required this.crc});
+  const _$LoRaImpl({
+    required this.active,
+    required this.frequency,
+    required this.txPower,
+    required this.spreadingFactor,
+    required this.signalBandwidth,
+    required this.codingRateDenom,
+    required this.preambleLength,
+    required this.syncWord,
+    required this.crc,
+  });
 
   factory _$LoRaImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoRaImplFromJson(json);
@@ -1491,16 +1613,17 @@ class _$LoRaImpl implements _LoRa {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      active,
-      frequency,
-      txPower,
-      spreadingFactor,
-      signalBandwidth,
-      codingRateDenom,
-      preambleLength,
-      syncWord,
-      crc);
+    runtimeType,
+    active,
+    frequency,
+    txPower,
+    spreadingFactor,
+    signalBandwidth,
+    codingRateDenom,
+    preambleLength,
+    syncWord,
+    crc,
+  );
 
   /// Create a copy of LoRa
   /// with the given fields replaced by the non-null parameter values.
@@ -1512,23 +1635,22 @@ class _$LoRaImpl implements _LoRa {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoRaImplToJson(
-      this,
-    );
+    return _$$LoRaImplToJson(this);
   }
 }
 
 abstract class _LoRa implements LoRa {
-  const factory _LoRa(
-      {required final bool active,
-      required final int frequency,
-      required final int txPower,
-      required final int spreadingFactor,
-      required final int signalBandwidth,
-      required final int codingRateDenom,
-      required final int preambleLength,
-      required final int syncWord,
-      required final bool crc}) = _$LoRaImpl;
+  const factory _LoRa({
+    required final bool active,
+    required final int frequency,
+    required final int txPower,
+    required final int spreadingFactor,
+    required final int signalBandwidth,
+    required final int codingRateDenom,
+    required final int preambleLength,
+    required final int syncWord,
+    required final bool crc,
+  }) = _$LoRaImpl;
 
   factory _LoRa.fromJson(Map<String, dynamic> json) = _$LoRaImpl.fromJson;
 
@@ -1584,8 +1706,12 @@ abstract class $TftCopyWith<$Res> {
   factory $TftCopyWith(Tft value, $Res Function(Tft) then) =
       _$TftCopyWithImpl<$Res, Tft>;
   @useResult
-  $Res call(
-      {bool active, bool timeout, int timeoutDuration, bool turnOnAtEvent});
+  $Res call({
+    bool active,
+    bool timeout,
+    int timeoutDuration,
+    bool turnOnAtEvent,
+  });
 }
 
 /// @nodoc
@@ -1607,24 +1733,31 @@ class _$TftCopyWithImpl<$Res, $Val extends Tft> implements $TftCopyWith<$Res> {
     Object? timeoutDuration = null,
     Object? turnOnAtEvent = null,
   }) {
-    return _then(_value.copyWith(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      timeout: null == timeout
-          ? _value.timeout
-          : timeout // ignore: cast_nullable_to_non_nullable
-              as bool,
-      timeoutDuration: null == timeoutDuration
-          ? _value.timeoutDuration
-          : timeoutDuration // ignore: cast_nullable_to_non_nullable
-              as int,
-      turnOnAtEvent: null == turnOnAtEvent
-          ? _value.turnOnAtEvent
-          : turnOnAtEvent // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            active:
+                null == active
+                    ? _value.active
+                    : active // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            timeout:
+                null == timeout
+                    ? _value.timeout
+                    : timeout // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            timeoutDuration:
+                null == timeoutDuration
+                    ? _value.timeoutDuration
+                    : timeoutDuration // ignore: cast_nullable_to_non_nullable
+                        as int,
+            turnOnAtEvent:
+                null == turnOnAtEvent
+                    ? _value.turnOnAtEvent
+                    : turnOnAtEvent // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -1634,15 +1767,19 @@ abstract class _$$TftImplCopyWith<$Res> implements $TftCopyWith<$Res> {
       __$$TftImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool active, bool timeout, int timeoutDuration, bool turnOnAtEvent});
+  $Res call({
+    bool active,
+    bool timeout,
+    int timeoutDuration,
+    bool turnOnAtEvent,
+  });
 }
 
 /// @nodoc
 class __$$TftImplCopyWithImpl<$Res> extends _$TftCopyWithImpl<$Res, _$TftImpl>
     implements _$$TftImplCopyWith<$Res> {
   __$$TftImplCopyWithImpl(_$TftImpl _value, $Res Function(_$TftImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of Tft
   /// with the given fields replaced by the non-null parameter values.
@@ -1654,35 +1791,42 @@ class __$$TftImplCopyWithImpl<$Res> extends _$TftCopyWithImpl<$Res, _$TftImpl>
     Object? timeoutDuration = null,
     Object? turnOnAtEvent = null,
   }) {
-    return _then(_$TftImpl(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      timeout: null == timeout
-          ? _value.timeout
-          : timeout // ignore: cast_nullable_to_non_nullable
-              as bool,
-      timeoutDuration: null == timeoutDuration
-          ? _value.timeoutDuration
-          : timeoutDuration // ignore: cast_nullable_to_non_nullable
-              as int,
-      turnOnAtEvent: null == turnOnAtEvent
-          ? _value.turnOnAtEvent
-          : turnOnAtEvent // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$TftImpl(
+        active:
+            null == active
+                ? _value.active
+                : active // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        timeout:
+            null == timeout
+                ? _value.timeout
+                : timeout // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        timeoutDuration:
+            null == timeoutDuration
+                ? _value.timeoutDuration
+                : timeoutDuration // ignore: cast_nullable_to_non_nullable
+                    as int,
+        turnOnAtEvent:
+            null == turnOnAtEvent
+                ? _value.turnOnAtEvent
+                : turnOnAtEvent // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TftImpl implements _Tft {
-  const _$TftImpl(
-      {required this.active,
-      required this.timeout,
-      required this.timeoutDuration,
-      required this.turnOnAtEvent});
+  const _$TftImpl({
+    required this.active,
+    required this.timeout,
+    required this.timeoutDuration,
+    required this.turnOnAtEvent,
+  });
 
   factory _$TftImpl.fromJson(Map<String, dynamic> json) =>
       _$$TftImplFromJson(json);
@@ -1729,18 +1873,17 @@ class _$TftImpl implements _Tft {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TftImplToJson(
-      this,
-    );
+    return _$$TftImplToJson(this);
   }
 }
 
 abstract class _Tft implements Tft {
-  const factory _Tft(
-      {required final bool active,
-      required final bool timeout,
-      required final int timeoutDuration,
-      required final bool turnOnAtEvent}) = _$TftImpl;
+  const factory _Tft({
+    required final bool active,
+    required final bool timeout,
+    required final int timeoutDuration,
+    required final bool turnOnAtEvent,
+  }) = _$TftImpl;
 
   factory _Tft.fromJson(Map<String, dynamic> json) = _$TftImpl.fromJson;
 
@@ -1801,25 +1944,27 @@ class _$VccCopyWithImpl<$Res, $Val extends Vcc> implements $VccCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? r1 = null,
-    Object? r2 = null,
-    Object? vbat = freezed,
-  }) {
-    return _then(_value.copyWith(
-      r1: null == r1
-          ? _value.r1
-          : r1 // ignore: cast_nullable_to_non_nullable
-              as int,
-      r2: null == r2
-          ? _value.r2
-          : r2 // ignore: cast_nullable_to_non_nullable
-              as int,
-      vbat: freezed == vbat
-          ? _value.vbat
-          : vbat // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ) as $Val);
+  $Res call({Object? r1 = null, Object? r2 = null, Object? vbat = freezed}) {
+    return _then(
+      _value.copyWith(
+            r1:
+                null == r1
+                    ? _value.r1
+                    : r1 // ignore: cast_nullable_to_non_nullable
+                        as int,
+            r2:
+                null == r2
+                    ? _value.r2
+                    : r2 // ignore: cast_nullable_to_non_nullable
+                        as int,
+            vbat:
+                freezed == vbat
+                    ? _value.vbat
+                    : vbat // ignore: cast_nullable_to_non_nullable
+                        as int?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -1836,31 +1981,32 @@ abstract class _$$VccImplCopyWith<$Res> implements $VccCopyWith<$Res> {
 class __$$VccImplCopyWithImpl<$Res> extends _$VccCopyWithImpl<$Res, _$VccImpl>
     implements _$$VccImplCopyWith<$Res> {
   __$$VccImplCopyWithImpl(_$VccImpl _value, $Res Function(_$VccImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of Vcc
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? r1 = null,
-    Object? r2 = null,
-    Object? vbat = freezed,
-  }) {
-    return _then(_$VccImpl(
-      r1: null == r1
-          ? _value.r1
-          : r1 // ignore: cast_nullable_to_non_nullable
-              as int,
-      r2: null == r2
-          ? _value.r2
-          : r2 // ignore: cast_nullable_to_non_nullable
-              as int,
-      vbat: freezed == vbat
-          ? _value.vbat
-          : vbat // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
+  $Res call({Object? r1 = null, Object? r2 = null, Object? vbat = freezed}) {
+    return _then(
+      _$VccImpl(
+        r1:
+            null == r1
+                ? _value.r1
+                : r1 // ignore: cast_nullable_to_non_nullable
+                    as int,
+        r2:
+            null == r2
+                ? _value.r2
+                : r2 // ignore: cast_nullable_to_non_nullable
+                    as int,
+        vbat:
+            freezed == vbat
+                ? _value.vbat
+                : vbat // ignore: cast_nullable_to_non_nullable
+                    as int?,
+      ),
+    );
   }
 }
 
@@ -1908,17 +2054,16 @@ class _$VccImpl implements _Vcc {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$VccImplToJson(
-      this,
-    );
+    return _$$VccImplToJson(this);
   }
 }
 
 abstract class _Vcc implements Vcc {
-  const factory _Vcc(
-      {required final int r1,
-      required final int r2,
-      final int? vbat}) = _$VccImpl;
+  const factory _Vcc({
+    required final int r1,
+    required final int r2,
+    final int? vbat,
+  }) = _$VccImpl;
 
   factory _Vcc.fromJson(Map<String, dynamic> json) = _$VccImpl.fromJson;
 
@@ -1983,28 +2128,35 @@ class _$WiFiCopyWithImpl<$Res, $Val extends WiFi>
     Object? ssid = null,
     Object? passwd = null,
   }) {
-    return _then(_value.copyWith(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      ssid: null == ssid
-          ? _value.ssid
-          : ssid // ignore: cast_nullable_to_non_nullable
-              as String,
-      passwd: null == passwd
-          ? _value.passwd
-          : passwd // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            active:
+                null == active
+                    ? _value.active
+                    : active // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            ssid:
+                null == ssid
+                    ? _value.ssid
+                    : ssid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            passwd:
+                null == passwd
+                    ? _value.passwd
+                    : passwd // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$WiFiImplCopyWith<$Res> implements $WiFiCopyWith<$Res> {
   factory _$$WiFiImplCopyWith(
-          _$WiFiImpl value, $Res Function(_$WiFiImpl) then) =
-      __$$WiFiImplCopyWithImpl<$Res>;
+    _$WiFiImpl value,
+    $Res Function(_$WiFiImpl) then,
+  ) = __$$WiFiImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool active, String ssid, String passwd});
@@ -2015,7 +2167,7 @@ class __$$WiFiImplCopyWithImpl<$Res>
     extends _$WiFiCopyWithImpl<$Res, _$WiFiImpl>
     implements _$$WiFiImplCopyWith<$Res> {
   __$$WiFiImplCopyWithImpl(_$WiFiImpl _value, $Res Function(_$WiFiImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of WiFi
   /// with the given fields replaced by the non-null parameter values.
@@ -2026,28 +2178,36 @@ class __$$WiFiImplCopyWithImpl<$Res>
     Object? ssid = null,
     Object? passwd = null,
   }) {
-    return _then(_$WiFiImpl(
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      ssid: null == ssid
-          ? _value.ssid
-          : ssid // ignore: cast_nullable_to_non_nullable
-              as String,
-      passwd: null == passwd
-          ? _value.passwd
-          : passwd // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$WiFiImpl(
+        active:
+            null == active
+                ? _value.active
+                : active // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        ssid:
+            null == ssid
+                ? _value.ssid
+                : ssid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        passwd:
+            null == passwd
+                ? _value.passwd
+                : passwd // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$WiFiImpl implements _WiFi {
-  const _$WiFiImpl(
-      {required this.active, required this.ssid, required this.passwd});
+  const _$WiFiImpl({
+    required this.active,
+    required this.ssid,
+    required this.passwd,
+  });
 
   factory _$WiFiImpl.fromJson(Map<String, dynamic> json) =>
       _$$WiFiImplFromJson(json);
@@ -2088,17 +2248,16 @@ class _$WiFiImpl implements _WiFi {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WiFiImplToJson(
-      this,
-    );
+    return _$$WiFiImplToJson(this);
   }
 }
 
 abstract class _WiFi implements WiFi {
-  const factory _WiFi(
-      {required final bool active,
-      required final String ssid,
-      required final String passwd}) = _$WiFiImpl;
+  const factory _WiFi({
+    required final bool active,
+    required final String ssid,
+    required final String passwd,
+  }) = _$WiFiImpl;
 
   factory _WiFi.fromJson(Map<String, dynamic> json) = _$WiFiImpl.fromJson;
 
@@ -2157,15 +2316,17 @@ class _$LedPanelCopyWithImpl<$Res, $Val extends LedPanel>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? brightness = null,
-  }) {
-    return _then(_value.copyWith(
-      brightness: null == brightness
-          ? _value.brightness
-          : brightness // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  $Res call({Object? brightness = null}) {
+    return _then(
+      _value.copyWith(
+            brightness:
+                null == brightness
+                    ? _value.brightness
+                    : brightness // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -2173,8 +2334,9 @@ class _$LedPanelCopyWithImpl<$Res, $Val extends LedPanel>
 abstract class _$$LedPanelImplCopyWith<$Res>
     implements $LedPanelCopyWith<$Res> {
   factory _$$LedPanelImplCopyWith(
-          _$LedPanelImpl value, $Res Function(_$LedPanelImpl) then) =
-      __$$LedPanelImplCopyWithImpl<$Res>;
+    _$LedPanelImpl value,
+    $Res Function(_$LedPanelImpl) then,
+  ) = __$$LedPanelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int brightness});
@@ -2185,22 +2347,24 @@ class __$$LedPanelImplCopyWithImpl<$Res>
     extends _$LedPanelCopyWithImpl<$Res, _$LedPanelImpl>
     implements _$$LedPanelImplCopyWith<$Res> {
   __$$LedPanelImplCopyWithImpl(
-      _$LedPanelImpl _value, $Res Function(_$LedPanelImpl) _then)
-      : super(_value, _then);
+    _$LedPanelImpl _value,
+    $Res Function(_$LedPanelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of LedPanel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? brightness = null,
-  }) {
-    return _then(_$LedPanelImpl(
-      brightness: null == brightness
-          ? _value.brightness
-          : brightness // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? brightness = null}) {
+    return _then(
+      _$LedPanelImpl(
+        brightness:
+            null == brightness
+                ? _value.brightness
+                : brightness // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -2243,9 +2407,7 @@ class _$LedPanelImpl implements _LedPanel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LedPanelImplToJson(
-      this,
-    );
+    return _$$LedPanelImplToJson(this);
   }
 }
 

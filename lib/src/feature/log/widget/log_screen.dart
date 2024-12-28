@@ -37,9 +37,7 @@ class LogScreen extends StatelessWidget {
                     children: <Widget>[
                       Flexible(
                         flex: 10,
-                        child: Align(
-                          child: _LogLevelIcon(level: item.level),
-                        ),
+                        child: Align(child: _LogLevelIcon(level: item.level)),
                       ),
                       Flexible(
                         flex: 10,
@@ -70,31 +68,28 @@ class LogScreen extends StatelessWidget {
   }
 
   List<Widget> _getDebugButtons(BuildContext context) => <Widget>[
-        Row(
-          children: <Widget>[
-            TextButton(
-              onPressed: () async {
-                final settingsBloc = context.read<SettingsBloc>();
-                final stageId = settingsBloc.state.settings.stageId;
-                BlocProvider.of<BluetoothBloc>(context).add(
-                  BluetoothEvent.messageReceived(
-                    message: 'F12:12:12,121#',
-                    stageId: stageId,
-                  ),
-                );
-              },
-              child: const Icon(Icons.build),
-            ),
-          ],
+    Row(
+      children: <Widget>[
+        TextButton(
+          onPressed: () async {
+            final settingsBloc = context.read<SettingsBloc>();
+            final stageId = settingsBloc.state.settings.stageId;
+            BlocProvider.of<BluetoothBloc>(context).add(
+              BluetoothEvent.messageReceived(
+                message: 'F12:12:12,121#',
+                stageId: stageId,
+              ),
+            );
+          },
+          child: const Icon(Icons.build),
         ),
-      ];
+      ],
+    ),
+  ];
 }
 
 class _LogSourceIcon extends StatelessWidget {
-  const _LogSourceIcon({
-    required this.source,
-    required this.direction,
-  });
+  const _LogSourceIcon({required this.source, required this.direction});
 
   final LogSource source;
   final LogSourceDirection? direction;
@@ -125,9 +120,7 @@ class _LogSourceIcon extends StatelessWidget {
 }
 
 class _LogLevelIcon extends StatelessWidget {
-  const _LogLevelIcon({
-    required this.level,
-  });
+  const _LogLevelIcon({required this.level});
 
   final LogLevel level;
 

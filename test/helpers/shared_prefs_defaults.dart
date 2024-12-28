@@ -27,6 +27,6 @@ Map<String, Object> sharedPrefsDefaults = <String, Object>{
   'substituteNumbers': false,
   'substituteNumbersDelay': 500,
   'logLimit': -1,
-// appTheme: themeFromString(prefs.getString('theme')),
+  // appTheme: themeFromString(prefs.getString('theme')),
   'previousVersion': '0.0.0',
 };

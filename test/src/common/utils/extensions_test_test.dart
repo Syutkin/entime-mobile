@@ -158,10 +158,7 @@ void main() {
       test('Very short time', () {
         const str = '10';
         final now = DateTime.now();
-        expect(
-          str.toDateTime(),
-          DateTime(now.year, now.month, now.day, 10),
-        );
+        expect(str.toDateTime(), DateTime(now.year, now.month, now.day, 10));
       });
       test('Negative short time', () {
         const str = '-10';

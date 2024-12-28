@@ -40,9 +40,9 @@ class UpdateProvider implements IUpdateProvider {
     http.Client client,
     AppInfoProvider appInfo,
     SettingsProvider settingsProvider,
-  )   : _client = client,
-        _appInfo = appInfo,
-        _settingsProvider = settingsProvider;
+  ) : _client = client,
+      _appInfo = appInfo,
+      _settingsProvider = settingsProvider;
   final http.Client _client;
   Release? _latestRelease;
 
@@ -66,8 +66,7 @@ class UpdateProvider implements IUpdateProvider {
     required http.Client client,
     required AppInfoProvider appInfoProvider,
     required SettingsProvider settingsProvider,
-  }) async =>
-      UpdateProvider._(client, appInfoProvider, settingsProvider);
+  }) async => UpdateProvider._(client, appInfoProvider, settingsProvider);
 
   @override
   void onDownloading(DownloadingHandler callback) =>
@@ -243,8 +242,9 @@ class UpdateProvider implements IUpdateProvider {
   @override
   Future<String?> showChangelog() async {
     // final settings = _settingsProvider.settings;
-    final previousVersion =
-        Version.parse(_settingsProvider.settings.previousVersion);
+    final previousVersion = Version.parse(
+      _settingsProvider.settings.previousVersion,
+    );
 
     final currentVersion = Version.parse(_appInfo.version);
     // Не показывать ченджлог для не релизных версий и первого запуска
@@ -256,8 +256,10 @@ class UpdateProvider implements IUpdateProvider {
       if (currentVersion > previousVersion &&
           previousVersion !=
               Version.parse(_settingsProvider.getDefaults().previousVersion)) {
-        return ChangelogProvider()
-            .changelog(currentVersion.toString(), previousVersion.toString());
+        return ChangelogProvider().changelog(
+          currentVersion.toString(),
+          previousVersion.toString(),
+        );
         // return ShowChangelog(
         //   show: true,
         //   markdown: markdown,

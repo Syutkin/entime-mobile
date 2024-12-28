@@ -19,9 +19,7 @@ class FinishPage extends StatelessWidget {
           return const RacesListPage();
         } else {
           if (stage == null) {
-            return StagesListPage(
-              race: race,
-            );
+            return StagesListPage(race: race);
           } else {
             return const FinishListPage();
           }

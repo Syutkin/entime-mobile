@@ -22,9 +22,9 @@ void main() async {
   setUp(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMessageHandler(
-      'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
-      (obj) async => obj,
-    );
+          'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
+          (obj) async => obj,
+        );
 
     SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
 
@@ -59,12 +59,7 @@ void main() async {
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
         ),
-      ).thenAnswer(
-        (_) async => http.Response(
-          _githubResponse,
-          200,
-        ),
-      );
+      ).thenAnswer((_) async => http.Response(_githubResponse, 200));
 
       final updater = await UpdateProvider.init(
         client: client,
@@ -75,45 +70,43 @@ void main() async {
       expect(await updater.isUpdateAvailable(), true);
     });
 
-    test('Update available but check disabled at settings',
-        skip: 'Remove this setting from provider', () async {
-      when(
-        () => appInfoProvider.appName,
-      ).thenAnswer((realInvocation) => 'entime');
-      when(
-        () => appInfoProvider.version,
-      ).thenAnswer((realInvocation) => '0.0.1');
-      when(
-        () => appInfoProvider.buildNumber,
-      ).thenAnswer((realInvocation) => '1');
-      when(
-        () => appInfoProvider.abi,
-      ).thenAnswer((realInvocation) => 'arm64-v8a');
-      when(
-        () => client.get(
-          Uri.parse(
-            'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
+    test(
+      'Update available but check disabled at settings',
+      skip: 'Remove this setting from provider',
+      () async {
+        when(
+          () => appInfoProvider.appName,
+        ).thenAnswer((realInvocation) => 'entime');
+        when(
+          () => appInfoProvider.version,
+        ).thenAnswer((realInvocation) => '0.0.1');
+        when(
+          () => appInfoProvider.buildNumber,
+        ).thenAnswer((realInvocation) => '1');
+        when(
+          () => appInfoProvider.abi,
+        ).thenAnswer((realInvocation) => 'arm64-v8a');
+        when(
+          () => client.get(
+            Uri.parse(
+              'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
+            ),
           ),
-        ),
-      ).thenAnswer(
-        (_) async => http.Response(
-          _githubResponse,
-          200,
-        ),
-      );
+        ).thenAnswer((_) async => http.Response(_githubResponse, 200));
 
-      await settings.update(settings.settings.copyWith(checkUpdates: false));
+        await settings.update(settings.settings.copyWith(checkUpdates: false));
 
-      final updater = await UpdateProvider.init(
-        client: client,
-        appInfoProvider: appInfoProvider,
-        settingsProvider: settings,
-      );
+        final updater = await UpdateProvider.init(
+          client: client,
+          appInfoProvider: appInfoProvider,
+          settingsProvider: settings,
+        );
 
-      expect(await updater.isUpdateAvailable(), false);
+        expect(await updater.isUpdateAvailable(), false);
 
-      await settings.update(settings.settings.copyWith(checkUpdates: true));
-    });
+        await settings.update(settings.settings.copyWith(checkUpdates: true));
+      },
+    );
 
     test('Update unavailable, you get a latest version', () async {
       when(
@@ -134,12 +127,7 @@ void main() async {
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
         ),
-      ).thenAnswer(
-        (_) async => http.Response(
-          _githubResponse,
-          200,
-        ),
-      );
+      ).thenAnswer((_) async => http.Response(_githubResponse, 200));
 
       final updater = await UpdateProvider.init(
         client: client,
@@ -169,12 +157,7 @@ void main() async {
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
         ),
-      ).thenAnswer(
-        (_) async => http.Response(
-          'Some incorrect response',
-          200,
-        ),
-      );
+      ).thenAnswer((_) async => http.Response('Some incorrect response', 200));
     });
 
     test('404 not found', () async {
@@ -196,12 +179,7 @@ void main() async {
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
         ),
-      ).thenAnswer(
-        (_) async => http.Response(
-          '',
-          404,
-        ),
-      );
+      ).thenAnswer((_) async => http.Response('', 404));
 
       final updater = await UpdateProvider.init(
         client: client,
@@ -263,12 +241,7 @@ void main() async {
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
         ),
-      ).thenAnswer(
-        (_) async => http.Response(
-          _githubResponse,
-          200,
-        ),
-      );
+      ).thenAnswer((_) async => http.Response(_githubResponse, 200));
 
       final updater = await UpdateProvider.init(
         client: client,
@@ -288,12 +261,7 @@ void main() async {
             'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
           ),
         ),
-      ).thenAnswer(
-        (_) async => http.Response(
-          _githubResponse,
-          404,
-        ),
-      );
+      ).thenAnswer((_) async => http.Response(_githubResponse, 404));
 
       final updater = await UpdateProvider.init(
         client: client,
@@ -317,20 +285,12 @@ void main() async {
 
       when(
         () => appInfoProvider.version,
-      ).thenAnswer(
-        (realInvocation) => '1.0.1',
-      );
+      ).thenAnswer((realInvocation) => '1.0.1');
 
-      expect(
-        await updater.showChangelog(),
-        null,
-      );
+      expect(await updater.showChangelog(), null);
 
       // Текущая версия должна быть сохранена в настройках
-      expect(
-        settings.settings.previousVersion,
-        '1.0.1',
-      );
+      expect(settings.settings.previousVersion, '1.0.1');
     });
 
     test('Second start, do not show changelog', () async {
@@ -346,14 +306,9 @@ void main() async {
 
       when(
         () => appInfoProvider.version,
-      ).thenAnswer(
-        (realInvocation) => '1.0.1',
-      );
+      ).thenAnswer((realInvocation) => '1.0.1');
 
-      expect(
-        await updater.showChangelog(),
-        null,
-      );
+      expect(await updater.showChangelog(), null);
     });
 
     test('Program updated', () async {
@@ -369,9 +324,7 @@ void main() async {
 
       when(
         () => appInfoProvider.version,
-      ).thenAnswer(
-        (realInvocation) => '999.0.1',
-      );
+      ).thenAnswer((realInvocation) => '999.0.1');
 
       // empty changelog 'cos version 999.0.1 didn't exists
       expect(await updater.showChangelog(), '');
@@ -390,9 +343,7 @@ void main() async {
 
       when(
         () => appInfoProvider.version,
-      ).thenAnswer(
-        (realInvocation) => '3.0.5-dev',
-      );
+      ).thenAnswer((realInvocation) => '3.0.5-dev');
 
       // на dev версиях не покаываем ченджлог и не сохраняем версию в настройки
       expect(await updater.showChangelog(), null);

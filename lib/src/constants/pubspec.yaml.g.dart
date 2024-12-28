@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-beta.1+396',
+    representation: r'0.5.0-beta.1+397',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-beta.1+396',
+    canonical: r'0.5.0-beta.1+397',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,7 +118,7 @@ sealed class Pubspec {
     preRelease: <String>[r'beta', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'396'],
+    build: <String>[r'397'],
   );
 
   /// Build date and time (UTC)
@@ -126,11 +126,11 @@ sealed class Pubspec {
     2024,
     12,
     28,
+    18,
     14,
-    25,
-    33,
-    155,
-    71,
+    47,
+    434,
+    425,
   );
 
   /// Name
@@ -346,8 +346,8 @@ sealed class Pubspec {
 
   /// Environment
   static const Map<String, String> environment = <String, String>{
-    'sdk': '^3.5.0',
-    'flutter': '^3.5.0',
+    'sdk': '^3.7.0-209.1.beta',
+    'flutter': '^3.7.0-209.1.beta',
   };
 
   /// Platforms
@@ -457,12 +457,13 @@ sealed class Pubspec {
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^9.1.7',
     'build_runner': r'^2.4.14',
+    'dart_style': r'^3.0.0',
     'drift_dev': r'^2.22.1',
     'flutter_lints': r'^5.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
     },
-    'freezed': r'^2.5.7',
+    'freezed': r'^3.0.0-0.0.dev',
     'integration_test': <String, Object>{
       'sdk': r'flutter',
     },

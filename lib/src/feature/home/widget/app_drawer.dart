@@ -13,53 +13,52 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
+    child: ListView(
+      // Important: Remove any padding from the ListView.
+      padding: EdgeInsets.zero,
+      children: <Widget>[
+        DrawerHeader(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          child: Image.asset('assets/fraction_logo.png'),
+        ),
+        ListTile(
+          contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
+          title: Text(Localization.current.I18nDrawer_settings),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (context) => const SettingsScreen(),
               ),
-              child: Image.asset('assets/fraction_logo.png'),
-            ),
-            ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-              title: Text(Localization.current.I18nDrawer_settings),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (context) => const SettingsScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-              title: Text(Localization.current.I18nDrawer_help),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (context) => const HelpPage(),
-                  ),
-                );
-              },
-            ),
-            const Updater(),
-            ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-              title: Text(Localization.current.I18nDrawer_about),
-              onTap: () {
-                showDialog<void>(
-                  context: context,
-                  builder: (context) => const AboutPopup(),
-                );
-              },
-            ),
-            BlocBuilder<AppInfoCubit, AppInfoProvider>(
-              builder: (context, appInfo) => Padding(
+            );
+          },
+        ),
+        ListTile(
+          contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
+          title: Text(Localization.current.I18nDrawer_help),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (context) => const HelpPage()),
+            );
+          },
+        ),
+        const Updater(),
+        ListTile(
+          contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
+          title: Text(Localization.current.I18nDrawer_about),
+          onTap: () {
+            showDialog<void>(
+              context: context,
+              builder: (context) => const AboutPopup(),
+            );
+          },
+        ),
+        BlocBuilder<AppInfoCubit, AppInfoProvider>(
+          builder:
+              (context, appInfo) => Padding(
                 padding: const EdgeInsets.fromLTRB(0, 24, 24, 8),
                 child: Text(
                   Localization.current.I18nDrawer_version(appInfo.version),
@@ -67,8 +66,8 @@ class AppDrawer extends StatelessWidget {
                   textAlign: TextAlign.right,
                 ),
               ),
-            ),
-          ],
         ),
-      );
+      ],
+    ),
+  );
 }

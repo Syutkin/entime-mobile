@@ -10,13 +10,11 @@ class AppSettings with _$AppSettings {
   const factory AppSettings({
     // язык
     required String language, // = "ru", // локаль
-
     // восстанавливать Bluetooth подключение при обрыве
     required bool reconnect,
 
     // звук
     required bool sound, // вкл/выкл
-
     // звук обратного отсчёта
     required bool beep,
     // звуком обратного отсчёта управляет приложение
@@ -30,7 +28,6 @@ class AppSettings with _$AppSettings {
     required double pitch, // тон речи
     required double rate, // скорость речи
     required String voiceLanguage, // = "ru-RU", // язык tts
-
     // id выбранного соревнования и участка
     required int raceId,
     required int stageId,
@@ -129,7 +126,6 @@ class AppSettings with _$AppSettings {
 
     // звук
     @Default(true) bool sound, // вкл/выкл
-
     // звук обратного отсчёта
     @Default(true) bool beep,
     // звуком обратного отсчёта управляет приложение
@@ -139,13 +135,12 @@ class AppSettings with _$AppSettings {
     @Default(true) bool voice, // использовать голосовые сообщения
     @Default(false)
     bool
-        voiceFromApp, // использовать голосовые сообщения и брать данные из приложения
+    voiceFromApp, // использовать голосовые сообщения и брать данные из приложения
     @Default(true) bool voiceName, // называть имена участников
     @Default(1.0) double volume, // громкость
     @Default(1.0) double pitch, // тон речи
     @Default(0.5) double rate, // скорость речи
     @Default('ru-RU') String voiceLanguage, // = "ru-RU", // язык
-
     // id выбранного соревнования и участка
     @Default(-1) int raceId,
     @Default(-1) int stageId,

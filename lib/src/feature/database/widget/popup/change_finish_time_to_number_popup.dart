@@ -10,10 +10,7 @@ Future<bool?> updateFinishTimePopup(BuildContext context, int number) async =>
     );
 
 class UpdateFinishTimePopup extends StatelessWidget {
-  const UpdateFinishTimePopup({
-    required this.number,
-    super.key,
-  });
+  const UpdateFinishTimePopup({required this.number, super.key});
 
   final int number;
 

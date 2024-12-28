@@ -27,107 +27,116 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
   final formKey = GlobalKey<FormState>();
   return showDialog<void>(
     context: context,
-    builder: (context) => ExpandedAlertDialog(
-      title: race == null
-          ? Text(Localization.current.I18nDatabase_editRace)
-          : Text(name),
-      content: Form(
-        key: formKey,
-        child: ListView(
-          // shrinkWrap: true,
-          children: <Widget>[
-            // Название гонки
-            TextFormField(
-              initialValue: name,
-              autofocus: true,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_raceName,
-              ),
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return Localization.current.I18nDatabase_enterRaceName;
-                } else {
-                  name = value;
-                  return null;
-                }
-              },
-            ),
-            // Даты проведения
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_raceDates,
-              ),
-              controller: dateController,
-              keyboardType: TextInputType.none,
-              onTap: () async {
-                final range = await showDateRangePicker(
-                  context: context,
-                  firstDate: DateTime.now().subtract(const Duration(days: 365)),
-                  lastDate: DateTime.now().add(const Duration(days: 365 * 4)),
-                );
+    builder:
+        (context) => ExpandedAlertDialog(
+          title:
+              race == null
+                  ? Text(Localization.current.I18nDatabase_editRace)
+                  : Text(name),
+          content: Form(
+            key: formKey,
+            child: ListView(
+              // shrinkWrap: true,
+              children: <Widget>[
+                // Название гонки
+                TextFormField(
+                  initialValue: name,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    labelText: Localization.current.I18nDatabase_raceName,
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return Localization.current.I18nDatabase_enterRaceName;
+                    } else {
+                      name = value;
+                      return null;
+                    }
+                  },
+                ),
+                // Даты проведения
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: Localization.current.I18nDatabase_raceDates,
+                  ),
+                  controller: dateController,
+                  keyboardType: TextInputType.none,
+                  onTap: () async {
+                    final range = await showDateRangePicker(
+                      context: context,
+                      firstDate: DateTime.now().subtract(
+                        const Duration(days: 365),
+                      ),
+                      lastDate: DateTime.now().add(
+                        const Duration(days: 365 * 4),
+                      ),
+                    );
 
-                startDate = range?.start;
-                finishDate = range?.end;
+                    startDate = range?.start;
+                    finishDate = range?.end;
 
-                if (startDate != null && finishDate != null) {
-                  dateController.text =
-                      '${formatter.format(startDate!)} - ${formatter.format(finishDate!)}';
-                }
-              },
+                    if (startDate != null && finishDate != null) {
+                      dateController.text =
+                          '${formatter.format(startDate!)} - ${formatter.format(finishDate!)}';
+                    }
+                  },
+                ),
+                TextFormField(
+                  initialValue: location,
+                  decoration: InputDecoration(
+                    labelText: Localization.current.I18nDatabase_raceLocation,
+                  ),
+                  onChanged: (value) {
+                    location = value;
+                  },
+                ),
+                TextFormField(
+                  initialValue: url,
+                  decoration: InputDecoration(
+                    labelText: Localization.current.I18nDatabase_raceUrl,
+                  ),
+                  keyboardType: TextInputType.url,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value.isNullOrEmpty) {
+                      url = '';
+                      return null;
+                    } else {
+                      if (value.isValidUrl) {
+                        url = value;
+                        return null;
+                      } else {
+                        return Localization
+                            .current
+                            .I18nDatabase_incorrectRaceUrl;
+                      }
+                    }
+                  },
+                ),
+                TextFormField(
+                  initialValue: description,
+                  decoration: InputDecoration(
+                    labelText:
+                        Localization.current.I18nDatabase_raceDescription,
+                  ),
+                  onChanged: (value) {
+                    description = value;
+                  },
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                ),
+              ],
             ),
-            TextFormField(
-              initialValue: location,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_raceLocation,
-              ),
-              onChanged: (value) {
-                location = value;
-              },
-            ),
-            TextFormField(
-              initialValue: url,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_raceUrl,
-              ),
-              keyboardType: TextInputType.url,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value.isNullOrEmpty) {
-                  url = '';
-                  return null;
-                } else {
-                  if (value.isValidUrl) {
-                    url = value;
-                    return null;
-                  } else {
-                    return Localization.current.I18nDatabase_incorrectRaceUrl;
-                  }
-                }
-              },
-            ),
-            TextFormField(
-              initialValue: description,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_raceDescription,
-              ),
-              onChanged: (value) {
-                description = value;
-              },
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-            ),
-          ],
-        ),
-      ),
-      actions: cancelOkButtons(
-        context: context,
-        onCancelPressed: () {
-          Navigator.of(context).pop();
-        },
-        onOkPressed: () {
-          if (formKey.currentState!.validate()) {
-            context.read<DatabaseBloc>().add(
+          ),
+          actions: cancelOkButtons(
+            context: context,
+            onCancelPressed: () {
+              Navigator.of(context).pop();
+            },
+            onOkPressed: () {
+              if (formKey.currentState!.validate()) {
+                context.read<DatabaseBloc>().add(
                   DatabaseEvent.upsertRace(
                     id: race?.id,
                     name: name,
@@ -138,10 +147,10 @@ Future<void> _upsertRacePopup(BuildContext context, [Race? race]) async {
                     description: description,
                   ),
                 );
-            Navigator.of(context).pop();
-          }
-        },
-      ),
-    ),
+                Navigator.of(context).pop();
+              }
+            },
+          ),
+        ),
   );
 }

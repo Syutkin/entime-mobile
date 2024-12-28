@@ -119,39 +119,41 @@ Future<int?> buzzerFrequencyPopup({
 
   return showDialog<int>(
     context: context,
-    builder: (context) => AlertDialog(
-      title: Text(text),
-      content: StatefulBuilder(
-        builder: (context, setState) => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              Localization.current.I18nModuleSettings_noteFrequency(
-                notes[value.toInt()].name,
-                notes[value.toInt()].frequency,
-              ),
-            ),
-            Slider(
-              value: value,
-              max: notes.length.toDouble() - 1,
-              //label: '${notes[_value.toInt()].name}',
-              divisions: notes.length,
-              onChanged: (newValue) {
-                setState(() => value = newValue);
-              },
-            ),
-          ],
+    builder:
+        (context) => AlertDialog(
+          title: Text(text),
+          content: StatefulBuilder(
+            builder:
+                (context, setState) => Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      Localization.current.I18nModuleSettings_noteFrequency(
+                        notes[value.toInt()].name,
+                        notes[value.toInt()].frequency,
+                      ),
+                    ),
+                    Slider(
+                      value: value,
+                      max: notes.length.toDouble() - 1,
+                      //label: '${notes[_value.toInt()].name}',
+                      divisions: notes.length,
+                      onChanged: (newValue) {
+                        setState(() => value = newValue);
+                      },
+                    ),
+                  ],
+                ),
+          ),
+          actions: cancelOkButtons(
+            context: context,
+            onCancelPressed: () {
+              Navigator.of(context).pop();
+            },
+            onOkPressed: () {
+              Navigator.of(context).pop(notes[value.toInt()].frequency);
+            },
+          ),
         ),
-      ),
-      actions: cancelOkButtons(
-        context: context,
-        onCancelPressed: () {
-          Navigator.of(context).pop();
-        },
-        onOkPressed: () {
-          Navigator.of(context).pop(notes[value.toInt()].frequency);
-        },
-      ),
-    ),
   );
 }

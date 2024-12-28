@@ -37,10 +37,7 @@ void main() {
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
       home: Material(
-        child: BlocProvider.value(
-          value: settingsBloc,
-          child: widget,
-        ),
+        child: BlocProvider.value(value: settingsBloc, child: widget),
       ),
     );
   }
@@ -61,8 +58,9 @@ void main() {
     });
 
     patrolWidgetTest('Show all basic info', (PatrolTester $) async {
-      when(() => settingsBloc.state)
-          .thenReturn(SettingsState(settings: settings));
+      when(
+        () => settingsBloc.state,
+      ).thenReturn(SettingsState(settings: settings));
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -80,13 +78,7 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await $.pumpWidgetAndSettle(
-        testWithLocale(
-          StartItemTile(
-            item: item,
-          ),
-        ),
-      );
+      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
 
       expect($(number.toString()), findsOneWidget);
       expect($(startTime), findsOneWidget);
@@ -94,10 +86,12 @@ void main() {
       expect($(manualCorrection.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('If countdown presents, show it instead of startTime',
-        (PatrolTester $) async {
-      when(() => settingsBloc.state)
-          .thenReturn(SettingsState(settings: settings));
+    patrolWidgetTest('If countdown presents, show it instead of startTime', (
+      PatrolTester $,
+    ) async {
+      when(
+        () => settingsBloc.state,
+      ).thenReturn(SettingsState(settings: settings));
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -116,12 +110,7 @@ void main() {
         statusId: ParticipantStatus.active.index,
       );
       await $.pumpWidgetAndSettle(
-        testWithLocale(
-          StartItemTile(
-            item: item,
-            countdown: countdown,
-          ),
-        ),
+        testWithLocale(StartItemTile(item: item, countdown: countdown)),
       );
 
       expect($(number.toString()), findsOneWidget);
@@ -132,119 +121,108 @@ void main() {
     });
 
     patrolWidgetTest(
-        'If participant is dns, show status name instead of manualCorrection',
-        (PatrolTester $) async {
-      when(() => settingsBloc.state)
-          .thenReturn(SettingsState(settings: settings));
-      final item = ParticipantAtStart(
-        row: row,
-        riderId: 1,
-        raceId: 1,
-        number: number,
-        participantStatusId: ParticipantStatus.active.index,
-        name: name,
-        startId: 1,
-        stageId: 1,
-        participantId: 1,
-        startTime: startTime,
-        automaticStartTime: automaticStartTime,
-        automaticCorrection: automaticCorrection,
-        manualStartTime: manualStartTime,
-        manualCorrection: manualCorrection,
-        statusId: ParticipantStatus.dns.index,
-      );
-      await $.pumpWidgetAndSettle(
-        testWithLocale(
-          StartItemTile(
-            item: item,
-          ),
-        ),
-      );
+      'If participant is dns, show status name instead of manualCorrection',
+      (PatrolTester $) async {
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
+        final item = ParticipantAtStart(
+          row: row,
+          riderId: 1,
+          raceId: 1,
+          number: number,
+          participantStatusId: ParticipantStatus.active.index,
+          name: name,
+          startId: 1,
+          stageId: 1,
+          participantId: 1,
+          startTime: startTime,
+          automaticStartTime: automaticStartTime,
+          automaticCorrection: automaticCorrection,
+          manualStartTime: manualStartTime,
+          manualCorrection: manualCorrection,
+          statusId: ParticipantStatus.dns.index,
+        );
+        await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
 
-      expect($(number.toString()), findsOneWidget);
-      expect($(startTime), findsOneWidget);
-      expect($(automaticCorrection.toString()), findsOneWidget);
-      expect($(manualCorrection.toString()), findsNothing);
-      expect($(Localization.current.I18nCore_dns), findsOneWidget);
-    });
+        expect($(number.toString()), findsOneWidget);
+        expect($(startTime), findsOneWidget);
+        expect($(automaticCorrection.toString()), findsOneWidget);
+        expect($(manualCorrection.toString()), findsNothing);
+        expect($(Localization.current.I18nCore_dns), findsOneWidget);
+      },
+    );
 
     patrolWidgetTest(
-        'If participant is dnf, show status name instead of manualCorrection',
-        (PatrolTester $) async {
-      when(() => settingsBloc.state)
-          .thenReturn(SettingsState(settings: settings));
-      final item = ParticipantAtStart(
-        row: row,
-        riderId: 1,
-        raceId: 1,
-        number: number,
-        participantStatusId: ParticipantStatus.active.index,
-        name: name,
-        startId: 1,
-        stageId: 1,
-        participantId: 1,
-        startTime: startTime,
-        automaticStartTime: automaticStartTime,
-        automaticCorrection: automaticCorrection,
-        manualStartTime: manualStartTime,
-        manualCorrection: manualCorrection,
-        statusId: ParticipantStatus.dnf.index,
-      );
-      await $.pumpWidgetAndSettle(
-        testWithLocale(
-          StartItemTile(
-            item: item,
-          ),
-        ),
-      );
+      'If participant is dnf, show status name instead of manualCorrection',
+      (PatrolTester $) async {
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
+        final item = ParticipantAtStart(
+          row: row,
+          riderId: 1,
+          raceId: 1,
+          number: number,
+          participantStatusId: ParticipantStatus.active.index,
+          name: name,
+          startId: 1,
+          stageId: 1,
+          participantId: 1,
+          startTime: startTime,
+          automaticStartTime: automaticStartTime,
+          automaticCorrection: automaticCorrection,
+          manualStartTime: manualStartTime,
+          manualCorrection: manualCorrection,
+          statusId: ParticipantStatus.dnf.index,
+        );
+        await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
 
-      expect($(number.toString()), findsOneWidget);
-      expect($(startTime), findsOneWidget);
-      expect($(automaticCorrection.toString()), findsOneWidget);
-      expect($(manualCorrection.toString()), findsNothing);
-      expect($(Localization.current.I18nCore_dnf), findsOneWidget);
-    });
+        expect($(number.toString()), findsOneWidget);
+        expect($(startTime), findsOneWidget);
+        expect($(automaticCorrection.toString()), findsOneWidget);
+        expect($(manualCorrection.toString()), findsNothing);
+        expect($(Localization.current.I18nCore_dnf), findsOneWidget);
+      },
+    );
 
     patrolWidgetTest(
-        'If participant is dsq, show status name instead of manualCorrection',
-        (PatrolTester $) async {
-      when(() => settingsBloc.state)
-          .thenReturn(SettingsState(settings: settings));
-      final item = ParticipantAtStart(
-        row: row,
-        riderId: 1,
-        raceId: 1,
-        number: number,
-        participantStatusId: ParticipantStatus.dsq.index,
-        name: name,
-        startId: 1,
-        stageId: 1,
-        participantId: 1,
-        startTime: startTime,
-        automaticStartTime: automaticStartTime,
-        automaticCorrection: automaticCorrection,
-        manualStartTime: manualStartTime,
-        manualCorrection: manualCorrection,
-        statusId: ParticipantStatus.dns.index,
-      );
-      await $.pumpWidgetAndSettle(
-        testWithLocale(
-          StartItemTile(
-            item: item,
-          ),
-        ),
-      );
+      'If participant is dsq, show status name instead of manualCorrection',
+      (PatrolTester $) async {
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
+        final item = ParticipantAtStart(
+          row: row,
+          riderId: 1,
+          raceId: 1,
+          number: number,
+          participantStatusId: ParticipantStatus.dsq.index,
+          name: name,
+          startId: 1,
+          stageId: 1,
+          participantId: 1,
+          startTime: startTime,
+          automaticStartTime: automaticStartTime,
+          automaticCorrection: automaticCorrection,
+          manualStartTime: manualStartTime,
+          manualCorrection: manualCorrection,
+          statusId: ParticipantStatus.dns.index,
+        );
+        await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
 
-      expect($(number.toString()), findsOneWidget);
-      expect($(startTime), findsOneWidget);
-      expect($(automaticCorrection.toString()), findsOneWidget);
-      expect($(manualCorrection.toString()), findsNothing);
-      expect($(Localization.current.I18nCore_dsq), findsOneWidget);
-    });
+        expect($(number.toString()), findsOneWidget);
+        expect($(startTime), findsOneWidget);
+        expect($(automaticCorrection.toString()), findsOneWidget);
+        expect($(manualCorrection.toString()), findsNothing);
+        expect($(Localization.current.I18nCore_dsq), findsOneWidget);
+      },
+    );
 
     patrolWidgetTest('Change color if highlighted', (PatrolTester $) async {
-      when(() => settingsBloc.state)
-          .thenReturn(SettingsState(settings: settings));
+      when(
+        () => settingsBloc.state,
+      ).thenReturn(SettingsState(settings: settings));
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -263,12 +241,7 @@ void main() {
         statusId: ParticipantStatus.active.index,
       );
       await $.pumpWidgetAndSettle(
-        testWithLocale(
-          StartItemTile(
-            item: item,
-            isHighlighted: true,
-          ),
-        ),
+        testWithLocale(StartItemTile(item: item, isHighlighted: true)),
       );
 
       final context = $.tester.element(find.byType(StartItemTile));
@@ -280,11 +253,13 @@ void main() {
       expect($(manualCorrection.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Change color if difference more than threshold',
-        (PatrolTester $) async {
+    patrolWidgetTest('Change color if difference more than threshold', (
+      PatrolTester $,
+    ) async {
       settings = settings.copyWith(showColorStartDifference: true);
-      when(() => settingsBloc.state)
-          .thenReturn(SettingsState(settings: settings));
+      when(
+        () => settingsBloc.state,
+      ).thenReturn(SettingsState(settings: settings));
       final now = DateTime.now();
 
       automaticStartTime = DateFormat(longTimeFormat).format(
@@ -309,13 +284,7 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await $.pumpWidgetAndSettle(
-        testWithLocale(
-          StartItemTile(
-            item: item,
-          ),
-        ),
-      );
+      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
 
       final context = $.tester.element(find.byType(StartItemTile));
       final color = ($.tester.firstWidget(find.byType(Card)) as Card).color;
@@ -326,11 +295,13 @@ void main() {
       expect($(manualCorrection.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Take into account ntpOffset and do not change color',
-        (PatrolTester $) async {
+    patrolWidgetTest('Take into account ntpOffset and do not change color', (
+      PatrolTester $,
+    ) async {
       settings = settings.copyWith(showColorStartDifference: true);
-      when(() => settingsBloc.state)
-          .thenReturn(SettingsState(settings: settings));
+      when(
+        () => settingsBloc.state,
+      ).thenReturn(SettingsState(settings: settings));
       final now = DateTime.now();
 
       automaticStartTime = DateFormat(longTimeFormat).format(
@@ -356,13 +327,7 @@ void main() {
         statusId: ParticipantStatus.active.index,
         ntpOffset: settings.startDifferenceThreshold,
       );
-      await $.pumpWidgetAndSettle(
-        testWithLocale(
-          StartItemTile(
-            item: item,
-          ),
-        ),
-      );
+      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
 
       final color = ($.tester.firstWidget(find.byType(Card)) as Card).color;
 

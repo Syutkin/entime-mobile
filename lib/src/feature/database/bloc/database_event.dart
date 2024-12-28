@@ -175,17 +175,13 @@ class DatabaseEvent with _$DatabaseEvent {
     int? number,
   }) = _AddFinishTimeManual;
 
-  const factory DatabaseEvent.clearStartResultsDebug(
-    int stageId,
-  ) = _ClearStartResultsDebug;
+  const factory DatabaseEvent.clearStartResultsDebug(int stageId) =
+      _ClearStartResultsDebug;
 
-  const factory DatabaseEvent.clearFinishResultsDebug(
-    int stageId,
-  ) = _ClearFinishResultsDebug;
+  const factory DatabaseEvent.clearFinishResultsDebug(int stageId) =
+      _ClearFinishResultsDebug;
 
-  const factory DatabaseEvent.hideAllFinises(
-    int stageId,
-  ) = _HideAllFinises;
+  const factory DatabaseEvent.hideAllFinises(int stageId) = _HideAllFinises;
 
   const factory DatabaseEvent.clearNumberAtFinish({
     required Stage stage,
@@ -202,9 +198,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required int number,
   }) = _SetDNFForStage;
 
-  const factory DatabaseEvent.hideFinish({
-    required int id,
-  }) = _HideFinish;
+  const factory DatabaseEvent.hideFinish({required int id}) = _HideFinish;
 
   const factory DatabaseEvent.addNumberToFinish({
     required Stage stage,
@@ -218,16 +212,14 @@ class DatabaseEvent with _$DatabaseEvent {
     required DateTime dateTimeNow,
   }) = _GetNumbersOnTraceNow;
 
-  const factory DatabaseEvent.selectAwaitingNumber({
-    required int number,
-  }) = _SelectAwaitingNumber;
+  const factory DatabaseEvent.selectAwaitingNumber({required int number}) =
+      _SelectAwaitingNumber;
 
   const factory DatabaseEvent.deselectAwaitingNumber() =
       _DeselectAwaitingNumber;
 
-  const factory DatabaseEvent.createRaceFromRaceCsv({
-    required RaceCsv race,
-  }) = _CreateRaceFromRaceCsv;
+  const factory DatabaseEvent.createRaceFromRaceCsv({required RaceCsv race}) =
+      _CreateRaceFromRaceCsv;
 
   const factory DatabaseEvent.createStagesFromStagesCsv({
     required int raceId,
@@ -240,7 +232,6 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.shareDatabase() = _ShareDatabase;
 
-  const factory DatabaseEvent.shareTrack({
-    required TrailInfo trail,
-  }) = _ShareTrack;
+  const factory DatabaseEvent.shareTrack({required TrailInfo trail}) =
+      _ShareTrack;
 }

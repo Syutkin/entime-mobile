@@ -27,7 +27,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(
-        builder: (context, activeTab) => DefaultTabController(
+    builder:
+        (context, activeTab) => DefaultTabController(
           length: 3,
           child: Scaffold(
             drawer: const AppDrawer(),
@@ -83,16 +84,12 @@ class HomeScreen extends StatelessWidget {
               ],
               child: const TabBarView(
                 physics: NeverScrollableScrollPhysics(),
-                children: <Widget>[
-                  InitPage(),
-                  StartPage(),
-                  FinishPage(),
-                ],
+                children: <Widget>[InitPage(), StartPage(), FinishPage()],
               ),
             ),
           ),
         ),
-      );
+  );
 
   SingleChildWidget _listenToBluetooth() =>
       BlocListener<BluetoothBloc, BluetoothBlocState>(
@@ -133,9 +130,9 @@ class HomeScreen extends StatelessWidget {
                   }
                 },
                 moduleSettings: (moduleSettings) {
-                  context
-                      .read<ModuleSettingsBloc>()
-                      .add(ModuleSettingsEvent.get(moduleSettings));
+                  context.read<ModuleSettingsBloc>().add(
+                    ModuleSettingsEvent.get(moduleSettings),
+                  );
                 },
               );
             },
@@ -158,20 +155,21 @@ class HomeScreen extends StatelessWidget {
                 // Если новая поправка для номера отличается от предыдущей
                 // более чем на две секунды, то уточняем, точно ли обновлять?
                 // Если разница менее двух секунд, то молча игнорируем отсечку
-                final updateStartCorrectionDelay = context
-                    .read<SettingsBloc>()
-                    .state
-                    .settings
-                    .updateStartCorrectionDelay;
+                final updateStartCorrectionDelay =
+                    context
+                        .read<SettingsBloc>()
+                        .state
+                        .settings
+                        .updateStartCorrectionDelay;
                 if (prevCorrection != null &&
                     prevCorrection - data.correction >
                         updateStartCorrectionDelay) {
-                  final text =
-                      Localization.current.I18nHome_updateAutomaticCorrection(
-                    data.number,
-                    data.previousStarts.first.automaticCorrection!,
-                    data.correction,
-                  );
+                  final text = Localization.current
+                      .I18nHome_updateAutomaticCorrection(
+                        data.number,
+                        data.previousStarts.first.automaticCorrection!,
+                        data.correction,
+                      );
                   final update = await overwriteStartTimePopup(
                     context: context,
                     text: text,
@@ -196,64 +194,65 @@ class HomeScreen extends StatelessWidget {
       );
 
   SingleChildWidget _listenToUpdater() => BlocListener<UpdateBloc, UpdateState>(
-        listenWhen: (previousState, state) {
-          // // ловим показ наличия обновления
-          // if (previousState is UpdateInitial && state is UpdateAvailable) {
-          //   return true;
-          //   // ловим показ ченджлога
-          // } else if (previousState is UpdateInitial && state is UpdateInitial) {
-          //   return true;
-          // } else {
-          //   return false;
-          // }
-          return previousState.maybeMap(
-            initial: (initial) {
-              return state.maybeMap(
-                initial: (_) {
-                  return true;
-                },
-                updateAvailable: (_) {
-                  return true;
-                },
-                orElse: () {
-                  return false;
-                },
-              );
+    listenWhen: (previousState, state) {
+      // // ловим показ наличия обновления
+      // if (previousState is UpdateInitial && state is UpdateAvailable) {
+      //   return true;
+      //   // ловим показ ченджлога
+      // } else if (previousState is UpdateInitial && state is UpdateInitial) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+      return previousState.maybeMap(
+        initial: (initial) {
+          return state.maybeMap(
+            initial: (_) {
+              return true;
+            },
+            updateAvailable: (_) {
+              return true;
             },
             orElse: () {
               return false;
             },
           );
         },
-        listener: (context, state) async {
-          await state.whenOrNull(
-            updateAvailable: (version) {
-              if (!Scaffold.of(context).isDrawerOpen) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      Localization.current.I18nHome_updateAvailable(version),
-                    ),
-                    action: SnackBarAction(
-                      onPressed: () {
-                        BlocProvider.of<UpdateBloc>(context)
-                            .add(const UpdateEvent.downloadUpdate());
-                        Scaffold.of(context).openDrawer();
-                      },
-                      label: Localization.current.I18nHome_update,
-                    ),
-                  ),
-                );
-              }
-            },
-            initial: (changelog) async {
-              if (changelog != null) {
-                await showChangelogAtStartup(context, changelog);
-              }
-            },
-          );
+        orElse: () {
+          return false;
         },
       );
+    },
+    listener: (context, state) async {
+      await state.whenOrNull(
+        updateAvailable: (version) {
+          if (!Scaffold.of(context).isDrawerOpen) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  Localization.current.I18nHome_updateAvailable(version),
+                ),
+                action: SnackBarAction(
+                  onPressed: () {
+                    BlocProvider.of<UpdateBloc>(
+                      context,
+                    ).add(const UpdateEvent.downloadUpdate());
+                    Scaffold.of(context).openDrawer();
+                  },
+                  label: Localization.current.I18nHome_update,
+                ),
+              ),
+            );
+          }
+        },
+        initial: (changelog) async {
+          if (changelog != null) {
+            await showChangelogAtStartup(context, changelog);
+          }
+        },
+      );
+    },
+  );
 
   SingleChildWidget _listenToCountdownEvents() {
     return BlocListener<CountdownBloc, CountdownState>(
@@ -275,9 +274,9 @@ class HomeScreen extends StatelessWidget {
               if (tick.second == 15) {
                 final stageId = context.read<DatabaseBloc>().state.stage?.id;
                 if (stageId != null) {
-                  context
-                      .read<CountdownBloc>()
-                      .add(CountdownEvent.callParticipant(stageId: stageId));
+                  context.read<CountdownBloc>().add(
+                    CountdownEvent.callParticipant(stageId: stageId),
+                  );
                 }
               }
             },
@@ -311,9 +310,7 @@ class _TextTitle extends StatelessWidget {
 }
 
 class _FilterButton extends StatelessWidget {
-  const _FilterButton({
-    required this.activeTab,
-  });
+  const _FilterButton({required this.activeTab});
 
   final AppTab activeTab;
 
@@ -363,9 +360,7 @@ class _FilterButton extends StatelessWidget {
                 case FilterStart.showDNF:
                   settingsBloc.add(
                     SettingsEvent.update(
-                      settings: settings.copyWith(
-                        showDNF: !settings.showDNF,
-                      ),
+                      settings: settings.copyWith(showDNF: !settings.showDNF),
                     ),
                   );
                 case FilterStart.showDSQ:
@@ -422,8 +417,9 @@ class _FilterButton extends StatelessWidget {
                 case FilterFinish.showHidden:
                   settingsBloc.add(
                     SettingsEvent.update(
-                      settings:
-                          settings.copyWith(showHidden: !settings.showHidden),
+                      settings: settings.copyWith(
+                        showHidden: !settings.showHidden,
+                      ),
                     ),
                   );
                 case FilterFinish.showNumbers:
@@ -437,8 +433,9 @@ class _FilterButton extends StatelessWidget {
                 case FilterFinish.showManual:
                   settingsBloc.add(
                     SettingsEvent.update(
-                      settings:
-                          settings.copyWith(showManual: !settings.showManual),
+                      settings: settings.copyWith(
+                        showManual: !settings.showManual,
+                      ),
                     ),
                   );
                 case FilterFinish.setDefaults:

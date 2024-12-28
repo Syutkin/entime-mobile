@@ -9,13 +9,7 @@ class HelpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(Localization.current.I18nHelp_manual),
-        ),
-        body: SafeArea(
-          child: Markdown(
-            data: _markdownData,
-          ),
-        ),
-      );
+    appBar: AppBar(title: Text(Localization.current.I18nHelp_manual)),
+    body: SafeArea(child: Markdown(data: _markdownData)),
+  );
 }

@@ -30,9 +30,7 @@ void main() async {
 
   final androidInfo = await DeviceInfoPlugin().androidInfo;
   final settings = await SharedPrefsSettingsProvider.load();
-  final appInfo = await AppInfoProvider.load(
-    deviceInfo: androidInfo,
-  );
+  final appInfo = await AppInfoProvider.load(deviceInfo: androidInfo);
   final updateProvider = await UpdateProvider.init(
     client: http.Client(),
     appInfoProvider: appInfo,

@@ -31,25 +31,30 @@ class StartItemTile extends StatelessWidget {
       builder: (context, state) {
         var difference = Duration.zero;
 
-        var cardColor = isHighlighted
-            ? Theme.of(context).colorScheme.primaryContainer
-            : null;
+        var cardColor =
+            isHighlighted
+                ? Theme.of(context).colorScheme.primaryContainer
+                : null;
 
-        var textColor = isHighlighted
-            ? Theme.of(context).colorScheme.onPrimaryContainer
-            : null;
+        var textColor =
+            isHighlighted
+                ? Theme.of(context).colorScheme.onPrimaryContainer
+                : null;
 
         if (item.timestamp != null) {
-          difference = item.automaticStartTime.toDateTime()?.difference(
-                    // При подсчёте разницы учитываем записанный NTP офсет
-                    item.timestamp!
-                        .add(Duration(milliseconds: item.ntpOffset ?? 0)),
-                  ) ??
+          difference =
+              item.automaticStartTime.toDateTime()?.difference(
+                // При подсчёте разницы учитываем записанный NTP офсет
+                item.timestamp!.add(
+                  Duration(milliseconds: item.ntpOffset ?? 0),
+                ),
+              ) ??
               Duration.zero;
           // ToDo: показывать разницу в числах?
           // final showDifference = state.settings.showStartDifference;
 
-          final isBigDifference = difference.inMilliseconds.abs() >
+          final isBigDifference =
+              difference.inMilliseconds.abs() >
               state.settings.startDifferenceThreshold;
 
           if (isBigDifference && state.settings.showColorStartDifference) {
@@ -58,7 +63,8 @@ class StartItemTile extends StatelessWidget {
           }
         }
 
-        final isNotActive = item.statusId != ParticipantStatus.active.index ||
+        final isNotActive =
+            item.statusId != ParticipantStatus.active.index ||
             item.participantStatusId != ParticipantStatus.active.index;
 
         var status = '';
@@ -86,9 +92,9 @@ class StartItemTile extends StatelessWidget {
               child: Text(
                 Localization.current.I18nStart_didNotStart,
                 style: DefaultTextStyle.of(context).style.apply(
-                      fontSizeFactor: 1.5,
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    ),
+                  fontSizeFactor: 1.5,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
               ),
             ),
             direction: DismissDirection.endToStart,
@@ -108,10 +114,10 @@ class StartItemTile extends StatelessWidget {
                         child: Text(
                           item.number.toString(),
                           style: DefaultTextStyle.of(context).style.apply(
-                                fontSizeFactor: 2,
-                                fontWeightDelta: 2,
-                                color: textColor,
-                              ),
+                            fontSizeFactor: 2,
+                            fontWeightDelta: 2,
+                            color: textColor,
+                          ),
                         ),
                       ),
                     ),
@@ -121,10 +127,9 @@ class StartItemTile extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           countdown ?? item.startTime,
-                          style: DefaultTextStyle.of(context).style.apply(
-                                fontSizeFactor: 1.5,
-                                color: textColor,
-                              ),
+                          style: DefaultTextStyle.of(
+                            context,
+                          ).style.apply(fontSizeFactor: 1.5, color: textColor),
                         ),
                       ),
                     ),
@@ -136,9 +141,9 @@ class StartItemTile extends StatelessWidget {
                           isNotActive
                               ? status
                               : item.manualCorrection.toString().strip(),
-                          style: DefaultTextStyle.of(context).style.apply(
-                                color: textColor,
-                              ),
+                          style: DefaultTextStyle.of(
+                            context,
+                          ).style.apply(color: textColor),
                         ),
                       ),
                     ),
@@ -148,10 +153,9 @@ class StartItemTile extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           item.automaticCorrection.toString().strip(),
-                          style: DefaultTextStyle.of(context).style.apply(
-                                fontSizeFactor: 1.5,
-                                color: textColor,
-                              ),
+                          style: DefaultTextStyle.of(
+                            context,
+                          ).style.apply(fontSizeFactor: 1.5, color: textColor),
                         ),
                       ),
                     ),

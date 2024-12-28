@@ -16,9 +16,11 @@ class MenuButton extends StatelessWidget {
   final AppTab activeTab;
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<SettingsBloc, SettingsState>(
-        builder: (context, state) => BlocBuilder<DatabaseBloc, DatabaseState>(
+  Widget build(
+    BuildContext context,
+  ) => BlocBuilder<SettingsBloc, SettingsState>(
+    builder:
+        (context, state) => BlocBuilder<DatabaseBloc, DatabaseState>(
           builder: (context, protocolState) {
             final settingsBloc = context.read<SettingsBloc>();
             final settings = settingsBloc.state.settings;
@@ -42,8 +44,9 @@ class MenuButton extends StatelessWidget {
                       value: HomeMenuButton.countdownPage,
                       child: ListTile(
                         leading: Icon(MdiIcons.timer),
-                        title:
-                            Text(Localization.current.I18nHome_countdownPage),
+                        title: Text(
+                          Localization.current.I18nHome_countdownPage,
+                        ),
                       ),
                     ),
                   )
@@ -63,9 +66,10 @@ class MenuButton extends StatelessWidget {
                     PopupMenuItem(
                       value: HomeMenuButton.showFinishDifference,
                       child: ListTile(
-                        leading: settings.showFinishDifference
-                            ? Icon(MdiIcons.timer)
-                            : const SizedBox.shrink(),
+                        leading:
+                            settings.showFinishDifference
+                                ? Icon(MdiIcons.timer)
+                                : const SizedBox.shrink(),
                         title: Text(
                           Localization.current.I18nHome_showFinishDifference,
                         ),
@@ -76,12 +80,14 @@ class MenuButton extends StatelessWidget {
                     PopupMenuItem(
                       value: HomeMenuButton.showColorFinishDifference,
                       child: ListTile(
-                        leading: settings.showColorFinishDifference
-                            ? Icon(MdiIcons.palette)
-                            : const SizedBox.shrink(),
+                        leading:
+                            settings.showColorFinishDifference
+                                ? Icon(MdiIcons.palette)
+                                : const SizedBox.shrink(),
                         title: Text(
                           Localization
-                              .current.I18nHome_showColorFinishDifference,
+                              .current
+                              .I18nHome_showColorFinishDifference,
                         ),
                       ),
                     ),
@@ -133,8 +139,9 @@ class MenuButton extends StatelessWidget {
                     if (activeTab == AppTab.start) {
                       settingsBloc.add(
                         SettingsEvent.update(
-                          settings:
-                              settings.copyWith(startFab: !settings.startFab),
+                          settings: settings.copyWith(
+                            startFab: !settings.startFab,
+                          ),
                         ),
                       );
                     } else if (activeTab == AppTab.finish) {
@@ -149,10 +156,7 @@ class MenuButton extends StatelessWidget {
                   case HomeMenuButton.addRacer:
                     final stage = databaseBloc.state.stage;
                     if (stage != null) {
-                      await addRacerPopup(
-                        context: context,
-                        stage: stage,
-                      );
+                      await addRacerPopup(context: context, stage: stage);
                     }
                   case HomeMenuButton.selectRace:
                     await Navigator.of(context).push(
@@ -165,8 +169,9 @@ class MenuButton extends StatelessWidget {
                   case HomeMenuButton.countdown:
                     settingsBloc.add(
                       SettingsEvent.update(
-                        settings:
-                            settings.copyWith(countdown: !settings.countdown),
+                        settings: settings.copyWith(
+                          countdown: !settings.countdown,
+                        ),
                       ),
                     );
                   case HomeMenuButton.countdownPage:
@@ -197,5 +202,5 @@ class MenuButton extends StatelessWidget {
             );
           },
         ),
-      );
+  );
 }

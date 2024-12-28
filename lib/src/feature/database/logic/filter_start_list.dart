@@ -11,7 +11,8 @@ List<ParticipantAtStart> filterStartList(
     return list;
   } else {
     return list.where((e) {
-      final result = (e.statusId == ParticipantStatus.active.index &&
+      final result =
+          (e.statusId == ParticipantStatus.active.index &&
               e.participantStatusId == ParticipantStatus.active.index) ||
           (showDNS &&
               (e.participantStatusId == ParticipantStatus.dns.index ||

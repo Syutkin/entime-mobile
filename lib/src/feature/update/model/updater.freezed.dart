@@ -12,7 +12,8 @@ part of 'updater.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Release _$ReleaseFromJson(Map<String, dynamic> json) {
   return _Release.fromJson(json);
@@ -53,25 +54,26 @@ abstract class $ReleaseCopyWith<$Res> {
   factory $ReleaseCopyWith(Release value, $Res Function(Release) then) =
       _$ReleaseCopyWithImpl<$Res, Release>;
   @useResult
-  $Res call(
-      {String url,
-      String assetsUrl,
-      String uploadUrl,
-      String htmlUrl,
-      int id,
-      Author author,
-      String nodeId,
-      String tagName,
-      String targetCommitish,
-      String name,
-      bool draft,
-      bool prerelease,
-      DateTime createdAt,
-      DateTime publishedAt,
-      List<Asset> assets,
-      String tarballUrl,
-      String zipballUrl,
-      String body});
+  $Res call({
+    String url,
+    String assetsUrl,
+    String uploadUrl,
+    String htmlUrl,
+    int id,
+    Author author,
+    String nodeId,
+    String tagName,
+    String targetCommitish,
+    String name,
+    bool draft,
+    bool prerelease,
+    DateTime createdAt,
+    DateTime publishedAt,
+    List<Asset> assets,
+    String tarballUrl,
+    String zipballUrl,
+    String body,
+  });
 
   $AuthorCopyWith<$Res> get author;
 }
@@ -110,80 +112,101 @@ class _$ReleaseCopyWithImpl<$Res, $Val extends Release>
     Object? zipballUrl = null,
     Object? body = null,
   }) {
-    return _then(_value.copyWith(
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      assetsUrl: null == assetsUrl
-          ? _value.assetsUrl
-          : assetsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      uploadUrl: null == uploadUrl
-          ? _value.uploadUrl
-          : uploadUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      htmlUrl: null == htmlUrl
-          ? _value.htmlUrl
-          : htmlUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      author: null == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
-              as Author,
-      nodeId: null == nodeId
-          ? _value.nodeId
-          : nodeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tagName: null == tagName
-          ? _value.tagName
-          : tagName // ignore: cast_nullable_to_non_nullable
-              as String,
-      targetCommitish: null == targetCommitish
-          ? _value.targetCommitish
-          : targetCommitish // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      draft: null == draft
-          ? _value.draft
-          : draft // ignore: cast_nullable_to_non_nullable
-              as bool,
-      prerelease: null == prerelease
-          ? _value.prerelease
-          : prerelease // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      publishedAt: null == publishedAt
-          ? _value.publishedAt
-          : publishedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      assets: null == assets
-          ? _value.assets
-          : assets // ignore: cast_nullable_to_non_nullable
-              as List<Asset>,
-      tarballUrl: null == tarballUrl
-          ? _value.tarballUrl
-          : tarballUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      zipballUrl: null == zipballUrl
-          ? _value.zipballUrl
-          : zipballUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      body: null == body
-          ? _value.body
-          : body // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            url:
+                null == url
+                    ? _value.url
+                    : url // ignore: cast_nullable_to_non_nullable
+                        as String,
+            assetsUrl:
+                null == assetsUrl
+                    ? _value.assetsUrl
+                    : assetsUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            uploadUrl:
+                null == uploadUrl
+                    ? _value.uploadUrl
+                    : uploadUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            htmlUrl:
+                null == htmlUrl
+                    ? _value.htmlUrl
+                    : htmlUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int,
+            author:
+                null == author
+                    ? _value.author
+                    : author // ignore: cast_nullable_to_non_nullable
+                        as Author,
+            nodeId:
+                null == nodeId
+                    ? _value.nodeId
+                    : nodeId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            tagName:
+                null == tagName
+                    ? _value.tagName
+                    : tagName // ignore: cast_nullable_to_non_nullable
+                        as String,
+            targetCommitish:
+                null == targetCommitish
+                    ? _value.targetCommitish
+                    : targetCommitish // ignore: cast_nullable_to_non_nullable
+                        as String,
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            draft:
+                null == draft
+                    ? _value.draft
+                    : draft // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            prerelease:
+                null == prerelease
+                    ? _value.prerelease
+                    : prerelease // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            createdAt:
+                null == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            publishedAt:
+                null == publishedAt
+                    ? _value.publishedAt
+                    : publishedAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            assets:
+                null == assets
+                    ? _value.assets
+                    : assets // ignore: cast_nullable_to_non_nullable
+                        as List<Asset>,
+            tarballUrl:
+                null == tarballUrl
+                    ? _value.tarballUrl
+                    : tarballUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            zipballUrl:
+                null == zipballUrl
+                    ? _value.zipballUrl
+                    : zipballUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            body:
+                null == body
+                    ? _value.body
+                    : body // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Release
@@ -200,29 +223,31 @@ class _$ReleaseCopyWithImpl<$Res, $Val extends Release>
 /// @nodoc
 abstract class _$$ReleaseImplCopyWith<$Res> implements $ReleaseCopyWith<$Res> {
   factory _$$ReleaseImplCopyWith(
-          _$ReleaseImpl value, $Res Function(_$ReleaseImpl) then) =
-      __$$ReleaseImplCopyWithImpl<$Res>;
+    _$ReleaseImpl value,
+    $Res Function(_$ReleaseImpl) then,
+  ) = __$$ReleaseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String url,
-      String assetsUrl,
-      String uploadUrl,
-      String htmlUrl,
-      int id,
-      Author author,
-      String nodeId,
-      String tagName,
-      String targetCommitish,
-      String name,
-      bool draft,
-      bool prerelease,
-      DateTime createdAt,
-      DateTime publishedAt,
-      List<Asset> assets,
-      String tarballUrl,
-      String zipballUrl,
-      String body});
+  $Res call({
+    String url,
+    String assetsUrl,
+    String uploadUrl,
+    String htmlUrl,
+    int id,
+    Author author,
+    String nodeId,
+    String tagName,
+    String targetCommitish,
+    String name,
+    bool draft,
+    bool prerelease,
+    DateTime createdAt,
+    DateTime publishedAt,
+    List<Asset> assets,
+    String tarballUrl,
+    String zipballUrl,
+    String body,
+  });
 
   @override
   $AuthorCopyWith<$Res> get author;
@@ -233,8 +258,9 @@ class __$$ReleaseImplCopyWithImpl<$Res>
     extends _$ReleaseCopyWithImpl<$Res, _$ReleaseImpl>
     implements _$$ReleaseImplCopyWith<$Res> {
   __$$ReleaseImplCopyWithImpl(
-      _$ReleaseImpl _value, $Res Function(_$ReleaseImpl) _then)
-      : super(_value, _then);
+    _$ReleaseImpl _value,
+    $Res Function(_$ReleaseImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Release
   /// with the given fields replaced by the non-null parameter values.
@@ -260,80 +286,100 @@ class __$$ReleaseImplCopyWithImpl<$Res>
     Object? zipballUrl = null,
     Object? body = null,
   }) {
-    return _then(_$ReleaseImpl(
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      assetsUrl: null == assetsUrl
-          ? _value.assetsUrl
-          : assetsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      uploadUrl: null == uploadUrl
-          ? _value.uploadUrl
-          : uploadUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      htmlUrl: null == htmlUrl
-          ? _value.htmlUrl
-          : htmlUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      author: null == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
-              as Author,
-      nodeId: null == nodeId
-          ? _value.nodeId
-          : nodeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tagName: null == tagName
-          ? _value.tagName
-          : tagName // ignore: cast_nullable_to_non_nullable
-              as String,
-      targetCommitish: null == targetCommitish
-          ? _value.targetCommitish
-          : targetCommitish // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      draft: null == draft
-          ? _value.draft
-          : draft // ignore: cast_nullable_to_non_nullable
-              as bool,
-      prerelease: null == prerelease
-          ? _value.prerelease
-          : prerelease // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      publishedAt: null == publishedAt
-          ? _value.publishedAt
-          : publishedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      assets: null == assets
-          ? _value._assets
-          : assets // ignore: cast_nullable_to_non_nullable
-              as List<Asset>,
-      tarballUrl: null == tarballUrl
-          ? _value.tarballUrl
-          : tarballUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      zipballUrl: null == zipballUrl
-          ? _value.zipballUrl
-          : zipballUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      body: null == body
-          ? _value.body
-          : body // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$ReleaseImpl(
+        url:
+            null == url
+                ? _value.url
+                : url // ignore: cast_nullable_to_non_nullable
+                    as String,
+        assetsUrl:
+            null == assetsUrl
+                ? _value.assetsUrl
+                : assetsUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        uploadUrl:
+            null == uploadUrl
+                ? _value.uploadUrl
+                : uploadUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        htmlUrl:
+            null == htmlUrl
+                ? _value.htmlUrl
+                : htmlUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int,
+        author:
+            null == author
+                ? _value.author
+                : author // ignore: cast_nullable_to_non_nullable
+                    as Author,
+        nodeId:
+            null == nodeId
+                ? _value.nodeId
+                : nodeId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        tagName:
+            null == tagName
+                ? _value.tagName
+                : tagName // ignore: cast_nullable_to_non_nullable
+                    as String,
+        targetCommitish:
+            null == targetCommitish
+                ? _value.targetCommitish
+                : targetCommitish // ignore: cast_nullable_to_non_nullable
+                    as String,
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        draft:
+            null == draft
+                ? _value.draft
+                : draft // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        prerelease:
+            null == prerelease
+                ? _value.prerelease
+                : prerelease // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        createdAt:
+            null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        publishedAt:
+            null == publishedAt
+                ? _value.publishedAt
+                : publishedAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        assets:
+            null == assets
+                ? _value._assets
+                : assets // ignore: cast_nullable_to_non_nullable
+                    as List<Asset>,
+        tarballUrl:
+            null == tarballUrl
+                ? _value.tarballUrl
+                : tarballUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        zipballUrl:
+            null == zipballUrl
+                ? _value.zipballUrl
+                : zipballUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        body:
+            null == body
+                ? _value.body
+                : body // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -341,26 +387,26 @@ class __$$ReleaseImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class _$ReleaseImpl implements _Release {
-  const _$ReleaseImpl(
-      {required this.url,
-      required this.assetsUrl,
-      required this.uploadUrl,
-      required this.htmlUrl,
-      required this.id,
-      required this.author,
-      required this.nodeId,
-      required this.tagName,
-      required this.targetCommitish,
-      required this.name,
-      required this.draft,
-      required this.prerelease,
-      required this.createdAt,
-      required this.publishedAt,
-      required final List<Asset> assets,
-      required this.tarballUrl,
-      required this.zipballUrl,
-      required this.body})
-      : _assets = assets;
+  const _$ReleaseImpl({
+    required this.url,
+    required this.assetsUrl,
+    required this.uploadUrl,
+    required this.htmlUrl,
+    required this.id,
+    required this.author,
+    required this.nodeId,
+    required this.tagName,
+    required this.targetCommitish,
+    required this.name,
+    required this.draft,
+    required this.prerelease,
+    required this.createdAt,
+    required this.publishedAt,
+    required final List<Asset> assets,
+    required this.tarballUrl,
+    required this.zipballUrl,
+    required this.body,
+  }) : _assets = assets;
 
   factory _$ReleaseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReleaseImplFromJson(json);
@@ -449,25 +495,26 @@ class _$ReleaseImpl implements _Release {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      url,
-      assetsUrl,
-      uploadUrl,
-      htmlUrl,
-      id,
-      author,
-      nodeId,
-      tagName,
-      targetCommitish,
-      name,
-      draft,
-      prerelease,
-      createdAt,
-      publishedAt,
-      const DeepCollectionEquality().hash(_assets),
-      tarballUrl,
-      zipballUrl,
-      body);
+    runtimeType,
+    url,
+    assetsUrl,
+    uploadUrl,
+    htmlUrl,
+    id,
+    author,
+    nodeId,
+    tagName,
+    targetCommitish,
+    name,
+    draft,
+    prerelease,
+    createdAt,
+    publishedAt,
+    const DeepCollectionEquality().hash(_assets),
+    tarballUrl,
+    zipballUrl,
+    body,
+  );
 
   /// Create a copy of Release
   /// with the given fields replaced by the non-null parameter values.
@@ -479,32 +526,31 @@ class _$ReleaseImpl implements _Release {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ReleaseImplToJson(
-      this,
-    );
+    return _$$ReleaseImplToJson(this);
   }
 }
 
 abstract class _Release implements Release {
-  const factory _Release(
-      {required final String url,
-      required final String assetsUrl,
-      required final String uploadUrl,
-      required final String htmlUrl,
-      required final int id,
-      required final Author author,
-      required final String nodeId,
-      required final String tagName,
-      required final String targetCommitish,
-      required final String name,
-      required final bool draft,
-      required final bool prerelease,
-      required final DateTime createdAt,
-      required final DateTime publishedAt,
-      required final List<Asset> assets,
-      required final String tarballUrl,
-      required final String zipballUrl,
-      required final String body}) = _$ReleaseImpl;
+  const factory _Release({
+    required final String url,
+    required final String assetsUrl,
+    required final String uploadUrl,
+    required final String htmlUrl,
+    required final int id,
+    required final Author author,
+    required final String nodeId,
+    required final String tagName,
+    required final String targetCommitish,
+    required final String name,
+    required final bool draft,
+    required final bool prerelease,
+    required final DateTime createdAt,
+    required final DateTime publishedAt,
+    required final List<Asset> assets,
+    required final String tarballUrl,
+    required final String zipballUrl,
+    required final String body,
+  }) = _$ReleaseImpl;
 
   factory _Release.fromJson(Map<String, dynamic> json) = _$ReleaseImpl.fromJson;
 
@@ -587,20 +633,21 @@ abstract class $AssetCopyWith<$Res> {
   factory $AssetCopyWith(Asset value, $Res Function(Asset) then) =
       _$AssetCopyWithImpl<$Res, Asset>;
   @useResult
-  $Res call(
-      {String url,
-      int id,
-      String nodeId,
-      String name,
-      dynamic label,
-      Author uploader,
-      String contentType,
-      String state,
-      int size,
-      int downloadCount,
-      DateTime createdAt,
-      DateTime updatedAt,
-      String browserDownloadUrl});
+  $Res call({
+    String url,
+    int id,
+    String nodeId,
+    String name,
+    dynamic label,
+    Author uploader,
+    String contentType,
+    String state,
+    int size,
+    int downloadCount,
+    DateTime createdAt,
+    DateTime updatedAt,
+    String browserDownloadUrl,
+  });
 
   $AuthorCopyWith<$Res> get uploader;
 }
@@ -634,60 +681,76 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
     Object? updatedAt = null,
     Object? browserDownloadUrl = null,
   }) {
-    return _then(_value.copyWith(
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      nodeId: null == nodeId
-          ? _value.nodeId
-          : nodeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      label: freezed == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      uploader: null == uploader
-          ? _value.uploader
-          : uploader // ignore: cast_nullable_to_non_nullable
-              as Author,
-      contentType: null == contentType
-          ? _value.contentType
-          : contentType // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: null == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String,
-      size: null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as int,
-      downloadCount: null == downloadCount
-          ? _value.downloadCount
-          : downloadCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      browserDownloadUrl: null == browserDownloadUrl
-          ? _value.browserDownloadUrl
-          : browserDownloadUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            url:
+                null == url
+                    ? _value.url
+                    : url // ignore: cast_nullable_to_non_nullable
+                        as String,
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int,
+            nodeId:
+                null == nodeId
+                    ? _value.nodeId
+                    : nodeId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            label:
+                freezed == label
+                    ? _value.label
+                    : label // ignore: cast_nullable_to_non_nullable
+                        as dynamic,
+            uploader:
+                null == uploader
+                    ? _value.uploader
+                    : uploader // ignore: cast_nullable_to_non_nullable
+                        as Author,
+            contentType:
+                null == contentType
+                    ? _value.contentType
+                    : contentType // ignore: cast_nullable_to_non_nullable
+                        as String,
+            state:
+                null == state
+                    ? _value.state
+                    : state // ignore: cast_nullable_to_non_nullable
+                        as String,
+            size:
+                null == size
+                    ? _value.size
+                    : size // ignore: cast_nullable_to_non_nullable
+                        as int,
+            downloadCount:
+                null == downloadCount
+                    ? _value.downloadCount
+                    : downloadCount // ignore: cast_nullable_to_non_nullable
+                        as int,
+            createdAt:
+                null == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            updatedAt:
+                null == updatedAt
+                    ? _value.updatedAt
+                    : updatedAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            browserDownloadUrl:
+                null == browserDownloadUrl
+                    ? _value.browserDownloadUrl
+                    : browserDownloadUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Asset
@@ -704,24 +767,26 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
 /// @nodoc
 abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
   factory _$$AssetImplCopyWith(
-          _$AssetImpl value, $Res Function(_$AssetImpl) then) =
-      __$$AssetImplCopyWithImpl<$Res>;
+    _$AssetImpl value,
+    $Res Function(_$AssetImpl) then,
+  ) = __$$AssetImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String url,
-      int id,
-      String nodeId,
-      String name,
-      dynamic label,
-      Author uploader,
-      String contentType,
-      String state,
-      int size,
-      int downloadCount,
-      DateTime createdAt,
-      DateTime updatedAt,
-      String browserDownloadUrl});
+  $Res call({
+    String url,
+    int id,
+    String nodeId,
+    String name,
+    dynamic label,
+    Author uploader,
+    String contentType,
+    String state,
+    int size,
+    int downloadCount,
+    DateTime createdAt,
+    DateTime updatedAt,
+    String browserDownloadUrl,
+  });
 
   @override
   $AuthorCopyWith<$Res> get uploader;
@@ -732,8 +797,9 @@ class __$$AssetImplCopyWithImpl<$Res>
     extends _$AssetCopyWithImpl<$Res, _$AssetImpl>
     implements _$$AssetImplCopyWith<$Res> {
   __$$AssetImplCopyWithImpl(
-      _$AssetImpl _value, $Res Function(_$AssetImpl) _then)
-      : super(_value, _then);
+    _$AssetImpl _value,
+    $Res Function(_$AssetImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Asset
   /// with the given fields replaced by the non-null parameter values.
@@ -754,60 +820,75 @@ class __$$AssetImplCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? browserDownloadUrl = null,
   }) {
-    return _then(_$AssetImpl(
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      nodeId: null == nodeId
-          ? _value.nodeId
-          : nodeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      label: freezed == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      uploader: null == uploader
-          ? _value.uploader
-          : uploader // ignore: cast_nullable_to_non_nullable
-              as Author,
-      contentType: null == contentType
-          ? _value.contentType
-          : contentType // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: null == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String,
-      size: null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as int,
-      downloadCount: null == downloadCount
-          ? _value.downloadCount
-          : downloadCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      browserDownloadUrl: null == browserDownloadUrl
-          ? _value.browserDownloadUrl
-          : browserDownloadUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$AssetImpl(
+        url:
+            null == url
+                ? _value.url
+                : url // ignore: cast_nullable_to_non_nullable
+                    as String,
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int,
+        nodeId:
+            null == nodeId
+                ? _value.nodeId
+                : nodeId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        label:
+            freezed == label
+                ? _value.label
+                : label // ignore: cast_nullable_to_non_nullable
+                    as dynamic,
+        uploader:
+            null == uploader
+                ? _value.uploader
+                : uploader // ignore: cast_nullable_to_non_nullable
+                    as Author,
+        contentType:
+            null == contentType
+                ? _value.contentType
+                : contentType // ignore: cast_nullable_to_non_nullable
+                    as String,
+        state:
+            null == state
+                ? _value.state
+                : state // ignore: cast_nullable_to_non_nullable
+                    as String,
+        size:
+            null == size
+                ? _value.size
+                : size // ignore: cast_nullable_to_non_nullable
+                    as int,
+        downloadCount:
+            null == downloadCount
+                ? _value.downloadCount
+                : downloadCount // ignore: cast_nullable_to_non_nullable
+                    as int,
+        createdAt:
+            null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        updatedAt:
+            null == updatedAt
+                ? _value.updatedAt
+                : updatedAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        browserDownloadUrl:
+            null == browserDownloadUrl
+                ? _value.browserDownloadUrl
+                : browserDownloadUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -815,20 +896,21 @@ class __$$AssetImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class _$AssetImpl implements _Asset {
-  const _$AssetImpl(
-      {required this.url,
-      required this.id,
-      required this.nodeId,
-      required this.name,
-      required this.label,
-      required this.uploader,
-      required this.contentType,
-      required this.state,
-      required this.size,
-      required this.downloadCount,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.browserDownloadUrl});
+  const _$AssetImpl({
+    required this.url,
+    required this.id,
+    required this.nodeId,
+    required this.name,
+    required this.label,
+    required this.uploader,
+    required this.contentType,
+    required this.state,
+    required this.size,
+    required this.downloadCount,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.browserDownloadUrl,
+  });
 
   factory _$AssetImpl.fromJson(Map<String, dynamic> json) =>
       _$$AssetImplFromJson(json);
@@ -894,20 +976,21 @@ class _$AssetImpl implements _Asset {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      url,
-      id,
-      nodeId,
-      name,
-      const DeepCollectionEquality().hash(label),
-      uploader,
-      contentType,
-      state,
-      size,
-      downloadCount,
-      createdAt,
-      updatedAt,
-      browserDownloadUrl);
+    runtimeType,
+    url,
+    id,
+    nodeId,
+    name,
+    const DeepCollectionEquality().hash(label),
+    uploader,
+    contentType,
+    state,
+    size,
+    downloadCount,
+    createdAt,
+    updatedAt,
+    browserDownloadUrl,
+  );
 
   /// Create a copy of Asset
   /// with the given fields replaced by the non-null parameter values.
@@ -919,27 +1002,26 @@ class _$AssetImpl implements _Asset {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AssetImplToJson(
-      this,
-    );
+    return _$$AssetImplToJson(this);
   }
 }
 
 abstract class _Asset implements Asset {
-  const factory _Asset(
-      {required final String url,
-      required final int id,
-      required final String nodeId,
-      required final String name,
-      required final dynamic label,
-      required final Author uploader,
-      required final String contentType,
-      required final String state,
-      required final int size,
-      required final int downloadCount,
-      required final DateTime createdAt,
-      required final DateTime updatedAt,
-      required final String browserDownloadUrl}) = _$AssetImpl;
+  const factory _Asset({
+    required final String url,
+    required final int id,
+    required final String nodeId,
+    required final String name,
+    required final dynamic label,
+    required final Author uploader,
+    required final String contentType,
+    required final String state,
+    required final int size,
+    required final int downloadCount,
+    required final DateTime createdAt,
+    required final DateTime updatedAt,
+    required final String browserDownloadUrl,
+  }) = _$AssetImpl;
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
 
@@ -1017,25 +1099,26 @@ abstract class $AuthorCopyWith<$Res> {
   factory $AuthorCopyWith(Author value, $Res Function(Author) then) =
       _$AuthorCopyWithImpl<$Res, Author>;
   @useResult
-  $Res call(
-      {String login,
-      int id,
-      String nodeId,
-      String avatarUrl,
-      String gravatarId,
-      String url,
-      String htmlUrl,
-      String followersUrl,
-      String followingUrl,
-      String gistsUrl,
-      String starredUrl,
-      String subscriptionsUrl,
-      String organizationsUrl,
-      String reposUrl,
-      String eventsUrl,
-      String receivedEventsUrl,
-      String type,
-      bool siteAdmin});
+  $Res call({
+    String login,
+    int id,
+    String nodeId,
+    String avatarUrl,
+    String gravatarId,
+    String url,
+    String htmlUrl,
+    String followersUrl,
+    String followingUrl,
+    String gistsUrl,
+    String starredUrl,
+    String subscriptionsUrl,
+    String organizationsUrl,
+    String reposUrl,
+    String eventsUrl,
+    String receivedEventsUrl,
+    String type,
+    bool siteAdmin,
+  });
 }
 
 /// @nodoc
@@ -1072,109 +1155,132 @@ class _$AuthorCopyWithImpl<$Res, $Val extends Author>
     Object? type = null,
     Object? siteAdmin = null,
   }) {
-    return _then(_value.copyWith(
-      login: null == login
-          ? _value.login
-          : login // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      nodeId: null == nodeId
-          ? _value.nodeId
-          : nodeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatarUrl: null == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      gravatarId: null == gravatarId
-          ? _value.gravatarId
-          : gravatarId // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      htmlUrl: null == htmlUrl
-          ? _value.htmlUrl
-          : htmlUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      followersUrl: null == followersUrl
-          ? _value.followersUrl
-          : followersUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      followingUrl: null == followingUrl
-          ? _value.followingUrl
-          : followingUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      gistsUrl: null == gistsUrl
-          ? _value.gistsUrl
-          : gistsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      starredUrl: null == starredUrl
-          ? _value.starredUrl
-          : starredUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      subscriptionsUrl: null == subscriptionsUrl
-          ? _value.subscriptionsUrl
-          : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      organizationsUrl: null == organizationsUrl
-          ? _value.organizationsUrl
-          : organizationsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      reposUrl: null == reposUrl
-          ? _value.reposUrl
-          : reposUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      eventsUrl: null == eventsUrl
-          ? _value.eventsUrl
-          : eventsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      receivedEventsUrl: null == receivedEventsUrl
-          ? _value.receivedEventsUrl
-          : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      siteAdmin: null == siteAdmin
-          ? _value.siteAdmin
-          : siteAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            login:
+                null == login
+                    ? _value.login
+                    : login // ignore: cast_nullable_to_non_nullable
+                        as String,
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int,
+            nodeId:
+                null == nodeId
+                    ? _value.nodeId
+                    : nodeId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            avatarUrl:
+                null == avatarUrl
+                    ? _value.avatarUrl
+                    : avatarUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            gravatarId:
+                null == gravatarId
+                    ? _value.gravatarId
+                    : gravatarId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            url:
+                null == url
+                    ? _value.url
+                    : url // ignore: cast_nullable_to_non_nullable
+                        as String,
+            htmlUrl:
+                null == htmlUrl
+                    ? _value.htmlUrl
+                    : htmlUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            followersUrl:
+                null == followersUrl
+                    ? _value.followersUrl
+                    : followersUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            followingUrl:
+                null == followingUrl
+                    ? _value.followingUrl
+                    : followingUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            gistsUrl:
+                null == gistsUrl
+                    ? _value.gistsUrl
+                    : gistsUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            starredUrl:
+                null == starredUrl
+                    ? _value.starredUrl
+                    : starredUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            subscriptionsUrl:
+                null == subscriptionsUrl
+                    ? _value.subscriptionsUrl
+                    : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            organizationsUrl:
+                null == organizationsUrl
+                    ? _value.organizationsUrl
+                    : organizationsUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            reposUrl:
+                null == reposUrl
+                    ? _value.reposUrl
+                    : reposUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            eventsUrl:
+                null == eventsUrl
+                    ? _value.eventsUrl
+                    : eventsUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            receivedEventsUrl:
+                null == receivedEventsUrl
+                    ? _value.receivedEventsUrl
+                    : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as String,
+            siteAdmin:
+                null == siteAdmin
+                    ? _value.siteAdmin
+                    : siteAdmin // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AuthorImplCopyWith<$Res> implements $AuthorCopyWith<$Res> {
   factory _$$AuthorImplCopyWith(
-          _$AuthorImpl value, $Res Function(_$AuthorImpl) then) =
-      __$$AuthorImplCopyWithImpl<$Res>;
+    _$AuthorImpl value,
+    $Res Function(_$AuthorImpl) then,
+  ) = __$$AuthorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String login,
-      int id,
-      String nodeId,
-      String avatarUrl,
-      String gravatarId,
-      String url,
-      String htmlUrl,
-      String followersUrl,
-      String followingUrl,
-      String gistsUrl,
-      String starredUrl,
-      String subscriptionsUrl,
-      String organizationsUrl,
-      String reposUrl,
-      String eventsUrl,
-      String receivedEventsUrl,
-      String type,
-      bool siteAdmin});
+  $Res call({
+    String login,
+    int id,
+    String nodeId,
+    String avatarUrl,
+    String gravatarId,
+    String url,
+    String htmlUrl,
+    String followersUrl,
+    String followingUrl,
+    String gistsUrl,
+    String starredUrl,
+    String subscriptionsUrl,
+    String organizationsUrl,
+    String reposUrl,
+    String eventsUrl,
+    String receivedEventsUrl,
+    String type,
+    bool siteAdmin,
+  });
 }
 
 /// @nodoc
@@ -1182,8 +1288,9 @@ class __$$AuthorImplCopyWithImpl<$Res>
     extends _$AuthorCopyWithImpl<$Res, _$AuthorImpl>
     implements _$$AuthorImplCopyWith<$Res> {
   __$$AuthorImplCopyWithImpl(
-      _$AuthorImpl _value, $Res Function(_$AuthorImpl) _then)
-      : super(_value, _then);
+    _$AuthorImpl _value,
+    $Res Function(_$AuthorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Author
   /// with the given fields replaced by the non-null parameter values.
@@ -1209,80 +1316,100 @@ class __$$AuthorImplCopyWithImpl<$Res>
     Object? type = null,
     Object? siteAdmin = null,
   }) {
-    return _then(_$AuthorImpl(
-      login: null == login
-          ? _value.login
-          : login // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      nodeId: null == nodeId
-          ? _value.nodeId
-          : nodeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatarUrl: null == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      gravatarId: null == gravatarId
-          ? _value.gravatarId
-          : gravatarId // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-      htmlUrl: null == htmlUrl
-          ? _value.htmlUrl
-          : htmlUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      followersUrl: null == followersUrl
-          ? _value.followersUrl
-          : followersUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      followingUrl: null == followingUrl
-          ? _value.followingUrl
-          : followingUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      gistsUrl: null == gistsUrl
-          ? _value.gistsUrl
-          : gistsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      starredUrl: null == starredUrl
-          ? _value.starredUrl
-          : starredUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      subscriptionsUrl: null == subscriptionsUrl
-          ? _value.subscriptionsUrl
-          : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      organizationsUrl: null == organizationsUrl
-          ? _value.organizationsUrl
-          : organizationsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      reposUrl: null == reposUrl
-          ? _value.reposUrl
-          : reposUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      eventsUrl: null == eventsUrl
-          ? _value.eventsUrl
-          : eventsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      receivedEventsUrl: null == receivedEventsUrl
-          ? _value.receivedEventsUrl
-          : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      siteAdmin: null == siteAdmin
-          ? _value.siteAdmin
-          : siteAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$AuthorImpl(
+        login:
+            null == login
+                ? _value.login
+                : login // ignore: cast_nullable_to_non_nullable
+                    as String,
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int,
+        nodeId:
+            null == nodeId
+                ? _value.nodeId
+                : nodeId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        avatarUrl:
+            null == avatarUrl
+                ? _value.avatarUrl
+                : avatarUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        gravatarId:
+            null == gravatarId
+                ? _value.gravatarId
+                : gravatarId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        url:
+            null == url
+                ? _value.url
+                : url // ignore: cast_nullable_to_non_nullable
+                    as String,
+        htmlUrl:
+            null == htmlUrl
+                ? _value.htmlUrl
+                : htmlUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        followersUrl:
+            null == followersUrl
+                ? _value.followersUrl
+                : followersUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        followingUrl:
+            null == followingUrl
+                ? _value.followingUrl
+                : followingUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        gistsUrl:
+            null == gistsUrl
+                ? _value.gistsUrl
+                : gistsUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        starredUrl:
+            null == starredUrl
+                ? _value.starredUrl
+                : starredUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        subscriptionsUrl:
+            null == subscriptionsUrl
+                ? _value.subscriptionsUrl
+                : subscriptionsUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        organizationsUrl:
+            null == organizationsUrl
+                ? _value.organizationsUrl
+                : organizationsUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        reposUrl:
+            null == reposUrl
+                ? _value.reposUrl
+                : reposUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        eventsUrl:
+            null == eventsUrl
+                ? _value.eventsUrl
+                : eventsUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        receivedEventsUrl:
+            null == receivedEventsUrl
+                ? _value.receivedEventsUrl
+                : receivedEventsUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as String,
+        siteAdmin:
+            null == siteAdmin
+                ? _value.siteAdmin
+                : siteAdmin // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
@@ -1290,25 +1417,26 @@ class __$$AuthorImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class _$AuthorImpl implements _Author {
-  const _$AuthorImpl(
-      {required this.login,
-      required this.id,
-      required this.nodeId,
-      required this.avatarUrl,
-      required this.gravatarId,
-      required this.url,
-      required this.htmlUrl,
-      required this.followersUrl,
-      required this.followingUrl,
-      required this.gistsUrl,
-      required this.starredUrl,
-      required this.subscriptionsUrl,
-      required this.organizationsUrl,
-      required this.reposUrl,
-      required this.eventsUrl,
-      required this.receivedEventsUrl,
-      required this.type,
-      required this.siteAdmin});
+  const _$AuthorImpl({
+    required this.login,
+    required this.id,
+    required this.nodeId,
+    required this.avatarUrl,
+    required this.gravatarId,
+    required this.url,
+    required this.htmlUrl,
+    required this.followersUrl,
+    required this.followingUrl,
+    required this.gistsUrl,
+    required this.starredUrl,
+    required this.subscriptionsUrl,
+    required this.organizationsUrl,
+    required this.reposUrl,
+    required this.eventsUrl,
+    required this.receivedEventsUrl,
+    required this.type,
+    required this.siteAdmin,
+  });
 
   factory _$AuthorImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthorImplFromJson(json);
@@ -1395,25 +1523,26 @@ class _$AuthorImpl implements _Author {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      login,
-      id,
-      nodeId,
-      avatarUrl,
-      gravatarId,
-      url,
-      htmlUrl,
-      followersUrl,
-      followingUrl,
-      gistsUrl,
-      starredUrl,
-      subscriptionsUrl,
-      organizationsUrl,
-      reposUrl,
-      eventsUrl,
-      receivedEventsUrl,
-      type,
-      siteAdmin);
+    runtimeType,
+    login,
+    id,
+    nodeId,
+    avatarUrl,
+    gravatarId,
+    url,
+    htmlUrl,
+    followersUrl,
+    followingUrl,
+    gistsUrl,
+    starredUrl,
+    subscriptionsUrl,
+    organizationsUrl,
+    reposUrl,
+    eventsUrl,
+    receivedEventsUrl,
+    type,
+    siteAdmin,
+  );
 
   /// Create a copy of Author
   /// with the given fields replaced by the non-null parameter values.
@@ -1425,32 +1554,31 @@ class _$AuthorImpl implements _Author {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AuthorImplToJson(
-      this,
-    );
+    return _$$AuthorImplToJson(this);
   }
 }
 
 abstract class _Author implements Author {
-  const factory _Author(
-      {required final String login,
-      required final int id,
-      required final String nodeId,
-      required final String avatarUrl,
-      required final String gravatarId,
-      required final String url,
-      required final String htmlUrl,
-      required final String followersUrl,
-      required final String followingUrl,
-      required final String gistsUrl,
-      required final String starredUrl,
-      required final String subscriptionsUrl,
-      required final String organizationsUrl,
-      required final String reposUrl,
-      required final String eventsUrl,
-      required final String receivedEventsUrl,
-      required final String type,
-      required final bool siteAdmin}) = _$AuthorImpl;
+  const factory _Author({
+    required final String login,
+    required final int id,
+    required final String nodeId,
+    required final String avatarUrl,
+    required final String gravatarId,
+    required final String url,
+    required final String htmlUrl,
+    required final String followersUrl,
+    required final String followingUrl,
+    required final String gistsUrl,
+    required final String starredUrl,
+    required final String subscriptionsUrl,
+    required final String organizationsUrl,
+    required final String reposUrl,
+    required final String eventsUrl,
+    required final String receivedEventsUrl,
+    required final String type,
+    required final bool siteAdmin,
+  }) = _$AuthorImpl;
 
   factory _Author.fromJson(Map<String, dynamic> json) = _$AuthorImpl.fromJson;
 

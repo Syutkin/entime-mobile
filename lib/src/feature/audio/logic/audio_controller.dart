@@ -20,9 +20,9 @@ class AudioController implements IAudioController {
     required IAudioService audioService,
     required AppDatabase database,
     required SettingsProvider settingsProvider,
-  })  : _audioService = audioService,
-        _db = database,
-        _settingsProvider = settingsProvider;
+  }) : _audioService = audioService,
+       _db = database,
+       _settingsProvider = settingsProvider;
   final IAudioService _audioService;
   final SettingsProvider _settingsProvider;
 
@@ -73,8 +73,10 @@ class AudioController implements IAudioController {
       dateTime = dateTime.add(const Duration(minutes: 1));
       start.add(DateFormat(shortTimeFormat).format(dateTime));
     }
-    var participants =
-        await _db.getStartingParticipants(time: time, stageId: stageId);
+    var participants = await _db.getStartingParticipants(
+      time: time,
+      stageId: stageId,
+    );
     if (participants.isNotEmpty) {
       _isStarted = true;
       _isBetweenCategory = false;
@@ -88,8 +90,10 @@ class AudioController implements IAudioController {
               !RegExp('^[0-9]').hasMatch(participants.first.name)
           ? newVoiceText += ', ${participants.first.name}.'
           : newVoiceText += '.';
-      participants =
-          await _db.getStartingParticipants(time: start[1], stageId: stageId);
+      participants = await _db.getStartingParticipants(
+        time: start[1],
+        stageId: stageId,
+      );
       if (participants.isNotEmpty) {
         newVoiceText += ' Следующий номер ${participants.first.number}';
         // Имена участников, которые были добавлены автоматически на старте,
@@ -102,8 +106,10 @@ class AudioController implements IAudioController {
         }
       }
     } else {
-      participants =
-          await _db.getStartingParticipants(time: start[1], stageId: stageId);
+      participants = await _db.getStartingParticipants(
+        time: start[1],
+        stageId: stageId,
+      );
       if (participants.isNotEmpty) {
         _isStarted = true;
         _isBetweenCategory = false;
@@ -126,9 +132,13 @@ class AudioController implements IAudioController {
           logger.d(
             'Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
           );
-          final participants = await _db
-              .getNextStartingParticipants(time: start.first, stageId: stageId)
-              .get();
+          final participants =
+              await _db
+                  .getNextStartingParticipants(
+                    time: start.first,
+                    stageId: stageId,
+                  )
+                  .get();
           if (participants.isNotEmpty) {
             _isBetweenCategory = true;
             final lastStart = start.first.toDateTime();

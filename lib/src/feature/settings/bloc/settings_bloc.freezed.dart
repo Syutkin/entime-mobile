@@ -12,7 +12,8 @@ part of 'settings_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$SettingsEvent {
@@ -21,52 +22,47 @@ mixin _$SettingsEvent {
     required TResult Function() initialize,
     required TResult Function() setDefault,
     required TResult Function(AppSettings settings) update,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? setDefault,
     TResult? Function(AppSettings settings)? update,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? setDefault,
     TResult Function(AppSettings settings)? update,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_SettingsEventInitialize value) initialize,
     required TResult Function(_SettingsEventSetDefault value) setDefault,
     required TResult Function(_SettingsEventUpdate value) update,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SettingsEventInitialize value)? initialize,
     TResult? Function(_SettingsEventSetDefault value)? setDefault,
     TResult? Function(_SettingsEventUpdate value)? update,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SettingsEventInitialize value)? initialize,
     TResult Function(_SettingsEventSetDefault value)? setDefault,
     TResult Function(_SettingsEventUpdate value)? update,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SettingsEventCopyWith<$Res> {
   factory $SettingsEventCopyWith(
-          SettingsEvent value, $Res Function(SettingsEvent) then) =
-      _$SettingsEventCopyWithImpl<$Res, SettingsEvent>;
+    SettingsEvent value,
+    $Res Function(SettingsEvent) then,
+  ) = _$SettingsEventCopyWithImpl<$Res, SettingsEvent>;
 }
 
 /// @nodoc
@@ -86,9 +82,9 @@ class _$SettingsEventCopyWithImpl<$Res, $Val extends SettingsEvent>
 /// @nodoc
 abstract class _$$SettingsEventInitializeImplCopyWith<$Res> {
   factory _$$SettingsEventInitializeImplCopyWith(
-          _$SettingsEventInitializeImpl value,
-          $Res Function(_$SettingsEventInitializeImpl) then) =
-      __$$SettingsEventInitializeImplCopyWithImpl<$Res>;
+    _$SettingsEventInitializeImpl value,
+    $Res Function(_$SettingsEventInitializeImpl) then,
+  ) = __$$SettingsEventInitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -96,9 +92,9 @@ class __$$SettingsEventInitializeImplCopyWithImpl<$Res>
     extends _$SettingsEventCopyWithImpl<$Res, _$SettingsEventInitializeImpl>
     implements _$$SettingsEventInitializeImplCopyWith<$Res> {
   __$$SettingsEventInitializeImplCopyWithImpl(
-      _$SettingsEventInitializeImpl _value,
-      $Res Function(_$SettingsEventInitializeImpl) _then)
-      : super(_value, _then);
+    _$SettingsEventInitializeImpl _value,
+    $Res Function(_$SettingsEventInitializeImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -200,9 +196,9 @@ abstract class _SettingsEventInitialize implements SettingsEvent {
 /// @nodoc
 abstract class _$$SettingsEventSetDefaultImplCopyWith<$Res> {
   factory _$$SettingsEventSetDefaultImplCopyWith(
-          _$SettingsEventSetDefaultImpl value,
-          $Res Function(_$SettingsEventSetDefaultImpl) then) =
-      __$$SettingsEventSetDefaultImplCopyWithImpl<$Res>;
+    _$SettingsEventSetDefaultImpl value,
+    $Res Function(_$SettingsEventSetDefaultImpl) then,
+  ) = __$$SettingsEventSetDefaultImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -210,9 +206,9 @@ class __$$SettingsEventSetDefaultImplCopyWithImpl<$Res>
     extends _$SettingsEventCopyWithImpl<$Res, _$SettingsEventSetDefaultImpl>
     implements _$$SettingsEventSetDefaultImplCopyWith<$Res> {
   __$$SettingsEventSetDefaultImplCopyWithImpl(
-      _$SettingsEventSetDefaultImpl _value,
-      $Res Function(_$SettingsEventSetDefaultImpl) _then)
-      : super(_value, _then);
+    _$SettingsEventSetDefaultImpl _value,
+    $Res Function(_$SettingsEventSetDefaultImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -313,9 +309,10 @@ abstract class _SettingsEventSetDefault implements SettingsEvent {
 
 /// @nodoc
 abstract class _$$SettingsEventUpdateImplCopyWith<$Res> {
-  factory _$$SettingsEventUpdateImplCopyWith(_$SettingsEventUpdateImpl value,
-          $Res Function(_$SettingsEventUpdateImpl) then) =
-      __$$SettingsEventUpdateImplCopyWithImpl<$Res>;
+  factory _$$SettingsEventUpdateImplCopyWith(
+    _$SettingsEventUpdateImpl value,
+    $Res Function(_$SettingsEventUpdateImpl) then,
+  ) = __$$SettingsEventUpdateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AppSettings settings});
 
@@ -326,23 +323,25 @@ abstract class _$$SettingsEventUpdateImplCopyWith<$Res> {
 class __$$SettingsEventUpdateImplCopyWithImpl<$Res>
     extends _$SettingsEventCopyWithImpl<$Res, _$SettingsEventUpdateImpl>
     implements _$$SettingsEventUpdateImplCopyWith<$Res> {
-  __$$SettingsEventUpdateImplCopyWithImpl(_$SettingsEventUpdateImpl _value,
-      $Res Function(_$SettingsEventUpdateImpl) _then)
-      : super(_value, _then);
+  __$$SettingsEventUpdateImplCopyWithImpl(
+    _$SettingsEventUpdateImpl _value,
+    $Res Function(_$SettingsEventUpdateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? settings = null,
-  }) {
-    return _then(_$SettingsEventUpdateImpl(
-      settings: null == settings
-          ? _value.settings
-          : settings // ignore: cast_nullable_to_non_nullable
-              as AppSettings,
-    ));
+  $Res call({Object? settings = null}) {
+    return _then(
+      _$SettingsEventUpdateImpl(
+        settings:
+            null == settings
+                ? _value.settings
+                : settings // ignore: cast_nullable_to_non_nullable
+                    as AppSettings,
+      ),
+    );
   }
 
   /// Create a copy of SettingsEvent
@@ -388,7 +387,9 @@ class _$SettingsEventUpdateImpl implements _SettingsEventUpdate {
   @pragma('vm:prefer-inline')
   _$$SettingsEventUpdateImplCopyWith<_$SettingsEventUpdateImpl> get copyWith =>
       __$$SettingsEventUpdateImplCopyWithImpl<_$SettingsEventUpdateImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -486,8 +487,9 @@ mixin _$SettingsState {
 /// @nodoc
 abstract class $SettingsStateCopyWith<$Res> {
   factory $SettingsStateCopyWith(
-          SettingsState value, $Res Function(SettingsState) then) =
-      _$SettingsStateCopyWithImpl<$Res, SettingsState>;
+    SettingsState value,
+    $Res Function(SettingsState) then,
+  ) = _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
   $Res call({AppSettings settings});
 
@@ -508,15 +510,17 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? settings = null,
-  }) {
-    return _then(_value.copyWith(
-      settings: null == settings
-          ? _value.settings
-          : settings // ignore: cast_nullable_to_non_nullable
-              as AppSettings,
-    ) as $Val);
+  $Res call({Object? settings = null}) {
+    return _then(
+      _value.copyWith(
+            settings:
+                null == settings
+                    ? _value.settings
+                    : settings // ignore: cast_nullable_to_non_nullable
+                        as AppSettings,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of SettingsState
@@ -534,8 +538,9 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
 abstract class _$$SettingsStateImplCopyWith<$Res>
     implements $SettingsStateCopyWith<$Res> {
   factory _$$SettingsStateImplCopyWith(
-          _$SettingsStateImpl value, $Res Function(_$SettingsStateImpl) then) =
-      __$$SettingsStateImplCopyWithImpl<$Res>;
+    _$SettingsStateImpl value,
+    $Res Function(_$SettingsStateImpl) then,
+  ) = __$$SettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({AppSettings settings});
@@ -549,22 +554,24 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
     extends _$SettingsStateCopyWithImpl<$Res, _$SettingsStateImpl>
     implements _$$SettingsStateImplCopyWith<$Res> {
   __$$SettingsStateImplCopyWithImpl(
-      _$SettingsStateImpl _value, $Res Function(_$SettingsStateImpl) _then)
-      : super(_value, _then);
+    _$SettingsStateImpl _value,
+    $Res Function(_$SettingsStateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? settings = null,
-  }) {
-    return _then(_$SettingsStateImpl(
-      settings: null == settings
-          ? _value.settings
-          : settings // ignore: cast_nullable_to_non_nullable
-              as AppSettings,
-    ));
+  $Res call({Object? settings = null}) {
+    return _then(
+      _$SettingsStateImpl(
+        settings:
+            null == settings
+                ? _value.settings
+                : settings // ignore: cast_nullable_to_non_nullable
+                    as AppSettings,
+      ),
+    );
   }
 }
 

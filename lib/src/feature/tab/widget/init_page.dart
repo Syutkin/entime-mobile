@@ -9,19 +9,17 @@ import '../../ntp/widget/ntp_tile.dart';
 import 'debug_init_widgets.dart';
 
 class InitPage extends StatelessWidget {
-  const InitPage({
-    super.key,
-  });
+  const InitPage({super.key});
 
   @override
   Widget build(BuildContext context) => ListView(
-        children: <Widget>[
-          const RaceTile(),
-          const BluetoothTile(),
-          const NtpTile(),
-          const TrailsTile(),
-          const RidersTile(),
-          if (!kReleaseMode) ...debugButtons(),
-        ],
-      );
+    children: <Widget>[
+      const RaceTile(),
+      const BluetoothTile(),
+      const NtpTile(),
+      const TrailsTile(),
+      const RidersTile(),
+      if (!kReleaseMode) ...debugButtons(),
+    ],
+  );
 }

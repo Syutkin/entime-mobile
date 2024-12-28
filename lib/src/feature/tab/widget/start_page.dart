@@ -19,13 +19,11 @@ class StartPage extends StatelessWidget {
           return const RacesListPage();
         } else {
           if (stage == null) {
-            return StagesListPage(
-              race: race,
-            );
+            return StagesListPage(race: race);
           } else {
             return const StartListPage(
-                // stage: stage,
-                );
+              // stage: stage,
+            );
           }
         }
       },

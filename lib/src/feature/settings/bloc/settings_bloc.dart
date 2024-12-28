@@ -10,7 +10,7 @@ part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc(this.settingsProvider)
-      : super(SettingsState(settings: settingsProvider.settings)) {
+    : super(SettingsState(settings: settingsProvider.settings)) {
     on<SettingsEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         initialize: (event) {

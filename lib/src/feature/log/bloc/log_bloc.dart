@@ -17,15 +17,16 @@ class LogBloc extends Bloc<LogEvent, LogState> {
   LogBloc({
     required AppDatabase database,
     required SettingsProvider settingsProvider,
-  })  : _db = database,
-        _settingsProvider = settingsProvider,
-        super(const LogState(log: [])) {
+  }) : _db = database,
+       _settingsProvider = settingsProvider,
+       super(const LogState(log: [])) {
     _settingsProvider.state.listen((state) {
       _limit = state.logLimit;
     });
 
-    _logsSubscription =
-        _db.managers.logs.limit(1).watch().listen((event) async {
+    _logsSubscription = _db.managers.logs.limit(1).watch().listen((
+      event,
+    ) async {
       logger.d('LogBloc -> (_db.logs).watch()');
       _log = await _db.getLog(limit: _limit);
       add(const LogEvent.emitState());

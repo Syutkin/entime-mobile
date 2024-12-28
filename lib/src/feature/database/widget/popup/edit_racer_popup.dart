@@ -17,11 +17,12 @@ Future<void> editRacerPopup({
 }) async {
   return showDialog<void>(
     context: context,
-    builder: (BuildContext context) => EditRacerPopup(
-      item: participantAtStart,
-      riders: riders,
-      categories: categories,
-    ),
+    builder:
+        (BuildContext context) => EditRacerPopup(
+          item: participantAtStart,
+          riders: riders,
+          categories: categories,
+        ),
   );
 }
 
@@ -62,24 +63,26 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
   @override
   void initState() {
     riders.addAll(widget.riders);
-    teams = riders
-        .map((e) {
-          if (e.team.isNotNullOrEmpty) {
-            return e.team;
-          }
-        })
-        .toSet()
-        .toList()
-      ..remove(null);
-    cities = riders
-        .map((e) {
-          if (e.city.isNotNullOrEmpty) {
-            return e.city;
-          }
-        })
-        .toSet()
-        .toList()
-      ..remove(null);
+    teams =
+        riders
+            .map((e) {
+              if (e.team.isNotNullOrEmpty) {
+                return e.team;
+              }
+            })
+            .toSet()
+            .toList()
+          ..remove(null);
+    cities =
+        riders
+            .map((e) {
+              if (e.city.isNotNullOrEmpty) {
+                return e.city;
+              }
+            })
+            .toSet()
+            .toList()
+          ..remove(null);
     categories.addAll(widget.categories);
     nicknameController.text = widget.item.nickname ?? '';
     birthdayController.text = widget.item.birthday ?? '';
@@ -121,8 +124,9 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
                     title: Text(Localization.current.I18nDatabase_newCategory),
                     trailing: TextButton(
                       onPressed: () {
-                        categoryDropdownKey.currentState!
-                            .changeSelectedItem(query);
+                        categoryDropdownKey.currentState!.changeSelectedItem(
+                          query,
+                        );
                         categoryDropdownKey.currentState!.closeDropDownSearch();
                         setState(() {
                           categories.insert(0, query);
@@ -136,8 +140,9 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
             ),
             DropdownSearch<Rider>(
               key: riderDropdownKey,
-              selectedItem:
-                  riders.firstWhere((rider) => rider.id == widget.item.riderId),
+              selectedItem: riders.firstWhere(
+                (rider) => rider.id == widget.item.riderId,
+              ),
               items: (f, cs) => riders,
               itemAsString: (value) => value.name,
               compareFn: (item1, item2) => item1.id == item2.id,
@@ -167,10 +172,14 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
                     title: Text(Localization.current.I18nDatabase_newRider),
                     trailing: TextButton(
                       onPressed: () {
-                        final rider =
-                            Rider(id: -1, name: query, isDeleted: false);
-                        riderDropdownKey.currentState!
-                            .changeSelectedItem(rider);
+                        final rider = Rider(
+                          id: -1,
+                          name: query,
+                          isDeleted: false,
+                        );
+                        riderDropdownKey.currentState!.changeSelectedItem(
+                          rider,
+                        );
                         riderDropdownKey.currentState!.closeDropDownSearch();
                         setState(() {
                           riders.insert(0, rider);
@@ -305,20 +314,20 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
             final rider = riderDropdownKey.currentState!.getSelectedItem!;
             final category = categoryDropdownKey.currentState!.getSelectedItem;
             context.read<DatabaseBloc>().add(
-                  DatabaseEvent.updateRacer(
-                    riderId: rider.id,
-                    participantId: widget.item.participantId,
-                    category: category,
-                    name: rider.name,
-                    nickname: nicknameController.text,
-                    birthday: birthdayController.text,
-                    team: teamDropdownKey.currentState!.getSelectedItem,
-                    city: cityDropdownKey.currentState!.getSelectedItem,
-                    email: emailController.text,
-                    phone: phoneController.text,
-                    comment: commentController.text,
-                  ),
-                );
+              DatabaseEvent.updateRacer(
+                riderId: rider.id,
+                participantId: widget.item.participantId,
+                category: category,
+                name: rider.name,
+                nickname: nicknameController.text,
+                birthday: birthdayController.text,
+                team: teamDropdownKey.currentState!.getSelectedItem,
+                city: cityDropdownKey.currentState!.getSelectedItem,
+                email: emailController.text,
+                phone: phoneController.text,
+                comment: commentController.text,
+              ),
+            );
             Navigator.of(context).pop();
           }
         },

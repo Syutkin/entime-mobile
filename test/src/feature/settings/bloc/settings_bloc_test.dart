@@ -25,8 +25,9 @@ class MockSettingsProvider extends Mock implements SettingsProvider {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   group('SettingsBloc', () {
-    final defaultSettingsProvider =
-        MockSettingsProvider(const AppSettings.defaults());
+    final defaultSettingsProvider = MockSettingsProvider(
+      const AppSettings.defaults(),
+    );
 
     test('initial state is correct', () {
       expect(
@@ -38,8 +39,11 @@ void main() {
 
   group('initialize', () {
     final changedSettingsProvider = MockSettingsProvider(
-      const AppSettings.defaults()
-          .copyWith(countdownSize: 150, startFabSize: 150, finishFabSize: 150),
+      const AppSettings.defaults().copyWith(
+        countdownSize: 150,
+        startFabSize: 150,
+        finishFabSize: 150,
+      ),
     );
 
     blocTest<SettingsBloc, SettingsState>(
@@ -51,8 +55,9 @@ void main() {
   });
 
   group('setDefault', () {
-    final defaultSettingsProvider =
-        MockSettingsProvider(const AppSettings.defaults());
+    final defaultSettingsProvider = MockSettingsProvider(
+      const AppSettings.defaults(),
+    );
 
     blocTest<SettingsBloc, SettingsState>(
       'correctly emits default settings',
@@ -62,8 +67,9 @@ void main() {
     );
 
     group('update', () {
-      final initialSettingsProvider =
-          MockSettingsProvider(const AppSettings.defaults());
+      final initialSettingsProvider = MockSettingsProvider(
+        const AppSettings.defaults(),
+      );
       final changedSettingsProvider = MockSettingsProvider(
         const AppSettings.defaults().copyWith(
           countdownSize: 150,
@@ -75,11 +81,12 @@ void main() {
       blocTest<SettingsBloc, SettingsState>(
         'correctly updates settings',
         build: () => SettingsBloc(initialSettingsProvider),
-        act: (bloc) => bloc.add(
-          SettingsEvent.update(settings: changedSettingsProvider.settings),
-        ),
-        expect: () =>
-            [SettingsState(settings: initialSettingsProvider.settings)],
+        act:
+            (bloc) => bloc.add(
+              SettingsEvent.update(settings: changedSettingsProvider.settings),
+            ),
+        expect:
+            () => [SettingsState(settings: initialSettingsProvider.settings)],
       );
     });
   });

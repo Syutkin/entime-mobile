@@ -100,11 +100,7 @@ class Tft with _$Tft {
 
 @freezed
 class Vcc with _$Vcc {
-  const factory Vcc({
-    required int r1,
-    required int r2,
-    int? vbat,
-  }) = _Vcc;
+  const factory Vcc({required int r1, required int r2, int? vbat}) = _Vcc;
 
   factory Vcc.fromJson(Map<String, dynamic> json) => _$VccFromJson(json);
 }
@@ -122,9 +118,7 @@ class WiFi with _$WiFi {
 
 @freezed
 class LedPanel with _$LedPanel {
-  const factory LedPanel({
-    required int brightness,
-  }) = _LedPanel;
+  const factory LedPanel({required int brightness}) = _LedPanel;
 
   factory LedPanel.fromJson(Map<String, dynamic> json) =>
       _$LedPanelFromJson(json);

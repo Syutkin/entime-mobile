@@ -9,8 +9,8 @@ import '../settings.dart';
 
 class SharedPrefsSettingsProvider extends SettingsProvider {
   SharedPrefsSettingsProvider._(SharedPreferences prefs, AppSettings settings)
-      : _prefs = prefs,
-        _settings = settings;
+    : _prefs = prefs,
+      _settings = settings;
   final SharedPreferences _prefs;
   AppSettings _settings;
 
@@ -47,7 +47,8 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       countdownSize: prefs.getDouble('countdownSize') ?? defaults.countdownSize,
       countdownLeft: prefs.getDouble('countdownLeft') ?? defaults.countdownLeft,
       countdownTop: prefs.getDouble('countdownTop') ?? defaults.countdownTop,
-      countdownAtStartTime: prefs.getBool('countdownAtStartTime') ??
+      countdownAtStartTime:
+          prefs.getBool('countdownAtStartTime') ??
           defaults.countdownAtStartTime,
       checkUpdates: prefs.getBool('checkUpdates') ?? defaults.checkUpdates,
       showDNS: prefs.getBool('showDNS') ?? defaults.showDNS,
@@ -60,28 +61,37 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
       finishDelay: prefs.getInt('finishDelay') ?? defaults.finishDelay,
       substituteNumbers:
           prefs.getBool('substituteNumbers') ?? defaults.substituteNumbers,
-      substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ??
+      substituteNumbersDelay:
+          prefs.getInt('substituteNumbersDelay') ??
           defaults.substituteNumbersDelay,
       showStartDifference:
           prefs.getBool('showStartDifference') ?? defaults.showStartDifference,
-      showColorStartDifference: prefs.getBool('showColorStartDifference') ??
+      showColorStartDifference:
+          prefs.getBool('showColorStartDifference') ??
           defaults.showColorStartDifference,
-      startDifferenceThreshold: prefs.getInt('startDifferenceThreshold') ??
+      startDifferenceThreshold:
+          prefs.getInt('startDifferenceThreshold') ??
           defaults.startDifferenceThreshold,
-      showFinishDifference: prefs.getBool('showFinishDifference') ??
+      showFinishDifference:
+          prefs.getBool('showFinishDifference') ??
           defaults.showFinishDifference,
-      showColorFinishDifference: prefs.getBool('showColorFinishDifference') ??
+      showColorFinishDifference:
+          prefs.getBool('showColorFinishDifference') ??
           defaults.showColorFinishDifference,
-      finishDifferenceThreshold: prefs.getInt('finishDifferenceThreshold') ??
+      finishDifferenceThreshold:
+          prefs.getInt('finishDifferenceThreshold') ??
           defaults.finishDifferenceThreshold,
       deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
-      updateStartCorrectionDelay: prefs.getInt('updateStartCorrectionDelay') ??
+      updateStartCorrectionDelay:
+          prefs.getInt('updateStartCorrectionDelay') ??
           defaults.updateStartCorrectionDelay,
       logLimit: prefs.getInt('logLimit') ?? defaults.logLimit,
-      seedColor: ColorSeed.values
-          .byName(prefs.getString('seedColor') ?? defaults.seedColor.name),
-      brightness: Brightness.values
-          .byName(prefs.getString('brightness') ?? defaults.brightness.name),
+      seedColor: ColorSeed.values.byName(
+        prefs.getString('seedColor') ?? defaults.seedColor.name,
+      ),
+      brightness: Brightness.values.byName(
+        prefs.getString('brightness') ?? defaults.brightness.name,
+      ),
       contrastLevel: prefs.getDouble('contrastLevel') ?? defaults.contrastLevel,
       dynamicSchemeVariant: DynamicSchemeVariant.values.byName(
         prefs.getString('dynamicSchemeVariant') ??
@@ -91,16 +101,15 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
           prefs.getBool('isOLEDBackground') ?? defaults.isOLEDBackground,
       previousVersion:
           prefs.getString('previousVersion') ?? defaults.previousVersion,
-      updateNtpOffsetAtStartup: prefs.getBool('updateNtpOffsetAtStartup') ??
+      updateNtpOffsetAtStartup:
+          prefs.getBool('updateNtpOffsetAtStartup') ??
           defaults.updateNtpOffsetAtStartup,
     );
 
     await WakelockPlus.toggle(enable: settings.wakelock);
 
-    return SharedPrefsSettingsProvider._(
-      prefs,
-      settings,
-    ).._appSettingsController.add(settings); //add initial value to stream
+    return SharedPrefsSettingsProvider._(prefs, settings)
+      .._appSettingsController.add(settings); //add initial value to stream
   }
 
   @override

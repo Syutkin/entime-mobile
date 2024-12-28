@@ -26,9 +26,7 @@ class TrailsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<TrailsBloc>(context).add(const TrailsEvent.getTrails());
     return Scaffold(
-      appBar: AppBar(
-        title: Text(Localization.current.I18nDatabase_trails),
-      ),
+      appBar: AppBar(title: Text(Localization.current.I18nDatabase_trails)),
       body: BlocBuilder<TrailsBloc, TrailsState>(
         builder: (context, state) {
           return state.maybeMap(

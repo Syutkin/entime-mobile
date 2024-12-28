@@ -28,9 +28,6 @@ class StartNumberAndTimesCsv with _$StartNumberAndTimesCsv {
       }
     }
 
-    return StartNumberAndTimesCsv(
-      number: number,
-      startTimes: startTimes,
-    );
+    return StartNumberAndTimesCsv(number: number, startTimes: startTimes);
   }
 }

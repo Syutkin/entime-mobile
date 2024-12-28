@@ -7,25 +7,24 @@ import '../../csv/csv.dart';
 import '../database.dart';
 
 class RaceItemTile extends StatelessWidget {
-  const RaceItemTile({
-    required this.race,
-    super.key,
-  });
+  const RaceItemTile({required this.race, super.key});
 
   final Race race;
 
   @override
   Widget build(BuildContext context) {
-    final formatter =
-        DateFormat.yMd(Localizations.localeOf(context).languageCode);
+    final formatter = DateFormat.yMd(
+      Localizations.localeOf(context).languageCode,
+    );
     return ListTile(
       title: Text(race.name),
-      subtitle: (race.startDate != null && race.finishDate != null)
-          ? Text(
-              '${formatter.format(DateTime.parse(race.startDate!))} - '
-              '${formatter.format(DateTime.parse(race.finishDate!))}',
-            )
-          : const SizedBox.shrink(),
+      subtitle:
+          (race.startDate != null && race.finishDate != null)
+              ? Text(
+                '${formatter.format(DateTime.parse(race.startDate!))} - '
+                '${formatter.format(DateTime.parse(race.finishDate!))}',
+              )
+              : const SizedBox.shrink(),
       onTap: () {
         context.read<DatabaseBloc>().add(DatabaseEvent.selectRace(race));
       },

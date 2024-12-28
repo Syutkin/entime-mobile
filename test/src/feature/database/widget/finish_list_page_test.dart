@@ -64,16 +64,18 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNothing);
       });
 
-      patrolWidgetTest('Show 8 finishes with any states',
-          (PatrolTester $) async {
+      patrolWidgetTest('Show 8 finishes with any states', (
+        PatrolTester $,
+      ) async {
         settings = settings.copyWith(showHidden: true);
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
@@ -88,8 +90,9 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -112,8 +115,9 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -137,8 +141,9 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -162,16 +167,18 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter manual and with numbers finishes',
-          (PatrolTester $) async {
+      patrolWidgetTest('Filter manual and with numbers finishes', (
+        PatrolTester $,
+      ) async {
         settings = settings.copyWith(
           showHidden: true,
           showManual: false,
@@ -192,16 +199,18 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter hidden and with numbers finishes',
-          (PatrolTester $) async {
+      patrolWidgetTest('Filter hidden and with numbers finishes', (
+        PatrolTester $,
+      ) async {
         settings = settings.copyWith(
           showHidden: false,
           showManual: true,
@@ -222,16 +231,18 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter hidden and manual finishes',
-          (PatrolTester $) async {
+      patrolWidgetTest('Filter hidden and manual finishes', (
+        PatrolTester $,
+      ) async {
         settings = settings.copyWith(
           showHidden: false,
           showManual: false,
@@ -252,16 +263,18 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter hidden, manual and with numbers finishes',
-          (PatrolTester $) async {
+      patrolWidgetTest('Filter hidden, manual and with numbers finishes', (
+        PatrolTester $,
+      ) async {
         settings = settings.copyWith(
           showHidden: false,
           showManual: false,
@@ -282,8 +295,9 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -305,8 +319,9 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -327,8 +342,9 @@ void main() {
             numbersOnTrace: numbersOnTrace(n),
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -349,8 +365,9 @@ void main() {
             numbersOnTrace: numbersOnTrace(n),
           ),
         );
-        when(() => settingsBloc.state)
-            .thenReturn(SettingsState(settings: settings));
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settings));
 
         await $.pumpWidgetAndSettle(testWidget());
 

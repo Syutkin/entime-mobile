@@ -2,13 +2,13 @@ import 'package:flutter_ntp/flutter_ntp.dart';
 
 abstract interface class INtpProvider {
   INtpProvider(
-      // {
-      // String? lookUpAddress,
-      // int? port,
-      // Duration? timeout,
-      // Duration? cacheDuration,
-      // }
-      ) {
+    // {
+    // String? lookUpAddress,
+    // int? port,
+    // Duration? timeout,
+    // Duration? cacheDuration,
+    // }
+  ) {
     // ToDo: start offset stream
   }
 

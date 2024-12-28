@@ -22,8 +22,7 @@ class SliverSubHeaderDelegate extends SliverPersistentHeaderDelegate {
     BuildContext context,
     double shrinkOffset,
     bool overlapsContent,
-  ) =>
-      SizedBox.expand(child: child);
+  ) => SizedBox.expand(child: child);
 
   @override
   bool shouldRebuild(SliverSubHeaderDelegate oldDelegate) =>

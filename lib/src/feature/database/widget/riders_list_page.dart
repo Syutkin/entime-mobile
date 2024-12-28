@@ -21,9 +21,7 @@ class RidersListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(Localization.current.I18nInit_riders),
-      ),
+      appBar: AppBar(title: Text(Localization.current.I18nInit_riders)),
       body: BlocBuilder<DatabaseBloc, DatabaseState>(
         builder: (context, state) {
           // final riders = state.riders;

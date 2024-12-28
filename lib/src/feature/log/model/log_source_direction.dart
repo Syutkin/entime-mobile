@@ -1,5 +1,1 @@
-enum LogSourceDirection {
-  undefined,
-  input,
-  output,
-}
+enum LogSourceDirection { undefined, input, output }

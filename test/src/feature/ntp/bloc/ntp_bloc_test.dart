@@ -26,36 +26,33 @@ void main() {
     blocTest<NtpBloc, NtpState>(
       'Successfully get ntp offset',
       setUp: () {
-        when(() => ntpProvider.getNtpOffset())
-            .thenAnswer((_) => Future.value(1234));
+        when(
+          () => ntpProvider.getNtpOffset(),
+        ).thenAnswer((_) => Future.value(1234));
       },
       build: () => NtpBloc(ntpProvider),
       act: (bloc) => bloc.add(const NtpEvent.getNtpOffset()),
-      expect: () => [
-        const NtpState.loading(0),
-        const NtpState.success(1234),
-      ],
+      expect: () => [const NtpState.loading(0), const NtpState.success(1234)],
     );
 
     blocTest<NtpBloc, NtpState>(
       "Couldn't get ntp offset",
       setUp: () {
-        when(() => ntpProvider.getNtpOffset())
-            .thenThrow((_) => Exception('Ntp error'));
+        when(
+          () => ntpProvider.getNtpOffset(),
+        ).thenThrow((_) => Exception('Ntp error'));
       },
       build: () => NtpBloc(ntpProvider),
       act: (bloc) => bloc.add(const NtpEvent.getNtpOffset()),
-      expect: () => [
-        const NtpState.loading(0),
-        const NtpState.failure(0),
-      ],
+      expect: () => [const NtpState.loading(0), const NtpState.failure(0)],
     );
 
     blocTest<NtpBloc, NtpState>(
       'Get ntp offset after first failure',
       setUp: () {
-        when(() => ntpProvider.getNtpOffset())
-            .thenThrow((_) => Exception('Ntp error'));
+        when(
+          () => ntpProvider.getNtpOffset(),
+        ).thenThrow((_) => Exception('Ntp error'));
 
         when(
           () => ntpProvider.getNtpOffset(
@@ -69,18 +66,16 @@ void main() {
         bloc
           ..add(const NtpEvent.getNtpOffset())
           ..add(
-            NtpEvent.getNtpOffset(
-              lookUpAddress: lookUpAddress,
-              port: port,
-            ),
+            NtpEvent.getNtpOffset(lookUpAddress: lookUpAddress, port: port),
           );
       },
-      expect: () => [
-        const NtpState.loading(0),
-        const NtpState.failure(0),
-        const NtpState.loading(0),
-        const NtpState.success(5432),
-      ],
+      expect:
+          () => [
+            const NtpState.loading(0),
+            const NtpState.failure(0),
+            const NtpState.loading(0),
+            const NtpState.success(5432),
+          ],
     );
   });
 }

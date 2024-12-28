@@ -25,9 +25,10 @@ void main() async {
       }
     });
 
-    final csv = Platform.isLinux
-        ? referenceFile.readAsLinesSync().join('\r\n') //Linux EOL hack
-        : referenceFile.readAsStringSync();
+    final csv =
+        Platform.isLinux
+            ? referenceFile.readAsLinesSync().join('\r\n') //Linux EOL hack
+            : referenceFile.readAsStringSync();
     test('saveCsv', () async {
       // Сохраняем с использованием saveCsv,
       // потом считываем и сравниваем с исходником

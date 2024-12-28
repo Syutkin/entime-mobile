@@ -20,13 +20,13 @@ class ExpandedAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        scrollable: scrollable,
-        title: title,
-        content: SizedBox(
-          width: width ?? MediaQuery.sizeOf(context).width * 0.9,
-          height: height,
-          child: content,
-        ),
-        actions: actions,
-      );
+    scrollable: scrollable,
+    title: title,
+    content: SizedBox(
+      width: width ?? MediaQuery.sizeOf(context).width * 0.9,
+      height: height,
+      child: content,
+    ),
+    actions: actions,
+  );
 }

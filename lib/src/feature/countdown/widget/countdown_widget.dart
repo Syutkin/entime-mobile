@@ -16,17 +16,17 @@ class CountdownWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final floatingActionButtonTheme = theme.floatingActionButtonTheme;
-    final foregroundColor = floatingActionButtonTheme.foregroundColor ??
+    final foregroundColor =
+        floatingActionButtonTheme.foregroundColor ??
         theme.colorScheme.onPrimaryContainer;
-    final backgroundColor = floatingActionButtonTheme.backgroundColor ??
+    final backgroundColor =
+        floatingActionButtonTheme.backgroundColor ??
         theme.colorScheme.primaryContainer;
 
     return Container(
       width: size,
       height: size,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-      ),
+      decoration: const BoxDecoration(shape: BoxShape.circle),
       margin: const EdgeInsets.all(8),
       child: Material(
         elevation: elevation, //default to FloatingButtonElevation
@@ -37,7 +37,8 @@ class CountdownWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: Text(
               text,
-              style: floatingActionButtonTheme.extendedTextStyle ??
+              style:
+                  floatingActionButtonTheme.extendedTextStyle ??
                   theme.textTheme.labelLarge!.copyWith(color: foregroundColor),
             ),
           ),

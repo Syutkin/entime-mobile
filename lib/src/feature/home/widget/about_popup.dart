@@ -15,15 +15,16 @@ class AboutPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final bodyTextStyle =
-        textTheme.bodyLarge!.apply(color: colorScheme.onSurface);
+    final bodyTextStyle = textTheme.bodyLarge!.apply(
+      color: colorScheme.onSurface,
+    );
     return AlertDialog(
       content: ListBody(
         children: <Widget>[
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-//              IconTheme(data: Theme.of(context).iconTheme, child: icon),
+              //              IconTheme(data: Theme.of(context).iconTheme, child: icon),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -60,24 +61,26 @@ class AboutPopup extends StatelessWidget {
                                 color: colorScheme.primary,
                               ),
                               text: 'syutkin@fraction.team',
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async {
-                                  final emailLaunchUri = Uri(
-                                    scheme: 'mailto',
-                                    path: 'syutkin@fraction.team',
-                                    queryParameters: <String, String>{
-                                      'subject': 'Entime замечания/предложения',
+                              recognizer:
+                                  TapGestureRecognizer()
+                                    ..onTap = () async {
+                                      final emailLaunchUri = Uri(
+                                        scheme: 'mailto',
+                                        path: 'syutkin@fraction.team',
+                                        queryParameters: <String, String>{
+                                          'subject':
+                                              'Entime замечания/предложения',
+                                        },
+                                      );
+                                      if (await canLaunchUrl(emailLaunchUri)) {
+                                        await launchUrl(emailLaunchUri);
+                                      } else {
+                                        final Error error = ArgumentError(
+                                          'Could not launch $emailLaunchUri',
+                                        );
+                                        throw error;
+                                      }
                                     },
-                                  );
-                                  if (await canLaunchUrl(emailLaunchUri)) {
-                                    await launchUrl(emailLaunchUri);
-                                  } else {
-                                    final Error error = ArgumentError(
-                                      'Could not launch $emailLaunchUri',
-                                    );
-                                    throw error;
-                                  }
-                                },
                             ),
                           ],
                         ),
@@ -97,8 +100,8 @@ class AboutPopup extends StatelessWidget {
             final changelogData = await rootBundle.loadString('CHANGELOG.md');
             await navigator.push(
               MaterialPageRoute<void>(
-                builder: (context) =>
-                    ChangelogScreen(markdownData: changelogData),
+                builder:
+                    (context) => ChangelogScreen(markdownData: changelogData),
               ),
             );
           },

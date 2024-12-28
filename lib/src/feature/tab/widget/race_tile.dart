@@ -18,9 +18,9 @@ class RaceTile extends StatelessWidget {
         builder: (context, databaseState) {
           void routeToSelectRace() {
             if (databaseState.race != null && databaseState.stage != null) {
-              context
-                  .read<DatabaseBloc>()
-                  .add(const DatabaseEvent.deselectRace());
+              context.read<DatabaseBloc>().add(
+                const DatabaseEvent.deselectRace(),
+              );
             }
             Navigator.of(context).push(
               MaterialPageRoute<void>(
@@ -35,12 +35,14 @@ class RaceTile extends StatelessWidget {
               icon: Icon(MdiIcons.flagCheckered),
               onPressed: routeToSelectRace,
             ),
-            title: databaseState.race == null
-                ? Text(Localization.current.I18nInit_selectRace)
-                : Text(databaseState.race!.name),
-            subtitle: databaseState.stage == null
-                ? Text(Localization.current.I18nInit_selectStage)
-                : Text(databaseState.stage!.name),
+            title:
+                databaseState.race == null
+                    ? Text(Localization.current.I18nInit_selectRace)
+                    : Text(databaseState.race!.name),
+            subtitle:
+                databaseState.stage == null
+                    ? Text(Localization.current.I18nInit_selectStage)
+                    : Text(databaseState.stage!.name),
             trailing: const _RaceMenuButton(),
           );
         },
@@ -61,9 +63,7 @@ class _SelectRaceRouterWidget extends StatelessWidget {
             return const RacesListPage();
           } else {
             if (stage == null) {
-              return StagesListPage(
-                race: race,
-              );
+              return StagesListPage(race: race);
             } else {
               _onWidgetDidBuild(() {
                 Navigator.pop(context);

@@ -37,11 +37,6 @@ class ProgressRefreshAction extends StatelessWidget {
         ),
       );
     }
-    return IconButton(
-      icon: const Icon(
-        Icons.refresh,
-      ),
-      onPressed: onPressed,
-    );
+    return IconButton(icon: const Icon(Icons.refresh), onPressed: onPressed);
   }
 }

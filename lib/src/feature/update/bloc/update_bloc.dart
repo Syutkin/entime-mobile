@@ -10,9 +10,8 @@ part 'update_event.dart';
 part 'update_state.dart';
 
 class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
-  UpdateBloc({
-    required this.updateProvider,
-  }) : super(const UpdateState.initial()) {
+  UpdateBloc({required this.updateProvider})
+    : super(const UpdateState.initial()) {
     updateProvider
       ..onDownloading((current, total) {
         add(UpdateEvent.downloading(bytes: current, total: total));
@@ -54,23 +53,17 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
         updateFromFile: (_UpdateFromFileEvent value) {
           updateProvider.installApk();
           emit(
-            UpdateState.updateAvailable(
-              version: updateProvider.latestVersion,
-            ),
+            UpdateState.updateAvailable(version: updateProvider.latestVersion),
           );
         },
         cancelDownload: (event) {
           updateProvider.stop();
           emit(
-            UpdateState.updateAvailable(
-              version: updateProvider.latestVersion,
-            ),
+            UpdateState.updateAvailable(version: updateProvider.latestVersion),
           );
         },
         downloadError: (event) {
-          emit(
-            UpdateState.downloadError(error: event.error),
-          );
+          emit(UpdateState.downloadError(error: event.error));
         },
         popupChangelog: (event) async {
           emit(

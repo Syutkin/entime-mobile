@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import '../../../common/logger/logger.dart';
-import '../../module_settings/model/module_settings.dart';
+import '../model/module_settings.dart';
 import 'module_settings_provider.dart';
 
 class ModuleSettingsType extends ModuleSettingsProvider {

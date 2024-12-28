@@ -26,7 +26,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable' # or: 'beta', 'dev' or 'master'
+          channel: 'beta' # or: 'stable', 'beta', 'main' or 'master'
           cache: true
 
       - run: flutter doctor -v

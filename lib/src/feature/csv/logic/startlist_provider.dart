@@ -32,10 +32,7 @@ class StartlistProvider {
         startItems: riders,
       );
     } on Exception catch (e) {
-      logger.e(
-        'CSV -> Exception while parsing starting list',
-        error: e,
-      );
+      logger.e('CSV -> Exception while parsing starting list', error: e);
       return null;
     } catch (e, st) {
       logger.e(
@@ -67,10 +64,7 @@ class StartlistProvider {
         startItems: stages,
       );
     } on Exception catch (e) {
-      logger.e(
-        'CSV -> Exception while parsing starting list',
-        error: e,
-      );
+      logger.e('CSV -> Exception while parsing starting list', error: e);
       return null;
     } catch (e, st) {
       logger.e(

@@ -179,8 +179,7 @@ INSERT INTO participants (race_id, rider_id, number, category) VALUES
 (1,77,69,"Элита"),
 (1,78,71,"Элита"),
 (1,79,73,"Элита");''')
-      ..add(
-        '''
+      ..add('''
 INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (1,1,"10:00:00"),
 (1,2,"10:01:00"),
@@ -260,10 +259,8 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (1,76,"11:45:00"),
 (1,77,"11:46:00"),
 (1,78,"11:47:00"),
-(1,79,"11:48:00");''',
-      )
-      ..add(
-        '''
+(1,79,"11:48:00");''')
+      ..add('''
 INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (2,1,"11:00:00"),
 (2,2,"11:01:00"),
@@ -343,10 +340,8 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (2,76,"12:15:00"),
 (2,77,"12:16:00"),
 (2,78,"12:17:00"),
-(2,79,"12:18:00");''',
-      )
-      ..add(
-        '''
+(2,79,"12:18:00");''')
+      ..add('''
 INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (3,1,"12:00:00"),
 (3,2,"12:01:00"),
@@ -426,10 +421,8 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (3,76,"13:15:00"),
 (3,77,"13:16:00"),
 (3,78,"13:17:00"),
-(3,79,"13:18:00");''',
-      )
-      ..add(
-        '''
+(3,79,"13:18:00");''')
+      ..add('''
 INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (4,1,"13:00:00"),
 (4,2,"13:01:00"),
@@ -509,8 +502,7 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (4,76,"14:15:00"),
 (4,77,"14:16:00"),
 (4,78,"14:17:00"),
-(4,79,"14:18:00");''',
-      )
+(4,79,"14:18:00");''')
       ..add('''
 INSERT INTO participants (race_id, rider_id, number, category) VALUES
 (2,1,2,"Девушки"),
@@ -592,8 +584,7 @@ INSERT INTO participants (race_id, rider_id, number, category) VALUES
 (2,77,69,"Элита"),
 (2,78,71,"Элита"),
 (2,79,73,"Элита");''')
-      ..add(
-        '''
+      ..add('''
 INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (5,1,"10:00:00"),
 (5,2,"10:01:00"),
@@ -673,10 +664,8 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (5,76,"11:15:00"),
 (5,77,"11:16:00"),
 (5,78,"11:17:00"),
-(5,79,"11:18:00");''',
-      )
-      ..add(
-        '''
+(5,79,"11:18:00");''')
+      ..add('''
 INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (6,1,"11:00:00"),
 (6,2,"11:01:00"),
@@ -756,10 +745,8 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (6,76,"12:15:00"),
 (6,77,"12:16:00"),
 (6,78,"12:17:00"),
-(6,79,"12:18:00");''',
-      )
-      ..add(
-        '''
+(6,79,"12:18:00");''')
+      ..add('''
 INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (7,1,"12:00:00"),
 (7,2,"12:01:00"),
@@ -839,10 +826,8 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (7,76,"13:15:00"),
 (7,77,"13:16:00"),
 (7,78,"13:17:00"),
-(7,79,"13:18:00");''',
-      )
-      ..add(
-        '''
+(7,79,"13:18:00");''')
+      ..add('''
 INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (8,1,"13:00:00"),
 (8,2,"13:01:00"),
@@ -922,8 +907,7 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (8,76,"14:15:00"),
 (8,77,"14:16:00"),
 (8,78,"14:17:00"),
-(8,79,"14:18:00");''',
-      );
+(8,79,"14:18:00");''');
   }
 
   List<String> queries = [];

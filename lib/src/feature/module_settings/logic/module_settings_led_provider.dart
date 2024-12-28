@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import '../../../common/logger/logger.dart';
-import '../../module_settings/model/module_settings.dart';
+import '../model/module_settings.dart';
 import 'module_settings_provider.dart';
 
 class ModuleSettingsLed extends ModuleSettingsProvider {
@@ -45,19 +45,19 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
 
   @override
   String get write => json.encode(
-        ModSettingsModelLed(
-          read: false,
-          type: type,
-          // Bluetooth
-          bluetooth: Bluetooth(
-            active: bluetooth,
-            name: bluetoothName,
-            number: bluetoothNumber,
-          ),
-          // WiFi
-          wiFi: WiFi(active: wifi, ssid: ssid, passwd: password),
-          //LedPanel
-          ledPanel: LedPanel(brightness: brightness),
-        ).toJson(),
-      );
+    ModSettingsModelLed(
+      read: false,
+      type: type,
+      // Bluetooth
+      bluetooth: Bluetooth(
+        active: bluetooth,
+        name: bluetoothName,
+        number: bluetoothNumber,
+      ),
+      // WiFi
+      wiFi: WiFi(active: wifi, ssid: ssid, passwd: password),
+      //LedPanel
+      ledPanel: LedPanel(brightness: brightness),
+    ).toJson(),
+  );
 }

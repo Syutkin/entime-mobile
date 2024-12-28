@@ -13,40 +13,40 @@ class BluetoothDeviceListEntry extends ListTile {
     super.enabled,
     super.key,
   }) : super(
-          leading: const Icon(Icons.devices),
-          // @TODO . !BluetoothClass! class aware icon
-          title: Text(
-            device.name ?? Localization.current.I18nBluetooth_unknownDevice,
-          ),
-          subtitle: Text(device.address),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              if (rssi != null)
-                Container(
-                  margin: const EdgeInsets.all(8),
-                  child: DefaultTextStyle(
-                    style: dBmTextStyle(rssi),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text(rssi.toString()),
-                        Text(Localization.current.I18nBluetooth_dbm),
-                      ],
-                    ),
-                  ),
-                )
-              else
-                const SizedBox.shrink(),
-              if (device.isConnected)
-                const Icon(Icons.import_export)
-              else
-                const SizedBox.shrink(),
-              if (device.isBonded)
-                const Icon(Icons.link)
-              else
-                const SizedBox.shrink(),
-            ],
-          ),
-        );
+         leading: const Icon(Icons.devices),
+         // @TODO . !BluetoothClass! class aware icon
+         title: Text(
+           device.name ?? Localization.current.I18nBluetooth_unknownDevice,
+         ),
+         subtitle: Text(device.address),
+         trailing: Row(
+           mainAxisSize: MainAxisSize.min,
+           children: <Widget>[
+             if (rssi != null)
+               Container(
+                 margin: const EdgeInsets.all(8),
+                 child: DefaultTextStyle(
+                   style: dBmTextStyle(rssi),
+                   child: Column(
+                     mainAxisSize: MainAxisSize.min,
+                     children: <Widget>[
+                       Text(rssi.toString()),
+                       Text(Localization.current.I18nBluetooth_dbm),
+                     ],
+                   ),
+                 ),
+               )
+             else
+               const SizedBox.shrink(),
+             if (device.isConnected)
+               const Icon(Icons.import_export)
+             else
+               const SizedBox.shrink(),
+             if (device.isBonded)
+               const Icon(Icons.link)
+             else
+               const SizedBox.shrink(),
+           ],
+         ),
+       );
 }

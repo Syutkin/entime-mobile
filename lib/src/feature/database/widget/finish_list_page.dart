@@ -60,18 +60,20 @@ class _FinishListPage extends State<FinishListPage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocListener<DatabaseBloc, DatabaseState>(
-        listener: (context, state) {
-          final databaseBloc = context.read<DatabaseBloc>();
+  Widget build(
+    BuildContext context,
+  ) => BlocListener<DatabaseBloc, DatabaseState>(
+    listener: (context, state) {
+      final databaseBloc = context.read<DatabaseBloc>();
 
-          // toast с автоматически проставленным номером
-          final autoFinishNumber = state.autoFinishNumber;
-          logger.d('autoFinishNumber: $autoFinishNumber');
-          if (autoFinishNumber != null) {
-            BotToast.showAttachedWidget(
-              verticalOffset: 36.0,
-              attachedBuilder: (cancel) => Card(
+      // toast с автоматически проставленным номером
+      final autoFinishNumber = state.autoFinishNumber;
+      logger.d('autoFinishNumber: $autoFinishNumber');
+      if (autoFinishNumber != null) {
+        BotToast.showAttachedWidget(
+          verticalOffset: 36.0,
+          attachedBuilder:
+              (cancel) => Card(
                 child: ListTile(
                   title: Text(
                     Localization.current.I18nProtocol_finishNumber(
@@ -97,152 +99,150 @@ class _FinishListPage extends State<FinishListPage> {
                   ),
                 ),
               ),
-              // enableSafeArea: false,
-              animationDuration: const Duration(milliseconds: 300),
-              duration: const Duration(seconds: 5),
-              targetContext: context,
+          // enableSafeArea: false,
+          animationDuration: const Duration(milliseconds: 300),
+          duration: const Duration(seconds: 5),
+          targetContext: context,
+        );
+      }
+
+      // Вызывается, если номеру уже присвоена финишная отсечка
+      state.notification?.mapOrNull(
+        changeFinishTimeToNumber: (notification) async {
+          final update = await updateFinishTimePopup(
+            context,
+            notification.number,
+          );
+          if (update != null && update) {
+            databaseBloc
+              ..add(
+                DatabaseEvent.clearNumberAtFinish(
+                  stage: notification.stage,
+                  number: notification.number,
+                ),
+              )
+              ..add(
+                DatabaseEvent.addNumberToFinish(
+                  finishId: notification.finishId,
+                  number: notification.number,
+                  finishTime: notification.finishTime,
+                  stage: notification.stage,
+                ),
+              );
+          }
+        },
+      );
+    },
+    child: Scaffold(
+      body: BlocBuilder<DatabaseBloc, DatabaseState>(
+        builder: (context, state) {
+          // ToDo: настройки? более интересное поведение?
+          // ToDo: Перематывать только при первоначальном показе всех отсечек?
+          // скролл на последнюю запись если показываем скрытые отсечки
+          // сейчас перематывает при любом обновлении, например каждую минуту
+          // при обновлении участников на трассе
+          if (BlocProvider.of<SettingsBloc>(
+            context,
+          ).state.settings.showHidden) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              scrollToEnd(_scrollController);
+            });
+          }
+          // return const SizedBox.shrink();
+          return _finishList(state.finishes);
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, settingsState) {
+          if (settingsState.settings.finishFab) {
+            return SizedBox(
+              height: settingsState.settings.finishFabSize,
+              width: settingsState.settings.finishFabSize,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  onPressed: _addFinishTimeManual,
+                  child: Icon(MdiIcons.handBackLeft),
+                ),
+              ),
             );
           }
-
-          // Вызывается, если номеру уже присвоена финишная отсечка
-          state.notification?.mapOrNull(
-            changeFinishTimeToNumber: (notification) async {
-              final update =
-                  await updateFinishTimePopup(context, notification.number);
-              if (update != null && update) {
-                databaseBloc
-                  ..add(
-                    DatabaseEvent.clearNumberAtFinish(
-                      stage: notification.stage,
-                      number: notification.number,
-                    ),
-                  )
-                  ..add(
-                    DatabaseEvent.addNumberToFinish(
-                      finishId: notification.finishId,
-                      number: notification.number,
-                      finishTime: notification.finishTime,
-                      stage: notification.stage,
-                    ),
-                  );
-              }
-            },
-          );
+          return const SizedBox.shrink();
         },
-        child: Scaffold(
-          body: BlocBuilder<DatabaseBloc, DatabaseState>(
-            builder: (context, state) {
-              // ToDo: настройки? более интересное поведение?
-              // ToDo: Перематывать только при первоначальном показе всех отсечек?
-              // скролл на последнюю запись если показываем скрытые отсечки
-              // сейчас перематывает при любом обновлении, например каждую минуту
-              // при обновлении участников на трассе
-              if (BlocProvider.of<SettingsBloc>(context)
-                  .state
-                  .settings
-                  .showHidden) {
-                SchedulerBinding.instance.addPostFrameCallback((_) {
-                  scrollToEnd(_scrollController);
-                });
-              }
-              // return const SizedBox.shrink();
-              return _finishList(state.finishes);
-            },
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
-            builder: (
-              context,
-              settingsState,
-            ) {
-              if (settingsState.settings.finishFab) {
-                return SizedBox(
-                  height: settingsState.settings.finishFabSize,
-                  width: settingsState.settings.finishFabSize,
-                  child: FittedBox(
-                    child: FloatingActionButton(
-                      onPressed: _addFinishTimeManual,
-                      child: Icon(MdiIcons.handBackLeft),
-                    ),
-                  ),
-                );
-              }
-              return const SizedBox.shrink();
-            },
-          ),
-          persistentFooterButtons: _getFooterButtons(context),
-        ),
-      );
+      ),
+      persistentFooterButtons: _getFooterButtons(context),
+    ),
+  );
 
   Widget _finishList(List<Finish> finishProtocol) => CustomScrollView(
-        controller: _scrollController,
-        // shrinkWrap: true,
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: SliverSubHeaderDelegate(
-              minHeight: 40,
-              maxHeight: 40,
-              child: _SliverFinishSubHeader(),
-            ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            buildWhen: (previous, current) =>
+    controller: _scrollController,
+    // shrinkWrap: true,
+    slivers: [
+      SliverPersistentHeader(
+        pinned: true,
+        delegate: SliverSubHeaderDelegate(
+          minHeight: 40,
+          maxHeight: 40,
+          child: _SliverFinishSubHeader(),
+        ),
+      ),
+      BlocBuilder<SettingsBloc, SettingsState>(
+        buildWhen:
+            (previous, current) =>
                 previous.settings.showHidden != current.settings.showHidden ||
                 previous.settings.showManual != current.settings.showManual ||
                 previous.settings.showNumbers != current.settings.showNumbers,
-            builder: (context, state) {
-              final filteredList = filterFinishList(
-                finishProtocol,
-                showHidden: state.settings.showHidden,
-                showManual: state.settings.showManual,
-                showNumbers: state.settings.showNumbers,
-              );
-              return SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: filteredList.length,
-                  (context, index) {
-                    final item = filteredList[index];
-                    return FinishItemTile(
-                      item: item,
-                      onTap: () async {
-                        await addFinishNumberPopup(context, item);
-                      },
-                      onLongPress: () async {
-                        await _finishTilePopup(item);
-                      },
-                      onAccept: (details) {
-                        final databaseBloc = context.read<DatabaseBloc>();
-                        final stage = databaseBloc.state.stage;
-                        final finishId = item.id;
-                        final number = details.data;
-                        final finishTime = item.finishTime;
-                        if (stage != null) {
-                          databaseBloc.add(
-                            DatabaseEvent.addNumberToFinish(
-                              stage: stage,
-                              finishId: finishId,
-                              number: number,
-                              finishTime: finishTime,
-                            ),
-                          );
-                        }
-                      },
-                      onTapDown: _storePosition,
-                      onDismissed: (direction) {
-                        final databaseBloc = context.read<DatabaseBloc>();
-                        final id = item.id;
-                        databaseBloc.add(DatabaseEvent.hideFinish(id: id));
-                      },
-                    );
+        builder: (context, state) {
+          final filteredList = filterFinishList(
+            finishProtocol,
+            showHidden: state.settings.showHidden,
+            showManual: state.settings.showManual,
+            showNumbers: state.settings.showNumbers,
+          );
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: filteredList.length,
+              (context, index) {
+                final item = filteredList[index];
+                return FinishItemTile(
+                  item: item,
+                  onTap: () async {
+                    await addFinishNumberPopup(context, item);
                   },
-                ),
-              );
-            },
-          ),
-        ],
-      );
+                  onLongPress: () async {
+                    await _finishTilePopup(item);
+                  },
+                  onAccept: (details) {
+                    final databaseBloc = context.read<DatabaseBloc>();
+                    final stage = databaseBloc.state.stage;
+                    final finishId = item.id;
+                    final number = details.data;
+                    final finishTime = item.finishTime;
+                    if (stage != null) {
+                      databaseBloc.add(
+                        DatabaseEvent.addNumberToFinish(
+                          stage: stage,
+                          finishId: finishId,
+                          number: number,
+                          finishTime: finishTime,
+                        ),
+                      );
+                    }
+                  },
+                  onTapDown: _storePosition,
+                  onDismissed: (direction) {
+                    final databaseBloc = context.read<DatabaseBloc>();
+                    final id = item.id;
+                    databaseBloc.add(DatabaseEvent.hideFinish(id: id));
+                  },
+                );
+              },
+            ),
+          );
+        },
+      ),
+    ],
+  );
 
   Widget _getNumbersOnTrace(BuildContext context) =>
       BlocBuilder<DatabaseBloc, DatabaseState>(
@@ -263,13 +263,14 @@ class _FinishListPage extends State<FinishListPage> {
                   onTap: () {
                     final databaseBloc = context.read<DatabaseBloc>();
                     isSelected
-                        ? databaseBloc
-                            .add(const DatabaseEvent.deselectAwaitingNumber())
+                        ? databaseBloc.add(
+                          const DatabaseEvent.deselectAwaitingNumber(),
+                        )
                         : databaseBloc.add(
-                            DatabaseEvent.selectAwaitingNumber(
-                              number: item.number,
-                            ),
-                          );
+                          DatabaseEvent.selectAwaitingNumber(
+                            number: item.number,
+                          ),
+                        );
                   },
                   onTapDown: _storePosition,
                   onLongPress: () async {
@@ -303,10 +304,7 @@ class _FinishListPage extends State<FinishListPage> {
             final number = item.number;
             if (number != null) {
               databaseBloc.add(
-                DatabaseEvent.clearNumberAtFinish(
-                  stage: stage,
-                  number: number,
-                ),
+                DatabaseEvent.clearNumberAtFinish(stage: stage, number: number),
               );
             }
           case FinishPopupMenu.hideAll:
@@ -333,10 +331,7 @@ class _FinishListPage extends State<FinishListPage> {
           value: FinishPopupMenu.clearNumber,
           child: Text(Localization.current.I18nProtocol_clearNumber),
         ),
-      if (number != null)
-        const PopupMenuDivider(
-          height: 5,
-        ),
+      if (number != null) const PopupMenuDivider(height: 5),
       PopupMenuItem(
         value: FinishPopupMenu.hideAll,
         child: Text(Localization.current.I18nProtocol_hideAll),
@@ -402,9 +397,7 @@ class _FinishListPage extends State<FinishListPage> {
           style: Theme.of(context).textTheme.labelLarge,
         ),
       ),
-      const PopupMenuDivider(
-        height: 5,
-      ),
+      const PopupMenuDivider(height: 5),
       PopupMenuItem(
         value: ParticipantStatus.dnf,
         child: Text(
@@ -439,8 +432,9 @@ class _FinishListPage extends State<FinishListPage> {
                     // print(finishTime);
                     databaseBloc.add(
                       DatabaseEvent.addFinishTime(
-                        finishTime:
-                            DateFormat(longTimeFormat).format(finishTime),
+                        finishTime: DateFormat(
+                          longTimeFormat,
+                        ).format(finishTime),
                         timestamp: timestamp,
                         ntpOffset: ntpOffset,
                         stage: stage!,
@@ -468,10 +462,10 @@ class _FinishListPage extends State<FinishListPage> {
                       ),
                     );
                     //_parseBT("F19:24:05,123#");
-//            _parseBT("F19:25:57#");
-//            var _deltas = List<int>();
-//            _deltas.insert(0, -100);
-//            logger.(_deltas);
+                    //            _parseBT("F19:25:57#");
+                    //            var _deltas = List<int>();
+                    //            _deltas.insert(0, -100);
+                    //            logger.(_deltas);
                   },
                   child: const Icon(Icons.build),
                 ),
@@ -480,8 +474,9 @@ class _FinishListPage extends State<FinishListPage> {
                   onPressed: () async {
                     final stageId = stage?.id;
                     if (stageId != null) {
-                      databaseBloc
-                          .add(DatabaseEvent.clearFinishResultsDebug(stageId));
+                      databaseBloc.add(
+                        DatabaseEvent.clearFinishResultsDebug(stageId),
+                      );
                     }
                   },
                   child: const Icon(Icons.clear_all),
@@ -492,9 +487,7 @@ class _FinishListPage extends State<FinishListPage> {
         ),
       ];
     } else {
-      return <Widget>[
-        _getNumbersOnTrace(context),
-      ];
+      return <Widget>[_getNumbersOnTrace(context)];
     }
   }
 
@@ -518,10 +511,10 @@ class _FinishListPage extends State<FinishListPage> {
     }
   }
 
-// таймер для обновления участников на трассе
-// Работает только на экране финиша
-// Обновляется спустя секунду после нового открытия окна финиша,
-// т.к. создаётся новый неинициализированный таймер
+  // таймер для обновления участников на трассе
+  // Работает только на экране финиша
+  // Обновляется спустя секунду после нового открытия окна финиша,
+  // т.к. создаётся новый неинициализированный таймер
   void _startTimer() {
     int? prevMinute;
     final databaseBloc = context.read<DatabaseBloc>();
@@ -544,49 +537,48 @@ class _FinishListPage extends State<FinishListPage> {
 class _SliverFinishSubHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
-        margin: const EdgeInsets.all(2),
-        color: Theme.of(context).colorScheme.surface,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: BlocBuilder<SettingsBloc, SettingsState>(
-            builder: (context, state) {
-              final showDifference = state.settings.showFinishDifference;
-              return Row(
-                children: <Widget>[
-                  Flexible(
-                    flex: 15,
-                    child: Align(
-                      child: Text(Localization.current.I18nProtocol_type),
-                    ),
+    margin: const EdgeInsets.all(2),
+    color: Theme.of(context).colorScheme.surface,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) {
+          final showDifference = state.settings.showFinishDifference;
+          return Row(
+            children: <Widget>[
+              Flexible(
+                flex: 15,
+                child: Align(
+                  child: Text(Localization.current.I18nProtocol_type),
+                ),
+              ),
+              Flexible(
+                flex: showDifference ? 45 : 65,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(Localization.current.I18nProtocol_time),
+                ),
+              ),
+              if (showDifference)
+                Flexible(
+                  flex: 20,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(Localization.current.I18nProtocol_difference),
+                    // child: Text('Difference'),
                   ),
-                  Flexible(
-                    flex: showDifference ? 45 : 65,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(Localization.current.I18nProtocol_time),
-                    ),
-                  ),
-                  if (showDifference)
-                    Flexible(
-                      flex: 20,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child:
-                            Text(Localization.current.I18nProtocol_difference),
-                        // child: Text('Difference'),
-                      ),
-                    ),
-                  Flexible(
-                    flex: 20,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(Localization.current.I18nProtocol_number),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-      );
+                ),
+              Flexible(
+                flex: 20,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(Localization.current.I18nProtocol_number),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    ),
+  );
 }

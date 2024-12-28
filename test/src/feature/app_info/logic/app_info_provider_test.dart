@@ -17,33 +17,23 @@ void main() {
   });
 
   setUp(() async {
-    appInfoProvider = await AppInfoProvider.load(
-      deviceInfo: deviceInfo,
-    );
+    appInfoProvider = await AppInfoProvider.load(deviceInfo: deviceInfo);
   });
 
   group('AppInfoProvider:', () {
     test('Initialize', () async {
       expect(
-        await AppInfoProvider.load(
-          deviceInfo: deviceInfo,
-        ),
+        await AppInfoProvider.load(deviceInfo: deviceInfo),
         isA<AppInfoProvider>(),
       );
     });
 
     test('Get appName', () async {
-      expect(
-        appInfoProvider.appName,
-        Pubspec.name,
-      );
+      expect(appInfoProvider.appName, Pubspec.name);
     });
 
     test('Get buildNumber', () async {
-      expect(
-        appInfoProvider.buildNumber,
-        Pubspec.version.build[0],
-      );
+      expect(appInfoProvider.buildNumber, Pubspec.version.build[0]);
     });
 
     test('Get version', () async {
@@ -53,10 +43,7 @@ void main() {
           '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}',
         );
       } else {
-        expect(
-          appInfoProvider.version,
-          Pubspec.version.canonical,
-        );
+        expect(appInfoProvider.version, Pubspec.version.canonical);
       }
     });
 
@@ -65,28 +52,19 @@ void main() {
         () => deviceInfo.supportedAbis,
       ).thenAnswer((realInvocation) => ['arm64-v8a', 'armeabi-v7a', 'x86_64']);
 
-      expect(
-        appInfoProvider.abi,
-        'arm64-v8a',
-      );
+      expect(appInfoProvider.abi, 'arm64-v8a');
 
       when(
         () => deviceInfo.supportedAbis,
       ).thenAnswer((realInvocation) => ['armeabi-v7a', 'arm64-v8a', 'x86_64']);
 
-      expect(
-        appInfoProvider.abi,
-        'armeabi-v7a',
-      );
+      expect(appInfoProvider.abi, 'armeabi-v7a');
 
       when(
         () => deviceInfo.supportedAbis,
       ).thenAnswer((realInvocation) => ['1', '2', '3']);
 
-      expect(
-        appInfoProvider.abi,
-        null,
-      );
+      expect(appInfoProvider.abi, null);
     });
 
     test('Get deviceSupported32BitAbis', () async {
@@ -94,10 +72,7 @@ void main() {
         () => deviceInfo.supported32BitAbis,
       ).thenAnswer((realInvocation) => ['armeabi-v7a']);
 
-      expect(
-        appInfoProvider.deviceSupported32BitAbis,
-        ['armeabi-v7a'],
-      );
+      expect(appInfoProvider.deviceSupported32BitAbis, ['armeabi-v7a']);
     });
 
     test('Get deviceSupported64BitAbis', () async {
@@ -105,10 +80,7 @@ void main() {
         () => deviceInfo.supported64BitAbis,
       ).thenAnswer((realInvocation) => ['arm64-v8a', 'x86_64']);
 
-      expect(
-        appInfoProvider.deviceSupported64BitAbis,
-        ['arm64-v8a', 'x86_64'],
-      );
+      expect(appInfoProvider.deviceSupported64BitAbis, ['arm64-v8a', 'x86_64']);
     });
 
     test('Get deviceSupportedAbis', () async {
@@ -116,10 +88,11 @@ void main() {
         () => deviceInfo.supportedAbis,
       ).thenAnswer((realInvocation) => ['armeabi-v7a', 'arm64-v8a', 'x86_64']);
 
-      expect(
-        appInfoProvider.deviceSupportedAbis,
-        ['armeabi-v7a', 'arm64-v8a', 'x86_64'],
-      );
+      expect(appInfoProvider.deviceSupportedAbis, [
+        'armeabi-v7a',
+        'arm64-v8a',
+        'x86_64',
+      ]);
     });
   });
 }

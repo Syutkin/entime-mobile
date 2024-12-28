@@ -14,8 +14,8 @@ class BluetoothProvider implements IBluetoothProvider {
   BluetoothProvider({
     required FlutterBluetoothSerial flutterBluetoothSerial,
     required IBluetoothBackgroundConnection bluetoothBackgroundConnection,
-  })  : _flutterBluetoothSerial = flutterBluetoothSerial,
-        _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
+  }) : _flutterBluetoothSerial = flutterBluetoothSerial,
+       _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
   final FlutterBluetoothSerial _flutterBluetoothSerial;
   final IBluetoothBackgroundConnection _bluetoothBackgroundConnection;
 
