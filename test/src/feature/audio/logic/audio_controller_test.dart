@@ -108,7 +108,6 @@ void main() {
         test('Last participant at category', () async {
           const time1 = '10:08:45';
           const time2 = '10:09:45';
-          const time3 = '10:10:45';
           when(() => appSettings.voiceName).thenReturn(true);
 
           final result1 =
