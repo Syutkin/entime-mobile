@@ -2,7 +2,7 @@ import '../../../common/logger/logger.dart';
 import '../../settings/settings.dart';
 import '../audio.dart';
 
-abstract class IAudioService {
+abstract interface class IAudioService {
   Future<void> countdown();
 
   Future<void> speak(String text);

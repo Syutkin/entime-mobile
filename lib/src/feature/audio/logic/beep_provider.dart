@@ -1,3 +1,3 @@
-abstract mixin class BeepProvider {
+abstract interface class IBeepProvider {
   Future<void> beep();
 }

@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-beta.1+398',
+    representation: r'0.5.0-beta.1+399',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-beta.1+398',
+    canonical: r'0.5.0-beta.1+399',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,19 +118,19 @@ sealed class Pubspec {
     preRelease: <String>[r'beta', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'398'],
+    build: <String>[r'399'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2024,
     12,
-    28,
-    18,
-    15,
-    50,
-    947,
-    481,
+    29,
+    11,
+    24,
+    59,
+    211,
+    470,
   );
 
   /// Name
@@ -407,6 +407,7 @@ sealed class Pubspec {
   /// For more information,
   /// see [Package dependencies](https://dart.dev/tools/pub/dependencies).
   static const Map<String, Object> dependencies = <String, Object>{
+    'audioplayers': r'^6.1.0',
     'bloc_concurrency': r'^0.2.5',
     'bot_toast': r'^4.1.3',
     'connectivity_plus': r'^6.1.1',
@@ -446,7 +447,6 @@ sealed class Pubspec {
     'settings_ui': r'^2.0.2',
     'share_plus': r'^10.1.3',
     'shared_preferences': r'^2.3.4',
-    'soundpool': r'^2.4.1',
     'sqlite3': r'^2.5.0',
     'sqlite3_flutter_libs': r'^0.5.28',
     'url_launcher': r'^6.3.1',
