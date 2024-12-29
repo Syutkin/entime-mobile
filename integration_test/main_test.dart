@@ -40,7 +40,9 @@ void main() {
       bluetoothBackgroundConnection: bluetoothBackgroundConnection,
     );
 
-    final audioService = AudioService(settings: settings);
+    final audioProvider = AudioProvider();
+
+    final audioService = AudioService(settings: settings, audio: audioProvider);
     final audioController = AudioController(
       audioService: audioService,
       database: database,

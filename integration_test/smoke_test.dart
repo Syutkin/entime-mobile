@@ -3,8 +3,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
-import 'package:entime/src/feature/audio/logic/audio_controller.dart';
-import 'package:entime/src/feature/audio/logic/audio_service.dart';
+import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
 import 'package:entime/src/feature/countdown/logic/countdown.dart';
@@ -44,7 +43,9 @@ void main() async {
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 
-  final IAudioService audioService = AudioService(settings: settings);
+  final audioProvider = AudioProvider();
+
+  final audioService = AudioService(settings: settings, audio: audioProvider);
   final IAudioController audioController = AudioController(
     audioService: audioService,
     // protocolProvider: protocolProvider,

@@ -3,13 +3,17 @@ import '../../settings/settings.dart';
 import '../audio.dart';
 
 abstract interface class IAudioService {
-  Future<void> countdown();
+  Future<bool> countdown();
 
-  Future<void> speak(String text);
+  Future<bool> speak(String text);
 }
 
 class AudioService implements IAudioService {
-  AudioService({required SettingsProvider settings}) : _settings = settings {
+  AudioService({
+    required SettingsProvider settings,
+    required IAudioProvider audio,
+  }) : _settings = settings,
+       _audio = audio {
     _settings.state.listen((settings) {
       _sound = settings.sound;
       _voice = settings.voice;
@@ -22,7 +26,7 @@ class AudioService implements IAudioService {
     });
   }
 
-  final IAudioProvider _audio = AudioProvider();
+  final IAudioProvider _audio;
   final SettingsProvider _settings;
 
   bool _sound = true;
@@ -30,20 +34,24 @@ class AudioService implements IAudioService {
   bool _beep = true;
 
   @override
-  Future<void> countdown() async {
+  Future<bool> countdown() async {
     if (_sound && _beep) {
       await _audio.beep();
+      return true;
     } else {
       logger.d('AudioService -> Sound is $_sound, beep is $_beep');
+      return false;
     }
   }
 
   @override
-  Future<void> speak(String text) async {
+  Future<bool> speak(String text) async {
     if (_sound && _voice) {
       await _audio.speak(text);
+      return true;
     } else {
       logger.d('AudioService -> Sound is $_sound, voice is $_voice');
+      return false;
     }
   }
 }

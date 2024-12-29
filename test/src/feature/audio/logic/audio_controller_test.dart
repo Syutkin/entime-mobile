@@ -50,7 +50,7 @@ void main() {
 
     when(() => settingsProvider.settings).thenReturn(appSettings);
 
-    when(() => audioService.speak(any())).thenAnswer((_) async {});
+    when(() => audioService.speak(any())).thenAnswer((_) => Future.value(true));
   });
 
   tearDown(() async {
