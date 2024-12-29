@@ -1,15 +1,11 @@
-import 'dart:io';
-
 import 'package:csv/csv.dart';
 import 'package:csv/csv_settings_autodetection.dart';
-import 'package:path_provider/path_provider.dart';
-
-import '../logger/logger.dart';
 
 /// Convert a list of maps to csv
 String? mapListToCsv(
   List<Map<String, dynamic>>? mapList, {
   ListToCsvConverter? converter,
+  String? eol,
 }) {
   if (mapList == null) {
     return null;
@@ -48,22 +44,7 @@ String? mapListToCsv(
     });
     data.add(dataRow);
   }
-  return converter.convert(<List<dynamic>>[keys, ...data]);
-}
-
-// Save csv to file
-Future<File?> saveCsv(String csv, String filename) async {
-  final directory =
-      Platform.isAndroid
-          ? await getExternalStorageDirectory()
-          : await getApplicationDocumentsDirectory();
-  if (directory == null) {
-    return null;
-  }
-  final file = File('${directory.path}/$filename.csv');
-  await file.writeAsString(csv);
-  logger.i('saveCsv -> Saved csv to file ${file.path}');
-  return file;
+  return converter.convert(<List<dynamic>>[keys, ...data], eol: eol);
 }
 
 //CSV to List<Map<String, String>> instead of the normal List<List<String>> scheme of the original csv package

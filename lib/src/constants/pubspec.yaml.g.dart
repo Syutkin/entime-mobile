@@ -44,15 +44,16 @@ library pubspec;
 ///
 /// Additional labels for pre-release and build metadata are available
 /// as extensions to the MAJOR.MINOR.PATCH format.
-typedef PubspecVersion = ({
-  String representation,
-  String canonical,
-  int major,
-  int minor,
-  int patch,
-  List<String> preRelease,
-  List<String> build
-});
+typedef PubspecVersion =
+    ({
+      String representation,
+      String canonical,
+      int major,
+      int minor,
+      int patch,
+      List<String> preRelease,
+      List<String> build,
+    });
 
 /// # The pubspec file
 ///
@@ -93,13 +94,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-beta.1+401',
+    representation: r'0.5.0-beta.1+403',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-beta.1+401',
+    canonical: r'0.5.0-beta.1+403',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,7 +119,7 @@ sealed class Pubspec {
     preRelease: <String>[r'beta', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'401'],
+    build: <String>[r'403'],
   );
 
   /// Build date and time (UTC)
@@ -126,11 +127,11 @@ sealed class Pubspec {
     2024,
     12,
     29,
+    18,
     17,
-    5,
-    10,
-    293,
-    177,
+    18,
+    841,
+    296,
   );
 
   /// Name
@@ -205,7 +206,8 @@ sealed class Pubspec {
   /// If issue_tracker is missing but repository is present and points to GitHub,
   /// then the pub.dev site uses the default issue tracker
   /// (https://github.com/<user>/<repository>/issues).
-  static const String issueTracker = r'https://github.com/Syutkin/entime-mobile/issues';
+  static const String issueTracker =
+      r'https://github.com/Syutkin/entime-mobile/issues';
 
   /// Documentation
   ///
@@ -418,14 +420,10 @@ sealed class Pubspec {
     'dropdown_search': r'^6.0.1',
     'equatable': r'^2.0.7',
     'file_picker': r'^8.1.6',
-    'flutter': <String, Object>{
-      'sdk': r'flutter',
-    },
+    'flutter': <String, Object>{'sdk': r'flutter'},
     'flutter_bloc': r'^8.1.6',
     'flutter_bluetooth_serial': r'^0.4.0',
-    'flutter_localizations': <String, Object>{
-      'sdk': r'flutter',
-    },
+    'flutter_localizations': <String, Object>{'sdk': r'flutter'},
     'flutter_markdown': r'^0.7.4+3',
     'flutter_ntp': r'^0.0.2',
     'flutter_tts': r'^4.2.0',
@@ -460,13 +458,9 @@ sealed class Pubspec {
     'dart_style': r'^3.0.0',
     'drift_dev': r'^2.22.1',
     'flutter_lints': r'^5.0.0',
-    'flutter_test': <String, Object>{
-      'sdk': r'flutter',
-    },
+    'flutter_test': <String, Object>{'sdk': r'flutter'},
     'freezed': r'^3.0.0-0.0.dev',
-    'integration_test': <String, Object>{
-      'sdk': r'flutter',
-    },
+    'integration_test': <String, Object>{'sdk': r'flutter'},
     'json_serializable': r'^6.9.0',
     'mocktail': r'^1.0.4',
     'patrol': r'^3.13.2',
@@ -543,10 +537,7 @@ sealed class Pubspec {
     'dependency_overrides': dependencyOverrides,
     'flutter': <String, Object>{
       'uses-material-design': true,
-      'assets': <Object>[
-        r'assets/',
-        r'CHANGELOG.md',
-      ],
+      'assets': <Object>[r'assets/', r'CHANGELOG.md'],
     },
     'flutter_intl': <String, Object>{
       'enabled': true,
@@ -559,15 +550,13 @@ sealed class Pubspec {
     'cider': <String, Object>{
       'link_template': <String, Object>{
         'tag': r'https://github.com/Syutkin/entime-mobile/releases/tag/%tag%',
-        'diff': r'https://github.com/Syutkin/entime-mobile/compare/%from%...%to%',
+        'diff':
+            r'https://github.com/Syutkin/entime-mobile/compare/%from%...%to%',
       },
     },
     'patrol': <String, Object>{
       'app_name': r'entime',
-      'android': <String, Object>{
-        'package_name': r'site.syutkin.entime',
-      },
+      'android': <String, Object>{'package_name': r'site.syutkin.entime'},
     },
   };
-
 }
