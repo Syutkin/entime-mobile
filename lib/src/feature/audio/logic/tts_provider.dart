@@ -4,8 +4,8 @@ import '../../../common/logger/logger.dart';
 
 enum TtsState { playing, stopped }
 
-class Tts {
-  Tts() {
+class TtsProvider {
+  TtsProvider() {
     flutterTts
       ..setStartHandler(() {
         logger.i('TTS -> Playing...');

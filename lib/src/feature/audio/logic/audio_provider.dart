@@ -19,22 +19,22 @@ abstract class IAudioProvider {
 }
 
 class AudioProvider implements IAudioProvider {
-  final Tts flutterTts = Tts();
+  final TtsProvider ttsProvider = TtsProvider();
 
   final IBeepProvider beepProvider = AudioplayersProvider();
 
   @override
   Future<dynamic> setLanguage(String language) =>
-      flutterTts.setLanguage(language);
+      ttsProvider.setLanguage(language);
 
   @override
-  Future<dynamic> setVolume(double volume) => flutterTts.setVolume(volume);
+  Future<dynamic> setVolume(double volume) => ttsProvider.setVolume(volume);
 
   @override
-  Future<dynamic> setSpeechRate(double rate) => flutterTts.setSpeechRate(rate);
+  Future<dynamic> setSpeechRate(double rate) => ttsProvider.setSpeechRate(rate);
 
   @override
-  Future<dynamic> setPitch(double pitch) => flutterTts.setPitch(pitch);
+  Future<dynamic> setPitch(double pitch) => ttsProvider.setPitch(pitch);
 
   @override
   Future<void> beep() async {
@@ -43,6 +43,6 @@ class AudioProvider implements IAudioProvider {
 
   @override
   Future<void> speak(String text) async {
-    await flutterTts.speak(text);
+    await ttsProvider.speak(text);
   }
 }
