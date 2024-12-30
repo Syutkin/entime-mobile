@@ -35,17 +35,15 @@ class BluetoothDeviceListEntry extends ListTile {
                      ],
                    ),
                  ),
-               )
-             else
-               const SizedBox.shrink(),
-             if (device.isConnected)
-               const Icon(Icons.import_export)
-             else
-               const SizedBox.shrink(),
-             if (device.isBonded)
-               const Icon(Icons.link)
-             else
-               const SizedBox.shrink(),
+               ),
+             //  else
+             //  const SizedBox.shrink(),
+             if (device.isConnected) const Icon(Icons.import_export),
+             //  else
+             //  const SizedBox.shrink(),
+             if (device.isBonded) const Icon(Icons.link),
+             //  else
+             //  const SizedBox.shrink(),
            ],
          ),
        );
