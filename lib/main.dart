@@ -1,5 +1,6 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/src/constants/pubspec.yaml.g.dart';
 import 'package:entime/src/feature/connectivity/bloc/connectivity_bloc.dart';
@@ -67,7 +68,8 @@ Future<void> main() async {
 
   final ntpProvider = NtpProvider();
 
-  final connectivityProvider = ConnectivityProvider.init();
+  final connectivity = Connectivity();
+  final connectivityProvider = ConnectivityProvider.init(connectivity);
 
   final app = EntimeApp(
     settingsProvider: settings,

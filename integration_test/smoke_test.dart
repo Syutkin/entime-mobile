@@ -1,4 +1,5 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
@@ -57,8 +58,10 @@ void main() async {
 
   final INtpProvider ntpProvider = NtpProvider();
 
-  final IConnectivityProvider connectivityProvider =
-      ConnectivityProvider.init();
+  final connectivity = Connectivity();
+  final IConnectivityProvider connectivityProvider = ConnectivityProvider.init(
+    connectivity,
+  );
 
   testWidgets('Smoke test', (tester) async {
     await tester.pumpWidget(
