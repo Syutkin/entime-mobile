@@ -14,7 +14,7 @@ library pubspec;
 
   MIT License
 
-  Copyright (c) 2024 Plague Fox
+  Copyright (c) 2025 Plague Fox
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -94,13 +94,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-beta.1+407',
+    representation: r'0.5.0-beta.2+408',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-beta.1+407',
+    canonical: r'0.5.0-beta.2+408',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -116,22 +116,22 @@ sealed class Pubspec {
     patch: 0,
 
     /// The pre-release identifier: "foo" in "1.2.3-foo".
-    preRelease: <String>[r'beta', r'1'],
+    preRelease: <String>[r'beta', r'2'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'407'],
+    build: <String>[r'408'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
-    2024,
+    2025,
+    1,
+    1,
     12,
-    30,
-    18,
+    35,
     52,
-    32,
-    969,
-    520,
+    35,
+    737,
   );
 
   /// Name
