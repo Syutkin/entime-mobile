@@ -1,3 +1,4 @@
+import 'package:any_date/any_date.dart';
 import 'package:entime/src/common/utils/extensions.dart';
 
 import '../../../common/localization/localization.dart';
@@ -40,19 +41,26 @@ String? validateBirthday(String? birthday) {
   if (birthday.isNullOrEmpty) {
     return null;
   }
-  final date = DateTime.tryParse(birthday!);
-  if (date != null && 1900 < date.year && date.year < DateTime.now().year) {
-    return null;
+  // Год рождения или возраст
+  final year = int.tryParse(birthday!);
+  if (year != null) {
+    if (1900 < year && year < DateTime.now().year) {
+      return null;
+    }
+    // Если не год, а возраст
+    if (0 < year && year < 150) {
+      return null;
+    }
+    return Localization.current.I18nStart_incorrectAge;
+  } else {
+    // Пробуем распарсить как дату
+    // ToDo: очень много всего пропускает, но пока так
+    final date = const AnyDate().tryParse(birthday);
+    if (date != null && 1900 < date.year && date.year < DateTime.now().year) {
+      return null;
+    }
+    return Localization.current.I18nStart_incorrectBirthday;
   }
-  final year = int.tryParse(birthday);
-  if (year != null && 1900 < year && year < DateTime.now().year) {
-    return null;
-  }
-  // Если не год/дата, а возраст
-  if (year != null && 0 < year && year < 150) {
-    return null;
-  }
-  return Localization.current.I18nStart_incorrectBirthday;
 }
 
 String? validateCity(String? city) {
@@ -60,7 +68,7 @@ String? validateCity(String? city) {
     return null;
   }
   if (RegExp(
-    r'^[ a-zA-Zа-яёА-ЯЁ0-9._-]+$',
+    r'^[ a-zA-Zа-яёА-ЯЁ0-9_-]+$',
     caseSensitive: false,
   ).hasMatch(city!)) {
     return null;

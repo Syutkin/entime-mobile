@@ -690,22 +690,31 @@ class I18nStart {
   );
 
   // edit_racer_popup
-  static String get incorrectName =>
-      Intl.message('Некорректное имя', name: 'I18nStart_incorrectName');
+  static String get incorrectName => Intl.message(
+    'Только буквы, цифры, пробел, дефис и подчёркивание',
+    name: 'I18nStart_incorrectName',
+  );
 
   static String get emptyName =>
       Intl.message('Введите имя', name: 'I18nStart_emptyName');
 
-  static String get incorrectNickname =>
-      Intl.message('Некорректный никнейм', name: 'I18nStart_incorrectNickname');
+  static String get incorrectNickname => Intl.message(
+    'Только буквы, цифры, пробел, дефис и подчёркивание',
+    name: 'I18nStart_incorrectNickname',
+  );
 
   static String get incorrectBirthday => Intl.message(
-    'Некорректная дата/год рождения',
+    'Некорректная дата рождения',
     name: 'I18nStart_incorrectBirthday',
   );
 
+  static String get incorrectAge => Intl.message(
+    'Некорректный возраст/год рождения',
+    name: 'I18nStart_incorrectAge',
+  );
+
   static String get incorrectCity => Intl.message(
-    'Некорректное название города',
+    'Только буквы, цифры, пробел, дефис и подчёркивание',
     name: 'I18nStart_incorrectCity',
   );
 
