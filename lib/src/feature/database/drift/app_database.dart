@@ -552,7 +552,7 @@ class AppDatabase extends _$AppDatabase {
       logger.i(
         'Database -> Creating new participant with number $number and start time $startTime...',
       );
-      // Поскольку имя участика обязательно, ставим ему вместо имени название соревнования
+      // Поскольку имя участника обязательно, ставим ему вместо имени название соревнования
       // ToDo: возможность редактировать гонщиков
       final raceName =
           (await (select(races)
@@ -561,7 +561,7 @@ class AppDatabase extends _$AppDatabase {
               .name;
       final ridersId = await into(
         riders,
-      ).insert(RidersCompanion(name: Value('$number, $raceName')));
+      ).insert(RidersCompanion(name: Value('$number. $raceName')));
       final participantsId = await into(participants).insert(
         ParticipantsCompanion(
           number: Value(number),

@@ -94,13 +94,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-beta.2+409',
+    representation: r'0.5.0-beta.2+410',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-beta.2+409',
+    canonical: r'0.5.0-beta.2+410',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -119,19 +119,19 @@ sealed class Pubspec {
     preRelease: <String>[r'beta', r'2'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'409'],
+    build: <String>[r'410'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2025,
     1,
-    1,
-    22,
-    13,
-    59,
-    731,
-    473,
+    2,
+    18,
+    33,
+    6,
+    488,
+    857,
   );
 
   /// Name
@@ -409,6 +409,7 @@ sealed class Pubspec {
   /// For more information,
   /// see [Package dependencies](https://dart.dev/tools/pub/dependencies).
   static const Map<String, Object> dependencies = <String, Object>{
+    'any_date': r'^1.1.1',
     'audioplayers': r'^6.1.0',
     'bloc_concurrency': r'^0.2.5',
     'bot_toast': r'^4.1.3',

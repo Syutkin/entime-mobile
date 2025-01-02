@@ -1567,10 +1567,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Некорректное имя`
+  /// `Только буквы, цифры, пробел, дефис и подчёркивание`
   String get I18nStart_incorrectName {
     return Intl.message(
-      'Некорректное имя',
+      'Только буквы, цифры, пробел, дефис и подчёркивание',
       name: 'I18nStart_incorrectName',
       desc: '',
       args: [],
@@ -1587,30 +1587,40 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Некорректный никнейм`
+  /// `Только буквы, цифры, пробел, дефис и подчёркивание`
   String get I18nStart_incorrectNickname {
     return Intl.message(
-      'Некорректный никнейм',
+      'Только буквы, цифры, пробел, дефис и подчёркивание',
       name: 'I18nStart_incorrectNickname',
       desc: '',
       args: [],
     );
   }
 
-  /// `Некорректная дата/год рождения`
+  /// `Некорректная дата рождения`
   String get I18nStart_incorrectBirthday {
     return Intl.message(
-      'Некорректная дата/год рождения',
+      'Некорректная дата рождения',
       name: 'I18nStart_incorrectBirthday',
       desc: '',
       args: [],
     );
   }
 
-  /// `Некорректное название города`
+  /// `Некорректный возраст/год рождения`
+  String get I18nStart_incorrectAge {
+    return Intl.message(
+      'Некорректный возраст/год рождения',
+      name: 'I18nStart_incorrectAge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Только буквы, цифры, пробел, дефис и подчёркивание`
   String get I18nStart_incorrectCity {
     return Intl.message(
-      'Некорректное название города',
+      'Только буквы, цифры, пробел, дефис и подчёркивание',
       name: 'I18nStart_incorrectCity',
       desc: '',
       args: [],

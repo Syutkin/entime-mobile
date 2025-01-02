@@ -652,11 +652,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Не стартовал",
     ),
     "I18nStart_emptyName": MessageLookupByLibrary.simpleMessage("Введите имя"),
+    "I18nStart_incorrectAge": MessageLookupByLibrary.simpleMessage(
+      "Некорректный возраст/год рождения",
+    ),
     "I18nStart_incorrectBirthday": MessageLookupByLibrary.simpleMessage(
-      "Некорректная дата/год рождения",
+      "Некорректная дата рождения",
     ),
     "I18nStart_incorrectCity": MessageLookupByLibrary.simpleMessage(
-      "Некорректное название города",
+      "Только буквы, цифры, пробел, дефис и подчёркивание",
     ),
     "I18nStart_incorrectCorrection": MessageLookupByLibrary.simpleMessage(
       "Неверное значение поправки",
@@ -665,10 +668,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Некорректный е-мейл",
     ),
     "I18nStart_incorrectName": MessageLookupByLibrary.simpleMessage(
-      "Некорректное имя",
+      "Только буквы, цифры, пробел, дефис и подчёркивание",
     ),
     "I18nStart_incorrectNickname": MessageLookupByLibrary.simpleMessage(
-      "Некорректный никнейм",
+      "Только буквы, цифры, пробел, дефис и подчёркивание",
     ),
     "I18nStart_incorrectTime": MessageLookupByLibrary.simpleMessage(
       "Неверное значение времени",
