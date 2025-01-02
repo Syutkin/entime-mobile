@@ -49,24 +49,6 @@ class _EditRiderPopupState extends State<EditRiderPopup> {
 
   @override
   void initState() {
-    // teams = riders
-    //     .map((e) {
-    //       if (e.team.isNotNullOrEmpty) {
-    //         return e.team;
-    //       }
-    //     })
-    //     .toSet()
-    //     .toList()
-    //   ..remove(null);
-    // cities = riders
-    //     .map((e) {
-    //       if (e.city.isNotNullOrEmpty) {
-    //         return e.city;
-    //       }
-    //     })
-    //     .toSet()
-    //     .toList()
-    //   ..remove(null);
     nameController.text = widget.rider.name;
     nicknameController.text = widget.rider.nickname ?? '';
     birthdayController.text = widget.rider.birthday ?? '';
@@ -94,54 +76,6 @@ class _EditRiderPopupState extends State<EditRiderPopup> {
               validator: validateName,
               autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
-            // DropdownSearch<Rider>(
-            //   key: riderDropdownKey,
-            //   selectedItem:
-            //       riders.firstWhere((rider) => rider.id == widget.rider.id),
-            //   items: (f, cs) => riders,
-            //   itemAsString: (value) => value.name,
-            //   compareFn: (item1, item2) => item1.id == item2.id,
-            //   // При выборе райдера из существующего списка, обновляем нижеследующие поля
-            //   onChanged: (value) {
-            //     nicknameController.text = value?.nickname ?? '';
-            //     birthdayController.text = value?.birthday ?? '';
-            //     teamDropdownKey.currentState!.changeSelectedItem(value?.team);
-            //     cityDropdownKey.currentState!.changeSelectedItem(value?.city);
-            //     emailController.text = value?.email ?? '';
-            //     phoneController.text = value?.phone ?? '';
-            //     commentController.text = value?.comment ?? '';
-            //   },
-            //   validator: validateRider,
-            //   autoValidateMode: AutovalidateMode.always,
-            //   decoratorProps: DropDownDecoratorProps(
-            //     decoration: InputDecoration(
-            //       labelText: Localization.current.I18nDatabase_name,
-            //     ),
-            //   ),
-            //   popupProps: PopupProps.menu(
-            //     showSearchBox: true,
-            //     fit: FlexFit.loose,
-            //     searchDelay: Duration.zero,
-            //     emptyBuilder: (context, query) {
-            //       return ListTile(
-            //         title: Text(Localization.current.I18nDatabase_newRider),
-            //         trailing: TextButton(
-            //           onPressed: () {
-            //             final rider =
-            //                 Rider(id: -1, name: query, isDeleted: false);
-            //             riderDropdownKey.currentState!
-            //                 .changeSelectedItem(rider);
-            //             riderDropdownKey.currentState!.closeDropDownSearch();
-            //             setState(() {
-            //               riders.insert(0, rider);
-            //             });
-            //           },
-            //           child: Text(Localization.current.I18nCore_yes),
-            //         ),
-            //       );
-            //     },
-            //   ),
-            // ),
             TextFormField(
               controller: nicknameController,
               decoration: InputDecoration(

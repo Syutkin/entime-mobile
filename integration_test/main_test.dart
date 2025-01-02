@@ -55,7 +55,8 @@ void main() {
     final ntpProvider = NtpProvider();
 
     final connectivity = Connectivity();
-    final IConnectivityProvider connectivityProvider = ConnectivityProvider.init(connectivity);
+    final IConnectivityProvider connectivityProvider =
+        ConnectivityProvider.init(connectivity);
 
     await $.pumpWidgetAndSettle(
       EntimeApp(

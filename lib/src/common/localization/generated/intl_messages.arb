@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2024-12-29T20:10:44.399375",
+  "@@last_modified": "2025-01-02T20:52:11.188273",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -840,7 +840,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nStart_incorrectName": "Некорректное имя",
+  "I18nStart_incorrectName": "Только буквы, цифры, пробел, дефис и подчёркивание",
   "@I18nStart_incorrectName": {
     "type": "text",
     "placeholders": {}
@@ -850,17 +850,22 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nStart_incorrectNickname": "Некорректный никнейм",
+  "I18nStart_incorrectNickname": "Только буквы, цифры, пробел, дефис и подчёркивание",
   "@I18nStart_incorrectNickname": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nStart_incorrectBirthday": "Некорректная дата/год рождения",
+  "I18nStart_incorrectBirthday": "Некорректная дата рождения",
   "@I18nStart_incorrectBirthday": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nStart_incorrectCity": "Некорректное название города",
+  "I18nStart_incorrectAge": "Некорректный возраст/год рождения",
+  "@I18nStart_incorrectAge": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectCity": "Только буквы, цифры, пробел, дефис и подчёркивание",
   "@I18nStart_incorrectCity": {
     "type": "text",
     "placeholders": {}
