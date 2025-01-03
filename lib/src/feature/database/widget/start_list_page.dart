@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:entime/src/common/widget/cancel_ok_buttons.dart';
+import 'package:entime/src/feature/database/logic/validators.dart';
 import 'package:entime/src/feature/database/widget/popup/edit_racer_popup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -24,8 +25,9 @@ import '../logic/filter_start_list.dart';
 part 'popup/add_racer_popup.dart';
 part 'popup/edit_start_time_popup.dart';
 part 'popup/overwrite_start_time_popup.dart';
+part 'popup/shift_starts_time.dart';
 
-enum StartPopupMenu { /*detail,*/ edit }
+enum StartPopupMenu { /*detail,*/ edit, shift }
 
 class StartListPage extends StatefulWidget {
   const StartListPage({super.key});
@@ -519,6 +521,11 @@ class _StartListPage extends State<StartListPage> {
                     currentContext.read<DatabaseBloc>().state.categories,
               );
             }
+          case StartPopupMenu.shift:
+            final currentContext = context;
+            if (currentContext.mounted) {
+              await shiftStartsTime(context: currentContext, item: item);
+            }
         }
       }
     }
@@ -532,6 +539,11 @@ class _StartListPage extends State<StartListPage> {
       PopupMenuItem(
         value: StartPopupMenu.edit,
         child: Text(Localization.current.I18nCore_edit),
+      ),
+      const PopupMenuDivider(),
+      PopupMenuItem(
+        value: StartPopupMenu.shift,
+        child: Text(Localization.current.I18nStart_shiftStartsTime),
       ),
     ];
   }

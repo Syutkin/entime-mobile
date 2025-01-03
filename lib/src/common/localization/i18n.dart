@@ -771,6 +771,31 @@ class I18nStart {
     'Время старта на смартфоне',
     name: 'I18nStart_startTimeAtSmartphone',
   );
+
+  static String get shiftStartsTime =>
+      Intl.message('Сдвинуть время стартов', name: 'I18nStart_shiftStartsTime');
+
+  static String shiftStartsTimeFromNumber(
+    int number,
+    String time,
+  ) => Intl.message(
+    'Сдвинуть время стартов на указанное количество минут от номера $number (время старта $time) и далее?',
+    name: 'I18nStart_shiftStartsTimeFromNumber',
+    args: [number, time],
+  );
+
+  static String get shiftMinutes =>
+      Intl.message('Минуты', name: 'I18nStart_shiftMinutes');
+
+  static String get incorrectShiftMinutes => Intl.message(
+    'Некорректные минуты',
+    name: 'I18nStart_incorrectShiftMinutes',
+  );
+
+  static String get wrongRangeShiftMinutes => Intl.message(
+    'Мин -2 часа, макс 10 часов',
+    name: 'I18nStart_wrongRangeShiftMinutes',
+  );
 }
 
 class I18nFinish {

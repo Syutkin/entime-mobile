@@ -175,8 +175,11 @@ void main() {
       );
 
       test('Some forbidden characters in city name', () {
-        const city = 'NamE 9 -21 Фыва_0';
-        expect(validateCity(city), null);
+        const city = 'NamE, 9 -21! Фыва_0';
+        expect(
+          validateCity(city),
+          Localization.current.I18nStart_incorrectCity,
+        );
       });
     });
 
@@ -201,6 +204,39 @@ void main() {
           validateEmail(city),
           Localization.current.I18nStart_incorrectEmail,
         );
+      });
+    });
+    group('validateShift tests', () {
+      test('Shift can be null', () {
+        String? shift;
+        expect(validateShift(shift), null);
+      });
+
+      test('Shift can be empty', () {
+        expect(validateShift(''), null);
+      });
+
+      test('Incorrect shift', () {
+        expect(
+          validateShift('a'),
+          Localization.current.I18nStart_incorrectShiftMinutes,
+        );
+      });
+
+      test('Incorrect range for shift', () {
+        expect(
+          validateShift('-121'),
+          Localization.current.I18nStart_wrongRangeShiftMinutes,
+        );
+        expect(
+          validateShift('700'),
+          Localization.current.I18nStart_wrongRangeShiftMinutes,
+        );
+      });
+
+      test('Correct shift', () {
+        expect(validateShift('-10'), null);
+        expect(validateShift('60'), null);
       });
     });
   });

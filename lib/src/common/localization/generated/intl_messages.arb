@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-01-03T18:33:58.239169",
+  "@@last_modified": "2025-01-03T22:36:42.687866",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -932,6 +932,34 @@
   },
   "I18nStart_startTimeAtSmartphone": "Время старта на смартфоне",
   "@I18nStart_startTimeAtSmartphone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_shiftStartsTime": "Сдвинуть время стартов",
+  "@I18nStart_shiftStartsTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_shiftStartsTimeFromNumber": "Сдвинуть время стартов на указанное количество минут от номера {number} (время старта {time}) и далее?",
+  "@I18nStart_shiftStartsTimeFromNumber": {
+    "type": "text",
+    "placeholders": {
+      "number": {},
+      "time": {}
+    }
+  },
+  "I18nStart_shiftMinutes": "Минуты",
+  "@I18nStart_shiftMinutes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_incorrectShiftMinutes": "Некорректные минуты",
+  "@I18nStart_incorrectShiftMinutes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_wrongRangeShiftMinutes": "Мин -2 часа, макс 10 часов",
+  "@I18nStart_wrongRangeShiftMinutes": {
     "type": "text",
     "placeholders": {}
   },

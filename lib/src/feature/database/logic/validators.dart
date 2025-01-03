@@ -85,3 +85,18 @@ String? validateEmail(String? email) {
   }
   return Localization.current.I18nStart_incorrectEmail;
 }
+
+String? validateShift(String? minutes) {
+  if (minutes.isNullOrEmpty) {
+    return null;
+  }
+  final result = int.tryParse(minutes!);
+  if (result == null) {
+    return Localization.current.I18nStart_incorrectShiftMinutes;
+  } else {
+    if (!(-120 <= result && result <= 600)) {
+      return Localization.current.I18nStart_wrongRangeShiftMinutes;
+    }
+  }
+  return null;
+}
