@@ -94,13 +94,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.0-beta.2+412',
+    representation: r'0.5.0-beta.2+414',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.0-beta.2+412',
+    canonical: r'0.5.0-beta.2+414',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -119,19 +119,19 @@ sealed class Pubspec {
     preRelease: <String>[r'beta', r'2'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'412'],
+    build: <String>[r'414'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2025,
     1,
-    2,
-    18,
-    42,
-    40,
-    443,
-    539,
+    3,
+    10,
+    56,
+    33,
+    916,
+    617,
   );
 
   /// Name
@@ -450,6 +450,7 @@ sealed class Pubspec {
     'sqlite3_flutter_libs': r'^0.5.28',
     'url_launcher': r'^6.3.1',
     'wakelock_plus': r'^1.2.10',
+    'windows1251': r'^2.0.0',
   };
 
   /// Developer dependencies

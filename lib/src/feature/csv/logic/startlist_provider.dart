@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:windows1251/windows1251.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
@@ -15,8 +17,7 @@ class StartlistProvider {
     if (file == null || file.bytes == null) {
       return null;
     }
-
-    final csv = utf8.decode(file.bytes!).trim();
+    final csv = _decodeBytes(file.bytes!);
 
     try {
       final maps = _convertCsv(csv);
@@ -49,7 +50,8 @@ class StartlistProvider {
     if (file == null || file.bytes == null) {
       return null;
     }
-    final csv = utf8.decode(file.bytes!).trim();
+    // final csv = utf8.decode(file.bytes!).trim();
+    final csv = _decodeBytes(file.bytes!);
 
     try {
       final maps = _convertCsv(csv);
@@ -74,6 +76,23 @@ class StartlistProvider {
       );
       return null;
     }
+  }
+
+  String _decodeBytes(Uint8List bytes) {
+    var csv = '';
+    try {
+      csv = utf8.decode(bytes).trim();
+    } on FormatException catch (e) {
+      logger
+        ..e('StartlistProvider -> Error converting to utf8: $e')
+        ..i('StartlistProvider -> Trying from cp1251...');
+      try {
+        csv = windows1251.decode(bytes).trim();
+      } on Exception {
+        rethrow;
+      }
+    }
+    return csv;
   }
 
   Future<PlatformFile?> _pickCsv() async {
