@@ -212,6 +212,12 @@ class DatabaseEvent with _$DatabaseEvent {
     required DateTime dateTimeNow,
   }) = _GetNumbersOnTraceNow;
 
+  const factory DatabaseEvent.shiftStartsTime({
+    required int stageId,
+    required int minutes,
+    String? fromTime,
+  }) = _ShiftStartsTime;
+
   const factory DatabaseEvent.selectAwaitingNumber({required int number}) =
       _SelectAwaitingNumber;
 

@@ -1,11 +1,15 @@
 //ignore_for_file: avoid_redundant_argument_values
+import 'dart:math';
+
 import 'package:crypto/crypto.dart';
 import 'package:drift/drift.dart' hide isNotNull;
 import 'package:drift/native.dart';
 import 'package:entime/src/common/utils/extensions.dart';
+import 'package:entime/src/constants/date_time_formats.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart';
 
 part 'helpers/raw_queries.dart';
 
@@ -1398,12 +1402,6 @@ void main() {
 
         finishes = await db.getFinishesFromStage(stageId: stage.id).get();
         expect(finishes.first.number, number);
-
-        // startInfo = (await db
-        //         .getNumberAtStarts(stageId: stage.id!, number: number)
-        //         .get())
-        //     .first;
-        // expect(startInfo.finishId, 1);
       });
     });
 
@@ -1536,6 +1534,77 @@ void main() {
 
         expect(result.length, 2);
         expect(result.first.number, number2);
+      });
+    });
+
+    group('Test shiftStartsTime', () {
+      Future<void> testShift(int stageId, int number, int minutes) async {
+        final duration = Duration(minutes: minutes);
+        var participants =
+            await db.getNumberAtStarts(stageId: stageId, number: number).get();
+
+        final addedDuration = DateFormat(
+          shortTimeFormat,
+        ).format(participants.first.startTime.toDateTime()!.add(duration));
+        final count = await db.shiftStartsTime(
+          stageId: stageId,
+          minutes: minutes,
+        );
+        expect(count, 79);
+
+        participants =
+            await db.getNumberAtStarts(stageId: stageId, number: number).get();
+        final updatedStartTime = participants.first.startTime;
+        expect(addedDuration, updatedStartTime);
+      }
+
+      test('Shift forward all times', () async {
+        final stageId = (await db.getStages(raceId: 1).get()).first.id;
+        final rng = Random();
+
+        for (var i = 0; i < 10; i++) {
+          final minutes = rng.nextInt(600);
+          final number = rng.nextInt(79) + 1;
+          await testShift(stageId, number, minutes);
+        }
+      });
+
+      test('Shift behind all times', () async {
+        final stageId = (await db.getStages(raceId: 1).get()).first.id;
+        final rng = Random();
+
+        for (var i = 0; i < 10; i++) {
+          final minutes = -rng.nextInt(121);
+          final number = rng.nextInt(79) + 1;
+          await testShift(stageId, number, minutes);
+        }
+      });
+
+      test('Shift forward from time', () async {
+        final stageId = (await db.getStages(raceId: 1).get()).first.id;
+        const minutes = 90;
+        var number = 50;
+        var startTime =
+            (await db.getNumberAtStarts(stageId: stageId, number: number).get())
+                .first
+                .startTime;
+        var count = await db.shiftStartsTime(
+          stageId: stageId,
+          minutes: minutes,
+          fromTime: startTime,
+        );
+        expect(count, 6);
+        number = 61;
+        startTime =
+            (await db.getNumberAtStarts(stageId: stageId, number: number).get())
+                .first
+                .startTime;
+        count = await db.shiftStartsTime(
+          stageId: stageId,
+          minutes: minutes,
+          fromTime: startTime,
+        );
+        expect(count, 70);
       });
     });
 

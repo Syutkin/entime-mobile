@@ -186,6 +186,8 @@ mixin _$DatabaseEvent {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -354,6 +356,8 @@ mixin _$DatabaseEvent {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -521,6 +525,8 @@ mixin _$DatabaseEvent {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -571,6 +577,7 @@ mixin _$DatabaseEvent {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -619,6 +626,7 @@ mixin _$DatabaseEvent {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -665,6 +673,7 @@ mixin _$DatabaseEvent {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -723,12 +732,18 @@ class __$$InitializeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitializeImpl implements _Initialize {
+class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
   const _$InitializeImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.initialize()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'DatabaseEvent.initialize'));
   }
 
   @override
@@ -910,6 +925,8 @@ class _$InitializeImpl implements _Initialize {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -1082,6 +1099,8 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -1253,6 +1272,8 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -1310,6 +1331,7 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -1362,6 +1384,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -1412,6 +1435,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -1583,7 +1607,7 @@ class __$$EmitStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EmitStateImpl implements _EmitState {
+class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
   const _$EmitStateImpl({
     required this.race,
     required this.stage,
@@ -1686,8 +1710,29 @@ class _$EmitStateImpl implements _EmitState {
   final bool? updateFinishNumber;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.emitState'))
+      ..add(DiagnosticsProperty('race', race))
+      ..add(DiagnosticsProperty('stage', stage))
+      ..add(DiagnosticsProperty('races', races))
+      ..add(DiagnosticsProperty('stages', stages))
+      ..add(DiagnosticsProperty('categories', categories))
+      ..add(DiagnosticsProperty('riders', riders))
+      ..add(DiagnosticsProperty('participants', participants))
+      ..add(DiagnosticsProperty('starts', starts))
+      ..add(DiagnosticsProperty('finishes', finishes))
+      ..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))
+      ..add(DiagnosticsProperty('notification', notification))
+      ..add(DiagnosticsProperty('autoFinishNumber', autoFinishNumber))
+      ..add(DiagnosticsProperty('awaitingNumber', awaitingNumber))
+      ..add(DiagnosticsProperty('updateFinishNumber', updateFinishNumber));
   }
 
   @override
@@ -1921,6 +1966,8 @@ class _$EmitStateImpl implements _EmitState {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -2108,6 +2155,8 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -2294,6 +2343,8 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -2366,6 +2417,7 @@ class _$EmitStateImpl implements _EmitState {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -2418,6 +2470,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -2468,6 +2521,7 @@ class _$EmitStateImpl implements _EmitState {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -2603,7 +2657,7 @@ class __$$AddRaceImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddRaceImpl implements _AddRace {
+class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
   const _$AddRaceImpl({
     required this.name,
     this.startDate,
@@ -2627,8 +2681,21 @@ class _$AddRaceImpl implements _AddRace {
   final String? description;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.addRace(name: $name, startDate: $startDate, finishDate: $finishDate, location: $location, url: $url, description: $description)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.addRace'))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('startDate', startDate))
+      ..add(DiagnosticsProperty('finishDate', finishDate))
+      ..add(DiagnosticsProperty('location', location))
+      ..add(DiagnosticsProperty('url', url))
+      ..add(DiagnosticsProperty('description', description));
   }
 
   @override
@@ -2837,6 +2904,8 @@ class _$AddRaceImpl implements _AddRace {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -3009,6 +3078,8 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -3187,6 +3258,8 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -3244,6 +3317,7 @@ class _$AddRaceImpl implements _AddRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -3296,6 +3370,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -3346,6 +3421,7 @@ class _$AddRaceImpl implements _AddRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -3472,7 +3548,7 @@ class __$$UpdateRaceImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateRaceImpl implements _UpdateRace {
+class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
   const _$UpdateRaceImpl({
     required this.id,
     this.name,
@@ -3499,8 +3575,22 @@ class _$UpdateRaceImpl implements _UpdateRace {
   final String? description;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.updateRace(id: $id, name: $name, startDate: $startDate, finishDate: $finishDate, location: $location, url: $url, description: $description)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateRace'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('startDate', startDate))
+      ..add(DiagnosticsProperty('finishDate', finishDate))
+      ..add(DiagnosticsProperty('location', location))
+      ..add(DiagnosticsProperty('url', url))
+      ..add(DiagnosticsProperty('description', description));
   }
 
   @override
@@ -3711,6 +3801,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -3891,6 +3983,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -4070,6 +4164,8 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -4135,6 +4231,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -4187,6 +4284,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -4237,6 +4335,7 @@ class _$UpdateRaceImpl implements _UpdateRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -4365,7 +4464,7 @@ class __$$UpsertRaceImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpsertRaceImpl implements _UpsertRace {
+class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
   const _$UpsertRaceImpl({
     this.id,
     this.name,
@@ -4392,8 +4491,22 @@ class _$UpsertRaceImpl implements _UpsertRace {
   final String? description;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.upsertRace(id: $id, name: $name, startDate: $startDate, finishDate: $finishDate, location: $location, url: $url, description: $description)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.upsertRace'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('startDate', startDate))
+      ..add(DiagnosticsProperty('finishDate', finishDate))
+      ..add(DiagnosticsProperty('location', location))
+      ..add(DiagnosticsProperty('url', url))
+      ..add(DiagnosticsProperty('description', description));
   }
 
   @override
@@ -4604,6 +4717,8 @@ class _$UpsertRaceImpl implements _UpsertRace {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -4784,6 +4899,8 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -4963,6 +5080,8 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -5028,6 +5147,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -5080,6 +5200,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -5130,6 +5251,7 @@ class _$UpsertRaceImpl implements _UpsertRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -5211,15 +5333,23 @@ class __$$DeleteRaceImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DeleteRaceImpl implements _DeleteRace {
+class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
   const _$DeleteRaceImpl(this.id);
 
   @override
   final int id;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.deleteRace(id: $id)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.deleteRace'))
+      ..add(DiagnosticsProperty('id', id));
   }
 
   @override
@@ -5411,6 +5541,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -5583,6 +5715,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -5754,6 +5888,8 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -5811,6 +5947,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -5863,6 +6000,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -5913,6 +6051,7 @@ class _$DeleteRaceImpl implements _DeleteRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -5966,12 +6105,18 @@ class __$$GetRacesImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetRacesImpl implements _GetRaces {
+class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
   const _$GetRacesImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.getRaces()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'DatabaseEvent.getRaces'));
   }
 
   @override
@@ -6153,6 +6298,8 @@ class _$GetRacesImpl implements _GetRaces {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -6325,6 +6472,8 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -6496,6 +6645,8 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -6553,6 +6704,7 @@ class _$GetRacesImpl implements _GetRaces {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -6605,6 +6757,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -6655,6 +6808,7 @@ class _$GetRacesImpl implements _GetRaces {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -6714,15 +6868,23 @@ class __$$SelectRaceImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SelectRaceImpl implements _SelectRace {
+class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
   const _$SelectRaceImpl(this.race);
 
   @override
   final Race race;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.selectRace(race: $race)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.selectRace'))
+      ..add(DiagnosticsProperty('race', race));
   }
 
   @override
@@ -6915,6 +7077,8 @@ class _$SelectRaceImpl implements _SelectRace {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -7087,6 +7251,8 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -7258,6 +7424,8 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -7315,6 +7483,7 @@ class _$SelectRaceImpl implements _SelectRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -7367,6 +7536,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -7417,6 +7587,7 @@ class _$SelectRaceImpl implements _SelectRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -7470,12 +7641,18 @@ class __$$DeselectRaceImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DeselectRaceImpl implements _DeselectRace {
+class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
   const _$DeselectRaceImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.deselectRace()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'DatabaseEvent.deselectRace'));
   }
 
   @override
@@ -7657,6 +7834,8 @@ class _$DeselectRaceImpl implements _DeselectRace {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -7829,6 +8008,8 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -8000,6 +8181,8 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -8057,6 +8240,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -8109,6 +8293,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -8159,6 +8344,7 @@ class _$DeselectRaceImpl implements _DeselectRace {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -8233,7 +8419,7 @@ class __$$AddStageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddStageImpl implements _AddStage {
+class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
   const _$AddStageImpl({
     required this.name,
     required this.raceId,
@@ -8248,8 +8434,18 @@ class _$AddStageImpl implements _AddStage {
   final int? trailId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.addStage(name: $name, raceId: $raceId, trailId: $trailId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.addStage'))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('raceId', raceId))
+      ..add(DiagnosticsProperty('trailId', trailId));
   }
 
   @override
@@ -8443,6 +8639,8 @@ class _$AddStageImpl implements _AddStage {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -8615,6 +8813,8 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -8786,6 +8986,8 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -8843,6 +9045,7 @@ class _$AddStageImpl implements _AddStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -8895,6 +9098,7 @@ class _$AddStageImpl implements _AddStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -8945,6 +9149,7 @@ class _$AddStageImpl implements _AddStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -9072,7 +9277,7 @@ class __$$UpsertStageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpsertStageImpl implements _UpsertStage {
+class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
   const _$UpsertStageImpl({
     this.id,
     this.name,
@@ -9103,8 +9308,23 @@ class _$UpsertStageImpl implements _UpsertStage {
   final bool removeTrailId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.upsertStage(id: $id, name: $name, description: $description, raceId: $raceId, trailId: $trailId, isActive: $isActive, isDeleted: $isDeleted, removeTrailId: $removeTrailId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.upsertStage'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('raceId', raceId))
+      ..add(DiagnosticsProperty('trailId', trailId))
+      ..add(DiagnosticsProperty('isActive', isActive))
+      ..add(DiagnosticsProperty('isDeleted', isDeleted))
+      ..add(DiagnosticsProperty('removeTrailId', removeTrailId));
   }
 
   @override
@@ -9317,6 +9537,8 @@ class _$UpsertStageImpl implements _UpsertStage {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -9498,6 +9720,8 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -9678,6 +9902,8 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -9744,6 +9970,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -9796,6 +10023,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -9846,6 +10074,7 @@ class _$UpsertStageImpl implements _UpsertStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -9929,15 +10158,23 @@ class __$$DeleteStageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DeleteStageImpl implements _DeleteStage {
+class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
   const _$DeleteStageImpl(this.id);
 
   @override
   final int id;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.deleteStage(id: $id)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.deleteStage'))
+      ..add(DiagnosticsProperty('id', id));
   }
 
   @override
@@ -10129,6 +10366,8 @@ class _$DeleteStageImpl implements _DeleteStage {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -10301,6 +10540,8 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -10472,6 +10713,8 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -10529,6 +10772,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -10581,6 +10825,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -10631,6 +10876,7 @@ class _$DeleteStageImpl implements _DeleteStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -10698,15 +10944,23 @@ class __$$GetStagesImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetStagesImpl implements _GetStages {
+class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
   const _$GetStagesImpl(this.raceId);
 
   @override
   final int raceId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.getStages(raceId: $raceId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.getStages'))
+      ..add(DiagnosticsProperty('raceId', raceId));
   }
 
   @override
@@ -10898,6 +11152,8 @@ class _$GetStagesImpl implements _GetStages {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -11070,6 +11326,8 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -11241,6 +11499,8 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -11298,6 +11558,7 @@ class _$GetStagesImpl implements _GetStages {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -11350,6 +11611,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -11400,6 +11662,7 @@ class _$GetStagesImpl implements _GetStages {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -11467,15 +11730,23 @@ class __$$SelectStageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SelectStageImpl implements _SelectStage {
+class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
   const _$SelectStageImpl(this.stage);
 
   @override
   final Stage stage;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.selectStage(stage: $stage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.selectStage'))
+      ..add(DiagnosticsProperty('stage', stage));
   }
 
   @override
@@ -11668,6 +11939,8 @@ class _$SelectStageImpl implements _SelectStage {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -11840,6 +12113,8 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -12011,6 +12286,8 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -12068,6 +12345,7 @@ class _$SelectStageImpl implements _SelectStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -12120,6 +12398,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -12170,6 +12449,7 @@ class _$SelectStageImpl implements _SelectStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -12237,15 +12517,25 @@ class __$$GetParticipantsAtStartImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
+class _$GetParticipantsAtStartImpl
+    with DiagnosticableTreeMixin
+    implements _GetParticipantsAtStart {
   const _$GetParticipantsAtStartImpl(this.stageId);
 
   @override
   final int stageId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.getParticipantsAtStart(stageId: $stageId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.getParticipantsAtStart'))
+      ..add(DiagnosticsProperty('stageId', stageId));
   }
 
   @override
@@ -12441,6 +12731,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -12613,6 +12905,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -12784,6 +13078,8 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -12841,6 +13137,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -12893,6 +13190,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -12943,6 +13241,7 @@ class _$GetParticipantsAtStartImpl implements _GetParticipantsAtStart {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -13032,7 +13331,9 @@ class __$$AddStartNumberImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddStartNumberImpl implements _AddStartNumber {
+class _$AddStartNumberImpl
+    with DiagnosticableTreeMixin
+    implements _AddStartNumber {
   const _$AddStartNumberImpl({
     required this.stage,
     required this.number,
@@ -13051,8 +13352,19 @@ class _$AddStartNumberImpl implements _AddStartNumber {
   final bool forceAdd;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.addStartNumber(stage: $stage, number: $number, startTime: $startTime, forceAdd: $forceAdd)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.addStartNumber'))
+      ..add(DiagnosticsProperty('stage', stage))
+      ..add(DiagnosticsProperty('number', number))
+      ..add(DiagnosticsProperty('startTime', startTime))
+      ..add(DiagnosticsProperty('forceAdd', forceAdd));
   }
 
   @override
@@ -13258,6 +13570,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -13430,6 +13744,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -13601,6 +13917,8 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -13658,6 +13976,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -13710,6 +14029,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -13760,6 +14080,7 @@ class _$AddStartNumberImpl implements _AddStartNumber {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -13903,7 +14224,7 @@ class __$$UpdateRiderImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateRiderImpl implements _UpdateRider {
+class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
   const _$UpdateRiderImpl({
     required this.riderId,
     required this.name,
@@ -13939,8 +14260,25 @@ class _$UpdateRiderImpl implements _UpdateRider {
   final bool? isDeleted;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.updateRider(riderId: $riderId, name: $name, nickname: $nickname, birthday: $birthday, team: $team, city: $city, email: $email, phone: $phone, comment: $comment, isDeleted: $isDeleted)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateRider'))
+      ..add(DiagnosticsProperty('riderId', riderId))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('nickname', nickname))
+      ..add(DiagnosticsProperty('birthday', birthday))
+      ..add(DiagnosticsProperty('team', team))
+      ..add(DiagnosticsProperty('city', city))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('phone', phone))
+      ..add(DiagnosticsProperty('comment', comment))
+      ..add(DiagnosticsProperty('isDeleted', isDeleted));
   }
 
   @override
@@ -14156,6 +14494,8 @@ class _$UpdateRiderImpl implements _UpdateRider {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -14339,6 +14679,8 @@ class _$UpdateRiderImpl implements _UpdateRider {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -14521,6 +14863,8 @@ class _$UpdateRiderImpl implements _UpdateRider {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -14589,6 +14933,7 @@ class _$UpdateRiderImpl implements _UpdateRider {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -14641,6 +14986,7 @@ class _$UpdateRiderImpl implements _UpdateRider {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -14691,6 +15037,7 @@ class _$UpdateRiderImpl implements _UpdateRider {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -14853,7 +15200,7 @@ class __$$UpdateRacerImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateRacerImpl implements _UpdateRacer {
+class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
   const _$UpdateRacerImpl({
     required this.riderId,
     required this.participantId,
@@ -14892,8 +15239,26 @@ class _$UpdateRacerImpl implements _UpdateRacer {
   final String? comment;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.updateRacer(riderId: $riderId, participantId: $participantId, name: $name, category: $category, nickname: $nickname, birthday: $birthday, team: $team, city: $city, email: $email, phone: $phone, comment: $comment)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateRacer'))
+      ..add(DiagnosticsProperty('riderId', riderId))
+      ..add(DiagnosticsProperty('participantId', participantId))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('category', category))
+      ..add(DiagnosticsProperty('nickname', nickname))
+      ..add(DiagnosticsProperty('birthday', birthday))
+      ..add(DiagnosticsProperty('team', team))
+      ..add(DiagnosticsProperty('city', city))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('phone', phone))
+      ..add(DiagnosticsProperty('comment', comment));
   }
 
   @override
@@ -15112,6 +15477,8 @@ class _$UpdateRacerImpl implements _UpdateRacer {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -15296,6 +15663,8 @@ class _$UpdateRacerImpl implements _UpdateRacer {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -15479,6 +15848,8 @@ class _$UpdateRacerImpl implements _UpdateRacer {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -15548,6 +15919,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -15600,6 +15972,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -15650,6 +16023,7 @@ class _$UpdateRacerImpl implements _UpdateRacer {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -15786,7 +16160,9 @@ class __$$UpdateStartingInfoImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
+class _$UpdateStartingInfoImpl
+    with DiagnosticableTreeMixin
+    implements _UpdateStartingInfo {
   const _$UpdateStartingInfoImpl({
     required this.stageId,
     required this.participantId,
@@ -15813,8 +16189,22 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
   final int? manualCorrection;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.updateStartingInfo(stageId: $stageId, participantId: $participantId, startTime: $startTime, automaticStartTime: $automaticStartTime, automaticCorrection: $automaticCorrection, manualStartTime: $manualStartTime, manualCorrection: $manualCorrection)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateStartingInfo'))
+      ..add(DiagnosticsProperty('stageId', stageId))
+      ..add(DiagnosticsProperty('participantId', participantId))
+      ..add(DiagnosticsProperty('startTime', startTime))
+      ..add(DiagnosticsProperty('automaticStartTime', automaticStartTime))
+      ..add(DiagnosticsProperty('automaticCorrection', automaticCorrection))
+      ..add(DiagnosticsProperty('manualStartTime', manualStartTime))
+      ..add(DiagnosticsProperty('manualCorrection', manualCorrection));
   }
 
   @override
@@ -16030,6 +16420,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -16210,6 +16602,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -16389,6 +16783,8 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -16454,6 +16850,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -16506,6 +16903,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -16556,6 +16954,7 @@ class _$UpdateStartingInfoImpl implements _UpdateStartingInfo {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -16684,7 +17083,9 @@ class __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
+class _$UpdateAutomaticCorrectionImpl
+    with DiagnosticableTreeMixin
+    implements _UpdateAutomaticCorrection {
   const _$UpdateAutomaticCorrectionImpl({
     required this.stageId,
     required this.startTime,
@@ -16712,8 +17113,24 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
   final int? deltaInSeconds;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.updateAutomaticCorrection(stageId: $stageId, startTime: $startTime, correction: $correction, timestamp: $timestamp, ntpOffset: $ntpOffset, forceUpdate: $forceUpdate, deltaInSeconds: $deltaInSeconds)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty('type', 'DatabaseEvent.updateAutomaticCorrection'),
+      )
+      ..add(DiagnosticsProperty('stageId', stageId))
+      ..add(DiagnosticsProperty('startTime', startTime))
+      ..add(DiagnosticsProperty('correction', correction))
+      ..add(DiagnosticsProperty('timestamp', timestamp))
+      ..add(DiagnosticsProperty('ntpOffset', ntpOffset))
+      ..add(DiagnosticsProperty('forceUpdate', forceUpdate))
+      ..add(DiagnosticsProperty('deltaInSeconds', deltaInSeconds));
   }
 
   @override
@@ -16928,6 +17345,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -17108,6 +17527,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -17287,6 +17708,8 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -17352,6 +17775,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -17404,6 +17828,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -17454,6 +17879,7 @@ class _$UpdateAutomaticCorrectionImpl implements _UpdateAutomaticCorrection {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -17568,7 +17994,9 @@ class __$$UpdateManualStartTimeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
+class _$UpdateManualStartTimeImpl
+    with DiagnosticableTreeMixin
+    implements _UpdateManualStartTime {
   const _$UpdateManualStartTimeImpl({
     required this.stageId,
     required this.time,
@@ -17590,8 +18018,20 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
   final int deltaInSeconds;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.updateManualStartTime(stageId: $stageId, time: $time, timestamp: $timestamp, ntpOffset: $ntpOffset, deltaInSeconds: $deltaInSeconds)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateManualStartTime'))
+      ..add(DiagnosticsProperty('stageId', stageId))
+      ..add(DiagnosticsProperty('time', time))
+      ..add(DiagnosticsProperty('timestamp', timestamp))
+      ..add(DiagnosticsProperty('ntpOffset', ntpOffset))
+      ..add(DiagnosticsProperty('deltaInSeconds', deltaInSeconds));
   }
 
   @override
@@ -17801,6 +18241,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -17979,6 +18421,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -18156,6 +18600,8 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -18219,6 +18665,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -18271,6 +18718,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -18321,6 +18769,7 @@ class _$UpdateManualStartTimeImpl implements _UpdateManualStartTime {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -18404,7 +18853,9 @@ class __$$SetStatusForStartIdImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
+class _$SetStatusForStartIdImpl
+    with DiagnosticableTreeMixin
+    implements _SetStatusForStartId {
   const _$SetStatusForStartIdImpl({
     required this.startId,
     required this.status,
@@ -18416,8 +18867,17 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
   final ParticipantStatus status;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.setStatusForStartId(startId: $startId, status: $status)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.setStatusForStartId'))
+      ..add(DiagnosticsProperty('startId', startId))
+      ..add(DiagnosticsProperty('status', status));
   }
 
   @override
@@ -18613,6 +19073,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -18785,6 +19247,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -18956,6 +19420,8 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -19013,6 +19479,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -19065,6 +19532,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -19115,6 +19583,7 @@ class _$SetStatusForStartIdImpl implements _SetStatusForStartId {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -19247,7 +19716,9 @@ class __$$AddFinishTimeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddFinishTimeImpl implements _AddFinishTime {
+class _$AddFinishTimeImpl
+    with DiagnosticableTreeMixin
+    implements _AddFinishTime {
   const _$AddFinishTimeImpl({
     required this.stage,
     required this.finishTime,
@@ -19280,8 +19751,26 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
   final int? number;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.addFinishTime(stage: $stage, finishTime: $finishTime, timestamp: $timestamp, ntpOffset: $ntpOffset, finishDelay: $finishDelay, substituteNumbers: $substituteNumbers, substituteNumbersDelay: $substituteNumbersDelay, dateTimeNow: $dateTimeNow, number: $number)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.addFinishTime'))
+      ..add(DiagnosticsProperty('stage', stage))
+      ..add(DiagnosticsProperty('finishTime', finishTime))
+      ..add(DiagnosticsProperty('timestamp', timestamp))
+      ..add(DiagnosticsProperty('ntpOffset', ntpOffset))
+      ..add(DiagnosticsProperty('finishDelay', finishDelay))
+      ..add(DiagnosticsProperty('substituteNumbers', substituteNumbers))
+      ..add(
+        DiagnosticsProperty('substituteNumbersDelay', substituteNumbersDelay),
+      )
+      ..add(DiagnosticsProperty('dateTimeNow', dateTimeNow))
+      ..add(DiagnosticsProperty('number', number));
   }
 
   @override
@@ -19499,6 +19988,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -19681,6 +20172,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -19862,6 +20355,8 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -19929,6 +20424,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -19981,6 +20477,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -20031,6 +20528,7 @@ class _$AddFinishTimeImpl implements _AddFinishTime {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -20149,7 +20647,9 @@ class __$$AddFinishTimeManualImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
+class _$AddFinishTimeManualImpl
+    with DiagnosticableTreeMixin
+    implements _AddFinishTimeManual {
   const _$AddFinishTimeManualImpl({
     required this.stageId,
     required this.finishTime,
@@ -20170,8 +20670,20 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
   final int? number;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.addFinishTimeManual(stageId: $stageId, finishTime: $finishTime, timestamp: $timestamp, ntpOffset: $ntpOffset, number: $number)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.addFinishTimeManual'))
+      ..add(DiagnosticsProperty('stageId', stageId))
+      ..add(DiagnosticsProperty('finishTime', finishTime))
+      ..add(DiagnosticsProperty('timestamp', timestamp))
+      ..add(DiagnosticsProperty('ntpOffset', ntpOffset))
+      ..add(DiagnosticsProperty('number', number));
   }
 
   @override
@@ -20380,6 +20892,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -20558,6 +21072,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -20735,6 +21251,8 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -20798,6 +21316,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -20850,6 +21369,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -20900,6 +21420,7 @@ class _$AddFinishTimeManualImpl implements _AddFinishTimeManual {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -20977,15 +21498,25 @@ class __$$ClearStartResultsDebugImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
+class _$ClearStartResultsDebugImpl
+    with DiagnosticableTreeMixin
+    implements _ClearStartResultsDebug {
   const _$ClearStartResultsDebugImpl(this.stageId);
 
   @override
   final int stageId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.clearStartResultsDebug(stageId: $stageId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.clearStartResultsDebug'))
+      ..add(DiagnosticsProperty('stageId', stageId));
   }
 
   @override
@@ -21181,6 +21712,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -21353,6 +21886,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -21524,6 +22059,8 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -21581,6 +22118,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -21633,6 +22171,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -21683,6 +22222,7 @@ class _$ClearStartResultsDebugImpl implements _ClearStartResultsDebug {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -21751,15 +22291,27 @@ class __$$ClearFinishResultsDebugImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
+class _$ClearFinishResultsDebugImpl
+    with DiagnosticableTreeMixin
+    implements _ClearFinishResultsDebug {
   const _$ClearFinishResultsDebugImpl(this.stageId);
 
   @override
   final int stageId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.clearFinishResultsDebug(stageId: $stageId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty('type', 'DatabaseEvent.clearFinishResultsDebug'),
+      )
+      ..add(DiagnosticsProperty('stageId', stageId));
   }
 
   @override
@@ -21953,6 +22505,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -22125,6 +22679,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -22296,6 +22852,8 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -22353,6 +22911,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -22405,6 +22964,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -22455,6 +23015,7 @@ class _$ClearFinishResultsDebugImpl implements _ClearFinishResultsDebug {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -22523,15 +23084,25 @@ class __$$HideAllFinisesImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HideAllFinisesImpl implements _HideAllFinises {
+class _$HideAllFinisesImpl
+    with DiagnosticableTreeMixin
+    implements _HideAllFinises {
   const _$HideAllFinisesImpl(this.stageId);
 
   @override
   final int stageId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.hideAllFinises(stageId: $stageId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.hideAllFinises'))
+      ..add(DiagnosticsProperty('stageId', stageId));
   }
 
   @override
@@ -22726,6 +23297,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -22898,6 +23471,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -23069,6 +23644,8 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -23126,6 +23703,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -23178,6 +23756,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -23228,6 +23807,7 @@ class _$HideAllFinisesImpl implements _HideAllFinises {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -23301,7 +23881,9 @@ class __$$ClearNumberAtFinishImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
+class _$ClearNumberAtFinishImpl
+    with DiagnosticableTreeMixin
+    implements _ClearNumberAtFinish {
   const _$ClearNumberAtFinishImpl({required this.stage, required this.number});
 
   @override
@@ -23310,8 +23892,17 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
   final int number;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.clearNumberAtFinish(stage: $stage, number: $number)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.clearNumberAtFinish'))
+      ..add(DiagnosticsProperty('stage', stage))
+      ..add(DiagnosticsProperty('number', number));
   }
 
   @override
@@ -23511,6 +24102,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -23683,6 +24276,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -23854,6 +24449,8 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -23911,6 +24508,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -23963,6 +24561,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -24013,6 +24612,7 @@ class _$ClearNumberAtFinishImpl implements _ClearNumberAtFinish {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -24090,7 +24690,9 @@ class __$$SetDNSForStageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SetDNSForStageImpl implements _SetDNSForStage {
+class _$SetDNSForStageImpl
+    with DiagnosticableTreeMixin
+    implements _SetDNSForStage {
   const _$SetDNSForStageImpl({required this.stage, required this.number});
 
   @override
@@ -24099,8 +24701,17 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
   final int number;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.setDNSForStage(stage: $stage, number: $number)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.setDNSForStage'))
+      ..add(DiagnosticsProperty('stage', stage))
+      ..add(DiagnosticsProperty('number', number));
   }
 
   @override
@@ -24300,6 +24911,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -24472,6 +25085,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -24643,6 +25258,8 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -24700,6 +25317,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -24752,6 +25370,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -24802,6 +25421,7 @@ class _$SetDNSForStageImpl implements _SetDNSForStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -24879,7 +25499,9 @@ class __$$SetDNFForStageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SetDNFForStageImpl implements _SetDNFForStage {
+class _$SetDNFForStageImpl
+    with DiagnosticableTreeMixin
+    implements _SetDNFForStage {
   const _$SetDNFForStageImpl({required this.stage, required this.number});
 
   @override
@@ -24888,8 +25510,17 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
   final int number;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.setDNFForStage(stage: $stage, number: $number)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.setDNFForStage'))
+      ..add(DiagnosticsProperty('stage', stage))
+      ..add(DiagnosticsProperty('number', number));
   }
 
   @override
@@ -25089,6 +25720,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -25261,6 +25894,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -25432,6 +26067,8 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -25489,6 +26126,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -25541,6 +26179,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -25591,6 +26230,7 @@ class _$SetDNFForStageImpl implements _SetDNFForStage {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -25663,15 +26303,23 @@ class __$$HideFinishImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HideFinishImpl implements _HideFinish {
+class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
   const _$HideFinishImpl({required this.id});
 
   @override
   final int id;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.hideFinish(id: $id)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.hideFinish'))
+      ..add(DiagnosticsProperty('id', id));
   }
 
   @override
@@ -25863,6 +26511,8 @@ class _$HideFinishImpl implements _HideFinish {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -26035,6 +26685,8 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -26206,6 +26858,8 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -26263,6 +26917,7 @@ class _$HideFinishImpl implements _HideFinish {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -26315,6 +26970,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -26365,6 +27021,7 @@ class _$HideFinishImpl implements _HideFinish {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -26453,7 +27110,9 @@ class __$$AddNumberToFinishImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddNumberToFinishImpl implements _AddNumberToFinish {
+class _$AddNumberToFinishImpl
+    with DiagnosticableTreeMixin
+    implements _AddNumberToFinish {
   const _$AddNumberToFinishImpl({
     required this.stage,
     required this.finishId,
@@ -26471,8 +27130,19 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
   final String finishTime;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.addNumberToFinish(stage: $stage, finishId: $finishId, number: $number, finishTime: $finishTime)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.addNumberToFinish'))
+      ..add(DiagnosticsProperty('stage', stage))
+      ..add(DiagnosticsProperty('finishId', finishId))
+      ..add(DiagnosticsProperty('number', number))
+      ..add(DiagnosticsProperty('finishTime', finishTime));
   }
 
   @override
@@ -26678,6 +27348,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -26850,6 +27522,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -27021,6 +27695,8 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -27078,6 +27754,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -27130,6 +27807,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -27180,6 +27858,7 @@ class _$AddNumberToFinishImpl implements _AddNumberToFinish {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -27261,7 +27940,9 @@ class __$$GetNumbersOnTraceNowImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
+class _$GetNumbersOnTraceNowImpl
+    with DiagnosticableTreeMixin
+    implements _GetNumbersOnTraceNow {
   const _$GetNumbersOnTraceNowImpl({
     required this.stageId,
     required this.dateTimeNow,
@@ -27273,8 +27954,17 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
   final DateTime dateTimeNow;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.getNumbersOnTraceNow(stageId: $stageId, dateTimeNow: $dateTimeNow)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.getNumbersOnTraceNow'))
+      ..add(DiagnosticsProperty('stageId', stageId))
+      ..add(DiagnosticsProperty('dateTimeNow', dateTimeNow));
   }
 
   @override
@@ -27472,6 +28162,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -27644,6 +28336,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -27815,6 +28509,8 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -27872,6 +28568,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -27924,6 +28621,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -27974,6 +28672,7 @@ class _$GetNumbersOnTraceNowImpl implements _GetNumbersOnTraceNow {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -28006,6 +28705,831 @@ abstract class _GetNumbersOnTraceNow implements DatabaseEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetNumbersOnTraceNowImplCopyWith<_$GetNumbersOnTraceNowImpl>
   get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ShiftStartsTimeImplCopyWith<$Res> {
+  factory _$$ShiftStartsTimeImplCopyWith(
+    _$ShiftStartsTimeImpl value,
+    $Res Function(_$ShiftStartsTimeImpl) then,
+  ) = __$$ShiftStartsTimeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int stageId, int minutes, String? fromTime});
+}
+
+/// @nodoc
+class __$$ShiftStartsTimeImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$ShiftStartsTimeImpl>
+    implements _$$ShiftStartsTimeImplCopyWith<$Res> {
+  __$$ShiftStartsTimeImplCopyWithImpl(
+    _$ShiftStartsTimeImpl _value,
+    $Res Function(_$ShiftStartsTimeImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? stageId = null,
+    Object? minutes = null,
+    Object? fromTime = freezed,
+  }) {
+    return _then(
+      _$ShiftStartsTimeImpl(
+        stageId:
+            null == stageId
+                ? _value.stageId
+                : stageId // ignore: cast_nullable_to_non_nullable
+                    as int,
+        minutes:
+            null == minutes
+                ? _value.minutes
+                : minutes // ignore: cast_nullable_to_non_nullable
+                    as int,
+        fromTime:
+            freezed == fromTime
+                ? _value.fromTime
+                : fromTime // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$ShiftStartsTimeImpl
+    with DiagnosticableTreeMixin
+    implements _ShiftStartsTime {
+  const _$ShiftStartsTimeImpl({
+    required this.stageId,
+    required this.minutes,
+    this.fromTime,
+  });
+
+  @override
+  final int stageId;
+  @override
+  final int minutes;
+  @override
+  final String? fromTime;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DatabaseEvent.shiftStartsTime(stageId: $stageId, minutes: $minutes, fromTime: $fromTime)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.shiftStartsTime'))
+      ..add(DiagnosticsProperty('stageId', stageId))
+      ..add(DiagnosticsProperty('minutes', minutes))
+      ..add(DiagnosticsProperty('fromTime', fromTime));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShiftStartsTimeImpl &&
+            (identical(other.stageId, stageId) || other.stageId == stageId) &&
+            (identical(other.minutes, minutes) || other.minutes == minutes) &&
+            (identical(other.fromTime, fromTime) ||
+                other.fromTime == fromTime));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, stageId, minutes, fromTime);
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShiftStartsTimeImplCopyWith<_$ShiftStartsTimeImpl> get copyWith =>
+      __$$ShiftStartsTimeImplCopyWithImpl<_$ShiftStartsTimeImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+      Race? race,
+      Stage? stage,
+      List<Race> races,
+      List<Stage> stages,
+      List<String?> categories,
+      List<Rider> riders,
+      List<ParticipantAtStart> participants,
+      List<Start> starts,
+      List<Finish> finishes,
+      List<StartingParticipant> numbersOnTrace,
+      Notification? notification,
+      int? autoFinishNumber,
+      int? awaitingNumber,
+      bool? updateFinishNumber,
+    )
+    emitState,
+    required TResult Function(
+      String name,
+      DateTime? startDate,
+      DateTime? finishDate,
+      String? location,
+      String? url,
+      String? description,
+    )
+    addRace,
+    required TResult Function(
+      int id,
+      String? name,
+      DateTime? startDate,
+      DateTime? finishDate,
+      String? location,
+      String? url,
+      String? description,
+    )
+    updateRace,
+    required TResult Function(
+      int? id,
+      String? name,
+      DateTime? startDate,
+      DateTime? finishDate,
+      String? location,
+      String? url,
+      String? description,
+    )
+    upsertRace,
+    required TResult Function(int id) deleteRace,
+    required TResult Function() getRaces,
+    required TResult Function(Race race) selectRace,
+    required TResult Function() deselectRace,
+    required TResult Function(String name, int raceId, int? trailId) addStage,
+    required TResult Function(
+      int? id,
+      String? name,
+      String? description,
+      int? raceId,
+      int? trailId,
+      bool? isActive,
+      bool? isDeleted,
+      bool removeTrailId,
+    )
+    upsertStage,
+    required TResult Function(int id) deleteStage,
+    required TResult Function(int raceId) getStages,
+    required TResult Function(Stage stage) selectStage,
+    required TResult Function(int stageId) getParticipantsAtStart,
+    required TResult Function(
+      Stage stage,
+      int number,
+      String startTime,
+      bool forceAdd,
+    )
+    addStartNumber,
+    required TResult Function(
+      int riderId,
+      String name,
+      String? nickname,
+      String? birthday,
+      String? team,
+      String? city,
+      String? email,
+      String? phone,
+      String? comment,
+      bool? isDeleted,
+    )
+    updateRider,
+    required TResult Function(
+      int riderId,
+      int participantId,
+      String name,
+      String? category,
+      String? nickname,
+      String? birthday,
+      String? team,
+      String? city,
+      String? email,
+      String? phone,
+      String? comment,
+    )
+    updateRacer,
+    required TResult Function(
+      int stageId,
+      int participantId,
+      String startTime,
+      String? automaticStartTime,
+      int? automaticCorrection,
+      String? manualStartTime,
+      int? manualCorrection,
+    )
+    updateStartingInfo,
+    required TResult Function(
+      int stageId,
+      String startTime,
+      int correction,
+      DateTime timestamp,
+      int ntpOffset,
+      bool forceUpdate,
+      int? deltaInSeconds,
+    )
+    updateAutomaticCorrection,
+    required TResult Function(
+      int stageId,
+      DateTime time,
+      DateTime timestamp,
+      int ntpOffset,
+      int deltaInSeconds,
+    )
+    updateManualStartTime,
+    required TResult Function(int startId, ParticipantStatus status)
+    setStatusForStartId,
+    required TResult Function(
+      Stage stage,
+      String finishTime,
+      DateTime timestamp,
+      int ntpOffset,
+      int? finishDelay,
+      bool? substituteNumbers,
+      int? substituteNumbersDelay,
+      DateTime? dateTimeNow,
+      int? number,
+    )
+    addFinishTime,
+    required TResult Function(
+      int stageId,
+      String finishTime,
+      DateTime timestamp,
+      int ntpOffset,
+      int? number,
+    )
+    addFinishTimeManual,
+    required TResult Function(int stageId) clearStartResultsDebug,
+    required TResult Function(int stageId) clearFinishResultsDebug,
+    required TResult Function(int stageId) hideAllFinises,
+    required TResult Function(Stage stage, int number) clearNumberAtFinish,
+    required TResult Function(Stage stage, int number) setDNSForStage,
+    required TResult Function(Stage stage, int number) setDNFForStage,
+    required TResult Function(int id) hideFinish,
+    required TResult Function(
+      Stage stage,
+      int finishId,
+      int number,
+      String finishTime,
+    )
+    addNumberToFinish,
+    required TResult Function(int stageId, DateTime dateTimeNow)
+    getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
+    required TResult Function(int number) selectAwaitingNumber,
+    required TResult Function() deselectAwaitingNumber,
+    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
+    required TResult Function(int raceId, StagesCsv stages)
+    createStagesFromStagesCsv,
+    required TResult Function() shareStart,
+    required TResult Function() shareFinish,
+    required TResult Function() shareDatabase,
+    required TResult Function(TrailInfo trail) shareTrack,
+  }) {
+    return shiftStartsTime(stageId, minutes, fromTime);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(
+      Race? race,
+      Stage? stage,
+      List<Race> races,
+      List<Stage> stages,
+      List<String?> categories,
+      List<Rider> riders,
+      List<ParticipantAtStart> participants,
+      List<Start> starts,
+      List<Finish> finishes,
+      List<StartingParticipant> numbersOnTrace,
+      Notification? notification,
+      int? autoFinishNumber,
+      int? awaitingNumber,
+      bool? updateFinishNumber,
+    )?
+    emitState,
+    TResult? Function(
+      String name,
+      DateTime? startDate,
+      DateTime? finishDate,
+      String? location,
+      String? url,
+      String? description,
+    )?
+    addRace,
+    TResult? Function(
+      int id,
+      String? name,
+      DateTime? startDate,
+      DateTime? finishDate,
+      String? location,
+      String? url,
+      String? description,
+    )?
+    updateRace,
+    TResult? Function(
+      int? id,
+      String? name,
+      DateTime? startDate,
+      DateTime? finishDate,
+      String? location,
+      String? url,
+      String? description,
+    )?
+    upsertRace,
+    TResult? Function(int id)? deleteRace,
+    TResult? Function()? getRaces,
+    TResult? Function(Race race)? selectRace,
+    TResult? Function()? deselectRace,
+    TResult? Function(String name, int raceId, int? trailId)? addStage,
+    TResult? Function(
+      int? id,
+      String? name,
+      String? description,
+      int? raceId,
+      int? trailId,
+      bool? isActive,
+      bool? isDeleted,
+      bool removeTrailId,
+    )?
+    upsertStage,
+    TResult? Function(int id)? deleteStage,
+    TResult? Function(int raceId)? getStages,
+    TResult? Function(Stage stage)? selectStage,
+    TResult? Function(int stageId)? getParticipantsAtStart,
+    TResult? Function(Stage stage, int number, String startTime, bool forceAdd)?
+    addStartNumber,
+    TResult? Function(
+      int riderId,
+      String name,
+      String? nickname,
+      String? birthday,
+      String? team,
+      String? city,
+      String? email,
+      String? phone,
+      String? comment,
+      bool? isDeleted,
+    )?
+    updateRider,
+    TResult? Function(
+      int riderId,
+      int participantId,
+      String name,
+      String? category,
+      String? nickname,
+      String? birthday,
+      String? team,
+      String? city,
+      String? email,
+      String? phone,
+      String? comment,
+    )?
+    updateRacer,
+    TResult? Function(
+      int stageId,
+      int participantId,
+      String startTime,
+      String? automaticStartTime,
+      int? automaticCorrection,
+      String? manualStartTime,
+      int? manualCorrection,
+    )?
+    updateStartingInfo,
+    TResult? Function(
+      int stageId,
+      String startTime,
+      int correction,
+      DateTime timestamp,
+      int ntpOffset,
+      bool forceUpdate,
+      int? deltaInSeconds,
+    )?
+    updateAutomaticCorrection,
+    TResult? Function(
+      int stageId,
+      DateTime time,
+      DateTime timestamp,
+      int ntpOffset,
+      int deltaInSeconds,
+    )?
+    updateManualStartTime,
+    TResult? Function(int startId, ParticipantStatus status)?
+    setStatusForStartId,
+    TResult? Function(
+      Stage stage,
+      String finishTime,
+      DateTime timestamp,
+      int ntpOffset,
+      int? finishDelay,
+      bool? substituteNumbers,
+      int? substituteNumbersDelay,
+      DateTime? dateTimeNow,
+      int? number,
+    )?
+    addFinishTime,
+    TResult? Function(
+      int stageId,
+      String finishTime,
+      DateTime timestamp,
+      int ntpOffset,
+      int? number,
+    )?
+    addFinishTimeManual,
+    TResult? Function(int stageId)? clearStartResultsDebug,
+    TResult? Function(int stageId)? clearFinishResultsDebug,
+    TResult? Function(int stageId)? hideAllFinises,
+    TResult? Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult? Function(Stage stage, int number)? setDNSForStage,
+    TResult? Function(Stage stage, int number)? setDNFForStage,
+    TResult? Function(int id)? hideFinish,
+    TResult? Function(Stage stage, int finishId, int number, String finishTime)?
+    addNumberToFinish,
+    TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
+    TResult? Function(int number)? selectAwaitingNumber,
+    TResult? Function()? deselectAwaitingNumber,
+    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? shareStart,
+    TResult? Function()? shareFinish,
+    TResult? Function()? shareDatabase,
+    TResult? Function(TrailInfo trail)? shareTrack,
+  }) {
+    return shiftStartsTime?.call(stageId, minutes, fromTime);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+      Race? race,
+      Stage? stage,
+      List<Race> races,
+      List<Stage> stages,
+      List<String?> categories,
+      List<Rider> riders,
+      List<ParticipantAtStart> participants,
+      List<Start> starts,
+      List<Finish> finishes,
+      List<StartingParticipant> numbersOnTrace,
+      Notification? notification,
+      int? autoFinishNumber,
+      int? awaitingNumber,
+      bool? updateFinishNumber,
+    )?
+    emitState,
+    TResult Function(
+      String name,
+      DateTime? startDate,
+      DateTime? finishDate,
+      String? location,
+      String? url,
+      String? description,
+    )?
+    addRace,
+    TResult Function(
+      int id,
+      String? name,
+      DateTime? startDate,
+      DateTime? finishDate,
+      String? location,
+      String? url,
+      String? description,
+    )?
+    updateRace,
+    TResult Function(
+      int? id,
+      String? name,
+      DateTime? startDate,
+      DateTime? finishDate,
+      String? location,
+      String? url,
+      String? description,
+    )?
+    upsertRace,
+    TResult Function(int id)? deleteRace,
+    TResult Function()? getRaces,
+    TResult Function(Race race)? selectRace,
+    TResult Function()? deselectRace,
+    TResult Function(String name, int raceId, int? trailId)? addStage,
+    TResult Function(
+      int? id,
+      String? name,
+      String? description,
+      int? raceId,
+      int? trailId,
+      bool? isActive,
+      bool? isDeleted,
+      bool removeTrailId,
+    )?
+    upsertStage,
+    TResult Function(int id)? deleteStage,
+    TResult Function(int raceId)? getStages,
+    TResult Function(Stage stage)? selectStage,
+    TResult Function(int stageId)? getParticipantsAtStart,
+    TResult Function(Stage stage, int number, String startTime, bool forceAdd)?
+    addStartNumber,
+    TResult Function(
+      int riderId,
+      String name,
+      String? nickname,
+      String? birthday,
+      String? team,
+      String? city,
+      String? email,
+      String? phone,
+      String? comment,
+      bool? isDeleted,
+    )?
+    updateRider,
+    TResult Function(
+      int riderId,
+      int participantId,
+      String name,
+      String? category,
+      String? nickname,
+      String? birthday,
+      String? team,
+      String? city,
+      String? email,
+      String? phone,
+      String? comment,
+    )?
+    updateRacer,
+    TResult Function(
+      int stageId,
+      int participantId,
+      String startTime,
+      String? automaticStartTime,
+      int? automaticCorrection,
+      String? manualStartTime,
+      int? manualCorrection,
+    )?
+    updateStartingInfo,
+    TResult Function(
+      int stageId,
+      String startTime,
+      int correction,
+      DateTime timestamp,
+      int ntpOffset,
+      bool forceUpdate,
+      int? deltaInSeconds,
+    )?
+    updateAutomaticCorrection,
+    TResult Function(
+      int stageId,
+      DateTime time,
+      DateTime timestamp,
+      int ntpOffset,
+      int deltaInSeconds,
+    )?
+    updateManualStartTime,
+    TResult Function(int startId, ParticipantStatus status)?
+    setStatusForStartId,
+    TResult Function(
+      Stage stage,
+      String finishTime,
+      DateTime timestamp,
+      int ntpOffset,
+      int? finishDelay,
+      bool? substituteNumbers,
+      int? substituteNumbersDelay,
+      DateTime? dateTimeNow,
+      int? number,
+    )?
+    addFinishTime,
+    TResult Function(
+      int stageId,
+      String finishTime,
+      DateTime timestamp,
+      int ntpOffset,
+      int? number,
+    )?
+    addFinishTimeManual,
+    TResult Function(int stageId)? clearStartResultsDebug,
+    TResult Function(int stageId)? clearFinishResultsDebug,
+    TResult Function(int stageId)? hideAllFinises,
+    TResult Function(Stage stage, int number)? clearNumberAtFinish,
+    TResult Function(Stage stage, int number)? setDNSForStage,
+    TResult Function(Stage stage, int number)? setDNFForStage,
+    TResult Function(int id)? hideFinish,
+    TResult Function(Stage stage, int finishId, int number, String finishTime)?
+    addNumberToFinish,
+    TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
+    TResult Function(int number)? selectAwaitingNumber,
+    TResult Function()? deselectAwaitingNumber,
+    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
+    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? shareStart,
+    TResult Function()? shareFinish,
+    TResult Function()? shareDatabase,
+    TResult Function(TrailInfo trail)? shareTrack,
+    required TResult orElse(),
+  }) {
+    if (shiftStartsTime != null) {
+      return shiftStartsTime(stageId, minutes, fromTime);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_EmitState value) emitState,
+    required TResult Function(_AddRace value) addRace,
+    required TResult Function(_UpdateRace value) updateRace,
+    required TResult Function(_UpsertRace value) upsertRace,
+    required TResult Function(_DeleteRace value) deleteRace,
+    required TResult Function(_GetRaces value) getRaces,
+    required TResult Function(_SelectRace value) selectRace,
+    required TResult Function(_DeselectRace value) deselectRace,
+    required TResult Function(_AddStage value) addStage,
+    required TResult Function(_UpsertStage value) upsertStage,
+    required TResult Function(_DeleteStage value) deleteStage,
+    required TResult Function(_GetStages value) getStages,
+    required TResult Function(_SelectStage value) selectStage,
+    required TResult Function(_GetParticipantsAtStart value)
+    getParticipantsAtStart,
+    required TResult Function(_AddStartNumber value) addStartNumber,
+    required TResult Function(_UpdateRider value) updateRider,
+    required TResult Function(_UpdateRacer value) updateRacer,
+    required TResult Function(_UpdateStartingInfo value) updateStartingInfo,
+    required TResult Function(_UpdateAutomaticCorrection value)
+    updateAutomaticCorrection,
+    required TResult Function(_UpdateManualStartTime value)
+    updateManualStartTime,
+    required TResult Function(_SetStatusForStartId value) setStatusForStartId,
+    required TResult Function(_AddFinishTime value) addFinishTime,
+    required TResult Function(_AddFinishTimeManual value) addFinishTimeManual,
+    required TResult Function(_ClearStartResultsDebug value)
+    clearStartResultsDebug,
+    required TResult Function(_ClearFinishResultsDebug value)
+    clearFinishResultsDebug,
+    required TResult Function(_HideAllFinises value) hideAllFinises,
+    required TResult Function(_ClearNumberAtFinish value) clearNumberAtFinish,
+    required TResult Function(_SetDNSForStage value) setDNSForStage,
+    required TResult Function(_SetDNFForStage value) setDNFForStage,
+    required TResult Function(_HideFinish value) hideFinish,
+    required TResult Function(_AddNumberToFinish value) addNumberToFinish,
+    required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
+    required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
+    required TResult Function(_DeselectAwaitingNumber value)
+    deselectAwaitingNumber,
+    required TResult Function(_CreateRaceFromRaceCsv value)
+    createRaceFromRaceCsv,
+    required TResult Function(_CreateStagesFromStagesCsvv value)
+    createStagesFromStagesCsv,
+    required TResult Function(_ShareStart value) shareStart,
+    required TResult Function(_ShareFinish value) shareFinish,
+    required TResult Function(_ShareDatabase value) shareDatabase,
+    required TResult Function(_ShareTrack value) shareTrack,
+  }) {
+    return shiftStartsTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_EmitState value)? emitState,
+    TResult? Function(_AddRace value)? addRace,
+    TResult? Function(_UpdateRace value)? updateRace,
+    TResult? Function(_UpsertRace value)? upsertRace,
+    TResult? Function(_DeleteRace value)? deleteRace,
+    TResult? Function(_GetRaces value)? getRaces,
+    TResult? Function(_SelectRace value)? selectRace,
+    TResult? Function(_DeselectRace value)? deselectRace,
+    TResult? Function(_AddStage value)? addStage,
+    TResult? Function(_UpsertStage value)? upsertStage,
+    TResult? Function(_DeleteStage value)? deleteStage,
+    TResult? Function(_GetStages value)? getStages,
+    TResult? Function(_SelectStage value)? selectStage,
+    TResult? Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult? Function(_AddStartNumber value)? addStartNumber,
+    TResult? Function(_UpdateRider value)? updateRider,
+    TResult? Function(_UpdateRacer value)? updateRacer,
+    TResult? Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult? Function(_UpdateAutomaticCorrection value)?
+    updateAutomaticCorrection,
+    TResult? Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult? Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult? Function(_AddFinishTime value)? addFinishTime,
+    TResult? Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult? Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult? Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult? Function(_HideAllFinises value)? hideAllFinises,
+    TResult? Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult? Function(_SetDNSForStage value)? setDNSForStage,
+    TResult? Function(_SetDNFForStage value)? setDNFForStage,
+    TResult? Function(_HideFinish value)? hideFinish,
+    TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
+    TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult? Function(_CreateStagesFromStagesCsvv value)?
+    createStagesFromStagesCsv,
+    TResult? Function(_ShareStart value)? shareStart,
+    TResult? Function(_ShareFinish value)? shareFinish,
+    TResult? Function(_ShareDatabase value)? shareDatabase,
+    TResult? Function(_ShareTrack value)? shareTrack,
+  }) {
+    return shiftStartsTime?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_EmitState value)? emitState,
+    TResult Function(_AddRace value)? addRace,
+    TResult Function(_UpdateRace value)? updateRace,
+    TResult Function(_UpsertRace value)? upsertRace,
+    TResult Function(_DeleteRace value)? deleteRace,
+    TResult Function(_GetRaces value)? getRaces,
+    TResult Function(_SelectRace value)? selectRace,
+    TResult Function(_DeselectRace value)? deselectRace,
+    TResult Function(_AddStage value)? addStage,
+    TResult Function(_UpsertStage value)? upsertStage,
+    TResult Function(_DeleteStage value)? deleteStage,
+    TResult Function(_GetStages value)? getStages,
+    TResult Function(_SelectStage value)? selectStage,
+    TResult Function(_GetParticipantsAtStart value)? getParticipantsAtStart,
+    TResult Function(_AddStartNumber value)? addStartNumber,
+    TResult Function(_UpdateRider value)? updateRider,
+    TResult Function(_UpdateRacer value)? updateRacer,
+    TResult Function(_UpdateStartingInfo value)? updateStartingInfo,
+    TResult Function(_UpdateAutomaticCorrection value)?
+    updateAutomaticCorrection,
+    TResult Function(_UpdateManualStartTime value)? updateManualStartTime,
+    TResult Function(_SetStatusForStartId value)? setStatusForStartId,
+    TResult Function(_AddFinishTime value)? addFinishTime,
+    TResult Function(_AddFinishTimeManual value)? addFinishTimeManual,
+    TResult Function(_ClearStartResultsDebug value)? clearStartResultsDebug,
+    TResult Function(_ClearFinishResultsDebug value)? clearFinishResultsDebug,
+    TResult Function(_HideAllFinises value)? hideAllFinises,
+    TResult Function(_ClearNumberAtFinish value)? clearNumberAtFinish,
+    TResult Function(_SetDNSForStage value)? setDNSForStage,
+    TResult Function(_SetDNFForStage value)? setDNFForStage,
+    TResult Function(_HideFinish value)? hideFinish,
+    TResult Function(_AddNumberToFinish value)? addNumberToFinish,
+    TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
+    TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
+    TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
+    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
+    TResult Function(_CreateStagesFromStagesCsvv value)?
+    createStagesFromStagesCsv,
+    TResult Function(_ShareStart value)? shareStart,
+    TResult Function(_ShareFinish value)? shareFinish,
+    TResult Function(_ShareDatabase value)? shareDatabase,
+    TResult Function(_ShareTrack value)? shareTrack,
+    required TResult orElse(),
+  }) {
+    if (shiftStartsTime != null) {
+      return shiftStartsTime(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShiftStartsTime implements DatabaseEvent {
+  const factory _ShiftStartsTime({
+    required final int stageId,
+    required final int minutes,
+    final String? fromTime,
+  }) = _$ShiftStartsTimeImpl;
+
+  int get stageId;
+  int get minutes;
+  String? get fromTime;
+
+  /// Create a copy of DatabaseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ShiftStartsTimeImplCopyWith<_$ShiftStartsTimeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -28046,15 +29570,25 @@ class __$$SelectAwaitingNumberImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
+class _$SelectAwaitingNumberImpl
+    with DiagnosticableTreeMixin
+    implements _SelectAwaitingNumber {
   const _$SelectAwaitingNumberImpl({required this.number});
 
   @override
   final int number;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.selectAwaitingNumber(number: $number)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.selectAwaitingNumber'))
+      ..add(DiagnosticsProperty('number', number));
   }
 
   @override
@@ -28250,6 +29784,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -28422,6 +29958,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -28593,6 +30131,8 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -28650,6 +30190,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -28702,6 +30243,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -28752,6 +30294,7 @@ class _$SelectAwaitingNumberImpl implements _SelectAwaitingNumber {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -28806,12 +30349,22 @@ class __$$DeselectAwaitingNumberImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
+class _$DeselectAwaitingNumberImpl
+    with DiagnosticableTreeMixin
+    implements _DeselectAwaitingNumber {
   const _$DeselectAwaitingNumberImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.deselectAwaitingNumber()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty('type', 'DatabaseEvent.deselectAwaitingNumber'),
+    );
   }
 
   @override
@@ -28994,6 +30547,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -29166,6 +30721,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -29337,6 +30894,8 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -29394,6 +30953,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -29446,6 +31006,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -29496,6 +31057,7 @@ class _$DeselectAwaitingNumberImpl implements _DeselectAwaitingNumber {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -29556,15 +31118,25 @@ class __$$CreateRaceFromRaceCsvImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
+class _$CreateRaceFromRaceCsvImpl
+    with DiagnosticableTreeMixin
+    implements _CreateRaceFromRaceCsv {
   const _$CreateRaceFromRaceCsvImpl({required this.race});
 
   @override
   final RaceCsv race;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.createRaceFromRaceCsv(race: $race)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.createRaceFromRaceCsv'))
+      ..add(DiagnosticsProperty('race', race));
   }
 
   @override
@@ -29760,6 +31332,8 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -29932,6 +31506,8 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -30103,6 +31679,8 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -30160,6 +31738,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -30212,6 +31791,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -30262,6 +31842,7 @@ class _$CreateRaceFromRaceCsvImpl implements _CreateRaceFromRaceCsv {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -30336,7 +31917,9 @@ class __$$CreateStagesFromStagesCsvvImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
+class _$CreateStagesFromStagesCsvvImpl
+    with DiagnosticableTreeMixin
+    implements _CreateStagesFromStagesCsvv {
   const _$CreateStagesFromStagesCsvvImpl({
     required this.raceId,
     required this.stages,
@@ -30348,8 +31931,19 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
   final StagesCsv stages;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.createStagesFromStagesCsv(raceId: $raceId, stages: $stages)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty('type', 'DatabaseEvent.createStagesFromStagesCsv'),
+      )
+      ..add(DiagnosticsProperty('raceId', raceId))
+      ..add(DiagnosticsProperty('stages', stages));
   }
 
   @override
@@ -30544,6 +32138,8 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -30716,6 +32312,8 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -30887,6 +32485,8 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -30944,6 +32544,7 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -30996,6 +32597,7 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -31046,6 +32648,7 @@ class _$CreateStagesFromStagesCsvvImpl implements _CreateStagesFromStagesCsvv {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -31103,12 +32706,18 @@ class __$$ShareStartImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ShareStartImpl implements _ShareStart {
+class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
   const _$ShareStartImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.shareStart()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'DatabaseEvent.shareStart'));
   }
 
   @override
@@ -31290,6 +32899,8 @@ class _$ShareStartImpl implements _ShareStart {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -31462,6 +33073,8 @@ class _$ShareStartImpl implements _ShareStart {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -31633,6 +33246,8 @@ class _$ShareStartImpl implements _ShareStart {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -31690,6 +33305,7 @@ class _$ShareStartImpl implements _ShareStart {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -31742,6 +33358,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -31792,6 +33409,7 @@ class _$ShareStartImpl implements _ShareStart {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -31837,12 +33455,18 @@ class __$$ShareFinishImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ShareFinishImpl implements _ShareFinish {
+class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
   const _$ShareFinishImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.shareFinish()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'DatabaseEvent.shareFinish'));
   }
 
   @override
@@ -32024,6 +33648,8 @@ class _$ShareFinishImpl implements _ShareFinish {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -32196,6 +33822,8 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -32367,6 +33995,8 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -32424,6 +34054,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -32476,6 +34107,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -32526,6 +34158,7 @@ class _$ShareFinishImpl implements _ShareFinish {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -32571,12 +34204,20 @@ class __$$ShareDatabaseImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ShareDatabaseImpl implements _ShareDatabase {
+class _$ShareDatabaseImpl
+    with DiagnosticableTreeMixin
+    implements _ShareDatabase {
   const _$ShareDatabaseImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.shareDatabase()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'DatabaseEvent.shareDatabase'));
   }
 
   @override
@@ -32758,6 +34399,8 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -32930,6 +34573,8 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -33101,6 +34746,8 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -33158,6 +34805,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -33210,6 +34858,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -33260,6 +34909,7 @@ class _$ShareDatabaseImpl implements _ShareDatabase {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -33320,15 +34970,23 @@ class __$$ShareTrackImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ShareTrackImpl implements _ShareTrack {
+class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
   const _$ShareTrackImpl({required this.trail});
 
   @override
   final TrailInfo trail;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseEvent.shareTrack(trail: $trail)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.shareTrack'))
+      ..add(DiagnosticsProperty('trail', trail));
   }
 
   @override
@@ -33521,6 +35179,8 @@ class _$ShareTrackImpl implements _ShareTrack {
     addNumberToFinish,
     required TResult Function(int stageId, DateTime dateTimeNow)
     getNumbersOnTraceNow,
+    required TResult Function(int stageId, int minutes, String? fromTime)
+    shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
     required TResult Function(RaceCsv race) createRaceFromRaceCsv,
@@ -33693,6 +35353,8 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult? Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult? Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult? Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
     TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -33864,6 +35526,8 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult Function(Stage stage, int finishId, int number, String finishTime)?
     addNumberToFinish,
     TResult Function(int stageId, DateTime dateTimeNow)? getNumbersOnTraceNow,
+    TResult Function(int stageId, int minutes, String? fromTime)?
+    shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
     TResult Function(RaceCsv race)? createRaceFromRaceCsv,
@@ -33921,6 +35585,7 @@ class _$ShareTrackImpl implements _ShareTrack {
     required TResult Function(_HideFinish value) hideFinish,
     required TResult Function(_AddNumberToFinish value) addNumberToFinish,
     required TResult Function(_GetNumbersOnTraceNow value) getNumbersOnTraceNow,
+    required TResult Function(_ShiftStartsTime value) shiftStartsTime,
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
     deselectAwaitingNumber,
@@ -33973,6 +35638,7 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult? Function(_HideFinish value)? hideFinish,
     TResult? Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult? Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -34023,6 +35689,7 @@ class _$ShareTrackImpl implements _ShareTrack {
     TResult Function(_HideFinish value)? hideFinish,
     TResult Function(_AddNumberToFinish value)? addNumberToFinish,
     TResult Function(_GetNumbersOnTraceNow value)? getNumbersOnTraceNow,
+    TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
     TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
@@ -34362,7 +36029,9 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DatabaseStateImpl implements _DatabaseState {
+class _$DatabaseStateImpl
+    with DiagnosticableTreeMixin
+    implements _DatabaseState {
   const _$DatabaseStateImpl({
     required final List<Race> races,
     required final List<Stage> stages,
@@ -34471,8 +36140,28 @@ class _$DatabaseStateImpl implements _DatabaseState {
   final int? awaitingNumber;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DatabaseState(races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DatabaseState'))
+      ..add(DiagnosticsProperty('races', races))
+      ..add(DiagnosticsProperty('stages', stages))
+      ..add(DiagnosticsProperty('categories', categories))
+      ..add(DiagnosticsProperty('riders', riders))
+      ..add(DiagnosticsProperty('participants', participants))
+      ..add(DiagnosticsProperty('starts', starts))
+      ..add(DiagnosticsProperty('finishes', finishes))
+      ..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))
+      ..add(DiagnosticsProperty('race', race))
+      ..add(DiagnosticsProperty('stage', stage))
+      ..add(DiagnosticsProperty('notification', notification))
+      ..add(DiagnosticsProperty('autoFinishNumber', autoFinishNumber))
+      ..add(DiagnosticsProperty('awaitingNumber', awaitingNumber));
   }
 
   @override

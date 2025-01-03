@@ -48,6 +48,21 @@ extension StringExtensions on String? {
   }
 }
 
+/// Formats Duration to HH:mm:ss String
+extension DurationExtensions on Duration {
+  String _format() {
+    return toString().split('.').first.padLeft(8, '0');
+  }
+
+  String format() {
+    if (isNegative) {
+      return '-${(-this)._format()}';
+    } else {
+      return _format();
+    }
+  }
+}
+
 /// Converts a `List<int>` to a [Uint8List].
 ///
 /// Attempts to cast to a [Uint8List] first to avoid creating an unnecessary

@@ -2,7 +2,7 @@ import 'package:entime/src/common/utils/extensions.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('String? tests', () {
+  group('String? extensions tests', () {
     group('strip() tests', () {
       test('String is null', () {
         String? str;
@@ -167,6 +167,48 @@ void main() {
       test('Negative time', () {
         const str = '-10:00:00';
         expect(str.toDateTime(), null);
+      });
+    });
+  });
+
+  group('Duration extensions tests', () {
+    group('format() tests', () {
+      test('Positive duration', () {
+        var duration = const Duration(hours: 1).format();
+        expect(duration, '01:00:00');
+
+        duration = const Duration(hours: 100).format();
+        expect(duration, '100:00:00');
+
+        duration = const Duration(hours: 2, minutes: 55, seconds: 34).format();
+        expect(duration, '02:55:34');
+
+        duration = const Duration(seconds: 1, milliseconds: 1).format();
+        expect(duration, '00:00:01');
+
+        duration = Duration.zero.format();
+        expect(duration, '00:00:00');
+
+        duration = const Duration(milliseconds: 1).format();
+        expect(duration, '00:00:00');
+      });
+
+      test('Negative duration', () {
+        var duration = const Duration(hours: -1).format();
+        expect(duration, '-01:00:00');
+
+        duration = const Duration(hours: -100).format();
+        expect(duration, '-100:00:00');
+
+        duration =
+            const Duration(hours: -2, minutes: -55, seconds: -34).format();
+        expect(duration, '-02:55:34');
+
+        duration = const Duration(seconds: -1, milliseconds: -1).format();
+        expect(duration, '-00:00:01');
+
+        duration = const Duration(milliseconds: -1).format();
+        expect(duration, '-00:00:00');
       });
     });
   });

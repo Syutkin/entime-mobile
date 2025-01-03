@@ -5389,6 +5389,31 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Future<int> _shiftStartsTime({
+    required String shift,
+    required int stageId,
+    required String fromTime,
+  }) {
+    return customUpdate(
+      'UPDATE starts SET start_time = TIME(start_time, ?1) WHERE stage_id = ?2 AND start_time >= ?3',
+      variables: [
+        Variable<String>(shift),
+        Variable<int>(stageId),
+        Variable<String>(fromTime),
+      ],
+      updates: {starts},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Selectable<String> _getFirstStartTime({required int stageId}) {
+    return customSelect(
+      'SELECT start_time FROM starts WHERE stage_id = ?1 ORDER BY start_time ASC LIMIT 1',
+      variables: [Variable<int>(stageId)],
+      readsFrom: {starts},
+    ).map((QueryRow row) => row.read<String>('start_time'));
+  }
+
   Selectable<Finish> _getFinishesFromStage({required int stageId}) {
     return customSelect(
       'SELECT * FROM finishes WHERE stage_id = ?1',

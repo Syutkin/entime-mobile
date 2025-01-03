@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:entime/src/feature/settings/model/app_settings.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
@@ -23,9 +24,7 @@ import '../model/notification.dart';
 import '../model/participant_status.dart';
 
 part 'database_bloc.freezed.dart';
-
 part 'database_event.dart';
-
 part 'database_state.dart';
 
 class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
@@ -462,6 +461,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
                   )
                   .get();
           _emitState();
+        },
+        shiftStartsTime: (event) async {
+          await _db.shiftStartsTime(
+            stageId: event.stageId,
+            minutes: event.minutes,
+            fromTime: event.fromTime,
+          );
         },
         selectAwaitingNumber: (event) {
           _awaitingNumber = event.number;

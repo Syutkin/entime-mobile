@@ -862,6 +862,19 @@ class AppDatabase extends _$AppDatabase {
     return _getNumbersOnTraceNow(stageId: stageId, timeNow: timeNow);
   }
 
+  Future<int> shiftStartsTime({
+    required int stageId,
+    required int minutes,
+    String? fromTime,
+  }) async {
+    fromTime ??= await _getFirstStartTime(stageId: stageId).getSingle();
+    return _shiftStartsTime(
+      shift: Duration(minutes: minutes).format(),
+      stageId: stageId,
+      fromTime: fromTime,
+    );
+  }
+
   // ----------------финиш----------------
 
   Selectable<Finish> getFinishesFromStage({required int stageId}) {

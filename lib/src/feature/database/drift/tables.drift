@@ -430,6 +430,13 @@ WHERE
     AND starts.automatic_start_time ISNULL
 ORDER BY starts.start_time ASC;
 
+_shiftStartsTime:
+UPDATE starts SET start_time = TIME(start_time, :shift)
+WHERE stage_id = :stage_id AND start_time >= :from_time;
+
+_getFirstStartTime:
+SELECT start_time FROM starts WHERE stage_id = :stage_id ORDER BY start_time ASC LIMIT 1;
+
 
 /* --- Finish --- */
 
