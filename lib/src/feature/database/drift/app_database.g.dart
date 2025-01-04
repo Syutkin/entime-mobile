@@ -5395,7 +5395,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required String fromTime,
   }) {
     return customUpdate(
-      'UPDATE starts SET start_time = TIME(start_time, ?1) WHERE stage_id = ?2 AND start_time >= ?3',
+      'UPDATE starts SET start_time = TIME(start_time, ?1), automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL, ntp_offset = NULL WHERE stage_id = ?2 AND start_time >= ?3',
       variables: [
         Variable<String>(shift),
         Variable<int>(stageId),

@@ -431,7 +431,15 @@ WHERE
 ORDER BY starts.start_time ASC;
 
 _shiftStartsTime:
-UPDATE starts SET start_time = TIME(start_time, :shift)
+UPDATE starts
+SET
+	start_time = TIME(start_time, :shift),
+	automatic_correction = NULL,
+	automatic_start_time = NULL,
+	manual_correction = NULL,
+	manual_start_time = NULL,
+	timestamp = NULL,
+	ntp_offset = NULL
 WHERE stage_id = :stage_id AND start_time >= :from_time;
 
 _getFirstStartTime:

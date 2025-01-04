@@ -18,17 +18,20 @@ class GeneratedLocalization {
   static GeneratedLocalization? _current;
 
   static GeneratedLocalization get current {
-    assert(_current != null,
-        'No instance of GeneratedLocalization was loaded. Try to initialize the GeneratedLocalization delegate before accessing GeneratedLocalization.current.');
+    assert(
+      _current != null,
+      'No instance of GeneratedLocalization was loaded. Try to initialize the GeneratedLocalization delegate before accessing GeneratedLocalization.current.',
+    );
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<GeneratedLocalization> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -41,14 +44,18 @@ class GeneratedLocalization {
 
   static GeneratedLocalization of(BuildContext context) {
     final instance = GeneratedLocalization.maybeOf(context);
-    assert(instance != null,
-        'No instance of GeneratedLocalization present in the widget tree. Did you add GeneratedLocalization.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of GeneratedLocalization present in the widget tree. Did you add GeneratedLocalization.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
   static GeneratedLocalization? maybeOf(BuildContext context) {
     return Localizations.of<GeneratedLocalization>(
-        context, GeneratedLocalization);
+      context,
+      GeneratedLocalization,
+    );
   }
 
   /// `Редактировать`
@@ -63,12 +70,7 @@ class GeneratedLocalization {
 
   /// `Удалить`
   String get I18nCore_delete {
-    return Intl.message(
-      'Удалить',
-      name: 'I18nCore_delete',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Удалить', name: 'I18nCore_delete', desc: '', args: []);
   }
 
   /// `Поделиться`
@@ -113,52 +115,27 @@ class GeneratedLocalization {
 
   /// `DNS`
   String get I18nCore_dns {
-    return Intl.message(
-      'DNS',
-      name: 'I18nCore_dns',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('DNS', name: 'I18nCore_dns', desc: '', args: []);
   }
 
   /// `DNF`
   String get I18nCore_dnf {
-    return Intl.message(
-      'DNF',
-      name: 'I18nCore_dnf',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('DNF', name: 'I18nCore_dnf', desc: '', args: []);
   }
 
   /// `DSQ`
   String get I18nCore_dsq {
-    return Intl.message(
-      'DSQ',
-      name: 'I18nCore_dsq',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('DSQ', name: 'I18nCore_dsq', desc: '', args: []);
   }
 
   /// `Да`
   String get I18nCore_yes {
-    return Intl.message(
-      'Да',
-      name: 'I18nCore_yes',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Да', name: 'I18nCore_yes', desc: '', args: []);
   }
 
   /// `Нет`
   String get I18nCore_no {
-    return Intl.message(
-      'Нет',
-      name: 'I18nCore_no',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Нет', name: 'I18nCore_no', desc: '', args: []);
   }
 
   /// `Что нового`
@@ -263,12 +240,7 @@ class GeneratedLocalization {
 
   /// `Звук`
   String get I18nSettings_sound {
-    return Intl.message(
-      'Звук',
-      name: 'I18nSettings_sound',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Звук', name: 'I18nSettings_sound', desc: '', args: []);
   }
 
   /// `Всегда включённый экран`
@@ -1013,22 +985,12 @@ class GeneratedLocalization {
 
   /// `Тип`
   String get I18nProtocol_type {
-    return Intl.message(
-      'Тип',
-      name: 'I18nProtocol_type',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Тип', name: 'I18nProtocol_type', desc: '', args: []);
   }
 
   /// `Время`
   String get I18nProtocol_time {
-    return Intl.message(
-      'Время',
-      name: 'I18nProtocol_time',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Время', name: 'I18nProtocol_time', desc: '', args: []);
   }
 
   /// `Разница`
@@ -1093,12 +1055,7 @@ class GeneratedLocalization {
 
   /// `дБм`
   String get I18nBluetooth_dbm {
-    return Intl.message(
-      'дБм',
-      name: 'I18nBluetooth_dbm',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('дБм', name: 'I18nBluetooth_dbm', desc: '', args: []);
   }
 
   /// `Выберите устройство`
@@ -1143,12 +1100,7 @@ class GeneratedLocalization {
 
   /// `Помощь`
   String get I18nDrawer_help {
-    return Intl.message(
-      'Помощь',
-      name: 'I18nDrawer_help',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Помощь', name: 'I18nDrawer_help', desc: '', args: []);
   }
 
   /// `О программе`
@@ -1193,7 +1145,10 @@ class GeneratedLocalization {
 
   /// `Участнику под номером {number} уже установлена стартовая поправка {prevCorrection}. Обновить её на {correction}?`
   String I18nHome_updateAutomaticCorrection(
-      Object number, Object prevCorrection, Object correction) {
+    Object number,
+    Object prevCorrection,
+    Object correction,
+  ) {
     return Intl.message(
       'Участнику под номером $number уже установлена стартовая поправка $prevCorrection. Обновить её на $correction?',
       name: 'I18nHome_updateAutomaticCorrection',
@@ -1204,7 +1159,10 @@ class GeneratedLocalization {
 
   /// `Стартовое время {time} уже присвоено номеру {prevNumber}. Вы уверены что хотите установить одинаковое стартовое время для номеров {currentNumber} и {prevNumber}?\n`
   String I18nHome_equalStartTime(
-      Object time, Object prevNumber, Object currentNumber) {
+    Object time,
+    Object prevNumber,
+    Object currentNumber,
+  ) {
     return Intl.message(
       'Стартовое время $time уже присвоено номеру $prevNumber. Вы уверены что хотите установить одинаковое стартовое время для номеров $currentNumber и $prevNumber?\n',
       name: 'I18nHome_equalStartTime',
@@ -1215,7 +1173,9 @@ class GeneratedLocalization {
 
   /// `У номера {number} уже проставлена автоматическая стартовая отсечка: {automaticCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n`
   String I18nHome_updateAutomaticStartCorrection(
-      Object number, Object automaticCorrection) {
+    Object number,
+    Object automaticCorrection,
+  ) {
     return Intl.message(
       'У номера $number уже проставлена автоматическая стартовая отсечка: $automaticCorrection. Установить новое стартовое время и удалить предыдущее значение?\n',
       name: 'I18nHome_updateAutomaticStartCorrection',
@@ -1226,7 +1186,9 @@ class GeneratedLocalization {
 
   /// `У номера {number} уже проставлена ручная стартовая отсечка: {manualCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n`
   String I18nHome_updateManualStartCorrection(
-      Object number, Object manualCorrection) {
+    Object number,
+    Object manualCorrection,
+  ) {
     return Intl.message(
       'У номера $number уже проставлена ручная стартовая отсечка: $manualCorrection. Установить новое стартовое время и удалить предыдущее значение?\n',
       name: 'I18nHome_updateManualStartCorrection',
@@ -1247,32 +1209,17 @@ class GeneratedLocalization {
 
   /// `Начало`
   String get I18nHome_home {
-    return Intl.message(
-      'Начало',
-      name: 'I18nHome_home',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Начало', name: 'I18nHome_home', desc: '', args: []);
   }
 
   /// `Старт`
   String get I18nHome_start {
-    return Intl.message(
-      'Старт',
-      name: 'I18nHome_start',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Старт', name: 'I18nHome_start', desc: '', args: []);
   }
 
   /// `Финиш`
   String get I18nHome_finish {
-    return Intl.message(
-      'Финиш',
-      name: 'I18nHome_finish',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Финиш', name: 'I18nHome_finish', desc: '', args: []);
   }
 
   /// `Доступна новая версия {version}`
@@ -1337,12 +1284,7 @@ class GeneratedLocalization {
 
   /// `FAB`
   String get I18nHome_fab {
-    return Intl.message(
-      'FAB',
-      name: 'I18nHome_fab',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('FAB', name: 'I18nHome_fab', desc: '', args: []);
   }
 
   /// `Разница во времени`
@@ -1437,32 +1379,17 @@ class GeneratedLocalization {
 
   /// `DNS`
   String get I18nHome_showDNS {
-    return Intl.message(
-      'DNS',
-      name: 'I18nHome_showDNS',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('DNS', name: 'I18nHome_showDNS', desc: '', args: []);
   }
 
   /// `DNF`
   String get I18nHome_showDNF {
-    return Intl.message(
-      'DNF',
-      name: 'I18nHome_showDNF',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('DNF', name: 'I18nHome_showDNF', desc: '', args: []);
   }
 
   /// `DSQ`
   String get I18nHome_showDSQ {
-    return Intl.message(
-      'DSQ',
-      name: 'I18nHome_showDSQ',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('DSQ', name: 'I18nHome_showDSQ', desc: '', args: []);
   }
 
   /// `Выберите соревнование`
@@ -1537,12 +1464,7 @@ class GeneratedLocalization {
 
   /// `Удалить`
   String get I18nInit_delete {
-    return Intl.message(
-      'Удалить',
-      name: 'I18nInit_delete',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Удалить', name: 'I18nInit_delete', desc: '', args: []);
   }
 
   /// `Импорт протокола из csv`
@@ -1557,22 +1479,12 @@ class GeneratedLocalization {
 
   /// `Трейлы`
   String get I18nInit_trails {
-    return Intl.message(
-      'Трейлы',
-      name: 'I18nInit_trails',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Трейлы', name: 'I18nInit_trails', desc: '', args: []);
   }
 
   /// `Гонщики`
   String get I18nInit_riders {
-    return Intl.message(
-      'Гонщики',
-      name: 'I18nInit_riders',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Гонщики', name: 'I18nInit_riders', desc: '', args: []);
   }
 
   /// `Не стартовал`
@@ -2440,12 +2352,7 @@ class GeneratedLocalization {
 
   /// `Имя`
   String get I18nDatabase_name {
-    return Intl.message(
-      'Имя',
-      name: 'I18nDatabase_name',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Имя', name: 'I18nDatabase_name', desc: '', args: []);
   }
 
   /// `Никнейм`
@@ -2480,12 +2387,7 @@ class GeneratedLocalization {
 
   /// `Город`
   String get I18nDatabase_city {
-    return Intl.message(
-      'Город',
-      name: 'I18nDatabase_city',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Город', name: 'I18nDatabase_city', desc: '', args: []);
   }
 
   /// `Электронная почта`
