@@ -12,8 +12,7 @@ part of 'bluetooth_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BluetoothEvent {
@@ -22,35 +21,36 @@ mixin _$BluetoothEvent {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
     required TResult Function() disconnected,
     required TResult Function(String message, int stageId) messageReceived,
     required TResult Function(String message) sendMessage,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
     TResult? Function()? disconnected,
     TResult? Function(String message, int stageId)? messageReceived,
     TResult? Function(String message)? sendMessage,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -58,7 +58,8 @@ mixin _$BluetoothEvent {
     TResult Function(String message, int stageId)? messageReceived,
     TResult Function(String message)? sendMessage,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitializeBluetooth value) initialize,
@@ -70,7 +71,8 @@ mixin _$BluetoothEvent {
     required TResult Function(_Disconnected value) disconnected,
     required TResult Function(_MessageReceived value) messageReceived,
     required TResult Function(_SendMessage value) sendMessage,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitializeBluetooth value)? initialize,
@@ -82,7 +84,8 @@ mixin _$BluetoothEvent {
     TResult? Function(_Disconnected value)? disconnected,
     TResult? Function(_MessageReceived value)? messageReceived,
     TResult? Function(_SendMessage value)? sendMessage,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitializeBluetooth value)? initialize,
@@ -95,15 +98,15 @@ mixin _$BluetoothEvent {
     TResult Function(_MessageReceived value)? messageReceived,
     TResult Function(_SendMessage value)? sendMessage,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $BluetoothEventCopyWith<$Res> {
   factory $BluetoothEventCopyWith(
-    BluetoothEvent value,
-    $Res Function(BluetoothEvent) then,
-  ) = _$BluetoothEventCopyWithImpl<$Res, BluetoothEvent>;
+          BluetoothEvent value, $Res Function(BluetoothEvent) then) =
+      _$BluetoothEventCopyWithImpl<$Res, BluetoothEvent>;
 }
 
 /// @nodoc
@@ -122,20 +125,18 @@ class _$BluetoothEventCopyWithImpl<$Res, $Val extends BluetoothEvent>
 
 /// @nodoc
 abstract class _$$InitializeBluetoothImplCopyWith<$Res> {
-  factory _$$InitializeBluetoothImplCopyWith(
-    _$InitializeBluetoothImpl value,
-    $Res Function(_$InitializeBluetoothImpl) then,
-  ) = __$$InitializeBluetoothImplCopyWithImpl<$Res>;
+  factory _$$InitializeBluetoothImplCopyWith(_$InitializeBluetoothImpl value,
+          $Res Function(_$InitializeBluetoothImpl) then) =
+      __$$InitializeBluetoothImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$InitializeBluetoothImplCopyWithImpl<$Res>
     extends _$BluetoothEventCopyWithImpl<$Res, _$InitializeBluetoothImpl>
     implements _$$InitializeBluetoothImplCopyWith<$Res> {
-  __$$InitializeBluetoothImplCopyWithImpl(
-    _$InitializeBluetoothImpl _value,
-    $Res Function(_$InitializeBluetoothImpl) _then,
-  ) : super(_value, _then);
+  __$$InitializeBluetoothImplCopyWithImpl(_$InitializeBluetoothImpl _value,
+      $Res Function(_$InitializeBluetoothImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -167,9 +168,8 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
@@ -186,7 +186,7 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
@@ -203,7 +203,7 @@ class _$InitializeBluetoothImpl implements _InitializeBluetooth {
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -277,10 +277,9 @@ abstract class _InitializeBluetooth implements BluetoothEvent {
 
 /// @nodoc
 abstract class _$$EnableBluetoothImplCopyWith<$Res> {
-  factory _$$EnableBluetoothImplCopyWith(
-    _$EnableBluetoothImpl value,
-    $Res Function(_$EnableBluetoothImpl) then,
-  ) = __$$EnableBluetoothImplCopyWithImpl<$Res>;
+  factory _$$EnableBluetoothImplCopyWith(_$EnableBluetoothImpl value,
+          $Res Function(_$EnableBluetoothImpl) then) =
+      __$$EnableBluetoothImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -288,9 +287,8 @@ class __$$EnableBluetoothImplCopyWithImpl<$Res>
     extends _$BluetoothEventCopyWithImpl<$Res, _$EnableBluetoothImpl>
     implements _$$EnableBluetoothImplCopyWith<$Res> {
   __$$EnableBluetoothImplCopyWithImpl(
-    _$EnableBluetoothImpl _value,
-    $Res Function(_$EnableBluetoothImpl) _then,
-  ) : super(_value, _then);
+      _$EnableBluetoothImpl _value, $Res Function(_$EnableBluetoothImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -321,9 +319,8 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
@@ -340,7 +337,7 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
@@ -357,7 +354,7 @@ class _$EnableBluetoothImpl implements _EnableBluetooth {
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -432,9 +429,8 @@ abstract class _EnableBluetooth implements BluetoothEvent {
 /// @nodoc
 abstract class _$$SelectDeviceImplCopyWith<$Res> {
   factory _$$SelectDeviceImplCopyWith(
-    _$SelectDeviceImpl value,
-    $Res Function(_$SelectDeviceImpl) then,
-  ) = __$$SelectDeviceImplCopyWithImpl<$Res>;
+          _$SelectDeviceImpl value, $Res Function(_$SelectDeviceImpl) then) =
+      __$$SelectDeviceImplCopyWithImpl<$Res>;
   @useResult
   $Res call({BluetoothDeviceWithAvailability? deviceWithAvailability});
 }
@@ -444,24 +440,22 @@ class __$$SelectDeviceImplCopyWithImpl<$Res>
     extends _$BluetoothEventCopyWithImpl<$Res, _$SelectDeviceImpl>
     implements _$$SelectDeviceImplCopyWith<$Res> {
   __$$SelectDeviceImplCopyWithImpl(
-    _$SelectDeviceImpl _value,
-    $Res Function(_$SelectDeviceImpl) _then,
-  ) : super(_value, _then);
+      _$SelectDeviceImpl _value, $Res Function(_$SelectDeviceImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? deviceWithAvailability = freezed}) {
-    return _then(
-      _$SelectDeviceImpl(
-        deviceWithAvailability:
-            freezed == deviceWithAvailability
-                ? _value.deviceWithAvailability
-                : deviceWithAvailability // ignore: cast_nullable_to_non_nullable
-                    as BluetoothDeviceWithAvailability?,
-      ),
-    );
+  $Res call({
+    Object? deviceWithAvailability = freezed,
+  }) {
+    return _then(_$SelectDeviceImpl(
+      deviceWithAvailability: freezed == deviceWithAvailability
+          ? _value.deviceWithAvailability
+          : deviceWithAvailability // ignore: cast_nullable_to_non_nullable
+              as BluetoothDeviceWithAvailability?,
+    ));
   }
 }
 
@@ -504,9 +498,8 @@ class _$SelectDeviceImpl implements _SelectDevice {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
@@ -523,7 +516,7 @@ class _$SelectDeviceImpl implements _SelectDevice {
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
@@ -540,7 +533,7 @@ class _$SelectDeviceImpl implements _SelectDevice {
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -609,9 +602,9 @@ class _$SelectDeviceImpl implements _SelectDevice {
 }
 
 abstract class _SelectDevice implements BluetoothEvent {
-  const factory _SelectDevice({
-    final BluetoothDeviceWithAvailability? deviceWithAvailability,
-  }) = _$SelectDeviceImpl;
+  const factory _SelectDevice(
+          {final BluetoothDeviceWithAvailability? deviceWithAvailability}) =
+      _$SelectDeviceImpl;
 
   BluetoothDeviceWithAvailability? get deviceWithAvailability;
 
@@ -625,9 +618,8 @@ abstract class _SelectDevice implements BluetoothEvent {
 /// @nodoc
 abstract class _$$ConnectedImplCopyWith<$Res> {
   factory _$$ConnectedImplCopyWith(
-    _$ConnectedImpl value,
-    $Res Function(_$ConnectedImpl) then,
-  ) = __$$ConnectedImplCopyWithImpl<$Res>;
+          _$ConnectedImpl value, $Res Function(_$ConnectedImpl) then) =
+      __$$ConnectedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -635,9 +627,8 @@ class __$$ConnectedImplCopyWithImpl<$Res>
     extends _$BluetoothEventCopyWithImpl<$Res, _$ConnectedImpl>
     implements _$$ConnectedImplCopyWith<$Res> {
   __$$ConnectedImplCopyWithImpl(
-    _$ConnectedImpl _value,
-    $Res Function(_$ConnectedImpl) _then,
-  ) : super(_value, _then);
+      _$ConnectedImpl _value, $Res Function(_$ConnectedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -668,9 +659,8 @@ class _$ConnectedImpl implements _Connected {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
@@ -687,7 +677,7 @@ class _$ConnectedImpl implements _Connected {
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
@@ -704,7 +694,7 @@ class _$ConnectedImpl implements _Connected {
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -779,9 +769,8 @@ abstract class _Connected implements BluetoothEvent {
 /// @nodoc
 abstract class _$$ConnectImplCopyWith<$Res> {
   factory _$$ConnectImplCopyWith(
-    _$ConnectImpl value,
-    $Res Function(_$ConnectImpl) then,
-  ) = __$$ConnectImplCopyWithImpl<$Res>;
+          _$ConnectImpl value, $Res Function(_$ConnectImpl) then) =
+      __$$ConnectImplCopyWithImpl<$Res>;
   @useResult
   $Res call({BluetoothDevice? selectedDevice});
 }
@@ -791,24 +780,22 @@ class __$$ConnectImplCopyWithImpl<$Res>
     extends _$BluetoothEventCopyWithImpl<$Res, _$ConnectImpl>
     implements _$$ConnectImplCopyWith<$Res> {
   __$$ConnectImplCopyWithImpl(
-    _$ConnectImpl _value,
-    $Res Function(_$ConnectImpl) _then,
-  ) : super(_value, _then);
+      _$ConnectImpl _value, $Res Function(_$ConnectImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? selectedDevice = freezed}) {
-    return _then(
-      _$ConnectImpl(
-        selectedDevice:
-            freezed == selectedDevice
-                ? _value.selectedDevice
-                : selectedDevice // ignore: cast_nullable_to_non_nullable
-                    as BluetoothDevice?,
-      ),
-    );
+  $Res call({
+    Object? selectedDevice = freezed,
+  }) {
+    return _then(_$ConnectImpl(
+      selectedDevice: freezed == selectedDevice
+          ? _value.selectedDevice
+          : selectedDevice // ignore: cast_nullable_to_non_nullable
+              as BluetoothDevice?,
+    ));
   }
 }
 
@@ -851,9 +838,8 @@ class _$ConnectImpl implements _Connect {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
@@ -870,7 +856,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
@@ -887,7 +873,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -971,9 +957,8 @@ abstract class _Connect implements BluetoothEvent {
 /// @nodoc
 abstract class _$$DisconnectImplCopyWith<$Res> {
   factory _$$DisconnectImplCopyWith(
-    _$DisconnectImpl value,
-    $Res Function(_$DisconnectImpl) then,
-  ) = __$$DisconnectImplCopyWithImpl<$Res>;
+          _$DisconnectImpl value, $Res Function(_$DisconnectImpl) then) =
+      __$$DisconnectImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -981,9 +966,8 @@ class __$$DisconnectImplCopyWithImpl<$Res>
     extends _$BluetoothEventCopyWithImpl<$Res, _$DisconnectImpl>
     implements _$$DisconnectImplCopyWith<$Res> {
   __$$DisconnectImplCopyWithImpl(
-    _$DisconnectImpl _value,
-    $Res Function(_$DisconnectImpl) _then,
-  ) : super(_value, _then);
+      _$DisconnectImpl _value, $Res Function(_$DisconnectImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1014,9 +998,8 @@ class _$DisconnectImpl implements _Disconnect {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
@@ -1033,7 +1016,7 @@ class _$DisconnectImpl implements _Disconnect {
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
@@ -1050,7 +1033,7 @@ class _$DisconnectImpl implements _Disconnect {
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -1125,9 +1108,8 @@ abstract class _Disconnect implements BluetoothEvent {
 /// @nodoc
 abstract class _$$DisconnectedImplCopyWith<$Res> {
   factory _$$DisconnectedImplCopyWith(
-    _$DisconnectedImpl value,
-    $Res Function(_$DisconnectedImpl) then,
-  ) = __$$DisconnectedImplCopyWithImpl<$Res>;
+          _$DisconnectedImpl value, $Res Function(_$DisconnectedImpl) then) =
+      __$$DisconnectedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -1135,9 +1117,8 @@ class __$$DisconnectedImplCopyWithImpl<$Res>
     extends _$BluetoothEventCopyWithImpl<$Res, _$DisconnectedImpl>
     implements _$$DisconnectedImplCopyWith<$Res> {
   __$$DisconnectedImplCopyWithImpl(
-    _$DisconnectedImpl _value,
-    $Res Function(_$DisconnectedImpl) _then,
-  ) : super(_value, _then);
+      _$DisconnectedImpl _value, $Res Function(_$DisconnectedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1168,9 +1149,8 @@ class _$DisconnectedImpl implements _Disconnected {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
@@ -1187,7 +1167,7 @@ class _$DisconnectedImpl implements _Disconnected {
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
@@ -1204,7 +1184,7 @@ class _$DisconnectedImpl implements _Disconnected {
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -1278,10 +1258,9 @@ abstract class _Disconnected implements BluetoothEvent {
 
 /// @nodoc
 abstract class _$$MessageReceivedImplCopyWith<$Res> {
-  factory _$$MessageReceivedImplCopyWith(
-    _$MessageReceivedImpl value,
-    $Res Function(_$MessageReceivedImpl) then,
-  ) = __$$MessageReceivedImplCopyWithImpl<$Res>;
+  factory _$$MessageReceivedImplCopyWith(_$MessageReceivedImpl value,
+          $Res Function(_$MessageReceivedImpl) then) =
+      __$$MessageReceivedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message, int stageId});
 }
@@ -1291,29 +1270,27 @@ class __$$MessageReceivedImplCopyWithImpl<$Res>
     extends _$BluetoothEventCopyWithImpl<$Res, _$MessageReceivedImpl>
     implements _$$MessageReceivedImplCopyWith<$Res> {
   __$$MessageReceivedImplCopyWithImpl(
-    _$MessageReceivedImpl _value,
-    $Res Function(_$MessageReceivedImpl) _then,
-  ) : super(_value, _then);
+      _$MessageReceivedImpl _value, $Res Function(_$MessageReceivedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null, Object? stageId = null}) {
-    return _then(
-      _$MessageReceivedImpl(
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        stageId:
-            null == stageId
-                ? _value.stageId
-                : stageId // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+    Object? stageId = null,
+  }) {
+    return _then(_$MessageReceivedImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      stageId: null == stageId
+          ? _value.stageId
+          : stageId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
@@ -1351,9 +1328,7 @@ class _$MessageReceivedImpl implements _MessageReceived {
   @pragma('vm:prefer-inline')
   _$$MessageReceivedImplCopyWith<_$MessageReceivedImpl> get copyWith =>
       __$$MessageReceivedImplCopyWithImpl<_$MessageReceivedImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1361,9 +1336,8 @@ class _$MessageReceivedImpl implements _MessageReceived {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
@@ -1380,7 +1354,7 @@ class _$MessageReceivedImpl implements _MessageReceived {
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
@@ -1397,7 +1371,7 @@ class _$MessageReceivedImpl implements _MessageReceived {
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -1466,10 +1440,9 @@ class _$MessageReceivedImpl implements _MessageReceived {
 }
 
 abstract class _MessageReceived implements BluetoothEvent {
-  const factory _MessageReceived({
-    required final String message,
-    required final int stageId,
-  }) = _$MessageReceivedImpl;
+  const factory _MessageReceived(
+      {required final String message,
+      required final int stageId}) = _$MessageReceivedImpl;
 
   String get message;
   int get stageId;
@@ -1484,9 +1457,8 @@ abstract class _MessageReceived implements BluetoothEvent {
 /// @nodoc
 abstract class _$$SendMessageImplCopyWith<$Res> {
   factory _$$SendMessageImplCopyWith(
-    _$SendMessageImpl value,
-    $Res Function(_$SendMessageImpl) then,
-  ) = __$$SendMessageImplCopyWithImpl<$Res>;
+          _$SendMessageImpl value, $Res Function(_$SendMessageImpl) then) =
+      __$$SendMessageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
@@ -1496,24 +1468,22 @@ class __$$SendMessageImplCopyWithImpl<$Res>
     extends _$BluetoothEventCopyWithImpl<$Res, _$SendMessageImpl>
     implements _$$SendMessageImplCopyWith<$Res> {
   __$$SendMessageImplCopyWithImpl(
-    _$SendMessageImpl _value,
-    $Res Function(_$SendMessageImpl) _then,
-  ) : super(_value, _then);
+      _$SendMessageImpl _value, $Res Function(_$SendMessageImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$SendMessageImpl(
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$SendMessageImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1555,9 +1525,8 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function() initialize,
     required TResult Function() enable,
     required TResult Function(
-      BluetoothDeviceWithAvailability? deviceWithAvailability,
-    )
-    selectDevice,
+            BluetoothDeviceWithAvailability? deviceWithAvailability)
+        selectDevice,
     required TResult Function() connected,
     required TResult Function(BluetoothDevice? selectedDevice) connect,
     required TResult Function() disconnect,
@@ -1574,7 +1543,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function()? initialize,
     TResult? Function()? enable,
     TResult? Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult? Function()? connected,
     TResult? Function(BluetoothDevice? selectedDevice)? connect,
     TResult? Function()? disconnect,
@@ -1591,7 +1560,7 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function()? initialize,
     TResult Function()? enable,
     TResult Function(BluetoothDeviceWithAvailability? deviceWithAvailability)?
-    selectDevice,
+        selectDevice,
     TResult Function()? connected,
     TResult Function(BluetoothDevice? selectedDevice)? connect,
     TResult Function()? disconnect,
@@ -1683,7 +1652,8 @@ mixin _$BluetoothBlocState {
     required TResult Function(BluetoothMessage? message) connected,
     required TResult Function() disconnecting,
     required TResult Function(BluetoothDevice? bluetoothDevice) disconnected,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notInitialized,
@@ -1693,7 +1663,8 @@ mixin _$BluetoothBlocState {
     TResult? Function(BluetoothMessage? message)? connected,
     TResult? Function()? disconnecting,
     TResult? Function(BluetoothDevice? bluetoothDevice)? disconnected,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notInitialized,
@@ -1704,7 +1675,8 @@ mixin _$BluetoothBlocState {
     TResult Function()? disconnecting,
     TResult Function(BluetoothDevice? bluetoothDevice)? disconnected,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_BluetoothNotInitialized value) notInitialized,
@@ -1714,7 +1686,8 @@ mixin _$BluetoothBlocState {
     required TResult Function(_BluetoothConnected value) connected,
     required TResult Function(_BluetoothDisconnecting value) disconnecting,
     required TResult Function(_BluetoothDisconnected value) disconnected,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_BluetoothNotInitialized value)? notInitialized,
@@ -1724,7 +1697,8 @@ mixin _$BluetoothBlocState {
     TResult? Function(_BluetoothConnected value)? connected,
     TResult? Function(_BluetoothDisconnecting value)? disconnecting,
     TResult? Function(_BluetoothDisconnected value)? disconnected,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_BluetoothNotInitialized value)? notInitialized,
@@ -1735,15 +1709,15 @@ mixin _$BluetoothBlocState {
     TResult Function(_BluetoothDisconnecting value)? disconnecting,
     TResult Function(_BluetoothDisconnected value)? disconnected,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $BluetoothBlocStateCopyWith<$Res> {
   factory $BluetoothBlocStateCopyWith(
-    BluetoothBlocState value,
-    $Res Function(BluetoothBlocState) then,
-  ) = _$BluetoothBlocStateCopyWithImpl<$Res, BluetoothBlocState>;
+          BluetoothBlocState value, $Res Function(BluetoothBlocState) then) =
+      _$BluetoothBlocStateCopyWithImpl<$Res, BluetoothBlocState>;
 }
 
 /// @nodoc
@@ -1763,20 +1737,20 @@ class _$BluetoothBlocStateCopyWithImpl<$Res, $Val extends BluetoothBlocState>
 /// @nodoc
 abstract class _$$BluetoothNotInitializedImplCopyWith<$Res> {
   factory _$$BluetoothNotInitializedImplCopyWith(
-    _$BluetoothNotInitializedImpl value,
-    $Res Function(_$BluetoothNotInitializedImpl) then,
-  ) = __$$BluetoothNotInitializedImplCopyWithImpl<$Res>;
+          _$BluetoothNotInitializedImpl value,
+          $Res Function(_$BluetoothNotInitializedImpl) then) =
+      __$$BluetoothNotInitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$BluetoothNotInitializedImplCopyWithImpl<$Res>
-    extends
-        _$BluetoothBlocStateCopyWithImpl<$Res, _$BluetoothNotInitializedImpl>
+    extends _$BluetoothBlocStateCopyWithImpl<$Res,
+        _$BluetoothNotInitializedImpl>
     implements _$$BluetoothNotInitializedImplCopyWith<$Res> {
   __$$BluetoothNotInitializedImplCopyWithImpl(
-    _$BluetoothNotInitializedImpl _value,
-    $Res Function(_$BluetoothNotInitializedImpl) _then,
-  ) : super(_value, _then);
+      _$BluetoothNotInitializedImpl _value,
+      $Res Function(_$BluetoothNotInitializedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -1902,19 +1876,18 @@ abstract class _BluetoothNotInitialized implements BluetoothBlocState {
 /// @nodoc
 abstract class _$$BluetoothNotAvailableImplCopyWith<$Res> {
   factory _$$BluetoothNotAvailableImplCopyWith(
-    _$BluetoothNotAvailableImpl value,
-    $Res Function(_$BluetoothNotAvailableImpl) then,
-  ) = __$$BluetoothNotAvailableImplCopyWithImpl<$Res>;
+          _$BluetoothNotAvailableImpl value,
+          $Res Function(_$BluetoothNotAvailableImpl) then) =
+      __$$BluetoothNotAvailableImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$BluetoothNotAvailableImplCopyWithImpl<$Res>
     extends _$BluetoothBlocStateCopyWithImpl<$Res, _$BluetoothNotAvailableImpl>
     implements _$$BluetoothNotAvailableImplCopyWith<$Res> {
-  __$$BluetoothNotAvailableImplCopyWithImpl(
-    _$BluetoothNotAvailableImpl _value,
-    $Res Function(_$BluetoothNotAvailableImpl) _then,
-  ) : super(_value, _then);
+  __$$BluetoothNotAvailableImplCopyWithImpl(_$BluetoothNotAvailableImpl _value,
+      $Res Function(_$BluetoothNotAvailableImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -2039,20 +2012,18 @@ abstract class _BluetoothNotAvailable implements BluetoothBlocState {
 
 /// @nodoc
 abstract class _$$BluetoothNotEnabledImplCopyWith<$Res> {
-  factory _$$BluetoothNotEnabledImplCopyWith(
-    _$BluetoothNotEnabledImpl value,
-    $Res Function(_$BluetoothNotEnabledImpl) then,
-  ) = __$$BluetoothNotEnabledImplCopyWithImpl<$Res>;
+  factory _$$BluetoothNotEnabledImplCopyWith(_$BluetoothNotEnabledImpl value,
+          $Res Function(_$BluetoothNotEnabledImpl) then) =
+      __$$BluetoothNotEnabledImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$BluetoothNotEnabledImplCopyWithImpl<$Res>
     extends _$BluetoothBlocStateCopyWithImpl<$Res, _$BluetoothNotEnabledImpl>
     implements _$$BluetoothNotEnabledImplCopyWith<$Res> {
-  __$$BluetoothNotEnabledImplCopyWithImpl(
-    _$BluetoothNotEnabledImpl _value,
-    $Res Function(_$BluetoothNotEnabledImpl) _then,
-  ) : super(_value, _then);
+  __$$BluetoothNotEnabledImplCopyWithImpl(_$BluetoothNotEnabledImpl _value,
+      $Res Function(_$BluetoothNotEnabledImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -2177,20 +2148,18 @@ abstract class _BluetoothNotEnabled implements BluetoothBlocState {
 
 /// @nodoc
 abstract class _$$BluetoothConnectingImplCopyWith<$Res> {
-  factory _$$BluetoothConnectingImplCopyWith(
-    _$BluetoothConnectingImpl value,
-    $Res Function(_$BluetoothConnectingImpl) then,
-  ) = __$$BluetoothConnectingImplCopyWithImpl<$Res>;
+  factory _$$BluetoothConnectingImplCopyWith(_$BluetoothConnectingImpl value,
+          $Res Function(_$BluetoothConnectingImpl) then) =
+      __$$BluetoothConnectingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$BluetoothConnectingImplCopyWithImpl<$Res>
     extends _$BluetoothBlocStateCopyWithImpl<$Res, _$BluetoothConnectingImpl>
     implements _$$BluetoothConnectingImplCopyWith<$Res> {
-  __$$BluetoothConnectingImplCopyWithImpl(
-    _$BluetoothConnectingImpl _value,
-    $Res Function(_$BluetoothConnectingImpl) _then,
-  ) : super(_value, _then);
+  __$$BluetoothConnectingImplCopyWithImpl(_$BluetoothConnectingImpl _value,
+      $Res Function(_$BluetoothConnectingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -2315,10 +2284,9 @@ abstract class _BluetoothConnecting implements BluetoothBlocState {
 
 /// @nodoc
 abstract class _$$BluetoothConnectedImplCopyWith<$Res> {
-  factory _$$BluetoothConnectedImplCopyWith(
-    _$BluetoothConnectedImpl value,
-    $Res Function(_$BluetoothConnectedImpl) then,
-  ) = __$$BluetoothConnectedImplCopyWithImpl<$Res>;
+  factory _$$BluetoothConnectedImplCopyWith(_$BluetoothConnectedImpl value,
+          $Res Function(_$BluetoothConnectedImpl) then) =
+      __$$BluetoothConnectedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({BluetoothMessage? message});
 
@@ -2329,25 +2297,23 @@ abstract class _$$BluetoothConnectedImplCopyWith<$Res> {
 class __$$BluetoothConnectedImplCopyWithImpl<$Res>
     extends _$BluetoothBlocStateCopyWithImpl<$Res, _$BluetoothConnectedImpl>
     implements _$$BluetoothConnectedImplCopyWith<$Res> {
-  __$$BluetoothConnectedImplCopyWithImpl(
-    _$BluetoothConnectedImpl _value,
-    $Res Function(_$BluetoothConnectedImpl) _then,
-  ) : super(_value, _then);
+  __$$BluetoothConnectedImplCopyWithImpl(_$BluetoothConnectedImpl _value,
+      $Res Function(_$BluetoothConnectedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothBlocState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = freezed}) {
-    return _then(
-      _$BluetoothConnectedImpl(
-        message:
-            freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as BluetoothMessage?,
-      ),
-    );
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$BluetoothConnectedImpl(
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as BluetoothMessage?,
+    ));
   }
 
   /// Create a copy of BluetoothBlocState
@@ -2396,9 +2362,7 @@ class _$BluetoothConnectedImpl implements _BluetoothConnected {
   @pragma('vm:prefer-inline')
   _$$BluetoothConnectedImplCopyWith<_$BluetoothConnectedImpl> get copyWith =>
       __$$BluetoothConnectedImplCopyWithImpl<_$BluetoothConnectedImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2509,9 +2473,9 @@ abstract class _BluetoothConnected implements BluetoothBlocState {
 /// @nodoc
 abstract class _$$BluetoothDisconnectingImplCopyWith<$Res> {
   factory _$$BluetoothDisconnectingImplCopyWith(
-    _$BluetoothDisconnectingImpl value,
-    $Res Function(_$BluetoothDisconnectingImpl) then,
-  ) = __$$BluetoothDisconnectingImplCopyWithImpl<$Res>;
+          _$BluetoothDisconnectingImpl value,
+          $Res Function(_$BluetoothDisconnectingImpl) then) =
+      __$$BluetoothDisconnectingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -2519,9 +2483,9 @@ class __$$BluetoothDisconnectingImplCopyWithImpl<$Res>
     extends _$BluetoothBlocStateCopyWithImpl<$Res, _$BluetoothDisconnectingImpl>
     implements _$$BluetoothDisconnectingImplCopyWith<$Res> {
   __$$BluetoothDisconnectingImplCopyWithImpl(
-    _$BluetoothDisconnectingImpl _value,
-    $Res Function(_$BluetoothDisconnectingImpl) _then,
-  ) : super(_value, _then);
+      _$BluetoothDisconnectingImpl _value,
+      $Res Function(_$BluetoothDisconnectingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -2647,9 +2611,9 @@ abstract class _BluetoothDisconnecting implements BluetoothBlocState {
 /// @nodoc
 abstract class _$$BluetoothDisconnectedImplCopyWith<$Res> {
   factory _$$BluetoothDisconnectedImplCopyWith(
-    _$BluetoothDisconnectedImpl value,
-    $Res Function(_$BluetoothDisconnectedImpl) then,
-  ) = __$$BluetoothDisconnectedImplCopyWithImpl<$Res>;
+          _$BluetoothDisconnectedImpl value,
+          $Res Function(_$BluetoothDisconnectedImpl) then) =
+      __$$BluetoothDisconnectedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({BluetoothDevice? bluetoothDevice});
 }
@@ -2658,25 +2622,23 @@ abstract class _$$BluetoothDisconnectedImplCopyWith<$Res> {
 class __$$BluetoothDisconnectedImplCopyWithImpl<$Res>
     extends _$BluetoothBlocStateCopyWithImpl<$Res, _$BluetoothDisconnectedImpl>
     implements _$$BluetoothDisconnectedImplCopyWith<$Res> {
-  __$$BluetoothDisconnectedImplCopyWithImpl(
-    _$BluetoothDisconnectedImpl _value,
-    $Res Function(_$BluetoothDisconnectedImpl) _then,
-  ) : super(_value, _then);
+  __$$BluetoothDisconnectedImplCopyWithImpl(_$BluetoothDisconnectedImpl _value,
+      $Res Function(_$BluetoothDisconnectedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of BluetoothBlocState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? bluetoothDevice = freezed}) {
-    return _then(
-      _$BluetoothDisconnectedImpl(
-        bluetoothDevice:
-            freezed == bluetoothDevice
-                ? _value.bluetoothDevice
-                : bluetoothDevice // ignore: cast_nullable_to_non_nullable
-                    as BluetoothDevice?,
-      ),
-    );
+  $Res call({
+    Object? bluetoothDevice = freezed,
+  }) {
+    return _then(_$BluetoothDisconnectedImpl(
+      bluetoothDevice: freezed == bluetoothDevice
+          ? _value.bluetoothDevice
+          : bluetoothDevice // ignore: cast_nullable_to_non_nullable
+              as BluetoothDevice?,
+    ));
   }
 }
 
@@ -2711,11 +2673,8 @@ class _$BluetoothDisconnectedImpl implements _BluetoothDisconnected {
   @override
   @pragma('vm:prefer-inline')
   _$$BluetoothDisconnectedImplCopyWith<_$BluetoothDisconnectedImpl>
-  get copyWith =>
-      __$$BluetoothDisconnectedImplCopyWithImpl<_$BluetoothDisconnectedImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$BluetoothDisconnectedImplCopyWithImpl<
+          _$BluetoothDisconnectedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2811,9 +2770,8 @@ class _$BluetoothDisconnectedImpl implements _BluetoothDisconnected {
 }
 
 abstract class _BluetoothDisconnected implements BluetoothBlocState {
-  const factory _BluetoothDisconnected({
-    final BluetoothDevice? bluetoothDevice,
-  }) = _$BluetoothDisconnectedImpl;
+  const factory _BluetoothDisconnected(
+      {final BluetoothDevice? bluetoothDevice}) = _$BluetoothDisconnectedImpl;
 
   BluetoothDevice? get bluetoothDevice;
 
@@ -2821,5 +2779,5 @@ abstract class _BluetoothDisconnected implements BluetoothBlocState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BluetoothDisconnectedImplCopyWith<_$BluetoothDisconnectedImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }

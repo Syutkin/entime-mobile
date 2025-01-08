@@ -7,58 +7,62 @@ part of 'module_settings.dart';
 // **************************************************************************
 
 _$ModSettingsModelTypeImpl _$$ModSettingsModelTypeImplFromJson(
-  Map<String, dynamic> json,
-) => _$ModSettingsModelTypeImpl(type: json['Type'] as String);
+        Map<String, dynamic> json) =>
+    _$ModSettingsModelTypeImpl(
+      type: json['Type'] as String,
+    );
 
 Map<String, dynamic> _$$ModSettingsModelTypeImplToJson(
-  _$ModSettingsModelTypeImpl instance,
-) => <String, dynamic>{'Type': instance.type};
+        _$ModSettingsModelTypeImpl instance) =>
+    <String, dynamic>{
+      'Type': instance.type,
+    };
 
 _$ModSettingsModelLedImpl _$$ModSettingsModelLedImplFromJson(
-  Map<String, dynamic> json,
-) => _$ModSettingsModelLedImpl(
-  read: json['Read'] as bool?,
-  type: json['Type'] as String,
-  bluetooth: Bluetooth.fromJson(json['Bluetooth'] as Map<String, dynamic>),
-  wiFi: WiFi.fromJson(json['WiFi'] as Map<String, dynamic>),
-  ledPanel: LedPanel.fromJson(json['LedPanel'] as Map<String, dynamic>),
-);
+        Map<String, dynamic> json) =>
+    _$ModSettingsModelLedImpl(
+      read: json['Read'] as bool?,
+      type: json['Type'] as String,
+      bluetooth: Bluetooth.fromJson(json['Bluetooth'] as Map<String, dynamic>),
+      wiFi: WiFi.fromJson(json['WiFi'] as Map<String, dynamic>),
+      ledPanel: LedPanel.fromJson(json['LedPanel'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$$ModSettingsModelLedImplToJson(
-  _$ModSettingsModelLedImpl instance,
-) => <String, dynamic>{
-  'Read': instance.read,
-  'Type': instance.type,
-  'Bluetooth': instance.bluetooth,
-  'WiFi': instance.wiFi,
-  'LedPanel': instance.ledPanel,
-};
+        _$ModSettingsModelLedImpl instance) =>
+    <String, dynamic>{
+      'Read': instance.read,
+      'Type': instance.type,
+      'Bluetooth': instance.bluetooth,
+      'WiFi': instance.wiFi,
+      'LedPanel': instance.ledPanel,
+    };
 
 _$ModSettingsModelImpl _$$ModSettingsModelImplFromJson(
-  Map<String, dynamic> json,
-) => _$ModSettingsModelImpl(
-  read: json['Read'] as bool?,
-  type: json['Type'] as String,
-  bluetooth: Bluetooth.fromJson(json['Bluetooth'] as Map<String, dynamic>),
-  loRa: LoRa.fromJson(json['LoRa'] as Map<String, dynamic>),
-  wiFi: WiFi.fromJson(json['WiFi'] as Map<String, dynamic>),
-  tft: Tft.fromJson(json['TFT'] as Map<String, dynamic>),
-  buzzer: Buzzer.fromJson(json['Buzzer'] as Map<String, dynamic>),
-  vcc: Vcc.fromJson(json['VCC'] as Map<String, dynamic>),
-);
+        Map<String, dynamic> json) =>
+    _$ModSettingsModelImpl(
+      read: json['Read'] as bool?,
+      type: json['Type'] as String,
+      bluetooth: Bluetooth.fromJson(json['Bluetooth'] as Map<String, dynamic>),
+      loRa: LoRa.fromJson(json['LoRa'] as Map<String, dynamic>),
+      wiFi: WiFi.fromJson(json['WiFi'] as Map<String, dynamic>),
+      tft: Tft.fromJson(json['TFT'] as Map<String, dynamic>),
+      buzzer: Buzzer.fromJson(json['Buzzer'] as Map<String, dynamic>),
+      vcc: Vcc.fromJson(json['VCC'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$$ModSettingsModelImplToJson(
-  _$ModSettingsModelImpl instance,
-) => <String, dynamic>{
-  'Read': instance.read,
-  'Type': instance.type,
-  'Bluetooth': instance.bluetooth,
-  'LoRa': instance.loRa,
-  'WiFi': instance.wiFi,
-  'TFT': instance.tft,
-  'Buzzer': instance.buzzer,
-  'VCC': instance.vcc,
-};
+        _$ModSettingsModelImpl instance) =>
+    <String, dynamic>{
+      'Read': instance.read,
+      'Type': instance.type,
+      'Bluetooth': instance.bluetooth,
+      'LoRa': instance.loRa,
+      'WiFi': instance.wiFi,
+      'TFT': instance.tft,
+      'Buzzer': instance.buzzer,
+      'VCC': instance.vcc,
+    };
 
 _$BluetoothImpl _$$BluetoothImplFromJson(Map<String, dynamic> json) =>
     _$BluetoothImpl(
@@ -75,10 +79,10 @@ Map<String, dynamic> _$$BluetoothImplToJson(_$BluetoothImpl instance) =>
     };
 
 _$BuzzerImpl _$$BuzzerImplFromJson(Map<String, dynamic> json) => _$BuzzerImpl(
-  active: json['active'] as bool,
-  shortFrequency: (json['shortFrequency'] as num).toInt(),
-  longFrequency: (json['longFrequency'] as num).toInt(),
-);
+      active: json['active'] as bool,
+      shortFrequency: (json['shortFrequency'] as num).toInt(),
+      longFrequency: (json['longFrequency'] as num).toInt(),
+    );
 
 Map<String, dynamic> _$$BuzzerImplToJson(_$BuzzerImpl instance) =>
     <String, dynamic>{
@@ -88,16 +92,16 @@ Map<String, dynamic> _$$BuzzerImplToJson(_$BuzzerImpl instance) =>
     };
 
 _$LoRaImpl _$$LoRaImplFromJson(Map<String, dynamic> json) => _$LoRaImpl(
-  active: json['active'] as bool,
-  frequency: (json['frequency'] as num).toInt(),
-  txPower: (json['txPower'] as num).toInt(),
-  spreadingFactor: (json['spreadingFactor'] as num).toInt(),
-  signalBandwidth: (json['signalBandwidth'] as num).toInt(),
-  codingRateDenom: (json['codingRateDenom'] as num).toInt(),
-  preambleLength: (json['preambleLength'] as num).toInt(),
-  syncWord: (json['syncWord'] as num).toInt(),
-  crc: json['crc'] as bool,
-);
+      active: json['active'] as bool,
+      frequency: (json['frequency'] as num).toInt(),
+      txPower: (json['txPower'] as num).toInt(),
+      spreadingFactor: (json['spreadingFactor'] as num).toInt(),
+      signalBandwidth: (json['signalBandwidth'] as num).toInt(),
+      codingRateDenom: (json['codingRateDenom'] as num).toInt(),
+      preambleLength: (json['preambleLength'] as num).toInt(),
+      syncWord: (json['syncWord'] as num).toInt(),
+      crc: json['crc'] as bool,
+    );
 
 Map<String, dynamic> _$$LoRaImplToJson(_$LoRaImpl instance) =>
     <String, dynamic>{
@@ -113,36 +117,36 @@ Map<String, dynamic> _$$LoRaImplToJson(_$LoRaImpl instance) =>
     };
 
 _$TftImpl _$$TftImplFromJson(Map<String, dynamic> json) => _$TftImpl(
-  active: json['active'] as bool,
-  timeout: json['timeout'] as bool,
-  timeoutDuration: (json['timeoutDuration'] as num).toInt(),
-  turnOnAtEvent: json['turnOnAtEvent'] as bool,
-);
+      active: json['active'] as bool,
+      timeout: json['timeout'] as bool,
+      timeoutDuration: (json['timeoutDuration'] as num).toInt(),
+      turnOnAtEvent: json['turnOnAtEvent'] as bool,
+    );
 
 Map<String, dynamic> _$$TftImplToJson(_$TftImpl instance) => <String, dynamic>{
-  'active': instance.active,
-  'timeout': instance.timeout,
-  'timeoutDuration': instance.timeoutDuration,
-  'turnOnAtEvent': instance.turnOnAtEvent,
-};
+      'active': instance.active,
+      'timeout': instance.timeout,
+      'timeoutDuration': instance.timeoutDuration,
+      'turnOnAtEvent': instance.turnOnAtEvent,
+    };
 
 _$VccImpl _$$VccImplFromJson(Map<String, dynamic> json) => _$VccImpl(
-  r1: (json['r1'] as num).toInt(),
-  r2: (json['r2'] as num).toInt(),
-  vbat: (json['vbat'] as num?)?.toInt(),
-);
+      r1: (json['r1'] as num).toInt(),
+      r2: (json['r2'] as num).toInt(),
+      vbat: (json['vbat'] as num?)?.toInt(),
+    );
 
 Map<String, dynamic> _$$VccImplToJson(_$VccImpl instance) => <String, dynamic>{
-  'r1': instance.r1,
-  'r2': instance.r2,
-  'vbat': instance.vbat,
-};
+      'r1': instance.r1,
+      'r2': instance.r2,
+      'vbat': instance.vbat,
+    };
 
 _$WiFiImpl _$$WiFiImplFromJson(Map<String, dynamic> json) => _$WiFiImpl(
-  active: json['active'] as bool,
-  ssid: json['ssid'] as String,
-  passwd: json['passwd'] as String,
-);
+      active: json['active'] as bool,
+      ssid: json['ssid'] as String,
+      passwd: json['passwd'] as String,
+    );
 
 Map<String, dynamic> _$$WiFiImplToJson(_$WiFiImpl instance) =>
     <String, dynamic>{
@@ -152,7 +156,11 @@ Map<String, dynamic> _$$WiFiImplToJson(_$WiFiImpl instance) =>
     };
 
 _$LedPanelImpl _$$LedPanelImplFromJson(Map<String, dynamic> json) =>
-    _$LedPanelImpl(brightness: (json['brightness'] as num).toInt());
+    _$LedPanelImpl(
+      brightness: (json['brightness'] as num).toInt(),
+    );
 
 Map<String, dynamic> _$$LedPanelImplToJson(_$LedPanelImpl instance) =>
-    <String, dynamic>{'brightness': instance.brightness};
+    <String, dynamic>{
+      'brightness': instance.brightness,
+    };

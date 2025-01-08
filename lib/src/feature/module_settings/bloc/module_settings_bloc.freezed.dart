@@ -12,8 +12,7 @@ part of 'module_settings_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ModuleSettingsEvent {
@@ -21,42 +20,47 @@ mixin _$ModuleSettingsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String json) get,
     required TResult Function(ModuleSettingsProvider moduleSettings) update,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String json)? get,
     TResult? Function(ModuleSettingsProvider moduleSettings)? update,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String json)? get,
     TResult Function(ModuleSettingsProvider moduleSettings)? update,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetModuleSettings value) get,
     required TResult Function(UpdateModuleSettings value) update,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetModuleSettings value)? get,
     TResult? Function(UpdateModuleSettings value)? update,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetModuleSettings value)? get,
     TResult Function(UpdateModuleSettings value)? update,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ModuleSettingsEventCopyWith<$Res> {
   factory $ModuleSettingsEventCopyWith(
-    ModuleSettingsEvent value,
-    $Res Function(ModuleSettingsEvent) then,
-  ) = _$ModuleSettingsEventCopyWithImpl<$Res, ModuleSettingsEvent>;
+          ModuleSettingsEvent value, $Res Function(ModuleSettingsEvent) then) =
+      _$ModuleSettingsEventCopyWithImpl<$Res, ModuleSettingsEvent>;
 }
 
 /// @nodoc
@@ -75,10 +79,9 @@ class _$ModuleSettingsEventCopyWithImpl<$Res, $Val extends ModuleSettingsEvent>
 
 /// @nodoc
 abstract class _$$GetModuleSettingsImplCopyWith<$Res> {
-  factory _$$GetModuleSettingsImplCopyWith(
-    _$GetModuleSettingsImpl value,
-    $Res Function(_$GetModuleSettingsImpl) then,
-  ) = __$$GetModuleSettingsImplCopyWithImpl<$Res>;
+  factory _$$GetModuleSettingsImplCopyWith(_$GetModuleSettingsImpl value,
+          $Res Function(_$GetModuleSettingsImpl) then) =
+      __$$GetModuleSettingsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String json});
 }
@@ -87,24 +90,23 @@ abstract class _$$GetModuleSettingsImplCopyWith<$Res> {
 class __$$GetModuleSettingsImplCopyWithImpl<$Res>
     extends _$ModuleSettingsEventCopyWithImpl<$Res, _$GetModuleSettingsImpl>
     implements _$$GetModuleSettingsImplCopyWith<$Res> {
-  __$$GetModuleSettingsImplCopyWithImpl(
-    _$GetModuleSettingsImpl _value,
-    $Res Function(_$GetModuleSettingsImpl) _then,
-  ) : super(_value, _then);
+  __$$GetModuleSettingsImplCopyWithImpl(_$GetModuleSettingsImpl _value,
+      $Res Function(_$GetModuleSettingsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ModuleSettingsEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? json = null}) {
-    return _then(
-      _$GetModuleSettingsImpl(
-        null == json
-            ? _value.json
-            : json // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? json = null,
+  }) {
+    return _then(_$GetModuleSettingsImpl(
+      null == json
+          ? _value.json
+          : json // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -139,9 +141,7 @@ class _$GetModuleSettingsImpl implements GetModuleSettings {
   @pragma('vm:prefer-inline')
   _$$GetModuleSettingsImplCopyWith<_$GetModuleSettingsImpl> get copyWith =>
       __$$GetModuleSettingsImplCopyWithImpl<_$GetModuleSettingsImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -220,10 +220,9 @@ abstract class GetModuleSettings implements ModuleSettingsEvent {
 
 /// @nodoc
 abstract class _$$UpdateModuleSettingsImplCopyWith<$Res> {
-  factory _$$UpdateModuleSettingsImplCopyWith(
-    _$UpdateModuleSettingsImpl value,
-    $Res Function(_$UpdateModuleSettingsImpl) then,
-  ) = __$$UpdateModuleSettingsImplCopyWithImpl<$Res>;
+  factory _$$UpdateModuleSettingsImplCopyWith(_$UpdateModuleSettingsImpl value,
+          $Res Function(_$UpdateModuleSettingsImpl) then) =
+      __$$UpdateModuleSettingsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ModuleSettingsProvider moduleSettings});
 }
@@ -232,24 +231,23 @@ abstract class _$$UpdateModuleSettingsImplCopyWith<$Res> {
 class __$$UpdateModuleSettingsImplCopyWithImpl<$Res>
     extends _$ModuleSettingsEventCopyWithImpl<$Res, _$UpdateModuleSettingsImpl>
     implements _$$UpdateModuleSettingsImplCopyWith<$Res> {
-  __$$UpdateModuleSettingsImplCopyWithImpl(
-    _$UpdateModuleSettingsImpl _value,
-    $Res Function(_$UpdateModuleSettingsImpl) _then,
-  ) : super(_value, _then);
+  __$$UpdateModuleSettingsImplCopyWithImpl(_$UpdateModuleSettingsImpl _value,
+      $Res Function(_$UpdateModuleSettingsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ModuleSettingsEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? moduleSettings = null}) {
-    return _then(
-      _$UpdateModuleSettingsImpl(
-        null == moduleSettings
-            ? _value.moduleSettings
-            : moduleSettings // ignore: cast_nullable_to_non_nullable
-                as ModuleSettingsProvider,
-      ),
-    );
+  $Res call({
+    Object? moduleSettings = null,
+  }) {
+    return _then(_$UpdateModuleSettingsImpl(
+      null == moduleSettings
+          ? _value.moduleSettings
+          : moduleSettings // ignore: cast_nullable_to_non_nullable
+              as ModuleSettingsProvider,
+    ));
   }
 }
 
@@ -284,11 +282,9 @@ class _$UpdateModuleSettingsImpl implements UpdateModuleSettings {
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateModuleSettingsImplCopyWith<_$UpdateModuleSettingsImpl>
-  get copyWith =>
-      __$$UpdateModuleSettingsImplCopyWithImpl<_$UpdateModuleSettingsImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$UpdateModuleSettingsImplCopyWithImpl<_$UpdateModuleSettingsImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -355,8 +351,7 @@ class _$UpdateModuleSettingsImpl implements UpdateModuleSettings {
 
 abstract class UpdateModuleSettings implements ModuleSettingsEvent {
   const factory UpdateModuleSettings(
-    final ModuleSettingsProvider moduleSettings,
-  ) = _$UpdateModuleSettingsImpl;
+      final ModuleSettingsProvider moduleSettings) = _$UpdateModuleSettingsImpl;
 
   ModuleSettingsProvider get moduleSettings;
 
@@ -364,7 +359,7 @@ abstract class UpdateModuleSettings implements ModuleSettingsEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateModuleSettingsImplCopyWith<_$UpdateModuleSettingsImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -375,14 +370,16 @@ mixin _$ModuleSettingsState {
     required TResult Function() loading,
     required TResult Function(ModuleSettingsProvider moduleSettings) loaded,
     required TResult Function() error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function(ModuleSettingsProvider moduleSettings)? loaded,
     TResult? Function()? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? uninitialized,
@@ -390,21 +387,24 @@ mixin _$ModuleSettingsState {
     TResult Function(ModuleSettingsProvider moduleSettings)? loaded,
     TResult Function()? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ModuleSettingsUninitialized value) uninitialized,
     required TResult Function(ModuleSettingsLoading value) loading,
     required TResult Function(ModuleSettingsLoaded value) loaded,
     required TResult Function(ModuleSettingsError value) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ModuleSettingsUninitialized value)? uninitialized,
     TResult? Function(ModuleSettingsLoading value)? loading,
     TResult? Function(ModuleSettingsLoaded value)? loaded,
     TResult? Function(ModuleSettingsError value)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ModuleSettingsUninitialized value)? uninitialized,
@@ -412,15 +412,15 @@ mixin _$ModuleSettingsState {
     TResult Function(ModuleSettingsLoaded value)? loaded,
     TResult Function(ModuleSettingsError value)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ModuleSettingsStateCopyWith<$Res> {
   factory $ModuleSettingsStateCopyWith(
-    ModuleSettingsState value,
-    $Res Function(ModuleSettingsState) then,
-  ) = _$ModuleSettingsStateCopyWithImpl<$Res, ModuleSettingsState>;
+          ModuleSettingsState value, $Res Function(ModuleSettingsState) then) =
+      _$ModuleSettingsStateCopyWithImpl<$Res, ModuleSettingsState>;
 }
 
 /// @nodoc
@@ -440,23 +440,20 @@ class _$ModuleSettingsStateCopyWithImpl<$Res, $Val extends ModuleSettingsState>
 /// @nodoc
 abstract class _$$ModuleSettingsUninitializedImplCopyWith<$Res> {
   factory _$$ModuleSettingsUninitializedImplCopyWith(
-    _$ModuleSettingsUninitializedImpl value,
-    $Res Function(_$ModuleSettingsUninitializedImpl) then,
-  ) = __$$ModuleSettingsUninitializedImplCopyWithImpl<$Res>;
+          _$ModuleSettingsUninitializedImpl value,
+          $Res Function(_$ModuleSettingsUninitializedImpl) then) =
+      __$$ModuleSettingsUninitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$ModuleSettingsUninitializedImplCopyWithImpl<$Res>
-    extends
-        _$ModuleSettingsStateCopyWithImpl<
-          $Res,
-          _$ModuleSettingsUninitializedImpl
-        >
+    extends _$ModuleSettingsStateCopyWithImpl<$Res,
+        _$ModuleSettingsUninitializedImpl>
     implements _$$ModuleSettingsUninitializedImplCopyWith<$Res> {
   __$$ModuleSettingsUninitializedImplCopyWithImpl(
-    _$ModuleSettingsUninitializedImpl _value,
-    $Res Function(_$ModuleSettingsUninitializedImpl) _then,
-  ) : super(_value, _then);
+      _$ModuleSettingsUninitializedImpl _value,
+      $Res Function(_$ModuleSettingsUninitializedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ModuleSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -565,19 +562,18 @@ abstract class ModuleSettingsUninitialized implements ModuleSettingsState {
 /// @nodoc
 abstract class _$$ModuleSettingsLoadingImplCopyWith<$Res> {
   factory _$$ModuleSettingsLoadingImplCopyWith(
-    _$ModuleSettingsLoadingImpl value,
-    $Res Function(_$ModuleSettingsLoadingImpl) then,
-  ) = __$$ModuleSettingsLoadingImplCopyWithImpl<$Res>;
+          _$ModuleSettingsLoadingImpl value,
+          $Res Function(_$ModuleSettingsLoadingImpl) then) =
+      __$$ModuleSettingsLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$ModuleSettingsLoadingImplCopyWithImpl<$Res>
     extends _$ModuleSettingsStateCopyWithImpl<$Res, _$ModuleSettingsLoadingImpl>
     implements _$$ModuleSettingsLoadingImplCopyWith<$Res> {
-  __$$ModuleSettingsLoadingImplCopyWithImpl(
-    _$ModuleSettingsLoadingImpl _value,
-    $Res Function(_$ModuleSettingsLoadingImpl) _then,
-  ) : super(_value, _then);
+  __$$ModuleSettingsLoadingImplCopyWithImpl(_$ModuleSettingsLoadingImpl _value,
+      $Res Function(_$ModuleSettingsLoadingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ModuleSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -684,10 +680,9 @@ abstract class ModuleSettingsLoading implements ModuleSettingsState {
 
 /// @nodoc
 abstract class _$$ModuleSettingsLoadedImplCopyWith<$Res> {
-  factory _$$ModuleSettingsLoadedImplCopyWith(
-    _$ModuleSettingsLoadedImpl value,
-    $Res Function(_$ModuleSettingsLoadedImpl) then,
-  ) = __$$ModuleSettingsLoadedImplCopyWithImpl<$Res>;
+  factory _$$ModuleSettingsLoadedImplCopyWith(_$ModuleSettingsLoadedImpl value,
+          $Res Function(_$ModuleSettingsLoadedImpl) then) =
+      __$$ModuleSettingsLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ModuleSettingsProvider moduleSettings});
 }
@@ -696,24 +691,23 @@ abstract class _$$ModuleSettingsLoadedImplCopyWith<$Res> {
 class __$$ModuleSettingsLoadedImplCopyWithImpl<$Res>
     extends _$ModuleSettingsStateCopyWithImpl<$Res, _$ModuleSettingsLoadedImpl>
     implements _$$ModuleSettingsLoadedImplCopyWith<$Res> {
-  __$$ModuleSettingsLoadedImplCopyWithImpl(
-    _$ModuleSettingsLoadedImpl _value,
-    $Res Function(_$ModuleSettingsLoadedImpl) _then,
-  ) : super(_value, _then);
+  __$$ModuleSettingsLoadedImplCopyWithImpl(_$ModuleSettingsLoadedImpl _value,
+      $Res Function(_$ModuleSettingsLoadedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ModuleSettingsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? moduleSettings = null}) {
-    return _then(
-      _$ModuleSettingsLoadedImpl(
-        null == moduleSettings
-            ? _value.moduleSettings
-            : moduleSettings // ignore: cast_nullable_to_non_nullable
-                as ModuleSettingsProvider,
-      ),
-    );
+  $Res call({
+    Object? moduleSettings = null,
+  }) {
+    return _then(_$ModuleSettingsLoadedImpl(
+      null == moduleSettings
+          ? _value.moduleSettings
+          : moduleSettings // ignore: cast_nullable_to_non_nullable
+              as ModuleSettingsProvider,
+    ));
   }
 }
 
@@ -748,11 +742,9 @@ class _$ModuleSettingsLoadedImpl implements ModuleSettingsLoaded {
   @override
   @pragma('vm:prefer-inline')
   _$$ModuleSettingsLoadedImplCopyWith<_$ModuleSettingsLoadedImpl>
-  get copyWith =>
-      __$$ModuleSettingsLoadedImplCopyWithImpl<_$ModuleSettingsLoadedImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$ModuleSettingsLoadedImplCopyWithImpl<_$ModuleSettingsLoadedImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -831,8 +823,7 @@ class _$ModuleSettingsLoadedImpl implements ModuleSettingsLoaded {
 
 abstract class ModuleSettingsLoaded implements ModuleSettingsState {
   const factory ModuleSettingsLoaded(
-    final ModuleSettingsProvider moduleSettings,
-  ) = _$ModuleSettingsLoadedImpl;
+      final ModuleSettingsProvider moduleSettings) = _$ModuleSettingsLoadedImpl;
 
   ModuleSettingsProvider get moduleSettings;
 
@@ -840,25 +831,23 @@ abstract class ModuleSettingsLoaded implements ModuleSettingsState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ModuleSettingsLoadedImplCopyWith<_$ModuleSettingsLoadedImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$ModuleSettingsErrorImplCopyWith<$Res> {
-  factory _$$ModuleSettingsErrorImplCopyWith(
-    _$ModuleSettingsErrorImpl value,
-    $Res Function(_$ModuleSettingsErrorImpl) then,
-  ) = __$$ModuleSettingsErrorImplCopyWithImpl<$Res>;
+  factory _$$ModuleSettingsErrorImplCopyWith(_$ModuleSettingsErrorImpl value,
+          $Res Function(_$ModuleSettingsErrorImpl) then) =
+      __$$ModuleSettingsErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$ModuleSettingsErrorImplCopyWithImpl<$Res>
     extends _$ModuleSettingsStateCopyWithImpl<$Res, _$ModuleSettingsErrorImpl>
     implements _$$ModuleSettingsErrorImplCopyWith<$Res> {
-  __$$ModuleSettingsErrorImplCopyWithImpl(
-    _$ModuleSettingsErrorImpl _value,
-    $Res Function(_$ModuleSettingsErrorImpl) _then,
-  ) : super(_value, _then);
+  __$$ModuleSettingsErrorImplCopyWithImpl(_$ModuleSettingsErrorImpl _value,
+      $Res Function(_$ModuleSettingsErrorImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ModuleSettingsState
   /// with the given fields replaced by the non-null parameter values.

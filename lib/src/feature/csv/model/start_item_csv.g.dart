@@ -15,6 +15,8 @@ _$StartItemCsvImpl _$$StartItemCsvImplFromJson(Map<String, dynamic> json) =>
       age: json['age'] as String?,
       team: json['team'] as String?,
       city: json['city'] as String?,
+      phone: json['phone'] as String?,
+      email: json['email'] as String?,
       startTimes: (json['startTimes'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, e as String),
       ),
@@ -29,5 +31,7 @@ Map<String, dynamic> _$$StartItemCsvImplToJson(_$StartItemCsvImpl instance) =>
       'age': instance.age,
       'team': instance.team,
       'city': instance.city,
+      'phone': instance.phone,
+      'email': instance.email,
       'startTimes': instance.startTimes,
     };

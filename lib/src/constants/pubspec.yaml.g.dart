@@ -44,16 +44,15 @@ library pubspec;
 ///
 /// Additional labels for pre-release and build metadata are available
 /// as extensions to the MAJOR.MINOR.PATCH format.
-typedef PubspecVersion =
-    ({
-      String representation,
-      String canonical,
-      int major,
-      int minor,
-      int patch,
-      List<String> preRelease,
-      List<String> build,
-    });
+typedef PubspecVersion = ({
+  String representation,
+  String canonical,
+  int major,
+  int minor,
+  int patch,
+  List<String> preRelease,
+  List<String> build
+});
 
 /// # The pubspec file
 ///
@@ -126,12 +125,12 @@ sealed class Pubspec {
   static final DateTime timestamp = DateTime.utc(
     2025,
     1,
-    4,
-    10,
-    50,
-    40,
-    884,
-    90,
+    8,
+    0,
+    35,
+    5,
+    755,
+    327,
   );
 
   /// Name
@@ -348,8 +347,8 @@ sealed class Pubspec {
 
   /// Environment
   static const Map<String, String> environment = <String, String>{
-    'sdk': '^3.7.0-209.1.beta',
-    'flutter': '^3.7.0-209.1.beta',
+    'sdk': '^3.6.0',
+    'flutter': '^3.6.0',
   };
 
   /// Platforms
@@ -417,17 +416,21 @@ sealed class Pubspec {
     'crypto': r'^3.0.6',
     'csv': r'^6.0.0',
     'device_info_plus': r'^11.2.0',
-    'drift': r'^2.22.1',
+    'drift': r'^2.23.1',
     'dropdown_search': r'^6.0.1',
     'equatable': r'^2.0.7',
-    'file_picker': r'^8.1.6',
-    'flutter': <String, Object>{'sdk': r'flutter'},
+    'file_picker': r'^8.1.7',
+    'flutter': <String, Object>{
+      'sdk': r'flutter',
+    },
     'flutter_bloc': r'^8.1.6',
     'flutter_bluetooth_serial': r'^0.4.0',
-    'flutter_localizations': <String, Object>{'sdk': r'flutter'},
+    'flutter_localizations': <String, Object>{
+      'sdk': r'flutter',
+    },
     'flutter_markdown': r'^0.7.4+3',
     'flutter_ntp': r'^0.0.2',
-    'flutter_tts': r'^4.2.0',
+    'flutter_tts': r'^4.2.1',
     'freezed_annotation': r'^2.4.4',
     'http': r'^1.2.2',
     'intl': r'^0.19.0',
@@ -445,7 +448,7 @@ sealed class Pubspec {
     'sentry_flutter': r'^8.12.0',
     'settings_ui': r'^2.0.2',
     'share_plus': r'^10.1.3',
-    'shared_preferences': r'^2.3.4',
+    'shared_preferences': r'^2.3.5',
     'sqlite3': r'^2.5.0',
     'sqlite3_flutter_libs': r'^0.5.28',
     'url_launcher': r'^6.3.1',
@@ -457,12 +460,16 @@ sealed class Pubspec {
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^9.1.7',
     'build_runner': r'^2.4.14',
-    'dart_style': r'^3.0.0',
-    'drift_dev': r'^2.22.1',
+    'dart_style': r'^2.3.7',
+    'drift_dev': r'^2.23.1',
     'flutter_lints': r'^5.0.0',
-    'flutter_test': <String, Object>{'sdk': r'flutter'},
-    'freezed': r'^3.0.0-0.0.dev',
-    'integration_test': <String, Object>{'sdk': r'flutter'},
+    'flutter_test': <String, Object>{
+      'sdk': r'flutter',
+    },
+    'freezed': r'^2.5.7',
+    'integration_test': <String, Object>{
+      'sdk': r'flutter',
+    },
     'json_serializable': r'^6.9.0',
     'mocktail': r'^1.0.4',
     'patrol': r'^3.13.2',
@@ -539,7 +546,10 @@ sealed class Pubspec {
     'dependency_overrides': dependencyOverrides,
     'flutter': <String, Object>{
       'uses-material-design': true,
-      'assets': <Object>[r'assets/', r'CHANGELOG.md'],
+      'assets': <Object>[
+        r'assets/',
+        r'CHANGELOG.md',
+      ],
     },
     'flutter_intl': <String, Object>{
       'enabled': true,
@@ -558,7 +568,9 @@ sealed class Pubspec {
     },
     'patrol': <String, Object>{
       'app_name': r'entime',
-      'android': <String, Object>{'package_name': r'site.syutkin.entime'},
+      'android': <String, Object>{
+        'package_name': r'site.syutkin.entime',
+      },
     },
   };
 }

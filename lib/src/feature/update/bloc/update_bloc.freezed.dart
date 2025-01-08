@@ -12,8 +12,7 @@ part of 'update_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UpdateEvent {
@@ -26,7 +25,8 @@ mixin _$UpdateEvent {
     required TResult Function() cancelDownload,
     required TResult Function(String error) downloadError,
     required TResult Function() updateFromFile,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? checkUpdate,
@@ -36,7 +36,8 @@ mixin _$UpdateEvent {
     TResult? Function()? cancelDownload,
     TResult? Function(String error)? downloadError,
     TResult? Function()? updateFromFile,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkUpdate,
@@ -47,7 +48,8 @@ mixin _$UpdateEvent {
     TResult Function(String error)? downloadError,
     TResult Function()? updateFromFile,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_CheckUpdateEvent value) checkUpdate,
@@ -57,7 +59,8 @@ mixin _$UpdateEvent {
     required TResult Function(_CancelDownloadEvent value) cancelDownload,
     required TResult Function(_DownloadErrorEvent value) downloadError,
     required TResult Function(_UpdateFromFileEvent value) updateFromFile,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CheckUpdateEvent value)? checkUpdate,
@@ -67,7 +70,8 @@ mixin _$UpdateEvent {
     TResult? Function(_CancelDownloadEvent value)? cancelDownload,
     TResult? Function(_DownloadErrorEvent value)? downloadError,
     TResult? Function(_UpdateFromFileEvent value)? updateFromFile,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CheckUpdateEvent value)? checkUpdate,
@@ -78,15 +82,15 @@ mixin _$UpdateEvent {
     TResult Function(_DownloadErrorEvent value)? downloadError,
     TResult Function(_UpdateFromFileEvent value)? updateFromFile,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UpdateEventCopyWith<$Res> {
   factory $UpdateEventCopyWith(
-    UpdateEvent value,
-    $Res Function(UpdateEvent) then,
-  ) = _$UpdateEventCopyWithImpl<$Res, UpdateEvent>;
+          UpdateEvent value, $Res Function(UpdateEvent) then) =
+      _$UpdateEventCopyWithImpl<$Res, UpdateEvent>;
 }
 
 /// @nodoc
@@ -105,20 +109,18 @@ class _$UpdateEventCopyWithImpl<$Res, $Val extends UpdateEvent>
 
 /// @nodoc
 abstract class _$$CheckUpdateEventImplCopyWith<$Res> {
-  factory _$$CheckUpdateEventImplCopyWith(
-    _$CheckUpdateEventImpl value,
-    $Res Function(_$CheckUpdateEventImpl) then,
-  ) = __$$CheckUpdateEventImplCopyWithImpl<$Res>;
+  factory _$$CheckUpdateEventImplCopyWith(_$CheckUpdateEventImpl value,
+          $Res Function(_$CheckUpdateEventImpl) then) =
+      __$$CheckUpdateEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$CheckUpdateEventImplCopyWithImpl<$Res>
     extends _$UpdateEventCopyWithImpl<$Res, _$CheckUpdateEventImpl>
     implements _$$CheckUpdateEventImplCopyWith<$Res> {
-  __$$CheckUpdateEventImplCopyWithImpl(
-    _$CheckUpdateEventImpl _value,
-    $Res Function(_$CheckUpdateEventImpl) _then,
-  ) : super(_value, _then);
+  __$$CheckUpdateEventImplCopyWithImpl(_$CheckUpdateEventImpl _value,
+      $Res Function(_$CheckUpdateEventImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -242,20 +244,18 @@ abstract class _CheckUpdateEvent implements UpdateEvent {
 
 /// @nodoc
 abstract class _$$PopupChangelogEventImplCopyWith<$Res> {
-  factory _$$PopupChangelogEventImplCopyWith(
-    _$PopupChangelogEventImpl value,
-    $Res Function(_$PopupChangelogEventImpl) then,
-  ) = __$$PopupChangelogEventImplCopyWithImpl<$Res>;
+  factory _$$PopupChangelogEventImplCopyWith(_$PopupChangelogEventImpl value,
+          $Res Function(_$PopupChangelogEventImpl) then) =
+      __$$PopupChangelogEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$PopupChangelogEventImplCopyWithImpl<$Res>
     extends _$UpdateEventCopyWithImpl<$Res, _$PopupChangelogEventImpl>
     implements _$$PopupChangelogEventImplCopyWith<$Res> {
-  __$$PopupChangelogEventImplCopyWithImpl(
-    _$PopupChangelogEventImpl _value,
-    $Res Function(_$PopupChangelogEventImpl) _then,
-  ) : super(_value, _then);
+  __$$PopupChangelogEventImplCopyWithImpl(_$PopupChangelogEventImpl _value,
+      $Res Function(_$PopupChangelogEventImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -380,20 +380,18 @@ abstract class _PopupChangelogEvent implements UpdateEvent {
 
 /// @nodoc
 abstract class _$$DownloadUpdateEventImplCopyWith<$Res> {
-  factory _$$DownloadUpdateEventImplCopyWith(
-    _$DownloadUpdateEventImpl value,
-    $Res Function(_$DownloadUpdateEventImpl) then,
-  ) = __$$DownloadUpdateEventImplCopyWithImpl<$Res>;
+  factory _$$DownloadUpdateEventImplCopyWith(_$DownloadUpdateEventImpl value,
+          $Res Function(_$DownloadUpdateEventImpl) then) =
+      __$$DownloadUpdateEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$DownloadUpdateEventImplCopyWithImpl<$Res>
     extends _$UpdateEventCopyWithImpl<$Res, _$DownloadUpdateEventImpl>
     implements _$$DownloadUpdateEventImplCopyWith<$Res> {
-  __$$DownloadUpdateEventImplCopyWithImpl(
-    _$DownloadUpdateEventImpl _value,
-    $Res Function(_$DownloadUpdateEventImpl) _then,
-  ) : super(_value, _then);
+  __$$DownloadUpdateEventImplCopyWithImpl(_$DownloadUpdateEventImpl _value,
+      $Res Function(_$DownloadUpdateEventImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -519,9 +517,9 @@ abstract class _DownloadUpdateEvent implements UpdateEvent {
 /// @nodoc
 abstract class _$$UpdateDownloadingEventImplCopyWith<$Res> {
   factory _$$UpdateDownloadingEventImplCopyWith(
-    _$UpdateDownloadingEventImpl value,
-    $Res Function(_$UpdateDownloadingEventImpl) then,
-  ) = __$$UpdateDownloadingEventImplCopyWithImpl<$Res>;
+          _$UpdateDownloadingEventImpl value,
+          $Res Function(_$UpdateDownloadingEventImpl) then) =
+      __$$UpdateDownloadingEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int bytes, int total});
 }
@@ -531,39 +529,36 @@ class __$$UpdateDownloadingEventImplCopyWithImpl<$Res>
     extends _$UpdateEventCopyWithImpl<$Res, _$UpdateDownloadingEventImpl>
     implements _$$UpdateDownloadingEventImplCopyWith<$Res> {
   __$$UpdateDownloadingEventImplCopyWithImpl(
-    _$UpdateDownloadingEventImpl _value,
-    $Res Function(_$UpdateDownloadingEventImpl) _then,
-  ) : super(_value, _then);
+      _$UpdateDownloadingEventImpl _value,
+      $Res Function(_$UpdateDownloadingEventImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? bytes = null, Object? total = null}) {
-    return _then(
-      _$UpdateDownloadingEventImpl(
-        bytes:
-            null == bytes
-                ? _value.bytes
-                : bytes // ignore: cast_nullable_to_non_nullable
-                    as int,
-        total:
-            null == total
-                ? _value.total
-                : total // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+  $Res call({
+    Object? bytes = null,
+    Object? total = null,
+  }) {
+    return _then(_$UpdateDownloadingEventImpl(
+      bytes: null == bytes
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 
 class _$UpdateDownloadingEventImpl implements _UpdateDownloadingEvent {
-  const _$UpdateDownloadingEventImpl({
-    required this.bytes,
-    required this.total,
-  });
+  const _$UpdateDownloadingEventImpl(
+      {required this.bytes, required this.total});
 
   @override
   final int bytes;
@@ -593,11 +588,8 @@ class _$UpdateDownloadingEventImpl implements _UpdateDownloadingEvent {
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateDownloadingEventImplCopyWith<_$UpdateDownloadingEventImpl>
-  get copyWith =>
-      __$$UpdateDownloadingEventImplCopyWithImpl<_$UpdateDownloadingEventImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$UpdateDownloadingEventImplCopyWithImpl<
+          _$UpdateDownloadingEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -693,10 +685,9 @@ class _$UpdateDownloadingEventImpl implements _UpdateDownloadingEvent {
 }
 
 abstract class _UpdateDownloadingEvent implements UpdateEvent {
-  const factory _UpdateDownloadingEvent({
-    required final int bytes,
-    required final int total,
-  }) = _$UpdateDownloadingEventImpl;
+  const factory _UpdateDownloadingEvent(
+      {required final int bytes,
+      required final int total}) = _$UpdateDownloadingEventImpl;
 
   int get bytes;
   int get total;
@@ -705,25 +696,23 @@ abstract class _UpdateDownloadingEvent implements UpdateEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateDownloadingEventImplCopyWith<_$UpdateDownloadingEventImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$CancelDownloadEventImplCopyWith<$Res> {
-  factory _$$CancelDownloadEventImplCopyWith(
-    _$CancelDownloadEventImpl value,
-    $Res Function(_$CancelDownloadEventImpl) then,
-  ) = __$$CancelDownloadEventImplCopyWithImpl<$Res>;
+  factory _$$CancelDownloadEventImplCopyWith(_$CancelDownloadEventImpl value,
+          $Res Function(_$CancelDownloadEventImpl) then) =
+      __$$CancelDownloadEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$CancelDownloadEventImplCopyWithImpl<$Res>
     extends _$UpdateEventCopyWithImpl<$Res, _$CancelDownloadEventImpl>
     implements _$$CancelDownloadEventImplCopyWith<$Res> {
-  __$$CancelDownloadEventImplCopyWithImpl(
-    _$CancelDownloadEventImpl _value,
-    $Res Function(_$CancelDownloadEventImpl) _then,
-  ) : super(_value, _then);
+  __$$CancelDownloadEventImplCopyWithImpl(_$CancelDownloadEventImpl _value,
+      $Res Function(_$CancelDownloadEventImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -848,10 +837,9 @@ abstract class _CancelDownloadEvent implements UpdateEvent {
 
 /// @nodoc
 abstract class _$$DownloadErrorEventImplCopyWith<$Res> {
-  factory _$$DownloadErrorEventImplCopyWith(
-    _$DownloadErrorEventImpl value,
-    $Res Function(_$DownloadErrorEventImpl) then,
-  ) = __$$DownloadErrorEventImplCopyWithImpl<$Res>;
+  factory _$$DownloadErrorEventImplCopyWith(_$DownloadErrorEventImpl value,
+          $Res Function(_$DownloadErrorEventImpl) then) =
+      __$$DownloadErrorEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
@@ -860,25 +848,23 @@ abstract class _$$DownloadErrorEventImplCopyWith<$Res> {
 class __$$DownloadErrorEventImplCopyWithImpl<$Res>
     extends _$UpdateEventCopyWithImpl<$Res, _$DownloadErrorEventImpl>
     implements _$$DownloadErrorEventImplCopyWith<$Res> {
-  __$$DownloadErrorEventImplCopyWithImpl(
-    _$DownloadErrorEventImpl _value,
-    $Res Function(_$DownloadErrorEventImpl) _then,
-  ) : super(_value, _then);
+  __$$DownloadErrorEventImplCopyWithImpl(_$DownloadErrorEventImpl _value,
+      $Res Function(_$DownloadErrorEventImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? error = null}) {
-    return _then(
-      _$DownloadErrorEventImpl(
-        error:
-            null == error
-                ? _value.error
-                : error // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$DownloadErrorEventImpl(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -913,9 +899,7 @@ class _$DownloadErrorEventImpl implements _DownloadErrorEvent {
   @pragma('vm:prefer-inline')
   _$$DownloadErrorEventImplCopyWith<_$DownloadErrorEventImpl> get copyWith =>
       __$$DownloadErrorEventImplCopyWithImpl<_$DownloadErrorEventImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1025,20 +1009,18 @@ abstract class _DownloadErrorEvent implements UpdateEvent {
 
 /// @nodoc
 abstract class _$$UpdateFromFileEventImplCopyWith<$Res> {
-  factory _$$UpdateFromFileEventImplCopyWith(
-    _$UpdateFromFileEventImpl value,
-    $Res Function(_$UpdateFromFileEventImpl) then,
-  ) = __$$UpdateFromFileEventImplCopyWithImpl<$Res>;
+  factory _$$UpdateFromFileEventImplCopyWith(_$UpdateFromFileEventImpl value,
+          $Res Function(_$UpdateFromFileEventImpl) then) =
+      __$$UpdateFromFileEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$UpdateFromFileEventImplCopyWithImpl<$Res>
     extends _$UpdateEventCopyWithImpl<$Res, _$UpdateFromFileEventImpl>
     implements _$$UpdateFromFileEventImplCopyWith<$Res> {
-  __$$UpdateFromFileEventImplCopyWithImpl(
-    _$UpdateFromFileEventImpl _value,
-    $Res Function(_$UpdateFromFileEventImpl) _then,
-  ) : super(_value, _then);
+  __$$UpdateFromFileEventImplCopyWithImpl(_$UpdateFromFileEventImpl _value,
+      $Res Function(_$UpdateFromFileEventImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1170,7 +1152,8 @@ mixin _$UpdateState {
     required TResult Function() connecting,
     required TResult Function(int bytes, int total) downloading,
     required TResult Function(String error) downloadError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? changelog)? initial,
@@ -1178,7 +1161,8 @@ mixin _$UpdateState {
     TResult? Function()? connecting,
     TResult? Function(int bytes, int total)? downloading,
     TResult? Function(String error)? downloadError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? changelog)? initial,
@@ -1187,7 +1171,8 @@ mixin _$UpdateState {
     TResult Function(int bytes, int total)? downloading,
     TResult Function(String error)? downloadError,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_UpdateInitial value) initial,
@@ -1195,7 +1180,8 @@ mixin _$UpdateState {
     required TResult Function(_UpdateConnecting value) connecting,
     required TResult Function(_UpdateDownloading value) downloading,
     required TResult Function(_UpdateDownloadError value) downloadError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_UpdateInitial value)? initial,
@@ -1203,7 +1189,8 @@ mixin _$UpdateState {
     TResult? Function(_UpdateConnecting value)? connecting,
     TResult? Function(_UpdateDownloading value)? downloading,
     TResult? Function(_UpdateDownloadError value)? downloadError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_UpdateInitial value)? initial,
@@ -1212,15 +1199,15 @@ mixin _$UpdateState {
     TResult Function(_UpdateDownloading value)? downloading,
     TResult Function(_UpdateDownloadError value)? downloadError,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UpdateStateCopyWith<$Res> {
   factory $UpdateStateCopyWith(
-    UpdateState value,
-    $Res Function(UpdateState) then,
-  ) = _$UpdateStateCopyWithImpl<$Res, UpdateState>;
+          UpdateState value, $Res Function(UpdateState) then) =
+      _$UpdateStateCopyWithImpl<$Res, UpdateState>;
 }
 
 /// @nodoc
@@ -1240,9 +1227,8 @@ class _$UpdateStateCopyWithImpl<$Res, $Val extends UpdateState>
 /// @nodoc
 abstract class _$$UpdateInitialImplCopyWith<$Res> {
   factory _$$UpdateInitialImplCopyWith(
-    _$UpdateInitialImpl value,
-    $Res Function(_$UpdateInitialImpl) then,
-  ) = __$$UpdateInitialImplCopyWithImpl<$Res>;
+          _$UpdateInitialImpl value, $Res Function(_$UpdateInitialImpl) then) =
+      __$$UpdateInitialImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String? changelog});
 }
@@ -1252,24 +1238,22 @@ class __$$UpdateInitialImplCopyWithImpl<$Res>
     extends _$UpdateStateCopyWithImpl<$Res, _$UpdateInitialImpl>
     implements _$$UpdateInitialImplCopyWith<$Res> {
   __$$UpdateInitialImplCopyWithImpl(
-    _$UpdateInitialImpl _value,
-    $Res Function(_$UpdateInitialImpl) _then,
-  ) : super(_value, _then);
+      _$UpdateInitialImpl _value, $Res Function(_$UpdateInitialImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? changelog = freezed}) {
-    return _then(
-      _$UpdateInitialImpl(
-        changelog:
-            freezed == changelog
-                ? _value.changelog
-                : changelog // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+  $Res call({
+    Object? changelog = freezed,
+  }) {
+    return _then(_$UpdateInitialImpl(
+      changelog: freezed == changelog
+          ? _value.changelog
+          : changelog // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
@@ -1401,10 +1385,9 @@ abstract class _UpdateInitial implements UpdateState {
 
 /// @nodoc
 abstract class _$$UpdateAvailableImplCopyWith<$Res> {
-  factory _$$UpdateAvailableImplCopyWith(
-    _$UpdateAvailableImpl value,
-    $Res Function(_$UpdateAvailableImpl) then,
-  ) = __$$UpdateAvailableImplCopyWithImpl<$Res>;
+  factory _$$UpdateAvailableImplCopyWith(_$UpdateAvailableImpl value,
+          $Res Function(_$UpdateAvailableImpl) then) =
+      __$$UpdateAvailableImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String version});
 }
@@ -1414,24 +1397,22 @@ class __$$UpdateAvailableImplCopyWithImpl<$Res>
     extends _$UpdateStateCopyWithImpl<$Res, _$UpdateAvailableImpl>
     implements _$$UpdateAvailableImplCopyWith<$Res> {
   __$$UpdateAvailableImplCopyWithImpl(
-    _$UpdateAvailableImpl _value,
-    $Res Function(_$UpdateAvailableImpl) _then,
-  ) : super(_value, _then);
+      _$UpdateAvailableImpl _value, $Res Function(_$UpdateAvailableImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? version = null}) {
-    return _then(
-      _$UpdateAvailableImpl(
-        version:
-            null == version
-                ? _value.version
-                : version // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? version = null,
+  }) {
+    return _then(_$UpdateAvailableImpl(
+      version: null == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1466,9 +1447,7 @@ class _$UpdateAvailableImpl implements _UpdateAvailable {
   @pragma('vm:prefer-inline')
   _$$UpdateAvailableImplCopyWith<_$UpdateAvailableImpl> get copyWith =>
       __$$UpdateAvailableImplCopyWithImpl<_$UpdateAvailableImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1566,20 +1545,18 @@ abstract class _UpdateAvailable implements UpdateState {
 
 /// @nodoc
 abstract class _$$UpdateConnectingImplCopyWith<$Res> {
-  factory _$$UpdateConnectingImplCopyWith(
-    _$UpdateConnectingImpl value,
-    $Res Function(_$UpdateConnectingImpl) then,
-  ) = __$$UpdateConnectingImplCopyWithImpl<$Res>;
+  factory _$$UpdateConnectingImplCopyWith(_$UpdateConnectingImpl value,
+          $Res Function(_$UpdateConnectingImpl) then) =
+      __$$UpdateConnectingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$UpdateConnectingImplCopyWithImpl<$Res>
     extends _$UpdateStateCopyWithImpl<$Res, _$UpdateConnectingImpl>
     implements _$$UpdateConnectingImplCopyWith<$Res> {
-  __$$UpdateConnectingImplCopyWithImpl(
-    _$UpdateConnectingImpl _value,
-    $Res Function(_$UpdateConnectingImpl) _then,
-  ) : super(_value, _then);
+  __$$UpdateConnectingImplCopyWithImpl(_$UpdateConnectingImpl _value,
+      $Res Function(_$UpdateConnectingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
@@ -1691,10 +1668,9 @@ abstract class _UpdateConnecting implements UpdateState {
 
 /// @nodoc
 abstract class _$$UpdateDownloadingImplCopyWith<$Res> {
-  factory _$$UpdateDownloadingImplCopyWith(
-    _$UpdateDownloadingImpl value,
-    $Res Function(_$UpdateDownloadingImpl) then,
-  ) = __$$UpdateDownloadingImplCopyWithImpl<$Res>;
+  factory _$$UpdateDownloadingImplCopyWith(_$UpdateDownloadingImpl value,
+          $Res Function(_$UpdateDownloadingImpl) then) =
+      __$$UpdateDownloadingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int bytes, int total});
 }
@@ -1703,30 +1679,28 @@ abstract class _$$UpdateDownloadingImplCopyWith<$Res> {
 class __$$UpdateDownloadingImplCopyWithImpl<$Res>
     extends _$UpdateStateCopyWithImpl<$Res, _$UpdateDownloadingImpl>
     implements _$$UpdateDownloadingImplCopyWith<$Res> {
-  __$$UpdateDownloadingImplCopyWithImpl(
-    _$UpdateDownloadingImpl _value,
-    $Res Function(_$UpdateDownloadingImpl) _then,
-  ) : super(_value, _then);
+  __$$UpdateDownloadingImplCopyWithImpl(_$UpdateDownloadingImpl _value,
+      $Res Function(_$UpdateDownloadingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? bytes = null, Object? total = null}) {
-    return _then(
-      _$UpdateDownloadingImpl(
-        bytes:
-            null == bytes
-                ? _value.bytes
-                : bytes // ignore: cast_nullable_to_non_nullable
-                    as int,
-        total:
-            null == total
-                ? _value.total
-                : total // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+  $Res call({
+    Object? bytes = null,
+    Object? total = null,
+  }) {
+    return _then(_$UpdateDownloadingImpl(
+      bytes: null == bytes
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as int,
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
@@ -1764,9 +1738,7 @@ class _$UpdateDownloadingImpl implements _UpdateDownloading {
   @pragma('vm:prefer-inline')
   _$$UpdateDownloadingImplCopyWith<_$UpdateDownloadingImpl> get copyWith =>
       __$$UpdateDownloadingImplCopyWithImpl<_$UpdateDownloadingImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1850,10 +1822,9 @@ class _$UpdateDownloadingImpl implements _UpdateDownloading {
 }
 
 abstract class _UpdateDownloading implements UpdateState {
-  const factory _UpdateDownloading({
-    required final int bytes,
-    required final int total,
-  }) = _$UpdateDownloadingImpl;
+  const factory _UpdateDownloading(
+      {required final int bytes,
+      required final int total}) = _$UpdateDownloadingImpl;
 
   int get bytes;
   int get total;
@@ -1867,10 +1838,9 @@ abstract class _UpdateDownloading implements UpdateState {
 
 /// @nodoc
 abstract class _$$UpdateDownloadErrorImplCopyWith<$Res> {
-  factory _$$UpdateDownloadErrorImplCopyWith(
-    _$UpdateDownloadErrorImpl value,
-    $Res Function(_$UpdateDownloadErrorImpl) then,
-  ) = __$$UpdateDownloadErrorImplCopyWithImpl<$Res>;
+  factory _$$UpdateDownloadErrorImplCopyWith(_$UpdateDownloadErrorImpl value,
+          $Res Function(_$UpdateDownloadErrorImpl) then) =
+      __$$UpdateDownloadErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
@@ -1879,25 +1849,23 @@ abstract class _$$UpdateDownloadErrorImplCopyWith<$Res> {
 class __$$UpdateDownloadErrorImplCopyWithImpl<$Res>
     extends _$UpdateStateCopyWithImpl<$Res, _$UpdateDownloadErrorImpl>
     implements _$$UpdateDownloadErrorImplCopyWith<$Res> {
-  __$$UpdateDownloadErrorImplCopyWithImpl(
-    _$UpdateDownloadErrorImpl _value,
-    $Res Function(_$UpdateDownloadErrorImpl) _then,
-  ) : super(_value, _then);
+  __$$UpdateDownloadErrorImplCopyWithImpl(_$UpdateDownloadErrorImpl _value,
+      $Res Function(_$UpdateDownloadErrorImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UpdateState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? error = null}) {
-    return _then(
-      _$UpdateDownloadErrorImpl(
-        error:
-            null == error
-                ? _value.error
-                : error // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$UpdateDownloadErrorImpl(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1932,9 +1900,7 @@ class _$UpdateDownloadErrorImpl implements _UpdateDownloadError {
   @pragma('vm:prefer-inline')
   _$$UpdateDownloadErrorImplCopyWith<_$UpdateDownloadErrorImpl> get copyWith =>
       __$$UpdateDownloadErrorImplCopyWithImpl<_$UpdateDownloadErrorImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs

@@ -12,8 +12,7 @@ part of 'tab_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TabEvent {
@@ -21,29 +20,35 @@ mixin _$TabEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AppTab tab) updated,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppTab tab)? updated,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppTab tab)? updated,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TabEventUpdated value) updated,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TabEventUpdated value)? updated,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TabEventUpdated value)? updated,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of TabEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -74,27 +79,24 @@ class _$TabEventCopyWithImpl<$Res, $Val extends TabEvent>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? tab = null}) {
-    return _then(
-      _value.copyWith(
-            tab:
-                null == tab
-                    ? _value.tab
-                    : tab // ignore: cast_nullable_to_non_nullable
-                        as AppTab,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? tab = null,
+  }) {
+    return _then(_value.copyWith(
+      tab: null == tab
+          ? _value.tab
+          : tab // ignore: cast_nullable_to_non_nullable
+              as AppTab,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$TabEventUpdatedImplCopyWith<$Res>
     implements $TabEventCopyWith<$Res> {
-  factory _$$TabEventUpdatedImplCopyWith(
-    _$TabEventUpdatedImpl value,
-    $Res Function(_$TabEventUpdatedImpl) then,
-  ) = __$$TabEventUpdatedImplCopyWithImpl<$Res>;
+  factory _$$TabEventUpdatedImplCopyWith(_$TabEventUpdatedImpl value,
+          $Res Function(_$TabEventUpdatedImpl) then) =
+      __$$TabEventUpdatedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({AppTab tab});
@@ -105,23 +107,22 @@ class __$$TabEventUpdatedImplCopyWithImpl<$Res>
     extends _$TabEventCopyWithImpl<$Res, _$TabEventUpdatedImpl>
     implements _$$TabEventUpdatedImplCopyWith<$Res> {
   __$$TabEventUpdatedImplCopyWithImpl(
-    _$TabEventUpdatedImpl _value,
-    $Res Function(_$TabEventUpdatedImpl) _then,
-  ) : super(_value, _then);
+      _$TabEventUpdatedImpl _value, $Res Function(_$TabEventUpdatedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of TabEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? tab = null}) {
-    return _then(
-      _$TabEventUpdatedImpl(
-        null == tab
-            ? _value.tab
-            : tab // ignore: cast_nullable_to_non_nullable
-                as AppTab,
-      ),
-    );
+  $Res call({
+    Object? tab = null,
+  }) {
+    return _then(_$TabEventUpdatedImpl(
+      null == tab
+          ? _value.tab
+          : tab // ignore: cast_nullable_to_non_nullable
+              as AppTab,
+    ));
   }
 }
 
@@ -156,9 +157,7 @@ class _$TabEventUpdatedImpl implements TabEventUpdated {
   @pragma('vm:prefer-inline')
   _$$TabEventUpdatedImplCopyWith<_$TabEventUpdatedImpl> get copyWith =>
       __$$TabEventUpdatedImplCopyWithImpl<_$TabEventUpdatedImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
