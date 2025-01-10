@@ -68,9 +68,9 @@ void main() {
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMessageHandler(
-          'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
-          (obj) async => obj,
-        );
+      'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
+      (obj) async => obj,
+    );
 
     SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
     settingsProvider = await SharedPrefsSettingsProvider.load();
@@ -84,60 +84,68 @@ void main() {
     connectivityProvider = MockIConnectivityProvider();
   });
 
-  group('EntimeApp', () {
-    testWidgets('renders EntimeAppView', (tester) async {
-      await tester.pumpWidget(
-        EntimeApp(
-          settingsProvider: settingsProvider,
-          updateProvider: updateProvider,
-          bluetoothProvider: bluetoothProvider,
-          audioController: audioController,
-          appInfo: appInfo,
-          database: database,
-          countdown: countdown,
-          ntpProvider: ntpProvider,
-          connectivityProvider: connectivityProvider,
-        ),
-      ); // Create main app
-      expect(find.byType(EntimeAppView), findsOneWidget);
-    });
-  }, skip: 'Refactor needed');
+  group(
+    'EntimeApp',
+    () {
+      testWidgets('renders EntimeAppView', (tester) async {
+        await tester.pumpWidget(
+          EntimeApp(
+            settingsProvider: settingsProvider,
+            updateProvider: updateProvider,
+            bluetoothProvider: bluetoothProvider,
+            audioController: audioController,
+            appInfo: appInfo,
+            database: database,
+            countdown: countdown,
+            ntpProvider: ntpProvider,
+            connectivityProvider: connectivityProvider,
+          ),
+        ); // Create main app
+        expect(find.byType(EntimeAppView), findsOneWidget);
+      });
+    },
+    skip: 'Refactor needed',
+  );
 
-  group('EntimeAppView', () {
-    late SettingsBloc settingsBloc;
-    late TabBloc tabBloc;
-    late UpdateBloc updateBloc;
-    late BluetoothBloc bluetoothBloc;
+  group(
+    'EntimeAppView',
+    () {
+      late SettingsBloc settingsBloc;
+      late TabBloc tabBloc;
+      late UpdateBloc updateBloc;
+      late BluetoothBloc bluetoothBloc;
 
-    setUp(() {
-      settingsBloc = MockSettingsBloc();
-      tabBloc = MockTabBloc();
-      updateBloc = MockUpdateBloc();
-      bluetoothBloc = MockBluetoothBloc();
-    });
+      setUp(() {
+        settingsBloc = MockSettingsBloc();
+        tabBloc = MockTabBloc();
+        updateBloc = MockUpdateBloc();
+        bluetoothBloc = MockBluetoothBloc();
+      });
 
-    testWidgets('Renders Home page', (tester) async {
-      when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settingsProvider.settings));
-      when(() => tabBloc.state).thenReturn(AppTab.init);
-      when(() => updateBloc.state).thenReturn(const UpdateState.initial());
-      when(
-        () => bluetoothBloc.state,
-      ).thenReturn(const BluetoothBlocState.notInitialized());
-      await tester.pumpWidget(
-        MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (_) => settingsBloc),
-            BlocProvider(create: (_) => tabBloc),
-            BlocProvider(create: (_) => updateBloc),
-            BlocProvider(create: (_) => bluetoothBloc),
-          ],
-          child: const EntimeAppView(),
-        ),
-      );
-      await tester.pumpAndSettle();
-      expect(find.byType(HomeScreen), findsOneWidget);
-    });
-  }, skip: 'Refactor needed');
+      testWidgets('Renders Home page', (tester) async {
+        when(
+          () => settingsBloc.state,
+        ).thenReturn(SettingsState(settings: settingsProvider.settings));
+        when(() => tabBloc.state).thenReturn(AppTab.init);
+        when(() => updateBloc.state).thenReturn(const UpdateState.initial());
+        when(
+          () => bluetoothBloc.state,
+        ).thenReturn(const BluetoothBlocState.notInitialized());
+        await tester.pumpWidget(
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => settingsBloc),
+              BlocProvider(create: (_) => tabBloc),
+              BlocProvider(create: (_) => updateBloc),
+              BlocProvider(create: (_) => bluetoothBloc),
+            ],
+            child: const EntimeAppView(),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.byType(HomeScreen), findsOneWidget);
+      });
+    },
+    skip: 'Refactor needed',
+  );
 }

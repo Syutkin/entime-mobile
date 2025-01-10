@@ -3,7 +3,7 @@ class Legend {
   static const List<String> number = ['номер', 'number'];
   static const List<String> name = ['имя', 'фио', 'name'];
   static const List<String> nickname = ['ник', 'никнейм', 'nickname'];
-  static const List<String> age = [
+  static const List<String> birthday = [
     'возраст',
     'год',
     'год рождения',
@@ -24,4 +24,5 @@ class Legend {
     'e-mail',
     'mail',
   ];
+  static const List<String> comment = ['комментарий', 'comment'];
 }

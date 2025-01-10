@@ -13,11 +13,12 @@ class StartItemCsv with _$StartItemCsv {
     required String name,
     String? category,
     String? nickname,
-    String? age,
+    String? birthday,
     String? team,
     String? city,
     String? phone,
     String? email,
+    String? comment,
     Map<String, String>? startTimes,
   }) = _StartItemCsv;
 
@@ -29,11 +30,12 @@ class StartItemCsv with _$StartItemCsv {
     late int number;
     late String name;
     String? nickname;
-    String? age;
+    String? birthday;
     String? team;
     String? city;
     String? phone;
     String? email;
+    String? comment;
     final startTimes = <String, String>{};
     for (final key in map.keys) {
       final element = key.toLowerCase().trim();
@@ -45,8 +47,8 @@ class StartItemCsv with _$StartItemCsv {
         name = map[key].toString();
       } else if (Legend.nickname.contains(element)) {
         nickname = map[key].toString();
-      } else if (Legend.age.contains(element)) {
-        age = map[key].toString();
+      } else if (Legend.birthday.contains(element)) {
+        birthday = map[key].toString();
       } else if (Legend.team.contains(element)) {
         team = map[key].toString();
       } else if (Legend.city.contains(element)) {
@@ -55,6 +57,8 @@ class StartItemCsv with _$StartItemCsv {
         phone = map[key].toString();
       } else if (Legend.email.contains(element)) {
         email = map[key].toString();
+      } else if (Legend.comment.contains(element)) {
+        comment = map[key].toString();
       } else {
         startTimes[key] = map[key].toString().trim();
       }
@@ -65,11 +69,12 @@ class StartItemCsv with _$StartItemCsv {
       number: number,
       name: name,
       nickname: nickname,
-      age: age,
+      birthday: birthday,
       team: team,
       city: city,
       phone: phone,
       email: email,
+      comment: comment,
       startTimes: startTimes,
     );
   }

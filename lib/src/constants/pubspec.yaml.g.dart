@@ -125,12 +125,12 @@ sealed class Pubspec {
   static final DateTime timestamp = DateTime.utc(
     2025,
     1,
-    8,
-    0,
-    35,
-    5,
-    755,
-    327,
+    10,
+    12,
+    42,
+    28,
+    359,
+    571,
   );
 
   /// Name
@@ -205,8 +205,7 @@ sealed class Pubspec {
   /// If issue_tracker is missing but repository is present and points to GitHub,
   /// then the pub.dev site uses the default issue tracker
   /// (https://github.com/<user>/<repository>/issues).
-  static const String issueTracker =
-      r'https://github.com/Syutkin/entime-mobile/issues';
+  static const String issueTracker = r'https://github.com/Syutkin/entime-mobile/issues';
 
   /// Documentation
   ///
@@ -562,8 +561,7 @@ sealed class Pubspec {
     'cider': <String, Object>{
       'link_template': <String, Object>{
         'tag': r'https://github.com/Syutkin/entime-mobile/releases/tag/%tag%',
-        'diff':
-            r'https://github.com/Syutkin/entime-mobile/compare/%from%...%to%',
+        'diff': r'https://github.com/Syutkin/entime-mobile/compare/%from%...%to%',
       },
     },
     'patrol': <String, Object>{
@@ -573,4 +571,5 @@ sealed class Pubspec {
       },
     },
   };
+
 }
