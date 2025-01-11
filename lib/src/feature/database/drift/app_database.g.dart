@@ -1696,13 +1696,13 @@ class Riders extends Table with TableInfo<Riders, Rider> {
       'email', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
-      $customConstraints: 'UNIQUE');
+      $customConstraints: '');
   static const VerificationMeta _phoneMeta = const VerificationMeta('phone');
   late final GeneratedColumn<String> phone = GeneratedColumn<String>(
       'phone', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
-      $customConstraints: 'UNIQUE');
+      $customConstraints: '');
   static const VerificationMeta _commentMeta =
       const VerificationMeta('comment');
   late final GeneratedColumn<String> comment = GeneratedColumn<String>(
@@ -1832,6 +1832,10 @@ class Rider extends DataClass implements Insertable<Rider> {
   final String? city;
   final String? email;
   final String? phone;
+
+  ///	phone text UNIQUE,
+  ///	email text UNIQUE,
+  /// TODO: make this unique
   final String? comment;
   final bool isDeleted;
   const Rider(

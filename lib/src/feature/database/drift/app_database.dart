@@ -367,20 +367,22 @@ class AppDatabase extends _$AppDatabase {
     String? email,
     String? phone,
   }) {
+    final data = RidersCompanion.insert(
+      name: name,
+      nickname:
+          nickname.isNotNullOrEmpty ? Value(nickname) : const Value.absent(),
+      birthday:
+          birthday.isNotNullOrEmpty ? Value(birthday) : const Value.absent(),
+      team: team.isNotNullOrEmpty ? Value(team) : const Value.absent(),
+      city: city.isNotNullOrEmpty ? Value(city) : const Value.absent(),
+      email: email.isNotNullOrEmpty ? Value(email) : const Value.absent(),
+      phone: phone.isNotNullOrEmpty ? Value(phone) : const Value.absent(),
+      comment: comment.isNotNullOrEmpty ? Value(comment) : const Value.absent(),
+    );
     return into(riders).insert(
-      RidersCompanion(
-        name: Value(name),
-        nickname:
-            nickname.isNotNullOrEmpty ? Value(nickname) : const Value.absent(),
-        birthday:
-            birthday.isNotNullOrEmpty ? Value(birthday) : const Value.absent(),
-        team: team.isNotNullOrEmpty ? Value(team) : const Value.absent(),
-        city: city.isNotNullOrEmpty ? Value(city) : const Value.absent(),
-        email: email.isNotNullOrEmpty ? Value(email) : const Value.absent(),
-        phone: phone.isNotNullOrEmpty ? Value(phone) : const Value.absent(),
-        comment:
-            comment.isNotNullOrEmpty ? Value(comment) : const Value.absent(),
-      ),
+      data,
+      // onConflict:
+      //     DoUpdate((old) => data, target: [riders.phone]),
     );
   }
 

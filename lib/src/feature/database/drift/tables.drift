@@ -32,8 +32,11 @@ CREATE TABLE riders (
 	birthday text,
 	team text,
 	city text,
-	email text UNIQUE,
-	phone text UNIQUE,
+	email text,
+	phone text,
+-- TODO: make this unique
+--	email text UNIQUE,
+--	phone text UNIQUE,
 	comment text,
 	is_deleted BOOLEAN NOT NULL DEFAULT false
 );
