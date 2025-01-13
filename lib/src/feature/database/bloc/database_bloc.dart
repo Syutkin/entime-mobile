@@ -343,7 +343,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         updateManualStartTime: (event) async {
           await _db.updateManualStartTime(
             stageId: event.stageId,
-            time: event.time,
             timestamp: event.timestamp,
             ntpOffset: event.ntpOffset,
             deltaInSeconds: event.deltaInSeconds,
@@ -401,7 +400,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         addFinishTimeManual: (event) async {
           await _db.addFinishTimeManual(
             stageId: event.stageId,
-            finishTime: event.finishTime,
             timestamp: event.timestamp,
             ntpOffset: event.ntpOffset,
             number: event.number,

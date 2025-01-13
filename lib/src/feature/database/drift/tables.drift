@@ -529,7 +529,7 @@ _getStartsForCsv AS StartForCsv:
 SELECT
     participants.number as number,
 	starts.start_time as start_time,
-	IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, 'DNS')) as automatic_correction
+	IFNULL (starts.automatic_correction, IFNULL (starts.manual_correction, 'DNS')) as correction
 FROM starts, participants
 WHERE
 	starts.participant_id = participants.id

@@ -7,6 +7,7 @@ import 'package:entime/src/feature/csv/model/race_csv.dart';
 import 'package:entime/src/feature/csv/model/stages_csv.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3/sqlite3.dart';
@@ -728,14 +729,15 @@ class AppDatabase extends _$AppDatabase {
   /// Конечно, участник по хорошему должен быть один, но мало ли что там в бд записано
   Future<int> updateManualStartTime({
     required int stageId,
-    required DateTime time,
     required DateTime timestamp,
     required int ntpOffset,
     int deltaInSeconds = 15,
   }) async {
     var result = 0;
-    final timeBefore = time.subtract(Duration(seconds: deltaInSeconds));
-    final timeAfter = time.add(Duration(seconds: deltaInSeconds));
+    //добавляем ntp offset к ручному времени старта
+    final time = timestamp.add(Duration(milliseconds: ntpOffset));
+    final timeBefore = timestamp.subtract(Duration(seconds: deltaInSeconds));
+    final timeAfter = timestamp.add(Duration(seconds: deltaInSeconds));
     final before = DateFormat(shortTimeFormat).format(timeBefore);
     final after = DateFormat(shortTimeFormat).format(timeAfter);
     final manualStartTime = DateFormat(longTimeFormat).format(time);
@@ -987,12 +989,13 @@ class AppDatabase extends _$AppDatabase {
 
   Future<int> addFinishTimeManual({
     required int stageId,
-    required String finishTime,
     required DateTime timestamp,
     required int ntpOffset,
     int? number,
   }) async {
-    // final String phoneTime = DateFormat(longTimeFormat).format(timestamp);
+    //добавляем ntp offset к ручному времени
+    final manual = timestamp.add(Duration(milliseconds: ntpOffset));
+    final finishTime = DateFormat(longTimeFormat).format(manual);
     final finishId = await _addFinishTimeManual(
       stageId: stageId,
       finishTime: finishTime,
@@ -1133,11 +1136,15 @@ class AppDatabase extends _$AppDatabase {
           category: item.category,
         );
         for (final stageName in stages.keys) {
-          await _addStartInfo(
-            stageId: stages[stageName]!,
-            participantId: participantId,
-            startTime: item.startTimes![stageName]!,
-          );
+          final stageId = stages[stageName];
+          final startTime = item.startTimes?[stageName];
+          if (stageId != null && startTime != null) {
+            await _addStartInfo(
+              stageId: stageId,
+              participantId: participantId,
+              startTime: startTime,
+            );
+          }
         }
       }
     });
@@ -1152,18 +1159,22 @@ class AppDatabase extends _$AppDatabase {
       }
       for (final item in stagesCsv.startItems) {
         for (final stageName in stages.keys) {
-          await addStartNumber(
-            stage: Stage(
-              id: stages[stageName]!,
-              raceId: raceId,
-              name: stageName,
-              isActive: true,
-              isDeleted: false,
-            ),
-            number: item.number,
-            startTime: item.startTimes![stageName]!,
-            forceAdd: true,
-          );
+          final id = stages[stageName];
+          final startTime = item.startTimes?[stageName];
+          if (id != null && startTime != null) {
+            await addStartNumber(
+              stage: Stage(
+                id: id,
+                raceId: raceId,
+                name: stageName,
+                isActive: true,
+                isDeleted: false,
+              ),
+              number: item.number,
+              startTime: startTime,
+              forceAdd: true,
+            );
+          }
         }
       }
     });
@@ -1289,6 +1300,7 @@ class AppDatabase extends _$AppDatabase {
   // -------------------------
   // для тестирования и дебага
 
+  @visibleForTesting
   Selectable<NumberAtStart> getNumberAtStarts({
     required int stageId,
     required int number,

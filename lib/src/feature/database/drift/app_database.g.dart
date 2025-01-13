@@ -4776,7 +4776,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Selectable<StartForCsv> _getStartsForCsv({required int stageId}) {
     return customSelect(
-        'SELECT participants.number AS number, starts.start_time AS start_time, IFNULL(starts.automatic_correction, IFNULL(starts.manual_correction, \'DNS\')) AS automatic_correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL AND(starts.automatic_correction NOTNULL OR starts.manual_correction NOTNULL OR starts.status_id = 2)ORDER BY starts.start_time ASC',
+        'SELECT participants.number AS number, starts.start_time AS start_time, IFNULL(starts.automatic_correction, IFNULL(starts.manual_correction, \'DNS\')) AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL AND(starts.automatic_correction NOTNULL OR starts.manual_correction NOTNULL OR starts.status_id = 2)ORDER BY starts.start_time ASC',
         variables: [
           Variable<int>(stageId)
         ],
@@ -4787,7 +4787,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
           row: row,
           number: row.read<int>('number'),
           startTime: row.read<String>('start_time'),
-          automaticCorrection: row.read<String>('automatic_correction'),
+          correction: row.read<String>('correction'),
         ));
   }
 
@@ -7108,12 +7108,12 @@ class GetStartingParticipantBetweenTimesResult extends CustomResultSet {
 class StartForCsv extends CustomResultSet {
   final int number;
   final String startTime;
-  final String automaticCorrection;
+  final String correction;
   StartForCsv({
     required QueryRow row,
     required this.number,
     required this.startTime,
-    required this.automaticCorrection,
+    required this.correction,
   }) : super(row);
 }
 

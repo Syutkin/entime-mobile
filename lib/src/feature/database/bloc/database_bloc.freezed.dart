@@ -126,8 +126,8 @@ mixin _$DatabaseEvent {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -142,8 +142,8 @@ mixin _$DatabaseEvent {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -267,8 +267,8 @@ mixin _$DatabaseEvent {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -283,8 +283,8 @@ mixin _$DatabaseEvent {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -405,8 +405,8 @@ mixin _$DatabaseEvent {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -421,8 +421,8 @@ mixin _$DatabaseEvent {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -776,8 +776,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -792,8 +792,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -920,8 +920,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -936,8 +936,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -1061,8 +1061,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -1077,8 +1077,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -1699,8 +1699,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -1715,8 +1715,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -1857,8 +1857,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -1873,8 +1873,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -2012,8 +2012,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -2028,8 +2028,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -2522,8 +2522,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -2538,8 +2538,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -2666,8 +2666,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -2682,8 +2682,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -2808,8 +2808,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -2824,8 +2824,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -3299,8 +3299,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -3315,8 +3315,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -3444,8 +3444,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -3460,8 +3460,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -3586,8 +3586,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -3602,8 +3602,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -4080,8 +4080,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -4096,8 +4096,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -4225,8 +4225,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -4241,8 +4241,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -4367,8 +4367,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -4383,8 +4383,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -4788,8 +4788,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -4804,8 +4804,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -4932,8 +4932,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -4948,8 +4948,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -5073,8 +5073,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -5089,8 +5089,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -5451,8 +5451,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -5467,8 +5467,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -5595,8 +5595,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -5611,8 +5611,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -5736,8 +5736,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -5752,8 +5752,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -6136,8 +6136,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -6152,8 +6152,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -6280,8 +6280,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -6296,8 +6296,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -6421,8 +6421,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -6437,8 +6437,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -6799,8 +6799,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -6815,8 +6815,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -6943,8 +6943,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -6959,8 +6959,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -7084,8 +7084,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -7100,8 +7100,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -7502,8 +7502,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -7518,8 +7518,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -7646,8 +7646,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -7662,8 +7662,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -7787,8 +7787,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -7803,8 +7803,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -8284,8 +8284,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -8300,8 +8300,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -8429,8 +8429,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -8445,8 +8445,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -8571,8 +8571,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -8587,8 +8587,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -8994,8 +8994,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -9010,8 +9010,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -9138,8 +9138,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -9154,8 +9154,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -9279,8 +9279,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -9295,8 +9295,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -9686,8 +9686,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -9702,8 +9702,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -9830,8 +9830,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -9846,8 +9846,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -9971,8 +9971,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -9987,8 +9987,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -10379,8 +10379,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -10395,8 +10395,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -10523,8 +10523,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -10539,8 +10539,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -10664,8 +10664,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -10680,8 +10680,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -11076,8 +11076,8 @@ class _$GetParticipantsAtStartImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -11092,8 +11092,8 @@ class _$GetParticipantsAtStartImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -11220,8 +11220,8 @@ class _$GetParticipantsAtStartImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -11236,8 +11236,8 @@ class _$GetParticipantsAtStartImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -11361,8 +11361,8 @@ class _$GetParticipantsAtStartImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -11377,8 +11377,8 @@ class _$GetParticipantsAtStartImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -11807,8 +11807,8 @@ class _$AddStartNumberImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -11823,8 +11823,8 @@ class _$AddStartNumberImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -11951,8 +11951,8 @@ class _$AddStartNumberImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -11967,8 +11967,8 @@ class _$AddStartNumberImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -12092,8 +12092,8 @@ class _$AddStartNumberImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -12108,8 +12108,8 @@ class _$AddStartNumberImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -12611,8 +12611,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -12627,8 +12627,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -12756,8 +12756,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -12772,8 +12772,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -12898,8 +12898,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -12914,8 +12914,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -13442,8 +13442,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -13458,8 +13458,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -13587,8 +13587,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -13603,8 +13603,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -13729,8 +13729,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -13745,8 +13745,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -14243,8 +14243,8 @@ class _$UpdateStartingInfoImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -14259,8 +14259,8 @@ class _$UpdateStartingInfoImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -14394,8 +14394,8 @@ class _$UpdateStartingInfoImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -14410,8 +14410,8 @@ class _$UpdateStartingInfoImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -14542,8 +14542,8 @@ class _$UpdateStartingInfoImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -14558,8 +14558,8 @@ class _$UpdateStartingInfoImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -15051,8 +15051,8 @@ class _$UpdateAutomaticCorrectionImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -15067,8 +15067,8 @@ class _$UpdateAutomaticCorrectionImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -15196,8 +15196,8 @@ class _$UpdateAutomaticCorrectionImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -15212,8 +15212,8 @@ class _$UpdateAutomaticCorrectionImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -15338,8 +15338,8 @@ class _$UpdateAutomaticCorrectionImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -15354,8 +15354,8 @@ class _$UpdateAutomaticCorrectionImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -15583,11 +15583,7 @@ abstract class _$$UpdateManualStartTimeImplCopyWith<$Res> {
       __$$UpdateManualStartTimeImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {int stageId,
-      DateTime time,
-      DateTime timestamp,
-      int ntpOffset,
-      int deltaInSeconds});
+      {int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds});
 }
 
 /// @nodoc
@@ -15604,7 +15600,6 @@ class __$$UpdateManualStartTimeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stageId = null,
-    Object? time = null,
     Object? timestamp = null,
     Object? ntpOffset = null,
     Object? deltaInSeconds = null,
@@ -15614,10 +15609,6 @@ class __$$UpdateManualStartTimeImplCopyWithImpl<$Res>
           ? _value.stageId
           : stageId // ignore: cast_nullable_to_non_nullable
               as int,
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -15641,15 +15632,12 @@ class _$UpdateManualStartTimeImpl
     implements _UpdateManualStartTime {
   const _$UpdateManualStartTimeImpl(
       {required this.stageId,
-      required this.time,
       required this.timestamp,
       required this.ntpOffset,
       this.deltaInSeconds = 15});
 
   @override
   final int stageId;
-  @override
-  final DateTime time;
   @override
   final DateTime timestamp;
   @override
@@ -15660,7 +15648,7 @@ class _$UpdateManualStartTimeImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DatabaseEvent.updateManualStartTime(stageId: $stageId, time: $time, timestamp: $timestamp, ntpOffset: $ntpOffset, deltaInSeconds: $deltaInSeconds)';
+    return 'DatabaseEvent.updateManualStartTime(stageId: $stageId, timestamp: $timestamp, ntpOffset: $ntpOffset, deltaInSeconds: $deltaInSeconds)';
   }
 
   @override
@@ -15669,7 +15657,6 @@ class _$UpdateManualStartTimeImpl
     properties
       ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateManualStartTime'))
       ..add(DiagnosticsProperty('stageId', stageId))
-      ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('timestamp', timestamp))
       ..add(DiagnosticsProperty('ntpOffset', ntpOffset))
       ..add(DiagnosticsProperty('deltaInSeconds', deltaInSeconds));
@@ -15681,7 +15668,6 @@ class _$UpdateManualStartTimeImpl
         (other.runtimeType == runtimeType &&
             other is _$UpdateManualStartTimeImpl &&
             (identical(other.stageId, stageId) || other.stageId == stageId) &&
-            (identical(other.time, time) || other.time == time) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.ntpOffset, ntpOffset) ||
@@ -15691,8 +15677,8 @@ class _$UpdateManualStartTimeImpl
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, stageId, time, timestamp, ntpOffset, deltaInSeconds);
+  int get hashCode =>
+      Object.hash(runtimeType, stageId, timestamp, ntpOffset, deltaInSeconds);
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -15814,8 +15800,8 @@ class _$UpdateManualStartTimeImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -15830,8 +15816,8 @@ class _$UpdateManualStartTimeImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -15857,8 +15843,7 @@ class _$UpdateManualStartTimeImpl
     required TResult Function() shareDatabase,
     required TResult Function(TrailInfo trail) shareTrack,
   }) {
-    return updateManualStartTime(
-        stageId, time, timestamp, ntpOffset, deltaInSeconds);
+    return updateManualStartTime(stageId, timestamp, ntpOffset, deltaInSeconds);
   }
 
   @override
@@ -15959,8 +15944,8 @@ class _$UpdateManualStartTimeImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -15975,8 +15960,8 @@ class _$UpdateManualStartTimeImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -16000,7 +15985,7 @@ class _$UpdateManualStartTimeImpl
     TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return updateManualStartTime?.call(
-        stageId, time, timestamp, ntpOffset, deltaInSeconds);
+        stageId, timestamp, ntpOffset, deltaInSeconds);
   }
 
   @override
@@ -16101,8 +16086,8 @@ class _$UpdateManualStartTimeImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -16117,8 +16102,8 @@ class _$UpdateManualStartTimeImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -16144,7 +16129,7 @@ class _$UpdateManualStartTimeImpl
   }) {
     if (updateManualStartTime != null) {
       return updateManualStartTime(
-          stageId, time, timestamp, ntpOffset, deltaInSeconds);
+          stageId, timestamp, ntpOffset, deltaInSeconds);
     }
     return orElse();
   }
@@ -16316,13 +16301,11 @@ class _$UpdateManualStartTimeImpl
 abstract class _UpdateManualStartTime implements DatabaseEvent {
   const factory _UpdateManualStartTime(
       {required final int stageId,
-      required final DateTime time,
       required final DateTime timestamp,
       required final int ntpOffset,
       final int deltaInSeconds}) = _$UpdateManualStartTimeImpl;
 
   int get stageId;
-  DateTime get time;
   DateTime get timestamp;
   int get ntpOffset;
   int get deltaInSeconds;
@@ -16531,8 +16514,8 @@ class _$SetStatusForStartIdImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -16547,8 +16530,8 @@ class _$SetStatusForStartIdImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -16675,8 +16658,8 @@ class _$SetStatusForStartIdImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -16691,8 +16674,8 @@ class _$SetStatusForStartIdImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -16816,8 +16799,8 @@ class _$SetStatusForStartIdImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -16832,8 +16815,8 @@ class _$SetStatusForStartIdImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -17336,8 +17319,8 @@ class _$AddFinishTimeImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -17352,8 +17335,8 @@ class _$AddFinishTimeImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -17481,8 +17464,8 @@ class _$AddFinishTimeImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -17497,8 +17480,8 @@ class _$AddFinishTimeImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -17631,8 +17614,8 @@ class _$AddFinishTimeImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -17647,8 +17630,8 @@ class _$AddFinishTimeImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -17878,12 +17861,7 @@ abstract class _$$AddFinishTimeManualImplCopyWith<$Res> {
           $Res Function(_$AddFinishTimeManualImpl) then) =
       __$$AddFinishTimeManualImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {int stageId,
-      String finishTime,
-      DateTime timestamp,
-      int ntpOffset,
-      int? number});
+  $Res call({int stageId, DateTime timestamp, int ntpOffset, int? number});
 }
 
 /// @nodoc
@@ -17900,7 +17878,6 @@ class __$$AddFinishTimeManualImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stageId = null,
-    Object? finishTime = null,
     Object? timestamp = null,
     Object? ntpOffset = null,
     Object? number = freezed,
@@ -17910,10 +17887,6 @@ class __$$AddFinishTimeManualImplCopyWithImpl<$Res>
           ? _value.stageId
           : stageId // ignore: cast_nullable_to_non_nullable
               as int,
-      finishTime: null == finishTime
-          ? _value.finishTime
-          : finishTime // ignore: cast_nullable_to_non_nullable
-              as String,
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -17937,15 +17910,12 @@ class _$AddFinishTimeManualImpl
     implements _AddFinishTimeManual {
   const _$AddFinishTimeManualImpl(
       {required this.stageId,
-      required this.finishTime,
       required this.timestamp,
       required this.ntpOffset,
       this.number});
 
   @override
   final int stageId;
-  @override
-  final String finishTime;
   @override
   final DateTime timestamp;
   @override
@@ -17955,7 +17925,7 @@ class _$AddFinishTimeManualImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DatabaseEvent.addFinishTimeManual(stageId: $stageId, finishTime: $finishTime, timestamp: $timestamp, ntpOffset: $ntpOffset, number: $number)';
+    return 'DatabaseEvent.addFinishTimeManual(stageId: $stageId, timestamp: $timestamp, ntpOffset: $ntpOffset, number: $number)';
   }
 
   @override
@@ -17964,7 +17934,6 @@ class _$AddFinishTimeManualImpl
     properties
       ..add(DiagnosticsProperty('type', 'DatabaseEvent.addFinishTimeManual'))
       ..add(DiagnosticsProperty('stageId', stageId))
-      ..add(DiagnosticsProperty('finishTime', finishTime))
       ..add(DiagnosticsProperty('timestamp', timestamp))
       ..add(DiagnosticsProperty('ntpOffset', ntpOffset))
       ..add(DiagnosticsProperty('number', number));
@@ -17976,8 +17945,6 @@ class _$AddFinishTimeManualImpl
         (other.runtimeType == runtimeType &&
             other is _$AddFinishTimeManualImpl &&
             (identical(other.stageId, stageId) || other.stageId == stageId) &&
-            (identical(other.finishTime, finishTime) ||
-                other.finishTime == finishTime) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.ntpOffset, ntpOffset) ||
@@ -17986,8 +17953,8 @@ class _$AddFinishTimeManualImpl
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, stageId, finishTime, timestamp, ntpOffset, number);
+  int get hashCode =>
+      Object.hash(runtimeType, stageId, timestamp, ntpOffset, number);
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -18109,8 +18076,8 @@ class _$AddFinishTimeManualImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -18125,8 +18092,8 @@ class _$AddFinishTimeManualImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -18152,8 +18119,7 @@ class _$AddFinishTimeManualImpl
     required TResult Function() shareDatabase,
     required TResult Function(TrailInfo trail) shareTrack,
   }) {
-    return addFinishTimeManual(
-        stageId, finishTime, timestamp, ntpOffset, number);
+    return addFinishTimeManual(stageId, timestamp, ntpOffset, number);
   }
 
   @override
@@ -18254,8 +18220,8 @@ class _$AddFinishTimeManualImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -18270,8 +18236,8 @@ class _$AddFinishTimeManualImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -18294,8 +18260,7 @@ class _$AddFinishTimeManualImpl
     TResult? Function()? shareDatabase,
     TResult? Function(TrailInfo trail)? shareTrack,
   }) {
-    return addFinishTimeManual?.call(
-        stageId, finishTime, timestamp, ntpOffset, number);
+    return addFinishTimeManual?.call(stageId, timestamp, ntpOffset, number);
   }
 
   @override
@@ -18396,8 +18361,8 @@ class _$AddFinishTimeManualImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -18412,8 +18377,8 @@ class _$AddFinishTimeManualImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -18438,8 +18403,7 @@ class _$AddFinishTimeManualImpl
     required TResult orElse(),
   }) {
     if (addFinishTimeManual != null) {
-      return addFinishTimeManual(
-          stageId, finishTime, timestamp, ntpOffset, number);
+      return addFinishTimeManual(stageId, timestamp, ntpOffset, number);
     }
     return orElse();
   }
@@ -18611,13 +18575,11 @@ class _$AddFinishTimeManualImpl
 abstract class _AddFinishTimeManual implements DatabaseEvent {
   const factory _AddFinishTimeManual(
       {required final int stageId,
-      required final String finishTime,
       required final DateTime timestamp,
       required final int ntpOffset,
       final int? number}) = _$AddFinishTimeManualImpl;
 
   int get stageId;
-  String get finishTime;
   DateTime get timestamp;
   int get ntpOffset;
   int? get number;
@@ -18818,8 +18780,8 @@ class _$ClearStartResultsDebugImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -18834,8 +18796,8 @@ class _$ClearStartResultsDebugImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -18962,8 +18924,8 @@ class _$ClearStartResultsDebugImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -18978,8 +18940,8 @@ class _$ClearStartResultsDebugImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -19103,8 +19065,8 @@ class _$ClearStartResultsDebugImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -19119,8 +19081,8 @@ class _$ClearStartResultsDebugImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -19517,8 +19479,8 @@ class _$ClearFinishResultsDebugImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -19533,8 +19495,8 @@ class _$ClearFinishResultsDebugImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -19661,8 +19623,8 @@ class _$ClearFinishResultsDebugImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -19677,8 +19639,8 @@ class _$ClearFinishResultsDebugImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -19802,8 +19764,8 @@ class _$ClearFinishResultsDebugImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -19818,8 +19780,8 @@ class _$ClearFinishResultsDebugImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -20213,8 +20175,8 @@ class _$HideAllFinisesImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -20229,8 +20191,8 @@ class _$HideAllFinisesImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -20357,8 +20319,8 @@ class _$HideAllFinisesImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -20373,8 +20335,8 @@ class _$HideAllFinisesImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -20498,8 +20460,8 @@ class _$HideAllFinisesImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -20514,8 +20476,8 @@ class _$HideAllFinisesImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -20918,8 +20880,8 @@ class _$ClearNumberAtFinishImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -20934,8 +20896,8 @@ class _$ClearNumberAtFinishImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -21062,8 +21024,8 @@ class _$ClearNumberAtFinishImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -21078,8 +21040,8 @@ class _$ClearNumberAtFinishImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -21203,8 +21165,8 @@ class _$ClearNumberAtFinishImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -21219,8 +21181,8 @@ class _$ClearNumberAtFinishImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -21626,8 +21588,8 @@ class _$SetDNSForStageImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -21642,8 +21604,8 @@ class _$SetDNSForStageImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -21770,8 +21732,8 @@ class _$SetDNSForStageImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -21786,8 +21748,8 @@ class _$SetDNSForStageImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -21911,8 +21873,8 @@ class _$SetDNSForStageImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -21927,8 +21889,8 @@ class _$SetDNSForStageImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -22334,8 +22296,8 @@ class _$SetDNFForStageImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -22350,8 +22312,8 @@ class _$SetDNFForStageImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -22478,8 +22440,8 @@ class _$SetDNFForStageImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -22494,8 +22456,8 @@ class _$SetDNFForStageImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -22619,8 +22581,8 @@ class _$SetDNFForStageImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -22635,8 +22597,8 @@ class _$SetDNFForStageImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -23029,8 +22991,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -23045,8 +23007,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -23173,8 +23135,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -23189,8 +23151,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -23314,8 +23276,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -23330,8 +23292,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -23758,8 +23720,8 @@ class _$AddNumberToFinishImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -23774,8 +23736,8 @@ class _$AddNumberToFinishImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -23902,8 +23864,8 @@ class _$AddNumberToFinishImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -23918,8 +23880,8 @@ class _$AddNumberToFinishImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -24043,8 +24005,8 @@ class _$AddNumberToFinishImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -24059,8 +24021,8 @@ class _$AddNumberToFinishImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -24472,8 +24434,8 @@ class _$GetNumbersOnTraceNowImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -24488,8 +24450,8 @@ class _$GetNumbersOnTraceNowImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -24616,8 +24578,8 @@ class _$GetNumbersOnTraceNowImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -24632,8 +24594,8 @@ class _$GetNumbersOnTraceNowImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -24757,8 +24719,8 @@ class _$GetNumbersOnTraceNowImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -24773,8 +24735,8 @@ class _$GetNumbersOnTraceNowImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -25190,8 +25152,8 @@ class _$ShiftStartsTimeImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -25206,8 +25168,8 @@ class _$ShiftStartsTimeImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -25334,8 +25296,8 @@ class _$ShiftStartsTimeImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -25350,8 +25312,8 @@ class _$ShiftStartsTimeImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -25475,8 +25437,8 @@ class _$ShiftStartsTimeImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -25491,8 +25453,8 @@ class _$ShiftStartsTimeImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -25891,8 +25853,8 @@ class _$SelectAwaitingNumberImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -25907,8 +25869,8 @@ class _$SelectAwaitingNumberImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -26035,8 +25997,8 @@ class _$SelectAwaitingNumberImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -26051,8 +26013,8 @@ class _$SelectAwaitingNumberImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -26176,8 +26138,8 @@ class _$SelectAwaitingNumberImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -26192,8 +26154,8 @@ class _$SelectAwaitingNumberImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -26561,8 +26523,8 @@ class _$DeselectAwaitingNumberImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -26577,8 +26539,8 @@ class _$DeselectAwaitingNumberImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -26705,8 +26667,8 @@ class _$DeselectAwaitingNumberImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -26721,8 +26683,8 @@ class _$DeselectAwaitingNumberImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -26846,8 +26808,8 @@ class _$DeselectAwaitingNumberImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -26862,8 +26824,8 @@ class _$DeselectAwaitingNumberImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -27249,8 +27211,8 @@ class _$CreateRaceFromRaceCsvImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -27265,8 +27227,8 @@ class _$CreateRaceFromRaceCsvImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -27393,8 +27355,8 @@ class _$CreateRaceFromRaceCsvImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -27409,8 +27371,8 @@ class _$CreateRaceFromRaceCsvImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -27534,8 +27496,8 @@ class _$CreateRaceFromRaceCsvImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -27550,8 +27512,8 @@ class _$CreateRaceFromRaceCsvImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -27958,8 +27920,8 @@ class _$CreateStagesFromStagesCsvvImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -27974,8 +27936,8 @@ class _$CreateStagesFromStagesCsvvImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -28102,8 +28064,8 @@ class _$CreateStagesFromStagesCsvvImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -28118,8 +28080,8 @@ class _$CreateStagesFromStagesCsvvImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -28243,8 +28205,8 @@ class _$CreateStagesFromStagesCsvvImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -28259,8 +28221,8 @@ class _$CreateStagesFromStagesCsvvImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -28624,8 +28586,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -28640,8 +28602,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -28768,8 +28730,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -28784,8 +28746,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -28909,8 +28871,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -28925,8 +28887,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -29279,8 +29241,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -29295,8 +29257,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -29423,8 +29385,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -29439,8 +29401,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -29564,8 +29526,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -29580,8 +29542,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -29936,8 +29898,8 @@ class _$ShareDatabaseImpl
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -29952,8 +29914,8 @@ class _$ShareDatabaseImpl
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -30080,8 +30042,8 @@ class _$ShareDatabaseImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -30096,8 +30058,8 @@ class _$ShareDatabaseImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -30221,8 +30183,8 @@ class _$ShareDatabaseImpl
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -30237,8 +30199,8 @@ class _$ShareDatabaseImpl
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,
@@ -30621,8 +30583,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             bool forceUpdate,
             int? deltaInSeconds)
         updateAutomaticCorrection,
-    required TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
         updateManualStartTime,
     required TResult Function(int startId, ParticipantStatus status)
         setStatusForStartId,
@@ -30637,8 +30599,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             DateTime? dateTimeNow,
             int? number)
         addFinishTime,
-    required TResult Function(int stageId, String finishTime,
-            DateTime timestamp, int ntpOffset, int? number)
+    required TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)
         addFinishTimeManual,
     required TResult Function(int stageId) clearStartResultsDebug,
     required TResult Function(int stageId) clearFinishResultsDebug,
@@ -30765,8 +30727,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult? Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult? Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -30781,8 +30743,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult? Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult? Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult? Function(int stageId)? clearStartResultsDebug,
     TResult? Function(int stageId)? clearFinishResultsDebug,
@@ -30906,8 +30868,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             bool forceUpdate,
             int? deltaInSeconds)?
         updateAutomaticCorrection,
-    TResult Function(int stageId, DateTime time, DateTime timestamp,
-            int ntpOffset, int deltaInSeconds)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
         updateManualStartTime,
     TResult Function(int startId, ParticipantStatus status)?
         setStatusForStartId,
@@ -30922,8 +30884,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             DateTime? dateTimeNow,
             int? number)?
         addFinishTime,
-    TResult Function(int stageId, String finishTime, DateTime timestamp,
-            int ntpOffset, int? number)?
+    TResult Function(
+            int stageId, DateTime timestamp, int ntpOffset, int? number)?
         addFinishTimeManual,
     TResult Function(int stageId)? clearStartResultsDebug,
     TResult Function(int stageId)? clearFinishResultsDebug,

@@ -140,7 +140,6 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.updateManualStartTime({
     required int stageId,
-    required DateTime time,
     required DateTime timestamp,
     required int ntpOffset,
     @Default(15) int deltaInSeconds,
@@ -169,7 +168,6 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.addFinishTimeManual({
     required int stageId,
-    required String finishTime,
     required DateTime timestamp,
     required int ntpOffset,
     int? number,

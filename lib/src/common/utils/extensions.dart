@@ -48,18 +48,25 @@ extension StringExtensions on String? {
   }
 }
 
-/// Formats Duration to HH:mm:ss String
 extension DurationExtensions on Duration {
   String _format() {
     return toString().split('.').first.padLeft(8, '0');
   }
 
+  /// Formats [Duration] to HH:mm:ss String
   String format() {
     if (isNegative) {
       return '-${(-this)._format()}';
     } else {
       return _format();
     }
+  }
+}
+
+extension DateTimeExt on DateTime {
+  /// Format [DateTime] to string [pattern]
+  String format(String pattern) {
+    return DateFormat(pattern).format(this);
   }
 }
 

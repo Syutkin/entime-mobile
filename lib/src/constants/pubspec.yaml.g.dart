@@ -125,12 +125,12 @@ sealed class Pubspec {
   static final DateTime timestamp = DateTime.utc(
     2025,
     1,
-    11,
-    0,
-    14,
-    6,
-    561,
-    114,
+    13,
+    13,
+    58,
+    16,
+    428,
+    744,
   );
 
   /// Name
@@ -409,7 +409,7 @@ sealed class Pubspec {
   static const Map<String, Object> dependencies = <String, Object>{
     'any_date': r'^1.1.1',
     'audioplayers': r'^6.1.0',
-    'bloc_concurrency': r'^0.2.5',
+    'bloc_concurrency': r'^0.3.0',
     'bot_toast': r'^4.1.3',
     'connectivity_plus': r'^6.1.1',
     'crypto': r'^3.0.6',
@@ -422,7 +422,7 @@ sealed class Pubspec {
     'flutter': <String, Object>{
       'sdk': r'flutter',
     },
-    'flutter_bloc': r'^8.1.6',
+    'flutter_bloc': r'^9.0.0',
     'flutter_bluetooth_serial': r'^0.4.0',
     'flutter_localizations': <String, Object>{
       'sdk': r'flutter',
@@ -448,7 +448,7 @@ sealed class Pubspec {
     'settings_ui': r'^2.0.2',
     'share_plus': r'^10.1.3',
     'shared_preferences': r'^2.3.5',
-    'sqlite3': r'^2.5.0',
+    'sqlite3': r'^2.6.0',
     'sqlite3_flutter_libs': r'^0.5.28',
     'url_launcher': r'^6.3.1',
     'wakelock_plus': r'^1.2.10',
@@ -457,7 +457,7 @@ sealed class Pubspec {
 
   /// Developer dependencies
   static const Map<String, Object> devDependencies = <String, Object>{
-    'bloc_test': r'^9.1.7',
+    'bloc_test': r'^10.0.0',
     'build_runner': r'^2.4.14',
     'dart_style': r'^2.3.7',
     'drift_dev': r'^2.23.1',
