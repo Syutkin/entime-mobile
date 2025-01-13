@@ -91,7 +91,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^2.5.7
+  freezed: ^3.0.0-0.0.dev
   integration_test:
     sdk: flutter
   json_serializable: ^6.9.0
