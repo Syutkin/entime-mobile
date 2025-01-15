@@ -42,13 +42,13 @@ void main() {
     );
   }
 
-  group('FinishListPage', () {
-    setUp(() {
-      databaseBloc = MockDatabaseBloc();
-      settingsBloc = MockSettingsBloc();
-      settings = const AppSettings.defaults();
-    });
+  setUp(() {
+    databaseBloc = MockDatabaseBloc();
+    settingsBloc = MockSettingsBloc();
+    settings = const AppSettings.defaults();
+  });
 
+  group('FinishListPage tests', () {
     group('Finish list', () {
       patrolWidgetTest('Empty list', (PatrolTester $) async {
         settings = settings.copyWith(showHidden: true);
