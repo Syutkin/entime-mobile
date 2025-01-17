@@ -14,14 +14,14 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 part 'helpers/database_state.dart';
 
-class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
-    implements SettingsBloc {}
+class MockSettingsCubit extends MockCubit<AppSettings>
+    implements SettingsCubit {}
 
 class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
     implements DatabaseBloc {}
 
 void main() {
-  late SettingsBloc settingsBloc;
+  late SettingsCubit settingsCubit;
   late DatabaseBloc databaseBloc;
   late AppSettings settings;
 
@@ -34,7 +34,7 @@ void main() {
         child: BlocProvider.value(
           value: databaseBloc,
           child: BlocProvider.value(
-            value: settingsBloc,
+            value: settingsCubit,
             child: const FinishListPage(),
           ),
         ),
@@ -44,7 +44,7 @@ void main() {
 
   setUp(() {
     databaseBloc = MockDatabaseBloc();
-    settingsBloc = MockSettingsBloc();
+    settingsCubit = MockSettingsCubit();
     settings = const AppSettings.defaults();
   });
 
@@ -65,8 +65,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -91,8 +91,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -116,8 +116,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -142,8 +142,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -168,8 +168,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -200,8 +200,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -232,8 +232,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -264,8 +264,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -296,8 +296,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -320,8 +320,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -343,8 +343,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -366,8 +366,8 @@ void main() {
           ),
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 

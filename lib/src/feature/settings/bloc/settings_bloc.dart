@@ -1,31 +1,21 @@
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../settings.dart';
 
-part 'settings_bloc.freezed.dart';
-part 'settings_event.dart';
-part 'settings_state.dart';
-
-class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  SettingsBloc(this.settingsProvider)
-      : super(SettingsState(settings: settingsProvider.settings)) {
-    on<SettingsEvent>(transformer: sequential(), (event, emit) async {
-      await event.map(
-        initialize: (event) {
-          emit(SettingsState(settings: settingsProvider.settings));
-        },
-        setDefault: (event) async {
-          await settingsProvider.setDefaults();
-          emit(SettingsState(settings: settingsProvider.settings));
-        },
-        update: (event) async {
-          emit(SettingsState(settings: event.settings));
-          await settingsProvider.update(event.settings);
-        },
-      );
-    });
-  }
+class SettingsCubit extends Cubit<AppSettings> {
+  SettingsCubit(this.settingsProvider) : super(settingsProvider.settings);
   SettingsProvider settingsProvider;
+  void initialize() {
+    emit(settingsProvider.settings);
+  }
+
+  void setDefault() {
+    settingsProvider.setDefaults();
+    emit(settingsProvider.settings);
+  }
+
+  void update(AppSettings settings) {
+    emit(settings);
+    settingsProvider.update(settings);
+  }
 }

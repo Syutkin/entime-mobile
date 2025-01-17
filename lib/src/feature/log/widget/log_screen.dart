@@ -68,24 +68,24 @@ class LogScreen extends StatelessWidget {
   }
 
   List<Widget> _getDebugButtons(BuildContext context) => <Widget>[
-    Row(
-      children: <Widget>[
-        TextButton(
-          onPressed: () async {
-            final settingsBloc = context.read<SettingsBloc>();
-            final stageId = settingsBloc.state.settings.stageId;
-            BlocProvider.of<BluetoothBloc>(context).add(
-              BluetoothEvent.messageReceived(
-                message: 'F12:12:12,121#',
-                stageId: stageId,
-              ),
-            );
-          },
-          child: const Icon(Icons.build),
+        Row(
+          children: <Widget>[
+            TextButton(
+              onPressed: () async {
+                final settingsCubit = context.read<SettingsCubit>();
+                final stageId = settingsCubit.state.stageId;
+                BlocProvider.of<BluetoothBloc>(context).add(
+                  BluetoothEvent.messageReceived(
+                    message: 'F12:12:12,121#',
+                    stageId: stageId,
+                  ),
+                );
+              },
+              child: const Icon(Icons.build),
+            ),
+          ],
         ),
-      ],
-    ),
-  ];
+      ];
 }
 
 class _LogSourceIcon extends StatelessWidget {

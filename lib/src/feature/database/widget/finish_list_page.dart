@@ -18,7 +18,7 @@ import '../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../ntp/bloc/ntp_bloc.dart';
-import '../../settings/bloc/settings_bloc.dart';
+import '../../settings/settings.dart';
 import '../database.dart';
 import '../logic/filter_finish_list.dart';
 import 'popup/change_finish_time_to_number_popup.dart';
@@ -141,9 +141,9 @@ class _FinishListPage extends State<FinishListPage> {
               // скролл на последнюю запись если показываем скрытые отсечки
               // сейчас перематывает при любом обновлении, например каждую минуту
               // при обновлении участников на трассе
-              if (BlocProvider.of<SettingsBloc>(
+              if (BlocProvider.of<SettingsCubit>(
                 context,
-              ).state.settings.showHidden) {
+              ).state.showHidden) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   scrollToEnd(_scrollController);
                 });
@@ -154,12 +154,12 @@ class _FinishListPage extends State<FinishListPage> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
+          floatingActionButton: BlocBuilder<SettingsCubit, AppSettings>(
             builder: (context, settingsState) {
-              if (settingsState.settings.finishFab) {
+              if (settingsState.finishFab) {
                 return SizedBox(
-                  height: settingsState.settings.finishFabSize,
-                  width: settingsState.settings.finishFabSize,
+                  height: settingsState.finishFabSize,
+                  width: settingsState.finishFabSize,
                   child: FittedBox(
                     child: FloatingActionButton(
                       onPressed: _addFinishTimeManual,
@@ -187,17 +187,17 @@ class _FinishListPage extends State<FinishListPage> {
               child: _SliverFinishSubHeader(),
             ),
           ),
-          BlocBuilder<SettingsBloc, SettingsState>(
+          BlocBuilder<SettingsCubit, AppSettings>(
             buildWhen: (previous, current) =>
-                previous.settings.showHidden != current.settings.showHidden ||
-                previous.settings.showManual != current.settings.showManual ||
-                previous.settings.showNumbers != current.settings.showNumbers,
+                previous.showHidden != current.showHidden ||
+                previous.showManual != current.showManual ||
+                previous.showNumbers != current.showNumbers,
             builder: (context, state) {
               final filteredList = filterFinishList(
                 finishProtocol,
-                showHidden: state.settings.showHidden,
-                showManual: state.settings.showManual,
-                showNumbers: state.settings.showNumbers,
+                showHidden: state.showHidden,
+                showManual: state.showManual,
+                showNumbers: state.showNumbers,
               );
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
@@ -537,9 +537,9 @@ class _SliverFinishSubHeader extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
-          child: BlocBuilder<SettingsBloc, SettingsState>(
+          child: BlocBuilder<SettingsCubit, AppSettings>(
             builder: (context, state) {
-              final showDifference = state.settings.showFinishDifference;
+              final showDifference = state.showFinishDifference;
               return Row(
                 children: <Widget>[
                   Flexible(

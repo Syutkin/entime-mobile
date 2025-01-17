@@ -18,8 +18,8 @@ import 'package:patrol_finders/patrol_finders.dart';
 class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
     implements DatabaseBloc {}
 
-class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
-    implements SettingsBloc {}
+class MockSettingsCubit extends MockCubit<AppSettings>
+    implements SettingsCubit {}
 
 class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState>
     implements CountdownBloc {}
@@ -28,7 +28,7 @@ class MockNtpBloc extends MockBloc<NtpEvent, NtpState> implements NtpBloc {}
 
 void main() {
   late DatabaseBloc databaseBloc;
-  late SettingsBloc settingsBloc;
+  late SettingsCubit settingsCubit;
   late CountdownBloc countdownBloc;
   late NtpBloc ntpBloc;
   late AppSettings settings;
@@ -39,7 +39,7 @@ void main() {
 
   setUp(() {
     databaseBloc = MockDatabaseBloc();
-    settingsBloc = MockSettingsBloc();
+    settingsCubit = MockSettingsCubit();
     countdownBloc = MockCountdownBloc();
     ntpBloc = MockNtpBloc();
     settings = const AppSettings.defaults();
@@ -54,7 +54,7 @@ void main() {
         child: BlocProvider.value(
           value: databaseBloc,
           child: BlocProvider.value(
-            value: settingsBloc,
+            value: settingsCubit,
             child: BlocProvider.value(
               value: countdownBloc,
               child: BlocProvider.value(
@@ -86,8 +86,8 @@ void main() {
             ),
           );
           when(
-            () => settingsBloc.state,
-          ).thenReturn(SettingsState(settings: settings));
+            () => settingsCubit.state,
+          ).thenReturn(settings);
         });
         patrolWidgetTest(
           'Show initial widgets',
@@ -145,8 +145,8 @@ void main() {
             ).thenReturn(const CountdownState.initial());
             settings = settings.copyWith(countdown: true);
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             await $.pumpWidgetAndSettle(testWidget());
             expect($(Positioned), findsOneWidget);
           },
@@ -157,8 +157,8 @@ void main() {
             settings = settings.copyWith(countdown: true);
             const text = 'countdown text';
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -177,8 +177,8 @@ void main() {
             settings = settings.copyWith(countdown: true);
             const text = 'countdown text';
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -208,8 +208,8 @@ void main() {
             settings = settings.copyWith(countdown: true, countdownSize: 150);
             const text = 'countdown text';
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -239,8 +239,8 @@ void main() {
             settings = settings.copyWith(countdown: true);
             const text = 'countdown text';
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -252,21 +252,15 @@ void main() {
             await $.tester.drag($(Draggable), const Offset(50, 50));
             await $.pumpAndSettle();
             verify(
-              () => settingsBloc.add(
-                SettingsEvent.update(
-                  settings:
-                      settings.copyWith(countdownLeft: 50, countdownTop: 50),
-                ),
+              () => settingsCubit.update(
+                settings.copyWith(countdownLeft: 50, countdownTop: 50),
               ),
             ).called(1);
             await $.tester.drag($(Draggable), const Offset(100, 100));
             await $.pumpAndSettle();
             verify(
-              () => settingsBloc.add(
-                SettingsEvent.update(
-                  settings:
-                      settings.copyWith(countdownLeft: 100, countdownTop: 100),
-                ),
+              () => settingsCubit.update(
+                settings.copyWith(countdownLeft: 100, countdownTop: 100),
               ),
             ).called(1);
           },
@@ -300,8 +294,8 @@ void main() {
           (PatrolTester $) async {
             settings = settings.copyWith(startFab: false);
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             await $.pumpWidgetAndSettle(testWidget());
             expect(
               $(FloatingActionButton),
@@ -313,8 +307,8 @@ void main() {
           'Default 75 size',
           (PatrolTester $) async {
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             await $.pumpWidgetAndSettle(testWidget());
             expect(
               ($(SizedBox).containing($(FittedBox)).evaluate().single.widget
@@ -336,8 +330,8 @@ void main() {
           (PatrolTester $) async {
             settings = settings.copyWith(startFabSize: 150);
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -364,8 +358,8 @@ void main() {
           (PatrolTester $) async {
             const offset = 1111;
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => ntpBloc.state,
             ).thenReturn(const NtpState.initial(offset));
@@ -403,8 +397,8 @@ void main() {
             );
             const offset = 1111;
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => ntpBloc.state,
             ).thenReturn(const NtpState.initial(offset));
@@ -435,8 +429,8 @@ void main() {
           'Show default participants',
           (PatrolTester $) async {
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -451,8 +445,8 @@ void main() {
           'Tap then edit start time',
           (PatrolTester $) async {
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -472,8 +466,8 @@ void main() {
           'Long press then popup appears',
           (PatrolTester $) async {
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -498,8 +492,8 @@ void main() {
           'Call edit racer popup',
           (PatrolTester $) async {
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -516,8 +510,8 @@ void main() {
           'Call shift popup',
           (PatrolTester $) async {
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(
@@ -536,8 +530,8 @@ void main() {
           skip: true,
           (PatrolTester $) async {
             when(
-              () => settingsBloc.state,
-            ).thenReturn(SettingsState(settings: settings));
+              () => settingsCubit.state,
+            ).thenReturn(settings);
             when(
               () => countdownBloc.state,
             ).thenReturn(

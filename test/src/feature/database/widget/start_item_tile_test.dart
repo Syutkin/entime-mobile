@@ -15,8 +15,8 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 class MockQueryRow extends Mock implements QueryRow {}
 
-class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
-    implements SettingsBloc {}
+class MockSettingsCubit extends MockCubit<AppSettings>
+    implements SettingsCubit {}
 
 void main() {
   late MockQueryRow row;
@@ -28,7 +28,7 @@ void main() {
   late String manualStartTime;
   late int manualCorrection;
   late String countdown;
-  late SettingsBloc settingsBloc;
+  late SettingsCubit settingsCubit;
   late AppSettings settings;
 
   Widget testWithLocale(Widget widget) {
@@ -37,7 +37,7 @@ void main() {
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
       home: Material(
-        child: BlocProvider.value(value: settingsBloc, child: widget),
+        child: BlocProvider.value(value: settingsCubit, child: widget),
       ),
     );
   }
@@ -53,14 +53,14 @@ void main() {
       manualStartTime = '10:00:04,456';
       manualCorrection = -4567;
       countdown = '03:56:27';
-      settingsBloc = MockSettingsBloc();
+      settingsCubit = MockSettingsCubit();
       settings = const AppSettings.defaults();
     });
 
     patrolWidgetTest('Show all basic info', (PatrolTester $) async {
       when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settings));
+        () => settingsCubit.state,
+      ).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -90,8 +90,8 @@ void main() {
       PatrolTester $,
     ) async {
       when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settings));
+        () => settingsCubit.state,
+      ).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -124,8 +124,8 @@ void main() {
       'If participant is dns, show status name instead of manualCorrection',
       (PatrolTester $) async {
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
         final item = ParticipantAtStart(
           row: row,
           riderId: 1,
@@ -157,8 +157,8 @@ void main() {
       'If participant is dnf, show status name instead of manualCorrection',
       (PatrolTester $) async {
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
         final item = ParticipantAtStart(
           row: row,
           riderId: 1,
@@ -190,8 +190,8 @@ void main() {
       'If participant is dsq, show status name instead of manualCorrection',
       (PatrolTester $) async {
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
         final item = ParticipantAtStart(
           row: row,
           riderId: 1,
@@ -221,8 +221,8 @@ void main() {
 
     patrolWidgetTest('Change color if highlighted', (PatrolTester $) async {
       when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settings));
+        () => settingsCubit.state,
+      ).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -258,8 +258,8 @@ void main() {
     ) async {
       settings = settings.copyWith(showColorStartDifference: true);
       when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settings));
+        () => settingsCubit.state,
+      ).thenReturn(settings);
       final now = DateTime.now();
 
       automaticStartTime = DateFormat(longTimeFormat).format(
@@ -300,8 +300,8 @@ void main() {
     ) async {
       settings = settings.copyWith(showColorStartDifference: true);
       when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settings));
+        () => settingsCubit.state,
+      ).thenReturn(settings);
       final now = DateTime.now();
 
       automaticStartTime = DateFormat(longTimeFormat).format(

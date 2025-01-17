@@ -130,11 +130,11 @@ class EntimeApp extends StatelessWidget {
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider<TabCubit>(create: (context) => TabCubit()),
-          BlocProvider<SettingsBloc>(
-            create: (context) => SettingsBloc(settingsProvider),
+          BlocProvider<SettingsCubit>(
+            create: (context) => SettingsCubit(settingsProvider),
           ),
-          BlocProvider<ModuleSettingsBloc>(
-            create: (context) => ModuleSettingsBloc(),
+          BlocProvider<ModuleSettingsCubit>(
+            create: (context) => ModuleSettingsCubit(),
           ),
           BlocProvider<LogBloc>(
             create: (context) =>
@@ -185,7 +185,7 @@ class EntimeAppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = context.read<SettingsBloc>().state.settings;
+    final settings = context.read<SettingsCubit>().state;
     if (settings.updateNtpOffsetAtStartup) {
       context.read<NtpBloc>().add(const NtpEvent.getNtpOffset());
     }
@@ -193,24 +193,24 @@ class EntimeAppView extends StatelessWidget {
       context.read<UpdateBloc>().add(const UpdateEvent.checkUpdate());
     }
 
-    return BlocBuilder<SettingsBloc, SettingsState>(
+    return BlocBuilder<SettingsCubit, AppSettings>(
       buildWhen: (previousState, state) =>
-          previousState.settings.seedColor != state.settings.seedColor ||
-          previousState.settings.brightness != state.settings.brightness ||
-          previousState.settings.contrastLevel !=
-              state.settings.contrastLevel ||
-          previousState.settings.dynamicSchemeVariant !=
-              state.settings.dynamicSchemeVariant ||
-          previousState.settings.language != state.settings.language ||
-          previousState.settings.isOLEDBackground !=
-              state.settings.isOLEDBackground,
+          previousState.seedColor != state.seedColor ||
+          previousState.brightness != state.brightness ||
+          previousState.contrastLevel !=
+              state.contrastLevel ||
+          previousState.dynamicSchemeVariant !=
+              state.dynamicSchemeVariant ||
+          previousState.language != state.language ||
+          previousState.isOLEDBackground !=
+              state.isOLEDBackground,
       builder: (context, state) => MaterialApp(
         theme: appThemeData(
-          seedColor: state.settings.seedColor,
-          brightness: state.settings.brightness,
-          contrastLevel: state.settings.contrastLevel,
-          dynamicSchemeVariant: state.settings.dynamicSchemeVariant,
-          isOLEDBackground: state.settings.isOLEDBackground,
+          seedColor: state.seedColor,
+          brightness: state.brightness,
+          contrastLevel: state.contrastLevel,
+          dynamicSchemeVariant: state.dynamicSchemeVariant,
+          isOLEDBackground: state.isOLEDBackground,
         ),
         title: Pubspec.name,
         localizationsDelegates: const [

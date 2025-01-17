@@ -12,15 +12,15 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
-    implements SettingsBloc {}
+class MockSettingsCubit extends MockCubit<AppSettings>
+    implements SettingsCubit {}
 
 void main() {
   late String finishTime;
   late DateTime timestamp;
   late String difference;
   late int number;
-  late SettingsBloc settingsBloc;
+  late SettingsCubit settingsCubit;
   late AppSettings settings;
 
   Widget testWidget(Finish item) {
@@ -30,7 +30,7 @@ void main() {
       supportedLocales: Localization.supportedLocales,
       home: Material(
         child: BlocProvider.value(
-          value: settingsBloc,
+          value: settingsCubit,
           child: FinishItemTile(item: item),
         ),
       ),
@@ -43,14 +43,14 @@ void main() {
       finishTime = '10:00:03,123';
       timestamp = '10:00:03.456'.toDateTime()!;
       difference = '-333';
-      settingsBloc = MockSettingsBloc();
+      settingsCubit = MockSettingsCubit();
       settings = const AppSettings.defaults();
     });
 
     patrolWidgetTest('Show all basic info', (PatrolTester $) async {
       when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settings));
+        () => settingsCubit.state,
+      ).thenReturn(settings);
 
       final item = Finish(
         id: 1,
@@ -76,8 +76,8 @@ void main() {
       PatrolTester $,
     ) async {
       when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settings));
+        () => settingsCubit.state,
+      ).thenReturn(settings);
 
       final item = Finish(
         id: 1,
@@ -103,8 +103,8 @@ void main() {
     ) async {
       settings = settings.copyWith(showFinishDifference: true);
       when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settings));
+        () => settingsCubit.state,
+      ).thenReturn(settings);
 
       final item = Finish(
         id: 1,
@@ -131,8 +131,8 @@ void main() {
           finishDifferenceThreshold: 1,
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         final item = Finish(
           id: 1,
@@ -169,8 +169,8 @@ void main() {
           finishDifferenceThreshold: 1,
         );
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settings));
+          () => settingsCubit.state,
+        ).thenReturn(settings);
 
         final item = Finish(
           id: 1,
@@ -207,8 +207,8 @@ void main() {
         finishDifferenceThreshold: 1,
       );
       when(
-        () => settingsBloc.state,
-      ).thenReturn(SettingsState(settings: settings));
+        () => settingsCubit.state,
+      ).thenReturn(settings);
 
       const offset = -300;
       final curDifference = int.parse(difference) - offset;

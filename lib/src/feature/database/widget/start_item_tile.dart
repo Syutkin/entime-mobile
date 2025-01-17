@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/utils/extensions.dart';
-import '../../settings/bloc/settings_bloc.dart';
+import '../../settings/settings.dart';
 import '../database.dart';
 
 class StartItemTile extends StatelessWidget {
@@ -27,44 +27,39 @@ class StartItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsBloc, SettingsState>(
+    return BlocBuilder<SettingsCubit, AppSettings>(
       builder: (context, state) {
         var difference = Duration.zero;
 
-        var cardColor =
-            isHighlighted
-                ? Theme.of(context).colorScheme.primaryContainer
-                : null;
+        var cardColor = isHighlighted
+            ? Theme.of(context).colorScheme.primaryContainer
+            : null;
 
-        var textColor =
-            isHighlighted
-                ? Theme.of(context).colorScheme.onPrimaryContainer
-                : null;
+        var textColor = isHighlighted
+            ? Theme.of(context).colorScheme.onPrimaryContainer
+            : null;
 
         if (item.timestamp != null) {
-          difference =
-              item.automaticStartTime.toDateTime()?.difference(
-                // При подсчёте разницы учитываем записанный NTP офсет
-                item.timestamp!.add(
-                  Duration(milliseconds: item.ntpOffset ?? 0),
-                ),
-              ) ??
+          difference = item.automaticStartTime.toDateTime()?.difference(
+                    // При подсчёте разницы учитываем записанный NTP офсет
+                    item.timestamp!.add(
+                      Duration(milliseconds: item.ntpOffset ?? 0),
+                    ),
+                  ) ??
               Duration.zero;
           // ToDo: показывать разницу в числах?
           // final showDifference = state.settings.showStartDifference;
 
-          final isBigDifference =
-              difference.inMilliseconds.abs() >
-              state.settings.startDifferenceThreshold;
+          final isBigDifference = difference.inMilliseconds.abs() >
+              state.startDifferenceThreshold;
 
-          if (isBigDifference && state.settings.showColorStartDifference) {
+          if (isBigDifference && state.showColorStartDifference) {
             cardColor = Theme.of(context).colorScheme.error;
             textColor = Theme.of(context).colorScheme.onError;
           }
         }
 
-        final isNotActive =
-            item.statusId != ParticipantStatus.active.index ||
+        final isNotActive = item.statusId != ParticipantStatus.active.index ||
             item.participantStatusId != ParticipantStatus.active.index;
 
         var status = '';
@@ -92,9 +87,9 @@ class StartItemTile extends StatelessWidget {
               child: Text(
                 Localization.current.I18nStart_didNotStart,
                 style: DefaultTextStyle.of(context).style.apply(
-                  fontSizeFactor: 1.5,
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                ),
+                      fontSizeFactor: 1.5,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
               ),
             ),
             direction: DismissDirection.endToStart,
@@ -114,10 +109,10 @@ class StartItemTile extends StatelessWidget {
                         child: Text(
                           item.number.toString(),
                           style: DefaultTextStyle.of(context).style.apply(
-                            fontSizeFactor: 2,
-                            fontWeightDelta: 2,
-                            color: textColor,
-                          ),
+                                fontSizeFactor: 2,
+                                fontWeightDelta: 2,
+                                color: textColor,
+                              ),
                         ),
                       ),
                     ),

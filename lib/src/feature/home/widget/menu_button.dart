@@ -5,11 +5,12 @@ import 'package:entime/src/feature/database/bloc/database_bloc.dart';
 import 'package:entime/src/feature/database/widget/races_list_page.dart';
 import 'package:entime/src/feature/database/widget/start_list_page.dart';
 import 'package:entime/src/feature/home/model/home_menu_button.dart';
-import 'package:entime/src/feature/settings/bloc/settings_bloc.dart';
 import 'package:entime/src/feature/tab/tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../../settings/settings.dart';
 
 class MenuButton extends StatelessWidget {
   const MenuButton({required this.activeTab, super.key});
@@ -18,12 +19,12 @@ class MenuButton extends StatelessWidget {
   @override
   Widget build(
     BuildContext context,
-  ) => BlocBuilder<SettingsBloc, SettingsState>(
-    builder:
-        (context, state) => BlocBuilder<DatabaseBloc, DatabaseState>(
+  ) =>
+      BlocBuilder<SettingsCubit, AppSettings>(
+        builder: (context, state) => BlocBuilder<DatabaseBloc, DatabaseState>(
           builder: (context, protocolState) {
-            final settingsBloc = context.read<SettingsBloc>();
-            final settings = settingsBloc.state.settings;
+            final settingsCubit = context.read<SettingsCubit>();
+            final settings = settingsCubit.state;
             final databaseBloc = context.read<DatabaseBloc>();
             final menuItems = <PopupMenuEntry<HomeMenuButton>>[];
             if (activeTab == AppTab.start || activeTab == AppTab.finish) {
@@ -66,10 +67,9 @@ class MenuButton extends StatelessWidget {
                     PopupMenuItem(
                       value: HomeMenuButton.showFinishDifference,
                       child: ListTile(
-                        leading:
-                            settings.showFinishDifference
-                                ? Icon(MdiIcons.timer)
-                                : const SizedBox.shrink(),
+                        leading: settings.showFinishDifference
+                            ? Icon(MdiIcons.timer)
+                            : const SizedBox.shrink(),
                         title: Text(
                           Localization.current.I18nHome_showFinishDifference,
                         ),
@@ -80,14 +80,12 @@ class MenuButton extends StatelessWidget {
                     PopupMenuItem(
                       value: HomeMenuButton.showColorFinishDifference,
                       child: ListTile(
-                        leading:
-                            settings.showColorFinishDifference
-                                ? Icon(MdiIcons.palette)
-                                : const SizedBox.shrink(),
+                        leading: settings.showColorFinishDifference
+                            ? Icon(MdiIcons.palette)
+                            : const SizedBox.shrink(),
                         title: Text(
                           Localization
-                              .current
-                              .I18nHome_showColorFinishDifference,
+                              .current.I18nHome_showColorFinishDifference,
                         ),
                       ),
                     ),
@@ -137,19 +135,15 @@ class MenuButton extends StatelessWidget {
                     }
                   case HomeMenuButton.fab:
                     if (activeTab == AppTab.start) {
-                      settingsBloc.add(
-                        SettingsEvent.update(
-                          settings: settings.copyWith(
-                            startFab: !settings.startFab,
-                          ),
+                      settingsCubit.update(
+                        settings.copyWith(
+                          startFab: !settings.startFab,
                         ),
                       );
                     } else if (activeTab == AppTab.finish) {
-                      settingsBloc.add(
-                        SettingsEvent.update(
-                          settings: settings.copyWith(
-                            finishFab: !settings.finishFab,
-                          ),
+                      settingsCubit.update(
+                        settings.copyWith(
+                          finishFab: !settings.finishFab,
                         ),
                       );
                     }
@@ -167,11 +161,9 @@ class MenuButton extends StatelessWidget {
                   case HomeMenuButton.bluetooth:
                     await selectBluetoothDevice(context);
                   case HomeMenuButton.countdown:
-                    settingsBloc.add(
-                      SettingsEvent.update(
-                        settings: settings.copyWith(
-                          countdown: !settings.countdown,
-                        ),
+                    settingsCubit.update(
+                      settings.copyWith(
+                        countdown: !settings.countdown,
                       ),
                     );
                   case HomeMenuButton.countdownPage:
@@ -181,20 +173,16 @@ class MenuButton extends StatelessWidget {
                       ),
                     );
                   case HomeMenuButton.showFinishDifference:
-                    settingsBloc.add(
-                      SettingsEvent.update(
-                        settings: settings.copyWith(
-                          showFinishDifference: !settings.showFinishDifference,
-                        ),
+                    settingsCubit.update(
+                      settings.copyWith(
+                        showFinishDifference: !settings.showFinishDifference,
                       ),
                     );
                   case HomeMenuButton.showColorFinishDifference:
-                    settingsBloc.add(
-                      SettingsEvent.update(
-                        settings: settings.copyWith(
-                          showColorFinishDifference:
-                              !settings.showColorFinishDifference,
-                        ),
+                    settingsCubit.update(
+                      settings.copyWith(
+                        showColorFinishDifference:
+                            !settings.showColorFinishDifference,
                       ),
                     );
                 }
@@ -202,5 +190,5 @@ class MenuButton extends StatelessWidget {
             );
           },
         ),
-  );
+      );
 }

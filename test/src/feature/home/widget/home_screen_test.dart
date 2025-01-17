@@ -46,7 +46,7 @@ class MockNtpBloc extends MockBloc<NtpEvent, NtpState> implements NtpBloc {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late SettingsBloc settingsBloc;
+  late SettingsCubit settingsCubit;
   late DatabaseBloc databaseBloc;
   late BluetoothBloc bluetoothBloc;
   late CountdownBloc countdownBloc;
@@ -77,7 +77,7 @@ void main() {
     // settings = const AppSettings.defaults();
     SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
     settingsProvider = await SharedPrefsSettingsProvider.load();
-    settingsBloc = SettingsBloc(settingsProvider);
+    settingsCubit = SettingsCubit(settingsProvider);
     tabCubit = TabCubit();
 
     db = AppDatabase.customConnection(
@@ -128,7 +128,7 @@ void main() {
       supportedLocales: Localization.supportedLocales,
       home: Material(
         child: BlocProvider.value(
-          value: settingsBloc,
+          value: settingsCubit,
           child: BlocProvider.value(
             value: tabCubit,
             child: BlocProvider.value(
@@ -215,33 +215,57 @@ void main() {
           'Press show DNS',
           (PatrolTester $) async {
             await $.pumpWidgetAndSettle(testWidget());
-            expect(settingsBloc.state.settings.showDNS, false);
+            expect(settingsCubit.state.showDNS, false);
             await $(#StartTab).tap();
             await $(FilterButton).tap();
             await $(#showDNS).tap();
-            expect(settingsBloc.state.settings.showDNS, true);
+            expect(settingsCubit.state.showDNS, true);
           },
         );
         patrolWidgetTest(
           'Press show DNF',
           (PatrolTester $) async {
             await $.pumpWidgetAndSettle(testWidget());
-            expect(settingsBloc.state.settings.showDNF, false);
+            expect(settingsCubit.state.showDNF, false);
             await $(#StartTab).tap();
             await $(FilterButton).tap();
             await $(#showDNF).tap();
-            expect(settingsBloc.state.settings.showDNF, true);
+            expect(settingsCubit.state.showDNF, true);
           },
         );
         patrolWidgetTest(
           'Press show DSQ',
           (PatrolTester $) async {
             await $.pumpWidgetAndSettle(testWidget());
-            expect(settingsBloc.state.settings.showDSQ, false);
+            expect(settingsCubit.state.showDSQ, false);
             await $(#StartTab).tap();
             await $(FilterButton).tap();
             await $(#showDSQ).tap();
-            expect(settingsBloc.state.settings.showDSQ, true);
+            expect(settingsCubit.state.showDSQ, true);
+          },
+        );
+        patrolWidgetTest(
+          'Press start defaults',
+          (PatrolTester $) async {
+            await $.pumpWidgetAndSettle(testWidget());
+            expect(settingsCubit.state.showDNS, false);
+            expect(settingsCubit.state.showDNF, false);
+            expect(settingsCubit.state.showDSQ, false);
+            await $(#StartTab).tap();
+            await $(FilterButton).tap();
+            await $(#showDNS).tap();
+            await $(FilterButton).tap();
+            await $(#showDNF).tap();
+            await $(FilterButton).tap();
+            await $(#showDSQ).tap();
+            expect(settingsCubit.state.showDNS, true);
+            expect(settingsCubit.state.showDNF, true);
+            expect(settingsCubit.state.showDSQ, true);
+            await $(FilterButton).tap();
+            await $(#setStartDefaults).tap();
+            expect(settingsCubit.state.showDNS, false);
+            expect(settingsCubit.state.showDNF, false);
+            expect(settingsCubit.state.showDSQ, false);
           },
         );
       });

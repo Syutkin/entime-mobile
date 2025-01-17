@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../common/localization/localization.dart';
 import '../../../common/utils/extensions.dart';
-import '../../settings/bloc/settings_bloc.dart';
+import '../../settings/settings.dart';
 import '../database.dart';
 
 class FinishItemTile extends StatelessWidget {
@@ -39,9 +39,9 @@ class FinishItemTile extends StatelessWidget {
         child: Text(
           Localization.current.I18nProtocol_hide,
           style: DefaultTextStyle.of(context).style.apply(
-            fontSizeFactor: 1.5,
-            color: Theme.of(context).colorScheme.onPrimaryContainer,
-          ),
+                fontSizeFactor: 1.5,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
         ),
       ),
       onDismissed: (direction) {
@@ -71,24 +71,22 @@ class FinishItemTile extends StatelessWidget {
             onAccept?.call(details);
           },
           builder: (context, candidateData, rejectedData) {
-            return BlocBuilder<SettingsBloc, SettingsState>(
+            return BlocBuilder<SettingsCubit, AppSettings>(
               builder: (context, state) {
-                final difference =
-                    item.finishTime.toDateTime()?.difference(
-                      item.timestamp
-                      // При подсчёте разницы учитываем записанный NTP офсет
-                      .add(Duration(milliseconds: item.ntpOffset)),
-                    ) ??
+                final difference = item.finishTime.toDateTime()?.difference(
+                          item.timestamp
+                              // При подсчёте разницы учитываем записанный NTP офсет
+                              .add(Duration(milliseconds: item.ntpOffset)),
+                        ) ??
                     Duration.zero;
-                final showDifference = state.settings.showFinishDifference;
+                final showDifference = state.showFinishDifference;
                 Color? cardColor;
                 Color? textColor;
-                final isBigDifference =
-                    difference.inMilliseconds.abs() >
-                    state.settings.finishDifferenceThreshold;
+                final isBigDifference = difference.inMilliseconds.abs() >
+                    state.finishDifferenceThreshold;
 
                 if (isBigDifference &&
-                    state.settings.showColorFinishDifference) {
+                    state.showColorFinishDifference) {
                   cardColor = Theme.of(context).colorScheme.error;
                   textColor = Theme.of(context).colorScheme.onError;
                 }
@@ -125,9 +123,9 @@ class FinishItemTile extends StatelessWidget {
                             child: Text(
                               item.finishTime.strip(),
                               style: DefaultTextStyle.of(context).style.apply(
-                                fontSizeFactor: 1.5,
-                                color: textColor,
-                              ),
+                                    fontSizeFactor: 1.5,
+                                    color: textColor,
+                                  ),
                             ),
                           ),
                         ),
@@ -151,9 +149,9 @@ class FinishItemTile extends StatelessWidget {
                                   ? item.number.toString().strip()
                                   : candidateData.first.toString(),
                               style: DefaultTextStyle.of(context).style.apply(
-                                fontSizeFactor: 2,
-                                color: textColor,
-                              ),
+                                    fontSizeFactor: 2,
+                                    color: textColor,
+                                  ),
                             ),
                           ),
                         ),

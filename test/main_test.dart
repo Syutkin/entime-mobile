@@ -30,8 +30,8 @@ class MockAudioService extends Mock implements AudioService {}
 
 class MockIAudioController extends Mock implements IAudioController {}
 
-class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
-    implements SettingsBloc {}
+class MockSettingsCubit extends MockCubit<AppSettings>
+    implements SettingsCubit {}
 
 class MockTabCubit extends MockCubit<AppTab> implements TabCubit {}
 
@@ -110,13 +110,13 @@ void main() {
   group(
     'EntimeAppView',
     () {
-      late SettingsBloc settingsBloc;
+      late SettingsCubit settingsCubit;
       late TabCubit tabCubit;
       late UpdateBloc updateBloc;
       late BluetoothBloc bluetoothBloc;
 
       setUp(() {
-        settingsBloc = MockSettingsBloc();
+        settingsCubit = MockSettingsCubit();
         tabCubit = MockTabCubit();
         updateBloc = MockUpdateBloc();
         bluetoothBloc = MockBluetoothBloc();
@@ -124,8 +124,8 @@ void main() {
 
       testWidgets('Renders Home page', (tester) async {
         when(
-          () => settingsBloc.state,
-        ).thenReturn(SettingsState(settings: settingsProvider.settings));
+          () => settingsCubit.state,
+        ).thenReturn(settingsProvider.settings);
         // when(() => tabBloc.state).thenReturn(AppTab.init);
         when(() => updateBloc.state).thenReturn(const UpdateState.initial());
         when(
@@ -134,7 +134,7 @@ void main() {
         await tester.pumpWidget(
           MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => settingsBloc),
+              BlocProvider(create: (_) => settingsCubit),
               BlocProvider(create: (_) => tabCubit),
               BlocProvider(create: (_) => updateBloc),
               BlocProvider(create: (_) => bluetoothBloc),

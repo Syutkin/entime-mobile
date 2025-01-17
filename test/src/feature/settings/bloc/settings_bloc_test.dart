@@ -24,15 +24,15 @@ class MockSettingsProvider extends Mock implements SettingsProvider {
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  group('SettingsBloc', () {
+  group('SettingsCubit', () {
     final defaultSettingsProvider = MockSettingsProvider(
       const AppSettings.defaults(),
     );
 
     test('initial state is correct', () {
       expect(
-        SettingsBloc(defaultSettingsProvider).state,
-        const SettingsState(settings: AppSettings.defaults()),
+        SettingsCubit(defaultSettingsProvider).state,
+        const  AppSettings.defaults(),
       );
     });
   });
@@ -46,11 +46,11 @@ void main() {
       ),
     );
 
-    blocTest<SettingsBloc, SettingsState>(
+    blocTest<SettingsCubit, AppSettings>(
       'correctly reads settings from SettingsProvider',
-      build: () => SettingsBloc(changedSettingsProvider),
-      act: (bloc) => bloc.add(const SettingsEvent.initialize()),
-      expect: () => [SettingsState(settings: changedSettingsProvider.settings)],
+      build: () => SettingsCubit(changedSettingsProvider),
+      act: (bloc) => bloc.initialize(),
+      expect: () => [changedSettingsProvider.settings],
     );
   });
 
@@ -59,11 +59,11 @@ void main() {
       const AppSettings.defaults(),
     );
 
-    blocTest<SettingsBloc, SettingsState>(
+    blocTest<SettingsCubit, AppSettings>(
       'correctly emits default settings',
-      build: () => SettingsBloc(defaultSettingsProvider),
-      act: (bloc) => bloc.add(const SettingsEvent.setDefault()),
-      expect: () => [SettingsState(settings: defaultSettingsProvider.settings)],
+      build: () => SettingsCubit(defaultSettingsProvider),
+      act: (bloc) => bloc.setDefault(),
+      expect: () => [defaultSettingsProvider.settings],
     );
 
     group('update', () {
@@ -78,15 +78,13 @@ void main() {
         ),
       );
 
-      blocTest<SettingsBloc, SettingsState>(
+      blocTest<SettingsCubit, AppSettings>(
         'correctly updates settings',
-        build: () => SettingsBloc(initialSettingsProvider),
-        act:
-            (bloc) => bloc.add(
-              SettingsEvent.update(settings: changedSettingsProvider.settings),
-            ),
-        expect:
-            () => [SettingsState(settings: initialSettingsProvider.settings)],
+        build: () => SettingsCubit(initialSettingsProvider),
+        act: (bloc) => bloc.update(changedSettingsProvider.settings),
+        
+        expect: () =>
+            [initialSettingsProvider.settings],
       );
     });
   });

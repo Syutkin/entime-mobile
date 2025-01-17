@@ -129,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                   }
                 },
                 moduleSettings: (moduleSettings) {
-                  context.read<ModuleSettingsBloc>().add(
+                  context.read<ModuleSettingsCubit>().add(
                         ModuleSettingsEvent.get(moduleSettings),
                       );
                 },
@@ -155,9 +155,8 @@ class HomeScreen extends StatelessWidget {
                 // более чем на две секунды, то уточняем, точно ли обновлять?
                 // Если разница менее двух секунд, то молча игнорируем отсечку
                 final updateStartCorrectionDelay = context
-                    .read<SettingsBloc>()
+                    .read<SettingsCubit>()
                     .state
-                    .settings
                     .updateStartCorrectionDelay;
                 if (prevCorrection != null &&
                     prevCorrection - data.correction >
@@ -255,7 +254,7 @@ class HomeScreen extends StatelessWidget {
   SingleChildWidget _listenToCountdownEvents() {
     return BlocListener<CountdownBloc, CountdownState>(
       listener: (context, state) {
-        if (context.read<SettingsBloc>().state.settings.beepFromApp) {
+        if (context.read<SettingsCubit>().state.beepFromApp) {
           state.whenOrNull(
             working: (tick) {
               // за три секунды до старта запускаем "бип"
@@ -265,7 +264,7 @@ class HomeScreen extends StatelessWidget {
             },
           );
         }
-        if (context.read<SettingsBloc>().state.settings.voiceFromApp) {
+        if (context.read<SettingsCubit>().state.voiceFromApp) {
           state.whenOrNull(
             working: (tick) {
               // на 15 секунде ищем участников для голосового вызова
@@ -315,10 +314,10 @@ class FilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsBloc, SettingsState>(
+    return BlocBuilder<SettingsCubit, AppSettings>(
       builder: (context, settingsState) {
-        final settingsBloc = context.read<SettingsBloc>();
-        final settings = settingsState.settings;
+        final settingsCubit = context.read<SettingsCubit>();
+        final settings = settingsCubit.state;
         print(settings);
         if (activeTab == AppTab.start) {
           final menuItems = <PopupMenuEntry<FilterStart>>[
@@ -356,32 +355,24 @@ class FilterButton extends StatelessWidget {
             onSelected: (value) async {
               switch (value) {
                 case FilterStart.showDNS:
-                  settingsBloc.add(
-                    SettingsEvent.update(
-                      settings: settings.copyWith(showDNS: !settings.showDNS),
-                    ),
+                  settingsCubit.update(
+                    settings.copyWith(showDNS: !settings.showDNS),
                   );
                 case FilterStart.showDNF:
-                  settingsBloc.add(
-                    SettingsEvent.update(
-                      settings: settings.copyWith(showDNF: !settings.showDNF),
-                    ),
+                  settingsCubit.update(
+                    settings.copyWith(showDNF: !settings.showDNF),
                   );
                 case FilterStart.showDSQ:
-                  settingsBloc.add(
-                    SettingsEvent.update(
-                      settings: settings.copyWith(showDSQ: !settings.showDSQ),
-                    ),
+                  settingsCubit.update(
+                    settings.copyWith(showDSQ: !settings.showDSQ),
                   );
                 case FilterStart.setDefaults:
                   const defaults = AppSettings.defaults();
-                  settingsBloc.add(
-                    SettingsEvent.update(
-                      settings: settings.copyWith(
-                        showDNS: defaults.showDNS,
-                        showDNF: defaults.showDNF,
-                        showDSQ: defaults.showDSQ,
-                      ),
+                  settingsCubit.update(
+                    settings.copyWith(
+                      showDNS: defaults.showDNS,
+                      showDNF: defaults.showDNF,
+                      showDSQ: defaults.showDSQ,
                     ),
                   );
               }
@@ -423,38 +414,30 @@ class FilterButton extends StatelessWidget {
             onSelected: (value) async {
               switch (value) {
                 case FilterFinish.showHidden:
-                  settingsBloc.add(
-                    SettingsEvent.update(
-                      settings: settings.copyWith(
-                        showHidden: !settings.showHidden,
-                      ),
+                  settingsCubit.update(
+                    settings.copyWith(
+                      showHidden: !settings.showHidden,
                     ),
                   );
                 case FilterFinish.showNumbers:
-                  settingsBloc.add(
-                    SettingsEvent.update(
-                      settings: settings.copyWith(
-                        showNumbers: !settings.showNumbers,
-                      ),
+                  settingsCubit.update(
+                    settings.copyWith(
+                      showNumbers: !settings.showNumbers,
                     ),
                   );
                 case FilterFinish.showManual:
-                  settingsBloc.add(
-                    SettingsEvent.update(
-                      settings: settings.copyWith(
-                        showManual: !settings.showManual,
-                      ),
+                  settingsCubit.update(
+                    settings.copyWith(
+                      showManual: !settings.showManual,
                     ),
                   );
                 case FilterFinish.setDefaults:
                   const defaults = AppSettings.defaults();
-                  settingsBloc.add(
-                    SettingsEvent.update(
-                      settings: settings.copyWith(
-                        showHidden: defaults.showHidden,
-                        showNumbers: defaults.showNumbers,
-                        showManual: defaults.showManual,
-                      ),
+                  settingsCubit.update(
+                    settings.copyWith(
+                      showHidden: defaults.showHidden,
+                      showNumbers: defaults.showNumbers,
+                      showManual: defaults.showManual,
                     ),
                   );
               }

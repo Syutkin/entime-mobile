@@ -56,17 +56,17 @@ class _StartListPage extends State<StartListPage> {
               child: _SliverStartSubHeader(),
             ),
           ),
-          BlocBuilder<SettingsBloc, SettingsState>(
+          BlocBuilder<SettingsCubit, AppSettings>(
             buildWhen: (previous, current) =>
-                previous.settings.showDNS != current.settings.showDNS ||
-                previous.settings.showDNF != current.settings.showDNF ||
-                previous.settings.showDSQ != current.settings.showDSQ,
+                previous.showDNS != current.showDNS ||
+                previous.showDNF != current.showDNF ||
+                previous.showDSQ != current.showDSQ,
             builder: (context, state) {
               final filteredList = filterStartList(
                 startList,
-                showDNS: state.settings.showDNS,
-                showDNF: state.settings.showDNF,
-                showDSQ: state.settings.showDSQ,
+                showDNS: state.showDNS,
+                showDNF: state.showDNF,
+                showDSQ: state.showDSQ,
               );
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
@@ -95,10 +95,10 @@ class _StartListPage extends State<StartListPage> {
                         }
                       },
                       builder: (context, countdownState) =>
-                          BlocBuilder<SettingsBloc, SettingsState>(
+                          BlocBuilder<SettingsCubit, AppSettings>(
                         buildWhen: (previous, current) =>
-                            previous.settings.countdownAtStartTime !=
-                            current.settings.countdownAtStartTime,
+                            previous.countdownAtStartTime !=
+                            current.countdownAtStartTime,
                         builder: (context, settingsState) => StartItemTile(
                           item: item,
                           onTap: () async {
@@ -119,11 +119,10 @@ class _StartListPage extends State<StartListPage> {
                             );
                           },
                           isHighlighted: isHighlighted,
-                          countdown:
-                              settingsState.settings.countdownAtStartTime &&
-                                      isHighlighted
-                                  ? _countdownFromState(countdownState)
-                                  : null,
+                          countdown: settingsState.countdownAtStartTime &&
+                                  isHighlighted
+                              ? _countdownFromState(countdownState)
+                              : null,
                         ),
                       ),
                     );
@@ -136,24 +135,24 @@ class _StartListPage extends State<StartListPage> {
         ],
       );
 
-  Widget _showCountdown() => BlocBuilder<SettingsBloc, SettingsState>(
+  Widget _showCountdown() => BlocBuilder<SettingsCubit, AppSettings>(
         //ребилдим, только если изменяются настройки, касаемые обратного отсчёта в круге
         buildWhen: (previous, current) =>
-            previous.settings.countdown != current.settings.countdown ||
-            previous.settings.countdownTop != current.settings.countdownTop ||
-            previous.settings.countdownLeft != current.settings.countdownLeft ||
-            previous.settings.countdownSize != current.settings.countdownSize,
+            previous.countdown != current.countdown ||
+            previous.countdownTop != current.countdownTop ||
+            previous.countdownLeft != current.countdownLeft ||
+            previous.countdownSize != current.countdownSize,
         builder: (context, settingsState) {
-          if (settingsState.settings.countdown) {
+          if (settingsState.countdown) {
             return Positioned(
-              left: settingsState.settings.countdownLeft,
-              top: settingsState.settings.countdownTop,
+              left: settingsState.countdownLeft,
+              top: settingsState.countdownTop,
               child: BlocBuilder<CountdownBloc, CountdownState>(
                 builder: (context, state) => state.maybeMap(
                   working: (state) {
                     final countdownWidget = CountdownWidget(
                       key: _countdownKey,
-                      size: settingsState.settings.countdownSize,
+                      size: settingsState.countdownSize,
                       text: state.tick.text,
                     );
                     return Draggable(
@@ -166,7 +165,7 @@ class _StartListPage extends State<StartListPage> {
                   orElse: () {
                     final countdownWidget = CountdownWidget(
                       key: _countdownKey,
-                      size: settingsState.settings.countdownSize,
+                      size: settingsState.countdownSize,
                     );
                     return Draggable(
                       feedback: countdownWidget,
@@ -207,12 +206,10 @@ class _StartListPage extends State<StartListPage> {
         dy = stackSize.height - countdownRenderBox.size.height;
       }
 
-      final settingsBloc = context.read<SettingsBloc>();
-      final settings = settingsBloc.state.settings;
-      settingsBloc.add(
-        SettingsEvent.update(
-          settings: settings.copyWith(countdownLeft: dx, countdownTop: dy),
-        ),
+      final settingsCubit = context.read<SettingsCubit>();
+      final settings = settingsCubit.state;
+      settingsCubit.update(
+        settings.copyWith(countdownLeft: dx, countdownTop: dy),
       );
     }
   }
@@ -319,14 +316,14 @@ class _StartListPage extends State<StartListPage> {
             ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: BlocBuilder<SettingsBloc, SettingsState>(
+            floatingActionButton: BlocBuilder<SettingsCubit, AppSettings>(
               buildWhen: (previous, current) =>
-                  previous.settings.startFab != current.settings.startFab,
+                  previous.startFab != current.startFab,
               builder: (context, settingsState) {
-                if (settingsState.settings.startFab) {
+                if (settingsState.startFab) {
                   return SizedBox(
-                    height: settingsState.settings.startFabSize,
-                    width: settingsState.settings.startFabSize,
+                    height: settingsState.startFabSize,
+                    width: settingsState.startFabSize,
                     child: FittedBox(
                       child: FloatingActionButton(
                         onPressed: () {

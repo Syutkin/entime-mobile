@@ -28,18 +28,17 @@ class _DebugLogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
-    onPressed: () {
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder:
-              (context) => LogScreen(
-                //moduleSettings: moduleSettings,
-              ),
-        ),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (context) => LogScreen(
+                  //moduleSettings: moduleSettings,
+                  ),
+            ),
+          );
+        },
+        child: const Text('Show Log'),
       );
-    },
-    child: const Text('Show Log'),
-  );
 }
 
 class _DebugAddLogButton extends StatelessWidget {
@@ -47,18 +46,18 @@ class _DebugAddLogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
-    onPressed: () {
-      BlocProvider.of<LogBloc>(context).add(
-        const LogEvent.add(
-          level: LogLevel.error,
-          source: LogSource.bluetooth,
-          rawData: 'rawData',
-          direction: LogSourceDirection.input,
-        ),
+        onPressed: () {
+          BlocProvider.of<LogBloc>(context).add(
+            const LogEvent.add(
+              level: LogLevel.error,
+              source: LogSource.bluetooth,
+              rawData: 'rawData',
+              direction: LogSourceDirection.input,
+            ),
+          );
+        },
+        child: const Text('Add Log'),
       );
-    },
-    child: const Text('Add Log'),
-  );
 }
 
 class _DebugTrailsButton extends StatelessWidget {
@@ -66,18 +65,17 @@ class _DebugTrailsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
-    onPressed: () {
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder:
-              (context) => TrailsListPage(
-                //moduleSettings: moduleSettings,
-              ),
-        ),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (context) => TrailsListPage(
+                  //moduleSettings: moduleSettings,
+                  ),
+            ),
+          );
+        },
+        child: const Text('Show Trails'),
       );
-    },
-    child: const Text('Show Trails'),
-  );
 }
 
 class _DebugCountdownButton extends StatelessWidget {
@@ -85,18 +83,21 @@ class _DebugCountdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
-    onPressed: () {
-      final settingsBloc = context.read<SettingsBloc>();
-      final stageId = settingsBloc.state.settings.stageId;
-      BlocProvider.of<BluetoothBloc>(context).add(
-        BluetoothEvent.messageReceived(message: 'B19:00:56#', stageId: stageId),
-      );
-      // showChangelogAtStartup(context, '0.3.2');
+        onPressed: () {
+          final settingsCubit = context.read<SettingsCubit>();
+          final stageId = settingsCubit.state.stageId;
+          BlocProvider.of<BluetoothBloc>(context).add(
+            BluetoothEvent.messageReceived(
+              message: 'B19:00:56#',
+              stageId: stageId,
+            ),
+          );
+          // showChangelogAtStartup(context, '0.3.2');
 
-      // BlocProvider.of<BluetoothBloc>(context).audioService.countdown();
-    },
-    child: const Text('Countdown Test'),
-  );
+          // BlocProvider.of<BluetoothBloc>(context).audioService.countdown();
+        },
+        child: const Text('Countdown Test'),
+      );
 }
 
 class _DebugVoiceButton extends StatelessWidget {
@@ -104,14 +105,14 @@ class _DebugVoiceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
-    // ignore: no-empty-block
-    onPressed: () {
-      // BlocProvider.of<BluetoothBloc>(context)
-      //     .audioService
-      //     .speak('Это тестовое сообщение');
-    },
-    child: const Text('Voice Test'),
-  );
+        // ignore: no-empty-block
+        onPressed: () {
+          // BlocProvider.of<BluetoothBloc>(context)
+          //     .audioService
+          //     .speak('Это тестовое сообщение');
+        },
+        child: const Text('Voice Test'),
+      );
 }
 
 class _DebugNewDatabase extends StatelessWidget {
@@ -119,11 +120,11 @@ class _DebugNewDatabase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
-    onPressed: () {
-      context.read<DatabaseBloc>().add(const DatabaseEvent.shareDatabase());
-    },
-    child: const Text('Share database'),
-  );
+        onPressed: () {
+          context.read<DatabaseBloc>().add(const DatabaseEvent.shareDatabase());
+        },
+        child: const Text('Share database'),
+      );
 }
 
 class _DebugTestCsv extends StatelessWidget {
