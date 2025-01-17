@@ -27,15 +27,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(
-    builder:
-        (context, activeTab) => DefaultTabController(
+        builder: (context, activeTab) => DefaultTabController(
           length: 3,
           child: Scaffold(
             drawer: const AppDrawer(),
             appBar: AppBar(
               title: const _TextTitle(),
               actions: <Widget>[
-                _FilterButton(activeTab: activeTab),
+                FilterButton(activeTab: activeTab),
                 const BluetoothButton(),
                 MenuButton(
                   key: const Key('HomeAppBarMenuButton'),
@@ -89,7 +88,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-  );
+      );
 
   SingleChildWidget _listenToBluetooth() =>
       BlocListener<BluetoothBloc, BluetoothBlocState>(
@@ -131,8 +130,8 @@ class HomeScreen extends StatelessWidget {
                 },
                 moduleSettings: (moduleSettings) {
                   context.read<ModuleSettingsBloc>().add(
-                    ModuleSettingsEvent.get(moduleSettings),
-                  );
+                        ModuleSettingsEvent.get(moduleSettings),
+                      );
                 },
               );
             },
@@ -155,21 +154,20 @@ class HomeScreen extends StatelessWidget {
                 // Если новая поправка для номера отличается от предыдущей
                 // более чем на две секунды, то уточняем, точно ли обновлять?
                 // Если разница менее двух секунд, то молча игнорируем отсечку
-                final updateStartCorrectionDelay =
-                    context
-                        .read<SettingsBloc>()
-                        .state
-                        .settings
-                        .updateStartCorrectionDelay;
+                final updateStartCorrectionDelay = context
+                    .read<SettingsBloc>()
+                    .state
+                    .settings
+                    .updateStartCorrectionDelay;
                 if (prevCorrection != null &&
                     prevCorrection - data.correction >
                         updateStartCorrectionDelay) {
-                  final text = Localization.current
-                      .I18nHome_updateAutomaticCorrection(
-                        data.number,
-                        data.previousStarts.first.automaticCorrection!,
-                        data.correction,
-                      );
+                  final text =
+                      Localization.current.I18nHome_updateAutomaticCorrection(
+                    data.number,
+                    data.previousStarts.first.automaticCorrection!,
+                    data.correction,
+                  );
                   final update = await overwriteStartTimePopup(
                     context: context,
                     text: text,
@@ -194,65 +192,65 @@ class HomeScreen extends StatelessWidget {
       );
 
   SingleChildWidget _listenToUpdater() => BlocListener<UpdateBloc, UpdateState>(
-    listenWhen: (previousState, state) {
-      // // ловим показ наличия обновления
-      // if (previousState is UpdateInitial && state is UpdateAvailable) {
-      //   return true;
-      //   // ловим показ ченджлога
-      // } else if (previousState is UpdateInitial && state is UpdateInitial) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-      return previousState.maybeMap(
-        initial: (initial) {
-          return state.maybeMap(
-            initial: (_) {
-              return true;
-            },
-            updateAvailable: (_) {
-              return true;
+        listenWhen: (previousState, state) {
+          // // ловим показ наличия обновления
+          // if (previousState is UpdateInitial && state is UpdateAvailable) {
+          //   return true;
+          //   // ловим показ ченджлога
+          // } else if (previousState is UpdateInitial && state is UpdateInitial) {
+          //   return true;
+          // } else {
+          //   return false;
+          // }
+          return previousState.maybeMap(
+            initial: (initial) {
+              return state.maybeMap(
+                initial: (_) {
+                  return true;
+                },
+                updateAvailable: (_) {
+                  return true;
+                },
+                orElse: () {
+                  return false;
+                },
+              );
             },
             orElse: () {
               return false;
             },
           );
         },
-        orElse: () {
-          return false;
+        listener: (context, state) async {
+          await state.whenOrNull(
+            updateAvailable: (version) {
+              if (!Scaffold.of(context).isDrawerOpen) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      Localization.current.I18nHome_updateAvailable(version),
+                    ),
+                    action: SnackBarAction(
+                      onPressed: () {
+                        BlocProvider.of<UpdateBloc>(
+                          context,
+                        ).add(const UpdateEvent.downloadUpdate());
+                        Scaffold.of(context).openDrawer();
+                      },
+                      label: Localization.current.I18nHome_update,
+                    ),
+                  ),
+                );
+              }
+            },
+            initial: (changelog) async {
+              if (changelog != null) {
+                await showChangelogAtStartup(context, changelog);
+              }
+            },
+          );
         },
       );
-    },
-    listener: (context, state) async {
-      await state.whenOrNull(
-        updateAvailable: (version) {
-          if (!Scaffold.of(context).isDrawerOpen) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  Localization.current.I18nHome_updateAvailable(version),
-                ),
-                action: SnackBarAction(
-                  onPressed: () {
-                    BlocProvider.of<UpdateBloc>(
-                      context,
-                    ).add(const UpdateEvent.downloadUpdate());
-                    Scaffold.of(context).openDrawer();
-                  },
-                  label: Localization.current.I18nHome_update,
-                ),
-              ),
-            );
-          }
-        },
-        initial: (changelog) async {
-          if (changelog != null) {
-            await showChangelogAtStartup(context, changelog);
-          }
-        },
-      );
-    },
-  );
 
   SingleChildWidget _listenToCountdownEvents() {
     return BlocListener<CountdownBloc, CountdownState>(
@@ -275,8 +273,8 @@ class HomeScreen extends StatelessWidget {
                 final stageId = context.read<DatabaseBloc>().state.stage?.id;
                 if (stageId != null) {
                   context.read<CountdownBloc>().add(
-                    CountdownEvent.callParticipant(stageId: stageId),
-                  );
+                        CountdownEvent.callParticipant(stageId: stageId),
+                      );
                 }
               }
             },
@@ -309,8 +307,9 @@ class _TextTitle extends StatelessWidget {
       );
 }
 
-class _FilterButton extends StatelessWidget {
-  const _FilterButton({required this.activeTab});
+@visibleForTesting
+class FilterButton extends StatelessWidget {
+  const FilterButton({required this.activeTab, super.key});
 
   final AppTab activeTab;
 
