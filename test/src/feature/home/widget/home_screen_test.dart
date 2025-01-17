@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
@@ -10,13 +8,10 @@ import 'package:entime/src/feature/countdown/countdown.dart';
 import 'package:entime/src/feature/countdown/model/tick.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/database/model/filter_start.dart';
-import 'package:entime/src/feature/database/widget/popup/edit_racer_popup.dart';
 import 'package:entime/src/feature/home/widget/home_screen.dart';
 import 'package:entime/src/feature/ntp/bloc/ntp_bloc.dart';
 import 'package:entime/src/feature/settings/bloc/settings_bloc.dart';
-import 'package:entime/src/feature/settings/logic/settings_provider.dart';
 import 'package:entime/src/feature/settings/logic/shared_prefs_settings_provider.dart';
-import 'package:entime/src/feature/settings/model/app_settings.dart';
 import 'package:entime/src/feature/tab/tab.dart';
 import 'package:entime/src/feature/tab/widget/finish_page.dart';
 import 'package:entime/src/feature/tab/widget/init_page.dart';
@@ -56,7 +51,7 @@ void main() {
   late BluetoothBloc bluetoothBloc;
   late CountdownBloc countdownBloc;
   late UpdateBloc updateBloc;
-  late TabBloc tabBloc;
+  late TabCubit tabCubit;
   late ConnectivityBloc connectivityBloc;
   late NtpBloc ntpBloc;
 
@@ -83,7 +78,7 @@ void main() {
     SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
     settingsProvider = await SharedPrefsSettingsProvider.load();
     settingsBloc = SettingsBloc(settingsProvider);
-    tabBloc = TabBloc();
+    tabCubit = TabCubit();
 
     db = AppDatabase.customConnection(
       DatabaseConnection(NativeDatabase.memory()),
@@ -122,6 +117,10 @@ void main() {
     );
   });
 
+  tearDown(() async {
+    await db.close();
+  });
+
   Widget testWidget() {
     initializeDateFormatting();
     return MaterialApp(
@@ -131,7 +130,7 @@ void main() {
         child: BlocProvider.value(
           value: settingsBloc,
           child: BlocProvider.value(
-            value: tabBloc,
+            value: tabCubit,
             child: BlocProvider.value(
               value: databaseBloc,
               child: BlocProvider.value(
@@ -194,24 +193,58 @@ void main() {
         );
       });
 
-      // group('FilterButton widget tests', () {
-      //   patrolWidgetTest(
-      //     "Didn't visible at initial screen",
-      //     (PatrolTester $) async {
-      //       await $.pumpWidgetAndSettle(testWidget());
-      //       expect($(FilterButton).$(PopupMenuButton), findsNothing);
-      //     },
-      //   );
-      //   patrolWidgetTest(
-      //     'Filter button at start screen',
-      //     (PatrolTester $) async {
-      //       await $.pumpWidgetAndSettle(testWidget());
-      //       await $(#StartTab).tap();
-      //       await $.pumpAndSettle();
-      //       await $(FilterButton).tap();
-      //     },
-      //   );
-      // });
+      group('FilterButton widget tests', () {
+        patrolWidgetTest(
+          "Didn't visible at initial screen",
+          (PatrolTester $) async {
+            await $.pumpWidgetAndSettle(testWidget());
+            expect($(FilterButton).$(PopupMenuButton), findsNothing);
+          },
+        );
+        patrolWidgetTest(
+          'Filter button at start screen',
+          (PatrolTester $) async {
+            await $.pumpWidgetAndSettle(testWidget());
+            await $(#StartTab).tap();
+            await $(FilterButton).tap();
+            expect($(CheckedPopupMenuItem<FilterStart>), findsNWidgets(3));
+            expect($(PopupMenuItem<FilterStart>), findsOneWidget);
+          },
+        );
+        patrolWidgetTest(
+          'Press show DNS',
+          (PatrolTester $) async {
+            await $.pumpWidgetAndSettle(testWidget());
+            expect(settingsBloc.state.settings.showDNS, false);
+            await $(#StartTab).tap();
+            await $(FilterButton).tap();
+            await $(#showDNS).tap();
+            expect(settingsBloc.state.settings.showDNS, true);
+          },
+        );
+        patrolWidgetTest(
+          'Press show DNF',
+          (PatrolTester $) async {
+            await $.pumpWidgetAndSettle(testWidget());
+            expect(settingsBloc.state.settings.showDNF, false);
+            await $(#StartTab).tap();
+            await $(FilterButton).tap();
+            await $(#showDNF).tap();
+            expect(settingsBloc.state.settings.showDNF, true);
+          },
+        );
+        patrolWidgetTest(
+          'Press show DSQ',
+          (PatrolTester $) async {
+            await $.pumpWidgetAndSettle(testWidget());
+            expect(settingsBloc.state.settings.showDSQ, false);
+            await $(#StartTab).tap();
+            await $(FilterButton).tap();
+            await $(#showDSQ).tap();
+            expect(settingsBloc.state.settings.showDSQ, true);
+          },
+        );
+      });
     },
   );
 }

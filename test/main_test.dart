@@ -33,7 +33,7 @@ class MockIAudioController extends Mock implements IAudioController {}
 class MockSettingsBloc extends MockBloc<SettingsEvent, SettingsState>
     implements SettingsBloc {}
 
-class MockTabBloc extends MockBloc<TabEvent, AppTab> implements TabBloc {}
+class MockTabCubit extends MockCubit<AppTab> implements TabCubit {}
 
 class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState>
     implements UpdateBloc {}
@@ -111,13 +111,13 @@ void main() {
     'EntimeAppView',
     () {
       late SettingsBloc settingsBloc;
-      late TabBloc tabBloc;
+      late TabCubit tabCubit;
       late UpdateBloc updateBloc;
       late BluetoothBloc bluetoothBloc;
 
       setUp(() {
         settingsBloc = MockSettingsBloc();
-        tabBloc = MockTabBloc();
+        tabCubit = MockTabCubit();
         updateBloc = MockUpdateBloc();
         bluetoothBloc = MockBluetoothBloc();
       });
@@ -126,7 +126,7 @@ void main() {
         when(
           () => settingsBloc.state,
         ).thenReturn(SettingsState(settings: settingsProvider.settings));
-        when(() => tabBloc.state).thenReturn(AppTab.init);
+        // when(() => tabBloc.state).thenReturn(AppTab.init);
         when(() => updateBloc.state).thenReturn(const UpdateState.initial());
         when(
           () => bluetoothBloc.state,
@@ -135,7 +135,7 @@ void main() {
           MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => settingsBloc),
-              BlocProvider(create: (_) => tabBloc),
+              BlocProvider(create: (_) => tabCubit),
               BlocProvider(create: (_) => updateBloc),
               BlocProvider(create: (_) => bluetoothBloc),
             ],

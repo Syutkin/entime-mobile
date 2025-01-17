@@ -30,7 +30,7 @@ import 'src/feature/home/widget/home_screen.dart';
 import 'src/feature/log/bloc/log_bloc.dart';
 import 'src/feature/module_settings/bloc/module_settings_bloc.dart';
 import 'src/feature/settings/settings.dart';
-import 'src/feature/tab/bloc/tab_bloc.dart';
+import 'src/feature/tab/bloc/tab_cubit.dart';
 import 'src/feature/update/update.dart';
 
 Future<void> main() async {
@@ -129,7 +129,7 @@ class EntimeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
-          BlocProvider<TabBloc>(create: (context) => TabBloc()),
+          BlocProvider<TabCubit>(create: (context) => TabCubit()),
           BlocProvider<SettingsBloc>(
             create: (context) => SettingsBloc(settingsProvider),
           ),

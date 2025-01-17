@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<TabBloc, AppTab>(
+  Widget build(BuildContext context) => BlocBuilder<TabCubit, AppTab>(
         builder: (context, activeTab) => DefaultTabController(
           length: 3,
           child: Scaffold(
@@ -44,14 +44,14 @@ class HomeScreen extends StatelessWidget {
               bottom: TabBar(
                 key: const Key('TabBar'),
                 onTap: (index) {
-                  final bloc = context.read<TabBloc>();
+                  final cubit = context.read<TabCubit>();
                   switch (index) {
                     case 0:
-                      bloc.add(const TabEvent.updated(AppTab.init));
+                      cubit.update(AppTab.init);
                     case 1:
-                      bloc.add(const TabEvent.updated(AppTab.start));
+                      cubit.update(AppTab.start);
                     case 2:
-                      bloc.add(const TabEvent.updated(AppTab.finish));
+                      cubit.update(AppTab.finish);
                   }
                 },
                 tabs: <Widget>[
@@ -319,25 +319,30 @@ class FilterButton extends StatelessWidget {
       builder: (context, settingsState) {
         final settingsBloc = context.read<SettingsBloc>();
         final settings = settingsState.settings;
+        print(settings);
         if (activeTab == AppTab.start) {
           final menuItems = <PopupMenuEntry<FilterStart>>[
             CheckedPopupMenuItem(
+              key: const Key('showDNS'),
               value: FilterStart.showDNS,
               checked: settings.showDNS,
               child: Text(Localization.current.I18nHome_showDNS),
             ),
             CheckedPopupMenuItem(
+              key: const Key('showDNF'),
               value: FilterStart.showDNF,
               checked: settings.showDNF,
               child: Text(Localization.current.I18nHome_showDNF),
             ),
             CheckedPopupMenuItem(
+              key: const Key('showDSQ'),
               value: FilterStart.showDSQ,
               checked: settings.showDSQ,
               child: Text(Localization.current.I18nHome_showDSQ),
             ),
             const PopupMenuDivider(),
             PopupMenuItem(
+              key: const Key('setStartDefaults'),
               value: FilterStart.setDefaults,
               child: ListTile(
                 leading: const SizedBox.shrink(),
@@ -385,22 +390,26 @@ class FilterButton extends StatelessWidget {
         } else if (activeTab == AppTab.finish) {
           final menuItems = <PopupMenuEntry<FilterFinish>>[
             CheckedPopupMenuItem(
+              key: const Key('showHidden'),
               value: FilterFinish.showHidden,
               checked: settings.showHidden,
               child: Text(Localization.current.I18nHome_showHidden),
             ),
             CheckedPopupMenuItem(
+              key: const Key('showNumbers'),
               value: FilterFinish.showNumbers,
               checked: settings.showNumbers,
               child: Text(Localization.current.I18nHome_showNumbers),
             ),
             CheckedPopupMenuItem(
+              key: const Key('showManual'),
               value: FilterFinish.showManual,
               checked: settings.showManual,
               child: Text(Localization.current.I18nHome_showManual),
             ),
             const PopupMenuDivider(),
             PopupMenuItem(
+              key: const Key('setFinishDefaults'),
               value: FilterFinish.setDefaults,
               child: ListTile(
                 leading: const SizedBox.shrink(),
