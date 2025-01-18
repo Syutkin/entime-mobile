@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install sqlite3
+        run: | 
+          sudo apt-get -y install sqlite
+          sqlite3 --version
+
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v2
         with:
@@ -41,7 +46,7 @@ jobs:
       - run: java --version
       - run: flutter doctor -v
 
-      - name: Install dependencies
+      - name: Install dependencies from pub
         run: flutter pub get
 
       - name: Generate with build_runner
