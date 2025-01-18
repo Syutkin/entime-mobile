@@ -81,6 +81,7 @@ class _FinishListPage extends State<FinishListPage> {
                     ),
                   ),
                   trailing: TextButton(
+                    key: const Key('cancelToast'),
                     onPressed: () {
                       final stage = state.stage;
                       if (stage != null) {
@@ -100,7 +101,7 @@ class _FinishListPage extends State<FinishListPage> {
                 ),
               ),
               // enableSafeArea: false,
-              animationDuration: const Duration(milliseconds: 300),
+              animationDuration: Durations.medium3,
               duration: const Duration(seconds: 5),
               targetContext: context,
             );
@@ -113,7 +114,7 @@ class _FinishListPage extends State<FinishListPage> {
                 context,
                 notification.number,
               );
-              if (update != null && update) {
+              if (update ?? false) {
                 databaseBloc
                   ..add(
                     DatabaseEvent.clearNumberAtFinish(
