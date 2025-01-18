@@ -133,8 +133,8 @@ class EntimeApp extends StatelessWidget {
           BlocProvider<SettingsCubit>(
             create: (context) => SettingsCubit(settingsProvider),
           ),
-          BlocProvider<ModuleSettingsCubit>(
-            create: (context) => ModuleSettingsCubit(),
+          BlocProvider<ModuleSettingsBloc>(
+            create: (context) => ModuleSettingsBloc(),
           ),
           BlocProvider<LogBloc>(
             create: (context) =>
@@ -197,13 +197,10 @@ class EntimeAppView extends StatelessWidget {
       buildWhen: (previousState, state) =>
           previousState.seedColor != state.seedColor ||
           previousState.brightness != state.brightness ||
-          previousState.contrastLevel !=
-              state.contrastLevel ||
-          previousState.dynamicSchemeVariant !=
-              state.dynamicSchemeVariant ||
+          previousState.contrastLevel != state.contrastLevel ||
+          previousState.dynamicSchemeVariant != state.dynamicSchemeVariant ||
           previousState.language != state.language ||
-          previousState.isOLEDBackground !=
-              state.isOLEDBackground,
+          previousState.isOLEDBackground != state.isOLEDBackground,
       builder: (context, state) => MaterialApp(
         theme: appThemeData(
           seedColor: state.seedColor,

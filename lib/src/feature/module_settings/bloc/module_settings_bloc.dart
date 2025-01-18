@@ -8,9 +8,9 @@ part 'module_settings_bloc.freezed.dart';
 part 'module_settings_event.dart';
 part 'module_settings_state.dart';
 
-class ModuleSettingsCubit
+class ModuleSettingsBloc
     extends Bloc<ModuleSettingsEvent, ModuleSettingsState> {
-  ModuleSettingsCubit() : super(const ModuleSettingsUninitialized()) {
+  ModuleSettingsBloc() : super(const ModuleSettingsUninitialized()) {
     on<GetModuleSettings>(_handleGetModuleSettings);
     // on<ModuleSettingsLoaded>((event, emit) {});
     on<UpdateModuleSettings>((event, emit) {

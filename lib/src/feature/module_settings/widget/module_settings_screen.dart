@@ -29,7 +29,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
             onOkPressed: () {
               BlocProvider.of<BluetoothBloc>(context).add(
                 BluetoothEvent.sendMessage(
-                  message: BlocProvider.of<ModuleSettingsCubit>(
+                  message: BlocProvider.of<ModuleSettingsBloc>(
                     context,
                   ).moduleSettings.write,
                 ),
@@ -68,7 +68,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(Localization.current.I18nModuleSettings_moduleSettings),
         ),
-        body: BlocBuilder<ModuleSettingsCubit, ModuleSettingsState>(
+        body: BlocBuilder<ModuleSettingsBloc, ModuleSettingsState>(
           builder: (context, state) {
             if (state is ModuleSettingsLoaded) {
               return ModuleSettingsScreen(onChanged: () => updated = true);
@@ -94,9 +94,9 @@ class ModuleSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<ModuleSettingsCubit>(context);
+    final bloc = BlocProvider.of<ModuleSettingsBloc>(context);
     if (bloc.moduleSettings.type == 'entime') {
-      return BlocBuilder<ModuleSettingsCubit, ModuleSettingsState>(
+      return BlocBuilder<ModuleSettingsBloc, ModuleSettingsState>(
         builder: (context, state) => SettingsList(
           sections: [
             SettingsSection(
@@ -504,7 +504,7 @@ class ModuleSettingsScreen extends StatelessWidget {
         ),
       );
     } else if (bloc.moduleSettings.type == 'led') {
-      return BlocBuilder<ModuleSettingsCubit, ModuleSettingsState>(
+      return BlocBuilder<ModuleSettingsBloc, ModuleSettingsState>(
         builder: (context, state) => SettingsList(
           sections: [
             SettingsSection(

@@ -30,9 +30,10 @@ class HomeScreen extends StatelessWidget {
         builder: (context, activeTab) => DefaultTabController(
           length: 3,
           child: Scaffold(
+            key: const Key('HomeScaffold'),
             drawer: const AppDrawer(),
             appBar: AppBar(
-              title: const _TextTitle(),
+              title: const TextTitle(),
               actions: <Widget>[
                 FilterButton(activeTab: activeTab),
                 const BluetoothButton(),
@@ -129,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                   }
                 },
                 moduleSettings: (moduleSettings) {
-                  context.read<ModuleSettingsCubit>().add(
+                  context.read<ModuleSettingsBloc>().add(
                         ModuleSettingsEvent.get(moduleSettings),
                       );
                 },
@@ -152,8 +153,9 @@ class HomeScreen extends StatelessWidget {
                 final prevCorrection =
                     data.previousStarts.first.automaticCorrection;
                 // Если новая поправка для номера отличается от предыдущей
-                // более чем на две секунды, то уточняем, точно ли обновлять?
-                // Если разница менее двух секунд, то молча игнорируем отсечку
+                // более чем на две секунды (updateStartCorrectionDelay в настройках),
+                // то уточняем, точно ли обновлять?
+                // Если разница настройки, то молча игнорируем отсечку
                 final updateStartCorrectionDelay = context
                     .read<SettingsCubit>()
                     .state
@@ -192,15 +194,6 @@ class HomeScreen extends StatelessWidget {
 
   SingleChildWidget _listenToUpdater() => BlocListener<UpdateBloc, UpdateState>(
         listenWhen: (previousState, state) {
-          // // ловим показ наличия обновления
-          // if (previousState is UpdateInitial && state is UpdateAvailable) {
-          //   return true;
-          //   // ловим показ ченджлога
-          // } else if (previousState is UpdateInitial && state is UpdateInitial) {
-          //   return true;
-          // } else {
-          //   return false;
-          // }
           return previousState.maybeMap(
             initial: (initial) {
               return state.maybeMap(
@@ -234,6 +227,7 @@ class HomeScreen extends StatelessWidget {
                         BlocProvider.of<UpdateBloc>(
                           context,
                         ).add(const UpdateEvent.downloadUpdate());
+                        // ToDo: fix this for tests
                         Scaffold.of(context).openDrawer();
                       },
                       label: Localization.current.I18nHome_update,
@@ -284,8 +278,9 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _TextTitle extends StatelessWidget {
-  const _TextTitle();
+@visibleForTesting
+class TextTitle extends StatelessWidget {
+  const TextTitle({super.key});
 
   @override
   Widget build(BuildContext context) =>
@@ -318,7 +313,6 @@ class FilterButton extends StatelessWidget {
       builder: (context, settingsState) {
         final settingsCubit = context.read<SettingsCubit>();
         final settings = settingsCubit.state;
-        print(settings);
         if (activeTab == AppTab.start) {
           final menuItems = <PopupMenuEntry<FilterStart>>[
             CheckedPopupMenuItem(

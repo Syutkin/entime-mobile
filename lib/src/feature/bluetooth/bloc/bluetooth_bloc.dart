@@ -23,11 +23,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     required AppDatabase database,
     required IAudioController audioController,
     required SettingsProvider settingsProvider,
-  }) : _bluetoothProvider = bluetoothProvider,
-       _database = database,
-       _audioController = audioController,
-       _settingsProvider = settingsProvider,
-       super(const BluetoothBlocState.notInitialized()) {
+  })  : _bluetoothProvider = bluetoothProvider,
+        _database = database,
+        _audioController = audioController,
+        _settingsProvider = settingsProvider,
+        super(const BluetoothBlocState.notInitialized()) {
     _settingsSubscription = _settingsProvider.state.listen((state) {
       _reconnect = state.reconnect;
       _stageId = state.stageId;
@@ -36,22 +36,22 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     _btStateSubscription = bluetoothProvider.flutterBluetoothSerial
         .onStateChanged()
         .listen((btState) {
-          if (btState == BluetoothState.STATE_OFF ||
-              btState == BluetoothState.STATE_ON) {
-            add(const BluetoothEvent.initialize());
-          }
-        });
+      if (btState == BluetoothState.STATE_OFF ||
+          btState == BluetoothState.STATE_ON) {
+        add(const BluetoothEvent.initialize());
+      }
+    });
 
     on<BluetoothEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         initialize: (event) async {
           final isAvailable =
               await bluetoothProvider.flutterBluetoothSerial.isAvailable ??
-              false;
+                  false;
           if (isAvailable) {
             final isEnabled =
                 await bluetoothProvider.flutterBluetoothSerial.isEnabled ??
-                false;
+                    false;
             if (isEnabled) {
               emit(
                 BluetoothBlocState.disconnected(
@@ -129,16 +129,15 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               await bluetoothProvider.bluetoothBackgroundConnection.start();
               // и подписываемся на его события (поступающие сообщения)
               _messageSubscription = bluetoothProvider
-                  .bluetoothBackgroundConnection
-                  .message
+                  .bluetoothBackgroundConnection.message
                   .listen(
-                    (message) => add(
-                      BluetoothEvent.messageReceived(
-                        message: message,
-                        stageId: _stageId,
-                      ),
-                    ),
-                  );
+                (message) => add(
+                  BluetoothEvent.messageReceived(
+                    message: message,
+                    stageId: _stageId,
+                  ),
+                ),
+              );
               bluetoothProvider.bluetoothBackgroundConnection.onDisconnect(() {
                 add(const BluetoothEvent.disconnected());
               });
