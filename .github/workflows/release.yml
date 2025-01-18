@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Install sqlite3
         run: | 
-          sudo apt-get -y install sqlite
+          sudo apt-get -y install sqlite3
           sqlite3 --version
 
       - uses: actions/checkout@v4
