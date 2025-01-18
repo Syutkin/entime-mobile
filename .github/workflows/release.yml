@@ -8,14 +8,9 @@ on:
 jobs:
   build:
     name: Test, build and release APK
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-      - name: Install sqlite3
-        run: | 
-          sudo apt-get -y install sqlite3
-          sqlite3 --version
-
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v2
         with:

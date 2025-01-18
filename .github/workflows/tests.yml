@@ -19,14 +19,9 @@ on:
 jobs:
   build:
     name: Analyze project source and run tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-      - name: Install sqlite3
-        run: | 
-          sudo apt-get -y install sqlite3
-          sqlite3 --version
-
       - uses: actions/checkout@v3
 
       - uses: subosito/flutter-action@v2
