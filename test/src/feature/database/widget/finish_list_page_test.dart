@@ -26,6 +26,7 @@ void main() {
   late SettingsCubit settingsCubit;
   late DatabaseBloc databaseBloc;
   late AppSettings settings;
+  late Stage stage;
 
   Widget testWidget() {
     initializeDateFormatting();
@@ -54,6 +55,13 @@ void main() {
     databaseBloc = MockDatabaseBloc();
     settingsCubit = MockSettingsCubit();
     settings = const AppSettings.defaults();
+    stage = const Stage(
+      id: 1,
+      raceId: 1,
+      name: 'Stage name',
+      isActive: true,
+      isDeleted: false,
+    );
   });
 
   group('FinishListPage tests', () {
@@ -308,8 +316,33 @@ void main() {
         ).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
-
         expect($(FinishItemTile), findsNWidgets(expected));
+      });
+
+      patrolWidgetTest('Tap FinishItemTile and get AlertDialog', (
+        PatrolTester $,
+      ) async {
+        const count = 8;
+        when(() => databaseBloc.state).thenReturn(
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            starts: [],
+            finishes: finishes(count),
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+        );
+        when(
+          () => settingsCubit.state,
+        ).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(FinishItemTile).tap();
+        expect($(AlertDialog), findsOneWidget);
       });
     });
 
