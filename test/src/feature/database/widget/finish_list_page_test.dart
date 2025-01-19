@@ -5,6 +5,7 @@ import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/database/widget/popup/change_finish_time_to_number_popup.dart';
+import 'package:entime/src/feature/database/widget/popup/finish_details.dart';
 import 'package:entime/src/feature/settings/bloc/settings_bloc.dart';
 import 'package:entime/src/feature/settings/model/app_settings.dart';
 import 'package:flutter/material.dart' hide Notification;
@@ -344,6 +345,152 @@ void main() {
         await $(FinishItemTile).tap();
         expect($(AlertDialog), findsOneWidget);
       });
+
+      patrolWidgetTest('Long press on FinishItemTile w/o number', (
+        PatrolTester $,
+      ) async {
+        const count = 8;
+        when(() => databaseBloc.state).thenReturn(
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            starts: [],
+            finishes: finishes(count),
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+        );
+        when(
+          () => settingsCubit.state,
+        ).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(FinishItemTile).longPress();
+        expect($(Localization.current.I18nProtocol_clearNumber), findsNothing);
+        expect($(Localization.current.I18nProtocol_hideAll), findsOneWidget);
+        expect($(Localization.current.I18nCore_details), findsOneWidget);
+      });
+
+      patrolWidgetTest('Long press on FinishItemTile with number', (
+        PatrolTester $,
+      ) async {
+        const count = 8;
+        when(() => databaseBloc.state).thenReturn(
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            starts: [],
+            finishes: finishes(count),
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+        );
+        when(
+          () => settingsCubit.state,
+        ).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(FinishItemTile).at(1).longPress();
+        expect(
+          $(Localization.current.I18nProtocol_clearNumber),
+          findsOneWidget,
+        );
+        expect($(Localization.current.I18nProtocol_hideAll), findsOneWidget);
+        expect($(Localization.current.I18nCore_details), findsOneWidget);
+      });
+
+      patrolWidgetTest('Long press on FinishItemTile and select clearNumber', (
+        PatrolTester $,
+      ) async {
+        const count = 8;
+        when(() => databaseBloc.state).thenReturn(
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            starts: [],
+            finishes: finishes(count),
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+        );
+        when(
+          () => settingsCubit.state,
+        ).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(FinishItemTile).at(1).longPress();
+        await $(Localization.current.I18nProtocol_clearNumber).tap();
+        verify(
+          () => databaseBloc.add(
+            DatabaseEvent.clearNumberAtFinish(stage: stage, number: 1),
+          ),
+        ).called(1);
+      });
+
+      patrolWidgetTest('Long press on FinishItemTile and select hideAll', (
+        PatrolTester $,
+      ) async {
+        const count = 8;
+        when(() => databaseBloc.state).thenReturn(
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            starts: [],
+            finishes: finishes(count),
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+        );
+        when(
+          () => settingsCubit.state,
+        ).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(FinishItemTile).at(1).longPress();
+        await $(Localization.current.I18nProtocol_hideAll).tap();
+        verify(
+          () => databaseBloc.add(DatabaseEvent.hideAllFinises(stage.id)),
+        ).called(1);
+      });
+
+      patrolWidgetTest('Long press on FinishItemTile and select details', (
+        PatrolTester $,
+      ) async {
+        const count = 8;
+        when(() => databaseBloc.state).thenReturn(
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            starts: [],
+            finishes: finishes(count),
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+        );
+        when(
+          () => settingsCubit.state,
+        ).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(FinishItemTile).at(1).longPress();
+        await $(Localization.current.I18nCore_details).tap();
+        expect($(FinishDetailsPopup), findsOneWidget);
+      });
     });
 
     group('NumbersOnTrace list', () {
@@ -448,9 +595,7 @@ void main() {
           () => settingsCubit.state,
         ).thenReturn(settings);
 
-        when(() => databaseBloc.state).thenReturn(
-          emptyState,
-        );
+        when(() => databaseBloc.state).thenReturn(emptyState);
       });
 
       group('autoFinishNumber listener', () {

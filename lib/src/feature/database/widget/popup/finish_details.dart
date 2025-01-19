@@ -76,6 +76,7 @@ class FinishDetailsPopup extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
+          key: const Key('okButton'),
           onPressed: () {
             Navigator.of(context).pop();
           },
