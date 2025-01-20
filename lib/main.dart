@@ -27,7 +27,7 @@ import 'src/feature/app_info/app_info.dart';
 import 'src/feature/audio/audio.dart';
 import 'src/feature/bluetooth/bluetooth.dart';
 import 'src/feature/countdown/bloc/countdown_bloc.dart';
-import 'src/feature/countdown/logic/countdown.dart';
+import 'src/feature/countdown/logic/countdown_at_start.dart';
 import 'src/feature/database/bloc/database_bloc.dart';
 import 'src/feature/database/drift/app_database.dart';
 import 'src/feature/home/widget/home_screen.dart';

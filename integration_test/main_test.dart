@@ -8,7 +8,7 @@ import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
-import 'package:entime/src/feature/countdown/logic/countdown.dart';
+import 'package:entime/src/feature/countdown/logic/countdown_at_start.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/home/home.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';

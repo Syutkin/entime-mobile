@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../constants/date_time_formats.dart';
 import '../../audio/audio.dart';
-import '../logic/countdown.dart';
+import '../logic/countdown_at_start.dart';
 import '../model/tick.dart';
 
 part 'countdown_bloc.freezed.dart';
