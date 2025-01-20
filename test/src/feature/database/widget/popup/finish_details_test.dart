@@ -75,7 +75,9 @@ void main() {
       );
       expect($(Localization.current.I18nFinish_finishTime), findsOneWidget);
       expect(
-          $(Localization.current.I18nFinish_finishTimestamp), findsOneWidget);
+        $(Localization.current.I18nFinish_finishTimestamp),
+        findsOneWidget,
+      );
       expect($(Localization.current.I18nNtp_ntpOffset), findsOneWidget);
       expect($(Localization.current.I18nProtocol_number), findsOneWidget);
       expect($(Localization.current.I18nProtocol_type), findsOneWidget);

@@ -16,6 +16,7 @@ import 'package:entime/src/feature/update/logic/update_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart' as http;
 import 'package:patrol/patrol.dart';
 
@@ -41,8 +42,12 @@ void main() {
       bluetoothBackgroundConnection: bluetoothBackgroundConnection,
     );
 
-    final audioProvider = AudioProvider();
+    final flutterTts = FlutterTts();
+    final ttsProvider = TtsProvider(flutterTts);
+    final beepProvider = AudioplayersProvider();
 
+    final audioProvider =
+        AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);
     final audioService = AudioService(settings: settings, audio: audioProvider);
     final audioController = AudioController(
       audioService: audioService,

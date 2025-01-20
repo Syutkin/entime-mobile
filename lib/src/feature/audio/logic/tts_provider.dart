@@ -5,7 +5,7 @@ import '../../../common/logger/logger.dart';
 enum TtsState { playing, stopped }
 
 class TtsProvider {
-  TtsProvider() {
+  TtsProvider(this.flutterTts) {
     flutterTts
       ..setStartHandler(() {
         logger.i('TTS -> Playing...');
@@ -21,7 +21,7 @@ class TtsProvider {
       });
   }
 
-  final FlutterTts flutterTts = FlutterTts();
+  final FlutterTts flutterTts;
   TtsState ttsState = TtsState.stopped;
 
   Future<String?> get getDefaultEngine async {

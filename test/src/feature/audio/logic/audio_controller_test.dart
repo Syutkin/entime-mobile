@@ -8,7 +8,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../database/drift/app_database_test.dart';
 
-class MockIAudioService extends Mock implements IAudioService {}
+class MockAudioService extends Mock implements AudioService {}
 
 class MockSettingsProvider extends Mock implements SettingsProvider {}
 
@@ -20,7 +20,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late IAudioController ac;
   late AppDatabase db;
-  late IAudioService audioService;
+  late AudioService audioService;
   late SettingsProvider settingsProvider;
   late AppSettings appSettings;
   late String time;
@@ -35,7 +35,7 @@ void main() {
     for (final query in PopDB().queries) {
       db.customInsert(query);
     }
-    audioService = MockIAudioService();
+    audioService = MockAudioService();
     settingsProvider = MockSettingsProvider();
     appSettings = MockAppSettings();
 
@@ -51,6 +51,7 @@ void main() {
     when(() => settingsProvider.settings).thenReturn(appSettings);
 
     when(() => audioService.speak(any())).thenAnswer((_) => Future.value(true));
+    when(() => audioService.countdown()).thenAnswer((_) => Future.value(true));
   });
 
   tearDown(() async {
@@ -58,6 +59,27 @@ void main() {
   });
 
   group('IAudioController tests', () {
+    group('Beep tests', () {
+      test('Get beep', () {
+        ac.beep();
+        verify(() => audioService.countdown()).called(1);
+      });
+    });
+
+    group('playCountdown tests', () {
+      test('Get beep for existing start time', () async {
+        time = '10:00:55';
+        await ac.playCountdown(time: time, stageId: stageId);
+        verify(() => audioService.countdown()).called(1);
+      });
+
+      test('No participant after time, do not beep', () async {
+        time = '01:00:55';
+        await ac.playCountdown(time: time, stageId: stageId);
+        verifyNever(() => audioService.countdown());
+      });
+    });
+
     group('callParticipant tests', () {
       setUp(() {
         when(() => appSettings.voiceName).thenReturn(true);
@@ -123,7 +145,8 @@ void main() {
         expect(result2, 'Старты окончены, спасибо');
       });
 
-      test('Do not call participant by name if first character is num', () async {
+      test('Do not call participant by name if first character is num',
+          () async {
         // (1,"Алексахина Варвара","Zoenor",35,"ТимАк","Занаду"),
         await db.updateRider(id: 1, name: '092 Алексахина Варвара');
 

@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'audioplayers_provider.dart';
 import 'beep_provider.dart';
 import 'tts_provider.dart';
 
-abstract class IAudioProvider {
+abstract interface class IAudioProvider {
   Future<void> beep();
 
   Future<void> speak(String text);
@@ -19,9 +18,11 @@ abstract class IAudioProvider {
 }
 
 class AudioProvider implements IAudioProvider {
-  final TtsProvider ttsProvider = TtsProvider();
+  AudioProvider({required this.ttsProvider, required this.beepProvider});
 
-  final IBeepProvider beepProvider = AudioplayersProvider();
+  final TtsProvider ttsProvider;
+
+  final IBeepProvider beepProvider;
 
   @override
   Future<dynamic> setLanguage(String language) =>

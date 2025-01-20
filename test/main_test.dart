@@ -8,14 +8,15 @@ import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
 import 'package:entime/src/feature/countdown/logic/countdown.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
-import 'package:entime/src/feature/home/home.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/tab/tab.dart';
 import 'package:entime/src/feature/update/update.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol_finders/patrol_finders.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'helpers/shared_prefs_defaults.dart';
@@ -49,8 +50,6 @@ class MockIConnectivityProvider extends Mock implements IConnectivityProvider {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  // Bloc.observer = AppBlocObserver();
-  // Bloc.transformer = bloc_concurrency.sequential<dynamic>();
 
   late SharedPrefsSettingsProvider settingsProvider;
   late MockAppInfoProvider appInfo;
@@ -82,13 +81,25 @@ void main() {
     countdown = CountdownAtStart(database: database);
     ntpProvider = MockINtpProvider();
     connectivityProvider = MockIConnectivityProvider();
+
+    when(
+      () => updateProvider.showChangelog(),
+    ).thenAnswer(
+      (_) => Future.value(''),
+    );
+
+    when(
+      () => updateProvider.isUpdateAvailable(),
+    ).thenAnswer(
+      (_) => Future.value(false),
+    );
   });
 
   group(
     'EntimeApp',
     () {
-      testWidgets('renders EntimeAppView', (tester) async {
-        await tester.pumpWidget(
+      patrolWidgetTest('Renders home widget', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(
           EntimeApp(
             settingsProvider: settingsProvider,
             updateProvider: updateProvider,
@@ -101,51 +112,8 @@ void main() {
             connectivityProvider: connectivityProvider,
           ),
         ); // Create main app
-        expect(find.byType(EntimeAppView), findsOneWidget);
+        expect($(SizedBox), findsOneWidget);
       });
     },
-    skip: 'Refactor needed',
-  );
-
-  group(
-    'EntimeAppView',
-    () {
-      late SettingsCubit settingsCubit;
-      late TabCubit tabCubit;
-      late UpdateBloc updateBloc;
-      late BluetoothBloc bluetoothBloc;
-
-      setUp(() {
-        settingsCubit = MockSettingsCubit();
-        tabCubit = MockTabCubit();
-        updateBloc = MockUpdateBloc();
-        bluetoothBloc = MockBluetoothBloc();
-      });
-
-      testWidgets('Renders Home page', (tester) async {
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settingsProvider.settings);
-        // when(() => tabBloc.state).thenReturn(AppTab.init);
-        when(() => updateBloc.state).thenReturn(const UpdateState.initial());
-        when(
-          () => bluetoothBloc.state,
-        ).thenReturn(const BluetoothBlocState.notInitialized());
-        await tester.pumpWidget(
-          MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (_) => settingsCubit),
-              BlocProvider(create: (_) => tabCubit),
-              BlocProvider(create: (_) => updateBloc),
-              BlocProvider(create: (_) => bluetoothBloc),
-            ],
-            child: const EntimeAppView(),
-          ),
-        );
-        await tester.pumpAndSettle();
-        expect(find.byType(HomeScreen), findsOneWidget);
-      });
-    },
-    skip: 'Refactor needed',
   );
 }

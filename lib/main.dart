@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -13,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart' as http;
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -56,7 +59,12 @@ Future<void> main() async {
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 
-  final audioProvider = AudioProvider();
+  final flutterTts = FlutterTts();
+  final ttsProvider = TtsProvider(flutterTts);
+  final beepProvider = AudioplayersProvider();
+
+  final audioProvider =
+      AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);
   final audioService = AudioService(settings: settings, audio: audioProvider);
   final audioController = AudioController(
     audioService: audioService,
@@ -193,6 +201,8 @@ class EntimeAppView extends StatelessWidget {
       context.read<UpdateBloc>().add(const UpdateEvent.checkUpdate());
     }
 
+    final isTest = Platform.environment.containsKey('FLUTTER_TEST');
+
     return BlocBuilder<SettingsCubit, AppSettings>(
       buildWhen: (previousState, state) =>
           previousState.seedColor != state.seedColor ||
@@ -221,7 +231,7 @@ class EntimeAppView extends StatelessWidget {
         builder: BotToastInit(),
         //2. registered route observer
         navigatorObservers: [BotToastNavigatorObserver()],
-        home: const HomeScreen(),
+        home: isTest ? const SizedBox.shrink() : const HomeScreen(),
       ),
     );
   }

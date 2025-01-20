@@ -88,6 +88,10 @@ void main() {
     databaseBloc = MockDatabaseBloc();
     moduleSettingsBloc = MockModuleSettingsBloc();
     row = MockQueryRow();
+    SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
+    settingsProvider = await SharedPrefsSettingsProvider.load();
+    settingsCubit = SettingsCubit(settingsProvider);
+    tabCubit = TabCubit();
 
     offset = 100;
 
@@ -135,11 +139,6 @@ void main() {
     ).thenReturn(
       const ModuleSettingsState.uninitialized(),
     );
-
-    SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
-    settingsProvider = await SharedPrefsSettingsProvider.load();
-    settingsCubit = SettingsCubit(settingsProvider);
-    tabCubit = TabCubit();
   });
 
   Widget testWidget() {
