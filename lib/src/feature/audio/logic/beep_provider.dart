@@ -4,12 +4,13 @@ abstract interface class IBeepProvider {
   Future<void> beep();
 }
 
-class AudioplayersProvider implements IBeepProvider {
-  AudioPool? _pool;
+class AudioPoolProvider implements IBeepProvider {
+  AudioPoolProvider(this.audioPool);
+
+  AudioPool audioPool;
 
   @override
   Future<void> beep() async {
-    _pool ??= await AudioPool.createFromAsset(path: 'beeps.mp3', maxPlayers: 2);
-    await _pool?.start();
+    await audioPool.start();
   }
 }

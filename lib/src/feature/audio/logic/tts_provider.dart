@@ -24,8 +24,8 @@ class TtsProvider {
   final FlutterTts flutterTts;
   TtsState ttsState = TtsState.stopped;
 
-  Future<String?> get getDefaultEngine async {
-    return flutterTts.getDefaultEngine as String?;
+  Future<String> get getDefaultEngine async {
+    return flutterTts.getDefaultEngine.toString();
   }
 
   Future<dynamic> setLanguage(String language) =>

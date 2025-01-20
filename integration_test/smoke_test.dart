@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -45,9 +46,11 @@ void main() async {
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 
-  final flutterTts = FlutterTts();
-  final ttsProvider = TtsProvider(flutterTts);
-  final beepProvider = AudioplayersProvider();
+    final flutterTts = FlutterTts();
+    final pool =
+        await AudioPool.createFromAsset(path: 'beeps.mp3', maxPlayers: 2);
+    final ttsProvider = TtsProvider(flutterTts);
+    final beepProvider = AudioPoolProvider(pool);
 
   final audioProvider =
       AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);

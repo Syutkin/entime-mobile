@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -60,8 +61,10 @@ Future<void> main() async {
   );
 
   final flutterTts = FlutterTts();
+  final pool =
+      await AudioPool.createFromAsset(path: 'beeps.mp3', maxPlayers: 2);
   final ttsProvider = TtsProvider(flutterTts);
-  final beepProvider = AudioplayersProvider();
+  final beepProvider = AudioPoolProvider(pool);
 
   final audioProvider =
       AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);
