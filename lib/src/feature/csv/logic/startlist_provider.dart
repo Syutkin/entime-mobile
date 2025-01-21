@@ -10,15 +10,10 @@ import '../model/race_csv.dart';
 import '../model/stages_csv.dart';
 import '../model/start_item_csv.dart';
 import '../model/start_number_and_times_csv.dart';
+import 'file_picker.dart';
 
 class StartlistProvider {
-  Future<RaceCsv?> getRaceCsv([PlatformFile? file]) async {
-    file ??= await _pickCsv();
-    if (file == null || file.bytes == null) {
-      return null;
-    }
-    final csv = _decodeBytes(file.bytes!);
-
+  RaceCsv? getRaceFromCsv(String csv, String fileName) {
     try {
       final maps = _convertCsv(csv);
       final riders = <StartItemCsv>[];
@@ -28,7 +23,7 @@ class StartlistProvider {
       }
 
       return RaceCsv(
-        fileName: file.name,
+        fileName:fileName,
         stageNames: riders.first.startTimes?.keys.toList() ?? [],
         startItems: riders,
       );
@@ -45,14 +40,7 @@ class StartlistProvider {
     }
   }
 
-  Future<StagesCsv?> getStagesCsv([PlatformFile? file]) async {
-    file ??= await _pickCsv();
-    if (file == null || file.bytes == null) {
-      return null;
-    }
-    // final csv = utf8.decode(file.bytes!).trim();
-    final csv = _decodeBytes(file.bytes!);
-
+  Future<StagesCsv?> getStagesFromCsv(String csv) async {
     try {
       final maps = _convertCsv(csv);
       final stages = <StartNumberAndTimesCsv>[];
@@ -78,33 +66,8 @@ class StartlistProvider {
     }
   }
 
-  String _decodeBytes(Uint8List bytes) {
-    var csv = '';
-    try {
-      csv = utf8.decode(bytes).trim();
-    } on FormatException catch (e) {
-      logger
-        ..e('StartlistProvider -> Error converting to utf8: $e')
-        ..i('StartlistProvider -> Trying from cp1251...');
-      try {
-        csv = windows1251.decode(bytes).trim();
-      } on Exception {
-        rethrow;
-      }
-    }
-    return csv;
-  }
-
-  Future<PlatformFile?> _pickCsv() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['csv'],
-      withData: true,
-    );
-    return result?.files.first;
-  }
-
   List<Map<String, dynamic>> _convertCsv(String csv) {
+    print(csv.allMatches('\r\n').length);
     var maps = CsvToMapConverter(fieldDelimiter: ';', eol: '\n').convert(csv);
     // Если конвертация не принесла успеха, то
     // пробуем сконвертировать с окончанием строки по умолчанию: '\r\n'

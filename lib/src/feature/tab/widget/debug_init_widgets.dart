@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../common/widget/header_widget.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../csv/csv.dart';
+import '../../csv/logic/file_picker.dart';
+import '../../csv/logic/text_decoder.dart';
 import '../../database/bloc/database_bloc.dart';
 import '../../log/log.dart';
 import '../../settings/bloc/settings_bloc.dart';
@@ -135,10 +137,13 @@ class _DebugTestCsv extends StatelessWidget {
     // final bloc = context.read<DatabaseBloc>();
     return TextButton(
       onPressed: () async {
-        final stages = await StartlistProvider().getStagesCsv();
+      final file = await pickCsvFile();
+      if (file != null) {
+        final csv = decodeBytes(file.bytes!);
+        final stages = await StartlistProvider().getStagesFromCsv(csv);
         if (stages != null) {
           // bloc.add(DatabaseEvent.createStagesFromStagesCsv(stages: stages));
-        }
+        }}
       },
       child: const Text('CSV Test'),
     );

@@ -1,9 +1,11 @@
+import 'package:entime/src/feature/csv/logic/text_decoder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../csv/csv.dart';
+import '../../csv/logic/file_picker.dart';
 import '../database.dart';
 
 class RaceItemTile extends StatelessWidget {
@@ -49,7 +51,10 @@ class RaceItemTile extends StatelessWidget {
       PopupMenuItem<void>(
         onTap: () async {
           final bloc = context.read<DatabaseBloc>();
-          final stages = await StartlistProvider().getStagesCsv();
+          final file = await pickCsvFile();
+          if (file != null) {
+            final csv = decodeBytes(file.bytes!);
+          final stages = await StartlistProvider().getStagesFromCsv(csv);
           if (stages != null) {
             bloc.add(
               DatabaseEvent.createStagesFromStagesCsv(
@@ -57,7 +62,7 @@ class RaceItemTile extends StatelessWidget {
                 stages: stages,
               ),
             );
-          }
+          }}
         },
         child: ListTile(
           leading: const Icon(Icons.add),

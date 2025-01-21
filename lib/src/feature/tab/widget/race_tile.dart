@@ -4,6 +4,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../common/localization/localization.dart';
 import '../../csv/csv.dart';
+import '../../csv/logic/file_picker.dart';
+import '../../csv/logic/text_decoder.dart';
 import '../../database/bloc/database_bloc.dart';
 import '../../database/widget/races_list_page.dart';
 import '../../database/widget/stages_list_page.dart';
@@ -19,8 +21,8 @@ class RaceTile extends StatelessWidget {
           void routeToSelectRace() {
             if (databaseState.race != null && databaseState.stage != null) {
               context.read<DatabaseBloc>().add(
-                const DatabaseEvent.deselectRace(),
-              );
+                    const DatabaseEvent.deselectRace(),
+                  );
             }
             Navigator.of(context).push(
               MaterialPageRoute<void>(
@@ -35,14 +37,12 @@ class RaceTile extends StatelessWidget {
               icon: Icon(MdiIcons.flagCheckered),
               onPressed: routeToSelectRace,
             ),
-            title:
-                databaseState.race == null
-                    ? Text(Localization.current.I18nInit_selectRace)
-                    : Text(databaseState.race!.name),
-            subtitle:
-                databaseState.stage == null
-                    ? Text(Localization.current.I18nInit_selectStage)
-                    : Text(databaseState.stage!.name),
+            title: databaseState.race == null
+                ? Text(Localization.current.I18nInit_selectRace)
+                : Text(databaseState.race!.name),
+            subtitle: databaseState.stage == null
+                ? Text(Localization.current.I18nInit_selectStage)
+                : Text(databaseState.stage!.name),
             trailing: const _RaceMenuButton(),
           );
         },
@@ -103,9 +103,15 @@ class _RaceMenuButton extends StatelessWidget {
       onSelected: (value) async {
         switch (value) {
           case RaceMenuButton.import:
-            final race = await StartlistProvider().getRaceCsv();
-            if (race != null) {
-              databaseBloc.add(DatabaseEvent.createRaceFromRaceCsv(race: race));
+            final file = await pickCsvFile();
+            if (file != null) {
+              final csv = decodeBytes(file.bytes!);
+              final race = StartlistProvider().getRaceFromCsv(csv, file.name);
+              // final race = await StartlistProvider().getRaceCsv();
+              if (race != null) {
+                databaseBloc
+                    .add(DatabaseEvent.createRaceFromRaceCsv(race: race));
+              }
             }
         }
       },
