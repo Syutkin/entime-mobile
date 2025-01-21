@@ -31,9 +31,6 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
       event.map(
         start: (event) async {
           await _countdown.start(event.stageId);
-          // _nextStartTime = await _getNextStarttime(DateTime.now());
-          // _isFinished = false;
-          // await _countdown(stageId: stageId);
         },
         tick: (event) {
           final nextStartTime = event.tick.nextStartTime;
@@ -56,7 +53,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
             );
           }
         },
-        beep: (_CountdownBeep event) {
+        beep: (_) {
           _audioController.beep();
         },
         callParticipant: (event) {
