@@ -1,20 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
-import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/feature/countdown/countdown.dart';
 import 'package:entime/src/feature/countdown/model/tick.dart';
-import 'package:entime/src/feature/database/database.dart';
-import 'package:entime/src/feature/settings/bloc/settings_bloc.dart';
-import 'package:entime/src/feature/settings/model/app_settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
-import 'package:entime/src/feature/countdown/widget/countdown_page.dart';
 
 class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState>
     implements CountdownBloc {}
