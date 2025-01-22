@@ -10,7 +10,7 @@ class AppBlocObserver extends BlocObserver {
     super.onEvent(bloc, event);
 
     if ('$event'.contains('DatabaseEvent.emitState')) {
-      logger.d('Event: DatabaseEvent.emitState');
+      logger.t('Event: DatabaseEvent.emitState');
     } else if (bloc.toString() != "Instance of 'CountdownBloc'") {
       logger.d('Event: $event');
     }
@@ -25,7 +25,9 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    if (bloc.toString() != "Instance of 'CountdownBloc'") {
+    if ('$transition'.contains('currentState: DatabaseState')) {
+      logger.t('Transition: from old to new DatabaseState');
+    } else if (bloc.toString() != "Instance of 'CountdownBloc'") {
       logger.t('Transition: $transition');
     }
   }

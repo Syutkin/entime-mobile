@@ -137,7 +137,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           }
         },
         emitState: (event) {
-          logger.t('emitState event, participants length: ${_participants.length}');
           emit(
             DatabaseState(
               race: event.race,
@@ -614,7 +613,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     int? autoFinishNumber,
     bool? updateFinishNumber,
   }) {
-    logger.t('_emitState func, participants length: ${_participants.length}');
     add(
       DatabaseEvent.emitState(
         race: _race,

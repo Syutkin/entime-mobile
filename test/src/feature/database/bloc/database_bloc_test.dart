@@ -1,11 +1,15 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/feature/csv/csv.dart';
 import 'package:entime/src/feature/csv/model/stages_csv.dart';
 import 'package:entime/src/feature/csv/model/start_number_and_times_csv.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/settings/settings.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -75,6 +79,7 @@ void main() {
       test(
         'Initial state',
         () async {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -99,6 +104,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Initialize',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -134,6 +140,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Add race',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -150,6 +157,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Delete race',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -166,6 +174,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Update race',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -183,6 +192,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Upsert race (update)',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -200,6 +210,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Upsert race (new)',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -217,6 +228,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Get races',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -233,6 +245,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Select race',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -253,6 +266,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Deselect race',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -277,6 +291,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Add stage',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -299,6 +314,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Upsert stage (new)',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -320,6 +336,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Upsert stage (update)',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -347,6 +364,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Delete stage',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -369,6 +387,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Get stages',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -390,6 +409,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Select stage',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -419,29 +439,225 @@ void main() {
         },
       );
 
-      // blocTest<DatabaseBloc, DatabaseState>(
-      //   'Get participants at start',
-      //   setUp: () {
-      //     bloc = DatabaseBloc(
-      //       database: db,
-      //       settingsProvider: settingsProvider,
-      //       fileProvider: fileProvider,
-      //     );
-      //   },
-      //   build: () => bloc,
-      //   act: (bloc) {
-      //     // At third stage we starts at 12:00:00
-      //     bloc.add( DatabaseEvent.getParticipantsAtStart(stage.id));
-      //   },
-      //   verify: (bloc) {
-      //     expectLater(bloc.state.participants.length, 79);
-      //     expectLater(bloc.state.participants.first.startTime, '12:00:00');
-      //   },
-      // );
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Get participants at start',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          await Future<void>.delayed(Duration.zero);
+          // At third stage we starts at 12:00:00
+          bloc.add(const DatabaseEvent.getParticipantsAtStart(3));
+        },
+        verify: (bloc) {
+          expect(bloc.state.participants.length, 79);
+          expect(bloc.state.participants.first.startTime, '12:00:00');
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Add start number',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(DatabaseEvent.selectStage(stage))
+            ..add(
+              DatabaseEvent.addStartNumber(
+                stage: stage,
+                number: 1,
+                startTime: '09:00:00',
+              ),
+            );
+        },
+        verify: (bloc) {
+          expect(bloc.state.participants.first.number, 1);
+          // expect(bloc.state.participants.first.startTime, '09:00:00');
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Add start number to existing start time',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc.add(
+            DatabaseEvent.addStartNumber(
+              stage: stage,
+              number: 1,
+              startTime: '10:00:00',
+            ),
+          );
+        },
+        verify: (bloc) {
+          bloc.state.notification?.mapOrNull(
+            updateStartNumber: (notification) {
+              expect(notification.number, 1);
+              expect(notification.startTime, '10:00:00');
+            },
+          );
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Update rider',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc.add(DatabaseEvent.updateRider(riderId: 1, name: 'name'));
+        },
+        verify: (bloc) {
+          expect(bloc.state.riders.first.name, 'name');
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Update racer',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.updateRacer(
+                riderId: 1,
+                participantId: 1,
+                name: 'name',
+                category: 'category',
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.riders.first.name, 'name');
+          expect(bloc.state.participants.first.name, 'name');
+          expect(bloc.state.participants.first.category, 'category');
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Update starting info',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.updateStartingInfo(
+                stageId: stage.id,
+                participantId: 1,
+                startTime: '05:00:00',
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.participants.first.startTime, '05:00:00');
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Update manual start time',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.updateManualStartTime(
+                stageId: stage.id,
+                timestamp: DateTime(2020, 1, 1, 10, 0, 2, 123),
+                ntpOffset: 111,
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          // Add offset to manual start time
+          expect(bloc.state.participants.first.manualStartTime, '10:00:02,234');
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Set status for start id',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          settingsProvider
+              .update(settingsProvider.settings.copyWith(showDNS: true));
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.setStatusForStartId(
+                startId: 1,
+                status: ParticipantStatus.dns,
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(
+            bloc.state.participants.first.statusId,
+            ParticipantStatus.dns.index,
+          );
+        },
+      );
 
       blocTest<DatabaseBloc, DatabaseState>(
         'Create race from file',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -490,6 +706,7 @@ void main() {
       blocTest<DatabaseBloc, DatabaseState>(
         'Create stages from file',
         setUp: () {
+          Bloc.observer = AppBlocObserver();
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
