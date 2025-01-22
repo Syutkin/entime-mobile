@@ -161,9 +161,8 @@ mixin _$DatabaseEvent {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -300,8 +299,8 @@ mixin _$DatabaseEvent {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -438,8 +437,8 @@ mixin _$DatabaseEvent {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -491,10 +490,8 @@ mixin _$DatabaseEvent {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -540,9 +537,8 @@ mixin _$DatabaseEvent {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -588,9 +584,8 @@ mixin _$DatabaseEvent {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -811,9 +806,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -953,8 +947,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -1094,8 +1088,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -1153,10 +1147,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -1205,9 +1197,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -1256,9 +1247,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -1734,9 +1724,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -1890,8 +1879,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -2045,8 +2034,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -2118,10 +2107,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -2170,9 +2157,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -2221,9 +2207,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -2557,9 +2542,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -2699,8 +2683,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -2841,8 +2825,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -2900,10 +2884,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -2952,9 +2934,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -3003,9 +2984,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -3334,9 +3314,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -3477,8 +3456,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -3619,8 +3598,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -3679,10 +3658,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -3731,9 +3708,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -3782,9 +3758,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -4115,9 +4090,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -4258,8 +4232,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -4400,8 +4374,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -4460,10 +4434,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -4512,9 +4484,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -4563,9 +4534,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -4823,9 +4793,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -4965,8 +4934,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -5106,8 +5075,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -5165,10 +5134,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -5217,9 +5184,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -5268,9 +5234,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -5486,9 +5451,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -5628,8 +5592,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -5769,8 +5733,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -5828,10 +5792,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -5880,9 +5842,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -5931,9 +5892,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -6171,9 +6131,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -6313,8 +6272,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -6454,8 +6413,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -6513,10 +6472,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -6565,9 +6522,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -6616,9 +6572,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -6834,9 +6789,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -6976,8 +6930,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -7117,8 +7071,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -7176,10 +7130,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -7228,9 +7180,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -7279,9 +7230,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -7537,9 +7487,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -7679,8 +7628,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -7820,8 +7769,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -7879,10 +7828,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -7931,9 +7878,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -7982,9 +7928,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -8319,9 +8264,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -8462,8 +8406,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -8604,8 +8548,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -8664,10 +8608,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -8716,9 +8658,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -8767,9 +8708,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -9029,9 +8969,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -9171,8 +9110,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -9312,8 +9251,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -9371,10 +9310,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -9423,9 +9360,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -9474,9 +9410,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -9721,9 +9656,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -9863,8 +9797,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -10004,8 +9938,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -10063,10 +9997,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -10115,9 +10047,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -10166,9 +10097,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -10414,9 +10344,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -10556,8 +10485,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -10697,8 +10626,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -10756,10 +10685,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -10808,9 +10735,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -10859,9 +10785,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -11111,9 +11036,8 @@ class _$GetParticipantsAtStartImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -11253,8 +11177,8 @@ class _$GetParticipantsAtStartImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -11394,8 +11318,8 @@ class _$GetParticipantsAtStartImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -11453,10 +11377,8 @@ class _$GetParticipantsAtStartImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -11505,9 +11427,8 @@ class _$GetParticipantsAtStartImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -11556,9 +11477,8 @@ class _$GetParticipantsAtStartImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -11842,9 +11762,8 @@ class _$AddStartNumberImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -11984,8 +11903,8 @@ class _$AddStartNumberImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -12125,8 +12044,8 @@ class _$AddStartNumberImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -12184,10 +12103,8 @@ class _$AddStartNumberImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -12236,9 +12153,8 @@ class _$AddStartNumberImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -12287,9 +12203,8 @@ class _$AddStartNumberImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -12646,9 +12561,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -12789,8 +12703,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -12931,8 +12845,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -12991,10 +12905,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -13043,9 +12955,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -13094,9 +13005,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -13477,9 +13387,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -13620,8 +13529,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -13762,8 +13671,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -13822,10 +13731,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -13874,9 +13781,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -13925,9 +13831,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -14278,9 +14183,8 @@ class _$UpdateStartingInfoImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -14427,8 +14331,8 @@ class _$UpdateStartingInfoImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -14575,8 +14479,8 @@ class _$UpdateStartingInfoImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -14641,10 +14545,8 @@ class _$UpdateStartingInfoImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -14693,9 +14595,8 @@ class _$UpdateStartingInfoImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -14744,9 +14645,8 @@ class _$UpdateStartingInfoImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -15086,9 +14986,8 @@ class _$UpdateAutomaticCorrectionImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -15229,8 +15128,8 @@ class _$UpdateAutomaticCorrectionImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -15371,8 +15270,8 @@ class _$UpdateAutomaticCorrectionImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -15431,10 +15330,8 @@ class _$UpdateAutomaticCorrectionImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -15483,9 +15380,8 @@ class _$UpdateAutomaticCorrectionImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -15534,9 +15430,8 @@ class _$UpdateAutomaticCorrectionImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -15835,9 +15730,8 @@ class _$UpdateManualStartTimeImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -15977,8 +15871,8 @@ class _$UpdateManualStartTimeImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -16119,8 +16013,8 @@ class _$UpdateManualStartTimeImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -16179,10 +16073,8 @@ class _$UpdateManualStartTimeImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -16231,9 +16123,8 @@ class _$UpdateManualStartTimeImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -16282,9 +16173,8 @@ class _$UpdateManualStartTimeImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -16549,9 +16439,8 @@ class _$SetStatusForStartIdImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -16691,8 +16580,8 @@ class _$SetStatusForStartIdImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -16832,8 +16721,8 @@ class _$SetStatusForStartIdImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -16891,10 +16780,8 @@ class _$SetStatusForStartIdImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -16943,9 +16830,8 @@ class _$SetStatusForStartIdImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -16994,9 +16880,8 @@ class _$SetStatusForStartIdImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -17354,9 +17239,8 @@ class _$AddFinishTimeImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -17497,8 +17381,8 @@ class _$AddFinishTimeImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -17647,8 +17531,8 @@ class _$AddFinishTimeImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -17707,10 +17591,8 @@ class _$AddFinishTimeImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -17759,9 +17641,8 @@ class _$AddFinishTimeImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -17810,9 +17691,8 @@ class _$AddFinishTimeImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -18111,9 +17991,8 @@ class _$AddFinishTimeManualImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -18253,8 +18132,8 @@ class _$AddFinishTimeManualImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -18394,8 +18273,8 @@ class _$AddFinishTimeManualImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -18453,10 +18332,8 @@ class _$AddFinishTimeManualImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -18505,9 +18382,8 @@ class _$AddFinishTimeManualImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -18556,9 +18432,8 @@ class _$AddFinishTimeManualImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -18815,9 +18690,8 @@ class _$ClearStartResultsDebugImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -18957,8 +18831,8 @@ class _$ClearStartResultsDebugImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -19098,8 +18972,8 @@ class _$ClearStartResultsDebugImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -19157,10 +19031,8 @@ class _$ClearStartResultsDebugImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -19209,9 +19081,8 @@ class _$ClearStartResultsDebugImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -19260,9 +19131,8 @@ class _$ClearStartResultsDebugImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -19514,9 +19384,8 @@ class _$ClearFinishResultsDebugImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -19656,8 +19525,8 @@ class _$ClearFinishResultsDebugImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -19797,8 +19666,8 @@ class _$ClearFinishResultsDebugImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -19856,10 +19725,8 @@ class _$ClearFinishResultsDebugImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -19908,9 +19775,8 @@ class _$ClearFinishResultsDebugImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -19959,9 +19825,8 @@ class _$ClearFinishResultsDebugImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -20210,9 +20075,8 @@ class _$HideAllFinisesImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -20352,8 +20216,8 @@ class _$HideAllFinisesImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -20493,8 +20357,8 @@ class _$HideAllFinisesImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -20552,10 +20416,8 @@ class _$HideAllFinisesImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -20604,9 +20466,8 @@ class _$HideAllFinisesImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -20655,9 +20516,8 @@ class _$HideAllFinisesImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -20915,9 +20775,8 @@ class _$ClearNumberAtFinishImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -21057,8 +20916,8 @@ class _$ClearNumberAtFinishImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -21198,8 +21057,8 @@ class _$ClearNumberAtFinishImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -21257,10 +21116,8 @@ class _$ClearNumberAtFinishImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -21309,9 +21166,8 @@ class _$ClearNumberAtFinishImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -21360,9 +21216,8 @@ class _$ClearNumberAtFinishImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -21623,9 +21478,8 @@ class _$SetDNSForStageImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -21765,8 +21619,8 @@ class _$SetDNSForStageImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -21906,8 +21760,8 @@ class _$SetDNSForStageImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -21965,10 +21819,8 @@ class _$SetDNSForStageImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -22017,9 +21869,8 @@ class _$SetDNSForStageImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -22068,9 +21919,8 @@ class _$SetDNSForStageImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -22331,9 +22181,8 @@ class _$SetDNFForStageImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -22473,8 +22322,8 @@ class _$SetDNFForStageImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -22614,8 +22463,8 @@ class _$SetDNFForStageImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -22673,10 +22522,8 @@ class _$SetDNFForStageImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -22725,9 +22572,8 @@ class _$SetDNFForStageImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -22776,9 +22622,8 @@ class _$SetDNFForStageImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -23026,9 +22871,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -23168,8 +23012,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -23309,8 +23153,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -23368,10 +23212,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -23420,9 +23262,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -23471,9 +23312,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -23755,9 +23595,8 @@ class _$AddNumberToFinishImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -23897,8 +23736,8 @@ class _$AddNumberToFinishImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -24038,8 +23877,8 @@ class _$AddNumberToFinishImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -24097,10 +23936,8 @@ class _$AddNumberToFinishImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -24149,9 +23986,8 @@ class _$AddNumberToFinishImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -24200,9 +24036,8 @@ class _$AddNumberToFinishImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -24469,9 +24304,8 @@ class _$GetNumbersOnTraceNowImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -24611,8 +24445,8 @@ class _$GetNumbersOnTraceNowImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -24752,8 +24586,8 @@ class _$GetNumbersOnTraceNowImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -24811,10 +24645,8 @@ class _$GetNumbersOnTraceNowImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -24863,9 +24695,8 @@ class _$GetNumbersOnTraceNowImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -24914,9 +24745,8 @@ class _$GetNumbersOnTraceNowImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -25187,9 +25017,8 @@ class _$ShiftStartsTimeImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -25329,8 +25158,8 @@ class _$ShiftStartsTimeImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -25470,8 +25299,8 @@ class _$ShiftStartsTimeImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -25529,10 +25358,8 @@ class _$ShiftStartsTimeImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -25581,9 +25408,8 @@ class _$ShiftStartsTimeImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -25632,9 +25458,8 @@ class _$ShiftStartsTimeImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -25888,9 +25713,8 @@ class _$SelectAwaitingNumberImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -26030,8 +25854,8 @@ class _$SelectAwaitingNumberImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -26171,8 +25995,8 @@ class _$SelectAwaitingNumberImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -26230,10 +26054,8 @@ class _$SelectAwaitingNumberImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -26282,9 +26104,8 @@ class _$SelectAwaitingNumberImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -26333,9 +26154,8 @@ class _$SelectAwaitingNumberImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -26558,9 +26378,8 @@ class _$DeselectAwaitingNumberImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -26700,8 +26519,8 @@ class _$DeselectAwaitingNumberImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -26841,8 +26660,8 @@ class _$DeselectAwaitingNumberImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -26900,10 +26719,8 @@ class _$DeselectAwaitingNumberImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -26952,9 +26769,8 @@ class _$DeselectAwaitingNumberImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -27003,9 +26819,8 @@ class _$DeselectAwaitingNumberImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -27024,81 +26839,51 @@ abstract class _DeselectAwaitingNumber implements DatabaseEvent {
 }
 
 /// @nodoc
-abstract class _$$CreateRaceFromRaceCsvImplCopyWith<$Res> {
-  factory _$$CreateRaceFromRaceCsvImplCopyWith(
-          _$CreateRaceFromRaceCsvImpl value,
-          $Res Function(_$CreateRaceFromRaceCsvImpl) then) =
-      __$$CreateRaceFromRaceCsvImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({RaceCsv race});
+abstract class _$$CreateRaceFromFileImplCopyWith<$Res> {
+  factory _$$CreateRaceFromFileImplCopyWith(_$CreateRaceFromFileImpl value,
+          $Res Function(_$CreateRaceFromFileImpl) then) =
+      __$$CreateRaceFromFileImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CreateRaceFromRaceCsvImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$CreateRaceFromRaceCsvImpl>
-    implements _$$CreateRaceFromRaceCsvImplCopyWith<$Res> {
-  __$$CreateRaceFromRaceCsvImplCopyWithImpl(_$CreateRaceFromRaceCsvImpl _value,
-      $Res Function(_$CreateRaceFromRaceCsvImpl) _then)
+class __$$CreateRaceFromFileImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$CreateRaceFromFileImpl>
+    implements _$$CreateRaceFromFileImplCopyWith<$Res> {
+  __$$CreateRaceFromFileImplCopyWithImpl(_$CreateRaceFromFileImpl _value,
+      $Res Function(_$CreateRaceFromFileImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? race = null,
-  }) {
-    return _then(_$CreateRaceFromRaceCsvImpl(
-      race: null == race
-          ? _value.race
-          : race // ignore: cast_nullable_to_non_nullable
-              as RaceCsv,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$CreateRaceFromRaceCsvImpl
+class _$CreateRaceFromFileImpl
     with DiagnosticableTreeMixin
-    implements _CreateRaceFromRaceCsv {
-  const _$CreateRaceFromRaceCsvImpl({required this.race});
-
-  @override
-  final RaceCsv race;
+    implements _CreateRaceFromFile {
+  const _$CreateRaceFromFileImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DatabaseEvent.createRaceFromRaceCsv(race: $race)';
+    return 'DatabaseEvent.createRaceFromFile()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'DatabaseEvent.createRaceFromRaceCsv'))
-      ..add(DiagnosticsProperty('race', race));
+        .add(DiagnosticsProperty('type', 'DatabaseEvent.createRaceFromFile'));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CreateRaceFromRaceCsvImpl &&
-            (identical(other.race, race) || other.race == race));
+        (other.runtimeType == runtimeType && other is _$CreateRaceFromFileImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, race);
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CreateRaceFromRaceCsvImplCopyWith<_$CreateRaceFromRaceCsvImpl>
-      get copyWith => __$$CreateRaceFromRaceCsvImplCopyWithImpl<
-          _$CreateRaceFromRaceCsvImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -27246,15 +27031,14 @@ class _$CreateRaceFromRaceCsvImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
     required TResult Function(TrailInfo trail) shareTrack,
   }) {
-    return createRaceFromRaceCsv(race);
+    return createRaceFromFile();
   }
 
   @override
@@ -27388,14 +27172,14 @@ class _$CreateRaceFromRaceCsvImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
     TResult? Function(TrailInfo trail)? shareTrack,
   }) {
-    return createRaceFromRaceCsv?.call(race);
+    return createRaceFromFile?.call();
   }
 
   @override
@@ -27529,16 +27313,16 @@ class _$CreateRaceFromRaceCsvImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
     TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
-    if (createRaceFromRaceCsv != null) {
-      return createRaceFromRaceCsv(race);
+    if (createRaceFromFile != null) {
+      return createRaceFromFile();
     }
     return orElse();
   }
@@ -27588,16 +27372,14 @@ class _$CreateRaceFromRaceCsvImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
     required TResult Function(_ShareTrack value) shareTrack,
   }) {
-    return createRaceFromRaceCsv(this);
+    return createRaceFromFile(this);
   }
 
   @override
@@ -27640,15 +27422,14 @@ class _$CreateRaceFromRaceCsvImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
     TResult? Function(_ShareTrack value)? shareTrack,
   }) {
-    return createRaceFromRaceCsv?.call(this);
+    return createRaceFromFile?.call(this);
   }
 
   @override
@@ -27691,52 +27472,40 @@ class _$CreateRaceFromRaceCsvImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
     TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
-    if (createRaceFromRaceCsv != null) {
-      return createRaceFromRaceCsv(this);
+    if (createRaceFromFile != null) {
+      return createRaceFromFile(this);
     }
     return orElse();
   }
 }
 
-abstract class _CreateRaceFromRaceCsv implements DatabaseEvent {
-  const factory _CreateRaceFromRaceCsv({required final RaceCsv race}) =
-      _$CreateRaceFromRaceCsvImpl;
-
-  RaceCsv get race;
-
-  /// Create a copy of DatabaseEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateRaceFromRaceCsvImplCopyWith<_$CreateRaceFromRaceCsvImpl>
-      get copyWith => throw _privateConstructorUsedError;
+abstract class _CreateRaceFromFile implements DatabaseEvent {
+  const factory _CreateRaceFromFile() = _$CreateRaceFromFileImpl;
 }
 
 /// @nodoc
-abstract class _$$CreateStagesFromStagesCsvvImplCopyWith<$Res> {
-  factory _$$CreateStagesFromStagesCsvvImplCopyWith(
-          _$CreateStagesFromStagesCsvvImpl value,
-          $Res Function(_$CreateStagesFromStagesCsvvImpl) then) =
-      __$$CreateStagesFromStagesCsvvImplCopyWithImpl<$Res>;
+abstract class _$$CreateStagesFromFileImplCopyWith<$Res> {
+  factory _$$CreateStagesFromFileImplCopyWith(_$CreateStagesFromFileImpl value,
+          $Res Function(_$CreateStagesFromFileImpl) then) =
+      __$$CreateStagesFromFileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int raceId, StagesCsv stages});
+  $Res call({int raceId});
 }
 
 /// @nodoc
-class __$$CreateStagesFromStagesCsvvImplCopyWithImpl<$Res>
-    extends _$DatabaseEventCopyWithImpl<$Res, _$CreateStagesFromStagesCsvvImpl>
-    implements _$$CreateStagesFromStagesCsvvImplCopyWith<$Res> {
-  __$$CreateStagesFromStagesCsvvImplCopyWithImpl(
-      _$CreateStagesFromStagesCsvvImpl _value,
-      $Res Function(_$CreateStagesFromStagesCsvvImpl) _then)
+class __$$CreateStagesFromFileImplCopyWithImpl<$Res>
+    extends _$DatabaseEventCopyWithImpl<$Res, _$CreateStagesFromFileImpl>
+    implements _$$CreateStagesFromFileImplCopyWith<$Res> {
+  __$$CreateStagesFromFileImplCopyWithImpl(_$CreateStagesFromFileImpl _value,
+      $Res Function(_$CreateStagesFromFileImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of DatabaseEvent
@@ -27745,69 +27514,59 @@ class __$$CreateStagesFromStagesCsvvImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? raceId = null,
-    Object? stages = null,
   }) {
-    return _then(_$CreateStagesFromStagesCsvvImpl(
+    return _then(_$CreateStagesFromFileImpl(
       raceId: null == raceId
           ? _value.raceId
           : raceId // ignore: cast_nullable_to_non_nullable
               as int,
-      stages: null == stages
-          ? _value.stages
-          : stages // ignore: cast_nullable_to_non_nullable
-              as StagesCsv,
     ));
   }
 }
 
 /// @nodoc
 
-class _$CreateStagesFromStagesCsvvImpl
+class _$CreateStagesFromFileImpl
     with DiagnosticableTreeMixin
-    implements _CreateStagesFromStagesCsvv {
-  const _$CreateStagesFromStagesCsvvImpl(
-      {required this.raceId, required this.stages});
+    implements _CreateStagesFromFile {
+  const _$CreateStagesFromFileImpl({required this.raceId});
 
   @override
   final int raceId;
-  @override
-  final StagesCsv stages;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DatabaseEvent.createStagesFromStagesCsv(raceId: $raceId, stages: $stages)';
+    return 'DatabaseEvent.createStagesFromFile(raceId: $raceId)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty(
-          'type', 'DatabaseEvent.createStagesFromStagesCsv'))
-      ..add(DiagnosticsProperty('raceId', raceId))
-      ..add(DiagnosticsProperty('stages', stages));
+      ..add(DiagnosticsProperty('type', 'DatabaseEvent.createStagesFromFile'))
+      ..add(DiagnosticsProperty('raceId', raceId));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CreateStagesFromStagesCsvvImpl &&
-            (identical(other.raceId, raceId) || other.raceId == raceId) &&
-            (identical(other.stages, stages) || other.stages == stages));
+            other is _$CreateStagesFromFileImpl &&
+            (identical(other.raceId, raceId) || other.raceId == raceId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, raceId, stages);
+  int get hashCode => Object.hash(runtimeType, raceId);
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CreateStagesFromStagesCsvvImplCopyWith<_$CreateStagesFromStagesCsvvImpl>
-      get copyWith => __$$CreateStagesFromStagesCsvvImplCopyWithImpl<
-          _$CreateStagesFromStagesCsvvImpl>(this, _$identity);
+  _$$CreateStagesFromFileImplCopyWith<_$CreateStagesFromFileImpl>
+      get copyWith =>
+          __$$CreateStagesFromFileImplCopyWithImpl<_$CreateStagesFromFileImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -27955,15 +27714,14 @@ class _$CreateStagesFromStagesCsvvImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
     required TResult Function(TrailInfo trail) shareTrack,
   }) {
-    return createStagesFromStagesCsv(raceId, stages);
+    return createStagesFromFile(raceId);
   }
 
   @override
@@ -28097,14 +27855,14 @@ class _$CreateStagesFromStagesCsvvImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
     TResult? Function(TrailInfo trail)? shareTrack,
   }) {
-    return createStagesFromStagesCsv?.call(raceId, stages);
+    return createStagesFromFile?.call(raceId);
   }
 
   @override
@@ -28238,16 +27996,16 @@ class _$CreateStagesFromStagesCsvvImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
     TResult Function(TrailInfo trail)? shareTrack,
     required TResult orElse(),
   }) {
-    if (createStagesFromStagesCsv != null) {
-      return createStagesFromStagesCsv(raceId, stages);
+    if (createStagesFromFile != null) {
+      return createStagesFromFile(raceId);
     }
     return orElse();
   }
@@ -28297,16 +28055,14 @@ class _$CreateStagesFromStagesCsvvImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
     required TResult Function(_ShareTrack value) shareTrack,
   }) {
-    return createStagesFromStagesCsv(this);
+    return createStagesFromFile(this);
   }
 
   @override
@@ -28349,15 +28105,14 @@ class _$CreateStagesFromStagesCsvvImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
     TResult? Function(_ShareTrack value)? shareTrack,
   }) {
-    return createStagesFromStagesCsv?.call(this);
+    return createStagesFromFile?.call(this);
   }
 
   @override
@@ -28400,34 +28155,31 @@ class _$CreateStagesFromStagesCsvvImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
     TResult Function(_ShareTrack value)? shareTrack,
     required TResult orElse(),
   }) {
-    if (createStagesFromStagesCsv != null) {
-      return createStagesFromStagesCsv(this);
+    if (createStagesFromFile != null) {
+      return createStagesFromFile(this);
     }
     return orElse();
   }
 }
 
-abstract class _CreateStagesFromStagesCsvv implements DatabaseEvent {
-  const factory _CreateStagesFromStagesCsvv(
-      {required final int raceId,
-      required final StagesCsv stages}) = _$CreateStagesFromStagesCsvvImpl;
+abstract class _CreateStagesFromFile implements DatabaseEvent {
+  const factory _CreateStagesFromFile({required final int raceId}) =
+      _$CreateStagesFromFileImpl;
 
   int get raceId;
-  StagesCsv get stages;
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateStagesFromStagesCsvvImplCopyWith<_$CreateStagesFromStagesCsvvImpl>
+  _$$CreateStagesFromFileImplCopyWith<_$CreateStagesFromFileImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -28621,9 +28373,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -28763,8 +28514,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -28904,8 +28655,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -28963,10 +28714,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -29015,9 +28764,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -29066,9 +28814,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -29276,9 +29023,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -29418,8 +29164,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -29559,8 +29305,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -29618,10 +29364,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -29670,9 +29414,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -29721,9 +29464,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -29933,9 +29675,8 @@ class _$ShareDatabaseImpl
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -30075,8 +29816,8 @@ class _$ShareDatabaseImpl
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -30216,8 +29957,8 @@ class _$ShareDatabaseImpl
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -30275,10 +30016,8 @@ class _$ShareDatabaseImpl
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -30327,9 +30066,8 @@ class _$ShareDatabaseImpl
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -30378,9 +30116,8 @@ class _$ShareDatabaseImpl
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,
@@ -30618,9 +30355,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
         shiftStartsTime,
     required TResult Function(int number) selectAwaitingNumber,
     required TResult Function() deselectAwaitingNumber,
-    required TResult Function(RaceCsv race) createRaceFromRaceCsv,
-    required TResult Function(int raceId, StagesCsv stages)
-        createStagesFromStagesCsv,
+    required TResult Function() createRaceFromFile,
+    required TResult Function(int raceId) createStagesFromFile,
     required TResult Function() shareStart,
     required TResult Function() shareFinish,
     required TResult Function() shareDatabase,
@@ -30760,8 +30496,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
         shiftStartsTime,
     TResult? Function(int number)? selectAwaitingNumber,
     TResult? Function()? deselectAwaitingNumber,
-    TResult? Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult? Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult? Function()? createRaceFromFile,
+    TResult? Function(int raceId)? createStagesFromFile,
     TResult? Function()? shareStart,
     TResult? Function()? shareFinish,
     TResult? Function()? shareDatabase,
@@ -30901,8 +30637,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
         shiftStartsTime,
     TResult Function(int number)? selectAwaitingNumber,
     TResult Function()? deselectAwaitingNumber,
-    TResult Function(RaceCsv race)? createRaceFromRaceCsv,
-    TResult Function(int raceId, StagesCsv stages)? createStagesFromStagesCsv,
+    TResult Function()? createRaceFromFile,
+    TResult Function(int raceId)? createStagesFromFile,
     TResult Function()? shareStart,
     TResult Function()? shareFinish,
     TResult Function()? shareDatabase,
@@ -30960,10 +30696,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
     required TResult Function(_SelectAwaitingNumber value) selectAwaitingNumber,
     required TResult Function(_DeselectAwaitingNumber value)
         deselectAwaitingNumber,
-    required TResult Function(_CreateRaceFromRaceCsv value)
-        createRaceFromRaceCsv,
-    required TResult Function(_CreateStagesFromStagesCsvv value)
-        createStagesFromStagesCsv,
+    required TResult Function(_CreateRaceFromFile value) createRaceFromFile,
+    required TResult Function(_CreateStagesFromFile value) createStagesFromFile,
     required TResult Function(_ShareStart value) shareStart,
     required TResult Function(_ShareFinish value) shareFinish,
     required TResult Function(_ShareDatabase value) shareDatabase,
@@ -31012,9 +30746,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
     TResult? Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult? Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult? Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult? Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult? Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult? Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult? Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult? Function(_ShareStart value)? shareStart,
     TResult? Function(_ShareFinish value)? shareFinish,
     TResult? Function(_ShareDatabase value)? shareDatabase,
@@ -31063,9 +30796,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
     TResult Function(_ShiftStartsTime value)? shiftStartsTime,
     TResult Function(_SelectAwaitingNumber value)? selectAwaitingNumber,
     TResult Function(_DeselectAwaitingNumber value)? deselectAwaitingNumber,
-    TResult Function(_CreateRaceFromRaceCsv value)? createRaceFromRaceCsv,
-    TResult Function(_CreateStagesFromStagesCsvv value)?
-        createStagesFromStagesCsv,
+    TResult Function(_CreateRaceFromFile value)? createRaceFromFile,
+    TResult Function(_CreateStagesFromFile value)? createStagesFromFile,
     TResult Function(_ShareStart value)? shareStart,
     TResult Function(_ShareFinish value)? shareFinish,
     TResult Function(_ShareDatabase value)? shareDatabase,

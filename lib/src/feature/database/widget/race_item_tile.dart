@@ -1,11 +1,8 @@
-import 'package:entime/src/feature/csv/logic/text_decoder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../csv/csv.dart';
-import '../../csv/logic/file_picker.dart';
 import '../database.dart';
 
 class RaceItemTile extends StatelessWidget {
@@ -20,13 +17,12 @@ class RaceItemTile extends StatelessWidget {
     );
     return ListTile(
       title: Text(race.name),
-      subtitle:
-          (race.startDate != null && race.finishDate != null)
-              ? Text(
-                '${formatter.format(DateTime.parse(race.startDate!))} - '
-                '${formatter.format(DateTime.parse(race.finishDate!))}',
-              )
-              : const SizedBox.shrink(),
+      subtitle: (race.startDate != null && race.finishDate != null)
+          ? Text(
+              '${formatter.format(DateTime.parse(race.startDate!))} - '
+              '${formatter.format(DateTime.parse(race.finishDate!))}',
+            )
+          : const SizedBox.shrink(),
       onTap: () {
         context.read<DatabaseBloc>().add(DatabaseEvent.selectRace(race));
       },
@@ -50,19 +46,11 @@ class RaceItemTile extends StatelessWidget {
       ),
       PopupMenuItem<void>(
         onTap: () async {
-          final bloc = context.read<DatabaseBloc>();
-          final file = await pickCsvFile();
-          if (file != null) {
-            final csv = decodeBytes(file.bytes!);
-          final stages = await StartlistProvider().getStagesFromCsv(csv);
-          if (stages != null) {
-            bloc.add(
-              DatabaseEvent.createStagesFromStagesCsv(
-                raceId: race.id,
-                stages: stages,
-              ),
-            );
-          }}
+          context.read<DatabaseBloc>().add(
+                DatabaseEvent.createStagesFromFile(
+                  raceId: race.id,
+                ),
+              );
         },
         child: ListTile(
           leading: const Icon(Icons.add),

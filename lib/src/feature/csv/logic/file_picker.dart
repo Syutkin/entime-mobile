@@ -1,9 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 
-Future<PlatformFile?> pickCsvFile() async {
+Future<PlatformFile?> pickFile([List<String> extensions = const ['csv']]) async {
   final file = (await FilePicker.platform.pickFiles(
     type: FileType.custom,
-    allowedExtensions: ['csv'],
+    allowedExtensions: extensions,
     withData: true,
   ))?.files.first;
 

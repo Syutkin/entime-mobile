@@ -222,13 +222,10 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.deselectAwaitingNumber() =
       _DeselectAwaitingNumber;
 
-  const factory DatabaseEvent.createRaceFromRaceCsv({required RaceCsv race}) =
-      _CreateRaceFromRaceCsv;
+  const factory DatabaseEvent.createRaceFromFile() = _CreateRaceFromFile;
 
-  const factory DatabaseEvent.createStagesFromStagesCsv({
-    required int raceId,
-    required StagesCsv stages,
-  }) = _CreateStagesFromStagesCsvv;
+  const factory DatabaseEvent.createStagesFromFile({required int raceId}) =
+      _CreateStagesFromFile;
 
   const factory DatabaseEvent.shareStart() = _ShareStart;
 

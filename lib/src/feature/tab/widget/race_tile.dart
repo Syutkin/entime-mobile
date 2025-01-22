@@ -3,9 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../csv/csv.dart';
-import '../../csv/logic/file_picker.dart';
-import '../../csv/logic/text_decoder.dart';
 import '../../database/bloc/database_bloc.dart';
 import '../../database/widget/races_list_page.dart';
 import '../../database/widget/stages_list_page.dart';
@@ -103,16 +100,7 @@ class _RaceMenuButton extends StatelessWidget {
       onSelected: (value) async {
         switch (value) {
           case RaceMenuButton.import:
-            final file = await pickCsvFile();
-            if (file != null) {
-              final csv = decodeBytes(file.bytes!);
-              final race = StartlistProvider().getRaceFromCsv(csv, file.name);
-              // final race = await StartlistProvider().getRaceCsv();
-              if (race != null) {
-                databaseBloc
-                    .add(DatabaseEvent.createRaceFromRaceCsv(race: race));
-              }
-            }
+            databaseBloc.add(const DatabaseEvent.createRaceFromFile());
         }
       },
     );

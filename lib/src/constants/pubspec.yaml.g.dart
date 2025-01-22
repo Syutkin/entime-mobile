@@ -125,12 +125,12 @@ sealed class Pubspec {
   static final DateTime timestamp = DateTime.utc(
     2025,
     1,
-    21,
-    23,
-    3,
-    37,
-    524,
-    766,
+    22,
+    1,
+    4,
+    5,
+    351,
+    892,
   );
 
   /// Name
@@ -424,6 +424,7 @@ sealed class Pubspec {
     },
     'flutter_bloc': r'^9.0.0',
     'flutter_bluetooth_serial': r'^0.4.0',
+    'flutter_charset_detector': r'^4.0.0',
     'flutter_localizations': <String, Object>{
       'sdk': r'flutter',
     },
@@ -452,7 +453,6 @@ sealed class Pubspec {
     'sqlite3_flutter_libs': r'^0.5.28',
     'url_launcher': r'^6.3.1',
     'wakelock_plus': r'^1.2.10',
-    'windows1251': r'^2.0.0',
   };
 
   /// Developer dependencies

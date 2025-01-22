@@ -17,7 +17,6 @@ import '../../../common/utils/csv_utils.dart';
 import '../../../common/utils/file_utils.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../../feature/csv/csv.dart';
-import '../../csv/model/stages_csv.dart';
 import '../../settings/logic/settings_provider.dart';
 import '../drift/app_database.dart';
 import '../model/notification.dart';
@@ -31,20 +30,22 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   DatabaseBloc({
     required AppDatabase database,
     required SettingsProvider settingsProvider,
-  }) : _db = database,
-       _settingsProvider = settingsProvider,
-       super(
-         const DatabaseState(
-           races: [],
-           stages: [],
-           categories: [],
-           riders: [],
-           participants: [],
-           starts: [],
-           finishes: [],
-           numbersOnTrace: [],
-         ),
-       ) {
+    this.fileProvider = const StartlistProvider(),
+  })  : _db = database,
+        _settingsProvider = settingsProvider,
+        super(
+          const DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            starts: [],
+            finishes: [],
+            numbersOnTrace: [],
+          ),
+        ) {
+
     _racesSubscription = _db.getRaces().watch().listen((event) async {
       _races = event;
       logger.t('DatabaseBloc -> getRaces().watch()');
@@ -92,19 +93,18 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         .getNumbersOnTraceNow(stageId: 0, dateTimeNow: DateTime.now())
         .watch()
         .listen((event) async {
-          final stageId = _stage?.id ?? 0;
-          _numbersOnTrace =
-              await _db
-                  .getNumbersOnTraceNow(
-                    stageId: stageId,
-                    dateTimeNow: DateTime.now(),
-                  )
-                  .get();
-          logger.t(
-            'DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()',
-          );
-          _emitState();
-        });
+      final stageId = _stage?.id ?? 0;
+      _numbersOnTrace = await _db
+          .getNumbersOnTraceNow(
+            stageId: stageId,
+            dateTimeNow: DateTime.now(),
+          )
+          .get();
+      logger.t(
+        'DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()',
+      );
+      _emitState();
+    });
 
     _appSettingsSubscription = _settingsProvider.state.listen((state) async {
       _finishDelay = state.finishDelay;
@@ -247,13 +247,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           await _settingsProvider.update(settings);
           _participants =
               await _db.getParticipantsAtStart(stageId: stageId).get();
-          _numbersOnTrace =
-              await _db
-                  .getNumbersOnTraceNow(
-                    stageId: stageId,
-                    dateTimeNow: DateTime.now(),
-                  )
-                  .get();
+          _numbersOnTrace = await _db
+              .getNumbersOnTraceNow(
+                stageId: stageId,
+                dateTimeNow: DateTime.now(),
+              )
+              .get();
           _finishes = await _db.getFinishesFromStage(stageId: stageId).get();
           _emitState();
         },
@@ -361,8 +360,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             correction: event.correction,
             timestamp: event.timestamp,
             ntpOffset: event.ntpOffset,
-            deltaInSeconds:
-                event.deltaInSeconds ??
+            deltaInSeconds: event.deltaInSeconds ??
                 settingsProvider.settings.deltaInSeconds,
             forceUpdate: event.forceUpdate,
           );
@@ -451,13 +449,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           }
         },
         getNumbersOnTraceNow: (event) async {
-          _numbersOnTrace =
-              await _db
-                  .getNumbersOnTraceNow(
-                    stageId: event.stageId,
-                    dateTimeNow: event.dateTimeNow,
-                  )
-                  .get();
+          _numbersOnTrace = await _db
+              .getNumbersOnTraceNow(
+                stageId: event.stageId,
+                dateTimeNow: event.dateTimeNow,
+              )
+              .get();
           _emitState();
         },
         shiftStartsTime: (event) async {
@@ -475,16 +472,24 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           _awaitingNumber = null;
           _emitState();
         },
-        createRaceFromRaceCsv: (event) async {
-          final id = await _db.createRaceFromRaceCsv(event.race);
-          final race = await _db.getRace(id);
-          if (race != null) {
-            _stage = null;
-            add(DatabaseEvent.selectRace(race));
+        createRaceFromFile: (event) async {
+          // final fileProvider = StartlistProvider();
+          final raceCsv = await fileProvider.getRaceFromFile();
+          if (raceCsv != null) {
+            final id = await _db.createRaceFromRaceCsv(raceCsv);
+            final race = await _db.getRace(id);
+            if (race != null) {
+              _stage = null;
+              add(DatabaseEvent.selectRace(race));
+            }
           }
         },
-        createStagesFromStagesCsv: (event) async {
-          await _db.createStagesFromStagesCsv(event.raceId, event.stages);
+        createStagesFromFile: (event) async {
+          // final fileProvider = StartlistProvider();
+          final stageCsv = await fileProvider.getStagesFromCsv();
+          if (stageCsv != null) {
+            await _db.createStagesFromStagesCsv(event.raceId, stageCsv);
+          }
         },
         shareStart: (event) async {
           final race = _race;
@@ -598,8 +603,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   late StreamSubscription<List<ParticipantAtStart>> _startsSubscription;
   late StreamSubscription<List<Finish>> _finishesSubscription;
   late StreamSubscription<List<StartingParticipant>>
-  _numbersOnTraceSubscription;
+      _numbersOnTraceSubscription;
   late StreamSubscription<AppSettings> _appSettingsSubscription;
+
+  final StartlistProvider fileProvider;
 
   void _emitState({
     Notification? notification,
