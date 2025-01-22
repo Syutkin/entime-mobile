@@ -1,7 +1,7 @@
 import 'package:entime/src/common/utils/csv_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'startlist_csv.dart';
+import '../../../helpers/startlist.dart';
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -9,7 +9,7 @@ void main() async {
 
   group('csv_utils:', () {
     setUpAll(() {
-      csv = startlistCsv;
+      csv = startlist;
     });
 
     test('CsvToMapConverter and mapListToCsv', () {

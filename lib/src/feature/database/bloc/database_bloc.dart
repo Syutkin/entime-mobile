@@ -45,7 +45,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             numbersOnTrace: [],
           ),
         ) {
-
     _racesSubscription = _db.getRaces().watch().listen((event) async {
       _races = event;
       logger.t('DatabaseBloc -> getRaces().watch()');
@@ -61,6 +60,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
     _ridersSubscription = _db.getRiders.watch().listen((event) async {
       _riders = event;
+      logger.t('DatabaseBloc -> getRiders().watch()');
       _emitState();
     });
 
@@ -137,6 +137,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           }
         },
         emitState: (event) {
+          logger.t('emitState event, participants length: ${_participants.length}');
           emit(
             DatabaseState(
               race: event.race,
@@ -504,7 +505,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             final csv = mapListToCsv(startMap);
             if (csv != null) {
               final filename = '${race.name}-${stage.name}-start';
-              final file = await saveCsv(csv, filename);
+              final file = await saveToFile(csv, filename);
               if (file != null) {
                 await Share.shareXFiles(
                   [XFile(file.path)],
@@ -530,7 +531,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             final csv = mapListToCsv(finishMap);
             if (csv != null) {
               final filename = '${race.name}-${stage.name}-finish';
-              final file = await saveCsv(csv, filename);
+              final file = await saveToFile(csv, filename);
               if (file != null) {
                 await Share.shareXFiles(
                   [XFile(file.path)],
@@ -613,6 +614,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     int? autoFinishNumber,
     bool? updateFinishNumber,
   }) {
+    logger.t('_emitState func, participants length: ${_participants.length}');
     add(
       DatabaseEvent.emitState(
         race: _race,

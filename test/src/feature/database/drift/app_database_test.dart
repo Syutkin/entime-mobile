@@ -23,7 +23,10 @@ void main() {
 
   setUp(() {
     db = AppDatabase.customConnection(
-      DatabaseConnection(NativeDatabase.memory()),
+      DatabaseConnection(
+        NativeDatabase.memory(),
+        closeStreamsSynchronously: true,
+      ),
     );
 
     // populate DB

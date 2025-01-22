@@ -5,7 +5,7 @@ import 'package:file_picker/file_picker.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
-import '../../../common/utils/file_picker.dart';
+import '../../../common/utils/file_utils.dart';
 import '../model/race_csv.dart';
 import '../model/stages_csv.dart';
 import '../model/start_item_csv.dart';

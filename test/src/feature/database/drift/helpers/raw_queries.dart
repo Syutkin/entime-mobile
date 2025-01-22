@@ -262,7 +262,7 @@ INSERT INTO starts (stage_id, participant_id, start_time) VALUES
 (1,79,"11:48:00");''')
       ..add('''
 INSERT INTO starts (stage_id, participant_id, start_time) VALUES
-(2,1,"11:00:00"),
+(2,1,"00:00:00"),
 (2,2,"11:01:00"),
 (2,3,"11:02:00"),
 (2,4,"11:03:00"),
