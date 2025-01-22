@@ -1,15 +1,15 @@
 import 'dart:typed_data';
 
-import 'package:entime/src/feature/csv/logic/text_decoder.dart';
+import 'package:entime/src/common/utils/text_decoder.dart';
 import 'package:file_picker/file_picker.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
+import '../../../common/utils/file_picker.dart';
 import '../model/race_csv.dart';
 import '../model/stages_csv.dart';
 import '../model/start_item_csv.dart';
 import '../model/start_number_and_times_csv.dart';
-import 'file_picker.dart';
 
 class StartlistProvider {
   const StartlistProvider({
@@ -49,12 +49,9 @@ class StartlistProvider {
           stageNames: riders.first.startTimes?.keys.toList() ?? [],
           startItems: riders,
         );
-      } on Exception catch (e) {
-        logger.e('CSV -> Exception while parsing starting list', error: e);
-        return null;
       } catch (e, st) {
         logger.e(
-          'CSV -> Error at parsing starting list',
+          'CSV -> Error while parsing starting list',
           error: e,
           stackTrace: st,
         );
@@ -64,7 +61,7 @@ class StartlistProvider {
     return null;
   }
 
-  Future<StagesCsv?> getStagesFromCsv() async {
+  Future<StagesCsv?> getStagesFromFile() async {
     final file = await filepicker();
     if (file != null) {
       final csv = await decoder(file.bytes!);
@@ -80,9 +77,6 @@ class StartlistProvider {
           stageNames: stages.first.startTimes?.keys.toList() ?? [],
           startItems: stages,
         );
-      } on Exception catch (e) {
-        logger.e('CSV -> Exception while parsing starting list', error: e);
-        return null;
       } catch (e, st) {
         logger.e(
           'CSV -> Error at parsing starting list',

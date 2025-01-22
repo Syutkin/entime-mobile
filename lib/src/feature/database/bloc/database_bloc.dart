@@ -486,7 +486,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         },
         createStagesFromFile: (event) async {
           // final fileProvider = StartlistProvider();
-          final stageCsv = await fileProvider.getStagesFromCsv();
+          final stageCsv = await fileProvider.getStagesFromFile();
           if (stageCsv != null) {
             await _db.createStagesFromStagesCsv(event.raceId, stageCsv);
           }
