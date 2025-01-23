@@ -8,7 +8,7 @@ class DatabaseState with _$DatabaseState {
     required List<String?> categories,
     required List<Rider> riders,
     required List<ParticipantAtStart> participants,
-    required List<Start> starts,
+    // required List<Start> starts,
     required List<Finish> finishes,
     required List<StartingParticipant> numbersOnTrace,
 

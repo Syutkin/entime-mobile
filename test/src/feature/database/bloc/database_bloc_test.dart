@@ -77,31 +77,6 @@ void main() {
   group(
     'DatabaseBloc tests',
     () {
-      test(
-        'Initial state',
-        () async {
-          Bloc.observer = AppBlocObserver();
-          bloc = DatabaseBloc(
-            database: db,
-            settingsProvider: settingsProvider,
-            fileProvider: fileProvider,
-          );
-          expect(
-            bloc.state,
-            const DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              starts: [],
-              finishes: [],
-              numbersOnTrace: [],
-            ),
-          );
-        },
-      );
-
       blocTest<DatabaseBloc, DatabaseState>(
         'Initialize',
         setUp: () {
@@ -113,7 +88,6 @@ void main() {
           );
         },
         build: () => bloc,
-        act: (bloc) => bloc.add(const DatabaseEvent.initialize()),
         verify: (bloc) {
           // Two races
           expect(bloc.state.races.length, 2);
@@ -125,8 +99,6 @@ void main() {
           expect(bloc.state.riders.length, 79);
           // Race not selected
           expect(bloc.state.participants.length, 0);
-          // Stage not selected
-          expect(bloc.state.starts.length, 0);
           // Stage not selected
           expect(bloc.state.finishes.length, 0);
           // Stage not selected
@@ -151,20 +123,17 @@ void main() {
           );
         },
         build: () => bloc,
-        act: (bloc) => bloc.add(const DatabaseEvent.initialize()),
         verify: (bloc) {
           // Two races
           expect(bloc.state.races.length, 2);
           // Race selected
           expect(bloc.state.stages.length, 4);
           // Race not selected
-          expect(bloc.state.categories.length, 0);
+          expect(bloc.state.categories.length, 5);
           // Total riders
           expect(bloc.state.riders.length, 79);
           // Race not selected
           expect(bloc.state.participants.length, 0);
-          // Stage not selected
-          expect(bloc.state.starts.length, 0);
           // Stage not selected
           expect(bloc.state.finishes.length, 0);
           // Stage not selected
@@ -177,12 +146,12 @@ void main() {
       );
 
       blocTest<DatabaseBloc, DatabaseState>(
-        'Initialize with only stage selected, '
-        'nothing selected because stage was not in list',
+        'Initialize with race and stage selected',
         setUp: () async {
           Bloc.observer = AppBlocObserver();
-          await settingsProvider
-              .update(settingsProvider.settings.copyWith(stageId: 1));
+          await settingsProvider.update(
+            settingsProvider.settings.copyWith(raceId: 1, stageId: 1),
+          );
           bloc = DatabaseBloc(
             database: db,
             settingsProvider: settingsProvider,
@@ -190,70 +159,17 @@ void main() {
           );
         },
         build: () => bloc,
-        act: (bloc) => bloc.add(const DatabaseEvent.initialize()),
-        verify: (bloc) {
-          // Two races
+        verify: (bloc) async {
           expect(bloc.state.races.length, 2);
-          // Race not selected
-          expect(bloc.state.stages.length, 0);
-          // Race not selected
-          expect(bloc.state.categories.length, 0);
-          // Total riders
+          expect(bloc.state.stages.length, 4);
+          expect(bloc.state.categories.length, 5);
           expect(bloc.state.riders.length, 79);
-          // Race not selected
-          expect(bloc.state.participants.length, 0);
-          // Stage not selected
-          expect(bloc.state.starts.length, 0);
-          // Stage not selected
+          expect(bloc.state.participants.length, 79);
           expect(bloc.state.finishes.length, 0);
-          // Stage not selected
-          expect(bloc.state.numbersOnTrace.length, 0);
-          // Race not selected
-          expect(bloc.state.race, null);
-          // Stage not selected
-          expect(bloc.state.stage, null);
+          expect(bloc.state.race?.id, 1);
+          expect(bloc.state.stage?.id, 1);
         },
       );
-
-      // ToDo: this
-      // blocTest<DatabaseBloc, DatabaseState>(
-      //   'Initialize with race and stage selected',
-      //   setUp: () async {
-      //     Bloc.observer = AppBlocObserver();
-      //     await settingsProvider.update(
-      //         settingsProvider.settings.copyWith(raceId: 1, stageId: 1),);
-      //     bloc = DatabaseBloc(
-      //       database: db,
-      //       settingsProvider: settingsProvider,
-      //       fileProvider: fileProvider,
-      //     );
-      //   },
-      //   build: () => bloc,
-      //   act: (bloc) async {
-      //     // bloc.add(const DatabaseEvent.initialize());
-      //     await Future<void>.delayed(Duration.zero);
-      //     bloc.add(const DatabaseEvent.initialize());
-      //   },
-      //   verify: (bloc) async {
-      //     await Future<void>.delayed(Duration.zero);
-      //     // Two races
-      //     expect(bloc.state.races.length, 2);
-      //     expect(bloc.state.stages.length, 4);
-      //     expect(bloc.state.categories.length, 0);
-      //     // Total riders
-      //     expect(bloc.state.riders.length, 79);
-      //     // Race not selected
-      //     expect(bloc.state.participants.length, 79);
-      //     // Stage not selected
-      //     expect(bloc.state.starts.length, 0);
-      //     // Stage not selected
-      //     expect(bloc.state.finishes.length, 0);
-      //     // Race not selected
-      //     expect(bloc.state.race?.id, 1);
-      //     // Stage not selected
-      //     expect(bloc.state.stage?.id, 1);
-      //   },
-      // );
 
       blocTest<DatabaseBloc, DatabaseState>(
         'Add race',
@@ -371,9 +287,11 @@ void main() {
           );
         },
         build: () => bloc,
-        act: (bloc) => bloc.add(DatabaseEvent.selectRace(race)),
+        act: (bloc) {
+          bloc.add(DatabaseEvent.selectRace(race));
+        },
         verify: (bloc) {
-          expect(bloc.state.race, race);
+          expect(bloc.state.race?.id, race.id);
           // Stages populated after race selection
           expect(bloc.state.stages.length, 4);
           // Selected race id saved to settings
@@ -569,7 +487,7 @@ void main() {
         },
         build: () => bloc,
         act: (bloc) async {
-          await Future<void>.delayed(Duration.zero);
+          // await Future<void>.delayed(Duration.zero);
           // At third stage we starts at 12:00:00
           bloc.add(const DatabaseEvent.getParticipantsAtStart(3));
         },
@@ -1158,9 +1076,8 @@ void main() {
         },
         build: () => bloc,
         act: (bloc) async {
-          bloc.add(
-            DatabaseEvent.initialize(),
-          );
+          // Stage not selected, so initial watch is null,
+          // just wait for initialization and then get numbers on trace with event
           await Future<void>.delayed(Duration.zero);
           bloc.add(
             DatabaseEvent.getNumbersOnTraceNow(
@@ -1345,7 +1262,7 @@ class DebugBlocObserver extends BlocObserver {
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
 
-      logger.d('Event: $event');
+    logger.d('Event: $event');
   }
 
   @override

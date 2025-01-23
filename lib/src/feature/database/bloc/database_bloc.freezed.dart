@@ -27,7 +27,6 @@ mixin _$DatabaseEvent {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -180,7 +179,6 @@ mixin _$DatabaseEvent {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -318,7 +316,6 @@ mixin _$DatabaseEvent {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -672,7 +669,6 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -828,7 +824,6 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -969,7 +964,6 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -1280,7 +1274,6 @@ abstract class _$$EmitStateImplCopyWith<$Res> {
       List<String?> categories,
       List<Rider> riders,
       List<ParticipantAtStart> participants,
-      List<Start> starts,
       List<Finish> finishes,
       List<StartingParticipant> numbersOnTrace,
       Notification? notification,
@@ -1311,7 +1304,6 @@ class __$$EmitStateImplCopyWithImpl<$Res>
     Object? categories = null,
     Object? riders = null,
     Object? participants = null,
-    Object? starts = null,
     Object? finishes = null,
     Object? numbersOnTrace = null,
     Object? notification = freezed,
@@ -1348,10 +1340,6 @@ class __$$EmitStateImplCopyWithImpl<$Res>
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
               as List<ParticipantAtStart>,
-      starts: null == starts
-          ? _value._starts
-          : starts // ignore: cast_nullable_to_non_nullable
-              as List<Start>,
       finishes: null == finishes
           ? _value._finishes
           : finishes // ignore: cast_nullable_to_non_nullable
@@ -1405,7 +1393,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
       required final List<String?> categories,
       required final List<Rider> riders,
       required final List<ParticipantAtStart> participants,
-      required final List<Start> starts,
       required final List<Finish> finishes,
       required final List<StartingParticipant> numbersOnTrace,
       required this.notification,
@@ -1417,7 +1404,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
         _categories = categories,
         _riders = riders,
         _participants = participants,
-        _starts = starts,
         _finishes = finishes,
         _numbersOnTrace = numbersOnTrace;
 
@@ -1465,15 +1451,9 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
     return EqualUnmodifiableListView(_participants);
   }
 
-  final List<Start> _starts;
-  @override
-  List<Start> get starts {
-    if (_starts is EqualUnmodifiableListView) return _starts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_starts);
-  }
-
+// required List<Start> starts,
   final List<Finish> _finishes;
+// required List<Start> starts,
   @override
   List<Finish> get finishes {
     if (_finishes is EqualUnmodifiableListView) return _finishes;
@@ -1500,7 +1480,7 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
+    return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
   }
 
   @override
@@ -1515,7 +1495,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
       ..add(DiagnosticsProperty('categories', categories))
       ..add(DiagnosticsProperty('riders', riders))
       ..add(DiagnosticsProperty('participants', participants))
-      ..add(DiagnosticsProperty('starts', starts))
       ..add(DiagnosticsProperty('finishes', finishes))
       ..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))
       ..add(DiagnosticsProperty('notification', notification))
@@ -1538,7 +1517,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             const DeepCollectionEquality().equals(other._riders, _riders) &&
             const DeepCollectionEquality()
                 .equals(other._participants, _participants) &&
-            const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
             const DeepCollectionEquality()
                 .equals(other._numbersOnTrace, _numbersOnTrace) &&
@@ -1562,7 +1540,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
       const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(_riders),
       const DeepCollectionEquality().hash(_participants),
-      const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_numbersOnTrace),
       notification,
@@ -1590,7 +1567,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -1739,7 +1715,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
         categories,
         riders,
         participants,
-        starts,
         finishes,
         numbersOnTrace,
         notification,
@@ -1760,7 +1735,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -1894,7 +1868,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
         categories,
         riders,
         participants,
-        starts,
         finishes,
         numbersOnTrace,
         notification,
@@ -1915,7 +1888,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -2051,7 +2023,6 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
           categories,
           riders,
           participants,
-          starts,
           finishes,
           numbersOnTrace,
           notification,
@@ -2231,7 +2202,6 @@ abstract class _EmitState implements DatabaseEvent {
       required final List<String?> categories,
       required final List<Rider> riders,
       required final List<ParticipantAtStart> participants,
-      required final List<Start> starts,
       required final List<Finish> finishes,
       required final List<StartingParticipant> numbersOnTrace,
       required final Notification? notification,
@@ -2245,8 +2215,7 @@ abstract class _EmitState implements DatabaseEvent {
   List<Stage> get stages;
   List<String?> get categories;
   List<Rider> get riders;
-  List<ParticipantAtStart> get participants;
-  List<Start> get starts;
+  List<ParticipantAtStart> get participants; // required List<Start> starts,
   List<Finish> get finishes;
   List<StartingParticipant> get numbersOnTrace;
   Notification? get notification;
@@ -2408,7 +2377,6 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -2564,7 +2532,6 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -2706,7 +2673,6 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -3180,7 +3146,6 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -3337,7 +3302,6 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -3479,7 +3443,6 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -3956,7 +3919,6 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -4113,7 +4075,6 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -4255,7 +4216,6 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -4659,7 +4619,6 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -4815,7 +4774,6 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -4956,7 +4914,6 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -5317,7 +5274,6 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -5473,7 +5429,6 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -5614,7 +5569,6 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -5997,7 +5951,6 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -6153,7 +6106,6 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -6294,7 +6246,6 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -6655,7 +6606,6 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -6811,7 +6761,6 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -6952,7 +6901,6 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -7353,7 +7301,6 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -7509,7 +7456,6 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -7650,7 +7596,6 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -8130,7 +8075,6 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -8287,7 +8231,6 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -8429,7 +8372,6 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -8835,7 +8777,6 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -8991,7 +8932,6 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -9132,7 +9072,6 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -9522,7 +9461,6 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -9678,7 +9616,6 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -9819,7 +9756,6 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -10210,7 +10146,6 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -10366,7 +10301,6 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -10507,7 +10441,6 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -10902,7 +10835,6 @@ class _$GetParticipantsAtStartImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -11058,7 +10990,6 @@ class _$GetParticipantsAtStartImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -11199,7 +11130,6 @@ class _$GetParticipantsAtStartImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -11628,7 +11558,6 @@ class _$AddStartNumberImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -11784,7 +11713,6 @@ class _$AddStartNumberImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -11925,7 +11853,6 @@ class _$AddStartNumberImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -12427,7 +12354,6 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -12584,7 +12510,6 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -12726,7 +12651,6 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -13253,7 +13177,6 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -13410,7 +13333,6 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -13552,7 +13474,6 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -14049,7 +13970,6 @@ class _$UpdateStartingInfoImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -14212,7 +14132,6 @@ class _$UpdateStartingInfoImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -14360,7 +14279,6 @@ class _$UpdateStartingInfoImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -14852,7 +14770,6 @@ class _$UpdateAutomaticCorrectionImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -15009,7 +14926,6 @@ class _$UpdateAutomaticCorrectionImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -15151,7 +15067,6 @@ class _$UpdateAutomaticCorrectionImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -15596,7 +15511,6 @@ class _$UpdateManualStartTimeImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -15752,7 +15666,6 @@ class _$UpdateManualStartTimeImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -15894,7 +15807,6 @@ class _$UpdateManualStartTimeImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -16305,7 +16217,6 @@ class _$SetStatusForStartIdImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -16461,7 +16372,6 @@ class _$SetStatusForStartIdImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -16602,7 +16512,6 @@ class _$SetStatusForStartIdImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -17105,7 +17014,6 @@ class _$AddFinishTimeImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -17262,7 +17170,6 @@ class _$AddFinishTimeImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -17412,7 +17319,6 @@ class _$AddFinishTimeImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -17857,7 +17763,6 @@ class _$AddFinishTimeManualImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -18013,7 +17918,6 @@ class _$AddFinishTimeManualImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -18154,7 +18058,6 @@ class _$AddFinishTimeManualImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -18556,7 +18459,6 @@ class _$ClearStartResultsDebugImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -18712,7 +18614,6 @@ class _$ClearStartResultsDebugImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -18853,7 +18754,6 @@ class _$ClearStartResultsDebugImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -19250,7 +19150,6 @@ class _$ClearFinishResultsDebugImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -19406,7 +19305,6 @@ class _$ClearFinishResultsDebugImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -19547,7 +19445,6 @@ class _$ClearFinishResultsDebugImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -19941,7 +19838,6 @@ class _$HideAllFinishesImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -20097,7 +19993,6 @@ class _$HideAllFinishesImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -20238,7 +20133,6 @@ class _$HideAllFinishesImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -20641,7 +20535,6 @@ class _$ClearNumberAtFinishImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -20797,7 +20690,6 @@ class _$ClearNumberAtFinishImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -20938,7 +20830,6 @@ class _$ClearNumberAtFinishImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -21344,7 +21235,6 @@ class _$SetDNSForStageImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -21500,7 +21390,6 @@ class _$SetDNSForStageImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -21641,7 +21530,6 @@ class _$SetDNSForStageImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -22047,7 +21935,6 @@ class _$SetDNFForStageImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -22203,7 +22090,6 @@ class _$SetDNFForStageImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -22344,7 +22230,6 @@ class _$SetDNFForStageImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -22737,7 +22622,6 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -22893,7 +22777,6 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -23034,7 +22917,6 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -23461,7 +23343,6 @@ class _$AddNumberToFinishImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -23617,7 +23498,6 @@ class _$AddNumberToFinishImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -23758,7 +23638,6 @@ class _$AddNumberToFinishImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -24170,7 +24049,6 @@ class _$GetNumbersOnTraceNowImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -24326,7 +24204,6 @@ class _$GetNumbersOnTraceNowImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -24467,7 +24344,6 @@ class _$GetNumbersOnTraceNowImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -24883,7 +24759,6 @@ class _$ShiftStartsTimeImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -25039,7 +24914,6 @@ class _$ShiftStartsTimeImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -25180,7 +25054,6 @@ class _$ShiftStartsTimeImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -25579,7 +25452,6 @@ class _$SelectAwaitingNumberImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -25735,7 +25607,6 @@ class _$SelectAwaitingNumberImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -25876,7 +25747,6 @@ class _$SelectAwaitingNumberImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -26244,7 +26114,6 @@ class _$DeselectAwaitingNumberImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -26400,7 +26269,6 @@ class _$DeselectAwaitingNumberImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -26541,7 +26409,6 @@ class _$DeselectAwaitingNumberImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -26897,7 +26764,6 @@ class _$CreateRaceFromFileImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -27053,7 +26919,6 @@ class _$CreateRaceFromFileImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -27194,7 +27059,6 @@ class _$CreateRaceFromFileImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -27580,7 +27444,6 @@ class _$CreateStagesFromFileImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -27736,7 +27599,6 @@ class _$CreateStagesFromFileImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -27877,7 +27739,6 @@ class _$CreateStagesFromFileImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -28239,7 +28100,6 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -28395,7 +28255,6 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -28536,7 +28395,6 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -28889,7 +28747,6 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -29045,7 +28902,6 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -29186,7 +29042,6 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -29541,7 +29396,6 @@ class _$ShareDatabaseImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -29697,7 +29551,6 @@ class _$ShareDatabaseImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -29838,7 +29691,6 @@ class _$ShareDatabaseImpl
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -30221,7 +30073,6 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -30377,7 +30228,6 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -30518,7 +30368,6 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             List<String?> categories,
             List<Rider> riders,
             List<ParticipantAtStart> participants,
-            List<Start> starts,
             List<Finish> finishes,
             List<StartingParticipant> numbersOnTrace,
             Notification? notification,
@@ -30831,8 +30680,7 @@ mixin _$DatabaseState {
   List<String?> get categories => throw _privateConstructorUsedError;
   List<Rider> get riders => throw _privateConstructorUsedError;
   List<ParticipantAtStart> get participants =>
-      throw _privateConstructorUsedError;
-  List<Start> get starts => throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // required List<Start> starts,
   List<Finish> get finishes => throw _privateConstructorUsedError;
   List<StartingParticipant> get numbersOnTrace =>
       throw _privateConstructorUsedError;
@@ -30871,7 +30719,6 @@ abstract class $DatabaseStateCopyWith<$Res> {
       List<String?> categories,
       List<Rider> riders,
       List<ParticipantAtStart> participants,
-      List<Start> starts,
       List<Finish> finishes,
       List<StartingParticipant> numbersOnTrace,
       Race? race,
@@ -30903,7 +30750,6 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
     Object? categories = null,
     Object? riders = null,
     Object? participants = null,
-    Object? starts = null,
     Object? finishes = null,
     Object? numbersOnTrace = null,
     Object? race = freezed,
@@ -30933,10 +30779,6 @@ class _$DatabaseStateCopyWithImpl<$Res, $Val extends DatabaseState>
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
               as List<ParticipantAtStart>,
-      starts: null == starts
-          ? _value.starts
-          : starts // ignore: cast_nullable_to_non_nullable
-              as List<Start>,
       finishes: null == finishes
           ? _value.finishes
           : finishes // ignore: cast_nullable_to_non_nullable
@@ -30997,7 +30839,6 @@ abstract class _$$DatabaseStateImplCopyWith<$Res>
       List<String?> categories,
       List<Rider> riders,
       List<ParticipantAtStart> participants,
-      List<Start> starts,
       List<Finish> finishes,
       List<StartingParticipant> numbersOnTrace,
       Race? race,
@@ -31028,7 +30869,6 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
     Object? categories = null,
     Object? riders = null,
     Object? participants = null,
-    Object? starts = null,
     Object? finishes = null,
     Object? numbersOnTrace = null,
     Object? race = freezed,
@@ -31058,10 +30898,6 @@ class __$$DatabaseStateImplCopyWithImpl<$Res>
           ? _value._participants
           : participants // ignore: cast_nullable_to_non_nullable
               as List<ParticipantAtStart>,
-      starts: null == starts
-          ? _value._starts
-          : starts // ignore: cast_nullable_to_non_nullable
-              as List<Start>,
       finishes: null == finishes
           ? _value._finishes
           : finishes // ignore: cast_nullable_to_non_nullable
@@ -31105,7 +30941,6 @@ class _$DatabaseStateImpl
       required final List<String?> categories,
       required final List<Rider> riders,
       required final List<ParticipantAtStart> participants,
-      required final List<Start> starts,
       required final List<Finish> finishes,
       required final List<StartingParticipant> numbersOnTrace,
       this.race,
@@ -31118,7 +30953,6 @@ class _$DatabaseStateImpl
         _categories = categories,
         _riders = riders,
         _participants = participants,
-        _starts = starts,
         _finishes = finishes,
         _numbersOnTrace = numbersOnTrace;
 
@@ -31162,15 +30996,9 @@ class _$DatabaseStateImpl
     return EqualUnmodifiableListView(_participants);
   }
 
-  final List<Start> _starts;
-  @override
-  List<Start> get starts {
-    if (_starts is EqualUnmodifiableListView) return _starts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_starts);
-  }
-
+// required List<Start> starts,
   final List<Finish> _finishes;
+// required List<Start> starts,
   @override
   List<Finish> get finishes {
     if (_finishes is EqualUnmodifiableListView) return _finishes;
@@ -31208,7 +31036,7 @@ class _$DatabaseStateImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DatabaseState(races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, starts: $starts, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
+    return 'DatabaseState(races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
   }
 
   @override
@@ -31221,7 +31049,6 @@ class _$DatabaseStateImpl
       ..add(DiagnosticsProperty('categories', categories))
       ..add(DiagnosticsProperty('riders', riders))
       ..add(DiagnosticsProperty('participants', participants))
-      ..add(DiagnosticsProperty('starts', starts))
       ..add(DiagnosticsProperty('finishes', finishes))
       ..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))
       ..add(DiagnosticsProperty('race', race))
@@ -31243,7 +31070,6 @@ class _$DatabaseStateImpl
             const DeepCollectionEquality().equals(other._riders, _riders) &&
             const DeepCollectionEquality()
                 .equals(other._participants, _participants) &&
-            const DeepCollectionEquality().equals(other._starts, _starts) &&
             const DeepCollectionEquality().equals(other._finishes, _finishes) &&
             const DeepCollectionEquality()
                 .equals(other._numbersOnTrace, _numbersOnTrace) &&
@@ -31265,7 +31091,6 @@ class _$DatabaseStateImpl
       const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(_riders),
       const DeepCollectionEquality().hash(_participants),
-      const DeepCollectionEquality().hash(_starts),
       const DeepCollectionEquality().hash(_finishes),
       const DeepCollectionEquality().hash(_numbersOnTrace),
       const DeepCollectionEquality().hash(race),
@@ -31290,7 +31115,6 @@ abstract class _DatabaseState implements DatabaseState {
       required final List<String?> categories,
       required final List<Rider> riders,
       required final List<ParticipantAtStart> participants,
-      required final List<Start> starts,
       required final List<Finish> finishes,
       required final List<StartingParticipant> numbersOnTrace,
       final Race? race,
@@ -31308,9 +31132,7 @@ abstract class _DatabaseState implements DatabaseState {
   @override
   List<Rider> get riders;
   @override
-  List<ParticipantAtStart> get participants;
-  @override
-  List<Start> get starts;
+  List<ParticipantAtStart> get participants; // required List<Start> starts,
   @override
   List<Finish> get finishes;
   @override

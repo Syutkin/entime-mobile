@@ -71,7 +71,6 @@ void main() {
           categories: [],
           riders: [],
           participants: [],
-          starts: [],
           finishes: [],
           numbersOnTrace: [],
         ),

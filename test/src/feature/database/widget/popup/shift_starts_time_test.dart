@@ -25,11 +25,10 @@ void main() {
       supportedLocales: Localization.supportedLocales,
       home: Material(
         child: Builder(
-          builder:
-              (context) => TextButton(
-                onPressed: () => shiftStartsTime(context: context, item: item),
-                child: const Text('TextButton'),
-              ),
+          builder: (context) => TextButton(
+            onPressed: () => shiftStartsTime(context: context, item: item),
+            child: const Text('TextButton'),
+          ),
         ),
       ),
     );

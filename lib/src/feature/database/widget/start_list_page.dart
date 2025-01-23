@@ -1,10 +1,7 @@
-// import 'dart:math';
-
 import 'package:entime/src/common/widget/cancel_ok_buttons.dart';
 import 'package:entime/src/feature/database/logic/validators.dart';
 import 'package:entime/src/feature/database/widget/popup/edit_racer_popup.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -15,7 +12,6 @@ import '../../../common/utils/extensions.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../../constants/date_time_formats.dart';
-// import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../countdown/countdown.dart';
 import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/settings.dart';

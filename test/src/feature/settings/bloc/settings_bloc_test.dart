@@ -32,7 +32,7 @@ void main() {
     test('initial state is correct', () {
       expect(
         SettingsCubit(defaultSettingsProvider).state,
-        const  AppSettings.defaults(),
+        const AppSettings.defaults(),
       );
     });
   });
@@ -82,9 +82,7 @@ void main() {
         'correctly updates settings',
         build: () => SettingsCubit(initialSettingsProvider),
         act: (bloc) => bloc.update(changedSettingsProvider.settings),
-        
-        expect: () =>
-            [initialSettingsProvider.settings],
+        expect: () => [initialSettingsProvider.settings],
       );
     });
   });

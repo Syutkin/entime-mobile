@@ -20,9 +20,9 @@ void main() {
   setUp(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMessageHandler(
-          'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
-          (obj) async => obj,
-        );
+      'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
+      (obj) async => obj,
+    );
 
     defaults = const AppSettings.defaults();
     settingsProvider = MockSettingsProvider();

@@ -7,8 +7,8 @@ void main() {
   group('ChangelogProvider tests', () {
     test('Get all released changelog', () async {
       final changelog = (await ChangelogProvider().changelog()).trim().split(
-        '\n',
-      );
+            '\n',
+          );
 
       expect(changelog.length > 170, true);
       expect(changelog.last.contains('[0.0.1]: https:'), true);
@@ -18,7 +18,9 @@ void main() {
       const currentVersion = '0.4.4';
       final changelog = (await ChangelogProvider().changelog(
         currentVersion,
-      )).trim().split('\n');
+      ))
+          .trim()
+          .split('\n');
 
       expect(changelog.first.contains(currentVersion), true);
       expect(changelog.last.contains('[0.0.1]: https:'), true);
@@ -31,7 +33,9 @@ void main() {
       final changelog = (await ChangelogProvider().changelog(
         currentVersion,
         fromVersion,
-      )).trim().split('\n');
+      ))
+          .trim()
+          .split('\n');
 
       expect(changelog.first.contains(currentVersion), true);
       expect(changelog.last.contains(fromVersion), true);
