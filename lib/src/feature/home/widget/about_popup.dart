@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../common/localization/localization.dart';
 import '../../app_info/bloc/app_info_cubit.dart';
 import '../../update/widget/changelog_screen.dart';
 
@@ -24,7 +25,6 @@ class AboutPopup extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              //              IconTheme(data: Theme.of(context).iconTheme, child: icon),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -35,12 +35,14 @@ class AboutPopup extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Text(
-                        'Версия: ${BlocProvider.of<AppInfoCubit>(context).version}',
+                        Localization.current.I18nAbout_version(
+                          BlocProvider.of<AppInfoCubit>(context).version,
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: _textVerticalSeparation),
                       Text(
-                        '© 2021 Andrey Syutkin',
+                        Localization.current.I18nAbout_copyright,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(height: _textVerticalSeparation),
@@ -49,38 +51,31 @@ class AboutPopup extends StatelessWidget {
                           children: [
                             TextSpan(
                               style: bodyTextStyle,
-                              text: '''
-Мобильное приложение к системе электронного замера времени на спортивных соревнованиях по даунхилу и эндуро
-                                  
-Приложение делается в свободное от работы время, используйте на свой страх и риск.
-                                  
-Замечания и предложения можно оправлять на почту: ''',
+                              text: Localization.current.I18nAbout_about,
                             ),
                             TextSpan(
                               style: bodyTextStyle.copyWith(
                                 color: colorScheme.primary,
                               ),
                               text: 'syutkin@fraction.team',
-                              recognizer:
-                                  TapGestureRecognizer()
-                                    ..onTap = () async {
-                                      final emailLaunchUri = Uri(
-                                        scheme: 'mailto',
-                                        path: 'syutkin@fraction.team',
-                                        queryParameters: <String, String>{
-                                          'subject':
-                                              'Entime замечания/предложения',
-                                        },
-                                      );
-                                      if (await canLaunchUrl(emailLaunchUri)) {
-                                        await launchUrl(emailLaunchUri);
-                                      } else {
-                                        final Error error = ArgumentError(
-                                          'Could not launch $emailLaunchUri',
-                                        );
-                                        throw error;
-                                      }
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  final emailLaunchUri = Uri(
+                                    scheme: 'mailto',
+                                    path: 'syutkin@fraction.team',
+                                    queryParameters: <String, String>{
+                                      'subject': Localization.current.I18nAbout_emailSubject,
                                     },
+                                  );
+                                  if (await canLaunchUrl(emailLaunchUri)) {
+                                    await launchUrl(emailLaunchUri);
+                                  } else {
+                                    final Error error = ArgumentError(
+                                      Localization.current.I18nAbout_emailSendError(emailLaunchUri),
+                                    );
+                                    throw error;
+                                  }
+                                },
                             ),
                           ],
                         ),
@@ -100,12 +95,12 @@ class AboutPopup extends StatelessWidget {
             final changelogData = await rootBundle.loadString('CHANGELOG.md');
             await navigator.push(
               MaterialPageRoute<void>(
-                builder:
-                    (context) => ChangelogScreen(markdownData: changelogData),
+                builder: (context) =>
+                    ChangelogScreen(markdownData: changelogData),
               ),
             );
           },
-          child: const Text('Список изменений'),
+          child: Text(Localization.current.I18nAbout_changelog),
         ),
         TextButton(
           onPressed: () {

@@ -20,16 +20,20 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m30(raceName) =>
+  static String m30(emailLaunchUri) => "Could not launch ${emailLaunchUri}";
+
+  static String m31(version) => "Версия: ${version}";
+
+  static String m32(raceName) =>
       "Вы уверены, что хотите удалить гонку \"${raceName}\"?";
 
-  static String m31(stageName) =>
+  static String m33(stageName) =>
       "Вы уверены, что хотите удалить этап \"${stageName}\"?";
 
-  static String m32(trailName) =>
+  static String m34(trailName) =>
       "Вы уверены, что хотите удалить трейл \"${trailName}\"?";
 
-  static String m33(limit) => "Максимальный размер ${limit} Мб";
+  static String m35(limit) => "Максимальный размер ${limit} Мб";
 
   static String m0(version) => "v${version}";
 
@@ -97,7 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m27(year) => "Год/Возраст: ${year}";
 
-  static String m34(number, time) =>
+  static String m36(number, time) =>
       "Сдвинуть время стартов на указанное количество минут от номера ${number} (время старта ${time}) и далее?";
 
   static String m28(current, total) => "${current} из ${total}";
@@ -106,6 +110,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "I18nAbout_about": MessageLookupByLibrary.simpleMessage(
+            "Мобильное приложение к системе электронного замера времени на спортивных соревнованиях по даунхилу и эндуро\n                                  \nПриложение делается в свободное от работы время, используйте на свой страх и риск.\n                                  \nЗамечания и предложения можно оправлять на почту: "),
+        "I18nAbout_changelog":
+            MessageLookupByLibrary.simpleMessage("Список изменений"),
+        "I18nAbout_copyright":
+            MessageLookupByLibrary.simpleMessage("© 2021-2025 Andrey Syutkin"),
+        "I18nAbout_emailSendError": m30,
+        "I18nAbout_emailSubject": MessageLookupByLibrary.simpleMessage(
+            "Entime замечания/предложения"),
+        "I18nAbout_version": m31,
         "I18nBluetooth_bluetoothNotAvailable":
             MessageLookupByLibrary.simpleMessage(
                 "Bluetooth недоступен на устройстве"),
@@ -139,9 +153,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nDatabase_city": MessageLookupByLibrary.simpleMessage("Город"),
         "I18nDatabase_comment":
             MessageLookupByLibrary.simpleMessage("Комментарий"),
-        "I18nDatabase_deleteRace": m30,
-        "I18nDatabase_deleteStage": m31,
-        "I18nDatabase_deleteTrail": m32,
+        "I18nDatabase_deleteRace": m32,
+        "I18nDatabase_deleteStage": m33,
+        "I18nDatabase_deleteTrail": m34,
         "I18nDatabase_editRace":
             MessageLookupByLibrary.simpleMessage("Редактирование"),
         "I18nDatabase_editRider":
@@ -205,7 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Название"),
         "I18nDatabase_trailUrl": MessageLookupByLibrary.simpleMessage("Ссылка"),
         "I18nDatabase_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
-        "I18nDatabase_uploadLimit": m33,
+        "I18nDatabase_uploadLimit": m35,
         "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
         "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
         "I18nDrawer_settings":
@@ -585,7 +599,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Минуты"),
         "I18nStart_shiftStartsTime":
             MessageLookupByLibrary.simpleMessage("Сдвинуть время стартов"),
-        "I18nStart_shiftStartsTimeFromNumber": m34,
+        "I18nStart_shiftStartsTimeFromNumber": m36,
         "I18nStart_sliverAutomaticCorrection":
             MessageLookupByLibrary.simpleMessage("Авто\r\nпоправка"),
         "I18nStart_sliverManualCorrection":

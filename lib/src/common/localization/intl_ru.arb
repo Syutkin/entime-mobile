@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-01-03T22:36:42.687866",
+  "@@last_modified": "2025-01-23T20:19:45.034439",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1517,5 +1517,39 @@
     "placeholders": {
       "offset": {}
     }
+  },
+  "I18nAbout_version": "Версия: {version}",
+  "@I18nAbout_version": {
+    "type": "text",
+    "placeholders": {
+      "version": {}
+    }
+  },
+  "I18nAbout_copyright": "© 2021-2025 Andrey Syutkin",
+  "@I18nAbout_copyright": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAbout_about": "Мобильное приложение к системе электронного замера времени на спортивных соревнованиях по даунхилу и эндуро\n                                  \nПриложение делается в свободное от работы время, используйте на свой страх и риск.\n                                  \nЗамечания и предложения можно оправлять на почту: ",
+  "@I18nAbout_about": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAbout_emailSubject": "Entime замечания/предложения",
+  "@I18nAbout_emailSubject": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAbout_emailSendError": "Could not launch {emailLaunchUri}",
+  "@I18nAbout_emailSendError": {
+    "type": "text",
+    "placeholders": {
+      "emailLaunchUri": {}
+    }
+  },
+  "I18nAbout_changelog": "Список изменений",
+  "@I18nAbout_changelog": {
+    "type": "text",
+    "placeholders": {}
   }
 }

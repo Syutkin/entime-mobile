@@ -2930,6 +2930,66 @@ class GeneratedLocalization {
       args: [offset],
     );
   }
+
+  /// `Версия: {version}`
+  String I18nAbout_version(Object version) {
+    return Intl.message(
+      'Версия: $version',
+      name: 'I18nAbout_version',
+      desc: '',
+      args: [version],
+    );
+  }
+
+  /// `© 2021-2025 Andrey Syutkin`
+  String get I18nAbout_copyright {
+    return Intl.message(
+      '© 2021-2025 Andrey Syutkin',
+      name: 'I18nAbout_copyright',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Мобильное приложение к системе электронного замера времени на спортивных соревнованиях по даунхилу и эндуро\n                                  \nПриложение делается в свободное от работы время, используйте на свой страх и риск.\n                                  \nЗамечания и предложения можно оправлять на почту: `
+  String get I18nAbout_about {
+    return Intl.message(
+      'Мобильное приложение к системе электронного замера времени на спортивных соревнованиях по даунхилу и эндуро\n                                  \nПриложение делается в свободное от работы время, используйте на свой страх и риск.\n                                  \nЗамечания и предложения можно оправлять на почту: ',
+      name: 'I18nAbout_about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Entime замечания/предложения`
+  String get I18nAbout_emailSubject {
+    return Intl.message(
+      'Entime замечания/предложения',
+      name: 'I18nAbout_emailSubject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Could not launch {emailLaunchUri}`
+  String I18nAbout_emailSendError(Object emailLaunchUri) {
+    return Intl.message(
+      'Could not launch $emailLaunchUri',
+      name: 'I18nAbout_emailSendError',
+      desc: '',
+      args: [emailLaunchUri],
+    );
+  }
+
+  /// `Список изменений`
+  String get I18nAbout_changelog {
+    return Intl.message(
+      'Список изменений',
+      name: 'I18nAbout_changelog',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate

@@ -1230,3 +1230,40 @@ class I18nNtp {
         args: [offset],
       );
 }
+
+class I18nAbout {
+  static String version(String version) => Intl.message(
+        'Версия: $version',
+        name: 'I18nAbout_version',
+        args: [version],
+      );
+
+  static String get copyright =>
+      Intl.message('© 2021-2025 Andrey Syutkin', name: 'I18nAbout_copyright');
+
+  static String get about => Intl.message(
+        '''
+Мобильное приложение к системе электронного замера времени на спортивных соревнованиях по даунхилу и эндуро
+                                  
+Приложение делается в свободное от работы время, используйте на свой страх и риск.
+                                  
+Замечания и предложения можно оправлять на почту: ''',
+        name: 'I18nAbout_about',
+      );
+
+  static String get emailSubject => Intl.message(
+        'Entime замечания/предложения',
+        name: 'I18nAbout_emailSubject',
+      );
+
+  static String emailSendError(String emailLaunchUri) => Intl.message(
+        'Could not launch $emailLaunchUri',
+        name: 'I18nAbout_emailSendError',
+        args: [emailLaunchUri],
+      );
+
+        static String get changelog => Intl.message(
+        'Список изменений',
+        name: 'I18nAbout_changelog',
+      );
+}
