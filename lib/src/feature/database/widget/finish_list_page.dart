@@ -310,7 +310,7 @@ class _FinishListPage extends State<FinishListPage> {
             }
           case FinishPopupMenu.hideAll:
             final stageId = stage.id;
-            databaseBloc.add(DatabaseEvent.hideAllFinises(stageId));
+            databaseBloc.add(DatabaseEvent.hideAllFinishes(stageId));
           case FinishPopupMenu.details:
             final currentContext = context;
             if (currentContext.mounted) {

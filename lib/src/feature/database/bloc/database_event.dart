@@ -179,7 +179,7 @@ class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.clearFinishResultsDebug(int stageId) =
       _ClearFinishResultsDebug;
 
-  const factory DatabaseEvent.hideAllFinises(int stageId) = _HideAllFinises;
+  const factory DatabaseEvent.hideAllFinishes(int stageId) = _HideAllFinishes;
 
   const factory DatabaseEvent.clearNumberAtFinish({
     required Stage stage,

@@ -461,7 +461,7 @@ void main() {
         await $(FinishItemTile).at(1).longPress();
         await $(Localization.current.I18nProtocol_hideAll).tap();
         verify(
-          () => databaseBloc.add(DatabaseEvent.hideAllFinises(stage.id)),
+          () => databaseBloc.add(DatabaseEvent.hideAllFinishes(stage.id)),
         ).called(1);
       });
 

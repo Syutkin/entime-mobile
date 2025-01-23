@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, strict_raw_type
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
+import 'package:entime/src/common/logger/logger.dart';
 import 'package:entime/src/feature/csv/csv.dart';
 import 'package:entime/src/feature/csv/model/stages_csv.dart';
 import 'package:entime/src/feature/csv/model/start_number_and_times_csv.dart';
@@ -136,6 +137,123 @@ void main() {
           expect(bloc.state.stage, null);
         },
       );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Initialize with race selected',
+        setUp: () async {
+          Bloc.observer = AppBlocObserver();
+          await settingsProvider
+              .update(settingsProvider.settings.copyWith(raceId: 1));
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) => bloc.add(const DatabaseEvent.initialize()),
+        verify: (bloc) {
+          // Two races
+          expect(bloc.state.races.length, 2);
+          // Race selected
+          expect(bloc.state.stages.length, 4);
+          // Race not selected
+          expect(bloc.state.categories.length, 0);
+          // Total riders
+          expect(bloc.state.riders.length, 79);
+          // Race not selected
+          expect(bloc.state.participants.length, 0);
+          // Stage not selected
+          expect(bloc.state.starts.length, 0);
+          // Stage not selected
+          expect(bloc.state.finishes.length, 0);
+          // Stage not selected
+          expect(bloc.state.numbersOnTrace.length, 0);
+          // Race selected
+          expect(bloc.state.race != null, true);
+          // Stage not selected
+          expect(bloc.state.stage, null);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Initialize with only stage selected, '
+        'nothing selected because stage was not in list',
+        setUp: () async {
+          Bloc.observer = AppBlocObserver();
+          await settingsProvider
+              .update(settingsProvider.settings.copyWith(stageId: 1));
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) => bloc.add(const DatabaseEvent.initialize()),
+        verify: (bloc) {
+          // Two races
+          expect(bloc.state.races.length, 2);
+          // Race not selected
+          expect(bloc.state.stages.length, 0);
+          // Race not selected
+          expect(bloc.state.categories.length, 0);
+          // Total riders
+          expect(bloc.state.riders.length, 79);
+          // Race not selected
+          expect(bloc.state.participants.length, 0);
+          // Stage not selected
+          expect(bloc.state.starts.length, 0);
+          // Stage not selected
+          expect(bloc.state.finishes.length, 0);
+          // Stage not selected
+          expect(bloc.state.numbersOnTrace.length, 0);
+          // Race not selected
+          expect(bloc.state.race, null);
+          // Stage not selected
+          expect(bloc.state.stage, null);
+        },
+      );
+
+      // ToDo: this
+      // blocTest<DatabaseBloc, DatabaseState>(
+      //   'Initialize with race and stage selected',
+      //   setUp: () async {
+      //     Bloc.observer = AppBlocObserver();
+      //     await settingsProvider.update(
+      //         settingsProvider.settings.copyWith(raceId: 1, stageId: 1),);
+      //     bloc = DatabaseBloc(
+      //       database: db,
+      //       settingsProvider: settingsProvider,
+      //       fileProvider: fileProvider,
+      //     );
+      //   },
+      //   build: () => bloc,
+      //   act: (bloc) async {
+      //     // bloc.add(const DatabaseEvent.initialize());
+      //     await Future<void>.delayed(Duration.zero);
+      //     bloc.add(const DatabaseEvent.initialize());
+      //   },
+      //   verify: (bloc) async {
+      //     await Future<void>.delayed(Duration.zero);
+      //     // Two races
+      //     expect(bloc.state.races.length, 2);
+      //     expect(bloc.state.stages.length, 4);
+      //     expect(bloc.state.categories.length, 0);
+      //     // Total riders
+      //     expect(bloc.state.riders.length, 79);
+      //     // Race not selected
+      //     expect(bloc.state.participants.length, 79);
+      //     // Stage not selected
+      //     expect(bloc.state.starts.length, 0);
+      //     // Stage not selected
+      //     expect(bloc.state.finishes.length, 0);
+      //     // Race not selected
+      //     expect(bloc.state.race?.id, 1);
+      //     // Stage not selected
+      //     expect(bloc.state.stage?.id, 1);
+      //   },
+      // );
 
       blocTest<DatabaseBloc, DatabaseState>(
         'Add race',
@@ -485,7 +603,6 @@ void main() {
         },
         verify: (bloc) {
           expect(bloc.state.participants.first.number, 1);
-          // expect(bloc.state.participants.first.startTime, '09:00:00');
         },
       );
 
@@ -625,9 +742,9 @@ void main() {
 
       blocTest<DatabaseBloc, DatabaseState>(
         'Set status for start id',
-        setUp: () {
+        setUp: () async {
           Bloc.observer = AppBlocObserver();
-          settingsProvider
+          await settingsProvider
               .update(settingsProvider.settings.copyWith(showDNS: true));
           bloc = DatabaseBloc(
             database: db,
@@ -651,6 +768,475 @@ void main() {
             bloc.state.participants.first.statusId,
             ParticipantStatus.dns.index,
           );
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Update automatic correction',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.updateAutomaticCorrection(
+                stageId: stage.id,
+                startTime: '10:00:01',
+                correction: 1000,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.participants.first.automaticCorrection, 1000);
+          expect(bloc.state.participants.first.ntpOffset, 123);
+          expect(bloc.state.participants.first.startTime, '10:00:00');
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Add finish time',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.addFinishTime(
+                stage: stage,
+                finishTime: '11:11:11,123',
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.finishes.length, 1);
+          expect(bloc.state.finishes.first.finishTime, '11:11:11,123');
+          expect(bloc.state.finishes.first.ntpOffset, 123);
+          expect(bloc.state.finishes.first.isManual, false);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Add finish time manual',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.finishes.length, 1);
+          expect(bloc.state.finishes.first.finishTime.isNotEmpty, true);
+          expect(bloc.state.finishes.first.ntpOffset, 123);
+          expect(bloc.state.finishes.first.isManual, true);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Clear start results debug',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.updateAutomaticCorrection(
+                stageId: stage.id,
+                startTime: '10:00:01',
+                correction: 1000,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+              ),
+            )
+            ..add(
+              DatabaseEvent.clearStartResultsDebug(stage.id),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.participants.first.automaticCorrection, null);
+          expect(bloc.state.participants.first.ntpOffset, null);
+          expect(bloc.state.participants.first.timestamp, null);
+          expect(bloc.state.participants.first.startTime, '10:00:00');
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Clear finish results debug',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+                number: 1,
+              ),
+            )
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+                number: 2,
+              ),
+            )
+            ..add(DatabaseEvent.clearFinishResultsDebug(stage.id))
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.finishes.length, 2);
+          expect(bloc.state.finishes.first.number, null);
+          expect(bloc.state.finishes.last.number, null);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Hide finish',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+                number: 1,
+              ),
+            )
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+                number: 2,
+              ),
+            )
+            ..add(DatabaseEvent.hideFinish(id: 1))
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.finishes.first.isHidden, true);
+          expect(bloc.state.finishes.last.isHidden, false);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Hide all finishes',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+                number: 1,
+              ),
+            )
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+                number: 2,
+              ),
+            )
+            ..add(DatabaseEvent.hideAllFinishes(stage.id))
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.finishes.first.isHidden, true);
+          expect(bloc.state.finishes.last.isHidden, true);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Clear number at finish',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+                number: 1,
+              ),
+            )
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+                number: 2,
+              ),
+            )
+            ..add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: 1))
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.finishes.first.number, null);
+          expect(bloc.state.finishes.last.number, 2);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Set DNS for stage',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.setDNSForStage(
+                stage: stage,
+                number: 2,
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.participants.first.number, 2);
+          expect(
+            bloc.state.participants.first.statusId,
+            ParticipantStatus.dns.index,
+          );
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Set DNF for stage',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.setDNFForStage(
+                stage: stage,
+                number: 2,
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.participants.first.number, 2);
+          expect(
+            bloc.state.participants.first.statusId,
+            ParticipantStatus.dnf.index,
+          );
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Add number to finish',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.addFinishTimeManual(
+                stageId: stage.id,
+                timestamp: DateTime.now(),
+                ntpOffset: 123,
+              ),
+            )
+            ..add(
+              DatabaseEvent.addNumberToFinish(
+                stage: stage,
+                finishId: 1,
+                finishTime: '',
+                number: 5,
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.finishes.first.number, 5);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Get numbers on trace now',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc.add(
+            DatabaseEvent.initialize(),
+          );
+          await Future<void>.delayed(Duration.zero);
+          bloc.add(
+            DatabaseEvent.getNumbersOnTraceNow(
+              stageId: stage.id,
+              dateTimeNow: DateTime(2020, 1, 1, 11, 11, 11),
+            ),
+          );
+        },
+        verify: (bloc) {
+          expect(bloc.state.numbersOnTrace.length, 52);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Shift starts time',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(
+              DatabaseEvent.shiftStartsTime(
+                stageId: stage.id,
+                minutes: 65,
+              ),
+            )
+            ..add(DatabaseEvent.selectStage(stage));
+        },
+        verify: (bloc) {
+          expect(bloc.state.participants.first.startTime, '11:05:00');
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Select awaiting number',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc.add(DatabaseEvent.selectAwaitingNumber(number: 12));
+        },
+        verify: (bloc) {
+          expect(bloc.state.awaitingNumber, 12);
+        },
+      );
+
+      blocTest<DatabaseBloc, DatabaseState>(
+        'Deselect awaiting number',
+        setUp: () {
+          Bloc.observer = AppBlocObserver();
+          bloc = DatabaseBloc(
+            database: db,
+            settingsProvider: settingsProvider,
+            fileProvider: fileProvider,
+          );
+        },
+        build: () => bloc,
+        act: (bloc) async {
+          bloc
+            ..add(DatabaseEvent.selectAwaitingNumber(number: 12))
+            ..add(DatabaseEvent.deselectAwaitingNumber());
+        },
+        verify: (bloc) {
+          expect(bloc.state.awaitingNumber, null);
         },
       );
 
@@ -752,4 +1338,25 @@ void main() {
       );
     },
   );
+}
+
+class DebugBlocObserver extends BlocObserver {
+  @override
+  void onEvent(Bloc bloc, Object? event) {
+    super.onEvent(bloc, event);
+
+      logger.d('Event: $event');
+  }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    super.onError(bloc, error, stackTrace);
+    logger.e('Bloc unknown error', error: error, stackTrace: stackTrace);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    logger.d('Transition: $transition');
+  }
 }

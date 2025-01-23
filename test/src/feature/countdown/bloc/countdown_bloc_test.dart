@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/countdown/bloc/countdown_bloc.dart';
@@ -82,9 +80,8 @@ void main() {
       blocTest<CountdownBloc, CountdownState>(
         'ConnectivityProvider states emits in order',
         setUp: () {
-          final rand = Random();
           for (var i = 0; i < 5; i++) {
-            ticks.add(Tick(second: rand.nextInt(60), text: text));
+            ticks.add(Tick(second: i, text: text));
           }
           when(() => countdownAtStart.value).thenAnswer(
             (_) =>
@@ -104,14 +101,13 @@ void main() {
       blocTest<CountdownBloc, CountdownState>(
         'ConnectivityProvider states emits in order and netStartTime not null',
         setUp: () {
-          final rand = Random();
           for (var i = 0; i < 5; i++) {
             ticks.add(
               Tick(
-                second: rand.nextInt(60),
+                second: i,
                 text: text,
                 nextStartTime: DateTime.now(),
-                number: rand.nextInt(100),
+                number: i,
               ),
             );
           }

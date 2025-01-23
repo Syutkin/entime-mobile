@@ -412,7 +412,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         hideFinish: (event) async {
           await _db.hideFinish(event.id);
         },
-        hideAllFinises: (event) async {
+        hideAllFinishes: (event) async {
           await _db.hideAllFinishes(event.stageId);
         },
         clearNumberAtFinish: (event) async {
