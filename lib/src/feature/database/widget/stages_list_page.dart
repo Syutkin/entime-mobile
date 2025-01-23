@@ -31,7 +31,7 @@ class StagesListPage extends StatelessWidget {
               itemCount: count,
               itemBuilder: (context, index) {
                 final stage = state.stages[index];
-                return StagesItemTile(stage: stage);
+                return StageItemTile(stage: stage);
               },
             );
           },

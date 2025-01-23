@@ -1,8 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/database/database.dart';
-import 'package:entime/src/feature/tab/model/race_menu_button.dart';
-import 'package:entime/src/feature/tab/widget/race_tile.dart';
+import 'package:entime/src/feature/database/widget/race_and_stage_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,7 +23,7 @@ void main() {
       home: Material(
         child: BlocProvider.value(
           value: databaseBloc,
-          child: const RaceTile(),
+          child: const RaceAndStageSelector(),
         ),
       ),
     );
@@ -61,14 +60,13 @@ void main() {
   );
 
   group(
-    'RaceTile tests',
+    'RaceAndStageSelector tests',
     () {
-      patrolWidgetTest('Initial build', (
+      patrolWidgetTest('Race and stage not selected', (
         PatrolTester $,
       ) async {
         await $.pumpWidgetAndSettle(testWidget());
-        expect($(RaceTile), findsOneWidget);
-        expect($(ListTile), findsOneWidget);
+        expect($(RacesListPage), findsOneWidget);
       });
 
       patrolWidgetTest('Race selected and stage not selected', (
@@ -88,9 +86,7 @@ void main() {
         );
 
         await $.pumpWidgetAndSettle(testWidget());
-        expect($(Localization.current.I18nInit_selectRace), findsNothing);
-        expect($(race.name), findsOneWidget);
-        expect($(Localization.current.I18nInit_selectStage), findsOneWidget);
+        expect($(StagesListPage), findsOneWidget);
       });
 
       patrolWidgetTest('Race and stage selected', (
@@ -111,34 +107,7 @@ void main() {
         );
 
         await $.pumpWidgetAndSettle(testWidget());
-        expect($(Localization.current.I18nInit_selectRace), findsNothing);
-        expect($(race.name), findsOneWidget);
-        expect($(Localization.current.I18nInit_selectStage), findsNothing);
-        expect($(stage.name), findsOneWidget);
-      });
-
-      patrolWidgetTest('Tap import protocol', (
-        PatrolTester $,
-      ) async {
-        when(() => databaseBloc.state).thenReturn(
-          DatabaseState(
-            races: [],
-            stages: [],
-            categories: [],
-            riders: [],
-            participants: [],
-            finishes: [],
-            numbersOnTrace: [],
-            race: race,
-            stage: stage,
-          ),
-        );
-        await $.pumpWidgetAndSettle(testWidget());
-        await $(PopupMenuButton<RaceMenuButton>).tap();
-        await $(Localization.current.I18nInit_importFromCsv).tap();
-        verify(
-          () => databaseBloc.add(const DatabaseEvent.createRaceFromFile()),
-        ).called(1);
+        expect($(SizedBox), findsOneWidget);
       });
     },
   );

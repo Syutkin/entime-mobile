@@ -1,7 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/database/database.dart';
-import 'package:entime/src/feature/tab/model/race_menu_button.dart';
+import 'package:entime/src/feature/settings/settings.dart';
+import 'package:entime/src/feature/tab/widget/finish_page.dart';
 import 'package:entime/src/feature/tab/widget/race_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,10 +13,15 @@ import 'package:patrol_finders/patrol_finders.dart';
 class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
     implements DatabaseBloc {}
 
+class MockSettingsCubit extends MockCubit<AppSettings>
+    implements SettingsCubit {}
+
 void main() {
   late DatabaseBloc databaseBloc;
   late Race race;
   late Stage stage;
+  late SettingsCubit settingsCubit;
+  late AppSettings settings;
 
   Widget testWidget() {
     return MaterialApp(
@@ -24,7 +30,10 @@ void main() {
       home: Material(
         child: BlocProvider.value(
           value: databaseBloc,
-          child: const RaceTile(),
+          child: BlocProvider.value(
+            value: settingsCubit,
+            child: const FinishPage(),
+          ),
         ),
       ),
     );
@@ -33,6 +42,8 @@ void main() {
   setUpAll(
     () {
       databaseBloc = MockDatabaseBloc();
+      settingsCubit = MockSettingsCubit();
+      settings = const AppSettings.defaults();
     },
   );
 
@@ -57,18 +68,20 @@ void main() {
           numbersOnTrace: [],
         ),
       );
+      when(
+        () => settingsCubit.state,
+      ).thenReturn(settings);
     },
   );
 
   group(
-    'RaceTile tests',
+    'FinishPage tests',
     () {
-      patrolWidgetTest('Initial build', (
+      patrolWidgetTest('Race and stage not selected', (
         PatrolTester $,
       ) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect($(RaceTile), findsOneWidget);
-        expect($(ListTile), findsOneWidget);
       });
 
       patrolWidgetTest('Race selected and stage not selected', (
@@ -88,9 +101,7 @@ void main() {
         );
 
         await $.pumpWidgetAndSettle(testWidget());
-        expect($(Localization.current.I18nInit_selectRace), findsNothing);
-        expect($(race.name), findsOneWidget);
-        expect($(Localization.current.I18nInit_selectStage), findsOneWidget);
+        expect($(RaceTile), findsOneWidget);
       });
 
       patrolWidgetTest('Race and stage selected', (
@@ -111,34 +122,7 @@ void main() {
         );
 
         await $.pumpWidgetAndSettle(testWidget());
-        expect($(Localization.current.I18nInit_selectRace), findsNothing);
-        expect($(race.name), findsOneWidget);
-        expect($(Localization.current.I18nInit_selectStage), findsNothing);
-        expect($(stage.name), findsOneWidget);
-      });
-
-      patrolWidgetTest('Tap import protocol', (
-        PatrolTester $,
-      ) async {
-        when(() => databaseBloc.state).thenReturn(
-          DatabaseState(
-            races: [],
-            stages: [],
-            categories: [],
-            riders: [],
-            participants: [],
-            finishes: [],
-            numbersOnTrace: [],
-            race: race,
-            stage: stage,
-          ),
-        );
-        await $.pumpWidgetAndSettle(testWidget());
-        await $(PopupMenuButton<RaceMenuButton>).tap();
-        await $(Localization.current.I18nInit_importFromCsv).tap();
-        verify(
-          () => databaseBloc.add(const DatabaseEvent.createRaceFromFile()),
-        ).called(1);
+        expect($(FinishListPage), findsOneWidget);
       });
     },
   );

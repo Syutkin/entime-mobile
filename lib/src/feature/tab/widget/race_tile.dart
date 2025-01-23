@@ -4,8 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../common/localization/localization.dart';
 import '../../database/bloc/database_bloc.dart';
-import '../../database/widget/races_list_page.dart';
-import '../../database/widget/stages_list_page.dart';
+import '../../database/widget/race_and_stage_selector.dart';
 import '../model/race_menu_button.dart';
 
 class RaceTile extends StatelessWidget {
@@ -23,7 +22,7 @@ class RaceTile extends StatelessWidget {
             }
             Navigator.of(context).push(
               MaterialPageRoute<void>(
-                builder: (context) => const _SelectRaceRouterWidget(),
+                builder: (context) => const RaceAndStageSelector(),
               ),
             );
           }
@@ -44,40 +43,6 @@ class RaceTile extends StatelessWidget {
           );
         },
       );
-}
-
-class _SelectRaceRouterWidget extends StatelessWidget {
-  const _SelectRaceRouterWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<DatabaseBloc, DatabaseState>(
-        builder: (context, state) {
-          final race = state.race;
-          final stage = state.stage;
-          if (race == null) {
-            return const RacesListPage();
-          } else {
-            if (stage == null) {
-              return StagesListPage(race: race);
-            } else {
-              _onWidgetDidBuild(() {
-                Navigator.pop(context);
-              });
-            }
-          }
-          return const SizedBox();
-        },
-      ),
-    );
-  }
-
-  void _onWidgetDidBuild(void Function() callback) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      callback();
-    });
-  }
 }
 
 class _RaceMenuButton extends StatelessWidget {

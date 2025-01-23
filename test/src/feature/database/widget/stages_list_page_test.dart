@@ -74,7 +74,7 @@ void main() {
         await $.pumpWidgetAndSettle(testWidget());
         expect($(AppBar).$(race.name), findsOneWidget);
         expect($(FloatingActionButton), findsOneWidget);
-        expect($(StagesItemTile), findsNothing);
+        expect($(StageItemTile), findsNothing);
       });
 
       // ToDo: I can't pass context with TrailsBloc
@@ -100,7 +100,7 @@ void main() {
           ),
         );
         await $.pumpWidgetAndSettle(testWidget());
-        expect($(StagesItemTile), findsNWidgets(4));
+        expect($(StageItemTile), findsNWidgets(4));
       });
     },
   );
