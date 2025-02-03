@@ -22,6 +22,7 @@ part 'popup/add_racer_popup.dart';
 part 'popup/edit_start_time_popup.dart';
 part 'popup/overwrite_start_time_popup.dart';
 part 'popup/shift_starts_time.dart';
+part 'popup/set_dns_popup.dart';
 
 enum StartPopupMenu { /*detail,*/ edit, shift }
 

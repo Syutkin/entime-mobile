@@ -101,7 +101,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m27(year) => "Год/Возраст: ${year}";
 
-  static String m36(number, time) =>
+  static String m36(number) => "Участник с номером ${number} не стартовал?";
+
+  static String m37(number, time) =>
       "Сдвинуть время стартов на указанное количество минут от номера ${number} (время старта ${time}) и далее?";
 
   static String m28(current, total) => "${current} из ${total}";
@@ -128,6 +130,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Выберите устройство"),
         "I18nBluetooth_unknownDevice":
             MessageLookupByLibrary.simpleMessage("Неизвестное устройство"),
+        "I18nCore_confirmation":
+            MessageLookupByLibrary.simpleMessage("Подтверждение"),
         "I18nCore_correction": MessageLookupByLibrary.simpleMessage("Поправка"),
         "I18nCore_delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "I18nCore_details": MessageLookupByLibrary.simpleMessage("Подробнее"),
@@ -595,11 +599,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nStart_participantNumberWithName": m25,
         "I18nStart_participantTeam": m26,
         "I18nStart_participantYear": m27,
+        "I18nStart_setDnsConfirmation": m36,
         "I18nStart_shiftMinutes":
             MessageLookupByLibrary.simpleMessage("Минуты"),
         "I18nStart_shiftStartsTime":
             MessageLookupByLibrary.simpleMessage("Сдвинуть время стартов"),
-        "I18nStart_shiftStartsTimeFromNumber": m36,
+        "I18nStart_shiftStartsTimeFromNumber": m37,
         "I18nStart_sliverAutomaticCorrection":
             MessageLookupByLibrary.simpleMessage("Авто\r\nпоправка"),
         "I18nStart_sliverManualCorrection":

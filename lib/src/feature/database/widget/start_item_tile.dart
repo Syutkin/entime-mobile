@@ -50,8 +50,8 @@ class StartItemTile extends StatelessWidget {
           // ToDo: показывать разницу в числах?
           // final showDifference = state.settings.showStartDifference;
 
-          final isBigDifference = difference.inMilliseconds.abs() >
-              state.startDifferenceThreshold;
+          final isBigDifference =
+              difference.inMilliseconds.abs() > state.startDifferenceThreshold;
 
           if (isBigDifference && state.showColorStartDifference) {
             cardColor = Theme.of(context).colorScheme.error;
@@ -83,9 +83,9 @@ class StartItemTile extends StatelessWidget {
             background: Container(
               color: Theme.of(context).colorScheme.primaryContainer,
               alignment: Alignment.centerRight,
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.only(right: 24),
               child: Text(
-                Localization.current.I18nStart_didNotStart,
+                Localization.current.I18nCore_dns,
                 style: DefaultTextStyle.of(context).style.apply(
                       fontSizeFactor: 1.5,
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -93,6 +93,9 @@ class StartItemTile extends StatelessWidget {
               ),
             ),
             direction: DismissDirection.endToStart,
+            confirmDismiss: (_) {
+              return setDnsPopup(context: context, number: item.number);
+            },
             onDismissed: (direction) {
               onDismissed?.call(direction);
             },

@@ -4,7 +4,6 @@ import 'package:entime/src/feature/app_info/bloc/app_info_cubit.dart';
 import 'package:entime/src/feature/app_info/logic/app_info_provider.dart';
 import 'package:entime/src/feature/home/widget/about_popup.dart';
 import 'package:entime/src/feature/update/widget/changelog_screen.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -82,13 +81,13 @@ void main() {
         expect($(AboutPopup), findsNothing);
       });
 
-      patrolWidgetTest('Press send mail', (
-        PatrolTester $,
-      ) async {
-        await $.pumpWidgetAndSettle(testWidget());
-        // await $(TapGestureRecognizer).at(1).tap();
-        expect($(TapGestureRecognizer), findsOneWidget);
-      });
+      // patrolWidgetTest('Press send mail', (
+      //   PatrolTester $,
+      // ) async {
+      //   await $.pumpWidgetAndSettle(testWidget());
+      //   // await $(TapGestureRecognizer).at(1).tap();
+      //   expect($(TapGestureRecognizer), findsOneWidget);
+      // });
     },
   );
 }

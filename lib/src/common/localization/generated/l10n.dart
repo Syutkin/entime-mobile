@@ -91,6 +91,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Подтверждение`
+  String get I18nCore_confirmation {
+    return Intl.message(
+      'Подтверждение',
+      name: 'I18nCore_confirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Подробнее`
   String get I18nCore_details {
     return Intl.message(
@@ -1862,6 +1872,16 @@ class GeneratedLocalization {
       name: 'I18nStart_wrongRangeShiftMinutes',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Участник с номером {number} не стартовал?`
+  String I18nStart_setDnsConfirmation(Object number) {
+    return Intl.message(
+      'Участник с номером $number не стартовал?',
+      name: 'I18nStart_setDnsConfirmation',
+      desc: '',
+      args: [number],
     );
   }
 

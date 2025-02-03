@@ -13,6 +13,9 @@ class I18nCore {
   static String get warning =>
       Intl.message('Предупреждение', name: 'I18nCore_warning');
 
+  static String get confirmation =>
+      Intl.message('Подтверждение', name: 'I18nCore_confirmation');
+
   static String get details =>
       Intl.message('Подробнее', name: 'I18nCore_details');
 
@@ -803,6 +806,15 @@ class I18nStart {
   static String get wrongRangeShiftMinutes => Intl.message(
         'Мин -2 часа, макс 10 часов',
         name: 'I18nStart_wrongRangeShiftMinutes',
+      );
+
+  static String setDnsConfirmation(
+      int number,
+      ) =>
+      Intl.message(
+        'Участник с номером $number не стартовал?',
+        name: 'I18nStart_setDnsConfirmation',
+        args: [number],
       );
 }
 
