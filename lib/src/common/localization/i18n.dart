@@ -1262,7 +1262,7 @@ class I18nAbout {
         args: [emailLaunchUri],
       );
 
-        static String get changelog => Intl.message(
+  static String get changelog => Intl.message(
         'Список изменений',
         name: 'I18nAbout_changelog',
       );
