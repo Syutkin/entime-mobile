@@ -43,7 +43,7 @@ void main() {
 
   group('Settings screen tests', () {
     setUp(() async {
-      // включаем неактивыне тайлы, иначе они недоступны для тестирования
+      // включаем неактивные тайлы, иначе они недоступны для тестирования
       settings = const AppSettings.defaults().copyWith(
         showColorStartDifference: true,
         showColorFinishDifference: true,
@@ -398,16 +398,14 @@ void main() {
             .scrollTo(maxScrolls: 100),
         findsOneWidget,
       );
-      for (final colorSeed in ColorSeed.values) {
-        expect(
-          await $(SettingsSection)
-              .containing(Localization.current.I18nSettings_themes)
-              .$(SettingsTile)
-              .$(colorSeed.name)
-              .scrollTo(),
-          findsOneWidget,
-        );
-      }
+            expect(
+        await $(SettingsSection)
+            .containing(Localization.current.I18nSettings_themes)
+            .$(SettingsTile)
+            .$(Localization.current.I18nSettings_themeSettings)
+            .scrollTo(maxScrolls: 100),
+        findsOneWidget,
+      );
     });
 
     patrolWidgetTest('Check journal section', (PatrolTester $) async {

@@ -546,6 +546,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Порог цветовой индикации"),
         "I18nSettings_startScreen":
             MessageLookupByLibrary.simpleMessage("Стартовый экран"),
+        "I18nSettings_themeSettings":
+            MessageLookupByLibrary.simpleMessage("Настройки темы"),
         "I18nSettings_themes": MessageLookupByLibrary.simpleMessage("Темы"),
         "I18nSettings_update":
             MessageLookupByLibrary.simpleMessage("Обновление"),

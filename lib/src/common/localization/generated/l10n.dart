@@ -731,6 +731,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Настройки темы`
+  String get I18nSettings_themeSettings {
+    return Intl.message(
+      'Настройки темы',
+      name: 'I18nSettings_themeSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Журнал`
   String get I18nSettings_journal {
     return Intl.message(

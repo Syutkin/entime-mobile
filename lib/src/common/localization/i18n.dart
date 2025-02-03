@@ -263,6 +263,11 @@ class I18nSettings {
         name: 'I18nSettings_oLEDBackground',
       );
 
+  static String get themeSettings => Intl.message(
+        'Настройки темы',
+        name: 'I18nSettings_themeSettings',
+      );
+
   static String get journal =>
       Intl.message('Журнал', name: 'I18nSettings_journal');
 
@@ -809,8 +814,8 @@ class I18nStart {
       );
 
   static String setDnsConfirmation(
-      int number,
-      ) =>
+    int number,
+  ) =>
       Intl.message(
         'Участник с номером $number не стартовал?',
         name: 'I18nStart_setDnsConfirmation',

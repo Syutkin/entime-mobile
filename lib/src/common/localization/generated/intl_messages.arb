@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-02-03T09:25:57.363529",
+  "@@last_modified": "2025-02-03T18:55:32.761882",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -347,6 +347,11 @@
   },
   "I18nSettings_oLEDBackground": "Чёрный фон (для OLED)",
   "@I18nSettings_oLEDBackground": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_themeSettings": "Настройки темы",
+  "@I18nSettings_themeSettings": {
     "type": "text",
     "placeholders": {}
   },

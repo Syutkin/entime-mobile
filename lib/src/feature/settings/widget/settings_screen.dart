@@ -6,6 +6,7 @@ import 'package:settings_ui/settings_ui.dart';
 
 import '../../../common/localization/localization.dart';
 import '../settings.dart';
+import 'select_theme_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -661,8 +662,8 @@ class _SettingsList extends StatelessWidget {
                   Localization.current.I18nSettings_resetToDefaults,
                 ),
                 //leading:  Icon(MdiIcons.backupRestore),
-                onPressed: (context) {
-                  settingsCubit.setDefault();
+                onPressed: (context) async {
+                  await settingsCubit.setDefault();
                 },
               ),
             ],
@@ -674,72 +675,40 @@ class _SettingsList extends StatelessWidget {
 
   List<SettingsTile> _themes(SettingsCubit bloc) {
     final settings = bloc.state;
-    final result = <SettingsTile>[];
-    final seedColor = settings.seedColor;
-    result
-      ..add(
-        SettingsTile.switchTile(
-          title: Text(Localization.current.I18nSettings_brightness),
-          initialValue: settings.brightness == Brightness.light,
-          onToggle: (value) {
-            bloc.update(
-              settings.copyWith(
-                brightness: value ? Brightness.light : Brightness.dark,
-              ),
-            );
-          },
-        ),
-      )
-      ..add(
-        SettingsTile.switchTile(
-          enabled: settings.brightness == Brightness.dark,
-          title: Text(Localization.current.I18nSettings_oLEDBackground),
-          initialValue: settings.isOLEDBackground,
-          onToggle: (value) {
-            bloc.update(
-              settings.copyWith(isOLEDBackground: value),
-            );
-          },
-        ),
-      );
-    for (final colorSeed in ColorSeed.values) {
-      result.add(
-        SettingsTile(
-          title: Text(colorSeed.name),
-          leading: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: appThemeData(
-                seedColor: colorSeed,
-                brightness: settings.brightness,
-              ).colorScheme.surface,
+    // final seedColor = settings.seedColor;
+    return <SettingsTile>[
+      SettingsTile.switchTile(
+        title: Text(Localization.current.I18nSettings_brightness),
+        initialValue: settings.brightness == Brightness.light,
+        onToggle: (value) {
+          bloc.update(
+            settings.copyWith(
+              brightness: value ? Brightness.light : Brightness.dark,
             ),
-            child: Icon(
-              MdiIcons.palette,
-              color: appThemeData(
-                seedColor: colorSeed,
-                brightness: settings.brightness,
-              ).colorScheme.primary,
+          );
+        },
+      ),
+      SettingsTile.switchTile(
+        enabled: settings.brightness == Brightness.dark,
+        title: Text(Localization.current.I18nSettings_oLEDBackground),
+        initialValue: settings.isOLEDBackground,
+        onToggle: (value) {
+          bloc.update(
+            settings.copyWith(isOLEDBackground: value),
+          );
+        },
+      ),
+      SettingsTile.navigation(
+        title: Text(Localization.current.I18nSettings_themeSettings),
+        onPressed: (context) {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (context) => const SelectThemeScreen(),
             ),
-          ),
-          trailing: Radio(
-            groupValue: seedColor,
-            onChanged: (value) {
-              bloc.update(
-                settings.copyWith(seedColor: colorSeed),
-              );
-            },
-            value: colorSeed,
-          ),
-          onPressed: (context) {
-            bloc.update(
-              settings.copyWith(seedColor: colorSeed),
-            );
-          },
-        ),
-      );
-    }
-    return result;
+          );
+        },
+      ),
+    ];
   }
 
   List<DropdownMenuEntry<String>> _dropdownMenuEntries() {

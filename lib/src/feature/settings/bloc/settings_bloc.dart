@@ -9,8 +9,8 @@ class SettingsCubit extends Cubit<AppSettings> {
     emit(settingsProvider.settings);
   }
 
-  void setDefault() {
-    settingsProvider.setDefaults();
+  Future<void> setDefault() async {
+    await settingsProvider.setDefaults();
     emit(settingsProvider.settings);
   }
 
