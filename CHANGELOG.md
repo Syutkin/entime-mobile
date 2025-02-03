@@ -1,3 +1,7 @@
+## [Unreleased]
+### Added
+- Дополнительные настройки темы
+
 ## [0.5.0] - 2025-02-03
 Полностью переработана организация работы с соревнованиями
 
@@ -175,6 +179,7 @@
 ### Added
 - Начальный релиз
 
+[Unreleased]: https://github.com/Syutkin/entime-mobile/compare/0.5.0...HEAD
 [0.5.0]: https://github.com/Syutkin/entime-mobile/compare/0.4.4...0.5.0
 [0.4.4]: https://github.com/Syutkin/entime-mobile/compare/0.4.3...0.4.4
 [0.4.3]: https://github.com/Syutkin/entime-mobile/compare/0.4.2...0.4.3
