@@ -64,7 +64,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Build APK
-        run: flutter build apk --target-platform android-arm,android-arm64,android-x64 --split-per-abi -v
+        run: flutter build apk --target-platform android-arm,android-arm64,android-x64 --split-per-abi
         env:
           KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
