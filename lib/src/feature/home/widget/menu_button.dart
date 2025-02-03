@@ -39,7 +39,6 @@ class MenuButton extends StatelessWidget {
                       ),
                     ),
                   )
-                  ..add(const PopupMenuDivider())
                   ..add(
                     PopupMenuItem(
                       value: HomeMenuButton.countdownPage,
@@ -51,11 +50,15 @@ class MenuButton extends StatelessWidget {
                       ),
                     ),
                   )
+                  ..add(const PopupMenuDivider())
                   ..add(
                     PopupMenuItem(
                       value: HomeMenuButton.countdown,
                       child: ListTile(
-                        leading: Icon(MdiIcons.timer),
+                        leading: settings.countdown
+                            ? const Icon(Icons.check)
+                            : const SizedBox.shrink(),
+                        // leading: Icon(MdiIcons.timer),
                         title: Text(Localization.current.I18nHome_countdown),
                       ),
                     ),
@@ -68,7 +71,7 @@ class MenuButton extends StatelessWidget {
                       value: HomeMenuButton.showFinishDifference,
                       child: ListTile(
                         leading: settings.showFinishDifference
-                            ? Icon(MdiIcons.timer)
+                            ? const Icon(Icons.check)
                             : const SizedBox.shrink(),
                         title: Text(
                           Localization.current.I18nHome_showFinishDifference,
@@ -81,7 +84,7 @@ class MenuButton extends StatelessWidget {
                       value: HomeMenuButton.showColorFinishDifference,
                       child: ListTile(
                         leading: settings.showColorFinishDifference
-                            ? Icon(MdiIcons.palette)
+                            ? const Icon(Icons.check)
                             : const SizedBox.shrink(),
                         title: Text(
                           Localization
@@ -91,12 +94,18 @@ class MenuButton extends StatelessWidget {
                     ),
                   );
               }
+              final checkedFAB =
+                  (activeTab == AppTab.start && settings.startFab) ||
+                      (activeTab == AppTab.finish && settings.finishFab);
               menuItems
                 ..add(
                   PopupMenuItem(
                     value: HomeMenuButton.fab,
                     child: ListTile(
-                      leading: Icon(MdiIcons.handBackLeft),
+                      leading: checkedFAB
+                          ? const Icon(Icons.check)
+                          : const SizedBox.shrink(),
+                      // leading: Icon(MdiIcons.handBackLeft),
                       title: Text(Localization.current.I18nHome_fab),
                     ),
                   ),
