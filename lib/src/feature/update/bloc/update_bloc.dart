@@ -22,13 +22,12 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       ..onError((error) {
         logger.e('UpdateBloc: Download error', error: error);
         add(UpdateEvent.downloadError(error: error));
-        // add(const UpdateEvent.cancelDownload());
       });
 
     on<UpdateEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         checkUpdate: (event) async {
-          final update = await updateProvider.isUpdateAvailable();
+          final update = await updateProvider.isUpdateAvailable;
           if (update) {
             emit(
               UpdateState.updateAvailable(

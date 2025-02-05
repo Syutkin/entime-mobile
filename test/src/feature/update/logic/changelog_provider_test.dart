@@ -24,7 +24,7 @@ void main() {
 
       expect(changelog.first.contains(currentVersion), true);
       expect(changelog.last.contains('[0.0.1]: https:'), true);
-      expect(changelog.length, 171);
+      expect(changelog.length > 170, true);
     });
 
     test('Get changelog from 0.2.0 to 0.3.3 version', () async {

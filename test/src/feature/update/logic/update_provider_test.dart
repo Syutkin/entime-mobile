@@ -67,7 +67,7 @@ void main() async {
         settingsProvider: settings,
       );
 
-      expect(await updater.isUpdateAvailable(), true);
+      expect(await updater.isUpdateAvailable, true);
     });
 
     test(
@@ -102,7 +102,7 @@ void main() async {
           settingsProvider: settings,
         );
 
-        expect(await updater.isUpdateAvailable(), false);
+        expect(await updater.isUpdateAvailable, false);
 
         await settings.update(settings.settings.copyWith(checkUpdates: true));
       },
@@ -135,7 +135,7 @@ void main() async {
         settingsProvider: settings,
       );
 
-      expect(await updater.isUpdateAvailable(), false);
+      expect(await updater.isUpdateAvailable, false);
     });
 
     test('Incorrect response from github api', () async {
@@ -187,7 +187,7 @@ void main() async {
         settingsProvider: settings,
       );
 
-      expect(await updater.isUpdateAvailable(), false);
+      expect(await updater.isUpdateAvailable, false);
     });
 
     test('Incorrect json from github api', () async {
@@ -225,7 +225,7 @@ void main() async {
         settingsProvider: settings,
       );
 
-      expect(await updater.isUpdateAvailable(), false);
+      expect(await updater.isUpdateAvailable, false);
     });
   });
 
@@ -249,7 +249,7 @@ void main() async {
         settingsProvider: settings,
       );
 
-      await updater.isUpdateAvailable();
+      await updater.isUpdateAvailable;
 
       expect(updater.latestVersion, '0.4.4');
     });
@@ -345,7 +345,7 @@ void main() async {
         () => appInfoProvider.version,
       ).thenAnswer((realInvocation) => '3.0.5-dev');
 
-      // на dev версиях не покаываем ченджлог и не сохраняем версию в настройки
+      // на dev версиях не показываем ченджлог и не сохраняем версию в настройки
       expect(await updater.showChangelog(), null);
       expect(settings.settings.previousVersion, '1.0.1');
     });

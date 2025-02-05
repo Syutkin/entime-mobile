@@ -22,7 +22,7 @@ typedef ErrorHandler = void Function(String error);
 abstract interface class IUpdateProvider {
   String get latestVersion;
 
-  Future<bool> isUpdateAvailable();
+  Future<bool> get isUpdateAvailable;
   Future<void> downloadUpdate();
   Future<void> installApk();
   Future<String?> showChangelog();
@@ -83,7 +83,7 @@ class UpdateProvider implements IUpdateProvider {
   void stop() => _client.close();
 
   @override
-  Future<bool> isUpdateAvailable() async {
+  Future<bool> get isUpdateAvailable async {
     _canUpdate = false;
     try {
       _latestRelease = await _getLatestRelease();
@@ -241,7 +241,6 @@ class UpdateProvider implements IUpdateProvider {
 
   @override
   Future<String?> showChangelog() async {
-    // final settings = _settingsProvider.settings;
     final previousVersion = Version.parse(
       _settingsProvider.settings.previousVersion,
     );
@@ -260,12 +259,6 @@ class UpdateProvider implements IUpdateProvider {
           currentVersion.toString(),
           previousVersion.toString(),
         );
-        // return ShowChangelog(
-        //   show: true,
-        //   markdown: markdown,
-        //   previousVersion: previousVersion.toString(),
-        //   // currentVersion: currentVersion.toString(),
-        // );
       }
     }
     return null;

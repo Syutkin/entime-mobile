@@ -89,7 +89,7 @@ void main() {
     );
 
     when(
-      () => updateProvider.isUpdateAvailable(),
+      () => updateProvider.isUpdateAvailable,
     ).thenAnswer(
       (_) => Future.value(false),
     );
