@@ -731,7 +731,7 @@ class AppDatabase extends _$AppDatabase {
     required int stageId,
     required DateTime timestamp,
     required int ntpOffset,
-    int deltaInSeconds = 15,
+    required int deltaInSeconds,
   }) async {
     var result = 0;
     //добавляем ntp offset к ручному времени старта
@@ -796,7 +796,7 @@ class AppDatabase extends _$AppDatabase {
   Future<int> checkParticipantAroundStartTime({
     required String time,
     required int stageId,
-    int deltaInSeconds = 10,
+    required int deltaInSeconds,
   }) async {
     final beepDateTime = time.toDateTime();
     if (beepDateTime == null) {

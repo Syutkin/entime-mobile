@@ -6,13 +6,13 @@ import 'package:rxdart/subjects.dart';
 
 class MockAudioProvider extends Mock implements AudioProvider {}
 
-class MockSettingsProvider extends Mock implements SettingsProvider {}
+class MockSettingsProvider extends Mock implements ISettingsProvider {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late IAudioService audioService;
-  late SettingsProvider settingsProvider;
+  late ISettingsProvider settingsProvider;
   late AudioProvider audioProvider;
   late AppSettings settings;
   late AppSettings defaults;

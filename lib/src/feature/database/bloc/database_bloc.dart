@@ -29,7 +29,7 @@ part 'database_state.dart';
 class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   DatabaseBloc({
     required AppDatabase database,
-    required SettingsProvider settingsProvider,
+    required ISettingsProvider settingsProvider,
     this.fileProvider = const StartlistProvider(),
   })  : _db = database,
         _settingsProvider = settingsProvider,
@@ -340,8 +340,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             correction: event.correction,
             timestamp: event.timestamp,
             ntpOffset: event.ntpOffset,
-            deltaInSeconds: event.deltaInSeconds ??
-                settingsProvider.settings.deltaInSeconds,
+            deltaInSeconds: event.deltaInSeconds,
             forceUpdate: event.forceUpdate,
           );
           if (previousStarts != null && !event.forceUpdate) {
@@ -573,7 +572,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   late int _substituteNumbersDelay;
   int? _awaitingNumber;
 
-  final SettingsProvider _settingsProvider;
+  final ISettingsProvider _settingsProvider;
 
   StreamSubscription<List<Race>>? _racesSubscription;
   StreamSubscription<List<Stage>>? _stagesSubscription;

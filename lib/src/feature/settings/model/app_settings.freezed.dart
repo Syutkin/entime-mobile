@@ -2544,7 +2544,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
       this.showFinishDifference = false,
       this.showColorFinishDifference = false,
       this.finishDifferenceThreshold = 2000,
-      this.deltaInSeconds = 15,
+      this.deltaInSeconds = 10,
       this.updateStartCorrectionDelay = 2000,
       this.logLimit = 100,
       this.seedColor = ColorSeed.blue,

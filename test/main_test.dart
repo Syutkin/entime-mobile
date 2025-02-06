@@ -78,7 +78,7 @@ void main() {
     bluetoothProvider = MockBluetoothProvider();
     audioController = MockIAudioController();
     database = MockAppDatabase();
-    countdown = CountdownAtStart(database: database);
+    countdown = CountdownAtStart(database: database, settingsProvider: settingsProvider);
     ntpProvider = MockINtpProvider();
     connectivityProvider = MockIConnectivityProvider();
 

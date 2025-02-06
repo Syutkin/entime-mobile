@@ -10,7 +10,7 @@ import '../../database/drift/app_database_test.dart';
 
 class MockAudioService extends Mock implements AudioService {}
 
-class MockSettingsProvider extends Mock implements SettingsProvider {}
+class MockSettingsProvider extends Mock implements ISettingsProvider {}
 
 class MockAppSettings extends Mock implements AppSettings {}
 
@@ -21,7 +21,7 @@ void main() {
   late IAudioController ac;
   late AppDatabase db;
   late AudioService audioService;
-  late SettingsProvider settingsProvider;
+  late ISettingsProvider settingsProvider;
   late AppSettings appSettings;
   late String time;
   late int stageId;
@@ -48,6 +48,7 @@ void main() {
       settingsProvider: settingsProvider,
     );
 
+    when(() => appSettings.deltaInSeconds).thenReturn(10);
     when(() => settingsProvider.settings).thenReturn(appSettings);
 
     when(() => audioService.speak(any())).thenAnswer((_) => Future.value(true));

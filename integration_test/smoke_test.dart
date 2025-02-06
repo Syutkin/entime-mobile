@@ -60,7 +60,7 @@ void main() async {
     database: database,
     settingsProvider: settings,
   );
-  final countdown = CountdownAtStart(database: database);
+  final countdown = CountdownAtStart(database: database, settingsProvider: settings);
 
   final INtpProvider ntpProvider = NtpProvider();
 

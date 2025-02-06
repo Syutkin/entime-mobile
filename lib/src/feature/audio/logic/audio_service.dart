@@ -10,7 +10,7 @@ abstract interface class IAudioService {
 
 class AudioService implements IAudioService {
   AudioService({
-    required SettingsProvider settings,
+    required ISettingsProvider settings,
     required IAudioProvider audio,
   }) : _settings = settings,
        _audio = audio {
@@ -27,7 +27,7 @@ class AudioService implements IAudioService {
   }
 
   final IAudioProvider _audio;
-  final SettingsProvider _settings;
+  final ISettingsProvider _settings;
 
   bool _sound = true;
   bool _voice = true;

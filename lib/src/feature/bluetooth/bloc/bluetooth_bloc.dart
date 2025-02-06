@@ -22,7 +22,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     required IBluetoothProvider bluetoothProvider,
     required AppDatabase database,
     required IAudioController audioController,
-    required SettingsProvider settingsProvider,
+    required ISettingsProvider settingsProvider,
   })  : _bluetoothProvider = bluetoothProvider,
         _database = database,
         _audioController = audioController,
@@ -207,7 +207,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           );
         },
         messageReceived: (event) {
-          //Пришло соообщение из Bluetooth serial
+          //Пришло сообщение из Bluetooth serial
           final now = DateTime.now();
           logger.i(
             'Bluetooth -> Received message: ${event.message}, time: $now',
@@ -271,7 +271,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   final AppDatabase _database;
   final IAudioController _audioController;
-  final SettingsProvider _settingsProvider;
+  final ISettingsProvider _settingsProvider;
 
   BluetoothDevice? _bluetoothDevice;
 

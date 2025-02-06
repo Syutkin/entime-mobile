@@ -134,15 +134,15 @@ class DatabaseEvent with _$DatabaseEvent {
     required int correction,
     required DateTime timestamp,
     required int ntpOffset,
+    required int deltaInSeconds,
     @Default(false) bool forceUpdate,
-    int? deltaInSeconds,
   }) = _UpdateAutomaticCorrection;
 
   const factory DatabaseEvent.updateManualStartTime({
     required int stageId,
     required DateTime timestamp,
     required int ntpOffset,
-    @Default(15) int deltaInSeconds,
+    required int deltaInSeconds,
   }) = _UpdateManualStartTime;
 
   const factory DatabaseEvent.setStatusForStartId({

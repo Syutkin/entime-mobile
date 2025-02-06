@@ -4,7 +4,7 @@ import '../settings.dart';
 
 class SettingsCubit extends Cubit<AppSettings> {
   SettingsCubit(this.settingsProvider) : super(settingsProvider.settings);
-  SettingsProvider settingsProvider;
+  ISettingsProvider settingsProvider;
   void initialize() {
     emit(settingsProvider.settings);
   }

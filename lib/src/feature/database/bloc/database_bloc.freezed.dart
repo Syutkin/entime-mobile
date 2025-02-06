@@ -122,8 +122,8 @@ mixin _$DatabaseEvent {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -261,8 +261,8 @@ mixin _$DatabaseEvent {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -398,8 +398,8 @@ mixin _$DatabaseEvent {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -764,8 +764,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -906,8 +906,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -1046,8 +1046,8 @@ class _$InitializeImpl with DiagnosticableTreeMixin implements _Initialize {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -1662,8 +1662,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -1817,8 +1817,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -1970,8 +1970,8 @@ class _$EmitStateImpl with DiagnosticableTreeMixin implements _EmitState {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -2472,8 +2472,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -2614,8 +2614,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -2755,8 +2755,8 @@ class _$AddRaceImpl with DiagnosticableTreeMixin implements _AddRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -3241,8 +3241,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -3384,8 +3384,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -3525,8 +3525,8 @@ class _$UpdateRaceImpl with DiagnosticableTreeMixin implements _UpdateRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -4014,8 +4014,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -4157,8 +4157,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -4298,8 +4298,8 @@ class _$UpsertRaceImpl with DiagnosticableTreeMixin implements _UpsertRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -4714,8 +4714,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -4856,8 +4856,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -4996,8 +4996,8 @@ class _$DeleteRaceImpl with DiagnosticableTreeMixin implements _DeleteRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -5369,8 +5369,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -5511,8 +5511,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -5651,8 +5651,8 @@ class _$GetRacesImpl with DiagnosticableTreeMixin implements _GetRaces {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -6046,8 +6046,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -6188,8 +6188,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -6328,8 +6328,8 @@ class _$SelectRaceImpl with DiagnosticableTreeMixin implements _SelectRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -6701,8 +6701,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -6843,8 +6843,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -6983,8 +6983,8 @@ class _$DeselectRaceImpl with DiagnosticableTreeMixin implements _DeselectRace {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -7396,8 +7396,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -7538,8 +7538,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -7678,8 +7678,8 @@ class _$AddStageImpl with DiagnosticableTreeMixin implements _AddStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -8170,8 +8170,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -8313,8 +8313,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -8454,8 +8454,8 @@ class _$UpsertStageImpl with DiagnosticableTreeMixin implements _UpsertStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -8872,8 +8872,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -9014,8 +9014,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -9154,8 +9154,8 @@ class _$DeleteStageImpl with DiagnosticableTreeMixin implements _DeleteStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -9556,8 +9556,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -9698,8 +9698,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -9838,8 +9838,8 @@ class _$GetStagesImpl with DiagnosticableTreeMixin implements _GetStages {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -10241,8 +10241,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -10383,8 +10383,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -10523,8 +10523,8 @@ class _$SelectStageImpl with DiagnosticableTreeMixin implements _SelectStage {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -10930,8 +10930,8 @@ class _$GetParticipantsAtStartImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -11072,8 +11072,8 @@ class _$GetParticipantsAtStartImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -11212,8 +11212,8 @@ class _$GetParticipantsAtStartImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -11653,8 +11653,8 @@ class _$AddStartNumberImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -11795,8 +11795,8 @@ class _$AddStartNumberImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -11935,8 +11935,8 @@ class _$AddStartNumberImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -12449,8 +12449,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -12592,8 +12592,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -12733,8 +12733,8 @@ class _$UpdateRiderImpl with DiagnosticableTreeMixin implements _UpdateRider {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -13272,8 +13272,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -13415,8 +13415,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -13556,8 +13556,8 @@ class _$UpdateRacerImpl with DiagnosticableTreeMixin implements _UpdateRacer {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -14065,8 +14065,8 @@ class _$UpdateStartingInfoImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -14214,8 +14214,8 @@ class _$UpdateStartingInfoImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -14361,8 +14361,8 @@ class _$UpdateStartingInfoImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -14616,8 +14616,8 @@ abstract class _$$UpdateAutomaticCorrectionImplCopyWith<$Res> {
       int correction,
       DateTime timestamp,
       int ntpOffset,
-      bool forceUpdate,
-      int? deltaInSeconds});
+      int deltaInSeconds,
+      bool forceUpdate});
 }
 
 /// @nodoc
@@ -14639,8 +14639,8 @@ class __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>
     Object? correction = null,
     Object? timestamp = null,
     Object? ntpOffset = null,
+    Object? deltaInSeconds = null,
     Object? forceUpdate = null,
-    Object? deltaInSeconds = freezed,
   }) {
     return _then(_$UpdateAutomaticCorrectionImpl(
       stageId: null == stageId
@@ -14663,14 +14663,14 @@ class __$$UpdateAutomaticCorrectionImplCopyWithImpl<$Res>
           ? _value.ntpOffset
           : ntpOffset // ignore: cast_nullable_to_non_nullable
               as int,
+      deltaInSeconds: null == deltaInSeconds
+          ? _value.deltaInSeconds
+          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+              as int,
       forceUpdate: null == forceUpdate
           ? _value.forceUpdate
           : forceUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
-      deltaInSeconds: freezed == deltaInSeconds
-          ? _value.deltaInSeconds
-          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -14686,8 +14686,8 @@ class _$UpdateAutomaticCorrectionImpl
       required this.correction,
       required this.timestamp,
       required this.ntpOffset,
-      this.forceUpdate = false,
-      this.deltaInSeconds});
+      required this.deltaInSeconds,
+      this.forceUpdate = false});
 
   @override
   final int stageId;
@@ -14700,14 +14700,14 @@ class _$UpdateAutomaticCorrectionImpl
   @override
   final int ntpOffset;
   @override
+  final int deltaInSeconds;
+  @override
   @JsonKey()
   final bool forceUpdate;
-  @override
-  final int? deltaInSeconds;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DatabaseEvent.updateAutomaticCorrection(stageId: $stageId, startTime: $startTime, correction: $correction, timestamp: $timestamp, ntpOffset: $ntpOffset, forceUpdate: $forceUpdate, deltaInSeconds: $deltaInSeconds)';
+    return 'DatabaseEvent.updateAutomaticCorrection(stageId: $stageId, startTime: $startTime, correction: $correction, timestamp: $timestamp, ntpOffset: $ntpOffset, deltaInSeconds: $deltaInSeconds, forceUpdate: $forceUpdate)';
   }
 
   @override
@@ -14721,8 +14721,8 @@ class _$UpdateAutomaticCorrectionImpl
       ..add(DiagnosticsProperty('correction', correction))
       ..add(DiagnosticsProperty('timestamp', timestamp))
       ..add(DiagnosticsProperty('ntpOffset', ntpOffset))
-      ..add(DiagnosticsProperty('forceUpdate', forceUpdate))
-      ..add(DiagnosticsProperty('deltaInSeconds', deltaInSeconds));
+      ..add(DiagnosticsProperty('deltaInSeconds', deltaInSeconds))
+      ..add(DiagnosticsProperty('forceUpdate', forceUpdate));
   }
 
   @override
@@ -14739,15 +14739,15 @@ class _$UpdateAutomaticCorrectionImpl
                 other.timestamp == timestamp) &&
             (identical(other.ntpOffset, ntpOffset) ||
                 other.ntpOffset == ntpOffset) &&
-            (identical(other.forceUpdate, forceUpdate) ||
-                other.forceUpdate == forceUpdate) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
-                other.deltaInSeconds == deltaInSeconds));
+                other.deltaInSeconds == deltaInSeconds) &&
+            (identical(other.forceUpdate, forceUpdate) ||
+                other.forceUpdate == forceUpdate));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, stageId, startTime, correction,
-      timestamp, ntpOffset, forceUpdate, deltaInSeconds);
+      timestamp, ntpOffset, deltaInSeconds, forceUpdate);
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -14865,8 +14865,8 @@ class _$UpdateAutomaticCorrectionImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -14911,7 +14911,7 @@ class _$UpdateAutomaticCorrectionImpl
     required TResult Function(TrailInfo trail) shareTrack,
   }) {
     return updateAutomaticCorrection(stageId, startTime, correction, timestamp,
-        ntpOffset, forceUpdate, deltaInSeconds);
+        ntpOffset, deltaInSeconds, forceUpdate);
   }
 
   @override
@@ -15008,8 +15008,8 @@ class _$UpdateAutomaticCorrectionImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -15052,7 +15052,7 @@ class _$UpdateAutomaticCorrectionImpl
     TResult? Function(TrailInfo trail)? shareTrack,
   }) {
     return updateAutomaticCorrection?.call(stageId, startTime, correction,
-        timestamp, ntpOffset, forceUpdate, deltaInSeconds);
+        timestamp, ntpOffset, deltaInSeconds, forceUpdate);
   }
 
   @override
@@ -15149,8 +15149,8 @@ class _$UpdateAutomaticCorrectionImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -15195,7 +15195,7 @@ class _$UpdateAutomaticCorrectionImpl
   }) {
     if (updateAutomaticCorrection != null) {
       return updateAutomaticCorrection(stageId, startTime, correction,
-          timestamp, ntpOffset, forceUpdate, deltaInSeconds);
+          timestamp, ntpOffset, deltaInSeconds, forceUpdate);
     }
     return orElse();
   }
@@ -15367,16 +15367,16 @@ abstract class _UpdateAutomaticCorrection implements DatabaseEvent {
       required final int correction,
       required final DateTime timestamp,
       required final int ntpOffset,
-      final bool forceUpdate,
-      final int? deltaInSeconds}) = _$UpdateAutomaticCorrectionImpl;
+      required final int deltaInSeconds,
+      final bool forceUpdate}) = _$UpdateAutomaticCorrectionImpl;
 
   int get stageId;
   String get startTime;
   int get correction;
   DateTime get timestamp;
   int get ntpOffset;
+  int get deltaInSeconds;
   bool get forceUpdate;
-  int? get deltaInSeconds;
 
   /// Create a copy of DatabaseEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -15444,7 +15444,7 @@ class _$UpdateManualStartTimeImpl
       {required this.stageId,
       required this.timestamp,
       required this.ntpOffset,
-      this.deltaInSeconds = 15});
+      required this.deltaInSeconds});
 
   @override
   final int stageId;
@@ -15453,7 +15453,6 @@ class _$UpdateManualStartTimeImpl
   @override
   final int ntpOffset;
   @override
-  @JsonKey()
   final int deltaInSeconds;
 
   @override
@@ -15606,8 +15605,8 @@ class _$UpdateManualStartTimeImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -15748,8 +15747,8 @@ class _$UpdateManualStartTimeImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -15889,8 +15888,8 @@ class _$UpdateManualStartTimeImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -16105,7 +16104,7 @@ abstract class _UpdateManualStartTime implements DatabaseEvent {
       {required final int stageId,
       required final DateTime timestamp,
       required final int ntpOffset,
-      final int deltaInSeconds}) = _$UpdateManualStartTimeImpl;
+      required final int deltaInSeconds}) = _$UpdateManualStartTimeImpl;
 
   int get stageId;
   DateTime get timestamp;
@@ -16312,8 +16311,8 @@ class _$SetStatusForStartIdImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -16454,8 +16453,8 @@ class _$SetStatusForStartIdImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -16594,8 +16593,8 @@ class _$SetStatusForStartIdImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -17109,8 +17108,8 @@ class _$AddFinishTimeImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -17252,8 +17251,8 @@ class _$AddFinishTimeImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -17401,8 +17400,8 @@ class _$AddFinishTimeImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -17858,8 +17857,8 @@ class _$AddFinishTimeManualImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -18000,8 +17999,8 @@ class _$AddFinishTimeManualImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -18140,8 +18139,8 @@ class _$AddFinishTimeManualImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -18554,8 +18553,8 @@ class _$ClearStartResultsDebugImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -18696,8 +18695,8 @@ class _$ClearStartResultsDebugImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -18836,8 +18835,8 @@ class _$ClearStartResultsDebugImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -19245,8 +19244,8 @@ class _$ClearFinishResultsDebugImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -19387,8 +19386,8 @@ class _$ClearFinishResultsDebugImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -19527,8 +19526,8 @@ class _$ClearFinishResultsDebugImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -19933,8 +19932,8 @@ class _$HideAllFinishesImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -20075,8 +20074,8 @@ class _$HideAllFinishesImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -20215,8 +20214,8 @@ class _$HideAllFinishesImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -20630,8 +20629,8 @@ class _$ClearNumberAtFinishImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -20772,8 +20771,8 @@ class _$ClearNumberAtFinishImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -20912,8 +20911,8 @@ class _$ClearNumberAtFinishImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -21330,8 +21329,8 @@ class _$SetDNSForStageImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -21472,8 +21471,8 @@ class _$SetDNSForStageImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -21612,8 +21611,8 @@ class _$SetDNSForStageImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -22030,8 +22029,8 @@ class _$SetDNFForStageImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -22172,8 +22171,8 @@ class _$SetDNFForStageImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -22312,8 +22311,8 @@ class _$SetDNFForStageImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -22717,8 +22716,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -22859,8 +22858,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -22999,8 +22998,8 @@ class _$HideFinishImpl with DiagnosticableTreeMixin implements _HideFinish {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -23438,8 +23437,8 @@ class _$AddNumberToFinishImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -23580,8 +23579,8 @@ class _$AddNumberToFinishImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -23720,8 +23719,8 @@ class _$AddNumberToFinishImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -24144,8 +24143,8 @@ class _$GetNumbersOnTraceNowImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -24286,8 +24285,8 @@ class _$GetNumbersOnTraceNowImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -24426,8 +24425,8 @@ class _$GetNumbersOnTraceNowImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -24854,8 +24853,8 @@ class _$ShiftStartsTimeImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -24996,8 +24995,8 @@ class _$ShiftStartsTimeImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -25136,8 +25135,8 @@ class _$ShiftStartsTimeImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -25547,8 +25546,8 @@ class _$SelectAwaitingNumberImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -25689,8 +25688,8 @@ class _$SelectAwaitingNumberImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -25829,8 +25828,8 @@ class _$SelectAwaitingNumberImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -26209,8 +26208,8 @@ class _$DeselectAwaitingNumberImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -26351,8 +26350,8 @@ class _$DeselectAwaitingNumberImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -26491,8 +26490,8 @@ class _$DeselectAwaitingNumberImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -26859,8 +26858,8 @@ class _$CreateRaceFromFileImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -27001,8 +27000,8 @@ class _$CreateRaceFromFileImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -27141,8 +27140,8 @@ class _$CreateRaceFromFileImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -27539,8 +27538,8 @@ class _$CreateStagesFromFileImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -27681,8 +27680,8 @@ class _$CreateStagesFromFileImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -27821,8 +27820,8 @@ class _$CreateStagesFromFileImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -28195,8 +28194,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -28337,8 +28336,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -28477,8 +28476,8 @@ class _$ShareStartImpl with DiagnosticableTreeMixin implements _ShareStart {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -28842,8 +28841,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -28984,8 +28983,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -29124,8 +29123,8 @@ class _$ShareFinishImpl with DiagnosticableTreeMixin implements _ShareFinish {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -29491,8 +29490,8 @@ class _$ShareDatabaseImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -29633,8 +29632,8 @@ class _$ShareDatabaseImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -29773,8 +29772,8 @@ class _$ShareDatabaseImpl
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -30168,8 +30167,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)
+            int deltaInSeconds,
+            bool forceUpdate)
         updateAutomaticCorrection,
     required TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)
@@ -30310,8 +30309,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult? Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?
@@ -30450,8 +30449,8 @@ class _$ShareTrackImpl with DiagnosticableTreeMixin implements _ShareTrack {
             int correction,
             DateTime timestamp,
             int ntpOffset,
-            bool forceUpdate,
-            int? deltaInSeconds)?
+            int deltaInSeconds,
+            bool forceUpdate)?
         updateAutomaticCorrection,
     TResult Function(
             int stageId, DateTime timestamp, int ntpOffset, int deltaInSeconds)?

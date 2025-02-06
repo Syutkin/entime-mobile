@@ -1025,6 +1025,7 @@ void main() {
           stageId: stage.id,
           timestamp: timestamp,
           ntpOffset: offset,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result, 1);
 
@@ -1054,6 +1055,7 @@ void main() {
           stageId: stage.id,
           timestamp: timestamp,
           ntpOffset: offset,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result, 0);
       });
@@ -1099,6 +1101,7 @@ void main() {
           stageId: stage.id,
           timestamp: timestamp,
           ntpOffset: offset,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result, 1);
 
@@ -1128,6 +1131,7 @@ void main() {
         final result = await db.checkParticipantAroundStartTime(
           time: time,
           stageId: stage.id,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result, 1);
       });
@@ -1139,6 +1143,7 @@ void main() {
         final result = await db.checkParticipantAroundStartTime(
           time: time,
           stageId: stage.id,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result, 0);
       });
@@ -1150,6 +1155,7 @@ void main() {
         final result = await db.checkParticipantAroundStartTime(
           time: time,
           stageId: stage.id,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(result, 0);
       });
@@ -1237,6 +1243,7 @@ void main() {
           // time: manualStartTime.toDateTime()!,
           timestamp: timestamp,
           ntpOffset: offset,
+          deltaInSeconds: deltaInSeconds,
         );
         expect(manualResult, 1);
 
@@ -2560,6 +2567,7 @@ void main() {
           stageId: stage.id,
           timestamp: timestamp,
           ntpOffset: ntpOffset,
+          deltaInSeconds: deltaInSeconds,
         );
 
         expect(result, 1);
@@ -2593,6 +2601,7 @@ void main() {
           stageId: stage.id,
           timestamp: timestamp,
           ntpOffset: ntpOffset,
+          deltaInSeconds: deltaInSeconds,
         );
 
         expect(manualResult, 1);

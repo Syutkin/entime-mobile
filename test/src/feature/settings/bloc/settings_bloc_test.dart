@@ -3,7 +3,7 @@ import 'package:entime/src/feature/settings/settings.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockSettingsProvider extends Mock implements SettingsProvider {
+class MockSettingsProvider extends Mock implements ISettingsProvider {
   MockSettingsProvider(this._settings);
 
   AppSettings _settings;

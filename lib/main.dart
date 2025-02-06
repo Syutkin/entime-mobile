@@ -75,7 +75,8 @@ Future<void> main() async {
     settingsProvider: settings,
   );
 
-  final countdown = CountdownAtStart(database: database);
+  final countdown =
+      CountdownAtStart(database: database, settingsProvider: settings);
 
   final ntpProvider = NtpProvider();
 
@@ -125,7 +126,7 @@ class EntimeApp extends StatelessWidget {
     super.key,
   });
 
-  final SettingsProvider settingsProvider;
+  final ISettingsProvider settingsProvider;
   final AppInfoProvider appInfo;
   final IUpdateProvider updateProvider;
   final IBluetoothProvider bluetoothProvider;

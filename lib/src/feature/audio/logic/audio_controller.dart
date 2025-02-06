@@ -19,12 +19,13 @@ class AudioController implements IAudioController {
   AudioController({
     required IAudioService audioService,
     required AppDatabase database,
-    required SettingsProvider settingsProvider,
-  }) : _audioService = audioService,
-       _db = database,
-       _settingsProvider = settingsProvider;
+    required ISettingsProvider settingsProvider,
+  })  : _audioService = audioService,
+        _db = database,
+        _settingsProvider = settingsProvider;
+
   final IAudioService _audioService;
-  final SettingsProvider _settingsProvider;
+  final ISettingsProvider _settingsProvider;
 
   final AppDatabase _db;
 
@@ -46,6 +47,7 @@ class AudioController implements IAudioController {
     if (await _db.checkParticipantAroundStartTime(
           time: time,
           stageId: stageId,
+          deltaInSeconds: _settingsProvider.settings.deltaInSeconds,
         ) >
         0) {
       await _audioService.countdown();
@@ -132,13 +134,12 @@ class AudioController implements IAudioController {
           logger.d(
             'Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
           );
-          final participants =
-              await _db
-                  .getNextStartingParticipants(
-                    time: start.first,
-                    stageId: stageId,
-                  )
-                  .get();
+          final participants = await _db
+              .getNextStartingParticipants(
+                time: start.first,
+                stageId: stageId,
+              )
+              .get();
           if (participants.isNotEmpty) {
             _isBetweenCategory = true;
             final lastStart = start.first.toDateTime();

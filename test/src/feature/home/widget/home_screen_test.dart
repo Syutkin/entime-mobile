@@ -68,6 +68,7 @@ void main() {
 
   late SharedPrefsSettingsProvider settingsProvider;
   late int offset;
+  late int deltaInSeconds;
 
   setUpAll(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -94,6 +95,7 @@ void main() {
     tabCubit = TabCubit();
 
     offset = 100;
+    deltaInSeconds = 10;
 
     when(
       () => bluetoothBloc.state,
@@ -372,6 +374,7 @@ void main() {
                 correction: automaticStart.correction,
                 timestamp: automaticStart.timestamp,
                 ntpOffset: offset,
+                deltaInSeconds: deltaInSeconds,
                 forceUpdate: automaticStart.updating,
               ),
             ),
@@ -565,6 +568,7 @@ void main() {
                 correction: correction,
                 timestamp: timestamp,
                 ntpOffset: offset,
+                deltaInSeconds: deltaInSeconds,
                 forceUpdate: true,
               ),
             ),

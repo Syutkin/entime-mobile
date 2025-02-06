@@ -204,7 +204,7 @@ class AppSettings with _$AppSettings {
     @Default(2000) int finishDifferenceThreshold,
 
     // дельта в секундах для автоматического подставления стартового времени
-    @Default(15) int deltaInSeconds,
+    @Default(10) int deltaInSeconds,
 
     // задержка в миллисекундах перед обновлением стартовой поправки,
     // если она уже была установлена

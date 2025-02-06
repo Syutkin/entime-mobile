@@ -28,11 +28,12 @@ void main() {
   late DatabaseBloc bloc;
   late AppDatabase db;
   late StartlistProvider fileProvider;
-  late SettingsProvider settingsProvider;
+  late ISettingsProvider settingsProvider;
   late Race race;
   late Stage stage;
   late RaceCsv raceCsv;
   late StagesCsv stagesCsv;
+  late int deltaInSeconds;
 
   setUpAll(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -68,6 +69,7 @@ void main() {
       isActive: true,
       isDeleted: false,
     );
+    deltaInSeconds = 10;
   });
 
   tearDown(() async {
@@ -648,6 +650,7 @@ void main() {
                 stageId: stage.id,
                 timestamp: DateTime(2020, 1, 1, 10, 0, 2, 123),
                 ntpOffset: 111,
+                deltaInSeconds: deltaInSeconds,
               ),
             )
             ..add(DatabaseEvent.selectStage(stage));
@@ -709,6 +712,7 @@ void main() {
                 correction: 1000,
                 timestamp: DateTime.now(),
                 ntpOffset: 123,
+                deltaInSeconds: deltaInSeconds,
               ),
             )
             ..add(DatabaseEvent.selectStage(stage));
@@ -801,6 +805,7 @@ void main() {
                 correction: 1000,
                 timestamp: DateTime.now(),
                 ntpOffset: 123,
+                deltaInSeconds: deltaInSeconds,
               ),
             )
             ..add(

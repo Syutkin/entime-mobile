@@ -27,7 +27,7 @@ class MockBluetoothBackgroundConnection extends Mock
 class MockFlutterBluetoothSerial extends Mock
     implements FlutterBluetoothSerial {}
 
-class MockSettingsProvider extends Mock implements SettingsProvider {}
+class MockSettingsProvider extends Mock implements ISettingsProvider {}
 
 class MockWakelockPlus extends Mock implements WakelockPlus {}
 

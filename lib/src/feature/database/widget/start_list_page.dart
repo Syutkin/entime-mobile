@@ -221,11 +221,13 @@ class _StartListPage extends State<StartListPage> {
   ) async {
     final stageId = bloc.state.stage?.id;
     if (stageId != null) {
+      final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
       bloc.add(
         DatabaseEvent.updateManualStartTime(
           stageId: stageId,
           timestamp: now,
           ntpOffset: offset,
+          deltaInSeconds: deltaInSeconds,
         ),
       );
     }

@@ -3,13 +3,19 @@ import 'package:drift/native.dart';
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/feature/countdown/logic/countdown_at_start.dart';
 import 'package:entime/src/feature/database/database.dart';
+import 'package:entime/src/feature/settings/settings.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import '../../database/drift/app_database_test.dart';
 
+class MockSettingsProvider extends Mock implements ISettingsProvider {}
+
 void main() {
   late AppDatabase db;
   late CountdownAtStart countdown;
+  late ISettingsProvider settings;
+  late AppSettings defaults;
 
   setUp(() {
     db = AppDatabase.customConnection(
@@ -21,7 +27,12 @@ void main() {
       db.customInsert(query);
     }
 
-    countdown = CountdownAtStart(database: db);
+    defaults = const AppSettings.defaults();
+
+    settings = MockSettingsProvider();
+    when(() => settings.settings).thenReturn(defaults);
+
+    countdown = CountdownAtStart(database: db, settingsProvider: settings);
   });
 
   tearDown(() async {
@@ -87,10 +98,22 @@ void main() {
       expect(countdown.value.value.text, 'Fin');
     });
 
-    test('Show Fin after last start', () async {
+    test('Show Fin after last start, defaults value', () async {
       countdown.customTimeNow = '11:47:59'.toDateTime();
       await countdown.start(1);
       await Future<void>.delayed(const Duration(seconds: 13));
+      countdown.stop();
+      expect(countdown.value.value.text, 'Fin');
+    });
+
+    test('Show Fin after last start, custom delta value', () async {
+      const deltaInSeconds = 5;
+      defaults = defaults.copyWith(deltaInSeconds: deltaInSeconds);
+      when(() => settings.settings).thenReturn(defaults);
+      countdown = CountdownAtStart(database: db, settingsProvider: settings)
+        ..customTimeNow = '11:47:59'.toDateTime();
+      await countdown.start(1);
+      await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 3));
       countdown.stop();
       expect(countdown.value.value.text, 'Fin');
     });

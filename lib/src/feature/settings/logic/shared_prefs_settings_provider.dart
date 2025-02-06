@@ -7,7 +7,7 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../settings.dart';
 
-class SharedPrefsSettingsProvider extends SettingsProvider {
+class SharedPrefsSettingsProvider implements ISettingsProvider {
   SharedPrefsSettingsProvider._(SharedPreferences prefs, AppSettings settings)
     : _prefs = prefs,
       _settings = settings;

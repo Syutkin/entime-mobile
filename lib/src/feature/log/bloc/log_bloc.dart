@@ -16,11 +16,11 @@ part 'log_state.dart';
 class LogBloc extends Bloc<LogEvent, LogState> {
   LogBloc({
     required AppDatabase database,
-    required SettingsProvider settingsProvider,
+    required ISettingsProvider settingsProvider,
   }) : _db = database,
        _settingsProvider = settingsProvider,
        super(const LogState(log: [])) {
-    _settingsProvider.state.listen((state) {
+    _settingsProvider.state.listen((AppSettings state) {
       _limit = state.logLimit;
     });
 
@@ -48,7 +48,7 @@ class LogBloc extends Bloc<LogEvent, LogState> {
     });
   }
   final AppDatabase _db;
-  final SettingsProvider _settingsProvider;
+  final ISettingsProvider _settingsProvider;
 
   int _limit = -1;
 

@@ -7,11 +7,13 @@ import 'package:rxdart/rxdart.dart';
 import '../../../common/utils/extensions.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../database/drift/app_database.dart';
+import '../../settings/settings.dart';
 import '../model/tick.dart';
 
 class CountdownAtStart {
-  CountdownAtStart({required AppDatabase database}) : _db = database;
-  final AppDatabase _db;
+  CountdownAtStart({required this.database, required this.settingsProvider});
+  final AppDatabase database;
+  final ISettingsProvider settingsProvider;
   Timer? _timer;
 
   BehaviorSubject<Tick> value = BehaviorSubject();
@@ -24,7 +26,10 @@ class CountdownAtStart {
 
   Future<void> start(int stageId) async {
     //subscribe to changes at starts table
-    _db.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
+    database
+        .getParticipantsAtStart(stageId: stageId)
+        .watch()
+        .listen((event) async {
       _isFinished = false;
       _nextStartingParticipant = await _getNextStartingParticipant(
         time: customTimeNow ?? DateTime.now(),
@@ -80,8 +85,11 @@ class CountdownAtStart {
               number: nextStartingParticipant.number,
             ),
           );
-          if (!nextStartTime
-              .isAfter(now.subtract(const Duration(seconds: 10)))) {
+          if (!nextStartTime.isAfter(
+            now.subtract(
+              Duration(seconds: settingsProvider.settings.deltaInSeconds),
+            ),
+          )) {
             _nextStartingParticipant = null;
           }
         }
@@ -104,7 +112,7 @@ class CountdownAtStart {
     required DateTime time,
     required int stageId,
   }) async {
-    final nextStart = await _db
+    final nextStart = await database
         .getNextStartingParticipants(
           stageId: stageId,
           time: DateFormat(shortTimeFormat).format(time),

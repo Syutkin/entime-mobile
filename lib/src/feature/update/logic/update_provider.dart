@@ -39,7 +39,7 @@ class UpdateProvider implements IUpdateProvider {
   UpdateProvider._(
     http.Client client,
     AppInfoProvider appInfo,
-    SettingsProvider settingsProvider,
+    ISettingsProvider settingsProvider,
   ) : _client = client,
       _appInfo = appInfo,
       _settingsProvider = settingsProvider;
@@ -52,7 +52,7 @@ class UpdateProvider implements IUpdateProvider {
   File? _isDownloadedFile;
 
   final AppInfoProvider _appInfo;
-  final SettingsProvider _settingsProvider;
+  final ISettingsProvider _settingsProvider;
   DownloadingHandler? _downloadingHandler;
   VoidCallback? _onDownloadComplete;
   ErrorHandler? _onError;
@@ -65,7 +65,7 @@ class UpdateProvider implements IUpdateProvider {
   static Future<UpdateProvider> init({
     required http.Client client,
     required AppInfoProvider appInfoProvider,
-    required SettingsProvider settingsProvider,
+    required ISettingsProvider settingsProvider,
   }) async => UpdateProvider._(client, appInfoProvider, settingsProvider);
 
   @override
