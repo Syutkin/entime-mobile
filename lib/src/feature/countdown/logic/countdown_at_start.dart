@@ -16,7 +16,7 @@ class CountdownAtStart {
   final ISettingsProvider settingsProvider;
   Timer? _timer;
 
-  BehaviorSubject<Tick> value = BehaviorSubject();
+  BehaviorSubject<Tick> ticks = BehaviorSubject();
 
   NextStartingParticipant? _nextStartingParticipant;
   bool _isFinished = false;
@@ -57,7 +57,7 @@ class CountdownAtStart {
   }
 
   Future<void> close() async {
-    await value.close();
+    await ticks.close();
   }
 
   Future<void> _countdown({required int stageId}) async {
@@ -67,11 +67,14 @@ class CountdownAtStart {
     if (nextStartingParticipant != null) {
       final nextStartTime = nextStartingParticipant.startTime.toDateTime();
       if (nextStartTime != null) {
+        final text = _formatDuration(
+          nextStartTime.difference(now),
+        );
         if (nextStartTime.isAfter(now)) {
-          value.add(
+          ticks.add(
             Tick(
               second: second,
-              text: _formatDuration(nextStartTime.difference(now)),
+              text: text,
               nextStartTime: nextStartTime,
               number: nextStartingParticipant.number,
             ),
@@ -79,22 +82,22 @@ class CountdownAtStart {
         } else {
           if (nextStartTime.isAfter(
             now.subtract(
-              Duration(seconds: settingsProvider.settings.deltaInSeconds),
+              Duration(seconds: settingsProvider.settings.deltaInSeconds - 1),
             ),
           )) {
-            value.add(
+            ticks.add(
               Tick(
                 second: second,
-                text: 'GO',
+                text: text,
                 nextStartTime: nextStartTime,
                 number: nextStartingParticipant.number,
               ),
             );
           } else {
-            value.add(
+            ticks.add(
               Tick(
                 second: second,
-                text: _formatDuration(nextStartTime.difference(now)),
+                text: text,
                 nextStartTime: nextStartTime,
                 number: nextStartingParticipant.number,
                 callNextParticipant: true,
@@ -110,9 +113,22 @@ class CountdownAtStart {
           time: now,
           stageId: stageId,
         );
-        if (_nextStartingParticipant == null) {
+        final nextStartingParticipant = _nextStartingParticipant;
+        if (nextStartingParticipant != null) {
+          final nextStartTime = nextStartingParticipant.startTime.toDateTime();
+          if (nextStartTime != null) {
+            ticks.add(
+              Tick(
+                second: second,
+                text: _formatDuration(nextStartTime.difference(now)),
+                nextStartTime: nextStartTime,
+                number: nextStartingParticipant.number,
+              ),
+            );
+          }
+        } else {
           _isFinished = true;
-          value.add(Tick(second: second, text: 'Fin'));
+          ticks.add(Tick(second: second, text: 'Fin'));
         }
       }
     }
@@ -132,15 +148,17 @@ class CountdownAtStart {
   }
 
   String _formatDuration(Duration duration) {
+    // Добавить одну секунду из-за отбрасывания миллисекунд
+    final fixDuration = duration + const Duration(seconds: 1);
     String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    final twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    if (duration.inHours > 0) {
-      return '${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds';
-    } else if (duration.inMinutes > 0) {
+    final twoDigitMinutes = twoDigits(fixDuration.inMinutes.remainder(60));
+    final twoDigitSeconds = twoDigits(fixDuration.inSeconds.remainder(60));
+    if (fixDuration.inHours > 0) {
+      return '${twoDigits(fixDuration.inHours)}:$twoDigitMinutes:$twoDigitSeconds';
+    } else if (fixDuration.inMinutes > 0) {
       return '$twoDigitMinutes:$twoDigitSeconds';
-    } else if (duration.inSeconds > 0) {
-      return '${duration.inSeconds}';
+    } else if (fixDuration.inSeconds > 0) {
+      return '${fixDuration.inSeconds}';
     } else {
       return 'GO';
     }

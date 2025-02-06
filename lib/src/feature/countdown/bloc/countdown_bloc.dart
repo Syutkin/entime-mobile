@@ -17,13 +17,13 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     required IAudioController audioController,
     required CountdownAtStart countdown,
     required int stageId,
-  }) : _audioController = audioController,
-       _countdown = countdown,
-       super(const CountdownState.initial()) {
+  })  : _audioController = audioController,
+        _countdown = countdown,
+        super(const CountdownState.initial()) {
     if (stageId > 0) {
       _countdown.start(stageId);
     }
-    _countdown.value.listen((value) {
+    _countdown.ticks.listen((value) {
       add(CountdownEvent.tick(value));
     });
 
@@ -43,12 +43,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
           } else {
             emit(
               CountdownState.working(
-                tick: Tick(
-                  text: event.tick.text,
-                  nextStartTime: nextStartTime,
-                  number: event.tick.number,
-                  second: event.tick.second,
-                ),
+                tick: event.tick,
               ),
             );
           }

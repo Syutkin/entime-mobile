@@ -429,6 +429,29 @@ class _SettingsList extends StatelessWidget {
                   }
                 },
               ),
+              SettingsTile(
+                title: Text(
+                  Localization.current.I18nSettings_startDeltaInSeconds,
+                ),
+                trailing: Text(
+                  Localization.current.I18nSettings_seconds(
+                    settingsState.deltaInSeconds,
+                  ),
+                ),
+                onPressed: (context) async {
+                  final value = await setDeltaInSecondsPopup(
+                    context,
+                    delta: settingsState.deltaInSeconds,
+                  );
+                  if (value != null) {
+                    settingsCubit.update(
+                      settingsState.copyWith(
+                        deltaInSeconds: value,
+                      ),
+                    );
+                  }
+                },
+              ),
             ],
           ),
           SettingsSection(

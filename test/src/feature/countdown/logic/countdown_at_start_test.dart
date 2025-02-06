@@ -45,39 +45,59 @@ void main() {
     });
 
     test('Format countdown time, more then a hour', () async {
+      countdown.customTimeNow = '08:00:00.001'.toDateTime();
+      await countdown.start(1);
+      countdown.stop();
+      expect(countdown.ticks.value.text, '02:00:00');
+
       countdown.customTimeNow = '08:00:00'.toDateTime();
       await countdown.start(1);
       countdown.stop();
-      expect(countdown.value.value.text, '02:00:00');
+      expect(countdown.ticks.value.text, '02:00:01');
     });
 
     test('Format countdown time, less then a hour', () async {
+      countdown.customTimeNow = '09:30:00.001'.toDateTime();
+      await countdown.start(1);
+      countdown.stop();
+      expect(countdown.ticks.value.text, '30:00');
+
       countdown.customTimeNow = '09:30:00'.toDateTime();
       await countdown.start(1);
       countdown.stop();
-      expect(countdown.value.value.text, '30:00');
+      expect(countdown.ticks.value.text, '30:01');
     });
 
     test('Format countdown time, less then a ten minute', () async {
+      countdown.customTimeNow = '09:55:10.001'.toDateTime();
+      await countdown.start(1);
+      countdown.stop();
+      expect(countdown.ticks.value.text, '04:50');
+
       countdown.customTimeNow = '09:55:10'.toDateTime();
       await countdown.start(1);
       countdown.stop();
-      expect(countdown.value.value.text, '04:50');
+      expect(countdown.ticks.value.text, '04:51');
     });
 
     test('Format countdown time, less then a minute', () async {
+      countdown.customTimeNow = '09:59:15.001'.toDateTime();
+      await countdown.start(1);
+      countdown.stop();
+      expect(countdown.ticks.value.text, '45');
+
       countdown.customTimeNow = '09:59:15'.toDateTime();
       await countdown.start(1);
       countdown.stop();
-      expect(countdown.value.value.text, '45');
+      expect(countdown.ticks.value.text, '46');
     });
 
     test('Format countdown time, right after start', () async {
-      countdown.customTimeNow = '09:59:59'.toDateTime();
+      countdown.customTimeNow = '09:59:59.001'.toDateTime();
       await countdown.start(1);
       await Future<void>.delayed(const Duration(seconds: 2));
       countdown.stop();
-      expect(countdown.value.value.text, 'GO');
+      expect(countdown.ticks.value.text, 'GO');
     });
 
     test('Start countdown before all starts', () async {
@@ -87,15 +107,15 @@ void main() {
       await countdown.start(1);
       await Future<void>.delayed(const Duration(seconds: 5));
       countdown.stop();
-      expect(countdown.value.value.nextStartTime, nextStartTime);
-      expect(countdown.value.value.number, number);
+      expect(countdown.ticks.value.nextStartTime, nextStartTime);
+      expect(countdown.ticks.value.number, number);
     });
 
     test('Start countdown after all starts, show Fin text', () async {
       countdown.customTimeNow = '19:00:00'.toDateTime();
       await countdown.start(1);
       countdown.stop();
-      expect(countdown.value.value.text, 'Fin');
+      expect(countdown.ticks.value.text, 'Fin');
     });
 
     test('Show Fin after last start, defaults value', () async {
@@ -103,7 +123,7 @@ void main() {
       await countdown.start(1);
       await Future<void>.delayed(const Duration(seconds: 13));
       countdown.stop();
-      expect(countdown.value.value.text, 'Fin');
+      expect(countdown.ticks.value.text, 'Fin');
     });
 
     test('Show Fin after last start, custom delta value', () async {
@@ -115,7 +135,7 @@ void main() {
       await countdown.start(1);
       await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 3));
       countdown.stop();
-      expect(countdown.value.value.text, 'Fin');
+      expect(countdown.ticks.value.text, 'Fin');
     });
 
     test('Call next participant once', () async {
@@ -125,7 +145,7 @@ void main() {
       when(() => settings.settings).thenReturn(defaults);
       countdown = CountdownAtStart(database: db, settingsProvider: settings)
         ..customTimeNow = '11:47:59'.toDateTime();
-      countdown.value.listen((data) {
+      countdown.ticks.listen((data) {
         if (data.callNextParticipant) {
           result++;
         }
@@ -136,10 +156,22 @@ void main() {
       expect(result, 1);
     });
 
+    test('Show second after call next participant', () async {
+      const deltaInSeconds = 2;
+      defaults = defaults.copyWith(deltaInSeconds: deltaInSeconds);
+      when(() => settings.settings).thenReturn(defaults);
+      countdown = CountdownAtStart(database: db, settingsProvider: settings)
+        ..customTimeNow = '10:00:59.5'.toDateTime();
+      await countdown.start(1);
+      await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 2));
+      countdown.stop();
+      expect(countdown.ticks.value.text, '58');
+    });
+
     test('Close stream', () async {
-      expect(countdown.value.isClosed, false);
+      expect(countdown.ticks.isClosed, false);
       await countdown.close();
-      expect(countdown.value.isClosed, true);
+      expect(countdown.ticks.isClosed, true);
     });
   });
 }

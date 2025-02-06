@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-02-03T18:55:32.761882",
+  "@@last_modified": "2025-02-06T15:37:20.881231",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -248,6 +248,38 @@
     "type": "text",
     "placeholders": {
       "milliseconds": {}
+    }
+  },
+  "I18nSettings_startDeltaInSeconds": "Отрезок времени старта после сигнала",
+  "@I18nSettings_startDeltaInSeconds": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_startDeltaInSecondsTitle": "Окно старта",
+  "@I18nSettings_startDeltaInSecondsTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_startDeltaInSecondsContent": "Отрезок времени в секундах, в течении которого можно стартовать до и после актуального времени старта",
+  "@I18nSettings_startDeltaInSecondsContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_startDelta": "Секунды",
+  "@I18nSettings_startDelta": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_incorrectStartDelta": "Неверный отрезок времени",
+  "@I18nSettings_incorrectStartDelta": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_seconds": "{seconds}с",
+  "@I18nSettings_seconds": {
+    "type": "text",
+    "placeholders": {
+      "seconds": {}
     }
   },
   "I18nSettings_autoSubstitution": "Автоподстановка номеров",

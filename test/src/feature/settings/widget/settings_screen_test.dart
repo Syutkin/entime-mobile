@@ -298,6 +298,14 @@ void main() {
             .scrollTo(maxScrolls: 100),
         findsOneWidget,
       );
+      expect(
+        await $(SettingsSection)
+            .containing(Localization.current.I18nSettings_startScreen)
+            .$(SettingsTile)
+            .$(Localization.current.I18nSettings_startDeltaInSeconds)
+            .scrollTo(maxScrolls: 100),
+        findsOneWidget,
+      );
     });
 
     patrolWidgetTest('Check finishScreen section', (PatrolTester $) async {
@@ -398,7 +406,7 @@ void main() {
             .scrollTo(maxScrolls: 100),
         findsOneWidget,
       );
-            expect(
+      expect(
         await $(SettingsSection)
             .containing(Localization.current.I18nSettings_themes)
             .$(SettingsTile)

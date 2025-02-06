@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m20(size) => "${size}px";
 
+  static String m36(seconds) => "${seconds}с";
+
   static String m21(category) => "Категория: ${category}";
 
   static String m22(city) => "Город: ${city}";
@@ -101,9 +103,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m27(year) => "Год/Возраст: ${year}";
 
-  static String m36(number) => "Участник с номером ${number} не стартовал?";
+  static String m37(number) => "Участник с номером ${number} не стартовал?";
 
-  static String m37(number, time) =>
+  static String m38(number, time) =>
       "Сдвинуть время стартов на указанное количество минут от номера ${number} (время старта ${time}) и далее?";
 
   static String m28(current, total) => "${current} из ${total}";
@@ -471,6 +473,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Основные"),
         "I18nSettings_incorrectDelay":
             MessageLookupByLibrary.simpleMessage("Неверная задержка"),
+        "I18nSettings_incorrectStartDelta":
+            MessageLookupByLibrary.simpleMessage("Неверный отрезок времени"),
         "I18nSettings_incorrectStartFinishDifference":
             MessageLookupByLibrary.simpleMessage("Неверный порог"),
         "I18nSettings_journal": MessageLookupByLibrary.simpleMessage("Журнал"),
@@ -509,6 +513,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Заменять время старта обратным отсчётом"),
         "I18nSettings_resetToDefaults":
             MessageLookupByLibrary.simpleMessage("Настройки по умолчанию"),
+        "I18nSettings_seconds": m36,
         "I18nSettings_settings":
             MessageLookupByLibrary.simpleMessage("Настройки"),
         "I18nSettings_showColorFinishDifference":
@@ -542,6 +547,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_startButtonSizeDescription":
             MessageLookupByLibrary.simpleMessage(
                 "Размер кнопки \"отсечка\" на стартовом экране"),
+        "I18nSettings_startDelta":
+            MessageLookupByLibrary.simpleMessage("Секунды"),
+        "I18nSettings_startDeltaInSeconds":
+            MessageLookupByLibrary.simpleMessage(
+                "Отрезок времени старта после сигнала"),
+        "I18nSettings_startDeltaInSecondsContent":
+            MessageLookupByLibrary.simpleMessage(
+                "Отрезок времени в секундах, в течении которого можно стартовать до и после актуального времени старта"),
+        "I18nSettings_startDeltaInSecondsTitle":
+            MessageLookupByLibrary.simpleMessage("Окно старта"),
         "I18nSettings_startFinishDifference":
             MessageLookupByLibrary.simpleMessage("Порог цветовой индикации"),
         "I18nSettings_startScreen":
@@ -601,12 +616,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nStart_participantNumberWithName": m25,
         "I18nStart_participantTeam": m26,
         "I18nStart_participantYear": m27,
-        "I18nStart_setDnsConfirmation": m36,
+        "I18nStart_setDnsConfirmation": m37,
         "I18nStart_shiftMinutes":
             MessageLookupByLibrary.simpleMessage("Минуты"),
         "I18nStart_shiftStartsTime":
             MessageLookupByLibrary.simpleMessage("Сдвинуть время стартов"),
-        "I18nStart_shiftStartsTimeFromNumber": m37,
+        "I18nStart_shiftStartsTimeFromNumber": m38,
         "I18nStart_sliverAutomaticCorrection":
             MessageLookupByLibrary.simpleMessage("Авто\r\nпоправка"),
         "I18nStart_sliverManualCorrection":

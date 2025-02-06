@@ -531,6 +531,66 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Отрезок времени старта после сигнала`
+  String get I18nSettings_startDeltaInSeconds {
+    return Intl.message(
+      'Отрезок времени старта после сигнала',
+      name: 'I18nSettings_startDeltaInSeconds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Окно старта`
+  String get I18nSettings_startDeltaInSecondsTitle {
+    return Intl.message(
+      'Окно старта',
+      name: 'I18nSettings_startDeltaInSecondsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Отрезок времени в секундах, в течении которого можно стартовать до и после актуального времени старта`
+  String get I18nSettings_startDeltaInSecondsContent {
+    return Intl.message(
+      'Отрезок времени в секундах, в течении которого можно стартовать до и после актуального времени старта',
+      name: 'I18nSettings_startDeltaInSecondsContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Секунды`
+  String get I18nSettings_startDelta {
+    return Intl.message(
+      'Секунды',
+      name: 'I18nSettings_startDelta',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверный отрезок времени`
+  String get I18nSettings_incorrectStartDelta {
+    return Intl.message(
+      'Неверный отрезок времени',
+      name: 'I18nSettings_incorrectStartDelta',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{seconds}с`
+  String I18nSettings_seconds(Object seconds) {
+    return Intl.message(
+      '$secondsс',
+      name: 'I18nSettings_seconds',
+      desc: '',
+      args: [seconds],
+    );
+  }
+
   /// `Автоподстановка номеров`
   String get I18nSettings_autoSubstitution {
     return Intl.message(

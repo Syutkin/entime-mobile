@@ -172,6 +172,37 @@ class I18nSettings {
         args: [milliseconds],
       );
 
+  static String get startDeltaInSeconds => Intl.message(
+        'Отрезок времени старта после сигнала',
+        name: 'I18nSettings_startDeltaInSeconds',
+      );
+
+  static String get startDeltaInSecondsTitle => Intl.message(
+        'Окно старта',
+        name: 'I18nSettings_startDeltaInSecondsTitle',
+      );
+
+        static String get startDeltaInSecondsContent => Intl.message(
+        'Отрезок времени в секундах, в течении которого можно стартовать до и после актуального времени старта',
+        name: 'I18nSettings_startDeltaInSecondsContent',
+      );
+
+  static String get startDelta => Intl.message(
+        'Секунды',
+        name: 'I18nSettings_startDelta',
+      );
+
+  static String get incorrectStartDelta => Intl.message(
+        'Неверный отрезок времени',
+        name: 'I18nSettings_incorrectStartDelta',
+      );
+
+  static String seconds(int seconds) => Intl.message(
+        '$secondsс',
+        name: 'I18nSettings_seconds',
+        args: [seconds],
+      );
+
   static String get autoSubstitution => Intl.message(
         'Автоподстановка номеров',
         name: 'I18nSettings_autoSubstitution',

@@ -33,7 +33,7 @@ void main() {
     when(() => countdownAtStart.start(stageId))
         .thenAnswer((_) => Future.value());
 
-    when(() => countdownAtStart.value)
+    when(() => countdownAtStart.ticks)
         .thenAnswer((_) => BehaviorSubject<Tick>());
 
     when(() => audioController.beep()).thenAnswer((_) => Future.value());
@@ -64,7 +64,7 @@ void main() {
       blocTest<CountdownBloc, CountdownState>(
         'State changes when ConnectivityProvider emit new state',
         setUp: () {
-          when(() => countdownAtStart.value)
+          when(() => countdownAtStart.ticks)
               .thenAnswer((_) => BehaviorSubject<Tick>.seeded(tick));
         },
         build: () => CountdownBloc(
@@ -83,7 +83,7 @@ void main() {
           for (var i = 0; i < 5; i++) {
             ticks.add(Tick(second: i, text: text));
           }
-          when(() => countdownAtStart.value).thenAnswer(
+          when(() => countdownAtStart.ticks).thenAnswer(
             (_) =>
                 BehaviorSubject<Tick>()..addStream(Stream.fromIterable(ticks)),
           );
@@ -111,7 +111,7 @@ void main() {
               ),
             );
           }
-          when(() => countdownAtStart.value).thenAnswer(
+          when(() => countdownAtStart.ticks).thenAnswer(
             (_) =>
                 BehaviorSubject<Tick>()..addStream(Stream.fromIterable(ticks)),
           );
