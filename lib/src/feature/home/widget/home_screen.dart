@@ -267,8 +267,9 @@ class HomeScreen extends StatelessWidget {
         if (context.read<SettingsCubit>().state.voiceFromApp) {
           state.whenOrNull(
             working: (tick) {
-              // на 15 секунде ищем участников для голосового вызова
-              if (tick.second == 15) {
+              // Ищем участников для голосового вызова
+              // если получили информацию от обратного отсчёта
+              if (tick.callNextParticipant) {
                 final stageId = context.read<DatabaseBloc>().state.stage?.id;
                 if (stageId != null) {
                   context.read<CountdownBloc>().add(

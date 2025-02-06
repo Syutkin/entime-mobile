@@ -824,7 +824,7 @@ void main() {
         );
       });
 
-      group('Coundown listener', () {
+      group('Countdown listener', () {
         patrolWidgetTest('Call beep from app if enable at settings',
             (PatrolTester $) async {
           settingsCubit.update(settingsCubit.state.copyWith(beepFromApp: true));
@@ -895,11 +895,13 @@ void main() {
           );
 
           final expectedStates = [
-            const CountdownState.working(tick: Tick(second: 13, text: '')),
-            const CountdownState.working(tick: Tick(second: 14, text: '')),
-            const CountdownState.working(tick: Tick(second: 15, text: '')),
-            const CountdownState.working(tick: Tick(second: 16, text: '')),
-            const CountdownState.working(tick: Tick(second: 17, text: '')),
+            const CountdownState.working(tick: Tick(second: 8, text: '')),
+            const CountdownState.working(tick: Tick(second: 9, text: '')),
+            const CountdownState.working(
+              tick: Tick(second: 10, text: '', callNextParticipant: true),
+            ),
+            const CountdownState.working(tick: Tick(second: 11, text: '')),
+            const CountdownState.working(tick: Tick(second: 12, text: '')),
           ];
           whenListen(
             countdownBloc,

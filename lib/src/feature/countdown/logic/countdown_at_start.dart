@@ -77,19 +77,29 @@ class CountdownAtStart {
             ),
           );
         } else {
-          value.add(
-            Tick(
-              second: second,
-              text: 'GO',
-              nextStartTime: nextStartTime,
-              number: nextStartingParticipant.number,
-            ),
-          );
-          if (!nextStartTime.isAfter(
+          if (nextStartTime.isAfter(
             now.subtract(
               Duration(seconds: settingsProvider.settings.deltaInSeconds),
             ),
           )) {
+            value.add(
+              Tick(
+                second: second,
+                text: 'GO',
+                nextStartTime: nextStartTime,
+                number: nextStartingParticipant.number,
+              ),
+            );
+          } else {
+            value.add(
+              Tick(
+                second: second,
+                text: _formatDuration(nextStartTime.difference(now)),
+                nextStartTime: nextStartTime,
+                number: nextStartingParticipant.number,
+                callNextParticipant: true,
+              ),
+            );
             _nextStartingParticipant = null;
           }
         }

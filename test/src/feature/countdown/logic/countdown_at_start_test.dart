@@ -118,6 +118,24 @@ void main() {
       expect(countdown.value.value.text, 'Fin');
     });
 
+    test('Call next participant once', () async {
+      const deltaInSeconds = 1;
+      var result = 0;
+      defaults = defaults.copyWith(deltaInSeconds: deltaInSeconds);
+      when(() => settings.settings).thenReturn(defaults);
+      countdown = CountdownAtStart(database: db, settingsProvider: settings)
+        ..customTimeNow = '11:47:59'.toDateTime();
+      countdown.value.listen((data) {
+        if (data.callNextParticipant) {
+          result++;
+        }
+      });
+      await countdown.start(1);
+      await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 3));
+      countdown.stop();
+      expect(result, 1);
+    });
+
     test('Close stream', () async {
       expect(countdown.value.isClosed, false);
       await countdown.close();
