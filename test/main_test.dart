@@ -83,7 +83,9 @@ void main() {
     audioController = MockIAudioController();
     database = MockAppDatabase();
     countdown = CountdownAtStart(
-        database: database, settingsProvider: settingsProvider);
+      database: database,
+      settingsProvider: settingsProvider,
+    );
     ntpProvider = MockINtpProvider();
     connectivityProvider = MockIConnectivityProvider();
 
