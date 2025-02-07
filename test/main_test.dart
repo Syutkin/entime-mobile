@@ -27,6 +27,8 @@ class MockUpdateProvider extends Mock implements UpdateProvider {}
 
 class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
+class MockTtsProvider extends Mock implements TtsProvider {}
+
 class MockAudioService extends Mock implements AudioService {}
 
 class MockIAudioController extends Mock implements IAudioController {}
@@ -55,6 +57,7 @@ void main() {
   late MockAppInfoProvider appInfo;
   late UpdateProvider updateProvider;
   late IBluetoothProvider bluetoothProvider;
+  late TtsProvider ttsProvider;
   late IAudioController audioController;
   late AppDatabase database;
   late CountdownAtStart countdown;
@@ -76,9 +79,11 @@ void main() {
     appInfo = MockAppInfoProvider();
     updateProvider = MockUpdateProvider();
     bluetoothProvider = MockBluetoothProvider();
+    ttsProvider = MockTtsProvider();
     audioController = MockIAudioController();
     database = MockAppDatabase();
-    countdown = CountdownAtStart(database: database, settingsProvider: settingsProvider);
+    countdown = CountdownAtStart(
+        database: database, settingsProvider: settingsProvider);
     ntpProvider = MockINtpProvider();
     connectivityProvider = MockIConnectivityProvider();
 
@@ -104,6 +109,7 @@ void main() {
             settingsProvider: settingsProvider,
             updateProvider: updateProvider,
             bluetoothProvider: bluetoothProvider,
+            ttsProvider: ttsProvider,
             audioController: audioController,
             appInfo: appInfo,
             database: database,

@@ -1,6 +1,8 @@
 // dart format width=200
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
+import 'package:entime/src/feature/audio/bloc/audio_bloc.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,10 +17,16 @@ import '../../../../helpers/shared_prefs_defaults.dart';
 
 class MockWakelockPlus extends Mock implements WakelockPlus {}
 
+class MockAudioBloc extends MockBloc<AudioEvent, AudioState>
+    implements AudioBloc {}
+
 void main() {
   late SettingsCubit settingsCubit;
   late AppSettings settings;
   late SharedPrefsSettingsProvider sharedPrefsSettingsProvider;
+  late AudioBloc audioBloc;
+  late String engine;
+  late String voice;
 
   Widget testWidget() {
     return MaterialApp(
@@ -26,8 +34,11 @@ void main() {
       supportedLocales: Localization.supportedLocales,
       home: Material(
         child: BlocProvider.value(
-          value: settingsCubit,
-          child: const SettingsScreen(),
+          value: audioBloc,
+          child: BlocProvider.value(
+            value: settingsCubit,
+            child: const SettingsScreen(),
+          ),
         ),
       ),
     );
@@ -39,6 +50,11 @@ void main() {
       'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
       (obj) async => obj,
     );
+  });
+
+  setUp(() {
+    audioBloc = MockAudioBloc();
+    when(() => audioBloc.state).thenReturn(const AudioState.initial());
   });
 
   group('Settings screen tests', () {
@@ -227,6 +243,22 @@ void main() {
             .containing(Localization.current.I18nSettings_voiceMessages)
             .$(SettingsTile)
             .$(Localization.current.I18nSettings_rate)
+            .scrollTo(),
+        findsOneWidget,
+      );
+      expect(
+        await $(SettingsSection)
+            .containing(Localization.current.I18nSettings_voiceMessages)
+            .$(SettingsTile)
+            .$(Localization.current.I18nSettings_ttsEngine)
+            .scrollTo(),
+        findsOneWidget,
+      );
+      expect(
+        await $(SettingsSection)
+            .containing(Localization.current.I18nSettings_voiceMessages)
+            .$(SettingsTile)
+            .$(Localization.current.I18nSettings_ttsVoice)
             .scrollTo(),
         findsOneWidget,
       );
@@ -438,6 +470,35 @@ void main() {
             .scrollTo(maxScrolls: 100),
         findsOneWidget,
       );
+    });
+
+    group('TTS tests', () {
+      setUp(() {
+        engine = 'TTS Engine';
+        voice = 'TTS Voice';
+        when(() => audioBloc.state).thenReturn(
+          AudioState.initialized(
+            engine: engine,
+            voice: voice,
+          ),
+        );
+      });
+
+      patrolWidgetTest('Show TTS engine', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        expect(
+          await $(engine).scrollTo(maxScrolls: 100),
+          findsOneWidget,
+        );
+      });
+
+      patrolWidgetTest('Show TTS voice', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        expect(
+          await $(voice).scrollTo(maxScrolls: 100),
+          findsOneWidget,
+        );
+      });
     });
   });
 }

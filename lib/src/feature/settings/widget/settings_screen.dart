@@ -5,6 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../audio/bloc/audio_bloc.dart';
 import '../settings.dart';
 import 'select_theme_screen.dart';
 
@@ -257,6 +258,30 @@ class _SettingsList extends StatelessWidget {
                     );
                   }
                 },
+              ),
+              SettingsTile(
+                enabled: settingsState.sound && settingsState.voice,
+                title: Text(Localization.current.I18nSettings_ttsEngine),
+                trailing: BlocBuilder<AudioBloc, AudioState>(
+                  builder: (context, state) {
+                    return state.map(
+                      initial: (value) => const SizedBox.shrink(),
+                      initialized: (value) => Text(value.engine ?? ''),
+                    );
+                  },
+                ),
+              ),
+              SettingsTile(
+                enabled: settingsState.sound && settingsState.voice,
+                title: Text(Localization.current.I18nSettings_ttsVoice),
+                trailing: BlocBuilder<AudioBloc, AudioState>(
+                  builder: (context, state) {
+                    return state.map(
+                      initial: (value) => const SizedBox.shrink(),
+                      initialized: (value) => Text(value.voice ?? ''),
+                    );
+                  },
+                ),
               ),
               SettingsTile(
                 enabled: settingsState.sound && settingsState.voice,

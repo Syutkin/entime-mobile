@@ -123,6 +123,12 @@ class I18nSettings {
 
   static String get rate => Intl.message('Скорость', name: 'I18nSettings_rate');
 
+  static String get ttsEngine =>
+      Intl.message('Синтезатор речи', name: 'I18nSettings_ttsEngine');
+
+  static String get ttsVoice =>
+      Intl.message('Голос', name: 'I18nSettings_ttsVoice');
+
   static String get voiceLanguage =>
       Intl.message('Язык', name: 'I18nSettings_voiceLanguage');
 
@@ -182,7 +188,7 @@ class I18nSettings {
         name: 'I18nSettings_startDeltaInSecondsTitle',
       );
 
-        static String get startDeltaInSecondsContent => Intl.message(
+  static String get startDeltaInSecondsContent => Intl.message(
         'Отрезок времени в секундах, в течении которого можно стартовать до и после актуального времени старта',
         name: 'I18nSettings_startDeltaInSecondsContent',
       );

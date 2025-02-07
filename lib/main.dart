@@ -25,6 +25,7 @@ import 'src/common/localization/localization.dart';
 import 'src/common/logger/logger.dart';
 import 'src/feature/app_info/app_info.dart';
 import 'src/feature/audio/audio.dart';
+import 'src/feature/audio/bloc/audio_bloc.dart' as audio_bloc;
 import 'src/feature/bluetooth/bluetooth.dart';
 import 'src/feature/countdown/bloc/countdown_bloc.dart';
 import 'src/feature/countdown/logic/countdown_at_start.dart';
@@ -87,6 +88,7 @@ Future<void> main() async {
     settingsProvider: settings,
     updateProvider: updateProvider,
     bluetoothProvider: bluetoothProvider,
+    ttsProvider: ttsProvider,
     audioController: audioController,
     appInfo: appInfo,
     database: database,
@@ -117,6 +119,7 @@ class EntimeApp extends StatelessWidget {
     required this.settingsProvider,
     required this.updateProvider,
     required this.bluetoothProvider,
+    required this.ttsProvider,
     required this.audioController,
     required this.appInfo,
     required this.database,
@@ -131,6 +134,7 @@ class EntimeApp extends StatelessWidget {
   final IUpdateProvider updateProvider;
   final IBluetoothProvider bluetoothProvider;
   final IAudioController audioController;
+  final TtsProvider ttsProvider;
 
   // final ILogProvider logProvider;
   final AppDatabase database;
@@ -160,6 +164,10 @@ class EntimeApp extends StatelessWidget {
           ),
           BlocProvider<TrailsBloc>(
             create: (context) => TrailsBloc(database: database),
+          ),
+          BlocProvider<audio_bloc.AudioBloc>(
+            create: (context) => audio_bloc.AudioBloc(ttsProvider: ttsProvider)
+              ..add(const audio_bloc.AudioEvent.init()),
           ),
           BlocProvider<CountdownBloc>(
             create: (context) => CountdownBloc(

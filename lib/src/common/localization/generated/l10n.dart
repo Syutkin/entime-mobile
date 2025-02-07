@@ -411,6 +411,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Синтезатор речи`
+  String get I18nSettings_ttsEngine {
+    return Intl.message(
+      'Синтезатор речи',
+      name: 'I18nSettings_ttsEngine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Голос`
+  String get I18nSettings_ttsVoice {
+    return Intl.message(
+      'Голос',
+      name: 'I18nSettings_ttsVoice',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Язык`
   String get I18nSettings_voiceLanguage {
     return Intl.message(

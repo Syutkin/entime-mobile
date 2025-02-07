@@ -15,6 +15,7 @@ void main() {
     ttsProvider = TtsProvider(flutterTts);
 
     when(() => flutterTts.getDefaultEngine).thenAnswer((_) => Future.value(''));
+    when(() => flutterTts.getDefaultVoice).thenAnswer((_) => Future.value(''));
     when(() => flutterTts.setLanguage(any())).thenAnswer((_) => Future.value());
     when(() => flutterTts.setVolume(any())).thenAnswer((_) => Future.value());
     when(() => flutterTts.setSpeechRate(any()))
@@ -36,6 +37,13 @@ void main() {
         () async {
           await ttsProvider.getDefaultEngine;
           verify(() => flutterTts.getDefaultEngine).called(1);
+        },
+      );
+      test(
+        'TtsProvider getDefaultVoice',
+        () async {
+          await ttsProvider.getDefaultVoice;
+          verify(() => flutterTts.getDefaultVoice).called(1);
         },
       );
       test(

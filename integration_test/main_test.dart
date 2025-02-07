@@ -72,6 +72,7 @@ void main() {
         settingsProvider: settings,
         updateProvider: updateProvider,
         bluetoothProvider: bluetoothProvider,
+        ttsProvider: ttsProvider,
         audioController: audioController,
         appInfo: appInfo,
         database: database,

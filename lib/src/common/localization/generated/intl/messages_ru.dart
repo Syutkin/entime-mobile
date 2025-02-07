@@ -564,6 +564,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "I18nSettings_themeSettings":
             MessageLookupByLibrary.simpleMessage("Настройки темы"),
         "I18nSettings_themes": MessageLookupByLibrary.simpleMessage("Темы"),
+        "I18nSettings_ttsEngine":
+            MessageLookupByLibrary.simpleMessage("Синтезатор речи"),
+        "I18nSettings_ttsVoice": MessageLookupByLibrary.simpleMessage("Голос"),
         "I18nSettings_update":
             MessageLookupByLibrary.simpleMessage("Обновление"),
         "I18nSettings_voice": MessageLookupByLibrary.simpleMessage("Голос"),
