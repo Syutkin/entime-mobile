@@ -1833,9 +1833,9 @@ class Rider extends DataClass implements Insertable<Rider> {
   final String? email;
   final String? phone;
 
-  ///	phone text UNIQUE,
-  ///	email text UNIQUE,
   /// TODO: make this unique
+  ///	email text UNIQUE,
+  ///	phone text UNIQUE,
   final String? comment;
   final bool isDeleted;
   const Rider(

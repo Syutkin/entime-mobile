@@ -93,13 +93,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.1-dev+437',
+    representation: r'0.5.1-dev+438',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.1-dev+437',
+    canonical: r'0.5.1-dev+438',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -118,19 +118,19 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'437'],
+    build: <String>[r'438'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2025,
     2,
-    7,
-    15,
+    10,
+    17,
     12,
-    13,
-    408,
-    805,
+    7,
+    430,
+    680,
   );
 
   /// Name
@@ -407,18 +407,18 @@ sealed class Pubspec {
   /// For more information,
   /// see [Package dependencies](https://dart.dev/tools/pub/dependencies).
   static const Map<String, Object> dependencies = <String, Object>{
-    'any_date': r'^1.1.1',
-    'audioplayers': r'^6.1.0',
+    'any_date': r'^1.1.2',
+    'audioplayers': r'^6.1.2',
     'bloc_concurrency': r'^0.3.0',
     'bot_toast': r'^4.1.3',
-    'connectivity_plus': r'^6.1.1',
+    'connectivity_plus': r'^6.1.3',
     'crypto': r'^3.0.6',
     'csv': r'^6.0.0',
-    'device_info_plus': r'^11.2.0',
-    'drift': r'^2.23.1',
-    'dropdown_search': r'^6.0.1',
+    'device_info_plus': r'^11.3.0',
+    'drift': r'^2.25.0',
+    'dropdown_search': r'^6.0.2',
     'equatable': r'^2.0.7',
-    'file_picker': r'^8.1.7',
+    'file_picker': r'^8.3.3',
     'flutter': <String, Object>{
       'sdk': r'flutter',
     },
@@ -428,11 +428,11 @@ sealed class Pubspec {
     'flutter_localizations': <String, Object>{
       'sdk': r'flutter',
     },
-    'flutter_markdown': r'^0.7.4+3',
+    'flutter_markdown': r'^0.7.6+1',
     'flutter_ntp': r'^0.0.2',
-    'flutter_tts': r'^4.2.1',
+    'flutter_tts': r'^4.2.2',
     'freezed_annotation': r'^2.4.4',
-    'http': r'^1.2.2',
+    'http': r'^1.3.0',
     'intl': r'^0.19.0',
     'json_annotation': r'^4.9.0',
     'logger': r'^2.5.0',
@@ -445,12 +445,12 @@ sealed class Pubspec {
     'permission_handler': r'^11.3.1',
     'pub_semver': r'^2.1.5',
     'rxdart': r'^0.28.0',
-    'sentry_flutter': r'^8.12.0',
+    'sentry_flutter': r'^8.13.0',
     'settings_ui': r'^2.0.2',
-    'share_plus': r'^10.1.3',
-    'shared_preferences': r'^2.3.5',
-    'sqlite3': r'^2.6.0',
-    'sqlite3_flutter_libs': r'^0.5.28',
+    'share_plus': r'^10.1.4',
+    'shared_preferences': r'^2.5.1',
+    'sqlite3': r'^2.7.3',
+    'sqlite3_flutter_libs': r'^0.5.30',
     'url_launcher': r'^6.3.1',
     'wakelock_plus': r'^1.2.10',
   };
@@ -460,7 +460,7 @@ sealed class Pubspec {
     'bloc_test': r'^10.0.0',
     'build_runner': r'^2.4.14',
     'dart_style': r'^2.3.7',
-    'drift_dev': r'^2.23.1',
+    'drift_dev': r'^2.25.0',
     'flutter_lints': r'^5.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
@@ -471,8 +471,8 @@ sealed class Pubspec {
     },
     'json_serializable': r'^6.9.0',
     'mocktail': r'^1.0.4',
-    'patrol': r'^3.13.2',
-    'patrol_finders': r'^2.6.0',
+    'patrol': r'^3.14.0',
+    'patrol_finders': r'^2.7.0',
     'pubspec_generator': r'^4.0.0',
     'test': r'^1.25.8',
     'very_good_analysis': r'^7.0.0',
